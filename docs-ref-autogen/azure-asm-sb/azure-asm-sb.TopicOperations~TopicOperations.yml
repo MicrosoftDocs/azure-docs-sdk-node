@@ -1,0 +1,933 @@
+### YamlMime:JavaScriptReference
+items:
+  - uid: azure-asm-sb.TopicOperations~TopicOperations
+    id: azure-asm-sb.TopicOperations~TopicOperations
+    name: TopicOperations
+    summary: |-
+      The Service Bus Management API includes operations for managing Service
+      Bus topics for a namespace.
+      __NOTE__: An instance of this class is automatically created for an
+      instance of the [ServiceBusManagementClient] {@link
+      ServiceBusManagementClient~ServiceBusManagementClient}.
+      See [topics] {@link
+      ServiceBusManagementClient~ServiceBusManagementClient#topics}.
+      Initializes a new instance of the TopicOperations class.
+    fullName: azure-asm-sb.TopicOperations
+    type: Class
+    children:
+      - 'azure-asm-sb.TopicOperations~TopicOperations.#ctor'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#client'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update'
+  - id: 'azure-asm-sb.TopicOperations~TopicOperations.#ctor'
+    uid: 'azure-asm-sb.TopicOperations~TopicOperations.#ctor'
+    parent: azure-asm-sb.TopicOperations~TopicOperations
+    name: TopicOperations(client)
+    fullName: azure-asm-sb.TopicOperations.TopicOperations(client)
+    summary: ''
+    type: Constructor
+    syntax:
+      parameters:
+        - id: client
+          type:
+            - azure-asm-sb.ServiceBusManagementClient
+          description: Reference to the service client.
+      content: new TopicOperations(client)
+  - uid: 'azure-asm-sb.TopicOperations~TopicOperations#client'
+    id: 'azure-asm-sb.TopicOperations~TopicOperations#client'
+    parent: azure-asm-sb.TopicOperations~TopicOperations
+    name: client
+    summary: ''
+    fullName: azure-asm-sb.TopicOperations~TopicOperations.client
+    type: Field
+    syntax:
+      content: client
+  - uid: 'azure-asm-sb.TopicOperations~TopicOperations#create'
+    id: 'azure-asm-sb.TopicOperations~TopicOperations#create'
+    parent: azure-asm-sb.TopicOperations~TopicOperations
+    name: 'create(namespaceName, topic, callback)'
+    summary: |-
+      Creates a new topic. Once created, this topic resource manifest is
+      immutable. This operation is not idempotent. Repeating the create call,
+      after a topic with same name has been created successfully, will result
+      in a 409 Conflict error message.  (see
+      http://msdn.microsoft.com/en-us/library/windowsazure/hh780728.aspx for
+      more information)
+    fullName: >-
+      azure-asm-sb.TopicOperations~TopicOperations.create(namespaceName, topic,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: topic
+          type:
+            - azure-asm-sb.ServiceBusTopic
+          description: The Service Bus topic.
+        - id: topic.name
+          type:
+            - string
+          description: The name of the topic.
+          optional: true
+        - id: topic.defaultMessageTimeToLive
+          type:
+            - string
+          description: >-
+            Determines how long a
+
+            message lives in the associated subscriptions. Subscriptions inherit
+            the
+
+            TTL from the topic unless they are created explicitly with a smaller
+            TTL.
+
+            Based on whether dead-lettering is enabled, a message whose TTL has
+
+            expired will either be moved to the subscription's associated
+
+            DeadLtterQueue or will be permanently deleted. The following values
+            are
+
+            settable at topic creation time:* Range: 1 second -
+            TimeSpan.MaxValue*
+
+            Default: TimeSpan.MaxValue
+          optional: true
+        - id: topic.maxSizeInMegabytes
+          type:
+            - number
+          description: >-
+            Specifies the maximum topic
+
+            size in megabytes. Any attempt to enqueue a message that will cause
+            the
+
+            topic to exceed this value will fail. All messages that are stored
+            in the
+
+            topic or any of its subscriptions count towards this value. Multiple
+
+            copies of a message that reside in one or multiple subscriptions
+            count as
+
+            a single messages. For example, if message m exists once in
+            subscription
+
+            s1 and twice in subscription s2, m is counted as a single message.
+            You
+
+            can only set this parameter at topic creation time using the
+            following
+
+            values:* Range: 1 - 5*1024 MB* Default: 1*1024
+          optional: true
+        - id: topic.requiresDuplicateDetection
+          type:
+            - boolean
+          description: |-
+            If enabled, the topic
+            will detect duplicate messages within the time span specified by the
+            DuplicateDetectionHistoryTimeWindow property. Settable only at topic
+            creation time.* Default: false
+          optional: true
+        - id: topic.duplicateDetectionHistoryTimeWindow
+          type:
+            - string
+          description: >-
+            Specifies the
+
+            time span during which the Service Bus will detect message
+            duplication.*
+
+            Range: 1 second - 7 days* Default: 10 minutes
+          optional: true
+        - id: topic.enableBatchedOperations
+          type:
+            - boolean
+          description: >-
+            Enables or disables
+
+            service side batching behavior when performing operations for the
+
+            specific queue. When enabled, service bus will collect/batch
+            multiple
+
+            operations to the backend to be more connection efficient. If user
+            wants
+
+            lower operation latency then they can disable this feature.
+          optional: true
+        - id: topic.sizeInBytes
+          type:
+            - number
+          description: >-
+            Reflects the actual bytes toward the
+
+            topic quota that messages in the topic currently occupy.
+            (read-only)*
+
+            Range: 0 -MaxTopicSizeinMegaBytes
+          optional: true
+        - id: topic.filteringMessagesBeforePublishing
+          type:
+            - boolean
+          description: |-
+            Gets or sets
+            whether messages should be filtered before publishing.
+          optional: true
+        - id: topic.isAnonymousAccessible
+          type:
+            - boolean
+          description: |-
+            Gets whether anonymous
+            access is allowed.
+          optional: true
+        - id: topic.authorizationRules
+          type:
+            - array
+          description: |-
+            Gets the authorization rules for
+            the description.
+          optional: true
+        - id: topic.status
+          type:
+            - string
+          description: >-
+            Gets or sets the current status of the
+
+            topic (enabled or disabled). When a topic is disabled, that topic
+            cannot
+
+            send or receive messages.
+          optional: true
+        - id: topic.createdAt
+          type:
+            - date
+          description: The time the queue was created at.
+          optional: true
+        - id: topic.updatedAt
+          type:
+            - date
+          description: The time the queue was last updated.
+          optional: true
+        - id: topic.accessedAt
+          type:
+            - date
+          description: The time the queue was last accessed.
+          optional: true
+        - id: topic.supportOrdering
+          type:
+            - boolean
+          description: |-
+            Gets or sets whether the topics
+            can be ordered.
+          optional: true
+        - id: topic.countDetails
+          type:
+            - azure-asm-sb.CountDetails
+          description: Current queue statistics.
+          optional: true
+        - id: topic.countDetails.activeMessageCount
+          type:
+            - number
+          description: |-
+            The current number
+            of active messages.
+          optional: true
+        - id: topic.countDetails.deadLetterMessageCount
+          type:
+            - number
+          description: |-
+            The current
+            number of dead letters.
+          optional: true
+        - id: topic.countDetails.scheduledMessageCount
+          type:
+            - number
+          description: |-
+            The current
+            number of scheduled messages.
+          optional: true
+        - id: topic.countDetails.transferDeadLetterMessageCount
+          type:
+            - number
+          description: |-
+            The
+            current number of transfer dead letters.
+          optional: true
+        - id: topic.countDetails.transferMessageCount
+          type:
+            - number
+          description: |-
+            The current
+            number of transfer messages.
+          optional: true
+        - id: topic.subscriptionCount
+          type:
+            - number
+          description: |-
+            The current number of
+            subscriptions to the topic.
+          optional: true
+        - id: topic.autoDeleteOnIdle
+          type:
+            - string
+          description: Implemented.
+          optional: true
+        - id: topic.entityAvailabilityStatus
+          type:
+            - string
+          description: |-
+            The current availability
+            status of the topic.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function create(namespaceName, topic, callback)'
+    children:
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~baseUrl'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~baseUrl'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~httpRequest'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~requestContent'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~requestDoc'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~entryElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~contentElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~typeAttribute'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~topicDescriptionElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~defaultMessageTimeToLiveElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~maxSizeInMegabytesElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~requiresDuplicateDetectionElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~duplicateDetectionHistoryTimeWindowElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~enableBatchedOperationsElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~sizeInBytesElement'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~filteringMessagesBeforePublishingElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~isAnonymousAccessibleElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~authorizationRulesSequenceElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~loweredIndex1'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~loweredIndex1'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~authorizationRulesItem
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~authorizationRuleElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~typeAttribute2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~claimTypeElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~claimValueElement'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~rightsSequenceElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~loweredIndex2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~loweredIndex2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~rightsItem'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~rightsItemElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~createdTimeElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~keyNameElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~modifiedTimeElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~primaryKeyElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~secondaryKeyElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~statusElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~createdAtElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~updatedAtElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~accessedAtElement'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~supportOrderingElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~countDetailsElement'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~activeMessageCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~deadLetterMessageCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~scheduledMessageCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~transferDeadLetterMessageCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~transferMessageCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~subscriptionCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~autoDeleteOnIdleElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#create~entityAvailabilityStatusElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#create~requestContent'
+  - uid: 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod'
+    id: 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod'
+    parent: azure-asm-sb.TopicOperations~TopicOperations
+    name: 'deleteMethod(namespaceName, topicName, callback)'
+    summary: |-
+      Deletes an existing topic. This operation will also remove all associated
+      state including associated subscriptions.  (see
+      http://msdn.microsoft.com/en-us/library/hh780721.aspx for more
+      information)
+    fullName: >-
+      azure-asm-sb.TopicOperations~TopicOperations.deleteMethod(namespaceName,
+      topicName, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: topicName
+          type:
+            - string
+          description: The topic.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function deleteMethod(namespaceName, topicName, callback)'
+    children:
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~baseUrl'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~baseUrl'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#deleteMethod~httpRequest'
+  - uid: 'azure-asm-sb.TopicOperations~TopicOperations#get'
+    id: 'azure-asm-sb.TopicOperations~TopicOperations#get'
+    parent: azure-asm-sb.TopicOperations~TopicOperations
+    name: 'get(namespaceName, topicName, callback)'
+    summary: |-
+      The topic description is an XML AtomPub document that defines the desired
+      semantics for a topic. The topic description contains the following
+      properties. For more information, see the TopicDescription Properties
+      topic.  (see
+      http://msdn.microsoft.com/en-us/library/windowsazure/hh780749.aspx for
+      more information)
+    fullName: >-
+      azure-asm-sb.TopicOperations~TopicOperations.get(namespaceName, topicName,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: topicName
+          type:
+            - string
+          description: The topic.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function get(namespaceName, topicName, callback)'
+    children:
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~baseUrl'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~baseUrl'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#get~httpRequest'
+  - uid: 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails'
+    id: 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails'
+    parent: azure-asm-sb.TopicOperations~TopicOperations
+    name: 'getConnectionDetails(namespaceName, topicName, callback)'
+    summary: Gets the set of connection strings for a topic.
+    fullName: >-
+      azure-asm-sb.TopicOperations~TopicOperations.getConnectionDetails(namespaceName,
+      topicName, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: topicName
+          type:
+            - string
+          description: The topic.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function getConnectionDetails(namespaceName, topicName, callback)'
+    children:
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~url2'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~baseUrl
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~baseUrl
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~url2'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#getConnectionDetails~httpRequest
+  - uid: 'azure-asm-sb.TopicOperations~TopicOperations#list'
+    id: 'azure-asm-sb.TopicOperations~TopicOperations#list'
+    parent: azure-asm-sb.TopicOperations~TopicOperations
+    name: 'list(namespaceName, callback)'
+    summary: |-
+      Enumerates the topics in the service namespace. An empty feed is returned
+      if no topic exists in the service namespace.  (see
+      http://msdn.microsoft.com/en-us/library/windowsazure/hh780744.aspx for
+      more information)
+    fullName: 'azure-asm-sb.TopicOperations~TopicOperations.list(namespaceName, callback)'
+    type: Method
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function list(namespaceName, callback)'
+    children:
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~baseUrl'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~baseUrl'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#list~httpRequest'
+  - uid: 'azure-asm-sb.TopicOperations~TopicOperations#update'
+    id: 'azure-asm-sb.TopicOperations~TopicOperations#update'
+    parent: azure-asm-sb.TopicOperations~TopicOperations
+    name: 'update(namespaceName, topic, callback)'
+    summary: |-
+      Updates a topic.  (see
+      http://msdn.microsoft.com/en-us/library/windowsazure/jj839740.aspx for
+      more information)
+    fullName: >-
+      azure-asm-sb.TopicOperations~TopicOperations.update(namespaceName, topic,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: topic
+          type:
+            - azure-asm-sb.ServiceBusTopic
+          description: The Service Bus topic.
+        - id: topic.name
+          type:
+            - string
+          description: The name of the topic.
+          optional: true
+        - id: topic.defaultMessageTimeToLive
+          type:
+            - string
+          description: >-
+            Determines how long a
+
+            message lives in the associated subscriptions. Subscriptions inherit
+            the
+
+            TTL from the topic unless they are created explicitly with a smaller
+            TTL.
+
+            Based on whether dead-lettering is enabled, a message whose TTL has
+
+            expired will either be moved to the subscription's associated
+
+            DeadLtterQueue or will be permanently deleted. The following values
+            are
+
+            settable at topic creation time:* Range: 1 second -
+            TimeSpan.MaxValue*
+
+            Default: TimeSpan.MaxValue
+          optional: true
+        - id: topic.maxSizeInMegabytes
+          type:
+            - number
+          description: >-
+            Specifies the maximum topic
+
+            size in megabytes. Any attempt to enqueue a message that will cause
+            the
+
+            topic to exceed this value will fail. All messages that are stored
+            in the
+
+            topic or any of its subscriptions count towards this value. Multiple
+
+            copies of a message that reside in one or multiple subscriptions
+            count as
+
+            a single messages. For example, if message m exists once in
+            subscription
+
+            s1 and twice in subscription s2, m is counted as a single message.
+            You
+
+            can only set this parameter at topic creation time using the
+            following
+
+            values:* Range: 1 - 5*1024 MB* Default: 1*1024
+          optional: true
+        - id: topic.requiresDuplicateDetection
+          type:
+            - boolean
+          description: |-
+            If enabled, the topic
+            will detect duplicate messages within the time span specified by the
+            DuplicateDetectionHistoryTimeWindow property. Settable only at topic
+            creation time.* Default: false
+          optional: true
+        - id: topic.duplicateDetectionHistoryTimeWindow
+          type:
+            - string
+          description: >-
+            Specifies the
+
+            time span during which the Service Bus will detect message
+            duplication.*
+
+            Range: 1 second - 7 days* Default: 10 minutes
+          optional: true
+        - id: topic.enableBatchedOperations
+          type:
+            - boolean
+          description: >-
+            Enables or disables
+
+            service side batching behavior when performing operations for the
+
+            specific queue. When enabled, service bus will collect/batch
+            multiple
+
+            operations to the backend to be more connection efficient. If user
+            wants
+
+            lower operation latency then they can disable this feature.
+          optional: true
+        - id: topic.sizeInBytes
+          type:
+            - number
+          description: >-
+            Reflects the actual bytes toward the
+
+            topic quota that messages in the topic currently occupy.
+            (read-only)*
+
+            Range: 0 -MaxTopicSizeinMegaBytes
+          optional: true
+        - id: topic.filteringMessagesBeforePublishing
+          type:
+            - boolean
+          description: |-
+            Gets or sets
+            whether messages should be filtered before publishing.
+          optional: true
+        - id: topic.isAnonymousAccessible
+          type:
+            - boolean
+          description: |-
+            Gets whether anonymous
+            access is allowed.
+          optional: true
+        - id: topic.authorizationRules
+          type:
+            - array
+          description: |-
+            Gets the authorization rules for
+            the description.
+          optional: true
+        - id: topic.status
+          type:
+            - string
+          description: >-
+            Gets or sets the current status of the
+
+            topic (enabled or disabled). When a topic is disabled, that topic
+            cannot
+
+            send or receive messages.
+          optional: true
+        - id: topic.createdAt
+          type:
+            - date
+          description: The time the queue was created at.
+          optional: true
+        - id: topic.updatedAt
+          type:
+            - date
+          description: The time the queue was last updated.
+          optional: true
+        - id: topic.accessedAt
+          type:
+            - date
+          description: The time the queue was last accessed.
+          optional: true
+        - id: topic.supportOrdering
+          type:
+            - boolean
+          description: |-
+            Gets or sets whether the topics
+            can be ordered.
+          optional: true
+        - id: topic.countDetails
+          type:
+            - azure-asm-sb.CountDetails
+          description: Current queue statistics.
+          optional: true
+        - id: topic.countDetails.activeMessageCount
+          type:
+            - number
+          description: |-
+            The current number
+            of active messages.
+          optional: true
+        - id: topic.countDetails.deadLetterMessageCount
+          type:
+            - number
+          description: |-
+            The current
+            number of dead letters.
+          optional: true
+        - id: topic.countDetails.scheduledMessageCount
+          type:
+            - number
+          description: |-
+            The current
+            number of scheduled messages.
+          optional: true
+        - id: topic.countDetails.transferDeadLetterMessageCount
+          type:
+            - number
+          description: |-
+            The
+            current number of transfer dead letters.
+          optional: true
+        - id: topic.countDetails.transferMessageCount
+          type:
+            - number
+          description: |-
+            The current
+            number of transfer messages.
+          optional: true
+        - id: topic.subscriptionCount
+          type:
+            - number
+          description: |-
+            The current number of
+            subscriptions to the topic.
+          optional: true
+        - id: topic.autoDeleteOnIdle
+          type:
+            - string
+          description: Implemented.
+          optional: true
+        - id: topic.entityAvailabilityStatus
+          type:
+            - string
+          description: |-
+            The current availability
+            status of the topic.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function update(namespaceName, topic, callback)'
+    children:
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~baseUrl'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~baseUrl'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~url2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~httpRequest'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~requestContent'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~requestDoc'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~entryElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~contentElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~typeAttribute'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~topicDescriptionElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~defaultMessageTimeToLiveElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~maxSizeInMegabytesElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~requiresDuplicateDetectionElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~duplicateDetectionHistoryTimeWindowElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~enableBatchedOperationsElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~sizeInBytesElement'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~filteringMessagesBeforePublishingElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~isAnonymousAccessibleElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~authorizationRulesSequenceElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~loweredIndex1'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~loweredIndex1'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~authorizationRulesItem
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~authorizationRuleElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~typeAttribute2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~claimTypeElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~claimValueElement'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~rightsSequenceElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~loweredIndex2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~loweredIndex2'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~rightsItem'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~rightsItemElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~createdTimeElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~keyNameElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~modifiedTimeElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~primaryKeyElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~secondaryKeyElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~statusElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~createdAtElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~updatedAtElement'
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~accessedAtElement'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~supportOrderingElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~countDetailsElement'
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~activeMessageCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~deadLetterMessageCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~scheduledMessageCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~transferDeadLetterMessageCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~transferMessageCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~subscriptionCountElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~autoDeleteOnIdleElement
+      - >-
+        azure-asm-sb.TopicOperations~TopicOperations#update~entityAvailabilityStatusElement
+      - 'azure-asm-sb.TopicOperations~TopicOperations#update~requestContent'
+references:
+  - uid: azure-asm-sb.ServiceBusManagementClient
+    name: ServiceBusManagementClient
+    fullName: azure-asm-sb.ServiceBusManagementClient
+    isExternal: true
+  - uid: string
+    name: string
+    fullName: string
+    isExternal: true
+  - uid: azure-asm-sb.ServiceBusTopic
+    name: ServiceBusTopic
+    fullName: azure-asm-sb.ServiceBusTopic
+    isExternal: true
+  - uid: number
+    name: number
+    fullName: number
+    isExternal: true
+  - uid: boolean
+    name: boolean
+    fullName: boolean
+    isExternal: true
+  - uid: array
+    name: array
+    fullName: array
+    isExternal: true
+  - uid: date
+    name: date
+    fullName: date
+    isExternal: true
+  - uid: azure-asm-sb.CountDetails
+    name: CountDetails
+    fullName: azure-asm-sb.CountDetails
+    isExternal: true
+  - uid: function
+    name: function
+    fullName: function
+    isExternal: true
+  - uid: azure-asm-sb.Stream
+    name: Stream
+    fullName: azure-asm-sb.Stream
+    isExternal: true

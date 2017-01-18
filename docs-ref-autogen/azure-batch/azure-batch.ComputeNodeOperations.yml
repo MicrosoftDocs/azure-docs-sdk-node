@@ -1,0 +1,1790 @@
+### YamlMime:JavaScriptReference
+items:
+  - uid: azure-batch.ComputeNodeOperations
+    id: azure-batch.ComputeNodeOperations
+    name: ComputeNodeOperations
+    summary: |-
+      ComputeNodeOperations
+      __NOTE__: An instance of this class is automatically created for an
+      instance of the BatchServiceClient.
+      Initializes a new instance of the ComputeNodeOperations class.
+    fullName: azure-batch.ComputeNodeOperations
+    type: Class
+    children:
+      - 'azure-batch.ComputeNodeOperations.#ctor'
+      - 'azure-batch.ComputeNodeOperations#client'
+      - 'azure-batch.ComputeNodeOperations#addUser'
+      - 'azure-batch.ComputeNodeOperations#deleteUser'
+      - 'azure-batch.ComputeNodeOperations#updateUser'
+      - 'azure-batch.ComputeNodeOperations#get'
+      - 'azure-batch.ComputeNodeOperations#reboot'
+      - 'azure-batch.ComputeNodeOperations#reimage'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop'
+      - 'azure-batch.ComputeNodeOperations#list'
+      - 'azure-batch.ComputeNodeOperations#listNext'
+  - id: 'azure-batch.ComputeNodeOperations.#ctor'
+    uid: 'azure-batch.ComputeNodeOperations.#ctor'
+    parent: azure-batch.ComputeNodeOperations
+    name: ComputeNodeOperations(client)
+    fullName: azure-batch.ComputeNodeOperations.ComputeNodeOperations(client)
+    summary: ''
+    type: Constructor
+    syntax:
+      parameters:
+        - id: client
+          type:
+            - azure-batch.BatchServiceClient
+          description: Reference to the service client.
+      content: new ComputeNodeOperations(client)
+  - uid: 'azure-batch.ComputeNodeOperations#client'
+    id: 'azure-batch.ComputeNodeOperations#client'
+    parent: azure-batch.ComputeNodeOperations
+    name: client
+    summary: ''
+    fullName: azure-batch.ComputeNodeOperations.client
+    type: Field
+    syntax:
+      content: client
+  - uid: 'azure-batch.ComputeNodeOperations#addUser'
+    id: 'azure-batch.ComputeNodeOperations#addUser'
+    parent: azure-batch.ComputeNodeOperations
+    name: 'addUser(poolId, nodeId, user, options, callback)'
+    summary: >-
+      Adds a user account to the specified compute node.
+
+
+      You can add a user account to a node only when it is in the idle or
+      running
+
+      state.
+    fullName: >-
+      azure-batch.ComputeNodeOperations.addUser(poolId, nodeId, user, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: poolId
+          type:
+            - string
+          description: The ID of the pool that contains the compute node.
+        - id: nodeId
+          type:
+            - string
+          description: |-
+            The ID of the machine on which you want to create a
+            user account.
+        - id: user
+          type:
+            - object
+          description: The user account to be created.
+        - id: user.name
+          type:
+            - string
+          description: The user name of the account.
+        - id: user.isAdmin
+          type:
+            - boolean
+          description: |-
+            Whether the account should be an
+            administrator on the compute node. The default value is false.
+          optional: true
+        - id: user.expiryTime
+          type:
+            - date
+          description: >-
+            The time at which the account should expire.
+
+            If omitted, the default is 1 day from the current time. For Linux
+            compute
+
+            nodes, the expiryTime has a precision up to a day.
+          optional: true
+        - id: user.password
+          type:
+            - string
+          description: >-
+            The password of the account. The password is
+
+            required for Windows nodes (those created with
+            'cloudServiceConfiguration',
+
+            or created with 'virtualMachineConfiguration' using a Windows image
+
+            reference). For Linux compute nodes, the password can optionally be
+
+            specified along with the sshPublicKey property.
+          optional: true
+        - id: user.sshPublicKey
+          type:
+            - string
+          description: >-
+            The SSH public key that can be used for
+
+            remote login to the compute node. The public key should be
+            compatible with
+
+            OpenSSH encoding and should be base 64 encoded. This property can be
+
+            specified only for Linux nodes. If this is specified for a Windows
+            node,
+
+            then the Batch service rejects the request; if you are calling the
+            REST API
+
+            directly, the HTTP status code is 400 (Bad Request).
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.computeNodeAddUserOptions
+          type:
+            - object
+          description: |-
+            Additional parameters
+            for the operation
+          optional: true
+        - id: options.computeNodeAddUserOptions.timeout
+          type:
+            - number
+          description: >-
+            The maximum time
+
+            that the server can spend processing the request, in seconds. The
+            default is
+
+            30 seconds.
+          optional: true
+        - id: options.computeNodeAddUserOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The
+
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.computeNodeAddUserOptions.returnClientRequestId
+          type:
+            - boolean
+          description: >-
+            Whether the server should return the client-request-id in the
+            response.
+          optional: true
+        - id: options.computeNodeAddUserOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time the
+
+            request was issued. If not specified, this header will be
+            automatically
+
+            populated with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function addUser(poolId, nodeId, user, options, callback)'
+    children:
+      - 'azure-batch.ComputeNodeOperations#addUser~client'
+      - 'azure-batch.ComputeNodeOperations#addUser~callback'
+      - 'azure-batch.ComputeNodeOperations#addUser~options'
+      - 'azure-batch.ComputeNodeOperations#addUser~computeNodeAddUserOptions'
+      - 'azure-batch.ComputeNodeOperations#addUser~timeout'
+      - 'azure-batch.ComputeNodeOperations#addUser~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#addUser~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#addUser~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#addUser~timeout'
+      - 'azure-batch.ComputeNodeOperations#addUser~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#addUser~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#addUser~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#addUser~baseUrl'
+      - 'azure-batch.ComputeNodeOperations#addUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#addUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#addUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#addUser~queryParameters'
+      - 'azure-batch.ComputeNodeOperations#addUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#addUser~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#addUser~headerName'
+      - 'azure-batch.ComputeNodeOperations#addUser~requestContent'
+      - 'azure-batch.ComputeNodeOperations#addUser~requestModel'
+      - 'azure-batch.ComputeNodeOperations#addUser~requestModelMapper'
+      - 'azure-batch.ComputeNodeOperations#addUser~requestModel'
+      - 'azure-batch.ComputeNodeOperations#addUser~requestContent'
+      - 'azure-batch.ComputeNodeOperations#addUser~serializationError'
+  - uid: 'azure-batch.ComputeNodeOperations#deleteUser'
+    id: 'azure-batch.ComputeNodeOperations#deleteUser'
+    parent: azure-batch.ComputeNodeOperations
+    name: 'deleteUser(poolId, nodeId, userName, options, callback)'
+    summary: |-
+      Deletes a user account from the specified compute node.
+
+      You can delete a user account to a node only when it is in the idle or
+      running state.
+    fullName: >-
+      azure-batch.ComputeNodeOperations.deleteUser(poolId, nodeId, userName,
+      options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: poolId
+          type:
+            - string
+          description: The ID of the pool that contains the compute node.
+        - id: nodeId
+          type:
+            - string
+          description: |-
+            The ID of the machine on which you want to delete a
+            user account.
+        - id: userName
+          type:
+            - string
+          description: The name of the user account to delete.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.computeNodeDeleteUserOptions
+          type:
+            - object
+          description: |-
+            Additional parameters
+            for the operation
+          optional: true
+        - id: options.computeNodeDeleteUserOptions.timeout
+          type:
+            - number
+          description: >-
+            The maximum
+
+            time that the server can spend processing the request, in seconds.
+            The
+
+            default is 30 seconds.
+          optional: true
+        - id: options.computeNodeDeleteUserOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The
+
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.computeNodeDeleteUserOptions.returnClientRequestId
+          type:
+            - boolean
+          description: |-
+            Whether the
+            server should return the client-request-id in the response.
+          optional: true
+        - id: options.computeNodeDeleteUserOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time the
+
+            request was issued. If not specified, this header will be
+            automatically
+
+            populated with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function deleteUser(poolId, nodeId, userName, options, callback)'
+    children:
+      - 'azure-batch.ComputeNodeOperations#deleteUser~client'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~callback'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~options'
+      - >-
+        azure-batch.ComputeNodeOperations#deleteUser~computeNodeDeleteUserOptions
+      - 'azure-batch.ComputeNodeOperations#deleteUser~timeout'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~timeout'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~baseUrl'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~queryParameters'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#deleteUser~headerName'
+  - uid: 'azure-batch.ComputeNodeOperations#updateUser'
+    id: 'azure-batch.ComputeNodeOperations#updateUser'
+    parent: azure-batch.ComputeNodeOperations
+    name: >-
+      updateUser(poolId, nodeId, userName, nodeUpdateUserParameter, options,
+      callback)
+    summary: >-
+      Updates the password or expiration time of a user account on the
+
+      specified compute node.
+
+
+      This operation replaces of all the updateable properties of the account.
+      For
+
+      example, if the expiryTime element is not specified, the current value is
+
+      replaced with the default value, not left unmodified. You can update a
+      user
+
+      account on a node only when it is in the idle or running state.
+    fullName: >-
+      azure-batch.ComputeNodeOperations.updateUser(poolId, nodeId, userName,
+      nodeUpdateUserParameter, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: poolId
+          type:
+            - string
+          description: The ID of the pool that contains the compute node.
+        - id: nodeId
+          type:
+            - string
+          description: |-
+            The ID of the machine on which you want to update a
+            user account.
+        - id: userName
+          type:
+            - string
+          description: The name of the user account to update.
+        - id: nodeUpdateUserParameter
+          type:
+            - object
+          description: The parameters for the request.
+        - id: nodeUpdateUserParameter.password
+          type:
+            - string
+          description: >-
+            The password of the
+
+            account. The password is required for Windows nodes (those created
+            with
+
+            'cloudServiceConfiguration', or created with
+            'virtualMachineConfiguration'
+
+            using a Windows image reference). For Linux compute nodes, the
+            password can
+
+            optionally be specified along with the sshPublicKey property. If
+            omitted,
+
+            any existing password is removed.
+          optional: true
+        - id: nodeUpdateUserParameter.expiryTime
+          type:
+            - date
+          description: >-
+            The time at which the
+
+            account should expire. If omitted, the default is 1 day from the
+            current
+
+            time. For Linux compute nodes, the expiryTime has a precision up to
+            a day.
+          optional: true
+        - id: nodeUpdateUserParameter.sshPublicKey
+          type:
+            - string
+          description: >-
+            The SSH public key
+
+            that can be used for remote login to the compute node. The public
+            key should
+
+            be compatible with OpenSSH encoding and should be base 64 encoded.
+            This
+
+            property can be specified only for Linux nodes. If this is specified
+            for a
+
+            Windows node, then the Batch service rejects the request; if you are
+            calling
+
+            the REST API directly, the HTTP status code is 400 (Bad Request). If
+
+            omitted, any existing SSH public key is removed.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.computeNodeUpdateUserOptions
+          type:
+            - object
+          description: |-
+            Additional parameters
+            for the operation
+          optional: true
+        - id: options.computeNodeUpdateUserOptions.timeout
+          type:
+            - number
+          description: >-
+            The maximum
+
+            time that the server can spend processing the request, in seconds.
+            The
+
+            default is 30 seconds.
+          optional: true
+        - id: options.computeNodeUpdateUserOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The
+
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.computeNodeUpdateUserOptions.returnClientRequestId
+          type:
+            - boolean
+          description: |-
+            Whether the
+            server should return the client-request-id in the response.
+          optional: true
+        - id: options.computeNodeUpdateUserOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time the
+
+            request was issued. If not specified, this header will be
+            automatically
+
+            populated with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function updateUser(poolId, nodeId, userName, nodeUpdateUserParameter,
+        options, callback)
+    children:
+      - 'azure-batch.ComputeNodeOperations#updateUser~client'
+      - 'azure-batch.ComputeNodeOperations#updateUser~callback'
+      - 'azure-batch.ComputeNodeOperations#updateUser~options'
+      - >-
+        azure-batch.ComputeNodeOperations#updateUser~computeNodeUpdateUserOptions
+      - 'azure-batch.ComputeNodeOperations#updateUser~timeout'
+      - 'azure-batch.ComputeNodeOperations#updateUser~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#updateUser~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#updateUser~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#updateUser~timeout'
+      - 'azure-batch.ComputeNodeOperations#updateUser~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#updateUser~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#updateUser~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#updateUser~baseUrl'
+      - 'azure-batch.ComputeNodeOperations#updateUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#updateUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#updateUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#updateUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#updateUser~queryParameters'
+      - 'azure-batch.ComputeNodeOperations#updateUser~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#updateUser~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#updateUser~headerName'
+      - 'azure-batch.ComputeNodeOperations#updateUser~requestContent'
+      - 'azure-batch.ComputeNodeOperations#updateUser~requestModel'
+      - 'azure-batch.ComputeNodeOperations#updateUser~requestModelMapper'
+      - 'azure-batch.ComputeNodeOperations#updateUser~requestModel'
+      - 'azure-batch.ComputeNodeOperations#updateUser~requestContent'
+      - 'azure-batch.ComputeNodeOperations#updateUser~serializationError'
+  - uid: 'azure-batch.ComputeNodeOperations#get'
+    id: 'azure-batch.ComputeNodeOperations#get'
+    parent: azure-batch.ComputeNodeOperations
+    name: 'get(poolId, nodeId, options, callback)'
+    summary: Gets information about the specified compute node.
+    fullName: 'azure-batch.ComputeNodeOperations.get(poolId, nodeId, options, callback)'
+    type: Method
+    syntax:
+      parameters:
+        - id: poolId
+          type:
+            - string
+          description: The ID of the pool that contains the compute node.
+        - id: nodeId
+          type:
+            - string
+          description: |-
+            The ID of the compute node that you want to get
+            information about.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.computeNodeGetOptions
+          type:
+            - object
+          description: |-
+            Additional parameters for
+            the operation
+          optional: true
+        - id: options.computeNodeGetOptions.select
+          type:
+            - string
+          description: |-
+            An OData $select
+            clause.
+          optional: true
+        - id: options.computeNodeGetOptions.timeout
+          type:
+            - number
+          description: >-
+            The maximum time
+
+            that the server can spend processing the request, in seconds. The
+            default is
+
+            30 seconds.
+          optional: true
+        - id: options.computeNodeGetOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The
+
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.computeNodeGetOptions.returnClientRequestId
+          type:
+            - boolean
+          description: >-
+            Whether the server should return the client-request-id in the
+            response.
+          optional: true
+        - id: options.computeNodeGetOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time the request
+
+            was issued. If not specified, this header will be automatically
+            populated
+
+            with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:ComputeNode> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function get(poolId, nodeId, options, callback)'
+    children:
+      - 'azure-batch.ComputeNodeOperations#get~client'
+      - 'azure-batch.ComputeNodeOperations#get~callback'
+      - 'azure-batch.ComputeNodeOperations#get~options'
+      - 'azure-batch.ComputeNodeOperations#get~computeNodeGetOptions'
+      - 'azure-batch.ComputeNodeOperations#get~select'
+      - 'azure-batch.ComputeNodeOperations#get~timeout'
+      - 'azure-batch.ComputeNodeOperations#get~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#get~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#get~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#get~select'
+      - 'azure-batch.ComputeNodeOperations#get~timeout'
+      - 'azure-batch.ComputeNodeOperations#get~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#get~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#get~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#get~baseUrl'
+      - 'azure-batch.ComputeNodeOperations#get~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#get~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#get~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#get~queryParameters'
+      - 'azure-batch.ComputeNodeOperations#get~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#get~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#get~headerName'
+  - uid: 'azure-batch.ComputeNodeOperations#reboot'
+    id: 'azure-batch.ComputeNodeOperations#reboot'
+    parent: azure-batch.ComputeNodeOperations
+    name: 'reboot(poolId, nodeId, options, callback)'
+    summary: |-
+      Restarts the specified compute node.
+
+      You can restart a node only if it is in an idle or running state.
+    fullName: >-
+      azure-batch.ComputeNodeOperations.reboot(poolId, nodeId, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: poolId
+          type:
+            - string
+          description: The ID of the pool that contains the compute node.
+        - id: nodeId
+          type:
+            - string
+          description: The ID of the compute node that you want to restart.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.nodeRebootOption
+          type:
+            - string
+          description: >-
+            When to reboot the compute node
+
+            and what to do with currently running tasks. The default value is
+            requeue.
+
+            Possible values include: 'requeue', 'terminate', 'taskcompletion',
+
+            'retaineddata'
+          optional: true
+        - id: options.computeNodeRebootOptions
+          type:
+            - object
+          description: |-
+            Additional parameters for
+            the operation
+          optional: true
+        - id: options.computeNodeRebootOptions.timeout
+          type:
+            - number
+          description: >-
+            The maximum time
+
+            that the server can spend processing the request, in seconds. The
+            default is
+
+            30 seconds.
+          optional: true
+        - id: options.computeNodeRebootOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The
+
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.computeNodeRebootOptions.returnClientRequestId
+          type:
+            - boolean
+          description: >-
+            Whether the server should return the client-request-id in the
+            response.
+          optional: true
+        - id: options.computeNodeRebootOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time the
+
+            request was issued. If not specified, this header will be
+            automatically
+
+            populated with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function reboot(poolId, nodeId, options, callback)'
+    children:
+      - 'azure-batch.ComputeNodeOperations#reboot~client'
+      - 'azure-batch.ComputeNodeOperations#reboot~callback'
+      - 'azure-batch.ComputeNodeOperations#reboot~options'
+      - 'azure-batch.ComputeNodeOperations#reboot~nodeRebootOption'
+      - 'azure-batch.ComputeNodeOperations#reboot~computeNodeRebootOptions'
+      - 'azure-batch.ComputeNodeOperations#reboot~allowedValues'
+      - 'azure-batch.ComputeNodeOperations#reboot~timeout'
+      - 'azure-batch.ComputeNodeOperations#reboot~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#reboot~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#reboot~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#reboot~nodeRebootParameter'
+      - 'azure-batch.ComputeNodeOperations#reboot~timeout'
+      - 'azure-batch.ComputeNodeOperations#reboot~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#reboot~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#reboot~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#reboot~nodeRebootParameter'
+      - 'azure-batch.ComputeNodeOperations#reboot~baseUrl'
+      - 'azure-batch.ComputeNodeOperations#reboot~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#reboot~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#reboot~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#reboot~queryParameters'
+      - 'azure-batch.ComputeNodeOperations#reboot~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#reboot~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#reboot~headerName'
+      - 'azure-batch.ComputeNodeOperations#reboot~requestContent'
+      - 'azure-batch.ComputeNodeOperations#reboot~requestModel'
+      - 'azure-batch.ComputeNodeOperations#reboot~requestModelMapper'
+      - 'azure-batch.ComputeNodeOperations#reboot~requestModel'
+      - 'azure-batch.ComputeNodeOperations#reboot~requestContent'
+      - 'azure-batch.ComputeNodeOperations#reboot~serializationError'
+  - uid: 'azure-batch.ComputeNodeOperations#reimage'
+    id: 'azure-batch.ComputeNodeOperations#reimage'
+    parent: azure-batch.ComputeNodeOperations
+    name: 'reimage(poolId, nodeId, options, callback)'
+    summary: >-
+      Reinstalls the operating system on the specified compute node.
+
+
+      You can reinstall the operating system on a node only if it is in an idle
+      or
+
+      running state. This API can be invoked only on pools created with the
+      cloud
+
+      service configuration property.
+    fullName: >-
+      azure-batch.ComputeNodeOperations.reimage(poolId, nodeId, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: poolId
+          type:
+            - string
+          description: The ID of the pool that contains the compute node.
+        - id: nodeId
+          type:
+            - string
+          description: The ID of the compute node that you want to restart.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.nodeReimageOption
+          type:
+            - string
+          description: >-
+            When to reimage the compute node
+
+            and what to do with currently running tasks. The default value is
+            requeue.
+
+            Possible values include: 'requeue', 'terminate', 'taskcompletion',
+
+            'retaineddata'
+          optional: true
+        - id: options.computeNodeReimageOptions
+          type:
+            - object
+          description: |-
+            Additional parameters
+            for the operation
+          optional: true
+        - id: options.computeNodeReimageOptions.timeout
+          type:
+            - number
+          description: >-
+            The maximum time
+
+            that the server can spend processing the request, in seconds. The
+            default is
+
+            30 seconds.
+          optional: true
+        - id: options.computeNodeReimageOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The
+
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.computeNodeReimageOptions.returnClientRequestId
+          type:
+            - boolean
+          description: >-
+            Whether the server should return the client-request-id in the
+            response.
+          optional: true
+        - id: options.computeNodeReimageOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time the
+
+            request was issued. If not specified, this header will be
+            automatically
+
+            populated with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function reimage(poolId, nodeId, options, callback)'
+    children:
+      - 'azure-batch.ComputeNodeOperations#reimage~client'
+      - 'azure-batch.ComputeNodeOperations#reimage~callback'
+      - 'azure-batch.ComputeNodeOperations#reimage~options'
+      - 'azure-batch.ComputeNodeOperations#reimage~nodeReimageOption'
+      - 'azure-batch.ComputeNodeOperations#reimage~computeNodeReimageOptions'
+      - 'azure-batch.ComputeNodeOperations#reimage~allowedValues'
+      - 'azure-batch.ComputeNodeOperations#reimage~timeout'
+      - 'azure-batch.ComputeNodeOperations#reimage~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#reimage~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#reimage~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#reimage~nodeReimageParameter'
+      - 'azure-batch.ComputeNodeOperations#reimage~timeout'
+      - 'azure-batch.ComputeNodeOperations#reimage~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#reimage~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#reimage~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#reimage~nodeReimageParameter'
+      - 'azure-batch.ComputeNodeOperations#reimage~baseUrl'
+      - 'azure-batch.ComputeNodeOperations#reimage~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#reimage~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#reimage~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#reimage~queryParameters'
+      - 'azure-batch.ComputeNodeOperations#reimage~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#reimage~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#reimage~headerName'
+      - 'azure-batch.ComputeNodeOperations#reimage~requestContent'
+      - 'azure-batch.ComputeNodeOperations#reimage~requestModel'
+      - 'azure-batch.ComputeNodeOperations#reimage~requestModelMapper'
+      - 'azure-batch.ComputeNodeOperations#reimage~requestModel'
+      - 'azure-batch.ComputeNodeOperations#reimage~requestContent'
+      - 'azure-batch.ComputeNodeOperations#reimage~serializationError'
+  - uid: 'azure-batch.ComputeNodeOperations#disableScheduling'
+    id: 'azure-batch.ComputeNodeOperations#disableScheduling'
+    parent: azure-batch.ComputeNodeOperations
+    name: 'disableScheduling(poolId, nodeId, options, callback)'
+    summary: Disables task scheduling on the specified compute node.
+    fullName: >-
+      azure-batch.ComputeNodeOperations.disableScheduling(poolId, nodeId,
+      options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: poolId
+          type:
+            - string
+          description: The ID of the pool that contains the compute node.
+        - id: nodeId
+          type:
+            - string
+          description: |-
+            The ID of the compute node on which you want to
+            disable task scheduling.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.nodeDisableSchedulingOption
+          type:
+            - string
+          description: >-
+            What to do with
+
+            currently running tasks when disabling task scheduling on the
+            compute node.
+
+            The default value is requeue. Possible values include: 'requeue',
+
+            'terminate', 'taskcompletion'
+          optional: true
+        - id: options.computeNodeDisableSchedulingOptions
+          type:
+            - object
+          description: |-
+            Additional
+            parameters for the operation
+          optional: true
+        - id: options.computeNodeDisableSchedulingOptions.timeout
+          type:
+            - number
+          description: >-
+            The
+
+            maximum time that the server can spend processing the request, in
+            seconds.
+
+            The default is 30 seconds.
+          optional: true
+        - id: options.computeNodeDisableSchedulingOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The
+
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.computeNodeDisableSchedulingOptions.returnClientRequestId
+          type:
+            - boolean
+          description: |-
+            Whether
+            the server should return the client-request-id in the response.
+          optional: true
+        - id: options.computeNodeDisableSchedulingOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time
+
+            the request was issued. If not specified, this header will be
+            automatically
+
+            populated with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function disableScheduling(poolId, nodeId, options, callback)'
+    children:
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~client'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~callback'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~options'
+      - >-
+        azure-batch.ComputeNodeOperations#disableScheduling~nodeDisableSchedulingOption
+      - >-
+        azure-batch.ComputeNodeOperations#disableScheduling~computeNodeDisableSchedulingOptions
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~allowedValues'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~timeout'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~clientRequestId'
+      - >-
+        azure-batch.ComputeNodeOperations#disableScheduling~returnClientRequestId
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~ocpDate'
+      - >-
+        azure-batch.ComputeNodeOperations#disableScheduling~nodeDisableSchedulingParameter
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~timeout'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~clientRequestId'
+      - >-
+        azure-batch.ComputeNodeOperations#disableScheduling~returnClientRequestId
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~ocpDate'
+      - >-
+        azure-batch.ComputeNodeOperations#disableScheduling~nodeDisableSchedulingParameter
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~baseUrl'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~queryParameters'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~headerName'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~requestContent'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~requestModel'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~requestModelMapper'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~requestModel'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~requestContent'
+      - 'azure-batch.ComputeNodeOperations#disableScheduling~serializationError'
+  - uid: 'azure-batch.ComputeNodeOperations#enableScheduling'
+    id: 'azure-batch.ComputeNodeOperations#enableScheduling'
+    parent: azure-batch.ComputeNodeOperations
+    name: 'enableScheduling(poolId, nodeId, options, callback)'
+    summary: Enables task scheduling on the specified compute node.
+    fullName: >-
+      azure-batch.ComputeNodeOperations.enableScheduling(poolId, nodeId,
+      options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: poolId
+          type:
+            - string
+          description: The ID of the pool that contains the compute node.
+        - id: nodeId
+          type:
+            - string
+          description: |-
+            The ID of the compute node on which you want to
+            enable task scheduling.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.computeNodeEnableSchedulingOptions
+          type:
+            - object
+          description: |-
+            Additional
+            parameters for the operation
+          optional: true
+        - id: options.computeNodeEnableSchedulingOptions.timeout
+          type:
+            - number
+          description: >-
+            The
+
+            maximum time that the server can spend processing the request, in
+            seconds.
+
+            The default is 30 seconds.
+          optional: true
+        - id: options.computeNodeEnableSchedulingOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The caller-generated request identity, in the form of a GUID with no
+
+            decoration such as curly braces, e.g.
+            9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.computeNodeEnableSchedulingOptions.returnClientRequestId
+          type:
+            - boolean
+          description: |-
+            Whether
+            the server should return the client-request-id in the response.
+          optional: true
+        - id: options.computeNodeEnableSchedulingOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time
+
+            the request was issued. If not specified, this header will be
+            automatically
+
+            populated with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function enableScheduling(poolId, nodeId, options, callback)'
+    children:
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~client'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~callback'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~options'
+      - >-
+        azure-batch.ComputeNodeOperations#enableScheduling~computeNodeEnableSchedulingOptions
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~timeout'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~timeout'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~baseUrl'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~queryParameters'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#enableScheduling~headerName'
+  - uid: 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings'
+    id: 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings'
+    parent: azure-batch.ComputeNodeOperations
+    name: 'getRemoteLoginSettings(poolId, nodeId, options, callback)'
+    summary: >-
+      Gets the settings required for remote login to a compute node.
+
+
+      Before you can remotely login to a node using the remote login settings,
+      you
+
+      must create a user account on the node. This API can be invoked only on
+
+      pools created with the virtual machine configuration property.
+    fullName: >-
+      azure-batch.ComputeNodeOperations.getRemoteLoginSettings(poolId, nodeId,
+      options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: poolId
+          type:
+            - string
+          description: The ID of the pool that contains the compute node.
+        - id: nodeId
+          type:
+            - string
+          description: |-
+            The ID of the compute node for which to obtain the
+            remote login settings.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.computeNodeGetRemoteLoginSettingsOptions
+          type:
+            - object
+          description: Additional parameters for the operation
+          optional: true
+        - id: options.computeNodeGetRemoteLoginSettingsOptions.timeout
+          type:
+            - number
+          description: >-
+            The maximum time that the server can spend processing the request,
+            in
+
+            seconds. The default is 30 seconds.
+          optional: true
+        - id: options.computeNodeGetRemoteLoginSettingsOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The
+
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: >-
+            options.computeNodeGetRemoteLoginSettingsOptions.returnClientRequestId
+          type:
+            - boolean
+          description: >-
+            Whether the server should return the client-request-id in the
+            response.
+          optional: true
+        - id: options.computeNodeGetRemoteLoginSettingsOptions.ocpDate
+          type:
+            - date
+          description: |-
+            The
+            time the request was issued. If not specified, this header will be
+            automatically populated with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:ComputeNodeGetRemoteLoginSettingsResult> for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function getRemoteLoginSettings(poolId, nodeId, options, callback)'
+    children:
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~client'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~callback'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~options'
+      - >-
+        azure-batch.ComputeNodeOperations#getRemoteLoginSettings~computeNodeGetRemoteLoginSettingsOptions
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~timeout'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~clientRequestId'
+      - >-
+        azure-batch.ComputeNodeOperations#getRemoteLoginSettings~returnClientRequestId
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~timeout'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~clientRequestId'
+      - >-
+        azure-batch.ComputeNodeOperations#getRemoteLoginSettings~returnClientRequestId
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~baseUrl'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~queryParameters'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#getRemoteLoginSettings~headerName'
+  - uid: 'azure-batch.ComputeNodeOperations#getRemoteDesktop'
+    id: 'azure-batch.ComputeNodeOperations#getRemoteDesktop'
+    parent: azure-batch.ComputeNodeOperations
+    name: 'getRemoteDesktop(poolId, nodeId, options, callback)'
+    summary: >-
+      Gets the Remote Desktop Protocol file for the specified compute
+
+      node.
+
+
+      Before you can access a node by using the RDP file, you must create a user
+
+      account on the node. This API can only be invoked on pools created with
+      the
+
+      cloud service configuration property.
+    fullName: >-
+      azure-batch.ComputeNodeOperations.getRemoteDesktop(poolId, nodeId,
+      options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: poolId
+          type:
+            - string
+          description: The ID of the pool that contains the compute node.
+        - id: nodeId
+          type:
+            - string
+          description: |-
+            The ID of the compute node for which you want to get
+            the Remote Desktop Protocol file.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.computeNodeGetRemoteDesktopOptions
+          type:
+            - object
+          description: |-
+            Additional
+            parameters for the operation
+          optional: true
+        - id: options.computeNodeGetRemoteDesktopOptions.timeout
+          type:
+            - number
+          description: >-
+            The
+
+            maximum time that the server can spend processing the request, in
+            seconds.
+
+            The default is 30 seconds.
+          optional: true
+        - id: options.computeNodeGetRemoteDesktopOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The caller-generated request identity, in the form of a GUID with no
+
+            decoration such as curly braces, e.g.
+            9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.computeNodeGetRemoteDesktopOptions.returnClientRequestId
+          type:
+            - boolean
+          description: |-
+            Whether
+            the server should return the client-request-id in the response.
+          optional: true
+        - id: options.computeNodeGetRemoteDesktopOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time
+
+            the request was issued. If not specified, this header will be
+            automatically
+
+            populated with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function getRemoteDesktop(poolId, nodeId, options, callback)'
+    children:
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~client'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~callback'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~options'
+      - >-
+        azure-batch.ComputeNodeOperations#getRemoteDesktop~computeNodeGetRemoteDesktopOptions
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~timeout'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~timeout'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~baseUrl'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~queryParameters'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#getRemoteDesktop~headerName'
+  - uid: 'azure-batch.ComputeNodeOperations#list'
+    id: 'azure-batch.ComputeNodeOperations#list'
+    parent: azure-batch.ComputeNodeOperations
+    name: 'list(poolId, options, callback)'
+    summary: Lists the compute nodes in the specified pool.
+    fullName: 'azure-batch.ComputeNodeOperations.list(poolId, options, callback)'
+    type: Method
+    syntax:
+      parameters:
+        - id: poolId
+          type:
+            - string
+          description: The ID of the pool from which you want to list nodes.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.computeNodeListOptions
+          type:
+            - object
+          description: |-
+            Additional parameters for
+            the operation
+          optional: true
+        - id: options.computeNodeListOptions.filter
+          type:
+            - string
+          description: |-
+            An OData $filter
+            clause..
+          optional: true
+        - id: options.computeNodeListOptions.select
+          type:
+            - string
+          description: |-
+            An OData $select
+            clause.
+          optional: true
+        - id: options.computeNodeListOptions.maxResults
+          type:
+            - number
+          description: >-
+            The maximum
+
+            number of items to return in the response. A maximum of 1000 nodes
+            can be
+
+            returned.
+          optional: true
+        - id: options.computeNodeListOptions.timeout
+          type:
+            - number
+          description: >-
+            The maximum time
+
+            that the server can spend processing the request, in seconds. The
+            default is
+
+            30 seconds.
+          optional: true
+        - id: options.computeNodeListOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The
+
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.computeNodeListOptions.returnClientRequestId
+          type:
+            - boolean
+          description: >-
+            Whether the server should return the client-request-id in the
+            response.
+          optional: true
+        - id: options.computeNodeListOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time the request
+
+            was issued. If not specified, this header will be automatically
+            populated
+
+            with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:ComputeNodeListResult> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function list(poolId, options, callback)'
+    children:
+      - 'azure-batch.ComputeNodeOperations#list~client'
+      - 'azure-batch.ComputeNodeOperations#list~callback'
+      - 'azure-batch.ComputeNodeOperations#list~options'
+      - 'azure-batch.ComputeNodeOperations#list~computeNodeListOptions'
+      - 'azure-batch.ComputeNodeOperations#list~filter'
+      - 'azure-batch.ComputeNodeOperations#list~select'
+      - 'azure-batch.ComputeNodeOperations#list~maxResults'
+      - 'azure-batch.ComputeNodeOperations#list~timeout'
+      - 'azure-batch.ComputeNodeOperations#list~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#list~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#list~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#list~filter'
+      - 'azure-batch.ComputeNodeOperations#list~select'
+      - 'azure-batch.ComputeNodeOperations#list~maxResults'
+      - 'azure-batch.ComputeNodeOperations#list~timeout'
+      - 'azure-batch.ComputeNodeOperations#list~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#list~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#list~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#list~baseUrl'
+      - 'azure-batch.ComputeNodeOperations#list~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#list~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#list~queryParameters'
+      - 'azure-batch.ComputeNodeOperations#list~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#list~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#list~headerName'
+  - uid: 'azure-batch.ComputeNodeOperations#listNext'
+    id: 'azure-batch.ComputeNodeOperations#listNext'
+    parent: azure-batch.ComputeNodeOperations
+    name: 'listNext(nextPageLink, options, callback)'
+    summary: Lists the compute nodes in the specified pool.
+    fullName: >-
+      azure-batch.ComputeNodeOperations.listNext(nextPageLink, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.computeNodeListNextOptions
+          type:
+            - object
+          description: |-
+            Additional parameters
+            for the operation
+          optional: true
+        - id: options.computeNodeListNextOptions.clientRequestId
+          type:
+            - string
+          description: >-
+            The
+
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.computeNodeListNextOptions.returnClientRequestId
+          type:
+            - boolean
+          description: >-
+            Whether the server should return the client-request-id in the
+            response.
+          optional: true
+        - id: options.computeNodeListNextOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time the
+
+            request was issued. If not specified, this header will be
+            automatically
+
+            populated with the current system clock time.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:ComputeNodeListResult> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function listNext(nextPageLink, options, callback)'
+    children:
+      - 'azure-batch.ComputeNodeOperations#listNext~client'
+      - 'azure-batch.ComputeNodeOperations#listNext~callback'
+      - 'azure-batch.ComputeNodeOperations#listNext~options'
+      - 'azure-batch.ComputeNodeOperations#listNext~computeNodeListNextOptions'
+      - 'azure-batch.ComputeNodeOperations#listNext~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#listNext~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#listNext~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#listNext~clientRequestId'
+      - 'azure-batch.ComputeNodeOperations#listNext~returnClientRequestId'
+      - 'azure-batch.ComputeNodeOperations#listNext~ocpDate'
+      - 'azure-batch.ComputeNodeOperations#listNext~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#listNext~requestUrl'
+      - 'azure-batch.ComputeNodeOperations#listNext~httpRequest'
+      - 'azure-batch.ComputeNodeOperations#listNext~headerName'
+references:
+  - uid: azure-batch.BatchServiceClient
+    name: BatchServiceClient
+    fullName: azure-batch.BatchServiceClient
+    isExternal: false
+  - uid: string
+    name: string
+    fullName: string
+    isExternal: true
+  - uid: object
+    name: object
+    fullName: object
+    isExternal: true
+  - uid: boolean
+    name: boolean
+    fullName: boolean
+    isExternal: true
+  - uid: date
+    name: date
+    fullName: date
+    isExternal: true
+  - uid: number
+    name: number
+    fullName: number
+    isExternal: true
+  - uid: function
+    name: function
+    fullName: function
+    isExternal: true

@@ -1,0 +1,1769 @@
+### YamlMime:JavaScriptReference
+items:
+  - uid: azure-arm-compute.Disks
+    id: azure-arm-compute.Disks
+    name: Disks
+    summary: |-
+      Disks
+      __NOTE__: An instance of this class is automatically created for an
+      instance of the ComputeManagementClient.
+      Initializes a new instance of the Disks class.
+    fullName: azure-arm-compute.Disks
+    type: Class
+    children:
+      - 'azure-arm-compute.Disks.#ctor'
+      - 'azure-arm-compute.Disks#client'
+      - 'azure-arm-compute.Disks#createOrUpdate'
+      - 'azure-arm-compute.Disks#update'
+      - 'azure-arm-compute.Disks#get'
+      - 'azure-arm-compute.Disks#deleteMethod'
+      - 'azure-arm-compute.Disks#listByResourceGroup'
+      - 'azure-arm-compute.Disks#list'
+      - 'azure-arm-compute.Disks#grantAccess'
+      - 'azure-arm-compute.Disks#revokeAccess'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate'
+      - 'azure-arm-compute.Disks#beginUpdate'
+      - 'azure-arm-compute.Disks#beginDeleteMethod'
+      - 'azure-arm-compute.Disks#beginGrantAccess'
+      - 'azure-arm-compute.Disks#beginRevokeAccess'
+      - 'azure-arm-compute.Disks#listByResourceGroupNext'
+      - 'azure-arm-compute.Disks#listNext'
+  - id: 'azure-arm-compute.Disks.#ctor'
+    uid: 'azure-arm-compute.Disks.#ctor'
+    parent: azure-arm-compute.Disks
+    name: Disks(client)
+    fullName: azure-arm-compute.Disks.Disks(client)
+    summary: ''
+    type: Constructor
+    syntax:
+      parameters:
+        - id: client
+          type:
+            - azure-arm-compute.ComputeManagementClient
+          description: Reference to the service client.
+      content: new Disks(client)
+  - uid: 'azure-arm-compute.Disks#client'
+    id: 'azure-arm-compute.Disks#client'
+    parent: azure-arm-compute.Disks
+    name: client
+    summary: ''
+    fullName: azure-arm-compute.Disks.client
+    type: Field
+    syntax:
+      content: client
+  - uid: 'azure-arm-compute.Disks#createOrUpdate'
+    id: 'azure-arm-compute.Disks#createOrUpdate'
+    parent: azure-arm-compute.Disks
+    name: 'createOrUpdate(resourceGroupName, diskName, disk, options, callback)'
+    summary: Creates or updates a disk.
+    fullName: >-
+      azure-arm-compute.Disks.createOrUpdate(resourceGroupName, diskName, disk,
+      options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: diskName
+          type:
+            - string
+          description: |-
+            The name of the disk within the given subscription
+            and resource group.
+        - id: disk
+          type:
+            - object
+          description: |-
+            Disk object supplied in the body of the Put disk
+            operation.
+        - id: disk.accountType
+          type:
+            - string
+          description: |-
+            the storage account type of the disk.
+            Possible values include: 'Standard_LRS', 'Premium_LRS'
+          optional: true
+        - id: disk.osType
+          type:
+            - string
+          description: |-
+            The Operating System type. Possible values
+            include: 'Windows', 'Linux'
+          optional: true
+        - id: disk.creationData
+          type:
+            - object
+          description: |-
+            Disk source information. CreationData
+            information cannot be changed after the disk has been created.
+        - id: disk.creationData.createOption
+          type:
+            - string
+          description: |-
+            Possible values include:
+            'Empty', 'Attach', 'FromImage', 'Import', 'Copy', 'Restore'
+        - id: disk.creationData.storageAccountId
+          type:
+            - string
+          description: >-
+            If createOption is
+
+            Import, the Azure Resource Manager identifier of the storage account
+
+            containing the blob to import as a disk. Required only if the blob
+            is in a
+
+            different subscription
+          optional: true
+        - id: disk.creationData.imageReference
+          type:
+            - object
+          description: Disk source information.
+          optional: true
+        - id: disk.creationData.imageReference.id
+          type:
+            - string
+          description: >-
+            A relative uri
+
+            containing either a Platform Imgage Repository or user image
+            reference.
+        - id: disk.creationData.imageReference.lun
+          type:
+            - number
+          description: >-
+            If the disk is
+
+            created from an image's data disk, this is an index that indicates
+            which of
+
+            the data disks in the image to use. For OS disks, this field is
+            null.
+          optional: true
+        - id: disk.creationData.sourceUri
+          type:
+            - string
+          description: >-
+            If creationOption is Import,
+
+            this is a SAS URI to a blob to be imported into a managed disk. If
+
+            creationOption is Copy, this is a relative Uri containing the id of
+            the
+
+            source snapshot to be copied into a managed disk.
+          optional: true
+        - id: disk.creationData.sourceResourceId
+          type:
+            - string
+          description: >-
+            If createOption is
+
+            Copy, this is the ARM id of the source snapshot or disk. If
+            creationOption
+
+            is Restore, this is the ARM-like id of the source disk restore
+            point.
+          optional: true
+        - id: disk.diskSizeGB
+          type:
+            - number
+          description: >-
+            If creationData.createOption is Empty,
+
+            this field is mandatory and it indicates the size of the VHD to
+            create. If
+
+            this field is present for updates or creation with other options, it
+
+            indicates a resize. Resizes are only allowed if the disk is not
+            attached to
+
+            a running VM, and can only increase the disk's size.
+          optional: true
+        - id: disk.encryptionSettings
+          type:
+            - object
+          description: |-
+            Encryption settings for disk or
+            snapshot
+          optional: true
+        - id: disk.encryptionSettings.enabled
+          type:
+            - boolean
+          description: >-
+            Set this flag to true and
+
+            provide DiskEncryptionKey and optional KeyEncryptionKey to enable
+
+            encryption. Set this flag to false and remove DiskEncryptionKey and
+
+            KeyEncryptionKey to disable encryption. If EncryptionSettings is
+            null in the
+
+            request object, the existing settings remain unchanged.
+          optional: true
+        - id: disk.encryptionSettings.diskEncryptionKey
+          type:
+            - object
+          description: |-
+            Key Vault Secret
+            Url and vault id of the disk encryption key
+          optional: true
+        - id: disk.encryptionSettings.diskEncryptionKey.sourceVault
+          type:
+            - object
+          description: Resource id of the KeyVault containing the key or secret
+        - id: disk.encryptionSettings.diskEncryptionKey.secretUrl
+          type:
+            - string
+          description: |-
+            Url
+            pointing to a key or secret in KeyVault
+        - id: disk.encryptionSettings.keyEncryptionKey
+          type:
+            - object
+          description: |-
+            Key Vault Key Url
+            and vault id of the key encryption key
+          optional: true
+        - id: disk.encryptionSettings.keyEncryptionKey.sourceVault
+          type:
+            - object
+          description: Resource id of the KeyVault containing the key or secret
+        - id: disk.encryptionSettings.keyEncryptionKey.sourceVault.id
+          type:
+            - string
+          description: Resource Id
+          optional: true
+        - id: disk.encryptionSettings.keyEncryptionKey.keyUrl
+          type:
+            - string
+          description: |-
+            Url pointing
+            to a key or secret in KeyVault
+        - id: disk.location
+          type:
+            - string
+          description: Resource location
+        - id: disk.tags
+          type:
+            - object
+          description: Resource tags
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:Disk> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function createOrUpdate(resourceGroupName, diskName, disk, options,
+        callback)
+    children:
+      - 'azure-arm-compute.Disks#createOrUpdate~client'
+      - 'azure-arm-compute.Disks#createOrUpdate~callback'
+      - 'azure-arm-compute.Disks#createOrUpdate~options'
+  - uid: 'azure-arm-compute.Disks#update'
+    id: 'azure-arm-compute.Disks#update'
+    parent: azure-arm-compute.Disks
+    name: 'update(resourceGroupName, diskName, disk, options, callback)'
+    summary: Updates (patches) a disk.
+    fullName: >-
+      azure-arm-compute.Disks.update(resourceGroupName, diskName, disk, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: diskName
+          type:
+            - string
+          description: |-
+            The name of the disk within the given subscription
+            and resource group.
+        - id: disk
+          type:
+            - object
+          description: |-
+            Disk object supplied in the body of the Patch disk
+            operation.
+        - id: disk.accountType
+          type:
+            - string
+          description: |-
+            the storage account type of the disk.
+            Possible values include: 'Standard_LRS', 'Premium_LRS'
+          optional: true
+        - id: disk.osType
+          type:
+            - string
+          description: |-
+            the Operating System type. Possible values
+            include: 'Windows', 'Linux'
+          optional: true
+        - id: disk.creationData
+          type:
+            - object
+          description: |-
+            disk source information. CreationData
+            information cannot be changed after the disk has been created.
+          optional: true
+        - id: disk.creationData.createOption
+          type:
+            - string
+          description: |-
+            Possible values include:
+            'Empty', 'Attach', 'FromImage', 'Import', 'Copy', 'Restore'
+        - id: disk.creationData.storageAccountId
+          type:
+            - string
+          description: >-
+            If createOption is
+
+            Import, the Azure Resource Manager identifier of the storage account
+
+            containing the blob to import as a disk. Required only if the blob
+            is in a
+
+            different subscription
+          optional: true
+        - id: disk.creationData.imageReference
+          type:
+            - object
+          description: Disk source information.
+          optional: true
+        - id: disk.creationData.imageReference.id
+          type:
+            - string
+          description: >-
+            A relative uri
+
+            containing either a Platform Imgage Repository or user image
+            reference.
+        - id: disk.creationData.imageReference.lun
+          type:
+            - number
+          description: >-
+            If the disk is
+
+            created from an image's data disk, this is an index that indicates
+            which of
+
+            the data disks in the image to use. For OS disks, this field is
+            null.
+          optional: true
+        - id: disk.creationData.sourceUri
+          type:
+            - string
+          description: >-
+            If creationOption is Import,
+
+            this is a SAS URI to a blob to be imported into a managed disk. If
+
+            creationOption is Copy, this is a relative Uri containing the id of
+            the
+
+            source snapshot to be copied into a managed disk.
+          optional: true
+        - id: disk.creationData.sourceResourceId
+          type:
+            - string
+          description: >-
+            If createOption is
+
+            Copy, this is the ARM id of the source snapshot or disk. If
+            creationOption
+
+            is Restore, this is the ARM-like id of the source disk restore
+            point.
+          optional: true
+        - id: disk.diskSizeGB
+          type:
+            - number
+          description: >-
+            If creationData.createOption is Empty,
+
+            this field is mandatory and it indicates the size of the VHD to
+            create. If
+
+            this field is present for updates or creation with other options, it
+
+            indicates a resize. Resizes are only allowed if the disk is not
+            attached to
+
+            a running VM, and can only increase the disk's size.
+          optional: true
+        - id: disk.encryptionSettings
+          type:
+            - object
+          description: |-
+            Encryption settings for disk or
+            snapshot
+          optional: true
+        - id: disk.encryptionSettings.enabled
+          type:
+            - boolean
+          description: >-
+            Set this flag to true and
+
+            provide DiskEncryptionKey and optional KeyEncryptionKey to enable
+
+            encryption. Set this flag to false and remove DiskEncryptionKey and
+
+            KeyEncryptionKey to disable encryption. If EncryptionSettings is
+            null in the
+
+            request object, the existing settings remain unchanged.
+          optional: true
+        - id: disk.encryptionSettings.diskEncryptionKey
+          type:
+            - object
+          description: |-
+            Key Vault Secret
+            Url and vault id of the disk encryption key
+          optional: true
+        - id: disk.encryptionSettings.diskEncryptionKey.sourceVault
+          type:
+            - object
+          description: Resource id of the KeyVault containing the key or secret
+        - id: disk.encryptionSettings.diskEncryptionKey.secretUrl
+          type:
+            - string
+          description: |-
+            Url
+            pointing to a key or secret in KeyVault
+        - id: disk.encryptionSettings.keyEncryptionKey
+          type:
+            - object
+          description: |-
+            Key Vault Key Url
+            and vault id of the key encryption key
+          optional: true
+        - id: disk.encryptionSettings.keyEncryptionKey.sourceVault
+          type:
+            - object
+          description: Resource id of the KeyVault containing the key or secret
+        - id: disk.encryptionSettings.keyEncryptionKey.sourceVault.id
+          type:
+            - string
+          description: Resource Id
+          optional: true
+        - id: disk.encryptionSettings.keyEncryptionKey.keyUrl
+          type:
+            - string
+          description: |-
+            Url pointing
+            to a key or secret in KeyVault
+        - id: disk.tags
+          type:
+            - object
+          description: Resource tags
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:Disk> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function update(resourceGroupName, diskName, disk, options, callback)'
+    children:
+      - 'azure-arm-compute.Disks#update~client'
+      - 'azure-arm-compute.Disks#update~callback'
+      - 'azure-arm-compute.Disks#update~options'
+  - uid: 'azure-arm-compute.Disks#get'
+    id: 'azure-arm-compute.Disks#get'
+    parent: azure-arm-compute.Disks
+    name: 'get(resourceGroupName, diskName, options, callback)'
+    summary: Gets information about a disk.
+    fullName: >-
+      azure-arm-compute.Disks.get(resourceGroupName, diskName, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: diskName
+          type:
+            - string
+          description: |-
+            The name of the disk within the given subscription
+            and resource group.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:Disk> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function get(resourceGroupName, diskName, options, callback)'
+    children:
+      - 'azure-arm-compute.Disks#get~client'
+      - 'azure-arm-compute.Disks#get~callback'
+      - 'azure-arm-compute.Disks#get~options'
+      - 'azure-arm-compute.Disks#get~apiVersion'
+      - 'azure-arm-compute.Disks#get~baseUrl'
+      - 'azure-arm-compute.Disks#get~requestUrl'
+      - 'azure-arm-compute.Disks#get~requestUrl'
+      - 'azure-arm-compute.Disks#get~requestUrl'
+      - 'azure-arm-compute.Disks#get~requestUrl'
+      - 'azure-arm-compute.Disks#get~queryParameters'
+      - 'azure-arm-compute.Disks#get~requestUrl'
+      - 'azure-arm-compute.Disks#get~httpRequest'
+      - 'azure-arm-compute.Disks#get~headerName'
+  - uid: 'azure-arm-compute.Disks#deleteMethod'
+    id: 'azure-arm-compute.Disks#deleteMethod'
+    parent: azure-arm-compute.Disks
+    name: 'deleteMethod(resourceGroupName, diskName, options, callback)'
+    summary: Deletes a disk.
+    fullName: >-
+      azure-arm-compute.Disks.deleteMethod(resourceGroupName, diskName, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: diskName
+          type:
+            - string
+          description: |-
+            The name of the disk within the given subscription
+            and resource group.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function deleteMethod(resourceGroupName, diskName, options, callback)'
+    children:
+      - 'azure-arm-compute.Disks#deleteMethod~client'
+      - 'azure-arm-compute.Disks#deleteMethod~callback'
+      - 'azure-arm-compute.Disks#deleteMethod~options'
+  - uid: 'azure-arm-compute.Disks#listByResourceGroup'
+    id: 'azure-arm-compute.Disks#listByResourceGroup'
+    parent: azure-arm-compute.Disks
+    name: 'listByResourceGroup(resourceGroupName, options, callback)'
+    summary: Lists all the disks under a resource group.
+    fullName: >-
+      azure-arm-compute.Disks.listByResourceGroup(resourceGroupName, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:DiskList> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function listByResourceGroup(resourceGroupName, options, callback)'
+    children:
+      - 'azure-arm-compute.Disks#listByResourceGroup~client'
+      - 'azure-arm-compute.Disks#listByResourceGroup~callback'
+      - 'azure-arm-compute.Disks#listByResourceGroup~options'
+      - 'azure-arm-compute.Disks#listByResourceGroup~apiVersion'
+      - 'azure-arm-compute.Disks#listByResourceGroup~baseUrl'
+      - 'azure-arm-compute.Disks#listByResourceGroup~requestUrl'
+      - 'azure-arm-compute.Disks#listByResourceGroup~requestUrl'
+      - 'azure-arm-compute.Disks#listByResourceGroup~requestUrl'
+      - 'azure-arm-compute.Disks#listByResourceGroup~queryParameters'
+      - 'azure-arm-compute.Disks#listByResourceGroup~requestUrl'
+      - 'azure-arm-compute.Disks#listByResourceGroup~httpRequest'
+      - 'azure-arm-compute.Disks#listByResourceGroup~headerName'
+  - uid: 'azure-arm-compute.Disks#list'
+    id: 'azure-arm-compute.Disks#list'
+    parent: azure-arm-compute.Disks
+    name: 'list(options, callback)'
+    summary: Lists all the disks under a subscription.
+    fullName: 'azure-arm-compute.Disks.list(options, callback)'
+    type: Method
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:DiskList> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function list(options, callback)'
+    children:
+      - 'azure-arm-compute.Disks#list~client'
+      - 'azure-arm-compute.Disks#list~callback'
+      - 'azure-arm-compute.Disks#list~options'
+      - 'azure-arm-compute.Disks#list~apiVersion'
+      - 'azure-arm-compute.Disks#list~baseUrl'
+      - 'azure-arm-compute.Disks#list~requestUrl'
+      - 'azure-arm-compute.Disks#list~requestUrl'
+      - 'azure-arm-compute.Disks#list~queryParameters'
+      - 'azure-arm-compute.Disks#list~requestUrl'
+      - 'azure-arm-compute.Disks#list~httpRequest'
+      - 'azure-arm-compute.Disks#list~headerName'
+  - uid: 'azure-arm-compute.Disks#grantAccess'
+    id: 'azure-arm-compute.Disks#grantAccess'
+    parent: azure-arm-compute.Disks
+    name: >-
+      grantAccess(resourceGroupName, diskName, grantAccessData, options,
+      callback)
+    summary: Grants access to a disk.
+    fullName: >-
+      azure-arm-compute.Disks.grantAccess(resourceGroupName, diskName,
+      grantAccessData, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: diskName
+          type:
+            - string
+          description: |-
+            The name of the disk within the given subscription
+            and resource group.
+        - id: grantAccessData
+          type:
+            - object
+          description: |-
+            Access data object supplied in the body of
+            the get disk access operation.
+        - id: grantAccessData.access
+          type:
+            - string
+          description: |-
+            Possible values include: 'None',
+            'Read'
+        - id: grantAccessData.durationInSeconds
+          type:
+            - number
+          description: |-
+            Time duration in seconds
+            until the SAS access expires.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:AccessUri> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function grantAccess(resourceGroupName, diskName, grantAccessData,
+        options, callback)
+    children:
+      - 'azure-arm-compute.Disks#grantAccess~client'
+      - 'azure-arm-compute.Disks#grantAccess~callback'
+      - 'azure-arm-compute.Disks#grantAccess~options'
+  - uid: 'azure-arm-compute.Disks#revokeAccess'
+    id: 'azure-arm-compute.Disks#revokeAccess'
+    parent: azure-arm-compute.Disks
+    name: 'revokeAccess(resourceGroupName, diskName, options, callback)'
+    summary: Revokes access to a disk.
+    fullName: >-
+      azure-arm-compute.Disks.revokeAccess(resourceGroupName, diskName, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: diskName
+          type:
+            - string
+          description: |-
+            The name of the disk within the given subscription
+            and resource group.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function revokeAccess(resourceGroupName, diskName, options, callback)'
+    children:
+      - 'azure-arm-compute.Disks#revokeAccess~client'
+      - 'azure-arm-compute.Disks#revokeAccess~callback'
+      - 'azure-arm-compute.Disks#revokeAccess~options'
+  - uid: 'azure-arm-compute.Disks#beginCreateOrUpdate'
+    id: 'azure-arm-compute.Disks#beginCreateOrUpdate'
+    parent: azure-arm-compute.Disks
+    name: 'beginCreateOrUpdate(resourceGroupName, diskName, disk, options, callback)'
+    summary: Creates or updates a disk.
+    fullName: >-
+      azure-arm-compute.Disks.beginCreateOrUpdate(resourceGroupName, diskName,
+      disk, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: diskName
+          type:
+            - string
+          description: |-
+            The name of the disk within the given subscription
+            and resource group.
+        - id: disk
+          type:
+            - object
+          description: |-
+            Disk object supplied in the body of the Put disk
+            operation.
+        - id: disk.accountType
+          type:
+            - string
+          description: |-
+            the storage account type of the disk.
+            Possible values include: 'Standard_LRS', 'Premium_LRS'
+          optional: true
+        - id: disk.osType
+          type:
+            - string
+          description: |-
+            The Operating System type. Possible values
+            include: 'Windows', 'Linux'
+          optional: true
+        - id: disk.creationData
+          type:
+            - object
+          description: |-
+            Disk source information. CreationData
+            information cannot be changed after the disk has been created.
+        - id: disk.creationData.createOption
+          type:
+            - string
+          description: |-
+            Possible values include:
+            'Empty', 'Attach', 'FromImage', 'Import', 'Copy', 'Restore'
+        - id: disk.creationData.storageAccountId
+          type:
+            - string
+          description: >-
+            If createOption is
+
+            Import, the Azure Resource Manager identifier of the storage account
+
+            containing the blob to import as a disk. Required only if the blob
+            is in a
+
+            different subscription
+          optional: true
+        - id: disk.creationData.imageReference
+          type:
+            - object
+          description: Disk source information.
+          optional: true
+        - id: disk.creationData.imageReference.id
+          type:
+            - string
+          description: >-
+            A relative uri
+
+            containing either a Platform Imgage Repository or user image
+            reference.
+        - id: disk.creationData.imageReference.lun
+          type:
+            - number
+          description: >-
+            If the disk is
+
+            created from an image's data disk, this is an index that indicates
+            which of
+
+            the data disks in the image to use. For OS disks, this field is
+            null.
+          optional: true
+        - id: disk.creationData.sourceUri
+          type:
+            - string
+          description: >-
+            If creationOption is Import,
+
+            this is a SAS URI to a blob to be imported into a managed disk. If
+
+            creationOption is Copy, this is a relative Uri containing the id of
+            the
+
+            source snapshot to be copied into a managed disk.
+          optional: true
+        - id: disk.creationData.sourceResourceId
+          type:
+            - string
+          description: >-
+            If createOption is
+
+            Copy, this is the ARM id of the source snapshot or disk. If
+            creationOption
+
+            is Restore, this is the ARM-like id of the source disk restore
+            point.
+          optional: true
+        - id: disk.diskSizeGB
+          type:
+            - number
+          description: >-
+            If creationData.createOption is Empty,
+
+            this field is mandatory and it indicates the size of the VHD to
+            create. If
+
+            this field is present for updates or creation with other options, it
+
+            indicates a resize. Resizes are only allowed if the disk is not
+            attached to
+
+            a running VM, and can only increase the disk's size.
+          optional: true
+        - id: disk.encryptionSettings
+          type:
+            - object
+          description: |-
+            Encryption settings for disk or
+            snapshot
+          optional: true
+        - id: disk.encryptionSettings.enabled
+          type:
+            - boolean
+          description: >-
+            Set this flag to true and
+
+            provide DiskEncryptionKey and optional KeyEncryptionKey to enable
+
+            encryption. Set this flag to false and remove DiskEncryptionKey and
+
+            KeyEncryptionKey to disable encryption. If EncryptionSettings is
+            null in the
+
+            request object, the existing settings remain unchanged.
+          optional: true
+        - id: disk.encryptionSettings.diskEncryptionKey
+          type:
+            - object
+          description: |-
+            Key Vault Secret
+            Url and vault id of the disk encryption key
+          optional: true
+        - id: disk.encryptionSettings.diskEncryptionKey.sourceVault
+          type:
+            - object
+          description: Resource id of the KeyVault containing the key or secret
+        - id: disk.encryptionSettings.diskEncryptionKey.secretUrl
+          type:
+            - string
+          description: |-
+            Url
+            pointing to a key or secret in KeyVault
+        - id: disk.encryptionSettings.keyEncryptionKey
+          type:
+            - object
+          description: |-
+            Key Vault Key Url
+            and vault id of the key encryption key
+          optional: true
+        - id: disk.encryptionSettings.keyEncryptionKey.sourceVault
+          type:
+            - object
+          description: Resource id of the KeyVault containing the key or secret
+        - id: disk.encryptionSettings.keyEncryptionKey.sourceVault.id
+          type:
+            - string
+          description: Resource Id
+          optional: true
+        - id: disk.encryptionSettings.keyEncryptionKey.keyUrl
+          type:
+            - string
+          description: |-
+            Url pointing
+            to a key or secret in KeyVault
+        - id: disk.location
+          type:
+            - string
+          description: Resource location
+        - id: disk.tags
+          type:
+            - object
+          description: Resource tags
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:Disk> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginCreateOrUpdate(resourceGroupName, diskName, disk, options,
+        callback)
+    children:
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~client'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~callback'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~options'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~apiVersion'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~baseUrl'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~queryParameters'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~httpRequest'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~headerName'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~requestContent'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~requestModel'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~requestModelMapper'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~requestModel'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~requestContent'
+      - 'azure-arm-compute.Disks#beginCreateOrUpdate~serializationError'
+  - uid: 'azure-arm-compute.Disks#beginUpdate'
+    id: 'azure-arm-compute.Disks#beginUpdate'
+    parent: azure-arm-compute.Disks
+    name: 'beginUpdate(resourceGroupName, diskName, disk, options, callback)'
+    summary: Updates (patches) a disk.
+    fullName: >-
+      azure-arm-compute.Disks.beginUpdate(resourceGroupName, diskName, disk,
+      options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: diskName
+          type:
+            - string
+          description: |-
+            The name of the disk within the given subscription
+            and resource group.
+        - id: disk
+          type:
+            - object
+          description: |-
+            Disk object supplied in the body of the Patch disk
+            operation.
+        - id: disk.accountType
+          type:
+            - string
+          description: |-
+            the storage account type of the disk.
+            Possible values include: 'Standard_LRS', 'Premium_LRS'
+          optional: true
+        - id: disk.osType
+          type:
+            - string
+          description: |-
+            the Operating System type. Possible values
+            include: 'Windows', 'Linux'
+          optional: true
+        - id: disk.creationData
+          type:
+            - object
+          description: |-
+            disk source information. CreationData
+            information cannot be changed after the disk has been created.
+          optional: true
+        - id: disk.creationData.createOption
+          type:
+            - string
+          description: |-
+            Possible values include:
+            'Empty', 'Attach', 'FromImage', 'Import', 'Copy', 'Restore'
+        - id: disk.creationData.storageAccountId
+          type:
+            - string
+          description: >-
+            If createOption is
+
+            Import, the Azure Resource Manager identifier of the storage account
+
+            containing the blob to import as a disk. Required only if the blob
+            is in a
+
+            different subscription
+          optional: true
+        - id: disk.creationData.imageReference
+          type:
+            - object
+          description: Disk source information.
+          optional: true
+        - id: disk.creationData.imageReference.id
+          type:
+            - string
+          description: >-
+            A relative uri
+
+            containing either a Platform Imgage Repository or user image
+            reference.
+        - id: disk.creationData.imageReference.lun
+          type:
+            - number
+          description: >-
+            If the disk is
+
+            created from an image's data disk, this is an index that indicates
+            which of
+
+            the data disks in the image to use. For OS disks, this field is
+            null.
+          optional: true
+        - id: disk.creationData.sourceUri
+          type:
+            - string
+          description: >-
+            If creationOption is Import,
+
+            this is a SAS URI to a blob to be imported into a managed disk. If
+
+            creationOption is Copy, this is a relative Uri containing the id of
+            the
+
+            source snapshot to be copied into a managed disk.
+          optional: true
+        - id: disk.creationData.sourceResourceId
+          type:
+            - string
+          description: >-
+            If createOption is
+
+            Copy, this is the ARM id of the source snapshot or disk. If
+            creationOption
+
+            is Restore, this is the ARM-like id of the source disk restore
+            point.
+          optional: true
+        - id: disk.diskSizeGB
+          type:
+            - number
+          description: >-
+            If creationData.createOption is Empty,
+
+            this field is mandatory and it indicates the size of the VHD to
+            create. If
+
+            this field is present for updates or creation with other options, it
+
+            indicates a resize. Resizes are only allowed if the disk is not
+            attached to
+
+            a running VM, and can only increase the disk's size.
+          optional: true
+        - id: disk.encryptionSettings
+          type:
+            - object
+          description: |-
+            Encryption settings for disk or
+            snapshot
+          optional: true
+        - id: disk.encryptionSettings.enabled
+          type:
+            - boolean
+          description: >-
+            Set this flag to true and
+
+            provide DiskEncryptionKey and optional KeyEncryptionKey to enable
+
+            encryption. Set this flag to false and remove DiskEncryptionKey and
+
+            KeyEncryptionKey to disable encryption. If EncryptionSettings is
+            null in the
+
+            request object, the existing settings remain unchanged.
+          optional: true
+        - id: disk.encryptionSettings.diskEncryptionKey
+          type:
+            - object
+          description: |-
+            Key Vault Secret
+            Url and vault id of the disk encryption key
+          optional: true
+        - id: disk.encryptionSettings.diskEncryptionKey.sourceVault
+          type:
+            - object
+          description: Resource id of the KeyVault containing the key or secret
+        - id: disk.encryptionSettings.diskEncryptionKey.secretUrl
+          type:
+            - string
+          description: |-
+            Url
+            pointing to a key or secret in KeyVault
+        - id: disk.encryptionSettings.keyEncryptionKey
+          type:
+            - object
+          description: |-
+            Key Vault Key Url
+            and vault id of the key encryption key
+          optional: true
+        - id: disk.encryptionSettings.keyEncryptionKey.sourceVault
+          type:
+            - object
+          description: Resource id of the KeyVault containing the key or secret
+        - id: disk.encryptionSettings.keyEncryptionKey.sourceVault.id
+          type:
+            - string
+          description: Resource Id
+          optional: true
+        - id: disk.encryptionSettings.keyEncryptionKey.keyUrl
+          type:
+            - string
+          description: |-
+            Url pointing
+            to a key or secret in KeyVault
+        - id: disk.tags
+          type:
+            - object
+          description: Resource tags
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:Disk> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginUpdate(resourceGroupName, diskName, disk, options,
+        callback)
+    children:
+      - 'azure-arm-compute.Disks#beginUpdate~client'
+      - 'azure-arm-compute.Disks#beginUpdate~callback'
+      - 'azure-arm-compute.Disks#beginUpdate~options'
+      - 'azure-arm-compute.Disks#beginUpdate~apiVersion'
+      - 'azure-arm-compute.Disks#beginUpdate~baseUrl'
+      - 'azure-arm-compute.Disks#beginUpdate~requestUrl'
+      - 'azure-arm-compute.Disks#beginUpdate~requestUrl'
+      - 'azure-arm-compute.Disks#beginUpdate~requestUrl'
+      - 'azure-arm-compute.Disks#beginUpdate~requestUrl'
+      - 'azure-arm-compute.Disks#beginUpdate~queryParameters'
+      - 'azure-arm-compute.Disks#beginUpdate~requestUrl'
+      - 'azure-arm-compute.Disks#beginUpdate~httpRequest'
+      - 'azure-arm-compute.Disks#beginUpdate~headerName'
+      - 'azure-arm-compute.Disks#beginUpdate~requestContent'
+      - 'azure-arm-compute.Disks#beginUpdate~requestModel'
+      - 'azure-arm-compute.Disks#beginUpdate~requestModelMapper'
+      - 'azure-arm-compute.Disks#beginUpdate~requestModel'
+      - 'azure-arm-compute.Disks#beginUpdate~requestContent'
+      - 'azure-arm-compute.Disks#beginUpdate~serializationError'
+  - uid: 'azure-arm-compute.Disks#beginDeleteMethod'
+    id: 'azure-arm-compute.Disks#beginDeleteMethod'
+    parent: azure-arm-compute.Disks
+    name: 'beginDeleteMethod(resourceGroupName, diskName, options, callback)'
+    summary: Deletes a disk.
+    fullName: >-
+      azure-arm-compute.Disks.beginDeleteMethod(resourceGroupName, diskName,
+      options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: diskName
+          type:
+            - string
+          description: |-
+            The name of the disk within the given subscription
+            and resource group.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginDeleteMethod(resourceGroupName, diskName, options,
+        callback)
+    children:
+      - 'azure-arm-compute.Disks#beginDeleteMethod~client'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~callback'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~options'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~apiVersion'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~baseUrl'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~requestUrl'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~requestUrl'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~requestUrl'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~requestUrl'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~queryParameters'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~requestUrl'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~httpRequest'
+      - 'azure-arm-compute.Disks#beginDeleteMethod~headerName'
+  - uid: 'azure-arm-compute.Disks#beginGrantAccess'
+    id: 'azure-arm-compute.Disks#beginGrantAccess'
+    parent: azure-arm-compute.Disks
+    name: >-
+      beginGrantAccess(resourceGroupName, diskName, grantAccessData, options,
+      callback)
+    summary: Grants access to a disk.
+    fullName: >-
+      azure-arm-compute.Disks.beginGrantAccess(resourceGroupName, diskName,
+      grantAccessData, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: diskName
+          type:
+            - string
+          description: |-
+            The name of the disk within the given subscription
+            and resource group.
+        - id: grantAccessData
+          type:
+            - object
+          description: |-
+            Access data object supplied in the body of
+            the get disk access operation.
+        - id: grantAccessData.access
+          type:
+            - string
+          description: |-
+            Possible values include: 'None',
+            'Read'
+        - id: grantAccessData.durationInSeconds
+          type:
+            - number
+          description: |-
+            Time duration in seconds
+            until the SAS access expires.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:AccessUri> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginGrantAccess(resourceGroupName, diskName, grantAccessData,
+        options, callback)
+    children:
+      - 'azure-arm-compute.Disks#beginGrantAccess~client'
+      - 'azure-arm-compute.Disks#beginGrantAccess~callback'
+      - 'azure-arm-compute.Disks#beginGrantAccess~options'
+      - 'azure-arm-compute.Disks#beginGrantAccess~apiVersion'
+      - 'azure-arm-compute.Disks#beginGrantAccess~baseUrl'
+      - 'azure-arm-compute.Disks#beginGrantAccess~requestUrl'
+      - 'azure-arm-compute.Disks#beginGrantAccess~requestUrl'
+      - 'azure-arm-compute.Disks#beginGrantAccess~requestUrl'
+      - 'azure-arm-compute.Disks#beginGrantAccess~requestUrl'
+      - 'azure-arm-compute.Disks#beginGrantAccess~queryParameters'
+      - 'azure-arm-compute.Disks#beginGrantAccess~requestUrl'
+      - 'azure-arm-compute.Disks#beginGrantAccess~httpRequest'
+      - 'azure-arm-compute.Disks#beginGrantAccess~headerName'
+      - 'azure-arm-compute.Disks#beginGrantAccess~requestContent'
+      - 'azure-arm-compute.Disks#beginGrantAccess~requestModel'
+      - 'azure-arm-compute.Disks#beginGrantAccess~requestModelMapper'
+      - 'azure-arm-compute.Disks#beginGrantAccess~requestModel'
+      - 'azure-arm-compute.Disks#beginGrantAccess~requestContent'
+      - 'azure-arm-compute.Disks#beginGrantAccess~serializationError'
+  - uid: 'azure-arm-compute.Disks#beginRevokeAccess'
+    id: 'azure-arm-compute.Disks#beginRevokeAccess'
+    parent: azure-arm-compute.Disks
+    name: 'beginRevokeAccess(resourceGroupName, diskName, options, callback)'
+    summary: Revokes access to a disk.
+    fullName: >-
+      azure-arm-compute.Disks.beginRevokeAccess(resourceGroupName, diskName,
+      options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: diskName
+          type:
+            - string
+          description: |-
+            The name of the disk within the given subscription
+            and resource group.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginRevokeAccess(resourceGroupName, diskName, options,
+        callback)
+    children:
+      - 'azure-arm-compute.Disks#beginRevokeAccess~client'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~callback'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~options'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~apiVersion'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~baseUrl'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~requestUrl'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~requestUrl'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~requestUrl'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~requestUrl'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~queryParameters'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~requestUrl'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~httpRequest'
+      - 'azure-arm-compute.Disks#beginRevokeAccess~headerName'
+  - uid: 'azure-arm-compute.Disks#listByResourceGroupNext'
+    id: 'azure-arm-compute.Disks#listByResourceGroupNext'
+    parent: azure-arm-compute.Disks
+    name: 'listByResourceGroupNext(nextPageLink, options, callback)'
+    summary: Lists all the disks under a resource group.
+    fullName: >-
+      azure-arm-compute.Disks.listByResourceGroupNext(nextPageLink, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:DiskList> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function listByResourceGroupNext(nextPageLink, options, callback)'
+    children:
+      - 'azure-arm-compute.Disks#listByResourceGroupNext~client'
+      - 'azure-arm-compute.Disks#listByResourceGroupNext~callback'
+      - 'azure-arm-compute.Disks#listByResourceGroupNext~options'
+      - 'azure-arm-compute.Disks#listByResourceGroupNext~requestUrl'
+      - 'azure-arm-compute.Disks#listByResourceGroupNext~requestUrl'
+      - 'azure-arm-compute.Disks#listByResourceGroupNext~httpRequest'
+      - 'azure-arm-compute.Disks#listByResourceGroupNext~headerName'
+  - uid: 'azure-arm-compute.Disks#listNext'
+    id: 'azure-arm-compute.Disks#listNext'
+    parent: azure-arm-compute.Disks
+    name: 'listNext(nextPageLink, options, callback)'
+    summary: Lists all the disks under a subscription.
+    fullName: 'azure-arm-compute.Disks.listNext(nextPageLink, options, callback)'
+    type: Method
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:DiskList> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function listNext(nextPageLink, options, callback)'
+    children:
+      - 'azure-arm-compute.Disks#listNext~client'
+      - 'azure-arm-compute.Disks#listNext~callback'
+      - 'azure-arm-compute.Disks#listNext~options'
+      - 'azure-arm-compute.Disks#listNext~requestUrl'
+      - 'azure-arm-compute.Disks#listNext~requestUrl'
+      - 'azure-arm-compute.Disks#listNext~httpRequest'
+      - 'azure-arm-compute.Disks#listNext~headerName'
+references:
+  - uid: azure-arm-compute.ComputeManagementClient
+    name: ComputeManagementClient
+    fullName: azure-arm-compute.ComputeManagementClient
+    isExternal: false
+  - uid: string
+    name: string
+    fullName: string
+    isExternal: true
+  - uid: object
+    name: object
+    fullName: object
+    isExternal: true
+  - uid: number
+    name: number
+    fullName: number
+    isExternal: true
+  - uid: boolean
+    name: boolean
+    fullName: boolean
+    isExternal: true
+  - uid: function
+    name: function
+    fullName: function
+    isExternal: true

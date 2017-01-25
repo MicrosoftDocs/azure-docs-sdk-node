@@ -14,19 +14,21 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs.#ctor'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#client'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#reimage'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#reimageAll'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#deallocate'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#deleteMethod'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#powerOff'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#restart'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#start'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#listNext'
   - id: 'azure-arm-compute.VirtualMachineScaleSetVMs.#ctor'
@@ -58,8 +60,8 @@ items:
     parent: azure-arm-compute.VirtualMachineScaleSetVMs
     name: 'reimage(resourceGroupName, vmScaleSetName, instanceId, options, callback)'
     summary: |-
-      Allows you to re-image(update the version of the installed operating
-      system) a virtual machine scale set instance.
+      Reimages (upgrade the operating system) a specific virtual machine in a VM
+      scale set.
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSetVMs.reimage(resourceGroupName,
       vmScaleSetName, instanceId, options, callback)
@@ -73,11 +75,11 @@ items:
         - id: vmScaleSetName
           type:
             - string
-          description: The name of the virtual machine scale set.
+          description: The name of the VM scale set.
         - id: instanceId
           type:
             - string
-          description: The instance id of the virtual machine.
+          description: The instance ID of the virtual machine.
         - id: options
           type:
             - object
@@ -102,7 +104,9 @@ items:
 
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
-                               {null} [result]   - The deserialized result object.
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -114,17 +118,18 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#reimage~client'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#reimage~callback'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#reimage~options'
-  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage'
-    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage'
+  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#reimageAll'
+    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#reimageAll'
     parent: azure-arm-compute.VirtualMachineScaleSetVMs
     name: >-
-      beginReimage(resourceGroupName, vmScaleSetName, instanceId, options,
+      reimageAll(resourceGroupName, vmScaleSetName, instanceId, options,
       callback)
     summary: |-
-      Allows you to re-image(update the version of the installed operating
-      system) a virtual machine scale set instance.
+      Allows you to re-image all the disks ( including data disks ) in the a
+      virtual machine scale set instance. This operation is only supported for
+      managed disks.
     fullName: >-
-      azure-arm-compute.VirtualMachineScaleSetVMs.beginReimage(resourceGroupName,
+      azure-arm-compute.VirtualMachineScaleSetVMs.reimageAll(resourceGroupName,
       vmScaleSetName, instanceId, options, callback)
     type: Method
     syntax:
@@ -136,11 +141,11 @@ items:
         - id: vmScaleSetName
           type:
             - string
-          description: The name of the virtual machine scale set.
+          description: The name of the VM scale set.
         - id: instanceId
           type:
             - string
-          description: The instance id of the virtual machine.
+          description: The instance ID of the virtual machine.
         - id: options
           type:
             - object
@@ -165,43 +170,31 @@ items:
 
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
-                               {null} [result]   - The deserialized result object.
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
       content: >-
-        function beginReimage(resourceGroupName, vmScaleSetName, instanceId,
+        function reimageAll(resourceGroupName, vmScaleSetName, instanceId,
         options, callback)
     children:
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~client'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~callback'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~options'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~apiVersion'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~queryParameters'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~regex'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~httpRequest'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~headerName'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#reimageAll~client'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#reimageAll~callback'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#reimageAll~options'
   - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#deallocate'
     id: 'azure-arm-compute.VirtualMachineScaleSetVMs#deallocate'
     parent: azure-arm-compute.VirtualMachineScaleSetVMs
     name: >-
       deallocate(resourceGroupName, vmScaleSetName, instanceId, options,
       callback)
-    summary: >-
-      Allows you to deallocate a virtual machine scale set virtual machine.
-      Shuts
-
-      down the virtual machine and releases the compute resources. You are not
-
-      billed for the compute resources that this virtual machine uses.
+    summary: |-
+      Deallocates a specific virtual machine in a VM scale set. Shuts down the
+      virtual machine and releases the compute resources it uses. You are not
+      billed for the compute resources of this virtual machine once it is
+      deallocated.
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSetVMs.deallocate(resourceGroupName,
       vmScaleSetName, instanceId, options, callback)
@@ -215,11 +208,11 @@ items:
         - id: vmScaleSetName
           type:
             - string
-          description: The name of the virtual machine scale set.
+          description: The name of the VM scale set.
         - id: instanceId
           type:
             - string
-          description: The instance id of the virtual machine.
+          description: The instance ID of the virtual machine.
         - id: options
           type:
             - object
@@ -244,7 +237,9 @@ items:
 
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
-                               {null} [result]   - The deserialized result object.
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -256,93 +251,13 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#deallocate~client'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#deallocate~callback'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#deallocate~options'
-  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate'
-    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate'
-    parent: azure-arm-compute.VirtualMachineScaleSetVMs
-    name: >-
-      beginDeallocate(resourceGroupName, vmScaleSetName, instanceId, options,
-      callback)
-    summary: >-
-      Allows you to deallocate a virtual machine scale set virtual machine.
-      Shuts
-
-      down the virtual machine and releases the compute resources. You are not
-
-      billed for the compute resources that this virtual machine uses.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSetVMs.beginDeallocate(resourceGroupName,
-      vmScaleSetName, instanceId, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the virtual machine scale set.
-        - id: instanceId
-          type:
-            - string
-          description: The instance id of the virtual machine.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginDeallocate(resourceGroupName, vmScaleSetName, instanceId,
-        options, callback)
-    children:
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~client'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~callback'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~options'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~apiVersion'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
-      - >-
-        azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~queryParameters
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~regex'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~httpRequest'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~headerName'
   - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#deleteMethod'
     id: 'azure-arm-compute.VirtualMachineScaleSetVMs#deleteMethod'
     parent: azure-arm-compute.VirtualMachineScaleSetVMs
     name: >-
       deleteMethod(resourceGroupName, vmScaleSetName, instanceId, options,
       callback)
-    summary: Allows you to delete a virtual machine scale set.
+    summary: Deletes a virtual machine from a VM scale set.
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSetVMs.deleteMethod(resourceGroupName,
       vmScaleSetName, instanceId, options, callback)
@@ -356,11 +271,11 @@ items:
         - id: vmScaleSetName
           type:
             - string
-          description: The name of the virtual machine scale set.
+          description: The name of the VM scale set.
         - id: instanceId
           type:
             - string
-          description: The instance id of the virtual machine.
+          description: The instance ID of the virtual machine.
         - id: options
           type:
             - object
@@ -385,7 +300,9 @@ items:
 
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
-                               {null} [result]   - The deserialized result object.
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -397,86 +314,11 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#deleteMethod~client'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#deleteMethod~callback'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#deleteMethod~options'
-  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod'
-    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod'
-    parent: azure-arm-compute.VirtualMachineScaleSetVMs
-    name: >-
-      beginDeleteMethod(resourceGroupName, vmScaleSetName, instanceId, options,
-      callback)
-    summary: Allows you to delete a virtual machine scale set.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSetVMs.beginDeleteMethod(resourceGroupName,
-      vmScaleSetName, instanceId, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the virtual machine scale set.
-        - id: instanceId
-          type:
-            - string
-          description: The instance id of the virtual machine.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginDeleteMethod(resourceGroupName, vmScaleSetName,
-        instanceId, options, callback)
-    children:
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~client'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~callback'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~options'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~apiVersion'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
-      - >-
-        azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~queryParameters
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~regex'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
-      - >-
-        azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~httpRequest
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~headerName'
   - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#get'
     id: 'azure-arm-compute.VirtualMachineScaleSetVMs#get'
     parent: azure-arm-compute.VirtualMachineScaleSetVMs
     name: 'get(resourceGroupName, vmScaleSetName, instanceId, options, callback)'
-    summary: Displays information about a virtual machine scale set virtual machine.
+    summary: Gets a virtual machine from a VM scale set.
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSetVMs.get(resourceGroupName,
       vmScaleSetName, instanceId, options, callback)
@@ -490,11 +332,11 @@ items:
         - id: vmScaleSetName
           type:
             - string
-          description: The name of the virtual machine scale set.
+          description: The name of the VM scale set.
         - id: instanceId
           type:
             - string
-          description: The instance id of the virtual machine.
+          description: The instance ID of the virtual machine.
         - id: options
           type:
             - object
@@ -534,14 +376,13 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~callback'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~options'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~apiVersion'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~baseUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~queryParameters'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~regex'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~httpRequest'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#get~headerName'
@@ -551,7 +392,7 @@ items:
     name: >-
       getInstanceView(resourceGroupName, vmScaleSetName, instanceId, options,
       callback)
-    summary: Displays the status of a virtual machine scale set virtual machine.
+    summary: Gets the status of a virtual machine from a VM scale set.
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSetVMs.getInstanceView(resourceGroupName,
       vmScaleSetName, instanceId, options, callback)
@@ -565,11 +406,11 @@ items:
         - id: vmScaleSetName
           type:
             - string
-          description: The name of the virtual machine scale set.
+          description: The name of the VM scale set.
         - id: instanceId
           type:
             - string
-          description: The instance id of the virtual machine.
+          description: The instance ID of the virtual machine.
         - id: options
           type:
             - object
@@ -609,6 +450,7 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~callback'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~options'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~apiVersion'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~baseUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~requestUrl'
@@ -617,15 +459,13 @@ items:
       - >-
         azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~queryParameters
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~regex'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~httpRequest'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#getInstanceView~headerName'
   - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#list'
     id: 'azure-arm-compute.VirtualMachineScaleSetVMs#list'
     parent: azure-arm-compute.VirtualMachineScaleSetVMs
     name: 'list(resourceGroupName, virtualMachineScaleSetName, options, callback)'
-    summary: Lists all virtual machines in a VM scale sets.
+    summary: Gets a list of all virtual machines in a VM scale sets.
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSetVMs.list(resourceGroupName,
       virtualMachineScaleSetName, options, callback)
@@ -639,9 +479,7 @@ items:
         - id: virtualMachineScaleSetName
           type:
             - string
-          description: |-
-            The name of the virtual machine
-            scale set.
+          description: The name of the VM scale set.
         - id: options
           type:
             - object
@@ -650,7 +488,7 @@ items:
         - id: options.filter
           type:
             - string
-          description: The filter to apply on the operation.
+          description: The filter to apply to the operation.
           optional: true
         - id: options.select
           type:
@@ -661,7 +499,7 @@ items:
           type:
             - string
           description: |-
-            The expand expression to apply on the
+            The expand expression to apply to the
             operation.
           optional: true
         - id: options.customHeaders
@@ -684,8 +522,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object.
-                               See <xref:VirtualMachineScaleSetVMListResult> for
-                               more information.
+                               See <xref:VirtualMachineScaleSetVMListResult> for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -701,13 +539,12 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~select'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~expand'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~apiVersion'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~baseUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~queryParameters'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~regex'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~httpRequest'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#list~headerName'
@@ -715,7 +552,10 @@ items:
     id: 'azure-arm-compute.VirtualMachineScaleSetVMs#powerOff'
     parent: azure-arm-compute.VirtualMachineScaleSetVMs
     name: 'powerOff(resourceGroupName, vmScaleSetName, instanceId, options, callback)'
-    summary: Allows you to power off (stop) a virtual machine in a VM scale set.
+    summary: |-
+      Power off (stop) a virtual machine in a VM scale set. Note that resources
+      are still attached and you are getting charged for the resources. Instead,
+      use deallocate to release resources and avoid charges.
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSetVMs.powerOff(resourceGroupName,
       vmScaleSetName, instanceId, options, callback)
@@ -729,11 +569,11 @@ items:
         - id: vmScaleSetName
           type:
             - string
-          description: The name of the virtual machine scale set.
+          description: The name of the VM scale set.
         - id: instanceId
           type:
             - string
-          description: The instance id of the virtual machine.
+          description: The instance ID of the virtual machine.
         - id: options
           type:
             - object
@@ -758,7 +598,9 @@ items:
 
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
-                               {null} [result]   - The deserialized result object.
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -770,85 +612,11 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#powerOff~client'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#powerOff~callback'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#powerOff~options'
-  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff'
-    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff'
-    parent: azure-arm-compute.VirtualMachineScaleSetVMs
-    name: >-
-      beginPowerOff(resourceGroupName, vmScaleSetName, instanceId, options,
-      callback)
-    summary: Allows you to power off (stop) a virtual machine in a VM scale set.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSetVMs.beginPowerOff(resourceGroupName,
-      vmScaleSetName, instanceId, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the virtual machine scale set.
-        - id: instanceId
-          type:
-            - string
-          description: The instance id of the virtual machine.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginPowerOff(resourceGroupName, vmScaleSetName, instanceId,
-        options, callback)
-    children:
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~client'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~callback'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~options'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~apiVersion'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
-      - >-
-        azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~queryParameters
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~regex'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~httpRequest'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~headerName'
   - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#restart'
     id: 'azure-arm-compute.VirtualMachineScaleSetVMs#restart'
     parent: azure-arm-compute.VirtualMachineScaleSetVMs
     name: 'restart(resourceGroupName, vmScaleSetName, instanceId, options, callback)'
-    summary: Allows you to restart a virtual machine in a VM scale set.
+    summary: Restarts a virtual machine in a VM scale set.
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSetVMs.restart(resourceGroupName,
       vmScaleSetName, instanceId, options, callback)
@@ -862,11 +630,11 @@ items:
         - id: vmScaleSetName
           type:
             - string
-          description: The name of the virtual machine scale set.
+          description: The name of the VM scale set.
         - id: instanceId
           type:
             - string
-          description: The instance id of the virtual machine.
+          description: The instance ID of the virtual machine.
         - id: options
           type:
             - object
@@ -891,7 +659,9 @@ items:
 
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
-                               {null} [result]   - The deserialized result object.
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -903,84 +673,11 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#restart~client'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#restart~callback'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#restart~options'
-  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart'
-    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart'
-    parent: azure-arm-compute.VirtualMachineScaleSetVMs
-    name: >-
-      beginRestart(resourceGroupName, vmScaleSetName, instanceId, options,
-      callback)
-    summary: Allows you to restart a virtual machine in a VM scale set.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSetVMs.beginRestart(resourceGroupName,
-      vmScaleSetName, instanceId, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the virtual machine scale set.
-        - id: instanceId
-          type:
-            - string
-          description: The instance id of the virtual machine.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginRestart(resourceGroupName, vmScaleSetName, instanceId,
-        options, callback)
-    children:
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~client'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~callback'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~options'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~apiVersion'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~queryParameters'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~regex'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~httpRequest'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~headerName'
   - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#start'
     id: 'azure-arm-compute.VirtualMachineScaleSetVMs#start'
     parent: azure-arm-compute.VirtualMachineScaleSetVMs
     name: 'start(resourceGroupName, vmScaleSetName, instanceId, options, callback)'
-    summary: Allows you to start a virtual machine in a VM scale set.
+    summary: Starts a virtual machine in a VM scale set.
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSetVMs.start(resourceGroupName,
       vmScaleSetName, instanceId, options, callback)
@@ -994,11 +691,11 @@ items:
         - id: vmScaleSetName
           type:
             - string
-          description: The name of the virtual machine scale set.
+          description: The name of the VM scale set.
         - id: instanceId
           type:
             - string
-          description: The instance id of the virtual machine.
+          description: The instance ID of the virtual machine.
         - id: options
           type:
             - object
@@ -1023,7 +720,9 @@ items:
 
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
-                               {null} [result]   - The deserialized result object.
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1035,13 +734,474 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#start~client'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#start~callback'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#start~options'
+  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage'
+    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage'
+    parent: azure-arm-compute.VirtualMachineScaleSetVMs
+    name: >-
+      beginReimage(resourceGroupName, vmScaleSetName, instanceId, options,
+      callback)
+    summary: |-
+      Reimages (upgrade the operating system) a specific virtual machine in a VM
+      scale set.
+    fullName: >-
+      azure-arm-compute.VirtualMachineScaleSetVMs.beginReimage(resourceGroupName,
+      vmScaleSetName, instanceId, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: vmScaleSetName
+          type:
+            - string
+          description: The name of the VM scale set.
+        - id: instanceId
+          type:
+            - string
+          description: The instance ID of the virtual machine.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginReimage(resourceGroupName, vmScaleSetName, instanceId,
+        options, callback)
+    children:
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~client'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~callback'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~options'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~apiVersion'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~baseUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~queryParameters'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~httpRequest'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimage~headerName'
+  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll'
+    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll'
+    parent: azure-arm-compute.VirtualMachineScaleSetVMs
+    name: >-
+      beginReimageAll(resourceGroupName, vmScaleSetName, instanceId, options,
+      callback)
+    summary: |-
+      Allows you to re-image all the disks ( including data disks ) in the a
+      virtual machine scale set instance. This operation is only supported for
+      managed disks.
+    fullName: >-
+      azure-arm-compute.VirtualMachineScaleSetVMs.beginReimageAll(resourceGroupName,
+      vmScaleSetName, instanceId, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: vmScaleSetName
+          type:
+            - string
+          description: The name of the VM scale set.
+        - id: instanceId
+          type:
+            - string
+          description: The instance ID of the virtual machine.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginReimageAll(resourceGroupName, vmScaleSetName, instanceId,
+        options, callback)
+    children:
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~client'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~callback'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~options'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~apiVersion'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~baseUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~requestUrl'
+      - >-
+        azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~queryParameters
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~httpRequest'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginReimageAll~headerName'
+  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate'
+    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate'
+    parent: azure-arm-compute.VirtualMachineScaleSetVMs
+    name: >-
+      beginDeallocate(resourceGroupName, vmScaleSetName, instanceId, options,
+      callback)
+    summary: |-
+      Deallocates a specific virtual machine in a VM scale set. Shuts down the
+      virtual machine and releases the compute resources it uses. You are not
+      billed for the compute resources of this virtual machine once it is
+      deallocated.
+    fullName: >-
+      azure-arm-compute.VirtualMachineScaleSetVMs.beginDeallocate(resourceGroupName,
+      vmScaleSetName, instanceId, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: vmScaleSetName
+          type:
+            - string
+          description: The name of the VM scale set.
+        - id: instanceId
+          type:
+            - string
+          description: The instance ID of the virtual machine.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginDeallocate(resourceGroupName, vmScaleSetName, instanceId,
+        options, callback)
+    children:
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~client'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~callback'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~options'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~apiVersion'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~baseUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
+      - >-
+        azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~queryParameters
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~httpRequest'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeallocate~headerName'
+  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod'
+    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod'
+    parent: azure-arm-compute.VirtualMachineScaleSetVMs
+    name: >-
+      beginDeleteMethod(resourceGroupName, vmScaleSetName, instanceId, options,
+      callback)
+    summary: Deletes a virtual machine from a VM scale set.
+    fullName: >-
+      azure-arm-compute.VirtualMachineScaleSetVMs.beginDeleteMethod(resourceGroupName,
+      vmScaleSetName, instanceId, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: vmScaleSetName
+          type:
+            - string
+          description: The name of the VM scale set.
+        - id: instanceId
+          type:
+            - string
+          description: The instance ID of the virtual machine.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginDeleteMethod(resourceGroupName, vmScaleSetName,
+        instanceId, options, callback)
+    children:
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~client'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~callback'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~options'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~apiVersion'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~baseUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
+      - >-
+        azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~queryParameters
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~requestUrl'
+      - >-
+        azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~httpRequest
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginDeleteMethod~headerName'
+  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff'
+    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff'
+    parent: azure-arm-compute.VirtualMachineScaleSetVMs
+    name: >-
+      beginPowerOff(resourceGroupName, vmScaleSetName, instanceId, options,
+      callback)
+    summary: |-
+      Power off (stop) a virtual machine in a VM scale set. Note that resources
+      are still attached and you are getting charged for the resources. Instead,
+      use deallocate to release resources and avoid charges.
+    fullName: >-
+      azure-arm-compute.VirtualMachineScaleSetVMs.beginPowerOff(resourceGroupName,
+      vmScaleSetName, instanceId, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: vmScaleSetName
+          type:
+            - string
+          description: The name of the VM scale set.
+        - id: instanceId
+          type:
+            - string
+          description: The instance ID of the virtual machine.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginPowerOff(resourceGroupName, vmScaleSetName, instanceId,
+        options, callback)
+    children:
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~client'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~callback'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~options'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~apiVersion'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~baseUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
+      - >-
+        azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~queryParameters
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~httpRequest'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginPowerOff~headerName'
+  - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart'
+    id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart'
+    parent: azure-arm-compute.VirtualMachineScaleSetVMs
+    name: >-
+      beginRestart(resourceGroupName, vmScaleSetName, instanceId, options,
+      callback)
+    summary: Restarts a virtual machine in a VM scale set.
+    fullName: >-
+      azure-arm-compute.VirtualMachineScaleSetVMs.beginRestart(resourceGroupName,
+      vmScaleSetName, instanceId, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: vmScaleSetName
+          type:
+            - string
+          description: The name of the VM scale set.
+        - id: instanceId
+          type:
+            - string
+          description: The instance ID of the virtual machine.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginRestart(resourceGroupName, vmScaleSetName, instanceId,
+        options, callback)
+    children:
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~client'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~callback'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~options'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~apiVersion'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~baseUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~queryParameters'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~requestUrl'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~httpRequest'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginRestart~headerName'
   - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart'
     id: 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart'
     parent: azure-arm-compute.VirtualMachineScaleSetVMs
     name: >-
       beginStart(resourceGroupName, vmScaleSetName, instanceId, options,
       callback)
-    summary: Allows you to start a virtual machine in a VM scale set.
+    summary: Starts a virtual machine in a VM scale set.
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSetVMs.beginStart(resourceGroupName,
       vmScaleSetName, instanceId, options, callback)
@@ -1055,11 +1215,11 @@ items:
         - id: vmScaleSetName
           type:
             - string
-          description: The name of the virtual machine scale set.
+          description: The name of the VM scale set.
         - id: instanceId
           type:
             - string
-          description: The instance id of the virtual machine.
+          description: The instance ID of the virtual machine.
         - id: options
           type:
             - object
@@ -1084,7 +1244,9 @@ items:
 
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
-                               {null} [result]   - The deserialized result object.
+                               {object} [result]   - The deserialized result object.
+                               See <xref:OperationStatusResponse> for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1097,6 +1259,7 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~callback'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~options'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~apiVersion'
+      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~baseUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~requestUrl'
@@ -1104,15 +1267,13 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~queryParameters'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~regex'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~httpRequest'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#beginStart~headerName'
   - uid: 'azure-arm-compute.VirtualMachineScaleSetVMs#listNext'
     id: 'azure-arm-compute.VirtualMachineScaleSetVMs#listNext'
     parent: azure-arm-compute.VirtualMachineScaleSetVMs
     name: 'listNext(nextPageLink, options, callback)'
-    summary: Lists all virtual machines in a VM scale sets.
+    summary: Gets a list of all virtual machines in a VM scale sets.
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSetVMs.listNext(nextPageLink,
       options, callback)
@@ -1150,8 +1311,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object.
-                               See <xref:VirtualMachineScaleSetVMListResult> for
-                               more information.
+                               See <xref:VirtualMachineScaleSetVMListResult> for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1162,8 +1323,6 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#listNext~callback'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#listNext~options'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#listNext~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#listNext~requestUrl'
-      - 'azure-arm-compute.VirtualMachineScaleSetVMs#listNext~regex'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#listNext~requestUrl'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#listNext~httpRequest'
       - 'azure-arm-compute.VirtualMachineScaleSetVMs#listNext~headerName'

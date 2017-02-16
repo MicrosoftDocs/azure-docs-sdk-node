@@ -14,16 +14,16 @@ items:
       - 'azure-arm-network.VirtualNetworkGatewayConnections.#ctor'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#client'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#createOrUpdate'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#get'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#deleteMethod'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod'
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#list'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#resetSharedKey'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey'
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate'
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey'
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#listNext'
   - id: 'azure-arm-network.VirtualNetworkGatewayConnections.#ctor'
     uid: 'azure-arm-network.VirtualNetworkGatewayConnections.#ctor'
@@ -55,13 +55,9 @@ items:
     name: >-
       createOrUpdate(resourceGroupName, virtualNetworkGatewayConnectionName,
       parameters, options, callback)
-    summary: >-
-      The Put VirtualNetworkGatewayConnection operation creates/updates a
-      virtual
-
-      network gateway connection in the specified resource group through Network
-
-      resource provider.
+    summary: |-
+      Creates or updates a virtual network gateway connection in the specified
+      resource group.
     fullName: >-
       azure-arm-network.VirtualNetworkGatewayConnections.createOrUpdate(resourceGroupName,
       virtualNetworkGatewayConnectionName, parameters, options, callback)
@@ -82,9 +78,8 @@ items:
           type:
             - object
           description: |-
-            Parameters supplied to the Begin Create or
-            update Virtual Network Gateway connection operation through Network
-            resource provider.
+            Parameters supplied to the create or update
+            virtual network gateway connection operation.
         - id: parameters.authorizationKey
           type:
             - string
@@ -94,7 +89,6 @@ items:
           type:
             - object
           description: ''
-          optional: true
         - id: parameters.virtualNetworkGateway2
           type:
             - object
@@ -103,33 +97,32 @@ items:
         - id: parameters.virtualNetworkGateway2.ipConfigurations
           type:
             - array
-          description: IpConfigurations for Virtual network gateway.
-          optional: true
-        - id: parameters.virtualNetworkGateway2.gatewayType
-          type:
-            - string
           description: |-
-            The type of
-            this virtual network gateway. Possible values include: 'Vpn',
-            'ExpressRoute'
-          optional: true
-        - id: parameters.virtualNetworkGateway2.vpnType
+            IP
+            configurations for virtual network gateway.
+        - id: parameters.virtualNetworkGateway2.gatewayType
           type:
             - string
           description: >-
             The type of
 
-            this virtual network gateway. Possible values include:
-            'PolicyBased',
+            this virtual network gateway. Possible values are: 'Vpn' and
+            'ExpressRoute'.
 
-            'RouteBased'
-          optional: true
+            Possible values include: 'Vpn', 'ExpressRoute'
+        - id: parameters.virtualNetworkGateway2.vpnType
+          type:
+            - string
+          description: |-
+            The type of this
+            virtual network gateway. Possible values are: 'PolicyBased' and
+            'RouteBased'. Possible values include: 'PolicyBased', 'RouteBased'
         - id: parameters.virtualNetworkGateway2.enableBgp
           type:
             - boolean
           description: |-
-            EnableBgp
-            Flag
+            Whether BGP
+            is enabled for this virtual network gateway or not.
           optional: true
         - id: parameters.virtualNetworkGateway2.activeActive
           type:
@@ -140,80 +133,82 @@ items:
           type:
             - object
           description: >-
-            Gets
+            The
 
-            or sets the reference of the LocalNetworkGateway resource which
-            represents
+            reference of the LocalNetworkGateway resource which represents local
+            network
 
-            Local network site having default routes. Assign Null value in case
-            of
+            site having default routes. Assign Null value in case of removing
+            existing
 
-            removing existing default site setting.
+            default site setting.
           optional: true
         - id: parameters.virtualNetworkGateway2.sku
           type:
             - object
           description: >-
-            Gets or sets the
+            The reference of the
 
-            reference of the VirtualNetworkGatewaySku resource which represents
-            the
+            VirtualNetworkGatewaySku resource which represents the SKU selected
+            for
 
-            sku selected for Virtual network gateway.
+            Virtual network gateway.
           optional: true
         - id: parameters.virtualNetworkGateway2.sku.name
           type:
             - string
           description: >-
-            Gateway sku
+            Gateway SKU name.
 
-            name -Basic/HighPerformance/Standard/UltraPerformance. Possible
-            values
+            Possible values are: 'Basic', 'HighPerformance','Standard', and
 
-            include: 'Basic', 'HighPerformance', 'Standard', 'UltraPerformance'
-          optional: true
+            'UltraPerformance'. Possible values include: 'Basic',
+            'HighPerformance',
+
+            'Standard', 'UltraPerformance'
         - id: parameters.virtualNetworkGateway2.sku.tier
           type:
             - string
           description: >-
-            Gateway sku
+            Gateway SKU tier.
 
-            tier -Basic/HighPerformance/Standard/UltraPerformance. Possible
-            values
+            Possible values are: 'Basic', 'HighPerformance','Standard', and
 
-            include: 'Basic', 'HighPerformance', 'Standard', 'UltraPerformance'
-          optional: true
+            'UltraPerformance'. Possible values include: 'Basic',
+            'HighPerformance',
+
+            'Standard', 'UltraPerformance'
         - id: parameters.virtualNetworkGateway2.sku.capacity
           type:
             - number
           description: |-
             The
-            capacity
+            capacity.
           optional: true
         - id: parameters.virtualNetworkGateway2.vpnClientConfiguration
           type:
             - object
           description: >-
-            Gets or sets the reference of the VpnClientConfiguration resource
-            which
+            The reference of the VpnClientConfiguration resource which
+            represents the
 
-            represents the P2S VpnClient configurations.
+            P2S VpnClient configurations.
           optional: true
         - id: >-
             parameters.virtualNetworkGateway2.vpnClientConfiguration.vpnClientAddressPool
           type:
             - object
           description: >-
-            Gets or sets the reference of the Address space resource which
-            represents
+            The reference of the address space resource which represents Address
+            space
 
-            Address space for P2S VpnClient.
+            for P2S VpnClient.
           optional: true
         - id: >-
             parameters.virtualNetworkGateway2.vpnClientConfiguration.vpnClientRootCertificates
           type:
             - array
-          description: VpnClientRootCertificate for Virtual network gateway.
+          description: VpnClientRootCertificate for virtual network gateway.
           optional: true
         - id: >-
             parameters.virtualNetworkGateway2.vpnClientConfiguration.vpnClientRevokedCertificates
@@ -226,46 +221,38 @@ items:
             - object
           description: |-
             Virtual
-            network gateway's BGP speaker settings
+            network gateway's BGP speaker settings.
           optional: true
         - id: parameters.virtualNetworkGateway2.resourceGuid
           type:
             - string
           description: |-
-            Gets or
-            sets resource guid property of the VirtualNetworkGateway resource
-          optional: true
-        - id: parameters.virtualNetworkGateway2.provisioningState
-          type:
-            - string
-          description: |-
-            Gets
-            provisioning state of the VirtualNetworkGateway resource
-            Updating/Deleting/Failed
+            The
+            resource GUID property of the VirtualNetworkGateway resource.
           optional: true
         - id: parameters.virtualNetworkGateway2.etag
           type:
             - string
           description: |-
             Gets a unique
-            read-only string that changes whenever the resource is updated
+            read-only string that changes whenever the resource is updated.
           optional: true
         - id: parameters.virtualNetworkGateway2.id
           type:
             - string
-          description: Resource Id
+          description: Resource ID.
           optional: true
         - id: parameters.virtualNetworkGateway2.location
           type:
             - string
           description: |-
             Resource
-            location
+            location.
           optional: true
         - id: parameters.virtualNetworkGateway2.tags
           type:
             - object
-          description: Resource tags
+          description: Resource tags.
           optional: true
         - id: parameters.localNetworkGateway2
           type:
@@ -275,17 +262,16 @@ items:
         - id: parameters.localNetworkGateway2.localNetworkAddressSpace
           type:
             - object
-          description: Local network site Address space
-          optional: true
+          description: Local network site address space.
         - id: >-
             parameters.localNetworkGateway2.localNetworkAddressSpace.addressPrefixes
           type:
             - array
           description: >-
-            Gets or sets list of address blocks reserved for this virtual
-            network in
+            A
 
-            CIDR notation
+            list of address blocks reserved for this virtual network in CIDR
+            notation.
           optional: true
         - id: parameters.localNetworkGateway2.gatewayIpAddress
           type:
@@ -299,108 +285,79 @@ items:
             - object
           description: |-
             Local network
-            gateway's BGP speaker settings
+            gateway's BGP speaker settings.
           optional: true
         - id: parameters.localNetworkGateway2.bgpSettings.asn
           type:
             - number
           description: |-
-            Gets or
-            sets this BGP speaker's ASN
+            The BGP
+            speaker's ASN.
           optional: true
         - id: parameters.localNetworkGateway2.bgpSettings.bgpPeeringAddress
           type:
             - string
           description: |-
-            Gets or
-            sets the BGP peering address and BGP identifier of this BGP speaker
+            The BGP
+            peering address and BGP identifier of this BGP speaker.
           optional: true
         - id: parameters.localNetworkGateway2.bgpSettings.peerWeight
           type:
             - number
-          description: >-
-            Gets or sets the weight added to routes learned from this BGP
-            speaker
+          description: |-
+            The
+            weight added to routes learned from this BGP speaker.
           optional: true
         - id: parameters.localNetworkGateway2.resourceGuid
           type:
             - string
           description: |-
-            Gets or sets
-            resource guid property of the LocalNetworkGateway resource
-          optional: true
-        - id: parameters.localNetworkGateway2.provisioningState
-          type:
-            - string
-          description: |-
-            Gets
-            provisioning state of the LocalNetworkGateway resource
-            Updating/Deleting/Failed
+            The resource
+            GUID property of the LocalNetworkGateway resource.
           optional: true
         - id: parameters.localNetworkGateway2.etag
           type:
             - string
           description: |-
-            Gets a unique
-            read-only string that changes whenever the resource is updated
+            A unique read-only
+            string that changes whenever the resource is updated.
           optional: true
         - id: parameters.localNetworkGateway2.id
           type:
             - string
-          description: Resource Id
+          description: Resource ID.
           optional: true
         - id: parameters.localNetworkGateway2.location
           type:
             - string
-          description: Resource location
+          description: |-
+            Resource
+            location.
           optional: true
         - id: parameters.localNetworkGateway2.tags
           type:
             - object
-          description: Resource tags
+          description: Resource tags.
           optional: true
         - id: parameters.connectionType
           type:
             - string
           description: >-
-            Gateway connection type
+            Gateway connection type. Possible
 
-            -Ipsec/Dedicated/VpnClient/Vnet2Vnet. Possible values include:
-            'IPsec',
+            values are: 'Ipsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.
+            Possible
 
-            'Vnet2Vnet', 'ExpressRoute', 'VPNClient'
-          optional: true
+            values include: 'IPsec', 'Vnet2Vnet', 'ExpressRoute', 'VPNClient'
         - id: parameters.routingWeight
           type:
             - number
-          description: The Routing weight.
+          description: The routing weight.
           optional: true
         - id: parameters.sharedKey
           type:
             - string
-          description: The Ipsec share key.
-          optional: true
-        - id: parameters.connectionStatus
-          type:
-            - string
-          description: |-
-            Virtual network Gateway
-            connection status. Possible values include: 'Unknown', 'Connecting',
-            'Connected', 'NotConnected'
-          optional: true
-        - id: parameters.egressBytesTransferred
-          type:
-            - number
-          description: |-
-            The Egress Bytes
-            Transferred in this connection
-          optional: true
-        - id: parameters.ingressBytesTransferred
-          type:
-            - number
-          description: |-
-            The Ingress Bytes
-            Transferred in this connection
+          description: The IPSec shared key.
           optional: true
         - id: parameters.peer
           type:
@@ -410,50 +367,41 @@ items:
         - id: parameters.peer.id
           type:
             - string
-          description: Resource Id
+          description: Resource ID.
           optional: true
         - id: parameters.enableBgp
           type:
             - boolean
-          description: EnableBgp Flag
+          description: EnableBgp flag
           optional: true
         - id: parameters.resourceGuid
           type:
             - string
           description: |-
-            Gets or sets resource guid
-            property of the VirtualNetworkGatewayConnection resource
-          optional: true
-        - id: parameters.provisioningState
-          type:
-            - string
-          description: >-
-            Gets provisioning state of
-
-            the VirtualNetworkGatewayConnection resource
-            Updating/Deleting/Failed
+            The resource GUID property of the
+            VirtualNetworkGatewayConnection resource.
           optional: true
         - id: parameters.etag
           type:
             - string
           description: |-
             Gets a unique read-only string that
-            changes whenever the resource is updated
+            changes whenever the resource is updated.
           optional: true
         - id: parameters.id
           type:
             - string
-          description: Resource Id
+          description: Resource ID.
           optional: true
         - id: parameters.location
           type:
             - string
-          description: Resource location
+          description: Resource location.
           optional: true
         - id: parameters.tags
           type:
             - object
-          description: Resource tags
+          description: Resource tags.
           optional: true
         - id: options
           type:
@@ -495,495 +443,13 @@ items:
         azure-arm-network.VirtualNetworkGatewayConnections#createOrUpdate~callback
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#createOrUpdate~options
-  - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate'
-    id: 'azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate'
-    parent: azure-arm-network.VirtualNetworkGatewayConnections
-    name: >-
-      beginCreateOrUpdate(resourceGroupName,
-      virtualNetworkGatewayConnectionName, parameters, options, callback)
-    summary: >-
-      The Put VirtualNetworkGatewayConnection operation creates/updates a
-      virtual
-
-      network gateway connection in the specified resource group through Network
-
-      resource provider.
-    fullName: >-
-      azure-arm-network.VirtualNetworkGatewayConnections.beginCreateOrUpdate(resourceGroupName,
-      virtualNetworkGatewayConnectionName, parameters, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: virtualNetworkGatewayConnectionName
-          type:
-            - string
-          description: |-
-            The name of the virtual
-            network gateway connection.
-        - id: parameters
-          type:
-            - object
-          description: |-
-            Parameters supplied to the Begin Create or
-            update Virtual Network Gateway connection operation through Network
-            resource provider.
-        - id: parameters.authorizationKey
-          type:
-            - string
-          description: The authorizationKey.
-          optional: true
-        - id: parameters.virtualNetworkGateway1
-          type:
-            - object
-          description: ''
-          optional: true
-        - id: parameters.virtualNetworkGateway2
-          type:
-            - object
-          description: ''
-          optional: true
-        - id: parameters.virtualNetworkGateway2.ipConfigurations
-          type:
-            - array
-          description: IpConfigurations for Virtual network gateway.
-          optional: true
-        - id: parameters.virtualNetworkGateway2.gatewayType
-          type:
-            - string
-          description: |-
-            The type of
-            this virtual network gateway. Possible values include: 'Vpn',
-            'ExpressRoute'
-          optional: true
-        - id: parameters.virtualNetworkGateway2.vpnType
-          type:
-            - string
-          description: >-
-            The type of
-
-            this virtual network gateway. Possible values include:
-            'PolicyBased',
-
-            'RouteBased'
-          optional: true
-        - id: parameters.virtualNetworkGateway2.enableBgp
-          type:
-            - boolean
-          description: |-
-            EnableBgp
-            Flag
-          optional: true
-        - id: parameters.virtualNetworkGateway2.activeActive
-          type:
-            - boolean
-          description: ActiveActive flag
-          optional: true
-        - id: parameters.virtualNetworkGateway2.gatewayDefaultSite
-          type:
-            - object
-          description: >-
-            Gets
-
-            or sets the reference of the LocalNetworkGateway resource which
-            represents
-
-            Local network site having default routes. Assign Null value in case
-            of
-
-            removing existing default site setting.
-          optional: true
-        - id: parameters.virtualNetworkGateway2.sku
-          type:
-            - object
-          description: >-
-            Gets or sets the
-
-            reference of the VirtualNetworkGatewaySku resource which represents
-            the
-
-            sku selected for Virtual network gateway.
-          optional: true
-        - id: parameters.virtualNetworkGateway2.sku.name
-          type:
-            - string
-          description: >-
-            Gateway sku
-
-            name -Basic/HighPerformance/Standard/UltraPerformance. Possible
-            values
-
-            include: 'Basic', 'HighPerformance', 'Standard', 'UltraPerformance'
-          optional: true
-        - id: parameters.virtualNetworkGateway2.sku.tier
-          type:
-            - string
-          description: >-
-            Gateway sku
-
-            tier -Basic/HighPerformance/Standard/UltraPerformance. Possible
-            values
-
-            include: 'Basic', 'HighPerformance', 'Standard', 'UltraPerformance'
-          optional: true
-        - id: parameters.virtualNetworkGateway2.sku.capacity
-          type:
-            - number
-          description: |-
-            The
-            capacity
-          optional: true
-        - id: parameters.virtualNetworkGateway2.vpnClientConfiguration
-          type:
-            - object
-          description: >-
-            Gets or sets the reference of the VpnClientConfiguration resource
-            which
-
-            represents the P2S VpnClient configurations.
-          optional: true
-        - id: >-
-            parameters.virtualNetworkGateway2.vpnClientConfiguration.vpnClientAddressPool
-          type:
-            - object
-          description: >-
-            Gets or sets the reference of the Address space resource which
-            represents
-
-            Address space for P2S VpnClient.
-          optional: true
-        - id: >-
-            parameters.virtualNetworkGateway2.vpnClientConfiguration.vpnClientRootCertificates
-          type:
-            - array
-          description: VpnClientRootCertificate for Virtual network gateway.
-          optional: true
-        - id: >-
-            parameters.virtualNetworkGateway2.vpnClientConfiguration.vpnClientRevokedCertificates
-          type:
-            - array
-          description: VpnClientRevokedCertificate for Virtual network gateway.
-          optional: true
-        - id: parameters.virtualNetworkGateway2.bgpSettings
-          type:
-            - object
-          description: |-
-            Virtual
-            network gateway's BGP speaker settings
-          optional: true
-        - id: parameters.virtualNetworkGateway2.resourceGuid
-          type:
-            - string
-          description: |-
-            Gets or
-            sets resource guid property of the VirtualNetworkGateway resource
-          optional: true
-        - id: parameters.virtualNetworkGateway2.provisioningState
-          type:
-            - string
-          description: |-
-            Gets
-            provisioning state of the VirtualNetworkGateway resource
-            Updating/Deleting/Failed
-          optional: true
-        - id: parameters.virtualNetworkGateway2.etag
-          type:
-            - string
-          description: |-
-            Gets a unique
-            read-only string that changes whenever the resource is updated
-          optional: true
-        - id: parameters.virtualNetworkGateway2.id
-          type:
-            - string
-          description: Resource Id
-          optional: true
-        - id: parameters.virtualNetworkGateway2.location
-          type:
-            - string
-          description: |-
-            Resource
-            location
-          optional: true
-        - id: parameters.virtualNetworkGateway2.tags
-          type:
-            - object
-          description: Resource tags
-          optional: true
-        - id: parameters.localNetworkGateway2
-          type:
-            - object
-          description: ''
-          optional: true
-        - id: parameters.localNetworkGateway2.localNetworkAddressSpace
-          type:
-            - object
-          description: Local network site Address space
-          optional: true
-        - id: >-
-            parameters.localNetworkGateway2.localNetworkAddressSpace.addressPrefixes
-          type:
-            - array
-          description: >-
-            Gets or sets list of address blocks reserved for this virtual
-            network in
-
-            CIDR notation
-          optional: true
-        - id: parameters.localNetworkGateway2.gatewayIpAddress
-          type:
-            - string
-          description: |-
-            IP
-            address of local network gateway.
-          optional: true
-        - id: parameters.localNetworkGateway2.bgpSettings
-          type:
-            - object
-          description: |-
-            Local network
-            gateway's BGP speaker settings
-          optional: true
-        - id: parameters.localNetworkGateway2.bgpSettings.asn
-          type:
-            - number
-          description: |-
-            Gets or
-            sets this BGP speaker's ASN
-          optional: true
-        - id: parameters.localNetworkGateway2.bgpSettings.bgpPeeringAddress
-          type:
-            - string
-          description: |-
-            Gets or
-            sets the BGP peering address and BGP identifier of this BGP speaker
-          optional: true
-        - id: parameters.localNetworkGateway2.bgpSettings.peerWeight
-          type:
-            - number
-          description: >-
-            Gets or sets the weight added to routes learned from this BGP
-            speaker
-          optional: true
-        - id: parameters.localNetworkGateway2.resourceGuid
-          type:
-            - string
-          description: |-
-            Gets or sets
-            resource guid property of the LocalNetworkGateway resource
-          optional: true
-        - id: parameters.localNetworkGateway2.provisioningState
-          type:
-            - string
-          description: |-
-            Gets
-            provisioning state of the LocalNetworkGateway resource
-            Updating/Deleting/Failed
-          optional: true
-        - id: parameters.localNetworkGateway2.etag
-          type:
-            - string
-          description: |-
-            Gets a unique
-            read-only string that changes whenever the resource is updated
-          optional: true
-        - id: parameters.localNetworkGateway2.id
-          type:
-            - string
-          description: Resource Id
-          optional: true
-        - id: parameters.localNetworkGateway2.location
-          type:
-            - string
-          description: Resource location
-          optional: true
-        - id: parameters.localNetworkGateway2.tags
-          type:
-            - object
-          description: Resource tags
-          optional: true
-        - id: parameters.connectionType
-          type:
-            - string
-          description: >-
-            Gateway connection type
-
-            -Ipsec/Dedicated/VpnClient/Vnet2Vnet. Possible values include:
-            'IPsec',
-
-            'Vnet2Vnet', 'ExpressRoute', 'VPNClient'
-          optional: true
-        - id: parameters.routingWeight
-          type:
-            - number
-          description: The Routing weight.
-          optional: true
-        - id: parameters.sharedKey
-          type:
-            - string
-          description: The Ipsec share key.
-          optional: true
-        - id: parameters.connectionStatus
-          type:
-            - string
-          description: |-
-            Virtual network Gateway
-            connection status. Possible values include: 'Unknown', 'Connecting',
-            'Connected', 'NotConnected'
-          optional: true
-        - id: parameters.egressBytesTransferred
-          type:
-            - number
-          description: |-
-            The Egress Bytes
-            Transferred in this connection
-          optional: true
-        - id: parameters.ingressBytesTransferred
-          type:
-            - number
-          description: |-
-            The Ingress Bytes
-            Transferred in this connection
-          optional: true
-        - id: parameters.peer
-          type:
-            - object
-          description: The reference to peerings resource.
-          optional: true
-        - id: parameters.peer.id
-          type:
-            - string
-          description: Resource Id
-          optional: true
-        - id: parameters.enableBgp
-          type:
-            - boolean
-          description: EnableBgp Flag
-          optional: true
-        - id: parameters.resourceGuid
-          type:
-            - string
-          description: |-
-            Gets or sets resource guid
-            property of the VirtualNetworkGatewayConnection resource
-          optional: true
-        - id: parameters.provisioningState
-          type:
-            - string
-          description: >-
-            Gets provisioning state of
-
-            the VirtualNetworkGatewayConnection resource
-            Updating/Deleting/Failed
-          optional: true
-        - id: parameters.etag
-          type:
-            - string
-          description: |-
-            Gets a unique read-only string that
-            changes whenever the resource is updated
-          optional: true
-        - id: parameters.id
-          type:
-            - string
-          description: Resource Id
-          optional: true
-        - id: parameters.location
-          type:
-            - string
-          description: Resource location
-          optional: true
-        - id: parameters.tags
-          type:
-            - object
-          description: Resource tags
-          optional: true
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:VirtualNetworkGatewayConnection> for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginCreateOrUpdate(resourceGroupName,
-        virtualNetworkGatewayConnectionName, parameters, options, callback)
-    children:
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~client
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~callback
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~options
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~regex
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~queryParameters
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~httpRequest
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~headerName
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestContent
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestModel
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestModelMapper
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestModel
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestContent
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~serializationError
   - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#get'
     id: 'azure-arm-network.VirtualNetworkGatewayConnections#get'
     parent: azure-arm-network.VirtualNetworkGatewayConnections
     name: >-
       get(resourceGroupName, virtualNetworkGatewayConnectionName, options,
       callback)
-    summary: |-
-      The Get VirtualNetworkGatewayConnection operation retrieves information
-      about the specified virtual network gateway connection through Network
-      resource provider.
+    summary: Gets the specified virtual network gateway connection by resource group.
     fullName: >-
       azure-arm-network.VirtualNetworkGatewayConnections.get(resourceGroupName,
       virtualNetworkGatewayConnectionName, options, callback)
@@ -1038,11 +504,11 @@ items:
       - 'azure-arm-network.VirtualNetworkGatewayConnections#get~client'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#get~callback'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#get~options'
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#get~apiVersion'
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#get~baseUrl'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#get~requestUrl'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#get~requestUrl'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#get~requestUrl'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#get~requestUrl'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#get~regex'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#get~requestUrl'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#get~queryParameters'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#get~requestUrl'
@@ -1054,9 +520,7 @@ items:
     name: >-
       deleteMethod(resourceGroupName, virtualNetworkGatewayConnectionName,
       options, callback)
-    summary: |-
-      The Delete VirtualNetworkGatewayConnection operation deletes the specified
-      virtual network Gateway connection through Network resource provider.
+    summary: Deletes the specified virtual network Gateway connection.
     fullName: >-
       azure-arm-network.VirtualNetworkGatewayConnections.deleteMethod(resourceGroupName,
       virtualNetworkGatewayConnectionName, options, callback)
@@ -1109,18 +573,24 @@ items:
       - 'azure-arm-network.VirtualNetworkGatewayConnections#deleteMethod~client'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#deleteMethod~callback'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#deleteMethod~options'
-  - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod'
-    id: 'azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod'
+  - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey'
+    id: 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey'
     parent: azure-arm-network.VirtualNetworkGatewayConnections
     name: >-
-      beginDeleteMethod(resourceGroupName, virtualNetworkGatewayConnectionName,
-      options, callback)
-    summary: |-
-      The Delete VirtualNetworkGatewayConnection operation deletes the specified
-      virtual network Gateway connection through Network resource provider.
+      setSharedKey(resourceGroupName, virtualNetworkGatewayConnectionName,
+      parameters, options, callback)
+    summary: >-
+      The Put VirtualNetworkGatewayConnectionSharedKey operation sets the
+      virtual
+
+      network gateway connection shared key for passed virtual network gateway
+
+      connection in the specified resource group through Network resource
+
+      provider.
     fullName: >-
-      azure-arm-network.VirtualNetworkGatewayConnections.beginDeleteMethod(resourceGroupName,
-      virtualNetworkGatewayConnectionName, options, callback)
+      azure-arm-network.VirtualNetworkGatewayConnections.setSharedKey(resourceGroupName,
+      virtualNetworkGatewayConnectionName, parameters, options, callback)
     type: Method
     syntax:
       parameters:
@@ -1132,93 +602,24 @@ items:
           type:
             - string
           description: |-
-            The name of the virtual
-            network gateway connection.
-        - id: options
+            The virtual network
+            gateway connection name.
+        - id: parameters
           type:
             - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
+          description: >-
+            Parameters supplied to the Begin Set Virtual
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
+            Network Gateway connection Shared key operation throughNetwork
+            resource
 
-                               {null} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginDeleteMethod(resourceGroupName,
-        virtualNetworkGatewayConnectionName, options, callback)
-    children:
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~client
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~callback
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~options
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~regex
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~queryParameters
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~httpRequest
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~headerName
-  - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey'
-    id: 'azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey'
-    parent: azure-arm-network.VirtualNetworkGatewayConnections
-    name: >-
-      getSharedKey(resourceGroupName, connectionSharedKeyName, options,
-      callback)
-    summary: |-
-      The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves
-      information about the specified virtual network gateway connection shared
-      key through Network resource provider.
-    fullName: >-
-      azure-arm-network.VirtualNetworkGatewayConnections.getSharedKey(resourceGroupName,
-      connectionSharedKeyName, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: connectionSharedKeyName
+            provider.
+        - id: parameters.value
           type:
             - string
           description: |-
-            The virtual network gateway
-            connection shared key name.
+            The virtual network connection shared key
+            value.
         - id: options
           type:
             - object
@@ -1244,28 +645,90 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object.
-                               See <xref:ConnectionSharedKeyResult> for more
-                               information.
+                               See <xref:ConnectionSharedKey> for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
       content: >-
-        function getSharedKey(resourceGroupName, connectionSharedKeyName,
-        options, callback)
+        function setSharedKey(resourceGroupName,
+        virtualNetworkGatewayConnectionName, parameters, options, callback)
+    children:
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey~client'
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey~callback'
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey~options'
+  - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey'
+    id: 'azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey'
+    parent: azure-arm-network.VirtualNetworkGatewayConnections
+    name: >-
+      getSharedKey(resourceGroupName, virtualNetworkGatewayConnectionName,
+      options, callback)
+    summary: |-
+      The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves
+      information about the specified virtual network gateway connection shared
+      key through Network resource provider.
+    fullName: >-
+      azure-arm-network.VirtualNetworkGatewayConnections.getSharedKey(resourceGroupName,
+      virtualNetworkGatewayConnectionName, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: virtualNetworkGatewayConnectionName
+          type:
+            - string
+          description: |-
+            The virtual network
+            gateway connection shared key name.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:ConnectionSharedKey> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function getSharedKey(resourceGroupName,
+        virtualNetworkGatewayConnectionName, options, callback)
     children:
       - 'azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey~client'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey~callback'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey~options'
       - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey~requestUrl
+        azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey~apiVersion
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey~baseUrl'
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey~requestUrl
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey~requestUrl
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey~requestUrl
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey~regex'
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#getSharedKey~requestUrl
       - >-
@@ -1329,10 +792,10 @@ items:
       - 'azure-arm-network.VirtualNetworkGatewayConnections#list~client'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#list~callback'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#list~options'
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#list~apiVersion'
+      - 'azure-arm-network.VirtualNetworkGatewayConnections#list~baseUrl'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#list~requestUrl'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#list~requestUrl'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#list~requestUrl'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#list~regex'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#list~requestUrl'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#list~queryParameters'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#list~requestUrl'
@@ -1343,15 +806,19 @@ items:
     parent: azure-arm-network.VirtualNetworkGatewayConnections
     name: >-
       resetSharedKey(resourceGroupName, virtualNetworkGatewayConnectionName,
-      options, callback)
-    summary: |-
+      parameters, options, callback)
+    summary: >-
       The VirtualNetworkGatewayConnectionResetSharedKey operation resets the
+
       virtual network gateway connection shared key for passed virtual network
+
       gateway connection in the specified resource group through Network
-      resource provider.
+      resource
+
+      provider.
     fullName: >-
       azure-arm-network.VirtualNetworkGatewayConnections.resetSharedKey(resourceGroupName,
-      virtualNetworkGatewayConnectionName, options, callback)
+      virtualNetworkGatewayConnectionName, parameters, options, callback)
     type: Method
     syntax:
       parameters:
@@ -1365,17 +832,26 @@ items:
           description: |-
             The virtual network
             gateway connection reset shared key Name.
-        - id: options
+        - id: parameters
           type:
             - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.keyLength
+          description: >-
+            Parameters supplied to the begin reset virtual
+
+            network gateway connection shared key operation through network
+            resource
+
+            provider.
+        - id: parameters.keyLength
           type:
             - number
           description: |-
             The virtual network connection reset
-            shared key length
+            shared key length, should between 1 and 128.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
           optional: true
         - id: options.customHeaders
           type:
@@ -1405,27 +881,659 @@ items:
                                {stream} [response] - The HTTP Response stream if an error did not occur.
       content: >-
         function resetSharedKey(resourceGroupName,
-        virtualNetworkGatewayConnectionName, options, callback)
+        virtualNetworkGatewayConnectionName, parameters, options, callback)
     children:
       - 'azure-arm-network.VirtualNetworkGatewayConnections#resetSharedKey~client'
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#resetSharedKey~callback
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#resetSharedKey~options
+  - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate'
+    id: 'azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate'
+    parent: azure-arm-network.VirtualNetworkGatewayConnections
+    name: >-
+      beginCreateOrUpdate(resourceGroupName,
+      virtualNetworkGatewayConnectionName, parameters, options, callback)
+    summary: |-
+      Creates or updates a virtual network gateway connection in the specified
+      resource group.
+    fullName: >-
+      azure-arm-network.VirtualNetworkGatewayConnections.beginCreateOrUpdate(resourceGroupName,
+      virtualNetworkGatewayConnectionName, parameters, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: virtualNetworkGatewayConnectionName
+          type:
+            - string
+          description: |-
+            The name of the virtual
+            network gateway connection.
+        - id: parameters
+          type:
+            - object
+          description: |-
+            Parameters supplied to the create or update
+            virtual network gateway connection operation.
+        - id: parameters.authorizationKey
+          type:
+            - string
+          description: The authorizationKey.
+          optional: true
+        - id: parameters.virtualNetworkGateway1
+          type:
+            - object
+          description: ''
+        - id: parameters.virtualNetworkGateway2
+          type:
+            - object
+          description: ''
+          optional: true
+        - id: parameters.virtualNetworkGateway2.ipConfigurations
+          type:
+            - array
+          description: |-
+            IP
+            configurations for virtual network gateway.
+        - id: parameters.virtualNetworkGateway2.gatewayType
+          type:
+            - string
+          description: >-
+            The type of
+
+            this virtual network gateway. Possible values are: 'Vpn' and
+            'ExpressRoute'.
+
+            Possible values include: 'Vpn', 'ExpressRoute'
+        - id: parameters.virtualNetworkGateway2.vpnType
+          type:
+            - string
+          description: |-
+            The type of this
+            virtual network gateway. Possible values are: 'PolicyBased' and
+            'RouteBased'. Possible values include: 'PolicyBased', 'RouteBased'
+        - id: parameters.virtualNetworkGateway2.enableBgp
+          type:
+            - boolean
+          description: |-
+            Whether BGP
+            is enabled for this virtual network gateway or not.
+          optional: true
+        - id: parameters.virtualNetworkGateway2.activeActive
+          type:
+            - boolean
+          description: ActiveActive flag
+          optional: true
+        - id: parameters.virtualNetworkGateway2.gatewayDefaultSite
+          type:
+            - object
+          description: >-
+            The
+
+            reference of the LocalNetworkGateway resource which represents local
+            network
+
+            site having default routes. Assign Null value in case of removing
+            existing
+
+            default site setting.
+          optional: true
+        - id: parameters.virtualNetworkGateway2.sku
+          type:
+            - object
+          description: >-
+            The reference of the
+
+            VirtualNetworkGatewaySku resource which represents the SKU selected
+            for
+
+            Virtual network gateway.
+          optional: true
+        - id: parameters.virtualNetworkGateway2.sku.name
+          type:
+            - string
+          description: >-
+            Gateway SKU name.
+
+            Possible values are: 'Basic', 'HighPerformance','Standard', and
+
+            'UltraPerformance'. Possible values include: 'Basic',
+            'HighPerformance',
+
+            'Standard', 'UltraPerformance'
+        - id: parameters.virtualNetworkGateway2.sku.tier
+          type:
+            - string
+          description: >-
+            Gateway SKU tier.
+
+            Possible values are: 'Basic', 'HighPerformance','Standard', and
+
+            'UltraPerformance'. Possible values include: 'Basic',
+            'HighPerformance',
+
+            'Standard', 'UltraPerformance'
+        - id: parameters.virtualNetworkGateway2.sku.capacity
+          type:
+            - number
+          description: |-
+            The
+            capacity.
+          optional: true
+        - id: parameters.virtualNetworkGateway2.vpnClientConfiguration
+          type:
+            - object
+          description: >-
+            The reference of the VpnClientConfiguration resource which
+            represents the
+
+            P2S VpnClient configurations.
+          optional: true
+        - id: >-
+            parameters.virtualNetworkGateway2.vpnClientConfiguration.vpnClientAddressPool
+          type:
+            - object
+          description: >-
+            The reference of the address space resource which represents Address
+            space
+
+            for P2S VpnClient.
+          optional: true
+        - id: >-
+            parameters.virtualNetworkGateway2.vpnClientConfiguration.vpnClientRootCertificates
+          type:
+            - array
+          description: VpnClientRootCertificate for virtual network gateway.
+          optional: true
+        - id: >-
+            parameters.virtualNetworkGateway2.vpnClientConfiguration.vpnClientRevokedCertificates
+          type:
+            - array
+          description: VpnClientRevokedCertificate for Virtual network gateway.
+          optional: true
+        - id: parameters.virtualNetworkGateway2.bgpSettings
+          type:
+            - object
+          description: |-
+            Virtual
+            network gateway's BGP speaker settings.
+          optional: true
+        - id: parameters.virtualNetworkGateway2.resourceGuid
+          type:
+            - string
+          description: |-
+            The
+            resource GUID property of the VirtualNetworkGateway resource.
+          optional: true
+        - id: parameters.virtualNetworkGateway2.etag
+          type:
+            - string
+          description: |-
+            Gets a unique
+            read-only string that changes whenever the resource is updated.
+          optional: true
+        - id: parameters.virtualNetworkGateway2.id
+          type:
+            - string
+          description: Resource ID.
+          optional: true
+        - id: parameters.virtualNetworkGateway2.location
+          type:
+            - string
+          description: |-
+            Resource
+            location.
+          optional: true
+        - id: parameters.virtualNetworkGateway2.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: parameters.localNetworkGateway2
+          type:
+            - object
+          description: ''
+          optional: true
+        - id: parameters.localNetworkGateway2.localNetworkAddressSpace
+          type:
+            - object
+          description: Local network site address space.
+        - id: >-
+            parameters.localNetworkGateway2.localNetworkAddressSpace.addressPrefixes
+          type:
+            - array
+          description: >-
+            A
+
+            list of address blocks reserved for this virtual network in CIDR
+            notation.
+          optional: true
+        - id: parameters.localNetworkGateway2.gatewayIpAddress
+          type:
+            - string
+          description: |-
+            IP
+            address of local network gateway.
+          optional: true
+        - id: parameters.localNetworkGateway2.bgpSettings
+          type:
+            - object
+          description: |-
+            Local network
+            gateway's BGP speaker settings.
+          optional: true
+        - id: parameters.localNetworkGateway2.bgpSettings.asn
+          type:
+            - number
+          description: |-
+            The BGP
+            speaker's ASN.
+          optional: true
+        - id: parameters.localNetworkGateway2.bgpSettings.bgpPeeringAddress
+          type:
+            - string
+          description: |-
+            The BGP
+            peering address and BGP identifier of this BGP speaker.
+          optional: true
+        - id: parameters.localNetworkGateway2.bgpSettings.peerWeight
+          type:
+            - number
+          description: |-
+            The
+            weight added to routes learned from this BGP speaker.
+          optional: true
+        - id: parameters.localNetworkGateway2.resourceGuid
+          type:
+            - string
+          description: |-
+            The resource
+            GUID property of the LocalNetworkGateway resource.
+          optional: true
+        - id: parameters.localNetworkGateway2.etag
+          type:
+            - string
+          description: |-
+            A unique read-only
+            string that changes whenever the resource is updated.
+          optional: true
+        - id: parameters.localNetworkGateway2.id
+          type:
+            - string
+          description: Resource ID.
+          optional: true
+        - id: parameters.localNetworkGateway2.location
+          type:
+            - string
+          description: |-
+            Resource
+            location.
+          optional: true
+        - id: parameters.localNetworkGateway2.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: parameters.connectionType
+          type:
+            - string
+          description: >-
+            Gateway connection type. Possible
+
+            values are: 'Ipsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.
+            Possible
+
+            values include: 'IPsec', 'Vnet2Vnet', 'ExpressRoute', 'VPNClient'
+        - id: parameters.routingWeight
+          type:
+            - number
+          description: The routing weight.
+          optional: true
+        - id: parameters.sharedKey
+          type:
+            - string
+          description: The IPSec shared key.
+          optional: true
+        - id: parameters.peer
+          type:
+            - object
+          description: The reference to peerings resource.
+          optional: true
+        - id: parameters.peer.id
+          type:
+            - string
+          description: Resource ID.
+          optional: true
+        - id: parameters.enableBgp
+          type:
+            - boolean
+          description: EnableBgp flag
+          optional: true
+        - id: parameters.resourceGuid
+          type:
+            - string
+          description: |-
+            The resource GUID property of the
+            VirtualNetworkGatewayConnection resource.
+          optional: true
+        - id: parameters.etag
+          type:
+            - string
+          description: |-
+            Gets a unique read-only string that
+            changes whenever the resource is updated.
+          optional: true
+        - id: parameters.id
+          type:
+            - string
+          description: Resource ID.
+          optional: true
+        - id: parameters.location
+          type:
+            - string
+          description: Resource location.
+          optional: true
+        - id: parameters.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:VirtualNetworkGatewayConnection> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginCreateOrUpdate(resourceGroupName,
+        virtualNetworkGatewayConnectionName, parameters, options, callback)
+    children:
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~client
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~callback
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~options
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~apiVersion
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~baseUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~queryParameters
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~httpRequest
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~headerName
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestContent
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestModel
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestModelMapper
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestModel
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~requestContent
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginCreateOrUpdate~serializationError
+  - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod'
+    id: 'azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod'
+    parent: azure-arm-network.VirtualNetworkGatewayConnections
+    name: >-
+      beginDeleteMethod(resourceGroupName, virtualNetworkGatewayConnectionName,
+      options, callback)
+    summary: Deletes the specified virtual network Gateway connection.
+    fullName: >-
+      azure-arm-network.VirtualNetworkGatewayConnections.beginDeleteMethod(resourceGroupName,
+      virtualNetworkGatewayConnectionName, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: virtualNetworkGatewayConnectionName
+          type:
+            - string
+          description: |-
+            The name of the virtual
+            network gateway connection.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginDeleteMethod(resourceGroupName,
+        virtualNetworkGatewayConnectionName, options, callback)
+    children:
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~client
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~callback
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~options
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~apiVersion
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~baseUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~queryParameters
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~httpRequest
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginDeleteMethod~headerName
+  - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey'
+    id: 'azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey'
+    parent: azure-arm-network.VirtualNetworkGatewayConnections
+    name: >-
+      beginSetSharedKey(resourceGroupName, virtualNetworkGatewayConnectionName,
+      parameters, options, callback)
+    summary: >-
+      The Put VirtualNetworkGatewayConnectionSharedKey operation sets the
+      virtual
+
+      network gateway connection shared key for passed virtual network gateway
+
+      connection in the specified resource group through Network resource
+
+      provider.
+    fullName: >-
+      azure-arm-network.VirtualNetworkGatewayConnections.beginSetSharedKey(resourceGroupName,
+      virtualNetworkGatewayConnectionName, parameters, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: virtualNetworkGatewayConnectionName
+          type:
+            - string
+          description: |-
+            The virtual network
+            gateway connection name.
+        - id: parameters
+          type:
+            - object
+          description: >-
+            Parameters supplied to the Begin Set Virtual
+
+            Network Gateway connection Shared key operation throughNetwork
+            resource
+
+            provider.
+        - id: parameters.value
+          type:
+            - string
+          description: |-
+            The virtual network connection shared key
+            value.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:ConnectionSharedKey> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginSetSharedKey(resourceGroupName,
+        virtualNetworkGatewayConnectionName, parameters, options, callback)
+    children:
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~client
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~callback
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~options
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~apiVersion
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~baseUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~queryParameters
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestUrl
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~httpRequest
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~headerName
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestContent
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestModel
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestModelMapper
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestModel
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestContent
+      - >-
+        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~serializationError
   - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey'
     id: 'azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey'
     parent: azure-arm-network.VirtualNetworkGatewayConnections
     name: >-
       beginResetSharedKey(resourceGroupName,
-      virtualNetworkGatewayConnectionName, options, callback)
-    summary: |-
+      virtualNetworkGatewayConnectionName, parameters, options, callback)
+    summary: >-
       The VirtualNetworkGatewayConnectionResetSharedKey operation resets the
+
       virtual network gateway connection shared key for passed virtual network
+
       gateway connection in the specified resource group through Network
-      resource provider.
+      resource
+
+      provider.
     fullName: >-
       azure-arm-network.VirtualNetworkGatewayConnections.beginResetSharedKey(resourceGroupName,
-      virtualNetworkGatewayConnectionName, options, callback)
+      virtualNetworkGatewayConnectionName, parameters, options, callback)
     type: Method
     syntax:
       parameters:
@@ -1439,17 +1547,26 @@ items:
           description: |-
             The virtual network
             gateway connection reset shared key Name.
-        - id: options
+        - id: parameters
           type:
             - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.keyLength
+          description: >-
+            Parameters supplied to the begin reset virtual
+
+            network gateway connection shared key operation through network
+            resource
+
+            provider.
+        - id: parameters.keyLength
           type:
             - number
           description: |-
             The virtual network connection reset
-            shared key length
+            shared key length, should between 1 and 128.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
           optional: true
         - id: options.customHeaders
           type:
@@ -1479,7 +1596,7 @@ items:
                                {stream} [response] - The HTTP Response stream if an error did not occur.
       content: >-
         function beginResetSharedKey(resourceGroupName,
-        virtualNetworkGatewayConnectionName, options, callback)
+        virtualNetworkGatewayConnectionName, parameters, options, callback)
     children:
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~client
@@ -1488,21 +1605,15 @@ items:
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~options
       - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~keyLength
+        azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~apiVersion
       - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~parameters
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~parameters
+        azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~baseUrl
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~requestUrl
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~requestUrl
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~regex
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~requestUrl
       - >-
@@ -1525,197 +1636,6 @@ items:
         azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~requestContent
       - >-
         azure-arm-network.VirtualNetworkGatewayConnections#beginResetSharedKey~serializationError
-  - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey'
-    id: 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey'
-    parent: azure-arm-network.VirtualNetworkGatewayConnections
-    name: >-
-      setSharedKey(resourceGroupName, virtualNetworkGatewayConnectionName,
-      options, callback)
-    summary: >-
-      The Put VirtualNetworkGatewayConnectionSharedKey operation sets the
-      virtual
-
-      network gateway connection shared key for passed virtual network gateway
-
-      connection in the specified resource group through Network resource
-
-      provider.
-    fullName: >-
-      azure-arm-network.VirtualNetworkGatewayConnections.setSharedKey(resourceGroupName,
-      virtualNetworkGatewayConnectionName, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: virtualNetworkGatewayConnectionName
-          type:
-            - string
-          description: |-
-            The virtual network
-            gateway connection name.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.value
-          type:
-            - string
-          description: |-
-            The virtual network connection shared key
-            value
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:ConnectionSharedKey> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function setSharedKey(resourceGroupName,
-        virtualNetworkGatewayConnectionName, options, callback)
-    children:
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey~client'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey~callback'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#setSharedKey~options'
-  - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey'
-    id: 'azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey'
-    parent: azure-arm-network.VirtualNetworkGatewayConnections
-    name: >-
-      beginSetSharedKey(resourceGroupName, virtualNetworkGatewayConnectionName,
-      options, callback)
-    summary: >-
-      The Put VirtualNetworkGatewayConnectionSharedKey operation sets the
-      virtual
-
-      network gateway connection shared key for passed virtual network gateway
-
-      connection in the specified resource group through Network resource
-
-      provider.
-    fullName: >-
-      azure-arm-network.VirtualNetworkGatewayConnections.beginSetSharedKey(resourceGroupName,
-      virtualNetworkGatewayConnectionName, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: virtualNetworkGatewayConnectionName
-          type:
-            - string
-          description: |-
-            The virtual network
-            gateway connection name.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.value
-          type:
-            - string
-          description: |-
-            The virtual network connection shared key
-            value
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:ConnectionSharedKey> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginSetSharedKey(resourceGroupName,
-        virtualNetworkGatewayConnectionName, options, callback)
-    children:
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~client
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~callback
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~options
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~value
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~parameters
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~parameters
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~regex
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~queryParameters
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestUrl
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~httpRequest
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~headerName
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestContent
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestModel
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestModelMapper
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestModel
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~requestContent
-      - >-
-        azure-arm-network.VirtualNetworkGatewayConnections#beginSetSharedKey~serializationError
   - uid: 'azure-arm-network.VirtualNetworkGatewayConnections#listNext'
     id: 'azure-arm-network.VirtualNetworkGatewayConnections#listNext'
     parent: azure-arm-network.VirtualNetworkGatewayConnections
@@ -1772,8 +1692,6 @@ items:
       - 'azure-arm-network.VirtualNetworkGatewayConnections#listNext~callback'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#listNext~options'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#listNext~requestUrl'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#listNext~requestUrl'
-      - 'azure-arm-network.VirtualNetworkGatewayConnections#listNext~regex'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#listNext~requestUrl'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#listNext~httpRequest'
       - 'azure-arm-network.VirtualNetworkGatewayConnections#listNext~headerName'

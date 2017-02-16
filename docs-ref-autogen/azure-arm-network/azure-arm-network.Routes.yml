@@ -14,11 +14,11 @@ items:
       - 'azure-arm-network.Routes.#ctor'
       - 'azure-arm-network.Routes#client'
       - 'azure-arm-network.Routes#deleteMethod'
-      - 'azure-arm-network.Routes#beginDeleteMethod'
       - 'azure-arm-network.Routes#get'
       - 'azure-arm-network.Routes#createOrUpdate'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate'
       - 'azure-arm-network.Routes#list'
+      - 'azure-arm-network.Routes#beginDeleteMethod'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate'
       - 'azure-arm-network.Routes#listNext'
   - id: 'azure-arm-network.Routes.#ctor'
     uid: 'azure-arm-network.Routes.#ctor'
@@ -49,7 +49,7 @@ items:
     name: >-
       deleteMethod(resourceGroupName, routeTableName, routeName, options,
       callback)
-    summary: The delete route operation deletes the specified route from a route table.
+    summary: Deletes the specified route from a route table.
     fullName: >-
       azure-arm-network.Routes.deleteMethod(resourceGroupName, routeTableName,
       routeName, options, callback)
@@ -104,85 +104,11 @@ items:
       - 'azure-arm-network.Routes#deleteMethod~client'
       - 'azure-arm-network.Routes#deleteMethod~callback'
       - 'azure-arm-network.Routes#deleteMethod~options'
-  - uid: 'azure-arm-network.Routes#beginDeleteMethod'
-    id: 'azure-arm-network.Routes#beginDeleteMethod'
-    parent: azure-arm-network.Routes
-    name: >-
-      beginDeleteMethod(resourceGroupName, routeTableName, routeName, options,
-      callback)
-    summary: The delete route operation deletes the specified route from a route table.
-    fullName: >-
-      azure-arm-network.Routes.beginDeleteMethod(resourceGroupName,
-      routeTableName, routeName, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: routeTableName
-          type:
-            - string
-          description: The name of the route table.
-        - id: routeName
-          type:
-            - string
-          description: The name of the route.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginDeleteMethod(resourceGroupName, routeTableName, routeName,
-        options, callback)
-    children:
-      - 'azure-arm-network.Routes#beginDeleteMethod~client'
-      - 'azure-arm-network.Routes#beginDeleteMethod~callback'
-      - 'azure-arm-network.Routes#beginDeleteMethod~options'
-      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.Routes#beginDeleteMethod~regex'
-      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.Routes#beginDeleteMethod~queryParameters'
-      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.Routes#beginDeleteMethod~httpRequest'
-      - 'azure-arm-network.Routes#beginDeleteMethod~headerName'
   - uid: 'azure-arm-network.Routes#get'
     id: 'azure-arm-network.Routes#get'
     parent: azure-arm-network.Routes
     name: 'get(resourceGroupName, routeTableName, routeName, options, callback)'
-    summary: |-
-      The Get route operation retrieves information about the specified route
-      from the route table.
+    summary: Gets the specified route from a route table.
     fullName: >-
       azure-arm-network.Routes.get(resourceGroupName, routeTableName, routeName,
       options, callback)
@@ -238,12 +164,12 @@ items:
       - 'azure-arm-network.Routes#get~client'
       - 'azure-arm-network.Routes#get~callback'
       - 'azure-arm-network.Routes#get~options'
+      - 'azure-arm-network.Routes#get~apiVersion'
+      - 'azure-arm-network.Routes#get~baseUrl'
       - 'azure-arm-network.Routes#get~requestUrl'
       - 'azure-arm-network.Routes#get~requestUrl'
       - 'azure-arm-network.Routes#get~requestUrl'
       - 'azure-arm-network.Routes#get~requestUrl'
-      - 'azure-arm-network.Routes#get~requestUrl'
-      - 'azure-arm-network.Routes#get~regex'
       - 'azure-arm-network.Routes#get~requestUrl'
       - 'azure-arm-network.Routes#get~queryParameters'
       - 'azure-arm-network.Routes#get~requestUrl'
@@ -255,9 +181,7 @@ items:
     name: >-
       createOrUpdate(resourceGroupName, routeTableName, routeName,
       routeParameters, options, callback)
-    summary: >-
-      The Put route operation creates/updates a route in the specified route
-      table
+    summary: Creates or updates a route in the specified route table.
     fullName: >-
       azure-arm-network.Routes.createOrUpdate(resourceGroupName, routeTableName,
       routeName, routeParameters, options, callback)
@@ -280,64 +204,68 @@ items:
           type:
             - object
           description: |-
-            Parameters supplied to the create/update
-            route operation
+            Parameters supplied to the create or update
+            route operation.
         - id: routeParameters.addressPrefix
           type:
             - string
           description: |-
-            Gets or sets the
-            destination CIDR to which the route applies.
+            The destination CIDR to
+            which the route applies.
           optional: true
         - id: routeParameters.nextHopType
           type:
             - string
           description: >-
-            Gets or sets the type of Azure
+            The type of Azure hop the packet
 
-            hop the packet should be sent to. Possible values include:
+            should be sent to. Possible values are: 'VirtualNetworkGateway',
 
-            'VirtualNetworkGateway', 'VnetLocal', 'Internet',
-            'VirtualAppliance',
+            'VnetLocal', 'Internet', 'VirtualAppliance', and 'None'. Possible
+            values
 
-            'None'
+            include: 'VirtualNetworkGateway', 'VnetLocal', 'Internet',
+
+            'VirtualAppliance', 'None'
         - id: routeParameters.nextHopIpAddress
           type:
             - string
           description: >-
-            Gets or sets the IP
+            The IP address packets
 
-            address packets should be forwarded to. Next hop values are only
-            allowed
+            should be forwarded to. Next hop values are only allowed in routes
+            where the
 
-            in routes where the next hop type is VirtualAppliance.
+            next hop type is VirtualAppliance.
           optional: true
         - id: routeParameters.provisioningState
           type:
             - string
-          description: |-
-            Gets provisioning state
-            of the resource Updating/Deleting/Failed
+          description: >-
+            The provisioning state
+
+            of the resource. Possible values are: 'Updating', 'Deleting', and
+            'Failed'.
           optional: true
         - id: routeParameters.name
           type:
             - string
           description: |-
-            Gets name of the resource that is
+            The name of the resource that is
             unique within a resource group. This name can be used to access the
-            resource
+            resource.
           optional: true
         - id: routeParameters.etag
           type:
             - string
           description: |-
             A unique read-only string that
-            changes whenever the resource is updated
+            changes whenever the resource is updated.
           optional: true
         - id: routeParameters.id
           type:
             - string
-          description: Resource Id
+          description: Resource ID.
           optional: true
         - id: options
           type:
@@ -376,157 +304,11 @@ items:
       - 'azure-arm-network.Routes#createOrUpdate~client'
       - 'azure-arm-network.Routes#createOrUpdate~callback'
       - 'azure-arm-network.Routes#createOrUpdate~options'
-  - uid: 'azure-arm-network.Routes#beginCreateOrUpdate'
-    id: 'azure-arm-network.Routes#beginCreateOrUpdate'
-    parent: azure-arm-network.Routes
-    name: >-
-      beginCreateOrUpdate(resourceGroupName, routeTableName, routeName,
-      routeParameters, options, callback)
-    summary: >-
-      The Put route operation creates/updates a route in the specified route
-      table
-    fullName: >-
-      azure-arm-network.Routes.beginCreateOrUpdate(resourceGroupName,
-      routeTableName, routeName, routeParameters, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: routeTableName
-          type:
-            - string
-          description: The name of the route table.
-        - id: routeName
-          type:
-            - string
-          description: The name of the route.
-        - id: routeParameters
-          type:
-            - object
-          description: |-
-            Parameters supplied to the create/update
-            route operation
-        - id: routeParameters.addressPrefix
-          type:
-            - string
-          description: |-
-            Gets or sets the
-            destination CIDR to which the route applies.
-          optional: true
-        - id: routeParameters.nextHopType
-          type:
-            - string
-          description: >-
-            Gets or sets the type of Azure
-
-            hop the packet should be sent to. Possible values include:
-
-            'VirtualNetworkGateway', 'VnetLocal', 'Internet',
-            'VirtualAppliance',
-
-            'None'
-        - id: routeParameters.nextHopIpAddress
-          type:
-            - string
-          description: >-
-            Gets or sets the IP
-
-            address packets should be forwarded to. Next hop values are only
-            allowed
-
-            in routes where the next hop type is VirtualAppliance.
-          optional: true
-        - id: routeParameters.provisioningState
-          type:
-            - string
-          description: |-
-            Gets provisioning state
-            of the resource Updating/Deleting/Failed
-          optional: true
-        - id: routeParameters.name
-          type:
-            - string
-          description: |-
-            Gets name of the resource that is
-            unique within a resource group. This name can be used to access the
-            resource
-          optional: true
-        - id: routeParameters.etag
-          type:
-            - string
-          description: |-
-            A unique read-only string that
-            changes whenever the resource is updated
-          optional: true
-        - id: routeParameters.id
-          type:
-            - string
-          description: Resource Id
-          optional: true
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:Route> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginCreateOrUpdate(resourceGroupName, routeTableName,
-        routeName, routeParameters, options, callback)
-    children:
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~client'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~callback'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~options'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~regex'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~queryParameters'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~httpRequest'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~headerName'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestContent'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestModel'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestModelMapper'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestModel'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestContent'
-      - 'azure-arm-network.Routes#beginCreateOrUpdate~serializationError'
   - uid: 'azure-arm-network.Routes#list'
     id: 'azure-arm-network.Routes#list'
     parent: azure-arm-network.Routes
     name: 'list(resourceGroupName, routeTableName, options, callback)'
-    summary: |-
-      The List network security rule operation retrieves all the routes in a
-      route table.
+    summary: Gets all routes in a route table.
     fullName: >-
       azure-arm-network.Routes.list(resourceGroupName, routeTableName, options,
       callback)
@@ -576,23 +358,239 @@ items:
       - 'azure-arm-network.Routes#list~client'
       - 'azure-arm-network.Routes#list~callback'
       - 'azure-arm-network.Routes#list~options'
+      - 'azure-arm-network.Routes#list~apiVersion'
+      - 'azure-arm-network.Routes#list~baseUrl'
       - 'azure-arm-network.Routes#list~requestUrl'
       - 'azure-arm-network.Routes#list~requestUrl'
       - 'azure-arm-network.Routes#list~requestUrl'
-      - 'azure-arm-network.Routes#list~requestUrl'
-      - 'azure-arm-network.Routes#list~regex'
       - 'azure-arm-network.Routes#list~requestUrl'
       - 'azure-arm-network.Routes#list~queryParameters'
       - 'azure-arm-network.Routes#list~requestUrl'
       - 'azure-arm-network.Routes#list~httpRequest'
       - 'azure-arm-network.Routes#list~headerName'
+  - uid: 'azure-arm-network.Routes#beginDeleteMethod'
+    id: 'azure-arm-network.Routes#beginDeleteMethod'
+    parent: azure-arm-network.Routes
+    name: >-
+      beginDeleteMethod(resourceGroupName, routeTableName, routeName, options,
+      callback)
+    summary: Deletes the specified route from a route table.
+    fullName: >-
+      azure-arm-network.Routes.beginDeleteMethod(resourceGroupName,
+      routeTableName, routeName, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: routeTableName
+          type:
+            - string
+          description: The name of the route table.
+        - id: routeName
+          type:
+            - string
+          description: The name of the route.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginDeleteMethod(resourceGroupName, routeTableName, routeName,
+        options, callback)
+    children:
+      - 'azure-arm-network.Routes#beginDeleteMethod~client'
+      - 'azure-arm-network.Routes#beginDeleteMethod~callback'
+      - 'azure-arm-network.Routes#beginDeleteMethod~options'
+      - 'azure-arm-network.Routes#beginDeleteMethod~apiVersion'
+      - 'azure-arm-network.Routes#beginDeleteMethod~baseUrl'
+      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
+      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
+      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
+      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
+      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
+      - 'azure-arm-network.Routes#beginDeleteMethod~queryParameters'
+      - 'azure-arm-network.Routes#beginDeleteMethod~requestUrl'
+      - 'azure-arm-network.Routes#beginDeleteMethod~httpRequest'
+      - 'azure-arm-network.Routes#beginDeleteMethod~headerName'
+  - uid: 'azure-arm-network.Routes#beginCreateOrUpdate'
+    id: 'azure-arm-network.Routes#beginCreateOrUpdate'
+    parent: azure-arm-network.Routes
+    name: >-
+      beginCreateOrUpdate(resourceGroupName, routeTableName, routeName,
+      routeParameters, options, callback)
+    summary: Creates or updates a route in the specified route table.
+    fullName: >-
+      azure-arm-network.Routes.beginCreateOrUpdate(resourceGroupName,
+      routeTableName, routeName, routeParameters, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: routeTableName
+          type:
+            - string
+          description: The name of the route table.
+        - id: routeName
+          type:
+            - string
+          description: The name of the route.
+        - id: routeParameters
+          type:
+            - object
+          description: |-
+            Parameters supplied to the create or update
+            route operation.
+        - id: routeParameters.addressPrefix
+          type:
+            - string
+          description: |-
+            The destination CIDR to
+            which the route applies.
+          optional: true
+        - id: routeParameters.nextHopType
+          type:
+            - string
+          description: >-
+            The type of Azure hop the packet
+
+            should be sent to. Possible values are: 'VirtualNetworkGateway',
+
+            'VnetLocal', 'Internet', 'VirtualAppliance', and 'None'. Possible
+            values
+
+            include: 'VirtualNetworkGateway', 'VnetLocal', 'Internet',
+
+            'VirtualAppliance', 'None'
+        - id: routeParameters.nextHopIpAddress
+          type:
+            - string
+          description: >-
+            The IP address packets
+
+            should be forwarded to. Next hop values are only allowed in routes
+            where the
+
+            next hop type is VirtualAppliance.
+          optional: true
+        - id: routeParameters.provisioningState
+          type:
+            - string
+          description: >-
+            The provisioning state
+
+            of the resource. Possible values are: 'Updating', 'Deleting', and
+            'Failed'.
+          optional: true
+        - id: routeParameters.name
+          type:
+            - string
+          description: |-
+            The name of the resource that is
+            unique within a resource group. This name can be used to access the
+            resource.
+          optional: true
+        - id: routeParameters.etag
+          type:
+            - string
+          description: |-
+            A unique read-only string that
+            changes whenever the resource is updated.
+          optional: true
+        - id: routeParameters.id
+          type:
+            - string
+          description: Resource ID.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:Route> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginCreateOrUpdate(resourceGroupName, routeTableName,
+        routeName, routeParameters, options, callback)
+    children:
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~client'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~callback'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~options'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~apiVersion'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~baseUrl'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~queryParameters'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~httpRequest'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~headerName'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestContent'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestModel'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestModelMapper'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestModel'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~requestContent'
+      - 'azure-arm-network.Routes#beginCreateOrUpdate~serializationError'
   - uid: 'azure-arm-network.Routes#listNext'
     id: 'azure-arm-network.Routes#listNext'
     parent: azure-arm-network.Routes
     name: 'listNext(nextPageLink, options, callback)'
-    summary: |-
-      The List network security rule operation retrieves all the routes in a
-      route table.
+    summary: Gets all routes in a route table.
     fullName: 'azure-arm-network.Routes.listNext(nextPageLink, options, callback)'
     type: Method
     syntax:
@@ -639,8 +637,6 @@ items:
       - 'azure-arm-network.Routes#listNext~callback'
       - 'azure-arm-network.Routes#listNext~options'
       - 'azure-arm-network.Routes#listNext~requestUrl'
-      - 'azure-arm-network.Routes#listNext~requestUrl'
-      - 'azure-arm-network.Routes#listNext~regex'
       - 'azure-arm-network.Routes#listNext~requestUrl'
       - 'azure-arm-network.Routes#listNext~httpRequest'
       - 'azure-arm-network.Routes#listNext~headerName'

@@ -14,29 +14,29 @@ items:
       - 'azure-arm-network.NetworkInterfaces.#ctor'
       - 'azure-arm-network.NetworkInterfaces#client'
       - 'azure-arm-network.NetworkInterfaces#deleteMethod'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod'
       - 'azure-arm-network.NetworkInterfaces#get'
       - 'azure-arm-network.NetworkInterfaces#createOrUpdate'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate'
+      - 'azure-arm-network.NetworkInterfaces#listAll'
+      - 'azure-arm-network.NetworkInterfaces#list'
+      - 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable'
+      - 'azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups'
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfaces
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfaces
       - >-
         azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface
-      - 'azure-arm-network.NetworkInterfaces#listAll'
-      - 'azure-arm-network.NetworkInterfaces#list'
-      - 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate'
       - 'azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable'
-      - 'azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups'
       - >-
         azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups
+      - 'azure-arm-network.NetworkInterfaces#listAllNext'
+      - 'azure-arm-network.NetworkInterfaces#listNext'
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfacesNext
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfacesNext
-      - 'azure-arm-network.NetworkInterfaces#listAllNext'
-      - 'azure-arm-network.NetworkInterfaces#listNext'
   - id: 'azure-arm-network.NetworkInterfaces.#ctor'
     uid: 'azure-arm-network.NetworkInterfaces.#ctor'
     parent: azure-arm-network.NetworkInterfaces
@@ -64,9 +64,7 @@ items:
     id: 'azure-arm-network.NetworkInterfaces#deleteMethod'
     parent: azure-arm-network.NetworkInterfaces
     name: 'deleteMethod(resourceGroupName, networkInterfaceName, options, callback)'
-    summary: >-
-      The delete netwokInterface operation deletes the specified
-      netwokInterface.
+    summary: Deletes the specified network interface.
     fullName: >-
       azure-arm-network.NetworkInterfaces.deleteMethod(resourceGroupName,
       networkInterfaceName, options, callback)
@@ -117,82 +115,11 @@ items:
       - 'azure-arm-network.NetworkInterfaces#deleteMethod~client'
       - 'azure-arm-network.NetworkInterfaces#deleteMethod~callback'
       - 'azure-arm-network.NetworkInterfaces#deleteMethod~options'
-  - uid: 'azure-arm-network.NetworkInterfaces#beginDeleteMethod'
-    id: 'azure-arm-network.NetworkInterfaces#beginDeleteMethod'
-    parent: azure-arm-network.NetworkInterfaces
-    name: >-
-      beginDeleteMethod(resourceGroupName, networkInterfaceName, options,
-      callback)
-    summary: >-
-      The delete netwokInterface operation deletes the specified
-      netwokInterface.
-    fullName: >-
-      azure-arm-network.NetworkInterfaces.beginDeleteMethod(resourceGroupName,
-      networkInterfaceName, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: networkInterfaceName
-          type:
-            - string
-          description: The name of the network interface.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginDeleteMethod(resourceGroupName, networkInterfaceName,
-        options, callback)
-    children:
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~client'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~callback'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~options'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~regex'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~queryParameters'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~httpRequest'
-      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~headerName'
   - uid: 'azure-arm-network.NetworkInterfaces#get'
     id: 'azure-arm-network.NetworkInterfaces#get'
     parent: azure-arm-network.NetworkInterfaces
     name: 'get(resourceGroupName, networkInterfaceName, options, callback)'
-    summary: |-
-      The Get network interface operation retrieves information about the
-      specified network interface.
+    summary: Gets information about the specified network interface.
     fullName: >-
       azure-arm-network.NetworkInterfaces.get(resourceGroupName,
       networkInterfaceName, options, callback)
@@ -215,7 +142,7 @@ items:
         - id: options.expand
           type:
             - string
-          description: expand references resources.
+          description: Expands referenced resources.
           optional: true
         - id: options.customHeaders
           type:
@@ -248,11 +175,11 @@ items:
       - 'azure-arm-network.NetworkInterfaces#get~callback'
       - 'azure-arm-network.NetworkInterfaces#get~options'
       - 'azure-arm-network.NetworkInterfaces#get~expand'
+      - 'azure-arm-network.NetworkInterfaces#get~apiVersion'
+      - 'azure-arm-network.NetworkInterfaces#get~baseUrl'
       - 'azure-arm-network.NetworkInterfaces#get~requestUrl'
       - 'azure-arm-network.NetworkInterfaces#get~requestUrl'
       - 'azure-arm-network.NetworkInterfaces#get~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#get~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#get~regex'
       - 'azure-arm-network.NetworkInterfaces#get~requestUrl'
       - 'azure-arm-network.NetworkInterfaces#get~queryParameters'
       - 'azure-arm-network.NetworkInterfaces#get~requestUrl'
@@ -264,7 +191,7 @@ items:
     name: >-
       createOrUpdate(resourceGroupName, networkInterfaceName, parameters,
       options, callback)
-    summary: The Put NetworkInterface operation creates/updates a networkInterface
+    summary: Creates or updates a network interface.
     fullName: >-
       azure-arm-network.NetworkInterfaces.createOrUpdate(resourceGroupName,
       networkInterfaceName, parameters, options, callback)
@@ -283,189 +210,221 @@ items:
           type:
             - object
           description: |-
-            Parameters supplied to the create/update
-            NetworkInterface operation
+            Parameters supplied to the create or update
+            network interface operation.
         - id: parameters.virtualMachine
           type:
             - object
           description: |-
-            Gets or sets the reference of a
-            VirtualMachine
+            The reference of a virtual
+            machine.
           optional: true
         - id: parameters.virtualMachine.id
           type:
             - string
-          description: Resource Id
+          description: Resource ID.
           optional: true
         - id: parameters.networkSecurityGroup
           type:
             - object
           description: |-
-            Gets or sets the
-            reference of the NetworkSecurityGroup resource
+            The reference of the
+            NetworkSecurityGroup resource.
           optional: true
         - id: parameters.networkSecurityGroup.securityRules
           type:
             - array
           description: |-
-            Gets or sets
-            security rules of network security group
+            A collection
+            of security rules of the network security group.
           optional: true
         - id: parameters.networkSecurityGroup.defaultSecurityRules
           type:
             - array
           description: |-
-            Gets
-            or default security rules of network security group
+            The
+            default security rules of network security group.
           optional: true
         - id: parameters.networkSecurityGroup.resourceGuid
           type:
             - string
           description: |-
-            Gets or sets
-            resource guid property of the network security group resource
+            The resource
+            GUID property of the network security group resource.
           optional: true
         - id: parameters.networkSecurityGroup.provisioningState
           type:
             - string
           description: |-
-            Gets
-            provisioning state of the PublicIP resource Updating/Deleting/Failed
+            The
+            provisioning state of the public IP resource. Possible values are:
+            'Updating', 'Deleting', and 'Failed'.
           optional: true
         - id: parameters.networkSecurityGroup.etag
           type:
             - string
           description: |-
-            Gets a unique
-            read-only string that changes whenever the resource is updated
+            A unique read-only
+            string that changes whenever the resource is updated.
           optional: true
         - id: parameters.networkSecurityGroup.id
           type:
             - string
-          description: Resource Id
+          description: Resource ID.
           optional: true
         - id: parameters.networkSecurityGroup.location
           type:
             - string
-          description: Resource location
+          description: |-
+            Resource
+            location.
           optional: true
         - id: parameters.networkSecurityGroup.tags
           type:
             - object
-          description: Resource tags
+          description: Resource tags.
           optional: true
         - id: parameters.ipConfigurations
           type:
             - array
           description: |-
-            Gets or sets list of
-            IPConfigurations of the network interface
+            A list of IPConfigurations of
+            the network interface.
           optional: true
         - id: parameters.dnsSettings
           type:
             - object
           description: |-
-            Gets or sets DNS settings in
-            network interface
+            The DNS settings in network
+            interface.
           optional: true
         - id: parameters.dnsSettings.dnsServers
           type:
             - array
-          description: |-
-            Gets or sets list of DNS
-            servers IP addresses
+          description: >-
+            List of DNS servers IP
+
+            addresses. Use 'AzureProvidedDNS' to switch to azure provided DNS
+
+            resolution. 'AzureProvidedDNS' value cannot be combined with other
+            IPs, it
+
+            must be the only value in dnsServers collection.
           optional: true
         - id: parameters.dnsSettings.appliedDnsServers
           type:
             - array
-          description: |-
-            Gets or sets list
-            of Applied DNS servers IP addresses
+          description: >-
+            If the VM that
+
+            uses this NIC is part of an Availability Set, then this list will
+            have the
+
+            union of all DNS servers from all NICs that are part of the
+            Availability
+
+            Set. This property is what is configured on each of those VMs.
           optional: true
         - id: parameters.dnsSettings.internalDnsNameLabel
           type:
             - string
-          description: |-
-            Gets or sets
-            the internal DNS name
+          description: >-
+            Relative DNS
+
+            name for this NIC used for internal communications between VMs in
+            the same
+
+            virtual network.
           optional: true
         - id: parameters.dnsSettings.internalFqdn
           type:
             - string
-          description: |-
-            Gets or sets the
-            internal fqdn.
+          description: >-
+            Fully qualified DNS
+
+            name supporting internal communications between VMs in the same
+            virtual
+
+            network.
           optional: true
         - id: parameters.dnsSettings.internalDomainNameSuffix
           type:
             - string
-          description: |-
-            Gets or
-            sets internal domain name suffix of the NIC.
+          description: >-
+            Even if
+
+            internalDnsNameLabel is not specified, a DNS entry is created for
+            the
+
+            primary NIC of the VM. This DNS name can be constructed by
+            concatenating the
+
+            VM name with the value of internalDomainNameSuffix.
           optional: true
         - id: parameters.macAddress
           type:
             - string
           description: |-
-            Gets the MAC address of the network
-            interface
+            The MAC address of the network
+            interface.
           optional: true
         - id: parameters.primary
           type:
             - boolean
           description: |-
-            Gets whether this is a primary NIC on
-            a virtual machine
+            Gets whether this is a primary network
+            interface on a virtual machine.
           optional: true
         - id: parameters.enableAcceleratedNetworking
           type:
             - boolean
           description: |-
-            Gets or sets if
-            the network interface is accelerated networking enabled
+            If the network
+            interface is accelerated networking enabled.
           optional: true
         - id: parameters.enableIPForwarding
           type:
             - boolean
           description: |-
-            Gets or sets whether
-            IPForwarding is enabled on the NIC
+            Indicates whether IP
+            forwarding is enabled on this network interface.
           optional: true
         - id: parameters.resourceGuid
           type:
             - string
           description: |-
-            Gets or sets resource guid
-            property of the network interface resource
+            The resource GUID property of the
+            network interface resource.
           optional: true
         - id: parameters.provisioningState
           type:
             - string
           description: |-
-            Gets provisioning state of
-            the PublicIP resource Updating/Deleting/Failed
+            The provisioning state of the
+            public IP resource. Possible values are: 'Updating', 'Deleting', and
+            'Failed'.
           optional: true
         - id: parameters.etag
           type:
             - string
           description: |-
-            Gets a unique read-only string that
-            changes whenever the resource is updated
+            A unique read-only string that changes
+            whenever the resource is updated.
           optional: true
         - id: parameters.id
           type:
             - string
-          description: Resource Id
+          description: Resource ID.
           optional: true
         - id: parameters.location
           type:
             - string
-          description: Resource location
+          description: Resource location.
           optional: true
         - id: parameters.tags
           type:
             - object
-          description: Resource tags
+          description: Resource tags.
           optional: true
         - id: options
           type:
@@ -504,215 +463,15 @@ items:
       - 'azure-arm-network.NetworkInterfaces#createOrUpdate~client'
       - 'azure-arm-network.NetworkInterfaces#createOrUpdate~callback'
       - 'azure-arm-network.NetworkInterfaces#createOrUpdate~options'
-  - uid: 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate'
-    id: 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate'
+  - uid: 'azure-arm-network.NetworkInterfaces#listAll'
+    id: 'azure-arm-network.NetworkInterfaces#listAll'
     parent: azure-arm-network.NetworkInterfaces
-    name: >-
-      beginCreateOrUpdate(resourceGroupName, networkInterfaceName, parameters,
-      options, callback)
-    summary: The Put NetworkInterface operation creates/updates a networkInterface
-    fullName: >-
-      azure-arm-network.NetworkInterfaces.beginCreateOrUpdate(resourceGroupName,
-      networkInterfaceName, parameters, options, callback)
+    name: 'listAll(options, callback)'
+    summary: Gets all network interfaces in a subscription.
+    fullName: 'azure-arm-network.NetworkInterfaces.listAll(options, callback)'
     type: Method
     syntax:
       parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: networkInterfaceName
-          type:
-            - string
-          description: The name of the network interface.
-        - id: parameters
-          type:
-            - object
-          description: |-
-            Parameters supplied to the create/update
-            NetworkInterface operation
-        - id: parameters.virtualMachine
-          type:
-            - object
-          description: |-
-            Gets or sets the reference of a
-            VirtualMachine
-          optional: true
-        - id: parameters.virtualMachine.id
-          type:
-            - string
-          description: Resource Id
-          optional: true
-        - id: parameters.networkSecurityGroup
-          type:
-            - object
-          description: |-
-            Gets or sets the
-            reference of the NetworkSecurityGroup resource
-          optional: true
-        - id: parameters.networkSecurityGroup.securityRules
-          type:
-            - array
-          description: |-
-            Gets or sets
-            security rules of network security group
-          optional: true
-        - id: parameters.networkSecurityGroup.defaultSecurityRules
-          type:
-            - array
-          description: |-
-            Gets
-            or default security rules of network security group
-          optional: true
-        - id: parameters.networkSecurityGroup.resourceGuid
-          type:
-            - string
-          description: |-
-            Gets or sets
-            resource guid property of the network security group resource
-          optional: true
-        - id: parameters.networkSecurityGroup.provisioningState
-          type:
-            - string
-          description: |-
-            Gets
-            provisioning state of the PublicIP resource Updating/Deleting/Failed
-          optional: true
-        - id: parameters.networkSecurityGroup.etag
-          type:
-            - string
-          description: |-
-            Gets a unique
-            read-only string that changes whenever the resource is updated
-          optional: true
-        - id: parameters.networkSecurityGroup.id
-          type:
-            - string
-          description: Resource Id
-          optional: true
-        - id: parameters.networkSecurityGroup.location
-          type:
-            - string
-          description: Resource location
-          optional: true
-        - id: parameters.networkSecurityGroup.tags
-          type:
-            - object
-          description: Resource tags
-          optional: true
-        - id: parameters.ipConfigurations
-          type:
-            - array
-          description: |-
-            Gets or sets list of
-            IPConfigurations of the network interface
-          optional: true
-        - id: parameters.dnsSettings
-          type:
-            - object
-          description: |-
-            Gets or sets DNS settings in
-            network interface
-          optional: true
-        - id: parameters.dnsSettings.dnsServers
-          type:
-            - array
-          description: |-
-            Gets or sets list of DNS
-            servers IP addresses
-          optional: true
-        - id: parameters.dnsSettings.appliedDnsServers
-          type:
-            - array
-          description: |-
-            Gets or sets list
-            of Applied DNS servers IP addresses
-          optional: true
-        - id: parameters.dnsSettings.internalDnsNameLabel
-          type:
-            - string
-          description: |-
-            Gets or sets
-            the internal DNS name
-          optional: true
-        - id: parameters.dnsSettings.internalFqdn
-          type:
-            - string
-          description: |-
-            Gets or sets the
-            internal fqdn.
-          optional: true
-        - id: parameters.dnsSettings.internalDomainNameSuffix
-          type:
-            - string
-          description: |-
-            Gets or
-            sets internal domain name suffix of the NIC.
-          optional: true
-        - id: parameters.macAddress
-          type:
-            - string
-          description: |-
-            Gets the MAC address of the network
-            interface
-          optional: true
-        - id: parameters.primary
-          type:
-            - boolean
-          description: |-
-            Gets whether this is a primary NIC on
-            a virtual machine
-          optional: true
-        - id: parameters.enableAcceleratedNetworking
-          type:
-            - boolean
-          description: |-
-            Gets or sets if
-            the network interface is accelerated networking enabled
-          optional: true
-        - id: parameters.enableIPForwarding
-          type:
-            - boolean
-          description: |-
-            Gets or sets whether
-            IPForwarding is enabled on the NIC
-          optional: true
-        - id: parameters.resourceGuid
-          type:
-            - string
-          description: |-
-            Gets or sets resource guid
-            property of the network interface resource
-          optional: true
-        - id: parameters.provisioningState
-          type:
-            - string
-          description: |-
-            Gets provisioning state of
-            the PublicIP resource Updating/Deleting/Failed
-          optional: true
-        - id: parameters.etag
-          type:
-            - string
-          description: |-
-            Gets a unique read-only string that
-            changes whenever the resource is updated
-          optional: true
-        - id: parameters.id
-          type:
-            - string
-          description: Resource Id
-          optional: true
-        - id: parameters.location
-          type:
-            - string
-          description: Resource location
-          optional: true
-        - id: parameters.tags
-          type:
-            - object
-          description: Resource tags
-          optional: true
         - id: options
           type:
             - object
@@ -738,36 +497,206 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object.
-                               See <xref:NetworkInterface> for more information.
+                               See <xref:NetworkInterfaceListResult> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function listAll(options, callback)'
+    children:
+      - 'azure-arm-network.NetworkInterfaces#listAll~client'
+      - 'azure-arm-network.NetworkInterfaces#listAll~callback'
+      - 'azure-arm-network.NetworkInterfaces#listAll~options'
+      - 'azure-arm-network.NetworkInterfaces#listAll~apiVersion'
+      - 'azure-arm-network.NetworkInterfaces#listAll~baseUrl'
+      - 'azure-arm-network.NetworkInterfaces#listAll~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#listAll~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#listAll~queryParameters'
+      - 'azure-arm-network.NetworkInterfaces#listAll~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#listAll~httpRequest'
+      - 'azure-arm-network.NetworkInterfaces#listAll~headerName'
+  - uid: 'azure-arm-network.NetworkInterfaces#list'
+    id: 'azure-arm-network.NetworkInterfaces#list'
+    parent: azure-arm-network.NetworkInterfaces
+    name: 'list(resourceGroupName, options, callback)'
+    summary: Gets all network interfaces in a resource group.
+    fullName: >-
+      azure-arm-network.NetworkInterfaces.list(resourceGroupName, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:NetworkInterfaceListResult> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function list(resourceGroupName, options, callback)'
+    children:
+      - 'azure-arm-network.NetworkInterfaces#list~client'
+      - 'azure-arm-network.NetworkInterfaces#list~callback'
+      - 'azure-arm-network.NetworkInterfaces#list~options'
+      - 'azure-arm-network.NetworkInterfaces#list~apiVersion'
+      - 'azure-arm-network.NetworkInterfaces#list~baseUrl'
+      - 'azure-arm-network.NetworkInterfaces#list~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#list~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#list~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#list~queryParameters'
+      - 'azure-arm-network.NetworkInterfaces#list~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#list~httpRequest'
+      - 'azure-arm-network.NetworkInterfaces#list~headerName'
+  - uid: 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable'
+    id: 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable'
+    parent: azure-arm-network.NetworkInterfaces
+    name: >-
+      getEffectiveRouteTable(resourceGroupName, networkInterfaceName, options,
+      callback)
+    summary: Gets all route tables applied to a network interface.
+    fullName: >-
+      azure-arm-network.NetworkInterfaces.getEffectiveRouteTable(resourceGroupName,
+      networkInterfaceName, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: networkInterfaceName
+          type:
+            - string
+          description: The name of the network interface.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:EffectiveRouteListResult> for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
       content: >-
-        function beginCreateOrUpdate(resourceGroupName, networkInterfaceName,
-        parameters, options, callback)
+        function getEffectiveRouteTable(resourceGroupName, networkInterfaceName,
+        options, callback)
     children:
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~client'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~callback'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~options'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~regex'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~queryParameters'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~httpRequest'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~headerName'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestContent'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestModel'
+      - 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable~client'
+      - 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable~callback'
+      - 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable~options'
+  - uid: 'azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups'
+    id: 'azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups'
+    parent: azure-arm-network.NetworkInterfaces
+    name: >-
+      listEffectiveNetworkSecurityGroups(resourceGroupName,
+      networkInterfaceName, options, callback)
+    summary: Gets all network security groups applied to a network interface.
+    fullName: >-
+      azure-arm-network.NetworkInterfaces.listEffectiveNetworkSecurityGroups(resourceGroupName,
+      networkInterfaceName, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: networkInterfaceName
+          type:
+            - string
+          description: The name of the network interface.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:EffectiveNetworkSecurityGroupListResult> for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function listEffectiveNetworkSecurityGroups(resourceGroupName,
+        networkInterfaceName, options, callback)
+    children:
       - >-
-        azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestModelMapper
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestModel'
-      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestContent'
+        azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups~client
       - >-
-        azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~serializationError
+        azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups~callback
+      - >-
+        azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups~options
   - uid: >-
       azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfaces
     id: >-
@@ -777,8 +706,8 @@ items:
       listVirtualMachineScaleSetVMNetworkInterfaces(resourceGroupName,
       virtualMachineScaleSetName, virtualmachineIndex, options, callback)
     summary: |-
-      The list network interface operation retrieves information about all
-      network interfaces in a virtual machine from a virtual machine scale set.
+      Gets information about all network interfaces in a virtual machine in a
+      virtual machine scale set.
     fullName: >-
       azure-arm-network.NetworkInterfaces.listVirtualMachineScaleSetVMNetworkInterfaces(resourceGroupName,
       virtualMachineScaleSetName, virtualmachineIndex, options, callback)
@@ -842,7 +771,9 @@ items:
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfaces~options
       - >-
-        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfaces~requestUrl
+        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfaces~apiVersion
+      - >-
+        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfaces~baseUrl
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfaces~requestUrl
       - >-
@@ -851,8 +782,6 @@ items:
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfaces~requestUrl
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfaces~requestUrl
-      - >-
-        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfaces~regex
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfaces~requestUrl
       - >-
@@ -871,9 +800,7 @@ items:
     name: >-
       listVirtualMachineScaleSetNetworkInterfaces(resourceGroupName,
       virtualMachineScaleSetName, options, callback)
-    summary: |-
-      The list network interface operation retrieves information about all
-      network interfaces in a virtual machine scale set.
+    summary: Gets all network interfaces in a virtual machine scale set.
     fullName: >-
       azure-arm-network.NetworkInterfaces.listVirtualMachineScaleSetNetworkInterfaces(resourceGroupName,
       virtualMachineScaleSetName, options, callback)
@@ -932,15 +859,15 @@ items:
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfaces~options
       - >-
-        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfaces~requestUrl
+        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfaces~apiVersion
+      - >-
+        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfaces~baseUrl
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfaces~requestUrl
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfaces~requestUrl
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfaces~requestUrl
-      - >-
-        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfaces~regex
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfaces~requestUrl
       - >-
@@ -960,9 +887,7 @@ items:
       getVirtualMachineScaleSetNetworkInterface(resourceGroupName,
       virtualMachineScaleSetName, virtualmachineIndex, networkInterfaceName,
       options, callback)
-    summary: |-
-      The Get network interface operation retrieves information about the
-      specified network interface in a virtual machine scale set.
+    summary: Get the specified network interface in a virtual machine scale set.
     fullName: >-
       azure-arm-network.NetworkInterfaces.getVirtualMachineScaleSetNetworkInterface(resourceGroupName,
       virtualMachineScaleSetName, virtualmachineIndex, networkInterfaceName,
@@ -996,7 +921,7 @@ items:
         - id: options.expand
           type:
             - string
-          description: expand references resources.
+          description: Expands referenced resources.
           optional: true
         - id: options.customHeaders
           type:
@@ -1037,7 +962,9 @@ items:
       - >-
         azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface~expand
       - >-
-        azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface~requestUrl
+        azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface~apiVersion
+      - >-
+        azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface~baseUrl
       - >-
         azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface~requestUrl
       - >-
@@ -1048,8 +975,6 @@ items:
         azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface~requestUrl
       - >-
         azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface~requestUrl
-      - >-
-        azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface~regex
       - >-
         azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface~requestUrl
       - >-
@@ -1060,138 +985,15 @@ items:
         azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface~httpRequest
       - >-
         azure-arm-network.NetworkInterfaces#getVirtualMachineScaleSetNetworkInterface~headerName
-  - uid: 'azure-arm-network.NetworkInterfaces#listAll'
-    id: 'azure-arm-network.NetworkInterfaces#listAll'
-    parent: azure-arm-network.NetworkInterfaces
-    name: 'listAll(options, callback)'
-    summary: >-
-      The List networkInterfaces operation retrieves all the networkInterfaces
-      in
-
-      a subscription.
-    fullName: 'azure-arm-network.NetworkInterfaces.listAll(options, callback)'
-    type: Method
-    syntax:
-      parameters:
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:NetworkInterfaceListResult> for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function listAll(options, callback)'
-    children:
-      - 'azure-arm-network.NetworkInterfaces#listAll~client'
-      - 'azure-arm-network.NetworkInterfaces#listAll~callback'
-      - 'azure-arm-network.NetworkInterfaces#listAll~options'
-      - 'azure-arm-network.NetworkInterfaces#listAll~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#listAll~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#listAll~regex'
-      - 'azure-arm-network.NetworkInterfaces#listAll~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#listAll~queryParameters'
-      - 'azure-arm-network.NetworkInterfaces#listAll~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#listAll~httpRequest'
-      - 'azure-arm-network.NetworkInterfaces#listAll~headerName'
-  - uid: 'azure-arm-network.NetworkInterfaces#list'
-    id: 'azure-arm-network.NetworkInterfaces#list'
-    parent: azure-arm-network.NetworkInterfaces
-    name: 'list(resourceGroupName, options, callback)'
-    summary: >-
-      The List networkInterfaces operation retrieves all the networkInterfaces
-      in
-
-      a resource group.
-    fullName: >-
-      azure-arm-network.NetworkInterfaces.list(resourceGroupName, options,
-      callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:NetworkInterfaceListResult> for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function list(resourceGroupName, options, callback)'
-    children:
-      - 'azure-arm-network.NetworkInterfaces#list~client'
-      - 'azure-arm-network.NetworkInterfaces#list~callback'
-      - 'azure-arm-network.NetworkInterfaces#list~options'
-      - 'azure-arm-network.NetworkInterfaces#list~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#list~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#list~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#list~regex'
-      - 'azure-arm-network.NetworkInterfaces#list~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#list~queryParameters'
-      - 'azure-arm-network.NetworkInterfaces#list~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#list~httpRequest'
-      - 'azure-arm-network.NetworkInterfaces#list~headerName'
-  - uid: 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable'
-    id: 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable'
+  - uid: 'azure-arm-network.NetworkInterfaces#beginDeleteMethod'
+    id: 'azure-arm-network.NetworkInterfaces#beginDeleteMethod'
     parent: azure-arm-network.NetworkInterfaces
     name: >-
-      getEffectiveRouteTable(resourceGroupName, networkInterfaceName, options,
+      beginDeleteMethod(resourceGroupName, networkInterfaceName, options,
       callback)
-    summary: |-
-      The get effective routetable operation retrieves all the route tables
-      applied on a networkInterface.
+    summary: Deletes the specified network interface.
     fullName: >-
-      azure-arm-network.NetworkInterfaces.getEffectiveRouteTable(resourceGroupName,
+      azure-arm-network.NetworkInterfaces.beginDeleteMethod(resourceGroupName,
       networkInterfaceName, options, callback)
     type: Method
     syntax:
@@ -1228,29 +1030,331 @@ items:
 
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
-                               {object} [result]   - The deserialized result object.
-                               See <xref:EffectiveRouteListResult> for more
-                               information.
+                               {null} [result]   - The deserialized result object.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
       content: >-
-        function getEffectiveRouteTable(resourceGroupName, networkInterfaceName,
+        function beginDeleteMethod(resourceGroupName, networkInterfaceName,
         options, callback)
     children:
-      - 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable~client'
-      - 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable~callback'
-      - 'azure-arm-network.NetworkInterfaces#getEffectiveRouteTable~options'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~client'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~callback'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~options'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~apiVersion'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~baseUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~queryParameters'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~httpRequest'
+      - 'azure-arm-network.NetworkInterfaces#beginDeleteMethod~headerName'
+  - uid: 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate'
+    id: 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate'
+    parent: azure-arm-network.NetworkInterfaces
+    name: >-
+      beginCreateOrUpdate(resourceGroupName, networkInterfaceName, parameters,
+      options, callback)
+    summary: Creates or updates a network interface.
+    fullName: >-
+      azure-arm-network.NetworkInterfaces.beginCreateOrUpdate(resourceGroupName,
+      networkInterfaceName, parameters, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: networkInterfaceName
+          type:
+            - string
+          description: The name of the network interface.
+        - id: parameters
+          type:
+            - object
+          description: |-
+            Parameters supplied to the create or update
+            network interface operation.
+        - id: parameters.virtualMachine
+          type:
+            - object
+          description: |-
+            The reference of a virtual
+            machine.
+          optional: true
+        - id: parameters.virtualMachine.id
+          type:
+            - string
+          description: Resource ID.
+          optional: true
+        - id: parameters.networkSecurityGroup
+          type:
+            - object
+          description: |-
+            The reference of the
+            NetworkSecurityGroup resource.
+          optional: true
+        - id: parameters.networkSecurityGroup.securityRules
+          type:
+            - array
+          description: |-
+            A collection
+            of security rules of the network security group.
+          optional: true
+        - id: parameters.networkSecurityGroup.defaultSecurityRules
+          type:
+            - array
+          description: |-
+            The
+            default security rules of network security group.
+          optional: true
+        - id: parameters.networkSecurityGroup.resourceGuid
+          type:
+            - string
+          description: |-
+            The resource
+            GUID property of the network security group resource.
+          optional: true
+        - id: parameters.networkSecurityGroup.provisioningState
+          type:
+            - string
+          description: |-
+            The
+            provisioning state of the public IP resource. Possible values are:
+            'Updating', 'Deleting', and 'Failed'.
+          optional: true
+        - id: parameters.networkSecurityGroup.etag
+          type:
+            - string
+          description: |-
+            A unique read-only
+            string that changes whenever the resource is updated.
+          optional: true
+        - id: parameters.networkSecurityGroup.id
+          type:
+            - string
+          description: Resource ID.
+          optional: true
+        - id: parameters.networkSecurityGroup.location
+          type:
+            - string
+          description: |-
+            Resource
+            location.
+          optional: true
+        - id: parameters.networkSecurityGroup.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: parameters.ipConfigurations
+          type:
+            - array
+          description: |-
+            A list of IPConfigurations of
+            the network interface.
+          optional: true
+        - id: parameters.dnsSettings
+          type:
+            - object
+          description: |-
+            The DNS settings in network
+            interface.
+          optional: true
+        - id: parameters.dnsSettings.dnsServers
+          type:
+            - array
+          description: >-
+            List of DNS servers IP
+
+            addresses. Use 'AzureProvidedDNS' to switch to azure provided DNS
+
+            resolution. 'AzureProvidedDNS' value cannot be combined with other
+            IPs, it
+
+            must be the only value in dnsServers collection.
+          optional: true
+        - id: parameters.dnsSettings.appliedDnsServers
+          type:
+            - array
+          description: >-
+            If the VM that
+
+            uses this NIC is part of an Availability Set, then this list will
+            have the
+
+            union of all DNS servers from all NICs that are part of the
+            Availability
+
+            Set. This property is what is configured on each of those VMs.
+          optional: true
+        - id: parameters.dnsSettings.internalDnsNameLabel
+          type:
+            - string
+          description: >-
+            Relative DNS
+
+            name for this NIC used for internal communications between VMs in
+            the same
+
+            virtual network.
+          optional: true
+        - id: parameters.dnsSettings.internalFqdn
+          type:
+            - string
+          description: >-
+            Fully qualified DNS
+
+            name supporting internal communications between VMs in the same
+            virtual
+
+            network.
+          optional: true
+        - id: parameters.dnsSettings.internalDomainNameSuffix
+          type:
+            - string
+          description: >-
+            Even if
+
+            internalDnsNameLabel is not specified, a DNS entry is created for
+            the
+
+            primary NIC of the VM. This DNS name can be constructed by
+            concatenating the
+
+            VM name with the value of internalDomainNameSuffix.
+          optional: true
+        - id: parameters.macAddress
+          type:
+            - string
+          description: |-
+            The MAC address of the network
+            interface.
+          optional: true
+        - id: parameters.primary
+          type:
+            - boolean
+          description: |-
+            Gets whether this is a primary network
+            interface on a virtual machine.
+          optional: true
+        - id: parameters.enableAcceleratedNetworking
+          type:
+            - boolean
+          description: |-
+            If the network
+            interface is accelerated networking enabled.
+          optional: true
+        - id: parameters.enableIPForwarding
+          type:
+            - boolean
+          description: |-
+            Indicates whether IP
+            forwarding is enabled on this network interface.
+          optional: true
+        - id: parameters.resourceGuid
+          type:
+            - string
+          description: |-
+            The resource GUID property of the
+            network interface resource.
+          optional: true
+        - id: parameters.provisioningState
+          type:
+            - string
+          description: |-
+            The provisioning state of the
+            public IP resource. Possible values are: 'Updating', 'Deleting', and
+            'Failed'.
+          optional: true
+        - id: parameters.etag
+          type:
+            - string
+          description: |-
+            A unique read-only string that changes
+            whenever the resource is updated.
+          optional: true
+        - id: parameters.id
+          type:
+            - string
+          description: Resource ID.
+          optional: true
+        - id: parameters.location
+          type:
+            - string
+          description: Resource location.
+          optional: true
+        - id: parameters.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:NetworkInterface> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginCreateOrUpdate(resourceGroupName, networkInterfaceName,
+        parameters, options, callback)
+    children:
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~client'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~callback'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~options'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~apiVersion'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~baseUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~queryParameters'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~httpRequest'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~headerName'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestContent'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestModel'
+      - >-
+        azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestModelMapper
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestModel'
+      - 'azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~requestContent'
+      - >-
+        azure-arm-network.NetworkInterfaces#beginCreateOrUpdate~serializationError
   - uid: 'azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable'
     id: 'azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable'
     parent: azure-arm-network.NetworkInterfaces
     name: >-
       beginGetEffectiveRouteTable(resourceGroupName, networkInterfaceName,
       options, callback)
-    summary: |-
-      The get effective routetable operation retrieves all the route tables
-      applied on a networkInterface.
+    summary: Gets all route tables applied to a network interface.
     fullName: >-
       azure-arm-network.NetworkInterfaces.beginGetEffectiveRouteTable(resourceGroupName,
       networkInterfaceName, options, callback)
@@ -1304,14 +1408,14 @@ items:
       - 'azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~callback'
       - 'azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~options'
       - >-
-        azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~requestUrl
+        azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~apiVersion
+      - 'azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~baseUrl'
       - >-
         azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~requestUrl
       - >-
         azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~requestUrl
       - >-
         azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~requestUrl
-      - 'azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~regex'
       - >-
         azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~requestUrl
       - >-
@@ -1322,70 +1426,6 @@ items:
         azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~httpRequest
       - >-
         azure-arm-network.NetworkInterfaces#beginGetEffectiveRouteTable~headerName
-  - uid: 'azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups'
-    id: 'azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups'
-    parent: azure-arm-network.NetworkInterfaces
-    name: >-
-      listEffectiveNetworkSecurityGroups(resourceGroupName,
-      networkInterfaceName, options, callback)
-    summary: |-
-      The list effective network security group operation retrieves all the
-      network security groups applied on a networkInterface.
-    fullName: >-
-      azure-arm-network.NetworkInterfaces.listEffectiveNetworkSecurityGroups(resourceGroupName,
-      networkInterfaceName, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: networkInterfaceName
-          type:
-            - string
-          description: The name of the network interface.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:EffectiveNetworkSecurityGroupListResult>
-                               for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function listEffectiveNetworkSecurityGroups(resourceGroupName,
-        networkInterfaceName, options, callback)
-    children:
-      - >-
-        azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups~client
-      - >-
-        azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups~callback
-      - >-
-        azure-arm-network.NetworkInterfaces#listEffectiveNetworkSecurityGroups~options
   - uid: >-
       azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups
     id: >-
@@ -1394,9 +1434,7 @@ items:
     name: >-
       beginListEffectiveNetworkSecurityGroups(resourceGroupName,
       networkInterfaceName, options, callback)
-    summary: |-
-      The list effective network security group operation retrieves all the
-      network security groups applied on a networkInterface.
+    summary: Gets all network security groups applied to a network interface.
     fullName: >-
       azure-arm-network.NetworkInterfaces.beginListEffectiveNetworkSecurityGroups(resourceGroupName,
       networkInterfaceName, options, callback)
@@ -1436,8 +1474,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object.
-                               See <xref:EffectiveNetworkSecurityGroupListResult>
-                               for more information.
+                               See <xref:EffectiveNetworkSecurityGroupListResult> for
+                               more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1453,15 +1491,15 @@ items:
       - >-
         azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups~options
       - >-
-        azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups~requestUrl
+        azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups~apiVersion
+      - >-
+        azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups~baseUrl
       - >-
         azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups~requestUrl
       - >-
         azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups~requestUrl
       - >-
         azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups~requestUrl
-      - >-
-        azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups~regex
       - >-
         azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups~requestUrl
       - >-
@@ -1472,6 +1510,120 @@ items:
         azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups~httpRequest
       - >-
         azure-arm-network.NetworkInterfaces#beginListEffectiveNetworkSecurityGroups~headerName
+  - uid: 'azure-arm-network.NetworkInterfaces#listAllNext'
+    id: 'azure-arm-network.NetworkInterfaces#listAllNext'
+    parent: azure-arm-network.NetworkInterfaces
+    name: 'listAllNext(nextPageLink, options, callback)'
+    summary: Gets all network interfaces in a subscription.
+    fullName: >-
+      azure-arm-network.NetworkInterfaces.listAllNext(nextPageLink, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:NetworkInterfaceListResult> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function listAllNext(nextPageLink, options, callback)'
+    children:
+      - 'azure-arm-network.NetworkInterfaces#listAllNext~client'
+      - 'azure-arm-network.NetworkInterfaces#listAllNext~callback'
+      - 'azure-arm-network.NetworkInterfaces#listAllNext~options'
+      - 'azure-arm-network.NetworkInterfaces#listAllNext~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#listAllNext~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#listAllNext~httpRequest'
+      - 'azure-arm-network.NetworkInterfaces#listAllNext~headerName'
+  - uid: 'azure-arm-network.NetworkInterfaces#listNext'
+    id: 'azure-arm-network.NetworkInterfaces#listNext'
+    parent: azure-arm-network.NetworkInterfaces
+    name: 'listNext(nextPageLink, options, callback)'
+    summary: Gets all network interfaces in a resource group.
+    fullName: >-
+      azure-arm-network.NetworkInterfaces.listNext(nextPageLink, options,
+      callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:NetworkInterfaceListResult> for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function listNext(nextPageLink, options, callback)'
+    children:
+      - 'azure-arm-network.NetworkInterfaces#listNext~client'
+      - 'azure-arm-network.NetworkInterfaces#listNext~callback'
+      - 'azure-arm-network.NetworkInterfaces#listNext~options'
+      - 'azure-arm-network.NetworkInterfaces#listNext~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#listNext~requestUrl'
+      - 'azure-arm-network.NetworkInterfaces#listNext~httpRequest'
+      - 'azure-arm-network.NetworkInterfaces#listNext~headerName'
   - uid: >-
       azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfacesNext
     id: >-
@@ -1481,8 +1633,8 @@ items:
       listVirtualMachineScaleSetVMNetworkInterfacesNext(nextPageLink, options,
       callback)
     summary: |-
-      The list network interface operation retrieves information about all
-      network interfaces in a virtual machine from a virtual machine scale set.
+      Gets information about all network interfaces in a virtual machine in a
+      virtual machine scale set.
     fullName: >-
       azure-arm-network.NetworkInterfaces.listVirtualMachineScaleSetVMNetworkInterfacesNext(nextPageLink,
       options, callback)
@@ -1541,10 +1693,6 @@ items:
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfacesNext~requestUrl
       - >-
-        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfacesNext~regex
-      - >-
-        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfacesNext~requestUrl
-      - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfacesNext~httpRequest
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetVMNetworkInterfacesNext~headerName
@@ -1556,9 +1704,7 @@ items:
     name: >-
       listVirtualMachineScaleSetNetworkInterfacesNext(nextPageLink, options,
       callback)
-    summary: |-
-      The list network interface operation retrieves information about all
-      network interfaces in a virtual machine scale set.
+    summary: Gets all network interfaces in a virtual machine scale set.
     fullName: >-
       azure-arm-network.NetworkInterfaces.listVirtualMachineScaleSetNetworkInterfacesNext(nextPageLink,
       options, callback)
@@ -1617,139 +1763,9 @@ items:
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfacesNext~requestUrl
       - >-
-        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfacesNext~regex
-      - >-
-        azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfacesNext~requestUrl
-      - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfacesNext~httpRequest
       - >-
         azure-arm-network.NetworkInterfaces#listVirtualMachineScaleSetNetworkInterfacesNext~headerName
-  - uid: 'azure-arm-network.NetworkInterfaces#listAllNext'
-    id: 'azure-arm-network.NetworkInterfaces#listAllNext'
-    parent: azure-arm-network.NetworkInterfaces
-    name: 'listAllNext(nextPageLink, options, callback)'
-    summary: >-
-      The List networkInterfaces operation retrieves all the networkInterfaces
-      in
-
-      a subscription.
-    fullName: >-
-      azure-arm-network.NetworkInterfaces.listAllNext(nextPageLink, options,
-      callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: nextPageLink
-          type:
-            - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:NetworkInterfaceListResult> for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function listAllNext(nextPageLink, options, callback)'
-    children:
-      - 'azure-arm-network.NetworkInterfaces#listAllNext~client'
-      - 'azure-arm-network.NetworkInterfaces#listAllNext~callback'
-      - 'azure-arm-network.NetworkInterfaces#listAllNext~options'
-      - 'azure-arm-network.NetworkInterfaces#listAllNext~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#listAllNext~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#listAllNext~regex'
-      - 'azure-arm-network.NetworkInterfaces#listAllNext~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#listAllNext~httpRequest'
-      - 'azure-arm-network.NetworkInterfaces#listAllNext~headerName'
-  - uid: 'azure-arm-network.NetworkInterfaces#listNext'
-    id: 'azure-arm-network.NetworkInterfaces#listNext'
-    parent: azure-arm-network.NetworkInterfaces
-    name: 'listNext(nextPageLink, options, callback)'
-    summary: >-
-      The List networkInterfaces operation retrieves all the networkInterfaces
-      in
-
-      a resource group.
-    fullName: >-
-      azure-arm-network.NetworkInterfaces.listNext(nextPageLink, options,
-      callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: nextPageLink
-          type:
-            - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:NetworkInterfaceListResult> for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function listNext(nextPageLink, options, callback)'
-    children:
-      - 'azure-arm-network.NetworkInterfaces#listNext~client'
-      - 'azure-arm-network.NetworkInterfaces#listNext~callback'
-      - 'azure-arm-network.NetworkInterfaces#listNext~options'
-      - 'azure-arm-network.NetworkInterfaces#listNext~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#listNext~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#listNext~regex'
-      - 'azure-arm-network.NetworkInterfaces#listNext~requestUrl'
-      - 'azure-arm-network.NetworkInterfaces#listNext~httpRequest'
-      - 'azure-arm-network.NetworkInterfaces#listNext~headerName'
 references:
   - uid: azure-arm-network.NetworkManagementClient
     name: NetworkManagementClient

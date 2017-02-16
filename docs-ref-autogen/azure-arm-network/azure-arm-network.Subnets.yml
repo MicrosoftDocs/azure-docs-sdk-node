@@ -14,11 +14,11 @@ items:
       - 'azure-arm-network.Subnets.#ctor'
       - 'azure-arm-network.Subnets#client'
       - 'azure-arm-network.Subnets#deleteMethod'
-      - 'azure-arm-network.Subnets#beginDeleteMethod'
       - 'azure-arm-network.Subnets#get'
       - 'azure-arm-network.Subnets#createOrUpdate'
-      - 'azure-arm-network.Subnets#beginCreateOrUpdate'
       - 'azure-arm-network.Subnets#list'
+      - 'azure-arm-network.Subnets#beginDeleteMethod'
+      - 'azure-arm-network.Subnets#beginCreateOrUpdate'
       - 'azure-arm-network.Subnets#listNext'
   - id: 'azure-arm-network.Subnets.#ctor'
     uid: 'azure-arm-network.Subnets.#ctor'
@@ -49,7 +49,7 @@ items:
     name: >-
       deleteMethod(resourceGroupName, virtualNetworkName, subnetName, options,
       callback)
-    summary: The delete subnet operation deletes the specified subnet.
+    summary: Deletes the specified subnet.
     fullName: >-
       azure-arm-network.Subnets.deleteMethod(resourceGroupName,
       virtualNetworkName, subnetName, options, callback)
@@ -104,13 +104,366 @@ items:
       - 'azure-arm-network.Subnets#deleteMethod~client'
       - 'azure-arm-network.Subnets#deleteMethod~callback'
       - 'azure-arm-network.Subnets#deleteMethod~options'
+  - uid: 'azure-arm-network.Subnets#get'
+    id: 'azure-arm-network.Subnets#get'
+    parent: azure-arm-network.Subnets
+    name: 'get(resourceGroupName, virtualNetworkName, subnetName, options, callback)'
+    summary: Gets the specified subnet by virtual network and resource group.
+    fullName: >-
+      azure-arm-network.Subnets.get(resourceGroupName, virtualNetworkName,
+      subnetName, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: virtualNetworkName
+          type:
+            - string
+          description: The name of the virtual network.
+        - id: subnetName
+          type:
+            - string
+          description: The name of the subnet.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.expand
+          type:
+            - string
+          description: Expands referenced resources.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:Subnet> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function get(resourceGroupName, virtualNetworkName, subnetName, options,
+        callback)
+    children:
+      - 'azure-arm-network.Subnets#get~client'
+      - 'azure-arm-network.Subnets#get~callback'
+      - 'azure-arm-network.Subnets#get~options'
+      - 'azure-arm-network.Subnets#get~expand'
+      - 'azure-arm-network.Subnets#get~apiVersion'
+      - 'azure-arm-network.Subnets#get~baseUrl'
+      - 'azure-arm-network.Subnets#get~requestUrl'
+      - 'azure-arm-network.Subnets#get~requestUrl'
+      - 'azure-arm-network.Subnets#get~requestUrl'
+      - 'azure-arm-network.Subnets#get~requestUrl'
+      - 'azure-arm-network.Subnets#get~requestUrl'
+      - 'azure-arm-network.Subnets#get~queryParameters'
+      - 'azure-arm-network.Subnets#get~requestUrl'
+      - 'azure-arm-network.Subnets#get~httpRequest'
+      - 'azure-arm-network.Subnets#get~headerName'
+  - uid: 'azure-arm-network.Subnets#createOrUpdate'
+    id: 'azure-arm-network.Subnets#createOrUpdate'
+    parent: azure-arm-network.Subnets
+    name: >-
+      createOrUpdate(resourceGroupName, virtualNetworkName, subnetName,
+      subnetParameters, options, callback)
+    summary: Creates or updates a subnet in the specified virtual network.
+    fullName: >-
+      azure-arm-network.Subnets.createOrUpdate(resourceGroupName,
+      virtualNetworkName, subnetName, subnetParameters, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: virtualNetworkName
+          type:
+            - string
+          description: The name of the virtual network.
+        - id: subnetName
+          type:
+            - string
+          description: The name of the subnet.
+        - id: subnetParameters
+          type:
+            - object
+          description: |-
+            Parameters supplied to the create or update
+            subnet operation.
+        - id: subnetParameters.addressPrefix
+          type:
+            - string
+          description: |-
+            The address prefix for the
+            subnet.
+          optional: true
+        - id: subnetParameters.networkSecurityGroup
+          type:
+            - object
+          description: |-
+            The reference of the
+            NetworkSecurityGroup resource.
+          optional: true
+        - id: subnetParameters.networkSecurityGroup.securityRules
+          type:
+            - array
+          description: |-
+            A
+            collection of security rules of the network security group.
+          optional: true
+        - id: subnetParameters.networkSecurityGroup.defaultSecurityRules
+          type:
+            - array
+          description: The default security rules of network security group.
+          optional: true
+        - id: subnetParameters.networkSecurityGroup.resourceGuid
+          type:
+            - string
+          description: |-
+            The
+            resource GUID property of the network security group resource.
+          optional: true
+        - id: subnetParameters.networkSecurityGroup.provisioningState
+          type:
+            - string
+          description: >-
+            The provisioning state of the public IP resource. Possible values
+            are:
+
+            'Updating', 'Deleting', and 'Failed'.
+          optional: true
+        - id: subnetParameters.networkSecurityGroup.etag
+          type:
+            - string
+          description: |-
+            A unique
+            read-only string that changes whenever the resource is updated.
+          optional: true
+        - id: subnetParameters.networkSecurityGroup.id
+          type:
+            - string
+          description: Resource ID.
+          optional: true
+        - id: subnetParameters.networkSecurityGroup.location
+          type:
+            - string
+          description: |-
+            Resource
+            location.
+          optional: true
+        - id: subnetParameters.networkSecurityGroup.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: subnetParameters.routeTable
+          type:
+            - object
+          description: |-
+            The reference of the
+            RouteTable resource.
+          optional: true
+        - id: subnetParameters.routeTable.routes
+          type:
+            - array
+          description: |-
+            Collection of routes
+            contained within a route table.
+          optional: true
+        - id: subnetParameters.routeTable.provisioningState
+          type:
+            - string
+          description: |-
+            The
+            provisioning state of the resource. Possible values are: 'Updating',
+            'Deleting', and 'Failed'.
+          optional: true
+        - id: subnetParameters.routeTable.etag
+          type:
+            - string
+          description: |-
+            Gets a unique read-only
+            string that changes whenever the resource is updated.
+          optional: true
+        - id: subnetParameters.routeTable.id
+          type:
+            - string
+          description: Resource ID.
+          optional: true
+        - id: subnetParameters.routeTable.location
+          type:
+            - string
+          description: Resource location.
+          optional: true
+        - id: subnetParameters.routeTable.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: subnetParameters.resourceNavigationLinks
+          type:
+            - array
+          description: |-
+            Gets an array of
+            references to the external resources using subnet.
+          optional: true
+        - id: subnetParameters.provisioningState
+          type:
+            - string
+          description: |-
+            The provisioning state
+            of the resource.
+          optional: true
+        - id: subnetParameters.name
+          type:
+            - string
+          description: |-
+            The name of the resource that is
+            unique within a resource group. This name can be used to access the
+            resource.
+          optional: true
+        - id: subnetParameters.etag
+          type:
+            - string
+          description: |-
+            A unique read-only string that
+            changes whenever the resource is updated.
+          optional: true
+        - id: subnetParameters.id
+          type:
+            - string
+          description: Resource ID.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:Subnet> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function createOrUpdate(resourceGroupName, virtualNetworkName,
+        subnetName, subnetParameters, options, callback)
+    children:
+      - 'azure-arm-network.Subnets#createOrUpdate~client'
+      - 'azure-arm-network.Subnets#createOrUpdate~callback'
+      - 'azure-arm-network.Subnets#createOrUpdate~options'
+  - uid: 'azure-arm-network.Subnets#list'
+    id: 'azure-arm-network.Subnets#list'
+    parent: azure-arm-network.Subnets
+    name: 'list(resourceGroupName, virtualNetworkName, options, callback)'
+    summary: Gets all subnets in a virtual network.
+    fullName: >-
+      azure-arm-network.Subnets.list(resourceGroupName, virtualNetworkName,
+      options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: virtualNetworkName
+          type:
+            - string
+          description: The name of the virtual network.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:SubnetListResult> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: 'function list(resourceGroupName, virtualNetworkName, options, callback)'
+    children:
+      - 'azure-arm-network.Subnets#list~client'
+      - 'azure-arm-network.Subnets#list~callback'
+      - 'azure-arm-network.Subnets#list~options'
+      - 'azure-arm-network.Subnets#list~apiVersion'
+      - 'azure-arm-network.Subnets#list~baseUrl'
+      - 'azure-arm-network.Subnets#list~requestUrl'
+      - 'azure-arm-network.Subnets#list~requestUrl'
+      - 'azure-arm-network.Subnets#list~requestUrl'
+      - 'azure-arm-network.Subnets#list~requestUrl'
+      - 'azure-arm-network.Subnets#list~queryParameters'
+      - 'azure-arm-network.Subnets#list~requestUrl'
+      - 'azure-arm-network.Subnets#list~httpRequest'
+      - 'azure-arm-network.Subnets#list~headerName'
   - uid: 'azure-arm-network.Subnets#beginDeleteMethod'
     id: 'azure-arm-network.Subnets#beginDeleteMethod'
     parent: azure-arm-network.Subnets
     name: >-
       beginDeleteMethod(resourceGroupName, virtualNetworkName, subnetName,
       options, callback)
-    summary: The delete subnet operation deletes the specified subnet.
+    summary: Deletes the specified subnet.
     fullName: >-
       azure-arm-network.Subnets.beginDeleteMethod(resourceGroupName,
       virtualNetworkName, subnetName, options, callback)
@@ -165,319 +518,24 @@ items:
       - 'azure-arm-network.Subnets#beginDeleteMethod~client'
       - 'azure-arm-network.Subnets#beginDeleteMethod~callback'
       - 'azure-arm-network.Subnets#beginDeleteMethod~options'
+      - 'azure-arm-network.Subnets#beginDeleteMethod~apiVersion'
+      - 'azure-arm-network.Subnets#beginDeleteMethod~baseUrl'
       - 'azure-arm-network.Subnets#beginDeleteMethod~requestUrl'
       - 'azure-arm-network.Subnets#beginDeleteMethod~requestUrl'
       - 'azure-arm-network.Subnets#beginDeleteMethod~requestUrl'
       - 'azure-arm-network.Subnets#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.Subnets#beginDeleteMethod~requestUrl'
-      - 'azure-arm-network.Subnets#beginDeleteMethod~regex'
       - 'azure-arm-network.Subnets#beginDeleteMethod~requestUrl'
       - 'azure-arm-network.Subnets#beginDeleteMethod~queryParameters'
       - 'azure-arm-network.Subnets#beginDeleteMethod~requestUrl'
       - 'azure-arm-network.Subnets#beginDeleteMethod~httpRequest'
       - 'azure-arm-network.Subnets#beginDeleteMethod~headerName'
-  - uid: 'azure-arm-network.Subnets#get'
-    id: 'azure-arm-network.Subnets#get'
-    parent: azure-arm-network.Subnets
-    name: 'get(resourceGroupName, virtualNetworkName, subnetName, options, callback)'
-    summary: The Get subnet operation retrieves information about the specified subnet.
-    fullName: >-
-      azure-arm-network.Subnets.get(resourceGroupName, virtualNetworkName,
-      subnetName, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: virtualNetworkName
-          type:
-            - string
-          description: The name of the virtual network.
-        - id: subnetName
-          type:
-            - string
-          description: The name of the subnet.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.expand
-          type:
-            - string
-          description: expand references resources.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:Subnet> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function get(resourceGroupName, virtualNetworkName, subnetName, options,
-        callback)
-    children:
-      - 'azure-arm-network.Subnets#get~client'
-      - 'azure-arm-network.Subnets#get~callback'
-      - 'azure-arm-network.Subnets#get~options'
-      - 'azure-arm-network.Subnets#get~expand'
-      - 'azure-arm-network.Subnets#get~requestUrl'
-      - 'azure-arm-network.Subnets#get~requestUrl'
-      - 'azure-arm-network.Subnets#get~requestUrl'
-      - 'azure-arm-network.Subnets#get~requestUrl'
-      - 'azure-arm-network.Subnets#get~requestUrl'
-      - 'azure-arm-network.Subnets#get~regex'
-      - 'azure-arm-network.Subnets#get~requestUrl'
-      - 'azure-arm-network.Subnets#get~queryParameters'
-      - 'azure-arm-network.Subnets#get~requestUrl'
-      - 'azure-arm-network.Subnets#get~httpRequest'
-      - 'azure-arm-network.Subnets#get~headerName'
-  - uid: 'azure-arm-network.Subnets#createOrUpdate'
-    id: 'azure-arm-network.Subnets#createOrUpdate'
-    parent: azure-arm-network.Subnets
-    name: >-
-      createOrUpdate(resourceGroupName, virtualNetworkName, subnetName,
-      subnetParameters, options, callback)
-    summary: |-
-      The Put Subnet operation creates/updates a subnet in the specified virtual
-      network
-    fullName: >-
-      azure-arm-network.Subnets.createOrUpdate(resourceGroupName,
-      virtualNetworkName, subnetName, subnetParameters, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: virtualNetworkName
-          type:
-            - string
-          description: The name of the virtual network.
-        - id: subnetName
-          type:
-            - string
-          description: The name of the subnet.
-        - id: subnetParameters
-          type:
-            - object
-          description: |-
-            Parameters supplied to the create/update
-            Subnet operation
-        - id: subnetParameters.addressPrefix
-          type:
-            - string
-          description: |-
-            Gets or sets Address
-            prefix for the subnet.
-          optional: true
-        - id: subnetParameters.networkSecurityGroup
-          type:
-            - object
-          description: |-
-            Gets or sets the
-            reference of the NetworkSecurityGroup resource
-          optional: true
-        - id: subnetParameters.networkSecurityGroup.securityRules
-          type:
-            - array
-          description: |-
-            Gets
-            or sets security rules of network security group
-          optional: true
-        - id: subnetParameters.networkSecurityGroup.defaultSecurityRules
-          type:
-            - array
-          description: Gets or default security rules of network security group
-          optional: true
-        - id: subnetParameters.networkSecurityGroup.resourceGuid
-          type:
-            - string
-          description: >-
-            Gets
-
-            or sets resource guid property of the network security group
-            resource
-          optional: true
-        - id: subnetParameters.networkSecurityGroup.provisioningState
-          type:
-            - string
-          description: >-
-            Gets provisioning state of the PublicIP resource
-            Updating/Deleting/Failed
-          optional: true
-        - id: subnetParameters.networkSecurityGroup.etag
-          type:
-            - string
-          description: |-
-            Gets a unique
-            read-only string that changes whenever the resource is updated
-          optional: true
-        - id: subnetParameters.networkSecurityGroup.id
-          type:
-            - string
-          description: Resource Id
-          optional: true
-        - id: subnetParameters.networkSecurityGroup.location
-          type:
-            - string
-          description: |-
-            Resource
-            location
-          optional: true
-        - id: subnetParameters.networkSecurityGroup.tags
-          type:
-            - object
-          description: Resource tags
-          optional: true
-        - id: subnetParameters.routeTable
-          type:
-            - object
-          description: |-
-            Gets or sets the reference of
-            the RouteTable resource
-          optional: true
-        - id: subnetParameters.routeTable.routes
-          type:
-            - array
-          description: |-
-            Gets or sets Routes in
-            a Route Table
-          optional: true
-        - id: subnetParameters.routeTable.provisioningState
-          type:
-            - string
-          description: |-
-            Gets
-            provisioning state of the resource Updating/Deleting/Failed
-          optional: true
-        - id: subnetParameters.routeTable.etag
-          type:
-            - string
-          description: |-
-            Gets a unique read-only
-            string that changes whenever the resource is updated
-          optional: true
-        - id: subnetParameters.routeTable.id
-          type:
-            - string
-          description: Resource Id
-          optional: true
-        - id: subnetParameters.routeTable.location
-          type:
-            - string
-          description: Resource location
-          optional: true
-        - id: subnetParameters.routeTable.tags
-          type:
-            - object
-          description: Resource tags
-          optional: true
-        - id: subnetParameters.resourceNavigationLinks
-          type:
-            - array
-          description: |-
-            Gets array of
-            references to the external resources using subnet
-          optional: true
-        - id: subnetParameters.provisioningState
-          type:
-            - string
-          description: |-
-            Gets provisioning
-            state of the resource
-          optional: true
-        - id: subnetParameters.name
-          type:
-            - string
-          description: >-
-            Gets or sets the name of the
-
-            resource that is unique within a resource group. This name can be
-            used to
-
-            access the resource
-          optional: true
-        - id: subnetParameters.etag
-          type:
-            - string
-          description: |-
-            A unique read-only string that
-            changes whenever the resource is updated
-          optional: true
-        - id: subnetParameters.id
-          type:
-            - string
-          description: Resource Id
-          optional: true
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:Subnet> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function createOrUpdate(resourceGroupName, virtualNetworkName,
-        subnetName, subnetParameters, options, callback)
-    children:
-      - 'azure-arm-network.Subnets#createOrUpdate~client'
-      - 'azure-arm-network.Subnets#createOrUpdate~callback'
-      - 'azure-arm-network.Subnets#createOrUpdate~options'
   - uid: 'azure-arm-network.Subnets#beginCreateOrUpdate'
     id: 'azure-arm-network.Subnets#beginCreateOrUpdate'
     parent: azure-arm-network.Subnets
     name: >-
       beginCreateOrUpdate(resourceGroupName, virtualNetworkName, subnetName,
       subnetParameters, options, callback)
-    summary: |-
-      The Put Subnet operation creates/updates a subnet in the specified virtual
-      network
+    summary: Creates or updates a subnet in the specified virtual network.
     fullName: >-
       azure-arm-network.Subnets.beginCreateOrUpdate(resourceGroupName,
       virtualNetworkName, subnetName, subnetParameters, options, callback)
@@ -500,153 +558,151 @@ items:
           type:
             - object
           description: |-
-            Parameters supplied to the create/update
-            Subnet operation
+            Parameters supplied to the create or update
+            subnet operation.
         - id: subnetParameters.addressPrefix
           type:
             - string
           description: |-
-            Gets or sets Address
-            prefix for the subnet.
+            The address prefix for the
+            subnet.
           optional: true
         - id: subnetParameters.networkSecurityGroup
           type:
             - object
           description: |-
-            Gets or sets the
-            reference of the NetworkSecurityGroup resource
+            The reference of the
+            NetworkSecurityGroup resource.
           optional: true
         - id: subnetParameters.networkSecurityGroup.securityRules
           type:
             - array
           description: |-
-            Gets
-            or sets security rules of network security group
+            A
+            collection of security rules of the network security group.
           optional: true
         - id: subnetParameters.networkSecurityGroup.defaultSecurityRules
           type:
             - array
-          description: Gets or default security rules of network security group
+          description: The default security rules of network security group.
           optional: true
         - id: subnetParameters.networkSecurityGroup.resourceGuid
           type:
             - string
-          description: >-
-            Gets
-
-            or sets resource guid property of the network security group
-            resource
+          description: |-
+            The
+            resource GUID property of the network security group resource.
           optional: true
         - id: subnetParameters.networkSecurityGroup.provisioningState
           type:
             - string
           description: >-
-            Gets provisioning state of the PublicIP resource
-            Updating/Deleting/Failed
+            The provisioning state of the public IP resource. Possible values
+            are:
+
+            'Updating', 'Deleting', and 'Failed'.
           optional: true
         - id: subnetParameters.networkSecurityGroup.etag
           type:
             - string
           description: |-
-            Gets a unique
-            read-only string that changes whenever the resource is updated
+            A unique
+            read-only string that changes whenever the resource is updated.
           optional: true
         - id: subnetParameters.networkSecurityGroup.id
           type:
             - string
-          description: Resource Id
+          description: Resource ID.
           optional: true
         - id: subnetParameters.networkSecurityGroup.location
           type:
             - string
           description: |-
             Resource
-            location
+            location.
           optional: true
         - id: subnetParameters.networkSecurityGroup.tags
           type:
             - object
-          description: Resource tags
+          description: Resource tags.
           optional: true
         - id: subnetParameters.routeTable
           type:
             - object
           description: |-
-            Gets or sets the reference of
-            the RouteTable resource
+            The reference of the
+            RouteTable resource.
           optional: true
         - id: subnetParameters.routeTable.routes
           type:
             - array
           description: |-
-            Gets or sets Routes in
-            a Route Table
+            Collection of routes
+            contained within a route table.
           optional: true
         - id: subnetParameters.routeTable.provisioningState
           type:
             - string
           description: |-
-            Gets
-            provisioning state of the resource Updating/Deleting/Failed
+            The
+            provisioning state of the resource. Possible values are: 'Updating',
+            'Deleting', and 'Failed'.
           optional: true
         - id: subnetParameters.routeTable.etag
           type:
             - string
           description: |-
             Gets a unique read-only
-            string that changes whenever the resource is updated
+            string that changes whenever the resource is updated.
           optional: true
         - id: subnetParameters.routeTable.id
           type:
             - string
-          description: Resource Id
+          description: Resource ID.
           optional: true
         - id: subnetParameters.routeTable.location
           type:
             - string
-          description: Resource location
+          description: Resource location.
           optional: true
         - id: subnetParameters.routeTable.tags
           type:
             - object
-          description: Resource tags
+          description: Resource tags.
           optional: true
         - id: subnetParameters.resourceNavigationLinks
           type:
             - array
           description: |-
-            Gets array of
-            references to the external resources using subnet
+            Gets an array of
+            references to the external resources using subnet.
           optional: true
         - id: subnetParameters.provisioningState
           type:
             - string
           description: |-
-            Gets provisioning
-            state of the resource
+            The provisioning state
+            of the resource.
           optional: true
         - id: subnetParameters.name
           type:
             - string
-          description: >-
-            Gets or sets the name of the
-
-            resource that is unique within a resource group. This name can be
-            used to
-
-            access the resource
+          description: |-
+            The name of the resource that is
+            unique within a resource group. This name can be used to access the
+            resource.
           optional: true
         - id: subnetParameters.etag
           type:
             - string
           description: |-
             A unique read-only string that
-            changes whenever the resource is updated
+            changes whenever the resource is updated.
           optional: true
         - id: subnetParameters.id
           type:
             - string
-          description: Resource Id
+          description: Resource ID.
           optional: true
         - id: options
           type:
@@ -685,12 +741,12 @@ items:
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~client'
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~callback'
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~options'
+      - 'azure-arm-network.Subnets#beginCreateOrUpdate~apiVersion'
+      - 'azure-arm-network.Subnets#beginCreateOrUpdate~baseUrl'
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~requestUrl'
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~requestUrl'
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~requestUrl'
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.Subnets#beginCreateOrUpdate~requestUrl'
-      - 'azure-arm-network.Subnets#beginCreateOrUpdate~regex'
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~requestUrl'
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~queryParameters'
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~requestUrl'
@@ -702,75 +758,11 @@ items:
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~requestModel'
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~requestContent'
       - 'azure-arm-network.Subnets#beginCreateOrUpdate~serializationError'
-  - uid: 'azure-arm-network.Subnets#list'
-    id: 'azure-arm-network.Subnets#list'
-    parent: azure-arm-network.Subnets
-    name: 'list(resourceGroupName, virtualNetworkName, options, callback)'
-    summary: The List subnets operation retrieves all the subnets in a virtual network.
-    fullName: >-
-      azure-arm-network.Subnets.list(resourceGroupName, virtualNetworkName,
-      options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: virtualNetworkName
-          type:
-            - string
-          description: The name of the virtual network.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:SubnetListResult> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function list(resourceGroupName, virtualNetworkName, options, callback)'
-    children:
-      - 'azure-arm-network.Subnets#list~client'
-      - 'azure-arm-network.Subnets#list~callback'
-      - 'azure-arm-network.Subnets#list~options'
-      - 'azure-arm-network.Subnets#list~requestUrl'
-      - 'azure-arm-network.Subnets#list~requestUrl'
-      - 'azure-arm-network.Subnets#list~requestUrl'
-      - 'azure-arm-network.Subnets#list~requestUrl'
-      - 'azure-arm-network.Subnets#list~regex'
-      - 'azure-arm-network.Subnets#list~requestUrl'
-      - 'azure-arm-network.Subnets#list~queryParameters'
-      - 'azure-arm-network.Subnets#list~requestUrl'
-      - 'azure-arm-network.Subnets#list~httpRequest'
-      - 'azure-arm-network.Subnets#list~headerName'
   - uid: 'azure-arm-network.Subnets#listNext'
     id: 'azure-arm-network.Subnets#listNext'
     parent: azure-arm-network.Subnets
     name: 'listNext(nextPageLink, options, callback)'
-    summary: The List subnets operation retrieves all the subnets in a virtual network.
+    summary: Gets all subnets in a virtual network.
     fullName: 'azure-arm-network.Subnets.listNext(nextPageLink, options, callback)'
     type: Method
     syntax:
@@ -817,8 +809,6 @@ items:
       - 'azure-arm-network.Subnets#listNext~callback'
       - 'azure-arm-network.Subnets#listNext~options'
       - 'azure-arm-network.Subnets#listNext~requestUrl'
-      - 'azure-arm-network.Subnets#listNext~requestUrl'
-      - 'azure-arm-network.Subnets#listNext~regex'
       - 'azure-arm-network.Subnets#listNext~requestUrl'
       - 'azure-arm-network.Subnets#listNext~httpRequest'
       - 'azure-arm-network.Subnets#listNext~headerName'

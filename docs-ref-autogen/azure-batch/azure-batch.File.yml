@@ -15,10 +15,10 @@ items:
       - 'azure-batch.File#client'
       - 'azure-batch.File#deleteFromTask'
       - 'azure-batch.File#getFromTask'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask'
+      - 'azure-batch.File#getPropertiesFromTask'
       - 'azure-batch.File#deleteFromComputeNode'
       - 'azure-batch.File#getFromComputeNode'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode'
+      - 'azure-batch.File#getPropertiesFromComputeNode'
       - 'azure-batch.File#listFromTask'
       - 'azure-batch.File#listFromComputeNode'
       - 'azure-batch.File#listFromTaskNext'
@@ -49,12 +49,12 @@ items:
   - uid: 'azure-batch.File#deleteFromTask'
     id: 'azure-batch.File#deleteFromTask'
     parent: azure-batch.File
-    name: 'deleteFromTask(jobId, taskId, fileName, options, callback)'
+    name: 'deleteFromTask(jobId, taskId, filePath, options, callback)'
     summary: |-
       Deletes the specified task file from the compute node where the
       task ran.
     fullName: >-
-      azure-batch.File.deleteFromTask(jobId, taskId, fileName, options,
+      azure-batch.File.deleteFromTask(jobId, taskId, filePath, options,
       callback)
     type: Method
     syntax:
@@ -67,7 +67,7 @@ items:
           type:
             - string
           description: The ID of the task whose file you want to delete.
-        - id: fileName
+        - id: filePath
           type:
             - string
           description: The path to the task file that you want to delete.
@@ -82,7 +82,7 @@ items:
           description: >-
             Whether to delete children of a
 
-            directory. If the fileName parameter represents a directory instead
+            directory. If the filePath parameter represents a directory instead
             of a
 
             file, you can set recursive to true to delete the directory and all
@@ -113,7 +113,7 @@ items:
           optional: true
         - id: options.fileDeleteFromTaskOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -135,10 +135,12 @@ items:
           description: >-
             The time the
 
-            request was issued. If not specified, this header will be
-            automatically
+            request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -164,7 +166,7 @@ items:
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function deleteFromTask(jobId, taskId, fileName, options, callback)'
+      content: 'function deleteFromTask(jobId, taskId, filePath, options, callback)'
     children:
       - 'azure-batch.File#deleteFromTask~client'
       - 'azure-batch.File#deleteFromTask~callback'
@@ -191,9 +193,9 @@ items:
   - uid: 'azure-batch.File#getFromTask'
     id: 'azure-batch.File#getFromTask'
     parent: azure-batch.File
-    name: 'getFromTask(jobId, taskId, fileName, options, callback)'
+    name: 'getFromTask(jobId, taskId, filePath, options, callback)'
     summary: Returns the content of the specified task file.
-    fullName: 'azure-batch.File.getFromTask(jobId, taskId, fileName, options, callback)'
+    fullName: 'azure-batch.File.getFromTask(jobId, taskId, filePath, options, callback)'
     type: Method
     syntax:
       parameters:
@@ -205,7 +207,7 @@ items:
           type:
             - string
           description: The ID of the task whose file you want to retrieve.
-        - id: fileName
+        - id: filePath
           type:
             - string
           description: |-
@@ -236,7 +238,7 @@ items:
           optional: true
         - id: options.fileGetFromTaskOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -258,10 +260,10 @@ items:
           description: >-
             The time the request
 
-            was issued. If not specified, this header will be automatically
-            populated
+            was issued. Client libraries typically set this to the current
+            system clock
 
-            with the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.fileGetFromTaskOptions.ocpRange
           type:
@@ -278,23 +280,29 @@ items:
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has been
-            modified since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.fileGetFromTaskOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify
+            A timestamp
 
-            this header to perform the operation only if the resource has not
-            been
+            indicating the last modified time of the resource known to the
+            client. The
 
-            modified since the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -320,7 +328,7 @@ items:
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function getFromTask(jobId, taskId, fileName, options, callback)'
+      content: 'function getFromTask(jobId, taskId, filePath, options, callback)'
     children:
       - 'azure-batch.File#getFromTask~client'
       - 'azure-batch.File#getFromTask~callback'
@@ -349,14 +357,14 @@ items:
       - 'azure-batch.File#getFromTask~requestUrl'
       - 'azure-batch.File#getFromTask~httpRequest'
       - 'azure-batch.File#getFromTask~headerName'
-  - uid: 'azure-batch.File#getNodeFilePropertiesFromTask'
-    id: 'azure-batch.File#getNodeFilePropertiesFromTask'
+  - uid: 'azure-batch.File#getPropertiesFromTask'
+    id: 'azure-batch.File#getPropertiesFromTask'
     parent: azure-batch.File
-    name: 'getNodeFilePropertiesFromTask(jobId, taskId, fileName, options, callback)'
+    name: 'getPropertiesFromTask(jobId, taskId, filePath, options, callback)'
     summary: Gets the properties of the specified task file.
     fullName: >-
-      azure-batch.File.getNodeFilePropertiesFromTask(jobId, taskId, fileName,
-      options, callback)
+      azure-batch.File.getPropertiesFromTask(jobId, taskId, filePath, options,
+      callback)
     type: Method
     syntax:
       parameters:
@@ -370,7 +378,7 @@ items:
           description: |-
             The ID of the task whose file you want to get the
             properties of.
-        - id: fileName
+        - id: filePath
           type:
             - string
           description: |-
@@ -381,23 +389,27 @@ items:
             - object
           description: Optional Parameters.
           optional: true
-        - id: options.fileGetNodeFilePropertiesFromTaskOptions
+        - id: options.fileGetPropertiesFromTaskOptions
           type:
             - object
-          description: Additional parameters for the operation
+          description: |-
+            Additional
+            parameters for the operation
           optional: true
-        - id: options.fileGetNodeFilePropertiesFromTaskOptions.timeout
+        - id: options.fileGetPropertiesFromTaskOptions.timeout
           type:
             - number
           description: >-
-            The maximum time that the server can spend processing the request,
-            in
+            The
 
-            seconds. The default is 30 seconds.
+            maximum time that the server can spend processing the request, in
+            seconds.
+
+            The default is 30 seconds.
           optional: true
-        - id: options.fileGetNodeFilePropertiesFromTaskOptions.clientRequestId
+        - id: options.fileGetPropertiesFromTaskOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -406,43 +418,53 @@ items:
 
             such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
           optional: true
-        - id: >-
-            options.fileGetNodeFilePropertiesFromTaskOptions.returnClientRequestId
+        - id: options.fileGetPropertiesFromTaskOptions.returnClientRequestId
           type:
             - boolean
-          description: >-
-            Whether the server should return the client-request-id in the
-            response.
-          optional: true
-        - id: options.fileGetNodeFilePropertiesFromTaskOptions.ocpDate
-          type:
-            - date
           description: |-
-            The
-            time the request was issued. If not specified, this header will be
-            automatically populated with the current system clock time.
+            Whether the
+            server should return the client-request-id in the response.
           optional: true
-        - id: options.fileGetNodeFilePropertiesFromTaskOptions.ifModifiedSince
+        - id: options.fileGetPropertiesFromTaskOptions.ocpDate
           type:
             - date
           description: >-
-            Specify
+            The time
 
-            this header to perform the operation only if the resource has been
-            modified
+            the request was issued. Client libraries typically set this to the
+            current
 
-            since the specified date/time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
-        - id: options.fileGetNodeFilePropertiesFromTaskOptions.ifUnmodifiedSince
+        - id: options.fileGetPropertiesFromTaskOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify
+            A
 
-            this header to perform the operation only if the resource has not
-            been
+            timestamp indicating the last modified time of the resource known to
+            the
 
-            modified since the specified date/time.
+            client. The operation will be performed only if the resource on the
+            service
+
+            has been modified since the specified time.
+          optional: true
+        - id: options.fileGetPropertiesFromTaskOptions.ifUnmodifiedSince
+          type:
+            - date
+          description: >-
+            A
+
+            timestamp indicating the last modified time of the resource known to
+            the
+
+            client. The operation will be performed only if the resource on the
+            service
+
+            has not been modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -469,42 +491,41 @@ items:
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
       content: >-
-        function getNodeFilePropertiesFromTask(jobId, taskId, fileName, options,
+        function getPropertiesFromTask(jobId, taskId, filePath, options,
         callback)
     children:
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~client'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~callback'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~options'
-      - >-
-        azure-batch.File#getNodeFilePropertiesFromTask~fileGetNodeFilePropertiesFromTaskOptions
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~timeout'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~clientRequestId'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~returnClientRequestId'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~ocpDate'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~ifModifiedSince'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~ifUnmodifiedSince'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~timeout'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~clientRequestId'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~returnClientRequestId'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~ocpDate'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~ifModifiedSince'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~ifUnmodifiedSince'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~baseUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~requestUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~requestUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~requestUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~requestUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~queryParameters'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~requestUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~httpRequest'
-      - 'azure-batch.File#getNodeFilePropertiesFromTask~headerName'
+      - 'azure-batch.File#getPropertiesFromTask~client'
+      - 'azure-batch.File#getPropertiesFromTask~callback'
+      - 'azure-batch.File#getPropertiesFromTask~options'
+      - 'azure-batch.File#getPropertiesFromTask~fileGetPropertiesFromTaskOptions'
+      - 'azure-batch.File#getPropertiesFromTask~timeout'
+      - 'azure-batch.File#getPropertiesFromTask~clientRequestId'
+      - 'azure-batch.File#getPropertiesFromTask~returnClientRequestId'
+      - 'azure-batch.File#getPropertiesFromTask~ocpDate'
+      - 'azure-batch.File#getPropertiesFromTask~ifModifiedSince'
+      - 'azure-batch.File#getPropertiesFromTask~ifUnmodifiedSince'
+      - 'azure-batch.File#getPropertiesFromTask~timeout'
+      - 'azure-batch.File#getPropertiesFromTask~clientRequestId'
+      - 'azure-batch.File#getPropertiesFromTask~returnClientRequestId'
+      - 'azure-batch.File#getPropertiesFromTask~ocpDate'
+      - 'azure-batch.File#getPropertiesFromTask~ifModifiedSince'
+      - 'azure-batch.File#getPropertiesFromTask~ifUnmodifiedSince'
+      - 'azure-batch.File#getPropertiesFromTask~baseUrl'
+      - 'azure-batch.File#getPropertiesFromTask~requestUrl'
+      - 'azure-batch.File#getPropertiesFromTask~requestUrl'
+      - 'azure-batch.File#getPropertiesFromTask~requestUrl'
+      - 'azure-batch.File#getPropertiesFromTask~requestUrl'
+      - 'azure-batch.File#getPropertiesFromTask~queryParameters'
+      - 'azure-batch.File#getPropertiesFromTask~requestUrl'
+      - 'azure-batch.File#getPropertiesFromTask~httpRequest'
+      - 'azure-batch.File#getPropertiesFromTask~headerName'
   - uid: 'azure-batch.File#deleteFromComputeNode'
     id: 'azure-batch.File#deleteFromComputeNode'
     parent: azure-batch.File
-    name: 'deleteFromComputeNode(poolId, nodeId, fileName, options, callback)'
+    name: 'deleteFromComputeNode(poolId, nodeId, filePath, options, callback)'
     summary: Deletes the specified task file from the compute node.
     fullName: >-
-      azure-batch.File.deleteFromComputeNode(poolId, nodeId, fileName, options,
+      azure-batch.File.deleteFromComputeNode(poolId, nodeId, filePath, options,
       callback)
     type: Method
     syntax:
@@ -519,7 +540,7 @@ items:
           description: |-
             The ID of the compute node from which you want to
             delete the file.
-        - id: fileName
+        - id: filePath
           type:
             - string
           description: The path to the file that you want to delete.
@@ -534,7 +555,7 @@ items:
           description: >-
             Whether to delete children of a
 
-            directory. If the fileName parameter represents a directory instead
+            directory. If the filePath parameter represents a directory instead
             of a
 
             file, you can set recursive to true to delete the directory and all
@@ -565,12 +586,14 @@ items:
           optional: true
         - id: options.fileDeleteFromComputeNodeOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
-            The caller-generated request identity, in the form of a GUID with no
+            The
 
-            decoration such as curly braces, e.g.
-            9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
           optional: true
         - id: options.fileDeleteFromComputeNodeOptions.returnClientRequestId
           type:
@@ -585,10 +608,12 @@ items:
           description: >-
             The time
 
-            the request was issued. If not specified, this header will be
-            automatically
+            the request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -615,7 +640,7 @@ items:
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
       content: >-
-        function deleteFromComputeNode(poolId, nodeId, fileName, options,
+        function deleteFromComputeNode(poolId, nodeId, filePath, options,
         callback)
     children:
       - 'azure-batch.File#deleteFromComputeNode~client'
@@ -643,10 +668,10 @@ items:
   - uid: 'azure-batch.File#getFromComputeNode'
     id: 'azure-batch.File#getFromComputeNode'
     parent: azure-batch.File
-    name: 'getFromComputeNode(poolId, nodeId, fileName, options, callback)'
+    name: 'getFromComputeNode(poolId, nodeId, filePath, options, callback)'
     summary: Returns the content of the specified task file.
     fullName: >-
-      azure-batch.File.getFromComputeNode(poolId, nodeId, fileName, options,
+      azure-batch.File.getFromComputeNode(poolId, nodeId, filePath, options,
       callback)
     type: Method
     syntax:
@@ -659,7 +684,7 @@ items:
           type:
             - string
           description: The ID of the compute node that contains the file.
-        - id: fileName
+        - id: filePath
           type:
             - string
           description: |-
@@ -690,7 +715,7 @@ items:
           optional: true
         - id: options.fileGetFromComputeNodeOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -712,10 +737,12 @@ items:
           description: >-
             The time the
 
-            request was issued. If not specified, this header will be
-            automatically
+            request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.fileGetFromComputeNodeOptions.ocpRange
           type:
@@ -732,19 +759,29 @@ items:
           type:
             - date
           description: >-
-            Specify this header to perform the operation only if the resource
-            has been
+            A
 
-            modified since the specified date/time.
+            timestamp indicating the last modified time of the resource known to
+            the
+
+            client. The operation will be performed only if the resource on the
+            service
+
+            has been modified since the specified time.
           optional: true
         - id: options.fileGetFromComputeNodeOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this header to perform the operation only if the resource
-            has not
+            A
 
-            been modified since the specified date/time.
+            timestamp indicating the last modified time of the resource known to
+            the
+
+            client. The operation will be performed only if the resource on the
+            service
+
+            has not been modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -770,7 +807,7 @@ items:
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function getFromComputeNode(poolId, nodeId, fileName, options, callback)'
+      content: 'function getFromComputeNode(poolId, nodeId, filePath, options, callback)'
     children:
       - 'azure-batch.File#getFromComputeNode~client'
       - 'azure-batch.File#getFromComputeNode~callback'
@@ -799,16 +836,14 @@ items:
       - 'azure-batch.File#getFromComputeNode~requestUrl'
       - 'azure-batch.File#getFromComputeNode~httpRequest'
       - 'azure-batch.File#getFromComputeNode~headerName'
-  - uid: 'azure-batch.File#getNodeFilePropertiesFromComputeNode'
-    id: 'azure-batch.File#getNodeFilePropertiesFromComputeNode'
+  - uid: 'azure-batch.File#getPropertiesFromComputeNode'
+    id: 'azure-batch.File#getPropertiesFromComputeNode'
     parent: azure-batch.File
-    name: >-
-      getNodeFilePropertiesFromComputeNode(poolId, nodeId, fileName, options,
-      callback)
+    name: 'getPropertiesFromComputeNode(poolId, nodeId, filePath, options, callback)'
     summary: Gets the properties of the specified compute node file.
     fullName: >-
-      azure-batch.File.getNodeFilePropertiesFromComputeNode(poolId, nodeId,
-      fileName, options, callback)
+      azure-batch.File.getPropertiesFromComputeNode(poolId, nodeId, filePath,
+      options, callback)
     type: Method
     syntax:
       parameters:
@@ -820,7 +855,7 @@ items:
           type:
             - string
           description: The ID of the compute node that contains the file.
-        - id: fileName
+        - id: filePath
           type:
             - string
           description: |-
@@ -831,70 +866,82 @@ items:
             - object
           description: Optional Parameters.
           optional: true
-        - id: options.fileGetNodeFilePropertiesFromComputeNodeOptions
+        - id: options.fileGetPropertiesFromComputeNodeOptions
           type:
             - object
-          description: Additional parameters for the operation
+          description: |-
+            Additional
+            parameters for the operation
           optional: true
-        - id: options.fileGetNodeFilePropertiesFromComputeNodeOptions.timeout
+        - id: options.fileGetPropertiesFromComputeNodeOptions.timeout
           type:
             - number
           description: >-
+            The maximum time that the server can spend processing the request,
+            in
+
+            seconds. The default is 30 seconds.
+          optional: true
+        - id: options.fileGetPropertiesFromComputeNodeOptions.clientRequestId
+          type:
+            - azure-batch.uuid
+          description: >-
             The
 
-            maximum time that the server can spend processing the request, in
-            seconds.
+            caller-generated request identity, in the form of a GUID with no
+            decoration
 
-            The default is 30 seconds.
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
           optional: true
         - id: >-
-            options.fileGetNodeFilePropertiesFromComputeNodeOptions.clientRequestId
-          type:
-            - string
-          description: >-
-            The caller-generated request identity, in the form of a GUID with no
-
-            decoration such as curly braces, e.g.
-            9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
-          optional: true
-        - id: >-
-            options.fileGetNodeFilePropertiesFromComputeNodeOptions.returnClientRequestId
+            options.fileGetPropertiesFromComputeNodeOptions.returnClientRequestId
           type:
             - boolean
           description: >-
             Whether the server should return the client-request-id in the
             response.
           optional: true
-        - id: options.fileGetNodeFilePropertiesFromComputeNodeOptions.ocpDate
+        - id: options.fileGetPropertiesFromComputeNodeOptions.ocpDate
           type:
             - date
           description: >-
-            The time
+            The
 
-            the request was issued. If not specified, this header will be
-            automatically
+            time the request was issued. Client libraries typically set this to
+            the
 
-            populated with the current system clock time.
+            current system clock time; set it explicitly if you are calling the
+            REST API
+
+            directly.
           optional: true
-        - id: >-
-            options.fileGetNodeFilePropertiesFromComputeNodeOptions.ifModifiedSince
+        - id: options.fileGetPropertiesFromComputeNodeOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this header to perform the operation only if the resource
-            has been
+            A
 
-            modified since the specified date/time.
+            timestamp indicating the last modified time of the resource known to
+            the
+
+            client. The operation will be performed only if the resource on the
+            service
+
+            has been modified since the specified time.
           optional: true
-        - id: >-
-            options.fileGetNodeFilePropertiesFromComputeNodeOptions.ifUnmodifiedSince
+        - id: options.fileGetPropertiesFromComputeNodeOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this header to perform the operation only if the resource
-            has not
+            A
 
-            been modified since the specified date/time.
+            timestamp indicating the last modified time of the resource known to
+            the
+
+            client. The operation will be performed only if the resource on the
+            service
+
+            has not been modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -921,37 +968,35 @@ items:
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
       content: >-
-        function getNodeFilePropertiesFromComputeNode(poolId, nodeId, fileName,
-        options, callback)
+        function getPropertiesFromComputeNode(poolId, nodeId, filePath, options,
+        callback)
     children:
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~client'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~callback'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~options'
+      - 'azure-batch.File#getPropertiesFromComputeNode~client'
+      - 'azure-batch.File#getPropertiesFromComputeNode~callback'
+      - 'azure-batch.File#getPropertiesFromComputeNode~options'
       - >-
-        azure-batch.File#getNodeFilePropertiesFromComputeNode~fileGetNodeFilePropertiesFromComputeNodeOptions
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~timeout'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~clientRequestId'
-      - >-
-        azure-batch.File#getNodeFilePropertiesFromComputeNode~returnClientRequestId
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~ocpDate'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~ifModifiedSince'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~ifUnmodifiedSince'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~timeout'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~clientRequestId'
-      - >-
-        azure-batch.File#getNodeFilePropertiesFromComputeNode~returnClientRequestId
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~ocpDate'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~ifModifiedSince'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~ifUnmodifiedSince'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~baseUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~requestUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~requestUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~requestUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~requestUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~queryParameters'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~requestUrl'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~httpRequest'
-      - 'azure-batch.File#getNodeFilePropertiesFromComputeNode~headerName'
+        azure-batch.File#getPropertiesFromComputeNode~fileGetPropertiesFromComputeNodeOptions
+      - 'azure-batch.File#getPropertiesFromComputeNode~timeout'
+      - 'azure-batch.File#getPropertiesFromComputeNode~clientRequestId'
+      - 'azure-batch.File#getPropertiesFromComputeNode~returnClientRequestId'
+      - 'azure-batch.File#getPropertiesFromComputeNode~ocpDate'
+      - 'azure-batch.File#getPropertiesFromComputeNode~ifModifiedSince'
+      - 'azure-batch.File#getPropertiesFromComputeNode~ifUnmodifiedSince'
+      - 'azure-batch.File#getPropertiesFromComputeNode~timeout'
+      - 'azure-batch.File#getPropertiesFromComputeNode~clientRequestId'
+      - 'azure-batch.File#getPropertiesFromComputeNode~returnClientRequestId'
+      - 'azure-batch.File#getPropertiesFromComputeNode~ocpDate'
+      - 'azure-batch.File#getPropertiesFromComputeNode~ifModifiedSince'
+      - 'azure-batch.File#getPropertiesFromComputeNode~ifUnmodifiedSince'
+      - 'azure-batch.File#getPropertiesFromComputeNode~baseUrl'
+      - 'azure-batch.File#getPropertiesFromComputeNode~requestUrl'
+      - 'azure-batch.File#getPropertiesFromComputeNode~requestUrl'
+      - 'azure-batch.File#getPropertiesFromComputeNode~requestUrl'
+      - 'azure-batch.File#getPropertiesFromComputeNode~requestUrl'
+      - 'azure-batch.File#getPropertiesFromComputeNode~queryParameters'
+      - 'azure-batch.File#getPropertiesFromComputeNode~requestUrl'
+      - 'azure-batch.File#getPropertiesFromComputeNode~httpRequest'
+      - 'azure-batch.File#getPropertiesFromComputeNode~headerName'
   - uid: 'azure-batch.File#listFromTask'
     id: 'azure-batch.File#listFromTask'
     parent: azure-batch.File
@@ -1020,7 +1065,7 @@ items:
           optional: true
         - id: options.fileListFromTaskOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -1042,10 +1087,10 @@ items:
           description: >-
             The time the request
 
-            was issued. If not specified, this header will be automatically
-            populated
+            was issued. Client libraries typically set this to the current
+            system clock
 
-            with the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -1170,7 +1215,7 @@ items:
           optional: true
         - id: options.fileListFromComputeNodeOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -1192,10 +1237,12 @@ items:
           description: >-
             The time the
 
-            request was issued. If not specified, this header will be
-            automatically
+            request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -1278,7 +1325,7 @@ items:
           optional: true
         - id: options.fileListFromTaskNextOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -1300,10 +1347,12 @@ items:
           description: >-
             The time the
 
-            request was issued. If not specified, this header will be
-            automatically
+            request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -1377,7 +1426,7 @@ items:
           optional: true
         - id: options.fileListFromComputeNodeNextOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The caller-generated request identity, in the form of a GUID with no
 
@@ -1397,10 +1446,12 @@ items:
           description: >-
             The time
 
-            the request was issued. If not specified, this header will be
-            automatically
+            the request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -1464,6 +1515,10 @@ references:
   - uid: number
     name: number
     fullName: number
+    isExternal: true
+  - uid: azure-batch.uuid
+    name: uuid
+    fullName: azure-batch.uuid
     isExternal: true
   - uid: date
     name: date

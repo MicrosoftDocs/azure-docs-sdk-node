@@ -13,8 +13,8 @@ items:
     children:
       - 'azure-batch.Pool.#ctor'
       - 'azure-batch.Pool#client'
-      - 'azure-batch.Pool#listPoolUsageMetrics'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics'
+      - 'azure-batch.Pool#listUsageMetrics'
+      - 'azure-batch.Pool#getAllLifetimeStatistics'
       - 'azure-batch.Pool#add'
       - 'azure-batch.Pool#list'
       - 'azure-batch.Pool#deleteMethod'
@@ -29,7 +29,7 @@ items:
       - 'azure-batch.Pool#updateProperties'
       - 'azure-batch.Pool#upgradeOS'
       - 'azure-batch.Pool#removeNodes'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext'
+      - 'azure-batch.Pool#listUsageMetricsNext'
       - 'azure-batch.Pool#listNext'
   - id: 'azure-batch.Pool.#ctor'
     uid: 'azure-batch.Pool.#ctor'
@@ -54,10 +54,10 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-batch.Pool#listPoolUsageMetrics'
-    id: 'azure-batch.Pool#listPoolUsageMetrics'
+  - uid: 'azure-batch.Pool#listUsageMetrics'
+    id: 'azure-batch.Pool#listUsageMetrics'
     parent: azure-batch.Pool
-    name: 'listPoolUsageMetrics(options, callback)'
+    name: 'listUsageMetrics(options, callback)'
     summary: |-
       Lists the usage metrics, aggregated by pool across individual time
       intervals, for the specified account.
@@ -65,7 +65,7 @@ items:
       If you do not specify a $filter clause including a poolId, the response
       includes all pools that existed in the account in the time range of the
       returned aggregation intervals.
-    fullName: 'azure-batch.Pool.listPoolUsageMetrics(options, callback)'
+    fullName: 'azure-batch.Pool.listUsageMetrics(options, callback)'
     type: Method
     syntax:
       parameters:
@@ -74,42 +74,42 @@ items:
             - object
           description: Optional Parameters.
           optional: true
-        - id: options.poolListPoolUsageMetricsOptions
+        - id: options.poolListUsageMetricsOptions
           type:
             - object
           description: |-
-            Additional
-            parameters for the operation
+            Additional parameters
+            for the operation
           optional: true
-        - id: options.poolListPoolUsageMetricsOptions.startTime
+        - id: options.poolListUsageMetricsOptions.startTime
           type:
             - date
           description: >-
-            The
+            The earliest
 
-            earliest time from which to include metrics. This must be at least
-            two and a
+            time from which to include metrics. This must be at least two and a
+            half
 
-            half hours before the current time. If not specified this defaults
-            to the
+            hours before the current time. If not specified this defaults to the
+            start
 
-            start time of the last aggregation interval currently available.
+            time of the last aggregation interval currently available.
           optional: true
-        - id: options.poolListPoolUsageMetricsOptions.endTime
+        - id: options.poolListUsageMetricsOptions.endTime
           type:
             - date
           description: >-
-            The latest
+            The latest time
 
-            time from which to include metrics. This must be at least two hours
-            before
+            from which to include metrics. This must be at least two hours
+            before the
 
-            the current time. If not specified this defaults to the end time of
-            the last
+            current time. If not specified this defaults to the end time of the
+            last
 
             aggregation interval currently available.
           optional: true
-        - id: options.poolListPoolUsageMetricsOptions.filter
+        - id: options.poolListUsageMetricsOptions.filter
           type:
             - string
           description: >-
@@ -123,54 +123,58 @@ items:
 
             intervals.
           optional: true
-        - id: options.poolListPoolUsageMetricsOptions.maxResults
+        - id: options.poolListUsageMetricsOptions.maxResults
           type:
             - number
           description: >-
-            The
+            The maximum
 
-            maximum number of items to return in the response. A maximum of 1000
-            results
+            number of items to return in the response. A maximum of 1000 results
+            will be
 
-            will be returned.
+            returned.
           optional: true
-        - id: options.poolListPoolUsageMetricsOptions.timeout
+        - id: options.poolListUsageMetricsOptions.timeout
           type:
             - number
           description: >-
+            The maximum
+
+            time that the server can spend processing the request, in seconds.
             The
 
-            maximum time that the server can spend processing the request, in
-            seconds.
-
-            The default is 30 seconds.
+            default is 30 seconds.
           optional: true
-        - id: options.poolListPoolUsageMetricsOptions.clientRequestId
+        - id: options.poolListUsageMetricsOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
-            The caller-generated request identity, in the form of a GUID with no
+            The
 
-            decoration such as curly braces, e.g.
-            9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
           optional: true
-        - id: options.poolListPoolUsageMetricsOptions.returnClientRequestId
+        - id: options.poolListUsageMetricsOptions.returnClientRequestId
           type:
             - boolean
-          description: |-
-            Whether the
-            server should return the client-request-id in the response.
+          description: >-
+            Whether the server should return the client-request-id in the
+            response.
           optional: true
-        - id: options.poolListPoolUsageMetricsOptions.ocpDate
+        - id: options.poolListUsageMetricsOptions.ocpDate
           type:
             - date
           description: >-
             The time the
 
-            request was issued. If not specified, this header will be
-            automatically
+            request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -192,51 +196,51 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object.
-                               See <xref:PoolListPoolUsageMetricsResult> for more
+                               See <xref:PoolListUsageMetricsResult> for more
                                information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function listPoolUsageMetrics(options, callback)'
+      content: 'function listUsageMetrics(options, callback)'
     children:
-      - 'azure-batch.Pool#listPoolUsageMetrics~client'
-      - 'azure-batch.Pool#listPoolUsageMetrics~callback'
-      - 'azure-batch.Pool#listPoolUsageMetrics~options'
-      - 'azure-batch.Pool#listPoolUsageMetrics~poolListPoolUsageMetricsOptions'
-      - 'azure-batch.Pool#listPoolUsageMetrics~startTime'
-      - 'azure-batch.Pool#listPoolUsageMetrics~endTime'
-      - 'azure-batch.Pool#listPoolUsageMetrics~filter'
-      - 'azure-batch.Pool#listPoolUsageMetrics~maxResults'
-      - 'azure-batch.Pool#listPoolUsageMetrics~timeout'
-      - 'azure-batch.Pool#listPoolUsageMetrics~clientRequestId'
-      - 'azure-batch.Pool#listPoolUsageMetrics~returnClientRequestId'
-      - 'azure-batch.Pool#listPoolUsageMetrics~ocpDate'
-      - 'azure-batch.Pool#listPoolUsageMetrics~startTime'
-      - 'azure-batch.Pool#listPoolUsageMetrics~endTime'
-      - 'azure-batch.Pool#listPoolUsageMetrics~filter'
-      - 'azure-batch.Pool#listPoolUsageMetrics~maxResults'
-      - 'azure-batch.Pool#listPoolUsageMetrics~timeout'
-      - 'azure-batch.Pool#listPoolUsageMetrics~clientRequestId'
-      - 'azure-batch.Pool#listPoolUsageMetrics~returnClientRequestId'
-      - 'azure-batch.Pool#listPoolUsageMetrics~ocpDate'
-      - 'azure-batch.Pool#listPoolUsageMetrics~baseUrl'
-      - 'azure-batch.Pool#listPoolUsageMetrics~requestUrl'
-      - 'azure-batch.Pool#listPoolUsageMetrics~queryParameters'
-      - 'azure-batch.Pool#listPoolUsageMetrics~requestUrl'
-      - 'azure-batch.Pool#listPoolUsageMetrics~httpRequest'
-      - 'azure-batch.Pool#listPoolUsageMetrics~headerName'
-  - uid: 'azure-batch.Pool#getAllPoolsLifetimeStatistics'
-    id: 'azure-batch.Pool#getAllPoolsLifetimeStatistics'
+      - 'azure-batch.Pool#listUsageMetrics~client'
+      - 'azure-batch.Pool#listUsageMetrics~callback'
+      - 'azure-batch.Pool#listUsageMetrics~options'
+      - 'azure-batch.Pool#listUsageMetrics~poolListUsageMetricsOptions'
+      - 'azure-batch.Pool#listUsageMetrics~startTime'
+      - 'azure-batch.Pool#listUsageMetrics~endTime'
+      - 'azure-batch.Pool#listUsageMetrics~filter'
+      - 'azure-batch.Pool#listUsageMetrics~maxResults'
+      - 'azure-batch.Pool#listUsageMetrics~timeout'
+      - 'azure-batch.Pool#listUsageMetrics~clientRequestId'
+      - 'azure-batch.Pool#listUsageMetrics~returnClientRequestId'
+      - 'azure-batch.Pool#listUsageMetrics~ocpDate'
+      - 'azure-batch.Pool#listUsageMetrics~startTime'
+      - 'azure-batch.Pool#listUsageMetrics~endTime'
+      - 'azure-batch.Pool#listUsageMetrics~filter'
+      - 'azure-batch.Pool#listUsageMetrics~maxResults'
+      - 'azure-batch.Pool#listUsageMetrics~timeout'
+      - 'azure-batch.Pool#listUsageMetrics~clientRequestId'
+      - 'azure-batch.Pool#listUsageMetrics~returnClientRequestId'
+      - 'azure-batch.Pool#listUsageMetrics~ocpDate'
+      - 'azure-batch.Pool#listUsageMetrics~baseUrl'
+      - 'azure-batch.Pool#listUsageMetrics~requestUrl'
+      - 'azure-batch.Pool#listUsageMetrics~queryParameters'
+      - 'azure-batch.Pool#listUsageMetrics~requestUrl'
+      - 'azure-batch.Pool#listUsageMetrics~httpRequest'
+      - 'azure-batch.Pool#listUsageMetrics~headerName'
+  - uid: 'azure-batch.Pool#getAllLifetimeStatistics'
+    id: 'azure-batch.Pool#getAllLifetimeStatistics'
     parent: azure-batch.Pool
-    name: 'getAllPoolsLifetimeStatistics(options, callback)'
+    name: 'getAllLifetimeStatistics(options, callback)'
     summary: |-
       Gets lifetime summary statistics for all of the pools in the
       specified account.
 
       Statistics are aggregated across all pools that have ever existed in the
       account, from account creation to the last update time of the statistics.
-    fullName: 'azure-batch.Pool.getAllPoolsLifetimeStatistics(options, callback)'
+    fullName: 'azure-batch.Pool.getAllLifetimeStatistics(options, callback)'
     type: Method
     syntax:
       parameters:
@@ -245,46 +249,52 @@ items:
             - object
           description: Optional Parameters.
           optional: true
-        - id: options.poolGetAllPoolsLifetimeStatisticsOptions
+        - id: options.poolGetAllLifetimeStatisticsOptions
           type:
             - object
-          description: Additional parameters for the operation
+          description: |-
+            Additional
+            parameters for the operation
           optional: true
-        - id: options.poolGetAllPoolsLifetimeStatisticsOptions.timeout
+        - id: options.poolGetAllLifetimeStatisticsOptions.timeout
           type:
             - number
           description: >-
-            The maximum time that the server can spend processing the request,
-            in
-
-            seconds. The default is 30 seconds.
-          optional: true
-        - id: options.poolGetAllPoolsLifetimeStatisticsOptions.clientRequestId
-          type:
-            - string
-          description: >-
             The
 
-            caller-generated request identity, in the form of a GUID with no
-            decoration
+            maximum time that the server can spend processing the request, in
+            seconds.
 
-            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+            The default is 30 seconds.
           optional: true
-        - id: >-
-            options.poolGetAllPoolsLifetimeStatisticsOptions.returnClientRequestId
+        - id: options.poolGetAllLifetimeStatisticsOptions.clientRequestId
+          type:
+            - azure-batch.uuid
+          description: >-
+            The caller-generated request identity, in the form of a GUID with no
+
+            decoration such as curly braces, e.g.
+            9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.poolGetAllLifetimeStatisticsOptions.returnClientRequestId
           type:
             - boolean
-          description: >-
-            Whether the server should return the client-request-id in the
-            response.
+          description: |-
+            Whether
+            the server should return the client-request-id in the response.
           optional: true
-        - id: options.poolGetAllPoolsLifetimeStatisticsOptions.ocpDate
+        - id: options.poolGetAllLifetimeStatisticsOptions.ocpDate
           type:
             - date
-          description: |-
-            The
-            time the request was issued. If not specified, this header will be
-            automatically populated with the current system clock time.
+          description: >-
+            The time
+
+            the request was issued. Client libraries typically set this to the
+            current
+
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -311,27 +321,27 @@ items:
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function getAllPoolsLifetimeStatistics(options, callback)'
+      content: 'function getAllLifetimeStatistics(options, callback)'
     children:
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~client'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~callback'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~options'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~client'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~callback'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~options'
       - >-
-        azure-batch.Pool#getAllPoolsLifetimeStatistics~poolGetAllPoolsLifetimeStatisticsOptions
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~timeout'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~clientRequestId'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~returnClientRequestId'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~ocpDate'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~timeout'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~clientRequestId'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~returnClientRequestId'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~ocpDate'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~baseUrl'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~requestUrl'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~queryParameters'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~requestUrl'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~httpRequest'
-      - 'azure-batch.Pool#getAllPoolsLifetimeStatistics~headerName'
+        azure-batch.Pool#getAllLifetimeStatistics~poolGetAllLifetimeStatisticsOptions
+      - 'azure-batch.Pool#getAllLifetimeStatistics~timeout'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~clientRequestId'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~returnClientRequestId'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~ocpDate'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~timeout'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~clientRequestId'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~returnClientRequestId'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~ocpDate'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~baseUrl'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~requestUrl'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~queryParameters'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~requestUrl'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~httpRequest'
+      - 'azure-batch.Pool#getAllLifetimeStatistics~headerName'
   - uid: 'azure-batch.Pool#add'
     id: 'azure-batch.Pool#add'
     parent: azure-batch.Pool
@@ -425,6 +435,12 @@ items:
             virtualMachineConfiguration
 
             are mutually exclusive and one of the properties must be specified.
+            This
+
+            property cannot be specified if the Batch account was created with
+            its
+
+            poolAllocationMode property set to 'UserSubscription'.
           optional: true
         - id: pool.cloudServiceConfiguration.osFamily
           type:
@@ -435,14 +451,16 @@ items:
             family to be installed on the virtual machines in the pool. Possible
             values
 
-            are: 2 – OS Family 2, equivalent to Windows Server 2008 R2 SP1. 3 –
+            are: 2 - OS Family 2, equivalent to Windows Server 2008 R2 SP1. 3 -
             OS
 
-            Family 3, equivalent to Windows Server 2012. 4 – OS Family 4,
+            Family 3, equivalent to Windows Server 2012. 4 - OS Family 4,
             equivalent to
 
-            Windows Server 2012 R2. For more information, see Azure Guest OS
-            Releases
+            Windows Server 2012 R2. 5 - OS Family 5, equivalent to Windows
+            Server 2016.
+
+            For more information, see Azure Guest OS Releases
 
             (https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases).
         - id: pool.cloudServiceConfiguration.targetOSVersion
@@ -495,9 +513,17 @@ items:
         - id: pool.virtualMachineConfiguration.imageReference
           type:
             - object
-          description: |-
-            A reference
-            to the Azure Virtual Machines Marketplace image to use.
+          description: >-
+            A
+
+            reference to the Azure Virtual Machines Marketplace image to use.
+            This
+
+            property and osDisk are mutually exclusive and one of the properties
+            must be
+
+            specified.
+          optional: true
         - id: pool.virtualMachineConfiguration.imageReference.publisher
           type:
             - string
@@ -538,6 +564,72 @@ items:
 
             omitted, the default is 'latest'.
           optional: true
+        - id: pool.virtualMachineConfiguration.osDisk
+          type:
+            - object
+          description: >-
+            A reference to the
+
+            OS disk image to use. This property can be specified only if the
+            Batch
+
+            account was created with its poolAllocationMode property set to
+
+            'UserSubscription'. This property and imageReference are mutually
+            exclusive
+
+            and one of the properties must be specified.
+          optional: true
+        - id: pool.virtualMachineConfiguration.osDisk.imageUris
+          type:
+            - array
+          description: >-
+            The
+
+            collection of Virtual Hard Disk (VHD) URIs. All the VHDs must be
+            identical
+
+            and must reside in an Azure Storage account within the same
+            subscription and
+
+            same region as the Batch account. For best performance, it is
+            recommended
+
+            that each VHD resides in a separate Azure Storage account. Each VHD
+            can
+
+            serve upto 20 Windows compute nodes or 40 Linux compute nodes. You
+            must
+
+            supply enough VHD URIs to satisfy the 'targetDedicated' property of
+            the
+
+            pool. If you do not supply enough VHD URIs, the pool will partially
+            allocate
+
+            compute nodes, and a resize error will occur.
+        - id: pool.virtualMachineConfiguration.osDisk.caching
+          type:
+            - string
+          description: >-
+            The type
+
+            of caching to enable for the OS disk. none - The caching mode for
+            the disk
+
+            is not enabled. readOnly - The caching mode for the disk is read
+            only.
+
+            readWrite - The caching mode for the disk is read and write. The
+            default
+
+            value for caching is none. For information about the caching options
+            see:
+
+            https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
+
+            Possible values include: 'none', 'readOnly', 'readWrite'
+          optional: true
         - id: pool.virtualMachineConfiguration.nodeAgentSKUId
           type:
             - string
@@ -573,8 +665,10 @@ items:
             Windows operating system settings on the virtual machine. This
             property must
 
-            not be specified if the imageReference property specifies a Linux OS
-            image.
+            not be specified if the imageReference or osDisk property specifies
+            a Linux
+
+            OS image.
           optional: true
         - id: >-
             pool.virtualMachineConfiguration.windowsConfiguration.enableAutomaticUpdates
@@ -798,12 +892,72 @@ items:
             A list of environment
             variable settings for the start task.
           optional: true
-        - id: pool.startTask.runElevated
+        - id: pool.startTask.userIdentity
           type:
-            - boolean
-          description: |-
-            Whether to run the start task
-            in elevated mode. The default value is false.
+            - object
+          description: >-
+            The user identity under which
+
+            the start task runs. If omitted, the task runs as a
+            non-administrative user
+
+            unique to the task.
+          optional: true
+        - id: pool.startTask.userIdentity.userName
+          type:
+            - string
+          description: >-
+            The name of the user
+
+            identity under which the task is run. The userName and autoUser
+            properties
+
+            are mutually exclusive; you must specify one but not both.
+          optional: true
+        - id: pool.startTask.userIdentity.autoUser
+          type:
+            - object
+          description: >-
+            The auto user under
+
+            which the task is run. The userName and autoUser properties are
+            mutually
+
+            exclusive; you must specify one but not both.
+          optional: true
+        - id: pool.startTask.userIdentity.autoUser.scope
+          type:
+            - string
+          description: >-
+            The scope for
+
+            the auto user pool - specifies that the task runs as the common auto
+            user
+
+            account which is created on every node in a pool. task - specifies
+            that the
+
+            service should create a new user for the task. The default value is
+            task.
+
+            Possible values include: 'task', 'pool'
+          optional: true
+        - id: pool.startTask.userIdentity.autoUser.elevationLevel
+          type:
+            - string
+          description: >-
+            The
+
+            elevation level of the auto user. nonAdmin - The auto user is a
+            standard
+
+            user without elevated access. admin - The auto user is a user with
+            elevated
+
+            access and operates with full Administrator permissions. The default
+            value
+
+            is nonAdmin. Possible values include: 'nonAdmin', 'admin'
           optional: true
         - id: pool.startTask.maxTaskRetryCount
           type:
@@ -890,13 +1044,13 @@ items:
 
             AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this
 
-            location. For certificates with visibility of remoteuser, a certs
-            directory
+            location. For certificates with visibility of 'remoteUser', a
+            'certs'
 
-            is created in the user's home directory (e.g.,
-            /home/<user-name>/certs)
+            directory is created in the user's home directory (e.g.,
 
-            where certificates are placed.
+            /home/{user-name}/certs) and certificates are placed in that
+            directory.
           optional: true
         - id: pool.applicationPackageReferences
           type:
@@ -938,10 +1092,17 @@ items:
           description: >-
             How tasks should be
 
-            distributed across compute nodes Possible values include: 'spread',
+            distributed across compute nodes. Possible values include: 'spread',
             'pack',
 
             'unmapped'
+        - id: pool.userAccounts
+          type:
+            - array
+          description: |-
+            The list of user accounts to be created
+            on each node in the pool.
+          optional: true
         - id: pool.metadata
           type:
             - array
@@ -978,14 +1139,14 @@ items:
           optional: true
         - id: options.poolAddOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
-            The
+            The caller-generated
 
-            caller-generated request identity, in the form of a GUID with no
-            decoration
+            request identity, in the form of a GUID with no decoration such as
+            curly
 
-            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+            braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
           optional: true
         - id: options.poolAddOptions.returnClientRequestId
           type:
@@ -1000,10 +1161,10 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -1113,14 +1274,14 @@ items:
           optional: true
         - id: options.poolListOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
-            The
+            The caller-generated
 
-            caller-generated request identity, in the form of a GUID with no
-            decoration
+            request identity, in the form of a GUID with no decoration such as
+            curly
 
-            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+            braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
           optional: true
         - id: options.poolListOptions.returnClientRequestId
           type:
@@ -1135,10 +1296,10 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -1264,7 +1425,7 @@ items:
           optional: true
         - id: options.poolDeleteMethodOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -1286,48 +1447,64 @@ items:
           description: >-
             The time the request
 
-            was issued. If not specified, this header will be automatically
-            populated
+            was issued. Client libraries typically set this to the current
+            system clock
 
-            with the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.poolDeleteMethodOptions.ifMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag is an exact match as specified.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service exactly matches the value specified by the client.
           optional: true
         - id: options.poolDeleteMethodOptions.ifNoneMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag does not match the specified ETag.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.poolDeleteMethodOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has been
-            modified since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.poolDeleteMethodOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify
+            A
 
-            this header to perform the operation only if the resource has not
-            been
+            timestamp indicating the last modified time of the resource known to
+            the
 
-            modified since the specified date/time.
+            client. The operation will be performed only if the resource on the
+            service
+
+            has not been modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -1420,7 +1597,7 @@ items:
           optional: true
         - id: options.poolExistsOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -1442,51 +1619,65 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.poolExistsOptions.ifMatch
           type:
             - string
           description: >-
-            An ETag is specified.
+            An ETag value associated
 
-            Specify this header to perform the operation only if the resource's
-            ETag is
+            with the version of the resource known to the client. The operation
+            will be
 
-            an exact match as specified.
+            performed only if the resource's current ETag on the service exactly
+            matches
+
+            the value specified by the client.
           optional: true
         - id: options.poolExistsOptions.ifNoneMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag does not match the specified ETag.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.poolExistsOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has been
-            modified since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.poolExistsOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has not been
-            modified
+            indicating the last modified time of the resource known to the
+            client. The
 
-            since the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -1589,14 +1780,14 @@ items:
           optional: true
         - id: options.poolGetOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
-            The
+            The caller-generated
 
-            caller-generated request identity, in the form of a GUID with no
-            decoration
+            request identity, in the form of a GUID with no decoration such as
+            curly
 
-            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+            braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
           optional: true
         - id: options.poolGetOptions.returnClientRequestId
           type:
@@ -1611,54 +1802,65 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.poolGetOptions.ifMatch
           type:
             - string
           description: >-
-            An ETag is specified.
+            An ETag value associated
 
-            Specify this header to perform the operation only if the resource's
-            ETag is
+            with the version of the resource known to the client. The operation
+            will be
 
-            an exact match as specified.
+            performed only if the resource's current ETag on the service exactly
+            matches
+
+            the value specified by the client.
           optional: true
         - id: options.poolGetOptions.ifNoneMatch
           type:
             - string
           description: >-
-            An ETag is specified.
+            An ETag value
 
-            Specify this header to perform the operation only if the resource's
-            ETag
+            associated with the version of the resource known to the client. The
 
-            does not match the specified ETag.
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.poolGetOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this header
+            A timestamp
 
-            to perform the operation only if the resource has been modified
-            since the
+            indicating the last modified time of the resource known to the
+            client. The
 
-            specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.poolGetOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this header
+            A timestamp
 
-            to perform the operation only if the resource has not been modified
-            since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -1796,12 +1998,73 @@ items:
             A list of
             environment variable settings for the start task.
           optional: true
-        - id: poolPatchParameter.startTask.runElevated
+        - id: poolPatchParameter.startTask.userIdentity
           type:
-            - boolean
-          description: |-
-            Whether to run
-            the start task in elevated mode. The default value is false.
+            - object
+          description: >-
+            The user
+
+            identity under which the start task runs. If omitted, the task runs
+            as a
+
+            non-administrative user unique to the task.
+          optional: true
+        - id: poolPatchParameter.startTask.userIdentity.userName
+          type:
+            - string
+          description: >-
+            The
+
+            name of the user identity under which the task is run. The userName
+            and
+
+            autoUser properties are mutually exclusive; you must specify one but
+            not
+
+            both.
+          optional: true
+        - id: poolPatchParameter.startTask.userIdentity.autoUser
+          type:
+            - object
+          description: >-
+            The
+
+            auto user under which the task is run. The userName and autoUser
+            properties
+
+            are mutually exclusive; you must specify one but not both.
+          optional: true
+        - id: poolPatchParameter.startTask.userIdentity.autoUser.scope
+          type:
+            - string
+          description: >-
+            The scope for the auto user pool - specifies that the task runs as
+            the
+
+            common auto user account which is created on every node in a pool.
+            task -
+
+            specifies that the service should create a new user for the task.
+            The
+
+            default value is task. Possible values include: 'task', 'pool'
+          optional: true
+        - id: poolPatchParameter.startTask.userIdentity.autoUser.elevationLevel
+          type:
+            - string
+          description: >-
+            The
+
+            elevation level of the auto user. nonAdmin - The auto user is a
+            standard
+
+            user without elevated access. admin - The auto user is a user with
+            elevated
+
+            access and operates with full Administrator permissions. The default
+            value
+
+            is nonAdmin. Possible values include: 'nonAdmin', 'admin'
           optional: true
         - id: poolPatchParameter.startTask.maxTaskRetryCount
           type:
@@ -1893,11 +2156,12 @@ items:
             task to
 
             query for this location. For certificates with visibility of
-            remoteuser, a
+            'remoteUser', a
 
-            certs directory is created in the user's home directory (e.g.,
+            'certs' directory is created in the user's home directory (e.g.,
 
-            /home/<user-name>/certs) where certificates are placed.
+            /home/{user-name}/certs) and certificates are placed in that
+            directory.
           optional: true
         - id: poolPatchParameter.applicationPackageReferences
           type:
@@ -1969,7 +2233,7 @@ items:
           optional: true
         - id: options.poolPatchOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -1991,54 +2255,65 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.poolPatchOptions.ifMatch
           type:
             - string
           description: >-
-            An ETag is specified.
+            An ETag value associated
 
-            Specify this header to perform the operation only if the resource's
-            ETag is
+            with the version of the resource known to the client. The operation
+            will be
 
-            an exact match as specified.
+            performed only if the resource's current ETag on the service exactly
+            matches
+
+            the value specified by the client.
           optional: true
         - id: options.poolPatchOptions.ifNoneMatch
           type:
             - string
           description: >-
-            An ETag is specified.
+            An ETag value
 
-            Specify this header to perform the operation only if the resource's
-            ETag
+            associated with the version of the resource known to the client. The
 
-            does not match the specified ETag.
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.poolPatchOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this header
+            A timestamp
 
-            to perform the operation only if the resource has been modified
-            since the
+            indicating the last modified time of the resource known to the
+            client. The
 
-            specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.poolPatchOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has not been
-            modified
+            indicating the last modified time of the resource known to the
+            client. The
 
-            since the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -2139,7 +2414,7 @@ items:
           optional: true
         - id: options.poolDisableAutoScaleOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -2161,10 +2436,12 @@ items:
           description: >-
             The time the
 
-            request was issued. If not specified, this header will be
-            automatically
+            request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -2327,7 +2604,7 @@ items:
           optional: true
         - id: options.poolEnableAutoScaleOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -2349,48 +2626,67 @@ items:
           description: >-
             The time the
 
-            request was issued. If not specified, this header will be
-            automatically
+            request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.poolEnableAutoScaleOptions.ifMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag is an exact match as specified.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service exactly matches the value specified by the client.
           optional: true
         - id: options.poolEnableAutoScaleOptions.ifNoneMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag does not match the specified ETag.
+          description: >-
+            An ETag
+
+            value associated with the version of the resource known to the
+            client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.poolEnableAutoScaleOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify
+            A
 
-            this header to perform the operation only if the resource has been
-            modified
+            timestamp indicating the last modified time of the resource known to
+            the
 
-            since the specified date/time.
+            client. The operation will be performed only if the resource on the
+            service
+
+            has been modified since the specified time.
           optional: true
         - id: options.poolEnableAutoScaleOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify
+            A
 
-            this header to perform the operation only if the resource has not
-            been
+            timestamp indicating the last modified time of the resource known to
+            the
 
-            modified since the specified date/time.
+            client. The operation will be performed only if the resource on the
+            service
+
+            has not been modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -2520,7 +2816,7 @@ items:
           optional: true
         - id: options.poolEvaluateAutoScaleOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -2542,10 +2838,12 @@ items:
           description: >-
             The time the
 
-            request was issued. If not specified, this header will be
-            automatically
+            request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -2665,14 +2963,14 @@ items:
           type:
             - string
           description: >-
-            When nodes may
+            Determines what
 
-            be removed from the pool, if the pool size is decreasing. The
-            default value
+            to do with a node and its running task(s) if the pool size is
+            decreasing.
 
-            is requeue. Possible values include: 'requeue', 'terminate',
+            The default value is requeue. Possible values include: 'requeue',
 
-            'taskcompletion', 'retaineddata'
+            'terminate', 'taskCompletion', 'retainedData'
           optional: true
         - id: options
           type:
@@ -2699,7 +2997,7 @@ items:
           optional: true
         - id: options.poolResizeOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -2721,51 +3019,65 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.poolResizeOptions.ifMatch
           type:
             - string
           description: >-
-            An ETag is specified.
+            An ETag value associated
 
-            Specify this header to perform the operation only if the resource's
-            ETag is
+            with the version of the resource known to the client. The operation
+            will be
 
-            an exact match as specified.
+            performed only if the resource's current ETag on the service exactly
+            matches
+
+            the value specified by the client.
           optional: true
         - id: options.poolResizeOptions.ifNoneMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag does not match the specified ETag.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.poolResizeOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has been
-            modified since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.poolResizeOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has not been
-            modified
+            indicating the last modified time of the resource known to the
+            client. The
 
-            since the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -2877,7 +3189,7 @@ items:
           optional: true
         - id: options.poolStopResizeOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -2899,48 +3211,64 @@ items:
           description: >-
             The time the request
 
-            was issued. If not specified, this header will be automatically
-            populated
+            was issued. Client libraries typically set this to the current
+            system clock
 
-            with the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.poolStopResizeOptions.ifMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag is an exact match as specified.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service exactly matches the value specified by the client.
           optional: true
         - id: options.poolStopResizeOptions.ifNoneMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag does not match the specified ETag.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.poolStopResizeOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has been
-            modified since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.poolStopResizeOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has not been
-            modified
+            indicating the last modified time of the resource known to the
+            client. The
 
-            since the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -3080,12 +3408,72 @@ items:
             - array
           description: A list of environment variable settings for the start task.
           optional: true
-        - id: poolUpdatePropertiesParameter.startTask.runElevated
+        - id: poolUpdatePropertiesParameter.startTask.userIdentity
           type:
-            - boolean
+            - object
           description: >-
-            Whether to run the start task in elevated mode. The default value is
-            false.
+            The
+
+            user identity under which the start task runs. If omitted, the task
+            runs as
+
+            a non-administrative user unique to the task.
+          optional: true
+        - id: poolUpdatePropertiesParameter.startTask.userIdentity.userName
+          type:
+            - string
+          description: >-
+            The name of
+
+            the user identity under which the task is run. The userName and
+            autoUser
+
+            properties are mutually exclusive; you must specify one but not
+            both.
+          optional: true
+        - id: poolUpdatePropertiesParameter.startTask.userIdentity.autoUser
+          type:
+            - object
+          description: >-
+            The auto
+
+            user under which the task is run. The userName and autoUser
+            properties are
+
+            mutually exclusive; you must specify one but not both.
+          optional: true
+        - id: poolUpdatePropertiesParameter.startTask.userIdentity.autoUser.scope
+          type:
+            - string
+          description: >-
+            The
+
+            scope for the auto user pool - specifies that the task runs as the
+            common
+
+            auto user account which is created on every node in a pool. task -
+            specifies
+
+            that the service should create a new user for the task. The default
+            value is
+
+            task. Possible values include: 'task', 'pool'
+          optional: true
+        - id: >-
+            poolUpdatePropertiesParameter.startTask.userIdentity.autoUser.elevationLevel
+          type:
+            - string
+          description: >-
+            The elevation level of the auto user. nonAdmin - The auto user is a
+            standard
+
+            user without elevated access. admin - The auto user is a user with
+            elevated
+
+            access and operates with full Administrator permissions. The default
+            value
+
+            is nonAdmin. Possible values include: 'nonAdmin', 'admin'
           optional: true
         - id: poolUpdatePropertiesParameter.startTask.maxTaskRetryCount
           type:
@@ -3176,11 +3564,13 @@ items:
             supplied to the task to query for this location. For certificates
             with
 
-            visibility of remoteuser, a certs directory is created in the user's
-            home
+            visibility of 'remoteUser', a 'certs' directory is created in the
+            user's
 
-            directory (e.g., /home/<user-name>/certs) where certificates are
-            placed.
+            home directory (e.g., /home/{user-name}/certs) and certificates are
+            placed
+
+            in that directory.
         - id: poolUpdatePropertiesParameter.applicationPackageReferences
           type:
             - array
@@ -3244,7 +3634,7 @@ items:
           optional: true
         - id: options.poolUpdatePropertiesOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -3266,10 +3656,12 @@ items:
           description: >-
             The time the
 
-            request was issued. If not specified, this header will be
-            automatically
+            request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -3398,7 +3790,7 @@ items:
           optional: true
         - id: options.poolUpgradeOSOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -3420,51 +3812,64 @@ items:
           description: >-
             The time the request
 
-            was issued. If not specified, this header will be automatically
-            populated
+            was issued. Client libraries typically set this to the current
+            system clock
 
-            with the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.poolUpgradeOSOptions.ifMatch
           type:
             - string
           description: >-
-            An ETag is specified.
+            An ETag value
 
-            Specify this header to perform the operation only if the resource's
-            ETag is
+            associated with the version of the resource known to the client. The
 
-            an exact match as specified.
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service exactly matches the value specified by the client.
           optional: true
         - id: options.poolUpgradeOSOptions.ifNoneMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag does not match the specified ETag.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.poolUpgradeOSOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has been
-            modified since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.poolUpgradeOSOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has not been
-            modified
+            indicating the last modified time of the resource known to the
+            client. The
 
-            since the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -3583,14 +3988,14 @@ items:
           type:
             - string
           description: >-
-            When to remove
+            Determines what
 
-            compute nodes and what to do with currently running tasks. The
-            default value
+            to do with a node and its running task(s) after it has been selected
+            for
 
-            is requeue. Possible values include: 'requeue', 'terminate',
+            deallocation. The default value is requeue. Possible values include:
 
-            'taskcompletion', 'retaineddata'
+            'requeue', 'terminate', 'taskCompletion', 'retainedData'
           optional: true
         - id: options
           type:
@@ -3617,7 +4022,7 @@ items:
           optional: true
         - id: options.poolRemoveNodesOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -3639,48 +4044,64 @@ items:
           description: >-
             The time the request
 
-            was issued. If not specified, this header will be automatically
-            populated
+            was issued. Client libraries typically set this to the current
+            system clock
 
-            with the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.poolRemoveNodesOptions.ifMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag is an exact match as specified.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service exactly matches the value specified by the client.
           optional: true
         - id: options.poolRemoveNodesOptions.ifNoneMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag does not match the specified ETag.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.poolRemoveNodesOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has been
-            modified since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.poolRemoveNodesOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify
+            A timestamp
 
-            this header to perform the operation only if the resource has not
-            been
+            indicating the last modified time of the resource known to the
+            client. The
 
-            modified since the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -3741,10 +4162,10 @@ items:
       - 'azure-batch.Pool#removeNodes~requestModel'
       - 'azure-batch.Pool#removeNodes~requestContent'
       - 'azure-batch.Pool#removeNodes~serializationError'
-  - uid: 'azure-batch.Pool#listPoolUsageMetricsNext'
-    id: 'azure-batch.Pool#listPoolUsageMetricsNext'
+  - uid: 'azure-batch.Pool#listUsageMetricsNext'
+    id: 'azure-batch.Pool#listUsageMetricsNext'
     parent: azure-batch.Pool
-    name: 'listPoolUsageMetricsNext(nextPageLink, options, callback)'
+    name: 'listUsageMetricsNext(nextPageLink, options, callback)'
     summary: |-
       Lists the usage metrics, aggregated by pool across individual time
       intervals, for the specified account.
@@ -3752,7 +4173,7 @@ items:
       If you do not specify a $filter clause including a poolId, the response
       includes all pools that existed in the account in the time range of the
       returned aggregation intervals.
-    fullName: 'azure-batch.Pool.listPoolUsageMetricsNext(nextPageLink, options, callback)'
+    fullName: 'azure-batch.Pool.listUsageMetricsNext(nextPageLink, options, callback)'
     type: Method
     syntax:
       parameters:
@@ -3767,16 +4188,16 @@ items:
             - object
           description: Optional Parameters.
           optional: true
-        - id: options.poolListPoolUsageMetricsNextOptions
+        - id: options.poolListUsageMetricsNextOptions
           type:
             - object
           description: |-
             Additional
             parameters for the operation
           optional: true
-        - id: options.poolListPoolUsageMetricsNextOptions.clientRequestId
+        - id: options.poolListUsageMetricsNextOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -3785,23 +4206,25 @@ items:
 
             such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
           optional: true
-        - id: options.poolListPoolUsageMetricsNextOptions.returnClientRequestId
+        - id: options.poolListUsageMetricsNextOptions.returnClientRequestId
           type:
             - boolean
           description: |-
-            Whether
-            the server should return the client-request-id in the response.
+            Whether the
+            server should return the client-request-id in the response.
           optional: true
-        - id: options.poolListPoolUsageMetricsNextOptions.ocpDate
+        - id: options.poolListUsageMetricsNextOptions.ocpDate
           type:
             - date
           description: >-
-            The time
+            The time the
 
-            the request was issued. If not specified, this header will be
-            automatically
+            request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -3823,29 +4246,28 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object.
-                               See <xref:PoolListPoolUsageMetricsResult> for more
+                               See <xref:PoolListUsageMetricsResult> for more
                                information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function listPoolUsageMetricsNext(nextPageLink, options, callback)'
+      content: 'function listUsageMetricsNext(nextPageLink, options, callback)'
     children:
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~client'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~callback'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~options'
-      - >-
-        azure-batch.Pool#listPoolUsageMetricsNext~poolListPoolUsageMetricsNextOptions
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~clientRequestId'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~returnClientRequestId'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~ocpDate'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~clientRequestId'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~returnClientRequestId'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~ocpDate'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~requestUrl'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~requestUrl'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~httpRequest'
-      - 'azure-batch.Pool#listPoolUsageMetricsNext~headerName'
+      - 'azure-batch.Pool#listUsageMetricsNext~client'
+      - 'azure-batch.Pool#listUsageMetricsNext~callback'
+      - 'azure-batch.Pool#listUsageMetricsNext~options'
+      - 'azure-batch.Pool#listUsageMetricsNext~poolListUsageMetricsNextOptions'
+      - 'azure-batch.Pool#listUsageMetricsNext~clientRequestId'
+      - 'azure-batch.Pool#listUsageMetricsNext~returnClientRequestId'
+      - 'azure-batch.Pool#listUsageMetricsNext~ocpDate'
+      - 'azure-batch.Pool#listUsageMetricsNext~clientRequestId'
+      - 'azure-batch.Pool#listUsageMetricsNext~returnClientRequestId'
+      - 'azure-batch.Pool#listUsageMetricsNext~ocpDate'
+      - 'azure-batch.Pool#listUsageMetricsNext~requestUrl'
+      - 'azure-batch.Pool#listUsageMetricsNext~requestUrl'
+      - 'azure-batch.Pool#listUsageMetricsNext~httpRequest'
+      - 'azure-batch.Pool#listUsageMetricsNext~headerName'
   - uid: 'azure-batch.Pool#listNext'
     id: 'azure-batch.Pool#listNext'
     parent: azure-batch.Pool
@@ -3875,7 +4297,7 @@ items:
           optional: true
         - id: options.poolListNextOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -3897,10 +4319,10 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -3964,6 +4386,10 @@ references:
     name: number
     fullName: number
     isExternal: true
+  - uid: azure-batch.uuid
+    name: uuid
+    fullName: azure-batch.uuid
+    isExternal: true
   - uid: boolean
     name: boolean
     fullName: boolean
@@ -3972,11 +4398,11 @@ references:
     name: function
     fullName: function
     isExternal: true
-  - uid: azure-batch.moment.duration
-    name: moment.duration
-    fullName: azure-batch.moment.duration
-    isExternal: true
   - uid: array
     name: array
     fullName: array
+    isExternal: true
+  - uid: azure-batch.moment.duration
+    name: moment.duration
+    fullName: azure-batch.moment.duration
     isExternal: true

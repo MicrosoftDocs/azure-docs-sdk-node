@@ -12,9 +12,10 @@ items:
       - azure-batch._global.BaseResource
       - azure-batch._global.CloudError
       - azure-batch._global.PoolUsageMetrics
-      - azure-batch._global.PoolListPoolUsageMetricsResult
+      - azure-batch._global.PoolListUsageMetricsResult
       - azure-batch._global.ImageReference
       - azure-batch._global.NodeAgentSku
+      - azure-batch._global.AuthenticationTokenSettings
       - azure-batch._global.AccountListNodeAgentSkusResult
       - azure-batch._global.UsageStatistics
       - azure-batch._global.ResourceStatistics
@@ -38,6 +39,9 @@ items:
       - azure-batch._global.ExitCodeMapping
       - azure-batch._global.ExitCodeRangeMapping
       - azure-batch._global.ExitConditions
+      - azure-batch._global.AutoUserSpecification
+      - azure-batch._global.UserIdentity
+      - azure-batch._global.UserAccount
       - azure-batch._global.TaskConstraints
       - azure-batch._global.JobManagerTask
       - azure-batch._global.JobPreparationTask
@@ -47,6 +51,7 @@ items:
       - azure-batch._global.CertificateReference
       - azure-batch._global.MetadataItem
       - azure-batch._global.CloudServiceConfiguration
+      - azure-batch._global.OSDisk
       - azure-batch._global.WindowsConfiguration
       - azure-batch._global.VirtualMachineConfiguration
       - azure-batch._global.NetworkConfiguration
@@ -122,8 +127,8 @@ items:
       - azure-batch._global.NodeRemoveParameter
       - azure-batch._global.ApplicationListOptions
       - azure-batch._global.ApplicationGetOptions
-      - azure-batch._global.PoolListPoolUsageMetricsOptions
-      - azure-batch._global.PoolGetAllPoolsLifetimeStatisticsOptions
+      - azure-batch._global.PoolListUsageMetricsOptions
+      - azure-batch._global.PoolGetAllLifetimeStatisticsOptions
       - azure-batch._global.PoolAddOptions
       - azure-batch._global.PoolListOptions
       - azure-batch._global.PoolDeleteMethodOptions
@@ -139,7 +144,7 @@ items:
       - azure-batch._global.PoolUpgradeOSOptions
       - azure-batch._global.PoolRemoveNodesOptions
       - azure-batch._global.AccountListNodeAgentSkusOptions
-      - azure-batch._global.JobGetAllJobsLifetimeStatisticsOptions
+      - azure-batch._global.JobGetAllLifetimeStatisticsOptions
       - azure-batch._global.JobDeleteMethodOptions
       - azure-batch._global.JobGetOptions
       - azure-batch._global.JobPatchOptions
@@ -158,10 +163,10 @@ items:
       - azure-batch._global.CertificateGetOptions
       - azure-batch._global.FileDeleteFromTaskOptions
       - azure-batch._global.FileGetFromTaskOptions
-      - azure-batch._global.FileGetNodeFilePropertiesFromTaskOptions
+      - azure-batch._global.FileGetPropertiesFromTaskOptions
       - azure-batch._global.FileDeleteFromComputeNodeOptions
       - azure-batch._global.FileGetFromComputeNodeOptions
-      - azure-batch._global.FileGetNodeFilePropertiesFromComputeNodeOptions
+      - azure-batch._global.FileGetPropertiesFromComputeNodeOptions
       - azure-batch._global.FileListFromTaskOptions
       - azure-batch._global.FileListFromComputeNodeOptions
       - azure-batch._global.JobScheduleExistsOptions
@@ -195,7 +200,7 @@ items:
       - azure-batch._global.ComputeNodeGetRemoteDesktopOptions
       - azure-batch._global.ComputeNodeListOptions
       - azure-batch._global.ApplicationListNextOptions
-      - azure-batch._global.PoolListPoolUsageMetricsNextOptions
+      - azure-batch._global.PoolListUsageMetricsNextOptions
       - azure-batch._global.PoolListNextOptions
       - azure-batch._global.AccountListNodeAgentSkusNextOptions
       - azure-batch._global.JobListNextOptions
@@ -208,7 +213,7 @@ items:
       - azure-batch._global.TaskListNextOptions
       - azure-batch._global.ComputeNodeListNextOptions
       - azure-batch._global.ApplicationListResult
-      - azure-batch._global.PoolListPoolUsageMetricsResult
+      - azure-batch._global.PoolListUsageMetricsResult
       - azure-batch._global.CloudPoolListResult
       - azure-batch._global.AccountListNodeAgentSkusResult
       - azure-batch._global.CloudJobListResult
@@ -267,14 +272,14 @@ items:
     type: Field
     syntax:
       content: PoolUsageMetrics
-  - uid: azure-batch._global.PoolListPoolUsageMetricsResult
-    id: azure-batch._global.PoolListPoolUsageMetricsResult
-    name: PoolListPoolUsageMetricsResult
+  - uid: azure-batch._global.PoolListUsageMetricsResult
+    id: azure-batch._global.PoolListUsageMetricsResult
+    name: PoolListUsageMetricsResult
     summary: ''
-    fullName: azure-batch.PoolListPoolUsageMetricsResult
+    fullName: azure-batch.PoolListUsageMetricsResult
     type: Field
     syntax:
-      content: PoolListPoolUsageMetricsResult
+      content: PoolListUsageMetricsResult
   - uid: azure-batch._global.ImageReference
     id: azure-batch._global.ImageReference
     name: ImageReference
@@ -291,6 +296,14 @@ items:
     type: Field
     syntax:
       content: NodeAgentSku
+  - uid: azure-batch._global.AuthenticationTokenSettings
+    id: azure-batch._global.AuthenticationTokenSettings
+    name: AuthenticationTokenSettings
+    summary: ''
+    fullName: azure-batch.AuthenticationTokenSettings
+    type: Field
+    syntax:
+      content: AuthenticationTokenSettings
   - uid: azure-batch._global.AccountListNodeAgentSkusResult
     id: azure-batch._global.AccountListNodeAgentSkusResult
     name: AccountListNodeAgentSkusResult
@@ -475,6 +488,30 @@ items:
     type: Field
     syntax:
       content: ExitConditions
+  - uid: azure-batch._global.AutoUserSpecification
+    id: azure-batch._global.AutoUserSpecification
+    name: AutoUserSpecification
+    summary: ''
+    fullName: azure-batch.AutoUserSpecification
+    type: Field
+    syntax:
+      content: AutoUserSpecification
+  - uid: azure-batch._global.UserIdentity
+    id: azure-batch._global.UserIdentity
+    name: UserIdentity
+    summary: ''
+    fullName: azure-batch.UserIdentity
+    type: Field
+    syntax:
+      content: UserIdentity
+  - uid: azure-batch._global.UserAccount
+    id: azure-batch._global.UserAccount
+    name: UserAccount
+    summary: ''
+    fullName: azure-batch.UserAccount
+    type: Field
+    syntax:
+      content: UserAccount
   - uid: azure-batch._global.TaskConstraints
     id: azure-batch._global.TaskConstraints
     name: TaskConstraints
@@ -547,6 +584,14 @@ items:
     type: Field
     syntax:
       content: CloudServiceConfiguration
+  - uid: azure-batch._global.OSDisk
+    id: azure-batch._global.OSDisk
+    name: OSDisk
+    summary: ''
+    fullName: azure-batch.OSDisk
+    type: Field
+    syntax:
+      content: OSDisk
   - uid: azure-batch._global.WindowsConfiguration
     id: azure-batch._global.WindowsConfiguration
     name: WindowsConfiguration
@@ -1147,22 +1192,22 @@ items:
     type: Field
     syntax:
       content: ApplicationGetOptions
-  - uid: azure-batch._global.PoolListPoolUsageMetricsOptions
-    id: azure-batch._global.PoolListPoolUsageMetricsOptions
-    name: PoolListPoolUsageMetricsOptions
+  - uid: azure-batch._global.PoolListUsageMetricsOptions
+    id: azure-batch._global.PoolListUsageMetricsOptions
+    name: PoolListUsageMetricsOptions
     summary: ''
-    fullName: azure-batch.PoolListPoolUsageMetricsOptions
+    fullName: azure-batch.PoolListUsageMetricsOptions
     type: Field
     syntax:
-      content: PoolListPoolUsageMetricsOptions
-  - uid: azure-batch._global.PoolGetAllPoolsLifetimeStatisticsOptions
-    id: azure-batch._global.PoolGetAllPoolsLifetimeStatisticsOptions
-    name: PoolGetAllPoolsLifetimeStatisticsOptions
+      content: PoolListUsageMetricsOptions
+  - uid: azure-batch._global.PoolGetAllLifetimeStatisticsOptions
+    id: azure-batch._global.PoolGetAllLifetimeStatisticsOptions
+    name: PoolGetAllLifetimeStatisticsOptions
     summary: ''
-    fullName: azure-batch.PoolGetAllPoolsLifetimeStatisticsOptions
+    fullName: azure-batch.PoolGetAllLifetimeStatisticsOptions
     type: Field
     syntax:
-      content: PoolGetAllPoolsLifetimeStatisticsOptions
+      content: PoolGetAllLifetimeStatisticsOptions
   - uid: azure-batch._global.PoolAddOptions
     id: azure-batch._global.PoolAddOptions
     name: PoolAddOptions
@@ -1283,14 +1328,14 @@ items:
     type: Field
     syntax:
       content: AccountListNodeAgentSkusOptions
-  - uid: azure-batch._global.JobGetAllJobsLifetimeStatisticsOptions
-    id: azure-batch._global.JobGetAllJobsLifetimeStatisticsOptions
-    name: JobGetAllJobsLifetimeStatisticsOptions
+  - uid: azure-batch._global.JobGetAllLifetimeStatisticsOptions
+    id: azure-batch._global.JobGetAllLifetimeStatisticsOptions
+    name: JobGetAllLifetimeStatisticsOptions
     summary: ''
-    fullName: azure-batch.JobGetAllJobsLifetimeStatisticsOptions
+    fullName: azure-batch.JobGetAllLifetimeStatisticsOptions
     type: Field
     syntax:
-      content: JobGetAllJobsLifetimeStatisticsOptions
+      content: JobGetAllLifetimeStatisticsOptions
   - uid: azure-batch._global.JobDeleteMethodOptions
     id: azure-batch._global.JobDeleteMethodOptions
     name: JobDeleteMethodOptions
@@ -1435,14 +1480,14 @@ items:
     type: Field
     syntax:
       content: FileGetFromTaskOptions
-  - uid: azure-batch._global.FileGetNodeFilePropertiesFromTaskOptions
-    id: azure-batch._global.FileGetNodeFilePropertiesFromTaskOptions
-    name: FileGetNodeFilePropertiesFromTaskOptions
+  - uid: azure-batch._global.FileGetPropertiesFromTaskOptions
+    id: azure-batch._global.FileGetPropertiesFromTaskOptions
+    name: FileGetPropertiesFromTaskOptions
     summary: ''
-    fullName: azure-batch.FileGetNodeFilePropertiesFromTaskOptions
+    fullName: azure-batch.FileGetPropertiesFromTaskOptions
     type: Field
     syntax:
-      content: FileGetNodeFilePropertiesFromTaskOptions
+      content: FileGetPropertiesFromTaskOptions
   - uid: azure-batch._global.FileDeleteFromComputeNodeOptions
     id: azure-batch._global.FileDeleteFromComputeNodeOptions
     name: FileDeleteFromComputeNodeOptions
@@ -1459,14 +1504,14 @@ items:
     type: Field
     syntax:
       content: FileGetFromComputeNodeOptions
-  - uid: azure-batch._global.FileGetNodeFilePropertiesFromComputeNodeOptions
-    id: azure-batch._global.FileGetNodeFilePropertiesFromComputeNodeOptions
-    name: FileGetNodeFilePropertiesFromComputeNodeOptions
+  - uid: azure-batch._global.FileGetPropertiesFromComputeNodeOptions
+    id: azure-batch._global.FileGetPropertiesFromComputeNodeOptions
+    name: FileGetPropertiesFromComputeNodeOptions
     summary: ''
-    fullName: azure-batch.FileGetNodeFilePropertiesFromComputeNodeOptions
+    fullName: azure-batch.FileGetPropertiesFromComputeNodeOptions
     type: Field
     syntax:
-      content: FileGetNodeFilePropertiesFromComputeNodeOptions
+      content: FileGetPropertiesFromComputeNodeOptions
   - uid: azure-batch._global.FileListFromTaskOptions
     id: azure-batch._global.FileListFromTaskOptions
     name: FileListFromTaskOptions
@@ -1731,14 +1776,14 @@ items:
     type: Field
     syntax:
       content: ApplicationListNextOptions
-  - uid: azure-batch._global.PoolListPoolUsageMetricsNextOptions
-    id: azure-batch._global.PoolListPoolUsageMetricsNextOptions
-    name: PoolListPoolUsageMetricsNextOptions
+  - uid: azure-batch._global.PoolListUsageMetricsNextOptions
+    id: azure-batch._global.PoolListUsageMetricsNextOptions
+    name: PoolListUsageMetricsNextOptions
     summary: ''
-    fullName: azure-batch.PoolListPoolUsageMetricsNextOptions
+    fullName: azure-batch.PoolListUsageMetricsNextOptions
     type: Field
     syntax:
-      content: PoolListPoolUsageMetricsNextOptions
+      content: PoolListUsageMetricsNextOptions
   - uid: azure-batch._global.PoolListNextOptions
     id: azure-batch._global.PoolListNextOptions
     name: PoolListNextOptions
@@ -1835,14 +1880,14 @@ items:
     type: Field
     syntax:
       content: ApplicationListResult
-  - uid: azure-batch._global.PoolListPoolUsageMetricsResult
-    id: azure-batch._global.PoolListPoolUsageMetricsResult
-    name: PoolListPoolUsageMetricsResult
+  - uid: azure-batch._global.PoolListUsageMetricsResult
+    id: azure-batch._global.PoolListUsageMetricsResult
+    name: PoolListUsageMetricsResult
     summary: ''
-    fullName: azure-batch.PoolListPoolUsageMetricsResult
+    fullName: azure-batch.PoolListUsageMetricsResult
     type: Field
     syntax:
-      content: PoolListPoolUsageMetricsResult
+      content: PoolListUsageMetricsResult
   - uid: azure-batch._global.CloudPoolListResult
     id: azure-batch._global.CloudPoolListResult
     name: CloudPoolListResult

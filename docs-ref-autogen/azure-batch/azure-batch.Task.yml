@@ -150,7 +150,7 @@ items:
             respond if the task fails with an exit condition not covered by any
             of the
 
-            other properties – that is, any nonzero exit code not listed in the
+            other properties - that is, any nonzero exit code not listed in the
 
             exitCodes or exitCodeRanges collection, or a scheduling error if the
 
@@ -173,24 +173,49 @@ items:
             the job containing the task, if the task completes with the given
             exit
 
-            condition and the job’s onTaskFailed property is
+            condition and the job's onTaskFailed property is
 
-            'performexitoptionsjobaction'. The default is none for exit code 0
+            'performExitOptionsJobAction'. The default is none for exit code 0
             and
 
-            terminate for all other exit conditions. It is an error to specify
-            this if
+            terminate for all other exit conditions. If the job's onTaskFailed
+            property
 
-            the job's onTaskFailed is noaction. The add task request fails with
-            an
+            is noAction, then specify this property returns an error. The add
+            task
 
-            invalid property value error; if you are calling the REST API
-            directly, the
+            request fails with an invalid property value error;; if you are
+            calling the
 
-            HTTP status code is 400 (Bad Request). Possible values include:
-            'none',
+            REST API directly, the HTTP status code is 400 (Bad Request).
+            Possible
 
-            'disable', 'terminate'
+            values include: 'none', 'disable', 'terminate'
+          optional: true
+        - id: task.exitConditions.default.dependencyAction
+          type:
+            - string
+          description: >-
+            An action
+
+            that the Batch service performs on tasks that depend on this task.
+            The
+
+            default is 'satisfy' for exit code 0, and 'block' for all other exit
+
+            conditions. If the job's usesTaskDependencies property is set to
+            false, then
+
+            specifying the dependencyAction property returns an error. The add
+            task
+
+            request fails with an invalid property value error; if you are
+            calling the
+
+            REST API directly, the HTTP status code is 400  (Bad Request).
+            Possible
+
+            values include: 'satisfy', 'block'
           optional: true
         - id: task.resourceFiles
           type:
@@ -310,12 +335,72 @@ items:
 
             count is -1, the Batch service retries the task without limit.
           optional: true
-        - id: task.runElevated
+        - id: task.userIdentity
           type:
-            - boolean
-          description: |-
-            Whether to run the task in elevated
-            mode. The default value is false.
+            - object
+          description: >-
+            The user identity under which the task
+
+            runs. If omitted, the task runs as a non-administrative user unique
+            to the
+
+            task.
+          optional: true
+        - id: task.userIdentity.userName
+          type:
+            - string
+          description: >-
+            The name of the user identity
+
+            under which the task is run. The userName and autoUser properties
+            are
+
+            mutually exclusive; you must specify one but not both.
+          optional: true
+        - id: task.userIdentity.autoUser
+          type:
+            - object
+          description: >-
+            The auto user under which the
+
+            task is run. The userName and autoUser properties are mutually
+            exclusive;
+
+            you must specify one but not both.
+          optional: true
+        - id: task.userIdentity.autoUser.scope
+          type:
+            - string
+          description: >-
+            The scope for the auto
+
+            user pool - specifies that the task runs as the common auto user
+            account
+
+            which is created on every node in a pool. task - specifies that the
+            service
+
+            should create a new user for the task. The default value is task.
+            Possible
+
+            values include: 'task', 'pool'
+          optional: true
+        - id: task.userIdentity.autoUser.elevationLevel
+          type:
+            - string
+          description: >-
+            The elevation
+
+            level of the auto user. nonAdmin - The auto user is a standard user
+            without
+
+            elevated access. admin - The auto user is a user with elevated
+            access and
+
+            operates with full Administrator permissions. The default value is
+            nonAdmin.
+
+            Possible values include: 'nonAdmin', 'admin'
           optional: true
         - id: task.multiInstanceSettings
           type:
@@ -374,15 +459,15 @@ items:
           type:
             - object
           description: >-
-            The tasks that this task depends on. The
+            The tasks that this task depends on. This
 
-            task will not be scheduled until all depended-on tasks have
+            task will not be scheduled until all tasks that it depends on have
             completed
 
-            successfully. (If any depended-on tasks fail and exhaust their retry
+            successfully. If any of those tasks fail and exhaust their retry
             counts,
 
-            the task will never be scheduled.) If the job does not have
+            this task will never be scheduled. If the job does not have
 
             usesTaskDependencies set to true, and this element is present, the
             request
@@ -422,6 +507,51 @@ items:
 
             running the command line.
           optional: true
+        - id: task.authenticationTokenSettings
+          type:
+            - object
+          description: >-
+            The settings for an
+
+            authentication token that the task can use to perform Batch service
+
+            operations. If this property is set, the Batch service provides the
+            task
+
+            with an authentication token which can be used to authenticate Batch
+            service
+
+            operations without requiring an account access key. The token is
+            provided
+
+            via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The
+            operations
+
+            that the task can carry out using the token depend on the settings.
+            For
+
+            example, a task can request job permissions in order to add other
+            tasks to
+
+            the job, or check the status of the job or of other tasks under the
+            job.
+          optional: true
+        - id: task.authenticationTokenSettings.access
+          type:
+            - array
+          description: >-
+            The Batch resources
+
+            to which the token grants access. The authentication token grants
+            access to
+
+            a limited set of Batch service operations. Currently the only
+            supported
+
+            value for the access property is 'job', which grants access to all
+
+            operations related to the job which contains the task.
+          optional: true
         - id: options
           type:
             - object
@@ -447,14 +577,14 @@ items:
           optional: true
         - id: options.taskAddOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
-            The
+            The caller-generated
 
-            caller-generated request identity, in the form of a GUID with no
-            decoration
+            request identity, in the form of a GUID with no decoration such as
+            curly
 
-            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+            braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
           optional: true
         - id: options.taskAddOptions.returnClientRequestId
           type:
@@ -469,10 +599,10 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -596,14 +726,14 @@ items:
           optional: true
         - id: options.taskListOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
-            The
+            The caller-generated
 
-            caller-generated request identity, in the form of a GUID with no
-            decoration
+            request identity, in the form of a GUID with no decoration such as
+            curly
 
-            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+            braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
           optional: true
         - id: options.taskListOptions.returnClientRequestId
           type:
@@ -618,10 +748,10 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -744,7 +874,7 @@ items:
           optional: true
         - id: options.taskAddCollectionOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -766,10 +896,12 @@ items:
           description: >-
             The time the
 
-            request was issued. If not specified, this header will be
-            automatically
+            request was issued. Client libraries typically set this to the
+            current
 
-            populated with the current system clock time.
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -880,7 +1012,7 @@ items:
           optional: true
         - id: options.taskDeleteMethodOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -902,48 +1034,64 @@ items:
           description: >-
             The time the request
 
-            was issued. If not specified, this header will be automatically
-            populated
+            was issued. Client libraries typically set this to the current
+            system clock
 
-            with the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.taskDeleteMethodOptions.ifMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag is an exact match as specified.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service exactly matches the value specified by the client.
           optional: true
         - id: options.taskDeleteMethodOptions.ifNoneMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag does not match the specified ETag.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.taskDeleteMethodOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has been
-            modified since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.taskDeleteMethodOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify
+            A
 
-            this header to perform the operation only if the resource has not
-            been
+            timestamp indicating the last modified time of the resource known to
+            the
 
-            modified since the specified date/time.
+            client. The operation will be performed only if the resource on the
+            service
+
+            has not been modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -1060,14 +1208,14 @@ items:
           optional: true
         - id: options.taskGetOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
-            The
+            The caller-generated
 
-            caller-generated request identity, in the form of a GUID with no
-            decoration
+            request identity, in the form of a GUID with no decoration such as
+            curly
 
-            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+            braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
           optional: true
         - id: options.taskGetOptions.returnClientRequestId
           type:
@@ -1082,54 +1230,65 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.taskGetOptions.ifMatch
           type:
             - string
           description: >-
-            An ETag is specified.
+            An ETag value associated
 
-            Specify this header to perform the operation only if the resource's
-            ETag is
+            with the version of the resource known to the client. The operation
+            will be
 
-            an exact match as specified.
+            performed only if the resource's current ETag on the service exactly
+            matches
+
+            the value specified by the client.
           optional: true
         - id: options.taskGetOptions.ifNoneMatch
           type:
             - string
           description: >-
-            An ETag is specified.
+            An ETag value
 
-            Specify this header to perform the operation only if the resource's
-            ETag
+            associated with the version of the resource known to the client. The
 
-            does not match the specified ETag.
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.taskGetOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this header
+            A timestamp
 
-            to perform the operation only if the resource has been modified
-            since the
+            indicating the last modified time of the resource known to the
+            client. The
 
-            specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.taskGetOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this header
+            A timestamp
 
-            to perform the operation only if the resource has not been modified
-            since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -1301,7 +1460,7 @@ items:
           optional: true
         - id: options.taskUpdateOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -1323,51 +1482,65 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.taskUpdateOptions.ifMatch
           type:
             - string
           description: >-
-            An ETag is specified.
+            An ETag value associated
 
-            Specify this header to perform the operation only if the resource's
-            ETag is
+            with the version of the resource known to the client. The operation
+            will be
 
-            an exact match as specified.
+            performed only if the resource's current ETag on the service exactly
+            matches
+
+            the value specified by the client.
           optional: true
         - id: options.taskUpdateOptions.ifNoneMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag does not match the specified ETag.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.taskUpdateOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has been
-            modified since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.taskUpdateOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has not been
-            modified
+            indicating the last modified time of the resource known to the
+            client. The
 
-            since the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -1485,7 +1658,7 @@ items:
           optional: true
         - id: options.taskListSubtasksOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -1507,10 +1680,10 @@ items:
           description: >-
             The time the request
 
-            was issued. If not specified, this header will be automatically
-            populated
+            was issued. Client libraries typically set this to the current
+            system clock
 
-            with the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -1615,7 +1788,7 @@ items:
           optional: true
         - id: options.taskTerminateOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -1637,51 +1810,64 @@ items:
           description: >-
             The time the request
 
-            was issued. If not specified, this header will be automatically
-            populated
+            was issued. Client libraries typically set this to the current
+            system clock
 
-            with the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.taskTerminateOptions.ifMatch
           type:
             - string
           description: >-
-            An ETag is specified.
+            An ETag value
 
-            Specify this header to perform the operation only if the resource's
-            ETag is
+            associated with the version of the resource known to the client. The
 
-            an exact match as specified.
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service exactly matches the value specified by the client.
           optional: true
         - id: options.taskTerminateOptions.ifNoneMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag does not match the specified ETag.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.taskTerminateOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has been
-            modified since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.taskTerminateOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has not been
-            modified
+            indicating the last modified time of the resource known to the
+            client. The
 
-            since the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -1797,7 +1983,7 @@ items:
           optional: true
         - id: options.taskReactivateOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -1819,48 +2005,64 @@ items:
           description: >-
             The time the request
 
-            was issued. If not specified, this header will be automatically
-            populated
+            was issued. Client libraries typically set this to the current
+            system clock
 
-            with the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.taskReactivateOptions.ifMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag is an exact match as specified.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service exactly matches the value specified by the client.
           optional: true
         - id: options.taskReactivateOptions.ifNoneMatch
           type:
             - string
-          description: |-
-            An ETag is
-            specified. Specify this header to perform the operation only if the
-            resource's ETag does not match the specified ETag.
+          description: >-
+            An ETag value
+
+            associated with the version of the resource known to the client. The
+
+            operation will be performed only if the resource's current ETag on
+            the
+
+            service does not match the value specified by the client.
           optional: true
         - id: options.taskReactivateOptions.ifModifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has been
-            modified since
+            indicating the last modified time of the resource known to the
+            client. The
 
-            the specified date/time.
+            operation will be performed only if the resource on the service has
+            been
+
+            modified since the specified time.
           optional: true
         - id: options.taskReactivateOptions.ifUnmodifiedSince
           type:
             - date
           description: >-
-            Specify this
+            A timestamp
 
-            header to perform the operation only if the resource has not been
-            modified
+            indicating the last modified time of the resource known to the
+            client. The
 
-            since the specified date/time.
+            operation will be performed only if the resource on the service has
+            not been
+
+            modified since the specified time.
           optional: true
         - id: options.customHeaders
           type:
@@ -1954,7 +2156,7 @@ items:
           optional: true
         - id: options.taskListNextOptions.clientRequestId
           type:
-            - string
+            - azure-batch.uuid
           description: >-
             The
 
@@ -1976,10 +2178,10 @@ items:
           description: >-
             The time the request was
 
-            issued. If not specified, this header will be automatically
-            populated with
+            issued. Client libraries typically set this to the current system
+            clock
 
-            the current system clock time.
+            time; set it explicitly if you are calling the REST API directly.
           optional: true
         - id: options.customHeaders
           type:
@@ -2046,6 +2248,10 @@ references:
   - uid: number
     name: number
     fullName: number
+    isExternal: true
+  - uid: azure-batch.uuid
+    name: uuid
+    fullName: azure-batch.uuid
     isExternal: true
   - uid: boolean
     name: boolean

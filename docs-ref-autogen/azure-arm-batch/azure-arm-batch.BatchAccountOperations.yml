@@ -14,16 +14,16 @@ items:
       - 'azure-arm-batch.BatchAccountOperations.#ctor'
       - 'azure-arm-batch.BatchAccountOperations#client'
       - 'azure-arm-batch.BatchAccountOperations#create'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate'
       - 'azure-arm-batch.BatchAccountOperations#update'
       - 'azure-arm-batch.BatchAccountOperations#deleteMethod'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod'
       - 'azure-arm-batch.BatchAccountOperations#get'
       - 'azure-arm-batch.BatchAccountOperations#list'
       - 'azure-arm-batch.BatchAccountOperations#listByResourceGroup'
       - 'azure-arm-batch.BatchAccountOperations#synchronizeAutoStorageKeys'
       - 'azure-arm-batch.BatchAccountOperations#regenerateKey'
       - 'azure-arm-batch.BatchAccountOperations#getKeys'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod'
       - 'azure-arm-batch.BatchAccountOperations#listNext'
       - 'azure-arm-batch.BatchAccountOperations#listByResourceGroupNext'
   - id: 'azure-arm-batch.BatchAccountOperations.#ctor'
@@ -53,10 +53,13 @@ items:
     id: 'azure-arm-batch.BatchAccountOperations#create'
     parent: azure-arm-batch.BatchAccountOperations
     name: 'create(resourceGroupName, accountName, parameters, options, callback)'
-    summary: |-
+    summary: >-
       Creates a new Batch account with the specified parameters. Existing
-      accounts cannot be updated with this API and should instead be updated
-      with the Update Batch Account API.
+      accounts
+
+      cannot be updated with this API and should instead be updated with the
+
+      Update Batch Account API.
     fullName: >-
       azure-arm-batch.BatchAccountOperations.create(resourceGroupName,
       accountName, parameters, options, callback)
@@ -115,8 +118,49 @@ items:
           type:
             - string
           description: |-
-            The resource id of
+            The resource ID of
             the storage account to be used for auto storage account.
+        - id: parameters.poolAllocationMode
+          type:
+            - string
+          description: >-
+            The allocation mode to use
+
+            for creating pools in the Batch account. The pool allocation mode
+            also
+
+            affects how clients may authenticate to the Batch Service API. If
+            the mode
+
+            is BatchService, clients may authenticate using access keys or Azure
+            Active
+
+            Directory. If the mode is UserSubscription, clients must use Azure
+            Active
+
+            Directory. The default is BatchService. Possible values include:
+
+            'BatchService', 'UserSubscription'
+          optional: true
+        - id: parameters.keyVaultReference
+          type:
+            - object
+          description: |-
+            A reference to the Azure key
+            vault associated with the Batch account.
+          optional: true
+        - id: parameters.keyVaultReference.id
+          type:
+            - string
+          description: |-
+            The resource ID of the Azure
+            key vault associated with the Batch account.
+        - id: parameters.keyVaultReference.url
+          type:
+            - string
+          description: |-
+            The Url of the Azure key
+            vault associated with the Batch account.
         - id: options
           type:
             - object
@@ -154,127 +198,6 @@ items:
       - 'azure-arm-batch.BatchAccountOperations#create~client'
       - 'azure-arm-batch.BatchAccountOperations#create~callback'
       - 'azure-arm-batch.BatchAccountOperations#create~options'
-  - uid: 'azure-arm-batch.BatchAccountOperations#beginCreate'
-    id: 'azure-arm-batch.BatchAccountOperations#beginCreate'
-    parent: azure-arm-batch.BatchAccountOperations
-    name: 'beginCreate(resourceGroupName, accountName, parameters, options, callback)'
-    summary: |-
-      Creates a new Batch account with the specified parameters. Existing
-      accounts cannot be updated with this API and should instead be updated
-      with the Update Batch Account API.
-    fullName: >-
-      azure-arm-batch.BatchAccountOperations.beginCreate(resourceGroupName,
-      accountName, parameters, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |-
-            The name of the resource group that
-            contains the new Batch account.
-        - id: accountName
-          type:
-            - string
-          description: >-
-            A name for the Batch account which must be
-
-            unique within the region. Batch account names must be between 3 and
-            24
-
-            characters in length and must use only numbers and lowercase
-            letters. This
-
-            name is used as part of the DNS name that is used to access the
-            Batch
-
-            service in the region in which the account is created. For example:
-
-            http://accountname.region.batch.azure.com/.
-        - id: parameters
-          type:
-            - object
-          description: Additional parameters for account creation.
-        - id: parameters.location
-          type:
-            - string
-          description: |-
-            The region in which to create the
-            account.
-        - id: parameters.tags
-          type:
-            - object
-          description: |-
-            The user specified tags associated with
-            the account.
-          optional: true
-        - id: parameters.autoStorage
-          type:
-            - object
-          description: |-
-            The properties related to auto
-            storage account.
-          optional: true
-        - id: parameters.autoStorage.storageAccountId
-          type:
-            - string
-          description: |-
-            The resource id of
-            the storage account to be used for auto storage account.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:BatchAccount> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginCreate(resourceGroupName, accountName, parameters,
-        options, callback)
-    children:
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~client'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~callback'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~options'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~regex'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~queryParameters'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~httpRequest'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~headerName'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestContent'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestModel'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestModelMapper'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestModel'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestContent'
-      - 'azure-arm-batch.BatchAccountOperations#beginCreate~serializationError'
   - uid: 'azure-arm-batch.BatchAccountOperations#update'
     id: 'azure-arm-batch.BatchAccountOperations#update'
     parent: azure-arm-batch.BatchAccountOperations
@@ -318,8 +241,49 @@ items:
           type:
             - string
           description: |-
-            The resource id of
+            The resource ID of
             the storage account to be used for auto storage account.
+        - id: parameters.poolAllocationMode
+          type:
+            - string
+          description: >-
+            The allocation mode to use
+
+            for creating pools in the Batch account. The pool allocation mode
+            also
+
+            affects how clients may authenticate to the Batch Service API. If
+            the mode
+
+            is BatchService, clients may authenticate using access keys or Azure
+            Active
+
+            Directory. If the mode is UserSubscription, clients must use Azure
+            Active
+
+            Directory. The default is BatchService. Possible values include:
+
+            'BatchService', 'UserSubscription'
+          optional: true
+        - id: parameters.keyVaultReference
+          type:
+            - object
+          description: |-
+            A reference to the Azure key
+            vault associated with the Batch account.
+          optional: true
+        - id: parameters.keyVaultReference.id
+          type:
+            - string
+          description: |-
+            The resource ID of the Azure
+            key vault associated with the Batch account.
+        - id: parameters.keyVaultReference.url
+          type:
+            - string
+          description: |-
+            The Url of the Azure key
+            vault associated with the Batch account.
         - id: options
           type:
             - object
@@ -357,11 +321,10 @@ items:
       - 'azure-arm-batch.BatchAccountOperations#update~client'
       - 'azure-arm-batch.BatchAccountOperations#update~callback'
       - 'azure-arm-batch.BatchAccountOperations#update~options'
+      - 'azure-arm-batch.BatchAccountOperations#update~baseUrl'
       - 'azure-arm-batch.BatchAccountOperations#update~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#update~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#update~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#update~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#update~regex'
       - 'azure-arm-batch.BatchAccountOperations#update~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#update~queryParameters'
       - 'azure-arm-batch.BatchAccountOperations#update~requestUrl'
@@ -428,73 +391,6 @@ items:
       - 'azure-arm-batch.BatchAccountOperations#deleteMethod~client'
       - 'azure-arm-batch.BatchAccountOperations#deleteMethod~callback'
       - 'azure-arm-batch.BatchAccountOperations#deleteMethod~options'
-  - uid: 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod'
-    id: 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod'
-    parent: azure-arm-batch.BatchAccountOperations
-    name: 'beginDeleteMethod(resourceGroupName, accountName, options, callback)'
-    summary: Deletes the specified Batch account.
-    fullName: >-
-      azure-arm-batch.BatchAccountOperations.beginDeleteMethod(resourceGroupName,
-      accountName, options, callback)
-    type: Method
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |-
-            The name of the resource group that
-            contains the Batch account to be deleted.
-        - id: accountName
-          type:
-            - string
-          description: The name of the account to be deleted.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: callback
-          type:
-            - function
-          description: ''
-      return:
-        type:
-          - function
-        description: |-
-          callback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: >-
-        function beginDeleteMethod(resourceGroupName, accountName, options,
-        callback)
-    children:
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~client'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~callback'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~options'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~regex'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~queryParameters'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~httpRequest'
-      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~headerName'
   - uid: 'azure-arm-batch.BatchAccountOperations#get'
     id: 'azure-arm-batch.BatchAccountOperations#get'
     parent: azure-arm-batch.BatchAccountOperations
@@ -551,11 +447,10 @@ items:
       - 'azure-arm-batch.BatchAccountOperations#get~client'
       - 'azure-arm-batch.BatchAccountOperations#get~callback'
       - 'azure-arm-batch.BatchAccountOperations#get~options'
+      - 'azure-arm-batch.BatchAccountOperations#get~baseUrl'
       - 'azure-arm-batch.BatchAccountOperations#get~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#get~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#get~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#get~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#get~regex'
       - 'azure-arm-batch.BatchAccountOperations#get~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#get~queryParameters'
       - 'azure-arm-batch.BatchAccountOperations#get~requestUrl'
@@ -608,9 +503,8 @@ items:
       - 'azure-arm-batch.BatchAccountOperations#list~client'
       - 'azure-arm-batch.BatchAccountOperations#list~callback'
       - 'azure-arm-batch.BatchAccountOperations#list~options'
+      - 'azure-arm-batch.BatchAccountOperations#list~baseUrl'
       - 'azure-arm-batch.BatchAccountOperations#list~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#list~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#list~regex'
       - 'azure-arm-batch.BatchAccountOperations#list~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#list~queryParameters'
       - 'azure-arm-batch.BatchAccountOperations#list~requestUrl'
@@ -633,8 +527,8 @@ items:
           type:
             - string
           description: |-
-            The name of the resource group whose
-            Batch accounts to list.
+            The name of the resource group whose Batch
+            accounts to list.
         - id: options
           type:
             - object
@@ -671,10 +565,9 @@ items:
       - 'azure-arm-batch.BatchAccountOperations#listByResourceGroup~client'
       - 'azure-arm-batch.BatchAccountOperations#listByResourceGroup~callback'
       - 'azure-arm-batch.BatchAccountOperations#listByResourceGroup~options'
+      - 'azure-arm-batch.BatchAccountOperations#listByResourceGroup~baseUrl'
       - 'azure-arm-batch.BatchAccountOperations#listByResourceGroup~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#listByResourceGroup~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#listByResourceGroup~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#listByResourceGroup~regex'
       - 'azure-arm-batch.BatchAccountOperations#listByResourceGroup~requestUrl'
       - >-
         azure-arm-batch.BatchAccountOperations#listByResourceGroup~queryParameters
@@ -745,14 +638,13 @@ items:
       - >-
         azure-arm-batch.BatchAccountOperations#synchronizeAutoStorageKeys~options
       - >-
-        azure-arm-batch.BatchAccountOperations#synchronizeAutoStorageKeys~requestUrl
+        azure-arm-batch.BatchAccountOperations#synchronizeAutoStorageKeys~baseUrl
       - >-
         azure-arm-batch.BatchAccountOperations#synchronizeAutoStorageKeys~requestUrl
       - >-
         azure-arm-batch.BatchAccountOperations#synchronizeAutoStorageKeys~requestUrl
       - >-
         azure-arm-batch.BatchAccountOperations#synchronizeAutoStorageKeys~requestUrl
-      - 'azure-arm-batch.BatchAccountOperations#synchronizeAutoStorageKeys~regex'
       - >-
         azure-arm-batch.BatchAccountOperations#synchronizeAutoStorageKeys~requestUrl
       - >-
@@ -767,7 +659,7 @@ items:
     id: 'azure-arm-batch.BatchAccountOperations#regenerateKey'
     parent: azure-arm-batch.BatchAccountOperations
     name: 'regenerateKey(resourceGroupName, accountName, keyName, options, callback)'
-    summary: Regenerates the specified account key for the specified Batch account.
+    summary: Regenerates the specified account key for the Batch account.
     fullName: >-
       azure-arm-batch.BatchAccountOperations.regenerateKey(resourceGroupName,
       accountName, keyName, options, callback)
@@ -830,11 +722,10 @@ items:
       - 'azure-arm-batch.BatchAccountOperations#regenerateKey~allowedValues'
       - 'azure-arm-batch.BatchAccountOperations#regenerateKey~parameters'
       - 'azure-arm-batch.BatchAccountOperations#regenerateKey~parameters'
+      - 'azure-arm-batch.BatchAccountOperations#regenerateKey~baseUrl'
       - 'azure-arm-batch.BatchAccountOperations#regenerateKey~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#regenerateKey~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#regenerateKey~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#regenerateKey~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#regenerateKey~regex'
       - 'azure-arm-batch.BatchAccountOperations#regenerateKey~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#regenerateKey~queryParameters'
       - 'azure-arm-batch.BatchAccountOperations#regenerateKey~requestUrl'
@@ -850,7 +741,20 @@ items:
     id: 'azure-arm-batch.BatchAccountOperations#getKeys'
     parent: azure-arm-batch.BatchAccountOperations
     name: 'getKeys(resourceGroupName, accountName, options, callback)'
-    summary: Gets the account keys for the specified Batch account.
+    summary: >-
+      Gets the account keys for the specified Batch account.
+
+
+      This operation applies only to Batch accounts created with a
+
+      poolAllocationMode of 'BatchService'. If the Batch account was created
+      with
+
+      a poolAllocationMode of 'UserSubscription', clients cannot use access to
+
+      keys to authenticate, and must use Azure Active Directory instead. In this
+
+      case, getting the keys will fail.
     fullName: >-
       azure-arm-batch.BatchAccountOperations.getKeys(resourceGroupName,
       accountName, options, callback)
@@ -902,16 +806,245 @@ items:
       - 'azure-arm-batch.BatchAccountOperations#getKeys~client'
       - 'azure-arm-batch.BatchAccountOperations#getKeys~callback'
       - 'azure-arm-batch.BatchAccountOperations#getKeys~options'
+      - 'azure-arm-batch.BatchAccountOperations#getKeys~baseUrl'
       - 'azure-arm-batch.BatchAccountOperations#getKeys~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#getKeys~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#getKeys~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#getKeys~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#getKeys~regex'
       - 'azure-arm-batch.BatchAccountOperations#getKeys~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#getKeys~queryParameters'
       - 'azure-arm-batch.BatchAccountOperations#getKeys~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#getKeys~httpRequest'
       - 'azure-arm-batch.BatchAccountOperations#getKeys~headerName'
+  - uid: 'azure-arm-batch.BatchAccountOperations#beginCreate'
+    id: 'azure-arm-batch.BatchAccountOperations#beginCreate'
+    parent: azure-arm-batch.BatchAccountOperations
+    name: 'beginCreate(resourceGroupName, accountName, parameters, options, callback)'
+    summary: >-
+      Creates a new Batch account with the specified parameters. Existing
+      accounts
+
+      cannot be updated with this API and should instead be updated with the
+
+      Update Batch Account API.
+    fullName: >-
+      azure-arm-batch.BatchAccountOperations.beginCreate(resourceGroupName,
+      accountName, parameters, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            The name of the resource group that
+            contains the new Batch account.
+        - id: accountName
+          type:
+            - string
+          description: >-
+            A name for the Batch account which must be
+
+            unique within the region. Batch account names must be between 3 and
+            24
+
+            characters in length and must use only numbers and lowercase
+            letters. This
+
+            name is used as part of the DNS name that is used to access the
+            Batch
+
+            service in the region in which the account is created. For example:
+
+            http://accountname.region.batch.azure.com/.
+        - id: parameters
+          type:
+            - object
+          description: Additional parameters for account creation.
+        - id: parameters.location
+          type:
+            - string
+          description: |-
+            The region in which to create the
+            account.
+        - id: parameters.tags
+          type:
+            - object
+          description: |-
+            The user specified tags associated with
+            the account.
+          optional: true
+        - id: parameters.autoStorage
+          type:
+            - object
+          description: |-
+            The properties related to auto
+            storage account.
+          optional: true
+        - id: parameters.autoStorage.storageAccountId
+          type:
+            - string
+          description: |-
+            The resource ID of
+            the storage account to be used for auto storage account.
+        - id: parameters.poolAllocationMode
+          type:
+            - string
+          description: >-
+            The allocation mode to use
+
+            for creating pools in the Batch account. The pool allocation mode
+            also
+
+            affects how clients may authenticate to the Batch Service API. If
+            the mode
+
+            is BatchService, clients may authenticate using access keys or Azure
+            Active
+
+            Directory. If the mode is UserSubscription, clients must use Azure
+            Active
+
+            Directory. The default is BatchService. Possible values include:
+
+            'BatchService', 'UserSubscription'
+          optional: true
+        - id: parameters.keyVaultReference
+          type:
+            - object
+          description: |-
+            A reference to the Azure key
+            vault associated with the Batch account.
+          optional: true
+        - id: parameters.keyVaultReference.id
+          type:
+            - string
+          description: |-
+            The resource ID of the Azure
+            key vault associated with the Batch account.
+        - id: parameters.keyVaultReference.url
+          type:
+            - string
+          description: |-
+            The Url of the Azure key
+            vault associated with the Batch account.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object.
+                               See <xref:BatchAccount> for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginCreate(resourceGroupName, accountName, parameters,
+        options, callback)
+    children:
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~client'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~callback'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~options'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~baseUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~queryParameters'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~httpRequest'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~headerName'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestContent'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestModel'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestModelMapper'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestModel'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~requestContent'
+      - 'azure-arm-batch.BatchAccountOperations#beginCreate~serializationError'
+  - uid: 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod'
+    id: 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod'
+    parent: azure-arm-batch.BatchAccountOperations
+    name: 'beginDeleteMethod(resourceGroupName, accountName, options, callback)'
+    summary: Deletes the specified Batch account.
+    fullName: >-
+      azure-arm-batch.BatchAccountOperations.beginDeleteMethod(resourceGroupName,
+      accountName, options, callback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            The name of the resource group that
+            contains the Batch account to be deleted.
+        - id: accountName
+          type:
+            - string
+          description: The name of the account to be deleted.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - function
+        description: |-
+          callback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+      content: >-
+        function beginDeleteMethod(resourceGroupName, accountName, options,
+        callback)
+    children:
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~client'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~callback'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~options'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~baseUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~requestUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~requestUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~requestUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~requestUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~queryParameters'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~requestUrl'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~httpRequest'
+      - 'azure-arm-batch.BatchAccountOperations#beginDeleteMethod~headerName'
   - uid: 'azure-arm-batch.BatchAccountOperations#listNext'
     id: 'azure-arm-batch.BatchAccountOperations#listNext'
     parent: azure-arm-batch.BatchAccountOperations
@@ -968,8 +1101,6 @@ items:
       - 'azure-arm-batch.BatchAccountOperations#listNext~callback'
       - 'azure-arm-batch.BatchAccountOperations#listNext~options'
       - 'azure-arm-batch.BatchAccountOperations#listNext~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#listNext~requestUrl'
-      - 'azure-arm-batch.BatchAccountOperations#listNext~regex'
       - 'azure-arm-batch.BatchAccountOperations#listNext~requestUrl'
       - 'azure-arm-batch.BatchAccountOperations#listNext~httpRequest'
       - 'azure-arm-batch.BatchAccountOperations#listNext~headerName'
@@ -1030,9 +1161,6 @@ items:
       - 'azure-arm-batch.BatchAccountOperations#listByResourceGroupNext~options'
       - >-
         azure-arm-batch.BatchAccountOperations#listByResourceGroupNext~requestUrl
-      - >-
-        azure-arm-batch.BatchAccountOperations#listByResourceGroupNext~requestUrl
-      - 'azure-arm-batch.BatchAccountOperations#listByResourceGroupNext~regex'
       - >-
         azure-arm-batch.BatchAccountOperations#listByResourceGroupNext~requestUrl
       - >-

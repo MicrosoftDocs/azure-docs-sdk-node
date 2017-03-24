@@ -63,18 +63,25 @@ items:
     parent: azure-arm-datalake-store.FileSystem
     name: 'concurrentAppend(accountName, filePath, streamContents, options, callback)'
     summary: >-
-      Appends to the specified file. This method supports multiple concurrent
+      Appends to the specified file, optionally first creating the file if it
+      does
 
-      appends to the file. NOTE: ConcurrentAppend and normal (serial) Append
+      not yet exist. This method supports multiple concurrent appends to the
+      file.
 
-      CANNOT be used interchangeably; once a file has been appended to using
+      NOTE: The target must not contain data added by Create or normal (serial)
 
-      either of these append options, it can only be appended to using that
-      append
+      Append. ConcurrentAppend and Append cannot be used interchangeably; once a
 
-      option. ConcurrentAppend DOES NOT guarantee order and can result in
+      target file has been modified using either of these append options, the
 
-      duplicated data landing in the target file.
+      other append option cannot be used on the target file. ConcurrentAppend
+      does
+
+      not guarantee order and can result in duplicated data landing in the
+      target
+
+      file.
     fullName: >-
       azure-arm-datalake-store.FileSystem.concurrentAppend(accountName,
       filePath, streamContents, options, callback)
@@ -289,11 +296,11 @@ items:
   - uid: 'azure-arm-datalake-store.FileSystem#checkAccess'
     id: 'azure-arm-datalake-store.FileSystem#checkAccess'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'checkAccess(accountName, path, options, callback)'
+    name: 'checkAccess(accountName, path, fsaction, options, callback)'
     summary: Checks if the specified access is available at the given path.
     fullName: >-
       azure-arm-datalake-store.FileSystem.checkAccess(accountName, path,
-      options, callback)
+      fsaction, options, callback)
     type: Method
     syntax:
       parameters:
@@ -309,17 +316,16 @@ items:
           description: |-
             The Data Lake Store path (starting with '/') of the
             file or directory for which to check access.
+        - id: fsaction
+          type:
+            - string
+          description: |-
+            File system operation read/write/execute in string
+            form, matching regex pattern '[rwx-]{3}'
         - id: options
           type:
             - object
           description: Optional Parameters.
-          optional: true
-        - id: options.fsaction
-          type:
-            - string
-          description: |-
-            File system operation read/write/execute
-            in string form, matching regex pattern '[rwx-]{3}'
           optional: true
         - id: options.customHeaders
           type:
@@ -345,12 +351,11 @@ items:
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
                                {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function checkAccess(accountName, path, options, callback)'
+      content: 'function checkAccess(accountName, path, fsaction, options, callback)'
     children:
       - 'azure-arm-datalake-store.FileSystem#checkAccess~client'
       - 'azure-arm-datalake-store.FileSystem#checkAccess~callback'
       - 'azure-arm-datalake-store.FileSystem#checkAccess~options'
-      - 'azure-arm-datalake-store.FileSystem#checkAccess~fsaction'
       - 'azure-arm-datalake-store.FileSystem#checkAccess~op'
       - 'azure-arm-datalake-store.FileSystem#checkAccess~baseUrl'
       - 'azure-arm-datalake-store.FileSystem#checkAccess~requestUrl'
@@ -389,6 +394,13 @@ items:
             - object
           description: Optional Parameters.
           optional: true
+        - id: options.permission
+          type:
+            - number
+          description: |-
+            Optional octal permission with which
+            the directory should be created.
+          optional: true
         - id: options.customHeaders
           type:
             - object
@@ -419,6 +431,7 @@ items:
       - 'azure-arm-datalake-store.FileSystem#mkdirs~client'
       - 'azure-arm-datalake-store.FileSystem#mkdirs~callback'
       - 'azure-arm-datalake-store.FileSystem#mkdirs~options'
+      - 'azure-arm-datalake-store.FileSystem#mkdirs~permission'
       - 'azure-arm-datalake-store.FileSystem#mkdirs~op'
       - 'azure-arm-datalake-store.FileSystem#mkdirs~baseUrl'
       - 'azure-arm-datalake-store.FileSystem#mkdirs~requestUrl'
@@ -458,7 +471,7 @@ items:
           type:
             - array
           description: >-
-            A list of comma seperated Data Lake Store paths
+            A list of comma separated Data Lake Store paths
 
             (starting with '/') of the files to concatenate, in the order in
             which they
@@ -543,10 +556,14 @@ items:
         - id: streamContents
           type:
             - object
-          description: |-
+          description: >-
             A list of Data Lake Store paths (starting
-            with '/') of the source files. Must be in the format: sources=<comma
-            separated list>
+
+            with '/') of the source files. Must be a comma-separated path list
+            in the
+
+            format:
+            sources=/file/path/1.txt,/file/path/2.txt,/file/path/lastfile.csv
         - id: options
           type:
             - object
@@ -683,6 +700,17 @@ items:
 
             will also return 'a','b'. Optional.
           optional: true
+        - id: options.tooId
+          type:
+            - boolean
+          description: >-
+            An optional switch to return friendly names
+
+            in place of owner and group. tooid=false returns friendly names
+            instead of
+
+            the AAD Object ID. Default value is true, returning AAD object IDs.
+          optional: true
         - id: options.customHeaders
           type:
             - object
@@ -716,6 +744,7 @@ items:
       - 'azure-arm-datalake-store.FileSystem#listFileStatus~listSize'
       - 'azure-arm-datalake-store.FileSystem#listFileStatus~listAfter'
       - 'azure-arm-datalake-store.FileSystem#listFileStatus~listBefore'
+      - 'azure-arm-datalake-store.FileSystem#listFileStatus~tooId'
       - 'azure-arm-datalake-store.FileSystem#listFileStatus~op'
       - 'azure-arm-datalake-store.FileSystem#listFileStatus~baseUrl'
       - 'azure-arm-datalake-store.FileSystem#listFileStatus~requestUrl'
@@ -826,6 +855,17 @@ items:
             - object
           description: Optional Parameters.
           optional: true
+        - id: options.tooId
+          type:
+            - boolean
+          description: >-
+            An optional switch to return friendly names
+
+            in place of owner and group. tooid=false returns friendly names
+            instead of
+
+            the AAD Object ID. Default value is true, returning AAD object IDs.
+          optional: true
         - id: options.customHeaders
           type:
             - object
@@ -856,6 +896,7 @@ items:
       - 'azure-arm-datalake-store.FileSystem#getFileStatus~client'
       - 'azure-arm-datalake-store.FileSystem#getFileStatus~callback'
       - 'azure-arm-datalake-store.FileSystem#getFileStatus~options'
+      - 'azure-arm-datalake-store.FileSystem#getFileStatus~tooId'
       - 'azure-arm-datalake-store.FileSystem#getFileStatus~op'
       - 'azure-arm-datalake-store.FileSystem#getFileStatus~baseUrl'
       - 'azure-arm-datalake-store.FileSystem#getFileStatus~requestUrl'
@@ -870,19 +911,7 @@ items:
     id: 'azure-arm-datalake-store.FileSystem#append'
     parent: azure-arm-datalake-store.FileSystem
     name: 'append(accountName, directFilePath, streamContents, options, callback)'
-    summary: >-
-      Appends to the specified file. This method does not support multiple
-
-      concurrent appends to the file. NOTE: Concurrent append and normal
-      (serial)
-
-      append CANNOT be used interchangeably. Once a file has been appended to
-
-      using either append option, it can only be appended to using that append
-
-      option. Use the ConcurrentAppend option if you would like support for
-
-      concurrent appends.
+    summary: "Used for serial appends to the specified file.\_NOTE: The target must not\ncontain data added by ConcurrentAppend. ConcurrentAppend and Append cannot\nbe used interchangeably; once a target file has been modified using either\nof these append options, the other append option cannot be used on the\ntarget file."
     fullName: >-
       azure-arm-datalake-store.FileSystem.append(accountName, directFilePath,
       streamContents, options, callback)
@@ -938,6 +967,31 @@ items:
 
             'METADATA', 'CLOSE'
           optional: true
+        - id: options.leaseId
+          type:
+            - azure-arm-datalake-store.uuid
+          description: >-
+            Optional unique GUID per file to ensure
+
+            single writer semantics, meaning that only clients that append to
+            the file
+
+            with the same leaseId will be allowed to do so.
+          optional: true
+        - id: options.fileSessionId
+          type:
+            - azure-arm-datalake-store.uuid
+          description: >-
+            Optional unique GUID per file
+
+            indicating all the appends with the same fileSessionId are from the
+            same
+
+            client and same session. This will give a performance benefit when
+            syncFlag
+
+            is DATA or METADATA.
+          optional: true
         - id: options.customHeaders
           type:
             - object
@@ -971,6 +1025,8 @@ items:
       - 'azure-arm-datalake-store.FileSystem#append~options'
       - 'azure-arm-datalake-store.FileSystem#append~offset'
       - 'azure-arm-datalake-store.FileSystem#append~syncFlag'
+      - 'azure-arm-datalake-store.FileSystem#append~leaseId'
+      - 'azure-arm-datalake-store.FileSystem#append~fileSessionId'
       - 'azure-arm-datalake-store.FileSystem#append~op'
       - 'azure-arm-datalake-store.FileSystem#append~appendParameter'
       - 'azure-arm-datalake-store.FileSystem#append~allowedValues'
@@ -988,7 +1044,9 @@ items:
     id: 'azure-arm-datalake-store.FileSystem#create'
     parent: azure-arm-datalake-store.FileSystem
     name: 'create(accountName, directFilePath, options, callback)'
-    summary: Creates a file with optionally specified content.
+    summary: |-
+      Creates a file with optionally specified content. NOTE: If content is
+      provided, the resulting file cannot be modified using ConcurrentAppend.
     fullName: >-
       azure-arm-datalake-store.FileSystem.create(accountName, directFilePath,
       options, callback)
@@ -1045,9 +1103,31 @@ items:
             the file only. CLOSE indicates that both the stream and metadata
             should be
 
-            refreshed upon append completion. Possible values include: 'DATA',
+            refreshed upon create completion. Possible values include: 'DATA',
 
             'METADATA', 'CLOSE'
+          optional: true
+        - id: options.leaseId
+          type:
+            - azure-arm-datalake-store.uuid
+          description: >-
+            Optional unique GUID per file to ensure
+
+            single writer semantics, meaning that only clients that append to
+            the file
+
+            with the same leaseId will be allowed to do so.
+          optional: true
+        - id: options.permission
+          type:
+            - number
+          description: >-
+            The octal representation of the unnamed
+
+            user, mask and other permissions that should be set for the file
+            when
+
+            created. If not specified, it inherits these from the container.
           optional: true
         - id: options.customHeaders
           type:
@@ -1081,6 +1161,8 @@ items:
       - 'azure-arm-datalake-store.FileSystem#create~streamContents'
       - 'azure-arm-datalake-store.FileSystem#create~overwrite'
       - 'azure-arm-datalake-store.FileSystem#create~syncFlag'
+      - 'azure-arm-datalake-store.FileSystem#create~leaseId'
+      - 'azure-arm-datalake-store.FileSystem#create~permission'
       - 'azure-arm-datalake-store.FileSystem#create~op'
       - 'azure-arm-datalake-store.FileSystem#create~write'
       - 'azure-arm-datalake-store.FileSystem#create~allowedValues'
@@ -1134,6 +1216,17 @@ items:
             - number
           description: The byte offset to start reading data from.
           optional: true
+        - id: options.fileSessionId
+          type:
+            - azure-arm-datalake-store.uuid
+          description: >-
+            Optional unique GUID per file
+
+            indicating all the reads with the same fileSessionId are from the
+            same
+
+            client and same session. This will give a performance benefit.
+          optional: true
         - id: options.customHeaders
           type:
             - object
@@ -1165,6 +1258,7 @@ items:
       - 'azure-arm-datalake-store.FileSystem#open~options'
       - 'azure-arm-datalake-store.FileSystem#open~length'
       - 'azure-arm-datalake-store.FileSystem#open~offset'
+      - 'azure-arm-datalake-store.FileSystem#open~fileSessionId'
       - 'azure-arm-datalake-store.FileSystem#open~op'
       - 'azure-arm-datalake-store.FileSystem#open~read'
       - 'azure-arm-datalake-store.FileSystem#open~baseUrl'
@@ -1573,6 +1667,20 @@ items:
             - object
           description: Optional Parameters.
           optional: true
+        - id: options.tooId
+          type:
+            - boolean
+          description: >-
+            An optional switch to return friendly names
+
+            in place of object ID for ACL entries. tooid=false returns friendly
+            names
+
+            instead of the AAD Object ID. Default value is true, returning AAD
+            object
+
+            IDs.
+          optional: true
         - id: options.customHeaders
           type:
             - object
@@ -1603,6 +1711,7 @@ items:
       - 'azure-arm-datalake-store.FileSystem#getAclStatus~client'
       - 'azure-arm-datalake-store.FileSystem#getAclStatus~callback'
       - 'azure-arm-datalake-store.FileSystem#getAclStatus~options'
+      - 'azure-arm-datalake-store.FileSystem#getAclStatus~tooId'
       - 'azure-arm-datalake-store.FileSystem#getAclStatus~op'
       - 'azure-arm-datalake-store.FileSystem#getAclStatus~baseUrl'
       - 'azure-arm-datalake-store.FileSystem#getAclStatus~requestUrl'
@@ -1951,4 +2060,8 @@ references:
   - uid: boolean
     name: boolean
     fullName: boolean
+    isExternal: true
+  - uid: azure-arm-datalake-store.uuid
+    name: uuid
+    fullName: azure-arm-datalake-store.uuid
     isExternal: true

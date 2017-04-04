@@ -3,31 +3,24 @@ items:
   - uid: azure-servicefabric.PartitionLists
     id: azure-servicefabric.PartitionLists
     name: PartitionLists
-    summary: |-
-      PartitionLists
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the ServiceFabricClient.
-      Initializes a new instance of the PartitionLists class.
+    summary: ''
     fullName: azure-servicefabric.PartitionLists
     type: Class
     children:
       - 'azure-servicefabric.PartitionLists.#ctor'
       - 'azure-servicefabric.PartitionLists#client'
+      - 'azure-servicefabric.PartitionLists#_repair'
+      - 'azure-servicefabric.PartitionLists#repairWithHttpOperationResponse'
       - 'azure-servicefabric.PartitionLists#repair'
   - id: 'azure-servicefabric.PartitionLists.#ctor'
     uid: 'azure-servicefabric.PartitionLists.#ctor'
     parent: azure-servicefabric.PartitionLists
-    name: PartitionLists(client)
-    fullName: azure-servicefabric.PartitionLists.PartitionLists(client)
+    name: PartitionLists()
+    fullName: azure-servicefabric.PartitionLists.PartitionLists()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-servicefabric.ServiceFabricClient
-          description: Reference to the service client.
-      content: new PartitionLists(client)
+      content: new PartitionLists()
   - uid: 'azure-servicefabric.PartitionLists#client'
     id: 'azure-servicefabric.PartitionLists#client'
     parent: azure-servicefabric.PartitionLists
@@ -37,12 +30,23 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-servicefabric.PartitionLists#repair'
-    id: 'azure-servicefabric.PartitionLists#repair'
+  - uid: 'azure-servicefabric.PartitionLists#_repair'
+    id: 'azure-servicefabric.PartitionLists#_repair'
     parent: azure-servicefabric.PartitionLists
-    name: 'repair(serviceName, options, callback)'
+    name: _repair
+    summary: ''
+    fullName: azure-servicefabric.PartitionLists._repair
+    type: Field
+    syntax:
+      content: _repair
+  - uid: 'azure-servicefabric.PartitionLists#repairWithHttpOperationResponse'
+    id: 'azure-servicefabric.PartitionLists#repairWithHttpOperationResponse'
+    parent: azure-servicefabric.PartitionLists
+    name: 'repairWithHttpOperationResponse(serviceName, options)'
     summary: Repair partition lists
-    fullName: 'azure-servicefabric.PartitionLists.repair(serviceName, options, callback)'
+    fullName: >-
+      azure-servicefabric.PartitionLists.repairWithHttpOperationResponse(serviceName,
+      options)
     type: Method
     syntax:
       parameters:
@@ -62,41 +66,54 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: 'function repairWithHttpOperationResponse(serviceName, options)'
+  - uid: 'azure-servicefabric.PartitionLists#repair'
+    id: 'azure-servicefabric.PartitionLists#repair'
+    parent: azure-servicefabric.PartitionLists
+    name: 'repair(serviceName, options, optionalCallback)'
+    summary: Repair partition lists
+    fullName: >-
+      azure-servicefabric.PartitionLists.repair(serviceName, options,
+      optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: serviceName
+          type:
+            - string
+          description: The name of the service
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {string} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function repair(serviceName, options, callback)'
-    children:
-      - 'azure-servicefabric.PartitionLists#repair~client'
-      - 'azure-servicefabric.PartitionLists#repair~callback'
-      - 'azure-servicefabric.PartitionLists#repair~options'
-      - 'azure-servicefabric.PartitionLists#repair~requestUrl'
-      - 'azure-servicefabric.PartitionLists#repair~requestUrl'
-      - 'azure-servicefabric.PartitionLists#repair~queryParameters'
-      - 'azure-servicefabric.PartitionLists#repair~requestUrl'
-      - 'azure-servicefabric.PartitionLists#repair~regex'
-      - 'azure-servicefabric.PartitionLists#repair~requestUrl'
-      - 'azure-servicefabric.PartitionLists#repair~httpRequest'
-      - 'azure-servicefabric.PartitionLists#repair~headerName'
+          {Promise} A promise is returned
+      content: 'function repair(serviceName, options, optionalCallback)'
 references:
-  - uid: azure-servicefabric.ServiceFabricClient
-    name: ServiceFabricClient
-    fullName: azure-servicefabric.ServiceFabricClient
-    isExternal: false
   - uid: string
     name: string
     fullName: string
@@ -104,6 +121,10 @@ references:
   - uid: object
     name: object
     fullName: object
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

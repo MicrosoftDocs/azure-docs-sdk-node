@@ -3,31 +3,24 @@ items:
   - uid: azure-servicefabric.DeployedServiceTypes
     id: azure-servicefabric.DeployedServiceTypes
     name: DeployedServiceTypes
-    summary: |-
-      DeployedServiceTypes
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the ServiceFabricClient.
-      Initializes a new instance of the DeployedServiceTypes class.
+    summary: ''
     fullName: azure-servicefabric.DeployedServiceTypes
     type: Class
     children:
       - 'azure-servicefabric.DeployedServiceTypes.#ctor'
       - 'azure-servicefabric.DeployedServiceTypes#client'
+      - 'azure-servicefabric.DeployedServiceTypes#_get'
+      - 'azure-servicefabric.DeployedServiceTypes#getWithHttpOperationResponse'
       - 'azure-servicefabric.DeployedServiceTypes#get'
   - id: 'azure-servicefabric.DeployedServiceTypes.#ctor'
     uid: 'azure-servicefabric.DeployedServiceTypes.#ctor'
     parent: azure-servicefabric.DeployedServiceTypes
-    name: DeployedServiceTypes(client)
-    fullName: azure-servicefabric.DeployedServiceTypes.DeployedServiceTypes(client)
+    name: DeployedServiceTypes()
+    fullName: azure-servicefabric.DeployedServiceTypes.DeployedServiceTypes()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-servicefabric.ServiceFabricClient
-          description: Reference to the service client.
-      content: new DeployedServiceTypes(client)
+      content: new DeployedServiceTypes()
   - uid: 'azure-servicefabric.DeployedServiceTypes#client'
     id: 'azure-servicefabric.DeployedServiceTypes#client'
     parent: azure-servicefabric.DeployedServiceTypes
@@ -37,14 +30,23 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-servicefabric.DeployedServiceTypes#get'
-    id: 'azure-servicefabric.DeployedServiceTypes#get'
+  - uid: 'azure-servicefabric.DeployedServiceTypes#_get'
+    id: 'azure-servicefabric.DeployedServiceTypes#_get'
     parent: azure-servicefabric.DeployedServiceTypes
-    name: 'get(nodeName, applicationName, options, callback)'
+    name: _get
+    summary: ''
+    fullName: azure-servicefabric.DeployedServiceTypes._get
+    type: Field
+    syntax:
+      content: _get
+  - uid: 'azure-servicefabric.DeployedServiceTypes#getWithHttpOperationResponse'
+    id: 'azure-servicefabric.DeployedServiceTypes#getWithHttpOperationResponse'
+    parent: azure-servicefabric.DeployedServiceTypes
+    name: 'getWithHttpOperationResponse(nodeName, applicationName, options)'
     summary: Get deployed service types
     fullName: >-
-      azure-servicefabric.DeployedServiceTypes.get(nodeName, applicationName,
-      options, callback)
+      azure-servicefabric.DeployedServiceTypes.getWithHttpOperationResponse(nodeName,
+      applicationName, options)
     type: Method
     syntax:
       parameters:
@@ -68,42 +70,60 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function getWithHttpOperationResponse(nodeName, applicationName,
+        options)
+  - uid: 'azure-servicefabric.DeployedServiceTypes#get'
+    id: 'azure-servicefabric.DeployedServiceTypes#get'
+    parent: azure-servicefabric.DeployedServiceTypes
+    name: 'get(nodeName, applicationName, options, optionalCallback)'
+    summary: Get deployed service types
+    fullName: >-
+      azure-servicefabric.DeployedServiceTypes.get(nodeName, applicationName,
+      options, optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: nodeName
+          type:
+            - string
+          description: The name of the node
+        - id: applicationName
+          type:
+            - string
+          description: The name of the application
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {array} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function get(nodeName, applicationName, options, callback)'
-    children:
-      - 'azure-servicefabric.DeployedServiceTypes#get~client'
-      - 'azure-servicefabric.DeployedServiceTypes#get~callback'
-      - 'azure-servicefabric.DeployedServiceTypes#get~options'
-      - 'azure-servicefabric.DeployedServiceTypes#get~requestUrl'
-      - 'azure-servicefabric.DeployedServiceTypes#get~requestUrl'
-      - 'azure-servicefabric.DeployedServiceTypes#get~requestUrl'
-      - 'azure-servicefabric.DeployedServiceTypes#get~queryParameters'
-      - 'azure-servicefabric.DeployedServiceTypes#get~requestUrl'
-      - 'azure-servicefabric.DeployedServiceTypes#get~regex'
-      - 'azure-servicefabric.DeployedServiceTypes#get~requestUrl'
-      - 'azure-servicefabric.DeployedServiceTypes#get~httpRequest'
-      - 'azure-servicefabric.DeployedServiceTypes#get~headerName'
+          {Promise} A promise is returned
+      content: 'function get(nodeName, applicationName, options, optionalCallback)'
 references:
-  - uid: azure-servicefabric.ServiceFabricClient
-    name: ServiceFabricClient
-    fullName: azure-servicefabric.ServiceFabricClient
-    isExternal: false
   - uid: string
     name: string
     fullName: string
@@ -111,6 +131,10 @@ references:
   - uid: object
     name: object
     fullName: object
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

@@ -3,32 +3,27 @@ items:
   - uid: azure-batch.Account
     id: azure-batch.Account
     name: Account
-    summary: |-
-      Account
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the BatchServiceClient.
-      Initializes a new instance of the Account class.
+    summary: ''
     fullName: azure-batch.Account
     type: Class
     children:
       - 'azure-batch.Account.#ctor'
       - 'azure-batch.Account#client'
+      - 'azure-batch.Account#_listNodeAgentSkus'
+      - 'azure-batch.Account#_listNodeAgentSkusNext'
+      - 'azure-batch.Account#listNodeAgentSkusWithHttpOperationResponse'
       - 'azure-batch.Account#listNodeAgentSkus'
+      - 'azure-batch.Account#listNodeAgentSkusNextWithHttpOperationResponse'
       - 'azure-batch.Account#listNodeAgentSkusNext'
   - id: 'azure-batch.Account.#ctor'
     uid: 'azure-batch.Account.#ctor'
     parent: azure-batch.Account
-    name: Account(client)
-    fullName: azure-batch.Account.Account(client)
+    name: Account()
+    fullName: azure-batch.Account.Account()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-batch.BatchServiceClient
-          description: Reference to the service client.
-      content: new Account(client)
+      content: new Account()
   - uid: 'azure-batch.Account#client'
     id: 'azure-batch.Account#client'
     parent: azure-batch.Account
@@ -38,12 +33,30 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-batch.Account#listNodeAgentSkus'
-    id: 'azure-batch.Account#listNodeAgentSkus'
+  - uid: 'azure-batch.Account#_listNodeAgentSkus'
+    id: 'azure-batch.Account#_listNodeAgentSkus'
     parent: azure-batch.Account
-    name: 'listNodeAgentSkus(options, callback)'
+    name: _listNodeAgentSkus
+    summary: ''
+    fullName: azure-batch.Account._listNodeAgentSkus
+    type: Field
+    syntax:
+      content: _listNodeAgentSkus
+  - uid: 'azure-batch.Account#_listNodeAgentSkusNext'
+    id: 'azure-batch.Account#_listNodeAgentSkusNext'
+    parent: azure-batch.Account
+    name: _listNodeAgentSkusNext
+    summary: ''
+    fullName: azure-batch.Account._listNodeAgentSkusNext
+    type: Field
+    syntax:
+      content: _listNodeAgentSkusNext
+  - uid: 'azure-batch.Account#listNodeAgentSkusWithHttpOperationResponse'
+    id: 'azure-batch.Account#listNodeAgentSkusWithHttpOperationResponse'
+    parent: azure-batch.Account
+    name: listNodeAgentSkusWithHttpOperationResponse(options)
     summary: Lists all node agent SKUs supported by the Azure Batch service.
-    fullName: 'azure-batch.Account.listNodeAgentSkus(options, callback)'
+    fullName: azure-batch.Account.listNodeAgentSkusWithHttpOperationResponse(options)
     type: Method
     syntax:
       parameters:
@@ -126,55 +139,122 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: function listNodeAgentSkusWithHttpOperationResponse(options)
+  - uid: 'azure-batch.Account#listNodeAgentSkus'
+    id: 'azure-batch.Account#listNodeAgentSkus'
+    parent: azure-batch.Account
+    name: 'listNodeAgentSkus(options, optionalCallback)'
+    summary: Lists all node agent SKUs supported by the Azure Batch service.
+    fullName: 'azure-batch.Account.listNodeAgentSkus(options, optionalCallback)'
+    type: Method
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.accountListNodeAgentSkusOptions
+          type:
+            - object
+          description: |-
+            Additional
+            parameters for the operation
+          optional: true
+        - id: options.accountListNodeAgentSkusOptions.filter
+          type:
+            - string
+          description: |-
+            An OData
+            $filter clause.
+          optional: true
+        - id: options.accountListNodeAgentSkusOptions.maxResults
+          type:
+            - number
+          description: >-
+            The
+
+            maximum number of items to return in the response. A maximum of 1000
+            results
+
+            will be returned.
+          optional: true
+        - id: options.accountListNodeAgentSkusOptions.timeout
+          type:
+            - number
+          description: >-
+            The
+
+            maximum time that the server can spend processing the request, in
+            seconds.
+
+            The default is 30 seconds.
+          optional: true
+        - id: options.accountListNodeAgentSkusOptions.clientRequestId
+          type:
+            - azure-batch.uuid
+          description: >-
+            The
+
+            caller-generated request identity, in the form of a GUID with no
+            decoration
+
+            such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.accountListNodeAgentSkusOptions.returnClientRequestId
+          type:
+            - boolean
+          description: |-
+            Whether the
+            server should return the client-request-id in the response.
+          optional: true
+        - id: options.accountListNodeAgentSkusOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time the
+
+            request was issued. Client libraries typically set this to the
+            current
+
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:AccountListNodeAgentSkusResult> for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function listNodeAgentSkus(options, callback)'
-    children:
-      - 'azure-batch.Account#listNodeAgentSkus~client'
-      - 'azure-batch.Account#listNodeAgentSkus~callback'
-      - 'azure-batch.Account#listNodeAgentSkus~options'
-      - 'azure-batch.Account#listNodeAgentSkus~accountListNodeAgentSkusOptions'
-      - 'azure-batch.Account#listNodeAgentSkus~filter'
-      - 'azure-batch.Account#listNodeAgentSkus~maxResults'
-      - 'azure-batch.Account#listNodeAgentSkus~timeout'
-      - 'azure-batch.Account#listNodeAgentSkus~clientRequestId'
-      - 'azure-batch.Account#listNodeAgentSkus~returnClientRequestId'
-      - 'azure-batch.Account#listNodeAgentSkus~ocpDate'
-      - 'azure-batch.Account#listNodeAgentSkus~filter'
-      - 'azure-batch.Account#listNodeAgentSkus~maxResults'
-      - 'azure-batch.Account#listNodeAgentSkus~timeout'
-      - 'azure-batch.Account#listNodeAgentSkus~clientRequestId'
-      - 'azure-batch.Account#listNodeAgentSkus~returnClientRequestId'
-      - 'azure-batch.Account#listNodeAgentSkus~ocpDate'
-      - 'azure-batch.Account#listNodeAgentSkus~baseUrl'
-      - 'azure-batch.Account#listNodeAgentSkus~requestUrl'
-      - 'azure-batch.Account#listNodeAgentSkus~queryParameters'
-      - 'azure-batch.Account#listNodeAgentSkus~requestUrl'
-      - 'azure-batch.Account#listNodeAgentSkus~httpRequest'
-      - 'azure-batch.Account#listNodeAgentSkus~headerName'
-  - uid: 'azure-batch.Account#listNodeAgentSkusNext'
-    id: 'azure-batch.Account#listNodeAgentSkusNext'
+          {Promise} A promise is returned
+      content: 'function listNodeAgentSkus(options, optionalCallback)'
+  - uid: 'azure-batch.Account#listNodeAgentSkusNextWithHttpOperationResponse'
+    id: 'azure-batch.Account#listNodeAgentSkusNextWithHttpOperationResponse'
     parent: azure-batch.Account
-    name: 'listNodeAgentSkusNext(nextPageLink, options, callback)'
+    name: 'listNodeAgentSkusNextWithHttpOperationResponse(nextPageLink, options)'
     summary: Lists all node agent SKUs supported by the Azure Batch service.
-    fullName: 'azure-batch.Account.listNodeAgentSkusNext(nextPageLink, options, callback)'
+    fullName: >-
+      azure-batch.Account.listNodeAgentSkusNextWithHttpOperationResponse(nextPageLink,
+      options)
     type: Method
     syntax:
       parameters:
@@ -232,47 +312,94 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function listNodeAgentSkusNextWithHttpOperationResponse(nextPageLink,
+        options)
+  - uid: 'azure-batch.Account#listNodeAgentSkusNext'
+    id: 'azure-batch.Account#listNodeAgentSkusNext'
+    parent: azure-batch.Account
+    name: 'listNodeAgentSkusNext(nextPageLink, options, optionalCallback)'
+    summary: Lists all node agent SKUs supported by the Azure Batch service.
+    fullName: >-
+      azure-batch.Account.listNodeAgentSkusNext(nextPageLink, options,
+      optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.accountListNodeAgentSkusNextOptions
+          type:
+            - object
+          description: |-
+            Additional
+            parameters for the operation
+          optional: true
+        - id: options.accountListNodeAgentSkusNextOptions.clientRequestId
+          type:
+            - azure-batch.uuid
+          description: >-
+            The caller-generated request identity, in the form of a GUID with no
+
+            decoration such as curly braces, e.g.
+            9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+          optional: true
+        - id: options.accountListNodeAgentSkusNextOptions.returnClientRequestId
+          type:
+            - boolean
+          description: |-
+            Whether
+            the server should return the client-request-id in the response.
+          optional: true
+        - id: options.accountListNodeAgentSkusNextOptions.ocpDate
+          type:
+            - date
+          description: >-
+            The time
+
+            the request was issued. Client libraries typically set this to the
+            current
+
+            system clock time; set it explicitly if you are calling the REST API
+
+            directly.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:AccountListNodeAgentSkusResult> for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function listNodeAgentSkusNext(nextPageLink, options, callback)'
-    children:
-      - 'azure-batch.Account#listNodeAgentSkusNext~client'
-      - 'azure-batch.Account#listNodeAgentSkusNext~callback'
-      - 'azure-batch.Account#listNodeAgentSkusNext~options'
-      - >-
-        azure-batch.Account#listNodeAgentSkusNext~accountListNodeAgentSkusNextOptions
-      - 'azure-batch.Account#listNodeAgentSkusNext~clientRequestId'
-      - 'azure-batch.Account#listNodeAgentSkusNext~returnClientRequestId'
-      - 'azure-batch.Account#listNodeAgentSkusNext~ocpDate'
-      - 'azure-batch.Account#listNodeAgentSkusNext~clientRequestId'
-      - 'azure-batch.Account#listNodeAgentSkusNext~returnClientRequestId'
-      - 'azure-batch.Account#listNodeAgentSkusNext~ocpDate'
-      - 'azure-batch.Account#listNodeAgentSkusNext~requestUrl'
-      - 'azure-batch.Account#listNodeAgentSkusNext~requestUrl'
-      - 'azure-batch.Account#listNodeAgentSkusNext~httpRequest'
-      - 'azure-batch.Account#listNodeAgentSkusNext~headerName'
+          {Promise} A promise is returned
+      content: 'function listNodeAgentSkusNext(nextPageLink, options, optionalCallback)'
 references:
-  - uid: azure-batch.BatchServiceClient
-    name: BatchServiceClient
-    fullName: azure-batch.BatchServiceClient
-    isExternal: false
   - uid: object
     name: object
     fullName: object
@@ -296,6 +423,10 @@ references:
   - uid: date
     name: date
     fullName: date
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

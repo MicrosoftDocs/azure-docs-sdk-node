@@ -3,31 +3,24 @@ items:
   - uid: azure-servicefabric.DeployedReplicas
     id: azure-servicefabric.DeployedReplicas
     name: DeployedReplicas
-    summary: |-
-      DeployedReplicas
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the ServiceFabricClient.
-      Initializes a new instance of the DeployedReplicas class.
+    summary: ''
     fullName: azure-servicefabric.DeployedReplicas
     type: Class
     children:
       - 'azure-servicefabric.DeployedReplicas.#ctor'
       - 'azure-servicefabric.DeployedReplicas#client'
+      - 'azure-servicefabric.DeployedReplicas#_get'
+      - 'azure-servicefabric.DeployedReplicas#getWithHttpOperationResponse'
       - 'azure-servicefabric.DeployedReplicas#get'
   - id: 'azure-servicefabric.DeployedReplicas.#ctor'
     uid: 'azure-servicefabric.DeployedReplicas.#ctor'
     parent: azure-servicefabric.DeployedReplicas
-    name: DeployedReplicas(client)
-    fullName: azure-servicefabric.DeployedReplicas.DeployedReplicas(client)
+    name: DeployedReplicas()
+    fullName: azure-servicefabric.DeployedReplicas.DeployedReplicas()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-servicefabric.ServiceFabricClient
-          description: Reference to the service client.
-      content: new DeployedReplicas(client)
+      content: new DeployedReplicas()
   - uid: 'azure-servicefabric.DeployedReplicas#client'
     id: 'azure-servicefabric.DeployedReplicas#client'
     parent: azure-servicefabric.DeployedReplicas
@@ -37,14 +30,23 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-servicefabric.DeployedReplicas#get'
-    id: 'azure-servicefabric.DeployedReplicas#get'
+  - uid: 'azure-servicefabric.DeployedReplicas#_get'
+    id: 'azure-servicefabric.DeployedReplicas#_get'
     parent: azure-servicefabric.DeployedReplicas
-    name: 'get(nodeName, applicationName, options, callback)'
+    name: _get
+    summary: ''
+    fullName: azure-servicefabric.DeployedReplicas._get
+    type: Field
+    syntax:
+      content: _get
+  - uid: 'azure-servicefabric.DeployedReplicas#getWithHttpOperationResponse'
+    id: 'azure-servicefabric.DeployedReplicas#getWithHttpOperationResponse'
+    parent: azure-servicefabric.DeployedReplicas
+    name: 'getWithHttpOperationResponse(nodeName, applicationName, options)'
     summary: Get deployed replicas
     fullName: >-
-      azure-servicefabric.DeployedReplicas.get(nodeName, applicationName,
-      options, callback)
+      azure-servicefabric.DeployedReplicas.getWithHttpOperationResponse(nodeName,
+      applicationName, options)
     type: Method
     syntax:
       parameters:
@@ -68,42 +70,60 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function getWithHttpOperationResponse(nodeName, applicationName,
+        options)
+  - uid: 'azure-servicefabric.DeployedReplicas#get'
+    id: 'azure-servicefabric.DeployedReplicas#get'
+    parent: azure-servicefabric.DeployedReplicas
+    name: 'get(nodeName, applicationName, options, optionalCallback)'
+    summary: Get deployed replicas
+    fullName: >-
+      azure-servicefabric.DeployedReplicas.get(nodeName, applicationName,
+      options, optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: nodeName
+          type:
+            - string
+          description: The name of the node
+        - id: applicationName
+          type:
+            - string
+          description: The name of the application
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {array} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function get(nodeName, applicationName, options, callback)'
-    children:
-      - 'azure-servicefabric.DeployedReplicas#get~client'
-      - 'azure-servicefabric.DeployedReplicas#get~callback'
-      - 'azure-servicefabric.DeployedReplicas#get~options'
-      - 'azure-servicefabric.DeployedReplicas#get~requestUrl'
-      - 'azure-servicefabric.DeployedReplicas#get~requestUrl'
-      - 'azure-servicefabric.DeployedReplicas#get~requestUrl'
-      - 'azure-servicefabric.DeployedReplicas#get~queryParameters'
-      - 'azure-servicefabric.DeployedReplicas#get~requestUrl'
-      - 'azure-servicefabric.DeployedReplicas#get~regex'
-      - 'azure-servicefabric.DeployedReplicas#get~requestUrl'
-      - 'azure-servicefabric.DeployedReplicas#get~httpRequest'
-      - 'azure-servicefabric.DeployedReplicas#get~headerName'
+          {Promise} A promise is returned
+      content: 'function get(nodeName, applicationName, options, optionalCallback)'
 references:
-  - uid: azure-servicefabric.ServiceFabricClient
-    name: ServiceFabricClient
-    fullName: azure-servicefabric.ServiceFabricClient
-    isExternal: false
   - uid: string
     name: string
     fullName: string
@@ -111,6 +131,10 @@ references:
   - uid: object
     name: object
     fullName: object
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

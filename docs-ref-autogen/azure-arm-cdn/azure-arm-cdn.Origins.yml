@@ -3,35 +3,36 @@ items:
   - uid: azure-arm-cdn.Origins
     id: azure-arm-cdn.Origins
     name: Origins
-    summary: |-
-      Origins
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the CdnManagementClient.
-      Initializes a new instance of the Origins class.
+    summary: ''
     fullName: azure-arm-cdn.Origins
     type: Class
     children:
       - 'azure-arm-cdn.Origins.#ctor'
       - 'azure-arm-cdn.Origins#client'
+      - 'azure-arm-cdn.Origins#_listByEndpoint'
+      - 'azure-arm-cdn.Origins#_get'
+      - 'azure-arm-cdn.Origins#_update'
+      - 'azure-arm-cdn.Origins#_beginUpdate'
+      - 'azure-arm-cdn.Origins#_listByEndpointNext'
+      - 'azure-arm-cdn.Origins#listByEndpointWithHttpOperationResponse'
       - 'azure-arm-cdn.Origins#listByEndpoint'
+      - 'azure-arm-cdn.Origins#getWithHttpOperationResponse'
       - 'azure-arm-cdn.Origins#get'
+      - 'azure-arm-cdn.Origins#updateWithHttpOperationResponse'
       - 'azure-arm-cdn.Origins#update'
+      - 'azure-arm-cdn.Origins#beginUpdateWithHttpOperationResponse'
       - 'azure-arm-cdn.Origins#beginUpdate'
+      - 'azure-arm-cdn.Origins#listByEndpointNextWithHttpOperationResponse'
       - 'azure-arm-cdn.Origins#listByEndpointNext'
   - id: 'azure-arm-cdn.Origins.#ctor'
     uid: 'azure-arm-cdn.Origins.#ctor'
     parent: azure-arm-cdn.Origins
-    name: Origins(client)
-    fullName: azure-arm-cdn.Origins.Origins(client)
+    name: Origins()
+    fullName: azure-arm-cdn.Origins.Origins()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-arm-cdn.CdnManagementClient
-          description: Reference to the service client.
-      content: new Origins(client)
+      content: new Origins()
   - uid: 'azure-arm-cdn.Origins#client'
     id: 'azure-arm-cdn.Origins#client'
     parent: azure-arm-cdn.Origins
@@ -41,16 +42,111 @@ items:
     type: Field
     syntax:
       content: client
+  - uid: 'azure-arm-cdn.Origins#_listByEndpoint'
+    id: 'azure-arm-cdn.Origins#_listByEndpoint'
+    parent: azure-arm-cdn.Origins
+    name: _listByEndpoint
+    summary: ''
+    fullName: azure-arm-cdn.Origins._listByEndpoint
+    type: Field
+    syntax:
+      content: _listByEndpoint
+  - uid: 'azure-arm-cdn.Origins#_get'
+    id: 'azure-arm-cdn.Origins#_get'
+    parent: azure-arm-cdn.Origins
+    name: _get
+    summary: ''
+    fullName: azure-arm-cdn.Origins._get
+    type: Field
+    syntax:
+      content: _get
+  - uid: 'azure-arm-cdn.Origins#_update'
+    id: 'azure-arm-cdn.Origins#_update'
+    parent: azure-arm-cdn.Origins
+    name: _update
+    summary: ''
+    fullName: azure-arm-cdn.Origins._update
+    type: Field
+    syntax:
+      content: _update
+  - uid: 'azure-arm-cdn.Origins#_beginUpdate'
+    id: 'azure-arm-cdn.Origins#_beginUpdate'
+    parent: azure-arm-cdn.Origins
+    name: _beginUpdate
+    summary: ''
+    fullName: azure-arm-cdn.Origins._beginUpdate
+    type: Field
+    syntax:
+      content: _beginUpdate
+  - uid: 'azure-arm-cdn.Origins#_listByEndpointNext'
+    id: 'azure-arm-cdn.Origins#_listByEndpointNext'
+    parent: azure-arm-cdn.Origins
+    name: _listByEndpointNext
+    summary: ''
+    fullName: azure-arm-cdn.Origins._listByEndpointNext
+    type: Field
+    syntax:
+      content: _listByEndpointNext
+  - uid: 'azure-arm-cdn.Origins#listByEndpointWithHttpOperationResponse'
+    id: 'azure-arm-cdn.Origins#listByEndpointWithHttpOperationResponse'
+    parent: azure-arm-cdn.Origins
+    name: >-
+      listByEndpointWithHttpOperationResponse(resourceGroupName, profileName,
+      endpointName, options)
+    summary: Lists all of the existing origins within an endpoint.
+    fullName: >-
+      azure-arm-cdn.Origins.listByEndpointWithHttpOperationResponse(resourceGroupName,
+      profileName, endpointName, options)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            Name of the Resource group within the
+            Azure subscription.
+        - id: profileName
+          type:
+            - string
+          description: |-
+            Name of the CDN profile which is unique within
+            the resource group.
+        - id: endpointName
+          type:
+            - string
+          description: |-
+            Name of the endpoint under the profile which is
+            unique globally.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function listByEndpointWithHttpOperationResponse(resourceGroupName,
+        profileName, endpointName, options)
   - uid: 'azure-arm-cdn.Origins#listByEndpoint'
     id: 'azure-arm-cdn.Origins#listByEndpoint'
     parent: azure-arm-cdn.Origins
     name: >-
       listByEndpoint(resourceGroupName, profileName, endpointName, options,
-      callback)
+      optionalCallback)
     summary: Lists all of the existing origins within an endpoint.
     fullName: >-
       azure-arm-cdn.Origins.listByEndpoint(resourceGroupName, profileName,
-      endpointName, options, callback)
+      endpointName, options, optionalCallback)
     type: Method
     syntax:
       parameters:
@@ -84,51 +180,89 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:OriginListResult> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+          {Promise} A promise is returned
       content: >-
         function listByEndpoint(resourceGroupName, profileName, endpointName,
-        options, callback)
-    children:
-      - 'azure-arm-cdn.Origins#listByEndpoint~client'
-      - 'azure-arm-cdn.Origins#listByEndpoint~callback'
-      - 'azure-arm-cdn.Origins#listByEndpoint~options'
-      - 'azure-arm-cdn.Origins#listByEndpoint~baseUrl'
-      - 'azure-arm-cdn.Origins#listByEndpoint~requestUrl'
-      - 'azure-arm-cdn.Origins#listByEndpoint~requestUrl'
-      - 'azure-arm-cdn.Origins#listByEndpoint~requestUrl'
-      - 'azure-arm-cdn.Origins#listByEndpoint~requestUrl'
-      - 'azure-arm-cdn.Origins#listByEndpoint~requestUrl'
-      - 'azure-arm-cdn.Origins#listByEndpoint~queryParameters'
-      - 'azure-arm-cdn.Origins#listByEndpoint~requestUrl'
-      - 'azure-arm-cdn.Origins#listByEndpoint~httpRequest'
-      - 'azure-arm-cdn.Origins#listByEndpoint~headerName'
+        options, optionalCallback)
+  - uid: 'azure-arm-cdn.Origins#getWithHttpOperationResponse'
+    id: 'azure-arm-cdn.Origins#getWithHttpOperationResponse'
+    parent: azure-arm-cdn.Origins
+    name: >-
+      getWithHttpOperationResponse(resourceGroupName, profileName, endpointName,
+      originName, options)
+    summary: Gets an existing origin within an endpoint.
+    fullName: >-
+      azure-arm-cdn.Origins.getWithHttpOperationResponse(resourceGroupName,
+      profileName, endpointName, originName, options)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            Name of the Resource group within the
+            Azure subscription.
+        - id: profileName
+          type:
+            - string
+          description: |-
+            Name of the CDN profile which is unique within
+            the resource group.
+        - id: endpointName
+          type:
+            - string
+          description: |-
+            Name of the endpoint under the profile which is
+            unique globally.
+        - id: originName
+          type:
+            - string
+          description: |-
+            Name of the origin which is unique within the
+            endpoint.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function getWithHttpOperationResponse(resourceGroupName, profileName,
+        endpointName, originName, options)
   - uid: 'azure-arm-cdn.Origins#get'
     id: 'azure-arm-cdn.Origins#get'
     parent: azure-arm-cdn.Origins
     name: >-
       get(resourceGroupName, profileName, endpointName, originName, options,
-      callback)
+      optionalCallback)
     summary: Gets an existing origin within an endpoint.
     fullName: >-
       azure-arm-cdn.Origins.get(resourceGroupName, profileName, endpointName,
-      originName, options, callback)
+      originName, options, optionalCallback)
     type: Method
     syntax:
       parameters:
@@ -168,52 +302,114 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:Origin> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+          {Promise} A promise is returned
       content: >-
         function get(resourceGroupName, profileName, endpointName, originName,
-        options, callback)
-    children:
-      - 'azure-arm-cdn.Origins#get~client'
-      - 'azure-arm-cdn.Origins#get~callback'
-      - 'azure-arm-cdn.Origins#get~options'
-      - 'azure-arm-cdn.Origins#get~baseUrl'
-      - 'azure-arm-cdn.Origins#get~requestUrl'
-      - 'azure-arm-cdn.Origins#get~requestUrl'
-      - 'azure-arm-cdn.Origins#get~requestUrl'
-      - 'azure-arm-cdn.Origins#get~requestUrl'
-      - 'azure-arm-cdn.Origins#get~requestUrl'
-      - 'azure-arm-cdn.Origins#get~requestUrl'
-      - 'azure-arm-cdn.Origins#get~queryParameters'
-      - 'azure-arm-cdn.Origins#get~requestUrl'
-      - 'azure-arm-cdn.Origins#get~httpRequest'
-      - 'azure-arm-cdn.Origins#get~headerName'
+        options, optionalCallback)
+  - uid: 'azure-arm-cdn.Origins#updateWithHttpOperationResponse'
+    id: 'azure-arm-cdn.Origins#updateWithHttpOperationResponse'
+    parent: azure-arm-cdn.Origins
+    name: >-
+      updateWithHttpOperationResponse(resourceGroupName, profileName,
+      endpointName, originName, originUpdateProperties, options)
+    summary: Updates an existing origin within an endpoint.
+    fullName: >-
+      azure-arm-cdn.Origins.updateWithHttpOperationResponse(resourceGroupName,
+      profileName, endpointName, originName, originUpdateProperties, options)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            Name of the Resource group within the
+            Azure subscription.
+        - id: profileName
+          type:
+            - string
+          description: |-
+            Name of the CDN profile which is unique within
+            the resource group.
+        - id: endpointName
+          type:
+            - string
+          description: |-
+            Name of the endpoint under the profile which is
+            unique globally.
+        - id: originName
+          type:
+            - string
+          description: |-
+            Name of the origin which is unique within the
+            endpoint.
+        - id: originUpdateProperties
+          type:
+            - object
+          description: Origin properties
+        - id: originUpdateProperties.hostName
+          type:
+            - string
+          description: |-
+            The address of the origin.
+            Domain names, IPv4 addresses, and IPv6 addresses are supported.
+          optional: true
+        - id: originUpdateProperties.httpPort
+          type:
+            - number
+          description: |-
+            The value of the HTTP
+            port. Must be between 1 and 65535.
+          optional: true
+        - id: originUpdateProperties.httpsPort
+          type:
+            - number
+          description: |-
+            The value of the HTTPS
+            port. Must be between 1 and 65535.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function updateWithHttpOperationResponse(resourceGroupName, profileName,
+        endpointName, originName, originUpdateProperties, options)
   - uid: 'azure-arm-cdn.Origins#update'
     id: 'azure-arm-cdn.Origins#update'
     parent: azure-arm-cdn.Origins
     name: >-
       update(resourceGroupName, profileName, endpointName, originName,
-      originUpdateProperties, options, callback)
+      originUpdateProperties, options, optionalCallback)
     summary: Updates an existing origin within an endpoint.
     fullName: >-
       azure-arm-cdn.Origins.update(resourceGroupName, profileName, endpointName,
-      originName, originUpdateProperties, options, callback)
+      originName, originUpdateProperties, options, optionalCallback)
     type: Method
     syntax:
       parameters:
@@ -278,41 +474,115 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:Origin> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+          {Promise} A promise is returned
       content: >-
         function update(resourceGroupName, profileName, endpointName,
-        originName, originUpdateProperties, options, callback)
-    children:
-      - 'azure-arm-cdn.Origins#update~client'
-      - 'azure-arm-cdn.Origins#update~callback'
-      - 'azure-arm-cdn.Origins#update~options'
+        originName, originUpdateProperties, options, optionalCallback)
+  - uid: 'azure-arm-cdn.Origins#beginUpdateWithHttpOperationResponse'
+    id: 'azure-arm-cdn.Origins#beginUpdateWithHttpOperationResponse'
+    parent: azure-arm-cdn.Origins
+    name: >-
+      beginUpdateWithHttpOperationResponse(resourceGroupName, profileName,
+      endpointName, originName, originUpdateProperties, options)
+    summary: Updates an existing origin within an endpoint.
+    fullName: >-
+      azure-arm-cdn.Origins.beginUpdateWithHttpOperationResponse(resourceGroupName,
+      profileName, endpointName, originName, originUpdateProperties, options)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            Name of the Resource group within the
+            Azure subscription.
+        - id: profileName
+          type:
+            - string
+          description: |-
+            Name of the CDN profile which is unique within
+            the resource group.
+        - id: endpointName
+          type:
+            - string
+          description: |-
+            Name of the endpoint under the profile which is
+            unique globally.
+        - id: originName
+          type:
+            - string
+          description: |-
+            Name of the origin which is unique within the
+            endpoint.
+        - id: originUpdateProperties
+          type:
+            - object
+          description: Origin properties
+        - id: originUpdateProperties.hostName
+          type:
+            - string
+          description: |-
+            The address of the origin.
+            Domain names, IPv4 addresses, and IPv6 addresses are supported.
+          optional: true
+        - id: originUpdateProperties.httpPort
+          type:
+            - number
+          description: |-
+            The value of the HTTP
+            port. Must be between 1 and 65535.
+          optional: true
+        - id: originUpdateProperties.httpsPort
+          type:
+            - number
+          description: |-
+            The value of the HTTPS
+            port. Must be between 1 and 65535.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginUpdateWithHttpOperationResponse(resourceGroupName,
+        profileName, endpointName, originName, originUpdateProperties, options)
   - uid: 'azure-arm-cdn.Origins#beginUpdate'
     id: 'azure-arm-cdn.Origins#beginUpdate'
     parent: azure-arm-cdn.Origins
     name: >-
       beginUpdate(resourceGroupName, profileName, endpointName, originName,
-      originUpdateProperties, options, callback)
+      originUpdateProperties, options, optionalCallback)
     summary: Updates an existing origin within an endpoint.
     fullName: >-
       azure-arm-cdn.Origins.beginUpdate(resourceGroupName, profileName,
-      endpointName, originName, originUpdateProperties, options, callback)
+      endpointName, originName, originUpdateProperties, options,
+      optionalCallback)
     type: Method
     syntax:
       parameters:
@@ -377,54 +647,31 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:Origin> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+          {Promise} A promise is returned
       content: >-
         function beginUpdate(resourceGroupName, profileName, endpointName,
-        originName, originUpdateProperties, options, callback)
-    children:
-      - 'azure-arm-cdn.Origins#beginUpdate~client'
-      - 'azure-arm-cdn.Origins#beginUpdate~callback'
-      - 'azure-arm-cdn.Origins#beginUpdate~options'
-      - 'azure-arm-cdn.Origins#beginUpdate~baseUrl'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestUrl'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestUrl'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestUrl'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestUrl'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestUrl'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestUrl'
-      - 'azure-arm-cdn.Origins#beginUpdate~queryParameters'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestUrl'
-      - 'azure-arm-cdn.Origins#beginUpdate~httpRequest'
-      - 'azure-arm-cdn.Origins#beginUpdate~headerName'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestContent'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestModel'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestModelMapper'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestModel'
-      - 'azure-arm-cdn.Origins#beginUpdate~requestContent'
-      - 'azure-arm-cdn.Origins#beginUpdate~serializationError'
-  - uid: 'azure-arm-cdn.Origins#listByEndpointNext'
-    id: 'azure-arm-cdn.Origins#listByEndpointNext'
+        originName, originUpdateProperties, options, optionalCallback)
+  - uid: 'azure-arm-cdn.Origins#listByEndpointNextWithHttpOperationResponse'
+    id: 'azure-arm-cdn.Origins#listByEndpointNextWithHttpOperationResponse'
     parent: azure-arm-cdn.Origins
-    name: 'listByEndpointNext(nextPageLink, options, callback)'
+    name: 'listByEndpointNextWithHttpOperationResponse(nextPageLink, options)'
     summary: Lists all of the existing origins within an endpoint.
-    fullName: 'azure-arm-cdn.Origins.listByEndpointNext(nextPageLink, options, callback)'
+    fullName: >-
+      azure-arm-cdn.Origins.listByEndpointNextWithHttpOperationResponse(nextPageLink,
+      options)
     type: Method
     syntax:
       parameters:
@@ -446,38 +693,58 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function listByEndpointNextWithHttpOperationResponse(nextPageLink,
+        options)
+  - uid: 'azure-arm-cdn.Origins#listByEndpointNext'
+    id: 'azure-arm-cdn.Origins#listByEndpointNext'
+    parent: azure-arm-cdn.Origins
+    name: 'listByEndpointNext(nextPageLink, options, optionalCallback)'
+    summary: Lists all of the existing origins within an endpoint.
+    fullName: >-
+      azure-arm-cdn.Origins.listByEndpointNext(nextPageLink, options,
+      optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:OriginListResult> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function listByEndpointNext(nextPageLink, options, callback)'
-    children:
-      - 'azure-arm-cdn.Origins#listByEndpointNext~client'
-      - 'azure-arm-cdn.Origins#listByEndpointNext~callback'
-      - 'azure-arm-cdn.Origins#listByEndpointNext~options'
-      - 'azure-arm-cdn.Origins#listByEndpointNext~requestUrl'
-      - 'azure-arm-cdn.Origins#listByEndpointNext~requestUrl'
-      - 'azure-arm-cdn.Origins#listByEndpointNext~httpRequest'
-      - 'azure-arm-cdn.Origins#listByEndpointNext~headerName'
+          {Promise} A promise is returned
+      content: 'function listByEndpointNext(nextPageLink, options, optionalCallback)'
 references:
-  - uid: azure-arm-cdn.CdnManagementClient
-    name: CdnManagementClient
-    fullName: azure-arm-cdn.CdnManagementClient
-    isExternal: false
   - uid: string
     name: string
     fullName: string
@@ -485,6 +752,10 @@ references:
   - uid: object
     name: object
     fullName: object
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

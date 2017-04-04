@@ -3,31 +3,24 @@ items:
   - uid: azure-servicefabric.ServiceDescriptions
     id: azure-servicefabric.ServiceDescriptions
     name: ServiceDescriptions
-    summary: |-
-      ServiceDescriptions
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the ServiceFabricClient.
-      Initializes a new instance of the ServiceDescriptions class.
+    summary: ''
     fullName: azure-servicefabric.ServiceDescriptions
     type: Class
     children:
       - 'azure-servicefabric.ServiceDescriptions.#ctor'
       - 'azure-servicefabric.ServiceDescriptions#client'
+      - 'azure-servicefabric.ServiceDescriptions#_get'
+      - 'azure-servicefabric.ServiceDescriptions#getWithHttpOperationResponse'
       - 'azure-servicefabric.ServiceDescriptions#get'
   - id: 'azure-servicefabric.ServiceDescriptions.#ctor'
     uid: 'azure-servicefabric.ServiceDescriptions.#ctor'
     parent: azure-servicefabric.ServiceDescriptions
-    name: ServiceDescriptions(client)
-    fullName: azure-servicefabric.ServiceDescriptions.ServiceDescriptions(client)
+    name: ServiceDescriptions()
+    fullName: azure-servicefabric.ServiceDescriptions.ServiceDescriptions()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-servicefabric.ServiceFabricClient
-          description: Reference to the service client.
-      content: new ServiceDescriptions(client)
+      content: new ServiceDescriptions()
   - uid: 'azure-servicefabric.ServiceDescriptions#client'
     id: 'azure-servicefabric.ServiceDescriptions#client'
     parent: azure-servicefabric.ServiceDescriptions
@@ -37,14 +30,23 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-servicefabric.ServiceDescriptions#get'
-    id: 'azure-servicefabric.ServiceDescriptions#get'
+  - uid: 'azure-servicefabric.ServiceDescriptions#_get'
+    id: 'azure-servicefabric.ServiceDescriptions#_get'
     parent: azure-servicefabric.ServiceDescriptions
-    name: 'get(serviceName, options, callback)'
+    name: _get
+    summary: ''
+    fullName: azure-servicefabric.ServiceDescriptions._get
+    type: Field
+    syntax:
+      content: _get
+  - uid: 'azure-servicefabric.ServiceDescriptions#getWithHttpOperationResponse'
+    id: 'azure-servicefabric.ServiceDescriptions#getWithHttpOperationResponse'
+    parent: azure-servicefabric.ServiceDescriptions
+    name: 'getWithHttpOperationResponse(serviceName, options)'
     summary: Get service descriptions
     fullName: >-
-      azure-servicefabric.ServiceDescriptions.get(serviceName, options,
-      callback)
+      azure-servicefabric.ServiceDescriptions.getWithHttpOperationResponse(serviceName,
+      options)
     type: Method
     syntax:
       parameters:
@@ -64,42 +66,54 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: 'function getWithHttpOperationResponse(serviceName, options)'
+  - uid: 'azure-servicefabric.ServiceDescriptions#get'
+    id: 'azure-servicefabric.ServiceDescriptions#get'
+    parent: azure-servicefabric.ServiceDescriptions
+    name: 'get(serviceName, options, optionalCallback)'
+    summary: Get service descriptions
+    fullName: >-
+      azure-servicefabric.ServiceDescriptions.get(serviceName, options,
+      optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: serviceName
+          type:
+            - string
+          description: The name of the service
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:ServiceDescription> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function get(serviceName, options, callback)'
-    children:
-      - 'azure-servicefabric.ServiceDescriptions#get~client'
-      - 'azure-servicefabric.ServiceDescriptions#get~callback'
-      - 'azure-servicefabric.ServiceDescriptions#get~options'
-      - 'azure-servicefabric.ServiceDescriptions#get~requestUrl'
-      - 'azure-servicefabric.ServiceDescriptions#get~requestUrl'
-      - 'azure-servicefabric.ServiceDescriptions#get~queryParameters'
-      - 'azure-servicefabric.ServiceDescriptions#get~requestUrl'
-      - 'azure-servicefabric.ServiceDescriptions#get~regex'
-      - 'azure-servicefabric.ServiceDescriptions#get~requestUrl'
-      - 'azure-servicefabric.ServiceDescriptions#get~httpRequest'
-      - 'azure-servicefabric.ServiceDescriptions#get~headerName'
+          {Promise} A promise is returned
+      content: 'function get(serviceName, options, optionalCallback)'
 references:
-  - uid: azure-servicefabric.ServiceFabricClient
-    name: ServiceFabricClient
-    fullName: azure-servicefabric.ServiceFabricClient
-    isExternal: false
   - uid: string
     name: string
     fullName: string
@@ -107,6 +121,10 @@ references:
   - uid: object
     name: object
     fullName: object
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

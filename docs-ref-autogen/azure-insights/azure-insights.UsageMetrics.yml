@@ -3,31 +3,24 @@ items:
   - uid: azure-insights.UsageMetrics
     id: azure-insights.UsageMetrics
     name: UsageMetrics
-    summary: |-
-      UsageMetrics
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the InsightsClient.
-      Initializes a new instance of the UsageMetrics class.
+    summary: ''
     fullName: azure-insights.UsageMetrics
     type: Class
     children:
       - 'azure-insights.UsageMetrics.#ctor'
       - 'azure-insights.UsageMetrics#client'
+      - 'azure-insights.UsageMetrics#_list'
+      - 'azure-insights.UsageMetrics#listWithHttpOperationResponse'
       - 'azure-insights.UsageMetrics#list'
   - id: 'azure-insights.UsageMetrics.#ctor'
     uid: 'azure-insights.UsageMetrics.#ctor'
     parent: azure-insights.UsageMetrics
-    name: UsageMetrics(client)
-    fullName: azure-insights.UsageMetrics.UsageMetrics(client)
+    name: UsageMetrics()
+    fullName: azure-insights.UsageMetrics.UsageMetrics()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-insights.InsightsClient
-          description: Reference to the service client.
-      content: new UsageMetrics(client)
+      content: new UsageMetrics()
   - uid: 'azure-insights.UsageMetrics#client'
     id: 'azure-insights.UsageMetrics#client'
     parent: azure-insights.UsageMetrics
@@ -37,14 +30,23 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-insights.UsageMetrics#list'
-    id: 'azure-insights.UsageMetrics#list'
+  - uid: 'azure-insights.UsageMetrics#_list'
+    id: 'azure-insights.UsageMetrics#_list'
     parent: azure-insights.UsageMetrics
-    name: 'list(resourceUri, apiVersion, options, callback)'
+    name: _list
+    summary: ''
+    fullName: azure-insights.UsageMetrics._list
+    type: Field
+    syntax:
+      content: _list
+  - uid: 'azure-insights.UsageMetrics#listWithHttpOperationResponse'
+    id: 'azure-insights.UsageMetrics#listWithHttpOperationResponse'
+    parent: azure-insights.UsageMetrics
+    name: 'listWithHttpOperationResponse(resourceUri, apiVersion, options)'
     summary: The List operation lists the usage metrics for the resource.
     fullName: >-
-      azure-insights.UsageMetrics.list(resourceUri, apiVersion, options,
-      callback)
+      azure-insights.UsageMetrics.listWithHttpOperationResponse(resourceUri,
+      apiVersion, options)
     type: Method
     syntax:
       parameters:
@@ -55,7 +57,11 @@ items:
         - id: apiVersion
           type:
             - string
-          description: The client Api Version.
+          description: >-
+            Client Api Version. NOTE: This is not a client
+
+            property, it must be explicit in the call and there is no default
+            value.
         - id: options
           type:
             - object
@@ -73,43 +79,67 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: 'function listWithHttpOperationResponse(resourceUri, apiVersion, options)'
+  - uid: 'azure-insights.UsageMetrics#list'
+    id: 'azure-insights.UsageMetrics#list'
+    parent: azure-insights.UsageMetrics
+    name: 'list(resourceUri, apiVersion, options, optionalCallback)'
+    summary: The List operation lists the usage metrics for the resource.
+    fullName: >-
+      azure-insights.UsageMetrics.list(resourceUri, apiVersion, options,
+      optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: resourceUri
+          type:
+            - string
+          description: The identifier of the resource.
+        - id: apiVersion
+          type:
+            - string
+          description: >-
+            Client Api Version. NOTE: This is not a client
+
+            property, it must be explicit in the call and there is no default
+            value.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.filter
+          type:
+            - string
+          description: The filter to apply on the operation.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:UsageMetricCollection> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function list(resourceUri, apiVersion, options, callback)'
-    children:
-      - 'azure-insights.UsageMetrics#list~client'
-      - 'azure-insights.UsageMetrics#list~callback'
-      - 'azure-insights.UsageMetrics#list~options'
-      - 'azure-insights.UsageMetrics#list~filter'
-      - 'azure-insights.UsageMetrics#list~baseUrl'
-      - 'azure-insights.UsageMetrics#list~requestUrl'
-      - 'azure-insights.UsageMetrics#list~requestUrl'
-      - 'azure-insights.UsageMetrics#list~requestUrl'
-      - 'azure-insights.UsageMetrics#list~queryParameters'
-      - 'azure-insights.UsageMetrics#list~requestUrl'
-      - 'azure-insights.UsageMetrics#list~httpRequest'
-      - 'azure-insights.UsageMetrics#list~headerName'
+          {Promise} A promise is returned
+      content: 'function list(resourceUri, apiVersion, options, optionalCallback)'
 references:
-  - uid: azure-insights.InsightsClient
-    name: InsightsClient
-    fullName: azure-insights.InsightsClient
-    isExternal: false
   - uid: string
     name: string
     fullName: string
@@ -117,6 +147,10 @@ references:
   - uid: object
     name: object
     fullName: object
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

@@ -3,33 +3,30 @@ items:
   - uid: azure-servicefabric.DeployedApplicationHealths
     id: azure-servicefabric.DeployedApplicationHealths
     name: DeployedApplicationHealths
-    summary: |-
-      DeployedApplicationHealths
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the ServiceFabricClient.
-      Initializes a new instance of the DeployedApplicationHealths class.
+    summary: ''
     fullName: azure-servicefabric.DeployedApplicationHealths
     type: Class
     children:
       - 'azure-servicefabric.DeployedApplicationHealths.#ctor'
       - 'azure-servicefabric.DeployedApplicationHealths#client'
+      - 'azure-servicefabric.DeployedApplicationHealths#_get'
+      - 'azure-servicefabric.DeployedApplicationHealths#_send'
+      - >-
+        azure-servicefabric.DeployedApplicationHealths#getWithHttpOperationResponse
       - 'azure-servicefabric.DeployedApplicationHealths#get'
+      - >-
+        azure-servicefabric.DeployedApplicationHealths#sendWithHttpOperationResponse
       - 'azure-servicefabric.DeployedApplicationHealths#send'
   - id: 'azure-servicefabric.DeployedApplicationHealths.#ctor'
     uid: 'azure-servicefabric.DeployedApplicationHealths.#ctor'
     parent: azure-servicefabric.DeployedApplicationHealths
-    name: DeployedApplicationHealths(client)
+    name: DeployedApplicationHealths()
     fullName: >-
-      azure-servicefabric.DeployedApplicationHealths.DeployedApplicationHealths(client)
+      azure-servicefabric.DeployedApplicationHealths.DeployedApplicationHealths()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-servicefabric.ServiceFabricClient
-          description: Reference to the service client.
-      content: new DeployedApplicationHealths(client)
+      content: new DeployedApplicationHealths()
   - uid: 'azure-servicefabric.DeployedApplicationHealths#client'
     id: 'azure-servicefabric.DeployedApplicationHealths#client'
     parent: azure-servicefabric.DeployedApplicationHealths
@@ -39,14 +36,34 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-servicefabric.DeployedApplicationHealths#get'
-    id: 'azure-servicefabric.DeployedApplicationHealths#get'
+  - uid: 'azure-servicefabric.DeployedApplicationHealths#_get'
+    id: 'azure-servicefabric.DeployedApplicationHealths#_get'
     parent: azure-servicefabric.DeployedApplicationHealths
-    name: 'get(nodeName, applicationName, options, callback)'
+    name: _get
+    summary: ''
+    fullName: azure-servicefabric.DeployedApplicationHealths._get
+    type: Field
+    syntax:
+      content: _get
+  - uid: 'azure-servicefabric.DeployedApplicationHealths#_send'
+    id: 'azure-servicefabric.DeployedApplicationHealths#_send'
+    parent: azure-servicefabric.DeployedApplicationHealths
+    name: _send
+    summary: ''
+    fullName: azure-servicefabric.DeployedApplicationHealths._send
+    type: Field
+    syntax:
+      content: _send
+  - uid: >-
+      azure-servicefabric.DeployedApplicationHealths#getWithHttpOperationResponse
+    id: >-
+      azure-servicefabric.DeployedApplicationHealths#getWithHttpOperationResponse
+    parent: azure-servicefabric.DeployedApplicationHealths
+    name: 'getWithHttpOperationResponse(nodeName, applicationName, options)'
     summary: Get deployed application healths
     fullName: >-
-      azure-servicefabric.DeployedApplicationHealths.get(nodeName,
-      applicationName, options, callback)
+      azure-servicefabric.DeployedApplicationHealths.getWithHttpOperationResponse(nodeName,
+      applicationName, options)
     type: Method
     syntax:
       parameters:
@@ -84,53 +101,85 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function getWithHttpOperationResponse(nodeName, applicationName,
+        options)
+  - uid: 'azure-servicefabric.DeployedApplicationHealths#get'
+    id: 'azure-servicefabric.DeployedApplicationHealths#get'
+    parent: azure-servicefabric.DeployedApplicationHealths
+    name: 'get(nodeName, applicationName, options, optionalCallback)'
+    summary: Get deployed application healths
+    fullName: >-
+      azure-servicefabric.DeployedApplicationHealths.get(nodeName,
+      applicationName, options, optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: nodeName
+          type:
+            - string
+          description: The name of the node
+        - id: applicationName
+          type:
+            - string
+          description: The name of the application
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.eventsHealthStateFilter
+          type:
+            - string
+          description: |-
+            The filter of the events
+            health state
+          optional: true
+        - id: options.deployedServicePackagesHealthStateFilter
+          type:
+            - string
+          description: |-
+            The
+            filter of the deployed service packages health state
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:DeployedApplicationHealth> for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function get(nodeName, applicationName, options, callback)'
-    children:
-      - 'azure-servicefabric.DeployedApplicationHealths#get~client'
-      - 'azure-servicefabric.DeployedApplicationHealths#get~callback'
-      - 'azure-servicefabric.DeployedApplicationHealths#get~options'
-      - >-
-        azure-servicefabric.DeployedApplicationHealths#get~eventsHealthStateFilter
-      - >-
-        azure-servicefabric.DeployedApplicationHealths#get~deployedServicePackagesHealthStateFilter
-      - 'azure-servicefabric.DeployedApplicationHealths#get~requestUrl'
-      - 'azure-servicefabric.DeployedApplicationHealths#get~requestUrl'
-      - 'azure-servicefabric.DeployedApplicationHealths#get~requestUrl'
-      - 'azure-servicefabric.DeployedApplicationHealths#get~queryParameters'
-      - 'azure-servicefabric.DeployedApplicationHealths#get~requestUrl'
-      - 'azure-servicefabric.DeployedApplicationHealths#get~regex'
-      - 'azure-servicefabric.DeployedApplicationHealths#get~requestUrl'
-      - 'azure-servicefabric.DeployedApplicationHealths#get~httpRequest'
-      - 'azure-servicefabric.DeployedApplicationHealths#get~headerName'
-  - uid: 'azure-servicefabric.DeployedApplicationHealths#send'
-    id: 'azure-servicefabric.DeployedApplicationHealths#send'
+          {Promise} A promise is returned
+      content: 'function get(nodeName, applicationName, options, optionalCallback)'
+  - uid: >-
+      azure-servicefabric.DeployedApplicationHealths#sendWithHttpOperationResponse
+    id: >-
+      azure-servicefabric.DeployedApplicationHealths#sendWithHttpOperationResponse
     parent: azure-servicefabric.DeployedApplicationHealths
     name: >-
-      send(nodeName, applicationName, deployedApplicationHealthReport, options,
-      callback)
+      sendWithHttpOperationResponse(nodeName, applicationName,
+      deployedApplicationHealthReport, options)
     summary: Send deployed application health
     fullName: >-
-      azure-servicefabric.DeployedApplicationHealths.send(nodeName,
-      applicationName, deployedApplicationHealthReport, options, callback)
+      azure-servicefabric.DeployedApplicationHealths.sendWithHttpOperationResponse(nodeName,
+      applicationName, deployedApplicationHealthReport, options)
     type: Method
     syntax:
       parameters:
@@ -197,50 +246,108 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function sendWithHttpOperationResponse(nodeName, applicationName,
+        deployedApplicationHealthReport, options)
+  - uid: 'azure-servicefabric.DeployedApplicationHealths#send'
+    id: 'azure-servicefabric.DeployedApplicationHealths#send'
+    parent: azure-servicefabric.DeployedApplicationHealths
+    name: >-
+      send(nodeName, applicationName, deployedApplicationHealthReport, options,
+      optionalCallback)
+    summary: Send deployed application health
+    fullName: >-
+      azure-servicefabric.DeployedApplicationHealths.send(nodeName,
+      applicationName, deployedApplicationHealthReport, options,
+      optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: nodeName
+          type:
+            - string
+          description: The name of the node
+        - id: applicationName
+          type:
+            - string
+          description: The name of the application
+        - id: deployedApplicationHealthReport
+          type:
+            - object
+          description: |-
+            The report of the deployed
+            application health
+        - id: deployedApplicationHealthReport.sourceId
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: deployedApplicationHealthReport.property
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: deployedApplicationHealthReport.healthState
+          type:
+            - string
+          description: |-
+            Possible
+            values include: 'Invalid', 'Ok', 'Warning', 'Error', 'Unknown'
+          optional: true
+        - id: deployedApplicationHealthReport.description
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: deployedApplicationHealthReport.timeToLiveInMilliSeconds
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: deployedApplicationHealthReport.sequenceNumber
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: deployedApplicationHealthReport.removeWhenExpired
+          type:
+            - boolean
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {string} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+          {Promise} A promise is returned
       content: >-
         function send(nodeName, applicationName,
-        deployedApplicationHealthReport, options, callback)
-    children:
-      - 'azure-servicefabric.DeployedApplicationHealths#send~client'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~callback'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~options'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~requestUrl'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~requestUrl'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~requestUrl'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~queryParameters'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~requestUrl'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~regex'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~requestUrl'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~httpRequest'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~headerName'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~requestContent'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~requestModel'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~requestModelMapper'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~requestModel'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~requestContent'
-      - 'azure-servicefabric.DeployedApplicationHealths#send~serializationError'
+        deployedApplicationHealthReport, options, optionalCallback)
 references:
-  - uid: azure-servicefabric.ServiceFabricClient
-    name: ServiceFabricClient
-    fullName: azure-servicefabric.ServiceFabricClient
-    isExternal: false
   - uid: string
     name: string
     fullName: string
@@ -248,6 +355,10 @@ references:
   - uid: object
     name: object
     fullName: object
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

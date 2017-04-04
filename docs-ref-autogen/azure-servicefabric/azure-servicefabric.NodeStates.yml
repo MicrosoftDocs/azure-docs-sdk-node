@@ -3,31 +3,24 @@ items:
   - uid: azure-servicefabric.NodeStates
     id: azure-servicefabric.NodeStates
     name: NodeStates
-    summary: |-
-      NodeStates
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the ServiceFabricClient.
-      Initializes a new instance of the NodeStates class.
+    summary: ''
     fullName: azure-servicefabric.NodeStates
     type: Class
     children:
       - 'azure-servicefabric.NodeStates.#ctor'
       - 'azure-servicefabric.NodeStates#client'
+      - 'azure-servicefabric.NodeStates#_remove'
+      - 'azure-servicefabric.NodeStates#removeWithHttpOperationResponse'
       - 'azure-servicefabric.NodeStates#remove'
   - id: 'azure-servicefabric.NodeStates.#ctor'
     uid: 'azure-servicefabric.NodeStates.#ctor'
     parent: azure-servicefabric.NodeStates
-    name: NodeStates(client)
-    fullName: azure-servicefabric.NodeStates.NodeStates(client)
+    name: NodeStates()
+    fullName: azure-servicefabric.NodeStates.NodeStates()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-servicefabric.ServiceFabricClient
-          description: Reference to the service client.
-      content: new NodeStates(client)
+      content: new NodeStates()
   - uid: 'azure-servicefabric.NodeStates#client'
     id: 'azure-servicefabric.NodeStates#client'
     parent: azure-servicefabric.NodeStates
@@ -37,12 +30,23 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-servicefabric.NodeStates#remove'
-    id: 'azure-servicefabric.NodeStates#remove'
+  - uid: 'azure-servicefabric.NodeStates#_remove'
+    id: 'azure-servicefabric.NodeStates#_remove'
     parent: azure-servicefabric.NodeStates
-    name: 'remove(nodeName, options, callback)'
+    name: _remove
+    summary: ''
+    fullName: azure-servicefabric.NodeStates._remove
+    type: Field
+    syntax:
+      content: _remove
+  - uid: 'azure-servicefabric.NodeStates#removeWithHttpOperationResponse'
+    id: 'azure-servicefabric.NodeStates#removeWithHttpOperationResponse'
+    parent: azure-servicefabric.NodeStates
+    name: 'removeWithHttpOperationResponse(nodeName, options)'
     summary: Remove node states
-    fullName: 'azure-servicefabric.NodeStates.remove(nodeName, options, callback)'
+    fullName: >-
+      azure-servicefabric.NodeStates.removeWithHttpOperationResponse(nodeName,
+      options)
     type: Method
     syntax:
       parameters:
@@ -62,41 +66,52 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: 'function removeWithHttpOperationResponse(nodeName, options)'
+  - uid: 'azure-servicefabric.NodeStates#remove'
+    id: 'azure-servicefabric.NodeStates#remove'
+    parent: azure-servicefabric.NodeStates
+    name: 'remove(nodeName, options, optionalCallback)'
+    summary: Remove node states
+    fullName: 'azure-servicefabric.NodeStates.remove(nodeName, options, optionalCallback)'
+    type: Method
+    syntax:
+      parameters:
+        - id: nodeName
+          type:
+            - string
+          description: The name of the node
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {string} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function remove(nodeName, options, callback)'
-    children:
-      - 'azure-servicefabric.NodeStates#remove~client'
-      - 'azure-servicefabric.NodeStates#remove~callback'
-      - 'azure-servicefabric.NodeStates#remove~options'
-      - 'azure-servicefabric.NodeStates#remove~requestUrl'
-      - 'azure-servicefabric.NodeStates#remove~requestUrl'
-      - 'azure-servicefabric.NodeStates#remove~queryParameters'
-      - 'azure-servicefabric.NodeStates#remove~requestUrl'
-      - 'azure-servicefabric.NodeStates#remove~regex'
-      - 'azure-servicefabric.NodeStates#remove~requestUrl'
-      - 'azure-servicefabric.NodeStates#remove~httpRequest'
-      - 'azure-servicefabric.NodeStates#remove~headerName'
+          {Promise} A promise is returned
+      content: 'function remove(nodeName, options, optionalCallback)'
 references:
-  - uid: azure-servicefabric.ServiceFabricClient
-    name: ServiceFabricClient
-    fullName: azure-servicefabric.ServiceFabricClient
-    isExternal: false
   - uid: string
     name: string
     fullName: string
@@ -104,6 +119,10 @@ references:
   - uid: object
     name: object
     fullName: object
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

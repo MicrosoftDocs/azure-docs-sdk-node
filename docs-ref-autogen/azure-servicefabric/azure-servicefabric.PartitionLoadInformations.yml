@@ -3,32 +3,25 @@ items:
   - uid: azure-servicefabric.PartitionLoadInformations
     id: azure-servicefabric.PartitionLoadInformations
     name: PartitionLoadInformations
-    summary: |-
-      PartitionLoadInformations
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the ServiceFabricClient.
-      Initializes a new instance of the PartitionLoadInformations class.
+    summary: ''
     fullName: azure-servicefabric.PartitionLoadInformations
     type: Class
     children:
       - 'azure-servicefabric.PartitionLoadInformations.#ctor'
       - 'azure-servicefabric.PartitionLoadInformations#client'
+      - 'azure-servicefabric.PartitionLoadInformations#_get'
+      - >-
+        azure-servicefabric.PartitionLoadInformations#getWithHttpOperationResponse
       - 'azure-servicefabric.PartitionLoadInformations#get'
   - id: 'azure-servicefabric.PartitionLoadInformations.#ctor'
     uid: 'azure-servicefabric.PartitionLoadInformations.#ctor'
     parent: azure-servicefabric.PartitionLoadInformations
-    name: PartitionLoadInformations(client)
-    fullName: >-
-      azure-servicefabric.PartitionLoadInformations.PartitionLoadInformations(client)
+    name: PartitionLoadInformations()
+    fullName: azure-servicefabric.PartitionLoadInformations.PartitionLoadInformations()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-servicefabric.ServiceFabricClient
-          description: Reference to the service client.
-      content: new PartitionLoadInformations(client)
+      content: new PartitionLoadInformations()
   - uid: 'azure-servicefabric.PartitionLoadInformations#client'
     id: 'azure-servicefabric.PartitionLoadInformations#client'
     parent: azure-servicefabric.PartitionLoadInformations
@@ -38,14 +31,23 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-servicefabric.PartitionLoadInformations#get'
-    id: 'azure-servicefabric.PartitionLoadInformations#get'
+  - uid: 'azure-servicefabric.PartitionLoadInformations#_get'
+    id: 'azure-servicefabric.PartitionLoadInformations#_get'
     parent: azure-servicefabric.PartitionLoadInformations
-    name: 'get(partitionId, options, callback)'
+    name: _get
+    summary: ''
+    fullName: azure-servicefabric.PartitionLoadInformations._get
+    type: Field
+    syntax:
+      content: _get
+  - uid: 'azure-servicefabric.PartitionLoadInformations#getWithHttpOperationResponse'
+    id: 'azure-servicefabric.PartitionLoadInformations#getWithHttpOperationResponse'
+    parent: azure-servicefabric.PartitionLoadInformations
+    name: 'getWithHttpOperationResponse(partitionId, options)'
     summary: Get partition load informations
     fullName: >-
-      azure-servicefabric.PartitionLoadInformations.get(partitionId, options,
-      callback)
+      azure-servicefabric.PartitionLoadInformations.getWithHttpOperationResponse(partitionId,
+      options)
     type: Method
     syntax:
       parameters:
@@ -65,43 +67,54 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: 'function getWithHttpOperationResponse(partitionId, options)'
+  - uid: 'azure-servicefabric.PartitionLoadInformations#get'
+    id: 'azure-servicefabric.PartitionLoadInformations#get'
+    parent: azure-servicefabric.PartitionLoadInformations
+    name: 'get(partitionId, options, optionalCallback)'
+    summary: Get partition load informations
+    fullName: >-
+      azure-servicefabric.PartitionLoadInformations.get(partitionId, options,
+      optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: partitionId
+          type:
+            - string
+          description: The id of the partition
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:PartitionLoadInformation> for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function get(partitionId, options, callback)'
-    children:
-      - 'azure-servicefabric.PartitionLoadInformations#get~client'
-      - 'azure-servicefabric.PartitionLoadInformations#get~callback'
-      - 'azure-servicefabric.PartitionLoadInformations#get~options'
-      - 'azure-servicefabric.PartitionLoadInformations#get~requestUrl'
-      - 'azure-servicefabric.PartitionLoadInformations#get~requestUrl'
-      - 'azure-servicefabric.PartitionLoadInformations#get~queryParameters'
-      - 'azure-servicefabric.PartitionLoadInformations#get~requestUrl'
-      - 'azure-servicefabric.PartitionLoadInformations#get~regex'
-      - 'azure-servicefabric.PartitionLoadInformations#get~requestUrl'
-      - 'azure-servicefabric.PartitionLoadInformations#get~httpRequest'
-      - 'azure-servicefabric.PartitionLoadInformations#get~headerName'
+          {Promise} A promise is returned
+      content: 'function get(partitionId, options, optionalCallback)'
 references:
-  - uid: azure-servicefabric.ServiceFabricClient
-    name: ServiceFabricClient
-    fullName: azure-servicefabric.ServiceFabricClient
-    isExternal: false
   - uid: string
     name: string
     fullName: string
@@ -109,6 +122,10 @@ references:
   - uid: object
     name: object
     fullName: object
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

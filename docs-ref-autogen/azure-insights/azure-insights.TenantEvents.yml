@@ -3,32 +3,27 @@ items:
   - uid: azure-insights.TenantEvents
     id: azure-insights.TenantEvents
     name: TenantEvents
-    summary: |-
-      TenantEvents
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the InsightsClient.
-      Initializes a new instance of the TenantEvents class.
+    summary: ''
     fullName: azure-insights.TenantEvents
     type: Class
     children:
       - 'azure-insights.TenantEvents.#ctor'
       - 'azure-insights.TenantEvents#client'
+      - 'azure-insights.TenantEvents#_list'
+      - 'azure-insights.TenantEvents#_listNext'
+      - 'azure-insights.TenantEvents#listWithHttpOperationResponse'
       - 'azure-insights.TenantEvents#list'
+      - 'azure-insights.TenantEvents#listNextWithHttpOperationResponse'
       - 'azure-insights.TenantEvents#listNext'
   - id: 'azure-insights.TenantEvents.#ctor'
     uid: 'azure-insights.TenantEvents.#ctor'
     parent: azure-insights.TenantEvents
-    name: TenantEvents(client)
-    fullName: azure-insights.TenantEvents.TenantEvents(client)
+    name: TenantEvents()
+    fullName: azure-insights.TenantEvents.TenantEvents()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-insights.InsightsClient
-          description: Reference to the service client.
-      content: new TenantEvents(client)
+      content: new TenantEvents()
   - uid: 'azure-insights.TenantEvents#client'
     id: 'azure-insights.TenantEvents#client'
     parent: azure-insights.TenantEvents
@@ -38,12 +33,74 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-insights.TenantEvents#list'
-    id: 'azure-insights.TenantEvents#list'
+  - uid: 'azure-insights.TenantEvents#_list'
+    id: 'azure-insights.TenantEvents#_list'
     parent: azure-insights.TenantEvents
-    name: 'list(options, callback)'
-    summary: Provides the list of tenant events.
-    fullName: 'azure-insights.TenantEvents.list(options, callback)'
+    name: _list
+    summary: ''
+    fullName: azure-insights.TenantEvents._list
+    type: Field
+    syntax:
+      content: _list
+  - uid: 'azure-insights.TenantEvents#_listNext'
+    id: 'azure-insights.TenantEvents#_listNext'
+    parent: azure-insights.TenantEvents
+    name: _listNext
+    summary: ''
+    fullName: azure-insights.TenantEvents._listNext
+    type: Field
+    syntax:
+      content: _listNext
+  - uid: 'azure-insights.TenantEvents#listWithHttpOperationResponse'
+    id: 'azure-insights.TenantEvents#listWithHttpOperationResponse'
+    parent: azure-insights.TenantEvents
+    name: listWithHttpOperationResponse(options)
+    summary: >-
+      get the Activity Logs for the Tenant. Everything that is applicable to the
+
+      API to get the Activity Log for the subscription is applicable to this API
+
+      (the parameters, $filter, etc.). One thing to point out here is that this
+
+      API does *not* retrieve the logs at the individual subscription of the
+
+      tenant but only surfaces the logs that were generated at the tenant level.
+
+      The **$filter** is very restricted and allows only the following patterns.
+      -
+
+      List events for a resource group: $filter=eventTimestamp ge '<Start Time>'
+
+      and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation'
+
+      and resourceGroupName eq '<ResourceGroupName>'. - List events for
+      resource:
+
+      $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End
+      Time>'
+
+      and eventChannels eq 'Admin, Operation' and resourceUri eq
+      '<ResourceURI>'.
+
+      - List events for a subscription: $filter=eventTimestamp ge '<Start Time>'
+
+      and eventTimestamp le '<End Time>' and eventChannels eq 'Admin,
+      Operation'.
+
+      - List evetns for a resource provider: $filter=eventTimestamp ge '<Start
+
+      Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin,
+
+      Operation' and resourceProvider eq '<ResourceProviderName>'. - List events
+
+      for a correlation Id: api-version=2014-04-01&$filter=eventTimestamp ge
+
+      '2014-07-16T04:36:37.6407898Z' and eventTimestamp le
+
+      '2014-07-20T04:36:37.6407898Z' and eventChannels eq 'Admin, Operation' and
+
+      correlationId eq '<CorrelationID>'. No other syntax is allowed.
+    fullName: azure-insights.TenantEvents.listWithHttpOperationResponse(options)
     type: Method
     syntax:
       parameters:
@@ -55,19 +112,24 @@ items:
         - id: options.filter
           type:
             - string
-          description: |-
-            The filter to apply on the operation. For
-            more information please see
-            https://msdn.microsoft.com/en-us/library/azure/dn931934.aspx
+          description: >-
+            Reduces the set of data collected. The
+
+            syntax allowed depends on the operation. See the operation's
+            description for
+
+            details.
           optional: true
         - id: options.select
           type:
             - string
           description: >-
-            The comma separated list of property names
+            Used to fetch events with only the given
 
-            to be returned. Possible values are: authorization, channels,
-            claims,
+            properties. The filter is a comma separated list of property names
+            to be
+
+            returned. Possible values are: authorization, channels, claims,
 
             correlationId, description, eventDataId, eventName, eventTimestamp,
 
@@ -84,44 +146,173 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: function listWithHttpOperationResponse(options)
+  - uid: 'azure-insights.TenantEvents#list'
+    id: 'azure-insights.TenantEvents#list'
+    parent: azure-insights.TenantEvents
+    name: 'list(options, optionalCallback)'
+    summary: >-
+      get the Activity Logs for the Tenant. Everything that is applicable to the
+
+      API to get the Activity Log for the subscription is applicable to this API
+
+      (the parameters, $filter, etc.). One thing to point out here is that this
+
+      API does *not* retrieve the logs at the individual subscription of the
+
+      tenant but only surfaces the logs that were generated at the tenant level.
+
+      The **$filter** is very restricted and allows only the following patterns.
+      -
+
+      List events for a resource group: $filter=eventTimestamp ge '<Start Time>'
+
+      and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation'
+
+      and resourceGroupName eq '<ResourceGroupName>'. - List events for
+      resource:
+
+      $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End
+      Time>'
+
+      and eventChannels eq 'Admin, Operation' and resourceUri eq
+      '<ResourceURI>'.
+
+      - List events for a subscription: $filter=eventTimestamp ge '<Start Time>'
+
+      and eventTimestamp le '<End Time>' and eventChannels eq 'Admin,
+      Operation'.
+
+      - List evetns for a resource provider: $filter=eventTimestamp ge '<Start
+
+      Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin,
+
+      Operation' and resourceProvider eq '<ResourceProviderName>'. - List events
+
+      for a correlation Id: api-version=2014-04-01&$filter=eventTimestamp ge
+
+      '2014-07-16T04:36:37.6407898Z' and eventTimestamp le
+
+      '2014-07-20T04:36:37.6407898Z' and eventChannels eq 'Admin, Operation' and
+
+      correlationId eq '<CorrelationID>'. No other syntax is allowed.
+    fullName: 'azure-insights.TenantEvents.list(options, optionalCallback)'
+    type: Method
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.filter
+          type:
+            - string
+          description: >-
+            Reduces the set of data collected. The
+
+            syntax allowed depends on the operation. See the operation's
+            description for
+
+            details.
+          optional: true
+        - id: options.select
+          type:
+            - string
+          description: >-
+            Used to fetch events with only the given
+
+            properties. The filter is a comma separated list of property names
+            to be
+
+            returned. Possible values are: authorization, channels, claims,
+
+            correlationId, description, eventDataId, eventName, eventTimestamp,
+
+            httpRequest, level, operationId, operationName, properties,
+
+            resourceGroupName, resourceProviderName, resourceId, status,
+
+            submissionTimestamp, subStatus, subscriptionId
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:EventDataCollection> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function list(options, callback)'
-    children:
-      - 'azure-insights.TenantEvents#list~client'
-      - 'azure-insights.TenantEvents#list~callback'
-      - 'azure-insights.TenantEvents#list~options'
-      - 'azure-insights.TenantEvents#list~filter'
-      - 'azure-insights.TenantEvents#list~select'
-      - 'azure-insights.TenantEvents#list~apiVersion'
-      - 'azure-insights.TenantEvents#list~baseUrl'
-      - 'azure-insights.TenantEvents#list~requestUrl'
-      - 'azure-insights.TenantEvents#list~queryParameters'
-      - 'azure-insights.TenantEvents#list~requestUrl'
-      - 'azure-insights.TenantEvents#list~httpRequest'
-      - 'azure-insights.TenantEvents#list~headerName'
-  - uid: 'azure-insights.TenantEvents#listNext'
-    id: 'azure-insights.TenantEvents#listNext'
+          {Promise} A promise is returned
+      content: 'function list(options, optionalCallback)'
+  - uid: 'azure-insights.TenantEvents#listNextWithHttpOperationResponse'
+    id: 'azure-insights.TenantEvents#listNextWithHttpOperationResponse'
     parent: azure-insights.TenantEvents
-    name: 'listNext(nextPageLink, options, callback)'
-    summary: Provides the list of tenant events.
-    fullName: 'azure-insights.TenantEvents.listNext(nextPageLink, options, callback)'
+    name: 'listNextWithHttpOperationResponse(nextPageLink, options)'
+    summary: >-
+      get the Activity Logs for the Tenant. Everything that is applicable to the
+
+      API to get the Activity Log for the subscription is applicable to this API
+
+      (the parameters, $filter, etc.). One thing to point out here is that this
+
+      API does *not* retrieve the logs at the individual subscription of the
+
+      tenant but only surfaces the logs that were generated at the tenant level.
+
+      The **$filter** is very restricted and allows only the following patterns.
+      -
+
+      List events for a resource group: $filter=eventTimestamp ge '<Start Time>'
+
+      and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation'
+
+      and resourceGroupName eq '<ResourceGroupName>'. - List events for
+      resource:
+
+      $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End
+      Time>'
+
+      and eventChannels eq 'Admin, Operation' and resourceUri eq
+      '<ResourceURI>'.
+
+      - List events for a subscription: $filter=eventTimestamp ge '<Start Time>'
+
+      and eventTimestamp le '<End Time>' and eventChannels eq 'Admin,
+      Operation'.
+
+      - List evetns for a resource provider: $filter=eventTimestamp ge '<Start
+
+      Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin,
+
+      Operation' and resourceProvider eq '<ResourceProviderName>'. - List events
+
+      for a correlation Id: api-version=2014-04-01&$filter=eventTimestamp ge
+
+      '2014-07-16T04:36:37.6407898Z' and eventTimestamp le
+
+      '2014-07-20T04:36:37.6407898Z' and eventChannels eq 'Admin, Operation' and
+
+      correlationId eq '<CorrelationID>'. No other syntax is allowed.
+    fullName: >-
+      azure-insights.TenantEvents.listNextWithHttpOperationResponse(nextPageLink,
+      options)
     type: Method
     syntax:
       parameters:
@@ -143,38 +334,100 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: 'function listNextWithHttpOperationResponse(nextPageLink, options)'
+  - uid: 'azure-insights.TenantEvents#listNext'
+    id: 'azure-insights.TenantEvents#listNext'
+    parent: azure-insights.TenantEvents
+    name: 'listNext(nextPageLink, options, optionalCallback)'
+    summary: >-
+      get the Activity Logs for the Tenant. Everything that is applicable to the
+
+      API to get the Activity Log for the subscription is applicable to this API
+
+      (the parameters, $filter, etc.). One thing to point out here is that this
+
+      API does *not* retrieve the logs at the individual subscription of the
+
+      tenant but only surfaces the logs that were generated at the tenant level.
+
+      The **$filter** is very restricted and allows only the following patterns.
+      -
+
+      List events for a resource group: $filter=eventTimestamp ge '<Start Time>'
+
+      and eventTimestamp le '<End Time>' and eventChannels eq 'Admin, Operation'
+
+      and resourceGroupName eq '<ResourceGroupName>'. - List events for
+      resource:
+
+      $filter=eventTimestamp ge '<Start Time>' and eventTimestamp le '<End
+      Time>'
+
+      and eventChannels eq 'Admin, Operation' and resourceUri eq
+      '<ResourceURI>'.
+
+      - List events for a subscription: $filter=eventTimestamp ge '<Start Time>'
+
+      and eventTimestamp le '<End Time>' and eventChannels eq 'Admin,
+      Operation'.
+
+      - List evetns for a resource provider: $filter=eventTimestamp ge '<Start
+
+      Time>' and eventTimestamp le '<End Time>' and eventChannels eq 'Admin,
+
+      Operation' and resourceProvider eq '<ResourceProviderName>'. - List events
+
+      for a correlation Id: api-version=2014-04-01&$filter=eventTimestamp ge
+
+      '2014-07-16T04:36:37.6407898Z' and eventTimestamp le
+
+      '2014-07-20T04:36:37.6407898Z' and eventChannels eq 'Admin, Operation' and
+
+      correlationId eq '<CorrelationID>'. No other syntax is allowed.
+    fullName: >-
+      azure-insights.TenantEvents.listNext(nextPageLink, options,
+      optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-                               See <xref:EventDataCollection> for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function listNext(nextPageLink, options, callback)'
-    children:
-      - 'azure-insights.TenantEvents#listNext~client'
-      - 'azure-insights.TenantEvents#listNext~callback'
-      - 'azure-insights.TenantEvents#listNext~options'
-      - 'azure-insights.TenantEvents#listNext~requestUrl'
-      - 'azure-insights.TenantEvents#listNext~requestUrl'
-      - 'azure-insights.TenantEvents#listNext~httpRequest'
-      - 'azure-insights.TenantEvents#listNext~headerName'
+          {Promise} A promise is returned
+      content: 'function listNext(nextPageLink, options, optionalCallback)'
 references:
-  - uid: azure-insights.InsightsClient
-    name: InsightsClient
-    fullName: azure-insights.InsightsClient
-    isExternal: false
   - uid: object
     name: object
     fullName: object
@@ -182,6 +435,10 @@ references:
   - uid: string
     name: string
     fullName: string
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

@@ -3,33 +3,30 @@ items:
   - uid: azure-servicefabric.ServiceGroups
     id: azure-servicefabric.ServiceGroups
     name: ServiceGroups
-    summary: |-
-      ServiceGroups
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the ServiceFabricClient.
-      Initializes a new instance of the ServiceGroups class.
+    summary: ''
     fullName: azure-servicefabric.ServiceGroups
     type: Class
     children:
       - 'azure-servicefabric.ServiceGroups.#ctor'
       - 'azure-servicefabric.ServiceGroups#client'
+      - 'azure-servicefabric.ServiceGroups#_create'
+      - 'azure-servicefabric.ServiceGroups#_update'
+      - 'azure-servicefabric.ServiceGroups#_remove'
+      - 'azure-servicefabric.ServiceGroups#createWithHttpOperationResponse'
       - 'azure-servicefabric.ServiceGroups#create'
+      - 'azure-servicefabric.ServiceGroups#updateWithHttpOperationResponse'
       - 'azure-servicefabric.ServiceGroups#update'
+      - 'azure-servicefabric.ServiceGroups#removeWithHttpOperationResponse'
       - 'azure-servicefabric.ServiceGroups#remove'
   - id: 'azure-servicefabric.ServiceGroups.#ctor'
     uid: 'azure-servicefabric.ServiceGroups.#ctor'
     parent: azure-servicefabric.ServiceGroups
-    name: ServiceGroups(client)
-    fullName: azure-servicefabric.ServiceGroups.ServiceGroups(client)
+    name: ServiceGroups()
+    fullName: azure-servicefabric.ServiceGroups.ServiceGroups()
     summary: ''
     type: Constructor
     syntax:
-      parameters:
-        - id: client
-          type:
-            - azure-servicefabric.ServiceFabricClient
-          description: Reference to the service client.
-      content: new ServiceGroups(client)
+      content: new ServiceGroups()
   - uid: 'azure-servicefabric.ServiceGroups#client'
     id: 'azure-servicefabric.ServiceGroups#client'
     parent: azure-servicefabric.ServiceGroups
@@ -39,14 +36,43 @@ items:
     type: Field
     syntax:
       content: client
-  - uid: 'azure-servicefabric.ServiceGroups#create'
-    id: 'azure-servicefabric.ServiceGroups#create'
+  - uid: 'azure-servicefabric.ServiceGroups#_create'
+    id: 'azure-servicefabric.ServiceGroups#_create'
     parent: azure-servicefabric.ServiceGroups
-    name: 'create(applicationName, createServiceGroupDescription, options, callback)'
+    name: _create
+    summary: ''
+    fullName: azure-servicefabric.ServiceGroups._create
+    type: Field
+    syntax:
+      content: _create
+  - uid: 'azure-servicefabric.ServiceGroups#_update'
+    id: 'azure-servicefabric.ServiceGroups#_update'
+    parent: azure-servicefabric.ServiceGroups
+    name: _update
+    summary: ''
+    fullName: azure-servicefabric.ServiceGroups._update
+    type: Field
+    syntax:
+      content: _update
+  - uid: 'azure-servicefabric.ServiceGroups#_remove'
+    id: 'azure-servicefabric.ServiceGroups#_remove'
+    parent: azure-servicefabric.ServiceGroups
+    name: _remove
+    summary: ''
+    fullName: azure-servicefabric.ServiceGroups._remove
+    type: Field
+    syntax:
+      content: _remove
+  - uid: 'azure-servicefabric.ServiceGroups#createWithHttpOperationResponse'
+    id: 'azure-servicefabric.ServiceGroups#createWithHttpOperationResponse'
+    parent: azure-servicefabric.ServiceGroups
+    name: >-
+      createWithHttpOperationResponse(applicationName,
+      createServiceGroupDescription, options)
     summary: Create service groups
     fullName: >-
-      azure-servicefabric.ServiceGroups.create(applicationName,
-      createServiceGroupDescription, options, callback)
+      azure-servicefabric.ServiceGroups.createWithHttpOperationResponse(applicationName,
+      createServiceGroupDescription, options)
     type: Method
     syntax:
       parameters:
@@ -58,8 +84,8 @@ items:
           type:
             - object
           description: |-
-            The description of the
-            service group
+            The description of the service
+            group
         - id: createServiceGroupDescription.applicationName
           type:
             - string
@@ -150,13 +176,12 @@ items:
             - array
           description: ''
           optional: true
-        - id: createServiceGroupDescription.ServiceKind
+        - id: createServiceGroupDescription.serviceKind
           type:
             - string
           description: |-
-            Polymorhpic
+            Polymorphic
             Discriminator
-          optional: true
         - id: options
           type:
             - object
@@ -169,54 +194,171 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function createWithHttpOperationResponse(applicationName,
+        createServiceGroupDescription, options)
+  - uid: 'azure-servicefabric.ServiceGroups#create'
+    id: 'azure-servicefabric.ServiceGroups#create'
+    parent: azure-servicefabric.ServiceGroups
+    name: >-
+      create(applicationName, createServiceGroupDescription, options,
+      optionalCallback)
+    summary: Create service groups
+    fullName: >-
+      azure-servicefabric.ServiceGroups.create(applicationName,
+      createServiceGroupDescription, options, optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: applicationName
+          type:
+            - string
+          description: The name of the service group
+        - id: createServiceGroupDescription
+          type:
+            - object
+          description: |-
+            The description of the service
+            group
+        - id: createServiceGroupDescription.applicationName
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.serviceName
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.serviceTypeName
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.partitionDescription
+          type:
+            - object
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.partitionDescription.partitionScheme
+          type:
+            - string
+          description: >-
+            Possible values include: 'Invalid', 'Singleton', 'UniformInt64',
+            'Named'
+          optional: true
+        - id: createServiceGroupDescription.partitionDescription.count
+          type:
+            - number
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.partitionDescription.names
+          type:
+            - array
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.partitionDescription.lowKey
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.partitionDescription.highKey
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.placementConstraints
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.correlationScheme
+          type:
+            - object
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.serviceLoadMetrics
+          type:
+            - object
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.servicePlacementPolicies
+          type:
+            - object
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.servicePlacementPolicies.serviceName
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: >-
+            createServiceGroupDescription.servicePlacementPolicies.serviceCorrelationScheme
+          type:
+            - string
+          description: |-
+            Possible values include: 'Invalid', 'Affinity', 'AlignedAffinity',
+            'NonAlignedAffinity'
+          optional: true
+        - id: createServiceGroupDescription.flags
+          type:
+            - number
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.serviceGroupMemberDescription
+          type:
+            - array
+          description: ''
+          optional: true
+        - id: createServiceGroupDescription.serviceKind
+          type:
+            - string
+          description: |-
+            Polymorphic
+            Discriminator
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+          {Promise} A promise is returned
       content: >-
         function create(applicationName, createServiceGroupDescription, options,
-        callback)
-    children:
-      - 'azure-servicefabric.ServiceGroups#create~client'
-      - 'azure-servicefabric.ServiceGroups#create~callback'
-      - 'azure-servicefabric.ServiceGroups#create~options'
-      - 'azure-servicefabric.ServiceGroups#create~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#create~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#create~queryParameters'
-      - 'azure-servicefabric.ServiceGroups#create~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#create~regex'
-      - 'azure-servicefabric.ServiceGroups#create~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#create~httpRequest'
-      - 'azure-servicefabric.ServiceGroups#create~headerName'
-      - 'azure-servicefabric.ServiceGroups#create~requestContent'
-      - 'azure-servicefabric.ServiceGroups#create~requestModel'
-      - 'azure-servicefabric.ServiceGroups#create~requestModelMapper'
-      - 'azure-servicefabric.ServiceGroups#create~requestModel'
-      - 'azure-servicefabric.ServiceGroups#create~requestContent'
-      - 'azure-servicefabric.ServiceGroups#create~serializationError'
-  - uid: 'azure-servicefabric.ServiceGroups#update'
-    id: 'azure-servicefabric.ServiceGroups#update'
+        optionalCallback)
+  - uid: 'azure-servicefabric.ServiceGroups#updateWithHttpOperationResponse'
+    id: 'azure-servicefabric.ServiceGroups#updateWithHttpOperationResponse'
     parent: azure-servicefabric.ServiceGroups
     name: >-
-      update(applicationName, serviceName, updateServiceGroupDescription,
-      options, callback)
+      updateWithHttpOperationResponse(applicationName, serviceName,
+      updateServiceGroupDescription, options)
     summary: Update service groups
     fullName: >-
-      azure-servicefabric.ServiceGroups.update(applicationName, serviceName,
-      updateServiceGroupDescription, options, callback)
+      azure-servicefabric.ServiceGroups.updateWithHttpOperationResponse(applicationName,
+      serviceName, updateServiceGroupDescription, options)
     type: Method
     syntax:
       parameters:
@@ -232,20 +374,19 @@ items:
           type:
             - object
           description: |-
-            The description of the
-            service group update
+            The description of the service
+            group update
         - id: updateServiceGroupDescription.flags
           type:
             - number
           description: ''
           optional: true
-        - id: updateServiceGroupDescription.ServiceKind
+        - id: updateServiceGroupDescription.serviceKind
           type:
             - string
           description: |-
-            Polymorhpic
+            Polymorphic
             Discriminator
-          optional: true
         - id: options
           type:
             - object
@@ -258,53 +399,88 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function updateWithHttpOperationResponse(applicationName, serviceName,
+        updateServiceGroupDescription, options)
+  - uid: 'azure-servicefabric.ServiceGroups#update'
+    id: 'azure-servicefabric.ServiceGroups#update'
+    parent: azure-servicefabric.ServiceGroups
+    name: >-
+      update(applicationName, serviceName, updateServiceGroupDescription,
+      options, optionalCallback)
+    summary: Update service groups
+    fullName: >-
+      azure-servicefabric.ServiceGroups.update(applicationName, serviceName,
+      updateServiceGroupDescription, options, optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: applicationName
+          type:
+            - string
+          description: The name of the application
+        - id: serviceName
+          type:
+            - string
+          description: The name of the service
+        - id: updateServiceGroupDescription
+          type:
+            - object
+          description: |-
+            The description of the service
+            group update
+        - id: updateServiceGroupDescription.flags
+          type:
+            - number
+          description: ''
+          optional: true
+        - id: updateServiceGroupDescription.serviceKind
+          type:
+            - string
+          description: |-
+            Polymorphic
+            Discriminator
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {string} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+          {Promise} A promise is returned
       content: >-
         function update(applicationName, serviceName,
-        updateServiceGroupDescription, options, callback)
-    children:
-      - 'azure-servicefabric.ServiceGroups#update~client'
-      - 'azure-servicefabric.ServiceGroups#update~callback'
-      - 'azure-servicefabric.ServiceGroups#update~options'
-      - 'azure-servicefabric.ServiceGroups#update~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#update~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#update~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#update~queryParameters'
-      - 'azure-servicefabric.ServiceGroups#update~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#update~regex'
-      - 'azure-servicefabric.ServiceGroups#update~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#update~httpRequest'
-      - 'azure-servicefabric.ServiceGroups#update~headerName'
-      - 'azure-servicefabric.ServiceGroups#update~requestContent'
-      - 'azure-servicefabric.ServiceGroups#update~requestModel'
-      - 'azure-servicefabric.ServiceGroups#update~requestModelMapper'
-      - 'azure-servicefabric.ServiceGroups#update~requestModel'
-      - 'azure-servicefabric.ServiceGroups#update~requestContent'
-      - 'azure-servicefabric.ServiceGroups#update~serializationError'
-  - uid: 'azure-servicefabric.ServiceGroups#remove'
-    id: 'azure-servicefabric.ServiceGroups#remove'
+        updateServiceGroupDescription, options, optionalCallback)
+  - uid: 'azure-servicefabric.ServiceGroups#removeWithHttpOperationResponse'
+    id: 'azure-servicefabric.ServiceGroups#removeWithHttpOperationResponse'
     parent: azure-servicefabric.ServiceGroups
-    name: 'remove(applicationName, serviceName, options, callback)'
+    name: 'removeWithHttpOperationResponse(applicationName, serviceName, options)'
     summary: Remove service groups
     fullName: >-
-      azure-servicefabric.ServiceGroups.remove(applicationName, serviceName,
-      options, callback)
+      azure-servicefabric.ServiceGroups.removeWithHttpOperationResponse(applicationName,
+      serviceName, options)
     type: Method
     syntax:
       parameters:
@@ -328,42 +504,60 @@ items:
             Headers that will be added to the
             request
           optional: true
-        - id: callback
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function removeWithHttpOperationResponse(applicationName, serviceName,
+        options)
+  - uid: 'azure-servicefabric.ServiceGroups#remove'
+    id: 'azure-servicefabric.ServiceGroups#remove'
+    parent: azure-servicefabric.ServiceGroups
+    name: 'remove(applicationName, serviceName, options, optionalCallback)'
+    summary: Remove service groups
+    fullName: >-
+      azure-servicefabric.ServiceGroups.remove(applicationName, serviceName,
+      options, optionalCallback)
+    type: Method
+    syntax:
+      parameters:
+        - id: applicationName
+          type:
+            - string
+          description: The name of the application
+        - id: serviceName
+          type:
+            - string
+          description: The name of the service
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
           type:
             - function
-          description: ''
+          description: The optional callback.
+          optional: true
       return:
         type:
           - function
+          - Promise
         description: |-
-          callback(err, result, request, response)
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
 
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {string} [result]   - The deserialized result object.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-      content: 'function remove(applicationName, serviceName, options, callback)'
-    children:
-      - 'azure-servicefabric.ServiceGroups#remove~client'
-      - 'azure-servicefabric.ServiceGroups#remove~callback'
-      - 'azure-servicefabric.ServiceGroups#remove~options'
-      - 'azure-servicefabric.ServiceGroups#remove~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#remove~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#remove~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#remove~queryParameters'
-      - 'azure-servicefabric.ServiceGroups#remove~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#remove~regex'
-      - 'azure-servicefabric.ServiceGroups#remove~requestUrl'
-      - 'azure-servicefabric.ServiceGroups#remove~httpRequest'
-      - 'azure-servicefabric.ServiceGroups#remove~headerName'
+          {Promise} A promise is returned
+      content: 'function remove(applicationName, serviceName, options, optionalCallback)'
 references:
-  - uid: azure-servicefabric.ServiceFabricClient
-    name: ServiceFabricClient
-    fullName: azure-servicefabric.ServiceFabricClient
-    isExternal: false
   - uid: string
     name: string
     fullName: string
@@ -379,6 +573,10 @@ references:
   - uid: array
     name: array
     fullName: array
+    isExternal: true
+  - uid: Promise
+    name: Promise
+    fullName: Promise
     isExternal: true
   - uid: function
     name: function

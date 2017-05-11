@@ -11,7 +11,7 @@ items:
       - 'azure-arm-trafficmanager.Profiles#client'
       - >-
         azure-arm-trafficmanager.Profiles#_checkTrafficManagerRelativeDnsNameAvailability
-      - 'azure-arm-trafficmanager.Profiles#_listByInResourceGroup'
+      - 'azure-arm-trafficmanager.Profiles#_listAllInResourceGroup'
       - 'azure-arm-trafficmanager.Profiles#_listAll'
       - 'azure-arm-trafficmanager.Profiles#_get'
       - 'azure-arm-trafficmanager.Profiles#_createOrUpdate'
@@ -22,8 +22,8 @@ items:
       - >-
         azure-arm-trafficmanager.Profiles#checkTrafficManagerRelativeDnsNameAvailability
       - >-
-        azure-arm-trafficmanager.Profiles#listByInResourceGroupWithHttpOperationResponse
-      - 'azure-arm-trafficmanager.Profiles#listByInResourceGroup'
+        azure-arm-trafficmanager.Profiles#listAllInResourceGroupWithHttpOperationResponse
+      - 'azure-arm-trafficmanager.Profiles#listAllInResourceGroup'
       - 'azure-arm-trafficmanager.Profiles#listAllWithHttpOperationResponse'
       - 'azure-arm-trafficmanager.Profiles#listAll'
       - 'azure-arm-trafficmanager.Profiles#getWithHttpOperationResponse'
@@ -65,15 +65,15 @@ items:
     type: Field
     syntax:
       content: _checkTrafficManagerRelativeDnsNameAvailability
-  - uid: 'azure-arm-trafficmanager.Profiles#_listByInResourceGroup'
-    id: 'azure-arm-trafficmanager.Profiles#_listByInResourceGroup'
+  - uid: 'azure-arm-trafficmanager.Profiles#_listAllInResourceGroup'
+    id: 'azure-arm-trafficmanager.Profiles#_listAllInResourceGroup'
     parent: azure-arm-trafficmanager.Profiles
-    name: _listByInResourceGroup
+    name: _listAllInResourceGroup
     summary: ''
-    fullName: azure-arm-trafficmanager.Profiles._listByInResourceGroup
+    fullName: azure-arm-trafficmanager.Profiles._listAllInResourceGroup
     type: Field
     syntax:
-      content: _listByInResourceGroup
+      content: _listAllInResourceGroup
   - uid: 'azure-arm-trafficmanager.Profiles#_listAll'
     id: 'azure-arm-trafficmanager.Profiles#_listAll'
     parent: azure-arm-trafficmanager.Profiles
@@ -231,14 +231,16 @@ items:
         function checkTrafficManagerRelativeDnsNameAvailability(parameters,
         options, optionalCallback)
   - uid: >-
-      azure-arm-trafficmanager.Profiles#listByInResourceGroupWithHttpOperationResponse
+      azure-arm-trafficmanager.Profiles#listAllInResourceGroupWithHttpOperationResponse
     id: >-
-      azure-arm-trafficmanager.Profiles#listByInResourceGroupWithHttpOperationResponse
+      azure-arm-trafficmanager.Profiles#listAllInResourceGroupWithHttpOperationResponse
     parent: azure-arm-trafficmanager.Profiles
-    name: 'listByInResourceGroupWithHttpOperationResponse(resourceGroupName, options)'
+    name: >-
+      listAllInResourceGroupWithHttpOperationResponse(resourceGroupName,
+      options)
     summary: Lists all Traffic Manager profiles within a resource group.
     fullName: >-
-      azure-arm-trafficmanager.Profiles.listByInResourceGroupWithHttpOperationResponse(resourceGroupName,
+      azure-arm-trafficmanager.Profiles.listAllInResourceGroupWithHttpOperationResponse(resourceGroupName,
       options)
     type: Method
     syntax:
@@ -267,15 +269,15 @@ items:
         description: A promise is returned
       content: >-
         function
-        listByInResourceGroupWithHttpOperationResponse(resourceGroupName,
+        listAllInResourceGroupWithHttpOperationResponse(resourceGroupName,
         options)
-  - uid: 'azure-arm-trafficmanager.Profiles#listByInResourceGroup'
-    id: 'azure-arm-trafficmanager.Profiles#listByInResourceGroup'
+  - uid: 'azure-arm-trafficmanager.Profiles#listAllInResourceGroup'
+    id: 'azure-arm-trafficmanager.Profiles#listAllInResourceGroup'
     parent: azure-arm-trafficmanager.Profiles
-    name: 'listByInResourceGroup(resourceGroupName, options, optionalCallback)'
+    name: 'listAllInResourceGroup(resourceGroupName, options, optionalCallback)'
     summary: Lists all Traffic Manager profiles within a resource group.
     fullName: >-
-      azure-arm-trafficmanager.Profiles.listByInResourceGroup(resourceGroupName,
+      azure-arm-trafficmanager.Profiles.listAllInResourceGroup(resourceGroupName,
       options, optionalCallback)
     type: Method
     syntax:
@@ -313,7 +315,7 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function listByInResourceGroup(resourceGroupName, options,
+        function listAllInResourceGroup(resourceGroupName, options,
         optionalCallback)
   - uid: 'azure-arm-trafficmanager.Profiles#listAllWithHttpOperationResponse'
     id: 'azure-arm-trafficmanager.Profiles#listAllWithHttpOperationResponse'
@@ -551,14 +553,12 @@ items:
           type:
             - number
           description: >-
-            Gets or sets the DNS
+            Gets or sets the DNS Time-To-Live
 
-            Ttime-To-Live (TTL), in seconds.  This informs the local DNS
-            resolvers and
+            (TTL), in seconds.  This informs the local DNS resolvers and DNS
+            clients how
 
-            DNS clients how long to cache DNS responses provided by this Traffic
-            Manager
-
+            long to cache DNS responses provided by this Traffic Manager
             profile.
           optional: true
         - id: parameters.monitorConfig
@@ -580,7 +580,7 @@ items:
             - string
           description: |-
             Gets or sets the
-            protocol (HTTP or HTTPS) used to probe for endpoint health.
+            protocol (HTTP, HTTPS or TCP) used to probe for endpoint health.
           optional: true
         - id: parameters.monitorConfig.port
           type:
@@ -597,6 +597,45 @@ items:
 
             relative to the endpoint domain name used to probe for endpoint
             health.
+          optional: true
+        - id: parameters.monitorConfig.intervalInSeconds
+          type:
+            - number
+          description: >-
+            Gets or sets
+
+            the monitor interval for endpoints in this profile. This is the
+            interval at
+
+            which Traffic Manager will check the health of each endpoint in this
+
+            profile.
+          optional: true
+        - id: parameters.monitorConfig.timeoutInSeconds
+          type:
+            - number
+          description: >-
+            Gets or sets the
+
+            monitor timeout for endpoints in this profile. This is the time that
+            Traffic
+
+            Manager allows endpoints in this profile to response to the health
+            check.
+          optional: true
+        - id: parameters.monitorConfig.toleratedNumberOfFailures
+          type:
+            - number
+          description: >-
+            Gets or
+
+            sets the number of consecutive failed health check that Traffic
+            Manager
+
+            tolerates before declaring an endpoint in this profile Degraded
+            after the
+
+            next failed health check.
           optional: true
         - id: parameters.endpoints
           type:
@@ -719,14 +758,12 @@ items:
           type:
             - number
           description: >-
-            Gets or sets the DNS
+            Gets or sets the DNS Time-To-Live
 
-            Ttime-To-Live (TTL), in seconds.  This informs the local DNS
-            resolvers and
+            (TTL), in seconds.  This informs the local DNS resolvers and DNS
+            clients how
 
-            DNS clients how long to cache DNS responses provided by this Traffic
-            Manager
-
+            long to cache DNS responses provided by this Traffic Manager
             profile.
           optional: true
         - id: parameters.monitorConfig
@@ -748,7 +785,7 @@ items:
             - string
           description: |-
             Gets or sets the
-            protocol (HTTP or HTTPS) used to probe for endpoint health.
+            protocol (HTTP, HTTPS or TCP) used to probe for endpoint health.
           optional: true
         - id: parameters.monitorConfig.port
           type:
@@ -765,6 +802,45 @@ items:
 
             relative to the endpoint domain name used to probe for endpoint
             health.
+          optional: true
+        - id: parameters.monitorConfig.intervalInSeconds
+          type:
+            - number
+          description: >-
+            Gets or sets
+
+            the monitor interval for endpoints in this profile. This is the
+            interval at
+
+            which Traffic Manager will check the health of each endpoint in this
+
+            profile.
+          optional: true
+        - id: parameters.monitorConfig.timeoutInSeconds
+          type:
+            - number
+          description: >-
+            Gets or sets the
+
+            monitor timeout for endpoints in this profile. This is the time that
+            Traffic
+
+            Manager allows endpoints in this profile to response to the health
+            check.
+          optional: true
+        - id: parameters.monitorConfig.toleratedNumberOfFailures
+          type:
+            - number
+          description: >-
+            Gets or
+
+            sets the number of consecutive failed health check that Traffic
+            Manager
+
+            tolerates before declaring an endpoint in this profile Degraded
+            after the
+
+            next failed health check.
           optional: true
         - id: parameters.endpoints
           type:
@@ -993,14 +1069,12 @@ items:
           type:
             - number
           description: >-
-            Gets or sets the DNS
+            Gets or sets the DNS Time-To-Live
 
-            Ttime-To-Live (TTL), in seconds.  This informs the local DNS
-            resolvers and
+            (TTL), in seconds.  This informs the local DNS resolvers and DNS
+            clients how
 
-            DNS clients how long to cache DNS responses provided by this Traffic
-            Manager
-
+            long to cache DNS responses provided by this Traffic Manager
             profile.
           optional: true
         - id: parameters.monitorConfig
@@ -1022,7 +1096,7 @@ items:
             - string
           description: |-
             Gets or sets the
-            protocol (HTTP or HTTPS) used to probe for endpoint health.
+            protocol (HTTP, HTTPS or TCP) used to probe for endpoint health.
           optional: true
         - id: parameters.monitorConfig.port
           type:
@@ -1039,6 +1113,45 @@ items:
 
             relative to the endpoint domain name used to probe for endpoint
             health.
+          optional: true
+        - id: parameters.monitorConfig.intervalInSeconds
+          type:
+            - number
+          description: >-
+            Gets or sets
+
+            the monitor interval for endpoints in this profile. This is the
+            interval at
+
+            which Traffic Manager will check the health of each endpoint in this
+
+            profile.
+          optional: true
+        - id: parameters.monitorConfig.timeoutInSeconds
+          type:
+            - number
+          description: >-
+            Gets or sets the
+
+            monitor timeout for endpoints in this profile. This is the time that
+            Traffic
+
+            Manager allows endpoints in this profile to response to the health
+            check.
+          optional: true
+        - id: parameters.monitorConfig.toleratedNumberOfFailures
+          type:
+            - number
+          description: >-
+            Gets or
+
+            sets the number of consecutive failed health check that Traffic
+            Manager
+
+            tolerates before declaring an endpoint in this profile Degraded
+            after the
+
+            next failed health check.
           optional: true
         - id: parameters.endpoints
           type:
@@ -1161,14 +1274,12 @@ items:
           type:
             - number
           description: >-
-            Gets or sets the DNS
+            Gets or sets the DNS Time-To-Live
 
-            Ttime-To-Live (TTL), in seconds.  This informs the local DNS
-            resolvers and
+            (TTL), in seconds.  This informs the local DNS resolvers and DNS
+            clients how
 
-            DNS clients how long to cache DNS responses provided by this Traffic
-            Manager
-
+            long to cache DNS responses provided by this Traffic Manager
             profile.
           optional: true
         - id: parameters.monitorConfig
@@ -1190,7 +1301,7 @@ items:
             - string
           description: |-
             Gets or sets the
-            protocol (HTTP or HTTPS) used to probe for endpoint health.
+            protocol (HTTP, HTTPS or TCP) used to probe for endpoint health.
           optional: true
         - id: parameters.monitorConfig.port
           type:
@@ -1207,6 +1318,45 @@ items:
 
             relative to the endpoint domain name used to probe for endpoint
             health.
+          optional: true
+        - id: parameters.monitorConfig.intervalInSeconds
+          type:
+            - number
+          description: >-
+            Gets or sets
+
+            the monitor interval for endpoints in this profile. This is the
+            interval at
+
+            which Traffic Manager will check the health of each endpoint in this
+
+            profile.
+          optional: true
+        - id: parameters.monitorConfig.timeoutInSeconds
+          type:
+            - number
+          description: >-
+            Gets or sets the
+
+            monitor timeout for endpoints in this profile. This is the time that
+            Traffic
+
+            Manager allows endpoints in this profile to response to the health
+            check.
+          optional: true
+        - id: parameters.monitorConfig.toleratedNumberOfFailures
+          type:
+            - number
+          description: >-
+            Gets or
+
+            sets the number of consecutive failed health check that Traffic
+            Manager
+
+            tolerates before declaring an endpoint in this profile Degraded
+            after the
+
+            next failed health check.
           optional: true
         - id: parameters.endpoints
           type:

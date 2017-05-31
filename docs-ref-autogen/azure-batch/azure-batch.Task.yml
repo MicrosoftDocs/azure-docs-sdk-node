@@ -263,12 +263,29 @@ items:
             A list of task exit code
             ranges and how the Batch service should respond to them.
           optional: true
-        - id: task.exitConditions.schedulingError
+        - id: task.exitConditions.preProcessingError
           type:
             - object
           description: |-
+            How the Batch
+            service should respond if the task fails to start due to an error.
+          optional: true
+        - id: task.exitConditions.fileUploadError
+          type:
+            - object
+          description: >-
             How the Batch service
-            should respond if the task fails with a scheduling error.
+
+            should respond if a file upload error occurs. If the task exited
+            with an
+
+            exit code that was specified via exitCodes or exitCodeRanges, and
+            then
+
+            encountered a file upload error, then the action specified by the
+            exit code
+
+            takes precedence.
           optional: true
         - id: task.exitConditions.default
           type:
@@ -279,19 +296,22 @@ items:
             respond if the task fails with an exit condition not covered by any
             of the
 
-            other properties - that is, any nonzero exit code not listed in the
+            other properties. This value is used if the task exits with any
+            nonzero exit
 
-            exitCodes or exitCodeRanges collection, or a scheduling error if the
+            code not listed in the exitCodes or exitCodeRanges collection, with
+            a
 
-            schedulingError property is not present. Note that the default
-            condition
+            pre-processing error if the preProcessingError property is not
+            present, or
 
-            does not include exit code 0. If you want non-default behaviour on
-            exit code
+            with a file upload error if the fileUploadError property is not
+            present. If
 
-            0, you must list it explicitly using the exitCodes or exitCodeRanges
+            you want non-default behaviour on exit code 0, you must list it
+            explicitly
 
-            collection.
+            using the exitCodes or exitCodeRanges collection.
           optional: true
         - id: task.exitConditions.default.jobAction
           type:
@@ -359,6 +379,20 @@ items:
             the
 
             compute node on which the primary task is executed.
+          optional: true
+        - id: task.outputFiles
+          type:
+            - array
+          description: >-
+            A list of files that the Batch service
+
+            will upload from the compute node after running the command line.
+            For
+
+            multi-instance tasks, the files will only be uploaded from the
+            compute node
+
+            on which the primary task is executed.
           optional: true
         - id: task.environmentSettings
           type:
@@ -835,12 +869,29 @@ items:
             A list of task exit code
             ranges and how the Batch service should respond to them.
           optional: true
-        - id: task.exitConditions.schedulingError
+        - id: task.exitConditions.preProcessingError
           type:
             - object
           description: |-
+            How the Batch
+            service should respond if the task fails to start due to an error.
+          optional: true
+        - id: task.exitConditions.fileUploadError
+          type:
+            - object
+          description: >-
             How the Batch service
-            should respond if the task fails with a scheduling error.
+
+            should respond if a file upload error occurs. If the task exited
+            with an
+
+            exit code that was specified via exitCodes or exitCodeRanges, and
+            then
+
+            encountered a file upload error, then the action specified by the
+            exit code
+
+            takes precedence.
           optional: true
         - id: task.exitConditions.default
           type:
@@ -851,19 +902,22 @@ items:
             respond if the task fails with an exit condition not covered by any
             of the
 
-            other properties - that is, any nonzero exit code not listed in the
+            other properties. This value is used if the task exits with any
+            nonzero exit
 
-            exitCodes or exitCodeRanges collection, or a scheduling error if the
+            code not listed in the exitCodes or exitCodeRanges collection, with
+            a
 
-            schedulingError property is not present. Note that the default
-            condition
+            pre-processing error if the preProcessingError property is not
+            present, or
 
-            does not include exit code 0. If you want non-default behaviour on
-            exit code
+            with a file upload error if the fileUploadError property is not
+            present. If
 
-            0, you must list it explicitly using the exitCodes or exitCodeRanges
+            you want non-default behaviour on exit code 0, you must list it
+            explicitly
 
-            collection.
+            using the exitCodes or exitCodeRanges collection.
           optional: true
         - id: task.exitConditions.default.jobAction
           type:
@@ -931,6 +985,20 @@ items:
             the
 
             compute node on which the primary task is executed.
+          optional: true
+        - id: task.outputFiles
+          type:
+            - array
+          description: >-
+            A list of files that the Batch service
+
+            will upload from the compute node after running the command line.
+            For
+
+            multi-instance tasks, the files will only be uploaded from the
+            compute node
+
+            on which the primary task is executed.
           optional: true
         - id: task.environmentSettings
           type:

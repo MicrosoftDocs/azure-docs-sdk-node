@@ -803,15 +803,15 @@ items:
 
             (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/).
 
-            Batch supports all Cloud Services VM sizes except ExtraSmall. For
+            Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2
+            and A2V2.
 
-            information about available VM sizes for pools using images from the
-            Virtual
+            For information about available VM sizes for pools using images from
+            the
 
-            Machines Marketplace (pools created with
-            virtualMachineConfiguration) see
+            Virtual Machines Marketplace (pools created with
 
-            Sizes for Virtual Machines (Linux)
+            virtualMachineConfiguration) see Sizes for Virtual Machines (Linux)
 
             (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/)
 
@@ -1098,16 +1098,34 @@ items:
 
             directly, the HTTP status code is 400 (Bad Request).
           optional: true
-        - id: pool.targetDedicated
+        - id: pool.targetDedicatedNodes
           type:
             - number
           description: >-
-            The desired number of compute nodes
+            The desired number of dedicated
 
-            in the pool. This property must have the default value if
-            enableAutoScale is
+            compute nodes in the pool. This property must not be specified if
 
-            true. It is required if enableAutoScale is false.
+            enableAutoScale is set to true. If enableAutoScale is set to false,
+            then you
+
+            must set either targetDedicatedNodes, targetLowPriorityNodes, or
+            both.
+          optional: true
+        - id: pool.targetLowPriorityNodes
+          type:
+            - number
+          description: >-
+            The desired number of
+
+            low-priority compute nodes in the pool. This property must not be
+            specified
+
+            if enableAutoScale is set to true. If enableAutoScale is set to
+            false, then
+
+            you must set either targetDedicatedNodes, targetLowPriorityNodes, or
+            both.
           optional: true
         - id: pool.enableAutoScale
           type:
@@ -1115,13 +1133,15 @@ items:
           description: >-
             Whether the pool size should
 
-            automatically adjust over time. If true, the autoScaleFormula
-            property must
+            automatically adjust over time. If false, at least one of
 
-            be set. If false, the targetDedicated property must be set. The
-            default
+            targetDedicateNodes and targetLowPriorityNodes must be specified. If
+            true,
 
-            value is false.
+            the autoScaleFormula property is required and the pool automatically
+            resizes
+
+            according to the formula. The default value is false.
           optional: true
         - id: pool.autoScaleFormula
           type:
@@ -1217,32 +1237,35 @@ items:
             enough free IP addresses, the pool will partially allocate compute
             nodes,
 
-            and a resize error will occur. The 'MicrosoftAzureBatch' service
-            principal
+            and a resize error will occur. The Batch service principal, named
+            'Microsoft
 
-            must have the 'Classic Virtual Machine Contributor' Role-Based
-            Access
+            Azure Batch' or 'MicrosoftAzureBatch', must have the 'Classic
+            Virtual
 
-            Control (RBAC) role for the specified VNet. The specified subnet
-            must allow
+            Machine Contributor' Role-Based Access Control (RBAC) role for the
+            specified
 
-            communication from the Azure Batch service to be able to schedule
-            tasks on
-
-            the compute nodes. This can be verified by checking if the specified
-            VNet
-
-            has any associated Network Security Groups (NSG). If communication
-            to the
-
-            compute nodes in the specified subnet is denied by an NSG, then the
+            VNet. The specified subnet must allow communication from the Azure
             Batch
 
-            service will set the state of the compute nodes to unusable. This
-            property
+            service to be able to schedule tasks on the compute nodes. This can
+            be
 
-            can only be specified for pools created with a
-            cloudServiceConfiguration.
+            verified by checking if the specified VNet has any associated
+            Network
+
+            Security Groups (NSG). If communication to the compute nodes in the
+
+            specified subnet is denied by an NSG, then the Batch service will
+            set the
+
+            state of the compute nodes to unusable. For pools created via
+
+            virtualMachineConfiguration the Batch account must have
+            poolAllocationMode
+
+            userSubscription in order to use a VNet.
           optional: true
         - id: pool.startTask
           type:
@@ -1463,6 +1486,23 @@ items:
 
             virtualMachineConfiguration (IaaS) property.
           optional: true
+        - id: pool.applicationLicenses
+          type:
+            - array
+          description: >-
+            The list of application licenses
+
+            the Batch service will make available on each compute node in the
+            pool. The
+
+            list of application licenses must be a subset of available Batch
+            service
+
+            application licenses. If a license is requested which is not
+            supported, pool
+
+            creation will fail.
+          optional: true
         - id: pool.maxTasksPerNode
           type:
             - number
@@ -1491,9 +1531,7 @@ items:
             How tasks should be
 
             distributed across compute nodes. Possible values include: 'spread',
-            'pack',
-
-            'unmapped'
+            'pack'
         - id: pool.userAccounts
           type:
             - array
@@ -1641,15 +1679,15 @@ items:
 
             (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/).
 
-            Batch supports all Cloud Services VM sizes except ExtraSmall. For
+            Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2
+            and A2V2.
 
-            information about available VM sizes for pools using images from the
-            Virtual
+            For information about available VM sizes for pools using images from
+            the
 
-            Machines Marketplace (pools created with
-            virtualMachineConfiguration) see
+            Virtual Machines Marketplace (pools created with
 
-            Sizes for Virtual Machines (Linux)
+            virtualMachineConfiguration) see Sizes for Virtual Machines (Linux)
 
             (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/)
 
@@ -1936,16 +1974,34 @@ items:
 
             directly, the HTTP status code is 400 (Bad Request).
           optional: true
-        - id: pool.targetDedicated
+        - id: pool.targetDedicatedNodes
           type:
             - number
           description: >-
-            The desired number of compute nodes
+            The desired number of dedicated
 
-            in the pool. This property must have the default value if
-            enableAutoScale is
+            compute nodes in the pool. This property must not be specified if
 
-            true. It is required if enableAutoScale is false.
+            enableAutoScale is set to true. If enableAutoScale is set to false,
+            then you
+
+            must set either targetDedicatedNodes, targetLowPriorityNodes, or
+            both.
+          optional: true
+        - id: pool.targetLowPriorityNodes
+          type:
+            - number
+          description: >-
+            The desired number of
+
+            low-priority compute nodes in the pool. This property must not be
+            specified
+
+            if enableAutoScale is set to true. If enableAutoScale is set to
+            false, then
+
+            you must set either targetDedicatedNodes, targetLowPriorityNodes, or
+            both.
           optional: true
         - id: pool.enableAutoScale
           type:
@@ -1953,13 +2009,15 @@ items:
           description: >-
             Whether the pool size should
 
-            automatically adjust over time. If true, the autoScaleFormula
-            property must
+            automatically adjust over time. If false, at least one of
 
-            be set. If false, the targetDedicated property must be set. The
-            default
+            targetDedicateNodes and targetLowPriorityNodes must be specified. If
+            true,
 
-            value is false.
+            the autoScaleFormula property is required and the pool automatically
+            resizes
+
+            according to the formula. The default value is false.
           optional: true
         - id: pool.autoScaleFormula
           type:
@@ -2055,32 +2113,35 @@ items:
             enough free IP addresses, the pool will partially allocate compute
             nodes,
 
-            and a resize error will occur. The 'MicrosoftAzureBatch' service
-            principal
+            and a resize error will occur. The Batch service principal, named
+            'Microsoft
 
-            must have the 'Classic Virtual Machine Contributor' Role-Based
-            Access
+            Azure Batch' or 'MicrosoftAzureBatch', must have the 'Classic
+            Virtual
 
-            Control (RBAC) role for the specified VNet. The specified subnet
-            must allow
+            Machine Contributor' Role-Based Access Control (RBAC) role for the
+            specified
 
-            communication from the Azure Batch service to be able to schedule
-            tasks on
-
-            the compute nodes. This can be verified by checking if the specified
-            VNet
-
-            has any associated Network Security Groups (NSG). If communication
-            to the
-
-            compute nodes in the specified subnet is denied by an NSG, then the
+            VNet. The specified subnet must allow communication from the Azure
             Batch
 
-            service will set the state of the compute nodes to unusable. This
-            property
+            service to be able to schedule tasks on the compute nodes. This can
+            be
 
-            can only be specified for pools created with a
-            cloudServiceConfiguration.
+            verified by checking if the specified VNet has any associated
+            Network
+
+            Security Groups (NSG). If communication to the compute nodes in the
+
+            specified subnet is denied by an NSG, then the Batch service will
+            set the
+
+            state of the compute nodes to unusable. For pools created via
+
+            virtualMachineConfiguration the Batch account must have
+            poolAllocationMode
+
+            userSubscription in order to use a VNet.
           optional: true
         - id: pool.startTask
           type:
@@ -2301,6 +2362,23 @@ items:
 
             virtualMachineConfiguration (IaaS) property.
           optional: true
+        - id: pool.applicationLicenses
+          type:
+            - array
+          description: >-
+            The list of application licenses
+
+            the Batch service will make available on each compute node in the
+            pool. The
+
+            list of application licenses must be a subset of available Batch
+            service
+
+            application licenses. If a license is requested which is not
+            supported, pool
+
+            creation will fail.
+          optional: true
         - id: pool.maxTasksPerNode
           type:
             - number
@@ -2329,9 +2407,7 @@ items:
             How tasks should be
 
             distributed across compute nodes. Possible values include: 'spread',
-            'pack',
-
-            'unmapped'
+            'pack'
         - id: pool.userAccounts
           type:
             - array
@@ -5283,12 +5359,20 @@ items:
           type:
             - object
           description: The parameters for the request.
-        - id: poolResizeParameter.targetDedicated
+        - id: poolResizeParameter.targetDedicatedNodes
           type:
             - number
           description: |-
-            The desired number of
-            compute nodes in the pool.
+            The desired
+            number of dedicated compute nodes in the pool.
+          optional: true
+        - id: poolResizeParameter.targetLowPriorityNodes
+          type:
+            - number
+          description: |-
+            The desired
+            number of low-priority compute nodes in the pool.
+          optional: true
         - id: poolResizeParameter.resizeTimeout
           type:
             - azure-batch.moment.duration
@@ -5482,12 +5566,20 @@ items:
           type:
             - object
           description: The parameters for the request.
-        - id: poolResizeParameter.targetDedicated
+        - id: poolResizeParameter.targetDedicatedNodes
           type:
             - number
           description: |-
-            The desired number of
-            compute nodes in the pool.
+            The desired
+            number of dedicated compute nodes in the pool.
+          optional: true
+        - id: poolResizeParameter.targetLowPriorityNodes
+          type:
+            - number
+          description: |-
+            The desired
+            number of low-priority compute nodes in the pool.
+          optional: true
         - id: poolResizeParameter.resizeTimeout
           type:
             - azure-batch.moment.duration

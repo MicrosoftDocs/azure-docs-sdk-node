@@ -22,7 +22,6 @@ items:
     source:
       id: azure-storage-legacy.BlobService
       path: lib\services\legacyStorage\lib\blob\blobservice.js
-      startLine: 82
       remote:
         branch: master
         path: lib\services\legacyStorage\lib\blob\blobservice.js
@@ -32,12 +31,6 @@ items:
     type: Class
     children:
       - 'azure-storage-legacy.BlobService.#ctor'
-      - 'azure-storage-legacy.BlobService#apiVersion'
-      - 'azure-storage-legacy.BlobService#authenticationProvider'
-      - 'azure-storage-legacy.BlobService#sharedAccessSignatureCredentials'
-      - 'azure-storage-legacy.BlobService#singleBlobPutThresholdInBytes'
-      - 'azure-storage-legacy.BlobService#writeBlockSizeInBytes'
-      - 'azure-storage-legacy.BlobService#pipeline'
       - 'azure-storage-legacy.BlobService#getServiceProperties'
       - 'azure-storage-legacy.BlobService#setServiceProperties'
       - 'azure-storage-legacy.BlobService#listContainers'
@@ -82,7 +75,6 @@ items:
       - 'azure-storage-legacy.BlobService#generateSharedAccessSignature'
       - 'azure-storage-legacy.BlobService#getBlobUrl'
       - 'azure-storage-legacy.BlobService#_leaseBlobImpl'
-      - 'azure-storage-legacy.BlobService#_updatePageBlobPagesImpl'
       - 'azure-storage-legacy.BlobService#createBlob'
       - 'azure-storage-legacy.BlobService#createBlockBlobFromFile'
       - 'azure-storage-legacy.BlobService#createBlockBlobFromStream'
@@ -93,7 +85,6 @@ items:
       - 'azure-storage-legacy.BlobService#createPageBlobFromStream'
       - 'azure-storage-legacy.BlobService#_createBlobFromStream'
       - 'azure-storage-legacy.BlobService#_createBlobFromChunkStream'
-      - azure-storage-legacy.BlobService.SpeedSummary
   - id: 'azure-storage-legacy.BlobService.#ctor'
     uid: 'azure-storage-legacy.BlobService.#ctor'
     parent: azure-storage-legacy.BlobService
@@ -138,72 +129,6 @@ items:
         host, authenticationProvider)
     langs:
       - js
-  - uid: 'azure-storage-legacy.BlobService#apiVersion'
-    id: 'azure-storage-legacy.BlobService#apiVersion'
-    parent: azure-storage-legacy.BlobService
-    name: apiVersion
-    summary: ''
-    fullName: azure-storage-legacy.BlobService.apiVersion
-    langs:
-      - js
-    type: Member
-    syntax:
-      content: apiVersion
-  - uid: 'azure-storage-legacy.BlobService#authenticationProvider'
-    id: 'azure-storage-legacy.BlobService#authenticationProvider'
-    parent: azure-storage-legacy.BlobService
-    name: authenticationProvider
-    summary: ''
-    fullName: azure-storage-legacy.BlobService.authenticationProvider
-    langs:
-      - js
-    type: Member
-    syntax:
-      content: authenticationProvider
-  - uid: 'azure-storage-legacy.BlobService#sharedAccessSignatureCredentials'
-    id: 'azure-storage-legacy.BlobService#sharedAccessSignatureCredentials'
-    parent: azure-storage-legacy.BlobService
-    name: sharedAccessSignatureCredentials
-    summary: ''
-    fullName: azure-storage-legacy.BlobService.sharedAccessSignatureCredentials
-    langs:
-      - js
-    type: Member
-    syntax:
-      content: sharedAccessSignatureCredentials
-  - uid: 'azure-storage-legacy.BlobService#singleBlobPutThresholdInBytes'
-    id: 'azure-storage-legacy.BlobService#singleBlobPutThresholdInBytes'
-    parent: azure-storage-legacy.BlobService
-    name: singleBlobPutThresholdInBytes
-    summary: ''
-    fullName: azure-storage-legacy.BlobService.singleBlobPutThresholdInBytes
-    langs:
-      - js
-    type: Member
-    syntax:
-      content: singleBlobPutThresholdInBytes
-  - uid: 'azure-storage-legacy.BlobService#writeBlockSizeInBytes'
-    id: 'azure-storage-legacy.BlobService#writeBlockSizeInBytes'
-    parent: azure-storage-legacy.BlobService
-    name: writeBlockSizeInBytes
-    summary: ''
-    fullName: azure-storage-legacy.BlobService.writeBlockSizeInBytes
-    langs:
-      - js
-    type: Member
-    syntax:
-      content: writeBlockSizeInBytes
-  - uid: 'azure-storage-legacy.BlobService#pipeline'
-    id: 'azure-storage-legacy.BlobService#pipeline'
-    parent: azure-storage-legacy.BlobService
-    name: pipeline
-    summary: ''
-    fullName: azure-storage-legacy.BlobService.pipeline
-    langs:
-      - js
-    type: Member
-    syntax:
-      content: pipeline
   - uid: 'azure-storage-legacy.BlobService#getServiceProperties'
     id: 'azure-storage-legacy.BlobService#getServiceProperties'
     parent: azure-storage-legacy.BlobService
@@ -236,9 +161,6 @@ items:
                                                                                  will contain the properties and `response`
                                                                                  will contain information related to this operation.
       content: 'function getServiceProperties(options, callback)'
-    children:
-      - >-
-        azure-storage-legacy.BlobService#getServiceProperties~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#setServiceProperties'
     id: 'azure-storage-legacy.BlobService#setServiceProperties'
     parent: azure-storage-legacy.BlobService
@@ -281,9 +203,6 @@ items:
                                                                                  if an error occurs; otherwise, `response`
                                                                                  will contain information related to this operation.
       content: 'function setServiceProperties(serviceProperties, options, callback)'
-    children:
-      - >-
-        azure-storage-legacy.BlobService#setServiceProperties~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#listContainers'
     id: 'azure-storage-legacy.BlobService#listContainers'
     parent: azure-storage-legacy.BlobService
@@ -346,8 +265,6 @@ items:
                                                                                     `nextMarker` will contain a value that can be used
                                                                                     to retrieve the next section of the containers list.
       content: 'function listContainers(options, callback)'
-    children:
-      - 'azure-storage-legacy.BlobService#listContainers~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#createContainer'
     id: 'azure-storage-legacy.BlobService#createContainer'
     parent: azure-storage-legacy.BlobService
@@ -398,8 +315,6 @@ items:
                                                                           the <xref:BlobService~containerResult> for the container.
                                                                           `response` will contain information related to this operation.
       content: 'function createContainer(container, options, callback)'
-    children:
-      - 'azure-storage-legacy.BlobService#createContainer~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#createContainerIfNotExists'
     id: 'azure-storage-legacy.BlobService#createContainerIfNotExists'
     parent: azure-storage-legacy.BlobService
@@ -492,9 +407,6 @@ items:
                                                                           the <xref:BlobService~containerResult> information for the container.
                                                                           `response` will contain information related to this operation.
       content: 'function getContainerProperties(container, options, callback)'
-    children:
-      - >-
-        azure-storage-legacy.BlobService#getContainerProperties~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#getContainerMetadata'
     id: 'azure-storage-legacy.BlobService#getContainerMetadata'
     parent: azure-storage-legacy.BlobService
@@ -536,9 +448,6 @@ items:
                                                                                     the <xref:BlobService~containerResult> information for the container.
                                                                                     `response` will contain information related to this operation.
       content: 'function getContainerMetadata(container, options, callback)'
-    children:
-      - >-
-        azure-storage-legacy.BlobService#getContainerMetadata~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#setContainerMetadata'
     id: 'azure-storage-legacy.BlobService#setContainerMetadata'
     parent: azure-storage-legacy.BlobService
@@ -597,9 +506,6 @@ items:
                                                                           if an error occurs; otherwise 
                                                                           `response` will contain information related to this operation.
       content: 'function setContainerMetadata(container, metadata, options, callback)'
-    children:
-      - >-
-        azure-storage-legacy.BlobService#setContainerMetadata~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#getContainerAcl'
     id: 'azure-storage-legacy.BlobService#getContainerAcl'
     parent: azure-storage-legacy.BlobService
@@ -641,8 +547,6 @@ items:
                                                                           the <xref:BlobService~containerResult> information for the container.
                                                                           `response` will contain information related to this operation.
       content: 'function getContainerAcl(container, options, callback)'
-    children:
-      - 'azure-storage-legacy.BlobService#getContainerAcl~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#setContainerAcl'
     id: 'azure-storage-legacy.BlobService#setContainerAcl'
     parent: azure-storage-legacy.BlobService
@@ -697,8 +601,6 @@ items:
       content: >-
         function setContainerAcl(container, publicAccessLevel, options,
         callback)
-    children:
-      - 'azure-storage-legacy.BlobService#setContainerAcl~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#deleteContainer'
     id: 'azure-storage-legacy.BlobService#deleteContainer'
     parent: azure-storage-legacy.BlobService
@@ -743,8 +645,6 @@ items:
                                                                           if an error occurs; otherwise
                                                                           `response` will contain information related to this operation.
       content: 'function deleteContainer(container, options, callback)'
-    children:
-      - 'azure-storage-legacy.BlobService#deleteContainer~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#listBlobs'
     id: 'azure-storage-legacy.BlobService#listBlobs'
     parent: azure-storage-legacy.BlobService
@@ -812,8 +712,6 @@ items:
                                                                           the blobs within the container.
                                                                           `response` will contain information related to this operation.
       content: 'function listBlobs(container, options, callback)'
-    children:
-      - 'azure-storage-legacy.BlobService#listBlobs~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#createPageBlob'
     id: 'azure-storage-legacy.BlobService#createPageBlob'
     parent: azure-storage-legacy.BlobService
@@ -875,8 +773,6 @@ items:
                                                                           if an error occurs; otherwise 
                                                                           `response` will contain information related to this operation.
       content: 'function createPageBlob(container, blob, length, options, callback)'
-    children:
-      - 'azure-storage-legacy.BlobService#createPageBlob~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#putBlockBlobFromFile'
     id: 'azure-storage-legacy.BlobService#putBlockBlobFromFile'
     parent: azure-storage-legacy.BlobService
@@ -1016,8 +912,6 @@ items:
       content: >-
         function putBlockBlobFromFile(container, blob, localFilename, options,
         callback)
-    children:
-      - 'azure-storage-legacy.BlobService#putBlockBlobFromFile~operation'
   - uid: 'azure-storage-legacy.BlobService#putBlockBlobFromStream'
     id: 'azure-storage-legacy.BlobService#putBlockBlobFromStream'
     parent: azure-storage-legacy.BlobService
@@ -1152,9 +1046,6 @@ items:
       content: >-
         function putBlockBlobFromStream(container, blob, (Stream), streamLength,
         options, callback)
-    children:
-      - >-
-        azure-storage-legacy.BlobService#putBlockBlobFromStream~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#createBlockBlobFromText'
     id: 'azure-storage-legacy.BlobService#createBlockBlobFromText'
     parent: azure-storage-legacy.BlobService
@@ -1283,9 +1174,6 @@ items:
       content: >-
         function createBlockBlobFromText(container, blob, text, options,
         callback)
-    children:
-      - >-
-        azure-storage-legacy.BlobService#createBlockBlobFromText~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#getBlobProperties'
     id: 'azure-storage-legacy.BlobService#getBlobProperties'
     parent: azure-storage-legacy.BlobService
@@ -1348,9 +1236,6 @@ items:
                                                                                     information about the blob.
                                                                                     `response` will contain information related to this operation.
       content: 'function getBlobProperties(container, blob, options, callback)'
-    children:
-      - >-
-        azure-storage-legacy.BlobService#getBlobProperties~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#getBlobMetadata'
     id: 'azure-storage-legacy.BlobService#getBlobMetadata'
     parent: azure-storage-legacy.BlobService
@@ -1409,8 +1294,6 @@ items:
                                                                                     information about the blob.
                                                                                     `response` will contain information related to this operation.
       content: 'function getBlobMetadata(container, blob, options, callback)'
-    children:
-      - 'azure-storage-legacy.BlobService#getBlobMetadata~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#setBlobProperties'
     id: 'azure-storage-legacy.BlobService#setBlobProperties'
     parent: azure-storage-legacy.BlobService
@@ -1493,9 +1376,6 @@ items:
                                                                                     information about the blob.
                                                                                     `response` will contain information related to this operation.
       content: 'function setBlobProperties(container, blob, options, callback)'
-    children:
-      - >-
-        azure-storage-legacy.BlobService#setBlobProperties~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#setBlobMetadata'
     id: 'azure-storage-legacy.BlobService#setBlobMetadata'
     parent: azure-storage-legacy.BlobService
@@ -1560,8 +1440,6 @@ items:
                                                                                     information on the blob.
                                                                                     `response` will contain information related to this operation.
       content: 'function setBlobMetadata(container, blob, metadata, options, callback)'
-    children:
-      - 'azure-storage-legacy.BlobService#setBlobMetadata~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#getBlob'
     id: 'azure-storage-legacy.BlobService#getBlob'
     parent: azure-storage-legacy.BlobService
@@ -2175,8 +2053,6 @@ items:
                                                                                     the blob information.
                                                                                     `response` will contain information related to this operation.
       content: 'function getBlobToText(container, blob, options, callback)'
-    children:
-      - 'azure-storage-legacy.BlobService#getBlobToText~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#deleteBlob'
     id: 'azure-storage-legacy.BlobService#deleteBlob'
     parent: azure-storage-legacy.BlobService
@@ -2240,8 +2116,6 @@ items:
                                                                           `true` if the operation was successful.
                                                                           `response` will contain information related to this operation.
       content: 'function deleteBlob(container, blob, options, callback)'
-    children:
-      - 'azure-storage-legacy.BlobService#deleteBlob~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#createBlobSnapshot'
     id: 'azure-storage-legacy.BlobService#createBlobSnapshot'
     parent: azure-storage-legacy.BlobService
@@ -2305,9 +2179,6 @@ items:
                                                                           the ID of the snapshot.
                                                                           `response` will contain information related to this operation.
       content: 'function createBlobSnapshot(container, blob, options, callback)'
-    children:
-      - >-
-        azure-storage-legacy.BlobService#createBlobSnapshot~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#copyBlob'
     id: 'azure-storage-legacy.BlobService#copyBlob'
     parent: azure-storage-legacy.BlobService
@@ -2392,8 +2263,6 @@ items:
       content: >-
         function copyBlob(sourceUri, targetContainer, targetBlob, options,
         callback)
-    children:
-      - 'azure-storage-legacy.BlobService#copyBlob~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#abortCopyBlob'
     id: 'azure-storage-legacy.BlobService#abortCopyBlob'
     parent: azure-storage-legacy.BlobService
@@ -2443,8 +2312,6 @@ items:
                                                                                     the blob information.
                                                                                     `response` will contain information related to this operation.
       content: 'function abortCopyBlob(container, blob, copyId, options, callback)'
-    children:
-      - 'azure-storage-legacy.BlobService#abortCopyBlob~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#statusOfCopyBlob'
     id: 'azure-storage-legacy.BlobService#statusOfCopyBlob'
     parent: azure-storage-legacy.BlobService
@@ -2505,9 +2372,6 @@ items:
       content: >-
         function statusOfCopyBlob(targetContainer, targetBlob, options,
         callback)
-    children:
-      - >-
-        azure-storage-legacy.BlobService#statusOfCopyBlob~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#acquireLease'
     id: 'azure-storage-legacy.BlobService#acquireLease'
     parent: azure-storage-legacy.BlobService
@@ -2791,8 +2655,6 @@ items:
       content: >-
         function clearBlobPages(container, blob, rangeStart, rangeEnd, options,
         callback)
-    children:
-      - 'azure-storage-legacy.BlobService#clearBlobPages~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#createBlobPagesFromStream'
     id: 'azure-storage-legacy.BlobService#createBlobPagesFromStream'
     parent: azure-storage-legacy.BlobService
@@ -2862,9 +2724,6 @@ items:
       content: >-
         function createBlobPagesFromStream(container, blob, readStream,
         rangeStart, rangeEnd, options, callback)
-    children:
-      - >-
-        azure-storage-legacy.BlobService#createBlobPagesFromStream~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#createBlobPagesFromText'
     id: 'azure-storage-legacy.BlobService#createBlobPagesFromText'
     parent: azure-storage-legacy.BlobService
@@ -2934,9 +2793,6 @@ items:
       content: >-
         function createBlobPagesFromText(container, blob, text, rangeStart,
         rangeEnd, options, callback)
-    children:
-      - >-
-        azure-storage-legacy.BlobService#createBlobPagesFromText~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#listBlobRegions'
     id: 'azure-storage-legacy.BlobService#listBlobRegions'
     parent: azure-storage-legacy.BlobService
@@ -2997,8 +2853,6 @@ items:
       content: >-
         function listBlobRegions(container, blob, rangeStart, rangeEnd, options,
         callback)
-    children:
-      - 'azure-storage-legacy.BlobService#listBlobRegions~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#createBlobBlockFromText'
     id: 'azure-storage-legacy.BlobService#createBlobBlockFromText'
     parent: azure-storage-legacy.BlobService
@@ -3073,9 +2927,6 @@ items:
       content: >-
         function createBlobBlockFromText(blockId, container, blob, content,
         options, callback)
-    children:
-      - >-
-        azure-storage-legacy.BlobService#createBlobBlockFromText~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#createBlobBlockFromStream'
     id: 'azure-storage-legacy.BlobService#createBlobBlockFromStream'
     parent: azure-storage-legacy.BlobService
@@ -3149,9 +3000,6 @@ items:
       content: >-
         function createBlobBlockFromStream(blockId, container, blob, readStream,
         streamLength, options, callback)
-    children:
-      - >-
-        azure-storage-legacy.BlobService#createBlobBlockFromStream~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#commitBlobBlocks'
     id: 'azure-storage-legacy.BlobService#commitBlobBlocks'
     parent: azure-storage-legacy.BlobService
@@ -3272,9 +3120,6 @@ items:
                                                                           the blocklist information.
                                                                           `response` will contain information related to this operation.
       content: 'function commitBlobBlocks(container, blob, blockList, options, callback)'
-    children:
-      - >-
-        azure-storage-legacy.BlobService#commitBlobBlocks~processResponseCallback
   - uid: 'azure-storage-legacy.BlobService#listBlobBlocks'
     id: 'azure-storage-legacy.BlobService#listBlobBlocks'
     parent: azure-storage-legacy.BlobService
@@ -3333,8 +3178,6 @@ items:
       content: >-
         function listBlobBlocks(container, blob, blocklisttype, options,
         callback)
-    children:
-      - 'azure-storage-legacy.BlobService#listBlobBlocks~processResponseCallback'
   - uid: 'azure-storage-legacy.BlobService#generateSharedAccessSignature'
     id: 'azure-storage-legacy.BlobService#generateSharedAccessSignature'
     parent: azure-storage-legacy.BlobService
@@ -3523,19 +3366,6 @@ items:
       content: >-
         function _leaseBlobImpl(container, blob, leaseId, leaseAction, options,
         callback)
-    children:
-      - 'azure-storage-legacy.BlobService#_leaseBlobImpl~processResponseCallback'
-  - uid: 'azure-storage-legacy.BlobService#_updatePageBlobPagesImpl'
-    id: 'azure-storage-legacy.BlobService#_updatePageBlobPagesImpl'
-    parent: azure-storage-legacy.BlobService
-    name: _updatePageBlobPagesImpl()
-    summary: ''
-    fullName: azure-storage-legacy.BlobService._updatePageBlobPagesImpl()
-    langs:
-      - js
-    type: Function
-    syntax:
-      content: function _updatePageBlobPagesImpl()
   - uid: 'azure-storage-legacy.BlobService#createBlob'
     id: 'azure-storage-legacy.BlobService#createBlob'
     parent: azure-storage-legacy.BlobService
@@ -4762,17 +4592,6 @@ items:
       content: >-
         function _createBlobFromChunkStream(container, blob, blobType, (Stream),
         streamLength, optionsOrCallback, callback)
-  - uid: azure-storage-legacy.BlobService.SpeedSummary
-    id: azure-storage-legacy.BlobService.SpeedSummary
-    parent: azure-storage-legacy.BlobService
-    name: SpeedSummary
-    summary: ''
-    fullName: azure-storage-legacy.BlobService.SpeedSummary
-    langs:
-      - js
-    type: Member
-    syntax:
-      content: SpeedSummary
 references:
   - uid: string
     name: string

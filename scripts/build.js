@@ -19,7 +19,7 @@ function itemsByType(type) {
   });
 }
 
-function buildTocItems(keys, relativePathToRootFolder='') {
+function buildTocItems(keys, relativePathToRootFolder) {
   return keys.sort().map(function (key) {
     var packageToc = path.join(dest, key, 'toc.yml');
     var href, topicHref;

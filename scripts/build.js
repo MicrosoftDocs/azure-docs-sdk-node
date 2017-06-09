@@ -66,11 +66,9 @@ generatePackageDoc(rootConfig.package, configPath, rootConfig.destination, false
 
 // 3. generate yml and copy readme.md for all sub packages
 var packageJsons = glob.sync(path.join(src, 'lib/**/package.json'));
-/*
 packageJsons.forEach(function (packagePath) {
   generatePackageDoc(packagePath, configPath, dest, true);
 });
-*/
 fs.unlink(tempConfigPath);
 
 // 4. copy documentation

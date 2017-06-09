@@ -30,7 +30,7 @@ function buildTocItems(keys, relativePathToRootFolder) {
     }
     var packageIndex = path.join(dest, key, 'index.md');
     if (fs.existsSync(packageIndex)) {
-      topicHref = path.join(key, 'index.md');
+      topicHref = path.join(relativePathToRootFolder, key, 'index.md');
     } else {
       topicHref = undefined;
     }

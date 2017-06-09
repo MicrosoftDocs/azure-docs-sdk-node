@@ -19,12 +19,12 @@ function itemsByType(type) {
   });
 }
 
-function buildTocItems(keys) {
+function buildTocItems(keys, relativePathToRootFolder='') {
   return keys.sort().map(function (key) {
     var packageToc = path.join(dest, key, 'toc.yml');
     var href, topicHref;
     if (fs.existsSync(packageToc)) {
-      href = path.join(key, 'toc.yml');
+      href = path.join(relativePathToRootFolder, key, 'toc.yml');
     } else {
       href = key + '/';
     }
@@ -77,7 +77,8 @@ console.log('Finish copying documentation');
 
 // 5. generate root toc
 var rootPackageName = fse.readJsonSync(rootConfig.package).name;
-var toc = yaml.safeLoad(fs.readFileSync(path.join(dest, rootPackageName, 'toc.yml')));
+var rootTocPath = path.join(dest, rootPackageName, 'toc.yml');
+var toc = yaml.safeLoad(fs.readFileSync(rootTocPath));
 var packageNames = packageJsons.map(function (p) {
   return fse.readJsonSync(p).name;
 });
@@ -86,21 +87,21 @@ var groupedToc = [
     name: 'Azure Services',
     items: buildTocItems(packageNames.filter(function (item) {
       return !(item.indexOf('-arm-') > -1 || item.indexOf('-asm-') > -1 || item.indexOf('-common') > -1);
-    }))
+    }), '../')
   },
   {
     name: 'Resource Management',
-    items: buildTocItems(itemsByType('-arm-'))
+    items: buildTocItems(itemsByType('-arm-'), '../')
   },
   {
     name: 'Service Management',
-    items: buildTocItems(itemsByType('-asm-'))
+    items: buildTocItems(itemsByType('-asm-'), '../')
   },
   {
     name: 'Common Libs',
-    items: buildTocItems(itemsByType('-common'))
+    items: buildTocItems(itemsByType('-common'), '../')
   }
 ];
 toc.unshift({ name: 'Azure SDK Packages', items: groupedToc });
-fs.writeFileSync(path.join(dest, 'toc.yml'), yaml.safeDump(toc));
+fs.writeFileSync(rootTocPath, yaml.safeDump(toc));
 console.log('Finish combining root TOC with sub TOCs');

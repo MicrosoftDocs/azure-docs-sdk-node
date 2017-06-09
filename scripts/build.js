@@ -42,7 +42,7 @@ function buildTocItems(keys, relativePathToRootFolder) {
   });
 }
 
-function generatePackageDoc(packagePath, configPath, dest, resetInclude=true) {
+function generatePackageDoc(packagePath, configPath, dest, resetInclude) {
   var config = fse.readJsonSync(configPath);
   var dir = path.dirname(packagePath);
   var packageName = fse.readJsonSync(packagePath).name;
@@ -67,7 +67,7 @@ generatePackageDoc(rootConfig.package, configPath, rootConfig.destination, false
 // 3. generate yml and copy readme.md for all sub packages
 var packageJsons = glob.sync(path.join(src, 'lib/**/package.json'));
 packageJsons.forEach(function (packagePath) {
-  generatePackageDoc(packagePath, configPath, dest);
+  generatePackageDoc(packagePath, configPath, dest, true);
 });
 fs.unlink(tempConfigPath);
 

@@ -20,7 +20,7 @@ When an app needs to access resources, you can set up an identity for the app an
 
 The service principal approach enables you to:
 - Assign permissions to the app identity that are different than your own permissions. Typically, these permissions are restricted to exactly what the app needs to do.
-- Use a certificate for authentication when executing an unattended script.
+- Use a certificate for authentication when running an unattended script.
 
 This topic shows you three techniques for creating a service principal.
 
@@ -31,7 +31,7 @@ This topic shows you three techniques for creating a service principal.
 ## Create a service principal using the Azure portal
 
 Follow the steps outlined in the topic, 
-[Azure Portal documentation](https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/) to generate the necessary keys.
+[Use portal to create an Azure Active Directory application and service principal that can access resources](https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/), to generate the service principal.
 
 ## Create a service principal using the Azure CLI
 
@@ -39,14 +39,13 @@ Creating a service principal using the Azure CLI can be
 accomplished using the 
 [Azure Cross-Platform CLI (npm module)](https://github.com/Azure/azure-xplat-cli).
 
-1. Log into Azure. This following command will produce a code and give you instructions on logging into Azure: 
+1. Log into Azure. The following command produces instructions that log you into Azure: 
 
 	```shell
 	$ azure login
 	```
 
-
-2. Create a service principal. The following command will create a service principal and output the results to the terminal.
+2. Create a service principal using the `azure ad sp` command:
 
 	```shell
 	$ azure ad sp create -n sp-name -p sp-password
@@ -106,23 +105,24 @@ accomplished using the
 
 ## Create a service principal using the Azure SDK for Node.js
 
-To programmatically create a service principal using Node.js, use the 
+To programmatically create a service principal using JavaScript, use the 
 [ServicePrincipal script](https://github.com/Azure/azure-sdk-for-node/tree/master/Documentation/ServicePrincipal).   
 
 ## Using the service principal
 
 Once you have a service principal, the following JavaScript code snippet 
 illustrates how to use the service principal keys to authenticate with the 
-Azure SDK for Node.js.
+Azure SDK for Node.js. Modify the following placeholders: &lt;clientId or appId>, &lt;secret or password>,
+and &lt;domain or tenant>,
 
 	```js
 	const Azure = require('azure');
 	const MsRest = require('ms-rest-azure');
 	
 	MsRest.loginWithServicePrincipalSecret(
-	  'clientId or appId',
-	  'secret or password',
-	  'domain or tenant',
+	  <clientId or appId>,
+	  <secret or password>,
+	  <domain or tenant>,
 	  (err, credentials) => {
 	    if (err) throw err
 	

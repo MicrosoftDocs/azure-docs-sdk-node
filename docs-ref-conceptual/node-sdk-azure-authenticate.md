@@ -19,7 +19,7 @@ ms.assetid:
 
 All service APIs require authentication via a `credentials` object when being
 instantiated. There are three ways of authenticating and creating the required
-`credentials` via the SDK: 
+credentials via the Azure SDK for Node.js: 
 
 - Basic authentication
 - Interactive login
@@ -27,7 +27,7 @@ instantiated. There are three ways of authenticating and creating the required
 
 ## Basic authentication
 
-To authenticate with the API using your Azure account, provide your username and password. We recommend that your username and password be stored in environment variables rather than in the source code for your project. The following JavaScript code snippet illustrates how to use basic authentication using credentials that are stored as environment variables. 
+To programmatically authenticate using your Azure account credentials, use the `loginWithUsernamePassword` function. The following JavaScript code snippet illustrates how to use basic authentication using credentials that are stored as environment variables. 
 
 	```js
 	const Azure = require('azure');
@@ -71,4 +71,4 @@ authenticate. However, when using the Node.js SDK, you may want
 to use service principal authentication rather than providing your account
 credentials. The topic, 
 [Create an Azure service principal with Node.js](./node-sdk-azure-authenticate-principal.md), 
-explains several techniques for creating a service principal. 
+explains various techniques for creating (and using) a service principal. 

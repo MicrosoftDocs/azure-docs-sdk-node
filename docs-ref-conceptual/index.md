@@ -22,7 +22,7 @@ The Azure libraries for Node.js help you manage Azure resources and connect to s
 
 Create and manage Azure resources from your Node.js applications using the [Azure management libraries for Node.js](node-sdk-azure-get-started.md). Use these libraries to build your own Azure automation tools and services. 
 
-For example, to log in (authenticate), create a client, and list all VM images, you could write the following code:
+For example, the following code snippet illustrates how to log in to Azure, create a management client, and list all VM images for the specified location, publisher, offer, and SKU.
 
 ```javascript
 var msRestAzure = require('ms-rest-azure');
@@ -33,10 +33,10 @@ var computeManagementClient = require('azure-arm-compute');
 msRestAzure.interactiveLogin(function(err, credentials) {
 	var client = new computeManagementClient(credentials, '<azure-subscription-id>');
 
-	client.virtualMachineImages.list('westus', 
-                                     'MicrosoftWindowsServer', 
-                                     'WindowsServer', 
-                                     '2012-R2-Datacenter', 
+	client.virtualMachineImages.list('westus', // location
+                                     'MicrosoftWindowsServer', // publisher name 
+                                     'WindowsServer',  // offer
+                                     '2012-R2-Datacenter', // sku
                                      function(err, result, request, response) {
 	if (err) console.log(err);
 		console.log(result);

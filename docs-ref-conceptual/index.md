@@ -24,7 +24,7 @@ Create and manage Azure resources from your Node.js applications using the [Azur
 
 For example, to log in (authenticate), create a client, and list all VM images, you could write the following code:
 
-	```node
+	```javascript
 	var msRestAzure = require('ms-rest-azure');
 	var computeManagementClient = require('azure-arm-compute');
 	
@@ -56,7 +56,7 @@ Select the library you need for a particular service from the [list of Node.js i
 
 For example, the following JavaScript illustrates how to list the contents of every blob in an Azure storage container:
 
-	```node
+	```javascript
 	blobSvc.listBlobsSegmented('mycontainer', 
 	                           null, 
 	                           function(error, result, response) {

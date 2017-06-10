@@ -115,20 +115,20 @@ illustrates how to use the service principal keys to authenticate with the
 Azure SDK for Node.js. Modify the following placeholders: &lt;clientId or appId>, &lt;secret or password>,
 and &lt;domain or tenant>,
 
-	```js
-	const Azure = require('azure');
-	const MsRest = require('ms-rest-azure');
-	
-	MsRest.loginWithServicePrincipalSecret(
-	  <clientId or appId>,
-	  <secret or password>,
-	  <domain or tenant>,
-	  (err, credentials) => {
-	    if (err) throw err
-	
-	    let storageClient = Azure.createARMStorageManagementClient(credentials, 'subscription-id');
-	
-	    // ..use the client instance to manage service resources.
-	  }
-	);
-	```
+```javascript
+const Azure = require('azure');
+const MsRest = require('ms-rest-azure');
+
+MsRest.loginWithServicePrincipalSecret(
+  <clientId or appId>,
+  <secret or password>,
+  <domain or tenant>,
+  (err, credentials) => {
+    if (err) throw err
+
+    let storageClient = Azure.createARMStorageManagementClient(credentials, 'subscription-id');
+
+    // ..use the client instance to manage service resources.
+  }
+);
+```

@@ -29,21 +29,21 @@ credentials via the Azure SDK for Node.js:
 
 To programmatically authenticate using your Azure account credentials, use the `loginWithUsernamePassword` function. The following JavaScript code snippet illustrates how to use basic authentication using credentials that are stored as environment variables. 
 
-	```js
-	const Azure = require('azure');
-	const MsRest = require('ms-rest-azure');
-	
-	MsRest.loginWithUsernamePassword(process.env.AZURE_USER, 
-                                     process.env.AZURE_PASS, 
-                                     (err, credentials) => {
-	  if (err) throw err;
-	
-	  let storageClient = Azure.createARMStorageManagementClient(credentials, 
-                                                                 'subscription-id');
-	
-	  // ..use the client instance to manage service resources.
-	});
-	```
+```javascript
+const Azure = require('azure');
+const MsRest = require('ms-rest-azure');
+
+MsRest.loginWithUsernamePassword(process.env.AZURE_USER, 
+                                 process.env.AZURE_PASS, 
+                                 (err, credentials) => {
+  if (err) throw err;
+
+  let storageClient = Azure.createARMStorageManagementClient(credentials, 
+                                                             'subscription-id');
+
+  // ..use the client instance to manage service resources.
+});
+```
 
 ## Interactive login
 
@@ -51,18 +51,18 @@ Interactive login provides a link and a code that allows the user to
 authenticate from a browser. Use this method when multiple accounts are used by
 the same script or when user intervention is preferred.
 
-	```js
-	const Azure = require('azure');
-	const MsRest = require('ms-rest-azure');
-	
-	MsRest.interactiveLogin((err, credentials) => {
-	  if (err) throw err;
-	
-	  let storageClient = Azure.createARMStorageManagementClient(credentials, 'subscription-id');
-	
-	  // ..use the client instance to manage service resources.
-	});
-	```
+```javascript
+const Azure = require('azure');
+const MsRest = require('ms-rest-azure');
+
+MsRest.interactiveLogin((err, credentials) => {
+  if (err) throw err;
+
+  let storageClient = Azure.createARMStorageManagementClient(credentials, 'subscription-id');
+
+  // ..use the client instance to manage service resources.
+});
+```
 
 ## Service principal authentication
 

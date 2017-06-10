@@ -24,25 +24,25 @@ Create and manage Azure resources from your Node.js applications using the [Azur
 
 For example, to log in (authenticate), create a client, and list all VM images, you could write the following code:
 
-	```javascript
-	var msRestAzure = require('ms-rest-azure');
-	var computeManagementClient = require('azure-arm-compute');
-	
-	// Interactive Login - provides a url, and a code that needs to be copied and pasted in a browser.  
-	// If successful, the user will receive a DeviceTokenCredentials object. 
-	msRestAzure.interactiveLogin(function(err, credentials) {
-		var client = new computeManagementClient(credentials, 'your-subscription-id');
+```java
+var msRestAzure = require('ms-rest-azure');
+var computeManagementClient = require('azure-arm-compute');
 
-		client.virtualMachineImages.list('westus', 
-	                                     'MicrosoftWindowsServer', 
-	                                     'WindowsServer', 
-	                                     '2012-R2-Datacenter', 
-	                                     function(err, result, request, response) {
-		if (err) console.log(err);
-			console.log(result);
-		});
+// Interactive Login - provides a url, and a code that needs to be copied and pasted in a browser.  
+// If successful, the user will receive a DeviceTokenCredentials object. 
+msRestAzure.interactiveLogin(function(err, credentials) {
+	var client = new computeManagementClient(credentials, 'your-subscription-id');
+
+	client.virtualMachineImages.list('westus', 
+                                     'MicrosoftWindowsServer', 
+                                     'WindowsServer', 
+                                     '2012-R2-Datacenter', 
+                                     function(err, result, request, response) {
+	if (err) console.log(err);
+		console.log(result);
 	});
-	```
+});
+```
 
 Review the [Node.js library installation instructions](node-sdk-azure-install.md) for a full list of the libraries, and how to import them into your projects. 
 
@@ -56,17 +56,17 @@ Select the library you need for a particular service from the [list of Node.js i
 
 For example, the following JavaScript illustrates how to list the contents of every blob in an Azure storage container:
 
-	```javascript
-	blobSvc.listBlobsSegmented('mycontainer', 
-	                           null, 
-	                           function(error, result, response) {
-	  if(!error) { 
-	      // result.entries contains the entries
-	      // If all blobs were not returned, result.continuationToken 
-	      // has the continuation token.
-	  }
-	});
-	```
+```javascript
+blobSvc.listBlobsSegmented('mycontainer', 
+                           null, 
+                           function(error, result, response) {
+  if(!error) { 
+      // result.entries contains the entries
+      // If all blobs were not returned, result.continuationToken 
+      // has the continuation token.
+  }
+});
+```
 
 ## Sample code and reference
 

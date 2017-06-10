@@ -31,7 +31,7 @@ var computeManagementClient = require('azure-arm-compute');
 // Interactive Login - provides a url, and a code that needs to be copied and pasted in a browser.  
 // If successful, the user will receive a DeviceTokenCredentials object. 
 msRestAzure.interactiveLogin(function(err, credentials) {
-	var client = new computeManagementClient(credentials, 'your-subscription-id');
+	var client = new computeManagementClient(credentials, <azure-subscription-id>');
 
 	client.virtualMachineImages.list('westus', 
                                      'MicrosoftWindowsServer', 
@@ -60,7 +60,7 @@ For example, the following JavaScript illustrates how to list the contents of ev
 var storage = require('azure-storage');
 
 var blobSvc = storage.createBlobService();
-blobSvc.listBlobsSegmented('mycontainer', 
+blobSvc.listBlobsSegmented(<container-name>', 
                            null, 
                            function(error, result, response) {
   if(!error) { 

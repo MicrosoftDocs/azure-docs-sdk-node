@@ -57,6 +57,9 @@ Select the library you need for a particular service from the [list of Node.js i
 For example, the following JavaScript illustrates how to list the contents of every blob in an Azure storage container:
 
 ```javascript
+var storage = require('azure-storage');
+
+var blobSvc = storage.createBlobService();
 blobSvc.listBlobsSegmented('mycontainer', 
                            null, 
                            function(error, result, response) {

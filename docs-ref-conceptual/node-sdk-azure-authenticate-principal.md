@@ -126,7 +126,7 @@ MsRest.loginWithServicePrincipalSecret(
   (err, credentials) => {
     if (err) throw err
 
-    let storageClient = Azure.createARMStorageManagementClient(credentials, 'subscription-id');
+    let storageClient = Azure.createARMStorageManagementClient(credentials, '<azure-subscription-id>');
 
     // ..use the client instance to manage service resources.
   }

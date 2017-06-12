@@ -81,7 +81,7 @@ var rootTocPath = path.join(dest, 'toc.yml');
 var subTocs = glob.sync(path.join(dest, '**/toc.yml'));
 subTocs.forEach(function (subTocPath) {
   var tocContent = yaml.safeLoad(fs.readFileSync(subTocPath));
-  var packageName = subTocPath;
+  var packageName = subTocPath.split('/')[1];
   var topicHref = path.join(packageName, 'index.md');
   tocContent = { name: packageName, topicHref: topicHref, items: tocContent };
   rootToc.push(tocContent);

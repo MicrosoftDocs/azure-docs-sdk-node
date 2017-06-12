@@ -74,34 +74,3 @@ fs.unlink(tempConfigPath);
 // 4. copy documentation
 fse.copySync(path.join(src, doc), path.join(dest, doc));
 console.log('Finish copying documentation');
-
-// 5. generate root toc
-var rootPackageName = fse.readJsonSync(rootConfig.package).name;
-var rootTocPath = path.join(dest, rootPackageName, 'toc.yml');
-var toc = yaml.safeLoad(fs.readFileSync(rootTocPath));
-var packageNames = packageJsons.map(function (p) {
-  return fse.readJsonSync(p).name;
-});
-var groupedToc = [
-  {
-    name: 'Azure Services',
-    items: buildTocItems(packageNames.filter(function (item) {
-      return !(item.indexOf('-arm-') > -1 || item.indexOf('-asm-') > -1 || item.indexOf('-common') > -1);
-    }), '../')
-  },
-  {
-    name: 'Resource Management',
-    items: buildTocItems(itemsByType('-arm-'), '../')
-  },
-  {
-    name: 'Service Management',
-    items: buildTocItems(itemsByType('-asm-'), '../')
-  },
-  {
-    name: 'Common Libs',
-    items: buildTocItems(itemsByType('-common'), '../')
-  }
-];
-toc.unshift({ name: 'Azure SDK Packages', items: groupedToc });
-fs.writeFileSync(rootTocPath, yaml.safeDump(toc));
-console.log('Finish combining root TOC with sub TOCs');

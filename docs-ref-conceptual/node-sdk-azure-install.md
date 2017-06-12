@@ -10,14 +10,14 @@ ms.service: Azure
 ms.devlang: node
 ms.topic: reference
 ms.technology: Azure
-ms.date: 6/07/2017
+ms.date: 6/12/2017
 ---
 
 # Azure libraries for Node.js
 
 This page lists all the individual Azure Node.js packages in a single
-place. To install a specific package, open a bash or command window on a machine with 
-npm (Node Package Manager) installed, and execute the **Install command** listed next to the desired package
+place. To install a specific package, open a bash or command, window on a machine with 
+npm (Node Package Manager) installed, and run the npm command listed next to the desired package
 in the table.
 
 

@@ -74,3 +74,14 @@ fs.unlink(tempConfigPath);
 // 4. copy documentation
 fse.copySync(path.join(src, doc), path.join(dest, doc));
 console.log('Finish copying documentation');
+
+// 5. generate root toc
+var rootToc = [];
+var rootTocPath = path.join(dest, 'toc.yml');
+var subTocs = glob.sync(path.join(dest, '**/toc.yml'));
+subTocs.forEach(function (subTocPath) {
+  var tocContent = yaml.safeLoad(fs.readFileSync(subTocPath));
+  rootToc.push(tocContent);
+});
+fs.writeFileSync(rootTocPath, yaml.safeDump(rootToc));
+console.log('Finish combining sub TOCs to root TOC');

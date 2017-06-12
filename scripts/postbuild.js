@@ -21,7 +21,7 @@ packagesToFilter.forEach(function (p) {
   });
   var tocPath = path.join(dest, p, 'toc.yml');
   if (fs.existsSync(tocPath)) {
-    var toc = yaml.safeLoad(fs.readFileSync(tocPath)).filter(function(i){
+    var toc = yaml.safeLoad(fs.readFileSync(tocPath)).items.filter(function(i){
       return uidsToFilter.indexOf(i.uid) == -1;
     });
     fs.writeFileSync(tocPath, yaml.safeDump(toc));

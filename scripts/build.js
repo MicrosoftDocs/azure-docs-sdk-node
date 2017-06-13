@@ -13,6 +13,8 @@ var dest = 'docs-ref-autogen';
 var doc = 'Documentation';
 var configPath = 'node2docfx.json';
 var tempConfigPath = '_node2docfx_temp.json';
+var filenameMaxLength = 100;
+var packagesToFilter = ['azure-arm-datalake-store'];
 
 function itemsByType(type) {
   return packageNames.filter(function (value) {
@@ -89,33 +91,37 @@ fs.unlink(tempConfigPath);
 fse.copySync(path.join(src, doc), path.join(dest, doc));
 console.log('Finish copying documentation');
 
-// 5. generate root toc
-var rootPackageName = fse.readJsonSync(rootConfig.package).name;
-var rootTocPath = path.join(dest, rootPackageName, 'toc.yml');
-var toc = yaml.safeLoad(fs.readFileSync(rootTocPath));
-var packageNames = packageJsons.map(function (p) {
-  return fse.readJsonSync(p).name;
-});
-var groupedToc = [
-  {
-    name: 'Azure Services',
-    items: buildTocItems(packageNames.filter(function (item) {
-      return !(item.indexOf('-arm-') > -1 || item.indexOf('-asm-') > -1 || item.indexOf('-common') > -1);
-    }), '../')
-  },
-  {
-    name: 'Resource Management',
-    items: buildTocItems(itemsByType('-arm-'), '../')
-  },
-  {
-    name: 'Service Management',
-    items: buildTocItems(itemsByType('-asm-'), '../')
-  },
-  {
-    name: 'Common Libs',
-    items: buildTocItems(itemsByType('-common'), '../')
+// 5. remove files with too long filename that breaks DocFX
+packagesToFilter.forEach(function (p) {
+  var uidsToFilter = [];
+  fs.readdirSync(path.join(dest, p)).forEach(function (f) {
+    if (f.length > filenameMaxLength) {
+      var filePath = path.join(dest, p, f);
+      uidsToFilter.push(yaml.safeLoad(fs.readFileSync(filePath)).items[0].uid);
+      fs.unlinkSync(filePath);
+      console.log('File with too long name is removed from ref folder: ' + filePath);
+    }
+  });
+  var tocPath = path.join(dest, p, 'toc.yml');
+  if (fs.existsSync(tocPath)) {
+    var toc = yaml.safeLoad(fs.readFileSync(tocPath)).filter(function(i){
+      return uidsToFilter.indexOf(i.uid) == -1;
+    });
+    fs.writeFileSync(tocPath, yaml.safeDump(toc));
+    console.log('TOC updated after removing files: ' + tocPath);
   }
-];
-toc.unshift({ name: 'Azure SDK Packages', items: groupedToc });
-fs.writeFileSync(rootTocPath, yaml.safeDump(toc));
-console.log('Finish combining root TOC with sub TOCs');
+});
+
+// 6. generate root toc
+var rootToc = [];
+var rootTocPath = path.join(dest, 'toc.yml');
+var subTocs = glob.sync(path.join(dest, '**/toc.yml'));
+subTocs.forEach(function (subTocPath) {
+  var tocContent = yaml.safeLoad(fs.readFileSync(subTocPath));
+  var packageName = subTocPath.split('/')[1];
+  var topicHref = path.join(packageName, 'index.md');
+  tocContent = { name: packageName, uid: packageName, topicHref: topicHref, items: tocContent };
+  rootToc.push(tocContent);
+});
+fs.writeFileSync(rootTocPath, yaml.safeDump(rootToc));
+console.log('Finish combining sub TOCs to root TOC');

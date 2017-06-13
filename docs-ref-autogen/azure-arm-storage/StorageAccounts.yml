@@ -12,7 +12,7 @@ items:
     source:
       id: azure-arm-storage.StorageAccounts
       path: lib\services\storageManagement2\lib\operations\storageAccounts.js
-      startLine: 2304
+      startLine: 2359
       remote:
         branch: master
         path: lib\services\storageManagement2\lib\operations\storageAccounts.js
@@ -71,20 +71,30 @@ items:
     id: >-
       azure-arm-storage.StorageAccounts#checkNameAvailabilityWithHttpOperationResponse
     parent: azure-arm-storage.StorageAccounts
-    name: 'checkNameAvailabilityWithHttpOperationResponse(name, options)'
+    name: 'checkNameAvailabilityWithHttpOperationResponse(accountName, options)'
     summary: Checks that the storage account name is valid and is not already in use.
     fullName: >-
-      azure-arm-storage.StorageAccounts.checkNameAvailabilityWithHttpOperationResponse(name,
+      azure-arm-storage.StorageAccounts.checkNameAvailabilityWithHttpOperationResponse(accountName,
       options)
     langs:
       - js
     type: Function
     syntax:
       parameters:
-        - id: name
+        - id: accountName
+          type:
+            - object
+          description: >-
+            The name of the storage account within the
+
+            specified resource group. Storage account names must be between 3
+            and 24
+
+            characters in length and use numbers and lower-case letters only.
+        - id: accountName.name
           type:
             - string
-          description: ''
+          description: The storage account name.
         - id: options
           type:
             - object
@@ -101,24 +111,36 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: 'function checkNameAvailabilityWithHttpOperationResponse(name, options)'
+      content: >-
+        function checkNameAvailabilityWithHttpOperationResponse(accountName,
+        options)
   - uid: 'azure-arm-storage.StorageAccounts#checkNameAvailability'
     id: 'azure-arm-storage.StorageAccounts#checkNameAvailability'
     parent: azure-arm-storage.StorageAccounts
-    name: 'checkNameAvailability(name, options, optionalCallback)'
+    name: 'checkNameAvailability(accountName, options, optionalCallback)'
     summary: Checks that the storage account name is valid and is not already in use.
     fullName: >-
-      azure-arm-storage.StorageAccounts.checkNameAvailability(name, options,
-      optionalCallback)
+      azure-arm-storage.StorageAccounts.checkNameAvailability(accountName,
+      options, optionalCallback)
     langs:
       - js
     type: Function
     syntax:
       parameters:
-        - id: name
+        - id: accountName
+          type:
+            - object
+          description: >-
+            The name of the storage account within the
+
+            specified resource group. Storage account names must be between 3
+            and 24
+
+            characters in length and use numbers and lower-case letters only.
+        - id: accountName.name
           type:
             - string
-          description: ''
+          description: The storage account name.
         - id: options
           type:
             - object
@@ -145,7 +167,7 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function checkNameAvailability(name, options, optionalCallback)'
+      content: 'function checkNameAvailability(accountName, options, optionalCallback)'
   - uid: 'azure-arm-storage.StorageAccounts#createWithHttpOperationResponse'
     id: 'azure-arm-storage.StorageAccounts#createWithHttpOperationResponse'
     parent: azure-arm-storage.StorageAccounts
@@ -248,6 +270,11 @@ items:
 
             characters and a value with a length no greater than 256 characters.
           optional: true
+        - id: parameters.identity
+          type:
+            - object
+          description: The identity of the resource.
+          optional: true
         - id: parameters.customDomain
           type:
             - object
@@ -318,6 +345,42 @@ items:
 
             indicating whether or not the service encrypts the data as it is
             stored.
+          optional: true
+        - id: parameters.encryption.keySource
+          type:
+            - string
+          description: |-
+            The encryption keySource
+            (provider). Possible values (case-insensitive):  Microsoft.Storage,
+            Microsoft.Keyvault. Possible values include: 'Microsoft.Storage',
+            'Microsoft.Keyvault'
+        - id: parameters.encryption.keyVaultProperties
+          type:
+            - object
+          description: |-
+            Properties
+            provided by key vault.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyName
+          type:
+            - string
+          description: |-
+            The name
+            of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVersion
+          type:
+            - string
+          description: |-
+            The
+            version of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVaultUri
+          type:
+            - string
+          description: |-
+            The
+            Uri of KeyVault.
           optional: true
         - id: parameters.accessTier
           type:
@@ -458,6 +521,11 @@ items:
 
             characters and a value with a length no greater than 256 characters.
           optional: true
+        - id: parameters.identity
+          type:
+            - object
+          description: The identity of the resource.
+          optional: true
         - id: parameters.customDomain
           type:
             - object
@@ -528,6 +596,42 @@ items:
 
             indicating whether or not the service encrypts the data as it is
             stored.
+          optional: true
+        - id: parameters.encryption.keySource
+          type:
+            - string
+          description: |-
+            The encryption keySource
+            (provider). Possible values (case-insensitive):  Microsoft.Storage,
+            Microsoft.Keyvault. Possible values include: 'Microsoft.Storage',
+            'Microsoft.Keyvault'
+        - id: parameters.encryption.keyVaultProperties
+          type:
+            - object
+          description: |-
+            Properties
+            provided by key vault.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyName
+          type:
+            - string
+          description: |-
+            The name
+            of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVersion
+          type:
+            - string
+          description: |-
+            The
+            version of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVaultUri
+          type:
+            - string
+          description: |-
+            The
+            Uri of KeyVault.
           optional: true
         - id: parameters.accessTier
           type:
@@ -897,6 +1001,11 @@ items:
 
             characters and a value no greater in length than 256 characters.
           optional: true
+        - id: parameters.identity
+          type:
+            - object
+          description: The identity of the resource.
+          optional: true
         - id: parameters.customDomain
           type:
             - object
@@ -965,6 +1074,42 @@ items:
 
             indicating whether or not the service encrypts the data as it is
             stored.
+          optional: true
+        - id: parameters.encryption.keySource
+          type:
+            - string
+          description: |-
+            The encryption keySource
+            (provider). Possible values (case-insensitive):  Microsoft.Storage,
+            Microsoft.Keyvault. Possible values include: 'Microsoft.Storage',
+            'Microsoft.Keyvault'
+        - id: parameters.encryption.keyVaultProperties
+          type:
+            - object
+          description: |-
+            Properties
+            provided by key vault.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyName
+          type:
+            - string
+          description: |-
+            The name
+            of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVersion
+          type:
+            - string
+          description: |-
+            The
+            version of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVaultUri
+          type:
+            - string
+          description: |-
+            The
+            Uri of KeyVault.
           optional: true
         - id: parameters.accessTier
           type:
@@ -1102,6 +1247,11 @@ items:
 
             characters and a value no greater in length than 256 characters.
           optional: true
+        - id: parameters.identity
+          type:
+            - object
+          description: The identity of the resource.
+          optional: true
         - id: parameters.customDomain
           type:
             - object
@@ -1170,6 +1320,42 @@ items:
 
             indicating whether or not the service encrypts the data as it is
             stored.
+          optional: true
+        - id: parameters.encryption.keySource
+          type:
+            - string
+          description: |-
+            The encryption keySource
+            (provider). Possible values (case-insensitive):  Microsoft.Storage,
+            Microsoft.Keyvault. Possible values include: 'Microsoft.Storage',
+            'Microsoft.Keyvault'
+        - id: parameters.encryption.keyVaultProperties
+          type:
+            - object
+          description: |-
+            Properties
+            provided by key vault.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyName
+          type:
+            - string
+          description: |-
+            The name
+            of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVersion
+          type:
+            - string
+          description: |-
+            The
+            version of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVaultUri
+          type:
+            - string
+          description: |-
+            The
+            Uri of KeyVault.
           optional: true
         - id: parameters.accessTier
           type:
@@ -1493,11 +1679,11 @@ items:
     parent: azure-arm-storage.StorageAccounts
     name: >-
       regenerateKeyWithHttpOperationResponse(resourceGroupName, accountName,
-      keyName, options)
+      regenerateKeyParameter, options)
     summary: Regenerates one of the access keys for the specified storage account.
     fullName: >-
       azure-arm-storage.StorageAccounts.regenerateKeyWithHttpOperationResponse(resourceGroupName,
-      accountName, keyName, options)
+      accountName, regenerateKeyParameter, options)
     langs:
       - js
     type: Function
@@ -1519,10 +1705,18 @@ items:
             and 24
 
             characters in length and use numbers and lower-case letters only.
-        - id: keyName
+        - id: regenerateKeyParameter
+          type:
+            - object
+          description: |-
+            Specifies name of the key which
+            should be regenerated -- key1 or key2.
+        - id: regenerateKeyParameter.keyName
           type:
             - string
-          description: ''
+          description: |-
+            The name of storage keys that
+            want to be regenerated, possible vaules are key1, key2.
         - id: options
           type:
             - object
@@ -1541,17 +1735,17 @@ items:
         description: A promise is returned
       content: >-
         function regenerateKeyWithHttpOperationResponse(resourceGroupName,
-        accountName, keyName, options)
+        accountName, regenerateKeyParameter, options)
   - uid: 'azure-arm-storage.StorageAccounts#regenerateKey'
     id: 'azure-arm-storage.StorageAccounts#regenerateKey'
     parent: azure-arm-storage.StorageAccounts
     name: >-
-      regenerateKey(resourceGroupName, accountName, keyName, options,
-      optionalCallback)
+      regenerateKey(resourceGroupName, accountName, regenerateKeyParameter,
+      options, optionalCallback)
     summary: Regenerates one of the access keys for the specified storage account.
     fullName: >-
       azure-arm-storage.StorageAccounts.regenerateKey(resourceGroupName,
-      accountName, keyName, options, optionalCallback)
+      accountName, regenerateKeyParameter, options, optionalCallback)
     langs:
       - js
     type: Function
@@ -1573,10 +1767,18 @@ items:
             and 24
 
             characters in length and use numbers and lower-case letters only.
-        - id: keyName
+        - id: regenerateKeyParameter
+          type:
+            - object
+          description: |-
+            Specifies name of the key which
+            should be regenerated -- key1 or key2.
+        - id: regenerateKeyParameter.keyName
           type:
             - string
-          description: ''
+          description: |-
+            The name of storage keys that
+            want to be regenerated, possible vaules are key1, key2.
         - id: options
           type:
             - object
@@ -1604,8 +1806,8 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function regenerateKey(resourceGroupName, accountName, keyName, options,
-        optionalCallback)
+        function regenerateKey(resourceGroupName, accountName,
+        regenerateKeyParameter, options, optionalCallback)
   - uid: 'azure-arm-storage.StorageAccounts#listAccountSASWithHttpOperationResponse'
     id: 'azure-arm-storage.StorageAccounts#listAccountSASWithHttpOperationResponse'
     parent: azure-arm-storage.StorageAccounts
@@ -2366,6 +2568,11 @@ items:
 
             characters and a value with a length no greater than 256 characters.
           optional: true
+        - id: parameters.identity
+          type:
+            - object
+          description: The identity of the resource.
+          optional: true
         - id: parameters.customDomain
           type:
             - object
@@ -2436,6 +2643,42 @@ items:
 
             indicating whether or not the service encrypts the data as it is
             stored.
+          optional: true
+        - id: parameters.encryption.keySource
+          type:
+            - string
+          description: |-
+            The encryption keySource
+            (provider). Possible values (case-insensitive):  Microsoft.Storage,
+            Microsoft.Keyvault. Possible values include: 'Microsoft.Storage',
+            'Microsoft.Keyvault'
+        - id: parameters.encryption.keyVaultProperties
+          type:
+            - object
+          description: |-
+            Properties
+            provided by key vault.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyName
+          type:
+            - string
+          description: |-
+            The name
+            of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVersion
+          type:
+            - string
+          description: |-
+            The
+            version of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVaultUri
+          type:
+            - string
+          description: |-
+            The
+            Uri of KeyVault.
           optional: true
         - id: parameters.accessTier
           type:
@@ -2576,6 +2819,11 @@ items:
 
             characters and a value with a length no greater than 256 characters.
           optional: true
+        - id: parameters.identity
+          type:
+            - object
+          description: The identity of the resource.
+          optional: true
         - id: parameters.customDomain
           type:
             - object
@@ -2646,6 +2894,42 @@ items:
 
             indicating whether or not the service encrypts the data as it is
             stored.
+          optional: true
+        - id: parameters.encryption.keySource
+          type:
+            - string
+          description: |-
+            The encryption keySource
+            (provider). Possible values (case-insensitive):  Microsoft.Storage,
+            Microsoft.Keyvault. Possible values include: 'Microsoft.Storage',
+            'Microsoft.Keyvault'
+        - id: parameters.encryption.keyVaultProperties
+          type:
+            - object
+          description: |-
+            Properties
+            provided by key vault.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyName
+          type:
+            - string
+          description: |-
+            The name
+            of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVersion
+          type:
+            - string
+          description: |-
+            The
+            version of KeyVault key.
+          optional: true
+        - id: parameters.encryption.keyVaultProperties.keyVaultUri
+          type:
+            - string
+          description: |-
+            The
+            Uri of KeyVault.
           optional: true
         - id: parameters.accessTier
           type:

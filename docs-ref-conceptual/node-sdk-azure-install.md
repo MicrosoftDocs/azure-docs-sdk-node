@@ -70,6 +70,6 @@ in the table.
 [Virtual Networks](http://www.npmjs.com/package/azure-asm-network)|`npm install azure-asm-network`
 [WebSites](http://www.npmjs.com/package/azure-asm-website)|`npm install azure-asm-website`
 | **Base Libraries** ||
-[Common Functionality (for Azure Service Management & Azure Resource Management clients)](http://www.npmjs.com/package/azure-common)|`npm install azure-common`
+[Common Functionality (for Azure Service Management & Azure Resource Manager clients)](http://www.npmjs.com/package/azure-common)|`npm install azure-common`
 [Common Functionality for Azure Resource Management clients generated from Autorest (Generic)](http://www.npmjs.com/package/ms-rest)|`npm install ms-rest`
 [Common Functionality for Azure Resource Management clients generated from Autorest (Azure)](http://www.npmjs.com/package/ms-rest-azure)|`npm install ms-rest-azure`

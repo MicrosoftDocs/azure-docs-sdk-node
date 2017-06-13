@@ -8,6 +8,7 @@ var path = require('path');
 var yaml = require('js-yaml');
 
 var src = 'src/azure-sdk-for-node';
+var packageMappingFileRelativePath = 'package_service_mapping.json';
 var dest = 'docs-ref-autogen';
 var doc = 'Documentation';
 var configPath = 'node2docfx.json';
@@ -42,10 +43,13 @@ function buildTocItems(keys, relativePathToRootFolder) {
   });
 }
 
-function generatePackageDoc(packagePath, configPath, dest, resetInclude) {
+function generatePackageDoc(packagePath, configPath, dest, resetInclude, whiteList) {
   var config = fse.readJsonSync(configPath);
   var dir = path.dirname(packagePath);
   var packageName = fse.readJsonSync(packagePath).name;
+  if (whiteList && whiteList[packageName] !== true) {
+    return;
+  }
   if (resetInclude) {
     config.source.include = [dir];
   }  
@@ -57,17 +61,27 @@ function generatePackageDoc(packagePath, configPath, dest, resetInclude) {
   console.log('Finish generating YAML files for ' + packageName);
 }
 
+function getWhiteListFromPackageMappingFile(sourcePath, packageMappingFileRelativePath) {
+  var mapping = fse.readJsonSync(sourcePath + '/' + packageMappingFileRelativePath);
+  var whiteList = {};
+  Object.keys(mapping).forEach(function(element) {
+    whiteList[element] = true;
+  }, this);
+  return whiteList; 
+}
+
 // 1. prepare
 fse.removeSync(dest);
+var whiteList = getWhiteListFromPackageMappingFile(src, packageMappingFileRelativePath);
 
 // 2. generate yml and copy readme.md for azure.js
 var rootConfig = fse.readJsonSync(configPath);
-generatePackageDoc(rootConfig.package, configPath, rootConfig.destination, false);
+generatePackageDoc(rootConfig.package, configPath, rootConfig.destination, false, whiteList);
 
 // 3. generate yml and copy readme.md for all sub packages
 var packageJsons = glob.sync(path.join(src, 'lib/**/package.json'));
 packageJsons.forEach(function (packagePath) {
-  generatePackageDoc(packagePath, configPath, dest, true);
+  generatePackageDoc(packagePath, configPath, dest, true, whiteList);
 });
 fs.unlink(tempConfigPath);
 

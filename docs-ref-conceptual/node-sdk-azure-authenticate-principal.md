@@ -5,7 +5,7 @@ keywords: Azure, Node, SDK, API, authentication, active directory, service princ
 author: tomarcher
 manager: douge
 ms.author: tarcher
-ms.date: 06/10/2017
+ms.date: 06/12/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure

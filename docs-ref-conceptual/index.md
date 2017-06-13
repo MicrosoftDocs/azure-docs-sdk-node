@@ -5,7 +5,7 @@ keywords: Azure, Node.js, SDK, API
 author: tomarcher
 ms.author: tarcher
 manager: douge
-ms.date: 06/10/2017
+ms.date: 06/12/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -25,22 +25,23 @@ Create and manage Azure resources from your Node.js applications using the [Azur
 For example, the following code snippet illustrates how to log in to Azure, create a management client, and list all VM images for the specified location, publisher, offer, and SKU.
 
 ```javascript
-var msRestAzure = require('ms-rest-azure');
-var computeManagementClient = require('azure-arm-compute');
+const msRestAzure = require('ms-rest-azure');
+const computeManagementClient = require('azure-arm-compute');
 
 // Interactive Login - provides a url, and a code that needs to be copied and pasted in a browser.  
 // If successful, the user will receive a DeviceTokenCredentials object. 
-msRestAzure.interactiveLogin(function(err, credentials) {
-	var client = new computeManagementClient(credentials, '<azure-subscription-id>');
+msRestAzure.interactiveLogin((err, credentials) => {
+    const client = new computeManagementClient(credentials, '<azure-subscription-id>');
 
-	client.virtualMachineImages.list('westus', // location
-                                     'MicrosoftWindowsServer', // publisher name 
-                                     'WindowsServer',  // offer
-                                     '2012-R2-Datacenter', // sku
-                                     function(err, result, request, response) {
-	if (err) console.log(err);
-		console.log(result);
-	});
+    client.virtualMachineImages.list(
+      'westus', // location
+      'MicrosoftWindowsServer', // publisher name 
+      'WindowsServer',  // offer
+      '2012-R2-Datacenter', // sku
+      (err, result, request, response) => {
+        if (err) console.error(err);
+        console.log(result);
+      });
 });
 ```
 
@@ -57,16 +58,14 @@ Select the library you need for a particular service from the [list of Node.js i
 For example, the following JavaScript illustrates how to list the contents of every blob in an Azure storage container:
 
 ```javascript
-var storage = require('azure-storage');
+const storage = require('azure-storage');
+const blobSvc = storage.createBlobService();
 
-var blobSvc = storage.createBlobService();
-blobSvc.listBlobsSegmented('<container-name>', 
-                           null, 
-                           function(error, result, response) {
-  if(!error) { 
+blobSvc.listBlobsSegmented('<container-name>', null, (error, result, response) => {
+  if (!error) { 
       // result.entries contains the entries
-      // If all blobs were not returned, result.continuationToken 
-      // has the continuation token.
+      // If all blobs were not returned,  
+      // result.continuationToken has the continuation token.
   }
 });
 ```

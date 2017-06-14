@@ -112,7 +112,7 @@ packagesToFilter.forEach(function (p) {
   }
 });
 
-// 6. generate root toc
+// 6. generate root toc and remove subToc
 var rootToc = [];
 var rootTocPath = path.join(dest, 'toc.yml');
 var subTocs = glob.sync(path.join(dest, '**/toc.yml'));
@@ -122,6 +122,7 @@ subTocs.forEach(function (subTocPath) {
   var topicHref = path.join(packageName, 'index.md');
   tocContent = { name: packageName, uid: packageName, topicHref: topicHref, items: tocContent };
   rootToc.push(tocContent);
+  fs.unlinkSync(subTocPath);
 });
 fs.writeFileSync(rootTocPath, yaml.safeDump(rootToc));
 console.log('Finish combining sub TOCs to root TOC');

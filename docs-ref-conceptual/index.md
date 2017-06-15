@@ -87,10 +87,6 @@ msRestAzure.interactiveLogin((err, credentials) => {
 });
 ```
 
-Review the [Node.js library installation instructions](node-sdk-azure-install.md) for a full list of the libraries, and how to import them into your projects. 
-
-The [get started article](node-sdk-azure-get-started.md) explains how to set up your authentication and run sample code against your Azure subscription. 
-
 ## Five-minute quickstarts
 Create and deploy a Node.js app to Azure in five minutes.
 <ul>

@@ -62,9 +62,7 @@ Get started building great Node.js apps on Azure.
 
 ## Management APIs
 
-Create and manage Azure resources from your Node.js applications using the [Azure management libraries for Node.js](node-sdk-azure-get-started.md). Use these libraries to build your own Azure automation tools and services. 
-
-For example, the following code snippet illustrates how to log in to Azure, create a management client, and list all VM images for the specified location, publisher, offer, and SKU.
+Create and manage Azure resources from your Node.js applications using the [Azure management libraries for Node.js](node-sdk-azure-get-started.md). The following code snippet illustrates how to log in to Azure, create a management client, and list all VM images for the specified location, publisher, offer, and SKU.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

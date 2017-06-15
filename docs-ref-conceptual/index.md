@@ -1,11 +1,12 @@
 ---
-title: Azure libraries for Node.js
+title: Azure for Node.js developers
 description: Overview of the Azure management and service libraries for Node.js
 keywords: Azure, Node.js, SDK, API
 author: tomarcher
+layout: LandingPage
 ms.author: tarcher
 manager: douge
-ms.date: 06/12/2017
+ms.date: 06/15/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -14,11 +15,52 @@ ms.service: multiple
 ms.assetid: 
 ---
 
-# Azure libraries for Node.js
+# Azure for Node.js developers
 
-The Azure libraries for Node.js help you manage Azure resources and connect to services from your application code. The libraries are available as [npm packages](node-sdk-azure-install.md) for use in your Node.js projects. 
+Get started building great Node.js apps on Azure.
 
-## Manage Azure resources
+<ul class="panelContent">
+    <li>
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardText">
+                        <h2>Tools</h2>
+                        <a href="node-azure-tools.md">Download Azure tools and plugins.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li><li>
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardImageOuter">
+                    </div>
+                    <div class="cardText">
+                        <h2>npm packages</h2>
+                        <a href="node-sdk-azure-install.md">Use services and manage Azure resources.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li><li>
+        <div class="cardSize">
+            <div class="cardPadding">
+                <div class="card">
+                    <div class="cardImageOuter">
+                    </div>
+                    <div class="cardText">
+                        <h2>Jenkins CI/CD</h2>
+                        <a href="/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd">Use Jenkins to deploy to Azure.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+
+## Management APIs
 
 Create and manage Azure resources from your Node.js applications using the [Azure management libraries for Node.js](node-sdk-azure-get-started.md). Use these libraries to build your own Azure automation tools and services. 
 
@@ -49,33 +91,21 @@ Review the [Node.js library installation instructions](node-sdk-azure-install.md
 
 The [get started article](node-sdk-azure-get-started.md) explains how to set up your authentication and run sample code against your Azure subscription. 
 
-## Connect to Azure services
+## Five-minute quickstarts
+Create and deploy a Node.js app to Azure in five minutes.
+<ul>
+   <li><a href="/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
+   <li><a href="/azure/app-service-api/app-service-api-nodejs-api-app">REST API</a></li>
+   <li><a href="/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
+   <li><a href="/azure/container-service/container-service-kubernetes-walkthrough">Docker and Kubernetes</a></li>
+</ul>
 
-In addition to using Node.js libraries to create and manage resources within Azure, you can also use Node.js libraries to connect to, and use those resources in your apps. For example, you could update a table in an SQL Database, or store files in Azure Storage. 
+## Tutorials and samples
 
-Select the library you need for a particular service from the [list of Node.js ibraries](node-sdk-azure-install.md), and visit the [Node.js developer center](https://azure.microsoft.com/develop/nodejs/) for tutorials and sample code.
+Complete walkthroughs for app creation and deployment.
 
-For example, the following JavaScript illustrates how to list the contents of every blob in an Azure storage container:
-
-```javascript
-const storage = require('azure-storage');
-const blobSvc = storage.createBlobService();
-
-blobSvc.listBlobsSegmented('<container-name>', null, (error, result, response) => {
-  if (!error) { 
-      // result.entries contains the entries
-      // If all blobs were not returned,  
-      // result.continuationToken has the continuation token.
-  }
-});
-```
-
-## Sample code and reference
-
-The following samples cover common automation tasks with the Azure management libraries for Node.js, and have ready-to-use code for your own apps:
-
-- [Virtual machines](node-sdk-azure-virtual-machine-samples.md)
-- [Web Apps](node-sdk-azure-web-apps-samples.md)
-- [SQL database](node-sdk-azure-sql-database-samples.md)
-
-A [reference](https://docs.microsoft.com/node/api) is available for all packages in both the service and management libraries. New features, breaking changes, and migration instructions from previous versions are available in the [release notes](node-sdk-azure-release-notes.md).
+<ul>
+    <li><a href="node-sdk-azure-virtual-machine-samples.md">Virtual machines</a></li>
+    <li><a href="node-sdk-azure-web-apps-samples.md">Web Apps</a></li>
+    <li><a href="node-sdk-azure-sql-database-samples.md">SQL Database</a></li>
+</ul>

@@ -27,11 +27,21 @@ The [Azure Cloud Shell](https://docs.microsoft.coms/azure/cloud-shell/quickstart
 
 You can also open the Cloud Shell from the Azure portal by clicking the ![Cloud Shell](cs-button.png) button on the top navigation. 
 
+## Prepare your environemnt
+
+Create a new project in an empty directory and install the following npm modules:
+
+```bash
+cd azure-node-quickstart
+npm init -y
+npm install --save azure ms-rest-azure azure-arm-compute azure-arm-website azure-storage
+```
+
 ## Set up authentication
 
 Your Node.js applications need read and create permissions in your Azure subscription to run the sample code in this guide. Create a service principal and configure your application to run with its credentials. Service principals are a non-interactive account associated with your identity to which you grant only the privileges your app needs to run.
 
-[Create a service principal using the Azure CLI 2.0](/cli/azure/create-an-azure-service-principal-azure-cli) and capture the output. You'll need to provide a [secure password](https://docs.microsoft.com/azure/active-directory/active-directory-passwords-policy) in the password argument instead of `MY_SECURE_PASSWORD`.
+[Create a service principal using the Azure CLI 2.0](https://docs.microsoft.com/cli/azure/create-an-azure-service-principal-azure-cli) and capture the output. You'll need to provide a [secure password](https://docs.microsoft.com/azure/active-directory/active-directory-passwords-policy) in the password argument instead of `MY_SECURE_PASSWORD`.
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name AzureNodeTest --password "MY_SECURE_PASSWORD"
@@ -43,33 +53,56 @@ az ad sp create-for-rbac --name AzureNodeTest --password "MY_SECURE_PASSWORD"
   "displayName": "AzureNodeTest",
   "name": "http://AzureNodeTest",
   "password": password,
-  "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+  "tenant": ""
 }
 ```
 
-Create a new file *nodeAzureTest.js* in a new directory with the following code, updating the parameters passed to `loginWIthServicePrincipalSecret` with the values from the CLI output.
+Export the values for  *appId*, *password* and *tenant* as environment variables.
+
+```bash
+export AZURE_ID a487e0c1-82af-47d9-9a0b-af184eb87646d
+export AZURE_PASS password
+export AZURE_TENANT XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+```
+
+Get the ID for your subscription with [az account show](https://docs.microsoft.com/cli/azure/account#show)
+
+```azurecli-interactive
+az account show
+```
+
+```json
+{
+   "environmentName": "AzureCloud",
+   "id": "3069ff33-0398-4a99-a42b-f6613d1664ac",
+   "isDefault": true
+}
+```
+
+Export the subscription ID as an environment variable
+
+```bash
+export AZURE_SUB = 3069ff33-0398-4a99-a42b-f6613d1664ac
+```
+
+
+## Create a new virtual machine
+
+Create a new file *createVM.js* in the current directory with the following code, updating the parameters passed to `loginWIthServicePrincipalSecret` with the values from the CLI output.
 
 ```javascript
 const Azure = require('azure');
 const MsRest = require('ms-rest-azure');
 
 MsRest.loginWithServicePrincipalSecret(
-  'http://AzureNodeTest',
-  'password',
-  'a487e0c1-82af-47d9-9a0b-af184eb87646d',
-  (err, credentials) => { }
+  process.env.AZURE_ID, process.env.AZURE_PASS, process.env.AZURE_TENANT,  (err, credentials) => { }
 );
 ```
 
-## Install Azure packages
-
-## Create a new virtual machine
 
 ## Deploy a web app from a Docker Hub image
 
-## Connect to Azure SQL Database
-
-## Write a new blob to Azure Storage
+## Write a blob to Azure Storage
 
 ## Clean up resources
 

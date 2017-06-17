@@ -18,7 +18,7 @@ ms.author: tarcher
 ## Azure CLI 2.0
 The Azure 2.0 CLI provides a full featured interface to create and configure Azure resources from the command line. The Azure CLI 2.0 is cross-platform and contains powerful query features so you can pipe outputs directly to your favorite command-line tools.
 
-[Install the Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-azure-cli)
+[Install the Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2)
 
 ##Visual Studio Code
 

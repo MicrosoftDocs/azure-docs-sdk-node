@@ -5,7 +5,7 @@ keywords: Azure, Node, SDK, API, authentication, active directory, service princ
 author: tomarcher
 manager: douge
 ms.author: tarcher
-ms.date: 06/12/2017
+ms.date: 06/17/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -25,8 +25,13 @@ The service principal approach enables you to:
 This topic shows you three techniques for creating a service principal.
 
 - Azure portal
-- Azure CLI
+- Azure CLI 2.0
 - Azure SDK for Node.js
+
+## Prerequisites
+- An Azure account. If you don't have one , [get a free trial](https://azure.microsoft.com/free/)
+- [Node.js](https://nodejs.org)
+- [Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2)
 
 ## Create a service principal using the Azure portal
 
@@ -36,72 +41,89 @@ Follow the steps outlined in the topic,
 ## Create a service principal using the Azure CLI
 
 Creating a service principal using the Azure CLI can be 
-accomplished using the 
-[Azure Cross-Platform CLI (npm module)](https://github.com/Azure/azure-xplat-cli).
+accomplished with the following steps:
 
-1. Log into Azure. The following command produces instructions that log you into Azure: 
+Get the Azure CLI
 
-	```shell
-	$ azure login
-	```
+Follow the guide on docs.microsoft.com or use the Azure Cloud Shell.
 
-2. Create a service principal using the `azure ad sp` command:
+1. Open a terminal window.
 
-	```shell
-	$ azure ad sp create -n sp-name -p sp-password
-	```
-
-	Here's an example of the output from the `azure ad sp` command:
+1. Type the following command to start the login process:
 
 	```shell
-	+ Creating application sp-name
-	+ Creating service principal for application <service-principal-name>
-	data:    Object Id:               weewrerer-e329-4e9b-98c6-7878787
-	data:    Display Name:            sp-name
-	data:    Service Principal Names:
-	data:                             <service-principal-name>
-	data:                             https://sp-name
-	info:    ad sp create command OK
+	$ az login
 	```
 
-3. Assign a role to the new service principal. For the `--spn` option, use the &lt;service-principal-name> from the previous step.
+2. Calling `az login` results in a URL and a code. Browse to the specified URL, enter the code, and login with your Azure identity (this may happen automatically if you're already logged in). 
+You'll then be able to access your account via the CLI.
+
+3. Get your subscription and tenant id:
 
 	```shell
-	$ azure role assignment create --spn <service-principal-name> -o Contributor
+	$ az account list
 	```
 
-	Running the `azure role assignment` command results in output similar to the following:
+	The following shows an example of the output:
 
 	```shell
-	info:    Executing command role assignment create
-	+ Finding role with specified name
-	data:    RoleAssignmentId     : /subscriptions/abcdefgh-1234-4cc9-89b5-12345678/providers/Microsoft.Authorization/roleAssignments/987654-ea85-40a5-80c2-abcdferghtt
-	data:    RoleDefinitionName   : Contributor
-	data:    RoleDefinitionId     : jhfskjf-6180-42a0-ab88-5656eiu677e23e
-	data:    Scope                : /subscriptions/abcdefgh-1234-4cc9-89b5-12345678
-	data:    Display Name         : sp-name
-	data:    SignInName           :
-	data:    ObjectId             : weewrerer-e329-4e9b-98c6-7878787
-	data:    ObjectType           : ServicePrincipal
-	data:
-	+
-	info:    role assignment create command OK
+	{
+	"cloudName": "AzureCloud",
+	"id": "c6e5c9a2-a4dd-4c05-81b4-6bed04f913ea",
+	"isDefault": true,
+	"name": "My Azure Subscription",
+	"registeredProviders": [],
+	"state": "Enabled",
+	"tenantId": "5bc10873-159c-4cbe-a7c9-bce05cb065c1",
+		"user": {
+			"name": "hello@example.com",
+			"type": "user"
+		}
+	}
 	```
 
-4. Log in using the service principal.
+	**Note the subscription ID as it will be used in Step 5.**
+
+4. Create a service principal to get a JSON object containing the other pieces of information you need to authenticate with Azure.
 
 	```shell
-	$ azure login -u <service-principal-name> -p <password> --tenant <guid or domain> --service-principal
-	```
+	$ az ad sp create-for-rbac
+	```shell
 
-	Once processed, the `azure login` command produces output similar to the following:
+	The following shows an example of the output:
 
 	```shell
-	info:    Executing command login
-	info:    Added subscription TestSubscription
-	+
-	info:    login command OK
+	{
+	"appId": "19f7b7c1-fc4e-4c92-8aaf-21fffc93b4c9",
+	"displayName": "azure-cli-1970-01-01-00-00-00",
+	"name": "http://azure-cli-1970-01-01-00-00-00",
+	"password": "48d82644-00f2-4e64-80c5-65192f9bb2d0",
+	"tenant": "16f63fe8-17db-476f-b2b3-ba3752a03a33"
+	}
+	```shell
+
+	**Note the tenant, name, and password values as they'll be used in Step 5.**
+
+5. Set up the environment variables - replacing the &lt;subscriptId>, &lt;tenant>, &lt;name>, and &lt;password> values 
+with the values you obtained in steps 4 and 5. 
+
+	**Using bash**
+
+	```shell
+	export azureSubId='<subscriptionId>' # From step 3
+	export azureServicePrincipalTenantId='<tenant>'
+	export azureServicePrincipalClientId='<name>'
+	export azureServicePrincipalPassword='<password>'
 	```
+
+	**Using PowerShell**
+
+	```shell
+	$env:azureSubId='<subscriptionId>' # From step 3
+	$env:azureServicePrincipalTenantId='<tenant>'
+	$env:azureServicePrincipalClientId='<name>'
+	$env:azureServicePrincipalPassword='<password>'
+	```shell
 
 ## Create a service principal using the Azure SDK for Node.js
 

@@ -69,12 +69,12 @@ You'll then be able to access your account via the CLI.
 	```shell
 	{
 	"cloudName": "AzureCloud",
-	"id": "c6e5c9a2-a4dd-4c05-81b4-6bed04f913ea",
+	"id": "<subscriptionId>",
 	"isDefault": true,
-	"name": "My Azure Subscription",
+	"name": "<subscriptionName>",
 	"registeredProviders": [],
 	"state": "Enabled",
-	"tenantId": "5bc10873-159c-4cbe-a7c9-bce05cb065c1",
+	"tenantId": "<tenantId>",
 		"user": {
 			"name": "hello@example.com",
 			"type": "user"
@@ -94,11 +94,11 @@ You'll then be able to access your account via the CLI.
 
 	```shell
 	{
-	"appId": "19f7b7c1-fc4e-4c92-8aaf-21fffc93b4c9",
+	"appId": "<appId>",
 	"displayName": "azure-cli-1970-01-01-00-00-00",
 	"name": "http://azure-cli-1970-01-01-00-00-00",
-	"password": "48d82644-00f2-4e64-80c5-65192f9bb2d0",
-	"tenant": "16f63fe8-17db-476f-b2b3-ba3752a03a33"
+	"password": "<password>",
+	"tenant": "<tenant>"
 	}
 	```
 

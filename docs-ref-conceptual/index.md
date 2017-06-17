@@ -6,7 +6,7 @@ author: tomarcher
 layout: LandingPage
 ms.author: tarcher
 manager: douge
-ms.date: 06/15/2017
+ms.date: 06/17/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -71,17 +71,17 @@ const computeManagementClient = require('azure-arm-compute');
 // Interactive Login - provides a url, and a code that needs to be copied and pasted in a browser.  
 // If successful, the user will receive a DeviceTokenCredentials object. 
 msRestAzure.interactiveLogin((err, credentials) => {
-    const client = new computeManagementClient(credentials, '<azure-subscription-id>');
+  const client = new computeManagementClient(credentials, '<azure-subscription-id>');
 
-    client.virtualMachineImages.list(
-      'westus', // location
-      'MicrosoftWindowsServer', // publisher name 
-      'WindowsServer',  // offer
-      '2012-R2-Datacenter', // sku
-      (err, result, request, response) => {
-        if (err) console.error(err);
-        console.log(result);
-      });
+  client.virtualMachineImages.list(
+    'westus', // location
+    'MicrosoftWindowsServer', // publisher name 
+    'WindowsServer',  // offer
+    '2012-R2-Datacenter', // sku
+    (err, result, request, response) => {
+      if (err) return console.error(err);
+      console.log(result);
+    });
 });
 ```
 

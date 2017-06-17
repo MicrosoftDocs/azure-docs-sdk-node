@@ -110,7 +110,7 @@ with the values you obtained in steps 4 and 5.
 	**Using bash**
 
 	```shell
-	export azureSubId='<subscriptionId>' # From step 3
+	export azureSubId='<subscriptionId>'
 	export azureServicePrincipalTenantId='<tenant>'
 	export azureServicePrincipalClientId='<name>'
 	export azureServicePrincipalPassword='<password>'
@@ -119,7 +119,7 @@ with the values you obtained in steps 4 and 5.
 	**Using PowerShell**
 
 	```shell
-	$env:azureSubId='<subscriptionId>' # From step 3
+	$env:azureSubId='<subscriptionId>'
 	$env:azureServicePrincipalTenantId='<tenant>'
 	$env:azureServicePrincipalClientId='<name>'
 	$env:azureServicePrincipalPassword='<password>'

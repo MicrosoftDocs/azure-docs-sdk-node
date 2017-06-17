@@ -95,8 +95,8 @@ You'll then be able to access your account via the CLI.
 	```shell
 	{
 	"appId": "<appId>",
-	"displayName": "azure-cli-1970-01-01-00-00-00",
-	"name": "http://azure-cli-1970-01-01-00-00-00",
+	"displayName": "<displayName>",
+	"name": "<name>",
 	"password": "<password>",
 	"tenant": "<tenant>"
 	}

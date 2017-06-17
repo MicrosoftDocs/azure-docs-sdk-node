@@ -74,7 +74,7 @@ az account show
 ```json
 {
    "environmentName": "AzureCloud",
-   "id": "3069ff33-0398-4a99-a42b-f6613d1664ac",
+   "id": "306943934-0323-4ae4d-a42b-f6613d1664ac",
    "isDefault": true
 }
 ```
@@ -85,18 +85,88 @@ Export the subscription ID as an environment variable
 export AZURE_SUB = 3069ff33-0398-4a99-a42b-f6613d1664ac
 ```
 
-
 ## Create a new virtual machine
 
-Create a new file *createVM.js* in the current directory with the following code, updating the parameters passed to `loginWIthServicePrincipalSecret` with the values from the CLI output.
+Create a new file *createVM.js* in the current directory with the following code.
 
 ```javascript
-const Azure = require('azure');
+'use strict';
+
 const MsRest = require('ms-rest-azure');
+const ComputeManagementClient = require('azure-arm-compute');
+const NetworkManagementClient = require('azure-arm-network');
 
 MsRest.loginWithServicePrincipalSecret(
-  process.env.AZURE_ID, process.env.AZURE_PASS, process.env.AZURE_TENANT,  (err, credentials) => { }
-);
+    process.env.AZURE_ID, process.env.AZURE_PASS, process.env.AZURE_TENANT, (err, credentials) => {
+        
+        const networkClient = new NetworkManagementClient(credentials, process.env.AZURE_SUB);
+        const computeClient = new ComputeManagementClient(credentials, process.env.AZURE_SUB);
+
+        let nicParameters = {
+            location: "eastus",
+            ipConfigurations: [
+                {
+                    name: "vmnetinterface",
+                    privateIPAllocationMethod: 'Dynamic',
+                }
+            ]
+        };
+
+        const vnetParameters = {
+            location: "eastus",
+            addressSpace: {
+                addressPrefixes: ['10.0.0.0/16']
+            },
+            dhcpOptions: {
+                dnsServers: ['10.1.1.1', '10.1.2.4']
+            },
+            subnets: [{ name: "mynodesubnet", addressPrefix: '10.0.0.0/24' }],
+        };
+
+        let vmParameters = {
+            location: "eastus",
+            osProfile: {
+                computerName: "newLinuxVM",
+                adminUsername: "testadmin",
+            },
+            hardwareProfile: {
+                vmSize: 'Basic_A1'
+            },
+            networkProfile: {
+                networkInterfaces: [
+                    {
+                        id: vmNetworkInterface.id,
+                        primary: true
+                    }
+                ]
+            },
+            storageProfile: {
+                imageReference: {
+                    publisher: 'Canonical',
+                    offer: 'UbuntuServer',
+                    sku: '16.04-LTS',
+                    version: 'latest'
+                },
+            }
+        };
+
+        networkClient.virtualNetworks.createOrUpdate("myResourceGroup", "mynodevnet", vnetParameters)
+            .then(function (vnetwork) {
+                networkClient.subnets.get("myResourceGroup", "mynodevnet", "mynodesubnet")
+                    .then(function (subnetinfo) {
+                        nicParameters.ipConfigurations[0].subnet = subnetInfo;
+                        networkClient.networkInterfaces.createOrUpdate("myResourceGroup", "vmnetinterface", nicParameters)
+                            .then(function (vmNetworkInterface) {
+                                vmParameters.networkProfile.networkInterfaces[0].id = vmNetworkInterface.id;
+                                computeClient.virtualMachines.createOrUpdate("myResourceGroup", "newLinuxVM", vmParameters, (err, data) => {
+                                    if (err) return console.log(err);
+                                    console.log("Created newLinuxVM");
+                                });
+                            });
+                    })
+            })
+    });
+
 ```
 
 

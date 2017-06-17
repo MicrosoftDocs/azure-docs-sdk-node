@@ -88,7 +88,7 @@ You'll then be able to access your account via the CLI.
 
 	```shell
 	$ az ad sp create-for-rbac
-	```shell
+	```
 
 	The following shows an example of the output:
 
@@ -100,7 +100,7 @@ You'll then be able to access your account via the CLI.
 	"password": "48d82644-00f2-4e64-80c5-65192f9bb2d0",
 	"tenant": "16f63fe8-17db-476f-b2b3-ba3752a03a33"
 	}
-	```shell
+	```
 
 	**Note the tenant, name, and password values as they'll be used in Step 6.**
 
@@ -123,7 +123,7 @@ with the values you obtained in steps 4 and 5.
 	$env:azureServicePrincipalTenantId='<tenant>'
 	$env:azureServicePrincipalClientId='<name>'
 	$env:azureServicePrincipalPassword='<password>'
-	```shell
+	```
 
 ## Create a service principal using the Azure SDK for Node.js
 

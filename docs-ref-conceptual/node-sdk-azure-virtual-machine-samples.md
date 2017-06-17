@@ -1,6 +1,6 @@
 ---
-title: Azure management libraries for Node.js virtual machine samples
-description: Get sample code for creating and updating Azure virtual machines using the Azure management libraries for Node.js
+title: Azure management modules for Node.js virtual machine samples
+description: Get sample code for creating and updating Azure virtual machines using the Azure management modules for Node.js
 keywords: Azure, Node, SDK, API, virtual machines
 author: tomarcher
 manager: douge
@@ -14,5 +14,5 @@ ms.service: multiple
 ms.assetid: 
 ---
 
-# Azure management libraries for Node.js samples for virtual machines
+# Azure management modules for Node.js samples for virtual machines
 

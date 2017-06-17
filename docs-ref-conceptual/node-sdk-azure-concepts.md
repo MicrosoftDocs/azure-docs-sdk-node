@@ -1,5 +1,5 @@
 ---
-title: Azure Management libraries for Node.js usage concepts and patterns
+title: Azure Management modules for Node.js usage concepts and patterns
 description: 
 keywords: Azure, Node, SDK, API, concepts
 author: tomarcher

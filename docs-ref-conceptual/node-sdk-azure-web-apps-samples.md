@@ -1,6 +1,6 @@
 ---
-title: Azure management libraries for Node.js web app samples
-description: Get sample code for creating and updating Azure web apps hosted in App Service using the Azure management libraries for Node.js
+title: Azure management modules for Node.js web app samples
+description: Get sample code for creating and updating Azure web apps hosted in App Service using the Azure management modules for Node.js
 keywords: Azure, Node, SDK, API, web apps, app service
 author: tomarcher
 manager: douge
@@ -14,5 +14,5 @@ ms.service: multiple
 ms.assetid: 
 ---
 
-# Azure management libraries for Java samples for web apps
+# Azure management modules for Java samples for web apps
 

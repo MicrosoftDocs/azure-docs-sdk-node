@@ -13,7 +13,7 @@ ms.technology: Azure
 ms.date: 6/12/2017
 ---
 
-# Azure libraries for Node.js
+# Azure modules for Node.js
 
 This page lists all the individual Azure Node.js packages in a single
 place. To install a specific package, open a bash, or command, window on a machine with 
@@ -69,7 +69,7 @@ in the table.
 [Traffic Manager](http://www.npmjs.com/package/azure-asm-trafficmanager)|`npm install azure-asm-trafficmanager`
 [Virtual Networks](http://www.npmjs.com/package/azure-asm-network)|`npm install azure-asm-network`
 [WebSites](http://www.npmjs.com/package/azure-asm-website)|`npm install azure-asm-website`
-| **Base Libraries** ||
+| **Base Modules** ||
 [Common Functionality (for Azure Service Management & Azure Resource Manager clients)](http://www.npmjs.com/package/azure-common)|`npm install azure-common`
 [Common Functionality for Azure Resource Management clients generated from Autorest (Generic)](http://www.npmjs.com/package/ms-rest)|`npm install ms-rest`
 [Common Functionality for Azure Resource Management clients generated from Autorest (Azure)](http://www.npmjs.com/package/ms-rest-azure)|`npm install ms-rest-azure`

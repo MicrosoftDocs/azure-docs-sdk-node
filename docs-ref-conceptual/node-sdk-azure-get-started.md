@@ -1,6 +1,6 @@
 ---
-title: Get started with the Azure libraries for Node.js
-description: Get started with basic use of the Azure libraries for Node.js with your own Azure subscription.
+title: Get started with the Azure modules for Node.js
+description: Get started with basic use of the Azure modules for Node.js with your own Azure subscription.
 keywords: Azure, Node, SDK, API, get-started, node.js
 author: tomarcher
 manager: douge
@@ -13,7 +13,7 @@ ms.devlang: node
 ms.service: multiple
 ---
 
-# Get started with the Azure libraries for Node.js
+# Get started with the Azure modules for Node.js
 
 This guide walks you through installing some Azure Node.js packages, authenticating to Azure with a service principal, and running sample code that creates resources in your Azure subscription and connects to Azure cloud services.
 

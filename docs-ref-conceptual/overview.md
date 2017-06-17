@@ -1,6 +1,6 @@
 ---
-title: Azure libraries for Node.js
-description: Overview of the Azure management and service libraries for Node.js
+title: Azure modules for Node.js
+description: Overview of the Azure management and service modules for Node.js
 keywords: Azure, Node.js, SDK, API, management , client, services
 author: TomArcher
 ms.author: tarcher
@@ -13,13 +13,13 @@ ms.devlang: nodejs
 ms.service: multiple
 ---
 
-# Azure libraries for Node.js
+# Azure modules for Node.js
 
-The Azure libraries for Node.js help you manage Azure resources and connect to services from your applications. The libraries are available as [npm packages](node-sdk-azure-install.md) for use in your projects. 
+The Azure modules for Node.js help you manage Azure resources and connect to services from your applications. The libraries are available as [npm packages](node-sdk-azure-install.md) for use in your projects. 
 
 ## Manage Azure resources
 
-Create and manage Azure resources from your Node.js applications using the [Azure SDK for Node.js](java-sdk-azure-get-started.md). Use these libraries to create and query resources from your apps or to build your own Azure automation tools. 
+Create and manage Azure resources from your Node.js applications using the [Azure SDK for Node.js](java-sdk-azure-get-started.md). Use these modules to create and query resources from your apps or to build your own Azure automation tools. 
 
 For example, to create a Linux VM using an existing network interface, you would write the following code:
 
@@ -82,7 +82,7 @@ Review the [install instructions](node-sdk-azure-install.md) for a full list of 
 
 ## Connect to Azure services
 
-In addition to using the Azure packages to create and manage resources within Azure, you can also use packages to connect and use Azure cloud services in your apps. For example, you might update a table SQL Database or upload files to Azure Storage. Select the package you need for a particular service from the [complete list](node-sdk-azure-install.md) and visit the [Node.js developer center](https://azure.microsoft.com/develop/nodejs/) for tutorials and sample code to learn how to use the libraries in your apps.
+In addition to using the Azure packages to create and manage resources within Azure, you can also use packages to connect and use Azure cloud services in your apps. For example, you might update a table SQL Database or upload files to Azure Storage. Select the package you need for a particular service from the [complete list](node-sdk-azure-install.md) and visit the [Node.js developer center](https://azure.microsoft.com/develop/nodejs/) for tutorials and sample code to learn how to use the modules in your apps.
 
 For example, to print out the contents of every blob in an Azure storage container:
 
@@ -103,4 +103,4 @@ The following samples cover common tasks with the Azure management packages and 
 - [Web apps](node-sdk-azure-web-apps-samples.md)
 - [SQL Database](node-sdk-azure-sql-database-samples.md)
    
-A [reference](https://docs.microsoft.com/nodejs/api) is available for all packages in both the service and management libraries. New features, breaking changes, and migration instructions from previous versions are available in the [release notes](node-sdk-azure-release-notes.md).
+A [reference](https://docs.microsoft.com/nodejs/api) is available for all packages in both the service and management modules. New features, breaking changes, and migration instructions from previous versions are available in the [release notes](node-sdk-azure-release-notes.md).

@@ -1,6 +1,6 @@
 ---
-title: Azure management libraries for Node.js SQL Database samples
-description: Get sample code for creating and updating Azure SQL databases using the Azure Management libraries for Node.js
+title: Azure management modules for Node.js SQL Database samples
+description: Get sample code for creating and updating Azure SQL databases using the Azure Management modules for Node.js
 keywords: Azure, Node, SDK, API, SQL database
 author: tomarcher
 manager: douge
@@ -15,4 +15,4 @@ ms.assetid:
 ---
 
 
-# Azure management libraries for Node.js samples for SQL Database
+# Azure management modules for Node.js samples for SQL Database

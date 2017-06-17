@@ -38,7 +38,7 @@ Get started building great Node.js apps on Azure.
                     <div class="cardImageOuter">
                     </div>
                     <div class="cardText">
-                        <h2>npm packages</h2>
+                        <h2>npm modules</h2>
                         <a href="node-sdk-azure-install.md">Use services and manage Azure resources.</a>
                     </div>
                 </div>

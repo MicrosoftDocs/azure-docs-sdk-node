@@ -15,7 +15,7 @@ ms.service: multiple
 
 # Get started with the Azure modules for Node.js
 
-This guide walks you through installing some Azure Node.js packages, authenticating to Azure with a service principal, and running sample code that creates resources in your Azure subscription and connects to Azure cloud services.
+This guide walks you through installing some Azure Node.js modules, authenticating to Azure with a service principal, and running sample code that creates resources in your Azure subscription and connects to Azure cloud services.
 
 ## Prerequisites
 

@@ -1,7 +1,7 @@
 ---
 title: Azure for Node.js developers Microsoft Docs
 description: Node.js SDK and API Reference for Azure
-keywords: Azure Node.js, Azure Node.js API Reference, Azure Node.js npm packages, Azure SDK
+keywords: Azure Node.js, Azure Node.js API Reference, Azure Node.js npm modules, npm packages, Azure SDK
 author: tomarcher
 manager: douge
 ms.author: tarcher
@@ -15,8 +15,8 @@ ms.date: 6/12/2017
 
 # Azure modules for Node.js
 
-This page lists all the individual Azure Node.js packages in a single
-place. To install a specific package, open a bash, or command, window on a machine with 
+This page lists all the individual Azure Node.js modules in a single
+place. To install a specific modules, open a bash, or command, window on a machine with 
 npm (Node Package Manager) installed, and run the npm command listed next to the desired package
 in the table.
 

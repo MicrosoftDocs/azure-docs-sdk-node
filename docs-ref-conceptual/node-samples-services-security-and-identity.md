@@ -3,7 +3,6 @@ title: Sample code for using Azure security and identity with Node.js
 description: Sample code that illustrates using Azure security and identity with Node.js.
 author: tomarcher
 manager: douge
-ms.assetid: 
 ms.devlang: node
 ms.topic: article
 ms.service: Azure

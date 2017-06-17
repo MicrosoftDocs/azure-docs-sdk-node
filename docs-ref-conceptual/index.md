@@ -12,7 +12,6 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: node
 ms.service: multiple
-ms.assetid: 
 ---
 
 # Azure for Node.js developers

@@ -11,7 +11,6 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: node
 ms.service: multiple
-ms.assetid: 
 ---
 
 # Azure management modules for Node.js samples for virtual machines

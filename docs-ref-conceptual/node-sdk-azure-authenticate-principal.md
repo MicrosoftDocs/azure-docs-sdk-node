@@ -49,16 +49,16 @@ Follow the guide on docs.microsoft.com or use the Azure Cloud Shell.
 
 1. Open a terminal window.
 
-1. Type the following command to start the login process:
+2. Type the following command to start the login process:
 
 	```shell
 	$ az login
 	```
 
-2. Calling `az login` results in a URL and a code. Browse to the specified URL, enter the code, and login with your Azure identity (this may happen automatically if you're already logged in). 
+3. Calling `az login` results in a URL and a code. Browse to the specified URL, enter the code, and login with your Azure identity (this may happen automatically if you're already logged in). 
 You'll then be able to access your account via the CLI.
 
-3. Get your subscription and tenant id:
+4. Get your subscription and tenant id:
 
 	```shell
 	$ az account list
@@ -82,9 +82,9 @@ You'll then be able to access your account via the CLI.
 	}
 	```
 
-	**Note the subscription ID as it will be used in Step 5.**
+	**Note the subscription ID as it will be used in Step 6.**
 
-4. Create a service principal to get a JSON object containing the other pieces of information you need to authenticate with Azure.
+5. Create a service principal to get a JSON object containing the other pieces of information you need to authenticate with Azure.
 
 	```shell
 	$ az ad sp create-for-rbac
@@ -102,9 +102,9 @@ You'll then be able to access your account via the CLI.
 	}
 	```shell
 
-	**Note the tenant, name, and password values as they'll be used in Step 5.**
+	**Note the tenant, name, and password values as they'll be used in Step 6.**
 
-5. Set up the environment variables - replacing the &lt;subscriptId>, &lt;tenant>, &lt;name>, and &lt;password> values 
+6. Set up the environment variables - replacing the &lt;subscriptId>, &lt;tenant>, &lt;name>, and &lt;password> placeholders 
 with the values you obtained in steps 4 and 5. 
 
 	**Using bash**

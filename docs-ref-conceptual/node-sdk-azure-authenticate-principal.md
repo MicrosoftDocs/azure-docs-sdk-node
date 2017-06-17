@@ -28,37 +28,30 @@ This topic shows you three techniques for creating a service principal.
 - Azure CLI 2.0
 - Azure SDK for Node.js
 
-## Prerequisites
-- An Azure account. If you don't have one , [get a free trial](https://azure.microsoft.com/free/)
-- [Node.js](https://nodejs.org)
-- [Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2)
-
 ## Create a service principal using the Azure portal
 
 Follow the steps outlined in the topic, 
 [Use portal to create an Azure Active Directory application and service principal that can access resources](https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/), to generate the service principal.
 
-## Create a service principal using the Azure CLI
+## Create a service principal using the Azure CLI 2.0
 
-Creating a service principal using the Azure CLI can be 
+Creating a service principal using the [Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2) can be 
 accomplished with the following steps:
 
-Get the Azure CLI
+1. Download the [Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2).
 
-Follow the guide on docs.microsoft.com or use the Azure Cloud Shell.
+2. Open a terminal window.
 
-1. Open a terminal window.
-
-2. Type the following command to start the login process:
+3. Type the following command to start the login process:
 
 	```shell
 	$ az login
 	```
 
-3. Calling `az login` results in a URL and a code. Browse to the specified URL, enter the code, and login with your Azure identity (this may happen automatically if you're already logged in). 
+4. Calling `az login` results in a URL and a code. Browse to the specified URL, enter the code, and login with your Azure identity (this may happen automatically if you're already logged in). 
 You'll then be able to access your account via the CLI.
 
-4. Get your subscription and tenant id:
+5. Get your subscription and tenant id:
 
 	```shell
 	$ az account list
@@ -82,9 +75,9 @@ You'll then be able to access your account via the CLI.
 	}
 	```
 
-	**Note the subscription ID as it will be used in Step 6.**
+	**Note the subscription ID as it will be used in Step 7.**
 
-5. Create a service principal to get a JSON object containing the other pieces of information you need to authenticate with Azure.
+6. Create a service principal to get a JSON object containing the other pieces of information you need to authenticate with Azure.
 
 	```shell
 	$ az ad sp create-for-rbac
@@ -102,9 +95,9 @@ You'll then be able to access your account via the CLI.
 	}
 	```
 
-	**Note the tenant, name, and password values as they'll be used in Step 6.**
+	**Note the tenant, name, and password values as they'll be used in Step 7.**
 
-6. Set up the environment variables - replacing the &lt;subscriptId>, &lt;tenant>, &lt;name>, and &lt;password> placeholders 
+7. Set up the environment variables - replacing the &lt;subscriptId>, &lt;tenant>, &lt;name>, and &lt;password> placeholders 
 with the values you obtained in steps 4 and 5. 
 
 	**Using bash**

@@ -6,7 +6,7 @@ author: tomarcher
 manager: douge
 ms.author: tarcher
 ms.service: Azure
-ms.devlang: node
+ms.devlang: nodejs
 ms.topic: reference
 ms.technology: Azure
 ms.date: 6/12/2017

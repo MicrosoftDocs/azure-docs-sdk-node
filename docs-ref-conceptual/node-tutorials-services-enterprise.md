@@ -3,7 +3,7 @@ title: Tutorials for using Azure enterprise services with Node.js
 description: Tutorials for using Azure enterprise services with Node.js.
 author: tomarcher
 manager: douge
-ms.devlang: node
+ms.devlang: nodejs
 ms.topic: article
 ms.service: Azure
 ms.technology: Azure

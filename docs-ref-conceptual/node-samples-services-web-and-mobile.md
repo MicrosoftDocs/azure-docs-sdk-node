@@ -3,7 +3,7 @@ title: Sample code for building Azure web and mobile apps with Node.js
 description: Sample code that illustrates building Azure web and mobile apps with Node.js.
 author: tomarcher
 manager: douge
-ms.devlang: node
+ms.devlang: nodejs
 ms.topic: article
 ms.service: Azure
 ms.technology: Azure

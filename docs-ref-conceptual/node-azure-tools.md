@@ -7,7 +7,7 @@ manager: douge
 
 ms.service: multiple
 ms.tgt_pltfrm: na
-ms.devlang: node
+ms.devlang: nodejs
 ms.topic: article
 ms.date: 06/15/2017
 ms.author: tarcher

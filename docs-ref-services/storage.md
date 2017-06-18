@@ -25,7 +25,7 @@ Use the Azure Storage client module to:
 
 Create, update, and manage Azure Storage accounts and query and regenerate access keys from your Node.js apps with the management libraries.
 
-## Install the modules with npm
+## Install modules with npm
 
 Use npm to install the Azure storage client or management modules.
 

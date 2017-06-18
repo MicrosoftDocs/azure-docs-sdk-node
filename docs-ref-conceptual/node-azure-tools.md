@@ -4,8 +4,7 @@ description: Install individual tools for Node.js development on Azure
 services: multiple
 author: tomarcher
 manager: douge
-
-ms.service: multiple
+ms.service: azure-nodejs
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article

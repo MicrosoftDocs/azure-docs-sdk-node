@@ -9,7 +9,7 @@ ms.date: 06/07/2017
 ms.topic: get-started-article
 ms.prod: azure
 ms.devlang: nodejs
-ms.service: multiple
+ms.service: azure-nodejs
 ---
 
 # Get started with the Azure modules for Node.js

@@ -9,7 +9,7 @@ ms.date: 06/17/2017
 ms.topic: article
 ms.prod: azure
 ms.devlang: nodejs
-ms.service: multiple
+ms.service: azure-nodejs
 ---
 
 # Create an Azure service principal with Node.js 

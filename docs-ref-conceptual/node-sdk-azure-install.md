@@ -5,7 +5,7 @@ keywords: Azure Node.js, Azure Node.js API Reference, Azure Node.js npm modules,
 author: tomarcher
 manager: douge
 ms.author: tarcher
-ms.service: Azure
+ms.service: azure-nodejs
 ms.devlang: nodejs
 ms.topic: reference
 ms.date: 6/12/2017

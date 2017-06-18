@@ -18,7 +18,7 @@ The Azure modules for Node.js help you manage Azure resources and connect to ser
 
 ## Manage Azure resources
 
-Create and manage Azure resources from your Node.js applications using the [Azure SDK for Node.js](java-sdk-azure-get-started.md). Use these modules to create and query resources from your apps or to build your own Azure automation tools. 
+Create and manage Azure resources from your Node.js applications using the [Azure SDK for Node.js](node-sdk-azure-get-started.md). Use these modules to create and query resources from your apps or to build your own Azure automation tools. 
 
 For example, to create a Linux VM using an existing network interface, you would write the following code:
 

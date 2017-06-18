@@ -12,5 +12,5 @@ ms.devlang: nodejs
 ms.service: azure-nodejs
 ---
 
-# Azure management modules for Java samples for web apps
+# Azure management modules for Node.js samples for web apps
 

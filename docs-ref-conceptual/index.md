@@ -9,7 +9,6 @@ manager: douge
 ms.date: 06/17/2017
 ms.topic: article
 ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: multiple
 ---

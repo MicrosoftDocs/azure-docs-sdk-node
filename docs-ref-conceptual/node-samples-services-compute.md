@@ -6,7 +6,6 @@ manager: douge
 ms.devlang: nodejs
 ms.topic: article
 ms.service: Azure
-ms.technology: Azure
 ms.date: 6/12/2017
 ms.author: tarcher
 ---

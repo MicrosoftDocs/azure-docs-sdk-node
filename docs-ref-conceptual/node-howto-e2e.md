@@ -43,7 +43,7 @@ To get started, we need to download the sample project using the following steps
 
 	![gitcl command in the Visual Studio Code command palette prompt](./media/node-howto-e2e/git-clone.png)
 
-1. When prompted **Repository URL**, enter `https://github.com/scotch-io/node-todo` and press **&lt;Enter>**.
+1. When prompted for the **Repository URL**, enter `https://github.com/scotch-io/node-todo`, then press **&lt;Enter>**.
 
 1. Select (or create) the local directory into which you want to clone the project.
 
@@ -61,7 +61,7 @@ Since this is a Node.js project, the first thing you need to do is ensure that a
 
 ## Integrated Git version control
 
-After installing the app's dependencies via Yarn, a `yarn.lock` file is created that provides a predictable way to reacquire the exact same dependencies in the future, without any surprises in either CI builds, production deployments, or other developer's machines.
+After installing the app's dependencies via Yarn, a `yarn.lock` file is created that provides a predictable way to reacquire the exact same dependencies in the future, without any surprises in either CI (continuous integration) builds, production deployments, or other developer's machines.
 
 The following steps illustrate how to check the `yarn.lock` file into source control:
 
@@ -145,48 +145,46 @@ You were able to press **&lt;F5>** to run the app because the currently open fil
 
 ![Peek at a variable's definition](./media/node-howto-e2e/select-env.png)
 
+Open a browser, and navigate to `http://localhost:8080` to see the running app. Type a message into the textbox and add/remove a few todos to get a feel for how the app works.
 
-
-
-
-
-
-
-If you open a browser, you can navigate to `http://localhost:8080` and see the running app. Type a message into the textbox and add/remove a few todos to get a feel for how the app works.
-
-![](./media/node-howto-e2e/todo.png)
+![Todo app running](./media/node-howto-e2e/todo.png)
 
 ## Debugging
 
-In addition to being able to run the app and interact with it via the integrated console, VS Code also provides the ability to set breakpoints directly within your code. For example, hit `CTRL+P` to bring up the file picker, type `route` and select the `route.js` file.
+In addition to being able to run the app and interact with it via the integrated console, Visual Studio Code provides the ability to set breakpoints directly within your code. For example, hit **&lt;Ctrl>P** to display the file picker. Once the file picker displays, type `route`, and select the `route.js` file.
 
-Let's set a breakpoint on line 28, which represents the Express route that will be called when our app tries to add a todo. To set a breakpoint, simply click the gutter to the left of the line number within the editor:
+Set a breakpoint on line 28, which represents the Express route that is called when the app tries to add a todo entry. To set a breakpoint, simply click the area to the left of the line number within the editor as shown in the following figure.
 
-![](./media/node-howto-e2e/breakpoint.png)
+![Setting a breakpoint within Visual Studio Code](./media/node-howto-e2e/breakpoint.png)
 
-> Note: In addition to standard breakpoints, VS Code also supports conditional breakpoints, which allow you to customize when the app should suspend execution. To use them, simply right-click the gutter, select `Add Conditional Breakpoint...`, and specify either the JavaScript expression (e.g. `foo = "bar"`) or hit count that you'd like to condition the breakpoint on.
+> [!NOTE]
+> In addition to standard breakpoints, Visual Studio Code supports conditional breakpoints that allow you to customize when the app should suspend execution. To set a conditional breakpoint, right-click the area to the left of the line on which you wish to pause execution, select **Add Conditional Breakpoint...**, and specify either a JavaScript expression (e.g. `foo = "bar"`) or execution count that defines the condition under which you want to pause execution.
 
-With that set, go back to the running app and add a todo. This immediately causes the app to suspend execution, and VS Code will pause on line 28 where we set the breakpoint:
+Once the breakpoint has been set, return to the running app and add a todo entry. Adding a todo entry immediately causes the app to suspend execution on line 28 where you set the breakpoint:
 
-![](./media/node-howto-e2e/debugger.png)
+![Visual Studio Code pausing execution on a breakpoint](./media/node-howto-e2e/debugger.png)
 
-Within the paused file, we can hover over expressions to view their current value, inspect the locals/watches and call stack, and use the debug toolbar at the top to step through the execution. All the things you would expect from an IDE, but in a lightweight text editor. Hit `F5` again to continue execution of the app.
+Once the application has been paused, you can hover your mouse over the code's expressions to view their current value, inspect the locals/watches and call stack, and use the debug toolbar to step through the code execution. Press **&lt;F5>** to resume execution of the app.
 
-## Full Stack Debugging
+## Full-stack debugging
 
-As mentioned, this is a MEAN app, which means it's front-end and back-end are both written using JavaScript. So while we're currently debugging our back-end Node/Express code, at some point, we may need to debug our front-end/Angular code. Fortunately, VS Code has a huge ecosystem of extensions, which are easy to install, including integrated Chrome debugging.
+As mentioned earlier in the topic, the TODO app is a MEAN app - meaning that its front-end and back-end are both written using JavaScript. So, while we're currently debugging the back-end (Node/Express) code, at some point, you may need to debug the front-end (Angular) code. For that purpose, Visual Studio Code has a huge ecosystem of extensions, including integrated Chrome debugging.
 
-To demonstrate this, switch to the extensions tab and type `chrome` into the search box:
+Switch to the **Extensions** tab, and type `chrome` into the search box:
 
-![](./media/node-howto-e2e/chrome.png)
+![Chrome debugging extension for Visual Studio Code](./media/node-howto-e2e/chrome.png)
 
-Select the extension named `Debugger for Chrome` and click the `Install` button. After doing this, you'll need to reload VS Code to activate the extension. It will persist your workspace across the restart so don't worry about losing any state.
+Select the extension named **Debugger for Chrome**, and select **Install**. After installing the Chrome debugging extension, select **Reload** to close and reopen Visual Studio Code in order to activate the extension. 
 
-While we were able to run/debug our Node.js app without any VS Code-specific configuration, in order to debug a front-end web app, we currently need to generate a `launch.json` file in order to instruct VS Code how to run the app. To do this, switch to the `Debug` tab and click the gear icon (which should have a little red dot on top of it).
+![Reloading Visual Studio Code after installing the Chrome debugging extension](./media/node-howto-e2e/chrome-extension-reload-vscode.png)
 
-![](./media/node-howto-e2e/debug-gear.png)
+While you were able to run and debug the Node.js code without any Visual Stdio Code-specific configuration, in order to debug a front-end web app, you need to generate a `launch.json` file that instructs Visual Studio Code how to run the app. 
 
-This will generate a `launch.json` file which simply tells VS Code how to launch and/or attach to your app in order to debug it. 
+To generate the `launch.json` file, switch to the **Debug** tab, click the gear icon (which should have a little red dot on top of it), and select the `node.js` environment.
+
+![Visual Studio Code option to configure the launch.json file](./media/node-howto-e2e/debug-gear.png)
+
+Once created, the `launch.json` file looks similar to the following, and tells Visual Studio Code how to launch and/or attach to the app in order to debug it. 
 
 ```json
 {
@@ -209,11 +207,15 @@ This will generate a `launch.json` file which simply tells VS Code how to launch
 }
 ```
 
-Notice that it was able to detect that the app's startup script is `server.js`, and once again, we don't need to change anything in order to make debugging just work. With the `launch.json` file opened, click the big blue `Add Configuration...` button in the bottom right, and select `Chrome: Launch with userDataDir`.
+Note that Visual Studio Code was able to detect that the app's startup script is `server.js`. 
 
-![](./media/node-howto-e2e/add-chrome-config.png)
+With the `launch.json` file open, select **Add Configuration** (bottom right), and select **Chrome: Launch with userDataDir**.
 
-This adds a new run configuration for Chrome, which will allow us to debug our front-end JavaScript code. You can hover your mouse over any of the settings that are specified to view documentation about what they do. Additionally, notice that it automatically detected the URL of our app. Update the `webRoot` property to `${workspaceRoot}/public` so that the Chrome debugger will know where to find your front-end assets:
+![Adding a Chrome configuration to Visual Studio Code](./media/node-howto-e2e/add-chrome-config.png)
+
+Adding a new run configuration for Chrome allows you to debug the front-end JavaScript code. 
+
+You can hover your mouse over any of the settings that are specified to view documentation about what the setting does. Additionally, notice that Visual Studio Code automatically detects the URL of the app. Update the **webRoot** property to `${workspaceRoot}/public` so that the Chrome debugger will know where to find the app's front-end assets:
 
 ```json
 {
@@ -226,7 +228,9 @@ This adds a new run configuration for Chrome, which will allow us to debug our f
 }
 ```
 
-In order to launch/debug both the front and back-end at the same time, we need to create a "compound" run configuration, which tells VS Code which set of configurations to run in parallel. Add the following snippet as a top-level property within the `launch.json` file (as a sibling of the existing `configurations` property). The compound configuration concept is really powerful, as we'll discuss later!
+In order to launch/debug both the front and back-end at the same time, you need to create a *compound* run configuration that tells Visual Studio Code which set of configurations to run in parallel. 
+
+Add the following snippet as a top-level property within the `launch.json` file (as a sibling of the existing `configurations` property).
 
 ```json
 "compounds": [
@@ -237,41 +241,51 @@ In order to launch/debug both the front and back-end at the same time, we need t
 ]
 ```
 
-> Note: The string values specified in the `compounds.configurations` array simply refer to the `name` of individual entries in the list of `configurations`. If you've customized your names, then simply reflect that in the compound definition.
+The string values specified in the `compounds.configurations` array refer to the `name` of individual entries in the list of `configurations`. If you've modfied those names, you'll need to make the appropriate changes in the array. To see this in action, switch to the debug tab, and change the selected configuration to `Full-Stack` (the name of the compound configuration), and press **&lt;F5>** to run it.
 
-To see this in action, switch to the debug tab in VS Code, and change the selected configuration to `Full-Stack` (which is what we called the compound config, you can name it anything you want), and then hit `F5` to run it.
+![Running a configuration in Visual Studio Code](./media/node-howto-e2e/full-stack-profile.png)
 
-![](./media/node-howto-e2e/full-stack-profile.png)
+Running the configuration launches the Node.js app (as can be seen in the debug console output) and Chrome (configured to navigate to the Node.js app at `http://localhost:8080`).
 
-This launches the Node.js app (as can be seen in the debug console output), as well as Chrome, which is configured to navigate to the Node.js app at `http://localhost:8080`.
+Press **&lt;Ctrl>P**, and enter (or select) `todos.js`, which is the main Angular controller for the app's front-end. 
 
-Type `CTRL+P` and enter/select `todos.js`, which is the main Angular controller for the app's front-end. Set a breakpoint on line 11, which is the entry-point for a new todo being created.
+Set a breakpoint on line 11, which is the entry-point for a new todo entry being created.
 
-Go back to the running app, add a new todo, and you'll notice that VS Code has now suspended execution within the Angular code:
+Return to the running app, add a new todo entry, and notice that Visual Studio Code has now suspended execution within the Angular code.
 
-![](./media/node-howto-e2e/chrome-pause.png)
+![Debuggging front-end code in Visual Studio Code](./media/node-howto-e2e/chrome-pause.png)
 
-Just like with the Node.js debugging, you can hover over expressions, view locals/watches, evaluate expressions in the console, etc. However, there are two cools things to consider now:
+Like Node.js debugging, you can hover your mouse over expressions, view locals/watches, evaluate expressions in the console, and so on. 
+
+There are two cools things to note:
 
 1. The `Call Stack` pane displays two different stacks: `Node` and `Chrome`, and indicates which one is currently paused.
 
-2. You can step between front and back-end code! To test this, simply hit `F5`, which will run execution and hit the breakpoint we previously set in our Express route.
+1. You can step between front and back-end code. To test this, press **&lt;F5>**, which will run and hit the breakpoint previously set in the Express route.
 
-With this setup, we can now efficiently debug front, back or full-stack JavaScript code directly within VS Code. Going further, the compound debugger concept isn't limited to just two target processes, and also isn't just limited to JavaScript, so if you're working on a micro-service app, that is potentially polyglot, you can use the exact same workflow we did above, once you've installed the necessary extensions (e.g. Go, Ruby, PHP).
+With this setup, you can now efficiently debug front, back, or full-stack JavaScript code directly within Visual Studio Code. 
 
-## Dockerizing Your App
+In addition, the compound debugger concept is not limited to just two target processes, and also isn't just limited to JavaScript. Therefore, if work on a microservice app (that is potentially polyglot), you can use the exact same workflow (once you've installed the appropriate extensions for the language/framework).
 
-Speaking of microservices, let's take a look at the experience that VS Code provides for developing with Docker. Many Node.js devs are using Docker for providing portable app deployments for both development, CI and production environments. That said, we've heard lots of feedback that while the benefits of Docker are extremely high, the learning curve and cost of getting started can also be fairly high. VS Code provides an extension that tries to help simplify some of that onboarding!
+## Dockerizing the app
 
-Switch back to the extensions tab, search for `docker` and select the `Docker` extension. Install it and then reload VS Code, just like we did for the Chrome extension above.
+This section focuses on the experience that Visual Studio Code provides for developing with [Docker](https://www.docker.com/). Node.js developers use Docker to provide portable app deployments for both development, CI (continuous integration), and production environments. As Docker presents a steep-learning curve to some, Visual Studio Code provides an extension that tries to help simplify some using Docker in your apps.
 
-![](./media/node-howto-e2e/docker-search.png)
+Switch back to the **Extensions** tab, search for `docker`, and select the `Docker` extension. 
 
-This extension includes many things, one of which is a simple command for generating a `Dockerfile` and `docker-compose.yml` file for an existing project. To see this in action, type `F1` (to bring up the command palette) and type `docker` to display all of the commands that the Docker extension provides:
+Install the Docker extension, and then reload Visual Studio Code.
 
-![](./media/node-howto-e2e/docker-commands.png)
+![Installing the Docker extenion for Visual Studio Code](./media/node-howto-e2e/docker-search.png)
 
-Select the `Docker: Add docker files to workspace` command,  select `Node.js` as the app platform, and specify that the app exposes port `8080`. This generates a complete `Dockerfile` and Docker compose files that you can begin using immediately.
+The Docker extension for Visual Studio Code includes a command for generating a *Dockerfile* and the `docker-compose.yml` file for an existing project. 
+
+To see the available Docker commands, display the commnand palette (**&lt;F1>**), and type `docker`.
+
+![Commands supported by the Docker extension for Visual Studio ](./media/node-howto-e2e/docker-commands.png)
+
+Select **Docker: Add docker files to workspace**, select **Node.js** as the app platform, and specify that the app exposes port `8080`. 
+
+The Docker command generates a complete `Dockerfile` and Docker-compose files that you can begin using immediately.
 
 ![](./media/node-howto-e2e/docker-file.png)
 

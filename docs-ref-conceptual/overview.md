@@ -5,7 +5,7 @@ keywords: Azure, Node.js, SDK, API, management , client, services
 author: TomArcher
 ms.author: tarcher
 manager: douge
-ms.date: 06/09/2017
+ms.date: 06/17/2017
 ms.topic: article
 ms.prod: azure
 ms.devlang: nodejs

@@ -8,7 +8,7 @@ ms.author: tarcher
 ms.service: azure-nodejs
 ms.devlang: nodejs
 ms.topic: reference
-ms.date: 6/12/2017
+ms.date: 06/17/2017
 ---
 
 # Azure modules for Node.js

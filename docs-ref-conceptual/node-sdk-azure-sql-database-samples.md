@@ -5,7 +5,7 @@ keywords: Azure, Node, SDK, API, SQL database
 author: tomarcher
 manager: douge
 ms.author: tarcher
-ms.date: 06/07/2017
+ms.date: 06/17/2017
 ms.topic: article
 ms.prod: azure
 ms.devlang: nodejs

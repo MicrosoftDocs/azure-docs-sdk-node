@@ -50,7 +50,7 @@ Get started building great Node.js apps on Azure.
                     </div>
                     <div class="cardText">
                         <h2>Jenkins CI/CD</h2>
-                        <a href="/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd">Use Jenkins to deploy to Azure.</a>
+                        <a href="http://docs.microsoft.com/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd">Use Jenkins to deploy to Azure.</a>
                     </div>
                 </div>
             </div>
@@ -86,10 +86,10 @@ msRestAzure.interactiveLogin((err, credentials) => {
 ## Five-minute quickstarts
 Create and deploy a Node.js app to Azure in five minutes.
 <ul>
-   <li><a href="/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
-   <li><a href="/azure/app-service-api/app-service-api-nodejs-api-app">REST API</a></li>
-   <li><a href="/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
-   <li><a href="/azure/container-service/container-service-kubernetes-walkthrough">Docker and Kubernetes</a></li>
+   <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
+   <li><a href="http://docs.microsoft.com/azure/app-service-api/app-service-api-nodejs-api-app">REST API</a></li>
+   <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
+   <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Docker and Kubernetes</a></li>
 </ul>
 
 ## Tutorials and samples

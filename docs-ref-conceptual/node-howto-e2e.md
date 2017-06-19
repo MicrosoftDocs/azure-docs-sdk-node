@@ -9,7 +9,7 @@ ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
 ms.date: 06/18/2017
-ms.author: tarcher
+ms.author: joncart
 ---
 
 # Node.js development with Visual Studio Code and Azure

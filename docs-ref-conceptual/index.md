@@ -17,44 +17,61 @@ ms.service: azure-nodejs
 
 Get started building great Node.js apps on Azure.
 
-<ul class="panelContent">
+<ul class="cardsY panelContent">
     <li>
-        <div class="cardSize">
-            <div class="cardPadding">
-                <div class="card">
-                    <div class="cardText">
-                        <h2>Tools</h2>
-                        <a href="node-azure-tools.md">Download Azure tools and plugins.</a>
+        <a href="node-azure-tools.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="media/common/i_tools.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h2>Tools</h2>
+                            Download Azure tools and plugins.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </li><li>
-        <div class="cardSize">
-            <div class="cardPadding">
-                <div class="card">
-                    <div class="cardImageOuter">
-                    </div>
-                    <div class="cardText">
-                        <h2>npm modules</h2>
-                        <a href="node-sdk-azure-install.md">Use services and manage Azure resources.</a>
+        <a href="node-sdk-azure-install.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="media/common/i_reference.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h2>Libraries</h2>
+                            Use services and manage Azure resources.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </li><li>
-        <div class="cardSize">
-            <div class="cardPadding">
-                <div class="card">
-                    <div class="cardImageOuter">
-                    </div>
-                    <div class="cardText">
-                        <h2>Jenkins CI/CD</h2>
-                        <a href="http://docs.microsoft.com/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd">Use Jenkins to deploy to Azure.</a>
+        <a href="/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="media/common/i_deploy.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h2>Jenkins CI/CD</h2>
+                            Use Jenkins to deploy apps to Azure.
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </li>
 </ul>
 
@@ -62,7 +79,6 @@ Get started building great Node.js apps on Azure.
 Create and deploy a Node.js app to Azure in five minutes.
 <ul>
    <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
-   <li><a href="http://docs.microsoft.com/azure/app-service-api/app-service-api-nodejs-api-app">REST API</a></li>
    <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
    <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Docker and Kubernetes</a></li>
 </ul>
@@ -96,5 +112,5 @@ msRestAzure.interactiveLogin((err, credentials) => {
 Learn how to use Azure services in your Java apps.
 
 <ul>
-    <li><a href="node-howto-e2e.md">Node.js development with Visual Studio Code and Azure</a></li>
+    <li><a href="https://docs.microsoft.com/azure/app-service-web/app-service-web-tutorial-nodejs-mongodb-app">Node.js with MongoDB</a></li>
 </ul>

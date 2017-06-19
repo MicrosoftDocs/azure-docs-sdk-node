@@ -1,7 +1,7 @@
 ---
 title: Azure Database for PostgreSQL libraries for Node.js
 description: Create and manage PostgreSQL resources from your Node.js apps.
-keywords: Azure, Node, SDK, API, nodejs, javascript, database, MySQL
+keywords: Azure, Node, SDK, API, nodejs, javascript, database, PostgreSQL
 author: tomarcher
 ms.author: tarcher
 manager: douge
@@ -10,14 +10,14 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: mysql
+ms.service: postgresql
 ---
 
 # Azure Database for PostgreSQL libraries for Node.js
 
 ## Overview
 
-The recommended client library for accessing Azure Database for PostgreSQL is the open-source [Node.js connection library for Azure Database for MySQL](https://www.npmjs.com/package/pg). 
+The recommended client library for accessing Azure Database for PostgreSQL is the open-source [Node.js connection library for Azure Database for PostgreSQL](https://www.npmjs.com/package/pg). 
 This library is a non-blocking PostgreSQL client for Node.js, supporting pure JavaScript and optional native libpq bindings.
 
 Learn more about [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/)

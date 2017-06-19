@@ -289,6 +289,13 @@ The Docker command generates a complete `Dockerfile` and Docker-compose files th
 
 ![](./media/node-howto-e2e/docker-file.png)
 
+
+
+
+
+
+
+
 The Docker extension also provides auto-completion for your `Dockerfiles` and `docker-compose.yml` files, which makes authoring your Docker assets a lot simpler. For example, open up the `Dockerfile` and change line 2 from:
 
 ```docker

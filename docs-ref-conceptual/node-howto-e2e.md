@@ -33,7 +33,7 @@ In order to follow along with the demo, you'll need to have the following softwa
 
 ## Project setup
 
-To get started, we need to download the sample project using the following steps:
+To get started, you need to download the sample project using the following steps:
 
 1. Open Visual Studio Code.
 
@@ -151,7 +151,7 @@ Open a browser, and navigate to `http://localhost:8080` to see the running app. 
 
 ## Debugging
 
-In addition to being able to run the app and interact with it via the integrated console, Visual Studio Code provides the ability to set breakpoints directly within your code. For example, hit **&lt;Ctrl>P** to display the file picker. Once the file picker displays, type `route`, and select the `route.js` file.
+In addition to being able to run the app and interact with it via the integrated console, Visual Studio Code provides the ability to set breakpoints directly within your code. For example, press **&lt;Ctrl>P** to display the file picker. Once the file picker displays, type `route`, and select the `route.js` file.
 
 Set a breakpoint on line 28, which represents the Express route that is called when the app tries to add a todo entry. To set a breakpoint, simply click the area to the left of the line number within the editor as shown in the following figure.
 
@@ -168,7 +168,7 @@ Once the application has been paused, you can hover your mouse over the code's e
 
 ## Full-stack debugging
 
-As mentioned earlier in the topic, the TODO app is a MEAN app - meaning that its front-end and back-end are both written using JavaScript. So, while we're currently debugging the back-end (Node/Express) code, at some point, you may need to debug the front-end (Angular) code. For that purpose, Visual Studio Code has a huge ecosystem of extensions, including integrated Chrome debugging.
+As mentioned earlier in the topic, the TODO app is a MEAN app - meaning that its front-end and back-end are both written using JavaScript. So, while you're currently debugging the back-end (Node/Express) code, at some point, you may need to debug the front-end (Angular) code. For that purpose, Visual Studio Code has a huge ecosystem of extensions, including integrated Chrome debugging.
 
 Switch to the **Extensions** tab, and type `chrome` into the search box:
 

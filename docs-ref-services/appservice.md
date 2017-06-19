@@ -13,51 +13,36 @@ ms.devlang: nodejs
 ms.service: appservice
 ---
 
-# Azure Storage Node.js modules
+# Azure App Service Node.js modules
 
 ## Overview
 
-Use the Azure Storage client module to:
-
-- Read and write objects and files from [Azure Blob storage](https://docs.microsoft.com/azure/storage/storage-nodejs-how-to-use-blob-storage)
-- Send and receive messages between cloud-connected applications with [Azure Queue storage](https://docs.microsoft.com/azure/storage/storage-nodejs-how-to-use-queues)
-- Read and write large structured data with [Azure Table storage](https://docs.microsoft.com/azure/storage/storage-nodejs-how-to-use-table-storage) 
-
-Create, update, and manage Azure Storage accounts and query and regenerate access keys from your Node.js apps with the management libraries.
+Deploy, manage, and scale web apps, APIs, and mobile apps running in Azure App Service from your Node.js code using the management libraries. The management libraries also provide a Node.js interface for automating app configuration as an alternative to using the Azure Portal or CLI.
 
 ## Install modules with npm
 
 Use npm to install the Azure storage client or management modules.
 
-### Client 
-
-```
-npm install azure-storage
-```   
-
 ### Management
 
 ```
-npm install azure-arm-storage
+npm install azure-arm-website
 ```   
 
 ## Example
 
-Write a local file *data.txt* to an existing blob storage container.
+Create a website from Node.js
 
 ```javascript
-var azure = require('azure-storage');
-var blobService = azure.createBlobService(storageConnectionString);
- 
-blobService.createBlockBlobFromLocalFile('mycontainer', 'taskblob', 'data.txt', function(error, result, response) {
-  if (!error) {
-    // file uploaded
-  }
-});
+var parameters = {
+  location: location,
+  serverFarmId: expectedServerFarmId
+};
+webSiteClient.sites.createOrUpdateSite(resourceGroupName, webSiteName, parameters, callback);
 ```
 
 ## Samples
 
-[!INCLUDE [node-storage-samples](../docs-ref-conceptual/includes/storage-samples.md)]
+[!INCLUDE [node-appservice-samples](../docs-ref-conceptual/includes/appservice-samples.md)]
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

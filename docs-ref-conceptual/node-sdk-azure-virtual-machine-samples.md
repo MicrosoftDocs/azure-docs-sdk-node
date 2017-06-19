@@ -1,6 +1,6 @@
 ---
-title: Azure management modules for Node.js virtual machine samples
-description: Get sample code for creating and updating Azure virtual machines using the Azure management modules for Node.js
+title: Sample code for managing Azure virtual machines with Node.js
+description: Define, configure, and deploy new Windows and Linux virtual machines from your Node.js app.
 keywords: Azure, Node, SDK, API, virtual machines
 author: tomarcher
 manager: douge
@@ -12,5 +12,10 @@ ms.devlang: nodejs
 ms.service: azure-nodejs
 ---
 
-# Azure management modules for Node.js samples for virtual machines
+# Sample code for managing Azure virtual machines with Node.js
 
+The following sample code illustrate managing Azure virtual machines with Node.js.
+
+If you need code for other tasks, you can browse the full list of [Azure Node.js samples](https://azure.microsoft.com/resources/samples/?term=nodejs).
+
+[!INCLUDE [node-storage-samples](../docs-ref-conceptual/includes/virtualmachines-samples.md)]

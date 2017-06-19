@@ -56,4 +56,6 @@ msRestAzure.interactiveLogin((err, credentials) => {
 
 ## Samples
 
+[!INCLUDE [node-storage-samples](../docs-ref-conceptual/includes/virtualmachines-samples.md)]
+
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

@@ -58,8 +58,16 @@ Get started building great Node.js apps on Azure.
     </li>
 </ul>
 
-## Management APIs
+## Five-minute quickstarts
+Create and deploy a Node.js app to Azure in five minutes.
+<ul>
+   <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
+   <li><a href="http://docs.microsoft.com/azure/app-service-api/app-service-api-nodejs-api-app">REST API</a></li>
+   <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
+   <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Docker and Kubernetes</a></li>
+</ul>
 
+## Management APIs
 Create and manage Azure resources from your Node.js applications using the [Azure management modules for Node.js](node-sdk-azure-get-started.md). The following code snippet illustrates how to log in to Azure, create a management client, and list all VM images for the specified location, publisher, offer, and SKU.
 
 ```javascript
@@ -83,21 +91,10 @@ msRestAzure.interactiveLogin((err, credentials) => {
 });
 ```
 
-## Five-minute quickstarts
-Create and deploy a Node.js app to Azure in five minutes.
-<ul>
-   <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
-   <li><a href="http://docs.microsoft.com/azure/app-service-api/app-service-api-nodejs-api-app">REST API</a></li>
-   <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
-   <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Docker and Kubernetes</a></li>
-</ul>
+## Tutorials
 
-## Tutorials and samples
-
-Complete walkthroughs for app creation and deployment.
+Learn how to use Azure services in your Java apps.
 
 <ul>
-    <li><a href="node-sdk-azure-virtual-machine-samples.md">Virtual machines</a></li>
-    <li><a href="node-samples-services-web-and-mobile.md">Web Apps</a></li>
-    <li><a href="node-sdk-azure-sql-database-samples.md">SQL Database</a></li>
+    <li><a href="node-howto-e2e.md">Node.js development with Visual Studio Code and Azure</a></li>
 </ul>

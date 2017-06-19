@@ -39,7 +39,7 @@ To get started, we need to download the sample project using the following steps
 
 1. Press **&lt;F1>** to display the command palette.
 
-1. At the command palette prompt, enter `gitcl` to find the `Git: Clone` command and press **&lt;Enter>**.
+1. At the command palette prompt, enter `gitcl`, select the `Git: Clone` command, and press **&lt;Enter>**.
 
 	![gitcl command in the Visual Studio Code command palette prompt](media/node-howto-e2e/git-clone.png)
 
@@ -287,16 +287,11 @@ Select **Docker: Add docker files to workspace**, select **Node.js** as the app 
 
 The Docker command generates a complete `Dockerfile` and Docker-compose files that you can begin using immediately.
 
-![](./media/node-howto-e2e/docker-file.png)
+![Generated Dockerfile](./media/node-howto-e2e/docker-file.png)
 
+The Docker extension also provides auto-completion for your `Dockerfiles` and `docker-compose.yml` files. 
 
-
-
-
-
-
-
-The Docker extension also provides auto-completion for your `Dockerfiles` and `docker-compose.yml` files, which makes authoring your Docker assets a lot simpler. For example, open up the `Dockerfile` and change line 2 from:
+To see this in action, open the `Dockerfile` and change line 2 from:
 
 ```docker
 FROM node:latest
@@ -308,149 +303,151 @@ To:
 FROM mhart
 ```
 
-With your cursor after the `t` in `mhart`, hit `CTRL+Space` to view all of the image repositories that `mhart` has published on DockerHub.
+With your cursor positioned after the `t` in `mhart`, press **&lt;<Ctrl><Space>** to view all the image repositories that `mhart` has published on DockerHub.
 
-![](./media/node-howto-e2e/docker-completion.png)
+![Docker extension auto-completion](./media/node-howto-e2e/docker-completion.png)
 
-Select `mhart/alpine-node`, which a very efficient and small Linux distro and provides everything that this app needs, without any additional bloat (Alpine Linux is great for Docker!). Smaller images are typically better since you want your app builds and deployments to be as fast as possible, which makes distribution/scaling/etc. quick.
+Select `mhart/alpine-node`, which provides everything that this app needs. 
 
-Now that we have our `Dockerfile`, we need to build the actual Docker image. Once again, we can use a command that the Docker extension installed, by typing `F1` and entering `dockerb` (using "fuzzy search"). Select the `Docker: Build Image` command, choose the `/Dockerfile` that we just generated/edited, and then give a tag to the image which includes your DockerHub username (e.g. `lostintangent/node`). Hit `<ENTER>`, which will launch the integrated terminal window and display the output of your Docker image being built.
+Smaller images are typically better since you want your app builds and deployments to be as fast as possible, which makes distribution and scaling quicker.
 
-![](./media/node-howto-e2e/docker-build.png)
+Now, that you have generated the `Dockerfile`, you need to build the actual Docker image. Once again, you can use a command that the Docker extension installed in Visual Studio Code. Press **&lt;F1>**, enter `dockerb` at the command palette, and select the `Docker: Build Image` command. Choose the `/Dockerfile` that you just generated and modified. Specify a tag that includes your DockerHub username (e.g. `lostintangent/node`). Press **&lt;ENTER>** to launch the integrated terminal window that displays the output of your Docker image being built.
 
-Notice that the command simply automated the process of running `docker build` for you, which is another example of a productivity enhancer that you can either choose to use, or you can just use the Docker CLI directly. Whatever works best for you!
+![Docker image build status](./media/node-howto-e2e/docker-build.png)
 
-At this point, to make this image easily acquirable for deployments, we just need to push it to DockerHub. To do this, make sure you have already autheticated with DockerHub by running `docker login` from the CLI and entering your account credentials. Then, back in VS Code, you can bring up the command palette, enter `dockerpush` and select the `Docker: Push` command. Select the image tag that you just build (e.g. `lostintangent/node`) and hit `<ENTER>`. This will automate calling `docker push` and will display the output in the integrated terminal.
+Notice that the command automated the process of running `docker build` for you, which is another example of a productivity enhancer that you can either choose to use, or you can just use the Docker CLI directly. 
 
-> We plan to add support for logging in to container registries from the Docker extension for VS Code (e.g. via a `Docker: Login` command), with the goal of further simplifying the above experience.
+At this point, to make this image easily acquirable for deployments, you need only push the image to DockerHub. To do this, make sure you have already autheticated with DockerHub by running `docker login` from the CLI and entering your account credentials. Then, in Visual Studio Code, you can bring up the command palette, enter `dockerpush`, and select the `Docker: Push` command. Select the image tag that you just built (e.g. `lostintangent/node`) and press **&lt;Enter>**. The command automates the calling of `docker push` and displays the output in the integrated terminal.
 
-## Deploying Your App
+## Deploying your app
 
-Now that we have our app Dockerized and pushed to DockerHub, we need to actually deploy it to the cloud so we can show it off to the world. For this, we'll use Azure App Service, which is Azure's PaaS offering, and recently added two new capabilities which are relevant to Node.js developers:
+Now that you the app Dockerized and pushed to DockerHub, you need to deploy it to the cloud so the world can see it. For this, you can use Azure App Service, which is Azure's PaaS offering. App Service has two capabilities that are relevant to Node.js developers:
 
-1. Support for Linux-based VMs, which reduces incompatibilities for apps which are built using native Node modules, or other tools which might not support Windows and/or may behave differently.
+- Support for Linux-based VMs, which reduces incompatibilities for apps which are built using native Node modules, or other tools which might not support Windows and/or may behave differently.
+- Support for Docker-based deployments, which allows you to specify the name of your Docker image, and allow App Service to pull, deploy, and scale the image automatically.
 
-2. Support for Docker-based deployments, which allow you to simply specify the name of your Docker image, and allow App Service to pull, deploy and scale the image automatically.
+To get started, open up the Visual Studio terminal. You'll use the new Azure CLI 2.0 to manage your Azure account and provision the necessary infrastructure to run the todo app. Once you've logged into your account from the CLI using the `az login` command (as mentioned in the pre-reqs), perform the following steps to provision the App Service instance and deploy the todo app container:
 
-To get started, open up your terminal, and we'll use the new Azure CLI 2.0 to manage your Azure account and provision the necessary infrastructure to run the todo app. Once you've logged into your account from the CLI using the `az login` command (as mentioned in the pre-reqs), perform the following steps in order to provision the App Service instance and deploy the todo app container:
-
-1. Create a resource group, which you can think of as a "namespace" or "directory" for helping to organize Azure resources. The `-n` flag is the name of the group and can be specified as anything you want.
+1. Create a resource group, which you can think of as a *namespace* or *directory* for helping to organize Azure resources. The `-n` option is used to specify the name of the group and can be anything you want.
 
     ```shell
     az group create -n nina-demo -l westus
     ```
 
-    *Note: The `-l` flag indicates the location of the resource group. While in preview, the App Service on Linux support is only available in select regions, so if you aren't located in the Western US, and you want to check which other regions are available, simply run `az appservice list-locations --linux-workers-enabled` from the CLI to view your datacenter options.*
+    **Note:** The `-l` option indicates the location of the resource group. While in preview, the App Service on Linux support is available only in select regions. Therefore, if you aren't located in the Western US, and you want to check which other regions are available, run `az appservice list-locations --linux-workers-enabled` from the CLI to view your datacenter options.
 
-2. Set the newly created resource group as the default one, so that you can continue to use the CLI without needing to explicitly specify it:
+2. Set the newly created resource group as the default resource group so that you can continue to use the CLI without needing to explicitly specify the resource group with each CLI call:
 
    ```shell
    az configure -d group=nina-demo
    ```
    
-3. Create the App Service "plan", which will manage creating and scaling the underlying VMs that your app is deployed to. Once again, specify any value that you'd like for the name flag.
+3. Create the App Service *plan*, which manages the creation and scaling of the underlying virtual machines to which your app is deployed. Once again, specify any value that you'd like for the `n` option.
 
     ```shell
     az appservice plan create -n nina-demo-plan --is-linux
     ```
 
-    > Note: The --is-linux flag is key, since that is what indicates that you want Linux-based VMs. Without it, the CLI will provision Windows-based VMs.
+    **Note:** The --is-linux option is indicates that you want Linux-based virtual machines. Without it, the CLI defaults to provisioning Windows-based virtual machines.
 
-4. Create the App Service web app, which represents the actual todo app that will be running within the plan and resource group we just created. You can roughly think of a web app as being synonymous with a process or container, and the plan as being the VM/container host that they're running on. Additionally, as part of creating the web app, we'll configure it to use the Docker image that we just published to DockerHub:
+4. Create the App Service web app, which represents the actual todo app that will be running within the plan and resource group just created. You can think of a web app as being synonymous with a process or container, and the plan as being the virtual machine/container host that they're running on. Additionally, as part of creating the web app, you'll need to configure it to use the Docker image you published to DockerHub:
 
     ```shell
     az webapp create -n nina-demo-app -p nina-demo-plan -i lostintangent/node
     ``` 
     
-    > Note: If instead of using a custom container, you'd prefer to do Git deployment, check out the instructions for setting that up [here](https://docs.microsoft.com/en-us/azure/app-service-web/app-service-web-get-started-nodejs#configure-to-use-nodejs).
+    **Note:** If instead of using a custom container, you'd prefer a Git deployment, refer to the article, [Create a Node.js web app in Azure](https://docs.microsoft.com/en-us/azure/app-service-web/app-service-web-get-started-nodejs#configure-to-use-nodejs).
 
-5. Set the newly created web app as the default web instance, so that you can continue to use the CLI without needing to explicitly specify it:
+5. Set the web app as the default web instance:
 
     ```shell
     az configure -d web=nina-demo-app
     ```
 
-6. Launch the app to view the container that was just deployed, which will be available at an `*.azurewebsites.net` URL:
+6. Launch the app to view the deployed container, which will be available at an `*.azurewebsites.net` URL:
 
     ```shell
     az webapp browse
     ```
 
-    ![](./media/node-howto-e2e/browse-app.png)
+    ![Todo app running in the browser](./media/node-howto-e2e/browse-app.png)
 
-    > Note: This may take a minute to first load your app, since App Service has to pull your Docker image from DockerHub and then start it up.
+    **Note:** It may take few minutes to load app the first time as App Service has to pull the Docker image from DockerHub and then start it.
 
-Yay! We just deployed our app. However, the spinning icon indicates that the app can't connect to the database, which makes sense because we were using a local instance of MongoDB during development, which obviously isn't reachable from within the Azure datacenters. Fortunately, since we updated the app to accept the connection string via an environment variable, we just need to spin up a MongoDB server and re-configure the App Service instance to reference it.
+At this point, you've just deployed and run the todo app. 
+
+You have now deployed the todo app. However, the spinning icon indicates that the app can't connect to the database. This is due to the fact that you were using a local instance of MongoDB during development, which obviously isn't reachable from within the Azure datacenters. Since you modified the app to accept the connection string via an environment variable, you need only to start a MongoDB server and re-configure the App Service instance to reference the environment variable. This is illustrated in the next section.
 
 ## Provisioning a MongoDB Server
 
-While we could setup a MongoDB server, or replica set, and manage that infrastructure ourselves, Azure provides another solution called [Cosmos DB](https://azure.microsoft.com/en-us/services/documentdb/). Cosmos DB is a fully-managed, geo-replicable, high-performance, NoSQL database, which provides a MongoDB-compatibility layer. This means that you can point an existing MEAN app at it (or any MongoDB client/tool such as [Studio 3T](https://studio3t.com/)), without needing to change anything but the connection string! Let's take a look at how this works:
+While you could configure a MongoDB server, or replica set, and manage that infrastructure yourself, Azure provides a solution called [Cosmos DB](https://azure.microsoft.com/en-us/services/documentdb/). Cosmos DB is a fully-managed, geo-replicable, high-performance, NoSQL database that provides a MongoDB-compatibility layer. This means that you can point an existing MEAN app at it (or any MongoDB client/tool such as [Studio 3T](https://studio3t.com/)) without needing to change anything but the connection string. The following steps illustrate how this is done:
 
-1. Head back to your terminal, and run the following command in order to create a MongoDB-compatible instance of the Cosmos DB service. Feel free to name the instance whatever you'd like, by taking note to replace the `<NAME>` placeholder below with a globally unique value (Cosmos DB uses this name to generate the database's server URL):
+1. From the Visual Studio Code terminal, run the following command to create a MongoDB-compatible instance of the Cosmos DB service. Replace the **<NAME>** placeholder with a globally unique value (Cosmos DB uses this name to generate the database's server URL):
 
    ```shell
    COSMOSDB_NAME=<NAME>
    az cosmosdb create -n $COSMOSDB_NAME --kind MongoDB
    ```
 
-2. Retrieve the MongoDB connection string for this instance by running the following command:
+2. Retrieve the MongoDB connection string for this instance:
 
    ```shell
    MONGODB_URL=$(az cosmosdb list-connection-strings -n $COSMOSDB_NAME -otsv --query "connectionStrings[0].connectionString")
    ```
 
-3. Update your web app's `MONGODB_URL` environment variable, so that it connects to the newly provisioned Cosmos DB instance, instead of attempting to connect to a locally running MongoDB server (which doesn't exist!):
+3. Update your web app's **MONGODB_URL** environment variable so that it connects to the newly provisioned Cosmos DB instance instead of attempting to connect to a locally running MongoDB server (that doesn't exist!):
 
     ```shell
     az webapp config appsettings set --settings MONGODB_URL=$MONGODB_URL
     ```
 
-4. Return to your browser and refresh it. Try adding and removing a todo item, to prove that the app now works without needing to change anything! We simply set the environment variable to our created Cosmos DB instance, which is fully emulating a MongoDB database.
+4. Return to your browser and refresh it. Try adding and removing a todo item to prove that the app now works without needing to change anything! Set the environment variable to the created Cosmos DB instance, which is fully emulating a MongoDB database.
 
-    ![](./media/node-howto-e2e/finished-demo.png)
+    ![Demo app after connected to a database](./media/node-howto-e2e/finished-demo.png)
 
-When needed, we could switch back to the Cosmos DB instance, and scale up (or down) the reserved throughput that our MongoDB instance needs, and benefit from the added traffic without needing to manage any infrastructure manually.
+When needed, you can switch back to the Cosmos DB instance and scale up (or down) the reserved throughput that the MongoDB instance needs, and benefit from the added traffic without needing to manage any infrastructure manually.
 
-Additionally, Cosmos DB automatically indexes every single document and property for you, so you don't need to worry about  profiling slow queries and/or manually fine-tuning your indexes. Just provision and scale as needed, and let Cosmos DB handle the rest!
+Additionally, Cosmos DB automatically indexes every single document and property for you. That way, you don't need to profile slow queries or manually fine-tune your indexes. Just provision and scale as needed, and let Cosmos DB handle the rest.
 
 ## Hosting a Private Docker Registry
 
-DockerHub provides an amazing experience for distributing your container images, but there may be scenarios where you'd prefer to host your own private Docker registry, for security/governance and/or performance benefits. Azure provides the [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) (ACR), which allows you to spin up your own Docker registry, whose backing storage is located in the same data center as your web app (which makes pulls quicker!), and provides you with full control over its contents and access controls (e.g. who can push and/or pull images?). Provisioning a custom registry is as simple as running the following command, taking note to replace the `<NAME>` placeholder with a globally unique value (ACR uses this to generate the registry's login server URL):
+DockerHub provides an amazing experience for distributing your container images, but there may be scenarios where you'd prefer to host your own private Docker registry - such as for security/governance or performance benefits. For this purpose, Azure provides the [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) (ACR) that allows you to spin up your own Docker registry whose backing storage is located in the same data center as your web app (which makes pulls quicker). The ACR also provides you with full control over the contents and access controls - such as who can push or pull images. 
+
+Provisioning a custom registry can be accomplished by running the following command. (Replace the **<NAME>** placeholder with a globally unique value as ACR uses specified value to generate the registry's login server URL.
 
 ```shell
 ACR_NAME=<NAME>
 az acr create -n $ACR_NAME -l westus --admin-enabled
 ```
 
-> The "admin account" isn't the recommended authentication solution for production registries, however, for the sake of experimentation and simplicity, we're going with that. The output of creating your ACR instance will actually instruct you on how to create a "service principal" in Azure Active Directory, so feel free to go off the happy path using that guidance.
+> [!NOTE]
+> While this topic's example uses the **admin account** to keep things simple, it is not recommended for production registries. 
 
-After running this, it will display the login server URL (via the `LOGIN SERVER` column) which you'll use to login to it using the Docker CLI (e.g. `ninademo.azurecr.io`). Additionally, it generated admin credentials that you can use in order to authenticate against it. To retrieve these credentials, run the following command and grab the displayed username and password:
+The `az acr create` commands displays the login server URL (via the `LOGIN SERVER` column) that you use to log in using the Docker CLI (e.g. `ninademo.azurecr.io`). Additionally, the command generates admin credentials that you can use in order to authenticate against it. To retrieve those credentials, run the following command and note the displayed username and password:
 
 ```shell
 az acr credential show -n $ACR_NAME
 ```
 
-Using these credentials, and your individual login server, you can login to the registry using the standard Docker CLI workflow:
+Using the credentials from the previous step, and your individual login server, you can log in to the registry using the standard Docker CLI workflow.
 
 ```shell
 docker login <LOGIN_SERVER> -u <USERNAME> -p <PASSWORD>
 ```
 
-You can now tag your Docker container to indicate that it's associated with your private registry, using the following command (replacing `lostintangent/node` with whatever name you gave to the container image previously):
+You can now tag your Docker container to indicate that it's associated with your private registry using the following command (replacing `lostintangent/node` with the name you gave the container image.
 
 ```shell
 docker tag lostintangent/node <LOGIN_SERVER>/lostintangent/node
 ```
 
-Finally, you can push this newly-tagged image to your private Docker registry:
+Finally, push the tagged image to your private Docker registry.
 
 ```shell
 docker push <LOGIN_SERVER>/lostintangent/node
 ```
 
-> Alternatively, you could use the `Docker: Tag Image` and `Docker: Push` commands via the VS Code command pallette, so just go with your preferred workflow. I chose to use the CLI for these steps since we were already in the terminal.
-
-Your container is now stored in your own private registry, and the Docker CLI was happy to allow you to continue working in the same way as you did when using DockerHub. In order to instruct the App Service web app to pull from your private registry, you simply need to run the following command:
+Your container is now stored in your own private registry, and the Docker CLI was happy to allow you to continue working in the same way as you did when using DockerHub. In order to instruct the App Service web app to pull from your private registry, you need only run the following command:
 
 ```shell
 az appservice web config container set \
@@ -460,66 +457,63 @@ az appservice web config container set \
     -p <PASSWORD> 
 ```
 
-> Make sure to add the `https://` prefix to the beginning of the `-r` parameter, as App Service currently expects it. However, don't add this to the container image name.
+**Note:** Make sure to add the `https://` prefix to the beginning of the `-r` option. However, don't add the prefix to the container image name.
 
-If you refresh the app in your browser, everything should look and work the same, however, it's now running your app via your private Docker registry! Once you update your app, simply tag and push the changes as done above, and update the tag in your App Service container configuration.
+If you refresh the app in your browser, everything should look and work the same. However, it's now running your app via your private Docker registry. Once you update your app, tag and push the changes as done above, and update the tag in your App Service container configuration.
 
 ## Configuring a custom domain name
 
-While the `*.azurewebsites.net` URL is cool for testing, at some point, you'll likely want to add a custom domain name to your web app. Once you've already purchased your domain from a registrar, you simply need to add an `A` record to it, that points at your web app's external IP (which is actually a load balancer). You can retrieve this IP by running the following command:
+While the `*.azurewebsites.net` URL is great for testing, at some point you may want to add a custom domain name to your web app. Once you have a domain name from a registrar, you need only add an `A` record to it  that points at your web app's external IP (which is actually a load balancer). You can retrieve this IP by running the following command:
 
 ```shell
 az webapp config hostname get-external-ip
 ```
 
-In addition to add an `A` record, you also need to add a `TXT` record to your domain, that points at the `*.azurewebsites.net` domain we've been using thus far. These two records are what allows Azure to verify that you actually own the domain.
+In addition to add an `A` record, you also need to add a `TXT` record to your domain that points at the `*.azurewebsites.net` domain you've been using thus far. The combination of the `A` and `TXT` records allows Azure to verify that you own the domain.
 
-Once those records are created, and you've waited a litte while for the DNS changes to propagate (~1 hour), register the custom domain with Azure,so that it knows to expect the incoming traffic correctly. You can do this by simply running the following command:
+Once those records are created - and the DNS changes have propagated - register the custom domain with Azure so that it knows to expect the incoming traffic correctly. 
 
 ```shell
 az webapp config hostname add --hostname <DOMAIN>
 ```
 
-> Note: If the DNS changes haven't propagated yet, the above command will fail. Simply wait a little while and re-run it later.
+**Note:** The command will not work until the DNS changes have propagated.
 
-Now, once you navigate to your custom domain in a browser, you'll notice that it resolves to your deployed app on Azure!
+Open a browser and navigate to your custom domain to see that it now resolves to your deployed app on Azure.
 
 ## Scaling up and out
 
-At some point, your web app may become popular enough that its allocated resources (CPU and RAM) aren't sufficient for handling the increase in traffic/operational demands. The App Service Plan that we created above (`B1`) comes with 1 CPU core and 1.75 GB of RAM, which as you can imagine, can get maxed out fairly quickly. The `B2` plan comes with twice as much RAM and CPU, so if you notice that your app is beginning to run out of either, you could "scale up" the underlying VM by running the following command:
+At some point, your web app may become popular enough that its allocated resources (CPU and RAM) aren't sufficient for handling the increase in traffic and operational demands. The App Service Plan that you created earlier (`B1`) comes with 1 CPU core and 1.75 GB of RAM, which can get maxed out fairly quickly. The `B2` plan come swith twice as much RAM and CPU, so if you notice that your app is beginning to run out of either, you can scale up the underlying virtual machine by running the following command:
 
 ```shell
 az appservice plan update -n nina-demo-plan --sku B2
 ```
 
-> Note: Check out [this page](nina-demo-plan) to view the pricing details and specs of each App Service Plan SKU.
+**Note:** For Azure App Plan pricing details and specs, see the article, [App Service Pricing](https://azure.microsoft.com/en-us/pricing/details/app-service/)
 
-After just a few moments, your web app will be migrated to the requested hardware, and can begin taking advantage of the associated resources. In addition to scaling up, you can also scale down by running the same command as above, but specifying a `--sku` that provides less resources, at a lower price. This way, you can ensure that your app has exactly what it needs. Nothing more and nothing less (depending on how much "buffer" you want to allocate).
+After just a few moments, your web app will be migrated to the requested hardware, and can begin taking advantage of the associated resources. In addition to scaling up, you can also scale down by running the same command as above, specifying a `--sku` option that provides less resources at a lower price. 
 
-In addition to scaling the VM specs up, as long as your web app is stateless, you also have the option to "scale out", by adding more underlying VM instances. The App Service Plan that we created above only included a single VM (a "worker"), and therefore, all incoming traffic is ultimately bound by the limits of the available resources of that one instance. If we wanted to add a second VM instance, we could run the same command as above, but instead of scaling up the SKU, we can scale out the number of worker VMs:
+In addition to scaling up the virtual machine specs, as long as your web app is stateless, you also have the option to *scale out* by adding more underlying virtual machine instances. The App Service Plan you created earlier included only a single virtual machine (a *worker*), and therefore, all incoming traffic is ultimately bound by the limits of the available resources of that one instance. If you want to add a second virtual machine instance, you could run the same command you ran earlier, but instead of scaling up the SKU, you scale out the number of worker virtual machines.
 
 ```shell
 az appservice plan update -n nina-demo-plan --number-of-workers 2
 ```
 
-When you scale a web app out like this, incoming traffic will be transparently load balanced between all instances, which allows you to immediately increase your capacity, without having to make any code changes, or worry about the needed infrastructure. This scaling simplicity is why stateless web apps are considered a best practice, since it makes the ability to scale them up, down, out, etc. entirely deterministic, since no single VM/app instance includes state that is neccessary in order to function. If you push all of your app's state (and associated complexity!) into PaaS database, and allow someone else to manage it for you (e.g. Cosmos DB, managed Redis), you'll likely be much happier in the long run!
+When you scale out a web app like this, incoming traffic will be transparently load balanced between all instances, which allows you to immediately increase your capacity without any code changes or worrying about the needed infrastructure. 
 
-> Note: While this tutorial only illustrates running a single web app as part of an App Service Plan, you can actually create and deploy multiple web apps into the same plan. This allows you to provision/pay for a single plan (which is ultimately a cluster of homogenous VMs, determine by the plan's SKU/worker count), and make the most use of them. 
+Stateless web apps are considered a best practice as they make the ability to scale them (up, down, out) entirely deterministic as no single virtual machine or app instance includes state that is neccessary in order to function. 
+
+> [!NOTE]
+> While this topic's tutorial illustrates running a single web app as part of an App Service Plan, you can create and deploy multiple web apps into the same plan, allowing you to provision and pay for a single plan. 
 
 ## Clean-up
 
-To ensure that you don't get charged for any Azure resources you aren't using, simply run the following command from your terminal to delete all of the resources we just provisioned:
+To ensure that you don't get charged for any Azure resources you aren't using, run the following command from your Visual Studio Code terminal to delete all of the resources provisioned during this tutorial.
 
 ```shell
 az group delete
 ```
 
-This will take a few minutes to complete, but when done, will leave your Azure account in the same state as it was before we started. This ability to organize, deploy and delete Azure resources as a single unit is one of the primary benefits of resource groups in the first place, so in the future, if you use Azure, I would recommend grouping resources together that you'd expect to have the same lifetime.
+**Note:** The clean-up process can take several minutes to complete. 
 
-## Conclusion
-
-Hopefully this demo illustrated some of the ways that Visual Studio Code and Azure are trying to help improve the overall Node.js development experience. Between debugging that supports full-stack and microservices, a rich authoring experience that provides navigation and auto-completion without any further configuration, and a large ecosystem of extensions such as Docker, that can enhance your feedback loop for other app types and practices, we're excited to keep evolving what productivity can look like from within a lightweight editor.
-
-Additionally, between the Azure CLI, App Service and Cosmos DB, we're trying to provide a productive and low-management cloud stack for Node.js/MEAN apps that can scale as needed, without introducing additional infrastructure complexity.
-
-Additionally, we hope to use this demo to continue iterating on the overall Node.js experience in both VS Code and Azure, so we can make it simpler and more flexible. If you have any questions or feedback for how we can improve things, please don't hesitate to file an issue on this repo or send me an [e-mail](mailto:joncart@microsoft.com). 
+Once finished, the `az group delete` command leaves your Azure account in the same state it was before you started the tutorial. The ability to organize, deploy, and delete Azure resources as a single unit is one of the primary benefits of resource groups. Therefore, as a recommended practice,  you should group your resources together that you anticipate having the same lifespan.

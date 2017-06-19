@@ -98,6 +98,6 @@ Complete walkthroughs for app creation and deployment.
 
 <ul>
     <li><a href="node-sdk-azure-virtual-machine-samples.md">Virtual machines</a></li>
-    <li><a href="node-sdk-azure-web-apps-samples.md">Web Apps</a></li>
+    <li><a href="node-samples-services-web-and-mobile.md">Web Apps</a></li>
     <li><a href="node-sdk-azure-sql-database-samples.md">SQL Database</a></li>
 </ul>

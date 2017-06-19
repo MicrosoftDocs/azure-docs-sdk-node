@@ -99,7 +99,7 @@ blobService.listBlobsSegmented('testcontainer', null, function(error, result, re
 The following samples cover common tasks with the Azure management modules and have code ready to use in your own apps:
 
 - [Virtual machines](node-sdk-azure-virtual-machine-samples.md)
-- [Web apps](node-sdk-azure-web-apps-samples.md)
+- [Web apps](node-samples-services-web-and-mobile.md)
 - [SQL Database](node-sdk-azure-sql-database-samples.md)
    
 A [reference](https://docs.microsoft.com/nodejs/api) is available for all modules in both the service and management modules. New features, breaking changes, and migration instructions from previous versions are available in the [release notes](node-sdk-azure-release-notes.md).

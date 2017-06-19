@@ -81,7 +81,7 @@ az account show
 Export the subscription ID as an environment variable
 
 ```bash
-export AZURE_SUB = 3069ff33-0398-4a99-a42b-f6613d1664ac
+export AZURE_SUB 3069ff33-0398-4a99-a42b-f6613d1664ac
 ```
 
 ## Create a new virtual machine
@@ -97,7 +97,7 @@ const NetworkManagementClient = require('azure-arm-network');
 
 MsRest.loginWithServicePrincipalSecret(
     process.env.AZURE_ID, process.env.AZURE_PASS, process.env.AZURE_TENANT, (err, credentials) => {
-        
+
         const networkClient = new NetworkManagementClient(credentials, process.env.AZURE_SUB);
         const computeClient = new ComputeManagementClient(credentials, process.env.AZURE_SUB);
 
@@ -127,6 +127,7 @@ MsRest.loginWithServicePrincipalSecret(
             osProfile: {
                 computerName: "newLinuxVM",
                 adminUsername: "testadmin",
+                adminPassword: "[B5^3{Ds"
             },
             hardwareProfile: {
                 vmSize: 'Basic_A1'
@@ -134,7 +135,6 @@ MsRest.loginWithServicePrincipalSecret(
             networkProfile: {
                 networkInterfaces: [
                     {
-                        id: vmNetworkInterface.id,
                         primary: true
                     }
                 ]
@@ -149,34 +149,121 @@ MsRest.loginWithServicePrincipalSecret(
             }
         };
 
+        let publicIPParameters = {
+            location: "eastus",
+            publicIPAllocationMethod: 'Dynamic'
+        };
+
         networkClient.virtualNetworks.createOrUpdate("myResourceGroup", "mynodevnet", vnetParameters)
             .then(function (vnetwork) {
                 networkClient.subnets.get("myResourceGroup", "mynodevnet", "mynodesubnet")
-                    .then(function (subnetinfo) {
+                    .then(function (subnetInfo) {
                         nicParameters.ipConfigurations[0].subnet = subnetInfo;
-                        networkClient.networkInterfaces.createOrUpdate("myResourceGroup", "vmnetinterface", nicParameters)
-                            .then(function (vmNetworkInterface) {
-                                vmParameters.networkProfile.networkInterfaces[0].id = vmNetworkInterface.id;
-                                computeClient.virtualMachines.createOrUpdate("myResourceGroup", "newLinuxVM", vmParameters, (err, data) => {
-                                    if (err) return console.log(err);
-                                    console.log("Created newLinuxVM");
-                                });
+                        networkClient.publicIPAddresses.createOrUpdate("myResourceGroup", "myLinuxPublicIP", publicIPParameters)
+                            .then(function (publicIP) {
+                                nicParameters.ipConfigurations[0].publicIPAddress = publicIP;
+                                networkClient.networkInterfaces.createOrUpdate("myResourceGroup", "vmnetinterface", nicParameters)
+                                    .then(function (vmNetworkInterface) {
+                                        vmParameters.networkProfile.networkInterfaces[0].id = vmNetworkInterface.id;
+                                        computeClient.virtualMachines.createOrUpdate("myResourceGroup", "newLinuxVM", vmParameters, (err, data) => {
+                                            if (err) return console.log(err);
+                                            console.log("Created new Linux VM");
+                                        });
+                                    });
                             });
-                    })
-            })
+                    });
+            });
     });
-
 ```
 
+Run the code from the command line:
 
-## Deploy a web app from a Docker Hub image
+```bash
+node createVM.js
+```
+
+Once the code completes, get the IP of your new virtual machine and log in with SSH using the value for `adminPassword` from your code.
+
+```azurecli-interactive
+az vm list-ip-addresses --name newLinuxVM
+```
+
+```bash
+ssh testadmin@*vm_ip_address*
+```
 
 ## Write a blob to Azure Storage
 
+Create a new file *uploadFile.js* in the current directory with the following code.
+
+```javascript
+'use strict'
+
+const MsRest = require('ms-rest-azure');
+const storage = require('azure-storage');
+const storageManagementClient = require('azure-arm-storage');
+
+MsRest.loginWithServicePrincipalSecret(process.env.AZURE_ID, process.env.AZURE_PASS, process.env.AZURE_TENANT, (err, credentials) => {
+    const client = new storageManagementClient(credentials, process.env.AZURE_SUB);
+
+    const createParameters = {
+        location: 'eastus',
+        sku: {
+            name: 'Standard_LRS'
+        },
+        kind: 'BlobStorage',
+        accessTier: 'Hot'
+    };
+
+    const blobAccountName = "nodedemo" + Math.random().toString(10).substr(4, 7);
+
+    client.storageAccounts.create("myResourceGroup", blobAccountName, createParameters, (err, result, httpRequest, response) => {
+        if (err) console.log(err);
+
+        // get a connection string for the account
+        client.storageAccounts.listKeys("myResourceGroup", blobAccountName, (err, result) => {
+            if (err) console.log(err);
+
+            // get a storage key and use it to connect to the azure-storage module
+            const blobSvc = storage.createBlobService(blobAccountName, result.keys[0].value);
+            blobSvc.createContainerIfNotExists('mycontainer', { publicAccessLevel: 'blob' }, function (error, result, response) {
+                if (!error) {
+                    blobSvc.createBlockBlobFromText('mycontainer', 'myblob', 'Hello Azure!', function (error, result, response) {
+                        if (!error) {
+                            console.log("File uploaded to " + "https://" + blobAccountName + ".blob.core.windows.net/mycontainer/myblob");
+                        }
+                    });
+                }
+            });
+
+        });
+    });
+});
+```
+
+Run the command and copy and paste the URL from the output in your web browser to view the file in Azure Storage:
+
+```bash
+node uploadFile.js
+```
+
 ## Clean up resources
 
-## Samples and reference
+Delete the resource group to remove the resources created in this quickstart.
+
+```azurecli-interactive
+az group delete --name myResourceGroup
+```
+
+## Next steps
+
+Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+
+## Reference 
+
+A [reference](/nodejs/api/overview/azure/?view=azure-node-2.0.0) is available for all packages.
 
 ## Get help and give feedback
 
+Post questions to the community on [Stack Overflow](https://stackoverflow.com/questions/tagged/azure+node.js). Report bugs and open issues against the Azure libraries for Java on the [project GitHub](https://github.com/Azure/azure-sdk-for-node).
 

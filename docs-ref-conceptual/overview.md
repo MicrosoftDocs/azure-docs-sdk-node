@@ -98,7 +98,7 @@ blobService.listBlobsSegmented('testcontainer', null, function(error, result, re
 
 The following samples cover common tasks with the Azure management modules and have code ready to use in your own apps:
 
-- [Virtual machines](node-sdk-azure-virtual-machine-samples.md)
+- [Virtual machines](node-samples-services-compute.md)
 - [Web apps](node-samples-services-web-and-mobile.md)
 - [SQL Database](node-sdk-azure-sql-database-samples.md)
    

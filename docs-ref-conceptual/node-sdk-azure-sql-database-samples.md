@@ -12,5 +12,6 @@ ms.devlang: nodejs
 ms.service: azure-nodejs
 ---
 
-
 # Azure management modules for Node.js samples for SQL Database
+
+[!INCLUDE [node-appservice-samples](../docs-ref-conceptual/includes/sql-samples.md)]

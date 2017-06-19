@@ -10,19 +10,14 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: storage
+ms.service: active-directory
 ---
 
 # Azure Active Directory Node.js modules
 
 ## Overview
 
-Use the Azure Storage client module to:
-
-- Create, update, and manage Azure Storage accounts and query and regenerate access keys from your Node.js apps with the management libraries.
-- Sign-on users to web apps and control access to API and applications with Azure Active Directory. The [Azure Active Directory authentication library (ADAL) for Node.js](https://github.com/AzureAD/azure-activedirectory-library-for-nodejs) provides a Node.js interface to set up OAuth2, OpenID Connect, Active Directory Graph API authentication flow, and provides support for single sign-on with [SAML 2.0](https://docs.microsoft.com/azure/active-directory/develop/active-directory-saml-protocol-reference).
-- Provide an interface to configure [role based access control](https://docs.microsoft.com/azure/active-directory/role-based-access-control-what-is) and assign identities (such as users and [service principals](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-application-objects)) to those roles.
-
+The Azure Active Directory Authentication Library (ADAL) for Node.js enables Node.js applications to authenticate to AAD in order to access AAD protected web resources.
 
 ## Install modules with npm
 

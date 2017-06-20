@@ -131,7 +131,7 @@ As with the previous code, you'll notice that you get autocompletion without any
 
 You can see which libraries support this auto-complete capability by browsing the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) project, which is the community-driven source of all TypeScript type definitions.
 
-## Running The app
+## Running the app
 
 Once you've explored the code a bit, it's time to run the app. To run the app from Visual Studio Code, press **&lt;F5>**. When running the code via **&lt;F5>** (debug mode), Visual Studio Code launches the app and displays the **Debug Console** window that displays stdout for the app.
 
@@ -359,7 +359,7 @@ To get started, open up the Visual Studio terminal. You'll use the new Azure CLI
     ``` 
 
     > [!NOTE]
-    > If instead of using a custom container, you'd prefer a Git deployment, refer to the article, [Create a Node.js web app in Azure](https://docs.microsoft.com/en-us/azure/app-service-web/app-service-web-get-started-nodejs#configure-to-use-nodejs).
+    > If instead of using a custom container, you'd prefer a Git deployment, refer to the article, [Create a Node.js web app in Azure](https://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs#configure-to-use-nodejs).
 
 5. Set the web app as the default web instance:
 
@@ -384,7 +384,7 @@ You have now deployed the todo app. However, the spinning icon indicates that th
 
 ## Provisioning a MongoDB Server
 
-While you could configure a MongoDB server, or replica set, and manage that infrastructure yourself, Azure provides a solution called [Cosmos DB](https://azure.microsoft.com/en-us/services/documentdb/). Cosmos DB is a fully-managed, geo-replicable, high-performance, NoSQL database that provides a MongoDB-compatibility layer. This means that you can point an existing MEAN app at it (or any MongoDB client/tool such as [Studio 3T](https://studio3t.com/)) without needing to change anything but the connection string. The following steps illustrate how this is done:
+While you could configure a MongoDB server, or replica set, and manage that infrastructure yourself, Azure provides a solution called [Cosmos DB](https://azure.microsoft.com/services/documentdb/). Cosmos DB is a fully-managed, geo-replicable, high-performance, NoSQL database that provides a MongoDB-compatibility layer. This means that you can point an existing MEAN app at it (or any MongoDB client/tool such as [Studio 3T](https://studio3t.com/)) without needing to change anything but the connection string. The following steps illustrate how this is done:
 
 1. From the Visual Studio Code terminal, run the following command to create a MongoDB-compatible instance of the Cosmos DB service. Replace the **<NAME>** placeholder with a globally unique value (Cosmos DB uses this name to generate the database's server URL):
 
@@ -415,7 +415,7 @@ Additionally, Cosmos DB automatically indexes every single document and property
 
 ## Hosting a Private Docker Registry
 
-DockerHub provides an amazing experience for distributing your container images, but there may be scenarios where you'd prefer to host your own private Docker registry - such as for security/governance or performance benefits. For this purpose, Azure provides the [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) (ACR) that allows you to spin up your own Docker registry whose backing storage is located in the same data center as your web app (which makes pulls quicker). The ACR also provides you with full control over the contents and access controls - such as who can push or pull images. 
+DockerHub provides an amazing experience for distributing your container images, but there may be scenarios where you'd prefer to host your own private Docker registry - such as for security/governance or performance benefits. For this purpose, Azure provides the [Azure Container Registry](https://azure.microsoft.com/services/container-registry/) (ACR) that allows you to spin up your own Docker registry whose backing storage is located in the same data center as your web app (which makes pulls quicker). The ACR also provides you with full control over the contents and access controls - such as who can push or pull images. 
 
 Provisioning a custom registry can be accomplished by running the following command. (Replace the **<NAME>** placeholder with a globally unique value as ACR uses specified value to generate the registry's login server URL.
 
@@ -496,7 +496,7 @@ az appservice plan update -n nina-demo-plan --sku B2
 ```
 
 > [!NOTE]
-> For Azure App Plan pricing details and specs, see the article, [App Service Pricing](https://azure.microsoft.com/en-us/pricing/details/app-service/)
+> For Azure App Plan pricing details and specs, see the article, [App Service Pricing](https://azure.microsoft.com/pricing/details/app-service/)
 
 After just a few moments, your web app will be migrated to the requested hardware, and can begin taking advantage of the associated resources. In addition to scaling up, you can also scale down by running the same command as above, specifying a `--sku` option that provides less resources at a lower price. 
 

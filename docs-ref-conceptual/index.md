@@ -25,7 +25,7 @@ Build great Node.js apps on Azure.
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="/media/common/i_tools.svg" alt="" />
+                                <img src="https://docs.microsoft.com/media/common/i_tools.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -43,7 +43,7 @@ Build great Node.js apps on Azure.
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="/media/common/i_reference.svg" alt="" />
+                                <img src="https://docs.microsoft.com/media/common/i_reference.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">

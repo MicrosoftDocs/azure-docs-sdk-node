@@ -15,7 +15,7 @@ ms.service: azure-nodejs
 
 # Azure for Node.js developers
 
-Get started building great Node.js apps on Azure.
+Build great Node.js apps on Azure.
 
 <ul class="cardsY panelContent">
     <li>
@@ -58,7 +58,7 @@ Get started building great Node.js apps on Azure.
 </ul>
 
 ## Five-minute quickstarts
-Create and deploy a Node.js app to Azure in five minutes.
+Create and deploy a sample app in five minutes.
 <ul>
    <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
    <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
@@ -90,7 +90,7 @@ Create and deploy a Node.js app to Azure in five minutes.
 </ul>
 
 ## Management APIs
-Create and manage Azure resources from your Node.js applications using the [Azure management modules for Node.js](node-sdk-azure-get-started.md). The following code snippet illustrates how to log in to Azure, create a management client, and list all VM images for the specified location, publisher, offer, and SKU.
+Install [Azure npm modules](node-sdk-azure-get-started.md) to manage Azure resources. 
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');
@@ -115,7 +115,7 @@ msRestAzure.interactiveLogin((err, credentials) => {
 
 ## Tutorials
 
-Learn how to use Azure services in your Java apps.
+Learn how to use Azure services in your Node.js apps.
 
 <ul>
     <li><a href="https://docs.microsoft.com/azure/app-service-web/app-service-web-tutorial-nodejs-mongodb-app">Node.js with MongoDB</a></li>

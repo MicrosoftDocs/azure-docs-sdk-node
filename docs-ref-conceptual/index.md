@@ -15,7 +15,7 @@ ms.service: azure-nodejs
 
 # Azure for Node.js developers
 
-Get started building great Node.js apps on Azure.
+Build great Node.js apps on Azure.
 
 <ul class="cardsY panelContent">
     <li>
@@ -25,7 +25,7 @@ Get started building great Node.js apps on Azure.
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="media/common/i_tools.svg" alt="" />
+                                <img src="https://docs.microsoft.com/media/common/i_tools.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -43,7 +43,7 @@ Get started building great Node.js apps on Azure.
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="media/common/i_reference.svg" alt="" />
+                                <img src="https://docs.microsoft.com/media/common/i_reference.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -54,37 +54,43 @@ Get started building great Node.js apps on Azure.
                 </div>
             </div>
         </a>
-    </li><li>
-        <a href="/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="media/common/i_deploy.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h2>Jenkins CI/CD</h2>
-                            Use Jenkins to deploy apps to Azure.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
     </li>
 </ul>
 
 ## Five-minute quickstarts
-Create and deploy a Node.js app to Azure in five minutes.
-<ul>
+Create and deploy a sample app in five minutes.
+<ul class="noBullet">
    <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
    <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
    <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Docker and Kubernetes</a></li>
 </ul>
 
+## Free PluralSight video training
+
+<ul class="panelContent cardsW">
+   <li>
+      <div class="cardSize">
+         <div class="cardPadding">
+            <div class="card">
+               <div class="cardImageOuter">
+                  <div class="cardImage">
+                     <a href="https://www.pluralsight.com/courses/developing-nodejs-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">
+                     <img alt="" src="https://docs.microsoft.com/en-us/azure/app-service-web/media/index/video-training-nodejs.png" data-linktype="external"></a>
+                  </div>
+               </div>
+               <div class="cardText">
+                  <p>
+                     <a href="https://www.pluralsight.com/courses/developing-nodejs-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">Developing with Node.js</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </li>
+</ul>
+
 ## Management APIs
-Create and manage Azure resources from your Node.js applications using the [Azure management modules for Node.js](node-sdk-azure-get-started.md). The following code snippet illustrates how to log in to Azure, create a management client, and list all VM images for the specified location, publisher, offer, and SKU.
+Install [Azure npm modules](node-sdk-azure-get-started.md) to manage Azure resources. 
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');
@@ -109,8 +115,8 @@ msRestAzure.interactiveLogin((err, credentials) => {
 
 ## Tutorials
 
-Learn how to use Azure services in your Java apps.
+Learn how to use Azure services in your Node.js apps.
 
-<ul>
+<ul class="noBullet">
     <li><a href="https://docs.microsoft.com/azure/app-service-web/app-service-web-tutorial-nodejs-mongodb-app">Node.js with MongoDB</a></li>
 </ul>

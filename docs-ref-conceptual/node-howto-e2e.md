@@ -41,13 +41,13 @@ To get started, you need to download the sample project using the following step
 
 1. At the command palette prompt, enter `gitcl`, select the `Git: Clone` command, and press **&lt;Enter>**.
 
-	![gitcl command in the Visual Studio Code command palette prompt](media/node-howto-e2e/git-clone.png)
+	![gitcl command in the Visual Studio Code command palette prompt](git-clone.png)
 
 1. When prompted for the **Repository URL**, enter `https://github.com/scotch-io/node-todo`, then press **&lt;Enter>**.
 
 1. Select (or create) the local directory into which you want to clone the project.
 
-	![Visual Studio Code explorer](./media/node-howto-e2e/explorer.png)
+    ![Visual Studio Code explorer](./media/node-howto-e2e/explorer.png)
 
 ## Integrated terminal
 

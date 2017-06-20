@@ -54,24 +54,6 @@ Get started building great Node.js apps on Azure.
                 </div>
             </div>
         </a>
-    </li><li>
-        <a href="/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd">
-            <div class="cardSize">
-                <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
-                            <div class="cardImage">
-                                <img src="/media/common/i_deploy.svg" alt="" />
-                            </div>
-                        </div>
-                        <div class="cardText">
-                            <h2>Jenkins CI/CD</h2>
-                            Use Jenkins to deploy apps to Azure.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
     </li>
 </ul>
 

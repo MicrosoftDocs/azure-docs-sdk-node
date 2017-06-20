@@ -20,15 +20,15 @@ ms.service: azure-nodejs
         <a href="node-azure-tools.md">
             <div class="cardSize">
                 <div class="cardPadding">
-                    <div class="card">
-                        <div class="cardImageOuter">
+                    <div class="card"  style="height: 84px">
+                        <div class="cardImageOuter"  style="margin-top: 12px">
                             <div class="cardImage">
                                 <img src="https://docs.microsoft.com/media/common/i_tools.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
-                            <h2>Tools</h2>
-                            Download Azure tools and plugins.
+                             <h3 style="margin-bottom: 0; font-size: 24px">Tools</h3>
+                            <p style="font-size: 1rem">Download Azure tools and plugins.</p>
                         </div>
                     </div>
                 </div>
@@ -39,14 +39,14 @@ ms.service: azure-nodejs
             <div class="cardSize">
                 <div class="cardPadding">
                     <div class="card">
-                        <div class="cardImageOuter">
+                        <div class="cardImageOuter"  style="margin-top: 12px">
                             <div class="cardImage">
                                 <img src="https://docs.microsoft.com/media/common/i_reference.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
-                            <h2>Modules</h2>
-                            Use services and manage Azure resources.
+                            <h3 style="margin-bottom: 0; font-size: 24px">Modules</h3>
+                            <p style="font-size: 1rem">Use services and manage Azure resources.</p>
                         </div>
                     </div>
                 </div>

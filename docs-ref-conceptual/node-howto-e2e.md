@@ -22,9 +22,9 @@ The tutorial makes use of a simple todo app created by and published by [Scotch.
 
 In order to follow along with the demo, you'll need to have the following software installed:
 
-- [Visual Studio Code Insiders Build](https://code.visualstudio.com/insiders) - The insider's build provides access to the latest bug fixes/feature enhancements (just like Chrome Canary builds), and is the same build that the Visual Studio Code team uses.
+- [Visual Studio Code](https://code.visualstudio.com/)
 - [Docker](https://www.docker.com/products/docker)
-- [DockerHub account] - You'll need to have a DockerHub account in order to publish the Docker images that will be created in this tutorial.
+- [DockerHub account](https://hub.docker.com/) - You'll need to have a DockerHub account in order to publish the Docker images that will be created in this tutorial.
 - [Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2)
 - [Azure account](https://azure.microsoft.com/free/)
 - [Yarn](https://yarnpkg.com/en/docs/install)
@@ -75,7 +75,7 @@ The following steps illustrate how to check the `yarn.lock` file into source con
 
 In order to orient ourselves within the codebase, let's play around with some examples of some of the navigation capabilities that Visual Studio Code provides.
 
-1. Type **&lt;Ctrl>p**.
+1. Press **&lt;Ctrl>P**.
 
 1. Enter `.js` to display all the JavaScript/JSON files in the project along with each file's parent directory 
 
@@ -121,9 +121,9 @@ Autocompetion works because Visual Studio Code uses TypeScript behind the scenes
 
 In addition to the built-in Node.js APIs, this auto-acquisition of typings also works for over 2,000 3rd party libraries, such as React, Underscore and Express. For example, in order to disable Mongoose from crashing the sample app if it can't connect to the configured MongoDB database instance, insert the following line of code at  line 13:
 
-	```javascript
-	mongoose.connection.on("error", () => { console.log("DB connection error"); });
-	```
+```javascript
+mongoose.connection.on("error", () => { console.log("DB connection error"); });
+```
 
 As with the previous code, you'll notice that you get autocompletion without any work on your part.
 
@@ -133,7 +133,7 @@ You can see which libraries support this auto-complete capability by browsing th
 
 ## Running The app
 
-Once you've explored the code a bit, it's time to run the app. To run the app from Visual Studio Code, press **&lt;<F5>**. When running the code via **&lt;<F5>** (debug mode), Visual Studio Code launches the app and displays the **Debug Console** window that displays stdout for the app.
+Once you've explored the code a bit, it's time to run the app. To run the app from Visual Studio Code, press **&lt;F5>**. When running the code via **&lt;F5>** (debug mode), Visual Studio Code launches the app and displays the **Debug Console** window that displays stdout for the app.
 
 ![Peek at a variable's definition](./media/node-howto-e2e/console.png)
 
@@ -303,7 +303,7 @@ To:
 FROM mhart
 ```
 
-With your cursor positioned after the `t` in `mhart`, press **&lt;<Ctrl><Space>** to view all the image repositories that `mhart` has published on DockerHub.
+With your cursor positioned after the `t` in `mhart`, press **&lt;Ctrl>&lt;Space>** to view all the image repositories that `mhart` has published on DockerHub.
 
 ![Docker extension auto-completion](./media/node-howto-e2e/docker-completion.png)
 
@@ -334,7 +334,8 @@ To get started, open up the Visual Studio terminal. You'll use the new Azure CLI
     az group create -n nina-demo -l westus
     ```
 
-    **Note:** The `-l` option indicates the location of the resource group. While in preview, the App Service on Linux support is available only in select regions. Therefore, if you aren't located in the Western US, and you want to check which other regions are available, run `az appservice list-locations --linux-workers-enabled` from the CLI to view your datacenter options.
+    > [!NOTE]
+    > The `-l` option indicates the location of the resource group. While in preview, the App Service on Linux support is available only in select regions. Therefore, if you aren't located in the Western US, and you want to check which other regions are available, run `az appservice list-locations --linux-workers-enabled` from the CLI to view your datacenter options.
 
 2. Set the newly created resource group as the default resource group so that you can continue to use the CLI without needing to explicitly specify the resource group with each CLI call:
 
@@ -348,15 +349,17 @@ To get started, open up the Visual Studio terminal. You'll use the new Azure CLI
     az appservice plan create -n nina-demo-plan --is-linux
     ```
 
-    **Note:** The --is-linux option is indicates that you want Linux-based virtual machines. Without it, the CLI defaults to provisioning Windows-based virtual machines.
+    > [!NOTE]
+    > The --is-linux option is indicates that you want Linux-based virtual machines. Without it, the CLI defaults to provisioning Windows-based virtual machines.
 
 4. Create the App Service web app, which represents the actual todo app that will be running within the plan and resource group just created. You can think of a web app as being synonymous with a process or container, and the plan as being the virtual machine/container host that they're running on. Additionally, as part of creating the web app, you'll need to configure it to use the Docker image you published to DockerHub:
 
     ```shell
     az webapp create -n nina-demo-app -p nina-demo-plan -i lostintangent/node
     ``` 
-    
-    **Note:** If instead of using a custom container, you'd prefer a Git deployment, refer to the article, [Create a Node.js web app in Azure](https://docs.microsoft.com/en-us/azure/app-service-web/app-service-web-get-started-nodejs#configure-to-use-nodejs).
+
+    > [!NOTE]
+    > If instead of using a custom container, you'd prefer a Git deployment, refer to the article, [Create a Node.js web app in Azure](https://docs.microsoft.com/en-us/azure/app-service-web/app-service-web-get-started-nodejs#configure-to-use-nodejs).
 
 5. Set the web app as the default web instance:
 
@@ -372,7 +375,8 @@ To get started, open up the Visual Studio terminal. You'll use the new Azure CLI
 
     ![Todo app running in the browser](./media/node-howto-e2e/browse-app.png)
 
-    **Note:** It may take few minutes to load app the first time as App Service has to pull the Docker image from DockerHub and then start it.
+    > [!NOTE]
+    > It may take few minutes to load app the first time as App Service has to pull the Docker image from DockerHub and then start it.
 
 At this point, you've just deployed and run the todo app. 
 
@@ -457,7 +461,8 @@ az appservice web config container set \
     -p <PASSWORD> 
 ```
 
-**Note:** Make sure to add the `https://` prefix to the beginning of the `-r` option. However, don't add the prefix to the container image name.
+> [!NOTE]
+> Make sure to add the `https://` prefix to the beginning of the `-r` option. However, don't add the prefix to the container image name.
 
 If you refresh the app in your browser, everything should look and work the same. However, it's now running your app via your private Docker registry. Once you update your app, tag and push the changes as done above, and update the tag in your App Service container configuration.
 
@@ -477,7 +482,8 @@ Once those records are created - and the DNS changes have propagated - register 
 az webapp config hostname add --hostname <DOMAIN>
 ```
 
-**Note:** The command will not work until the DNS changes have propagated.
+> [!NOTE]
+> The command will not work until the DNS changes have propagated.
 
 Open a browser and navigate to your custom domain to see that it now resolves to your deployed app on Azure.
 
@@ -489,7 +495,8 @@ At some point, your web app may become popular enough that its allocated resourc
 az appservice plan update -n nina-demo-plan --sku B2
 ```
 
-**Note:** For Azure App Plan pricing details and specs, see the article, [App Service Pricing](https://azure.microsoft.com/en-us/pricing/details/app-service/)
+> [!NOTE]
+> For Azure App Plan pricing details and specs, see the article, [App Service Pricing](https://azure.microsoft.com/en-us/pricing/details/app-service/)
 
 After just a few moments, your web app will be migrated to the requested hardware, and can begin taking advantage of the associated resources. In addition to scaling up, you can also scale down by running the same command as above, specifying a `--sku` option that provides less resources at a lower price. 
 
@@ -514,6 +521,7 @@ To ensure that you don't get charged for any Azure resources you aren't using, r
 az group delete
 ```
 
-**Note:** The clean-up process can take several minutes to complete. 
+> [!NOTE]
+> The clean-up process can take several minutes to complete. 
 
 Once finished, the `az group delete` command leaves your Azure account in the same state it was before you started the tutorial. The ability to organize, deploy, and delete Azure resources as a single unit is one of the primary benefits of resource groups. Therefore, as a recommended practice,  you should group your resources together that you anticipate having the same lifespan.

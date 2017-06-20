@@ -25,7 +25,7 @@ Get started building great Node.js apps on Azure.
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="media/common/i_tools.svg" alt="" />
+                                <img src="/media/common/i_tools.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -43,7 +43,7 @@ Get started building great Node.js apps on Azure.
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="media/common/i_reference.svg" alt="" />
+                                <img src="/media/common/i_reference.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -61,7 +61,7 @@ Get started building great Node.js apps on Azure.
                     <div class="card">
                         <div class="cardImageOuter">
                             <div class="cardImage">
-                                <img src="media/common/i_deploy.svg" alt="" />
+                                <img src="/media/common/i_deploy.svg" alt="" />
                             </div>
                         </div>
                         <div class="cardText">
@@ -81,6 +81,30 @@ Create and deploy a Node.js app to Azure in five minutes.
    <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
    <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
    <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Docker and Kubernetes</a></li>
+</ul>
+
+## Free PluralSight video training
+
+<ul class="panelContent cardsW">
+   <li>
+      <div class="cardSize">
+         <div class="cardPadding">
+            <div class="card">
+               <div class="cardImageOuter">
+                  <div class="cardImage">
+                     <a href="https://www.pluralsight.com/courses/developing-nodejs-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">
+                     <img alt="" src="https://docs.microsoft.com/en-us/azure/app-service-web/media/index/video-training-nodejs.png" data-linktype="external"></a>
+                  </div>
+               </div>
+               <div class="cardText">
+                  <p>
+                     <a href="https://www.pluralsight.com/courses/developing-nodejs-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">Developing with Node.js</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </li>
 </ul>
 
 ## Management APIs

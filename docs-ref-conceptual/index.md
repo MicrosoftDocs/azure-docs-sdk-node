@@ -38,7 +38,7 @@ ms.service: azure-nodejs
         <a href="node-sdk-azure-install.md">
             <div class="cardSize">
                 <div class="cardPadding">
-                    <div class="card">
+                    <div class="card" style="height: 84px">
                         <div class="cardImageOuter"  style="margin-top: 12px">
                             <div class="cardImage">
                                 <img src="https://docs.microsoft.com/media/common/i_reference.svg" alt="" />

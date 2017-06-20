@@ -1,5 +1,5 @@
 ---
-title: Azure App Service libraries for Node.js
+title: Azure App Service modules for Node.js
 description: Deploy, manage, and scale web apps, APIs, and mobile apps running in Azure App Service from your Node.js code
 keywords: Azure, Node, SDK, API, web apps , mobile , nodejs, javascript
 author: tomarcher
@@ -17,7 +17,7 @@ ms.service: appservice
 
 ## Overview
 
-Deploy, manage, and scale web apps, APIs, and mobile apps running in Azure App Service from your Node.js code using the management libraries. The management libraries also provide a Node.js interface for automating app configuration as an alternative to using the Azure Portal or CLI.
+Deploy, manage, and scale web apps, APIs, and mobile apps running in Azure App Service from your Node.js code using the management modules. The management modules also provide a Node.js interface for automating app configuration as an alternative to using the Azure Portal or CLI.
 
 ## Install modules with npm
 

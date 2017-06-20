@@ -3,18 +3,14 @@ items:
   - uid: azure-arm-network.ApplicationGateways
     id: azure-arm-network.ApplicationGateways
     name: ApplicationGateways
-    summary: |-
-      ApplicationGateways
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the NetworkManagementClient.
-      Initializes a new instance of the ApplicationGateways class.
+    summary: Class representing a ApplicationGateways.
     fullName: azure-arm-network.ApplicationGateways
     source:
       id: azure-arm-network.ApplicationGateways
       path: lib\services\networkManagement2\lib\operations\applicationGateways.js
-      startLine: 2070
+      startLine: 2625
       remote:
-        branch: master
+        branch: jsdoc
         path: lib\services\networkManagement2\lib\operations\applicationGateways.js
         repo: 'https://github.com/Azure/azure-sdk-for-node.git'
     type: Class
@@ -43,6 +39,15 @@ items:
         azure-arm-network.ApplicationGateways#listAvailableWafRuleSetsWithHttpOperationResponse
       - 'azure-arm-network.ApplicationGateways#listAvailableWafRuleSets'
       - >-
+        azure-arm-network.ApplicationGateways#availableSslOptionsWithHttpOperationResponse
+      - 'azure-arm-network.ApplicationGateways#availableSslOptions'
+      - >-
+        azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPoliciesWithHttpOperationResponse
+      - 'azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPolicies'
+      - >-
+        azure-arm-network.ApplicationGateways#getSslPredefinedPolicyWithHttpOperationResponse
+      - 'azure-arm-network.ApplicationGateways#getSslPredefinedPolicy'
+      - >-
         azure-arm-network.ApplicationGateways#beginDeleteMethodWithHttpOperationResponse
       - 'azure-arm-network.ApplicationGateways#beginDeleteMethod'
       - >-
@@ -61,6 +66,21 @@ items:
       - >-
         azure-arm-network.ApplicationGateways#listAllNextWithHttpOperationResponse
       - 'azure-arm-network.ApplicationGateways#listAllNext'
+      - >-
+        azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPoliciesNextWithHttpOperationResponse
+      - >-
+        azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPoliciesNext
+    langs:
+      - js
+  - id: 'azure-arm-network.ApplicationGateways.#ctor'
+    uid: 'azure-arm-network.ApplicationGateways.#ctor'
+    parent: azure-arm-network.ApplicationGateways
+    name: ApplicationGateways()
+    fullName: azure-arm-network.ApplicationGateways.ApplicationGateways()
+    summary: ''
+    type: Constructor
+    syntax:
+      content: new ApplicationGateways()
     langs:
       - js
   - id: 'azure-arm-network.ApplicationGateways.#ctor'
@@ -68,7 +88,7 @@ items:
     parent: azure-arm-network.ApplicationGateways
     name: ApplicationGateways(client)
     fullName: azure-arm-network.ApplicationGateways.ApplicationGateways(client)
-    summary: ''
+    summary: Create a ApplicationGateways.
     type: Constructor
     syntax:
       parameters:
@@ -433,8 +453,38 @@ items:
           type:
             - array
           description: |-
-            SSL protocols to
+            Ssl protocols to
             be disabled on application gateway.
+          optional: true
+        - id: parameters.sslPolicy.policyType
+          type:
+            - string
+          description: |-
+            Type of Ssl Policy.
+            Possible values include: 'Predefined', 'Custom'
+          optional: true
+        - id: parameters.sslPolicy.policyName
+          type:
+            - string
+          description: |-
+            Name of Ssl predefined
+            policy. Possible values include: 'AppGwSslPolicy20150501',
+            'AppGwSslPolicy20170401', 'AppGwSslPolicy20170401S'
+          optional: true
+        - id: parameters.sslPolicy.cipherSuites
+          type:
+            - array
+          description: |-
+            Ssl cipher suites to be
+            enabled in the specified order to application gateway.
+          optional: true
+        - id: parameters.sslPolicy.minProtocolVersion
+          type:
+            - string
+          description: |-
+            Minimum version of
+            Ssl protocol to be supported on application gateway. Possible values
+            include: 'TLSv1_0', 'TLSv1_1', 'TLSv1_2'
           optional: true
         - id: parameters.gatewayIPConfigurations
           type:
@@ -512,6 +562,13 @@ items:
           description: |-
             Request routing rules of the
             application gateway resource.
+          optional: true
+        - id: parameters.redirectConfigurations
+          type:
+            - array
+          description: |-
+            Redirect configurations
+            of the application gateway resource.
           optional: true
         - id: parameters.webApplicationFirewallConfiguration
           type:
@@ -710,8 +767,38 @@ items:
           type:
             - array
           description: |-
-            SSL protocols to
+            Ssl protocols to
             be disabled on application gateway.
+          optional: true
+        - id: parameters.sslPolicy.policyType
+          type:
+            - string
+          description: |-
+            Type of Ssl Policy.
+            Possible values include: 'Predefined', 'Custom'
+          optional: true
+        - id: parameters.sslPolicy.policyName
+          type:
+            - string
+          description: |-
+            Name of Ssl predefined
+            policy. Possible values include: 'AppGwSslPolicy20150501',
+            'AppGwSslPolicy20170401', 'AppGwSslPolicy20170401S'
+          optional: true
+        - id: parameters.sslPolicy.cipherSuites
+          type:
+            - array
+          description: |-
+            Ssl cipher suites to be
+            enabled in the specified order to application gateway.
+          optional: true
+        - id: parameters.sslPolicy.minProtocolVersion
+          type:
+            - string
+          description: |-
+            Minimum version of
+            Ssl protocol to be supported on application gateway. Possible values
+            include: 'TLSv1_0', 'TLSv1_1', 'TLSv1_2'
           optional: true
         - id: parameters.gatewayIPConfigurations
           type:
@@ -789,6 +876,13 @@ items:
           description: |-
             Request routing rules of the
             application gateway resource.
+          optional: true
+        - id: parameters.redirectConfigurations
+          type:
+            - array
+          description: |-
+            Redirect configurations
+            of the application gateway resource.
           optional: true
         - id: parameters.webApplicationFirewallConfiguration
           type:
@@ -1694,6 +1788,379 @@ items:
     langs:
       - js
   - uid: >-
+      azure-arm-network.ApplicationGateways#availableSslOptionsWithHttpOperationResponse
+    id: >-
+      azure-arm-network.ApplicationGateways#availableSslOptionsWithHttpOperationResponse
+    parent: azure-arm-network.ApplicationGateways
+    name: availableSslOptionsWithHttpOperationResponse(options)
+    summary: Lists available Ssl options for configuring Ssl policy.
+    fullName: >-
+      azure-arm-network.ApplicationGateways.availableSslOptionsWithHttpOperationResponse(options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ApplicationGatewayAvailableSslOptions>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<ApplicationGatewayAvailableSslOptions>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: function availableSslOptionsWithHttpOperationResponse(options)
+    langs:
+      - js
+  - uid: 'azure-arm-network.ApplicationGateways#availableSslOptions'
+    id: 'azure-arm-network.ApplicationGateways#availableSslOptions'
+    parent: azure-arm-network.ApplicationGateways
+    name: 'availableSslOptions(options, optionalCallback)'
+    summary: Lists available Ssl options for configuring Ssl policy.
+    fullName: >-
+      azure-arm-network.ApplicationGateways.availableSslOptions(options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {ApplicationGatewayAvailableSslOptions} - The deserialized result
+          object.
+        value: >-
+          {ApplicationGatewayAvailableSslOptions} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link ApplicationGatewayAvailableSslOptions} for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link ApplicationGatewayAvailableSslOptions} for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function availableSslOptions(options, optionalCallback)'
+    langs:
+      - js
+  - uid: >-
+      azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPoliciesWithHttpOperationResponse
+    id: >-
+      azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPoliciesWithHttpOperationResponse
+    parent: azure-arm-network.ApplicationGateways
+    name: listAvailableSslPredefinedPoliciesWithHttpOperationResponse(options)
+    summary: Lists all SSL predefined policies for configuring Ssl policy.
+    fullName: >-
+      azure-arm-network.ApplicationGateways.listAvailableSslPredefinedPoliciesWithHttpOperationResponse(options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ApplicationGatewayAvailableSslPredefinedPolicies>}
+          - The deserialized result object.
+        value: >-
+          {HttpOperationResponse<ApplicationGatewayAvailableSslPredefinedPolicies>}
+          - The deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function
+        listAvailableSslPredefinedPoliciesWithHttpOperationResponse(options)
+    langs:
+      - js
+  - uid: 'azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPolicies'
+    id: 'azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPolicies'
+    parent: azure-arm-network.ApplicationGateways
+    name: 'listAvailableSslPredefinedPolicies(options, optionalCallback)'
+    summary: Lists all SSL predefined policies for configuring Ssl policy.
+    fullName: >-
+      azure-arm-network.ApplicationGateways.listAvailableSslPredefinedPolicies(options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {ApplicationGatewayAvailableSslPredefinedPolicies} - The deserialized
+          result object.
+        value: >-
+          {ApplicationGatewayAvailableSslPredefinedPolicies} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link
+                               ApplicationGatewayAvailableSslPredefinedPolicies} for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link
+                               ApplicationGatewayAvailableSslPredefinedPolicies} for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function listAvailableSslPredefinedPolicies(options, optionalCallback)'
+    langs:
+      - js
+  - uid: >-
+      azure-arm-network.ApplicationGateways#getSslPredefinedPolicyWithHttpOperationResponse
+    id: >-
+      azure-arm-network.ApplicationGateways#getSslPredefinedPolicyWithHttpOperationResponse
+    parent: azure-arm-network.ApplicationGateways
+    name: getSslPredefinedPolicyWithHttpOperationResponse(options)
+    summary: Gets Ssl predefined policy with the specified policy name.
+    fullName: >-
+      azure-arm-network.ApplicationGateways.getSslPredefinedPolicyWithHttpOperationResponse(options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ApplicationGatewaySslPredefinedPolicy>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<ApplicationGatewaySslPredefinedPolicy>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: function getSslPredefinedPolicyWithHttpOperationResponse(options)
+    langs:
+      - js
+  - uid: 'azure-arm-network.ApplicationGateways#getSslPredefinedPolicy'
+    id: 'azure-arm-network.ApplicationGateways#getSslPredefinedPolicy'
+    parent: azure-arm-network.ApplicationGateways
+    name: 'getSslPredefinedPolicy(options, optionalCallback)'
+    summary: Gets Ssl predefined policy with the specified policy name.
+    fullName: >-
+      azure-arm-network.ApplicationGateways.getSslPredefinedPolicy(options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {ApplicationGatewaySslPredefinedPolicy} - The deserialized result
+          object.
+        value: >-
+          {ApplicationGatewaySslPredefinedPolicy} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link ApplicationGatewaySslPredefinedPolicy} for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link ApplicationGatewaySslPredefinedPolicy} for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function getSslPredefinedPolicy(options, optionalCallback)'
+    langs:
+      - js
+  - uid: >-
       azure-arm-network.ApplicationGateways#beginDeleteMethodWithHttpOperationResponse
     id: >-
       azure-arm-network.ApplicationGateways#beginDeleteMethodWithHttpOperationResponse
@@ -1909,8 +2376,38 @@ items:
           type:
             - array
           description: |-
-            SSL protocols to
+            Ssl protocols to
             be disabled on application gateway.
+          optional: true
+        - id: parameters.sslPolicy.policyType
+          type:
+            - string
+          description: |-
+            Type of Ssl Policy.
+            Possible values include: 'Predefined', 'Custom'
+          optional: true
+        - id: parameters.sslPolicy.policyName
+          type:
+            - string
+          description: |-
+            Name of Ssl predefined
+            policy. Possible values include: 'AppGwSslPolicy20150501',
+            'AppGwSslPolicy20170401', 'AppGwSslPolicy20170401S'
+          optional: true
+        - id: parameters.sslPolicy.cipherSuites
+          type:
+            - array
+          description: |-
+            Ssl cipher suites to be
+            enabled in the specified order to application gateway.
+          optional: true
+        - id: parameters.sslPolicy.minProtocolVersion
+          type:
+            - string
+          description: |-
+            Minimum version of
+            Ssl protocol to be supported on application gateway. Possible values
+            include: 'TLSv1_0', 'TLSv1_1', 'TLSv1_2'
           optional: true
         - id: parameters.gatewayIPConfigurations
           type:
@@ -1988,6 +2485,13 @@ items:
           description: |-
             Request routing rules of the
             application gateway resource.
+          optional: true
+        - id: parameters.redirectConfigurations
+          type:
+            - array
+          description: |-
+            Redirect configurations
+            of the application gateway resource.
           optional: true
         - id: parameters.webApplicationFirewallConfiguration
           type:
@@ -2186,8 +2690,38 @@ items:
           type:
             - array
           description: |-
-            SSL protocols to
+            Ssl protocols to
             be disabled on application gateway.
+          optional: true
+        - id: parameters.sslPolicy.policyType
+          type:
+            - string
+          description: |-
+            Type of Ssl Policy.
+            Possible values include: 'Predefined', 'Custom'
+          optional: true
+        - id: parameters.sslPolicy.policyName
+          type:
+            - string
+          description: |-
+            Name of Ssl predefined
+            policy. Possible values include: 'AppGwSslPolicy20150501',
+            'AppGwSslPolicy20170401', 'AppGwSslPolicy20170401S'
+          optional: true
+        - id: parameters.sslPolicy.cipherSuites
+          type:
+            - array
+          description: |-
+            Ssl cipher suites to be
+            enabled in the specified order to application gateway.
+          optional: true
+        - id: parameters.sslPolicy.minProtocolVersion
+          type:
+            - string
+          description: |-
+            Minimum version of
+            Ssl protocol to be supported on application gateway. Possible values
+            include: 'TLSv1_0', 'TLSv1_1', 'TLSv1_2'
           optional: true
         - id: parameters.gatewayIPConfigurations
           type:
@@ -2265,6 +2799,13 @@ items:
           description: |-
             Request routing rules of the
             application gateway resource.
+          optional: true
+        - id: parameters.redirectConfigurations
+          type:
+            - array
+          description: |-
+            Redirect configurations
+            of the application gateway resource.
           optional: true
         - id: parameters.webApplicationFirewallConfiguration
           type:
@@ -3063,6 +3604,155 @@ items:
 
           {Promise} A promise is returned
       content: 'function listAllNext(nextPageLink, options, optionalCallback)'
+    langs:
+      - js
+  - uid: >-
+      azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPoliciesNextWithHttpOperationResponse
+    id: >-
+      azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPoliciesNextWithHttpOperationResponse
+    parent: azure-arm-network.ApplicationGateways
+    name: >-
+      listAvailableSslPredefinedPoliciesNextWithHttpOperationResponse(nextPageLink,
+      options)
+    summary: Lists all SSL predefined policies for configuring Ssl policy.
+    fullName: >-
+      azure-arm-network.ApplicationGateways.listAvailableSslPredefinedPoliciesNextWithHttpOperationResponse(nextPageLink,
+      options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ApplicationGatewayAvailableSslPredefinedPolicies>}
+          - The deserialized result object.
+        value: >-
+          {HttpOperationResponse<ApplicationGatewayAvailableSslPredefinedPolicies>}
+          - The deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function
+        listAvailableSslPredefinedPoliciesNextWithHttpOperationResponse(nextPageLink,
+        options)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPoliciesNext
+    id: >-
+      azure-arm-network.ApplicationGateways#listAvailableSslPredefinedPoliciesNext
+    parent: azure-arm-network.ApplicationGateways
+    name: >-
+      listAvailableSslPredefinedPoliciesNext(nextPageLink, options,
+      optionalCallback)
+    summary: Lists all SSL predefined policies for configuring Ssl policy.
+    fullName: >-
+      azure-arm-network.ApplicationGateways.listAvailableSslPredefinedPoliciesNext(nextPageLink,
+      options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {ApplicationGatewayAvailableSslPredefinedPolicies} - The deserialized
+          result object.
+        value: >-
+          {ApplicationGatewayAvailableSslPredefinedPolicies} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link
+                               ApplicationGatewayAvailableSslPredefinedPolicies} for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link
+                               ApplicationGatewayAvailableSslPredefinedPolicies} for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function listAvailableSslPredefinedPoliciesNext(nextPageLink, options,
+        optionalCallback)
     langs:
       - js
 references:

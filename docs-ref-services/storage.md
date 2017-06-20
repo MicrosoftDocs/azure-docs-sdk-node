@@ -1,5 +1,5 @@
 ---
-title: Azure Storage libraries for Node.js
+title: Azure Storage modules for Node.js
 description: Connect and manage Azure Storage from your Node.js apps.
 keywords: Azure, Node, SDK, API, Storage, nodejs, javascript
 author: tomarcher
@@ -23,7 +23,7 @@ Use the Azure Storage client module to:
 - Send and receive messages between cloud-connected applications with [Azure Queue storage](https://docs.microsoft.com/azure/storage/storage-nodejs-how-to-use-queues)
 - Read and write large structured data with [Azure Table storage](https://docs.microsoft.com/azure/storage/storage-nodejs-how-to-use-table-storage) 
 
-Create, update, and manage Azure Storage accounts and query and regenerate access keys from your Node.js apps with the management libraries.
+Create, update, and manage Azure Storage accounts and query and regenerate access keys from your Node.js apps with the management modules.
 
 ## Install modules with npm
 

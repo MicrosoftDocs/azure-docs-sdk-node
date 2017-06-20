@@ -1,5 +1,5 @@
 ---
-title: Azure Virtual Machine libraries for Node.js
+title: Azure Virtual Machine modules for Node.js
 description: Define, configure, and deploy new Windows and Linux virtual machines from your Node.js app.
 keywords: Azure, Node, SDK, API, virtual machine, vm, nodejs, javascript
 author: tomarcher
@@ -13,11 +13,11 @@ ms.devlang: nodejs
 ms.service: compute
 ---
 
-# Azure virtual machine libraries
+# Azure virtual machine modules
 
 ## Overview
 
-Define, configure, and deploy new Windows and Linux virtual machines and virtual machine scale sets from your code with the Azure management libraries for Node.js. The libraries also enable you to programmatically start and stop existing virtual machines, and attach or detach disks to stopped VMs in your Azure subscription.
+Define, configure, and deploy new Windows and Linux virtual machines and virtual machine scale sets from your code with the Azure management modules for Node.js. The modules let you start and stop existing virtual machines and attach or detach disks to stopped VMs in your Azure subscription.
 
 ## Install modules with npm
 

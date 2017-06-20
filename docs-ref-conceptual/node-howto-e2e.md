@@ -14,7 +14,7 @@ ms.author: joncart
 
 # Node.js development with Visual Studio Code and Azure
 
-This tutorial illustrates taking an existing Node.js app, "containerizing" it (with Docker), and then deploying the app to the cloud.
+This tutorial illustrates taking an existing Node.js app, "containerizing" it (with Docker), and then deploying the app to Azure using Visual Studio Code.
 
 The tutorial makes use of a simple todo app created by and published by [Scotch.io](https://scotch.io/tutorials/creating-a-single-page-todo-app-with-node-and-angular). It is a single-page MEAN app, and therefore, uses MongoDB as its database, Node/Express for the REST API/web server, and Angular.js 1.x for the front-end UI. 
 
@@ -22,18 +22,18 @@ The tutorial makes use of a simple todo app created by and published by [Scotch.
 
 In order to follow along with the demo, you'll need to have the following software installed:
 
-- [Visual Studio Code Insiders Build](https://code.visualstudio.com/insiders) - The insider's build provides access to the latest bug fixes/feature enhancements (just like Chrome Canary builds), and is the same build that the Visual Studio Code team uses.
+- [Visual Studio Code](https://code.visualstudio.com/)
 - [Docker](https://www.docker.com/products/docker)
-- [DockerHub account] - You'll need to have a DockerHub account in order to publish the Docker images that will be created in this tutorial.
+- [DockerHub account](https://hub.docker.com/)
 - [Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2)
 - [Azure account](https://azure.microsoft.com/free/)
 - [Yarn](https://yarnpkg.com/en/docs/install)
 - [Chrome](https://www.google.com/chrome/browser/desktop/) - Used for debugging the demo app's front-end.
-- MongoDB - Since the demo app uses MongoDB, you need to have a locally running MongoDB instance that is listening on the standard `27017` port. The simplest way to achieve this is by running the following command after Docker is installed: `docker run -it -p 27017:27017 mongo`.
+- MongoDB - Since the demo app uses MongoDB, you need to have a locally running MongoDB instance that is listening on the standard `27017` port. The simplest way to achieve this is by running the following two commands after Docker is installed: `docker pull mongo` followed by `docker run -it -p 27017:27017 mongo`.
 
 ## Project setup
 
-To get started, you need to download the sample project using the following steps:
+To get started, download the sample project using the following steps:
 
 1. Open Visual Studio Code.
 
@@ -41,13 +41,13 @@ To get started, you need to download the sample project using the following step
 
 1. At the command palette prompt, enter `gitcl`, select the `Git: Clone` command, and press **&lt;Enter>**.
 
-	![gitcl command in the Visual Studio Code command palette prompt](media/node-howto-e2e/git-clone.png)
+    ![gitcl command in the Visual Studio Code command palette prompt](./media/node-howto-e2e/git-clone.png)
 
 1. When prompted for the **Repository URL**, enter `https://github.com/scotch-io/node-todo`, then press **&lt;Enter>**.
 
 1. Select (or create) the local directory into which you want to clone the project.
 
-	![Visual Studio Code explorer](./media/node-howto-e2e/explorer.png)
+    ![Visual Studio Code explorer](./media/node-howto-e2e/explorer.png)
 
 ## Integrated terminal
 
@@ -61,7 +61,7 @@ Since this is a Node.js project, the first thing you need to do is ensure that a
 
 ## Integrated Git version control
 
-After installing the app's dependencies via Yarn, a `yarn.lock` file is created that provides a predictable way to reacquire the exact same dependencies in the future, without any surprises in either CI (continuous integration) builds, production deployments, or other developer's machines.
+After installing the app's dependencies via Yarn, a `yarn.lock` file is created that provides a predictable way to reacquire the exact same dependencies in the future, without any surprises in either CI (continuous integration) builds, production deployments, or other developer machines.
 
 The following steps illustrate how to check the `yarn.lock` file into source control:
 
@@ -75,7 +75,7 @@ The following steps illustrate how to check the `yarn.lock` file into source con
 
 In order to orient ourselves within the codebase, let's play around with some examples of some of the navigation capabilities that Visual Studio Code provides.
 
-1. Type **&lt;Ctrl>p**.
+1. Press **&lt;Ctrl>P**.
 
 1. Enter `.js` to display all the JavaScript/JSON files in the project along with each file's parent directory 
 
@@ -119,31 +119,31 @@ Note that if you type the code in manually (instead of copy and paste), when you
 
 Autocompetion works because Visual Studio Code uses TypeScript behind the scenes - even for JavaScript - to provide type information that can then be used to inform the completion list as you type. Visual Studio Code is able to detect that this is a Node.js project, and as a result, automatically downloaded the TypeScript typings file for [Node.js from NPM](https://www.npmjs.com/package/@types/node). The typings file allows you to get autocompletion for other Node.js globals such as `Buffer` or `setTimeout`, as well as all of the built-in modules such as `fs` and `http`.
 
-In addition to the built-in Node.js APIs, this auto-acquisition of typings also works for over 2,000 3rd party libraries, such as React, Underscore and Express. For example, in order to disable Mongoose from crashing the sample app if it can't connect to the configured MongoDB database instance, insert the following line of code at  line 13:
+In addition to the built-in Node.js APIs, this auto-acquisition of typings also works for over 2,000 3rd party modules, such as React, Underscore and Express. For example, in order to disable Mongoose from crashing the sample app if it can't connect to the configured MongoDB database instance, insert the following line of code at  line 13:
 
-	```javascript
-	mongoose.connection.on("error", () => { console.log("DB connection error"); });
-	```
+```javascript
+mongoose.connection.on("error", () => { console.log("DB connection error"); });
+```
 
 As with the previous code, you'll notice that you get autocompletion without any work on your part.
 
 ![Autocomplete automatically shows the members of an API](./media/node-howto-e2e/mongoose.png)
 
-You can see which libraries support this auto-complete capability by browsing the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) project, which is the community-driven source of all TypeScript type definitions.
+You can see which modules support this auto-complete capability by browsing the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) project, which is the community-driven source of all TypeScript type definitions.
 
-## Running The app
+## Running the app
 
-Once you've explored the code a bit, it's time to run the app. To run the app from Visual Studio Code, press **&lt;<F5>**. When running the code via **&lt;<F5>** (debug mode), Visual Studio Code launches the app and displays the **Debug Console** window that displays stdout for the app.
+Once you've explored the code a bit, it's time to run the app. To run the app from Visual Studio Code, press **&lt;F5>**. When running the code via **&lt;F5>** (debug mode), Visual Studio Code launches the app and displays the **Debug Console** window that displays stdout for the app.
 
-![Peek at a variable's definition](./media/node-howto-e2e/console.png)
+![Monitoring an app's stdout via the Debug console](./media/node-howto-e2e/console.png)
 
 Additionally, the **Debug Console** is attached to the newly running app so you can type JavaScript expressions, which will be evaluated in the app, and also includes auto-completion. To see this in action, type `process.env` in the console:
 
-![Peek at a variable's definition](./media/node-howto-e2e/console-code.png)
+![Typing code into the Debug console](./media/node-howto-e2e/console-code.png)
 
 You were able to press **&lt;F5>** to run the app because the currently open file is a JavaScript file (`server.js`). As a result, Visual Studio Code assumes that the project is a Node.js app. If you close all JavaScript files in Visual Studio Code, and then press **&lt;F5>**, Visual Studio Code will query you as the environment:
 
-![Peek at a variable's definition](./media/node-howto-e2e/select-env.png)
+![Specifying the runtime environment](./media/node-howto-e2e/select-env.png)
 
 Open a browser, and navigate to `http://localhost:8080` to see the running app. Type a message into the textbox and add/remove a few todos to get a feel for how the app works.
 
@@ -159,6 +159,8 @@ Set a breakpoint on line 28, which represents the Express route that is called w
 
 > [!NOTE]
 > In addition to standard breakpoints, Visual Studio Code supports conditional breakpoints that allow you to customize when the app should suspend execution. To set a conditional breakpoint, right-click the area to the left of the line on which you wish to pause execution, select **Add Conditional Breakpoint...**, and specify either a JavaScript expression (e.g. `foo = "bar"`) or execution count that defines the condition under which you want to pause execution.
+> 
+> 
 
 Once the breakpoint has been set, return to the running app and add a todo entry. Adding a todo entry immediately causes the app to suspend execution on line 28 where you set the breakpoint:
 
@@ -303,7 +305,7 @@ To:
 FROM mhart
 ```
 
-With your cursor positioned after the `t` in `mhart`, press **&lt;<Ctrl><Space>** to view all the image repositories that `mhart` has published on DockerHub.
+With your cursor positioned after the `t` in `mhart`, press **&lt;Ctrl>&lt;Space>** to view all the image repositories that `mhart` has published on DockerHub.
 
 ![Docker extension auto-completion](./media/node-howto-e2e/docker-completion.png)
 
@@ -319,7 +321,7 @@ Notice that the command automated the process of running `docker build` for you,
 
 At this point, to make this image easily acquirable for deployments, you need only push the image to DockerHub. To do this, make sure you have already autheticated with DockerHub by running `docker login` from the CLI and entering your account credentials. Then, in Visual Studio Code, you can bring up the command palette, enter `dockerpush`, and select the `Docker: Push` command. Select the image tag that you just built (e.g. `lostintangent/node`) and press **&lt;Enter>**. The command automates the calling of `docker push` and displays the output in the integrated terminal.
 
-## Deploying your app
+## Deploying the app
 
 Now that you the app Dockerized and pushed to DockerHub, you need to deploy it to the cloud so the world can see it. For this, you can use Azure App Service, which is Azure's PaaS offering. App Service has two capabilities that are relevant to Node.js developers:
 
@@ -334,7 +336,8 @@ To get started, open up the Visual Studio terminal. You'll use the new Azure CLI
     az group create -n nina-demo -l westus
     ```
 
-    **Note:** The `-l` option indicates the location of the resource group. While in preview, the App Service on Linux support is available only in select regions. Therefore, if you aren't located in the Western US, and you want to check which other regions are available, run `az appservice list-locations --linux-workers-enabled` from the CLI to view your datacenter options.
+    > [!NOTE]
+    > The `-l` option indicates the location of the resource group. While in preview, the App Service on Linux support is available only in select regions. Therefore, if you aren't located in the Western US, and you want to check which other regions are available, run `az appservice list-locations --linux-workers-enabled` from the CLI to view your datacenter options.
 
 2. Set the newly created resource group as the default resource group so that you can continue to use the CLI without needing to explicitly specify the resource group with each CLI call:
 
@@ -348,15 +351,17 @@ To get started, open up the Visual Studio terminal. You'll use the new Azure CLI
     az appservice plan create -n nina-demo-plan --is-linux
     ```
 
-    **Note:** The --is-linux option is indicates that you want Linux-based virtual machines. Without it, the CLI defaults to provisioning Windows-based virtual machines.
+    > [!NOTE]
+    > The --is-linux option is indicates that you want Linux-based virtual machines. Without it, the CLI defaults to provisioning Windows-based virtual machines.
 
 4. Create the App Service web app, which represents the actual todo app that will be running within the plan and resource group just created. You can think of a web app as being synonymous with a process or container, and the plan as being the virtual machine/container host that they're running on. Additionally, as part of creating the web app, you'll need to configure it to use the Docker image you published to DockerHub:
 
     ```shell
     az webapp create -n nina-demo-app -p nina-demo-plan -i lostintangent/node
     ``` 
-    
-    **Note:** If instead of using a custom container, you'd prefer a Git deployment, refer to the article, [Create a Node.js web app in Azure](https://docs.microsoft.com/en-us/azure/app-service-web/app-service-web-get-started-nodejs#configure-to-use-nodejs).
+
+    > [!NOTE]
+    > If instead of using a custom container, you'd prefer a Git deployment, refer to the article, [Create a Node.js web app in Azure](https://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs#configure-to-use-nodejs).
 
 5. Set the web app as the default web instance:
 
@@ -372,15 +377,16 @@ To get started, open up the Visual Studio terminal. You'll use the new Azure CLI
 
     ![Todo app running in the browser](./media/node-howto-e2e/browse-app.png)
 
-    **Note:** It may take few minutes to load app the first time as App Service has to pull the Docker image from DockerHub and then start it.
+    > [!NOTE]
+    > It may take few minutes to load app the first time as App Service has to pull the Docker image from DockerHub and then start it.
 
 At this point, you've just deployed and run the todo app. 
 
 You have now deployed the todo app. However, the spinning icon indicates that the app can't connect to the database. This is due to the fact that you were using a local instance of MongoDB during development, which obviously isn't reachable from within the Azure datacenters. Since you modified the app to accept the connection string via an environment variable, you need only to start a MongoDB server and re-configure the App Service instance to reference the environment variable. This is illustrated in the next section.
 
-## Provisioning a MongoDB Server
+## Provisioning a MongoDB server
 
-While you could configure a MongoDB server, or replica set, and manage that infrastructure yourself, Azure provides a solution called [Cosmos DB](https://azure.microsoft.com/en-us/services/documentdb/). Cosmos DB is a fully-managed, geo-replicable, high-performance, NoSQL database that provides a MongoDB-compatibility layer. This means that you can point an existing MEAN app at it (or any MongoDB client/tool such as [Studio 3T](https://studio3t.com/)) without needing to change anything but the connection string. The following steps illustrate how this is done:
+While you could configure a MongoDB server, or replica set, and manage that infrastructure yourself, Azure provides a solution called [Cosmos DB](https://azure.microsoft.com/services/documentdb/). Cosmos DB is a fully-managed, geo-replicable, high-performance, NoSQL database that provides a MongoDB-compatibility layer. This means that you can point an existing MEAN app at it (or any MongoDB client/tool such as [Studio 3T](https://studio3t.com/)) without needing to change anything but the connection string. The following steps illustrate how this is done:
 
 1. From the Visual Studio Code terminal, run the following command to create a MongoDB-compatible instance of the Cosmos DB service. Replace the **<NAME>** placeholder with a globally unique value (Cosmos DB uses this name to generate the database's server URL):
 
@@ -409,9 +415,9 @@ When needed, you can switch back to the Cosmos DB instance and scale up (or down
 
 Additionally, Cosmos DB automatically indexes every single document and property for you. That way, you don't need to profile slow queries or manually fine-tune your indexes. Just provision and scale as needed, and let Cosmos DB handle the rest.
 
-## Hosting a Private Docker Registry
+## Hosting a private Docker registry
 
-DockerHub provides an amazing experience for distributing your container images, but there may be scenarios where you'd prefer to host your own private Docker registry - such as for security/governance or performance benefits. For this purpose, Azure provides the [Azure Container Registry](https://azure.microsoft.com/en-us/services/container-registry/) (ACR) that allows you to spin up your own Docker registry whose backing storage is located in the same data center as your web app (which makes pulls quicker). The ACR also provides you with full control over the contents and access controls - such as who can push or pull images. 
+DockerHub provides an amazing experience for distributing your container images, but there may be scenarios where you'd prefer to host your own private Docker registry - such as for security/governance or performance benefits. For this purpose, Azure provides the [Azure Container Registry](https://azure.microsoft.com/services/container-registry/) (ACR) that allows you to spin up your own Docker registry whose backing storage is located in the same data center as your web app (which makes pulls quicker). The ACR also provides you with full control over the contents and access controls - such as who can push or pull images. 
 
 Provisioning a custom registry can be accomplished by running the following command. (Replace the **<NAME>** placeholder with a globally unique value as ACR uses specified value to generate the registry's login server URL.
 
@@ -457,7 +463,8 @@ az appservice web config container set \
     -p <PASSWORD> 
 ```
 
-**Note:** Make sure to add the `https://` prefix to the beginning of the `-r` option. However, don't add the prefix to the container image name.
+> [!NOTE]
+> Make sure to add the `https://` prefix to the beginning of the `-r` option. However, don't add the prefix to the container image name.
 
 If you refresh the app in your browser, everything should look and work the same. However, it's now running your app via your private Docker registry. Once you update your app, tag and push the changes as done above, and update the tag in your App Service container configuration.
 
@@ -477,7 +484,8 @@ Once those records are created - and the DNS changes have propagated - register 
 az webapp config hostname add --hostname <DOMAIN>
 ```
 
-**Note:** The command will not work until the DNS changes have propagated.
+> [!NOTE]
+> The command will not work until the DNS changes have propagated.
 
 Open a browser and navigate to your custom domain to see that it now resolves to your deployed app on Azure.
 
@@ -489,7 +497,8 @@ At some point, your web app may become popular enough that its allocated resourc
 az appservice plan update -n nina-demo-plan --sku B2
 ```
 
-**Note:** For Azure App Plan pricing details and specs, see the article, [App Service Pricing](https://azure.microsoft.com/en-us/pricing/details/app-service/)
+> [!NOTE]
+> For Azure App Plan pricing details and specs, see the article, [App Service Pricing](https://azure.microsoft.com/pricing/details/app-service/)
 
 After just a few moments, your web app will be migrated to the requested hardware, and can begin taking advantage of the associated resources. In addition to scaling up, you can also scale down by running the same command as above, specifying a `--sku` option that provides less resources at a lower price. 
 
@@ -514,6 +523,7 @@ To ensure that you don't get charged for any Azure resources you aren't using, r
 az group delete
 ```
 
-**Note:** The clean-up process can take several minutes to complete. 
+> [!NOTE]
+> The clean-up process can take several minutes to complete. 
 
 Once finished, the `az group delete` command leaves your Azure account in the same state it was before you started the tutorial. The ability to organize, deploy, and delete Azure resources as a single unit is one of the primary benefits of resource groups. Therefore, as a recommended practice,  you should group your resources together that you anticipate having the same lifespan.

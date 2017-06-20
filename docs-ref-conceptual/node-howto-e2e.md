@@ -14,7 +14,7 @@ ms.author: joncart
 
 # Node.js development with Visual Studio Code and Azure
 
-This tutorial illustrates taking an existing Node.js app, "containerizing" it (with Docker), and then deploying the app to the cloud.
+This tutorial illustrates taking an existing Node.js app, "containerizing" it (with Docker), and then deploying the app to Azure using Visual Studio Code.
 
 The tutorial makes use of a simple todo app created by and published by [Scotch.io](https://scotch.io/tutorials/creating-a-single-page-todo-app-with-node-and-angular). It is a single-page MEAN app, and therefore, uses MongoDB as its database, Node/Express for the REST API/web server, and Angular.js 1.x for the front-end UI. 
 
@@ -33,7 +33,7 @@ In order to follow along with the demo, you'll need to have the following softwa
 
 ## Project setup
 
-To get started, you need to download the sample project using the following steps:
+To get started, download the sample project using the following steps:
 
 1. Open Visual Studio Code.
 
@@ -61,7 +61,7 @@ Since this is a Node.js project, the first thing you need to do is ensure that a
 
 ## Integrated Git version control
 
-After installing the app's dependencies via Yarn, a `yarn.lock` file is created that provides a predictable way to reacquire the exact same dependencies in the future, without any surprises in either CI (continuous integration) builds, production deployments, or other developer's machines.
+After installing the app's dependencies via Yarn, a `yarn.lock` file is created that provides a predictable way to reacquire the exact same dependencies in the future, without any surprises in either CI (continuous integration) builds, production deployments, or other developer machines.
 
 The following steps illustrate how to check the `yarn.lock` file into source control:
 

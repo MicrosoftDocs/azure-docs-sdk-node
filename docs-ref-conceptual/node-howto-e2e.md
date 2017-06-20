@@ -41,13 +41,13 @@ To get started, you need to download the sample project using the following step
 
 1. At the command palette prompt, enter `gitcl`, select the `Git: Clone` command, and press **&lt;Enter>**.
 
-  ![gitcl command in the Visual Studio Code command palette prompt](./media/node-howto-e2e/git-clone.png)
+    ![gitcl command in the Visual Studio Code command palette prompt][1]
 
 1. When prompted for the **Repository URL**, enter `https://github.com/scotch-io/node-todo`, then press **&lt;Enter>**.
 
 1. Select (or create) the local directory into which you want to clone the project.
 
-  ![Visual Studio Code explorer](./media/node-howto-e2e/explorer.png)
+    ![Visual Studio Code explorer][2]
 
 ## Integrated terminal
 
@@ -525,3 +525,6 @@ az group delete
 > The clean-up process can take several minutes to complete. 
 
 Once finished, the `az group delete` command leaves your Azure account in the same state it was before you started the tutorial. The ability to organize, deploy, and delete Azure resources as a single unit is one of the primary benefits of resource groups. Therefore, as a recommended practice,  you should group your resources together that you anticipate having the same lifespan.
+
+[1]: (./media/node-howto-e2e/git-clone.png)
+[2]: (./media/node-howto-e2e/explorer.png)

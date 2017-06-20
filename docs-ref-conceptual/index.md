@@ -1,0 +1,116 @@
+---
+title: Azure for Node.js developers
+description: Overview of the Azure management and service modules for Node.js
+keywords: Azure, Node.js, SDK, API
+author: tomarcher
+layout: LandingPage
+ms.author: tarcher
+manager: douge
+ms.date: 06/17/2017
+ms.topic: article
+ms.prod: azure
+ms.devlang: nodejs
+ms.service: azure-nodejs
+---
+
+# Azure for Node.js developers
+
+Get started building great Node.js apps on Azure.
+
+<ul class="cardsY panelContent">
+    <li>
+        <a href="node-azure-tools.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="media/common/i_tools.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h2>Tools</h2>
+                            Download Azure tools and plugins.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li><li>
+        <a href="node-sdk-azure-install.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="media/common/i_reference.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h2>Libraries</h2>
+                            Use services and manage Azure resources.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li><li>
+        <a href="/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card">
+                        <div class="cardImageOuter">
+                            <div class="cardImage">
+                                <img src="media/common/i_deploy.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h2>Jenkins CI/CD</h2>
+                            Use Jenkins to deploy apps to Azure.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
+
+## Five-minute quickstarts
+Create and deploy a Node.js app to Azure in five minutes.
+<ul>
+   <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
+   <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
+   <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Docker and Kubernetes</a></li>
+</ul>
+
+## Management APIs
+Create and manage Azure resources from your Node.js applications using the [Azure management modules for Node.js](node-sdk-azure-get-started.md). The following code snippet illustrates how to log in to Azure, create a management client, and list all VM images for the specified location, publisher, offer, and SKU.
+
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const computeManagementClient = require('azure-arm-compute');
+
+// Interactive Login - provides a url, and a code that needs to be copied and pasted in a browser.  
+// If successful, the user will receive a DeviceTokenCredentials object. 
+msRestAzure.interactiveLogin((err, credentials) => {
+  const client = new computeManagementClient(credentials, '<azure-subscription-id>');
+
+  client.virtualMachineImages.list(
+    'westus', // location
+    'MicrosoftWindowsServer', // publisher name 
+    'WindowsServer',  // offer
+    '2012-R2-Datacenter', // sku
+    (err, result, request, response) => {
+      if (err) return console.error(err);
+      console.log(result);
+    });
+});
+```
+
+## Tutorials
+
+Learn how to use Azure services in your Java apps.
+
+<ul>
+    <li><a href="https://docs.microsoft.com/azure/app-service-web/app-service-web-tutorial-nodejs-mongodb-app">Node.js with MongoDB</a></li>
+</ul>

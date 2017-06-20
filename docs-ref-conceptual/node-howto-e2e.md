@@ -159,6 +159,8 @@ Set a breakpoint on line 28, which represents the Express route that is called w
 
 > [!NOTE]
 > In addition to standard breakpoints, Visual Studio Code supports conditional breakpoints that allow you to customize when the app should suspend execution. To set a conditional breakpoint, right-click the area to the left of the line on which you wish to pause execution, select **Add Conditional Breakpoint...**, and specify either a JavaScript expression (e.g. `foo = "bar"`) or execution count that defines the condition under which you want to pause execution.
+> 
+> 
 
 Once the breakpoint has been set, return to the running app and add a todo entry. Adding a todo entry immediately causes the app to suspend execution on line 28 where you set the breakpoint:
 

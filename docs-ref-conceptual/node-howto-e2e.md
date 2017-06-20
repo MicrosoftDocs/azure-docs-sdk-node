@@ -319,7 +319,7 @@ Notice that the command automated the process of running `docker build` for you,
 
 At this point, to make this image easily acquirable for deployments, you need only push the image to DockerHub. To do this, make sure you have already autheticated with DockerHub by running `docker login` from the CLI and entering your account credentials. Then, in Visual Studio Code, you can bring up the command palette, enter `dockerpush`, and select the `Docker: Push` command. Select the image tag that you just built (e.g. `lostintangent/node`) and press **&lt;Enter>**. The command automates the calling of `docker push` and displays the output in the integrated terminal.
 
-## Deploying your app
+## Deploying the app
 
 Now that you the app Dockerized and pushed to DockerHub, you need to deploy it to the cloud so the world can see it. For this, you can use Azure App Service, which is Azure's PaaS offering. App Service has two capabilities that are relevant to Node.js developers:
 
@@ -382,7 +382,7 @@ At this point, you've just deployed and run the todo app.
 
 You have now deployed the todo app. However, the spinning icon indicates that the app can't connect to the database. This is due to the fact that you were using a local instance of MongoDB during development, which obviously isn't reachable from within the Azure datacenters. Since you modified the app to accept the connection string via an environment variable, you need only to start a MongoDB server and re-configure the App Service instance to reference the environment variable. This is illustrated in the next section.
 
-## Provisioning a MongoDB Server
+## Provisioning a MongoDB server
 
 While you could configure a MongoDB server, or replica set, and manage that infrastructure yourself, Azure provides a solution called [Cosmos DB](https://azure.microsoft.com/services/documentdb/). Cosmos DB is a fully-managed, geo-replicable, high-performance, NoSQL database that provides a MongoDB-compatibility layer. This means that you can point an existing MEAN app at it (or any MongoDB client/tool such as [Studio 3T](https://studio3t.com/)) without needing to change anything but the connection string. The following steps illustrate how this is done:
 
@@ -413,7 +413,7 @@ When needed, you can switch back to the Cosmos DB instance and scale up (or down
 
 Additionally, Cosmos DB automatically indexes every single document and property for you. That way, you don't need to profile slow queries or manually fine-tune your indexes. Just provision and scale as needed, and let Cosmos DB handle the rest.
 
-## Hosting a Private Docker Registry
+## Hosting a private Docker registry
 
 DockerHub provides an amazing experience for distributing your container images, but there may be scenarios where you'd prefer to host your own private Docker registry - such as for security/governance or performance benefits. For this purpose, Azure provides the [Azure Container Registry](https://azure.microsoft.com/services/container-registry/) (ACR) that allows you to spin up your own Docker registry whose backing storage is located in the same data center as your web app (which makes pulls quicker). The ACR also provides you with full control over the contents and access controls - such as who can push or pull images. 
 

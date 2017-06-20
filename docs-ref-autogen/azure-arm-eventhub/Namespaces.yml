@@ -3,16 +3,12 @@ items:
   - uid: azure-arm-eventhub.Namespaces
     id: azure-arm-eventhub.Namespaces
     name: Namespaces
-    summary: |-
-      Namespaces
-      __NOTE__: An instance of this class is automatically created for an
-      instance of the EventHubManagementClient.
-      Initializes a new instance of the Namespaces class.
+    summary: Class representing a Namespaces.
     fullName: azure-arm-eventhub.Namespaces
     source:
       id: azure-arm-eventhub.Namespaces
       path: lib\services\eventHubManagement\lib\operations\namespaces.js
-      startLine: 2865
+      startLine: 2913
       remote:
         branch: master
         path: lib\services\eventHubManagement\lib\operations\namespaces.js
@@ -21,10 +17,11 @@ items:
     children:
       - 'azure-arm-eventhub.Namespaces.#ctor'
       - >-
-        azure-arm-eventhub.Namespaces#checkNameAvailabilityMethodWithHttpOperationResponse
-      - 'azure-arm-eventhub.Namespaces#checkNameAvailabilityMethod'
-      - 'azure-arm-eventhub.Namespaces#listWithHttpOperationResponse'
-      - 'azure-arm-eventhub.Namespaces#list'
+        azure-arm-eventhub.Namespaces#checkNameAvailabilityWithHttpOperationResponse
+      - 'azure-arm-eventhub.Namespaces#checkNameAvailability'
+      - >-
+        azure-arm-eventhub.Namespaces#listBySubscriptionWithHttpOperationResponse
+      - 'azure-arm-eventhub.Namespaces#listBySubscription'
       - >-
         azure-arm-eventhub.Namespaces#listByResourceGroupWithHttpOperationResponse
       - 'azure-arm-eventhub.Namespaces#listByResourceGroup'
@@ -57,8 +54,9 @@ items:
       - 'azure-arm-eventhub.Namespaces#beginCreateOrUpdate'
       - 'azure-arm-eventhub.Namespaces#beginDeleteMethodWithHttpOperationResponse'
       - 'azure-arm-eventhub.Namespaces#beginDeleteMethod'
-      - 'azure-arm-eventhub.Namespaces#listNextWithHttpOperationResponse'
-      - 'azure-arm-eventhub.Namespaces#listNext'
+      - >-
+        azure-arm-eventhub.Namespaces#listBySubscriptionNextWithHttpOperationResponse
+      - 'azure-arm-eventhub.Namespaces#listBySubscriptionNext'
       - >-
         azure-arm-eventhub.Namespaces#listByResourceGroupNextWithHttpOperationResponse
       - 'azure-arm-eventhub.Namespaces#listByResourceGroupNext'
@@ -70,9 +68,20 @@ items:
   - id: 'azure-arm-eventhub.Namespaces.#ctor'
     uid: 'azure-arm-eventhub.Namespaces.#ctor'
     parent: azure-arm-eventhub.Namespaces
+    name: Namespaces()
+    fullName: azure-arm-eventhub.Namespaces.Namespaces()
+    summary: ''
+    type: Constructor
+    syntax:
+      content: new Namespaces()
+    langs:
+      - js
+  - id: 'azure-arm-eventhub.Namespaces.#ctor'
+    uid: 'azure-arm-eventhub.Namespaces.#ctor'
+    parent: azure-arm-eventhub.Namespaces
     name: Namespaces(client)
     fullName: azure-arm-eventhub.Namespaces.Namespaces(client)
-    summary: ''
+    summary: Create a Namespaces.
     type: Constructor
     syntax:
       parameters:
@@ -84,14 +93,14 @@ items:
     langs:
       - js
   - uid: >-
-      azure-arm-eventhub.Namespaces#checkNameAvailabilityMethodWithHttpOperationResponse
+      azure-arm-eventhub.Namespaces#checkNameAvailabilityWithHttpOperationResponse
     id: >-
-      azure-arm-eventhub.Namespaces#checkNameAvailabilityMethodWithHttpOperationResponse
+      azure-arm-eventhub.Namespaces#checkNameAvailabilityWithHttpOperationResponse
     parent: azure-arm-eventhub.Namespaces
-    name: 'checkNameAvailabilityMethodWithHttpOperationResponse(parameters, options)'
-    summary: Check the give namespace name availability.
+    name: 'checkNameAvailabilityWithHttpOperationResponse(parameters, options)'
+    summary: Check the give Namespace name availability.
     fullName: >-
-      azure-arm-eventhub.Namespaces.checkNameAvailabilityMethodWithHttpOperationResponse(parameters,
+      azure-arm-eventhub.Namespaces.checkNameAvailabilityWithHttpOperationResponse(parameters,
       options)
     tags:
       - originalTitle: resolve
@@ -114,12 +123,12 @@ items:
             - object
           description: |-
             Parameters to check availability of the given
-            namespace name
+            Namespace name
         - id: parameters.name
           type:
             - string
           description: |-
-            The Name to check the namespce name
+            Name to check the namespace name
             availability
         - id: options
           type:
@@ -138,19 +147,18 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function
-        checkNameAvailabilityMethodWithHttpOperationResponse(parameters,
+        function checkNameAvailabilityWithHttpOperationResponse(parameters,
         options)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.Namespaces#checkNameAvailabilityMethod'
-    id: 'azure-arm-eventhub.Namespaces#checkNameAvailabilityMethod'
+  - uid: 'azure-arm-eventhub.Namespaces#checkNameAvailability'
+    id: 'azure-arm-eventhub.Namespaces#checkNameAvailability'
     parent: azure-arm-eventhub.Namespaces
-    name: 'checkNameAvailabilityMethod(parameters, options, optionalCallback)'
-    summary: Check the give namespace name availability.
+    name: 'checkNameAvailability(parameters, options, optionalCallback)'
+    summary: Check the give Namespace name availability.
     fullName: >-
-      azure-arm-eventhub.Namespaces.checkNameAvailabilityMethod(parameters,
-      options, optionalCallback)
+      azure-arm-eventhub.Namespaces.checkNameAvailability(parameters, options,
+      optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -194,12 +202,12 @@ items:
             - object
           description: |-
             Parameters to check availability of the given
-            namespace name
+            Namespace name
         - id: parameters.name
           type:
             - string
           description: |-
-            The Name to check the namespce name
+            Name to check the namespace name
             availability
         - id: options
           type:
@@ -227,19 +235,18 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: >-
-        function checkNameAvailabilityMethod(parameters, options,
-        optionalCallback)
+      content: 'function checkNameAvailability(parameters, options, optionalCallback)'
     langs:
       - js
-  - uid: 'azure-arm-eventhub.Namespaces#listWithHttpOperationResponse'
-    id: 'azure-arm-eventhub.Namespaces#listWithHttpOperationResponse'
+  - uid: 'azure-arm-eventhub.Namespaces#listBySubscriptionWithHttpOperationResponse'
+    id: 'azure-arm-eventhub.Namespaces#listBySubscriptionWithHttpOperationResponse'
     parent: azure-arm-eventhub.Namespaces
-    name: listWithHttpOperationResponse(options)
+    name: listBySubscriptionWithHttpOperationResponse(options)
     summary: |-
-      Lists all the available namespaces within a subscription, irrespective of
+      Lists all the available Namespaces within a subscription, irrespective of
       the resource groups.
-    fullName: azure-arm-eventhub.Namespaces.listWithHttpOperationResponse(options)
+    fullName: >-
+      azure-arm-eventhub.Namespaces.listBySubscriptionWithHttpOperationResponse(options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -272,17 +279,19 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: function listWithHttpOperationResponse(options)
+      content: function listBySubscriptionWithHttpOperationResponse(options)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.Namespaces#list'
-    id: 'azure-arm-eventhub.Namespaces#list'
+  - uid: 'azure-arm-eventhub.Namespaces#listBySubscription'
+    id: 'azure-arm-eventhub.Namespaces#listBySubscription'
     parent: azure-arm-eventhub.Namespaces
-    name: 'list(options, optionalCallback)'
+    name: 'listBySubscription(options, optionalCallback)'
     summary: |-
-      Lists all the available namespaces within a subscription, irrespective of
+      Lists all the available Namespaces within a subscription, irrespective of
       the resource groups.
-    fullName: 'azure-arm-eventhub.Namespaces.list(options, optionalCallback)'
+    fullName: >-
+      azure-arm-eventhub.Namespaces.listBySubscription(options,
+      optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -345,14 +354,14 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function list(options, optionalCallback)'
+      content: 'function listBySubscription(options, optionalCallback)'
     langs:
       - js
   - uid: 'azure-arm-eventhub.Namespaces#listByResourceGroupWithHttpOperationResponse'
     id: 'azure-arm-eventhub.Namespaces#listByResourceGroupWithHttpOperationResponse'
     parent: azure-arm-eventhub.Namespaces
     name: 'listByResourceGroupWithHttpOperationResponse(resourceGroupName, options)'
-    summary: Lists the available namespaces within a resource group.
+    summary: Lists the available Namespaces within a resource group.
     fullName: >-
       azure-arm-eventhub.Namespaces.listByResourceGroupWithHttpOperationResponse(resourceGroupName,
       options)
@@ -376,8 +385,8 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: options
           type:
             - object
@@ -403,7 +412,7 @@ items:
     id: 'azure-arm-eventhub.Namespaces#listByResourceGroup'
     parent: azure-arm-eventhub.Namespaces
     name: 'listByResourceGroup(resourceGroupName, options, optionalCallback)'
-    summary: Lists the available namespaces within a resource group.
+    summary: Lists the available Namespaces within a resource group.
     fullName: >-
       azure-arm-eventhub.Namespaces.listByResourceGroup(resourceGroupName,
       options, optionalCallback)
@@ -447,8 +456,8 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: options
           type:
             - object
@@ -495,8 +504,12 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{HttpOperationResponse<Namespace>} - The deserialized result object.'
-        value: '{HttpOperationResponse<Namespace>} - The deserialized result object.'
+        text: >-
+          {HttpOperationResponse<NamespaceResource>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<NamespaceResource>} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -508,16 +521,20 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: parameters
           type:
             - object
           description: Parameters for creating a namespace resource.
+        - id: parameters.location
+          type:
+            - string
+          description: Namespace location.
         - id: parameters.sku
           type:
             - object
@@ -539,16 +556,52 @@ items:
         - id: parameters.sku.capacity
           type:
             - number
-          description: The EventHubs throughput units.
+          description: The Event Hubs throughput units.
           optional: true
-        - id: parameters.location
-          type:
-            - string
-          description: Resource location
         - id: parameters.tags
           type:
             - object
-          description: Resource tags
+          description: Namespace tags.
+          optional: true
+        - id: parameters.status
+          type:
+            - string
+          description: |-
+            State of the Namespace. Possible values
+            include: 'Unknown', 'Creating', 'Created', 'Activating', 'Enabling',
+            'Active', 'Disabling', 'Disabled', 'SoftDeleting', 'SoftDeleted',
+            'Removing', 'Removed', 'Failed'
+          optional: true
+        - id: parameters.provisioningState
+          type:
+            - string
+          description: |-
+            Provisioning state of the
+            Namespace.
+          optional: true
+        - id: parameters.createdAt
+          type:
+            - date
+          description: The time the Namespace was created.
+          optional: true
+        - id: parameters.updatedAt
+          type:
+            - date
+          description: The time the Namespace was updated.
+          optional: true
+        - id: parameters.serviceBusEndpoint
+          type:
+            - string
+          description: |-
+            Endpoint you can use to
+            perform Service Bus operations.
+          optional: true
+        - id: parameters.enabled
+          type:
+            - boolean
+          description: |-
+            Specifies whether this instance is
+            enabled.
           optional: true
         - id: options
           type:
@@ -586,8 +639,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{Namespace} - The deserialized result object.'
-        value: '{Namespace} - The deserialized result object.'
+        text: '{NamespaceResource} - The deserialized result object.'
+        value: '{NamespaceResource} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -598,7 +651,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Namespace} for more information.
+                               See {@link NamespaceResource} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -611,7 +664,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Namespace} for more information.
+                               See {@link NamespaceResource} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -623,16 +676,20 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: parameters
           type:
             - object
           description: Parameters for creating a namespace resource.
+        - id: parameters.location
+          type:
+            - string
+          description: Namespace location.
         - id: parameters.sku
           type:
             - object
@@ -654,16 +711,52 @@ items:
         - id: parameters.sku.capacity
           type:
             - number
-          description: The EventHubs throughput units.
+          description: The Event Hubs throughput units.
           optional: true
-        - id: parameters.location
-          type:
-            - string
-          description: Resource location
         - id: parameters.tags
           type:
             - object
-          description: Resource tags
+          description: Namespace tags.
+          optional: true
+        - id: parameters.status
+          type:
+            - string
+          description: |-
+            State of the Namespace. Possible values
+            include: 'Unknown', 'Creating', 'Created', 'Activating', 'Enabling',
+            'Active', 'Disabling', 'Disabled', 'SoftDeleting', 'SoftDeleted',
+            'Removing', 'Removed', 'Failed'
+          optional: true
+        - id: parameters.provisioningState
+          type:
+            - string
+          description: |-
+            Provisioning state of the
+            Namespace.
+          optional: true
+        - id: parameters.createdAt
+          type:
+            - date
+          description: The time the Namespace was created.
+          optional: true
+        - id: parameters.updatedAt
+          type:
+            - date
+          description: The time the Namespace was updated.
+          optional: true
+        - id: parameters.serviceBusEndpoint
+          type:
+            - string
+          description: |-
+            Endpoint you can use to
+            perform Service Bus operations.
+          optional: true
+        - id: parameters.enabled
+          type:
+            - boolean
+          description: |-
+            Specifies whether this instance is
+            enabled.
           optional: true
         - id: options
           type:
@@ -724,12 +817,12 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: options
           type:
             - object
@@ -799,12 +892,12 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: options
           type:
             - object
@@ -847,8 +940,12 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{HttpOperationResponse<Namespace>} - The deserialized result object.'
-        value: '{HttpOperationResponse<Namespace>} - The deserialized result object.'
+        text: >-
+          {HttpOperationResponse<NamespaceResource>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<NamespaceResource>} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -860,12 +957,12 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: options
           type:
             - object
@@ -898,8 +995,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{Namespace} - The deserialized result object.'
-        value: '{Namespace} - The deserialized result object.'
+        text: '{NamespaceResource} - The deserialized result object.'
+        value: '{NamespaceResource} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -910,7 +1007,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Namespace} for more information.
+                               See {@link NamespaceResource} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -923,7 +1020,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Namespace} for more information.
+                               See {@link NamespaceResource} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -935,12 +1032,12 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: options
           type:
             - object
@@ -987,8 +1084,12 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{HttpOperationResponse<Namespace>} - The deserialized result object.'
-        value: '{HttpOperationResponse<Namespace>} - The deserialized result object.'
+        text: >-
+          {HttpOperationResponse<NamespaceResource>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<NamespaceResource>} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -1000,12 +1101,12 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: parameters
           type:
             - object
@@ -1018,7 +1119,7 @@ items:
         - id: parameters.sku
           type:
             - object
-          description: The sku of the created namespace
+          description: The sku of the created Namespace
           optional: true
         - id: parameters.sku.name
           type:
@@ -1036,7 +1137,7 @@ items:
         - id: parameters.sku.capacity
           type:
             - number
-          description: The EventHubs throughput units.
+          description: The Event Hubs throughput units.
           optional: true
         - id: options
           type:
@@ -1074,8 +1175,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{Namespace} - The deserialized result object.'
-        value: '{Namespace} - The deserialized result object.'
+        text: '{NamespaceResource} - The deserialized result object.'
+        value: '{NamespaceResource} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -1086,7 +1187,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Namespace} for more information.
+                               See {@link NamespaceResource} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1099,7 +1200,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Namespace} for more information.
+                               See {@link NamespaceResource} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1111,12 +1212,12 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: parameters
           type:
             - object
@@ -1129,7 +1230,7 @@ items:
         - id: parameters.sku
           type:
             - object
-          description: The sku of the created namespace
+          description: The sku of the created Namespace
           optional: true
         - id: parameters.sku.name
           type:
@@ -1147,7 +1248,7 @@ items:
         - id: parameters.sku.capacity
           type:
             - number
-          description: The EventHubs throughput units.
+          description: The Event Hubs throughput units.
           optional: true
         - id: options
           type:
@@ -1188,7 +1289,7 @@ items:
     name: >-
       listAuthorizationRulesWithHttpOperationResponse(resourceGroupName,
       namespaceName, options)
-    summary: Gets a list of authorization rules for a namespace.
+    summary: Gets a list of authorization rules for a Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.listAuthorizationRulesWithHttpOperationResponse(resourceGroupName,
       namespaceName, options)
@@ -1212,12 +1313,12 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: options
           type:
             - object
@@ -1246,7 +1347,7 @@ items:
     name: >-
       listAuthorizationRules(resourceGroupName, namespaceName, options,
       optionalCallback)
-    summary: Gets a list of authorization rules for a namespace.
+    summary: Gets a list of authorization rules for a Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.listAuthorizationRules(resourceGroupName,
       namespaceName, options, optionalCallback)
@@ -1296,12 +1397,12 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: options
           type:
             - object
@@ -1341,7 +1442,7 @@ items:
     name: >-
       createOrUpdateAuthorizationRuleWithHttpOperationResponse(resourceGroupName,
       namespaceName, authorizationRuleName, parameters, options)
-    summary: Creates or updates an authorization rule for a namespace.
+    summary: Creates or updates an AuthorizationRule for a Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.createOrUpdateAuthorizationRuleWithHttpOperationResponse(resourceGroupName,
       namespaceName, authorizationRuleName, parameters, options)
@@ -1349,10 +1450,10 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRule>} - The
+          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
           deserialized result object.
         value: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRule>} - The
+          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
           deserialized result object.
       - originalTitle: reject
         title: reject
@@ -1365,20 +1466,30 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: authorizationRuleName
           type:
             - string
-          description: The authorizationrule name.
+          description: The authorization rule name.
         - id: parameters
           type:
             - object
-          description: The shared access authorization rule.
+          description: The shared access AuthorizationRule.
+        - id: parameters.location
+          type:
+            - string
+          description: Data center location.
+          optional: true
+        - id: parameters.name
+          type:
+            - string
+          description: Name of the AuthorizationRule.
+          optional: true
         - id: parameters.rights
           type:
             - array
@@ -1411,7 +1522,7 @@ items:
     name: >-
       createOrUpdateAuthorizationRule(resourceGroupName, namespaceName,
       authorizationRuleName, parameters, options, optionalCallback)
-    summary: Creates or updates an authorization rule for a namespace.
+    summary: Creates or updates an AuthorizationRule for a Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.createOrUpdateAuthorizationRule(resourceGroupName,
       namespaceName, authorizationRuleName, parameters, options,
@@ -1419,8 +1530,12 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{SharedAccessAuthorizationRule} - The deserialized result object.'
-        value: '{SharedAccessAuthorizationRule} - The deserialized result object.'
+        text: >-
+          {SharedAccessAuthorizationRuleResource} - The deserialized result
+          object.
+        value: >-
+          {SharedAccessAuthorizationRuleResource} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: |-
@@ -1431,8 +1546,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRule} for more
-                               information.
+                               See {@link SharedAccessAuthorizationRuleResource} for
+                               more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1445,8 +1560,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRule} for more
-                               information.
+                               See {@link SharedAccessAuthorizationRuleResource} for
+                               more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1458,20 +1573,30 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: authorizationRuleName
           type:
             - string
-          description: The authorizationrule name.
+          description: The authorization rule name.
         - id: parameters
           type:
             - object
-          description: The shared access authorization rule.
+          description: The shared access AuthorizationRule.
+        - id: parameters.location
+          type:
+            - string
+          description: Data center location.
+          optional: true
+        - id: parameters.name
+          type:
+            - string
+          description: Name of the AuthorizationRule.
+          optional: true
         - id: parameters.rights
           type:
             - array
@@ -1516,7 +1641,7 @@ items:
     name: >-
       deleteAuthorizationRuleWithHttpOperationResponse(resourceGroupName,
       namespaceName, authorizationRuleName, options)
-    summary: Deletes an authorization rule for a namespace.
+    summary: Deletes an AuthorizationRule for a Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.deleteAuthorizationRuleWithHttpOperationResponse(resourceGroupName,
       namespaceName, authorizationRuleName, options)
@@ -1536,16 +1661,16 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: authorizationRuleName
           type:
             - string
-          description: The authorizationrule name.
+          description: The authorization rule name.
         - id: options
           type:
             - object
@@ -1574,7 +1699,7 @@ items:
     name: >-
       deleteAuthorizationRule(resourceGroupName, namespaceName,
       authorizationRuleName, options, optionalCallback)
-    summary: Deletes an authorization rule for a namespace.
+    summary: Deletes an AuthorizationRule for a Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.deleteAuthorizationRule(resourceGroupName,
       namespaceName, authorizationRuleName, options, optionalCallback)
@@ -1616,16 +1741,16 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: authorizationRuleName
           type:
             - string
-          description: The authorizationrule name.
+          description: The authorization rule name.
         - id: options
           type:
             - object
@@ -1665,7 +1790,7 @@ items:
     name: >-
       getAuthorizationRuleWithHttpOperationResponse(resourceGroupName,
       namespaceName, authorizationRuleName, options)
-    summary: Gets an authorization rule for a namespace by rule name.
+    summary: Gets an AuthorizationRule for a Namespace by rule name.
     fullName: >-
       azure-arm-eventhub.Namespaces.getAuthorizationRuleWithHttpOperationResponse(resourceGroupName,
       namespaceName, authorizationRuleName, options)
@@ -1673,10 +1798,10 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRule>} - The
+          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
           deserialized result object.
         value: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRule>} - The
+          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
           deserialized result object.
       - originalTitle: reject
         title: reject
@@ -1689,16 +1814,16 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: authorizationRuleName
           type:
             - string
-          description: The authorizationrule name.
+          description: The authorization rule name.
         - id: options
           type:
             - object
@@ -1727,15 +1852,19 @@ items:
     name: >-
       getAuthorizationRule(resourceGroupName, namespaceName,
       authorizationRuleName, options, optionalCallback)
-    summary: Gets an authorization rule for a namespace by rule name.
+    summary: Gets an AuthorizationRule for a Namespace by rule name.
     fullName: >-
       azure-arm-eventhub.Namespaces.getAuthorizationRule(resourceGroupName,
       namespaceName, authorizationRuleName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{SharedAccessAuthorizationRule} - The deserialized result object.'
-        value: '{SharedAccessAuthorizationRule} - The deserialized result object.'
+        text: >-
+          {SharedAccessAuthorizationRuleResource} - The deserialized result
+          object.
+        value: >-
+          {SharedAccessAuthorizationRuleResource} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: |-
@@ -1746,8 +1875,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRule} for more
-                               information.
+                               See {@link SharedAccessAuthorizationRuleResource} for
+                               more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1760,8 +1889,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRule} for more
-                               information.
+                               See {@link SharedAccessAuthorizationRuleResource} for
+                               more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1773,16 +1902,16 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: authorizationRuleName
           type:
             - string
-          description: The authorizationrule name.
+          description: The authorization rule name.
         - id: options
           type:
             - object
@@ -1820,7 +1949,7 @@ items:
     name: >-
       listKeysWithHttpOperationResponse(resourceGroupName, namespaceName,
       authorizationRuleName, options)
-    summary: Gets the primary and secondary connection strings for the namespace.
+    summary: Gets the primary and secondary connection strings for the Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.listKeysWithHttpOperationResponse(resourceGroupName,
       namespaceName, authorizationRuleName, options)
@@ -1844,16 +1973,16 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: authorizationRuleName
           type:
             - string
-          description: The authorizationrule name.
+          description: The authorization rule name.
         - id: options
           type:
             - object
@@ -1881,7 +2010,7 @@ items:
     name: >-
       listKeys(resourceGroupName, namespaceName, authorizationRuleName, options,
       optionalCallback)
-    summary: Gets the primary and secondary connection strings for the namespace.
+    summary: Gets the primary and secondary connection strings for the Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.listKeys(resourceGroupName, namespaceName,
       authorizationRuleName, options, optionalCallback)
@@ -1925,16 +2054,16 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: authorizationRuleName
           type:
             - string
-          description: The authorizationrule name.
+          description: The authorization rule name.
         - id: options
           type:
             - object
@@ -1974,7 +2103,7 @@ items:
       authorizationRuleName, parameters, options)
     summary: |-
       Regenerates the primary or secondary connection strings for the specified
-      namespace.
+      Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.regenerateKeysWithHttpOperationResponse(resourceGroupName,
       namespaceName, authorizationRuleName, parameters, options)
@@ -1998,16 +2127,16 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: authorizationRuleName
           type:
             - string
-          description: The authorizationrule name.
+          description: The authorization rule name.
         - id: parameters
           type:
             - object
@@ -2050,7 +2179,7 @@ items:
       parameters, options, optionalCallback)
     summary: |-
       Regenerates the primary or secondary connection strings for the specified
-      namespace.
+      Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.regenerateKeys(resourceGroupName,
       namespaceName, authorizationRuleName, parameters, options,
@@ -2095,16 +2224,16 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: authorizationRuleName
           type:
             - string
-          description: The authorizationrule name.
+          description: The authorization rule name.
         - id: parameters
           type:
             - object
@@ -2164,8 +2293,12 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{HttpOperationResponse<Namespace>} - The deserialized result object.'
-        value: '{HttpOperationResponse<Namespace>} - The deserialized result object.'
+        text: >-
+          {HttpOperationResponse<NamespaceResource>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<NamespaceResource>} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -2177,16 +2310,20 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: parameters
           type:
             - object
           description: Parameters for creating a namespace resource.
+        - id: parameters.location
+          type:
+            - string
+          description: Namespace location.
         - id: parameters.sku
           type:
             - object
@@ -2208,16 +2345,52 @@ items:
         - id: parameters.sku.capacity
           type:
             - number
-          description: The EventHubs throughput units.
+          description: The Event Hubs throughput units.
           optional: true
-        - id: parameters.location
-          type:
-            - string
-          description: Resource location
         - id: parameters.tags
           type:
             - object
-          description: Resource tags
+          description: Namespace tags.
+          optional: true
+        - id: parameters.status
+          type:
+            - string
+          description: |-
+            State of the Namespace. Possible values
+            include: 'Unknown', 'Creating', 'Created', 'Activating', 'Enabling',
+            'Active', 'Disabling', 'Disabled', 'SoftDeleting', 'SoftDeleted',
+            'Removing', 'Removed', 'Failed'
+          optional: true
+        - id: parameters.provisioningState
+          type:
+            - string
+          description: |-
+            Provisioning state of the
+            Namespace.
+          optional: true
+        - id: parameters.createdAt
+          type:
+            - date
+          description: The time the Namespace was created.
+          optional: true
+        - id: parameters.updatedAt
+          type:
+            - date
+          description: The time the Namespace was updated.
+          optional: true
+        - id: parameters.serviceBusEndpoint
+          type:
+            - string
+          description: |-
+            Endpoint you can use to
+            perform Service Bus operations.
+          optional: true
+        - id: parameters.enabled
+          type:
+            - boolean
+          description: |-
+            Specifies whether this instance is
+            enabled.
           optional: true
         - id: options
           type:
@@ -2255,8 +2428,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{Namespace} - The deserialized result object.'
-        value: '{Namespace} - The deserialized result object.'
+        text: '{NamespaceResource} - The deserialized result object.'
+        value: '{NamespaceResource} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -2267,7 +2440,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Namespace} for more information.
+                               See {@link NamespaceResource} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -2280,7 +2453,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Namespace} for more information.
+                               See {@link NamespaceResource} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -2292,16 +2465,20 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: parameters
           type:
             - object
           description: Parameters for creating a namespace resource.
+        - id: parameters.location
+          type:
+            - string
+          description: Namespace location.
         - id: parameters.sku
           type:
             - object
@@ -2323,16 +2500,52 @@ items:
         - id: parameters.sku.capacity
           type:
             - number
-          description: The EventHubs throughput units.
+          description: The Event Hubs throughput units.
           optional: true
-        - id: parameters.location
-          type:
-            - string
-          description: Resource location
         - id: parameters.tags
           type:
             - object
-          description: Resource tags
+          description: Namespace tags.
+          optional: true
+        - id: parameters.status
+          type:
+            - string
+          description: |-
+            State of the Namespace. Possible values
+            include: 'Unknown', 'Creating', 'Created', 'Activating', 'Enabling',
+            'Active', 'Disabling', 'Disabled', 'SoftDeleting', 'SoftDeleted',
+            'Removing', 'Removed', 'Failed'
+          optional: true
+        - id: parameters.provisioningState
+          type:
+            - string
+          description: |-
+            Provisioning state of the
+            Namespace.
+          optional: true
+        - id: parameters.createdAt
+          type:
+            - date
+          description: The time the Namespace was created.
+          optional: true
+        - id: parameters.updatedAt
+          type:
+            - date
+          description: The time the Namespace was updated.
+          optional: true
+        - id: parameters.serviceBusEndpoint
+          type:
+            - string
+          description: |-
+            Endpoint you can use to
+            perform Service Bus operations.
+          optional: true
+        - id: parameters.enabled
+          type:
+            - boolean
+          description: |-
+            Specifies whether this instance is
+            enabled.
           optional: true
         - id: options
           type:
@@ -2393,12 +2606,12 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: options
           type:
             - object
@@ -2470,12 +2683,12 @@ items:
           type:
             - string
           description: |-
-            Name of the Resource group within the
-            Azure subscription.
+            Name of the resource group within the
+            azure subscription.
         - id: namespaceName
           type:
             - string
-          description: The namespace name
+          description: The Namespace name
         - id: options
           type:
             - object
@@ -2507,15 +2720,17 @@ items:
         optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.Namespaces#listNextWithHttpOperationResponse'
-    id: 'azure-arm-eventhub.Namespaces#listNextWithHttpOperationResponse'
+  - uid: >-
+      azure-arm-eventhub.Namespaces#listBySubscriptionNextWithHttpOperationResponse
+    id: >-
+      azure-arm-eventhub.Namespaces#listBySubscriptionNextWithHttpOperationResponse
     parent: azure-arm-eventhub.Namespaces
-    name: 'listNextWithHttpOperationResponse(nextPageLink, options)'
+    name: 'listBySubscriptionNextWithHttpOperationResponse(nextPageLink, options)'
     summary: |-
-      Lists all the available namespaces within a subscription, irrespective of
+      Lists all the available Namespaces within a subscription, irrespective of
       the resource groups.
     fullName: >-
-      azure-arm-eventhub.Namespaces.listNextWithHttpOperationResponse(nextPageLink,
+      azure-arm-eventhub.Namespaces.listBySubscriptionNextWithHttpOperationResponse(nextPageLink,
       options)
     tags:
       - originalTitle: resolve
@@ -2555,19 +2770,21 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: 'function listNextWithHttpOperationResponse(nextPageLink, options)'
+      content: >-
+        function listBySubscriptionNextWithHttpOperationResponse(nextPageLink,
+        options)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.Namespaces#listNext'
-    id: 'azure-arm-eventhub.Namespaces#listNext'
+  - uid: 'azure-arm-eventhub.Namespaces#listBySubscriptionNext'
+    id: 'azure-arm-eventhub.Namespaces#listBySubscriptionNext'
     parent: azure-arm-eventhub.Namespaces
-    name: 'listNext(nextPageLink, options, optionalCallback)'
+    name: 'listBySubscriptionNext(nextPageLink, options, optionalCallback)'
     summary: |-
-      Lists all the available namespaces within a subscription, irrespective of
+      Lists all the available Namespaces within a subscription, irrespective of
       the resource groups.
     fullName: >-
-      azure-arm-eventhub.Namespaces.listNext(nextPageLink, options,
-      optionalCallback)
+      azure-arm-eventhub.Namespaces.listBySubscriptionNext(nextPageLink,
+      options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -2636,7 +2853,7 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function listNext(nextPageLink, options, optionalCallback)'
+      content: 'function listBySubscriptionNext(nextPageLink, options, optionalCallback)'
     langs:
       - js
   - uid: >-
@@ -2645,7 +2862,7 @@ items:
       azure-arm-eventhub.Namespaces#listByResourceGroupNextWithHttpOperationResponse
     parent: azure-arm-eventhub.Namespaces
     name: 'listByResourceGroupNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: Lists the available namespaces within a resource group.
+    summary: Lists the available Namespaces within a resource group.
     fullName: >-
       azure-arm-eventhub.Namespaces.listByResourceGroupNextWithHttpOperationResponse(nextPageLink,
       options)
@@ -2696,7 +2913,7 @@ items:
     id: 'azure-arm-eventhub.Namespaces#listByResourceGroupNext'
     parent: azure-arm-eventhub.Namespaces
     name: 'listByResourceGroupNext(nextPageLink, options, optionalCallback)'
-    summary: Lists the available namespaces within a resource group.
+    summary: Lists the available Namespaces within a resource group.
     fullName: >-
       azure-arm-eventhub.Namespaces.listByResourceGroupNext(nextPageLink,
       options, optionalCallback)
@@ -2779,7 +2996,7 @@ items:
       azure-arm-eventhub.Namespaces#listAuthorizationRulesNextWithHttpOperationResponse
     parent: azure-arm-eventhub.Namespaces
     name: 'listAuthorizationRulesNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: Gets a list of authorization rules for a namespace.
+    summary: Gets a list of authorization rules for a Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.listAuthorizationRulesNextWithHttpOperationResponse(nextPageLink,
       options)
@@ -2831,7 +3048,7 @@ items:
     id: 'azure-arm-eventhub.Namespaces#listAuthorizationRulesNext'
     parent: azure-arm-eventhub.Namespaces
     name: 'listAuthorizationRulesNext(nextPageLink, options, optionalCallback)'
-    summary: Gets a list of authorization rules for a namespace.
+    summary: Gets a list of authorization rules for a Namespace.
     fullName: >-
       azure-arm-eventhub.Namespaces.listAuthorizationRulesNext(nextPageLink,
       options, optionalCallback)

@@ -14,7 +14,7 @@ ms.service: azure-nodejs
 
 # Get started with the Azure modules for Node.js
 
-This guide walks you through installing some Azure Node.js modules, authenticating to Azure with a service principal, and running sample code that creates resources in your Azure subscription and connects to Azure cloud services.
+This guide walks you through installing Azure Node.js modules, authenticating to Azure with a service principal, and running sample code that creates resources in your Azure subscription and connects to Azure cloud services.
 
 ## Prerequisites
 
@@ -24,14 +24,14 @@ This guide walks you through installing some Azure Node.js modules, authenticati
 
 [!INCLUDE [azure-cloud-shell](../docs-ref-conceptual/includes/cloud-shell-try-it.md)]
 
-## Prepare your environemnt
+## Prepare your environment
 
 Create a new project in an empty directory and install the following npm modules:
 
 ```bash
 cd azure-node-quickstart
 npm init -y
-npm install --save azure ms-rest-azure azure-arm-compute azure-arm-website azure-storage
+npm install --save azure ms-rest-azure azure-arm-compute azure-arm-network azure-storage azure-arm-storage
 ```
 
 ## Set up authentication
@@ -41,7 +41,7 @@ Your Node.js applications need read and create permissions in your Azure subscri
 [Create a service principal using the Azure CLI 2.0](https://docs.microsoft.com/cli/azure/create-an-azure-service-principal-azure-cli) and capture the output. You'll need to provide a [secure password](https://docs.microsoft.com/azure/active-directory/active-directory-passwords-policy) in the password argument instead of `MY_SECURE_PASSWORD`.
 
 ```azurecli-interactive
-az ad sp create-for-rbac --name AzureNodeTest --password "MY_SECURE_PASSWORD"
+az ad sp create-for-rbac --name AzureNodeTest --password MY_SECURE_PASSWORD
 ```
 
 ```json
@@ -54,7 +54,7 @@ az ad sp create-for-rbac --name AzureNodeTest --password "MY_SECURE_PASSWORD"
 }
 ```
 
-Export the values for  *appId*, *password* and *tenant* as environment variables.
+Export the values for *appId*, *password* and *tenant* as environment variables:
 
 ```bash
 export AZURE_ID a487e0c1-82af-47d9-9a0b-af184eb87646d
@@ -79,12 +79,12 @@ az account show
 Export the subscription ID as an environment variable
 
 ```bash
-export AZURE_SUB 3069ff33-0398-4a99-a42b-f6613d1664ac
+export AZURE_SUB 306943934-0323-4ae4d-a42b-f6613d1664ac
 ```
 
-## Create a new virtual machine
+## Create a Linux virtual machine
 
-Create a new file *createVM.js* in the current directory with the following code.
+Create a new file *createVM.js* in the current directory with the following code. Update the value of `adminPass` with a good password.
 
 ```javascript
 'use strict';
@@ -96,6 +96,7 @@ const NetworkManagementClient = require('azure-arm-network');
 MsRest.loginWithServicePrincipalSecret(
     process.env.AZURE_ID, process.env.AZURE_PASS, process.env.AZURE_TENANT, (err, credentials) => {
 
+        let adminPass = YOUR_VALUE_HERE;
         const networkClient = new NetworkManagementClient(credentials, process.env.AZURE_SUB);
         const computeClient = new ComputeManagementClient(credentials, process.env.AZURE_SUB);
 
@@ -125,7 +126,7 @@ MsRest.loginWithServicePrincipalSecret(
             osProfile: {
                 computerName: "newLinuxVM",
                 adminUsername: "testadmin",
-                adminPassword: "[B5^3{Ds"
+                adminPassword: admin_password
             },
             hardwareProfile: {
                 vmSize: 'Basic_A1'
@@ -180,7 +181,7 @@ Run the code from the command line:
 node createVM.js
 ```
 
-Once the code completes, get the IP of your new virtual machine and log in with SSH using the value for `adminPassword` from your code.
+Once the code completes, get the IP of your new virtual machine and log in with SSH using the value for `adminPass` from your code.
 
 ```azurecli-interactive
 az vm list-ip-addresses --name newLinuxVM
@@ -239,7 +240,7 @@ MsRest.loginWithServicePrincipalSecret(process.env.AZURE_ID, process.env.AZURE_P
 });
 ```
 
-Run the command and copy and paste the URL from the output in your web browser to view the file in Azure Storage:
+Run the command and then copy and paste the URL from the output into your web browser to view the file in Azure Storage:
 
 ```bash
 node uploadFile.js
@@ -247,7 +248,7 @@ node uploadFile.js
 
 ## Clean up resources
 
-Delete the resource group to remove the resources created in this quickstart.
+Delete the resource group to remove the resources created in this guide.
 
 ```azurecli-interactive
 az group delete --name myResourceGroup

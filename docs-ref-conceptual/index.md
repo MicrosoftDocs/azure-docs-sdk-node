@@ -59,7 +59,7 @@ ms.service: azure-nodejs
 Create and deploy a sample app in five minutes.
 <ul class="noBullet">
    <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Create a web app</a></li>
-   <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Create and trigger serverless code</a></li>
+   <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Run code in a serverless environment</a></li>
    <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Deploy a Docker image to a Kubernetes cluster</a></li>
 </ul>
 

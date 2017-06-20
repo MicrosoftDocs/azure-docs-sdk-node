@@ -135,15 +135,15 @@ You can see which libraries support this auto-complete capability by browsing th
 
 Once you've explored the code a bit, it's time to run the app. To run the app from Visual Studio Code, press **&lt;F5>**. When running the code via **&lt;F5>** (debug mode), Visual Studio Code launches the app and displays the **Debug Console** window that displays stdout for the app.
 
-![Peek at a variable's definition](./media/node-howto-e2e/console.png)
+![Monitoring an app's stdout via the Debug console](./media/node-howto-e2e/console.png)
 
 Additionally, the **Debug Console** is attached to the newly running app so you can type JavaScript expressions, which will be evaluated in the app, and also includes auto-completion. To see this in action, type `process.env` in the console:
 
-![Peek at a variable's definition](./media/node-howto-e2e/console-code.png)
+![Typing code into the Debug console](./media/node-howto-e2e/console-code.png)
 
 You were able to press **&lt;F5>** to run the app because the currently open file is a JavaScript file (`server.js`). As a result, Visual Studio Code assumes that the project is a Node.js app. If you close all JavaScript files in Visual Studio Code, and then press **&lt;F5>**, Visual Studio Code will query you as the environment:
 
-![Peek at a variable's definition](./media/node-howto-e2e/select-env.png)
+![Specifying the runtime environment](./media/node-howto-e2e/select-env.png)
 
 Open a browser, and navigate to `http://localhost:8080` to see the running app. Type a message into the textbox and add/remove a few todos to get a feel for how the app works.
 

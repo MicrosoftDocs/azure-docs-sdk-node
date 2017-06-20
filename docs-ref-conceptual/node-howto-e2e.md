@@ -24,12 +24,12 @@ In order to follow along with the demo, you'll need to have the following softwa
 
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Docker](https://www.docker.com/products/docker)
-- [DockerHub account](https://hub.docker.com/) - You'll need to have a DockerHub account in order to publish the Docker images that will be created in this tutorial.
+- [DockerHub account](https://hub.docker.com/)
 - [Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2)
 - [Azure account](https://azure.microsoft.com/free/)
 - [Yarn](https://yarnpkg.com/en/docs/install)
 - [Chrome](https://www.google.com/chrome/browser/desktop/) - Used for debugging the demo app's front-end.
-- MongoDB - Since the demo app uses MongoDB, you need to have a locally running MongoDB instance that is listening on the standard `27017` port. The simplest way to achieve this is by running the following command after Docker is installed: `docker run -it -p 27017:27017 mongo`.
+- MongoDB - Since the demo app uses MongoDB, you need to have a locally running MongoDB instance that is listening on the standard `27017` port. The simplest way to achieve this is by running the following two commands after Docker is installed: `docker pull mongo` followed by `docker run -it -p 27017:27017 mongo`.
 
 ## Project setup
 

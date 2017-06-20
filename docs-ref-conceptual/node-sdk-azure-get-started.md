@@ -20,11 +20,9 @@ This guide walks you through installing some Azure Node.js modules, authenticati
 
 - An Azure account. If you don't have one , [get a free trial](https://azure.microsoft.com/free/)
 - [Node.js](https://nodejs.org)
-- [Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2) or use [Azure Cloud Shell](https://docs.microsoft.coms/azure/cloud-shell/quickstart)
+- [Azure Cloud Shell](https://docs.microsoft.coms/azure/cloud-shell/quickstart) or [Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2).
 
-The [Azure Cloud Shell](https://docs.microsoft.coms/azure/cloud-shell/quickstart) (in public preview) is a web-based shell that is preconfigured to simplify using Azure tools. With Cloud Shell, you always have the most up-to-date version of the tools available and you don’t have to install, update or separately log in. Click the **Try It** button at the top right of an Azure CLI code block to launch the Cloud Shell. Then, use the **Copy** button to copy and paste the sample code into the Cloud Shell.
-
-You can also open the Cloud Shell from the Azure portal by clicking the ![Cloud Shell](cs-button.png) button on the top navigation. 
+[!INCLUDE [azure-cloud-shell](../docs-ref-conceptual/includes/cloud-shell-try-it.md)]
 
 ## Prepare your environemnt
 

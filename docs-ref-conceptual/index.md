@@ -59,7 +59,7 @@ Build great Node.js apps on Azure.
 
 ## Five-minute quickstarts
 Create and deploy a sample app in five minutes.
-<ul>
+<ul class="noBullet">
    <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
    <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
    <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Docker and Kubernetes</a></li>
@@ -117,6 +117,6 @@ msRestAzure.interactiveLogin((err, credentials) => {
 
 Learn how to use Azure services in your Node.js apps.
 
-<ul>
+<ul class="noBullet">
     <li><a href="https://docs.microsoft.com/azure/app-service-web/app-service-web-tutorial-nodejs-mongodb-app">Node.js with MongoDB</a></li>
 </ul>

@@ -14,7 +14,7 @@ ms.service: azure-nodejs
 
 # Azure modules for Node.js
 
-The Azure modules for Node.js help you manage Azure resources and connect to services from your applications. The libraries are available as [npm modules](node-sdk-azure-install.md) for use in your projects. 
+The Azure modules for Node.js help you manage Azure resources and connect to services from your applications. The code is available as [npm modules](node-sdk-azure-install.md) for use in your projects. 
 
 ## Manage Azure resources
 

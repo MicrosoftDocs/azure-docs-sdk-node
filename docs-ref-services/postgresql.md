@@ -1,5 +1,5 @@
 ---
-title: Azure Database for PostgreSQL libraries for Node.js
+title: Azure Database for PostgreSQL modules for Node.js
 description: Create and manage PostgreSQL resources from your Node.js apps.
 keywords: Azure, Node, SDK, API, nodejs, javascript, database, PostgreSQL
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: postgresql
 ---
 
-# Azure Database for PostgreSQL libraries for Node.js
+# Azure Database for PostgreSQL modules for Node.js
 
 ## Overview
 

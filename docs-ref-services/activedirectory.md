@@ -1,5 +1,5 @@
 ---
-title: Azure Active Directory libraries for Node.js
+title: Azure Active Directory modules for Node.js
 description: Leverage Azure Active Directory from your Node.js apps.
 keywords: Azure, Node, SDK, API, Storage, nodejs, javascript
 author: tomarcher

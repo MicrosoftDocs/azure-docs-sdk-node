@@ -15,8 +15,6 @@ ms.service: azure-nodejs
 
 # Azure for Node.js developers
 
-Build great Node.js apps on Azure.
-
 <ul class="cardsY panelContent">
     <li>
         <a href="node-azure-tools.md">
@@ -47,7 +45,7 @@ Build great Node.js apps on Azure.
                             </div>
                         </div>
                         <div class="cardText">
-                            <h2>Libraries</h2>
+                            <h2>Modules</h2>
                             Use services and manage Azure resources.
                         </div>
                     </div>
@@ -60,9 +58,9 @@ Build great Node.js apps on Azure.
 ## Five-minute quickstarts
 Create and deploy a sample app in five minutes.
 <ul class="noBullet">
-   <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Web Apps</a></li>
-   <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Azure Functions</a></li>
-   <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Docker and Kubernetes</a></li>
+   <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Create a web app</a></li>
+   <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Create and trigger serverless code</a></li>
+   <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Deploy a Docker image to a Kubernetes cluster</a></li>
 </ul>
 
 ## Free PluralSight video training
@@ -96,16 +94,15 @@ Install [Azure npm modules](node-sdk-azure-get-started.md) to manage Azure resou
 const msRestAzure = require('ms-rest-azure');
 const computeManagementClient = require('azure-arm-compute');
 
-// Interactive Login - provides a url, and a code that needs to be copied and pasted in a browser.  
-// If successful, the user will receive a DeviceTokenCredentials object. 
-msRestAzure.interactiveLogin((err, credentials) => {
-  const client = new computeManagementClient(credentials, '<azure-subscription-id>');
+// Authenticate with service principal information from environment variables
+MsRest.loginWithServicePrincipalSecret(process.env.AZURE_APPID, process.env.AZURE_PASS, process.env.AZURE_TENANT, (err, credentials) => {
+    const client = new storageManagementClient(credentials, process.env.AZURE_SUB);
 
   client.virtualMachineImages.list(
     'westus', // location
-    'MicrosoftWindowsServer', // publisher name 
-    'WindowsServer',  // offer
-    '2012-R2-Datacenter', // sku
+    'Canonical', // publisher name 
+    'UbuntuServer',  // offer
+    '16.04-LTS', // sku
     (err, result, request, response) => {
       if (err) return console.error(err);
       console.log(result);

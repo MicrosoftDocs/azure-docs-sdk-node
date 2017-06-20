@@ -265,5 +265,5 @@ A [reference](/nodejs/api/overview/azure/?view=azure-node-2.0.0) is available fo
 
 ## Get help and give feedback
 
-Post questions to the community on [Stack Overflow](https://stackoverflow.com/questions/tagged/azure+node.js). Report bugs and open issues against the Azure libraries for Java on the [project GitHub](https://github.com/Azure/azure-sdk-for-node).
+Post questions to the community on [Stack Overflow](https://stackoverflow.com/questions/tagged/azure+node.js). Report bugs and open issues against the Azure modules for Node.js on the [project GitHub](https://github.com/Azure/azure-sdk-for-node).
 

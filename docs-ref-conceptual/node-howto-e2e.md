@@ -525,5 +525,3 @@ az group delete
 > The clean-up process can take several minutes to complete. 
 
 Once finished, the `az group delete` command leaves your Azure account in the same state it was before you started the tutorial. The ability to organize, deploy, and delete Azure resources as a single unit is one of the primary benefits of resource groups. Therefore, as a recommended practice,  you should group your resources together that you anticipate having the same lifespan.
-
-

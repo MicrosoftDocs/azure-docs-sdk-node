@@ -17,7 +17,7 @@ ms.service: active-directory
 
 ## Overview
 
-The Azure Active Directory Authentication Library (ADAL) for Node.js enables Node.js applications to authenticate to AAD in order to access AAD protected web resources.
+The [Azure Active Directory Authentication Library (ADAL) for Node.js](https://www.npmjs.com/package/adal-node) enables Node.js applications to authenticate to AAD in order to access AAD protected web resources.
 
 ## Install modules with npm
 

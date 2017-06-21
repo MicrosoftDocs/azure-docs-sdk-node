@@ -28,7 +28,7 @@ ms.service: azure-nodejs
                         </div>
                         <div class="cardText">
                              <h3 style="margin-bottom: 0; font-size: 24px">Tools</h3>
-                            <p style="font-size: 1rem">Download Azure tools and plugins.</p>
+                            <p style="font-size: 1rem">Download Azure tools and plug-ins</p>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@ ms.service: azure-nodejs
                         </div>
                         <div class="cardText">
                             <h3 style="margin-bottom: 0; font-size: 24px">Modules</h3>
-                            <p style="font-size: 1rem">Use services and manage Azure resources.</p>
+                            <p style="font-size: 1rem">Use services and manage Azure resources</p>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@ ms.service: azure-nodejs
     </li>
 </ul>
 
-## Five-minute quickstarts
+## 5-Minute quickstarts
 Create and deploy a sample app in five minutes.
 <ul class="noBullet">
    <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Create a web app</a></li>
@@ -110,7 +110,7 @@ MsRest.loginWithServicePrincipalSecret(process.env.AZURE_APPID, process.env.AZUR
 });
 ```
 
-## Tutorials
+## Step-by-Step Tutorials
 
 Learn how to use Azure services in your Node.js apps.
 

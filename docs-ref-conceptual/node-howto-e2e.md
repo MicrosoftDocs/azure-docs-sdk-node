@@ -81,7 +81,7 @@ In order to orient ourselves within the codebase, let's play around with some ex
 
     ![Display all .js* files](./media/node-howto-e2e/git-output.png)
 
-1. Select **server.js**, which is the startup script for the app. 
+1. Select `server.js`, which is the startup script for the app. 
 
 1. Hover your mouse over the **database** variable (imported on line 6) to see its type. This ability to quickly inspect variables/modules/types within a file is very useful during the development of your projects. 
 

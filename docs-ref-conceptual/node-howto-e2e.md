@@ -8,7 +8,7 @@ ms.service: azure-nodejs
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
-ms.date: 06/18/2017
+ms.date: 06/25/2017
 ms.author: joncart
 ---
 
@@ -39,7 +39,7 @@ To get started, download the sample project using the following steps:
 
 1. Press **&lt;F1>** to display the command palette.
 
-1. At the command palette prompt, enter `gitcl`, select the `Git: Clone` command, and press **&lt;Enter>**.
+1. At the command palette prompt, enter `gitcl`, select the **Git: Clone** command, and press **&lt;Enter>**.
 
     ![gitcl command in the Visual Studio Code command palette prompt](./media/node-howto-e2e/git-clone.png)
 
@@ -83,21 +83,21 @@ In order to orient ourselves within the codebase, let's play around with some ex
 
 1. Select `server.js`, which is the startup script for the app. 
 
-1. Hover your mouse over the `database` variable (imported on line 6) to see its type. This ability to quickly inspect variables/modules/types within a file is very useful during the development of your projects. 
+1. Hover your mouse over the **database** variable (imported on line 6) to see its type. This ability to quickly inspect variables/modules/types within a file is very useful during the development of your projects. 
 
     ![Discover type](./media/node-howto-e2e/hover-help.png)
 
-1. Clicking your mouse within the span of a variable - such as `database` - allows you to see all references to that variable within the same file. To view all references to a variable within the project, right-click the variable, and from the context menu, and select **Find All References**.
+1. Clicking your mouse within the span of a variable - such as **database** - allows you to see all references to that variable within the same file. To view all references to a variable within the project, right-click the variable, and from the context menu, and select **Find All References**.
 
     ![Find references to a variable](./media/node-howto-e2e/word-hilight.png)
 
-1. In addition to being to hover your mouse over a variable to discover its type, you can also inspect the definition of a variable, even if it's in another file. To see this in action, right-click `database.localUrl` (line 12), and, from the context menu, select **Peek Definition**. 
+1. In addition to being to hover your mouse over a variable to discover its type, you can also inspect the definition of a variable, even if it's in another file. To see this in action, right-click **database.localUrl** (line 12), and, from the context menu, select **Peek Definition**. 
 
     ![Peek at a variable's definition](./media/node-howto-e2e/code-peek.png)
 
 ## Modifying the code and using autocompletion
 
-The MongoDB connection string is hard-coded in declaration of the `database.localUrl`. In this section, you'll modify the code to retrieve the connection string from an environment variable, and learn about Visual Studio Code's autocompetion feature.  
+The MongoDB connection string is hard-coded in declaration of the **database.localUrl**. In this section, you'll modify the code to retrieve the connection string from an environment variable, and learn about Visual Studio Code's autocompetion feature.  
 
 1. Open the `server.js` file
 
@@ -113,11 +113,11 @@ The MongoDB connection string is hard-coded in declaration of the `database.loca
 	mongoose.connect(process.env.MONGODB_URL || database.localUrl);
 	```
 
-Note that if you type the code in manually (instead of copy and paste), when you type the period after `process`, Visual Studio Code displays the available members of the Node.js `process` global API.
+Note that if you type the code in manually (instead of copy and paste), when you type the period after `process`, Visual Studio Code displays the available members of the Node.js **process** global API.
 
 ![Autocomplete automatically shows the members of an API](./media/node-howto-e2e/process-env.png)
 
-Autocompetion works because Visual Studio Code uses TypeScript behind the scenes - even for JavaScript - to provide type information that can then be used to inform the completion list as you type. Visual Studio Code is able to detect that this is a Node.js project, and as a result, automatically downloaded the TypeScript typings file for [Node.js from NPM](https://www.npmjs.com/package/@types/node). The typings file allows you to get autocompletion for other Node.js globals such as `Buffer` or `setTimeout`, as well as all of the built-in modules such as `fs` and `http`.
+Autocompetion works because Visual Studio Code uses TypeScript behind the scenes - even for JavaScript - to provide type information that can then be used to inform the completion list as you type. Visual Studio Code is able to detect that this is a Node.js project, and as a result, automatically downloaded the TypeScript typings file for [Node.js from NPM](https://www.npmjs.com/package/@types/node). The typings file allows you to get autocompletion for other Node.js globals - such as **Buffer** and **setTimeout** - as well as all of the built-in modules such as **fs** and **http**.
 
 In addition to the built-in Node.js APIs, this auto-acquisition of typings also works for over 2,000 3rd party modules, such as React, Underscore and Express. For example, in order to disable Mongoose from crashing the sample app if it can't connect to the configured MongoDB database instance, insert the following line of code at  line 13:
 
@@ -182,7 +182,7 @@ Select the extension named **Debugger for Chrome**, and select **Install**. Afte
 
 While you were able to run and debug the Node.js code without any Visual Stdio Code-specific configuration, in order to debug a front-end web app, you need to generate a `launch.json` file that instructs Visual Studio Code how to run the app. 
 
-To generate the `launch.json` file, switch to the **Debug** tab, click the gear icon (which should have a little red dot on top of it), and select the `node.js` environment.
+To generate the `launch.json` file, switch to the **Debug** tab, click the gear icon (which should have a little red dot on top of it), and select the **node.js** environment.
 
 ![Visual Studio Code option to configure the launch.json file](./media/node-howto-e2e/debug-gear.png)
 
@@ -232,7 +232,7 @@ You can hover your mouse over any of the settings that are specified to view doc
 
 In order to launch/debug both the front and back-end at the same time, you need to create a *compound* run configuration that tells Visual Studio Code which set of configurations to run in parallel. 
 
-Add the following snippet as a top-level property within the `launch.json` file (as a sibling of the existing `configurations` property).
+Add the following snippet as a top-level property within the `launch.json` file (as a sibling of the existing **configurations** property).
 
 ```json
 "compounds": [
@@ -243,7 +243,7 @@ Add the following snippet as a top-level property within the `launch.json` file 
 ]
 ```
 
-The string values specified in the `compounds.configurations` array refer to the `name` of individual entries in the list of `configurations`. If you've modfied those names, you'll need to make the appropriate changes in the array. To see this in action, switch to the debug tab, and change the selected configuration to `Full-Stack` (the name of the compound configuration), and press **&lt;F5>** to run it.
+The string values specified in the **compounds.configurations** array refer to the **name** of individual entries in the list of **configurations**. If you've modfied those names, you'll need to make the appropriate changes in the array. To see this in action, switch to the debug tab, and change the selected configuration to **Full-Stack** (the name of the compound configuration), and press **&lt;F5>** to run it.
 
 ![Running a configuration in Visual Studio Code](./media/node-howto-e2e/full-stack-profile.png)
 
@@ -261,7 +261,7 @@ Like Node.js debugging, you can hover your mouse over expressions, view locals/w
 
 There are two cools things to note:
 
-1. The `Call Stack` pane displays two different stacks: `Node` and `Chrome`, and indicates which one is currently paused.
+1. The **Call Stack** pane displays two different stacks: **Node** and **Chrome**, and indicates which one is currently paused.
 
 1. You can step between front and back-end code. To test this, press **&lt;F5>**, which will run and hit the breakpoint previously set in the Express route.
 
@@ -273,7 +273,7 @@ In addition, the compound debugger concept is not limited to just two target pro
 
 This section focuses on the experience that Visual Studio Code provides for developing with [Docker](https://www.docker.com/). Node.js developers use Docker to provide portable app deployments for both development, CI (continuous integration), and production environments. As Docker presents a steep-learning curve to some, Visual Studio Code provides an extension that tries to help simplify some using Docker in your apps.
 
-Switch back to the **Extensions** tab, search for `docker`, and select the `Docker` extension. 
+Switch back to the **Extensions** tab, search for `docker`, and select the **Docker** extension. 
 
 Install the Docker extension, and then reload Visual Studio Code.
 
@@ -281,7 +281,7 @@ Install the Docker extension, and then reload Visual Studio Code.
 
 The Docker extension for Visual Studio Code includes a command for generating a *Dockerfile* and the `docker-compose.yml` file for an existing project. 
 
-To see the available Docker commands, display the commnand palette (**&lt;F1>**), and type `docker`.
+To see the available Docker commands, display the command palette - via **&lt;F1>** - and type `docker`.
 
 ![Commands supported by the Docker extension for Visual Studio ](./media/node-howto-e2e/docker-commands.png)
 
@@ -313,7 +313,7 @@ Select `mhart/alpine-node`, which provides everything that this app needs.
 
 Smaller images are typically better since you want your app builds and deployments to be as fast as possible, which makes distribution and scaling quicker.
 
-Now, that you have generated the `Dockerfile`, you need to build the actual Docker image. Once again, you can use a command that the Docker extension installed in Visual Studio Code. Press **&lt;F1>**, enter `dockerb` at the command palette, and select the `Docker: Build Image` command. Choose the `/Dockerfile` that you just generated and modified. Specify a tag that includes your DockerHub username (e.g. `lostintangent/node`). Press **&lt;ENTER>** to launch the integrated terminal window that displays the output of your Docker image being built.
+Now, that you have generated the `Dockerfile`, you need to build the actual Docker image. Once again, you can use a command that the Docker extension installed in Visual Studio Code. Press **&lt;F1>**, enter `dockerb` at the command palette, and select the **Docker: Build Image** command. Choose the `/Dockerfile` that you just generated and modified. Specify a tag that includes your DockerHub username (e.g. `lostintangent/node`). Press **&lt;ENTER>** to launch the integrated terminal window that displays the output of your Docker image being built.
 
 ![Docker image build status](./media/node-howto-e2e/docker-build.png)
 
@@ -491,7 +491,7 @@ Open a browser and navigate to your custom domain to see that it now resolves to
 
 ## Scaling up and out
 
-At some point, your web app may become popular enough that its allocated resources (CPU and RAM) aren't sufficient for handling the increase in traffic and operational demands. The App Service Plan that you created earlier (`B1`) comes with 1 CPU core and 1.75 GB of RAM, which can get maxed out fairly quickly. The `B2` plan come swith twice as much RAM and CPU, so if you notice that your app is beginning to run out of either, you can scale up the underlying virtual machine by running the following command:
+At some point, your web app may become popular enough that its allocated resources (CPU and RAM) aren't sufficient for handling the increase in traffic and operational demands. The App Service Plan that you created earlier (**B1**) comes with 1 CPU core and 1.75 GB of RAM, which can get maxed out fairly quickly. The **B2** plan come swith twice as much RAM and CPU, so if you notice that your app is beginning to run out of either, you can scale up the underlying virtual machine by running the following command:
 
 ```shell
 az appservice plan update -n nina-demo-plan --sku B2

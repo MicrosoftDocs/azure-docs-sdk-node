@@ -9,6 +9,7 @@ var yaml = require('js-yaml');
 
 var src = 'src/azure-sdk-for-node';
 var packageMappingFileRelativePath = 'package_service_mapping.json';
+var repoRelativePath = 'repo.json';
 var dest = 'docs-ref-autogen';
 var doc = 'Documentation';
 var configPath = 'node2docfx.json';
@@ -45,7 +46,7 @@ function buildTocItems(keys, relativePathToRootFolder) {
   });
 }
 
-function generatePackageDoc(packagePath, configPath, dest, resetInclude, whiteList) {
+function generatePackageDoc(packagePath, configPath, dest, resetInclude, whiteList, repo) {
   var config = fse.readJsonSync(configPath);
   var dir = path.dirname(packagePath);
   var packageName = fse.readJsonSync(packagePath).name;
@@ -58,6 +59,9 @@ function generatePackageDoc(packagePath, configPath, dest, resetInclude, whiteLi
   config.package = packagePath;
   config.readme = path.join(dir, 'README.md');
   config.destination = path.join(dest, packageName);
+  if (repo) {
+    config.repo = repo;
+  }
   fse.writeJsonSync(tempConfigPath, config);
   child_process.execFileSync('node', ['node_modules/node2docfx/node2docfx.js', tempConfigPath]);
   console.log('Finish generating YAML files for ' + packageName);
@@ -75,15 +79,20 @@ function getWhiteListFromPackageMappingFile(sourcePath, packageMappingFileRelati
 // 1. prepare
 fse.removeSync(dest);
 var whiteList = getWhiteListFromPackageMappingFile(src, packageMappingFileRelativePath);
+var repoConfig = fse.readJsonSync(repoRelativePath);
+var repo = null;
+if (repoConfig && repoConfig.repo) {
+  repo = repoConfig.repo;
+}
 
 // 2. generate yml and copy readme.md for azure.js
 var rootConfig = fse.readJsonSync(configPath);
-generatePackageDoc(rootConfig.package, configPath, rootConfig.destination, false, whiteList);
+generatePackageDoc(rootConfig.package, configPath, rootConfig.destination, false, whiteList, repo);
 
 // 3. generate yml and copy readme.md for all sub packages
 var packageJsons = glob.sync(path.join(src, 'lib/**/package.json'));
 packageJsons.forEach(function (packagePath) {
-  generatePackageDoc(packagePath, configPath, dest, true, whiteList);
+  generatePackageDoc(packagePath, configPath, dest, true, whiteList, repo);
 });
 fs.unlink(tempConfigPath);
 
@@ -112,7 +121,7 @@ packagesToFilter.forEach(function (p) {
   }
 });
 
-// 6. generate root toc and remove subToc
+// 6. generate root toc
 var rootToc = [];
 var rootTocPath = path.join(dest, 'toc.yml');
 var subTocs = glob.sync(path.join(dest, '**/toc.yml'));
@@ -122,7 +131,6 @@ subTocs.forEach(function (subTocPath) {
   var topicHref = path.join(packageName, 'index.md');
   tocContent = { name: packageName, uid: packageName, topicHref: topicHref, items: tocContent };
   rootToc.push(tocContent);
-  fs.unlinkSync(subTocPath);
 });
 fs.writeFileSync(rootTocPath, yaml.safeDump(rootToc));
 console.log('Finish combining sub TOCs to root TOC');

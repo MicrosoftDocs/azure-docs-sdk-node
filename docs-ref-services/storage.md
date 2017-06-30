@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: storage
 ---
 
-# Azure Storage Node.js modules
+# Azure Storage modules for Node.js
 
 ## Overview
 

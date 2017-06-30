@@ -1,5 +1,5 @@
 ---
-title: Azure SQL Database modules for Node.js
+title: Azure SQL modules for Node.js
 description: Connect and manage Azure SQL from your Node.js apps.
 keywords: Azure, Node, SDK, API, nodejs, javascript, sql
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: sql-database
 ---
 
-# Azure SQL Database modules for Node.js
+# Azure SQL modules for Node.js
 
 ## Overview
 

@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: active-directory
 ---
 
-# Azure Active Directory Node.js modules
+# Azure Active Directory modules for Node.js
 
 ## Overview
 

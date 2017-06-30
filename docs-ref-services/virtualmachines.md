@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: compute
 ---
 
-# Azure virtual machine modules
+# Azure Virtual Machine modules for Node.js
 
 ## Overview
 

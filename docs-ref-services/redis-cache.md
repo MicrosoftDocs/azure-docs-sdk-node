@@ -30,6 +30,7 @@ npm install azure-arm-rediscache
 
 
 ## Example
+```js
 const msRestAzure = require('ms-rest-azure');
 const AzureMgmtRedisCache = require('azure-arm-rediscache');
 
@@ -39,7 +40,7 @@ msRestAzure.interactiveLogin().then(credentials => {
     console.log(result);
   });
 });
-
+```
 
 
 ## Samples

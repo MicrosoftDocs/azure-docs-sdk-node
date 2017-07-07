@@ -1,6 +1,6 @@
 ---
-title: Azure Server Management modules for Node.js
-description: Reference for Azure Server Management modules for Node.js
+title: Azure Server Management module for Node.js
+description: Reference for Azure Server Management module for Node.js
 keywords: Azure,SDK,API,Server Management, Node.js
 author: tomarcher
 ms.author: tarcher
@@ -13,21 +13,24 @@ ms.devlang: nodejs
 ms.service: Server Management
 ---
 
-# Azure Server Management modules for Node.js
+# Azure Server Management module for Node.js
 
 ## Overview
 
-## Install the modules with npm
+The Azure Server Manager allows you to manage nodes, gateways, sessions, and PowerShell commands and sessions.
 
-Use npm to install the Azure Server Management modules for Node.js
+> [!WARNING]
+> This API is deprecated in favor of using the [Azure Resource Manager](/nodejs/api/overview/azure/resources), and it may not work with all services.
 
+## Install the module with npm
 
+Use npm to install the Azure Server Management module for Node.js
 
 ### Management
+
 ```bash
 npm install azure-arm-servermanagement
 ```
-
 
 ##Example
 

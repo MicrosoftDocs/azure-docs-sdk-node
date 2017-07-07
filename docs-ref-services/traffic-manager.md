@@ -1,6 +1,6 @@
 ---
-title: Azure Traffic Manager modules for Node.js
-description: Reference for Azure Traffic Manager modules for Node.js
+title: Azure Traffic Manager module for Node.js
+description: Reference for Azure Traffic Manager module for Node.js
 keywords: Azure,SDK,API,Traffic Manager, Node.js
 author: tomarcher
 ms.author: tarcher
@@ -13,21 +13,23 @@ ms.devlang: nodejs
 ms.service: Traffic Manager
 ---
 
-# Azure Traffic Manager modules for Node.js
+# Azure Traffic Manager module for Node.js
 
 ## Overview
 
-## Install the modules with npm
+Microsoft Azure Traffic Manager allows you to control the distribution of user traffic for service endpoints in different datacenters. Service endpoints supported by Traffic Manager include Azure VMs, Web Apps, and cloud services. You can also use Traffic Manager with external, non-Azure endpoints.
 
-Use npm to install the Azure Traffic Manager modules for Node.js
+Learn more about [Azure Traffic Manager](https://docs.microsoft.com/en-us/azure/traffic-manager/traffic-manager-overview).
 
+## Install the module with npm
 
+Use npm to install the Azure Traffic Manager module for Node.js
 
 ### Management
+
 ```bash
 npm install azure-arm-trafficmanager
 ```
-
 
 ##Example
 

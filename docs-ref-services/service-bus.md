@@ -1,6 +1,6 @@
 ---
-title: Azure Service Bus modules for Node.js
-description: Reference for Azure Service Bus modules for Node.js
+title: Azure Service Bus module for Node.js
+description: Reference for Azure Service Bus module for Node.js
 keywords: Azure,SDK,API,Service Bus, Node.js
 author: tomarcher
 ms.author: tarcher
@@ -13,21 +13,23 @@ ms.devlang: nodejs
 ms.service: Service Bus
 ---
 
-# Azure Service Bus modules for Node.js
+# Azure Service Bus module for Node.js
 
 ## Overview
 
-## Install the modules with npm
+Azure Service Bus is an asynchronous messaging cloud platform that enables you to send data between decoupled systems.
 
-Use npm to install the Azure Service Bus modules for Node.js
+Learn more about [Azure Service Bus](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview).
 
+## Install the module with npm
 
+Use npm to install the Azure Service Bus module for Node.js
 
 ### Management
+
 ```bash
 npm install azure-arm-sb
 ```
-
 
 ##Example
 

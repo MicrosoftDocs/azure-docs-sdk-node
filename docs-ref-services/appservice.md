@@ -36,11 +36,20 @@ npm install azure-arm-website
 Create a website from Node.js
 
 ```javascript
-var parameters = {
-  location: location,
-  serverFarmId: expectedServerFarmId
-};
-webSiteClient.sites.createOrUpdateSite(resourceGroupName, webSiteName, parameters, callback);
+const msRestAzure = require('ms-rest-azure');
+const webSiteManagementClient = require('azure-arm-website');
+let webSiteClient;
+
+msRestAzure.interactiveLogin((err, credentials) => {
+  webSiteClient = new webSiteManagementClient(credentials, 'my-subscription-id');
+  createWebSite('website001').then(website => console.log('Web Site created successfully', website));
+});
+
+function createWebSite(webSiteName) {
+  const parameters = { location: 'westus', serverFarmId: 'testHostingPlan' };
+  console.log(`Creating web site:  ${webSiteName}`);
+  return webSiteClient.webApps.createOrUpdate('testResourceGroup', webSiteName, parameters, null);
+}
 ```
 
 ## Samples

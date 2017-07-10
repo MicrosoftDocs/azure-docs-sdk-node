@@ -27,7 +27,20 @@ Use npm to install the Azure Cognitive Services modules for Node.js
 npm install azure-arm-cognitiveservices
 ```
 
-##Example
+### Example
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const cognitiveServicesManagementClient = require('azure-arm-cognitiveservices');
+let cognitiveServicesClient;
+
+msRestAzure.interactiveLogin().then(credentials => {
+  cognitiveServicesClient = new cognitiveServicesManagementClient(credentials, 'your-subscription-id');
+  cognitiveServicesClient.cognitiveServicesAccounts.list()
+    .then(cognitiveServicesAccounts => {
+      console.log('Retrieved cognitive services accounts: ', cognitiveServicesAccounts);
+    });
+});
+```
 
 ##Samples
 

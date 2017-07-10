@@ -27,8 +27,19 @@ Use npm to install the Azure CDN modules for Node.js
 npm install azure-arm-cdn
 ```
 
-##Example
+### Example
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const cdnManagementClient = require('azure-arm-cdn');
+let cdnClient;
 
-##Samples
+msRestAzure.interactiveLogin((err, credentials) => {
+  cdnClient = new cdnManagementClient(credentials, 'your-subscription-id');
+  cdnClient.profiles.list()
+    .then(profilesList => { console.log('Retrieved profiles list: ', profilesList)});
+});
+```
+
+### Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

@@ -1,4 +1,4 @@
-﻿---
+---
 title: Azure Redis Cache modules for Node.js
 description: Reference for Azure Redis Cache modules for Node.js
 keywords: Azure,SDK,API,Redis Cache, Node.js

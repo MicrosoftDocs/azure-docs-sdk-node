@@ -35,7 +35,18 @@ Use npm to install the Azure Notification Hubs modules for Node.js
 npm install azure-arm-notificationhubs
 ```
 
-##Example
+### Example
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const notificationHubsManagementClient = require('azure-arm-notificationhubs');
+let notificationHubsClient;
+ 
+msRestAzure.interactiveLogin().then(credentials => {
+  notificationHubsClient = new notificationHubsManagementClient(credentials, 'your-subscription-id');
+  notificationHubsClient.notificationHubs.list('test-resource-group', 'test-namespace')
+    .then(notificationHubs => console.log('Retrieved notification hubs: ', notificationHubs));
+});
+```
 
 ##Samples
 

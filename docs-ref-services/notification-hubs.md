@@ -37,6 +37,12 @@ npm install azure-arm-notificationhubs
 
 ##Example
 
-##Samples
+### Samples
+| | |
+ |---|---|
+ | **Mobile Apps** ||
+  | [App Service Mobile completed quickstart for Node.js backend](https://azure.microsoft.com/en-us/resources/samples/app-service-mobile-nodejs-backend-quickstart/) | Node.js backend quickstart project. |
+  | **IoT** ||
+  | [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running Node.js](https://azure.microsoft.com/en-us/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/) | This sample demonstrates how to connect an Intel Edison app running Node.js with the Azure IoT Hub. |
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

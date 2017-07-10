@@ -29,8 +29,14 @@ Use npm to install the Azure Key Vault modules for Node.js
 npm install azure-arm-keyvault
 ```
 
-##Example
+## Example
 
-##Samples
+## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+|  Web Apps |   |
+|---|---|
+| [Getting started with Key Vault in Node.js](https://azure.microsoft.com/en-us/resources/samples/key-vault-node-getting-started/)  | This sample demonstrates how to create and manage a keyvault and interact with it in Node.js. We will also write an app that consumes information from the key vault. |
+| [Manage Azure resources and resource groups with Node.js](https://azure.microsoft.com/en-us/resources/samples/resource-manager-node-resources-and-groups/) | This sample explains how to manage your resources and resource groups in Azure using the Azure SDK for Node.js. |
+| [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/en-us/resources/samples/active-directory-node-webapp-openidconnect/) | This Node.js app will give you with a quick and easy way to set up a Web application in node.js with Express using OpenID Connect. The sample server included in the download is designed to run on any platform. |
+
+Explore more [sample Node.js code](https://azure.microsoft.com/en-us/resources/samples/?platform=nodejs) you can use in your apps.

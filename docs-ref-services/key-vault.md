@@ -31,7 +31,7 @@ npm install azure-arm-keyvault
 
 ## Example
 
-```
+```javascript
 const msRestAzure = require('ms-rest-azure');
 const KeyVaultManagementClient = require('azure-arm-keyvault');
 

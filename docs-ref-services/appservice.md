@@ -38,6 +38,7 @@ This example creates a website using Node.js
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const webSiteManagementClient = require('azure-arm-website');
+
 const subscriptionId = 'my-subscription-id';
 const website = 'website001';
 const hostingPlan = 'testHostingPlan';

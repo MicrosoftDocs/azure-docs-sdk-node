@@ -20,18 +20,21 @@ Azure Key Vault helps safeguard cryptographic keys and secrets used by cloud app
 
 Key Vault streamlines the key management process and enables you to maintain control of keys that access and encrypt your data. Developers can create keys for development and testing in minutes, and then seamlessly migrate them to production keys. Security administrators can grant (and revoke) permission to keys, as needed.
 
-## Install the modules with npm
+## Management Package
 
-Use npm to install the Azure Key Vault modules for Node.js
+### Install npm package
 
-### Management
+Use npm to install the Azure Key Vault module for Node.js
+
 ```bash
 npm install azure-arm-keyvault
 ```
 
-## Example
+### Example
 
-```
+This example creates a new Key Vault service in Azure.
+
+```javascript
 const msRestAzure = require('ms-rest-azure');
 const KeyVaultManagementClient = require('azure-arm-keyvault');
 
@@ -70,12 +73,10 @@ msRestAzure
   });
 ```
 
-## Samples
+### Samples
 
-|  Web Apps |   |
-|---|---|
-| [Getting started with Key Vault in Node.js](https://azure.microsoft.com/en-us/resources/samples/key-vault-node-getting-started/)  | This sample demonstrates how to create and manage a keyvault and interact with it in Node.js. We will also write an app that consumes information from the key vault. |
-| [Manage Azure resources and resource groups with Node.js](https://azure.microsoft.com/en-us/resources/samples/resource-manager-node-resources-and-groups/) | This sample explains how to manage your resources and resource groups in Azure using the Azure SDK for Node.js. |
-| [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/en-us/resources/samples/active-directory-node-webapp-openidconnect/) | This Node.js app will give you with a quick and easy way to set up a Web application in node.js with Express using OpenID Connect. The sample server included in the download is designed to run on any platform. |
+- [Getting started with Key Vault in Node.js](https://azure.microsoft.com/en-us/resources/samples/key-vault-node-getting-started/)
+- [Manage Azure resources and resource groups with Node.js](https://azure.microsoft.com/en-us/resources/samples/resource-manager-node-resources-and-groups/) 
+- [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/en-us/resources/samples/active-directory-node-webapp-openidconnect/) 
 
 Explore more [sample Node.js code](https://azure.microsoft.com/en-us/resources/samples/?platform=nodejs) you can use in your apps.

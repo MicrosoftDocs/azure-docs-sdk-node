@@ -21,32 +21,37 @@ Azure App Service is a platform-as-a-service (PaaS) offering of Microsoft Azure.
 
 App Service includes the web and mobile capabilities that we previously delivered separately as Azure Websites and Azure Mobile Services. It also includes new capabilities for automating business processes and hosting cloud APIs. As a single integrated service, App Service lets you compose various components -- websites, mobile app back ends, RESTful APIs, and business processes -- into a single solution.
 
-## Install modules with npm
+## Management Package
 
-Use npm to install the Azure storage client or management modules.
+### Install npm package
 
-### Management
+Use npm to install the Azure storage module.
 
 ```
 npm install azure-arm-website
 ```   
 
-## Example
+### Example
 
-Create a website from Node.js
+This example creates a website using Node.js
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const webSiteManagementClient = require('azure-arm-website');
+
+const subscriptionId = 'my-subscription-id';
+const website = 'website001';
+const hostingPlan = 'testHostingPlan';
 let webSiteClient;
 
+// interactive login
 msRestAzure.interactiveLogin((err, credentials) => {
-  webSiteClient = new webSiteManagementClient(credentials, 'my-subscription-id');
-  createWebSite('website001').then(website => console.log('Web Site created successfully', website));
+  webSiteClient = new webSiteManagementClient(credentials, subscriptionId);
+  createWebSite(website).then(website => console.log('Web Site created successfully', website));
 });
 
 function createWebSite(webSiteName) {
-  const parameters = { location: 'westus', serverFarmId: 'testHostingPlan' };
+  const parameters = { location: 'westus', serverFarmId: hostingPlan };
   console.log(`Creating web site:  ${webSiteName}`);
   return webSiteClient.webApps.createOrUpdate('testResourceGroup', webSiteName, parameters, null);
 }

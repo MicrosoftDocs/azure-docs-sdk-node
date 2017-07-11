@@ -13,16 +13,13 @@ ms.devlang: nodejs
 ms.service: CDN
 ---
 
-# Azure CDN modules for Node.js
+# Azure CDN packages for Node.js
 
 ## Overview
 The Azure Content Delivery Network (CDN) offers developers a global solution for delivering high-bandwidth content that is hosted in Azure or any other location. Using the CDN, you can cache publicly available objects loaded from Azure blob storage, a web application, virtual machine, application folder, or other HTTP/HTTPS location. The CDN cache can be held at strategic locations to provide maximum bandwidth for delivering content to users. The CDN is typically used for delivering static content such as images, style sheets, documents, files, client-side scripts, and HTML pages.
 
-## Install the modules with npm
-
-Use npm to install the Azure CDN modules for Node.js
-
-### Management
+## Management Package
+### Install npm module
 ```bash
 npm install azure-arm-cdn
 ```
@@ -31,12 +28,15 @@ npm install azure-arm-cdn
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const cdnManagementClient = require('azure-arm-cdn');
+
+const subscriptionId = 'your-subscription-id';
 let cdnClient;
 
 msRestAzure.interactiveLogin((err, credentials) => {
-  cdnClient = new cdnManagementClient(credentials, 'your-subscription-id');
-  cdnClient.profiles.list()
-    .then(profilesList => { console.log('Retrieved profiles list: ', profilesList)});
+  cdnClient = new cdnManagementClient(credentials, subscriptionId);
+  cdnClient.profiles
+    .list()
+    .then(profilesList => console.log('Retrieved profiles list: ', profilesList));
 });
 ```
 

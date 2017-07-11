@@ -37,23 +37,24 @@ npm install azure-arm-notificationhubs
 
 ### Example
  ```javascript
- const msRestAzure = require('ms-rest-azure');
- const notificationHubsManagementClient = require('azure-arm-notificationhubs');
- let notificationHubsClient;
-  
- msRestAzure.interactiveLogin().then(credentials => {
-   notificationHubsClient = new notificationHubsManagementClient(credentials, 'your-subscription-id');
-   notificationHubsClient.notificationHubs.list('test-resource-group', 'test-namespace')
-     .then(notificationHubs => console.log('Retrieved notification hubs: ', notificationHubs));
- });
+const msRestAzure = require('ms-rest-azure');
+const notificationHubsManagementClient = require('azure-arm-notificationhubs');
+
+const subscriptionId = 'your-subscription-id';
+const notificationHubNamespace = 'your-hub-namespace';
+const resourceGroup = 'your-resource-group';
+let notificationHubsClient;
+
+msRestAzure.interactiveLogin().then(credentials => {
+  notificationHubsClient = new notificationHubsManagementClient(credentials, subscriptionId);
+  notificationHubsClient.notificationHubs
+    .list(resourceGroup, notificationHubNamespace)
+    .then(notificationHubs => console.log('Retrieved notification hubs: ', notificationHubs));
+});
  ```
 
 ### Samples
-| | |
- |---|---|
- | **Mobile Apps** ||
-  | [App Service Mobile completed quickstart for Node.js backend](https://azure.microsoft.com/en-us/resources/samples/app-service-mobile-nodejs-backend-quickstart/) | Node.js backend quickstart project. |
-  | **IoT** ||
-  | [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running Node.js](https://azure.microsoft.com/en-us/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/) | This sample demonstrates how to connect an Intel Edison app running Node.js with the Azure IoT Hub. |
+* [App Service Mobile completed quickstart for Node.js backend](https://azure.microsoft.com/en-us/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
+* [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running Node.js](https://azure.microsoft.com/en-us/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

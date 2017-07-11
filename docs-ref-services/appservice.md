@@ -38,15 +38,19 @@ This example creates a website using Node.js
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const webSiteManagementClient = require('azure-arm-website');
+const subscriptionId = 'my-subscription-id';
+const website = 'website001';
+const hostingPlan = 'testHostingPlan';
 let webSiteClient;
 
+// interactive login
 msRestAzure.interactiveLogin((err, credentials) => {
-  webSiteClient = new webSiteManagementClient(credentials, 'my-subscription-id');
-  createWebSite('website001').then(website => console.log('Web Site created successfully', website));
+  webSiteClient = new webSiteManagementClient(credentials, subscriptionId);
+  createWebSite(website).then(website => console.log('Web Site created successfully', website));
 });
 
 function createWebSite(webSiteName) {
-  const parameters = { location: 'westus', serverFarmId: 'testHostingPlan' };
+  const parameters = { location: 'westus', serverFarmId: hostingPlan };
   console.log(`Creating web site:  ${webSiteName}`);
   return webSiteClient.webApps.createOrUpdate('testResourceGroup', webSiteName, parameters, null);
 }

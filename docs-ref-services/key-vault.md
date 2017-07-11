@@ -20,7 +20,7 @@ Azure Key Vault helps safeguard cryptographic keys and secrets used by cloud app
 
 Key Vault streamlines the key management process and enables you to maintain control of keys that access and encrypt your data. Developers can create keys for development and testing in minutes, and then seamlessly migrate them to production keys. Security administrators can grant (and revoke) permission to keys, as needed.
 
-## Management
+## Management Package
 
 ### Install npm packages
 

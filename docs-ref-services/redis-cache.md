@@ -13,24 +13,22 @@ ms.devlang: nodejs
 ms.service: Redis Cache
 ---
 
-# Azure Redis Cache modules for Node.js
+# Azure Redis Cache packages for Node.js
 
 ## Overview
 
-## Install the modules with npm
+## Management Package
+
+#### Install the packages with npm
 
 Use npm to install the Azure Redis Cache modules for Node.js
 
-
-
-### Management
 ```bash
 npm install azure-arm-rediscache
 ```
 
-
 ## Example
-```js
+```javascript
 const msRestAzure = require('ms-rest-azure');
 const AzureMgmtRedisCache = require('azure-arm-rediscache');
 
@@ -45,4 +43,4 @@ msRestAzure.interactiveLogin().then(credentials => {
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+* [How to use Azure Redis Cache with Node.js](https://docs.microsoft.com/en-us/azure/redis-cache/cache-nodejs-get-started)

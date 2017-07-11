@@ -17,20 +17,45 @@ ms.service: Search
 
 ## Overview
 
-## Install the modules with npm
+This package provides a Node.js module that makes it easy to manage Microsoft Azure Search.
 
-Use npm to install the Azure Search modules for Node.js
+## Management Package
 
+### Install npm module
 
+Use npm to install the Azure Search module for Node.js
 
-### Management
 ```bash
 npm install azure-arm-search
 ```
 
+### Example
 
-##Example
+This example creates a new search service in Azure, and lists the resources in its resource group.
 
-##Samples
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const SearchManagement = require('azure-arm-search');
+
+const subscriptionId = 'your-subscription-id';
+const resourceGroup = 'yourResourceGroup';
+
+// Interactive Login provides a url and code that needs to be copied
+// and pasted in a browser and authenticated over there.If successful,
+// the user will get a DeviceTokenCredentials object.
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const client = new SearchManagement(credentials, subscriptionId);
+    return client.services.listByResourceGroup(resourceGroup);
+  })
+  .then(services => console.dir(services, { depth: null, colors: true }))
+  .catch(err => {
+    console.log('An error ocurred');
+    console.dir(err, { depth: null, colors: true });
+  });
+```
+
+### Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

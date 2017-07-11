@@ -42,9 +42,6 @@ msRestAzure.interactiveLogin().then( credentials => {
     console.log('List of recommendations:');
     console.dir(recommendations, {depth: null, colors: true});
   });
-}).catch(err => {
-  console.log('An error ocurred');
-  console.dir(err, {depth: null, colors: true});
 });
 ```
 ## Samples

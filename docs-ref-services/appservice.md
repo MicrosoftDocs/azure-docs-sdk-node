@@ -33,7 +33,7 @@ npm install azure-arm-website
 
 ### Example
 
-This example creates a website using Node.js
+This example creates a website on Azure using Node.js
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

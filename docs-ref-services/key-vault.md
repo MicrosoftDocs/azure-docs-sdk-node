@@ -31,6 +31,45 @@ npm install azure-arm-keyvault
 
 ## Example
 
+```
+const msRestAzure = require('ms-rest-azure');
+const KeyVaultManagementClient = require('azure-arm-keyvault');
+
+const subscriptionId = 'your-subscription-id';
+const resourceGroup = 'your-resource-group';
+const vaultName = 'your-new-vault';
+const tenantGUID = 'your-tenant-guid';
+
+// Interactive Login
+let client;
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    client = new KeyVaultManagementClient(credentials, subscriptionId);
+    return client.vaults.list();
+  })
+  .then(vaults => {
+    console.dir(vaults, { depth: null, colors: true });
+    const parameters = {
+      location: 'East US',
+      properties: {
+        sku: { family: 'A', name: 'standard' },
+        accessPolicies: [],
+        enabledForDeployment: false,
+        tenantId: tenantGUID
+      }
+    };
+    console.info('Creating vault ${vaultName} ...');
+    return client.vaults.createOrUpdate(resourceGroup, vaultName, parameters);
+  })
+  .then(vault => console.dir(vault, { depth: null, colors: true }))
+  .catch(err => {
+    console.log('An error occured');
+    console.dir(err, { depth: null, colors: true });
+    return err;
+  });
+```
+
 ## Samples
 
 |  Web Apps |   |

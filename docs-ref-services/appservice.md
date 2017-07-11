@@ -21,19 +21,19 @@ Azure App Service is a platform-as-a-service (PaaS) offering of Microsoft Azure.
 
 App Service includes the web and mobile capabilities that we previously delivered separately as Azure Websites and Azure Mobile Services. It also includes new capabilities for automating business processes and hosting cloud APIs. As a single integrated service, App Service lets you compose various components -- websites, mobile app back ends, RESTful APIs, and business processes -- into a single solution.
 
-## Install modules with npm
+## Management Package
 
-Use npm to install the Azure storage client or management modules.
+### Install packages with npm
 
-### Management
+Use npm to install the Azure storage module.
 
 ```
 npm install azure-arm-website
 ```   
 
-## Example
+### Example
 
-Create a website from Node.js
+This example creates a website using Node.js
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

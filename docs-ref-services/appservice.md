@@ -23,7 +23,7 @@ App Service includes the web and mobile capabilities that we previously delivere
 
 ## Management Package
 
-### Install packages with npm
+### Install npm package
 
 Use npm to install the Azure storage module.
 

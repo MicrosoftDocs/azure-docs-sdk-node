@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: postgresql
 ---
 
-# Azure PostgreSQL modules for Node.js
+# Azure PostgreSQL packages for Node.js
 
 ## Overview
 
@@ -22,9 +22,9 @@ This library is a non-blocking PostgreSQL client for Node.js, supporting pure Ja
 
 Learn more about [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/)
 
-## Client Module
+## Client Package
 
-#### Install modules with npm
+#### Install packages with npm
 
 Use npm to install the PostgreSQL client module.
 
@@ -38,13 +38,15 @@ Opening a client connection and running a simple query.
 
 ```javascript
 const pg = require('pg');
+
 const connectionString =
   'postgres://{username}@{database-name}:{password}@{database-name}.postgres.database.azure.com:5432/Items?ssl=true';
 
 const client = new pg.Client(connectionString);
 client.connect();
 
-client.query('SELECT * FROM {table-name}', (err, res) => {
+const query = 'SELECT * FROM {table-name}';
+client.query(query, (err, res) => {
   console.log(res);
 });
 ```

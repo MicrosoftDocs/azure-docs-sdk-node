@@ -13,24 +13,35 @@ ms.devlang: nodejs
 ms.service: Service Map
 ---
 
-# Azure Service Map modules for Node.js
+# Azure Service Map packages for Node.js
 
 ## Overview
+This package provides a Node.js module that makes it easy to manage Microsoft Azure Service Maps.
 
-## Install the modules with npm
-
-Use npm to install the Azure Service Map modules for Node.js
-
-
-
-### Management
+## Management Package
+### Install npm module
 ```bash
 npm install azure-arm-servicemap
 ```
 
+### Example
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const serviceMapManagement = require('azure-arm-servicemap');
 
-##Example
+const subscriptionId = 'your-subscription-id';
+const resourceGroup = 'your-resource-group';
+const workspace = 'your-workspace';
+let serviceMapClient;
 
-##Samples
+msRestAzure.interactiveLogin().then(credentials => {
+  serviceMapClient = new serviceMapManagement(credentials, subscriptionId);
+  serviceMapClient.machineGroups
+    .listByWorkspace(resourceGroup, workspace)
+    .then(machineGroups => console.log('Retrieved machine groups: ', machineGroups));
+});
+```
+
+### Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

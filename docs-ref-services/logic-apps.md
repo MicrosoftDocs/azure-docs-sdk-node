@@ -30,7 +30,7 @@ Logic Apps is a fully managed iPaaS (integration Platform as a Service) allowing
 
 ## Management Package
 
-#### Install npm modules
+### Install npm modules
 ```bash
 npm install azure-arm-logic
 ```
@@ -43,12 +43,13 @@ const LogicManagement = require('azure-arm-logic');
 msRestAzure
   .interactiveLogin()
   .then(credentials => {
-    const client = new LogicManagement(credentials, 'subscription-id');
+    const subscriptionId = 'subscription-id';
+    const client = new LogicManagement(credentials, subscriptionId);
     return client.workflows.listBySubscription();
   })
   .then(workflows => console.log(workflows));
 ```
 
-## Samples
+### Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

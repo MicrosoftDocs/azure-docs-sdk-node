@@ -60,7 +60,7 @@ sections:
       text: PostgreSQL
       href: http://docs.microsoft.com/en-us/azure/postgresql/connect-nodejs
     - image:
-        src: https://docs.microsoft.com/en-us/azure/media/index/ConterService.svg
+        src: https://docs.microsoft.com/en-us/azure/media/index/ContainerService.svg
       text: Docker and Kubernetes
       href: http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough
 - title: Free Pluralsight Video Training

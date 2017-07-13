@@ -1,6 +1,6 @@
 ---
-title: Azure Search modules for Node.js
-description: Reference for Azure Search modules for Node.js
+title: Azure Search module for Node.js
+description: Reference for Azure Search module for Node.js
 keywords: Azure,SDK,API,Search, Node.js
 author: tomarcher
 ms.author: tarcher
@@ -13,17 +13,21 @@ ms.devlang: nodejs
 ms.service: Search
 ---
 
-# Azure Search modules for Node.js
+# Azure Search module for Node.js
 
 ## Overview
 
-This package provides a Node.js module that makes it easy to manage Microsoft Azure Search.
+Azure Search is a cloud search-as-a-service solution that delegates server and infrastructure management to Microsoft, leaving you with a ready-to-use service that you can populate with your data and then use to add search to your application.
+
+Learn more about [Azure Search](https://docs.microsoft.com/en-us/azure/search/search-what-is-azure-search).
 
 ## Management Package
 
-### Install npm module
+## Install the module with npm
 
 Use npm to install the Azure Search module for Node.js
+
+### Management
 
 ```bash
 npm install azure-arm-search

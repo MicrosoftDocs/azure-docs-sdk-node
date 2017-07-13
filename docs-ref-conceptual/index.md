@@ -8,7 +8,7 @@ metadata:
   author: tomarcher
   ms.author: tarcher
   manager: douge
-  ms.date: 07/13/2017
+  ms.date: 07/12/2017
   ms.topic: article
   ms.prod: azure
   ms.technology: azure

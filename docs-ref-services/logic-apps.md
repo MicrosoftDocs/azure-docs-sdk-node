@@ -28,17 +28,28 @@ The advantages of using Logic Apps include the following:
 
 Logic Apps is a fully managed iPaaS (integration Platform as a Service) allowing developers not to have to worry about building hosting, scalability, availability and management. Logic Apps will scale up automatically to meet demand.
 
-## Install the modules with npm
+## Management Package
 
-Use npm to install the Azure Logic Apps modules for Node.js
-
-### Management
+### Install npm modules
 ```bash
 npm install azure-arm-logic
 ```
 
-##Example
+### Example
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const LogicManagement = require('azure-arm-logic');
 
-##Samples
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const subscriptionId = 'subscription-id';
+    const client = new LogicManagement(credentials, subscriptionId);
+    return client.workflows.listBySubscription();
+  })
+  .then(workflows => console.log(workflows));
+```
+
+### Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

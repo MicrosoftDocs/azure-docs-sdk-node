@@ -35,13 +35,15 @@ npm install azure-arm-iothub
 
 ### Example
 
+Create and name an IoT hub 
+
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const IoTHubClient = require('azure-arm-iothub');
 
 const subscriptionId = 'your-subscription-id';
-const resourceGroup = 'testrg001';
-const hubName = 'testhub';
+const resourceGroup = 'your-resource-group';
+const hubName = 'your-hub';
 const location = 'East US';
 
 // Describe the IoT hub you want to create
@@ -66,7 +68,6 @@ const hubDescription = {
   }
 };
 
-// Interactive Login
 msRestAzure.interactiveLogin((err, credentials) => {
   const client = new IoTHubClient(credentials, subscriptionId);
 
@@ -77,14 +78,13 @@ msRestAzure.interactiveLogin((err, credentials) => {
 });
 ```
 
-Get the existing hub, by name
+Get the existing IoT hub, by name
 
 ```javascript
 const subscriptionId = 'your-subscription-id';
-const resourceGroup = 'testrg001';
-const hubName = 'testhub';
+const resourceGroup = 'your-resource-group';
+const hubName = 'your-hub';
 
-// Interactive Login
 msRestAzure.interactiveLogin((err, credentials) => {
   const client = new IoTHubClient(credentials, subscriptionId);
   

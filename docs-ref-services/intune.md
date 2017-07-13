@@ -24,17 +24,33 @@ Azure Intune is a cloud-based enterprise mobility management (EMM) service that 
 
 Intune integrates closely with Azure Active Directory (Azure AD) for identity and access control, and Azure Information Protection for data protection.
 
-## Install the modules with npm
+## Management Package
+
+### Install npm modules
 
 Use npm to install the Azure Intune modules for Node.js
 
-### Management
 ```bash
 npm install azure-arm-intune
 ```
 
-##Example
+### Example
 
-##Samples
+Authenticate, create a client and retrieve a location by host name.
+
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const IntuneResourceManagementClient = require('azure-arm-intune');
+
+msRestAzure.interactiveLogin().then(credentials => {
+  const client = new IntuneResourceManagementClient(credentials);
+  client.getLocationByHostName(null).then((error, result) => {
+    console.log(result);
+  });
+});
+```
+
+
+### Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

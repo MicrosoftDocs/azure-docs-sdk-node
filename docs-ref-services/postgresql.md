@@ -40,7 +40,7 @@ Opening a client connection and running a simple query.
 const pg = require('pg');
 
 const connectionString =
-  'postgres://{username}@{database-name}:{password}@{database-name}.postgres.database.azure.com:5432/Items?ssl=true';
+  'postgres://{username}@{server-name}:{password}@{server-name}.postgres.database.azure.com:5432/{database-name}?ssl=true';
 
 const client = new pg.Client(connectionString);
 client.connect();

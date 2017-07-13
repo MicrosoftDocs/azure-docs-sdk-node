@@ -1,4 +1,4 @@
----
+### YamlMime:YamlDocument
 documentType: LandingData
 title: Azure for Node.js developers
 metadata:
@@ -14,7 +14,6 @@ metadata:
   ms.technology: azure
   ms.devlang: nodejs
   ms.service: multiple
----
 sections:
 - items:
   - type: list

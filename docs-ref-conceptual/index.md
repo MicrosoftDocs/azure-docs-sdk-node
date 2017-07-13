@@ -14,6 +14,7 @@ metadata:
   ms.technology: azure
   ms.devlang: nodejs
   ms.service: multiple
+---
 sections:
 - items:
   - type: list
@@ -81,4 +82,3 @@ sections:
     style: unordered
     items:
     - html: <a href="https://docs.microsoft.com/azure/app-service-web/app-service-web-tutorial-nodejs-mong">Create an ASP.NET web app with Azure SQL Database</a>
----

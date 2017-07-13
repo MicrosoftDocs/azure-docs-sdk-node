@@ -1,6 +1,6 @@
 ---
-title: Azure Site Recovery modules for Node.js
-description: Reference for Azure Site Recovery modules for Node.js
+title: Azure Site Recovery module for Node.js
+description: Reference for Azure Site Recovery module for Node.js
 keywords: Azure,SDK,API,Site Recovery, Node.js
 author: tomarcher
 ms.author: tarcher
@@ -13,21 +13,23 @@ ms.devlang: nodejs
 ms.service: Site Recovery
 ---
 
-# Azure Site Recovery modules for Node.js
+# Azure Site Recovery module for Node.js
 
 ## Overview
 
-## Install the modules with npm
+Site Recovery allows you to automate replication of Azure VMs between regions, on-premises virtual machines and physical servers to Azure, and on-premises machines to a secondary datacenter.
 
-Use npm to install the Azure Site Recovery modules for Node.js
+Learn more about [Azure Site Recovery](https://docs.microsoft.com/en-us/azure/site-recovery/site-recovery-overview).
 
+## Install the module with npm
 
+Use npm to install the Azure Site Recovery module for Node.js
 
 ### Management
+
 ```bash
 npm install azure-arm-recoveryservices
 ```
-
 
 ##Example
 

@@ -1,6 +1,6 @@
 ---
-title: Azure Scheduler modules for Node.js
-description: Reference for Azure Scheduler modules for Node.js
+title: Azure Scheduler module for Node.js
+description: Reference for Azure Scheduler module for Node.js
 keywords: Azure,SDK,API,Scheduler, Node.js
 author: tomarcher
 ms.author: tarcher
@@ -13,21 +13,23 @@ ms.devlang: nodejs
 ms.service: Scheduler
 ---
 
-# Azure Scheduler modules for Node.js
+# Azure Scheduler module for Node.js
 
 ## Overview
 
-## Install the modules with npm
+Azure Scheduler allows you to declaratively describe actions to run in the cloud. It creates, maintains, and invokes scheduled work via HTTP, HTTPS, a storage queue, or the [Azure Service Bus](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview).
 
-Use npm to install the Azure Scheduler modules for Node.js
+Learn more about [Azure Scheduler](https://docs.microsoft.com/en-us/azure/scheduler/scheduler-intro).
 
+## Install the module with npm
 
+Use npm to install the Azure Scheduler module for Node.js
 
 ### Management
+
 ```bash
 npm install azure-arm-scheduler
 ```
-
 
 ##Example
 

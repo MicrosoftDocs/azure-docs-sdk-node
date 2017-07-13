@@ -17,6 +17,12 @@ ms.service: Redis Cache
 
 ## Overview
 
+Azure Redis Cache is based on the popular open source Redis project. It gives you access to a secure, dedicated Redis instance, managed by Microsoft and accessible from your Azure apps.
+
+Redis is an advanced key-value store, where keys can contain data structures such as strings, hashes, lists, sets, and sorted sets. Redis supports a set of atomic operations on these data types.
+
+Learn more about [Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/).
+
 ## Management Package
 
 #### Install the packages with npm
@@ -44,3 +50,5 @@ msRestAzure.interactiveLogin().then(credentials => {
 ## Samples
 
 * [How to use Azure Redis Cache with Node.js](https://docs.microsoft.com/en-us/azure/redis-cache/cache-nodejs-get-started)
+
+Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

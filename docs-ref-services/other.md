@@ -13,21 +13,21 @@ ms.devlang: nodejs
 ms.service: Other
 ---
 
-# Azure Other modules for Node.js
+# Azure Other module for Node.js
 
 ## Overview
 
-## Install the modules with npm
+This module includes all of the individual Azure Node.js modules in a single place.
 
-Use npm to install the Azure Other modules for Node.js
+## Install the module with npm
+
+Use npm to install the Azure module for Node.js
 
 ### Client
+
 ```bash
 npm install azure
 ```
-
-
-
 
 ##Example
 

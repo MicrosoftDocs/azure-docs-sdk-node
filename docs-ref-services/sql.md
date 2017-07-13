@@ -20,7 +20,7 @@ ms.service: sql-database
 Work with data stored in [Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) from Node.js.
 The management library provides an interface to make it easy to manage Microsoft Azure SQL databases.
 
-### Client Package
+## Client Package
 
 #### Install packages with npm
 
@@ -67,7 +67,7 @@ const executeStatement = () => {
 };
 ```
 
-### Management Package
+## Management Package
 
 #### Install packages with npm
 

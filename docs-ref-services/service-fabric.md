@@ -21,18 +21,39 @@ Azure Service Fabric is a distributed systems platform that makes it easy to pac
 
 Learn more about [Azure Service Fabric](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview).
 
-## Install the module with npm
+## Management Package
+
+### Install npm module
 
 Use npm to install the Azure Service Fabric module for Node.js
-
-### Management
-
 ```bash
 npm install azure-arm-servicefabric
 ```
 
-##Example
+### Example
 
-##Samples
+This example shows how you can list the clusters for an Azure subscription.
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const ServiceFabricManagement = require('azure-arm-servicefabric');
+
+const subscriptionId = 'your-subscription-id';
+
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const client = new ServiceFabricManagement(
+      credentials,
+      subscriptionId
+    );
+    return client.clusters.list();
+  })
+  .then(clusters => {
+    console.log('List of clusters:');
+    console.dir(clusters, { depth: null, colors: true });
+  });
+```
+
+### Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

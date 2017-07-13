@@ -95,6 +95,9 @@ msRestAzure.interactiveLogin((err, credentials) => {
 });
 ```
 
-###Samples
+### Samples
+
+- [Get started with the Raspberry Pi Azure IoT Starter Kit](https://azure.microsoft.com/en-us/resources/samples/iot-remote-monitoring-node-raspberrypi-getstartedkit/)
+- [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running Node.js](https://azure.microsoft.com/en-us/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

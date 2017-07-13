@@ -17,20 +17,38 @@ ms.service: Service Fabric
 
 ## Overview
 
-## Install the modules with npm
+## Management Package
 
 Use npm to install the Azure Service Fabric modules for Node.js
 
-
-
-### Management
+### Install npm module
 ```bash
 npm install azure-arm-servicefabric
 ```
 
 
-##Example
+### Example
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const ServiceFabricManagement = require('azure-arm-servicefabric');
 
-##Samples
+const subscriptionId = 'your-subscription-id';
+
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const client = new ServiceFabricManagement(
+      credentials,
+      subscriptionId
+    );
+    return client.clusters.list();
+  })
+  .then(clusters => {
+    console.log('List of clusters:');
+    console.dir(clusters, { depth: null, colors: true });
+  });
+```
+
+### Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

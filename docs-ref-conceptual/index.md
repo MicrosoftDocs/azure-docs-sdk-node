@@ -1,83 +1,119 @@
-### YamlMime:YamlDocument
-documentType: LandingData
+---
 title: Azure for Node.js developers
-metadata:
-  title: Azure for Node.js developers - Tutorials, API Reference
-  description: Tools, SDKs, tutorials, and samples to help you create and deploy Node.js apps to Azure.
-  keywords: Azure, Node.js, SDK, API, npm
-  author: tomarcher
-  ms.author: tarcher
-  manager: douge
-  ms.date: 07/12/2017
-  ms.topic: article
-  ms.prod: azure
-  ms.technology: azure
-  ms.devlang: nodejs
-  ms.service: multiple
-sections:
-- items:
-  - type: list
-    style: cards
-    className: cardsM
-    items:
-    - href: https://docs.microsoft.com/en-us/azure/app-service-web/app-service-web-get-started-nodejs
-      html: <p>Create a Node.js web app&nbsp;app</p>
-      image:
-        src: https://docs.microsoft.com/en-us/media/common/i_get-started.svg
-      title: Quickstart
-    - href: https://docs.microsoft.com/en-us/nodejs/azure/node-azure-tools
-      html: <p>Developer tools for Node.js</p>
-      image:
-        src: https://docs.microsoft.com/en-us/media/common/i_download-install.svg
-      title: SDK &amp; Tools
-    - href: https://docs.microsoft.com/en-us/nodejs/api/overview/azure
-      html: <p>npm packages for Azure services</p>
-      image:
-        src: https://docs.microsoft.com/en-us/media/common/i_api-reference.svg
-      title: API Reference
-    - href: https://azure.microsoft.com/en-us/resources/samples/?platform=nodejs
-      html: <p>Azure samples using Node.js</p>
-      image:
-        src: https://docs.microsoft.com/en-us/media/common/i_code-samples.svg
-      title: Code Samples
-- title: 5-Minute Quickstarts
-  items:
-  - type: paragraph
-    text: 'Learn how to build Node.js apps with Azure services.'
-  - type: list
-    style: icon48
-    items: 
-    - image:
-        src: https://docs.microsoft.com/en-us/azure/media/index/app-service-web.svg
-      text: Web Apps
-      href: http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs
-    - image:
-        src: https://docs.microsoft.com/en-us/azure/media/index/azurefunctions.svg
-      text: Functions
-      href: http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function
-    - image:
-        src: https://docs.microsoft.com/en-us/azure/media/index/PostgreSQL.svg
-      text: PostgreSQL
-      href: http://docs.microsoft.com/en-us/azure/postgresql/connect-nodejs
-    - image:
-        src: https://docs.microsoft.com/en-us/azure/media/index/ContainerService.svg
-      text: Docker and Kubernetes
-      href: http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough
-- title: Free Pluralsight Video Training
-  items:
-  - type: list
-    style: cards
-    className: cardsW
-    items:
-    - html: <p><a href="https://www.pluralsight.com/courses/developing-dotnet-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">Developing with .NET</a></p>
-      image:
-        src: https://azurecomcdn.azureedge.net/cvt-6a59219b08ce7e787c535fc7ff035bef4f43507b7f8ae3f896dc033ba35b66b5/images/page/training/courses/author-thumbnails/scott-allen.jpg
-        href: https://www.pluralsight.com/courses/developing-dotnet-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02
-- title: Step-by-Step Tutorials
-  items:
-  - type: paragraph
-    text: Learn how to use Azure services and tools in your Node.js apps.
-  - type: list
-    style: unordered
-    items:
-    - html: <a href="https://docs.microsoft.com/azure/app-service-web/app-service-web-tutorial-nodejs-mong">Create an ASP.NET web app with Azure SQL Database</a>
+description: Overview of the Azure management and service modules for Node.js
+keywords: Azure, Node.js, SDK, API
+author: tomarcher
+layout: LandingPage
+ms.author: tarcher
+manager: douge
+ms.date: 06/17/2017
+ms.topic: article
+ms.prod: azure
+ms.devlang: nodejs
+ms.service: azure-nodejs
+---
+
+# Azure for Node.js developers
+
+<ul class="cardsY panelContent">
+    <li>
+        <a href="node-azure-tools.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card"  style="height: 84px">
+                        <div class="cardImageOuter"  style="margin-top: 12px">
+                            <div class="cardImage">
+                                <img src="https://docs.microsoft.com/media/common/i_tools.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                             <h3 style="margin-bottom: 0; font-size: 24px">Tools</h3>
+                            <p style="font-size: 1rem">Download Azure tools and plug-ins</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li><li>
+        <a href="node-sdk-azure-install.md">
+            <div class="cardSize">
+                <div class="cardPadding">
+                    <div class="card" style="height: 84px">
+                        <div class="cardImageOuter"  style="margin-top: 12px">
+                            <div class="cardImage">
+                                <img src="https://docs.microsoft.com/media/common/i_reference.svg" alt="" />
+                            </div>
+                        </div>
+                        <div class="cardText">
+                            <h3 style="margin-bottom: 0; font-size: 24px">Modules</h3>
+                            <p style="font-size: 1rem">Use services and manage Azure resources</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
+
+## 5-Minute Quickstarts
+Create and deploy a sample app in five minutes.
+<ul class="noBullet">
+   <li><a href="http://docs.microsoft.com/azure/app-service-web/app-service-web-get-started-nodejs">Create a web app</a></li>
+   <li><a href="http://docs.microsoft.com/azure/azure-functions/functions-create-first-azure-function">Run code in a serverless environment</a></li>
+   <li><a href="http://docs.microsoft.com/azure/container-service/container-service-kubernetes-walkthrough">Deploy a Docker image to a Kubernetes cluster</a></li>
+</ul>
+
+## Free PluralSight video training
+
+<ul class="panelContent cardsW">
+   <li>
+      <div class="cardSize">
+         <div class="cardPadding">
+            <div class="card">
+               <div class="cardImageOuter">
+                  <div class="cardImage">
+                     <a href="https://www.pluralsight.com/courses/developing-nodejs-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">
+                     <img alt="" src="https://docs.microsoft.com/en-us/azure/app-service-web/media/index/video-training-nodejs.png" data-linktype="external"></a>
+                  </div>
+               </div>
+               <div class="cardText">
+                  <p>
+                     <a href="https://www.pluralsight.com/courses/developing-nodejs-microsoft-azure-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02" data-linktype="external">Developing with Node.js</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </li>
+</ul>
+
+## Management APIs
+Install [Azure npm modules](node-sdk-azure-get-started.md) to manage Azure resources. 
+
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const computeManagementClient = require('azure-arm-compute');
+
+// Authenticate with service principal information from environment variables
+MsRest.loginWithServicePrincipalSecret(process.env.AZURE_APPID, process.env.AZURE_PASS, process.env.AZURE_TENANT, (err, credentials) => {
+    const client = new storageManagementClient(credentials, process.env.AZURE_SUB);
+
+  client.virtualMachineImages.list(
+    'westus', // location
+    'Canonical', // publisher name 
+    'UbuntuServer',  // offer
+    '16.04-LTS', // sku
+    (err, result, request, response) => {
+      if (err) return console.error(err);
+      console.log(result);
+    });
+});
+```
+
+## Step-by-Step Tutorials
+
+Learn how to use Azure services in your Node.js apps.
+
+<ul class="noBullet">
+    <li><a href="https://docs.microsoft.com/azure/app-service-web/app-service-web-tutorial-nodejs-mongodb-app">Node.js with MongoDB</a></li>
+</ul>

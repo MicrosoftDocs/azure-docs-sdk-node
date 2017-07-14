@@ -21,6 +21,8 @@ The recommended client library for accessing Azure Database for MySQL is the ope
 
 Learn more about [Azure Database for MySQL](https://docs.microsoft.com/azure/MySQL/)
 
+## Client Package
+
 ### Install npm module
 
 Use npm to install the MySQL client module.

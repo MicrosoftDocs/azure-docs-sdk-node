@@ -21,7 +21,7 @@ The recommended client library for accessing Azure Database for MySQL is the ope
 
 Learn more about [Azure Database for MySQL](https://docs.microsoft.com/azure/MySQL/)
 
-## Install packages with npm
+### Install packages with npm
 
 Use npm to install the MySQL client module.
 
@@ -29,9 +29,9 @@ Use npm to install the MySQL client module.
 npm install mysql
 ```   
 
-## Example
+### Example
 
-Connect to a MySQL database and perform a simple query.
+Connect to a MySQL database and perform a simple query to retrieve all customers.
 
 ```javascript
 const mysql = require('mysql');
@@ -43,15 +43,15 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
-const query = 'SELECT 1 + 1 AS solution';
+const query = 'SELECT * FROM customers';
 connection.query(query, (err, res) =>
-  console.log('The solution is: ', res[0].solution)
+  console.log(`We have ${res.length} customers`)
 );
 
 connection.end();
 ```
 
-## Samples
+### Samples
 
 [!INCLUDE [node-storage-samples](../docs-ref-conceptual/includes/mysql-samples.md)]
 

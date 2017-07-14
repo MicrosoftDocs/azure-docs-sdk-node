@@ -18,11 +18,11 @@ Whatever your operating system, we have a great set of recommended tools to help
 ### Step 1: Install the Azure CLI
 Azure CLI is optimized for managing Azure resources from the command line.
  
-[Install the Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2)
+[!div class="nextstepaction"][Install the Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2)
 
 <img src="https://docs.microsoft.com/en-us/media/logos/logo_vs-code.svg" width="50" height="50"></img>
 
 ### Step 2: Visual Studio Code
 Edit and debug Node.js apps on any OS.
  
-[Download Visual Studio Code](https://code.visualstudio.com/download)
+[!div class="nextstepaction"][Download Visual Studio Code](https://code.visualstudio.com/download)

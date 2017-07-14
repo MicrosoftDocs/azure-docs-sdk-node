@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Traffic Manager
 ---
 
-# Azure Traffic Manager module for Node.js
+# Azure Traffic Manager Packages for Node.js
 
 ## Overview
 
@@ -21,18 +21,32 @@ Microsoft Azure Traffic Manager allows you to control the distribution of user t
 
 Learn more about [Azure Traffic Manager](https://docs.microsoft.com/en-us/azure/traffic-manager/traffic-manager-overview).
 
-## Install the module with npm
+## Management Package
 
-Use npm to install the Azure Traffic Manager module for Node.js
-
-### Management
-
+### Install npm module
 ```bash
 npm install azure-arm-trafficmanager
 ```
 
-##Example
+### Example
 
-##Samples
+Authenticate to Azure, create a new client and list all Traffic Managers for a given resource group.
+
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const trafficManager = require('azure-arm-trafficmanager');
+
+msRestAzure.interactiveLogin().then(credentials => {
+  const client = new trafficManager(credentials, 'subscription-id');
+  const resourceGroupName = 'resource-group-name';
+  client.profiles.listAllInResourceGroup(resourceGroupName).then(profiles => {
+    profiles.map(profile => {
+      console.log(`found profile : ${profile.name}`);
+    });
+  });
+});
+```
+
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

@@ -1,5 +1,5 @@
 ---
-title: Azure MySQL modules for Node.js
+title: Azure MySQL packages for Node.js
 description: Create and manage MySQL resources from your Node.js apps.
 keywords: Azure, Node, SDK, API, nodejs, javascript, database, MySQL
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: mysql
 ---
 
-# Azure MySQL modules for Node.js
+# Azure MySQL packages for Node.js
 
 ## Overview
 
@@ -21,7 +21,9 @@ The recommended client library for accessing Azure Database for MySQL is the ope
 
 Learn more about [Azure Database for MySQL](https://docs.microsoft.com/azure/MySQL/)
 
-## Install modules with npm
+## Client Package
+
+### Install npm module
 
 Use npm to install the MySQL client module.
 
@@ -29,30 +31,29 @@ Use npm to install the MySQL client module.
 npm install mysql
 ```   
 
-## Example
+### Example
 
-Connect to, and query, a MySQL database.
+Connect to a MySQL database and perform a simple query to retrieve all customers.
 
 ```javascript
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'me',
-  password : 'secret',
-  database : 'my_db'
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'me',
+  password: 'secret',
+  database: 'my_db'
 });
 
 connection.connect();
-
-connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The solution is: ', results[0].solution);
-});
+const query = 'SELECT * FROM customers';
+connection.query(query, (err, res) =>
+  console.log(`We have ${res.length} customers`)
+);
 
 connection.end();
 ```
 
-## Samples
+### Samples
 
 [!INCLUDE [node-storage-samples](../docs-ref-conceptual/includes/mysql-samples.md)]
 

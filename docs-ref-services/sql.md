@@ -13,39 +13,86 @@ ms.devlang: nodejs
 ms.service: sql-database
 ---
 
-# Azure SQL modules for Node.js
+# Azure SQL packages for Node.js
 
 ## Overview
 
 Work with data stored in [Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) from Node.js.
 The management library provides an interface to make it easy to manage Microsoft Azure SQL databases.
 
-## Install modules with npm
+## Client Package
 
-Use npm to install the Azure storage client module.
+#### Install npm modules
+
+Use npm to install the SQL Server client module.
+
+```bash
+npm install tedious
+```
+
+### Example
+
+Connect to a SQL Server database and perform a simple query.
+
+```javascript
+const Connection = require('tedious').Connection;
+const Request = require('tedious').Request;
+
+const config = {
+  userName: 'your-username',
+  password: 'your-password',
+  server: 'path-to-server',
+  options: {
+    database: 'database-name',
+    encrypt: true
+  }
+};
+
+const connection = new Connection(config);
+connection.on('connect', err => {
+  err ? console.log(err) : executeStatement();
+});
+
+const query = 'SELECT * from TableName';
+const executeStatement = () => {
+  const request = new Request(query, (err, rowCount) => {
+    err ? console.log(err) : console.log(rowCount);
+  });
+
+  request.on('row', columns => {
+    columns.forEach(column => console.log(column.value));
+  });
+
+  connection.execSql(request);
+};
+```
+
+## Management Package
+
+#### Install npm modules
+
+Use npm to install the Azure SQL Server management module.
 
 ```
-npm install azure-arm-storage
+npm install azure-arm-sql
 ```   
 
-## Example
+### Example
 
 Authenticate, create a client, and list all servers.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');
-const SQLManagement = require("azure-arm-sql");
- 
-msRestAzure.interactiveLogin().then((credentials) => {
-  let client = new SQLManagement(credentials, 'your-subscription-id');
-  return client.servers.list();
-}).then((servers) => {
- console.log('List of servers:');
- console.dir(servers, {depth: null, colors: true});
-}).catch((err) => {
-  console.log('An error ocurred');
-  console.dir(err, {depth: null, colors: true});
-});
+const SQLManagement = require('azure-arm-sql');
+
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const client = new SQLManagement(credentials, 'your-subscription-id');
+    return client.servers.list();
+  })
+  .then(servers => console.dir(servers, { depth: null, colors: true }))
+  .catch(err => console.log(err));
 ```
 
 ## Samples

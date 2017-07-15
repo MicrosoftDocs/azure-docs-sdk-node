@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: postgresql
 ---
 
-# Azure PostgreSQL modules for Node.js
+# Azure PostgreSQL packages for Node.js
 
 ## Overview
 
@@ -22,7 +22,9 @@ This library is a non-blocking PostgreSQL client for Node.js, supporting pure Ja
 
 Learn more about [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/)
 
-## Install modules with npm
+## Client Package
+
+#### Install packages with npm
 
 Use npm to install the PostgreSQL client module.
 
@@ -30,23 +32,26 @@ Use npm to install the PostgreSQL client module.
 npm install pg
 ```   
 
-## Example
+### Example
 
-Passing a query to an existing pool. Note that after running the query, you do not need to return any client to the pool, or close a connection.
+Opening a client connection and running a simple query.
 
 ```javascript
-const pool = require('./lib/db');
- 
-pool.query('SELECT $1::int AS number', ['2'], function(err, res) {
-  if(err) {
-    return console.error('error running query', err);
-  }
- 
-  console.log('number:', res.rows[0].number);
+const pg = require('pg');
+
+const connectionString =
+  'postgres://{username}@{server-name}:{password}@{server-name}.postgres.database.azure.com:5432/{database-name}?ssl=true';
+
+const client = new pg.Client(connectionString);
+client.connect();
+
+const query = 'SELECT * FROM {table-name}';
+client.query(query, (err, res) => {
+  console.log(res);
 });
 ```
 
-## Samples
+### Samples
 
 [!INCLUDE [node-postgresql-samples](../docs-ref-conceptual/includes/postgresql-samples.md)]
 

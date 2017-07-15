@@ -1,3 +1,4 @@
-| | |
-|--|--|
-| [Node.js code snippets using MySQL](https://github.com/sidorares/node-mysql2/blob/master/documentation/Examples.md) | Learn how to execute a simple SELECT statement, use a prepared statement with parameters, connect over an encrypted connection, and more.
+* [Create a connection to MySQL using Node.js](https://github.com/mysqljs/mysql/blob/master/Readme.md#establishing-connections)
+* [Perform queries using Node.js and MySQL](https://github.com/mysqljs/mysql/blob/master/Readme.md#performing-queries)
+* [MySQL transactions in Node.js](https://github.com/mysqljs/mysql/blob/master/Readme.md#transactions)
+

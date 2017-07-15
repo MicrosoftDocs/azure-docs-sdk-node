@@ -1,5 +1,5 @@
 ---
-title: Azure PowerBI Embedded module for Node.js
+title: Azure PowerBI Embedded package for Node.js
 description: Reference for Azure PowerBI Embedded module for Node.js
 keywords: Azure,SDK,API,PowerBI Embedded, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: PowerBI Embedded
 ---
 
-# Azure PowerBI Embedded module for Node.js
+# Azure PowerBI Embedded package for Node.js
 
 ## Overview
 
@@ -21,18 +21,51 @@ With the Power BI Embedded Azure service, you can integrate Power BI reports rig
 
 Learn more about [Power BI Embedded](https://powerbi.microsoft.com/en-us/documentation/powerbi-developer-embedding/).
 
-## Install the modules with npm
+## Management Package
 
-Use npm to install the Azure PowerBI Embedded module for Node.js
+### Install npm module
 
-### Management
 ```bash
 npm install azure-arm-powerbiembedded
 ```
 
+### Example
 
-##Example
+Authenticate, create client and create workspace collection in an existing resource group.
 
-##Samples
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const PowerBIEmbeddedManagementClient = require('azure-arm-powerbiembedded');
+
+const creationOptions = {
+  location: 'northcentralus',
+  tags: {
+    key1: 'value1',
+    key2: 'value2'
+  },
+  sku: {
+    name: 'S1',
+    teir: 'Standard'
+  }
+};
+
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const client = new PowerBIEmbeddedManagementClient(
+      credentials,
+      'your-subscription-id'
+    );
+    return client.workspaceCollections.create(
+      'your-resource-group-name',
+      'workspace-collection-name',
+      creationOptions
+    );
+  })
+  .then(workspaces => console.dir(workspaces, { depth: null, colors: true }))
+  .catch(err => console.log(err));
+```
+
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

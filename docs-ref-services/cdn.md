@@ -19,7 +19,11 @@ ms.service: CDN
 The Azure Content Delivery Network (CDN) offers developers a global solution for delivering high-bandwidth content that is hosted in Azure or any other location. Using the CDN, you can cache publicly available objects loaded from Azure blob storage, a web application, virtual machine, application folder, or other HTTP/HTTPS location. The CDN cache can be held at strategic locations to provide maximum bandwidth for delivering content to users. The CDN is typically used for delivering static content such as images, style sheets, documents, files, client-side scripts, and HTML pages.
 
 ## Management Package
-### Install npm module
+
+### Install npm package
+
+Install the Azure CDN module for Node.js
+
 ```bash
 npm install azure-arm-cdn
 ```

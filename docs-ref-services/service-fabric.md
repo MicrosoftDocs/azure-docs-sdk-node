@@ -17,7 +17,7 @@ ms.service: Service Fabric
 
 ## Overview
 
-Azure Service Fabric is a distributed systems platform that makes it easy to package, deploy, and manage scalable and reliable microservices and containers. 
+Azure Service Fabric is a distributed systems platform that makes it easy to package, deploy, and manage scalable and reliable microservices and containers.
 
 Learn more about [Azure Service Fabric](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview).
 
@@ -26,6 +26,7 @@ Learn more about [Azure Service Fabric](https://docs.microsoft.com/en-us/azure/s
 ### Install npm module
 
 Use npm to install the Azure Service Fabric module for Node.js
+
 ```bash
 npm install azure-arm-servicefabric
 ```

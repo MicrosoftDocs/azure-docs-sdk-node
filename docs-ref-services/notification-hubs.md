@@ -26,11 +26,12 @@ Notification Hubs works great for both enterprise and consumer scenarios. Here a
 - Notify users of enterprise events like new messages and work items.
 - Send codes for multi-factor authentication.
 
-## Install the modules with npm
+## Management Package
 
-Use npm to install the Azure Notification Hubs modules for Node.js
+### Install npm package
 
-### Management
+Install the Azure Noticiation Hubs module for Node.js
+
 ```bash
 npm install azure-arm-notificationhubs
 ```

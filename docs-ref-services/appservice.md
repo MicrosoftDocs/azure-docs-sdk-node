@@ -25,11 +25,11 @@ App Service includes the web and mobile capabilities that we previously delivere
 
 ### Install npm package
 
-Use npm to install the Azure storage module.
+Install the Azure storage module for Node.js
 
-```
+```bash
 npm install azure-arm-website
-```   
+```
 
 ### Example
 
@@ -44,7 +44,6 @@ const website = 'website001';
 const hostingPlan = 'testHostingPlan';
 let webSiteClient;
 
-// interactive login
 msRestAzure.interactiveLogin((err, credentials) => {
   webSiteClient = new webSiteManagementClient(credentials, subscriptionId);
   createWebSite(website).then(website => console.log('Web Site created successfully', website));

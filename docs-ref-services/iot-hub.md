@@ -28,14 +28,16 @@ Use npm to install the Azure IoT Hub modules for Node.js
 
 ## Management Package
 
-### Install the npm packages
+### Install npm package
+
+Install the Azure IoT Hub module for Node.js
+
 ```bash
 npm install azure-arm-iothub
 ```
-
 ### Example
 
-Create and name an IoT hub 
+Create and name an IoT hub
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');
@@ -87,7 +89,7 @@ const hubName = 'your-hub';
 
 msRestAzure.interactiveLogin((err, credentials) => {
   const client = new IoTHubClient(credentials, subscriptionId);
-  
+
   client.iotHubResource
     .get(resourceGroup, hubName)
     .then(hubDescriptionResult => console.log(hubDescriptionResult))

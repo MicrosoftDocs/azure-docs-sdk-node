@@ -15,7 +15,7 @@ ms.author: tarcher
 # Azure tools for Node.js developers
 Whatever your operating system, we have a great set of recommended tools to help you develop using Node.js on Azure.
 
-### Step 1: Install the Azure CLI
+### Step 1: Azure CLI
 Azure CLI is optimized for managing Azure resources from the command line.
  
 > [!div class="nextstepaction"]

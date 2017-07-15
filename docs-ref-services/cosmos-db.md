@@ -22,7 +22,10 @@ Azure Cosmos DB contains a write optimized, resource governed, schema-agnostic d
 
 ## Management Package
 
-### Install npm module
+### Install npm package
+
+Install the Azure Cosmos DB module for Node.js
+
 ```bash
 npm install azure-arm-documentdb
 ```

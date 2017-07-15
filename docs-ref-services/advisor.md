@@ -23,14 +23,16 @@ With Advisor, you can:
 - Improve the performance, security, and high availability of your resources, as you identify opportunities to reduce your overall Azure spend.
 - Get recommendations with proposed actions inline.
 
-## Management
+## Management Package
 
 Use npm to install the Azure Advisor modules for Node.js
 
-### Install the modules with npm
+### Install npm package
+
 ```bash
 npm install azure-arm-advisor
 ```
+
 ## Example
 ```javascript
 const msRestAzure = require('ms-rest-azure');

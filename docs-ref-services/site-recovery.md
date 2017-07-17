@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Site Recovery
 ---
 
-# Azure Site Recovery module for Node.js
+# Azure Site Recovery Package for Node.js
 
 ## Overview
 
@@ -21,18 +21,35 @@ Site Recovery allows you to automate replication of Azure VMs between regions, o
 
 Learn more about [Azure Site Recovery](https://docs.microsoft.com/en-us/azure/site-recovery/site-recovery-overview).
 
-## Install the module with npm
+## Management Package
 
-Use npm to install the Azure Site Recovery module for Node.js
-
-### Management
-
+### Install npm module
 ```bash
 npm install azure-arm-recoveryservices
 ```
 
-##Example
+### Example
 
-##Samples
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const RecoveryServicesManagement = require('azure-arm-recoveryservices');
+
+const subscriptionId = 'your-subscription-id';
+const resourceGroupName = 'your-resource-group-name';
+
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const client = new RecoveryServicesManagement(credentials, subscriptionId);
+    return client.vaults.listByResourceGroup(resourceGroupName);
+  })
+  .then(vaults => {
+    console.log('List of vaults:');
+    console.dir(vaults, { depth: null, colors: true });
+  });
+  
+```
+
+### Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

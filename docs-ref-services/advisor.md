@@ -29,23 +29,31 @@ Use npm to install the Azure Advisor modules for Node.js
 
 ### Install npm package
 
+Install the Azure advisor npm package
+
 ```bash
 npm install azure-arm-advisor
 ```
 
-## Example
+### Example
+
+This example displays the list of recommendations from Azure advisor.
+
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const advisorManagement = require('azure-arm-advisor');
 
-msRestAzure.interactiveLogin().then( credentials => {
-  const client = new advisorManagement(credentials, 'your-subscription-id');
+const subscriptionId = 'your-subscription-id';
+
+msRestAzure.interactiveLogin().then(credentials => {
+  const client = new advisorManagement(credentials, subscriptionId);
   client.recommendations.list().then(recommendations => {
     console.log('List of recommendations:');
     console.dir(recommendations, {depth: null, colors: true});
   });
 });
 ```
-## Samples
+
+### Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

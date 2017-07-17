@@ -37,15 +37,17 @@ const subscriptionId = 'your-subscription-id';
 const resourceGroupName = 'your-resource-group-name';
 const labName = 'your-lab-name';
 
-msRestAzure.interactiveLogin((err, credentials) => {
-  const client = new DevTestLabsClient(credentials, subscriptionId);
-  client.labOperations
-    .getResource(resourceGroupName, labName)
-    .then(lab => {
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const client = new DevTestLabsClient(credentials, subscriptionId);
+    return client.labOperations.getResource(resourceGroupName, labName);
+  })
+  .then(lab => {
     console.log('Details of lab:');
     console.dir(lab, { depth: null, colors: true });
-    });
-});
+  });
+
 
 ```
 

@@ -18,8 +18,12 @@ ms.service: Cognitive Services
 ## Overview
 Azure Cognitive Services is a set of APIs, SDKs, and services available to developers to make their applications more intelligent, engaging and discoverable. Microsoft Cognitive Services expands on Microsoft’s evolving portfolio of machine learning APIs and enables developers to easily add intelligent features – such as emotion and video detection; facial, speech and vision recognition; and speech and language understanding – into their applications. Our vision is for more personal computing experiences and enhanced productivity aided by systems that increasingly can see, hear, speak, understand and even begin to reason.
 
-## Management
-### Install npm module
+## Management Package
+
+### Install npm package
+
+Install the Azure Cognitive Services module for Node.js
+
 ```bash
 npm install azure-arm-cognitiveservices
 ```

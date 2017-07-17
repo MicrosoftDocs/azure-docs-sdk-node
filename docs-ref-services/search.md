@@ -23,11 +23,9 @@ Learn more about [Azure Search](https://docs.microsoft.com/en-us/azure/search/se
 
 ## Management Package
 
-## Install the module with npm
+### Install npm package
 
-Use npm to install the Azure Search module for Node.js
-
-### Management
+Install the Azure Search module for Node.js
 
 ```bash
 npm install azure-arm-search

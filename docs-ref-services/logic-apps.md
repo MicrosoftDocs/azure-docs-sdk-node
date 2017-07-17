@@ -30,7 +30,10 @@ Logic Apps is a fully managed iPaaS (integration Platform as a Service) allowing
 
 ## Management Package
 
-### Install npm modules
+### Install npm package
+
+Install the Azure logic module for Node.js
+
 ```bash
 npm install azure-arm-logic
 ```

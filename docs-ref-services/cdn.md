@@ -31,7 +31,7 @@ npm install azure-arm-cdn
 
 ### Example
 
-This example lists all of the CDN profiles
+This example lists all of the CDN profiles.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

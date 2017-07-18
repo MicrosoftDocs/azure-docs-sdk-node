@@ -1,5 +1,5 @@
 ---
-title: Azure Container Registry modules for Node.js
+title: Azure Container Registry Modules for Node.js
 description: Reference for Azure Container Registry modules for Node.js
 keywords: Azure,SDK,API,Container Registry, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Container Registry
 ---
 
-# Azure Container Registry modules for Node.js
+# Azure Container Registry Modules for Node.js
 
 ## Overview
 
@@ -21,7 +21,7 @@ Azure Container Registry is a managed Docker registry service based on the open-
 
 ## Management Package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure container registry npm module
 

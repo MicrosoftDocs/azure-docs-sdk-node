@@ -23,23 +23,32 @@ Azure App Service Authentication / Authorization is a feature that provides a wa
 Use npm to install the Azure Authorization modules for Node.js
 
 ### Install the modules with npm
+
+Install the Azure authorization npm package
+
 ```bash
 npm install azure-arm-authorization
 ```
+
 ### Example
+
+This example lists all role assignments for the requested resource group.
+
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const authorizationManagement = require('azure-arm-authorization');
 
-msRestAzure.interactiveLogin( (err, credentials) => {
- const client = new authorizationManagement(credentials, 'your-subscription-id');
- const resourceGroupName = 'resource-group-name';
+const resourceGroup = 'resource-group-name';
+const subscriptionId = 'your-subscription-id';
+
+msRestAzure.interactiveLogin((err, credentials) => {
+ const client = new authorizationManagement(credentials, subscriptionId);
  client.roleAssignments.listForResourceGroup(resourceGroupName, (err, result) => {
    console.log(result);
  });
 });
 ```
 
-##Samples
+### Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

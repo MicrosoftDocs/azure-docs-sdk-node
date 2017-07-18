@@ -23,7 +23,7 @@ Learn more about [Azure Service Fabric](https://docs.microsoft.com/en-us/azure/s
 
 ## Management package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure Service Fabric npm module
 

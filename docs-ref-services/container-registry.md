@@ -34,21 +34,25 @@ npm install azure-arm-containerregistry
 This example gets a list of the available containers.
 
 ```javascript
-const msRestAzure = require('ms-rest-azure')
-const ContainerRegistryManagement = require('azure-arm-containerregistry')
+const msRestAzure = require('ms-rest-azure');
+const ContainerRegistryManagement = require('azure-arm-containerregistry');
 
 const subscriptionId = 'your-subscription-id';
 
-msRestAzure.interactiveLogin().then(credentials => {
-    let manager = new ContainerRegistryManagement(credentials, subscriptionId)
-    return manager.registries.list()
-}).then(registries => {
-    console.log("List of registries:")
-    console.dir(registries, {depth:null, colors:true})
-}).catch(error => {
-    console.log("An error occurred:")
-    console.dir(error, {depth:null, colors:true})
-})
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const manager = new ContainerRegistryManagement(
+      credentials,
+      subscriptionId
+    );
+    return manager.registries.list();
+  })
+  .then(registries => {
+    console.log('List of registries:');
+    console.dir(registries, { depth: null, colors: true });
+  });
+
 ```
 
 ## Samples

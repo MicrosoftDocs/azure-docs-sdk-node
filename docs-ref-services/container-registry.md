@@ -23,7 +23,7 @@ Azure Container Registry is a managed Docker registry service based on the open-
 
 ### Install npm package
 
-Install the Azure container registry module for Node.js
+Install the Azure container registry npm module
 
 ```bash
 npm install azure-arm-containerregistry
@@ -31,24 +31,26 @@ npm install azure-arm-containerregistry
 
 ### Example
 
-Get a list of the available Docker containers:
+This examle lists all available containers
 
 ```javascript
 const msRestAzure = require('ms-rest-azure')
 const ContainerRegistryManagement = require('azure-arm-containerregistry')
 
-msRestAzure.interactiveLogin().then( (credentials) => {
-    let manager = new ContainerRegistryManagement(credentials, 'your-subscription-id')
+const subscriptionId = 'your-subscription-id';
+
+msRestAzure.interactiveLogin().then(credentials => {
+    let manager = new ContainerRegistryManagement(credentials, subscriptionId)
     return manager.registries.list()
-}).then( (registries) => {
+}).then(registries => {
     console.log("List of registries:")
     console.dir(registries, {depth:null, colors:true})
-}).catch( (error) => {
+}).catch(error => {
     console.log("An error occurred:")
     console.dir(error, {depth:null, colors:true})
 })
 ```
 
-##Samples
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

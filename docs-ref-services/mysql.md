@@ -1,5 +1,5 @@
 ---
-title: Azure MySQL packages for Node.js
+title: Azure MySQL modules for Node.js
 description: Create and manage MySQL resources from your Node.js apps.
 keywords: Azure, Node, SDK, API, nodejs, javascript, database, MySQL
 author: tomarcher
@@ -13,17 +13,17 @@ ms.devlang: nodejs
 ms.service: mysql
 ---
 
-# Azure MySQL packages for Node.js
+# Azure MySQL Modules for Node.js
 
 ## Overview
 
-The recommended client library for accessing Azure Database for MySQL is the open-source [Node.js connection library for Azure Database for MySQL](https://github.com/sidorares/node-mysql2/tree/master/documentation). 
+The recommended client library for accessing Azure Database for MySQL is the open-source [Node.js connection library for Azure Database for MySQL](https://github.com/mysqljs/mysql). 
 
 Learn more about [Azure Database for MySQL](https://docs.microsoft.com/azure/MySQL/)
 
 ## Client Package
 
-### Install npm module
+### Install the npm module
 
 Use npm to install the MySQL client module.
 

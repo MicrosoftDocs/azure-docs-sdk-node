@@ -1,5 +1,5 @@
 ---
-title: Azure Container Registry modules for Node.js
+title: Azure Container Registry Modules for Node.js
 description: Reference for Azure Container Registry modules for Node.js
 keywords: Azure,SDK,API,Container Registry, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Container Registry
 ---
 
-# Azure Container Registry modules for Node.js
+# Azure Container Registry Modules for Node.js
 
 ## Overview
 
@@ -21,9 +21,9 @@ Azure Container Registry is a managed Docker registry service based on the open-
 
 ## Management Package
 
-### Install npm package
+### Install the npm module
 
-Install the Azure container registry module for Node.js
+Install the Azure container registry npm module
 
 ```bash
 npm install azure-arm-containerregistry
@@ -31,24 +31,26 @@ npm install azure-arm-containerregistry
 
 ### Example
 
-Get a list of the available Docker containers:
+This example lists all available containers.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure')
 const ContainerRegistryManagement = require('azure-arm-containerregistry')
 
-msRestAzure.interactiveLogin().then( (credentials) => {
-    let manager = new ContainerRegistryManagement(credentials, 'your-subscription-id')
+const subscriptionId = 'your-subscription-id';
+
+msRestAzure.interactiveLogin().then(credentials => {
+    let manager = new ContainerRegistryManagement(credentials, subscriptionId)
     return manager.registries.list()
-}).then( (registries) => {
+}).then(registries => {
     console.log("List of registries:")
     console.dir(registries, {depth:null, colors:true})
-}).catch( (error) => {
+}).catch(error => {
     console.log("An error occurred:")
     console.dir(error, {depth:null, colors:true})
 })
 ```
 
-##Samples
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

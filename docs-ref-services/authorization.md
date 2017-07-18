@@ -16,15 +16,16 @@ ms.service: Authorization
 # Azure Authorization modules for Node.js
 
 ## Overview
+
 Azure App Service Authentication / Authorization is a feature that provides a way for your application to sign in users so that code doesn't have to be changed on the app backend. Authorization provides an easy way to protect your application and work with per-user data.
 
 ## Management
 
 Use npm to install the Azure Authorization modules for Node.js
 
-### Install the modules with npm
+### Install npm module
 
-Install the Azure authorization npm package
+Install the Azure authorization npm module
 
 ```bash
 npm install azure-arm-authorization

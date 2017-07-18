@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Virtual Network
 ---
 
-# Azure Virtual Network Modules for Node.js
+# Azure Virtual Network modules for Node.js
 
 ## Overview
 

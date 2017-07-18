@@ -1,5 +1,5 @@
 ---
-title: Azure Notification Hubs Modules for Node.js
+title: Azure Notification Hubs modules for Node.js
 description: Reference for Azure Notification Hubs modules for Node.js
 keywords: Azure,SDK,API,Notification Hubs, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Notification Hubs
 ---
 
-# Azure Notification Hubs Modules for Node.js
+# Azure Notification Hubs modules for Node.js
 
 ## Overview
 

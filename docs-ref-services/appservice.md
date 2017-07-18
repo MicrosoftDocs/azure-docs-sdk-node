@@ -1,5 +1,5 @@
 ---
-title: Azure App Service Modules for Node.js
+title: Azure App Service modules for Node.js
 description: Deploy, manage, and scale web apps, APIs, and mobile apps running in Azure App Service from your Node.js code
 keywords: Azure, Node, SDK, API, web apps , mobile , nodejs, javascript
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: appservice
 ---
 
-# Azure App Service Node.js Modules
+# Azure App Service modules for Node.js
 
 ## Overview
 

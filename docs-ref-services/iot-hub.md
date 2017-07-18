@@ -1,5 +1,5 @@
 ---
-title: Azure IoT Hub Modules for Node.js
+title: Azure IoT Hub modules for Node.js
 description: Reference for Azure IoT Hub modules for Node.js
 keywords: Azure,SDK,API,IoT Hub, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: IoT Hub
 ---
 
-# Azure IoT Hub Modules for Node.js
+# Azure IoT Hub modules for Node.js
 
 ## Overview
 

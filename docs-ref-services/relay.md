@@ -1,5 +1,5 @@
 ---
-title: Azure Relay Modules for Node.js
+title: Azure Relay modules for Node.js
 description: Reference for Azure Relay package for Node.js
 keywords: Azure,SDK,API,Relay, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Relay
 ---
 
-# Azure Relay Modules for Node.js
+# Azure Relay modules for Node.js
 
 ## Overview
 

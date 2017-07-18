@@ -1,5 +1,5 @@
 ---
-title: Azure Server Management module for Node.js
+title: Azure Server Management modules for Node.js
 description: Reference for Azure Server Management module for Node.js
 keywords: Azure,SDK,API,Server Management, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Server Management
 ---
 
-# Azure Server Management module for Node.js
+# Azure Server Management modules for Node.js
 
 ## Overview
 

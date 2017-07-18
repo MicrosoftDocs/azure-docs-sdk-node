@@ -27,7 +27,9 @@ Create, update, and manage Azure Storage accounts and query and regenerate acces
 
 ## Client Package
 
-### Install packages with npm
+### Install npm module
+
+Install the Azure storage client npm module
 
 ```bash
 npm install azure-storage
@@ -61,7 +63,9 @@ blobService.createContainerIfNotExists(container, error => {
 
 ## Management Package
 
-### Install packages with npm
+### Install npm module 
+
+Install the Azure storage management npm module
 
 ```bash
 npm install azure-arm-storage
@@ -75,12 +79,14 @@ Authenticate, create client and list storage accounts.
 const msRestAzure = require('ms-rest-azure');
 const storageManagementClient = require('azure-arm-storage');
 
+const subscriptionId = 'your-subscription-id';
+
 msRestAzure
   .interactiveLogin()
   .then(credentials => {
     const client = new storageManagementClient(
       credentials,
-      'your-subscription-id'
+      subscriptionId
     );
     return client.storageAccounts.list();
   })

@@ -39,14 +39,22 @@ const cognitiveServicesManagementClient = require('azure-arm-cognitiveservices')
 
 const subscriptionId = 'your-subscription-id';
 
-msRestAzure.interactiveLogin().then(credentials => {
-  const cognitiveServicesClient = new cognitiveServicesManagementClient(credentials, subscriptionId);
-  cognitiveServicesClient.cognitiveServicesAccounts
-    .list()
-    .then(cognitiveServicesAccounts =>
-      console.log('Retrieved cognitive services accounts: ', cognitiveServicesAccounts)
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const cognitiveServicesClient = new cognitiveServicesManagementClient(
+      credentials,
+      subscriptionId
     );
-});
+    return cognitiveServicesClient.cognitiveServicesAccounts.list();
+  })
+  .then(cognitiveServicesAccounts =>
+    console.log(
+      'Retrieved cognitive services accounts: ',
+      cognitiveServicesAccounts
+    )
+  );
+
 ```
 
 ## Samples

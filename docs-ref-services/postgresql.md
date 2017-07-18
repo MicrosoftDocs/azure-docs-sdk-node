@@ -28,7 +28,7 @@ Learn more about [Azure Database for PostgreSQL](https://docs.microsoft.com/azur
 
 Use npm to install the PostgreSQL client module.
 
-```
+```bash
 npm install pg
 ```   
 

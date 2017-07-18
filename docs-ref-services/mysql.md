@@ -27,7 +27,7 @@ Learn more about [Azure Database for MySQL](https://docs.microsoft.com/azure/MyS
 
 Use npm to install the MySQL client module.
 
-```
+```bash
 npm install mysql
 ```   
 

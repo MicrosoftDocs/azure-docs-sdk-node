@@ -42,10 +42,11 @@ const msRestAzure = require('ms-rest-azure');
 const AzureMgmtRedisCache = require('azure-arm-rediscache');
 
 const subscriptionId = 'your-subscription-id';
+const resourceGroup = 'your-resource-group';
 
 msRestAzure.interactiveLogin().then(credentials => {
   const client = new AzureMgmtRedisCache(credentials, subscriptionId);
-  client.redis.listByResourceGroup('testResourceGroup').then(result => {
+  client.redis.listByResourceGroup(resourceGroup).then(result => {
     console.log(result);
   });
 });

@@ -25,7 +25,7 @@ App Service includes the web and mobile capabilities that we previously delivere
 
 ### Install the npm package
 
-Install the Azure storage module for Node.js
+Install the Azure App Service module for Node.js
 
 ```bash
 npm install azure-arm-website

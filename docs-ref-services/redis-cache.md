@@ -25,7 +25,7 @@ Learn more about [Azure Redis Cache](https://docs.microsoft.com/azure/redis-cach
 
 ## Management package
 
-#### Install the npm module
+### Install the npm module
 
 Install the Azure Redis Cache npm module
 
@@ -33,9 +33,9 @@ Install the Azure Redis Cache npm module
 npm install azure-arm-rediscache
 ```
 
-## Example
+### Example
 
-
+This example lists all Redis Cache instances for a given resource group
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

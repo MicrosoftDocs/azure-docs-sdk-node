@@ -21,14 +21,13 @@ Azure Scheduler creates, maintains, and invokes scheduled work via HTTP, HTTPS, 
 
 Learn more about [Azure Scheduler](/azure/scheduler/scheduler-intro).
 
-
-## Management API
+## Management package
 
 Create, maintain, and invoke scheduled work across various communication channels with the management API.
 
-### Install npm package
+### Install npm module
 
-Use npm to install the Azure Scheduler module for Node.js
+Install the Azure Scheduler npm module
 
 ```bash
 npm install azure-arm-scheduler
@@ -57,7 +56,6 @@ msRestAzure.interactiveLogin().then((credentials) => {
 })
 ```
 
-### Samples
-
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

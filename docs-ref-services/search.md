@@ -21,11 +21,11 @@ Azure Search is a cloud search-as-a-service solution that delegates server and i
 
 Learn more about [Azure Search](https://docs.microsoft.com/en-us/azure/search/search-what-is-azure-search).
 
-## Management Package
+## Management package
 
-### Install npm package
+### Install npm module
 
-Install the Azure Search module for Node.js
+Install the Azure Search npm module
 
 ```bash
 npm install azure-arm-search
@@ -58,6 +58,6 @@ msRestAzure
   });
 ```
 
-### Samples
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

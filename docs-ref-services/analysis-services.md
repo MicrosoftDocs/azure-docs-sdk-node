@@ -30,7 +30,7 @@ npm install azure-arm-analysisservices
 
 ### Example
 
-This example lists all available analysis servers.
+This example lists all available Analysis Service servers.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

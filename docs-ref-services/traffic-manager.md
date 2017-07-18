@@ -24,6 +24,9 @@ Learn more about [Azure Traffic Manager](https://docs.microsoft.com/en-us/azure/
 ## Management Package
 
 ### Install npm module
+
+Install the Azure traffic manager npm module
+
 ```bash
 npm install azure-arm-trafficmanager
 ```
@@ -36,8 +39,10 @@ Authenticate to Azure, create a new client and list all Traffic Managers for a g
 const msRestAzure = require('ms-rest-azure');
 const trafficManager = require('azure-arm-trafficmanager');
 
+const subscriptionId = 'your-subscription-id';
+
 msRestAzure.interactiveLogin().then(credentials => {
-  const client = new trafficManager(credentials, 'subscription-id');
+  const client = new trafficManager(credentials, subscriptionId);
   const resourceGroupName = 'resource-group-name';
   client.profiles.listAllInResourceGroup(resourceGroupName).then(profiles => {
     profiles.map(profile => {

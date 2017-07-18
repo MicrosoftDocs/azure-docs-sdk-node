@@ -35,7 +35,7 @@ npm install azure-arm-rediscache
 
 ### Example
 
-This example lists all Redis Cache instances for a given resource group
+This example lists all Redis Cache instances for a given resource group.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');
@@ -50,7 +50,6 @@ msRestAzure.interactiveLogin().then(credentials => {
   });
 });
 ```
-
 
 ## Samples
 

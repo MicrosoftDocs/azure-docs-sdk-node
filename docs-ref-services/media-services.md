@@ -16,6 +16,7 @@ ms.service: Media Services
 # Azure Media Services packages for Node.js
 
 ## Overview
+
 Azure Media Services is an extensible cloud-based platform that enables developers to build scalable media management and delivery applications. Media Services is based on REST APIs that enable you to securely upload, store, encode, and package video or audio content for both on-demand and live streaming delivery to various clients (for example, TV, PC, and mobile devices).
 
 With Azure Media Services, you can:
@@ -24,12 +25,19 @@ With Azure Media Services, you can:
 - Stream your content live or deliver content on-demand. The topic also links to other relevant topics.
 
 ## Management Package
+
 ### Install npm module
+
+Install the Azure media services npm module
+
 ```bash
 npm install azure-arm-mediaservices
 ```
 
 ### Example
+
+This example liss all media services for a resource group
+
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const mediaServicesManagement = require('azure-arm-mediaservices');
@@ -46,6 +54,6 @@ msRestAzure.interactiveLogin().then(credentials => {
 });
 ```
 
-### Samples
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

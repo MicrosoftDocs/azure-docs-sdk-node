@@ -16,6 +16,7 @@ ms.service: IoT Hub
 # Azure IoT Hub Packages for Node.js
 
 ## Overview
+
 Azure IoT Hub is a fully managed service that enables reliable and secure bidirectional communications between millions of IoT devices and a solution back end. Azure IoT Hub:
 - Provides multiple device-to-cloud and cloud-to-device communication options, including one-way messaging, file transfer, and request-reply methods.
 - Provides built-in declarative message routing to other Azure services.
@@ -30,11 +31,12 @@ Use npm to install the Azure IoT Hub modules for Node.js
 
 ### Install npm package
 
-Install the Azure IoT Hub module for Node.js
+Install the Azure IoT Hub npm module
 
 ```bash
 npm install azure-arm-iothub
 ```
+
 ### Example
 
 Create and name an IoT hub

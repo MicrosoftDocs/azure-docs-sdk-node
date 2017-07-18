@@ -29,7 +29,7 @@ Use npm to install the Azure IoT Hub modules for Node.js
 
 ## Management Package
 
-### Install npm package
+### Install npm module
 
 Install the Azure IoT Hub npm module
 

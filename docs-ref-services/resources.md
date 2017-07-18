@@ -1,5 +1,5 @@
 ---
-title: Azure Resource Manager module for Node.js
+title: Azure Resource Manager modules for Node.js
 description: Reference for Azure Resource Manager module for Node.js
 keywords: Azure,SDK,API,Resources, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Resources
 ---
 
-# Azure Resource module for Node.js
+# Azure Resource modules for Node.js
 
 ## Overview
 

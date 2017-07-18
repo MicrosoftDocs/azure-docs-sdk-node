@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Redis Cache
 ---
 
-# Azure Redis Cache Modules for Node.js
+# Azure Redis Cache modules for Node.js
 
 ## Overview
 

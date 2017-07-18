@@ -1,5 +1,5 @@
 ---
-title: Azure Storage Modules for Node.js
+title: Azure Storage modules for Node.js
 description: Connect and manage Azure Storage from your Node.js apps.
 keywords: Azure, Node, SDK, API, Storage, nodejs, javascript
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: storage
 ---
 
-# Azure Storage Modules for Node.js
+# Azure Storage modules for Node.js
 
 ## Overview
 

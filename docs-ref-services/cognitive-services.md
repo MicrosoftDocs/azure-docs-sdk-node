@@ -1,5 +1,5 @@
 ---
-title: Azure Cognitive Services Modules for Node.js
+title: Azure Cognitive Services modules for Node.js
 description: Reference for Azure Cognitive Services modules for Node.js
 keywords: Azure,SDK,API,Cognitive Services, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Cognitive Services
 ---
 
-# Azure Cognitive Services Modules for Node.js
+# Azure Cognitive Services modules for Node.js
 
 ## Overview
 

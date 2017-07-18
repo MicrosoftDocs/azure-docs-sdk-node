@@ -1,5 +1,5 @@
 ---
-title: Azure Advisor Modules for Node.js
+title: Azure Advisor modules for Node.js
 description: Reference for Azure Advisor modules for Node.js
 keywords: Azure,SDK,API,Advisor, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Advisor
 ---
 
-# Azure Advisor Modules for Node.js
+# Azure Advisor modules for Node.js
 
 ## Overview
 

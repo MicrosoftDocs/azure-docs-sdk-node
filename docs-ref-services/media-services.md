@@ -1,5 +1,5 @@
 ---
-title: Azure Media Services Modules for Node.js
+title: Azure Media Services modules for Node.js
 description: Reference for Azure Media Services modules for Node.js
 keywords: Azure,SDK,API,Media Services, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Media Services
 ---
 
-# Azure Media Services Modules for Node.js
+# Azure Media Services modules for Node.js
 
 ## Overview
 

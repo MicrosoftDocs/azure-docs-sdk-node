@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: DevTest Labs
 ---
 
-# Azure DevTest Labs Modules for Node.js
+# Azure DevTest Labs modules for Node.js
 
 ## Overview
 

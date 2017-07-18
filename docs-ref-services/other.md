@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Other
 ---
 
-# Azure Other module for Node.js
+# Azure Other modules for Node.js
 
 ## Overview
 

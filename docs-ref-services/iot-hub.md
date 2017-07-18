@@ -39,7 +39,7 @@ npm install azure-arm-iothub
 
 ### Example
 
-Create and name an IoT hub
+This example creates and names an IoT hub.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');
@@ -82,7 +82,7 @@ msRestAzure.interactiveLogin((err, credentials) => {
 });
 ```
 
-Get the existing IoT hub, by name
+This example gets the existing IoT hub, by name.
 
 ```javascript
 const subscriptionId = 'your-subscription-id';
@@ -99,7 +99,7 @@ msRestAzure.interactiveLogin((err, credentials) => {
 });
 ```
 
-### Samples
+## Samples
 
 - [Get started with the Raspberry Pi Azure IoT Starter Kit](https://azure.microsoft.com/en-us/resources/samples/iot-remote-monitoring-node-raspberrypi-getstartedkit/)
 - [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running Node.js](https://azure.microsoft.com/en-us/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)

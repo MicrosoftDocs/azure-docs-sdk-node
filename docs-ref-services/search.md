@@ -1,5 +1,5 @@
 ---
-title: Azure Search module for Node.js
+title: Azure Search Modules for Node.js
 description: Reference for Azure Search module for Node.js
 keywords: Azure,SDK,API,Search, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Search
 ---
 
-# Azure Search module for Node.js
+# Azure Search Modules for Node.js
 
 ## Overview
 
@@ -33,7 +33,7 @@ npm install azure-arm-search
 
 ### Example
 
-This example creates a new search service in Azure, and lists the resources in its resource group.
+This example creates a new Search service in Azure, and lists the resources in its resource group.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

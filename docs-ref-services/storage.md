@@ -37,7 +37,7 @@ npm install azure-storage
 
 ### Example
 
-Create a storage container and upload a local file *data.txt* to it.
+This example create a storage container and uploads a local file `data.txt` to it.
 
 ```javascript
 const azure = require('azure-storage');

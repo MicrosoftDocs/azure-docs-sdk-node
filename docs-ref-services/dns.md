@@ -21,6 +21,8 @@ ms.service: DNS
 
 ### Install npm module
 
+Install the Azure DNS npm module
+
 ```bash
 npm install azure-arm-dns
 ```
@@ -33,10 +35,12 @@ Authenticate, create the client and list the zones.
 const msRestAzure = require('ms-rest-azure');
 const DNSManagement = require('azure-arm-dns');
 
+const subscriptionId = 'your-subscription-id';
+
 msRestAzure
   .interactiveLogin()
   .then(credentials => {
-    const client = new DNSManagement(credentials, 'your-subscription-id');
+    const client = new DNSManagement(credentials, subscriptionId);
     return client.zones.list();
   })
   .then(zones => console.dir(zones, { depth: null, colors: true }))

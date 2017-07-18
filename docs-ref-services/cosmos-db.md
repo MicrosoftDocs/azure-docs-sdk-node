@@ -1,5 +1,5 @@
 ---
-title: Azure Cosmos DB modules for Node.js
+title: Azure Cosmos DB Modules for Node.js
 description: Reference for Azure Cosmos DB modules for Node.js
 keywords: Azure,SDK,API,Cosmos DB, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Cosmos DB
 ---
 
-# Azure Cosmos DB packages for Node.js
+# Azure Cosmos DB Modules for Node.js
 
 ## Overview
 
@@ -23,7 +23,7 @@ Azure Cosmos DB contains a write optimized, resource governed, schema-agnostic d
 
 ## Management Package
 
-### Install npm module 
+### Install the npm module 
 
 Install the Azure Cosmos DB npm module
 

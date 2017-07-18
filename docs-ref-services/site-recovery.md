@@ -21,14 +21,19 @@ Site Recovery allows you to automate replication of Azure VMs between regions, o
 
 Learn more about [Azure Site Recovery](https://docs.microsoft.com/en-us/azure/site-recovery/site-recovery-overview).
 
-## Management Package
+## Management package
 
 ### Install npm module
+
+Install the Azure recovery servics npm module
+
 ```bash
 npm install azure-arm-recoveryservices
 ```
 
 ### Example
+
+This example lists the recovery services for a resource group
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');
@@ -50,6 +55,6 @@ msRestAzure
   
 ```
 
-### Samples
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

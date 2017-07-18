@@ -21,6 +21,9 @@ Azure DevTest Labs is a service that helps developers and testers quickly create
 ## Management Package
 
 ### Install npm module
+
+Install the Azure Dev Test Labs npm module
+
 ```bash
 npm install azure-arm-devtestlabs
 ```
@@ -51,6 +54,6 @@ msRestAzure
 
 ```
 
-### Samples
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

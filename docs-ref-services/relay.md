@@ -1,5 +1,5 @@
 ---
-title: Azure Relay package for Node.js
+title: Azure Relay Modules for Node.js
 description: Reference for Azure Relay package for Node.js
 keywords: Azure,SDK,API,Relay, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Relay
 ---
 
-# Azure Relay package for Node.js
+# Azure Relay Modules for Node.js
 
 ## Overview
 
@@ -23,9 +23,9 @@ Learn more about [Azure Relay](https://docs.microsoft.com/en-us/azure/service-bu
 
 ## Management package
 
-### Install npm module
+### Install the npm module
 
-Install the Azure relay npm module
+Install the Azure Relay npm module
 
 ```bash
 npm install azure-arm-relay

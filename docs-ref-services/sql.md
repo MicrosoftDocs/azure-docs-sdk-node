@@ -1,5 +1,5 @@
 ---
-title: Azure SQL modules for Node.js
+title: Azure SQL Modules for Node.js
 description: Connect and manage Azure SQL from your Node.js apps.
 keywords: Azure, Node, SDK, API, nodejs, javascript, sql
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: sql-database
 ---
 
-# Azure SQL packages for Node.js
+# Azure SQL Modules for Node.js
 
 ## Overview
 
@@ -22,9 +22,9 @@ The management library provides an interface to make it easy to manage Microsoft
 
 ## Client Package
 
-#### Install npm modules
+### Install the npm module
 
-Use npm to install the SQL Server client module.
+Install the SQL Server client npm module
 
 ```bash
 npm install tedious
@@ -32,7 +32,7 @@ npm install tedious
 
 ### Example
 
-Connect to a SQL Server database and perform a simple query.
+This example connects to a SQL Server database and perform a simple query.
 
 ```javascript
 const Connection = require('tedious').Connection;
@@ -67,11 +67,11 @@ const executeStatement = () => {
 };
 ```
 
-## Management Package
+## Management package
 
-#### Install npm modules
+### Install npm modules
 
-Use npm to install the Azure SQL Server management module.
+Install the Azure SQL Server management npm module
 
 ```
 npm install azure-arm-sql

@@ -1,5 +1,5 @@
 ---
-title: Azure MySQL modules for Node.js
+title: Azure MySQL Modules for Node.js
 description: Create and manage MySQL resources from your Node.js apps.
 keywords: Azure, Node, SDK, API, nodejs, javascript, database, MySQL
 author: tomarcher
@@ -33,7 +33,7 @@ npm install mysql
 
 ### Example
 
-Connect to a MySQL database and perform a simple query to retrieve all customers.
+This example connects to a MySQL database and performs a simple query to retrieve all customers.
 
 ```javascript
 const mysql = require('mysql');
@@ -53,7 +53,7 @@ connection.query(query, (err, res) =>
 connection.end();
 ```
 
-### Samples
+## Samples
 
 [!INCLUDE [node-storage-samples](../docs-ref-conceptual/includes/mysql-samples.md)]
 

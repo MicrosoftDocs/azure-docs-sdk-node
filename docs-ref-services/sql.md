@@ -32,7 +32,7 @@ npm install tedious
 
 ### Example
 
-Connect to a SQL Server database and perform a simple query.
+This example connects to a SQL Server database and perform a simple query.
 
 ```javascript
 const Connection = require('tedious').Connection;

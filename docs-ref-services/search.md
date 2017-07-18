@@ -42,9 +42,6 @@ const SearchManagement = require('azure-arm-search');
 const subscriptionId = 'your-subscription-id';
 const resourceGroup = 'yourResourceGroup';
 
-// Interactive Login provides a url and code that needs to be copied
-// and pasted in a browser and authenticated over there.If successful,
-// the user will get a DeviceTokenCredentials object.
 msRestAzure
   .interactiveLogin()
   .then(credentials => {

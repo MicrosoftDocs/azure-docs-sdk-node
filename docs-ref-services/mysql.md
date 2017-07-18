@@ -17,7 +17,7 @@ ms.service: mysql
 
 ## Overview
 
-The recommended client library for accessing Azure Database for MySQL is the open-source [Node.js connection library for Azure Database for MySQL](https://github.com/sidorares/node-mysql2/tree/master/documentation). 
+The recommended client library for accessing Azure Database for MySQL is the open-source [Node.js connection library for Azure Database for MySQL](https://github.com/mysqljs/mysql). 
 
 Learn more about [Azure Database for MySQL](https://docs.microsoft.com/azure/MySQL/)
 

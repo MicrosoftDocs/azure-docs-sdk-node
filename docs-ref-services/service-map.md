@@ -33,7 +33,7 @@ npm install azure-arm-servicemap
 
 ### Example
 
-This example lists all service maps for the specified resource group and workspace
+This example lists all service maps for the specified resource group and workspace.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

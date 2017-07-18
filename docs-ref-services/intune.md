@@ -37,7 +37,7 @@ npm install azure-arm-intune
 
 ### Example
 
-Authenticate, create a client and retrieve a location by host name.
+This example creates an Intune Resource client and retrieves a location by host name.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

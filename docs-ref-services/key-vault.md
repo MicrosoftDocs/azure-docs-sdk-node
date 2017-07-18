@@ -1,5 +1,5 @@
 ---
-title: Azure Key Vault modules for Node.js
+title: Azure Key Vault Modules for Node.js
 description: Reference for Azure Key Vault modules for Node.js
 keywords: Azure,SDK,API,Key Vault, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Key Vault
 ---
 
-# Azure Key Vault modules for Node.js
+# Azure Key Vault Modules for Node.js
 
 ## Overview
 
@@ -23,7 +23,7 @@ Key Vault streamlines the key management process and enables you to maintain con
 
 ## Management Package
 
-### Install npm module 
+### Install the npm module 
 
 Install the Azure Key Vault npm module
 

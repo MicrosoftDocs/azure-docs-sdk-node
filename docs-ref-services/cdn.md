@@ -1,5 +1,5 @@
 ---
-title: Azure CDN modules for Node.js
+title: Azure CDN Modules for Node.js
 description: Reference for Azure CDN modules for Node.js
 keywords: Azure,SDK,API,CDN, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: CDN
 ---
 
-# Azure CDN packages for Node.js
+# Azure CDN Modules for Node.js
 
 ## Overview
 
@@ -21,7 +21,7 @@ The Azure Content Delivery Network (CDN) offers developers a global solution for
 
 ## Management Package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure CDN npm module
 

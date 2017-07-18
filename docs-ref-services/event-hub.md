@@ -20,7 +20,7 @@ Azure Event Hubs is a highly scalable data streaming platform and event ingestio
 
 ## Management Package
 
-### Install the modules with npm
+### Install the npm module 
 
 Use npm to install the Azure Event Hub modules for Node.js
 

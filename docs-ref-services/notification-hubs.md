@@ -29,7 +29,7 @@ Notification Hubs works great for both enterprise and consumer scenarios. Here a
 
 ## Management Package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure Noticiation Hubs module 
 

@@ -48,12 +48,10 @@ msRestAzure
     );
     return cognitiveServicesClient.cognitiveServicesAccounts.list();
   })
-  .then(cognitiveServicesAccounts =>
-    console.log(
-      'Retrieved cognitive services accounts: ',
-      cognitiveServicesAccounts
-    )
-  );
+  .then(cognitiveServicesAccounts => {
+    console.log('List of accounts:');
+    console.dir(cognitiveServicesAccounts, { depth: null, colors: true });    
+  });
 
 ```
 

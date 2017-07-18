@@ -39,7 +39,7 @@ const cdnManagementClient = require('azure-arm-cdn');
 
 const subscriptionId = 'your-subscription-id';
 
-msRestAzure.interactiveLogin((err, credentials) => {
+msRestAzure.interactiveLogin().then(credentials => {
   const cdnClient = new cdnManagementClient(credentials, subscriptionId);
   cdnClient.profiles
     .list()

@@ -16,6 +16,7 @@ ms.service: Notification Hubs
 # Azure Notification Hubs modules for Node.js
 
 ## Overview
+
 Azure Notification Hubs provide an easy-to-use, multi-platform, scaled-out push engine. With a single cross-platform API call, you can easily send targeted and personalized push notifications to any mobile platform from any cloud or on-premises backend.
 
 Notification Hubs works great for both enterprise and consumer scenarios. Here are a few examples customers use Notification Hubs for:
@@ -30,13 +31,16 @@ Notification Hubs works great for both enterprise and consumer scenarios. Here a
 
 ### Install npm package
 
-Install the Azure Noticiation Hubs module for Node.js
+Install the Azure Noticiation Hubs module 
 
 ```bash
 npm install azure-arm-notificationhubs
 ```
 
 ### Example
+
+This example lists all notification hubs
+
  ```javascript
 const msRestAzure = require('ms-rest-azure');
 const notificationHubsManagementClient = require('azure-arm-notificationhubs');
@@ -54,7 +58,7 @@ msRestAzure.interactiveLogin().then(credentials => {
 });
  ```
 
-### Samples
+## Samples
 
 * [App Service Mobile completed quickstart for Node.js backend](https://azure.microsoft.com/en-us/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
 * [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running Node.js](https://azure.microsoft.com/en-us/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)

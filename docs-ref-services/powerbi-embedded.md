@@ -1,5 +1,5 @@
 ---
-title: Azure PowerBI Embedded package for Node.js
+title: Azure PowerBI Embedded Modules for Node.js
 description: Reference for Azure PowerBI Embedded module for Node.js
 keywords: Azure,SDK,API,PowerBI Embedded, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: PowerBI Embedded
 ---
 
-# Azure PowerBI Embedded package for Node.js
+# Azure PowerBI Embedded Modules for Node.js
 
 ## Overview
 
@@ -23,7 +23,7 @@ Learn more about [Power BI Embedded](https://powerbi.microsoft.com/en-us/documen
 
 ## Management Package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure Power BI npm module
 

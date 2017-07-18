@@ -5,7 +5,7 @@ keywords: Azure,SDK,API,Billing, Node.js
 author: tomarcher
 ms.author: tarcher
 manager: douge
-ms.date: 07/06/2017
+ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure

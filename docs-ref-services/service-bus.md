@@ -1,11 +1,11 @@
 ---
 title: Azure Service Bus modules for Node.js
-description: Reference for Azure Service Bus module for Node.js
+description: Reference for Azure Service Bus modules for Node.js
 keywords: Azure,SDK,API,Service Bus, Node.js
 author: tomarcher
 ms.author: tarcher
 manager: douge
-ms.date: 06/30/2017
+ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure

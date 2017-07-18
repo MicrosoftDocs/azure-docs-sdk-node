@@ -16,6 +16,7 @@ ms.service: Advisor
 # Azure Advisor modules for Node.js
 
 ## Overview
+
 Azure Advisor is a personalized cloud consultant that helps you follow best practices to optimize your Azure deployments. Advisor analyzes your resource configuration and usage telemetry and then recommends solutions that can help you improve the cost effectiveness, performance, high availability, and security of your Azure resources.
 
 With Advisor, you can:
@@ -23,13 +24,13 @@ With Advisor, you can:
 - Improve the performance, security, and high availability of your resources, as you identify opportunities to reduce your overall Azure spend.
 - Get recommendations with proposed actions inline.
 
-## Management Package
+## Management package
 
-Use npm to install the Azure Advisor modules for Node.js
+Install the Azure Advisor npm module
 
-### Install npm package
+### Install npm module
 
-Install the Azure advisor npm package
+Install the Azure advisor npm module
 
 ```bash
 npm install azure-arm-advisor

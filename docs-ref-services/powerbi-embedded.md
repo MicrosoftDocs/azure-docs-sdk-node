@@ -33,7 +33,7 @@ npm install azure-arm-powerbiembedded
 
 ### Example
 
-Authenticate, create client and create workspace collection in an existing resource group.
+This example creates a workspace collection in an existing resource group.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

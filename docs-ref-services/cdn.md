@@ -1,5 +1,5 @@
 ---
-title: Azure CDN Modules for Node.js
+title: Azure CDN modules for Node.js
 description: Reference for Azure CDN modules for Node.js
 keywords: Azure,SDK,API,CDN, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: CDN
 ---
 
-# Azure CDN Modules for Node.js
+# Azure CDN modules for Node.js
 
 ## Overview
 

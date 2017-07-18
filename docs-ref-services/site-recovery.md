@@ -1,5 +1,5 @@
 ---
-title: Azure Site Recovery Modules for Node.js
+title: Azure Site Recovery modules for Node.js
 description: Reference for Azure Site Recovery module for Node.js
 keywords: Azure,SDK,API,Site Recovery, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Site Recovery
 ---
 
-# Azure Site Recovery Modules for Node.js
+# Azure Site Recovery modules for Node.js
 
 ## Overview
 

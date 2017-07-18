@@ -1,5 +1,5 @@
 ---
-title: Azure Service Map Modules for Node.js
+title: Azure Service Map modules for Node.js
 description: Reference for Azure Service Map module for Node.js
 keywords: Azure,SDK,API,Service Map, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Service Map
 ---
 
-# Azure Service Map Modules for Node.js
+# Azure Service Map modules for Node.js
 
 ## Overview
 

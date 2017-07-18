@@ -1,5 +1,5 @@
 ---
-title: Azure Search Modules for Node.js
+title: Azure Search modules for Node.js
 description: Reference for Azure Search module for Node.js
 keywords: Azure,SDK,API,Search, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Search
 ---
 
-# Azure Search Modules for Node.js
+# Azure Search modules for Node.js
 
 ## Overview
 

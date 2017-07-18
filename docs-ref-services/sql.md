@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: sql-database
 ---
 
-# Azure SQL Packages for Node.js
+# Azure SQL Modules for Node.js
 
 ## Overview
 

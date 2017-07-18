@@ -21,7 +21,7 @@ Azure Container Registry is a managed Docker registry service based on the open-
 
 ## Management Package
 
-### Install npm package
+### Install npm module
 
 Install the Azure container registry npm module
 

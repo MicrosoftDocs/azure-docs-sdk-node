@@ -36,7 +36,7 @@ npm install azure-arm-advisor
 
 ### Example
 
-This example displays the list of recommendations from Azure advisor.
+This example displays the list of recommendations from Azure Advisor.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

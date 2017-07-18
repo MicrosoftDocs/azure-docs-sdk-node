@@ -1,6 +1,6 @@
 ---
 title: Azure Redis Cache modules for Node.js
-description: Reference for Azure Redis Cache modules for Node.js
+description: Reference for Azure Redis Cache Modules for Node.js
 keywords: Azure,SDK,API,Redis Cache, Node.js
 author: tomarcher
 ms.author: tarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Redis Cache
 ---
 
-# Azure Redis Cache packages for Node.js
+# Azure Redis Cache Modules for Node.js
 
 ## Overview
 
@@ -23,9 +23,40 @@ Redis is an advanced key-value store, where keys can contain data structures suc
 
 Learn more about [Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/).
 
-## Management Package
+## Client package
 
-#### Install the packages with npm
+### Install the npm module
+
+Use npm to install the Redis module for Node.js
+
+```bash
+npm install redis
+```
+
+### Example
+
+This example connects to an Azure Redis Cache instance, stores a key/value pair and then reads the stored value by its key.
+
+```javascript
+const redis = require('redis');
+
+const client = redis.createClient(6380, '<name>.redis.cache.windows.net', {
+  auth_pass: '<key>',
+  tls: { servername: '<name>.redis.cache.windows.net' }
+});
+
+client.set('key1', 'value', (err, reply) => {
+  console.log(reply);
+});
+
+client.get('key1', (err, reply) => {
+  console.log(reply);
+});
+```
+
+## Management package
+
+### Install the npm module
 
 Use npm to install the Azure Redis Cache modules for Node.js
 
@@ -33,7 +64,10 @@ Use npm to install the Azure Redis Cache modules for Node.js
 npm install azure-arm-rediscache
 ```
 
-## Example
+### Example
+
+This example authenticates to Azure and lists all Redis Cache instances in a specified resource group.
+
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const AzureMgmtRedisCache = require('azure-arm-rediscache');

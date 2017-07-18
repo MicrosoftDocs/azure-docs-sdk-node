@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Logic Apps
 ---
 
-# Azure Logic Apps modules for Node.js
+# Azure Logic Apps Modules for Node.js
 
 ## Overview
 Logic Apps provide a way to simplify and implement scalable integrations and workflows in the cloud. It provides a visual designer to model and automate your process as a series of steps known as a workflow. There are many connectors across the cloud and on-premises to quickly integrate across services and protocols. A logic app begins with a trigger (like 'When an account is added to Dynamics CRM') and after firing can begin many combinations of actions, conversions, and condition logic.
@@ -28,9 +28,9 @@ The advantages of using Logic Apps include the following:
 
 Logic Apps is a fully managed iPaaS (integration Platform as a Service) allowing developers not to have to worry about building hosting, scalability, availability and management. Logic Apps will scale up automatically to meet demand.
 
-## Management Package
+## Management package
 
-### Install npm package
+### Install the npm module
 
 Install the Azure logic module for Node.js
 
@@ -39,6 +39,7 @@ npm install azure-arm-logic
 ```
 
 ### Example
+
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const LogicManagement = require('azure-arm-logic');

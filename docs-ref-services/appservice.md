@@ -1,5 +1,5 @@
 ---
-title: Azure App Service modules for Node.js
+title: Azure App Service Modules for Node.js
 description: Deploy, manage, and scale web apps, APIs, and mobile apps running in Azure App Service from your Node.js code
 keywords: Azure, Node, SDK, API, web apps , mobile , nodejs, javascript
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: appservice
 ---
 
-# Azure App Service Node.js modules
+# Azure App Service Node.js Modules
 
 ## Overview
 
@@ -23,9 +23,9 @@ App Service includes the web and mobile capabilities that we previously delivere
 
 ## Management Package
 
-### Install npm package
+### Install the npm package
 
-Install the Azure storage module for Node.js
+Install the Azure App Service module for Node.js
 
 ```bash
 npm install azure-arm-website
@@ -33,7 +33,7 @@ npm install azure-arm-website
 
 ### Example
 
-This example creates a website on Azure using Node.js
+This example creates a website on Azure using Node.js.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

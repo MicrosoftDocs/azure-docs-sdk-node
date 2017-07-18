@@ -1,5 +1,5 @@
 ---
-title: Azure PostgreSQL modules for Node.js
+title: Azure PostgreSQL Modules for Node.js
 description: Create and manage PostgreSQL resources from your Node.js apps.
 keywords: Azure, Node, SDK, API, nodejs, javascript, database, PostgreSQL
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: postgresql
 ---
 
-# Azure PostgreSQL packages for Node.js
+# Azure PostgreSQL Modules for Node.js
 
 ## Overview
 
@@ -22,9 +22,9 @@ This library is a non-blocking PostgreSQL client for Node.js, supporting pure Ja
 
 Learn more about [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/)
 
-## Client Package
+## Client package
 
-#### Install packages with npm
+### Install the npm module
 
 Use npm to install the PostgreSQL client module.
 
@@ -34,7 +34,7 @@ npm install pg
 
 ### Example
 
-Opening a client connection and running a simple query.
+This example opens a client connection and executes a simple query.
 
 ```javascript
 const pg = require('pg');
@@ -51,7 +51,7 @@ client.query(query, (err, res) => {
 });
 ```
 
-### Samples
+## Samples
 
 [!INCLUDE [node-postgresql-samples](../docs-ref-conceptual/includes/postgresql-samples.md)]
 

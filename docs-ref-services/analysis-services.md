@@ -1,5 +1,5 @@
 ---
-title: Azure Analysis Services modules for Node.js
+title: Azure Analysis Services Modules for Node.js
 description: Reference for Azure Analysis Services modules for Node.js
 keywords: Azure,SDK,API,Analysis Services, Node.js
 author: tomarcher
@@ -13,18 +13,25 @@ ms.devlang: nodejs
 ms.service: Analysis Services
 ---
 
-# Azure Analysis Services packages for Node.js
+# Azure Analysis Services Modules for Node.js
 
 ## Overview
 This package provides a Node.js module that makes it easy to manage Microsoft Azure Analysis Services.
 
-## Management Package
-### Install npm module
+## Management package
+
+### Install the npm module
+
+Install the Azure Analysis Services npm module
+
 ```bash
 npm install azure-arm-analysisservices
 ```
 
 ### Example
+
+This example lists all available Analysis Service servers.
+
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const analysisServicesManagement = require('azure-arm-analysisservices');
@@ -41,6 +48,6 @@ msRestAzure.interactiveLogin().then(credentials => {
 });
 ```
 
-### Samples
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

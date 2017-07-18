@@ -95,7 +95,7 @@ You'll then be able to access your account via the CLI.
 
 	**Note the tenant, name, and password values as they'll be used in Step 7.**
 
-7. Set up the environment variables - replacing the &lt;subscriptId>, &lt;tenant>, &lt;name>, and &lt;password> placeholders 
+7. Set up the environment variables - replacing the &lt;subscriptionId>, &lt;tenant>, &lt;name>, and &lt;password> placeholders 
 with the values you obtained in steps 4 and 5. 
 
 	**Using bash**

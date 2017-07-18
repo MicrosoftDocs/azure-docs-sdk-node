@@ -21,9 +21,9 @@ The Azure Content Delivery Network (CDN) offers developers a global solution for
 
 ## Management Package
 
-### Install npm package
+### Install npm module
 
-Install the Azure CDN npm package
+Install the Azure CDN npm module
 
 ```bash
 npm install azure-arm-cdn

@@ -23,7 +23,7 @@ Key Vault streamlines the key management process and enables you to maintain con
 
 ## Management Package
 
-### Install npm package
+### Install npm module 
 
 Install the Azure Key Vault npm module
 

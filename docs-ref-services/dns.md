@@ -17,6 +17,8 @@ ms.service: DNS
 
 ## Overview
 
+Use Azure DNS to host your Domain Name System (DNS) domains in Azure. Manage your DNS records using the same credentials and billing and support contract as your other Azure services. Seamlessly integrate Azure-based services with corresponding DNS updates and streamline your end-to-end deployment process.
+
 ## Management package
 
 ### Install the npm module

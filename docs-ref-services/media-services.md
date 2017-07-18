@@ -36,7 +36,7 @@ npm install azure-arm-mediaservices
 
 ### Example
 
-This example liss all media services for a resource group
+This example lists all media services for a resource group.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

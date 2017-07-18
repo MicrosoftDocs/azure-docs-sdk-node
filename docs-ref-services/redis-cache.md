@@ -23,23 +23,28 @@ Redis is an advanced key-value store, where keys can contain data structures suc
 
 Learn more about [Azure Redis Cache](https://docs.microsoft.com/azure/redis-cache/).
 
-## Management Package
+## Management package
 
-#### Install the packages with npm
+#### Install the npm module
 
-Use npm to install the Azure Redis Cache modules for Node.js
+Install the Azure Redis Cache npm module
 
 ```bash
 npm install azure-arm-rediscache
 ```
 
 ## Example
+
+
+
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const AzureMgmtRedisCache = require('azure-arm-rediscache');
 
+const subscriptionId = 'your-subscription-id';
+
 msRestAzure.interactiveLogin().then(credentials => {
-  const client = new AzureMgmtRedisCache(credentials, 'my-subscription-id');
+  const client = new AzureMgmtRedisCache(credentials, subscriptionId);
   client.redis.listByResourceGroup('testResourceGroup').then(result => {
     console.log(result);
   });

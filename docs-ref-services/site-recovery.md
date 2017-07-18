@@ -23,7 +23,7 @@ Learn more about [Azure Site Recovery](https://docs.microsoft.com/en-us/azure/si
 
 ## Management package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure Site Recovery service npm module
 

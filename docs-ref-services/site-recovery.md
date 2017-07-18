@@ -33,7 +33,7 @@ npm install azure-arm-recoveryservices
 
 ### Example
 
-This example lists the Site Recovery service for a resource group
+This example lists the Site Recovery service for a resource group.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

@@ -1,5 +1,5 @@
 ---
-title: Azure Authorization modules for Node.js
+title: Azure Authorization Modules for Node.js
 description: Reference for Azure Authorization modules for Node.js
 keywords: Azure,SDK,API,Authorization, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Authorization
 ---
 
-# Azure Authorization modules for Node.js
+# Azure Authorization Modules for Node.js
 
 ## Overview
 
@@ -23,7 +23,7 @@ Azure App Service Authentication / Authorization is a feature that provides a wa
 
 Use npm to install the Azure Authorization modules for Node.js
 
-### Install npm module
+### Install the npm module
 
 Install the Azure authorization npm module
 

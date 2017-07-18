@@ -1,5 +1,5 @@
 ---
-title: Azure Scheduler module for Node.js
+title: Azure Scheduler Modules for Node.js
 description: Reference for Azure Scheduler module for Node.js
 keywords: Azure,SDK,API,Scheduler, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Scheduler
 ---
 
-# Azure Scheduler module for Node.js
+# Azure Scheduler Modules for Node.js
 
 ## Overview
 
@@ -25,7 +25,7 @@ Learn more about [Azure Scheduler](/azure/scheduler/scheduler-intro).
 
 Create, maintain, and invoke scheduled work across various communication channels with the management API.
 
-### Install npm module
+### Install the npm module
 
 Install the Azure Scheduler npm module
 

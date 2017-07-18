@@ -35,7 +35,7 @@ npm install azure-arm-scheduler
 
 ### Example
 
-Get a list of the current schedulers:
+This examples lists the current schedulers.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure')

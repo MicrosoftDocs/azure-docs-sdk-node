@@ -1,5 +1,5 @@
 ---
-title: Azure DevTest Labs modules for Node.js
+title: Azure DevTest Labs Modules for Node.js
 description: Reference for Azure DevTest Labs modules for Node.js
 keywords: Azure,SDK,API,DevTest Labs, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: DevTest Labs
 ---
 
-# Azure DevTest Labs Package for Node.js
+# Azure DevTest Labs Modules for Node.js
 
 ## Overview
 
@@ -21,7 +21,7 @@ Azure DevTest Labs is a service that helps developers and testers quickly create
 
 ## Management package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure DevTest Labs npm module
 

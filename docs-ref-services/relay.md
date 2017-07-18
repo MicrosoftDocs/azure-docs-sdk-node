@@ -21,9 +21,11 @@ The Azure Relay service facilitates hybrid applications by enabling you to secur
 
 Learn more about [Azure Relay](https://docs.microsoft.com/en-us/azure/service-bus-relay/relay-what-is-it).
 
-## Management Package
+## Management package
 
 ### Install npm module
+
+Install the Azure relay npm module
 
 ```bash
 npm install azure-arm-relay
@@ -49,6 +51,6 @@ msRestAzure
   .catch(err => console.log(err));
 ```
 
-##Samples
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

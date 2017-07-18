@@ -44,7 +44,7 @@ const website = 'website001';
 const hostingPlan = 'testHostingPlan';
 let webSiteClient;
 
-msRestAzure.interactiveLogin((err, credentials) => {
+msRestAzure.interactiveLogin().then(credentials => {
   webSiteClient = new webSiteManagementClient(credentials, subscriptionId);
   createWebSite(website).then(website => console.log('Web Site created successfully', website));
 });

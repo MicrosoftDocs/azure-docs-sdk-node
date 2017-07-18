@@ -21,7 +21,7 @@ Azure Cognitive Services is a set of APIs, SDKs, and services available to devel
 
 ## Management Package
 
-### Install npm package
+### Install npm module
 
 Install the Azure Cognitive Services npm module
 

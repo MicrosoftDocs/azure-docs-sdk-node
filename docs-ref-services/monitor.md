@@ -28,7 +28,7 @@ npm install azure-arm-insights
 
 ### Example
 
-This snippet prints all the alerting rules associated with a resource group.
+This code example prints all the alerting rules associated with a resource group.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

@@ -39,7 +39,7 @@ This example creates a website on Azure using Node.js.
 const msRestAzure = require('ms-rest-azure');
 const webSiteManagementClient = require('azure-arm-website');
 
-const subscriptionId = 'you-subscription-id';
+const subscriptionId = 'your-subscription-id';
 const website = 'website001';
 const resourceGroup = 'your-resource-group';
 const hostingPlan = 'testHostingPlan';

@@ -31,7 +31,7 @@ Notification Hubs works great for both enterprise and consumer scenarios. Here a
 
 ### Install the npm module
 
-Install the Azure Noticiation Hubs module 
+Install the Azure Notification Hubs module 
 
 ```bash
 npm install azure-arm-notificationhubs
@@ -56,7 +56,7 @@ msRestAzure.interactiveLogin().then(credentials => {
     .list(resourceGroup, notificationHubNamespace)
     .then(notificationHubs => console.log('Retrieved notification hubs: ', notificationHubs));
 });
- ```
+```
 
 ## Samples
 

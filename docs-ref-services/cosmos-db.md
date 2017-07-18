@@ -33,7 +33,7 @@ npm install azure-arm-documentdb
 
 ### Example
 
-This example lists all Cosmos DB accounts
+This example lists all Cosmos DB accounts.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

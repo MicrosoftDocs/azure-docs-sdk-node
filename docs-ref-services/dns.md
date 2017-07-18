@@ -1,5 +1,5 @@
 ---
-title: Azure DNS packages for Node.js
+title: Azure DNS Modules for Node.js
 description: Reference for Azure DNS modules for Node.js
 keywords: Azure,SDK,API,DNS, Node.js
 author: tomarcher
@@ -13,13 +13,13 @@ ms.devlang: nodejs
 ms.service: DNS
 ---
 
-# Azure DNS packages for Node.js
+# Azure DNS Modules for Node.js
 
 ## Overview
 
 ## Management package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure DNS npm module
 

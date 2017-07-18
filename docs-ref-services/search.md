@@ -23,7 +23,7 @@ Learn more about [Azure Search](https://docs.microsoft.com/en-us/azure/search/se
 
 ## Management package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure Search npm module
 

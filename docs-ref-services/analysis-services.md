@@ -18,11 +18,11 @@ ms.service: Analysis Services
 ## Overview
 This package provides a Node.js module that makes it easy to manage Microsoft Azure Analysis Services.
 
-## Management Package
+## Management package
 
 ### Install npm module
 
-Install the Azure analysis services npm package
+Install the Azure analysis services npm module
 
 ```bash
 npm install azure-arm-analysisservices

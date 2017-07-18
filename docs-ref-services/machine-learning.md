@@ -1,5 +1,5 @@
 ---
-title: Azure Machine Learning modules for Node.js
+title: Azure Machine Learning Modules for Node.js
 description: Reference for Azure Machine Learning modules for Node.js
 keywords: Azure,SDK,API,Machine Learning, Node.js
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Machine Learning
 ---
 
-# Azure Machine Learning modules for Node.js
+# Azure Machine Learning Modules for Node.js
 
 ## Overview
 

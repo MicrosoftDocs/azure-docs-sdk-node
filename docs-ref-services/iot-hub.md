@@ -72,7 +72,7 @@ const hubDescription = {
   }
 };
 
-msRestAzure.interactiveLogin((err, credentials) => {
+msRestAzure.interactiveLogin().then(credentials => {
   const client = new IoTHubClient(credentials, subscriptionId);
 
   client.iotHubResource
@@ -89,7 +89,7 @@ const subscriptionId = 'your-subscription-id';
 const resourceGroup = 'your-resource-group';
 const hubName = 'your-hub';
 
-msRestAzure.interactiveLogin((err, credentials) => {
+msRestAzure.interactiveLogin().then(credentials => {
   const client = new IoTHubClient(credentials, subscriptionId);
 
   client.iotHubResource

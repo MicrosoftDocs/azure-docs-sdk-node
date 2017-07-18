@@ -1,11 +1,11 @@
 ---
 title: Azure Virtual Machine modules for Node.js
-description: Define, configure, and deploy new Windows and Linux virtual machines from your Node.js app.
+description: Reference for Azure Virtual Machine modules for Node.js
 keywords: Azure, Node, SDK, API, virtual machine, vm, nodejs, javascript
 author: tomarcher
 ms.author: tarcher
 manager: douge
-ms.date: 06/18/2017
+ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure

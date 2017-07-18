@@ -1,11 +1,11 @@
 ---
 title: Azure Service Fabric modules for Node.js
-description: Reference for Azure Service Fabric module for Node.js
+description: Reference for Azure Service Fabric modules for Node.js
 keywords: Azure,SDK,API,Service Fabric, Node.js
 author: tomarcher
 ms.author: tarcher
 manager: douge
-ms.date: 06/30/2017
+ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure

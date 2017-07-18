@@ -1,5 +1,5 @@
 ---
-title: Azure Active Directory modules for Node.js
+title: Azure Active Directory Modules for Node.js
 description: Leverage Azure Active Directory from your Node.js apps.
 keywords: Azure, Node, SDK, API, Storage, nodejs, javascript
 author: tomarcher
@@ -13,17 +13,17 @@ ms.devlang: nodejs
 ms.service: active-directory
 ---
 
-# Azure Active Directory modules for Node.js
+# Azure Active Directory Modules for Node.js
 
 ## Overview
 
 The [Azure Active Directory Authentication Library (ADAL) for Node.js](https://www.npmjs.com/package/adal-node) enables Node.js applications to authenticate to AAD in order to access AAD protected web resources.
 
-## Install modules with npm
+## Install the npm modules
 
 Use npm to install the Azure storage client or management modules.
 
-```
+```bash
 npm install adal-node
 ```   
 

@@ -22,9 +22,9 @@ The management library provides an interface to make it easy to manage Microsoft
 
 ## Client Package
 
-#### Install npm modules
+### Install npm module
 
-Use npm to install the SQL Server client module.
+Install the SQL Server client npm module
 
 ```bash
 npm install tedious
@@ -67,11 +67,11 @@ const executeStatement = () => {
 };
 ```
 
-## Management Package
+## Management package
 
-#### Install npm modules
+### Install npm modules
 
-Use npm to install the Azure SQL Server management module.
+Install the Azure SQL Server management npm module
 
 ```
 npm install azure-arm-sql

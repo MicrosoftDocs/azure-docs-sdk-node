@@ -19,7 +19,7 @@ ms.service: PowerBI Embedded
 
 With the Power BI Embedded Azure service, you can integrate Power BI reports right into your node application to create or edit charts and reports.
 
-Learn more about [Power BI Embedded](https://powerbi.microsoft.com/en-us/documentation/powerbi-developer-embedding/).
+Learn more about [Power BI Embedded](https://powerbi.microsoft.com/documentation/powerbi-developer-embedding/).
 
 ## Management Package
 

@@ -19,7 +19,7 @@ ms.service: Search
 
 Azure Search is a cloud search-as-a-service solution that delegates server and infrastructure management to Microsoft, leaving you with a ready-to-use service that you can populate with your data and then use to add search to your application.
 
-Learn more about [Azure Search](https://docs.microsoft.com/en-us/azure/search/search-what-is-azure-search).
+Learn more about [Azure Search](https://docs.microsoft.com/azure/search/search-what-is-azure-search).
 
 ## Management package
 

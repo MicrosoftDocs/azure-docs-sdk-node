@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Notification Hubs
 ---
 
-# Azure Notification Hubs modules for Node.js
+# Azure Notification Hubs Modules for Node.js
 
 ## Overview
 Azure Notification Hubs provide an easy-to-use, multi-platform, scaled-out push engine. With a single cross-platform API call, you can easily send targeted and personalized push notifications to any mobile platform from any cloud or on-premises backend.

@@ -25,6 +25,8 @@ Learn more about [Power BI Embedded](https://powerbi.microsoft.com/en-us/documen
 
 ### Install npm module
 
+Install the Azure Power BI npm module
+
 ```bash
 npm install azure-arm-powerbiembedded
 ```
@@ -49,16 +51,20 @@ const creationOptions = {
   }
 };
 
+const subscriptionId = 'your-subscription-id';
+const resourceGroup = 'your-resource-group-name';
+const workspace = 'workspace-collection-name';
+
 msRestAzure
   .interactiveLogin()
   .then(credentials => {
     const client = new PowerBIEmbeddedManagementClient(
       credentials,
-      'your-subscription-id'
+      subscriptionId
     );
     return client.workspaceCollections.create(
-      'your-resource-group-name',
-      'workspace-collection-name',
+      resourceGroup,
+      workspace,
       creationOptions
     );
   })

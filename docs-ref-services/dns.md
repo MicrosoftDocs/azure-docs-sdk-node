@@ -29,7 +29,7 @@ npm install azure-arm-dns
 
 ### Example
 
-Authenticate, create the client and list the zones. 
+This example lists the DNS Management zones.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

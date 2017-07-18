@@ -1,5 +1,5 @@
 ---
-title: Azure Storage packages for Node.js
+title: Azure Storage Modules for Node.js
 description: Connect and manage Azure Storage from your Node.js apps.
 keywords: Azure, Node, SDK, API, Storage, nodejs, javascript
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: storage
 ---
 
-# Azure Storage packages for Node.js
+# Azure Storage Modules for Node.js
 
 ## Overview
 
@@ -27,7 +27,7 @@ Create, update, and manage Azure Storage accounts and query and regenerate acces
 
 ## Client Package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure storage client npm module
 
@@ -63,7 +63,7 @@ blobService.createContainerIfNotExists(container, error => {
 
 ## Management Package
 
-### Install npm module 
+### Install the npm module 
 
 Install the Azure storage management npm module
 

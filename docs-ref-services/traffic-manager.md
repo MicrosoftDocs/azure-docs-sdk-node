@@ -1,6 +1,6 @@
 ---
-title: Azure Traffic Manager module for Node.js
-description: Reference for Azure Traffic Manager module for Node.js
+title: Azure Traffic Manager Modules for Node.js
+description: Reference for Azure Traffic Manager Modules for Node.js
 keywords: Azure,SDK,API,Traffic Manager, Node.js
 author: tomarcher
 ms.author: tarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Traffic Manager
 ---
 
-# Azure Traffic Manager Packages for Node.js
+# Azure Traffic Manager Modules for Node.js
 
 ## Overview
 
@@ -23,7 +23,7 @@ Learn more about [Azure Traffic Manager](https://docs.microsoft.com/en-us/azure/
 
 ## Management Package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure traffic manager npm module
 

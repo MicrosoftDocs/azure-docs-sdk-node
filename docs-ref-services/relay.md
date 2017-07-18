@@ -17,7 +17,7 @@ ms.service: Relay
 
 ## Overview
 
-The Azure Relay service facilitates hybrid applications by enabling you to securely expose services that reside within a corporate enterprise network to the public cloud, without having to open a firewall connection, or require intrusive changes to a corporate network infrastructure. Relay supports a variety of different transport protocols and web services standards.
+The Azure Relay service creates hybrid applications by enabling you to securely expose services that reside within a corporate enterprise network to the public cloud, without having to open a firewall connection, or require intrusive changes to a corporate network infrastructure. Relay supports a variety of different transport protocols and web services standards.
 
 Learn more about [Azure Relay](https://docs.microsoft.com/en-us/azure/service-bus-relay/relay-what-is-it).
 
@@ -39,10 +39,12 @@ Authenticate, create client and list namespaces.
 const msRestAzure = require('ms-rest-azure');
 const RelayManagement = require('azure-arm-relay');
 
+const subscriptionId = 'your-subscription-id';
+
 msRestAzure
   .interactiveLogin()
   .then(credentials => {
-    const client = new RelayManagement(credentials, 'your-subscription-id');
+    const client = new RelayManagement(credentials, subscriptionId);
     return client.namespaces.list();
   })
   .then(namespaces => {

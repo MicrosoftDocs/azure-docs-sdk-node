@@ -23,7 +23,7 @@ Learn more about [Azure Service Map](https://docs.microsoft.com/en-us/azure/oper
 
 ## Management package
 
-### Install npm module
+### Install the npm module
 
 Install the Azure Service Map npm module
 

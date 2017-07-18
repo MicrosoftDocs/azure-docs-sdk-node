@@ -31,7 +31,7 @@ npm install azure-arm-cognitiveservices
 
 ### Example
 
-This example lists all cognitive service accounts
+This example lists all cognitive service accounts.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

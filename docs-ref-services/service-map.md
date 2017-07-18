@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Service Map
 ---
 
-# Azure Service Map packages for Node.js
+# Azure Service Map Package for Node.js
 
 ## Overview
 
@@ -25,7 +25,7 @@ Learn more about [Azure Service Map](https://docs.microsoft.com/en-us/azure/oper
 
 ### Install npm module
 
-Install the Azure Service map npm module
+Install the Azure Service Map npm module
 
 ```bash
 npm install azure-arm-servicemap

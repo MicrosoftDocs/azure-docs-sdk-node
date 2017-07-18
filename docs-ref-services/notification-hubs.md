@@ -39,7 +39,7 @@ npm install azure-arm-notificationhubs
 
 ### Example
 
-This example lists all notification hubs
+This example lists all notification hubs.
 
  ```javascript
 const msRestAzure = require('ms-rest-azure');

@@ -33,7 +33,7 @@ npm install azure-arm-trafficmanager
 
 ### Example
 
-Authenticate to Azure, create a new client and list all Traffic Managers for a given resource group.
+This example lists all Traffic Managers for a given resource group.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

@@ -31,7 +31,7 @@ npm install azure-arm-containerregistry
 
 ### Example
 
-This examle lists all available containers
+This example lists all available containers.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure')

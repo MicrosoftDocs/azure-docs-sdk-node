@@ -41,16 +41,15 @@ This examples lists the current schedulers.
 const msRestAzure = require('ms-rest-azure')
 const SchedulerManagement = require('azure-arm-scheduler')
 
-// Log in interactively
-msRestAzure.interactiveLogin().then((credentials) => {
+msRestAzure.interactiveLogin().then(credentials => {
     // Create a scheduler from the login credentials
     let client = new SchedulerManagement(credentials, 'your-subscription-id')
     // Get the full list of current jobs for the subscription
     return client.jobCollections.listBySubscription()
-}).then((currentJobs) => {
+}).then(currentJobs => {
     console.log("Current jobs:")
     console.dir(currentJobs, {depth:null, colors:true})
-}).catch((error) => {
+}).catch(error => {
     console.log("An error occurred:")
     console.dir(error, {depth:null, colors:true})
 })

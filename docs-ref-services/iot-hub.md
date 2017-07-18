@@ -1,5 +1,5 @@
 ---
-title: Azure IoT Hub modules for Node.js
+title: Azure IoT Hub Modules for Node.js
 description: Reference for Azure IoT Hub modules for Node.js
 keywords: Azure,SDK,API,IoT Hub, Node.js
 author: tomarcher
@@ -13,9 +13,10 @@ ms.devlang: nodejs
 ms.service: IoT Hub
 ---
 
-# Azure IoT Hub Packages for Node.js
+# Azure IoT Hub Modules for Node.js
 
 ## Overview
+
 Azure IoT Hub is a fully managed service that enables reliable and secure bidirectional communications between millions of IoT devices and a solution back end. Azure IoT Hub:
 - Provides multiple device-to-cloud and cloud-to-device communication options, including one-way messaging, file transfer, and request-reply methods.
 - Provides built-in declarative message routing to other Azure services.
@@ -28,16 +29,17 @@ Use npm to install the Azure IoT Hub modules for Node.js
 
 ## Management Package
 
-### Install npm package
+### Install the npm module
 
-Install the Azure IoT Hub module for Node.js
+Install the Azure IoT Hub npm module
 
 ```bash
 npm install azure-arm-iothub
 ```
+
 ### Example
 
-Create and name an IoT hub
+This example creates and names an IoT hub.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');
@@ -80,7 +82,7 @@ msRestAzure.interactiveLogin((err, credentials) => {
 });
 ```
 
-Get the existing IoT hub, by name
+This example gets the existing IoT hub, by name.
 
 ```javascript
 const subscriptionId = 'your-subscription-id';
@@ -97,7 +99,7 @@ msRestAzure.interactiveLogin((err, credentials) => {
 });
 ```
 
-### Samples
+## Samples
 
 - [Get started with the Raspberry Pi Azure IoT Starter Kit](https://azure.microsoft.com/en-us/resources/samples/iot-remote-monitoring-node-raspberrypi-getstartedkit/)
 - [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running Node.js](https://azure.microsoft.com/en-us/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)

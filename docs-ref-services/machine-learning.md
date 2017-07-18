@@ -32,7 +32,7 @@ npm install azure-arm-machinelearning
 
 ### Example
 
-This example lists all machine learning committment plans
+This example lists all machine learning committment plans.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

@@ -42,9 +42,9 @@ const authorizationManagement = require('azure-arm-authorization');
 const resourceGroup = 'resource-group-name';
 const subscriptionId = 'your-subscription-id';
 
-msRestAzure.interactiveLogin((err, credentials) => {
+msRestAzure.interactiveLogin().then(credentials => {
  const client = new authorizationManagement(credentials, subscriptionId);
- client.roleAssignments.listForResourceGroup(resourceGroupName, (err, result) => {
+ client.roleAssignments.listForResourceGroup(resourceGroupName).then(result => {
    console.log(result);
  });
 });

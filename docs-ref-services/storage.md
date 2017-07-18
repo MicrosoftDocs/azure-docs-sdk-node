@@ -73,7 +73,7 @@ npm install azure-arm-storage
 
 ### Example
 
-Authenticate, create client and list storage accounts.
+This example list the storage accounts.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

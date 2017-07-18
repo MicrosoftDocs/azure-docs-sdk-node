@@ -23,7 +23,7 @@ Azure Cosmos DB contains a write optimized, resource governed, schema-agnostic d
 
 ## Management Package
 
-### Install npm package
+### Install npm module 
 
 Install the Azure Cosmos DB npm module
 

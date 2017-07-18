@@ -25,7 +25,7 @@ Use npm to install the Azure management modules.
 
 ### Management
 
-```
+```bash
 npm install azure-arm-compute
 ```   
 
@@ -37,9 +37,7 @@ The following code snippet illustrates how to log in to Azure, create a manageme
 const msRestAzure = require('ms-rest-azure');
 const computeManagementClient = require('azure-arm-compute');
 
-// Interactive Login - provides a url, and a code that needs to be copied and pasted in a browser.  
-// If successful, the user will receive a DeviceTokenCredentials object. 
-msRestAzure.interactiveLogin((err, credentials) => {
+msRestAzure.interactiveLogin().then(credentials => {
   const client = new computeManagementClient(credentials, '<azure-subscription-id>');
 
   client.virtualMachineImages.list(

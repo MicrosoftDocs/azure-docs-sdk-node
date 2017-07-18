@@ -1,5 +1,5 @@
 ---
-title: Azure Notification Hubs modules for Node.js
+title: Azure Notification Hubs Modules for Node.js
 description: Reference for Azure Notification Hubs modules for Node.js
 keywords: Azure,SDK,API,Notification Hubs, Node.js
 author: tomarcher
@@ -13,9 +13,10 @@ ms.devlang: nodejs
 ms.service: Notification Hubs
 ---
 
-# Azure Notification Hubs modules for Node.js
+# Azure Notification Hubs Modules for Node.js
 
 ## Overview
+
 Azure Notification Hubs provide an easy-to-use, multi-platform, scaled-out push engine. With a single cross-platform API call, you can easily send targeted and personalized push notifications to any mobile platform from any cloud or on-premises backend.
 
 Notification Hubs works great for both enterprise and consumer scenarios. Here are a few examples customers use Notification Hubs for:
@@ -28,15 +29,18 @@ Notification Hubs works great for both enterprise and consumer scenarios. Here a
 
 ## Management Package
 
-### Install npm package
+### Install the npm module
 
-Install the Azure Noticiation Hubs module for Node.js
+Install the Azure Notification Hubs module 
 
 ```bash
 npm install azure-arm-notificationhubs
 ```
 
 ### Example
+
+This example lists all notification hubs.
+
  ```javascript
 const msRestAzure = require('ms-rest-azure');
 const notificationHubsManagementClient = require('azure-arm-notificationhubs');
@@ -52,9 +56,9 @@ msRestAzure.interactiveLogin().then(credentials => {
     .list(resourceGroup, notificationHubNamespace)
     .then(notificationHubs => console.log('Retrieved notification hubs: ', notificationHubs));
 });
- ```
+```
 
-### Samples
+## Samples
 
 * [App Service Mobile completed quickstart for Node.js backend](https://azure.microsoft.com/en-us/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
 * [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running Node.js](https://azure.microsoft.com/en-us/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)

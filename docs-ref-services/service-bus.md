@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Service Bus
 ---
 
-# Azure Service Bus module for Node.js
+# Azure Service Bus Module for Node.js
 
 ## Overview
 
@@ -21,18 +21,39 @@ Azure Service Bus is an asynchronous messaging cloud platform that enables you t
 
 Learn more about [Azure Service Bus](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview).
 
-## Install the module with npm
+## Management package
 
-Use npm to install the Azure Service Bus module for Node.js
+### Install the npm module
 
-### Management
+Install the Azure Service Bus npm module
 
 ```bash
 npm install azure-arm-sb
 ```
 
-##Example
+### Example
 
-##Samples
+This example gets and prints a list of namespaces
+
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const ServicebusManagement = require('azure-arm-sb');
+
+const subscriptionId = 'your-subscription-id';
+
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const client = new ServicebusManagement(credentials, subscriptionId);
+    return client.namespaces.listBySubscription();
+  })
+  .then(namespaces => {
+    console.log('List of namespaces:');
+    console.dir(namespaces, { depth: null, colors: true });
+  });
+
+```
+
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

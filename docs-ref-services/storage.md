@@ -1,5 +1,5 @@
 ---
-title: Azure Storage modules for Node.js
+title: Azure Storage Modules for Node.js
 description: Connect and manage Azure Storage from your Node.js apps.
 keywords: Azure, Node, SDK, API, Storage, nodejs, javascript
 author: tomarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: storage
 ---
 
-# Azure Storage modules for Node.js
+# Azure Storage Modules for Node.js
 
 ## Overview
 
@@ -25,35 +25,73 @@ Use the Azure Storage client module to:
 
 Create, update, and manage Azure Storage accounts and query and regenerate access keys from your Node.js apps with the management modules.
 
-## Install modules with npm
+## Client Package
 
-Use npm to install the Azure storage client or management modules.
+### Install the npm module
 
-### Client
+Install the Azure storage client npm module
 
 ```bash
 npm install azure-storage
 ```
 
-### Management
+### Example
+
+This example create a storage container and uploads a local file `data.txt` to it.
+
+```javascript
+const azure = require('azure-storage');
+const blobService = azure.createBlobService(storageConnectionString);
+
+const container = 'taskcontainer';
+const task = 'taskblob';
+const filename = 'data.txt';
+
+blobService.createContainerIfNotExists(container, error => {
+  if (error) return console.log(error);
+  blobService.createBlockBlobFromLocalFile(
+    container,
+    task,
+    filename,
+    (error, result) => {
+      if (error) return console.log(error);
+      console.dir(result, { depth: null, colors: true });
+    }
+  );
+});
+```
+
+## Management Package
+
+### Install the npm module 
+
+Install the Azure storage management npm module
 
 ```bash
 npm install azure-arm-storage
 ```
 
-## Example
+### Example
 
-Write a local file *data.txt* to an existing blob storage container.
+This example list the storage accounts.
 
 ```javascript
-var azure = require('azure-storage');
-var blobService = azure.createBlobService(storageConnectionString);
+const msRestAzure = require('ms-rest-azure');
+const storageManagementClient = require('azure-arm-storage');
 
-blobService.createBlockBlobFromLocalFile('mycontainer', 'taskblob', 'data.txt', function(error, result, response) {
-  if (!error) {
-    // file uploaded
-  }
-});
+const subscriptionId = 'your-subscription-id';
+
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    const client = new storageManagementClient(
+      credentials,
+      subscriptionId
+    );
+    return client.storageAccounts.list();
+  })
+  .then(accounts => console.dir(accounts, { depth: null, colors: true }))
+  .catch(err => console.log(err));
 ```
 
 ## Samples

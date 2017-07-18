@@ -33,7 +33,7 @@ npm install azure-arm-relay
 
 ### Example
 
-Authenticate, create client and list namespaces.
+This example lists the namespaces for a Relay client.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

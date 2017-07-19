@@ -19,7 +19,7 @@ ms.service: Resources
 
 Azure Resource Manager enables you to deploy and manage the infrastructure for your Azure solutions. You organize related resources in resource groups, and deploy your resources with JSON templates.
 
-Learn more about [Azure Resources](https://docs.microsoft.com/en-us/azure/azure-resource-manager/).
+Learn more about [Azure Resources](https://docs.microsoft.com/azure/azure-resource-manager/).
 
 ## Install the modules with npm
 

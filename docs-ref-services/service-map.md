@@ -19,7 +19,7 @@ ms.service: Service Map
 
 Service Map automatically discovers application components on Windows and Linux systems and maps the communication between services. Service Map shows connections between servers, processes, and ports across any TCP-connected architecture, with no configuration required other than the installation of an agent.
 
-Learn more about [Azure Service Map](https://docs.microsoft.com/en-us/azure/operations-management-suite/operations-management-suite-service-map).
+Learn more about [Azure Service Map](https://docs.microsoft.com/azure/operations-management-suite/operations-management-suite-service-map).
 
 ## Management package
 

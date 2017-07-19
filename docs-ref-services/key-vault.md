@@ -76,8 +76,8 @@ msRestAzure
 
 ## Samples
 
-- [Getting started with Key Vault in Node.js](https://azure.microsoft.com/en-us/resources/samples/key-vault-node-getting-started/)
-- [Manage Azure resources and resource groups with Node.js](https://azure.microsoft.com/en-us/resources/samples/resource-manager-node-resources-and-groups/) 
-- [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/en-us/resources/samples/active-directory-node-webapp-openidconnect/) 
+- [Getting started with Key Vault in Node.js](https://azure.microsoft.com/resources/samples/key-vault-node-getting-started/)
+- [Manage Azure resources and resource groups with Node.js](https://azure.microsoft.com/resources/samples/resource-manager-node-resources-and-groups/) 
+- [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/resources/samples/active-directory-node-webapp-openidconnect/) 
 
-Explore more [sample Node.js code](https://azure.microsoft.com/en-us/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

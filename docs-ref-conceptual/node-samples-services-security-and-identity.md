@@ -19,7 +19,7 @@ If you need code for other tasks, you can browse the full list of [Azure Node.js
 | | |
 |---|---|
 | **Azure Active Directory** ||
-| [Securing a web API with Azure AD](https://azure.microsoft.com/en-us/resources/samples/active-directory-node-webapi/) | A NodeJS web API that is secured using Azure AD and OAuth 2.0 access tokens. |
-| [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/en-us/resources/samples/active-directory-node-webapp-openidconnect/) | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
+| [Securing a web API with Azure AD](https://azure.microsoft.com/resources/samples/active-directory-node-webapi/) | A NodeJS web API that is secured using Azure AD and OAuth 2.0 access tokens. |
+| [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/resources/samples/active-directory-node-webapp-openidconnect/) | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
 | **Azure Key Vault** ||
-| [Getting started with Key Vault in Node.js](https://azure.microsoft.com/en-us/resources/samples/key-vault-node-getting-started/) | Demonstrates how to create, manage, and interact with a keyvault |
+| [Getting started with Key Vault in Node.js](https://azure.microsoft.com/resources/samples/key-vault-node-getting-started/) | Demonstrates how to create, manage, and interact with a keyvault |

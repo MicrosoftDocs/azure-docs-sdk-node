@@ -83,6 +83,6 @@ msRestAzure.interactiveLogin().then(credentials => {
 
 ## Samples
 
-* [How to use Azure Redis Cache with Node.js](https://docs.microsoft.com/en-us/azure/redis-cache/cache-nodejs-get-started)
+* [How to use Azure Redis Cache with Node.js](https://docs.microsoft.com/azure/redis-cache/cache-nodejs-get-started)
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

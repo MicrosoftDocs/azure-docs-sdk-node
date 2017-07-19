@@ -60,7 +60,7 @@ msRestAzure.interactiveLogin().then(credentials => {
 
 ## Samples
 
-* [App Service Mobile completed quickstart for Node.js backend](https://azure.microsoft.com/en-us/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
-* [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running Node.js](https://azure.microsoft.com/en-us/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
+* [App Service Mobile completed quickstart for Node.js backend](https://azure.microsoft.com/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
+* [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running Node.js](https://azure.microsoft.com/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

@@ -19,7 +19,7 @@ ms.service: Service Bus
 
 Azure Service Bus is an asynchronous messaging cloud platform that enables you to send data between decoupled systems.
 
-Learn more about [Azure Service Bus](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview).
+Learn more about [Azure Service Bus](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview).
 
 ## Install the module with npm
 

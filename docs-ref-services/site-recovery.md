@@ -19,7 +19,7 @@ ms.service: Site Recovery
 
 Site Recovery allows you to automate replication of Azure VMs between regions, on-premises virtual machines and physical servers to Azure, and on-premises machines to a secondary datacenter.
 
-Learn more about [Azure Site Recovery](https://docs.microsoft.com/en-us/azure/site-recovery/site-recovery-overview).
+Learn more about [Azure Site Recovery](https://docs.microsoft.com/azure/site-recovery/site-recovery-overview).
 
 ## Management package
 

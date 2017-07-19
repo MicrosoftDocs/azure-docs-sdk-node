@@ -1,6 +1,6 @@
 ---
-title: Azure Service Bus module for Node.js
-description: Reference for Azure Service Bus module for Node.js
+title: Azure Service Bus Modules for Node.js
+description: Reference for Azure Service Bus Modules for Node.js
 keywords: Azure,SDK,API,Service Bus, Node.js
 author: tomarcher
 ms.author: tarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Service Bus
 ---
 
-# Azure Service Bus Module for Node.js
+# Azure Service Bus Modules for Node.js
 
 ## Overview
 
@@ -33,7 +33,7 @@ npm install azure-arm-sb
 
 ### Example
 
-This example gets and prints a list of namespaces
+This example gets and prints a list of namespaces.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

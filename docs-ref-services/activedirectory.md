@@ -19,7 +19,9 @@ ms.service: active-directory
 
 The [Azure Active Directory Authentication Library (ADAL) for Node.js](https://www.npmjs.com/package/adal-node) enables Node.js applications to authenticate to AAD in order to access AAD protected web resources.
 
-## Install the npm modules
+## Client package
+
+### Install the npm modules
 
 Use npm to install the Azure storage client or management modules.
 
@@ -27,29 +29,34 @@ Use npm to install the Azure storage client or management modules.
 npm install adal-node
 ```   
 
-## Example
+### Example
 
-The following code from the [client credentials sample](https://github.com/MSOpenTech/azure-activedirectory-library-for-nodejs/blob/master/sample/client-credentials-sample.js) illustrates server-to-server authentication via client credentials:
+This example from the [client credentials sample](https://github.com/MSOpenTech/azure-activedirectory-library-for-nodejs/blob/master/sample/client-credentials-sample.js) illustrates server-to-server authentication via client credentials.
 
 ```javascript
-var adal = require('adal-node').AuthenticationContext;
+const adal = require('adal-node').AuthenticationContext;
 
-var authorityHostUrl = 'https://login.windows.net';
-var tenant = 'myTenant';
-var authorityUrl = authorityHostUrl + '/' + tenant;
-var clientId = 'yourClientIdHere';
-var clientSecret = 'yourAADIssuedClientSecretHere'
-var resource = '00000002-0000-0000-c000-000000000000';
+const authorityHostUrl = 'https://login.windows.net';
+const tenant = 'your-tenant-id';
+const authorityUrl = authorityHostUrl + '/' + tenant;
+const clientId = 'your-client-id';
+const clientSecret = 'your-client-secret';
+const resource = 'your-app-id-uri';
 
-var context = new AuthenticationContext(authorityUrl);
+const context = new adal(authorityUrl);
 
-context.acquireTokenWithClientCredentials(resource, clientId, clientSecret, function(err, tokenResponse) {
-  if (err) {
-    console.log('well that didn\'t work: ' + err.stack);
-  } else {
-    console.log(tokenResponse);
+context.acquireTokenWithClientCredentials(
+  resource,
+  clientId,
+  clientSecret,
+  (err, tokenResponse) => {
+    if (err) {
+      console.log(`Token generation failed due to ${err}`);
+    } else {
+      console.dir(tokenResponse, { depth: null, colors: true });
+    }
   }
-});
+);
 ```
 
 ## Samples

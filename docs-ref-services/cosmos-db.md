@@ -51,7 +51,7 @@ msRestAzure.interactiveLogin().then(credentials => {
 
 ## Samples
 
-* [Developing a Node.js app using Azure Cosmos DB - DocumentDB](https://azure.microsoft.com/en-us/resources/samples/azure-cosmos-db-documentdb-nodejs-getting-started/)
-* [Developing a Node.js app using Azure Cosmos DB - Gremlin](https://azure.microsoft.com/en-us/resources/samples/azure-cosmos-db-graph-nodejs-getting-started/)
+* [Developing a Node.js app using Azure Cosmos DB - DocumentDB](https://azure.microsoft.com/resources/samples/azure-cosmos-db-documentdb-nodejs-getting-started/)
+* [Developing a Node.js app using Azure Cosmos DB - Gremlin](https://azure.microsoft.com/resources/samples/azure-cosmos-db-graph-nodejs-getting-started/)
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

@@ -19,6 +19,6 @@ If you need code for other tasks, you can browse the full list of [Azure Node.js
 | | |
 |---|---|
 | **Azure Functions** ||
-| [Node.js Azure Function for generating SAS tokens](https://azure.microsoft.com/en-us/resources/samples/functions-node-sas-token/) | Node.js Azure Function for getting a blob or container Storage SAS token. |
+| [Node.js Azure Function for generating SAS tokens](https://azure.microsoft.com/resources/samples/functions-node-sas-token/) | Node.js Azure Function for getting a blob or container Storage SAS token. |
 | **Virtual machine management** ||
 | [Azure virtual machines management sample with Node.js](https://github.com/Azure-Samples/storage-blob-node-getting-started) | Demonstrates how to create, list, restart, and delete virtual machines. |

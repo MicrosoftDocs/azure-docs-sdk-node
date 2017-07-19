@@ -29,7 +29,7 @@ This topic shows you three techniques for creating a service principal.
 ## Create a service principal using the Azure portal
 
 Follow the steps outlined in the topic, 
-[Use portal to create an Azure Active Directory application and service principal that can access resources](https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/), to generate the service principal.
+[Use portal to create an Azure Active Directory application and service principal that can access resources](https://azure.microsoft.com/documentation/articles/resource-group-create-service-principal-portal/), to generate the service principal.
 
 ## Create a service principal using the Azure CLI 2.0
 

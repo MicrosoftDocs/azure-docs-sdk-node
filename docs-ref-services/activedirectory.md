@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory modules for Node.js
-description: Reference for Azure Active Directory modules for Node.js
+title: Azure Active Directory Modules for Node.js
+description: Reference for Azure Active Directory Modules for Node.js
 keywords: Azure, Node, SDK, API, Storage, nodejs, javascript
 author: tomarcher
 ms.author: tarcher

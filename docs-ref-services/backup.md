@@ -1,6 +1,6 @@
 ---
 title: Azure Backup Modules for Node.js
-description: Reference for Azure Backup modules for Node.js
+description: Reference for Azure Backup Modules for Node.js
 keywords: Azure,SDK,API,Backup, Node.js
 author: tomarcher
 ms.author: tarcher

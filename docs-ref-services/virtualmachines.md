@@ -1,6 +1,6 @@
 ---
-title: Azure Virtual Machine modules for Node.js
-description: Reference for Azure Virtual Machine modules for Node.js
+title: Azure Virtual Machine Modules for Node.js
+description: Reference for Azure Virtual Machine Modules for Node.js
 keywords: Azure, Node, SDK, API, virtual machine, vm, nodejs, javascript
 author: tomarcher
 ms.author: tarcher
@@ -13,42 +13,43 @@ ms.devlang: nodejs
 ms.service: compute
 ---
 
-# Azure Virtual Machine modules for Node.js
+# Azure Virtual Machine Modules for Node.js
 
 ## Overview
 
 Define, configure, and deploy new Windows and Linux virtual machines and virtual machine scale sets from your code with the Azure management modules for Node.js. The modules let you start and stop existing virtual machines and attach or detach disks to stopped VMs in your Azure subscription.
 
-## Install modules with npm
+## Management package
 
-Use npm to install the Azure management modules.
+### Install the npm module
 
-### Management
+Install the Azure Compute npm module
 
 ```bash
 npm install azure-arm-compute
 ```   
 
-## Example
+### Example
 
-The following code snippet illustrates how to log in to Azure, create a management client, and list all VM images for the specified location, publisher, offer, and SKU.
+The following example illustrates how to log in to Azure, create a management client, and list all VM images for the specified location, publisher, offer, and SKU.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');
 const computeManagementClient = require('azure-arm-compute');
 
-msRestAzure.interactiveLogin().then(credentials => {
-  const client = new computeManagementClient(credentials, '<azure-subscription-id>');
+const subscriptionId = 'my-subscription-id';
 
-  client.virtualMachineImages.list(
-    'westus', // location
-    'MicrosoftWindowsServer', // publisher name 
-    'WindowsServer',  // offer
-    '2012-R2-Datacenter', // sku
-    (err, result, request, response) => {
-      if (err) return console.error(err);
-      console.log(result);
-    });
+msRestAzure.interactiveLogin().then(credentials => {
+  const client = new computeManagementClient(credentials, subscriptionId);
+
+  client.virtualMachineImages
+    .list(
+        'westus',                   // location
+        'MicrosoftWindowsServer',   // publisher name
+        'WindowsServer',            // offer
+        '2012-R2-Datacenter'        // sku
+    )
+    .then(result => console.log(result));
 });
 ```
 

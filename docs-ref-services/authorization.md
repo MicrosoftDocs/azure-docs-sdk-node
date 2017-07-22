@@ -19,7 +19,7 @@ ms.service: Authorization
 
 Azure App Service Authentication / Authorization is a feature that provides a way for your application to sign in users so that code doesn't have to be changed on the app backend. Authorization provides an easy way to protect your application and work with per-user data.
 
-## Management
+## Management package
 
 Use npm to install the Azure Authorization modules for Node.js
 

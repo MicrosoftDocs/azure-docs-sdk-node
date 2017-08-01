@@ -11,6 +11,7 @@ var src = 'src/azure-sdk-for-node';
 var packageMappingFileRelativePath = 'package_service_mapping.json';
 var repoRelativePath = 'repo.json';
 var dest = 'docs-ref-autogen';
+var doc = 'Documentation';
 var configPath = 'node2docfx.json';
 var tempConfigPath = '_node2docfx_temp.json';
 var filenameMaxLength = 100;
@@ -95,7 +96,11 @@ packageJsons.forEach(function (packagePath) {
 });
 fs.unlink(tempConfigPath);
 
-// 4. remove files with too long filename that breaks DocFX
+// 4. copy documentation
+fse.copySync(path.join(src, doc), path.join(dest, doc));
+console.log('Finish copying documentation');
+
+// 5. remove files with too long filename that breaks DocFX
 packagesToFilter.forEach(function (p) {
   var uidsToFilter = [];
   fs.readdirSync(path.join(dest, p)).forEach(function (f) {
@@ -116,7 +121,7 @@ packagesToFilter.forEach(function (p) {
   }
 });
 
-// 5. generate root toc
+// 6. generate root toc
 var rootToc = [];
 var rootTocPath = path.join(dest, 'toc.yml');
 var subTocs = glob.sync(path.join(dest, '**/toc.yml'));

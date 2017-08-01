@@ -13,9 +13,10 @@ ms.devlang: nodejs
 ms.service: Intune
 ---
 
-# Azure Intune modules for Node.js
+# Azure Intune packages for Node.js
 
 ## Overview
+
 Azure Intune is a cloud-based enterprise mobility management (EMM) service that helps enable your workforce to be productive while keeping your corporate data protected. With Intune, you can:
 - Manage the mobile devices your workforce uses to access company data.
 - Manage the mobile apps your workforce uses.
@@ -24,17 +25,32 @@ Azure Intune is a cloud-based enterprise mobility management (EMM) service that 
 
 Intune integrates closely with Azure Active Directory (Azure AD) for identity and access control, and Azure Information Protection for data protection.
 
-## Install the modules with npm
+## Management Package
 
-Use npm to install the Azure Intune modules for Node.js
+### Install npm module
 
-### Management
+Install the Azure Intune npm module
+
 ```bash
 npm install azure-arm-intune
 ```
 
-##Example
+### Example
 
-##Samples
+This example creates an Intune Resource client and retrieves a location by host name.
+
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const IntuneResourceManagementClient = require('azure-arm-intune');
+
+msRestAzure.interactiveLogin().then(credentials => {
+  const client = new IntuneResourceManagementClient(credentials);
+  client.getLocationByHostName(null).then(result => {
+    console.log(result);
+  });
+});
+```
+
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

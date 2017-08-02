@@ -60,7 +60,7 @@ you through each method.
 #### 1. Azure Portal
 
 Follow the steps outlined in the
-[Azure Portal documentation](https://azure.microsoft.com/documentation/articles/resource-group-create-service-principal-portal/)
+[Azure Portal documentation](https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/)
  to generate the necessary keys.
 
 #### 2. Azure CLI

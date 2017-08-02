@@ -1,6 +1,6 @@
 ---
-title: Azure Resource Manager modules for Node.js
-description: Reference for Azure Resource Manager modules for Node.js
+title: Azure Resource Manager Modules for Node.js
+description: Reference for Azure Resource Manager Modules for Node.js
 keywords: Azure,SDK,API,Resources, Node.js
 author: tomarcher
 ms.author: tarcher
@@ -21,18 +21,38 @@ Azure Resource Manager enables you to deploy and manage the infrastructure for y
 
 Learn more about [Azure Resources](https://docs.microsoft.com/azure/azure-resource-manager/).
 
-## Install the modules with npm
+## Management package
+
+### Install the npm module
 
 Use npm to install the Azure Resource Manager module for Node.js
-
-### Management
 
 ```bash
 npm install azure-arm-resource
 ```
 
-##Example
+### Example
 
-##Samples
+This example creates a client and then retrieves all of the resource groups for a specified subscription.
+
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const resourceManagement = require('azure-arm-resource');
+
+const subscriptionId = 'your-subscription-id';
+
+// Interactive Login
+msRestAzure.interactiveLogin().then(credentials => {
+    const client = new resourceManagement.ResourceManagementClient(
+        credentials, 
+        subscriptionId
+    );
+    client.resources.list((err, result) => {
+        console.log(result);
+    });
+});
+```
+
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

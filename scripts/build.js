@@ -15,6 +15,7 @@ var configPath = 'node2docfx.json';
 var tempConfigPath = '_node2docfx_temp.json';
 var filenameMaxLength = 100;
 var packagesToFilter = ['azure-arm-datalake-store'];
+var packageIndexName = 'index.md';
 
 function itemsByType(type) {
   return packageNames.filter(function (value) {
@@ -31,9 +32,9 @@ function buildTocItems(keys, relativePathToRootFolder) {
     } else {
       href = key + '/';
     }
-    var packageIndex = path.join(dest, key, 'index.md');
+    var packageIndex = path.join(dest, key, packageIndexName);
     if (fs.existsSync(packageIndex)) {
-      topicHref = path.join(relativePathToRootFolder, key, 'index.md');
+      topicHref = path.join(relativePathToRootFolder, key, packageIndexName);
     } else {
       topicHref = undefined;
     }
@@ -43,6 +44,11 @@ function buildTocItems(keys, relativePathToRootFolder) {
       topicHref: topicHref
     };
   });
+}
+
+function generatePackageIndex(packageDirPath, packageIndexName, packageName) {
+  var packageIndexPath = packageDirPath.trim('/') + '/' + packageIndexName;
+  fs.writeFileSync(packageIndexPath, '#Package ' + packageName + '\r\n');
 }
 
 function generatePackageDoc(packagePath, configPath, dest, resetInclude, whiteList, repo) {
@@ -56,13 +62,14 @@ function generatePackageDoc(packagePath, configPath, dest, resetInclude, whiteLi
     config.source.include = [dir];
   }  
   config.package = packagePath;
-  config.readme = path.join(dir, 'README.md');
+  config.readme = path.join(dir, packageIndexName);
   config.destination = path.join(dest, packageName);
   if (repo) {
     config.repo = repo;
   }
   fse.writeJsonSync(tempConfigPath, config);
   child_process.execFileSync('node', ['node_modules/node2docfx/node2docfx.js', tempConfigPath]);
+  generatePackageIndex(dir, packageIndexName, packageName);
   console.log('Finish generating YAML files for ' + packageName);
 }
 
@@ -123,7 +130,7 @@ var subTocs = glob.sync(path.join(dest, '**/toc.yml'));
 subTocs.forEach(function (subTocPath) {
   var tocContent = yaml.safeLoad(fs.readFileSync(subTocPath));
   var packageName = subTocPath.split('/')[1];
-  var topicHref = path.join(packageName, 'index.md');
+  var topicHref = path.join(packageName, packageIndexName);
   tocContent = { name: packageName, uid: packageName, topicHref: topicHref, items: tocContent };
   rootToc.push(tocContent);
 });

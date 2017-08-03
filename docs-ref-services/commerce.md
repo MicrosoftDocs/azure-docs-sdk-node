@@ -19,11 +19,11 @@ ms.service: Commerce
 
 Use Azure Billing APIs to pull usage and resource data into your preferred data analysis tools. The Azure Resource Usage and RateCard APIs can help you accurately predict and manage your costs. The APIs are implemented as a Resource Provider and part of the family of APIs exposed by the Azure Resource Manager.
 
-## Management Package
+## Management package
 
-### Install the modules with npm
+### Install the npm module
 
-Use npm to install the Azure Commerce modules for Node.js
+Install the Azure Commerce npm module
 
 ```bash
 npm install azure-arm-commerce

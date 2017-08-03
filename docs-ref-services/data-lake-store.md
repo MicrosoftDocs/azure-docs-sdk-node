@@ -18,17 +18,37 @@ ms.service: Data Lake Store
 ## Overview
 Azure Data Lake Store is an enterprise-wide hyper-scale repository for big data analytic workloads. Azure Data Lake enables you to capture data of any size, type, and ingestion speed in one single place for operational and exploratory analytics.
 
-## Install the modules with npm
+## Management Package
+
+### Install the npm module
 
 Use npm to install the Azure Data Lake Store modules for Node.js
 
-### Management
 ```bash
 npm install azure-arm-datalake-store
 ```
 
-##Example
+### Example
 
-##Samples
+This example lists all Data Lake Store accounts within a given Azure subscription
+
+```js
+const msRestAzure = require('ms-rest-azure');
+const adlsManagement = require('azure-arm-datalake-store');
+
+const subscriptionId = 'your-subscription-id';
+
+msRestAzure.interactiveLogin().then(credentials => {
+  const accountClient = new adlsManagement.DataLakeStoreAccountClient(
+    credentials,
+    subscriptionId
+  );
+  accountClient.account.list().then(result => {
+    console.log(result);
+  });
+});
+```
+
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

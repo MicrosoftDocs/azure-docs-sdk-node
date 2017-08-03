@@ -32,7 +32,7 @@ npm install azure-arm-datalake-store
 
 This example lists all Data Lake Store accounts within a given Azure subscription
 
-```js
+```javascript
 const msRestAzure = require('ms-rest-azure');
 const adlsManagement = require('azure-arm-datalake-store');
 

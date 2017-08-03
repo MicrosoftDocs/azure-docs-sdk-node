@@ -1,41 +1,16 @@
-# Microsoft Azure SDK for Node.js - BillingManagement
-
-This project provides a Node.js package for accessing Azure. Right now it supports:
-- **Node.js version: 6.x.x or higher**
-- **API version: 2017-02-27-preview**
-
-## Features
-
-
-## How to Install
-
-```bash
-npm install azure-arm-billing
-```
-
-## How to Use
-
-### Authentication, client creation and listing invoices as an example
-
- ```javascript
- const msRestAzure = require('ms-rest-azure');
- const BillingManagement = require("azure-arm-billing");
- 
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin().then((credentials) => {
-   let client = new BillingManagement(credentials, 'your-subscription-id');
-   client.invoices.list().then((invoices) => {
-     console.log('List of invoices:');
-     console.dir(invoices, {depth: null, colors: true});
-   });
- }).catch((err) => {
-   console.log('An error ocurred');
-   console.dir(err, {depth: null, colors: true});
- });
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/Azure/azure-sdk-for-node)
+# Package azure-arm-billing
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-billing.Operations |Class representing a Operations.|
+| @azure-arm-billing.Invoices |Class representing a Invoices.|
+| @azure-arm-billing.Resource |The Resource model definition.|
+| @azure-arm-billing.OperationListResult |Result of the request to list billing operations. It contains a list of operations and a URL link to get the next set of results.|
+| @azure-arm-billing.OperationDisplay |The object that represents the operation.|
+| @azure-arm-billing.Operation |A Billing REST API operation|
+| @azure-arm-billing.InvoicesListResult |Result of the request to list invoices. It contains a list of available invoices in reverse chronological order.|
+| @azure-arm-billing.Invoice |An invoice resource can be used download a PDF version of an invoice.|
+| @azure-arm-billing.ErrorResponse |Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.|
+| @azure-arm-billing.ErrorDetails |The details of the error.|
+| @azure-arm-billing.DownloadUrl |A secure URL that can be used to download a PDF invoice until the URL expires.|
+| @azure-arm-billing.BillingClient |Class representing a BillingClient.|

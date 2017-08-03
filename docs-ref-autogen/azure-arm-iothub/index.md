@@ -1,338 +1,42 @@
-# Microsoft Azure SDK for Node.js - IoT Hub
-
-This project provides a Node.js package that makes it easy to manage Microsoft Azure Iot Hub Resources.Right now it supports:
-- **Node.js version: 6.x.x or higher**
-
-## How to Install
-
-```bash
-npm install azure-arm-iothub
-```
-## How to Use
-
-### Authentication, client creation and listing iotHubs in a subscription as an example
-
- ```javascript
-
-  var msRestAzure = require('ms-rest-azure');
-  var IoTHubClient = require('azure-arm-iothub');
-
-  // Interactive Login
-  msRestAzure.interactiveLogin(function(err, credentials) 
-	{
-    var client = new IoTHubClient(credentials, 'your-subscription-id');
-    client.iotHubResource.listBySubscription(function (err, result, request, response)
-    {
-      if (err)
-      {
-        console.log(err);
-      }
-
-      console.log(result);
-    });
-  });
-
- ```
-
-## Check if an IoT Hub name is available
-
-```javascript
-
-  var operationInputs = 
-  {
-    name: resourceName
-  };
-
-  client.iotHubResource.checkNameAvailability(resourceName, operationInputs, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  }
-
-```
-
-## Create an IoT Hub
-
-```javascript
-
-  var iotHubCreateParams =
-  {
-    name: resourceName,
-    location: location,
-    subscriptionid: subscriptionId,
-    resourcegroup: resourceGroupName,
-    sku:
-    {
-      name: 'S1',
-      capacity: 2
-    },
-    properties:
-    {
-      enableFileUploadNotifications: false,
-	  ipFilterRules: [
-		 {
-			filterName: "ipfilterrule",
-			action: "accept",
-			ipMask: "0.0.0.0/0"
-		 }
-		],
-      operationsMonitoringProperties:
-      {
-        events:
-        {
-          "C2DCommands": "Error",
-          "DeviceTelemetry": "Error",
-          "DeviceIdentityOperations": "Error",
-          "Connections": "Error, Information"
-        }
-      },
-      "features": "None",
-    }
-  }
-
-  client.iotHubResource.createOrUpdate(resourceGroupName, resourceName, iotHubCreateParams, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-## Update an IoT Hub
-
-```javascript
-
-  var iotHubUpdateParams =
-  {
-    name: resourceName,
-    location: location,
-    subscriptionid: subscriptionId,
-    resourcegroup: resourceGroupName,
-    sku:
-    {
-      name: 'S1',
-      capacity: 3
-    },
-    properties:
-    {
-      enableFileUploadNotifications: false,
-      ipFilterRules: [
-        {
-           filterName: "ipfilterrule2",
-           action: "reject",
-           ipMask: "192.168.0.0/10"
-        }
-      ],
-      operationsMonitoringProperties:
-      {
-        events:
-        {
-          "C2DCommands": "Error",
-          "DeviceTelemetry": "Error",
-          "DeviceIdentityOperations": "Error",
-          "Connections": "Error, Information"
-        }
-      },
-      "features": "None",
-    }
-  }
-
-  client.iotHubResource.createOrUpdate(resourceGroupName, resourceName, iotHubUpdateParams, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-## Get an IoT Hub Description
-
-```javascript
-
-  client.iotHubResource.get(resourceGroupName, resourceName, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-## Delete an IoT Hub 
-
-```javascript
-
-  client.iotHubResource.deleteMethod(resourceGroupName, resourceName, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-
-## Get all IoT Hub Descriptions in a resourcegroup
-
-```javascript
-
-  client.iotHubResource.listByResourceGroup(resourceGroupName, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-## Get IoT Hub Quota Metrics 
-
-```javascript
-
-  client.iotHubResource.getQuotaMetrics(resourceGroupName, resourceName, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-## Get Valid IoT Hub Skus
-
-```javascript
-
-  client.iotHubResource.getValidSkus(resourceGroupName, resourceName, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-## Get All IoT Hub Keys
-
-```javascript
-
-  client.iotHubResource.listKeys(resourceGroupName, resourceName, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-## Get a specific IoT Hub Key
-
-```javascript
-
-  client.iotHubResource.getKeysForKeyName(resourceGroupName, resourceName, 'iothubowner', function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-## Get all eventhub consumer groups
-
-```javascript
-
-  client.iotHubResource.listEventHubConsumerGroups(resourceGroupName, resourceName, 'events', function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-## Add an eventhub consumer group
-
-```javascript
-
-  client.iotHubResource.createEventHubConsumerGroup(resourceGroupName, resourceName, eventsEndpointName, consumerGroupName, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-## Get an eventhub consumer group
-
-```javascript
-
-  client.iotHubResource.getEventHubConsumerGroup(resourceGroupName, resourceName, eventsEndpointName, consumerGroupName, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-
-## Delete an eventhub consumer group
-
-```javascript
-
-  client.iotHubResource.deleteEventHubConsumerGroup(resourceGroupName, resourceName, eventsEndpointName, consumerGroupName, function (err, result, request, response)
-  {
-    if (err)
-    {
-      console.log(err);
-    }
-
-    console.log(result);
-  });
-
-```
-## Related projects
-
-- [Microsoft Azure SDK for Node.js - All-up](https://github.com/WindowsAzure/azure-sdk-for-node)
+# Package azure-arm-iothub
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-iothub.IotHubResource |Class representing a IotHubResource.|
+| @azure-arm-iothub.StorageEndpointProperties |The properties of the Azure Storage endpoint for file upload.|
+| @azure-arm-iothub.SharedAccessSignatureAuthorizationRuleListResult |The list of shared access policies with a next link.|
+| @azure-arm-iothub.SharedAccessSignatureAuthorizationRule |The properties of an IoT hub shared access policy.|
+| @azure-arm-iothub.RoutingServiceBusTopicEndpointProperties |The properties related to service bus topic endpoint types.|
+| @azure-arm-iothub.RoutingServiceBusQueueEndpointProperties |The properties related to service bus queue endpoint types.|
+| @azure-arm-iothub.RoutingProperties |The routing related properties of the IoT hub. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging|
+| @azure-arm-iothub.RoutingEventHubProperties |The properties related to an event hub endpoint.|
+| @azure-arm-iothub.RoutingEndpoints |The properties related to the custom endpoints to which your IoT hub routes messages based on the routing rules. A maximum of 10 custom endpoints are allowed across all endpoint types for paid hubs and only 1 custom endpoint is allowed across all endpoint types for free hubs.|
+| @azure-arm-iothub.RouteProperties |The properties of a routing rule that your IoT hub uses to route messages to endpoints.|
+| @azure-arm-iothub.Resource |The common properties of an Azure resource.|
+| @azure-arm-iothub.RegistryStatistics |Identity registry statistics.|
+| @azure-arm-iothub.OperationsMonitoringProperties |The operations monitoring properties for the IoT hub. The possible keys to the dictionary are Connections, DeviceTelemetry, C2DCommands, DeviceIdentityOperations, FileUploadOperations, Routes, D2CTwinOperations, C2DTwinOperations, TwinQueries, JobsOperations, DirectMethods.|
+| @azure-arm-iothub.OperationInputs |Input values.|
+| @azure-arm-iothub.MessagingEndpointProperties |The properties of the messaging endpoints used by this IoT hub.|
+| @azure-arm-iothub.JobResponseListResult |The JSON-serialized array of JobResponse objects with a next link.|
+| @azure-arm-iothub.JobResponse |The properties of the Job Response object.|
+| @azure-arm-iothub.IpFilterRule |The IP filter rules for the IoT hub.|
+| @azure-arm-iothub.IotHubSkuInfo |Information about the SKU of the IoT hub.|
+| @azure-arm-iothub.IotHubSkuDescriptionListResult |The JSON-serialized array of IotHubSkuDescription objects with a next link.|
+| @azure-arm-iothub.IotHubSkuDescription |SKU properties.|
+| @azure-arm-iothub.IotHubQuotaMetricInfoListResult |The JSON-serialized array of IotHubQuotaMetricInfo objects with a next link.|
+| @azure-arm-iothub.IotHubQuotaMetricInfo |Quota metrics properties.|
+| @azure-arm-iothub.IotHubProperties |The properties of an IoT hub.|
+| @azure-arm-iothub.IotHubNameAvailabilityInfo |The properties indicating whether a given IoT hub name is available.|
+| @azure-arm-iothub.IotHubDescriptionListResult |The JSON-serialized array of IotHubDescription objects with a next link.|
+| @azure-arm-iothub.IotHubDescription |The description of the IoT hub.|
+| @azure-arm-iothub.IotHubCapacity |IoT Hub capacity information.|
+| @azure-arm-iothub.ImportDevicesRequest |Use to provide parameters when requesting an import of all devices in the hub.|
+| @azure-arm-iothub.FeedbackProperties |The properties of the feedback queue for cloud-to-device messages.|
+| @azure-arm-iothub.FallbackRouteProperties |The properties related to the fallback route based on which the IoT hub routes messages to the fallback endpoint.|
+| @azure-arm-iothub.ExportDevicesRequest |Use to provide parameters when requesting an export of all devices in the IoT hub.|
+| @azure-arm-iothub.EventHubProperties |The properties of the provisioned Event Hub-compatible endpoint used by the IoT hub.|
+| @azure-arm-iothub.EventHubConsumerGroupsListResult |The JSON-serialized array of Event Hub-compatible consumer group names with a next link.|
+| @azure-arm-iothub.EventHubConsumerGroupInfo |The properties of the EventHubConsumerGroupInfo object.|
+| @azure-arm-iothub.ErrorDetails |Error details.|
+| @azure-arm-iothub.CloudToDeviceProperties |The IoT hub cloud-to-device messaging properties.|
+| @azure-arm-iothub.IotHubClient |Class representing a IotHubClient.|

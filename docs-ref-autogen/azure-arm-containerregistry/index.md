@@ -1,41 +1,23 @@
-# Microsoft Azure SDK for Node.js - ContainerRegistryManagement
-
-This project provides a Node.js package for accessing Azure. Right now it supports:
-- **Node.js version: 6.x.x or higher**
-- **API version: 2017-03-01**
-
-## Features
-
-
-## How to Install
-
-```bash
-npm install azure-arm-containerregistry
-```
-
-## How to Use
-
-### Authentication, client creation and listing registries as an example
-
- ```javascript
- const msRestAzure = require('ms-rest-azure');
- const ContainerRegistryManagement = require("azure-arm-containerregistry");
- 
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin().then((credentials) => {
-   let client = new ContainerRegistryManagement(credentials, 'your-subscription-id');
-   client.registries.list().then((registries) => {
-     console.log('List of registries:');
-     console.dir(registries, {depth: null, colors: true});
-   });
- }).catch((err) => {
-   console.log('An error ocurred');
-   console.dir(err, {depth: null, colors: true});
- });
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/Azure/azure-sdk-for-node)
+# Package azure-arm-containerregistry
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-containerregistry.Registries |Class representing a Registries.|
+| @azure-arm-containerregistry.Operations |Class representing a Operations.|
+| @azure-arm-containerregistry.StorageAccountProperties |The properties of a storage account for a container registry.|
+| @azure-arm-containerregistry.StorageAccountParameters |The parameters of a storage account for a container registry.|
+| @azure-arm-containerregistry.Sku |The SKU of a container registry.|
+| @azure-arm-containerregistry.Resource |An Azure resource.|
+| @azure-arm-containerregistry.RegistryUpdateParameters |The parameters for updating a container registry.|
+| @azure-arm-containerregistry.RegistryPassword |The login password for the container registry.|
+| @azure-arm-containerregistry.RegistryNameStatus |The result of a request to check the availability of a container registry name.|
+| @azure-arm-containerregistry.RegistryNameCheckRequest |A request to check whether a container registry name is available.|
+| @azure-arm-containerregistry.RegistryListResult |The result of a request to list container registries.|
+| @azure-arm-containerregistry.RegistryListCredentialsResult |The response from the ListCredentials operation.|
+| @azure-arm-containerregistry.RegistryCreateParameters |The parameters for creating a container registry.|
+| @azure-arm-containerregistry.Registry |An object that represents a container registry.|
+| @azure-arm-containerregistry.RegenerateCredentialParameters |The parameters used to regenerate the login credential.|
+| @azure-arm-containerregistry.OperationListResult |The result of a request to list container registry operations.|
+| @azure-arm-containerregistry.OperationDisplayDefinition |The display information for a container registry operation.|
+| @azure-arm-containerregistry.OperationDefinition |The definition of a container registry operation.|
+| @azure-arm-containerregistry.ContainerRegistryManagementClient |Class representing a ContainerRegistryManagementClient.|

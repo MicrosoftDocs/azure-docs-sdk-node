@@ -1,131 +1,116 @@
-# Microsoft Azure SDK for Node.js - Data Lake Analytics
-
-This project provides a Node.js package that makes it easy to manage Azure Data Lake Analytics accounts.
-
-Right now it supports:
-
-  *  **Node.js version: 6.x.x or higher**
-  *  **REST API version for Account: 2016-11-01**
-  *  **REST API version for Catalog: 2016-11-01**
-  *  **REST API version for Job: 2016-11-01**
-
-## Features
-
-- Account management: create, get, list, update, and delete.
-- Account storage management: add, get, list update and delete Data Lake Store accounts and Azure Storage accounts from an existing Data Lake analytics account.
-- Job management: submit, get, list, cancel.
-- Catalog management: get, list, create (secrets and credentials), update (secrets and credentials), delete (secrets and credentials).
-
-## How to Install
-
-```bash
-npm install azure-arm-datalake-analytics
-```
-
-## How to Use
-
-### Authentication, account, job and catalog client creation and listing jobs as an example
-
-### Login and list jobs using promises
- ```javascript
- var msRestAzure = require('ms-rest-azure');
- var adlaManagement = require("azure-arm-datalake-analytics");
-
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin().then((credentials) => {
-  var acccountClient = new adlaManagement.DataLakeAnalyticsAccountClient(credentials, 'your-subscription-id');
-  var jobClient = new adlaManagement.DataLakeAnalyticsJobClient(credentials, 'azuredatalakeanalytics.net');
-  var catalogClient = new adlaManagement.DataLakeAnalyticsCatalogClient(credentials, 'azuredatalakeanalytics.net');
-  return jobClient.job.list(accountName);
-}).then((jobs) => {
-  console.log(result);
-  return;
-}).catch((err) => {
-  console.log('An error occured');
-  console.dir(err, {depth: null, colors: true});
-});
- ```
-
-### Create a Data Lake Analytics Account using callback pattern
-```javascript
-var util = require('util');
-var resourceGroupName = 'testrg';
-var accountName = 'testadlaacct';
-var location = 'eastus2';
-
-// A Data Lake Store account must already have been created to create
-// a Data Lake Analytics account. See the Data Lake Store readme for
-// information on doing so. For now, we assume one exists already.
-var datalakeStoreAccountName = 'existingadlsaccount';
-
-// account object to create
-var accountToCreate = {
-  tags: {
-    testtag1: 'testvalue1',
-    testtag2: 'testvalue2'
-  },
-  location: location,
-  defaultDataLakeStoreAccount: datalakeStoreAccountName,
-  dataLakeStoreAccounts: [
-    {
-      name: datalakeStoreAccountName
-    }
-  ]
-};
-
-client.account.create(resourceGroupName, accountName, accountToCreate, function (err, result, request, response) {
-  if (err) {
-    console.log(err);
-    /*err has reference to the actual request and response, so you can see what was sent and received on the wire.
-      The structure of err looks like this:
-      err: {
-        code: 'Error Code',
-        message: 'Error Message',
-        body: 'The response body if any',
-        request: reference to a stripped version of http request
-        response: reference to a stripped version of the response
-      }
-    */
-  } else {
-    console.log('result is: ' + util.inspect(result, {depth: null}));
-  }
-});
-```
-
-### Get a list of jobs using callback pattern
-
-```javascript
-var util = require('util');
-var accountName = 'testadlaacct';
-jobClient.job.list(accountName, function (err, result, request, response) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('result is: ' + util.inspect(result, {depth: null}));
-  }
-});
-```
-
-### Get a list of databases in the Data Lake Analytics Catalog using Promise that provides the HttpOperationResponse<T> wrapper
-```javascript
-var util = require('util');
-var accountName = 'testadlaacct';
-catalogClient.catalog.listDatabasesWithHttpOperationResponse(accountName).then((httpOperationResponse) => {
-  console.log('Deserialized Result (list of databases)');
-  console.dir(httpOperationResponse.body, {depth: null, colors: true});
-  console.log('Actual Request');
-  console.dir(httpOperationResponse.request, {depth: null, colors: true});
-  console.log('Raw Response');
-  console.dir(httpOperationResponse.response, {depth: 3, colors: true});
-}).catch((err) => {
-  console.log('An error occurred.');
-  console.dir(err, {depth: null, colors: true});
-});
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/azure/azure-sdk-for-node)
-- [Microsoft Azure SDK for Node.js - Data Lake Store Management](https://github.com/Azure/azure-sdk-for-node/tree/autorest/lib/services/dataLake.Store)
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-datalake-analytics.Recurrence |Class representing a Recurrence.|
+| @azure-arm-datalake-analytics.Pipeline |Class representing a Pipeline.|
+| @azure-arm-datalake-analytics.Job |Class representing a Job.|
+| @azure-arm-datalake-analytics.USqlJobProperties |U-SQL job properties used when submitting and retrieving U-SQL jobs.|
+| @azure-arm-datalake-analytics.JobStatisticsVertexStage |The Data Lake Analytics job statistics vertex stage information.|
+| @azure-arm-datalake-analytics.JobStatistics |The Data Lake Analytics job execution statistics.|
+| @azure-arm-datalake-analytics.JobStateAuditRecord |The Data Lake Analytics job state audit records for tracking the lifecycle
+of a job.|
+| @azure-arm-datalake-analytics.JobResource |The Data Lake Analytics job resources.|
+| @azure-arm-datalake-analytics.JobRelationshipProperties |Job relationship information properties including pipeline information,
+correlation information, etc.|
+| @azure-arm-datalake-analytics.JobRecurrenceInformationListResult |List of job recurrence information items.|
+| @azure-arm-datalake-analytics.JobRecurrenceInformation |Recurrence job information for a specific recurrence.|
+| @azure-arm-datalake-analytics.JobProperties |The common Data Lake Analytics job properties.|
+| @azure-arm-datalake-analytics.JobPipelineRunInformation |Run info for a specific job pipeline.|
+| @azure-arm-datalake-analytics.JobPipelineInformationListResult |List of job pipeline information items.|
+| @azure-arm-datalake-analytics.JobPipelineInformation |Job Pipeline Information, showing the relationship of jobs and recurrences
+of those jobs in a pipeline.|
+| @azure-arm-datalake-analytics.JobInnerError |The Data Lake Analytics job error details.|
+| @azure-arm-datalake-analytics.JobInformation |The common Data Lake Analytics job information properties.|
+| @azure-arm-datalake-analytics.JobInfoListResult |List of jobInfo items.|
+| @azure-arm-datalake-analytics.JobErrorDetails |The Data Lake Analytics job error details.|
+| @azure-arm-datalake-analytics.JobDataPath |A Data Lake Analytics job data path item.|
+| @azure-arm-datalake-analytics.HiveJobProperties |Hive job properties used when submitting and retrieving Hive jobs.|
+| @azure-arm-datalake-analytics.Diagnostics |Error diagnostic information for failed jobs.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsJobManagementClient |Class representing a DataLakeAnalyticsJobManagementClient.|
+| @azure-arm-datalake-analytics.Catalog |Class representing a Catalog.|
+| @azure-arm-datalake-analytics.USqlViewList |A Data Lake Analytics catalog U-SQL view item list.|
+| @azure-arm-datalake-analytics.USqlView |A Data Lake Analytics catalog U-SQL view item.|
+| @azure-arm-datalake-analytics.USqlTypeList |A Data Lake Analytics catalog U-SQL type item list.|
+| @azure-arm-datalake-analytics.USqlType |A Data Lake Analytics catalog U-SQL type item.|
+| @azure-arm-datalake-analytics.USqlTableValuedFunctionList |A Data Lake Analytics catalog U-SQL table valued function item list.|
+| @azure-arm-datalake-analytics.USqlTableValuedFunction |A Data Lake Analytics catalog U-SQL table valued function item.|
+| @azure-arm-datalake-analytics.USqlTableTypeList |A Data Lake Analytics catalog U-SQL table type item list.|
+| @azure-arm-datalake-analytics.USqlTableType |A Data Lake Analytics catalog U-SQL table type item.|
+| @azure-arm-datalake-analytics.USqlTableStatisticsList |A Data Lake Analytics catalog U-SQL table statistics item list.|
+| @azure-arm-datalake-analytics.USqlTableStatistics |A Data Lake Analytics catalog U-SQL table statistics item.|
+| @azure-arm-datalake-analytics.USqlTablePartitionList |A Data Lake Analytics catalog U-SQL table partition item list.|
+| @azure-arm-datalake-analytics.USqlTablePartition |A Data Lake Analytics catalog U-SQL table partition item.|
+| @azure-arm-datalake-analytics.USqlTableList |A Data Lake Analytics catalog U-SQL table item list.|
+| @azure-arm-datalake-analytics.USqlTableColumn |A Data Lake Analytics catalog U-SQL table column item.|
+| @azure-arm-datalake-analytics.USqlTable |A Data Lake Analytics catalog U-SQL table item.|
+| @azure-arm-datalake-analytics.USqlSecret |A Data Lake Analytics catalog U-SQL secret item.|
+| @azure-arm-datalake-analytics.USqlSchemaList |A Data Lake Analytics catalog U-SQL schema item list.|
+| @azure-arm-datalake-analytics.USqlSchema |A Data Lake Analytics catalog U-SQL schema item.|
+| @azure-arm-datalake-analytics.USqlProcedureList |A Data Lake Analytics catalog U-SQL procedure item list.|
+| @azure-arm-datalake-analytics.USqlProcedure |A Data Lake Analytics catalog U-SQL procedure item.|
+| @azure-arm-datalake-analytics.USqlPackageList |A Data Lake Analytics catalog U-SQL package item list.|
+| @azure-arm-datalake-analytics.USqlPackage |A Data Lake Analytics catalog U-SQL package item.|
+| @azure-arm-datalake-analytics.USqlIndex |A Data Lake Analytics catalog U-SQL table index item.|
+| @azure-arm-datalake-analytics.USqlExternalDataSourceList |A Data Lake Analytics catalog U-SQL external datasource item list.|
+| @azure-arm-datalake-analytics.USqlExternalDataSource |A Data Lake Analytics catalog U-SQL external datasource item.|
+| @azure-arm-datalake-analytics.USqlDistributionInfo |A Data Lake Analytics catalog U-SQL distribution information object.|
+| @azure-arm-datalake-analytics.USqlDirectedColumn |A Data Lake Analytics catalog U-SQL directed column item.|
+| @azure-arm-datalake-analytics.USqlDatabaseList |A Data Lake Analytics catalog U-SQL database item list.|
+| @azure-arm-datalake-analytics.USqlDatabase |A Data Lake Analytics catalog U-SQL database item.|
+| @azure-arm-datalake-analytics.USqlCredentialList |A Data Lake Analytics catalog U-SQL credential item list.|
+| @azure-arm-datalake-analytics.USqlCredential |A Data Lake Analytics catalog U-SQL credential item.|
+| @azure-arm-datalake-analytics.USqlAssemblyList |A Data Lake Analytics catalog U-SQL assembly CLR item list.|
+| @azure-arm-datalake-analytics.USqlAssemblyFileInfo |A Data Lake Analytics catalog U-SQL assembly file information item.|
+| @azure-arm-datalake-analytics.USqlAssemblyDependencyInfo |A Data Lake Analytics catalog U-SQL dependency information item.|
+| @azure-arm-datalake-analytics.USqlAssemblyClr |A Data Lake Analytics catalog U-SQL assembly CLR item.|
+| @azure-arm-datalake-analytics.USqlAssembly |A Data Lake Analytics catalog U-SQL Assembly.|
+| @azure-arm-datalake-analytics.TypeFieldInfo |A Data Lake Analytics catalog type field information item.|
+| @azure-arm-datalake-analytics.ExternalTable |A Data Lake Analytics catalog external table item.|
+| @azure-arm-datalake-analytics.EntityId |A Data Lake Analytics catalog entity identifier object.|
+| @azure-arm-datalake-analytics.DdlName |A Data Lake Analytics DDL name item.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters |Data Lake Analytics catalog secret creation and update parameters. This is
+deprecated and will be removed in the next release. Please use
+DataLakeAnalyticsCatalogCredentialCreateOrUpdateParameters instead.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsCatalogCredentialUpdateParameters |Data Lake Analytics catalog credential update parameters.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsCatalogCredentialDeleteParameters |Data Lake Analytics catalog credential deletion parameters.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsCatalogCredentialCreateParameters |Data Lake Analytics catalog credential creation parameters.|
+| @azure-arm-datalake-analytics.CatalogItemList |A Data Lake Analytics catalog item list.|
+| @azure-arm-datalake-analytics.CatalogItem |A Data Lake Analytics catalog item.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsCatalogManagementClient |Class representing a DataLakeAnalyticsCatalogManagementClient.|
+| @azure-arm-datalake-analytics.StorageAccounts |Class representing a StorageAccounts.|
+| @azure-arm-datalake-analytics.FirewallRules |Class representing a FirewallRules.|
+| @azure-arm-datalake-analytics.DataLakeStoreAccounts |Class representing a DataLakeStoreAccounts.|
+| @azure-arm-datalake-analytics.ComputePolicies |Class representing a ComputePolicies.|
+| @azure-arm-datalake-analytics.Account |Class representing a Account.|
+| @azure-arm-datalake-analytics.UpdateStorageAccountParameters |Storage account parameters for a storage account being updated in a Data
+Lake Analytics account.|
+| @azure-arm-datalake-analytics.UpdateFirewallRuleParameters |Data Lake Analytics firewall rule update parameters|
+| @azure-arm-datalake-analytics.SubResource |The Sub Resource model definition.|
+| @azure-arm-datalake-analytics.StorageContainer |Azure Storage blob container information.|
+| @azure-arm-datalake-analytics.StorageAccountInfo |Azure Storage account information.|
+| @azure-arm-datalake-analytics.SasTokenInfo |SAS token information.|
+| @azure-arm-datalake-analytics.Resource |The Resource model definition.|
+| @azure-arm-datalake-analytics.OptionalSubResource |The Resource model definition for a nested resource with no required
+properties.|
+| @azure-arm-datalake-analytics.ListStorageContainersResult |The list of blob containers associated with the storage account attached to
+the Data Lake Analytics account.|
+| @azure-arm-datalake-analytics.ListSasTokensResult |The SAS response that contains the storage account, container and associated
+SAS token for connection use.|
+| @azure-arm-datalake-analytics.FirewallRule |Data Lake Analytics firewall rule information|
+| @azure-arm-datalake-analytics.DataLakeStoreAccountInfo |Data Lake Store account information.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsFirewallRuleListResult |Data Lake Analytics firewall rule list information.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsAccountUpdateParameters |The parameters that can be used to update an existing Data Lake Analytics
+account.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsAccountListStorageAccountsResult |Azure Storage Account list information.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsAccountListResult |DataLakeAnalytics Account list information.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsAccountListDataLakeStoreResult |Data Lake Account list information.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsAccount |A Data Lake Analytics account object, containing all information associated
+with the named Data Lake Analytics account.|
+| @azure-arm-datalake-analytics.ComputePolicyListResult |The list of compute policies in the account.|
+| @azure-arm-datalake-analytics.ComputePolicyCreateOrUpdateParameters |The parameters used to create a new compute policy.|
+| @azure-arm-datalake-analytics.ComputePolicyAccountCreateParameters |The parameters used to create a new compute policy.|
+| @azure-arm-datalake-analytics.ComputePolicy |The parameters used to create a new compute policy.|
+| @azure-arm-datalake-analytics.AddStorageAccountParameters |Storage account parameters for a storage account being added to a Data Lake
+Analytics account.|
+| @azure-arm-datalake-analytics.AddDataLakeStoreParameters |Additional Data Lake Store parameters.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsAccountManagementClient |Class representing a DataLakeAnalyticsAccountManagementClient.|

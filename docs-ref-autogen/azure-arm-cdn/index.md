@@ -1,392 +1,57 @@
-# Microsoft Azure SDK for Node.js - Cdn
-
-This project provides a Node.js package for accessing the Azure Cdn Client. Right now it supports:
-- **Node.js version: 6.x.x or higher**
-- **API version: 2016-10-02**
-
-## Features
-- Manage Cdn Profile: create, update, delete, list, get.
-- Manage Cdn Endpoint: create, update, delete, list, get, start, stop validate custom domain.
-- Manage Cdn Origin: update, list, get.
-- Manage Cdn CustomDomain: creat, list, get, update.
-
-
-## Install from npm
-
-```
-npm install azure-arm-cdn
-```
-&nbsp;
-
-## How to Use
-
-### Authentication, client creation and listing profiles as an example
-
- ```javascript
- var msRestAzure = require('ms-rest-azure');
- var CDNManagementClient = require('azure-arm-cdn');
-
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin(function(err, credentials) {
-  var client = new CDNManagementClient(credentials, 'your-subscription-id');
-  client.profiles.listBySubscriptionId(function(err, result, request, response) {
-    if (err) console.log(err);
-    console.log(result);
-  });
- });
- ```
-
-### Profile operations
-```javascript
-//List profiles under a subscription-id
-client.profiles.listBySubscriptionId(function(err, result, request, response) {
-    if (err) {
-        console.log(err);
-    } else {
-		var profiles = result
-		console.log(profiles.length);
-	}
-});
-
-//List profiles by resource group
-client.profiles.listByResourceGroup("your-resource-group-name", function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    } else {
-		var profiles = result
-		console.log(profiles.length);
-	}
-});
-
-//Create profile under certain resource group
-var standardCreateParameters = {
-	location: 'West US',
-	tags: {
-	    tag1: 'val1',
-	    tag2: 'val2'
-	},
-	sku: {
-	    name: 'Standard'
-	}
-};
-
-client.profiles.create("your-resource-group-name", "your-profile-name", standardCreateParameters, function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    } else {
-		var profile = result;
-		console.log(profile.name);
-		console.log(profile.sku.name);
-	}
-});
-
-//Get profile resource usage
-client.profiles.listResourceUsage("your-resource-group-name", "your-profile-name", function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    } else {
-		var usages = result;
-		console.log(usages);
-	}
-});
-
-//Delete profile
-client.profiles.deleteIfExists("your-resource-group-name", "your-profile-name", function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    }
-});
-
-//update tags
-var tags = {
-	tag1: 'val1',
-	tag2: 'val2',
-	tag3: 'val3'
-};
-
-client.profiles.update("your-resource-group-name", "your-profile-name", tags, function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    } else {
-		var profile = result;
-		console.log(profile.tags.tag1);
-		console.log(profile.tags.tag2);
-		console.log(profile.tags.tag3);
-	}
-});
-
-//Generate sso uri
-client.profiles.generateSsoUri("your-resource-group-name", "your-profile-name", function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    } else {
-		console.log(result);
-	}
-});
-```
-
-### Endpoint operations
-```javascript
-//List endpoint by profile
-client.endpoints.listByProfile("your-resource-group-name", "your-profile-name", function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    } else {
-		var endpoints = result;
-		console.log(endpoints.length);
-	}
-});
-
-//Create endpoint (Automatic start this endpoint)
-var endpointProperties = {
-	location: 'West US',
-		tags: {
-		tag1: 'val1'
-	},
-	origins: [{
-		name: 'newname',
-		hostName: 'newname.azure.com'
-	}],
-  geoFilters : [
-    {
-      "relativePath": "/mycar",
-      "action": "Allow",
-      "countryCodes": [
-          "DZ"
-      ]
-    }
-  ]
-}
-
-client.endpoints.create("your-resource-group-name", "your-profile-name", "your-endpoint-name", endpointProperties, function(err, result, request, response) {
-    if (err) {
-        console.log(err);
-    } else {
-		var endpoint = result;
-		console.log(endpoint);
-	}
-});
-
-//Get endpoint resource usage
-client.endpoints.listResourceUsage("your-resource-group-name", "your-profile-name", "your-endpoint-name", function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    } else {
-		var usages = result;
-		console.log(usages);
-	}
-});
-
-//Update endpoint
-var newEndpointProperties = {
-	location: 'West US',
-	tags: {
-		tag1: 'val2',
-		tag2: 'val1'
-	}
-  }
-
-client.endpoints.update("your-resource-group-name", "your-profile-name", "your-endpoint-name", newEndpointProperties, function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    } else {
-		var endpoint = result;
-		console.log(endpoint);
-	}
-});
-
-//Get Endpoint
-client.endpoints.get("your-resource-group-name", "your-profile-name", "your-endpoint-name", function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    } else {
-		var endpoint = result;
-		console.log(endpoint);
-	}
-});
-
-//Purge Content
-var purgeContentPaths = [
-	'/movies/*',
-	'/pictures/pic1.jpg'
-]
-
-client.endpoints.purgeContent("your-resource-group-name", "your-profile-name", "your-endpoint-name", purgeContentPaths, function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    }
-});
-
-//Load Content
-var loadContentPaths = [
-	'/movies/amazing.mp4',
-	'/pictures/pic1.jpg'
-]
-
-client.endpoints.loadContent("your-resource-group-name", "your-profile-name", "your-endpoint-name", loadContentPaths, function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    }
-});
-
-//Stop
-client.endpoints.stop("your-resource-group-name", "your-profile-name", "your-endpoint-name", function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    }
-});
-
-//Start
-client.endpoints.start("your-resource-group-name", "your-profile-name", "your-endpoint-name", function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    }
-});
-
-//Validate custom domain
-client.endpoints.validateCustomDomain("your-resource-group-name", "your-profile-name", "your-endpoint-name", "your-hostName.whatever.com", function (err, result, request, response) {
-	if (err) {
-        console.log(err);
-    } else {
-		console.log(result.customDomainValidated);
-	}
-});
-
-//Delete endpoint
-client.endpoints.deleteIfExists("your-resource-group-name", "your-profile-name", "your-endpoint-name", function(err, result, request, response) {
-	if (err) {
-        console.log(err);
-    }
-});
-```
-
-### Origin operations
-```javascript
-//List Origins
-client.origins.listByEndpoint("your-resource-group-name", "your-profile-name", "your-endpoint-name", function (err, result, request, response) {
-	if (err) {
-		console.log(err);
-	} else {
-		var origins = result;
-		//...
-	}
-});
-
-//Get origin
-client.origins.get("your-resource-group-name", "your-profile-name", "your-endpoint-name", "your-origin-name", function (err, result, request, response) {
-	if (err) {
-		console.log(err);
-	} else {
-		var origin = result;
-		//...
-	}
-});
-
-//Update origin
-var updateParameters = {
-	hostName: "somename.helloworld.com",
-	httpPort: 9874,
-	httpsPort: 9090
-}
-client.origins.update("your-resource-group-name", "your-profile-name", "your-endpoint-name", "your-origin-name", updateParameters, function(err, result, request, response) {
-    if (err) {
-		console.log(err);
-	}
-}
-
-//Delete origin
-client.origins.deleteIfExists("your-resource-group-name", "your-profile-name", "your-endpoint-name", "your-origin-name", function (err, result, request, response) {
-	if (err) {
-		console.log(err);
-	}
-});
-```
-
-### Custom domain operations
-```javascript
-//List custom domain by endpoint
-client.customDomains.listByEndpoint("your-resource-group-name", "your-profile-name", "your-endpoint-name", function (err, result, request, response) {
-		if (err) {
-		console.log(err);
-	} else {
-		var customDomains = result;
-		//...
-	}
-});
-
-//Create custom domain
-client.customDomains.create("your-resource-group-name", "your-profile-name", "your-endpoint-name", "your-custom-domain-name", "customdomainhostname.hello.com", function (err, result, request, response) {
-	if (err) {
-		console.log(err);
-	}
-});
-
-//Get custom domain
-client.customDomains.get("your-resource-group-name", "your-profile-name", "your-endpoint-name", "your-custom-domain-name", function (err, result, request, response) {
-	if (err) {
-		console.log(err);
-	} else {
-		var customDomain = result;
-		//...
-	}
-});
-
-//Delete custom domain
-client.customDomains.deleteIfExists("your-resource-group-name", "your-profile-name", "your-endpoint-name", "your-custom-domain-name", function (err, result, request, response) {
-	if (err) {
-		console.log(err);
-	}
-});
-```
-
-### Check Name Availability (only works for endpoint now)
-```javascript
-client.nameAvailability.checkNameAvailability("your-endpoint-name", "Microsoft.Cdn/Profiles/Endpoints", function(err, result, request, response) {
-	if (err) {
-		console.log(err);
-	} else {
-		console.log(result.nameAvailable);
-	}
-});
-```
-
-### Get Operations
-```javascript
-client.operations.list(function(err, result, request, response) {
-	if (err) {
-		console.log(err);
-	} else {
-		console.log(result);
-	}
-});
-```
-
-### List edge nodes of Azure CDN
-```javascript
-client.edgeNodes.list(function(err, result, request, response) {
-	if (err) {
-		console.log(err);
-	} else {
-    ...
-	}
-});
-```
-
-### Get resource usage of subscription
-```javascript
-client.checkResourceUsage(function(err, result, request, response) {
-	if (err) {
-		console.log(err);
-	} else {
-    console.log(result);
-    ...
-	}
-});
-```
-
-## Related Projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/Azure/azure-sdk-for-node)
-- [AutoRest](https://github.com/Azure/autorest)
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-cdn.Profiles |Class representing a Profiles.|
+| @azure-arm-cdn.Origins |Class representing a Origins.|
+| @azure-arm-cdn.Endpoints |Class representing a Endpoints.|
+| @azure-arm-cdn.EdgeNodes |Class representing a EdgeNodes.|
+| @azure-arm-cdn.CustomDomains |Class representing a CustomDomains.|
+| @azure-arm-cdn.ValidateCustomDomainOutput |Output of custom domain validation.|
+| @azure-arm-cdn.ValidateCustomDomainInput |Input of the custom domain to be validated for DNS mapping.|
+| @azure-arm-cdn.SsoUri |SSO URI required to login to the supplemental portal.|
+| @azure-arm-cdn.Sku |The pricing tier (defines a CDN provider, feature list and rate) of the CDN
+profile.|
+| @azure-arm-cdn.ResourceUsageListResult |Output of check resource usage API.|
+| @azure-arm-cdn.ResourceUsage |Output of check resource usage API.|
+| @azure-arm-cdn.Resource |The Resource definition.|
+| @azure-arm-cdn.PurgeParameters |Parameters required for content purge.|
+| @azure-arm-cdn.ProfileUpdateParameters |Properties required to update a profile.|
+| @azure-arm-cdn.ProfileListResult |Result of the request to list profiles. It contains a list of profile
+objects and a URL link to get the the next set of results.|
+| @azure-arm-cdn.Profile |CDN profile represents the top level resource and the entry point into the
+CDN API. This allows users to set up a logical grouping of endpoints in
+addition to creating shared configuration settings and selecting pricing
+tiers and providers.|
+| @azure-arm-cdn.OriginUpdateParameters |Origin properties needed for origin creation or update.|
+| @azure-arm-cdn.OriginListResult |Result of the request to list origins. It contains a list of origin objects
+and a URL link to get the next set of results.|
+| @azure-arm-cdn.Origin |CDN origin is the source of the content being delivered via CDN. When the
+edge nodes represented by an endpoint do not have the requested content
+cached, they attempt to fetch it from one or more of the configured origins.|
+| @azure-arm-cdn.OperationListResult |Result of the request to list CDN operations. It contains a list of
+operations and a URL link to get the next set of results.|
+| @azure-arm-cdn.OperationDisplay |The object that represents the operation.|
+| @azure-arm-cdn.Operation |CDN REST API operation|
+| @azure-arm-cdn.LoadParameters |Parameters required for content load.|
+| @azure-arm-cdn.IpAddressGroup |CDN Ip address group|
+| @azure-arm-cdn.GeoFilter |Rules defining user geo access within a CDN endpoint.|
+| @azure-arm-cdn.ErrorResponse |Error reponse indicates CDN service is not able to process the incoming
+request. The reason is provided in the error message.|
+| @azure-arm-cdn.EndpointUpdateParameters |Properties required to create a new endpoint.|
+| @azure-arm-cdn.EndpointListResult |Result of the request to list endpoints. It contains a list of endpoint
+objects and a URL link to get the the next set of results.|
+| @azure-arm-cdn.Endpoint |CDN endpoint is the entity within a CDN profile containing configuration
+information such as origin, protocol, content caching and delivery behavior.
+The CDN endpoint uses the URL format <endpointname>.azureedge.net.|
+| @azure-arm-cdn.EdgenodeResult |Result of the request to list CDN edgenodes. It contains a list of ip
+address group and a URL link to get the next set of results.|
+| @azure-arm-cdn.EdgeNode |Edge node of CDN service.|
+| @azure-arm-cdn.DeepCreatedOrigin |Origin to be added when creating a CDN endpoint.|
+| @azure-arm-cdn.CustomDomainParameters |The customDomain JSON object required for custom domain creation or update.|
+| @azure-arm-cdn.CustomDomainListResult |Result of the request to list custom domains. It contains a list of custom
+domain objects and a URL link to get the next set of results.|
+| @azure-arm-cdn.CustomDomain |Customer provided domain for branding purposes, e.g. www.consoto.com.|
+| @azure-arm-cdn.CidrIpAddress |CIDR Ip address|
+| @azure-arm-cdn.CheckNameAvailabilityOutput |Output of check name availability API.|
+| @azure-arm-cdn.CheckNameAvailabilityInput |Input of CheckNameAvailability API.|
+| @azure-arm-cdn.CdnManagementClient |Class representing a CdnManagementClient.|

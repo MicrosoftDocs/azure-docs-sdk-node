@@ -1,38 +1,23 @@
-# Microsoft Azure SDK for Node.js - DNSManagement
-
-This project provides a Node.js package that makes it easy to manage Microsoft Azure DNS.
-## API-Version: 2016-04-01
-## Minimum node.js version >= 6.x.x
-
-## How to Install
-
-```bash
-npm install azure-arm-dns
-```
-
-## How to Use
-
-### Authentication, client creation and listing zones as an example
-
- ```javascript
- const msRestAzure = require('ms-rest-azure');
- const DNSManagement = require("azure-arm-dns");
- 
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin().then((credentials) => {
-   let client = new DNSManagement(credentials, 'your-subscription-id');
-   return client.zones.list();
- }).then((zones) => {
-  console.log('List of zones:');
-  console.dir(zones, {depth: null, colors: true});
-}).catch((err) => {
-   console.log('An error ocurred');
-   console.dir(err, {depth: null, colors: true});
- });
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/Azure/azure-sdk-for-node)
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-dns.Zones |Class representing a Zones.|
+| @azure-arm-dns.RecordSets |Class representing a RecordSets.|
+| @azure-arm-dns.ZoneListResult |The response to a Zone List or ListAll operation.|
+| @azure-arm-dns.ZoneDeleteResult |The response to a Zone Delete operation.|
+| @azure-arm-dns.Zone |Describes a DNS zone.|
+| @azure-arm-dns.TxtRecord |A TXT record.|
+| @azure-arm-dns.SrvRecord |An SRV record.|
+| @azure-arm-dns.SoaRecord |An SOA record.|
+| @azure-arm-dns.Resource |Class representing a Resource.|
+| @azure-arm-dns.RecordSetUpdateParameters |Parameters supplied to update a record set.|
+| @azure-arm-dns.RecordSetListResult |The response to a record set List operation.|
+| @azure-arm-dns.RecordSet |Describes a DNS record set (a collection of DNS records with the same name
+and type).|
+| @azure-arm-dns.PtrRecord |A PTR record.|
+| @azure-arm-dns.NsRecord |An NS record.|
+| @azure-arm-dns.MxRecord |An MX record.|
+| @azure-arm-dns.CnameRecord |A CNAME record.|
+| @azure-arm-dns.ARecord |An A record.|
+| @azure-arm-dns.AaaaRecord |An AAAA record.|
+| @azure-arm-dns.DnsManagementClient |Class representing a DnsManagementClient.|

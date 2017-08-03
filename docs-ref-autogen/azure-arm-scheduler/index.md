@@ -1,38 +1,38 @@
-# Microsoft Azure SDK for Node.js - SchedulerManagement
-
-This project provides a Node.js package that makes it easy to manage Microsoft Azure Scheduler.
-## API-Version: 2016-04-01
-## Minimum node.js version >= 6.x.x
-
-## How to Install
-
-```bash
-npm install azure-arm-scheduler
-```
-
-## How to Use
-
-### Authentication, client creation and listing zones as an example
-
- ```javascript
- const msRestAzure = require('ms-rest-azure');
- const SchedulerManagement = require("azure-arm-scheduler");
- 
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin().then((credentials) => {
-   let client = new SchedulerManagement(credentials, 'your-subscription-id');
-   return client.zones.list();
- }).then((zones) => {
-  console.log('List of zones:');
-  console.dir(zones, {depth: null, colors: true});
-}).catch((err) => {
-   console.log('An error ocurred');
-   console.dir(err, {depth: null, colors: true});
- });
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/Azure/azure-sdk-for-node)
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-scheduler.SchedulerManagementClient |Class representing a SchedulerManagementClient.|
+| @azure-arm-scheduler.Jobs |Class representing a Jobs.|
+| @azure-arm-scheduler.JobCollections |Class representing a JobCollections.|
+| @azure-arm-scheduler.StorageQueueMessage |Class representing a StorageQueueMessage.|
+| @azure-arm-scheduler.Sku |Class representing a Sku.|
+| @azure-arm-scheduler.ServiceBusTopicMessage |Class representing a ServiceBusTopicMessage.|
+| @azure-arm-scheduler.ServiceBusQueueMessage |Class representing a ServiceBusQueueMessage.|
+| @azure-arm-scheduler.ServiceBusMessage |Class representing a ServiceBusMessage.|
+| @azure-arm-scheduler.ServiceBusBrokeredMessageProperties |Class representing a ServiceBusBrokeredMessageProperties.|
+| @azure-arm-scheduler.ServiceBusAuthentication |Class representing a ServiceBusAuthentication.|
+| @azure-arm-scheduler.RetryPolicy |Class representing a RetryPolicy.|
+| @azure-arm-scheduler.OAuthAuthentication |Class representing a OAuthAuthentication.|
+| @azure-arm-scheduler.JobStatus |Class representing a JobStatus.|
+| @azure-arm-scheduler.JobStateFilter |Class representing a JobStateFilter.|
+| @azure-arm-scheduler.JobRecurrenceScheduleMonthlyOccurrence |Class representing a JobRecurrenceScheduleMonthlyOccurrence.|
+| @azure-arm-scheduler.JobRecurrenceSchedule |Class representing a JobRecurrenceSchedule.|
+| @azure-arm-scheduler.JobRecurrence |Class representing a JobRecurrence.|
+| @azure-arm-scheduler.JobProperties |Class representing a JobProperties.|
+| @azure-arm-scheduler.JobMaxRecurrence |Class representing a JobMaxRecurrence.|
+| @azure-arm-scheduler.JobListResult |Class representing a JobListResult.|
+| @azure-arm-scheduler.JobHistoryListResult |Class representing a JobHistoryListResult.|
+| @azure-arm-scheduler.JobHistoryFilter |Class representing a JobHistoryFilter.|
+| @azure-arm-scheduler.JobHistoryDefinitionProperties |Class representing a JobHistoryDefinitionProperties.|
+| @azure-arm-scheduler.JobHistoryDefinition |Class representing a JobHistoryDefinition.|
+| @azure-arm-scheduler.JobErrorAction |Class representing a JobErrorAction.|
+| @azure-arm-scheduler.JobDefinition |Class representing a JobDefinition.|
+| @azure-arm-scheduler.JobCollectionQuota |Class representing a JobCollectionQuota.|
+| @azure-arm-scheduler.JobCollectionProperties |Class representing a JobCollectionProperties.|
+| @azure-arm-scheduler.JobCollectionListResult |Class representing a JobCollectionListResult.|
+| @azure-arm-scheduler.JobCollectionDefinition |Class representing a JobCollectionDefinition.|
+| @azure-arm-scheduler.JobAction |Class representing a JobAction.|
+| @azure-arm-scheduler.HttpRequest |Class representing a HttpRequest.|
+| @azure-arm-scheduler.HttpAuthentication |Class representing a HttpAuthentication.|
+| @azure-arm-scheduler.ClientCertAuthentication |Class representing a ClientCertAuthentication.|
+| @azure-arm-scheduler.BasicAuthentication |Class representing a BasicAuthentication.|

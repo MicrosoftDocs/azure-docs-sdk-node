@@ -1,113 +1,30 @@
-# Microsoft Azure SDK for Node.js - Redis
-
-This project provides a Node.js package for accessing the Azure Redis Cache Client. Right now it supports:
-- **Node.js version: 6.x.x or higher**
-- **API version: 2016-04-01**
-
-## Features
-- Manage Redis Cache: create, update, delete, list, get, regenerate key and get-key.
-
-## How to Install
-
-```bash
-npm install azure-arm-rediscache
-```
-
-## How to Use
-
-### Authentication, client creation and listing redis caches in a resource group as an example
-
- ```javascript
- var msRestAzure = require('ms-rest-azure');
- var AzureMgmtRedisCache = require('azure-arm-rediscache');
-
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin(function(err, credentials) {
-  var client = new AzureMgmtRedisCache(credentials, subscriptionId);
-  client.redis.listByResourceGroup(resourceGroup, workspaceCollectionName, function(err, result, request, response) {
-    if (err) console.log(err);
-    console.log(result);
-  });
- });
- ```
-
-#### Managing a RedisCache
-```javascript
-var client = new AzureMgmtRedisCache(credentials, 'your-subscription-id');
-
-var resourceGroup = 'myResourceGroup';
-var cacheName = 'myNewCache';
-
-//Create an Azure Redis Cache
-
-var skuProperties = {
-    capacity : 1,
-    family : C,
-    name : 'Standard'
-  };
-    
-var parameters = {
-    location:'West US',
-    redisVersion : '3.0',
-    enableNonSslPort : false,
-    sku : skuProperties
-  };
-
-console.info('Creating cache...');
-client.redis.createOrUpdate(resourceGroup, cacheName, parameters, function (err, result) {
-  if (err) throw err;
-  console.info('Cache created: ' + JSON.stringify(result, null, ' '));
-});
-
-
-//Show properties of an existing Azure Redis Cache
-
-console.info('Getting cache properties...');
-client.redis.get(resourceGroup, cacheName, function (err, result) {
-  if (err) throw err;
-  console.info('Cache properties: ' + JSON.stringify(result, null, ' '));
-});
-
-
-//list all caches within a resource group
-
-console.info('Getting caches within a resource group...');
-client.redis.listByResourceGroup(resourceGroup, function (err, result) {
-  if (err) throw err;
-  console.info('Caches: ' + JSON.stringify(result, null, ' '));
-});
-
-//list all caches within your subscription
-
-console.info('Getting caches within a subscription...');
-client.redis.list(function (err, result) {
-  if (err) throw err;
-  console.info('Caches: ' + JSON.stringify(result, null, ' '));
-});
-
-//show primary and secondary keys of the cache
-
-console.info('Getting cache keys...');
-client.redis.listKeys(resourceGroup, cacheName, function (err, result) {
-  if (err) throw err;
-  console.info('Cache keys: ' + JSON.stringify(result, null, ' '));
-});
-
-
-//regenerate  keys of the cache
-
-var keytype = 'Primary';
-console.info('Getting cache keys...');
-client.redis.regenerateKey(resourceGroup, cacheName, keytype, function (err, result) {
-  if (err) throw err;
-  console.info('Cache primary key regenerated');
-  console.info('Regenerated Cache keys: ' + JSON.stringify(result, null, ' '));
-});
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/Azure/azure-sdk-for-node)
-- [AutoRest](https://github.com/Azure/autorest)
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-rediscache.RedisManagementClient |Class representing a RedisManagementClient.|
+| @azure-arm-rediscache.RedisFirewallRuleOperations |Class representing a RedisFirewallRuleOperations.|
+| @azure-arm-rediscache.Redis |Class representing a Redis.|
+| @azure-arm-rediscache.PatchSchedules |Class representing a PatchSchedules.|
+| @azure-arm-rediscache.Operations |Class representing a Operations.|
+| @azure-arm-rediscache.FirewallRules |Class representing a FirewallRules.|
+| @azure-arm-rediscache.Sku |SKU parameters supplied to the create Redis operation.|
+| @azure-arm-rediscache.ScheduleEntry |Patch schedule entry for a Premium Redis Cache.|
+| @azure-arm-rediscache.Resource |The Resource definition.|
+| @azure-arm-rediscache.RedisUpdateParameters |Parameters supplied to the Update Redis operation.|
+| @azure-arm-rediscache.RedisResource |A single Redis item in List or Get Operation.|
+| @azure-arm-rediscache.RedisRegenerateKeyParameters |Specifies which Redis access keys to reset.|
+| @azure-arm-rediscache.RedisRebootParameters |Specifies which Redis node(s) to reboot.|
+| @azure-arm-rediscache.RedisPatchSchedule |Response to put/get patch schedules for Redis cache.|
+| @azure-arm-rediscache.RedisListResult |The response of list Redis operation.|
+| @azure-arm-rediscache.RedisForceRebootResponse |Response to force reboot for Redis cache.|
+| @azure-arm-rediscache.RedisFirewallRuleListResult |The response of list firewall rules Redis operation.|
+| @azure-arm-rediscache.RedisFirewallRule |A firewall rule on a redis cache has a name, and describes a contiguous
+range of IP addresses permitted to connect|
+| @azure-arm-rediscache.RedisCreateParameters |Parameters supplied to the Create Redis operation.|
+| @azure-arm-rediscache.RedisAccessKeys |Redis cache access keys.|
+| @azure-arm-rediscache.OperationListResult |Result of the request to list REST API operations. It contains a list of
+operations and a URL nextLink to get the next set of results.|
+| @azure-arm-rediscache.OperationDisplay |The object that describes the operation.|
+| @azure-arm-rediscache.Operation |REST API operation|
+| @azure-arm-rediscache.ImportRDBParameters |Parameters for Redis import operation.|
+| @azure-arm-rediscache.ExportRDBParameters |Parameters for Redis export operation.|

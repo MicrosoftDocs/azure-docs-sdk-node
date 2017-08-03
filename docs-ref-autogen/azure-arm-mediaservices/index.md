@@ -1,38 +1,17 @@
-# Microsoft Azure SDK for Node.js - MediaServicesManagement
-
-This project provides a Node.js package that makes it easy to manage Microsoft Azure MediaServices.
-## API-Version: 2015-10-01
-## Minimum node.js version >= 6.x.x
-
-## How to Install
-
-```bash
-npm install azure-arm-mediaservice
-```
-
-## How to Use
-
-### Authentication, client creation and listing mediaServices as an example
-
- ```javascript
- const msRestAzure = require('ms-rest-azure');
- const MediaServicesManagement = require('azure-arm-mediaservices');
- 
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin().then((credentials) => {
-   let client = new MediaServicesManagement(credentials, 'your-subscription-id');
-   return client.mediaServiceOperations.listByResourceGroup('testrg');
- }).then((mediaServices) => {
-  console.log('List of zones:');
-  console.dir(mediaServices, {depth: null, colors: true});
-}).catch((err) => {
-   console.log('An error ocurred');
-   console.dir(err, {depth: null, colors: true});
- });
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/Azure/azure-sdk-for-node)
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-mediaservices.MediaServiceOperations |Class representing a MediaServiceOperations.|
+| @azure-arm-mediaservices.SyncStorageKeysInput |The request  body for a SyncStorageKeys API.|
+| @azure-arm-mediaservices.StorageAccount |The properties of a storage account associated with this resource.|
+| @azure-arm-mediaservices.ServiceKeys |The response body for a ListKeys API.|
+| @azure-arm-mediaservices.Resource |The Azure Resource Manager resource.|
+| @azure-arm-mediaservices.RegenerateKeyOutput |The response body for a RegenerateKey API.|
+| @azure-arm-mediaservices.RegenerateKeyInput |The request body for a RegenerateKey API.|
+| @azure-arm-mediaservices.MediaServiceCollection |The collection of Media Service resources.|
+| @azure-arm-mediaservices.MediaService |The properties of a Media Service resource.|
+| @azure-arm-mediaservices.CheckNameAvailabilityOutput |The response body for CheckNameAvailability API.|
+| @azure-arm-mediaservices.CheckNameAvailabilityInput |The request body for CheckNameAvailability API.|
+| @azure-arm-mediaservices.ApiError |The error returned from a failed Media Services REST API call.|
+| @azure-arm-mediaservices.ApiEndpoint |The properties for a Media Services REST API endpoint.|
+| @azure-arm-mediaservices.MediaServicesManagementClient |Class representing a MediaServicesManagementClient.|

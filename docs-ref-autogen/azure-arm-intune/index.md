@@ -1,39 +1,33 @@
-# Microsoft Azure SDK for Node.js - Intune
-
-This project provides a Node.js package that makes it easy to manage Microsoft Intune Resources. Right now it supports:
-- **Node.js version: 6.x.x or higher**
-- **API version: 2015-01-14-preview**
-
-## Features
-
- - TODO
-
-## How to Install
-
-```bash
-npm install azure-arm-intune
-```
-
-## How to Use
-
-### Authentication, client creation and getting location by hostname
-
- ```javascript
- var msRestAzure = require('ms-rest-azure');
- var IntuneResourceManagementClient = require('azure-arm-intune');
-
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin(function(err, credentials) {
-  var client = new IntuneResourceManagementClient(credentials);
-  client.getLocationByHostName(null, function(error, result, request, response) {
-    if (err) console.log(err);
-    console.log(result);
-  });
- });
- ```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js - All-up](https://github.com/WindowsAzure/azure-sdk-for-node)
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-intune.Ios |Class representing a Ios.|
+| @azure-arm-intune.Android |Class representing a Android.|
+| @azure-arm-intune.WipeDeviceOperationResult |Device entity for Intune.|
+| @azure-arm-intune.StatusesDefault |Default Statuses entity for the given tenant.|
+| @azure-arm-intune.Resource |Class representing a Resource.|
+| @azure-arm-intune.OperationResultCollection |Class representing a OperationResultCollection.|
+| @azure-arm-intune.OperationResult |OperationResult entity for Intune.|
+| @azure-arm-intune.OperationMetadataProperties |Class representing a OperationMetadataProperties.|
+| @azure-arm-intune.MAMPolicyProperties |Class representing a MAMPolicyProperties.|
+| @azure-arm-intune.MAMPolicyAppOrGroupIdProperties |Android Policy request body for Intune MAM.|
+| @azure-arm-intune.MAMPolicyAppIdOrGroupIdPayload |MAM Policy request body for properties Intune MAM.|
+| @azure-arm-intune.LocationCollection |Class representing a LocationCollection.|
+| @azure-arm-intune.Location |Location entity for given tenant.|
+| @azure-arm-intune.IOSMAMPolicyCollection |Class representing a IOSMAMPolicyCollection.|
+| @azure-arm-intune.IOSMAMPolicy |iOS Policy entity for Intune MAM.|
+| @azure-arm-intune.GroupsCollection |Class representing a GroupsCollection.|
+| @azure-arm-intune.GroupItem |Group entity for Intune MAM.|
+| @azure-arm-intune.FlaggedUserCollection |Flagged user collection for the given tenant.|
+| @azure-arm-intune.FlaggedUser |Flagged user for the given tenant.|
+| @azure-arm-intune.FlaggedEnrolledAppError |Class representing a FlaggedEnrolledAppError.|
+| @azure-arm-intune.FlaggedEnrolledAppCollection |Flagged Enrolled App collection for the given tenant.|
+| @azure-arm-intune.FlaggedEnrolledApp |Flagged Enrolled App for the given tenant.|
+| @azure-arm-intune.ErrorModel |Class representing a ErrorModel.|
+| @azure-arm-intune.DeviceCollection |Class representing a DeviceCollection.|
+| @azure-arm-intune.Device |Device entity for Intune.|
+| @azure-arm-intune.ApplicationCollection |Class representing a ApplicationCollection.|
+| @azure-arm-intune.Application |Application entity for Intune MAM.|
+| @azure-arm-intune.AndroidMAMPolicyCollection |Class representing a AndroidMAMPolicyCollection.|
+| @azure-arm-intune.AndroidMAMPolicy |Android Policy entity for Intune MAM.|
+| @azure-arm-intune.IntuneResourceManagementClient |Class representing a IntuneResourceManagementClient.|

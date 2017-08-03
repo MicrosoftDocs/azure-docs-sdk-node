@@ -1,41 +1,21 @@
-# Microsoft Azure SDK for Node.js - DocumentDBManagement
-
-This project provides a Node.js package for accessing Azure. Right now it supports:
-- **Node.js version: 6.x.x or higher**
-- **API version: 2015-04-08**
-
-## Features
-
-
-## How to Install
-
-```bash
-npm install azure-arm-documentdb
-```
-
-## How to Use
-
-### Authentication, client creation and listing databaseAccounts as an example
-
- ```javascript
- const msRestAzure = require('ms-rest-azure');
- const DocumentDBManagement = require("azure-arm-documentdb");
- 
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin().then((credentials) => {
-   let client = new DocumentDBManagement(credentials, 'your-subscription-id');
-   return client.databaseAccounts.list();
- }).then((databaseAccounts) => {
-  console.log('List of databaseAccounts:');
-  console.dir(databaseAccounts, {depth: null, colors: true});
-}).catch((err) => {
-   console.log('An error ocurred');
-   console.dir(err, {depth: null, colors: true});
- });
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/Azure/azure-sdk-for-node)
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-documentdb.DatabaseAccounts |Class representing a DatabaseAccounts.|
+| @azure-arm-documentdb.Resource |A database account resource.|
+| @azure-arm-documentdb.Location |A region in which the Azure DocumentDB database account is deployed.|
+| @azure-arm-documentdb.FailoverPolicy |The failover policy for a given region of a database account.|
+| @azure-arm-documentdb.FailoverPolicies |The list of new failover policies for the failover priority change.|
+| @azure-arm-documentdb.DatabaseAccountsListResult |The List operation response, that contains the database accounts and their
+properties.|
+| @azure-arm-documentdb.DatabaseAccountRegenerateKeyParameters |Parameters to regenerate the keys within the database account.|
+| @azure-arm-documentdb.DatabaseAccountPatchParameters |Parameters for patching Azure DocumentDB database account properties.|
+| @azure-arm-documentdb.DatabaseAccountListReadOnlyKeysResult |The read-only access keys for the given database account.|
+| @azure-arm-documentdb.DatabaseAccountListKeysResult |The access keys for the given database account.|
+| @azure-arm-documentdb.DatabaseAccountListConnectionStringsResult |The connection strings for the given database account.|
+| @azure-arm-documentdb.DatabaseAccountCreateUpdateParameters |Parameters to create and update DocumentDB database accounts.|
+| @azure-arm-documentdb.DatabaseAccountConnectionString |Connection string for the DocumentDB account|
+| @azure-arm-documentdb.DatabaseAccount |A DocumentDB database account.|
+| @azure-arm-documentdb.ConsistencyPolicy |The consistency policy for the DocumentDB database account.|
+| @azure-arm-documentdb.DocumentdbManagementClient |Initializes a new instance of the DocumentdbManagementClient class.|
+| @azure-arm-documentdb.DocumentDB |Class representing a DocumentDB.|

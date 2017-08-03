@@ -1,85 +1,13 @@
-# Microsoft Azure SDK for Node.js - AnalysisServices
-
-This project provides a Node.js package for accessing the Azure PAS. Right now it supports:
-- **Node.js version: 6.x.x or higher**
-- **API version: 2016-05-16**
-
-## Features
-
-
-## How to Install
-
-```bash
-npm install azure-arm-analysisservices
-```
-
-## How to Use
-
-### Authentication, client creation and listing role assignments as an example
-
- ```javascript
- var msRestAzure = require('ms-rest-azure');
- var analysisServicesManagement = require("azure-arm-analysisservices");
- 
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin(function(err, credentials) {
-  var client = new azureARMAnalysisServices.AnalysisServicesManagementClient(credentials, 'your-subscription-id');
-
-  var util = require('util');
-  var resourceGroupName = 'testrg';
-  var serverName = 'testadlsacct';
-  var location = 'eastus2';
-
-  client.servers.list(function(err, result) {
-    if (err) console.log(err);
-    console.log(result);
-  });
-
-  // account object to create
-  var serverToCreate = {
-    sku: {
-        name: "S1",
-        tier: "Standard"
-    },    
-    tags: {
-      testtag1: 'testvalue1',
-      testtag2: 'testvalue2'
-    },
-    name: serverName,
-    location: location,
-    properties: {
-      provisioningState: "Succeeded",
-      serverFullName: "asazure://stabletest.asazure-int.windows.net/upgradevalidation",
-      asAdministrators: {
-        members: [
-          "aztest0@stabletest.ccsctp.net"
-        ]
-      }
-    }
-  };
-
-  client.servers.create(resourceGroupName, serverName, serverToCreate, function (err, result) {
-    if (err) {
-      console.log(err);
-      /*err has reference to the actual request and response, so you can see what was sent and received on the wire.
-        The structure of err looks like this:
-        err: {
-          code: 'Error Code',
-          message: 'Error Message',
-          body: 'The response body if any',
-          request: reference to a stripped version of http request
-          response: reference to a stripped version of the response
-        }
-      */
-    } else {
-      console.log('result is: ' + util.inspect(result, {depth: null}));
-    }
-  });
- });
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/Azure/azure-sdk-for-node)
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-analysisservices.Servers |Class representing a Servers.|
+| @azure-arm-analysisservices.ServerAdministrators |An array of administrator user identities|
+| @azure-arm-analysisservices.ResourceSku |Represents the SKU name and Azure pricing tier for Analysis Services
+resource.|
+| @azure-arm-analysisservices.Resource |Represents an instance of an Analysis Services resource.|
+| @azure-arm-analysisservices.BackupConfiguration |An object that represents backup configurations|
+| @azure-arm-analysisservices.AnalysisServicesServerUpdateParameters |Provision request specification|
+| @azure-arm-analysisservices.AnalysisServicesServers |An array of Analysis Services resources.|
+| @azure-arm-analysisservices.AnalysisServicesServer |Represents an instance of an Analysis Services resource.|
+| @azure-arm-analysisservices.AnalysisServicesManagementClient |Class representing a AnalysisServicesManagementClient.|

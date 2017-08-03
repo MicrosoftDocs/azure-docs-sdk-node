@@ -37,14 +37,13 @@ This example retrieves your estimated Azure consumption data for a selected time
 const msRestAzure = require('ms-rest-azure');
 const CommerceManagement = require('azure-arm-commerce');
 
-const subscriptionId = 'your-subscription-id';
-
 const endDate = new Date();
-endDate.setUTCHours(0,0,0,0);
+endDate.setUTCHours(0, 0, 0, 0);
 const startDate = new Date();
 startDate.setMonth(startDate.getMonth() - 1);
-startDate.setUTCHours(0,0,0,0);
+startDate.setUTCHours(0, 0, 0, 0);
 
+const subscriptionId = 'your-subscription-id';
 const usageOptions = {
   showDetails: true,
   granularity: 'Daily'
@@ -54,12 +53,7 @@ msRestAzure
   .interactiveLogin()
   .then(credentials => {
     const client = new CommerceManagement(credentials, subscriptionId);
-
-    return client.usageAggregates.list(
-      startDate,
-      endDate,
-      usageOptions
-    );
+    return client.usageAggregates.list(startDate, endDate, usageOptions);
   })
   .then(usage => {
     console.dir(usage, { depth: null, colors: true });

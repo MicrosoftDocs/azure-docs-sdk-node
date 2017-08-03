@@ -31,7 +31,7 @@ npm install azure-arm-commerce
 
 ### Example
 
-This example retrieves your estimated Azure consumption data for a selected time period.
+This example retrieves your estimated Azure consumption data for the last month.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

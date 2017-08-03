@@ -1,3 +1,4 @@
+# Package azure-arm-operationalinsights
 ## Classes
 | Class Name | Description |
 |---|---|

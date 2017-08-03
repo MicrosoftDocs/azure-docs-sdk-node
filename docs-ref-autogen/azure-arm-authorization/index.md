@@ -1,3 +1,4 @@
+# Package azure-arm-authorization
 ## Classes
 | Class Name | Description |
 |---|---|

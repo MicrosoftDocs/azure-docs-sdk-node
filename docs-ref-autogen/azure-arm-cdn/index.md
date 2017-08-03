@@ -1,3 +1,4 @@
+# Package azure-arm-cdn
 ## Classes
 | Class Name | Description |
 |---|---|

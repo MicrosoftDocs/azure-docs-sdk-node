@@ -1,3 +1,4 @@
+# Package azure-arm-logic
 ## Classes
 | Class Name | Description |
 |---|---|

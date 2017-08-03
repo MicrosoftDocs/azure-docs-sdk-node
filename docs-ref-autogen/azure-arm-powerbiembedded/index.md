@@ -1,3 +1,4 @@
+# Package azure-arm-powerbiembedded
 ## Classes
 | Class Name | Description |
 |---|---|

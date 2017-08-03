@@ -1,3 +1,4 @@
+# Package azure-arm-hdinsight
 ## Classes
 | Class Name | Description |
 |---|---|

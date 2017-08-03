@@ -1,3 +1,4 @@
+# Package azure-arm-cognitiveservices
 ## Classes
 | Class Name | Description |
 |---|---|

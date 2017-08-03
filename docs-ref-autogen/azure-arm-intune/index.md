@@ -1,3 +1,4 @@
+# Package azure-arm-intune
 ## Classes
 | Class Name | Description |
 |---|---|

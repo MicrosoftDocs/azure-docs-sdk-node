@@ -1,3 +1,4 @@
+# Package azure-arm-resource
 ## Classes
 | Class Name | Description |
 |---|---|

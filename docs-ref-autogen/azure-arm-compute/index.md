@@ -1,3 +1,4 @@
+# Package azure-arm-compute
 ## Classes
 | Class Name | Description |
 |---|---|

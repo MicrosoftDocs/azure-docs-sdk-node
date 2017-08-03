@@ -1,3 +1,4 @@
+# Package azure-arm-trafficmanager
 ## Classes
 | Class Name | Description |
 |---|---|

@@ -1,3 +1,4 @@
+# Package azure-arm-search
 ## Classes
 | Class Name | Description |
 |---|---|

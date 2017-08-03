@@ -1,3 +1,4 @@
+# Package azure-arm-notificationhubs
 ## Classes
 | Class Name | Description |
 |---|---|

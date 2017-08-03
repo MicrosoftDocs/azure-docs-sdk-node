@@ -1,3 +1,4 @@
+# Package azure-arm-analysisservices
 ## Classes
 | Class Name | Description |
 |---|---|

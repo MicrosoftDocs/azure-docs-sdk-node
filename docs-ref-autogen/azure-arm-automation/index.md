@@ -1,3 +1,4 @@
+# Package azure-arm-automation
 ## Classes
 | Class Name | Description |
 |---|---|

@@ -1,3 +1,4 @@
+# Package azure-arm-hdinsight-jobs
 ## Classes
 | Class Name | Description |
 |---|---|

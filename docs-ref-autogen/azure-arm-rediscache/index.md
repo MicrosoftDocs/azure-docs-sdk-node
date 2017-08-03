@@ -1,3 +1,4 @@
+# Package azure-arm-rediscache
 ## Classes
 | Class Name | Description |
 |---|---|

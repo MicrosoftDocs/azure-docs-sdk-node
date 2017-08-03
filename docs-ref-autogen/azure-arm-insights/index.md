@@ -1,3 +1,4 @@
+# Package azure-arm-insights
 ## Classes
 | Class Name | Description |
 |---|---|

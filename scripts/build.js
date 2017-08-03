@@ -46,11 +46,6 @@ function buildTocItems(keys, relativePathToRootFolder) {
   });
 }
 
-function generatePackageIndex(packageDirPath, packageIndexName, packageName) {
-  var packageIndexPath = packageDirPath.trim('/') + '/' + packageIndexName;
-  fs.writeFileSync(packageIndexPath, '#Package ' + packageName + '\r\n');
-}
-
 function generatePackageDoc(packagePath, configPath, dest, resetInclude, whiteList, repo) {
   var config = fse.readJsonSync(configPath);
   var dir = path.dirname(packagePath);
@@ -69,7 +64,6 @@ function generatePackageDoc(packagePath, configPath, dest, resetInclude, whiteLi
   }
   fse.writeJsonSync(tempConfigPath, config);
   child_process.execFileSync('node', ['node_modules/node2docfx/node2docfx.js', tempConfigPath]);
-  generatePackageIndex(dir, packageIndexName, packageName);
   console.log('Finish generating YAML files for ' + packageName);
 }
 

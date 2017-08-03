@@ -39,7 +39,6 @@ const CommerceManagement = require('azure-arm-commerce');
 
 const subscriptionId = 'your-subscription-id';
 
-// Generate an end date of today and a start date of a month ago
 const endDate = new Date();
 endDate.setUTCHours(0,0,0,0);
 const startDate = new Date();

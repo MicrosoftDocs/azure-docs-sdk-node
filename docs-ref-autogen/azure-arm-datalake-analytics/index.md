@@ -7,18 +7,15 @@
 | @azure-arm-datalake-analytics.USqlJobProperties |U-SQL job properties used when submitting and retrieving U-SQL jobs.|
 | @azure-arm-datalake-analytics.JobStatisticsVertexStage |The Data Lake Analytics job statistics vertex stage information.|
 | @azure-arm-datalake-analytics.JobStatistics |The Data Lake Analytics job execution statistics.|
-| @azure-arm-datalake-analytics.JobStateAuditRecord |The Data Lake Analytics job state audit records for tracking the lifecycle
-of a job.|
+| @azure-arm-datalake-analytics.JobStateAuditRecord |The Data Lake Analytics job state audit records for tracking the lifecycle of a job.|
 | @azure-arm-datalake-analytics.JobResource |The Data Lake Analytics job resources.|
-| @azure-arm-datalake-analytics.JobRelationshipProperties |Job relationship information properties including pipeline information,
-correlation information, etc.|
+| @azure-arm-datalake-analytics.JobRelationshipProperties |Job relationship information properties including pipeline information, correlation information, etc.|
 | @azure-arm-datalake-analytics.JobRecurrenceInformationListResult |List of job recurrence information items.|
 | @azure-arm-datalake-analytics.JobRecurrenceInformation |Recurrence job information for a specific recurrence.|
 | @azure-arm-datalake-analytics.JobProperties |The common Data Lake Analytics job properties.|
 | @azure-arm-datalake-analytics.JobPipelineRunInformation |Run info for a specific job pipeline.|
 | @azure-arm-datalake-analytics.JobPipelineInformationListResult |List of job pipeline information items.|
-| @azure-arm-datalake-analytics.JobPipelineInformation |Job Pipeline Information, showing the relationship of jobs and recurrences
-of those jobs in a pipeline.|
+| @azure-arm-datalake-analytics.JobPipelineInformation |Job Pipeline Information, showing the relationship of jobs and recurrences of those jobs in a pipeline.|
 | @azure-arm-datalake-analytics.JobInnerError |The Data Lake Analytics job error details.|
 | @azure-arm-datalake-analytics.JobInformation |The common Data Lake Analytics job information properties.|
 | @azure-arm-datalake-analytics.JobInfoListResult |List of jobInfo items.|
@@ -68,9 +65,7 @@ of those jobs in a pipeline.|
 | @azure-arm-datalake-analytics.ExternalTable |A Data Lake Analytics catalog external table item.|
 | @azure-arm-datalake-analytics.EntityId |A Data Lake Analytics catalog entity identifier object.|
 | @azure-arm-datalake-analytics.DdlName |A Data Lake Analytics DDL name item.|
-| @azure-arm-datalake-analytics.DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters |Data Lake Analytics catalog secret creation and update parameters. This is
-deprecated and will be removed in the next release. Please use
-DataLakeAnalyticsCatalogCredentialCreateOrUpdateParameters instead.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsCatalogSecretCreateOrUpdateParameters |Data Lake Analytics catalog secret creation and update parameters. This is deprecated and will be removed in the next release. Please use DataLakeAnalyticsCatalogCredentialCreateOrUpdateParameters instead.|
 | @azure-arm-datalake-analytics.DataLakeAnalyticsCatalogCredentialUpdateParameters |Data Lake Analytics catalog credential update parameters.|
 | @azure-arm-datalake-analytics.DataLakeAnalyticsCatalogCredentialDeleteParameters |Data Lake Analytics catalog credential deletion parameters.|
 | @azure-arm-datalake-analytics.DataLakeAnalyticsCatalogCredentialCreateParameters |Data Lake Analytics catalog credential creation parameters.|
@@ -82,35 +77,28 @@ DataLakeAnalyticsCatalogCredentialCreateOrUpdateParameters instead.|
 | @azure-arm-datalake-analytics.DataLakeStoreAccounts |Class representing a DataLakeStoreAccounts.|
 | @azure-arm-datalake-analytics.ComputePolicies |Class representing a ComputePolicies.|
 | @azure-arm-datalake-analytics.Account |Class representing a Account.|
-| @azure-arm-datalake-analytics.UpdateStorageAccountParameters |Storage account parameters for a storage account being updated in a Data
-Lake Analytics account.|
+| @azure-arm-datalake-analytics.UpdateStorageAccountParameters |Storage account parameters for a storage account being updated in a Data Lake Analytics account.|
 | @azure-arm-datalake-analytics.UpdateFirewallRuleParameters |Data Lake Analytics firewall rule update parameters|
 | @azure-arm-datalake-analytics.SubResource |The Sub Resource model definition.|
 | @azure-arm-datalake-analytics.StorageContainer |Azure Storage blob container information.|
 | @azure-arm-datalake-analytics.StorageAccountInfo |Azure Storage account information.|
 | @azure-arm-datalake-analytics.SasTokenInfo |SAS token information.|
 | @azure-arm-datalake-analytics.Resource |The Resource model definition.|
-| @azure-arm-datalake-analytics.OptionalSubResource |The Resource model definition for a nested resource with no required
-properties.|
-| @azure-arm-datalake-analytics.ListStorageContainersResult |The list of blob containers associated with the storage account attached to
-the Data Lake Analytics account.|
-| @azure-arm-datalake-analytics.ListSasTokensResult |The SAS response that contains the storage account, container and associated
-SAS token for connection use.|
+| @azure-arm-datalake-analytics.OptionalSubResource |The Resource model definition for a nested resource with no required properties.|
+| @azure-arm-datalake-analytics.ListStorageContainersResult |The list of blob containers associated with the storage account attached to the Data Lake Analytics account.|
+| @azure-arm-datalake-analytics.ListSasTokensResult |The SAS response that contains the storage account, container and associated SAS token for connection use.|
 | @azure-arm-datalake-analytics.FirewallRule |Data Lake Analytics firewall rule information|
 | @azure-arm-datalake-analytics.DataLakeStoreAccountInfo |Data Lake Store account information.|
 | @azure-arm-datalake-analytics.DataLakeAnalyticsFirewallRuleListResult |Data Lake Analytics firewall rule list information.|
-| @azure-arm-datalake-analytics.DataLakeAnalyticsAccountUpdateParameters |The parameters that can be used to update an existing Data Lake Analytics
-account.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsAccountUpdateParameters |The parameters that can be used to update an existing Data Lake Analytics account.|
 | @azure-arm-datalake-analytics.DataLakeAnalyticsAccountListStorageAccountsResult |Azure Storage Account list information.|
 | @azure-arm-datalake-analytics.DataLakeAnalyticsAccountListResult |DataLakeAnalytics Account list information.|
 | @azure-arm-datalake-analytics.DataLakeAnalyticsAccountListDataLakeStoreResult |Data Lake Account list information.|
-| @azure-arm-datalake-analytics.DataLakeAnalyticsAccount |A Data Lake Analytics account object, containing all information associated
-with the named Data Lake Analytics account.|
+| @azure-arm-datalake-analytics.DataLakeAnalyticsAccount |A Data Lake Analytics account object, containing all information associated with the named Data Lake Analytics account.|
 | @azure-arm-datalake-analytics.ComputePolicyListResult |The list of compute policies in the account.|
 | @azure-arm-datalake-analytics.ComputePolicyCreateOrUpdateParameters |The parameters used to create a new compute policy.|
 | @azure-arm-datalake-analytics.ComputePolicyAccountCreateParameters |The parameters used to create a new compute policy.|
 | @azure-arm-datalake-analytics.ComputePolicy |The parameters used to create a new compute policy.|
-| @azure-arm-datalake-analytics.AddStorageAccountParameters |Storage account parameters for a storage account being added to a Data Lake
-Analytics account.|
+| @azure-arm-datalake-analytics.AddStorageAccountParameters |Storage account parameters for a storage account being added to a Data Lake Analytics account.|
 | @azure-arm-datalake-analytics.AddDataLakeStoreParameters |Additional Data Lake Store parameters.|
 | @azure-arm-datalake-analytics.DataLakeAnalyticsAccountManagementClient |Class representing a DataLakeAnalyticsAccountManagementClient.|

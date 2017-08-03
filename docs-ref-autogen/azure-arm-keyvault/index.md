@@ -10,6 +10,5 @@
 | @azure-arm-keyvault.ResourceListResult |List of vault resources.|
 | @azure-arm-keyvault.Resource |Key Vault resource|
 | @azure-arm-keyvault.Permissions |Permissions the identity has for keys, secrets and certificates.|
-| @azure-arm-keyvault.AccessPolicyEntry |An identity that have access to the key vault. All identities in the array
-must use the same tenant ID as the key vault's tenant ID.|
+| @azure-arm-keyvault.AccessPolicyEntry |An identity that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.|
 | @azure-arm-keyvault.KeyVaultManagementClient |Class representing a KeyVaultManagementClient.|

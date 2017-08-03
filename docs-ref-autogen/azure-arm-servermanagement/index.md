@@ -12,12 +12,10 @@
 | @azure-arm-servermanagement.Resource |Resource Manager Resource Information.|
 | @azure-arm-servermanagement.PromptMessageResponse |The response to a prompt message.|
 | @azure-arm-servermanagement.PromptFieldDescription |Field description for the implementation of PSHostUserInterface.Prompt|
-| @azure-arm-servermanagement.PowerShellTabCompletionResults |An array of strings representing the different values that can be selected
-through.|
+| @azure-arm-servermanagement.PowerShellTabCompletionResults |An array of strings representing the different values that can be selected through.|
 | @azure-arm-servermanagement.PowerShellTabCompletionParameters |Collection of parameters for PowerShell tab completion.|
 | @azure-arm-servermanagement.PowerShellSessionResources |A collection of PowerShell session resources|
-| @azure-arm-servermanagement.PowerShellSessionResource |A PowerShell session resource (practically equivalent to a runspace
-instance).|
+| @azure-arm-servermanagement.PowerShellSessionResource |A PowerShell session resource (practically equivalent to a runspace instance).|
 | @azure-arm-servermanagement.PowerShellCommandStatus |Result status from invoking a PowerShell command.|
 | @azure-arm-servermanagement.PowerShellCommandResults |A collection of results from a PowerShell command.|
 | @azure-arm-servermanagement.PowerShellCommandResult |Results from invoking a PowerShell command.|
@@ -28,8 +26,7 @@ instance).|
 | @azure-arm-servermanagement.GatewayStatus |Expanded gateway status information.|
 | @azure-arm-servermanagement.GatewayResources |Collection of Gateway Resources.|
 | @azure-arm-servermanagement.GatewayResource |Data model for an arm gateway resource.|
-| @azure-arm-servermanagement.GatewayProfile |JSON properties that the gateway service uses know how to communicate with
-the resource.|
+| @azure-arm-servermanagement.GatewayProfile |JSON properties that the gateway service uses know how to communicate with the resource.|
 | @azure-arm-servermanagement.GatewayParameters |Collection of parameters for operations on a gateway resource.|
 | @azure-arm-servermanagement.ErrorModel |Error message.|
 | @azure-arm-servermanagement.EncryptionJwkResource |The public key of the gateway.|

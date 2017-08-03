@@ -24,8 +24,7 @@
 | @azure-arm-sb.QueueResource |Description of queue Resource.|
 | @azure-arm-sb.QueueListResult |The response to the List Queues operation.|
 | @azure-arm-sb.QueueCreateOrUpdateParameters |Parameters supplied to the Create Or Update Queue operation.|
-| @azure-arm-sb.OperationListResult |Result of the request to list ServiceBus operations. It contains a list of
-operations and a URL link to get the next set of results.|
+| @azure-arm-sb.OperationListResult |Result of the request to list ServiceBus operations. It contains a list of operations and a URL link to get the next set of results.|
 | @azure-arm-sb.OperationDisplay |The object that represents the operation.|
 | @azure-arm-sb.Operation |A ServiceBus REST API operation|
 | @azure-arm-sb.NamespaceUpdateParameters |Parameters supplied to the Patch Namespace operation.|

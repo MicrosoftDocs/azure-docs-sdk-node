@@ -6,8 +6,7 @@
 | @azure-arm-documentdb.Location |A region in which the Azure DocumentDB database account is deployed.|
 | @azure-arm-documentdb.FailoverPolicy |The failover policy for a given region of a database account.|
 | @azure-arm-documentdb.FailoverPolicies |The list of new failover policies for the failover priority change.|
-| @azure-arm-documentdb.DatabaseAccountsListResult |The List operation response, that contains the database accounts and their
-properties.|
+| @azure-arm-documentdb.DatabaseAccountsListResult |The List operation response, that contains the database accounts and their properties.|
 | @azure-arm-documentdb.DatabaseAccountRegenerateKeyParameters |Parameters to regenerate the keys within the database account.|
 | @azure-arm-documentdb.DatabaseAccountPatchParameters |Parameters for patching Azure DocumentDB database account properties.|
 | @azure-arm-documentdb.DatabaseAccountListReadOnlyKeysResult |The read-only access keys for the given database account.|

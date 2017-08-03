@@ -18,8 +18,7 @@
 | @azure-arm-sql.Capabilities |Class representing a Capabilities.|
 | @azure-arm-sql.VirtualNetworkRuleListResult |A list of virtual network rules.|
 | @azure-arm-sql.VirtualNetworkRule |A virtual network rule.|
-| @azure-arm-sql.TransparentDataEncryptionActivityListResult |Represents the response to a list database transparent data encryption
-activity request.|
+| @azure-arm-sql.TransparentDataEncryptionActivityListResult |Represents the response to a list database transparent data encryption activity request.|
 | @azure-arm-sql.TransparentDataEncryptionActivity |Represents a database transparent data encryption Scan.|
 | @azure-arm-sql.TransparentDataEncryption |Represents a database transparent data encryption .|
 | @azure-arm-sql.TrackedResource |ARM tracked top level resource.|
@@ -59,8 +58,7 @@ activity request.|
 | @azure-arm-sql.RecommendedElasticPool |Represents a recommented elastic pool.|
 | @azure-arm-sql.ProxyResource |ARM proxy resource.|
 | @azure-arm-sql.PartnerInfo |Partner server information for the failover group.|
-| @azure-arm-sql.OperationListResult |Result of the request to list SQL operations. It contains a list of
-operations and a URL link to get the next set of results.|
+| @azure-arm-sql.OperationListResult |Result of the request to list SQL operations. It contains a list of operations and a URL link to get the next set of results.|
 | @azure-arm-sql.OperationImpact |The impact of an operation, both in absolute and relative terms.|
 | @azure-arm-sql.OperationDisplay |Display metadata associated with the operation.|
 | @azure-arm-sql.Operation |SQL REST API operation definition.|
@@ -104,8 +102,7 @@ operations and a URL link to get the next set of results.|
 | @azure-arm-sql.DatabaseListResult |Represents the response to a list database request.|
 | @azure-arm-sql.DatabaseBlobAuditingPolicy |A database blob auditing policy.|
 | @azure-arm-sql.Database |Represents a database.|
-| @azure-arm-sql.CheckNameAvailabilityResponse |A response indicating whether the specified name for a resource is
-available.|
+| @azure-arm-sql.CheckNameAvailabilityResponse |A response indicating whether the specified name for a resource is available.|
 | @azure-arm-sql.CheckNameAvailabilityRequest |A request to check whether the specified name for a resource is available.|
 | @azure-arm-sql.BackupLongTermRetentionVault |A backup long term retention vault|
 | @azure-arm-sql.BackupLongTermRetentionPolicy |A backup long term retention policy|

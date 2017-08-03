@@ -9,8 +9,7 @@
 | @azure-arm-containerregistry.Resource |An Azure resource.|
 | @azure-arm-containerregistry.RegistryUpdateParameters |The parameters for updating a container registry.|
 | @azure-arm-containerregistry.RegistryPassword |The login password for the container registry.|
-| @azure-arm-containerregistry.RegistryNameStatus |The result of a request to check the availability of a container registry
-name.|
+| @azure-arm-containerregistry.RegistryNameStatus |The result of a request to check the availability of a container registry name.|
 | @azure-arm-containerregistry.RegistryNameCheckRequest |A request to check whether a container registry name is available.|
 | @azure-arm-containerregistry.RegistryListResult |The result of a request to list container registries.|
 | @azure-arm-containerregistry.RegistryListCredentialsResult |The response from the ListCredentials operation.|

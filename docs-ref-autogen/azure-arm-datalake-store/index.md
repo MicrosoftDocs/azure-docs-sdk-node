@@ -9,33 +9,18 @@
 | @azure-arm-datalake-store.FileOperationResult |The result of the request or operation.|
 | @azure-arm-datalake-store.ContentSummaryResult |Data Lake Store filesystem content summary information response.|
 | @azure-arm-datalake-store.ContentSummary |Data Lake Store content summary information|
-| @azure-arm-datalake-store.AdlsUnsupportedOperationException |A WebHDFS exception thrown indicating that the requested operation is not
-supported. Thrown when a 400 error response code is returned (bad request).|
-| @azure-arm-datalake-store.AdlsThrottledException |A WebHDFS exception thrown indicating that the request is being throttled.
-Reducing the number of requests or request size helps to mitigate this
-error.|
-| @azure-arm-datalake-store.AdlsSecurityException |A WebHDFS exception thrown indicating that access is denied. Thrown when a
-401 error response code is returned (Unauthorized).|
-| @azure-arm-datalake-store.AdlsRuntimeException |A WebHDFS exception thrown when an unexpected error occurs during an
-operation. Thrown when a 500 error response code is returned (Internal
-server error).|
-| @azure-arm-datalake-store.AdlsRemoteException |Data Lake Store filesystem exception based on the WebHDFS definition for
-RemoteExceptions. This is a WebHDFS 'catch all' exception|
-| @azure-arm-datalake-store.AdlsIOException |A WebHDFS exception thrown indicating there was an IO (read or write) error.
-Thrown when a 403 error response code is returned (forbidden).|
-| @azure-arm-datalake-store.AdlsIllegalArgumentException |A WebHDFS exception thrown indicating that one more arguments is incorrect.
-Thrown when a 400 error response code is returned (bad request).|
-| @azure-arm-datalake-store.AdlsFileNotFoundException |A WebHDFS exception thrown indicating the file or folder could not be found.
-Thrown when a 404 error response code is returned (not found).|
-| @azure-arm-datalake-store.AdlsFileAlreadyExistsException |A WebHDFS exception thrown indicating the file or folder already exists.
-Thrown when a 403 error response code is returned (forbidden).|
+| @azure-arm-datalake-store.AdlsUnsupportedOperationException |A WebHDFS exception thrown indicating that the requested operation is not supported. Thrown when a 400 error response code is returned (bad request).|
+| @azure-arm-datalake-store.AdlsThrottledException |A WebHDFS exception thrown indicating that the request is being throttled. Reducing the number of requests or request size helps to mitigate this error.|
+| @azure-arm-datalake-store.AdlsSecurityException |A WebHDFS exception thrown indicating that access is denied. Thrown when a 401 error response code is returned (Unauthorized).|
+| @azure-arm-datalake-store.AdlsRuntimeException |A WebHDFS exception thrown when an unexpected error occurs during an operation. Thrown when a 500 error response code is returned (Internal server error).|
+| @azure-arm-datalake-store.AdlsRemoteException |Data Lake Store filesystem exception based on the WebHDFS definition for RemoteExceptions. This is a WebHDFS 'catch all' exception|
+| @azure-arm-datalake-store.AdlsIOException |A WebHDFS exception thrown indicating there was an IO (read or write) error. Thrown when a 403 error response code is returned (forbidden).|
+| @azure-arm-datalake-store.AdlsIllegalArgumentException |A WebHDFS exception thrown indicating that one more arguments is incorrect. Thrown when a 400 error response code is returned (bad request).|
+| @azure-arm-datalake-store.AdlsFileNotFoundException |A WebHDFS exception thrown indicating the file or folder could not be found. Thrown when a 404 error response code is returned (not found).|
+| @azure-arm-datalake-store.AdlsFileAlreadyExistsException |A WebHDFS exception thrown indicating the file or folder already exists. Thrown when a 403 error response code is returned (forbidden).|
 | @azure-arm-datalake-store.AdlsError |Data Lake Store filesystem error containing a specific WebHDFS exception.|
-| @azure-arm-datalake-store.AdlsBadOffsetException |A WebHDFS exception thrown indicating the append or read is from a bad
-offset. Thrown when a 400 error response code is returned for append and
-open operations (Bad request).|
-| @azure-arm-datalake-store.AdlsAccessControlException |A WebHDFS exception thrown indicating that access is denied due to
-insufficient permissions. Thrown when a 403 error response code is returned
-(forbidden).|
+| @azure-arm-datalake-store.AdlsBadOffsetException |A WebHDFS exception thrown indicating the append or read is from a bad offset. Thrown when a 400 error response code is returned for append and open operations (Bad request).|
+| @azure-arm-datalake-store.AdlsAccessControlException |A WebHDFS exception thrown indicating that access is denied due to insufficient permissions. Thrown when a 403 error response code is returned (forbidden).|
 | @azure-arm-datalake-store.AclStatusResult |Data Lake Store file or directory Access Control List information.|
 | @azure-arm-datalake-store.AclStatus |Data Lake Store file or directory Access Control List information.|
 | @azure-arm-datalake-store.DataLakeStoreFileSystemManagementClient |Class representing a DataLakeStoreFileSystemManagementClient.|

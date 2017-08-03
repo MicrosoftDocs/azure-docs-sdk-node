@@ -61,8 +61,7 @@
 | @azure-arm-logic.RecurrenceScheduleOccurrence |The recurrence schedule occurence.|
 | @azure-arm-logic.RecurrenceSchedule |The recurrence schedule.|
 | @azure-arm-logic.PartnerContent |The integration account partner content.|
-| @azure-arm-logic.OperationListResult |Result of the request to list Logic operations. It contains a list of
-operations and a URL link to get the next set of results.|
+| @azure-arm-logic.OperationListResult |Result of the request to list Logic operations. It contains a list of operations and a URL link to get the next set of results.|
 | @azure-arm-logic.OperationDisplay |The object that represents the operation.|
 | @azure-arm-logic.Operation |Logic REST API operation|
 | @azure-arm-logic.KeyVaultKeyReferenceKeyVault |The key vault reference.|
@@ -90,10 +89,8 @@ operations and a URL link to get the next set of results.|
 | @azure-arm-logic.IntegrationAccount |The integration account.|
 | @azure-arm-logic.GetCallbackUrlParameters |The callback url parameters.|
 | @azure-arm-logic.GenerateUpgradedDefinitionParameters |The parameters to generate upgraded definition.|
-| @azure-arm-logic.ErrorResponse |Error reponse indicates Logic service is not able to process the incoming
-request. The error property contains the error details.|
-| @azure-arm-logic.ErrorProperties |Error properties indicate why the Logic service was not able to process the
-incoming request. The reason is provided in the error message.|
+| @azure-arm-logic.ErrorResponse |Error reponse indicates Logic service is not able to process the incoming request. The error property contains the error details.|
+| @azure-arm-logic.ErrorProperties |Error properties indicate why the Logic service was not able to process the incoming request. The reason is provided in the error message.|
 | @azure-arm-logic.EdifactValidationSettings |The Edifact agreement validation settings.|
 | @azure-arm-logic.EdifactValidationOverride |The Edifact validation override settings.|
 | @azure-arm-logic.EdifactSchemaReference |The Edifact schema reference.|

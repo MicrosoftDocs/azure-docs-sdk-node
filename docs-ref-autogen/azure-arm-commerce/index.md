@@ -8,8 +8,7 @@
 | @azure-arm-commerce.UsageAggregation |Describes the usageAggregation.|
 | @azure-arm-commerce.ResourceRateCardInfo |Price and Metadata information for resources|
 | @azure-arm-commerce.RecurringCharge |Indicates a recurring charge is present for this offer.|
-| @azure-arm-commerce.RateCardQueryParameters |Parameters that are used in the odata $filter query parameter for providing
-RateCard information.|
+| @azure-arm-commerce.RateCardQueryParameters |Parameters that are used in the odata $filter query parameter for providing RateCard information.|
 | @azure-arm-commerce.OfferTermInfo |Describes the offer term.|
 | @azure-arm-commerce.MonetaryCredit |Indicates that this is a monetary credit offer.|
 | @azure-arm-commerce.MonetaryCommitment |Indicates that a monetary commitment is required for this offer|

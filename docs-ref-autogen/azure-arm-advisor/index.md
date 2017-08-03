@@ -4,8 +4,7 @@
 | @azure-arm-advisor.Suppressions |Class representing a Suppressions.|
 | @azure-arm-advisor.Recommendations |Class representing a Recommendations.|
 | @azure-arm-advisor.Operations |Class representing a Operations.|
-| @azure-arm-advisor.SuppressionContract |The details of the snoozed or dismissed rule; for example, the duration,
-name, and GUID associated with the rule.|
+| @azure-arm-advisor.SuppressionContract |The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.|
 | @azure-arm-advisor.ShortDescription |A summary of the recommendation.|
 | @azure-arm-advisor.ResourceRecommendationBaseListResult |The list of Advisor recommendations.|
 | @azure-arm-advisor.ResourceRecommendationBase |Advisor Recommendation.|

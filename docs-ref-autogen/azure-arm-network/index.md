@@ -32,8 +32,7 @@
 | @azure-arm-network.VpnClientConfiguration |VpnClientConfiguration for P2S client.|
 | @azure-arm-network.VirtualNetworkUsageName |Usage strings container.|
 | @azure-arm-network.VirtualNetworkUsage |Usage details for subnet.|
-| @azure-arm-network.VirtualNetworkPeeringListResult |Response for ListSubnets API service call. Retrieves all subnets that belong
-to a virtual network.|
+| @azure-arm-network.VirtualNetworkPeeringListResult |Response for ListSubnets API service call. Retrieves all subnets that belong to a virtual network.|
 | @azure-arm-network.VirtualNetworkPeering |Peerings in a virtual network resource.|
 | @azure-arm-network.VirtualNetworkListUsageResult |Response for the virtual networks GetUsage API service call.|
 | @azure-arm-network.VirtualNetworkListResult |Response for the ListVirtualNetworks API service call.|
@@ -59,12 +58,10 @@ to a virtual network.|
 | @azure-arm-network.TopologyAssociation |Resources that have an association with the parent resource.|
 | @azure-arm-network.Topology |Topology of the specified resource group.|
 | @azure-arm-network.SubResource |Class representing a SubResource.|
-| @azure-arm-network.SubnetListResult |Response for ListSubnets API service callRetrieves all subnet that belongs
-to a virtual network|
+| @azure-arm-network.SubnetListResult |Response for ListSubnets API service callRetrieves all subnet that belongs to a virtual network|
 | @azure-arm-network.SubnetAssociation |Network interface and its custom security rules.|
 | @azure-arm-network.Subnet |Subnet in a virtual network resource.|
-| @azure-arm-network.SecurityRuleListResult |Response for ListSecurityRule API service call. Retrieves all security rules
-that belongs to a network security group.|
+| @azure-arm-network.SecurityRuleListResult |Response for ListSecurityRule API service call. Retrieves all security rules that belongs to a network security group.|
 | @azure-arm-network.SecurityRuleAssociations |All security rules associated with the network interface.|
 | @azure-arm-network.SecurityRule |Network security rule.|
 | @azure-arm-network.SecurityGroupViewResult |The information about security rules applied to the specified VM.|
@@ -93,8 +90,7 @@ that belongs to a network security group.|
 | @azure-arm-network.PacketCaptureQueryStatusResult |Status of packet capture session.|
 | @azure-arm-network.PacketCaptureParameters |Parameters that define the create packet capture operation.|
 | @azure-arm-network.PacketCaptureListResult |List of packet capture sessions.|
-| @azure-arm-network.PacketCaptureFilter |Filter that is applied to packet capture request. Multiple filters can be
-applied.|
+| @azure-arm-network.PacketCaptureFilter |Filter that is applied to packet capture request. Multiple filters can be applied.|
 | @azure-arm-network.PacketCapture |Parameters that define the create packet capture operation.|
 | @azure-arm-network.OutboundNatRule |Outbound NAT pool of the load balancer.|
 | @azure-arm-network.NextHopResult |The information about next hop from the specified VM.|
@@ -134,8 +130,7 @@ applied.|
 | @azure-arm-network.ExpressRouteCircuitsArpTableListResult |Response for ListArpTable associated with the Express Route Circuits API.|
 | @azure-arm-network.ExpressRouteCircuitRoutesTableSummary |The routes table associated with the ExpressRouteCircuit.|
 | @azure-arm-network.ExpressRouteCircuitRoutesTable |The routes table associated with the ExpressRouteCircuit|
-| @azure-arm-network.ExpressRouteCircuitPeeringListResult |Response for ListPeering API service call retrieves all peerings that belong
-to an ExpressRouteCircuit.|
+| @azure-arm-network.ExpressRouteCircuitPeeringListResult |Response for ListPeering API service call retrieves all peerings that belong to an ExpressRouteCircuit.|
 | @azure-arm-network.ExpressRouteCircuitPeeringConfig |Specifies the peering configuration.|
 | @azure-arm-network.ExpressRouteCircuitPeering |Peering in an ExpressRouteCircuit resource.|
 | @azure-arm-network.ExpressRouteCircuitListResult |Response for ListExpressRouteCircuit API service call.|
@@ -151,13 +146,10 @@ to an ExpressRouteCircuit.|
 | @azure-arm-network.EffectiveNetworkSecurityGroupAssociation |The effective network security group association.|
 | @azure-arm-network.EffectiveNetworkSecurityGroup |Effective network security group.|
 | @azure-arm-network.DnsNameAvailabilityResult |Response for the CheckDnsNameAvailability API service call.|
-| @azure-arm-network.DhcpOptions |DhcpOptions contains an array of DNS servers available to VMs deployed in
-the virtual network. Standard DHCP option for a subnet overrides VNET DHCP
-options.|
+| @azure-arm-network.DhcpOptions |DhcpOptions contains an array of DNS servers available to VMs deployed in the virtual network. Standard DHCP option for a subnet overrides VNET DHCP options.|
 | @azure-arm-network.ConnectivitySource |Parameters that define the source of the connection.|
 | @azure-arm-network.ConnectivityParameters |Parameters that determine how the connectivity check will be performed.|
-| @azure-arm-network.ConnectivityIssue |Information about an issue encountered in the process of checking for
-connectivity.|
+| @azure-arm-network.ConnectivityIssue |Information about an issue encountered in the process of checking for connectivity.|
 | @azure-arm-network.ConnectivityInformation |Information on the connectivity status.|
 | @azure-arm-network.ConnectivityHop |Information about a hop between the source and the destination.|
 | @azure-arm-network.ConnectivityDestination |Parameters that define destination of connection.|
@@ -170,19 +162,10 @@ connectivity.|
 | @azure-arm-network.BgpPeerStatus |BGP peer status details|
 | @azure-arm-network.BGPCommunity |Contains bgp community information offered in Service Community resources.|
 | @azure-arm-network.BackendAddressPool |Pool of backend IP addresses.|
-| @azure-arm-network.AzureAsyncOperationResult |The response body contains the status of the specified asynchronous
-operation, indicating whether it has succeeded, is in progress, or has
-failed. Note that this status is distinct from the HTTP status code returned
-for the Get Operation Status operation itself. If the asynchronous operation
-succeeded, the response body includes the HTTP status code for the
-successful request. If the asynchronous operation failed, the response body
-includes the HTTP status code for the failed request and error information
-regarding the failure.|
-| @azure-arm-network.AuthorizationListResult |Response for ListAuthorizations API service call retrieves all
-authorizations that belongs to an ExpressRouteCircuit.|
+| @azure-arm-network.AzureAsyncOperationResult |The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure.|
+| @azure-arm-network.AuthorizationListResult |Response for ListAuthorizations API service call retrieves all authorizations that belongs to an ExpressRouteCircuit.|
 | @azure-arm-network.ApplicationGatewayWebApplicationFirewallConfiguration |Application gateway web application firewall configuration.|
-| @azure-arm-network.ApplicationGatewayUrlPathMap |UrlPathMaps give a url path to the backend mapping information for
-PathBasedRouting.|
+| @azure-arm-network.ApplicationGatewayUrlPathMap |UrlPathMaps give a url path to the backend mapping information for PathBasedRouting.|
 | @azure-arm-network.ApplicationGatewaySslPredefinedPolicy |An Ssl predefined policy|
 | @azure-arm-network.ApplicationGatewaySslPolicy |Application Gateway Ssl policy.|
 | @azure-arm-network.ApplicationGatewaySslCertificate |SSL certificates of an application gateway.|
@@ -193,8 +176,7 @@ PathBasedRouting.|
 | @azure-arm-network.ApplicationGatewayProbe |Probe of the application gateway.|
 | @azure-arm-network.ApplicationGatewayPathRule |Path rule of URL path map of an application gateway.|
 | @azure-arm-network.ApplicationGatewayListResult |Response for ListApplicationGateways API service call.|
-| @azure-arm-network.ApplicationGatewayIPConfiguration |IP configuration of an application gateway. Currently 1 public and 1 private
-IP configuration is allowed.|
+| @azure-arm-network.ApplicationGatewayIPConfiguration |IP configuration of an application gateway. Currently 1 public and 1 private IP configuration is allowed.|
 | @azure-arm-network.ApplicationGatewayHttpListener |Http listener of an application gateway.|
 | @azure-arm-network.ApplicationGatewayFrontendPort |Frontend port of an application gateway.|
 | @azure-arm-network.ApplicationGatewayFrontendIPConfiguration |Frontend IP configuration of an application gateway.|
@@ -202,9 +184,7 @@ IP configuration is allowed.|
 | @azure-arm-network.ApplicationGatewayFirewallRuleGroup |A web application firewall rule group.|
 | @azure-arm-network.ApplicationGatewayFirewallRule |A web application firewall rule.|
 | @azure-arm-network.ApplicationGatewayFirewallDisabledRuleGroup |Allows to disable rules within a rule group or an entire rule group.|
-| @azure-arm-network.ApplicationGatewayConnectionDraining |Connection draining allows open connections to a backend server to be active
-for a specified time after the backend server got removed from the
-configuration.|
+| @azure-arm-network.ApplicationGatewayConnectionDraining |Connection draining allows open connections to a backend server to be active for a specified time after the backend server got removed from the configuration.|
 | @azure-arm-network.ApplicationGatewayBackendHttpSettings |Backend address pool settings of an application gateway.|
 | @azure-arm-network.ApplicationGatewayBackendHealthServer |Application gateway backendhealth http settings.|
 | @azure-arm-network.ApplicationGatewayBackendHealthPool |Application gateway BackendHealth pool.|
@@ -217,5 +197,4 @@ configuration.|
 | @azure-arm-network.ApplicationGatewayAvailableSslOptions |Response for ApplicationGatewayAvailableSslOptions API service call.|
 | @azure-arm-network.ApplicationGatewayAuthenticationCertificate |Authentication certificates of an application gateway.|
 | @azure-arm-network.ApplicationGateway |Application gateway resource|
-| @azure-arm-network.AddressSpace |AddressSpace contains an array of IP address ranges that can be used by
-subnets of the virtual network.|
+| @azure-arm-network.AddressSpace |AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network.|

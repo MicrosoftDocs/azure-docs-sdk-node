@@ -13,8 +13,7 @@
 | @azure-arm-eventhub.ResourceListKeys |Namespace/EventHub Connection String|
 | @azure-arm-eventhub.Resource |The Resource definition|
 | @azure-arm-eventhub.RegenerateKeysParameters |Parameters supplied to the Regenerate Authorization Rule keys operation.|
-| @azure-arm-eventhub.OperationListResult |Result of the request to list Event Hub operations. It contains a list of
-operations and a URL link to get the next set of results.|
+| @azure-arm-eventhub.OperationListResult |Result of the request to list Event Hub operations. It contains a list of operations and a URL link to get the next set of results.|
 | @azure-arm-eventhub.OperationDisplay |The object that represents the operation.|
 | @azure-arm-eventhub.Operation |A Event Hub REST API operation|
 | @azure-arm-eventhub.NamespaceUpdateParameter |Parameters supplied to the Patch/update Namespace operation.|

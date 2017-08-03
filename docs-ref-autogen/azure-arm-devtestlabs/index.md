@@ -40,12 +40,9 @@
 | @azure-arm-devtestlabs.SubnetOverride |Property overrides on a subnet of a virtual network.|
 | @azure-arm-devtestlabs.SubnetFragment |Subnet information.|
 | @azure-arm-devtestlabs.Subnet |Subnet information.|
-| @azure-arm-devtestlabs.ShutdownNotificationContent |The contents of a shutdown notification. Webhooks can use this type to
-deserialize the request body when they get notified of an imminent shutdown.|
-| @azure-arm-devtestlabs.SharedPublicIpAddressConfigurationFragment |Properties of a virtual machine that determine how it is connected to a load
-balancer.|
-| @azure-arm-devtestlabs.SharedPublicIpAddressConfiguration |Properties of a virtual machine that determine how it is connected to a load
-balancer.|
+| @azure-arm-devtestlabs.ShutdownNotificationContent |The contents of a shutdown notification. Webhooks can use this type to deserialize the request body when they get notified of an imminent shutdown.|
+| @azure-arm-devtestlabs.SharedPublicIpAddressConfigurationFragment |Properties of a virtual machine that determine how it is connected to a load balancer.|
+| @azure-arm-devtestlabs.SharedPublicIpAddressConfiguration |Properties of a virtual machine that determine how it is connected to a load balancer.|
 | @azure-arm-devtestlabs.ServiceRunner |A container for a managed identity to execute DevTest lab services.|
 | @azure-arm-devtestlabs.Secret |A secret.|
 | @azure-arm-devtestlabs.ScheduleFragment |A schedule.|
@@ -97,10 +94,8 @@ balancer.|
 | @azure-arm-devtestlabs.LabCostDetailsProperties |The properties of a lab cost item.|
 | @azure-arm-devtestlabs.LabCost |A cost item.|
 | @azure-arm-devtestlabs.Lab |A lab.|
-| @azure-arm-devtestlabs.InboundNatRuleFragment |A rule for NAT - exposing a VM's port (backendPort) on the public IP address
-using a load balancer.|
-| @azure-arm-devtestlabs.InboundNatRule |A rule for NAT - exposing a VM's port (backendPort) on the public IP address
-using a load balancer.|
+| @azure-arm-devtestlabs.InboundNatRuleFragment |A rule for NAT - exposing a VM's port (backendPort) on the public IP address using a load balancer.|
+| @azure-arm-devtestlabs.InboundNatRule |A rule for NAT - exposing a VM's port (backendPort) on the public IP address using a load balancer.|
 | @azure-arm-devtestlabs.IdentityProperties |IdentityProperties|
 | @azure-arm-devtestlabs.HourDetailsFragment |Properties of an hourly schedule.|
 | @azure-arm-devtestlabs.HourDetails |Properties of an hourly schedule.|
@@ -154,8 +149,6 @@ using a load balancer.|
 | @azure-arm-devtestlabs.ArmTemplateInfo |Information about a generated ARM template.|
 | @azure-arm-devtestlabs.ArmTemplate |An Azure Resource Manager template.|
 | @azure-arm-devtestlabs.ApplyArtifactsRequest |Request body for applying artifacts to a virtual machine.|
-| @azure-arm-devtestlabs.ApplicableScheduleFragment |Schedules applicable to a virtual machine. The schedules may have been
-defined on a VM or on lab level.|
-| @azure-arm-devtestlabs.ApplicableSchedule |Schedules applicable to a virtual machine. The schedules may have been
-defined on a VM or on lab level.|
+| @azure-arm-devtestlabs.ApplicableScheduleFragment |Schedules applicable to a virtual machine. The schedules may have been defined on a VM or on lab level.|
+| @azure-arm-devtestlabs.ApplicableSchedule |Schedules applicable to a virtual machine. The schedules may have been defined on a VM or on lab level.|
 | @azure-arm-devtestlabs.DevTestLabsClient |Class representing a DevTestLabsClient.|

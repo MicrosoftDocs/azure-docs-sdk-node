@@ -12,8 +12,7 @@
 | @azure-arm-dns.Resource |Class representing a Resource.|
 | @azure-arm-dns.RecordSetUpdateParameters |Parameters supplied to update a record set.|
 | @azure-arm-dns.RecordSetListResult |The response to a record set List operation.|
-| @azure-arm-dns.RecordSet |Describes a DNS record set (a collection of DNS records with the same name
-and type).|
+| @azure-arm-dns.RecordSet |Describes a DNS record set (a collection of DNS records with the same name and type).|
 | @azure-arm-dns.PtrRecord |A PTR record.|
 | @azure-arm-dns.NsRecord |An NS record.|
 | @azure-arm-dns.MxRecord |An MX record.|

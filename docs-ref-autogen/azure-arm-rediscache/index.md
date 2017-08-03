@@ -18,12 +18,10 @@
 | @azure-arm-rediscache.RedisListResult |The response of list Redis operation.|
 | @azure-arm-rediscache.RedisForceRebootResponse |Response to force reboot for Redis cache.|
 | @azure-arm-rediscache.RedisFirewallRuleListResult |The response of list firewall rules Redis operation.|
-| @azure-arm-rediscache.RedisFirewallRule |A firewall rule on a redis cache has a name, and describes a contiguous
-range of IP addresses permitted to connect|
+| @azure-arm-rediscache.RedisFirewallRule |A firewall rule on a redis cache has a name, and describes a contiguous range of IP addresses permitted to connect|
 | @azure-arm-rediscache.RedisCreateParameters |Parameters supplied to the Create Redis operation.|
 | @azure-arm-rediscache.RedisAccessKeys |Redis cache access keys.|
-| @azure-arm-rediscache.OperationListResult |Result of the request to list REST API operations. It contains a list of
-operations and a URL nextLink to get the next set of results.|
+| @azure-arm-rediscache.OperationListResult |Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.|
 | @azure-arm-rediscache.OperationDisplay |The object that describes the operation.|
 | @azure-arm-rediscache.Operation |REST API operation|
 | @azure-arm-rediscache.ImportRDBParameters |Parameters for Redis import operation.|

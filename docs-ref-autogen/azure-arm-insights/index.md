@@ -13,31 +13,23 @@
 | @azure-arm-insights.ScaleRule |A rule that provide the triggers and parameters for the scaling action.|
 | @azure-arm-insights.ScaleCapacity |The number of instances that can be used during this profile.|
 | @azure-arm-insights.ScaleAction |The parameters for the scaling action.|
-| @azure-arm-insights.RuleWebhookAction |Specifies the action to post to service when the rule condition is
-evaluated. The discriminator is always RuleWebhookAction in this case.|
-| @azure-arm-insights.RuleMetricDataSource |A rule metric data source. The discriminator value is always
-RuleMetricDataSource in this case.|
-| @azure-arm-insights.RuleManagementEventDataSource |A rule management event data source. The discriminator fields is always
-RuleManagementEventDataSource in this case.|
+| @azure-arm-insights.RuleWebhookAction |Specifies the action to post to service when the rule condition is evaluated. The discriminator is always RuleWebhookAction in this case.|
+| @azure-arm-insights.RuleMetricDataSource |A rule metric data source. The discriminator value is always RuleMetricDataSource in this case.|
+| @azure-arm-insights.RuleManagementEventDataSource |A rule management event data source. The discriminator fields is always RuleManagementEventDataSource in this case.|
 | @azure-arm-insights.RuleManagementEventClaimsDataSource |The claims for a rule management event data source.|
-| @azure-arm-insights.RuleEmailAction |Specifies the action to send email when the rule condition is evaluated. The
-discriminator is always RuleEmailAction in this case.|
+| @azure-arm-insights.RuleEmailAction |Specifies the action to send email when the rule condition is evaluated. The discriminator is always RuleEmailAction in this case.|
 | @azure-arm-insights.RuleDataSource |The resource from which the rule collects its data.|
 | @azure-arm-insights.RuleCondition |The condition that results in the alert rule being activated.|
-| @azure-arm-insights.RuleAction |The action that is performed when the alert rule becomes active, and when an
-alert condition is resolved.|
+| @azure-arm-insights.RuleAction |The action that is performed when the alert rule becomes active, and when an alert condition is resolved.|
 | @azure-arm-insights.RetentionPolicy |Specifies the retention policy for the log.|
 | @azure-arm-insights.Resource |An azure resource object|
 | @azure-arm-insights.RecurrentSchedule |The scheduling constraints for when the profile begins.|
-| @azure-arm-insights.Recurrence |The repeating times at which this profile begins. This element is not used
-if the FixedDate element is used.|
+| @azure-arm-insights.Recurrence |The repeating times at which this profile begins. This element is not used if the FixedDate element is used.|
 | @azure-arm-insights.MetricTrigger |The trigger that results in a scaling action.|
-| @azure-arm-insights.MetricSettings |Part of MultiTenantDiagnosticSettings. Specifies the settings for a
-particular metric.|
+| @azure-arm-insights.MetricSettings |Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric.|
 | @azure-arm-insights.ManagementEventRuleCondition |A management event rule condition.|
 | @azure-arm-insights.ManagementEventAggregationCondition |How the data that is collected should be combined over time.|
-| @azure-arm-insights.LogSettings |Part of MultiTenantDiagnosticSettings. Specifies the settings for a
-particular log.|
+| @azure-arm-insights.LogSettings |Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log.|
 | @azure-arm-insights.LogProfileResource |The log profile resource.|
 | @azure-arm-insights.LogProfileCollection |Represents a collection of log profiles.|
 | @azure-arm-insights.LocationThresholdRuleCondition |A rule condition based on a certain number of locations failing.|

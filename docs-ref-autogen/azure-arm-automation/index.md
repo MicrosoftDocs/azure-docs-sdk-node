@@ -93,8 +93,7 @@
 | @azure-arm-automation.DscNodeReport |Definition of the dsc node report type.|
 | @azure-arm-automation.DscNodeListResult |The response model for the list dsc nodes operation.|
 | @azure-arm-automation.DscNodeConfigurationListResult |The response model for the list job operation.|
-| @azure-arm-automation.DscNodeConfigurationCreateOrUpdateParameters |The parameters supplied to the create or update node configuration
-operation.|
+| @azure-arm-automation.DscNodeConfigurationCreateOrUpdateParameters |The parameters supplied to the create or update node configuration operation.|
 | @azure-arm-automation.DscNodeConfigurationAssociationProperty |The dsc nodeconfiguration property associated with the entity.|
 | @azure-arm-automation.DscNodeConfiguration |Definition of the dsc node configuration.|
 | @azure-arm-automation.DscNode |Definition of the dsc node type.|
@@ -124,13 +123,11 @@ operation.|
 | @azure-arm-automation.Connection |Definition of the connection.|
 | @azure-arm-automation.CertificateUpdateParameters |The parameters supplied to the update certificate operation.|
 | @azure-arm-automation.CertificateListResult |The response model for the list certificate operation.|
-| @azure-arm-automation.CertificateCreateOrUpdateParameters |The parameters supplied to the create or update or replace certificate
-operation.|
+| @azure-arm-automation.CertificateCreateOrUpdateParameters |The parameters supplied to the create or update or replace certificate operation.|
 | @azure-arm-automation.Certificate |Definition of the certificate.|
 | @azure-arm-automation.AutomationAccountUpdateParameters |The parameters supplied to the update automation account operation.|
 | @azure-arm-automation.AutomationAccountListResult |The response model for the list account operation.|
-| @azure-arm-automation.AutomationAccountCreateOrUpdateParameters |The parameters supplied to the create or update automation account
-operation.|
+| @azure-arm-automation.AutomationAccountCreateOrUpdateParameters |The parameters supplied to the create or update automation account operation.|
 | @azure-arm-automation.AutomationAccount |Definition of the automation account type.|
 | @azure-arm-automation.AgentRegistrationRegenerateKeyParameter |The parameters supplied to the regenerate keys operation.|
 | @azure-arm-automation.AgentRegistrationKeys |Definition of the agent registration keys.|

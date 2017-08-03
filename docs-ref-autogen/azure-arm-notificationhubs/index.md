@@ -27,11 +27,9 @@
 | @azure-arm-notificationhubs.MpnsCredential |Description of a NotificationHub MpnsCredential.|
 | @azure-arm-notificationhubs.GcmCredential |Description of a NotificationHub GcmCredential.|
 | @azure-arm-notificationhubs.CheckNameAvailabilityResponse |Class representing a CheckNameAvailabilityResponse.|
-| @azure-arm-notificationhubs.CheckNameAvailabilityRequestParameters |Parameters supplied to the Check Name Availability for Namespace and
-NotificationHubs.|
+| @azure-arm-notificationhubs.CheckNameAvailabilityRequestParameters |Parameters supplied to the Check Name Availability for Namespace and NotificationHubs.|
 | @azure-arm-notificationhubs.CheckAvailabilityResult |Description of a CheckAvailibility resource.|
-| @azure-arm-notificationhubs.CheckAvailabilityParameters |Parameters supplied to the Check Name Availability for Namespace and
-NotificationHubs.|
+| @azure-arm-notificationhubs.CheckAvailabilityParameters |Parameters supplied to the Check Name Availability for Namespace and NotificationHubs.|
 | @azure-arm-notificationhubs.BaiduCredential |Description of a NotificationHub BaiduCredential.|
 | @azure-arm-notificationhubs.ApnsCredential |Description of a NotificationHub ApnsCredential.|
 | @azure-arm-notificationhubs.AdmCredential |Description of a NotificationHub AdmCredential.|

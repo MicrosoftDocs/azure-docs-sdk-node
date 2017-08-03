@@ -10,10 +10,8 @@
 | @azure-arm-servicefabric.SettingsParameterDescription |ServiceFabric settings under sections|
 | @azure-arm-servicefabric.Resource |The resource model definition.|
 | @azure-arm-servicefabric.OperationResult |Available operation list result|
-| @azure-arm-servicefabric.OperationListResult |Result of the request to list ServiceFabric operations. It contains a list
-of operations and a URL link to get the next set of results.|
-| @azure-arm-servicefabric.NodeTypeDescription |Describes a node type in the cluster, each node type represents sub set of
-nodes in the cluster|
+| @azure-arm-servicefabric.OperationListResult |Result of the request to list ServiceFabric operations. It contains a list of operations and a URL link to get the next set of results.|
+| @azure-arm-servicefabric.NodeTypeDescription |Describes a node type in the cluster, each node type represents sub set of nodes in the cluster|
 | @azure-arm-servicefabric.ErrorModelError |The error detail|
 | @azure-arm-servicefabric.ErrorModel |The structure of the error|
 | @azure-arm-servicefabric.EndpointRangeDescription |Port range details|
@@ -23,8 +21,7 @@ nodes in the cluster|
 | @azure-arm-servicefabric.ClusterUpgradeDeltaHealthPolicy |Delta health policy for the cluster|
 | @azure-arm-servicefabric.ClusterUpdateParameters |Cluster update request|
 | @azure-arm-servicefabric.ClusterListResult |Cluster list results|
-| @azure-arm-servicefabric.ClusterHealthPolicy |Defines a health policy used to evaluate the health of the cluster or of a
-cluster node.|
+| @azure-arm-servicefabric.ClusterHealthPolicy |Defines a health policy used to evaluate the health of the cluster or of a cluster node.|
 | @azure-arm-servicefabric.ClusterCodeVersionsResult |The result of the ServiceFabric runtime versions|
 | @azure-arm-servicefabric.ClusterCodeVersionsListResult |The list results of the ServiceFabric runtime versions|
 | @azure-arm-servicefabric.Cluster |The cluster resource|

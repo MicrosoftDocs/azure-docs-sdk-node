@@ -1,16 +1,7 @@
-# Microsoft Azure SDK for Node.js - HDInsight
-
-This project provides a Node.js package for accessing the Azure HDInsight.
-
-## Features
-
-
-## How to Install
-
-```bash
-npm install azure-arm-hdinsight-jobs
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/WindowsAzure/azure-sdk-for-node)
+# Package azure-arm-hdinsight-jobs
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-hdinsight-jobs.JobOperations~JobOperations |Operations for managing jobs against HDInsight clusters. __NOTE__: An instance of this class is automatically created for an instance of the [HDInsightJobManagementClient] {@link HDInsightJobManagementClient~HDInsightJobManagementClient}. See [jobManagement] {@link HDInsightJobManagementClient~HDInsightJobManagementClient#jobManagement}. Initializes a new instance of the JobOperations class.|
+| @azure-arm-hdinsight-jobs.HDInsightJobManagementClient~HDInsightJobManagementClient |The HDInsight job client manages jobs against HDInsight clusters. Initializes a new instance of the HDInsightJobManagementClient class.|
+| @azure-arm-hdinsight-jobs.createHDInsightJobManagementClient |The HDInsightJobManagementClient class is used to submit jobs on the Microsoft Azure HDInsight Service.|

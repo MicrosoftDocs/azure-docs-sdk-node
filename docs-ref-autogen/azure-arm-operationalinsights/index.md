@@ -1,37 +1,14 @@
-# Microsoft Azure SDK for Node.js - OperationalInsightsManagement
-
-This project provides a Node.js package that makes it easy to manage Microsoft Azure OperationalInsights.
-## Minimum node.js version >= 6.x.x
-
-## How to Install
-
-```bash
-npm install azure-arm-operationalinsights
-```
-
-## How to Use
-
-### Authentication, client creation and listing workspaces as an example
-
- ```javascript
- const msRestAzure = require('ms-rest-azure');
- const OperationalInsightsManagement = require("azure-arm-operationalinsights");
- 
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin().then((credentials) => {
-   let client = new OperationalInsightsManagement(credentials, 'your-subscription-id');
-   return client.workspaces.listByResourceGroup('testworkspace');
- }).then((workspaces) => {
-  console.log('List of workspaces:');
-  console.dir(workspaces, {depth: null, colors: true});
-}).catch((err) => {
-   console.log('An error ocurred');
-   console.dir(err, {depth: null, colors: true});
- });
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/Azure/azure-sdk-for-node)
+# Package azure-arm-operationalinsights
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-operationalinsights.Workspaces |Workspaces __NOTE__: An instance of this class is automatically created for an instance of the OperationalInsightsManagementClient. Initializes a new instance of the Workspaces class.|
+| @azure-arm-operationalinsights.StorageInsights |StorageInsights __NOTE__: An instance of this class is automatically created for an instance of the OperationalInsightsManagementClient. Initializes a new instance of the StorageInsights class.|
+| @azure-arm-operationalinsights.SavedSearches |SavedSearches __NOTE__: An instance of this class is automatically created for an instance of the OperationalInsightsManagementClient. Initializes a new instance of the SavedSearches class.|
+| @azure-arm-operationalinsights.LinkedServices |LinkedServices __NOTE__: An instance of this class is automatically created for an instance of the OperationalInsightsManagementClient. Initializes a new instance of the LinkedServices class.|
+| @azure-arm-operationalinsights.DataSources |DataSources __NOTE__: An instance of this class is automatically created for an instance of the OperationalInsightsManagementClient. Initializes a new instance of the DataSources class.|
+| @azure-arm-operationalinsights.OperationalInsightsManagementClient |Initializes a new instance of the OperationalInsightsManagementClient class.|
+| @azure-arm-operationalinsights.The list workspace usages operation response. |Initializes a new instance of the WorkspaceListUsagesResult class.|
+| @azure-arm-operationalinsights.The list workspaces operation response. |Initializes a new instance of the WorkspaceListResult class.|
+| @azure-arm-operationalinsights.The list workspace managmement groups operation response. |Initializes a new instance of the WorkspaceListManagementGroupsResult class.|
+| @azure-arm-operationalinsights.The list linked service operation response. |Initializes a new instance of the LinkedServiceListResult class.|

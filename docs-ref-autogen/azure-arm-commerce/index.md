@@ -1,41 +1,18 @@
-# Microsoft Azure SDK for Node.js - commerceManagement
-
-This project provides a Node.js package for accessing Azure. Right now it supports:
-- **Node.js version: 6.x.x or higher**
-- **API version: 2015-06-01-preview**
-
-## Features
-
-
-## How to Install
-
-```bash
-npm install azure-arm-commerce
-```
-
-## How to Use
-
-### Authentication, client creation and listing invoices as an example
-
- ```javascript
- const msRestAzure = require('ms-rest-azure');
- const CommerceManagement = require("azure-arm-commerce");
- 
- // Interactive Login
- // It provides a url and code that needs to be copied and pasted in a browser and authenticated over there. If successful, 
- // the user will get a DeviceTokenCredentials object.
- msRestAzure.interactiveLogin().then((credentials) => {
-   let client = new CommerceManagement(credentials, 'your-subscription-id');
-   client.usageAggregates.list().then((usageAggregates) => {
-     console.log('List of usageAggregates:');
-     console.dir(usageAggregates, {depth: null, colors: true});
-   });
- }).catch((err) => {
-   console.log('An error ocurred');
-   console.dir(err, {depth: null, colors: true});
- });
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/Azure/azure-sdk-for-node)
+# Package azure-arm-commerce
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-commerce.UsageManagementClient |Class representing a UsageManagementClient.|
+| @azure-arm-commerce.UsageAggregates |Class representing a UsageAggregates.|
+| @azure-arm-commerce.RateCard |Class representing a RateCard.|
+| @azure-arm-commerce.UsageAggregationListResult |The Get UsageAggregates operation response.|
+| @azure-arm-commerce.UsageAggregation |Describes the usageAggregation.|
+| @azure-arm-commerce.ResourceRateCardInfo |Price and Metadata information for resources|
+| @azure-arm-commerce.RecurringCharge |Indicates a recurring charge is present for this offer.|
+| @azure-arm-commerce.RateCardQueryParameters |Parameters that are used in the odata $filter query parameter for providing RateCard information.|
+| @azure-arm-commerce.OfferTermInfo |Describes the offer term.|
+| @azure-arm-commerce.MonetaryCredit |Indicates that this is a monetary credit offer.|
+| @azure-arm-commerce.MonetaryCommitment |Indicates that a monetary commitment is required for this offer|
+| @azure-arm-commerce.MeterInfo |Detailed information about the meter.|
+| @azure-arm-commerce.InfoField |Key-value pairs of instance details in the legacy format.|
+| @azure-arm-commerce.ErrorResponse |Describes the format of Error response.|

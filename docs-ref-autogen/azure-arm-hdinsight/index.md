@@ -1,17 +1,7 @@
-# Microsoft Azure SDK for Node.js - HDInsight
-
-This project provides a Node.js package for accessing the Azure HDInsight. Right now it supports:
-- **Node.js version: 0.6.15 or higher**
-
-## Features
-
-
-## How to Install
-
-```bash
-npm install azure-arm-hdinsight
-```
-
-## Related projects
-
-- [Microsoft Azure SDK for Node.js](https://github.com/WindowsAzure/azure-sdk-for-node)
+# Package azure-arm-hdinsight
+## Classes
+| Class Name | Description |
+|---|---|
+| @azure-arm-hdinsight.ClusterOperations~ClusterOperations |Contains all the cluster operations. __NOTE__: An instance of this class is automatically created for an instance of the [HDInsightManagementClient] {@link HDInsightManagementClient~HDInsightManagementClient}. See [clusters] {@link HDInsightManagementClient~HDInsightManagementClient#clusters}. Initializes a new instance of the ClusterOperations class.|
+| @azure-arm-hdinsight.HDInsightManagementClient~HDInsightManagementClient |The HDInsight Management Client. Initializes a new instance of the HDInsightManagementClient class.|
+| @azure-arm-hdinsight.createHDInsightManagementClient |The HDInsightManagementClient class is used to perform cluster CRUD operations on the Microsoft Azure HDInsight Service.|

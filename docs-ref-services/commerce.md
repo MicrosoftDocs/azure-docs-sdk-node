@@ -1,6 +1,6 @@
 ---
-title: Azure Commerce Modules for Node.js
-description: Reference for Azure Commerce Modules for Node.js
+title: Azure Commerce modules for Node.js
+description: Reference for Azure Commerce modules for Node.js
 keywords: Azure,SDK,API,Commerce, Node.js
 author: tomarcher
 ms.author: tarcher
@@ -13,7 +13,7 @@ ms.devlang: nodejs
 ms.service: Commerce
 ---
 
-# Azure Commerce Modules for Node.js
+# Azure Commerce modules for Node.js
 
 ## Overview
 

@@ -30,7 +30,7 @@ npm install azure-arm-datalake-analytics
 
 ### Example
 
-This example lists all of the data analytics accounts for a given subscription.
+This example lists all of the analytics accounts for a given subscription.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');

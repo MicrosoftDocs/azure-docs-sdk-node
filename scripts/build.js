@@ -124,7 +124,7 @@ subTocs.forEach(function (subTocPath) {
   var tocContent = yaml.safeLoad(fs.readFileSync(subTocPath));
   var packageName = subTocPath.split('/')[1];
   var topicHref = path.join(packageName, 'index.md');
-  tocContent = { name: packageName, uid: packageName, topicHref: topicHref, items: tocContent };
+  tocContent = { name: packageName, uid: packageName, landingPageType: 'Service', items: tocContent };
   rootToc.push(tocContent);
 });
 fs.writeFileSync(rootTocPath, yaml.safeDump(rootToc));

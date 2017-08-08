@@ -18,6 +18,8 @@ ms.service: Billing
 ## Overview
 The Azure Billing APIs provide access to your Azure billing information and invoices.
 
+To use this API, the account admin must opt in via the Azure portal. See [Manage access to Azure billing using roles](https://docs.microsoft.com/azure/billing/billing-manage-access).
+
 ### Install the npm module 
 
 Install the Azure Billing npm module 

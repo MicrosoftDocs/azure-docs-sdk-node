@@ -16,21 +16,40 @@ ms.service: Billing
 # Azure Billing modules for Node.js
 
 ## Overview
-The Azure Billing APIs provide access to resource consumption and metadata information for Azure subscriptions, enabling you to better predict and manage Azure costs.
+The Azure Billing APIs provide access to your Azure billing information and invoices.
 
-Use Azure Billing APIs to pull usage and resource data into your preferred data analysis tools. The Azure Resource Usage and RateCard APIs can help you accurately predict and manage your costs. The APIs are implemented as a Resource Provider and part of the family of APIs exposed by the Azure Resource Manager.
+To use this API, the account admin must opt in via the Azure portal. See [Manage access to Azure billing using roles](https://docs.microsoft.com/azure/billing/billing-manage-access).
 
-## Install the modules with npm
+### Install the npm module 
 
-Use npm to install the Azure Billing modules for Node.js
+Install the Azure Billing npm module 
 
-### Management
 ```bash
 npm install azure-arm-billing
 ```
+### Example 
+ 
+This example prints a list of all of your past invoices.
+ 
+```javascript 
+const msRestAzure = require('ms-rest-azure');
+const BillingManagement = require('azure-arm-billing');
 
-##Example
+const subscriptionId = 'your-subscription-id';
 
-##Samples
+msRestAzure
+  .interactiveLogin()
+  .then(credentials => {
+    let client = new BillingManagement(credentials, subscriptionId);
+    return client.invoices.list();
+  })
+  .then(invoices => {
+    console.log('List of invoices:');
+    console.dir(invoices, { depth: null, colors: true });
+  });
+``` 
+
+
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

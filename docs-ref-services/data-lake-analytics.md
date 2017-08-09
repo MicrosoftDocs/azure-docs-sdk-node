@@ -18,17 +18,37 @@ ms.service: Data Lake Analytics
 ## Overview
 Azure Data Lake Analytics is an on-demand analytics job service to simplify big data analytics. You can focus on writing, running, and managing jobs rather than on operating distributed infrastructure. Instead of deploying, configuring, and tuning hardware, you write queries to transform your data and extract valuable insights. The analytics service can handle jobs of any scale instantly by setting the dial for how much power you need. You only pay for your job when it is running, making it cost-effective. The analytics service supports Azure Active Directory letting you manage access and roles, integrated with your on-premises identity system. It also includes U-SQL, a language that unifies the benefits of SQL with the expressive power of user code. U-SQL’s scalable distributed runtime enables you to efficiently analyze data in the store and across SQL Servers in Azure, Azure SQL Database, and Azure SQL Data Warehouse.
 
-## Install the modules with npm
+### Management package
+
+### Install the npm module
 
 Use npm to install the Azure Data Lake Analytics modules for Node.js
 
-### Management
 ```bash
 npm install azure-arm-datalake-analytics
 ```
 
-##Example
+### Example
 
-##Samples
+This example lists all of the analytics accounts for a given subscription.
+
+```javascript
+const msRestAzure = require('ms-rest-azure');
+const adlsManagement = require('azure-arm-datalake-analytics');
+
+const subscriptionId = 'your-subscription-id';
+
+msRestAzure.interactiveLogin().then(credentials => {
+  const accountClient = new adlsManagement.DataLakeAnalyticsAccountClient(
+    credentials,
+    subscriptionId
+  );
+  accountClient.account.list().then(result => {
+    console.log(result);
+  });
+});
+```
+
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

@@ -22,13 +22,16 @@ $src = "src"
 md -Force $rootFolder\$src
 Push-Location $rootFolder\$src
 
-$config = Get-Content $rootFolder\repo.json -Raw | ConvertFrom-Json
-Foreach($repo in $config.repo){
-	CloneOrPull $($repo.url) $($repo.branch) $($repo.name)
-	if ($repo.build_script)
+[System.Reflection.Assembly]::LoadWithPartialName("System.Web.Extensions")
+$JSON = Get-Content -Path $rootFolder\repo.json -Raw
+$HT = (New-Object System.Web.Script.Serialization.JavaScriptSerializer).Deserialize($JSON, [System.Collections.Hashtable])
+$HT.repo.GetEnumerator() | ForEach-Object {
+	CloneOrPull $($_.Value.url) $($_.Value.branch) $($_.Value.name)
+
+	if ($_.Value.build_script)
 	{
-		Push-Location $($repo.name)
-		Invoke-Expression $repo.build_script
+		Push-Location $($_.Value.name)
+		Invoke-Expression $_.Value.build_script
 		Pop-Location
 	}
 }

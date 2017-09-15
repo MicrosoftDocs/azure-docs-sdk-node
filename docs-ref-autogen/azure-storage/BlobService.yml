@@ -6382,6 +6382,12 @@ items:
       successfully written to the server in a prior
 
       createBlock operation.
+
+      Note: If no valid list is specified in the blockList parameter, blob would
+      be updated with empty content,
+
+      i.e. existing blocks in the blob will be removed, this behavior is kept
+      for backward compatibility consideration.
     fullName: >-
       azure-storage.BlobService.commitBlocks(container, blob, blockList,
       options, callback)
@@ -6399,7 +6405,38 @@ items:
         - id: blockList
           type:
             - object
-          description: The block identifiers.
+          description: >-
+            The wrapper for block ID list contains block IDs that make up the
+            blob.
+                                                                                      Three kinds of list are provided, please choose one to use according to requirement.
+                                                                                      For more background knowledge, please refer to https://docs.microsoft.com/en-us/rest/api/storageservices/put-block-list
+        - id: blockList.LatestBlocks
+          type:
+            - azure-storage.Array.<string>
+          description: |-
+            The list contains block IDs that make up the blob sequentially.
+                                                                                      All the block IDs in this list will be specified within Latest element.
+                                                                                      Choose this list to contain block IDs indicates that the Blob service should first search
+                                                                                      the uncommitted block list, and then the committed block list for the named block.
+          optional: true
+        - id: blockList.CommittedBlocks
+          type:
+            - azure-storage.Array.<string>
+          description: |-
+            The list contains block IDs that make up the blob sequentially.
+                                                                                      All the block IDs in this list will be specified within Committed element.
+                                                                                      Choose this list to contain block IDs indicates that the Blob service should only search
+                                                                                      the committed block list for the named block.
+          optional: true
+        - id: blockList.UncommittedBlocks
+          type:
+            - azure-storage.Array.<string>
+          description: |-
+            The list contains block IDs that make up the blob sequentially.
+                                                                                      All the block IDs in this list will be specified within Uncommitted element.
+                                                                                      Choose this list to contain block IDs indicates that the Blob service should only search
+                                                                                      the uncommitted block list for the named block.
+          optional: true
         - id: options
           type:
             - object

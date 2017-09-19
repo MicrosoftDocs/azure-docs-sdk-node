@@ -1,0 +1,289 @@
+### YamlMime:UniversalReference
+items:
+  - uid: azure-storage.SharedKey
+    id: azure-storage.SharedKey
+    name: SharedKey
+    summary: ''
+    fullName: azure-storage.SharedKey
+    source:
+      id: azure-storage.SharedKey
+      path: lib\common\signing\sharedkey.js
+      startLine: 41
+      remote:
+        branch: master
+        path: lib\common\signing\sharedkey.js
+        repo: 'https://github.com/Azure/azure-storage-node.git'
+    type: Class
+    children:
+      - 'azure-storage.SharedKey.#ctor'
+      - 'azure-storage.SharedKey#generateAccountSignedQueryString'
+      - 'azure-storage.SharedKey#signRequest'
+      - 'azure-storage.SharedKey#generateSignedQueryString'
+    langs:
+      - js
+  - id: 'azure-storage.SharedKey.#ctor'
+    uid: 'azure-storage.SharedKey.#ctor'
+    parent: azure-storage.SharedKey
+    name: 'SharedKey(storageAccount, storageAccessKey, usePathStyleUri)'
+    fullName: >-
+      azure-storage.SharedKey.SharedKey(storageAccount, storageAccessKey,
+      usePathStyleUri)
+    summary: Creates a new SharedKey object.
+    type: Constructor
+    syntax:
+      parameters:
+        - id: storageAccount
+          type:
+            - string
+          description: The storage account.
+        - id: storageAccessKey
+          type:
+            - string
+          description: The storage account's access key.
+        - id: usePathStyleUri
+          type:
+            - azure-storage.bool
+          description: >-
+            Boolean value indicating if the path, or the hostname, should
+            include the storage account.
+      content: 'new SharedKey(storageAccount, storageAccessKey, usePathStyleUri)'
+    langs:
+      - js
+  - uid: 'azure-storage.SharedKey#generateAccountSignedQueryString'
+    id: 'azure-storage.SharedKey#generateAccountSignedQueryString'
+    parent: azure-storage.SharedKey
+    name: generateAccountSignedQueryString(sharedAccessPolicy)
+    summary: >-
+      Generates the shared access signature for a account.
+
+      For more detailed information, refer to
+      https://msdn.microsoft.com/en-us/library/azure/mt584140.aspx
+    fullName: >-
+      azure-storage.SharedKey.generateAccountSignedQueryString(sharedAccessPolicy)
+    type: Function
+    syntax:
+      parameters:
+        - id: sharedAccessPolicy
+          type:
+            - object
+          description: The shared access policy.
+        - id: sharedAccessPolicy.AccessPolicy.Services
+          type:
+            - azure-storage.SharedAccessServices
+          description: >-
+            The services (blob, file, queue, table) for a shared access
+            signature associated with this shared access policy.
+                                                                                                  Refer to `Constants.AccountSasConstants.Services`.
+        - id: sharedAccessPolicy.AccessPolicy.ResourceTypes
+          type:
+            - azure-storage.SharedAccessResourceTypes
+          description: >-
+            The resource type for a shared access signature associated with this
+            shared access policy.
+                                                                                                  Refer to `Constants.AccountSasConstants.ResourceTypes`.
+        - id: sharedAccessPolicy.AccessPolicy.Permissions
+          type:
+            - azure-storage.SharedAccessPermissions
+          description: |-
+            The permissions for a shared access signature. 
+                                                                                                  Refer to `Constants.AccountSasConstants.Permissions`.
+        - id: sharedAccessPolicy.AccessPolicy.Start
+          type:
+            - date
+          description: The time at which the Shared Access Signature becomes valid.
+        - id: sharedAccessPolicy.AccessPolicy.Expiry
+          type:
+            - date
+          description: The time at which the Shared Access Signature becomes expired.
+        - id: sharedAccessPolicy.AccessPolicy.IPAddressOrRange
+          type:
+            - string
+          description: >-
+            An IP address or a range of IP addresses from which to accept
+            requests. When specifying a range, note that the range is inclusive.
+        - id: sharedAccessPolicy.AccessPolicy.Protocols
+          type:
+            - string
+          description: |-
+            The protocols permitted for a request made with the account SAS. 
+                                                                                                  Possible values are both HTTPS and HTTP (https,http) or HTTPS only (https). The default value is https,http. 
+                                                                                                  Refer to `Constants.AccountSasConstants.Protocols`.
+      return:
+        type:
+          - string
+        description: The shared access signature.
+      content: function generateAccountSignedQueryString(sharedAccessPolicy)
+    langs:
+      - js
+  - uid: 'azure-storage.SharedKey#signRequest'
+    id: 'azure-storage.SharedKey#signRequest'
+    parent: azure-storage.SharedKey
+    name: 'signRequest(The, callback)'
+    summary: Signs a request with the Authentication header.
+    fullName: 'azure-storage.SharedKey.signRequest(The, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: The
+          type:
+            - azure-storage.WebResource
+          description: webresource to be signed.
+        - id: callback
+          type:
+            - function
+          description: The callback function.
+      content: 'function signRequest(The, callback)'
+    langs:
+      - js
+  - uid: 'azure-storage.SharedKey#generateSignedQueryString'
+    id: 'azure-storage.SharedKey#generateSignedQueryString'
+    parent: azure-storage.SharedKey
+    name: >-
+      generateSignedQueryString(serviceType, path, sharedAccessPolicy,
+      sasVersion)
+    summary: Generates the query string for a shared access signature signing.
+    fullName: >-
+      azure-storage.SharedKey.generateSignedQueryString(serviceType, path,
+      sharedAccessPolicy, sasVersion)
+    tags:
+      - originalTitle: parma
+        title: parma
+        text: >-
+          {ResourceTypes}             
+          [args.resourceType]                                 The resource type,
+          if the resource is a blob or container.  Null if the resource is a
+          queue or table.
+        value: >-
+          {ResourceTypes}             
+          [args.resourceType]                                 The resource type,
+          if the resource is a blob or container.  Null if the resource is a
+          queue or table.
+      - originalTitle: parma
+        title: parma
+        text: >-
+          {ResourceTypes}             
+          [args.tableName]                                    The table name, if
+          the resource is a table.  Null if the resource is a blob orqueue.
+        value: >-
+          {ResourceTypes}             
+          [args.tableName]                                    The table name, if
+          the resource is a table.  Null if the resource is a blob orqueue.
+      - originalTitle: parma
+        title: parma
+        text: >-
+          {ResourceTypes}             
+          [args.queryString]                                  The query string,
+          if additional parameters are desired.
+        value: >-
+          {ResourceTypes}             
+          [args.queryString]                                  The query string,
+          if additional parameters are desired.
+    type: Function
+    syntax:
+      parameters:
+        - id: serviceType
+          type:
+            - string
+          description: The service type.
+        - id: path
+          type:
+            - string
+          description: The path to the resource.
+        - id: sharedAccessPolicy
+          type:
+            - object
+          description: The shared access policy.
+        - id: sharedAccessPolicy.Id
+          type:
+            - string
+          description: The signed identifier.
+          optional: true
+        - id: sharedAccessPolicy.AccessPolicy.Permissions
+          type:
+            - azure-storage.SharedAccessPermissions
+          description: The permission type.
+          optional: true
+        - id: sharedAccessPolicy.AccessPolicy.Start
+          type:
+            - date
+          description: The time at which the Shared Access Signature becomes valid.
+          optional: true
+        - id: sharedAccessPolicy.AccessPolicy.Expiry
+          type:
+            - date
+          description: The time at which the Shared Access Signature becomes expired.
+          optional: true
+        - id: sharedAccessPolicy.AccessPolicy.IPAddressOrRange
+          type:
+            - string
+          description: >-
+            An IP address or a range of IP addresses from which to accept
+            requests. When specifying a range, note that the range is inclusive.
+          optional: true
+        - id: sharedAccessPolicy.AccessPolicy.Protocols
+          type:
+            - string
+          description: |-
+            The protocols permitted for a request made with the account SAS. 
+                                                                                                    Possible values are both HTTPS and HTTP (https,http) or HTTPS only (https). The default value is https,http.
+          optional: true
+        - id: sasVersion
+          type:
+            - string
+          description: >-
+            A string indicating the desired SAS Version to use, in storage
+            service version format. Value must be 2012-02-12 or later.
+        - id: args.headers
+          type:
+            - object
+          description: The optional header values to set for a blob returned wth this SAS.
+          optional: true
+        - id: args.headers.CacheControl
+          type:
+            - string
+          description: >-
+            The value of the Cache-Control response header to be returned when
+            this SAS is used.
+          optional: true
+        - id: args.headers.ContentType
+          type:
+            - string
+          description: >-
+            The value of the Content-Type response header to be returned when
+            this SAS is used.
+          optional: true
+        - id: args.headers.ContentEncoding
+          type:
+            - string
+          description: >-
+            The value of the Content-Encoding response header to be returned
+            when this SAS is used.
+          optional: true
+        - id: args.headers.ContentLanguage
+          type:
+            - string
+          description: >-
+            The value of the Content-Language response header to be returned
+            when this SAS is used.
+          optional: true
+        - id: args.headers.ContentDisposition
+          type:
+            - string
+          description: >-
+            The value of the Content-Disposition response header to be returned
+            when this SAS is used.
+          optional: true
+      return:
+        type:
+          - object
+        description: The shared access signature query string.
+      content: >-
+        function generateSignedQueryString(serviceType, path,
+        sharedAccessPolicy, sasVersion)
+    langs:
+      - js
+references:
+  - uid: azure-storage.WebResource
+    name: WebResource
+    fullName: azure-storage.WebResource
+    isExternal: false

@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-containerregistry.Registries
       path: lib\services\containerRegistryManagement\lib\operations\registries.js
-      startLine: 1864
+      startLine: 2219
       remote:
         branch: jsdoc
         path: lib\services\containerRegistryManagement\lib\operations\registries.js
@@ -40,8 +40,17 @@ items:
         azure-arm-containerregistry.Registries#regenerateCredentialWithHttpOperationResponse
       - 'azure-arm-containerregistry.Registries#regenerateCredential'
       - >-
+        azure-arm-containerregistry.Registries#listUsagesWithHttpOperationResponse
+      - 'azure-arm-containerregistry.Registries#listUsages'
+      - >-
         azure-arm-containerregistry.Registries#beginCreateWithHttpOperationResponse
       - 'azure-arm-containerregistry.Registries#beginCreate'
+      - >-
+        azure-arm-containerregistry.Registries#beginDeleteMethodWithHttpOperationResponse
+      - 'azure-arm-containerregistry.Registries#beginDeleteMethod'
+      - >-
+        azure-arm-containerregistry.Registries#beginUpdateWithHttpOperationResponse
+      - 'azure-arm-containerregistry.Registries#beginUpdate'
       - >-
         azure-arm-containerregistry.Registries#listByResourceGroupNextWithHttpOperationResponse
       - 'azure-arm-containerregistry.Registries#listByResourceGroupNext'
@@ -79,7 +88,7 @@ items:
       must contain only alphanumeric characters, be globally unique, and between
       5
 
-      and 60 characters in length.
+      and 50 characters in length.
     fullName: >-
       azure-arm-containerregistry.Registries.checkNameAvailabilityWithHttpOperationResponse(registryNameCheckRequest,
       options)
@@ -143,7 +152,7 @@ items:
       must contain only alphanumeric characters, be globally unique, and between
       5
 
-      and 60 characters in length.
+      and 50 characters in length.
     fullName: >-
       azure-arm-containerregistry.Registries.checkNameAvailability(registryNameCheckRequest,
       options, optionalCallback)
@@ -364,12 +373,12 @@ items:
     id: 'azure-arm-containerregistry.Registries#createWithHttpOperationResponse'
     parent: azure-arm-containerregistry.Registries
     name: >-
-      createWithHttpOperationResponse(resourceGroupName, registryName,
-      registryCreateParameters, options)
+      createWithHttpOperationResponse(resourceGroupName, registryName, registry,
+      options)
     summary: Creates a container registry with the specified parameters.
     fullName: >-
       azure-arm-containerregistry.Registries.createWithHttpOperationResponse(resourceGroupName,
-      registryName, registryCreateParameters, options)
+      registryName, registry, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -392,73 +401,52 @@ items:
           type:
             - string
           description: The name of the container registry.
-        - id: registryCreateParameters
+        - id: registry
           type:
             - object
-          description: |-
-            The parameters for creating a
-            container registry.
-        - id: registryCreateParameters.tags
+          description: The parameters for creating a container registry.
+        - id: registry.sku
           type:
             - object
-          description: |-
-            The tags for the container
-            registry.
-          optional: true
-        - id: registryCreateParameters.location
+          description: The SKU of the container registry.
+        - id: registry.sku.name
           type:
             - string
-          description: >-
-            The location of the
-
-            container registry. This cannot be changed after the resource is
-            created.
-        - id: registryCreateParameters.sku
-          type:
-            - object
           description: |-
-            The SKU of the container
-            registry.
-        - id: registryCreateParameters.sku.name
-          type:
-            - string
-          description: >-
-            The SKU name of the the
-
-            container registry. Required for registry creation. Allowed value:
-            Basic.
-        - id: registryCreateParameters.adminUserEnabled
+            The SKU name of the container registry.
+            Required for registry creation. Possible values include: 'Classic',
+            'Managed_Basic', 'Managed_Standard', 'Managed_Premium'
+        - id: registry.adminUserEnabled
           type:
             - boolean
-          description: >-
-            The value that
-
-            indicates whether the admin user is enabled. This value is false by
-            default.
+          description: |-
+            The value that indicates
+            whether the admin user is enabled.
           optional: true
-        - id: registryCreateParameters.storageAccount
+        - id: registry.storageAccount
           type:
             - object
-          description: >-
-            The parameters of a
-
-            storage account for the container registry. If specified, the
-            storage
-
-            account must be in the same physical location as the container
-            registry.
-        - id: registryCreateParameters.storageAccount.name
+          description: |-
+            The properties of the storage
+            account for the container registry. Only applicable to Classic SKU.
+          optional: true
+        - id: registry.storageAccount.id
           type:
             - string
           description: |-
-            The name of the
-            storage account.
-        - id: registryCreateParameters.storageAccount.accessKey
+            The resource ID of the storage
+            account.
+        - id: registry.location
           type:
             - string
           description: |-
-            The access
-            key to the storage account.
+            The location of the resource. This cannot
+            be changed after the resource is created.
+        - id: registry.tags
+          type:
+            - object
+          description: The tags of the resource.
+          optional: true
         - id: options
           type:
             - object
@@ -477,19 +465,19 @@ items:
         description: A promise is returned
       content: >-
         function createWithHttpOperationResponse(resourceGroupName,
-        registryName, registryCreateParameters, options)
+        registryName, registry, options)
     langs:
       - js
   - uid: 'azure-arm-containerregistry.Registries#create'
     id: 'azure-arm-containerregistry.Registries#create'
     parent: azure-arm-containerregistry.Registries
     name: >-
-      create(resourceGroupName, registryName, registryCreateParameters, options,
+      create(resourceGroupName, registryName, registry, options,
       optionalCallback)
     summary: Creates a container registry with the specified parameters.
     fullName: >-
       azure-arm-containerregistry.Registries.create(resourceGroupName,
-      registryName, registryCreateParameters, options, optionalCallback)
+      registryName, registry, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -536,73 +524,52 @@ items:
           type:
             - string
           description: The name of the container registry.
-        - id: registryCreateParameters
+        - id: registry
           type:
             - object
-          description: |-
-            The parameters for creating a
-            container registry.
-        - id: registryCreateParameters.tags
+          description: The parameters for creating a container registry.
+        - id: registry.sku
           type:
             - object
-          description: |-
-            The tags for the container
-            registry.
-          optional: true
-        - id: registryCreateParameters.location
+          description: The SKU of the container registry.
+        - id: registry.sku.name
           type:
             - string
-          description: >-
-            The location of the
-
-            container registry. This cannot be changed after the resource is
-            created.
-        - id: registryCreateParameters.sku
-          type:
-            - object
           description: |-
-            The SKU of the container
-            registry.
-        - id: registryCreateParameters.sku.name
-          type:
-            - string
-          description: >-
-            The SKU name of the the
-
-            container registry. Required for registry creation. Allowed value:
-            Basic.
-        - id: registryCreateParameters.adminUserEnabled
+            The SKU name of the container registry.
+            Required for registry creation. Possible values include: 'Classic',
+            'Managed_Basic', 'Managed_Standard', 'Managed_Premium'
+        - id: registry.adminUserEnabled
           type:
             - boolean
-          description: >-
-            The value that
-
-            indicates whether the admin user is enabled. This value is false by
-            default.
+          description: |-
+            The value that indicates
+            whether the admin user is enabled.
           optional: true
-        - id: registryCreateParameters.storageAccount
+        - id: registry.storageAccount
           type:
             - object
-          description: >-
-            The parameters of a
-
-            storage account for the container registry. If specified, the
-            storage
-
-            account must be in the same physical location as the container
-            registry.
-        - id: registryCreateParameters.storageAccount.name
+          description: |-
+            The properties of the storage
+            account for the container registry. Only applicable to Classic SKU.
+          optional: true
+        - id: registry.storageAccount.id
           type:
             - string
           description: |-
-            The name of the
-            storage account.
-        - id: registryCreateParameters.storageAccount.accessKey
+            The resource ID of the storage
+            account.
+        - id: registry.location
           type:
             - string
           description: |-
-            The access
-            key to the storage account.
+            The location of the resource. This cannot
+            be changed after the resource is created.
+        - id: registry.tags
+          type:
+            - object
+          description: The tags of the resource.
+          optional: true
         - id: options
           type:
             - object
@@ -630,8 +597,8 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function create(resourceGroupName, registryName,
-        registryCreateParameters, options, optionalCallback)
+        function create(resourceGroupName, registryName, registry, options,
+        optionalCallback)
     langs:
       - js
   - uid: >-
@@ -817,14 +784,29 @@ items:
             The tags for the container
             registry.
           optional: true
+        - id: registryUpdateParameters.sku
+          type:
+            - object
+          description: |-
+            The SKU of the container
+            registry.
+          optional: true
+        - id: registryUpdateParameters.sku.name
+          type:
+            - string
+          description: >-
+            The SKU name of the
+
+            container registry. Required for registry creation. Possible values
+            include:
+
+            'Classic', 'Managed_Basic', 'Managed_Standard', 'Managed_Premium'
         - id: registryUpdateParameters.adminUserEnabled
           type:
             - boolean
-          description: >-
+          description: |-
             The value that
-
-            indicates whether the admin user is enabled. This value is false by
-            default.
+            indicates whether the admin user is enabled.
           optional: true
         - id: registryUpdateParameters.storageAccount
           type:
@@ -832,24 +814,20 @@ items:
           description: >-
             The parameters of
 
-            a storage account for the container registry. If specified, the
-            storage
+            a storage account for the container registry. Only applicable to
+            Classic
 
-            account must be in the same physical location as the container
-            registry.
+            SKU. If specified, the storage account must be in the same physical
+            location
+
+            as the container registry.
           optional: true
-        - id: registryUpdateParameters.storageAccount.name
+        - id: registryUpdateParameters.storageAccount.id
           type:
             - string
           description: |-
-            The name of the
-            storage account.
-        - id: registryUpdateParameters.storageAccount.accessKey
-          type:
-            - string
-          description: |-
-            The access
-            key to the storage account.
+            The resource ID
+            of the storage account.
         - id: options
           type:
             - object
@@ -940,14 +918,29 @@ items:
             The tags for the container
             registry.
           optional: true
+        - id: registryUpdateParameters.sku
+          type:
+            - object
+          description: |-
+            The SKU of the container
+            registry.
+          optional: true
+        - id: registryUpdateParameters.sku.name
+          type:
+            - string
+          description: >-
+            The SKU name of the
+
+            container registry. Required for registry creation. Possible values
+            include:
+
+            'Classic', 'Managed_Basic', 'Managed_Standard', 'Managed_Premium'
         - id: registryUpdateParameters.adminUserEnabled
           type:
             - boolean
-          description: >-
+          description: |-
             The value that
-
-            indicates whether the admin user is enabled. This value is false by
-            default.
+            indicates whether the admin user is enabled.
           optional: true
         - id: registryUpdateParameters.storageAccount
           type:
@@ -955,24 +948,20 @@ items:
           description: >-
             The parameters of
 
-            a storage account for the container registry. If specified, the
-            storage
+            a storage account for the container registry. Only applicable to
+            Classic
 
-            account must be in the same physical location as the container
-            registry.
+            SKU. If specified, the storage account must be in the same physical
+            location
+
+            as the container registry.
           optional: true
-        - id: registryUpdateParameters.storageAccount.name
+        - id: registryUpdateParameters.storageAccount.id
           type:
             - string
           description: |-
-            The name of the
-            storage account.
-        - id: registryUpdateParameters.storageAccount.accessKey
-          type:
-            - string
-          description: |-
-            The access
-            key to the storage account.
+            The resource ID
+            of the storage account.
         - id: options
           type:
             - object
@@ -1584,6 +1573,150 @@ items:
         regenerateCredentialParameters, options, optionalCallback)
     langs:
       - js
+  - uid: 'azure-arm-containerregistry.Registries#listUsagesWithHttpOperationResponse'
+    id: 'azure-arm-containerregistry.Registries#listUsagesWithHttpOperationResponse'
+    parent: azure-arm-containerregistry.Registries
+    name: >-
+      listUsagesWithHttpOperationResponse(resourceGroupName, registryName,
+      options)
+    summary: Gets the quota usages for the specified container registry.
+    fullName: >-
+      azure-arm-containerregistry.Registries.listUsagesWithHttpOperationResponse(resourceGroupName,
+      registryName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<RegistryUsageListResult>} - The deserialized
+          result object.
+        value: >-
+          {HttpOperationResponse<RegistryUsageListResult>} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            The name of the resource group to which
+            the container registry belongs.
+        - id: registryName
+          type:
+            - string
+          description: The name of the container registry.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function listUsagesWithHttpOperationResponse(resourceGroupName,
+        registryName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-containerregistry.Registries#listUsages'
+    id: 'azure-arm-containerregistry.Registries#listUsages'
+    parent: azure-arm-containerregistry.Registries
+    name: 'listUsages(resourceGroupName, registryName, options, optionalCallback)'
+    summary: Gets the quota usages for the specified container registry.
+    fullName: >-
+      azure-arm-containerregistry.Registries.listUsages(resourceGroupName,
+      registryName, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{RegistryUsageListResult} - The deserialized result object.'
+        value: '{RegistryUsageListResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link RegistryUsageListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link RegistryUsageListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            The name of the resource group to which
+            the container registry belongs.
+        - id: registryName
+          type:
+            - string
+          description: The name of the container registry.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function listUsages(resourceGroupName, registryName, options,
+        optionalCallback)
+    langs:
+      - js
   - uid: >-
       azure-arm-containerregistry.Registries#beginCreateWithHttpOperationResponse
     id: >-
@@ -1591,11 +1724,11 @@ items:
     parent: azure-arm-containerregistry.Registries
     name: >-
       beginCreateWithHttpOperationResponse(resourceGroupName, registryName,
-      registryCreateParameters, options)
+      registry, options)
     summary: Creates a container registry with the specified parameters.
     fullName: >-
       azure-arm-containerregistry.Registries.beginCreateWithHttpOperationResponse(resourceGroupName,
-      registryName, registryCreateParameters, options)
+      registryName, registry, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1618,73 +1751,52 @@ items:
           type:
             - string
           description: The name of the container registry.
-        - id: registryCreateParameters
+        - id: registry
           type:
             - object
-          description: |-
-            The parameters for creating a
-            container registry.
-        - id: registryCreateParameters.tags
+          description: The parameters for creating a container registry.
+        - id: registry.sku
           type:
             - object
-          description: |-
-            The tags for the container
-            registry.
-          optional: true
-        - id: registryCreateParameters.location
+          description: The SKU of the container registry.
+        - id: registry.sku.name
           type:
             - string
-          description: >-
-            The location of the
-
-            container registry. This cannot be changed after the resource is
-            created.
-        - id: registryCreateParameters.sku
-          type:
-            - object
           description: |-
-            The SKU of the container
-            registry.
-        - id: registryCreateParameters.sku.name
-          type:
-            - string
-          description: >-
-            The SKU name of the the
-
-            container registry. Required for registry creation. Allowed value:
-            Basic.
-        - id: registryCreateParameters.adminUserEnabled
+            The SKU name of the container registry.
+            Required for registry creation. Possible values include: 'Classic',
+            'Managed_Basic', 'Managed_Standard', 'Managed_Premium'
+        - id: registry.adminUserEnabled
           type:
             - boolean
-          description: >-
-            The value that
-
-            indicates whether the admin user is enabled. This value is false by
-            default.
+          description: |-
+            The value that indicates
+            whether the admin user is enabled.
           optional: true
-        - id: registryCreateParameters.storageAccount
+        - id: registry.storageAccount
           type:
             - object
-          description: >-
-            The parameters of a
-
-            storage account for the container registry. If specified, the
-            storage
-
-            account must be in the same physical location as the container
-            registry.
-        - id: registryCreateParameters.storageAccount.name
+          description: |-
+            The properties of the storage
+            account for the container registry. Only applicable to Classic SKU.
+          optional: true
+        - id: registry.storageAccount.id
           type:
             - string
           description: |-
-            The name of the
-            storage account.
-        - id: registryCreateParameters.storageAccount.accessKey
+            The resource ID of the storage
+            account.
+        - id: registry.location
           type:
             - string
           description: |-
-            The access
-            key to the storage account.
+            The location of the resource. This cannot
+            be changed after the resource is created.
+        - id: registry.tags
+          type:
+            - object
+          description: The tags of the resource.
+          optional: true
         - id: options
           type:
             - object
@@ -1703,19 +1815,19 @@ items:
         description: A promise is returned
       content: >-
         function beginCreateWithHttpOperationResponse(resourceGroupName,
-        registryName, registryCreateParameters, options)
+        registryName, registry, options)
     langs:
       - js
   - uid: 'azure-arm-containerregistry.Registries#beginCreate'
     id: 'azure-arm-containerregistry.Registries#beginCreate'
     parent: azure-arm-containerregistry.Registries
     name: >-
-      beginCreate(resourceGroupName, registryName, registryCreateParameters,
-      options, optionalCallback)
+      beginCreate(resourceGroupName, registryName, registry, options,
+      optionalCallback)
     summary: Creates a container registry with the specified parameters.
     fullName: >-
       azure-arm-containerregistry.Registries.beginCreate(resourceGroupName,
-      registryName, registryCreateParameters, options, optionalCallback)
+      registryName, registry, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1762,73 +1874,52 @@ items:
           type:
             - string
           description: The name of the container registry.
-        - id: registryCreateParameters
+        - id: registry
           type:
             - object
-          description: |-
-            The parameters for creating a
-            container registry.
-        - id: registryCreateParameters.tags
+          description: The parameters for creating a container registry.
+        - id: registry.sku
           type:
             - object
-          description: |-
-            The tags for the container
-            registry.
-          optional: true
-        - id: registryCreateParameters.location
+          description: The SKU of the container registry.
+        - id: registry.sku.name
           type:
             - string
-          description: >-
-            The location of the
-
-            container registry. This cannot be changed after the resource is
-            created.
-        - id: registryCreateParameters.sku
-          type:
-            - object
           description: |-
-            The SKU of the container
-            registry.
-        - id: registryCreateParameters.sku.name
-          type:
-            - string
-          description: >-
-            The SKU name of the the
-
-            container registry. Required for registry creation. Allowed value:
-            Basic.
-        - id: registryCreateParameters.adminUserEnabled
+            The SKU name of the container registry.
+            Required for registry creation. Possible values include: 'Classic',
+            'Managed_Basic', 'Managed_Standard', 'Managed_Premium'
+        - id: registry.adminUserEnabled
           type:
             - boolean
-          description: >-
-            The value that
-
-            indicates whether the admin user is enabled. This value is false by
-            default.
+          description: |-
+            The value that indicates
+            whether the admin user is enabled.
           optional: true
-        - id: registryCreateParameters.storageAccount
+        - id: registry.storageAccount
           type:
             - object
-          description: >-
-            The parameters of a
-
-            storage account for the container registry. If specified, the
-            storage
-
-            account must be in the same physical location as the container
-            registry.
-        - id: registryCreateParameters.storageAccount.name
+          description: |-
+            The properties of the storage
+            account for the container registry. Only applicable to Classic SKU.
+          optional: true
+        - id: registry.storageAccount.id
           type:
             - string
           description: |-
-            The name of the
-            storage account.
-        - id: registryCreateParameters.storageAccount.accessKey
+            The resource ID of the storage
+            account.
+        - id: registry.location
           type:
             - string
           description: |-
-            The access
-            key to the storage account.
+            The location of the resource. This cannot
+            be changed after the resource is created.
+        - id: registry.tags
+          type:
+            - object
+          description: The tags of the resource.
+          optional: true
         - id: options
           type:
             - object
@@ -1856,8 +1947,404 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function beginCreate(resourceGroupName, registryName,
-        registryCreateParameters, options, optionalCallback)
+        function beginCreate(resourceGroupName, registryName, registry, options,
+        optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-containerregistry.Registries#beginDeleteMethodWithHttpOperationResponse
+    id: >-
+      azure-arm-containerregistry.Registries#beginDeleteMethodWithHttpOperationResponse
+    parent: azure-arm-containerregistry.Registries
+    name: >-
+      beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
+      registryName, options)
+    summary: Deletes a container registry.
+    fullName: >-
+      azure-arm-containerregistry.Registries.beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
+      registryName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            The name of the resource group to which
+            the container registry belongs.
+        - id: registryName
+          type:
+            - string
+          description: The name of the container registry.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
+        registryName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-containerregistry.Registries#beginDeleteMethod'
+    id: 'azure-arm-containerregistry.Registries#beginDeleteMethod'
+    parent: azure-arm-containerregistry.Registries
+    name: >-
+      beginDeleteMethod(resourceGroupName, registryName, options,
+      optionalCallback)
+    summary: Deletes a container registry.
+    fullName: >-
+      azure-arm-containerregistry.Registries.beginDeleteMethod(resourceGroupName,
+      registryName, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            The name of the resource group to which
+            the container registry belongs.
+        - id: registryName
+          type:
+            - string
+          description: The name of the container registry.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function beginDeleteMethod(resourceGroupName, registryName, options,
+        optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-containerregistry.Registries#beginUpdateWithHttpOperationResponse
+    id: >-
+      azure-arm-containerregistry.Registries#beginUpdateWithHttpOperationResponse
+    parent: azure-arm-containerregistry.Registries
+    name: >-
+      beginUpdateWithHttpOperationResponse(resourceGroupName, registryName,
+      registryUpdateParameters, options)
+    summary: Updates a container registry with the specified parameters.
+    fullName: >-
+      azure-arm-containerregistry.Registries.beginUpdateWithHttpOperationResponse(resourceGroupName,
+      registryName, registryUpdateParameters, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<Registry>} - The deserialized result object.'
+        value: '{HttpOperationResponse<Registry>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            The name of the resource group to which
+            the container registry belongs.
+        - id: registryName
+          type:
+            - string
+          description: The name of the container registry.
+        - id: registryUpdateParameters
+          type:
+            - object
+          description: |-
+            The parameters for updating a
+            container registry.
+        - id: registryUpdateParameters.tags
+          type:
+            - object
+          description: |-
+            The tags for the container
+            registry.
+          optional: true
+        - id: registryUpdateParameters.sku
+          type:
+            - object
+          description: |-
+            The SKU of the container
+            registry.
+          optional: true
+        - id: registryUpdateParameters.sku.name
+          type:
+            - string
+          description: >-
+            The SKU name of the
+
+            container registry. Required for registry creation. Possible values
+            include:
+
+            'Classic', 'Managed_Basic', 'Managed_Standard', 'Managed_Premium'
+        - id: registryUpdateParameters.adminUserEnabled
+          type:
+            - boolean
+          description: |-
+            The value that
+            indicates whether the admin user is enabled.
+          optional: true
+        - id: registryUpdateParameters.storageAccount
+          type:
+            - object
+          description: >-
+            The parameters of
+
+            a storage account for the container registry. Only applicable to
+            Classic
+
+            SKU. If specified, the storage account must be in the same physical
+            location
+
+            as the container registry.
+          optional: true
+        - id: registryUpdateParameters.storageAccount.id
+          type:
+            - string
+          description: |-
+            The resource ID
+            of the storage account.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginUpdateWithHttpOperationResponse(resourceGroupName,
+        registryName, registryUpdateParameters, options)
+    langs:
+      - js
+  - uid: 'azure-arm-containerregistry.Registries#beginUpdate'
+    id: 'azure-arm-containerregistry.Registries#beginUpdate'
+    parent: azure-arm-containerregistry.Registries
+    name: >-
+      beginUpdate(resourceGroupName, registryName, registryUpdateParameters,
+      options, optionalCallback)
+    summary: Updates a container registry with the specified parameters.
+    fullName: >-
+      azure-arm-containerregistry.Registries.beginUpdate(resourceGroupName,
+      registryName, registryUpdateParameters, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{Registry} - The deserialized result object.'
+        value: '{Registry} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link Registry} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link Registry} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            The name of the resource group to which
+            the container registry belongs.
+        - id: registryName
+          type:
+            - string
+          description: The name of the container registry.
+        - id: registryUpdateParameters
+          type:
+            - object
+          description: |-
+            The parameters for updating a
+            container registry.
+        - id: registryUpdateParameters.tags
+          type:
+            - object
+          description: |-
+            The tags for the container
+            registry.
+          optional: true
+        - id: registryUpdateParameters.sku
+          type:
+            - object
+          description: |-
+            The SKU of the container
+            registry.
+          optional: true
+        - id: registryUpdateParameters.sku.name
+          type:
+            - string
+          description: >-
+            The SKU name of the
+
+            container registry. Required for registry creation. Possible values
+            include:
+
+            'Classic', 'Managed_Basic', 'Managed_Standard', 'Managed_Premium'
+        - id: registryUpdateParameters.adminUserEnabled
+          type:
+            - boolean
+          description: |-
+            The value that
+            indicates whether the admin user is enabled.
+          optional: true
+        - id: registryUpdateParameters.storageAccount
+          type:
+            - object
+          description: >-
+            The parameters of
+
+            a storage account for the container registry. Only applicable to
+            Classic
+
+            SKU. If specified, the storage account must be in the same physical
+            location
+
+            as the container registry.
+          optional: true
+        - id: registryUpdateParameters.storageAccount.id
+          type:
+            - string
+          description: |-
+            The resource ID
+            of the storage account.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function beginUpdate(resourceGroupName, registryName,
+        registryUpdateParameters, options, optionalCallback)
     langs:
       - js
   - uid: >-

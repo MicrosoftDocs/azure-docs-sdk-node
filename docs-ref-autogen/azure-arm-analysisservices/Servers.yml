@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-analysisservices.Servers
       path: lib\services\analysisServices\lib\operations\servers.js
-      startLine: 1883
+      startLine: 2599
       remote:
         branch: jsdoc
         path: lib\services\analysisServices\lib\operations\servers.js
@@ -33,6 +33,18 @@ items:
       - 'azure-arm-analysisservices.Servers#listByResourceGroup'
       - 'azure-arm-analysisservices.Servers#listWithHttpOperationResponse'
       - 'azure-arm-analysisservices.Servers#list'
+      - >-
+        azure-arm-analysisservices.Servers#listSkusForNewWithHttpOperationResponse
+      - 'azure-arm-analysisservices.Servers#listSkusForNew'
+      - >-
+        azure-arm-analysisservices.Servers#listSkusForExistingWithHttpOperationResponse
+      - 'azure-arm-analysisservices.Servers#listSkusForExisting'
+      - >-
+        azure-arm-analysisservices.Servers#listGatewayStatusWithHttpOperationResponse
+      - 'azure-arm-analysisservices.Servers#listGatewayStatus'
+      - >-
+        azure-arm-analysisservices.Servers#dissociateGatewayWithHttpOperationResponse
+      - 'azure-arm-analysisservices.Servers#dissociateGateway'
       - 'azure-arm-analysisservices.Servers#beginCreateWithHttpOperationResponse'
       - 'azure-arm-analysisservices.Servers#beginCreate'
       - >-
@@ -273,7 +285,9 @@ items:
         - id: serverParameters.asAdministrators
           type:
             - object
-          description: ''
+          description: |-
+            A collection of AS
+            server administrators
           optional: true
         - id: serverParameters.asAdministrators.members
           type:
@@ -282,29 +296,65 @@ items:
             An array of
             administrator user identities.
           optional: true
-        - id: serverParameters.backupConfiguration
+        - id: serverParameters.backupBlobContainerUri
+          type:
+            - string
+          description: |-
+            The container URI
+            of backup blob.
+          optional: true
+        - id: serverParameters.gatewayDetails
           type:
             - object
-          description: ''
+          description: |-
+            The gateway details
+            configured for the AS server.
           optional: true
-        - id: serverParameters.backupConfiguration.storageAccount
+        - id: serverParameters.gatewayDetails.gatewayResourceId
           type:
             - string
           description: |-
-            Storage
-            account full resource id for backup configuration
-        - id: serverParameters.backupConfiguration.blobContainer
+            Gateway
+            resource to be associated with the server.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings
+          type:
+            - object
+          description: |-
+            The firewall
+            settings for the AS server.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings.firewallRules
+          type:
+            - array
+          description: |-
+            An
+            array of firewall rules.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings.enablePowerBIService
           type:
             - string
-          description: |-
-            The name
-            of blob container for backup configuration
-        - id: serverParameters.backupConfiguration.accessKey
+          description: The indicator of enableing PBI service.
+          optional: true
+        - id: serverParameters.querypoolConnectionMode
           type:
             - string
-          description: |-
-            The access
-            key of storage account used for backup configuration
+          description: >-
+            How the
+
+            read-write server's participation in the query pool is
+            controlled.<br/>It
+
+            can have the following values: <ul><li>readOnly - indicates that the
+
+            read-write server is intended not to participate in query
+
+            operations</li><li>all - indicates that the read-write server can
+
+            participate in query operations</li></ul>Specifying readOnly when
+            capacity
+
+            is 1 results in error. Possible values include: 'All', 'ReadOnly'
           optional: true
         - id: serverParameters.location
           type:
@@ -321,13 +371,7 @@ items:
         - id: serverParameters.sku.name
           type:
             - string
-          description: >-
-            Name of the SKU level for the
-
-            server being provisioned. Possible values include: 'B1', 'B2', 'S0',
-            'S1',
-
-            'S2', 'S4', 'D1'
+          description: Name of the SKU level.
         - id: serverParameters.sku.tier
           type:
             - string
@@ -338,6 +382,13 @@ items:
             'Development',
 
             'Basic', 'Standard'
+          optional: true
+        - id: serverParameters.sku.capacity
+          type:
+            - number
+          description: |-
+            The number of instances in
+            the read only query pool.
           optional: true
         - id: serverParameters.tags
           type:
@@ -444,7 +495,9 @@ items:
         - id: serverParameters.asAdministrators
           type:
             - object
-          description: ''
+          description: |-
+            A collection of AS
+            server administrators
           optional: true
         - id: serverParameters.asAdministrators.members
           type:
@@ -453,29 +506,65 @@ items:
             An array of
             administrator user identities.
           optional: true
-        - id: serverParameters.backupConfiguration
+        - id: serverParameters.backupBlobContainerUri
+          type:
+            - string
+          description: |-
+            The container URI
+            of backup blob.
+          optional: true
+        - id: serverParameters.gatewayDetails
           type:
             - object
-          description: ''
+          description: |-
+            The gateway details
+            configured for the AS server.
           optional: true
-        - id: serverParameters.backupConfiguration.storageAccount
+        - id: serverParameters.gatewayDetails.gatewayResourceId
           type:
             - string
           description: |-
-            Storage
-            account full resource id for backup configuration
-        - id: serverParameters.backupConfiguration.blobContainer
+            Gateway
+            resource to be associated with the server.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings
+          type:
+            - object
+          description: |-
+            The firewall
+            settings for the AS server.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings.firewallRules
+          type:
+            - array
+          description: |-
+            An
+            array of firewall rules.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings.enablePowerBIService
           type:
             - string
-          description: |-
-            The name
-            of blob container for backup configuration
-        - id: serverParameters.backupConfiguration.accessKey
+          description: The indicator of enableing PBI service.
+          optional: true
+        - id: serverParameters.querypoolConnectionMode
           type:
             - string
-          description: |-
-            The access
-            key of storage account used for backup configuration
+          description: >-
+            How the
+
+            read-write server's participation in the query pool is
+            controlled.<br/>It
+
+            can have the following values: <ul><li>readOnly - indicates that the
+
+            read-write server is intended not to participate in query
+
+            operations</li><li>all - indicates that the read-write server can
+
+            participate in query operations</li></ul>Specifying readOnly when
+            capacity
+
+            is 1 results in error. Possible values include: 'All', 'ReadOnly'
           optional: true
         - id: serverParameters.location
           type:
@@ -492,13 +581,7 @@ items:
         - id: serverParameters.sku.name
           type:
             - string
-          description: >-
-            Name of the SKU level for the
-
-            server being provisioned. Possible values include: 'B1', 'B2', 'S0',
-            'S1',
-
-            'S2', 'S4', 'D1'
+          description: Name of the SKU level.
         - id: serverParameters.sku.tier
           type:
             - string
@@ -509,6 +592,13 @@ items:
             'Development',
 
             'Basic', 'Standard'
+          optional: true
+        - id: serverParameters.sku.capacity
+          type:
+            - number
+          description: |-
+            The number of instances in
+            the read only query pool.
           optional: true
         - id: serverParameters.tags
           type:
@@ -754,13 +844,7 @@ items:
         - id: serverUpdateParameters.sku.name
           type:
             - string
-          description: >-
-            Name of the SKU level for
-
-            the server being provisioned. Possible values include: 'B1', 'B2',
-            'S0',
-
-            'S1', 'S2', 'S4', 'D1'
+          description: Name of the SKU level.
         - id: serverUpdateParameters.sku.tier
           type:
             - string
@@ -768,6 +852,13 @@ items:
             The name of the Azure
             pricing tier to which the SKU applies. Possible values include:
             'Development', 'Basic', 'Standard'
+          optional: true
+        - id: serverUpdateParameters.sku.capacity
+          type:
+            - number
+          description: |-
+            The number of
+            instances in the read only query pool.
           optional: true
         - id: serverUpdateParameters.tags
           type:
@@ -779,7 +870,9 @@ items:
         - id: serverUpdateParameters.asAdministrators
           type:
             - object
-          description: ''
+          description: |-
+            A collection of AS
+            server administrators
           optional: true
         - id: serverUpdateParameters.asAdministrators.members
           type:
@@ -788,27 +881,63 @@ items:
             An array of
             administrator user identities.
           optional: true
-        - id: serverUpdateParameters.backupConfiguration
+        - id: serverUpdateParameters.backupBlobContainerUri
+          type:
+            - string
+          description: |-
+            The
+            container URI of backup blob.
+          optional: true
+        - id: serverUpdateParameters.gatewayDetails
           type:
             - object
-          description: ''
+          description: |-
+            The gateway details
+            configured for the AS server.
           optional: true
-        - id: serverUpdateParameters.backupConfiguration.storageAccount
+        - id: serverUpdateParameters.gatewayDetails.gatewayResourceId
           type:
             - string
-          description: Storage account full resource id for backup configuration
-        - id: serverUpdateParameters.backupConfiguration.blobContainer
+          description: Gateway resource to be associated with the server.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings
+          type:
+            - object
+          description: |-
+            The firewall
+            settings for the AS server.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings.firewallRules
+          type:
+            - array
+          description: An array of firewall rules.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings.enablePowerBIService
           type:
             - string
           description: |-
             The
-            name of blob container for backup configuration
-        - id: serverUpdateParameters.backupConfiguration.accessKey
+            indicator of enableing PBI service.
+          optional: true
+        - id: serverUpdateParameters.querypoolConnectionMode
           type:
             - string
-          description: |-
-            The
-            access key of storage account used for backup configuration
+          description: >-
+            How the
+
+            read-write server's participation in the query pool is
+            controlled.<br/>It
+
+            can have the following values: <ul><li>readOnly - indicates that the
+
+            read-write server is intended not to participate in query
+
+            operations</li><li>all - indicates that the read-write server can
+
+            participate in query operations</li></ul>Specifying readOnly when
+            capacity
+
+            is 1 results in error. Possible values include: 'All', 'ReadOnly'
           optional: true
         - id: options
           type:
@@ -911,13 +1040,7 @@ items:
         - id: serverUpdateParameters.sku.name
           type:
             - string
-          description: >-
-            Name of the SKU level for
-
-            the server being provisioned. Possible values include: 'B1', 'B2',
-            'S0',
-
-            'S1', 'S2', 'S4', 'D1'
+          description: Name of the SKU level.
         - id: serverUpdateParameters.sku.tier
           type:
             - string
@@ -925,6 +1048,13 @@ items:
             The name of the Azure
             pricing tier to which the SKU applies. Possible values include:
             'Development', 'Basic', 'Standard'
+          optional: true
+        - id: serverUpdateParameters.sku.capacity
+          type:
+            - number
+          description: |-
+            The number of
+            instances in the read only query pool.
           optional: true
         - id: serverUpdateParameters.tags
           type:
@@ -936,7 +1066,9 @@ items:
         - id: serverUpdateParameters.asAdministrators
           type:
             - object
-          description: ''
+          description: |-
+            A collection of AS
+            server administrators
           optional: true
         - id: serverUpdateParameters.asAdministrators.members
           type:
@@ -945,27 +1077,63 @@ items:
             An array of
             administrator user identities.
           optional: true
-        - id: serverUpdateParameters.backupConfiguration
+        - id: serverUpdateParameters.backupBlobContainerUri
+          type:
+            - string
+          description: |-
+            The
+            container URI of backup blob.
+          optional: true
+        - id: serverUpdateParameters.gatewayDetails
           type:
             - object
-          description: ''
+          description: |-
+            The gateway details
+            configured for the AS server.
           optional: true
-        - id: serverUpdateParameters.backupConfiguration.storageAccount
+        - id: serverUpdateParameters.gatewayDetails.gatewayResourceId
           type:
             - string
-          description: Storage account full resource id for backup configuration
-        - id: serverUpdateParameters.backupConfiguration.blobContainer
+          description: Gateway resource to be associated with the server.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings
+          type:
+            - object
+          description: |-
+            The firewall
+            settings for the AS server.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings.firewallRules
+          type:
+            - array
+          description: An array of firewall rules.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings.enablePowerBIService
           type:
             - string
           description: |-
             The
-            name of blob container for backup configuration
-        - id: serverUpdateParameters.backupConfiguration.accessKey
+            indicator of enableing PBI service.
+          optional: true
+        - id: serverUpdateParameters.querypoolConnectionMode
           type:
             - string
-          description: |-
-            The
-            access key of storage account used for backup configuration
+          description: >-
+            How the
+
+            read-write server's participation in the query pool is
+            controlled.<br/>It
+
+            can have the following values: <ul><li>readOnly - indicates that the
+
+            read-write server is intended not to participate in query
+
+            operations</li><li>all - indicates that the read-write server can
+
+            participate in query operations</li></ul>Specifying readOnly when
+            capacity
+
+            is 1 results in error. Possible values include: 'All', 'ReadOnly'
           optional: true
         - id: options
           type:
@@ -1548,6 +1716,597 @@ items:
       content: 'function list(options, optionalCallback)'
     langs:
       - js
+  - uid: 'azure-arm-analysisservices.Servers#listSkusForNewWithHttpOperationResponse'
+    id: 'azure-arm-analysisservices.Servers#listSkusForNewWithHttpOperationResponse'
+    parent: azure-arm-analysisservices.Servers
+    name: listSkusForNewWithHttpOperationResponse(options)
+    summary: Lists eligible SKUs for Analysis Services resource provider.
+    fullName: >-
+      azure-arm-analysisservices.Servers.listSkusForNewWithHttpOperationResponse(options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<SkuEnumerationForNewResourceResult>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<SkuEnumerationForNewResourceResult>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: function listSkusForNewWithHttpOperationResponse(options)
+    langs:
+      - js
+  - uid: 'azure-arm-analysisservices.Servers#listSkusForNew'
+    id: 'azure-arm-analysisservices.Servers#listSkusForNew'
+    parent: azure-arm-analysisservices.Servers
+    name: 'listSkusForNew(options, optionalCallback)'
+    summary: Lists eligible SKUs for Analysis Services resource provider.
+    fullName: >-
+      azure-arm-analysisservices.Servers.listSkusForNew(options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{SkuEnumerationForNewResourceResult} - The deserialized result object.'
+        value: '{SkuEnumerationForNewResourceResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link SkuEnumerationForNewResourceResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link SkuEnumerationForNewResourceResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function listSkusForNew(options, optionalCallback)'
+    langs:
+      - js
+  - uid: >-
+      azure-arm-analysisservices.Servers#listSkusForExistingWithHttpOperationResponse
+    id: >-
+      azure-arm-analysisservices.Servers#listSkusForExistingWithHttpOperationResponse
+    parent: azure-arm-analysisservices.Servers
+    name: >-
+      listSkusForExistingWithHttpOperationResponse(resourceGroupName,
+      serverName, options)
+    summary: Lists eligible SKUs for an Analysis Services resource.
+    fullName: >-
+      azure-arm-analysisservices.Servers.listSkusForExistingWithHttpOperationResponse(resourceGroupName,
+      serverName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<SkuEnumerationForExistingResourceResult>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<SkuEnumerationForExistingResourceResult>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: >-
+            The name of the Azure Resource group of
+
+            which a given Analysis Services server is part. This name must be at
+            least 1
+
+            character in length, and no more than 90.
+        - id: serverName
+          type:
+            - string
+          description: |-
+            The name of the Analysis Services server. It must
+            be at least 3 characters in length, and no more than 63.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function listSkusForExistingWithHttpOperationResponse(resourceGroupName,
+        serverName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-analysisservices.Servers#listSkusForExisting'
+    id: 'azure-arm-analysisservices.Servers#listSkusForExisting'
+    parent: azure-arm-analysisservices.Servers
+    name: >-
+      listSkusForExisting(resourceGroupName, serverName, options,
+      optionalCallback)
+    summary: Lists eligible SKUs for an Analysis Services resource.
+    fullName: >-
+      azure-arm-analysisservices.Servers.listSkusForExisting(resourceGroupName,
+      serverName, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {SkuEnumerationForExistingResourceResult} - The deserialized result
+          object.
+        value: >-
+          {SkuEnumerationForExistingResourceResult} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link SkuEnumerationForExistingResourceResult} for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link SkuEnumerationForExistingResourceResult} for
+                               more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: >-
+            The name of the Azure Resource group of
+
+            which a given Analysis Services server is part. This name must be at
+            least 1
+
+            character in length, and no more than 90.
+        - id: serverName
+          type:
+            - string
+          description: |-
+            The name of the Analysis Services server. It must
+            be at least 3 characters in length, and no more than 63.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function listSkusForExisting(resourceGroupName, serverName, options,
+        optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-analysisservices.Servers#listGatewayStatusWithHttpOperationResponse
+    id: >-
+      azure-arm-analysisservices.Servers#listGatewayStatusWithHttpOperationResponse
+    parent: azure-arm-analysisservices.Servers
+    name: >-
+      listGatewayStatusWithHttpOperationResponse(resourceGroupName, serverName,
+      options)
+    summary: |-
+      Return the gateway status of the specified Analysis Services server
+      instance.
+    fullName: >-
+      azure-arm-analysisservices.Servers.listGatewayStatusWithHttpOperationResponse(resourceGroupName,
+      serverName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<GatewayListStatusLive>} - The deserialized
+          result object.
+        value: >-
+          {HttpOperationResponse<GatewayListStatusLive>} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: >-
+            The name of the Azure Resource group of
+
+            which a given Analysis Services server is part. This name must be at
+            least 1
+
+            character in length, and no more than 90.
+        - id: serverName
+          type:
+            - string
+          description: The name of the Analysis Services server.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function listGatewayStatusWithHttpOperationResponse(resourceGroupName,
+        serverName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-analysisservices.Servers#listGatewayStatus'
+    id: 'azure-arm-analysisservices.Servers#listGatewayStatus'
+    parent: azure-arm-analysisservices.Servers
+    name: >-
+      listGatewayStatus(resourceGroupName, serverName, options,
+      optionalCallback)
+    summary: |-
+      Return the gateway status of the specified Analysis Services server
+      instance.
+    fullName: >-
+      azure-arm-analysisservices.Servers.listGatewayStatus(resourceGroupName,
+      serverName, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{GatewayListStatusLive} - The deserialized result object.'
+        value: '{GatewayListStatusLive} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link GatewayListStatusLive} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link GatewayListStatusLive} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: >-
+            The name of the Azure Resource group of
+
+            which a given Analysis Services server is part. This name must be at
+            least 1
+
+            character in length, and no more than 90.
+        - id: serverName
+          type:
+            - string
+          description: The name of the Analysis Services server.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function listGatewayStatus(resourceGroupName, serverName, options,
+        optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-analysisservices.Servers#dissociateGatewayWithHttpOperationResponse
+    id: >-
+      azure-arm-analysisservices.Servers#dissociateGatewayWithHttpOperationResponse
+    parent: azure-arm-analysisservices.Servers
+    name: >-
+      dissociateGatewayWithHttpOperationResponse(resourceGroupName, serverName,
+      options)
+    summary: Dissociates a Unified Gateway associated with the server.
+    fullName: >-
+      azure-arm-analysisservices.Servers.dissociateGatewayWithHttpOperationResponse(resourceGroupName,
+      serverName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: >-
+            The name of the Azure Resource group of
+
+            which a given Analysis Services server is part. This name must be at
+            least 1
+
+            character in length, and no more than 90.
+        - id: serverName
+          type:
+            - string
+          description: |-
+            The name of the Analysis Services server. It must
+            be at least 3 characters in length, and no more than 63.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function dissociateGatewayWithHttpOperationResponse(resourceGroupName,
+        serverName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-analysisservices.Servers#dissociateGateway'
+    id: 'azure-arm-analysisservices.Servers#dissociateGateway'
+    parent: azure-arm-analysisservices.Servers
+    name: >-
+      dissociateGateway(resourceGroupName, serverName, options,
+      optionalCallback)
+    summary: Dissociates a Unified Gateway associated with the server.
+    fullName: >-
+      azure-arm-analysisservices.Servers.dissociateGateway(resourceGroupName,
+      serverName, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: >-
+            The name of the Azure Resource group of
+
+            which a given Analysis Services server is part. This name must be at
+            least 1
+
+            character in length, and no more than 90.
+        - id: serverName
+          type:
+            - string
+          description: |-
+            The name of the Analysis Services server. It must
+            be at least 3 characters in length, and no more than 63.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function dissociateGateway(resourceGroupName, serverName, options,
+        optionalCallback)
+    langs:
+      - js
   - uid: 'azure-arm-analysisservices.Servers#beginCreateWithHttpOperationResponse'
     id: 'azure-arm-analysisservices.Servers#beginCreateWithHttpOperationResponse'
     parent: azure-arm-analysisservices.Servers
@@ -1603,7 +2362,9 @@ items:
         - id: serverParameters.asAdministrators
           type:
             - object
-          description: ''
+          description: |-
+            A collection of AS
+            server administrators
           optional: true
         - id: serverParameters.asAdministrators.members
           type:
@@ -1612,29 +2373,65 @@ items:
             An array of
             administrator user identities.
           optional: true
-        - id: serverParameters.backupConfiguration
+        - id: serverParameters.backupBlobContainerUri
+          type:
+            - string
+          description: |-
+            The container URI
+            of backup blob.
+          optional: true
+        - id: serverParameters.gatewayDetails
           type:
             - object
-          description: ''
+          description: |-
+            The gateway details
+            configured for the AS server.
           optional: true
-        - id: serverParameters.backupConfiguration.storageAccount
+        - id: serverParameters.gatewayDetails.gatewayResourceId
           type:
             - string
           description: |-
-            Storage
-            account full resource id for backup configuration
-        - id: serverParameters.backupConfiguration.blobContainer
+            Gateway
+            resource to be associated with the server.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings
+          type:
+            - object
+          description: |-
+            The firewall
+            settings for the AS server.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings.firewallRules
+          type:
+            - array
+          description: |-
+            An
+            array of firewall rules.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings.enablePowerBIService
           type:
             - string
-          description: |-
-            The name
-            of blob container for backup configuration
-        - id: serverParameters.backupConfiguration.accessKey
+          description: The indicator of enableing PBI service.
+          optional: true
+        - id: serverParameters.querypoolConnectionMode
           type:
             - string
-          description: |-
-            The access
-            key of storage account used for backup configuration
+          description: >-
+            How the
+
+            read-write server's participation in the query pool is
+            controlled.<br/>It
+
+            can have the following values: <ul><li>readOnly - indicates that the
+
+            read-write server is intended not to participate in query
+
+            operations</li><li>all - indicates that the read-write server can
+
+            participate in query operations</li></ul>Specifying readOnly when
+            capacity
+
+            is 1 results in error. Possible values include: 'All', 'ReadOnly'
           optional: true
         - id: serverParameters.location
           type:
@@ -1651,13 +2448,7 @@ items:
         - id: serverParameters.sku.name
           type:
             - string
-          description: >-
-            Name of the SKU level for the
-
-            server being provisioned. Possible values include: 'B1', 'B2', 'S0',
-            'S1',
-
-            'S2', 'S4', 'D1'
+          description: Name of the SKU level.
         - id: serverParameters.sku.tier
           type:
             - string
@@ -1668,6 +2459,13 @@ items:
             'Development',
 
             'Basic', 'Standard'
+          optional: true
+        - id: serverParameters.sku.capacity
+          type:
+            - number
+          description: |-
+            The number of instances in
+            the read only query pool.
           optional: true
         - id: serverParameters.tags
           type:
@@ -1774,7 +2572,9 @@ items:
         - id: serverParameters.asAdministrators
           type:
             - object
-          description: ''
+          description: |-
+            A collection of AS
+            server administrators
           optional: true
         - id: serverParameters.asAdministrators.members
           type:
@@ -1783,29 +2583,65 @@ items:
             An array of
             administrator user identities.
           optional: true
-        - id: serverParameters.backupConfiguration
+        - id: serverParameters.backupBlobContainerUri
+          type:
+            - string
+          description: |-
+            The container URI
+            of backup blob.
+          optional: true
+        - id: serverParameters.gatewayDetails
           type:
             - object
-          description: ''
+          description: |-
+            The gateway details
+            configured for the AS server.
           optional: true
-        - id: serverParameters.backupConfiguration.storageAccount
+        - id: serverParameters.gatewayDetails.gatewayResourceId
           type:
             - string
           description: |-
-            Storage
-            account full resource id for backup configuration
-        - id: serverParameters.backupConfiguration.blobContainer
+            Gateway
+            resource to be associated with the server.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings
+          type:
+            - object
+          description: |-
+            The firewall
+            settings for the AS server.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings.firewallRules
+          type:
+            - array
+          description: |-
+            An
+            array of firewall rules.
+          optional: true
+        - id: serverParameters.ipV4FirewallSettings.enablePowerBIService
           type:
             - string
-          description: |-
-            The name
-            of blob container for backup configuration
-        - id: serverParameters.backupConfiguration.accessKey
+          description: The indicator of enableing PBI service.
+          optional: true
+        - id: serverParameters.querypoolConnectionMode
           type:
             - string
-          description: |-
-            The access
-            key of storage account used for backup configuration
+          description: >-
+            How the
+
+            read-write server's participation in the query pool is
+            controlled.<br/>It
+
+            can have the following values: <ul><li>readOnly - indicates that the
+
+            read-write server is intended not to participate in query
+
+            operations</li><li>all - indicates that the read-write server can
+
+            participate in query operations</li></ul>Specifying readOnly when
+            capacity
+
+            is 1 results in error. Possible values include: 'All', 'ReadOnly'
           optional: true
         - id: serverParameters.location
           type:
@@ -1822,13 +2658,7 @@ items:
         - id: serverParameters.sku.name
           type:
             - string
-          description: >-
-            Name of the SKU level for the
-
-            server being provisioned. Possible values include: 'B1', 'B2', 'S0',
-            'S1',
-
-            'S2', 'S4', 'D1'
+          description: Name of the SKU level.
         - id: serverParameters.sku.tier
           type:
             - string
@@ -1839,6 +2669,13 @@ items:
             'Development',
 
             'Basic', 'Standard'
+          optional: true
+        - id: serverParameters.sku.capacity
+          type:
+            - number
+          description: |-
+            The number of instances in
+            the read only query pool.
           optional: true
         - id: serverParameters.tags
           type:
@@ -2088,13 +2925,7 @@ items:
         - id: serverUpdateParameters.sku.name
           type:
             - string
-          description: >-
-            Name of the SKU level for
-
-            the server being provisioned. Possible values include: 'B1', 'B2',
-            'S0',
-
-            'S1', 'S2', 'S4', 'D1'
+          description: Name of the SKU level.
         - id: serverUpdateParameters.sku.tier
           type:
             - string
@@ -2102,6 +2933,13 @@ items:
             The name of the Azure
             pricing tier to which the SKU applies. Possible values include:
             'Development', 'Basic', 'Standard'
+          optional: true
+        - id: serverUpdateParameters.sku.capacity
+          type:
+            - number
+          description: |-
+            The number of
+            instances in the read only query pool.
           optional: true
         - id: serverUpdateParameters.tags
           type:
@@ -2113,7 +2951,9 @@ items:
         - id: serverUpdateParameters.asAdministrators
           type:
             - object
-          description: ''
+          description: |-
+            A collection of AS
+            server administrators
           optional: true
         - id: serverUpdateParameters.asAdministrators.members
           type:
@@ -2122,27 +2962,63 @@ items:
             An array of
             administrator user identities.
           optional: true
-        - id: serverUpdateParameters.backupConfiguration
+        - id: serverUpdateParameters.backupBlobContainerUri
+          type:
+            - string
+          description: |-
+            The
+            container URI of backup blob.
+          optional: true
+        - id: serverUpdateParameters.gatewayDetails
           type:
             - object
-          description: ''
+          description: |-
+            The gateway details
+            configured for the AS server.
           optional: true
-        - id: serverUpdateParameters.backupConfiguration.storageAccount
+        - id: serverUpdateParameters.gatewayDetails.gatewayResourceId
           type:
             - string
-          description: Storage account full resource id for backup configuration
-        - id: serverUpdateParameters.backupConfiguration.blobContainer
+          description: Gateway resource to be associated with the server.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings
+          type:
+            - object
+          description: |-
+            The firewall
+            settings for the AS server.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings.firewallRules
+          type:
+            - array
+          description: An array of firewall rules.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings.enablePowerBIService
           type:
             - string
           description: |-
             The
-            name of blob container for backup configuration
-        - id: serverUpdateParameters.backupConfiguration.accessKey
+            indicator of enableing PBI service.
+          optional: true
+        - id: serverUpdateParameters.querypoolConnectionMode
           type:
             - string
-          description: |-
-            The
-            access key of storage account used for backup configuration
+          description: >-
+            How the
+
+            read-write server's participation in the query pool is
+            controlled.<br/>It
+
+            can have the following values: <ul><li>readOnly - indicates that the
+
+            read-write server is intended not to participate in query
+
+            operations</li><li>all - indicates that the read-write server can
+
+            participate in query operations</li></ul>Specifying readOnly when
+            capacity
+
+            is 1 results in error. Possible values include: 'All', 'ReadOnly'
           optional: true
         - id: options
           type:
@@ -2245,13 +3121,7 @@ items:
         - id: serverUpdateParameters.sku.name
           type:
             - string
-          description: >-
-            Name of the SKU level for
-
-            the server being provisioned. Possible values include: 'B1', 'B2',
-            'S0',
-
-            'S1', 'S2', 'S4', 'D1'
+          description: Name of the SKU level.
         - id: serverUpdateParameters.sku.tier
           type:
             - string
@@ -2259,6 +3129,13 @@ items:
             The name of the Azure
             pricing tier to which the SKU applies. Possible values include:
             'Development', 'Basic', 'Standard'
+          optional: true
+        - id: serverUpdateParameters.sku.capacity
+          type:
+            - number
+          description: |-
+            The number of
+            instances in the read only query pool.
           optional: true
         - id: serverUpdateParameters.tags
           type:
@@ -2270,7 +3147,9 @@ items:
         - id: serverUpdateParameters.asAdministrators
           type:
             - object
-          description: ''
+          description: |-
+            A collection of AS
+            server administrators
           optional: true
         - id: serverUpdateParameters.asAdministrators.members
           type:
@@ -2279,27 +3158,63 @@ items:
             An array of
             administrator user identities.
           optional: true
-        - id: serverUpdateParameters.backupConfiguration
+        - id: serverUpdateParameters.backupBlobContainerUri
+          type:
+            - string
+          description: |-
+            The
+            container URI of backup blob.
+          optional: true
+        - id: serverUpdateParameters.gatewayDetails
           type:
             - object
-          description: ''
+          description: |-
+            The gateway details
+            configured for the AS server.
           optional: true
-        - id: serverUpdateParameters.backupConfiguration.storageAccount
+        - id: serverUpdateParameters.gatewayDetails.gatewayResourceId
           type:
             - string
-          description: Storage account full resource id for backup configuration
-        - id: serverUpdateParameters.backupConfiguration.blobContainer
+          description: Gateway resource to be associated with the server.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings
+          type:
+            - object
+          description: |-
+            The firewall
+            settings for the AS server.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings.firewallRules
+          type:
+            - array
+          description: An array of firewall rules.
+          optional: true
+        - id: serverUpdateParameters.ipV4FirewallSettings.enablePowerBIService
           type:
             - string
           description: |-
             The
-            name of blob container for backup configuration
-        - id: serverUpdateParameters.backupConfiguration.accessKey
+            indicator of enableing PBI service.
+          optional: true
+        - id: serverUpdateParameters.querypoolConnectionMode
           type:
             - string
-          description: |-
-            The
-            access key of storage account used for backup configuration
+          description: >-
+            How the
+
+            read-write server's participation in the query pool is
+            controlled.<br/>It
+
+            can have the following values: <ul><li>readOnly - indicates that the
+
+            read-write server is intended not to participate in query
+
+            operations</li><li>all - indicates that the read-write server can
+
+            participate in query operations</li></ul>Specifying readOnly when
+            capacity
+
+            is 1 results in error. Possible values include: 'All', 'ReadOnly'
           optional: true
         - id: options
           type:

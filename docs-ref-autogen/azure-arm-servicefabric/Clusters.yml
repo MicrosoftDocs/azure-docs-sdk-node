@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-servicefabric.Clusters
       path: lib\services\serviceFabricManagement\lib\operations\clusters.js
-      startLine: 1817
+      startLine: 1744
       remote:
         branch: jsdoc
         path: lib\services\serviceFabricManagement\lib\operations\clusters.js
@@ -16,28 +16,23 @@ items:
     type: Class
     children:
       - 'azure-arm-servicefabric.Clusters.#ctor'
-      - 'azure-arm-servicefabric.Clusters#updateWithHttpOperationResponse'
-      - 'azure-arm-servicefabric.Clusters#update'
-      - 'azure-arm-servicefabric.Clusters#getWithHttpOperationResponse'
-      - 'azure-arm-servicefabric.Clusters#get'
       - 'azure-arm-servicefabric.Clusters#createWithHttpOperationResponse'
       - 'azure-arm-servicefabric.Clusters#create'
       - 'azure-arm-servicefabric.Clusters#deleteMethodWithHttpOperationResponse'
       - 'azure-arm-servicefabric.Clusters#deleteMethod'
+      - 'azure-arm-servicefabric.Clusters#getWithHttpOperationResponse'
+      - 'azure-arm-servicefabric.Clusters#get'
+      - 'azure-arm-servicefabric.Clusters#updateWithHttpOperationResponse'
+      - 'azure-arm-servicefabric.Clusters#update'
       - >-
         azure-arm-servicefabric.Clusters#listByResourceGroupWithHttpOperationResponse
       - 'azure-arm-servicefabric.Clusters#listByResourceGroup'
       - 'azure-arm-servicefabric.Clusters#listWithHttpOperationResponse'
       - 'azure-arm-servicefabric.Clusters#list'
-      - 'azure-arm-servicefabric.Clusters#beginUpdateWithHttpOperationResponse'
-      - 'azure-arm-servicefabric.Clusters#beginUpdate'
       - 'azure-arm-servicefabric.Clusters#beginCreateWithHttpOperationResponse'
       - 'azure-arm-servicefabric.Clusters#beginCreate'
-      - >-
-        azure-arm-servicefabric.Clusters#listByResourceGroupNextWithHttpOperationResponse
-      - 'azure-arm-servicefabric.Clusters#listByResourceGroupNext'
-      - 'azure-arm-servicefabric.Clusters#listNextWithHttpOperationResponse'
-      - 'azure-arm-servicefabric.Clusters#listNext'
+      - 'azure-arm-servicefabric.Clusters#beginUpdateWithHttpOperationResponse'
+      - 'azure-arm-servicefabric.Clusters#beginUpdate'
     langs:
       - js
   - id: 'azure-arm-servicefabric.Clusters.#ctor'
@@ -56,16 +51,19 @@ items:
       content: new Clusters(client)
     langs:
       - js
-  - uid: 'azure-arm-servicefabric.Clusters#updateWithHttpOperationResponse'
-    id: 'azure-arm-servicefabric.Clusters#updateWithHttpOperationResponse'
+  - uid: 'azure-arm-servicefabric.Clusters#createWithHttpOperationResponse'
+    id: 'azure-arm-servicefabric.Clusters#createWithHttpOperationResponse'
     parent: azure-arm-servicefabric.Clusters
     name: >-
-      updateWithHttpOperationResponse(resourceGroupName, clusterName,
-      parameters, options)
-    summary: Update cluster configuration
+      createWithHttpOperationResponse(resourceGroupName, clusterName, cluster,
+      options)
+    summary: |-
+      Create a ServiceFabric cluster
+
+      Create cluster resource
     fullName: >-
-      azure-arm-servicefabric.Clusters.updateWithHttpOperationResponse(resourceGroupName,
-      clusterName, parameters, options)
+      azure-arm-servicefabric.Clusters.createWithHttpOperationResponse(resourceGroupName,
+      clusterName, cluster, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -81,115 +79,122 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
+          description: The name of the resource group.
         - id: clusterName
           type:
             - string
           description: The name of the cluster resource
-        - id: parameters
+        - id: cluster
           type:
             - object
-          description: |-
-            The parameters which contains the property value
-            and property name which used to update the cluster configuration
-        - id: parameters.reliabilityLevel
-          type:
-            - string
-          description: |-
-            This level is used to set the
-            number of replicas of the system services. Possible values include:
-            'Bronze', 'Silver', 'Gold'
-          optional: true
-        - id: parameters.upgradeMode
-          type:
-            - string
-          description: >-
-            Cluster upgrade mode indicates if
-
-            fabric upgrade is initiated automatically by the system or not.
-            Possible
-
-            values include: 'Automatic', 'Manual'
-          optional: true
-        - id: parameters.clusterCodeVersion
-          type:
-            - string
-          description: >-
-            The ServiceFabric code
-
-            version, if set it, please make sure you have set upgradeMode to
-            Manual,
-
-            otherwise ,it will fail, if you are using PUT new cluster, you can
-            get the
-
-            version by using ClusterVersions_List, if you are updating existing
-            cluster,
-
-            you can get the availableClusterVersions from Clusters_Get
-          optional: true
-        - id: parameters.certificate
-          type:
-            - object
-          description: >-
-            This primay certificate will be
-
-            used as cluster node to node security, SSL certificate for cluster
-
-            management endpoint and default admin client, the certificate should
-            exist
-
-            in the virtual machine scale sets or Azure key vault, before you add
-            it. It
-
-            will override original value
-          optional: true
-        - id: parameters.clientCertificateThumbprints
-          type:
-            - array
-          description: >-
-            The client
-
-            thumbprint details, it is used for client access for cluster
-            operation, it
-
-            will override existing collection
-          optional: true
-        - id: parameters.clientCertificateCommonNames
+          description: The cluster resource.
+        - id: cluster.availableClusterVersions
           type:
             - array
           description: |-
-            List of client
-            certificates to whitelist based on common names.
+            The Service Fabric runtime
+            versions available for this cluster.
           optional: true
-        - id: parameters.fabricSettings
+        - id: cluster.clusterState
+          type:
+            - string
+          description: |-
+            Possible values include:
+            'WaitingForNodes', 'Deploying', 'BaselineUpgrade',
+            'UpdatingUserConfiguration', 'UpdatingUserCertificate',
+            'UpdatingInfrastructure', 'EnforcingClusterVersion',
+            'UpgradeServiceUnreachable', 'AutoScale', 'Ready'
+          optional: true
+        - id: cluster.clusterCodeVersion
+          type:
+            - string
+          description: >-
+            The Service Fabric runtime
+
+            version of the cluster. This property can only by set the user when
+
+            **upgradeMode** is set to 'Manual'. To get list of available Service
+            Fabric
+
+            versions for new clusters use [ClusterVersion
+            API](./ClusterVersion.md). To
+
+            get the list of available version for existing clusters use
+
+            **availableClusterVersions**.
+          optional: true
+        - id: cluster.certificate
+          type:
+            - object
+          description: >-
+            The certificate to use for securing
+
+            the cluster. The certificate provided will be used for  node to node
+
+            security within the cluster, SSL certificate for cluster management
+            endpoint
+
+            and default  admin client.
+          optional: true
+        - id: cluster.reliabilityLevel
+          type:
+            - string
+          description: |-
+            Possible values include: 'None',
+            'Bronze', 'Silver', 'Gold', 'Platinum'
+          optional: true
+        - id: cluster.upgradeMode
+          type:
+            - string
+          description: |-
+            Possible values include: 'Automatic',
+            'Manual'
+          optional: true
+        - id: cluster.clientCertificateThumbprints
           type:
             - array
           description: |-
-            List of custom fabric settings to
-            configure the cluster, Note, it will overwrite existing collection
+            The list of client
+            certificates referenced by thumbprint that are allowed to manage the
+            cluster.
           optional: true
-        - id: parameters.reverseProxyCertificate
+        - id: cluster.clientCertificateCommonNames
+          type:
+            - array
+          description: >-
+            The list of client
+
+            certificates referenced by common name that are allowed to manage
+            the
+
+            cluster.
+          optional: true
+        - id: cluster.fabricSettings
+          type:
+            - array
+          description: |-
+            The list of custom fabric settings
+            to configure the cluster.
+          optional: true
+        - id: cluster.reverseProxyCertificate
           type:
             - object
           description: |-
-            Certificate for the
-            reverse proxy
+            The server certificate
+            used by reverse proxy.
           optional: true
-        - id: parameters.reverseProxyCertificate.thumbprint
+        - id: cluster.reverseProxyCertificate.thumbprint
           type:
             - string
           description: |-
-            Thumbprint of
-            the primary certificate
-        - id: parameters.reverseProxyCertificate.thumbprintSecondary
+            Thumbprint of the
+            primary certificate.
+        - id: cluster.reverseProxyCertificate.thumbprintSecondary
           type:
             - string
-          description: Thumbprint of the secondary certificate
+          description: Thumbprint of the secondary certificate.
           optional: true
-        - id: parameters.reverseProxyCertificate.x509StoreName
+        - id: cluster.reverseProxyCertificate.x509StoreName
           type:
             - string
           description: |-
@@ -198,39 +203,124 @@ items:
             'AuthRoot', 'CertificateAuthority', 'Disallowed', 'My', 'Root',
             'TrustedPeople', 'TrustedPublisher'
           optional: true
-        - id: parameters.nodeTypes
+        - id: cluster.managementEndpoint
+          type:
+            - string
+          description: |-
+            The http management endpoint of
+            the cluster.
+        - id: cluster.nodeTypes
           type:
             - array
+          description: The list of node types in the cluster.
+        - id: cluster.azureActiveDirectory
+          type:
+            - object
           description: |-
-            The list of nodetypes that make up the
-            cluster, it will override
+            The AAD authentication
+            settings of the cluster.
           optional: true
-        - id: parameters.upgradeDescription
+        - id: cluster.azureActiveDirectory.tenantId
+          type:
+            - string
+          description: |-
+            Azure active
+            directory tenant id.
+          optional: true
+        - id: cluster.azureActiveDirectory.clusterApplication
+          type:
+            - string
+          description: |-
+            Azure
+            active directory cluster application id.
+          optional: true
+        - id: cluster.azureActiveDirectory.clientApplication
+          type:
+            - string
+          description: |-
+            Azure
+            active directory client application id.
+          optional: true
+        - id: cluster.vmImage
+          type:
+            - string
+          description: |-
+            The VM image VMSS has been configured
+            with. Generic names such as Windows or Linux can be used.
+          optional: true
+        - id: cluster.diagnosticsStorageAccountConfig
+          type:
+            - object
+          description: |-
+            The storage
+            account information for storing Service Fabric diagnostic logs.
+          optional: true
+        - id: cluster.diagnosticsStorageAccountConfig.storageAccountName
+          type:
+            - string
+          description: The Azure storage account name.
+        - id: cluster.diagnosticsStorageAccountConfig.protectedAccountKeyName
+          type:
+            - string
+          description: |-
+            The
+            protected diagnostics storage key name.
+        - id: cluster.diagnosticsStorageAccountConfig.blobEndpoint
+          type:
+            - string
+          description: |-
+            The
+            blob endpoint of the azure storage account.
+        - id: cluster.diagnosticsStorageAccountConfig.queueEndpoint
+          type:
+            - string
+          description: |-
+            The
+            queue endpoint of the azure storage account.
+        - id: cluster.diagnosticsStorageAccountConfig.tableEndpoint
+          type:
+            - string
+          description: |-
+            The
+            table endpoint of the azure storage account.
+        - id: cluster.upgradeDescription
           type:
             - object
           description: |-
             The policy to use when
             upgrading the cluster.
           optional: true
-        - id: parameters.upgradeDescription.overrideUserUpgradePolicy
+        - id: cluster.upgradeDescription.forceRestart
           type:
             - boolean
-          description: Use the user defined upgrade policy or not
+          description: >-
+            If true, then
+
+            processes are forcefully restarted during upgrade even when the code
+            version
+
+            has not changed (the upgrade only changes configuration or data).
           optional: true
-        - id: parameters.upgradeDescription.forceRestart
-          type:
-            - boolean
-          description: |-
-            Force node to
-            restart or not
-          optional: true
-        - id: parameters.upgradeDescription.upgradeReplicaSetCheckTimeout
+        - id: cluster.upgradeDescription.upgradeReplicaSetCheckTimeout
           type:
             - string
           description: >-
-            Timeout for replica set upgrade to complete,it represents .Net
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckWaitDuration
+            The
+
+            maximum amount of time to block processing of an upgrade domain and
+            revent
+
+            loss of availability when there are unexpected issues. When this
+            timeout
+
+            expires, processing of the upgrade domain will proceed regardless of
+
+            availability loss issues. The timeout is reset at the start of each
+            upgrade
+
+            domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms
+            format.
+        - id: cluster.upgradeDescription.healthCheckWaitDuration
           type:
             - string
           description: >-
@@ -239,46 +329,63 @@ items:
             length of time to wait after completing an upgrade domain before
             performing
 
-            health checks, it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthCheckStableDuration
+            health checks. The duration can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: cluster.upgradeDescription.healthCheckStableDuration
           type:
             - string
           description: >-
             The
 
-            length of time that health checks must pass continuously,it
-            represents .Net
+            amount of time that the application or cluster must remain healthy
+            before
 
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckRetryTimeout
+            the upgrade proceeds to the next upgrade domain. The duration can be
+            in
+
+            either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.healthCheckRetryTimeout
           type:
             - string
           description: >-
             The
 
-            length of time that health checks can fail continuously,it
-            represents .Net
+            amount of time to retry health evaluation when the application or
+            cluster is
 
-            TimeSpan
-        - id: parameters.upgradeDescription.upgradeTimeout
+            unhealthy before the upgrade rolls back. The timeout can be in
+            either
+
+            hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.upgradeTimeout
           type:
             - string
-          description: |-
-            The upgrade
-            timeout,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.upgradeDomainTimeout
-          type:
-            - string
-          description: |-
+          description: >-
+            The amount of time
+
+            the overall upgrade has to complete before the upgrade rolls back.
             The
-            timeout for any upgrade domain,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthPolicy
+
+            timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.upgradeDomainTimeout
+          type:
+            - string
+          description: >-
+            The amount
+
+            of time each upgrade domain has to complete before the upgrade rolls
+            back.
+
+            The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.healthPolicy
           type:
             - object
           description: |-
-            Cluster health
-            Policy
-        - id: parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
+            The cluster health
+            policy used when upgrading the cluster.
+        - id: cluster.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
           type:
             - number
           description: >-
@@ -291,7 +398,7 @@ items:
             10.
           optional: true
         - id: >-
-            parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
+            cluster.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
           type:
             - number
           description: >-
@@ -303,32 +410,97 @@ items:
 
             would be 10.
           optional: true
-        - id: parameters.upgradeDescription.deltaHealthPolicy
+        - id: cluster.upgradeDescription.deltaHealthPolicy
           type:
             - object
           description: |-
-            Delta
-            health policy
+            The delta
+            health policy used when upgrading the cluster.
           optional: true
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage
+          description: >-
+            The maximum allowed percentage of nodes health degradation allowed
+            during
+
+            cluster upgrades. The delta is measured between the state of the
+            nodes at
+
+            the beginning of upgrade and the state of the nodes at the time of
+            the
+
+            health evaluation. The check is performed after every upgrade domain
+            upgrade
+
+            completion to make sure the global state of the cluster is within
+            tolerated
+
+            limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage per upgrade domain
+          description: >-
+            The maximum allowed percentage of upgrade domain nodes health
+            degradation
+
+            allowed during cluster upgrades. The delta is measured between the
+            state of
+
+            the upgrade domain nodes at the beginning of upgrade and the state
+            of the
+
+            upgrade domain nodes at the time of the health evaluation. The check
+            is
+
+            performed after every upgrade domain upgrade completion for all
+            completed
+
+            upgrade domains to make sure the state of the upgrade domains is
+            within
+
+            tolerated limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
           type:
             - number
-          description: Additional unhealthy applications percentage
-        - id: parameters.tags
+          description: >-
+            The maximum allowed percentage of applications health degradation
+            allowed
+
+            during cluster upgrades. The delta is measured between the state of
+            the
+
+            applications at the beginning of upgrade and the state of the
+            applications
+
+            at the time of the health evaluation. The check is performed after
+            every
+
+            upgrade domain upgrade completion to make sure the global state of
+            the
+
+            cluster is within tolerated limits. System services are not included
+            in
+
+            this.
+        - id: cluster.addOnFeatures
+          type:
+            - array
+          description: |-
+            The list of add-on features to enable
+            in the cluster.
+          optional: true
+        - id: cluster.location
+          type:
+            - string
+          description: Resource location.
+        - id: cluster.tags
           type:
             - object
-          description: Cluster update parameters
+          description: Resource tags.
           optional: true
         - id: options
           type:
@@ -347,20 +519,21 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function updateWithHttpOperationResponse(resourceGroupName, clusterName,
-        parameters, options)
+        function createWithHttpOperationResponse(resourceGroupName, clusterName,
+        cluster, options)
     langs:
       - js
-  - uid: 'azure-arm-servicefabric.Clusters#update'
-    id: 'azure-arm-servicefabric.Clusters#update'
+  - uid: 'azure-arm-servicefabric.Clusters#create'
+    id: 'azure-arm-servicefabric.Clusters#create'
     parent: azure-arm-servicefabric.Clusters
-    name: >-
-      update(resourceGroupName, clusterName, parameters, options,
-      optionalCallback)
-    summary: Update cluster configuration
+    name: 'create(resourceGroupName, clusterName, cluster, options, optionalCallback)'
+    summary: |-
+      Create a ServiceFabric cluster
+
+      Create cluster resource
     fullName: >-
-      azure-arm-servicefabric.Clusters.update(resourceGroupName, clusterName,
-      parameters, options, optionalCallback)
+      azure-arm-servicefabric.Clusters.create(resourceGroupName, clusterName,
+      cluster, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -400,115 +573,122 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
+          description: The name of the resource group.
         - id: clusterName
           type:
             - string
           description: The name of the cluster resource
-        - id: parameters
+        - id: cluster
           type:
             - object
-          description: |-
-            The parameters which contains the property value
-            and property name which used to update the cluster configuration
-        - id: parameters.reliabilityLevel
-          type:
-            - string
-          description: |-
-            This level is used to set the
-            number of replicas of the system services. Possible values include:
-            'Bronze', 'Silver', 'Gold'
-          optional: true
-        - id: parameters.upgradeMode
-          type:
-            - string
-          description: >-
-            Cluster upgrade mode indicates if
-
-            fabric upgrade is initiated automatically by the system or not.
-            Possible
-
-            values include: 'Automatic', 'Manual'
-          optional: true
-        - id: parameters.clusterCodeVersion
-          type:
-            - string
-          description: >-
-            The ServiceFabric code
-
-            version, if set it, please make sure you have set upgradeMode to
-            Manual,
-
-            otherwise ,it will fail, if you are using PUT new cluster, you can
-            get the
-
-            version by using ClusterVersions_List, if you are updating existing
-            cluster,
-
-            you can get the availableClusterVersions from Clusters_Get
-          optional: true
-        - id: parameters.certificate
-          type:
-            - object
-          description: >-
-            This primay certificate will be
-
-            used as cluster node to node security, SSL certificate for cluster
-
-            management endpoint and default admin client, the certificate should
-            exist
-
-            in the virtual machine scale sets or Azure key vault, before you add
-            it. It
-
-            will override original value
-          optional: true
-        - id: parameters.clientCertificateThumbprints
-          type:
-            - array
-          description: >-
-            The client
-
-            thumbprint details, it is used for client access for cluster
-            operation, it
-
-            will override existing collection
-          optional: true
-        - id: parameters.clientCertificateCommonNames
+          description: The cluster resource.
+        - id: cluster.availableClusterVersions
           type:
             - array
           description: |-
-            List of client
-            certificates to whitelist based on common names.
+            The Service Fabric runtime
+            versions available for this cluster.
           optional: true
-        - id: parameters.fabricSettings
+        - id: cluster.clusterState
+          type:
+            - string
+          description: |-
+            Possible values include:
+            'WaitingForNodes', 'Deploying', 'BaselineUpgrade',
+            'UpdatingUserConfiguration', 'UpdatingUserCertificate',
+            'UpdatingInfrastructure', 'EnforcingClusterVersion',
+            'UpgradeServiceUnreachable', 'AutoScale', 'Ready'
+          optional: true
+        - id: cluster.clusterCodeVersion
+          type:
+            - string
+          description: >-
+            The Service Fabric runtime
+
+            version of the cluster. This property can only by set the user when
+
+            **upgradeMode** is set to 'Manual'. To get list of available Service
+            Fabric
+
+            versions for new clusters use [ClusterVersion
+            API](./ClusterVersion.md). To
+
+            get the list of available version for existing clusters use
+
+            **availableClusterVersions**.
+          optional: true
+        - id: cluster.certificate
+          type:
+            - object
+          description: >-
+            The certificate to use for securing
+
+            the cluster. The certificate provided will be used for  node to node
+
+            security within the cluster, SSL certificate for cluster management
+            endpoint
+
+            and default  admin client.
+          optional: true
+        - id: cluster.reliabilityLevel
+          type:
+            - string
+          description: |-
+            Possible values include: 'None',
+            'Bronze', 'Silver', 'Gold', 'Platinum'
+          optional: true
+        - id: cluster.upgradeMode
+          type:
+            - string
+          description: |-
+            Possible values include: 'Automatic',
+            'Manual'
+          optional: true
+        - id: cluster.clientCertificateThumbprints
           type:
             - array
           description: |-
-            List of custom fabric settings to
-            configure the cluster, Note, it will overwrite existing collection
+            The list of client
+            certificates referenced by thumbprint that are allowed to manage the
+            cluster.
           optional: true
-        - id: parameters.reverseProxyCertificate
+        - id: cluster.clientCertificateCommonNames
+          type:
+            - array
+          description: >-
+            The list of client
+
+            certificates referenced by common name that are allowed to manage
+            the
+
+            cluster.
+          optional: true
+        - id: cluster.fabricSettings
+          type:
+            - array
+          description: |-
+            The list of custom fabric settings
+            to configure the cluster.
+          optional: true
+        - id: cluster.reverseProxyCertificate
           type:
             - object
           description: |-
-            Certificate for the
-            reverse proxy
+            The server certificate
+            used by reverse proxy.
           optional: true
-        - id: parameters.reverseProxyCertificate.thumbprint
+        - id: cluster.reverseProxyCertificate.thumbprint
           type:
             - string
           description: |-
-            Thumbprint of
-            the primary certificate
-        - id: parameters.reverseProxyCertificate.thumbprintSecondary
+            Thumbprint of the
+            primary certificate.
+        - id: cluster.reverseProxyCertificate.thumbprintSecondary
           type:
             - string
-          description: Thumbprint of the secondary certificate
+          description: Thumbprint of the secondary certificate.
           optional: true
-        - id: parameters.reverseProxyCertificate.x509StoreName
+        - id: cluster.reverseProxyCertificate.x509StoreName
           type:
             - string
           description: |-
@@ -517,39 +697,124 @@ items:
             'AuthRoot', 'CertificateAuthority', 'Disallowed', 'My', 'Root',
             'TrustedPeople', 'TrustedPublisher'
           optional: true
-        - id: parameters.nodeTypes
+        - id: cluster.managementEndpoint
+          type:
+            - string
+          description: |-
+            The http management endpoint of
+            the cluster.
+        - id: cluster.nodeTypes
           type:
             - array
+          description: The list of node types in the cluster.
+        - id: cluster.azureActiveDirectory
+          type:
+            - object
           description: |-
-            The list of nodetypes that make up the
-            cluster, it will override
+            The AAD authentication
+            settings of the cluster.
           optional: true
-        - id: parameters.upgradeDescription
+        - id: cluster.azureActiveDirectory.tenantId
+          type:
+            - string
+          description: |-
+            Azure active
+            directory tenant id.
+          optional: true
+        - id: cluster.azureActiveDirectory.clusterApplication
+          type:
+            - string
+          description: |-
+            Azure
+            active directory cluster application id.
+          optional: true
+        - id: cluster.azureActiveDirectory.clientApplication
+          type:
+            - string
+          description: |-
+            Azure
+            active directory client application id.
+          optional: true
+        - id: cluster.vmImage
+          type:
+            - string
+          description: |-
+            The VM image VMSS has been configured
+            with. Generic names such as Windows or Linux can be used.
+          optional: true
+        - id: cluster.diagnosticsStorageAccountConfig
+          type:
+            - object
+          description: |-
+            The storage
+            account information for storing Service Fabric diagnostic logs.
+          optional: true
+        - id: cluster.diagnosticsStorageAccountConfig.storageAccountName
+          type:
+            - string
+          description: The Azure storage account name.
+        - id: cluster.diagnosticsStorageAccountConfig.protectedAccountKeyName
+          type:
+            - string
+          description: |-
+            The
+            protected diagnostics storage key name.
+        - id: cluster.diagnosticsStorageAccountConfig.blobEndpoint
+          type:
+            - string
+          description: |-
+            The
+            blob endpoint of the azure storage account.
+        - id: cluster.diagnosticsStorageAccountConfig.queueEndpoint
+          type:
+            - string
+          description: |-
+            The
+            queue endpoint of the azure storage account.
+        - id: cluster.diagnosticsStorageAccountConfig.tableEndpoint
+          type:
+            - string
+          description: |-
+            The
+            table endpoint of the azure storage account.
+        - id: cluster.upgradeDescription
           type:
             - object
           description: |-
             The policy to use when
             upgrading the cluster.
           optional: true
-        - id: parameters.upgradeDescription.overrideUserUpgradePolicy
+        - id: cluster.upgradeDescription.forceRestart
           type:
             - boolean
-          description: Use the user defined upgrade policy or not
+          description: >-
+            If true, then
+
+            processes are forcefully restarted during upgrade even when the code
+            version
+
+            has not changed (the upgrade only changes configuration or data).
           optional: true
-        - id: parameters.upgradeDescription.forceRestart
-          type:
-            - boolean
-          description: |-
-            Force node to
-            restart or not
-          optional: true
-        - id: parameters.upgradeDescription.upgradeReplicaSetCheckTimeout
+        - id: cluster.upgradeDescription.upgradeReplicaSetCheckTimeout
           type:
             - string
           description: >-
-            Timeout for replica set upgrade to complete,it represents .Net
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckWaitDuration
+            The
+
+            maximum amount of time to block processing of an upgrade domain and
+            revent
+
+            loss of availability when there are unexpected issues. When this
+            timeout
+
+            expires, processing of the upgrade domain will proceed regardless of
+
+            availability loss issues. The timeout is reset at the start of each
+            upgrade
+
+            domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms
+            format.
+        - id: cluster.upgradeDescription.healthCheckWaitDuration
           type:
             - string
           description: >-
@@ -558,46 +823,63 @@ items:
             length of time to wait after completing an upgrade domain before
             performing
 
-            health checks, it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthCheckStableDuration
+            health checks. The duration can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: cluster.upgradeDescription.healthCheckStableDuration
           type:
             - string
           description: >-
             The
 
-            length of time that health checks must pass continuously,it
-            represents .Net
+            amount of time that the application or cluster must remain healthy
+            before
 
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckRetryTimeout
+            the upgrade proceeds to the next upgrade domain. The duration can be
+            in
+
+            either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.healthCheckRetryTimeout
           type:
             - string
           description: >-
             The
 
-            length of time that health checks can fail continuously,it
-            represents .Net
+            amount of time to retry health evaluation when the application or
+            cluster is
 
-            TimeSpan
-        - id: parameters.upgradeDescription.upgradeTimeout
+            unhealthy before the upgrade rolls back. The timeout can be in
+            either
+
+            hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.upgradeTimeout
           type:
             - string
-          description: |-
-            The upgrade
-            timeout,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.upgradeDomainTimeout
-          type:
-            - string
-          description: |-
+          description: >-
+            The amount of time
+
+            the overall upgrade has to complete before the upgrade rolls back.
             The
-            timeout for any upgrade domain,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthPolicy
+
+            timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.upgradeDomainTimeout
+          type:
+            - string
+          description: >-
+            The amount
+
+            of time each upgrade domain has to complete before the upgrade rolls
+            back.
+
+            The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.healthPolicy
           type:
             - object
           description: |-
-            Cluster health
-            Policy
-        - id: parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
+            The cluster health
+            policy used when upgrading the cluster.
+        - id: cluster.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
           type:
             - number
           description: >-
@@ -610,7 +892,7 @@ items:
             10.
           optional: true
         - id: >-
-            parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
+            cluster.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
           type:
             - number
           description: >-
@@ -622,32 +904,97 @@ items:
 
             would be 10.
           optional: true
-        - id: parameters.upgradeDescription.deltaHealthPolicy
+        - id: cluster.upgradeDescription.deltaHealthPolicy
           type:
             - object
           description: |-
-            Delta
-            health policy
+            The delta
+            health policy used when upgrading the cluster.
           optional: true
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage
+          description: >-
+            The maximum allowed percentage of nodes health degradation allowed
+            during
+
+            cluster upgrades. The delta is measured between the state of the
+            nodes at
+
+            the beginning of upgrade and the state of the nodes at the time of
+            the
+
+            health evaluation. The check is performed after every upgrade domain
+            upgrade
+
+            completion to make sure the global state of the cluster is within
+            tolerated
+
+            limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage per upgrade domain
+          description: >-
+            The maximum allowed percentage of upgrade domain nodes health
+            degradation
+
+            allowed during cluster upgrades. The delta is measured between the
+            state of
+
+            the upgrade domain nodes at the beginning of upgrade and the state
+            of the
+
+            upgrade domain nodes at the time of the health evaluation. The check
+            is
+
+            performed after every upgrade domain upgrade completion for all
+            completed
+
+            upgrade domains to make sure the state of the upgrade domains is
+            within
+
+            tolerated limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
           type:
             - number
-          description: Additional unhealthy applications percentage
-        - id: parameters.tags
+          description: >-
+            The maximum allowed percentage of applications health degradation
+            allowed
+
+            during cluster upgrades. The delta is measured between the state of
+            the
+
+            applications at the beginning of upgrade and the state of the
+            applications
+
+            at the time of the health evaluation. The check is performed after
+            every
+
+            upgrade domain upgrade completion to make sure the global state of
+            the
+
+            cluster is within tolerated limits. System services are not included
+            in
+
+            this.
+        - id: cluster.addOnFeatures
+          type:
+            - array
+          description: |-
+            The list of add-on features to enable
+            in the cluster.
+          optional: true
+        - id: cluster.location
+          type:
+            - string
+          description: Resource location.
+        - id: cluster.tags
           type:
             - object
-          description: Cluster update parameters
+          description: Resource tags.
           optional: true
         - id: options
           type:
@@ -676,7 +1023,145 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function update(resourceGroupName, clusterName, parameters, options,
+        function create(resourceGroupName, clusterName, cluster, options,
+        optionalCallback)
+    langs:
+      - js
+  - uid: 'azure-arm-servicefabric.Clusters#deleteMethodWithHttpOperationResponse'
+    id: 'azure-arm-servicefabric.Clusters#deleteMethodWithHttpOperationResponse'
+    parent: azure-arm-servicefabric.Clusters
+    name: >-
+      deleteMethodWithHttpOperationResponse(resourceGroupName, clusterName,
+      options)
+    summary: |-
+      Delete cluster resource
+
+      Delete cluster resource
+    fullName: >-
+      azure-arm-servicefabric.Clusters.deleteMethodWithHttpOperationResponse(resourceGroupName,
+      clusterName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: clusterName
+          type:
+            - string
+          description: The name of the cluster resource
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function deleteMethodWithHttpOperationResponse(resourceGroupName,
+        clusterName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-servicefabric.Clusters#deleteMethod'
+    id: 'azure-arm-servicefabric.Clusters#deleteMethod'
+    parent: azure-arm-servicefabric.Clusters
+    name: 'deleteMethod(resourceGroupName, clusterName, options, optionalCallback)'
+    summary: |-
+      Delete cluster resource
+
+      Delete cluster resource
+    fullName: >-
+      azure-arm-servicefabric.Clusters.deleteMethod(resourceGroupName,
+      clusterName, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: clusterName
+          type:
+            - string
+          description: The name of the cluster resource
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function deleteMethod(resourceGroupName, clusterName, options,
         optionalCallback)
     langs:
       - js
@@ -684,7 +1169,10 @@ items:
     id: 'azure-arm-servicefabric.Clusters#getWithHttpOperationResponse'
     parent: azure-arm-servicefabric.Clusters
     name: 'getWithHttpOperationResponse(resourceGroupName, clusterName, options)'
-    summary: Get cluster resource
+    summary: |-
+      Get cluster resource
+
+      Get cluster resource
     fullName: >-
       azure-arm-servicefabric.Clusters.getWithHttpOperationResponse(resourceGroupName,
       clusterName, options)
@@ -703,9 +1191,7 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
+          description: The name of the resource group.
         - id: clusterName
           type:
             - string
@@ -735,7 +1221,10 @@ items:
     id: 'azure-arm-servicefabric.Clusters#get'
     parent: azure-arm-servicefabric.Clusters
     name: 'get(resourceGroupName, clusterName, options, optionalCallback)'
-    summary: Get cluster resource
+    summary: |-
+      Get cluster resource
+
+      Get cluster resource
     fullName: >-
       azure-arm-servicefabric.Clusters.get(resourceGroupName, clusterName,
       options, optionalCallback)
@@ -778,9 +1267,7 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
+          description: The name of the resource group.
         - id: clusterName
           type:
             - string
@@ -814,16 +1301,19 @@ items:
       content: 'function get(resourceGroupName, clusterName, options, optionalCallback)'
     langs:
       - js
-  - uid: 'azure-arm-servicefabric.Clusters#createWithHttpOperationResponse'
-    id: 'azure-arm-servicefabric.Clusters#createWithHttpOperationResponse'
+  - uid: 'azure-arm-servicefabric.Clusters#updateWithHttpOperationResponse'
+    id: 'azure-arm-servicefabric.Clusters#updateWithHttpOperationResponse'
     parent: azure-arm-servicefabric.Clusters
     name: >-
-      createWithHttpOperationResponse(resourceGroupName, clusterName,
-      parameters, options)
-    summary: Create cluster resource
+      updateWithHttpOperationResponse(resourceGroupName, clusterName,
+      clusterUpdateParameters, options)
+    summary: |-
+      Update cluster configuration
+
+      Update cluster configuration
     fullName: >-
-      azure-arm-servicefabric.Clusters.createWithHttpOperationResponse(resourceGroupName,
-      clusterName, parameters, options)
+      azure-arm-servicefabric.Clusters.updateWithHttpOperationResponse(resourceGroupName,
+      clusterName, clusterUpdateParameters, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -839,96 +1329,127 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
+          description: The name of the resource group.
         - id: clusterName
           type:
             - string
           description: The name of the cluster resource
-        - id: parameters
-          type:
-            - object
-          description: Put Request
-        - id: parameters.clusterCodeVersion
-          type:
-            - string
-          description: |-
-            The ServiceFabric code
-            version running in your cluster
-          optional: true
-        - id: parameters.certificate
+        - id: clusterUpdateParameters
           type:
             - object
           description: |-
-            This primay certificate will be
-            used as cluster node to node security, SSL certificate for cluster
-            management endpoint and default admin client
-          optional: true
-        - id: parameters.reliabilityLevel
+            The parameters which contains the
+            property value and property name which used to update the cluster
+            configuration.
+        - id: clusterUpdateParameters.reliabilityLevel
           type:
             - string
           description: >-
-            Cluster reliability level
+            The reliability
 
-            indicates replica set size of system service. Possible values
-            include:
+            level sets the replica set size of system services. Learn about
 
-            'Bronze', 'Silver', 'Gold', 'Platinum'
+            [ReliabilityLevel](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-capacity).
+
+            Possible values include: 'Bronze', 'Silver', 'Gold'
           optional: true
-        - id: parameters.upgradeMode
+        - id: clusterUpdateParameters.upgradeMode
           type:
             - string
           description: >-
-            Cluster upgrade mode indicates if
+            The upgrade mode of
 
-            fabric upgrade is initiated automatically by the system or not.
-            Possible
+            the cluster. This indicates if the cluster should be automatically
+            upgraded
 
-            values include: 'Automatic', 'Manual'
+            when new Service Fabric runtime version is available. Possible
+            values
+
+            include: 'Automatic', 'Manual'
           optional: true
-        - id: parameters.clientCertificateThumbprints
+        - id: clusterUpdateParameters.clusterCodeVersion
+          type:
+            - string
+          description: >-
+            The Service
+
+            Fabric runtime version of the cluster. This property can only by set
+            the
+
+            user when **upgradeMode** is set to 'Manual'. To get list of
+            available
+
+            Service Fabric versions for new clusters use [ClusterVersion
+
+            API](./ClusterVersion.md). To get the list of available version for
+            existing
+
+            clusters use **availableClusterVersions**.
+          optional: true
+        - id: clusterUpdateParameters.certificate
+          type:
+            - object
+          description: >-
+            The certificate to use
+
+            for securing the cluster. The certificate provided will be used for 
+            node to
+
+            node security within the cluster, SSL certificate for cluster
+            management
+
+            endpoint and default  admin client.
+          optional: true
+        - id: clusterUpdateParameters.clientCertificateThumbprints
           type:
             - array
           description: >-
-            The client
+            The
 
-            thumbprint details ,it is used for client access for cluster
-            operation
+            list of client certificates referenced by thumbprint that are
+            allowed to
+
+            manage the cluster. This will overwrite the existing list.
           optional: true
-        - id: parameters.clientCertificateCommonNames
+        - id: clusterUpdateParameters.clientCertificateCommonNames
           type:
             - array
-          description: |-
-            List of client
-            certificates to whitelist based on common names
+          description: >-
+            The
+
+            list of client certificates referenced by common name that are
+            allowed to
+
+            manage the cluster. This will overwrite the existing list.
           optional: true
-        - id: parameters.fabricSettings
+        - id: clusterUpdateParameters.fabricSettings
           type:
             - array
-          description: |-
-            List of custom fabric settings to
-            configure the cluster.
+          description: >-
+            The list of custom
+
+            fabric settings to configure the cluster. This will overwrite the
+            existing
+
+            list.
           optional: true
-        - id: parameters.reverseProxyCertificate
+        - id: clusterUpdateParameters.reverseProxyCertificate
           type:
             - object
           description: |-
-            The server certificate
-            used by reverse proxy
+            The server
+            certificate used by reverse proxy.
           optional: true
-        - id: parameters.reverseProxyCertificate.thumbprint
+        - id: clusterUpdateParameters.reverseProxyCertificate.thumbprint
           type:
             - string
-          description: |-
-            Thumbprint of
-            the primary certificate
-        - id: parameters.reverseProxyCertificate.thumbprintSecondary
+          description: Thumbprint of the primary certificate.
+        - id: clusterUpdateParameters.reverseProxyCertificate.thumbprintSecondary
           type:
             - string
-          description: Thumbprint of the secondary certificate
+          description: Thumbprint of the secondary certificate.
           optional: true
-        - id: parameters.reverseProxyCertificate.x509StoreName
+        - id: clusterUpdateParameters.reverseProxyCertificate.x509StoreName
           type:
             - string
           description: |-
@@ -937,110 +1458,53 @@ items:
             'AuthRoot', 'CertificateAuthority', 'Disallowed', 'My', 'Root',
             'TrustedPeople', 'TrustedPublisher'
           optional: true
-        - id: parameters.managementEndpoint
-          type:
-            - string
-          description: |-
-            The http management endpoint
-            of the cluster
-        - id: parameters.nodeTypes
+        - id: clusterUpdateParameters.nodeTypes
           type:
             - array
           description: |-
-            The list of nodetypes that make up the
-            cluster
-        - id: parameters.azureActiveDirectory
+            The list of node types in
+            the cluster. This will overwrite the existing list.
+          optional: true
+        - id: clusterUpdateParameters.upgradeDescription
           type:
             - object
           description: |-
-            The settings to enable AAD
-            authentication on the cluster
+            The policy to
+            use when upgrading the cluster.
           optional: true
-        - id: parameters.azureActiveDirectory.tenantId
-          type:
-            - string
-          description: |-
-            Azure active
-            directory tenant id
-          optional: true
-        - id: parameters.azureActiveDirectory.clusterApplication
-          type:
-            - string
-          description: |-
-            Azure
-            active directory cluster application id
-          optional: true
-        - id: parameters.azureActiveDirectory.clientApplication
-          type:
-            - string
-          description: |-
-            Azure
-            active directory client application id
-          optional: true
-        - id: parameters.vmImage
-          type:
-            - string
-          description: |-
-            The name of VM image VMSS has been
-            configured with. Generic names such as Windows or Linux can be used.
-          optional: true
-        - id: parameters.diagnosticsStorageAccountConfig
-          type:
-            - object
-          description: |-
-            The storage
-            diagnostics account configuration details
-          optional: true
-        - id: parameters.diagnosticsStorageAccountConfig.storageAccountName
-          type:
-            - string
-          description: |-
-            Diagnostics
-            storage account name
-        - id: parameters.diagnosticsStorageAccountConfig.protectedAccountKeyName
-          type:
-            - string
-          description: |-
-            Protected
-            Diagnostics storage key name
-        - id: parameters.diagnosticsStorageAccountConfig.blobEndpoint
-          type:
-            - string
-          description: Diagnostics storage account blob endpoint
-        - id: parameters.diagnosticsStorageAccountConfig.queueEndpoint
-          type:
-            - string
-          description: Diagnostics storage account queue endpoint
-        - id: parameters.diagnosticsStorageAccountConfig.tableEndpoint
-          type:
-            - string
-          description: Diagnostics storage account table endpoint
-        - id: parameters.upgradeDescription
-          type:
-            - object
-          description: |-
-            The policy to use when
-            upgrading the cluster.
-          optional: true
-        - id: parameters.upgradeDescription.overrideUserUpgradePolicy
+        - id: clusterUpdateParameters.upgradeDescription.forceRestart
           type:
             - boolean
-          description: Use the user defined upgrade policy or not
+          description: >-
+            If true, then processes are forcefully restarted during upgrade even
+            when
+
+            the code version has not changed (the upgrade only changes
+            configuration or
+
+            data).
           optional: true
-        - id: parameters.upgradeDescription.forceRestart
-          type:
-            - boolean
-          description: |-
-            Force node to
-            restart or not
-          optional: true
-        - id: parameters.upgradeDescription.upgradeReplicaSetCheckTimeout
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.upgradeReplicaSetCheckTimeout
           type:
             - string
           description: >-
-            Timeout for replica set upgrade to complete,it represents .Net
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckWaitDuration
+            The
+
+            maximum amount of time to block processing of an upgrade domain and
+            revent
+
+            loss of availability when there are unexpected issues. When this
+            timeout
+
+            expires, processing of the upgrade domain will proceed regardless of
+
+            availability loss issues. The timeout is reset at the start of each
+            upgrade
+
+            domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckWaitDuration
           type:
             - string
           description: >-
@@ -1049,59 +1513,76 @@ items:
             length of time to wait after completing an upgrade domain before
             performing
 
-            health checks, it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthCheckStableDuration
+            health checks. The duration can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckStableDuration
           type:
             - string
           description: >-
             The
 
-            length of time that health checks must pass continuously,it
-            represents .Net
+            amount of time that the application or cluster must remain healthy
+            before
 
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckRetryTimeout
+            the upgrade proceeds to the next upgrade domain. The duration can be
+            in
+
+            either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckRetryTimeout
           type:
             - string
           description: >-
             The
 
-            length of time that health checks can fail continuously,it
-            represents .Net
+            amount of time to retry health evaluation when the application or
+            cluster is
 
-            TimeSpan
-        - id: parameters.upgradeDescription.upgradeTimeout
+            unhealthy before the upgrade rolls back. The timeout can be in
+            either
+
+            hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.upgradeTimeout
           type:
             - string
-          description: |-
-            The upgrade
-            timeout,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.upgradeDomainTimeout
+          description: >-
+            The amount of time the overall upgrade has to complete before the
+            upgrade
+
+            rolls back. The timeout can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.upgradeDomainTimeout
           type:
             - string
-          description: |-
-            The
-            timeout for any upgrade domain,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthPolicy
+          description: >-
+            The amount
+
+            of time each upgrade domain has to complete before the upgrade rolls
+            back.
+
+            The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.healthPolicy
           type:
             - object
           description: |-
-            Cluster health
-            Policy
-        - id: parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
+            The
+            cluster health policy used when upgrading the cluster.
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
           type:
             - number
           description: >-
-            The
+            The maximum allowed percentage of unhealthy nodes before reporting
+            an error.
 
-            maximum allowed percentage of unhealthy nodes before reporting an
-            error. For
-
-            example, to allow 10% of nodes to be unhealthy, this value would be
-            10.
+            For example, to allow 10% of nodes to be unhealthy, this value would
+            be 10.
           optional: true
         - id: >-
-            parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
+            clusterUpdateParameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
           type:
             - number
           description: >-
@@ -1113,36 +1594,93 @@ items:
 
             would be 10.
           optional: true
-        - id: parameters.upgradeDescription.deltaHealthPolicy
+        - id: clusterUpdateParameters.upgradeDescription.deltaHealthPolicy
           type:
             - object
           description: |-
-            Delta
-            health policy
+            The delta
+            health policy used when upgrading the cluster.
           optional: true
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage
+          description: >-
+            The maximum allowed percentage of nodes health degradation allowed
+            during
+
+            cluster upgrades. The delta is measured between the state of the
+            nodes at
+
+            the beginning of upgrade and the state of the nodes at the time of
+            the
+
+            health evaluation. The check is performed after every upgrade domain
+            upgrade
+
+            completion to make sure the global state of the cluster is within
+            tolerated
+
+            limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage per upgrade domain
+          description: >-
+            The maximum allowed percentage of upgrade domain nodes health
+            degradation
+
+            allowed during cluster upgrades. The delta is measured between the
+            state of
+
+            the upgrade domain nodes at the beginning of upgrade and the state
+            of the
+
+            upgrade domain nodes at the time of the health evaluation. The check
+            is
+
+            performed after every upgrade domain upgrade completion for all
+            completed
+
+            upgrade domains to make sure the state of the upgrade domains is
+            within
+
+            tolerated limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
           type:
             - number
-          description: Additional unhealthy applications percentage
-        - id: parameters.location
+          description: >-
+            The maximum allowed percentage of applications health degradation
+            allowed
+
+            during cluster upgrades. The delta is measured between the state of
+            the
+
+            applications at the beginning of upgrade and the state of the
+            applications
+
+            at the time of the health evaluation. The check is performed after
+            every
+
+            upgrade domain upgrade completion to make sure the global state of
+            the
+
+            cluster is within tolerated limits. System services are not included
+            in
+
+            this.
+        - id: clusterUpdateParameters.addOnFeatures
           type:
-            - string
-          description: Resource location.
-        - id: parameters.tags
+            - array
+          description: |-
+            The list of add-on
+            features to enable in the cluster.
+          optional: true
+        - id: clusterUpdateParameters.tags
           type:
             - object
-          description: Resource tags.
+          description: Cluster update parameters
           optional: true
         - id: options
           type:
@@ -1161,20 +1699,23 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function createWithHttpOperationResponse(resourceGroupName, clusterName,
-        parameters, options)
+        function updateWithHttpOperationResponse(resourceGroupName, clusterName,
+        clusterUpdateParameters, options)
     langs:
       - js
-  - uid: 'azure-arm-servicefabric.Clusters#create'
-    id: 'azure-arm-servicefabric.Clusters#create'
+  - uid: 'azure-arm-servicefabric.Clusters#update'
+    id: 'azure-arm-servicefabric.Clusters#update'
     parent: azure-arm-servicefabric.Clusters
     name: >-
-      create(resourceGroupName, clusterName, parameters, options,
+      update(resourceGroupName, clusterName, clusterUpdateParameters, options,
       optionalCallback)
-    summary: Create cluster resource
+    summary: |-
+      Update cluster configuration
+
+      Update cluster configuration
     fullName: >-
-      azure-arm-servicefabric.Clusters.create(resourceGroupName, clusterName,
-      parameters, options, optionalCallback)
+      azure-arm-servicefabric.Clusters.update(resourceGroupName, clusterName,
+      clusterUpdateParameters, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1214,96 +1755,127 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
+          description: The name of the resource group.
         - id: clusterName
           type:
             - string
           description: The name of the cluster resource
-        - id: parameters
-          type:
-            - object
-          description: Put Request
-        - id: parameters.clusterCodeVersion
-          type:
-            - string
-          description: |-
-            The ServiceFabric code
-            version running in your cluster
-          optional: true
-        - id: parameters.certificate
+        - id: clusterUpdateParameters
           type:
             - object
           description: |-
-            This primay certificate will be
-            used as cluster node to node security, SSL certificate for cluster
-            management endpoint and default admin client
-          optional: true
-        - id: parameters.reliabilityLevel
+            The parameters which contains the
+            property value and property name which used to update the cluster
+            configuration.
+        - id: clusterUpdateParameters.reliabilityLevel
           type:
             - string
           description: >-
-            Cluster reliability level
+            The reliability
 
-            indicates replica set size of system service. Possible values
-            include:
+            level sets the replica set size of system services. Learn about
 
-            'Bronze', 'Silver', 'Gold', 'Platinum'
+            [ReliabilityLevel](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-capacity).
+
+            Possible values include: 'Bronze', 'Silver', 'Gold'
           optional: true
-        - id: parameters.upgradeMode
+        - id: clusterUpdateParameters.upgradeMode
           type:
             - string
           description: >-
-            Cluster upgrade mode indicates if
+            The upgrade mode of
 
-            fabric upgrade is initiated automatically by the system or not.
-            Possible
+            the cluster. This indicates if the cluster should be automatically
+            upgraded
 
-            values include: 'Automatic', 'Manual'
+            when new Service Fabric runtime version is available. Possible
+            values
+
+            include: 'Automatic', 'Manual'
           optional: true
-        - id: parameters.clientCertificateThumbprints
+        - id: clusterUpdateParameters.clusterCodeVersion
+          type:
+            - string
+          description: >-
+            The Service
+
+            Fabric runtime version of the cluster. This property can only by set
+            the
+
+            user when **upgradeMode** is set to 'Manual'. To get list of
+            available
+
+            Service Fabric versions for new clusters use [ClusterVersion
+
+            API](./ClusterVersion.md). To get the list of available version for
+            existing
+
+            clusters use **availableClusterVersions**.
+          optional: true
+        - id: clusterUpdateParameters.certificate
+          type:
+            - object
+          description: >-
+            The certificate to use
+
+            for securing the cluster. The certificate provided will be used for 
+            node to
+
+            node security within the cluster, SSL certificate for cluster
+            management
+
+            endpoint and default  admin client.
+          optional: true
+        - id: clusterUpdateParameters.clientCertificateThumbprints
           type:
             - array
           description: >-
-            The client
+            The
 
-            thumbprint details ,it is used for client access for cluster
-            operation
+            list of client certificates referenced by thumbprint that are
+            allowed to
+
+            manage the cluster. This will overwrite the existing list.
           optional: true
-        - id: parameters.clientCertificateCommonNames
+        - id: clusterUpdateParameters.clientCertificateCommonNames
           type:
             - array
-          description: |-
-            List of client
-            certificates to whitelist based on common names
+          description: >-
+            The
+
+            list of client certificates referenced by common name that are
+            allowed to
+
+            manage the cluster. This will overwrite the existing list.
           optional: true
-        - id: parameters.fabricSettings
+        - id: clusterUpdateParameters.fabricSettings
           type:
             - array
-          description: |-
-            List of custom fabric settings to
-            configure the cluster.
+          description: >-
+            The list of custom
+
+            fabric settings to configure the cluster. This will overwrite the
+            existing
+
+            list.
           optional: true
-        - id: parameters.reverseProxyCertificate
+        - id: clusterUpdateParameters.reverseProxyCertificate
           type:
             - object
           description: |-
-            The server certificate
-            used by reverse proxy
+            The server
+            certificate used by reverse proxy.
           optional: true
-        - id: parameters.reverseProxyCertificate.thumbprint
+        - id: clusterUpdateParameters.reverseProxyCertificate.thumbprint
           type:
             - string
-          description: |-
-            Thumbprint of
-            the primary certificate
-        - id: parameters.reverseProxyCertificate.thumbprintSecondary
+          description: Thumbprint of the primary certificate.
+        - id: clusterUpdateParameters.reverseProxyCertificate.thumbprintSecondary
           type:
             - string
-          description: Thumbprint of the secondary certificate
+          description: Thumbprint of the secondary certificate.
           optional: true
-        - id: parameters.reverseProxyCertificate.x509StoreName
+        - id: clusterUpdateParameters.reverseProxyCertificate.x509StoreName
           type:
             - string
           description: |-
@@ -1312,110 +1884,53 @@ items:
             'AuthRoot', 'CertificateAuthority', 'Disallowed', 'My', 'Root',
             'TrustedPeople', 'TrustedPublisher'
           optional: true
-        - id: parameters.managementEndpoint
-          type:
-            - string
-          description: |-
-            The http management endpoint
-            of the cluster
-        - id: parameters.nodeTypes
+        - id: clusterUpdateParameters.nodeTypes
           type:
             - array
           description: |-
-            The list of nodetypes that make up the
-            cluster
-        - id: parameters.azureActiveDirectory
+            The list of node types in
+            the cluster. This will overwrite the existing list.
+          optional: true
+        - id: clusterUpdateParameters.upgradeDescription
           type:
             - object
           description: |-
-            The settings to enable AAD
-            authentication on the cluster
+            The policy to
+            use when upgrading the cluster.
           optional: true
-        - id: parameters.azureActiveDirectory.tenantId
-          type:
-            - string
-          description: |-
-            Azure active
-            directory tenant id
-          optional: true
-        - id: parameters.azureActiveDirectory.clusterApplication
-          type:
-            - string
-          description: |-
-            Azure
-            active directory cluster application id
-          optional: true
-        - id: parameters.azureActiveDirectory.clientApplication
-          type:
-            - string
-          description: |-
-            Azure
-            active directory client application id
-          optional: true
-        - id: parameters.vmImage
-          type:
-            - string
-          description: |-
-            The name of VM image VMSS has been
-            configured with. Generic names such as Windows or Linux can be used.
-          optional: true
-        - id: parameters.diagnosticsStorageAccountConfig
-          type:
-            - object
-          description: |-
-            The storage
-            diagnostics account configuration details
-          optional: true
-        - id: parameters.diagnosticsStorageAccountConfig.storageAccountName
-          type:
-            - string
-          description: |-
-            Diagnostics
-            storage account name
-        - id: parameters.diagnosticsStorageAccountConfig.protectedAccountKeyName
-          type:
-            - string
-          description: |-
-            Protected
-            Diagnostics storage key name
-        - id: parameters.diagnosticsStorageAccountConfig.blobEndpoint
-          type:
-            - string
-          description: Diagnostics storage account blob endpoint
-        - id: parameters.diagnosticsStorageAccountConfig.queueEndpoint
-          type:
-            - string
-          description: Diagnostics storage account queue endpoint
-        - id: parameters.diagnosticsStorageAccountConfig.tableEndpoint
-          type:
-            - string
-          description: Diagnostics storage account table endpoint
-        - id: parameters.upgradeDescription
-          type:
-            - object
-          description: |-
-            The policy to use when
-            upgrading the cluster.
-          optional: true
-        - id: parameters.upgradeDescription.overrideUserUpgradePolicy
+        - id: clusterUpdateParameters.upgradeDescription.forceRestart
           type:
             - boolean
-          description: Use the user defined upgrade policy or not
+          description: >-
+            If true, then processes are forcefully restarted during upgrade even
+            when
+
+            the code version has not changed (the upgrade only changes
+            configuration or
+
+            data).
           optional: true
-        - id: parameters.upgradeDescription.forceRestart
-          type:
-            - boolean
-          description: |-
-            Force node to
-            restart or not
-          optional: true
-        - id: parameters.upgradeDescription.upgradeReplicaSetCheckTimeout
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.upgradeReplicaSetCheckTimeout
           type:
             - string
           description: >-
-            Timeout for replica set upgrade to complete,it represents .Net
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckWaitDuration
+            The
+
+            maximum amount of time to block processing of an upgrade domain and
+            revent
+
+            loss of availability when there are unexpected issues. When this
+            timeout
+
+            expires, processing of the upgrade domain will proceed regardless of
+
+            availability loss issues. The timeout is reset at the start of each
+            upgrade
+
+            domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckWaitDuration
           type:
             - string
           description: >-
@@ -1424,59 +1939,76 @@ items:
             length of time to wait after completing an upgrade domain before
             performing
 
-            health checks, it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthCheckStableDuration
+            health checks. The duration can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckStableDuration
           type:
             - string
           description: >-
             The
 
-            length of time that health checks must pass continuously,it
-            represents .Net
+            amount of time that the application or cluster must remain healthy
+            before
 
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckRetryTimeout
+            the upgrade proceeds to the next upgrade domain. The duration can be
+            in
+
+            either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckRetryTimeout
           type:
             - string
           description: >-
             The
 
-            length of time that health checks can fail continuously,it
-            represents .Net
+            amount of time to retry health evaluation when the application or
+            cluster is
 
-            TimeSpan
-        - id: parameters.upgradeDescription.upgradeTimeout
+            unhealthy before the upgrade rolls back. The timeout can be in
+            either
+
+            hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.upgradeTimeout
           type:
             - string
-          description: |-
-            The upgrade
-            timeout,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.upgradeDomainTimeout
+          description: >-
+            The amount of time the overall upgrade has to complete before the
+            upgrade
+
+            rolls back. The timeout can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.upgradeDomainTimeout
           type:
             - string
-          description: |-
-            The
-            timeout for any upgrade domain,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthPolicy
+          description: >-
+            The amount
+
+            of time each upgrade domain has to complete before the upgrade rolls
+            back.
+
+            The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.healthPolicy
           type:
             - object
           description: |-
-            Cluster health
-            Policy
-        - id: parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
+            The
+            cluster health policy used when upgrading the cluster.
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
           type:
             - number
           description: >-
-            The
+            The maximum allowed percentage of unhealthy nodes before reporting
+            an error.
 
-            maximum allowed percentage of unhealthy nodes before reporting an
-            error. For
-
-            example, to allow 10% of nodes to be unhealthy, this value would be
-            10.
+            For example, to allow 10% of nodes to be unhealthy, this value would
+            be 10.
           optional: true
         - id: >-
-            parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
+            clusterUpdateParameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
           type:
             - number
           description: >-
@@ -1488,36 +2020,93 @@ items:
 
             would be 10.
           optional: true
-        - id: parameters.upgradeDescription.deltaHealthPolicy
+        - id: clusterUpdateParameters.upgradeDescription.deltaHealthPolicy
           type:
             - object
           description: |-
-            Delta
-            health policy
+            The delta
+            health policy used when upgrading the cluster.
           optional: true
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage
+          description: >-
+            The maximum allowed percentage of nodes health degradation allowed
+            during
+
+            cluster upgrades. The delta is measured between the state of the
+            nodes at
+
+            the beginning of upgrade and the state of the nodes at the time of
+            the
+
+            health evaluation. The check is performed after every upgrade domain
+            upgrade
+
+            completion to make sure the global state of the cluster is within
+            tolerated
+
+            limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage per upgrade domain
+          description: >-
+            The maximum allowed percentage of upgrade domain nodes health
+            degradation
+
+            allowed during cluster upgrades. The delta is measured between the
+            state of
+
+            the upgrade domain nodes at the beginning of upgrade and the state
+            of the
+
+            upgrade domain nodes at the time of the health evaluation. The check
+            is
+
+            performed after every upgrade domain upgrade completion for all
+            completed
+
+            upgrade domains to make sure the state of the upgrade domains is
+            within
+
+            tolerated limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
           type:
             - number
-          description: Additional unhealthy applications percentage
-        - id: parameters.location
+          description: >-
+            The maximum allowed percentage of applications health degradation
+            allowed
+
+            during cluster upgrades. The delta is measured between the state of
+            the
+
+            applications at the beginning of upgrade and the state of the
+            applications
+
+            at the time of the health evaluation. The check is performed after
+            every
+
+            upgrade domain upgrade completion to make sure the global state of
+            the
+
+            cluster is within tolerated limits. System services are not included
+            in
+
+            this.
+        - id: clusterUpdateParameters.addOnFeatures
           type:
-            - string
-          description: Resource location.
-        - id: parameters.tags
+            - array
+          description: |-
+            The list of add-on
+            features to enable in the cluster.
+          optional: true
+        - id: clusterUpdateParameters.tags
           type:
             - object
-          description: Resource tags.
+          description: Cluster update parameters
           optional: true
         - id: options
           type:
@@ -1546,144 +2135,8 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function create(resourceGroupName, clusterName, parameters, options,
-        optionalCallback)
-    langs:
-      - js
-  - uid: 'azure-arm-servicefabric.Clusters#deleteMethodWithHttpOperationResponse'
-    id: 'azure-arm-servicefabric.Clusters#deleteMethodWithHttpOperationResponse'
-    parent: azure-arm-servicefabric.Clusters
-    name: >-
-      deleteMethodWithHttpOperationResponse(resourceGroupName, clusterName,
-      options)
-    summary: Delete cluster resource
-    fullName: >-
-      azure-arm-servicefabric.Clusters.deleteMethodWithHttpOperationResponse(resourceGroupName,
-      clusterName, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<null>} - The deserialized result object.'
-        value: '{HttpOperationResponse<null>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
-        - id: clusterName
-          type:
-            - string
-          description: The name of the cluster resource
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function deleteMethodWithHttpOperationResponse(resourceGroupName,
-        clusterName, options)
-    langs:
-      - js
-  - uid: 'azure-arm-servicefabric.Clusters#deleteMethod'
-    id: 'azure-arm-servicefabric.Clusters#deleteMethod'
-    parent: azure-arm-servicefabric.Clusters
-    name: 'deleteMethod(resourceGroupName, clusterName, options, optionalCallback)'
-    summary: Delete cluster resource
-    fullName: >-
-      azure-arm-servicefabric.Clusters.deleteMethod(resourceGroupName,
-      clusterName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{null} - The deserialized result object.'
-        value: '{null} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
-        - id: clusterName
-          type:
-            - string
-          description: The name of the cluster resource
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: >-
-        function deleteMethod(resourceGroupName, clusterName, options,
-        optionalCallback)
+        function update(resourceGroupName, clusterName, clusterUpdateParameters,
+        options, optionalCallback)
     langs:
       - js
   - uid: >-
@@ -1692,7 +2145,10 @@ items:
       azure-arm-servicefabric.Clusters#listByResourceGroupWithHttpOperationResponse
     parent: azure-arm-servicefabric.Clusters
     name: 'listByResourceGroupWithHttpOperationResponse(resourceGroupName, options)'
-    summary: List cluster resource by resource group
+    summary: |-
+      List cluster resource by resource group
+
+      List cluster resource by resource group
     fullName: >-
       azure-arm-servicefabric.Clusters.listByResourceGroupWithHttpOperationResponse(resourceGroupName,
       options)
@@ -1715,9 +2171,7 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
+          description: The name of the resource group.
         - id: options
           type:
             - object
@@ -1743,7 +2197,10 @@ items:
     id: 'azure-arm-servicefabric.Clusters#listByResourceGroup'
     parent: azure-arm-servicefabric.Clusters
     name: 'listByResourceGroup(resourceGroupName, options, optionalCallback)'
-    summary: List cluster resource by resource group
+    summary: |-
+      List cluster resource by resource group
+
+      List cluster resource by resource group
     fullName: >-
       azure-arm-servicefabric.Clusters.listByResourceGroup(resourceGroupName,
       options, optionalCallback)
@@ -1786,9 +2243,7 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
+          description: The name of the resource group.
         - id: options
           type:
             - object
@@ -1824,7 +2279,10 @@ items:
     id: 'azure-arm-servicefabric.Clusters#listWithHttpOperationResponse'
     parent: azure-arm-servicefabric.Clusters
     name: listWithHttpOperationResponse(options)
-    summary: List cluster resource
+    summary: |-
+      List cluster resource
+
+      List cluster resource
     fullName: azure-arm-servicefabric.Clusters.listWithHttpOperationResponse(options)
     tags:
       - originalTitle: resolve
@@ -1865,7 +2323,10 @@ items:
     id: 'azure-arm-servicefabric.Clusters#list'
     parent: azure-arm-servicefabric.Clusters
     name: 'list(options, optionalCallback)'
-    summary: List cluster resource
+    summary: |-
+      List cluster resource
+
+      List cluster resource
     fullName: 'azure-arm-servicefabric.Clusters.list(options, optionalCallback)'
     tags:
       - originalTitle: resolve
@@ -1932,640 +2393,19 @@ items:
       content: 'function list(options, optionalCallback)'
     langs:
       - js
-  - uid: 'azure-arm-servicefabric.Clusters#beginUpdateWithHttpOperationResponse'
-    id: 'azure-arm-servicefabric.Clusters#beginUpdateWithHttpOperationResponse'
-    parent: azure-arm-servicefabric.Clusters
-    name: >-
-      beginUpdateWithHttpOperationResponse(resourceGroupName, clusterName,
-      parameters, options)
-    summary: Update cluster configuration
-    fullName: >-
-      azure-arm-servicefabric.Clusters.beginUpdateWithHttpOperationResponse(resourceGroupName,
-      clusterName, parameters, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<Cluster>} - The deserialized result object.'
-        value: '{HttpOperationResponse<Cluster>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
-        - id: clusterName
-          type:
-            - string
-          description: The name of the cluster resource
-        - id: parameters
-          type:
-            - object
-          description: |-
-            The parameters which contains the property value
-            and property name which used to update the cluster configuration
-        - id: parameters.reliabilityLevel
-          type:
-            - string
-          description: |-
-            This level is used to set the
-            number of replicas of the system services. Possible values include:
-            'Bronze', 'Silver', 'Gold'
-          optional: true
-        - id: parameters.upgradeMode
-          type:
-            - string
-          description: >-
-            Cluster upgrade mode indicates if
-
-            fabric upgrade is initiated automatically by the system or not.
-            Possible
-
-            values include: 'Automatic', 'Manual'
-          optional: true
-        - id: parameters.clusterCodeVersion
-          type:
-            - string
-          description: >-
-            The ServiceFabric code
-
-            version, if set it, please make sure you have set upgradeMode to
-            Manual,
-
-            otherwise ,it will fail, if you are using PUT new cluster, you can
-            get the
-
-            version by using ClusterVersions_List, if you are updating existing
-            cluster,
-
-            you can get the availableClusterVersions from Clusters_Get
-          optional: true
-        - id: parameters.certificate
-          type:
-            - object
-          description: >-
-            This primay certificate will be
-
-            used as cluster node to node security, SSL certificate for cluster
-
-            management endpoint and default admin client, the certificate should
-            exist
-
-            in the virtual machine scale sets or Azure key vault, before you add
-            it. It
-
-            will override original value
-          optional: true
-        - id: parameters.clientCertificateThumbprints
-          type:
-            - array
-          description: >-
-            The client
-
-            thumbprint details, it is used for client access for cluster
-            operation, it
-
-            will override existing collection
-          optional: true
-        - id: parameters.clientCertificateCommonNames
-          type:
-            - array
-          description: |-
-            List of client
-            certificates to whitelist based on common names.
-          optional: true
-        - id: parameters.fabricSettings
-          type:
-            - array
-          description: |-
-            List of custom fabric settings to
-            configure the cluster, Note, it will overwrite existing collection
-          optional: true
-        - id: parameters.reverseProxyCertificate
-          type:
-            - object
-          description: |-
-            Certificate for the
-            reverse proxy
-          optional: true
-        - id: parameters.reverseProxyCertificate.thumbprint
-          type:
-            - string
-          description: |-
-            Thumbprint of
-            the primary certificate
-        - id: parameters.reverseProxyCertificate.thumbprintSecondary
-          type:
-            - string
-          description: Thumbprint of the secondary certificate
-          optional: true
-        - id: parameters.reverseProxyCertificate.x509StoreName
-          type:
-            - string
-          description: |-
-            The local
-            certificate store location. Possible values include: 'AddressBook',
-            'AuthRoot', 'CertificateAuthority', 'Disallowed', 'My', 'Root',
-            'TrustedPeople', 'TrustedPublisher'
-          optional: true
-        - id: parameters.nodeTypes
-          type:
-            - array
-          description: |-
-            The list of nodetypes that make up the
-            cluster, it will override
-          optional: true
-        - id: parameters.upgradeDescription
-          type:
-            - object
-          description: |-
-            The policy to use when
-            upgrading the cluster.
-          optional: true
-        - id: parameters.upgradeDescription.overrideUserUpgradePolicy
-          type:
-            - boolean
-          description: Use the user defined upgrade policy or not
-          optional: true
-        - id: parameters.upgradeDescription.forceRestart
-          type:
-            - boolean
-          description: |-
-            Force node to
-            restart or not
-          optional: true
-        - id: parameters.upgradeDescription.upgradeReplicaSetCheckTimeout
-          type:
-            - string
-          description: >-
-            Timeout for replica set upgrade to complete,it represents .Net
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckWaitDuration
-          type:
-            - string
-          description: >-
-            The
-
-            length of time to wait after completing an upgrade domain before
-            performing
-
-            health checks, it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthCheckStableDuration
-          type:
-            - string
-          description: >-
-            The
-
-            length of time that health checks must pass continuously,it
-            represents .Net
-
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckRetryTimeout
-          type:
-            - string
-          description: >-
-            The
-
-            length of time that health checks can fail continuously,it
-            represents .Net
-
-            TimeSpan
-        - id: parameters.upgradeDescription.upgradeTimeout
-          type:
-            - string
-          description: |-
-            The upgrade
-            timeout,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.upgradeDomainTimeout
-          type:
-            - string
-          description: |-
-            The
-            timeout for any upgrade domain,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthPolicy
-          type:
-            - object
-          description: |-
-            Cluster health
-            Policy
-        - id: parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
-          type:
-            - number
-          description: >-
-            The
-
-            maximum allowed percentage of unhealthy nodes before reporting an
-            error. For
-
-            example, to allow 10% of nodes to be unhealthy, this value would be
-            10.
-          optional: true
-        - id: >-
-            parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
-          type:
-            - number
-          description: >-
-            The maximum allowed percentage of unhealthy applications before
-            reporting an
-
-            error. For example, to allow 10% of applications to be unhealthy,
-            this value
-
-            would be 10.
-          optional: true
-        - id: parameters.upgradeDescription.deltaHealthPolicy
-          type:
-            - object
-          description: |-
-            Delta
-            health policy
-          optional: true
-        - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
-          type:
-            - number
-          description: Additional unhealthy nodes percentage
-        - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
-          type:
-            - number
-          description: Additional unhealthy nodes percentage per upgrade domain
-        - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
-          type:
-            - number
-          description: Additional unhealthy applications percentage
-        - id: parameters.tags
-          type:
-            - object
-          description: Cluster update parameters
-          optional: true
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function beginUpdateWithHttpOperationResponse(resourceGroupName,
-        clusterName, parameters, options)
-    langs:
-      - js
-  - uid: 'azure-arm-servicefabric.Clusters#beginUpdate'
-    id: 'azure-arm-servicefabric.Clusters#beginUpdate'
-    parent: azure-arm-servicefabric.Clusters
-    name: >-
-      beginUpdate(resourceGroupName, clusterName, parameters, options,
-      optionalCallback)
-    summary: Update cluster configuration
-    fullName: >-
-      azure-arm-servicefabric.Clusters.beginUpdate(resourceGroupName,
-      clusterName, parameters, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{Cluster} - The deserialized result object.'
-        value: '{Cluster} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Cluster} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Cluster} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
-        - id: clusterName
-          type:
-            - string
-          description: The name of the cluster resource
-        - id: parameters
-          type:
-            - object
-          description: |-
-            The parameters which contains the property value
-            and property name which used to update the cluster configuration
-        - id: parameters.reliabilityLevel
-          type:
-            - string
-          description: |-
-            This level is used to set the
-            number of replicas of the system services. Possible values include:
-            'Bronze', 'Silver', 'Gold'
-          optional: true
-        - id: parameters.upgradeMode
-          type:
-            - string
-          description: >-
-            Cluster upgrade mode indicates if
-
-            fabric upgrade is initiated automatically by the system or not.
-            Possible
-
-            values include: 'Automatic', 'Manual'
-          optional: true
-        - id: parameters.clusterCodeVersion
-          type:
-            - string
-          description: >-
-            The ServiceFabric code
-
-            version, if set it, please make sure you have set upgradeMode to
-            Manual,
-
-            otherwise ,it will fail, if you are using PUT new cluster, you can
-            get the
-
-            version by using ClusterVersions_List, if you are updating existing
-            cluster,
-
-            you can get the availableClusterVersions from Clusters_Get
-          optional: true
-        - id: parameters.certificate
-          type:
-            - object
-          description: >-
-            This primay certificate will be
-
-            used as cluster node to node security, SSL certificate for cluster
-
-            management endpoint and default admin client, the certificate should
-            exist
-
-            in the virtual machine scale sets or Azure key vault, before you add
-            it. It
-
-            will override original value
-          optional: true
-        - id: parameters.clientCertificateThumbprints
-          type:
-            - array
-          description: >-
-            The client
-
-            thumbprint details, it is used for client access for cluster
-            operation, it
-
-            will override existing collection
-          optional: true
-        - id: parameters.clientCertificateCommonNames
-          type:
-            - array
-          description: |-
-            List of client
-            certificates to whitelist based on common names.
-          optional: true
-        - id: parameters.fabricSettings
-          type:
-            - array
-          description: |-
-            List of custom fabric settings to
-            configure the cluster, Note, it will overwrite existing collection
-          optional: true
-        - id: parameters.reverseProxyCertificate
-          type:
-            - object
-          description: |-
-            Certificate for the
-            reverse proxy
-          optional: true
-        - id: parameters.reverseProxyCertificate.thumbprint
-          type:
-            - string
-          description: |-
-            Thumbprint of
-            the primary certificate
-        - id: parameters.reverseProxyCertificate.thumbprintSecondary
-          type:
-            - string
-          description: Thumbprint of the secondary certificate
-          optional: true
-        - id: parameters.reverseProxyCertificate.x509StoreName
-          type:
-            - string
-          description: |-
-            The local
-            certificate store location. Possible values include: 'AddressBook',
-            'AuthRoot', 'CertificateAuthority', 'Disallowed', 'My', 'Root',
-            'TrustedPeople', 'TrustedPublisher'
-          optional: true
-        - id: parameters.nodeTypes
-          type:
-            - array
-          description: |-
-            The list of nodetypes that make up the
-            cluster, it will override
-          optional: true
-        - id: parameters.upgradeDescription
-          type:
-            - object
-          description: |-
-            The policy to use when
-            upgrading the cluster.
-          optional: true
-        - id: parameters.upgradeDescription.overrideUserUpgradePolicy
-          type:
-            - boolean
-          description: Use the user defined upgrade policy or not
-          optional: true
-        - id: parameters.upgradeDescription.forceRestart
-          type:
-            - boolean
-          description: |-
-            Force node to
-            restart or not
-          optional: true
-        - id: parameters.upgradeDescription.upgradeReplicaSetCheckTimeout
-          type:
-            - string
-          description: >-
-            Timeout for replica set upgrade to complete,it represents .Net
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckWaitDuration
-          type:
-            - string
-          description: >-
-            The
-
-            length of time to wait after completing an upgrade domain before
-            performing
-
-            health checks, it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthCheckStableDuration
-          type:
-            - string
-          description: >-
-            The
-
-            length of time that health checks must pass continuously,it
-            represents .Net
-
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckRetryTimeout
-          type:
-            - string
-          description: >-
-            The
-
-            length of time that health checks can fail continuously,it
-            represents .Net
-
-            TimeSpan
-        - id: parameters.upgradeDescription.upgradeTimeout
-          type:
-            - string
-          description: |-
-            The upgrade
-            timeout,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.upgradeDomainTimeout
-          type:
-            - string
-          description: |-
-            The
-            timeout for any upgrade domain,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthPolicy
-          type:
-            - object
-          description: |-
-            Cluster health
-            Policy
-        - id: parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
-          type:
-            - number
-          description: >-
-            The
-
-            maximum allowed percentage of unhealthy nodes before reporting an
-            error. For
-
-            example, to allow 10% of nodes to be unhealthy, this value would be
-            10.
-          optional: true
-        - id: >-
-            parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
-          type:
-            - number
-          description: >-
-            The maximum allowed percentage of unhealthy applications before
-            reporting an
-
-            error. For example, to allow 10% of applications to be unhealthy,
-            this value
-
-            would be 10.
-          optional: true
-        - id: parameters.upgradeDescription.deltaHealthPolicy
-          type:
-            - object
-          description: |-
-            Delta
-            health policy
-          optional: true
-        - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
-          type:
-            - number
-          description: Additional unhealthy nodes percentage
-        - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
-          type:
-            - number
-          description: Additional unhealthy nodes percentage per upgrade domain
-        - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
-          type:
-            - number
-          description: Additional unhealthy applications percentage
-        - id: parameters.tags
-          type:
-            - object
-          description: Cluster update parameters
-          optional: true
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: >-
-        function beginUpdate(resourceGroupName, clusterName, parameters,
-        options, optionalCallback)
-    langs:
-      - js
   - uid: 'azure-arm-servicefabric.Clusters#beginCreateWithHttpOperationResponse'
     id: 'azure-arm-servicefabric.Clusters#beginCreateWithHttpOperationResponse'
     parent: azure-arm-servicefabric.Clusters
     name: >-
       beginCreateWithHttpOperationResponse(resourceGroupName, clusterName,
-      parameters, options)
-    summary: Create cluster resource
+      cluster, options)
+    summary: |-
+      Create a ServiceFabric cluster
+
+      Create cluster resource
     fullName: >-
       azure-arm-servicefabric.Clusters.beginCreateWithHttpOperationResponse(resourceGroupName,
-      clusterName, parameters, options)
+      clusterName, cluster, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -2581,96 +2421,122 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
+          description: The name of the resource group.
         - id: clusterName
           type:
             - string
           description: The name of the cluster resource
-        - id: parameters
+        - id: cluster
           type:
             - object
-          description: Put Request
-        - id: parameters.clusterCodeVersion
+          description: The cluster resource.
+        - id: cluster.availableClusterVersions
+          type:
+            - array
+          description: |-
+            The Service Fabric runtime
+            versions available for this cluster.
+          optional: true
+        - id: cluster.clusterState
           type:
             - string
           description: |-
-            The ServiceFabric code
-            version running in your cluster
+            Possible values include:
+            'WaitingForNodes', 'Deploying', 'BaselineUpgrade',
+            'UpdatingUserConfiguration', 'UpdatingUserCertificate',
+            'UpdatingInfrastructure', 'EnforcingClusterVersion',
+            'UpgradeServiceUnreachable', 'AutoScale', 'Ready'
           optional: true
-        - id: parameters.certificate
-          type:
-            - object
-          description: |-
-            This primay certificate will be
-            used as cluster node to node security, SSL certificate for cluster
-            management endpoint and default admin client
-          optional: true
-        - id: parameters.reliabilityLevel
+        - id: cluster.clusterCodeVersion
           type:
             - string
           description: >-
-            Cluster reliability level
+            The Service Fabric runtime
 
-            indicates replica set size of system service. Possible values
-            include:
+            version of the cluster. This property can only by set the user when
 
+            **upgradeMode** is set to 'Manual'. To get list of available Service
+            Fabric
+
+            versions for new clusters use [ClusterVersion
+            API](./ClusterVersion.md). To
+
+            get the list of available version for existing clusters use
+
+            **availableClusterVersions**.
+          optional: true
+        - id: cluster.certificate
+          type:
+            - object
+          description: >-
+            The certificate to use for securing
+
+            the cluster. The certificate provided will be used for  node to node
+
+            security within the cluster, SSL certificate for cluster management
+            endpoint
+
+            and default  admin client.
+          optional: true
+        - id: cluster.reliabilityLevel
+          type:
+            - string
+          description: |-
+            Possible values include: 'None',
             'Bronze', 'Silver', 'Gold', 'Platinum'
           optional: true
-        - id: parameters.upgradeMode
+        - id: cluster.upgradeMode
           type:
             - string
-          description: >-
-            Cluster upgrade mode indicates if
-
-            fabric upgrade is initiated automatically by the system or not.
-            Possible
-
-            values include: 'Automatic', 'Manual'
+          description: |-
+            Possible values include: 'Automatic',
+            'Manual'
           optional: true
-        - id: parameters.clientCertificateThumbprints
-          type:
-            - array
-          description: >-
-            The client
-
-            thumbprint details ,it is used for client access for cluster
-            operation
-          optional: true
-        - id: parameters.clientCertificateCommonNames
+        - id: cluster.clientCertificateThumbprints
           type:
             - array
           description: |-
-            List of client
-            certificates to whitelist based on common names
+            The list of client
+            certificates referenced by thumbprint that are allowed to manage the
+            cluster.
           optional: true
-        - id: parameters.fabricSettings
+        - id: cluster.clientCertificateCommonNames
+          type:
+            - array
+          description: >-
+            The list of client
+
+            certificates referenced by common name that are allowed to manage
+            the
+
+            cluster.
+          optional: true
+        - id: cluster.fabricSettings
           type:
             - array
           description: |-
-            List of custom fabric settings to
-            configure the cluster.
+            The list of custom fabric settings
+            to configure the cluster.
           optional: true
-        - id: parameters.reverseProxyCertificate
+        - id: cluster.reverseProxyCertificate
           type:
             - object
           description: |-
             The server certificate
-            used by reverse proxy
+            used by reverse proxy.
           optional: true
-        - id: parameters.reverseProxyCertificate.thumbprint
+        - id: cluster.reverseProxyCertificate.thumbprint
           type:
             - string
           description: |-
-            Thumbprint of
-            the primary certificate
-        - id: parameters.reverseProxyCertificate.thumbprintSecondary
+            Thumbprint of the
+            primary certificate.
+        - id: cluster.reverseProxyCertificate.thumbprintSecondary
           type:
             - string
-          description: Thumbprint of the secondary certificate
+          description: Thumbprint of the secondary certificate.
           optional: true
-        - id: parameters.reverseProxyCertificate.x509StoreName
+        - id: cluster.reverseProxyCertificate.x509StoreName
           type:
             - string
           description: |-
@@ -2679,110 +2545,124 @@ items:
             'AuthRoot', 'CertificateAuthority', 'Disallowed', 'My', 'Root',
             'TrustedPeople', 'TrustedPublisher'
           optional: true
-        - id: parameters.managementEndpoint
+        - id: cluster.managementEndpoint
           type:
             - string
           description: |-
-            The http management endpoint
-            of the cluster
-        - id: parameters.nodeTypes
+            The http management endpoint of
+            the cluster.
+        - id: cluster.nodeTypes
           type:
             - array
-          description: |-
-            The list of nodetypes that make up the
-            cluster
-        - id: parameters.azureActiveDirectory
+          description: The list of node types in the cluster.
+        - id: cluster.azureActiveDirectory
           type:
             - object
           description: |-
-            The settings to enable AAD
-            authentication on the cluster
+            The AAD authentication
+            settings of the cluster.
           optional: true
-        - id: parameters.azureActiveDirectory.tenantId
+        - id: cluster.azureActiveDirectory.tenantId
           type:
             - string
           description: |-
             Azure active
-            directory tenant id
+            directory tenant id.
           optional: true
-        - id: parameters.azureActiveDirectory.clusterApplication
+        - id: cluster.azureActiveDirectory.clusterApplication
           type:
             - string
           description: |-
             Azure
-            active directory cluster application id
+            active directory cluster application id.
           optional: true
-        - id: parameters.azureActiveDirectory.clientApplication
+        - id: cluster.azureActiveDirectory.clientApplication
           type:
             - string
           description: |-
             Azure
-            active directory client application id
+            active directory client application id.
           optional: true
-        - id: parameters.vmImage
+        - id: cluster.vmImage
           type:
             - string
           description: |-
-            The name of VM image VMSS has been
-            configured with. Generic names such as Windows or Linux can be used.
+            The VM image VMSS has been configured
+            with. Generic names such as Windows or Linux can be used.
           optional: true
-        - id: parameters.diagnosticsStorageAccountConfig
+        - id: cluster.diagnosticsStorageAccountConfig
           type:
             - object
           description: |-
             The storage
-            diagnostics account configuration details
+            account information for storing Service Fabric diagnostic logs.
           optional: true
-        - id: parameters.diagnosticsStorageAccountConfig.storageAccountName
+        - id: cluster.diagnosticsStorageAccountConfig.storageAccountName
+          type:
+            - string
+          description: The Azure storage account name.
+        - id: cluster.diagnosticsStorageAccountConfig.protectedAccountKeyName
           type:
             - string
           description: |-
-            Diagnostics
-            storage account name
-        - id: parameters.diagnosticsStorageAccountConfig.protectedAccountKeyName
+            The
+            protected diagnostics storage key name.
+        - id: cluster.diagnosticsStorageAccountConfig.blobEndpoint
           type:
             - string
           description: |-
-            Protected
-            Diagnostics storage key name
-        - id: parameters.diagnosticsStorageAccountConfig.blobEndpoint
+            The
+            blob endpoint of the azure storage account.
+        - id: cluster.diagnosticsStorageAccountConfig.queueEndpoint
           type:
             - string
-          description: Diagnostics storage account blob endpoint
-        - id: parameters.diagnosticsStorageAccountConfig.queueEndpoint
+          description: |-
+            The
+            queue endpoint of the azure storage account.
+        - id: cluster.diagnosticsStorageAccountConfig.tableEndpoint
           type:
             - string
-          description: Diagnostics storage account queue endpoint
-        - id: parameters.diagnosticsStorageAccountConfig.tableEndpoint
-          type:
-            - string
-          description: Diagnostics storage account table endpoint
-        - id: parameters.upgradeDescription
+          description: |-
+            The
+            table endpoint of the azure storage account.
+        - id: cluster.upgradeDescription
           type:
             - object
           description: |-
             The policy to use when
             upgrading the cluster.
           optional: true
-        - id: parameters.upgradeDescription.overrideUserUpgradePolicy
+        - id: cluster.upgradeDescription.forceRestart
           type:
             - boolean
-          description: Use the user defined upgrade policy or not
+          description: >-
+            If true, then
+
+            processes are forcefully restarted during upgrade even when the code
+            version
+
+            has not changed (the upgrade only changes configuration or data).
           optional: true
-        - id: parameters.upgradeDescription.forceRestart
-          type:
-            - boolean
-          description: |-
-            Force node to
-            restart or not
-          optional: true
-        - id: parameters.upgradeDescription.upgradeReplicaSetCheckTimeout
+        - id: cluster.upgradeDescription.upgradeReplicaSetCheckTimeout
           type:
             - string
           description: >-
-            Timeout for replica set upgrade to complete,it represents .Net
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckWaitDuration
+            The
+
+            maximum amount of time to block processing of an upgrade domain and
+            revent
+
+            loss of availability when there are unexpected issues. When this
+            timeout
+
+            expires, processing of the upgrade domain will proceed regardless of
+
+            availability loss issues. The timeout is reset at the start of each
+            upgrade
+
+            domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms
+            format.
+        - id: cluster.upgradeDescription.healthCheckWaitDuration
           type:
             - string
           description: >-
@@ -2791,46 +2671,63 @@ items:
             length of time to wait after completing an upgrade domain before
             performing
 
-            health checks, it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthCheckStableDuration
+            health checks. The duration can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: cluster.upgradeDescription.healthCheckStableDuration
           type:
             - string
           description: >-
             The
 
-            length of time that health checks must pass continuously,it
-            represents .Net
+            amount of time that the application or cluster must remain healthy
+            before
 
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckRetryTimeout
+            the upgrade proceeds to the next upgrade domain. The duration can be
+            in
+
+            either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.healthCheckRetryTimeout
           type:
             - string
           description: >-
             The
 
-            length of time that health checks can fail continuously,it
-            represents .Net
+            amount of time to retry health evaluation when the application or
+            cluster is
 
-            TimeSpan
-        - id: parameters.upgradeDescription.upgradeTimeout
+            unhealthy before the upgrade rolls back. The timeout can be in
+            either
+
+            hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.upgradeTimeout
           type:
             - string
-          description: |-
-            The upgrade
-            timeout,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.upgradeDomainTimeout
-          type:
-            - string
-          description: |-
+          description: >-
+            The amount of time
+
+            the overall upgrade has to complete before the upgrade rolls back.
             The
-            timeout for any upgrade domain,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthPolicy
+
+            timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.upgradeDomainTimeout
+          type:
+            - string
+          description: >-
+            The amount
+
+            of time each upgrade domain has to complete before the upgrade rolls
+            back.
+
+            The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.healthPolicy
           type:
             - object
           description: |-
-            Cluster health
-            Policy
-        - id: parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
+            The cluster health
+            policy used when upgrading the cluster.
+        - id: cluster.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
           type:
             - number
           description: >-
@@ -2843,7 +2740,7 @@ items:
             10.
           optional: true
         - id: >-
-            parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
+            cluster.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
           type:
             - number
           description: >-
@@ -2855,33 +2752,94 @@ items:
 
             would be 10.
           optional: true
-        - id: parameters.upgradeDescription.deltaHealthPolicy
+        - id: cluster.upgradeDescription.deltaHealthPolicy
           type:
             - object
           description: |-
-            Delta
-            health policy
+            The delta
+            health policy used when upgrading the cluster.
           optional: true
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage
+          description: >-
+            The maximum allowed percentage of nodes health degradation allowed
+            during
+
+            cluster upgrades. The delta is measured between the state of the
+            nodes at
+
+            the beginning of upgrade and the state of the nodes at the time of
+            the
+
+            health evaluation. The check is performed after every upgrade domain
+            upgrade
+
+            completion to make sure the global state of the cluster is within
+            tolerated
+
+            limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage per upgrade domain
+          description: >-
+            The maximum allowed percentage of upgrade domain nodes health
+            degradation
+
+            allowed during cluster upgrades. The delta is measured between the
+            state of
+
+            the upgrade domain nodes at the beginning of upgrade and the state
+            of the
+
+            upgrade domain nodes at the time of the health evaluation. The check
+            is
+
+            performed after every upgrade domain upgrade completion for all
+            completed
+
+            upgrade domains to make sure the state of the upgrade domains is
+            within
+
+            tolerated limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
           type:
             - number
-          description: Additional unhealthy applications percentage
-        - id: parameters.location
+          description: >-
+            The maximum allowed percentage of applications health degradation
+            allowed
+
+            during cluster upgrades. The delta is measured between the state of
+            the
+
+            applications at the beginning of upgrade and the state of the
+            applications
+
+            at the time of the health evaluation. The check is performed after
+            every
+
+            upgrade domain upgrade completion to make sure the global state of
+            the
+
+            cluster is within tolerated limits. System services are not included
+            in
+
+            this.
+        - id: cluster.addOnFeatures
+          type:
+            - array
+          description: |-
+            The list of add-on features to enable
+            in the cluster.
+          optional: true
+        - id: cluster.location
           type:
             - string
           description: Resource location.
-        - id: parameters.tags
+        - id: cluster.tags
           type:
             - object
           description: Resource tags.
@@ -2904,19 +2862,22 @@ items:
         description: A promise is returned
       content: >-
         function beginCreateWithHttpOperationResponse(resourceGroupName,
-        clusterName, parameters, options)
+        clusterName, cluster, options)
     langs:
       - js
   - uid: 'azure-arm-servicefabric.Clusters#beginCreate'
     id: 'azure-arm-servicefabric.Clusters#beginCreate'
     parent: azure-arm-servicefabric.Clusters
     name: >-
-      beginCreate(resourceGroupName, clusterName, parameters, options,
+      beginCreate(resourceGroupName, clusterName, cluster, options,
       optionalCallback)
-    summary: Create cluster resource
+    summary: |-
+      Create a ServiceFabric cluster
+
+      Create cluster resource
     fullName: >-
       azure-arm-servicefabric.Clusters.beginCreate(resourceGroupName,
-      clusterName, parameters, options, optionalCallback)
+      clusterName, cluster, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -2956,96 +2917,122 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: |-
-            The name of the resource group to which
-            the resource belongs or get created
+          description: The name of the resource group.
         - id: clusterName
           type:
             - string
           description: The name of the cluster resource
-        - id: parameters
+        - id: cluster
           type:
             - object
-          description: Put Request
-        - id: parameters.clusterCodeVersion
+          description: The cluster resource.
+        - id: cluster.availableClusterVersions
+          type:
+            - array
+          description: |-
+            The Service Fabric runtime
+            versions available for this cluster.
+          optional: true
+        - id: cluster.clusterState
           type:
             - string
           description: |-
-            The ServiceFabric code
-            version running in your cluster
+            Possible values include:
+            'WaitingForNodes', 'Deploying', 'BaselineUpgrade',
+            'UpdatingUserConfiguration', 'UpdatingUserCertificate',
+            'UpdatingInfrastructure', 'EnforcingClusterVersion',
+            'UpgradeServiceUnreachable', 'AutoScale', 'Ready'
           optional: true
-        - id: parameters.certificate
-          type:
-            - object
-          description: |-
-            This primay certificate will be
-            used as cluster node to node security, SSL certificate for cluster
-            management endpoint and default admin client
-          optional: true
-        - id: parameters.reliabilityLevel
+        - id: cluster.clusterCodeVersion
           type:
             - string
           description: >-
-            Cluster reliability level
+            The Service Fabric runtime
 
-            indicates replica set size of system service. Possible values
-            include:
+            version of the cluster. This property can only by set the user when
 
+            **upgradeMode** is set to 'Manual'. To get list of available Service
+            Fabric
+
+            versions for new clusters use [ClusterVersion
+            API](./ClusterVersion.md). To
+
+            get the list of available version for existing clusters use
+
+            **availableClusterVersions**.
+          optional: true
+        - id: cluster.certificate
+          type:
+            - object
+          description: >-
+            The certificate to use for securing
+
+            the cluster. The certificate provided will be used for  node to node
+
+            security within the cluster, SSL certificate for cluster management
+            endpoint
+
+            and default  admin client.
+          optional: true
+        - id: cluster.reliabilityLevel
+          type:
+            - string
+          description: |-
+            Possible values include: 'None',
             'Bronze', 'Silver', 'Gold', 'Platinum'
           optional: true
-        - id: parameters.upgradeMode
+        - id: cluster.upgradeMode
           type:
             - string
-          description: >-
-            Cluster upgrade mode indicates if
-
-            fabric upgrade is initiated automatically by the system or not.
-            Possible
-
-            values include: 'Automatic', 'Manual'
+          description: |-
+            Possible values include: 'Automatic',
+            'Manual'
           optional: true
-        - id: parameters.clientCertificateThumbprints
-          type:
-            - array
-          description: >-
-            The client
-
-            thumbprint details ,it is used for client access for cluster
-            operation
-          optional: true
-        - id: parameters.clientCertificateCommonNames
+        - id: cluster.clientCertificateThumbprints
           type:
             - array
           description: |-
-            List of client
-            certificates to whitelist based on common names
+            The list of client
+            certificates referenced by thumbprint that are allowed to manage the
+            cluster.
           optional: true
-        - id: parameters.fabricSettings
+        - id: cluster.clientCertificateCommonNames
+          type:
+            - array
+          description: >-
+            The list of client
+
+            certificates referenced by common name that are allowed to manage
+            the
+
+            cluster.
+          optional: true
+        - id: cluster.fabricSettings
           type:
             - array
           description: |-
-            List of custom fabric settings to
-            configure the cluster.
+            The list of custom fabric settings
+            to configure the cluster.
           optional: true
-        - id: parameters.reverseProxyCertificate
+        - id: cluster.reverseProxyCertificate
           type:
             - object
           description: |-
             The server certificate
-            used by reverse proxy
+            used by reverse proxy.
           optional: true
-        - id: parameters.reverseProxyCertificate.thumbprint
+        - id: cluster.reverseProxyCertificate.thumbprint
           type:
             - string
           description: |-
-            Thumbprint of
-            the primary certificate
-        - id: parameters.reverseProxyCertificate.thumbprintSecondary
+            Thumbprint of the
+            primary certificate.
+        - id: cluster.reverseProxyCertificate.thumbprintSecondary
           type:
             - string
-          description: Thumbprint of the secondary certificate
+          description: Thumbprint of the secondary certificate.
           optional: true
-        - id: parameters.reverseProxyCertificate.x509StoreName
+        - id: cluster.reverseProxyCertificate.x509StoreName
           type:
             - string
           description: |-
@@ -3054,110 +3041,124 @@ items:
             'AuthRoot', 'CertificateAuthority', 'Disallowed', 'My', 'Root',
             'TrustedPeople', 'TrustedPublisher'
           optional: true
-        - id: parameters.managementEndpoint
+        - id: cluster.managementEndpoint
           type:
             - string
           description: |-
-            The http management endpoint
-            of the cluster
-        - id: parameters.nodeTypes
+            The http management endpoint of
+            the cluster.
+        - id: cluster.nodeTypes
           type:
             - array
-          description: |-
-            The list of nodetypes that make up the
-            cluster
-        - id: parameters.azureActiveDirectory
+          description: The list of node types in the cluster.
+        - id: cluster.azureActiveDirectory
           type:
             - object
           description: |-
-            The settings to enable AAD
-            authentication on the cluster
+            The AAD authentication
+            settings of the cluster.
           optional: true
-        - id: parameters.azureActiveDirectory.tenantId
+        - id: cluster.azureActiveDirectory.tenantId
           type:
             - string
           description: |-
             Azure active
-            directory tenant id
+            directory tenant id.
           optional: true
-        - id: parameters.azureActiveDirectory.clusterApplication
+        - id: cluster.azureActiveDirectory.clusterApplication
           type:
             - string
           description: |-
             Azure
-            active directory cluster application id
+            active directory cluster application id.
           optional: true
-        - id: parameters.azureActiveDirectory.clientApplication
+        - id: cluster.azureActiveDirectory.clientApplication
           type:
             - string
           description: |-
             Azure
-            active directory client application id
+            active directory client application id.
           optional: true
-        - id: parameters.vmImage
+        - id: cluster.vmImage
           type:
             - string
           description: |-
-            The name of VM image VMSS has been
-            configured with. Generic names such as Windows or Linux can be used.
+            The VM image VMSS has been configured
+            with. Generic names such as Windows or Linux can be used.
           optional: true
-        - id: parameters.diagnosticsStorageAccountConfig
+        - id: cluster.diagnosticsStorageAccountConfig
           type:
             - object
           description: |-
             The storage
-            diagnostics account configuration details
+            account information for storing Service Fabric diagnostic logs.
           optional: true
-        - id: parameters.diagnosticsStorageAccountConfig.storageAccountName
+        - id: cluster.diagnosticsStorageAccountConfig.storageAccountName
+          type:
+            - string
+          description: The Azure storage account name.
+        - id: cluster.diagnosticsStorageAccountConfig.protectedAccountKeyName
           type:
             - string
           description: |-
-            Diagnostics
-            storage account name
-        - id: parameters.diagnosticsStorageAccountConfig.protectedAccountKeyName
+            The
+            protected diagnostics storage key name.
+        - id: cluster.diagnosticsStorageAccountConfig.blobEndpoint
           type:
             - string
           description: |-
-            Protected
-            Diagnostics storage key name
-        - id: parameters.diagnosticsStorageAccountConfig.blobEndpoint
+            The
+            blob endpoint of the azure storage account.
+        - id: cluster.diagnosticsStorageAccountConfig.queueEndpoint
           type:
             - string
-          description: Diagnostics storage account blob endpoint
-        - id: parameters.diagnosticsStorageAccountConfig.queueEndpoint
+          description: |-
+            The
+            queue endpoint of the azure storage account.
+        - id: cluster.diagnosticsStorageAccountConfig.tableEndpoint
           type:
             - string
-          description: Diagnostics storage account queue endpoint
-        - id: parameters.diagnosticsStorageAccountConfig.tableEndpoint
-          type:
-            - string
-          description: Diagnostics storage account table endpoint
-        - id: parameters.upgradeDescription
+          description: |-
+            The
+            table endpoint of the azure storage account.
+        - id: cluster.upgradeDescription
           type:
             - object
           description: |-
             The policy to use when
             upgrading the cluster.
           optional: true
-        - id: parameters.upgradeDescription.overrideUserUpgradePolicy
+        - id: cluster.upgradeDescription.forceRestart
           type:
             - boolean
-          description: Use the user defined upgrade policy or not
+          description: >-
+            If true, then
+
+            processes are forcefully restarted during upgrade even when the code
+            version
+
+            has not changed (the upgrade only changes configuration or data).
           optional: true
-        - id: parameters.upgradeDescription.forceRestart
-          type:
-            - boolean
-          description: |-
-            Force node to
-            restart or not
-          optional: true
-        - id: parameters.upgradeDescription.upgradeReplicaSetCheckTimeout
+        - id: cluster.upgradeDescription.upgradeReplicaSetCheckTimeout
           type:
             - string
           description: >-
-            Timeout for replica set upgrade to complete,it represents .Net
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckWaitDuration
+            The
+
+            maximum amount of time to block processing of an upgrade domain and
+            revent
+
+            loss of availability when there are unexpected issues. When this
+            timeout
+
+            expires, processing of the upgrade domain will proceed regardless of
+
+            availability loss issues. The timeout is reset at the start of each
+            upgrade
+
+            domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms
+            format.
+        - id: cluster.upgradeDescription.healthCheckWaitDuration
           type:
             - string
           description: >-
@@ -3166,46 +3167,63 @@ items:
             length of time to wait after completing an upgrade domain before
             performing
 
-            health checks, it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthCheckStableDuration
+            health checks. The duration can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: cluster.upgradeDescription.healthCheckStableDuration
           type:
             - string
           description: >-
             The
 
-            length of time that health checks must pass continuously,it
-            represents .Net
+            amount of time that the application or cluster must remain healthy
+            before
 
-            TimeSpan
-        - id: parameters.upgradeDescription.healthCheckRetryTimeout
+            the upgrade proceeds to the next upgrade domain. The duration can be
+            in
+
+            either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.healthCheckRetryTimeout
           type:
             - string
           description: >-
             The
 
-            length of time that health checks can fail continuously,it
-            represents .Net
+            amount of time to retry health evaluation when the application or
+            cluster is
 
-            TimeSpan
-        - id: parameters.upgradeDescription.upgradeTimeout
+            unhealthy before the upgrade rolls back. The timeout can be in
+            either
+
+            hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.upgradeTimeout
           type:
             - string
-          description: |-
-            The upgrade
-            timeout,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.upgradeDomainTimeout
-          type:
-            - string
-          description: |-
+          description: >-
+            The amount of time
+
+            the overall upgrade has to complete before the upgrade rolls back.
             The
-            timeout for any upgrade domain,it represents .Net TimeSpan
-        - id: parameters.upgradeDescription.healthPolicy
+
+            timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.upgradeDomainTimeout
+          type:
+            - string
+          description: >-
+            The amount
+
+            of time each upgrade domain has to complete before the upgrade rolls
+            back.
+
+            The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: cluster.upgradeDescription.healthPolicy
           type:
             - object
           description: |-
-            Cluster health
-            Policy
-        - id: parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
+            The cluster health
+            policy used when upgrading the cluster.
+        - id: cluster.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
           type:
             - number
           description: >-
@@ -3218,7 +3236,7 @@ items:
             10.
           optional: true
         - id: >-
-            parameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
+            cluster.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
           type:
             - number
           description: >-
@@ -3230,33 +3248,94 @@ items:
 
             would be 10.
           optional: true
-        - id: parameters.upgradeDescription.deltaHealthPolicy
+        - id: cluster.upgradeDescription.deltaHealthPolicy
           type:
             - object
           description: |-
-            Delta
-            health policy
+            The delta
+            health policy used when upgrading the cluster.
           optional: true
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage
+          description: >-
+            The maximum allowed percentage of nodes health degradation allowed
+            during
+
+            cluster upgrades. The delta is measured between the state of the
+            nodes at
+
+            the beginning of upgrade and the state of the nodes at the time of
+            the
+
+            health evaluation. The check is performed after every upgrade domain
+            upgrade
+
+            completion to make sure the global state of the cluster is within
+            tolerated
+
+            limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
           type:
             - number
-          description: Additional unhealthy nodes percentage per upgrade domain
+          description: >-
+            The maximum allowed percentage of upgrade domain nodes health
+            degradation
+
+            allowed during cluster upgrades. The delta is measured between the
+            state of
+
+            the upgrade domain nodes at the beginning of upgrade and the state
+            of the
+
+            upgrade domain nodes at the time of the health evaluation. The check
+            is
+
+            performed after every upgrade domain upgrade completion for all
+            completed
+
+            upgrade domains to make sure the state of the upgrade domains is
+            within
+
+            tolerated limits.
         - id: >-
-            parameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
+            cluster.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
           type:
             - number
-          description: Additional unhealthy applications percentage
-        - id: parameters.location
+          description: >-
+            The maximum allowed percentage of applications health degradation
+            allowed
+
+            during cluster upgrades. The delta is measured between the state of
+            the
+
+            applications at the beginning of upgrade and the state of the
+            applications
+
+            at the time of the health evaluation. The check is performed after
+            every
+
+            upgrade domain upgrade completion to make sure the global state of
+            the
+
+            cluster is within tolerated limits. System services are not included
+            in
+
+            this.
+        - id: cluster.addOnFeatures
+          type:
+            - array
+          description: |-
+            The list of add-on features to enable
+            in the cluster.
+          optional: true
+        - id: cluster.location
           type:
             - string
           description: Resource location.
-        - id: parameters.tags
+        - id: cluster.tags
           type:
             - object
           description: Resource tags.
@@ -3288,161 +3367,28 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function beginCreate(resourceGroupName, clusterName, parameters,
-        options, optionalCallback)
-    langs:
-      - js
-  - uid: >-
-      azure-arm-servicefabric.Clusters#listByResourceGroupNextWithHttpOperationResponse
-    id: >-
-      azure-arm-servicefabric.Clusters#listByResourceGroupNextWithHttpOperationResponse
-    parent: azure-arm-servicefabric.Clusters
-    name: 'listByResourceGroupNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: List cluster resource by resource group
-    fullName: >-
-      azure-arm-servicefabric.Clusters.listByResourceGroupNextWithHttpOperationResponse(nextPageLink,
-      options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<ClusterListResult>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<ClusterListResult>} - The deserialized result
-          object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: nextPageLink
-          type:
-            - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function listByResourceGroupNextWithHttpOperationResponse(nextPageLink,
-        options)
-    langs:
-      - js
-  - uid: 'azure-arm-servicefabric.Clusters#listByResourceGroupNext'
-    id: 'azure-arm-servicefabric.Clusters#listByResourceGroupNext'
-    parent: azure-arm-servicefabric.Clusters
-    name: 'listByResourceGroupNext(nextPageLink, options, optionalCallback)'
-    summary: List cluster resource by resource group
-    fullName: >-
-      azure-arm-servicefabric.Clusters.listByResourceGroupNext(nextPageLink,
-      options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{ClusterListResult} - The deserialized result object.'
-        value: '{ClusterListResult} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ClusterListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ClusterListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: nextPageLink
-          type:
-            - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: >-
-        function listByResourceGroupNext(nextPageLink, options,
+        function beginCreate(resourceGroupName, clusterName, cluster, options,
         optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-servicefabric.Clusters#listNextWithHttpOperationResponse'
-    id: 'azure-arm-servicefabric.Clusters#listNextWithHttpOperationResponse'
+  - uid: 'azure-arm-servicefabric.Clusters#beginUpdateWithHttpOperationResponse'
+    id: 'azure-arm-servicefabric.Clusters#beginUpdateWithHttpOperationResponse'
     parent: azure-arm-servicefabric.Clusters
-    name: 'listNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: List cluster resource
+    name: >-
+      beginUpdateWithHttpOperationResponse(resourceGroupName, clusterName,
+      clusterUpdateParameters, options)
+    summary: |-
+      Update cluster configuration
+
+      Update cluster configuration
     fullName: >-
-      azure-arm-servicefabric.Clusters.listNextWithHttpOperationResponse(nextPageLink,
-      options)
+      azure-arm-servicefabric.Clusters.beginUpdateWithHttpOperationResponse(resourceGroupName,
+      clusterName, clusterUpdateParameters, options)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<ClusterListResult>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<ClusterListResult>} - The deserialized result
-          object.
+        text: '{HttpOperationResponse<Cluster>} - The deserialized result object.'
+        value: '{HttpOperationResponse<Cluster>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -3450,12 +3396,362 @@ items:
     type: Function
     syntax:
       parameters:
-        - id: nextPageLink
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: clusterName
+          type:
+            - string
+          description: The name of the cluster resource
+        - id: clusterUpdateParameters
+          type:
+            - object
+          description: |-
+            The parameters which contains the
+            property value and property name which used to update the cluster
+            configuration.
+        - id: clusterUpdateParameters.reliabilityLevel
+          type:
+            - string
+          description: >-
+            The reliability
+
+            level sets the replica set size of system services. Learn about
+
+            [ReliabilityLevel](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-capacity).
+
+            Possible values include: 'Bronze', 'Silver', 'Gold'
+          optional: true
+        - id: clusterUpdateParameters.upgradeMode
+          type:
+            - string
+          description: >-
+            The upgrade mode of
+
+            the cluster. This indicates if the cluster should be automatically
+            upgraded
+
+            when new Service Fabric runtime version is available. Possible
+            values
+
+            include: 'Automatic', 'Manual'
+          optional: true
+        - id: clusterUpdateParameters.clusterCodeVersion
+          type:
+            - string
+          description: >-
+            The Service
+
+            Fabric runtime version of the cluster. This property can only by set
+            the
+
+            user when **upgradeMode** is set to 'Manual'. To get list of
+            available
+
+            Service Fabric versions for new clusters use [ClusterVersion
+
+            API](./ClusterVersion.md). To get the list of available version for
+            existing
+
+            clusters use **availableClusterVersions**.
+          optional: true
+        - id: clusterUpdateParameters.certificate
+          type:
+            - object
+          description: >-
+            The certificate to use
+
+            for securing the cluster. The certificate provided will be used for 
+            node to
+
+            node security within the cluster, SSL certificate for cluster
+            management
+
+            endpoint and default  admin client.
+          optional: true
+        - id: clusterUpdateParameters.clientCertificateThumbprints
+          type:
+            - array
+          description: >-
+            The
+
+            list of client certificates referenced by thumbprint that are
+            allowed to
+
+            manage the cluster. This will overwrite the existing list.
+          optional: true
+        - id: clusterUpdateParameters.clientCertificateCommonNames
+          type:
+            - array
+          description: >-
+            The
+
+            list of client certificates referenced by common name that are
+            allowed to
+
+            manage the cluster. This will overwrite the existing list.
+          optional: true
+        - id: clusterUpdateParameters.fabricSettings
+          type:
+            - array
+          description: >-
+            The list of custom
+
+            fabric settings to configure the cluster. This will overwrite the
+            existing
+
+            list.
+          optional: true
+        - id: clusterUpdateParameters.reverseProxyCertificate
+          type:
+            - object
+          description: |-
+            The server
+            certificate used by reverse proxy.
+          optional: true
+        - id: clusterUpdateParameters.reverseProxyCertificate.thumbprint
+          type:
+            - string
+          description: Thumbprint of the primary certificate.
+        - id: clusterUpdateParameters.reverseProxyCertificate.thumbprintSecondary
+          type:
+            - string
+          description: Thumbprint of the secondary certificate.
+          optional: true
+        - id: clusterUpdateParameters.reverseProxyCertificate.x509StoreName
           type:
             - string
           description: |-
-            The NextLink from the previous successful call
-            to List operation.
+            The local
+            certificate store location. Possible values include: 'AddressBook',
+            'AuthRoot', 'CertificateAuthority', 'Disallowed', 'My', 'Root',
+            'TrustedPeople', 'TrustedPublisher'
+          optional: true
+        - id: clusterUpdateParameters.nodeTypes
+          type:
+            - array
+          description: |-
+            The list of node types in
+            the cluster. This will overwrite the existing list.
+          optional: true
+        - id: clusterUpdateParameters.upgradeDescription
+          type:
+            - object
+          description: |-
+            The policy to
+            use when upgrading the cluster.
+          optional: true
+        - id: clusterUpdateParameters.upgradeDescription.forceRestart
+          type:
+            - boolean
+          description: >-
+            If true, then processes are forcefully restarted during upgrade even
+            when
+
+            the code version has not changed (the upgrade only changes
+            configuration or
+
+            data).
+          optional: true
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.upgradeReplicaSetCheckTimeout
+          type:
+            - string
+          description: >-
+            The
+
+            maximum amount of time to block processing of an upgrade domain and
+            revent
+
+            loss of availability when there are unexpected issues. When this
+            timeout
+
+            expires, processing of the upgrade domain will proceed regardless of
+
+            availability loss issues. The timeout is reset at the start of each
+            upgrade
+
+            domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckWaitDuration
+          type:
+            - string
+          description: >-
+            The
+
+            length of time to wait after completing an upgrade domain before
+            performing
+
+            health checks. The duration can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckStableDuration
+          type:
+            - string
+          description: >-
+            The
+
+            amount of time that the application or cluster must remain healthy
+            before
+
+            the upgrade proceeds to the next upgrade domain. The duration can be
+            in
+
+            either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckRetryTimeout
+          type:
+            - string
+          description: >-
+            The
+
+            amount of time to retry health evaluation when the application or
+            cluster is
+
+            unhealthy before the upgrade rolls back. The timeout can be in
+            either
+
+            hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.upgradeTimeout
+          type:
+            - string
+          description: >-
+            The amount of time the overall upgrade has to complete before the
+            upgrade
+
+            rolls back. The timeout can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.upgradeDomainTimeout
+          type:
+            - string
+          description: >-
+            The amount
+
+            of time each upgrade domain has to complete before the upgrade rolls
+            back.
+
+            The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.healthPolicy
+          type:
+            - object
+          description: |-
+            The
+            cluster health policy used when upgrading the cluster.
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
+          type:
+            - number
+          description: >-
+            The maximum allowed percentage of unhealthy nodes before reporting
+            an error.
+
+            For example, to allow 10% of nodes to be unhealthy, this value would
+            be 10.
+          optional: true
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
+          type:
+            - number
+          description: >-
+            The maximum allowed percentage of unhealthy applications before
+            reporting an
+
+            error. For example, to allow 10% of applications to be unhealthy,
+            this value
+
+            would be 10.
+          optional: true
+        - id: clusterUpdateParameters.upgradeDescription.deltaHealthPolicy
+          type:
+            - object
+          description: |-
+            The delta
+            health policy used when upgrading the cluster.
+          optional: true
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
+          type:
+            - number
+          description: >-
+            The maximum allowed percentage of nodes health degradation allowed
+            during
+
+            cluster upgrades. The delta is measured between the state of the
+            nodes at
+
+            the beginning of upgrade and the state of the nodes at the time of
+            the
+
+            health evaluation. The check is performed after every upgrade domain
+            upgrade
+
+            completion to make sure the global state of the cluster is within
+            tolerated
+
+            limits.
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
+          type:
+            - number
+          description: >-
+            The maximum allowed percentage of upgrade domain nodes health
+            degradation
+
+            allowed during cluster upgrades. The delta is measured between the
+            state of
+
+            the upgrade domain nodes at the beginning of upgrade and the state
+            of the
+
+            upgrade domain nodes at the time of the health evaluation. The check
+            is
+
+            performed after every upgrade domain upgrade completion for all
+            completed
+
+            upgrade domains to make sure the state of the upgrade domains is
+            within
+
+            tolerated limits.
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
+          type:
+            - number
+          description: >-
+            The maximum allowed percentage of applications health degradation
+            allowed
+
+            during cluster upgrades. The delta is measured between the state of
+            the
+
+            applications at the beginning of upgrade and the state of the
+            applications
+
+            at the time of the health evaluation. The check is performed after
+            every
+
+            upgrade domain upgrade completion to make sure the global state of
+            the
+
+            cluster is within tolerated limits. System services are not included
+            in
+
+            this.
+        - id: clusterUpdateParameters.addOnFeatures
+          type:
+            - array
+          description: |-
+            The list of add-on
+            features to enable in the cluster.
+          optional: true
+        - id: clusterUpdateParameters.tags
+          type:
+            - object
+          description: Cluster update parameters
+          optional: true
         - id: options
           type:
             - object
@@ -3472,22 +3768,29 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: 'function listNextWithHttpOperationResponse(nextPageLink, options)'
+      content: >-
+        function beginUpdateWithHttpOperationResponse(resourceGroupName,
+        clusterName, clusterUpdateParameters, options)
     langs:
       - js
-  - uid: 'azure-arm-servicefabric.Clusters#listNext'
-    id: 'azure-arm-servicefabric.Clusters#listNext'
+  - uid: 'azure-arm-servicefabric.Clusters#beginUpdate'
+    id: 'azure-arm-servicefabric.Clusters#beginUpdate'
     parent: azure-arm-servicefabric.Clusters
-    name: 'listNext(nextPageLink, options, optionalCallback)'
-    summary: List cluster resource
+    name: >-
+      beginUpdate(resourceGroupName, clusterName, clusterUpdateParameters,
+      options, optionalCallback)
+    summary: |-
+      Update cluster configuration
+
+      Update cluster configuration
     fullName: >-
-      azure-arm-servicefabric.Clusters.listNext(nextPageLink, options,
-      optionalCallback)
+      azure-arm-servicefabric.Clusters.beginUpdate(resourceGroupName,
+      clusterName, clusterUpdateParameters, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{ClusterListResult} - The deserialized result object.'
-        value: '{ClusterListResult} - The deserialized result object.'
+        text: '{Cluster} - The deserialized result object.'
+        value: '{Cluster} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -3498,7 +3801,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ClusterListResult} for more information.
+                               See {@link Cluster} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -3511,7 +3814,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ClusterListResult} for more information.
+                               See {@link Cluster} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -3519,12 +3822,362 @@ items:
     type: Function
     syntax:
       parameters:
-        - id: nextPageLink
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: clusterName
+          type:
+            - string
+          description: The name of the cluster resource
+        - id: clusterUpdateParameters
+          type:
+            - object
+          description: |-
+            The parameters which contains the
+            property value and property name which used to update the cluster
+            configuration.
+        - id: clusterUpdateParameters.reliabilityLevel
+          type:
+            - string
+          description: >-
+            The reliability
+
+            level sets the replica set size of system services. Learn about
+
+            [ReliabilityLevel](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-capacity).
+
+            Possible values include: 'Bronze', 'Silver', 'Gold'
+          optional: true
+        - id: clusterUpdateParameters.upgradeMode
+          type:
+            - string
+          description: >-
+            The upgrade mode of
+
+            the cluster. This indicates if the cluster should be automatically
+            upgraded
+
+            when new Service Fabric runtime version is available. Possible
+            values
+
+            include: 'Automatic', 'Manual'
+          optional: true
+        - id: clusterUpdateParameters.clusterCodeVersion
+          type:
+            - string
+          description: >-
+            The Service
+
+            Fabric runtime version of the cluster. This property can only by set
+            the
+
+            user when **upgradeMode** is set to 'Manual'. To get list of
+            available
+
+            Service Fabric versions for new clusters use [ClusterVersion
+
+            API](./ClusterVersion.md). To get the list of available version for
+            existing
+
+            clusters use **availableClusterVersions**.
+          optional: true
+        - id: clusterUpdateParameters.certificate
+          type:
+            - object
+          description: >-
+            The certificate to use
+
+            for securing the cluster. The certificate provided will be used for 
+            node to
+
+            node security within the cluster, SSL certificate for cluster
+            management
+
+            endpoint and default  admin client.
+          optional: true
+        - id: clusterUpdateParameters.clientCertificateThumbprints
+          type:
+            - array
+          description: >-
+            The
+
+            list of client certificates referenced by thumbprint that are
+            allowed to
+
+            manage the cluster. This will overwrite the existing list.
+          optional: true
+        - id: clusterUpdateParameters.clientCertificateCommonNames
+          type:
+            - array
+          description: >-
+            The
+
+            list of client certificates referenced by common name that are
+            allowed to
+
+            manage the cluster. This will overwrite the existing list.
+          optional: true
+        - id: clusterUpdateParameters.fabricSettings
+          type:
+            - array
+          description: >-
+            The list of custom
+
+            fabric settings to configure the cluster. This will overwrite the
+            existing
+
+            list.
+          optional: true
+        - id: clusterUpdateParameters.reverseProxyCertificate
+          type:
+            - object
+          description: |-
+            The server
+            certificate used by reverse proxy.
+          optional: true
+        - id: clusterUpdateParameters.reverseProxyCertificate.thumbprint
+          type:
+            - string
+          description: Thumbprint of the primary certificate.
+        - id: clusterUpdateParameters.reverseProxyCertificate.thumbprintSecondary
+          type:
+            - string
+          description: Thumbprint of the secondary certificate.
+          optional: true
+        - id: clusterUpdateParameters.reverseProxyCertificate.x509StoreName
           type:
             - string
           description: |-
-            The NextLink from the previous successful call
-            to List operation.
+            The local
+            certificate store location. Possible values include: 'AddressBook',
+            'AuthRoot', 'CertificateAuthority', 'Disallowed', 'My', 'Root',
+            'TrustedPeople', 'TrustedPublisher'
+          optional: true
+        - id: clusterUpdateParameters.nodeTypes
+          type:
+            - array
+          description: |-
+            The list of node types in
+            the cluster. This will overwrite the existing list.
+          optional: true
+        - id: clusterUpdateParameters.upgradeDescription
+          type:
+            - object
+          description: |-
+            The policy to
+            use when upgrading the cluster.
+          optional: true
+        - id: clusterUpdateParameters.upgradeDescription.forceRestart
+          type:
+            - boolean
+          description: >-
+            If true, then processes are forcefully restarted during upgrade even
+            when
+
+            the code version has not changed (the upgrade only changes
+            configuration or
+
+            data).
+          optional: true
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.upgradeReplicaSetCheckTimeout
+          type:
+            - string
+          description: >-
+            The
+
+            maximum amount of time to block processing of an upgrade domain and
+            revent
+
+            loss of availability when there are unexpected issues. When this
+            timeout
+
+            expires, processing of the upgrade domain will proceed regardless of
+
+            availability loss issues. The timeout is reset at the start of each
+            upgrade
+
+            domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckWaitDuration
+          type:
+            - string
+          description: >-
+            The
+
+            length of time to wait after completing an upgrade domain before
+            performing
+
+            health checks. The duration can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckStableDuration
+          type:
+            - string
+          description: >-
+            The
+
+            amount of time that the application or cluster must remain healthy
+            before
+
+            the upgrade proceeds to the next upgrade domain. The duration can be
+            in
+
+            either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.healthCheckRetryTimeout
+          type:
+            - string
+          description: >-
+            The
+
+            amount of time to retry health evaluation when the application or
+            cluster is
+
+            unhealthy before the upgrade rolls back. The timeout can be in
+            either
+
+            hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.upgradeTimeout
+          type:
+            - string
+          description: >-
+            The amount of time the overall upgrade has to complete before the
+            upgrade
+
+            rolls back. The timeout can be in either hh:mm:ss or in
+            d.hh:mm:ss.ms
+
+            format.
+        - id: clusterUpdateParameters.upgradeDescription.upgradeDomainTimeout
+          type:
+            - string
+          description: >-
+            The amount
+
+            of time each upgrade domain has to complete before the upgrade rolls
+            back.
+
+            The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format.
+        - id: clusterUpdateParameters.upgradeDescription.healthPolicy
+          type:
+            - object
+          description: |-
+            The
+            cluster health policy used when upgrading the cluster.
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.healthPolicy.maxPercentUnhealthyNodes
+          type:
+            - number
+          description: >-
+            The maximum allowed percentage of unhealthy nodes before reporting
+            an error.
+
+            For example, to allow 10% of nodes to be unhealthy, this value would
+            be 10.
+          optional: true
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.healthPolicy.maxPercentUnhealthyApplications
+          type:
+            - number
+          description: >-
+            The maximum allowed percentage of unhealthy applications before
+            reporting an
+
+            error. For example, to allow 10% of applications to be unhealthy,
+            this value
+
+            would be 10.
+          optional: true
+        - id: clusterUpdateParameters.upgradeDescription.deltaHealthPolicy
+          type:
+            - object
+          description: |-
+            The delta
+            health policy used when upgrading the cluster.
+          optional: true
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyNodes
+          type:
+            - number
+          description: >-
+            The maximum allowed percentage of nodes health degradation allowed
+            during
+
+            cluster upgrades. The delta is measured between the state of the
+            nodes at
+
+            the beginning of upgrade and the state of the nodes at the time of
+            the
+
+            health evaluation. The check is performed after every upgrade domain
+            upgrade
+
+            completion to make sure the global state of the cluster is within
+            tolerated
+
+            limits.
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentUpgradeDomainDeltaUnhealthyNodes
+          type:
+            - number
+          description: >-
+            The maximum allowed percentage of upgrade domain nodes health
+            degradation
+
+            allowed during cluster upgrades. The delta is measured between the
+            state of
+
+            the upgrade domain nodes at the beginning of upgrade and the state
+            of the
+
+            upgrade domain nodes at the time of the health evaluation. The check
+            is
+
+            performed after every upgrade domain upgrade completion for all
+            completed
+
+            upgrade domains to make sure the state of the upgrade domains is
+            within
+
+            tolerated limits.
+        - id: >-
+            clusterUpdateParameters.upgradeDescription.deltaHealthPolicy.maxPercentDeltaUnhealthyApplications
+          type:
+            - number
+          description: >-
+            The maximum allowed percentage of applications health degradation
+            allowed
+
+            during cluster upgrades. The delta is measured between the state of
+            the
+
+            applications at the beginning of upgrade and the state of the
+            applications
+
+            at the time of the health evaluation. The check is performed after
+            every
+
+            upgrade domain upgrade completion to make sure the global state of
+            the
+
+            cluster is within tolerated limits. System services are not included
+            in
+
+            this.
+        - id: clusterUpdateParameters.addOnFeatures
+          type:
+            - array
+          description: |-
+            The list of add-on
+            features to enable in the cluster.
+          optional: true
+        - id: clusterUpdateParameters.tags
+          type:
+            - object
+          description: Cluster update parameters
+          optional: true
         - id: options
           type:
             - object
@@ -3551,7 +4204,9 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function listNext(nextPageLink, options, optionalCallback)'
+      content: >-
+        function beginUpdate(resourceGroupName, clusterName,
+        clusterUpdateParameters, options, optionalCallback)
     langs:
       - js
 references:

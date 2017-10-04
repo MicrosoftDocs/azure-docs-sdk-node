@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-eventhub.ConsumerGroups
       path: lib\services\eventHubManagement\lib\operations\consumerGroups.js
-      startLine: 936
+      startLine: 922
       remote:
         branch: jsdoc
         path: lib\services\eventHubManagement\lib\operations\consumerGroups.js
@@ -23,10 +23,12 @@ items:
       - 'azure-arm-eventhub.ConsumerGroups#deleteMethod'
       - 'azure-arm-eventhub.ConsumerGroups#getWithHttpOperationResponse'
       - 'azure-arm-eventhub.ConsumerGroups#get'
-      - 'azure-arm-eventhub.ConsumerGroups#listAllWithHttpOperationResponse'
-      - 'azure-arm-eventhub.ConsumerGroups#listAll'
-      - 'azure-arm-eventhub.ConsumerGroups#listAllNextWithHttpOperationResponse'
-      - 'azure-arm-eventhub.ConsumerGroups#listAllNext'
+      - >-
+        azure-arm-eventhub.ConsumerGroups#listByEventHubWithHttpOperationResponse
+      - 'azure-arm-eventhub.ConsumerGroups#listByEventHub'
+      - >-
+        azure-arm-eventhub.ConsumerGroups#listByEventHubNextWithHttpOperationResponse
+      - 'azure-arm-eventhub.ConsumerGroups#listByEventHubNext'
     langs:
       - js
   - id: 'azure-arm-eventhub.ConsumerGroups.#ctor'
@@ -63,11 +65,11 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<ConsumerGroupResource>} - The deserialized
-          result object.
+          {HttpOperationResponse<ConsumerGroup>} - The deserialized result
+          object.
         value: >-
-          {HttpOperationResponse<ConsumerGroupResource>} - The deserialized
-          result object.
+          {HttpOperationResponse<ConsumerGroup>} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -99,24 +101,18 @@ items:
           description: |-
             Parameters supplied to create or update a
             consumer group resource.
-        - id: parameters.location
-          type:
-            - string
-          description: Location of the resource.
-        - id: parameters.type
-          type:
-            - string
-          description: ARM type of the Namespace.
-          optional: true
-        - id: parameters.name
-          type:
-            - string
-          description: Name of the consumer group.
-          optional: true
         - id: parameters.userMetadata
           type:
             - string
-          description: The user metadata.
+          description: >-
+            Usermetadata is a placeholder to
+
+            store user-defined string data with maximum length 1024. e.g. it can
+            be used
+
+            to store descriptive data, such as list of teams and their contact
+
+            information also user-defined configuration settings can be stored.
           optional: true
         - id: options
           type:
@@ -157,8 +153,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{ConsumerGroupResource} - The deserialized result object.'
-        value: '{ConsumerGroupResource} - The deserialized result object.'
+        text: '{ConsumerGroup} - The deserialized result object.'
+        value: '{ConsumerGroup} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -169,7 +165,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ConsumerGroupResource} for more information.
+                               See {@link ConsumerGroup} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -182,7 +178,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ConsumerGroupResource} for more information.
+                               See {@link ConsumerGroup} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -214,24 +210,18 @@ items:
           description: |-
             Parameters supplied to create or update a
             consumer group resource.
-        - id: parameters.location
-          type:
-            - string
-          description: Location of the resource.
-        - id: parameters.type
-          type:
-            - string
-          description: ARM type of the Namespace.
-          optional: true
-        - id: parameters.name
-          type:
-            - string
-          description: Name of the consumer group.
-          optional: true
         - id: parameters.userMetadata
           type:
             - string
-          description: The user metadata.
+          description: >-
+            Usermetadata is a placeholder to
+
+            store user-defined string data with maximum length 1024. e.g. it can
+            be used
+
+            to store descriptive data, such as list of teams and their contact
+
+            information also user-defined configuration settings can be stored.
           optional: true
         - id: options
           type:
@@ -432,11 +422,11 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<ConsumerGroupResource>} - The deserialized
-          result object.
+          {HttpOperationResponse<ConsumerGroup>} - The deserialized result
+          object.
         value: >-
-          {HttpOperationResponse<ConsumerGroupResource>} - The deserialized
-          result object.
+          {HttpOperationResponse<ConsumerGroup>} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -496,8 +486,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{ConsumerGroupResource} - The deserialized result object.'
-        value: '{ConsumerGroupResource} - The deserialized result object.'
+        text: '{ConsumerGroup} - The deserialized result object.'
+        value: '{ConsumerGroup} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -508,7 +498,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ConsumerGroupResource} for more information.
+                               See {@link ConsumerGroup} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -521,7 +511,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ConsumerGroupResource} for more information.
+                               See {@link ConsumerGroup} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -578,11 +568,11 @@ items:
         consumerGroupName, options, optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.ConsumerGroups#listAllWithHttpOperationResponse'
-    id: 'azure-arm-eventhub.ConsumerGroups#listAllWithHttpOperationResponse'
+  - uid: 'azure-arm-eventhub.ConsumerGroups#listByEventHubWithHttpOperationResponse'
+    id: 'azure-arm-eventhub.ConsumerGroups#listByEventHubWithHttpOperationResponse'
     parent: azure-arm-eventhub.ConsumerGroups
     name: >-
-      listAllWithHttpOperationResponse(resourceGroupName, namespaceName,
+      listByEventHubWithHttpOperationResponse(resourceGroupName, namespaceName,
       eventHubName, options)
     summary: >-
       Gets all the consumer groups in a Namespace. An empty feed is returned if
@@ -590,7 +580,7 @@ items:
 
       consumer group exists in the Namespace.
     fullName: >-
-      azure-arm-eventhub.ConsumerGroups.listAllWithHttpOperationResponse(resourceGroupName,
+      azure-arm-eventhub.ConsumerGroups.listByEventHubWithHttpOperationResponse(resourceGroupName,
       namespaceName, eventHubName, options)
     tags:
       - originalTitle: resolve
@@ -639,15 +629,15 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function listAllWithHttpOperationResponse(resourceGroupName,
+        function listByEventHubWithHttpOperationResponse(resourceGroupName,
         namespaceName, eventHubName, options)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.ConsumerGroups#listAll'
-    id: 'azure-arm-eventhub.ConsumerGroups#listAll'
+  - uid: 'azure-arm-eventhub.ConsumerGroups#listByEventHub'
+    id: 'azure-arm-eventhub.ConsumerGroups#listByEventHub'
     parent: azure-arm-eventhub.ConsumerGroups
     name: >-
-      listAll(resourceGroupName, namespaceName, eventHubName, options,
+      listByEventHub(resourceGroupName, namespaceName, eventHubName, options,
       optionalCallback)
     summary: >-
       Gets all the consumer groups in a Namespace. An empty feed is returned if
@@ -655,7 +645,7 @@ items:
 
       consumer group exists in the Namespace.
     fullName: >-
-      azure-arm-eventhub.ConsumerGroups.listAll(resourceGroupName,
+      azure-arm-eventhub.ConsumerGroups.listByEventHub(resourceGroupName,
       namespaceName, eventHubName, options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -736,21 +726,23 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function listAll(resourceGroupName, namespaceName, eventHubName,
+        function listByEventHub(resourceGroupName, namespaceName, eventHubName,
         options, optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.ConsumerGroups#listAllNextWithHttpOperationResponse'
-    id: 'azure-arm-eventhub.ConsumerGroups#listAllNextWithHttpOperationResponse'
+  - uid: >-
+      azure-arm-eventhub.ConsumerGroups#listByEventHubNextWithHttpOperationResponse
+    id: >-
+      azure-arm-eventhub.ConsumerGroups#listByEventHubNextWithHttpOperationResponse
     parent: azure-arm-eventhub.ConsumerGroups
-    name: 'listAllNextWithHttpOperationResponse(nextPageLink, options)'
+    name: 'listByEventHubNextWithHttpOperationResponse(nextPageLink, options)'
     summary: >-
       Gets all the consumer groups in a Namespace. An empty feed is returned if
       no
 
       consumer group exists in the Namespace.
     fullName: >-
-      azure-arm-eventhub.ConsumerGroups.listAllNextWithHttpOperationResponse(nextPageLink,
+      azure-arm-eventhub.ConsumerGroups.listByEventHubNextWithHttpOperationResponse(nextPageLink,
       options)
     tags:
       - originalTitle: resolve
@@ -790,21 +782,23 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: 'function listAllNextWithHttpOperationResponse(nextPageLink, options)'
+      content: >-
+        function listByEventHubNextWithHttpOperationResponse(nextPageLink,
+        options)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.ConsumerGroups#listAllNext'
-    id: 'azure-arm-eventhub.ConsumerGroups#listAllNext'
+  - uid: 'azure-arm-eventhub.ConsumerGroups#listByEventHubNext'
+    id: 'azure-arm-eventhub.ConsumerGroups#listByEventHubNext'
     parent: azure-arm-eventhub.ConsumerGroups
-    name: 'listAllNext(nextPageLink, options, optionalCallback)'
+    name: 'listByEventHubNext(nextPageLink, options, optionalCallback)'
     summary: >-
       Gets all the consumer groups in a Namespace. An empty feed is returned if
       no
 
       consumer group exists in the Namespace.
     fullName: >-
-      azure-arm-eventhub.ConsumerGroups.listAllNext(nextPageLink, options,
-      optionalCallback)
+      azure-arm-eventhub.ConsumerGroups.listByEventHubNext(nextPageLink,
+      options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -875,7 +869,7 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function listAllNext(nextPageLink, options, optionalCallback)'
+      content: 'function listByEventHubNext(nextPageLink, options, optionalCallback)'
     langs:
       - js
 references:

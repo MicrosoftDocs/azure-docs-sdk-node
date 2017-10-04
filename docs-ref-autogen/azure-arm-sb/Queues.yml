@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-sb.Queues
       path: lib\services\serviceBusManagement2\lib\operations\queues.js
-      startLine: 2253
+      startLine: 2213
       remote:
         branch: jsdoc
         path: lib\services\serviceBusManagement2\lib\operations\queues.js
@@ -16,8 +16,8 @@ items:
     type: Class
     children:
       - 'azure-arm-sb.Queues.#ctor'
-      - 'azure-arm-sb.Queues#listAllWithHttpOperationResponse'
-      - 'azure-arm-sb.Queues#listAll'
+      - 'azure-arm-sb.Queues#listByNamespaceWithHttpOperationResponse'
+      - 'azure-arm-sb.Queues#listByNamespace'
       - 'azure-arm-sb.Queues#createOrUpdateWithHttpOperationResponse'
       - 'azure-arm-sb.Queues#createOrUpdate'
       - 'azure-arm-sb.Queues#deleteMethodWithHttpOperationResponse'
@@ -37,8 +37,8 @@ items:
       - 'azure-arm-sb.Queues#listKeys'
       - 'azure-arm-sb.Queues#regenerateKeysWithHttpOperationResponse'
       - 'azure-arm-sb.Queues#regenerateKeys'
-      - 'azure-arm-sb.Queues#listAllNextWithHttpOperationResponse'
-      - 'azure-arm-sb.Queues#listAllNext'
+      - 'azure-arm-sb.Queues#listByNamespaceNextWithHttpOperationResponse'
+      - 'azure-arm-sb.Queues#listByNamespaceNext'
       - 'azure-arm-sb.Queues#listAuthorizationRulesNextWithHttpOperationResponse'
       - 'azure-arm-sb.Queues#listAuthorizationRulesNext'
     langs:
@@ -59,24 +59,24 @@ items:
       content: new Queues(client)
     langs:
       - js
-  - uid: 'azure-arm-sb.Queues#listAllWithHttpOperationResponse'
-    id: 'azure-arm-sb.Queues#listAllWithHttpOperationResponse'
+  - uid: 'azure-arm-sb.Queues#listByNamespaceWithHttpOperationResponse'
+    id: 'azure-arm-sb.Queues#listByNamespaceWithHttpOperationResponse'
     parent: azure-arm-sb.Queues
     name: >-
-      listAllWithHttpOperationResponse(resourceGroupName, namespaceName,
+      listByNamespaceWithHttpOperationResponse(resourceGroupName, namespaceName,
       options)
     summary: Gets the queues within a namespace.
     fullName: >-
-      azure-arm-sb.Queues.listAllWithHttpOperationResponse(resourceGroupName,
+      azure-arm-sb.Queues.listByNamespaceWithHttpOperationResponse(resourceGroupName,
       namespaceName, options)
     tags:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<QueueListResult>} - The deserialized result
+          {HttpOperationResponse<SBQueueListResult>} - The deserialized result
           object.
         value: >-
-          {HttpOperationResponse<QueueListResult>} - The deserialized result
+          {HttpOperationResponse<SBQueueListResult>} - The deserialized result
           object.
       - originalTitle: reject
         title: reject
@@ -112,23 +112,25 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function listAllWithHttpOperationResponse(resourceGroupName,
+        function listByNamespaceWithHttpOperationResponse(resourceGroupName,
         namespaceName, options)
     langs:
       - js
-  - uid: 'azure-arm-sb.Queues#listAll'
-    id: 'azure-arm-sb.Queues#listAll'
+  - uid: 'azure-arm-sb.Queues#listByNamespace'
+    id: 'azure-arm-sb.Queues#listByNamespace'
     parent: azure-arm-sb.Queues
-    name: 'listAll(resourceGroupName, namespaceName, options, optionalCallback)'
+    name: >-
+      listByNamespace(resourceGroupName, namespaceName, options,
+      optionalCallback)
     summary: Gets the queues within a namespace.
     fullName: >-
-      azure-arm-sb.Queues.listAll(resourceGroupName, namespaceName, options,
-      optionalCallback)
+      azure-arm-sb.Queues.listByNamespace(resourceGroupName, namespaceName,
+      options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{QueueListResult} - The deserialized result object.'
-        value: '{QueueListResult} - The deserialized result object.'
+        text: '{SBQueueListResult} - The deserialized result object.'
+        value: '{SBQueueListResult} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -139,7 +141,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link QueueListResult} for more information.
+                               See {@link SBQueueListResult} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -152,7 +154,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link QueueListResult} for more information.
+                               See {@link SBQueueListResult} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -197,7 +199,7 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function listAll(resourceGroupName, namespaceName, options,
+        function listByNamespace(resourceGroupName, namespaceName, options,
         optionalCallback)
     langs:
       - js
@@ -214,12 +216,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<QueueResource>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<QueueResource>} - The deserialized result
-          object.
+        text: '{HttpOperationResponse<SBQueue>} - The deserialized result object.'
+        value: '{HttpOperationResponse<SBQueue>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -247,125 +245,19 @@ items:
           description: |-
             Parameters supplied to create or update a queue
             resource.
-        - id: parameters.name
-          type:
-            - string
-          description: Queue name.
-          optional: true
-        - id: parameters.location
-          type:
-            - string
-          description: location of the resource.
         - id: parameters.lockDuration
           type:
-            - string
+            - azure-arm-sb.moment.duration
           description: >-
-            The duration of a peek-lock; that
+            ISO 8601 timespan
 
-            is, the amount of time that the message is locked for other
-            receivers. The
+            duration of a peek-lock; that is, the amount of time that the
+            message is
 
-            maximum value for LockDuration is 5 minutes; the default value is 1
-            minute.
-          optional: true
-        - id: parameters.autoDeleteOnIdle
-          type:
-            - string
-          description: >-
-            the TimeSpan idle interval
+            locked for other receivers. The maximum value for LockDuration is 5
+            minutes;
 
-            after which the queue is automatically deleted. The minimum duration
-            is 5
-
-            minutes.
-          optional: true
-        - id: parameters.entityAvailabilityStatus
-          type:
-            - string
-          description: >-
-            Entity availability
-
-            status for the queue. Possible values include: 'Available',
-            'Limited',
-
-            'Renaming', 'Restoring', 'Unknown'
-          optional: true
-        - id: parameters.defaultMessageTimeToLive
-          type:
-            - string
-          description: >-
-            The default message
-
-            time to live value. This is the duration after which the message
-            expires,
-
-            starting from when the message is sent to Service Bus. This is the
-            default
-
-            value used when TimeToLive is not set on a message itself.
-          optional: true
-        - id: parameters.duplicateDetectionHistoryTimeWindow
-          type:
-            - string
-          description: >-
-            TimeSpan
-
-            structure that defines the duration of the duplicate detection
-            history. The
-
-            default value is 10 minutes.
-          optional: true
-        - id: parameters.enableBatchedOperations
-          type:
-            - boolean
-          description: |-
-            A value that indicates
-            whether server-side batched operations are enabled.
-          optional: true
-        - id: parameters.deadLetteringOnMessageExpiration
-          type:
-            - boolean
-          description: >-
-            A value that
-
-            indicates whether this queue has dead letter support when a message
-            expires.
-          optional: true
-        - id: parameters.enableExpress
-          type:
-            - boolean
-          description: >-
-            A value that indicates whether
-
-            Express Entities are enabled. An express queue holds a message in
-            memory
-
-            temporarily before writing it to persistent storage.
-          optional: true
-        - id: parameters.enablePartitioning
-          type:
-            - boolean
-          description: >-
-            A value that indicates
-
-            whether the queue is to be partitioned across multiple message
-            brokers.
-          optional: true
-        - id: parameters.isAnonymousAccessible
-          type:
-            - boolean
-          description: |-
-            A value that indicates
-            whether the message is accessible anonymously.
-          optional: true
-        - id: parameters.maxDeliveryCount
-          type:
-            - number
-          description: >-
-            The maximum delivery count. A
-
-            message is automatically deadlettered after this number of
-            deliveries.
+            the default value is 1 minute.
           optional: true
         - id: parameters.maxSizeInMegabytes
           type:
@@ -375,6 +267,8 @@ items:
 
             queue in megabytes, which is the size of memory allocated for the
             queue.
+
+            Default is 1024.
           optional: true
         - id: parameters.requiresDuplicateDetection
           type:
@@ -390,6 +284,50 @@ items:
             A value that indicates whether
             the queue supports the concept of sessions.
           optional: true
+        - id: parameters.defaultMessageTimeToLive
+          type:
+            - azure-arm-sb.moment.duration
+          description: >-
+            ISO 8601
+
+            default message timespan to live value. This is the duration after
+            which the
+
+            message expires, starting from when the message is sent to Service
+            Bus. This
+
+            is the default value used when TimeToLive is not set on a message
+            itself.
+          optional: true
+        - id: parameters.deadLetteringOnMessageExpiration
+          type:
+            - boolean
+          description: >-
+            A value that
+
+            indicates whether this queue has dead letter support when a message
+            expires.
+          optional: true
+        - id: parameters.duplicateDetectionHistoryTimeWindow
+          type:
+            - azure-arm-sb.moment.duration
+          description: >-
+            ISO 8601 timeSpan structure that defines the duration of the
+            duplicate
+
+            detection history. The default value is 10 minutes.
+          optional: true
+        - id: parameters.maxDeliveryCount
+          type:
+            - number
+          description: >-
+            The maximum delivery count. A
+
+            message is automatically deadlettered after this number of
+            deliveries.
+
+            default value is 10.
+          optional: true
         - id: parameters.status
           type:
             - string
@@ -397,18 +335,43 @@ items:
             Enumerates the possible values for the
 
             status of a messaging entity. Possible values include: 'Active',
-            'Creating',
+            'Disabled',
 
-            'Deleting', 'Disabled', 'ReceiveDisabled', 'Renaming', 'Restoring',
+            'Restoring', 'SendDisabled', 'ReceiveDisabled', 'Creating',
+            'Deleting',
 
-            'SendDisabled', 'Unknown'
+            'Renaming', 'Unknown'
           optional: true
-        - id: parameters.supportOrdering
+        - id: parameters.autoDeleteOnIdle
+          type:
+            - azure-arm-sb.moment.duration
+          description: >-
+            ISO 8061 timeSpan
+
+            idle interval after which the queue is automatically deleted. The
+            minimum
+
+            duration is 5 minutes.
+          optional: true
+        - id: parameters.enablePartitioning
           type:
             - boolean
-          description: |-
+          description: >-
+            A value that indicates
+
+            whether the queue is to be partitioned across multiple message
+            brokers.
+          optional: true
+        - id: parameters.enableExpress
+          type:
+            - boolean
+          description: >-
             A value that indicates whether
-            the queue supports ordering.
+
+            Express Entities are enabled. An express queue holds a message in
+            memory
+
+            temporarily before writing it to persistent storage.
           optional: true
         - id: options
           type:
@@ -444,8 +407,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{QueueResource} - The deserialized result object.'
-        value: '{QueueResource} - The deserialized result object.'
+        text: '{SBQueue} - The deserialized result object.'
+        value: '{SBQueue} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -456,7 +419,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link QueueResource} for more information.
+                               See {@link SBQueue} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -469,7 +432,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link QueueResource} for more information.
+                               See {@link SBQueue} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -497,125 +460,19 @@ items:
           description: |-
             Parameters supplied to create or update a queue
             resource.
-        - id: parameters.name
-          type:
-            - string
-          description: Queue name.
-          optional: true
-        - id: parameters.location
-          type:
-            - string
-          description: location of the resource.
         - id: parameters.lockDuration
           type:
-            - string
+            - azure-arm-sb.moment.duration
           description: >-
-            The duration of a peek-lock; that
+            ISO 8601 timespan
 
-            is, the amount of time that the message is locked for other
-            receivers. The
+            duration of a peek-lock; that is, the amount of time that the
+            message is
 
-            maximum value for LockDuration is 5 minutes; the default value is 1
-            minute.
-          optional: true
-        - id: parameters.autoDeleteOnIdle
-          type:
-            - string
-          description: >-
-            the TimeSpan idle interval
+            locked for other receivers. The maximum value for LockDuration is 5
+            minutes;
 
-            after which the queue is automatically deleted. The minimum duration
-            is 5
-
-            minutes.
-          optional: true
-        - id: parameters.entityAvailabilityStatus
-          type:
-            - string
-          description: >-
-            Entity availability
-
-            status for the queue. Possible values include: 'Available',
-            'Limited',
-
-            'Renaming', 'Restoring', 'Unknown'
-          optional: true
-        - id: parameters.defaultMessageTimeToLive
-          type:
-            - string
-          description: >-
-            The default message
-
-            time to live value. This is the duration after which the message
-            expires,
-
-            starting from when the message is sent to Service Bus. This is the
-            default
-
-            value used when TimeToLive is not set on a message itself.
-          optional: true
-        - id: parameters.duplicateDetectionHistoryTimeWindow
-          type:
-            - string
-          description: >-
-            TimeSpan
-
-            structure that defines the duration of the duplicate detection
-            history. The
-
-            default value is 10 minutes.
-          optional: true
-        - id: parameters.enableBatchedOperations
-          type:
-            - boolean
-          description: |-
-            A value that indicates
-            whether server-side batched operations are enabled.
-          optional: true
-        - id: parameters.deadLetteringOnMessageExpiration
-          type:
-            - boolean
-          description: >-
-            A value that
-
-            indicates whether this queue has dead letter support when a message
-            expires.
-          optional: true
-        - id: parameters.enableExpress
-          type:
-            - boolean
-          description: >-
-            A value that indicates whether
-
-            Express Entities are enabled. An express queue holds a message in
-            memory
-
-            temporarily before writing it to persistent storage.
-          optional: true
-        - id: parameters.enablePartitioning
-          type:
-            - boolean
-          description: >-
-            A value that indicates
-
-            whether the queue is to be partitioned across multiple message
-            brokers.
-          optional: true
-        - id: parameters.isAnonymousAccessible
-          type:
-            - boolean
-          description: |-
-            A value that indicates
-            whether the message is accessible anonymously.
-          optional: true
-        - id: parameters.maxDeliveryCount
-          type:
-            - number
-          description: >-
-            The maximum delivery count. A
-
-            message is automatically deadlettered after this number of
-            deliveries.
+            the default value is 1 minute.
           optional: true
         - id: parameters.maxSizeInMegabytes
           type:
@@ -625,6 +482,8 @@ items:
 
             queue in megabytes, which is the size of memory allocated for the
             queue.
+
+            Default is 1024.
           optional: true
         - id: parameters.requiresDuplicateDetection
           type:
@@ -640,6 +499,50 @@ items:
             A value that indicates whether
             the queue supports the concept of sessions.
           optional: true
+        - id: parameters.defaultMessageTimeToLive
+          type:
+            - azure-arm-sb.moment.duration
+          description: >-
+            ISO 8601
+
+            default message timespan to live value. This is the duration after
+            which the
+
+            message expires, starting from when the message is sent to Service
+            Bus. This
+
+            is the default value used when TimeToLive is not set on a message
+            itself.
+          optional: true
+        - id: parameters.deadLetteringOnMessageExpiration
+          type:
+            - boolean
+          description: >-
+            A value that
+
+            indicates whether this queue has dead letter support when a message
+            expires.
+          optional: true
+        - id: parameters.duplicateDetectionHistoryTimeWindow
+          type:
+            - azure-arm-sb.moment.duration
+          description: >-
+            ISO 8601 timeSpan structure that defines the duration of the
+            duplicate
+
+            detection history. The default value is 10 minutes.
+          optional: true
+        - id: parameters.maxDeliveryCount
+          type:
+            - number
+          description: >-
+            The maximum delivery count. A
+
+            message is automatically deadlettered after this number of
+            deliveries.
+
+            default value is 10.
+          optional: true
         - id: parameters.status
           type:
             - string
@@ -647,18 +550,43 @@ items:
             Enumerates the possible values for the
 
             status of a messaging entity. Possible values include: 'Active',
-            'Creating',
+            'Disabled',
 
-            'Deleting', 'Disabled', 'ReceiveDisabled', 'Renaming', 'Restoring',
+            'Restoring', 'SendDisabled', 'ReceiveDisabled', 'Creating',
+            'Deleting',
 
-            'SendDisabled', 'Unknown'
+            'Renaming', 'Unknown'
           optional: true
-        - id: parameters.supportOrdering
+        - id: parameters.autoDeleteOnIdle
+          type:
+            - azure-arm-sb.moment.duration
+          description: >-
+            ISO 8061 timeSpan
+
+            idle interval after which the queue is automatically deleted. The
+            minimum
+
+            duration is 5 minutes.
+          optional: true
+        - id: parameters.enablePartitioning
           type:
             - boolean
-          description: |-
+          description: >-
+            A value that indicates
+
+            whether the queue is to be partitioned across multiple message
+            brokers.
+          optional: true
+        - id: parameters.enableExpress
+          type:
+            - boolean
+          description: >-
             A value that indicates whether
-            the queue supports ordering.
+
+            Express Entities are enabled. An express queue holds a message in
+            memory
+
+            temporarily before writing it to persistent storage.
           optional: true
         - id: options
           type:
@@ -850,12 +778,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<QueueResource>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<QueueResource>} - The deserialized result
-          object.
+        text: '{HttpOperationResponse<SBQueue>} - The deserialized result object.'
+        value: '{HttpOperationResponse<SBQueue>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -911,8 +835,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{QueueResource} - The deserialized result object.'
-        value: '{QueueResource} - The deserialized result object.'
+        text: '{SBQueue} - The deserialized result object.'
+        value: '{SBQueue} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -923,7 +847,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link QueueResource} for more information.
+                               See {@link SBQueue} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -936,7 +860,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link QueueResource} for more information.
+                               See {@link SBQueue} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1003,10 +927,10 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The
+          {HttpOperationResponse<SBAuthorizationRuleListResult>} - The
           deserialized result object.
         value: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The
+          {HttpOperationResponse<SBAuthorizationRuleListResult>} - The
           deserialized result object.
       - originalTitle: reject
         title: reject
@@ -1064,12 +988,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {SharedAccessAuthorizationRuleListResult} - The deserialized result
-          object.
-        value: >-
-          {SharedAccessAuthorizationRuleListResult} - The deserialized result
-          object.
+        text: '{SBAuthorizationRuleListResult} - The deserialized result object.'
+        value: '{SBAuthorizationRuleListResult} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -1080,8 +1000,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleListResult} for
-                               more information.
+                               See {@link SBAuthorizationRuleListResult} for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1094,8 +1014,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleListResult} for
-                               more information.
+                               See {@link SBAuthorizationRuleListResult} for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1164,11 +1084,11 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
-          deserialized result object.
+          {HttpOperationResponse<SBAuthorizationRule>} - The deserialized result
+          object.
         value: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
-          deserialized result object.
+          {HttpOperationResponse<SBAuthorizationRule>} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -1198,20 +1118,11 @@ items:
           type:
             - object
           description: The shared access authorization rule.
-        - id: parameters.location
-          type:
-            - string
-          description: data center location.
-          optional: true
-        - id: parameters.name
-          type:
-            - string
-          description: Name of the authorization rule.
-          optional: true
         - id: parameters.rights
           type:
             - array
           description: The rights associated with the rule.
+          optional: true
         - id: options
           type:
             - object
@@ -1248,12 +1159,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {SharedAccessAuthorizationRuleResource} - The deserialized result
-          object.
-        value: >-
-          {SharedAccessAuthorizationRuleResource} - The deserialized result
-          object.
+        text: '{SBAuthorizationRule} - The deserialized result object.'
+        value: '{SBAuthorizationRule} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -1264,8 +1171,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleResource} for
-                               more information.
+                               See {@link SBAuthorizationRule} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1278,8 +1184,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleResource} for
-                               more information.
+                               See {@link SBAuthorizationRule} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1309,20 +1214,11 @@ items:
           type:
             - object
           description: The shared access authorization rule.
-        - id: parameters.location
-          type:
-            - string
-          description: data center location.
-          optional: true
-        - id: parameters.name
-          type:
-            - string
-          description: Name of the authorization rule.
-          optional: true
         - id: parameters.rights
           type:
             - array
           description: The rights associated with the rule.
+          optional: true
         - id: options
           type:
             - object
@@ -1525,11 +1421,11 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
-          deserialized result object.
+          {HttpOperationResponse<SBAuthorizationRule>} - The deserialized result
+          object.
         value: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
-          deserialized result object.
+          {HttpOperationResponse<SBAuthorizationRule>} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -1590,12 +1486,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {SharedAccessAuthorizationRuleResource} - The deserialized result
-          object.
-        value: >-
-          {SharedAccessAuthorizationRuleResource} - The deserialized result
-          object.
+        text: '{SBAuthorizationRule} - The deserialized result object.'
+        value: '{SBAuthorizationRule} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -1606,8 +1498,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleResource} for
-                               more information.
+                               See {@link SBAuthorizationRule} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1620,8 +1511,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleResource} for
-                               more information.
+                               See {@link SBAuthorizationRule} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1691,12 +1581,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<ResourceListKeys>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<ResourceListKeys>} - The deserialized result
-          object.
+        text: '{HttpOperationResponse<AccessKeys>} - The deserialized result object.'
+        value: '{HttpOperationResponse<AccessKeys>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -1756,8 +1642,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{ResourceListKeys} - The deserialized result object.'
-        value: '{ResourceListKeys} - The deserialized result object.'
+        text: '{AccessKeys} - The deserialized result object.'
+        value: '{AccessKeys} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -1768,7 +1654,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ResourceListKeys} for more information.
+                               See {@link AccessKeys} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1781,7 +1667,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ResourceListKeys} for more information.
+                               See {@link AccessKeys} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1851,12 +1737,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<ResourceListKeys>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<ResourceListKeys>} - The deserialized result
-          object.
+        text: '{HttpOperationResponse<AccessKeys>} - The deserialized result object.'
+        value: '{HttpOperationResponse<AccessKeys>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -1888,12 +1770,18 @@ items:
           description: |-
             Parameters supplied to regenerate the
             authorization rule.
-        - id: parameters.policykey
+        - id: parameters.keyType
           type:
             - string
           description: |-
-            Key that needs to be regenerated.
-            Possible values include: 'PrimaryKey', 'SecondaryKey'
+            The access key to regenerate. Possible
+            values include: 'PrimaryKey', 'SecondaryKey'
+        - id: parameters.key
+          type:
+            - string
+          description: |-
+            Optional, if the key value provided, is
+            reset for KeyType value or autogenerate Key value set for keyType
           optional: true
         - id: options
           type:
@@ -1929,8 +1817,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{ResourceListKeys} - The deserialized result object.'
-        value: '{ResourceListKeys} - The deserialized result object.'
+        text: '{AccessKeys} - The deserialized result object.'
+        value: '{AccessKeys} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -1941,7 +1829,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ResourceListKeys} for more information.
+                               See {@link AccessKeys} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1954,7 +1842,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ResourceListKeys} for more information.
+                               See {@link AccessKeys} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1986,12 +1874,18 @@ items:
           description: |-
             Parameters supplied to regenerate the
             authorization rule.
-        - id: parameters.policykey
+        - id: parameters.keyType
           type:
             - string
           description: |-
-            Key that needs to be regenerated.
-            Possible values include: 'PrimaryKey', 'SecondaryKey'
+            The access key to regenerate. Possible
+            values include: 'PrimaryKey', 'SecondaryKey'
+        - id: parameters.key
+          type:
+            - string
+          description: |-
+            Optional, if the key value provided, is
+            reset for KeyType value or autogenerate Key value set for keyType
           optional: true
         - id: options
           type:
@@ -2024,22 +1918,22 @@ items:
         authorizationRuleName, parameters, options, optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-sb.Queues#listAllNextWithHttpOperationResponse'
-    id: 'azure-arm-sb.Queues#listAllNextWithHttpOperationResponse'
+  - uid: 'azure-arm-sb.Queues#listByNamespaceNextWithHttpOperationResponse'
+    id: 'azure-arm-sb.Queues#listByNamespaceNextWithHttpOperationResponse'
     parent: azure-arm-sb.Queues
-    name: 'listAllNextWithHttpOperationResponse(nextPageLink, options)'
+    name: 'listByNamespaceNextWithHttpOperationResponse(nextPageLink, options)'
     summary: Gets the queues within a namespace.
     fullName: >-
-      azure-arm-sb.Queues.listAllNextWithHttpOperationResponse(nextPageLink,
+      azure-arm-sb.Queues.listByNamespaceNextWithHttpOperationResponse(nextPageLink,
       options)
     tags:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<QueueListResult>} - The deserialized result
+          {HttpOperationResponse<SBQueueListResult>} - The deserialized result
           object.
         value: >-
-          {HttpOperationResponse<QueueListResult>} - The deserialized result
+          {HttpOperationResponse<SBQueueListResult>} - The deserialized result
           object.
       - originalTitle: reject
         title: reject
@@ -2070,20 +1964,24 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: 'function listAllNextWithHttpOperationResponse(nextPageLink, options)'
+      content: >-
+        function listByNamespaceNextWithHttpOperationResponse(nextPageLink,
+        options)
     langs:
       - js
-  - uid: 'azure-arm-sb.Queues#listAllNext'
-    id: 'azure-arm-sb.Queues#listAllNext'
+  - uid: 'azure-arm-sb.Queues#listByNamespaceNext'
+    id: 'azure-arm-sb.Queues#listByNamespaceNext'
     parent: azure-arm-sb.Queues
-    name: 'listAllNext(nextPageLink, options, optionalCallback)'
+    name: 'listByNamespaceNext(nextPageLink, options, optionalCallback)'
     summary: Gets the queues within a namespace.
-    fullName: 'azure-arm-sb.Queues.listAllNext(nextPageLink, options, optionalCallback)'
+    fullName: >-
+      azure-arm-sb.Queues.listByNamespaceNext(nextPageLink, options,
+      optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{QueueListResult} - The deserialized result object.'
-        value: '{QueueListResult} - The deserialized result object.'
+        text: '{SBQueueListResult} - The deserialized result object.'
+        value: '{SBQueueListResult} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -2094,7 +1992,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link QueueListResult} for more information.
+                               See {@link SBQueueListResult} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -2107,7 +2005,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link QueueListResult} for more information.
+                               See {@link SBQueueListResult} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -2147,7 +2045,7 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function listAllNext(nextPageLink, options, optionalCallback)'
+      content: 'function listByNamespaceNext(nextPageLink, options, optionalCallback)'
     langs:
       - js
   - uid: 'azure-arm-sb.Queues#listAuthorizationRulesNextWithHttpOperationResponse'
@@ -2162,10 +2060,10 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The
+          {HttpOperationResponse<SBAuthorizationRuleListResult>} - The
           deserialized result object.
         value: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The
+          {HttpOperationResponse<SBAuthorizationRuleListResult>} - The
           deserialized result object.
       - originalTitle: reject
         title: reject
@@ -2213,12 +2111,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {SharedAccessAuthorizationRuleListResult} - The deserialized result
-          object.
-        value: >-
-          {SharedAccessAuthorizationRuleListResult} - The deserialized result
-          object.
+        text: '{SBAuthorizationRuleListResult} - The deserialized result object.'
+        value: '{SBAuthorizationRuleListResult} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -2229,8 +2123,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleListResult} for
-                               more information.
+                               See {@link SBAuthorizationRuleListResult} for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -2243,8 +2137,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleListResult} for
-                               more information.
+                               See {@link SBAuthorizationRuleListResult} for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 

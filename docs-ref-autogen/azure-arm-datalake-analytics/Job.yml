@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-datalake-analytics.Job
       path: lib\services\dataLake.Analytics\lib\job\operations\job.js
-      startLine: 1350
+      startLine: 1321
       remote:
         branch: jsdoc
         path: lib\services\dataLake.Analytics\lib\job\operations\job.js
@@ -25,10 +25,10 @@ items:
       - 'azure-arm-datalake-analytics.Job#build'
       - 'azure-arm-datalake-analytics.Job#cancelWithHttpOperationResponse'
       - 'azure-arm-datalake-analytics.Job#cancel'
-      - 'azure-arm-datalake-analytics.Job#getWithHttpOperationResponse'
-      - 'azure-arm-datalake-analytics.Job#get'
       - 'azure-arm-datalake-analytics.Job#createWithHttpOperationResponse'
       - 'azure-arm-datalake-analytics.Job#create'
+      - 'azure-arm-datalake-analytics.Job#getWithHttpOperationResponse'
+      - 'azure-arm-datalake-analytics.Job#get'
       - 'azure-arm-datalake-analytics.Job#listWithHttpOperationResponse'
       - 'azure-arm-datalake-analytics.Job#list'
       - 'azure-arm-datalake-analytics.Job#listNextWithHttpOperationResponse'
@@ -222,7 +222,9 @@ items:
         - id: jobIdentity
           type:
             - azure-arm-datalake-analytics.uuid
-          description: JobInfo ID.
+          description: |-
+            Job identifier. Uniquely identifies the job across
+            all jobs submitted to the service.
         - id: options
           type:
             - object
@@ -297,7 +299,9 @@ items:
         - id: jobIdentity
           type:
             - azure-arm-datalake-analytics.uuid
-          description: JobInfo ID.
+          description: |-
+            Job identifier. Uniquely identifies the job across
+            all jobs submitted to the service.
         - id: options
           type:
             - object
@@ -368,46 +372,14 @@ items:
         - id: parameters.name
           type:
             - string
-          description: the friendly name of the job.
+          description: the friendly name of the job to build.
+          optional: true
         - id: parameters.type
           type:
             - string
           description: |-
             the job type of the current job (Hive or
             USql). Possible values include: 'USql', 'Hive'
-        - id: parameters.degreeOfParallelism
-          type:
-            - number
-          description: >-
-            the degree of parallelism
-
-            used for this job. This must be greater than 0, if set to less than
-            0 it
-
-            will default to 1.
-          optional: true
-        - id: parameters.priority
-          type:
-            - number
-          description: >-
-            the priority value for the current
-
-            job. Lower numbers have a higher priority. By default, a job has a
-            priority
-
-            of 1000. This must be greater than 0.
-          optional: true
-        - id: parameters.logFilePatterns
-          type:
-            - array
-          description: >-
-            the list of log file name
-
-            patterns to find in the logFolder. '*' is the only matching
-            character
-
-            allowed. Example format: jobExecution*.log or *mylog*.txt
-          optional: true
         - id: parameters.properties
           type:
             - object
@@ -426,60 +398,13 @@ items:
         - id: parameters.properties.script
           type:
             - string
-          description: the script to run
+          description: |-
+            the script to run. Please note
+            that the maximum script size is 3 MB.
         - id: parameters.properties.type
           type:
             - string
           description: Polymorphic Discriminator
-        - id: parameters.related
-          type:
-            - object
-          description: |-
-            the recurring job relationship
-            information properties.
-          optional: true
-        - id: parameters.related.pipelineId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the job relationship pipeline
-            identifier (a GUID).
-          optional: true
-        - id: parameters.related.pipelineName
-          type:
-            - string
-          description: |-
-            the friendly name of the
-            job relationship pipeline, which does not need to be unique.
-          optional: true
-        - id: parameters.related.pipelineUri
-          type:
-            - string
-          description: |-
-            the pipeline uri, unique,
-            links to the originating service for this pipeline.
-          optional: true
-        - id: parameters.related.runId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the run identifier (a GUID), unique
-            identifier of the iteration of this pipeline.
-          optional: true
-        - id: parameters.related.recurrenceId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the recurrence identifier (a
-            GUID), unique per activity/script, regardless of iterations. This is
-            something to link different occurrences of the same job together.
-        - id: parameters.related.recurrenceName
-          type:
-            - string
-          description: |-
-            the recurrence name,
-            user friendly name for the correlation between jobs.
-          optional: true
         - id: options
           type:
             - object
@@ -560,46 +485,14 @@ items:
         - id: parameters.name
           type:
             - string
-          description: the friendly name of the job.
+          description: the friendly name of the job to build.
+          optional: true
         - id: parameters.type
           type:
             - string
           description: |-
             the job type of the current job (Hive or
             USql). Possible values include: 'USql', 'Hive'
-        - id: parameters.degreeOfParallelism
-          type:
-            - number
-          description: >-
-            the degree of parallelism
-
-            used for this job. This must be greater than 0, if set to less than
-            0 it
-
-            will default to 1.
-          optional: true
-        - id: parameters.priority
-          type:
-            - number
-          description: >-
-            the priority value for the current
-
-            job. Lower numbers have a higher priority. By default, a job has a
-            priority
-
-            of 1000. This must be greater than 0.
-          optional: true
-        - id: parameters.logFilePatterns
-          type:
-            - array
-          description: >-
-            the list of log file name
-
-            patterns to find in the logFolder. '*' is the only matching
-            character
-
-            allowed. Example format: jobExecution*.log or *mylog*.txt
-          optional: true
         - id: parameters.properties
           type:
             - object
@@ -618,60 +511,13 @@ items:
         - id: parameters.properties.script
           type:
             - string
-          description: the script to run
+          description: |-
+            the script to run. Please note
+            that the maximum script size is 3 MB.
         - id: parameters.properties.type
           type:
             - string
           description: Polymorphic Discriminator
-        - id: parameters.related
-          type:
-            - object
-          description: |-
-            the recurring job relationship
-            information properties.
-          optional: true
-        - id: parameters.related.pipelineId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the job relationship pipeline
-            identifier (a GUID).
-          optional: true
-        - id: parameters.related.pipelineName
-          type:
-            - string
-          description: |-
-            the friendly name of the
-            job relationship pipeline, which does not need to be unique.
-          optional: true
-        - id: parameters.related.pipelineUri
-          type:
-            - string
-          description: |-
-            the pipeline uri, unique,
-            links to the originating service for this pipeline.
-          optional: true
-        - id: parameters.related.runId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the run identifier (a GUID), unique
-            identifier of the iteration of this pipeline.
-          optional: true
-        - id: parameters.related.recurrenceId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the recurrence identifier (a
-            GUID), unique per activity/script, regardless of iterations. This is
-            something to link different occurrences of the same job together.
-        - id: parameters.related.recurrenceName
-          type:
-            - string
-          description: |-
-            the recurrence name,
-            user friendly name for the correlation between jobs.
-          optional: true
         - id: options
           type:
             - object
@@ -730,7 +576,9 @@ items:
         - id: jobIdentity
           type:
             - azure-arm-datalake-analytics.uuid
-          description: JobInfo ID to cancel.
+          description: |-
+            Job identifier. Uniquely identifies the job across
+            all jobs submitted to the service.
         - id: options
           type:
             - object
@@ -803,7 +651,9 @@ items:
         - id: jobIdentity
           type:
             - azure-arm-datalake-analytics.uuid
-          description: JobInfo ID to cancel.
+          description: |-
+            Job identifier. Uniquely identifies the job across
+            all jobs submitted to the service.
         - id: options
           type:
             - object
@@ -831,6 +681,394 @@ items:
 
           {Promise} A promise is returned
       content: 'function cancel(accountName, jobIdentity, options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-datalake-analytics.Job#createWithHttpOperationResponse'
+    id: 'azure-arm-datalake-analytics.Job#createWithHttpOperationResponse'
+    parent: azure-arm-datalake-analytics.Job
+    name: >-
+      createWithHttpOperationResponse(accountName, jobIdentity, parameters,
+      options)
+    summary: Submits a job to the specified Data Lake Analytics account.
+    fullName: >-
+      azure-arm-datalake-analytics.Job.createWithHttpOperationResponse(accountName,
+      jobIdentity, parameters, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<JobInformation>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<JobInformation>} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: accountName
+          type:
+            - string
+          description: |-
+            The Azure Data Lake Analytics account to execute
+            job operations on.
+        - id: jobIdentity
+          type:
+            - azure-arm-datalake-analytics.uuid
+          description: |-
+            Job identifier. Uniquely identifies the job across
+            all jobs submitted to the service.
+        - id: parameters
+          type:
+            - object
+          description: The parameters to submit a job.
+        - id: parameters.name
+          type:
+            - string
+          description: the friendly name of the job to submit.
+        - id: parameters.degreeOfParallelism
+          type:
+            - number
+          description: >-
+            the degree of parallelism
+
+            to use for this job. This must be greater than 0, if set to less
+            than 0 it
+
+            will default to 1.
+          optional: true
+        - id: parameters.priority
+          type:
+            - number
+          description: >-
+            the priority value to use for the
+
+            current job. Lower numbers have a higher priority. By default, a job
+            has a
+
+            priority of 1000. This must be greater than 0.
+          optional: true
+        - id: parameters.logFilePatterns
+          type:
+            - array
+          description: >-
+            the list of log file name
+
+            patterns to find in the logFolder. '*' is the only matching
+            character
+
+            allowed. Example format: jobExecution*.log or *mylog*.txt
+          optional: true
+        - id: parameters.related
+          type:
+            - object
+          description: |-
+            the recurring job relationship
+            information properties.
+          optional: true
+        - id: parameters.related.pipelineId
+          type:
+            - azure-arm-datalake-analytics.uuid
+          description: |-
+            the job relationship pipeline
+            identifier (a GUID).
+          optional: true
+        - id: parameters.related.pipelineName
+          type:
+            - string
+          description: |-
+            the friendly name of the
+            job relationship pipeline, which does not need to be unique.
+          optional: true
+        - id: parameters.related.pipelineUri
+          type:
+            - string
+          description: |-
+            the pipeline uri, unique,
+            links to the originating service for this pipeline.
+          optional: true
+        - id: parameters.related.runId
+          type:
+            - azure-arm-datalake-analytics.uuid
+          description: |-
+            the run identifier (a GUID), unique
+            identifier of the iteration of this pipeline.
+          optional: true
+        - id: parameters.related.recurrenceId
+          type:
+            - azure-arm-datalake-analytics.uuid
+          description: |-
+            the recurrence identifier (a
+            GUID), unique per activity/script, regardless of iterations. This is
+            something to link different occurrences of the same job together.
+        - id: parameters.related.recurrenceName
+          type:
+            - string
+          description: |-
+            the recurrence name,
+            user friendly name for the correlation between jobs.
+          optional: true
+        - id: parameters.type
+          type:
+            - string
+          description: |-
+            the job type of the current job (Hive or
+            USql). Possible values include: 'USql', 'Hive'
+        - id: parameters.properties
+          type:
+            - object
+          description: the job specific properties.
+        - id: parameters.properties.runtimeVersion
+          type:
+            - string
+          description: >-
+            the runtime version
+
+            of the Data Lake Analytics engine to use for the specific type of
+            job being
+
+            run.
+          optional: true
+        - id: parameters.properties.script
+          type:
+            - string
+          description: |-
+            the script to run. Please note
+            that the maximum script size is 3 MB.
+        - id: parameters.properties.type
+          type:
+            - string
+          description: Polymorphic Discriminator
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function createWithHttpOperationResponse(accountName, jobIdentity,
+        parameters, options)
+    langs:
+      - js
+  - uid: 'azure-arm-datalake-analytics.Job#create'
+    id: 'azure-arm-datalake-analytics.Job#create'
+    parent: azure-arm-datalake-analytics.Job
+    name: 'create(accountName, jobIdentity, parameters, options, optionalCallback)'
+    summary: Submits a job to the specified Data Lake Analytics account.
+    fullName: >-
+      azure-arm-datalake-analytics.Job.create(accountName, jobIdentity,
+      parameters, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{JobInformation} - The deserialized result object.'
+        value: '{JobInformation} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link JobInformation} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link JobInformation} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: accountName
+          type:
+            - string
+          description: |-
+            The Azure Data Lake Analytics account to execute
+            job operations on.
+        - id: jobIdentity
+          type:
+            - azure-arm-datalake-analytics.uuid
+          description: |-
+            Job identifier. Uniquely identifies the job across
+            all jobs submitted to the service.
+        - id: parameters
+          type:
+            - object
+          description: The parameters to submit a job.
+        - id: parameters.name
+          type:
+            - string
+          description: the friendly name of the job to submit.
+        - id: parameters.degreeOfParallelism
+          type:
+            - number
+          description: >-
+            the degree of parallelism
+
+            to use for this job. This must be greater than 0, if set to less
+            than 0 it
+
+            will default to 1.
+          optional: true
+        - id: parameters.priority
+          type:
+            - number
+          description: >-
+            the priority value to use for the
+
+            current job. Lower numbers have a higher priority. By default, a job
+            has a
+
+            priority of 1000. This must be greater than 0.
+          optional: true
+        - id: parameters.logFilePatterns
+          type:
+            - array
+          description: >-
+            the list of log file name
+
+            patterns to find in the logFolder. '*' is the only matching
+            character
+
+            allowed. Example format: jobExecution*.log or *mylog*.txt
+          optional: true
+        - id: parameters.related
+          type:
+            - object
+          description: |-
+            the recurring job relationship
+            information properties.
+          optional: true
+        - id: parameters.related.pipelineId
+          type:
+            - azure-arm-datalake-analytics.uuid
+          description: |-
+            the job relationship pipeline
+            identifier (a GUID).
+          optional: true
+        - id: parameters.related.pipelineName
+          type:
+            - string
+          description: |-
+            the friendly name of the
+            job relationship pipeline, which does not need to be unique.
+          optional: true
+        - id: parameters.related.pipelineUri
+          type:
+            - string
+          description: |-
+            the pipeline uri, unique,
+            links to the originating service for this pipeline.
+          optional: true
+        - id: parameters.related.runId
+          type:
+            - azure-arm-datalake-analytics.uuid
+          description: |-
+            the run identifier (a GUID), unique
+            identifier of the iteration of this pipeline.
+          optional: true
+        - id: parameters.related.recurrenceId
+          type:
+            - azure-arm-datalake-analytics.uuid
+          description: |-
+            the recurrence identifier (a
+            GUID), unique per activity/script, regardless of iterations. This is
+            something to link different occurrences of the same job together.
+        - id: parameters.related.recurrenceName
+          type:
+            - string
+          description: |-
+            the recurrence name,
+            user friendly name for the correlation between jobs.
+          optional: true
+        - id: parameters.type
+          type:
+            - string
+          description: |-
+            the job type of the current job (Hive or
+            USql). Possible values include: 'USql', 'Hive'
+        - id: parameters.properties
+          type:
+            - object
+          description: the job specific properties.
+        - id: parameters.properties.runtimeVersion
+          type:
+            - string
+          description: >-
+            the runtime version
+
+            of the Data Lake Analytics engine to use for the specific type of
+            job being
+
+            run.
+          optional: true
+        - id: parameters.properties.script
+          type:
+            - string
+          description: |-
+            the script to run. Please note
+            that the maximum script size is 3 MB.
+        - id: parameters.properties.type
+          type:
+            - string
+          description: Polymorphic Discriminator
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function create(accountName, jobIdentity, parameters, options,
+        optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-datalake-analytics.Job#getWithHttpOperationResponse'
@@ -967,386 +1205,6 @@ items:
 
           {Promise} A promise is returned
       content: 'function get(accountName, jobIdentity, options, optionalCallback)'
-    langs:
-      - js
-  - uid: 'azure-arm-datalake-analytics.Job#createWithHttpOperationResponse'
-    id: 'azure-arm-datalake-analytics.Job#createWithHttpOperationResponse'
-    parent: azure-arm-datalake-analytics.Job
-    name: >-
-      createWithHttpOperationResponse(accountName, jobIdentity, parameters,
-      options)
-    summary: Submits a job to the specified Data Lake Analytics account.
-    fullName: >-
-      azure-arm-datalake-analytics.Job.createWithHttpOperationResponse(accountName,
-      jobIdentity, parameters, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<JobInformation>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<JobInformation>} - The deserialized result
-          object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: accountName
-          type:
-            - string
-          description: |-
-            The Azure Data Lake Analytics account to execute
-            job operations on.
-        - id: jobIdentity
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: The job ID (a GUID) for the job being submitted.
-        - id: parameters
-          type:
-            - object
-          description: The parameters to submit a job.
-        - id: parameters.name
-          type:
-            - string
-          description: the friendly name of the job.
-        - id: parameters.type
-          type:
-            - string
-          description: |-
-            the job type of the current job (Hive or
-            USql). Possible values include: 'USql', 'Hive'
-        - id: parameters.degreeOfParallelism
-          type:
-            - number
-          description: >-
-            the degree of parallelism
-
-            used for this job. This must be greater than 0, if set to less than
-            0 it
-
-            will default to 1.
-          optional: true
-        - id: parameters.priority
-          type:
-            - number
-          description: >-
-            the priority value for the current
-
-            job. Lower numbers have a higher priority. By default, a job has a
-            priority
-
-            of 1000. This must be greater than 0.
-          optional: true
-        - id: parameters.logFilePatterns
-          type:
-            - array
-          description: >-
-            the list of log file name
-
-            patterns to find in the logFolder. '*' is the only matching
-            character
-
-            allowed. Example format: jobExecution*.log or *mylog*.txt
-          optional: true
-        - id: parameters.properties
-          type:
-            - object
-          description: the job specific properties.
-        - id: parameters.properties.runtimeVersion
-          type:
-            - string
-          description: >-
-            the runtime version
-
-            of the Data Lake Analytics engine to use for the specific type of
-            job being
-
-            run.
-          optional: true
-        - id: parameters.properties.script
-          type:
-            - string
-          description: the script to run
-        - id: parameters.properties.type
-          type:
-            - string
-          description: Polymorphic Discriminator
-        - id: parameters.related
-          type:
-            - object
-          description: |-
-            the recurring job relationship
-            information properties.
-          optional: true
-        - id: parameters.related.pipelineId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the job relationship pipeline
-            identifier (a GUID).
-          optional: true
-        - id: parameters.related.pipelineName
-          type:
-            - string
-          description: |-
-            the friendly name of the
-            job relationship pipeline, which does not need to be unique.
-          optional: true
-        - id: parameters.related.pipelineUri
-          type:
-            - string
-          description: |-
-            the pipeline uri, unique,
-            links to the originating service for this pipeline.
-          optional: true
-        - id: parameters.related.runId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the run identifier (a GUID), unique
-            identifier of the iteration of this pipeline.
-          optional: true
-        - id: parameters.related.recurrenceId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the recurrence identifier (a
-            GUID), unique per activity/script, regardless of iterations. This is
-            something to link different occurrences of the same job together.
-        - id: parameters.related.recurrenceName
-          type:
-            - string
-          description: |-
-            the recurrence name,
-            user friendly name for the correlation between jobs.
-          optional: true
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function createWithHttpOperationResponse(accountName, jobIdentity,
-        parameters, options)
-    langs:
-      - js
-  - uid: 'azure-arm-datalake-analytics.Job#create'
-    id: 'azure-arm-datalake-analytics.Job#create'
-    parent: azure-arm-datalake-analytics.Job
-    name: 'create(accountName, jobIdentity, parameters, options, optionalCallback)'
-    summary: Submits a job to the specified Data Lake Analytics account.
-    fullName: >-
-      azure-arm-datalake-analytics.Job.create(accountName, jobIdentity,
-      parameters, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{JobInformation} - The deserialized result object.'
-        value: '{JobInformation} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link JobInformation} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link JobInformation} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: accountName
-          type:
-            - string
-          description: |-
-            The Azure Data Lake Analytics account to execute
-            job operations on.
-        - id: jobIdentity
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: The job ID (a GUID) for the job being submitted.
-        - id: parameters
-          type:
-            - object
-          description: The parameters to submit a job.
-        - id: parameters.name
-          type:
-            - string
-          description: the friendly name of the job.
-        - id: parameters.type
-          type:
-            - string
-          description: |-
-            the job type of the current job (Hive or
-            USql). Possible values include: 'USql', 'Hive'
-        - id: parameters.degreeOfParallelism
-          type:
-            - number
-          description: >-
-            the degree of parallelism
-
-            used for this job. This must be greater than 0, if set to less than
-            0 it
-
-            will default to 1.
-          optional: true
-        - id: parameters.priority
-          type:
-            - number
-          description: >-
-            the priority value for the current
-
-            job. Lower numbers have a higher priority. By default, a job has a
-            priority
-
-            of 1000. This must be greater than 0.
-          optional: true
-        - id: parameters.logFilePatterns
-          type:
-            - array
-          description: >-
-            the list of log file name
-
-            patterns to find in the logFolder. '*' is the only matching
-            character
-
-            allowed. Example format: jobExecution*.log or *mylog*.txt
-          optional: true
-        - id: parameters.properties
-          type:
-            - object
-          description: the job specific properties.
-        - id: parameters.properties.runtimeVersion
-          type:
-            - string
-          description: >-
-            the runtime version
-
-            of the Data Lake Analytics engine to use for the specific type of
-            job being
-
-            run.
-          optional: true
-        - id: parameters.properties.script
-          type:
-            - string
-          description: the script to run
-        - id: parameters.properties.type
-          type:
-            - string
-          description: Polymorphic Discriminator
-        - id: parameters.related
-          type:
-            - object
-          description: |-
-            the recurring job relationship
-            information properties.
-          optional: true
-        - id: parameters.related.pipelineId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the job relationship pipeline
-            identifier (a GUID).
-          optional: true
-        - id: parameters.related.pipelineName
-          type:
-            - string
-          description: |-
-            the friendly name of the
-            job relationship pipeline, which does not need to be unique.
-          optional: true
-        - id: parameters.related.pipelineUri
-          type:
-            - string
-          description: |-
-            the pipeline uri, unique,
-            links to the originating service for this pipeline.
-          optional: true
-        - id: parameters.related.runId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the run identifier (a GUID), unique
-            identifier of the iteration of this pipeline.
-          optional: true
-        - id: parameters.related.recurrenceId
-          type:
-            - azure-arm-datalake-analytics.uuid
-          description: |-
-            the recurrence identifier (a
-            GUID), unique per activity/script, regardless of iterations. This is
-            something to link different occurrences of the same job together.
-        - id: parameters.related.recurrenceName
-          type:
-            - string
-          description: |-
-            the recurrence name,
-            user friendly name for the correlation between jobs.
-          optional: true
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: >-
-        function create(accountName, jobIdentity, parameters, options,
-        optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-datalake-analytics.Job#listWithHttpOperationResponse'

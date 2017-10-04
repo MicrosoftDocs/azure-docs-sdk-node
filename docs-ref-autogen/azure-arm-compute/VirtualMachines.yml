@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-compute.VirtualMachines
       path: lib\services\computeManagement2\lib\operations\virtualMachines.js
-      startLine: 4021
+      startLine: 4403
       remote:
         branch: jsdoc
         path: lib\services\computeManagement2\lib\operations\virtualMachines.js
@@ -25,6 +25,8 @@ items:
       - 'azure-arm-compute.VirtualMachines#deleteMethod'
       - 'azure-arm-compute.VirtualMachines#getWithHttpOperationResponse'
       - 'azure-arm-compute.VirtualMachines#get'
+      - 'azure-arm-compute.VirtualMachines#instanceViewWithHttpOperationResponse'
+      - 'azure-arm-compute.VirtualMachines#instanceView'
       - >-
         azure-arm-compute.VirtualMachines#convertToManagedDisksWithHttpOperationResponse
       - 'azure-arm-compute.VirtualMachines#convertToManagedDisks'
@@ -337,9 +339,25 @@ items:
         - id: parameters.plan
           type:
             - object
-          description: |-
-            The purchase plan when deploying virtual
-            machine from VM Marketplace images.
+          description: >-
+            Specifies information about the
+
+            marketplace image used to create the virtual machine. This element
+            is only
+
+            used for marketplace images. Before you can use a marketplace image
+            from an
+
+            API, you must enable the image for programmatic use.  In the Azure
+            portal,
+
+            find the marketplace image that you want to use and then click
+            **Want to
+
+            deploy programmatically, Get Started ->**. Enter any required
+            information
+
+            and then click **Save**.
           optional: true
         - id: parameters.plan.name
           type:
@@ -354,7 +372,10 @@ items:
         - id: parameters.plan.product
           type:
             - string
-          description: The offer ID.
+          description: |-
+            Specifies the product of the image
+            from the marketplace. This is the same value as Offer under the
+            imageReference element.
           optional: true
         - id: parameters.plan.promotionCode
           type:
@@ -364,54 +385,84 @@ items:
         - id: parameters.hardwareProfile
           type:
             - object
-          description: The hardware profile.
+          description: |-
+            Specifies the hardware settings
+            for the virtual machine.
           optional: true
         - id: parameters.hardwareProfile.vmSize
           type:
             - string
           description: >-
-            The virtual machine size
+            Specifies the size of
 
-            name. Possible values include: 'Basic_A0', 'Basic_A1', 'Basic_A2',
+            the virtual machine. For more information about virtual machine
+            sizes, see
 
-            'Basic_A3', 'Basic_A4', 'Standard_A0', 'Standard_A1', 'Standard_A2',
+            [Sizes for virtual
 
-            'Standard_A3', 'Standard_A4', 'Standard_A5', 'Standard_A6',
-            'Standard_A7',
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
-            'Standard_A8', 'Standard_A9', 'Standard_A10', 'Standard_A11',
+            <br><br> The available VM sizes depend on region and availability
+            set. For a
 
-            'Standard_A1_v2', 'Standard_A2_v2', 'Standard_A4_v2',
-            'Standard_A8_v2',
+            list of available sizes use these APIs:  <br><br> [List all
+            available
 
-            'Standard_A2m_v2', 'Standard_A4m_v2', 'Standard_A8m_v2',
-            'Standard_D1',
+            virtual machine sizes in an availability
 
-            'Standard_D2', 'Standard_D3', 'Standard_D4', 'Standard_D11',
-            'Standard_D12',
+            set](virtualmachines-list-sizes-availability-set.md) <br><br> [List
+            all
 
-            'Standard_D13', 'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2',
+            available virtual machine sizes in a
 
-            'Standard_D3_v2', 'Standard_D4_v2', 'Standard_D5_v2',
-            'Standard_D11_v2',
+            region](virtualmachines-list-sizes-region.md) <br><br> [List all
+            available
 
-            'Standard_D12_v2', 'Standard_D13_v2', 'Standard_D14_v2',
-            'Standard_D15_v2',
+            virtual machine sizes for
 
-            'Standard_DS1', 'Standard_DS2', 'Standard_DS3', 'Standard_DS4',
+            resizing](virtualmachines-list-sizes-for-resizing.md). Possible
+            values
 
-            'Standard_DS11', 'Standard_DS12', 'Standard_DS13', 'Standard_DS14',
+            include: 'Basic_A0', 'Basic_A1', 'Basic_A2', 'Basic_A3', 'Basic_A4',
 
-            'Standard_DS1_v2', 'Standard_DS2_v2', 'Standard_DS3_v2',
-            'Standard_DS4_v2',
+            'Standard_A0', 'Standard_A1', 'Standard_A2', 'Standard_A3',
+            'Standard_A4',
 
-            'Standard_DS5_v2', 'Standard_DS11_v2', 'Standard_DS12_v2',
+            'Standard_A5', 'Standard_A6', 'Standard_A7', 'Standard_A8',
+            'Standard_A9',
 
-            'Standard_DS13_v2', 'Standard_DS14_v2', 'Standard_DS15_v2',
-            'Standard_F1',
+            'Standard_A10', 'Standard_A11', 'Standard_A1_v2', 'Standard_A2_v2',
 
-            'Standard_F2', 'Standard_F4', 'Standard_F8', 'Standard_F16',
-            'Standard_F1s',
+            'Standard_A4_v2', 'Standard_A8_v2', 'Standard_A2m_v2',
+            'Standard_A4m_v2',
+
+            'Standard_A8m_v2', 'Standard_D1', 'Standard_D2', 'Standard_D3',
+
+            'Standard_D4', 'Standard_D11', 'Standard_D12', 'Standard_D13',
+
+            'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2',
+            'Standard_D3_v2',
+
+            'Standard_D4_v2', 'Standard_D5_v2', 'Standard_D11_v2',
+            'Standard_D12_v2',
+
+            'Standard_D13_v2', 'Standard_D14_v2', 'Standard_D15_v2',
+            'Standard_DS1',
+
+            'Standard_DS2', 'Standard_DS3', 'Standard_DS4', 'Standard_DS11',
+
+            'Standard_DS12', 'Standard_DS13', 'Standard_DS14',
+            'Standard_DS1_v2',
+
+            'Standard_DS2_v2', 'Standard_DS3_v2', 'Standard_DS4_v2',
+            'Standard_DS5_v2',
+
+            'Standard_DS11_v2', 'Standard_DS12_v2', 'Standard_DS13_v2',
+
+            'Standard_DS14_v2', 'Standard_DS15_v2', 'Standard_F1',
+            'Standard_F2',
+
+            'Standard_F4', 'Standard_F8', 'Standard_F16', 'Standard_F1s',
 
             'Standard_F2s', 'Standard_F4s', 'Standard_F8s', 'Standard_F16s',
 
@@ -433,14 +484,26 @@ items:
         - id: parameters.storageProfile
           type:
             - object
-          description: The storage profile.
+          description: |-
+            Specifies the storage settings
+            for the virtual machine disks.
           optional: true
         - id: parameters.storageProfile.imageReference
           type:
             - object
-          description: |-
-            The image
-            reference.
+          description: >-
+            Specifies
+
+            information about the image to use. You can specify information
+            about
+
+            platform images, marketplace images, or virtual machine images. This
+            element
+
+            is required when you want to use a platform image, marketplace
+            image, or
+
+            virtual machine image, but is not used in other creation operations.
           optional: true
         - id: parameters.storageProfile.imageReference.publisher
           type:
@@ -452,9 +515,13 @@ items:
         - id: parameters.storageProfile.imageReference.offer
           type:
             - string
-          description: |-
-            The image
-            offer.
+          description: >-
+            Specifies
+
+            the offer of the platform image or marketplace image used to create
+            the
+
+            virtual machine.
           optional: true
         - id: parameters.storageProfile.imageReference.sku
           type:
@@ -467,15 +534,23 @@ items:
           type:
             - string
           description: >-
-            The image
+            Specifies
 
-            version. The allowed formats are Major.Minor.Build or 'latest'.
-            Major, Minor
+            the version of the platform image or marketplace image used to
+            create the
 
-            and Build are decimal numbers. Specify 'latest' to use the latest
-            version of
+            virtual machine. The allowed formats are Major.Minor.Build or
+            'latest'.
 
-            the image.
+            Major, Minor, and Build are decimal numbers. Specify 'latest' to use
+            the
+
+            latest version of an image available at deploy time. Even if you use
+
+            'latest', the VM image will not automatically update after deploy
+            time even
+
+            if a new version becomes available.
           optional: true
         - id: parameters.storageProfile.imageReference.id
           type:
@@ -485,29 +560,50 @@ items:
         - id: parameters.storageProfile.osDisk
           type:
             - object
-          description: The OS disk.
+          description: >-
+            Specifies information
+
+            about the operating system disk used by the virtual machine.
+            <br><br> For
+
+            more information about disks, see [About disks and VHDs for Azure
+            virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
           optional: true
         - id: parameters.storageProfile.osDisk.osType
           type:
             - string
-          description: |-
-            The Operating
-            System type. Possible values include: 'Windows', 'Linux'
+          description: >-
+            This property
+
+            allows you to specify the type of the OS that is included in the
+            disk if
+
+            creating a VM from user-image or a specialized VHD. <br><br>
+            Possible values
+
+            are: <br><br> **Windows** <br><br> **Linux**. Possible values
+            include:
+
+            'Windows', 'Linux'
           optional: true
         - id: parameters.storageProfile.osDisk.encryptionSettings
           type:
             - object
           description: |-
-            The
-            disk encryption settings.
+            Specifies the encryption settings for the OS Disk. <br><br> Minimum
+            api-version: 2015-06-15
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.diskEncryptionKey
           type:
             - object
-          description: |-
-            The
-            disk encryption key which is a Key Vault Secret.
+          description: >-
+            Specifies the location of the disk encryption key, which is a Key
+            Vault
+
+            Secret.
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.diskEncryptionKey.secretUrl
@@ -522,15 +618,13 @@ items:
         - id: parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey
           type:
             - object
-          description: |-
-            The
-            key encryption key which is Key Vault Key.
+          description: Specifies the location of the key encryption key in Key Vault.
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey.keyUrl
           type:
             - string
-          description: The URL referencing a key in a Key Vault.
+          description: The URL referencing a key encryption key in Key Vault.
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey.sourceVault
           type:
@@ -562,39 +656,76 @@ items:
             The source user
 
             image virtual hard disk. The virtual hard disk will be copied before
-            using
+            being
 
-            it to attach to the virtual machine. If SourceImage is provided, the
+            attached to the virtual machine. If SourceImage is provided, the
+            destination
 
-            destination virtual hard disk must not exist.
+            virtual hard drive must not exist.
           optional: true
         - id: parameters.storageProfile.osDisk.image.uri
           type:
             - string
           description: |-
-            The virtual
-            hard disk's URI. Must be a valid URI to a virtual hard disk.
+            Specifies the
+            virtual hard disk's uri.
           optional: true
         - id: parameters.storageProfile.osDisk.caching
           type:
             - string
-          description: |-
-            The caching type.
-            Possible values include: 'None', 'ReadOnly', 'ReadWrite'
+          description: >-
+            Specifies the
+
+            caching requirements. <br><br> Possible values are: <br><br>
+            **None**
+
+            <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default:
+            **None for
+
+            Standard storage. ReadOnly for Premium storage**. Possible values
+            include:
+
+            'None', 'ReadOnly', 'ReadWrite'
           optional: true
         - id: parameters.storageProfile.osDisk.createOption
           type:
             - string
-          description: |-
-            The create
-            option. Possible values include: 'fromImage', 'empty', 'attach'
+          description: >-
+            Specifies how
+
+            the virtual machine should be created.<br><br> Possible values
+            are:<br><br>
+
+            **Attach** \u2013 This value is used when you are using a
+            specialized disk
+
+            to create the virtual machine.<br><br> **FromImage** \u2013 This
+            value is
+
+            used when you are using an image to create the virtual machine. If
+            you are
+
+            using a platform image, you also use the imageReference element
+            described
+
+            above. If you are using a marketplace image, you  also use the plan
+            element
+
+            previously described. Possible values include: 'FromImage', 'Empty',
+
+            'Attach'
         - id: parameters.storageProfile.osDisk.diskSizeGB
           type:
             - number
-          description: |-
-            The initial
-            disk size, in GB, for blank data disks, and the new desired size for
-            resizing existing OS and data disks.
+          description: >-
+            Specifies the
+
+            size of an empty data disk in gigabytes. This element can be used to
+
+            overwrite the name of the disk in a virtual machine image. <br><br>
+            This
+
+            value cannot be larger than 1023 GB
           optional: true
         - id: parameters.storageProfile.osDisk.managedDisk
           type:
@@ -607,9 +738,13 @@ items:
           type:
             - string
           description: >-
-            The
+            Specifies
 
-            Storage Account type. Possible values include: 'Standard_LRS',
+            the storage account type for the managed disk. Possible values are:
+
+            Standard_LRS or Premium_LRS. Possible values include:
+            'Standard_LRS',
+
             'Premium_LRS'
           optional: true
         - id: parameters.storageProfile.osDisk.managedDisk.id
@@ -622,33 +757,129 @@ items:
         - id: parameters.storageProfile.dataDisks
           type:
             - array
-          description: The data disks.
+          description: >-
+            Specifies the
+
+            parameters that are used to add a data disk to a virtual machine.
+            <br><br>
+
+            For more information about disks, see [About disks and VHDs for
+            Azure
+
+            virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
           optional: true
         - id: parameters.osProfile
           type:
             - object
-          description: The OS profile.
+          description: |-
+            Specifies the operating system
+            settings for the virtual machine.
           optional: true
         - id: parameters.osProfile.computerName
           type:
             - string
-          description: |-
+          description: >-
             Specifies the host OS
-            name of the virtual machine.
+
+            name of the virtual machine. <br><br> **Max-length (Windows):** 15
+
+            characters <br><br> **Max-length (Linux):** 64 characters. <br><br>
+            For
+
+            naming conventions and restrictions see [Azure infrastructure
+            services
+
+            implementation
+
+            guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions).
           optional: true
         - id: parameters.osProfile.adminUsername
           type:
             - string
-          description: |-
+          description: >-
             Specifies the name of
-            the administrator account.
+
+            the administrator account. <br><br> **Windows-only restriction:**
+            Cannot end
+
+            in "." <br><br> **Disallowed values:** "administrator", "admin",
+            "user",
+
+            "user1", "test", "user2", "test1", "user3", "admin1", "1", "123",
+            "a",
+
+            "actuser", "adm", "admin2", "aspnet", "backup", "console", "david",
+            "guest",
+
+            "john", "owner", "root", "server", "sql", "support",
+            "support_388945a0",
+
+            "sys", "test2", "test3", "user4", "user5". <br><br> **Minimum-length
+
+            (Linux):** 1  character <br><br> **Max-length (Linux):** 64
+            characters
+
+            <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For
+            root
+
+            access to the Linux VM, see [Using root privileges on Linux virtual
+            machines
+
+            in
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li>
+
+            For a list of built-in system users on Linux that should not be used
+            in this
+
+            field, see [Selecting User Names for Linux on
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
           optional: true
         - id: parameters.osProfile.adminPassword
           type:
             - string
-          description: |-
+          description: >-
             Specifies the password
-            of the administrator account.
+
+            of the administrator account. <br><br> **Minimum-length (Windows):**
+            8
+
+            characters <br><br> **Minimum-length (Linux):** 6 characters
+            <br><br>
+
+            **Max-length (Windows):** 123 characters <br><br> **Max-length
+            (Linux):** 72
+
+            characters <br><br> **Complexity requirements:** 3 out of 4
+            conditions below
+
+            need to be fulfilled <br> Has lower characters <br>Has upper
+            characters <br>
+
+            Has a digit <br> Has a special character (Regex match [\W_])
+            <br><br>
+
+            **Disallowed values:** "abc@123", "P@$$w0rd", "P@ssw0rd",
+            "P@ssword123",
+
+            "Pa$$word", "pass@word1", "Password!", "Password1", "Password22",
+
+            "iloveyou!" <br><br> For resetting the password, see [How to reset
+            the
+
+            Remote Desktop service or its login password in a Windows
+
+            VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> For resetting root password, see [Manage users, SSH, and
+            check or
+
+            repair disks on Azure Linux VMs using the VMAccess
+
+            Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)
           optional: true
         - id: parameters.osProfile.customData
           type:
@@ -662,14 +893,19 @@ items:
             binary array that is saved as a file on the Virtual Machine. The
             maximum
 
-            length of the binary array is 65535 bytes
+            length of the binary array is 65535 bytes. <br><br> For using
+            cloud-init for
+
+            your VM, see [Using cloud-init to customize a Linux VM during
+
+            creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
           optional: true
         - id: parameters.osProfile.windowsConfiguration
           type:
             - object
           description: |-
-            The Windows
-            configuration of the OS profile.
+            Specifies
+            Windows operating system settings on the virtual machine.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.provisionVMAgent
           type:
@@ -677,41 +913,47 @@ items:
           description: >-
             Indicates
 
-            whether the virtual machine agent should be provisioned on the
-            Virtual
+            whether virtual machine agent should be provisioned on the virtual
+            machine.
 
-            Machine. If not specified, then the default behavior is to set it to
-            true.
+            <br><br> When this property is not specified in the request body,
+            default
+
+            behavior is to set it to true.  This will ensure that VM Agent is
+            installed
+
+            on the VM so that extensions can be added to the VM later.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.enableAutomaticUpdates
           type:
             - boolean
           description: |-
             Indicates
-            whether Windows updates are automatically installed on the VM.
+            whether virtual machine is enabled for automatic updates.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.timeZone
           type:
             - string
-          description: |-
-            The
-            time zone of the VM
+          description: >-
+            Specifies the time zone of the virtual machine. e.g. "Pacific
+            Standard Time"
           optional: true
         - id: parameters.osProfile.windowsConfiguration.additionalUnattendContent
           type:
             - array
           description: >-
-            Additional base-64 encoded XML formatted information that can be
-            included in
+            Specifies additional base-64 encoded XML formatted information that
+            can be
 
-            the Unattend.xml file.
+            included in the Unattend.xml file, which is used by Windows Setup.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.winRM
           type:
             - object
           description: |-
-            The
-            Windows Remote Management configuration of the VM
+            Specifies
+            the Windows Remote Management listeners. This enables remote Windows
+            PowerShell.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.winRM.listeners
           type:
@@ -721,9 +963,22 @@ items:
         - id: parameters.osProfile.linuxConfiguration
           type:
             - object
-          description: |-
-            The Linux
-            configuration of the OS profile.
+          description: >-
+            Specifies the
+
+            Linux operating system settings on the virtual machine. <br><br>For
+            a list
+
+            of supported Linux distributions, see [Linux on Azure-Endorsed
+
+            Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+
+            <br><br> For running non-endorsed distributions, see [Information
+            for
+
+            Non-Endorsed
+
+            Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
           optional: true
         - id: >-
             parameters.osProfile.linuxConfiguration.disablePasswordAuthentication
@@ -735,8 +990,8 @@ items:
           type:
             - object
           description: |-
-            The SSH
-            configuration for linux VMs.
+            Specifies the
+            ssh key configuration for a Linux OS.
           optional: true
         - id: parameters.osProfile.linuxConfiguration.ssh.publicKeys
           type:
@@ -749,13 +1004,15 @@ items:
           type:
             - array
           description: |-
-            The list of certificates for
-            addition to the VM.
+            Specifies set of certificates
+            that should be installed onto the virtual machine.
           optional: true
         - id: parameters.networkProfile
           type:
             - object
-          description: The network profile.
+          description: |-
+            Specifies the network interfaces
+            of the virtual machine.
           optional: true
         - id: parameters.networkProfile.networkInterfaces
           type:
@@ -763,7 +1020,7 @@ items:
           description: >-
             Specifies the
 
-            list of resource IDs for the network interfaces associated with the
+            list of resource Ids for the network interfaces associated with the
             virtual
 
             machine.
@@ -771,7 +1028,9 @@ items:
         - id: parameters.diagnosticsProfile
           type:
             - object
-          description: The diagnostics profile.
+          description: |-
+            Specifies the boot
+            diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.
           optional: true
         - id: parameters.diagnosticsProfile.bootDiagnostics
           type:
@@ -779,11 +1038,18 @@ items:
           description: >-
             Boot
 
-            Diagnostics is a debugging feature which allows the user to view
-            console
+            Diagnostics is a debugging feature which allows you to view Console
+            Output
 
-            output and/or a screenshot of the virtual machine from the
-            hypervisor.
+            and Screenshot to diagnose VM status. <br><br> For Linux Virtual
+            Machines,
+
+            you can easily view the output of your console log. <br><br> For
+            both
+
+            Windows and Linux virtual machines, Azure also enables you to see a
+
+            screenshot of the VM from the hypervisor.
           optional: true
         - id: parameters.diagnosticsProfile.bootDiagnostics.enabled
           type:
@@ -794,15 +1060,39 @@ items:
           type:
             - string
           description: |-
-            URI of the storage account to use for placing the console output and
+            Uri of the storage account to use for placing the console output and
             screenshot.
           optional: true
         - id: parameters.availabilitySet
           type:
             - object
-          description: |-
-            The reference Id of the
-            availability set to which the virtual machine belongs.
+          description: >-
+            Specifies information about the
+
+            availability set that the virtual machine should be assigned to.
+            Virtual
+
+            machines specified in the same availability set are allocated to
+            different
+
+            nodes to maximize availability. For more information about
+            availability
+
+            sets, see [Manage the availability of virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+
+            <br><br> For more information on Azure planned maintainance, see
+            [Planned
+
+            maintenance for virtual machines in
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> Currently, a VM can only be added to availability set at
+            creation
+
+            time. An existing VM cannot be added to an availability set.
           optional: true
         - id: parameters.availabilitySet.id
           type:
@@ -818,7 +1108,23 @@ items:
             that is being used was licensed on-premises. This element is only
             used for
 
-            images that contain the Windows Server operating system.
+            images that contain the Windows Server operating system. <br><br>
+            Possible
+
+            values are: <br><br> Windows_Client <br><br> Windows_Server <br><br>
+            If this
+
+            element is included in a request for an update, the value must match
+            the
+
+            initial value. This value cannot be updated. <br><br> For more
+            information,
+
+            see [Azure Hybrid Use Benefit for Windows
+
+            Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> Minimum api-version: 2015-06-15
           optional: true
         - id: parameters.identity
           type:
@@ -839,6 +1145,11 @@ items:
             which implicitly creates an identity. Possible values include:
 
             'SystemAssigned'
+          optional: true
+        - id: parameters.zones
+          type:
+            - array
+          description: The virtual machine zones.
           optional: true
         - id: parameters.location
           type:
@@ -933,9 +1244,25 @@ items:
         - id: parameters.plan
           type:
             - object
-          description: |-
-            The purchase plan when deploying virtual
-            machine from VM Marketplace images.
+          description: >-
+            Specifies information about the
+
+            marketplace image used to create the virtual machine. This element
+            is only
+
+            used for marketplace images. Before you can use a marketplace image
+            from an
+
+            API, you must enable the image for programmatic use.  In the Azure
+            portal,
+
+            find the marketplace image that you want to use and then click
+            **Want to
+
+            deploy programmatically, Get Started ->**. Enter any required
+            information
+
+            and then click **Save**.
           optional: true
         - id: parameters.plan.name
           type:
@@ -950,7 +1277,10 @@ items:
         - id: parameters.plan.product
           type:
             - string
-          description: The offer ID.
+          description: |-
+            Specifies the product of the image
+            from the marketplace. This is the same value as Offer under the
+            imageReference element.
           optional: true
         - id: parameters.plan.promotionCode
           type:
@@ -960,54 +1290,84 @@ items:
         - id: parameters.hardwareProfile
           type:
             - object
-          description: The hardware profile.
+          description: |-
+            Specifies the hardware settings
+            for the virtual machine.
           optional: true
         - id: parameters.hardwareProfile.vmSize
           type:
             - string
           description: >-
-            The virtual machine size
+            Specifies the size of
 
-            name. Possible values include: 'Basic_A0', 'Basic_A1', 'Basic_A2',
+            the virtual machine. For more information about virtual machine
+            sizes, see
 
-            'Basic_A3', 'Basic_A4', 'Standard_A0', 'Standard_A1', 'Standard_A2',
+            [Sizes for virtual
 
-            'Standard_A3', 'Standard_A4', 'Standard_A5', 'Standard_A6',
-            'Standard_A7',
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
-            'Standard_A8', 'Standard_A9', 'Standard_A10', 'Standard_A11',
+            <br><br> The available VM sizes depend on region and availability
+            set. For a
 
-            'Standard_A1_v2', 'Standard_A2_v2', 'Standard_A4_v2',
-            'Standard_A8_v2',
+            list of available sizes use these APIs:  <br><br> [List all
+            available
 
-            'Standard_A2m_v2', 'Standard_A4m_v2', 'Standard_A8m_v2',
-            'Standard_D1',
+            virtual machine sizes in an availability
 
-            'Standard_D2', 'Standard_D3', 'Standard_D4', 'Standard_D11',
-            'Standard_D12',
+            set](virtualmachines-list-sizes-availability-set.md) <br><br> [List
+            all
 
-            'Standard_D13', 'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2',
+            available virtual machine sizes in a
 
-            'Standard_D3_v2', 'Standard_D4_v2', 'Standard_D5_v2',
-            'Standard_D11_v2',
+            region](virtualmachines-list-sizes-region.md) <br><br> [List all
+            available
 
-            'Standard_D12_v2', 'Standard_D13_v2', 'Standard_D14_v2',
-            'Standard_D15_v2',
+            virtual machine sizes for
 
-            'Standard_DS1', 'Standard_DS2', 'Standard_DS3', 'Standard_DS4',
+            resizing](virtualmachines-list-sizes-for-resizing.md). Possible
+            values
 
-            'Standard_DS11', 'Standard_DS12', 'Standard_DS13', 'Standard_DS14',
+            include: 'Basic_A0', 'Basic_A1', 'Basic_A2', 'Basic_A3', 'Basic_A4',
 
-            'Standard_DS1_v2', 'Standard_DS2_v2', 'Standard_DS3_v2',
-            'Standard_DS4_v2',
+            'Standard_A0', 'Standard_A1', 'Standard_A2', 'Standard_A3',
+            'Standard_A4',
 
-            'Standard_DS5_v2', 'Standard_DS11_v2', 'Standard_DS12_v2',
+            'Standard_A5', 'Standard_A6', 'Standard_A7', 'Standard_A8',
+            'Standard_A9',
 
-            'Standard_DS13_v2', 'Standard_DS14_v2', 'Standard_DS15_v2',
-            'Standard_F1',
+            'Standard_A10', 'Standard_A11', 'Standard_A1_v2', 'Standard_A2_v2',
 
-            'Standard_F2', 'Standard_F4', 'Standard_F8', 'Standard_F16',
-            'Standard_F1s',
+            'Standard_A4_v2', 'Standard_A8_v2', 'Standard_A2m_v2',
+            'Standard_A4m_v2',
+
+            'Standard_A8m_v2', 'Standard_D1', 'Standard_D2', 'Standard_D3',
+
+            'Standard_D4', 'Standard_D11', 'Standard_D12', 'Standard_D13',
+
+            'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2',
+            'Standard_D3_v2',
+
+            'Standard_D4_v2', 'Standard_D5_v2', 'Standard_D11_v2',
+            'Standard_D12_v2',
+
+            'Standard_D13_v2', 'Standard_D14_v2', 'Standard_D15_v2',
+            'Standard_DS1',
+
+            'Standard_DS2', 'Standard_DS3', 'Standard_DS4', 'Standard_DS11',
+
+            'Standard_DS12', 'Standard_DS13', 'Standard_DS14',
+            'Standard_DS1_v2',
+
+            'Standard_DS2_v2', 'Standard_DS3_v2', 'Standard_DS4_v2',
+            'Standard_DS5_v2',
+
+            'Standard_DS11_v2', 'Standard_DS12_v2', 'Standard_DS13_v2',
+
+            'Standard_DS14_v2', 'Standard_DS15_v2', 'Standard_F1',
+            'Standard_F2',
+
+            'Standard_F4', 'Standard_F8', 'Standard_F16', 'Standard_F1s',
 
             'Standard_F2s', 'Standard_F4s', 'Standard_F8s', 'Standard_F16s',
 
@@ -1029,14 +1389,26 @@ items:
         - id: parameters.storageProfile
           type:
             - object
-          description: The storage profile.
+          description: |-
+            Specifies the storage settings
+            for the virtual machine disks.
           optional: true
         - id: parameters.storageProfile.imageReference
           type:
             - object
-          description: |-
-            The image
-            reference.
+          description: >-
+            Specifies
+
+            information about the image to use. You can specify information
+            about
+
+            platform images, marketplace images, or virtual machine images. This
+            element
+
+            is required when you want to use a platform image, marketplace
+            image, or
+
+            virtual machine image, but is not used in other creation operations.
           optional: true
         - id: parameters.storageProfile.imageReference.publisher
           type:
@@ -1048,9 +1420,13 @@ items:
         - id: parameters.storageProfile.imageReference.offer
           type:
             - string
-          description: |-
-            The image
-            offer.
+          description: >-
+            Specifies
+
+            the offer of the platform image or marketplace image used to create
+            the
+
+            virtual machine.
           optional: true
         - id: parameters.storageProfile.imageReference.sku
           type:
@@ -1063,15 +1439,23 @@ items:
           type:
             - string
           description: >-
-            The image
+            Specifies
 
-            version. The allowed formats are Major.Minor.Build or 'latest'.
-            Major, Minor
+            the version of the platform image or marketplace image used to
+            create the
 
-            and Build are decimal numbers. Specify 'latest' to use the latest
-            version of
+            virtual machine. The allowed formats are Major.Minor.Build or
+            'latest'.
 
-            the image.
+            Major, Minor, and Build are decimal numbers. Specify 'latest' to use
+            the
+
+            latest version of an image available at deploy time. Even if you use
+
+            'latest', the VM image will not automatically update after deploy
+            time even
+
+            if a new version becomes available.
           optional: true
         - id: parameters.storageProfile.imageReference.id
           type:
@@ -1081,29 +1465,50 @@ items:
         - id: parameters.storageProfile.osDisk
           type:
             - object
-          description: The OS disk.
+          description: >-
+            Specifies information
+
+            about the operating system disk used by the virtual machine.
+            <br><br> For
+
+            more information about disks, see [About disks and VHDs for Azure
+            virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
           optional: true
         - id: parameters.storageProfile.osDisk.osType
           type:
             - string
-          description: |-
-            The Operating
-            System type. Possible values include: 'Windows', 'Linux'
+          description: >-
+            This property
+
+            allows you to specify the type of the OS that is included in the
+            disk if
+
+            creating a VM from user-image or a specialized VHD. <br><br>
+            Possible values
+
+            are: <br><br> **Windows** <br><br> **Linux**. Possible values
+            include:
+
+            'Windows', 'Linux'
           optional: true
         - id: parameters.storageProfile.osDisk.encryptionSettings
           type:
             - object
           description: |-
-            The
-            disk encryption settings.
+            Specifies the encryption settings for the OS Disk. <br><br> Minimum
+            api-version: 2015-06-15
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.diskEncryptionKey
           type:
             - object
-          description: |-
-            The
-            disk encryption key which is a Key Vault Secret.
+          description: >-
+            Specifies the location of the disk encryption key, which is a Key
+            Vault
+
+            Secret.
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.diskEncryptionKey.secretUrl
@@ -1118,15 +1523,13 @@ items:
         - id: parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey
           type:
             - object
-          description: |-
-            The
-            key encryption key which is Key Vault Key.
+          description: Specifies the location of the key encryption key in Key Vault.
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey.keyUrl
           type:
             - string
-          description: The URL referencing a key in a Key Vault.
+          description: The URL referencing a key encryption key in Key Vault.
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey.sourceVault
           type:
@@ -1158,39 +1561,76 @@ items:
             The source user
 
             image virtual hard disk. The virtual hard disk will be copied before
-            using
+            being
 
-            it to attach to the virtual machine. If SourceImage is provided, the
+            attached to the virtual machine. If SourceImage is provided, the
+            destination
 
-            destination virtual hard disk must not exist.
+            virtual hard drive must not exist.
           optional: true
         - id: parameters.storageProfile.osDisk.image.uri
           type:
             - string
           description: |-
-            The virtual
-            hard disk's URI. Must be a valid URI to a virtual hard disk.
+            Specifies the
+            virtual hard disk's uri.
           optional: true
         - id: parameters.storageProfile.osDisk.caching
           type:
             - string
-          description: |-
-            The caching type.
-            Possible values include: 'None', 'ReadOnly', 'ReadWrite'
+          description: >-
+            Specifies the
+
+            caching requirements. <br><br> Possible values are: <br><br>
+            **None**
+
+            <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default:
+            **None for
+
+            Standard storage. ReadOnly for Premium storage**. Possible values
+            include:
+
+            'None', 'ReadOnly', 'ReadWrite'
           optional: true
         - id: parameters.storageProfile.osDisk.createOption
           type:
             - string
-          description: |-
-            The create
-            option. Possible values include: 'fromImage', 'empty', 'attach'
+          description: >-
+            Specifies how
+
+            the virtual machine should be created.<br><br> Possible values
+            are:<br><br>
+
+            **Attach** \u2013 This value is used when you are using a
+            specialized disk
+
+            to create the virtual machine.<br><br> **FromImage** \u2013 This
+            value is
+
+            used when you are using an image to create the virtual machine. If
+            you are
+
+            using a platform image, you also use the imageReference element
+            described
+
+            above. If you are using a marketplace image, you  also use the plan
+            element
+
+            previously described. Possible values include: 'FromImage', 'Empty',
+
+            'Attach'
         - id: parameters.storageProfile.osDisk.diskSizeGB
           type:
             - number
-          description: |-
-            The initial
-            disk size, in GB, for blank data disks, and the new desired size for
-            resizing existing OS and data disks.
+          description: >-
+            Specifies the
+
+            size of an empty data disk in gigabytes. This element can be used to
+
+            overwrite the name of the disk in a virtual machine image. <br><br>
+            This
+
+            value cannot be larger than 1023 GB
           optional: true
         - id: parameters.storageProfile.osDisk.managedDisk
           type:
@@ -1203,9 +1643,13 @@ items:
           type:
             - string
           description: >-
-            The
+            Specifies
 
-            Storage Account type. Possible values include: 'Standard_LRS',
+            the storage account type for the managed disk. Possible values are:
+
+            Standard_LRS or Premium_LRS. Possible values include:
+            'Standard_LRS',
+
             'Premium_LRS'
           optional: true
         - id: parameters.storageProfile.osDisk.managedDisk.id
@@ -1218,33 +1662,129 @@ items:
         - id: parameters.storageProfile.dataDisks
           type:
             - array
-          description: The data disks.
+          description: >-
+            Specifies the
+
+            parameters that are used to add a data disk to a virtual machine.
+            <br><br>
+
+            For more information about disks, see [About disks and VHDs for
+            Azure
+
+            virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
           optional: true
         - id: parameters.osProfile
           type:
             - object
-          description: The OS profile.
+          description: |-
+            Specifies the operating system
+            settings for the virtual machine.
           optional: true
         - id: parameters.osProfile.computerName
           type:
             - string
-          description: |-
+          description: >-
             Specifies the host OS
-            name of the virtual machine.
+
+            name of the virtual machine. <br><br> **Max-length (Windows):** 15
+
+            characters <br><br> **Max-length (Linux):** 64 characters. <br><br>
+            For
+
+            naming conventions and restrictions see [Azure infrastructure
+            services
+
+            implementation
+
+            guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions).
           optional: true
         - id: parameters.osProfile.adminUsername
           type:
             - string
-          description: |-
+          description: >-
             Specifies the name of
-            the administrator account.
+
+            the administrator account. <br><br> **Windows-only restriction:**
+            Cannot end
+
+            in "." <br><br> **Disallowed values:** "administrator", "admin",
+            "user",
+
+            "user1", "test", "user2", "test1", "user3", "admin1", "1", "123",
+            "a",
+
+            "actuser", "adm", "admin2", "aspnet", "backup", "console", "david",
+            "guest",
+
+            "john", "owner", "root", "server", "sql", "support",
+            "support_388945a0",
+
+            "sys", "test2", "test3", "user4", "user5". <br><br> **Minimum-length
+
+            (Linux):** 1  character <br><br> **Max-length (Linux):** 64
+            characters
+
+            <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For
+            root
+
+            access to the Linux VM, see [Using root privileges on Linux virtual
+            machines
+
+            in
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li>
+
+            For a list of built-in system users on Linux that should not be used
+            in this
+
+            field, see [Selecting User Names for Linux on
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
           optional: true
         - id: parameters.osProfile.adminPassword
           type:
             - string
-          description: |-
+          description: >-
             Specifies the password
-            of the administrator account.
+
+            of the administrator account. <br><br> **Minimum-length (Windows):**
+            8
+
+            characters <br><br> **Minimum-length (Linux):** 6 characters
+            <br><br>
+
+            **Max-length (Windows):** 123 characters <br><br> **Max-length
+            (Linux):** 72
+
+            characters <br><br> **Complexity requirements:** 3 out of 4
+            conditions below
+
+            need to be fulfilled <br> Has lower characters <br>Has upper
+            characters <br>
+
+            Has a digit <br> Has a special character (Regex match [\W_])
+            <br><br>
+
+            **Disallowed values:** "abc@123", "P@$$w0rd", "P@ssw0rd",
+            "P@ssword123",
+
+            "Pa$$word", "pass@word1", "Password!", "Password1", "Password22",
+
+            "iloveyou!" <br><br> For resetting the password, see [How to reset
+            the
+
+            Remote Desktop service or its login password in a Windows
+
+            VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> For resetting root password, see [Manage users, SSH, and
+            check or
+
+            repair disks on Azure Linux VMs using the VMAccess
+
+            Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)
           optional: true
         - id: parameters.osProfile.customData
           type:
@@ -1258,14 +1798,19 @@ items:
             binary array that is saved as a file on the Virtual Machine. The
             maximum
 
-            length of the binary array is 65535 bytes
+            length of the binary array is 65535 bytes. <br><br> For using
+            cloud-init for
+
+            your VM, see [Using cloud-init to customize a Linux VM during
+
+            creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
           optional: true
         - id: parameters.osProfile.windowsConfiguration
           type:
             - object
           description: |-
-            The Windows
-            configuration of the OS profile.
+            Specifies
+            Windows operating system settings on the virtual machine.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.provisionVMAgent
           type:
@@ -1273,41 +1818,47 @@ items:
           description: >-
             Indicates
 
-            whether the virtual machine agent should be provisioned on the
-            Virtual
+            whether virtual machine agent should be provisioned on the virtual
+            machine.
 
-            Machine. If not specified, then the default behavior is to set it to
-            true.
+            <br><br> When this property is not specified in the request body,
+            default
+
+            behavior is to set it to true.  This will ensure that VM Agent is
+            installed
+
+            on the VM so that extensions can be added to the VM later.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.enableAutomaticUpdates
           type:
             - boolean
           description: |-
             Indicates
-            whether Windows updates are automatically installed on the VM.
+            whether virtual machine is enabled for automatic updates.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.timeZone
           type:
             - string
-          description: |-
-            The
-            time zone of the VM
+          description: >-
+            Specifies the time zone of the virtual machine. e.g. "Pacific
+            Standard Time"
           optional: true
         - id: parameters.osProfile.windowsConfiguration.additionalUnattendContent
           type:
             - array
           description: >-
-            Additional base-64 encoded XML formatted information that can be
-            included in
+            Specifies additional base-64 encoded XML formatted information that
+            can be
 
-            the Unattend.xml file.
+            included in the Unattend.xml file, which is used by Windows Setup.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.winRM
           type:
             - object
           description: |-
-            The
-            Windows Remote Management configuration of the VM
+            Specifies
+            the Windows Remote Management listeners. This enables remote Windows
+            PowerShell.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.winRM.listeners
           type:
@@ -1317,9 +1868,22 @@ items:
         - id: parameters.osProfile.linuxConfiguration
           type:
             - object
-          description: |-
-            The Linux
-            configuration of the OS profile.
+          description: >-
+            Specifies the
+
+            Linux operating system settings on the virtual machine. <br><br>For
+            a list
+
+            of supported Linux distributions, see [Linux on Azure-Endorsed
+
+            Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+
+            <br><br> For running non-endorsed distributions, see [Information
+            for
+
+            Non-Endorsed
+
+            Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
           optional: true
         - id: >-
             parameters.osProfile.linuxConfiguration.disablePasswordAuthentication
@@ -1331,8 +1895,8 @@ items:
           type:
             - object
           description: |-
-            The SSH
-            configuration for linux VMs.
+            Specifies the
+            ssh key configuration for a Linux OS.
           optional: true
         - id: parameters.osProfile.linuxConfiguration.ssh.publicKeys
           type:
@@ -1345,13 +1909,15 @@ items:
           type:
             - array
           description: |-
-            The list of certificates for
-            addition to the VM.
+            Specifies set of certificates
+            that should be installed onto the virtual machine.
           optional: true
         - id: parameters.networkProfile
           type:
             - object
-          description: The network profile.
+          description: |-
+            Specifies the network interfaces
+            of the virtual machine.
           optional: true
         - id: parameters.networkProfile.networkInterfaces
           type:
@@ -1359,7 +1925,7 @@ items:
           description: >-
             Specifies the
 
-            list of resource IDs for the network interfaces associated with the
+            list of resource Ids for the network interfaces associated with the
             virtual
 
             machine.
@@ -1367,7 +1933,9 @@ items:
         - id: parameters.diagnosticsProfile
           type:
             - object
-          description: The diagnostics profile.
+          description: |-
+            Specifies the boot
+            diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.
           optional: true
         - id: parameters.diagnosticsProfile.bootDiagnostics
           type:
@@ -1375,11 +1943,18 @@ items:
           description: >-
             Boot
 
-            Diagnostics is a debugging feature which allows the user to view
-            console
+            Diagnostics is a debugging feature which allows you to view Console
+            Output
 
-            output and/or a screenshot of the virtual machine from the
-            hypervisor.
+            and Screenshot to diagnose VM status. <br><br> For Linux Virtual
+            Machines,
+
+            you can easily view the output of your console log. <br><br> For
+            both
+
+            Windows and Linux virtual machines, Azure also enables you to see a
+
+            screenshot of the VM from the hypervisor.
           optional: true
         - id: parameters.diagnosticsProfile.bootDiagnostics.enabled
           type:
@@ -1390,15 +1965,39 @@ items:
           type:
             - string
           description: |-
-            URI of the storage account to use for placing the console output and
+            Uri of the storage account to use for placing the console output and
             screenshot.
           optional: true
         - id: parameters.availabilitySet
           type:
             - object
-          description: |-
-            The reference Id of the
-            availability set to which the virtual machine belongs.
+          description: >-
+            Specifies information about the
+
+            availability set that the virtual machine should be assigned to.
+            Virtual
+
+            machines specified in the same availability set are allocated to
+            different
+
+            nodes to maximize availability. For more information about
+            availability
+
+            sets, see [Manage the availability of virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+
+            <br><br> For more information on Azure planned maintainance, see
+            [Planned
+
+            maintenance for virtual machines in
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> Currently, a VM can only be added to availability set at
+            creation
+
+            time. An existing VM cannot be added to an availability set.
           optional: true
         - id: parameters.availabilitySet.id
           type:
@@ -1414,7 +2013,23 @@ items:
             that is being used was licensed on-premises. This element is only
             used for
 
-            images that contain the Windows Server operating system.
+            images that contain the Windows Server operating system. <br><br>
+            Possible
+
+            values are: <br><br> Windows_Client <br><br> Windows_Server <br><br>
+            If this
+
+            element is included in a request for an update, the value must match
+            the
+
+            initial value. This value cannot be updated. <br><br> For more
+            information,
+
+            see [Azure Hybrid Use Benefit for Windows
+
+            Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> Minimum api-version: 2015-06-15
           optional: true
         - id: parameters.identity
           type:
@@ -1435,6 +2050,11 @@ items:
             which implicitly creates an identity. Possible values include:
 
             'SystemAssigned'
+          optional: true
+        - id: parameters.zones
+          type:
+            - array
+          description: The virtual machine zones.
           optional: true
         - id: parameters.location
           type:
@@ -1768,6 +2388,144 @@ items:
 
           {Promise} A promise is returned
       content: 'function get(resourceGroupName, vmName, options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-compute.VirtualMachines#instanceViewWithHttpOperationResponse'
+    id: 'azure-arm-compute.VirtualMachines#instanceViewWithHttpOperationResponse'
+    parent: azure-arm-compute.VirtualMachines
+    name: 'instanceViewWithHttpOperationResponse(resourceGroupName, vmName, options)'
+    summary: Retrieves information about the run-time state of a virtual machine.
+    fullName: >-
+      azure-arm-compute.VirtualMachines.instanceViewWithHttpOperationResponse(resourceGroupName,
+      vmName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<VirtualMachineInstanceView>} - The deserialized
+          result object.
+        value: >-
+          {HttpOperationResponse<VirtualMachineInstanceView>} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: vmName
+          type:
+            - string
+          description: The name of the virtual machine.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function instanceViewWithHttpOperationResponse(resourceGroupName,
+        vmName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-compute.VirtualMachines#instanceView'
+    id: 'azure-arm-compute.VirtualMachines#instanceView'
+    parent: azure-arm-compute.VirtualMachines
+    name: 'instanceView(resourceGroupName, vmName, options, optionalCallback)'
+    summary: Retrieves information about the run-time state of a virtual machine.
+    fullName: >-
+      azure-arm-compute.VirtualMachines.instanceView(resourceGroupName, vmName,
+      options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{VirtualMachineInstanceView} - The deserialized result object.'
+        value: '{VirtualMachineInstanceView} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link VirtualMachineInstanceView} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link VirtualMachineInstanceView} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: vmName
+          type:
+            - string
+          description: The name of the virtual machine.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function instanceView(resourceGroupName, vmName, options,
+        optionalCallback)
     langs:
       - js
   - uid: >-
@@ -3344,6 +4102,17 @@ items:
           type:
             - string
           description: The run command id.
+        - id: parameters.script
+          type:
+            - array
+          description: >-
+            Optional. The script to be executed.
+
+            When this value is given, the given script will override the default
+            script
+
+            of the command.
+          optional: true
         - id: parameters.parameters
           type:
             - array
@@ -3432,6 +4201,17 @@ items:
           type:
             - string
           description: The run command id.
+        - id: parameters.script
+          type:
+            - array
+          description: >-
+            Optional. The script to be executed.
+
+            When this value is given, the given script will override the default
+            script
+
+            of the command.
+          optional: true
         - id: parameters.parameters
           type:
             - array
@@ -3707,9 +4487,25 @@ items:
         - id: parameters.plan
           type:
             - object
-          description: |-
-            The purchase plan when deploying virtual
-            machine from VM Marketplace images.
+          description: >-
+            Specifies information about the
+
+            marketplace image used to create the virtual machine. This element
+            is only
+
+            used for marketplace images. Before you can use a marketplace image
+            from an
+
+            API, you must enable the image for programmatic use.  In the Azure
+            portal,
+
+            find the marketplace image that you want to use and then click
+            **Want to
+
+            deploy programmatically, Get Started ->**. Enter any required
+            information
+
+            and then click **Save**.
           optional: true
         - id: parameters.plan.name
           type:
@@ -3724,7 +4520,10 @@ items:
         - id: parameters.plan.product
           type:
             - string
-          description: The offer ID.
+          description: |-
+            Specifies the product of the image
+            from the marketplace. This is the same value as Offer under the
+            imageReference element.
           optional: true
         - id: parameters.plan.promotionCode
           type:
@@ -3734,54 +4533,84 @@ items:
         - id: parameters.hardwareProfile
           type:
             - object
-          description: The hardware profile.
+          description: |-
+            Specifies the hardware settings
+            for the virtual machine.
           optional: true
         - id: parameters.hardwareProfile.vmSize
           type:
             - string
           description: >-
-            The virtual machine size
+            Specifies the size of
 
-            name. Possible values include: 'Basic_A0', 'Basic_A1', 'Basic_A2',
+            the virtual machine. For more information about virtual machine
+            sizes, see
 
-            'Basic_A3', 'Basic_A4', 'Standard_A0', 'Standard_A1', 'Standard_A2',
+            [Sizes for virtual
 
-            'Standard_A3', 'Standard_A4', 'Standard_A5', 'Standard_A6',
-            'Standard_A7',
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
-            'Standard_A8', 'Standard_A9', 'Standard_A10', 'Standard_A11',
+            <br><br> The available VM sizes depend on region and availability
+            set. For a
 
-            'Standard_A1_v2', 'Standard_A2_v2', 'Standard_A4_v2',
-            'Standard_A8_v2',
+            list of available sizes use these APIs:  <br><br> [List all
+            available
 
-            'Standard_A2m_v2', 'Standard_A4m_v2', 'Standard_A8m_v2',
-            'Standard_D1',
+            virtual machine sizes in an availability
 
-            'Standard_D2', 'Standard_D3', 'Standard_D4', 'Standard_D11',
-            'Standard_D12',
+            set](virtualmachines-list-sizes-availability-set.md) <br><br> [List
+            all
 
-            'Standard_D13', 'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2',
+            available virtual machine sizes in a
 
-            'Standard_D3_v2', 'Standard_D4_v2', 'Standard_D5_v2',
-            'Standard_D11_v2',
+            region](virtualmachines-list-sizes-region.md) <br><br> [List all
+            available
 
-            'Standard_D12_v2', 'Standard_D13_v2', 'Standard_D14_v2',
-            'Standard_D15_v2',
+            virtual machine sizes for
 
-            'Standard_DS1', 'Standard_DS2', 'Standard_DS3', 'Standard_DS4',
+            resizing](virtualmachines-list-sizes-for-resizing.md). Possible
+            values
 
-            'Standard_DS11', 'Standard_DS12', 'Standard_DS13', 'Standard_DS14',
+            include: 'Basic_A0', 'Basic_A1', 'Basic_A2', 'Basic_A3', 'Basic_A4',
 
-            'Standard_DS1_v2', 'Standard_DS2_v2', 'Standard_DS3_v2',
-            'Standard_DS4_v2',
+            'Standard_A0', 'Standard_A1', 'Standard_A2', 'Standard_A3',
+            'Standard_A4',
 
-            'Standard_DS5_v2', 'Standard_DS11_v2', 'Standard_DS12_v2',
+            'Standard_A5', 'Standard_A6', 'Standard_A7', 'Standard_A8',
+            'Standard_A9',
 
-            'Standard_DS13_v2', 'Standard_DS14_v2', 'Standard_DS15_v2',
-            'Standard_F1',
+            'Standard_A10', 'Standard_A11', 'Standard_A1_v2', 'Standard_A2_v2',
 
-            'Standard_F2', 'Standard_F4', 'Standard_F8', 'Standard_F16',
-            'Standard_F1s',
+            'Standard_A4_v2', 'Standard_A8_v2', 'Standard_A2m_v2',
+            'Standard_A4m_v2',
+
+            'Standard_A8m_v2', 'Standard_D1', 'Standard_D2', 'Standard_D3',
+
+            'Standard_D4', 'Standard_D11', 'Standard_D12', 'Standard_D13',
+
+            'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2',
+            'Standard_D3_v2',
+
+            'Standard_D4_v2', 'Standard_D5_v2', 'Standard_D11_v2',
+            'Standard_D12_v2',
+
+            'Standard_D13_v2', 'Standard_D14_v2', 'Standard_D15_v2',
+            'Standard_DS1',
+
+            'Standard_DS2', 'Standard_DS3', 'Standard_DS4', 'Standard_DS11',
+
+            'Standard_DS12', 'Standard_DS13', 'Standard_DS14',
+            'Standard_DS1_v2',
+
+            'Standard_DS2_v2', 'Standard_DS3_v2', 'Standard_DS4_v2',
+            'Standard_DS5_v2',
+
+            'Standard_DS11_v2', 'Standard_DS12_v2', 'Standard_DS13_v2',
+
+            'Standard_DS14_v2', 'Standard_DS15_v2', 'Standard_F1',
+            'Standard_F2',
+
+            'Standard_F4', 'Standard_F8', 'Standard_F16', 'Standard_F1s',
 
             'Standard_F2s', 'Standard_F4s', 'Standard_F8s', 'Standard_F16s',
 
@@ -3803,14 +4632,26 @@ items:
         - id: parameters.storageProfile
           type:
             - object
-          description: The storage profile.
+          description: |-
+            Specifies the storage settings
+            for the virtual machine disks.
           optional: true
         - id: parameters.storageProfile.imageReference
           type:
             - object
-          description: |-
-            The image
-            reference.
+          description: >-
+            Specifies
+
+            information about the image to use. You can specify information
+            about
+
+            platform images, marketplace images, or virtual machine images. This
+            element
+
+            is required when you want to use a platform image, marketplace
+            image, or
+
+            virtual machine image, but is not used in other creation operations.
           optional: true
         - id: parameters.storageProfile.imageReference.publisher
           type:
@@ -3822,9 +4663,13 @@ items:
         - id: parameters.storageProfile.imageReference.offer
           type:
             - string
-          description: |-
-            The image
-            offer.
+          description: >-
+            Specifies
+
+            the offer of the platform image or marketplace image used to create
+            the
+
+            virtual machine.
           optional: true
         - id: parameters.storageProfile.imageReference.sku
           type:
@@ -3837,15 +4682,23 @@ items:
           type:
             - string
           description: >-
-            The image
+            Specifies
 
-            version. The allowed formats are Major.Minor.Build or 'latest'.
-            Major, Minor
+            the version of the platform image or marketplace image used to
+            create the
 
-            and Build are decimal numbers. Specify 'latest' to use the latest
-            version of
+            virtual machine. The allowed formats are Major.Minor.Build or
+            'latest'.
 
-            the image.
+            Major, Minor, and Build are decimal numbers. Specify 'latest' to use
+            the
+
+            latest version of an image available at deploy time. Even if you use
+
+            'latest', the VM image will not automatically update after deploy
+            time even
+
+            if a new version becomes available.
           optional: true
         - id: parameters.storageProfile.imageReference.id
           type:
@@ -3855,29 +4708,50 @@ items:
         - id: parameters.storageProfile.osDisk
           type:
             - object
-          description: The OS disk.
+          description: >-
+            Specifies information
+
+            about the operating system disk used by the virtual machine.
+            <br><br> For
+
+            more information about disks, see [About disks and VHDs for Azure
+            virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
           optional: true
         - id: parameters.storageProfile.osDisk.osType
           type:
             - string
-          description: |-
-            The Operating
-            System type. Possible values include: 'Windows', 'Linux'
+          description: >-
+            This property
+
+            allows you to specify the type of the OS that is included in the
+            disk if
+
+            creating a VM from user-image or a specialized VHD. <br><br>
+            Possible values
+
+            are: <br><br> **Windows** <br><br> **Linux**. Possible values
+            include:
+
+            'Windows', 'Linux'
           optional: true
         - id: parameters.storageProfile.osDisk.encryptionSettings
           type:
             - object
           description: |-
-            The
-            disk encryption settings.
+            Specifies the encryption settings for the OS Disk. <br><br> Minimum
+            api-version: 2015-06-15
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.diskEncryptionKey
           type:
             - object
-          description: |-
-            The
-            disk encryption key which is a Key Vault Secret.
+          description: >-
+            Specifies the location of the disk encryption key, which is a Key
+            Vault
+
+            Secret.
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.diskEncryptionKey.secretUrl
@@ -3892,15 +4766,13 @@ items:
         - id: parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey
           type:
             - object
-          description: |-
-            The
-            key encryption key which is Key Vault Key.
+          description: Specifies the location of the key encryption key in Key Vault.
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey.keyUrl
           type:
             - string
-          description: The URL referencing a key in a Key Vault.
+          description: The URL referencing a key encryption key in Key Vault.
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey.sourceVault
           type:
@@ -3932,39 +4804,76 @@ items:
             The source user
 
             image virtual hard disk. The virtual hard disk will be copied before
-            using
+            being
 
-            it to attach to the virtual machine. If SourceImage is provided, the
+            attached to the virtual machine. If SourceImage is provided, the
+            destination
 
-            destination virtual hard disk must not exist.
+            virtual hard drive must not exist.
           optional: true
         - id: parameters.storageProfile.osDisk.image.uri
           type:
             - string
           description: |-
-            The virtual
-            hard disk's URI. Must be a valid URI to a virtual hard disk.
+            Specifies the
+            virtual hard disk's uri.
           optional: true
         - id: parameters.storageProfile.osDisk.caching
           type:
             - string
-          description: |-
-            The caching type.
-            Possible values include: 'None', 'ReadOnly', 'ReadWrite'
+          description: >-
+            Specifies the
+
+            caching requirements. <br><br> Possible values are: <br><br>
+            **None**
+
+            <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default:
+            **None for
+
+            Standard storage. ReadOnly for Premium storage**. Possible values
+            include:
+
+            'None', 'ReadOnly', 'ReadWrite'
           optional: true
         - id: parameters.storageProfile.osDisk.createOption
           type:
             - string
-          description: |-
-            The create
-            option. Possible values include: 'fromImage', 'empty', 'attach'
+          description: >-
+            Specifies how
+
+            the virtual machine should be created.<br><br> Possible values
+            are:<br><br>
+
+            **Attach** \u2013 This value is used when you are using a
+            specialized disk
+
+            to create the virtual machine.<br><br> **FromImage** \u2013 This
+            value is
+
+            used when you are using an image to create the virtual machine. If
+            you are
+
+            using a platform image, you also use the imageReference element
+            described
+
+            above. If you are using a marketplace image, you  also use the plan
+            element
+
+            previously described. Possible values include: 'FromImage', 'Empty',
+
+            'Attach'
         - id: parameters.storageProfile.osDisk.diskSizeGB
           type:
             - number
-          description: |-
-            The initial
-            disk size, in GB, for blank data disks, and the new desired size for
-            resizing existing OS and data disks.
+          description: >-
+            Specifies the
+
+            size of an empty data disk in gigabytes. This element can be used to
+
+            overwrite the name of the disk in a virtual machine image. <br><br>
+            This
+
+            value cannot be larger than 1023 GB
           optional: true
         - id: parameters.storageProfile.osDisk.managedDisk
           type:
@@ -3977,9 +4886,13 @@ items:
           type:
             - string
           description: >-
-            The
+            Specifies
 
-            Storage Account type. Possible values include: 'Standard_LRS',
+            the storage account type for the managed disk. Possible values are:
+
+            Standard_LRS or Premium_LRS. Possible values include:
+            'Standard_LRS',
+
             'Premium_LRS'
           optional: true
         - id: parameters.storageProfile.osDisk.managedDisk.id
@@ -3992,33 +4905,129 @@ items:
         - id: parameters.storageProfile.dataDisks
           type:
             - array
-          description: The data disks.
+          description: >-
+            Specifies the
+
+            parameters that are used to add a data disk to a virtual machine.
+            <br><br>
+
+            For more information about disks, see [About disks and VHDs for
+            Azure
+
+            virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
           optional: true
         - id: parameters.osProfile
           type:
             - object
-          description: The OS profile.
+          description: |-
+            Specifies the operating system
+            settings for the virtual machine.
           optional: true
         - id: parameters.osProfile.computerName
           type:
             - string
-          description: |-
+          description: >-
             Specifies the host OS
-            name of the virtual machine.
+
+            name of the virtual machine. <br><br> **Max-length (Windows):** 15
+
+            characters <br><br> **Max-length (Linux):** 64 characters. <br><br>
+            For
+
+            naming conventions and restrictions see [Azure infrastructure
+            services
+
+            implementation
+
+            guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions).
           optional: true
         - id: parameters.osProfile.adminUsername
           type:
             - string
-          description: |-
+          description: >-
             Specifies the name of
-            the administrator account.
+
+            the administrator account. <br><br> **Windows-only restriction:**
+            Cannot end
+
+            in "." <br><br> **Disallowed values:** "administrator", "admin",
+            "user",
+
+            "user1", "test", "user2", "test1", "user3", "admin1", "1", "123",
+            "a",
+
+            "actuser", "adm", "admin2", "aspnet", "backup", "console", "david",
+            "guest",
+
+            "john", "owner", "root", "server", "sql", "support",
+            "support_388945a0",
+
+            "sys", "test2", "test3", "user4", "user5". <br><br> **Minimum-length
+
+            (Linux):** 1  character <br><br> **Max-length (Linux):** 64
+            characters
+
+            <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For
+            root
+
+            access to the Linux VM, see [Using root privileges on Linux virtual
+            machines
+
+            in
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li>
+
+            For a list of built-in system users on Linux that should not be used
+            in this
+
+            field, see [Selecting User Names for Linux on
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
           optional: true
         - id: parameters.osProfile.adminPassword
           type:
             - string
-          description: |-
+          description: >-
             Specifies the password
-            of the administrator account.
+
+            of the administrator account. <br><br> **Minimum-length (Windows):**
+            8
+
+            characters <br><br> **Minimum-length (Linux):** 6 characters
+            <br><br>
+
+            **Max-length (Windows):** 123 characters <br><br> **Max-length
+            (Linux):** 72
+
+            characters <br><br> **Complexity requirements:** 3 out of 4
+            conditions below
+
+            need to be fulfilled <br> Has lower characters <br>Has upper
+            characters <br>
+
+            Has a digit <br> Has a special character (Regex match [\W_])
+            <br><br>
+
+            **Disallowed values:** "abc@123", "P@$$w0rd", "P@ssw0rd",
+            "P@ssword123",
+
+            "Pa$$word", "pass@word1", "Password!", "Password1", "Password22",
+
+            "iloveyou!" <br><br> For resetting the password, see [How to reset
+            the
+
+            Remote Desktop service or its login password in a Windows
+
+            VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> For resetting root password, see [Manage users, SSH, and
+            check or
+
+            repair disks on Azure Linux VMs using the VMAccess
+
+            Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)
           optional: true
         - id: parameters.osProfile.customData
           type:
@@ -4032,14 +5041,19 @@ items:
             binary array that is saved as a file on the Virtual Machine. The
             maximum
 
-            length of the binary array is 65535 bytes
+            length of the binary array is 65535 bytes. <br><br> For using
+            cloud-init for
+
+            your VM, see [Using cloud-init to customize a Linux VM during
+
+            creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
           optional: true
         - id: parameters.osProfile.windowsConfiguration
           type:
             - object
           description: |-
-            The Windows
-            configuration of the OS profile.
+            Specifies
+            Windows operating system settings on the virtual machine.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.provisionVMAgent
           type:
@@ -4047,41 +5061,47 @@ items:
           description: >-
             Indicates
 
-            whether the virtual machine agent should be provisioned on the
-            Virtual
+            whether virtual machine agent should be provisioned on the virtual
+            machine.
 
-            Machine. If not specified, then the default behavior is to set it to
-            true.
+            <br><br> When this property is not specified in the request body,
+            default
+
+            behavior is to set it to true.  This will ensure that VM Agent is
+            installed
+
+            on the VM so that extensions can be added to the VM later.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.enableAutomaticUpdates
           type:
             - boolean
           description: |-
             Indicates
-            whether Windows updates are automatically installed on the VM.
+            whether virtual machine is enabled for automatic updates.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.timeZone
           type:
             - string
-          description: |-
-            The
-            time zone of the VM
+          description: >-
+            Specifies the time zone of the virtual machine. e.g. "Pacific
+            Standard Time"
           optional: true
         - id: parameters.osProfile.windowsConfiguration.additionalUnattendContent
           type:
             - array
           description: >-
-            Additional base-64 encoded XML formatted information that can be
-            included in
+            Specifies additional base-64 encoded XML formatted information that
+            can be
 
-            the Unattend.xml file.
+            included in the Unattend.xml file, which is used by Windows Setup.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.winRM
           type:
             - object
           description: |-
-            The
-            Windows Remote Management configuration of the VM
+            Specifies
+            the Windows Remote Management listeners. This enables remote Windows
+            PowerShell.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.winRM.listeners
           type:
@@ -4091,9 +5111,22 @@ items:
         - id: parameters.osProfile.linuxConfiguration
           type:
             - object
-          description: |-
-            The Linux
-            configuration of the OS profile.
+          description: >-
+            Specifies the
+
+            Linux operating system settings on the virtual machine. <br><br>For
+            a list
+
+            of supported Linux distributions, see [Linux on Azure-Endorsed
+
+            Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+
+            <br><br> For running non-endorsed distributions, see [Information
+            for
+
+            Non-Endorsed
+
+            Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
           optional: true
         - id: >-
             parameters.osProfile.linuxConfiguration.disablePasswordAuthentication
@@ -4105,8 +5138,8 @@ items:
           type:
             - object
           description: |-
-            The SSH
-            configuration for linux VMs.
+            Specifies the
+            ssh key configuration for a Linux OS.
           optional: true
         - id: parameters.osProfile.linuxConfiguration.ssh.publicKeys
           type:
@@ -4119,13 +5152,15 @@ items:
           type:
             - array
           description: |-
-            The list of certificates for
-            addition to the VM.
+            Specifies set of certificates
+            that should be installed onto the virtual machine.
           optional: true
         - id: parameters.networkProfile
           type:
             - object
-          description: The network profile.
+          description: |-
+            Specifies the network interfaces
+            of the virtual machine.
           optional: true
         - id: parameters.networkProfile.networkInterfaces
           type:
@@ -4133,7 +5168,7 @@ items:
           description: >-
             Specifies the
 
-            list of resource IDs for the network interfaces associated with the
+            list of resource Ids for the network interfaces associated with the
             virtual
 
             machine.
@@ -4141,7 +5176,9 @@ items:
         - id: parameters.diagnosticsProfile
           type:
             - object
-          description: The diagnostics profile.
+          description: |-
+            Specifies the boot
+            diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.
           optional: true
         - id: parameters.diagnosticsProfile.bootDiagnostics
           type:
@@ -4149,11 +5186,18 @@ items:
           description: >-
             Boot
 
-            Diagnostics is a debugging feature which allows the user to view
-            console
+            Diagnostics is a debugging feature which allows you to view Console
+            Output
 
-            output and/or a screenshot of the virtual machine from the
-            hypervisor.
+            and Screenshot to diagnose VM status. <br><br> For Linux Virtual
+            Machines,
+
+            you can easily view the output of your console log. <br><br> For
+            both
+
+            Windows and Linux virtual machines, Azure also enables you to see a
+
+            screenshot of the VM from the hypervisor.
           optional: true
         - id: parameters.diagnosticsProfile.bootDiagnostics.enabled
           type:
@@ -4164,15 +5208,39 @@ items:
           type:
             - string
           description: |-
-            URI of the storage account to use for placing the console output and
+            Uri of the storage account to use for placing the console output and
             screenshot.
           optional: true
         - id: parameters.availabilitySet
           type:
             - object
-          description: |-
-            The reference Id of the
-            availability set to which the virtual machine belongs.
+          description: >-
+            Specifies information about the
+
+            availability set that the virtual machine should be assigned to.
+            Virtual
+
+            machines specified in the same availability set are allocated to
+            different
+
+            nodes to maximize availability. For more information about
+            availability
+
+            sets, see [Manage the availability of virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+
+            <br><br> For more information on Azure planned maintainance, see
+            [Planned
+
+            maintenance for virtual machines in
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> Currently, a VM can only be added to availability set at
+            creation
+
+            time. An existing VM cannot be added to an availability set.
           optional: true
         - id: parameters.availabilitySet.id
           type:
@@ -4188,7 +5256,23 @@ items:
             that is being used was licensed on-premises. This element is only
             used for
 
-            images that contain the Windows Server operating system.
+            images that contain the Windows Server operating system. <br><br>
+            Possible
+
+            values are: <br><br> Windows_Client <br><br> Windows_Server <br><br>
+            If this
+
+            element is included in a request for an update, the value must match
+            the
+
+            initial value. This value cannot be updated. <br><br> For more
+            information,
+
+            see [Azure Hybrid Use Benefit for Windows
+
+            Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> Minimum api-version: 2015-06-15
           optional: true
         - id: parameters.identity
           type:
@@ -4209,6 +5293,11 @@ items:
             which implicitly creates an identity. Possible values include:
 
             'SystemAssigned'
+          optional: true
+        - id: parameters.zones
+          type:
+            - array
+          description: The virtual machine zones.
           optional: true
         - id: parameters.location
           type:
@@ -4303,9 +5392,25 @@ items:
         - id: parameters.plan
           type:
             - object
-          description: |-
-            The purchase plan when deploying virtual
-            machine from VM Marketplace images.
+          description: >-
+            Specifies information about the
+
+            marketplace image used to create the virtual machine. This element
+            is only
+
+            used for marketplace images. Before you can use a marketplace image
+            from an
+
+            API, you must enable the image for programmatic use.  In the Azure
+            portal,
+
+            find the marketplace image that you want to use and then click
+            **Want to
+
+            deploy programmatically, Get Started ->**. Enter any required
+            information
+
+            and then click **Save**.
           optional: true
         - id: parameters.plan.name
           type:
@@ -4320,7 +5425,10 @@ items:
         - id: parameters.plan.product
           type:
             - string
-          description: The offer ID.
+          description: |-
+            Specifies the product of the image
+            from the marketplace. This is the same value as Offer under the
+            imageReference element.
           optional: true
         - id: parameters.plan.promotionCode
           type:
@@ -4330,54 +5438,84 @@ items:
         - id: parameters.hardwareProfile
           type:
             - object
-          description: The hardware profile.
+          description: |-
+            Specifies the hardware settings
+            for the virtual machine.
           optional: true
         - id: parameters.hardwareProfile.vmSize
           type:
             - string
           description: >-
-            The virtual machine size
+            Specifies the size of
 
-            name. Possible values include: 'Basic_A0', 'Basic_A1', 'Basic_A2',
+            the virtual machine. For more information about virtual machine
+            sizes, see
 
-            'Basic_A3', 'Basic_A4', 'Standard_A0', 'Standard_A1', 'Standard_A2',
+            [Sizes for virtual
 
-            'Standard_A3', 'Standard_A4', 'Standard_A5', 'Standard_A6',
-            'Standard_A7',
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-sizes?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
-            'Standard_A8', 'Standard_A9', 'Standard_A10', 'Standard_A11',
+            <br><br> The available VM sizes depend on region and availability
+            set. For a
 
-            'Standard_A1_v2', 'Standard_A2_v2', 'Standard_A4_v2',
-            'Standard_A8_v2',
+            list of available sizes use these APIs:  <br><br> [List all
+            available
 
-            'Standard_A2m_v2', 'Standard_A4m_v2', 'Standard_A8m_v2',
-            'Standard_D1',
+            virtual machine sizes in an availability
 
-            'Standard_D2', 'Standard_D3', 'Standard_D4', 'Standard_D11',
-            'Standard_D12',
+            set](virtualmachines-list-sizes-availability-set.md) <br><br> [List
+            all
 
-            'Standard_D13', 'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2',
+            available virtual machine sizes in a
 
-            'Standard_D3_v2', 'Standard_D4_v2', 'Standard_D5_v2',
-            'Standard_D11_v2',
+            region](virtualmachines-list-sizes-region.md) <br><br> [List all
+            available
 
-            'Standard_D12_v2', 'Standard_D13_v2', 'Standard_D14_v2',
-            'Standard_D15_v2',
+            virtual machine sizes for
 
-            'Standard_DS1', 'Standard_DS2', 'Standard_DS3', 'Standard_DS4',
+            resizing](virtualmachines-list-sizes-for-resizing.md). Possible
+            values
 
-            'Standard_DS11', 'Standard_DS12', 'Standard_DS13', 'Standard_DS14',
+            include: 'Basic_A0', 'Basic_A1', 'Basic_A2', 'Basic_A3', 'Basic_A4',
 
-            'Standard_DS1_v2', 'Standard_DS2_v2', 'Standard_DS3_v2',
-            'Standard_DS4_v2',
+            'Standard_A0', 'Standard_A1', 'Standard_A2', 'Standard_A3',
+            'Standard_A4',
 
-            'Standard_DS5_v2', 'Standard_DS11_v2', 'Standard_DS12_v2',
+            'Standard_A5', 'Standard_A6', 'Standard_A7', 'Standard_A8',
+            'Standard_A9',
 
-            'Standard_DS13_v2', 'Standard_DS14_v2', 'Standard_DS15_v2',
-            'Standard_F1',
+            'Standard_A10', 'Standard_A11', 'Standard_A1_v2', 'Standard_A2_v2',
 
-            'Standard_F2', 'Standard_F4', 'Standard_F8', 'Standard_F16',
-            'Standard_F1s',
+            'Standard_A4_v2', 'Standard_A8_v2', 'Standard_A2m_v2',
+            'Standard_A4m_v2',
+
+            'Standard_A8m_v2', 'Standard_D1', 'Standard_D2', 'Standard_D3',
+
+            'Standard_D4', 'Standard_D11', 'Standard_D12', 'Standard_D13',
+
+            'Standard_D14', 'Standard_D1_v2', 'Standard_D2_v2',
+            'Standard_D3_v2',
+
+            'Standard_D4_v2', 'Standard_D5_v2', 'Standard_D11_v2',
+            'Standard_D12_v2',
+
+            'Standard_D13_v2', 'Standard_D14_v2', 'Standard_D15_v2',
+            'Standard_DS1',
+
+            'Standard_DS2', 'Standard_DS3', 'Standard_DS4', 'Standard_DS11',
+
+            'Standard_DS12', 'Standard_DS13', 'Standard_DS14',
+            'Standard_DS1_v2',
+
+            'Standard_DS2_v2', 'Standard_DS3_v2', 'Standard_DS4_v2',
+            'Standard_DS5_v2',
+
+            'Standard_DS11_v2', 'Standard_DS12_v2', 'Standard_DS13_v2',
+
+            'Standard_DS14_v2', 'Standard_DS15_v2', 'Standard_F1',
+            'Standard_F2',
+
+            'Standard_F4', 'Standard_F8', 'Standard_F16', 'Standard_F1s',
 
             'Standard_F2s', 'Standard_F4s', 'Standard_F8s', 'Standard_F16s',
 
@@ -4399,14 +5537,26 @@ items:
         - id: parameters.storageProfile
           type:
             - object
-          description: The storage profile.
+          description: |-
+            Specifies the storage settings
+            for the virtual machine disks.
           optional: true
         - id: parameters.storageProfile.imageReference
           type:
             - object
-          description: |-
-            The image
-            reference.
+          description: >-
+            Specifies
+
+            information about the image to use. You can specify information
+            about
+
+            platform images, marketplace images, or virtual machine images. This
+            element
+
+            is required when you want to use a platform image, marketplace
+            image, or
+
+            virtual machine image, but is not used in other creation operations.
           optional: true
         - id: parameters.storageProfile.imageReference.publisher
           type:
@@ -4418,9 +5568,13 @@ items:
         - id: parameters.storageProfile.imageReference.offer
           type:
             - string
-          description: |-
-            The image
-            offer.
+          description: >-
+            Specifies
+
+            the offer of the platform image or marketplace image used to create
+            the
+
+            virtual machine.
           optional: true
         - id: parameters.storageProfile.imageReference.sku
           type:
@@ -4433,15 +5587,23 @@ items:
           type:
             - string
           description: >-
-            The image
+            Specifies
 
-            version. The allowed formats are Major.Minor.Build or 'latest'.
-            Major, Minor
+            the version of the platform image or marketplace image used to
+            create the
 
-            and Build are decimal numbers. Specify 'latest' to use the latest
-            version of
+            virtual machine. The allowed formats are Major.Minor.Build or
+            'latest'.
 
-            the image.
+            Major, Minor, and Build are decimal numbers. Specify 'latest' to use
+            the
+
+            latest version of an image available at deploy time. Even if you use
+
+            'latest', the VM image will not automatically update after deploy
+            time even
+
+            if a new version becomes available.
           optional: true
         - id: parameters.storageProfile.imageReference.id
           type:
@@ -4451,29 +5613,50 @@ items:
         - id: parameters.storageProfile.osDisk
           type:
             - object
-          description: The OS disk.
+          description: >-
+            Specifies information
+
+            about the operating system disk used by the virtual machine.
+            <br><br> For
+
+            more information about disks, see [About disks and VHDs for Azure
+            virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
           optional: true
         - id: parameters.storageProfile.osDisk.osType
           type:
             - string
-          description: |-
-            The Operating
-            System type. Possible values include: 'Windows', 'Linux'
+          description: >-
+            This property
+
+            allows you to specify the type of the OS that is included in the
+            disk if
+
+            creating a VM from user-image or a specialized VHD. <br><br>
+            Possible values
+
+            are: <br><br> **Windows** <br><br> **Linux**. Possible values
+            include:
+
+            'Windows', 'Linux'
           optional: true
         - id: parameters.storageProfile.osDisk.encryptionSettings
           type:
             - object
           description: |-
-            The
-            disk encryption settings.
+            Specifies the encryption settings for the OS Disk. <br><br> Minimum
+            api-version: 2015-06-15
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.diskEncryptionKey
           type:
             - object
-          description: |-
-            The
-            disk encryption key which is a Key Vault Secret.
+          description: >-
+            Specifies the location of the disk encryption key, which is a Key
+            Vault
+
+            Secret.
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.diskEncryptionKey.secretUrl
@@ -4488,15 +5671,13 @@ items:
         - id: parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey
           type:
             - object
-          description: |-
-            The
-            key encryption key which is Key Vault Key.
+          description: Specifies the location of the key encryption key in Key Vault.
           optional: true
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey.keyUrl
           type:
             - string
-          description: The URL referencing a key in a Key Vault.
+          description: The URL referencing a key encryption key in Key Vault.
         - id: >-
             parameters.storageProfile.osDisk.encryptionSettings.keyEncryptionKey.sourceVault
           type:
@@ -4528,39 +5709,76 @@ items:
             The source user
 
             image virtual hard disk. The virtual hard disk will be copied before
-            using
+            being
 
-            it to attach to the virtual machine. If SourceImage is provided, the
+            attached to the virtual machine. If SourceImage is provided, the
+            destination
 
-            destination virtual hard disk must not exist.
+            virtual hard drive must not exist.
           optional: true
         - id: parameters.storageProfile.osDisk.image.uri
           type:
             - string
           description: |-
-            The virtual
-            hard disk's URI. Must be a valid URI to a virtual hard disk.
+            Specifies the
+            virtual hard disk's uri.
           optional: true
         - id: parameters.storageProfile.osDisk.caching
           type:
             - string
-          description: |-
-            The caching type.
-            Possible values include: 'None', 'ReadOnly', 'ReadWrite'
+          description: >-
+            Specifies the
+
+            caching requirements. <br><br> Possible values are: <br><br>
+            **None**
+
+            <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default:
+            **None for
+
+            Standard storage. ReadOnly for Premium storage**. Possible values
+            include:
+
+            'None', 'ReadOnly', 'ReadWrite'
           optional: true
         - id: parameters.storageProfile.osDisk.createOption
           type:
             - string
-          description: |-
-            The create
-            option. Possible values include: 'fromImage', 'empty', 'attach'
+          description: >-
+            Specifies how
+
+            the virtual machine should be created.<br><br> Possible values
+            are:<br><br>
+
+            **Attach** \u2013 This value is used when you are using a
+            specialized disk
+
+            to create the virtual machine.<br><br> **FromImage** \u2013 This
+            value is
+
+            used when you are using an image to create the virtual machine. If
+            you are
+
+            using a platform image, you also use the imageReference element
+            described
+
+            above. If you are using a marketplace image, you  also use the plan
+            element
+
+            previously described. Possible values include: 'FromImage', 'Empty',
+
+            'Attach'
         - id: parameters.storageProfile.osDisk.diskSizeGB
           type:
             - number
-          description: |-
-            The initial
-            disk size, in GB, for blank data disks, and the new desired size for
-            resizing existing OS and data disks.
+          description: >-
+            Specifies the
+
+            size of an empty data disk in gigabytes. This element can be used to
+
+            overwrite the name of the disk in a virtual machine image. <br><br>
+            This
+
+            value cannot be larger than 1023 GB
           optional: true
         - id: parameters.storageProfile.osDisk.managedDisk
           type:
@@ -4573,9 +5791,13 @@ items:
           type:
             - string
           description: >-
-            The
+            Specifies
 
-            Storage Account type. Possible values include: 'Standard_LRS',
+            the storage account type for the managed disk. Possible values are:
+
+            Standard_LRS or Premium_LRS. Possible values include:
+            'Standard_LRS',
+
             'Premium_LRS'
           optional: true
         - id: parameters.storageProfile.osDisk.managedDisk.id
@@ -4588,33 +5810,129 @@ items:
         - id: parameters.storageProfile.dataDisks
           type:
             - array
-          description: The data disks.
+          description: >-
+            Specifies the
+
+            parameters that are used to add a data disk to a virtual machine.
+            <br><br>
+
+            For more information about disks, see [About disks and VHDs for
+            Azure
+
+            virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
           optional: true
         - id: parameters.osProfile
           type:
             - object
-          description: The OS profile.
+          description: |-
+            Specifies the operating system
+            settings for the virtual machine.
           optional: true
         - id: parameters.osProfile.computerName
           type:
             - string
-          description: |-
+          description: >-
             Specifies the host OS
-            name of the virtual machine.
+
+            name of the virtual machine. <br><br> **Max-length (Windows):** 15
+
+            characters <br><br> **Max-length (Linux):** 64 characters. <br><br>
+            For
+
+            naming conventions and restrictions see [Azure infrastructure
+            services
+
+            implementation
+
+            guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions).
           optional: true
         - id: parameters.osProfile.adminUsername
           type:
             - string
-          description: |-
+          description: >-
             Specifies the name of
-            the administrator account.
+
+            the administrator account. <br><br> **Windows-only restriction:**
+            Cannot end
+
+            in "." <br><br> **Disallowed values:** "administrator", "admin",
+            "user",
+
+            "user1", "test", "user2", "test1", "user3", "admin1", "1", "123",
+            "a",
+
+            "actuser", "adm", "admin2", "aspnet", "backup", "console", "david",
+            "guest",
+
+            "john", "owner", "root", "server", "sql", "support",
+            "support_388945a0",
+
+            "sys", "test2", "test3", "user4", "user5". <br><br> **Minimum-length
+
+            (Linux):** 1  character <br><br> **Max-length (Linux):** 64
+            characters
+
+            <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For
+            root
+
+            access to the Linux VM, see [Using root privileges on Linux virtual
+            machines
+
+            in
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li>
+
+            For a list of built-in system users on Linux that should not be used
+            in this
+
+            field, see [Selecting User Names for Linux on
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
           optional: true
         - id: parameters.osProfile.adminPassword
           type:
             - string
-          description: |-
+          description: >-
             Specifies the password
-            of the administrator account.
+
+            of the administrator account. <br><br> **Minimum-length (Windows):**
+            8
+
+            characters <br><br> **Minimum-length (Linux):** 6 characters
+            <br><br>
+
+            **Max-length (Windows):** 123 characters <br><br> **Max-length
+            (Linux):** 72
+
+            characters <br><br> **Complexity requirements:** 3 out of 4
+            conditions below
+
+            need to be fulfilled <br> Has lower characters <br>Has upper
+            characters <br>
+
+            Has a digit <br> Has a special character (Regex match [\W_])
+            <br><br>
+
+            **Disallowed values:** "abc@123", "P@$$w0rd", "P@ssw0rd",
+            "P@ssword123",
+
+            "Pa$$word", "pass@word1", "Password!", "Password1", "Password22",
+
+            "iloveyou!" <br><br> For resetting the password, see [How to reset
+            the
+
+            Remote Desktop service or its login password in a Windows
+
+            VM](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-reset-rdp?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> For resetting root password, see [Manage users, SSH, and
+            check or
+
+            repair disks on Azure Linux VMs using the VMAccess
+
+            Extension](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-vmaccess-extension?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#reset-root-password)
           optional: true
         - id: parameters.osProfile.customData
           type:
@@ -4628,14 +5946,19 @@ items:
             binary array that is saved as a file on the Virtual Machine. The
             maximum
 
-            length of the binary array is 65535 bytes
+            length of the binary array is 65535 bytes. <br><br> For using
+            cloud-init for
+
+            your VM, see [Using cloud-init to customize a Linux VM during
+
+            creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
           optional: true
         - id: parameters.osProfile.windowsConfiguration
           type:
             - object
           description: |-
-            The Windows
-            configuration of the OS profile.
+            Specifies
+            Windows operating system settings on the virtual machine.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.provisionVMAgent
           type:
@@ -4643,41 +5966,47 @@ items:
           description: >-
             Indicates
 
-            whether the virtual machine agent should be provisioned on the
-            Virtual
+            whether virtual machine agent should be provisioned on the virtual
+            machine.
 
-            Machine. If not specified, then the default behavior is to set it to
-            true.
+            <br><br> When this property is not specified in the request body,
+            default
+
+            behavior is to set it to true.  This will ensure that VM Agent is
+            installed
+
+            on the VM so that extensions can be added to the VM later.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.enableAutomaticUpdates
           type:
             - boolean
           description: |-
             Indicates
-            whether Windows updates are automatically installed on the VM.
+            whether virtual machine is enabled for automatic updates.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.timeZone
           type:
             - string
-          description: |-
-            The
-            time zone of the VM
+          description: >-
+            Specifies the time zone of the virtual machine. e.g. "Pacific
+            Standard Time"
           optional: true
         - id: parameters.osProfile.windowsConfiguration.additionalUnattendContent
           type:
             - array
           description: >-
-            Additional base-64 encoded XML formatted information that can be
-            included in
+            Specifies additional base-64 encoded XML formatted information that
+            can be
 
-            the Unattend.xml file.
+            included in the Unattend.xml file, which is used by Windows Setup.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.winRM
           type:
             - object
           description: |-
-            The
-            Windows Remote Management configuration of the VM
+            Specifies
+            the Windows Remote Management listeners. This enables remote Windows
+            PowerShell.
           optional: true
         - id: parameters.osProfile.windowsConfiguration.winRM.listeners
           type:
@@ -4687,9 +6016,22 @@ items:
         - id: parameters.osProfile.linuxConfiguration
           type:
             - object
-          description: |-
-            The Linux
-            configuration of the OS profile.
+          description: >-
+            Specifies the
+
+            Linux operating system settings on the virtual machine. <br><br>For
+            a list
+
+            of supported Linux distributions, see [Linux on Azure-Endorsed
+
+            Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-endorsed-distros?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+
+            <br><br> For running non-endorsed distributions, see [Information
+            for
+
+            Non-Endorsed
+
+            Distributions](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-create-upload-generic?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
           optional: true
         - id: >-
             parameters.osProfile.linuxConfiguration.disablePasswordAuthentication
@@ -4701,8 +6043,8 @@ items:
           type:
             - object
           description: |-
-            The SSH
-            configuration for linux VMs.
+            Specifies the
+            ssh key configuration for a Linux OS.
           optional: true
         - id: parameters.osProfile.linuxConfiguration.ssh.publicKeys
           type:
@@ -4715,13 +6057,15 @@ items:
           type:
             - array
           description: |-
-            The list of certificates for
-            addition to the VM.
+            Specifies set of certificates
+            that should be installed onto the virtual machine.
           optional: true
         - id: parameters.networkProfile
           type:
             - object
-          description: The network profile.
+          description: |-
+            Specifies the network interfaces
+            of the virtual machine.
           optional: true
         - id: parameters.networkProfile.networkInterfaces
           type:
@@ -4729,7 +6073,7 @@ items:
           description: >-
             Specifies the
 
-            list of resource IDs for the network interfaces associated with the
+            list of resource Ids for the network interfaces associated with the
             virtual
 
             machine.
@@ -4737,7 +6081,9 @@ items:
         - id: parameters.diagnosticsProfile
           type:
             - object
-          description: The diagnostics profile.
+          description: |-
+            Specifies the boot
+            diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.
           optional: true
         - id: parameters.diagnosticsProfile.bootDiagnostics
           type:
@@ -4745,11 +6091,18 @@ items:
           description: >-
             Boot
 
-            Diagnostics is a debugging feature which allows the user to view
-            console
+            Diagnostics is a debugging feature which allows you to view Console
+            Output
 
-            output and/or a screenshot of the virtual machine from the
-            hypervisor.
+            and Screenshot to diagnose VM status. <br><br> For Linux Virtual
+            Machines,
+
+            you can easily view the output of your console log. <br><br> For
+            both
+
+            Windows and Linux virtual machines, Azure also enables you to see a
+
+            screenshot of the VM from the hypervisor.
           optional: true
         - id: parameters.diagnosticsProfile.bootDiagnostics.enabled
           type:
@@ -4760,15 +6113,39 @@ items:
           type:
             - string
           description: |-
-            URI of the storage account to use for placing the console output and
+            Uri of the storage account to use for placing the console output and
             screenshot.
           optional: true
         - id: parameters.availabilitySet
           type:
             - object
-          description: |-
-            The reference Id of the
-            availability set to which the virtual machine belongs.
+          description: >-
+            Specifies information about the
+
+            availability set that the virtual machine should be assigned to.
+            Virtual
+
+            machines specified in the same availability set are allocated to
+            different
+
+            nodes to maximize availability. For more information about
+            availability
+
+            sets, see [Manage the availability of virtual
+
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+
+            <br><br> For more information on Azure planned maintainance, see
+            [Planned
+
+            maintenance for virtual machines in
+
+            Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> Currently, a VM can only be added to availability set at
+            creation
+
+            time. An existing VM cannot be added to an availability set.
           optional: true
         - id: parameters.availabilitySet.id
           type:
@@ -4784,7 +6161,23 @@ items:
             that is being used was licensed on-premises. This element is only
             used for
 
-            images that contain the Windows Server operating system.
+            images that contain the Windows Server operating system. <br><br>
+            Possible
+
+            values are: <br><br> Windows_Client <br><br> Windows_Server <br><br>
+            If this
+
+            element is included in a request for an update, the value must match
+            the
+
+            initial value. This value cannot be updated. <br><br> For more
+            information,
+
+            see [Azure Hybrid Use Benefit for Windows
+
+            Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+
+            <br><br> Minimum api-version: 2015-06-15
           optional: true
         - id: parameters.identity
           type:
@@ -4805,6 +6198,11 @@ items:
             which implicitly creates an identity. Possible values include:
 
             'SystemAssigned'
+          optional: true
+        - id: parameters.zones
+          type:
+            - array
+          description: The virtual machine zones.
           optional: true
         - id: parameters.location
           type:
@@ -6034,6 +7432,17 @@ items:
           type:
             - string
           description: The run command id.
+        - id: parameters.script
+          type:
+            - array
+          description: >-
+            Optional. The script to be executed.
+
+            When this value is given, the given script will override the default
+            script
+
+            of the command.
+          optional: true
         - id: parameters.parameters
           type:
             - array
@@ -6122,6 +7531,17 @@ items:
           type:
             - string
           description: The run command id.
+        - id: parameters.script
+          type:
+            - array
+          description: >-
+            Optional. The script to be executed.
+
+            When this value is given, the given script will override the default
+            script
+
+            of the command.
+          optional: true
         - id: parameters.parameters
           type:
             - array

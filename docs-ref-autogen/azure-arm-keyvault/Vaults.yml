@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-keyvault.Vaults
       path: lib\services\keyVaultManagement\lib\operations\vaults.js
-      startLine: 1073
+      startLine: 1676
       remote:
         branch: jsdoc
         path: lib\services\keyVaultManagement\lib\operations\vaults.js
@@ -24,11 +24,21 @@ items:
       - 'azure-arm-keyvault.Vaults#get'
       - 'azure-arm-keyvault.Vaults#listByResourceGroupWithHttpOperationResponse'
       - 'azure-arm-keyvault.Vaults#listByResourceGroup'
+      - 'azure-arm-keyvault.Vaults#listDeletedWithHttpOperationResponse'
+      - 'azure-arm-keyvault.Vaults#listDeleted'
+      - 'azure-arm-keyvault.Vaults#getDeletedWithHttpOperationResponse'
+      - 'azure-arm-keyvault.Vaults#getDeleted'
+      - 'azure-arm-keyvault.Vaults#purgeDeletedWithHttpOperationResponse'
+      - 'azure-arm-keyvault.Vaults#purgeDeleted'
       - 'azure-arm-keyvault.Vaults#listWithHttpOperationResponse'
       - 'azure-arm-keyvault.Vaults#list'
+      - 'azure-arm-keyvault.Vaults#beginPurgeDeletedWithHttpOperationResponse'
+      - 'azure-arm-keyvault.Vaults#beginPurgeDeleted'
       - >-
         azure-arm-keyvault.Vaults#listByResourceGroupNextWithHttpOperationResponse
       - 'azure-arm-keyvault.Vaults#listByResourceGroupNext'
+      - 'azure-arm-keyvault.Vaults#listDeletedNextWithHttpOperationResponse'
+      - 'azure-arm-keyvault.Vaults#listDeletedNext'
       - 'azure-arm-keyvault.Vaults#listNextWithHttpOperationResponse'
       - 'azure-arm-keyvault.Vaults#listNext'
     langs:
@@ -102,13 +112,6 @@ items:
           type:
             - object
           description: Properties of the vault
-        - id: parameters.properties.vaultUri
-          type:
-            - string
-          description: |-
-            The URI of the vault for
-            performing operations on keys and secrets.
-          optional: true
         - id: parameters.properties.tenantId
           type:
             - azure-arm-keyvault.uuid
@@ -141,6 +144,14 @@ items:
             array
 
             must use the same tenant ID as the key vault's tenant ID.
+          optional: true
+        - id: parameters.properties.vaultUri
+          type:
+            - string
+          description: |-
+            The URI of the vault for
+            performing operations on keys and secrets.
+          optional: true
         - id: parameters.properties.enabledForDeployment
           type:
             - boolean
@@ -178,7 +189,18 @@ items:
             specify whether the 'soft delete' functionality is enabled for this
             key
 
-            vault.
+            vault. It does not accept false value.
+          optional: true
+        - id: parameters.properties.createMode
+          type:
+            - string
+          description: >-
+            The vault's create mode
+
+            to indicate whether the vault need to be recovered or not. Possible
+            values
+
+            include: 'recover', 'default'
           optional: true
         - id: options
           type:
@@ -278,13 +300,6 @@ items:
           type:
             - object
           description: Properties of the vault
-        - id: parameters.properties.vaultUri
-          type:
-            - string
-          description: |-
-            The URI of the vault for
-            performing operations on keys and secrets.
-          optional: true
         - id: parameters.properties.tenantId
           type:
             - azure-arm-keyvault.uuid
@@ -317,6 +332,14 @@ items:
             array
 
             must use the same tenant ID as the key vault's tenant ID.
+          optional: true
+        - id: parameters.properties.vaultUri
+          type:
+            - string
+          description: |-
+            The URI of the vault for
+            performing operations on keys and secrets.
+          optional: true
         - id: parameters.properties.enabledForDeployment
           type:
             - boolean
@@ -354,7 +377,18 @@ items:
             specify whether the 'soft delete' functionality is enabled for this
             key
 
-            vault.
+            vault. It does not accept false value.
+          optional: true
+        - id: parameters.properties.createMode
+          type:
+            - string
+          description: >-
+            The vault's create mode
+
+            to indicate whether the vault need to be recovered or not. Possible
+            values
+
+            include: 'recover', 'default'
           optional: true
         - id: options
           type:
@@ -803,6 +837,386 @@ items:
         optionalCallback)
     langs:
       - js
+  - uid: 'azure-arm-keyvault.Vaults#listDeletedWithHttpOperationResponse'
+    id: 'azure-arm-keyvault.Vaults#listDeletedWithHttpOperationResponse'
+    parent: azure-arm-keyvault.Vaults
+    name: listDeletedWithHttpOperationResponse(options)
+    summary: Gets information about the deleted vaults in a subscription.
+    fullName: azure-arm-keyvault.Vaults.listDeletedWithHttpOperationResponse(options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<DeletedVaultListResult>} - The deserialized
+          result object.
+        value: >-
+          {HttpOperationResponse<DeletedVaultListResult>} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: function listDeletedWithHttpOperationResponse(options)
+    langs:
+      - js
+  - uid: 'azure-arm-keyvault.Vaults#listDeleted'
+    id: 'azure-arm-keyvault.Vaults#listDeleted'
+    parent: azure-arm-keyvault.Vaults
+    name: 'listDeleted(options, optionalCallback)'
+    summary: Gets information about the deleted vaults in a subscription.
+    fullName: 'azure-arm-keyvault.Vaults.listDeleted(options, optionalCallback)'
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{DeletedVaultListResult} - The deserialized result object.'
+        value: '{DeletedVaultListResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link DeletedVaultListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link DeletedVaultListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function listDeleted(options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-keyvault.Vaults#getDeletedWithHttpOperationResponse'
+    id: 'azure-arm-keyvault.Vaults#getDeletedWithHttpOperationResponse'
+    parent: azure-arm-keyvault.Vaults
+    name: 'getDeletedWithHttpOperationResponse(vaultName, location, options)'
+    summary: Gets the deleted Azure key vault.
+    fullName: >-
+      azure-arm-keyvault.Vaults.getDeletedWithHttpOperationResponse(vaultName,
+      location, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<DeletedVault>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<DeletedVault>} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: vaultName
+          type:
+            - string
+          description: The name of the vault.
+        - id: location
+          type:
+            - string
+          description: The location of the deleted vault.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function getDeletedWithHttpOperationResponse(vaultName, location,
+        options)
+    langs:
+      - js
+  - uid: 'azure-arm-keyvault.Vaults#getDeleted'
+    id: 'azure-arm-keyvault.Vaults#getDeleted'
+    parent: azure-arm-keyvault.Vaults
+    name: 'getDeleted(vaultName, location, options, optionalCallback)'
+    summary: Gets the deleted Azure key vault.
+    fullName: >-
+      azure-arm-keyvault.Vaults.getDeleted(vaultName, location, options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{DeletedVault} - The deserialized result object.'
+        value: '{DeletedVault} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link DeletedVault} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link DeletedVault} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: vaultName
+          type:
+            - string
+          description: The name of the vault.
+        - id: location
+          type:
+            - string
+          description: The location of the deleted vault.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function getDeleted(vaultName, location, options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-keyvault.Vaults#purgeDeletedWithHttpOperationResponse'
+    id: 'azure-arm-keyvault.Vaults#purgeDeletedWithHttpOperationResponse'
+    parent: azure-arm-keyvault.Vaults
+    name: 'purgeDeletedWithHttpOperationResponse(vaultName, location, options)'
+    summary: |-
+      Permanently deletes the specified vault. aka Purges the deleted Azure key
+      vault.
+    fullName: >-
+      azure-arm-keyvault.Vaults.purgeDeletedWithHttpOperationResponse(vaultName,
+      location, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: vaultName
+          type:
+            - string
+          description: The name of the soft-deleted vault.
+        - id: location
+          type:
+            - string
+          description: The location of the soft-deleted vault.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function purgeDeletedWithHttpOperationResponse(vaultName, location,
+        options)
+    langs:
+      - js
+  - uid: 'azure-arm-keyvault.Vaults#purgeDeleted'
+    id: 'azure-arm-keyvault.Vaults#purgeDeleted'
+    parent: azure-arm-keyvault.Vaults
+    name: 'purgeDeleted(vaultName, location, options, optionalCallback)'
+    summary: |-
+      Permanently deletes the specified vault. aka Purges the deleted Azure key
+      vault.
+    fullName: >-
+      azure-arm-keyvault.Vaults.purgeDeleted(vaultName, location, options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: vaultName
+          type:
+            - string
+          description: The name of the soft-deleted vault.
+        - id: location
+          type:
+            - string
+          description: The location of the soft-deleted vault.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function purgeDeleted(vaultName, location, options, optionalCallback)'
+    langs:
+      - js
   - uid: 'azure-arm-keyvault.Vaults#listWithHttpOperationResponse'
     id: 'azure-arm-keyvault.Vaults#listWithHttpOperationResponse'
     parent: azure-arm-keyvault.Vaults
@@ -927,6 +1341,140 @@ items:
 
           {Promise} A promise is returned
       content: 'function list(options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-keyvault.Vaults#beginPurgeDeletedWithHttpOperationResponse'
+    id: 'azure-arm-keyvault.Vaults#beginPurgeDeletedWithHttpOperationResponse'
+    parent: azure-arm-keyvault.Vaults
+    name: 'beginPurgeDeletedWithHttpOperationResponse(vaultName, location, options)'
+    summary: |-
+      Permanently deletes the specified vault. aka Purges the deleted Azure key
+      vault.
+    fullName: >-
+      azure-arm-keyvault.Vaults.beginPurgeDeletedWithHttpOperationResponse(vaultName,
+      location, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: vaultName
+          type:
+            - string
+          description: The name of the soft-deleted vault.
+        - id: location
+          type:
+            - string
+          description: The location of the soft-deleted vault.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginPurgeDeletedWithHttpOperationResponse(vaultName, location,
+        options)
+    langs:
+      - js
+  - uid: 'azure-arm-keyvault.Vaults#beginPurgeDeleted'
+    id: 'azure-arm-keyvault.Vaults#beginPurgeDeleted'
+    parent: azure-arm-keyvault.Vaults
+    name: 'beginPurgeDeleted(vaultName, location, options, optionalCallback)'
+    summary: |-
+      Permanently deletes the specified vault. aka Purges the deleted Azure key
+      vault.
+    fullName: >-
+      azure-arm-keyvault.Vaults.beginPurgeDeleted(vaultName, location, options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: vaultName
+          type:
+            - string
+          description: The name of the soft-deleted vault.
+        - id: location
+          type:
+            - string
+          description: The location of the soft-deleted vault.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function beginPurgeDeleted(vaultName, location, options,
+        optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-keyvault.Vaults#listByResourceGroupNextWithHttpOperationResponse'
@@ -1063,6 +1611,136 @@ items:
       content: >-
         function listByResourceGroupNext(nextPageLink, options,
         optionalCallback)
+    langs:
+      - js
+  - uid: 'azure-arm-keyvault.Vaults#listDeletedNextWithHttpOperationResponse'
+    id: 'azure-arm-keyvault.Vaults#listDeletedNextWithHttpOperationResponse'
+    parent: azure-arm-keyvault.Vaults
+    name: 'listDeletedNextWithHttpOperationResponse(nextPageLink, options)'
+    summary: Gets information about the deleted vaults in a subscription.
+    fullName: >-
+      azure-arm-keyvault.Vaults.listDeletedNextWithHttpOperationResponse(nextPageLink,
+      options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<DeletedVaultListResult>} - The deserialized
+          result object.
+        value: >-
+          {HttpOperationResponse<DeletedVaultListResult>} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: 'function listDeletedNextWithHttpOperationResponse(nextPageLink, options)'
+    langs:
+      - js
+  - uid: 'azure-arm-keyvault.Vaults#listDeletedNext'
+    id: 'azure-arm-keyvault.Vaults#listDeletedNext'
+    parent: azure-arm-keyvault.Vaults
+    name: 'listDeletedNext(nextPageLink, options, optionalCallback)'
+    summary: Gets information about the deleted vaults in a subscription.
+    fullName: >-
+      azure-arm-keyvault.Vaults.listDeletedNext(nextPageLink, options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{DeletedVaultListResult} - The deserialized result object.'
+        value: '{DeletedVaultListResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link DeletedVaultListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link DeletedVaultListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function listDeletedNext(nextPageLink, options, optionalCallback)'
     langs:
       - js
   - uid: 'azure-arm-keyvault.Vaults#listNextWithHttpOperationResponse'

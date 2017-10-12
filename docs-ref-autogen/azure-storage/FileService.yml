@@ -47,7 +47,7 @@ items:
     source:
       id: azure-storage.FileService
       path: lib\services\file\fileservice.core.js
-      startLine: 89
+      startLine: 90
       remote:
         branch: master
         path: lib\services\file\fileservice.core.js
@@ -61,6 +61,7 @@ items:
       - 'azure-storage.FileService#listSharesSegmentedWithPrefix'
       - 'azure-storage.FileService#doesShareExist'
       - 'azure-storage.FileService#createShare'
+      - 'azure-storage.FileService#createShareSnapshot'
       - 'azure-storage.FileService#createShareIfNotExists'
       - 'azure-storage.FileService#getShareProperties'
       - 'azure-storage.FileService#setShareProperties'
@@ -360,7 +361,7 @@ items:
           description: >-
             Include this parameter to specify that the share's metadata be
             returned as part of the response body. (allowed values: '',
-            'metadata')
+            'metadata', 'snapshots' or any combination of them)
                                                                                     **Note** that all metadata names returned from the server will be converted to lower case by NodeJS itself as metadata is set via HTTP headers and HTTP header names are case insensitive.
           optional: true
         - id: options.timeoutIntervalInMs
@@ -468,7 +469,7 @@ items:
           description: >-
             Include this parameter to specify that the share's metadata be
             returned as part of the response body. (allowed values: '',
-            'metadata')
+            'metadata', 'snapshots' or any combination of them)
                                                                                     **Note** that all metadata names returned from the server will be converted to lower case by NodeJS itself as metadata is set via HTTP headers and HTTP header names are case insensitive.
           optional: true
         - id: options.timeoutIntervalInMs
@@ -539,6 +540,11 @@ items:
           type:
             - object
           description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
           optional: true
         - id: options.locationMode
           type:
@@ -684,6 +690,86 @@ items:
       content: 'function createShare(share, options, callback)'
     langs:
       - js
+  - uid: 'azure-storage.FileService#createShareSnapshot'
+    id: 'azure-storage.FileService#createShareSnapshot'
+    parent: azure-storage.FileService
+    name: 'createShareSnapshot(share, options, callback)'
+    summary: Creates a share snapshot.
+    fullName: 'azure-storage.FileService.createShareSnapshot(share, options, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: share
+          type:
+            - string
+          description: The share name.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.locationMode
+          type:
+            - azure-storage.LocationMode
+          description: >-
+            Specifies the location mode used to decide which location the
+            request should be sent to. 
+                                                                            Please see StorageUtilities.LocationMode for the possible values.
+          optional: true
+        - id: options.metadata
+          type:
+            - object
+          description: The metadata key/value pairs.
+          optional: true
+        - id: options.timeoutIntervalInMs
+          type:
+            - azure-storage.int
+          description: >-
+            The server timeout interval, in milliseconds, to use for the
+            request.
+          optional: true
+        - id: options.clientRequestTimeoutInMs
+          type:
+            - azure-storage.int
+          description: >-
+            The timeout of client requests, in milliseconds, to use for the
+            request.
+          optional: true
+        - id: options.maximumExecutionTimeInMs
+          type:
+            - azure-storage.int
+          description: >-
+            The maximum execution time, in milliseconds, across all potential
+            retries, to use when making this request.
+                                                                            The maximum execution time interval begins at the time that the client begins building the request. The maximum
+                                                                            execution time is checked intermittently while performing requests, and before executing retries.
+          optional: true
+        - id: options.clientRequestId
+          type:
+            - string
+          description: >-
+            A string that represents the client request ID with a 1KB character
+            limit.
+          optional: true
+        - id: options.useNagleAlgorithm
+          type:
+            - azure-storage.bool
+          description: >-
+            Determines whether the Nagle algorithm is used; true to use the
+            Nagle algorithm; otherwise, false.
+                                                                            The default value is false.
+          optional: true
+        - id: callback
+          type:
+            - azure-storage.errorOrResult
+          description: |-
+            `error` will contain information
+                                                                            if an error occurs; otherwise `result` will contain
+                                                                            the ID of the snapshot.
+                                                                            `response` will contain information related to this operation.
+      content: 'function createShareSnapshot(share, options, callback)'
+    langs:
+      - js
   - uid: 'azure-storage.FileService#createShareIfNotExists'
     id: 'azure-storage.FileService#createShareIfNotExists'
     parent: azure-storage.FileService
@@ -788,6 +874,11 @@ items:
           type:
             - object
           description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
           optional: true
         - id: options.locationMode
           type:
@@ -1021,6 +1112,11 @@ items:
           type:
             - object
           description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
           optional: true
         - id: options.locationMode
           type:
@@ -1339,6 +1435,18 @@ items:
             - object
           description: The request options.
           optional: true
+        - id: options.deleteSnapshots
+          type:
+            - string
+          description: >-
+            The snapshot delete option. See
+            azure.FileUtilities.ShareSnapshotDeleteOptions.*.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The share snapshot identifier.
+          optional: true
         - id: options.locationMode
           type:
             - azure-storage.LocationMode
@@ -1416,6 +1524,18 @@ items:
           type:
             - object
           description: The request options.
+          optional: true
+        - id: options.deleteSnapshots
+          type:
+            - string
+          description: >-
+            The snapshot delete option. See
+            azure.FileUtilities.ShareSnapshotDeleteOptions.*.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The share snapshot identifier.
           optional: true
         - id: options.locationMode
           type:
@@ -1498,6 +1618,11 @@ items:
           type:
             - object
           description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The share snapshot identifier.
           optional: true
         - id: options.locationMode
           type:
@@ -1762,6 +1887,11 @@ items:
             - object
           description: The request options.
           optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
+          optional: true
         - id: options.locationMode
           type:
             - azure-storage.LocationMode
@@ -2017,6 +2147,11 @@ items:
             - object
           description: The request options.
           optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
+          optional: true
         - id: options.maxResults
           type:
             - azure-storage.int
@@ -2120,6 +2255,11 @@ items:
             - object
           description: The request options.
           optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
+          optional: true
         - id: options.maxResults
           type:
             - azure-storage.int
@@ -2190,14 +2330,16 @@ items:
   - uid: 'azure-storage.FileService#getDirectoryMetadata'
     id: 'azure-storage.FileService#getDirectoryMetadata'
     parent: azure-storage.FileService
-    name: 'getDirectoryMetadata(share, directory, callback)'
+    name: 'getDirectoryMetadata(share, directory, options, callback)'
     summary: >-
       Returns all user-defined metadata for the specified directory.
 
       **Note** that all metadata names returned from the server will be
       converted to lower case by NodeJS itself as metadata is set via HTTP
       headers and HTTP header names are case insensitive.
-    fullName: 'azure-storage.FileService.getDirectoryMetadata(share, directory, callback)'
+    fullName: >-
+      azure-storage.FileService.getDirectoryMetadata(share, directory, options,
+      callback)
     type: Function
     syntax:
       parameters:
@@ -2209,6 +2351,16 @@ items:
           type:
             - string
           description: The directory name. Use '' to refer to the base directory.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
+          optional: true
         - id: options.timeoutIntervalInMs
           type:
             - azure-storage.int
@@ -2255,7 +2407,7 @@ items:
                                                                                     if an error occurs; otherwise `[result](xref:azure-storage.DirectoryResult)` will contain
                                                                                     information about the directory.
                                                                                     `response` will contain information related to this operation.
-      content: 'function getDirectoryMetadata(share, directory, callback)'
+      content: 'function getDirectoryMetadata(share, directory, options, callback)'
     langs:
       - js
   - uid: 'azure-storage.FileService#setDirectoryMetadata'
@@ -2464,11 +2616,11 @@ items:
   - uid: 'azure-storage.FileService#getUrl'
     id: 'azure-storage.FileService#getUrl'
     parent: azure-storage.FileService
-    name: 'getUrl(share, directory, file, sasToken, primary)'
+    name: 'getUrl(share, directory, file, sasToken, primary, shareSnapshotId)'
     summary: Retrieves a file or directory URL.
     fullName: >-
       azure-storage.FileService.getUrl(share, directory, file, sasToken,
-      primary)
+      primary, shareSnapshotId)
     type: Function
     syntax:
       parameters:
@@ -2499,11 +2651,18 @@ items:
             A boolean representing whether to use the primary or the secondary
             endpoint.
           optional: true
+        - id: shareSnapshotId
+          type:
+            - boolean
+          description: The snapshot identifier of the share.
+          optional: true
       return:
         type:
           - string
         description: The formatted URL string.
-      content: 'function getUrl(share, directory, file, sasToken, primary)'
+      content: >-
+        function getUrl(share, directory, file, sasToken, primary,
+        shareSnapshotId)
     langs:
       - js
   - uid: 'azure-storage.FileService#getFileProperties'
@@ -2543,6 +2702,11 @@ items:
           type:
             - object
           description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
           optional: true
         - id: options.locationMode
           type:
@@ -2604,7 +2768,7 @@ items:
   - uid: 'azure-storage.FileService#getFileMetadata'
     id: 'azure-storage.FileService#getFileMetadata'
     parent: azure-storage.FileService
-    name: 'getFileMetadata(share, directory, file, callback)'
+    name: 'getFileMetadata(share, directory, file, options, callback)'
     summary: >-
       Returns all user-defined metadata for the specified file.
 
@@ -2614,7 +2778,7 @@ items:
       converted to lower case by NodeJS itself as metadata is set via HTTP
       headers and HTTP header names are case insensitive.
     fullName: >-
-      azure-storage.FileService.getFileMetadata(share, directory, file,
+      azure-storage.FileService.getFileMetadata(share, directory, file, options,
       callback)
     type: Function
     syntax:
@@ -2633,6 +2797,16 @@ items:
           description: >-
             The file name. File names may not start or end with the delimiter
             '/'.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
+          optional: true
         - id: options.locationMode
           type:
             - azure-storage.LocationMode
@@ -2687,7 +2861,7 @@ items:
                                                                                     if an error occurs; otherwise `[result](xref:azure-storage.FileResult)` will contain
                                                                                     information about the file.
                                                                                     `response` will contain information related to this operation.
-      content: 'function getFileMetadata(share, directory, file, callback)'
+      content: 'function getFileMetadata(share, directory, file, options, callback)'
     langs:
       - js
   - uid: 'azure-storage.FileService#setFileProperties'
@@ -3035,6 +3209,11 @@ items:
           type:
             - object
           description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
           optional: true
         - id: options.locationMode
           type:
@@ -3435,6 +3614,11 @@ items:
             - object
           description: The request options.
           optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
+          optional: true
         - id: options.rangeStart
           type:
             - azure-storage.int
@@ -3538,6 +3722,11 @@ items:
           type:
             - object
           description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
           optional: true
         - id: options.rangeStart
           type:
@@ -3654,6 +3843,11 @@ items:
           type:
             - object
           description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
           optional: true
         - id: options.skipSizeCheck
           type:
@@ -3792,6 +3986,11 @@ items:
           type:
             - object
           description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
           optional: true
         - id: options.rangeStart
           type:
@@ -4950,6 +5149,11 @@ items:
           type:
             - object
           description: The request options.
+          optional: true
+        - id: options.shareSnapshotId
+          type:
+            - string
+          description: The snapshot identifier of the share.
           optional: true
         - id: options.skipSizeCheck
           type:

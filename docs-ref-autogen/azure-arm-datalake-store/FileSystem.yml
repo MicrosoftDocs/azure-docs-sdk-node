@@ -17,11 +17,11 @@ items:
     children:
       - 'azure-arm-datalake-store.FileSystem.#ctor'
       - >-
-        azure-arm-datalake-store.FileSystem#concurrentAppendWithHttpOperationResponse
-      - 'azure-arm-datalake-store.FileSystem#concurrentAppend'
-      - >-
         azure-arm-datalake-store.FileSystem#setFileExpiryWithHttpOperationResponse
       - 'azure-arm-datalake-store.FileSystem#setFileExpiry'
+      - >-
+        azure-arm-datalake-store.FileSystem#concurrentAppendWithHttpOperationResponse
+      - 'azure-arm-datalake-store.FileSystem#concurrentAppend'
       - 'azure-arm-datalake-store.FileSystem#checkAccessWithHttpOperationResponse'
       - 'azure-arm-datalake-store.FileSystem#checkAccess'
       - 'azure-arm-datalake-store.FileSystem#mkdirsWithHttpOperationResponse'
@@ -39,12 +39,12 @@ items:
       - >-
         azure-arm-datalake-store.FileSystem#getFileStatusWithHttpOperationResponse
       - 'azure-arm-datalake-store.FileSystem#getFileStatus'
+      - 'azure-arm-datalake-store.FileSystem#openWithHttpOperationResponse'
+      - 'azure-arm-datalake-store.FileSystem#open'
       - 'azure-arm-datalake-store.FileSystem#appendWithHttpOperationResponse'
       - 'azure-arm-datalake-store.FileSystem#append'
       - 'azure-arm-datalake-store.FileSystem#createWithHttpOperationResponse'
       - 'azure-arm-datalake-store.FileSystem#create'
-      - 'azure-arm-datalake-store.FileSystem#openWithHttpOperationResponse'
-      - 'azure-arm-datalake-store.FileSystem#open'
       - 'azure-arm-datalake-store.FileSystem#setAclWithHttpOperationResponse'
       - 'azure-arm-datalake-store.FileSystem#setAcl'
       - >-
@@ -89,292 +89,18 @@ items:
       content: new FileSystem(client)
     langs:
       - js
-  - uid: >-
-      azure-arm-datalake-store.FileSystem#concurrentAppendWithHttpOperationResponse
-    id: >-
-      azure-arm-datalake-store.FileSystem#concurrentAppendWithHttpOperationResponse
-    parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      concurrentAppendWithHttpOperationResponse(accountName, filePath,
-      streamContents, options)
-    summary: >-
-      Appends to the specified file, optionally first creating the file if it
-      does
-
-      not yet exist. This method supports multiple concurrent appends to the
-      file.
-
-      NOTE: The target must not contain data added by Create or normal (serial)
-
-      Append. ConcurrentAppend and Append cannot be used interchangeably; once a
-
-      target file has been modified using either of these append options, the
-
-      other append option cannot be used on the target file. ConcurrentAppend
-      does
-
-      not guarantee order and can result in duplicated data landing in the
-      target
-
-      file.
-    fullName: >-
-      azure-arm-datalake-store.FileSystem.concurrentAppendWithHttpOperationResponse(accountName,
-      filePath, streamContents, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<null>} - The deserialized result object.'
-        value: '{HttpOperationResponse<null>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: accountName
-          type:
-            - string
-          description: |-
-            The Azure Data Lake Store account to execute
-            filesystem operations on.
-        - id: filePath
-          type:
-            - string
-          description: |-
-            The Data Lake Store path (starting with '/') of the
-            file to which to append using concurrent append.
-        - id: streamContents
-          type:
-            - object
-          description: |-
-            The file contents to include when appending
-            to the file.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.appendMode
-          type:
-            - string
-          description: >-
-            Indicates the concurrent append call
-
-            should create the file if it doesn't exist or just open the existing
-            file
-
-            for append. Possible values include: 'autocreate'
-          optional: true
-        - id: options.syncFlag
-          type:
-            - string
-          description: >-
-            Optionally indicates what to do after
-
-            completion of the concurrent append. DATA indicates that more data
-            will be
-
-            sent immediately by the client, the file handle should remain
-            open/locked,
-
-            and file metadata (including file length, last modified time) should
-            NOT get
-
-            updated. METADATA indicates that more data will be sent immediately
-            by the
-
-            client, the file handle should remain open/locked, and file metadata
-            should
-
-            get updated. CLOSE indicates that the client is done sending data,
-            the file
-
-            handle should be closed/unlocked, and file metadata should get
-            updated.
-
-            Possible values include: 'DATA', 'METADATA', 'CLOSE'
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function concurrentAppendWithHttpOperationResponse(accountName,
-        filePath, streamContents, options)
-    langs:
-      - js
-  - uid: 'azure-arm-datalake-store.FileSystem#concurrentAppend'
-    id: 'azure-arm-datalake-store.FileSystem#concurrentAppend'
-    parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      concurrentAppend(accountName, filePath, streamContents, options,
-      optionalCallback)
-    summary: >-
-      Appends to the specified file, optionally first creating the file if it
-      does
-
-      not yet exist. This method supports multiple concurrent appends to the
-      file.
-
-      NOTE: The target must not contain data added by Create or normal (serial)
-
-      Append. ConcurrentAppend and Append cannot be used interchangeably; once a
-
-      target file has been modified using either of these append options, the
-
-      other append option cannot be used on the target file. ConcurrentAppend
-      does
-
-      not guarantee order and can result in duplicated data landing in the
-      target
-
-      file.
-    fullName: >-
-      azure-arm-datalake-store.FileSystem.concurrentAppend(accountName,
-      filePath, streamContents, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{null} - The deserialized result object.'
-        value: '{null} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: accountName
-          type:
-            - string
-          description: |-
-            The Azure Data Lake Store account to execute
-            filesystem operations on.
-        - id: filePath
-          type:
-            - string
-          description: |-
-            The Data Lake Store path (starting with '/') of the
-            file to which to append using concurrent append.
-        - id: streamContents
-          type:
-            - object
-          description: |-
-            The file contents to include when appending
-            to the file.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.appendMode
-          type:
-            - string
-          description: >-
-            Indicates the concurrent append call
-
-            should create the file if it doesn't exist or just open the existing
-            file
-
-            for append. Possible values include: 'autocreate'
-          optional: true
-        - id: options.syncFlag
-          type:
-            - string
-          description: >-
-            Optionally indicates what to do after
-
-            completion of the concurrent append. DATA indicates that more data
-            will be
-
-            sent immediately by the client, the file handle should remain
-            open/locked,
-
-            and file metadata (including file length, last modified time) should
-            NOT get
-
-            updated. METADATA indicates that more data will be sent immediately
-            by the
-
-            client, the file handle should remain open/locked, and file metadata
-            should
-
-            get updated. CLOSE indicates that the client is done sending data,
-            the file
-
-            handle should be closed/unlocked, and file metadata should get
-            updated.
-
-            Possible values include: 'DATA', 'METADATA', 'CLOSE'
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: >-
-        function concurrentAppend(accountName, filePath, streamContents,
-        options, optionalCallback)
-    langs:
-      - js
   - uid: 'azure-arm-datalake-store.FileSystem#setFileExpiryWithHttpOperationResponse'
     id: 'azure-arm-datalake-store.FileSystem#setFileExpiryWithHttpOperationResponse'
     parent: azure-arm-datalake-store.FileSystem
     name: >-
-      setFileExpiryWithHttpOperationResponse(accountName, filePath,
-      expiryOption, options)
+      setFileExpiryWithHttpOperationResponse(accountName, path, expiryOption,
+      options)
     summary: |-
       Sets or removes the expiration time on the specified file. This operation
       can only be executed against files. Folders are not supported.
     fullName: >-
       azure-arm-datalake-store.FileSystem.setFileExpiryWithHttpOperationResponse(accountName,
-      filePath, expiryOption, options)
+      path, expiryOption, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -393,7 +119,7 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: filePath
+        - id: path
           type:
             - string
           description: |-
@@ -447,21 +173,19 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function setFileExpiryWithHttpOperationResponse(accountName, filePath,
+        function setFileExpiryWithHttpOperationResponse(accountName, path,
         expiryOption, options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#setFileExpiry'
     id: 'azure-arm-datalake-store.FileSystem#setFileExpiry'
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      setFileExpiry(accountName, filePath, expiryOption, options,
-      optionalCallback)
+    name: 'setFileExpiry(accountName, path, expiryOption, options, optionalCallback)'
     summary: |-
       Sets or removes the expiration time on the specified file. This operation
       can only be executed against files. Folders are not supported.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.setFileExpiry(accountName, filePath,
+      azure-arm-datalake-store.FileSystem.setFileExpiry(accountName, path,
       expiryOption, options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -503,7 +227,7 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: filePath
+        - id: path
           type:
             - string
           description: |-
@@ -567,7 +291,281 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function setFileExpiry(accountName, filePath, expiryOption, options,
+        function setFileExpiry(accountName, path, expiryOption, options,
+        optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-datalake-store.FileSystem#concurrentAppendWithHttpOperationResponse
+    id: >-
+      azure-arm-datalake-store.FileSystem#concurrentAppendWithHttpOperationResponse
+    parent: azure-arm-datalake-store.FileSystem
+    name: >-
+      concurrentAppendWithHttpOperationResponse(accountName, path,
+      streamContents, options)
+    summary: >-
+      Appends to the specified file, optionally first creating the file if it
+      does
+
+      not yet exist. This method supports multiple concurrent appends to the
+      file.
+
+      NOTE: The target must not contain data added by Create or normal (serial)
+
+      Append. ConcurrentAppend and Append cannot be used interchangeably; once a
+
+      target file has been modified using either of these append options, the
+
+      other append option cannot be used on the target file. ConcurrentAppend
+      does
+
+      not guarantee order and can result in duplicated data landing in the
+      target
+
+      file.
+    fullName: >-
+      azure-arm-datalake-store.FileSystem.concurrentAppendWithHttpOperationResponse(accountName,
+      path, streamContents, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: accountName
+          type:
+            - string
+          description: |-
+            The Azure Data Lake Store account to execute
+            filesystem operations on.
+        - id: path
+          type:
+            - string
+          description: |-
+            The Data Lake Store path (starting with '/') of the
+            file to which to append using concurrent append.
+        - id: streamContents
+          type:
+            - object
+          description: |-
+            The file contents to include when appending
+            to the file.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.appendMode
+          type:
+            - string
+          description: >-
+            Indicates the concurrent append call
+
+            should create the file if it doesn't exist or just open the existing
+            file
+
+            for append. Possible values include: 'autocreate'
+          optional: true
+        - id: options.syncFlag
+          type:
+            - string
+          description: >-
+            Optionally indicates what to do after
+
+            completion of the concurrent append. DATA indicates that more data
+            will be
+
+            sent immediately by the client, the file handle should remain
+            open/locked,
+
+            and file metadata (including file length, last modified time) should
+            NOT get
+
+            updated. METADATA indicates that more data will be sent immediately
+            by the
+
+            client, the file handle should remain open/locked, and file metadata
+            should
+
+            get updated. CLOSE indicates that the client is done sending data,
+            the file
+
+            handle should be closed/unlocked, and file metadata should get
+            updated.
+
+            Possible values include: 'DATA', 'METADATA', 'CLOSE'
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function concurrentAppendWithHttpOperationResponse(accountName, path,
+        streamContents, options)
+    langs:
+      - js
+  - uid: 'azure-arm-datalake-store.FileSystem#concurrentAppend'
+    id: 'azure-arm-datalake-store.FileSystem#concurrentAppend'
+    parent: azure-arm-datalake-store.FileSystem
+    name: >-
+      concurrentAppend(accountName, path, streamContents, options,
+      optionalCallback)
+    summary: >-
+      Appends to the specified file, optionally first creating the file if it
+      does
+
+      not yet exist. This method supports multiple concurrent appends to the
+      file.
+
+      NOTE: The target must not contain data added by Create or normal (serial)
+
+      Append. ConcurrentAppend and Append cannot be used interchangeably; once a
+
+      target file has been modified using either of these append options, the
+
+      other append option cannot be used on the target file. ConcurrentAppend
+      does
+
+      not guarantee order and can result in duplicated data landing in the
+      target
+
+      file.
+    fullName: >-
+      azure-arm-datalake-store.FileSystem.concurrentAppend(accountName, path,
+      streamContents, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: accountName
+          type:
+            - string
+          description: |-
+            The Azure Data Lake Store account to execute
+            filesystem operations on.
+        - id: path
+          type:
+            - string
+          description: |-
+            The Data Lake Store path (starting with '/') of the
+            file to which to append using concurrent append.
+        - id: streamContents
+          type:
+            - object
+          description: |-
+            The file contents to include when appending
+            to the file.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.appendMode
+          type:
+            - string
+          description: >-
+            Indicates the concurrent append call
+
+            should create the file if it doesn't exist or just open the existing
+            file
+
+            for append. Possible values include: 'autocreate'
+          optional: true
+        - id: options.syncFlag
+          type:
+            - string
+          description: >-
+            Optionally indicates what to do after
+
+            completion of the concurrent append. DATA indicates that more data
+            will be
+
+            sent immediately by the client, the file handle should remain
+            open/locked,
+
+            and file metadata (including file length, last modified time) should
+            NOT get
+
+            updated. METADATA indicates that more data will be sent immediately
+            by the
+
+            client, the file handle should remain open/locked, and file metadata
+            should
+
+            get updated. CLOSE indicates that the client is done sending data,
+            the file
+
+            handle should be closed/unlocked, and file metadata should get
+            updated.
+
+            Possible values include: 'DATA', 'METADATA', 'CLOSE'
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function concurrentAppend(accountName, path, streamContents, options,
         optionalCallback)
     langs:
       - js
@@ -878,15 +876,13 @@ items:
   - uid: 'azure-arm-datalake-store.FileSystem#concatWithHttpOperationResponse'
     id: 'azure-arm-datalake-store.FileSystem#concatWithHttpOperationResponse'
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      concatWithHttpOperationResponse(accountName, destinationPath, sources,
-      options)
+    name: 'concatWithHttpOperationResponse(accountName, path, sources, options)'
     summary: |-
       Concatenates the list of source files into the destination file, removing
       all source files upon success.
     fullName: >-
       azure-arm-datalake-store.FileSystem.concatWithHttpOperationResponse(accountName,
-      destinationPath, sources, options)
+      path, sources, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -905,12 +901,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: destinationPath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/')
-            of the destination file resulting from the concatenation.
+            The Data Lake Store path (starting with '/') of the
+            destination file resulting from the concatenation.
         - id: sources
           type:
             - array
@@ -938,20 +934,20 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function concatWithHttpOperationResponse(accountName, destinationPath,
-        sources, options)
+        function concatWithHttpOperationResponse(accountName, path, sources,
+        options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#concat'
     id: 'azure-arm-datalake-store.FileSystem#concat'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'concat(accountName, destinationPath, sources, options, optionalCallback)'
+    name: 'concat(accountName, path, sources, options, optionalCallback)'
     summary: |-
       Concatenates the list of source files into the destination file, removing
       all source files upon success.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.concat(accountName, destinationPath,
-      sources, options, optionalCallback)
+      azure-arm-datalake-store.FileSystem.concat(accountName, path, sources,
+      options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -992,12 +988,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: destinationPath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/')
-            of the destination file resulting from the concatenation.
+            The Data Lake Store path (starting with '/') of the
+            destination file resulting from the concatenation.
         - id: sources
           type:
             - array
@@ -1034,17 +1030,15 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: >-
-        function concat(accountName, destinationPath, sources, options,
-        optionalCallback)
+      content: 'function concat(accountName, path, sources, options, optionalCallback)'
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#msConcatWithHttpOperationResponse'
     id: 'azure-arm-datalake-store.FileSystem#msConcatWithHttpOperationResponse'
     parent: azure-arm-datalake-store.FileSystem
     name: >-
-      msConcatWithHttpOperationResponse(accountName, msConcatDestinationPath,
-      streamContents, options)
+      msConcatWithHttpOperationResponse(accountName, path, streamContents,
+      options)
     summary: |-
       Concatenates the list of source files into the destination file, deleting
       all source files upon success. This method accepts more source file paths
@@ -1052,7 +1046,7 @@ items:
       subject to change for usability in an upcoming version.
     fullName: >-
       azure-arm-datalake-store.FileSystem.msConcatWithHttpOperationResponse(accountName,
-      msConcatDestinationPath, streamContents, options)
+      path, streamContents, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1071,12 +1065,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: msConcatDestinationPath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting
-            with '/') of the destination file resulting from the concatenation.
+            The Data Lake Store path (starting with '/') of the
+            destination file resulting from the concatenation.
         - id: streamContents
           type:
             - object
@@ -1128,24 +1122,22 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function msConcatWithHttpOperationResponse(accountName,
-        msConcatDestinationPath, streamContents, options)
+        function msConcatWithHttpOperationResponse(accountName, path,
+        streamContents, options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#msConcat'
     id: 'azure-arm-datalake-store.FileSystem#msConcat'
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      msConcat(accountName, msConcatDestinationPath, streamContents, options,
-      optionalCallback)
+    name: 'msConcat(accountName, path, streamContents, options, optionalCallback)'
     summary: |-
       Concatenates the list of source files into the destination file, deleting
       all source files upon success. This method accepts more source file paths
       than the Concat method. This method and the parameters it accepts are
       subject to change for usability in an upcoming version.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.msConcat(accountName,
-      msConcatDestinationPath, streamContents, options, optionalCallback)
+      azure-arm-datalake-store.FileSystem.msConcat(accountName, path,
+      streamContents, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1186,12 +1178,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: msConcatDestinationPath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting
-            with '/') of the destination file resulting from the concatenation.
+            The Data Lake Store path (starting with '/') of the
+            destination file resulting from the concatenation.
         - id: streamContents
           type:
             - object
@@ -1253,8 +1245,8 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function msConcat(accountName, msConcatDestinationPath, streamContents,
-        options, optionalCallback)
+        function msConcat(accountName, path, streamContents, options,
+        optionalCallback)
     langs:
       - js
   - uid: >-
@@ -1262,15 +1254,13 @@ items:
     id: >-
       azure-arm-datalake-store.FileSystem#listFileStatusWithHttpOperationResponse
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      listFileStatusWithHttpOperationResponse(accountName, listFilePath,
-      options)
+    name: 'listFileStatusWithHttpOperationResponse(accountName, path, options)'
     summary: |-
       Get the list of file status objects specified by the file path, with
       optional pagination parameters
     fullName: >-
       azure-arm-datalake-store.FileSystem.listFileStatusWithHttpOperationResponse(accountName,
-      listFilePath, options)
+      path, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1293,12 +1283,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: listFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/') of
-            the directory to list.
+            The Data Lake Store path (starting with '/') of the
+            directory to list.
         - id: options
           type:
             - object
@@ -1362,20 +1352,20 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function listFileStatusWithHttpOperationResponse(accountName,
-        listFilePath, options)
+        function listFileStatusWithHttpOperationResponse(accountName, path,
+        options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#listFileStatus'
     id: 'azure-arm-datalake-store.FileSystem#listFileStatus'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'listFileStatus(accountName, listFilePath, options, optionalCallback)'
+    name: 'listFileStatus(accountName, path, options, optionalCallback)'
     summary: |-
       Get the list of file status objects specified by the file path, with
       optional pagination parameters
     fullName: >-
-      azure-arm-datalake-store.FileSystem.listFileStatus(accountName,
-      listFilePath, options, optionalCallback)
+      azure-arm-datalake-store.FileSystem.listFileStatus(accountName, path,
+      options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1418,12 +1408,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: listFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/') of
-            the directory to list.
+            The Data Lake Store path (starting with '/') of the
+            directory to list.
         - id: options
           type:
             - object
@@ -1496,9 +1486,7 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: >-
-        function listFileStatus(accountName, listFilePath, options,
-        optionalCallback)
+      content: 'function listFileStatus(accountName, path, options, optionalCallback)'
     langs:
       - js
   - uid: >-
@@ -1506,13 +1494,11 @@ items:
     id: >-
       azure-arm-datalake-store.FileSystem#getContentSummaryWithHttpOperationResponse
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      getContentSummaryWithHttpOperationResponse(accountName,
-      getContentSummaryFilePath, options)
+    name: 'getContentSummaryWithHttpOperationResponse(accountName, path, options)'
     summary: Gets the file content summary object specified by the file path.
     fullName: >-
       azure-arm-datalake-store.FileSystem.getContentSummaryWithHttpOperationResponse(accountName,
-      getContentSummaryFilePath, options)
+      path, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1535,12 +1521,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: getContentSummaryFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting
-            with '/') of the file for which to retrieve the summary.
+            The Data Lake Store path (starting with '/') of the
+            file for which to retrieve the summary.
         - id: options
           type:
             - object
@@ -1558,20 +1544,18 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function getContentSummaryWithHttpOperationResponse(accountName,
-        getContentSummaryFilePath, options)
+        function getContentSummaryWithHttpOperationResponse(accountName, path,
+        options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#getContentSummary'
     id: 'azure-arm-datalake-store.FileSystem#getContentSummary'
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      getContentSummary(accountName, getContentSummaryFilePath, options,
-      optionalCallback)
+    name: 'getContentSummary(accountName, path, options, optionalCallback)'
     summary: Gets the file content summary object specified by the file path.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.getContentSummary(accountName,
-      getContentSummaryFilePath, options, optionalCallback)
+      azure-arm-datalake-store.FileSystem.getContentSummary(accountName, path,
+      options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1614,12 +1598,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: getContentSummaryFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting
-            with '/') of the file for which to retrieve the summary.
+            The Data Lake Store path (starting with '/') of the
+            file for which to retrieve the summary.
         - id: options
           type:
             - object
@@ -1646,19 +1630,17 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: >-
-        function getContentSummary(accountName, getContentSummaryFilePath,
-        options, optionalCallback)
+      content: 'function getContentSummary(accountName, path, options, optionalCallback)'
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#getFileStatusWithHttpOperationResponse'
     id: 'azure-arm-datalake-store.FileSystem#getFileStatusWithHttpOperationResponse'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'getFileStatusWithHttpOperationResponse(accountName, getFilePath, options)'
+    name: 'getFileStatusWithHttpOperationResponse(accountName, path, options)'
     summary: Get the file status object specified by the file path.
     fullName: >-
       azure-arm-datalake-store.FileSystem.getFileStatusWithHttpOperationResponse(accountName,
-      getFilePath, options)
+      path, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1681,12 +1663,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: getFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/') of
-            the file or directory for which to retrieve the status.
+            The Data Lake Store path (starting with '/') of the
+            file or directory for which to retrieve the status.
         - id: options
           type:
             - object
@@ -1715,18 +1697,18 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function getFileStatusWithHttpOperationResponse(accountName,
-        getFilePath, options)
+        function getFileStatusWithHttpOperationResponse(accountName, path,
+        options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#getFileStatus'
     id: 'azure-arm-datalake-store.FileSystem#getFileStatus'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'getFileStatus(accountName, getFilePath, options, optionalCallback)'
+    name: 'getFileStatus(accountName, path, options, optionalCallback)'
     summary: Get the file status object specified by the file path.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.getFileStatus(accountName,
-      getFilePath, options, optionalCallback)
+      azure-arm-datalake-store.FileSystem.getFileStatus(accountName, path,
+      options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1769,12 +1751,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: getFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/') of
-            the file or directory for which to retrieve the status.
+            The Data Lake Store path (starting with '/') of the
+            file or directory for which to retrieve the status.
         - id: options
           type:
             - object
@@ -1812,21 +1794,199 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: >-
-        function getFileStatus(accountName, getFilePath, options,
-        optionalCallback)
+      content: 'function getFileStatus(accountName, path, options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-datalake-store.FileSystem#openWithHttpOperationResponse'
+    id: 'azure-arm-datalake-store.FileSystem#openWithHttpOperationResponse'
+    parent: azure-arm-datalake-store.FileSystem
+    name: 'openWithHttpOperationResponse(accountName, path, options)'
+    summary: Opens and reads from the specified file.
+    fullName: >-
+      azure-arm-datalake-store.FileSystem.openWithHttpOperationResponse(accountName,
+      path, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<Object>} - The deserialized result object.'
+        value: '{HttpOperationResponse<Object>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: accountName
+          type:
+            - string
+          description: |-
+            The Azure Data Lake Store account to execute
+            filesystem operations on.
+        - id: path
+          type:
+            - string
+          description: |-
+            The Data Lake Store path (starting with '/') of the
+            file to open.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.length
+          type:
+            - number
+          description: |-
+            The number of bytes that the server will
+            attempt to retrieve. It will retrieve <= length bytes.
+          optional: true
+        - id: options.offset
+          type:
+            - number
+          description: The byte offset to start reading data from.
+          optional: true
+        - id: options.fileSessionId
+          type:
+            - azure-arm-datalake-store.uuid
+          description: >-
+            Optional unique GUID per file
+
+            indicating all the reads with the same fileSessionId are from the
+            same
+
+            client and same session. This will give a performance benefit.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: 'function openWithHttpOperationResponse(accountName, path, options)'
+    langs:
+      - js
+  - uid: 'azure-arm-datalake-store.FileSystem#open'
+    id: 'azure-arm-datalake-store.FileSystem#open'
+    parent: azure-arm-datalake-store.FileSystem
+    name: 'open(accountName, path, options, optionalCallback)'
+    summary: Opens and reads from the specified file.
+    fullName: >-
+      azure-arm-datalake-store.FileSystem.open(accountName, path, options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{Object} - The deserialized result object.'
+        value: '{Object} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: accountName
+          type:
+            - string
+          description: |-
+            The Azure Data Lake Store account to execute
+            filesystem operations on.
+        - id: path
+          type:
+            - string
+          description: |-
+            The Data Lake Store path (starting with '/') of the
+            file to open.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.length
+          type:
+            - number
+          description: |-
+            The number of bytes that the server will
+            attempt to retrieve. It will retrieve <= length bytes.
+          optional: true
+        - id: options.offset
+          type:
+            - number
+          description: The byte offset to start reading data from.
+          optional: true
+        - id: options.fileSessionId
+          type:
+            - azure-arm-datalake-store.uuid
+          description: >-
+            Optional unique GUID per file
+
+            indicating all the reads with the same fileSessionId are from the
+            same
+
+            client and same session. This will give a performance benefit.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function open(accountName, path, options, optionalCallback)'
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#appendWithHttpOperationResponse'
     id: 'azure-arm-datalake-store.FileSystem#appendWithHttpOperationResponse'
     parent: azure-arm-datalake-store.FileSystem
     name: >-
-      appendWithHttpOperationResponse(accountName, directFilePath,
-      streamContents, options)
+      appendWithHttpOperationResponse(accountName, path, streamContents,
+      options)
     summary: "Used for serial appends to the specified file.\_NOTE: The target must not\ncontain data added by ConcurrentAppend. ConcurrentAppend and Append cannot\nbe used interchangeably; once a target file has been modified using either\nof these append options, the other append option cannot be used on the\ntarget file."
     fullName: >-
       azure-arm-datalake-store.FileSystem.appendWithHttpOperationResponse(accountName,
-      directFilePath, streamContents, options)
+      path, streamContents, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1845,12 +2005,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: directFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/')
-            of the file to which to append.
+            The Data Lake Store path (starting with '/') of the
+            file to which to append.
         - id: streamContents
           type:
             - object
@@ -1935,19 +2095,17 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function appendWithHttpOperationResponse(accountName, directFilePath,
+        function appendWithHttpOperationResponse(accountName, path,
         streamContents, options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#append'
     id: 'azure-arm-datalake-store.FileSystem#append'
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      append(accountName, directFilePath, streamContents, options,
-      optionalCallback)
+    name: 'append(accountName, path, streamContents, options, optionalCallback)'
     summary: "Used for serial appends to the specified file.\_NOTE: The target must not\ncontain data added by ConcurrentAppend. ConcurrentAppend and Append cannot\nbe used interchangeably; once a target file has been modified using either\nof these append options, the other append option cannot be used on the\ntarget file."
     fullName: >-
-      azure-arm-datalake-store.FileSystem.append(accountName, directFilePath,
+      azure-arm-datalake-store.FileSystem.append(accountName, path,
       streamContents, options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -1989,12 +2147,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: directFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/')
-            of the file to which to append.
+            The Data Lake Store path (starting with '/') of the
+            file to which to append.
         - id: streamContents
           type:
             - object
@@ -2089,20 +2247,20 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function append(accountName, directFilePath, streamContents, options,
+        function append(accountName, path, streamContents, options,
         optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#createWithHttpOperationResponse'
     id: 'azure-arm-datalake-store.FileSystem#createWithHttpOperationResponse'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'createWithHttpOperationResponse(accountName, directFilePath, options)'
+    name: 'createWithHttpOperationResponse(accountName, path, options)'
     summary: |-
       Creates a file with optionally specified content. NOTE: If content is
       provided, the resulting file cannot be modified using ConcurrentAppend.
     fullName: >-
       azure-arm-datalake-store.FileSystem.createWithHttpOperationResponse(accountName,
-      directFilePath, options)
+      path, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -2121,12 +2279,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: directFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/')
-            of the file to create.
+            The Data Lake Store path (starting with '/') of the
+            file to create.
         - id: options
           type:
             - object
@@ -2211,20 +2369,228 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: >-
-        function createWithHttpOperationResponse(accountName, directFilePath,
-        options)
+      content: 'function createWithHttpOperationResponse(accountName, path, options)'
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#create'
     id: 'azure-arm-datalake-store.FileSystem#create'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'create(accountName, directFilePath, options, optionalCallback)'
+    name: 'create(accountName, path, options, optionalCallback)'
     summary: |-
       Creates a file with optionally specified content. NOTE: If content is
       provided, the resulting file cannot be modified using ConcurrentAppend.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.create(accountName, directFilePath,
+      azure-arm-datalake-store.FileSystem.create(accountName, path, options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: accountName
+          type:
+            - string
+          description: |-
+            The Azure Data Lake Store account to execute
+            filesystem operations on.
+        - id: path
+          type:
+            - string
+          description: |-
+            The Data Lake Store path (starting with '/') of the
+            file to create.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.streamContents
+          type:
+            - object
+          description: >-
+            The file contents to include when
+
+            creating the file. This parameter is optional, resulting in an empty
+            file if
+
+            not specified.
+          optional: true
+        - id: options.overwrite
+          type:
+            - boolean
+          description: |-
+            The indication of if the file should be
+            overwritten.
+          optional: true
+        - id: options.syncFlag
+          type:
+            - string
+          description: >-
+            Optionally indicates what to do after
+
+            completion of the create. DATA indicates that more data will be sent
+
+            immediately by the client, the file handle should remain
+            open/locked, and
+
+            file metadata (including file length, last modified time) should NOT
+            get
+
+            updated. METADATA indicates that more data will be sent immediately
+            by the
+
+            client, the file handle should remain open/locked, and file metadata
+            should
+
+            get updated. CLOSE indicates that the client is done sending data,
+            the file
+
+            handle should be closed/unlocked, and file metadata should get
+            updated.
+
+            Possible values include: 'DATA', 'METADATA', 'CLOSE'
+          optional: true
+        - id: options.leaseId
+          type:
+            - azure-arm-datalake-store.uuid
+          description: >-
+            Optional unique GUID per file to ensure
+
+            single writer semantics, meaning that only clients that append to
+            the file
+
+            with the same leaseId will be allowed to do so.
+          optional: true
+        - id: options.permission
+          type:
+            - number
+          description: >-
+            The octal representation of the unnamed
+
+            user, mask and other permissions that should be set for the file
+            when
+
+            created. If not specified, it inherits these from the container.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function create(accountName, path, options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-datalake-store.FileSystem#setAclWithHttpOperationResponse'
+    id: 'azure-arm-datalake-store.FileSystem#setAclWithHttpOperationResponse'
+    parent: azure-arm-datalake-store.FileSystem
+    name: 'setAclWithHttpOperationResponse(accountName, path, aclspec, options)'
+    summary: Sets the Access Control List (ACL) for a file or folder.
+    fullName: >-
+      azure-arm-datalake-store.FileSystem.setAclWithHttpOperationResponse(accountName,
+      path, aclspec, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: accountName
+          type:
+            - string
+          description: |-
+            The Azure Data Lake Store account to execute
+            filesystem operations on.
+        - id: path
+          type:
+            - string
+          description: |-
+            The Data Lake Store path (starting with '/') of the
+            file or directory on which to set the ACL.
+        - id: aclspec
+          type:
+            - string
+          description: |-
+            The ACL spec included in ACL creation operations in
+            the format '[default:]user|group|other::r|-w|-x|-'
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function setAclWithHttpOperationResponse(accountName, path, aclspec,
+        options)
+    langs:
+      - js
+  - uid: 'azure-arm-datalake-store.FileSystem#setAcl'
+    id: 'azure-arm-datalake-store.FileSystem#setAcl'
+    parent: azure-arm-datalake-store.FileSystem
+    name: 'setAcl(accountName, path, aclspec, options, optionalCallback)'
+    summary: Sets the Access Control List (ACL) for a file or folder.
+    fullName: >-
+      azure-arm-datalake-store.FileSystem.setAcl(accountName, path, aclspec,
       options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -2266,325 +2632,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: directFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/')
-            of the file to create.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.streamContents
-          type:
-            - object
-          description: >-
-            The file contents to include when
-
-            creating the file. This parameter is optional, resulting in an empty
-            file if
-
-            not specified.
-          optional: true
-        - id: options.overwrite
-          type:
-            - boolean
-          description: |-
-            The indication of if the file should be
-            overwritten.
-          optional: true
-        - id: options.syncFlag
-          type:
-            - string
-          description: >-
-            Optionally indicates what to do after
-
-            completion of the create. DATA indicates that more data will be sent
-
-            immediately by the client, the file handle should remain
-            open/locked, and
-
-            file metadata (including file length, last modified time) should NOT
-            get
-
-            updated. METADATA indicates that more data will be sent immediately
-            by the
-
-            client, the file handle should remain open/locked, and file metadata
-            should
-
-            get updated. CLOSE indicates that the client is done sending data,
-            the file
-
-            handle should be closed/unlocked, and file metadata should get
-            updated.
-
-            Possible values include: 'DATA', 'METADATA', 'CLOSE'
-          optional: true
-        - id: options.leaseId
-          type:
-            - azure-arm-datalake-store.uuid
-          description: >-
-            Optional unique GUID per file to ensure
-
-            single writer semantics, meaning that only clients that append to
-            the file
-
-            with the same leaseId will be allowed to do so.
-          optional: true
-        - id: options.permission
-          type:
-            - number
-          description: >-
-            The octal representation of the unnamed
-
-            user, mask and other permissions that should be set for the file
-            when
-
-            created. If not specified, it inherits these from the container.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: 'function create(accountName, directFilePath, options, optionalCallback)'
-    langs:
-      - js
-  - uid: 'azure-arm-datalake-store.FileSystem#openWithHttpOperationResponse'
-    id: 'azure-arm-datalake-store.FileSystem#openWithHttpOperationResponse'
-    parent: azure-arm-datalake-store.FileSystem
-    name: 'openWithHttpOperationResponse(accountName, directFilePath, options)'
-    summary: Opens and reads from the specified file.
-    fullName: >-
-      azure-arm-datalake-store.FileSystem.openWithHttpOperationResponse(accountName,
-      directFilePath, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<Object>} - The deserialized result object.'
-        value: '{HttpOperationResponse<Object>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: accountName
-          type:
-            - string
-          description: |-
-            The Azure Data Lake Store account to execute
-            filesystem operations on.
-        - id: directFilePath
-          type:
-            - string
-          description: |-
-            The Data Lake Store path (starting with '/')
-            of the file to open.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.length
-          type:
-            - number
-          description: |-
-            The number of bytes that the server will
-            attempt to retrieve. It will retrieve <= length bytes.
-          optional: true
-        - id: options.offset
-          type:
-            - number
-          description: The byte offset to start reading data from.
-          optional: true
-        - id: options.fileSessionId
-          type:
-            - azure-arm-datalake-store.uuid
-          description: >-
-            Optional unique GUID per file
-
-            indicating all the reads with the same fileSessionId are from the
-            same
-
-            client and same session. This will give a performance benefit.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function openWithHttpOperationResponse(accountName, directFilePath,
-        options)
-    langs:
-      - js
-  - uid: 'azure-arm-datalake-store.FileSystem#open'
-    id: 'azure-arm-datalake-store.FileSystem#open'
-    parent: azure-arm-datalake-store.FileSystem
-    name: 'open(accountName, directFilePath, options, optionalCallback)'
-    summary: Opens and reads from the specified file.
-    fullName: >-
-      azure-arm-datalake-store.FileSystem.open(accountName, directFilePath,
-      options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{Object} - The deserialized result object.'
-        value: '{Object} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: accountName
-          type:
-            - string
-          description: |-
-            The Azure Data Lake Store account to execute
-            filesystem operations on.
-        - id: directFilePath
-          type:
-            - string
-          description: |-
-            The Data Lake Store path (starting with '/')
-            of the file to open.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.length
-          type:
-            - number
-          description: |-
-            The number of bytes that the server will
-            attempt to retrieve. It will retrieve <= length bytes.
-          optional: true
-        - id: options.offset
-          type:
-            - number
-          description: The byte offset to start reading data from.
-          optional: true
-        - id: options.fileSessionId
-          type:
-            - azure-arm-datalake-store.uuid
-          description: >-
-            Optional unique GUID per file
-
-            indicating all the reads with the same fileSessionId are from the
-            same
-
-            client and same session. This will give a performance benefit.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: 'function open(accountName, directFilePath, options, optionalCallback)'
-    langs:
-      - js
-  - uid: 'azure-arm-datalake-store.FileSystem#setAclWithHttpOperationResponse'
-    id: 'azure-arm-datalake-store.FileSystem#setAclWithHttpOperationResponse'
-    parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      setAclWithHttpOperationResponse(accountName, setAclFilePath, aclspec,
-      options)
-    summary: Sets the Access Control List (ACL) for a file or folder.
-    fullName: >-
-      azure-arm-datalake-store.FileSystem.setAclWithHttpOperationResponse(accountName,
-      setAclFilePath, aclspec, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<null>} - The deserialized result object.'
-        value: '{HttpOperationResponse<null>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: accountName
-          type:
-            - string
-          description: |-
-            The Azure Data Lake Store account to execute
-            filesystem operations on.
-        - id: setAclFilePath
-          type:
-            - string
-          description: |-
-            The Data Lake Store path (starting with '/')
-            of the file or directory on which to set the ACL.
+            The Data Lake Store path (starting with '/') of the
+            file or directory on which to set the ACL.
         - id: aclspec
           type:
             - string
@@ -2603,22 +2656,93 @@ items:
             Headers that will be added to the
             request
           optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function setAcl(accountName, path, aclspec, options, optionalCallback)'
+    langs:
+      - js
+  - uid: >-
+      azure-arm-datalake-store.FileSystem#modifyAclEntriesWithHttpOperationResponse
+    id: >-
+      azure-arm-datalake-store.FileSystem#modifyAclEntriesWithHttpOperationResponse
+    parent: azure-arm-datalake-store.FileSystem
+    name: >-
+      modifyAclEntriesWithHttpOperationResponse(accountName, path, aclspec,
+      options)
+    summary: Modifies existing Access Control List (ACL) entries on a file or folder.
+    fullName: >-
+      azure-arm-datalake-store.FileSystem.modifyAclEntriesWithHttpOperationResponse(accountName,
+      path, aclspec, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: accountName
+          type:
+            - string
+          description: |-
+            The Azure Data Lake Store account to execute
+            filesystem operations on.
+        - id: path
+          type:
+            - string
+          description: |-
+            The Data Lake Store path (starting with '/') of the
+            file or directory with the ACL being modified.
+        - id: aclspec
+          type:
+            - string
+          description: |-
+            The ACL specification included in ACL modification
+            operations in the format '[default:]user|group|other::r|-w|-x|-'
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
       return:
         type:
           - Promise
         description: A promise is returned
       content: >-
-        function setAclWithHttpOperationResponse(accountName, setAclFilePath,
+        function modifyAclEntriesWithHttpOperationResponse(accountName, path,
         aclspec, options)
     langs:
       - js
-  - uid: 'azure-arm-datalake-store.FileSystem#setAcl'
-    id: 'azure-arm-datalake-store.FileSystem#setAcl'
+  - uid: 'azure-arm-datalake-store.FileSystem#modifyAclEntries'
+    id: 'azure-arm-datalake-store.FileSystem#modifyAclEntries'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'setAcl(accountName, setAclFilePath, aclspec, options, optionalCallback)'
-    summary: Sets the Access Control List (ACL) for a file or folder.
+    name: 'modifyAclEntries(accountName, path, aclspec, options, optionalCallback)'
+    summary: Modifies existing Access Control List (ACL) entries on a file or folder.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.setAcl(accountName, setAclFilePath,
+      azure-arm-datalake-store.FileSystem.modifyAclEntries(accountName, path,
       aclspec, options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -2660,18 +2784,18 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: setAclFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/')
-            of the file or directory on which to set the ACL.
+            The Data Lake Store path (starting with '/') of the
+            file or directory with the ACL being modified.
         - id: aclspec
           type:
             - string
           description: |-
-            The ACL spec included in ACL creation operations in
-            the format '[default:]user|group|other::r|-w|-x|-'
+            The ACL specification included in ACL modification
+            operations in the format '[default:]user|group|other::r|-w|-x|-'
         - id: options
           type:
             - object
@@ -2699,178 +2823,22 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function setAcl(accountName, setAclFilePath, aclspec, options,
+        function modifyAclEntries(accountName, path, aclspec, options,
         optionalCallback)
     langs:
       - js
   - uid: >-
-      azure-arm-datalake-store.FileSystem#modifyAclEntriesWithHttpOperationResponse
-    id: >-
-      azure-arm-datalake-store.FileSystem#modifyAclEntriesWithHttpOperationResponse
-    parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      modifyAclEntriesWithHttpOperationResponse(accountName, modifyAclFilePath,
-      aclspec, options)
-    summary: Modifies existing Access Control List (ACL) entries on a file or folder.
-    fullName: >-
-      azure-arm-datalake-store.FileSystem.modifyAclEntriesWithHttpOperationResponse(accountName,
-      modifyAclFilePath, aclspec, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<null>} - The deserialized result object.'
-        value: '{HttpOperationResponse<null>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: accountName
-          type:
-            - string
-          description: |-
-            The Azure Data Lake Store account to execute
-            filesystem operations on.
-        - id: modifyAclFilePath
-          type:
-            - string
-          description: |-
-            The Data Lake Store path (starting with
-            '/') of the file or directory with the ACL being modified.
-        - id: aclspec
-          type:
-            - string
-          description: |-
-            The ACL specification included in ACL modification
-            operations in the format '[default:]user|group|other::r|-w|-x|-'
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function modifyAclEntriesWithHttpOperationResponse(accountName,
-        modifyAclFilePath, aclspec, options)
-    langs:
-      - js
-  - uid: 'azure-arm-datalake-store.FileSystem#modifyAclEntries'
-    id: 'azure-arm-datalake-store.FileSystem#modifyAclEntries'
-    parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      modifyAclEntries(accountName, modifyAclFilePath, aclspec, options,
-      optionalCallback)
-    summary: Modifies existing Access Control List (ACL) entries on a file or folder.
-    fullName: >-
-      azure-arm-datalake-store.FileSystem.modifyAclEntries(accountName,
-      modifyAclFilePath, aclspec, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{null} - The deserialized result object.'
-        value: '{null} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: accountName
-          type:
-            - string
-          description: |-
-            The Azure Data Lake Store account to execute
-            filesystem operations on.
-        - id: modifyAclFilePath
-          type:
-            - string
-          description: |-
-            The Data Lake Store path (starting with
-            '/') of the file or directory with the ACL being modified.
-        - id: aclspec
-          type:
-            - string
-          description: |-
-            The ACL specification included in ACL modification
-            operations in the format '[default:]user|group|other::r|-w|-x|-'
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: >-
-        function modifyAclEntries(accountName, modifyAclFilePath, aclspec,
-        options, optionalCallback)
-    langs:
-      - js
-  - uid: >-
       azure-arm-datalake-store.FileSystem#removeAclEntriesWithHttpOperationResponse
     id: >-
       azure-arm-datalake-store.FileSystem#removeAclEntriesWithHttpOperationResponse
     parent: azure-arm-datalake-store.FileSystem
     name: >-
-      removeAclEntriesWithHttpOperationResponse(accountName, removeAclFilePath,
-      aclspec, options)
+      removeAclEntriesWithHttpOperationResponse(accountName, path, aclspec,
+      options)
     summary: Removes existing Access Control List (ACL) entries for a file or folder.
     fullName: >-
       azure-arm-datalake-store.FileSystem.removeAclEntriesWithHttpOperationResponse(accountName,
-      removeAclFilePath, aclspec, options)
+      path, aclspec, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -2889,12 +2857,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: removeAclFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with
-            '/') of the file or directory with the ACL being removed.
+            The Data Lake Store path (starting with '/') of the
+            file or directory with the ACL being removed.
         - id: aclspec
           type:
             - string
@@ -2918,20 +2886,18 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function removeAclEntriesWithHttpOperationResponse(accountName,
-        removeAclFilePath, aclspec, options)
+        function removeAclEntriesWithHttpOperationResponse(accountName, path,
+        aclspec, options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#removeAclEntries'
     id: 'azure-arm-datalake-store.FileSystem#removeAclEntries'
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      removeAclEntries(accountName, removeAclFilePath, aclspec, options,
-      optionalCallback)
+    name: 'removeAclEntries(accountName, path, aclspec, options, optionalCallback)'
     summary: Removes existing Access Control List (ACL) entries for a file or folder.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.removeAclEntries(accountName,
-      removeAclFilePath, aclspec, options, optionalCallback)
+      azure-arm-datalake-store.FileSystem.removeAclEntries(accountName, path,
+      aclspec, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -2972,12 +2938,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: removeAclFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with
-            '/') of the file or directory with the ACL being removed.
+            The Data Lake Store path (starting with '/') of the
+            file or directory with the ACL being removed.
         - id: aclspec
           type:
             - string
@@ -3011,8 +2977,8 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function removeAclEntries(accountName, removeAclFilePath, aclspec,
-        options, optionalCallback)
+        function removeAclEntries(accountName, path, aclspec, options,
+        optionalCallback)
     langs:
       - js
   - uid: >-
@@ -3020,15 +2986,13 @@ items:
     id: >-
       azure-arm-datalake-store.FileSystem#removeDefaultAclWithHttpOperationResponse
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      removeDefaultAclWithHttpOperationResponse(accountName, defaultAclFilePath,
-      options)
+    name: 'removeDefaultAclWithHttpOperationResponse(accountName, path, options)'
     summary: |-
       Removes the existing Default Access Control List (ACL) of the specified
       directory.
     fullName: >-
       azure-arm-datalake-store.FileSystem.removeDefaultAclWithHttpOperationResponse(accountName,
-      defaultAclFilePath, options)
+      path, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -3047,12 +3011,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: defaultAclFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with
-            '/') of the directory with the default ACL being removed.
+            The Data Lake Store path (starting with '/') of the
+            directory with the default ACL being removed.
         - id: options
           type:
             - object
@@ -3070,163 +3034,19 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function removeDefaultAclWithHttpOperationResponse(accountName,
-        defaultAclFilePath, options)
+        function removeDefaultAclWithHttpOperationResponse(accountName, path,
+        options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#removeDefaultAcl'
     id: 'azure-arm-datalake-store.FileSystem#removeDefaultAcl'
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      removeDefaultAcl(accountName, defaultAclFilePath, options,
-      optionalCallback)
+    name: 'removeDefaultAcl(accountName, path, options, optionalCallback)'
     summary: |-
       Removes the existing Default Access Control List (ACL) of the specified
       directory.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.removeDefaultAcl(accountName,
-      defaultAclFilePath, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{null} - The deserialized result object.'
-        value: '{null} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: accountName
-          type:
-            - string
-          description: |-
-            The Azure Data Lake Store account to execute
-            filesystem operations on.
-        - id: defaultAclFilePath
-          type:
-            - string
-          description: |-
-            The Data Lake Store path (starting with
-            '/') of the directory with the default ACL being removed.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: >-
-        function removeDefaultAcl(accountName, defaultAclFilePath, options,
-        optionalCallback)
-    langs:
-      - js
-  - uid: 'azure-arm-datalake-store.FileSystem#removeAclWithHttpOperationResponse'
-    id: 'azure-arm-datalake-store.FileSystem#removeAclWithHttpOperationResponse'
-    parent: azure-arm-datalake-store.FileSystem
-    name: 'removeAclWithHttpOperationResponse(accountName, aclFilePath, options)'
-    summary: |-
-      Removes the existing Access Control List (ACL) of the specified file or
-      directory.
-    fullName: >-
-      azure-arm-datalake-store.FileSystem.removeAclWithHttpOperationResponse(accountName,
-      aclFilePath, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<null>} - The deserialized result object.'
-        value: '{HttpOperationResponse<null>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: accountName
-          type:
-            - string
-          description: |-
-            The Azure Data Lake Store account to execute
-            filesystem operations on.
-        - id: aclFilePath
-          type:
-            - string
-          description: |-
-            The Data Lake Store path (starting with '/') of
-            the file or directory with the ACL being removed.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function removeAclWithHttpOperationResponse(accountName, aclFilePath,
-        options)
-    langs:
-      - js
-  - uid: 'azure-arm-datalake-store.FileSystem#removeAcl'
-    id: 'azure-arm-datalake-store.FileSystem#removeAcl'
-    parent: azure-arm-datalake-store.FileSystem
-    name: 'removeAcl(accountName, aclFilePath, options, optionalCallback)'
-    summary: |-
-      Removes the existing Access Control List (ACL) of the specified file or
-      directory.
-    fullName: >-
-      azure-arm-datalake-store.FileSystem.removeAcl(accountName, aclFilePath,
+      azure-arm-datalake-store.FileSystem.removeDefaultAcl(accountName, path,
       options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -3268,12 +3088,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: aclFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/') of
-            the file or directory with the ACL being removed.
+            The Data Lake Store path (starting with '/') of the
+            directory with the default ACL being removed.
         - id: options
           type:
             - object
@@ -3300,19 +3120,157 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function removeAcl(accountName, aclFilePath, options, optionalCallback)'
+      content: 'function removeDefaultAcl(accountName, path, options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-datalake-store.FileSystem#removeAclWithHttpOperationResponse'
+    id: 'azure-arm-datalake-store.FileSystem#removeAclWithHttpOperationResponse'
+    parent: azure-arm-datalake-store.FileSystem
+    name: 'removeAclWithHttpOperationResponse(accountName, path, options)'
+    summary: |-
+      Removes the existing Access Control List (ACL) of the specified file or
+      directory.
+    fullName: >-
+      azure-arm-datalake-store.FileSystem.removeAclWithHttpOperationResponse(accountName,
+      path, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: accountName
+          type:
+            - string
+          description: |-
+            The Azure Data Lake Store account to execute
+            filesystem operations on.
+        - id: path
+          type:
+            - string
+          description: |-
+            The Data Lake Store path (starting with '/') of the
+            file or directory with the ACL being removed.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: 'function removeAclWithHttpOperationResponse(accountName, path, options)'
+    langs:
+      - js
+  - uid: 'azure-arm-datalake-store.FileSystem#removeAcl'
+    id: 'azure-arm-datalake-store.FileSystem#removeAcl'
+    parent: azure-arm-datalake-store.FileSystem
+    name: 'removeAcl(accountName, path, options, optionalCallback)'
+    summary: |-
+      Removes the existing Access Control List (ACL) of the specified file or
+      directory.
+    fullName: >-
+      azure-arm-datalake-store.FileSystem.removeAcl(accountName, path, options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: accountName
+          type:
+            - string
+          description: |-
+            The Azure Data Lake Store account to execute
+            filesystem operations on.
+        - id: path
+          type:
+            - string
+          description: |-
+            The Data Lake Store path (starting with '/') of the
+            file or directory with the ACL being removed.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function removeAcl(accountName, path, options, optionalCallback)'
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#getAclStatusWithHttpOperationResponse'
     id: 'azure-arm-datalake-store.FileSystem#getAclStatusWithHttpOperationResponse'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'getAclStatusWithHttpOperationResponse(accountName, aclFilePath, options)'
+    name: 'getAclStatusWithHttpOperationResponse(accountName, path, options)'
     summary: >-
       Gets Access Control List (ACL) entries for the specified file or
       directory.
     fullName: >-
       azure-arm-datalake-store.FileSystem.getAclStatusWithHttpOperationResponse(accountName,
-      aclFilePath, options)
+      path, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -3335,12 +3293,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: aclFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/') of
-            the file or directory for which to get the ACL.
+            The Data Lake Store path (starting with '/') of the
+            file or directory for which to get the ACL.
         - id: options
           type:
             - object
@@ -3372,19 +3330,19 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function getAclStatusWithHttpOperationResponse(accountName, aclFilePath,
+        function getAclStatusWithHttpOperationResponse(accountName, path,
         options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#getAclStatus'
     id: 'azure-arm-datalake-store.FileSystem#getAclStatus'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'getAclStatus(accountName, aclFilePath, options, optionalCallback)'
+    name: 'getAclStatus(accountName, path, options, optionalCallback)'
     summary: >-
       Gets Access Control List (ACL) entries for the specified file or
       directory.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.getAclStatus(accountName, aclFilePath,
+      azure-arm-datalake-store.FileSystem.getAclStatus(accountName, path,
       options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -3428,12 +3386,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: aclFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/') of
-            the file or directory for which to get the ACL.
+            The Data Lake Store path (starting with '/') of the
+            file or directory for which to get the ACL.
         - id: options
           type:
             - object
@@ -3474,19 +3432,17 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: >-
-        function getAclStatus(accountName, aclFilePath, options,
-        optionalCallback)
+      content: 'function getAclStatus(accountName, path, options, optionalCallback)'
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#deleteMethodWithHttpOperationResponse'
     id: 'azure-arm-datalake-store.FileSystem#deleteMethodWithHttpOperationResponse'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'deleteMethodWithHttpOperationResponse(accountName, filePath, options)'
+    name: 'deleteMethodWithHttpOperationResponse(accountName, path, options)'
     summary: 'Deletes the requested file or directory, optionally recursively.'
     fullName: >-
       azure-arm-datalake-store.FileSystem.deleteMethodWithHttpOperationResponse(accountName,
-      filePath, options)
+      path, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -3509,7 +3465,7 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: filePath
+        - id: path
           type:
             - string
           description: |-
@@ -3539,17 +3495,17 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function deleteMethodWithHttpOperationResponse(accountName, filePath,
+        function deleteMethodWithHttpOperationResponse(accountName, path,
         options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#deleteMethod'
     id: 'azure-arm-datalake-store.FileSystem#deleteMethod'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'deleteMethod(accountName, filePath, options, optionalCallback)'
+    name: 'deleteMethod(accountName, path, options, optionalCallback)'
     summary: 'Deletes the requested file or directory, optionally recursively.'
     fullName: >-
-      azure-arm-datalake-store.FileSystem.deleteMethod(accountName, filePath,
+      azure-arm-datalake-store.FileSystem.deleteMethod(accountName, path,
       options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -3593,7 +3549,7 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: filePath
+        - id: path
           type:
             - string
           description: |-
@@ -3632,19 +3588,17 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function deleteMethod(accountName, filePath, options, optionalCallback)'
+      content: 'function deleteMethod(accountName, path, options, optionalCallback)'
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#renameWithHttpOperationResponse'
     id: 'azure-arm-datalake-store.FileSystem#renameWithHttpOperationResponse'
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      renameWithHttpOperationResponse(accountName, renameFilePath, destination,
-      options)
+    name: 'renameWithHttpOperationResponse(accountName, path, destination, options)'
     summary: Rename a file or directory.
     fullName: >-
       azure-arm-datalake-store.FileSystem.renameWithHttpOperationResponse(accountName,
-      renameFilePath, destination, options)
+      path, destination, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -3667,12 +3621,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: renameFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/')
-            of the file or directory to move/rename.
+            The Data Lake Store path (starting with '/') of the
+            file or directory to move/rename.
         - id: destination
           type:
             - string
@@ -3694,20 +3648,18 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function renameWithHttpOperationResponse(accountName, renameFilePath,
-        destination, options)
+        function renameWithHttpOperationResponse(accountName, path, destination,
+        options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#rename'
     id: 'azure-arm-datalake-store.FileSystem#rename'
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      rename(accountName, renameFilePath, destination, options,
-      optionalCallback)
+    name: 'rename(accountName, path, destination, options, optionalCallback)'
     summary: Rename a file or directory.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.rename(accountName, renameFilePath,
-      destination, options, optionalCallback)
+      azure-arm-datalake-store.FileSystem.rename(accountName, path, destination,
+      options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -3750,12 +3702,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: renameFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with '/')
-            of the file or directory to move/rename.
+            The Data Lake Store path (starting with '/') of the
+            file or directory to move/rename.
         - id: destination
           type:
             - string
@@ -3787,18 +3739,18 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function rename(accountName, renameFilePath, destination, options,
+        function rename(accountName, path, destination, options,
         optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#setOwnerWithHttpOperationResponse'
     id: 'azure-arm-datalake-store.FileSystem#setOwnerWithHttpOperationResponse'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'setOwnerWithHttpOperationResponse(accountName, setOwnerFilePath, options)'
+    name: 'setOwnerWithHttpOperationResponse(accountName, path, options)'
     summary: Sets the owner of a file or directory.
     fullName: >-
       azure-arm-datalake-store.FileSystem.setOwnerWithHttpOperationResponse(accountName,
-      setOwnerFilePath, options)
+      path, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -3817,12 +3769,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: setOwnerFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with
-            '/') of the file or directory for which to set the owner.
+            The Data Lake Store path (starting with '/') of the
+            file or directory for which to set the owner.
         - id: options
           type:
             - object
@@ -3853,19 +3805,17 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: >-
-        function setOwnerWithHttpOperationResponse(accountName,
-        setOwnerFilePath, options)
+      content: 'function setOwnerWithHttpOperationResponse(accountName, path, options)'
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#setOwner'
     id: 'azure-arm-datalake-store.FileSystem#setOwner'
     parent: azure-arm-datalake-store.FileSystem
-    name: 'setOwner(accountName, setOwnerFilePath, options, optionalCallback)'
+    name: 'setOwner(accountName, path, options, optionalCallback)'
     summary: Sets the owner of a file or directory.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.setOwner(accountName,
-      setOwnerFilePath, options, optionalCallback)
+      azure-arm-datalake-store.FileSystem.setOwner(accountName, path, options,
+      optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -3906,12 +3856,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: setOwnerFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting with
-            '/') of the file or directory for which to set the owner.
+            The Data Lake Store path (starting with '/') of the
+            file or directory for which to set the owner.
         - id: options
           type:
             - object
@@ -3952,21 +3902,17 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: >-
-        function setOwner(accountName, setOwnerFilePath, options,
-        optionalCallback)
+      content: 'function setOwner(accountName, path, options, optionalCallback)'
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#setPermissionWithHttpOperationResponse'
     id: 'azure-arm-datalake-store.FileSystem#setPermissionWithHttpOperationResponse'
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      setPermissionWithHttpOperationResponse(accountName, setPermissionFilePath,
-      options)
+    name: 'setPermissionWithHttpOperationResponse(accountName, path, options)'
     summary: Sets the permission of the file or folder.
     fullName: >-
       azure-arm-datalake-store.FileSystem.setPermissionWithHttpOperationResponse(accountName,
-      setPermissionFilePath, options)
+      path, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -3985,12 +3931,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: setPermissionFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting
-            with '/') of the file or directory for which to set the permission.
+            The Data Lake Store path (starting with '/') of the
+            file or directory for which to set the permission.
         - id: options
           type:
             - object
@@ -4015,20 +3961,18 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function setPermissionWithHttpOperationResponse(accountName,
-        setPermissionFilePath, options)
+        function setPermissionWithHttpOperationResponse(accountName, path,
+        options)
     langs:
       - js
   - uid: 'azure-arm-datalake-store.FileSystem#setPermission'
     id: 'azure-arm-datalake-store.FileSystem#setPermission'
     parent: azure-arm-datalake-store.FileSystem
-    name: >-
-      setPermission(accountName, setPermissionFilePath, options,
-      optionalCallback)
+    name: 'setPermission(accountName, path, options, optionalCallback)'
     summary: Sets the permission of the file or folder.
     fullName: >-
-      azure-arm-datalake-store.FileSystem.setPermission(accountName,
-      setPermissionFilePath, options, optionalCallback)
+      azure-arm-datalake-store.FileSystem.setPermission(accountName, path,
+      options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -4069,12 +4013,12 @@ items:
           description: |-
             The Azure Data Lake Store account to execute
             filesystem operations on.
-        - id: setPermissionFilePath
+        - id: path
           type:
             - string
           description: |-
-            The Data Lake Store path (starting
-            with '/') of the file or directory for which to set the permission.
+            The Data Lake Store path (starting with '/') of the
+            file or directory for which to set the permission.
         - id: options
           type:
             - object
@@ -4108,9 +4052,7 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: >-
-        function setPermission(accountName, setPermissionFilePath, options,
-        optionalCallback)
+      content: 'function setPermission(accountName, path, options, optionalCallback)'
     langs:
       - js
 references:

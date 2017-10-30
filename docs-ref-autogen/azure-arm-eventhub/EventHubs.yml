@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-eventhub.EventHubs
       path: lib\services\eventHubManagement\lib\operations\eventHubs.js
-      startLine: 2209
+      startLine: 2194
       remote:
         branch: jsdoc
         path: lib\services\eventHubManagement\lib\operations\eventHubs.js
@@ -16,8 +16,8 @@ items:
     type: Class
     children:
       - 'azure-arm-eventhub.EventHubs.#ctor'
-      - 'azure-arm-eventhub.EventHubs#listAllWithHttpOperationResponse'
-      - 'azure-arm-eventhub.EventHubs#listAll'
+      - 'azure-arm-eventhub.EventHubs#listByNamespaceWithHttpOperationResponse'
+      - 'azure-arm-eventhub.EventHubs#listByNamespace'
       - 'azure-arm-eventhub.EventHubs#createOrUpdateWithHttpOperationResponse'
       - 'azure-arm-eventhub.EventHubs#createOrUpdate'
       - 'azure-arm-eventhub.EventHubs#deleteMethodWithHttpOperationResponse'
@@ -40,8 +40,9 @@ items:
       - 'azure-arm-eventhub.EventHubs#listKeys'
       - 'azure-arm-eventhub.EventHubs#regenerateKeysWithHttpOperationResponse'
       - 'azure-arm-eventhub.EventHubs#regenerateKeys'
-      - 'azure-arm-eventhub.EventHubs#listAllNextWithHttpOperationResponse'
-      - 'azure-arm-eventhub.EventHubs#listAllNext'
+      - >-
+        azure-arm-eventhub.EventHubs#listByNamespaceNextWithHttpOperationResponse
+      - 'azure-arm-eventhub.EventHubs#listByNamespaceNext'
       - >-
         azure-arm-eventhub.EventHubs#listAuthorizationRulesNextWithHttpOperationResponse
       - 'azure-arm-eventhub.EventHubs#listAuthorizationRulesNext'
@@ -63,15 +64,15 @@ items:
       content: new EventHubs(client)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.EventHubs#listAllWithHttpOperationResponse'
-    id: 'azure-arm-eventhub.EventHubs#listAllWithHttpOperationResponse'
+  - uid: 'azure-arm-eventhub.EventHubs#listByNamespaceWithHttpOperationResponse'
+    id: 'azure-arm-eventhub.EventHubs#listByNamespaceWithHttpOperationResponse'
     parent: azure-arm-eventhub.EventHubs
     name: >-
-      listAllWithHttpOperationResponse(resourceGroupName, namespaceName,
+      listByNamespaceWithHttpOperationResponse(resourceGroupName, namespaceName,
       options)
     summary: Gets all the Event Hubs in a Namespace.
     fullName: >-
-      azure-arm-eventhub.EventHubs.listAllWithHttpOperationResponse(resourceGroupName,
+      azure-arm-eventhub.EventHubs.listByNamespaceWithHttpOperationResponse(resourceGroupName,
       namespaceName, options)
     tags:
       - originalTitle: resolve
@@ -116,18 +117,20 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function listAllWithHttpOperationResponse(resourceGroupName,
+        function listByNamespaceWithHttpOperationResponse(resourceGroupName,
         namespaceName, options)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.EventHubs#listAll'
-    id: 'azure-arm-eventhub.EventHubs#listAll'
+  - uid: 'azure-arm-eventhub.EventHubs#listByNamespace'
+    id: 'azure-arm-eventhub.EventHubs#listByNamespace'
     parent: azure-arm-eventhub.EventHubs
-    name: 'listAll(resourceGroupName, namespaceName, options, optionalCallback)'
+    name: >-
+      listByNamespace(resourceGroupName, namespaceName, options,
+      optionalCallback)
     summary: Gets all the Event Hubs in a Namespace.
     fullName: >-
-      azure-arm-eventhub.EventHubs.listAll(resourceGroupName, namespaceName,
-      options, optionalCallback)
+      azure-arm-eventhub.EventHubs.listByNamespace(resourceGroupName,
+      namespaceName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -201,7 +204,7 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function listAll(resourceGroupName, namespaceName, options,
+        function listByNamespace(resourceGroupName, namespaceName, options,
         optionalCallback)
     langs:
       - js
@@ -220,12 +223,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<EventHubResource>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<EventHubResource>} - The deserialized result
-          object.
+        text: '{HttpOperationResponse<Eventhub>} - The deserialized result object.'
+        value: '{HttpOperationResponse<Eventhub>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -253,33 +252,19 @@ items:
           description: |-
             Parameters supplied to create an Event Hub
             resource.
-        - id: parameters.location
-          type:
-            - string
-          description: Location of the resource.
-        - id: parameters.type
-          type:
-            - string
-          description: ARM type of the Namespace.
-          optional: true
-        - id: parameters.name
-          type:
-            - string
-          description: Name of the Event Hub.
-          optional: true
         - id: parameters.messageRetentionInDays
           type:
             - number
           description: |-
             Number of days to retain
-            the events for this Event Hub.
+            the events for this Event Hub, value should be 1 to 7 days
           optional: true
         - id: parameters.partitionCount
           type:
             - number
           description: |-
             Number of partitions created for
-            the Event Hub.
+            the Event Hub, allowed values are from 1 to 32 partitions.
           optional: true
         - id: parameters.status
           type:
@@ -294,6 +279,94 @@ items:
             'Deleting',
 
             'Renaming', 'Unknown'
+          optional: true
+        - id: parameters.captureDescription
+          type:
+            - object
+          description: |-
+            Properties of capture
+            description
+          optional: true
+        - id: parameters.captureDescription.enabled
+          type:
+            - boolean
+          description: |-
+            A value that
+            indicates whether capture description is enabled.
+          optional: true
+        - id: parameters.captureDescription.encoding
+          type:
+            - string
+          description: >-
+            Enumerates the
+
+            possible values for the encoding format of capture description.
+            Possible
+
+            values include: 'Avro', 'AvroDeflate'
+          optional: true
+        - id: parameters.captureDescription.intervalInSeconds
+          type:
+            - number
+          description: >-
+            The time
+
+            window allows you to set the frequency with which the capture to
+            Azure Blobs
+
+            will happen, value should between 60 to 900 seconds
+          optional: true
+        - id: parameters.captureDescription.sizeLimitInBytes
+          type:
+            - number
+          description: >-
+            The size
+
+            window defines the amount of data built up in your Event Hub before
+            an
+
+            capture operation, value should be between 10485760 to 524288000
+            bytes
+          optional: true
+        - id: parameters.captureDescription.destination
+          type:
+            - object
+          description: >-
+            Properties of
+
+            Destination where capture will be stored. (Storage Account, Blob
+            Names)
+          optional: true
+        - id: parameters.captureDescription.destination.name
+          type:
+            - string
+          description: |-
+            Name for
+            capture destination
+          optional: true
+        - id: parameters.captureDescription.destination.storageAccountResourceId
+          type:
+            - string
+          description: Resource id of the storage account to be used to create the blobs
+          optional: true
+        - id: parameters.captureDescription.destination.blobContainer
+          type:
+            - string
+          description: Blob container Name
+          optional: true
+        - id: parameters.captureDescription.destination.archiveNameFormat
+          type:
+            - string
+          description: >-
+            Blob naming
+
+            convention for archive, e.g.
+
+            {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}.
+
+            Here all the parameters (Namespace,EventHub .. etc) are mandatory
+
+            irrespective of order
           optional: true
         - id: options
           type:
@@ -331,8 +404,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{EventHubResource} - The deserialized result object.'
-        value: '{EventHubResource} - The deserialized result object.'
+        text: '{Eventhub} - The deserialized result object.'
+        value: '{Eventhub} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -343,7 +416,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link EventHubResource} for more information.
+                               See {@link Eventhub} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -356,7 +429,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link EventHubResource} for more information.
+                               See {@link Eventhub} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -384,33 +457,19 @@ items:
           description: |-
             Parameters supplied to create an Event Hub
             resource.
-        - id: parameters.location
-          type:
-            - string
-          description: Location of the resource.
-        - id: parameters.type
-          type:
-            - string
-          description: ARM type of the Namespace.
-          optional: true
-        - id: parameters.name
-          type:
-            - string
-          description: Name of the Event Hub.
-          optional: true
         - id: parameters.messageRetentionInDays
           type:
             - number
           description: |-
             Number of days to retain
-            the events for this Event Hub.
+            the events for this Event Hub, value should be 1 to 7 days
           optional: true
         - id: parameters.partitionCount
           type:
             - number
           description: |-
             Number of partitions created for
-            the Event Hub.
+            the Event Hub, allowed values are from 1 to 32 partitions.
           optional: true
         - id: parameters.status
           type:
@@ -425,6 +484,94 @@ items:
             'Deleting',
 
             'Renaming', 'Unknown'
+          optional: true
+        - id: parameters.captureDescription
+          type:
+            - object
+          description: |-
+            Properties of capture
+            description
+          optional: true
+        - id: parameters.captureDescription.enabled
+          type:
+            - boolean
+          description: |-
+            A value that
+            indicates whether capture description is enabled.
+          optional: true
+        - id: parameters.captureDescription.encoding
+          type:
+            - string
+          description: >-
+            Enumerates the
+
+            possible values for the encoding format of capture description.
+            Possible
+
+            values include: 'Avro', 'AvroDeflate'
+          optional: true
+        - id: parameters.captureDescription.intervalInSeconds
+          type:
+            - number
+          description: >-
+            The time
+
+            window allows you to set the frequency with which the capture to
+            Azure Blobs
+
+            will happen, value should between 60 to 900 seconds
+          optional: true
+        - id: parameters.captureDescription.sizeLimitInBytes
+          type:
+            - number
+          description: >-
+            The size
+
+            window defines the amount of data built up in your Event Hub before
+            an
+
+            capture operation, value should be between 10485760 to 524288000
+            bytes
+          optional: true
+        - id: parameters.captureDescription.destination
+          type:
+            - object
+          description: >-
+            Properties of
+
+            Destination where capture will be stored. (Storage Account, Blob
+            Names)
+          optional: true
+        - id: parameters.captureDescription.destination.name
+          type:
+            - string
+          description: |-
+            Name for
+            capture destination
+          optional: true
+        - id: parameters.captureDescription.destination.storageAccountResourceId
+          type:
+            - string
+          description: Resource id of the storage account to be used to create the blobs
+          optional: true
+        - id: parameters.captureDescription.destination.blobContainer
+          type:
+            - string
+          description: Blob container Name
+          optional: true
+        - id: parameters.captureDescription.destination.archiveNameFormat
+          type:
+            - string
+          description: >-
+            Blob naming
+
+            convention for archive, e.g.
+
+            {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}.
+
+            Here all the parameters (Namespace,EventHub .. etc) are mandatory
+
+            irrespective of order
           optional: true
         - id: options
           type:
@@ -616,12 +763,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<EventHubResource>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<EventHubResource>} - The deserialized result
-          object.
+        text: '{HttpOperationResponse<Eventhub>} - The deserialized result object.'
+        value: '{HttpOperationResponse<Eventhub>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -677,8 +820,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{EventHubResource} - The deserialized result object.'
-        value: '{EventHubResource} - The deserialized result object.'
+        text: '{Eventhub} - The deserialized result object.'
+        value: '{Eventhub} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -689,7 +832,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link EventHubResource} for more information.
+                               See {@link Eventhub} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -702,7 +845,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link EventHubResource} for more information.
+                               See {@link Eventhub} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -771,10 +914,10 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The
+          {HttpOperationResponse<AuthorizationRuleListResult>} - The
           deserialized result object.
         value: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The
+          {HttpOperationResponse<AuthorizationRuleListResult>} - The
           deserialized result object.
       - originalTitle: reject
         title: reject
@@ -832,12 +975,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {SharedAccessAuthorizationRuleListResult} - The deserialized result
-          object.
-        value: >-
-          {SharedAccessAuthorizationRuleListResult} - The deserialized result
-          object.
+        text: '{AuthorizationRuleListResult} - The deserialized result object.'
+        value: '{AuthorizationRuleListResult} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -848,8 +987,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleListResult} for
-                               more information.
+                               See {@link AuthorizationRuleListResult} for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -862,8 +1001,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleListResult} for
-                               more information.
+                               See {@link AuthorizationRuleListResult} for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -932,11 +1071,11 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
-          deserialized result object.
+          {HttpOperationResponse<AuthorizationRule>} - The deserialized result
+          object.
         value: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
-          deserialized result object.
+          {HttpOperationResponse<AuthorizationRule>} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -966,20 +1105,11 @@ items:
           type:
             - object
           description: The shared access AuthorizationRule.
-        - id: parameters.location
-          type:
-            - string
-          description: Data center location.
-          optional: true
-        - id: parameters.name
-          type:
-            - string
-          description: Name of the AuthorizationRule.
-          optional: true
         - id: parameters.rights
           type:
             - array
           description: The rights associated with the rule.
+          optional: true
         - id: options
           type:
             - object
@@ -1017,12 +1147,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {SharedAccessAuthorizationRuleResource} - The deserialized result
-          object.
-        value: >-
-          {SharedAccessAuthorizationRuleResource} - The deserialized result
-          object.
+        text: '{AuthorizationRule} - The deserialized result object.'
+        value: '{AuthorizationRule} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -1033,8 +1159,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleResource} for
-                               more information.
+                               See {@link AuthorizationRule} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1047,8 +1172,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleResource} for
-                               more information.
+                               See {@link AuthorizationRule} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1078,20 +1202,11 @@ items:
           type:
             - object
           description: The shared access AuthorizationRule.
-        - id: parameters.location
-          type:
-            - string
-          description: Data center location.
-          optional: true
-        - id: parameters.name
-          type:
-            - string
-          description: Name of the AuthorizationRule.
-          optional: true
         - id: parameters.rights
           type:
             - array
           description: The rights associated with the rule.
+          optional: true
         - id: options
           type:
             - object
@@ -1138,11 +1253,11 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
-          deserialized result object.
+          {HttpOperationResponse<AuthorizationRule>} - The deserialized result
+          object.
         value: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleResource>} - The
-          deserialized result object.
+          {HttpOperationResponse<AuthorizationRule>} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -1204,12 +1319,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {SharedAccessAuthorizationRuleResource} - The deserialized result
-          object.
-        value: >-
-          {SharedAccessAuthorizationRuleResource} - The deserialized result
-          object.
+        text: '{AuthorizationRule} - The deserialized result object.'
+        value: '{AuthorizationRule} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -1220,8 +1331,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleResource} for
-                               more information.
+                               See {@link AuthorizationRule} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1234,8 +1344,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleResource} for
-                               more information.
+                               See {@link AuthorizationRule} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1463,12 +1572,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<ResourceListKeys>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<ResourceListKeys>} - The deserialized result
-          object.
+        text: '{HttpOperationResponse<AccessKeys>} - The deserialized result object.'
+        value: '{HttpOperationResponse<AccessKeys>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -1528,8 +1633,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{ResourceListKeys} - The deserialized result object.'
-        value: '{ResourceListKeys} - The deserialized result object.'
+        text: '{AccessKeys} - The deserialized result object.'
+        value: '{AccessKeys} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -1540,7 +1645,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ResourceListKeys} for more information.
+                               See {@link AccessKeys} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1553,7 +1658,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ResourceListKeys} for more information.
+                               See {@link AccessKeys} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1623,12 +1728,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<ResourceListKeys>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<ResourceListKeys>} - The deserialized result
-          object.
+        text: '{HttpOperationResponse<AccessKeys>} - The deserialized result object.'
+        value: '{HttpOperationResponse<AccessKeys>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -1660,12 +1761,18 @@ items:
           description: |-
             Parameters supplied to regenerate the
             AuthorizationRule Keys (PrimaryKey/SecondaryKey).
-        - id: parameters.policykey
+        - id: parameters.keyType
           type:
             - string
           description: |-
-            Key that needs to be regenerated.
-            Possible values include: 'PrimaryKey', 'SecondaryKey'
+            The access key to regenerate. Possible
+            values include: 'PrimaryKey', 'SecondaryKey'
+        - id: parameters.key
+          type:
+            - string
+          description: |-
+            Optional, if the key value provided, is set
+            for KeyType or autogenerated Key value set for keyType
           optional: true
         - id: options
           type:
@@ -1702,8 +1809,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{ResourceListKeys} - The deserialized result object.'
-        value: '{ResourceListKeys} - The deserialized result object.'
+        text: '{AccessKeys} - The deserialized result object.'
+        value: '{AccessKeys} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -1714,7 +1821,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ResourceListKeys} for more information.
+                               See {@link AccessKeys} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1727,7 +1834,7 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ResourceListKeys} for more information.
+                               See {@link AccessKeys} for more information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -1759,12 +1866,18 @@ items:
           description: |-
             Parameters supplied to regenerate the
             AuthorizationRule Keys (PrimaryKey/SecondaryKey).
-        - id: parameters.policykey
+        - id: parameters.keyType
           type:
             - string
           description: |-
-            Key that needs to be regenerated.
-            Possible values include: 'PrimaryKey', 'SecondaryKey'
+            The access key to regenerate. Possible
+            values include: 'PrimaryKey', 'SecondaryKey'
+        - id: parameters.key
+          type:
+            - string
+          description: |-
+            Optional, if the key value provided, is set
+            for KeyType or autogenerated Key value set for keyType
           optional: true
         - id: options
           type:
@@ -1797,13 +1910,13 @@ items:
         authorizationRuleName, parameters, options, optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.EventHubs#listAllNextWithHttpOperationResponse'
-    id: 'azure-arm-eventhub.EventHubs#listAllNextWithHttpOperationResponse'
+  - uid: 'azure-arm-eventhub.EventHubs#listByNamespaceNextWithHttpOperationResponse'
+    id: 'azure-arm-eventhub.EventHubs#listByNamespaceNextWithHttpOperationResponse'
     parent: azure-arm-eventhub.EventHubs
-    name: 'listAllNextWithHttpOperationResponse(nextPageLink, options)'
+    name: 'listByNamespaceNextWithHttpOperationResponse(nextPageLink, options)'
     summary: Gets all the Event Hubs in a Namespace.
     fullName: >-
-      azure-arm-eventhub.EventHubs.listAllNextWithHttpOperationResponse(nextPageLink,
+      azure-arm-eventhub.EventHubs.listByNamespaceNextWithHttpOperationResponse(nextPageLink,
       options)
     tags:
       - originalTitle: resolve
@@ -1843,16 +1956,18 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: 'function listAllNextWithHttpOperationResponse(nextPageLink, options)'
+      content: >-
+        function listByNamespaceNextWithHttpOperationResponse(nextPageLink,
+        options)
     langs:
       - js
-  - uid: 'azure-arm-eventhub.EventHubs#listAllNext'
-    id: 'azure-arm-eventhub.EventHubs#listAllNext'
+  - uid: 'azure-arm-eventhub.EventHubs#listByNamespaceNext'
+    id: 'azure-arm-eventhub.EventHubs#listByNamespaceNext'
     parent: azure-arm-eventhub.EventHubs
-    name: 'listAllNext(nextPageLink, options, optionalCallback)'
+    name: 'listByNamespaceNext(nextPageLink, options, optionalCallback)'
     summary: Gets all the Event Hubs in a Namespace.
     fullName: >-
-      azure-arm-eventhub.EventHubs.listAllNext(nextPageLink, options,
+      azure-arm-eventhub.EventHubs.listByNamespaceNext(nextPageLink, options,
       optionalCallback)
     tags:
       - originalTitle: resolve
@@ -1922,7 +2037,7 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function listAllNext(nextPageLink, options, optionalCallback)'
+      content: 'function listByNamespaceNext(nextPageLink, options, optionalCallback)'
     langs:
       - js
   - uid: >-
@@ -1939,10 +2054,10 @@ items:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The
+          {HttpOperationResponse<AuthorizationRuleListResult>} - The
           deserialized result object.
         value: >-
-          {HttpOperationResponse<SharedAccessAuthorizationRuleListResult>} - The
+          {HttpOperationResponse<AuthorizationRuleListResult>} - The
           deserialized result object.
       - originalTitle: reject
         title: reject
@@ -1990,12 +2105,8 @@ items:
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {SharedAccessAuthorizationRuleListResult} - The deserialized result
-          object.
-        value: >-
-          {SharedAccessAuthorizationRuleListResult} - The deserialized result
-          object.
+        text: '{AuthorizationRuleListResult} - The deserialized result object.'
+        value: '{AuthorizationRuleListResult} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: |-
@@ -2006,8 +2117,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleListResult} for
-                               more information.
+                               See {@link AuthorizationRuleListResult} for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 
@@ -2020,8 +2131,8 @@ items:
                                {Error}  err        - The Error object if an error occurred, null otherwise.
 
                                {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link SharedAccessAuthorizationRuleListResult} for
-                               more information.
+                               See {@link AuthorizationRuleListResult} for more
+                               information.
 
                                {object} [request]  - The HTTP Request object if an error did not occur.
 

@@ -13,16 +13,20 @@ ms.author: tarcher
 ---
 
 # Azure tools for Node.js developers
-Whatever your operating system, we have a great set of recommended tools to help you develop using Node.js on Azure.
+We recommend these great tools to develop using Node.js on Azure, no matter which operating system you use.
 
-### Step 1: Azure CLI
+### Optional: Install the Azure CLI
 Azure CLI is optimized for managing Azure resources from the command line.
+
+![CLI](media/node-azure-tools/cli.png)
  
 > [!div class="nextstepaction"]
 > [Install the Azure CLI 2.0](https://docs.microsoft.com/cli/azure/install-az-cli2)
 
-### Step 2: Visual Studio Code
+### Optional: Install Visual Studio Code
 Edit and debug Node.js apps on any OS.
- 
+
+![Visual Studio Code](media/node-azure-tools/vs-code.png)
+
 > [!div class="nextstepaction"]
 > [Download Visual Studio Code](https://code.visualstudio.com)

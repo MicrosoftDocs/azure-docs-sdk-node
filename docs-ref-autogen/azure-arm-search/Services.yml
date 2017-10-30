@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-search.Services
       path: lib\services\searchManagement\lib\operations\services.js
-      startLine: 944
+      startLine: 1077
       remote:
         branch: jsdoc
         path: lib\services\searchManagement\lib\operations\services.js
@@ -26,6 +26,8 @@ items:
       - 'azure-arm-search.Services#listByResourceGroup'
       - 'azure-arm-search.Services#checkNameAvailabilityWithHttpOperationResponse'
       - 'azure-arm-search.Services#checkNameAvailability'
+      - 'azure-arm-search.Services#beginCreateOrUpdateWithHttpOperationResponse'
+      - 'azure-arm-search.Services#beginCreateOrUpdate'
     langs:
       - js
   - id: 'azure-arm-search.Services.#ctor'
@@ -1232,6 +1234,444 @@ items:
 
           {Promise} A promise is returned
       content: 'function checkNameAvailability(name, options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-search.Services#beginCreateOrUpdateWithHttpOperationResponse'
+    id: 'azure-arm-search.Services#beginCreateOrUpdateWithHttpOperationResponse'
+    parent: azure-arm-search.Services
+    name: >-
+      beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
+      searchServiceName, service, options)
+    summary: >-
+      Creates or updates a Search service in the given resource group. If the
+
+      Search service already exists, all properties will be updated with the
+      given
+
+      values.
+    fullName: >-
+      azure-arm-search.Services.beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
+      searchServiceName, service, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<SearchService>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<SearchService>} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: >-
+            The name of the resource group within the
+
+            current subscription. You can obtain this value from the Azure
+            Resource
+
+            Manager API or the portal.
+        - id: searchServiceName
+          type:
+            - string
+          description: >-
+            The name of the Azure Search service to
+
+            create or update. Search service names must only contain lowercase
+            letters,
+
+            digits or dashes, cannot use dash as the first two or last one
+            characters,
+
+            cannot contain consecutive dashes, and must be between 2 and 60
+            characters
+
+            in length. Search service names must be globally unique since they
+            are part
+
+            of the service URI (https://<name>.search.windows.net). You cannot
+            change
+
+            the service name after the service is created.
+        - id: service
+          type:
+            - object
+          description: |-
+            The definition of the Search service to create or
+            update.
+        - id: service.replicaCount
+          type:
+            - number
+          description: >-
+            The number of replicas in the Search
+
+            service. If specified, it must be a value between 1 and 12 inclusive
+            for
+
+            standard SKUs or between 1 and 3 inclusive for basic SKU.
+          optional: true
+        - id: service.partitionCount
+          type:
+            - number
+          description: >-
+            The number of partitions in the
+
+            Search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values
+            greater
+
+            than 1 are only valid for standard SKUs. For 'standard3' services
+            with
+
+            hostingMode set to 'highDensity', the allowed values are between 1
+            and 3.
+          optional: true
+        - id: service.hostingMode
+          type:
+            - string
+          description: >-
+            Applicable only for the standard3 SKU.
+
+            You can set this property to enable up to 3 high density partitions
+            that
+
+            allow up to 1000 indexes, which is much higher than the maximum
+            indexes
+
+            allowed for any other SKU. For the standard3 SKU, the value is
+            either
+
+            'default' or 'highDensity'. For all other SKUs, this value must be
+
+            'default'. Possible values include: 'default', 'highDensity'
+          optional: true
+        - id: service.sku
+          type:
+            - object
+          description: |-
+            The SKU of the Search Service, which determines
+            price tier and capacity limits.
+        - id: service.sku.name
+          type:
+            - string
+          description: >-
+            The SKU of the Search service. Valid
+
+            values include: 'free': Shared service. 'basic': Dedicated service
+            with up
+
+            to 3 replicas. 'standard': Dedicated service with up to 12
+            partitions and 12
+
+            replicas. 'standard2': Similar to standard, but with more capacity
+            per
+
+            search unit. 'standard3': Offers maximum capacity per search unit
+            with up to
+
+            12 partitions and 12 replicas (or up to 3 partitions with more
+            indexes if
+
+            you also set the hostingMode property to 'highDensity'). Possible
+            values
+
+            include: 'free', 'basic', 'standard', 'standard2', 'standard3'
+          optional: true
+        - id: service.location
+          type:
+            - string
+          description: >-
+            The geographic location of the resource.
+
+            This must be one of the supported and registered Azure Geo Regions
+            (for
+
+            example, West US, East US, Southeast Asia, and so forth).
+        - id: service.tags
+          type:
+            - object
+          description: |-
+            Tags to help categorize the resource in the
+            Azure portal.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.searchManagementRequestOptions
+          type:
+            - object
+          description: |-
+            Additional
+            parameters for the operation
+          optional: true
+        - id: options.searchManagementRequestOptions.clientRequestId
+          type:
+            - azure-arm-search.uuid
+          description: >-
+            A
+
+            client-generated GUID value that identifies this request. If
+            specified, this
+
+            will be included in response information as a way to track the
+            request.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
+        searchServiceName, service, options)
+    langs:
+      - js
+  - uid: 'azure-arm-search.Services#beginCreateOrUpdate'
+    id: 'azure-arm-search.Services#beginCreateOrUpdate'
+    parent: azure-arm-search.Services
+    name: >-
+      beginCreateOrUpdate(resourceGroupName, searchServiceName, service,
+      options, optionalCallback)
+    summary: >-
+      Creates or updates a Search service in the given resource group. If the
+
+      Search service already exists, all properties will be updated with the
+      given
+
+      values.
+    fullName: >-
+      azure-arm-search.Services.beginCreateOrUpdate(resourceGroupName,
+      searchServiceName, service, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{SearchService} - The deserialized result object.'
+        value: '{SearchService} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link SearchService} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link SearchService} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: >-
+            The name of the resource group within the
+
+            current subscription. You can obtain this value from the Azure
+            Resource
+
+            Manager API or the portal.
+        - id: searchServiceName
+          type:
+            - string
+          description: >-
+            The name of the Azure Search service to
+
+            create or update. Search service names must only contain lowercase
+            letters,
+
+            digits or dashes, cannot use dash as the first two or last one
+            characters,
+
+            cannot contain consecutive dashes, and must be between 2 and 60
+            characters
+
+            in length. Search service names must be globally unique since they
+            are part
+
+            of the service URI (https://<name>.search.windows.net). You cannot
+            change
+
+            the service name after the service is created.
+        - id: service
+          type:
+            - object
+          description: |-
+            The definition of the Search service to create or
+            update.
+        - id: service.replicaCount
+          type:
+            - number
+          description: >-
+            The number of replicas in the Search
+
+            service. If specified, it must be a value between 1 and 12 inclusive
+            for
+
+            standard SKUs or between 1 and 3 inclusive for basic SKU.
+          optional: true
+        - id: service.partitionCount
+          type:
+            - number
+          description: >-
+            The number of partitions in the
+
+            Search service; if specified, it can be 1, 2, 3, 4, 6, or 12. Values
+            greater
+
+            than 1 are only valid for standard SKUs. For 'standard3' services
+            with
+
+            hostingMode set to 'highDensity', the allowed values are between 1
+            and 3.
+          optional: true
+        - id: service.hostingMode
+          type:
+            - string
+          description: >-
+            Applicable only for the standard3 SKU.
+
+            You can set this property to enable up to 3 high density partitions
+            that
+
+            allow up to 1000 indexes, which is much higher than the maximum
+            indexes
+
+            allowed for any other SKU. For the standard3 SKU, the value is
+            either
+
+            'default' or 'highDensity'. For all other SKUs, this value must be
+
+            'default'. Possible values include: 'default', 'highDensity'
+          optional: true
+        - id: service.sku
+          type:
+            - object
+          description: |-
+            The SKU of the Search Service, which determines
+            price tier and capacity limits.
+        - id: service.sku.name
+          type:
+            - string
+          description: >-
+            The SKU of the Search service. Valid
+
+            values include: 'free': Shared service. 'basic': Dedicated service
+            with up
+
+            to 3 replicas. 'standard': Dedicated service with up to 12
+            partitions and 12
+
+            replicas. 'standard2': Similar to standard, but with more capacity
+            per
+
+            search unit. 'standard3': Offers maximum capacity per search unit
+            with up to
+
+            12 partitions and 12 replicas (or up to 3 partitions with more
+            indexes if
+
+            you also set the hostingMode property to 'highDensity'). Possible
+            values
+
+            include: 'free', 'basic', 'standard', 'standard2', 'standard3'
+          optional: true
+        - id: service.location
+          type:
+            - string
+          description: >-
+            The geographic location of the resource.
+
+            This must be one of the supported and registered Azure Geo Regions
+            (for
+
+            example, West US, East US, Southeast Asia, and so forth).
+        - id: service.tags
+          type:
+            - object
+          description: |-
+            Tags to help categorize the resource in the
+            Azure portal.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.searchManagementRequestOptions
+          type:
+            - object
+          description: |-
+            Additional
+            parameters for the operation
+          optional: true
+        - id: options.searchManagementRequestOptions.clientRequestId
+          type:
+            - azure-arm-search.uuid
+          description: >-
+            A
+
+            client-generated GUID value that identifies this request. If
+            specified, this
+
+            will be included in response information as a way to track the
+            request.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function beginCreateOrUpdate(resourceGroupName, searchServiceName,
+        service, options, optionalCallback)
     langs:
       - js
 references:

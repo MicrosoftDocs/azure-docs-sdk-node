@@ -7,11 +7,10 @@ var glob = require('glob');
 var path = require('path');
 var yaml = require('js-yaml');
 
-var src = 'src/azure-sdk-for-node';
+var src = 'src';
 var packageMappingFileRelativePath = 'package_service_mapping.json';
 var repoRelativePath = 'repo.json';
 var dest = 'docs-ref-autogen';
-var doc = 'Documentation';
 var configPath = 'node2docfx.json';
 var tempConfigPath = '_node2docfx_temp.json';
 var filenameMaxLength = 100;
@@ -46,21 +45,32 @@ function buildTocItems(keys, relativePathToRootFolder) {
   });
 }
 
-function generatePackageDoc(packagePath, configPath, dest, resetInclude, whiteList, repo) {
+function generatePackageDoc(packagePath, configPath, dest, rootPackage, whiteList, repo, repoName) {
   var config = fse.readJsonSync(configPath);
   var dir = path.dirname(packagePath);
   var packageName = fse.readJsonSync(packagePath).name;
-  if (whiteList && whiteList[packageName] !== true) {
+  
+  if (whiteList && whiteList.indexOf(packageName) == -1) {
     return;
   }
-  if (resetInclude) {
-    config.source.include = [dir];
+  
+  if (rootPackage) {
+    if (whiteList){
+      config.source.include = path.join(dir, 'lib', packageName + '.js');
+    }
+    else{
+      // null whiteList means this root package is the only one package
+      config.source.include = path.join(dir, 'lib');
+    }
   }  
+  else{
+    config.source.include = [dir];
+  }
   config.package = packagePath;
   config.readme = path.join(dir, 'README.md');
   config.destination = path.join(dest, packageName);
   if (repo) {
-    config.repo = repo;
+    config.repo = [repo[repoName]];
   }
   fse.writeJsonSync(tempConfigPath, config);
   child_process.execFileSync('node', ['node_modules/node2docfx/node2docfx.js', tempConfigPath]);
@@ -69,38 +79,52 @@ function generatePackageDoc(packagePath, configPath, dest, resetInclude, whiteLi
 
 function getWhiteListFromPackageMappingFile(sourcePath, packageMappingFileRelativePath) {
   var mapping = fse.readJsonSync(sourcePath + '/' + packageMappingFileRelativePath);
-  var whiteList = {};
+  var whiteList = [];
   Object.keys(mapping).forEach(function(element) {
-    whiteList[element] = true;
+    whiteList.push(element);
   }, this);
   return whiteList; 
 }
 
 // 1. prepare
 fse.removeSync(dest);
-var whiteList = getWhiteListFromPackageMappingFile(src, packageMappingFileRelativePath);
 var repoConfig = fse.readJsonSync(repoRelativePath);
 var repo = null;
 if (repoConfig && repoConfig.repo) {
   repo = repoConfig.repo;
 }
+// get globalWhiteList from all repo package_service_mapping files, except one package repo
+var globalWhiteList = [];
+Object.keys(repo).forEach(function (repoName){
+  if(!repo[repoName]['onePackage']){
+    var whiteList = getWhiteListFromPackageMappingFile(src + '/' + repoName, packageMappingFileRelativePath);
+    globalWhiteList = globalWhiteList.concat(whiteList);
+  }
+});
 
-// 2. generate yml and copy readme.md for azure.js
+// 2. generate yml and copy readme.md for root package of repo
 var rootConfig = fse.readJsonSync(configPath);
-generatePackageDoc(rootConfig.package, configPath, rootConfig.destination, false, whiteList, repo);
+Object.keys(repo).forEach(function (repoName){
+  var packagePath = path.join(src, repoName, 'package.json');
+  var whiteList = globalWhiteList;
+  if(repo[repoName]['onePackage'] && repo[repoName]['onePackage'] === 'true'){
+    whiteList = null;
+  }
+  generatePackageDoc(packagePath, configPath, rootConfig.destination, true, whiteList, repo, repoName);
+});
 
 // 3. generate yml and copy readme.md for all sub packages
-var packageJsons = glob.sync(path.join(src, 'lib/**/package.json'));
-packageJsons.forEach(function (packagePath) {
-  generatePackageDoc(packagePath, configPath, dest, true, whiteList, repo);
-});
+Object.keys(repo).forEach(function (repoName){
+  if (!repo[repoName]['onePackage']){
+    var packageJsons = glob.sync(path.join(src, repoName, 'lib/**/package.json'));
+    packageJsons.forEach(function (packagePath) {
+      generatePackageDoc(packagePath, configPath, dest, false, globalWhiteList, repo, repoName);
+    });
+  }
+}); 
 fs.unlink(tempConfigPath);
 
-// 4. copy documentation
-fse.copySync(path.join(src, doc), path.join(dest, doc));
-console.log('Finish copying documentation');
-
-// 5. remove files with too long filename that breaks DocFX
+// 4. remove files with too long filename that breaks DocFX
 packagesToFilter.forEach(function (p) {
   var uidsToFilter = [];
   fs.readdirSync(path.join(dest, p)).forEach(function (f) {
@@ -121,7 +145,7 @@ packagesToFilter.forEach(function (p) {
   }
 });
 
-// 6. generate root toc
+// 5. generate root toc
 var rootToc = [];
 var rootTocPath = path.join(dest, 'toc.yml');
 var subTocs = glob.sync(path.join(dest, '**/toc.yml'));
@@ -129,7 +153,7 @@ subTocs.forEach(function (subTocPath) {
   var tocContent = yaml.safeLoad(fs.readFileSync(subTocPath));
   var packageName = subTocPath.split('/')[1];
   var topicHref = path.join(packageName, 'index.md');
-  tocContent = { name: packageName, uid: packageName, topicHref: topicHref, items: tocContent };
+  tocContent = { name: packageName, uid: packageName, landingPageType: 'Service', items: tocContent };
   rootToc.push(tocContent);
 });
 fs.writeFileSync(rootTocPath, yaml.safeDump(rootToc));

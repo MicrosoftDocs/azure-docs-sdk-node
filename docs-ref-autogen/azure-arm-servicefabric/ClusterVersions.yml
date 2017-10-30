@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-servicefabric.ClusterVersions
       path: lib\services\serviceFabricManagement\lib\operations\clusterVersions.js
-      startLine: 294
+      startLine: 620
       remote:
         branch: jsdoc
         path: lib\services\serviceFabricManagement\lib\operations\clusterVersions.js
@@ -16,11 +16,16 @@ items:
     type: Class
     children:
       - 'azure-arm-servicefabric.ClusterVersions.#ctor'
+      - 'azure-arm-servicefabric.ClusterVersions#getWithHttpOperationResponse'
+      - 'azure-arm-servicefabric.ClusterVersions#get'
+      - >-
+        azure-arm-servicefabric.ClusterVersions#getByEnvironmentWithHttpOperationResponse
+      - 'azure-arm-servicefabric.ClusterVersions#getByEnvironment'
       - 'azure-arm-servicefabric.ClusterVersions#listWithHttpOperationResponse'
       - 'azure-arm-servicefabric.ClusterVersions#list'
       - >-
-        azure-arm-servicefabric.ClusterVersions#listNextWithHttpOperationResponse
-      - 'azure-arm-servicefabric.ClusterVersions#listNext'
+        azure-arm-servicefabric.ClusterVersions#listByEnvironmentWithHttpOperationResponse
+      - 'azure-arm-servicefabric.ClusterVersions#listByEnvironment'
     langs:
       - js
   - id: 'azure-arm-servicefabric.ClusterVersions.#ctor'
@@ -39,14 +44,17 @@ items:
       content: new ClusterVersions(client)
     langs:
       - js
-  - uid: 'azure-arm-servicefabric.ClusterVersions#listWithHttpOperationResponse'
-    id: 'azure-arm-servicefabric.ClusterVersions#listWithHttpOperationResponse'
+  - uid: 'azure-arm-servicefabric.ClusterVersions#getWithHttpOperationResponse'
+    id: 'azure-arm-servicefabric.ClusterVersions#getWithHttpOperationResponse'
     parent: azure-arm-servicefabric.ClusterVersions
-    name: 'listWithHttpOperationResponse(location, environment, options)'
-    summary: List cluster code versions by location
+    name: 'getWithHttpOperationResponse(location, clusterVersion, options)'
+    summary: |-
+      Get cluster code versions
+
+      Get cluster code versions by location
     fullName: >-
-      azure-arm-servicefabric.ClusterVersions.listWithHttpOperationResponse(location,
-      environment, options)
+      azure-arm-servicefabric.ClusterVersions.getWithHttpOperationResponse(location,
+      clusterVersion, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -69,12 +77,10 @@ items:
           description: |-
             The location for the cluster code versions, this is
             different from cluster location
-        - id: environment
+        - id: clusterVersion
           type:
             - string
-          description: |-
-            Cluster operating system, the default means all.
-            Possible values include: 'Default', 'Windows', 'Linux'
+          description: The cluster code version
         - id: options
           type:
             - object
@@ -91,16 +97,19 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: 'function listWithHttpOperationResponse(location, environment, options)'
+      content: 'function getWithHttpOperationResponse(location, clusterVersion, options)'
     langs:
       - js
-  - uid: 'azure-arm-servicefabric.ClusterVersions#list'
-    id: 'azure-arm-servicefabric.ClusterVersions#list'
+  - uid: 'azure-arm-servicefabric.ClusterVersions#get'
+    id: 'azure-arm-servicefabric.ClusterVersions#get'
     parent: azure-arm-servicefabric.ClusterVersions
-    name: 'list(location, environment, options, optionalCallback)'
-    summary: List cluster code versions by location
+    name: 'get(location, clusterVersion, options, optionalCallback)'
+    summary: |-
+      Get cluster code versions
+
+      Get cluster code versions by location
     fullName: >-
-      azure-arm-servicefabric.ClusterVersions.list(location, environment,
+      azure-arm-servicefabric.ClusterVersions.get(location, clusterVersion,
       options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -146,12 +155,10 @@ items:
           description: |-
             The location for the cluster code versions, this is
             different from cluster location
-        - id: environment
+        - id: clusterVersion
           type:
             - string
-          description: |-
-            Cluster operating system, the default means all.
-            Possible values include: 'Default', 'Windows', 'Linux'
+          description: The cluster code version
         - id: options
           type:
             - object
@@ -178,16 +185,185 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function list(location, environment, options, optionalCallback)'
+      content: 'function get(location, clusterVersion, options, optionalCallback)'
     langs:
       - js
-  - uid: 'azure-arm-servicefabric.ClusterVersions#listNextWithHttpOperationResponse'
-    id: 'azure-arm-servicefabric.ClusterVersions#listNextWithHttpOperationResponse'
+  - uid: >-
+      azure-arm-servicefabric.ClusterVersions#getByEnvironmentWithHttpOperationResponse
+    id: >-
+      azure-arm-servicefabric.ClusterVersions#getByEnvironmentWithHttpOperationResponse
     parent: azure-arm-servicefabric.ClusterVersions
-    name: 'listNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: List cluster code versions by location
+    name: >-
+      getByEnvironmentWithHttpOperationResponse(location, environment,
+      clusterVersion, options)
+    summary: |-
+      Get cluster code versions by environment
+
+      Get cluster code versions by environment
     fullName: >-
-      azure-arm-servicefabric.ClusterVersions.listNextWithHttpOperationResponse(nextPageLink,
+      azure-arm-servicefabric.ClusterVersions.getByEnvironmentWithHttpOperationResponse(location,
+      environment, clusterVersion, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ClusterCodeVersionsListResult>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<ClusterCodeVersionsListResult>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: location
+          type:
+            - string
+          description: |-
+            The location for the cluster code versions, this is
+            different from cluster location
+        - id: environment
+          type:
+            - string
+          description: |-
+            Cluster operating system, the default means all.
+            Possible values include: 'Windows', 'Linux'
+        - id: clusterVersion
+          type:
+            - string
+          description: The cluster code version
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function getByEnvironmentWithHttpOperationResponse(location,
+        environment, clusterVersion, options)
+    langs:
+      - js
+  - uid: 'azure-arm-servicefabric.ClusterVersions#getByEnvironment'
+    id: 'azure-arm-servicefabric.ClusterVersions#getByEnvironment'
+    parent: azure-arm-servicefabric.ClusterVersions
+    name: >-
+      getByEnvironment(location, environment, clusterVersion, options,
+      optionalCallback)
+    summary: |-
+      Get cluster code versions by environment
+
+      Get cluster code versions by environment
+    fullName: >-
+      azure-arm-servicefabric.ClusterVersions.getByEnvironment(location,
+      environment, clusterVersion, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{ClusterCodeVersionsListResult} - The deserialized result object.'
+        value: '{ClusterCodeVersionsListResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link ClusterCodeVersionsListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link ClusterCodeVersionsListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: location
+          type:
+            - string
+          description: |-
+            The location for the cluster code versions, this is
+            different from cluster location
+        - id: environment
+          type:
+            - string
+          description: |-
+            Cluster operating system, the default means all.
+            Possible values include: 'Windows', 'Linux'
+        - id: clusterVersion
+          type:
+            - string
+          description: The cluster code version
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function getByEnvironment(location, environment, clusterVersion,
+        options, optionalCallback)
+    langs:
+      - js
+  - uid: 'azure-arm-servicefabric.ClusterVersions#listWithHttpOperationResponse'
+    id: 'azure-arm-servicefabric.ClusterVersions#listWithHttpOperationResponse'
+    parent: azure-arm-servicefabric.ClusterVersions
+    name: 'listWithHttpOperationResponse(location, options)'
+    summary: |-
+      List cluster code versions by location
+
+      List cluster code versions by location
+    fullName: >-
+      azure-arm-servicefabric.ClusterVersions.listWithHttpOperationResponse(location,
       options)
     tags:
       - originalTitle: resolve
@@ -205,12 +381,12 @@ items:
     type: Function
     syntax:
       parameters:
-        - id: nextPageLink
+        - id: location
           type:
             - string
           description: |-
-            The NextLink from the previous successful call
-            to List operation.
+            The location for the cluster code versions, this is
+            different from cluster location
         - id: options
           type:
             - object
@@ -227,16 +403,19 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: 'function listNextWithHttpOperationResponse(nextPageLink, options)'
+      content: 'function listWithHttpOperationResponse(location, options)'
     langs:
       - js
-  - uid: 'azure-arm-servicefabric.ClusterVersions#listNext'
-    id: 'azure-arm-servicefabric.ClusterVersions#listNext'
+  - uid: 'azure-arm-servicefabric.ClusterVersions#list'
+    id: 'azure-arm-servicefabric.ClusterVersions#list'
     parent: azure-arm-servicefabric.ClusterVersions
-    name: 'listNext(nextPageLink, options, optionalCallback)'
-    summary: List cluster code versions by location
+    name: 'list(location, options, optionalCallback)'
+    summary: |-
+      List cluster code versions by location
+
+      List cluster code versions by location
     fullName: >-
-      azure-arm-servicefabric.ClusterVersions.listNext(nextPageLink, options,
+      azure-arm-servicefabric.ClusterVersions.list(location, options,
       optionalCallback)
     tags:
       - originalTitle: resolve
@@ -276,12 +455,12 @@ items:
     type: Function
     syntax:
       parameters:
-        - id: nextPageLink
+        - id: location
           type:
             - string
           description: |-
-            The NextLink from the previous successful call
-            to List operation.
+            The location for the cluster code versions, this is
+            different from cluster location
         - id: options
           type:
             - object
@@ -308,7 +487,161 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function listNext(nextPageLink, options, optionalCallback)'
+      content: 'function list(location, options, optionalCallback)'
+    langs:
+      - js
+  - uid: >-
+      azure-arm-servicefabric.ClusterVersions#listByEnvironmentWithHttpOperationResponse
+    id: >-
+      azure-arm-servicefabric.ClusterVersions#listByEnvironmentWithHttpOperationResponse
+    parent: azure-arm-servicefabric.ClusterVersions
+    name: 'listByEnvironmentWithHttpOperationResponse(location, environment, options)'
+    summary: |-
+      List cluster code versions by environment
+
+      List cluster code versions by environment
+    fullName: >-
+      azure-arm-servicefabric.ClusterVersions.listByEnvironmentWithHttpOperationResponse(location,
+      environment, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ClusterCodeVersionsListResult>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<ClusterCodeVersionsListResult>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: location
+          type:
+            - string
+          description: |-
+            The location for the cluster code versions, this is
+            different from cluster location
+        - id: environment
+          type:
+            - string
+          description: |-
+            Cluster operating system, the default means all.
+            Possible values include: 'Windows', 'Linux'
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function listByEnvironmentWithHttpOperationResponse(location,
+        environment, options)
+    langs:
+      - js
+  - uid: 'azure-arm-servicefabric.ClusterVersions#listByEnvironment'
+    id: 'azure-arm-servicefabric.ClusterVersions#listByEnvironment'
+    parent: azure-arm-servicefabric.ClusterVersions
+    name: 'listByEnvironment(location, environment, options, optionalCallback)'
+    summary: |-
+      List cluster code versions by environment
+
+      List cluster code versions by environment
+    fullName: >-
+      azure-arm-servicefabric.ClusterVersions.listByEnvironment(location,
+      environment, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{ClusterCodeVersionsListResult} - The deserialized result object.'
+        value: '{ClusterCodeVersionsListResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link ClusterCodeVersionsListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link ClusterCodeVersionsListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: location
+          type:
+            - string
+          description: |-
+            The location for the cluster code versions, this is
+            different from cluster location
+        - id: environment
+          type:
+            - string
+          description: |-
+            Cluster operating system, the default means all.
+            Possible values include: 'Windows', 'Linux'
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function listByEnvironment(location, environment, options,
+        optionalCallback)
     langs:
       - js
 references:

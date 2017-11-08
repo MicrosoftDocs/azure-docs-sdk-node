@@ -20,7 +20,7 @@ ms.service: Server Management
 The Azure Server Manager allows you to manage nodes, gateways, sessions, and PowerShell commands and sessions.
 
 > [!WARNING]
-> This API is deprecated in favor of using the [Azure Resource Manager](/nodejs/api/overview/azure/resources), and it may not work with all services.
+> This API is deprecated in favor of using the [Azure Resource Manager](/javascript/api/overview/azure/resources), and it may not work with all services.
 
 ## Install the module with npm
 

@@ -260,7 +260,7 @@ Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples
 
 ## Reference 
 
-A [reference](/nodejs/api/overview/azure/?view=azure-node-2.0.0) is available for all packages.
+A [reference](/javascript/api/overview/azure/) is available for all packages.
 
 ## Get help and give feedback
 

@@ -5,7 +5,7 @@ keywords: Azure,SDK,API,Service Fabric, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
-ms.date: 07/18/2017
+ms.date: 11/12/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure

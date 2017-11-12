@@ -2,9 +2,9 @@
 title: Azure Scheduler modules for Node.js
 description: Reference for Azure Scheduler modules for Node.js
 keywords: Azure,SDK,API,Scheduler, Node.js
-author: tomarcher
-ms.author: tarcher
-manager: douge
+author: craigshoemaker
+ms.author: cshoe
+manager: routlaw
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

@@ -2,9 +2,9 @@
 title: Azure MySQL modules for Node.js
 description: Reference for Azure MySQL modules for Node.js
 keywords: Azure, Node, SDK, API, nodejs, javascript, database, MySQL
-author: tomarcher
-ms.author: tarcher
-manager: douge
+author: craigshoemaker
+ms.author: cshoe
+manager: routlaw
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

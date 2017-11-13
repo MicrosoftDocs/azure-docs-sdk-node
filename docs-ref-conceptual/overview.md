@@ -2,9 +2,9 @@
 title: Azure modules for Node.js
 description: Overview of the Azure management and service modules for Node.js
 keywords: Azure, Node.js, SDK, API, management , client, services
-author: TomArcher
-ms.author: tarcher
-manager: douge
+author: craigshoemaker
+ms.author: cshoe
+manager: routlaw
 ms.date: 06/17/2017
 ms.topic: article
 ms.prod: azure

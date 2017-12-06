@@ -13,7 +13,7 @@ ms.author: cshoe
 ---
 
 # Azure tools for Node.js developers
-The following tools are reccomended for developing with Azure on Node.js.
+The following tools are recommended for developing with Azure on Node.js.
 
 ## Azure CLI
 Azure CLI is optimized for managing Azure resources from the command line.

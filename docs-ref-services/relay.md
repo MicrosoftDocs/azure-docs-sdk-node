@@ -1,7 +1,6 @@
 ---
 title: Azure Relay modules for Node.js
 description: Reference for Azure Relay modules for Node.js
-keywords: Azure,SDK,API,Relay, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: Relay
 ---
 
 # Azure Relay modules for Node.js
-
-## Overview
 
 The Azure Relay service creates hybrid applications by enabling you to securely expose services that reside within a corporate enterprise network to the public cloud, without having to open a firewall connection, or require intrusive changes to a corporate network infrastructure. Relay supports a variety of different transport protocols and web services standards.
 

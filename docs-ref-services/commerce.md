@@ -1,7 +1,6 @@
 ---
 title: Azure Commerce modules for Node.js
 description: Reference for Azure Commerce modules for Node.js
-keywords: Azure,SDK,API,Commerce, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw

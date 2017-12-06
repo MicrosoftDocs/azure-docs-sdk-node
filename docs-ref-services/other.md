@@ -1,7 +1,6 @@
 ---
 title: Azure Other modules for Node.js
 description: Reference for Azure Other modules for Node.js
-keywords: Azure,SDK,API,Other, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: Other
 ---
 
 # Azure Other modules for Node.js
-
-## Overview
 
 This module includes all of the individual Azure Node.js modules in a single place.
 

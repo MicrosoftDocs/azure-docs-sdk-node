@@ -1,7 +1,6 @@
 ---
 title: Azure Storage modules for Node.js
 description: Reference for Azure Storage modules for Node.js
-keywords: Azure, Node, SDK, API, Storage, nodejs, javascript
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: storage
 ---
 
 # Azure Storage modules for Node.js
-
-## Overview
 
 Use the Azure Storage client module to:
 

@@ -1,7 +1,6 @@
 ---
 title: Azure Server Management modules for Node.js
 description: Reference for Azure Server Management modules for Node.js
-keywords: Azure,SDK,API,Server Management, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: Server Management
 ---
 
 # Azure Server Management modules for Node.js
-
-## Overview
 
 The Azure Server Manager allows you to manage nodes, gateways, sessions, and PowerShell commands and sessions.
 

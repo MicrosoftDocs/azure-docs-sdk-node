@@ -1,7 +1,6 @@
 ---
 title: Azure Billing modules for Node.js
 description: Reference for Azure Billing modules for Node.js
-keywords: Azure,SDK,API,Billing, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw

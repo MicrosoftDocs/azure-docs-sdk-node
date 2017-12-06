@@ -1,7 +1,6 @@
 ---
 title: Azure Resource Manager modules for Node.js
 description: Reference for Azure Resource Manager modules for Node.js
-keywords: Azure,SDK,API,Resources, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: Resources
 ---
 
 # Azure Resource modules for Node.js
-
-## Overview
 
 Azure Resource Manager enables you to deploy and manage the infrastructure for your Azure solutions. You organize related resources in resource groups, and deploy your resources with JSON templates.
 

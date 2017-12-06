@@ -1,7 +1,6 @@
 ---
 title: Azure App Service modules for Node.js
 description: Reference for Azure App Service modules for Node.js
-keywords: Azure, Node, SDK, API, web apps , mobile , nodejs, javascript
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw

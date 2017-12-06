@@ -1,7 +1,6 @@
 ---
 title: Azure Virtual Network modules for Node.js
 description: Reference for Azure Virtual Network modules for Node.js
-keywords: Azure,SDK,API,Virtual Network, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw

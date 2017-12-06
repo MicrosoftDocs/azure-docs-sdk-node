@@ -1,7 +1,6 @@
 ---
 title: Azure Scheduler modules for Node.js
 description: Reference for Azure Scheduler modules for Node.js
-keywords: Azure,SDK,API,Scheduler, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: Scheduler
 ---
 
 # Azure Scheduler modules for Node.js
-
-## Overview
 
 Azure Scheduler creates, maintains, and invokes scheduled work via HTTP, HTTPS, a storage queue, or the [Azure Service Bus](/azure/service-bus-messaging/service-bus-messaging-overview).
 

@@ -44,9 +44,9 @@ msRestAzure.interactiveLogin().then(credentials => {
   client.virtualMachineImages
     .list(
         'westus',                   // location
-        'MicrosoftWindowsServer',   // publisher name
-        'WindowsServer',            // offer
-        '2012-R2-Datacenter'        // sku
+        'Canonical',   // publisher name
+        'UbuntuServer',            // offer
+        '16.04-LTS'        // sku
     )
     .then(result => console.log(result));
 });

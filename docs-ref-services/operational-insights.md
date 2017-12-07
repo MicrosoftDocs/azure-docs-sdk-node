@@ -1,7 +1,6 @@
 ---
 title: Azure Operational Insights Modules for Node.js
 description: Reference for Azure Operational Insights Modules for Node.js
-keywords: Azure,SDK,API,Operational Insights, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,12 +13,6 @@ ms.service: Operational Insights
 ---
 
 # Azure Operational Insights Modules for Node.js
-
-## Overview
-
-## Management package
-
-### Install the npm module
 
 Use npm to install the Azure Operational Insights module for Node.js
 

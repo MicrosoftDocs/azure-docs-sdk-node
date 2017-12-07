@@ -1,7 +1,6 @@
 ---
 title: Azure Container Registry modules for Node.js
 description: Reference for Azure Container Registry Modules for Node.js
-keywords: Azure,SDK,API,Container Registry, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: Container Registry
 ---
 
 # Azure Container Registry modules for Node.js
-
-## Overview
 
 Azure Container Registry is a managed Docker registry service based on the open-source Docker Registry 2.0. Create and maintain Azure container registries to store and manage your private Docker container images. Use container registries in Azure with your existing container development and deployment pipelines, and draw on the body of Docker community expertise.
 

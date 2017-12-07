@@ -1,7 +1,6 @@
 ---
 title: Azure Authorization modules for Node.js
 description: Reference for Azure Authorization modules for Node.js
-keywords: Azure,SDK,API,Authorization, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw

@@ -1,7 +1,6 @@
 ---
 title: Azure Key Vault modules for Node.js
 description: Reference for Azure Key Vault modules for Node.js
-keywords: Azure,SDK,API,Key Vault, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: Key Vault
 ---
 
 # Azure Key Vault modules for Node.js
-
-## Overview
 
 Azure Key Vault helps safeguard cryptographic keys and secrets used by cloud applications and services. By using Key Vault, you can encrypt keys and secrets (such as authentication keys, storage account keys, data encryption keys, .PFX files, and passwords) by using keys that are protected by hardware security modules (HSMs). For added assurance, you can import or generate keys in HSMs. If you choose to do this, Microsoft processes your keys in FIPS 140-2 Level 2 validated HSMs (hardware and firmware).
 

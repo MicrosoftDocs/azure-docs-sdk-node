@@ -1,7 +1,6 @@
 ---
 title: Azure Search modules for Node.js
 description: Reference for Azure Search modules for Node.js
-keywords: Azure,SDK,API,Search, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: Search
 ---
 
 # Azure Search modules for Node.js
-
-## Overview
 
 Azure Search is a cloud search-as-a-service solution that delegates server and infrastructure management to Microsoft, leaving you with a ready-to-use service that you can populate with your data and then use to add search to your application.
 

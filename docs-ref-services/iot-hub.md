@@ -1,7 +1,6 @@
 ---
 title: Azure IoT Hub modules for Node.js
 description: Reference for Azure IoT Hub modules for Node.js
-keywords: Azure,SDK,API,IoT Hub, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: IoT Hub
 ---
 
 # Azure IoT Hub modules for Node.js
-
-## Overview
 
 Azure IoT Hub is a fully managed service that enables reliable and secure bidirectional communications between millions of IoT devices and a solution back end. Azure IoT Hub:
 - Provides multiple device-to-cloud and cloud-to-device communication options, including one-way messaging, file transfer, and request-reply methods.

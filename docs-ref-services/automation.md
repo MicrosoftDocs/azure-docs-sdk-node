@@ -1,7 +1,6 @@
 ---
 title: Azure Automation Modules for Node.js
 description: Reference for Azure Automation Modules for Node.js
-keywords: Azure,SDK,API,Automation, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw

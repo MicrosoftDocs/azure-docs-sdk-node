@@ -1,7 +1,6 @@
 ---
 title: Azure Cosmos DB Modules for Node.js
 description: Reference for Azure Cosmos DB modules for Node.js
-keywords: Azure,SDK,API,Cosmos DB, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: Cosmos DB
 ---
 
 # Azure Cosmos DB Modules for Node.js
-
-## Overview
 
 Azure Cosmos DB is Microsoft's globally distributed, multi-model database. Azure Cosmos DB enables you to elastically and independently scale throughput and storage across any number of Azure's geographic regions. It offers throughput, latency, availability, and consistency guarantees with comprehensive service level agreements (SLAs), something no other database service can offer.
 

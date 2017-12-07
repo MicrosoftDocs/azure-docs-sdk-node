@@ -1,7 +1,6 @@
 ---
 title: Azure Service Map modules for Node.js
 description: Reference for Azure Service Map modules for Node.js
-keywords: Azure,SDK,API,Service Map, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -14,8 +13,6 @@ ms.service: Service Map
 ---
 
 # Azure Service Map modules for Node.js
-
-## Overview
 
 Service Map automatically discovers application components on Windows and Linux systems and maps the communication between services. Service Map shows connections between servers, processes, and ports across any TCP-connected architecture, with no configuration required other than the installation of an agent.
 

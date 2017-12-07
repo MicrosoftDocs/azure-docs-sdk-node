@@ -1,7 +1,6 @@
 ---
 title: Authenticate with the Azure management modules for Node.js
 description: Authenticate with a service principal into the Azure management modules for Node.js
-keywords: Azure, Node, SDK, API, authentication, active directory, service principal
 author: craigshoemaker
 manager: routlaw
 ms.author: cshoe

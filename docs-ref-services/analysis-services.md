@@ -1,7 +1,6 @@
 ---
 title: Azure Analysis Services modules for Node.js
 description: Reference for Azure Analysis Services modules for Node.js
-keywords: Azure,SDK,API,Analysis Services, Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw

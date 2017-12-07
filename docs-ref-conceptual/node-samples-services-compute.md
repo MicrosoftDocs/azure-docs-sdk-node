@@ -1,6 +1,6 @@
 ---
-title: Sample code for adding Azure Compute functionality with Node.js
-description: Sample code that illustrates adding Azure Compute functionality with Node.js.
+title: Azure Compute code samples for Node.js
+description: Sample code demonstrating how to add Azure Compute functionality with Node.js.
 author: craigshoemaker
 manager: routlaw
 ms.devlang: nodejs
@@ -10,7 +10,7 @@ ms.date: 06/17/2017
 ms.author: cshoe
 ---
 
-# Sample code for adding Azure Compute functionality with Node.js
+# Azure Compute with Node.js code samples
 
 The following sample code illustrates adding Azure Compute functionality with Node.js.
 

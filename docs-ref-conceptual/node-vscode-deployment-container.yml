@@ -1,0 +1,46 @@
+### YamlMime:YamlDocument
+documentType: Tutorial
+title: Deploy Custom Docker Container to Azure App Service with Visual Studio Code
+metadata:
+  title: Deploy custom docker container to Azure App Service with Visual Studio Code
+  description: Use Visual Studio Code extensions for Docker to deploy a Node.js application in a custom Docker container to Azure App Service
+  audience: Developer
+  level: Intermediate
+  nextTutorialHref: http://example.com
+  nextTutorialTitle: TODO
+  displayType: one-column
+  interactive: azurecli
+items:
+- durationInMinutes: 5
+  content: |
+    This tutorial demonstrates how to deploy a Node.js application in a custom Docker container to Azure App Service using [Visual Studio Code extensions](https://code.visualstudio.com/docs/editor/extension-gallery).
+
+    Before you begin, make sure you have the following items:
+
+    - [Azure account](https://azure.microsoft.com/free/)
+    - [Visual Studio Code](https://code.visualstudio.com/download)
+    - [Azure CLI](/cli/azure/install-azure-cli)
+    - [Docker](https://www.docker.com/)
+    - [Node Pack for Azure](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack) for Visual Studio Code
+- title: Prepare a Resource Group and Container Registry
+  durationInMinutes: 5
+  content: |
+    To begin, ensure you have a container registry created. If you need to create a new registry, follow the steps in [Create a container registry using the Azure CLI](/container-registry/container-registry-get-started-azure-cli). As you go through the steps to create a registry, **be sure not to delete the resource group** as described in the [**Clean up resources**](/azure/container-registry/container-registry-get-started-azure-cli#clean-up-resources) section. You need a resource group in the following steps of this tutorial.
+
+    If you have an existing resource group and container registry available for use, then proceed to the next section.
+- title: Containerize your application
+  durationInMinutes: 1
+  content: |
+    Visual Studio Code makes it easy to create a container for your application. Open the Command Palette (`Cmd/Ctrl + P`) and enter `> Docker: Add Docker files to workspace` and follow the prompts.
+- title: Build the Docker image
+  durationInMinutes: 2
+  content: | 
+    Open the Command Palette (`Cmd/Ctrl + P`), and enter `> Docker: Build Image` and name the image `<YOUR_CONTAINER_REGISTRY_NAME>.azurecr.io/<IMAGE_NAME>:<TAG_NAME>`.
+- title: Push Docker image to Azure Container Registry
+  durationInMinutes: 3
+  content: |
+    Open the Visual Studio Docker extension and locate your image listed under the **Images** heading. Right-click on the image name and select **Push**.
+- title: Deploy image to Azure App Service
+  durationInMinutes: 2
+  content: |
+    From the Visual Studio Docker extension, expand **Registries > Azure**. Next, click on the expansion indicators next to your registry name and then the container name. Finally, right-click the desired tag and select **Deploy Image to Azure App Service** and follow the prompts.

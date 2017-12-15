@@ -1,0 +1,880 @@
+### YamlMime:UniversalReference
+items:
+  - uid: azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations
+    id: azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations
+    name: ExtensionImageOperations
+    summary: "The Service Management API includes operations for managing the service\rand virtual machine extension images in your publisher subscription.\r__NOTE__: An instance of this class is automatically created for an\rinstance of the [ComputeManagementClient] {@link\rComputeManagementClient~ComputeManagementClient}.\rSee [extensionImages] {@link\rComputeManagementClient~ComputeManagementClient#extensionImages}.\rInitializes a new instance of the ExtensionImageOperations class."
+    fullName: azure-asm-compute.ExtensionImageOperations
+    source:
+      id: azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations
+      path: lib\services\computeManagement\lib\computeManagementClient.js
+      startLine: 11224
+      remote:
+        branch: master
+        path: lib\services\computeManagement\lib\computeManagementClient.js
+        repo: 'https://github.com/Azure/azure-sdk-for-node.git'
+    type: Class
+    children:
+      - >-
+        azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations.#ctor
+      - >-
+        azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#beginRegistering
+      - >-
+        azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#beginUnregistering
+      - >-
+        azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#beginUpdating
+      - >-
+        azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#register
+      - >-
+        azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#unregister
+      - >-
+        azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#update
+    langs:
+      - js
+  - id: 'azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations.#ctor'
+    uid: 'azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations.#ctor'
+    parent: azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations
+    name: ExtensionImageOperations(client)
+    fullName: >-
+      azure-asm-compute.ExtensionImageOperations.ExtensionImageOperations(client)
+    summary: ''
+    type: Constructor
+    syntax:
+      parameters:
+        - id: client
+          type:
+            - azure-asm-compute.ComputeManagementClient
+          description: Reference to the service client.
+      content: new ExtensionImageOperations(client)
+    langs:
+      - js
+  - uid: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#beginRegistering
+    id: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#beginRegistering
+    parent: azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations
+    name: 'beginRegistering(parameters, callback)'
+    summary: "Register a new extension. An extension is identified by the combination of\rits ProviderNamespace and Type (case-sensitive string). It is not allowed\rto register an extension with the same identity (i.e. combination of\rProviderNamespace and Type) of an already-registered extension. To\rregister new version of an existing extension, the Update Extension API\rshould be used."
+    fullName: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations.beginRegistering(parameters,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: parameters
+          type:
+            - azure-asm-compute.ExtensionImageRegisterParameters
+          description: "Parameters supplied\rto the Register Virtual Machine Extension Image operation."
+        - id: parameters.providerNameSpace
+          type:
+            - string
+          description: "Required. The provider\rnamespace of the extension."
+        - id: parameters.type
+          type:
+            - string
+          description: Required. The type of the extension.
+        - id: parameters.version
+          type:
+            - string
+          description: Required. The version of the extension.
+        - id: parameters.label
+          type:
+            - string
+          description: "Required. A one line label of the\rextension."
+          optional: true
+        - id: parameters.hostingResources
+          type:
+            - string
+          description: "Required. The supported\rhosting resources. It must contain 'WebRole' and/or 'WorkerRole'. E.g.\r'WebRole|WorkerRole' or 'WebRole|WorkerRole|VmRole'."
+          optional: true
+        - id: parameters.mediaLink
+          type:
+            - string
+          description: "Required. URI string pointing to\rthe ZIP package of the extension. The ZIP package has to include the\rextension executable and other supporting files, and the\rPluginManifest.xml manifest. MediaLink value must point to a URL (either\rHttp or Https) in a Azure blob storage and is downloadable. Windows Azure\rwill copy the extension package from this source location and replicate\rit to all regions. The typical time for replication to complete is 20\rminutes."
+          optional: true
+        - id: parameters.certificate
+          type:
+            - azure-asm-compute.ExtensionCertificateConfiguration
+          description: "Optional. Parameters of the the certificate for encrypting the private\rconfiguration data. Supported on WebRole or WorkerRole, but ignored on\rVmRole."
+          optional: true
+        - id: parameters.certificate.storeLocation
+          type:
+            - string
+          description: "Required for\rcertificate declaration. The Windows certificate store location to\rinstall the certificate for encryption, if required. Its value has to be\r'LocalMachine' if present."
+          optional: true
+        - id: parameters.certificate.storeName
+          type:
+            - string
+          description: "Optional. The Windows\rcertificate store name to install the certificate for encryption, if\rrequired. Its value has to be 'My' if present."
+          optional: true
+        - id: parameters.certificate.thumbprintRequired
+          type:
+            - boolean
+          description: "Optional.\rWhether thumbprint is required for the certificate for encryption or not.\rIts value has to be 'true' or 'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.certificate.thumbprintAlgorithm
+          type:
+            - string
+          description: "Optional. The\rthumbprint algorithm of the certificate for encryption, if required. Its\rvalue has to be 'sha1' if present."
+          optional: true
+        - id: parameters.extensionEndpoints
+          type:
+            - azure-asm-compute.ExtensionEndpointConfiguration
+          description: "Optional. Declared endpoints to automatically add to each deployment with\rthis extension added."
+          optional: true
+        - id: parameters.extensionEndpoints.inputEndpoints
+          type:
+            - array
+          description: "Optional. A\rlist of input endpoints required by this extension. Supported on WebRole\ror WorkerRole, but ignored on VmRole. Each input endpoint will be\rautomatically added to the service definition of the deployment utilizing\rthis extension."
+          optional: true
+        - id: parameters.extensionEndpoints.internalEndpoints
+          type:
+            - array
+          description: "Optional.\rA list of internal endpoints required by this extension. Supported on\rWebRole or WorkerRole, but ignored on VmRole. Each internal endpoint will\rbe automatically added to the service definition of the deployment\rutilizing this extension."
+          optional: true
+        - id: parameters.extensionEndpoints.instanceInputEndpoints
+          type:
+            - array
+          description: "Optional. A list of instance input endpoints required by this extension.\rSupported on WebRole or WorkerRole, but ignored on VmRole. Each instance\rinput endpoint will be automatically added to the service definition of\rthe deployment utilizing this extension."
+          optional: true
+        - id: parameters.publicConfigurationSchema
+          type:
+            - string
+          description: "Optional. The XSD\rschema of public configuration data."
+          optional: true
+        - id: parameters.privateConfigurationSchema
+          type:
+            - string
+          description: "Optional. The XSD\rschema of private configuration data."
+          optional: true
+        - id: parameters.description
+          type:
+            - string
+          description: "Required. Detailed description of\rthe extension."
+          optional: true
+        - id: parameters.publisherName
+          type:
+            - string
+          description: Optional. Publisher name text.
+          optional: true
+        - id: parameters.publishedDate
+          type:
+            - date
+          description: "Publisher can set it to any\rarbitrary date, and this is only for display purpose. If not specified by\rpublisher, Azure will automatically assign the UTC time when the\rextension request was received."
+          optional: true
+        - id: parameters.localResources
+          type:
+            - array
+          description: "Declared local resources used\rinside guest VM by the extension. Optional."
+          optional: true
+        - id: parameters.blockRoleUponFailure
+          type:
+            - boolean
+          description: "Optional. Its value has\rto be 'true' or 'false' (case-sensitive) When set to 'true', the role\rstartup will be blocked till the extension installation completes. This\rflag should be set to 'true' when the role cannot start without the\rextension being installed. If set to 'false' (default value), the role\rwill be started without waiting for the extension installation to\rcomplete. Supported on WebRole or WorkerRole, but ignored on VmRole."
+          optional: true
+        - id: parameters.isInternalExtension
+          type:
+            - boolean
+          description: "Optional. If this is set\rto 'true' the extension is not visible for public use, i.e. being\rreturned from list API's. It can be still accessed by referring to the\rProviderNamespace, Type & Version combo. Therefore an internal extension\ris intended only for testing purpose. Its value has to be 'true' or\r'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.sampleConfig
+          type:
+            - string
+          description: "Optional. A sample configuration\rfor the extension. It can be downloaded by users, and the user can\rreplace with customized input parameters. The sample configuration should\rbe sufficiently commented. If configuration data are in XML format, then\rthe XML document-level element must be 'Configuration', and the optional\rpublic configuration data corresponds to a child element of\r'PublicConfig', and the optional private configuration data corresponds\rto a child element of 'PrivateConfig'. The sample configuration data\rshould be validated against public and private configuration schema by\rthe publisher."
+          optional: true
+        - id: parameters.replicationCompleted
+          type:
+            - boolean
+          description: "Indicates whether this\rversion of extension has been replicated to all regions or not. If true,\rthen the given extension version can be used in creating or updating\rdeployments. Otherwise, the given extension version might cause failure\rin creating or updating deployments. The typical time is 20 minutes for a\rnewly-registered or newly-updated extension to replicate completely by\rAzure."
+          optional: true
+        - id: parameters.eula
+          type:
+            - string
+          description: "Optional. URL string pointing to the\rEULA (End User License Agreement) of this version of extension. This is\roptionally specified by the third-party publishing the extension instead\rof Windows Azure. If the software requires any additional EULAs, a link\rto the EULA should be provided."
+          optional: true
+        - id: parameters.privacyUri
+          type:
+            - string
+          description: "Optional. URL string pointing to\rprivacy document of this version of extension. This is optionally\rspecified by the third-party publishing the extension instead of Azure.\rIf the software collects any data and transfers out the guest VM, then an\radditional privacy document might be needed."
+          optional: true
+        - id: parameters.homepageUri
+          type:
+            - string
+          description: "Optional. URL string pointing to\rhomepage of this version of extension. This is optionally specified by\rthe third-party publishing the extension instead of Azure. The homepage\rshould have usage information and contact information for customer\rsupport."
+          optional: true
+        - id: parameters.isJsonExtension
+          type:
+            - boolean
+          description: "Optional. If this is set to\r'true' the extension is expected to receive JSON based configuration. If\rthis is set to 'false' the extension is expected to receive XML based\rconfiguration. Its value has to be 'true' or 'false' (case-sensitive) if\rpresent."
+          optional: true
+        - id: parameters.disallowMajorVersionUpgrade
+          type:
+            - boolean
+          description: "Optional. If\rthis is set to 'true' the extension version cannot be upgraded to from\rother major versions in active deployments. If the value is 'false' or\rnor present, the extension version can be upgraded to from any other\rversion. Downgrade is not supported. The value has to be 'true' or\r'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.supportedOS
+          type:
+            - string
+          description: "String property indicating the OS\rwhich the extension supports. Current values are 'Windows' or 'Linux'."
+          optional: true
+        - id: parameters.companyName
+          type:
+            - string
+          description: "String property containing the\rname of the company/organization who publishes the extension."
+          optional: true
+        - id: parameters.regions
+          type:
+            - string
+          description: "String property containing the name\rof the regions required for the slice."
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-compute.Stream
+        description: The response stream.
+      content: 'function beginRegistering(parameters, callback)'
+    langs:
+      - js
+  - uid: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#beginUnregistering
+    id: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#beginUnregistering
+    parent: azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations
+    name: 'beginUnregistering(providerNamespace, type, version, callback)'
+    summary: "Unregister a version of an extension that was previously registered using\reither the Register Extension or Update Extension APIs. An extension\rversion is identified by the combination of its ProviderNamespace, Type\rand Version which are specified when registering the extension.\rUnregistering is only allowed for internal extensions, that is, the\rextensions for which the IsInternalExtension field is set to 'true'\rduring registration or during an update. There is a quota (15) on the\rnumber of extensions that can be registered per subscription. If your\rsubscription runs out of quota, you will wither need to unregister some\rof the internal extensions or contact Azure (same email used to become a\rpublisher)  to increase the quota."
+    fullName: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations.beginUnregistering(providerNamespace,
+      type, version, callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: providerNamespace
+          type:
+            - string
+          description: "The provider namespace of the extension\rimage to unregister."
+        - id: type
+          type:
+            - string
+          description: The type of the extension image to unregister.
+        - id: version
+          type:
+            - string
+          description: The version of the extension image to unregister.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-compute.Stream
+        description: The response stream.
+      content: 'function beginUnregistering(providerNamespace, type, version, callback)'
+    langs:
+      - js
+  - uid: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#beginUpdating
+    id: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#beginUpdating
+    parent: azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations
+    name: 'beginUpdating(parameters, callback)'
+    summary: "Update a new extension. It is allowed to update an extension which had\ralready been registered with the same identity (i.e. combination of\rProviderNamespace and Type) but with different version. It will fail if\rthe extension to update has an identity that has not been registered\rbefore, or there is already an extension with the same identity and same\rversion."
+    fullName: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations.beginUpdating(parameters,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: parameters
+          type:
+            - azure-asm-compute.ExtensionImageUpdateParameters
+          description: "Parameters supplied to\rthe Update Virtual Machine Extension Image operation."
+        - id: parameters.providerNameSpace
+          type:
+            - string
+          description: "Required. The provider\rnamespace of the extension."
+        - id: parameters.type
+          type:
+            - string
+          description: Required. The type of the extension.
+        - id: parameters.version
+          type:
+            - string
+          description: Required. The version of the extension.
+        - id: parameters.label
+          type:
+            - string
+          description: "Required. A one line label of the\rextension."
+          optional: true
+        - id: parameters.hostingResources
+          type:
+            - string
+          description: "Required. The supported\rhosting resources. It must contain 'WebRole' and/or 'WorkerRole'. E.g.\r'WebRole|WorkerRole' or 'WebRole|WorkerRole|VmRole'."
+          optional: true
+        - id: parameters.mediaLink
+          type:
+            - string
+          description: "Required. URI string pointing to\rthe ZIP package of the extension. The ZIP package has to include the\rextension executable and other supporting files, and the\rPluginManifest.xml manifest. MediaLink value must point to a URL (either\rHttp or Https) in a Azure blob storage and is downloadable. Windows Azure\rwill copy the extension package from this source location and replicate\rit to all regions. The typical time for replication to complete is 20\rminutes."
+          optional: true
+        - id: parameters.certificate
+          type:
+            - azure-asm-compute.ExtensionCertificateConfiguration
+          description: "Optional. Parameters of the the certificate for encrypting the private\rconfiguration data. Supported on WebRole or WorkerRole, but ignored on\rVmRole."
+          optional: true
+        - id: parameters.certificate.storeLocation
+          type:
+            - string
+          description: "Required for\rcertificate declaration. The Windows certificate store location to\rinstall the certificate for encryption, if required. Its value has to be\r'LocalMachine' if present."
+          optional: true
+        - id: parameters.certificate.storeName
+          type:
+            - string
+          description: "Optional. The Windows\rcertificate store name to install the certificate for encryption, if\rrequired. Its value has to be 'My' if present."
+          optional: true
+        - id: parameters.certificate.thumbprintRequired
+          type:
+            - boolean
+          description: "Optional.\rWhether thumbprint is required for the certificate for encryption or not.\rIts value has to be 'true' or 'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.certificate.thumbprintAlgorithm
+          type:
+            - string
+          description: "Optional. The\rthumbprint algorithm of the certificate for encryption, if required. Its\rvalue has to be 'sha1' if present."
+          optional: true
+        - id: parameters.extensionEndpoints
+          type:
+            - azure-asm-compute.ExtensionEndpointConfiguration
+          description: "Optional. Declared endpoints to automatically add to each deployment with\rthis extension added."
+          optional: true
+        - id: parameters.extensionEndpoints.inputEndpoints
+          type:
+            - array
+          description: "Optional. A\rlist of input endpoints required by this extension. Supported on WebRole\ror WorkerRole, but ignored on VmRole. Each input endpoint will be\rautomatically added to the service definition of the deployment utilizing\rthis extension."
+          optional: true
+        - id: parameters.extensionEndpoints.internalEndpoints
+          type:
+            - array
+          description: "Optional.\rA list of internal endpoints required by this extension. Supported on\rWebRole or WorkerRole, but ignored on VmRole. Each internal endpoint will\rbe automatically added to the service definition of the deployment\rutilizing this extension."
+          optional: true
+        - id: parameters.extensionEndpoints.instanceInputEndpoints
+          type:
+            - array
+          description: "Optional. A list of instance input endpoints required by this extension.\rSupported on WebRole or WorkerRole, but ignored on VmRole. Each instance\rinput endpoint will be automatically added to the service definition of\rthe deployment utilizing this extension."
+          optional: true
+        - id: parameters.publicConfigurationSchema
+          type:
+            - string
+          description: "Optional. The XSD\rschema of public configuration data."
+          optional: true
+        - id: parameters.privateConfigurationSchema
+          type:
+            - string
+          description: "Optional. The XSD\rschema of private configuration data."
+          optional: true
+        - id: parameters.description
+          type:
+            - string
+          description: "Required. Detailed description of\rthe extension."
+          optional: true
+        - id: parameters.publisherName
+          type:
+            - string
+          description: Optional. Publisher name text.
+          optional: true
+        - id: parameters.publishedDate
+          type:
+            - date
+          description: "Publisher can set it to any\rarbitrary date, and this is only for display purpose. If not specified by\rpublisher, Azure will automatically assign the UTC time when the\rextension request was received."
+          optional: true
+        - id: parameters.localResources
+          type:
+            - array
+          description: "Declared local resources used\rinside guest VM by the extension. Optional."
+          optional: true
+        - id: parameters.blockRoleUponFailure
+          type:
+            - boolean
+          description: "Optional. Its value has\rto be 'true' or 'false' (case-sensitive) When set to 'true', the role\rstartup will be blocked till the extension installation completes. This\rflag should be set to 'true' when the role cannot start without the\rextension being installed. If set to 'false' (default value), the role\rwill be started without waiting for the extension installation to\rcomplete. Supported on WebRole or WorkerRole, but ignored on VmRole."
+          optional: true
+        - id: parameters.isInternalExtension
+          type:
+            - boolean
+          description: "Optional. If this is set\rto 'true' the extension is not visible for public use, i.e. being\rreturned from list API's. It can be still accessed by referring to the\rProviderNamespace, Type & Version combo. Therefore an internal extension\ris intended only for testing purpose. Its value has to be 'true' or\r'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.sampleConfig
+          type:
+            - string
+          description: "Optional. A sample configuration\rfor the extension. It can be downloaded by users, and the user can\rreplace with customized input parameters. The sample configuration should\rbe sufficiently commented. If configuration data are in XML format, then\rthe XML document-level element must be 'Configuration', and the optional\rpublic configuration data corresponds to a child element of\r'PublicConfig', and the optional private configuration data corresponds\rto a child element of 'PrivateConfig'. The sample configuration data\rshould be validated against public and private configuration schema by\rthe publisher."
+          optional: true
+        - id: parameters.replicationCompleted
+          type:
+            - boolean
+          description: "Indicates whether this\rversion of extension has been replicated to all regions or not. If true,\rthen the given extension version can be used in creating or updating\rdeployments. Otherwise, the given extension version might cause failure\rin creating or updating deployments. The typical time is 20 minutes for a\rnewly-registered or newly-updated extension to replicate completely by\rAzure."
+          optional: true
+        - id: parameters.eula
+          type:
+            - string
+          description: "Optional. URL string pointing to the\rEULA (End User License Agreement) of this version of extension. This is\roptionally specified by the third-party publishing the extension instead\rof Windows Azure. If the software requires any additional EULAs, a link\rto the EULA should be provided."
+          optional: true
+        - id: parameters.privacyUri
+          type:
+            - string
+          description: "Optional. URL string pointing to\rprivacy document of this version of extension. This is optionally\rspecified by the third-party publishing the extension instead of Azure.\rIf the software collects any data and transfers out the guest VM, then an\radditional privacy document might be needed."
+          optional: true
+        - id: parameters.homepageUri
+          type:
+            - string
+          description: "Optional. URL string pointing to\rhomepage of this version of extension. This is optionally specified by\rthe third-party publishing the extension instead of Azure. The homepage\rshould have usage information and contact information for customer\rsupport."
+          optional: true
+        - id: parameters.isJsonExtension
+          type:
+            - boolean
+          description: "Optional. If this is set to\r'true' the extension is expected to receive JSON based configuration. If\rthis is set to 'false' the extension is expected to receive XML based\rconfiguration. Its value has to be 'true' or 'false' (case-sensitive) if\rpresent."
+          optional: true
+        - id: parameters.disallowMajorVersionUpgrade
+          type:
+            - boolean
+          description: "Optional. If\rthis is set to 'true' the extension version cannot be upgraded to from\rother major versions in active deployments. If the value is 'false' or\rnor present, the extension version can be upgraded to from any other\rversion. Downgrade is not supported. The value has to be 'true' or\r'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.supportedOS
+          type:
+            - string
+          description: "String property indicating the OS\rwhich the extension supports. Current values are 'Windows' or 'Linux'."
+          optional: true
+        - id: parameters.companyName
+          type:
+            - string
+          description: "String property containing the\rname of the company/organization who publishes the extension."
+          optional: true
+        - id: parameters.regions
+          type:
+            - string
+          description: "String property containing the name\rof the regions required for the slice."
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-compute.Stream
+        description: The response stream.
+      content: 'function beginUpdating(parameters, callback)'
+    langs:
+      - js
+  - uid: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#register
+    id: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#register
+    parent: azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations
+    name: 'register(parameters, callback)'
+    summary: "Register a new extension. An extension is identified by the combination of\rits ProviderNamespace and Type (case-sensitive string). It is not allowed\rto register an extension with the same identity (i.e. combination of\rProviderNamespace and Type) of an already-registered extension. To\rregister new version of an existing extension, the Update Extension API\rshould be used."
+    fullName: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations.register(parameters,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: parameters
+          type:
+            - azure-asm-compute.ExtensionImageRegisterParameters
+          description: "Parameters supplied\rto the Register Virtual Machine Extension Image operation."
+        - id: parameters.providerNameSpace
+          type:
+            - string
+          description: "Required. The provider\rnamespace of the extension."
+        - id: parameters.type
+          type:
+            - string
+          description: Required. The type of the extension.
+        - id: parameters.version
+          type:
+            - string
+          description: Required. The version of the extension.
+        - id: parameters.label
+          type:
+            - string
+          description: "Required. A one line label of the\rextension."
+          optional: true
+        - id: parameters.hostingResources
+          type:
+            - string
+          description: "Required. The supported\rhosting resources. It must contain 'WebRole' and/or 'WorkerRole'. E.g.\r'WebRole|WorkerRole' or 'WebRole|WorkerRole|VmRole'."
+          optional: true
+        - id: parameters.mediaLink
+          type:
+            - string
+          description: "Required. URI string pointing to\rthe ZIP package of the extension. The ZIP package has to include the\rextension executable and other supporting files, and the\rPluginManifest.xml manifest. MediaLink value must point to a URL (either\rHttp or Https) in a Azure blob storage and is downloadable. Windows Azure\rwill copy the extension package from this source location and replicate\rit to all regions. The typical time for replication to complete is 20\rminutes."
+          optional: true
+        - id: parameters.certificate
+          type:
+            - azure-asm-compute.ExtensionCertificateConfiguration
+          description: "Optional. Parameters of the the certificate for encrypting the private\rconfiguration data. Supported on WebRole or WorkerRole, but ignored on\rVmRole."
+          optional: true
+        - id: parameters.certificate.storeLocation
+          type:
+            - string
+          description: "Required for\rcertificate declaration. The Windows certificate store location to\rinstall the certificate for encryption, if required. Its value has to be\r'LocalMachine' if present."
+          optional: true
+        - id: parameters.certificate.storeName
+          type:
+            - string
+          description: "Optional. The Windows\rcertificate store name to install the certificate for encryption, if\rrequired. Its value has to be 'My' if present."
+          optional: true
+        - id: parameters.certificate.thumbprintRequired
+          type:
+            - boolean
+          description: "Optional.\rWhether thumbprint is required for the certificate for encryption or not.\rIts value has to be 'true' or 'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.certificate.thumbprintAlgorithm
+          type:
+            - string
+          description: "Optional. The\rthumbprint algorithm of the certificate for encryption, if required. Its\rvalue has to be 'sha1' if present."
+          optional: true
+        - id: parameters.extensionEndpoints
+          type:
+            - azure-asm-compute.ExtensionEndpointConfiguration
+          description: "Optional. Declared endpoints to automatically add to each deployment with\rthis extension added."
+          optional: true
+        - id: parameters.extensionEndpoints.inputEndpoints
+          type:
+            - array
+          description: "Optional. A\rlist of input endpoints required by this extension. Supported on WebRole\ror WorkerRole, but ignored on VmRole. Each input endpoint will be\rautomatically added to the service definition of the deployment utilizing\rthis extension."
+          optional: true
+        - id: parameters.extensionEndpoints.internalEndpoints
+          type:
+            - array
+          description: "Optional.\rA list of internal endpoints required by this extension. Supported on\rWebRole or WorkerRole, but ignored on VmRole. Each internal endpoint will\rbe automatically added to the service definition of the deployment\rutilizing this extension."
+          optional: true
+        - id: parameters.extensionEndpoints.instanceInputEndpoints
+          type:
+            - array
+          description: "Optional. A list of instance input endpoints required by this extension.\rSupported on WebRole or WorkerRole, but ignored on VmRole. Each instance\rinput endpoint will be automatically added to the service definition of\rthe deployment utilizing this extension."
+          optional: true
+        - id: parameters.publicConfigurationSchema
+          type:
+            - string
+          description: "Optional. The XSD\rschema of public configuration data."
+          optional: true
+        - id: parameters.privateConfigurationSchema
+          type:
+            - string
+          description: "Optional. The XSD\rschema of private configuration data."
+          optional: true
+        - id: parameters.description
+          type:
+            - string
+          description: "Required. Detailed description of\rthe extension."
+          optional: true
+        - id: parameters.publisherName
+          type:
+            - string
+          description: Optional. Publisher name text.
+          optional: true
+        - id: parameters.publishedDate
+          type:
+            - date
+          description: "Publisher can set it to any\rarbitrary date, and this is only for display purpose. If not specified by\rpublisher, Azure will automatically assign the UTC time when the\rextension request was received."
+          optional: true
+        - id: parameters.localResources
+          type:
+            - array
+          description: "Declared local resources used\rinside guest VM by the extension. Optional."
+          optional: true
+        - id: parameters.blockRoleUponFailure
+          type:
+            - boolean
+          description: "Optional. Its value has\rto be 'true' or 'false' (case-sensitive) When set to 'true', the role\rstartup will be blocked till the extension installation completes. This\rflag should be set to 'true' when the role cannot start without the\rextension being installed. If set to 'false' (default value), the role\rwill be started without waiting for the extension installation to\rcomplete. Supported on WebRole or WorkerRole, but ignored on VmRole."
+          optional: true
+        - id: parameters.isInternalExtension
+          type:
+            - boolean
+          description: "Optional. If this is set\rto 'true' the extension is not visible for public use, i.e. being\rreturned from list API's. It can be still accessed by referring to the\rProviderNamespace, Type & Version combo. Therefore an internal extension\ris intended only for testing purpose. Its value has to be 'true' or\r'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.sampleConfig
+          type:
+            - string
+          description: "Optional. A sample configuration\rfor the extension. It can be downloaded by users, and the user can\rreplace with customized input parameters. The sample configuration should\rbe sufficiently commented. If configuration data are in XML format, then\rthe XML document-level element must be 'Configuration', and the optional\rpublic configuration data corresponds to a child element of\r'PublicConfig', and the optional private configuration data corresponds\rto a child element of 'PrivateConfig'. The sample configuration data\rshould be validated against public and private configuration schema by\rthe publisher."
+          optional: true
+        - id: parameters.replicationCompleted
+          type:
+            - boolean
+          description: "Indicates whether this\rversion of extension has been replicated to all regions or not. If true,\rthen the given extension version can be used in creating or updating\rdeployments. Otherwise, the given extension version might cause failure\rin creating or updating deployments. The typical time is 20 minutes for a\rnewly-registered or newly-updated extension to replicate completely by\rAzure."
+          optional: true
+        - id: parameters.eula
+          type:
+            - string
+          description: "Optional. URL string pointing to the\rEULA (End User License Agreement) of this version of extension. This is\roptionally specified by the third-party publishing the extension instead\rof Windows Azure. If the software requires any additional EULAs, a link\rto the EULA should be provided."
+          optional: true
+        - id: parameters.privacyUri
+          type:
+            - string
+          description: "Optional. URL string pointing to\rprivacy document of this version of extension. This is optionally\rspecified by the third-party publishing the extension instead of Azure.\rIf the software collects any data and transfers out the guest VM, then an\radditional privacy document might be needed."
+          optional: true
+        - id: parameters.homepageUri
+          type:
+            - string
+          description: "Optional. URL string pointing to\rhomepage of this version of extension. This is optionally specified by\rthe third-party publishing the extension instead of Azure. The homepage\rshould have usage information and contact information for customer\rsupport."
+          optional: true
+        - id: parameters.isJsonExtension
+          type:
+            - boolean
+          description: "Optional. If this is set to\r'true' the extension is expected to receive JSON based configuration. If\rthis is set to 'false' the extension is expected to receive XML based\rconfiguration. Its value has to be 'true' or 'false' (case-sensitive) if\rpresent."
+          optional: true
+        - id: parameters.disallowMajorVersionUpgrade
+          type:
+            - boolean
+          description: "Optional. If\rthis is set to 'true' the extension version cannot be upgraded to from\rother major versions in active deployments. If the value is 'false' or\rnor present, the extension version can be upgraded to from any other\rversion. Downgrade is not supported. The value has to be 'true' or\r'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.supportedOS
+          type:
+            - string
+          description: "String property indicating the OS\rwhich the extension supports. Current values are 'Windows' or 'Linux'."
+          optional: true
+        - id: parameters.companyName
+          type:
+            - string
+          description: "String property containing the\rname of the company/organization who publishes the extension."
+          optional: true
+        - id: parameters.regions
+          type:
+            - string
+          description: "String property containing the name\rof the regions required for the slice."
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-compute.Stream
+        description: The response stream.
+      content: 'function register(parameters, callback)'
+    langs:
+      - js
+  - uid: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#unregister
+    id: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#unregister
+    parent: azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations
+    name: 'unregister(providerNamespace, type, version, callback)'
+    summary: "Unregister a version of an extension that was previously registered using\reither the Register Extension or Update Extension APIs. An extension\rversion is identified by the combination of its ProviderNamespace, Type\rand Version which are specified when registering the extension.\rUnregistering is only allowed for internal extensions, that is, the\rextensions for which the IsInternalExtension field is set to 'true'\rduring registration or during an update. There is a quota (15) on the\rnumber of extensions that can be registered per subscription. If your\rsubscription runs out of quota, you will wither need to unregister some\rof the internal extensions or contact Azure (same email used to become a\rpublisher)  to increase the quota."
+    fullName: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations.unregister(providerNamespace,
+      type, version, callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: providerNamespace
+          type:
+            - string
+          description: "The provider namespace of the extension\rimage to unregister."
+        - id: type
+          type:
+            - string
+          description: The type of the extension image to unregister.
+        - id: version
+          type:
+            - string
+          description: The version of the extension image to unregister.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-compute.Stream
+        description: The response stream.
+      content: 'function unregister(providerNamespace, type, version, callback)'
+    langs:
+      - js
+  - uid: 'azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#update'
+    id: 'azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations#update'
+    parent: azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations
+    name: 'update(parameters, callback)'
+    summary: "Update a new extension. It is allowed to update an extension which had\ralready been registered with the same identity (i.e. combination of\rProviderNamespace and Type) but with different version. It will fail if\rthe extension to update has an identity that has not been registered\rbefore, or there is already an extension with the same identity and same\rversion."
+    fullName: >-
+      azure-asm-compute.ExtensionImageOperations~ExtensionImageOperations.update(parameters,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: parameters
+          type:
+            - azure-asm-compute.ExtensionImageUpdateParameters
+          description: "Parameters supplied to\rthe Update Virtual Machine Extension Image operation."
+        - id: parameters.providerNameSpace
+          type:
+            - string
+          description: "Required. The provider\rnamespace of the extension."
+        - id: parameters.type
+          type:
+            - string
+          description: Required. The type of the extension.
+        - id: parameters.version
+          type:
+            - string
+          description: Required. The version of the extension.
+        - id: parameters.label
+          type:
+            - string
+          description: "Required. A one line label of the\rextension."
+          optional: true
+        - id: parameters.hostingResources
+          type:
+            - string
+          description: "Required. The supported\rhosting resources. It must contain 'WebRole' and/or 'WorkerRole'. E.g.\r'WebRole|WorkerRole' or 'WebRole|WorkerRole|VmRole'."
+          optional: true
+        - id: parameters.mediaLink
+          type:
+            - string
+          description: "Required. URI string pointing to\rthe ZIP package of the extension. The ZIP package has to include the\rextension executable and other supporting files, and the\rPluginManifest.xml manifest. MediaLink value must point to a URL (either\rHttp or Https) in a Azure blob storage and is downloadable. Windows Azure\rwill copy the extension package from this source location and replicate\rit to all regions. The typical time for replication to complete is 20\rminutes."
+          optional: true
+        - id: parameters.certificate
+          type:
+            - azure-asm-compute.ExtensionCertificateConfiguration
+          description: "Optional. Parameters of the the certificate for encrypting the private\rconfiguration data. Supported on WebRole or WorkerRole, but ignored on\rVmRole."
+          optional: true
+        - id: parameters.certificate.storeLocation
+          type:
+            - string
+          description: "Required for\rcertificate declaration. The Windows certificate store location to\rinstall the certificate for encryption, if required. Its value has to be\r'LocalMachine' if present."
+          optional: true
+        - id: parameters.certificate.storeName
+          type:
+            - string
+          description: "Optional. The Windows\rcertificate store name to install the certificate for encryption, if\rrequired. Its value has to be 'My' if present."
+          optional: true
+        - id: parameters.certificate.thumbprintRequired
+          type:
+            - boolean
+          description: "Optional.\rWhether thumbprint is required for the certificate for encryption or not.\rIts value has to be 'true' or 'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.certificate.thumbprintAlgorithm
+          type:
+            - string
+          description: "Optional. The\rthumbprint algorithm of the certificate for encryption, if required. Its\rvalue has to be 'sha1' if present."
+          optional: true
+        - id: parameters.extensionEndpoints
+          type:
+            - azure-asm-compute.ExtensionEndpointConfiguration
+          description: "Optional. Declared endpoints to automatically add to each deployment with\rthis extension added."
+          optional: true
+        - id: parameters.extensionEndpoints.inputEndpoints
+          type:
+            - array
+          description: "Optional. A\rlist of input endpoints required by this extension. Supported on WebRole\ror WorkerRole, but ignored on VmRole. Each input endpoint will be\rautomatically added to the service definition of the deployment utilizing\rthis extension."
+          optional: true
+        - id: parameters.extensionEndpoints.internalEndpoints
+          type:
+            - array
+          description: "Optional.\rA list of internal endpoints required by this extension. Supported on\rWebRole or WorkerRole, but ignored on VmRole. Each internal endpoint will\rbe automatically added to the service definition of the deployment\rutilizing this extension."
+          optional: true
+        - id: parameters.extensionEndpoints.instanceInputEndpoints
+          type:
+            - array
+          description: "Optional. A list of instance input endpoints required by this extension.\rSupported on WebRole or WorkerRole, but ignored on VmRole. Each instance\rinput endpoint will be automatically added to the service definition of\rthe deployment utilizing this extension."
+          optional: true
+        - id: parameters.publicConfigurationSchema
+          type:
+            - string
+          description: "Optional. The XSD\rschema of public configuration data."
+          optional: true
+        - id: parameters.privateConfigurationSchema
+          type:
+            - string
+          description: "Optional. The XSD\rschema of private configuration data."
+          optional: true
+        - id: parameters.description
+          type:
+            - string
+          description: "Required. Detailed description of\rthe extension."
+          optional: true
+        - id: parameters.publisherName
+          type:
+            - string
+          description: Optional. Publisher name text.
+          optional: true
+        - id: parameters.publishedDate
+          type:
+            - date
+          description: "Publisher can set it to any\rarbitrary date, and this is only for display purpose. If not specified by\rpublisher, Azure will automatically assign the UTC time when the\rextension request was received."
+          optional: true
+        - id: parameters.localResources
+          type:
+            - array
+          description: "Declared local resources used\rinside guest VM by the extension. Optional."
+          optional: true
+        - id: parameters.blockRoleUponFailure
+          type:
+            - boolean
+          description: "Optional. Its value has\rto be 'true' or 'false' (case-sensitive) When set to 'true', the role\rstartup will be blocked till the extension installation completes. This\rflag should be set to 'true' when the role cannot start without the\rextension being installed. If set to 'false' (default value), the role\rwill be started without waiting for the extension installation to\rcomplete. Supported on WebRole or WorkerRole, but ignored on VmRole."
+          optional: true
+        - id: parameters.isInternalExtension
+          type:
+            - boolean
+          description: "Optional. If this is set\rto 'true' the extension is not visible for public use, i.e. being\rreturned from list API's. It can be still accessed by referring to the\rProviderNamespace, Type & Version combo. Therefore an internal extension\ris intended only for testing purpose. Its value has to be 'true' or\r'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.sampleConfig
+          type:
+            - string
+          description: "Optional. A sample configuration\rfor the extension. It can be downloaded by users, and the user can\rreplace with customized input parameters. The sample configuration should\rbe sufficiently commented. If configuration data are in XML format, then\rthe XML document-level element must be 'Configuration', and the optional\rpublic configuration data corresponds to a child element of\r'PublicConfig', and the optional private configuration data corresponds\rto a child element of 'PrivateConfig'. The sample configuration data\rshould be validated against public and private configuration schema by\rthe publisher."
+          optional: true
+        - id: parameters.replicationCompleted
+          type:
+            - boolean
+          description: "Indicates whether this\rversion of extension has been replicated to all regions or not. If true,\rthen the given extension version can be used in creating or updating\rdeployments. Otherwise, the given extension version might cause failure\rin creating or updating deployments. The typical time is 20 minutes for a\rnewly-registered or newly-updated extension to replicate completely by\rAzure."
+          optional: true
+        - id: parameters.eula
+          type:
+            - string
+          description: "Optional. URL string pointing to the\rEULA (End User License Agreement) of this version of extension. This is\roptionally specified by the third-party publishing the extension instead\rof Windows Azure. If the software requires any additional EULAs, a link\rto the EULA should be provided."
+          optional: true
+        - id: parameters.privacyUri
+          type:
+            - string
+          description: "Optional. URL string pointing to\rprivacy document of this version of extension. This is optionally\rspecified by the third-party publishing the extension instead of Azure.\rIf the software collects any data and transfers out the guest VM, then an\radditional privacy document might be needed."
+          optional: true
+        - id: parameters.homepageUri
+          type:
+            - string
+          description: "Optional. URL string pointing to\rhomepage of this version of extension. This is optionally specified by\rthe third-party publishing the extension instead of Azure. The homepage\rshould have usage information and contact information for customer\rsupport."
+          optional: true
+        - id: parameters.isJsonExtension
+          type:
+            - boolean
+          description: "Optional. If this is set to\r'true' the extension is expected to receive JSON based configuration. If\rthis is set to 'false' the extension is expected to receive XML based\rconfiguration. Its value has to be 'true' or 'false' (case-sensitive) if\rpresent."
+          optional: true
+        - id: parameters.disallowMajorVersionUpgrade
+          type:
+            - boolean
+          description: "Optional. If\rthis is set to 'true' the extension version cannot be upgraded to from\rother major versions in active deployments. If the value is 'false' or\rnor present, the extension version can be upgraded to from any other\rversion. Downgrade is not supported. The value has to be 'true' or\r'false' (case-sensitive) if present."
+          optional: true
+        - id: parameters.supportedOS
+          type:
+            - string
+          description: "String property indicating the OS\rwhich the extension supports. Current values are 'Windows' or 'Linux'."
+          optional: true
+        - id: parameters.companyName
+          type:
+            - string
+          description: "String property containing the\rname of the company/organization who publishes the extension."
+          optional: true
+        - id: parameters.regions
+          type:
+            - string
+          description: "String property containing the name\rof the regions required for the slice."
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-compute.Stream
+        description: The response stream.
+      content: 'function update(parameters, callback)'
+    langs:
+      - js

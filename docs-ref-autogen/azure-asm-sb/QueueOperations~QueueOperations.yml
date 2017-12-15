@@ -1,0 +1,470 @@
+### YamlMime:UniversalReference
+items:
+  - uid: azure-asm-sb.QueueOperations~QueueOperations
+    id: azure-asm-sb.QueueOperations~QueueOperations
+    name: QueueOperations
+    summary: "The Service Bus Management API includes operations for managing Service\rBus queues.\r__NOTE__: An instance of this class is automatically created for an\rinstance of the [ServiceBusManagementClient] {@link\rServiceBusManagementClient~ServiceBusManagementClient}.\rSee [queues] {@link\rServiceBusManagementClient~ServiceBusManagementClient#queues}.\rInitializes a new instance of the QueueOperations class."
+    fullName: azure-asm-sb.QueueOperations
+    source:
+      id: azure-asm-sb.QueueOperations~QueueOperations
+      path: lib\services\serviceBusManagement\lib\serviceBusManagementClient.js
+      startLine: 2940
+      remote:
+        branch: master
+        path: lib\services\serviceBusManagement\lib\serviceBusManagementClient.js
+        repo: 'https://github.com/Azure/azure-sdk-for-node.git'
+    type: Class
+    children:
+      - 'azure-asm-sb.QueueOperations~QueueOperations.#ctor'
+      - 'azure-asm-sb.QueueOperations~QueueOperations#create'
+      - 'azure-asm-sb.QueueOperations~QueueOperations#deleteMethod'
+      - 'azure-asm-sb.QueueOperations~QueueOperations#get'
+      - 'azure-asm-sb.QueueOperations~QueueOperations#getConnectionDetails'
+      - 'azure-asm-sb.QueueOperations~QueueOperations#list'
+      - 'azure-asm-sb.QueueOperations~QueueOperations#update'
+    langs:
+      - js
+  - id: 'azure-asm-sb.QueueOperations~QueueOperations.#ctor'
+    uid: 'azure-asm-sb.QueueOperations~QueueOperations.#ctor'
+    parent: azure-asm-sb.QueueOperations~QueueOperations
+    name: QueueOperations(client)
+    fullName: azure-asm-sb.QueueOperations.QueueOperations(client)
+    summary: ''
+    type: Constructor
+    syntax:
+      parameters:
+        - id: client
+          type:
+            - azure-asm-sb.ServiceBusManagementClient
+          description: Reference to the service client.
+      content: new QueueOperations(client)
+    langs:
+      - js
+  - uid: 'azure-asm-sb.QueueOperations~QueueOperations#create'
+    id: 'azure-asm-sb.QueueOperations~QueueOperations#create'
+    parent: azure-asm-sb.QueueOperations~QueueOperations
+    name: 'create(namespaceName, queue, callback)'
+    summary: "Creates a new queue. Once created, this queue's resource manifest is\rimmutable. This operation is idempotent. Repeating the create call, after\ra queue with same name has been created successfully, will result in a\r409 Conflict error message.  (see\rhttp://msdn.microsoft.com/en-us/library/windowsazure/jj856295.aspx for\rmore information)"
+    fullName: >-
+      azure-asm-sb.QueueOperations~QueueOperations.create(namespaceName, queue,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: queue
+          type:
+            - azure-asm-sb.ServiceBusQueueCreateParameters
+          description: The service bus queue.
+        - id: queue.name
+          type:
+            - string
+          description: The name of the queue.
+        - id: queue.lockDuration
+          type:
+            - string
+          description: "Determines the amount of time in\rseconds in which a message should be locked for processing by a receiver.\rAfter this period, the message is unlocked and available for consumption\rby the next receiver. Settable only at queue creation time:* Range: 0 - 5\rminutes. 0 means that the message is not locked* Default: 30 seconds"
+          optional: true
+        - id: queue.maxSizeInMegabytes
+          type:
+            - number
+          description: "Specifies the maximum queue\rsize in megabytes. Any attempt to enqueue a message that will cause the\rqueue to exceed this value will fail. You can only set this parameter at\rqueue creation time using the following values: * Range: 1 - 1024 (valid\rvalues are 1024, 2048, 3072, 4096, 5120) * Default: 1*1024 (valid values\rare 1024, 2048, 3072, 4096, 5120)"
+          optional: true
+        - id: queue.requiresDuplicateDetection
+          type:
+            - boolean
+          description: "Settable only at queue\rcreation time.* Default for durable queue: false"
+          optional: true
+        - id: queue.requiresSession
+          type:
+            - boolean
+          description: "Settable only at queue creation\rtime. If set to true, the queue will be session-aware and only\rSessionReceiver will be supported. Session-aware queues are not supported\rthrough REST.* Default for durable queue: false"
+          optional: true
+        - id: queue.defaultMessageTimeToLive
+          type:
+            - string
+          description: "Depending on whether\rDeadLettering is enabled, a message is automatically moved to the\rDeadLetterQueue or deleted if it has been stored in the queue for longer\rthan the specified time. This value is overwritten by a TTL specified on\rthe message if and only if the message TTL is smaller than the TTL set on\rthe queue. This value is immutable after the Queue has been created:*\rRange: 1 second - TimeSpan.MaxValue* Default: TimeSpan.MaxValue"
+          optional: true
+        - id: queue.deadLetteringOnMessageExpiration
+          type:
+            - boolean
+          description: "This field\rcontrols how the Service Bus handles a message whose TTL has expired. If\rit is enabled and a message expires, the Service Bus moves the message\rfrom the queue into the queue's dead-letter sub-queue. If disabled,\rmessage will be permanently deleted from the queue. Settable only at\rqueue creation time.* Default: false"
+          optional: true
+        - id: queue.duplicateDetectionHistoryTimeWindow
+          type:
+            - string
+          description: "Specifies the\rtime span during which the Service Bus detects message duplication:*\rRange: 1 second - 7 days* Default: 10 minutes"
+          optional: true
+        - id: queue.maxDeliveryCount
+          type:
+            - number
+          description: "The maximum number of times a\rmessage SB will try to deliver before being dead lettered or discarded."
+          optional: true
+        - id: queue.enableBatchedOperations
+          type:
+            - boolean
+          description: "Enables or disables\rservice side batching behavior when performing operations for the\rspecific queue. When enabled, service bus will collect/batch multiple\roperations to the backend to be more connection efficient. If user wants\rlower operation latency then they can disable this feature."
+          optional: true
+        - id: queue.sizeInBytes
+          type:
+            - number
+          description: "Reflects the actual bytes that\rmessages in the queue currently occupy toward the queue's quota.* Range:\r0 -MaxTopicSizeinMegaBytes"
+          optional: true
+        - id: queue.messageCount
+          type:
+            - number
+          description: "Displays the number of messages\rcurrently in the queue."
+          optional: true
+        - id: queue.isAnonymousAccessible
+          type:
+            - boolean
+          description: "Gets whether anonymous\raccess is allowed."
+          optional: true
+        - id: queue.authorizationRules
+          type:
+            - array
+          description: "Gets the authorization rules for\rthe description."
+          optional: true
+        - id: queue.status
+          type:
+            - string
+          description: "Gets or sets the current status of the\rqueue (enabled or disabled). When a queue is disabled, that queue cannot\rsend or receive messages."
+          optional: true
+        - id: queue.supportOrdering
+          type:
+            - boolean
+          description: "Gets or sets whether the queue\rsupports ordering."
+          optional: true
+        - id: queue.countDetails
+          type:
+            - azure-asm-sb.CountDetails
+          description: Current queue statistics.
+          optional: true
+        - id: queue.countDetails.activeMessageCount
+          type:
+            - number
+          description: "The current number\rof active messages."
+          optional: true
+        - id: queue.countDetails.deadLetterMessageCount
+          type:
+            - number
+          description: "The current\rnumber of dead letters."
+          optional: true
+        - id: queue.countDetails.scheduledMessageCount
+          type:
+            - number
+          description: "The current\rnumber of scheduled messages."
+          optional: true
+        - id: queue.countDetails.transferDeadLetterMessageCount
+          type:
+            - number
+          description: "The\rcurrent number of transfer dead letters."
+          optional: true
+        - id: queue.countDetails.transferMessageCount
+          type:
+            - number
+          description: "The current\rnumber of transfer messages."
+          optional: true
+        - id: queue.autoDeleteOnIdle
+          type:
+            - string
+          description: Implemented.
+          optional: true
+        - id: queue.entityAvailabilityStatus
+          type:
+            - string
+          description: "The current availability\rstatus of the queue."
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function create(namespaceName, queue, callback)'
+    langs:
+      - js
+  - uid: 'azure-asm-sb.QueueOperations~QueueOperations#deleteMethod'
+    id: 'azure-asm-sb.QueueOperations~QueueOperations#deleteMethod'
+    parent: azure-asm-sb.QueueOperations~QueueOperations
+    name: 'deleteMethod(namespaceName, queueName, callback)'
+    summary: "Deletes an existing queue. This operation will also remove all associated\rstate including messages in the queue.  (see\rhttp://msdn.microsoft.com/en-us/library/hh780747.aspx for more\rinformation)"
+    fullName: >-
+      azure-asm-sb.QueueOperations~QueueOperations.deleteMethod(namespaceName,
+      queueName, callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: queueName
+          type:
+            - string
+          description: The queue name.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function deleteMethod(namespaceName, queueName, callback)'
+    langs:
+      - js
+  - uid: 'azure-asm-sb.QueueOperations~QueueOperations#get'
+    id: 'azure-asm-sb.QueueOperations~QueueOperations#get'
+    parent: azure-asm-sb.QueueOperations~QueueOperations
+    name: 'get(namespaceName, queueName, callback)'
+    summary: "The queue description is an XML AtomPub document that defines the desired\rsemantics for a subscription. The queue description contains the\rfollowing properties. For more information, see the QueueDescription\rProperties topic.  (see\rhttp://msdn.microsoft.com/en-us/library/windowsazure/hh780773.aspx for\rmore information)"
+    fullName: >-
+      azure-asm-sb.QueueOperations~QueueOperations.get(namespaceName, queueName,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: queueName
+          type:
+            - string
+          description: The queue name.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function get(namespaceName, queueName, callback)'
+    langs:
+      - js
+  - uid: 'azure-asm-sb.QueueOperations~QueueOperations#getConnectionDetails'
+    id: 'azure-asm-sb.QueueOperations~QueueOperations#getConnectionDetails'
+    parent: azure-asm-sb.QueueOperations~QueueOperations
+    name: 'getConnectionDetails(namespaceName, queueName, callback)'
+    summary: Gets the set of connection strings for a queue.
+    fullName: >-
+      azure-asm-sb.QueueOperations~QueueOperations.getConnectionDetails(namespaceName,
+      queueName, callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: queueName
+          type:
+            - string
+          description: The queue name.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function getConnectionDetails(namespaceName, queueName, callback)'
+    langs:
+      - js
+  - uid: 'azure-asm-sb.QueueOperations~QueueOperations#list'
+    id: 'azure-asm-sb.QueueOperations~QueueOperations#list'
+    parent: azure-asm-sb.QueueOperations~QueueOperations
+    name: 'list(namespaceName, callback)'
+    summary: "Enumerates the queues in the service namespace. The result is returned in\rpages, each containing up to 100 queues. If the namespace contains more\rthan 100 queues, a feed is returned that contains the first page and a\rnext link with the URI to view the next page of data.  (see\rhttp://msdn.microsoft.com/en-us/library/windowsazure/hh780759.asp for\rmore information)"
+    fullName: 'azure-asm-sb.QueueOperations~QueueOperations.list(namespaceName, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function list(namespaceName, callback)'
+    langs:
+      - js
+  - uid: 'azure-asm-sb.QueueOperations~QueueOperations#update'
+    id: 'azure-asm-sb.QueueOperations~QueueOperations#update'
+    parent: azure-asm-sb.QueueOperations~QueueOperations
+    name: 'update(namespaceName, queue, callback)'
+    summary: "Updates the queue description and makes a call to update corresponding DB\rentries.  (see\rhttp://msdn.microsoft.com/en-us/library/windowsazure/jj856305.aspx for\rmore information)"
+    fullName: >-
+      azure-asm-sb.QueueOperations~QueueOperations.update(namespaceName, queue,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: namespaceName
+          type:
+            - string
+          description: The namespace name.
+        - id: queue
+          type:
+            - azure-asm-sb.ServiceBusQueue
+          description: The service bus queue.
+        - id: queue.name
+          type:
+            - string
+          description: The name of the queue.
+          optional: true
+        - id: queue.lockDuration
+          type:
+            - string
+          description: "Determines the amount of time in\rseconds in which a message should be locked for processing by a receiver.\rAfter this period, the message is unlocked and available for consumption\rby the next receiver. Settable only at queue creation time:* Range: 0 - 5\rminutes. 0 means that the message is not locked* Default: 30 seconds"
+          optional: true
+        - id: queue.maxSizeInMegabytes
+          type:
+            - number
+          description: "Specifies the maximum queue\rsize in megabytes. Any attempt to enqueue a message that will cause the\rqueue to exceed this value will fail. You can only set this parameter at\rqueue creation time using the following values: * Range: 1 - 1024 (valid\rvalues are 1024, 2048, 3072, 4096, 5120) * Default: 1*1024 (valid values\rare 1024, 2048, 3072, 4096, 5120)"
+          optional: true
+        - id: queue.requiresDuplicateDetection
+          type:
+            - boolean
+          description: "Settable only at queue\rcreation time.* Default for durable queue: false"
+          optional: true
+        - id: queue.requiresSession
+          type:
+            - boolean
+          description: "Settable only at queue creation\rtime. If set to true, the queue will be session-aware and only\rSessionReceiver will be supported. Session-aware queues are not supported\rthrough REST.* Default for durable queue: false"
+          optional: true
+        - id: queue.defaultMessageTimeToLive
+          type:
+            - string
+          description: "Depending on whether\rDeadLettering is enabled, a message is automatically moved to the\rDeadLetterQueue or deleted if it has been stored in the queue for longer\rthan the specified time. This value is overwritten by a TTL specified on\rthe message if and only if the message TTL is smaller than the TTL set on\rthe queue. This value is immutable after the Queue has been created:*\rRange: 1 second - TimeSpan.MaxValue* Default: TimeSpan.MaxValue"
+          optional: true
+        - id: queue.deadLetteringOnMessageExpiration
+          type:
+            - boolean
+          description: "This field\rcontrols how the Service Bus handles a message whose TTL has expired. If\rit is enabled and a message expires, the Service Bus moves the message\rfrom the queue into the queue's dead-letter sub-queue. If disabled,\rmessage will be permanently deleted from the queue. Settable only at\rqueue creation time.* Default: false"
+          optional: true
+        - id: queue.duplicateDetectionHistoryTimeWindow
+          type:
+            - string
+          description: "Specifies the\rtime span during which the Service Bus detects message duplication:*\rRange: 1 second - 7 days* Default: 10 minutes"
+          optional: true
+        - id: queue.maxDeliveryCount
+          type:
+            - number
+          description: "The maximum number of times a\rmessage SB will try to deliver before being dead lettered or discarded."
+          optional: true
+        - id: queue.enableBatchedOperations
+          type:
+            - boolean
+          description: "Enables or disables\rservice side batching behavior when performing operations for the\rspecific queue. When enabled, service bus will collect/batch multiple\roperations to the backend to be more connection efficient. If user wants\rlower operation latency then they can disable this feature."
+          optional: true
+        - id: queue.sizeInBytes
+          type:
+            - number
+          description: "Reflects the actual bytes that\rmessages in the queue currently occupy toward the queue's quota.* Range:\r0 -MaxTopicSizeinMegaBytes"
+          optional: true
+        - id: queue.messageCount
+          type:
+            - number
+          description: "Displays the number of messages\rcurrently in the queue."
+          optional: true
+        - id: queue.isAnonymousAccessible
+          type:
+            - boolean
+          description: "Gets whether anonymous\raccess is allowed."
+          optional: true
+        - id: queue.authorizationRules
+          type:
+            - array
+          description: "Gets the authorization rules for\rthe description."
+          optional: true
+        - id: queue.status
+          type:
+            - string
+          description: "Gets or sets the current status of the\rqueue (enabled or disabled). When a queue is disabled, that queue cannot\rsend or receive messages."
+          optional: true
+        - id: queue.createdAt
+          type:
+            - date
+          description: The time the queue was created at.
+          optional: true
+        - id: queue.updatedAt
+          type:
+            - date
+          description: The time the queue was last updated.
+          optional: true
+        - id: queue.accessedAt
+          type:
+            - date
+          description: The time the queue was last accessed.
+          optional: true
+        - id: queue.supportOrdering
+          type:
+            - boolean
+          description: "Gets or sets whether the queue\rsupports ordering."
+          optional: true
+        - id: queue.countDetails
+          type:
+            - azure-asm-sb.CountDetails
+          description: Current queue statistics.
+          optional: true
+        - id: queue.countDetails.activeMessageCount
+          type:
+            - number
+          description: "The current number\rof active messages."
+          optional: true
+        - id: queue.countDetails.deadLetterMessageCount
+          type:
+            - number
+          description: "The current\rnumber of dead letters."
+          optional: true
+        - id: queue.countDetails.scheduledMessageCount
+          type:
+            - number
+          description: "The current\rnumber of scheduled messages."
+          optional: true
+        - id: queue.countDetails.transferDeadLetterMessageCount
+          type:
+            - number
+          description: "The\rcurrent number of transfer dead letters."
+          optional: true
+        - id: queue.countDetails.transferMessageCount
+          type:
+            - number
+          description: "The current\rnumber of transfer messages."
+          optional: true
+        - id: queue.autoDeleteOnIdle
+          type:
+            - string
+          description: Implemented.
+          optional: true
+        - id: queue.entityAvailabilityStatus
+          type:
+            - string
+          description: "The current availability\rstatus of the queue."
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-asm-sb.Stream
+        description: The response stream.
+      content: 'function update(namespaceName, queue, callback)'
+    langs:
+      - js

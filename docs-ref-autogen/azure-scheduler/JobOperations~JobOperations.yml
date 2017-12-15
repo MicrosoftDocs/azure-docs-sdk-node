@@ -1,0 +1,821 @@
+### YamlMime:UniversalReference
+items:
+  - uid: azure-scheduler.JobOperations~JobOperations
+    id: azure-scheduler.JobOperations~JobOperations
+    name: JobOperations
+    summary: "__NOTE__: An instance of this class is automatically created for an\rinstance of the [SchedulerClient] <xref:azure-scheduler.SchedulerClient~SchedulerClient>.\rSee [jobs] <xref:azure-scheduler.SchedulerClient~SchedulerClient%23jobs>.\rInitializes a new instance of the JobOperations class."
+    fullName: azure-scheduler.JobOperations
+    source:
+      id: azure-scheduler.JobOperations~JobOperations
+      path: lib\services\scheduler\lib\schedulerClient.js
+      startLine: 109
+      remote:
+        branch: master
+        path: lib\services\scheduler\lib\schedulerClient.js
+        repo: 'https://github.com/Azure/azure-sdk-for-node.git'
+    type: Class
+    children:
+      - 'azure-scheduler.JobOperations~JobOperations.#ctor'
+      - 'azure-scheduler.JobOperations~JobOperations#create'
+      - 'azure-scheduler.JobOperations~JobOperations#createOrUpdate'
+      - 'azure-scheduler.JobOperations~JobOperations#deleteMethod'
+      - 'azure-scheduler.JobOperations~JobOperations#get'
+      - 'azure-scheduler.JobOperations~JobOperations#getHistory'
+      - 'azure-scheduler.JobOperations~JobOperations#getHistoryWithFilter'
+      - 'azure-scheduler.JobOperations~JobOperations#list'
+      - 'azure-scheduler.JobOperations~JobOperations#listWithFilter'
+      - 'azure-scheduler.JobOperations~JobOperations#updateJobCollectionState'
+      - 'azure-scheduler.JobOperations~JobOperations#updateState'
+    langs:
+      - js
+  - id: 'azure-scheduler.JobOperations~JobOperations.#ctor'
+    uid: 'azure-scheduler.JobOperations~JobOperations.#ctor'
+    parent: azure-scheduler.JobOperations~JobOperations
+    name: JobOperations(client)
+    fullName: azure-scheduler.JobOperations.JobOperations(client)
+    summary: ''
+    type: Constructor
+    syntax:
+      parameters:
+        - id: client
+          type:
+            - azure-scheduler.SchedulerClient
+          description: Reference to the service client.
+      content: new JobOperations(client)
+    langs:
+      - js
+  - uid: 'azure-scheduler.JobOperations~JobOperations#create'
+    id: 'azure-scheduler.JobOperations~JobOperations#create'
+    parent: azure-scheduler.JobOperations~JobOperations
+    name: 'create(parameters, callback)'
+    summary: "Creates a new Job, allowing the service to generate a job id. Use\rCreateOrUpdate if a user-chosen job id is required."
+    fullName: 'azure-scheduler.JobOperations~JobOperations.create(parameters, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: parameters
+          type:
+            - azure-scheduler.JobCreateParameters
+          description: "Parameters specifying the job\rdefinition for a Create Job operation."
+        - id: parameters.startTime
+          type:
+            - date
+          description: "Start time for the job.  Defined as\rISO-8601."
+          optional: true
+        - id: parameters.action
+          type:
+            - azure-scheduler.JobAction
+          description: Action to invoke for the job.
+        - id: parameters.action.type
+          type:
+            - azure-scheduler.JobActionType
+          description: "Type of action. Can be one\rof http, https, storageQueue."
+        - id: parameters.action.retryPolicy
+          type:
+            - azure-scheduler.RetryPolicy
+          description: "Retry Policy for the\rjob action."
+          optional: true
+        - id: parameters.action.retryPolicy.retryType
+          type:
+            - azure-scheduler.RetryType
+          description: "The Retry\rType of the Retry Policy. Can be either 'fixed' or 'none'."
+          optional: true
+        - id: parameters.action.retryPolicy.retryInterval
+          type:
+            - azure-scheduler.TimeSpan
+          description: "The\rinterval between retries."
+          optional: true
+        - id: parameters.action.retryPolicy.retryCount
+          type:
+            - number
+          description: "Number of times\ra retry should be attempted."
+          optional: true
+        - id: parameters.action.errorAction
+          type:
+            - azure-scheduler.JobErrorAction
+          description: "Error Action for\rthe job."
+          optional: true
+        - id: parameters.action.errorAction.type
+          type:
+            - azure-scheduler.JobActionType
+          description: "Type of\raction. Can be one of http, https, storageQueue."
+          optional: true
+        - id: parameters.action.errorAction.request
+          type:
+            - azure-scheduler.JobHttpRequest
+          description: "Request\rfor a http or https action type."
+          optional: true
+        - id: parameters.action.errorAction.request.uri
+          type:
+            - string
+          description: "Gets or sets\rUri of the endpoint to invoke."
+          optional: true
+        - id: parameters.action.errorAction.request.method
+          type:
+            - string
+          description: "Gets or\rsets Http method e.g. GET, PUT, POST, DELETE."
+          optional: true
+        - id: parameters.action.errorAction.request.headers
+          type:
+            - object
+          description: "Gets or\rsets Header name value pairs to supply with the http/https action."
+          optional: true
+        - id: parameters.action.errorAction.request.body
+          type:
+            - string
+          description: "Gets or sets\rthe request body."
+          optional: true
+        - id: parameters.action.errorAction.request.authentication
+          type:
+            - azure-scheduler.HttpAuthentication
+          description: "Gets or sets the\rrequest authentication."
+          optional: true
+        - id: parameters.action.errorAction.request.authentication.type
+          type:
+            - azure-scheduler.HttpAuthenticationType
+          description: "Specifies the\rauthentication type"
+          optional: true
+        - id: parameters.action.errorAction.queueMessage
+          type:
+            - azure-scheduler.JobQueueMessage
+          description: Queue and content for a queue message action type.
+          optional: true
+        - id: parameters.action.errorAction.queueMessage.storageAccountName
+          type:
+            - string
+          description: "Name of\rthe storage account for the queue."
+          optional: true
+        - id: parameters.action.errorAction.queueMessage.queueName
+          type:
+            - string
+          description: Name of the queue to send to.
+          optional: true
+        - id: parameters.action.errorAction.queueMessage.sasToken
+          type:
+            - string
+          description: "SAS\rkey for the storage account to send message to the queue."
+          optional: true
+        - id: parameters.action.errorAction.queueMessage.message
+          type:
+            - string
+          description: Content of the message to send to the queue.
+          optional: true
+        - id: parameters.action.request
+          type:
+            - azure-scheduler.JobHttpRequest
+          description: "Request for a http or\rhttps action type."
+          optional: true
+        - id: parameters.action.request.uri
+          type:
+            - string
+          description: "Gets or sets Uri of the\rendpoint to invoke."
+          optional: true
+        - id: parameters.action.request.method
+          type:
+            - string
+          description: "Gets or sets Http\rmethod e.g. GET, PUT, POST, DELETE."
+          optional: true
+        - id: parameters.action.request.headers
+          type:
+            - object
+          description: "Gets or sets Header\rname value pairs to supply with the http/https action."
+          optional: true
+        - id: parameters.action.request.body
+          type:
+            - string
+          description: "Gets or sets the request\rbody."
+          optional: true
+        - id: parameters.action.request.authentication
+          type:
+            - azure-scheduler.HttpAuthentication
+          description: Gets or sets the request authentication.
+          optional: true
+        - id: parameters.action.request.authentication.type
+          type:
+            - azure-scheduler.HttpAuthenticationType
+          description: "Specifies the\rauthentication type"
+          optional: true
+        - id: parameters.action.queueMessage
+          type:
+            - azure-scheduler.JobQueueMessage
+          description: "Queue and\rcontent for a queue message action type."
+          optional: true
+        - id: parameters.action.queueMessage.storageAccountName
+          type:
+            - string
+          description: "Name\rof the storage account for the queue."
+          optional: true
+        - id: parameters.action.queueMessage.queueName
+          type:
+            - string
+          description: "Name of the\rqueue to send to."
+          optional: true
+        - id: parameters.action.queueMessage.sasToken
+          type:
+            - string
+          description: "SAS key for the\rstorage account to send message to the queue."
+          optional: true
+        - id: parameters.action.queueMessage.message
+          type:
+            - string
+          description: "Content of the\rmessage to send to the queue."
+          optional: true
+        - id: parameters.recurrence
+          type:
+            - azure-scheduler.JobRecurrence
+          description: "Recurrence schedule for the\rjob."
+          optional: true
+        - id: parameters.recurrence.frequency
+          type:
+            - azure-scheduler.JobRecurrenceFrequency
+          description: "The\rfrequency of recurrence."
+          optional: true
+        - id: parameters.recurrence.interval
+          type:
+            - number
+          description: "Interval of the\rrecurrence at the given frequency."
+          optional: true
+        - id: parameters.recurrence.count
+          type:
+            - number
+          description: "Count of occurrences that\rwill execute. Optional. Default will recur infinitely"
+          optional: true
+        - id: parameters.recurrence.endTime
+          type:
+            - date
+          description: "Time in ISO-8601 format\rafter which no more occurrences will execute."
+          optional: true
+        - id: parameters.recurrence.schedule
+          type:
+            - azure-scheduler.JobRecurrenceSchedule
+          description: "Recurrence\rschedule for the job."
+          optional: true
+        - id: parameters.recurrence.schedule.minutes
+          type:
+            - array
+          description: "Minutes of the\rhour that the job should execute at."
+          optional: true
+        - id: parameters.recurrence.schedule.hours
+          type:
+            - array
+          description: "Hours of the day\rthat the job should execute at."
+          optional: true
+        - id: parameters.recurrence.schedule.days
+          type:
+            - array
+          description: "Days of the week that\rthe job should execute on."
+          optional: true
+        - id: parameters.recurrence.schedule.months
+          type:
+            - array
+          description: "Months that the job\rshould execute in.  Must be between 1 and 12."
+          optional: true
+        - id: parameters.recurrence.schedule.monthDays
+          type:
+            - array
+          description: "Days of the\rmonth that the job should execute on.  Must be between 1 and 31."
+          optional: true
+        - id: parameters.recurrence.schedule.monthlyOccurrences
+          type:
+            - array
+          description: Occurrences of days within a month.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-scheduler.Stream
+        description: The response stream.
+      content: 'function create(parameters, callback)'
+    langs:
+      - js
+  - uid: 'azure-scheduler.JobOperations~JobOperations#createOrUpdate'
+    id: 'azure-scheduler.JobOperations~JobOperations#createOrUpdate'
+    parent: azure-scheduler.JobOperations~JobOperations
+    name: 'createOrUpdate(jobId, parameters, callback)'
+    summary: "Creates a new Job with a user-provided job id, or updates an existing job,\rreplacing its definition with that specified."
+    fullName: >-
+      azure-scheduler.JobOperations~JobOperations.createOrUpdate(jobId,
+      parameters, callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: jobId
+          type:
+            - string
+          description: Id of the job to create or update.
+        - id: parameters
+          type:
+            - azure-scheduler.JobCreateOrUpdateParameters
+          description: "Parameters specifying the\rjob definition for a CreateOrUpdate Job operation."
+        - id: parameters.startTime
+          type:
+            - date
+          description: "Start time for the job. Defined as\rISO-8601."
+          optional: true
+        - id: parameters.action
+          type:
+            - azure-scheduler.JobAction
+          description: Action to invoke for the job.
+        - id: parameters.action.type
+          type:
+            - azure-scheduler.JobActionType
+          description: "Type of action. Can be one\rof http, https, storageQueue."
+        - id: parameters.action.retryPolicy
+          type:
+            - azure-scheduler.RetryPolicy
+          description: "Retry Policy for the\rjob action."
+          optional: true
+        - id: parameters.action.retryPolicy.retryType
+          type:
+            - azure-scheduler.RetryType
+          description: "The Retry\rType of the Retry Policy. Can be either 'fixed' or 'none'."
+          optional: true
+        - id: parameters.action.retryPolicy.retryInterval
+          type:
+            - azure-scheduler.TimeSpan
+          description: "The\rinterval between retries."
+          optional: true
+        - id: parameters.action.retryPolicy.retryCount
+          type:
+            - number
+          description: "Number of times\ra retry should be attempted."
+          optional: true
+        - id: parameters.action.errorAction
+          type:
+            - azure-scheduler.JobErrorAction
+          description: "Error Action for\rthe job."
+          optional: true
+        - id: parameters.action.errorAction.type
+          type:
+            - azure-scheduler.JobActionType
+          description: "Type of\raction. Can be one of http, https, storageQueue."
+          optional: true
+        - id: parameters.action.errorAction.request
+          type:
+            - azure-scheduler.JobHttpRequest
+          description: "Request\rfor a http or https action type."
+          optional: true
+        - id: parameters.action.errorAction.request.uri
+          type:
+            - string
+          description: "Gets or sets\rUri of the endpoint to invoke."
+          optional: true
+        - id: parameters.action.errorAction.request.method
+          type:
+            - string
+          description: "Gets or\rsets Http method e.g. GET, PUT, POST, DELETE."
+          optional: true
+        - id: parameters.action.errorAction.request.headers
+          type:
+            - object
+          description: "Gets or\rsets Header name value pairs to supply with the http/https action."
+          optional: true
+        - id: parameters.action.errorAction.request.body
+          type:
+            - string
+          description: "Gets or sets\rthe request body."
+          optional: true
+        - id: parameters.action.errorAction.request.authentication
+          type:
+            - azure-scheduler.HttpAuthentication
+          description: "Gets or sets the\rrequest authentication."
+          optional: true
+        - id: parameters.action.errorAction.request.authentication.type
+          type:
+            - azure-scheduler.HttpAuthenticationType
+          description: "Specifies the\rauthentication type"
+          optional: true
+        - id: parameters.action.errorAction.queueMessage
+          type:
+            - azure-scheduler.JobQueueMessage
+          description: Queue and content for a queue message action type.
+          optional: true
+        - id: parameters.action.errorAction.queueMessage.storageAccountName
+          type:
+            - string
+          description: "Name of\rthe storage account for the queue."
+          optional: true
+        - id: parameters.action.errorAction.queueMessage.queueName
+          type:
+            - string
+          description: Name of the queue to send to.
+          optional: true
+        - id: parameters.action.errorAction.queueMessage.sasToken
+          type:
+            - string
+          description: "SAS\rkey for the storage account to send message to the queue."
+          optional: true
+        - id: parameters.action.errorAction.queueMessage.message
+          type:
+            - string
+          description: Content of the message to send to the queue.
+          optional: true
+        - id: parameters.action.request
+          type:
+            - azure-scheduler.JobHttpRequest
+          description: "Request for a http or\rhttps action type."
+          optional: true
+        - id: parameters.action.request.uri
+          type:
+            - string
+          description: "Gets or sets Uri of the\rendpoint to invoke."
+          optional: true
+        - id: parameters.action.request.method
+          type:
+            - string
+          description: "Gets or sets Http\rmethod e.g. GET, PUT, POST, DELETE."
+          optional: true
+        - id: parameters.action.request.headers
+          type:
+            - object
+          description: "Gets or sets Header\rname value pairs to supply with the http/https action."
+          optional: true
+        - id: parameters.action.request.body
+          type:
+            - string
+          description: "Gets or sets the request\rbody."
+          optional: true
+        - id: parameters.action.request.authentication
+          type:
+            - azure-scheduler.HttpAuthentication
+          description: Gets or sets the request authentication.
+          optional: true
+        - id: parameters.action.request.authentication.type
+          type:
+            - azure-scheduler.HttpAuthenticationType
+          description: "Specifies the\rauthentication type"
+          optional: true
+        - id: parameters.action.queueMessage
+          type:
+            - azure-scheduler.JobQueueMessage
+          description: "Queue and\rcontent for a queue message action type."
+          optional: true
+        - id: parameters.action.queueMessage.storageAccountName
+          type:
+            - string
+          description: "Name\rof the storage account for the queue."
+          optional: true
+        - id: parameters.action.queueMessage.queueName
+          type:
+            - string
+          description: "Name of the\rqueue to send to."
+          optional: true
+        - id: parameters.action.queueMessage.sasToken
+          type:
+            - string
+          description: "SAS key for the\rstorage account to send message to the queue."
+          optional: true
+        - id: parameters.action.queueMessage.message
+          type:
+            - string
+          description: "Content of the\rmessage to send to the queue."
+          optional: true
+        - id: parameters.recurrence
+          type:
+            - azure-scheduler.JobRecurrence
+          description: "Recurrence schedule for the\rjob."
+          optional: true
+        - id: parameters.recurrence.frequency
+          type:
+            - azure-scheduler.JobRecurrenceFrequency
+          description: "The\rfrequency of recurrence."
+          optional: true
+        - id: parameters.recurrence.interval
+          type:
+            - number
+          description: "Interval of the\rrecurrence at the given frequency."
+          optional: true
+        - id: parameters.recurrence.count
+          type:
+            - number
+          description: "Count of occurrences that\rwill execute. Optional. Default will recur infinitely"
+          optional: true
+        - id: parameters.recurrence.endTime
+          type:
+            - date
+          description: "Time in ISO-8601 format\rafter which no more occurrences will execute."
+          optional: true
+        - id: parameters.recurrence.schedule
+          type:
+            - azure-scheduler.JobRecurrenceSchedule
+          description: "Recurrence\rschedule for the job."
+          optional: true
+        - id: parameters.recurrence.schedule.minutes
+          type:
+            - array
+          description: "Minutes of the\rhour that the job should execute at."
+          optional: true
+        - id: parameters.recurrence.schedule.hours
+          type:
+            - array
+          description: "Hours of the day\rthat the job should execute at."
+          optional: true
+        - id: parameters.recurrence.schedule.days
+          type:
+            - array
+          description: "Days of the week that\rthe job should execute on."
+          optional: true
+        - id: parameters.recurrence.schedule.months
+          type:
+            - array
+          description: "Months that the job\rshould execute in.  Must be between 1 and 12."
+          optional: true
+        - id: parameters.recurrence.schedule.monthDays
+          type:
+            - array
+          description: "Days of the\rmonth that the job should execute on.  Must be between 1 and 31."
+          optional: true
+        - id: parameters.recurrence.schedule.monthlyOccurrences
+          type:
+            - array
+          description: Occurrences of days within a month.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-scheduler.Stream
+        description: The response stream.
+      content: 'function createOrUpdate(jobId, parameters, callback)'
+    langs:
+      - js
+  - uid: 'azure-scheduler.JobOperations~JobOperations#deleteMethod'
+    id: 'azure-scheduler.JobOperations~JobOperations#deleteMethod'
+    parent: azure-scheduler.JobOperations~JobOperations
+    name: 'deleteMethod(jobId, callback)'
+    summary: Deletes a job.
+    fullName: 'azure-scheduler.JobOperations~JobOperations.deleteMethod(jobId, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: jobId
+          type:
+            - string
+          description: Id of the job to delete.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-scheduler.Stream
+        description: The response stream.
+      content: 'function deleteMethod(jobId, callback)'
+    langs:
+      - js
+  - uid: 'azure-scheduler.JobOperations~JobOperations#get'
+    id: 'azure-scheduler.JobOperations~JobOperations#get'
+    parent: azure-scheduler.JobOperations~JobOperations
+    name: 'get(jobId, callback)'
+    summary: Get the definition and status of a job.
+    fullName: 'azure-scheduler.JobOperations~JobOperations.get(jobId, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: jobId
+          type:
+            - string
+          description: Id of the job to get.
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-scheduler.Stream
+        description: The response stream.
+      content: 'function get(jobId, callback)'
+    langs:
+      - js
+  - uid: 'azure-scheduler.JobOperations~JobOperations#getHistory'
+    id: 'azure-scheduler.JobOperations~JobOperations#getHistory'
+    parent: azure-scheduler.JobOperations~JobOperations
+    name: 'getHistory(jobId, parameters, callback)'
+    summary: Get the execution history of a Job.
+    fullName: >-
+      azure-scheduler.JobOperations~JobOperations.getHistory(jobId, parameters,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: jobId
+          type:
+            - string
+          description: Id of the job to get the history of.
+        - id: parameters
+          type:
+            - azure-scheduler.JobGetHistoryParameters
+          description: "Parameters supplied to the Get\rJob History operation."
+        - id: parameters.skip
+          type:
+            - number
+          description: "Specify the (0-based) index of the\rhistory list from which to begin requesting entries."
+          optional: true
+        - id: parameters.top
+          type:
+            - number
+          description: "Specify the number of history entries to\rrequest, in the of range [1..100]."
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-scheduler.Stream
+        description: The response stream.
+      content: 'function getHistory(jobId, parameters, callback)'
+    langs:
+      - js
+  - uid: 'azure-scheduler.JobOperations~JobOperations#getHistoryWithFilter'
+    id: 'azure-scheduler.JobOperations~JobOperations#getHistoryWithFilter'
+    parent: azure-scheduler.JobOperations~JobOperations
+    name: 'getHistoryWithFilter(jobId, parameters, callback)'
+    summary: Get the execution history of a Job with a filter on the job Status.
+    fullName: >-
+      azure-scheduler.JobOperations~JobOperations.getHistoryWithFilter(jobId,
+      parameters, callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: jobId
+          type:
+            - string
+          description: Id of the job to get the history of.
+        - id: parameters
+          type:
+            - azure-scheduler.JobGetHistoryWithFilterParameters
+          description: "Parameters supplied\rto the Get Job History With Filter operation."
+        - id: parameters.status
+          type:
+            - azure-scheduler.JobHistoryStatus
+          description: "Filter the job history to have\rit only return job execution attempts having a particular Status,\r'completed' or 'failed'."
+        - id: parameters.skip
+          type:
+            - number
+          description: "Specify the (0-based) index of the\rhistory list from which to begin requesting entries."
+          optional: true
+        - id: parameters.top
+          type:
+            - number
+          description: "Specify the number of history entries to\rrequest, in the of range [1..100]."
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-scheduler.Stream
+        description: The response stream.
+      content: 'function getHistoryWithFilter(jobId, parameters, callback)'
+    langs:
+      - js
+  - uid: 'azure-scheduler.JobOperations~JobOperations#list'
+    id: 'azure-scheduler.JobOperations~JobOperations#list'
+    parent: azure-scheduler.JobOperations~JobOperations
+    name: 'list(parameters, callback)'
+    summary: Get the list of all jobs in a job collection.
+    fullName: 'azure-scheduler.JobOperations~JobOperations.list(parameters, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: parameters
+          type:
+            - azure-scheduler.JobListParameters
+          description: "Parameters supplied to the List Jobs\roperation."
+        - id: parameters.skip
+          type:
+            - number
+          description: "Specify the (0-based) index of the job\rlist from which to begin requesting entries."
+          optional: true
+        - id: parameters.top
+          type:
+            - number
+          description: "Specify the number of jobs to request, in\rthe of range [1..100]."
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-scheduler.Stream
+        description: The response stream.
+      content: 'function list(parameters, callback)'
+    langs:
+      - js
+  - uid: 'azure-scheduler.JobOperations~JobOperations#listWithFilter'
+    id: 'azure-scheduler.JobOperations~JobOperations#listWithFilter'
+    parent: azure-scheduler.JobOperations~JobOperations
+    name: 'listWithFilter(parameters, callback)'
+    summary: Get the list of jobs in a job collection matching a filter on job state.
+    fullName: >-
+      azure-scheduler.JobOperations~JobOperations.listWithFilter(parameters,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: parameters
+          type:
+            - azure-scheduler.JobListWithFilterParameters
+          description: "Parameters supplied to the\rList Jobs with filter operation."
+        - id: parameters.state
+          type:
+            - azure-scheduler.JobState
+          description: "Filter the job history to have it only\rreturn job execution attempts having a particular State, enabled,\rdisabled, faulted, or completed."
+        - id: parameters.skip
+          type:
+            - number
+          description: "Specify the (0-based) index of the job\rlist from which to begin requesting entries."
+          optional: true
+        - id: parameters.top
+          type:
+            - number
+          description: "Specify the number of jobs to request, in\rthe of range [1..100]."
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-scheduler.Stream
+        description: The response stream.
+      content: 'function listWithFilter(parameters, callback)'
+    langs:
+      - js
+  - uid: 'azure-scheduler.JobOperations~JobOperations#updateJobCollectionState'
+    id: 'azure-scheduler.JobOperations~JobOperations#updateJobCollectionState'
+    parent: azure-scheduler.JobOperations~JobOperations
+    name: 'updateJobCollectionState(parameters, callback)'
+    summary: Update the state of all jobs in a job collections.
+    fullName: >-
+      azure-scheduler.JobOperations~JobOperations.updateJobCollectionState(parameters,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: parameters
+          type:
+            - azure-scheduler.JobCollectionJobsUpdateStateParameters
+          description: "Parameters\rsupplied to the Update Jobs State operation."
+        - id: parameters.state
+          type:
+            - azure-scheduler.JobState
+          description: "New state to update to: 'enabled' or\r'disabled'."
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-scheduler.Stream
+        description: The response stream.
+      content: 'function updateJobCollectionState(parameters, callback)'
+    langs:
+      - js
+  - uid: 'azure-scheduler.JobOperations~JobOperations#updateState'
+    id: 'azure-scheduler.JobOperations~JobOperations#updateState'
+    parent: azure-scheduler.JobOperations~JobOperations
+    name: 'updateState(jobId, parameters, callback)'
+    summary: Update the state of a job.
+    fullName: >-
+      azure-scheduler.JobOperations~JobOperations.updateState(jobId, parameters,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: jobId
+          type:
+            - string
+          description: Id of the job to update.
+        - id: parameters
+          type:
+            - azure-scheduler.JobUpdateStateParameters
+          description: "Parameters supplied to the\rUpdate Job State operation."
+        - id: parameters.state
+          type:
+            - azure-scheduler.JobState
+          description: "New state to update to: 'enabled' or\r'disabled'."
+        - id: parameters.updateStateReason
+          type:
+            - string
+          description: "A description of the\rcircumstances associated with this job state update."
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: ''
+      return:
+        type:
+          - azure-scheduler.Stream
+        description: The response stream.
+      content: 'function updateState(jobId, parameters, callback)'
+    langs:
+      - js

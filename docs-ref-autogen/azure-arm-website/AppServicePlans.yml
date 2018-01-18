@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-website.AppServicePlans
       path: lib\services\webSiteManagement2\lib\operations\appServicePlans.js
-      startLine: 5605
+      startLine: 6317
       remote:
         branch: jsdoc
         path: lib\services\webSiteManagement2\lib\operations\appServicePlans.js
@@ -28,6 +28,8 @@ items:
       - 'azure-arm-website.AppServicePlans#createOrUpdate'
       - 'azure-arm-website.AppServicePlans#deleteMethodWithHttpOperationResponse'
       - 'azure-arm-website.AppServicePlans#deleteMethod'
+      - 'azure-arm-website.AppServicePlans#updateWithHttpOperationResponse'
+      - 'azure-arm-website.AppServicePlans#update'
       - >-
         azure-arm-website.AppServicePlans#listCapabilitiesWithHttpOperationResponse
       - 'azure-arm-website.AppServicePlans#listCapabilities'
@@ -59,6 +61,11 @@ items:
       - 'azure-arm-website.AppServicePlans#restartWebApps'
       - 'azure-arm-website.AppServicePlans#listWebAppsWithHttpOperationResponse'
       - 'azure-arm-website.AppServicePlans#listWebApps'
+      - >-
+        azure-arm-website.AppServicePlans#getServerFarmSkusWithHttpOperationResponse
+      - 'azure-arm-website.AppServicePlans#getServerFarmSkus'
+      - 'azure-arm-website.AppServicePlans#listUsagesWithHttpOperationResponse'
+      - 'azure-arm-website.AppServicePlans#listUsages'
       - 'azure-arm-website.AppServicePlans#listVnetsWithHttpOperationResponse'
       - 'azure-arm-website.AppServicePlans#listVnets'
       - >-
@@ -110,6 +117,9 @@ items:
       - >-
         azure-arm-website.AppServicePlans#listWebAppsNextWithHttpOperationResponse
       - 'azure-arm-website.AppServicePlans#listWebAppsNext'
+      - >-
+        azure-arm-website.AppServicePlans#listUsagesNextWithHttpOperationResponse
+      - 'azure-arm-website.AppServicePlans#listUsagesNext'
     langs:
       - js
   - id: 'azure-arm-website.AppServicePlans.#ctor'
@@ -607,7 +617,6 @@ items:
           description: |-
             Name for the App Service
             plan.
-          optional: true
         - id: appServicePlan.workerTierName
           type:
             - string
@@ -649,10 +658,26 @@ items:
 
             all instances of the plan.
           optional: true
+        - id: appServicePlan.isSpot
+          type:
+            - boolean
+          description: |-
+            If <code>true</code>, this App
+            Service Plan owns spot instances.
+          optional: true
+        - id: appServicePlan.spotExpirationTime
+          type:
+            - date
+          description: |-
+            The time when the server
+            farm expires. Valid only if it is a spot server farm.
+          optional: true
         - id: appServicePlan.reserved
           type:
             - boolean
-          description: Reserved.
+          description: |-
+            If Linux app service plan
+            <code>true</code>, <code>false</code> otherwise.
           optional: true
         - id: appServicePlan.targetWorkerCount
           type:
@@ -849,7 +874,6 @@ items:
           description: |-
             Name for the App Service
             plan.
-          optional: true
         - id: appServicePlan.workerTierName
           type:
             - string
@@ -891,10 +915,26 @@ items:
 
             all instances of the plan.
           optional: true
+        - id: appServicePlan.isSpot
+          type:
+            - boolean
+          description: |-
+            If <code>true</code>, this App
+            Service Plan owns spot instances.
+          optional: true
+        - id: appServicePlan.spotExpirationTime
+          type:
+            - date
+          description: |-
+            The time when the server
+            farm expires. Valid only if it is a spot server farm.
+          optional: true
         - id: appServicePlan.reserved
           type:
             - boolean
-          description: Reserved.
+          description: |-
+            If Linux app service plan
+            <code>true</code>, <code>false</code> otherwise.
           optional: true
         - id: appServicePlan.targetWorkerCount
           type:
@@ -1169,6 +1209,328 @@ items:
           {Promise} A promise is returned
       content: >-
         function deleteMethod(resourceGroupName, name, options,
+        optionalCallback)
+    langs:
+      - js
+  - uid: 'azure-arm-website.AppServicePlans#updateWithHttpOperationResponse'
+    id: 'azure-arm-website.AppServicePlans#updateWithHttpOperationResponse'
+    parent: azure-arm-website.AppServicePlans
+    name: >-
+      updateWithHttpOperationResponse(resourceGroupName, name, appServicePlan,
+      options)
+    summary: |-
+      Creates or updates an App Service Plan.
+
+      Creates or updates an App Service Plan.
+    fullName: >-
+      azure-arm-website.AppServicePlans.updateWithHttpOperationResponse(resourceGroupName,
+      name, appServicePlan, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<AppServicePlan>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<AppServicePlan>} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            Name of the resource group to which the
+            resource belongs.
+        - id: name
+          type:
+            - string
+          description: Name of the App Service plan.
+        - id: appServicePlan
+          type:
+            - object
+          description: Details of the App Service plan.
+        - id: appServicePlan.appServicePlanPatchResourceName
+          type:
+            - string
+          description: |-
+            Name for the
+            App Service plan.
+        - id: appServicePlan.workerTierName
+          type:
+            - string
+          description: |-
+            Target worker tier assigned
+            to the App Service plan.
+          optional: true
+        - id: appServicePlan.adminSiteName
+          type:
+            - string
+          description: |-
+            App Service plan
+            administration site.
+          optional: true
+        - id: appServicePlan.hostingEnvironmentProfile
+          type:
+            - object
+          description: |-
+            Specification for
+            the App Service Environment to use for the App Service plan.
+          optional: true
+        - id: appServicePlan.hostingEnvironmentProfile.id
+          type:
+            - string
+          description: |-
+            Resource ID of
+            the App Service Environment.
+          optional: true
+        - id: appServicePlan.perSiteScaling
+          type:
+            - boolean
+          description: >-
+            If <code>true</code>, apps
+
+            assigned to this App Service plan can be scaled independently.
+
+            If <code>false</code>, apps assigned to this App Service plan will
+            scale to
+
+            all instances of the plan.
+          optional: true
+        - id: appServicePlan.isSpot
+          type:
+            - boolean
+          description: |-
+            If <code>true</code>, this App
+            Service Plan owns spot instances.
+          optional: true
+        - id: appServicePlan.spotExpirationTime
+          type:
+            - date
+          description: |-
+            The time when the server
+            farm expires. Valid only if it is a spot server farm.
+          optional: true
+        - id: appServicePlan.reserved
+          type:
+            - boolean
+          description: |-
+            If Linux app service plan
+            <code>true</code>, <code>false</code> otherwise.
+          optional: true
+        - id: appServicePlan.targetWorkerCount
+          type:
+            - number
+          description: Scaling worker count.
+          optional: true
+        - id: appServicePlan.targetWorkerSizeId
+          type:
+            - number
+          description: Scaling worker size ID.
+          optional: true
+        - id: appServicePlan.kind
+          type:
+            - string
+          description: Kind of resource.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function updateWithHttpOperationResponse(resourceGroupName, name,
+        appServicePlan, options)
+    langs:
+      - js
+  - uid: 'azure-arm-website.AppServicePlans#update'
+    id: 'azure-arm-website.AppServicePlans#update'
+    parent: azure-arm-website.AppServicePlans
+    name: 'update(resourceGroupName, name, appServicePlan, options, optionalCallback)'
+    summary: |-
+      Creates or updates an App Service Plan.
+
+      Creates or updates an App Service Plan.
+    fullName: >-
+      azure-arm-website.AppServicePlans.update(resourceGroupName, name,
+      appServicePlan, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{AppServicePlan} - The deserialized result object.'
+        value: '{AppServicePlan} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link AppServicePlan} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link AppServicePlan} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            Name of the resource group to which the
+            resource belongs.
+        - id: name
+          type:
+            - string
+          description: Name of the App Service plan.
+        - id: appServicePlan
+          type:
+            - object
+          description: Details of the App Service plan.
+        - id: appServicePlan.appServicePlanPatchResourceName
+          type:
+            - string
+          description: |-
+            Name for the
+            App Service plan.
+        - id: appServicePlan.workerTierName
+          type:
+            - string
+          description: |-
+            Target worker tier assigned
+            to the App Service plan.
+          optional: true
+        - id: appServicePlan.adminSiteName
+          type:
+            - string
+          description: |-
+            App Service plan
+            administration site.
+          optional: true
+        - id: appServicePlan.hostingEnvironmentProfile
+          type:
+            - object
+          description: |-
+            Specification for
+            the App Service Environment to use for the App Service plan.
+          optional: true
+        - id: appServicePlan.hostingEnvironmentProfile.id
+          type:
+            - string
+          description: |-
+            Resource ID of
+            the App Service Environment.
+          optional: true
+        - id: appServicePlan.perSiteScaling
+          type:
+            - boolean
+          description: >-
+            If <code>true</code>, apps
+
+            assigned to this App Service plan can be scaled independently.
+
+            If <code>false</code>, apps assigned to this App Service plan will
+            scale to
+
+            all instances of the plan.
+          optional: true
+        - id: appServicePlan.isSpot
+          type:
+            - boolean
+          description: |-
+            If <code>true</code>, this App
+            Service Plan owns spot instances.
+          optional: true
+        - id: appServicePlan.spotExpirationTime
+          type:
+            - date
+          description: |-
+            The time when the server
+            farm expires. Valid only if it is a spot server farm.
+          optional: true
+        - id: appServicePlan.reserved
+          type:
+            - boolean
+          description: |-
+            If Linux app service plan
+            <code>true</code>, <code>false</code> otherwise.
+          optional: true
+        - id: appServicePlan.targetWorkerCount
+          type:
+            - number
+          description: Scaling worker count.
+          optional: true
+        - id: appServicePlan.targetWorkerSizeId
+          type:
+            - number
+          description: Scaling worker size ID.
+          optional: true
+        - id: appServicePlan.kind
+          type:
+            - string
+          description: Kind of resource.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function update(resourceGroupName, name, appServicePlan, options,
         optionalCallback)
     langs:
       - js
@@ -3018,6 +3380,318 @@ items:
       content: 'function listWebApps(resourceGroupName, name, options, optionalCallback)'
     langs:
       - js
+  - uid: >-
+      azure-arm-website.AppServicePlans#getServerFarmSkusWithHttpOperationResponse
+    id: >-
+      azure-arm-website.AppServicePlans#getServerFarmSkusWithHttpOperationResponse
+    parent: azure-arm-website.AppServicePlans
+    name: >-
+      getServerFarmSkusWithHttpOperationResponse(resourceGroupName, name,
+      options)
+    summary: |-
+      Gets all selectable sku's for a given App Service Plan
+
+      Gets all selectable sku's for a given App Service Plan
+    fullName: >-
+      azure-arm-website.AppServicePlans.getServerFarmSkusWithHttpOperationResponse(resourceGroupName,
+      name, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<Object>} - The deserialized result object.'
+        value: '{HttpOperationResponse<Object>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            Name of the resource group to which the
+            resource belongs.
+        - id: name
+          type:
+            - string
+          description: Name of App Service Plan
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function getServerFarmSkusWithHttpOperationResponse(resourceGroupName,
+        name, options)
+    langs:
+      - js
+  - uid: 'azure-arm-website.AppServicePlans#getServerFarmSkus'
+    id: 'azure-arm-website.AppServicePlans#getServerFarmSkus'
+    parent: azure-arm-website.AppServicePlans
+    name: 'getServerFarmSkus(resourceGroupName, name, options, optionalCallback)'
+    summary: |-
+      Gets all selectable sku's for a given App Service Plan
+
+      Gets all selectable sku's for a given App Service Plan
+    fullName: >-
+      azure-arm-website.AppServicePlans.getServerFarmSkus(resourceGroupName,
+      name, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{Object} - The deserialized result object.'
+        value: '{Object} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            Name of the resource group to which the
+            resource belongs.
+        - id: name
+          type:
+            - string
+          description: Name of App Service Plan
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function getServerFarmSkus(resourceGroupName, name, options,
+        optionalCallback)
+    langs:
+      - js
+  - uid: 'azure-arm-website.AppServicePlans#listUsagesWithHttpOperationResponse'
+    id: 'azure-arm-website.AppServicePlans#listUsagesWithHttpOperationResponse'
+    parent: azure-arm-website.AppServicePlans
+    name: 'listUsagesWithHttpOperationResponse(resourceGroupName, name, options)'
+    summary: |-
+      Gets server farm usage information
+
+      Gets server farm usage information
+    fullName: >-
+      azure-arm-website.AppServicePlans.listUsagesWithHttpOperationResponse(resourceGroupName,
+      name, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<CsmUsageQuotaCollection>} - The deserialized
+          result object.
+        value: >-
+          {HttpOperationResponse<CsmUsageQuotaCollection>} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            Name of the resource group to which the
+            resource belongs.
+        - id: name
+          type:
+            - string
+          description: Name of App Service Plan
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.filter
+          type:
+            - string
+          description: >-
+            Return only usages/metrics specified in the
+
+            filter. Filter conforms to odata syntax. Example:
+            $filter=(name.value eq
+
+            'Metric1' or name.value eq 'Metric2').
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function listUsagesWithHttpOperationResponse(resourceGroupName, name,
+        options)
+    langs:
+      - js
+  - uid: 'azure-arm-website.AppServicePlans#listUsages'
+    id: 'azure-arm-website.AppServicePlans#listUsages'
+    parent: azure-arm-website.AppServicePlans
+    name: 'listUsages(resourceGroupName, name, options, optionalCallback)'
+    summary: |-
+      Gets server farm usage information
+
+      Gets server farm usage information
+    fullName: >-
+      azure-arm-website.AppServicePlans.listUsages(resourceGroupName, name,
+      options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{CsmUsageQuotaCollection} - The deserialized result object.'
+        value: '{CsmUsageQuotaCollection} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link CsmUsageQuotaCollection} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link CsmUsageQuotaCollection} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |-
+            Name of the resource group to which the
+            resource belongs.
+        - id: name
+          type:
+            - string
+          description: Name of App Service Plan
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.filter
+          type:
+            - string
+          description: >-
+            Return only usages/metrics specified in the
+
+            filter. Filter conforms to odata syntax. Example:
+            $filter=(name.value eq
+
+            'Metric1' or name.value eq 'Metric2').
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function listUsages(resourceGroupName, name, options, optionalCallback)'
+    langs:
+      - js
   - uid: 'azure-arm-website.AppServicePlans#listVnetsWithHttpOperationResponse'
     id: 'azure-arm-website.AppServicePlans#listVnetsWithHttpOperationResponse'
     parent: azure-arm-website.AppServicePlans
@@ -3541,7 +4215,6 @@ items:
           description: |-
             The URI where the VPN
             package can be downloaded.
-          optional: true
         - id: connectionEnvelope.kind
           type:
             - string
@@ -3653,7 +4326,6 @@ items:
           description: |-
             The URI where the VPN
             package can be downloaded.
-          optional: true
         - id: connectionEnvelope.kind
           type:
             - string
@@ -4934,7 +5606,6 @@ items:
           description: |-
             Name for the App Service
             plan.
-          optional: true
         - id: appServicePlan.workerTierName
           type:
             - string
@@ -4976,10 +5647,26 @@ items:
 
             all instances of the plan.
           optional: true
+        - id: appServicePlan.isSpot
+          type:
+            - boolean
+          description: |-
+            If <code>true</code>, this App
+            Service Plan owns spot instances.
+          optional: true
+        - id: appServicePlan.spotExpirationTime
+          type:
+            - date
+          description: |-
+            The time when the server
+            farm expires. Valid only if it is a spot server farm.
+          optional: true
         - id: appServicePlan.reserved
           type:
             - boolean
-          description: Reserved.
+          description: |-
+            If Linux app service plan
+            <code>true</code>, <code>false</code> otherwise.
           optional: true
         - id: appServicePlan.targetWorkerCount
           type:
@@ -5176,7 +5863,6 @@ items:
           description: |-
             Name for the App Service
             plan.
-          optional: true
         - id: appServicePlan.workerTierName
           type:
             - string
@@ -5218,10 +5904,26 @@ items:
 
             all instances of the plan.
           optional: true
+        - id: appServicePlan.isSpot
+          type:
+            - boolean
+          description: |-
+            If <code>true</code>, this App
+            Service Plan owns spot instances.
+          optional: true
+        - id: appServicePlan.spotExpirationTime
+          type:
+            - date
+          description: |-
+            The time when the server
+            farm expires. Valid only if it is a spot server farm.
+          optional: true
         - id: appServicePlan.reserved
           type:
             - boolean
-          description: Reserved.
+          description: |-
+            If Linux app service plan
+            <code>true</code>, <code>false</code> otherwise.
           optional: true
         - id: appServicePlan.targetWorkerCount
           type:
@@ -6337,6 +7039,142 @@ items:
 
           {Promise} A promise is returned
       content: 'function listWebAppsNext(nextPageLink, options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-website.AppServicePlans#listUsagesNextWithHttpOperationResponse'
+    id: 'azure-arm-website.AppServicePlans#listUsagesNextWithHttpOperationResponse'
+    parent: azure-arm-website.AppServicePlans
+    name: 'listUsagesNextWithHttpOperationResponse(nextPageLink, options)'
+    summary: |-
+      Gets server farm usage information
+
+      Gets server farm usage information
+    fullName: >-
+      azure-arm-website.AppServicePlans.listUsagesNextWithHttpOperationResponse(nextPageLink,
+      options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<CsmUsageQuotaCollection>} - The deserialized
+          result object.
+        value: >-
+          {HttpOperationResponse<CsmUsageQuotaCollection>} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: 'function listUsagesNextWithHttpOperationResponse(nextPageLink, options)'
+    langs:
+      - js
+  - uid: 'azure-arm-website.AppServicePlans#listUsagesNext'
+    id: 'azure-arm-website.AppServicePlans#listUsagesNext'
+    parent: azure-arm-website.AppServicePlans
+    name: 'listUsagesNext(nextPageLink, options, optionalCallback)'
+    summary: |-
+      Gets server farm usage information
+
+      Gets server farm usage information
+    fullName: >-
+      azure-arm-website.AppServicePlans.listUsagesNext(nextPageLink, options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{CsmUsageQuotaCollection} - The deserialized result object.'
+        value: '{CsmUsageQuotaCollection} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link CsmUsageQuotaCollection} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link CsmUsageQuotaCollection} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function listUsagesNext(nextPageLink, options, optionalCallback)'
     langs:
       - js
 references:

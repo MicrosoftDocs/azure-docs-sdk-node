@@ -49,6 +49,7 @@ items:
       - 'azure-storage.BlobService#getBlobToStream'
       - 'azure-storage.BlobService#getBlobToText'
       - 'azure-storage.BlobService#deleteBlob'
+      - 'azure-storage.BlobService#undeleteBlob'
       - 'azure-storage.BlobService#doesBlobExist'
       - 'azure-storage.BlobService#deleteBlobIfExists'
       - 'azure-storage.BlobService#createBlobSnapshot'
@@ -253,7 +254,7 @@ items:
     id: 'azure-storage.BlobService#setServiceProperties'
     parent: azure-storage.BlobService
     name: 'setServiceProperties(serviceProperties, options, callback)'
-    summary: "Sets the properties of a storage account's Blob service, including Azure Storage Analytics.\rYou can also use this operation to set the default request version for all incoming requests that do not have a version specified."
+    summary: "Sets the properties of a storage account's Blob service, including Azure Storage Analytics.\rYou can also use this operation to set the default request version for all incoming requests that do not have a version specified.\rWhen you set blob service properties (such as enabling soft delete), it may take up to 30 seconds to take effect."
     fullName: >-
       azure-storage.BlobService.setServiceProperties(serviceProperties, options,
       callback)
@@ -1472,7 +1473,7 @@ items:
         - id: options.include
           type:
             - string
-          description: "Specifies that the response should include one or more of the following subsets: '', 'metadata', 'snapshots', 'uncommittedblobs', 'copy'). \r                                                                Please find these values in BlobUtilities.BlobListingDetails. Multiple values can be added separated with a comma (,).\r                                                                **Note** that all metadata names returned from the server will be converted to lower case by NodeJS itself as metadata is set via HTTP headers and HTTP header names are case insensitive."
+          description: "Specifies that the response should include one or more of the following subsets: '', 'metadata', 'snapshots', 'uncommittedblobs', 'copy', 'deleted'). \r                                                                Please find these values in BlobUtilities.BlobListingDetails. Multiple values can be added separated with a comma (,).\r                                                                **Note** that all metadata names returned from the server will be converted to lower case by NodeJS itself as metadata is set via HTTP headers and HTTP header names are case insensitive."
           optional: true
         - id: options.locationMode
           type:
@@ -1567,7 +1568,7 @@ items:
         - id: options.include
           type:
             - string
-          description: "Specifies that the response should include one or more of the following subsets: '', 'metadata', 'snapshots', 'uncommittedblobs', 'copy').\r                                                                Please find these values in BlobUtilities.BlobListingDetails. Multiple values can be added separated with a comma (,).\r                                                                **Note** that all metadata names returned from the server will be converted to lower case by NodeJS itself as metadata is set via HTTP headers and HTTP header names are case insensitive."
+          description: "Specifies that the response should include one or more of the following subsets: '', 'metadata', 'snapshots', 'uncommittedblobs', 'copy', 'deleted').\r                                                                Please find these values in BlobUtilities.BlobListingDetails. Multiple values can be added separated with a comma (,).\r                                                                **Note** that all metadata names returned from the server will be converted to lower case by NodeJS itself as metadata is set via HTTP headers and HTTP header names are case insensitive."
           optional: true
         - id: options.locationMode
           type:
@@ -2803,6 +2804,76 @@ items:
             - azure-storage.errorOrResponse
           description: "`error` will contain information\r                                                                        if an error occurs; `response` will contain information related to this operation."
       content: 'function deleteBlob(container, blob, options, callback)'
+    langs:
+      - js
+  - uid: 'azure-storage.BlobService#undeleteBlob'
+    id: 'azure-storage.BlobService#undeleteBlob'
+    parent: azure-storage.BlobService
+    name: 'undeleteBlob(container, blob, options, callback)'
+    summary: "The undelete Blob operation restores the contents and metadata of soft deleted blob or snapshot.\rAttempting to undelete a blob or snapshot that is not soft deleted will succeed without any changes."
+    fullName: 'azure-storage.BlobService.undeleteBlob(container, blob, options, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: container
+          type:
+            - string
+          description: The container name.
+        - id: blob
+          type:
+            - string
+          description: The blob name.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.accessConditions
+          type:
+            - azure-storage.AccessConditions
+          description: The access conditions.
+          optional: true
+        - id: options.locationMode
+          type:
+            - azure-storage.LocationMode
+          description: "Specifies the location mode used to decide which location the request should be sent to. \r                                                                        Please see StorageUtilities.LocationMode for the possible values."
+          optional: true
+        - id: options.timeoutIntervalInMs
+          type:
+            - azure-storage.int
+          description: >-
+            The server timeout interval, in milliseconds, to use for the
+            request.
+          optional: true
+        - id: options.clientRequestTimeoutInMs
+          type:
+            - azure-storage.int
+          description: >-
+            The timeout of client requests, in milliseconds, to use for the
+            request.
+          optional: true
+        - id: options.maximumExecutionTimeInMs
+          type:
+            - azure-storage.int
+          description: "The maximum execution time, in milliseconds, across all potential retries, to use when making this request.\r                                                                        The maximum execution time interval begins at the time that the client begins building the request. The maximum\r                                                                        execution time is checked intermittently while performing requests, and before executing retries."
+          optional: true
+        - id: options.clientRequestId
+          type:
+            - string
+          description: >-
+            A string that represents the client request ID with a 1KB character
+            limit.
+          optional: true
+        - id: options.useNagleAlgorithm
+          type:
+            - azure-storage.bool
+          description: "Determines whether the Nagle algorithm is used; true to use the Nagle algorithm; otherwise, false.\r                                                                        The default value is false."
+          optional: true
+        - id: callback
+          type:
+            - azure-storage.errorOrResponse
+          description: "`error` will contain information\r                                                                        if an error occurs; `response` will contain information related to this operation."
+      content: 'function undeleteBlob(container, blob, options, callback)'
     langs:
       - js
   - uid: 'azure-storage.BlobService#doesBlobExist'

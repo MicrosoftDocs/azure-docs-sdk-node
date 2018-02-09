@@ -1,0 +1,380 @@
+### YamlMime:UniversalReference
+items:
+  - uid: ms-rest
+    name: ms-rest
+    langs:
+      - js
+    type: package
+    summary: ''
+    children:
+      - ms-rest.WebResource
+      - ms-rest.ServiceClient
+      - ms-rest.HttpOperationResponse
+      - ms-rest.SystemErrorRetryPolicyFilter
+      - ms-rest.ExponentialRetryPolicyFilter
+      - ms-rest.TokenCredentials
+      - ms-rest.BasicAuthenticationCredentials
+      - ms-rest.ApiKeyCredentials
+      - ms-rest.create
+      - ms-rest.setAgent
+      - ms-rest.createWithSink
+      - ms-rest.createCompositeFilter
+      - ms-rest.interimStream
+      - ms-rest.serializeObject
+      - ms-rest.serialize
+      - ms-rest.deserialize
+      - ms-rest.urlIsHTTPS
+      - ms-rest.objectIsNull
+      - ms-rest.encodeUri
+      - ms-rest.stripResponse
+      - ms-rest.stripRequest
+      - ms-rest.isValidUuid
+      - ms-rest.objectValues
+      - ms-rest.generateUuid
+      - ms-rest.homeDir
+  - uid: ms-rest.create
+    id: ms-rest.create
+    name: create()
+    summary: "formDataFilter - This filter is resposnsible for setting the form property on the \rrequest object if the Content-Type header is 'application/x-www-form-urlencoded'"
+    fullName: ms-rest.create()
+    type: Function
+    syntax:
+      content: function create()
+    langs:
+      - js
+  - uid: ms-rest.setAgent
+    id: ms-rest.setAgent
+    name: 'setAgent(resouce, proxy)'
+    summary: "Set the Agent to use for the request\rResult depends on proxy settings and protocol"
+    fullName: 'ms-rest.setAgent(resouce, proxy)'
+    type: Function
+    syntax:
+      parameters:
+        - id: resouce
+          type:
+            - object
+          description: request options for request.
+        - id: proxy
+          type:
+            - object
+          description: parsed url for the proxy.
+      content: 'function setAgent(resouce, proxy)'
+    langs:
+      - js
+  - uid: ms-rest.createWithSink
+    id: ms-rest.createWithSink
+    name: createWithSink()
+    summary: "create a new http client pipeline that ends with a call to the\rrequest library using the given sink function to actually make\rthe http request."
+    fullName: ms-rest.createWithSink()
+    type: Function
+    syntax:
+      return:
+        description: 'function(request, callback) - function to make a request.'
+      content: function createWithSink()
+    langs:
+      - js
+  - uid: ms-rest.createCompositeFilter
+    id: ms-rest.createCompositeFilter
+    name: createCompositeFilter(filters)
+    summary: "Create a new filter that's a combination of all the filters\rgiven on the arguments list."
+    fullName: ms-rest.createCompositeFilter(filters)
+    type: Function
+    syntax:
+      parameters:
+        - id: filters
+          type:
+            - ms-rest.varargs
+          description: "to run. First filter in the list is closest to\rthe sink, so last to run before the request, first to run on the response:\rexactly the same as if you called pipeline.add or passed the list to\rpipeline.create."
+      return:
+        description: the new filter.
+      content: function createCompositeFilter(filters)
+    langs:
+      - js
+  - uid: ms-rest.interimStream
+    id: ms-rest.interimStream
+    name: interimStream(setPipe)
+    summary: "Creates an interim stream which can be returned to the\rcaller synchronously, so that async operations can still\rhook up to the streaming output afterwards. Used when\rfilters need to do async work before they can call the rest\rof the pipeline."
+    fullName: ms-rest.interimStream(setPipe)
+    type: Function
+    syntax:
+      parameters:
+        - id: setPipe
+          description: "function(input, output)\r   this function is invoked synchronously, to pass the two\r   underlying streams. input should be piped to the result of\r   the next filter. The result of next should be piped to output.\r   It's common to pause the input stream to prevent data loss\r   before actually returning the real stream to hook up to."
+      return:
+        description: "a duplex stream that writes to the input stream and\rproduces data from the output stream."
+      content: function interimStream(setPipe)
+    langs:
+      - js
+  - uid: ms-rest.serializeObject
+    id: ms-rest.serializeObject
+    name: serializeObject(toSerialize)
+    summary: "Serializes the JSON Object. It serializes Buffer object to a \r'base64' encoded string and a Date Object to a string \rcompliant with ISO8601 format."
+    fullName: ms-rest.serializeObject(toSerialize)
+    type: Function
+    syntax:
+      parameters:
+        - id: toSerialize
+          type:
+            - Object
+          description: ''
+      return:
+        type:
+          - Object
+        description: serializedObject
+      content: function serializeObject(toSerialize)
+    langs:
+      - js
+  - uid: ms-rest.serialize
+    id: ms-rest.serialize
+    name: 'serialize(mapper, object, objectName)'
+    summary: Serialize the given object based on its metadata defined in the mapper
+    fullName: 'ms-rest.serialize(mapper, object, objectName)'
+    type: Function
+    syntax:
+      parameters:
+        - id: mapper
+          type:
+            - object
+          description: The mapper which defines the metadata of the serializable object
+        - id: object
+          type:
+            - object
+            - string
+            - Array
+            - number
+            - boolean
+            - Date
+            - ms-rest.stream
+          description: A valid Javascript object to be serialized
+        - id: objectName
+          type:
+            - string
+          description: Name of the serialized object
+      return:
+        type:
+          - object
+          - string
+          - Array
+          - number
+          - boolean
+          - Date
+          - ms-rest.stream
+        description: A valid serialized Javascript object
+      content: 'function serialize(mapper, object, objectName)'
+    langs:
+      - js
+  - uid: ms-rest.deserialize
+    id: ms-rest.deserialize
+    name: 'deserialize(mapper, responseBody, objectName)'
+    summary: Deserialize the given object based on its metadata defined in the mapper
+    fullName: 'ms-rest.deserialize(mapper, responseBody, objectName)'
+    type: Function
+    syntax:
+      parameters:
+        - id: mapper
+          type:
+            - object
+          description: The mapper which defines the metadata of the serializable object
+        - id: responseBody
+          type:
+            - object
+            - string
+            - Array
+            - number
+            - boolean
+            - Date
+            - ms-rest.stream
+          description: A valid Javascript entity to be deserialized
+        - id: objectName
+          type:
+            - string
+          description: Name of the deserialized object
+      return:
+        type:
+          - object
+          - string
+          - Array
+          - number
+          - boolean
+          - Date
+          - ms-rest.stream
+        description: A valid deserialized Javascript object
+      content: 'function deserialize(mapper, responseBody, objectName)'
+    langs:
+      - js
+  - uid: ms-rest.urlIsHTTPS
+    id: ms-rest.urlIsHTTPS
+    name: urlIsHTTPS(urlToCheck)
+    summary: Checks if a parsed URL is HTTPS
+    fullName: ms-rest.urlIsHTTPS(urlToCheck)
+    type: Function
+    syntax:
+      parameters:
+        - id: urlToCheck
+          type:
+            - object
+          description: The url to check
+      return:
+        type:
+          - ms-rest.bool
+        description: True if the URL is HTTPS; false otherwise.
+      content: function urlIsHTTPS(urlToCheck)
+    langs:
+      - js
+  - uid: ms-rest.objectIsNull
+    id: ms-rest.objectIsNull
+    name: objectIsNull(value)
+    summary: Checks if a value is null or undefined.
+    fullName: ms-rest.objectIsNull(value)
+    type: Function
+    syntax:
+      parameters:
+        - id: value
+          type:
+            - object
+          description: The value to check for null or undefined.
+      return:
+        type:
+          - ms-rest.bool
+        description: 'True if the value is null or undefined, false otherwise.'
+      content: function objectIsNull(value)
+    langs:
+      - js
+  - uid: ms-rest.encodeUri
+    id: ms-rest.encodeUri
+    name: encodeUri(uri)
+    summary: Encodes an URI.
+    fullName: ms-rest.encodeUri(uri)
+    type: Function
+    syntax:
+      parameters:
+        - id: uri
+          type:
+            - string
+          description: The URI to be encoded.
+      return:
+        type:
+          - string
+        description: The encoded URI.
+      content: function encodeUri(uri)
+    langs:
+      - js
+  - uid: ms-rest.stripResponse
+    id: ms-rest.stripResponse
+    name: stripResponse(response)
+    summary: "Returns a stripped version of the Http Response which only contains body, \rheaders and the statusCode."
+    fullName: ms-rest.stripResponse(response)
+    type: Function
+    syntax:
+      parameters:
+        - id: response
+          type:
+            - ms-rest.stream
+          description: The Http Response
+      return:
+        type:
+          - object
+        description: strippedResponse - The stripped version of Http Response.
+      content: function stripResponse(response)
+    langs:
+      - js
+  - uid: ms-rest.stripRequest
+    id: ms-rest.stripRequest
+    name: stripRequest(request)
+    summary: "Returns a stripped version of the Http Request that does not contain the \rAuthorization header."
+    fullName: ms-rest.stripRequest(request)
+    type: Function
+    syntax:
+      parameters:
+        - id: request
+          type:
+            - object
+          description: The Http Request object
+      return:
+        type:
+          - object
+        description: strippedRequest - The stripped version of Http Request.
+      content: function stripRequest(request)
+    langs:
+      - js
+  - uid: ms-rest.isValidUuid
+    id: ms-rest.isValidUuid
+    name: isValidUuid(uuid)
+    summary: Validates the given uuid as a string
+    fullName: ms-rest.isValidUuid(uuid)
+    type: Function
+    syntax:
+      parameters:
+        - id: uuid
+          type:
+            - string
+          description: The uuid as a string that needs to be validated
+      return:
+        type:
+          - boolean
+        description: result - True if the uuid is valid; false otherwise.
+      content: function isValidUuid(uuid)
+    langs:
+      - js
+  - uid: ms-rest.objectValues
+    id: ms-rest.objectValues
+    name: objectValues(obj)
+    summary: "Provides an array of values of an object. For example \rfor a given object { 'a': 'foo', 'b': 'bar' }, the method returns ['foo', 'bar']."
+    fullName: ms-rest.objectValues(obj)
+    type: Function
+    syntax:
+      parameters:
+        - id: obj
+          type:
+            - object
+          description: >-
+            An object whose properties need to be enumerated so that it's values
+            can be provided as an array
+      return:
+        type:
+          - array
+        description: result - An array of values of the given object.
+      content: function objectValues(obj)
+    langs:
+      - js
+  - uid: ms-rest.generateUuid
+    id: ms-rest.generateUuid
+    name: generateUuid()
+    summary: Generated UUID
+    fullName: ms-rest.generateUuid()
+    type: Function
+    syntax:
+      return:
+        type:
+          - string
+        description: RFC4122 v4 UUID.
+      content: function generateUuid()
+    langs:
+      - js
+  - uid: ms-rest.homeDir
+    id: ms-rest.homeDir
+    name: homeDir()
+    summary: Provides path to home directory.
+    fullName: ms-rest.homeDir()
+    type: Function
+    syntax:
+      content: function homeDir()
+    langs:
+      - js
+references:
+  - uid: ms-rest.WebResource
+    name: WebResource
+  - uid: ms-rest.ServiceClient
+    name: ServiceClient
+  - uid: ms-rest.HttpOperationResponse
+    name: HttpOperationResponse
+  - uid: ms-rest.SystemErrorRetryPolicyFilter
+    name: SystemErrorRetryPolicyFilter
+  - uid: ms-rest.ExponentialRetryPolicyFilter
+    name: ExponentialRetryPolicyFilter
+  - uid: ms-rest.TokenCredentials
+    name: TokenCredentials
+  - uid: ms-rest.BasicAuthenticationCredentials
+    name: BasicAuthenticationCredentials
+  - uid: ms-rest.ApiKeyCredentials
+    name: ApiKeyCredentials

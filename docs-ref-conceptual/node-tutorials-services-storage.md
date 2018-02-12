@@ -1,16 +1,16 @@
 ---
-title: Tutorials for using Azure storage with Node.js
+title: Azure storage with Node.js tutorials
 description: Tutorials for connecting to and using Azure storage with Node.js.
-author: tomarcher
-manager: douge
+author: craigshoemaker
+manager: routlaw
 ms.devlang: nodejs
 ms.topic: article
 ms.service: azure-nodejs
 ms.date: 06/17/2017
-ms.author: tarcher
+ms.author: cshoe
 ---
 
-# Tutorials for using Azure storage with Node.js
+# Azure storage with Node.js tutorials
 
 The following table links to in-depth tutorials for connecting to and using Azure storage with Node.js.
 

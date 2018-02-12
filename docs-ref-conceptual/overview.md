@@ -1,10 +1,9 @@
 ---
 title: Azure modules for Node.js
 description: Overview of the Azure management and service modules for Node.js
-keywords: Azure, Node.js, SDK, API, management , client, services
-author: TomArcher
-ms.author: tarcher
-manager: douge
+author: craigshoemaker
+ms.author: cshoe
+manager: routlaw
 ms.date: 06/17/2017
 ms.topic: article
 ms.prod: azure
@@ -102,4 +101,4 @@ The following samples cover common tasks with the Azure management modules and h
 - [Web apps](node-samples-services-web-and-mobile.md)
 - [SQL Database](node-samples-services-database.md)
    
-A [reference](https://docs.microsoft.com/nodejs/api) is available for all modules in both the service and management modules. New features, breaking changes, and migration instructions from previous versions are available in the [release notes](https://github.com/Azure/azure-sdk-for-node/releases).
+A [reference](https://docs.microsoft.com/javascript/api) is available for all modules in both the service and management modules. New features, breaking changes, and migration instructions from previous versions are available in the [release notes](https://github.com/Azure/azure-sdk-for-node/releases).

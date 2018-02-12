@@ -1,10 +1,9 @@
 ---
 title: Azure Notification Hubs modules for Node.js
 description: Reference for Azure Notification Hubs modules for Node.js
-keywords: Azure,SDK,API,Notification Hubs, Node.js
-author: tomarcher
-ms.author: tarcher
-manager: douge
+author: craigshoemaker
+ms.author: cshoe
+manager: routlaw
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure
@@ -14,8 +13,6 @@ ms.service: Notification Hubs
 ---
 
 # Azure Notification Hubs modules for Node.js
-
-## Overview
 
 Azure Notification Hubs provide an easy-to-use, multi-platform, scaled-out push engine. With a single cross-platform API call, you can easily send targeted and personalized push notifications to any mobile platform from any cloud or on-premises backend.
 

@@ -1,10 +1,9 @@
 ---
 title: Get started with the Azure modules for Node.js
-description: Get started with basic use of the Azure modules for Node.js with your own Azure subscription.
-keywords: Azure, Node, SDK, API, get-started, node.js
-author: tomarcher
-manager: douge
-ms.author: tarcher
+description: Get started with authentication and resource management with Azure modules for Node.js
+author: craigshoemaker
+manager: routlaw
+ms.author: cshoe
 ms.date: 06/17/2017
 ms.topic: get-started-article
 ms.prod: azure
@@ -260,7 +259,7 @@ Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples
 
 ## Reference 
 
-A [reference](/nodejs/api/overview/azure/?view=azure-node-2.0.0) is available for all packages.
+A [reference](/javascript/api/overview/azure/) is available for all packages.
 
 ## Get help and give feedback
 

@@ -1,10 +1,9 @@
 ---
-title: Azure Virtual Machine Modules for Node.js
-description: Reference for Azure Virtual Machine Modules for Node.js
-keywords: Azure, Node, SDK, API, virtual machine, vm, nodejs, javascript
-author: tomarcher
-ms.author: tarcher
-manager: douge
+title: Virtual Machine Modules for Node.js - Azure
+description: Azure Virtual Machine Modules for Node.js reference guide
+author: craigshoemaker
+ms.author: cshoe
+manager: routlaw
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure
@@ -45,9 +44,9 @@ msRestAzure.interactiveLogin().then(credentials => {
   client.virtualMachineImages
     .list(
         'westus',                   // location
-        'MicrosoftWindowsServer',   // publisher name
-        'WindowsServer',            // offer
-        '2012-R2-Datacenter'        // sku
+        'Canonical',   // publisher name
+        'UbuntuServer',            // offer
+        '16.04-LTS'        // sku
     )
     .then(result => console.log(result));
 });

@@ -1,10 +1,9 @@
 ---
 title: Azure SQL modules for Node.js
 description: Reference for Azure SQL modules for Node.js
-keywords: Azure, Node, SDK, API, nodejs, javascript, sql
-author: tomarcher
-ms.author: tarcher
-manager: douge
+author: craigshoemaker
+ms.author: cshoe
+manager: routlaw
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure
@@ -14,8 +13,6 @@ ms.service: sql-database
 ---
 
 # Azure SQL modules for Node.js
-
-## Overview
 
 Work with data stored in [Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) from Node.js.
 The management library provides an interface to make it easy to manage Microsoft Azure SQL databases.

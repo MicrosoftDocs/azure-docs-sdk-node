@@ -1,10 +1,9 @@
 ---
 title: Azure management modules for Node.js web app samples
-description: Get sample code for creating and updating Azure web apps hosted in App Service using the Azure management modules for Node.js
-keywords: Azure, Node, SDK, API, web apps, app service
-author: tomarcher
-manager: douge
-ms.author: tarcher
+description: Node.js code samples for Azure App Service management modules
+author: craigshoemaker
+manager: routlaw
+ms.author: cshoe
 ms.date: 06/17/2017
 ms.topic: article
 ms.prod: azure
@@ -12,6 +11,6 @@ ms.devlang: nodejs
 ms.service: azure-nodejs
 ---
 
-# Azure management modules for Node.js samples for web apps
+# Node.js Code samples for Azure App Service management modules
 
 [!INCLUDE [node-appservice-samples](../docs-ref-conceptual/includes/appservice-samples.md)]

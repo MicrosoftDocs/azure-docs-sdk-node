@@ -1,10 +1,9 @@
 ---
 title: Azure DNS modules for Node.js
 description: Reference for Azure DNS modules for Node.js
-keywords: Azure,SDK,API,DNS, Node.js
-author: tomarcher
-ms.author: tarcher
-manager: douge
+author: craigshoemaker
+ms.author: cshoe
+manager: routlaw
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure
@@ -14,8 +13,6 @@ ms.service: DNS
 ---
 
 # Azure DNS modules for Node.js
-
-## Overview
 
 Use Azure DNS to host your Domain Name System (DNS) domains in Azure. Manage your DNS records using the same credentials and billing and support contract as your other Azure services. Seamlessly integrate Azure-based services with corresponding DNS updates and streamline your end-to-end deployment process.
 

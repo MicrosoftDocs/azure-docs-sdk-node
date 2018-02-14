@@ -8,7 +8,7 @@ items:
     source:
       id: azure-arm-eventgrid.EventSubscriptions
       path: lib\services\eventgridManagement\lib\operations\eventSubscriptions.js
-      startLine: 2544
+      startLine: 2542
       remote:
         branch: jsdoc
         path: lib\services\eventgridManagement\lib\operations\eventSubscriptions.js
@@ -18,8 +18,9 @@ items:
       - 'azure-arm-eventgrid.EventSubscriptions.#ctor'
       - 'azure-arm-eventgrid.EventSubscriptions#getWithHttpOperationResponse'
       - 'azure-arm-eventgrid.EventSubscriptions#get'
-      - 'azure-arm-eventgrid.EventSubscriptions#createWithHttpOperationResponse'
-      - 'azure-arm-eventgrid.EventSubscriptions#create'
+      - >-
+        azure-arm-eventgrid.EventSubscriptions#createOrUpdateWithHttpOperationResponse
+      - 'azure-arm-eventgrid.EventSubscriptions#createOrUpdate'
       - >-
         azure-arm-eventgrid.EventSubscriptions#deleteMethodWithHttpOperationResponse
       - 'azure-arm-eventgrid.EventSubscriptions#deleteMethod'
@@ -60,8 +61,8 @@ items:
         azure-arm-eventgrid.EventSubscriptions#listByResourceWithHttpOperationResponse
       - 'azure-arm-eventgrid.EventSubscriptions#listByResource'
       - >-
-        azure-arm-eventgrid.EventSubscriptions#beginCreateWithHttpOperationResponse
-      - 'azure-arm-eventgrid.EventSubscriptions#beginCreate'
+        azure-arm-eventgrid.EventSubscriptions#beginCreateOrUpdateWithHttpOperationResponse
+      - 'azure-arm-eventgrid.EventSubscriptions#beginCreateOrUpdate'
       - >-
         azure-arm-eventgrid.EventSubscriptions#beginDeleteMethodWithHttpOperationResponse
       - 'azure-arm-eventgrid.EventSubscriptions#beginDeleteMethod'
@@ -188,15 +189,17 @@ items:
       content: 'function get(scope, eventSubscriptionName, options, optionalCallback)'
     langs:
       - js
-  - uid: 'azure-arm-eventgrid.EventSubscriptions#createWithHttpOperationResponse'
-    id: 'azure-arm-eventgrid.EventSubscriptions#createWithHttpOperationResponse'
+  - uid: >-
+      azure-arm-eventgrid.EventSubscriptions#createOrUpdateWithHttpOperationResponse
+    id: >-
+      azure-arm-eventgrid.EventSubscriptions#createOrUpdateWithHttpOperationResponse
     parent: azure-arm-eventgrid.EventSubscriptions
     name: >-
-      createWithHttpOperationResponse(scope, eventSubscriptionName,
+      createOrUpdateWithHttpOperationResponse(scope, eventSubscriptionName,
       eventSubscriptionInfo, options)
-    summary: "Create an event subscription\r\rAsynchronously creates a new event subscription to the specified scope.\rExisting event subscriptions cannot be updated with this API and should\rinstead use the Update event subscription API."
+    summary: "Create or update an event subscription\r\rAsynchronously creates a new event subscription or updates an existing event\rsubscription based on the specified scope."
     fullName: >-
-      azure-arm-eventgrid.EventSubscriptions.createWithHttpOperationResponse(scope,
+      azure-arm-eventgrid.EventSubscriptions.createOrUpdateWithHttpOperationResponse(scope,
       eventSubscriptionName, eventSubscriptionInfo, options)
     tags:
       - originalTitle: resolve
@@ -217,11 +220,11 @@ items:
         - id: scope
           type:
             - string
-          description: "The scope of the resource to which the event\rsubscription needs to be created. The scope can be a subscription, or a\rresource group, or a top level resource belonging to a resource provider\rnamespace, or an EventGrid topic. For example, use\r'/subscriptions/{subscriptionId}/' for a subscription,\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a\rresource group, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'\rfor a resource, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'\rfor an EventGrid topic."
+          description: "The identifier of the resource to which the event\rsubscription needs to be created or updated. The scope can be a\rsubscription, or a resource group, or a top level resource belonging to a\rresource provider namespace, or an EventGrid topic. For example, use\r'/subscriptions/{subscriptionId}/' for a subscription,\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a\rresource group, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'\rfor a resource, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'\rfor an EventGrid topic."
         - id: eventSubscriptionName
           type:
             - string
-          description: "Name of the event subscription to be\rcreated. Event subscription names must be between 3 and 64 characters in\rlength and use alphanumeric letters only."
+          description: "Name of the event subscription. Event\rsubscription names must be between 3 and 64 characters in length and should\ruse alphanumeric letters only."
         - id: eventSubscriptionInfo
           type:
             - object
@@ -280,19 +283,19 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function createWithHttpOperationResponse(scope, eventSubscriptionName,
-        eventSubscriptionInfo, options)
+        function createOrUpdateWithHttpOperationResponse(scope,
+        eventSubscriptionName, eventSubscriptionInfo, options)
     langs:
       - js
-  - uid: 'azure-arm-eventgrid.EventSubscriptions#create'
-    id: 'azure-arm-eventgrid.EventSubscriptions#create'
+  - uid: 'azure-arm-eventgrid.EventSubscriptions#createOrUpdate'
+    id: 'azure-arm-eventgrid.EventSubscriptions#createOrUpdate'
     parent: azure-arm-eventgrid.EventSubscriptions
     name: >-
-      create(scope, eventSubscriptionName, eventSubscriptionInfo, options,
-      optionalCallback)
-    summary: "Create an event subscription\r\rAsynchronously creates a new event subscription to the specified scope.\rExisting event subscriptions cannot be updated with this API and should\rinstead use the Update event subscription API."
+      createOrUpdate(scope, eventSubscriptionName, eventSubscriptionInfo,
+      options, optionalCallback)
+    summary: "Create or update an event subscription\r\rAsynchronously creates a new event subscription or updates an existing event\rsubscription based on the specified scope."
     fullName: >-
-      azure-arm-eventgrid.EventSubscriptions.create(scope,
+      azure-arm-eventgrid.EventSubscriptions.createOrUpdate(scope,
       eventSubscriptionName, eventSubscriptionInfo, options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -309,11 +312,11 @@ items:
         - id: scope
           type:
             - string
-          description: "The scope of the resource to which the event\rsubscription needs to be created. The scope can be a subscription, or a\rresource group, or a top level resource belonging to a resource provider\rnamespace, or an EventGrid topic. For example, use\r'/subscriptions/{subscriptionId}/' for a subscription,\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a\rresource group, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'\rfor a resource, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'\rfor an EventGrid topic."
+          description: "The identifier of the resource to which the event\rsubscription needs to be created or updated. The scope can be a\rsubscription, or a resource group, or a top level resource belonging to a\rresource provider namespace, or an EventGrid topic. For example, use\r'/subscriptions/{subscriptionId}/' for a subscription,\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a\rresource group, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'\rfor a resource, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'\rfor an EventGrid topic."
         - id: eventSubscriptionName
           type:
             - string
-          description: "Name of the event subscription to be\rcreated. Event subscription names must be between 3 and 64 characters in\rlength and use alphanumeric letters only."
+          description: "Name of the event subscription. Event\rsubscription names must be between 3 and 64 characters in length and should\ruse alphanumeric letters only."
         - id: eventSubscriptionInfo
           type:
             - object
@@ -378,8 +381,8 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function create(scope, eventSubscriptionName, eventSubscriptionInfo,
-        options, optionalCallback)
+        function createOrUpdate(scope, eventSubscriptionName,
+        eventSubscriptionInfo, options, optionalCallback)
     langs:
       - js
   - uid: >-
@@ -1758,16 +1761,16 @@ items:
     langs:
       - js
   - uid: >-
-      azure-arm-eventgrid.EventSubscriptions#beginCreateWithHttpOperationResponse
+      azure-arm-eventgrid.EventSubscriptions#beginCreateOrUpdateWithHttpOperationResponse
     id: >-
-      azure-arm-eventgrid.EventSubscriptions#beginCreateWithHttpOperationResponse
+      azure-arm-eventgrid.EventSubscriptions#beginCreateOrUpdateWithHttpOperationResponse
     parent: azure-arm-eventgrid.EventSubscriptions
     name: >-
-      beginCreateWithHttpOperationResponse(scope, eventSubscriptionName,
+      beginCreateOrUpdateWithHttpOperationResponse(scope, eventSubscriptionName,
       eventSubscriptionInfo, options)
-    summary: "Create an event subscription\r\rAsynchronously creates a new event subscription to the specified scope.\rExisting event subscriptions cannot be updated with this API and should\rinstead use the Update event subscription API."
+    summary: "Create or update an event subscription\r\rAsynchronously creates a new event subscription or updates an existing event\rsubscription based on the specified scope."
     fullName: >-
-      azure-arm-eventgrid.EventSubscriptions.beginCreateWithHttpOperationResponse(scope,
+      azure-arm-eventgrid.EventSubscriptions.beginCreateOrUpdateWithHttpOperationResponse(scope,
       eventSubscriptionName, eventSubscriptionInfo, options)
     tags:
       - originalTitle: resolve
@@ -1788,11 +1791,11 @@ items:
         - id: scope
           type:
             - string
-          description: "The scope of the resource to which the event\rsubscription needs to be created. The scope can be a subscription, or a\rresource group, or a top level resource belonging to a resource provider\rnamespace, or an EventGrid topic. For example, use\r'/subscriptions/{subscriptionId}/' for a subscription,\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a\rresource group, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'\rfor a resource, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'\rfor an EventGrid topic."
+          description: "The identifier of the resource to which the event\rsubscription needs to be created or updated. The scope can be a\rsubscription, or a resource group, or a top level resource belonging to a\rresource provider namespace, or an EventGrid topic. For example, use\r'/subscriptions/{subscriptionId}/' for a subscription,\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a\rresource group, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'\rfor a resource, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'\rfor an EventGrid topic."
         - id: eventSubscriptionName
           type:
             - string
-          description: "Name of the event subscription to be\rcreated. Event subscription names must be between 3 and 64 characters in\rlength and use alphanumeric letters only."
+          description: "Name of the event subscription. Event\rsubscription names must be between 3 and 64 characters in length and should\ruse alphanumeric letters only."
         - id: eventSubscriptionInfo
           type:
             - object
@@ -1851,19 +1854,19 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function beginCreateWithHttpOperationResponse(scope,
+        function beginCreateOrUpdateWithHttpOperationResponse(scope,
         eventSubscriptionName, eventSubscriptionInfo, options)
     langs:
       - js
-  - uid: 'azure-arm-eventgrid.EventSubscriptions#beginCreate'
-    id: 'azure-arm-eventgrid.EventSubscriptions#beginCreate'
+  - uid: 'azure-arm-eventgrid.EventSubscriptions#beginCreateOrUpdate'
+    id: 'azure-arm-eventgrid.EventSubscriptions#beginCreateOrUpdate'
     parent: azure-arm-eventgrid.EventSubscriptions
     name: >-
-      beginCreate(scope, eventSubscriptionName, eventSubscriptionInfo, options,
-      optionalCallback)
-    summary: "Create an event subscription\r\rAsynchronously creates a new event subscription to the specified scope.\rExisting event subscriptions cannot be updated with this API and should\rinstead use the Update event subscription API."
+      beginCreateOrUpdate(scope, eventSubscriptionName, eventSubscriptionInfo,
+      options, optionalCallback)
+    summary: "Create or update an event subscription\r\rAsynchronously creates a new event subscription or updates an existing event\rsubscription based on the specified scope."
     fullName: >-
-      azure-arm-eventgrid.EventSubscriptions.beginCreate(scope,
+      azure-arm-eventgrid.EventSubscriptions.beginCreateOrUpdate(scope,
       eventSubscriptionName, eventSubscriptionInfo, options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -1880,11 +1883,11 @@ items:
         - id: scope
           type:
             - string
-          description: "The scope of the resource to which the event\rsubscription needs to be created. The scope can be a subscription, or a\rresource group, or a top level resource belonging to a resource provider\rnamespace, or an EventGrid topic. For example, use\r'/subscriptions/{subscriptionId}/' for a subscription,\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a\rresource group, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'\rfor a resource, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'\rfor an EventGrid topic."
+          description: "The identifier of the resource to which the event\rsubscription needs to be created or updated. The scope can be a\rsubscription, or a resource group, or a top level resource belonging to a\rresource provider namespace, or an EventGrid topic. For example, use\r'/subscriptions/{subscriptionId}/' for a subscription,\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a\rresource group, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'\rfor a resource, and\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}'\rfor an EventGrid topic."
         - id: eventSubscriptionName
           type:
             - string
-          description: "Name of the event subscription to be\rcreated. Event subscription names must be between 3 and 64 characters in\rlength and use alphanumeric letters only."
+          description: "Name of the event subscription. Event\rsubscription names must be between 3 and 64 characters in length and should\ruse alphanumeric letters only."
         - id: eventSubscriptionInfo
           type:
             - object
@@ -1949,7 +1952,7 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function beginCreate(scope, eventSubscriptionName,
+        function beginCreateOrUpdate(scope, eventSubscriptionName,
         eventSubscriptionInfo, options, optionalCallback)
     langs:
       - js

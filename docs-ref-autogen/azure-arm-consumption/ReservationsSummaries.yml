@@ -9,7 +9,7 @@ items:
       id: azure-arm-consumption.ReservationsSummaries
       path: >-
         lib\services\consumptionManagement\lib\operations\reservationsSummaries.js
-      startLine: 175
+      startLine: 592
       remote:
         branch: jsdoc
         path: >-
@@ -19,8 +19,19 @@ items:
     children:
       - 'azure-arm-consumption.ReservationsSummaries.#ctor'
       - >-
-        azure-arm-consumption.ReservationsSummaries#listWithHttpOperationResponse
-      - 'azure-arm-consumption.ReservationsSummaries#list'
+        azure-arm-consumption.ReservationsSummaries#listByReservationOrderWithHttpOperationResponse
+      - 'azure-arm-consumption.ReservationsSummaries#listByReservationOrder'
+      - >-
+        azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservationWithHttpOperationResponse
+      - >-
+        azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservation
+      - >-
+        azure-arm-consumption.ReservationsSummaries#listByReservationOrderNextWithHttpOperationResponse
+      - 'azure-arm-consumption.ReservationsSummaries#listByReservationOrderNext'
+      - >-
+        azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservationNextWithHttpOperationResponse
+      - >-
+        azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservationNext
     langs:
       - js
   - id: 'azure-arm-consumption.ReservationsSummaries.#ctor'
@@ -39,13 +50,17 @@ items:
       content: new ReservationsSummaries(client)
     langs:
       - js
-  - uid: 'azure-arm-consumption.ReservationsSummaries#listWithHttpOperationResponse'
-    id: 'azure-arm-consumption.ReservationsSummaries#listWithHttpOperationResponse'
+  - uid: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderWithHttpOperationResponse
+    id: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderWithHttpOperationResponse
     parent: azure-arm-consumption.ReservationsSummaries
-    name: 'listWithHttpOperationResponse(scope, grain, options)'
+    name: >-
+      listByReservationOrderWithHttpOperationResponse(reservationOrderId, grain,
+      options)
     summary: Lists the reservations summaries for daily or monthly grain.
     fullName: >-
-      azure-arm-consumption.ReservationsSummaries.listWithHttpOperationResponse(scope,
+      azure-arm-consumption.ReservationsSummaries.listByReservationOrderWithHttpOperationResponse(reservationOrderId,
       grain, options)
     tags:
       - originalTitle: resolve
@@ -63,10 +78,10 @@ items:
     type: Function
     syntax:
       parameters:
-        - id: scope
+        - id: reservationOrderId
           type:
             - string
-          description: "The scope of the reservation summaries. The scope can\rbe 'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}' or\r'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}/reservations/{ReservationId}'"
+          description: Order Id of the reservation
         - id: grain
           type:
             - string
@@ -90,17 +105,22 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: 'function listWithHttpOperationResponse(scope, grain, options)'
+      content: >-
+        function
+        listByReservationOrderWithHttpOperationResponse(reservationOrderId,
+        grain, options)
     langs:
       - js
-  - uid: 'azure-arm-consumption.ReservationsSummaries#list'
-    id: 'azure-arm-consumption.ReservationsSummaries#list'
+  - uid: 'azure-arm-consumption.ReservationsSummaries#listByReservationOrder'
+    id: 'azure-arm-consumption.ReservationsSummaries#listByReservationOrder'
     parent: azure-arm-consumption.ReservationsSummaries
-    name: 'list(scope, grain, options, optionalCallback)'
+    name: >-
+      listByReservationOrder(reservationOrderId, grain, options,
+      optionalCallback)
     summary: Lists the reservations summaries for daily or monthly grain.
     fullName: >-
-      azure-arm-consumption.ReservationsSummaries.list(scope, grain, options,
-      optionalCallback)
+      azure-arm-consumption.ReservationsSummaries.listByReservationOrder(reservationOrderId,
+      grain, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -113,10 +133,10 @@ items:
     type: Function
     syntax:
       parameters:
-        - id: scope
+        - id: reservationOrderId
           type:
             - string
-          description: "The scope of the reservation summaries. The scope can\rbe 'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}' or\r'providers/Microsoft.Capacity/reservationorders/{ReservationOrderId}/reservations/{ReservationId}'"
+          description: Order Id of the reservation
         - id: grain
           type:
             - string
@@ -146,6 +166,343 @@ items:
           - function
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: 'function list(scope, grain, options, optionalCallback)'
+      content: >-
+        function listByReservationOrder(reservationOrderId, grain, options,
+        optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservationWithHttpOperationResponse
+    id: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservationWithHttpOperationResponse
+    parent: azure-arm-consumption.ReservationsSummaries
+    name: >-
+      listByReservationOrderAndReservationWithHttpOperationResponse(reservationOrderId,
+      reservationId, grain, options)
+    summary: Lists the reservations summaries for daily or monthly grain.
+    fullName: >-
+      azure-arm-consumption.ReservationsSummaries.listByReservationOrderAndReservationWithHttpOperationResponse(reservationOrderId,
+      reservationId, grain, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ReservationSummariesListResult>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<ReservationSummariesListResult>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: reservationOrderId
+          type:
+            - string
+          description: Order Id of the reservation
+        - id: reservationId
+          type:
+            - string
+          description: Id of the reservation
+        - id: grain
+          type:
+            - string
+          description: "Can be daily or monthly. Possible values include:\r'DailyGrain', 'MonthlyGrain'"
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.filter
+          type:
+            - string
+          description: "Required only for daily grain. The\rproperties/UsageDate for start date and end date. The filter supports 'le'\rand  'ge'"
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function
+        listByReservationOrderAndReservationWithHttpOperationResponse(reservationOrderId,
+        reservationId, grain, options)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservation
+    id: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservation
+    parent: azure-arm-consumption.ReservationsSummaries
+    name: >-
+      listByReservationOrderAndReservation(reservationOrderId, reservationId,
+      grain, options, optionalCallback)
+    summary: Lists the reservations summaries for daily or monthly grain.
+    fullName: >-
+      azure-arm-consumption.ReservationsSummaries.listByReservationOrderAndReservation(reservationOrderId,
+      reservationId, grain, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{ReservationSummariesListResult} - The deserialized result object.'
+        value: '{ReservationSummariesListResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ReservationSummariesListResult} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ReservationSummariesListResult} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: reservationOrderId
+          type:
+            - string
+          description: Order Id of the reservation
+        - id: reservationId
+          type:
+            - string
+          description: Id of the reservation
+        - id: grain
+          type:
+            - string
+          description: "Can be daily or monthly. Possible values include:\r'DailyGrain', 'MonthlyGrain'"
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.filter
+          type:
+            - string
+          description: "Required only for daily grain. The\rproperties/UsageDate for start date and end date. The filter supports 'le'\rand  'ge'"
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function listByReservationOrderAndReservation(reservationOrderId,
+        reservationId, grain, options, optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderNextWithHttpOperationResponse
+    id: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderNextWithHttpOperationResponse
+    parent: azure-arm-consumption.ReservationsSummaries
+    name: 'listByReservationOrderNextWithHttpOperationResponse(nextPageLink, options)'
+    summary: Lists the reservations summaries for daily or monthly grain.
+    fullName: >-
+      azure-arm-consumption.ReservationsSummaries.listByReservationOrderNextWithHttpOperationResponse(nextPageLink,
+      options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ReservationSummariesListResult>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<ReservationSummariesListResult>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: "The NextLink from the previous successful call\rto List operation."
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function
+        listByReservationOrderNextWithHttpOperationResponse(nextPageLink,
+        options)
+    langs:
+      - js
+  - uid: 'azure-arm-consumption.ReservationsSummaries#listByReservationOrderNext'
+    id: 'azure-arm-consumption.ReservationsSummaries#listByReservationOrderNext'
+    parent: azure-arm-consumption.ReservationsSummaries
+    name: 'listByReservationOrderNext(nextPageLink, options, optionalCallback)'
+    summary: Lists the reservations summaries for daily or monthly grain.
+    fullName: >-
+      azure-arm-consumption.ReservationsSummaries.listByReservationOrderNext(nextPageLink,
+      options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{ReservationSummariesListResult} - The deserialized result object.'
+        value: '{ReservationSummariesListResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ReservationSummariesListResult} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ReservationSummariesListResult} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: "The NextLink from the previous successful call\rto List operation."
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function listByReservationOrderNext(nextPageLink, options,
+        optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservationNextWithHttpOperationResponse
+    id: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservationNextWithHttpOperationResponse
+    parent: azure-arm-consumption.ReservationsSummaries
+    name: >-
+      listByReservationOrderAndReservationNextWithHttpOperationResponse(nextPageLink,
+      options)
+    summary: Lists the reservations summaries for daily or monthly grain.
+    fullName: >-
+      azure-arm-consumption.ReservationsSummaries.listByReservationOrderAndReservationNextWithHttpOperationResponse(nextPageLink,
+      options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ReservationSummariesListResult>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<ReservationSummariesListResult>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: "The NextLink from the previous successful call\rto List operation."
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function
+        listByReservationOrderAndReservationNextWithHttpOperationResponse(nextPageLink,
+        options)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservationNext
+    id: >-
+      azure-arm-consumption.ReservationsSummaries#listByReservationOrderAndReservationNext
+    parent: azure-arm-consumption.ReservationsSummaries
+    name: >-
+      listByReservationOrderAndReservationNext(nextPageLink, options,
+      optionalCallback)
+    summary: Lists the reservations summaries for daily or monthly grain.
+    fullName: >-
+      azure-arm-consumption.ReservationsSummaries.listByReservationOrderAndReservationNext(nextPageLink,
+      options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{ReservationSummariesListResult} - The deserialized result object.'
+        value: '{ReservationSummariesListResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ReservationSummariesListResult} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ReservationSummariesListResult} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: "The NextLink from the previous successful call\rto List operation."
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function listByReservationOrderAndReservationNext(nextPageLink, options,
+        optionalCallback)
     langs:
       - js

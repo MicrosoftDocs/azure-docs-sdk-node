@@ -20,7 +20,7 @@ If you need code for other tasks, you can browse the full list of [Azure Node.js
 |---|---|
 | **Cosmos DB** ||
 | [Use the Azure Cosmos DB and Graph API](https://azure.microsoft.com/resources/samples/azure-cosmos-db-graph-nodejs-getting-started/) | Shows you how to use the Azure Cosmos DB with the Graph API to store and access data from a Node.js application. |
-| [Use the Azure Cosmos DB and SQL API](https://azure.microsoft.com/resources/samples/azure-cosmos-db-documentdb-nodejs-getting-started/) | Shows you how to use the Azure Cosmos DB with the SQL API to store and access data from a Node.js application. |
+| [Use the Azure Cosmos DB SQL API](https://azure.microsoft.com/resources/samples/azure-cosmos-db-documentdb-nodejs-getting-started/) | Shows you how to use the Azure Cosmos DB with the SQL API to store and access data from a Node.js application. |
 | **MongoDB** ||
 | [Node.js and MongoDB web app in Azure](https://azure.microsoft.com/resources/samples/meanjs/) | Sample application that you can use to follow along with the tutorial, [Build a Node.js and MongoDB web app in Azure](http://docs.microsoft.com/azure/app-service-web/app-service-web-tutorial-nodejs-mongodb-app?toc=/azure/node/toc.json&bc=/azure/node/toc.json). |
 | **SQL Database** ||

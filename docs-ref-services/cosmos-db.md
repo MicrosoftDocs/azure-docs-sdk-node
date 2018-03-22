@@ -4,7 +4,7 @@ description: Reference for Azure Cosmos DB modules for Node.js
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
-ms.date: 07/18/2017
+ms.date: 03/20/2018
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -16,13 +16,13 @@ ms.service: Cosmos DB
 
 Azure Cosmos DB is Microsoft's globally distributed, multi-model database. Azure Cosmos DB enables you to elastically and independently scale throughput and storage across any number of Azure's geographic regions. It offers throughput, latency, availability, and consistency guarantees with comprehensive service level agreements (SLAs), something no other database service can offer.
 
-Azure Cosmos DB contains a write optimized, resource governed, schema-agnostic database engine that natively supports multiple data models: key-value, documents, graphs, and columnar. It also supports many APIs for accessing data including MongoDB, DocumentDB SQL, Gremlin (preview), and Azure Tables (preview), in an extensible manner.
+Azure Cosmos DB contains a write optimized, resource governed, schema-agnostic database engine that natively supports multiple data models: key-value, documents, graphs, and columnar. It also supports many APIs for accessing data including MongoDB, SQL, Gremlin/Graph, Azure Tables, and Cassandra (preview) in an extensible manner.
 
 ## Management Package
 
 ### Install the npm module 
 
-Install the Azure Cosmos DB npm module
+Install the Azure Cosmos DB npm module.
 
 ```bash
 npm install azure-arm-documentdb
@@ -30,7 +30,7 @@ npm install azure-arm-documentdb
 
 ### Example
 
-This example lists all Cosmos DB accounts.
+This example lists all Azure Cosmos DB accounts.
 
 ```javascript
 const msRestAzure = require('ms-rest-azure');
@@ -48,7 +48,7 @@ msRestAzure.interactiveLogin().then(credentials => {
 
 ## Samples
 
-* [Developing a Node.js app using Azure Cosmos DB - DocumentDB](https://azure.microsoft.com/resources/samples/azure-cosmos-db-documentdb-nodejs-getting-started/)
+* [Developing a Node.js app using Azure Cosmos DB](https://azure.microsoft.com/resources/samples/azure-cosmos-db-documentdb-nodejs-getting-started/)
 * [Developing a Node.js app using Azure Cosmos DB - Gremlin](https://azure.microsoft.com/resources/samples/azure-cosmos-db-graph-nodejs-getting-started/)
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

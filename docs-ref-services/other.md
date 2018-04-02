@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Other
 ---
 
-# Azure Other modules for Node.js
+# Other modules for Azure Node.js
 
 This module includes all of the individual Azure Node.js modules in a single place.
 

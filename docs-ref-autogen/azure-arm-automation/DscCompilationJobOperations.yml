@@ -9,9 +9,9 @@ items:
       id: azure-arm-automation.DscCompilationJobOperations
       path: >-
         lib\services\automationManagement\lib\operations\dscCompilationJobOperations.js
-      startLine: 825
+      startLine: 954
       remote:
-        branch: jsdoc
+        branch: master
         path: >-
           lib\services\automationManagement\lib\operations\dscCompilationJobOperations.js
         repo: 'https://github.com/Azure/azure-sdk-for-node.git'
@@ -30,6 +30,9 @@ items:
       - >-
         azure-arm-automation.DscCompilationJobOperations#getStreamWithHttpOperationResponse
       - 'azure-arm-automation.DscCompilationJobOperations#getStream'
+      - >-
+        azure-arm-automation.DscCompilationJobOperations#beginCreateWithHttpOperationResponse
+      - 'azure-arm-automation.DscCompilationJobOperations#beginCreate'
       - >-
         azure-arm-automation.DscCompilationJobOperations#listByAutomationAccountNextWithHttpOperationResponse
       - >-
@@ -60,11 +63,11 @@ items:
     parent: azure-arm-automation.DscCompilationJobOperations
     name: >-
       createWithHttpOperationResponse(resourceGroupName, automationAccountName,
-      compilationJobId, parameters, options)
+      compilationJobName, parameters, options)
     summary: Creates the Dsc compilation job of the configuration.
     fullName: >-
       azure-arm-automation.DscCompilationJobOperations.createWithHttpOperationResponse(resourceGroupName,
-      automationAccountName, compilationJobId, parameters, options)
+      automationAccountName, compilationJobName, parameters, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -84,14 +87,14 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: The resource group name.
+          description: Name of an Azure Resource group.
         - id: automationAccountName
           type:
             - string
-          description: The automation account name.
-        - id: compilationJobId
+          description: The name of the automation account.
+        - id: compilationJobName
           type:
-            - azure-arm-automation.uuid
+            - string
           description: The the DSC configuration Id.
         - id: parameters
           type:
@@ -110,6 +113,11 @@ items:
           type:
             - object
           description: "Gets or sets the parameters of the\rjob."
+          optional: true
+        - id: parameters.newNodeConfigurationBuildVersionRequired
+          type:
+            - boolean
+          description: "If a\rnew build version of NodeConfiguration is required."
           optional: true
         - id: parameters.name
           type:
@@ -142,19 +150,19 @@ items:
         description: A promise is returned
       content: >-
         function createWithHttpOperationResponse(resourceGroupName,
-        automationAccountName, compilationJobId, parameters, options)
+        automationAccountName, compilationJobName, parameters, options)
     langs:
       - js
   - uid: 'azure-arm-automation.DscCompilationJobOperations#create'
     id: 'azure-arm-automation.DscCompilationJobOperations#create'
     parent: azure-arm-automation.DscCompilationJobOperations
     name: >-
-      create(resourceGroupName, automationAccountName, compilationJobId,
+      create(resourceGroupName, automationAccountName, compilationJobName,
       parameters, options, optionalCallback)
     summary: Creates the Dsc compilation job of the configuration.
     fullName: >-
       azure-arm-automation.DscCompilationJobOperations.create(resourceGroupName,
-      automationAccountName, compilationJobId, parameters, options,
+      automationAccountName, compilationJobName, parameters, options,
       optionalCallback)
     tags:
       - originalTitle: resolve
@@ -171,14 +179,14 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: The resource group name.
+          description: Name of an Azure Resource group.
         - id: automationAccountName
           type:
             - string
-          description: The automation account name.
-        - id: compilationJobId
+          description: The name of the automation account.
+        - id: compilationJobName
           type:
-            - azure-arm-automation.uuid
+            - string
           description: The the DSC configuration Id.
         - id: parameters
           type:
@@ -197,6 +205,11 @@ items:
           type:
             - object
           description: "Gets or sets the parameters of the\rjob."
+          optional: true
+        - id: parameters.newNodeConfigurationBuildVersionRequired
+          type:
+            - boolean
+          description: "If a\rnew build version of NodeConfiguration is required."
           optional: true
         - id: parameters.name
           type:
@@ -235,7 +248,7 @@ items:
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function create(resourceGroupName, automationAccountName,
-        compilationJobId, parameters, options, optionalCallback)
+        compilationJobName, parameters, options, optionalCallback)
     langs:
       - js
   - uid: >-
@@ -245,11 +258,11 @@ items:
     parent: azure-arm-automation.DscCompilationJobOperations
     name: >-
       getWithHttpOperationResponse(resourceGroupName, automationAccountName,
-      compilationJobId, options)
+      compilationJobName, options)
     summary: Retrieve the Dsc configuration compilation job identified by job id.
     fullName: >-
       azure-arm-automation.DscCompilationJobOperations.getWithHttpOperationResponse(resourceGroupName,
-      automationAccountName, compilationJobId, options)
+      automationAccountName, compilationJobName, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -269,15 +282,15 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: The resource group name.
+          description: Name of an Azure Resource group.
         - id: automationAccountName
           type:
             - string
-          description: The automation account name.
-        - id: compilationJobId
+          description: The name of the automation account.
+        - id: compilationJobName
           type:
-            - azure-arm-automation.uuid
-          description: The Dsc configuration compilation job id.
+            - string
+          description: The the DSC configuration Id.
         - id: options
           type:
             - object
@@ -294,19 +307,19 @@ items:
         description: A promise is returned
       content: >-
         function getWithHttpOperationResponse(resourceGroupName,
-        automationAccountName, compilationJobId, options)
+        automationAccountName, compilationJobName, options)
     langs:
       - js
   - uid: 'azure-arm-automation.DscCompilationJobOperations#get'
     id: 'azure-arm-automation.DscCompilationJobOperations#get'
     parent: azure-arm-automation.DscCompilationJobOperations
     name: >-
-      get(resourceGroupName, automationAccountName, compilationJobId, options,
+      get(resourceGroupName, automationAccountName, compilationJobName, options,
       optionalCallback)
     summary: Retrieve the Dsc configuration compilation job identified by job id.
     fullName: >-
       azure-arm-automation.DscCompilationJobOperations.get(resourceGroupName,
-      automationAccountName, compilationJobId, options, optionalCallback)
+      automationAccountName, compilationJobName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -322,15 +335,15 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: The resource group name.
+          description: Name of an Azure Resource group.
         - id: automationAccountName
           type:
             - string
-          description: The automation account name.
-        - id: compilationJobId
+          description: The name of the automation account.
+        - id: compilationJobName
           type:
-            - azure-arm-automation.uuid
-          description: The Dsc configuration compilation job id.
+            - string
+          description: The the DSC configuration Id.
         - id: options
           type:
             - object
@@ -352,8 +365,8 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function get(resourceGroupName, automationAccountName, compilationJobId,
-        options, optionalCallback)
+        function get(resourceGroupName, automationAccountName,
+        compilationJobName, options, optionalCallback)
     langs:
       - js
   - uid: >-
@@ -387,11 +400,11 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: The resource group name.
+          description: Name of an Azure Resource group.
         - id: automationAccountName
           type:
             - string
-          description: The automation account name.
+          description: The name of the automation account.
         - id: options
           type:
             - object
@@ -442,11 +455,11 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: The resource group name.
+          description: Name of an Azure Resource group.
         - id: automationAccountName
           type:
             - string
-          description: The automation account name.
+          description: The name of the automation account.
         - id: options
           type:
             - object
@@ -504,11 +517,11 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: The resource group name.
+          description: Name of an Azure Resource group.
         - id: automationAccountName
           type:
             - string
-          description: The automation account name.
+          description: The name of the automation account.
         - id: jobId
           type:
             - azure-arm-automation.uuid
@@ -561,11 +574,11 @@ items:
         - id: resourceGroupName
           type:
             - string
-          description: The resource group name.
+          description: Name of an Azure Resource group.
         - id: automationAccountName
           type:
             - string
-          description: The automation account name.
+          description: The name of the automation account.
         - id: jobId
           type:
             - azure-arm-automation.uuid
@@ -597,6 +610,201 @@ items:
       content: >-
         function getStream(resourceGroupName, automationAccountName, jobId,
         jobStreamId, options, optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-automation.DscCompilationJobOperations#beginCreateWithHttpOperationResponse
+    id: >-
+      azure-arm-automation.DscCompilationJobOperations#beginCreateWithHttpOperationResponse
+    parent: azure-arm-automation.DscCompilationJobOperations
+    name: >-
+      beginCreateWithHttpOperationResponse(resourceGroupName,
+      automationAccountName, compilationJobName, parameters, options)
+    summary: Creates the Dsc compilation job of the configuration.
+    fullName: >-
+      azure-arm-automation.DscCompilationJobOperations.beginCreateWithHttpOperationResponse(resourceGroupName,
+      automationAccountName, compilationJobName, parameters, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<DscCompilationJob>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<DscCompilationJob>} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: Name of an Azure Resource group.
+        - id: automationAccountName
+          type:
+            - string
+          description: The name of the automation account.
+        - id: compilationJobName
+          type:
+            - string
+          description: The the DSC configuration Id.
+        - id: parameters
+          type:
+            - object
+          description: "The parameters supplied to the create compilation\rjob operation."
+        - id: parameters.configuration
+          type:
+            - object
+          description: Gets or sets the configuration.
+        - id: parameters.configuration.name
+          type:
+            - string
+          description: "Gets or sets the name of the\rDsc configuration."
+          optional: true
+        - id: parameters.parameters
+          type:
+            - object
+          description: "Gets or sets the parameters of the\rjob."
+          optional: true
+        - id: parameters.newNodeConfigurationBuildVersionRequired
+          type:
+            - boolean
+          description: "If a\rnew build version of NodeConfiguration is required."
+          optional: true
+        - id: parameters.name
+          type:
+            - string
+          description: Gets or sets name of the resource.
+          optional: true
+        - id: parameters.location
+          type:
+            - string
+          description: "Gets or sets the location of the\rresource."
+          optional: true
+        - id: parameters.tags
+          type:
+            - object
+          description: "Gets or sets the tags attached to the\rresource."
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginCreateWithHttpOperationResponse(resourceGroupName,
+        automationAccountName, compilationJobName, parameters, options)
+    langs:
+      - js
+  - uid: 'azure-arm-automation.DscCompilationJobOperations#beginCreate'
+    id: 'azure-arm-automation.DscCompilationJobOperations#beginCreate'
+    parent: azure-arm-automation.DscCompilationJobOperations
+    name: >-
+      beginCreate(resourceGroupName, automationAccountName, compilationJobName,
+      parameters, options, optionalCallback)
+    summary: Creates the Dsc compilation job of the configuration.
+    fullName: >-
+      azure-arm-automation.DscCompilationJobOperations.beginCreate(resourceGroupName,
+      automationAccountName, compilationJobName, parameters, options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{DscCompilationJob} - The deserialized result object.'
+        value: '{DscCompilationJob} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link DscCompilationJob} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link DscCompilationJob} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: Name of an Azure Resource group.
+        - id: automationAccountName
+          type:
+            - string
+          description: The name of the automation account.
+        - id: compilationJobName
+          type:
+            - string
+          description: The the DSC configuration Id.
+        - id: parameters
+          type:
+            - object
+          description: "The parameters supplied to the create compilation\rjob operation."
+        - id: parameters.configuration
+          type:
+            - object
+          description: Gets or sets the configuration.
+        - id: parameters.configuration.name
+          type:
+            - string
+          description: "Gets or sets the name of the\rDsc configuration."
+          optional: true
+        - id: parameters.parameters
+          type:
+            - object
+          description: "Gets or sets the parameters of the\rjob."
+          optional: true
+        - id: parameters.newNodeConfigurationBuildVersionRequired
+          type:
+            - boolean
+          description: "If a\rnew build version of NodeConfiguration is required."
+          optional: true
+        - id: parameters.name
+          type:
+            - string
+          description: Gets or sets name of the resource.
+          optional: true
+        - id: parameters.location
+          type:
+            - string
+          description: "Gets or sets the location of the\rresource."
+          optional: true
+        - id: parameters.tags
+          type:
+            - object
+          description: "Gets or sets the tags attached to the\rresource."
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function beginCreate(resourceGroupName, automationAccountName,
+        compilationJobName, parameters, options, optionalCallback)
     langs:
       - js
   - uid: >-

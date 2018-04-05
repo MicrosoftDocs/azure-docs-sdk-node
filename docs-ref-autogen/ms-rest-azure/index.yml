@@ -23,6 +23,11 @@ items:
       - ms-rest-azure.BaseResource
       - ms-rest-azure.AzureServiceClient
       - ms-rest-azure.AzureEnvironment
+      - ms-rest-azure.create
+      - ms-rest-azure.checkRPNotRegisteredError
+      - ms-rest-azure.extractSubscriptionUrl
+      - ms-rest-azure.registerRP
+      - ms-rest-azure.getRegistrationStatus
       - ms-rest-azure.interactive
       - ms-rest-azure.withUsernamePassword
       - ms-rest-azure.withServicePrincipalSecret
@@ -31,6 +36,110 @@ items:
       - ms-rest-azure.withMSI
       - ms-rest-azure.withAppServiceMSI
       - ms-rest-azure.generateUuid
+  - uid: ms-rest-azure.create
+    id: ms-rest-azure.create
+    name: create(retryTimeoutInSec)
+    summary: "Creates a filter that verifies whether the request failed due to RP not being registered.\rIt tries to register the RP and after successful registration it retries the original request."
+    fullName: ms-rest-azure.create(retryTimeoutInSec)
+    type: Function
+    syntax:
+      parameters:
+        - id: retryTimeoutInSec
+          type:
+            - number
+          description: The retry timeout in seconds. Default is 30 seconds.
+      content: function create(retryTimeoutInSec)
+    langs:
+      - js
+  - uid: ms-rest-azure.checkRPNotRegisteredError
+    id: ms-rest-azure.checkRPNotRegisteredError
+    name: checkRPNotRegisteredError(body)
+    summary: "Validates the error code and message associated with 409 response status code. If it matches to that of \rRP not registered then it returns the name of the RP else returns undefined."
+    fullName: ms-rest-azure.checkRPNotRegisteredError(body)
+    type: Function
+    syntax:
+      parameters:
+        - id: body
+          type:
+            - string
+          description: The response body received after making the original request.
+      return:
+        type:
+          - string
+        description: result The name of the RP if condition is satisfied else undefined.
+      content: function checkRPNotRegisteredError(body)
+    langs:
+      - js
+  - uid: ms-rest-azure.extractSubscriptionUrl
+    id: ms-rest-azure.extractSubscriptionUrl
+    name: extractSubscriptionUrl(url)
+    summary: "Extracts the first part of the URL, just after subscription: \rhttps://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/"
+    fullName: ms-rest-azure.extractSubscriptionUrl(url)
+    type: Function
+    syntax:
+      parameters:
+        - id: url
+          type:
+            - string
+          description: The original request url
+      return:
+        type:
+          - string
+        description: urlPrefix The url prefix as explained above.
+      content: function extractSubscriptionUrl(url)
+    langs:
+      - js
+  - uid: ms-rest-azure.registerRP
+    id: ms-rest-azure.registerRP
+    name: 'registerRP(urlPrefix, provider, originalRequest, callback)'
+    summary: Registers the given provider.
+    fullName: 'ms-rest-azure.registerRP(urlPrefix, provider, originalRequest, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: urlPrefix
+          type:
+            - string
+          description: >-
+            https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/
+        - id: provider
+          type:
+            - string
+          description: The provider name to be registered.
+        - id: originalRequest
+          type:
+            - object
+          description: "The original request sent by the user that returned a 409 response\rwith a message that the provider is not registered."
+        - id: callback
+          type:
+            - ms-rest-azure.registrationCallback
+          description: The callback that handles the RP registration
+      content: 'function registerRP(urlPrefix, provider, originalRequest, callback)'
+    langs:
+      - js
+  - uid: ms-rest-azure.getRegistrationStatus
+    id: ms-rest-azure.getRegistrationStatus
+    name: 'getRegistrationStatus(url, originalRequest, callback)'
+    summary: "Polls the registration status of the provider that was registered. Polling happens at an interval of 30 seconds.\rPolling will happen till the registrationState property of the response body is 'Registered'."
+    fullName: 'ms-rest-azure.getRegistrationStatus(url, originalRequest, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: url
+          type:
+            - string
+          description: The request url for polling
+        - id: originalRequest
+          type:
+            - object
+          description: "The original request sent by the user that returned a 409 response\rwith a message that the provider is not registered."
+        - id: callback
+          type:
+            - ms-rest-azure.registrationCallback
+          description: The callback that handles the RP registration.
+      content: 'function getRegistrationStatus(url, originalRequest, callback)'
+    langs:
+      - js
   - uid: ms-rest-azure.interactive
     id: ms-rest-azure.interactive
     name: 'interactive(options, optionalCallback)'
@@ -61,7 +170,7 @@ items:
         - id: options.tokenAudience
           type:
             - string
-          description: "The audience for which the token is requested. Valid values are 'graph', 'batch' or any other resource like 'https://vault.azure.com/'.\rIf tokenAudience is 'graph' then domain should also be provided and its value should not be the default 'common' tenant. It must be a string (preferrably in a guid format)."
+          description: "The audience for which the token is requested. Valid value is 'graph'.If tokenAudience is provided \rthen domain should also be provided its value should not be the default 'common' tenant. It must be a string (preferrably in a guid format)."
           optional: true
         - id: options.domain
           type:
@@ -148,7 +257,7 @@ items:
         - id: options.tokenAudience
           type:
             - string
-          description: "The audience for which the token is requested. Valid values are 'graph', 'batch' or any other resource like 'https://vault.azure.com/'.\rIf tokenAudience is 'graph' then domain should also be provided and its value should not be the default 'common' tenant. It must be a string (preferrably in a guid format)."
+          description: "The audience for which the token is requested. Valid value is 'graph'. If tokenAudience is provided \rthen domain should also be provided and its value should not be the default 'common' tenant. It must be a string (preferrably in a guid format)."
           optional: true
         - id: options.domain
           type:
@@ -231,7 +340,9 @@ items:
         - id: options.tokenAudience
           type:
             - string
-          description: "The audience for which the token is requested. Valid values are 'graph', 'batch' or any other resource like 'https://vault.azure.com/'.\rIf tokenAudience is 'graph' then domain should also be provided and its value should not be the default 'common' tenant. It must be a string (preferrably in a guid format)."
+          description: >-
+            The audience for which the token is requested. Valid value is
+            'graph'.
           optional: true
         - id: options.environment
           type:

@@ -9,9 +9,9 @@ items:
       id: azure-arm-sql.BackupLongTermRetentionPolicies
       path: >-
         lib\services\sqlManagement2\lib\operations\backupLongTermRetentionPolicies.js
-      startLine: 606
+      startLine: 461
       remote:
-        branch: master
+        branch: jsdoc
         path: >-
           lib\services\sqlManagement2\lib\operations\backupLongTermRetentionPolicies.js
         repo: 'https://github.com/Azure/azure-sdk-for-node.git'
@@ -24,9 +24,6 @@ items:
       - >-
         azure-arm-sql.BackupLongTermRetentionPolicies#createOrUpdateWithHttpOperationResponse
       - 'azure-arm-sql.BackupLongTermRetentionPolicies#createOrUpdate'
-      - >-
-        azure-arm-sql.BackupLongTermRetentionPolicies#listByDatabaseWithHttpOperationResponse
-      - 'azure-arm-sql.BackupLongTermRetentionPolicies#listByDatabase'
       - >-
         azure-arm-sql.BackupLongTermRetentionPolicies#beginCreateOrUpdateWithHttpOperationResponse
       - 'azure-arm-sql.BackupLongTermRetentionPolicies#beginCreateOrUpdate'
@@ -55,7 +52,7 @@ items:
     name: >-
       getWithHttpOperationResponse(resourceGroupName, serverName, databaseName,
       options)
-    summary: Gets a database's long term retention policy.
+    summary: Returns a database backup long term retention policy
     fullName: >-
       azure-arm-sql.BackupLongTermRetentionPolicies.getWithHttpOperationResponse(resourceGroupName,
       serverName, databaseName, options)
@@ -112,7 +109,7 @@ items:
     name: >-
       get(resourceGroupName, serverName, databaseName, options,
       optionalCallback)
-    summary: Gets a database's long term retention policy.
+    summary: Returns a database backup long term retention policy
     fullName: >-
       azure-arm-sql.BackupLongTermRetentionPolicies.get(resourceGroupName,
       serverName, databaseName, options, optionalCallback)
@@ -173,7 +170,7 @@ items:
     name: >-
       createOrUpdateWithHttpOperationResponse(resourceGroupName, serverName,
       databaseName, parameters, options)
-    summary: Sets a database's long term retention policy.
+    summary: Creates or updates a database backup long term retention policy
     fullName: >-
       azure-arm-sql.BackupLongTermRetentionPolicies.createOrUpdateWithHttpOperationResponse(resourceGroupName,
       serverName, databaseName, parameters, options)
@@ -204,31 +201,19 @@ items:
         - id: databaseName
           type:
             - string
-          description: The name of the database.
+          description: The name of the database
         - id: parameters
           type:
             - object
-          description: The long term retention policy info.
-        - id: parameters.weeklyRetention
+          description: "The required parameters to update a backup long\rterm retention policy"
+        - id: parameters.state
           type:
             - string
-          description: "The weekly retention policy for\ran LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.monthlyRetention
+          description: "The status of the backup long term\rretention policy. Possible values include: 'Disabled', 'Enabled'"
+        - id: parameters.recoveryServicesBackupPolicyResourceId
           type:
             - string
-          description: "The montly retention policy\rfor an LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.yearlyRetention
-          type:
-            - string
-          description: "The yearly retention policy for\ran LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.weekOfYear
-          type:
-            - number
-          description: "The week of year to take the yearly\rbackup in an ISO 8601 format."
-          optional: true
+          description: "The azure\rrecovery services backup protection policy resource id"
         - id: options
           type:
             - object
@@ -254,7 +239,7 @@ items:
     name: >-
       createOrUpdate(resourceGroupName, serverName, databaseName, parameters,
       options, optionalCallback)
-    summary: Sets a database's long term retention policy.
+    summary: Creates or updates a database backup long term retention policy
     fullName: >-
       azure-arm-sql.BackupLongTermRetentionPolicies.createOrUpdate(resourceGroupName,
       serverName, databaseName, parameters, options, optionalCallback)
@@ -281,31 +266,19 @@ items:
         - id: databaseName
           type:
             - string
-          description: The name of the database.
+          description: The name of the database
         - id: parameters
           type:
             - object
-          description: The long term retention policy info.
-        - id: parameters.weeklyRetention
+          description: "The required parameters to update a backup long\rterm retention policy"
+        - id: parameters.state
           type:
             - string
-          description: "The weekly retention policy for\ran LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.monthlyRetention
+          description: "The status of the backup long term\rretention policy. Possible values include: 'Disabled', 'Enabled'"
+        - id: parameters.recoveryServicesBackupPolicyResourceId
           type:
             - string
-          description: "The montly retention policy\rfor an LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.yearlyRetention
-          type:
-            - string
-          description: "The yearly retention policy for\ran LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.weekOfYear
-          type:
-            - number
-          description: "The week of year to take the yearly\rbackup in an ISO 8601 format."
-          optional: true
+          description: "The azure\rrecovery services backup protection policy resource id"
         - id: options
           type:
             - object
@@ -332,124 +305,6 @@ items:
     langs:
       - js
   - uid: >-
-      azure-arm-sql.BackupLongTermRetentionPolicies#listByDatabaseWithHttpOperationResponse
-    id: >-
-      azure-arm-sql.BackupLongTermRetentionPolicies#listByDatabaseWithHttpOperationResponse
-    parent: azure-arm-sql.BackupLongTermRetentionPolicies
-    name: >-
-      listByDatabaseWithHttpOperationResponse(resourceGroupName, serverName,
-      databaseName, options)
-    summary: Gets a database's long term retention policy.
-    fullName: >-
-      azure-arm-sql.BackupLongTermRetentionPolicies.listByDatabaseWithHttpOperationResponse(resourceGroupName,
-      serverName, databaseName, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<BackupLongTermRetentionPolicy>} - The
-          deserialized result object.
-        value: >-
-          {HttpOperationResponse<BackupLongTermRetentionPolicy>} - The
-          deserialized result object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
-        - id: serverName
-          type:
-            - string
-          description: The name of the server.
-        - id: databaseName
-          type:
-            - string
-          description: The name of the database.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function listByDatabaseWithHttpOperationResponse(resourceGroupName,
-        serverName, databaseName, options)
-    langs:
-      - js
-  - uid: 'azure-arm-sql.BackupLongTermRetentionPolicies#listByDatabase'
-    id: 'azure-arm-sql.BackupLongTermRetentionPolicies#listByDatabase'
-    parent: azure-arm-sql.BackupLongTermRetentionPolicies
-    name: >-
-      listByDatabase(resourceGroupName, serverName, databaseName, options,
-      optionalCallback)
-    summary: Gets a database's long term retention policy.
-    fullName: >-
-      azure-arm-sql.BackupLongTermRetentionPolicies.listByDatabase(resourceGroupName,
-      serverName, databaseName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{BackupLongTermRetentionPolicy} - The deserialized result object.'
-        value: '{BackupLongTermRetentionPolicy} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link BackupLongTermRetentionPolicy} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link BackupLongTermRetentionPolicy} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
-        - id: serverName
-          type:
-            - string
-          description: The name of the server.
-        - id: databaseName
-          type:
-            - string
-          description: The name of the database.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function listByDatabase(resourceGroupName, serverName, databaseName,
-        options, optionalCallback)
-    langs:
-      - js
-  - uid: >-
       azure-arm-sql.BackupLongTermRetentionPolicies#beginCreateOrUpdateWithHttpOperationResponse
     id: >-
       azure-arm-sql.BackupLongTermRetentionPolicies#beginCreateOrUpdateWithHttpOperationResponse
@@ -457,7 +312,7 @@ items:
     name: >-
       beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
       serverName, databaseName, parameters, options)
-    summary: Sets a database's long term retention policy.
+    summary: Creates or updates a database backup long term retention policy
     fullName: >-
       azure-arm-sql.BackupLongTermRetentionPolicies.beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
       serverName, databaseName, parameters, options)
@@ -488,31 +343,19 @@ items:
         - id: databaseName
           type:
             - string
-          description: The name of the database.
+          description: The name of the database
         - id: parameters
           type:
             - object
-          description: The long term retention policy info.
-        - id: parameters.weeklyRetention
+          description: "The required parameters to update a backup long\rterm retention policy"
+        - id: parameters.state
           type:
             - string
-          description: "The weekly retention policy for\ran LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.monthlyRetention
+          description: "The status of the backup long term\rretention policy. Possible values include: 'Disabled', 'Enabled'"
+        - id: parameters.recoveryServicesBackupPolicyResourceId
           type:
             - string
-          description: "The montly retention policy\rfor an LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.yearlyRetention
-          type:
-            - string
-          description: "The yearly retention policy for\ran LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.weekOfYear
-          type:
-            - number
-          description: "The week of year to take the yearly\rbackup in an ISO 8601 format."
-          optional: true
+          description: "The azure\rrecovery services backup protection policy resource id"
         - id: options
           type:
             - object
@@ -538,7 +381,7 @@ items:
     name: >-
       beginCreateOrUpdate(resourceGroupName, serverName, databaseName,
       parameters, options, optionalCallback)
-    summary: Sets a database's long term retention policy.
+    summary: Creates or updates a database backup long term retention policy
     fullName: >-
       azure-arm-sql.BackupLongTermRetentionPolicies.beginCreateOrUpdate(resourceGroupName,
       serverName, databaseName, parameters, options, optionalCallback)
@@ -565,31 +408,19 @@ items:
         - id: databaseName
           type:
             - string
-          description: The name of the database.
+          description: The name of the database
         - id: parameters
           type:
             - object
-          description: The long term retention policy info.
-        - id: parameters.weeklyRetention
+          description: "The required parameters to update a backup long\rterm retention policy"
+        - id: parameters.state
           type:
             - string
-          description: "The weekly retention policy for\ran LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.monthlyRetention
+          description: "The status of the backup long term\rretention policy. Possible values include: 'Disabled', 'Enabled'"
+        - id: parameters.recoveryServicesBackupPolicyResourceId
           type:
             - string
-          description: "The montly retention policy\rfor an LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.yearlyRetention
-          type:
-            - string
-          description: "The yearly retention policy for\ran LTR backup in an ISO 8601 format."
-          optional: true
-        - id: parameters.weekOfYear
-          type:
-            - number
-          description: "The week of year to take the yearly\rbackup in an ISO 8601 format."
-          optional: true
+          description: "The azure\rrecovery services backup protection policy resource id"
         - id: options
           type:
             - object

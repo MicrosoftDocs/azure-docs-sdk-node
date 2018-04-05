@@ -8,9 +8,9 @@ items:
     source:
       id: azure-arm-cosmosdb.DatabaseAccounts
       path: lib\services\cosmosdbManagement\lib\operations\databaseAccounts.js
-      startLine: 3010
+      startLine: 2469
       remote:
-        branch: master
+        branch: jsdoc
         path: lib\services\cosmosdbManagement\lib\operations\databaseAccounts.js
         repo: 'https://github.com/Azure/azure-sdk-for-node.git'
     type: Class
@@ -48,13 +48,6 @@ items:
       - >-
         azure-arm-cosmosdb.DatabaseAccounts#checkNameExistsWithHttpOperationResponse
       - 'azure-arm-cosmosdb.DatabaseAccounts#checkNameExists'
-      - 'azure-arm-cosmosdb.DatabaseAccounts#listMetricsWithHttpOperationResponse'
-      - 'azure-arm-cosmosdb.DatabaseAccounts#listMetrics'
-      - 'azure-arm-cosmosdb.DatabaseAccounts#listUsagesWithHttpOperationResponse'
-      - 'azure-arm-cosmosdb.DatabaseAccounts#listUsages'
-      - >-
-        azure-arm-cosmosdb.DatabaseAccounts#listMetricDefinitionsWithHttpOperationResponse
-      - 'azure-arm-cosmosdb.DatabaseAccounts#listMetricDefinitions'
       - 'azure-arm-cosmosdb.DatabaseAccounts#beginPatchWithHttpOperationResponse'
       - 'azure-arm-cosmosdb.DatabaseAccounts#beginPatch'
       - >-
@@ -232,11 +225,6 @@ items:
             - object
           description: ''
           optional: true
-        - id: updateParameters.capabilities
-          type:
-            - array
-          description: "List of Cosmos DB\rcapabilities for the account"
-          optional: true
         - id: options
           type:
             - object
@@ -294,11 +282,6 @@ items:
           type:
             - object
           description: ''
-          optional: true
-        - id: updateParameters.capabilities
-          type:
-            - array
-          description: "List of Cosmos DB\rcapabilities for the account"
           optional: true
         - id: options
           type:
@@ -387,7 +370,7 @@ items:
         - id: createUpdateParameters.consistencyPolicy.maxIntervalInSeconds
           type:
             - number
-          description: "When used\rwith the Bounded Staleness consistency level, this value represents the time\ramount of staleness (in seconds) tolerated. Accepted range for this value is\r5 - 86400. Required when defaultConsistencyPolicy is set to\r'BoundedStaleness'."
+          description: "When used\rwith the Bounded Staleness consistency level, this value represents the time\ramount of staleness (in seconds) tolerated. Accepted range for this value is\r1 - 100. Required when defaultConsistencyPolicy is set to\r'BoundedStaleness'."
           optional: true
         - id: createUpdateParameters.locations
           type:
@@ -402,11 +385,6 @@ items:
           type:
             - boolean
           description: "Enables\rautomatic failover of the write region in the rare event that the region is\runavailable due to an outage. Automatic failover will result in a new write\rregion for the account and is chosen based on the failover priorities\rconfigured for the account."
-          optional: true
-        - id: createUpdateParameters.capabilities
-          type:
-            - array
-          description: "List of Cosmos DB\rcapabilities for the account"
           optional: true
         - id: createUpdateParameters.location
           type:
@@ -492,7 +470,7 @@ items:
         - id: createUpdateParameters.consistencyPolicy.maxIntervalInSeconds
           type:
             - number
-          description: "When used\rwith the Bounded Staleness consistency level, this value represents the time\ramount of staleness (in seconds) tolerated. Accepted range for this value is\r5 - 86400. Required when defaultConsistencyPolicy is set to\r'BoundedStaleness'."
+          description: "When used\rwith the Bounded Staleness consistency level, this value represents the time\ramount of staleness (in seconds) tolerated. Accepted range for this value is\r1 - 100. Required when defaultConsistencyPolicy is set to\r'BoundedStaleness'."
           optional: true
         - id: createUpdateParameters.locations
           type:
@@ -507,11 +485,6 @@ items:
           type:
             - boolean
           description: "Enables\rautomatic failover of the write region in the rare event that the region is\runavailable due to an outage. Automatic failover will result in a new write\rregion for the account and is chosen based on the failover priorities\rconfigured for the account."
-          optional: true
-        - id: createUpdateParameters.capabilities
-          type:
-            - array
-          description: "List of Cosmos DB\rcapabilities for the account"
           optional: true
         - id: createUpdateParameters.location
           type:
@@ -689,6 +662,7 @@ items:
           type:
             - array
           description: "List of failover\rpolicies."
+          optional: true
         - id: options
           type:
             - object
@@ -747,6 +721,7 @@ items:
           type:
             - array
           description: "List of failover\rpolicies."
+          optional: true
         - id: options
           type:
             - object
@@ -1493,349 +1468,6 @@ items:
       content: 'function checkNameExists(accountName, options, optionalCallback)'
     langs:
       - js
-  - uid: 'azure-arm-cosmosdb.DatabaseAccounts#listMetricsWithHttpOperationResponse'
-    id: 'azure-arm-cosmosdb.DatabaseAccounts#listMetricsWithHttpOperationResponse'
-    parent: azure-arm-cosmosdb.DatabaseAccounts
-    name: >-
-      listMetricsWithHttpOperationResponse(resourceGroupName, accountName,
-      filter, options)
-    summary: "Retrieves the metrics determined by the given filter for the given database\raccount."
-    fullName: >-
-      azure-arm-cosmosdb.DatabaseAccounts.listMetricsWithHttpOperationResponse(resourceGroupName,
-      accountName, filter, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<MetricListResult>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<MetricListResult>} - The deserialized result
-          object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: Name of an Azure resource group.
-        - id: accountName
-          type:
-            - string
-          description: Cosmos DB database account name.
-        - id: filter
-          type:
-            - string
-          description: "An OData filter expression that describes a subset of\rmetrics to return. The parameters that can be filtered are name.value (name\rof the metric, can have an or of multiple names), startTime, endTime, and\rtimeGrain. The supported operator is eq."
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function listMetricsWithHttpOperationResponse(resourceGroupName,
-        accountName, filter, options)
-    langs:
-      - js
-  - uid: 'azure-arm-cosmosdb.DatabaseAccounts#listMetrics'
-    id: 'azure-arm-cosmosdb.DatabaseAccounts#listMetrics'
-    parent: azure-arm-cosmosdb.DatabaseAccounts
-    name: >-
-      listMetrics(resourceGroupName, accountName, filter, options,
-      optionalCallback)
-    summary: "Retrieves the metrics determined by the given filter for the given database\raccount."
-    fullName: >-
-      azure-arm-cosmosdb.DatabaseAccounts.listMetrics(resourceGroupName,
-      accountName, filter, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{MetricListResult} - The deserialized result object.'
-        value: '{MetricListResult} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link MetricListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link MetricListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: Name of an Azure resource group.
-        - id: accountName
-          type:
-            - string
-          description: Cosmos DB database account name.
-        - id: filter
-          type:
-            - string
-          description: "An OData filter expression that describes a subset of\rmetrics to return. The parameters that can be filtered are name.value (name\rof the metric, can have an or of multiple names), startTime, endTime, and\rtimeGrain. The supported operator is eq."
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function listMetrics(resourceGroupName, accountName, filter, options,
-        optionalCallback)
-    langs:
-      - js
-  - uid: 'azure-arm-cosmosdb.DatabaseAccounts#listUsagesWithHttpOperationResponse'
-    id: 'azure-arm-cosmosdb.DatabaseAccounts#listUsagesWithHttpOperationResponse'
-    parent: azure-arm-cosmosdb.DatabaseAccounts
-    name: >-
-      listUsagesWithHttpOperationResponse(resourceGroupName, accountName,
-      options)
-    summary: Retrieves the usages (most recent data) for the given database account.
-    fullName: >-
-      azure-arm-cosmosdb.DatabaseAccounts.listUsagesWithHttpOperationResponse(resourceGroupName,
-      accountName, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<UsagesResult>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<UsagesResult>} - The deserialized result
-          object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: Name of an Azure resource group.
-        - id: accountName
-          type:
-            - string
-          description: Cosmos DB database account name.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.filter
-          type:
-            - string
-          description: "An OData filter expression that describes a\rsubset of usages to return. The supported parameter is name.value (name of\rthe metric, can have an or of multiple names)."
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function listUsagesWithHttpOperationResponse(resourceGroupName,
-        accountName, options)
-    langs:
-      - js
-  - uid: 'azure-arm-cosmosdb.DatabaseAccounts#listUsages'
-    id: 'azure-arm-cosmosdb.DatabaseAccounts#listUsages'
-    parent: azure-arm-cosmosdb.DatabaseAccounts
-    name: 'listUsages(resourceGroupName, accountName, options, optionalCallback)'
-    summary: Retrieves the usages (most recent data) for the given database account.
-    fullName: >-
-      azure-arm-cosmosdb.DatabaseAccounts.listUsages(resourceGroupName,
-      accountName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{UsagesResult} - The deserialized result object.'
-        value: '{UsagesResult} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link UsagesResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link UsagesResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: Name of an Azure resource group.
-        - id: accountName
-          type:
-            - string
-          description: Cosmos DB database account name.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.filter
-          type:
-            - string
-          description: "An OData filter expression that describes a\rsubset of usages to return. The supported parameter is name.value (name of\rthe metric, can have an or of multiple names)."
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function listUsages(resourceGroupName, accountName, options,
-        optionalCallback)
-    langs:
-      - js
-  - uid: >-
-      azure-arm-cosmosdb.DatabaseAccounts#listMetricDefinitionsWithHttpOperationResponse
-    id: >-
-      azure-arm-cosmosdb.DatabaseAccounts#listMetricDefinitionsWithHttpOperationResponse
-    parent: azure-arm-cosmosdb.DatabaseAccounts
-    name: >-
-      listMetricDefinitionsWithHttpOperationResponse(resourceGroupName,
-      accountName, options)
-    summary: Retrieves metric defintions for the given database account.
-    fullName: >-
-      azure-arm-cosmosdb.DatabaseAccounts.listMetricDefinitionsWithHttpOperationResponse(resourceGroupName,
-      accountName, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<MetricDefinitionsListResult>} - The
-          deserialized result object.
-        value: >-
-          {HttpOperationResponse<MetricDefinitionsListResult>} - The
-          deserialized result object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: Name of an Azure resource group.
-        - id: accountName
-          type:
-            - string
-          description: Cosmos DB database account name.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function
-        listMetricDefinitionsWithHttpOperationResponse(resourceGroupName,
-        accountName, options)
-    langs:
-      - js
-  - uid: 'azure-arm-cosmosdb.DatabaseAccounts#listMetricDefinitions'
-    id: 'azure-arm-cosmosdb.DatabaseAccounts#listMetricDefinitions'
-    parent: azure-arm-cosmosdb.DatabaseAccounts
-    name: >-
-      listMetricDefinitions(resourceGroupName, accountName, options,
-      optionalCallback)
-    summary: Retrieves metric defintions for the given database account.
-    fullName: >-
-      azure-arm-cosmosdb.DatabaseAccounts.listMetricDefinitions(resourceGroupName,
-      accountName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{MetricDefinitionsListResult} - The deserialized result object.'
-        value: '{MetricDefinitionsListResult} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link MetricDefinitionsListResult} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link MetricDefinitionsListResult} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: Name of an Azure resource group.
-        - id: accountName
-          type:
-            - string
-          description: Cosmos DB database account name.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function listMetricDefinitions(resourceGroupName, accountName, options,
-        optionalCallback)
-    langs:
-      - js
   - uid: 'azure-arm-cosmosdb.DatabaseAccounts#beginPatchWithHttpOperationResponse'
     id: 'azure-arm-cosmosdb.DatabaseAccounts#beginPatchWithHttpOperationResponse'
     parent: azure-arm-cosmosdb.DatabaseAccounts
@@ -1878,11 +1510,6 @@ items:
           type:
             - object
           description: ''
-          optional: true
-        - id: updateParameters.capabilities
-          type:
-            - array
-          description: "List of Cosmos DB\rcapabilities for the account"
           optional: true
         - id: options
           type:
@@ -1941,11 +1568,6 @@ items:
           type:
             - object
           description: ''
-          optional: true
-        - id: updateParameters.capabilities
-          type:
-            - array
-          description: "List of Cosmos DB\rcapabilities for the account"
           optional: true
         - id: options
           type:
@@ -2034,7 +1656,7 @@ items:
         - id: createUpdateParameters.consistencyPolicy.maxIntervalInSeconds
           type:
             - number
-          description: "When used\rwith the Bounded Staleness consistency level, this value represents the time\ramount of staleness (in seconds) tolerated. Accepted range for this value is\r5 - 86400. Required when defaultConsistencyPolicy is set to\r'BoundedStaleness'."
+          description: "When used\rwith the Bounded Staleness consistency level, this value represents the time\ramount of staleness (in seconds) tolerated. Accepted range for this value is\r1 - 100. Required when defaultConsistencyPolicy is set to\r'BoundedStaleness'."
           optional: true
         - id: createUpdateParameters.locations
           type:
@@ -2049,11 +1671,6 @@ items:
           type:
             - boolean
           description: "Enables\rautomatic failover of the write region in the rare event that the region is\runavailable due to an outage. Automatic failover will result in a new write\rregion for the account and is chosen based on the failover priorities\rconfigured for the account."
-          optional: true
-        - id: createUpdateParameters.capabilities
-          type:
-            - array
-          description: "List of Cosmos DB\rcapabilities for the account"
           optional: true
         - id: createUpdateParameters.location
           type:
@@ -2139,7 +1756,7 @@ items:
         - id: createUpdateParameters.consistencyPolicy.maxIntervalInSeconds
           type:
             - number
-          description: "When used\rwith the Bounded Staleness consistency level, this value represents the time\ramount of staleness (in seconds) tolerated. Accepted range for this value is\r5 - 86400. Required when defaultConsistencyPolicy is set to\r'BoundedStaleness'."
+          description: "When used\rwith the Bounded Staleness consistency level, this value represents the time\ramount of staleness (in seconds) tolerated. Accepted range for this value is\r1 - 100. Required when defaultConsistencyPolicy is set to\r'BoundedStaleness'."
           optional: true
         - id: createUpdateParameters.locations
           type:
@@ -2154,11 +1771,6 @@ items:
           type:
             - boolean
           description: "Enables\rautomatic failover of the write region in the rare event that the region is\runavailable due to an outage. Automatic failover will result in a new write\rregion for the account and is chosen based on the failover priorities\rconfigured for the account."
-          optional: true
-        - id: createUpdateParameters.capabilities
-          type:
-            - array
-          description: "List of Cosmos DB\rcapabilities for the account"
           optional: true
         - id: createUpdateParameters.location
           type:
@@ -2340,6 +1952,7 @@ items:
           type:
             - array
           description: "List of failover\rpolicies."
+          optional: true
         - id: options
           type:
             - object
@@ -2398,6 +2011,7 @@ items:
           type:
             - array
           description: "List of failover\rpolicies."
+          optional: true
         - id: options
           type:
             - object

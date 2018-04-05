@@ -8,9 +8,9 @@ items:
     source:
       id: azure-arm-sql.ElasticPools
       path: lib\services\sqlManagement2\lib\operations\elasticPools.js
-      startLine: 1634
+      startLine: 1361
       remote:
-        branch: master
+        branch: jsdoc
         path: lib\services\sqlManagement2\lib\operations\elasticPools.js
         repo: 'https://github.com/Azure/azure-sdk-for-node.git'
     type: Class
@@ -21,24 +21,20 @@ items:
       - >-
         azure-arm-sql.ElasticPools#listMetricDefinitionsWithHttpOperationResponse
       - 'azure-arm-sql.ElasticPools#listMetricDefinitions'
-      - 'azure-arm-sql.ElasticPools#listByServerWithHttpOperationResponse'
-      - 'azure-arm-sql.ElasticPools#listByServer'
-      - 'azure-arm-sql.ElasticPools#getWithHttpOperationResponse'
-      - 'azure-arm-sql.ElasticPools#get'
       - 'azure-arm-sql.ElasticPools#createOrUpdateWithHttpOperationResponse'
       - 'azure-arm-sql.ElasticPools#createOrUpdate'
-      - 'azure-arm-sql.ElasticPools#deleteMethodWithHttpOperationResponse'
-      - 'azure-arm-sql.ElasticPools#deleteMethod'
       - 'azure-arm-sql.ElasticPools#updateWithHttpOperationResponse'
       - 'azure-arm-sql.ElasticPools#update'
+      - 'azure-arm-sql.ElasticPools#deleteMethodWithHttpOperationResponse'
+      - 'azure-arm-sql.ElasticPools#deleteMethod'
+      - 'azure-arm-sql.ElasticPools#getWithHttpOperationResponse'
+      - 'azure-arm-sql.ElasticPools#get'
+      - 'azure-arm-sql.ElasticPools#listByServerWithHttpOperationResponse'
+      - 'azure-arm-sql.ElasticPools#listByServer'
       - 'azure-arm-sql.ElasticPools#beginCreateOrUpdateWithHttpOperationResponse'
       - 'azure-arm-sql.ElasticPools#beginCreateOrUpdate'
-      - 'azure-arm-sql.ElasticPools#beginDeleteMethodWithHttpOperationResponse'
-      - 'azure-arm-sql.ElasticPools#beginDeleteMethod'
       - 'azure-arm-sql.ElasticPools#beginUpdateWithHttpOperationResponse'
       - 'azure-arm-sql.ElasticPools#beginUpdate'
-      - 'azure-arm-sql.ElasticPools#listByServerNextWithHttpOperationResponse'
-      - 'azure-arm-sql.ElasticPools#listByServerNext'
     langs:
       - js
   - id: 'azure-arm-sql.ElasticPools.#ctor'
@@ -298,25 +294,21 @@ items:
         elasticPoolName, options, optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-sql.ElasticPools#listByServerWithHttpOperationResponse'
-    id: 'azure-arm-sql.ElasticPools#listByServerWithHttpOperationResponse'
+  - uid: 'azure-arm-sql.ElasticPools#createOrUpdateWithHttpOperationResponse'
+    id: 'azure-arm-sql.ElasticPools#createOrUpdateWithHttpOperationResponse'
     parent: azure-arm-sql.ElasticPools
     name: >-
-      listByServerWithHttpOperationResponse(resourceGroupName, serverName,
-      options)
-    summary: Gets all elastic pools in a server.
+      createOrUpdateWithHttpOperationResponse(resourceGroupName, serverName,
+      elasticPoolName, parameters, options)
+    summary: Creates a new elastic pool or updates an existing elastic pool.
     fullName: >-
-      azure-arm-sql.ElasticPools.listByServerWithHttpOperationResponse(resourceGroupName,
-      serverName, options)
+      azure-arm-sql.ElasticPools.createOrUpdateWithHttpOperationResponse(resourceGroupName,
+      serverName, elasticPoolName, parameters, options)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<ElasticPoolListResult>} - The deserialized
-          result object.
-        value: >-
-          {HttpOperationResponse<ElasticPoolListResult>} - The deserialized
-          result object.
+        text: '{HttpOperationResponse<ElasticPool>} - The deserialized result object.'
+        value: '{HttpOperationResponse<ElasticPool>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -332,15 +324,52 @@ items:
           type:
             - string
           description: The name of the server.
+        - id: elasticPoolName
+          type:
+            - string
+          description: "The name of the elastic pool to be operated\ron (updated or created)."
+        - id: parameters
+          type:
+            - object
+          description: "The required parameters for creating or updating\ran elastic pool."
+        - id: parameters.edition
+          type:
+            - string
+          description: "The edition of the elastic pool.\rPossible values include: 'Basic', 'Standard', 'Premium'"
+          optional: true
+        - id: parameters.dtu
+          type:
+            - number
+          description: "The total shared DTU for the database\relastic pool."
+          optional: true
+        - id: parameters.databaseDtuMax
+          type:
+            - number
+          description: "The maximum DTU any one database\rcan consume."
+          optional: true
+        - id: parameters.databaseDtuMin
+          type:
+            - number
+          description: "The minimum DTU all databases\rare guaranteed."
+          optional: true
+        - id: parameters.storageMB
+          type:
+            - number
+          description: "Gets storage limit for the database\relastic pool in MB."
+          optional: true
+        - id: parameters.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: parameters.location
+          type:
+            - string
+          description: Resource location.
         - id: options
           type:
             - object
           description: Optional Parameters.
-          optional: true
-        - id: options.skip
-          type:
-            - number
-          description: "The number of elements in the collection to\rskip."
           optional: true
         - id: options.customHeaders
           type:
@@ -352,27 +381,29 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function listByServerWithHttpOperationResponse(resourceGroupName,
-        serverName, options)
+        function createOrUpdateWithHttpOperationResponse(resourceGroupName,
+        serverName, elasticPoolName, parameters, options)
     langs:
       - js
-  - uid: 'azure-arm-sql.ElasticPools#listByServer'
-    id: 'azure-arm-sql.ElasticPools#listByServer'
+  - uid: 'azure-arm-sql.ElasticPools#createOrUpdate'
+    id: 'azure-arm-sql.ElasticPools#createOrUpdate'
     parent: azure-arm-sql.ElasticPools
-    name: 'listByServer(resourceGroupName, serverName, options, optionalCallback)'
-    summary: Gets all elastic pools in a server.
-    fullName: >-
-      azure-arm-sql.ElasticPools.listByServer(resourceGroupName, serverName,
+    name: >-
+      createOrUpdate(resourceGroupName, serverName, elasticPoolName, parameters,
       options, optionalCallback)
+    summary: Creates a new elastic pool or updates an existing elastic pool.
+    fullName: >-
+      azure-arm-sql.ElasticPools.createOrUpdate(resourceGroupName, serverName,
+      elasticPoolName, parameters, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{ElasticPoolListResult} - The deserialized result object.'
-        value: '{ElasticPoolListResult} - The deserialized result object.'
+        text: '{ElasticPool} - The deserialized result object.'
+        value: '{ElasticPool} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPoolListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPoolListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPool} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPool} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -384,15 +415,52 @@ items:
           type:
             - string
           description: The name of the server.
+        - id: elasticPoolName
+          type:
+            - string
+          description: "The name of the elastic pool to be operated\ron (updated or created)."
+        - id: parameters
+          type:
+            - object
+          description: "The required parameters for creating or updating\ran elastic pool."
+        - id: parameters.edition
+          type:
+            - string
+          description: "The edition of the elastic pool.\rPossible values include: 'Basic', 'Standard', 'Premium'"
+          optional: true
+        - id: parameters.dtu
+          type:
+            - number
+          description: "The total shared DTU for the database\relastic pool."
+          optional: true
+        - id: parameters.databaseDtuMax
+          type:
+            - number
+          description: "The maximum DTU any one database\rcan consume."
+          optional: true
+        - id: parameters.databaseDtuMin
+          type:
+            - number
+          description: "The minimum DTU all databases\rare guaranteed."
+          optional: true
+        - id: parameters.storageMB
+          type:
+            - number
+          description: "Gets storage limit for the database\relastic pool in MB."
+          optional: true
+        - id: parameters.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: parameters.location
+          type:
+            - string
+          description: Resource location.
         - id: options
           type:
             - object
           description: Optional Parameters.
-          optional: true
-        - id: options.skip
-          type:
-            - number
-          description: "The number of elements in the collection to\rskip."
           optional: true
         - id: options.customHeaders
           type:
@@ -410,8 +478,300 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function listByServer(resourceGroupName, serverName, options,
-        optionalCallback)
+        function createOrUpdate(resourceGroupName, serverName, elasticPoolName,
+        parameters, options, optionalCallback)
+    langs:
+      - js
+  - uid: 'azure-arm-sql.ElasticPools#updateWithHttpOperationResponse'
+    id: 'azure-arm-sql.ElasticPools#updateWithHttpOperationResponse'
+    parent: azure-arm-sql.ElasticPools
+    name: >-
+      updateWithHttpOperationResponse(resourceGroupName, serverName,
+      elasticPoolName, parameters, options)
+    summary: Updates an existing elastic pool.
+    fullName: >-
+      azure-arm-sql.ElasticPools.updateWithHttpOperationResponse(resourceGroupName,
+      serverName, elasticPoolName, parameters, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<ElasticPool>} - The deserialized result object.'
+        value: '{HttpOperationResponse<ElasticPool>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
+        - id: serverName
+          type:
+            - string
+          description: The name of the server.
+        - id: elasticPoolName
+          type:
+            - string
+          description: The name of the elastic pool to be updated.
+        - id: parameters
+          type:
+            - object
+          description: "The required parameters for updating an elastic\rpool."
+        - id: parameters.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: parameters.edition
+          type:
+            - string
+          description: "The edition of the elastic pool.\rPossible values include: 'Basic', 'Standard', 'Premium'"
+          optional: true
+        - id: parameters.dtu
+          type:
+            - number
+          description: "The total shared DTU for the database\relastic pool."
+          optional: true
+        - id: parameters.databaseDtuMax
+          type:
+            - number
+          description: "The maximum DTU any one database\rcan consume."
+          optional: true
+        - id: parameters.databaseDtuMin
+          type:
+            - number
+          description: "The minimum DTU all databases\rare guaranteed."
+          optional: true
+        - id: parameters.storageMB
+          type:
+            - number
+          description: "Gets storage limit for the database\relastic pool in MB."
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function updateWithHttpOperationResponse(resourceGroupName, serverName,
+        elasticPoolName, parameters, options)
+    langs:
+      - js
+  - uid: 'azure-arm-sql.ElasticPools#update'
+    id: 'azure-arm-sql.ElasticPools#update'
+    parent: azure-arm-sql.ElasticPools
+    name: >-
+      update(resourceGroupName, serverName, elasticPoolName, parameters,
+      options, optionalCallback)
+    summary: Updates an existing elastic pool.
+    fullName: >-
+      azure-arm-sql.ElasticPools.update(resourceGroupName, serverName,
+      elasticPoolName, parameters, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{ElasticPool} - The deserialized result object.'
+        value: '{ElasticPool} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPool} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPool} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
+        - id: serverName
+          type:
+            - string
+          description: The name of the server.
+        - id: elasticPoolName
+          type:
+            - string
+          description: The name of the elastic pool to be updated.
+        - id: parameters
+          type:
+            - object
+          description: "The required parameters for updating an elastic\rpool."
+        - id: parameters.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: parameters.edition
+          type:
+            - string
+          description: "The edition of the elastic pool.\rPossible values include: 'Basic', 'Standard', 'Premium'"
+          optional: true
+        - id: parameters.dtu
+          type:
+            - number
+          description: "The total shared DTU for the database\relastic pool."
+          optional: true
+        - id: parameters.databaseDtuMax
+          type:
+            - number
+          description: "The maximum DTU any one database\rcan consume."
+          optional: true
+        - id: parameters.databaseDtuMin
+          type:
+            - number
+          description: "The minimum DTU all databases\rare guaranteed."
+          optional: true
+        - id: parameters.storageMB
+          type:
+            - number
+          description: "Gets storage limit for the database\relastic pool in MB."
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function update(resourceGroupName, serverName, elasticPoolName,
+        parameters, options, optionalCallback)
+    langs:
+      - js
+  - uid: 'azure-arm-sql.ElasticPools#deleteMethodWithHttpOperationResponse'
+    id: 'azure-arm-sql.ElasticPools#deleteMethodWithHttpOperationResponse'
+    parent: azure-arm-sql.ElasticPools
+    name: >-
+      deleteMethodWithHttpOperationResponse(resourceGroupName, serverName,
+      elasticPoolName, options)
+    summary: Deletes the elastic pool.
+    fullName: >-
+      azure-arm-sql.ElasticPools.deleteMethodWithHttpOperationResponse(resourceGroupName,
+      serverName, elasticPoolName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
+        - id: serverName
+          type:
+            - string
+          description: The name of the server.
+        - id: elasticPoolName
+          type:
+            - string
+          description: The name of the elastic pool to be deleted.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function deleteMethodWithHttpOperationResponse(resourceGroupName,
+        serverName, elasticPoolName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-sql.ElasticPools#deleteMethod'
+    id: 'azure-arm-sql.ElasticPools#deleteMethod'
+    parent: azure-arm-sql.ElasticPools
+    name: >-
+      deleteMethod(resourceGroupName, serverName, elasticPoolName, options,
+      optionalCallback)
+    summary: Deletes the elastic pool.
+    fullName: >-
+      azure-arm-sql.ElasticPools.deleteMethod(resourceGroupName, serverName,
+      elasticPoolName, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
+        - id: serverName
+          type:
+            - string
+          description: The name of the server.
+        - id: elasticPoolName
+          type:
+            - string
+          description: The name of the elastic pool to be deleted.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function deleteMethod(resourceGroupName, serverName, elasticPoolName,
+        options, optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-sql.ElasticPools#getWithHttpOperationResponse'
@@ -447,7 +807,7 @@ items:
         - id: elasticPoolName
           type:
             - string
-          description: The name of the elastic pool.
+          description: "The name of the elastic pool to be\rretrieved."
         - id: options
           type:
             - object
@@ -500,7 +860,7 @@ items:
         - id: elasticPoolName
           type:
             - string
-          description: The name of the elastic pool.
+          description: "The name of the elastic pool to be\rretrieved."
         - id: options
           type:
             - object
@@ -526,21 +886,25 @@ items:
         optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-sql.ElasticPools#createOrUpdateWithHttpOperationResponse'
-    id: 'azure-arm-sql.ElasticPools#createOrUpdateWithHttpOperationResponse'
+  - uid: 'azure-arm-sql.ElasticPools#listByServerWithHttpOperationResponse'
+    id: 'azure-arm-sql.ElasticPools#listByServerWithHttpOperationResponse'
     parent: azure-arm-sql.ElasticPools
     name: >-
-      createOrUpdateWithHttpOperationResponse(resourceGroupName, serverName,
-      elasticPoolName, parameters, options)
-    summary: Creates or updates an elastic pool.
+      listByServerWithHttpOperationResponse(resourceGroupName, serverName,
+      options)
+    summary: Returns a list of elastic pools in a server.
     fullName: >-
-      azure-arm-sql.ElasticPools.createOrUpdateWithHttpOperationResponse(resourceGroupName,
-      serverName, elasticPoolName, parameters, options)
+      azure-arm-sql.ElasticPools.listByServerWithHttpOperationResponse(resourceGroupName,
+      serverName, options)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{HttpOperationResponse<ElasticPool>} - The deserialized result object.'
-        value: '{HttpOperationResponse<ElasticPool>} - The deserialized result object.'
+        text: >-
+          {HttpOperationResponse<ElasticPoolListResult>} - The deserialized
+          result object.
+        value: >-
+          {HttpOperationResponse<ElasticPoolListResult>} - The deserialized
+          result object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -556,82 +920,6 @@ items:
           type:
             - string
           description: The name of the server.
-        - id: elasticPoolName
-          type:
-            - string
-          description: The name of the elastic pool.
-        - id: parameters
-          type:
-            - object
-          description: The elastic pool parameters.
-        - id: parameters.sku
-          type:
-            - object
-          description: ''
-          optional: true
-        - id: parameters.sku.name
-          type:
-            - string
-          description: "The name of the SKU, typically, a letter\r+ Number code, e.g. P3."
-        - id: parameters.sku.tier
-          type:
-            - string
-          description: "The tier of the particular SKU, e.g.\rBasic, Premium."
-          optional: true
-        - id: parameters.sku.size
-          type:
-            - string
-          description: Size of the particular SKU
-          optional: true
-        - id: parameters.sku.family
-          type:
-            - string
-          description: "If the service has different\rgenerations of hardware, for the same SKU, then that can be captured here."
-          optional: true
-        - id: parameters.sku.capacity
-          type:
-            - number
-          description: Capacity of the particular SKU.
-          optional: true
-        - id: parameters.maxSizeBytes
-          type:
-            - number
-          description: "The storage limit for the database\relastic pool in bytes."
-          optional: true
-        - id: parameters.perDatabaseSettings
-          type:
-            - object
-          description: "The per database settings\rfor the elastic pool."
-          optional: true
-        - id: parameters.perDatabaseSettings.minCapacity
-          type:
-            - number
-          description: "The minimum\rcapacity all databases are guaranteed."
-          optional: true
-        - id: parameters.perDatabaseSettings.maxCapacity
-          type:
-            - number
-          description: "The maximum\rcapacity any one database can consume."
-          optional: true
-        - id: parameters.zoneRedundant
-          type:
-            - boolean
-          description: "Whether or not this elastic pool\ris zone redundant, which means the replicas of this elastic pool will be\rspread across multiple availability zones."
-          optional: true
-        - id: parameters.licenseType
-          type:
-            - string
-          description: "The license type to apply for this\relastic pool. Possible values include: 'LicenseIncluded', 'BasePrice'"
-          optional: true
-        - id: parameters.tags
-          type:
-            - object
-          description: Resource tags.
-          optional: true
-        - id: parameters.location
-          type:
-            - string
-          description: Resource location.
         - id: options
           type:
             - object
@@ -647,29 +935,27 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function createOrUpdateWithHttpOperationResponse(resourceGroupName,
-        serverName, elasticPoolName, parameters, options)
+        function listByServerWithHttpOperationResponse(resourceGroupName,
+        serverName, options)
     langs:
       - js
-  - uid: 'azure-arm-sql.ElasticPools#createOrUpdate'
-    id: 'azure-arm-sql.ElasticPools#createOrUpdate'
+  - uid: 'azure-arm-sql.ElasticPools#listByServer'
+    id: 'azure-arm-sql.ElasticPools#listByServer'
     parent: azure-arm-sql.ElasticPools
-    name: >-
-      createOrUpdate(resourceGroupName, serverName, elasticPoolName, parameters,
+    name: 'listByServer(resourceGroupName, serverName, options, optionalCallback)'
+    summary: Returns a list of elastic pools in a server.
+    fullName: >-
+      azure-arm-sql.ElasticPools.listByServer(resourceGroupName, serverName,
       options, optionalCallback)
-    summary: Creates or updates an elastic pool.
-    fullName: >-
-      azure-arm-sql.ElasticPools.createOrUpdate(resourceGroupName, serverName,
-      elasticPoolName, parameters, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{ElasticPool} - The deserialized result object.'
-        value: '{ElasticPool} - The deserialized result object.'
+        text: '{ElasticPoolListResult} - The deserialized result object.'
+        value: '{ElasticPoolListResult} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPool} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPool} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPoolListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPoolListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -681,82 +967,6 @@ items:
           type:
             - string
           description: The name of the server.
-        - id: elasticPoolName
-          type:
-            - string
-          description: The name of the elastic pool.
-        - id: parameters
-          type:
-            - object
-          description: The elastic pool parameters.
-        - id: parameters.sku
-          type:
-            - object
-          description: ''
-          optional: true
-        - id: parameters.sku.name
-          type:
-            - string
-          description: "The name of the SKU, typically, a letter\r+ Number code, e.g. P3."
-        - id: parameters.sku.tier
-          type:
-            - string
-          description: "The tier of the particular SKU, e.g.\rBasic, Premium."
-          optional: true
-        - id: parameters.sku.size
-          type:
-            - string
-          description: Size of the particular SKU
-          optional: true
-        - id: parameters.sku.family
-          type:
-            - string
-          description: "If the service has different\rgenerations of hardware, for the same SKU, then that can be captured here."
-          optional: true
-        - id: parameters.sku.capacity
-          type:
-            - number
-          description: Capacity of the particular SKU.
-          optional: true
-        - id: parameters.maxSizeBytes
-          type:
-            - number
-          description: "The storage limit for the database\relastic pool in bytes."
-          optional: true
-        - id: parameters.perDatabaseSettings
-          type:
-            - object
-          description: "The per database settings\rfor the elastic pool."
-          optional: true
-        - id: parameters.perDatabaseSettings.minCapacity
-          type:
-            - number
-          description: "The minimum\rcapacity all databases are guaranteed."
-          optional: true
-        - id: parameters.perDatabaseSettings.maxCapacity
-          type:
-            - number
-          description: "The maximum\rcapacity any one database can consume."
-          optional: true
-        - id: parameters.zoneRedundant
-          type:
-            - boolean
-          description: "Whether or not this elastic pool\ris zone redundant, which means the replicas of this elastic pool will be\rspread across multiple availability zones."
-          optional: true
-        - id: parameters.licenseType
-          type:
-            - string
-          description: "The license type to apply for this\relastic pool. Possible values include: 'LicenseIncluded', 'BasePrice'"
-          optional: true
-        - id: parameters.tags
-          type:
-            - object
-          description: Resource tags.
-          optional: true
-        - id: parameters.location
-          type:
-            - string
-          description: Resource location.
         - id: options
           type:
             - object
@@ -778,368 +988,8 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function createOrUpdate(resourceGroupName, serverName, elasticPoolName,
-        parameters, options, optionalCallback)
-    langs:
-      - js
-  - uid: 'azure-arm-sql.ElasticPools#deleteMethodWithHttpOperationResponse'
-    id: 'azure-arm-sql.ElasticPools#deleteMethodWithHttpOperationResponse'
-    parent: azure-arm-sql.ElasticPools
-    name: >-
-      deleteMethodWithHttpOperationResponse(resourceGroupName, serverName,
-      elasticPoolName, options)
-    summary: Deletes an elastic pool.
-    fullName: >-
-      azure-arm-sql.ElasticPools.deleteMethodWithHttpOperationResponse(resourceGroupName,
-      serverName, elasticPoolName, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<null>} - The deserialized result object.'
-        value: '{HttpOperationResponse<null>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
-        - id: serverName
-          type:
-            - string
-          description: The name of the server.
-        - id: elasticPoolName
-          type:
-            - string
-          description: The name of the elastic pool.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function deleteMethodWithHttpOperationResponse(resourceGroupName,
-        serverName, elasticPoolName, options)
-    langs:
-      - js
-  - uid: 'azure-arm-sql.ElasticPools#deleteMethod'
-    id: 'azure-arm-sql.ElasticPools#deleteMethod'
-    parent: azure-arm-sql.ElasticPools
-    name: >-
-      deleteMethod(resourceGroupName, serverName, elasticPoolName, options,
-      optionalCallback)
-    summary: Deletes an elastic pool.
-    fullName: >-
-      azure-arm-sql.ElasticPools.deleteMethod(resourceGroupName, serverName,
-      elasticPoolName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{null} - The deserialized result object.'
-        value: '{null} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
-        - id: serverName
-          type:
-            - string
-          description: The name of the server.
-        - id: elasticPoolName
-          type:
-            - string
-          description: The name of the elastic pool.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function deleteMethod(resourceGroupName, serverName, elasticPoolName,
-        options, optionalCallback)
-    langs:
-      - js
-  - uid: 'azure-arm-sql.ElasticPools#updateWithHttpOperationResponse'
-    id: 'azure-arm-sql.ElasticPools#updateWithHttpOperationResponse'
-    parent: azure-arm-sql.ElasticPools
-    name: >-
-      updateWithHttpOperationResponse(resourceGroupName, serverName,
-      elasticPoolName, parameters, options)
-    summary: Updates an elastic pool.
-    fullName: >-
-      azure-arm-sql.ElasticPools.updateWithHttpOperationResponse(resourceGroupName,
-      serverName, elasticPoolName, parameters, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<ElasticPool>} - The deserialized result object.'
-        value: '{HttpOperationResponse<ElasticPool>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
-        - id: serverName
-          type:
-            - string
-          description: The name of the server.
-        - id: elasticPoolName
-          type:
-            - string
-          description: The name of the elastic pool.
-        - id: parameters
-          type:
-            - object
-          description: The elastic pool update parameters.
-        - id: parameters.sku
-          type:
-            - object
-          description: ''
-          optional: true
-        - id: parameters.sku.name
-          type:
-            - string
-          description: "The name of the SKU, typically, a letter\r+ Number code, e.g. P3."
-        - id: parameters.sku.tier
-          type:
-            - string
-          description: "The tier of the particular SKU, e.g.\rBasic, Premium."
-          optional: true
-        - id: parameters.sku.size
-          type:
-            - string
-          description: Size of the particular SKU
-          optional: true
-        - id: parameters.sku.family
-          type:
-            - string
-          description: "If the service has different\rgenerations of hardware, for the same SKU, then that can be captured here."
-          optional: true
-        - id: parameters.sku.capacity
-          type:
-            - number
-          description: Capacity of the particular SKU.
-          optional: true
-        - id: parameters.maxSizeBytes
-          type:
-            - number
-          description: "The storage limit for the database\relastic pool in bytes."
-          optional: true
-        - id: parameters.perDatabaseSettings
-          type:
-            - object
-          description: "The per database settings\rfor the elastic pool."
-          optional: true
-        - id: parameters.perDatabaseSettings.minCapacity
-          type:
-            - number
-          description: "The minimum\rcapacity all databases are guaranteed."
-          optional: true
-        - id: parameters.perDatabaseSettings.maxCapacity
-          type:
-            - number
-          description: "The maximum\rcapacity any one database can consume."
-          optional: true
-        - id: parameters.zoneRedundant
-          type:
-            - boolean
-          description: "Whether or not this elastic pool\ris zone redundant, which means the replicas of this elastic pool will be\rspread across multiple availability zones."
-          optional: true
-        - id: parameters.licenseType
-          type:
-            - string
-          description: "The license type to apply for this\relastic pool. Possible values include: 'LicenseIncluded', 'BasePrice'"
-          optional: true
-        - id: parameters.tags
-          type:
-            - object
-          description: Resource tags.
-          optional: true
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function updateWithHttpOperationResponse(resourceGroupName, serverName,
-        elasticPoolName, parameters, options)
-    langs:
-      - js
-  - uid: 'azure-arm-sql.ElasticPools#update'
-    id: 'azure-arm-sql.ElasticPools#update'
-    parent: azure-arm-sql.ElasticPools
-    name: >-
-      update(resourceGroupName, serverName, elasticPoolName, parameters,
-      options, optionalCallback)
-    summary: Updates an elastic pool.
-    fullName: >-
-      azure-arm-sql.ElasticPools.update(resourceGroupName, serverName,
-      elasticPoolName, parameters, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{ElasticPool} - The deserialized result object.'
-        value: '{ElasticPool} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPool} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPool} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
-        - id: serverName
-          type:
-            - string
-          description: The name of the server.
-        - id: elasticPoolName
-          type:
-            - string
-          description: The name of the elastic pool.
-        - id: parameters
-          type:
-            - object
-          description: The elastic pool update parameters.
-        - id: parameters.sku
-          type:
-            - object
-          description: ''
-          optional: true
-        - id: parameters.sku.name
-          type:
-            - string
-          description: "The name of the SKU, typically, a letter\r+ Number code, e.g. P3."
-        - id: parameters.sku.tier
-          type:
-            - string
-          description: "The tier of the particular SKU, e.g.\rBasic, Premium."
-          optional: true
-        - id: parameters.sku.size
-          type:
-            - string
-          description: Size of the particular SKU
-          optional: true
-        - id: parameters.sku.family
-          type:
-            - string
-          description: "If the service has different\rgenerations of hardware, for the same SKU, then that can be captured here."
-          optional: true
-        - id: parameters.sku.capacity
-          type:
-            - number
-          description: Capacity of the particular SKU.
-          optional: true
-        - id: parameters.maxSizeBytes
-          type:
-            - number
-          description: "The storage limit for the database\relastic pool in bytes."
-          optional: true
-        - id: parameters.perDatabaseSettings
-          type:
-            - object
-          description: "The per database settings\rfor the elastic pool."
-          optional: true
-        - id: parameters.perDatabaseSettings.minCapacity
-          type:
-            - number
-          description: "The minimum\rcapacity all databases are guaranteed."
-          optional: true
-        - id: parameters.perDatabaseSettings.maxCapacity
-          type:
-            - number
-          description: "The maximum\rcapacity any one database can consume."
-          optional: true
-        - id: parameters.zoneRedundant
-          type:
-            - boolean
-          description: "Whether or not this elastic pool\ris zone redundant, which means the replicas of this elastic pool will be\rspread across multiple availability zones."
-          optional: true
-        - id: parameters.licenseType
-          type:
-            - string
-          description: "The license type to apply for this\relastic pool. Possible values include: 'LicenseIncluded', 'BasePrice'"
-          optional: true
-        - id: parameters.tags
-          type:
-            - object
-          description: Resource tags.
-          optional: true
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function update(resourceGroupName, serverName, elasticPoolName,
-        parameters, options, optionalCallback)
+        function listByServer(resourceGroupName, serverName, options,
+        optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-sql.ElasticPools#beginCreateOrUpdateWithHttpOperationResponse'
@@ -1148,7 +998,7 @@ items:
     name: >-
       beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
       serverName, elasticPoolName, parameters, options)
-    summary: Creates or updates an elastic pool.
+    summary: Creates a new elastic pool or updates an existing elastic pool.
     fullName: >-
       azure-arm-sql.ElasticPools.beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
       serverName, elasticPoolName, parameters, options)
@@ -1175,69 +1025,35 @@ items:
         - id: elasticPoolName
           type:
             - string
-          description: The name of the elastic pool.
+          description: "The name of the elastic pool to be operated\ron (updated or created)."
         - id: parameters
           type:
             - object
-          description: The elastic pool parameters.
-        - id: parameters.sku
-          type:
-            - object
-          description: ''
-          optional: true
-        - id: parameters.sku.name
+          description: "The required parameters for creating or updating\ran elastic pool."
+        - id: parameters.edition
           type:
             - string
-          description: "The name of the SKU, typically, a letter\r+ Number code, e.g. P3."
-        - id: parameters.sku.tier
-          type:
-            - string
-          description: "The tier of the particular SKU, e.g.\rBasic, Premium."
+          description: "The edition of the elastic pool.\rPossible values include: 'Basic', 'Standard', 'Premium'"
           optional: true
-        - id: parameters.sku.size
-          type:
-            - string
-          description: Size of the particular SKU
-          optional: true
-        - id: parameters.sku.family
-          type:
-            - string
-          description: "If the service has different\rgenerations of hardware, for the same SKU, then that can be captured here."
-          optional: true
-        - id: parameters.sku.capacity
+        - id: parameters.dtu
           type:
             - number
-          description: Capacity of the particular SKU.
+          description: "The total shared DTU for the database\relastic pool."
           optional: true
-        - id: parameters.maxSizeBytes
+        - id: parameters.databaseDtuMax
           type:
             - number
-          description: "The storage limit for the database\relastic pool in bytes."
+          description: "The maximum DTU any one database\rcan consume."
           optional: true
-        - id: parameters.perDatabaseSettings
-          type:
-            - object
-          description: "The per database settings\rfor the elastic pool."
-          optional: true
-        - id: parameters.perDatabaseSettings.minCapacity
+        - id: parameters.databaseDtuMin
           type:
             - number
-          description: "The minimum\rcapacity all databases are guaranteed."
+          description: "The minimum DTU all databases\rare guaranteed."
           optional: true
-        - id: parameters.perDatabaseSettings.maxCapacity
+        - id: parameters.storageMB
           type:
             - number
-          description: "The maximum\rcapacity any one database can consume."
-          optional: true
-        - id: parameters.zoneRedundant
-          type:
-            - boolean
-          description: "Whether or not this elastic pool\ris zone redundant, which means the replicas of this elastic pool will be\rspread across multiple availability zones."
-          optional: true
-        - id: parameters.licenseType
-          type:
-            - string
-          description: "The license type to apply for this\relastic pool. Possible values include: 'LicenseIncluded', 'BasePrice'"
+          description: "Gets storage limit for the database\relastic pool in MB."
           optional: true
         - id: parameters.tags
           type:
@@ -1273,7 +1089,7 @@ items:
     name: >-
       beginCreateOrUpdate(resourceGroupName, serverName, elasticPoolName,
       parameters, options, optionalCallback)
-    summary: Creates or updates an elastic pool.
+    summary: Creates a new elastic pool or updates an existing elastic pool.
     fullName: >-
       azure-arm-sql.ElasticPools.beginCreateOrUpdate(resourceGroupName,
       serverName, elasticPoolName, parameters, options, optionalCallback)
@@ -1300,69 +1116,35 @@ items:
         - id: elasticPoolName
           type:
             - string
-          description: The name of the elastic pool.
+          description: "The name of the elastic pool to be operated\ron (updated or created)."
         - id: parameters
           type:
             - object
-          description: The elastic pool parameters.
-        - id: parameters.sku
-          type:
-            - object
-          description: ''
-          optional: true
-        - id: parameters.sku.name
+          description: "The required parameters for creating or updating\ran elastic pool."
+        - id: parameters.edition
           type:
             - string
-          description: "The name of the SKU, typically, a letter\r+ Number code, e.g. P3."
-        - id: parameters.sku.tier
-          type:
-            - string
-          description: "The tier of the particular SKU, e.g.\rBasic, Premium."
+          description: "The edition of the elastic pool.\rPossible values include: 'Basic', 'Standard', 'Premium'"
           optional: true
-        - id: parameters.sku.size
-          type:
-            - string
-          description: Size of the particular SKU
-          optional: true
-        - id: parameters.sku.family
-          type:
-            - string
-          description: "If the service has different\rgenerations of hardware, for the same SKU, then that can be captured here."
-          optional: true
-        - id: parameters.sku.capacity
+        - id: parameters.dtu
           type:
             - number
-          description: Capacity of the particular SKU.
+          description: "The total shared DTU for the database\relastic pool."
           optional: true
-        - id: parameters.maxSizeBytes
+        - id: parameters.databaseDtuMax
           type:
             - number
-          description: "The storage limit for the database\relastic pool in bytes."
+          description: "The maximum DTU any one database\rcan consume."
           optional: true
-        - id: parameters.perDatabaseSettings
-          type:
-            - object
-          description: "The per database settings\rfor the elastic pool."
-          optional: true
-        - id: parameters.perDatabaseSettings.minCapacity
+        - id: parameters.databaseDtuMin
           type:
             - number
-          description: "The minimum\rcapacity all databases are guaranteed."
+          description: "The minimum DTU all databases\rare guaranteed."
           optional: true
-        - id: parameters.perDatabaseSettings.maxCapacity
+        - id: parameters.storageMB
           type:
             - number
-          description: "The maximum\rcapacity any one database can consume."
-          optional: true
-        - id: parameters.zoneRedundant
-          type:
-            - boolean
-          description: "Whether or not this elastic pool\ris zone redundant, which means the replicas of this elastic pool will be\rspread across multiple availability zones."
-          optional: true
-        - id: parameters.licenseType
-          type:
-            - string
-          description: "The license type to apply for this\relastic pool. Possible values include: 'LicenseIncluded', 'BasePrice'"
+          description: "Gets storage limit for the database\relastic pool in MB."
           optional: true
         - id: parameters.tags
           type:
@@ -1398,125 +1180,13 @@ items:
         elasticPoolName, parameters, options, optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-sql.ElasticPools#beginDeleteMethodWithHttpOperationResponse'
-    id: 'azure-arm-sql.ElasticPools#beginDeleteMethodWithHttpOperationResponse'
-    parent: azure-arm-sql.ElasticPools
-    name: >-
-      beginDeleteMethodWithHttpOperationResponse(resourceGroupName, serverName,
-      elasticPoolName, options)
-    summary: Deletes an elastic pool.
-    fullName: >-
-      azure-arm-sql.ElasticPools.beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
-      serverName, elasticPoolName, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<null>} - The deserialized result object.'
-        value: '{HttpOperationResponse<null>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
-        - id: serverName
-          type:
-            - string
-          description: The name of the server.
-        - id: elasticPoolName
-          type:
-            - string
-          description: The name of the elastic pool.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
-        serverName, elasticPoolName, options)
-    langs:
-      - js
-  - uid: 'azure-arm-sql.ElasticPools#beginDeleteMethod'
-    id: 'azure-arm-sql.ElasticPools#beginDeleteMethod'
-    parent: azure-arm-sql.ElasticPools
-    name: >-
-      beginDeleteMethod(resourceGroupName, serverName, elasticPoolName, options,
-      optionalCallback)
-    summary: Deletes an elastic pool.
-    fullName: >-
-      azure-arm-sql.ElasticPools.beginDeleteMethod(resourceGroupName,
-      serverName, elasticPoolName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{null} - The deserialized result object.'
-        value: '{null} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: "The name of the resource group that\rcontains the resource. You can obtain this value from the Azure Resource\rManager API or the portal."
-        - id: serverName
-          type:
-            - string
-          description: The name of the server.
-        - id: elasticPoolName
-          type:
-            - string
-          description: The name of the elastic pool.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function beginDeleteMethod(resourceGroupName, serverName,
-        elasticPoolName, options, optionalCallback)
-    langs:
-      - js
   - uid: 'azure-arm-sql.ElasticPools#beginUpdateWithHttpOperationResponse'
     id: 'azure-arm-sql.ElasticPools#beginUpdateWithHttpOperationResponse'
     parent: azure-arm-sql.ElasticPools
     name: >-
       beginUpdateWithHttpOperationResponse(resourceGroupName, serverName,
       elasticPoolName, parameters, options)
-    summary: Updates an elastic pool.
+    summary: Updates an existing elastic pool.
     fullName: >-
       azure-arm-sql.ElasticPools.beginUpdateWithHttpOperationResponse(resourceGroupName,
       serverName, elasticPoolName, parameters, options)
@@ -1543,74 +1213,40 @@ items:
         - id: elasticPoolName
           type:
             - string
-          description: The name of the elastic pool.
+          description: The name of the elastic pool to be updated.
         - id: parameters
           type:
             - object
-          description: The elastic pool update parameters.
-        - id: parameters.sku
-          type:
-            - object
-          description: ''
-          optional: true
-        - id: parameters.sku.name
-          type:
-            - string
-          description: "The name of the SKU, typically, a letter\r+ Number code, e.g. P3."
-        - id: parameters.sku.tier
-          type:
-            - string
-          description: "The tier of the particular SKU, e.g.\rBasic, Premium."
-          optional: true
-        - id: parameters.sku.size
-          type:
-            - string
-          description: Size of the particular SKU
-          optional: true
-        - id: parameters.sku.family
-          type:
-            - string
-          description: "If the service has different\rgenerations of hardware, for the same SKU, then that can be captured here."
-          optional: true
-        - id: parameters.sku.capacity
-          type:
-            - number
-          description: Capacity of the particular SKU.
-          optional: true
-        - id: parameters.maxSizeBytes
-          type:
-            - number
-          description: "The storage limit for the database\relastic pool in bytes."
-          optional: true
-        - id: parameters.perDatabaseSettings
-          type:
-            - object
-          description: "The per database settings\rfor the elastic pool."
-          optional: true
-        - id: parameters.perDatabaseSettings.minCapacity
-          type:
-            - number
-          description: "The minimum\rcapacity all databases are guaranteed."
-          optional: true
-        - id: parameters.perDatabaseSettings.maxCapacity
-          type:
-            - number
-          description: "The maximum\rcapacity any one database can consume."
-          optional: true
-        - id: parameters.zoneRedundant
-          type:
-            - boolean
-          description: "Whether or not this elastic pool\ris zone redundant, which means the replicas of this elastic pool will be\rspread across multiple availability zones."
-          optional: true
-        - id: parameters.licenseType
-          type:
-            - string
-          description: "The license type to apply for this\relastic pool. Possible values include: 'LicenseIncluded', 'BasePrice'"
-          optional: true
+          description: "The required parameters for updating an elastic\rpool."
         - id: parameters.tags
           type:
             - object
           description: Resource tags.
+          optional: true
+        - id: parameters.edition
+          type:
+            - string
+          description: "The edition of the elastic pool.\rPossible values include: 'Basic', 'Standard', 'Premium'"
+          optional: true
+        - id: parameters.dtu
+          type:
+            - number
+          description: "The total shared DTU for the database\relastic pool."
+          optional: true
+        - id: parameters.databaseDtuMax
+          type:
+            - number
+          description: "The maximum DTU any one database\rcan consume."
+          optional: true
+        - id: parameters.databaseDtuMin
+          type:
+            - number
+          description: "The minimum DTU all databases\rare guaranteed."
+          optional: true
+        - id: parameters.storageMB
+          type:
+            - number
+          description: "Gets storage limit for the database\relastic pool in MB."
           optional: true
         - id: options
           type:
@@ -1637,7 +1273,7 @@ items:
     name: >-
       beginUpdate(resourceGroupName, serverName, elasticPoolName, parameters,
       options, optionalCallback)
-    summary: Updates an elastic pool.
+    summary: Updates an existing elastic pool.
     fullName: >-
       azure-arm-sql.ElasticPools.beginUpdate(resourceGroupName, serverName,
       elasticPoolName, parameters, options, optionalCallback)
@@ -1664,74 +1300,40 @@ items:
         - id: elasticPoolName
           type:
             - string
-          description: The name of the elastic pool.
+          description: The name of the elastic pool to be updated.
         - id: parameters
           type:
             - object
-          description: The elastic pool update parameters.
-        - id: parameters.sku
-          type:
-            - object
-          description: ''
-          optional: true
-        - id: parameters.sku.name
-          type:
-            - string
-          description: "The name of the SKU, typically, a letter\r+ Number code, e.g. P3."
-        - id: parameters.sku.tier
-          type:
-            - string
-          description: "The tier of the particular SKU, e.g.\rBasic, Premium."
-          optional: true
-        - id: parameters.sku.size
-          type:
-            - string
-          description: Size of the particular SKU
-          optional: true
-        - id: parameters.sku.family
-          type:
-            - string
-          description: "If the service has different\rgenerations of hardware, for the same SKU, then that can be captured here."
-          optional: true
-        - id: parameters.sku.capacity
-          type:
-            - number
-          description: Capacity of the particular SKU.
-          optional: true
-        - id: parameters.maxSizeBytes
-          type:
-            - number
-          description: "The storage limit for the database\relastic pool in bytes."
-          optional: true
-        - id: parameters.perDatabaseSettings
-          type:
-            - object
-          description: "The per database settings\rfor the elastic pool."
-          optional: true
-        - id: parameters.perDatabaseSettings.minCapacity
-          type:
-            - number
-          description: "The minimum\rcapacity all databases are guaranteed."
-          optional: true
-        - id: parameters.perDatabaseSettings.maxCapacity
-          type:
-            - number
-          description: "The maximum\rcapacity any one database can consume."
-          optional: true
-        - id: parameters.zoneRedundant
-          type:
-            - boolean
-          description: "Whether or not this elastic pool\ris zone redundant, which means the replicas of this elastic pool will be\rspread across multiple availability zones."
-          optional: true
-        - id: parameters.licenseType
-          type:
-            - string
-          description: "The license type to apply for this\relastic pool. Possible values include: 'LicenseIncluded', 'BasePrice'"
-          optional: true
+          description: "The required parameters for updating an elastic\rpool."
         - id: parameters.tags
           type:
             - object
           description: Resource tags.
+          optional: true
+        - id: parameters.edition
+          type:
+            - string
+          description: "The edition of the elastic pool.\rPossible values include: 'Basic', 'Standard', 'Premium'"
+          optional: true
+        - id: parameters.dtu
+          type:
+            - number
+          description: "The total shared DTU for the database\relastic pool."
+          optional: true
+        - id: parameters.databaseDtuMax
+          type:
+            - number
+          description: "The maximum DTU any one database\rcan consume."
+          optional: true
+        - id: parameters.databaseDtuMin
+          type:
+            - number
+          description: "The minimum DTU all databases\rare guaranteed."
+          optional: true
+        - id: parameters.storageMB
+          type:
+            - number
+          description: "Gets storage limit for the database\relastic pool in MB."
           optional: true
         - id: options
           type:
@@ -1756,99 +1358,5 @@ items:
       content: >-
         function beginUpdate(resourceGroupName, serverName, elasticPoolName,
         parameters, options, optionalCallback)
-    langs:
-      - js
-  - uid: 'azure-arm-sql.ElasticPools#listByServerNextWithHttpOperationResponse'
-    id: 'azure-arm-sql.ElasticPools#listByServerNextWithHttpOperationResponse'
-    parent: azure-arm-sql.ElasticPools
-    name: 'listByServerNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: Gets all elastic pools in a server.
-    fullName: >-
-      azure-arm-sql.ElasticPools.listByServerNextWithHttpOperationResponse(nextPageLink,
-      options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<ElasticPoolListResult>} - The deserialized
-          result object.
-        value: >-
-          {HttpOperationResponse<ElasticPoolListResult>} - The deserialized
-          result object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: nextPageLink
-          type:
-            - string
-          description: "The NextLink from the previous successful call\rto List operation."
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function listByServerNextWithHttpOperationResponse(nextPageLink,
-        options)
-    langs:
-      - js
-  - uid: 'azure-arm-sql.ElasticPools#listByServerNext'
-    id: 'azure-arm-sql.ElasticPools#listByServerNext'
-    parent: azure-arm-sql.ElasticPools
-    name: 'listByServerNext(nextPageLink, options, optionalCallback)'
-    summary: Gets all elastic pools in a server.
-    fullName: >-
-      azure-arm-sql.ElasticPools.listByServerNext(nextPageLink, options,
-      optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{ElasticPoolListResult} - The deserialized result object.'
-        value: '{ElasticPoolListResult} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPoolListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ElasticPoolListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: nextPageLink
-          type:
-            - string
-          description: "The NextLink from the previous successful call\rto List operation."
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: 'function listByServerNext(nextPageLink, options, optionalCallback)'
     langs:
       - js

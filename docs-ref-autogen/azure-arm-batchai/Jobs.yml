@@ -8,9 +8,9 @@ items:
     source:
       id: azure-arm-batchai.Jobs
       path: lib\services\batchaiManagement\lib\operations\jobs.js
-      startLine: 2704
+      startLine: 2606
       remote:
-        branch: master
+        branch: jsdoc
         path: lib\services\batchaiManagement\lib\operations\jobs.js
         repo: 'https://github.com/Azure/azure-sdk-for-node.git'
     type: Class
@@ -123,31 +123,6 @@ items:
           type:
             - object
           description: "Specifies the Id of the cluster on which\rthis job will run."
-        - id: parameters.mountVolumes
-          type:
-            - object
-          description: "Information on mount volumes to be\rused by the job. These volumes will be mounted before the job execution and\rwill be unmouted after the job completion. The volumes will be mounted at\rlocation specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable."
-          optional: true
-        - id: parameters.mountVolumes.azureFileShares
-          type:
-            - array
-          description: "Azure File Share\rsetup configuration. References to Azure File Shares that are to be mounted\rto the cluster nodes."
-          optional: true
-        - id: parameters.mountVolumes.azureBlobFileSystems
-          type:
-            - array
-          description: "Azure Blob\rFileSystem setup configuration. References to Azure Blob FUSE that are to be\rmounted to the cluster nodes."
-          optional: true
-        - id: parameters.mountVolumes.fileServers
-          type:
-            - array
-          description: "References to a list of\rfile servers that are mounted to the cluster node."
-          optional: true
-        - id: parameters.mountVolumes.unmanagedFileSystems
-          type:
-            - array
-          description: "References to\ra list of file servers that are mounted to the cluster node."
-          optional: true
         - id: parameters.nodeCount
           type:
             - number
@@ -242,35 +217,6 @@ items:
             - number
           description: "Number of processes\rparameter that is passed to MPI runtime. The default value for this property\ris equal to nodeCount property"
           optional: true
-        - id: parameters.pyTorchSettings
-          type:
-            - object
-          description: "Specifies the settings for\rpyTorch job."
-          optional: true
-        - id: parameters.pyTorchSettings.pythonScriptFilePath
-          type:
-            - string
-          description: "The path and\rfile name of the python script to execute the job."
-        - id: parameters.pyTorchSettings.pythonInterpreterPath
-          type:
-            - string
-          description: "The path\rto python interpreter."
-          optional: true
-        - id: parameters.pyTorchSettings.commandLineArgs
-          type:
-            - string
-          description: "Specifies the\rcommand line arguments for the master task."
-          optional: true
-        - id: parameters.pyTorchSettings.processCount
-          type:
-            - number
-          description: "Number of\rprocesses to launch for the job execution. The default value for this\rproperty is equal to nodeCount property."
-          optional: true
-        - id: parameters.pyTorchSettings.communicationBackend
-          type:
-            - string
-          description: "Type of\rthe communication backend for distributed jobs. Valid values are 'TCP',\r'Gloo' or 'MPI'. Not required for non-distributed jobs."
-          optional: true
         - id: parameters.tensorFlowSettings
           type:
             - object
@@ -289,7 +235,6 @@ items:
           type:
             - string
           description: Specifies the command line arguments for the master task.
-          optional: true
         - id: parameters.tensorFlowSettings.workerCommandLineArgs
           type:
             - string
@@ -414,17 +359,12 @@ items:
         - id: parameters.outputDirectories
           type:
             - array
-          description: "Specifies the list of output\rdirectories."
+          description: "Specifies the list of output\rdirectories where the models will be created. ."
           optional: true
         - id: parameters.environmentVariables
           type:
             - array
-          description: "Additional environment\rvariables to set on the job. Batch AI will setup these additional\renvironment variables for the job."
-          optional: true
-        - id: parameters.secrets
-          type:
-            - array
-          description: "Additional environment variables with\rsecret values to set on the job. Batch AI will setup these additional\renvironment variables for the job. Server will never report values of these\rvariables back."
+          description: "Additional environment\rvariables to set on the job. Batch AI service sets the following environment\rvariables for all jobs: AZ_BATCHAI_INPUT_id, AZ_BATCHAI_OUTPUT_id,\rAZ_BATCHAI_NUM_GPUS_PER_NODE. For distributed TensorFlow jobs, following\radditional environment variables are set by the Batch AI Service:\rAZ_BATCHAI_PS_HOSTS, AZ_BATCHAI_WORKER_HOSTS"
           optional: true
         - id: parameters.constraints
           type:
@@ -510,31 +450,6 @@ items:
           type:
             - object
           description: "Specifies the Id of the cluster on which\rthis job will run."
-        - id: parameters.mountVolumes
-          type:
-            - object
-          description: "Information on mount volumes to be\rused by the job. These volumes will be mounted before the job execution and\rwill be unmouted after the job completion. The volumes will be mounted at\rlocation specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable."
-          optional: true
-        - id: parameters.mountVolumes.azureFileShares
-          type:
-            - array
-          description: "Azure File Share\rsetup configuration. References to Azure File Shares that are to be mounted\rto the cluster nodes."
-          optional: true
-        - id: parameters.mountVolumes.azureBlobFileSystems
-          type:
-            - array
-          description: "Azure Blob\rFileSystem setup configuration. References to Azure Blob FUSE that are to be\rmounted to the cluster nodes."
-          optional: true
-        - id: parameters.mountVolumes.fileServers
-          type:
-            - array
-          description: "References to a list of\rfile servers that are mounted to the cluster node."
-          optional: true
-        - id: parameters.mountVolumes.unmanagedFileSystems
-          type:
-            - array
-          description: "References to\ra list of file servers that are mounted to the cluster node."
-          optional: true
         - id: parameters.nodeCount
           type:
             - number
@@ -629,35 +544,6 @@ items:
             - number
           description: "Number of processes\rparameter that is passed to MPI runtime. The default value for this property\ris equal to nodeCount property"
           optional: true
-        - id: parameters.pyTorchSettings
-          type:
-            - object
-          description: "Specifies the settings for\rpyTorch job."
-          optional: true
-        - id: parameters.pyTorchSettings.pythonScriptFilePath
-          type:
-            - string
-          description: "The path and\rfile name of the python script to execute the job."
-        - id: parameters.pyTorchSettings.pythonInterpreterPath
-          type:
-            - string
-          description: "The path\rto python interpreter."
-          optional: true
-        - id: parameters.pyTorchSettings.commandLineArgs
-          type:
-            - string
-          description: "Specifies the\rcommand line arguments for the master task."
-          optional: true
-        - id: parameters.pyTorchSettings.processCount
-          type:
-            - number
-          description: "Number of\rprocesses to launch for the job execution. The default value for this\rproperty is equal to nodeCount property."
-          optional: true
-        - id: parameters.pyTorchSettings.communicationBackend
-          type:
-            - string
-          description: "Type of\rthe communication backend for distributed jobs. Valid values are 'TCP',\r'Gloo' or 'MPI'. Not required for non-distributed jobs."
-          optional: true
         - id: parameters.tensorFlowSettings
           type:
             - object
@@ -676,7 +562,6 @@ items:
           type:
             - string
           description: Specifies the command line arguments for the master task.
-          optional: true
         - id: parameters.tensorFlowSettings.workerCommandLineArgs
           type:
             - string
@@ -801,17 +686,12 @@ items:
         - id: parameters.outputDirectories
           type:
             - array
-          description: "Specifies the list of output\rdirectories."
+          description: "Specifies the list of output\rdirectories where the models will be created. ."
           optional: true
         - id: parameters.environmentVariables
           type:
             - array
-          description: "Additional environment\rvariables to set on the job. Batch AI will setup these additional\renvironment variables for the job."
-          optional: true
-        - id: parameters.secrets
-          type:
-            - array
-          description: "Additional environment variables with\rsecret values to set on the job. Batch AI will setup these additional\renvironment variables for the job. Server will never report values of these\rvariables back."
+          description: "Additional environment\rvariables to set on the job. Batch AI service sets the following environment\rvariables for all jobs: AZ_BATCHAI_INPUT_id, AZ_BATCHAI_OUTPUT_id,\rAZ_BATCHAI_NUM_GPUS_PER_NODE. For distributed TensorFlow jobs, following\radditional environment variables are set by the Batch AI Service:\rAZ_BATCHAI_PS_HOSTS, AZ_BATCHAI_WORKER_HOSTS"
           optional: true
         - id: parameters.constraints
           type:
@@ -1517,7 +1397,7 @@ items:
     name: >-
       listOutputFilesWithHttpOperationResponse(resourceGroupName, jobName,
       jobsListOutputFilesOptions, options)
-    summary: "List all directories and files inside the given directory of the output\rdirectory (Only if the output directory is on Azure File Share or Azure\rStorage container)."
+    summary: "List all files inside the given output directory (Only if the output\rdirectory is on Azure File Share or Azure Storage container)."
     fullName: >-
       azure-arm-batchai.Jobs.listOutputFilesWithHttpOperationResponse(resourceGroupName,
       jobName, jobsListOutputFilesOptions, options)
@@ -1553,11 +1433,6 @@ items:
           type:
             - string
           description: "Id of the job\routput directory. This is the OutputDirectory-->id parameter that is given\rby the user during Create Job."
-        - id: jobsListOutputFilesOptions.directory
-          type:
-            - string
-          description: "The path to the\rdirectory."
-          optional: true
         - id: jobsListOutputFilesOptions.linkexpiryinminutes
           type:
             - number
@@ -1593,7 +1468,7 @@ items:
     name: >-
       listOutputFiles(resourceGroupName, jobName, jobsListOutputFilesOptions,
       options, optionalCallback)
-    summary: "List all directories and files inside the given directory of the output\rdirectory (Only if the output directory is on Azure File Share or Azure\rStorage container)."
+    summary: "List all files inside the given output directory (Only if the output\rdirectory is on Azure File Share or Azure Storage container)."
     fullName: >-
       azure-arm-batchai.Jobs.listOutputFiles(resourceGroupName, jobName,
       jobsListOutputFilesOptions, options, optionalCallback)
@@ -1625,11 +1500,6 @@ items:
           type:
             - string
           description: "Id of the job\routput directory. This is the OutputDirectory-->id parameter that is given\rby the user during Create Job."
-        - id: jobsListOutputFilesOptions.directory
-          type:
-            - string
-          description: "The path to the\rdirectory."
-          optional: true
         - id: jobsListOutputFilesOptions.linkexpiryinminutes
           type:
             - number
@@ -1722,31 +1592,6 @@ items:
           type:
             - object
           description: "Specifies the Id of the cluster on which\rthis job will run."
-        - id: parameters.mountVolumes
-          type:
-            - object
-          description: "Information on mount volumes to be\rused by the job. These volumes will be mounted before the job execution and\rwill be unmouted after the job completion. The volumes will be mounted at\rlocation specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable."
-          optional: true
-        - id: parameters.mountVolumes.azureFileShares
-          type:
-            - array
-          description: "Azure File Share\rsetup configuration. References to Azure File Shares that are to be mounted\rto the cluster nodes."
-          optional: true
-        - id: parameters.mountVolumes.azureBlobFileSystems
-          type:
-            - array
-          description: "Azure Blob\rFileSystem setup configuration. References to Azure Blob FUSE that are to be\rmounted to the cluster nodes."
-          optional: true
-        - id: parameters.mountVolumes.fileServers
-          type:
-            - array
-          description: "References to a list of\rfile servers that are mounted to the cluster node."
-          optional: true
-        - id: parameters.mountVolumes.unmanagedFileSystems
-          type:
-            - array
-          description: "References to\ra list of file servers that are mounted to the cluster node."
-          optional: true
         - id: parameters.nodeCount
           type:
             - number
@@ -1841,35 +1686,6 @@ items:
             - number
           description: "Number of processes\rparameter that is passed to MPI runtime. The default value for this property\ris equal to nodeCount property"
           optional: true
-        - id: parameters.pyTorchSettings
-          type:
-            - object
-          description: "Specifies the settings for\rpyTorch job."
-          optional: true
-        - id: parameters.pyTorchSettings.pythonScriptFilePath
-          type:
-            - string
-          description: "The path and\rfile name of the python script to execute the job."
-        - id: parameters.pyTorchSettings.pythonInterpreterPath
-          type:
-            - string
-          description: "The path\rto python interpreter."
-          optional: true
-        - id: parameters.pyTorchSettings.commandLineArgs
-          type:
-            - string
-          description: "Specifies the\rcommand line arguments for the master task."
-          optional: true
-        - id: parameters.pyTorchSettings.processCount
-          type:
-            - number
-          description: "Number of\rprocesses to launch for the job execution. The default value for this\rproperty is equal to nodeCount property."
-          optional: true
-        - id: parameters.pyTorchSettings.communicationBackend
-          type:
-            - string
-          description: "Type of\rthe communication backend for distributed jobs. Valid values are 'TCP',\r'Gloo' or 'MPI'. Not required for non-distributed jobs."
-          optional: true
         - id: parameters.tensorFlowSettings
           type:
             - object
@@ -1888,7 +1704,6 @@ items:
           type:
             - string
           description: Specifies the command line arguments for the master task.
-          optional: true
         - id: parameters.tensorFlowSettings.workerCommandLineArgs
           type:
             - string
@@ -2013,17 +1828,12 @@ items:
         - id: parameters.outputDirectories
           type:
             - array
-          description: "Specifies the list of output\rdirectories."
+          description: "Specifies the list of output\rdirectories where the models will be created. ."
           optional: true
         - id: parameters.environmentVariables
           type:
             - array
-          description: "Additional environment\rvariables to set on the job. Batch AI will setup these additional\renvironment variables for the job."
-          optional: true
-        - id: parameters.secrets
-          type:
-            - array
-          description: "Additional environment variables with\rsecret values to set on the job. Batch AI will setup these additional\renvironment variables for the job. Server will never report values of these\rvariables back."
+          description: "Additional environment\rvariables to set on the job. Batch AI service sets the following environment\rvariables for all jobs: AZ_BATCHAI_INPUT_id, AZ_BATCHAI_OUTPUT_id,\rAZ_BATCHAI_NUM_GPUS_PER_NODE. For distributed TensorFlow jobs, following\radditional environment variables are set by the Batch AI Service:\rAZ_BATCHAI_PS_HOSTS, AZ_BATCHAI_WORKER_HOSTS"
           optional: true
         - id: parameters.constraints
           type:
@@ -2111,31 +1921,6 @@ items:
           type:
             - object
           description: "Specifies the Id of the cluster on which\rthis job will run."
-        - id: parameters.mountVolumes
-          type:
-            - object
-          description: "Information on mount volumes to be\rused by the job. These volumes will be mounted before the job execution and\rwill be unmouted after the job completion. The volumes will be mounted at\rlocation specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable."
-          optional: true
-        - id: parameters.mountVolumes.azureFileShares
-          type:
-            - array
-          description: "Azure File Share\rsetup configuration. References to Azure File Shares that are to be mounted\rto the cluster nodes."
-          optional: true
-        - id: parameters.mountVolumes.azureBlobFileSystems
-          type:
-            - array
-          description: "Azure Blob\rFileSystem setup configuration. References to Azure Blob FUSE that are to be\rmounted to the cluster nodes."
-          optional: true
-        - id: parameters.mountVolumes.fileServers
-          type:
-            - array
-          description: "References to a list of\rfile servers that are mounted to the cluster node."
-          optional: true
-        - id: parameters.mountVolumes.unmanagedFileSystems
-          type:
-            - array
-          description: "References to\ra list of file servers that are mounted to the cluster node."
-          optional: true
         - id: parameters.nodeCount
           type:
             - number
@@ -2230,35 +2015,6 @@ items:
             - number
           description: "Number of processes\rparameter that is passed to MPI runtime. The default value for this property\ris equal to nodeCount property"
           optional: true
-        - id: parameters.pyTorchSettings
-          type:
-            - object
-          description: "Specifies the settings for\rpyTorch job."
-          optional: true
-        - id: parameters.pyTorchSettings.pythonScriptFilePath
-          type:
-            - string
-          description: "The path and\rfile name of the python script to execute the job."
-        - id: parameters.pyTorchSettings.pythonInterpreterPath
-          type:
-            - string
-          description: "The path\rto python interpreter."
-          optional: true
-        - id: parameters.pyTorchSettings.commandLineArgs
-          type:
-            - string
-          description: "Specifies the\rcommand line arguments for the master task."
-          optional: true
-        - id: parameters.pyTorchSettings.processCount
-          type:
-            - number
-          description: "Number of\rprocesses to launch for the job execution. The default value for this\rproperty is equal to nodeCount property."
-          optional: true
-        - id: parameters.pyTorchSettings.communicationBackend
-          type:
-            - string
-          description: "Type of\rthe communication backend for distributed jobs. Valid values are 'TCP',\r'Gloo' or 'MPI'. Not required for non-distributed jobs."
-          optional: true
         - id: parameters.tensorFlowSettings
           type:
             - object
@@ -2277,7 +2033,6 @@ items:
           type:
             - string
           description: Specifies the command line arguments for the master task.
-          optional: true
         - id: parameters.tensorFlowSettings.workerCommandLineArgs
           type:
             - string
@@ -2402,17 +2157,12 @@ items:
         - id: parameters.outputDirectories
           type:
             - array
-          description: "Specifies the list of output\rdirectories."
+          description: "Specifies the list of output\rdirectories where the models will be created. ."
           optional: true
         - id: parameters.environmentVariables
           type:
             - array
-          description: "Additional environment\rvariables to set on the job. Batch AI will setup these additional\renvironment variables for the job."
-          optional: true
-        - id: parameters.secrets
-          type:
-            - array
-          description: "Additional environment variables with\rsecret values to set on the job. Batch AI will setup these additional\renvironment variables for the job. Server will never report values of these\rvariables back."
+          description: "Additional environment\rvariables to set on the job. Batch AI service sets the following environment\rvariables for all jobs: AZ_BATCHAI_INPUT_id, AZ_BATCHAI_OUTPUT_id,\rAZ_BATCHAI_NUM_GPUS_PER_NODE. For distributed TensorFlow jobs, following\radditional environment variables are set by the Batch AI Service:\rAZ_BATCHAI_PS_HOSTS, AZ_BATCHAI_WORKER_HOSTS"
           optional: true
         - id: parameters.constraints
           type:
@@ -2944,7 +2694,7 @@ items:
     id: 'azure-arm-batchai.Jobs#listOutputFilesNextWithHttpOperationResponse'
     parent: azure-arm-batchai.Jobs
     name: 'listOutputFilesNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: "List all directories and files inside the given directory of the output\rdirectory (Only if the output directory is on Azure File Share or Azure\rStorage container)."
+    summary: "List all files inside the given output directory (Only if the output\rdirectory is on Azure File Share or Azure Storage container)."
     fullName: >-
       azure-arm-batchai.Jobs.listOutputFilesNextWithHttpOperationResponse(nextPageLink,
       options)
@@ -2991,7 +2741,7 @@ items:
     id: 'azure-arm-batchai.Jobs#listOutputFilesNext'
     parent: azure-arm-batchai.Jobs
     name: 'listOutputFilesNext(nextPageLink, options, optionalCallback)'
-    summary: "List all directories and files inside the given directory of the output\rdirectory (Only if the output directory is on Azure File Share or Azure\rStorage container)."
+    summary: "List all files inside the given output directory (Only if the output\rdirectory is on Azure File Share or Azure Storage container)."
     fullName: >-
       azure-arm-batchai.Jobs.listOutputFilesNext(nextPageLink, options,
       optionalCallback)

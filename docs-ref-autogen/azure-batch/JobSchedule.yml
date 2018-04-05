@@ -8,9 +8,9 @@ items:
     source:
       id: azure-batch.JobSchedule
       path: lib\services\batch\lib\operations\jobSchedule.js
-      startLine: 5535
+      startLine: 5583
       remote:
-        branch: master
+        branch: jsdoc
         path: lib\services\batch\lib\operations\jobSchedule.js
         repo: 'https://github.com/Azure/azure-sdk-for-node.git'
     type: Class
@@ -696,12 +696,12 @@ items:
         - id: jobSchedulePatchParameter.jobSpecification.onAllTasksComplete
           type:
             - string
-          description: "The action\rthe Batch service should take when all tasks in a job created under this\rschedule are in the completed state. Note that if a job contains no tasks,\rthen all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noaction and update the job properties to set\ronAllTasksComplete to terminatejob once you have finished adding tasks. The\rdefault is noaction. Possible values include: 'noAction', 'terminateJob'"
+          description: "The action\rthe Batch service should take when all tasks in a job created under this\rschedule are in the completed state. Note that if a job contains no tasks,\rthen all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noAction and update the job properties to set\ronAllTasksComplete to terminateJob once you have finished adding tasks. The\rdefault is noAction. Possible values include: 'noAction', 'terminateJob'"
           optional: true
         - id: jobSchedulePatchParameter.jobSpecification.onTaskFailure
           type:
             - string
-          description: "The action the Batch service should take when any task fails in a job\rcreated under this schedule. A task is considered to have failed if it have\rfailed if has a failureInfo. A failureInfo is set if the task completes with\ra non-zero exit code after exhausting its retry count, or if there was an\rerror starting the task, for example due to a resource file download error.\rThe default is noaction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
+          description: "The action the Batch service should take when any task fails in a job\rcreated under this schedule. A task is considered to have failed if it have\rfailed if has a failureInfo. A failureInfo is set if the task completes with\ra non-zero exit code after exhausting its retry count, or if there was an\rerror starting the task, for example due to a resource file download error.\rThe default is noAction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
           optional: true
         - id: jobSchedulePatchParameter.jobSpecification.constraints
           type:
@@ -970,7 +970,7 @@ items:
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.poolLifetimeOption
           type:
             - string
-          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. Possible values include: 'jobSchedule',\r'job'"
+          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. When the pool lifetime is jobSchedule the\rpool exists for the lifetime of the job schedule. The Batch Service creates\rthe pool when it creates the first job on the schedule. You may apply this\roption only to job schedules, not to jobs. When the pool lifetime is job the\rpool exists for the lifetime of the job to which it is dedicated. The Batch\rservice creates the pool when it creates the job. If the 'job' option is\rapplied to a job schedule, the Batch service creates a new auto pool for\revery job created on the schedule. Possible values include: 'jobSchedule',\r'job'"
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.keepAlive
           type:
@@ -1062,7 +1062,7 @@ items:
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.osDisk.caching
           type:
             - string
-          description: "The type of caching to enable for the OS disk. The default value for caching\ris none. For information about the caching options see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
+          description: "The type of caching to enable for the OS disk. Values are:\r\rnone - The caching mode for the disk is not enabled.\rreadOnly - The caching mode for the disk is read only.\rreadWrite - The caching mode for the disk is read and write.\r\rThe default value for caching is none. For information about the caching\roptions see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
           optional: true
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.nodeAgentSKUId
@@ -1085,7 +1085,7 @@ items:
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.dataDisks
           type:
             - array
-          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated. Each node\rgets its own disk (the disk is not a file share). Existing disks cannot be\rattached, each attached disk is empty. When the node is removed from the\rpool, the disk and all data associated with it is also deleted. The disk is\rnot formatted after being attached, it must be formatted before use - for\rmore information see\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux\rand\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine."
+          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated."
           optional: true
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.licenseType
@@ -1127,7 +1127,7 @@ items:
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.taskSchedulingPolicy.nodeFillType
           type:
             - string
-          description: "How tasks are distributed across compute nodes in a pool. Possible values\rinclude: 'spread', 'pack'"
+          description: "How tasks are distributed across compute nodes in a pool. Values are:\r\rpack - As many tasks as possible (maxTasksPerNode) should be assigned to\reach node in the pool before any tasks are assigned to the next node in the\rpool.\rspread - Tasks should be assigned evenly across all nodes in the pool.\rPossible values include: 'spread', 'pack'"
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.resizeTimeout
           type:
@@ -1277,13 +1277,13 @@ items:
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.scope
           type:
             - string
-          description: "The scope for the auto user The default value is task. Possible values\rinclude: 'task', 'pool'"
+          description: "The scope for the auto user Values are:\r\rpool - specifies that the task runs as the common auto user account which is\rcreated on every node in a pool.\rtask - specifies that the service should create a new user for the task.\rThe default value is task. Possible values include: 'task', 'pool'"
           optional: true
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.elevationLevel
           type:
             - string
-          description: "The elevation level of the auto user. The default value is nonAdmin.\rPossible values include: 'nonAdmin', 'admin'"
+          description: "The elevation level of the auto user. nonAdmin - The auto user is a standard\ruser without elevated access. admin - The auto user is a user with elevated\raccess and operates with full Administrator permissions. The default value\ris nonAdmin. Possible values include: 'nonAdmin', 'admin'"
           optional: true
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.maxTaskRetryCount
@@ -1479,12 +1479,12 @@ items:
         - id: jobSchedulePatchParameter.jobSpecification.onAllTasksComplete
           type:
             - string
-          description: "The action\rthe Batch service should take when all tasks in a job created under this\rschedule are in the completed state. Note that if a job contains no tasks,\rthen all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noaction and update the job properties to set\ronAllTasksComplete to terminatejob once you have finished adding tasks. The\rdefault is noaction. Possible values include: 'noAction', 'terminateJob'"
+          description: "The action\rthe Batch service should take when all tasks in a job created under this\rschedule are in the completed state. Note that if a job contains no tasks,\rthen all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noAction and update the job properties to set\ronAllTasksComplete to terminateJob once you have finished adding tasks. The\rdefault is noAction. Possible values include: 'noAction', 'terminateJob'"
           optional: true
         - id: jobSchedulePatchParameter.jobSpecification.onTaskFailure
           type:
             - string
-          description: "The action the Batch service should take when any task fails in a job\rcreated under this schedule. A task is considered to have failed if it have\rfailed if has a failureInfo. A failureInfo is set if the task completes with\ra non-zero exit code after exhausting its retry count, or if there was an\rerror starting the task, for example due to a resource file download error.\rThe default is noaction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
+          description: "The action the Batch service should take when any task fails in a job\rcreated under this schedule. A task is considered to have failed if it have\rfailed if has a failureInfo. A failureInfo is set if the task completes with\ra non-zero exit code after exhausting its retry count, or if there was an\rerror starting the task, for example due to a resource file download error.\rThe default is noAction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
           optional: true
         - id: jobSchedulePatchParameter.jobSpecification.constraints
           type:
@@ -1753,7 +1753,7 @@ items:
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.poolLifetimeOption
           type:
             - string
-          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. Possible values include: 'jobSchedule',\r'job'"
+          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. When the pool lifetime is jobSchedule the\rpool exists for the lifetime of the job schedule. The Batch Service creates\rthe pool when it creates the first job on the schedule. You may apply this\roption only to job schedules, not to jobs. When the pool lifetime is job the\rpool exists for the lifetime of the job to which it is dedicated. The Batch\rservice creates the pool when it creates the job. If the 'job' option is\rapplied to a job schedule, the Batch service creates a new auto pool for\revery job created on the schedule. Possible values include: 'jobSchedule',\r'job'"
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.keepAlive
           type:
@@ -1845,7 +1845,7 @@ items:
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.osDisk.caching
           type:
             - string
-          description: "The type of caching to enable for the OS disk. The default value for caching\ris none. For information about the caching options see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
+          description: "The type of caching to enable for the OS disk. Values are:\r\rnone - The caching mode for the disk is not enabled.\rreadOnly - The caching mode for the disk is read only.\rreadWrite - The caching mode for the disk is read and write.\r\rThe default value for caching is none. For information about the caching\roptions see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
           optional: true
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.nodeAgentSKUId
@@ -1868,7 +1868,7 @@ items:
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.dataDisks
           type:
             - array
-          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated. Each node\rgets its own disk (the disk is not a file share). Existing disks cannot be\rattached, each attached disk is empty. When the node is removed from the\rpool, the disk and all data associated with it is also deleted. The disk is\rnot formatted after being attached, it must be formatted before use - for\rmore information see\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux\rand\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine."
+          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated."
           optional: true
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.licenseType
@@ -1910,7 +1910,7 @@ items:
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.taskSchedulingPolicy.nodeFillType
           type:
             - string
-          description: "How tasks are distributed across compute nodes in a pool. Possible values\rinclude: 'spread', 'pack'"
+          description: "How tasks are distributed across compute nodes in a pool. Values are:\r\rpack - As many tasks as possible (maxTasksPerNode) should be assigned to\reach node in the pool before any tasks are assigned to the next node in the\rpool.\rspread - Tasks should be assigned evenly across all nodes in the pool.\rPossible values include: 'spread', 'pack'"
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.resizeTimeout
           type:
@@ -2060,13 +2060,13 @@ items:
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.scope
           type:
             - string
-          description: "The scope for the auto user The default value is task. Possible values\rinclude: 'task', 'pool'"
+          description: "The scope for the auto user Values are:\r\rpool - specifies that the task runs as the common auto user account which is\rcreated on every node in a pool.\rtask - specifies that the service should create a new user for the task.\rThe default value is task. Possible values include: 'task', 'pool'"
           optional: true
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.elevationLevel
           type:
             - string
-          description: "The elevation level of the auto user. The default value is nonAdmin.\rPossible values include: 'nonAdmin', 'admin'"
+          description: "The elevation level of the auto user. nonAdmin - The auto user is a standard\ruser without elevated access. admin - The auto user is a user with elevated\raccess and operates with full Administrator permissions. The default value\ris nonAdmin. Possible values include: 'nonAdmin', 'admin'"
           optional: true
         - id: >-
             jobSchedulePatchParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.maxTaskRetryCount
@@ -2268,12 +2268,12 @@ items:
         - id: jobScheduleUpdateParameter.jobSpecification.onAllTasksComplete
           type:
             - string
-          description: "The action\rthe Batch service should take when all tasks in a job created under this\rschedule are in the completed state. Note that if a job contains no tasks,\rthen all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noaction and update the job properties to set\ronAllTasksComplete to terminatejob once you have finished adding tasks. The\rdefault is noaction. Possible values include: 'noAction', 'terminateJob'"
+          description: "The action\rthe Batch service should take when all tasks in a job created under this\rschedule are in the completed state. Note that if a job contains no tasks,\rthen all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noAction and update the job properties to set\ronAllTasksComplete to terminateJob once you have finished adding tasks. The\rdefault is noAction. Possible values include: 'noAction', 'terminateJob'"
           optional: true
         - id: jobScheduleUpdateParameter.jobSpecification.onTaskFailure
           type:
             - string
-          description: "The action the Batch service should take when any task fails in a job\rcreated under this schedule. A task is considered to have failed if it have\rfailed if has a failureInfo. A failureInfo is set if the task completes with\ra non-zero exit code after exhausting its retry count, or if there was an\rerror starting the task, for example due to a resource file download error.\rThe default is noaction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
+          description: "The action the Batch service should take when any task fails in a job\rcreated under this schedule. A task is considered to have failed if it have\rfailed if has a failureInfo. A failureInfo is set if the task completes with\ra non-zero exit code after exhausting its retry count, or if there was an\rerror starting the task, for example due to a resource file download error.\rThe default is noAction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
           optional: true
         - id: jobScheduleUpdateParameter.jobSpecification.constraints
           type:
@@ -2543,7 +2543,7 @@ items:
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.poolLifetimeOption
           type:
             - string
-          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. Possible values include: 'jobSchedule',\r'job'"
+          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. When the pool lifetime is jobSchedule the\rpool exists for the lifetime of the job schedule. The Batch Service creates\rthe pool when it creates the first job on the schedule. You may apply this\roption only to job schedules, not to jobs. When the pool lifetime is job the\rpool exists for the lifetime of the job to which it is dedicated. The Batch\rservice creates the pool when it creates the job. If the 'job' option is\rapplied to a job schedule, the Batch service creates a new auto pool for\revery job created on the schedule. Possible values include: 'jobSchedule',\r'job'"
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.keepAlive
           type:
@@ -2635,7 +2635,7 @@ items:
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.osDisk.caching
           type:
             - string
-          description: "The type of caching to enable for the OS disk. The default value for caching\ris none. For information about the caching options see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
+          description: "The type of caching to enable for the OS disk. Values are:\r\rnone - The caching mode for the disk is not enabled.\rreadOnly - The caching mode for the disk is read only.\rreadWrite - The caching mode for the disk is read and write.\r\rThe default value for caching is none. For information about the caching\roptions see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
           optional: true
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.nodeAgentSKUId
@@ -2658,7 +2658,7 @@ items:
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.dataDisks
           type:
             - array
-          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated. Each node\rgets its own disk (the disk is not a file share). Existing disks cannot be\rattached, each attached disk is empty. When the node is removed from the\rpool, the disk and all data associated with it is also deleted. The disk is\rnot formatted after being attached, it must be formatted before use - for\rmore information see\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux\rand\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine."
+          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated."
           optional: true
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.licenseType
@@ -2700,7 +2700,7 @@ items:
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.taskSchedulingPolicy.nodeFillType
           type:
             - string
-          description: "How tasks are distributed across compute nodes in a pool. Possible values\rinclude: 'spread', 'pack'"
+          description: "How tasks are distributed across compute nodes in a pool. Values are:\r\rpack - As many tasks as possible (maxTasksPerNode) should be assigned to\reach node in the pool before any tasks are assigned to the next node in the\rpool.\rspread - Tasks should be assigned evenly across all nodes in the pool.\rPossible values include: 'spread', 'pack'"
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.resizeTimeout
           type:
@@ -2850,13 +2850,13 @@ items:
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.scope
           type:
             - string
-          description: "The scope for the auto user The default value is task. Possible values\rinclude: 'task', 'pool'"
+          description: "The scope for the auto user Values are:\r\rpool - specifies that the task runs as the common auto user account which is\rcreated on every node in a pool.\rtask - specifies that the service should create a new user for the task.\rThe default value is task. Possible values include: 'task', 'pool'"
           optional: true
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.elevationLevel
           type:
             - string
-          description: "The elevation level of the auto user. The default value is nonAdmin.\rPossible values include: 'nonAdmin', 'admin'"
+          description: "The elevation level of the auto user. nonAdmin - The auto user is a standard\ruser without elevated access. admin - The auto user is a user with elevated\raccess and operates with full Administrator permissions. The default value\ris nonAdmin. Possible values include: 'nonAdmin', 'admin'"
           optional: true
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.maxTaskRetryCount
@@ -3052,12 +3052,12 @@ items:
         - id: jobScheduleUpdateParameter.jobSpecification.onAllTasksComplete
           type:
             - string
-          description: "The action\rthe Batch service should take when all tasks in a job created under this\rschedule are in the completed state. Note that if a job contains no tasks,\rthen all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noaction and update the job properties to set\ronAllTasksComplete to terminatejob once you have finished adding tasks. The\rdefault is noaction. Possible values include: 'noAction', 'terminateJob'"
+          description: "The action\rthe Batch service should take when all tasks in a job created under this\rschedule are in the completed state. Note that if a job contains no tasks,\rthen all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noAction and update the job properties to set\ronAllTasksComplete to terminateJob once you have finished adding tasks. The\rdefault is noAction. Possible values include: 'noAction', 'terminateJob'"
           optional: true
         - id: jobScheduleUpdateParameter.jobSpecification.onTaskFailure
           type:
             - string
-          description: "The action the Batch service should take when any task fails in a job\rcreated under this schedule. A task is considered to have failed if it have\rfailed if has a failureInfo. A failureInfo is set if the task completes with\ra non-zero exit code after exhausting its retry count, or if there was an\rerror starting the task, for example due to a resource file download error.\rThe default is noaction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
+          description: "The action the Batch service should take when any task fails in a job\rcreated under this schedule. A task is considered to have failed if it have\rfailed if has a failureInfo. A failureInfo is set if the task completes with\ra non-zero exit code after exhausting its retry count, or if there was an\rerror starting the task, for example due to a resource file download error.\rThe default is noAction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
           optional: true
         - id: jobScheduleUpdateParameter.jobSpecification.constraints
           type:
@@ -3327,7 +3327,7 @@ items:
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.poolLifetimeOption
           type:
             - string
-          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. Possible values include: 'jobSchedule',\r'job'"
+          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. When the pool lifetime is jobSchedule the\rpool exists for the lifetime of the job schedule. The Batch Service creates\rthe pool when it creates the first job on the schedule. You may apply this\roption only to job schedules, not to jobs. When the pool lifetime is job the\rpool exists for the lifetime of the job to which it is dedicated. The Batch\rservice creates the pool when it creates the job. If the 'job' option is\rapplied to a job schedule, the Batch service creates a new auto pool for\revery job created on the schedule. Possible values include: 'jobSchedule',\r'job'"
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.keepAlive
           type:
@@ -3419,7 +3419,7 @@ items:
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.osDisk.caching
           type:
             - string
-          description: "The type of caching to enable for the OS disk. The default value for caching\ris none. For information about the caching options see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
+          description: "The type of caching to enable for the OS disk. Values are:\r\rnone - The caching mode for the disk is not enabled.\rreadOnly - The caching mode for the disk is read only.\rreadWrite - The caching mode for the disk is read and write.\r\rThe default value for caching is none. For information about the caching\roptions see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
           optional: true
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.nodeAgentSKUId
@@ -3442,7 +3442,7 @@ items:
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.dataDisks
           type:
             - array
-          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated. Each node\rgets its own disk (the disk is not a file share). Existing disks cannot be\rattached, each attached disk is empty. When the node is removed from the\rpool, the disk and all data associated with it is also deleted. The disk is\rnot formatted after being attached, it must be formatted before use - for\rmore information see\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux\rand\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine."
+          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated."
           optional: true
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.licenseType
@@ -3484,7 +3484,7 @@ items:
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.taskSchedulingPolicy.nodeFillType
           type:
             - string
-          description: "How tasks are distributed across compute nodes in a pool. Possible values\rinclude: 'spread', 'pack'"
+          description: "How tasks are distributed across compute nodes in a pool. Values are:\r\rpack - As many tasks as possible (maxTasksPerNode) should be assigned to\reach node in the pool before any tasks are assigned to the next node in the\rpool.\rspread - Tasks should be assigned evenly across all nodes in the pool.\rPossible values include: 'spread', 'pack'"
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.resizeTimeout
           type:
@@ -3634,13 +3634,13 @@ items:
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.scope
           type:
             - string
-          description: "The scope for the auto user The default value is task. Possible values\rinclude: 'task', 'pool'"
+          description: "The scope for the auto user Values are:\r\rpool - specifies that the task runs as the common auto user account which is\rcreated on every node in a pool.\rtask - specifies that the service should create a new user for the task.\rThe default value is task. Possible values include: 'task', 'pool'"
           optional: true
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.elevationLevel
           type:
             - string
-          description: "The elevation level of the auto user. The default value is nonAdmin.\rPossible values include: 'nonAdmin', 'admin'"
+          description: "The elevation level of the auto user. nonAdmin - The auto user is a standard\ruser without elevated access. admin - The auto user is a user with elevated\raccess and operates with full Administrator permissions. The default value\ris nonAdmin. Possible values include: 'nonAdmin', 'admin'"
           optional: true
         - id: >-
             jobScheduleUpdateParameter.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.maxTaskRetryCount
@@ -4387,12 +4387,12 @@ items:
         - id: cloudJobSchedule.jobSpecification.onAllTasksComplete
           type:
             - string
-          description: "The\raction the Batch service should take when all tasks in a job created under\rthis schedule are in the completed state. Note that if a job contains no\rtasks, then all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noaction and update the job properties to set\ronAllTasksComplete to terminatejob once you have finished adding tasks. The\rdefault is noaction. Possible values include: 'noAction', 'terminateJob'"
+          description: "The\raction the Batch service should take when all tasks in a job created under\rthis schedule are in the completed state. Note that if a job contains no\rtasks, then all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noAction and update the job properties to set\ronAllTasksComplete to terminateJob once you have finished adding tasks. The\rdefault is noAction. Possible values include: 'noAction', 'terminateJob'"
           optional: true
         - id: cloudJobSchedule.jobSpecification.onTaskFailure
           type:
             - string
-          description: "The action\rthe Batch service should take when any task fails in a job created under\rthis schedule. A task is considered to have failed if it have failed if has\ra failureInfo. A failureInfo is set if the task completes with a non-zero\rexit code after exhausting its retry count, or if there was an error\rstarting the task, for example due to a resource file download error. The\rdefault is noaction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
+          description: "The action\rthe Batch service should take when any task fails in a job created under\rthis schedule. A task is considered to have failed if it have failed if has\ra failureInfo. A failureInfo is set if the task completes with a non-zero\rexit code after exhausting its retry count, or if there was an error\rstarting the task, for example due to a resource file download error. The\rdefault is noAction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
           optional: true
         - id: cloudJobSchedule.jobSpecification.constraints
           type:
@@ -4634,7 +4634,7 @@ items:
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.poolLifetimeOption
           type:
             - string
-          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. Possible values include: 'jobSchedule',\r'job'"
+          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. When the pool lifetime is jobSchedule the\rpool exists for the lifetime of the job schedule. The Batch Service creates\rthe pool when it creates the first job on the schedule. You may apply this\roption only to job schedules, not to jobs. When the pool lifetime is job the\rpool exists for the lifetime of the job to which it is dedicated. The Batch\rservice creates the pool when it creates the job. If the 'job' option is\rapplied to a job schedule, the Batch service creates a new auto pool for\revery job created on the schedule. Possible values include: 'jobSchedule',\r'job'"
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.keepAlive
           type:
@@ -4726,7 +4726,7 @@ items:
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.osDisk.caching
           type:
             - string
-          description: "The type of caching to enable for the OS disk. The default value for caching\ris none. For information about the caching options see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
+          description: "The type of caching to enable for the OS disk. Values are:\r\rnone - The caching mode for the disk is not enabled.\rreadOnly - The caching mode for the disk is read only.\rreadWrite - The caching mode for the disk is read and write.\r\rThe default value for caching is none. For information about the caching\roptions see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
           optional: true
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.nodeAgentSKUId
@@ -4749,7 +4749,7 @@ items:
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.dataDisks
           type:
             - array
-          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated. Each node\rgets its own disk (the disk is not a file share). Existing disks cannot be\rattached, each attached disk is empty. When the node is removed from the\rpool, the disk and all data associated with it is also deleted. The disk is\rnot formatted after being attached, it must be formatted before use - for\rmore information see\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux\rand\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine."
+          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated."
           optional: true
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.licenseType
@@ -4791,7 +4791,7 @@ items:
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.taskSchedulingPolicy.nodeFillType
           type:
             - string
-          description: "How tasks are distributed across compute nodes in a pool. Possible values\rinclude: 'spread', 'pack'"
+          description: "How tasks are distributed across compute nodes in a pool. Values are:\r\rpack - As many tasks as possible (maxTasksPerNode) should be assigned to\reach node in the pool before any tasks are assigned to the next node in the\rpool.\rspread - Tasks should be assigned evenly across all nodes in the pool.\rPossible values include: 'spread', 'pack'"
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.resizeTimeout
           type:
@@ -4941,13 +4941,13 @@ items:
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.scope
           type:
             - string
-          description: "The scope for the auto user The default value is task. Possible values\rinclude: 'task', 'pool'"
+          description: "The scope for the auto user Values are:\r\rpool - specifies that the task runs as the common auto user account which is\rcreated on every node in a pool.\rtask - specifies that the service should create a new user for the task.\rThe default value is task. Possible values include: 'task', 'pool'"
           optional: true
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.elevationLevel
           type:
             - string
-          description: "The elevation level of the auto user. The default value is nonAdmin.\rPossible values include: 'nonAdmin', 'admin'"
+          description: "The elevation level of the auto user. nonAdmin - The auto user is a standard\ruser without elevated access. admin - The auto user is a user with elevated\raccess and operates with full Administrator permissions. The default value\ris nonAdmin. Possible values include: 'nonAdmin', 'admin'"
           optional: true
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.maxTaskRetryCount
@@ -5122,12 +5122,12 @@ items:
         - id: cloudJobSchedule.jobSpecification.onAllTasksComplete
           type:
             - string
-          description: "The\raction the Batch service should take when all tasks in a job created under\rthis schedule are in the completed state. Note that if a job contains no\rtasks, then all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noaction and update the job properties to set\ronAllTasksComplete to terminatejob once you have finished adding tasks. The\rdefault is noaction. Possible values include: 'noAction', 'terminateJob'"
+          description: "The\raction the Batch service should take when all tasks in a job created under\rthis schedule are in the completed state. Note that if a job contains no\rtasks, then all tasks are considered complete. This option is therefore most\rcommonly used with a Job Manager task; if you want to use automatic job\rtermination without a Job Manager, you should initially set\ronAllTasksComplete to noAction and update the job properties to set\ronAllTasksComplete to terminateJob once you have finished adding tasks. The\rdefault is noAction. Possible values include: 'noAction', 'terminateJob'"
           optional: true
         - id: cloudJobSchedule.jobSpecification.onTaskFailure
           type:
             - string
-          description: "The action\rthe Batch service should take when any task fails in a job created under\rthis schedule. A task is considered to have failed if it have failed if has\ra failureInfo. A failureInfo is set if the task completes with a non-zero\rexit code after exhausting its retry count, or if there was an error\rstarting the task, for example due to a resource file download error. The\rdefault is noaction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
+          description: "The action\rthe Batch service should take when any task fails in a job created under\rthis schedule. A task is considered to have failed if it have failed if has\ra failureInfo. A failureInfo is set if the task completes with a non-zero\rexit code after exhausting its retry count, or if there was an error\rstarting the task, for example due to a resource file download error. The\rdefault is noAction. Possible values include: 'noAction',\r'performExitOptionsJobAction'"
           optional: true
         - id: cloudJobSchedule.jobSpecification.constraints
           type:
@@ -5369,7 +5369,7 @@ items:
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.poolLifetimeOption
           type:
             - string
-          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. Possible values include: 'jobSchedule',\r'job'"
+          description: "The minimum lifetime of created auto pools, and how multiple jobs on a\rschedule are assigned to pools. When the pool lifetime is jobSchedule the\rpool exists for the lifetime of the job schedule. The Batch Service creates\rthe pool when it creates the first job on the schedule. You may apply this\roption only to job schedules, not to jobs. When the pool lifetime is job the\rpool exists for the lifetime of the job to which it is dedicated. The Batch\rservice creates the pool when it creates the job. If the 'job' option is\rapplied to a job schedule, the Batch service creates a new auto pool for\revery job created on the schedule. Possible values include: 'jobSchedule',\r'job'"
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.keepAlive
           type:
@@ -5461,7 +5461,7 @@ items:
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.osDisk.caching
           type:
             - string
-          description: "The type of caching to enable for the OS disk. The default value for caching\ris none. For information about the caching options see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
+          description: "The type of caching to enable for the OS disk. Values are:\r\rnone - The caching mode for the disk is not enabled.\rreadOnly - The caching mode for the disk is read only.\rreadWrite - The caching mode for the disk is read and write.\r\rThe default value for caching is none. For information about the caching\roptions see:\rhttps://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.\rPossible values include: 'none', 'readOnly', 'readWrite'"
           optional: true
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.nodeAgentSKUId
@@ -5484,7 +5484,7 @@ items:
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.dataDisks
           type:
             - array
-          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated. Each node\rgets its own disk (the disk is not a file share). Existing disks cannot be\rattached, each attached disk is empty. When the node is removed from the\rpool, the disk and all data associated with it is also deleted. The disk is\rnot formatted after being attached, it must be formatted before use - for\rmore information see\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux\rand\rhttps://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine."
+          description: "The configuration for data disks attached to the comptue nodes in the pool.\rThis property must be specified if the compute nodes in the pool need to\rhave empty data disks attached to them. This cannot be updated."
           optional: true
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.virtualMachineConfiguration.licenseType
@@ -5526,7 +5526,7 @@ items:
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.taskSchedulingPolicy.nodeFillType
           type:
             - string
-          description: "How tasks are distributed across compute nodes in a pool. Possible values\rinclude: 'spread', 'pack'"
+          description: "How tasks are distributed across compute nodes in a pool. Values are:\r\rpack - As many tasks as possible (maxTasksPerNode) should be assigned to\reach node in the pool before any tasks are assigned to the next node in the\rpool.\rspread - Tasks should be assigned evenly across all nodes in the pool.\rPossible values include: 'spread', 'pack'"
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.resizeTimeout
           type:
@@ -5676,13 +5676,13 @@ items:
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.scope
           type:
             - string
-          description: "The scope for the auto user The default value is task. Possible values\rinclude: 'task', 'pool'"
+          description: "The scope for the auto user Values are:\r\rpool - specifies that the task runs as the common auto user account which is\rcreated on every node in a pool.\rtask - specifies that the service should create a new user for the task.\rThe default value is task. Possible values include: 'task', 'pool'"
           optional: true
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.userIdentity.autoUser.elevationLevel
           type:
             - string
-          description: "The elevation level of the auto user. The default value is nonAdmin.\rPossible values include: 'nonAdmin', 'admin'"
+          description: "The elevation level of the auto user. nonAdmin - The auto user is a standard\ruser without elevated access. admin - The auto user is a user with elevated\raccess and operates with full Administrator permissions. The default value\ris nonAdmin. Possible values include: 'nonAdmin', 'admin'"
           optional: true
         - id: >-
             cloudJobSchedule.jobSpecification.poolInfo.autoPoolSpecification.pool.startTask.maxTaskRetryCount

@@ -9,9 +9,9 @@ items:
       id: azure-arm-compute.VirtualMachineScaleSets
       path: >-
         lib\services\computeManagement2\lib\operations\virtualMachineScaleSets.js
-      startLine: 5895
+      startLine: 5156
       remote:
-        branch: master
+        branch: jsdoc
         path: >-
           lib\services\computeManagement2\lib\operations\virtualMachineScaleSets.js
         repo: 'https://github.com/Azure/azure-sdk-for-node.git'
@@ -55,12 +55,6 @@ items:
       - 'azure-arm-compute.VirtualMachineScaleSets#startWithHttpOperationResponse'
       - 'azure-arm-compute.VirtualMachineScaleSets#start'
       - >-
-        azure-arm-compute.VirtualMachineScaleSets#redeployWithHttpOperationResponse
-      - 'azure-arm-compute.VirtualMachineScaleSets#redeploy'
-      - >-
-        azure-arm-compute.VirtualMachineScaleSets#performMaintenanceWithHttpOperationResponse
-      - 'azure-arm-compute.VirtualMachineScaleSets#performMaintenance'
-      - >-
         azure-arm-compute.VirtualMachineScaleSets#updateInstancesWithHttpOperationResponse
       - 'azure-arm-compute.VirtualMachineScaleSets#updateInstances'
       - >-
@@ -69,10 +63,6 @@ items:
       - >-
         azure-arm-compute.VirtualMachineScaleSets#reimageAllWithHttpOperationResponse
       - 'azure-arm-compute.VirtualMachineScaleSets#reimageAll'
-      - >-
-        azure-arm-compute.VirtualMachineScaleSets#forceRecoveryServiceFabricPlatformUpdateDomainWalkWithHttpOperationResponse
-      - >-
-        azure-arm-compute.VirtualMachineScaleSets#forceRecoveryServiceFabricPlatformUpdateDomainWalk
       - >-
         azure-arm-compute.VirtualMachineScaleSets#beginCreateOrUpdateWithHttpOperationResponse
       - 'azure-arm-compute.VirtualMachineScaleSets#beginCreateOrUpdate'
@@ -97,12 +87,6 @@ items:
       - >-
         azure-arm-compute.VirtualMachineScaleSets#beginStartWithHttpOperationResponse
       - 'azure-arm-compute.VirtualMachineScaleSets#beginStart'
-      - >-
-        azure-arm-compute.VirtualMachineScaleSets#beginRedeployWithHttpOperationResponse
-      - 'azure-arm-compute.VirtualMachineScaleSets#beginRedeploy'
-      - >-
-        azure-arm-compute.VirtualMachineScaleSets#beginPerformMaintenanceWithHttpOperationResponse
-      - 'azure-arm-compute.VirtualMachineScaleSets#beginPerformMaintenance'
       - >-
         azure-arm-compute.VirtualMachineScaleSets#beginUpdateInstancesWithHttpOperationResponse
       - 'azure-arm-compute.VirtualMachineScaleSets#beginUpdateInstances'
@@ -422,12 +406,6 @@ items:
             - string
           description: "Specifies\rthe caching requirements. <br><br> Possible values are: <br><br> **None**\r<br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for\rStandard storage. ReadOnly for Premium storage**. Possible values include:\r'None', 'ReadOnly', 'ReadWrite'"
           optional: true
-        - id: >-
-            parameters.virtualMachineProfile.storageProfile.osDisk.writeAcceleratorEnabled
-          type:
-            - boolean
-          description: "Specifies whether writeAccelerator should be enabled or disabled on the\rdisk."
-          optional: true
         - id: parameters.virtualMachineProfile.storageProfile.osDisk.createOption
           type:
             - string
@@ -526,11 +504,6 @@ items:
             - string
           description: "Specifies\rthat the image or disk that is being used was licensed on-premises. This\relement is only used for images that contain the Windows Server operating\rsystem. <br><br> Possible values are: <br><br> Windows_Client <br><br>\rWindows_Server <br><br> If this element is included in a request for an\rupdate, the value must match the initial value. This value cannot be\rupdated. <br><br> For more information, see [Azure Hybrid Use Benefit for\rWindows\rServer](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)\r<br><br> Minimum api-version: 2015-06-15"
           optional: true
-        - id: parameters.virtualMachineProfile.priority
-          type:
-            - string
-          description: "Specifies the\rpriority for the virtual machines in the scale set. <br><br>Minimum\rapi-version: 2017-10-30-preview. Possible values include: 'Regular', 'Low'"
-          optional: true
         - id: parameters.overprovision
           type:
             - boolean
@@ -541,16 +514,6 @@ items:
             - boolean
           description: "When true this limits the\rscale set to a single placement group, of max size 100 virtual machines."
           optional: true
-        - id: parameters.zoneBalance
-          type:
-            - boolean
-          description: "Whether to force stictly even\rVirtual Machine distribution cross x-zones in case there is zone outage."
-          optional: true
-        - id: parameters.platformFaultDomainCount
-          type:
-            - number
-          description: "Fault Domain count for\reach placement group."
-          optional: true
         - id: parameters.identity
           type:
             - object
@@ -559,12 +522,7 @@ items:
         - id: parameters.identity.type
           type:
             - string
-          description: "The type of identity used for the\rvirtual machine scale set. The type 'SystemAssigned, UserAssigned' includes\rboth an implicitly created identity and a set of user assigned identities.\rThe type 'None' will remove any identities from the virtual machine scale\rset. Possible values include: 'SystemAssigned', 'UserAssigned',\r'SystemAssigned, UserAssigned', 'None'"
-          optional: true
-        - id: parameters.identity.identityIds
-          type:
-            - array
-          description: "The list of user identities\rassociated with the virtual machine scale set. The user identity references\rwill be ARM resource ids in the form:\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'."
+          description: "The type of identity used for the\rvirtual machine scale set. Currently, the only supported type is\r'SystemAssigned', which implicitly creates an identity. Possible values\rinclude: 'SystemAssigned'"
           optional: true
         - id: parameters.zones
           type:
@@ -876,12 +834,6 @@ items:
             - string
           description: "Specifies\rthe caching requirements. <br><br> Possible values are: <br><br> **None**\r<br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for\rStandard storage. ReadOnly for Premium storage**. Possible values include:\r'None', 'ReadOnly', 'ReadWrite'"
           optional: true
-        - id: >-
-            parameters.virtualMachineProfile.storageProfile.osDisk.writeAcceleratorEnabled
-          type:
-            - boolean
-          description: "Specifies whether writeAccelerator should be enabled or disabled on the\rdisk."
-          optional: true
         - id: parameters.virtualMachineProfile.storageProfile.osDisk.createOption
           type:
             - string
@@ -980,11 +932,6 @@ items:
             - string
           description: "Specifies\rthat the image or disk that is being used was licensed on-premises. This\relement is only used for images that contain the Windows Server operating\rsystem. <br><br> Possible values are: <br><br> Windows_Client <br><br>\rWindows_Server <br><br> If this element is included in a request for an\rupdate, the value must match the initial value. This value cannot be\rupdated. <br><br> For more information, see [Azure Hybrid Use Benefit for\rWindows\rServer](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)\r<br><br> Minimum api-version: 2015-06-15"
           optional: true
-        - id: parameters.virtualMachineProfile.priority
-          type:
-            - string
-          description: "Specifies the\rpriority for the virtual machines in the scale set. <br><br>Minimum\rapi-version: 2017-10-30-preview. Possible values include: 'Regular', 'Low'"
-          optional: true
         - id: parameters.overprovision
           type:
             - boolean
@@ -995,16 +942,6 @@ items:
             - boolean
           description: "When true this limits the\rscale set to a single placement group, of max size 100 virtual machines."
           optional: true
-        - id: parameters.zoneBalance
-          type:
-            - boolean
-          description: "Whether to force stictly even\rVirtual Machine distribution cross x-zones in case there is zone outage."
-          optional: true
-        - id: parameters.platformFaultDomainCount
-          type:
-            - number
-          description: "Fault Domain count for\reach placement group."
-          optional: true
         - id: parameters.identity
           type:
             - object
@@ -1013,12 +950,7 @@ items:
         - id: parameters.identity.type
           type:
             - string
-          description: "The type of identity used for the\rvirtual machine scale set. The type 'SystemAssigned, UserAssigned' includes\rboth an implicitly created identity and a set of user assigned identities.\rThe type 'None' will remove any identities from the virtual machine scale\rset. Possible values include: 'SystemAssigned', 'UserAssigned',\r'SystemAssigned, UserAssigned', 'None'"
-          optional: true
-        - id: parameters.identity.identityIds
-          type:
-            - array
-          description: "The list of user identities\rassociated with the virtual machine scale set. The user identity references\rwill be ARM resource ids in the form:\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'."
+          description: "The type of identity used for the\rvirtual machine scale set. Currently, the only supported type is\r'SystemAssigned', which implicitly creates an identity. Possible values\rinclude: 'SystemAssigned'"
           optional: true
         - id: parameters.zones
           type:
@@ -1320,12 +1252,6 @@ items:
             - string
           description: "The caching\rtype. Possible values include: 'None', 'ReadOnly', 'ReadWrite'"
           optional: true
-        - id: >-
-            parameters.virtualMachineProfile.storageProfile.osDisk.writeAcceleratorEnabled
-          type:
-            - boolean
-          description: "Specifies whether writeAccelerator should be enabled or disabled on the\rdisk."
-          optional: true
         - id: parameters.virtualMachineProfile.storageProfile.osDisk.image
           type:
             - object
@@ -1423,12 +1349,7 @@ items:
         - id: parameters.identity.type
           type:
             - string
-          description: "The type of identity used for the\rvirtual machine scale set. The type 'SystemAssigned, UserAssigned' includes\rboth an implicitly created identity and a set of user assigned identities.\rThe type 'None' will remove any identities from the virtual machine scale\rset. Possible values include: 'SystemAssigned', 'UserAssigned',\r'SystemAssigned, UserAssigned', 'None'"
-          optional: true
-        - id: parameters.identity.identityIds
-          type:
-            - array
-          description: "The list of user identities\rassociated with the virtual machine scale set. The user identity references\rwill be ARM resource ids in the form:\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'."
+          description: "The type of identity used for the\rvirtual machine scale set. Currently, the only supported type is\r'SystemAssigned', which implicitly creates an identity. Possible values\rinclude: 'SystemAssigned'"
           optional: true
         - id: parameters.tags
           type:
@@ -1711,12 +1632,6 @@ items:
             - string
           description: "The caching\rtype. Possible values include: 'None', 'ReadOnly', 'ReadWrite'"
           optional: true
-        - id: >-
-            parameters.virtualMachineProfile.storageProfile.osDisk.writeAcceleratorEnabled
-          type:
-            - boolean
-          description: "Specifies whether writeAccelerator should be enabled or disabled on the\rdisk."
-          optional: true
         - id: parameters.virtualMachineProfile.storageProfile.osDisk.image
           type:
             - object
@@ -1814,12 +1729,7 @@ items:
         - id: parameters.identity.type
           type:
             - string
-          description: "The type of identity used for the\rvirtual machine scale set. The type 'SystemAssigned, UserAssigned' includes\rboth an implicitly created identity and a set of user assigned identities.\rThe type 'None' will remove any identities from the virtual machine scale\rset. Possible values include: 'SystemAssigned', 'UserAssigned',\r'SystemAssigned, UserAssigned', 'None'"
-          optional: true
-        - id: parameters.identity.identityIds
-          type:
-            - array
-          description: "The list of user identities\rassociated with the virtual machine scale set. The user identity references\rwill be ARM resource ids in the form:\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'."
+          description: "The type of identity used for the\rvirtual machine scale set. Currently, the only supported type is\r'SystemAssigned', which implicitly creates an identity. Possible values\rinclude: 'SystemAssigned'"
           optional: true
         - id: parameters.tags
           type:
@@ -2505,7 +2415,7 @@ items:
     id: 'azure-arm-compute.VirtualMachineScaleSets#listAllWithHttpOperationResponse'
     parent: azure-arm-compute.VirtualMachineScaleSets
     name: listAllWithHttpOperationResponse(options)
-    summary: "Gets a list of all VM Scale Sets in the subscription, regardless of the\rassociated resource group. Use nextLink property in the response to get the\rnext page of VM Scale Sets. Do this till nextLink is null to fetch all the\rVM Scale Sets."
+    summary: "Gets a list of all VM Scale Sets in the subscription, regardless of the\rassociated resource group. Use nextLink property in the response to get the\rnext page of VM Scale Sets. Do this till nextLink is not null to fetch all\rthe VM Scale Sets."
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSets.listAllWithHttpOperationResponse(options)
     tags:
@@ -2545,7 +2455,7 @@ items:
     id: 'azure-arm-compute.VirtualMachineScaleSets#listAll'
     parent: azure-arm-compute.VirtualMachineScaleSets
     name: 'listAll(options, optionalCallback)'
-    summary: "Gets a list of all VM Scale Sets in the subscription, regardless of the\rassociated resource group. Use nextLink property in the response to get the\rnext page of VM Scale Sets. Do this till nextLink is null to fetch all the\rVM Scale Sets."
+    summary: "Gets a list of all VM Scale Sets in the subscription, regardless of the\rassociated resource group. Use nextLink property in the response to get the\rnext page of VM Scale Sets. Do this till nextLink is not null to fetch all\rthe VM Scale Sets."
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSets.listAll(options,
       optionalCallback)
@@ -3049,244 +2959,6 @@ items:
     langs:
       - js
   - uid: >-
-      azure-arm-compute.VirtualMachineScaleSets#redeployWithHttpOperationResponse
-    id: >-
-      azure-arm-compute.VirtualMachineScaleSets#redeployWithHttpOperationResponse
-    parent: azure-arm-compute.VirtualMachineScaleSets
-    name: >-
-      redeployWithHttpOperationResponse(resourceGroupName, vmScaleSetName,
-      options)
-    summary: Redeploy one or more virtual machines in a VM scale set.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSets.redeployWithHttpOperationResponse(resourceGroupName,
-      vmScaleSetName, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<OperationStatusResponse>} - The deserialized
-          result object.
-        value: >-
-          {HttpOperationResponse<OperationStatusResponse>} - The deserialized
-          result object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the VM scale set.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.instanceIds
-          type:
-            - array
-          description: "The virtual machine scale set instance\rids. Omitting the virtual machine scale set instance ids will result in the\roperation being performed on all virtual machines in the virtual machine\rscale set."
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function redeployWithHttpOperationResponse(resourceGroupName,
-        vmScaleSetName, options)
-    langs:
-      - js
-  - uid: 'azure-arm-compute.VirtualMachineScaleSets#redeploy'
-    id: 'azure-arm-compute.VirtualMachineScaleSets#redeploy'
-    parent: azure-arm-compute.VirtualMachineScaleSets
-    name: 'redeploy(resourceGroupName, vmScaleSetName, options, optionalCallback)'
-    summary: Redeploy one or more virtual machines in a VM scale set.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSets.redeploy(resourceGroupName,
-      vmScaleSetName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{OperationStatusResponse} - The deserialized result object.'
-        value: '{OperationStatusResponse} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link OperationStatusResponse} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link OperationStatusResponse} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the VM scale set.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.instanceIds
-          type:
-            - array
-          description: "The virtual machine scale set instance\rids. Omitting the virtual machine scale set instance ids will result in the\roperation being performed on all virtual machines in the virtual machine\rscale set."
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function redeploy(resourceGroupName, vmScaleSetName, options,
-        optionalCallback)
-    langs:
-      - js
-  - uid: >-
-      azure-arm-compute.VirtualMachineScaleSets#performMaintenanceWithHttpOperationResponse
-    id: >-
-      azure-arm-compute.VirtualMachineScaleSets#performMaintenanceWithHttpOperationResponse
-    parent: azure-arm-compute.VirtualMachineScaleSets
-    name: >-
-      performMaintenanceWithHttpOperationResponse(resourceGroupName,
-      vmScaleSetName, options)
-    summary: Perform maintenance on one or more virtual machines in a VM scale set.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSets.performMaintenanceWithHttpOperationResponse(resourceGroupName,
-      vmScaleSetName, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<OperationStatusResponse>} - The deserialized
-          result object.
-        value: >-
-          {HttpOperationResponse<OperationStatusResponse>} - The deserialized
-          result object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the VM scale set.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.instanceIds
-          type:
-            - array
-          description: "The virtual machine scale set instance\rids. Omitting the virtual machine scale set instance ids will result in the\roperation being performed on all virtual machines in the virtual machine\rscale set."
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function performMaintenanceWithHttpOperationResponse(resourceGroupName,
-        vmScaleSetName, options)
-    langs:
-      - js
-  - uid: 'azure-arm-compute.VirtualMachineScaleSets#performMaintenance'
-    id: 'azure-arm-compute.VirtualMachineScaleSets#performMaintenance'
-    parent: azure-arm-compute.VirtualMachineScaleSets
-    name: >-
-      performMaintenance(resourceGroupName, vmScaleSetName, options,
-      optionalCallback)
-    summary: Perform maintenance on one or more virtual machines in a VM scale set.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSets.performMaintenance(resourceGroupName,
-      vmScaleSetName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{OperationStatusResponse} - The deserialized result object.'
-        value: '{OperationStatusResponse} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link OperationStatusResponse} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link OperationStatusResponse} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the VM scale set.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.instanceIds
-          type:
-            - array
-          description: "The virtual machine scale set instance\rids. Omitting the virtual machine scale set instance ids will result in the\roperation being performed on all virtual machines in the virtual machine\rscale set."
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function performMaintenance(resourceGroupName, vmScaleSetName, options,
-        optionalCallback)
-    langs:
-      - js
-  - uid: >-
       azure-arm-compute.VirtualMachineScaleSets#updateInstancesWithHttpOperationResponse
     id: >-
       azure-arm-compute.VirtualMachineScaleSets#updateInstancesWithHttpOperationResponse
@@ -3639,128 +3311,6 @@ items:
     langs:
       - js
   - uid: >-
-      azure-arm-compute.VirtualMachineScaleSets#forceRecoveryServiceFabricPlatformUpdateDomainWalkWithHttpOperationResponse
-    id: >-
-      azure-arm-compute.VirtualMachineScaleSets#forceRecoveryServiceFabricPlatformUpdateDomainWalkWithHttpOperationResponse
-    parent: azure-arm-compute.VirtualMachineScaleSets
-    name: >-
-      forceRecoveryServiceFabricPlatformUpdateDomainWalkWithHttpOperationResponse(resourceGroupName,
-      vmScaleSetName, platformUpdateDomain, options)
-    summary: "Manual platform update domain walk to update virtual machines in a service\rfabric virtual machine scale set."
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSets.forceRecoveryServiceFabricPlatformUpdateDomainWalkWithHttpOperationResponse(resourceGroupName,
-      vmScaleSetName, platformUpdateDomain, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<RecoveryWalkResponse>} - The deserialized
-          result object.
-        value: >-
-          {HttpOperationResponse<RecoveryWalkResponse>} - The deserialized
-          result object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the VM scale set.
-        - id: platformUpdateDomain
-          type:
-            - number
-          description: "The platform update domain for which a\rmanual recovery walk is requested"
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function
-        forceRecoveryServiceFabricPlatformUpdateDomainWalkWithHttpOperationResponse(resourceGroupName,
-        vmScaleSetName, platformUpdateDomain, options)
-    langs:
-      - js
-  - uid: >-
-      azure-arm-compute.VirtualMachineScaleSets#forceRecoveryServiceFabricPlatformUpdateDomainWalk
-    id: >-
-      azure-arm-compute.VirtualMachineScaleSets#forceRecoveryServiceFabricPlatformUpdateDomainWalk
-    parent: azure-arm-compute.VirtualMachineScaleSets
-    name: >-
-      forceRecoveryServiceFabricPlatformUpdateDomainWalk(resourceGroupName,
-      vmScaleSetName, platformUpdateDomain, options, optionalCallback)
-    summary: "Manual platform update domain walk to update virtual machines in a service\rfabric virtual machine scale set."
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSets.forceRecoveryServiceFabricPlatformUpdateDomainWalk(resourceGroupName,
-      vmScaleSetName, platformUpdateDomain, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{RecoveryWalkResponse} - The deserialized result object.'
-        value: '{RecoveryWalkResponse} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link RecoveryWalkResponse} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link RecoveryWalkResponse} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the VM scale set.
-        - id: platformUpdateDomain
-          type:
-            - number
-          description: "The platform update domain for which a\rmanual recovery walk is requested"
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function
-        forceRecoveryServiceFabricPlatformUpdateDomainWalk(resourceGroupName,
-        vmScaleSetName, platformUpdateDomain, options, optionalCallback)
-    langs:
-      - js
-  - uid: >-
       azure-arm-compute.VirtualMachineScaleSets#beginCreateOrUpdateWithHttpOperationResponse
     id: >-
       azure-arm-compute.VirtualMachineScaleSets#beginCreateOrUpdateWithHttpOperationResponse
@@ -4043,12 +3593,6 @@ items:
             - string
           description: "Specifies\rthe caching requirements. <br><br> Possible values are: <br><br> **None**\r<br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for\rStandard storage. ReadOnly for Premium storage**. Possible values include:\r'None', 'ReadOnly', 'ReadWrite'"
           optional: true
-        - id: >-
-            parameters.virtualMachineProfile.storageProfile.osDisk.writeAcceleratorEnabled
-          type:
-            - boolean
-          description: "Specifies whether writeAccelerator should be enabled or disabled on the\rdisk."
-          optional: true
         - id: parameters.virtualMachineProfile.storageProfile.osDisk.createOption
           type:
             - string
@@ -4147,11 +3691,6 @@ items:
             - string
           description: "Specifies\rthat the image or disk that is being used was licensed on-premises. This\relement is only used for images that contain the Windows Server operating\rsystem. <br><br> Possible values are: <br><br> Windows_Client <br><br>\rWindows_Server <br><br> If this element is included in a request for an\rupdate, the value must match the initial value. This value cannot be\rupdated. <br><br> For more information, see [Azure Hybrid Use Benefit for\rWindows\rServer](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)\r<br><br> Minimum api-version: 2015-06-15"
           optional: true
-        - id: parameters.virtualMachineProfile.priority
-          type:
-            - string
-          description: "Specifies the\rpriority for the virtual machines in the scale set. <br><br>Minimum\rapi-version: 2017-10-30-preview. Possible values include: 'Regular', 'Low'"
-          optional: true
         - id: parameters.overprovision
           type:
             - boolean
@@ -4162,16 +3701,6 @@ items:
             - boolean
           description: "When true this limits the\rscale set to a single placement group, of max size 100 virtual machines."
           optional: true
-        - id: parameters.zoneBalance
-          type:
-            - boolean
-          description: "Whether to force stictly even\rVirtual Machine distribution cross x-zones in case there is zone outage."
-          optional: true
-        - id: parameters.platformFaultDomainCount
-          type:
-            - number
-          description: "Fault Domain count for\reach placement group."
-          optional: true
         - id: parameters.identity
           type:
             - object
@@ -4180,12 +3709,7 @@ items:
         - id: parameters.identity.type
           type:
             - string
-          description: "The type of identity used for the\rvirtual machine scale set. The type 'SystemAssigned, UserAssigned' includes\rboth an implicitly created identity and a set of user assigned identities.\rThe type 'None' will remove any identities from the virtual machine scale\rset. Possible values include: 'SystemAssigned', 'UserAssigned',\r'SystemAssigned, UserAssigned', 'None'"
-          optional: true
-        - id: parameters.identity.identityIds
-          type:
-            - array
-          description: "The list of user identities\rassociated with the virtual machine scale set. The user identity references\rwill be ARM resource ids in the form:\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'."
+          description: "The type of identity used for the\rvirtual machine scale set. Currently, the only supported type is\r'SystemAssigned', which implicitly creates an identity. Possible values\rinclude: 'SystemAssigned'"
           optional: true
         - id: parameters.zones
           type:
@@ -4497,12 +4021,6 @@ items:
             - string
           description: "Specifies\rthe caching requirements. <br><br> Possible values are: <br><br> **None**\r<br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for\rStandard storage. ReadOnly for Premium storage**. Possible values include:\r'None', 'ReadOnly', 'ReadWrite'"
           optional: true
-        - id: >-
-            parameters.virtualMachineProfile.storageProfile.osDisk.writeAcceleratorEnabled
-          type:
-            - boolean
-          description: "Specifies whether writeAccelerator should be enabled or disabled on the\rdisk."
-          optional: true
         - id: parameters.virtualMachineProfile.storageProfile.osDisk.createOption
           type:
             - string
@@ -4601,11 +4119,6 @@ items:
             - string
           description: "Specifies\rthat the image or disk that is being used was licensed on-premises. This\relement is only used for images that contain the Windows Server operating\rsystem. <br><br> Possible values are: <br><br> Windows_Client <br><br>\rWindows_Server <br><br> If this element is included in a request for an\rupdate, the value must match the initial value. This value cannot be\rupdated. <br><br> For more information, see [Azure Hybrid Use Benefit for\rWindows\rServer](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)\r<br><br> Minimum api-version: 2015-06-15"
           optional: true
-        - id: parameters.virtualMachineProfile.priority
-          type:
-            - string
-          description: "Specifies the\rpriority for the virtual machines in the scale set. <br><br>Minimum\rapi-version: 2017-10-30-preview. Possible values include: 'Regular', 'Low'"
-          optional: true
         - id: parameters.overprovision
           type:
             - boolean
@@ -4616,16 +4129,6 @@ items:
             - boolean
           description: "When true this limits the\rscale set to a single placement group, of max size 100 virtual machines."
           optional: true
-        - id: parameters.zoneBalance
-          type:
-            - boolean
-          description: "Whether to force stictly even\rVirtual Machine distribution cross x-zones in case there is zone outage."
-          optional: true
-        - id: parameters.platformFaultDomainCount
-          type:
-            - number
-          description: "Fault Domain count for\reach placement group."
-          optional: true
         - id: parameters.identity
           type:
             - object
@@ -4634,12 +4137,7 @@ items:
         - id: parameters.identity.type
           type:
             - string
-          description: "The type of identity used for the\rvirtual machine scale set. The type 'SystemAssigned, UserAssigned' includes\rboth an implicitly created identity and a set of user assigned identities.\rThe type 'None' will remove any identities from the virtual machine scale\rset. Possible values include: 'SystemAssigned', 'UserAssigned',\r'SystemAssigned, UserAssigned', 'None'"
-          optional: true
-        - id: parameters.identity.identityIds
-          type:
-            - array
-          description: "The list of user identities\rassociated with the virtual machine scale set. The user identity references\rwill be ARM resource ids in the form:\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'."
+          description: "The type of identity used for the\rvirtual machine scale set. Currently, the only supported type is\r'SystemAssigned', which implicitly creates an identity. Possible values\rinclude: 'SystemAssigned'"
           optional: true
         - id: parameters.zones
           type:
@@ -4943,12 +4441,6 @@ items:
             - string
           description: "The caching\rtype. Possible values include: 'None', 'ReadOnly', 'ReadWrite'"
           optional: true
-        - id: >-
-            parameters.virtualMachineProfile.storageProfile.osDisk.writeAcceleratorEnabled
-          type:
-            - boolean
-          description: "Specifies whether writeAccelerator should be enabled or disabled on the\rdisk."
-          optional: true
         - id: parameters.virtualMachineProfile.storageProfile.osDisk.image
           type:
             - object
@@ -5046,12 +4538,7 @@ items:
         - id: parameters.identity.type
           type:
             - string
-          description: "The type of identity used for the\rvirtual machine scale set. The type 'SystemAssigned, UserAssigned' includes\rboth an implicitly created identity and a set of user assigned identities.\rThe type 'None' will remove any identities from the virtual machine scale\rset. Possible values include: 'SystemAssigned', 'UserAssigned',\r'SystemAssigned, UserAssigned', 'None'"
-          optional: true
-        - id: parameters.identity.identityIds
-          type:
-            - array
-          description: "The list of user identities\rassociated with the virtual machine scale set. The user identity references\rwill be ARM resource ids in the form:\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'."
+          description: "The type of identity used for the\rvirtual machine scale set. Currently, the only supported type is\r'SystemAssigned', which implicitly creates an identity. Possible values\rinclude: 'SystemAssigned'"
           optional: true
         - id: parameters.tags
           type:
@@ -5334,12 +4821,6 @@ items:
             - string
           description: "The caching\rtype. Possible values include: 'None', 'ReadOnly', 'ReadWrite'"
           optional: true
-        - id: >-
-            parameters.virtualMachineProfile.storageProfile.osDisk.writeAcceleratorEnabled
-          type:
-            - boolean
-          description: "Specifies whether writeAccelerator should be enabled or disabled on the\rdisk."
-          optional: true
         - id: parameters.virtualMachineProfile.storageProfile.osDisk.image
           type:
             - object
@@ -5437,12 +4918,7 @@ items:
         - id: parameters.identity.type
           type:
             - string
-          description: "The type of identity used for the\rvirtual machine scale set. The type 'SystemAssigned, UserAssigned' includes\rboth an implicitly created identity and a set of user assigned identities.\rThe type 'None' will remove any identities from the virtual machine scale\rset. Possible values include: 'SystemAssigned', 'UserAssigned',\r'SystemAssigned, UserAssigned', 'None'"
-          optional: true
-        - id: parameters.identity.identityIds
-          type:
-            - array
-          description: "The list of user identities\rassociated with the virtual machine scale set. The user identity references\rwill be ARM resource ids in the form:\r'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/identities/{identityName}'."
+          description: "The type of identity used for the\rvirtual machine scale set. Currently, the only supported type is\r'SystemAssigned', which implicitly creates an identity. Possible values\rinclude: 'SystemAssigned'"
           optional: true
         - id: parameters.tags
           type:
@@ -6180,247 +5656,6 @@ items:
     langs:
       - js
   - uid: >-
-      azure-arm-compute.VirtualMachineScaleSets#beginRedeployWithHttpOperationResponse
-    id: >-
-      azure-arm-compute.VirtualMachineScaleSets#beginRedeployWithHttpOperationResponse
-    parent: azure-arm-compute.VirtualMachineScaleSets
-    name: >-
-      beginRedeployWithHttpOperationResponse(resourceGroupName, vmScaleSetName,
-      options)
-    summary: Redeploy one or more virtual machines in a VM scale set.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSets.beginRedeployWithHttpOperationResponse(resourceGroupName,
-      vmScaleSetName, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<OperationStatusResponse>} - The deserialized
-          result object.
-        value: >-
-          {HttpOperationResponse<OperationStatusResponse>} - The deserialized
-          result object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the VM scale set.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.instanceIds
-          type:
-            - array
-          description: "The virtual machine scale set instance\rids. Omitting the virtual machine scale set instance ids will result in the\roperation being performed on all virtual machines in the virtual machine\rscale set."
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function beginRedeployWithHttpOperationResponse(resourceGroupName,
-        vmScaleSetName, options)
-    langs:
-      - js
-  - uid: 'azure-arm-compute.VirtualMachineScaleSets#beginRedeploy'
-    id: 'azure-arm-compute.VirtualMachineScaleSets#beginRedeploy'
-    parent: azure-arm-compute.VirtualMachineScaleSets
-    name: >-
-      beginRedeploy(resourceGroupName, vmScaleSetName, options,
-      optionalCallback)
-    summary: Redeploy one or more virtual machines in a VM scale set.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSets.beginRedeploy(resourceGroupName,
-      vmScaleSetName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{OperationStatusResponse} - The deserialized result object.'
-        value: '{OperationStatusResponse} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link OperationStatusResponse} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link OperationStatusResponse} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the VM scale set.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.instanceIds
-          type:
-            - array
-          description: "The virtual machine scale set instance\rids. Omitting the virtual machine scale set instance ids will result in the\roperation being performed on all virtual machines in the virtual machine\rscale set."
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function beginRedeploy(resourceGroupName, vmScaleSetName, options,
-        optionalCallback)
-    langs:
-      - js
-  - uid: >-
-      azure-arm-compute.VirtualMachineScaleSets#beginPerformMaintenanceWithHttpOperationResponse
-    id: >-
-      azure-arm-compute.VirtualMachineScaleSets#beginPerformMaintenanceWithHttpOperationResponse
-    parent: azure-arm-compute.VirtualMachineScaleSets
-    name: >-
-      beginPerformMaintenanceWithHttpOperationResponse(resourceGroupName,
-      vmScaleSetName, options)
-    summary: Perform maintenance on one or more virtual machines in a VM scale set.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSets.beginPerformMaintenanceWithHttpOperationResponse(resourceGroupName,
-      vmScaleSetName, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<OperationStatusResponse>} - The deserialized
-          result object.
-        value: >-
-          {HttpOperationResponse<OperationStatusResponse>} - The deserialized
-          result object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the VM scale set.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.instanceIds
-          type:
-            - array
-          description: "The virtual machine scale set instance\rids. Omitting the virtual machine scale set instance ids will result in the\roperation being performed on all virtual machines in the virtual machine\rscale set."
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function
-        beginPerformMaintenanceWithHttpOperationResponse(resourceGroupName,
-        vmScaleSetName, options)
-    langs:
-      - js
-  - uid: 'azure-arm-compute.VirtualMachineScaleSets#beginPerformMaintenance'
-    id: 'azure-arm-compute.VirtualMachineScaleSets#beginPerformMaintenance'
-    parent: azure-arm-compute.VirtualMachineScaleSets
-    name: >-
-      beginPerformMaintenance(resourceGroupName, vmScaleSetName, options,
-      optionalCallback)
-    summary: Perform maintenance on one or more virtual machines in a VM scale set.
-    fullName: >-
-      azure-arm-compute.VirtualMachineScaleSets.beginPerformMaintenance(resourceGroupName,
-      vmScaleSetName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{OperationStatusResponse} - The deserialized result object.'
-        value: '{OperationStatusResponse} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link OperationStatusResponse} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link OperationStatusResponse} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: vmScaleSetName
-          type:
-            - string
-          description: The name of the VM scale set.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.instanceIds
-          type:
-            - array
-          description: "The virtual machine scale set instance\rids. Omitting the virtual machine scale set instance ids will result in the\roperation being performed on all virtual machines in the virtual machine\rscale set."
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function beginPerformMaintenance(resourceGroupName, vmScaleSetName,
-        options, optionalCallback)
-    langs:
-      - js
-  - uid: >-
       azure-arm-compute.VirtualMachineScaleSets#beginUpdateInstancesWithHttpOperationResponse
     id: >-
       azure-arm-compute.VirtualMachineScaleSets#beginUpdateInstancesWithHttpOperationResponse
@@ -6877,7 +6112,7 @@ items:
       azure-arm-compute.VirtualMachineScaleSets#listAllNextWithHttpOperationResponse
     parent: azure-arm-compute.VirtualMachineScaleSets
     name: 'listAllNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: "Gets a list of all VM Scale Sets in the subscription, regardless of the\rassociated resource group. Use nextLink property in the response to get the\rnext page of VM Scale Sets. Do this till nextLink is null to fetch all the\rVM Scale Sets."
+    summary: "Gets a list of all VM Scale Sets in the subscription, regardless of the\rassociated resource group. Use nextLink property in the response to get the\rnext page of VM Scale Sets. Do this till nextLink is not null to fetch all\rthe VM Scale Sets."
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSets.listAllNextWithHttpOperationResponse(nextPageLink,
       options)
@@ -6922,7 +6157,7 @@ items:
     id: 'azure-arm-compute.VirtualMachineScaleSets#listAllNext'
     parent: azure-arm-compute.VirtualMachineScaleSets
     name: 'listAllNext(nextPageLink, options, optionalCallback)'
-    summary: "Gets a list of all VM Scale Sets in the subscription, regardless of the\rassociated resource group. Use nextLink property in the response to get the\rnext page of VM Scale Sets. Do this till nextLink is null to fetch all the\rVM Scale Sets."
+    summary: "Gets a list of all VM Scale Sets in the subscription, regardless of the\rassociated resource group. Use nextLink property in the response to get the\rnext page of VM Scale Sets. Do this till nextLink is not null to fetch all\rthe VM Scale Sets."
     fullName: >-
       azure-arm-compute.VirtualMachineScaleSets.listAllNext(nextPageLink,
       options, optionalCallback)

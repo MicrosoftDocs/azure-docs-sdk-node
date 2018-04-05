@@ -8,9 +8,9 @@ items:
     source:
       id: azure-arm-apimanagement.Policy
       path: lib\services\apimanagement\lib\operations\policy.js
-      startLine: 856
+      startLine: 707
       remote:
-        branch: master
+        branch: jsdoc
         path: lib\services\apimanagement\lib\operations\policy.js
         repo: 'https://github.com/Azure/azure-sdk-for-node.git'
     type: Class
@@ -18,8 +18,6 @@ items:
       - 'azure-arm-apimanagement.Policy.#ctor'
       - 'azure-arm-apimanagement.Policy#listByServiceWithHttpOperationResponse'
       - 'azure-arm-apimanagement.Policy#listByService'
-      - 'azure-arm-apimanagement.Policy#getEntityTagWithHttpOperationResponse'
-      - 'azure-arm-apimanagement.Policy#getEntityTag'
       - 'azure-arm-apimanagement.Policy#getWithHttpOperationResponse'
       - 'azure-arm-apimanagement.Policy#get'
       - 'azure-arm-apimanagement.Policy#createOrUpdateWithHttpOperationResponse'
@@ -157,108 +155,6 @@ items:
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function listByService(resourceGroupName, serviceName, options,
-        optionalCallback)
-    langs:
-      - js
-  - uid: 'azure-arm-apimanagement.Policy#getEntityTagWithHttpOperationResponse'
-    id: 'azure-arm-apimanagement.Policy#getEntityTagWithHttpOperationResponse'
-    parent: azure-arm-apimanagement.Policy
-    name: >-
-      getEntityTagWithHttpOperationResponse(resourceGroupName, serviceName,
-      options)
-    summary: "Gets the entity state (Etag) version of the Global policy definition in the\rApi Management service."
-    fullName: >-
-      azure-arm-apimanagement.Policy.getEntityTagWithHttpOperationResponse(resourceGroupName,
-      serviceName, options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<null>} - The deserialized result object.'
-        value: '{HttpOperationResponse<null>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: serviceName
-          type:
-            - string
-          description: The name of the API Management service.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: >-
-        function getEntityTagWithHttpOperationResponse(resourceGroupName,
-        serviceName, options)
-    langs:
-      - js
-  - uid: 'azure-arm-apimanagement.Policy#getEntityTag'
-    id: 'azure-arm-apimanagement.Policy#getEntityTag'
-    parent: azure-arm-apimanagement.Policy
-    name: 'getEntityTag(resourceGroupName, serviceName, options, optionalCallback)'
-    summary: "Gets the entity state (Etag) version of the Global policy definition in the\rApi Management service."
-    fullName: >-
-      azure-arm-apimanagement.Policy.getEntityTag(resourceGroupName,
-      serviceName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{null} - The deserialized result object.'
-        value: '{null} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
-    type: Function
-    syntax:
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: serviceName
-          type:
-            - string
-          description: The name of the API Management service.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: "Headers that will be added to the\rrequest"
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: >-
-        function getEntityTag(resourceGroupName, serviceName, options,
         optionalCallback)
     langs:
       - js
@@ -405,12 +301,7 @@ items:
         - id: parameters.policyContent
           type:
             - string
-          description: "Json escaped Xml Encoded contents\rof the Policy."
-        - id: parameters.contentFormat
-          type:
-            - string
-          description: "Format of the policyContent.\rPossible values include: 'xml', 'xml-link'"
-          optional: true
+          description: Xml Encoded contents of the Policy.
         - id: options
           type:
             - object
@@ -467,12 +358,7 @@ items:
         - id: parameters.policyContent
           type:
             - string
-          description: "Json escaped Xml Encoded contents\rof the Policy."
-        - id: parameters.contentFormat
-          type:
-            - string
-          description: "Format of the policyContent.\rPossible values include: 'xml', 'xml-link'"
-          optional: true
+          description: Xml Encoded contents of the Policy.
         - id: options
           type:
             - object
@@ -531,7 +417,7 @@ items:
         - id: ifMatch
           type:
             - string
-          description: "ETag of the Entity. ETag should match the current\rentity state from the header response of the GET request or it should be *\rfor unconditional update."
+          description: "The entity state (Etag) version of the policy to be\rdeleted. A value of \"*\" can be used for If-Match to unconditionally apply\rthe operation."
         - id: options
           type:
             - object
@@ -584,7 +470,7 @@ items:
         - id: ifMatch
           type:
             - string
-          description: "ETag of the Entity. ETag should match the current\rentity state from the header response of the GET request or it should be *\rfor unconditional update."
+          description: "The entity state (Etag) version of the policy to be\rdeleted. A value of \"*\" can be used for If-Match to unconditionally apply\rthe operation."
         - id: options
           type:
             - object

@@ -8,9 +8,9 @@ items:
     source:
       id: azure-arm-batchai.Clusters
       path: lib\services\batchaiManagement\lib\operations\clusters.js
-      startLine: 2181
+      startLine: 2077
       remote:
-        branch: master
+        branch: jsdoc
         path: lib\services\batchaiManagement\lib\operations\clusters.js
         repo: 'https://github.com/Azure/azure-sdk-for-node.git'
     type: Class
@@ -175,13 +175,7 @@ items:
         - id: parameters.virtualMachineConfiguration.imageReference.version
           type:
             - string
-          description: "Version of\rthe image."
-          optional: true
-        - id: >-
-            parameters.virtualMachineConfiguration.imageReference.virtualMachineImageId
-          type:
-            - string
-          description: "The ARM resource identifier of the virtual machine image. Computes nodes of\rthe cluster will be created using this custom image. This is of the form\r/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}\rThe virtual machine image must be in the same region and subscription as the\rcluster. For information about the firewall settings for the Batch node\ragent to communicate with the Batch service see\rhttps://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.\rNote, you need to provide publisher, offer and sku of the base OS image of\rwhich the custom image has been derived from."
+          description: "Version of\rthe image"
           optional: true
         - id: parameters.nodeSetup
           type:
@@ -200,26 +194,21 @@ items:
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
-          description: Collection of environment variables to be set for setup task.
-          optional: true
-        - id: parameters.nodeSetup.setupTask.secrets
-          type:
-            - array
-          description: "Collection of\renvironment variables with secret values to be set for setup task. Server\rwill never report values of these variables back."
+          description: Collection of environment settings.
           optional: true
         - id: parameters.nodeSetup.setupTask.runElevated
           type:
             - boolean
-          description: "Specifies\rwhether to run the setup task under root account. The default value is\rfalse. Note. Non-elevated tasks are run under an account added into sudoer\rlist and can perform sudo when required."
+          description: "Specifies\rwhether to run the setup task in elevated mode. The default value is false."
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
             - string
-          description: "The\rprefix of a path where the Batch AI service will upload the stdout and\rstderr of the setup task."
+          description: "The path\rwhere the Batch AI service will upload the stdout and stderror of setup\rtask."
         - id: parameters.nodeSetup.mountVolumes
           type:
             - object
-          description: "Information on shared\rvolumes to be used by jobs. Specified mount volumes will be available to all\rjobs executing on the cluster. The volumes will be mounted at location\rspecified by $AZ_BATCHAI_MOUNT_ROOT environment variable."
+          description: "Information on shared\rvolumes to be used by jobs."
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureFileShares
           type:
@@ -243,43 +232,6 @@ items:
             References to a list of file servers that are mounted to the cluster
             node.
           optional: true
-        - id: parameters.nodeSetup.performanceCountersSettings
-          type:
-            - object
-          description: "Specifies\rsettings for performance counters collecting and uploading."
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference
-          type:
-            - object
-          description: "Specifies Azure Application Insights information for performance counters\rreporting. If provided, Batch AI will upload node performance counters to\rthe corresponding Azure Application Insights account."
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.component
-          type:
-            - object
-          description: Specifies the Azure Application Insights component resource id.
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKey
-          type:
-            - string
-          description: Value of the Azure Application Insights instrumentation key.
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference
-          type:
-            - object
-          description: "Specifies a KeyVault Secret containing Azure Application Insights\rinstrumentation key. Specifies KeyVault Store and Secret which contains\rAzure Application Insights instrumentation key. One of instumentationKey or\rinstrumentationKeySecretReference must be specified."
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.sourceVault
-          type:
-            - object
-          description: Fully qualified resource Id for the Key Vault.
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.secretUrl
-          type:
-            - string
-          description: The URL referencing a secret in a Key Vault.
         - id: parameters.userAccountSettings
           type:
             - object
@@ -440,13 +392,7 @@ items:
         - id: parameters.virtualMachineConfiguration.imageReference.version
           type:
             - string
-          description: "Version of\rthe image."
-          optional: true
-        - id: >-
-            parameters.virtualMachineConfiguration.imageReference.virtualMachineImageId
-          type:
-            - string
-          description: "The ARM resource identifier of the virtual machine image. Computes nodes of\rthe cluster will be created using this custom image. This is of the form\r/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}\rThe virtual machine image must be in the same region and subscription as the\rcluster. For information about the firewall settings for the Batch node\ragent to communicate with the Batch service see\rhttps://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.\rNote, you need to provide publisher, offer and sku of the base OS image of\rwhich the custom image has been derived from."
+          description: "Version of\rthe image"
           optional: true
         - id: parameters.nodeSetup
           type:
@@ -465,26 +411,21 @@ items:
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
-          description: Collection of environment variables to be set for setup task.
-          optional: true
-        - id: parameters.nodeSetup.setupTask.secrets
-          type:
-            - array
-          description: "Collection of\renvironment variables with secret values to be set for setup task. Server\rwill never report values of these variables back."
+          description: Collection of environment settings.
           optional: true
         - id: parameters.nodeSetup.setupTask.runElevated
           type:
             - boolean
-          description: "Specifies\rwhether to run the setup task under root account. The default value is\rfalse. Note. Non-elevated tasks are run under an account added into sudoer\rlist and can perform sudo when required."
+          description: "Specifies\rwhether to run the setup task in elevated mode. The default value is false."
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
             - string
-          description: "The\rprefix of a path where the Batch AI service will upload the stdout and\rstderr of the setup task."
+          description: "The path\rwhere the Batch AI service will upload the stdout and stderror of setup\rtask."
         - id: parameters.nodeSetup.mountVolumes
           type:
             - object
-          description: "Information on shared\rvolumes to be used by jobs. Specified mount volumes will be available to all\rjobs executing on the cluster. The volumes will be mounted at location\rspecified by $AZ_BATCHAI_MOUNT_ROOT environment variable."
+          description: "Information on shared\rvolumes to be used by jobs."
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureFileShares
           type:
@@ -508,43 +449,6 @@ items:
             References to a list of file servers that are mounted to the cluster
             node.
           optional: true
-        - id: parameters.nodeSetup.performanceCountersSettings
-          type:
-            - object
-          description: "Specifies\rsettings for performance counters collecting and uploading."
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference
-          type:
-            - object
-          description: "Specifies Azure Application Insights information for performance counters\rreporting. If provided, Batch AI will upload node performance counters to\rthe corresponding Azure Application Insights account."
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.component
-          type:
-            - object
-          description: Specifies the Azure Application Insights component resource id.
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKey
-          type:
-            - string
-          description: Value of the Azure Application Insights instrumentation key.
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference
-          type:
-            - object
-          description: "Specifies a KeyVault Secret containing Azure Application Insights\rinstrumentation key. Specifies KeyVault Store and Secret which contains\rAzure Application Insights instrumentation key. One of instumentationKey or\rinstrumentationKeySecretReference must be specified."
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.sourceVault
-          type:
-            - object
-          description: Fully qualified resource Id for the Key Vault.
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.secretUrl
-          type:
-            - string
-          description: The URL referencing a secret in a Key Vault.
         - id: parameters.userAccountSettings
           type:
             - object
@@ -1474,13 +1378,7 @@ items:
         - id: parameters.virtualMachineConfiguration.imageReference.version
           type:
             - string
-          description: "Version of\rthe image."
-          optional: true
-        - id: >-
-            parameters.virtualMachineConfiguration.imageReference.virtualMachineImageId
-          type:
-            - string
-          description: "The ARM resource identifier of the virtual machine image. Computes nodes of\rthe cluster will be created using this custom image. This is of the form\r/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}\rThe virtual machine image must be in the same region and subscription as the\rcluster. For information about the firewall settings for the Batch node\ragent to communicate with the Batch service see\rhttps://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.\rNote, you need to provide publisher, offer and sku of the base OS image of\rwhich the custom image has been derived from."
+          description: "Version of\rthe image"
           optional: true
         - id: parameters.nodeSetup
           type:
@@ -1499,26 +1397,21 @@ items:
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
-          description: Collection of environment variables to be set for setup task.
-          optional: true
-        - id: parameters.nodeSetup.setupTask.secrets
-          type:
-            - array
-          description: "Collection of\renvironment variables with secret values to be set for setup task. Server\rwill never report values of these variables back."
+          description: Collection of environment settings.
           optional: true
         - id: parameters.nodeSetup.setupTask.runElevated
           type:
             - boolean
-          description: "Specifies\rwhether to run the setup task under root account. The default value is\rfalse. Note. Non-elevated tasks are run under an account added into sudoer\rlist and can perform sudo when required."
+          description: "Specifies\rwhether to run the setup task in elevated mode. The default value is false."
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
             - string
-          description: "The\rprefix of a path where the Batch AI service will upload the stdout and\rstderr of the setup task."
+          description: "The path\rwhere the Batch AI service will upload the stdout and stderror of setup\rtask."
         - id: parameters.nodeSetup.mountVolumes
           type:
             - object
-          description: "Information on shared\rvolumes to be used by jobs. Specified mount volumes will be available to all\rjobs executing on the cluster. The volumes will be mounted at location\rspecified by $AZ_BATCHAI_MOUNT_ROOT environment variable."
+          description: "Information on shared\rvolumes to be used by jobs."
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureFileShares
           type:
@@ -1542,43 +1435,6 @@ items:
             References to a list of file servers that are mounted to the cluster
             node.
           optional: true
-        - id: parameters.nodeSetup.performanceCountersSettings
-          type:
-            - object
-          description: "Specifies\rsettings for performance counters collecting and uploading."
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference
-          type:
-            - object
-          description: "Specifies Azure Application Insights information for performance counters\rreporting. If provided, Batch AI will upload node performance counters to\rthe corresponding Azure Application Insights account."
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.component
-          type:
-            - object
-          description: Specifies the Azure Application Insights component resource id.
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKey
-          type:
-            - string
-          description: Value of the Azure Application Insights instrumentation key.
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference
-          type:
-            - object
-          description: "Specifies a KeyVault Secret containing Azure Application Insights\rinstrumentation key. Specifies KeyVault Store and Secret which contains\rAzure Application Insights instrumentation key. One of instumentationKey or\rinstrumentationKeySecretReference must be specified."
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.sourceVault
-          type:
-            - object
-          description: Fully qualified resource Id for the Key Vault.
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.secretUrl
-          type:
-            - string
-          description: The URL referencing a secret in a Key Vault.
         - id: parameters.userAccountSettings
           type:
             - object
@@ -1739,13 +1595,7 @@ items:
         - id: parameters.virtualMachineConfiguration.imageReference.version
           type:
             - string
-          description: "Version of\rthe image."
-          optional: true
-        - id: >-
-            parameters.virtualMachineConfiguration.imageReference.virtualMachineImageId
-          type:
-            - string
-          description: "The ARM resource identifier of the virtual machine image. Computes nodes of\rthe cluster will be created using this custom image. This is of the form\r/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}\rThe virtual machine image must be in the same region and subscription as the\rcluster. For information about the firewall settings for the Batch node\ragent to communicate with the Batch service see\rhttps://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.\rNote, you need to provide publisher, offer and sku of the base OS image of\rwhich the custom image has been derived from."
+          description: "Version of\rthe image"
           optional: true
         - id: parameters.nodeSetup
           type:
@@ -1764,26 +1614,21 @@ items:
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
-          description: Collection of environment variables to be set for setup task.
-          optional: true
-        - id: parameters.nodeSetup.setupTask.secrets
-          type:
-            - array
-          description: "Collection of\renvironment variables with secret values to be set for setup task. Server\rwill never report values of these variables back."
+          description: Collection of environment settings.
           optional: true
         - id: parameters.nodeSetup.setupTask.runElevated
           type:
             - boolean
-          description: "Specifies\rwhether to run the setup task under root account. The default value is\rfalse. Note. Non-elevated tasks are run under an account added into sudoer\rlist and can perform sudo when required."
+          description: "Specifies\rwhether to run the setup task in elevated mode. The default value is false."
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
             - string
-          description: "The\rprefix of a path where the Batch AI service will upload the stdout and\rstderr of the setup task."
+          description: "The path\rwhere the Batch AI service will upload the stdout and stderror of setup\rtask."
         - id: parameters.nodeSetup.mountVolumes
           type:
             - object
-          description: "Information on shared\rvolumes to be used by jobs. Specified mount volumes will be available to all\rjobs executing on the cluster. The volumes will be mounted at location\rspecified by $AZ_BATCHAI_MOUNT_ROOT environment variable."
+          description: "Information on shared\rvolumes to be used by jobs."
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureFileShares
           type:
@@ -1807,43 +1652,6 @@ items:
             References to a list of file servers that are mounted to the cluster
             node.
           optional: true
-        - id: parameters.nodeSetup.performanceCountersSettings
-          type:
-            - object
-          description: "Specifies\rsettings for performance counters collecting and uploading."
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference
-          type:
-            - object
-          description: "Specifies Azure Application Insights information for performance counters\rreporting. If provided, Batch AI will upload node performance counters to\rthe corresponding Azure Application Insights account."
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.component
-          type:
-            - object
-          description: Specifies the Azure Application Insights component resource id.
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKey
-          type:
-            - string
-          description: Value of the Azure Application Insights instrumentation key.
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference
-          type:
-            - object
-          description: "Specifies a KeyVault Secret containing Azure Application Insights\rinstrumentation key. Specifies KeyVault Store and Secret which contains\rAzure Application Insights instrumentation key. One of instumentationKey or\rinstrumentationKeySecretReference must be specified."
-          optional: true
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.sourceVault
-          type:
-            - object
-          description: Fully qualified resource Id for the Key Vault.
-        - id: >-
-            parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.secretUrl
-          type:
-            - string
-          description: The URL referencing a secret in a Key Vault.
         - id: parameters.userAccountSettings
           type:
             - object

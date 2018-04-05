@@ -8,16 +8,16 @@ items:
     source:
       id: azure-arm-mysql.Servers
       path: lib\services\mysqlManagement\lib\operations\servers.js
-      startLine: 1322
+      startLine: 1282
       remote:
-        branch: master
+        branch: jsdoc
         path: lib\services\mysqlManagement\lib\operations\servers.js
         repo: 'https://github.com/Azure/azure-sdk-for-node.git'
     type: Class
     children:
       - 'azure-arm-mysql.Servers.#ctor'
-      - 'azure-arm-mysql.Servers#createWithHttpOperationResponse'
-      - 'azure-arm-mysql.Servers#create'
+      - 'azure-arm-mysql.Servers#createOrUpdateWithHttpOperationResponse'
+      - 'azure-arm-mysql.Servers#createOrUpdate'
       - 'azure-arm-mysql.Servers#updateWithHttpOperationResponse'
       - 'azure-arm-mysql.Servers#update'
       - 'azure-arm-mysql.Servers#deleteMethodWithHttpOperationResponse'
@@ -28,8 +28,8 @@ items:
       - 'azure-arm-mysql.Servers#listByResourceGroup'
       - 'azure-arm-mysql.Servers#listWithHttpOperationResponse'
       - 'azure-arm-mysql.Servers#list'
-      - 'azure-arm-mysql.Servers#beginCreateWithHttpOperationResponse'
-      - 'azure-arm-mysql.Servers#beginCreate'
+      - 'azure-arm-mysql.Servers#beginCreateOrUpdateWithHttpOperationResponse'
+      - 'azure-arm-mysql.Servers#beginCreateOrUpdate'
       - 'azure-arm-mysql.Servers#beginUpdateWithHttpOperationResponse'
       - 'azure-arm-mysql.Servers#beginUpdate'
       - 'azure-arm-mysql.Servers#beginDeleteMethodWithHttpOperationResponse'
@@ -52,15 +52,15 @@ items:
       content: new Servers(client)
     langs:
       - js
-  - uid: 'azure-arm-mysql.Servers#createWithHttpOperationResponse'
-    id: 'azure-arm-mysql.Servers#createWithHttpOperationResponse'
+  - uid: 'azure-arm-mysql.Servers#createOrUpdateWithHttpOperationResponse'
+    id: 'azure-arm-mysql.Servers#createOrUpdateWithHttpOperationResponse'
     parent: azure-arm-mysql.Servers
     name: >-
-      createWithHttpOperationResponse(resourceGroupName, serverName, parameters,
-      options)
+      createOrUpdateWithHttpOperationResponse(resourceGroupName, serverName,
+      parameters, options)
     summary: "Creates a new server or updates an existing server. The update action will\roverwrite the existing server."
     fullName: >-
-      azure-arm-mysql.Servers.createWithHttpOperationResponse(resourceGroupName,
+      azure-arm-mysql.Servers.createOrUpdateWithHttpOperationResponse(resourceGroupName,
       serverName, parameters, options)
     tags:
       - originalTitle: resolve
@@ -94,12 +94,12 @@ items:
         - id: parameters.sku.name
           type:
             - string
-          description: "The name of the sku, typically, tier +\rfamily + cores, e.g. B_Gen4_1, GP_Gen5_8."
+          description: "The name of the sku, typically, a\rletter + Number code, e.g. P3."
           optional: true
         - id: parameters.sku.tier
           type:
             - string
-          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'GeneralPurpose', 'MemoryOptimized'"
+          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'Standard'"
           optional: true
         - id: parameters.sku.capacity
           type:
@@ -120,6 +120,11 @@ items:
           type:
             - object
           description: Properties of the server.
+        - id: parameters.properties.storageMB
+          type:
+            - number
+          description: "The maximum storage\rallowed for a server."
+          optional: true
         - id: parameters.properties.version
           type:
             - string
@@ -129,26 +134,6 @@ items:
           type:
             - string
           description: "Enable ssl\renforcement or not when connect to server. Possible values include:\r'Enabled', 'Disabled'"
-          optional: true
-        - id: parameters.properties.storageProfile
-          type:
-            - object
-          description: "Storage profile of a\rserver."
-          optional: true
-        - id: parameters.properties.storageProfile.backupRetentionDays
-          type:
-            - number
-          description: Backup retention days for the server.
-          optional: true
-        - id: parameters.properties.storageProfile.geoRedundantBackup
-          type:
-            - string
-          description: "Enable Geo-redundant or not for server backup. Possible values include:\r'Enabled', 'Disabled'"
-          optional: true
-        - id: parameters.properties.storageProfile.storageMB
-          type:
-            - number
-          description: "Max storage\rallowed for a server."
           optional: true
         - id: parameters.properties.createMode
           type:
@@ -178,20 +163,20 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function createWithHttpOperationResponse(resourceGroupName, serverName,
-        parameters, options)
+        function createOrUpdateWithHttpOperationResponse(resourceGroupName,
+        serverName, parameters, options)
     langs:
       - js
-  - uid: 'azure-arm-mysql.Servers#create'
-    id: 'azure-arm-mysql.Servers#create'
+  - uid: 'azure-arm-mysql.Servers#createOrUpdate'
+    id: 'azure-arm-mysql.Servers#createOrUpdate'
     parent: azure-arm-mysql.Servers
     name: >-
-      create(resourceGroupName, serverName, parameters, options,
+      createOrUpdate(resourceGroupName, serverName, parameters, options,
       optionalCallback)
     summary: "Creates a new server or updates an existing server. The update action will\roverwrite the existing server."
     fullName: >-
-      azure-arm-mysql.Servers.create(resourceGroupName, serverName, parameters,
-      options, optionalCallback)
+      azure-arm-mysql.Servers.createOrUpdate(resourceGroupName, serverName,
+      parameters, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -224,12 +209,12 @@ items:
         - id: parameters.sku.name
           type:
             - string
-          description: "The name of the sku, typically, tier +\rfamily + cores, e.g. B_Gen4_1, GP_Gen5_8."
+          description: "The name of the sku, typically, a\rletter + Number code, e.g. P3."
           optional: true
         - id: parameters.sku.tier
           type:
             - string
-          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'GeneralPurpose', 'MemoryOptimized'"
+          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'Standard'"
           optional: true
         - id: parameters.sku.capacity
           type:
@@ -250,6 +235,11 @@ items:
           type:
             - object
           description: Properties of the server.
+        - id: parameters.properties.storageMB
+          type:
+            - number
+          description: "The maximum storage\rallowed for a server."
+          optional: true
         - id: parameters.properties.version
           type:
             - string
@@ -259,26 +249,6 @@ items:
           type:
             - string
           description: "Enable ssl\renforcement or not when connect to server. Possible values include:\r'Enabled', 'Disabled'"
-          optional: true
-        - id: parameters.properties.storageProfile
-          type:
-            - object
-          description: "Storage profile of a\rserver."
-          optional: true
-        - id: parameters.properties.storageProfile.backupRetentionDays
-          type:
-            - number
-          description: Backup retention days for the server.
-          optional: true
-        - id: parameters.properties.storageProfile.geoRedundantBackup
-          type:
-            - string
-          description: "Enable Geo-redundant or not for server backup. Possible values include:\r'Enabled', 'Disabled'"
-          optional: true
-        - id: parameters.properties.storageProfile.storageMB
-          type:
-            - number
-          description: "Max storage\rallowed for a server."
           optional: true
         - id: parameters.properties.createMode
           type:
@@ -314,8 +284,8 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function create(resourceGroupName, serverName, parameters, options,
-        optionalCallback)
+        function createOrUpdate(resourceGroupName, serverName, parameters,
+        options, optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-mysql.Servers#updateWithHttpOperationResponse'
@@ -360,12 +330,12 @@ items:
         - id: parameters.sku.name
           type:
             - string
-          description: "The name of the sku, typically, tier +\rfamily + cores, e.g. B_Gen4_1, GP_Gen5_8."
+          description: "The name of the sku, typically, a\rletter + Number code, e.g. P3."
           optional: true
         - id: parameters.sku.tier
           type:
             - string
-          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'GeneralPurpose', 'MemoryOptimized'"
+          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'Standard'"
           optional: true
         - id: parameters.sku.capacity
           type:
@@ -382,25 +352,10 @@ items:
             - string
           description: The family of hardware.
           optional: true
-        - id: parameters.storageProfile
-          type:
-            - object
-          description: Storage profile of a server.
-          optional: true
-        - id: parameters.storageProfile.backupRetentionDays
+        - id: parameters.storageMB
           type:
             - number
-          description: "Backup\rretention days for the server."
-          optional: true
-        - id: parameters.storageProfile.geoRedundantBackup
-          type:
-            - string
-          description: "Enable\rGeo-redundant or not for server backup. Possible values include: 'Enabled',\r'Disabled'"
-          optional: true
-        - id: parameters.storageProfile.storageMB
-          type:
-            - number
-          description: "Max storage allowed\rfor a server."
+          description: The max storage allowed for a server.
           optional: true
         - id: parameters.administratorLoginPassword
           type:
@@ -483,12 +438,12 @@ items:
         - id: parameters.sku.name
           type:
             - string
-          description: "The name of the sku, typically, tier +\rfamily + cores, e.g. B_Gen4_1, GP_Gen5_8."
+          description: "The name of the sku, typically, a\rletter + Number code, e.g. P3."
           optional: true
         - id: parameters.sku.tier
           type:
             - string
-          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'GeneralPurpose', 'MemoryOptimized'"
+          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'Standard'"
           optional: true
         - id: parameters.sku.capacity
           type:
@@ -505,25 +460,10 @@ items:
             - string
           description: The family of hardware.
           optional: true
-        - id: parameters.storageProfile
-          type:
-            - object
-          description: Storage profile of a server.
-          optional: true
-        - id: parameters.storageProfile.backupRetentionDays
+        - id: parameters.storageMB
           type:
             - number
-          description: "Backup\rretention days for the server."
-          optional: true
-        - id: parameters.storageProfile.geoRedundantBackup
-          type:
-            - string
-          description: "Enable\rGeo-redundant or not for server backup. Possible values include: 'Enabled',\r'Disabled'"
-          optional: true
-        - id: parameters.storageProfile.storageMB
-          type:
-            - number
-          description: "Max storage allowed\rfor a server."
+          description: The max storage allowed for a server.
           optional: true
         - id: parameters.administratorLoginPassword
           type:
@@ -946,15 +886,15 @@ items:
       content: 'function list(options, optionalCallback)'
     langs:
       - js
-  - uid: 'azure-arm-mysql.Servers#beginCreateWithHttpOperationResponse'
-    id: 'azure-arm-mysql.Servers#beginCreateWithHttpOperationResponse'
+  - uid: 'azure-arm-mysql.Servers#beginCreateOrUpdateWithHttpOperationResponse'
+    id: 'azure-arm-mysql.Servers#beginCreateOrUpdateWithHttpOperationResponse'
     parent: azure-arm-mysql.Servers
     name: >-
-      beginCreateWithHttpOperationResponse(resourceGroupName, serverName,
-      parameters, options)
+      beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
+      serverName, parameters, options)
     summary: "Creates a new server or updates an existing server. The update action will\roverwrite the existing server."
     fullName: >-
-      azure-arm-mysql.Servers.beginCreateWithHttpOperationResponse(resourceGroupName,
+      azure-arm-mysql.Servers.beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
       serverName, parameters, options)
     tags:
       - originalTitle: resolve
@@ -988,12 +928,12 @@ items:
         - id: parameters.sku.name
           type:
             - string
-          description: "The name of the sku, typically, tier +\rfamily + cores, e.g. B_Gen4_1, GP_Gen5_8."
+          description: "The name of the sku, typically, a\rletter + Number code, e.g. P3."
           optional: true
         - id: parameters.sku.tier
           type:
             - string
-          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'GeneralPurpose', 'MemoryOptimized'"
+          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'Standard'"
           optional: true
         - id: parameters.sku.capacity
           type:
@@ -1014,6 +954,11 @@ items:
           type:
             - object
           description: Properties of the server.
+        - id: parameters.properties.storageMB
+          type:
+            - number
+          description: "The maximum storage\rallowed for a server."
+          optional: true
         - id: parameters.properties.version
           type:
             - string
@@ -1023,26 +968,6 @@ items:
           type:
             - string
           description: "Enable ssl\renforcement or not when connect to server. Possible values include:\r'Enabled', 'Disabled'"
-          optional: true
-        - id: parameters.properties.storageProfile
-          type:
-            - object
-          description: "Storage profile of a\rserver."
-          optional: true
-        - id: parameters.properties.storageProfile.backupRetentionDays
-          type:
-            - number
-          description: Backup retention days for the server.
-          optional: true
-        - id: parameters.properties.storageProfile.geoRedundantBackup
-          type:
-            - string
-          description: "Enable Geo-redundant or not for server backup. Possible values include:\r'Enabled', 'Disabled'"
-          optional: true
-        - id: parameters.properties.storageProfile.storageMB
-          type:
-            - number
-          description: "Max storage\rallowed for a server."
           optional: true
         - id: parameters.properties.createMode
           type:
@@ -1072,19 +997,19 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function beginCreateWithHttpOperationResponse(resourceGroupName,
+        function beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
         serverName, parameters, options)
     langs:
       - js
-  - uid: 'azure-arm-mysql.Servers#beginCreate'
-    id: 'azure-arm-mysql.Servers#beginCreate'
+  - uid: 'azure-arm-mysql.Servers#beginCreateOrUpdate'
+    id: 'azure-arm-mysql.Servers#beginCreateOrUpdate'
     parent: azure-arm-mysql.Servers
     name: >-
-      beginCreate(resourceGroupName, serverName, parameters, options,
+      beginCreateOrUpdate(resourceGroupName, serverName, parameters, options,
       optionalCallback)
     summary: "Creates a new server or updates an existing server. The update action will\roverwrite the existing server."
     fullName: >-
-      azure-arm-mysql.Servers.beginCreate(resourceGroupName, serverName,
+      azure-arm-mysql.Servers.beginCreateOrUpdate(resourceGroupName, serverName,
       parameters, options, optionalCallback)
     tags:
       - originalTitle: resolve
@@ -1118,12 +1043,12 @@ items:
         - id: parameters.sku.name
           type:
             - string
-          description: "The name of the sku, typically, tier +\rfamily + cores, e.g. B_Gen4_1, GP_Gen5_8."
+          description: "The name of the sku, typically, a\rletter + Number code, e.g. P3."
           optional: true
         - id: parameters.sku.tier
           type:
             - string
-          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'GeneralPurpose', 'MemoryOptimized'"
+          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'Standard'"
           optional: true
         - id: parameters.sku.capacity
           type:
@@ -1144,6 +1069,11 @@ items:
           type:
             - object
           description: Properties of the server.
+        - id: parameters.properties.storageMB
+          type:
+            - number
+          description: "The maximum storage\rallowed for a server."
+          optional: true
         - id: parameters.properties.version
           type:
             - string
@@ -1153,26 +1083,6 @@ items:
           type:
             - string
           description: "Enable ssl\renforcement or not when connect to server. Possible values include:\r'Enabled', 'Disabled'"
-          optional: true
-        - id: parameters.properties.storageProfile
-          type:
-            - object
-          description: "Storage profile of a\rserver."
-          optional: true
-        - id: parameters.properties.storageProfile.backupRetentionDays
-          type:
-            - number
-          description: Backup retention days for the server.
-          optional: true
-        - id: parameters.properties.storageProfile.geoRedundantBackup
-          type:
-            - string
-          description: "Enable Geo-redundant or not for server backup. Possible values include:\r'Enabled', 'Disabled'"
-          optional: true
-        - id: parameters.properties.storageProfile.storageMB
-          type:
-            - number
-          description: "Max storage\rallowed for a server."
           optional: true
         - id: parameters.properties.createMode
           type:
@@ -1208,8 +1118,8 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function beginCreate(resourceGroupName, serverName, parameters, options,
-        optionalCallback)
+        function beginCreateOrUpdate(resourceGroupName, serverName, parameters,
+        options, optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-mysql.Servers#beginUpdateWithHttpOperationResponse'
@@ -1254,12 +1164,12 @@ items:
         - id: parameters.sku.name
           type:
             - string
-          description: "The name of the sku, typically, tier +\rfamily + cores, e.g. B_Gen4_1, GP_Gen5_8."
+          description: "The name of the sku, typically, a\rletter + Number code, e.g. P3."
           optional: true
         - id: parameters.sku.tier
           type:
             - string
-          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'GeneralPurpose', 'MemoryOptimized'"
+          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'Standard'"
           optional: true
         - id: parameters.sku.capacity
           type:
@@ -1276,25 +1186,10 @@ items:
             - string
           description: The family of hardware.
           optional: true
-        - id: parameters.storageProfile
-          type:
-            - object
-          description: Storage profile of a server.
-          optional: true
-        - id: parameters.storageProfile.backupRetentionDays
+        - id: parameters.storageMB
           type:
             - number
-          description: "Backup\rretention days for the server."
-          optional: true
-        - id: parameters.storageProfile.geoRedundantBackup
-          type:
-            - string
-          description: "Enable\rGeo-redundant or not for server backup. Possible values include: 'Enabled',\r'Disabled'"
-          optional: true
-        - id: parameters.storageProfile.storageMB
-          type:
-            - number
-          description: "Max storage allowed\rfor a server."
+          description: The max storage allowed for a server.
           optional: true
         - id: parameters.administratorLoginPassword
           type:
@@ -1377,12 +1272,12 @@ items:
         - id: parameters.sku.name
           type:
             - string
-          description: "The name of the sku, typically, tier +\rfamily + cores, e.g. B_Gen4_1, GP_Gen5_8."
+          description: "The name of the sku, typically, a\rletter + Number code, e.g. P3."
           optional: true
         - id: parameters.sku.tier
           type:
             - string
-          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'GeneralPurpose', 'MemoryOptimized'"
+          description: "The tier of the particular SKU, e.g.\rBasic. Possible values include: 'Basic', 'Standard'"
           optional: true
         - id: parameters.sku.capacity
           type:
@@ -1399,25 +1294,10 @@ items:
             - string
           description: The family of hardware.
           optional: true
-        - id: parameters.storageProfile
-          type:
-            - object
-          description: Storage profile of a server.
-          optional: true
-        - id: parameters.storageProfile.backupRetentionDays
+        - id: parameters.storageMB
           type:
             - number
-          description: "Backup\rretention days for the server."
-          optional: true
-        - id: parameters.storageProfile.geoRedundantBackup
-          type:
-            - string
-          description: "Enable\rGeo-redundant or not for server backup. Possible values include: 'Enabled',\r'Disabled'"
-          optional: true
-        - id: parameters.storageProfile.storageMB
-          type:
-            - number
-          description: "Max storage allowed\rfor a server."
+          description: The max storage allowed for a server.
           optional: true
         - id: parameters.administratorLoginPassword
           type:

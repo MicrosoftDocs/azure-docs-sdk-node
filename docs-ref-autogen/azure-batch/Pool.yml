@@ -870,20 +870,10 @@ items:
           description: >-
             The type
 
-            of caching to enable for the OS disk. Values are:
+            of caching to enable for the OS disk. The default value for caching
+            is none.
 
-
-            none - The caching mode for the disk is not enabled.
-
-            readOnly - The caching mode for the disk is read only.
-
-            readWrite - The caching mode for the disk is read and write.
-
-
-            The default value for caching is none. For information about the
-            caching
-
-            options see:
+            For information about the caching options see:
 
             https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
 
@@ -951,7 +941,28 @@ items:
             property must be specified if the compute nodes in the pool need to
             have
 
-            empty data disks attached to them. This cannot be updated.
+            empty data disks attached to them. This cannot be updated. Each node
+            gets
+
+            its own disk (the disk is not a file share). Existing disks cannot
+            be
+
+            attached, each attached disk is empty. When the node is removed from
+            the
+
+            pool, the disk and all data associated with it is also deleted. The
+            disk is
+
+            not formatted after being attached, it must be formatted before use
+            - for
+
+            more information see
+
+            https://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux
+
+            and
+
+            https://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine.
           optional: true
         - id: pool.virtualMachineConfiguration.licenseType
           type:
@@ -1416,18 +1427,10 @@ items:
           description: >-
             The scope for
 
-            the auto user Values are:
+            the auto user The default value is task. Possible values include:
+            'task',
 
-
-            pool - specifies that the task runs as the common auto user account
-            which is
-
-            created on every node in a pool.
-
-            task - specifies that the service should create a new user for the
-            task.
-
-            The default value is task. Possible values include: 'task', 'pool'
+            'pool'
           optional: true
         - id: pool.startTask.userIdentity.autoUser.elevationLevel
           type:
@@ -1435,16 +1438,10 @@ items:
           description: >-
             The
 
-            elevation level of the auto user. nonAdmin - The auto user is a
-            standard
+            elevation level of the auto user. The default value is nonAdmin.
+            Possible
 
-            user without elevated access. admin - The auto user is a user with
-            elevated
-
-            access and operates with full Administrator permissions. The default
-            value
-
-            is nonAdmin. Possible values include: 'nonAdmin', 'admin'
+            values include: 'nonAdmin', 'admin'
           optional: true
         - id: pool.startTask.maxTaskRetryCount
           type:
@@ -1586,24 +1583,10 @@ items:
         - id: pool.taskSchedulingPolicy.nodeFillType
           type:
             - string
-          description: >-
+          description: |-
             How tasks are
-
-            distributed across compute nodes in a pool. Values are:
-
-
-            pack - As many tasks as possible (maxTasksPerNode) should be
-            assigned to
-
-            each node in the pool before any tasks are assigned to the next node
-            in the
-
-            pool.
-
-            spread - Tasks should be assigned evenly across all nodes in the
-            pool.
-
-            Possible values include: 'spread', 'pack'
+            distributed across compute nodes in a pool. Possible values include:
+            'spread', 'pack'
         - id: pool.userAccounts
           type:
             - array
@@ -1955,20 +1938,10 @@ items:
           description: >-
             The type
 
-            of caching to enable for the OS disk. Values are:
+            of caching to enable for the OS disk. The default value for caching
+            is none.
 
-
-            none - The caching mode for the disk is not enabled.
-
-            readOnly - The caching mode for the disk is read only.
-
-            readWrite - The caching mode for the disk is read and write.
-
-
-            The default value for caching is none. For information about the
-            caching
-
-            options see:
+            For information about the caching options see:
 
             https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
 
@@ -2036,7 +2009,28 @@ items:
             property must be specified if the compute nodes in the pool need to
             have
 
-            empty data disks attached to them. This cannot be updated.
+            empty data disks attached to them. This cannot be updated. Each node
+            gets
+
+            its own disk (the disk is not a file share). Existing disks cannot
+            be
+
+            attached, each attached disk is empty. When the node is removed from
+            the
+
+            pool, the disk and all data associated with it is also deleted. The
+            disk is
+
+            not formatted after being attached, it must be formatted before use
+            - for
+
+            more information see
+
+            https://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux
+
+            and
+
+            https://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine.
           optional: true
         - id: pool.virtualMachineConfiguration.licenseType
           type:
@@ -2501,18 +2495,10 @@ items:
           description: >-
             The scope for
 
-            the auto user Values are:
+            the auto user The default value is task. Possible values include:
+            'task',
 
-
-            pool - specifies that the task runs as the common auto user account
-            which is
-
-            created on every node in a pool.
-
-            task - specifies that the service should create a new user for the
-            task.
-
-            The default value is task. Possible values include: 'task', 'pool'
+            'pool'
           optional: true
         - id: pool.startTask.userIdentity.autoUser.elevationLevel
           type:
@@ -2520,16 +2506,10 @@ items:
           description: >-
             The
 
-            elevation level of the auto user. nonAdmin - The auto user is a
-            standard
+            elevation level of the auto user. The default value is nonAdmin.
+            Possible
 
-            user without elevated access. admin - The auto user is a user with
-            elevated
-
-            access and operates with full Administrator permissions. The default
-            value
-
-            is nonAdmin. Possible values include: 'nonAdmin', 'admin'
+            values include: 'nonAdmin', 'admin'
           optional: true
         - id: pool.startTask.maxTaskRetryCount
           type:
@@ -2671,24 +2651,10 @@ items:
         - id: pool.taskSchedulingPolicy.nodeFillType
           type:
             - string
-          description: >-
+          description: |-
             How tasks are
-
-            distributed across compute nodes in a pool. Values are:
-
-
-            pack - As many tasks as possible (maxTasksPerNode) should be
-            assigned to
-
-            each node in the pool before any tasks are assigned to the next node
-            in the
-
-            pool.
-
-            spread - Tasks should be assigned evenly across all nodes in the
-            pool.
-
-            Possible values include: 'spread', 'pack'
+            distributed across compute nodes in a pool. Possible values include:
+            'spread', 'pack'
         - id: pool.userAccounts
           type:
             - array
@@ -4295,18 +4261,10 @@ items:
           type:
             - string
           description: >-
-            The scope for the auto user Values are:
+            The scope for the auto user The default value is task. Possible
+            values
 
-
-            pool - specifies that the task runs as the common auto user account
-            which is
-
-            created on every node in a pool.
-
-            task - specifies that the service should create a new user for the
-            task.
-
-            The default value is task. Possible values include: 'task', 'pool'
+            include: 'task', 'pool'
           optional: true
         - id: poolPatchParameter.startTask.userIdentity.autoUser.elevationLevel
           type:
@@ -4314,16 +4272,10 @@ items:
           description: >-
             The
 
-            elevation level of the auto user. nonAdmin - The auto user is a
-            standard
+            elevation level of the auto user. The default value is nonAdmin.
+            Possible
 
-            user without elevated access. admin - The auto user is a user with
-            elevated
-
-            access and operates with full Administrator permissions. The default
-            value
-
-            is nonAdmin. Possible values include: 'nonAdmin', 'admin'
+            values include: 'nonAdmin', 'admin'
           optional: true
         - id: poolPatchParameter.startTask.maxTaskRetryCount
           type:
@@ -4825,18 +4777,10 @@ items:
           type:
             - string
           description: >-
-            The scope for the auto user Values are:
+            The scope for the auto user The default value is task. Possible
+            values
 
-
-            pool - specifies that the task runs as the common auto user account
-            which is
-
-            created on every node in a pool.
-
-            task - specifies that the service should create a new user for the
-            task.
-
-            The default value is task. Possible values include: 'task', 'pool'
+            include: 'task', 'pool'
           optional: true
         - id: poolPatchParameter.startTask.userIdentity.autoUser.elevationLevel
           type:
@@ -4844,16 +4788,10 @@ items:
           description: >-
             The
 
-            elevation level of the auto user. nonAdmin - The auto user is a
-            standard
+            elevation level of the auto user. The default value is nonAdmin.
+            Possible
 
-            user without elevated access. admin - The auto user is a user with
-            elevated
-
-            access and operates with full Administrator permissions. The default
-            value
-
-            is nonAdmin. Possible values include: 'nonAdmin', 'admin'
+            values include: 'nonAdmin', 'admin'
           optional: true
         - id: poolPatchParameter.startTask.maxTaskRetryCount
           type:
@@ -7150,34 +7088,18 @@ items:
           description: >-
             The
 
-            scope for the auto user Values are:
+            scope for the auto user The default value is task. Possible values
+            include:
 
-
-            pool - specifies that the task runs as the common auto user account
-            which is
-
-            created on every node in a pool.
-
-            task - specifies that the service should create a new user for the
-            task.
-
-            The default value is task. Possible values include: 'task', 'pool'
+            'task', 'pool'
           optional: true
         - id: >-
             poolUpdatePropertiesParameter.startTask.userIdentity.autoUser.elevationLevel
           type:
             - string
-          description: >-
-            The elevation level of the auto user. nonAdmin - The auto user is a
-            standard
-
-            user without elevated access. admin - The auto user is a user with
-            elevated
-
-            access and operates with full Administrator permissions. The default
-            value
-
-            is nonAdmin. Possible values include: 'nonAdmin', 'admin'
+          description: |-
+            The elevation level of the auto user. The default value is nonAdmin.
+            Possible values include: 'nonAdmin', 'admin'
           optional: true
         - id: poolUpdatePropertiesParameter.startTask.maxTaskRetryCount
           type:
@@ -7619,34 +7541,18 @@ items:
           description: >-
             The
 
-            scope for the auto user Values are:
+            scope for the auto user The default value is task. Possible values
+            include:
 
-
-            pool - specifies that the task runs as the common auto user account
-            which is
-
-            created on every node in a pool.
-
-            task - specifies that the service should create a new user for the
-            task.
-
-            The default value is task. Possible values include: 'task', 'pool'
+            'task', 'pool'
           optional: true
         - id: >-
             poolUpdatePropertiesParameter.startTask.userIdentity.autoUser.elevationLevel
           type:
             - string
-          description: >-
-            The elevation level of the auto user. nonAdmin - The auto user is a
-            standard
-
-            user without elevated access. admin - The auto user is a user with
-            elevated
-
-            access and operates with full Administrator permissions. The default
-            value
-
-            is nonAdmin. Possible values include: 'nonAdmin', 'admin'
+          description: |-
+            The elevation level of the auto user. The default value is nonAdmin.
+            Possible values include: 'nonAdmin', 'admin'
           optional: true
         - id: poolUpdatePropertiesParameter.startTask.maxTaskRetryCount
           type:

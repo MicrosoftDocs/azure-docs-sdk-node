@@ -14,6 +14,8 @@ items:
       - 'azure-arm-dns.Zones#deleteMethod'
       - 'azure-arm-dns.Zones#getWithHttpOperationResponse'
       - 'azure-arm-dns.Zones#get'
+      - 'azure-arm-dns.Zones#updateWithHttpOperationResponse'
+      - 'azure-arm-dns.Zones#update'
       - 'azure-arm-dns.Zones#listByResourceGroupWithHttpOperationResponse'
       - 'azure-arm-dns.Zones#listByResourceGroup'
       - 'azure-arm-dns.Zones#listWithHttpOperationResponse'
@@ -73,41 +75,30 @@ items:
         - id: zoneName
           type:
             - string
-          description: |-
-            The name of the DNS zone (without a terminating
-            dot).
+          description: "The name of the DNS zone (without a terminating\rdot)."
         - id: parameters
           type:
             - object
-          description: |-
-            Parameters supplied to the CreateOrUpdate
-            operation.
+          description: "Parameters supplied to the CreateOrUpdate\roperation."
         - id: parameters.etag
           type:
             - string
           description: The etag of the zone.
           optional: true
-        - id: parameters.maxNumberOfRecordSets
+        - id: parameters.zoneType
           type:
-            - number
-          description: >-
-            The maximum number of
-
-            record sets that can be created in this DNS zone.  This is a
-            read-only
-
-            property and any attempt to set this value will be ignored.
+            - string
+          description: "The type of this DNS zone (Public or\rPrivate). Possible values include: 'Public', 'Private'"
           optional: true
-        - id: parameters.numberOfRecordSets
+        - id: parameters.registrationVirtualNetworks
           type:
-            - number
-          description: >-
-            The current number of record
-
-            sets in this DNS zone.  This is a read-only property and any attempt
-            to set
-
-            this value will be ignored.
+            - array
+          description: "A list of references\rto virtual networks that register hostnames in this DNS zone. This is a only\rwhen ZoneType is Private."
+          optional: true
+        - id: parameters.resolutionVirtualNetworks
+          type:
+            - array
+          description: "A list of references\rto virtual networks that resolve records in this DNS zone. This is a only\rwhen ZoneType is Private."
           optional: true
         - id: parameters.location
           type:
@@ -126,31 +117,17 @@ items:
         - id: options.ifMatch
           type:
             - string
-          description: >-
-            The etag of the DNS zone. Omit this value
-
-            to always overwrite the current zone. Specify the last-seen etag
-            value to
-
-            prevent accidentally overwritting any concurrent changes.
+          description: "The etag of the DNS zone. Omit this value\rto always overwrite the current zone. Specify the last-seen etag value to\rprevent accidentally overwritting any concurrent changes."
           optional: true
         - id: options.ifNoneMatch
           type:
             - string
-          description: >-
-            Set to '*' to allow a new DNS zone to
-
-            be created, but to prevent updating an existing zone. Other values
-            will be
-
-            ignored.
+          description: "Set to '*' to allow a new DNS zone to\rbe created, but to prevent updating an existing zone. Other values will be\rignored."
           optional: true
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -180,32 +157,8 @@ items:
         value: '{Zone} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Zone} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Zone} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link Zone} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link Zone} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -216,41 +169,30 @@ items:
         - id: zoneName
           type:
             - string
-          description: |-
-            The name of the DNS zone (without a terminating
-            dot).
+          description: "The name of the DNS zone (without a terminating\rdot)."
         - id: parameters
           type:
             - object
-          description: |-
-            Parameters supplied to the CreateOrUpdate
-            operation.
+          description: "Parameters supplied to the CreateOrUpdate\roperation."
         - id: parameters.etag
           type:
             - string
           description: The etag of the zone.
           optional: true
-        - id: parameters.maxNumberOfRecordSets
+        - id: parameters.zoneType
           type:
-            - number
-          description: >-
-            The maximum number of
-
-            record sets that can be created in this DNS zone.  This is a
-            read-only
-
-            property and any attempt to set this value will be ignored.
+            - string
+          description: "The type of this DNS zone (Public or\rPrivate). Possible values include: 'Public', 'Private'"
           optional: true
-        - id: parameters.numberOfRecordSets
+        - id: parameters.registrationVirtualNetworks
           type:
-            - number
-          description: >-
-            The current number of record
-
-            sets in this DNS zone.  This is a read-only property and any attempt
-            to set
-
-            this value will be ignored.
+            - array
+          description: "A list of references\rto virtual networks that register hostnames in this DNS zone. This is a only\rwhen ZoneType is Private."
+          optional: true
+        - id: parameters.resolutionVirtualNetworks
+          type:
+            - array
+          description: "A list of references\rto virtual networks that resolve records in this DNS zone. This is a only\rwhen ZoneType is Private."
           optional: true
         - id: parameters.location
           type:
@@ -269,31 +211,17 @@ items:
         - id: options.ifMatch
           type:
             - string
-          description: >-
-            The etag of the DNS zone. Omit this value
-
-            to always overwrite the current zone. Specify the last-seen etag
-            value to
-
-            prevent accidentally overwritting any concurrent changes.
+          description: "The etag of the DNS zone. Omit this value\rto always overwrite the current zone. Specify the last-seen etag value to\rprevent accidentally overwritting any concurrent changes."
           optional: true
         - id: options.ifNoneMatch
           type:
             - string
-          description: >-
-            Set to '*' to allow a new DNS zone to
-
-            be created, but to prevent updating an existing zone. Other values
-            will be
-
-            ignored.
+          description: "Set to '*' to allow a new DNS zone to\rbe created, but to prevent updating an existing zone. Other values will be\rignored."
           optional: true
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -304,11 +232,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function createOrUpdate(resourceGroupName, zoneName, parameters,
         options, optionalCallback)
@@ -320,21 +244,15 @@ items:
     name: >-
       deleteMethodWithHttpOperationResponse(resourceGroupName, zoneName,
       options)
-    summary: |-
-      Deletes a DNS zone. WARNING: All DNS records in the zone will also be
-      deleted. This operation cannot be undone.
+    summary: "Deletes a DNS zone. WARNING: All DNS records in the zone will also be\rdeleted. This operation cannot be undone."
     fullName: >-
       azure-arm-dns.Zones.deleteMethodWithHttpOperationResponse(resourceGroupName,
       zoneName, options)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<ZoneDeleteResult>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<ZoneDeleteResult>} - The deserialized result
-          object.
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -349,9 +267,7 @@ items:
         - id: zoneName
           type:
             - string
-          description: |-
-            The name of the DNS zone (without a terminating
-            dot).
+          description: "The name of the DNS zone (without a terminating\rdot)."
         - id: options
           type:
             - object
@@ -360,20 +276,12 @@ items:
         - id: options.ifMatch
           type:
             - string
-          description: >-
-            The etag of the DNS zone. Omit this value
-
-            to always delete the current zone. Specify the last-seen etag value
-            to
-
-            prevent accidentally deleting any concurrent changes.
+          description: "The etag of the DNS zone. Omit this value\rto always delete the current zone. Specify the last-seen etag value to\rprevent accidentally deleting any concurrent changes."
           optional: true
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -388,45 +296,19 @@ items:
     id: 'azure-arm-dns.Zones#deleteMethod'
     parent: azure-arm-dns.Zones
     name: 'deleteMethod(resourceGroupName, zoneName, options, optionalCallback)'
-    summary: |-
-      Deletes a DNS zone. WARNING: All DNS records in the zone will also be
-      deleted. This operation cannot be undone.
+    summary: "Deletes a DNS zone. WARNING: All DNS records in the zone will also be\rdeleted. This operation cannot be undone."
     fullName: >-
       azure-arm-dns.Zones.deleteMethod(resourceGroupName, zoneName, options,
       optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{ZoneDeleteResult} - The deserialized result object.'
-        value: '{ZoneDeleteResult} - The deserialized result object.'
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneDeleteResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneDeleteResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -437,9 +319,7 @@ items:
         - id: zoneName
           type:
             - string
-          description: |-
-            The name of the DNS zone (without a terminating
-            dot).
+          description: "The name of the DNS zone (without a terminating\rdot)."
         - id: options
           type:
             - object
@@ -448,20 +328,12 @@ items:
         - id: options.ifMatch
           type:
             - string
-          description: >-
-            The etag of the DNS zone. Omit this value
-
-            to always delete the current zone. Specify the last-seen etag value
-            to
-
-            prevent accidentally deleting any concurrent changes.
+          description: "The etag of the DNS zone. Omit this value\rto always delete the current zone. Specify the last-seen etag value to\rprevent accidentally deleting any concurrent changes."
           optional: true
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -472,11 +344,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function deleteMethod(resourceGroupName, zoneName, options,
         optionalCallback)
@@ -486,9 +354,7 @@ items:
     id: 'azure-arm-dns.Zones#getWithHttpOperationResponse'
     parent: azure-arm-dns.Zones
     name: 'getWithHttpOperationResponse(resourceGroupName, zoneName, options)'
-    summary: |-
-      Gets a DNS zone. Retrieves the zone properties, but not the record sets
-      within the zone.
+    summary: "Gets a DNS zone. Retrieves the zone properties, but not the record sets\rwithin the zone."
     fullName: >-
       azure-arm-dns.Zones.getWithHttpOperationResponse(resourceGroupName,
       zoneName, options)
@@ -511,9 +377,7 @@ items:
         - id: zoneName
           type:
             - string
-          description: |-
-            The name of the DNS zone (without a terminating
-            dot).
+          description: "The name of the DNS zone (without a terminating\rdot)."
         - id: options
           type:
             - object
@@ -522,9 +386,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -539,9 +401,7 @@ items:
     id: 'azure-arm-dns.Zones#get'
     parent: azure-arm-dns.Zones
     name: 'get(resourceGroupName, zoneName, options, optionalCallback)'
-    summary: |-
-      Gets a DNS zone. Retrieves the zone properties, but not the record sets
-      within the zone.
+    summary: "Gets a DNS zone. Retrieves the zone properties, but not the record sets\rwithin the zone."
     fullName: >-
       azure-arm-dns.Zones.get(resourceGroupName, zoneName, options,
       optionalCallback)
@@ -552,32 +412,8 @@ items:
         value: '{Zone} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Zone} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link Zone} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link Zone} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link Zone} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -588,9 +424,7 @@ items:
         - id: zoneName
           type:
             - string
-          description: |-
-            The name of the DNS zone (without a terminating
-            dot).
+          description: "The name of the DNS zone (without a terminating\rdot)."
         - id: options
           type:
             - object
@@ -599,9 +433,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -612,12 +444,138 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: 'function get(resourceGroupName, zoneName, options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-dns.Zones#updateWithHttpOperationResponse'
+    id: 'azure-arm-dns.Zones#updateWithHttpOperationResponse'
+    parent: azure-arm-dns.Zones
+    name: >-
+      updateWithHttpOperationResponse(resourceGroupName, zoneName, parameters,
+      options)
+    summary: Updates a DNS zone. Does not modify DNS records within the zone.
+    fullName: >-
+      azure-arm-dns.Zones.updateWithHttpOperationResponse(resourceGroupName,
+      zoneName, parameters, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<Zone>} - The deserialized result object.'
+        value: '{HttpOperationResponse<Zone>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: zoneName
+          type:
+            - string
+          description: "The name of the DNS zone (without a terminating\rdot)."
+        - id: parameters
+          type:
+            - object
+          description: Parameters supplied to the Update operation.
+        - id: parameters.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.ifMatch
+          type:
+            - string
+          description: "The etag of the DNS zone. Omit this value\rto always overwrite the current zone. Specify the last-seen etag value to\rprevent accidentally overwritting any concurrent changes."
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function updateWithHttpOperationResponse(resourceGroupName, zoneName,
+        parameters, options)
+    langs:
+      - js
+  - uid: 'azure-arm-dns.Zones#update'
+    id: 'azure-arm-dns.Zones#update'
+    parent: azure-arm-dns.Zones
+    name: 'update(resourceGroupName, zoneName, parameters, options, optionalCallback)'
+    summary: Updates a DNS zone. Does not modify DNS records within the zone.
+    fullName: >-
+      azure-arm-dns.Zones.update(resourceGroupName, zoneName, parameters,
+      options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{Zone} - The deserialized result object.'
+        value: '{Zone} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link Zone} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link Zone} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: zoneName
+          type:
+            - string
+          description: "The name of the DNS zone (without a terminating\rdot)."
+        - id: parameters
+          type:
+            - object
+          description: Parameters supplied to the Update operation.
+        - id: parameters.tags
+          type:
+            - object
+          description: Resource tags.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.ifMatch
+          type:
+            - string
+          description: "The etag of the DNS zone. Omit this value\rto always overwrite the current zone. Specify the last-seen etag value to\rprevent accidentally overwritting any concurrent changes."
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function update(resourceGroupName, zoneName, parameters, options,
+        optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-dns.Zones#listByResourceGroupWithHttpOperationResponse'
@@ -656,16 +614,12 @@ items:
         - id: options.top
           type:
             - number
-          description: |-
-            The maximum number of record sets to return.
-            If not specified, returns up to 100 record sets.
+          description: "The maximum number of record sets to return.\rIf not specified, returns up to 100 record sets."
           optional: true
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -691,32 +645,8 @@ items:
         value: '{ZoneListResult} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ZoneListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ZoneListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -732,16 +662,12 @@ items:
         - id: options.top
           type:
             - number
-          description: |-
-            The maximum number of record sets to return.
-            If not specified, returns up to 100 record sets.
+          description: "The maximum number of record sets to return.\rIf not specified, returns up to 100 record sets."
           optional: true
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -752,11 +678,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function listByResourceGroup(resourceGroupName, options,
         optionalCallback)
@@ -792,16 +714,12 @@ items:
         - id: options.top
           type:
             - number
-          description: |-
-            The maximum number of DNS zones to return. If
-            not specified, returns up to 100 zones.
+          description: "The maximum number of DNS zones to return. If\rnot specified, returns up to 100 zones."
           optional: true
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -823,32 +741,8 @@ items:
         value: '{ZoneListResult} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ZoneListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ZoneListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -860,16 +754,12 @@ items:
         - id: options.top
           type:
             - number
-          description: |-
-            The maximum number of DNS zones to return. If
-            not specified, returns up to 100 zones.
+          description: "The maximum number of DNS zones to return. If\rnot specified, returns up to 100 zones."
           optional: true
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -880,11 +770,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: 'function list(options, optionalCallback)'
     langs:
       - js
@@ -894,21 +780,15 @@ items:
     name: >-
       beginDeleteMethodWithHttpOperationResponse(resourceGroupName, zoneName,
       options)
-    summary: |-
-      Deletes a DNS zone. WARNING: All DNS records in the zone will also be
-      deleted. This operation cannot be undone.
+    summary: "Deletes a DNS zone. WARNING: All DNS records in the zone will also be\rdeleted. This operation cannot be undone."
     fullName: >-
       azure-arm-dns.Zones.beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
       zoneName, options)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {HttpOperationResponse<ZoneDeleteResult>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<ZoneDeleteResult>} - The deserialized result
-          object.
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -923,9 +803,7 @@ items:
         - id: zoneName
           type:
             - string
-          description: |-
-            The name of the DNS zone (without a terminating
-            dot).
+          description: "The name of the DNS zone (without a terminating\rdot)."
         - id: options
           type:
             - object
@@ -934,20 +812,12 @@ items:
         - id: options.ifMatch
           type:
             - string
-          description: >-
-            The etag of the DNS zone. Omit this value
-
-            to always delete the current zone. Specify the last-seen etag value
-            to
-
-            prevent accidentally deleting any concurrent changes.
+          description: "The etag of the DNS zone. Omit this value\rto always delete the current zone. Specify the last-seen etag value to\rprevent accidentally deleting any concurrent changes."
           optional: true
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -962,45 +832,19 @@ items:
     id: 'azure-arm-dns.Zones#beginDeleteMethod'
     parent: azure-arm-dns.Zones
     name: 'beginDeleteMethod(resourceGroupName, zoneName, options, optionalCallback)'
-    summary: |-
-      Deletes a DNS zone. WARNING: All DNS records in the zone will also be
-      deleted. This operation cannot be undone.
+    summary: "Deletes a DNS zone. WARNING: All DNS records in the zone will also be\rdeleted. This operation cannot be undone."
     fullName: >-
       azure-arm-dns.Zones.beginDeleteMethod(resourceGroupName, zoneName,
       options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{ZoneDeleteResult} - The deserialized result object.'
-        value: '{ZoneDeleteResult} - The deserialized result object.'
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneDeleteResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneDeleteResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -1011,9 +855,7 @@ items:
         - id: zoneName
           type:
             - string
-          description: |-
-            The name of the DNS zone (without a terminating
-            dot).
+          description: "The name of the DNS zone (without a terminating\rdot)."
         - id: options
           type:
             - object
@@ -1022,20 +864,12 @@ items:
         - id: options.ifMatch
           type:
             - string
-          description: >-
-            The etag of the DNS zone. Omit this value
-
-            to always delete the current zone. Specify the last-seen etag value
-            to
-
-            prevent accidentally deleting any concurrent changes.
+          description: "The etag of the DNS zone. Omit this value\rto always delete the current zone. Specify the last-seen etag value to\rprevent accidentally deleting any concurrent changes."
           optional: true
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -1046,11 +880,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function beginDeleteMethod(resourceGroupName, zoneName, options,
         optionalCallback)
@@ -1083,9 +913,7 @@ items:
         - id: nextPageLink
           type:
             - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
+          description: "The NextLink from the previous successful call\rto List operation."
         - id: options
           type:
             - object
@@ -1094,9 +922,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -1122,41 +948,15 @@ items:
         value: '{ZoneListResult} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ZoneListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ZoneListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
         - id: nextPageLink
           type:
             - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
+          description: "The NextLink from the previous successful call\rto List operation."
         - id: options
           type:
             - object
@@ -1165,9 +965,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -1178,11 +976,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function listByResourceGroupNext(nextPageLink, options,
         optionalCallback)
@@ -1215,9 +1009,7 @@ items:
         - id: nextPageLink
           type:
             - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
+          description: "The NextLink from the previous successful call\rto List operation."
         - id: options
           type:
             - object
@@ -1226,9 +1018,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -1250,41 +1040,15 @@ items:
         value: '{ZoneListResult} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ZoneListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ZoneListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ZoneListResult} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
         - id: nextPageLink
           type:
             - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
+          description: "The NextLink from the previous successful call\rto List operation."
         - id: options
           type:
             - object
@@ -1293,9 +1057,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -1306,11 +1068,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: 'function listNext(nextPageLink, options, optionalCallback)'
     langs:
       - js

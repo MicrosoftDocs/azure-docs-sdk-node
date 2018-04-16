@@ -32,6 +32,8 @@ items:
       - 'azure-arm-keyvault.Vaults#list'
       - 'azure-arm-keyvault.Vaults#checkNameAvailabilityWithHttpOperationResponse'
       - 'azure-arm-keyvault.Vaults#checkNameAvailability'
+      - 'azure-arm-keyvault.Vaults#beginCreateOrUpdateWithHttpOperationResponse'
+      - 'azure-arm-keyvault.Vaults#beginCreateOrUpdate'
       - 'azure-arm-keyvault.Vaults#beginPurgeDeletedWithHttpOperationResponse'
       - 'azure-arm-keyvault.Vaults#beginPurgeDeleted'
       - >-
@@ -149,7 +151,7 @@ items:
         - id: parameters.properties.enableSoftDelete
           type:
             - boolean
-          description: "Property\rspecifying whether recoverable deletion is enabled for this key vault.\rSetting this property to true activates the soft delete feature, whereby\rvaults or vault entities can be recovered after deletion. Enabling this\rfunctionality is irreversible - that is, the property does not accept false\ras its value."
+          description: "Property to\rspecify whether the 'soft delete' functionality is enabled for this key\rvault. It does not accept false value."
           optional: true
         - id: parameters.properties.createMode
           type:
@@ -160,6 +162,31 @@ items:
           type:
             - boolean
           description: "Property\rspecifying whether protection against purge is enabled for this vault.\rSetting this property to true activates protection against purge for this\rvault and its content - only the Key Vault service may initiate a hard,\rirrecoverable deletion. The setting is effective only if soft delete is also\renabled. Enabling this functionality is irreversible - that is, the property\rdoes not accept false as its value."
+          optional: true
+        - id: parameters.properties.networkAcls
+          type:
+            - object
+          description: "A collection of rules\rgoverning the accessibility of the vault from specific network locations."
+          optional: true
+        - id: parameters.properties.networkAcls.bypass
+          type:
+            - string
+          description: "Tells what\rtraffic can bypass network rules. This can be 'AzureServices' or 'None'.  If\rnot specified the default is 'AzureServices'. Possible values include:\r'AzureServices', 'None'"
+          optional: true
+        - id: parameters.properties.networkAcls.defaultAction
+          type:
+            - string
+          description: "The\rdefault action when no rule from ipRules and from virtualNetworkRules match.\rThis is only used after the bypass property has been evaluated. Possible\rvalues include: 'Allow', 'Deny'"
+          optional: true
+        - id: parameters.properties.networkAcls.ipRules
+          type:
+            - array
+          description: "The list of IP\raddress rules."
+          optional: true
+        - id: parameters.properties.networkAcls.virtualNetworkRules
+          type:
+            - array
+          description: "The\rlist of virtual network rules."
           optional: true
         - id: options
           type:
@@ -267,7 +294,7 @@ items:
         - id: parameters.properties.enableSoftDelete
           type:
             - boolean
-          description: "Property\rspecifying whether recoverable deletion is enabled for this key vault.\rSetting this property to true activates the soft delete feature, whereby\rvaults or vault entities can be recovered after deletion. Enabling this\rfunctionality is irreversible - that is, the property does not accept false\ras its value."
+          description: "Property to\rspecify whether the 'soft delete' functionality is enabled for this key\rvault. It does not accept false value."
           optional: true
         - id: parameters.properties.createMode
           type:
@@ -278,6 +305,31 @@ items:
           type:
             - boolean
           description: "Property\rspecifying whether protection against purge is enabled for this vault.\rSetting this property to true activates protection against purge for this\rvault and its content - only the Key Vault service may initiate a hard,\rirrecoverable deletion. The setting is effective only if soft delete is also\renabled. Enabling this functionality is irreversible - that is, the property\rdoes not accept false as its value."
+          optional: true
+        - id: parameters.properties.networkAcls
+          type:
+            - object
+          description: "A collection of rules\rgoverning the accessibility of the vault from specific network locations."
+          optional: true
+        - id: parameters.properties.networkAcls.bypass
+          type:
+            - string
+          description: "Tells what\rtraffic can bypass network rules. This can be 'AzureServices' or 'None'.  If\rnot specified the default is 'AzureServices'. Possible values include:\r'AzureServices', 'None'"
+          optional: true
+        - id: parameters.properties.networkAcls.defaultAction
+          type:
+            - string
+          description: "The\rdefault action when no rule from ipRules and from virtualNetworkRules match.\rThis is only used after the bypass property has been evaluated. Possible\rvalues include: 'Allow', 'Deny'"
+          optional: true
+        - id: parameters.properties.networkAcls.ipRules
+          type:
+            - array
+          description: "The list of IP\raddress rules."
+          optional: true
+        - id: parameters.properties.networkAcls.virtualNetworkRules
+          type:
+            - array
+          description: "The\rlist of virtual network rules."
           optional: true
         - id: options
           type:
@@ -385,7 +437,7 @@ items:
         - id: parameters.properties.enableSoftDelete
           type:
             - boolean
-          description: "Property\rspecifying whether recoverable deletion ('soft' delete) is enabled for this\rkey vault. The property may not be set to false."
+          description: "Property to\rspecify whether the 'soft delete' functionality is enabled for this key\rvault. It does not accept false value."
           optional: true
         - id: parameters.properties.createMode
           type:
@@ -395,7 +447,32 @@ items:
         - id: parameters.properties.enablePurgeProtection
           type:
             - boolean
-          description: "Property\rspecifying whether protection against purge is enabled for this vault; it is\ronly effective if soft delete is also enabled. Once activated, the property\rmay no longer be reset to false."
+          description: "Property\rspecifying whether protection against purge is enabled for this vault.\rSetting this property to true activates protection against purge for this\rvault and its content - only the Key Vault service may initiate a hard,\rirrecoverable deletion. The setting is effective only if soft delete is also\renabled. Enabling this functionality is irreversible - that is, the property\rdoes not accept false as its value."
+          optional: true
+        - id: parameters.properties.networkAcls
+          type:
+            - object
+          description: "A collection of rules\rgoverning the accessibility of the vault from specific network locations."
+          optional: true
+        - id: parameters.properties.networkAcls.bypass
+          type:
+            - string
+          description: "Tells what\rtraffic can bypass network rules. This can be 'AzureServices' or 'None'.  If\rnot specified the default is 'AzureServices'. Possible values include:\r'AzureServices', 'None'"
+          optional: true
+        - id: parameters.properties.networkAcls.defaultAction
+          type:
+            - string
+          description: "The\rdefault action when no rule from ipRules and from virtualNetworkRules match.\rThis is only used after the bypass property has been evaluated. Possible\rvalues include: 'Allow', 'Deny'"
+          optional: true
+        - id: parameters.properties.networkAcls.ipRules
+          type:
+            - array
+          description: "The list of IP\raddress rules."
+          optional: true
+        - id: parameters.properties.networkAcls.virtualNetworkRules
+          type:
+            - array
+          description: "The\rlist of virtual network rules."
           optional: true
         - id: options
           type:
@@ -497,7 +574,7 @@ items:
         - id: parameters.properties.enableSoftDelete
           type:
             - boolean
-          description: "Property\rspecifying whether recoverable deletion ('soft' delete) is enabled for this\rkey vault. The property may not be set to false."
+          description: "Property to\rspecify whether the 'soft delete' functionality is enabled for this key\rvault. It does not accept false value."
           optional: true
         - id: parameters.properties.createMode
           type:
@@ -507,7 +584,32 @@ items:
         - id: parameters.properties.enablePurgeProtection
           type:
             - boolean
-          description: "Property\rspecifying whether protection against purge is enabled for this vault; it is\ronly effective if soft delete is also enabled. Once activated, the property\rmay no longer be reset to false."
+          description: "Property\rspecifying whether protection against purge is enabled for this vault.\rSetting this property to true activates protection against purge for this\rvault and its content - only the Key Vault service may initiate a hard,\rirrecoverable deletion. The setting is effective only if soft delete is also\renabled. Enabling this functionality is irreversible - that is, the property\rdoes not accept false as its value."
+          optional: true
+        - id: parameters.properties.networkAcls
+          type:
+            - object
+          description: "A collection of rules\rgoverning the accessibility of the vault from specific network locations."
+          optional: true
+        - id: parameters.properties.networkAcls.bypass
+          type:
+            - string
+          description: "Tells what\rtraffic can bypass network rules. This can be 'AzureServices' or 'None'.  If\rnot specified the default is 'AzureServices'. Possible values include:\r'AzureServices', 'None'"
+          optional: true
+        - id: parameters.properties.networkAcls.defaultAction
+          type:
+            - string
+          description: "The\rdefault action when no rule from ipRules and from virtualNetworkRules match.\rThis is only used after the bypass property has been evaluated. Possible\rvalues include: 'Allow', 'Deny'"
+          optional: true
+        - id: parameters.properties.networkAcls.ipRules
+          type:
+            - array
+          description: "The list of IP\raddress rules."
+          optional: true
+        - id: parameters.properties.networkAcls.virtualNetworkRules
+          type:
+            - array
+          description: "The\rlist of virtual network rules."
           optional: true
         - id: options
           type:
@@ -1541,6 +1643,298 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: 'function checkNameAvailability(vaultName, options, optionalCallback)'
+    langs:
+      - js
+  - uid: 'azure-arm-keyvault.Vaults#beginCreateOrUpdateWithHttpOperationResponse'
+    id: 'azure-arm-keyvault.Vaults#beginCreateOrUpdateWithHttpOperationResponse'
+    parent: azure-arm-keyvault.Vaults
+    name: >-
+      beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName, vaultName,
+      parameters, options)
+    summary: Create or update a key vault in the specified subscription.
+    fullName: >-
+      azure-arm-keyvault.Vaults.beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
+      vaultName, parameters, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<Vault>} - The deserialized result object.'
+        value: '{HttpOperationResponse<Vault>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: "The name of the Resource Group to which\rthe server belongs."
+        - id: vaultName
+          type:
+            - string
+          description: Name of the vault
+        - id: parameters
+          type:
+            - object
+          description: Parameters to create or update the vault
+        - id: parameters.location
+          type:
+            - string
+          description: "The supported Azure location where the\rkey vault should be created."
+        - id: parameters.tags
+          type:
+            - object
+          description: "The tags that will be assigned to the key\rvault."
+          optional: true
+        - id: parameters.properties
+          type:
+            - object
+          description: Properties of the vault
+        - id: parameters.properties.tenantId
+          type:
+            - azure-arm-keyvault.uuid
+          description: "The Azure Active Directory\rtenant ID that should be used for authenticating requests to the key vault."
+        - id: parameters.properties.sku
+          type:
+            - object
+          description: SKU details
+        - id: parameters.properties.sku.name
+          type:
+            - string
+          description: "SKU name to specify whether\rthe key vault is a standard vault or a premium vault. Possible values\rinclude: 'standard', 'premium'"
+        - id: parameters.properties.accessPolicies
+          type:
+            - array
+          description: "An array of 0 to 16\ridentities that have access to the key vault. All identities in the array\rmust use the same tenant ID as the key vault's tenant ID."
+          optional: true
+        - id: parameters.properties.vaultUri
+          type:
+            - string
+          description: "The URI of the vault for\rperforming operations on keys and secrets."
+          optional: true
+        - id: parameters.properties.enabledForDeployment
+          type:
+            - boolean
+          description: "Property to\rspecify whether Azure Virtual Machines are permitted to retrieve\rcertificates stored as secrets from the key vault."
+          optional: true
+        - id: parameters.properties.enabledForDiskEncryption
+          type:
+            - boolean
+          description: "Property\rto specify whether Azure Disk Encryption is permitted to retrieve secrets\rfrom the vault and unwrap keys."
+          optional: true
+        - id: parameters.properties.enabledForTemplateDeployment
+          type:
+            - boolean
+          description: "Property to specify whether Azure Resource Manager is permitted to retrieve\rsecrets from the key vault."
+          optional: true
+        - id: parameters.properties.enableSoftDelete
+          type:
+            - boolean
+          description: "Property to\rspecify whether the 'soft delete' functionality is enabled for this key\rvault. It does not accept false value."
+          optional: true
+        - id: parameters.properties.createMode
+          type:
+            - string
+          description: "The vault's create mode\rto indicate whether the vault need to be recovered or not. Possible values\rinclude: 'recover', 'default'"
+          optional: true
+        - id: parameters.properties.enablePurgeProtection
+          type:
+            - boolean
+          description: "Property\rspecifying whether protection against purge is enabled for this vault.\rSetting this property to true activates protection against purge for this\rvault and its content - only the Key Vault service may initiate a hard,\rirrecoverable deletion. The setting is effective only if soft delete is also\renabled. Enabling this functionality is irreversible - that is, the property\rdoes not accept false as its value."
+          optional: true
+        - id: parameters.properties.networkAcls
+          type:
+            - object
+          description: "A collection of rules\rgoverning the accessibility of the vault from specific network locations."
+          optional: true
+        - id: parameters.properties.networkAcls.bypass
+          type:
+            - string
+          description: "Tells what\rtraffic can bypass network rules. This can be 'AzureServices' or 'None'.  If\rnot specified the default is 'AzureServices'. Possible values include:\r'AzureServices', 'None'"
+          optional: true
+        - id: parameters.properties.networkAcls.defaultAction
+          type:
+            - string
+          description: "The\rdefault action when no rule from ipRules and from virtualNetworkRules match.\rThis is only used after the bypass property has been evaluated. Possible\rvalues include: 'Allow', 'Deny'"
+          optional: true
+        - id: parameters.properties.networkAcls.ipRules
+          type:
+            - array
+          description: "The list of IP\raddress rules."
+          optional: true
+        - id: parameters.properties.networkAcls.virtualNetworkRules
+          type:
+            - array
+          description: "The\rlist of virtual network rules."
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
+        vaultName, parameters, options)
+    langs:
+      - js
+  - uid: 'azure-arm-keyvault.Vaults#beginCreateOrUpdate'
+    id: 'azure-arm-keyvault.Vaults#beginCreateOrUpdate'
+    parent: azure-arm-keyvault.Vaults
+    name: >-
+      beginCreateOrUpdate(resourceGroupName, vaultName, parameters, options,
+      optionalCallback)
+    summary: Create or update a key vault in the specified subscription.
+    fullName: >-
+      azure-arm-keyvault.Vaults.beginCreateOrUpdate(resourceGroupName,
+      vaultName, parameters, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{Vault} - The deserialized result object.'
+        value: '{Vault} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link Vault} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link Vault} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: "The name of the Resource Group to which\rthe server belongs."
+        - id: vaultName
+          type:
+            - string
+          description: Name of the vault
+        - id: parameters
+          type:
+            - object
+          description: Parameters to create or update the vault
+        - id: parameters.location
+          type:
+            - string
+          description: "The supported Azure location where the\rkey vault should be created."
+        - id: parameters.tags
+          type:
+            - object
+          description: "The tags that will be assigned to the key\rvault."
+          optional: true
+        - id: parameters.properties
+          type:
+            - object
+          description: Properties of the vault
+        - id: parameters.properties.tenantId
+          type:
+            - azure-arm-keyvault.uuid
+          description: "The Azure Active Directory\rtenant ID that should be used for authenticating requests to the key vault."
+        - id: parameters.properties.sku
+          type:
+            - object
+          description: SKU details
+        - id: parameters.properties.sku.name
+          type:
+            - string
+          description: "SKU name to specify whether\rthe key vault is a standard vault or a premium vault. Possible values\rinclude: 'standard', 'premium'"
+        - id: parameters.properties.accessPolicies
+          type:
+            - array
+          description: "An array of 0 to 16\ridentities that have access to the key vault. All identities in the array\rmust use the same tenant ID as the key vault's tenant ID."
+          optional: true
+        - id: parameters.properties.vaultUri
+          type:
+            - string
+          description: "The URI of the vault for\rperforming operations on keys and secrets."
+          optional: true
+        - id: parameters.properties.enabledForDeployment
+          type:
+            - boolean
+          description: "Property to\rspecify whether Azure Virtual Machines are permitted to retrieve\rcertificates stored as secrets from the key vault."
+          optional: true
+        - id: parameters.properties.enabledForDiskEncryption
+          type:
+            - boolean
+          description: "Property\rto specify whether Azure Disk Encryption is permitted to retrieve secrets\rfrom the vault and unwrap keys."
+          optional: true
+        - id: parameters.properties.enabledForTemplateDeployment
+          type:
+            - boolean
+          description: "Property to specify whether Azure Resource Manager is permitted to retrieve\rsecrets from the key vault."
+          optional: true
+        - id: parameters.properties.enableSoftDelete
+          type:
+            - boolean
+          description: "Property to\rspecify whether the 'soft delete' functionality is enabled for this key\rvault. It does not accept false value."
+          optional: true
+        - id: parameters.properties.createMode
+          type:
+            - string
+          description: "The vault's create mode\rto indicate whether the vault need to be recovered or not. Possible values\rinclude: 'recover', 'default'"
+          optional: true
+        - id: parameters.properties.enablePurgeProtection
+          type:
+            - boolean
+          description: "Property\rspecifying whether protection against purge is enabled for this vault.\rSetting this property to true activates protection against purge for this\rvault and its content - only the Key Vault service may initiate a hard,\rirrecoverable deletion. The setting is effective only if soft delete is also\renabled. Enabling this functionality is irreversible - that is, the property\rdoes not accept false as its value."
+          optional: true
+        - id: parameters.properties.networkAcls
+          type:
+            - object
+          description: "A collection of rules\rgoverning the accessibility of the vault from specific network locations."
+          optional: true
+        - id: parameters.properties.networkAcls.bypass
+          type:
+            - string
+          description: "Tells what\rtraffic can bypass network rules. This can be 'AzureServices' or 'None'.  If\rnot specified the default is 'AzureServices'. Possible values include:\r'AzureServices', 'None'"
+          optional: true
+        - id: parameters.properties.networkAcls.defaultAction
+          type:
+            - string
+          description: "The\rdefault action when no rule from ipRules and from virtualNetworkRules match.\rThis is only used after the bypass property has been evaluated. Possible\rvalues include: 'Allow', 'Deny'"
+          optional: true
+        - id: parameters.properties.networkAcls.ipRules
+          type:
+            - array
+          description: "The list of IP\raddress rules."
+          optional: true
+        - id: parameters.properties.networkAcls.virtualNetworkRules
+          type:
+            - array
+          description: "The\rlist of virtual network rules."
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function beginCreateOrUpdate(resourceGroupName, vaultName, parameters,
+        options, optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-keyvault.Vaults#beginPurgeDeletedWithHttpOperationResponse'

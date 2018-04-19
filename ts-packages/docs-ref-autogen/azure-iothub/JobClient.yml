@@ -1,0 +1,286 @@
+### YamlMime:UniversalReference
+items:
+  - uid: azure-iothub.JobClient
+    name: JobClient
+    fullName: JobClient
+    children:
+      - azure-iothub.JobClient.cancelJob
+      - azure-iothub.JobClient.createQuery
+      - azure-iothub.JobClient.fromConnectionString
+      - azure-iothub.JobClient.fromSharedAccessSignature
+      - azure-iothub.JobClient.getJob
+      - azure-iothub.JobClient.JobCallback
+      - azure-iothub.JobClient.scheduleDeviceMethod
+      - azure-iothub.JobClient.scheduleTwinUpdate
+    langs:
+      - typeScript
+    type: class
+    summary: >
+      Provides methods to create, update, monitor and cancel long-running jobs
+      on an IoT Hub instance, as well as query existing jobs.
+
+      The Jobs API in Azure IoT Hub allows to schedule direct method calls and
+      twin updates on multiple devices.
+
+      SDK users are expected to create <xref:azure-iothub.JobClient> instances
+      using the factory methods
+      <xref:azure-iothub.JobClient.fromConnectionString> and
+      <xref:azure-iothub.JobClient.fromSharedAccessSignature>.
+    package: azure-iothub
+  - uid: azure-iothub.JobClient.cancelJob
+    name: cancelJob
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Cancels an existing job.
+    syntax:
+      content: 'function cancelJob(jobId: string | number, done: JobCallback)'
+      parameters:
+        - id: jobId
+          type:
+            - string | number
+          description: The identifier of an existing job.
+        - id: done
+          type:
+            - azure-iothub.JobClient.JobCallback
+          description: |
+            The function to call when the operation is
+                                           complete. `done` will be called with three
+                                           arguments: an Error object (can be null), a
+                                           job object, and a transport-specific response
+                                           object useful for logging or debugging.
+  - uid: azure-iothub.JobClient.createQuery
+    name: createQuery
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates a query that can be used to return pages of existing job based on
+      type and status.
+    syntax:
+      content: >-
+        function createQuery(jobType?: JobType, jobStatus?: JobStatus,
+        pageSize?: number)
+      parameters:
+        - id: jobType
+          type:
+            - azure-iothub.JobType
+          description: The type that should be used to filter results.
+          optional: true
+        - id: jobStatus
+          type:
+            - azure-iothub.JobStatus
+          description: The status that should be used to filter results.
+          optional: true
+        - id: pageSize
+          type:
+            - number
+          description: |
+            The number of elements to return per page.
+          optional: true
+      return:
+        type:
+          - azure-iothub.Query
+  - uid: azure-iothub.JobClient.fromConnectionString
+    name: fromConnectionString
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Constructs a JobClient object from the given connection string.
+    syntax:
+      content: 'static function fromConnectionString(connectionString: string)'
+      parameters:
+        - id: connectionString
+          type:
+            - string
+          description: |
+            A connection string which encapsulates the
+                                                              appropriate (read and/or write) Registry
+                                                              permissions.
+      return:
+        type:
+          - azure-iothub.JobClient
+    exceptions:
+      - type: ReferenceError
+        description: |
+          If the connectionString argument is falsy.
+  - uid: azure-iothub.JobClient.fromSharedAccessSignature
+    name: fromSharedAccessSignature
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Constructs a JobClient object from the given shared access signature.
+    syntax:
+      content: 'static function fromSharedAccessSignature(sharedAccessSignature: string)'
+      parameters:
+        - id: sharedAccessSignature
+          type:
+            - string
+          description: |
+            A shared access signature which encapsulates
+                                                         the appropriate (read and/or write) Registry
+                                                         permissions.
+      return:
+        type:
+          - azure-iothub.JobClient
+    exceptions:
+      - type: ReferenceError
+        description: |
+          If the sharedAccessSignature argument is falsy.
+  - uid: azure-iothub.JobClient.getJob
+    name: getJob
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Requests information about an existing job.
+    syntax:
+      content: 'function getJob(jobId: string | number, done: JobCallback)'
+      parameters:
+        - id: jobId
+          type:
+            - string | number
+          description: The identifier of an existing job.
+        - id: done
+          type:
+            - azure-iothub.JobClient.JobCallback
+          description: |
+            The function to call when the operation is
+                                           complete. `done` will be called with three
+                                           arguments: an Error object (can be null), a
+                                           job object, and a transport-specific response
+                                           object useful for logging or debugging.
+  - uid: azure-iothub.JobClient.JobCallback
+    name: JobCallback
+    fullName: JobCallback
+    children: []
+    langs:
+      - typeScript
+    type: class
+    summary: |+
+
+    package: azure-iothub
+  - uid: azure-iothub.JobClient.scheduleDeviceMethod
+    name: scheduleDeviceMethod
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Schedules a job that will execute a device method on a set of devices.
+    syntax:
+      content: >-
+        function scheduleDeviceMethod(jobId: string | number, queryCondition:
+        string, methodParams: DeviceMethodParams, jobStartTime?: Date |
+        JobCallback, maxExecutionTimeInSeconds?: number | JobCallback, done?:
+        JobCallback)
+      parameters:
+        - id: jobId
+          type:
+            - string | number
+          description: The unique identifier that should be used for this job.
+        - id: queryCondition
+          type:
+            - string
+          description: |-
+            A SQL query WHERE clause used to compute the list of devices
+                                                 on which this job should be run.
+        - id: methodParams
+          type:
+            - azure-iothub.DeviceMethodParams
+          description: >-
+            An object describing the method and shall have the following
+            properties:
+                                                 - methodName          The name of the method that shall be invoked.
+                                                 - payload             [optional] The payload to use for the method call.
+                                                 - responseTimeoutInSeconds [optional] The number of seconds IoT Hub shall wait for the device
+        - id: jobStartTime
+          type:
+            - Date | azure-iothub.JobClient.JobCallback
+          description: Time time at which the job should start
+          optional: true
+        - id: maxExecutionTimeInSeconds
+          type:
+            - number | azure-iothub.JobClient.JobCallback
+          description: The maximum time alloted for this job to run in seconds.
+          optional: true
+        - id: done
+          type:
+            - azure-iothub.JobClient.JobCallback
+          description: |
+            The function to call when the operation is
+                                                 complete. `done` will be called with three
+                                                 arguments: an Error object (can be null), a
+                                                 job object, and a transport-specific response
+                                                 object useful for logging or debugging.
+          optional: true
+    exceptions:
+      - type: ReferenceError
+        description: >-
+          If one or more of the jobId, queryCondition or methodParams arguments
+          are falsy.
+      - type: ReferenceError
+        description: If methodParams.methodName is falsy.
+      - type: TypeError
+        description: |
+          If the callback is not the last parameter
+  - uid: azure-iothub.JobClient.scheduleTwinUpdate
+    name: scheduleTwinUpdate
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Schedule a job that will update a set of twins with the patch provided as
+      a parameter.
+    syntax:
+      content: >-
+        function scheduleTwinUpdate(jobId: string | number, queryCondition:
+        string, patch: any, jobStartTime?: Date | JobCallback,
+        maxExecutionTimeInSeconds?: number | JobCallback, done?: JobCallback)
+      parameters:
+        - id: jobId
+          type:
+            - string | number
+          description: The unique identifier that should be used for this job.
+        - id: queryCondition
+          type:
+            - string
+          description: |-
+            A SQL query WHERE clause used to compute the list of devices
+                                                 on which this job should be run.
+        - id: patch
+          type:
+            - any
+          description: The twin patch that should be applied to the twins.
+        - id: jobStartTime
+          type:
+            - Date | azure-iothub.JobClient.JobCallback
+          description: Time time at which the job should start
+          optional: true
+        - id: maxExecutionTimeInSeconds
+          type:
+            - number | azure-iothub.JobClient.JobCallback
+          description: The maximum time alloted for this job to run in seconds.
+          optional: true
+        - id: done
+          type:
+            - azure-iothub.JobClient.JobCallback
+          description: |
+            The function to call when the operation is
+                                                 complete. `done` will be called with three
+                                                 arguments: an Error object (can be null), a
+                                                 job object, and a transport-specific response
+                                                 object useful for logging or debugging.
+          optional: true
+    exceptions:
+      - type: ReferenceError
+        description: >-
+          If one or more of the jobId, queryCondition or patch arguments are
+          falsy.
+      - type: TypeError
+        description: |
+          If the callback is not the last parameter

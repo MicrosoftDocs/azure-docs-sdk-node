@@ -5,16 +5,6 @@ items:
     name: ContainerGroups
     summary: Class representing a ContainerGroups.
     fullName: azure-arm-containerinstance.ContainerGroups
-    source:
-      id: azure-arm-containerinstance.ContainerGroups
-      path: >-
-        lib\services\containerinstanceManagement\lib\operations\containerGroups.js
-      startLine: 1262
-      remote:
-        branch: jsdoc
-        path: >-
-          lib\services\containerinstanceManagement\lib\operations\containerGroups.js
-        repo: 'https://github.com/Azure/azure-sdk-for-node.git'
     type: Class
     children:
       - 'azure-arm-containerinstance.ContainerGroups.#ctor'
@@ -35,6 +25,9 @@ items:
       - >-
         azure-arm-containerinstance.ContainerGroups#deleteMethodWithHttpOperationResponse
       - 'azure-arm-containerinstance.ContainerGroups#deleteMethod'
+      - >-
+        azure-arm-containerinstance.ContainerGroups#beginCreateOrUpdateWithHttpOperationResponse
+      - 'azure-arm-containerinstance.ContainerGroups#beginCreateOrUpdate'
       - >-
         azure-arm-containerinstance.ContainerGroups#listNextWithHttpOperationResponse
       - 'azure-arm-containerinstance.ContainerGroups#listNext'
@@ -575,11 +568,11 @@ items:
     parent: azure-arm-containerinstance.ContainerGroups
     name: >-
       updateWithHttpOperationResponse(resourceGroupName, containerGroupName,
-      options)
+      resource, options)
     summary: "Update container groups.\r\rUpdates container group tags with specified values."
     fullName: >-
       azure-arm-containerinstance.ContainerGroups.updateWithHttpOperationResponse(resourceGroupName,
-      containerGroupName, options)
+      containerGroupName, resource, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -604,25 +597,24 @@ items:
           type:
             - string
           description: The name of the container group.
-        - id: options
+        - id: resource
           type:
             - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.resource
-          type:
-            - object
-          description: "The container group resource with just\rthe tags to be updated."
-          optional: true
-        - id: options.resource.location
+          description: "The container group resource with just the tags to\rbe updated."
+        - id: resource.location
           type:
             - string
           description: The resource location.
           optional: true
-        - id: options.resource.tags
+        - id: resource.tags
           type:
             - object
           description: The resource tags.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
           optional: true
         - id: options.customHeaders
           type:
@@ -635,17 +627,19 @@ items:
         description: A promise is returned
       content: >-
         function updateWithHttpOperationResponse(resourceGroupName,
-        containerGroupName, options)
+        containerGroupName, resource, options)
     langs:
       - js
   - uid: 'azure-arm-containerinstance.ContainerGroups#update'
     id: 'azure-arm-containerinstance.ContainerGroups#update'
     parent: azure-arm-containerinstance.ContainerGroups
-    name: 'update(resourceGroupName, containerGroupName, options, optionalCallback)'
+    name: >-
+      update(resourceGroupName, containerGroupName, resource, options,
+      optionalCallback)
     summary: "Update container groups.\r\rUpdates container group tags with specified values."
     fullName: >-
       azure-arm-containerinstance.ContainerGroups.update(resourceGroupName,
-      containerGroupName, options, optionalCallback)
+      containerGroupName, resource, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -666,25 +660,24 @@ items:
           type:
             - string
           description: The name of the container group.
-        - id: options
+        - id: resource
           type:
             - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.resource
-          type:
-            - object
-          description: "The container group resource with just\rthe tags to be updated."
-          optional: true
-        - id: options.resource.location
+          description: "The container group resource with just the tags to\rbe updated."
+        - id: resource.location
           type:
             - string
           description: The resource location.
           optional: true
-        - id: options.resource.tags
+        - id: resource.tags
           type:
             - object
           description: The resource tags.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
           optional: true
         - id: options.customHeaders
           type:
@@ -702,8 +695,8 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function update(resourceGroupName, containerGroupName, options,
-        optionalCallback)
+        function update(resourceGroupName, containerGroupName, resource,
+        options, optionalCallback)
     langs:
       - js
   - uid: >-
@@ -814,6 +807,228 @@ items:
       content: >-
         function deleteMethod(resourceGroupName, containerGroupName, options,
         optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-containerinstance.ContainerGroups#beginCreateOrUpdateWithHttpOperationResponse
+    id: >-
+      azure-arm-containerinstance.ContainerGroups#beginCreateOrUpdateWithHttpOperationResponse
+    parent: azure-arm-containerinstance.ContainerGroups
+    name: >-
+      beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
+      containerGroupName, containerGroup, options)
+    summary: "Create or update container groups.\r\rCreate or update container groups with specified configurations."
+    fullName: >-
+      azure-arm-containerinstance.ContainerGroups.beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
+      containerGroupName, containerGroup, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ContainerGroup>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<ContainerGroup>} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: containerGroupName
+          type:
+            - string
+          description: The name of the container group.
+        - id: containerGroup
+          type:
+            - object
+          description: "The properties of the container group to be\rcreated or updated."
+        - id: containerGroup.containers
+          type:
+            - array
+          description: "The containers within the container\rgroup."
+        - id: containerGroup.imageRegistryCredentials
+          type:
+            - array
+          description: "The image registry\rcredentials by which the container group is created from."
+          optional: true
+        - id: containerGroup.restartPolicy
+          type:
+            - string
+          description: "Restart policy for all\rcontainers within the container group.\r- `Always` Always restart\r- `OnFailure` Restart on failure\r- `Never` Never restart\r. Possible values include: 'Always', 'OnFailure', 'Never'"
+          optional: true
+        - id: containerGroup.ipAddress
+          type:
+            - object
+          description: "The IP address type of the\rcontainer group."
+          optional: true
+        - id: containerGroup.ipAddress.ports
+          type:
+            - array
+          description: "The list of ports exposed on\rthe container group."
+        - id: containerGroup.ipAddress.ip
+          type:
+            - string
+          description: "The IP exposed to the public\rinternet."
+          optional: true
+        - id: containerGroup.ipAddress.dnsNameLabel
+          type:
+            - string
+          description: "The Dns name label\rfor the IP."
+          optional: true
+        - id: containerGroup.osType
+          type:
+            - string
+          description: "The operating system type required by\rthe containers in the container group. Possible values include: 'Windows',\r'Linux'"
+        - id: containerGroup.volumes
+          type:
+            - array
+          description: "The list of volumes that can be\rmounted by containers in this container group."
+          optional: true
+        - id: containerGroup.location
+          type:
+            - string
+          description: The resource location.
+          optional: true
+        - id: containerGroup.tags
+          type:
+            - object
+          description: The resource tags.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginCreateOrUpdateWithHttpOperationResponse(resourceGroupName,
+        containerGroupName, containerGroup, options)
+    langs:
+      - js
+  - uid: 'azure-arm-containerinstance.ContainerGroups#beginCreateOrUpdate'
+    id: 'azure-arm-containerinstance.ContainerGroups#beginCreateOrUpdate'
+    parent: azure-arm-containerinstance.ContainerGroups
+    name: >-
+      beginCreateOrUpdate(resourceGroupName, containerGroupName, containerGroup,
+      options, optionalCallback)
+    summary: "Create or update container groups.\r\rCreate or update container groups with specified configurations."
+    fullName: >-
+      azure-arm-containerinstance.ContainerGroups.beginCreateOrUpdate(resourceGroupName,
+      containerGroupName, containerGroup, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{ContainerGroup} - The deserialized result object.'
+        value: '{ContainerGroup} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ContainerGroup} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ContainerGroup} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: containerGroupName
+          type:
+            - string
+          description: The name of the container group.
+        - id: containerGroup
+          type:
+            - object
+          description: "The properties of the container group to be\rcreated or updated."
+        - id: containerGroup.containers
+          type:
+            - array
+          description: "The containers within the container\rgroup."
+        - id: containerGroup.imageRegistryCredentials
+          type:
+            - array
+          description: "The image registry\rcredentials by which the container group is created from."
+          optional: true
+        - id: containerGroup.restartPolicy
+          type:
+            - string
+          description: "Restart policy for all\rcontainers within the container group.\r- `Always` Always restart\r- `OnFailure` Restart on failure\r- `Never` Never restart\r. Possible values include: 'Always', 'OnFailure', 'Never'"
+          optional: true
+        - id: containerGroup.ipAddress
+          type:
+            - object
+          description: "The IP address type of the\rcontainer group."
+          optional: true
+        - id: containerGroup.ipAddress.ports
+          type:
+            - array
+          description: "The list of ports exposed on\rthe container group."
+        - id: containerGroup.ipAddress.ip
+          type:
+            - string
+          description: "The IP exposed to the public\rinternet."
+          optional: true
+        - id: containerGroup.ipAddress.dnsNameLabel
+          type:
+            - string
+          description: "The Dns name label\rfor the IP."
+          optional: true
+        - id: containerGroup.osType
+          type:
+            - string
+          description: "The operating system type required by\rthe containers in the container group. Possible values include: 'Windows',\r'Linux'"
+        - id: containerGroup.volumes
+          type:
+            - array
+          description: "The list of volumes that can be\rmounted by containers in this container group."
+          optional: true
+        - id: containerGroup.location
+          type:
+            - string
+          description: The resource location.
+          optional: true
+        - id: containerGroup.tags
+          type:
+            - object
+          description: The resource tags.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function beginCreateOrUpdate(resourceGroupName, containerGroupName,
+        containerGroup, options, optionalCallback)
     langs:
       - js
   - uid: >-

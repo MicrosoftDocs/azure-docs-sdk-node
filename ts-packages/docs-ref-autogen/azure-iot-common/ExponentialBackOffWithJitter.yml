@@ -1,0 +1,136 @@
+### YamlMime:UniversalReference
+items:
+  - uid: azure-iot-common.ExponentialBackOffWithJitter
+    name: ExponentialBackOffWithJitter
+    fullName: ExponentialBackOffWithJitter
+    children:
+      - azure-iot-common.ExponentialBackOffWithJitter.constructor
+      - azure-iot-common.ExponentialBackOffWithJitter.immediateFirstRetry
+      - azure-iot-common.ExponentialBackOffWithJitter.nextRetryTimeout
+      - azure-iot-common.ExponentialBackOffWithJitter.normalParameters
+      - azure-iot-common.ExponentialBackOffWithJitter.shouldRetry
+      - azure-iot-common.ExponentialBackOffWithJitter.throttledParameters
+    langs:
+      - typeScript
+    type: class
+    summary: >-
+      Implements an Exponential Backoff with Jitter retry strategy.
+
+      The function to calculate the next interval is the following (x is the xth
+      retry):
+
+      F(x) = min(Cmin+ (2^(x-1)-1) * rand(C * (1 – Jd), C*(1-Ju)), Cmax)
+    package: azure-iot-common
+  - uid: azure-iot-common.ExponentialBackOffWithJitter.constructor
+    name: ExponentialBackOffWithJitter
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: >-
+      Initializes a new instance of the
+      <xref:azure-iot-common.ExponentialBackOffWithJitter> class.
+    syntax:
+      content: >-
+        new ExponentialBackOffWithJitter(immediateFirstRetry?: boolean,
+        errorFilter?: ErrorFilter)
+      parameters:
+        - id: immediateFirstRetry
+          type:
+            - boolean
+          description: >
+            boolean indicating whether the first retry should be immediate
+            (default) or wait the first interval (c value).
+          optional: true
+        - id: errorFilter
+          type:
+            - ErrorFilter
+          description: ''
+          optional: true
+  - uid: azure-iot-common.ExponentialBackOffWithJitter.immediateFirstRetry
+    name: immediateFirstRetry
+    fullName: immediateFirstRetry
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Boolean indicating whether the first retry should be immediate (if set to
+      true) or after the normalParameters.c delay (if set to false).
+    syntax:
+      content: 'immediateFirstRetry: boolean'
+      return:
+        type:
+          - boolean
+  - uid: azure-iot-common.ExponentialBackOffWithJitter.nextRetryTimeout
+    name: nextRetryTimeout
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Computes the interval to wait before retrying at each new retry tentative.
+    syntax:
+      content: 'function nextRetryTimeout(retryCount: number, isThrottled: boolean)'
+      parameters:
+        - id: retryCount
+          type:
+            - number
+          description: Current retry tentative.
+        - id: isThrottled
+          type:
+            - boolean
+          description: >-
+            Boolean indicating whether the Azure IoT hub is throttling
+            operations.
+      return:
+        type:
+          - number
+  - uid: azure-iot-common.ExponentialBackOffWithJitter.normalParameters
+    name: normalParameters
+    fullName: normalParameters
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Retry parameters used to calculate the delay between each retry in normal
+      situations (ie. not throttled).
+    syntax:
+      content: 'normalParameters: ExponentialBackoffWithJitterParameters'
+      return:
+        type:
+          - azure-iot-common.ExponentialBackoffWithJitterParameters
+  - uid: azure-iot-common.ExponentialBackOffWithJitter.shouldRetry
+    name: shouldRetry
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Based on the error passed as argument, determines if an error is transient
+      and if the operation should be retried or not.
+    syntax:
+      content: 'function shouldRetry(error: Error)'
+      parameters:
+        - id: error
+          type:
+            - Error
+          description: The error encountered by the operation.
+      return:
+        type:
+          - boolean
+  - uid: azure-iot-common.ExponentialBackOffWithJitter.throttledParameters
+    name: throttledParameters
+    fullName: throttledParameters
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Retry parameters used to calculate the delay between each retry in
+      throttled situations.
+    syntax:
+      content: 'throttledParameters: ExponentialBackoffWithJitterParameters'
+      return:
+        type:
+          - azure-iot-common.ExponentialBackoffWithJitterParameters

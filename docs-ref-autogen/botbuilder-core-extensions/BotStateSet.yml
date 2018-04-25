@@ -1,0 +1,87 @@
+### YamlMime:UniversalReference
+items:
+  - uid: botbuilder-core-extensions.BotStateSet
+    id: botbuilder-core-extensions.BotStateSet
+    name: BotStateSet
+    summary: ":package: **botbuilder-core-extensions**\r\rMiddleware that will call `read()` and `write()` in parallel on multiple `BotState`\rinstances.\r\r**Usage Example**\r\r```JavaScript\rconst { BotStateSet, ConversationState, UserState, MemoryStorage } = require('botbuilder');\r\rconst storage = new MemoryStorage();\rconst conversationState = new ConversationState(storage);\rconst userState = new UserState(storage);\radapter.use(new BotStateSet(conversationState, userState));\r\rserver.post('/api/messages', (req, res) => {\r   adapter.processActivity(req, res, async (context) => {\r      // Get state\r      const convo = conversationState.get(context);\r      const user = userState.get(context);\r\r      // ... route activity ...\r\r   });\r});\r```"
+    fullName: botbuilder-core-extensions.BotStateSet
+    source:
+      id: botbuilder-core-extensions.BotStateSet
+      path: libraries\botbuilder-core-extensions\lib\botStateSet.js
+      startLine: 31
+      remote:
+        branch: master
+        path: libraries\botbuilder-core-extensions\lib\botStateSet.js
+        repo: 'https://github.com/Microsoft/botbuilder-js.git'
+    type: Class
+    children:
+      - 'botbuilder-core-extensions.BotStateSet.#ctor'
+      - 'botbuilder-core-extensions.BotStateSet#use'
+      - 'botbuilder-core-extensions.BotStateSet#readAll'
+      - 'botbuilder-core-extensions.BotStateSet#writeAll'
+    langs:
+      - js
+  - id: 'botbuilder-core-extensions.BotStateSet.#ctor'
+    uid: 'botbuilder-core-extensions.BotStateSet.#ctor'
+    parent: botbuilder-core-extensions.BotStateSet
+    name: BotStateSet(middleware)
+    fullName: botbuilder-core-extensions.BotStateSet.BotStateSet(middleware)
+    summary: Creates a new BotStateSet instance.
+    type: Constructor
+    syntax:
+      parameters:
+        - id: middleware
+          description: Zero or more BotState plugins to register.
+      content: new BotStateSet(middleware)
+    langs:
+      - js
+  - uid: 'botbuilder-core-extensions.BotStateSet#use'
+    id: 'botbuilder-core-extensions.BotStateSet#use'
+    parent: botbuilder-core-extensions.BotStateSet
+    name: use(middleware)
+    summary: "Registers `BotState` middleware plugins with the set.\r\r**Usage Example**\r\r```JavaScript\rconst stateSet = new BotStateSet();\r\r// Add conversation state\rconst conversationState = new ConversationState();\rstateSet.use(conversationState);\r\r// Add user state\rconst userState = new UserState();\rstateSet.use(userState);\r\r// Register middleware\radapter.use(stateSet);\r```"
+    fullName: botbuilder-core-extensions.BotStateSet.use(middleware)
+    type: Function
+    syntax:
+      parameters:
+        - id: middleware
+          description: One or more BotState plugins to register.
+      content: function use(middleware)
+    langs:
+      - js
+  - uid: 'botbuilder-core-extensions.BotStateSet#readAll'
+    id: 'botbuilder-core-extensions.BotStateSet#readAll'
+    parent: botbuilder-core-extensions.BotStateSet
+    name: 'readAll(context, force)'
+    summary: "Calls `BotState.read()` on all of the BotState plugins in the set. This will trigger all of\rthe plugins to read in their state in parallel.\r\r**Usage Example**\r\r```JavaScript\rawait stateSet.readAll(context);\r```"
+    fullName: 'botbuilder-core-extensions.BotStateSet.readAll(context, force)'
+    type: Function
+    syntax:
+      parameters:
+        - id: context
+          description: Context for current turn of conversation with the user.
+        - id: force
+          description: >-
+            (Optional) If `true` the cache will be bypassed and the state will
+            always be read in directly from storage. Defaults to `false`.
+      content: 'function readAll(context, force)'
+    langs:
+      - js
+  - uid: 'botbuilder-core-extensions.BotStateSet#writeAll'
+    id: 'botbuilder-core-extensions.BotStateSet#writeAll'
+    parent: botbuilder-core-extensions.BotStateSet
+    name: 'writeAll(context, force)'
+    summary: "Calls `BotState.write()` on all of the BotState plugins in the set. This will trigger all of\rthe plugins to write out their state in parallel.\r\r**Usage Example**\r\r```JavaScript\rawait stateSet.writeAll(context);\r```"
+    fullName: 'botbuilder-core-extensions.BotStateSet.writeAll(context, force)'
+    type: Function
+    syntax:
+      parameters:
+        - id: context
+          description: Context for current turn of conversation with the user.
+        - id: force
+          description: >-
+            (Optional) if `true` the state will always be written out regardless
+            of its change state. Defaults to `false`.
+      content: 'function writeAll(context, force)'
+    langs:
+      - js

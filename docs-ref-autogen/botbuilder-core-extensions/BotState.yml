@@ -1,0 +1,106 @@
+### YamlMime:UniversalReference
+items:
+  - uid: botbuilder-core-extensions.BotState
+    id: botbuilder-core-extensions.BotState
+    name: BotState
+    summary: ":package: **botbuilder-core-extensions**\r\rReads and writes state for your bot to storage. The state object will be automatically cached on\rthe context object for the lifetime of the turn and will only be written to storage if they have\rbeen modified.\r\rWhen a `BotState` instance is used as middleware its state object will be automatically read in\rbefore your bots logic runs and then intelligently written back out upon completion of your bots\rlogic. Multiple instances can be read and written in parallel using the `BotStateSet` middleware.\r\r**Usage Example**\r\r```JavaScript\rconst { BotState, MemoryStorage } = require('botbuilder');\r\rconst storage = new MemoryStorage();\rconst botState = new BotState(storage, (context) => 'botState');\radapter.use(botState);\r\rserver.post('/api/messages', (req, res) => {\r   adapter.processActivity(req, res, async (context) => {\r      // Track up time\r      const state = botState.get(context);\r      if (!('startTime' in state)) { state.startTime = new Date().getTime() }\r      state.upTime = new Date().getTime() - state.stateTime;\r\r      // ... route activity ...\r\r   });\r});\r```"
+    fullName: botbuilder-core-extensions.BotState
+    source:
+      id: botbuilder-core-extensions.BotState
+      path: libraries\botbuilder-core-extensions\lib\botState.js
+      startLine: 37
+      remote:
+        branch: master
+        path: libraries\botbuilder-core-extensions\lib\botState.js
+        repo: 'https://github.com/Microsoft/botbuilder-js.git'
+    type: Class
+    children:
+      - 'botbuilder-core-extensions.BotState.#ctor'
+      - 'botbuilder-core-extensions.BotState#read'
+      - 'botbuilder-core-extensions.BotState#write'
+      - 'botbuilder-core-extensions.BotState#clear'
+      - 'botbuilder-core-extensions.BotState#get'
+    langs:
+      - js
+  - id: 'botbuilder-core-extensions.BotState.#ctor'
+    uid: 'botbuilder-core-extensions.BotState.#ctor'
+    parent: botbuilder-core-extensions.BotState
+    name: 'BotState(storage, storageKey)'
+    fullName: 'botbuilder-core-extensions.BotState.BotState(storage, storageKey)'
+    summary: Creates a new BotState instance.
+    type: Constructor
+    syntax:
+      parameters:
+        - id: storage
+          description: Storage provider to persist the state object to.
+        - id: storageKey
+          description: >-
+            Function called anytime the storage key for a given turn needs to be
+            calculated.
+      content: 'new BotState(storage, storageKey)'
+    langs:
+      - js
+  - uid: 'botbuilder-core-extensions.BotState#read'
+    id: 'botbuilder-core-extensions.BotState#read'
+    parent: botbuilder-core-extensions.BotState
+    name: 'read(context, force)'
+    summary: "Reads in and caches the current state object for a turn. Subsequent reads will return the\rcached object unless the `force` flag is passed in which will force the state object to\rbe re-read.\r\r**Usage Example**\r\r```JavaScript\rconst state = await botState.read(context);\r```"
+    fullName: 'botbuilder-core-extensions.BotState.read(context, force)'
+    type: Function
+    syntax:
+      parameters:
+        - id: context
+          description: Context for current turn of conversation with the user.
+        - id: force
+          description: >-
+            (Optional) If `true` the cache will be bypassed and the state will
+            always be read in directly from storage. Defaults to `false`.
+      content: 'function read(context, force)'
+    langs:
+      - js
+  - uid: 'botbuilder-core-extensions.BotState#write'
+    id: 'botbuilder-core-extensions.BotState#write'
+    parent: botbuilder-core-extensions.BotState
+    name: 'write(context, force)'
+    summary: "Save the cached state object if it's been changed. If the `force` flag is passed in the\rcached state object will be saved regardless of whether its been changed and if no object\rhas been a cached an empty object will created and saved.\r\r**Usage Example**\r\r```JavaScript\rawait botState.write(context);\r```"
+    fullName: 'botbuilder-core-extensions.BotState.write(context, force)'
+    type: Function
+    syntax:
+      parameters:
+        - id: context
+          description: Context for current turn of conversation with the user.
+        - id: force
+          description: >-
+            (Optional) if `true` the state will always be written out regardless
+            of its change state. Defaults to `false`.
+      content: 'function write(context, force)'
+    langs:
+      - js
+  - uid: 'botbuilder-core-extensions.BotState#clear'
+    id: 'botbuilder-core-extensions.BotState#clear'
+    parent: botbuilder-core-extensions.BotState
+    name: clear(context)
+    summary: "Clears the current state object for a turn.\r\r**Usage Example**\r\r```JavaScript\rbotState.clear(context);\r```"
+    fullName: botbuilder-core-extensions.BotState.clear(context)
+    type: Function
+    syntax:
+      parameters:
+        - id: context
+          description: Context for current turn of conversation with the user.
+      content: function clear(context)
+    langs:
+      - js
+  - uid: 'botbuilder-core-extensions.BotState#get'
+    id: 'botbuilder-core-extensions.BotState#get'
+    parent: botbuilder-core-extensions.BotState
+    name: get(context)
+    summary: "Returns a cached state object or undefined if not cached.\r\r**Usage Example**\r\r```JavaScript\rconst state botState.get(context);\r```"
+    fullName: botbuilder-core-extensions.BotState.get(context)
+    type: Function
+    syntax:
+      parameters:
+        - id: context
+          description: Context for current turn of conversation with the user.
+      content: function get(context)
+    langs:
+      - js

@@ -1,8 +1,8 @@
 ---
 title: Azure Service Bus Modules for Node.js
 description: Reference for Azure Service Bus Modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
+author: rloutlaw
+ms.author: routlaw
 manager: routlaw
 ms.date: 07/18/2017
 ms.topic: article

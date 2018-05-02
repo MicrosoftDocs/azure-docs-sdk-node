@@ -1,8 +1,8 @@
 ---
 title: Azure Advisor modules for Node.js
 description: Reference for Azure Advisor modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
+author: rloutlaw
+ms.author: routlaw
 manager: routlaw
 ms.date: 07/18/2017
 ms.topic: article

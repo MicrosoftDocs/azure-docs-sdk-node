@@ -1,8 +1,8 @@
 ---
 title: Azure Traffic Manager modules for Node.js
 description: Azure Traffic Manager modules for Node.js reference
-author: craigshoemaker
-ms.author: cshoe
+author: rloutlaw
+ms.author: routlaw
 manager: routlaw
 ms.date: 07/18/2017
 ms.topic: article

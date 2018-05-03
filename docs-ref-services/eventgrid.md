@@ -134,7 +134,7 @@ msRestAzure.interactiveLogin(function(err, credentials) {
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/javascript/api/overview/azure/eventgrid/management)
+> [Explore the management APIs](/javascript/api/overview/azure/eventgrid/management)
 
 ## Learn more
 

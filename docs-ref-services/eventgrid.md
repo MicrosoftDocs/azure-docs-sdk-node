@@ -117,6 +117,9 @@ npm install azure-arm-eventgrid
 The following code creates an Event Grid topic `topic1` and returns the access keys associated with the newly created topic.
 
 ```javascript
+var msRestAzure = require('ms-rest-azure');
+var EventGridManagementClient = require("azure-arm-eventgrid");
+
 msRestAzure.interactiveLogin(function(err, credentials) {
     // Created the management client
     let EGMClient = new EventGridManagementClient(credentials, 'your-subscription-id');

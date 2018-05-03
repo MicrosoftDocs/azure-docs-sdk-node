@@ -62,7 +62,6 @@ let events = [
 ];
 return EGClient.publishEvents(topicHostName, events).then((result) => {
    return Promise.resolve(console.log('Published events successfully.'));
-  });
  }).catch((err) => {
   console.log('An error ocurred');
   console.dir(err, {depth: null, colors: true});

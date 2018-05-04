@@ -1,9 +1,9 @@
 ---
 title: Azure Cosmos DB Modules for Node.js
 description: Reference for Azure Cosmos DB modules for Node.js
-author: mimig1
-ms.author: mimig
-manager: jhubbard
+author: SnehaGunda
+ms.author: sngun
+manager: kfile
 ms.date: 03/20/2018
 ms.topic: article
 ms.prod: azure

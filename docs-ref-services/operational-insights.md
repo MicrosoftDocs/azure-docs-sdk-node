@@ -1,9 +1,9 @@
 ---
 title: Azure Operational Insights Modules for Node.js
 description: Reference for Azure Operational Insights Modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
+author: MGoedtel
+ms.author: magoedte
+manager: carmonm
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

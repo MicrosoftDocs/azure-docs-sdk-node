@@ -1,9 +1,9 @@
 ---
 title: Virtual Machine Modules for Node.js - Azure
 description: Azure Virtual Machine Modules for Node.js reference guide
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
+author: iainfoulds
+ms.author: iainfou
+manager: jeconnoc
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

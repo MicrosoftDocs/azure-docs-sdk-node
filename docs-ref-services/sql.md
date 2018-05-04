@@ -1,9 +1,9 @@
 ---
 title: Azure SQL modules for Node.js
 description: Reference for Azure SQL modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
+author: CarlRabeler
+ms.author: carlrab
+manager: craigg
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

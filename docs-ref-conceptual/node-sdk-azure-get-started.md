@@ -1,9 +1,9 @@
 ---
 title: Get started with the Azure modules for Node.js
 description: Get started with authentication and resource management with Azure modules for Node.js
-author: craigshoemaker
+author: rloutlaw
 manager: routlaw
-ms.author: cshoe
+ms.author: routlaw
 ms.date: 06/17/2017
 ms.topic: get-started-article
 ms.prod: azure

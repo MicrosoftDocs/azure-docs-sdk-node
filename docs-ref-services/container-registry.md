@@ -1,9 +1,9 @@
 ---
 title: Azure Container Registry modules for Node.js
 description: Reference for Azure Container Registry Modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
+author: mmacy
+ms.author: marsma
+manager: jeconnoc
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

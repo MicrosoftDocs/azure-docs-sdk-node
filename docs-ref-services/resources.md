@@ -1,9 +1,9 @@
 ---
 title: Azure Resource Manager modules for Node.js
 description: Reference for Azure Resource Manager modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
+author: tfitzmac
+ms.author: tomfitz
+manager: timlt
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

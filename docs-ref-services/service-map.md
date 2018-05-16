@@ -1,9 +1,9 @@
 ---
 title: Azure Service Map modules for Node.js
 description: Reference for Azure Service Map modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
+author: bwren
+ms.author: bwren
+manager: carmonm
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

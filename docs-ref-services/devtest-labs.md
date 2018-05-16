@@ -1,9 +1,9 @@
 ---
 title: Azure DevTest Labs Modules for Node.js
 description: Reference for Azure DevTest Labs modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
+author: craigcaseyMSFT
+ms.author: v-craic
+manager: v-laurab
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

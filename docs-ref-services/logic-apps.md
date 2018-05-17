@@ -1,9 +1,9 @@
 ---
 title: Azure Logic Apps modules for Node.js
 description: Reference for Azure Logic Apps modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
+author: ecfan
+ms.author: estfan
+manager: cfowler
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

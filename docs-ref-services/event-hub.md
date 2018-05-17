@@ -1,9 +1,9 @@
 ---
 title: Azure Event Hub modules for Node.js
 description: Reference for Azure Event Hub modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
+author: sethmanheim
+ms.author: sethm
+manager: timlt
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

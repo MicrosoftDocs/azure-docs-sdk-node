@@ -1,9 +1,9 @@
 ---
 title: Azure Media Services modules for Node.js
 description: Reference for Azure Media Services modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
+author: Juliako
+ms.author: juliako
+manager: cfowler
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

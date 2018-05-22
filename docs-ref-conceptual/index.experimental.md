@@ -303,6 +303,52 @@ getTextAnalytics.end();
 			</li>
 		</ul>				
 	</div>
-	<br>
-	<br>
+
+	<hr style="margin-top:80px; margin-bottom:50px;">
+
+	<ul class="cardsM cols cols2">
+		<li style="
+				flex-basis: 180px;
+				text-align: center;
+				background-color: black;
+				font: white;
+				display: block;
+				margin-left: auto;
+				margin-top: 15px;
+				margin-bottom: 25px;
+				margin-right: 10px;
+
+			">
+			<a class="card" href="https://azure.microsoft.com/en-us/try/app-service/web/?language=nodejs">
+				<br>
+					<div class="cardText">
+					<h3 style="
+						color: white;
+						font-size: large;
+					">Get started free &gt;</h3>
+				</div>
+			</a>
+		</li>
+
+		<li style="
+				flex-basis: 180px;
+				text-align: center;
+				background-color: white;
+				display: block;
+				margin-right: auto;
+				margin-top: 15px;
+				margin-bottom: 25px;
+				margin-left: 10px;
+			">
+			<a class="card" href="https://code.visualstudio.com/docs/nodejs/nodejs-deployment">
+				<br>
+					<div class="cardText">
+					<h3 style="
+						color: black;
+						font-size: large;
+					">Documentation</h3>
+				</div>
+			</a>
+		</li>
+	</ul>
 </div>

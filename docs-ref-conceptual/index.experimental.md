@@ -61,6 +61,7 @@ ms.topic: hub-page
 			display: block;
 			margin: auto;
 			border-radius: 7px;
+			width: 650px
 		">
 
 		<h2 style="margin-top: 50px">Get started fast</h2>
@@ -302,8 +303,7 @@ getTextAnalytics.end();
 				</ul>
 			</li>
 		</ul>				
-		<hr style="margin-top:80px; margin-bottom:50px;">
-	
+		
 		<ul class="cardsM cols cols2">
 			<li style="
 					flex-basis: 180px;

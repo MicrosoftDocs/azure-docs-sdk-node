@@ -10,8 +10,16 @@ items:
     type: Class
     children:
       - 'azure-event-hubs.EventHubClient.#ctor'
+      - 'azure-event-hubs.EventHubClient#close'
+      - 'azure-event-hubs.EventHubClient#send'
+      - 'azure-event-hubs.EventHubClient#sendBatch'
       - 'azure-event-hubs.EventHubClient#receive'
       - 'azure-event-hubs.EventHubClient#receiveBatch'
+      - 'azure-event-hubs.EventHubClient#getHubRuntimeInformation'
+      - 'azure-event-hubs.EventHubClient#getPartitionIds'
+      - 'azure-event-hubs.EventHubClient#getPartitionInformation'
+      - azure-event-hubs.EventHubClient.createFromConnectionString
+      - azure-event-hubs.EventHubClient.createFromIotHubConnectionString
       - azure-event-hubs.EventHubClient.createFromAadTokenCredentials
     langs:
       - js
@@ -38,6 +46,93 @@ items:
             Default value: SasTokenProvider.
           optional: true
       content: 'new EventHubClient(config, tokenProvider)'
+    langs:
+      - js
+  - uid: 'azure-event-hubs.EventHubClient#close'
+    id: 'azure-event-hubs.EventHubClient#close'
+    parent: azure-event-hubs.EventHubClient
+    name: close()
+    summary: |-
+      Closes the AMQP connection to the Event Hub for this client,
+      returning a promise that will be resolved when disconnection is completed.
+    fullName: azure-event-hubs.EventHubClient.close()
+    type: Function
+    syntax:
+      return:
+        type:
+          - azure-event-hubs.Promise.<any>
+        description: ''
+      content: function close()
+    langs:
+      - js
+  - uid: 'azure-event-hubs.EventHubClient#send'
+    id: 'azure-event-hubs.EventHubClient#send'
+    parent: azure-event-hubs.EventHubClient
+    name: 'send(data, partitionId)'
+    summary: Sends the given message to the EventHub.
+    fullName: 'azure-event-hubs.EventHubClient.send(data, partitionId)'
+    type: Function
+    syntax:
+      parameters:
+        - id: data
+          type:
+            - azure-event-hubs.any
+          description: Message to send.  Will be sent as UTF8-encoded JSON string.
+        - id: partitionId
+          type:
+            - string
+            - number
+          description: >-
+            Partition ID to which the event data needs to be sent. This should
+            only be specified
+
+            if you intend to send the event to a specific partition. When not
+            specified EventHub will store the messages in a round-robin
+
+            fashion amongst the different partitions in the EventHub.
+          optional: true
+      return:
+        type:
+          - azure-event-hubs.Promise.<Delivery>
+        description: Promise<rheaPromise.Delivery>
+      content: 'function send(data, partitionId)'
+    langs:
+      - js
+  - uid: 'azure-event-hubs.EventHubClient#sendBatch'
+    id: 'azure-event-hubs.EventHubClient#sendBatch'
+    parent: azure-event-hubs.EventHubClient
+    name: 'sendBatch(datas, partitionId)'
+    summary: >-
+      Send a batch of EventData to the EventHub. The "message_annotations",
+      "application_properties" and "properties"
+
+      of the first message will be set as that of the envelope (batch message).
+    fullName: 'azure-event-hubs.EventHubClient.sendBatch(datas, partitionId)'
+    type: Function
+    syntax:
+      parameters:
+        - id: datas
+          type:
+            - azure-event-hubs.Array.<EventData>
+          description: An array of EventData objects to be sent in a Batch message.
+        - id: partitionId
+          type:
+            - string
+            - number
+          description: >-
+            Partition ID to which the event data needs to be sent. This should
+            only be specified
+
+            if you intend to send the event to a specific partition. When not
+            specified EventHub will store the messages in a round-robin
+
+            fashion amongst the different partitions in the EventHub.
+          optional: true
+      return:
+        type:
+          - azure-event-hubs.Promise.<rheaPromise.Delivery>
+        description: Promise<rheaPromise.Delivery>
+      content: 'function sendBatch(datas, partitionId)'
     langs:
       - js
   - uid: 'azure-event-hubs.EventHubClient#receive'
@@ -243,6 +338,132 @@ items:
       content: >-
         function receiveBatch(partitionId, maxMessageCount,
         maxWaitTimeInSeconds, options, name)
+    langs:
+      - js
+  - uid: 'azure-event-hubs.EventHubClient#getHubRuntimeInformation'
+    id: 'azure-event-hubs.EventHubClient#getHubRuntimeInformation'
+    parent: azure-event-hubs.EventHubClient
+    name: getHubRuntimeInformation()
+    summary: Provides the eventhub runtime information.
+    fullName: azure-event-hubs.EventHubClient.getHubRuntimeInformation()
+    type: Function
+    syntax:
+      return:
+        type:
+          - azure-event-hubs.Promise.<EventHubRuntimeInformation>
+        description: ''
+      content: function getHubRuntimeInformation()
+    langs:
+      - js
+  - uid: 'azure-event-hubs.EventHubClient#getPartitionIds'
+    id: 'azure-event-hubs.EventHubClient#getPartitionIds'
+    parent: azure-event-hubs.EventHubClient
+    name: getPartitionIds()
+    summary: Provides an array of partitionIds.
+    fullName: azure-event-hubs.EventHubClient.getPartitionIds()
+    type: Function
+    syntax:
+      return:
+        type:
+          - azure-event-hubs.Promise.<Array.<string>>
+        description: ''
+      content: function getPartitionIds()
+    langs:
+      - js
+  - uid: 'azure-event-hubs.EventHubClient#getPartitionInformation'
+    id: 'azure-event-hubs.EventHubClient#getPartitionInformation'
+    parent: azure-event-hubs.EventHubClient
+    name: getPartitionInformation(partitionId)
+    summary: Provides information about the specified partition.
+    fullName: azure-event-hubs.EventHubClient.getPartitionInformation(partitionId)
+    type: Function
+    syntax:
+      parameters:
+        - id: partitionId
+          type:
+            - string
+            - number
+          description: Partition ID for which partition information is required.
+      content: function getPartitionInformation(partitionId)
+    langs:
+      - js
+  - uid: azure-event-hubs.EventHubClient.createFromConnectionString
+    id: azure-event-hubs.EventHubClient.createFromConnectionString
+    parent: azure-event-hubs.EventHubClient
+    name: 'createFromConnectionString(connectionString, path, options)'
+    summary: Creates an EventHub Client from connection string.
+    fullName: >-
+      azure-event-hubs.EventHubClient.createFromConnectionString(connectionString,
+      path, options)
+    type: Function
+    syntax:
+      parameters:
+        - id: connectionString
+          type:
+            - string
+          description: >-
+            Connection string of the form
+            'Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key'
+        - id: path
+          type:
+            - string
+          description: EventHub path of the form 'my-event-hub-name'
+          optional: true
+        - id: options
+          type:
+            - azure-event-hubs.ClientOptions
+          description: Options that can be provided during client creation.
+          optional: true
+        - id: options.tokenProvider
+          type:
+            - azure-event-hubs.TokenProvider
+          description: >-
+            An instance of the token provider that provides the token for
+            authentication. Default value: SasTokenProvider.
+          optional: true
+      return:
+        type:
+          - azure-event-hubs.EventHubClient
+        description: '- An instance of the eventhub client.'
+      content: 'function createFromConnectionString(connectionString, path, options)'
+    langs:
+      - js
+  - uid: azure-event-hubs.EventHubClient.createFromIotHubConnectionString
+    id: azure-event-hubs.EventHubClient.createFromIotHubConnectionString
+    parent: azure-event-hubs.EventHubClient
+    name: 'createFromIotHubConnectionString(iothubConnectionString, options)'
+    summary: Creates an EventHub Client from connection string.
+    fullName: >-
+      azure-event-hubs.EventHubClient.createFromIotHubConnectionString(iothubConnectionString,
+      options)
+    type: Function
+    syntax:
+      parameters:
+        - id: iothubConnectionString
+          type:
+            - string
+          description: >-
+            Connection string of the form
+            'HostName=iot-host-name;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key'
+        - id: options
+          type:
+            - azure-event-hubs.ClientOptions
+          description: Options that can be provided during client creation.
+          optional: true
+        - id: options.tokenProvider
+          type:
+            - azure-event-hubs.TokenProvider
+          description: >-
+            An instance of the token provider that provides the token for
+            authentication. Default value: SasTokenProvider.
+          optional: true
+      return:
+        type:
+          - azure-event-hubs.Promise.<EventHubClient>
+        description: '- Promise<EventHubClient>.'
+      content: >-
+        function createFromIotHubConnectionString(iothubConnectionString,
+        options)
     langs:
       - js
   - uid: azure-event-hubs.EventHubClient.createFromAadTokenCredentials

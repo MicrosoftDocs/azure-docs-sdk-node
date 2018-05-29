@@ -28,10 +28,10 @@ items:
     parent: azure-storage.StorageServiceClient
     name: >-
       StorageServiceClient(storageAccount, storageAccessKey, host,
-      usePathStyleUri, sasToken)
+      usePathStyleUri, sas, token)
     fullName: >-
       azure-storage.StorageServiceClient.StorageServiceClient(storageAccount,
-      storageAccessKey, host, usePathStyleUri, sasToken)
+      storageAccessKey, host, usePathStyleUri, sas, token)
     summary: Creates a new StorageServiceClient object.
     type: Constructor
     syntax:
@@ -52,13 +52,20 @@ items:
           type:
             - undefinedbool
           description: Boolean value indicating wether to use path style uris.
-        - id: sasToken
+        - id: sas
           type:
             - string
-          description: The Shared Access Signature token.
+          description: The Shared Access Signature string.
+        - id: token
+          type:
+            - undefinedTokenCredential
+          description: >-
+            The <xref:TokenCredential> object, which can be created with an
+            OAuth access token string.
+          optional: true
       content: >-
         new StorageServiceClient(storageAccount, storageAccessKey, host,
-        usePathStyleUri, sasToken)
+        usePathStyleUri, sas, token)
     langs:
       - js
   - uid: 'azure-storage.StorageServiceClient#logger'
@@ -257,11 +264,11 @@ items:
     parent: azure-storage.StorageServiceClient
     name: >-
       getStorageSettings(storageAccountOrConnectionString, storageAccessKey,
-      host, sasToken)
+      host, sas, token)
     summary: Gets the storage settings.
     fullName: >-
       azure-storage.StorageServiceClient.getStorageSettings(storageAccountOrConnectionString,
-      storageAccessKey, host, sasToken)
+      storageAccessKey, host, sas, token)
     type: Function
     syntax:
       parameters:
@@ -280,10 +287,15 @@ items:
             - string
           description: The host address.
           optional: true
-        - id: sasToken
+        - id: sas
           type:
             - object
-          description: The sas token.
+          description: The Shared Access Signature string.
+          optional: true
+        - id: token
+          type:
+            - azure-storage.TokenCredential
+          description: 'The <xref:azure-storage.TokenCredential> object.'
           optional: true
       return:
         type:
@@ -291,7 +303,7 @@ items:
         description: ''
       content: >-
         function getStorageSettings(storageAccountOrConnectionString,
-        storageAccessKey, host, sasToken)
+        storageAccessKey, host, sas, token)
     langs:
       - js
   - uid: 'azure-storage.StorageServiceClient#parseMetadataHeaders'
@@ -446,4 +458,8 @@ references:
   - uid: azure-storage.WebResource
     name: WebResource
     fullName: azure-storage.WebResource
+    isExternal: false
+  - uid: azure-storage.TokenCredential
+    name: TokenCredential
+    fullName: azure-storage.TokenCredential
     isExternal: false

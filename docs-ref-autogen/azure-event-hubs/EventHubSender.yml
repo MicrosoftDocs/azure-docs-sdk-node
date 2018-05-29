@@ -10,7 +10,9 @@ items:
     type: Class
     children:
       - 'azure-event-hubs.EventHubSender.#ctor'
+      - 'azure-event-hubs.EventHubSender#send'
       - 'azure-event-hubs.EventHubSender#sendBatch'
+      - 'azure-event-hubs.EventHubSender#close'
       - azure-event-hubs.EventHubSender.create
     langs:
       - js
@@ -38,6 +40,26 @@ items:
       content: 'new EventHubSender(context, partitionId)'
     langs:
       - js
+  - uid: 'azure-event-hubs.EventHubSender#send'
+    id: 'azure-event-hubs.EventHubSender#send'
+    parent: azure-event-hubs.EventHubSender
+    name: send(data)
+    summary: 'Sends the given message, with the given options on this link'
+    fullName: azure-event-hubs.EventHubSender.send(data)
+    type: Function
+    syntax:
+      parameters:
+        - id: data
+          type:
+            - azure-event-hubs.any
+          description: Message to send.  Will be sent as UTF8-encoded JSON string.
+      return:
+        type:
+          - azure-event-hubs.Promise.<rheaPromise.Delivery>
+        description: Promise<rheaPromise.Delivery>
+      content: function send(data)
+    langs:
+      - js
   - uid: 'azure-event-hubs.EventHubSender#sendBatch'
     id: 'azure-event-hubs.EventHubSender#sendBatch'
     parent: azure-event-hubs.EventHubSender
@@ -62,6 +84,25 @@ items:
           - azure-event-hubs.Promise.<rheaPromise.Delivery>
         description: Promise<rheaPromise.Delivery>
       content: function sendBatch(datas)
+    langs:
+      - js
+  - uid: 'azure-event-hubs.EventHubSender#close'
+    id: 'azure-event-hubs.EventHubSender#close'
+    parent: azure-event-hubs.EventHubSender
+    name: close()
+    summary: >-
+      "Unlink" this sender, closing the link and resolving when that operation
+      is complete.
+
+      Leaves the underlying connection open.
+    fullName: azure-event-hubs.EventHubSender.close()
+    type: Function
+    syntax:
+      return:
+        type:
+          - azure-event-hubs.Promise.<void>
+        description: Promise<void>
+      content: function close()
     langs:
       - js
   - uid: azure-event-hubs.EventHubSender.create

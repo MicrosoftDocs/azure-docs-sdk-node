@@ -338,13 +338,13 @@ getTextAnalytics.end();
 					margin-bottom: 25px;
 					margin-left: 10px;
 				">
-				<a class="card" href="https://code.visualstudio.com/docs/nodejs/nodejs-deployment">
+				<a class="card" href="https://docs.microsoft.com/en-us/javascript/api/overview/azure/?view=azure-node-latest">
 					<br>
 						<div class="cardText">
 						<h3 style="
 							color: black;
 							font-size: large;
-						">Documentation</h3>
+						">API Reference</h3>
 					</div>
 				</a>
 			</li>

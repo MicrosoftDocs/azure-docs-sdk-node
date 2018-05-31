@@ -43,6 +43,7 @@ msRestAzure.interactiveLogin().then((creds) => {
   console.log('An error ocurred:');
   console.dir(err, {depth: null, colors: true});
 });
+```
 
 ## Related projects
 

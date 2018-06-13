@@ -1,9 +1,9 @@
 ---
 title: Azure HDInsight Modules for Node.js
 description: Reference for Azure HDInsight Modules for Node.js
-author: craigshoemaker
-ms.author: cshoe
-manager: routlaw
+author: mumian
+ms.author: jgao
+manager: cgronlun
 ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure

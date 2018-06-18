@@ -39,7 +39,12 @@ items:
   - uid: ms-rest.create
     id: ms-rest.create
     name: create()
-    summary: "formDataFilter - This filter is resposnsible for setting the form property on the \rrequest object if the Content-Type header is 'application/x-www-form-urlencoded'"
+    summary: >-
+      formDataFilter - This filter is resposnsible for setting the form property
+      on the 
+
+      request object if the Content-Type header is
+      'application/x-www-form-urlencoded'
     fullName: ms-rest.create()
     type: Function
     syntax:
@@ -49,7 +54,9 @@ items:
   - uid: ms-rest.setAgent
     id: ms-rest.setAgent
     name: 'setAgent(resouce, proxy)'
-    summary: "Set the Agent to use for the request\rResult depends on proxy settings and protocol"
+    summary: |-
+      Set the Agent to use for the request
+      Result depends on proxy settings and protocol
     fullName: 'ms-rest.setAgent(resouce, proxy)'
     type: Function
     syntax:
@@ -68,7 +75,12 @@ items:
   - uid: ms-rest.checkRPNotRegisteredError
     id: ms-rest.checkRPNotRegisteredError
     name: checkRPNotRegisteredError(body)
-    summary: "Validates the error code and message associated with 409 response status code. If it matches to that of \rRP not registered then it returns the name of the RP else returns undefined."
+    summary: >-
+      Validates the error code and message associated with 409 response status
+      code. If it matches to that of 
+
+      RP not registered then it returns the name of the RP else returns
+      undefined.
     fullName: ms-rest.checkRPNotRegisteredError(body)
     type: Function
     syntax:
@@ -87,7 +99,10 @@ items:
   - uid: ms-rest.extractSubscriptionUrl
     id: ms-rest.extractSubscriptionUrl
     name: extractSubscriptionUrl(url)
-    summary: "Extracts the first part of the URL, just after subscription: \rhttps://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/"
+    summary: >-
+      Extracts the first part of the URL, just after subscription: 
+
+      https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/
     fullName: ms-rest.extractSubscriptionUrl(url)
     type: Function
     syntax:
@@ -123,7 +138,9 @@ items:
         - id: originalRequest
           type:
             - object
-          description: "The original request sent by the user that returned a 409 response\rwith a message that the provider is not registered."
+          description: |-
+            The original request sent by the user that returned a 409 response
+            with a message that the provider is not registered.
         - id: callback
           type:
             - ms-rest.registrationCallback
@@ -134,7 +151,12 @@ items:
   - uid: ms-rest.getRegistrationStatus
     id: ms-rest.getRegistrationStatus
     name: 'getRegistrationStatus(url, originalRequest, callback)'
-    summary: "Polls the registration status of the provider that was registered. Polling happens at an interval of 30 seconds.\rPolling will happen till the registrationState property of the response body is 'Registered'."
+    summary: >-
+      Polls the registration status of the provider that was registered. Polling
+      happens at an interval of 30 seconds.
+
+      Polling will happen till the registrationState property of the response
+      body is 'Registered'.
     fullName: 'ms-rest.getRegistrationStatus(url, originalRequest, callback)'
     type: Function
     syntax:
@@ -146,7 +168,9 @@ items:
         - id: originalRequest
           type:
             - object
-          description: "The original request sent by the user that returned a 409 response\rwith a message that the provider is not registered."
+          description: |-
+            The original request sent by the user that returned a 409 response
+            with a message that the provider is not registered.
         - id: callback
           type:
             - ms-rest.registrationCallback
@@ -157,7 +181,10 @@ items:
   - uid: ms-rest.createWithSink
     id: ms-rest.createWithSink
     name: createWithSink()
-    summary: "create a new http client pipeline that ends with a call to the\rrequest library using the given sink function to actually make\rthe http request."
+    summary: |-
+      create a new http client pipeline that ends with a call to the
+      request library using the given sink function to actually make
+      the http request.
     fullName: ms-rest.createWithSink()
     type: Function
     syntax:
@@ -169,7 +196,9 @@ items:
   - uid: ms-rest.createCompositeFilter
     id: ms-rest.createCompositeFilter
     name: createCompositeFilter(filters)
-    summary: "Create a new filter that's a combination of all the filters\rgiven on the arguments list."
+    summary: |-
+      Create a new filter that's a combination of all the filters
+      given on the arguments list.
     fullName: ms-rest.createCompositeFilter(filters)
     type: Function
     syntax:
@@ -177,7 +206,15 @@ items:
         - id: filters
           type:
             - ms-rest.varargs
-          description: "to run. First filter in the list is closest to\rthe sink, so last to run before the request, first to run on the response:\rexactly the same as if you called pipeline.add or passed the list to\rpipeline.create."
+          description: >-
+            to run. First filter in the list is closest to
+
+            the sink, so last to run before the request, first to run on the
+            response:
+
+            exactly the same as if you called pipeline.add or passed the list to
+
+            pipeline.create.
       return:
         description: the new filter.
       content: function createCompositeFilter(filters)
@@ -186,22 +223,38 @@ items:
   - uid: ms-rest.interimStream
     id: ms-rest.interimStream
     name: interimStream(setPipe)
-    summary: "Creates an interim stream which can be returned to the\rcaller synchronously, so that async operations can still\rhook up to the streaming output afterwards. Used when\rfilters need to do async work before they can call the rest\rof the pipeline."
+    summary: |-
+      Creates an interim stream which can be returned to the
+      caller synchronously, so that async operations can still
+      hook up to the streaming output afterwards. Used when
+      filters need to do async work before they can call the rest
+      of the pipeline.
     fullName: ms-rest.interimStream(setPipe)
     type: Function
     syntax:
       parameters:
         - id: setPipe
-          description: "function(input, output)\r   this function is invoked synchronously, to pass the two\r   underlying streams. input should be piped to the result of\r   the next filter. The result of next should be piped to output.\r   It's common to pause the input stream to prevent data loss\r   before actually returning the real stream to hook up to."
+          description: |-
+            function(input, output)
+               this function is invoked synchronously, to pass the two
+               underlying streams. input should be piped to the result of
+               the next filter. The result of next should be piped to output.
+               It's common to pause the input stream to prevent data loss
+               before actually returning the real stream to hook up to.
       return:
-        description: "a duplex stream that writes to the input stream and\rproduces data from the output stream."
+        description: |-
+          a duplex stream that writes to the input stream and
+          produces data from the output stream.
       content: function interimStream(setPipe)
     langs:
       - js
   - uid: ms-rest.serializeObject
     id: ms-rest.serializeObject
     name: serializeObject(toSerialize)
-    summary: "Serializes the JSON Object. It serializes Buffer object to a \r'base64' encoded string and a Date Object to a string \rcompliant with ISO8601 format."
+    summary: |-
+      Serializes the JSON Object. It serializes Buffer object to a
+      'base64' encoded string and a Date Object to a string
+      compliant with ISO8601 format.
     fullName: ms-rest.serializeObject(toSerialize)
     type: Function
     syntax:
@@ -355,7 +408,9 @@ items:
   - uid: ms-rest.stripResponse
     id: ms-rest.stripResponse
     name: stripResponse(response)
-    summary: "Returns a stripped version of the Http Response which only contains body, \rheaders and the statusCode."
+    summary: |-
+      Returns a stripped version of the Http Response which only contains body, 
+      headers and the statusCode.
     fullName: ms-rest.stripResponse(response)
     type: Function
     syntax:
@@ -374,7 +429,9 @@ items:
   - uid: ms-rest.stripRequest
     id: ms-rest.stripRequest
     name: stripRequest(request)
-    summary: "Returns a stripped version of the Http Request that does not contain the \rAuthorization header."
+    summary: |-
+      Returns a stripped version of the Http Request that does not contain the 
+      Authorization header.
     fullName: ms-rest.stripRequest(request)
     type: Function
     syntax:
@@ -412,7 +469,11 @@ items:
   - uid: ms-rest.objectValues
     id: ms-rest.objectValues
     name: objectValues(obj)
-    summary: "Provides an array of values of an object. For example \rfor a given object { 'a': 'foo', 'b': 'bar' }, the method returns ['foo', 'bar']."
+    summary: >-
+      Provides an array of values of an object. For example 
+
+      for a given object { 'a': 'foo', 'b': 'bar' }, the method returns ['foo',
+      'bar'].
     fullName: ms-rest.objectValues(obj)
     type: Function
     syntax:

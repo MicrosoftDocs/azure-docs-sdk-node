@@ -19,10 +19,8 @@ items:
       - >-
         azure-arm-batchai.Clusters#listRemoteLoginInformationWithHttpOperationResponse
       - 'azure-arm-batchai.Clusters#listRemoteLoginInformation'
-      - 'azure-arm-batchai.Clusters#listWithHttpOperationResponse'
-      - 'azure-arm-batchai.Clusters#list'
-      - 'azure-arm-batchai.Clusters#listByResourceGroupWithHttpOperationResponse'
-      - 'azure-arm-batchai.Clusters#listByResourceGroup'
+      - 'azure-arm-batchai.Clusters#listByWorkspaceWithHttpOperationResponse'
+      - 'azure-arm-batchai.Clusters#listByWorkspace'
       - 'azure-arm-batchai.Clusters#beginCreateWithHttpOperationResponse'
       - 'azure-arm-batchai.Clusters#beginCreate'
       - 'azure-arm-batchai.Clusters#beginDeleteMethodWithHttpOperationResponse'
@@ -30,11 +28,8 @@ items:
       - >-
         azure-arm-batchai.Clusters#listRemoteLoginInformationNextWithHttpOperationResponse
       - 'azure-arm-batchai.Clusters#listRemoteLoginInformationNext'
-      - 'azure-arm-batchai.Clusters#listNextWithHttpOperationResponse'
-      - 'azure-arm-batchai.Clusters#listNext'
-      - >-
-        azure-arm-batchai.Clusters#listByResourceGroupNextWithHttpOperationResponse
-      - 'azure-arm-batchai.Clusters#listByResourceGroupNext'
+      - 'azure-arm-batchai.Clusters#listByWorkspaceNextWithHttpOperationResponse'
+      - 'azure-arm-batchai.Clusters#listByWorkspaceNext'
     langs:
       - js
   - id: 'azure-arm-batchai.Clusters.#ctor'
@@ -57,14 +52,12 @@ items:
     id: 'azure-arm-batchai.Clusters#createWithHttpOperationResponse'
     parent: azure-arm-batchai.Clusters
     name: >-
-      createWithHttpOperationResponse(resourceGroupName, clusterName,
-      parameters, options)
-    summary: |-
-      Adds a cluster. A cluster is a collection of compute nodes. Multiple jobs
-      can be run on the same cluster.
+      createWithHttpOperationResponse(resourceGroupName, workspaceName,
+      clusterName, parameters, options)
+    summary: Creates a Cluster in the given Workspace.
     fullName: >-
       azure-arm-batchai.Clusters.createWithHttpOperationResponse(resourceGroupName,
-      clusterName, parameters, options)
+      workspaceName, clusterName, parameters, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -83,6 +76,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -99,20 +103,9 @@ items:
         - id: parameters
           type:
             - object
-          description: The parameters to provide for cluster creation.
-        - id: parameters.location
-          type:
-            - string
           description: |-
-            The region in which to create the
-            cluster.
-        - id: parameters.tags
-          type:
-            - object
-          description: |-
-            The user specified tags associated with
-            the Cluster.
-          optional: true
+            The parameters to provide for the Cluster
+            creation.
         - id: parameters.vmSize
           type:
             - string
@@ -173,7 +166,7 @@ items:
             size is decreasing. The default value is requeue. Possible values
             include:
 
-            'requeue', 'terminate', 'waitforjobcompletion', 'unknown'
+            'requeue', 'terminate', 'waitforjobcompletion'
           optional: true
         - id: parameters.scaleSettings.autoScale
           type:
@@ -288,9 +281,16 @@ items:
         - id: parameters.nodeSetup.setupTask.commandLine
           type:
             - string
-          description: |-
-            Command Line to
-            start Setup process.
+          description: >-
+            Command line to
+
+            be executed on each cluster's node after it being allocated or
+            rebooted.
+
+            Command line to be executed on each cluster's node after it being
+            allocated
+
+            or rebooted. The command is executed in a bash subshell as a root.
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
@@ -306,20 +306,6 @@ items:
             Server
 
             will never report values of these variables back.
-          optional: true
-        - id: parameters.nodeSetup.setupTask.runElevated
-          type:
-            - boolean
-          description: >-
-            Specifies
-
-            whether to run the setup task under root account. The default value
-            is
-
-            false. Note. Non-elevated tasks are run under an account added into
-            sudoer
-
-            list and can perform sudo when required.
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
@@ -494,22 +480,20 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function createWithHttpOperationResponse(resourceGroupName, clusterName,
-        parameters, options)
+        function createWithHttpOperationResponse(resourceGroupName,
+        workspaceName, clusterName, parameters, options)
     langs:
       - js
   - uid: 'azure-arm-batchai.Clusters#create'
     id: 'azure-arm-batchai.Clusters#create'
     parent: azure-arm-batchai.Clusters
     name: >-
-      create(resourceGroupName, clusterName, parameters, options,
+      create(resourceGroupName, workspaceName, clusterName, parameters, options,
       optionalCallback)
-    summary: |-
-      Adds a cluster. A cluster is a collection of compute nodes. Multiple jobs
-      can be run on the same cluster.
+    summary: Creates a Cluster in the given Workspace.
     fullName: >-
-      azure-arm-batchai.Clusters.create(resourceGroupName, clusterName,
-      parameters, options, optionalCallback)
+      azure-arm-batchai.Clusters.create(resourceGroupName, workspaceName,
+      clusterName, parameters, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -552,6 +536,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -568,20 +563,9 @@ items:
         - id: parameters
           type:
             - object
-          description: The parameters to provide for cluster creation.
-        - id: parameters.location
-          type:
-            - string
           description: |-
-            The region in which to create the
-            cluster.
-        - id: parameters.tags
-          type:
-            - object
-          description: |-
-            The user specified tags associated with
-            the Cluster.
-          optional: true
+            The parameters to provide for the Cluster
+            creation.
         - id: parameters.vmSize
           type:
             - string
@@ -642,7 +626,7 @@ items:
             size is decreasing. The default value is requeue. Possible values
             include:
 
-            'requeue', 'terminate', 'waitforjobcompletion', 'unknown'
+            'requeue', 'terminate', 'waitforjobcompletion'
           optional: true
         - id: parameters.scaleSettings.autoScale
           type:
@@ -757,9 +741,16 @@ items:
         - id: parameters.nodeSetup.setupTask.commandLine
           type:
             - string
-          description: |-
-            Command Line to
-            start Setup process.
+          description: >-
+            Command line to
+
+            be executed on each cluster's node after it being allocated or
+            rebooted.
+
+            Command line to be executed on each cluster's node after it being
+            allocated
+
+            or rebooted. The command is executed in a bash subshell as a root.
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
@@ -775,20 +766,6 @@ items:
             Server
 
             will never report values of these variables back.
-          optional: true
-        - id: parameters.nodeSetup.setupTask.runElevated
-          type:
-            - boolean
-          description: >-
-            Specifies
-
-            whether to run the setup task under root account. The default value
-            is
-
-            false. Note. Non-elevated tasks are run under an account added into
-            sudoer
-
-            list and can perform sudo when required.
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
@@ -973,20 +950,20 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function create(resourceGroupName, clusterName, parameters, options,
-        optionalCallback)
+        function create(resourceGroupName, workspaceName, clusterName,
+        parameters, options, optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-batchai.Clusters#updateWithHttpOperationResponse'
     id: 'azure-arm-batchai.Clusters#updateWithHttpOperationResponse'
     parent: azure-arm-batchai.Clusters
     name: >-
-      updateWithHttpOperationResponse(resourceGroupName, clusterName,
-      parameters, options)
-    summary: Update the properties of a given cluster.
+      updateWithHttpOperationResponse(resourceGroupName, workspaceName,
+      clusterName, options)
+    summary: Updates properties of a Cluster.
     fullName: >-
       azure-arm-batchai.Clusters.updateWithHttpOperationResponse(resourceGroupName,
-      clusterName, parameters, options)
+      workspaceName, clusterName, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1005,6 +982,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -1018,30 +1006,24 @@ items:
             from 1
 
             through 64 characters long.
-        - id: parameters
+        - id: options
           type:
             - object
-          description: Additional parameters for cluster update.
-        - id: parameters.tags
-          type:
-            - object
-          description: |-
-            The user specified tags associated with
-            the Cluster.
+          description: Optional Parameters.
           optional: true
-        - id: parameters.scaleSettings
+        - id: options.scaleSettings
           type:
             - object
           description: Desired scale for the cluster
           optional: true
-        - id: parameters.scaleSettings.manual
+        - id: options.scaleSettings.manual
           type:
             - object
           description: |-
-            The scale for the cluster
-            by manual settings
+            The scale for the cluster by
+            manual settings
           optional: true
-        - id: parameters.scaleSettings.manual.targetNodeCount
+        - id: options.scaleSettings.manual.targetNodeCount
           type:
             - number
           description: >-
@@ -1051,7 +1033,7 @@ items:
             autoScaleSettings
 
             are not specified, then the Cluster starts with this target.
-        - id: parameters.scaleSettings.manual.nodeDeallocationOption
+        - id: options.scaleSettings.manual.nodeDeallocationOption
           type:
             - string
           description: >-
@@ -1061,36 +1043,37 @@ items:
             size is decreasing. The default value is requeue. Possible values
             include:
 
-            'requeue', 'terminate', 'waitforjobcompletion', 'unknown'
+            'requeue', 'terminate', 'waitforjobcompletion'
           optional: true
-        - id: parameters.scaleSettings.autoScale
+        - id: options.scaleSettings.autoScale
           type:
             - object
           description: |-
-            The scale for the
-            cluster by autoscale settings
+            The scale for the cluster
+            by autoscale settings
           optional: true
-        - id: parameters.scaleSettings.autoScale.minimumNodeCount
+        - id: options.scaleSettings.autoScale.minimumNodeCount
           type:
             - number
-          description: Specifies the minimum number of compute nodes the cluster can have.
-        - id: parameters.scaleSettings.autoScale.maximumNodeCount
+          description: |-
+            Specifies
+            the minimum number of compute nodes the cluster can have.
+        - id: options.scaleSettings.autoScale.maximumNodeCount
           type:
             - number
-          description: Specifies the maximum number of compute nodes the cluster can have.
-        - id: parameters.scaleSettings.autoScale.initialNodeCount
+          description: |-
+            Specifies
+            the maximum number of compute nodes the cluster can have.
+        - id: options.scaleSettings.autoScale.initialNodeCount
           type:
             - number
           description: >-
-            Specifies the number of compute nodes to allocate on cluster
-            creation. Note
+            Specifies
 
-            that this value is used only during cluster creation.
-          optional: true
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
+            the number of compute nodes to allocate on cluster creation. Note
+            that this
+
+            value is used only during cluster creation.
           optional: true
         - id: options.customHeaders
           type:
@@ -1104,20 +1087,20 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function updateWithHttpOperationResponse(resourceGroupName, clusterName,
-        parameters, options)
+        function updateWithHttpOperationResponse(resourceGroupName,
+        workspaceName, clusterName, options)
     langs:
       - js
   - uid: 'azure-arm-batchai.Clusters#update'
     id: 'azure-arm-batchai.Clusters#update'
     parent: azure-arm-batchai.Clusters
     name: >-
-      update(resourceGroupName, clusterName, parameters, options,
+      update(resourceGroupName, workspaceName, clusterName, options,
       optionalCallback)
-    summary: Update the properties of a given cluster.
+    summary: Updates properties of a Cluster.
     fullName: >-
-      azure-arm-batchai.Clusters.update(resourceGroupName, clusterName,
-      parameters, options, optionalCallback)
+      azure-arm-batchai.Clusters.update(resourceGroupName, workspaceName,
+      clusterName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1160,6 +1143,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -1173,30 +1167,24 @@ items:
             from 1
 
             through 64 characters long.
-        - id: parameters
+        - id: options
           type:
             - object
-          description: Additional parameters for cluster update.
-        - id: parameters.tags
-          type:
-            - object
-          description: |-
-            The user specified tags associated with
-            the Cluster.
+          description: Optional Parameters.
           optional: true
-        - id: parameters.scaleSettings
+        - id: options.scaleSettings
           type:
             - object
           description: Desired scale for the cluster
           optional: true
-        - id: parameters.scaleSettings.manual
+        - id: options.scaleSettings.manual
           type:
             - object
           description: |-
-            The scale for the cluster
-            by manual settings
+            The scale for the cluster by
+            manual settings
           optional: true
-        - id: parameters.scaleSettings.manual.targetNodeCount
+        - id: options.scaleSettings.manual.targetNodeCount
           type:
             - number
           description: >-
@@ -1206,7 +1194,7 @@ items:
             autoScaleSettings
 
             are not specified, then the Cluster starts with this target.
-        - id: parameters.scaleSettings.manual.nodeDeallocationOption
+        - id: options.scaleSettings.manual.nodeDeallocationOption
           type:
             - string
           description: >-
@@ -1216,36 +1204,37 @@ items:
             size is decreasing. The default value is requeue. Possible values
             include:
 
-            'requeue', 'terminate', 'waitforjobcompletion', 'unknown'
+            'requeue', 'terminate', 'waitforjobcompletion'
           optional: true
-        - id: parameters.scaleSettings.autoScale
+        - id: options.scaleSettings.autoScale
           type:
             - object
           description: |-
-            The scale for the
-            cluster by autoscale settings
+            The scale for the cluster
+            by autoscale settings
           optional: true
-        - id: parameters.scaleSettings.autoScale.minimumNodeCount
+        - id: options.scaleSettings.autoScale.minimumNodeCount
           type:
             - number
-          description: Specifies the minimum number of compute nodes the cluster can have.
-        - id: parameters.scaleSettings.autoScale.maximumNodeCount
+          description: |-
+            Specifies
+            the minimum number of compute nodes the cluster can have.
+        - id: options.scaleSettings.autoScale.maximumNodeCount
           type:
             - number
-          description: Specifies the maximum number of compute nodes the cluster can have.
-        - id: parameters.scaleSettings.autoScale.initialNodeCount
+          description: |-
+            Specifies
+            the maximum number of compute nodes the cluster can have.
+        - id: options.scaleSettings.autoScale.initialNodeCount
           type:
             - number
           description: >-
-            Specifies the number of compute nodes to allocate on cluster
-            creation. Note
+            Specifies
 
-            that this value is used only during cluster creation.
-          optional: true
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
+            the number of compute nodes to allocate on cluster creation. Note
+            that this
+
+            value is used only during cluster creation.
           optional: true
         - id: options.customHeaders
           type:
@@ -1269,7 +1258,7 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function update(resourceGroupName, clusterName, parameters, options,
+        function update(resourceGroupName, workspaceName, clusterName, options,
         optionalCallback)
     langs:
       - js
@@ -1277,12 +1266,12 @@ items:
     id: 'azure-arm-batchai.Clusters#deleteMethodWithHttpOperationResponse'
     parent: azure-arm-batchai.Clusters
     name: >-
-      deleteMethodWithHttpOperationResponse(resourceGroupName, clusterName,
-      options)
+      deleteMethodWithHttpOperationResponse(resourceGroupName, workspaceName,
+      clusterName, options)
     summary: Deletes a Cluster.
     fullName: >-
       azure-arm-batchai.Clusters.deleteMethodWithHttpOperationResponse(resourceGroupName,
-      clusterName, options)
+      workspaceName, clusterName, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1301,6 +1290,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -1332,17 +1332,19 @@ items:
         description: A promise is returned
       content: >-
         function deleteMethodWithHttpOperationResponse(resourceGroupName,
-        clusterName, options)
+        workspaceName, clusterName, options)
     langs:
       - js
   - uid: 'azure-arm-batchai.Clusters#deleteMethod'
     id: 'azure-arm-batchai.Clusters#deleteMethod'
     parent: azure-arm-batchai.Clusters
-    name: 'deleteMethod(resourceGroupName, clusterName, options, optionalCallback)'
+    name: >-
+      deleteMethod(resourceGroupName, workspaceName, clusterName, options,
+      optionalCallback)
     summary: Deletes a Cluster.
     fullName: >-
-      azure-arm-batchai.Clusters.deleteMethod(resourceGroupName, clusterName,
-      options, optionalCallback)
+      azure-arm-batchai.Clusters.deleteMethod(resourceGroupName, workspaceName,
+      clusterName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1383,6 +1385,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -1423,18 +1436,20 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function deleteMethod(resourceGroupName, clusterName, options,
-        optionalCallback)
+        function deleteMethod(resourceGroupName, workspaceName, clusterName,
+        options, optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-batchai.Clusters#getWithHttpOperationResponse'
     id: 'azure-arm-batchai.Clusters#getWithHttpOperationResponse'
     parent: azure-arm-batchai.Clusters
-    name: 'getWithHttpOperationResponse(resourceGroupName, clusterName, options)'
-    summary: Gets information about the specified Cluster.
+    name: >-
+      getWithHttpOperationResponse(resourceGroupName, workspaceName,
+      clusterName, options)
+    summary: Gets information about a Cluster.
     fullName: >-
       azure-arm-batchai.Clusters.getWithHttpOperationResponse(resourceGroupName,
-      clusterName, options)
+      workspaceName, clusterName, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1453,6 +1468,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -1483,18 +1509,20 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function getWithHttpOperationResponse(resourceGroupName, clusterName,
-        options)
+        function getWithHttpOperationResponse(resourceGroupName, workspaceName,
+        clusterName, options)
     langs:
       - js
   - uid: 'azure-arm-batchai.Clusters#get'
     id: 'azure-arm-batchai.Clusters#get'
     parent: azure-arm-batchai.Clusters
-    name: 'get(resourceGroupName, clusterName, options, optionalCallback)'
-    summary: Gets information about the specified Cluster.
-    fullName: >-
-      azure-arm-batchai.Clusters.get(resourceGroupName, clusterName, options,
+    name: >-
+      get(resourceGroupName, workspaceName, clusterName, options,
       optionalCallback)
+    summary: Gets information about a Cluster.
+    fullName: >-
+      azure-arm-batchai.Clusters.get(resourceGroupName, workspaceName,
+      clusterName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1537,6 +1565,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -1576,7 +1615,9 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function get(resourceGroupName, clusterName, options, optionalCallback)'
+      content: >-
+        function get(resourceGroupName, workspaceName, clusterName, options,
+        optionalCallback)
     langs:
       - js
   - uid: >-
@@ -1586,11 +1627,11 @@ items:
     parent: azure-arm-batchai.Clusters
     name: >-
       listRemoteLoginInformationWithHttpOperationResponse(resourceGroupName,
-      clusterName, options)
-    summary: 'Get the IP address, port of all the compute nodes in the cluster.'
+      workspaceName, clusterName, options)
+    summary: 'Get the IP address, port of all the compute nodes in the Cluster.'
     fullName: >-
       azure-arm-batchai.Clusters.listRemoteLoginInformationWithHttpOperationResponse(resourceGroupName,
-      clusterName, options)
+      workspaceName, clusterName, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1613,6 +1654,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -1645,19 +1697,19 @@ items:
       content: >-
         function
         listRemoteLoginInformationWithHttpOperationResponse(resourceGroupName,
-        clusterName, options)
+        workspaceName, clusterName, options)
     langs:
       - js
   - uid: 'azure-arm-batchai.Clusters#listRemoteLoginInformation'
     id: 'azure-arm-batchai.Clusters#listRemoteLoginInformation'
     parent: azure-arm-batchai.Clusters
     name: >-
-      listRemoteLoginInformation(resourceGroupName, clusterName, options,
-      optionalCallback)
-    summary: 'Get the IP address, port of all the compute nodes in the cluster.'
+      listRemoteLoginInformation(resourceGroupName, workspaceName, clusterName,
+      options, optionalCallback)
+    summary: 'Get the IP address, port of all the compute nodes in the Cluster.'
     fullName: >-
       azure-arm-batchai.Clusters.listRemoteLoginInformation(resourceGroupName,
-      clusterName, options, optionalCallback)
+      workspaceName, clusterName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1702,6 +1754,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -1742,202 +1805,20 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function listRemoteLoginInformation(resourceGroupName, clusterName,
-        options, optionalCallback)
+        function listRemoteLoginInformation(resourceGroupName, workspaceName,
+        clusterName, options, optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-batchai.Clusters#listWithHttpOperationResponse'
-    id: 'azure-arm-batchai.Clusters#listWithHttpOperationResponse'
+  - uid: 'azure-arm-batchai.Clusters#listByWorkspaceWithHttpOperationResponse'
+    id: 'azure-arm-batchai.Clusters#listByWorkspaceWithHttpOperationResponse'
     parent: azure-arm-batchai.Clusters
-    name: listWithHttpOperationResponse(options)
-    summary: Gets information about the Clusters associated with the subscription.
-    fullName: azure-arm-batchai.Clusters.listWithHttpOperationResponse(options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<ClusterListResult>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<ClusterListResult>} - The deserialized result
-          object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.clustersListOptions
-          type:
-            - object
-          description: |-
-            Additional parameters for the
-            operation
-          optional: true
-        - id: options.clustersListOptions.filter
-          type:
-            - string
-          description: >-
-            An OData $filter
-
-            clause.. Used to filter results that are returned in the GET
-            respnose.
-          optional: true
-        - id: options.clustersListOptions.select
-          type:
-            - string
-          description: >-
-            An OData $select
-
-            clause. Used to select the properties to be returned in the GET
-            respnose.
-          optional: true
-        - id: options.clustersListOptions.maxResults
-          type:
-            - number
-          description: >-
-            The maximum number
-
-            of items to return in the response. A maximum of 1000 files can be
-            returned.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: function listWithHttpOperationResponse(options)
-    langs:
-      - js
-  - uid: 'azure-arm-batchai.Clusters#list'
-    id: 'azure-arm-batchai.Clusters#list'
-    parent: azure-arm-batchai.Clusters
-    name: 'list(options, optionalCallback)'
-    summary: Gets information about the Clusters associated with the subscription.
-    fullName: 'azure-arm-batchai.Clusters.list(options, optionalCallback)'
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{ClusterListResult} - The deserialized result object.'
-        value: '{ClusterListResult} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ClusterListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ClusterListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.clustersListOptions
-          type:
-            - object
-          description: |-
-            Additional parameters for the
-            operation
-          optional: true
-        - id: options.clustersListOptions.filter
-          type:
-            - string
-          description: >-
-            An OData $filter
-
-            clause.. Used to filter results that are returned in the GET
-            respnose.
-          optional: true
-        - id: options.clustersListOptions.select
-          type:
-            - string
-          description: >-
-            An OData $select
-
-            clause. Used to select the properties to be returned in the GET
-            respnose.
-          optional: true
-        - id: options.clustersListOptions.maxResults
-          type:
-            - number
-          description: >-
-            The maximum number
-
-            of items to return in the response. A maximum of 1000 files can be
-            returned.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: 'function list(options, optionalCallback)'
-    langs:
-      - js
-  - uid: 'azure-arm-batchai.Clusters#listByResourceGroupWithHttpOperationResponse'
-    id: 'azure-arm-batchai.Clusters#listByResourceGroupWithHttpOperationResponse'
-    parent: azure-arm-batchai.Clusters
-    name: 'listByResourceGroupWithHttpOperationResponse(resourceGroupName, options)'
-    summary: >-
-      Gets information about the Clusters associated within the specified
-      resource
-
-      group.
-    fullName: >-
-      azure-arm-batchai.Clusters.listByResourceGroupWithHttpOperationResponse(resourceGroupName,
+    name: >-
+      listByWorkspaceWithHttpOperationResponse(resourceGroupName, workspaceName,
       options)
+    summary: Gets information about Clusters associated with the given Workspace.
+    fullName: >-
+      azure-arm-batchai.Clusters.listByWorkspaceWithHttpOperationResponse(resourceGroupName,
+      workspaceName, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1960,38 +1841,30 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: options
           type:
             - object
           description: Optional Parameters.
           optional: true
-        - id: options.clustersListByResourceGroupOptions
+        - id: options.clustersListByWorkspaceOptions
           type:
             - object
           description: |-
             Additional
             parameters for the operation
           optional: true
-        - id: options.clustersListByResourceGroupOptions.filter
-          type:
-            - string
-          description: |-
-            An OData
-            $filter clause.. Used to filter results that are returned in the GET
-            respnose.
-          optional: true
-        - id: options.clustersListByResourceGroupOptions.select
-          type:
-            - string
-          description: >-
-            An OData
-
-            $select clause. Used to select the properties to be returned in the
-            GET
-
-            respnose.
-          optional: true
-        - id: options.clustersListByResourceGroupOptions.maxResults
+        - id: options.clustersListByWorkspaceOptions.maxResults
           type:
             - number
           description: >-
@@ -2014,22 +1887,20 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function listByResourceGroupWithHttpOperationResponse(resourceGroupName,
-        options)
+        function listByWorkspaceWithHttpOperationResponse(resourceGroupName,
+        workspaceName, options)
     langs:
       - js
-  - uid: 'azure-arm-batchai.Clusters#listByResourceGroup'
-    id: 'azure-arm-batchai.Clusters#listByResourceGroup'
+  - uid: 'azure-arm-batchai.Clusters#listByWorkspace'
+    id: 'azure-arm-batchai.Clusters#listByWorkspace'
     parent: azure-arm-batchai.Clusters
-    name: 'listByResourceGroup(resourceGroupName, options, optionalCallback)'
-    summary: >-
-      Gets information about the Clusters associated within the specified
-      resource
-
-      group.
-    fullName: >-
-      azure-arm-batchai.Clusters.listByResourceGroup(resourceGroupName, options,
+    name: >-
+      listByWorkspace(resourceGroupName, workspaceName, options,
       optionalCallback)
+    summary: Gets information about Clusters associated with the given Workspace.
+    fullName: >-
+      azure-arm-batchai.Clusters.listByWorkspace(resourceGroupName,
+      workspaceName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -2072,38 +1943,30 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: options
           type:
             - object
           description: Optional Parameters.
           optional: true
-        - id: options.clustersListByResourceGroupOptions
+        - id: options.clustersListByWorkspaceOptions
           type:
             - object
           description: |-
             Additional
             parameters for the operation
           optional: true
-        - id: options.clustersListByResourceGroupOptions.filter
-          type:
-            - string
-          description: |-
-            An OData
-            $filter clause.. Used to filter results that are returned in the GET
-            respnose.
-          optional: true
-        - id: options.clustersListByResourceGroupOptions.select
-          type:
-            - string
-          description: >-
-            An OData
-
-            $select clause. Used to select the properties to be returned in the
-            GET
-
-            respnose.
-          optional: true
-        - id: options.clustersListByResourceGroupOptions.maxResults
+        - id: options.clustersListByWorkspaceOptions.maxResults
           type:
             - number
           description: >-
@@ -2136,7 +1999,7 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function listByResourceGroup(resourceGroupName, options,
+        function listByWorkspace(resourceGroupName, workspaceName, options,
         optionalCallback)
     langs:
       - js
@@ -2144,14 +2007,12 @@ items:
     id: 'azure-arm-batchai.Clusters#beginCreateWithHttpOperationResponse'
     parent: azure-arm-batchai.Clusters
     name: >-
-      beginCreateWithHttpOperationResponse(resourceGroupName, clusterName,
-      parameters, options)
-    summary: |-
-      Adds a cluster. A cluster is a collection of compute nodes. Multiple jobs
-      can be run on the same cluster.
+      beginCreateWithHttpOperationResponse(resourceGroupName, workspaceName,
+      clusterName, parameters, options)
+    summary: Creates a Cluster in the given Workspace.
     fullName: >-
       azure-arm-batchai.Clusters.beginCreateWithHttpOperationResponse(resourceGroupName,
-      clusterName, parameters, options)
+      workspaceName, clusterName, parameters, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -2170,6 +2031,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -2186,20 +2058,9 @@ items:
         - id: parameters
           type:
             - object
-          description: The parameters to provide for cluster creation.
-        - id: parameters.location
-          type:
-            - string
           description: |-
-            The region in which to create the
-            cluster.
-        - id: parameters.tags
-          type:
-            - object
-          description: |-
-            The user specified tags associated with
-            the Cluster.
-          optional: true
+            The parameters to provide for the Cluster
+            creation.
         - id: parameters.vmSize
           type:
             - string
@@ -2260,7 +2121,7 @@ items:
             size is decreasing. The default value is requeue. Possible values
             include:
 
-            'requeue', 'terminate', 'waitforjobcompletion', 'unknown'
+            'requeue', 'terminate', 'waitforjobcompletion'
           optional: true
         - id: parameters.scaleSettings.autoScale
           type:
@@ -2375,9 +2236,16 @@ items:
         - id: parameters.nodeSetup.setupTask.commandLine
           type:
             - string
-          description: |-
-            Command Line to
-            start Setup process.
+          description: >-
+            Command line to
+
+            be executed on each cluster's node after it being allocated or
+            rebooted.
+
+            Command line to be executed on each cluster's node after it being
+            allocated
+
+            or rebooted. The command is executed in a bash subshell as a root.
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
@@ -2393,20 +2261,6 @@ items:
             Server
 
             will never report values of these variables back.
-          optional: true
-        - id: parameters.nodeSetup.setupTask.runElevated
-          type:
-            - boolean
-          description: >-
-            Specifies
-
-            whether to run the setup task under root account. The default value
-            is
-
-            false. Note. Non-elevated tasks are run under an account added into
-            sudoer
-
-            list and can perform sudo when required.
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
@@ -2582,21 +2436,19 @@ items:
         description: A promise is returned
       content: >-
         function beginCreateWithHttpOperationResponse(resourceGroupName,
-        clusterName, parameters, options)
+        workspaceName, clusterName, parameters, options)
     langs:
       - js
   - uid: 'azure-arm-batchai.Clusters#beginCreate'
     id: 'azure-arm-batchai.Clusters#beginCreate'
     parent: azure-arm-batchai.Clusters
     name: >-
-      beginCreate(resourceGroupName, clusterName, parameters, options,
-      optionalCallback)
-    summary: |-
-      Adds a cluster. A cluster is a collection of compute nodes. Multiple jobs
-      can be run on the same cluster.
+      beginCreate(resourceGroupName, workspaceName, clusterName, parameters,
+      options, optionalCallback)
+    summary: Creates a Cluster in the given Workspace.
     fullName: >-
-      azure-arm-batchai.Clusters.beginCreate(resourceGroupName, clusterName,
-      parameters, options, optionalCallback)
+      azure-arm-batchai.Clusters.beginCreate(resourceGroupName, workspaceName,
+      clusterName, parameters, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -2639,6 +2491,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -2655,20 +2518,9 @@ items:
         - id: parameters
           type:
             - object
-          description: The parameters to provide for cluster creation.
-        - id: parameters.location
-          type:
-            - string
           description: |-
-            The region in which to create the
-            cluster.
-        - id: parameters.tags
-          type:
-            - object
-          description: |-
-            The user specified tags associated with
-            the Cluster.
-          optional: true
+            The parameters to provide for the Cluster
+            creation.
         - id: parameters.vmSize
           type:
             - string
@@ -2729,7 +2581,7 @@ items:
             size is decreasing. The default value is requeue. Possible values
             include:
 
-            'requeue', 'terminate', 'waitforjobcompletion', 'unknown'
+            'requeue', 'terminate', 'waitforjobcompletion'
           optional: true
         - id: parameters.scaleSettings.autoScale
           type:
@@ -2844,9 +2696,16 @@ items:
         - id: parameters.nodeSetup.setupTask.commandLine
           type:
             - string
-          description: |-
-            Command Line to
-            start Setup process.
+          description: >-
+            Command line to
+
+            be executed on each cluster's node after it being allocated or
+            rebooted.
+
+            Command line to be executed on each cluster's node after it being
+            allocated
+
+            or rebooted. The command is executed in a bash subshell as a root.
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
@@ -2862,20 +2721,6 @@ items:
             Server
 
             will never report values of these variables back.
-          optional: true
-        - id: parameters.nodeSetup.setupTask.runElevated
-          type:
-            - boolean
-          description: >-
-            Specifies
-
-            whether to run the setup task under root account. The default value
-            is
-
-            false. Note. Non-elevated tasks are run under an account added into
-            sudoer
-
-            list and can perform sudo when required.
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
@@ -3060,20 +2905,20 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function beginCreate(resourceGroupName, clusterName, parameters,
-        options, optionalCallback)
+        function beginCreate(resourceGroupName, workspaceName, clusterName,
+        parameters, options, optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-batchai.Clusters#beginDeleteMethodWithHttpOperationResponse'
     id: 'azure-arm-batchai.Clusters#beginDeleteMethodWithHttpOperationResponse'
     parent: azure-arm-batchai.Clusters
     name: >-
-      beginDeleteMethodWithHttpOperationResponse(resourceGroupName, clusterName,
-      options)
+      beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
+      workspaceName, clusterName, options)
     summary: Deletes a Cluster.
     fullName: >-
       azure-arm-batchai.Clusters.beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
-      clusterName, options)
+      workspaceName, clusterName, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -3092,6 +2937,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -3123,19 +2979,19 @@ items:
         description: A promise is returned
       content: >-
         function beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
-        clusterName, options)
+        workspaceName, clusterName, options)
     langs:
       - js
   - uid: 'azure-arm-batchai.Clusters#beginDeleteMethod'
     id: 'azure-arm-batchai.Clusters#beginDeleteMethod'
     parent: azure-arm-batchai.Clusters
     name: >-
-      beginDeleteMethod(resourceGroupName, clusterName, options,
+      beginDeleteMethod(resourceGroupName, workspaceName, clusterName, options,
       optionalCallback)
     summary: Deletes a Cluster.
     fullName: >-
       azure-arm-batchai.Clusters.beginDeleteMethod(resourceGroupName,
-      clusterName, options, optionalCallback)
+      workspaceName, clusterName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -3176,6 +3032,17 @@ items:
           description: |-
             Name of the resource group to which the
             resource belongs.
+        - id: workspaceName
+          type:
+            - string
+          description: >-
+            The name of the workspace. Workspace names can
+
+            only contain a combination of alphanumeric characters along with
+            dash (-)
+
+            and underscore (_). The name must be from 1 through 64 characters
+            long.
         - id: clusterName
           type:
             - string
@@ -3216,8 +3083,8 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function beginDeleteMethod(resourceGroupName, clusterName, options,
-        optionalCallback)
+        function beginDeleteMethod(resourceGroupName, workspaceName,
+        clusterName, options, optionalCallback)
     langs:
       - js
   - uid: >-
@@ -3228,7 +3095,7 @@ items:
     name: >-
       listRemoteLoginInformationNextWithHttpOperationResponse(nextPageLink,
       options)
-    summary: 'Get the IP address, port of all the compute nodes in the cluster.'
+    summary: 'Get the IP address, port of all the compute nodes in the Cluster.'
     fullName: >-
       azure-arm-batchai.Clusters.listRemoteLoginInformationNextWithHttpOperationResponse(nextPageLink,
       options)
@@ -3280,7 +3147,7 @@ items:
     id: 'azure-arm-batchai.Clusters#listRemoteLoginInformationNext'
     parent: azure-arm-batchai.Clusters
     name: 'listRemoteLoginInformationNext(nextPageLink, options, optionalCallback)'
-    summary: 'Get the IP address, port of all the compute nodes in the cluster.'
+    summary: 'Get the IP address, port of all the compute nodes in the Cluster.'
     fullName: >-
       azure-arm-batchai.Clusters.listRemoteLoginInformationNext(nextPageLink,
       options, optionalCallback)
@@ -3359,147 +3226,13 @@ items:
         optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-batchai.Clusters#listNextWithHttpOperationResponse'
-    id: 'azure-arm-batchai.Clusters#listNextWithHttpOperationResponse'
+  - uid: 'azure-arm-batchai.Clusters#listByWorkspaceNextWithHttpOperationResponse'
+    id: 'azure-arm-batchai.Clusters#listByWorkspaceNextWithHttpOperationResponse'
     parent: azure-arm-batchai.Clusters
-    name: 'listNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: Gets information about the Clusters associated with the subscription.
+    name: 'listByWorkspaceNextWithHttpOperationResponse(nextPageLink, options)'
+    summary: Gets information about Clusters associated with the given Workspace.
     fullName: >-
-      azure-arm-batchai.Clusters.listNextWithHttpOperationResponse(nextPageLink,
-      options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<ClusterListResult>} - The deserialized result
-          object.
-        value: >-
-          {HttpOperationResponse<ClusterListResult>} - The deserialized result
-          object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: nextPageLink
-          type:
-            - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: 'function listNextWithHttpOperationResponse(nextPageLink, options)'
-    langs:
-      - js
-  - uid: 'azure-arm-batchai.Clusters#listNext'
-    id: 'azure-arm-batchai.Clusters#listNext'
-    parent: azure-arm-batchai.Clusters
-    name: 'listNext(nextPageLink, options, optionalCallback)'
-    summary: Gets information about the Clusters associated with the subscription.
-    fullName: >-
-      azure-arm-batchai.Clusters.listNext(nextPageLink, options,
-      optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{ClusterListResult} - The deserialized result object.'
-        value: '{ClusterListResult} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ClusterListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ClusterListResult} for more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: nextPageLink
-          type:
-            - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: 'function listNext(nextPageLink, options, optionalCallback)'
-    langs:
-      - js
-  - uid: >-
-      azure-arm-batchai.Clusters#listByResourceGroupNextWithHttpOperationResponse
-    id: >-
-      azure-arm-batchai.Clusters#listByResourceGroupNextWithHttpOperationResponse
-    parent: azure-arm-batchai.Clusters
-    name: 'listByResourceGroupNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: >-
-      Gets information about the Clusters associated within the specified
-      resource
-
-      group.
-    fullName: >-
-      azure-arm-batchai.Clusters.listByResourceGroupNextWithHttpOperationResponse(nextPageLink,
+      azure-arm-batchai.Clusters.listByWorkspaceNextWithHttpOperationResponse(nextPageLink,
       options)
     tags:
       - originalTitle: resolve
@@ -3540,21 +3273,17 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function listByResourceGroupNextWithHttpOperationResponse(nextPageLink,
+        function listByWorkspaceNextWithHttpOperationResponse(nextPageLink,
         options)
     langs:
       - js
-  - uid: 'azure-arm-batchai.Clusters#listByResourceGroupNext'
-    id: 'azure-arm-batchai.Clusters#listByResourceGroupNext'
+  - uid: 'azure-arm-batchai.Clusters#listByWorkspaceNext'
+    id: 'azure-arm-batchai.Clusters#listByWorkspaceNext'
     parent: azure-arm-batchai.Clusters
-    name: 'listByResourceGroupNext(nextPageLink, options, optionalCallback)'
-    summary: >-
-      Gets information about the Clusters associated within the specified
-      resource
-
-      group.
+    name: 'listByWorkspaceNext(nextPageLink, options, optionalCallback)'
+    summary: Gets information about Clusters associated with the given Workspace.
     fullName: >-
-      azure-arm-batchai.Clusters.listByResourceGroupNext(nextPageLink, options,
+      azure-arm-batchai.Clusters.listByWorkspaceNext(nextPageLink, options,
       optionalCallback)
     tags:
       - originalTitle: resolve
@@ -3624,8 +3353,6 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: >-
-        function listByResourceGroupNext(nextPageLink, options,
-        optionalCallback)
+      content: 'function listByWorkspaceNext(nextPageLink, options, optionalCallback)'
     langs:
       - js

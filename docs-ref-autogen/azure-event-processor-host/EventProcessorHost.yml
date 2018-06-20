@@ -10,6 +10,10 @@ items:
       - 'azure-event-processor-host.EventProcessorHost.#ctor'
       - 'azure-event-processor-host.EventProcessorHost#hostName'
       - 'azure-event-processor-host.EventProcessorHost#consumerGroup'
+      - 'azure-event-processor-host.EventProcessorHost#getHubRuntimeInformation'
+      - 'azure-event-processor-host.EventProcessorHost#getPartitionInformation'
+      - 'azure-event-processor-host.EventProcessorHost#getPartitionIds'
+      - 'azure-event-processor-host.EventProcessorHost#start'
       - 'azure-event-processor-host.EventProcessorHost#stop'
       - azure-event-processor-host.EventProcessorHost.createHostName
       - azure-event-processor-host.EventProcessorHost.createFromConnectionString
@@ -52,6 +56,85 @@ items:
     type: Member
     syntax:
       content: consumerGroup
+    langs:
+      - js
+  - uid: 'azure-event-processor-host.EventProcessorHost#getHubRuntimeInformation'
+    id: 'azure-event-processor-host.EventProcessorHost#getHubRuntimeInformation'
+    parent: azure-event-processor-host.EventProcessorHost
+    name: getHubRuntimeInformation()
+    summary: Provides the eventhub runtime information.
+    fullName: azure-event-processor-host.EventProcessorHost.getHubRuntimeInformation()
+    type: Function
+    syntax:
+      return:
+        type:
+          - azure-event-processor-host.Promise.<EventHubRuntimeInformation>
+        description: ''
+      content: function getHubRuntimeInformation()
+    langs:
+      - js
+  - uid: 'azure-event-processor-host.EventProcessorHost#getPartitionInformation'
+    id: 'azure-event-processor-host.EventProcessorHost#getPartitionInformation'
+    parent: azure-event-processor-host.EventProcessorHost
+    name: getPartitionInformation(partitionId)
+    summary: Provides information about the specified partition.
+    fullName: >-
+      azure-event-processor-host.EventProcessorHost.getPartitionInformation(partitionId)
+    type: Function
+    syntax:
+      parameters:
+        - id: partitionId
+          type:
+            - string
+            - number
+          description: Partition ID for which partition information is required.
+      content: function getPartitionInformation(partitionId)
+    langs:
+      - js
+  - uid: 'azure-event-processor-host.EventProcessorHost#getPartitionIds'
+    id: 'azure-event-processor-host.EventProcessorHost#getPartitionIds'
+    parent: azure-event-processor-host.EventProcessorHost
+    name: getPartitionIds()
+    summary: Provides an array of partitionIds.
+    fullName: azure-event-processor-host.EventProcessorHost.getPartitionIds()
+    type: Function
+    syntax:
+      return:
+        type:
+          - azure-event-processor-host.Promise.<Array.<string>>
+        description: ''
+      content: function getPartitionIds()
+    langs:
+      - js
+  - uid: 'azure-event-processor-host.EventProcessorHost#start'
+    id: 'azure-event-processor-host.EventProcessorHost#start'
+    parent: azure-event-processor-host.EventProcessorHost
+    name: start(options)
+    summary: >-
+      Starts the event processor host, fetching the list of partitions,
+      (optionally) filtering
+
+      them, and attempting to grab leases on the (filtered) set. For each
+      successful lease, will
+
+      get the details from the blob and start a receiver at the point where it
+      left off previously.
+    fullName: azure-event-processor-host.EventProcessorHost.start(options)
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - azure-event-processor-host.StartEPHOptions
+          description: |-
+            Optional parameters that can be provided while starting the
+            EPH.
+          optional: true
+      return:
+        type:
+          - azure-event-processor-host.Promise.<void>
+        description: ''
+      content: function start(options)
     langs:
       - js
   - uid: 'azure-event-processor-host.EventProcessorHost#stop'

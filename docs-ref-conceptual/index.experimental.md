@@ -8,7 +8,7 @@ description: Learn how to develop and deploy Node.js applications in the cloud w
 ms.topic: hub-page
 ---
 
-
+<!---Loc Comment: This file is writtern in HTML. Could you rewrite in markdown syntax, please?---->
 <div id="main" class="v2">
 	<div class="container">
 		<h1 style="text-align: center">Node.js Dev Center</h1> 

@@ -14,8 +14,6 @@ items:
       - 'azure-graph.Groups#removeMember'
       - 'azure-graph.Groups#addMemberWithHttpOperationResponse'
       - 'azure-graph.Groups#addMember'
-      - 'azure-graph.Groups#deleteMethodWithHttpOperationResponse'
-      - 'azure-graph.Groups#deleteMethod'
       - 'azure-graph.Groups#createWithHttpOperationResponse'
       - 'azure-graph.Groups#create'
       - 'azure-graph.Groups#listWithHttpOperationResponse'
@@ -24,6 +22,8 @@ items:
       - 'azure-graph.Groups#getGroupMembers'
       - 'azure-graph.Groups#getWithHttpOperationResponse'
       - 'azure-graph.Groups#get'
+      - 'azure-graph.Groups#deleteMethodWithHttpOperationResponse'
+      - 'azure-graph.Groups#deleteMethod'
       - 'azure-graph.Groups#getMemberGroupsWithHttpOperationResponse'
       - 'azure-graph.Groups#getMemberGroups'
       - 'azure-graph.Groups#listNextWithHttpOperationResponse'
@@ -343,11 +343,11 @@ items:
   - uid: 'azure-graph.Groups#addMemberWithHttpOperationResponse'
     id: 'azure-graph.Groups#addMemberWithHttpOperationResponse'
     parent: azure-graph.Groups
-    name: 'addMemberWithHttpOperationResponse(groupObjectId, url, options)'
+    name: 'addMemberWithHttpOperationResponse(groupObjectId, parameters, options)'
     summary: Add a member to a group.
     fullName: >-
-      azure-graph.Groups.addMemberWithHttpOperationResponse(groupObjectId, url,
-      options)
+      azure-graph.Groups.addMemberWithHttpOperationResponse(groupObjectId,
+      parameters, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -366,7 +366,14 @@ items:
           description: |-
             The object ID of the group to which to add the
             member.
-        - id: url
+        - id: parameters
+          type:
+            - object
+          description: >-
+            The URL of the member object, such as
+
+            https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd.
+        - id: parameters.url
           type:
             - string
           description: >-
@@ -396,16 +403,18 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: 'function addMemberWithHttpOperationResponse(groupObjectId, url, options)'
+      content: >-
+        function addMemberWithHttpOperationResponse(groupObjectId, parameters,
+        options)
     langs:
       - js
   - uid: 'azure-graph.Groups#addMember'
     id: 'azure-graph.Groups#addMember'
     parent: azure-graph.Groups
-    name: 'addMember(groupObjectId, url, options, optionalCallback)'
+    name: 'addMember(groupObjectId, parameters, options, optionalCallback)'
     summary: Add a member to a group.
     fullName: >-
-      azure-graph.Groups.addMember(groupObjectId, url, options,
+      azure-graph.Groups.addMember(groupObjectId, parameters, options,
       optionalCallback)
     tags:
       - originalTitle: resolve
@@ -447,7 +456,14 @@ items:
           description: |-
             The object ID of the group to which to add the
             member.
-        - id: url
+        - id: parameters
+          type:
+            - object
+          description: >-
+            The URL of the member object, such as
+
+            https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd.
+        - id: parameters.url
           type:
             - string
           description: >-
@@ -487,123 +503,7 @@ items:
           then it returns the callback else returns a Promise.
 
           {Promise} A promise is returned
-      content: 'function addMember(groupObjectId, url, options, optionalCallback)'
-    langs:
-      - js
-  - uid: 'azure-graph.Groups#deleteMethodWithHttpOperationResponse'
-    id: 'azure-graph.Groups#deleteMethodWithHttpOperationResponse'
-    parent: azure-graph.Groups
-    name: 'deleteMethodWithHttpOperationResponse(groupObjectId, options)'
-    summary: Delete a group from the directory.
-    fullName: >-
-      azure-graph.Groups.deleteMethodWithHttpOperationResponse(groupObjectId,
-      options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{HttpOperationResponse<null>} - The deserialized result object.'
-        value: '{HttpOperationResponse<null>} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: groupObjectId
-          type:
-            - string
-          description: The object ID of the group to delete.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: 'function deleteMethodWithHttpOperationResponse(groupObjectId, options)'
-    langs:
-      - js
-  - uid: 'azure-graph.Groups#deleteMethod'
-    id: 'azure-graph.Groups#deleteMethod'
-    parent: azure-graph.Groups
-    name: 'deleteMethod(groupObjectId, options, optionalCallback)'
-    summary: Delete a group from the directory.
-    fullName: 'azure-graph.Groups.deleteMethod(groupObjectId, options, optionalCallback)'
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: '{null} - The deserialized result object.'
-        value: '{null} - The deserialized result object.'
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: groupObjectId
-          type:
-            - string
-          description: The object ID of the group to delete.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: 'function deleteMethod(groupObjectId, options, optionalCallback)'
+      content: 'function addMember(groupObjectId, parameters, options, optionalCallback)'
     langs:
       - js
   - uid: 'azure-graph.Groups#createWithHttpOperationResponse'
@@ -1106,12 +1006,126 @@ items:
       content: 'function get(objectId, options, optionalCallback)'
     langs:
       - js
+  - uid: 'azure-graph.Groups#deleteMethodWithHttpOperationResponse'
+    id: 'azure-graph.Groups#deleteMethodWithHttpOperationResponse'
+    parent: azure-graph.Groups
+    name: 'deleteMethodWithHttpOperationResponse(objectId, options)'
+    summary: Delete a group from the directory.
+    fullName: >-
+      azure-graph.Groups.deleteMethodWithHttpOperationResponse(objectId,
+      options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: objectId
+          type:
+            - string
+          description: The object ID of the group to delete.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: 'function deleteMethodWithHttpOperationResponse(objectId, options)'
+    langs:
+      - js
+  - uid: 'azure-graph.Groups#deleteMethod'
+    id: 'azure-graph.Groups#deleteMethod'
+    parent: azure-graph.Groups
+    name: 'deleteMethod(objectId, options, optionalCallback)'
+    summary: Delete a group from the directory.
+    fullName: 'azure-graph.Groups.deleteMethod(objectId, options, optionalCallback)'
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {null} [result]   - The deserialized result object if an error did not occur.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: objectId
+          type:
+            - string
+          description: The object ID of the group to delete.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function deleteMethod(objectId, options, optionalCallback)'
+    langs:
+      - js
   - uid: 'azure-graph.Groups#getMemberGroupsWithHttpOperationResponse'
     id: 'azure-graph.Groups#getMemberGroupsWithHttpOperationResponse'
     parent: azure-graph.Groups
-    name: >-
-      getMemberGroupsWithHttpOperationResponse(objectId, securityEnabledOnly,
-      options)
+    name: 'getMemberGroupsWithHttpOperationResponse(objectId, parameters, options)'
     summary: >-
       Gets a collection of object IDs of groups of which the specified group is
       a
@@ -1119,7 +1133,7 @@ items:
       member.
     fullName: >-
       azure-graph.Groups.getMemberGroupsWithHttpOperationResponse(objectId,
-      securityEnabledOnly, options)
+      parameters, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -1142,7 +1156,11 @@ items:
           description: |-
             The object ID of the group for which to get group
             membership.
-        - id: securityEnabledOnly
+        - id: parameters
+          type:
+            - object
+          description: Group filtering parameters.
+        - id: parameters.securityEnabledOnly
           type:
             - boolean
           description: >-
@@ -1169,21 +1187,21 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function getMemberGroupsWithHttpOperationResponse(objectId,
-        securityEnabledOnly, options)
+        function getMemberGroupsWithHttpOperationResponse(objectId, parameters,
+        options)
     langs:
       - js
   - uid: 'azure-graph.Groups#getMemberGroups'
     id: 'azure-graph.Groups#getMemberGroups'
     parent: azure-graph.Groups
-    name: 'getMemberGroups(objectId, securityEnabledOnly, options, optionalCallback)'
+    name: 'getMemberGroups(objectId, parameters, options, optionalCallback)'
     summary: >-
       Gets a collection of object IDs of groups of which the specified group is
       a
 
       member.
     fullName: >-
-      azure-graph.Groups.getMemberGroups(objectId, securityEnabledOnly, options,
+      azure-graph.Groups.getMemberGroups(objectId, parameters, options,
       optionalCallback)
     tags:
       - originalTitle: resolve
@@ -1229,7 +1247,11 @@ items:
           description: |-
             The object ID of the group for which to get group
             membership.
-        - id: securityEnabledOnly
+        - id: parameters
+          type:
+            - object
+          description: Group filtering parameters.
+        - id: parameters.securityEnabledOnly
           type:
             - boolean
           description: >-
@@ -1266,7 +1288,7 @@ items:
 
           {Promise} A promise is returned
       content: >-
-        function getMemberGroups(objectId, securityEnabledOnly, options,
+        function getMemberGroups(objectId, parameters, options,
         optionalCallback)
     langs:
       - js

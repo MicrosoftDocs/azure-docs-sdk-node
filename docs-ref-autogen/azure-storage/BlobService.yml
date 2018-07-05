@@ -10,6 +10,7 @@ items:
       - 'azure-storage.BlobService.#ctor'
       - 'azure-storage.BlobService#getServiceStats'
       - 'azure-storage.BlobService#getServiceProperties'
+      - 'azure-storage.BlobService#getAccountProperties'
       - 'azure-storage.BlobService#setServiceProperties'
       - 'azure-storage.BlobService#setBlobTier'
       - 'azure-storage.BlobService#listContainersSegmented'
@@ -64,6 +65,7 @@ items:
       - 'azure-storage.BlobService#createWriteStreamToBlockBlob'
       - 'azure-storage.BlobService#createBlockFromStream'
       - 'azure-storage.BlobService#createBlockFromText'
+      - 'azure-storage.BlobService#createBlockFromURL'
       - 'azure-storage.BlobService#commitBlocks'
       - 'azure-storage.BlobService#listBlocks'
       - 'azure-storage.BlobService#generateBlockIdPrefix'
@@ -243,8 +245,81 @@ items:
         - id: callback
           type:
             - azure-storage.errorOrResult
-          description: "`error` will contain information if an error occurs; otherwise, `[result](xref:azure-storage.ServiceProperties)` will contain the properties \r                                                              and `response` will contain information related to this operation."
+          description: "`error` will contain information if an error occurs; otherwise, `[result](xref:azure-storage.BlobServiceProperties)` will contain the properties \r                                                              and `response` will contain information related to this operation."
       content: 'function getServiceProperties(options, callback)'
+    langs:
+      - js
+  - uid: 'azure-storage.BlobService#getAccountProperties'
+    id: 'azure-storage.BlobService#getAccountProperties'
+    parent: azure-storage.BlobService
+    name: 'getAccountProperties(container, blob, options, callback)'
+    summary: Gets the properties of a storage account.
+    fullName: >-
+      azure-storage.BlobService.getAccountProperties(container, blob, options,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: container
+          type:
+            - string
+          description: >-
+            Optional. Name of an existing container. Required when using a SAS
+            token to a specific container or blob.
+          optional: true
+        - id: blob
+          type:
+            - string
+          description: >-
+            Optional. Name of an existing blob. Required when using a SAS token
+            to a specific blob.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.locationMode
+          type:
+            - azure-storage.LocationMode
+          description: "Specifies the location mode used to decide which location the request should be sent to. \r                                                              Please see StorageUtilities.LocationMode for the possible values."
+          optional: true
+        - id: options.timeoutIntervalInMs
+          type:
+            - azure-storage.int
+          description: >-
+            The server timeout interval, in milliseconds, to use for the
+            request.
+          optional: true
+        - id: options.clientRequestTimeoutInMs
+          type:
+            - azure-storage.int
+          description: >-
+            The timeout of client requests, in milliseconds, to use for the
+            request.
+          optional: true
+        - id: options.maximumExecutionTimeInMs
+          type:
+            - azure-storage.int
+          description: "The maximum execution time, in milliseconds, across all potential retries, to use when making this request.\r                                                              The maximum execution time interval begins at the time that the client begins building the request. The maximum\r                                                              execution time is checked intermittently while performing requests, and before executing retries."
+          optional: true
+        - id: options.clientRequestId
+          type:
+            - string
+          description: >-
+            A string that represents the client request ID with a 1KB character
+            limit.
+          optional: true
+        - id: options.useNagleAlgorithm
+          type:
+            - azure-storage.bool
+          description: "Determines whether the Nagle algorithm is used; true to use the Nagle algorithm; otherwise, false.\r                                                              The default value is false."
+          optional: true
+        - id: callback
+          type:
+            - azure-storage.errorOrResult
+          description: "`error` will contain information if an error occurs; otherwise, `[result](xref:azure-storage.ServiceProperties)` will contain the properties \r                                                              and `response` will contain information related to this operation."
+      content: 'function getAccountProperties(container, blob, options, callback)'
     langs:
       - js
   - uid: 'azure-storage.BlobService#setServiceProperties'
@@ -261,7 +336,10 @@ items:
         - id: serviceProperties
           type:
             - object
-          description: The service properties.
+          description: >-
+            A
+            `[BlobServiceProperties](xref:azure-storage.BlobServiceProperties)`
+            object.
         - id: options
           type:
             - object
@@ -3130,9 +3208,7 @@ items:
     id: 'azure-storage.BlobService#startCopyBlob'
     parent: azure-storage.BlobService
     name: 'startCopyBlob(sourceUri, targetContainer, targetBlob, options, callback)'
-    summary: >-
-      Starts to copy a blob to a destination within the storage account. The
-      Copy Blob operation copies the entire committed blob.
+    summary: "Starts to copy a blob or an Azure Storage file to a destination blob.\r\rFor an asynchronous copy(by default), this operation returns a object including a copy ID which\ryou can use to check or abort the copy operation. The Blob service copies blobs on a best-effort basis.\rThe source blob for an asynchronous copy operation may be a block blob, an append blob,\ra page blob or an Azure Storage file.\r\rRefer to https://docs.microsoft.com/en-us/rest/api/storageservices/copy-blob for more details."
     fullName: >-
       azure-storage.BlobService.startCopyBlob(sourceUri, targetContainer,
       targetBlob, options, callback)
@@ -5338,6 +5414,116 @@ items:
         callback)
     langs:
       - js
+  - uid: 'azure-storage.BlobService#createBlockFromURL'
+    id: 'azure-storage.BlobService#createBlockFromURL'
+    parent: azure-storage.BlobService
+    name: >-
+      createBlockFromURL(blockId, container, blob, sourceURL, sourceRangeStart,
+      sourceRangeEnd, options, callback)
+    summary: >-
+      Creates a new block to be committed as part of a blob from an URL of an
+      Azure blob or file.
+    fullName: >-
+      azure-storage.BlobService.createBlockFromURL(blockId, container, blob,
+      sourceURL, sourceRangeStart, sourceRangeEnd, options, callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: blockId
+          type:
+            - string
+          description: The block identifier.
+        - id: container
+          type:
+            - string
+          description: The container name.
+        - id: blob
+          type:
+            - string
+          description: The blob name.
+        - id: sourceURL
+          type:
+            - string
+          description: "The URL of the source data.\r                                                                      It can point to any Azure Blob or File, that is either public or has a shared access signature attached."
+        - id: sourceRangeStart
+          type:
+            - azure-storage.int
+          description: >-
+            The start of the range of bytes(inclusive) that has to be taken from
+            the copy source.
+        - id: sourceRangeEnd
+          type:
+            - azure-storage.int
+          description: >-
+            The end of the range of bytes(inclusive) that has to be taken from
+            the copy source.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.leaseId
+          type:
+            - string
+          description: The target blob lease identifier.
+          optional: true
+        - id: options.transactionalContentMD5
+          type:
+            - string
+          description: >-
+            An MD5 hash of the block content. This hash is used to verify the
+            integrity of the block during transport.
+          optional: true
+        - id: options.accessConditions
+          type:
+            - azure-storage.AccessConditions
+          description: The access conditions.
+          optional: true
+        - id: options.locationMode
+          type:
+            - azure-storage.LocationMode
+          description: "Specifies the location mode used to decide which location the request should be sent to. \r                                                                      Please see StorageUtilities.LocationMode for the possible values."
+          optional: true
+        - id: options.timeoutIntervalInMs
+          type:
+            - azure-storage.int
+          description: >-
+            The server timeout interval, in milliseconds, to use for the
+            request.
+          optional: true
+        - id: options.clientRequestTimeoutInMs
+          type:
+            - azure-storage.int
+          description: >-
+            The timeout of client requests, in milliseconds, to use for the
+            request.
+          optional: true
+        - id: options.maximumExecutionTimeInMs
+          type:
+            - azure-storage.int
+          description: "The maximum execution time, in milliseconds, across all potential retries, to use when making this request.\r                                                                      The maximum execution time interval begins at the time that the client begins building the request. The maximum\r                                                                      execution time is checked intermittently while performing requests, and before executing retries."
+          optional: true
+        - id: options.clientRequestId
+          type:
+            - string
+          description: >-
+            A string that represents the client request ID with a 1KB character
+            limit.
+          optional: true
+        - id: options.useNagleAlgorithm
+          type:
+            - azure-storage.bool
+          description: "Determines whether the Nagle algorithm is used; true to use the Nagle algorithm; otherwise, false.\r                                                                      The default value is false."
+          optional: true
+        - id: callback
+          type:
+            - azure-storage.errorOrResponse
+          description: "`error` will contain information\r                                                                      if an error occurs; otherwise \r                                                                      `response` will contain information related to this operation."
+      content: >-
+        function createBlockFromURL(blockId, container, blob, sourceURL,
+        sourceRangeStart, sourceRangeEnd, options, callback)
+    langs:
+      - js
   - uid: 'azure-storage.BlobService#commitBlocks'
     id: 'azure-storage.BlobService#commitBlocks'
     parent: azure-storage.BlobService
@@ -6577,7 +6763,7 @@ items:
     name: >-
       appendBlockFromStream(container, blob, readStream, streamLength, options,
       callback)
-    summary: "Creates a new block from a read stream to be appended to an append blob.\rThis API should be used strictly in a single writer scenario because the API internally uses the append-offset conditional header to avoid duplicate blocks.\rIf you are guaranteed to have a single writer scenario, please look at options.absorbConditionalErrorsOnRetry and see if setting this flag to true is acceptable for you."
+    summary: "Creates a new block from a read stream to be appended to an append blob.\rIf the sequence of data to be appended is important, please use this API strictly in a single writer.\rIf you are guaranteed to have a single writer scenario, please look at options.absorbConditionalErrorsOnRetry and see if setting this flag to true is acceptable for you.\rIf the sequence of data to be appended is not important, this API can be used in parallel,\rin this case, options.appendPosition can be left without settings."
     fullName: >-
       azure-storage.BlobService.appendBlockFromStream(container, blob,
       readStream, streamLength, options, callback)
@@ -6689,7 +6875,7 @@ items:
     id: 'azure-storage.BlobService#appendBlockFromText'
     parent: azure-storage.BlobService
     name: 'appendBlockFromText(container, blob, content, options, callback)'
-    summary: "Creates a new block from a text to be appended to an append blob.\rThis API should be used strictly in a single writer scenario because the API internally uses the append-offset conditional header to avoid duplicate blocks.\rIf you are guaranteed to have a single writer scenario, please look at options.absorbConditionalErrorsOnRetry and see if setting this flag to true is acceptable for you."
+    summary: "Creates a new block from a text to be appended to an append blob.\rIf the sequence of data to be appended is important, please use this API strictly in a single writer.\rIf you are guaranteed to have a single writer scenario, please look at options.absorbConditionalErrorsOnRetry and see if setting this flag to true is acceptable for you.\rIf the sequence of data to be appended is not important, this API can be used in parallel,\rin this case, options.appendPosition can be left without settings."
     fullName: >-
       azure-storage.BlobService.appendBlockFromText(container, blob, content,
       options, callback)

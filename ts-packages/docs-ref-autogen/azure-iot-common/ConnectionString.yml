@@ -7,6 +7,7 @@ items:
       - azure-iot-common.ConnectionString.DeviceId
       - azure-iot-common.ConnectionString.GatewayHostName
       - azure-iot-common.ConnectionString.HostName
+      - azure-iot-common.ConnectionString.ModuleId
       - azure-iot-common.ConnectionString.parse
       - azure-iot-common.ConnectionString.SharedAccessKey
       - azure-iot-common.ConnectionString.SharedAccessKeyName
@@ -42,19 +43,14 @@ items:
       - typeScript
     type: property
     summary: >-
-      This was used in public preview when MQTT support required the use of a
-      protocol gateway.
-
-      Now that MQTT is supported natively in Azure IoT Hub, this parameter is
-      ignored and kept only for compatibility purposes.
+      IP address or internet name of the host machine working as a device or
+      protocol gateway.  Used when communicating with Azure Edge devices.
     optional: true
     syntax:
       content: 'GatewayHostName?: string'
       return:
         type:
           - string
-    deprecated:
-      content: ''
   - uid: azure-iot-common.ConnectionString.HostName
     name: HostName
     fullName: HostName
@@ -66,6 +62,22 @@ items:
     optional: true
     syntax:
       content: 'HostName?: string'
+      return:
+        type:
+          - string
+  - uid: azure-iot-common.ConnectionString.ModuleId
+    name: ModuleId
+    fullName: ModuleId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Unique module identifier as it exists in the device identity registry.
+      This is only used for device connection strings.
+    optional: true
+    syntax:
+      content: 'ModuleId?: string'
       return:
         type:
           - string
@@ -144,3 +156,9 @@ items:
       return:
         type:
           - string
+references:
+  - uid: azure-iot-common.ConnectionString
+    spec.typeScript:
+      - name: ConnectionString
+        fullName: ConnectionString
+        uid: azure-iot-common.ConnectionString

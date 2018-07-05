@@ -1,0 +1,185 @@
+### YamlMime:UniversalReference
+items:
+  - uid: azure-event-processor-host.PartitionContext
+    name: PartitionContext
+    fullName: PartitionContext
+    children:
+      - azure-event-processor-host.PartitionContext.checkpoint
+      - azure-event-processor-host.PartitionContext.lease
+      - azure-event-processor-host.PartitionContext.constructor
+      - azure-event-processor-host.PartitionContext.partitionId
+      - azure-event-processor-host.PartitionContext.setCheckpointInfo
+      - >-
+        azure-event-processor-host.PartitionContext.updateCheckpointDataFromEventData
+      - >-
+        azure-event-processor-host.PartitionContext.updateCheckpointInfoFromLease
+    langs:
+      - typeScript
+    type: class
+    summary: Describes the Partition Context.
+    package: azure-event-processor-host
+  - uid: azure-event-processor-host.PartitionContext.checkpoint
+    name: checkpoint
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Stores the checkpoint data into the appropriate blob, assuming the lease
+      is held (otherwise, rejects).
+
+      The checkpoint data is structured as a JSON payload (example):
+
+      `{
+      "PartitionId":"0","Owner":"ephtest","Token":"48e209e3-55f0-41b8-a8dd-d9c09ff6c35a",
+
+      "Epoch":1,"Offset":"","SequenceNumber":0}`. The format and the casing of
+      keys in the object
+
+      is in sync with the .net sdk of EventHubs.
+    syntax:
+      content: function checkpoint()
+      parameters: []
+      return:
+        type:
+          - Promise<azure-event-processor-host.CheckpointInfo | void>
+  - uid: azure-event-processor-host.PartitionContext.lease
+    name: lease
+    fullName: lease
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'lease: BlobLease'
+      return:
+        type:
+          - azure-event-processor-host.BlobLease
+  - uid: azure-event-processor-host.PartitionContext.constructor
+    name: PartitionContext
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Creates a new PartitionContext.
+    syntax:
+      content: >-
+        new PartitionContext(partitionId: string, owner: string, lease:
+        BlobLease)
+      parameters:
+        - id: partitionId
+          type:
+            - string
+          description: The eventhub partition id.
+        - id: owner
+          type:
+            - string
+          description: The name of the owner.
+        - id: lease
+          type:
+            - azure-event-processor-host.BlobLease
+          description: |
+            The lease object.
+  - uid: azure-event-processor-host.PartitionContext.partitionId
+    name: partitionId
+    fullName: partitionId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'partitionId: string'
+      return:
+        type:
+          - string
+  - uid: azure-event-processor-host.PartitionContext.setCheckpointInfo
+    name: setCheckpointInfo
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Sets the checkpoint info.
+    syntax:
+      content: >-
+        function setCheckpointInfo(owner: string, token: string, epoch: number,
+        offset: string, sequenceNumber: number)
+      parameters:
+        - id: owner
+          type:
+            - string
+          description: Name of the owner.
+        - id: token
+          type:
+            - string
+          description: The token string.
+        - id: epoch
+          type:
+            - number
+          description: The epoch value.
+        - id: offset
+          type:
+            - string
+          description: The offset of the message in the event stream.
+        - id: sequenceNumber
+          type:
+            - number
+          description: |
+            The sequnce number of the message in the event stream
+  - uid: >-
+      azure-event-processor-host.PartitionContext.updateCheckpointDataFromEventData
+    name: updateCheckpointDataFromEventData
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Updates data from the message, which should have an annotations field
+      containing something like:
+        "x-opt-sequence-number":6,"x-opt-offset":"480","x-opt-enqueued-time":"2015-12-18T17:26:49.331Z"
+    syntax:
+      content: 'function updateCheckpointDataFromEventData(eventData: EventData)'
+      parameters:
+        - id: eventData
+          type:
+            - EventData
+          description: |
+            The event data received from the EventHubReceiver.
+  - uid: azure-event-processor-host.PartitionContext.updateCheckpointInfoFromLease
+    name: updateCheckpointInfoFromLease
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Updates the checkpoint data from the owned lease.
+    syntax:
+      content: function updateCheckpointInfoFromLease()
+      parameters: []
+      return:
+        type:
+          - Promise<azure-event-processor-host.CheckpointInfo>
+references:
+  - uid: azure-event-processor-host.BlobLease
+    spec.typeScript:
+      - name: BlobLease
+        fullName: BlobLease
+        uid: azure-event-processor-host.BlobLease
+  - uid: Promise<azure-event-processor-host.CheckpointInfo | void>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: CheckpointInfo
+        fullName: CheckpointInfo
+        uid: azure-event-processor-host.CheckpointInfo
+      - name: ' | void>'
+        fullName: ' | void>'
+  - uid: Promise<azure-event-processor-host.CheckpointInfo>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: CheckpointInfo
+        fullName: CheckpointInfo
+        uid: azure-event-processor-host.CheckpointInfo
+      - name: '>'
+        fullName: '>'

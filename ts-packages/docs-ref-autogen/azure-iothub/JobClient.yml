@@ -35,7 +35,7 @@ items:
       - typeScript
     summary: Cancels an existing job.
     syntax:
-      content: 'function cancelJob(jobId: string | number, done: JobCallback)'
+      content: 'function cancelJob(jobId: string | number, done: JobClient.JobCallback)'
       parameters:
         - id: jobId
           type:
@@ -103,10 +103,6 @@ items:
       return:
         type:
           - azure-iothub.JobClient
-    exceptions:
-      - type: ReferenceError
-        description: |
-          If the connectionString argument is falsy.
   - uid: azure-iothub.JobClient.fromSharedAccessSignature
     name: fromSharedAccessSignature
     children: []
@@ -127,10 +123,6 @@ items:
       return:
         type:
           - azure-iothub.JobClient
-    exceptions:
-      - type: ReferenceError
-        description: |
-          If the sharedAccessSignature argument is falsy.
   - uid: azure-iothub.JobClient.getJob
     name: getJob
     children: []
@@ -139,7 +131,7 @@ items:
       - typeScript
     summary: Requests information about an existing job.
     syntax:
-      content: 'function getJob(jobId: string | number, done: JobCallback)'
+      content: 'function getJob(jobId: string | number, done: JobClient.JobCallback)'
       parameters:
         - id: jobId
           type:
@@ -175,8 +167,8 @@ items:
       content: >-
         function scheduleDeviceMethod(jobId: string | number, queryCondition:
         string, methodParams: DeviceMethodParams, jobStartTime?: Date |
-        JobCallback, maxExecutionTimeInSeconds?: number | JobCallback, done?:
-        JobCallback)
+        JobClient.JobCallback, maxExecutionTimeInSeconds?: number |
+        JobClient.JobCallback, done?: JobClient.JobCallback)
       parameters:
         - id: jobId
           type:
@@ -217,16 +209,6 @@ items:
                                                  job object, and a transport-specific response
                                                  object useful for logging or debugging.
           optional: true
-    exceptions:
-      - type: ReferenceError
-        description: >-
-          If one or more of the jobId, queryCondition or methodParams arguments
-          are falsy.
-      - type: ReferenceError
-        description: If methodParams.methodName is falsy.
-      - type: TypeError
-        description: |
-          If the callback is not the last parameter
   - uid: azure-iothub.JobClient.scheduleTwinUpdate
     name: scheduleTwinUpdate
     children: []
@@ -239,8 +221,9 @@ items:
     syntax:
       content: >-
         function scheduleTwinUpdate(jobId: string | number, queryCondition:
-        string, patch: any, jobStartTime?: Date | JobCallback,
-        maxExecutionTimeInSeconds?: number | JobCallback, done?: JobCallback)
+        string, patch: any, jobStartTime?: Date | JobClient.JobCallback,
+        maxExecutionTimeInSeconds?: number | JobClient.JobCallback, done?:
+        JobClient.JobCallback)
       parameters:
         - id: jobId
           type:
@@ -276,11 +259,48 @@ items:
                                                  job object, and a transport-specific response
                                                  object useful for logging or debugging.
           optional: true
-    exceptions:
-      - type: ReferenceError
-        description: >-
-          If one or more of the jobId, queryCondition or patch arguments are
-          falsy.
-      - type: TypeError
-        description: |
-          If the callback is not the last parameter
+references:
+  - uid: azure-iothub.JobClient.JobCallback
+    spec.typeScript:
+      - name: JobCallback
+        fullName: JobCallback
+        uid: azure-iothub.JobClient.JobCallback
+  - uid: azure-iothub.JobType
+    spec.typeScript:
+      - name: JobType
+        fullName: JobType
+        uid: azure-iothub.JobType
+  - uid: azure-iothub.JobStatus
+    spec.typeScript:
+      - name: JobStatus
+        fullName: JobStatus
+        uid: azure-iothub.JobStatus
+  - uid: azure-iothub.Query
+    spec.typeScript:
+      - name: Query
+        fullName: Query
+        uid: azure-iothub.Query
+  - uid: azure-iothub.DeviceMethodParams
+    spec.typeScript:
+      - name: DeviceMethodParams
+        fullName: DeviceMethodParams
+        uid: azure-iothub.DeviceMethodParams
+  - uid: Date | azure-iothub.JobClient.JobCallback
+    spec.typeScript:
+      - name: 'Date | '
+        fullName: 'Date | '
+      - name: JobCallback
+        fullName: JobCallback
+        uid: azure-iothub.JobClient.JobCallback
+  - uid: number | azure-iothub.JobClient.JobCallback
+    spec.typeScript:
+      - name: 'number | '
+        fullName: 'number | '
+      - name: JobCallback
+        fullName: JobCallback
+        uid: azure-iothub.JobClient.JobCallback
+  - uid: azure-iothub.JobClient
+    spec.typeScript:
+      - name: JobClient
+        fullName: JobClient
+        uid: azure-iothub.JobClient

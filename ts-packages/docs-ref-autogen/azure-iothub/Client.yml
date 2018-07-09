@@ -11,6 +11,7 @@ items:
       - azure-iothub.Client.getFeedbackReceiver
       - azure-iothub.Client.getFileNotificationReceiver
       - azure-iothub.Client.invokeDeviceMethod
+      - azure-iothub.Client.invokeDeviceMethod_1
       - azure-iothub.Client.open
       - azure-iothub.Client.send
       - azure-iothub.Client.setRetryPolicy
@@ -67,6 +68,7 @@ items:
                                        argument, which will be null if the operation
                                        completed successfully.
           optional: true
+    package: azure-iothub
   - uid: azure-iothub.Client.fromConnectionString
     name: fromConnectionString
     children: []
@@ -80,7 +82,7 @@ items:
     syntax:
       content: >-
         static function fromConnectionString(connStr: string, transportCtor?:
-        TransportCtor)
+        Client.TransportCtor)
       parameters:
         - id: connStr
           type:
@@ -96,6 +98,7 @@ items:
       return:
         type:
           - azure-iothub.Client
+    package: azure-iothub
   - uid: azure-iothub.Client.fromSharedAccessSignature
     name: fromSharedAccessSignature
     children: []
@@ -109,7 +112,7 @@ items:
     syntax:
       content: >-
         static function fromSharedAccessSignature(sharedAccessSignature: string,
-        transportCtor?: TransportCtor)
+        transportCtor?: Client.TransportCtor)
       parameters:
         - id: sharedAccessSignature
           type:
@@ -125,6 +128,7 @@ items:
       return:
         type:
           - azure-iothub.Client
+    package: azure-iothub
   - uid: azure-iothub.Client.getFeedbackReceiver
     name: getFeedbackReceiver
     children: []
@@ -145,6 +149,7 @@ items:
                                          complete. `done` will be called with two
                                          arguments: an Error object (can be null) and a
                                          AmqpReceiver object.
+    package: azure-iothub
   - uid: azure-iothub.Client.getFileNotificationReceiver
     name: getFileNotificationReceiver
     children: []
@@ -165,13 +170,14 @@ items:
                                          complete. `done` will be called with two
                                          arguments: an Error object (can be null) and a
                                          AmqpReceiver object.
+    package: azure-iothub
   - uid: azure-iothub.Client.invokeDeviceMethod
     name: invokeDeviceMethod
     children: []
     type: method
     langs:
       - typeScript
-    summary: Invokes a method on a particular device.
+    summary: Invokes a method on a particular device or module.
     syntax:
       content: >-
         function invokeDeviceMethod(deviceId: string, methodParams:
@@ -191,12 +197,37 @@ items:
           description: |
             The callback to call with the result of the method execution.
           optional: true
-    exceptions:
-      - type: ReferenceError
-        description: 'If one of the required parameters is null, undefined or empty.'
-      - type: TypeError
-        description: |
-          If one of the parameters is of the wrong type.
+    package: azure-iothub
+  - uid: azure-iothub.Client.invokeDeviceMethod_1
+    name: invokeDeviceMethod
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Invokes a method on a particular device or module.
+    syntax:
+      content: >-
+        function invokeDeviceMethod(deviceId: string, moduleId: string,
+        methodParams: DeviceMethodParams, done?: Callback<any>)
+      parameters:
+        - id: deviceId
+          type:
+            - string
+          description: ''
+        - id: moduleId
+          type:
+            - string
+          description: ''
+        - id: methodParams
+          type:
+            - azure-iothub.DeviceMethodParams
+          description: ''
+        - id: done
+          type:
+            - azure-iothub.Client.Callback<any>
+          description: ''
+          optional: true
+    package: azure-iothub
   - uid: azure-iothub.Client.open
     name: open
     children: []
@@ -216,6 +247,7 @@ items:
                                        argument, which will be null if the operation
                                        completed successfully.
           optional: true
+    package: azure-iothub
   - uid: azure-iothub.Client.send
     name: send
     children: []
@@ -225,8 +257,8 @@ items:
     summary: Sends a message to a device.
     syntax:
       content: >-
-        function send(deviceId: string, message: Message | BufferConvertible,
-        done?: Callback<MessageEnqueued>)
+        function send(deviceId: string, message: Message |
+        Message.BufferConvertible, done?: Callback<MessageEnqueued>)
       parameters:
         - id: deviceId
           type:
@@ -234,7 +266,7 @@ items:
           description: The identifier of an existing device identity.
         - id: message
           type:
-            - Message | BufferConvertible
+            - Message | Message.BufferConvertible
           description: |-
             The body of the message to send to the device.
                                          If `message` is not of type
@@ -250,10 +282,7 @@ items:
                                          transport-specific response object useful for
                                          logging or debugging.
           optional: true
-    exceptions:
-      - type: ReferenceError
-        description: |
-          If `deviceId` or `message` is null, undefined or empty.
+    package: azure-iothub
   - uid: azure-iothub.Client.setRetryPolicy
     name: setRetryPolicy
     children: []
@@ -275,6 +304,7 @@ items:
                           - shouldRetry(err: Error): boolean : indicates whether an operation should be retried based on the error type
                           - nextRetryTimeout(retryCount: number, throttled: boolean): number : returns the time to wait (in milliseconds)
                           before retrying based on the past number of attempts (retryCount) and the fact that the error is a throttling error or not.
+    package: azure-iothub
   - uid: azure-iothub.Client.TransportCtor
     name: TransportCtor
     fullName: TransportCtor

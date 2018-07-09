@@ -341,44 +341,45 @@ items:
           type:
             - string
           description: >-
-            Scheduling priority
+            Scheduling priority.
 
-            associated with the job. Scheduling priority associated with the
-            job.
+            Scheduling priority associated with the job. Possible values: low,
+            normal,
 
-            Possible values include: 'low', 'normal', 'high'
+            high. Possible values include: 'low', 'normal', 'high'
           optional: true
         - id: parameters.cluster
           type:
             - object
           description: |-
-            Specifies the Id of the cluster on which
-            this job will run.
+            Cluster. Resource ID of the cluster on
+            which this job will run.
         - id: parameters.mountVolumes
           type:
             - object
           description: >-
-            Information on mount volumes to be
+            Mount volumes. Information on
 
-            used by the job. These volumes will be mounted before the job
-            execution and
+            mount volumes to be used by the job. These volumes will be mounted
+            before
 
-            will be unmouted after the job completion. The volumes will be
-            mounted at
+            the job execution and will be unmouted after the job completion. The
+            volumes
 
-            location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment
-            variable.
+            will be mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT
+
+            environment variable.
           optional: true
         - id: parameters.mountVolumes.azureFileShares
           type:
             - array
           description: >-
-            Azure File Share
+            Azure File Shares.
 
-            setup configuration. References to Azure File Shares that are to be
-            mounted
+            A collection of Azure File Shares that are to be mounted to the
+            cluster
 
-            to the cluster nodes.
+            nodes.
           optional: true
         - id: parameters.mountVolumes.azureBlobFileSystems
           type:
@@ -386,68 +387,77 @@ items:
           description: >-
             Azure Blob
 
-            FileSystem setup configuration. References to Azure Blob FUSE that
-            are to be
+            file systems. A collection of Azure Blob Containers that are to be
+            mounted
 
-            mounted to the cluster nodes.
+            to the cluster nodes.
           optional: true
         - id: parameters.mountVolumes.fileServers
           type:
             - array
-          description: |-
-            References to a list of
-            file servers that are mounted to the cluster node.
+          description: >-
+            File Servers. A
+
+            collection of Batch AI File Servers that are to be mounted to the
+            cluster
+
+            nodes.
           optional: true
         - id: parameters.mountVolumes.unmanagedFileSystems
           type:
             - array
-          description: |-
-            References to
-            a list of file servers that are mounted to the cluster node.
+          description: >-
+            Unmanaged file
+
+            systems. A collection of unmanaged file systems that are to be
+            mounted to
+
+            the cluster nodes.
           optional: true
         - id: parameters.nodeCount
           type:
             - number
-          description: |-
-            Number of compute nodes to run the job
-            on. The job will be gang scheduled on that many compute nodes
+          description: >-
+            Node count. Number of compute nodes to
+
+            run the job on. The job will be gang scheduled on that many compute
+            nodes.
         - id: parameters.containerSettings
           type:
             - object
           description: >-
-            If provided the job will run
+            Container settings. Docker
 
-            in the specified container. If the container was downloaded as part
-            of
+            container settings for the job. If not provided, the job will run
+            directly
 
-            cluster setup then the same container image will be used. If not
-            provided,
-
-            the job will run on the VM.
+            on the node.
           optional: true
         - id: parameters.containerSettings.imageSourceRegistry
           type:
             - object
-          description: |-
-            Registry to
+          description: >-
+            Image
+
+            source registry. Information about docker image and docker registry
+            to
+
             download the container from.
         - id: parameters.containerSettings.imageSourceRegistry.serverUrl
           type:
             - string
-          description: URL for image repository.
+          description: Server URL. URL for image repository.
           optional: true
         - id: parameters.containerSettings.imageSourceRegistry.image
           type:
             - string
-          description: |-
-            The
-            name of the image in image repository.
+          description: Image. The name of the image in the image repository.
         - id: parameters.containerSettings.imageSourceRegistry.credentials
           type:
             - object
           description: |-
-            Information
-            to access the private Docker repository.
+            Credentials.
+            Credentials to access the private docker repository.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.username
@@ -455,37 +465,42 @@ items:
             - string
           description: |-
             User
-            name to login.
+            name. User name to login to the repository.
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.password
           type:
             - string
           description: >-
-            Password to login. One of password or passwordSecretReference must
-            be
+            Password. User password to login to the docker repository. One of
+            password
 
-            specified.
+            or passwordSecretReference must be specified.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference
           type:
             - object
           description: >-
-            Specifies the location of the password, which is a Key Vault Secret.
-            Users
+            Password secret reference. KeyVault Secret storing the password.
+            Users can
 
-            can store their secrets in Azure KeyVault and pass it to the Batch
-            AI
+            store their secrets in Azure KeyVault and pass it to the Batch AI
+            service to
 
-            Service to integrate with KeyVault. One of password or
+            integrate with KeyVault. One of password or passwordSecretReference
+            must be
 
-            passwordSecretReference must be specified.
+            specified.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.sourceVault
           type:
             - object
-          description: Fully qualified resource Id for the Key Vault.
+          description: >-
+            Key Vault resource identifier. Fully qualified resource indentifier
+            of the
+
+            Key Vault.
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.sourceVault.id
           type:
@@ -495,327 +510,358 @@ items:
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.secretUrl
           type:
             - string
-          description: The URL referencing a secret in a Key Vault.
+          description: Secret URL. The URL referencing a secret in the Key Vault.
         - id: parameters.containerSettings.shmSize
           type:
             - string
-          description: |-
-            Size of /dev/shm.
-            Please refer to docker documentation for supported argument formats.
+          description: >-
+            /dev/shm size. Size
+
+            of /dev/shm. Please refer to docker documentation for supported
+            argument
+
+            formats.
           optional: true
         - id: parameters.cntkSettings
           type:
             - object
           description: |-
-            Specifies the settings for CNTK
+            CNTK settings. Settings for CNTK
             (aka Microsoft Cognitive Toolkit) job.
           optional: true
         - id: parameters.cntkSettings.languageType
           type:
             - string
           description: >-
-            Specifies the
+            Language type. The
 
-            language type to use for launching CNTK (aka Microsoft Cognitive
-            Toolkit)
+            language to use for launching CNTK (aka Microsoft Cognitive Toolkit)
+            job.
 
-            job. Valid values are 'BrainScript' or 'Python'.
+            Valid values are 'BrainScript' or 'Python'.
           optional: true
         - id: parameters.cntkSettings.configFilePath
           type:
             - string
           description: >-
-            Specifies the path
+            Config file path.
 
-            of the config file. This property can be specified only if the
-            languageType
+            Specifies the path of the BrainScript config file. This property can
+            be
 
-            is 'BrainScript'.
+            specified only if the languageType is 'BrainScript'.
           optional: true
         - id: parameters.cntkSettings.pythonScriptFilePath
           type:
             - string
           description: >-
-            The path and
+            Python script
 
-            file name of the python script to execute the job. This property can
-            be
+            file path. Python script to execute. This property can be specified
+            only if
 
-            specified only if the languageType is 'Python'.
+            the languageType is 'Python'.
           optional: true
         - id: parameters.cntkSettings.pythonInterpreterPath
           type:
             - string
           description: >-
-            The path to
+            Python
 
-            python interpreter. This property can be specified only if the
-            languageType
+            interpreter path. The path to the Python interpreter. This property
+            can be
 
-            is 'Python'.
+            specified only if the languageType is 'Python'.
           optional: true
         - id: parameters.cntkSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script or CNTK.exe.
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script or cntk executable.
           optional: true
         - id: parameters.cntkSettings.processCount
           type:
             - number
           description: >-
-            Number of processes
+            Process count. Number
 
-            parameter that is passed to MPI runtime. The default value for this
-            property
+            of processes to launch for the job execution. The default value for
+            this
 
-            is equal to nodeCount property
+            property is equal to nodeCount property
           optional: true
         - id: parameters.pyTorchSettings
           type:
             - object
           description: |-
-            Specifies the settings for
+            pyTorch settings. Settings for
             pyTorch job.
           optional: true
         - id: parameters.pyTorchSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.pyTorchSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.pyTorchSettings.commandLineArgs
           type:
             - string
-          description: |-
-            Specifies the
-            command line arguments for the master task.
+          description: >-
+            Command line
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.pyTorchSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes to launch for the job execution. The default value for
-            this
+            Number of processes to launch for the job execution. The default
+            value for
 
-            property is equal to nodeCount property.
+            this property is equal to nodeCount property
           optional: true
         - id: parameters.pyTorchSettings.communicationBackend
           type:
             - string
           description: >-
-            Type of
+            Communication backend. Type of the communication backend for
+            distributed
 
-            the communication backend for distributed jobs. Valid values are
-            'TCP',
+            jobs. Valid values are 'TCP', 'Gloo' or 'MPI'. Not required for
 
-            'Gloo' or 'MPI'. Not required for non-distributed jobs.
+            non-distributed jobs.
           optional: true
         - id: parameters.tensorFlowSettings
           type:
             - object
           description: |-
-            Specifies the settings for
-            Tensor Flow job.
+            TensorFlow settings.
+            Settings for Tensor Flow job.
           optional: true
         - id: parameters.tensorFlowSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path
-            and file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.tensorFlowSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The
-            path to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.tensorFlowSettings.masterCommandLineArgs
           type:
             - string
-          description: Specifies the command line arguments for the master task.
+          description: >-
+            Master
+
+            command line arguments. Command line arguments that need to be
+            passed to the
+
+            python script for the master task.
           optional: true
         - id: parameters.tensorFlowSettings.workerCommandLineArgs
           type:
             - string
           description: >-
-            Specifies the command line arguments for the worker task. This
-            property is
+            Worker
 
-            optional for single machine training.
+            command line arguments. Command line arguments that need to be
+            passed to the
+
+            python script for the worker task. Optional for single process jobs.
           optional: true
         - id: parameters.tensorFlowSettings.parameterServerCommandLineArgs
           type:
             - string
           description: >-
-            Specifies the
+            Parameter
 
-            command line arguments for the parameter server task. This property
-            is
+            server command line arguments. Command line arguments that need to
+            be passed
 
-            optional for single machine training.
+            to the python script for the parameter server. Optional for single
+            process
+
+            jobs.
           optional: true
         - id: parameters.tensorFlowSettings.workerCount
           type:
             - number
           description: >-
-            The number of
+            Worker count.
 
-            worker tasks. If specified, the value must be less than or equal to
+            The number of worker tasks. If specified, the value must be less
+            than or
 
-            (nodeCount * numberOfGPUs per VM). If not specified, the default
-            value is
+            equal to (nodeCount * numberOfGPUs per VM). If not specified, the
+            default
 
-            equal to nodeCount. This property can be specified only for
-            distributed
+            value is equal to nodeCount. This property can be specified only for
 
-            TensorFlow training
+            distributed TensorFlow training.
           optional: true
         - id: parameters.tensorFlowSettings.parameterServerCount
           type:
             - number
           description: >-
-            The
+            Parameter server count. The number of parameter server tasks. If
+            specified,
 
-            number of parmeter server tasks. If specified, the value must be
-            less than
+            the value must be less than or equal to nodeCount. If not specified,
+            the
 
-            or equal to nodeCount. If not specified, the default value is equal
-            to 1 for
+            default value is equal to 1 for distributed TensorFlow training.
+            This
 
-            distributed TensorFlow training (This property is not applicable for
-            single
-
-            machine training). This property can be specified only for
-            distributed
-
-            TensorFlow training.
+            property can be specified only for distributed TensorFlow training.
           optional: true
         - id: parameters.caffeSettings
           type:
             - object
           description: |-
-            Specifies the settings for Caffe
-            job.
+            Caffe settings. Settings for
+            Caffe job.
           optional: true
         - id: parameters.caffeSettings.configFilePath
           type:
             - string
-          description: |-
-            Specifies the path
-            of the config file. This property cannot be specified if
+          description: >-
+            Config file path.
+
+            Path of the config file for the job. This property cannot be
+            specified if
+
             pythonScriptFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.pythonScriptFilePath
           type:
             - string
-          description: >-
-            The path and
-
-            file name of the python script to execute the job. This property
-            cannot be
-
+          description: |-
+            Python
+            script file path. Python script to execute. This property cannot be
             specified if configFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.pythonInterpreterPath
           type:
             - string
-          description: |-
-            The path to
-            python interpreter. This property can be specified only if the
-            pythonScriptFilePath is specified.
+          description: >-
+            Python
+
+            interpreter path. The path to the Python interpreter. The property
+            can be
+
+            specified only if the pythonScriptFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the Caffe job.
+
+            arguments. Command line arguments that need to be passed to the
+            Caffe job.
           optional: true
         - id: parameters.caffeSettings.processCount
           type:
             - number
           description: >-
-            Number of processes
+            Process count.
 
-            parameter that is passed to MPI runtime. The default value for this
-            property
+            Number of processes to launch for the job execution. The default
+            value for
 
-            is equal to nodeCount property
+            this property is equal to nodeCount property
           optional: true
         - id: parameters.caffe2Settings
           type:
             - object
           description: |-
-            Specifies the settings for
+            Caffe2 settings. Settings for
             Caffe2 job.
           optional: true
         - id: parameters.caffe2Settings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python script
+            file path. The python script to execute.
         - id: parameters.caffe2Settings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.caffe2Settings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.chainerSettings
           type:
             - object
           description: |-
-            Specifies the settings for
+            Chainer settings. Settings for
             Chainer job.
           optional: true
         - id: parameters.chainerSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.chainerSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.chainerSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.chainerSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
@@ -823,37 +869,37 @@ items:
           type:
             - object
           description: |-
-            Specifies the settings
-            for custom tool kit job.
+            Custom tool kit job.
+            Settings for custom tool kit job.
           optional: true
         - id: parameters.customToolkitSettings.commandLine
           type:
             - string
           description: |-
-            The command
-            line to execute the custom toolkit Job.
+            Command line.
+            The command line to execute on the master node.
           optional: true
         - id: parameters.customMpiSettings
           type:
             - object
           description: |-
-            Specifies the settings for
-            custom MPI job.
+            Custom MPI settings. Settings
+            for custom MPI job.
           optional: true
         - id: parameters.customMpiSettings.commandLine
           type:
             - string
           description: |-
-            The program and
-            program command line parameters to be executed by mpi runtime.
+            Command line. The
+            command line to be executed by mpi runtime on each compute node.
         - id: parameters.customMpiSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
@@ -861,105 +907,105 @@ items:
           type:
             - object
           description: |-
-            Specifies the settings for
+            Horovod settings. Settings for
             Horovod job.
           optional: true
         - id: parameters.horovodSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.horovodSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.horovodSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.horovodSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
         - id: parameters.jobPreparation
           type:
             - object
-          description: >-
-            Specifies the command line to be
-
-            executed before tool kit is launched. The specified actions will run
-            on all
-
-            the nodes that are part of the job
+          description: |-
+            Job preparation. A command line
+            to be executed on each node allocated for the job before tool kit is
+            launched.
           optional: true
         - id: parameters.jobPreparation.commandLine
           type:
             - string
           description: >-
-            The command line to
+            Command line. The
 
-            execute. If containerSettings is specified on the job, this
-            commandLine will
+            command line to execute. If containerSettings is specified on the
+            job, this
 
-            be executed in the same container as job. Otherwise it will be
-            executed on
+            commandLine will be executed in the same container as job. Otherwise
+            it will
 
-            the node.
+            be executed on the node.
         - id: parameters.stdOutErrPathPrefix
           type:
             - string
           description: |-
-            The path where the Batch AI
-            service will upload stdout and stderror of the job.
+            Standard output path prefix.
+            The path where the Batch AI service will store stdout, stderror and
+            execution log of the job.
         - id: parameters.inputDirectories
           type:
             - array
           description: |-
-            Specifies the list of input
-            directories for the Job.
+            Input directories. A list of
+            input directories for the job.
           optional: true
         - id: parameters.outputDirectories
           type:
             - array
           description: |-
-            Specifies the list of output
-            directories.
+            Output directories. A list of
+            output directories for the job.
           optional: true
         - id: parameters.environmentVariables
           type:
             - array
-          description: |-
-            Additional environment
-            variables to set on the job. Batch AI will setup these additional
-            environment variables for the job.
+          description: >-
+            Environment variables. A
+
+            list of user defined environment variables which will be setup for
+            the job.
           optional: true
         - id: parameters.secrets
           type:
             - array
           description: >-
-            Additional environment variables with
+            Secrets. A list of user defined
 
-            secret values to set on the job. Batch AI will setup these
-            additional
+            environment variables with secret values which will be setup for the
+            job.
 
-            environment variables for the job. Server will never report values
-            of these
-
-            variables back.
+            Server will never report values of these variables back.
           optional: true
         - id: parameters.constraints
           type:
@@ -972,8 +1018,8 @@ items:
           type:
             - azure-arm-batchai.moment.duration
           description: |-
-            Max time
-            the job can run. Default Value = 1 week.
+            Max wall
+            clock time. Max time the job can run. Default value: 1 week.
           optional: true
         - id: options
           type:
@@ -1091,44 +1137,45 @@ items:
           type:
             - string
           description: >-
-            Scheduling priority
+            Scheduling priority.
 
-            associated with the job. Scheduling priority associated with the
-            job.
+            Scheduling priority associated with the job. Possible values: low,
+            normal,
 
-            Possible values include: 'low', 'normal', 'high'
+            high. Possible values include: 'low', 'normal', 'high'
           optional: true
         - id: parameters.cluster
           type:
             - object
           description: |-
-            Specifies the Id of the cluster on which
-            this job will run.
+            Cluster. Resource ID of the cluster on
+            which this job will run.
         - id: parameters.mountVolumes
           type:
             - object
           description: >-
-            Information on mount volumes to be
+            Mount volumes. Information on
 
-            used by the job. These volumes will be mounted before the job
-            execution and
+            mount volumes to be used by the job. These volumes will be mounted
+            before
 
-            will be unmouted after the job completion. The volumes will be
-            mounted at
+            the job execution and will be unmouted after the job completion. The
+            volumes
 
-            location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment
-            variable.
+            will be mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT
+
+            environment variable.
           optional: true
         - id: parameters.mountVolumes.azureFileShares
           type:
             - array
           description: >-
-            Azure File Share
+            Azure File Shares.
 
-            setup configuration. References to Azure File Shares that are to be
-            mounted
+            A collection of Azure File Shares that are to be mounted to the
+            cluster
 
-            to the cluster nodes.
+            nodes.
           optional: true
         - id: parameters.mountVolumes.azureBlobFileSystems
           type:
@@ -1136,68 +1183,77 @@ items:
           description: >-
             Azure Blob
 
-            FileSystem setup configuration. References to Azure Blob FUSE that
-            are to be
+            file systems. A collection of Azure Blob Containers that are to be
+            mounted
 
-            mounted to the cluster nodes.
+            to the cluster nodes.
           optional: true
         - id: parameters.mountVolumes.fileServers
           type:
             - array
-          description: |-
-            References to a list of
-            file servers that are mounted to the cluster node.
+          description: >-
+            File Servers. A
+
+            collection of Batch AI File Servers that are to be mounted to the
+            cluster
+
+            nodes.
           optional: true
         - id: parameters.mountVolumes.unmanagedFileSystems
           type:
             - array
-          description: |-
-            References to
-            a list of file servers that are mounted to the cluster node.
+          description: >-
+            Unmanaged file
+
+            systems. A collection of unmanaged file systems that are to be
+            mounted to
+
+            the cluster nodes.
           optional: true
         - id: parameters.nodeCount
           type:
             - number
-          description: |-
-            Number of compute nodes to run the job
-            on. The job will be gang scheduled on that many compute nodes
+          description: >-
+            Node count. Number of compute nodes to
+
+            run the job on. The job will be gang scheduled on that many compute
+            nodes.
         - id: parameters.containerSettings
           type:
             - object
           description: >-
-            If provided the job will run
+            Container settings. Docker
 
-            in the specified container. If the container was downloaded as part
-            of
+            container settings for the job. If not provided, the job will run
+            directly
 
-            cluster setup then the same container image will be used. If not
-            provided,
-
-            the job will run on the VM.
+            on the node.
           optional: true
         - id: parameters.containerSettings.imageSourceRegistry
           type:
             - object
-          description: |-
-            Registry to
+          description: >-
+            Image
+
+            source registry. Information about docker image and docker registry
+            to
+
             download the container from.
         - id: parameters.containerSettings.imageSourceRegistry.serverUrl
           type:
             - string
-          description: URL for image repository.
+          description: Server URL. URL for image repository.
           optional: true
         - id: parameters.containerSettings.imageSourceRegistry.image
           type:
             - string
-          description: |-
-            The
-            name of the image in image repository.
+          description: Image. The name of the image in the image repository.
         - id: parameters.containerSettings.imageSourceRegistry.credentials
           type:
             - object
           description: |-
-            Information
-            to access the private Docker repository.
+            Credentials.
+            Credentials to access the private docker repository.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.username
@@ -1205,37 +1261,42 @@ items:
             - string
           description: |-
             User
-            name to login.
+            name. User name to login to the repository.
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.password
           type:
             - string
           description: >-
-            Password to login. One of password or passwordSecretReference must
-            be
+            Password. User password to login to the docker repository. One of
+            password
 
-            specified.
+            or passwordSecretReference must be specified.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference
           type:
             - object
           description: >-
-            Specifies the location of the password, which is a Key Vault Secret.
-            Users
+            Password secret reference. KeyVault Secret storing the password.
+            Users can
 
-            can store their secrets in Azure KeyVault and pass it to the Batch
-            AI
+            store their secrets in Azure KeyVault and pass it to the Batch AI
+            service to
 
-            Service to integrate with KeyVault. One of password or
+            integrate with KeyVault. One of password or passwordSecretReference
+            must be
 
-            passwordSecretReference must be specified.
+            specified.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.sourceVault
           type:
             - object
-          description: Fully qualified resource Id for the Key Vault.
+          description: >-
+            Key Vault resource identifier. Fully qualified resource indentifier
+            of the
+
+            Key Vault.
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.sourceVault.id
           type:
@@ -1245,327 +1306,358 @@ items:
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.secretUrl
           type:
             - string
-          description: The URL referencing a secret in a Key Vault.
+          description: Secret URL. The URL referencing a secret in the Key Vault.
         - id: parameters.containerSettings.shmSize
           type:
             - string
-          description: |-
-            Size of /dev/shm.
-            Please refer to docker documentation for supported argument formats.
+          description: >-
+            /dev/shm size. Size
+
+            of /dev/shm. Please refer to docker documentation for supported
+            argument
+
+            formats.
           optional: true
         - id: parameters.cntkSettings
           type:
             - object
           description: |-
-            Specifies the settings for CNTK
+            CNTK settings. Settings for CNTK
             (aka Microsoft Cognitive Toolkit) job.
           optional: true
         - id: parameters.cntkSettings.languageType
           type:
             - string
           description: >-
-            Specifies the
+            Language type. The
 
-            language type to use for launching CNTK (aka Microsoft Cognitive
-            Toolkit)
+            language to use for launching CNTK (aka Microsoft Cognitive Toolkit)
+            job.
 
-            job. Valid values are 'BrainScript' or 'Python'.
+            Valid values are 'BrainScript' or 'Python'.
           optional: true
         - id: parameters.cntkSettings.configFilePath
           type:
             - string
           description: >-
-            Specifies the path
+            Config file path.
 
-            of the config file. This property can be specified only if the
-            languageType
+            Specifies the path of the BrainScript config file. This property can
+            be
 
-            is 'BrainScript'.
+            specified only if the languageType is 'BrainScript'.
           optional: true
         - id: parameters.cntkSettings.pythonScriptFilePath
           type:
             - string
           description: >-
-            The path and
+            Python script
 
-            file name of the python script to execute the job. This property can
-            be
+            file path. Python script to execute. This property can be specified
+            only if
 
-            specified only if the languageType is 'Python'.
+            the languageType is 'Python'.
           optional: true
         - id: parameters.cntkSettings.pythonInterpreterPath
           type:
             - string
           description: >-
-            The path to
+            Python
 
-            python interpreter. This property can be specified only if the
-            languageType
+            interpreter path. The path to the Python interpreter. This property
+            can be
 
-            is 'Python'.
+            specified only if the languageType is 'Python'.
           optional: true
         - id: parameters.cntkSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script or CNTK.exe.
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script or cntk executable.
           optional: true
         - id: parameters.cntkSettings.processCount
           type:
             - number
           description: >-
-            Number of processes
+            Process count. Number
 
-            parameter that is passed to MPI runtime. The default value for this
-            property
+            of processes to launch for the job execution. The default value for
+            this
 
-            is equal to nodeCount property
+            property is equal to nodeCount property
           optional: true
         - id: parameters.pyTorchSettings
           type:
             - object
           description: |-
-            Specifies the settings for
+            pyTorch settings. Settings for
             pyTorch job.
           optional: true
         - id: parameters.pyTorchSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.pyTorchSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.pyTorchSettings.commandLineArgs
           type:
             - string
-          description: |-
-            Specifies the
-            command line arguments for the master task.
+          description: >-
+            Command line
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.pyTorchSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes to launch for the job execution. The default value for
-            this
+            Number of processes to launch for the job execution. The default
+            value for
 
-            property is equal to nodeCount property.
+            this property is equal to nodeCount property
           optional: true
         - id: parameters.pyTorchSettings.communicationBackend
           type:
             - string
           description: >-
-            Type of
+            Communication backend. Type of the communication backend for
+            distributed
 
-            the communication backend for distributed jobs. Valid values are
-            'TCP',
+            jobs. Valid values are 'TCP', 'Gloo' or 'MPI'. Not required for
 
-            'Gloo' or 'MPI'. Not required for non-distributed jobs.
+            non-distributed jobs.
           optional: true
         - id: parameters.tensorFlowSettings
           type:
             - object
           description: |-
-            Specifies the settings for
-            Tensor Flow job.
+            TensorFlow settings.
+            Settings for Tensor Flow job.
           optional: true
         - id: parameters.tensorFlowSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path
-            and file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.tensorFlowSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The
-            path to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.tensorFlowSettings.masterCommandLineArgs
           type:
             - string
-          description: Specifies the command line arguments for the master task.
+          description: >-
+            Master
+
+            command line arguments. Command line arguments that need to be
+            passed to the
+
+            python script for the master task.
           optional: true
         - id: parameters.tensorFlowSettings.workerCommandLineArgs
           type:
             - string
           description: >-
-            Specifies the command line arguments for the worker task. This
-            property is
+            Worker
 
-            optional for single machine training.
+            command line arguments. Command line arguments that need to be
+            passed to the
+
+            python script for the worker task. Optional for single process jobs.
           optional: true
         - id: parameters.tensorFlowSettings.parameterServerCommandLineArgs
           type:
             - string
           description: >-
-            Specifies the
+            Parameter
 
-            command line arguments for the parameter server task. This property
-            is
+            server command line arguments. Command line arguments that need to
+            be passed
 
-            optional for single machine training.
+            to the python script for the parameter server. Optional for single
+            process
+
+            jobs.
           optional: true
         - id: parameters.tensorFlowSettings.workerCount
           type:
             - number
           description: >-
-            The number of
+            Worker count.
 
-            worker tasks. If specified, the value must be less than or equal to
+            The number of worker tasks. If specified, the value must be less
+            than or
 
-            (nodeCount * numberOfGPUs per VM). If not specified, the default
-            value is
+            equal to (nodeCount * numberOfGPUs per VM). If not specified, the
+            default
 
-            equal to nodeCount. This property can be specified only for
-            distributed
+            value is equal to nodeCount. This property can be specified only for
 
-            TensorFlow training
+            distributed TensorFlow training.
           optional: true
         - id: parameters.tensorFlowSettings.parameterServerCount
           type:
             - number
           description: >-
-            The
+            Parameter server count. The number of parameter server tasks. If
+            specified,
 
-            number of parmeter server tasks. If specified, the value must be
-            less than
+            the value must be less than or equal to nodeCount. If not specified,
+            the
 
-            or equal to nodeCount. If not specified, the default value is equal
-            to 1 for
+            default value is equal to 1 for distributed TensorFlow training.
+            This
 
-            distributed TensorFlow training (This property is not applicable for
-            single
-
-            machine training). This property can be specified only for
-            distributed
-
-            TensorFlow training.
+            property can be specified only for distributed TensorFlow training.
           optional: true
         - id: parameters.caffeSettings
           type:
             - object
           description: |-
-            Specifies the settings for Caffe
-            job.
+            Caffe settings. Settings for
+            Caffe job.
           optional: true
         - id: parameters.caffeSettings.configFilePath
           type:
             - string
-          description: |-
-            Specifies the path
-            of the config file. This property cannot be specified if
+          description: >-
+            Config file path.
+
+            Path of the config file for the job. This property cannot be
+            specified if
+
             pythonScriptFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.pythonScriptFilePath
           type:
             - string
-          description: >-
-            The path and
-
-            file name of the python script to execute the job. This property
-            cannot be
-
+          description: |-
+            Python
+            script file path. Python script to execute. This property cannot be
             specified if configFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.pythonInterpreterPath
           type:
             - string
-          description: |-
-            The path to
-            python interpreter. This property can be specified only if the
-            pythonScriptFilePath is specified.
+          description: >-
+            Python
+
+            interpreter path. The path to the Python interpreter. The property
+            can be
+
+            specified only if the pythonScriptFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the Caffe job.
+
+            arguments. Command line arguments that need to be passed to the
+            Caffe job.
           optional: true
         - id: parameters.caffeSettings.processCount
           type:
             - number
           description: >-
-            Number of processes
+            Process count.
 
-            parameter that is passed to MPI runtime. The default value for this
-            property
+            Number of processes to launch for the job execution. The default
+            value for
 
-            is equal to nodeCount property
+            this property is equal to nodeCount property
           optional: true
         - id: parameters.caffe2Settings
           type:
             - object
           description: |-
-            Specifies the settings for
+            Caffe2 settings. Settings for
             Caffe2 job.
           optional: true
         - id: parameters.caffe2Settings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python script
+            file path. The python script to execute.
         - id: parameters.caffe2Settings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.caffe2Settings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.chainerSettings
           type:
             - object
           description: |-
-            Specifies the settings for
+            Chainer settings. Settings for
             Chainer job.
           optional: true
         - id: parameters.chainerSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.chainerSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.chainerSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.chainerSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
@@ -1573,37 +1665,37 @@ items:
           type:
             - object
           description: |-
-            Specifies the settings
-            for custom tool kit job.
+            Custom tool kit job.
+            Settings for custom tool kit job.
           optional: true
         - id: parameters.customToolkitSettings.commandLine
           type:
             - string
           description: |-
-            The command
-            line to execute the custom toolkit Job.
+            Command line.
+            The command line to execute on the master node.
           optional: true
         - id: parameters.customMpiSettings
           type:
             - object
           description: |-
-            Specifies the settings for
-            custom MPI job.
+            Custom MPI settings. Settings
+            for custom MPI job.
           optional: true
         - id: parameters.customMpiSettings.commandLine
           type:
             - string
           description: |-
-            The program and
-            program command line parameters to be executed by mpi runtime.
+            Command line. The
+            command line to be executed by mpi runtime on each compute node.
         - id: parameters.customMpiSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
@@ -1611,105 +1703,105 @@ items:
           type:
             - object
           description: |-
-            Specifies the settings for
+            Horovod settings. Settings for
             Horovod job.
           optional: true
         - id: parameters.horovodSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.horovodSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.horovodSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.horovodSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
         - id: parameters.jobPreparation
           type:
             - object
-          description: >-
-            Specifies the command line to be
-
-            executed before tool kit is launched. The specified actions will run
-            on all
-
-            the nodes that are part of the job
+          description: |-
+            Job preparation. A command line
+            to be executed on each node allocated for the job before tool kit is
+            launched.
           optional: true
         - id: parameters.jobPreparation.commandLine
           type:
             - string
           description: >-
-            The command line to
+            Command line. The
 
-            execute. If containerSettings is specified on the job, this
-            commandLine will
+            command line to execute. If containerSettings is specified on the
+            job, this
 
-            be executed in the same container as job. Otherwise it will be
-            executed on
+            commandLine will be executed in the same container as job. Otherwise
+            it will
 
-            the node.
+            be executed on the node.
         - id: parameters.stdOutErrPathPrefix
           type:
             - string
           description: |-
-            The path where the Batch AI
-            service will upload stdout and stderror of the job.
+            Standard output path prefix.
+            The path where the Batch AI service will store stdout, stderror and
+            execution log of the job.
         - id: parameters.inputDirectories
           type:
             - array
           description: |-
-            Specifies the list of input
-            directories for the Job.
+            Input directories. A list of
+            input directories for the job.
           optional: true
         - id: parameters.outputDirectories
           type:
             - array
           description: |-
-            Specifies the list of output
-            directories.
+            Output directories. A list of
+            output directories for the job.
           optional: true
         - id: parameters.environmentVariables
           type:
             - array
-          description: |-
-            Additional environment
-            variables to set on the job. Batch AI will setup these additional
-            environment variables for the job.
+          description: >-
+            Environment variables. A
+
+            list of user defined environment variables which will be setup for
+            the job.
           optional: true
         - id: parameters.secrets
           type:
             - array
           description: >-
-            Additional environment variables with
+            Secrets. A list of user defined
 
-            secret values to set on the job. Batch AI will setup these
-            additional
+            environment variables with secret values which will be setup for the
+            job.
 
-            environment variables for the job. Server will never report values
-            of these
-
-            variables back.
+            Server will never report values of these variables back.
           optional: true
         - id: parameters.constraints
           type:
@@ -1722,8 +1814,8 @@ items:
           type:
             - azure-arm-batchai.moment.duration
           description: |-
-            Max time
-            the job can run. Default Value = 1 week.
+            Max wall
+            clock time. Max time the job can run. Default value: 1 week.
           optional: true
         - id: options
           type:
@@ -2944,44 +3036,45 @@ items:
           type:
             - string
           description: >-
-            Scheduling priority
+            Scheduling priority.
 
-            associated with the job. Scheduling priority associated with the
-            job.
+            Scheduling priority associated with the job. Possible values: low,
+            normal,
 
-            Possible values include: 'low', 'normal', 'high'
+            high. Possible values include: 'low', 'normal', 'high'
           optional: true
         - id: parameters.cluster
           type:
             - object
           description: |-
-            Specifies the Id of the cluster on which
-            this job will run.
+            Cluster. Resource ID of the cluster on
+            which this job will run.
         - id: parameters.mountVolumes
           type:
             - object
           description: >-
-            Information on mount volumes to be
+            Mount volumes. Information on
 
-            used by the job. These volumes will be mounted before the job
-            execution and
+            mount volumes to be used by the job. These volumes will be mounted
+            before
 
-            will be unmouted after the job completion. The volumes will be
-            mounted at
+            the job execution and will be unmouted after the job completion. The
+            volumes
 
-            location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment
-            variable.
+            will be mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT
+
+            environment variable.
           optional: true
         - id: parameters.mountVolumes.azureFileShares
           type:
             - array
           description: >-
-            Azure File Share
+            Azure File Shares.
 
-            setup configuration. References to Azure File Shares that are to be
-            mounted
+            A collection of Azure File Shares that are to be mounted to the
+            cluster
 
-            to the cluster nodes.
+            nodes.
           optional: true
         - id: parameters.mountVolumes.azureBlobFileSystems
           type:
@@ -2989,68 +3082,77 @@ items:
           description: >-
             Azure Blob
 
-            FileSystem setup configuration. References to Azure Blob FUSE that
-            are to be
+            file systems. A collection of Azure Blob Containers that are to be
+            mounted
 
-            mounted to the cluster nodes.
+            to the cluster nodes.
           optional: true
         - id: parameters.mountVolumes.fileServers
           type:
             - array
-          description: |-
-            References to a list of
-            file servers that are mounted to the cluster node.
+          description: >-
+            File Servers. A
+
+            collection of Batch AI File Servers that are to be mounted to the
+            cluster
+
+            nodes.
           optional: true
         - id: parameters.mountVolumes.unmanagedFileSystems
           type:
             - array
-          description: |-
-            References to
-            a list of file servers that are mounted to the cluster node.
+          description: >-
+            Unmanaged file
+
+            systems. A collection of unmanaged file systems that are to be
+            mounted to
+
+            the cluster nodes.
           optional: true
         - id: parameters.nodeCount
           type:
             - number
-          description: |-
-            Number of compute nodes to run the job
-            on. The job will be gang scheduled on that many compute nodes
+          description: >-
+            Node count. Number of compute nodes to
+
+            run the job on. The job will be gang scheduled on that many compute
+            nodes.
         - id: parameters.containerSettings
           type:
             - object
           description: >-
-            If provided the job will run
+            Container settings. Docker
 
-            in the specified container. If the container was downloaded as part
-            of
+            container settings for the job. If not provided, the job will run
+            directly
 
-            cluster setup then the same container image will be used. If not
-            provided,
-
-            the job will run on the VM.
+            on the node.
           optional: true
         - id: parameters.containerSettings.imageSourceRegistry
           type:
             - object
-          description: |-
-            Registry to
+          description: >-
+            Image
+
+            source registry. Information about docker image and docker registry
+            to
+
             download the container from.
         - id: parameters.containerSettings.imageSourceRegistry.serverUrl
           type:
             - string
-          description: URL for image repository.
+          description: Server URL. URL for image repository.
           optional: true
         - id: parameters.containerSettings.imageSourceRegistry.image
           type:
             - string
-          description: |-
-            The
-            name of the image in image repository.
+          description: Image. The name of the image in the image repository.
         - id: parameters.containerSettings.imageSourceRegistry.credentials
           type:
             - object
           description: |-
-            Information
-            to access the private Docker repository.
+            Credentials.
+            Credentials to access the private docker repository.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.username
@@ -3058,37 +3160,42 @@ items:
             - string
           description: |-
             User
-            name to login.
+            name. User name to login to the repository.
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.password
           type:
             - string
           description: >-
-            Password to login. One of password or passwordSecretReference must
-            be
+            Password. User password to login to the docker repository. One of
+            password
 
-            specified.
+            or passwordSecretReference must be specified.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference
           type:
             - object
           description: >-
-            Specifies the location of the password, which is a Key Vault Secret.
-            Users
+            Password secret reference. KeyVault Secret storing the password.
+            Users can
 
-            can store their secrets in Azure KeyVault and pass it to the Batch
-            AI
+            store their secrets in Azure KeyVault and pass it to the Batch AI
+            service to
 
-            Service to integrate with KeyVault. One of password or
+            integrate with KeyVault. One of password or passwordSecretReference
+            must be
 
-            passwordSecretReference must be specified.
+            specified.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.sourceVault
           type:
             - object
-          description: Fully qualified resource Id for the Key Vault.
+          description: >-
+            Key Vault resource identifier. Fully qualified resource indentifier
+            of the
+
+            Key Vault.
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.sourceVault.id
           type:
@@ -3098,327 +3205,358 @@ items:
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.secretUrl
           type:
             - string
-          description: The URL referencing a secret in a Key Vault.
+          description: Secret URL. The URL referencing a secret in the Key Vault.
         - id: parameters.containerSettings.shmSize
           type:
             - string
-          description: |-
-            Size of /dev/shm.
-            Please refer to docker documentation for supported argument formats.
+          description: >-
+            /dev/shm size. Size
+
+            of /dev/shm. Please refer to docker documentation for supported
+            argument
+
+            formats.
           optional: true
         - id: parameters.cntkSettings
           type:
             - object
           description: |-
-            Specifies the settings for CNTK
+            CNTK settings. Settings for CNTK
             (aka Microsoft Cognitive Toolkit) job.
           optional: true
         - id: parameters.cntkSettings.languageType
           type:
             - string
           description: >-
-            Specifies the
+            Language type. The
 
-            language type to use for launching CNTK (aka Microsoft Cognitive
-            Toolkit)
+            language to use for launching CNTK (aka Microsoft Cognitive Toolkit)
+            job.
 
-            job. Valid values are 'BrainScript' or 'Python'.
+            Valid values are 'BrainScript' or 'Python'.
           optional: true
         - id: parameters.cntkSettings.configFilePath
           type:
             - string
           description: >-
-            Specifies the path
+            Config file path.
 
-            of the config file. This property can be specified only if the
-            languageType
+            Specifies the path of the BrainScript config file. This property can
+            be
 
-            is 'BrainScript'.
+            specified only if the languageType is 'BrainScript'.
           optional: true
         - id: parameters.cntkSettings.pythonScriptFilePath
           type:
             - string
           description: >-
-            The path and
+            Python script
 
-            file name of the python script to execute the job. This property can
-            be
+            file path. Python script to execute. This property can be specified
+            only if
 
-            specified only if the languageType is 'Python'.
+            the languageType is 'Python'.
           optional: true
         - id: parameters.cntkSettings.pythonInterpreterPath
           type:
             - string
           description: >-
-            The path to
+            Python
 
-            python interpreter. This property can be specified only if the
-            languageType
+            interpreter path. The path to the Python interpreter. This property
+            can be
 
-            is 'Python'.
+            specified only if the languageType is 'Python'.
           optional: true
         - id: parameters.cntkSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script or CNTK.exe.
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script or cntk executable.
           optional: true
         - id: parameters.cntkSettings.processCount
           type:
             - number
           description: >-
-            Number of processes
+            Process count. Number
 
-            parameter that is passed to MPI runtime. The default value for this
-            property
+            of processes to launch for the job execution. The default value for
+            this
 
-            is equal to nodeCount property
+            property is equal to nodeCount property
           optional: true
         - id: parameters.pyTorchSettings
           type:
             - object
           description: |-
-            Specifies the settings for
+            pyTorch settings. Settings for
             pyTorch job.
           optional: true
         - id: parameters.pyTorchSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.pyTorchSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.pyTorchSettings.commandLineArgs
           type:
             - string
-          description: |-
-            Specifies the
-            command line arguments for the master task.
+          description: >-
+            Command line
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.pyTorchSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes to launch for the job execution. The default value for
-            this
+            Number of processes to launch for the job execution. The default
+            value for
 
-            property is equal to nodeCount property.
+            this property is equal to nodeCount property
           optional: true
         - id: parameters.pyTorchSettings.communicationBackend
           type:
             - string
           description: >-
-            Type of
+            Communication backend. Type of the communication backend for
+            distributed
 
-            the communication backend for distributed jobs. Valid values are
-            'TCP',
+            jobs. Valid values are 'TCP', 'Gloo' or 'MPI'. Not required for
 
-            'Gloo' or 'MPI'. Not required for non-distributed jobs.
+            non-distributed jobs.
           optional: true
         - id: parameters.tensorFlowSettings
           type:
             - object
           description: |-
-            Specifies the settings for
-            Tensor Flow job.
+            TensorFlow settings.
+            Settings for Tensor Flow job.
           optional: true
         - id: parameters.tensorFlowSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path
-            and file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.tensorFlowSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The
-            path to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.tensorFlowSettings.masterCommandLineArgs
           type:
             - string
-          description: Specifies the command line arguments for the master task.
+          description: >-
+            Master
+
+            command line arguments. Command line arguments that need to be
+            passed to the
+
+            python script for the master task.
           optional: true
         - id: parameters.tensorFlowSettings.workerCommandLineArgs
           type:
             - string
           description: >-
-            Specifies the command line arguments for the worker task. This
-            property is
+            Worker
 
-            optional for single machine training.
+            command line arguments. Command line arguments that need to be
+            passed to the
+
+            python script for the worker task. Optional for single process jobs.
           optional: true
         - id: parameters.tensorFlowSettings.parameterServerCommandLineArgs
           type:
             - string
           description: >-
-            Specifies the
+            Parameter
 
-            command line arguments for the parameter server task. This property
-            is
+            server command line arguments. Command line arguments that need to
+            be passed
 
-            optional for single machine training.
+            to the python script for the parameter server. Optional for single
+            process
+
+            jobs.
           optional: true
         - id: parameters.tensorFlowSettings.workerCount
           type:
             - number
           description: >-
-            The number of
+            Worker count.
 
-            worker tasks. If specified, the value must be less than or equal to
+            The number of worker tasks. If specified, the value must be less
+            than or
 
-            (nodeCount * numberOfGPUs per VM). If not specified, the default
-            value is
+            equal to (nodeCount * numberOfGPUs per VM). If not specified, the
+            default
 
-            equal to nodeCount. This property can be specified only for
-            distributed
+            value is equal to nodeCount. This property can be specified only for
 
-            TensorFlow training
+            distributed TensorFlow training.
           optional: true
         - id: parameters.tensorFlowSettings.parameterServerCount
           type:
             - number
           description: >-
-            The
+            Parameter server count. The number of parameter server tasks. If
+            specified,
 
-            number of parmeter server tasks. If specified, the value must be
-            less than
+            the value must be less than or equal to nodeCount. If not specified,
+            the
 
-            or equal to nodeCount. If not specified, the default value is equal
-            to 1 for
+            default value is equal to 1 for distributed TensorFlow training.
+            This
 
-            distributed TensorFlow training (This property is not applicable for
-            single
-
-            machine training). This property can be specified only for
-            distributed
-
-            TensorFlow training.
+            property can be specified only for distributed TensorFlow training.
           optional: true
         - id: parameters.caffeSettings
           type:
             - object
           description: |-
-            Specifies the settings for Caffe
-            job.
+            Caffe settings. Settings for
+            Caffe job.
           optional: true
         - id: parameters.caffeSettings.configFilePath
           type:
             - string
-          description: |-
-            Specifies the path
-            of the config file. This property cannot be specified if
+          description: >-
+            Config file path.
+
+            Path of the config file for the job. This property cannot be
+            specified if
+
             pythonScriptFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.pythonScriptFilePath
           type:
             - string
-          description: >-
-            The path and
-
-            file name of the python script to execute the job. This property
-            cannot be
-
+          description: |-
+            Python
+            script file path. Python script to execute. This property cannot be
             specified if configFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.pythonInterpreterPath
           type:
             - string
-          description: |-
-            The path to
-            python interpreter. This property can be specified only if the
-            pythonScriptFilePath is specified.
+          description: >-
+            Python
+
+            interpreter path. The path to the Python interpreter. The property
+            can be
+
+            specified only if the pythonScriptFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the Caffe job.
+
+            arguments. Command line arguments that need to be passed to the
+            Caffe job.
           optional: true
         - id: parameters.caffeSettings.processCount
           type:
             - number
           description: >-
-            Number of processes
+            Process count.
 
-            parameter that is passed to MPI runtime. The default value for this
-            property
+            Number of processes to launch for the job execution. The default
+            value for
 
-            is equal to nodeCount property
+            this property is equal to nodeCount property
           optional: true
         - id: parameters.caffe2Settings
           type:
             - object
           description: |-
-            Specifies the settings for
+            Caffe2 settings. Settings for
             Caffe2 job.
           optional: true
         - id: parameters.caffe2Settings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python script
+            file path. The python script to execute.
         - id: parameters.caffe2Settings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.caffe2Settings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.chainerSettings
           type:
             - object
           description: |-
-            Specifies the settings for
+            Chainer settings. Settings for
             Chainer job.
           optional: true
         - id: parameters.chainerSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.chainerSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.chainerSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.chainerSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
@@ -3426,37 +3564,37 @@ items:
           type:
             - object
           description: |-
-            Specifies the settings
-            for custom tool kit job.
+            Custom tool kit job.
+            Settings for custom tool kit job.
           optional: true
         - id: parameters.customToolkitSettings.commandLine
           type:
             - string
           description: |-
-            The command
-            line to execute the custom toolkit Job.
+            Command line.
+            The command line to execute on the master node.
           optional: true
         - id: parameters.customMpiSettings
           type:
             - object
           description: |-
-            Specifies the settings for
-            custom MPI job.
+            Custom MPI settings. Settings
+            for custom MPI job.
           optional: true
         - id: parameters.customMpiSettings.commandLine
           type:
             - string
           description: |-
-            The program and
-            program command line parameters to be executed by mpi runtime.
+            Command line. The
+            command line to be executed by mpi runtime on each compute node.
         - id: parameters.customMpiSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
@@ -3464,105 +3602,105 @@ items:
           type:
             - object
           description: |-
-            Specifies the settings for
+            Horovod settings. Settings for
             Horovod job.
           optional: true
         - id: parameters.horovodSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.horovodSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.horovodSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.horovodSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
         - id: parameters.jobPreparation
           type:
             - object
-          description: >-
-            Specifies the command line to be
-
-            executed before tool kit is launched. The specified actions will run
-            on all
-
-            the nodes that are part of the job
+          description: |-
+            Job preparation. A command line
+            to be executed on each node allocated for the job before tool kit is
+            launched.
           optional: true
         - id: parameters.jobPreparation.commandLine
           type:
             - string
           description: >-
-            The command line to
+            Command line. The
 
-            execute. If containerSettings is specified on the job, this
-            commandLine will
+            command line to execute. If containerSettings is specified on the
+            job, this
 
-            be executed in the same container as job. Otherwise it will be
-            executed on
+            commandLine will be executed in the same container as job. Otherwise
+            it will
 
-            the node.
+            be executed on the node.
         - id: parameters.stdOutErrPathPrefix
           type:
             - string
           description: |-
-            The path where the Batch AI
-            service will upload stdout and stderror of the job.
+            Standard output path prefix.
+            The path where the Batch AI service will store stdout, stderror and
+            execution log of the job.
         - id: parameters.inputDirectories
           type:
             - array
           description: |-
-            Specifies the list of input
-            directories for the Job.
+            Input directories. A list of
+            input directories for the job.
           optional: true
         - id: parameters.outputDirectories
           type:
             - array
           description: |-
-            Specifies the list of output
-            directories.
+            Output directories. A list of
+            output directories for the job.
           optional: true
         - id: parameters.environmentVariables
           type:
             - array
-          description: |-
-            Additional environment
-            variables to set on the job. Batch AI will setup these additional
-            environment variables for the job.
+          description: >-
+            Environment variables. A
+
+            list of user defined environment variables which will be setup for
+            the job.
           optional: true
         - id: parameters.secrets
           type:
             - array
           description: >-
-            Additional environment variables with
+            Secrets. A list of user defined
 
-            secret values to set on the job. Batch AI will setup these
-            additional
+            environment variables with secret values which will be setup for the
+            job.
 
-            environment variables for the job. Server will never report values
-            of these
-
-            variables back.
+            Server will never report values of these variables back.
           optional: true
         - id: parameters.constraints
           type:
@@ -3575,8 +3713,8 @@ items:
           type:
             - azure-arm-batchai.moment.duration
           description: |-
-            Max time
-            the job can run. Default Value = 1 week.
+            Max wall
+            clock time. Max time the job can run. Default value: 1 week.
           optional: true
         - id: options
           type:
@@ -3694,44 +3832,45 @@ items:
           type:
             - string
           description: >-
-            Scheduling priority
+            Scheduling priority.
 
-            associated with the job. Scheduling priority associated with the
-            job.
+            Scheduling priority associated with the job. Possible values: low,
+            normal,
 
-            Possible values include: 'low', 'normal', 'high'
+            high. Possible values include: 'low', 'normal', 'high'
           optional: true
         - id: parameters.cluster
           type:
             - object
           description: |-
-            Specifies the Id of the cluster on which
-            this job will run.
+            Cluster. Resource ID of the cluster on
+            which this job will run.
         - id: parameters.mountVolumes
           type:
             - object
           description: >-
-            Information on mount volumes to be
+            Mount volumes. Information on
 
-            used by the job. These volumes will be mounted before the job
-            execution and
+            mount volumes to be used by the job. These volumes will be mounted
+            before
 
-            will be unmouted after the job completion. The volumes will be
-            mounted at
+            the job execution and will be unmouted after the job completion. The
+            volumes
 
-            location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment
-            variable.
+            will be mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT
+
+            environment variable.
           optional: true
         - id: parameters.mountVolumes.azureFileShares
           type:
             - array
           description: >-
-            Azure File Share
+            Azure File Shares.
 
-            setup configuration. References to Azure File Shares that are to be
-            mounted
+            A collection of Azure File Shares that are to be mounted to the
+            cluster
 
-            to the cluster nodes.
+            nodes.
           optional: true
         - id: parameters.mountVolumes.azureBlobFileSystems
           type:
@@ -3739,68 +3878,77 @@ items:
           description: >-
             Azure Blob
 
-            FileSystem setup configuration. References to Azure Blob FUSE that
-            are to be
+            file systems. A collection of Azure Blob Containers that are to be
+            mounted
 
-            mounted to the cluster nodes.
+            to the cluster nodes.
           optional: true
         - id: parameters.mountVolumes.fileServers
           type:
             - array
-          description: |-
-            References to a list of
-            file servers that are mounted to the cluster node.
+          description: >-
+            File Servers. A
+
+            collection of Batch AI File Servers that are to be mounted to the
+            cluster
+
+            nodes.
           optional: true
         - id: parameters.mountVolumes.unmanagedFileSystems
           type:
             - array
-          description: |-
-            References to
-            a list of file servers that are mounted to the cluster node.
+          description: >-
+            Unmanaged file
+
+            systems. A collection of unmanaged file systems that are to be
+            mounted to
+
+            the cluster nodes.
           optional: true
         - id: parameters.nodeCount
           type:
             - number
-          description: |-
-            Number of compute nodes to run the job
-            on. The job will be gang scheduled on that many compute nodes
+          description: >-
+            Node count. Number of compute nodes to
+
+            run the job on. The job will be gang scheduled on that many compute
+            nodes.
         - id: parameters.containerSettings
           type:
             - object
           description: >-
-            If provided the job will run
+            Container settings. Docker
 
-            in the specified container. If the container was downloaded as part
-            of
+            container settings for the job. If not provided, the job will run
+            directly
 
-            cluster setup then the same container image will be used. If not
-            provided,
-
-            the job will run on the VM.
+            on the node.
           optional: true
         - id: parameters.containerSettings.imageSourceRegistry
           type:
             - object
-          description: |-
-            Registry to
+          description: >-
+            Image
+
+            source registry. Information about docker image and docker registry
+            to
+
             download the container from.
         - id: parameters.containerSettings.imageSourceRegistry.serverUrl
           type:
             - string
-          description: URL for image repository.
+          description: Server URL. URL for image repository.
           optional: true
         - id: parameters.containerSettings.imageSourceRegistry.image
           type:
             - string
-          description: |-
-            The
-            name of the image in image repository.
+          description: Image. The name of the image in the image repository.
         - id: parameters.containerSettings.imageSourceRegistry.credentials
           type:
             - object
           description: |-
-            Information
-            to access the private Docker repository.
+            Credentials.
+            Credentials to access the private docker repository.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.username
@@ -3808,37 +3956,42 @@ items:
             - string
           description: |-
             User
-            name to login.
+            name. User name to login to the repository.
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.password
           type:
             - string
           description: >-
-            Password to login. One of password or passwordSecretReference must
-            be
+            Password. User password to login to the docker repository. One of
+            password
 
-            specified.
+            or passwordSecretReference must be specified.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference
           type:
             - object
           description: >-
-            Specifies the location of the password, which is a Key Vault Secret.
-            Users
+            Password secret reference. KeyVault Secret storing the password.
+            Users can
 
-            can store their secrets in Azure KeyVault and pass it to the Batch
-            AI
+            store their secrets in Azure KeyVault and pass it to the Batch AI
+            service to
 
-            Service to integrate with KeyVault. One of password or
+            integrate with KeyVault. One of password or passwordSecretReference
+            must be
 
-            passwordSecretReference must be specified.
+            specified.
           optional: true
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.sourceVault
           type:
             - object
-          description: Fully qualified resource Id for the Key Vault.
+          description: >-
+            Key Vault resource identifier. Fully qualified resource indentifier
+            of the
+
+            Key Vault.
         - id: >-
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.sourceVault.id
           type:
@@ -3848,327 +4001,358 @@ items:
             parameters.containerSettings.imageSourceRegistry.credentials.passwordSecretReference.secretUrl
           type:
             - string
-          description: The URL referencing a secret in a Key Vault.
+          description: Secret URL. The URL referencing a secret in the Key Vault.
         - id: parameters.containerSettings.shmSize
           type:
             - string
-          description: |-
-            Size of /dev/shm.
-            Please refer to docker documentation for supported argument formats.
+          description: >-
+            /dev/shm size. Size
+
+            of /dev/shm. Please refer to docker documentation for supported
+            argument
+
+            formats.
           optional: true
         - id: parameters.cntkSettings
           type:
             - object
           description: |-
-            Specifies the settings for CNTK
+            CNTK settings. Settings for CNTK
             (aka Microsoft Cognitive Toolkit) job.
           optional: true
         - id: parameters.cntkSettings.languageType
           type:
             - string
           description: >-
-            Specifies the
+            Language type. The
 
-            language type to use for launching CNTK (aka Microsoft Cognitive
-            Toolkit)
+            language to use for launching CNTK (aka Microsoft Cognitive Toolkit)
+            job.
 
-            job. Valid values are 'BrainScript' or 'Python'.
+            Valid values are 'BrainScript' or 'Python'.
           optional: true
         - id: parameters.cntkSettings.configFilePath
           type:
             - string
           description: >-
-            Specifies the path
+            Config file path.
 
-            of the config file. This property can be specified only if the
-            languageType
+            Specifies the path of the BrainScript config file. This property can
+            be
 
-            is 'BrainScript'.
+            specified only if the languageType is 'BrainScript'.
           optional: true
         - id: parameters.cntkSettings.pythonScriptFilePath
           type:
             - string
           description: >-
-            The path and
+            Python script
 
-            file name of the python script to execute the job. This property can
-            be
+            file path. Python script to execute. This property can be specified
+            only if
 
-            specified only if the languageType is 'Python'.
+            the languageType is 'Python'.
           optional: true
         - id: parameters.cntkSettings.pythonInterpreterPath
           type:
             - string
           description: >-
-            The path to
+            Python
 
-            python interpreter. This property can be specified only if the
-            languageType
+            interpreter path. The path to the Python interpreter. This property
+            can be
 
-            is 'Python'.
+            specified only if the languageType is 'Python'.
           optional: true
         - id: parameters.cntkSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script or CNTK.exe.
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script or cntk executable.
           optional: true
         - id: parameters.cntkSettings.processCount
           type:
             - number
           description: >-
-            Number of processes
+            Process count. Number
 
-            parameter that is passed to MPI runtime. The default value for this
-            property
+            of processes to launch for the job execution. The default value for
+            this
 
-            is equal to nodeCount property
+            property is equal to nodeCount property
           optional: true
         - id: parameters.pyTorchSettings
           type:
             - object
           description: |-
-            Specifies the settings for
+            pyTorch settings. Settings for
             pyTorch job.
           optional: true
         - id: parameters.pyTorchSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.pyTorchSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.pyTorchSettings.commandLineArgs
           type:
             - string
-          description: |-
-            Specifies the
-            command line arguments for the master task.
+          description: >-
+            Command line
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.pyTorchSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes to launch for the job execution. The default value for
-            this
+            Number of processes to launch for the job execution. The default
+            value for
 
-            property is equal to nodeCount property.
+            this property is equal to nodeCount property
           optional: true
         - id: parameters.pyTorchSettings.communicationBackend
           type:
             - string
           description: >-
-            Type of
+            Communication backend. Type of the communication backend for
+            distributed
 
-            the communication backend for distributed jobs. Valid values are
-            'TCP',
+            jobs. Valid values are 'TCP', 'Gloo' or 'MPI'. Not required for
 
-            'Gloo' or 'MPI'. Not required for non-distributed jobs.
+            non-distributed jobs.
           optional: true
         - id: parameters.tensorFlowSettings
           type:
             - object
           description: |-
-            Specifies the settings for
-            Tensor Flow job.
+            TensorFlow settings.
+            Settings for Tensor Flow job.
           optional: true
         - id: parameters.tensorFlowSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path
-            and file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.tensorFlowSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The
-            path to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.tensorFlowSettings.masterCommandLineArgs
           type:
             - string
-          description: Specifies the command line arguments for the master task.
+          description: >-
+            Master
+
+            command line arguments. Command line arguments that need to be
+            passed to the
+
+            python script for the master task.
           optional: true
         - id: parameters.tensorFlowSettings.workerCommandLineArgs
           type:
             - string
           description: >-
-            Specifies the command line arguments for the worker task. This
-            property is
+            Worker
 
-            optional for single machine training.
+            command line arguments. Command line arguments that need to be
+            passed to the
+
+            python script for the worker task. Optional for single process jobs.
           optional: true
         - id: parameters.tensorFlowSettings.parameterServerCommandLineArgs
           type:
             - string
           description: >-
-            Specifies the
+            Parameter
 
-            command line arguments for the parameter server task. This property
-            is
+            server command line arguments. Command line arguments that need to
+            be passed
 
-            optional for single machine training.
+            to the python script for the parameter server. Optional for single
+            process
+
+            jobs.
           optional: true
         - id: parameters.tensorFlowSettings.workerCount
           type:
             - number
           description: >-
-            The number of
+            Worker count.
 
-            worker tasks. If specified, the value must be less than or equal to
+            The number of worker tasks. If specified, the value must be less
+            than or
 
-            (nodeCount * numberOfGPUs per VM). If not specified, the default
-            value is
+            equal to (nodeCount * numberOfGPUs per VM). If not specified, the
+            default
 
-            equal to nodeCount. This property can be specified only for
-            distributed
+            value is equal to nodeCount. This property can be specified only for
 
-            TensorFlow training
+            distributed TensorFlow training.
           optional: true
         - id: parameters.tensorFlowSettings.parameterServerCount
           type:
             - number
           description: >-
-            The
+            Parameter server count. The number of parameter server tasks. If
+            specified,
 
-            number of parmeter server tasks. If specified, the value must be
-            less than
+            the value must be less than or equal to nodeCount. If not specified,
+            the
 
-            or equal to nodeCount. If not specified, the default value is equal
-            to 1 for
+            default value is equal to 1 for distributed TensorFlow training.
+            This
 
-            distributed TensorFlow training (This property is not applicable for
-            single
-
-            machine training). This property can be specified only for
-            distributed
-
-            TensorFlow training.
+            property can be specified only for distributed TensorFlow training.
           optional: true
         - id: parameters.caffeSettings
           type:
             - object
           description: |-
-            Specifies the settings for Caffe
-            job.
+            Caffe settings. Settings for
+            Caffe job.
           optional: true
         - id: parameters.caffeSettings.configFilePath
           type:
             - string
-          description: |-
-            Specifies the path
-            of the config file. This property cannot be specified if
+          description: >-
+            Config file path.
+
+            Path of the config file for the job. This property cannot be
+            specified if
+
             pythonScriptFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.pythonScriptFilePath
           type:
             - string
-          description: >-
-            The path and
-
-            file name of the python script to execute the job. This property
-            cannot be
-
+          description: |-
+            Python
+            script file path. Python script to execute. This property cannot be
             specified if configFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.pythonInterpreterPath
           type:
             - string
-          description: |-
-            The path to
-            python interpreter. This property can be specified only if the
-            pythonScriptFilePath is specified.
+          description: >-
+            Python
+
+            interpreter path. The path to the Python interpreter. The property
+            can be
+
+            specified only if the pythonScriptFilePath is specified.
           optional: true
         - id: parameters.caffeSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the Caffe job.
+
+            arguments. Command line arguments that need to be passed to the
+            Caffe job.
           optional: true
         - id: parameters.caffeSettings.processCount
           type:
             - number
           description: >-
-            Number of processes
+            Process count.
 
-            parameter that is passed to MPI runtime. The default value for this
-            property
+            Number of processes to launch for the job execution. The default
+            value for
 
-            is equal to nodeCount property
+            this property is equal to nodeCount property
           optional: true
         - id: parameters.caffe2Settings
           type:
             - object
           description: |-
-            Specifies the settings for
+            Caffe2 settings. Settings for
             Caffe2 job.
           optional: true
         - id: parameters.caffe2Settings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python script
+            file path. The python script to execute.
         - id: parameters.caffe2Settings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.caffe2Settings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.chainerSettings
           type:
             - object
           description: |-
-            Specifies the settings for
+            Chainer settings. Settings for
             Chainer job.
           optional: true
         - id: parameters.chainerSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.chainerSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.chainerSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.chainerSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
@@ -4176,37 +4360,37 @@ items:
           type:
             - object
           description: |-
-            Specifies the settings
-            for custom tool kit job.
+            Custom tool kit job.
+            Settings for custom tool kit job.
           optional: true
         - id: parameters.customToolkitSettings.commandLine
           type:
             - string
           description: |-
-            The command
-            line to execute the custom toolkit Job.
+            Command line.
+            The command line to execute on the master node.
           optional: true
         - id: parameters.customMpiSettings
           type:
             - object
           description: |-
-            Specifies the settings for
-            custom MPI job.
+            Custom MPI settings. Settings
+            for custom MPI job.
           optional: true
         - id: parameters.customMpiSettings.commandLine
           type:
             - string
           description: |-
-            The program and
-            program command line parameters to be executed by mpi runtime.
+            Command line. The
+            command line to be executed by mpi runtime on each compute node.
         - id: parameters.customMpiSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
@@ -4214,105 +4398,105 @@ items:
           type:
             - object
           description: |-
-            Specifies the settings for
+            Horovod settings. Settings for
             Horovod job.
           optional: true
         - id: parameters.horovodSettings.pythonScriptFilePath
           type:
             - string
           description: |-
-            The path and
-            file name of the python script to execute the job.
+            Python
+            script file path. The python script to execute.
         - id: parameters.horovodSettings.pythonInterpreterPath
           type:
             - string
           description: |-
-            The path
-            to python interpreter.
+            Python
+            interpreter path. The path to the Python interpreter.
           optional: true
         - id: parameters.horovodSettings.commandLineArgs
           type:
             - string
-          description: |-
+          description: >-
             Command line
-            arguments that needs to be passed to the python script
+
+            arguments. Command line arguments that need to be passed to the
+            python
+
+            script.
           optional: true
         - id: parameters.horovodSettings.processCount
           type:
             - number
           description: >-
-            Number of
+            Process count.
 
-            processes parameter that is passed to MPI runtime. The default value
-            for
+            Number of processes to launch for the job execution. The default
+            value for
 
             this property is equal to nodeCount property
           optional: true
         - id: parameters.jobPreparation
           type:
             - object
-          description: >-
-            Specifies the command line to be
-
-            executed before tool kit is launched. The specified actions will run
-            on all
-
-            the nodes that are part of the job
+          description: |-
+            Job preparation. A command line
+            to be executed on each node allocated for the job before tool kit is
+            launched.
           optional: true
         - id: parameters.jobPreparation.commandLine
           type:
             - string
           description: >-
-            The command line to
+            Command line. The
 
-            execute. If containerSettings is specified on the job, this
-            commandLine will
+            command line to execute. If containerSettings is specified on the
+            job, this
 
-            be executed in the same container as job. Otherwise it will be
-            executed on
+            commandLine will be executed in the same container as job. Otherwise
+            it will
 
-            the node.
+            be executed on the node.
         - id: parameters.stdOutErrPathPrefix
           type:
             - string
           description: |-
-            The path where the Batch AI
-            service will upload stdout and stderror of the job.
+            Standard output path prefix.
+            The path where the Batch AI service will store stdout, stderror and
+            execution log of the job.
         - id: parameters.inputDirectories
           type:
             - array
           description: |-
-            Specifies the list of input
-            directories for the Job.
+            Input directories. A list of
+            input directories for the job.
           optional: true
         - id: parameters.outputDirectories
           type:
             - array
           description: |-
-            Specifies the list of output
-            directories.
+            Output directories. A list of
+            output directories for the job.
           optional: true
         - id: parameters.environmentVariables
           type:
             - array
-          description: |-
-            Additional environment
-            variables to set on the job. Batch AI will setup these additional
-            environment variables for the job.
+          description: >-
+            Environment variables. A
+
+            list of user defined environment variables which will be setup for
+            the job.
           optional: true
         - id: parameters.secrets
           type:
             - array
           description: >-
-            Additional environment variables with
+            Secrets. A list of user defined
 
-            secret values to set on the job. Batch AI will setup these
-            additional
+            environment variables with secret values which will be setup for the
+            job.
 
-            environment variables for the job. Server will never report values
-            of these
-
-            variables back.
+            Server will never report values of these variables back.
           optional: true
         - id: parameters.constraints
           type:
@@ -4325,8 +4509,8 @@ items:
           type:
             - azure-arm-batchai.moment.duration
           description: |-
-            Max time
-            the job can run. Default Value = 1 week.
+            Max wall
+            clock time. Max time the job can run. Default value: 1 week.
           optional: true
         - id: options
           type:

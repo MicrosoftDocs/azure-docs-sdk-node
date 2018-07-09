@@ -110,60 +110,64 @@ items:
           type:
             - string
           description: >-
-            The size of the virtual machines in the
+            VM size. The size of the virtual machines
 
-            cluster. All virtual machines in a cluster are the same size. For
+            in the cluster. All nodes in a cluster have the same VM size. For
 
             information about available VM sizes for clusters using images from
             the
 
-            Virtual Machines Marketplace (see Sizes for Virtual Machines (Linux)
-            or
+            Virtual Machines Marketplace see Sizes for Virtual Machines (Linux).
+            Batch
 
-            Sizes for Virtual Machines (Windows). Batch AI service supports all
-            Azure VM
+            AI service supports all Azure VM sizes except STANDARD_A0 and those
+            with
 
-            sizes except STANDARD_A0 and those with premium storage
-            (STANDARD_GS,
-
-            STANDARD_DS, and STANDARD_DSV2 series).
+            premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2
+            series).
         - id: parameters.vmPriority
           type:
             - string
-          description: |-
-            dedicated or lowpriority. Default is
-            dedicated. Possible values include: 'dedicated', 'lowpriority'
+          description: >-
+            VM priority. VM priority. Allowed
+
+            values are: dedicated (default) and lowpriority. Possible values
+            include:
+
+            'dedicated', 'lowpriority'
           optional: true
         - id: parameters.scaleSettings
           type:
             - object
-          description: Desired scale for the cluster.
+          description: >-
+            Scale settings. Scale settings
+
+            for the cluster. Batch AI service supports manual and auto scale
+            clusters.
           optional: true
         - id: parameters.scaleSettings.manual
           type:
             - object
           description: |-
-            The scale for the cluster
-            by manual settings
+            Manual scale settings.
+            Manual scale settings for the cluster.
           optional: true
         - id: parameters.scaleSettings.manual.targetNodeCount
           type:
             - number
           description: >-
-            The desired
+            Target node
 
-            number of compute nodes in the Cluster. Default is 0. If
-            autoScaleSettings
-
-            are not specified, then the Cluster starts with this target.
+            count. The desired number of compute nodes in the Cluster. Default
+            is 0.
         - id: parameters.scaleSettings.manual.nodeDeallocationOption
           type:
             - string
           description: >-
-            Determines what to do with the job(s) running on compute node if the
-            Cluster
+            Node deallocation options. An action to be performed when the
+            cluster size
 
-            size is decreasing. The default value is requeue. Possible values
+            is decreasing. The default value is requeue. Possible values
             include:
 
             'requeue', 'terminate', 'waitforjobcompletion'
@@ -172,71 +176,92 @@ items:
           type:
             - object
           description: |-
-            The scale for the
-            cluster by autoscale settings
+            Auto-scale settings.
+            Auto-scale settings for the cluster.
           optional: true
         - id: parameters.scaleSettings.autoScale.minimumNodeCount
           type:
             - number
-          description: Specifies the minimum number of compute nodes the cluster can have.
+          description: >-
+            Minimum
+
+            node count. The minimum number of compute nodes the Batch AI service
+            will
+
+            try to allocate for the cluster. Note, the actual number of nodes
+            can be
+
+            less than the specified value if the subscription has not enough
+            quota to
+
+            fulfill the request.
         - id: parameters.scaleSettings.autoScale.maximumNodeCount
           type:
             - number
-          description: Specifies the maximum number of compute nodes the cluster can have.
+          description: >-
+            Maximum
+
+            node count. The maximum number of compute nodes the cluster can
+            have.
         - id: parameters.scaleSettings.autoScale.initialNodeCount
           type:
             - number
           description: >-
-            Specifies the number of compute nodes to allocate on cluster
-            creation. Note
+            Initial node count. The number of compute nodes to allocate on
+            cluster
 
-            that this value is used only during cluster creation.
+            creation. Note that this value is used only during cluster creation.
+
+            Default: 0.
           optional: true
         - id: parameters.virtualMachineConfiguration
           type:
             - object
-          description: |-
-            Settings for OS
-            image and mounted data volumes.
+          description: >-
+            VM configuration.
+
+            OS image configuration for cluster nodes. All nodes in a cluster
+            have the
+
+            same OS image.
           optional: true
         - id: parameters.virtualMachineConfiguration.imageReference
           type:
             - object
-          description: Reference to OS image.
+          description: Image reference. OS image reference for cluster nodes.
           optional: true
         - id: parameters.virtualMachineConfiguration.imageReference.publisher
           type:
             - string
           description: |-
-            Publisher of
-            the image.
+            Publisher.
+            Publisher of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.offer
           type:
             - string
-          description: Offer of the image.
+          description: Offer. Offer of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.sku
           type:
             - string
-          description: SKU of the image.
+          description: SKU. SKU of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.version
           type:
             - string
           description: |-
-            Version of
-            the image.
+            Version.
+            Version of the image.
           optional: true
         - id: >-
             parameters.virtualMachineConfiguration.imageReference.virtualMachineImageId
           type:
             - string
           description: >-
-            The ARM resource identifier of the virtual machine image. Computes
-            nodes of
+            Custom VM image resource ID. The ARM resource identifier of the
+            virtual
 
-            the cluster will be created using this custom image. This is of the
-            form
+            machine image for the compute nodes. This is of the form
 
-            /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}
+            /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}.
 
             The virtual machine image must be in the same region and
             subscription as the
@@ -257,24 +282,23 @@ items:
           type:
             - object
           description: |-
-            Setup to be done on all compute nodes
-            in the cluster.
+            Node setup. Setup to be performed on
+            each compute node in the cluster.
           optional: true
         - id: parameters.nodeSetup.setupTask
           type:
             - object
           description: >-
-            Specifies a setup task
+            Setup task. Setup task to
 
-            which can be used to customize the compute nodes of the cluster. The
+            run on cluster nodes when nodes got created or rebooted. The setup
+            task code
 
-            NodeSetup task runs everytime a VM is rebooted. For that reason the
-            task
-
-            code needs to be idempotent. Generally it is used to either download
+            needs to be idempotent. Generally the setup task is used to download
             static
 
-            data that is required for all jobs that run on the cluster VMs or to
+            data that is required for all jobs that run on the cluster VMs
+            and/or to
 
             download/install software.
           optional: true
@@ -282,54 +306,58 @@ items:
           type:
             - string
           description: >-
-            Command line to
+            Command line. The
 
-            be executed on each cluster's node after it being allocated or
-            rebooted.
-
-            Command line to be executed on each cluster's node after it being
+            command line to be executed on each cluster's node after it being
             allocated
 
             or rebooted. The command is executed in a bash subshell as a root.
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
-          description: Collection of environment variables to be set for setup task.
+          description: >-
+            Environment variables. A collection of user defined environment
+            variables to
+
+            be set for setup task.
           optional: true
         - id: parameters.nodeSetup.setupTask.secrets
           type:
             - array
           description: >-
-            Collection of
+            Secrets. A
 
-            environment variables with secret values to be set for setup task.
-            Server
+            collection of user defined environment variables with secret values
+            to be
 
-            will never report values of these variables back.
+            set for the setup task. Server will never report values of these
+            variables
+
+            back.
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
             - string
           description: >-
-            The
+            Output
 
-            prefix of a path where the Batch AI service will upload the stdout
-            and
+            path prefix. The prefix of a path where the Batch AI service will
+            upload the
 
-            stderr of the setup task.
+            stdout, stderr and execution log of the setup task.
         - id: parameters.nodeSetup.mountVolumes
           type:
             - object
           description: >-
-            Information on shared
+            Mount volumes. Mount
 
-            volumes to be used by jobs. Specified mount volumes will be
-            available to all
+            volumes to be available to setup task and all jobs executing on the
+            cluster.
 
-            jobs executing on the cluster. The volumes will be mounted at
-            location
+            The volumes will be mounted at location specified by
+            $AZ_BATCHAI_MOUNT_ROOT
 
-            specified by $AZ_BATCHAI_MOUNT_ROOT environment variable.
+            environment variable.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureFileShares
           type:
@@ -337,127 +365,148 @@ items:
           description: >-
             Azure
 
-            File Share setup configuration. References to Azure File Shares that
-            are to
+            File Shares. A collection of Azure File Shares that are to be
+            mounted to the
 
-            be mounted to the cluster nodes.
+            cluster nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureBlobFileSystems
           type:
             - array
           description: >-
-            Azure Blob FileSystem setup configuration. References to Azure Blob
-            FUSE
+            Azure Blob file systems. A collection of Azure Blob Containers that
+            are to
 
-            that are to be mounted to the cluster nodes.
+            be mounted to the cluster nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.fileServers
           type:
             - array
-          description: |-
-            References to
-            a list of file servers that are mounted to the cluster node.
+          description: >-
+            File Servers.
+
+            A collection of Batch AI File Servers that are to be mounted to the
+            cluster
+
+            nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.unmanagedFileSystems
           type:
             - array
           description: >-
-            References to a list of file servers that are mounted to the cluster
-            node.
+            Unmanaged file systems. A collection of unmanaged file systems that
+            are to
+
+            be mounted to the cluster nodes.
           optional: true
         - id: parameters.nodeSetup.performanceCountersSettings
           type:
             - object
-          description: |-
-            Specifies
-            settings for performance counters collecting and uploading.
+          description: >-
+            Performance counters settings. Settings for performance counters
+            collecting
+
+            and uploading.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference
           type:
             - object
           description: >-
-            Specifies Azure Application Insights information for performance
-            counters
+            Azure
 
-            reporting. If provided, Batch AI will upload node performance
-            counters to
+            Application Insights reference. Azure Application Insights
+            information for
 
-            the corresponding Azure Application Insights account.
+            performance counters reporting. If provided, Batch AI will upload
+            node
+
+            performance counters to the corresponding Azure Application Insights
+
+            account.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.component
           type:
             - object
-          description: Specifies the Azure Application Insights component resource id.
+          description: Component ID. Azure Application Insights component resource ID.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKey
           type:
             - string
-          description: Value of the Azure Application Insights instrumentation key.
+          description: >-
+            Instrumentation Key. Value of the Azure Application Insights
+            instrumentation
+
+            key.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference
           type:
             - object
           description: >-
-            Specifies a KeyVault Secret containing Azure Application Insights
+            Instrumentation key KeyVault Secret reference. KeyVault Store and
+            Secret
 
-            instrumentation key. Specifies KeyVault Store and Secret which
-            contains
+            which contains Azure Application Insights instrumentation key. One
+            of
 
-            Azure Application Insights instrumentation key. One of
-            instumentationKey or
-
-            instrumentationKeySecretReference must be specified.
+            instrumentationKey or instrumentationKeySecretReference must be
+            specified.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.sourceVault
           type:
             - object
-          description: Fully qualified resource Id for the Key Vault.
+          description: >-
+            Key Vault resource identifier. Fully qualified resource indentifier
+            of the
+
+            Key Vault.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.secretUrl
           type:
             - string
-          description: The URL referencing a secret in a Key Vault.
+          description: Secret URL. The URL referencing a secret in the Key Vault.
         - id: parameters.userAccountSettings
           type:
             - object
-          description: |-
-            Settings for user account
-            that will be created on all compute nodes of the cluster.
+          description: >-
+            User account settings.
+
+            Settings for an administrator user account that will be created on
+            each
+
+            compute node in the cluster.
         - id: parameters.userAccountSettings.adminUserName
           type:
             - string
           description: |-
-            Specifies the
-            name of the administrator account.
+            User name. Name
+            of the administrator user account which can be used to SSH to nodes.
         - id: parameters.userAccountSettings.adminUserSshPublicKey
           type:
             - string
-          description: >-
+          description: |-
             SSH
-
-            public keys used to authenticate with linux based VMs. This does not
-            get
-
-            returned in a GET response body.
+            public key. SSH public key of the administrator user account.
           optional: true
         - id: parameters.userAccountSettings.adminUserPassword
           type:
             - string
-          description: >-
-            Admin
-
-            user Password (linux only). This does not get returned in a GET
-            response
-
-            body.
+          description: |-
+            Password.
+            Password of the administrator user account.
           optional: true
         - id: parameters.subnet
           type:
             - object
-          description: Specifies the identifier of the subnet.
+          description: >-
+            Subnet. Existing virtual network subnet
+
+            to put the cluster nodes in. Note, if a File Server mount configured
+            in node
+
+            setup, the File Server's subnet will be used automatically.
           optional: true
         - id: parameters.subnet.id
           type:
@@ -570,60 +619,64 @@ items:
           type:
             - string
           description: >-
-            The size of the virtual machines in the
+            VM size. The size of the virtual machines
 
-            cluster. All virtual machines in a cluster are the same size. For
+            in the cluster. All nodes in a cluster have the same VM size. For
 
             information about available VM sizes for clusters using images from
             the
 
-            Virtual Machines Marketplace (see Sizes for Virtual Machines (Linux)
-            or
+            Virtual Machines Marketplace see Sizes for Virtual Machines (Linux).
+            Batch
 
-            Sizes for Virtual Machines (Windows). Batch AI service supports all
-            Azure VM
+            AI service supports all Azure VM sizes except STANDARD_A0 and those
+            with
 
-            sizes except STANDARD_A0 and those with premium storage
-            (STANDARD_GS,
-
-            STANDARD_DS, and STANDARD_DSV2 series).
+            premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2
+            series).
         - id: parameters.vmPriority
           type:
             - string
-          description: |-
-            dedicated or lowpriority. Default is
-            dedicated. Possible values include: 'dedicated', 'lowpriority'
+          description: >-
+            VM priority. VM priority. Allowed
+
+            values are: dedicated (default) and lowpriority. Possible values
+            include:
+
+            'dedicated', 'lowpriority'
           optional: true
         - id: parameters.scaleSettings
           type:
             - object
-          description: Desired scale for the cluster.
+          description: >-
+            Scale settings. Scale settings
+
+            for the cluster. Batch AI service supports manual and auto scale
+            clusters.
           optional: true
         - id: parameters.scaleSettings.manual
           type:
             - object
           description: |-
-            The scale for the cluster
-            by manual settings
+            Manual scale settings.
+            Manual scale settings for the cluster.
           optional: true
         - id: parameters.scaleSettings.manual.targetNodeCount
           type:
             - number
           description: >-
-            The desired
+            Target node
 
-            number of compute nodes in the Cluster. Default is 0. If
-            autoScaleSettings
-
-            are not specified, then the Cluster starts with this target.
+            count. The desired number of compute nodes in the Cluster. Default
+            is 0.
         - id: parameters.scaleSettings.manual.nodeDeallocationOption
           type:
             - string
           description: >-
-            Determines what to do with the job(s) running on compute node if the
-            Cluster
+            Node deallocation options. An action to be performed when the
+            cluster size
 
-            size is decreasing. The default value is requeue. Possible values
+            is decreasing. The default value is requeue. Possible values
             include:
 
             'requeue', 'terminate', 'waitforjobcompletion'
@@ -632,71 +685,92 @@ items:
           type:
             - object
           description: |-
-            The scale for the
-            cluster by autoscale settings
+            Auto-scale settings.
+            Auto-scale settings for the cluster.
           optional: true
         - id: parameters.scaleSettings.autoScale.minimumNodeCount
           type:
             - number
-          description: Specifies the minimum number of compute nodes the cluster can have.
+          description: >-
+            Minimum
+
+            node count. The minimum number of compute nodes the Batch AI service
+            will
+
+            try to allocate for the cluster. Note, the actual number of nodes
+            can be
+
+            less than the specified value if the subscription has not enough
+            quota to
+
+            fulfill the request.
         - id: parameters.scaleSettings.autoScale.maximumNodeCount
           type:
             - number
-          description: Specifies the maximum number of compute nodes the cluster can have.
+          description: >-
+            Maximum
+
+            node count. The maximum number of compute nodes the cluster can
+            have.
         - id: parameters.scaleSettings.autoScale.initialNodeCount
           type:
             - number
           description: >-
-            Specifies the number of compute nodes to allocate on cluster
-            creation. Note
+            Initial node count. The number of compute nodes to allocate on
+            cluster
 
-            that this value is used only during cluster creation.
+            creation. Note that this value is used only during cluster creation.
+
+            Default: 0.
           optional: true
         - id: parameters.virtualMachineConfiguration
           type:
             - object
-          description: |-
-            Settings for OS
-            image and mounted data volumes.
+          description: >-
+            VM configuration.
+
+            OS image configuration for cluster nodes. All nodes in a cluster
+            have the
+
+            same OS image.
           optional: true
         - id: parameters.virtualMachineConfiguration.imageReference
           type:
             - object
-          description: Reference to OS image.
+          description: Image reference. OS image reference for cluster nodes.
           optional: true
         - id: parameters.virtualMachineConfiguration.imageReference.publisher
           type:
             - string
           description: |-
-            Publisher of
-            the image.
+            Publisher.
+            Publisher of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.offer
           type:
             - string
-          description: Offer of the image.
+          description: Offer. Offer of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.sku
           type:
             - string
-          description: SKU of the image.
+          description: SKU. SKU of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.version
           type:
             - string
           description: |-
-            Version of
-            the image.
+            Version.
+            Version of the image.
           optional: true
         - id: >-
             parameters.virtualMachineConfiguration.imageReference.virtualMachineImageId
           type:
             - string
           description: >-
-            The ARM resource identifier of the virtual machine image. Computes
-            nodes of
+            Custom VM image resource ID. The ARM resource identifier of the
+            virtual
 
-            the cluster will be created using this custom image. This is of the
-            form
+            machine image for the compute nodes. This is of the form
 
-            /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}
+            /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}.
 
             The virtual machine image must be in the same region and
             subscription as the
@@ -717,24 +791,23 @@ items:
           type:
             - object
           description: |-
-            Setup to be done on all compute nodes
-            in the cluster.
+            Node setup. Setup to be performed on
+            each compute node in the cluster.
           optional: true
         - id: parameters.nodeSetup.setupTask
           type:
             - object
           description: >-
-            Specifies a setup task
+            Setup task. Setup task to
 
-            which can be used to customize the compute nodes of the cluster. The
+            run on cluster nodes when nodes got created or rebooted. The setup
+            task code
 
-            NodeSetup task runs everytime a VM is rebooted. For that reason the
-            task
-
-            code needs to be idempotent. Generally it is used to either download
+            needs to be idempotent. Generally the setup task is used to download
             static
 
-            data that is required for all jobs that run on the cluster VMs or to
+            data that is required for all jobs that run on the cluster VMs
+            and/or to
 
             download/install software.
           optional: true
@@ -742,54 +815,58 @@ items:
           type:
             - string
           description: >-
-            Command line to
+            Command line. The
 
-            be executed on each cluster's node after it being allocated or
-            rebooted.
-
-            Command line to be executed on each cluster's node after it being
+            command line to be executed on each cluster's node after it being
             allocated
 
             or rebooted. The command is executed in a bash subshell as a root.
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
-          description: Collection of environment variables to be set for setup task.
+          description: >-
+            Environment variables. A collection of user defined environment
+            variables to
+
+            be set for setup task.
           optional: true
         - id: parameters.nodeSetup.setupTask.secrets
           type:
             - array
           description: >-
-            Collection of
+            Secrets. A
 
-            environment variables with secret values to be set for setup task.
-            Server
+            collection of user defined environment variables with secret values
+            to be
 
-            will never report values of these variables back.
+            set for the setup task. Server will never report values of these
+            variables
+
+            back.
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
             - string
           description: >-
-            The
+            Output
 
-            prefix of a path where the Batch AI service will upload the stdout
-            and
+            path prefix. The prefix of a path where the Batch AI service will
+            upload the
 
-            stderr of the setup task.
+            stdout, stderr and execution log of the setup task.
         - id: parameters.nodeSetup.mountVolumes
           type:
             - object
           description: >-
-            Information on shared
+            Mount volumes. Mount
 
-            volumes to be used by jobs. Specified mount volumes will be
-            available to all
+            volumes to be available to setup task and all jobs executing on the
+            cluster.
 
-            jobs executing on the cluster. The volumes will be mounted at
-            location
+            The volumes will be mounted at location specified by
+            $AZ_BATCHAI_MOUNT_ROOT
 
-            specified by $AZ_BATCHAI_MOUNT_ROOT environment variable.
+            environment variable.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureFileShares
           type:
@@ -797,127 +874,148 @@ items:
           description: >-
             Azure
 
-            File Share setup configuration. References to Azure File Shares that
-            are to
+            File Shares. A collection of Azure File Shares that are to be
+            mounted to the
 
-            be mounted to the cluster nodes.
+            cluster nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureBlobFileSystems
           type:
             - array
           description: >-
-            Azure Blob FileSystem setup configuration. References to Azure Blob
-            FUSE
+            Azure Blob file systems. A collection of Azure Blob Containers that
+            are to
 
-            that are to be mounted to the cluster nodes.
+            be mounted to the cluster nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.fileServers
           type:
             - array
-          description: |-
-            References to
-            a list of file servers that are mounted to the cluster node.
+          description: >-
+            File Servers.
+
+            A collection of Batch AI File Servers that are to be mounted to the
+            cluster
+
+            nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.unmanagedFileSystems
           type:
             - array
           description: >-
-            References to a list of file servers that are mounted to the cluster
-            node.
+            Unmanaged file systems. A collection of unmanaged file systems that
+            are to
+
+            be mounted to the cluster nodes.
           optional: true
         - id: parameters.nodeSetup.performanceCountersSettings
           type:
             - object
-          description: |-
-            Specifies
-            settings for performance counters collecting and uploading.
+          description: >-
+            Performance counters settings. Settings for performance counters
+            collecting
+
+            and uploading.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference
           type:
             - object
           description: >-
-            Specifies Azure Application Insights information for performance
-            counters
+            Azure
 
-            reporting. If provided, Batch AI will upload node performance
-            counters to
+            Application Insights reference. Azure Application Insights
+            information for
 
-            the corresponding Azure Application Insights account.
+            performance counters reporting. If provided, Batch AI will upload
+            node
+
+            performance counters to the corresponding Azure Application Insights
+
+            account.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.component
           type:
             - object
-          description: Specifies the Azure Application Insights component resource id.
+          description: Component ID. Azure Application Insights component resource ID.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKey
           type:
             - string
-          description: Value of the Azure Application Insights instrumentation key.
+          description: >-
+            Instrumentation Key. Value of the Azure Application Insights
+            instrumentation
+
+            key.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference
           type:
             - object
           description: >-
-            Specifies a KeyVault Secret containing Azure Application Insights
+            Instrumentation key KeyVault Secret reference. KeyVault Store and
+            Secret
 
-            instrumentation key. Specifies KeyVault Store and Secret which
-            contains
+            which contains Azure Application Insights instrumentation key. One
+            of
 
-            Azure Application Insights instrumentation key. One of
-            instumentationKey or
-
-            instrumentationKeySecretReference must be specified.
+            instrumentationKey or instrumentationKeySecretReference must be
+            specified.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.sourceVault
           type:
             - object
-          description: Fully qualified resource Id for the Key Vault.
+          description: >-
+            Key Vault resource identifier. Fully qualified resource indentifier
+            of the
+
+            Key Vault.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.secretUrl
           type:
             - string
-          description: The URL referencing a secret in a Key Vault.
+          description: Secret URL. The URL referencing a secret in the Key Vault.
         - id: parameters.userAccountSettings
           type:
             - object
-          description: |-
-            Settings for user account
-            that will be created on all compute nodes of the cluster.
+          description: >-
+            User account settings.
+
+            Settings for an administrator user account that will be created on
+            each
+
+            compute node in the cluster.
         - id: parameters.userAccountSettings.adminUserName
           type:
             - string
           description: |-
-            Specifies the
-            name of the administrator account.
+            User name. Name
+            of the administrator user account which can be used to SSH to nodes.
         - id: parameters.userAccountSettings.adminUserSshPublicKey
           type:
             - string
-          description: >-
+          description: |-
             SSH
-
-            public keys used to authenticate with linux based VMs. This does not
-            get
-
-            returned in a GET response body.
+            public key. SSH public key of the administrator user account.
           optional: true
         - id: parameters.userAccountSettings.adminUserPassword
           type:
             - string
-          description: >-
-            Admin
-
-            user Password (linux only). This does not get returned in a GET
-            response
-
-            body.
+          description: |-
+            Password.
+            Password of the administrator user account.
           optional: true
         - id: parameters.subnet
           type:
             - object
-          description: Specifies the identifier of the subnet.
+          description: >-
+            Subnet. Existing virtual network subnet
+
+            to put the cluster nodes in. Note, if a File Server mount configured
+            in node
+
+            setup, the File Server's subnet will be used automatically.
           optional: true
         - id: parameters.subnet.id
           type:
@@ -1014,34 +1112,39 @@ items:
         - id: options.scaleSettings
           type:
             - object
-          description: Desired scale for the cluster
+          description: >-
+            Scale settings. Desired scale
+
+            settings for the cluster. Batch AI service supports manual and auto
+            scale
+
+            clusters.
           optional: true
         - id: options.scaleSettings.manual
           type:
             - object
           description: |-
-            The scale for the cluster by
-            manual settings
+            Manual scale settings. Manual
+            scale settings for the cluster.
           optional: true
         - id: options.scaleSettings.manual.targetNodeCount
           type:
             - number
           description: >-
-            The desired
+            Target node
 
-            number of compute nodes in the Cluster. Default is 0. If
-            autoScaleSettings
-
-            are not specified, then the Cluster starts with this target.
+            count. The desired number of compute nodes in the Cluster. Default
+            is 0.
         - id: options.scaleSettings.manual.nodeDeallocationOption
           type:
             - string
           description: >-
-            Determines what to do with the job(s) running on compute node if the
-            Cluster
+            Node
 
-            size is decreasing. The default value is requeue. Possible values
-            include:
+            deallocation options. An action to be performed when the cluster
+            size is
+
+            decreasing. The default value is requeue. Possible values include:
 
             'requeue', 'terminate', 'waitforjobcompletion'
           optional: true
@@ -1049,31 +1152,44 @@ items:
           type:
             - object
           description: |-
-            The scale for the cluster
-            by autoscale settings
+            Auto-scale settings.
+            Auto-scale settings for the cluster.
           optional: true
         - id: options.scaleSettings.autoScale.minimumNodeCount
           type:
             - number
-          description: |-
-            Specifies
-            the minimum number of compute nodes the cluster can have.
+          description: >-
+            Minimum
+
+            node count. The minimum number of compute nodes the Batch AI service
+            will
+
+            try to allocate for the cluster. Note, the actual number of nodes
+            can be
+
+            less than the specified value if the subscription has not enough
+            quota to
+
+            fulfill the request.
         - id: options.scaleSettings.autoScale.maximumNodeCount
           type:
             - number
-          description: |-
-            Specifies
-            the maximum number of compute nodes the cluster can have.
+          description: >-
+            Maximum
+
+            node count. The maximum number of compute nodes the cluster can
+            have.
         - id: options.scaleSettings.autoScale.initialNodeCount
           type:
             - number
           description: >-
-            Specifies
+            Initial
 
-            the number of compute nodes to allocate on cluster creation. Note
-            that this
+            node count. The number of compute nodes to allocate on cluster
+            creation.
 
-            value is used only during cluster creation.
+            Note that this value is used only during cluster creation. Default:
+            0.
           optional: true
         - id: options.customHeaders
           type:
@@ -1175,34 +1291,39 @@ items:
         - id: options.scaleSettings
           type:
             - object
-          description: Desired scale for the cluster
+          description: >-
+            Scale settings. Desired scale
+
+            settings for the cluster. Batch AI service supports manual and auto
+            scale
+
+            clusters.
           optional: true
         - id: options.scaleSettings.manual
           type:
             - object
           description: |-
-            The scale for the cluster by
-            manual settings
+            Manual scale settings. Manual
+            scale settings for the cluster.
           optional: true
         - id: options.scaleSettings.manual.targetNodeCount
           type:
             - number
           description: >-
-            The desired
+            Target node
 
-            number of compute nodes in the Cluster. Default is 0. If
-            autoScaleSettings
-
-            are not specified, then the Cluster starts with this target.
+            count. The desired number of compute nodes in the Cluster. Default
+            is 0.
         - id: options.scaleSettings.manual.nodeDeallocationOption
           type:
             - string
           description: >-
-            Determines what to do with the job(s) running on compute node if the
-            Cluster
+            Node
 
-            size is decreasing. The default value is requeue. Possible values
-            include:
+            deallocation options. An action to be performed when the cluster
+            size is
+
+            decreasing. The default value is requeue. Possible values include:
 
             'requeue', 'terminate', 'waitforjobcompletion'
           optional: true
@@ -1210,31 +1331,44 @@ items:
           type:
             - object
           description: |-
-            The scale for the cluster
-            by autoscale settings
+            Auto-scale settings.
+            Auto-scale settings for the cluster.
           optional: true
         - id: options.scaleSettings.autoScale.minimumNodeCount
           type:
             - number
-          description: |-
-            Specifies
-            the minimum number of compute nodes the cluster can have.
+          description: >-
+            Minimum
+
+            node count. The minimum number of compute nodes the Batch AI service
+            will
+
+            try to allocate for the cluster. Note, the actual number of nodes
+            can be
+
+            less than the specified value if the subscription has not enough
+            quota to
+
+            fulfill the request.
         - id: options.scaleSettings.autoScale.maximumNodeCount
           type:
             - number
-          description: |-
-            Specifies
-            the maximum number of compute nodes the cluster can have.
+          description: >-
+            Maximum
+
+            node count. The maximum number of compute nodes the cluster can
+            have.
         - id: options.scaleSettings.autoScale.initialNodeCount
           type:
             - number
           description: >-
-            Specifies
+            Initial
 
-            the number of compute nodes to allocate on cluster creation. Note
-            that this
+            node count. The number of compute nodes to allocate on cluster
+            creation.
 
-            value is used only during cluster creation.
+            Note that this value is used only during cluster creation. Default:
+            0.
           optional: true
         - id: options.customHeaders
           type:
@@ -2065,60 +2199,64 @@ items:
           type:
             - string
           description: >-
-            The size of the virtual machines in the
+            VM size. The size of the virtual machines
 
-            cluster. All virtual machines in a cluster are the same size. For
+            in the cluster. All nodes in a cluster have the same VM size. For
 
             information about available VM sizes for clusters using images from
             the
 
-            Virtual Machines Marketplace (see Sizes for Virtual Machines (Linux)
-            or
+            Virtual Machines Marketplace see Sizes for Virtual Machines (Linux).
+            Batch
 
-            Sizes for Virtual Machines (Windows). Batch AI service supports all
-            Azure VM
+            AI service supports all Azure VM sizes except STANDARD_A0 and those
+            with
 
-            sizes except STANDARD_A0 and those with premium storage
-            (STANDARD_GS,
-
-            STANDARD_DS, and STANDARD_DSV2 series).
+            premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2
+            series).
         - id: parameters.vmPriority
           type:
             - string
-          description: |-
-            dedicated or lowpriority. Default is
-            dedicated. Possible values include: 'dedicated', 'lowpriority'
+          description: >-
+            VM priority. VM priority. Allowed
+
+            values are: dedicated (default) and lowpriority. Possible values
+            include:
+
+            'dedicated', 'lowpriority'
           optional: true
         - id: parameters.scaleSettings
           type:
             - object
-          description: Desired scale for the cluster.
+          description: >-
+            Scale settings. Scale settings
+
+            for the cluster. Batch AI service supports manual and auto scale
+            clusters.
           optional: true
         - id: parameters.scaleSettings.manual
           type:
             - object
           description: |-
-            The scale for the cluster
-            by manual settings
+            Manual scale settings.
+            Manual scale settings for the cluster.
           optional: true
         - id: parameters.scaleSettings.manual.targetNodeCount
           type:
             - number
           description: >-
-            The desired
+            Target node
 
-            number of compute nodes in the Cluster. Default is 0. If
-            autoScaleSettings
-
-            are not specified, then the Cluster starts with this target.
+            count. The desired number of compute nodes in the Cluster. Default
+            is 0.
         - id: parameters.scaleSettings.manual.nodeDeallocationOption
           type:
             - string
           description: >-
-            Determines what to do with the job(s) running on compute node if the
-            Cluster
+            Node deallocation options. An action to be performed when the
+            cluster size
 
-            size is decreasing. The default value is requeue. Possible values
+            is decreasing. The default value is requeue. Possible values
             include:
 
             'requeue', 'terminate', 'waitforjobcompletion'
@@ -2127,71 +2265,92 @@ items:
           type:
             - object
           description: |-
-            The scale for the
-            cluster by autoscale settings
+            Auto-scale settings.
+            Auto-scale settings for the cluster.
           optional: true
         - id: parameters.scaleSettings.autoScale.minimumNodeCount
           type:
             - number
-          description: Specifies the minimum number of compute nodes the cluster can have.
+          description: >-
+            Minimum
+
+            node count. The minimum number of compute nodes the Batch AI service
+            will
+
+            try to allocate for the cluster. Note, the actual number of nodes
+            can be
+
+            less than the specified value if the subscription has not enough
+            quota to
+
+            fulfill the request.
         - id: parameters.scaleSettings.autoScale.maximumNodeCount
           type:
             - number
-          description: Specifies the maximum number of compute nodes the cluster can have.
+          description: >-
+            Maximum
+
+            node count. The maximum number of compute nodes the cluster can
+            have.
         - id: parameters.scaleSettings.autoScale.initialNodeCount
           type:
             - number
           description: >-
-            Specifies the number of compute nodes to allocate on cluster
-            creation. Note
+            Initial node count. The number of compute nodes to allocate on
+            cluster
 
-            that this value is used only during cluster creation.
+            creation. Note that this value is used only during cluster creation.
+
+            Default: 0.
           optional: true
         - id: parameters.virtualMachineConfiguration
           type:
             - object
-          description: |-
-            Settings for OS
-            image and mounted data volumes.
+          description: >-
+            VM configuration.
+
+            OS image configuration for cluster nodes. All nodes in a cluster
+            have the
+
+            same OS image.
           optional: true
         - id: parameters.virtualMachineConfiguration.imageReference
           type:
             - object
-          description: Reference to OS image.
+          description: Image reference. OS image reference for cluster nodes.
           optional: true
         - id: parameters.virtualMachineConfiguration.imageReference.publisher
           type:
             - string
           description: |-
-            Publisher of
-            the image.
+            Publisher.
+            Publisher of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.offer
           type:
             - string
-          description: Offer of the image.
+          description: Offer. Offer of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.sku
           type:
             - string
-          description: SKU of the image.
+          description: SKU. SKU of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.version
           type:
             - string
           description: |-
-            Version of
-            the image.
+            Version.
+            Version of the image.
           optional: true
         - id: >-
             parameters.virtualMachineConfiguration.imageReference.virtualMachineImageId
           type:
             - string
           description: >-
-            The ARM resource identifier of the virtual machine image. Computes
-            nodes of
+            Custom VM image resource ID. The ARM resource identifier of the
+            virtual
 
-            the cluster will be created using this custom image. This is of the
-            form
+            machine image for the compute nodes. This is of the form
 
-            /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}
+            /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}.
 
             The virtual machine image must be in the same region and
             subscription as the
@@ -2212,24 +2371,23 @@ items:
           type:
             - object
           description: |-
-            Setup to be done on all compute nodes
-            in the cluster.
+            Node setup. Setup to be performed on
+            each compute node in the cluster.
           optional: true
         - id: parameters.nodeSetup.setupTask
           type:
             - object
           description: >-
-            Specifies a setup task
+            Setup task. Setup task to
 
-            which can be used to customize the compute nodes of the cluster. The
+            run on cluster nodes when nodes got created or rebooted. The setup
+            task code
 
-            NodeSetup task runs everytime a VM is rebooted. For that reason the
-            task
-
-            code needs to be idempotent. Generally it is used to either download
+            needs to be idempotent. Generally the setup task is used to download
             static
 
-            data that is required for all jobs that run on the cluster VMs or to
+            data that is required for all jobs that run on the cluster VMs
+            and/or to
 
             download/install software.
           optional: true
@@ -2237,54 +2395,58 @@ items:
           type:
             - string
           description: >-
-            Command line to
+            Command line. The
 
-            be executed on each cluster's node after it being allocated or
-            rebooted.
-
-            Command line to be executed on each cluster's node after it being
+            command line to be executed on each cluster's node after it being
             allocated
 
             or rebooted. The command is executed in a bash subshell as a root.
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
-          description: Collection of environment variables to be set for setup task.
+          description: >-
+            Environment variables. A collection of user defined environment
+            variables to
+
+            be set for setup task.
           optional: true
         - id: parameters.nodeSetup.setupTask.secrets
           type:
             - array
           description: >-
-            Collection of
+            Secrets. A
 
-            environment variables with secret values to be set for setup task.
-            Server
+            collection of user defined environment variables with secret values
+            to be
 
-            will never report values of these variables back.
+            set for the setup task. Server will never report values of these
+            variables
+
+            back.
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
             - string
           description: >-
-            The
+            Output
 
-            prefix of a path where the Batch AI service will upload the stdout
-            and
+            path prefix. The prefix of a path where the Batch AI service will
+            upload the
 
-            stderr of the setup task.
+            stdout, stderr and execution log of the setup task.
         - id: parameters.nodeSetup.mountVolumes
           type:
             - object
           description: >-
-            Information on shared
+            Mount volumes. Mount
 
-            volumes to be used by jobs. Specified mount volumes will be
-            available to all
+            volumes to be available to setup task and all jobs executing on the
+            cluster.
 
-            jobs executing on the cluster. The volumes will be mounted at
-            location
+            The volumes will be mounted at location specified by
+            $AZ_BATCHAI_MOUNT_ROOT
 
-            specified by $AZ_BATCHAI_MOUNT_ROOT environment variable.
+            environment variable.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureFileShares
           type:
@@ -2292,127 +2454,148 @@ items:
           description: >-
             Azure
 
-            File Share setup configuration. References to Azure File Shares that
-            are to
+            File Shares. A collection of Azure File Shares that are to be
+            mounted to the
 
-            be mounted to the cluster nodes.
+            cluster nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureBlobFileSystems
           type:
             - array
           description: >-
-            Azure Blob FileSystem setup configuration. References to Azure Blob
-            FUSE
+            Azure Blob file systems. A collection of Azure Blob Containers that
+            are to
 
-            that are to be mounted to the cluster nodes.
+            be mounted to the cluster nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.fileServers
           type:
             - array
-          description: |-
-            References to
-            a list of file servers that are mounted to the cluster node.
+          description: >-
+            File Servers.
+
+            A collection of Batch AI File Servers that are to be mounted to the
+            cluster
+
+            nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.unmanagedFileSystems
           type:
             - array
           description: >-
-            References to a list of file servers that are mounted to the cluster
-            node.
+            Unmanaged file systems. A collection of unmanaged file systems that
+            are to
+
+            be mounted to the cluster nodes.
           optional: true
         - id: parameters.nodeSetup.performanceCountersSettings
           type:
             - object
-          description: |-
-            Specifies
-            settings for performance counters collecting and uploading.
+          description: >-
+            Performance counters settings. Settings for performance counters
+            collecting
+
+            and uploading.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference
           type:
             - object
           description: >-
-            Specifies Azure Application Insights information for performance
-            counters
+            Azure
 
-            reporting. If provided, Batch AI will upload node performance
-            counters to
+            Application Insights reference. Azure Application Insights
+            information for
 
-            the corresponding Azure Application Insights account.
+            performance counters reporting. If provided, Batch AI will upload
+            node
+
+            performance counters to the corresponding Azure Application Insights
+
+            account.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.component
           type:
             - object
-          description: Specifies the Azure Application Insights component resource id.
+          description: Component ID. Azure Application Insights component resource ID.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKey
           type:
             - string
-          description: Value of the Azure Application Insights instrumentation key.
+          description: >-
+            Instrumentation Key. Value of the Azure Application Insights
+            instrumentation
+
+            key.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference
           type:
             - object
           description: >-
-            Specifies a KeyVault Secret containing Azure Application Insights
+            Instrumentation key KeyVault Secret reference. KeyVault Store and
+            Secret
 
-            instrumentation key. Specifies KeyVault Store and Secret which
-            contains
+            which contains Azure Application Insights instrumentation key. One
+            of
 
-            Azure Application Insights instrumentation key. One of
-            instumentationKey or
-
-            instrumentationKeySecretReference must be specified.
+            instrumentationKey or instrumentationKeySecretReference must be
+            specified.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.sourceVault
           type:
             - object
-          description: Fully qualified resource Id for the Key Vault.
+          description: >-
+            Key Vault resource identifier. Fully qualified resource indentifier
+            of the
+
+            Key Vault.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.secretUrl
           type:
             - string
-          description: The URL referencing a secret in a Key Vault.
+          description: Secret URL. The URL referencing a secret in the Key Vault.
         - id: parameters.userAccountSettings
           type:
             - object
-          description: |-
-            Settings for user account
-            that will be created on all compute nodes of the cluster.
+          description: >-
+            User account settings.
+
+            Settings for an administrator user account that will be created on
+            each
+
+            compute node in the cluster.
         - id: parameters.userAccountSettings.adminUserName
           type:
             - string
           description: |-
-            Specifies the
-            name of the administrator account.
+            User name. Name
+            of the administrator user account which can be used to SSH to nodes.
         - id: parameters.userAccountSettings.adminUserSshPublicKey
           type:
             - string
-          description: >-
+          description: |-
             SSH
-
-            public keys used to authenticate with linux based VMs. This does not
-            get
-
-            returned in a GET response body.
+            public key. SSH public key of the administrator user account.
           optional: true
         - id: parameters.userAccountSettings.adminUserPassword
           type:
             - string
-          description: >-
-            Admin
-
-            user Password (linux only). This does not get returned in a GET
-            response
-
-            body.
+          description: |-
+            Password.
+            Password of the administrator user account.
           optional: true
         - id: parameters.subnet
           type:
             - object
-          description: Specifies the identifier of the subnet.
+          description: >-
+            Subnet. Existing virtual network subnet
+
+            to put the cluster nodes in. Note, if a File Server mount configured
+            in node
+
+            setup, the File Server's subnet will be used automatically.
           optional: true
         - id: parameters.subnet.id
           type:
@@ -2525,60 +2708,64 @@ items:
           type:
             - string
           description: >-
-            The size of the virtual machines in the
+            VM size. The size of the virtual machines
 
-            cluster. All virtual machines in a cluster are the same size. For
+            in the cluster. All nodes in a cluster have the same VM size. For
 
             information about available VM sizes for clusters using images from
             the
 
-            Virtual Machines Marketplace (see Sizes for Virtual Machines (Linux)
-            or
+            Virtual Machines Marketplace see Sizes for Virtual Machines (Linux).
+            Batch
 
-            Sizes for Virtual Machines (Windows). Batch AI service supports all
-            Azure VM
+            AI service supports all Azure VM sizes except STANDARD_A0 and those
+            with
 
-            sizes except STANDARD_A0 and those with premium storage
-            (STANDARD_GS,
-
-            STANDARD_DS, and STANDARD_DSV2 series).
+            premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2
+            series).
         - id: parameters.vmPriority
           type:
             - string
-          description: |-
-            dedicated or lowpriority. Default is
-            dedicated. Possible values include: 'dedicated', 'lowpriority'
+          description: >-
+            VM priority. VM priority. Allowed
+
+            values are: dedicated (default) and lowpriority. Possible values
+            include:
+
+            'dedicated', 'lowpriority'
           optional: true
         - id: parameters.scaleSettings
           type:
             - object
-          description: Desired scale for the cluster.
+          description: >-
+            Scale settings. Scale settings
+
+            for the cluster. Batch AI service supports manual and auto scale
+            clusters.
           optional: true
         - id: parameters.scaleSettings.manual
           type:
             - object
           description: |-
-            The scale for the cluster
-            by manual settings
+            Manual scale settings.
+            Manual scale settings for the cluster.
           optional: true
         - id: parameters.scaleSettings.manual.targetNodeCount
           type:
             - number
           description: >-
-            The desired
+            Target node
 
-            number of compute nodes in the Cluster. Default is 0. If
-            autoScaleSettings
-
-            are not specified, then the Cluster starts with this target.
+            count. The desired number of compute nodes in the Cluster. Default
+            is 0.
         - id: parameters.scaleSettings.manual.nodeDeallocationOption
           type:
             - string
           description: >-
-            Determines what to do with the job(s) running on compute node if the
-            Cluster
+            Node deallocation options. An action to be performed when the
+            cluster size
 
-            size is decreasing. The default value is requeue. Possible values
+            is decreasing. The default value is requeue. Possible values
             include:
 
             'requeue', 'terminate', 'waitforjobcompletion'
@@ -2587,71 +2774,92 @@ items:
           type:
             - object
           description: |-
-            The scale for the
-            cluster by autoscale settings
+            Auto-scale settings.
+            Auto-scale settings for the cluster.
           optional: true
         - id: parameters.scaleSettings.autoScale.minimumNodeCount
           type:
             - number
-          description: Specifies the minimum number of compute nodes the cluster can have.
+          description: >-
+            Minimum
+
+            node count. The minimum number of compute nodes the Batch AI service
+            will
+
+            try to allocate for the cluster. Note, the actual number of nodes
+            can be
+
+            less than the specified value if the subscription has not enough
+            quota to
+
+            fulfill the request.
         - id: parameters.scaleSettings.autoScale.maximumNodeCount
           type:
             - number
-          description: Specifies the maximum number of compute nodes the cluster can have.
+          description: >-
+            Maximum
+
+            node count. The maximum number of compute nodes the cluster can
+            have.
         - id: parameters.scaleSettings.autoScale.initialNodeCount
           type:
             - number
           description: >-
-            Specifies the number of compute nodes to allocate on cluster
-            creation. Note
+            Initial node count. The number of compute nodes to allocate on
+            cluster
 
-            that this value is used only during cluster creation.
+            creation. Note that this value is used only during cluster creation.
+
+            Default: 0.
           optional: true
         - id: parameters.virtualMachineConfiguration
           type:
             - object
-          description: |-
-            Settings for OS
-            image and mounted data volumes.
+          description: >-
+            VM configuration.
+
+            OS image configuration for cluster nodes. All nodes in a cluster
+            have the
+
+            same OS image.
           optional: true
         - id: parameters.virtualMachineConfiguration.imageReference
           type:
             - object
-          description: Reference to OS image.
+          description: Image reference. OS image reference for cluster nodes.
           optional: true
         - id: parameters.virtualMachineConfiguration.imageReference.publisher
           type:
             - string
           description: |-
-            Publisher of
-            the image.
+            Publisher.
+            Publisher of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.offer
           type:
             - string
-          description: Offer of the image.
+          description: Offer. Offer of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.sku
           type:
             - string
-          description: SKU of the image.
+          description: SKU. SKU of the image.
         - id: parameters.virtualMachineConfiguration.imageReference.version
           type:
             - string
           description: |-
-            Version of
-            the image.
+            Version.
+            Version of the image.
           optional: true
         - id: >-
             parameters.virtualMachineConfiguration.imageReference.virtualMachineImageId
           type:
             - string
           description: >-
-            The ARM resource identifier of the virtual machine image. Computes
-            nodes of
+            Custom VM image resource ID. The ARM resource identifier of the
+            virtual
 
-            the cluster will be created using this custom image. This is of the
-            form
+            machine image for the compute nodes. This is of the form
 
-            /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}
+            /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}.
 
             The virtual machine image must be in the same region and
             subscription as the
@@ -2672,24 +2880,23 @@ items:
           type:
             - object
           description: |-
-            Setup to be done on all compute nodes
-            in the cluster.
+            Node setup. Setup to be performed on
+            each compute node in the cluster.
           optional: true
         - id: parameters.nodeSetup.setupTask
           type:
             - object
           description: >-
-            Specifies a setup task
+            Setup task. Setup task to
 
-            which can be used to customize the compute nodes of the cluster. The
+            run on cluster nodes when nodes got created or rebooted. The setup
+            task code
 
-            NodeSetup task runs everytime a VM is rebooted. For that reason the
-            task
-
-            code needs to be idempotent. Generally it is used to either download
+            needs to be idempotent. Generally the setup task is used to download
             static
 
-            data that is required for all jobs that run on the cluster VMs or to
+            data that is required for all jobs that run on the cluster VMs
+            and/or to
 
             download/install software.
           optional: true
@@ -2697,54 +2904,58 @@ items:
           type:
             - string
           description: >-
-            Command line to
+            Command line. The
 
-            be executed on each cluster's node after it being allocated or
-            rebooted.
-
-            Command line to be executed on each cluster's node after it being
+            command line to be executed on each cluster's node after it being
             allocated
 
             or rebooted. The command is executed in a bash subshell as a root.
         - id: parameters.nodeSetup.setupTask.environmentVariables
           type:
             - array
-          description: Collection of environment variables to be set for setup task.
+          description: >-
+            Environment variables. A collection of user defined environment
+            variables to
+
+            be set for setup task.
           optional: true
         - id: parameters.nodeSetup.setupTask.secrets
           type:
             - array
           description: >-
-            Collection of
+            Secrets. A
 
-            environment variables with secret values to be set for setup task.
-            Server
+            collection of user defined environment variables with secret values
+            to be
 
-            will never report values of these variables back.
+            set for the setup task. Server will never report values of these
+            variables
+
+            back.
           optional: true
         - id: parameters.nodeSetup.setupTask.stdOutErrPathPrefix
           type:
             - string
           description: >-
-            The
+            Output
 
-            prefix of a path where the Batch AI service will upload the stdout
-            and
+            path prefix. The prefix of a path where the Batch AI service will
+            upload the
 
-            stderr of the setup task.
+            stdout, stderr and execution log of the setup task.
         - id: parameters.nodeSetup.mountVolumes
           type:
             - object
           description: >-
-            Information on shared
+            Mount volumes. Mount
 
-            volumes to be used by jobs. Specified mount volumes will be
-            available to all
+            volumes to be available to setup task and all jobs executing on the
+            cluster.
 
-            jobs executing on the cluster. The volumes will be mounted at
-            location
+            The volumes will be mounted at location specified by
+            $AZ_BATCHAI_MOUNT_ROOT
 
-            specified by $AZ_BATCHAI_MOUNT_ROOT environment variable.
+            environment variable.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureFileShares
           type:
@@ -2752,127 +2963,148 @@ items:
           description: >-
             Azure
 
-            File Share setup configuration. References to Azure File Shares that
-            are to
+            File Shares. A collection of Azure File Shares that are to be
+            mounted to the
 
-            be mounted to the cluster nodes.
+            cluster nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.azureBlobFileSystems
           type:
             - array
           description: >-
-            Azure Blob FileSystem setup configuration. References to Azure Blob
-            FUSE
+            Azure Blob file systems. A collection of Azure Blob Containers that
+            are to
 
-            that are to be mounted to the cluster nodes.
+            be mounted to the cluster nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.fileServers
           type:
             - array
-          description: |-
-            References to
-            a list of file servers that are mounted to the cluster node.
+          description: >-
+            File Servers.
+
+            A collection of Batch AI File Servers that are to be mounted to the
+            cluster
+
+            nodes.
           optional: true
         - id: parameters.nodeSetup.mountVolumes.unmanagedFileSystems
           type:
             - array
           description: >-
-            References to a list of file servers that are mounted to the cluster
-            node.
+            Unmanaged file systems. A collection of unmanaged file systems that
+            are to
+
+            be mounted to the cluster nodes.
           optional: true
         - id: parameters.nodeSetup.performanceCountersSettings
           type:
             - object
-          description: |-
-            Specifies
-            settings for performance counters collecting and uploading.
+          description: >-
+            Performance counters settings. Settings for performance counters
+            collecting
+
+            and uploading.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference
           type:
             - object
           description: >-
-            Specifies Azure Application Insights information for performance
-            counters
+            Azure
 
-            reporting. If provided, Batch AI will upload node performance
-            counters to
+            Application Insights reference. Azure Application Insights
+            information for
 
-            the corresponding Azure Application Insights account.
+            performance counters reporting. If provided, Batch AI will upload
+            node
+
+            performance counters to the corresponding Azure Application Insights
+
+            account.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.component
           type:
             - object
-          description: Specifies the Azure Application Insights component resource id.
+          description: Component ID. Azure Application Insights component resource ID.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKey
           type:
             - string
-          description: Value of the Azure Application Insights instrumentation key.
+          description: >-
+            Instrumentation Key. Value of the Azure Application Insights
+            instrumentation
+
+            key.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference
           type:
             - object
           description: >-
-            Specifies a KeyVault Secret containing Azure Application Insights
+            Instrumentation key KeyVault Secret reference. KeyVault Store and
+            Secret
 
-            instrumentation key. Specifies KeyVault Store and Secret which
-            contains
+            which contains Azure Application Insights instrumentation key. One
+            of
 
-            Azure Application Insights instrumentation key. One of
-            instumentationKey or
-
-            instrumentationKeySecretReference must be specified.
+            instrumentationKey or instrumentationKeySecretReference must be
+            specified.
           optional: true
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.sourceVault
           type:
             - object
-          description: Fully qualified resource Id for the Key Vault.
+          description: >-
+            Key Vault resource identifier. Fully qualified resource indentifier
+            of the
+
+            Key Vault.
         - id: >-
             parameters.nodeSetup.performanceCountersSettings.appInsightsReference.instrumentationKeySecretReference.secretUrl
           type:
             - string
-          description: The URL referencing a secret in a Key Vault.
+          description: Secret URL. The URL referencing a secret in the Key Vault.
         - id: parameters.userAccountSettings
           type:
             - object
-          description: |-
-            Settings for user account
-            that will be created on all compute nodes of the cluster.
+          description: >-
+            User account settings.
+
+            Settings for an administrator user account that will be created on
+            each
+
+            compute node in the cluster.
         - id: parameters.userAccountSettings.adminUserName
           type:
             - string
           description: |-
-            Specifies the
-            name of the administrator account.
+            User name. Name
+            of the administrator user account which can be used to SSH to nodes.
         - id: parameters.userAccountSettings.adminUserSshPublicKey
           type:
             - string
-          description: >-
+          description: |-
             SSH
-
-            public keys used to authenticate with linux based VMs. This does not
-            get
-
-            returned in a GET response body.
+            public key. SSH public key of the administrator user account.
           optional: true
         - id: parameters.userAccountSettings.adminUserPassword
           type:
             - string
-          description: >-
-            Admin
-
-            user Password (linux only). This does not get returned in a GET
-            response
-
-            body.
+          description: |-
+            Password.
+            Password of the administrator user account.
           optional: true
         - id: parameters.subnet
           type:
             - object
-          description: Specifies the identifier of the subnet.
+          description: >-
+            Subnet. Existing virtual network subnet
+
+            to put the cluster nodes in. Note, if a File Server mount configured
+            in node
+
+            setup, the File Server's subnet will be used automatically.
           optional: true
         - id: parameters.subnet.id
           type:

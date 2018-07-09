@@ -12,6 +12,8 @@ items:
       - 'azure-arm-iothub.IotHubResource#get'
       - 'azure-arm-iothub.IotHubResource#createOrUpdateWithHttpOperationResponse'
       - 'azure-arm-iothub.IotHubResource#createOrUpdate'
+      - 'azure-arm-iothub.IotHubResource#updateWithHttpOperationResponse'
+      - 'azure-arm-iothub.IotHubResource#update'
       - 'azure-arm-iothub.IotHubResource#deleteMethodWithHttpOperationResponse'
       - 'azure-arm-iothub.IotHubResource#deleteMethod'
       - >-
@@ -43,8 +45,15 @@ items:
       - 'azure-arm-iothub.IotHubResource#getQuotaMetricsWithHttpOperationResponse'
       - 'azure-arm-iothub.IotHubResource#getQuotaMetrics'
       - >-
+        azure-arm-iothub.IotHubResource#getEndpointHealthWithHttpOperationResponse
+      - 'azure-arm-iothub.IotHubResource#getEndpointHealth'
+      - >-
         azure-arm-iothub.IotHubResource#checkNameAvailabilityWithHttpOperationResponse
       - 'azure-arm-iothub.IotHubResource#checkNameAvailability'
+      - 'azure-arm-iothub.IotHubResource#testAllRoutesWithHttpOperationResponse'
+      - 'azure-arm-iothub.IotHubResource#testAllRoutes'
+      - 'azure-arm-iothub.IotHubResource#testRouteWithHttpOperationResponse'
+      - 'azure-arm-iothub.IotHubResource#testRoute'
       - 'azure-arm-iothub.IotHubResource#listKeysWithHttpOperationResponse'
       - 'azure-arm-iothub.IotHubResource#listKeys'
       - >-
@@ -57,6 +66,8 @@ items:
       - >-
         azure-arm-iothub.IotHubResource#beginCreateOrUpdateWithHttpOperationResponse
       - 'azure-arm-iothub.IotHubResource#beginCreateOrUpdate'
+      - 'azure-arm-iothub.IotHubResource#beginUpdateWithHttpOperationResponse'
+      - 'azure-arm-iothub.IotHubResource#beginUpdate'
       - >-
         azure-arm-iothub.IotHubResource#beginDeleteMethodWithHttpOperationResponse
       - 'azure-arm-iothub.IotHubResource#beginDeleteMethod'
@@ -77,6 +88,9 @@ items:
       - >-
         azure-arm-iothub.IotHubResource#getQuotaMetricsNextWithHttpOperationResponse
       - 'azure-arm-iothub.IotHubResource#getQuotaMetricsNext'
+      - >-
+        azure-arm-iothub.IotHubResource#getEndpointHealthNextWithHttpOperationResponse
+      - 'azure-arm-iothub.IotHubResource#getEndpointHealthNext'
       - 'azure-arm-iothub.IotHubResource#listKeysNextWithHttpOperationResponse'
       - 'azure-arm-iothub.IotHubResource#listKeysNext'
     langs:
@@ -102,7 +116,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'getWithHttpOperationResponse(resourceGroupName, resourceName, options)'
     summary: |-
-      Get the non-security related metadata of an IoT hub.
+      Get the non-security related metadata of an IoT hub
 
       Get the non-security related metadata of an IoT hub.
     fullName: >-
@@ -160,7 +174,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'get(resourceGroupName, resourceName, options, optionalCallback)'
     summary: |-
-      Get the non-security related metadata of an IoT hub.
+      Get the non-security related metadata of an IoT hub
 
       Get the non-security related metadata of an IoT hub.
     fullName: >-
@@ -285,29 +299,13 @@ items:
         - id: resourceName
           type:
             - string
-          description: The name of the IoT hub to create or update.
+          description: The name of the IoT hub.
         - id: iotHubDescription
           type:
             - object
           description: |-
             The IoT hub metadata and security
             metadata.
-        - id: iotHubDescription.subscriptionid
-          type:
-            - string
-          description: |-
-            The subscription
-            identifier.
-        - id: iotHubDescription.resourcegroup
-          type:
-            - string
-          description: >-
-            The name of the resource
-
-            group that contains the IoT hub. A resource group name uniquely
-            identifies
-
-            the resource group within the subscription.
         - id: iotHubDescription.etag
           type:
             - string
@@ -322,7 +320,7 @@ items:
         - id: iotHubDescription.properties
           type:
             - object
-          description: ''
+          description: IotHub properties
           optional: true
         - id: iotHubDescription.properties.authorizationPolicies
           type:
@@ -444,6 +442,18 @@ items:
             the
 
             built-in eventhub endpoint.
+          optional: true
+        - id: iotHubDescription.properties.routing.fallbackRoute.name
+          type:
+            - string
+          description: >-
+            The name of the route. The name can only include alphanumeric
+            characters,
+
+            periods, underscores, hyphens, has a maximum length of 64
+            characters, and
+
+            must be unique.
           optional: true
         - id: iotHubDescription.properties.routing.fallbackRoute.condition
           type:
@@ -604,22 +614,23 @@ items:
         - id: iotHubDescription.sku
           type:
             - object
-          description: ''
+          description: IotHub SKU info
         - id: iotHubDescription.sku.name
           type:
             - string
           description: |-
             The name of the SKU. Possible
-            values include: 'F1', 'S1', 'S2', 'S3'
+            values include: 'F1', 'S1', 'S2', 'S3', 'B1', 'B2', 'B3'
         - id: iotHubDescription.sku.capacity
           type:
             - number
           description: >-
-            The number of provisioned IoT
+            The number of provisioned
 
-            Hub units. See:
+            IoT Hub units. See:
 
             https://docs.microsoft.com/azure/azure-subscription-service-limits#iot-hub-limits.
+          optional: true
         - id: iotHubDescription.location
           type:
             - string
@@ -633,6 +644,15 @@ items:
           type:
             - object
           description: Optional Parameters.
+          optional: true
+        - id: options.ifMatch
+          type:
+            - string
+          description: >-
+            ETag of the IoT Hub. Do not specify for
+
+            creating a brand new IoT Hub. Required to update an existing IoT
+            Hub.
           optional: true
         - id: options.customHeaders
           type:
@@ -714,29 +734,13 @@ items:
         - id: resourceName
           type:
             - string
-          description: The name of the IoT hub to create or update.
+          description: The name of the IoT hub.
         - id: iotHubDescription
           type:
             - object
           description: |-
             The IoT hub metadata and security
             metadata.
-        - id: iotHubDescription.subscriptionid
-          type:
-            - string
-          description: |-
-            The subscription
-            identifier.
-        - id: iotHubDescription.resourcegroup
-          type:
-            - string
-          description: >-
-            The name of the resource
-
-            group that contains the IoT hub. A resource group name uniquely
-            identifies
-
-            the resource group within the subscription.
         - id: iotHubDescription.etag
           type:
             - string
@@ -751,7 +755,7 @@ items:
         - id: iotHubDescription.properties
           type:
             - object
-          description: ''
+          description: IotHub properties
           optional: true
         - id: iotHubDescription.properties.authorizationPolicies
           type:
@@ -873,6 +877,18 @@ items:
             the
 
             built-in eventhub endpoint.
+          optional: true
+        - id: iotHubDescription.properties.routing.fallbackRoute.name
+          type:
+            - string
+          description: >-
+            The name of the route. The name can only include alphanumeric
+            characters,
+
+            periods, underscores, hyphens, has a maximum length of 64
+            characters, and
+
+            must be unique.
           optional: true
         - id: iotHubDescription.properties.routing.fallbackRoute.condition
           type:
@@ -1033,22 +1049,23 @@ items:
         - id: iotHubDescription.sku
           type:
             - object
-          description: ''
+          description: IotHub SKU info
         - id: iotHubDescription.sku.name
           type:
             - string
           description: |-
             The name of the SKU. Possible
-            values include: 'F1', 'S1', 'S2', 'S3'
+            values include: 'F1', 'S1', 'S2', 'S3', 'B1', 'B2', 'B3'
         - id: iotHubDescription.sku.capacity
           type:
             - number
           description: >-
-            The number of provisioned IoT
+            The number of provisioned
 
-            Hub units. See:
+            IoT Hub units. See:
 
             https://docs.microsoft.com/azure/azure-subscription-service-limits#iot-hub-limits.
+          optional: true
         - id: iotHubDescription.location
           type:
             - string
@@ -1062,6 +1079,15 @@ items:
           type:
             - object
           description: Optional Parameters.
+          optional: true
+        - id: options.ifMatch
+          type:
+            - string
+          description: >-
+            ETag of the IoT Hub. Do not specify for
+
+            creating a brand new IoT Hub. Required to update an existing IoT
+            Hub.
           optional: true
         - id: options.customHeaders
           type:
@@ -1089,6 +1115,160 @@ items:
         iotHubDescription, options, optionalCallback)
     langs:
       - js
+  - uid: 'azure-arm-iothub.IotHubResource#updateWithHttpOperationResponse'
+    id: 'azure-arm-iothub.IotHubResource#updateWithHttpOperationResponse'
+    parent: azure-arm-iothub.IotHubResource
+    name: 'updateWithHttpOperationResponse(resourceGroupName, resourceName, options)'
+    summary: |-
+      Update an existing IoT Hubs tags.
+
+      Update an existing IoT Hub tags. to update other fields use the
+      CreateOrUpdate method
+    fullName: >-
+      azure-arm-iothub.IotHubResource.updateWithHttpOperationResponse(resourceGroupName,
+      resourceName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<IotHubDescription>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<IotHubDescription>} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: Resource group identifier.
+        - id: resourceName
+          type:
+            - string
+          description: Name of iot hub to update.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.tags
+          type:
+            - object
+          description: Resource tags
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function updateWithHttpOperationResponse(resourceGroupName,
+        resourceName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-iothub.IotHubResource#update'
+    id: 'azure-arm-iothub.IotHubResource#update'
+    parent: azure-arm-iothub.IotHubResource
+    name: 'update(resourceGroupName, resourceName, options, optionalCallback)'
+    summary: |-
+      Update an existing IoT Hubs tags.
+
+      Update an existing IoT Hub tags. to update other fields use the
+      CreateOrUpdate method
+    fullName: >-
+      azure-arm-iothub.IotHubResource.update(resourceGroupName, resourceName,
+      options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{IotHubDescription} - The deserialized result object.'
+        value: '{IotHubDescription} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link IotHubDescription} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link IotHubDescription} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: Resource group identifier.
+        - id: resourceName
+          type:
+            - string
+          description: Name of iot hub to update.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.tags
+          type:
+            - object
+          description: Resource tags
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function update(resourceGroupName, resourceName, options,
+        optionalCallback)
+    langs:
+      - js
   - uid: 'azure-arm-iothub.IotHubResource#deleteMethodWithHttpOperationResponse'
     id: 'azure-arm-iothub.IotHubResource#deleteMethodWithHttpOperationResponse'
     parent: azure-arm-iothub.IotHubResource
@@ -1096,7 +1276,7 @@ items:
       deleteMethodWithHttpOperationResponse(resourceGroupName, resourceName,
       options)
     summary: |-
-      Delete an IoT hub.
+      Delete an IoT hub
 
       Delete an IoT hub.
     fullName: >-
@@ -1123,7 +1303,7 @@ items:
         - id: resourceName
           type:
             - string
-          description: The name of the IoT hub to delete.
+          description: The name of the IoT hub.
         - id: options
           type:
             - object
@@ -1150,7 +1330,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'deleteMethod(resourceGroupName, resourceName, options, optionalCallback)'
     summary: |-
-      Delete an IoT hub.
+      Delete an IoT hub
 
       Delete an IoT hub.
     fullName: >-
@@ -1199,7 +1379,7 @@ items:
         - id: resourceName
           type:
             - string
-          description: The name of the IoT hub to delete.
+          description: The name of the IoT hub.
         - id: options
           type:
             - object
@@ -1238,7 +1418,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: listBySubscriptionWithHttpOperationResponse(options)
     summary: |-
-      Get all the IoT hubs in a subscription.
+      Get all the IoT hubs in a subscription
 
       Get all the IoT hubs in a subscription.
     fullName: >-
@@ -1283,7 +1463,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'listBySubscription(options, optionalCallback)'
     summary: |-
-      Get all the IoT hubs in a subscription.
+      Get all the IoT hubs in a subscription
 
       Get all the IoT hubs in a subscription.
     fullName: >-
@@ -1363,7 +1543,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'listByResourceGroupWithHttpOperationResponse(resourceGroupName, options)'
     summary: |-
-      Get all the IoT hubs in a resource group.
+      Get all the IoT hubs in a resource group
 
       Get all the IoT hubs in a resource group.
     fullName: >-
@@ -1390,7 +1570,7 @@ items:
             - string
           description: |-
             The name of the resource group that
-            contains the IoT hubs.
+            contains the IoT hub.
         - id: options
           type:
             - object
@@ -1417,7 +1597,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'listByResourceGroup(resourceGroupName, options, optionalCallback)'
     summary: |-
-      Get all the IoT hubs in a resource group.
+      Get all the IoT hubs in a resource group
 
       Get all the IoT hubs in a resource group.
     fullName: >-
@@ -1466,7 +1646,7 @@ items:
             - string
           description: |-
             The name of the resource group that
-            contains the IoT hubs.
+            contains the IoT hub.
         - id: options
           type:
             - object
@@ -1505,7 +1685,7 @@ items:
       getStatsWithHttpOperationResponse(resourceGroupName, resourceName,
       options)
     summary: |-
-      Get the statistics from an IoT hub.
+      Get the statistics from an IoT hub
 
       Get the statistics from an IoT hub.
     fullName: >-
@@ -1563,7 +1743,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'getStats(resourceGroupName, resourceName, options, optionalCallback)'
     summary: |-
-      Get the statistics from an IoT hub.
+      Get the statistics from an IoT hub
 
       Get the statistics from an IoT hub.
     fullName: >-
@@ -1653,7 +1833,7 @@ items:
       getValidSkusWithHttpOperationResponse(resourceGroupName, resourceName,
       options)
     summary: |-
-      Get the list of valid SKUs for an IoT hub.
+      Get the list of valid SKUs for an IoT hub
 
       Get the list of valid SKUs for an IoT hub.
     fullName: >-
@@ -1711,7 +1891,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'getValidSkus(resourceGroupName, resourceName, options, optionalCallback)'
     summary: |-
-      Get the list of valid SKUs for an IoT hub.
+      Get the list of valid SKUs for an IoT hub
 
       Get the list of valid SKUs for an IoT hub.
     fullName: >-
@@ -1806,7 +1986,7 @@ items:
       resourceName, eventHubEndpointName, options)
     summary: |-
       Get a list of the consumer groups in the Event Hub-compatible
-      device-to-cloud endpoint in an IoT hub.
+      device-to-cloud endpoint in an IoT hub
 
       Get a list of the consumer groups in the Event Hub-compatible
       device-to-cloud endpoint in an IoT hub.
@@ -1875,7 +2055,7 @@ items:
       eventHubEndpointName, options, optionalCallback)
     summary: |-
       Get a list of the consumer groups in the Event Hub-compatible
-      device-to-cloud endpoint in an IoT hub.
+      device-to-cloud endpoint in an IoT hub
 
       Get a list of the consumer groups in the Event Hub-compatible
       device-to-cloud endpoint in an IoT hub.
@@ -1978,7 +2158,7 @@ items:
     summary: >-
       Get a consumer group from the Event Hub-compatible device-to-cloud
 
-      endpoint for an IoT hub.
+      endpoint for an IoT hub
 
 
       Get a consumer group from the Event Hub-compatible device-to-cloud
@@ -2055,7 +2235,7 @@ items:
     summary: >-
       Get a consumer group from the Event Hub-compatible device-to-cloud
 
-      endpoint for an IoT hub.
+      endpoint for an IoT hub
 
 
       Get a consumer group from the Event Hub-compatible device-to-cloud
@@ -2164,7 +2344,7 @@ items:
       resourceName, eventHubEndpointName, name, options)
     summary: |-
       Add a consumer group to an Event Hub-compatible endpoint in an IoT
-      hub.
+      hub
 
       Add a consumer group to an Event Hub-compatible endpoint in an IoT hub.
     fullName: >-
@@ -2236,7 +2416,7 @@ items:
       eventHubEndpointName, name, options, optionalCallback)
     summary: |-
       Add a consumer group to an Event Hub-compatible endpoint in an IoT
-      hub.
+      hub
 
       Add a consumer group to an Event Hub-compatible endpoint in an IoT hub.
     fullName: >-
@@ -2342,7 +2522,7 @@ items:
     summary: >-
       Delete a consumer group from an Event Hub-compatible endpoint in an
 
-      IoT hub.
+      IoT hub
 
 
       Delete a consumer group from an Event Hub-compatible endpoint in an IoT
@@ -2413,7 +2593,7 @@ items:
     summary: >-
       Delete a consumer group from an Event Hub-compatible endpoint in an
 
-      IoT hub.
+      IoT hub
 
 
       Delete a consumer group from an Event Hub-compatible endpoint in an IoT
@@ -2517,7 +2697,7 @@ items:
 
       see:
 
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry
 
 
       Get a list of all the jobs in an IoT hub. For more information, see:
@@ -2582,7 +2762,7 @@ items:
 
       see:
 
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry
 
 
       Get a list of all the jobs in an IoT hub. For more information, see:
@@ -2679,7 +2859,7 @@ items:
 
       see:
 
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry
 
 
       Get the details of a job from an IoT hub. For more information, see:
@@ -2744,7 +2924,7 @@ items:
 
       see:
 
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry
 
 
       Get the details of a job from an IoT hub. For more information, see:
@@ -2841,7 +3021,7 @@ items:
       getQuotaMetricsWithHttpOperationResponse(resourceGroupName, resourceName,
       options)
     summary: |-
-      Get the quota metrics for an IoT hub.
+      Get the quota metrics for an IoT hub
 
       Get the quota metrics for an IoT hub.
     fullName: >-
@@ -2901,7 +3081,7 @@ items:
       getQuotaMetrics(resourceGroupName, resourceName, options,
       optionalCallback)
     summary: |-
-      Get the quota metrics for an IoT hub.
+      Get the quota metrics for an IoT hub
 
       Get the quota metrics for an IoT hub.
     fullName: >-
@@ -2986,6 +3166,154 @@ items:
         optionalCallback)
     langs:
       - js
+  - uid: 'azure-arm-iothub.IotHubResource#getEndpointHealthWithHttpOperationResponse'
+    id: 'azure-arm-iothub.IotHubResource#getEndpointHealthWithHttpOperationResponse'
+    parent: azure-arm-iothub.IotHubResource
+    name: >-
+      getEndpointHealthWithHttpOperationResponse(resourceGroupName, iotHubName,
+      options)
+    summary: |-
+      Get the health for routing endpoints
+
+      Get the health for routing endpoints.
+    fullName: >-
+      azure-arm-iothub.IotHubResource.getEndpointHealthWithHttpOperationResponse(resourceGroupName,
+      iotHubName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<EndpointHealthDataListResult>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<EndpointHealthDataListResult>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: ''
+        - id: iotHubName
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function getEndpointHealthWithHttpOperationResponse(resourceGroupName,
+        iotHubName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-iothub.IotHubResource#getEndpointHealth'
+    id: 'azure-arm-iothub.IotHubResource#getEndpointHealth'
+    parent: azure-arm-iothub.IotHubResource
+    name: >-
+      getEndpointHealth(resourceGroupName, iotHubName, options,
+      optionalCallback)
+    summary: |-
+      Get the health for routing endpoints
+
+      Get the health for routing endpoints.
+    fullName: >-
+      azure-arm-iothub.IotHubResource.getEndpointHealth(resourceGroupName,
+      iotHubName, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{EndpointHealthDataListResult} - The deserialized result object.'
+        value: '{EndpointHealthDataListResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link EndpointHealthDataListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link EndpointHealthDataListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: ''
+        - id: iotHubName
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function getEndpointHealth(resourceGroupName, iotHubName, options,
+        optionalCallback)
+    langs:
+      - js
   - uid: >-
       azure-arm-iothub.IotHubResource#checkNameAvailabilityWithHttpOperationResponse
     id: >-
@@ -2993,7 +3321,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'checkNameAvailabilityWithHttpOperationResponse(name, options)'
     summary: |-
-      Check if an IoT hub name is available.
+      Check if an IoT hub name is available
 
       Check if an IoT hub name is available.
     fullName: >-
@@ -3043,7 +3371,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'checkNameAvailability(name, options, optionalCallback)'
     summary: |-
-      Check if an IoT hub name is available.
+      Check if an IoT hub name is available
 
       Check if an IoT hub name is available.
     fullName: >-
@@ -3120,6 +3448,518 @@ items:
       content: 'function checkNameAvailability(name, options, optionalCallback)'
     langs:
       - js
+  - uid: 'azure-arm-iothub.IotHubResource#testAllRoutesWithHttpOperationResponse'
+    id: 'azure-arm-iothub.IotHubResource#testAllRoutesWithHttpOperationResponse'
+    parent: azure-arm-iothub.IotHubResource
+    name: >-
+      testAllRoutesWithHttpOperationResponse(input, iotHubName,
+      resourceGroupName, options)
+    summary: |-
+      Test all routes
+
+      Test all routes configured in this Iot Hub
+    fullName: >-
+      azure-arm-iothub.IotHubResource.testAllRoutesWithHttpOperationResponse(input,
+      iotHubName, resourceGroupName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<TestAllRoutesResult>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<TestAllRoutesResult>} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: input
+          type:
+            - object
+          description: Input for testing all routes
+        - id: input.routingSource
+          type:
+            - string
+          description: |-
+            Routing source. Possible values
+            include: 'Invalid', 'DeviceMessages', 'TwinChangeEvents',
+            'DeviceLifecycleEvents', 'DeviceJobLifecycleEvents'
+          optional: true
+        - id: input.message
+          type:
+            - object
+          description: Routing message
+          optional: true
+        - id: input.message.body
+          type:
+            - string
+          description: Body of routing message
+          optional: true
+        - id: input.message.appProperties
+          type:
+            - object
+          description: App properties
+          optional: true
+        - id: input.message.systemProperties
+          type:
+            - object
+          description: System properties
+          optional: true
+        - id: iotHubName
+          type:
+            - string
+          description: IotHub to be tested
+        - id: resourceGroupName
+          type:
+            - string
+          description: resource group which Iot Hub belongs to
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function testAllRoutesWithHttpOperationResponse(input, iotHubName,
+        resourceGroupName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-iothub.IotHubResource#testAllRoutes'
+    id: 'azure-arm-iothub.IotHubResource#testAllRoutes'
+    parent: azure-arm-iothub.IotHubResource
+    name: >-
+      testAllRoutes(input, iotHubName, resourceGroupName, options,
+      optionalCallback)
+    summary: |-
+      Test all routes
+
+      Test all routes configured in this Iot Hub
+    fullName: >-
+      azure-arm-iothub.IotHubResource.testAllRoutes(input, iotHubName,
+      resourceGroupName, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{TestAllRoutesResult} - The deserialized result object.'
+        value: '{TestAllRoutesResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link TestAllRoutesResult} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link TestAllRoutesResult} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: input
+          type:
+            - object
+          description: Input for testing all routes
+        - id: input.routingSource
+          type:
+            - string
+          description: |-
+            Routing source. Possible values
+            include: 'Invalid', 'DeviceMessages', 'TwinChangeEvents',
+            'DeviceLifecycleEvents', 'DeviceJobLifecycleEvents'
+          optional: true
+        - id: input.message
+          type:
+            - object
+          description: Routing message
+          optional: true
+        - id: input.message.body
+          type:
+            - string
+          description: Body of routing message
+          optional: true
+        - id: input.message.appProperties
+          type:
+            - object
+          description: App properties
+          optional: true
+        - id: input.message.systemProperties
+          type:
+            - object
+          description: System properties
+          optional: true
+        - id: iotHubName
+          type:
+            - string
+          description: IotHub to be tested
+        - id: resourceGroupName
+          type:
+            - string
+          description: resource group which Iot Hub belongs to
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function testAllRoutes(input, iotHubName, resourceGroupName, options,
+        optionalCallback)
+    langs:
+      - js
+  - uid: 'azure-arm-iothub.IotHubResource#testRouteWithHttpOperationResponse'
+    id: 'azure-arm-iothub.IotHubResource#testRouteWithHttpOperationResponse'
+    parent: azure-arm-iothub.IotHubResource
+    name: >-
+      testRouteWithHttpOperationResponse(input, iotHubName, resourceGroupName,
+      options)
+    summary: |-
+      Test the new route
+
+      Test the new route for this Iot Hub
+    fullName: >-
+      azure-arm-iothub.IotHubResource.testRouteWithHttpOperationResponse(input,
+      iotHubName, resourceGroupName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<TestRouteResult>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<TestRouteResult>} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: input
+          type:
+            - object
+          description: Route that needs to be tested
+        - id: input.message
+          type:
+            - object
+          description: Routing message
+          optional: true
+        - id: input.message.body
+          type:
+            - string
+          description: Body of routing message
+          optional: true
+        - id: input.message.appProperties
+          type:
+            - object
+          description: App properties
+          optional: true
+        - id: input.message.systemProperties
+          type:
+            - object
+          description: System properties
+          optional: true
+        - id: input.route
+          type:
+            - object
+          description: Route properties
+        - id: input.route.name
+          type:
+            - string
+          description: >-
+            The name of the route. The name can only
+
+            include alphanumeric characters, periods, underscores, hyphens, has
+            a
+
+            maximum length of 64 characters, and must be unique.
+        - id: input.route.source
+          type:
+            - string
+          description: >-
+            The source that the routing rule is to be
+
+            applied to, such as DeviceMessages. Possible values include:
+            'Invalid',
+
+            'DeviceMessages', 'TwinChangeEvents', 'DeviceLifecycleEvents',
+
+            'DeviceJobLifecycleEvents'
+        - id: input.route.condition
+          type:
+            - string
+          description: >-
+            The condition that is evaluated to
+
+            apply the routing rule. If no condition is provided, it evaluates to
+            true by
+
+            default. For grammar, see:
+
+            https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language
+          optional: true
+        - id: input.route.endpointNames
+          type:
+            - array
+          description: >-
+            The list of endpoints to which
+
+            messages that satisfy the condition are routed. Currently only one
+            endpoint
+
+            is allowed.
+        - id: input.route.isEnabled
+          type:
+            - boolean
+          description: |-
+            Used to specify whether a route is
+            enabled.
+        - id: iotHubName
+          type:
+            - string
+          description: IotHub to be tested
+        - id: resourceGroupName
+          type:
+            - string
+          description: resource group which Iot Hub belongs to
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function testRouteWithHttpOperationResponse(input, iotHubName,
+        resourceGroupName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-iothub.IotHubResource#testRoute'
+    id: 'azure-arm-iothub.IotHubResource#testRoute'
+    parent: azure-arm-iothub.IotHubResource
+    name: 'testRoute(input, iotHubName, resourceGroupName, options, optionalCallback)'
+    summary: |-
+      Test the new route
+
+      Test the new route for this Iot Hub
+    fullName: >-
+      azure-arm-iothub.IotHubResource.testRoute(input, iotHubName,
+      resourceGroupName, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{TestRouteResult} - The deserialized result object.'
+        value: '{TestRouteResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link TestRouteResult} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link TestRouteResult} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: input
+          type:
+            - object
+          description: Route that needs to be tested
+        - id: input.message
+          type:
+            - object
+          description: Routing message
+          optional: true
+        - id: input.message.body
+          type:
+            - string
+          description: Body of routing message
+          optional: true
+        - id: input.message.appProperties
+          type:
+            - object
+          description: App properties
+          optional: true
+        - id: input.message.systemProperties
+          type:
+            - object
+          description: System properties
+          optional: true
+        - id: input.route
+          type:
+            - object
+          description: Route properties
+        - id: input.route.name
+          type:
+            - string
+          description: >-
+            The name of the route. The name can only
+
+            include alphanumeric characters, periods, underscores, hyphens, has
+            a
+
+            maximum length of 64 characters, and must be unique.
+        - id: input.route.source
+          type:
+            - string
+          description: >-
+            The source that the routing rule is to be
+
+            applied to, such as DeviceMessages. Possible values include:
+            'Invalid',
+
+            'DeviceMessages', 'TwinChangeEvents', 'DeviceLifecycleEvents',
+
+            'DeviceJobLifecycleEvents'
+        - id: input.route.condition
+          type:
+            - string
+          description: >-
+            The condition that is evaluated to
+
+            apply the routing rule. If no condition is provided, it evaluates to
+            true by
+
+            default. For grammar, see:
+
+            https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language
+          optional: true
+        - id: input.route.endpointNames
+          type:
+            - array
+          description: >-
+            The list of endpoints to which
+
+            messages that satisfy the condition are routed. Currently only one
+            endpoint
+
+            is allowed.
+        - id: input.route.isEnabled
+          type:
+            - boolean
+          description: |-
+            Used to specify whether a route is
+            enabled.
+        - id: iotHubName
+          type:
+            - string
+          description: IotHub to be tested
+        - id: resourceGroupName
+          type:
+            - string
+          description: resource group which Iot Hub belongs to
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function testRoute(input, iotHubName, resourceGroupName, options,
+        optionalCallback)
+    langs:
+      - js
   - uid: 'azure-arm-iothub.IotHubResource#listKeysWithHttpOperationResponse'
     id: 'azure-arm-iothub.IotHubResource#listKeysWithHttpOperationResponse'
     parent: azure-arm-iothub.IotHubResource
@@ -3128,7 +3968,7 @@ items:
       options)
     summary: |-
       Get the security metadata for an IoT hub. For more information,
-      see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.
+      see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security
 
       Get the security metadata for an IoT hub. For more information, see:
       https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.
@@ -3188,7 +4028,7 @@ items:
     name: 'listKeys(resourceGroupName, resourceName, options, optionalCallback)'
     summary: |-
       Get the security metadata for an IoT hub. For more information,
-      see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.
+      see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security
 
       Get the security metadata for an IoT hub. For more information, see:
       https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.
@@ -3289,7 +4129,7 @@ items:
     summary: |-
       Get a shared access policy by name from an IoT hub. For more
       information, see:
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security
 
       Get a shared access policy by name from an IoT hub. For more information,
       see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.
@@ -3356,7 +4196,7 @@ items:
     summary: |-
       Get a shared access policy by name from an IoT hub. For more
       information, see:
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security
 
       Get a shared access policy by name from an IoT hub. For more information,
       see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.
@@ -3461,7 +4301,7 @@ items:
 
       to an Azure Storage blob container. For more information, see:
 
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities
 
 
       Exports all the device identities in the IoT hub identity registry to an
@@ -3544,7 +4384,7 @@ items:
 
       to an Azure Storage blob container. For more information, see:
 
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities
 
 
       Exports all the device identities in the IoT hub identity registry to an
@@ -3661,7 +4501,7 @@ items:
 
       registry from a blob. For more information, see:
 
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities
 
 
       Import, update, or delete device identities in the IoT hub identity
@@ -3745,7 +4585,7 @@ items:
 
       registry from a blob. For more information, see:
 
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities
 
 
       Import, update, or delete device identities in the IoT hub identity
@@ -3898,29 +4738,13 @@ items:
         - id: resourceName
           type:
             - string
-          description: The name of the IoT hub to create or update.
+          description: The name of the IoT hub.
         - id: iotHubDescription
           type:
             - object
           description: |-
             The IoT hub metadata and security
             metadata.
-        - id: iotHubDescription.subscriptionid
-          type:
-            - string
-          description: |-
-            The subscription
-            identifier.
-        - id: iotHubDescription.resourcegroup
-          type:
-            - string
-          description: >-
-            The name of the resource
-
-            group that contains the IoT hub. A resource group name uniquely
-            identifies
-
-            the resource group within the subscription.
         - id: iotHubDescription.etag
           type:
             - string
@@ -3935,7 +4759,7 @@ items:
         - id: iotHubDescription.properties
           type:
             - object
-          description: ''
+          description: IotHub properties
           optional: true
         - id: iotHubDescription.properties.authorizationPolicies
           type:
@@ -4057,6 +4881,18 @@ items:
             the
 
             built-in eventhub endpoint.
+          optional: true
+        - id: iotHubDescription.properties.routing.fallbackRoute.name
+          type:
+            - string
+          description: >-
+            The name of the route. The name can only include alphanumeric
+            characters,
+
+            periods, underscores, hyphens, has a maximum length of 64
+            characters, and
+
+            must be unique.
           optional: true
         - id: iotHubDescription.properties.routing.fallbackRoute.condition
           type:
@@ -4217,22 +5053,23 @@ items:
         - id: iotHubDescription.sku
           type:
             - object
-          description: ''
+          description: IotHub SKU info
         - id: iotHubDescription.sku.name
           type:
             - string
           description: |-
             The name of the SKU. Possible
-            values include: 'F1', 'S1', 'S2', 'S3'
+            values include: 'F1', 'S1', 'S2', 'S3', 'B1', 'B2', 'B3'
         - id: iotHubDescription.sku.capacity
           type:
             - number
           description: >-
-            The number of provisioned IoT
+            The number of provisioned
 
-            Hub units. See:
+            IoT Hub units. See:
 
             https://docs.microsoft.com/azure/azure-subscription-service-limits#iot-hub-limits.
+          optional: true
         - id: iotHubDescription.location
           type:
             - string
@@ -4246,6 +5083,15 @@ items:
           type:
             - object
           description: Optional Parameters.
+          optional: true
+        - id: options.ifMatch
+          type:
+            - string
+          description: >-
+            ETag of the IoT Hub. Do not specify for
+
+            creating a brand new IoT Hub. Required to update an existing IoT
+            Hub.
           optional: true
         - id: options.customHeaders
           type:
@@ -4327,29 +5173,13 @@ items:
         - id: resourceName
           type:
             - string
-          description: The name of the IoT hub to create or update.
+          description: The name of the IoT hub.
         - id: iotHubDescription
           type:
             - object
           description: |-
             The IoT hub metadata and security
             metadata.
-        - id: iotHubDescription.subscriptionid
-          type:
-            - string
-          description: |-
-            The subscription
-            identifier.
-        - id: iotHubDescription.resourcegroup
-          type:
-            - string
-          description: >-
-            The name of the resource
-
-            group that contains the IoT hub. A resource group name uniquely
-            identifies
-
-            the resource group within the subscription.
         - id: iotHubDescription.etag
           type:
             - string
@@ -4364,7 +5194,7 @@ items:
         - id: iotHubDescription.properties
           type:
             - object
-          description: ''
+          description: IotHub properties
           optional: true
         - id: iotHubDescription.properties.authorizationPolicies
           type:
@@ -4486,6 +5316,18 @@ items:
             the
 
             built-in eventhub endpoint.
+          optional: true
+        - id: iotHubDescription.properties.routing.fallbackRoute.name
+          type:
+            - string
+          description: >-
+            The name of the route. The name can only include alphanumeric
+            characters,
+
+            periods, underscores, hyphens, has a maximum length of 64
+            characters, and
+
+            must be unique.
           optional: true
         - id: iotHubDescription.properties.routing.fallbackRoute.condition
           type:
@@ -4646,22 +5488,23 @@ items:
         - id: iotHubDescription.sku
           type:
             - object
-          description: ''
+          description: IotHub SKU info
         - id: iotHubDescription.sku.name
           type:
             - string
           description: |-
             The name of the SKU. Possible
-            values include: 'F1', 'S1', 'S2', 'S3'
+            values include: 'F1', 'S1', 'S2', 'S3', 'B1', 'B2', 'B3'
         - id: iotHubDescription.sku.capacity
           type:
             - number
           description: >-
-            The number of provisioned IoT
+            The number of provisioned
 
-            Hub units. See:
+            IoT Hub units. See:
 
             https://docs.microsoft.com/azure/azure-subscription-service-limits#iot-hub-limits.
+          optional: true
         - id: iotHubDescription.location
           type:
             - string
@@ -4675,6 +5518,15 @@ items:
           type:
             - object
           description: Optional Parameters.
+          optional: true
+        - id: options.ifMatch
+          type:
+            - string
+          description: >-
+            ETag of the IoT Hub. Do not specify for
+
+            creating a brand new IoT Hub. Required to update an existing IoT
+            Hub.
           optional: true
         - id: options.customHeaders
           type:
@@ -4702,6 +5554,162 @@ items:
         iotHubDescription, options, optionalCallback)
     langs:
       - js
+  - uid: 'azure-arm-iothub.IotHubResource#beginUpdateWithHttpOperationResponse'
+    id: 'azure-arm-iothub.IotHubResource#beginUpdateWithHttpOperationResponse'
+    parent: azure-arm-iothub.IotHubResource
+    name: >-
+      beginUpdateWithHttpOperationResponse(resourceGroupName, resourceName,
+      options)
+    summary: |-
+      Update an existing IoT Hubs tags.
+
+      Update an existing IoT Hub tags. to update other fields use the
+      CreateOrUpdate method
+    fullName: >-
+      azure-arm-iothub.IotHubResource.beginUpdateWithHttpOperationResponse(resourceGroupName,
+      resourceName, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<IotHubDescription>} - The deserialized result
+          object.
+        value: >-
+          {HttpOperationResponse<IotHubDescription>} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: Resource group identifier.
+        - id: resourceName
+          type:
+            - string
+          description: Name of iot hub to update.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.tags
+          type:
+            - object
+          description: Resource tags
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginUpdateWithHttpOperationResponse(resourceGroupName,
+        resourceName, options)
+    langs:
+      - js
+  - uid: 'azure-arm-iothub.IotHubResource#beginUpdate'
+    id: 'azure-arm-iothub.IotHubResource#beginUpdate'
+    parent: azure-arm-iothub.IotHubResource
+    name: 'beginUpdate(resourceGroupName, resourceName, options, optionalCallback)'
+    summary: |-
+      Update an existing IoT Hubs tags.
+
+      Update an existing IoT Hub tags. to update other fields use the
+      CreateOrUpdate method
+    fullName: >-
+      azure-arm-iothub.IotHubResource.beginUpdate(resourceGroupName,
+      resourceName, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{IotHubDescription} - The deserialized result object.'
+        value: '{IotHubDescription} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link IotHubDescription} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link IotHubDescription} for more information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: Resource group identifier.
+        - id: resourceName
+          type:
+            - string
+          description: Name of iot hub to update.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.tags
+          type:
+            - object
+          description: Resource tags
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: >-
+        function beginUpdate(resourceGroupName, resourceName, options,
+        optionalCallback)
+    langs:
+      - js
   - uid: 'azure-arm-iothub.IotHubResource#beginDeleteMethodWithHttpOperationResponse'
     id: 'azure-arm-iothub.IotHubResource#beginDeleteMethodWithHttpOperationResponse'
     parent: azure-arm-iothub.IotHubResource
@@ -4709,7 +5717,7 @@ items:
       beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
       resourceName, options)
     summary: |-
-      Delete an IoT hub.
+      Delete an IoT hub
 
       Delete an IoT hub.
     fullName: >-
@@ -4736,7 +5744,7 @@ items:
         - id: resourceName
           type:
             - string
-          description: The name of the IoT hub to delete.
+          description: The name of the IoT hub.
         - id: options
           type:
             - object
@@ -4765,7 +5773,7 @@ items:
       beginDeleteMethod(resourceGroupName, resourceName, options,
       optionalCallback)
     summary: |-
-      Delete an IoT hub.
+      Delete an IoT hub
 
       Delete an IoT hub.
     fullName: >-
@@ -4814,7 +5822,7 @@ items:
         - id: resourceName
           type:
             - string
-          description: The name of the IoT hub to delete.
+          description: The name of the IoT hub.
         - id: options
           type:
             - object
@@ -4853,7 +5861,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'listBySubscriptionNextWithHttpOperationResponse(nextPageLink, options)'
     summary: |-
-      Get all the IoT hubs in a subscription.
+      Get all the IoT hubs in a subscription
 
       Get all the IoT hubs in a subscription.
     fullName: >-
@@ -4907,7 +5915,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'listBySubscriptionNext(nextPageLink, options, optionalCallback)'
     summary: |-
-      Get all the IoT hubs in a subscription.
+      Get all the IoT hubs in a subscription
 
       Get all the IoT hubs in a subscription.
     fullName: >-
@@ -4993,7 +6001,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'listByResourceGroupNextWithHttpOperationResponse(nextPageLink, options)'
     summary: |-
-      Get all the IoT hubs in a resource group.
+      Get all the IoT hubs in a resource group
 
       Get all the IoT hubs in a resource group.
     fullName: >-
@@ -5047,7 +6055,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'listByResourceGroupNext(nextPageLink, options, optionalCallback)'
     summary: |-
-      Get all the IoT hubs in a resource group.
+      Get all the IoT hubs in a resource group
 
       Get all the IoT hubs in a resource group.
     fullName: >-
@@ -5133,7 +6141,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'getValidSkusNextWithHttpOperationResponse(nextPageLink, options)'
     summary: |-
-      Get the list of valid SKUs for an IoT hub.
+      Get the list of valid SKUs for an IoT hub
 
       Get the list of valid SKUs for an IoT hub.
     fullName: >-
@@ -5187,7 +6195,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'getValidSkusNext(nextPageLink, options, optionalCallback)'
     summary: |-
-      Get the list of valid SKUs for an IoT hub.
+      Get the list of valid SKUs for an IoT hub
 
       Get the list of valid SKUs for an IoT hub.
     fullName: >-
@@ -5276,7 +6284,7 @@ items:
       options)
     summary: |-
       Get a list of the consumer groups in the Event Hub-compatible
-      device-to-cloud endpoint in an IoT hub.
+      device-to-cloud endpoint in an IoT hub
 
       Get a list of the consumer groups in the Event Hub-compatible
       device-to-cloud endpoint in an IoT hub.
@@ -5333,7 +6341,7 @@ items:
     name: 'listEventHubConsumerGroupsNext(nextPageLink, options, optionalCallback)'
     summary: |-
       Get a list of the consumer groups in the Event Hub-compatible
-      device-to-cloud endpoint in an IoT hub.
+      device-to-cloud endpoint in an IoT hub
 
       Get a list of the consumer groups in the Event Hub-compatible
       device-to-cloud endpoint in an IoT hub.
@@ -5424,7 +6432,7 @@ items:
 
       see:
 
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry
 
 
       Get a list of all the jobs in an IoT hub. For more information, see:
@@ -5483,7 +6491,7 @@ items:
 
       see:
 
-      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry
 
 
       Get a list of all the jobs in an IoT hub. For more information, see:
@@ -5570,7 +6578,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'getQuotaMetricsNextWithHttpOperationResponse(nextPageLink, options)'
     summary: |-
-      Get the quota metrics for an IoT hub.
+      Get the quota metrics for an IoT hub
 
       Get the quota metrics for an IoT hub.
     fullName: >-
@@ -5624,7 +6632,7 @@ items:
     parent: azure-arm-iothub.IotHubResource
     name: 'getQuotaMetricsNext(nextPageLink, options, optionalCallback)'
     summary: |-
-      Get the quota metrics for an IoT hub.
+      Get the quota metrics for an IoT hub
 
       Get the quota metrics for an IoT hub.
     fullName: >-
@@ -5703,13 +6711,153 @@ items:
       content: 'function getQuotaMetricsNext(nextPageLink, options, optionalCallback)'
     langs:
       - js
+  - uid: >-
+      azure-arm-iothub.IotHubResource#getEndpointHealthNextWithHttpOperationResponse
+    id: >-
+      azure-arm-iothub.IotHubResource#getEndpointHealthNextWithHttpOperationResponse
+    parent: azure-arm-iothub.IotHubResource
+    name: 'getEndpointHealthNextWithHttpOperationResponse(nextPageLink, options)'
+    summary: |-
+      Get the health for routing endpoints
+
+      Get the health for routing endpoints.
+    fullName: >-
+      azure-arm-iothub.IotHubResource.getEndpointHealthNextWithHttpOperationResponse(nextPageLink,
+      options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<EndpointHealthDataListResult>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<EndpointHealthDataListResult>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function getEndpointHealthNextWithHttpOperationResponse(nextPageLink,
+        options)
+    langs:
+      - js
+  - uid: 'azure-arm-iothub.IotHubResource#getEndpointHealthNext'
+    id: 'azure-arm-iothub.IotHubResource#getEndpointHealthNext'
+    parent: azure-arm-iothub.IotHubResource
+    name: 'getEndpointHealthNext(nextPageLink, options, optionalCallback)'
+    summary: |-
+      Get the health for routing endpoints
+
+      Get the health for routing endpoints.
+    fullName: >-
+      azure-arm-iothub.IotHubResource.getEndpointHealthNext(nextPageLink,
+      options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{EndpointHealthDataListResult} - The deserialized result object.'
+        value: '{EndpointHealthDataListResult} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link EndpointHealthDataListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link EndpointHealthDataListResult} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function getEndpointHealthNext(nextPageLink, options, optionalCallback)'
+    langs:
+      - js
   - uid: 'azure-arm-iothub.IotHubResource#listKeysNextWithHttpOperationResponse'
     id: 'azure-arm-iothub.IotHubResource#listKeysNextWithHttpOperationResponse'
     parent: azure-arm-iothub.IotHubResource
     name: 'listKeysNextWithHttpOperationResponse(nextPageLink, options)'
     summary: |-
       Get the security metadata for an IoT hub. For more information,
-      see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.
+      see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security
 
       Get the security metadata for an IoT hub. For more information, see:
       https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.
@@ -5763,7 +6911,7 @@ items:
     name: 'listKeysNext(nextPageLink, options, optionalCallback)'
     summary: |-
       Get the security metadata for an IoT hub. For more information,
-      see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.
+      see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security
 
       Get the security metadata for an IoT hub. For more information, see:
       https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.

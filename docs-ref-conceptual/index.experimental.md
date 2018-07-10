@@ -27,7 +27,7 @@ ms.topic: hub-page
 					margin-right: 10px;
 
 				">
-				<a class="card" href="https://azure.microsoft.com/en-us/try/app-service/web/?language=nodejs">
+				<a class="card" href="https://azure.microsoft.com/try/app-service/web/?language=nodejs">
 					<br>
 						<div class="cardText">
 						<h3 style="
@@ -105,7 +105,7 @@ ms.topic: hub-page
 				</a>
 			</li>
 			<li>
-				<a class="card" href="https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-node-node-getstarted">
+				<a class="card" href="https://docs.microsoft.com/azure/iot-hub/iot-hub-node-node-getstarted">
 					<img class="cardImage" role="presentation" alt="" src="https://docs.microsoft.com/azure/media/index/IOT_edge_50.svg">
 					<div class="cardText">
 						<h3>Connect and manage IoT devices</h3>
@@ -114,7 +114,7 @@ ms.topic: hub-page
 				</a>
 			</li>
 			<li>
-				<a class="card" href="https://docs.microsoft.com/en-us/vsts/build-release/apps/cd/azure/azure-devops-project-nodejs?toc=%2Fvsts%2Fdeploy-azure%2Ftoc.json&bc=%2Fvsts%2Fdeploy-azure%2Fbreadcrumb%2Ftoc.json&view=vsts">
+				<a class="card" href="https://docs.microsoft.com/vsts/build-release/apps/cd/azure/azure-devops-project-nodejs?toc=%2Fvsts%2Fdeploy-azure%2Ftoc.json&bc=%2Fvsts%2Fdeploy-azure%2Fbreadcrumb%2Ftoc.json&view=vsts">
 					<img class="cardImage" role="presentation" alt="" src="https://docs.microsoft.com/media/logos/logo_vs-team-services.svg">
 					<div class="cardText">
 						<h3>Add CI/CD</h3>
@@ -137,7 +137,7 @@ ms.topic: hub-page
 						<div id="storage1">
 							<div>
 								<h3>Upload files to Azure Storage </h3>
-								<h4>1. Download the Azure CLI (on Windows <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest"> get the MSI</a>) and login.</h4> 
+								<h4>1. Download the Azure CLI (on Windows <a href="https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest"> get the MSI</a>) and login.</h4> 
 								<div class="codeHeader" data-bi-name="code-header"><span class="language">bash</span>
 								</div>
 								<pre><code class="lang-bash">
@@ -222,7 +222,7 @@ main();
 							<div>
 
 								<h3>Get sentiment on any language. </h3>
-								<h4>1. Download the Azure CLI (on Windows <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest"> get the MSI</a>) and login.</h4> 
+								<h4>1. Download the Azure CLI (on Windows <a href="https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest"> get the MSI</a>) and login.</h4> 
 								<div class="codeHeader" data-bi-name="code-header"><span class="language">bash</span>
 								</div>
 								<pre><code class="lang-bash">
@@ -319,7 +319,7 @@ getTextAnalytics.end();
 					margin-right: 10px;
 	
 				">
-				<a class="card" href="https://azure.microsoft.com/en-us/try/app-service/web/?language=nodejs">
+				<a class="card" href="https://azure.microsoft.com/try/app-service/web/?language=nodejs">
 					<br>
 						<div class="cardText">
 						<h3 style="
@@ -340,7 +340,7 @@ getTextAnalytics.end();
 					margin-bottom: 25px;
 					margin-left: 10px;
 				">
-				<a class="card" href="https://docs.microsoft.com/en-us/javascript/api/overview/azure/?view=azure-node-latest">
+				<a class="card" href="https://docs.microsoft.com/javascript/api/overview/azure/?view=azure-node-latest">
 					<br>
 						<div class="cardText">
 						<h3 style="

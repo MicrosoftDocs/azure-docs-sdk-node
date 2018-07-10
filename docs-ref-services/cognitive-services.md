@@ -24,7 +24,7 @@ Returns information about visual content found in an image:
 - Apply adult/racy settings to enable automated restriction of adult content.
 - Identify image types and color schemes in pictures.
 
-[Try Computer Vision](https://azure.microsoft.com/en-us/services/cognitive-services/computer-vision/) for free in your browser.
+[Try Computer Vision](https://azure.microsoft.com/services/cognitive-services/computer-vision/) for free in your browser.
 
 Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
@@ -50,7 +50,7 @@ npm install azure-cognitiveservices-contentmoderator
 
 Detect, identify, analyze, organize, and tag faces in photos. 
 
-[Try the Face API](https://azure.microsoft.com/en-us/services/cognitive-services/face/) in your browser.
+[Try the Face API](https://azure.microsoft.com/services/cognitive-services/face/) in your browser.
 
 Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
@@ -66,7 +66,7 @@ npm install azure-cognitiveservices-face
 
 Retrieve web documents indexed by the Bing Web Search API and narrow down the results by result type, freshness and more. 
 
-[Try the Web Search API](https://azure.microsoft.com/en-us/services/cognitive-services/bing-web-search-api/) in your browser.
+[Try the Web Search API](https://azure.microsoft.com/services/cognitive-services/bing-web-search-api/) in your browser.
 
 Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
@@ -80,7 +80,7 @@ npm install azure-cognitiveservices-websearch
 
 Search for images and get thumbnails, full image URLs, image metadata and more in your results.
 
-[Try the Image Search API](https://azure.microsoft.com/en-us/services/cognitive-services/bing-image-search-api/) in your browser.
+[Try the Image Search API](https://azure.microsoft.com/services/cognitive-services/bing-image-search-api/) in your browser.
 
 Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
@@ -157,7 +157,7 @@ The Text Analytics API is a cloud-based service that provides  natural language 
 - Key phrase extraction
 - Language detection
 
-[Try the Text Analytics API](https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/) in your browser.
+[Try the Text Analytics API](https://azure.microsoft.com/services/cognitive-services/text-analytics/) in your browser.
 
 Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
@@ -172,7 +172,7 @@ npm install azure-cognitiveservices-textanalytics
 
 Perform contextual grammar and spell checking with the Bing Spell Check API.
 
-[Try the Spell Check API](https://azure.microsoft.com/en-us/services/cognitive-services/spell-check/) in your browser.
+[Try the Spell Check API](https://azure.microsoft.com/services/cognitive-services/spell-check/) in your browser.
 
 Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 

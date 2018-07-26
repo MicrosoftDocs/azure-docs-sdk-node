@@ -8,19 +8,22 @@ items:
     type: Class
     children:
       - 'azure-arm-hdinsight.Applications.#ctor'
-      - 'azure-arm-hdinsight.Applications#listWithHttpOperationResponse'
-      - 'azure-arm-hdinsight.Applications#list'
+      - 'azure-arm-hdinsight.Applications#listByClusterWithHttpOperationResponse'
+      - 'azure-arm-hdinsight.Applications#listByCluster'
       - 'azure-arm-hdinsight.Applications#getWithHttpOperationResponse'
       - 'azure-arm-hdinsight.Applications#get'
       - 'azure-arm-hdinsight.Applications#createWithHttpOperationResponse'
       - 'azure-arm-hdinsight.Applications#create'
       - 'azure-arm-hdinsight.Applications#deleteMethodWithHttpOperationResponse'
       - 'azure-arm-hdinsight.Applications#deleteMethod'
+      - 'azure-arm-hdinsight.Applications#beginCreateWithHttpOperationResponse'
+      - 'azure-arm-hdinsight.Applications#beginCreate'
       - >-
         azure-arm-hdinsight.Applications#beginDeleteMethodWithHttpOperationResponse
       - 'azure-arm-hdinsight.Applications#beginDeleteMethod'
-      - 'azure-arm-hdinsight.Applications#listNextWithHttpOperationResponse'
-      - 'azure-arm-hdinsight.Applications#listNext'
+      - >-
+        azure-arm-hdinsight.Applications#listByClusterNextWithHttpOperationResponse
+      - 'azure-arm-hdinsight.Applications#listByClusterNext'
     langs:
       - js
   - id: 'azure-arm-hdinsight.Applications.#ctor'
@@ -39,13 +42,15 @@ items:
       content: new Applications(client)
     langs:
       - js
-  - uid: 'azure-arm-hdinsight.Applications#listWithHttpOperationResponse'
-    id: 'azure-arm-hdinsight.Applications#listWithHttpOperationResponse'
+  - uid: 'azure-arm-hdinsight.Applications#listByClusterWithHttpOperationResponse'
+    id: 'azure-arm-hdinsight.Applications#listByClusterWithHttpOperationResponse'
     parent: azure-arm-hdinsight.Applications
-    name: 'listWithHttpOperationResponse(resourceGroupName, clusterName, options)'
-    summary: Lists all of the applications HDInsight cluster.
+    name: >-
+      listByClusterWithHttpOperationResponse(resourceGroupName, clusterName,
+      options)
+    summary: Lists all of the applications for the HDInsight cluster.
     fullName: >-
-      azure-arm-hdinsight.Applications.listWithHttpOperationResponse(resourceGroupName,
+      azure-arm-hdinsight.Applications.listByClusterWithHttpOperationResponse(resourceGroupName,
       clusterName, options)
     tags:
       - originalTitle: resolve
@@ -86,18 +91,18 @@ items:
           - Promise
         description: A promise is returned
       content: >-
-        function listWithHttpOperationResponse(resourceGroupName, clusterName,
-        options)
+        function listByClusterWithHttpOperationResponse(resourceGroupName,
+        clusterName, options)
     langs:
       - js
-  - uid: 'azure-arm-hdinsight.Applications#list'
-    id: 'azure-arm-hdinsight.Applications#list'
+  - uid: 'azure-arm-hdinsight.Applications#listByCluster'
+    id: 'azure-arm-hdinsight.Applications#listByCluster'
     parent: azure-arm-hdinsight.Applications
-    name: 'list(resourceGroupName, clusterName, options, optionalCallback)'
-    summary: Lists all of the applications HDInsight cluster.
+    name: 'listByCluster(resourceGroupName, clusterName, options, optionalCallback)'
+    summary: Lists all of the applications for the HDInsight cluster.
     fullName: >-
-      azure-arm-hdinsight.Applications.list(resourceGroupName, clusterName,
-      options, optionalCallback)
+      azure-arm-hdinsight.Applications.listByCluster(resourceGroupName,
+      clusterName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -138,7 +143,9 @@ items:
           - function
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: 'function list(resourceGroupName, clusterName, options, optionalCallback)'
+      content: >-
+        function listByCluster(resourceGroupName, clusterName, options,
+        optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-hdinsight.Applications#getWithHttpOperationResponse'
@@ -147,7 +154,7 @@ items:
     name: >-
       getWithHttpOperationResponse(resourceGroupName, clusterName,
       applicationName, options)
-    summary: Lists properties of the specified application.
+    summary: Gets properties of the specified application.
     fullName: >-
       azure-arm-hdinsight.Applications.getWithHttpOperationResponse(resourceGroupName,
       clusterName, applicationName, options)
@@ -200,7 +207,7 @@ items:
     name: >-
       get(resourceGroupName, clusterName, applicationName, options,
       optionalCallback)
-    summary: Lists properties of the specified application.
+    summary: Gets properties of the specified application.
     fullName: >-
       azure-arm-hdinsight.Applications.get(resourceGroupName, clusterName,
       applicationName, options, optionalCallback)
@@ -258,11 +265,11 @@ items:
     parent: azure-arm-hdinsight.Applications
     name: >-
       createWithHttpOperationResponse(resourceGroupName, clusterName,
-      parameters, options)
+      applicationName, parameters, options)
     summary: Creates applications for the HDInsight cluster.
     fullName: >-
       azure-arm-hdinsight.Applications.createWithHttpOperationResponse(resourceGroupName,
-      clusterName, parameters, options)
+      clusterName, applicationName, parameters, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -283,6 +290,10 @@ items:
           type:
             - string
           description: The name of the cluster.
+        - id: applicationName
+          type:
+            - string
+          description: The constant value for the application name.
         - id: parameters
           type:
             - object
@@ -348,19 +359,19 @@ items:
         description: A promise is returned
       content: >-
         function createWithHttpOperationResponse(resourceGroupName, clusterName,
-        parameters, options)
+        applicationName, parameters, options)
     langs:
       - js
   - uid: 'azure-arm-hdinsight.Applications#create'
     id: 'azure-arm-hdinsight.Applications#create'
     parent: azure-arm-hdinsight.Applications
     name: >-
-      create(resourceGroupName, clusterName, parameters, options,
-      optionalCallback)
+      create(resourceGroupName, clusterName, applicationName, parameters,
+      options, optionalCallback)
     summary: Creates applications for the HDInsight cluster.
     fullName: >-
       azure-arm-hdinsight.Applications.create(resourceGroupName, clusterName,
-      parameters, options, optionalCallback)
+      applicationName, parameters, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -381,6 +392,10 @@ items:
           type:
             - string
           description: The name of the cluster.
+        - id: applicationName
+          type:
+            - string
+          description: The constant value for the application name.
         - id: parameters
           type:
             - object
@@ -451,8 +466,8 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function create(resourceGroupName, clusterName, parameters, options,
-        optionalCallback)
+        function create(resourceGroupName, clusterName, applicationName,
+        parameters, options, optionalCallback)
     langs:
       - js
   - uid: 'azure-arm-hdinsight.Applications#deleteMethodWithHttpOperationResponse'
@@ -460,11 +475,11 @@ items:
     parent: azure-arm-hdinsight.Applications
     name: >-
       deleteMethodWithHttpOperationResponse(resourceGroupName, clusterName,
-      options)
+      applicationName, options)
     summary: Deletes the specified application on the HDInsight cluster.
     fullName: >-
       azure-arm-hdinsight.Applications.deleteMethodWithHttpOperationResponse(resourceGroupName,
-      clusterName, options)
+      clusterName, applicationName, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -485,6 +500,10 @@ items:
           type:
             - string
           description: The name of the cluster.
+        - id: applicationName
+          type:
+            - string
+          description: The constant value for the application name.
         - id: options
           type:
             - object
@@ -501,17 +520,19 @@ items:
         description: A promise is returned
       content: >-
         function deleteMethodWithHttpOperationResponse(resourceGroupName,
-        clusterName, options)
+        clusterName, applicationName, options)
     langs:
       - js
   - uid: 'azure-arm-hdinsight.Applications#deleteMethod'
     id: 'azure-arm-hdinsight.Applications#deleteMethod'
     parent: azure-arm-hdinsight.Applications
-    name: 'deleteMethod(resourceGroupName, clusterName, options, optionalCallback)'
+    name: >-
+      deleteMethod(resourceGroupName, clusterName, applicationName, options,
+      optionalCallback)
     summary: Deletes the specified application on the HDInsight cluster.
     fullName: >-
       azure-arm-hdinsight.Applications.deleteMethod(resourceGroupName,
-      clusterName, options, optionalCallback)
+      clusterName, applicationName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -532,6 +553,10 @@ items:
           type:
             - string
           description: The name of the cluster.
+        - id: applicationName
+          type:
+            - string
+          description: The constant value for the application name.
         - id: options
           type:
             - object
@@ -553,8 +578,218 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function deleteMethod(resourceGroupName, clusterName, options,
-        optionalCallback)
+        function deleteMethod(resourceGroupName, clusterName, applicationName,
+        options, optionalCallback)
+    langs:
+      - js
+  - uid: 'azure-arm-hdinsight.Applications#beginCreateWithHttpOperationResponse'
+    id: 'azure-arm-hdinsight.Applications#beginCreateWithHttpOperationResponse'
+    parent: azure-arm-hdinsight.Applications
+    name: >-
+      beginCreateWithHttpOperationResponse(resourceGroupName, clusterName,
+      applicationName, parameters, options)
+    summary: Creates applications for the HDInsight cluster.
+    fullName: >-
+      azure-arm-hdinsight.Applications.beginCreateWithHttpOperationResponse(resourceGroupName,
+      clusterName, applicationName, parameters, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<Application>} - The deserialized result object.'
+        value: '{HttpOperationResponse<Application>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: clusterName
+          type:
+            - string
+          description: The name of the cluster.
+        - id: applicationName
+          type:
+            - string
+          description: The constant value for the application name.
+        - id: parameters
+          type:
+            - object
+          description: The application create request.
+        - id: parameters.computeProfile
+          type:
+            - object
+          description: "The list of roles in the\rcluster."
+          optional: true
+        - id: parameters.computeProfile.roles
+          type:
+            - array
+          description: "The list of roles in the\rcluster."
+          optional: true
+        - id: parameters.installScriptActions
+          type:
+            - array
+          description: "The list of install script\ractions."
+          optional: true
+        - id: parameters.uninstallScriptActions
+          type:
+            - array
+          description: "The list of uninstall\rscript actions."
+          optional: true
+        - id: parameters.httpsEndpoints
+          type:
+            - array
+          description: "The list of application HTTPS\rendpoints."
+          optional: true
+        - id: parameters.sshEndpoints
+          type:
+            - array
+          description: "The list of application SSH\rendpoints."
+          optional: true
+        - id: parameters.applicationType
+          type:
+            - string
+          description: The application type.
+          optional: true
+        - id: parameters.errors
+          type:
+            - array
+          description: The list of errors.
+          optional: true
+        - id: parameters.additionalProperties
+          type:
+            - string
+          description: "The additional properties\rfor application."
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginCreateWithHttpOperationResponse(resourceGroupName,
+        clusterName, applicationName, parameters, options)
+    langs:
+      - js
+  - uid: 'azure-arm-hdinsight.Applications#beginCreate'
+    id: 'azure-arm-hdinsight.Applications#beginCreate'
+    parent: azure-arm-hdinsight.Applications
+    name: >-
+      beginCreate(resourceGroupName, clusterName, applicationName, parameters,
+      options, optionalCallback)
+    summary: Creates applications for the HDInsight cluster.
+    fullName: >-
+      azure-arm-hdinsight.Applications.beginCreate(resourceGroupName,
+      clusterName, applicationName, parameters, options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{Application} - The deserialized result object.'
+        value: '{Application} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link Application} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link Application} for more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: clusterName
+          type:
+            - string
+          description: The name of the cluster.
+        - id: applicationName
+          type:
+            - string
+          description: The constant value for the application name.
+        - id: parameters
+          type:
+            - object
+          description: The application create request.
+        - id: parameters.computeProfile
+          type:
+            - object
+          description: "The list of roles in the\rcluster."
+          optional: true
+        - id: parameters.computeProfile.roles
+          type:
+            - array
+          description: "The list of roles in the\rcluster."
+          optional: true
+        - id: parameters.installScriptActions
+          type:
+            - array
+          description: "The list of install script\ractions."
+          optional: true
+        - id: parameters.uninstallScriptActions
+          type:
+            - array
+          description: "The list of uninstall\rscript actions."
+          optional: true
+        - id: parameters.httpsEndpoints
+          type:
+            - array
+          description: "The list of application HTTPS\rendpoints."
+          optional: true
+        - id: parameters.sshEndpoints
+          type:
+            - array
+          description: "The list of application SSH\rendpoints."
+          optional: true
+        - id: parameters.applicationType
+          type:
+            - string
+          description: The application type.
+          optional: true
+        - id: parameters.errors
+          type:
+            - array
+          description: The list of errors.
+          optional: true
+        - id: parameters.additionalProperties
+          type:
+            - string
+          description: "The additional properties\rfor application."
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function beginCreate(resourceGroupName, clusterName, applicationName,
+        parameters, options, optionalCallback)
     langs:
       - js
   - uid: >-
@@ -564,11 +799,11 @@ items:
     parent: azure-arm-hdinsight.Applications
     name: >-
       beginDeleteMethodWithHttpOperationResponse(resourceGroupName, clusterName,
-      options)
+      applicationName, options)
     summary: Deletes the specified application on the HDInsight cluster.
     fullName: >-
       azure-arm-hdinsight.Applications.beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
-      clusterName, options)
+      clusterName, applicationName, options)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -589,6 +824,10 @@ items:
           type:
             - string
           description: The name of the cluster.
+        - id: applicationName
+          type:
+            - string
+          description: The constant value for the application name.
         - id: options
           type:
             - object
@@ -605,19 +844,19 @@ items:
         description: A promise is returned
       content: >-
         function beginDeleteMethodWithHttpOperationResponse(resourceGroupName,
-        clusterName, options)
+        clusterName, applicationName, options)
     langs:
       - js
   - uid: 'azure-arm-hdinsight.Applications#beginDeleteMethod'
     id: 'azure-arm-hdinsight.Applications#beginDeleteMethod'
     parent: azure-arm-hdinsight.Applications
     name: >-
-      beginDeleteMethod(resourceGroupName, clusterName, options,
-      optionalCallback)
+      beginDeleteMethod(resourceGroupName, clusterName, applicationName,
+      options, optionalCallback)
     summary: Deletes the specified application on the HDInsight cluster.
     fullName: >-
       azure-arm-hdinsight.Applications.beginDeleteMethod(resourceGroupName,
-      clusterName, options, optionalCallback)
+      clusterName, applicationName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
@@ -638,6 +877,10 @@ items:
           type:
             - string
           description: The name of the cluster.
+        - id: applicationName
+          type:
+            - string
+          description: The constant value for the application name.
         - id: options
           type:
             - object
@@ -659,17 +902,19 @@ items:
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function beginDeleteMethod(resourceGroupName, clusterName, options,
-        optionalCallback)
+        function beginDeleteMethod(resourceGroupName, clusterName,
+        applicationName, options, optionalCallback)
     langs:
       - js
-  - uid: 'azure-arm-hdinsight.Applications#listNextWithHttpOperationResponse'
-    id: 'azure-arm-hdinsight.Applications#listNextWithHttpOperationResponse'
+  - uid: >-
+      azure-arm-hdinsight.Applications#listByClusterNextWithHttpOperationResponse
+    id: >-
+      azure-arm-hdinsight.Applications#listByClusterNextWithHttpOperationResponse
     parent: azure-arm-hdinsight.Applications
-    name: 'listNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: Lists all of the applications HDInsight cluster.
+    name: 'listByClusterNextWithHttpOperationResponse(nextPageLink, options)'
+    summary: Lists all of the applications for the HDInsight cluster.
     fullName: >-
-      azure-arm-hdinsight.Applications.listNextWithHttpOperationResponse(nextPageLink,
+      azure-arm-hdinsight.Applications.listByClusterNextWithHttpOperationResponse(nextPageLink,
       options)
     tags:
       - originalTitle: resolve
@@ -705,16 +950,18 @@ items:
         type:
           - Promise
         description: A promise is returned
-      content: 'function listNextWithHttpOperationResponse(nextPageLink, options)'
+      content: >-
+        function listByClusterNextWithHttpOperationResponse(nextPageLink,
+        options)
     langs:
       - js
-  - uid: 'azure-arm-hdinsight.Applications#listNext'
-    id: 'azure-arm-hdinsight.Applications#listNext'
+  - uid: 'azure-arm-hdinsight.Applications#listByClusterNext'
+    id: 'azure-arm-hdinsight.Applications#listByClusterNext'
     parent: azure-arm-hdinsight.Applications
-    name: 'listNext(nextPageLink, options, optionalCallback)'
-    summary: Lists all of the applications HDInsight cluster.
+    name: 'listByClusterNext(nextPageLink, options, optionalCallback)'
+    summary: Lists all of the applications for the HDInsight cluster.
     fullName: >-
-      azure-arm-hdinsight.Applications.listNext(nextPageLink, options,
+      azure-arm-hdinsight.Applications.listByClusterNext(nextPageLink, options,
       optionalCallback)
     tags:
       - originalTitle: resolve
@@ -752,6 +999,6 @@ items:
           - function
           - Promise
         description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
-      content: 'function listNext(nextPageLink, options, optionalCallback)'
+      content: 'function listByClusterNext(nextPageLink, options, optionalCallback)'
     langs:
       - js

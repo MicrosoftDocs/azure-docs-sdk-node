@@ -13,9 +13,9 @@ items:
       - >-
         azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.#ctor
       - >-
-        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethodWithHttpOperationResponse
+        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainersWithHttpOperationResponse
       - >-
-        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethod
+        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainers
       - >-
         azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#getWithHttpOperationResponse
       - >-
@@ -29,17 +29,17 @@ items:
       - >-
         azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#purge
       - >-
-        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainersWithHttpOperationResponse
+        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#updateWithHttpOperationResponse
       - >-
-        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainers
+        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#update
+      - >-
+        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethodWithHttpOperationResponse
+      - >-
+        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethod
       - >-
         azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listWithHttpOperationResponse
       - >-
         azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#list
-      - >-
-        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethodWithHttpOperationResponse
-      - >-
-        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethod
       - >-
         azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginCreateWithHttpOperationResponse
       - >-
@@ -48,6 +48,14 @@ items:
         azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginPurgeWithHttpOperationResponse
       - >-
         azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginPurge
+      - >-
+        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginUpdateWithHttpOperationResponse
+      - >-
+        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginUpdate
+      - >-
+        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethodWithHttpOperationResponse
+      - >-
+        azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethod
       - >-
         azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainersNextWithHttpOperationResponse
       - >-
@@ -79,26 +87,27 @@ items:
     langs:
       - js
   - uid: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethodWithHttpOperationResponse
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainersWithHttpOperationResponse
     id: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethodWithHttpOperationResponse
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainersWithHttpOperationResponse
     parent: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
     name: >-
-      deleteMethodWithHttpOperationResponse(fabricName, protectionContainerName,
-      mappingName, removalInput, options)
-    summary: |-
-      Remove protection container mapping.
-
-      The operation to delete or remove a protection container mapping.
+      listByReplicationProtectionContainersWithHttpOperationResponse(fabricName,
+      protectionContainerName, options)
+    summary: "Gets the list of protection container mappings for a protection\rcontainer.\r\rLists the protection container mappings for a protection container."
     fullName: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.deleteMethodWithHttpOperationResponse(fabricName,
-      protectionContainerName, mappingName, removalInput, options)
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.listByReplicationProtectionContainersWithHttpOperationResponse(fabricName,
+      protectionContainerName, options)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{HttpOperationResponse<null>} - The deserialized result object.'
-        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+        text: >-
+          {HttpOperationResponse<ProtectionContainerMappingCollection>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<ProtectionContainerMappingCollection>} - The
+          deserialized result object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -114,33 +123,6 @@ items:
           type:
             - string
           description: Protection container name.
-        - id: mappingName
-          type:
-            - string
-          description: Protection container mapping name.
-        - id: removalInput
-          type:
-            - object
-          description: Removal input.
-        - id: removalInput.properties
-          type:
-            - object
-          description: |-
-            Configure protection input
-            properties.
-          optional: true
-        - id: removalInput.properties.providerSpecificInput
-          type:
-            - object
-          description: |-
-            Provider
-            specific input for unpairing.
-          optional: true
-        - id: removalInput.properties.providerSpecificInput.instanceType
-          type:
-            - string
-          description: The class type.
-          optional: true
         - id: options
           type:
             - object
@@ -149,67 +131,44 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
           - Promise
         description: A promise is returned
       content: >-
-        function deleteMethodWithHttpOperationResponse(fabricName,
-        protectionContainerName, mappingName, removalInput, options)
+        function
+        listByReplicationProtectionContainersWithHttpOperationResponse(fabricName,
+        protectionContainerName, options)
     langs:
       - js
   - uid: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethod
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainers
     id: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethod
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainers
     parent: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
     name: >-
-      deleteMethod(fabricName, protectionContainerName, mappingName,
-      removalInput, options, optionalCallback)
-    summary: |-
-      Remove protection container mapping.
-
-      The operation to delete or remove a protection container mapping.
+      listByReplicationProtectionContainers(fabricName, protectionContainerName,
+      options, optionalCallback)
+    summary: "Gets the list of protection container mappings for a protection\rcontainer.\r\rLists the protection container mappings for a protection container."
     fullName: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.deleteMethod(fabricName,
-      protectionContainerName, mappingName, removalInput, options,
-      optionalCallback)
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.listByReplicationProtectionContainers(fabricName,
+      protectionContainerName, options, optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: '{null} - The deserialized result object.'
-        value: '{null} - The deserialized result object.'
+        text: >-
+          {ProtectionContainerMappingCollection} - The deserialized result
+          object.
+        value: >-
+          {ProtectionContainerMappingCollection} - The deserialized result
+          object.
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMappingCollection} for\r                     more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMappingCollection} for\r                     more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -221,33 +180,6 @@ items:
           type:
             - string
           description: Protection container name.
-        - id: mappingName
-          type:
-            - string
-          description: Protection container mapping name.
-        - id: removalInput
-          type:
-            - object
-          description: Removal input.
-        - id: removalInput.properties
-          type:
-            - object
-          description: |-
-            Configure protection input
-            properties.
-          optional: true
-        - id: removalInput.properties.providerSpecificInput
-          type:
-            - object
-          description: |-
-            Provider
-            specific input for unpairing.
-          optional: true
-        - id: removalInput.properties.providerSpecificInput.instanceType
-          type:
-            - string
-          description: The class type.
-          optional: true
         - id: options
           type:
             - object
@@ -256,9 +188,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -269,14 +199,10 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function deleteMethod(fabricName, protectionContainerName, mappingName,
-        removalInput, options, optionalCallback)
+        function listByReplicationProtectionContainers(fabricName,
+        protectionContainerName, options, optionalCallback)
     langs:
       - js
   - uid: >-
@@ -288,10 +214,7 @@ items:
     name: >-
       getWithHttpOperationResponse(fabricName, protectionContainerName,
       mappingName, options)
-    summary: |-
-      Gets a protection container mapping/
-
-      Gets the details of a protection container mapping.
+    summary: "Gets a protection container mapping/\r\rGets the details of a protection container mapping."
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.getWithHttpOperationResponse(fabricName,
       protectionContainerName, mappingName, options)
@@ -331,9 +254,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -353,10 +274,7 @@ items:
     name: >-
       get(fabricName, protectionContainerName, mappingName, options,
       optionalCallback)
-    summary: |-
-      Gets a protection container mapping/
-
-      Gets the details of a protection container mapping.
+    summary: "Gets a protection container mapping/\r\rGets the details of a protection container mapping."
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.get(fabricName,
       protectionContainerName, mappingName, options, optionalCallback)
@@ -367,34 +285,8 @@ items:
         value: '{ProtectionContainerMapping} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMapping} for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMapping} for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMapping} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMapping} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -418,9 +310,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -431,11 +321,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function get(fabricName, protectionContainerName, mappingName, options,
         optionalCallback)
@@ -450,10 +336,7 @@ items:
     name: >-
       createWithHttpOperationResponse(fabricName, protectionContainerName,
       mappingName, creationInput, options)
-    summary: |-
-      Create protection container mapping.
-
-      The operation to create a protection container mapping.
+    summary: "Create protection container mapping.\r\rThe operation to create a protection container mapping."
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.createWithHttpOperationResponse(fabricName,
       protectionContainerName, mappingName, creationInput, options)
@@ -492,16 +375,12 @@ items:
         - id: creationInput.properties
           type:
             - object
-          description: |-
-            Configure protection input
-            properties.
+          description: "Configure protection input\rproperties."
           optional: true
         - id: creationInput.properties.targetProtectionContainerId
           type:
             - string
-          description: |-
-            The
-            target unique protection container name.
+          description: "The\rtarget unique protection container name."
           optional: true
         - id: creationInput.properties.policyId
           type:
@@ -511,17 +390,12 @@ items:
         - id: creationInput.properties.providerSpecificInput
           type:
             - object
-          description: |-
-            Provider
-            specific input for pairing.
+          description: "Provider\rspecific input for pairing."
           optional: true
         - id: creationInput.properties.providerSpecificInput.instanceType
           type:
             - string
-          description: |-
-            The class
-            type.
-          optional: true
+          description: Polymorphic Discriminator
         - id: options
           type:
             - object
@@ -530,9 +404,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -552,10 +424,7 @@ items:
     name: >-
       create(fabricName, protectionContainerName, mappingName, creationInput,
       options, optionalCallback)
-    summary: |-
-      Create protection container mapping.
-
-      The operation to create a protection container mapping.
+    summary: "Create protection container mapping.\r\rThe operation to create a protection container mapping."
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.create(fabricName,
       protectionContainerName, mappingName, creationInput, options,
@@ -567,34 +436,8 @@ items:
         value: '{ProtectionContainerMapping} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMapping} for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMapping} for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMapping} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMapping} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -617,16 +460,12 @@ items:
         - id: creationInput.properties
           type:
             - object
-          description: |-
-            Configure protection input
-            properties.
+          description: "Configure protection input\rproperties."
           optional: true
         - id: creationInput.properties.targetProtectionContainerId
           type:
             - string
-          description: |-
-            The
-            target unique protection container name.
+          description: "The\rtarget unique protection container name."
           optional: true
         - id: creationInput.properties.policyId
           type:
@@ -636,17 +475,12 @@ items:
         - id: creationInput.properties.providerSpecificInput
           type:
             - object
-          description: |-
-            Provider
-            specific input for pairing.
+          description: "Provider\rspecific input for pairing."
           optional: true
         - id: creationInput.properties.providerSpecificInput.instanceType
           type:
             - string
-          description: |-
-            The class
-            type.
-          optional: true
+          description: Polymorphic Discriminator
         - id: options
           type:
             - object
@@ -655,9 +489,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -668,11 +500,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function create(fabricName, protectionContainerName, mappingName,
         creationInput, options, optionalCallback)
@@ -687,10 +515,7 @@ items:
     name: >-
       purgeWithHttpOperationResponse(fabricName, protectionContainerName,
       mappingName, options)
-    summary: |-
-      Purge protection container mapping.
-
-      The operation to purge(force delete) a protection container mapping
+    summary: "Purge protection container mapping.\r\rThe operation to purge(force delete) a protection container mapping"
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.purgeWithHttpOperationResponse(fabricName,
       protectionContainerName, mappingName, options)
@@ -726,9 +551,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -748,10 +571,7 @@ items:
     name: >-
       purge(fabricName, protectionContainerName, mappingName, options,
       optionalCallback)
-    summary: |-
-      Purge protection container mapping.
-
-      The operation to purge(force delete) a protection container mapping
+    summary: "Purge protection container mapping.\r\rThe operation to purge(force delete) a protection container mapping"
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.purge(fabricName,
       protectionContainerName, mappingName, options, optionalCallback)
@@ -762,30 +582,8 @@ items:
         value: '{null} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -809,9 +607,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -822,42 +618,34 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function purge(fabricName, protectionContainerName, mappingName,
         options, optionalCallback)
     langs:
       - js
   - uid: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainersWithHttpOperationResponse
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#updateWithHttpOperationResponse
     id: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainersWithHttpOperationResponse
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#updateWithHttpOperationResponse
     parent: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
     name: >-
-      listByReplicationProtectionContainersWithHttpOperationResponse(fabricName,
-      protectionContainerName, options)
-    summary: |-
-      Gets the list of protection container mappings for a protection
-      container.
-
-      Lists the protection container mappings for a protection container.
+      updateWithHttpOperationResponse(fabricName, protectionContainerName,
+      mappingName, updateInput, options)
+    summary: "Update protection container mapping.\r\rThe operation to update protection container mapping."
     fullName: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.listByReplicationProtectionContainersWithHttpOperationResponse(fabricName,
-      protectionContainerName, options)
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.updateWithHttpOperationResponse(fabricName,
+      protectionContainerName, mappingName, updateInput, options)
     tags:
       - originalTitle: resolve
         title: resolve
         text: >-
-          {HttpOperationResponse<ProtectionContainerMappingCollection>} - The
-          deserialized result object.
+          {HttpOperationResponse<ProtectionContainerMapping>} - The deserialized
+          result object.
         value: >-
-          {HttpOperationResponse<ProtectionContainerMappingCollection>} - The
-          deserialized result object.
+          {HttpOperationResponse<ProtectionContainerMapping>} - The deserialized
+          result object.
       - originalTitle: reject
         title: reject
         text: '{Error} - The error object.'
@@ -873,6 +661,28 @@ items:
           type:
             - string
           description: Protection container name.
+        - id: mappingName
+          type:
+            - string
+          description: Protection container mapping name.
+        - id: updateInput
+          type:
+            - object
+          description: Mapping update input.
+        - id: updateInput.properties
+          type:
+            - object
+          description: "Update protection container mapping\rinput properties."
+          optional: true
+        - id: updateInput.properties.providerSpecificInput
+          type:
+            - object
+          description: "Provider\rspecific input for updating protection container mapping."
+          optional: true
+        - id: updateInput.properties.providerSpecificInput.instanceType
+          type:
+            - string
+          description: Polymorphic Discriminator
         - id: options
           type:
             - object
@@ -881,222 +691,73 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
           - Promise
         description: A promise is returned
       content: >-
-        function
-        listByReplicationProtectionContainersWithHttpOperationResponse(fabricName,
-        protectionContainerName, options)
+        function updateWithHttpOperationResponse(fabricName,
+        protectionContainerName, mappingName, updateInput, options)
     langs:
       - js
   - uid: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainers
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#update
     id: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listByReplicationProtectionContainers
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#update
     parent: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
     name: >-
-      listByReplicationProtectionContainers(fabricName, protectionContainerName,
+      update(fabricName, protectionContainerName, mappingName, updateInput,
       options, optionalCallback)
-    summary: |-
-      Gets the list of protection container mappings for a protection
-      container.
-
-      Lists the protection container mappings for a protection container.
+    summary: "Update protection container mapping.\r\rThe operation to update protection container mapping."
     fullName: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.listByReplicationProtectionContainers(fabricName,
-      protectionContainerName, options, optionalCallback)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {ProtectionContainerMappingCollection} - The deserialized result
-          object.
-        value: >-
-          {ProtectionContainerMappingCollection} - The deserialized result
-          object.
-      - originalTitle: reject
-        title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMappingCollection} for
-                               more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMappingCollection} for
-                               more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-    type: Function
-    syntax:
-      parameters:
-        - id: fabricName
-          type:
-            - string
-          description: Fabric name.
-        - id: protectionContainerName
-          type:
-            - string
-          description: Protection container name.
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-        - id: optionalCallback
-          type:
-            - function
-          description: The optional callback.
-          optional: true
-      return:
-        type:
-          - function
-          - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: >-
-        function listByReplicationProtectionContainers(fabricName,
-        protectionContainerName, options, optionalCallback)
-    langs:
-      - js
-  - uid: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listWithHttpOperationResponse
-    id: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listWithHttpOperationResponse
-    parent: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
-    name: listWithHttpOperationResponse(options)
-    summary: |-
-      Gets the list of all protection container mappings in a vault.
-
-      Lists the protection container mappings in the vault.
-    fullName: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.listWithHttpOperationResponse(options)
-    tags:
-      - originalTitle: resolve
-        title: resolve
-        text: >-
-          {HttpOperationResponse<ProtectionContainerMappingCollection>} - The
-          deserialized result object.
-        value: >-
-          {HttpOperationResponse<ProtectionContainerMappingCollection>} - The
-          deserialized result object.
-      - originalTitle: reject
-        title: reject
-        text: '{Error} - The error object.'
-        value: '{Error} - The error object.'
-    type: Function
-    syntax:
-      parameters:
-        - id: options
-          type:
-            - object
-          description: Optional Parameters.
-          optional: true
-        - id: options.customHeaders
-          type:
-            - object
-          description: |-
-            Headers that will be added to the
-            request
-          optional: true
-      return:
-        type:
-          - Promise
-        description: A promise is returned
-      content: function listWithHttpOperationResponse(options)
-    langs:
-      - js
-  - uid: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#list
-    id: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#list
-    parent: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
-    name: 'list(options, optionalCallback)'
-    summary: |-
-      Gets the list of all protection container mappings in a vault.
-
-      Lists the protection container mappings in the vault.
-    fullName: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.list(options,
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.update(fabricName,
+      protectionContainerName, mappingName, updateInput, options,
       optionalCallback)
     tags:
       - originalTitle: resolve
         title: resolve
-        text: >-
-          {ProtectionContainerMappingCollection} - The deserialized result
-          object.
-        value: >-
-          {ProtectionContainerMappingCollection} - The deserialized result
-          object.
+        text: '{ProtectionContainerMapping} - The deserialized result object.'
+        value: '{ProtectionContainerMapping} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMappingCollection} for
-                               more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMappingCollection} for
-                               more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMapping} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMapping} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
+        - id: fabricName
+          type:
+            - string
+          description: Fabric name.
+        - id: protectionContainerName
+          type:
+            - string
+          description: Protection container name.
+        - id: mappingName
+          type:
+            - string
+          description: Protection container mapping name.
+        - id: updateInput
+          type:
+            - object
+          description: Mapping update input.
+        - id: updateInput.properties
+          type:
+            - object
+          description: "Update protection container mapping\rinput properties."
+          optional: true
+        - id: updateInput.properties.providerSpecificInput
+          type:
+            - object
+          description: "Provider\rspecific input for updating protection container mapping."
+          optional: true
+        - id: updateInput.properties.providerSpecificInput.instanceType
+          type:
+            - string
+          description: Polymorphic Discriminator
         - id: options
           type:
             - object
@@ -1105,9 +766,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -1118,29 +777,24 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
-      content: 'function list(options, optionalCallback)'
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function update(fabricName, protectionContainerName, mappingName,
+        updateInput, options, optionalCallback)
     langs:
       - js
   - uid: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethodWithHttpOperationResponse
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethodWithHttpOperationResponse
     id: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethodWithHttpOperationResponse
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethodWithHttpOperationResponse
     parent: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
     name: >-
-      beginDeleteMethodWithHttpOperationResponse(fabricName,
-      protectionContainerName, mappingName, removalInput, options)
-    summary: |-
-      Remove protection container mapping.
-
-      The operation to delete or remove a protection container mapping.
+      deleteMethodWithHttpOperationResponse(fabricName, protectionContainerName,
+      mappingName, removalInput, options)
+    summary: "Remove protection container mapping.\r\rThe operation to delete or remove a protection container mapping."
     fullName: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.beginDeleteMethodWithHttpOperationResponse(fabricName,
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.deleteMethodWithHttpOperationResponse(fabricName,
       protectionContainerName, mappingName, removalInput, options)
     tags:
       - originalTitle: resolve
@@ -1173,16 +827,12 @@ items:
         - id: removalInput.properties
           type:
             - object
-          description: |-
-            Configure protection input
-            properties.
+          description: "Configure protection input\rproperties."
           optional: true
         - id: removalInput.properties.providerSpecificInput
           type:
             - object
-          description: |-
-            Provider
-            specific input for unpairing.
+          description: "Provider\rspecific input for unpairing."
           optional: true
         - id: removalInput.properties.providerSpecificInput.instanceType
           type:
@@ -1197,34 +847,29 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
           - Promise
         description: A promise is returned
       content: >-
-        function beginDeleteMethodWithHttpOperationResponse(fabricName,
+        function deleteMethodWithHttpOperationResponse(fabricName,
         protectionContainerName, mappingName, removalInput, options)
     langs:
       - js
   - uid: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethod
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethod
     id: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethod
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#deleteMethod
     parent: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
     name: >-
-      beginDeleteMethod(fabricName, protectionContainerName, mappingName,
+      deleteMethod(fabricName, protectionContainerName, mappingName,
       removalInput, options, optionalCallback)
-    summary: |-
-      Remove protection container mapping.
-
-      The operation to delete or remove a protection container mapping.
+    summary: "Remove protection container mapping.\r\rThe operation to delete or remove a protection container mapping."
     fullName: >-
-      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.beginDeleteMethod(fabricName,
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.deleteMethod(fabricName,
       protectionContainerName, mappingName, removalInput, options,
       optionalCallback)
     tags:
@@ -1234,30 +879,8 @@ items:
         value: '{null} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -1280,16 +903,12 @@ items:
         - id: removalInput.properties
           type:
             - object
-          description: |-
-            Configure protection input
-            properties.
+          description: "Configure protection input\rproperties."
           optional: true
         - id: removalInput.properties.providerSpecificInput
           type:
             - object
-          description: |-
-            Provider
-            specific input for unpairing.
+          description: "Provider\rspecific input for unpairing."
           optional: true
         - id: removalInput.properties.providerSpecificInput.instanceType
           type:
@@ -1304,9 +923,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -1317,14 +934,103 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
-        function beginDeleteMethod(fabricName, protectionContainerName,
-        mappingName, removalInput, options, optionalCallback)
+        function deleteMethod(fabricName, protectionContainerName, mappingName,
+        removalInput, options, optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listWithHttpOperationResponse
+    id: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#listWithHttpOperationResponse
+    parent: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
+    name: listWithHttpOperationResponse(options)
+    summary: "Gets the list of all protection container mappings in a vault.\r\rLists the protection container mappings in the vault."
+    fullName: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.listWithHttpOperationResponse(options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ProtectionContainerMappingCollection>} - The
+          deserialized result object.
+        value: >-
+          {HttpOperationResponse<ProtectionContainerMappingCollection>} - The
+          deserialized result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: function listWithHttpOperationResponse(options)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#list
+    id: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#list
+    parent: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
+    name: 'list(options, optionalCallback)'
+    summary: "Gets the list of all protection container mappings in a vault.\r\rLists the protection container mappings in the vault."
+    fullName: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.list(options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {ProtectionContainerMappingCollection} - The deserialized result
+          object.
+        value: >-
+          {ProtectionContainerMappingCollection} - The deserialized result
+          object.
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMappingCollection} for\r                     more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMappingCollection} for\r                     more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: 'function list(options, optionalCallback)'
     langs:
       - js
   - uid: >-
@@ -1336,10 +1042,7 @@ items:
     name: >-
       beginCreateWithHttpOperationResponse(fabricName, protectionContainerName,
       mappingName, creationInput, options)
-    summary: |-
-      Create protection container mapping.
-
-      The operation to create a protection container mapping.
+    summary: "Create protection container mapping.\r\rThe operation to create a protection container mapping."
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.beginCreateWithHttpOperationResponse(fabricName,
       protectionContainerName, mappingName, creationInput, options)
@@ -1378,16 +1081,12 @@ items:
         - id: creationInput.properties
           type:
             - object
-          description: |-
-            Configure protection input
-            properties.
+          description: "Configure protection input\rproperties."
           optional: true
         - id: creationInput.properties.targetProtectionContainerId
           type:
             - string
-          description: |-
-            The
-            target unique protection container name.
+          description: "The\rtarget unique protection container name."
           optional: true
         - id: creationInput.properties.policyId
           type:
@@ -1397,17 +1096,12 @@ items:
         - id: creationInput.properties.providerSpecificInput
           type:
             - object
-          description: |-
-            Provider
-            specific input for pairing.
+          description: "Provider\rspecific input for pairing."
           optional: true
         - id: creationInput.properties.providerSpecificInput.instanceType
           type:
             - string
-          description: |-
-            The class
-            type.
-          optional: true
+          description: Polymorphic Discriminator
         - id: options
           type:
             - object
@@ -1416,9 +1110,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -1438,10 +1130,7 @@ items:
     name: >-
       beginCreate(fabricName, protectionContainerName, mappingName,
       creationInput, options, optionalCallback)
-    summary: |-
-      Create protection container mapping.
-
-      The operation to create a protection container mapping.
+    summary: "Create protection container mapping.\r\rThe operation to create a protection container mapping."
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.beginCreate(fabricName,
       protectionContainerName, mappingName, creationInput, options,
@@ -1453,34 +1142,8 @@ items:
         value: '{ProtectionContainerMapping} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMapping} for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMapping} for more
-                               information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMapping} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMapping} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -1503,16 +1166,12 @@ items:
         - id: creationInput.properties
           type:
             - object
-          description: |-
-            Configure protection input
-            properties.
+          description: "Configure protection input\rproperties."
           optional: true
         - id: creationInput.properties.targetProtectionContainerId
           type:
             - string
-          description: |-
-            The
-            target unique protection container name.
+          description: "The\rtarget unique protection container name."
           optional: true
         - id: creationInput.properties.policyId
           type:
@@ -1522,17 +1181,12 @@ items:
         - id: creationInput.properties.providerSpecificInput
           type:
             - object
-          description: |-
-            Provider
-            specific input for pairing.
+          description: "Provider\rspecific input for pairing."
           optional: true
         - id: creationInput.properties.providerSpecificInput.instanceType
           type:
             - string
-          description: |-
-            The class
-            type.
-          optional: true
+          description: Polymorphic Discriminator
         - id: options
           type:
             - object
@@ -1541,9 +1195,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -1554,11 +1206,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function beginCreate(fabricName, protectionContainerName, mappingName,
         creationInput, options, optionalCallback)
@@ -1573,10 +1221,7 @@ items:
     name: >-
       beginPurgeWithHttpOperationResponse(fabricName, protectionContainerName,
       mappingName, options)
-    summary: |-
-      Purge protection container mapping.
-
-      The operation to purge(force delete) a protection container mapping
+    summary: "Purge protection container mapping.\r\rThe operation to purge(force delete) a protection container mapping"
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.beginPurgeWithHttpOperationResponse(fabricName,
       protectionContainerName, mappingName, options)
@@ -1612,9 +1257,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -1634,10 +1277,7 @@ items:
     name: >-
       beginPurge(fabricName, protectionContainerName, mappingName, options,
       optionalCallback)
-    summary: |-
-      Purge protection container mapping.
-
-      The operation to purge(force delete) a protection container mapping
+    summary: "Purge protection container mapping.\r\rThe operation to purge(force delete) a protection container mapping"
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.beginPurge(fabricName,
       protectionContainerName, mappingName, options, optionalCallback)
@@ -1648,30 +1288,8 @@ items:
         value: '{null} - The deserialized result object.'
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {null} [result]   - The deserialized result object if an error did not occur.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
@@ -1695,9 +1313,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -1708,14 +1324,326 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function beginPurge(fabricName, protectionContainerName, mappingName,
         options, optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginUpdateWithHttpOperationResponse
+    id: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginUpdateWithHttpOperationResponse
+    parent: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
+    name: >-
+      beginUpdateWithHttpOperationResponse(fabricName, protectionContainerName,
+      mappingName, updateInput, options)
+    summary: "Update protection container mapping.\r\rThe operation to update protection container mapping."
+    fullName: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.beginUpdateWithHttpOperationResponse(fabricName,
+      protectionContainerName, mappingName, updateInput, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<ProtectionContainerMapping>} - The deserialized
+          result object.
+        value: >-
+          {HttpOperationResponse<ProtectionContainerMapping>} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: fabricName
+          type:
+            - string
+          description: Fabric name.
+        - id: protectionContainerName
+          type:
+            - string
+          description: Protection container name.
+        - id: mappingName
+          type:
+            - string
+          description: Protection container mapping name.
+        - id: updateInput
+          type:
+            - object
+          description: Mapping update input.
+        - id: updateInput.properties
+          type:
+            - object
+          description: "Update protection container mapping\rinput properties."
+          optional: true
+        - id: updateInput.properties.providerSpecificInput
+          type:
+            - object
+          description: "Provider\rspecific input for updating protection container mapping."
+          optional: true
+        - id: updateInput.properties.providerSpecificInput.instanceType
+          type:
+            - string
+          description: Polymorphic Discriminator
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginUpdateWithHttpOperationResponse(fabricName,
+        protectionContainerName, mappingName, updateInput, options)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginUpdate
+    id: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginUpdate
+    parent: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
+    name: >-
+      beginUpdate(fabricName, protectionContainerName, mappingName, updateInput,
+      options, optionalCallback)
+    summary: "Update protection container mapping.\r\rThe operation to update protection container mapping."
+    fullName: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.beginUpdate(fabricName,
+      protectionContainerName, mappingName, updateInput, options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{ProtectionContainerMapping} - The deserialized result object.'
+        value: '{ProtectionContainerMapping} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMapping} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMapping} for more\r                     information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: fabricName
+          type:
+            - string
+          description: Fabric name.
+        - id: protectionContainerName
+          type:
+            - string
+          description: Protection container name.
+        - id: mappingName
+          type:
+            - string
+          description: Protection container mapping name.
+        - id: updateInput
+          type:
+            - object
+          description: Mapping update input.
+        - id: updateInput.properties
+          type:
+            - object
+          description: "Update protection container mapping\rinput properties."
+          optional: true
+        - id: updateInput.properties.providerSpecificInput
+          type:
+            - object
+          description: "Provider\rspecific input for updating protection container mapping."
+          optional: true
+        - id: updateInput.properties.providerSpecificInput.instanceType
+          type:
+            - string
+          description: Polymorphic Discriminator
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function beginUpdate(fabricName, protectionContainerName, mappingName,
+        updateInput, options, optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethodWithHttpOperationResponse
+    id: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethodWithHttpOperationResponse
+    parent: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
+    name: >-
+      beginDeleteMethodWithHttpOperationResponse(fabricName,
+      protectionContainerName, mappingName, removalInput, options)
+    summary: "Remove protection container mapping.\r\rThe operation to delete or remove a protection container mapping."
+    fullName: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.beginDeleteMethodWithHttpOperationResponse(fabricName,
+      protectionContainerName, mappingName, removalInput, options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{HttpOperationResponse<null>} - The deserialized result object.'
+        value: '{HttpOperationResponse<null>} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: fabricName
+          type:
+            - string
+          description: Fabric name.
+        - id: protectionContainerName
+          type:
+            - string
+          description: Protection container name.
+        - id: mappingName
+          type:
+            - string
+          description: Protection container mapping name.
+        - id: removalInput
+          type:
+            - object
+          description: Removal input.
+        - id: removalInput.properties
+          type:
+            - object
+          description: "Configure protection input\rproperties."
+          optional: true
+        - id: removalInput.properties.providerSpecificInput
+          type:
+            - object
+          description: "Provider\rspecific input for unpairing."
+          optional: true
+        - id: removalInput.properties.providerSpecificInput.instanceType
+          type:
+            - string
+          description: The class type.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function beginDeleteMethodWithHttpOperationResponse(fabricName,
+        protectionContainerName, mappingName, removalInput, options)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethod
+    id: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings#beginDeleteMethod
+    parent: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
+    name: >-
+      beginDeleteMethod(fabricName, protectionContainerName, mappingName,
+      removalInput, options, optionalCallback)
+    summary: "Remove protection container mapping.\r\rThe operation to delete or remove a protection container mapping."
+    fullName: >-
+      azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.beginDeleteMethod(fabricName,
+      protectionContainerName, mappingName, removalInput, options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{null} - The deserialized result object.'
+        value: '{null} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {null} [result]   - The deserialized result object if an error did not occur.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+    type: Function
+    syntax:
+      parameters:
+        - id: fabricName
+          type:
+            - string
+          description: Fabric name.
+        - id: protectionContainerName
+          type:
+            - string
+          description: Protection container name.
+        - id: mappingName
+          type:
+            - string
+          description: Protection container mapping name.
+        - id: removalInput
+          type:
+            - object
+          description: Removal input.
+        - id: removalInput.properties
+          type:
+            - object
+          description: "Configure protection input\rproperties."
+          optional: true
+        - id: removalInput.properties.providerSpecificInput
+          type:
+            - object
+          description: "Provider\rspecific input for unpairing."
+          optional: true
+        - id: removalInput.properties.providerSpecificInput.instanceType
+          type:
+            - string
+          description: The class type.
+          optional: true
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: "Headers that will be added to the\rrequest"
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
+      content: >-
+        function beginDeleteMethod(fabricName, protectionContainerName,
+        mappingName, removalInput, options, optionalCallback)
     langs:
       - js
   - uid: >-
@@ -1727,11 +1655,7 @@ items:
     name: >-
       listByReplicationProtectionContainersNextWithHttpOperationResponse(nextPageLink,
       options)
-    summary: |-
-      Gets the list of protection container mappings for a protection
-      container.
-
-      Lists the protection container mappings for a protection container.
+    summary: "Gets the list of protection container mappings for a protection\rcontainer.\r\rLists the protection container mappings for a protection container."
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.listByReplicationProtectionContainersNextWithHttpOperationResponse(nextPageLink,
       options)
@@ -1754,9 +1678,7 @@ items:
         - id: nextPageLink
           type:
             - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
+          description: "The NextLink from the previous successful call\rto List operation."
         - id: options
           type:
             - object
@@ -1765,9 +1687,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -1788,11 +1708,7 @@ items:
     name: >-
       listByReplicationProtectionContainersNext(nextPageLink, options,
       optionalCallback)
-    summary: |-
-      Gets the list of protection container mappings for a protection
-      container.
-
-      Lists the protection container mappings for a protection container.
+    summary: "Gets the list of protection container mappings for a protection\rcontainer.\r\rLists the protection container mappings for a protection container."
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.listByReplicationProtectionContainersNext(nextPageLink,
       options, optionalCallback)
@@ -1807,43 +1723,15 @@ items:
           object.
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMappingCollection} for
-                               more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMappingCollection} for
-                               more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMappingCollection} for\r                     more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMappingCollection} for\r                     more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
         - id: nextPageLink
           type:
             - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
+          description: "The NextLink from the previous successful call\rto List operation."
         - id: options
           type:
             - object
@@ -1852,9 +1740,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -1865,11 +1751,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: >-
         function listByReplicationProtectionContainersNext(nextPageLink,
         options, optionalCallback)
@@ -1882,10 +1764,7 @@ items:
     parent: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
     name: 'listNextWithHttpOperationResponse(nextPageLink, options)'
-    summary: |-
-      Gets the list of all protection container mappings in a vault.
-
-      Lists the protection container mappings in the vault.
+    summary: "Gets the list of all protection container mappings in a vault.\r\rLists the protection container mappings in the vault."
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.listNextWithHttpOperationResponse(nextPageLink,
       options)
@@ -1908,9 +1787,7 @@ items:
         - id: nextPageLink
           type:
             - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
+          description: "The NextLink from the previous successful call\rto List operation."
         - id: options
           type:
             - object
@@ -1919,9 +1796,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
       return:
         type:
@@ -1937,10 +1812,7 @@ items:
     parent: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings
     name: 'listNext(nextPageLink, options, optionalCallback)'
-    summary: |-
-      Gets the list of all protection container mappings in a vault.
-
-      Lists the protection container mappings in the vault.
+    summary: "Gets the list of all protection container mappings in a vault.\r\rLists the protection container mappings in the vault."
     fullName: >-
       azure-arm-recoveryservices-siterecovery.ReplicationProtectionContainerMappings.listNext(nextPageLink,
       options, optionalCallback)
@@ -1955,43 +1827,15 @@ items:
           object.
       - originalTitle: reject
         title: reject
-        text: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMappingCollection} for
-                               more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
-        value: |-
-          {Error} - The error object.
-
-          {function} optionalCallback(err, result, request, response)
-
-                               {Error}  err        - The Error object if an error occurred, null otherwise.
-
-                               {object} [result]   - The deserialized result object if an error did not occur.
-                               See {@link ProtectionContainerMappingCollection} for
-                               more information.
-
-                               {object} [request]  - The HTTP Request object if an error did not occur.
-
-                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        text: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMappingCollection} for\r                     more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
+        value: "{Error} - The error object.\r\r{function} optionalCallback(err, result, request, response)\r\r                     {Error}  err        - The Error object if an error occurred, null otherwise.\r\r                     {object} [result]   - The deserialized result object if an error did not occur.\r                     See {@link ProtectionContainerMappingCollection} for\r                     more information.\r\r                     {object} [request]  - The HTTP Request object if an error did not occur.\r\r                     {stream} [response] - The HTTP Response stream if an error did not occur."
     type: Function
     syntax:
       parameters:
         - id: nextPageLink
           type:
             - string
-          description: |-
-            The NextLink from the previous successful call
-            to List operation.
+          description: "The NextLink from the previous successful call\rto List operation."
         - id: options
           type:
             - object
@@ -2000,9 +1844,7 @@ items:
         - id: options.customHeaders
           type:
             - object
-          description: |-
-            Headers that will be added to the
-            request
+          description: "Headers that will be added to the\rrequest"
           optional: true
         - id: optionalCallback
           type:
@@ -2013,11 +1855,7 @@ items:
         type:
           - function
           - Promise
-        description: |-
-          If a callback was passed as the last parameter
-          then it returns the callback else returns a Promise.
-
-          {Promise} A promise is returned
+        description: "If a callback was passed as the last parameter\rthen it returns the callback else returns a Promise.\r\r{Promise} A promise is returned"
       content: 'function listNext(nextPageLink, options, optionalCallback)'
     langs:
       - js

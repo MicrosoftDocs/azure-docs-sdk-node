@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Analysis Services
+uid: azure.nodejs.sdk.landingpage.services.analysisservices
+
+
+
+
+
 ---
 
 # Azure Analysis Services modules for Node.js

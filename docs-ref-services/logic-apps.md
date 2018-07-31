@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Logic Apps
+uid: azure.nodejs.sdk.landingpage.services.logicapps
+
+
+
+
+
 ---
 
 # Azure Logic Apps modules for Node.js

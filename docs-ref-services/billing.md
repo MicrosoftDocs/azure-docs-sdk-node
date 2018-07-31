@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Billing
+uid: azure.nodejs.sdk.landingpage.services.billing
+
+
+
+
+
 ---
 
 # Azure Billing modules for Node.js

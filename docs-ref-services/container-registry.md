@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Container Registry
+uid: azure.nodejs.sdk.landingpage.services.containerregistry
+
+
+
+
+
 ---
 
 # Azure Container Registry modules for Node.js

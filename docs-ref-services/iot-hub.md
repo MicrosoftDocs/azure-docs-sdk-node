@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: IoT Hub
+uid: azure.nodejs.sdk.landingpage.services.iothub
+
+
+
+
+
 ---
 
 # Azure IoT Hub modules for Node.js

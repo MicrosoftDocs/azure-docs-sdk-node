@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: DNS
+uid: azure.nodejs.sdk.landingpage.services.dns
+
+
+
+
+
 ---
 
 # Azure DNS modules for Node.js

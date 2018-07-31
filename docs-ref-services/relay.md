@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Relay
+uid: azure.nodejs.sdk.landingpage.services.relay
+
+
+
+
+
 ---
 
 # Azure Relay modules for Node.js

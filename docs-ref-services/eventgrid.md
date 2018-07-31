@@ -1,8 +1,8 @@
 ---
 title: Azure Event Grid libraries for Node.js
 description: Reference for Azure Event Grid libraries for Node.js
-author: rloutlaw 
-ms.author: routlaw    
+author: rloutlaw
+ms.author: routlaw
 manager: angerobe
 ms.date: 05/03/2018
 ms.topic: reference
@@ -11,6 +11,12 @@ ms.technology: azure
 ms.devlang: nodejs
 ms.service: event-grid
 ms.custom: devcenter
+uid: azure.nodejs.sdk.landingpage.services.eventgrid
+
+
+
+
+
 ---
 
 # Azure Event Grid libraries for Node.js

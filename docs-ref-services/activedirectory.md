@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: active-directory
+uid: azure.nodejs.sdk.landingpage.services.activedirectory
+
+
+
+
+
 ---
 
 # Azure Active Directory modules for Node.js

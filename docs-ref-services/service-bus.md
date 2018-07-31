@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Service Bus
+uid: azure.nodejs.sdk.landingpage.services.servicebus
+
+
+
+
+
 ---
 
 # Azure Service Bus Modules for Node.js

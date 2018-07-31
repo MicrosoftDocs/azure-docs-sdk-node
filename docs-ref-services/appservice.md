@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: appservice
+uid: azure.nodejs.sdk.landingpage.services.appservice
+
+
+
+
+
 ---
 
 # Azure App Service modules for Node.js

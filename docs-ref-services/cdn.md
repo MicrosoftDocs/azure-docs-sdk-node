@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: CDN
+uid: azure.nodejs.sdk.landingpage.services.cdn
+
+
+
+
+
 ---
 
 # Azure CDN modules for Node.js

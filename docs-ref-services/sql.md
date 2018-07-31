@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: sql-database
+uid: azure.nodejs.sdk.landingpage.services.sql
+
+
+
+
+
 ---
 
 # Azure SQL modules for Node.js

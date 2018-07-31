@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Data Lake Store
+uid: azure.nodejs.sdk.landingpage.services.datalakestore
+
+
+
+
+
 ---
 
 # Azure Data Lake Store modules for Node.js

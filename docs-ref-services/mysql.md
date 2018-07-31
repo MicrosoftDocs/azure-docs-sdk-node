@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: mysql
+uid: azure.nodejs.sdk.landingpage.services.mysql
+
+
+
+
+
 ---
 
 # Azure MySQL modules for Node.js

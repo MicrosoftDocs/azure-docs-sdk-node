@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Cognitive Services
+uid: azure.nodejs.sdk.landingpage.services.cognitiveservices
+
+
+
+
+
 ---
 
 # JavaScript Azure Cognitive Services modules

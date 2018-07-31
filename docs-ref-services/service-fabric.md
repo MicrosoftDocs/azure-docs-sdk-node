@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Service Fabric
+uid: azure.nodejs.sdk.landingpage.services.servicefabric
+
+
+
+
+
 ---
 
 # Azure Service Fabric modules for Node.js

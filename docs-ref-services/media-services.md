@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Media Services
+uid: azure.nodejs.sdk.landingpage.services.mediaservices
+
+
+
+
+
 ---
 
 # Azure Media Services modules for Node.js

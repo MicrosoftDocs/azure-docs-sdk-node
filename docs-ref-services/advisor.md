@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Advisor
+uid: azure.nodejs.sdk.landingpage.services.advisor
+
+
+
+
+
 ---
 
 # Azure Advisor modules for Node.js

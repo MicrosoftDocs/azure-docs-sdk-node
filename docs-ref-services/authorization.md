@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Authorization
+uid: azure.nodejs.sdk.landingpage.services.authorization
+
+
+
+
+
 ---
 
 # Azure Authorization modules for Node.js

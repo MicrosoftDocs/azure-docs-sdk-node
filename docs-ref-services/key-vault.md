@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Key Vault
+uid: azure.nodejs.sdk.landingpage.services.keyvault
+
+
+
+
+
 ---
 
 # Azure Key Vault modules for Node.js

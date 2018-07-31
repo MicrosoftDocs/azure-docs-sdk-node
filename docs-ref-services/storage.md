@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: storage
+uid: azure.nodejs.sdk.landingpage.services.storage
+
+
+
+
+
 ---
 
 # Azure Storage modules for Node.js

@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Commerce
+uid: azure.nodejs.sdk.landingpage.services.commerce
+
+
+
+
+
 ---
 
 # Azure Commerce modules for Node.js

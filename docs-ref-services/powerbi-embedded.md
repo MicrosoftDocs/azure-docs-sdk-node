@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: PowerBI Embedded
+uid: azure.nodejs.sdk.landingpage.services.powerbiembedded
+
+
+
+
+
 ---
 
 # Azure PowerBI Embedded modules for Node.js

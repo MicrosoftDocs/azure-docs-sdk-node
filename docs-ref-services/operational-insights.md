@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Operational Insights
+uid: azure.nodejs.sdk.landingpage.services.operationalinsights
+
+
+
+
+
 ---
 
 # Azure Operational Insights Modules for Node.js

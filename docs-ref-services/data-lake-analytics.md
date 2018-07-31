@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Data Lake Analytics
+uid: azure.nodejs.sdk.landingpage.services.datalakeanalytics
+
+
+
+
+
 ---
 
 # Azure Data Lake Analytics modules for Node.js

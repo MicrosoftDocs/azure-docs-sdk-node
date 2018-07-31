@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: HDInsight
+uid: azure.nodejs.sdk.landingpage.services.hdinsight
+
+
+
+
+
 ---
 
 # Azure HDInsight Modules for Node.js

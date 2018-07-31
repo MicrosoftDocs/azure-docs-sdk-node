@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: compute
+uid: azure.nodejs.sdk.landingpage.services.vms
+
+
+
+
+
 ---
 
 # Azure Virtual Machine Modules for Node.js

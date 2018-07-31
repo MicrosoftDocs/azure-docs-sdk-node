@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: DevTest Labs
+uid: azure.nodejs.sdk.landingpage.services.devtestlabs
+
+
+
+
+
 ---
 
 # Azure DevTest Labs modules for Node.js

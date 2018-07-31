@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Event Hub
+uid: azure.nodejs.sdk.landingpage.services.eventhub
+
+
+
+
+
 ---
 
 # Azure Event Hub modules for Node.js

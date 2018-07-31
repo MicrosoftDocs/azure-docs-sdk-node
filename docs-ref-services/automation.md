@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Automation
+uid: azure.nodejs.sdk.landingpage.services.automation
+
+
+
+
+
 ---
 
 # Azure Automation Modules for Node.js

@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Site Recovery
+uid: azure.nodejs.sdk.landingpage.services.siterecovery
+
+
+
+
+
 ---
 
 # Azure Site Recovery modules for Node.js

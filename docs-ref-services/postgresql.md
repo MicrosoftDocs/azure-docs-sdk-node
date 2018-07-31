@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: postgresql
+uid: azure.nodejs.sdk.landingpage.services.postgresql
+
+
+
+
+
 ---
 
 # Azure PostgreSQL modules for Node.js

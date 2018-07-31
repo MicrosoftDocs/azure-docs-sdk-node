@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Service Map
+uid: azure.nodejs.sdk.landingpage.services.servicemap
+
+
+
+
+
 ---
 
 # Azure Service Map modules for Node.js

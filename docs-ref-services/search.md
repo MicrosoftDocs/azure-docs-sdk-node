@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Search
+uid: azure.nodejs.sdk.landingpage.services.search
+
+
+
+
+
 ---
 
 # Azure Search modules for Node.js

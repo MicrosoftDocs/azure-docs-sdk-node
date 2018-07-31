@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Machine Learning
+uid: azure.nodejs.sdk.landingpage.services.machinelearning
+
+
+
+
+
 ---
 
 # Azure Machine Learning modules for Node.js

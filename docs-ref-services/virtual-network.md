@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Virtual Network
+uid: azure.nodejs.sdk.landingpage.services.virtualnetwork
+
+
+
+
+
 ---
 
 # Azure Virtual Network modules for Node.js

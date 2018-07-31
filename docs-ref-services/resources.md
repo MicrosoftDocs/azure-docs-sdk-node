@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Resources
+uid: azure.nodejs.sdk.landingpage.services.resources
+
+
+
+
+
 ---
 
 # Azure Resource modules for Node.js

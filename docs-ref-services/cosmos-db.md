@@ -10,6 +10,12 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: Cosmos DB
+uid: azure.nodejs.sdk.landingpage.services.cosmosdb
+
+
+
+
+
 ---
 
 # Azure Cosmos DB Modules for Node.js

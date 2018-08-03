@@ -2,20 +2,26 @@
 items:
   - uid: '@azure/cosmos.QueryIterator'
     name: QueryIterator
-    fullName: QueryIterator
+    fullName: QueryIterator<T>
     children:
       - '@azure/cosmos.QueryIterator.current'
       - '@azure/cosmos.QueryIterator.executeNext'
       - '@azure/cosmos.QueryIterator.forEach'
+      - '@azure/cosmos.QueryIterator.getAsyncIterator'
       - '@azure/cosmos.QueryIterator.hasMoreResults'
       - '@azure/cosmos.QueryIterator.nextItem'
-      - '@azure/cosmos.QueryIterator.constructor'
       - '@azure/cosmos.QueryIterator.reset'
       - '@azure/cosmos.QueryIterator.toArray'
     langs:
       - typeScript
     type: class
-    summary: ''
+    summary: >-
+      Represents a QueryIterator Object, an implmenetation of feed or query
+      response that enables
+
+      traversal and iterating over the response
+
+      in the Azure Cosmos DB database service.
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.QueryIterator.current'
     name: current
@@ -25,18 +31,11 @@ items:
       - typeScript
     summary: Retrieve the current element on the QueryIterator.
     syntax:
-      content: 'function current(callback?: QueryIteratorCallback)'
-      parameters:
-        - id: callback
-          type:
-            - '@azure/cosmos.QueryIteratorCallback'
-          description: |
-            Function to execute for the current element. \
-            the function takes two parameters error, element.
-          optional: true
+      content: function current()
+      parameters: []
       return:
         type:
-          - Promise<@azure/cosmos.Response<any>>
+          - Promise<@azure/cosmos.Response<T>>
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.QueryIterator.executeNext'
     name: executeNext
@@ -48,18 +47,11 @@ items:
       Retrieve the next batch of the feed and pass them as an array to a
       function
     syntax:
-      content: 'function executeNext(callback?: QueryIteratorCallback)'
-      parameters:
-        - id: callback
-          type:
-            - '@azure/cosmos.QueryIteratorCallback'
-          description: >
-            Function execute on the feed response, takes two parameters error,
-            resourcesList
-          optional: true
+      content: function executeNext()
+      parameters: []
       return:
         type:
-          - Promise<@azure/cosmos.Response<any>>
+          - Promise<@azure/cosmos.Response<T>>
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.QueryIterator.forEach'
     name: forEach
@@ -67,22 +59,52 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Execute a provided function once per feed element.
+    summary: |-
+      Calls a specified callback for each item returned from the query.
+      Runs serially; each callback blocks the next.
     syntax:
-      content: 'function forEach(callback: QueryIteratorCallback)'
+      content: >-
+        function forEach(callback: (result: T, headers?: IHeaders, index?:
+        number) => boolean | void)
       parameters:
         - id: callback
           type:
-            - '@azure/cosmos.QueryIteratorCallback'
-          description: >
-            Function to execute for each element. \
+            - '(result: T, headers?: IHeaders, index?: number) => boolean | void'
+          description: |
+            Specified callback.
+            First param is the result,
+            second param (optional) is the current headers object state,
+            third param (optional) is current index.
+            No more callbacks will be called if one of them results false.
+      return:
+        type:
+          - Promise<void>
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.QueryIterator.getAsyncIterator'
+    name: getAsyncIterator
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |
+      Gets an async iterator that will yield results until completion.
+      NOTE: AsyncIterators are a very new feature and you might need to
+      use polyfils/etc. in order to use them in your code.
 
-            the function takes two parameters error, element.
+      If you're using TypeScript, you can use the following polyfill as long
+      as you target ES6 or higher and are running on Node 6 or higher.
 
-            Note: the last element the callback will be called on will be
-            undefined.
-
-            If the callback explicitly returned false, the loop gets stopped.
+      ```typescript
+      if (!Symbol || !Symbol.asyncIterator) {
+        (Symbol as any).asyncIterator = Symbol.for("Symbol.asyncIterator");
+      }
+      ```
+    syntax:
+      content: function getAsyncIterator()
+      parameters: []
+      return:
+        type:
+          - AsyncIterable<@azure/cosmos.Response<T>>
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.QueryIterator.hasMoreResults'
     name: hasMoreResults
@@ -100,8 +122,7 @@ items:
     package: '@azure/cosmos'
     deprecated:
       content: >-
-        Instead check if callback(undefined, undefined) is invoked by
-        nextItem(callback) or current(callback)
+        Instead check if nextItem() or current() returns undefined.
 
 
         Determine if there are still remaining resources to processs based on
@@ -116,63 +137,11 @@ items:
       - typeScript
     summary: Execute a provided function on the next element in the QueryIterator.
     syntax:
-      content: 'function nextItem(callback?: QueryIteratorCallback)'
-      parameters:
-        - id: callback
-          type:
-            - '@azure/cosmos.QueryIteratorCallback'
-          description: |
-            Function to execute for each element. \
-            the function takes two parameters error, element.
-          optional: true
+      content: function nextItem()
+      parameters: []
       return:
         type:
-          - Promise<@azure/cosmos.Response<any>>
-    package: '@azure/cosmos'
-  - uid: '@azure/cosmos.QueryIterator.constructor'
-    name: QueryIterator
-    children: []
-    type: constructor
-    langs:
-      - typeScript
-    summary: >-
-      Represents a QueryIterator Object, an implmenetation of feed or query
-      response that enables \
-
-      traversal and iterating over the response
-
-      in the Azure Cosmos DB database service.
-    syntax:
-      content: >-
-        new QueryIterator(documentclient: DocumentClient, query: SqlQuerySpec |
-        string, options: any, fetchFunctions: FetchFunctionCallback |
-        FetchFunctionCallback[], resourceLink?: string | string[])
-      parameters:
-        - id: documentclient
-          type:
-            - '@azure/cosmos.DocumentClient'
-          description: The documentclient object.
-        - id: query
-          type:
-            - '@azure/cosmos.SqlQuerySpec | string'
-          description: A SQL query.
-        - id: options
-          type:
-            - any
-          description: Represents the feed options.
-        - id: fetchFunctions
-          type:
-            - >-
-              @azure/cosmos.FetchFunctionCallback |
-              @azure/cosmos.FetchFunctionCallback[]
-          description: |-
-            A function to retrieve each page of data. \
-            An array of functions may be used to query more than one partition.
-        - id: resourceLink
-          type:
-            - 'string | string[]'
-          description: ''
-          optional: true
+          - Promise<@azure/cosmos.Response<T>>
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.QueryIterator.reset'
     name: reset
@@ -197,66 +166,37 @@ items:
       Retrieve all the elements of the feed and pass them as an array to a
       function
     syntax:
-      content: 'function toArray(callback?: QueryIteratorCallback)'
-      parameters:
-        - id: callback
-          type:
-            - '@azure/cosmos.QueryIteratorCallback'
-          description: >
-            Function execute on the feed response, takes two parameters error,
-            resourcesList
-          optional: true
+      content: function toArray()
+      parameters: []
       return:
         type:
-          - 'Promise<@azure/cosmos.Response<any[]>>'
+          - 'Promise<@azure/cosmos.Response<T[]>>'
     package: '@azure/cosmos'
 references:
-  - uid: '@azure/cosmos.DocumentClient'
-    spec.typeScript:
-      - name: DocumentClient
-        fullName: DocumentClient
-        uid: '@azure/cosmos.DocumentClient'
-  - uid: '@azure/cosmos.SqlQuerySpec | string'
-    spec.typeScript:
-      - name: SqlQuerySpec
-        fullName: SqlQuerySpec
-        uid: '@azure/cosmos.SqlQuerySpec'
-      - name: ' | string'
-        fullName: ' | string'
-  - uid: >-
-      @azure/cosmos.FetchFunctionCallback |
-      @azure/cosmos.FetchFunctionCallback[]
-    spec.typeScript:
-      - name: FetchFunctionCallback
-        fullName: FetchFunctionCallback
-        uid: '@azure/cosmos.FetchFunctionCallback'
-      - name: ' | '
-        fullName: ' | '
-      - name: FetchFunctionCallback
-        fullName: FetchFunctionCallback
-        uid: '@azure/cosmos.FetchFunctionCallback'
-      - name: '[]'
-        fullName: '[]'
-  - uid: '@azure/cosmos.QueryIteratorCallback'
-    spec.typeScript:
-      - name: QueryIteratorCallback
-        fullName: QueryIteratorCallback
-        uid: '@azure/cosmos.QueryIteratorCallback'
-  - uid: Promise<@azure/cosmos.Response<any>>
+  - uid: Promise<@azure/cosmos.Response<T>>
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
       - name: Response
         fullName: Response
         uid: '@azure/cosmos.Response'
-      - name: <any>>
-        fullName: <any>>
-  - uid: 'Promise<@azure/cosmos.Response<any[]>>'
+      - name: <T>>
+        fullName: <T>>
+  - uid: AsyncIterable<@azure/cosmos.Response<T>>
+    spec.typeScript:
+      - name: AsyncIterable<
+        fullName: AsyncIterable<
+      - name: Response
+        fullName: Response
+        uid: '@azure/cosmos.Response'
+      - name: <T>>
+        fullName: <T>>
+  - uid: 'Promise<@azure/cosmos.Response<T[]>>'
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
       - name: Response
         fullName: Response
         uid: '@azure/cosmos.Response'
-      - name: '<any[]>>'
-        fullName: '<any[]>>'
+      - name: '<T[]>>'
+        fullName: '<T[]>>'

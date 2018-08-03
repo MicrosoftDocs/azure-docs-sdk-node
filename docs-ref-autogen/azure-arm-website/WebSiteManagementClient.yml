@@ -24,6 +24,9 @@ items:
         azure-arm-website.WebSiteManagementClient#updateSourceControlWithHttpOperationResponse
       - 'azure-arm-website.WebSiteManagementClient#updateSourceControl'
       - >-
+        azure-arm-website.WebSiteManagementClient#listBillingMetersWithHttpOperationResponse
+      - 'azure-arm-website.WebSiteManagementClient#listBillingMeters'
+      - >-
         azure-arm-website.WebSiteManagementClient#checkNameAvailabilityWithHttpOperationResponse
       - 'azure-arm-website.WebSiteManagementClient#checkNameAvailability'
       - >-
@@ -57,6 +60,9 @@ items:
       - >-
         azure-arm-website.WebSiteManagementClient#listSourceControlsNextWithHttpOperationResponse
       - 'azure-arm-website.WebSiteManagementClient#listSourceControlsNext'
+      - >-
+        azure-arm-website.WebSiteManagementClient#listBillingMetersNextWithHttpOperationResponse
+      - 'azure-arm-website.WebSiteManagementClient#listBillingMetersNext'
       - >-
         azure-arm-website.WebSiteManagementClient#listGeoRegionsNextWithHttpOperationResponse
       - 'azure-arm-website.WebSiteManagementClient#listGeoRegionsNext'
@@ -122,21 +128,22 @@ items:
         - id: options.acceptLanguage
           type:
             - string
-          description: Gets or sets the preferred language for the response.
+          description: The preferred language for the response.
           optional: true
         - id: options.longRunningOperationRetryTimeout
           type:
             - number
           description: >-
-            Gets or sets the retry timeout in seconds for Long Running
-            Operations. Default value is 30.
+            The retry timeout in seconds for Long Running Operations. Default
+            value is 30.
           optional: true
         - id: options.generateClientRequestId
           type:
             - boolean
           description: >-
-            When set to true a unique x-ms-client-request-id value is generated
-            and included in each request. Default is true.
+            Whether a unique x-ms-client-request-id should be generated. When
+            set to true a unique x-ms-client-request-id value is generated and
+            included in each request. Default is true.
           optional: true
       content: >-
         new WebSiteManagementClient(credentials, subscriptionId, baseUri,
@@ -291,11 +298,6 @@ items:
           type:
             - object
           description: Details of publishing user
-        - id: userDetails.userName
-          type:
-            - string
-          description: Username
-          optional: true
         - id: userDetails.publishingUserName
           type:
             - string
@@ -320,6 +322,11 @@ items:
           description: |-
             Password hash salt
             used for publishing.
+          optional: true
+        - id: userDetails.scmUri
+          type:
+            - string
+          description: Url of SCM site.
           optional: true
         - id: userDetails.kind
           type:
@@ -398,11 +405,6 @@ items:
           type:
             - object
           description: Details of publishing user
-        - id: userDetails.userName
-          type:
-            - string
-          description: Username
-          optional: true
         - id: userDetails.publishingUserName
           type:
             - string
@@ -427,6 +429,11 @@ items:
           description: |-
             Password hash salt
             used for publishing.
+          optional: true
+        - id: userDetails.scmUri
+          type:
+            - string
+          description: Url of SCM site.
           optional: true
         - id: userDetails.kind
           type:
@@ -760,13 +767,6 @@ items:
           type:
             - object
           description: Source control token information
-        - id: requestMessage.sourceControlName
-          type:
-            - string
-          description: |-
-            Name or source control
-            type.
-          optional: true
         - id: requestMessage.token
           type:
             - string
@@ -870,13 +870,6 @@ items:
           type:
             - object
           description: Source control token information
-        - id: requestMessage.sourceControlName
-          type:
-            - string
-          description: |-
-            Name or source control
-            type.
-          optional: true
         - id: requestMessage.token
           type:
             - string
@@ -931,6 +924,155 @@ items:
       content: >-
         function updateSourceControl(sourceControlType, requestMessage, options,
         optionalCallback)
+    langs:
+      - js
+  - uid: >-
+      azure-arm-website.WebSiteManagementClient#listBillingMetersWithHttpOperationResponse
+    id: >-
+      azure-arm-website.WebSiteManagementClient#listBillingMetersWithHttpOperationResponse
+    parent: azure-arm-website.WebSiteManagementClient
+    name: listBillingMetersWithHttpOperationResponse(options)
+    summary: |-
+      Gets a list of meters for a given location.
+
+      Gets a list of meters for a given location.
+    fullName: >-
+      azure-arm-website.WebSiteManagementClient.listBillingMetersWithHttpOperationResponse(options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<BillingMeterCollection>} - The deserialized
+          result object.
+        value: >-
+          {HttpOperationResponse<BillingMeterCollection>} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.billingLocation
+          type:
+            - string
+          description: |-
+            Azure Location of billable
+            resource
+          optional: true
+        - id: options.osType
+          type:
+            - string
+          description: App Service OS type meters used for
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: function listBillingMetersWithHttpOperationResponse(options)
+    langs:
+      - js
+  - uid: 'azure-arm-website.WebSiteManagementClient#listBillingMeters'
+    id: 'azure-arm-website.WebSiteManagementClient#listBillingMeters'
+    parent: azure-arm-website.WebSiteManagementClient
+    name: 'listBillingMeters(options, optionalCallback)'
+    summary: |-
+      Gets a list of meters for a given location.
+
+      Gets a list of meters for a given location.
+    fullName: >-
+      azure-arm-website.WebSiteManagementClient.listBillingMeters(options,
+      optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{BillingMeterCollection} - The deserialized result object.'
+        value: '{BillingMeterCollection} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link BillingMeterCollection} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link BillingMeterCollection} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.billingLocation
+          type:
+            - string
+          description: |-
+            Azure Location of billable
+            resource
+          optional: true
+        - id: options.osType
+          type:
+            - string
+          description: App Service OS type meters used for
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function listBillingMeters(options, optionalCallback)'
     langs:
       - js
   - uid: >-
@@ -1264,7 +1406,7 @@ items:
             Possible values include: 'Free', 'Shared', 'Basic', 'Standard',
             'Premium',
 
-            'PremiumV2', 'Dynamic', 'Isolated'
+            'Dynamic', 'Isolated', 'PremiumV2'
           optional: true
         - id: options.linuxWorkersEnabled
           type:
@@ -1272,6 +1414,13 @@ items:
           description: |-
             Specify <code>true</code> if
             you want to filter to only regions that support Linux workers.
+          optional: true
+        - id: options.xenonWorkersEnabled
+          type:
+            - boolean
+          description: |-
+            Specify <code>true</code> if
+            you want to filter to only regions that support Xenon workers.
           optional: true
         - id: options.customHeaders
           type:
@@ -1348,7 +1497,7 @@ items:
             Possible values include: 'Free', 'Shared', 'Basic', 'Standard',
             'Premium',
 
-            'PremiumV2', 'Dynamic', 'Isolated'
+            'Dynamic', 'Isolated', 'PremiumV2'
           optional: true
         - id: options.linuxWorkersEnabled
           type:
@@ -1356,6 +1505,13 @@ items:
           description: |-
             Specify <code>true</code> if
             you want to filter to only regions that support Linux workers.
+          optional: true
+        - id: options.xenonWorkersEnabled
+          type:
+            - boolean
+          description: |-
+            Specify <code>true</code> if
+            you want to filter to only regions that support Xenon workers.
           optional: true
         - id: options.customHeaders
           type:
@@ -2214,6 +2370,13 @@ items:
             Name of App Service
             Environment where app or App Service plan should be created.
           optional: true
+        - id: validateRequest.isXenon
+          type:
+            - boolean
+          description: |-
+            <code>true</code> if App Service
+            plan is running as a windows container
+          optional: true
         - id: options
           type:
             - object
@@ -2347,6 +2510,13 @@ items:
           description: |-
             Name of App Service
             Environment where app or App Service plan should be created.
+          optional: true
+        - id: validateRequest.isXenon
+          type:
+            - boolean
+          description: |-
+            <code>true</code> if App Service
+            plan is running as a windows container
           optional: true
         - id: options
           type:
@@ -2687,6 +2857,146 @@ items:
 
           {Promise} A promise is returned
       content: 'function listSourceControlsNext(nextPageLink, options, optionalCallback)'
+    langs:
+      - js
+  - uid: >-
+      azure-arm-website.WebSiteManagementClient#listBillingMetersNextWithHttpOperationResponse
+    id: >-
+      azure-arm-website.WebSiteManagementClient#listBillingMetersNextWithHttpOperationResponse
+    parent: azure-arm-website.WebSiteManagementClient
+    name: 'listBillingMetersNextWithHttpOperationResponse(nextPageLink, options)'
+    summary: |-
+      Gets a list of meters for a given location.
+
+      Gets a list of meters for a given location.
+    fullName: >-
+      azure-arm-website.WebSiteManagementClient.listBillingMetersNextWithHttpOperationResponse(nextPageLink,
+      options)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: >-
+          {HttpOperationResponse<BillingMeterCollection>} - The deserialized
+          result object.
+        value: >-
+          {HttpOperationResponse<BillingMeterCollection>} - The deserialized
+          result object.
+      - originalTitle: reject
+        title: reject
+        text: '{Error} - The error object.'
+        value: '{Error} - The error object.'
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+      return:
+        type:
+          - Promise
+        description: A promise is returned
+      content: >-
+        function listBillingMetersNextWithHttpOperationResponse(nextPageLink,
+        options)
+    langs:
+      - js
+  - uid: 'azure-arm-website.WebSiteManagementClient#listBillingMetersNext'
+    id: 'azure-arm-website.WebSiteManagementClient#listBillingMetersNext'
+    parent: azure-arm-website.WebSiteManagementClient
+    name: 'listBillingMetersNext(nextPageLink, options, optionalCallback)'
+    summary: |-
+      Gets a list of meters for a given location.
+
+      Gets a list of meters for a given location.
+    fullName: >-
+      azure-arm-website.WebSiteManagementClient.listBillingMetersNext(nextPageLink,
+      options, optionalCallback)
+    tags:
+      - originalTitle: resolve
+        title: resolve
+        text: '{BillingMeterCollection} - The deserialized result object.'
+        value: '{BillingMeterCollection} - The deserialized result object.'
+      - originalTitle: reject
+        title: reject
+        text: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link BillingMeterCollection} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+        value: |-
+          {Error} - The error object.
+
+          {function} optionalCallback(err, result, request, response)
+
+                               {Error}  err        - The Error object if an error occurred, null otherwise.
+
+                               {object} [result]   - The deserialized result object if an error did not occur.
+                               See {@link BillingMeterCollection} for more
+                               information.
+
+                               {object} [request]  - The HTTP Request object if an error did not occur.
+
+                               {stream} [response] - The HTTP Response stream if an error did not occur.
+    type: Function
+    syntax:
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |-
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - object
+          description: Optional Parameters.
+          optional: true
+        - id: options.customHeaders
+          type:
+            - object
+          description: |-
+            Headers that will be added to the
+            request
+          optional: true
+        - id: optionalCallback
+          type:
+            - function
+          description: The optional callback.
+          optional: true
+      return:
+        type:
+          - function
+          - Promise
+        description: |-
+          If a callback was passed as the last parameter
+          then it returns the callback else returns a Promise.
+
+          {Promise} A promise is returned
+      content: 'function listBillingMetersNext(nextPageLink, options, optionalCallback)'
     langs:
       - js
   - uid: >-

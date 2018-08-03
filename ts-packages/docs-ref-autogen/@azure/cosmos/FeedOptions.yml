@@ -14,11 +14,12 @@ items:
       - '@azure/cosmos.FeedOptions.maxDegreeOfParallelism'
       - '@azure/cosmos.FeedOptions.maxItemCount'
       - '@azure/cosmos.FeedOptions.partitionKey'
+      - '@azure/cosmos.FeedOptions.populateQueryMetrics'
       - '@azure/cosmos.FeedOptions.sessionToken'
     langs:
       - typeScript
     type: interface
-    summary: The feed options
+    summary: The feed options and query methods.
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.FeedOptions.accessCondition'
     name: accessCondition
@@ -27,13 +28,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Conditions Associated with the request.
     optional: true
     syntax:
-      content: 'accessCondition?: any'
+      content: 'accessCondition?: function'
       return:
         type:
-          - any
+          - function
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.FeedOptions.a_im'
     name: a_im
@@ -42,7 +43,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Indicates a change feed request. Must be set to "Incremental feed", or
+      omitted otherwise.
     optional: true
     syntax:
       content: 'a_im?: string'
@@ -57,7 +60,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Opaque token for continuing the enumeration.
     optional: true
     syntax:
       content: 'continuation?: string'
@@ -72,7 +75,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      DisableRUPerMinuteUsage is used to enable/disable Request
+      Units(RUs)/minute capacity to serve
+
+      the request if regular provisioned RUs/second is exhausted.
     optional: true
     syntax:
       content: 'disableRUPerMinuteUsage?: boolean'
@@ -87,7 +94,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >
+      A value indicating whether users are enabled to send more than one request
+      to execute the query in the Azure Cosmos DB database service.
+
+      More than one request is necessary if the query is not scoped to single
+      partition key value.
     optional: true
     syntax:
       content: 'enableCrossPartitionQuery?: boolean'
@@ -102,7 +114,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Allow scan on the queries which couldn't be served as indexing was opted
+      out on the requested paths.
     optional: true
     syntax:
       content: 'enableScanInQuery?: boolean'
@@ -117,7 +131,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      (Advanced use case) Initial headers to start with when sending requests to
+      Cosmos
     optional: true
     syntax:
       content: 'initialHeaders?: IHeaders'
@@ -132,7 +148,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The maximum number of concurrent operations that run client side during
+      parallel query execution in the
+
+      Azure Cosmos DB database service. Negative values make the system
+      automatically decides the number of
+
+      concurrent operations to run.
     optional: true
     syntax:
       content: 'maxDegreeOfParallelism?: number'
@@ -147,7 +170,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Max number of items to be returned in the enumeration operation.
     optional: true
     syntax:
       content: 'maxItemCount?: number'
@@ -162,13 +185,30 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Specifies a partition key definition for a particular path in the Azure
+      Cosmos DB database service.
     optional: true
     syntax:
       content: 'partitionKey?: string'
       return:
         type:
           - string
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.FeedOptions.populateQueryMetrics'
+    name: populateQueryMetrics
+    fullName: populateQueryMetrics
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Enable returning query metrics in response headers
+    optional: true
+    syntax:
+      content: 'populateQueryMetrics?: boolean'
+      return:
+        type:
+          - boolean
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.FeedOptions.sessionToken'
     name: sessionToken
@@ -177,7 +217,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Token for use with Session consistency.
     optional: true
     syntax:
       content: 'sessionToken?: string'

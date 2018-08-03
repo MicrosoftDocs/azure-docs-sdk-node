@@ -7,6 +7,8 @@ items:
       - azure-event-hubs.CbsClient.constructor
       - azure-event-hubs.CbsClient.cbsLock
       - azure-event-hubs.CbsClient.close
+      - azure-event-hubs.CbsClient.connection
+      - azure-event-hubs.CbsClient.connectionLock
       - azure-event-hubs.CbsClient.endpoint
       - azure-event-hubs.CbsClient.init
       - azure-event-hubs.CbsClient.negotiateClaim
@@ -24,11 +26,15 @@ items:
       - typeScript
     summary: ''
     syntax:
-      content: 'new CbsClient(context: ConnectionContext)'
+      content: 'new CbsClient(connection: Connection, connectionLock: string)'
       parameters:
-        - id: context
+        - id: connection
           type:
-            - azure-event-hubs.ConnectionContext
+            - azure-event-hubs.Connection
+          description: ''
+        - id: connectionLock
+          type:
+            - string
           description: ''
     package: azure-event-hubs
   - uid: azure-event-hubs.CbsClient.cbsLock
@@ -52,7 +58,7 @@ items:
     langs:
       - typeScript
     summary: |-
-      Closes the AMQP cbs session to the Event Hub for this client,
+      Closes the AMQP cbs session to the EventHub/ServiceBus for this client,
       returning a promise that will be resolved when disconnection is completed.
     syntax:
       content: function close()
@@ -60,6 +66,34 @@ items:
       return:
         type:
           - Promise<void>
+    package: azure-event-hubs
+  - uid: azure-event-hubs.CbsClient.connection
+    name: connection
+    fullName: connection
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'connection: Connection'
+      return:
+        type:
+          - azure-event-hubs.Connection
+    package: azure-event-hubs
+  - uid: azure-event-hubs.CbsClient.connectionLock
+    name: connectionLock
+    fullName: connectionLock
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'connectionLock: string'
+      return:
+        type:
+          - string
     package: azure-event-hubs
   - uid: azure-event-hubs.CbsClient.endpoint
     name: endpoint
@@ -97,7 +131,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Negotiates the CBS claim with the EventHub Service.
+    summary: Negotiates the CBS claim with the EventHub/ServiceBus Service.
     syntax:
       content: 'function negotiateClaim(audience: string, tokenObject: TokenInfo)'
       parameters:
@@ -128,11 +162,11 @@ items:
           - string
     package: azure-event-hubs
 references:
-  - uid: azure-event-hubs.ConnectionContext
+  - uid: azure-event-hubs.Connection
     spec.typeScript:
-      - name: ConnectionContext
-        fullName: ConnectionContext
-        uid: azure-event-hubs.ConnectionContext
+      - name: Connection
+        fullName: Connection
+        uid: azure-event-hubs.Connection
   - uid: azure-event-hubs.TokenInfo
     spec.typeScript:
       - name: TokenInfo

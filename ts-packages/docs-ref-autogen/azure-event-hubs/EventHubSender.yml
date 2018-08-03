@@ -6,7 +6,9 @@ items:
     children:
       - azure-event-hubs.EventHubSender.close
       - azure-event-hubs.EventHubSender.create
+      - azure-event-hubs.EventHubSender.detached
       - azure-event-hubs.EventHubSender.constructor
+      - azure-event-hubs.EventHubSender.isOpen
       - azure-event-hubs.EventHubSender.send
       - azure-event-hubs.EventHubSender.sendBatch
       - azure-event-hubs.EventHubSender.senderLock
@@ -15,7 +17,7 @@ items:
     type: class
     summary: Describes the EventHubSender that will send event data to EventHub.
     extends:
-      name: azure-event-hubs.ClientEntity
+      name: azure-event-hubs.LinkEntity
     package: azure-event-hubs
   - uid: azure-event-hubs.EventHubSender.close
     name: close
@@ -64,6 +66,25 @@ items:
         type:
           - azure-event-hubs.EventHubSender
     package: azure-event-hubs
+  - uid: azure-event-hubs.EventHubSender.detached
+    name: detached
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Will reconnect the sender link if necessary.
+    syntax:
+      content: 'function detached(senderError?: AmqpError | Error)'
+      parameters:
+        - id: senderError
+          type:
+            - AmqpError | Error
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<void>
+    package: azure-event-hubs
   - uid: azure-event-hubs.EventHubSender.constructor
     name: EventHubSender
     children: []
@@ -90,6 +111,22 @@ items:
             - string
           description: ''
           optional: true
+    package: azure-event-hubs
+  - uid: azure-event-hubs.EventHubSender.isOpen
+    name: isOpen
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether the AMQP sender link is open. If open then returns true
+      else returns false.
+    syntax:
+      content: function isOpen()
+      parameters: []
+      return:
+        type:
+          - boolean
     package: azure-event-hubs
   - uid: azure-event-hubs.EventHubSender.send
     name: send
@@ -148,11 +185,11 @@ items:
           - string
     package: azure-event-hubs
 references:
-  - uid: azure-event-hubs.ClientEntity
+  - uid: azure-event-hubs.LinkEntity
     spec.typeScript:
-      - name: ClientEntity
-        fullName: ClientEntity
-        uid: azure-event-hubs.ClientEntity
+      - name: LinkEntity
+        fullName: LinkEntity
+        uid: azure-event-hubs.LinkEntity
   - uid: azure-event-hubs.ConnectionContext
     spec.typeScript:
       - name: ConnectionContext

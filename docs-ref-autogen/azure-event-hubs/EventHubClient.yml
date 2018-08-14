@@ -9,6 +9,7 @@ items:
       - azure-event-hubs.EventHubClient.createFromAadTokenCredentials
       - azure-event-hubs.EventHubClient.createFromConnectionString
       - azure-event-hubs.EventHubClient.createFromIotHubConnectionString
+      - azure-event-hubs.EventHubClient.createFromTokenProvider
       - azure-event-hubs.EventHubClient.constructor
       - azure-event-hubs.EventHubClient.getHubRuntimeInformation
       - azure-event-hubs.EventHubClient.getPartitionIds
@@ -70,9 +71,9 @@ items:
         - id: host
           type:
             - string
-          description: >-
+          description: |-
             Fully qualified domain name for Event Hubs. Most likely,
-            {yournamespace}.servicebus.windows.net
+            <yournamespace>.servicebus.windows.net
         - id: entityPath
           type:
             - string
@@ -84,6 +85,7 @@ items:
               DeviceTokenCredentials | MSITokenCredentials
           description: >-
             The AAD Token credentials. It can be one of the following:
+
             ApplicationTokenCredentials | UserTokenCredentials |
             DeviceTokenCredentials | MSITokenCredentials.
         - id: options
@@ -153,6 +155,41 @@ items:
       return:
         type:
           - Promise<azure-event-hubs.EventHubClient>
+    package: azure-event-hubs
+  - uid: azure-event-hubs.EventHubClient.createFromTokenProvider
+    name: createFromTokenProvider
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates an EventHub Client from a generic token provider.
+    syntax:
+      content: >-
+        static function createFromTokenProvider(host: string, entityPath:
+        string, tokenProvider: TokenProvider, options?: ClientOptionsBase)
+      parameters:
+        - id: host
+          type:
+            - string
+          description: |-
+            Fully qualified domain name for Event Hubs. Most likely,
+            <yournamespace>.servicebus.windows.net
+        - id: entityPath
+          type:
+            - string
+          description: EventHub path of the form 'my-event-hub-name'
+        - id: tokenProvider
+          type:
+            - azure-event-hubs.TokenProvider
+          description: Your token provider that implements the TokenProvider interface.
+        - id: options
+          type:
+            - azure-event-hubs.ClientOptionsBase
+          description: The options that can be provided during client creation.
+          optional: true
+      return:
+        type:
+          - azure-event-hubs.EventHubClient
     package: azure-event-hubs
   - uid: azure-event-hubs.EventHubClient.constructor
     name: EventHubClient
@@ -442,3 +479,8 @@ references:
         uid: azure-event-hubs.EventHubClient
       - name: '>'
         fullName: '>'
+  - uid: azure-event-hubs.TokenProvider
+    spec.typeScript:
+      - name: TokenProvider
+        fullName: TokenProvider
+        uid: azure-event-hubs.TokenProvider

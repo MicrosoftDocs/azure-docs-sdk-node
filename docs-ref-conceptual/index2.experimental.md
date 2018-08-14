@@ -1,6 +1,4 @@
 ---
-layout: HubPage
-hide_bc: true
 title: Node.js Dev Center | Microsoft Docs
 description: Learn how to develop and deploy Node.js applications in the cloud with Azure.
 ms.topic: article

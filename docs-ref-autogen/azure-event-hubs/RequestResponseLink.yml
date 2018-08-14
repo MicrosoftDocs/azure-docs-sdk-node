@@ -16,7 +16,9 @@ items:
     langs:
       - typeScript
     type: class
-    summary: ''
+    summary: >-
+      Describes an amqp request(sender)-response(receiver) link that is created
+      over an amqp session.
     package: azure-event-hubs
   - uid: azure-event-hubs.RequestResponseLink.close
     name: close
@@ -24,7 +26,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: 'Closes the sender, receiver link and the underlying session.'
     syntax:
       content: function close()
       parameters: []
@@ -39,7 +41,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Provides the underlying amqp connection object.
     syntax:
       content: 'connection: Connection'
       return:
@@ -52,7 +54,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: Creates an amqp request/response link.
     syntax:
       content: >-
         static function create(connection: Connection, senderOptions:
@@ -61,15 +63,15 @@ items:
         - id: connection
           type:
             - azure-event-hubs.Connection
-          description: ''
+          description: The amqp connection.
         - id: senderOptions
           type:
             - azure-event-hubs.SenderOptions
-          description: ''
+          description: Options that must be provided to create the sender link.
         - id: receiverOptions
           type:
             - azure-event-hubs.ReceiverOptions
-          description: ''
+          description: Options that must be provided to create the receiver link.
       return:
         type:
           - Promise<azure-event-hubs.RequestResponseLink>
@@ -80,7 +82,9 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: >-
+      Indicates whether the session and the sender and receiver links are all
+      open or closed.
     syntax:
       content: function isOpen()
       parameters: []
@@ -117,15 +121,16 @@ items:
         - id: session
           type:
             - azure-event-hubs.Session
-          description: ''
+          description: The amqp session.
         - id: sender
           type:
             - azure-event-hubs.Sender
-          description: ''
+          description: The amqp sender link.
         - id: receiver
           type:
             - azure-event-hubs.Receiver
-          description: ''
+          description: |
+            The amqp receiver link.
     package: azure-event-hubs
   - uid: azure-event-hubs.RequestResponseLink.sender
     name: sender
@@ -147,17 +152,27 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: >-
+      Sends the given request message and returns the received response. If the
+      operation is not
+
+      completed in the provided timeout in seconds `default: 10`, then the
+      request will be retried
+
+      linearly for the provided number of times `default: 3` with the provided
+      delay in seconds
+
+      `default: 15` between each attempt.
     syntax:
-      content: 'function sendRequest<T>(request: Message, timeoutInSeconds?: number)'
+      content: 'function sendRequest<T>(request: Message, options?: SendRequestOptions)'
       parameters:
         - id: request
           type:
             - Message
-          description: ''
-        - id: timeoutInSeconds
+          description: The AMQP message.
+        - id: options
           type:
-            - number
+            - azure-event-hubs.SendRequestOptions
           description: ''
           optional: true
       return:
@@ -199,6 +214,11 @@ references:
       - name: Connection
         fullName: Connection
         uid: azure-event-hubs.Connection
+  - uid: azure-event-hubs.SendRequestOptions
+    spec.typeScript:
+      - name: SendRequestOptions
+        fullName: SendRequestOptions
+        uid: azure-event-hubs.SendRequestOptions
   - uid: azure-event-hubs.SenderOptions
     spec.typeScript:
       - name: SenderOptions

@@ -7,6 +7,7 @@ items:
       - '@azure/cosmos.QueryIterator.current'
       - '@azure/cosmos.QueryIterator.executeNext'
       - '@azure/cosmos.QueryIterator.forEach'
+      - '@azure/cosmos.QueryIterator.getAsyncIterator'
       - '@azure/cosmos.QueryIterator.hasMoreResults'
       - '@azure/cosmos.QueryIterator.nextItem'
       - '@azure/cosmos.QueryIterator.reset'
@@ -58,9 +59,48 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Execute a provided function once per feed element.
+    summary: |-
+      Calls a specified callback for each item returned from the query.
+      Runs serially; each callback blocks the next.
     syntax:
-      content: function forEach()
+      content: >-
+        function forEach(callback: (result: T, headers?: IHeaders, index?:
+        number) => boolean | void)
+      parameters:
+        - id: callback
+          type:
+            - '(result: T, headers?: IHeaders, index?: number) => boolean | void'
+          description: |
+            Specified callback.
+            First param is the result,
+            second param (optional) is the current headers object state,
+            third param (optional) is current index.
+            No more callbacks will be called if one of them results false.
+      return:
+        type:
+          - Promise<void>
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.QueryIterator.getAsyncIterator'
+    name: getAsyncIterator
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |
+      Gets an async iterator that will yield results until completion.
+      NOTE: AsyncIterators are a very new feature and you might need to
+      use polyfils/etc. in order to use them in your code.
+
+      If you're using TypeScript, you can use the following polyfill as long
+      as you target ES6 or higher and are running on Node 6 or higher.
+
+      ```typescript
+      if (!Symbol || !Symbol.asyncIterator) {
+        (Symbol as any).asyncIterator = Symbol.for("Symbol.asyncIterator");
+      }
+      ```
+    syntax:
+      content: function getAsyncIterator()
       parameters: []
       return:
         type:

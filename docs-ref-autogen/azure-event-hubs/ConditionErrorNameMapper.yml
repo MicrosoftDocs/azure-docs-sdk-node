@@ -5,7 +5,7 @@ items:
     fullName: ConditionErrorNameMapper
     children:
       - 'azure-event-hubs.ConditionErrorNameMapper.amqp:connection:forced'
-      - 'azure-event-hubs.ConditionErrorNameMapper.com.microsoft:timeout'
+      - 'azure-event-hubs.ConditionErrorNameMapper.system:error'
       - 'azure-event-hubs.ConditionErrorNameMapper.amqp:connection:redirect'
       - 'azure-event-hubs.ConditionErrorNameMapper.amqp:decode-error'
       - 'azure-event-hubs.ConditionErrorNameMapper.amqp:frame-size-too-small'
@@ -24,8 +24,8 @@ items:
       - 'azure-event-hubs.ConditionErrorNameMapper.amqp:not-implemented'
       - 'azure-event-hubs.ConditionErrorNameMapper.amqp:precondition-failed'
       - 'azure-event-hubs.ConditionErrorNameMapper.amqp:resource-deleted'
+      - 'azure-event-hubs.ConditionErrorNameMapper.amqp:resource-limit-exceeded'
       - 'azure-event-hubs.ConditionErrorNameMapper.amqp:connection:framing-error'
-      - 'azure-event-hubs.ConditionErrorNameMapper.amqp:resource-locked'
       - 'azure-event-hubs.ConditionErrorNameMapper.amqp:session:errant-link'
       - 'azure-event-hubs.ConditionErrorNameMapper.amqp:session:handle-in-use'
       - 'azure-event-hubs.ConditionErrorNameMapper.amqp:session:unattached-handle'
@@ -49,11 +49,12 @@ items:
         azure-event-hubs.ConditionErrorNameMapper.com.microsoft:session-cannot-be-locked
       - >-
         azure-event-hubs.ConditionErrorNameMapper.com.microsoft:session-lock-lost
-      - 'azure-event-hubs.ConditionErrorNameMapper.amqp:resource-limit-exceeded'
+      - 'azure-event-hubs.ConditionErrorNameMapper.com.microsoft:timeout'
+      - 'azure-event-hubs.ConditionErrorNameMapper.amqp:resource-locked'
     langs:
       - typeScript
     type: enum
-    summary: Maps the conditions to the Error names.
+    summary: Maps the amqp error conditions to the Error names.
     package: azure-event-hubs
   - uid: 'azure-event-hubs.ConditionErrorNameMapper.amqp:connection:forced'
     name: 'amqp:connection:forced'
@@ -66,14 +67,15 @@ items:
     type: field
     numericValue: null
     package: azure-event-hubs
-  - uid: 'azure-event-hubs.ConditionErrorNameMapper.com.microsoft:timeout'
-    name: 'com.microsoft:timeout'
+  - uid: 'azure-event-hubs.ConditionErrorNameMapper.system:error'
+    name: 'system:error'
     children: []
     langs:
       - typeScript
     summary: >-
-      Error is thrown when the service is unavailable. The operation should be
-      retried.
+      Error is thrown when a low level system error is thrown by node.js.
+
+      <xref:https%3A%2F%2Fnodejs.org%2Fdist%2Flatest-v8.x%2Fdocs%2Fapi%2Fall.html%23errors_class_system_error>
     type: field
     numericValue: null
     package: azure-event-hubs
@@ -253,6 +255,26 @@ items:
     type: field
     numericValue: null
     package: azure-event-hubs
+  - uid: 'azure-event-hubs.ConditionErrorNameMapper.amqp:resource-limit-exceeded'
+    name: 'amqp:resource-limit-exceeded'
+    children: []
+    langs:
+      - typeScript
+    summary: >-
+      Error is thrown the the Azure EventHub/ServiceBus quota has been exceeded.
+
+      Quotas are reset periodically, this operation will have to wait until
+      then.
+
+      The messaging entity has reached its maximum allowable size.
+
+      This can happen if the maximum number of receivers (which is 5) has
+      already
+
+      been opened on a per-consumer group level.
+    type: field
+    numericValue: null
+    package: azure-event-hubs
   - uid: 'azure-event-hubs.ConditionErrorNameMapper.amqp:connection:framing-error'
     name: 'amqp:connection:framing-error'
     children: []
@@ -261,19 +283,6 @@ items:
     summary: >-
       Error is thrown when a valid frame header cannot be formed from the
       incoming byte stream.
-    type: field
-    numericValue: null
-    package: azure-event-hubs
-  - uid: 'azure-event-hubs.ConditionErrorNameMapper.amqp:resource-locked'
-    name: 'amqp:resource-locked'
-    children: []
-    langs:
-      - typeScript
-    summary: >-
-      Error is thrown when the client attempted to work with a server entity to
-      which it
-
-      has no access because another client is working with it.
     type: field
     numericValue: null
     package: azure-event-hubs
@@ -450,23 +459,27 @@ items:
     type: field
     numericValue: null
     package: azure-event-hubs
-  - uid: 'azure-event-hubs.ConditionErrorNameMapper.amqp:resource-limit-exceeded'
-    name: 'amqp:resource-limit-exceeded'
+  - uid: 'azure-event-hubs.ConditionErrorNameMapper.com.microsoft:timeout'
+    name: 'com.microsoft:timeout'
     children: []
     langs:
       - typeScript
     summary: >-
-      Error is thrown the the Azure EventHub/ServiceBus quota has been exceeded.
+      Error is thrown when the service is unavailable. The operation should be
+      retried.
+    type: field
+    numericValue: null
+    package: azure-event-hubs
+  - uid: 'azure-event-hubs.ConditionErrorNameMapper.amqp:resource-locked'
+    name: 'amqp:resource-locked'
+    children: []
+    langs:
+      - typeScript
+    summary: >-
+      Error is thrown when the client attempted to work with a server entity to
+      which it
 
-      Quotas are reset periodically, this operation will have to wait until
-      then.
-
-      The messaging entity has reached its maximum allowable size.
-
-      This can happen if the maximum number of receivers (which is 5) has
-      already
-
-      been opened on a per-consumer group level.
+      has no access because another client is working with it.
     type: field
     numericValue: null
     package: azure-event-hubs

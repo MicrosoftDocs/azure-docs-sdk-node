@@ -10,7 +10,11 @@ items:
       - azure-event-hubs.Sender.credit
       - azure-event-hubs.Sender.error
       - azure-event-hubs.Sender.getMaxListeners
+      - azure-event-hubs.Sender.isClosed
+      - azure-event-hubs.Sender.isItselfClosed
       - azure-event-hubs.Sender.isOpen
+      - azure-event-hubs.Sender.isSessionClosed
+      - azure-event-hubs.Sender.isSessionItselfClosed
       - azure-event-hubs.Sender.name
       - azure-event-hubs.Sender.properties
       - azure-event-hubs.Sender.registerHandler
@@ -115,6 +119,55 @@ items:
         type:
           - number
     package: azure-event-hubs
+  - uid: azure-event-hubs.Sender.isClosed
+    name: isClosed
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether both local and remote endpoint for link or it's
+      underlying session
+
+      or it's underlying connection are closed.
+
+      Within the "sender_close", "session_close" event handler, if this
+
+      method returns `false` it means that the local end is still open. It can
+      be useful to
+
+      determine whether the close was initiated locally under such
+      circumstances.
+    syntax:
+      content: function isClosed()
+      parameters: []
+      return:
+        type:
+          - boolean
+    package: azure-event-hubs
+  - uid: azure-event-hubs.Sender.isItselfClosed
+    name: isItselfClosed
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether both local and remote endpoint for just the link itself
+      are closed.
+
+      Within the "sender_close" event handler, if this method returns `false` it
+
+      means that the local end is still open. It can be useful to determine
+      whether the close
+
+      was initiated locally under such circumstances.
+    syntax:
+      content: function isItselfClosed()
+      parameters: []
+      return:
+        type:
+          - boolean
+    package: azure-event-hubs
   - uid: azure-event-hubs.Sender.isOpen
     name: isOpen
     children: []
@@ -124,6 +177,56 @@ items:
     summary: Determines whether the sender link is open.
     syntax:
       content: function isOpen()
+      parameters: []
+      return:
+        type:
+          - boolean
+    package: azure-event-hubs
+  - uid: azure-event-hubs.Sender.isSessionClosed
+    name: isSessionClosed
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Determines whether both local and remote endpoint for session or it's
+      underlying
+
+      connection are closed.
+
+      Within the "session_close" event handler, if this method returns `false`
+      it means that
+
+      the local end is still open. It can be useful to determine whether the
+      close
+
+      was initiated locally under such circumstances.
+    syntax:
+      content: function isSessionClosed()
+      parameters: []
+      return:
+        type:
+          - boolean
+    package: azure-event-hubs
+  - uid: azure-event-hubs.Sender.isSessionItselfClosed
+    name: isSessionItselfClosed
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether both local and remote endpoint for just the session
+      itself are closed.
+
+      Within the "session_close" event handler, if this method returns `false`
+      it means that
+
+      the local end is still open. It can be useful to determine whether the
+      close
+
+      was initiated locally under such circumstances.
+    syntax:
+      content: function isSessionItselfClosed()
       parameters: []
       return:
         type:
@@ -203,7 +306,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: Removes the sender and it's underlying session from the internal map.
     syntax:
       content: function remove()
       parameters: []

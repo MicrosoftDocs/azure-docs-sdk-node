@@ -9,6 +9,8 @@ items:
       - azure-event-hubs.Session.connection
       - azure-event-hubs.Session.createReceiver
       - azure-event-hubs.Session.createSender
+      - azure-event-hubs.Session.isClosed
+      - azure-event-hubs.Session.isItselfClosed
       - azure-event-hubs.Session.isOpen
       - azure-event-hubs.Session.outgoing
       - azure-event-hubs.Session.registerConnectionHandler
@@ -98,6 +100,46 @@ items:
       return:
         type:
           - Promise<azure-event-hubs.Sender>
+    package: azure-event-hubs
+  - uid: azure-event-hubs.Session.isClosed
+    name: isClosed
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether the close from the peer is a response to a locally
+      initiated close request.
+    syntax:
+      content: function isClosed()
+      parameters: []
+      return:
+        type:
+          - boolean
+    package: azure-event-hubs
+  - uid: azure-event-hubs.Session.isItselfClosed
+    name: isItselfClosed
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether both local and remote endpoint for just the session
+      itself are closed.
+
+      Within the "session_close" event handler, if this method returns `false`
+      it means that
+
+      the local end is still open. It can be useful to determine whether the
+      close
+
+      was initiated locally under such circumstances.
+    syntax:
+      content: function isItselfClosed()
+      parameters: []
+      return:
+        type:
+          - boolean
     package: azure-event-hubs
   - uid: azure-event-hubs.Session.isOpen
     name: isOpen

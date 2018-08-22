@@ -1136,7 +1136,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: '{boolean} QueueService#queueMessagEncoder'
     syntax:
       content: 'messageEncoder: QueueMessageEncoder'
       return:
@@ -1362,8 +1362,8 @@ items:
     summary: Updates the queue's ACL.
     syntax:
       content: >-
-        function setQueueAcl(queue: string, signedIdentifiers: function,
-        callback?: ErrorOrResult<QueueResult>)
+        function setQueueAcl(queue: string, signedIdentifiers: [key: string]:
+        AccessPolicy, callback?: ErrorOrResult<QueueResult>)
       parameters:
         - id: queue
           type:
@@ -1371,7 +1371,7 @@ items:
           description: The queue name.
         - id: signedIdentifiers
           type:
-            - function
+            - '[key: string]: azure-storage.azurestorage.common.AccessPolicy'
           description: The signed identifiers. Signed identifiers must be in an array.
         - id: callback
           type:
@@ -1393,8 +1393,9 @@ items:
     summary: Updates the queue's ACL.
     syntax:
       content: >-
-        function setQueueAcl(queue: string, signedIdentifiers: function,
-        options: RequestOptions, callback?: ErrorOrResult<QueueResult>)
+        function setQueueAcl(queue: string, signedIdentifiers: [key: string]:
+        AccessPolicy, options: RequestOptions, callback?:
+        ErrorOrResult<QueueResult>)
       parameters:
         - id: queue
           type:
@@ -1402,7 +1403,7 @@ items:
           description: The queue name.
         - id: signedIdentifiers
           type:
-            - function
+            - '[key: string]: azure-storage.azurestorage.common.AccessPolicy'
           description: The signed identifiers. Signed identifiers must be in an array.
         - id: options
           type:
@@ -1430,8 +1431,8 @@ items:
       with the queue as name-value pairs.
     syntax:
       content: >-
-        function setQueueMetadata(queue: string, metadata: function, options:
-        RequestOptions, callback: ErrorOrResult<QueueResult>)
+        function setQueueMetadata(queue: string, metadata: [key: string]:
+        string, options: RequestOptions, callback: ErrorOrResult<QueueResult>)
       parameters:
         - id: queue
           type:
@@ -1439,7 +1440,7 @@ items:
           description: The queue name.
         - id: metadata
           type:
-            - function
+            - '[key: string]: string'
           description: The metadata key/value pairs.
         - id: options
           type:
@@ -1466,8 +1467,8 @@ items:
       with the queue as name-value pairs.
     syntax:
       content: >-
-        function setQueueMetadata(queue: string, metadata: function, callback:
-        ErrorOrResult<QueueResult>)
+        function setQueueMetadata(queue: string, metadata: [key: string]:
+        string, callback: ErrorOrResult<QueueResult>)
       parameters:
         - id: queue
           type:
@@ -1475,7 +1476,7 @@ items:
           description: The queue name.
         - id: metadata
           type:
-            - function
+            - '[key: string]: string'
           description: The metadata key/value pairs.
         - id: callback
           type:
@@ -1877,6 +1878,13 @@ references:
         fullName: ContainerResult
         uid: >-
           azure-storage.azurestorage.services.blob.blobservice.BlobService.ContainerResult
+  - uid: '[key: string]: azure-storage.azurestorage.common.AccessPolicy'
+    spec.typeScript:
+      - name: '[key: string]: '
+        fullName: '[key: string]: '
+      - name: AccessPolicy
+        fullName: AccessPolicy
+        uid: azure-storage.azurestorage.common.AccessPolicy
   - uid: >-
       azure-storage.azurestorage.services.blob.blobservice.BlobService.BlobRequestOptions
     spec.typeScript:
@@ -2746,13 +2754,13 @@ references:
         uid: azure-storage.azurestorage.ErrorOrResult
       - name: <T>
         fullName: <T>
-  - uid: azure-storage.azurestorage.ErrorOrResult<function>
+  - uid: azure-storage.azurestorage.ErrorOrResult<Object>
     spec.typeScript:
       - name: ErrorOrResult
         fullName: ErrorOrResult
         uid: azure-storage.azurestorage.ErrorOrResult
-      - name: <function>
-        fullName: <function>
+      - name: <Object>
+        fullName: <Object>
   - uid: azure-storage.azurestorage.services.table.TableService
     spec.typeScript:
       - name: TableService

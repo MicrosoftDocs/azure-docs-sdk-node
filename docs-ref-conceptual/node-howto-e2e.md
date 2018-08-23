@@ -380,9 +380,8 @@ To get started, open up the Visual Studio terminal. You'll use the new Azure CLI
     > [!NOTE]
     > It may take few minutes to load app the first time as App Service has to pull the Docker image from DockerHub and then start it.
 
-At this point, you've just deployed and run the todo app. 
 
-You have now deployed the todo app. However, the spinning icon indicates that the app can't connect to the database. This is due to the fact that you were using a local instance of MongoDB during development, which obviously isn't reachable from within the Azure datacenters. Since you modified the app to accept the connection string via an environment variable, you need only to start a MongoDB server and re-configure the App Service instance to reference the environment variable. This is illustrated in the next section.
+At this point, you've just deployed and run the todo app. However, the spinning icon indicates that the app can't connect to the database. This is due to the fact that you were using a local instance of MongoDB during development, which obviously isn't reachable from within the Azure datacenters. Since you modified the app to accept the connection string via an environment variable, you need only to start a MongoDB server and re-configure the App Service instance to reference the environment variable. This is illustrated in the next section.
 
 ## Provisioning a MongoDB server
 
@@ -526,4 +525,4 @@ az group delete
 > [!NOTE]
 > The clean-up process can take several minutes to complete. 
 
-Once finished, the `az group delete` command leaves your Azure account in the same state it was before you started the tutorial. The ability to organize, deploy, and delete Azure resources as a single unit is one of the primary benefits of resource groups. Therefore, as a recommended practice,  you should group your resources together that you anticipate having the same lifespan.
+Once finished, the `az group delete` command leaves your Azure account in the same state it was before you started the tutorial. The ability to organize, deploy, and delete Azure resources as a single unit is one of the primary benefits of resource groups. Therefore, as a recommended practice, you should group your resources together that you anticipate having the same lifespan.

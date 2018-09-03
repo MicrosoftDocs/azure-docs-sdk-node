@@ -18,8 +18,6 @@ ms.topic: hub-page
 			<li style="
 					flex-basis: 180px;
 					text-align: center;
-					background-color: black;
-					font: white;
 					display: block;
 					margin-left: auto;
 					margin-top: 15px;
@@ -310,8 +308,6 @@ getTextAnalytics.end();
 			<li style="
 					flex-basis: 180px;
 					text-align: center;
-					background-color: black;
-					font: white;
 					display: block;
 					margin-left: auto;
 					margin-top: 15px;

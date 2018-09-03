@@ -29,7 +29,7 @@ ms.topic: hub-page
 					<br>
 						<div class="cardText">
 						<h3 style="
-							color: white;
+							font-weight: bold;
 							font-size: large;
 						">Get started free &gt;</h3>
 					</div>
@@ -319,7 +319,7 @@ getTextAnalytics.end();
 					<br>
 						<div class="cardText">
 						<h3 style="
-							color: white;
+							font-weight: bold;
 							font-size: large;
 						">Get started free &gt;</h3>
 					</div>

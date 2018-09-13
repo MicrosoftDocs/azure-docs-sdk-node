@@ -4,62 +4,86 @@ items:
     name: CheckpointInfo
     fullName: CheckpointInfo
     children:
-      - azure-event-processor-host.CheckpointInfo.deserialize
-      - azure-event-processor-host.CheckpointInfo.epoch
+      - azure-event-processor-host.CheckpointInfo.create
+      - azure-event-processor-host.CheckpointInfo.createFromEventData
+      - azure-event-processor-host.CheckpointInfo.createFromLease
       - azure-event-processor-host.CheckpointInfo.offset
-      - azure-event-processor-host.CheckpointInfo.owner
       - azure-event-processor-host.CheckpointInfo.partitionId
       - azure-event-processor-host.CheckpointInfo.sequenceNumber
-      - azure-event-processor-host.CheckpointInfo.serialize
-      - azure-event-processor-host.CheckpointInfo.token
     langs:
       - typeScript
     type: module
     summary: Describes the checkoint information.
     package: azure-event-processor-host
-  - uid: azure-event-processor-host.CheckpointInfo.deserialize
-    name: deserialize
+  - uid: azure-event-processor-host.CheckpointInfo.create
+    name: create
     children: []
     type: function
     langs:
       - typeScript
-    summary: >-
-      Deserializes the checkpoint data received from the blob. We take care of
-      deserializing the blob
-
-      content if someone ran a .net sdk EPH which stores the JSON keys in
-      PascalCase. When we
-
-      checkpoint, we will follow the standard convention of camelCasing the JSON
-      keys.
+    summary: Creates the checkpoint info
     syntax:
-      content: 'function deserialize(response: string)'
+      content: >-
+        function create(partitionId: string, offset?: string, sequenceNumber?:
+        number)
       parameters:
-        - id: response
+        - id: partitionId
           type:
             - string
-          description: The content received from the storage blob.
+          description: The partition id for the checkpoint
+        - id: offset
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: sequenceNumber
+          type:
+            - number
+          description: ''
+          optional: true
       return:
         type:
-          - azure-event-processor-host.CheckpointInfo | undefined
+          - azure-event-processor-host.CheckpointInfo
     package: azure-event-processor-host
-  - uid: azure-event-processor-host.CheckpointInfo.epoch
-    name: epoch
-    fullName: epoch
+  - uid: azure-event-processor-host.CheckpointInfo.createFromEventData
+    name: createFromEventData
     children: []
+    type: function
     langs:
       - typeScript
-    type: property
-    summary: >-
-      {string} epoch The epoch value associated with the receiver that is
-      checking in this
-
-      event.
+    summary: Creates the checkpoint info.
     syntax:
-      content: 'epoch: number'
+      content: 'function createFromEventData(partitionId: string, eventData: EventData)'
+      parameters:
+        - id: partitionId
+          type:
+            - string
+          description: The partition id for the checkpoint
+        - id: eventData
+          type:
+            - EventData
+          description: The event data from which the checkpoint info needs to created.
       return:
         type:
-          - number
+          - azure-event-processor-host.CheckpointInfo
+    package: azure-event-processor-host
+  - uid: azure-event-processor-host.CheckpointInfo.createFromLease
+    name: createFromLease
+    children: []
+    type: function
+    langs:
+      - typeScript
+    summary: Creates the checkpoint info
+    syntax:
+      content: 'function createFromLease(lease: LeaseInfo)'
+      parameters:
+        - id: lease
+          type:
+            - azure-event-processor-host.LeaseInfo
+          description: The lease info from which the checkpoint info needs to created.
+      return:
+        type:
+          - azure-event-processor-host.CheckpointInfo
     package: azure-event-processor-host
   - uid: azure-event-processor-host.CheckpointInfo.offset
     name: offset
@@ -69,25 +93,8 @@ items:
       - typeScript
     type: property
     summary: '{string} offset The offset of the event to be checked in.'
-    optional: true
     syntax:
-      content: 'offset?: string'
-      return:
-        type:
-          - string
-    package: azure-event-processor-host
-  - uid: azure-event-processor-host.CheckpointInfo.owner
-    name: owner
-    fullName: owner
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      {string} owner The name of the owner checking in this event (usually the
-      eph host name).
-    syntax:
-      content: 'owner: string'
+      content: 'offset: string'
       return:
         type:
           - string
@@ -120,66 +127,28 @@ items:
         type:
           - number
     package: azure-event-processor-host
-  - uid: azure-event-processor-host.CheckpointInfo.serialize
-    name: serialize
-    children: []
-    type: function
-    langs:
-      - typeScript
-    summary: Serializes the checkpoint info before writing it to the blob.
-    syntax:
-      content: 'function serialize(data: CheckpointInfo)'
-      parameters:
-        - id: data
-          type:
-            - azure-event-processor-host.CheckpointInfo
-          description: The checkpoint data that needs to be serialized.
-      return:
-        type:
-          - string
-    package: azure-event-processor-host
-  - uid: azure-event-processor-host.CheckpointInfo.token
-    name: token
-    fullName: token
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: '{string} token The token associated with the lease.'
-    syntax:
-      content: 'token: string'
-      return:
-        type:
-          - string
-    package: azure-event-processor-host
 references:
-  - uid: azure-event-processor-host.CheckpointInfo | undefined
-    name: CheckpointInfo | undefined
-    spec.typeScript:
-      - name: CheckpointInfo
-        fullName: CheckpointInfo
-        uid: azure-event-processor-host.CheckpointInfo
-      - name: ' | undefined'
-        fullName: ' | undefined'
   - uid: azure-event-processor-host.CheckpointInfo
     name: CheckpointInfo
     spec.typeScript:
       - name: CheckpointInfo
         fullName: CheckpointInfo
         uid: azure-event-processor-host.CheckpointInfo
-  - uid: azure-event-processor-host.CheckpointInfo.deserialize
-    name: deserialize
-  - uid: azure-event-processor-host.CheckpointInfo.epoch
-    name: epoch
+  - uid: azure-event-processor-host.LeaseInfo
+    name: LeaseInfo
+    spec.typeScript:
+      - name: LeaseInfo
+        fullName: LeaseInfo
+        uid: azure-event-processor-host.LeaseInfo
+  - uid: azure-event-processor-host.CheckpointInfo.create
+    name: create
+  - uid: azure-event-processor-host.CheckpointInfo.createFromEventData
+    name: createFromEventData
+  - uid: azure-event-processor-host.CheckpointInfo.createFromLease
+    name: createFromLease
   - uid: azure-event-processor-host.CheckpointInfo.offset
     name: offset
-  - uid: azure-event-processor-host.CheckpointInfo.owner
-    name: owner
   - uid: azure-event-processor-host.CheckpointInfo.partitionId
     name: partitionId
   - uid: azure-event-processor-host.CheckpointInfo.sequenceNumber
     name: sequenceNumber
-  - uid: azure-event-processor-host.CheckpointInfo.serialize
-    name: serialize
-  - uid: azure-event-processor-host.CheckpointInfo.token
-    name: token

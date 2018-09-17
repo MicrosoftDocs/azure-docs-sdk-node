@@ -9,57 +9,42 @@ items:
       - azure-arm-storage.StorageAccounts.beginCreate_2
       - azure-arm-storage.StorageAccounts.beginCreateWithHttpOperationResponse
       - azure-arm-storage.StorageAccounts.checkNameAvailability
-      - azure-arm-storage.StorageAccounts.checkNameAvailability_1
       - azure-arm-storage.StorageAccounts.checkNameAvailability_2
+      - azure-arm-storage.StorageAccounts.checkNameAvailability_1
       - >-
         azure-arm-storage.StorageAccounts.checkNameAvailabilityWithHttpOperationResponse
+      - azure-arm-storage.StorageAccounts.create
       - azure-arm-storage.StorageAccounts.create_1
       - azure-arm-storage.StorageAccounts.create_2
-      - azure-arm-storage.StorageAccounts.create
-      - azure-arm-storage.StorageAccounts.createOrUpdateManagementPolicies_1
-      - azure-arm-storage.StorageAccounts.createOrUpdateManagementPolicies_2
-      - azure-arm-storage.StorageAccounts.createOrUpdateManagementPolicies
-      - >-
-        azure-arm-storage.StorageAccounts.createOrUpdateManagementPoliciesWithHttpOperationResponse
       - azure-arm-storage.StorageAccounts.createWithHttpOperationResponse
-      - azure-arm-storage.StorageAccounts.deleteManagementPolicies_1
-      - azure-arm-storage.StorageAccounts.deleteManagementPolicies
-      - azure-arm-storage.StorageAccounts.deleteManagementPolicies_2
-      - >-
-        azure-arm-storage.StorageAccounts.deleteManagementPoliciesWithHttpOperationResponse
-      - azure-arm-storage.StorageAccounts.deleteMethod
       - azure-arm-storage.StorageAccounts.deleteMethod_1
+      - azure-arm-storage.StorageAccounts.deleteMethod
       - azure-arm-storage.StorageAccounts.deleteMethod_2
       - azure-arm-storage.StorageAccounts.deleteMethodWithHttpOperationResponse
-      - azure-arm-storage.StorageAccounts.getManagementPolicies
-      - azure-arm-storage.StorageAccounts.getManagementPolicies_1
-      - azure-arm-storage.StorageAccounts.getManagementPolicies_2
-      - >-
-        azure-arm-storage.StorageAccounts.getManagementPoliciesWithHttpOperationResponse
       - azure-arm-storage.StorageAccounts.getProperties
       - azure-arm-storage.StorageAccounts.getProperties_1
       - azure-arm-storage.StorageAccounts.getProperties_2
       - azure-arm-storage.StorageAccounts.getPropertiesWithHttpOperationResponse
       - azure-arm-storage.StorageAccounts.list
-      - azure-arm-storage.StorageAccounts.list_2
       - azure-arm-storage.StorageAccounts.list_1
+      - azure-arm-storage.StorageAccounts.list_2
+      - azure-arm-storage.StorageAccounts.listAccountSAS
       - azure-arm-storage.StorageAccounts.listAccountSAS_1
       - azure-arm-storage.StorageAccounts.listAccountSAS_2
-      - azure-arm-storage.StorageAccounts.listAccountSAS
       - >-
         azure-arm-storage.StorageAccounts.listAccountSASWithHttpOperationResponse
-      - azure-arm-storage.StorageAccounts.listByResourceGroup
       - azure-arm-storage.StorageAccounts.listByResourceGroup_1
       - azure-arm-storage.StorageAccounts.listByResourceGroup_2
+      - azure-arm-storage.StorageAccounts.listByResourceGroup
       - >-
         azure-arm-storage.StorageAccounts.listByResourceGroupWithHttpOperationResponse
       - azure-arm-storage.StorageAccounts.listKeys
       - azure-arm-storage.StorageAccounts.listKeys_1
       - azure-arm-storage.StorageAccounts.listKeys_2
       - azure-arm-storage.StorageAccounts.listKeysWithHttpOperationResponse
+      - azure-arm-storage.StorageAccounts.listServiceSAS
       - azure-arm-storage.StorageAccounts.listServiceSAS_1
       - azure-arm-storage.StorageAccounts.listServiceSAS_2
-      - azure-arm-storage.StorageAccounts.listServiceSAS
       - >-
         azure-arm-storage.StorageAccounts.listServiceSASWithHttpOperationResponse
       - azure-arm-storage.StorageAccounts.listWithHttpOperationResponse
@@ -297,30 +282,6 @@ items:
         type:
           - Promise<azure-arm-storage.CheckNameAvailabilityResult>
     package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.checkNameAvailability_1
-    name: checkNameAvailability
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Checks that the storage account name is valid and is not already in use.
-    syntax:
-      content: >-
-        function checkNameAvailability(name: string, callback:
-        ServiceCallback<CheckNameAvailabilityResult>)
-      parameters:
-        - id: name
-          type:
-            - string
-          description: ''
-        - id: callback
-          type:
-            - ServiceCallback<azure-arm-storage.CheckNameAvailabilityResult>
-          description: ''
-      return:
-        type:
-          - Promise<azure-arm-storage.CheckNameAvailabilityResult>
-    package: azure-arm-storage
   - uid: azure-arm-storage.StorageAccounts.checkNameAvailability_2
     name: checkNameAvailability
     children: []
@@ -340,6 +301,30 @@ items:
         - id: options
           type:
             - Object
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<azure-arm-storage.CheckNameAvailabilityResult>
+          description: ''
+      return:
+        type:
+          - Promise<azure-arm-storage.CheckNameAvailabilityResult>
+    package: azure-arm-storage
+  - uid: azure-arm-storage.StorageAccounts.checkNameAvailability_1
+    name: checkNameAvailability
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Checks that the storage account name is valid and is not already in use.
+    syntax:
+      content: >-
+        function checkNameAvailability(name: string, callback:
+        ServiceCallback<CheckNameAvailabilityResult>)
+      parameters:
+        - id: name
+          type:
+            - string
           description: ''
         - id: callback
           type:
@@ -376,6 +361,59 @@ items:
         type:
           - >-
             Promise<HttpOperationResponse<azure-arm-storage.CheckNameAvailabilityResult>>
+    package: azure-arm-storage
+  - uid: azure-arm-storage.StorageAccounts.create
+    name: create
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Asynchronously creates a new storage account with the specified
+      parameters.
+
+      If an account is already created and a subsequent create request is issued
+
+      with different properties, the account properties will be updated. If an
+
+      account is already created and a subsequent create or update request is
+
+      issued with the exact same set of properties, the request will succeed.
+    syntax:
+      content: >-
+        function create(resourceGroupName: string, accountName: string,
+        parameters: StorageAccountCreateParameters, options?: Object)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |
+            The name of the resource group within the
+            user's subscription. The name is case insensitive.
+        - id: accountName
+          type:
+            - string
+          description: >
+            The name of the storage account within the
+
+            specified resource group. Storage account names must be between 3
+            and 24
+
+            characters in length and use numbers and lower-case letters only.
+        - id: parameters
+          type:
+            - azure-arm-storage.StorageAccountCreateParameters
+          description: |
+            The parameters to provide for the created
+            account.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<azure-arm-storage.StorageAccount>
     package: azure-arm-storage
   - uid: azure-arm-storage.StorageAccounts.create_1
     name: create
@@ -467,200 +505,6 @@ items:
         type:
           - Promise<azure-arm-storage.StorageAccount>
     package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.create
-    name: create
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Asynchronously creates a new storage account with the specified
-      parameters.
-
-      If an account is already created and a subsequent create request is issued
-
-      with different properties, the account properties will be updated. If an
-
-      account is already created and a subsequent create or update request is
-
-      issued with the exact same set of properties, the request will succeed.
-    syntax:
-      content: >-
-        function create(resourceGroupName: string, accountName: string,
-        parameters: StorageAccountCreateParameters, options?: Object)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |
-            The name of the resource group within the
-            user's subscription. The name is case insensitive.
-        - id: accountName
-          type:
-            - string
-          description: >
-            The name of the storage account within the
-
-            specified resource group. Storage account names must be between 3
-            and 24
-
-            characters in length and use numbers and lower-case letters only.
-        - id: parameters
-          type:
-            - azure-arm-storage.StorageAccountCreateParameters
-          description: |
-            The parameters to provide for the created
-            account.
-        - id: options
-          type:
-            - Object
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<azure-arm-storage.StorageAccount>
-    package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.createOrUpdateManagementPolicies_1
-    name: createOrUpdateManagementPolicies
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Sets the data policy rules associated with the specified storage account.
-    syntax:
-      content: >-
-        function createOrUpdateManagementPolicies(resourceGroupName: string,
-        accountName: string, callback:
-        ServiceCallback<StorageAccountManagementPolicies>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: ''
-        - id: accountName
-          type:
-            - string
-          description: ''
-        - id: callback
-          type:
-            - >-
-              ServiceCallback<azure-arm-storage.StorageAccountManagementPolicies>
-          description: ''
-      return:
-        type:
-          - Promise<azure-arm-storage.StorageAccountManagementPolicies>
-    package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.createOrUpdateManagementPolicies_2
-    name: createOrUpdateManagementPolicies
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Sets the data policy rules associated with the specified storage account.
-    syntax:
-      content: >-
-        function createOrUpdateManagementPolicies(resourceGroupName: string,
-        accountName: string, options: Object, callback:
-        ServiceCallback<StorageAccountManagementPolicies>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: ''
-        - id: accountName
-          type:
-            - string
-          description: ''
-        - id: options
-          type:
-            - Object
-          description: ''
-        - id: callback
-          type:
-            - >-
-              ServiceCallback<azure-arm-storage.StorageAccountManagementPolicies>
-          description: ''
-      return:
-        type:
-          - Promise<azure-arm-storage.StorageAccountManagementPolicies>
-    package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.createOrUpdateManagementPolicies
-    name: createOrUpdateManagementPolicies
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Sets the data policy rules associated with the specified storage account.
-    syntax:
-      content: >-
-        function createOrUpdateManagementPolicies(resourceGroupName: string,
-        accountName: string, options?: Object)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |
-            The name of the resource group within the
-            user's subscription. The name is case insensitive.
-        - id: accountName
-          type:
-            - string
-          description: >
-            The name of the storage account within the
-
-            specified resource group. Storage account names must be between 3
-            and 24
-
-            characters in length and use numbers and lower-case letters only.
-        - id: options
-          type:
-            - Object
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<azure-arm-storage.StorageAccountManagementPolicies>
-    package: azure-arm-storage
-  - uid: >-
-      azure-arm-storage.StorageAccounts.createOrUpdateManagementPoliciesWithHttpOperationResponse
-    name: createOrUpdateManagementPoliciesWithHttpOperationResponse
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Sets the data policy rules associated with the specified storage account.
-    syntax:
-      content: >-
-        function
-        createOrUpdateManagementPoliciesWithHttpOperationResponse(resourceGroupName:
-        string, accountName: string, options?: Object)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |
-            The name of the resource group within the
-            user's subscription. The name is case insensitive.
-        - id: accountName
-          type:
-            - string
-          description: >
-            The name of the storage account within the
-
-            specified resource group. Storage account names must be between 3
-            and 24
-
-            characters in length and use numbers and lower-case letters only.
-        - id: options
-          type:
-            - Object
-          description: ''
-          optional: true
-      return:
-        type:
-          - >-
-            Promise<HttpOperationResponse<azure-arm-storage.StorageAccountManagementPolicies>>
-    package: azure-arm-storage
   - uid: azure-arm-storage.StorageAccounts.createWithHttpOperationResponse
     name: createWithHttpOperationResponse
     children: []
@@ -715,19 +559,17 @@ items:
         type:
           - Promise<HttpOperationResponse<azure-arm-storage.StorageAccount>>
     package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.deleteManagementPolicies_1
-    name: deleteManagementPolicies
+  - uid: azure-arm-storage.StorageAccounts.deleteMethod_1
+    name: deleteMethod
     children: []
     type: method
     langs:
       - typeScript
-    summary: >-
-      Deletes the data policy rules associated with the specified storage
-      account.
+    summary: Deletes a storage account in Microsoft Azure.
     syntax:
       content: >-
-        function deleteManagementPolicies(resourceGroupName: string,
-        accountName: string, callback: ServiceCallback<void>)
+        function deleteMethod(resourceGroupName: string, accountName: string,
+        callback: ServiceCallback<void>)
       parameters:
         - id: resourceGroupName
           type:
@@ -744,120 +586,6 @@ items:
       return:
         type:
           - Promise<void>
-    package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.deleteManagementPolicies
-    name: deleteManagementPolicies
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Deletes the data policy rules associated with the specified storage
-      account.
-    syntax:
-      content: >-
-        function deleteManagementPolicies(resourceGroupName: string,
-        accountName: string, options?: Object)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |
-            The name of the resource group within the
-            user's subscription. The name is case insensitive.
-        - id: accountName
-          type:
-            - string
-          description: >
-            The name of the storage account within the
-
-            specified resource group. Storage account names must be between 3
-            and 24
-
-            characters in length and use numbers and lower-case letters only.
-        - id: options
-          type:
-            - Object
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<void>
-    package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.deleteManagementPolicies_2
-    name: deleteManagementPolicies
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Deletes the data policy rules associated with the specified storage
-      account.
-    syntax:
-      content: >-
-        function deleteManagementPolicies(resourceGroupName: string,
-        accountName: string, options: Object, callback: ServiceCallback<void>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: ''
-        - id: accountName
-          type:
-            - string
-          description: ''
-        - id: options
-          type:
-            - Object
-          description: ''
-        - id: callback
-          type:
-            - ServiceCallback<void>
-          description: ''
-      return:
-        type:
-          - Promise<void>
-    package: azure-arm-storage
-  - uid: >-
-      azure-arm-storage.StorageAccounts.deleteManagementPoliciesWithHttpOperationResponse
-    name: deleteManagementPoliciesWithHttpOperationResponse
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Deletes the data policy rules associated with the specified storage
-      account.
-    syntax:
-      content: >-
-        function
-        deleteManagementPoliciesWithHttpOperationResponse(resourceGroupName:
-        string, accountName: string, options?: Object)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |
-            The name of the resource group within the
-            user's subscription. The name is case insensitive.
-        - id: accountName
-          type:
-            - string
-          description: >
-            The name of the storage account within the
-
-            specified resource group. Storage account names must be between 3
-            and 24
-
-            characters in length and use numbers and lower-case letters only.
-        - id: options
-          type:
-            - Object
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<HttpOperationResponse<void>>
     package: azure-arm-storage
   - uid: azure-arm-storage.StorageAccounts.deleteMethod
     name: deleteMethod
@@ -892,34 +620,6 @@ items:
             - Object
           description: ''
           optional: true
-      return:
-        type:
-          - Promise<void>
-    package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.deleteMethod_1
-    name: deleteMethod
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Deletes a storage account in Microsoft Azure.
-    syntax:
-      content: >-
-        function deleteMethod(resourceGroupName: string, accountName: string,
-        callback: ServiceCallback<void>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: ''
-        - id: accountName
-          type:
-            - string
-          description: ''
-        - id: callback
-          type:
-            - ServiceCallback<void>
-          description: ''
       return:
         type:
           - Promise<void>
@@ -992,146 +692,6 @@ items:
       return:
         type:
           - Promise<HttpOperationResponse<void>>
-    package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.getManagementPolicies
-    name: getManagementPolicies
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Gets the data policy rules associated with the specified storage account.
-    syntax:
-      content: >-
-        function getManagementPolicies(resourceGroupName: string, accountName:
-        string, options?: Object)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |
-            The name of the resource group within the
-            user's subscription. The name is case insensitive.
-        - id: accountName
-          type:
-            - string
-          description: >
-            The name of the storage account within the
-
-            specified resource group. Storage account names must be between 3
-            and 24
-
-            characters in length and use numbers and lower-case letters only.
-        - id: options
-          type:
-            - Object
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<azure-arm-storage.StorageAccountManagementPolicies>
-    package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.getManagementPolicies_1
-    name: getManagementPolicies
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Gets the data policy rules associated with the specified storage account.
-    syntax:
-      content: >-
-        function getManagementPolicies(resourceGroupName: string, accountName:
-        string, callback: ServiceCallback<StorageAccountManagementPolicies>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: ''
-        - id: accountName
-          type:
-            - string
-          description: ''
-        - id: callback
-          type:
-            - >-
-              ServiceCallback<azure-arm-storage.StorageAccountManagementPolicies>
-          description: ''
-      return:
-        type:
-          - Promise<azure-arm-storage.StorageAccountManagementPolicies>
-    package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.getManagementPolicies_2
-    name: getManagementPolicies
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Gets the data policy rules associated with the specified storage account.
-    syntax:
-      content: >-
-        function getManagementPolicies(resourceGroupName: string, accountName:
-        string, options: Object, callback:
-        ServiceCallback<StorageAccountManagementPolicies>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: ''
-        - id: accountName
-          type:
-            - string
-          description: ''
-        - id: options
-          type:
-            - Object
-          description: ''
-        - id: callback
-          type:
-            - >-
-              ServiceCallback<azure-arm-storage.StorageAccountManagementPolicies>
-          description: ''
-      return:
-        type:
-          - Promise<azure-arm-storage.StorageAccountManagementPolicies>
-    package: azure-arm-storage
-  - uid: >-
-      azure-arm-storage.StorageAccounts.getManagementPoliciesWithHttpOperationResponse
-    name: getManagementPoliciesWithHttpOperationResponse
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Gets the data policy rules associated with the specified storage account.
-    syntax:
-      content: >-
-        function
-        getManagementPoliciesWithHttpOperationResponse(resourceGroupName:
-        string, accountName: string, options?: Object)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |
-            The name of the resource group within the
-            user's subscription. The name is case insensitive.
-        - id: accountName
-          type:
-            - string
-          description: >
-            The name of the storage account within the
-
-            specified resource group. Storage account names must be between 3
-            and 24
-
-            characters in length and use numbers and lower-case letters only.
-        - id: options
-          type:
-            - Object
-          description: ''
-          optional: true
-      return:
-        type:
-          - >-
-            Promise<HttpOperationResponse<azure-arm-storage.StorageAccountManagementPolicies>>
     package: azure-arm-storage
   - uid: azure-arm-storage.StorageAccounts.getProperties
     name: getProperties
@@ -1300,6 +860,26 @@ items:
         type:
           - Promise<azure-arm-storage.StorageAccountListResult>
     package: azure-arm-storage
+  - uid: azure-arm-storage.StorageAccounts.list_1
+    name: list
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Lists all the storage accounts available under the subscription. Note that
+      storage keys are not returned; use the ListKeys operation for this.
+    syntax:
+      content: 'function list(callback: ServiceCallback<StorageAccountListResult>)'
+      parameters:
+        - id: callback
+          type:
+            - ServiceCallback<azure-arm-storage.StorageAccountListResult>
+          description: ''
+      return:
+        type:
+          - Promise<azure-arm-storage.StorageAccountListResult>
+    package: azure-arm-storage
   - uid: azure-arm-storage.StorageAccounts.list_2
     name: list
     children: []
@@ -1326,25 +906,48 @@ items:
         type:
           - Promise<azure-arm-storage.StorageAccountListResult>
     package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.list_1
-    name: list
+  - uid: azure-arm-storage.StorageAccounts.listAccountSAS
+    name: listAccountSAS
     children: []
     type: method
     langs:
       - typeScript
-    summary: |-
-      Lists all the storage accounts available under the subscription. Note that
-      storage keys are not returned; use the ListKeys operation for this.
+    summary: List SAS credentials of a storage account.
     syntax:
-      content: 'function list(callback: ServiceCallback<StorageAccountListResult>)'
+      content: >-
+        function listAccountSAS(resourceGroupName: string, accountName: string,
+        parameters: AccountSasParameters, options?: Object)
       parameters:
-        - id: callback
+        - id: resourceGroupName
           type:
-            - ServiceCallback<azure-arm-storage.StorageAccountListResult>
+            - string
+          description: |
+            The name of the resource group within the
+            user's subscription. The name is case insensitive.
+        - id: accountName
+          type:
+            - string
+          description: >
+            The name of the storage account within the
+
+            specified resource group. Storage account names must be between 3
+            and 24
+
+            characters in length and use numbers and lower-case letters only.
+        - id: parameters
+          type:
+            - azure-arm-storage.AccountSasParameters
+          description: |
+            The parameters to provide to list SAS credentials
+            for the storage account.
+        - id: options
+          type:
+            - Object
           description: ''
+          optional: true
       return:
         type:
-          - Promise<azure-arm-storage.StorageAccountListResult>
+          - Promise<azure-arm-storage.ListAccountSasResponse>
     package: azure-arm-storage
   - uid: azure-arm-storage.StorageAccounts.listAccountSAS_1
     name: listAccountSAS
@@ -1416,49 +1019,6 @@ items:
         type:
           - Promise<azure-arm-storage.ListAccountSasResponse>
     package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.listAccountSAS
-    name: listAccountSAS
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: List SAS credentials of a storage account.
-    syntax:
-      content: >-
-        function listAccountSAS(resourceGroupName: string, accountName: string,
-        parameters: AccountSasParameters, options?: Object)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |
-            The name of the resource group within the
-            user's subscription. The name is case insensitive.
-        - id: accountName
-          type:
-            - string
-          description: >
-            The name of the storage account within the
-
-            specified resource group. Storage account names must be between 3
-            and 24
-
-            characters in length and use numbers and lower-case letters only.
-        - id: parameters
-          type:
-            - azure-arm-storage.AccountSasParameters
-          description: |
-            The parameters to provide to list SAS credentials
-            for the storage account.
-        - id: options
-          type:
-            - Object
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<azure-arm-storage.ListAccountSasResponse>
-    package: azure-arm-storage
   - uid: azure-arm-storage.StorageAccounts.listAccountSASWithHttpOperationResponse
     name: listAccountSASWithHttpOperationResponse
     children: []
@@ -1503,36 +1063,6 @@ items:
         type:
           - >-
             Promise<HttpOperationResponse<azure-arm-storage.ListAccountSasResponse>>
-    package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.listByResourceGroup
-    name: listByResourceGroup
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: |-
-      Lists all the storage accounts available under the given resource group.
-      Note that storage keys are not returned; use the ListKeys operation for
-      this.
-    syntax:
-      content: >-
-        function listByResourceGroup(resourceGroupName: string, options?:
-        Object)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |
-            The name of the resource group within the
-            user's subscription. The name is case insensitive.
-        - id: options
-          type:
-            - Object
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<azure-arm-storage.StorageAccountListResult>
     package: azure-arm-storage
   - uid: azure-arm-storage.StorageAccounts.listByResourceGroup_1
     name: listByResourceGroup
@@ -1588,6 +1118,36 @@ items:
           type:
             - ServiceCallback<azure-arm-storage.StorageAccountListResult>
           description: ''
+      return:
+        type:
+          - Promise<azure-arm-storage.StorageAccountListResult>
+    package: azure-arm-storage
+  - uid: azure-arm-storage.StorageAccounts.listByResourceGroup
+    name: listByResourceGroup
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Lists all the storage accounts available under the given resource group.
+      Note that storage keys are not returned; use the ListKeys operation for
+      this.
+    syntax:
+      content: >-
+        function listByResourceGroup(resourceGroupName: string, options?:
+        Object)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |
+            The name of the resource group within the
+            user's subscription. The name is case insensitive.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
       return:
         type:
           - Promise<azure-arm-storage.StorageAccountListResult>
@@ -1760,6 +1320,49 @@ items:
           - >-
             Promise<HttpOperationResponse<azure-arm-storage.StorageAccountListKeysResult>>
     package: azure-arm-storage
+  - uid: azure-arm-storage.StorageAccounts.listServiceSAS
+    name: listServiceSAS
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: List service SAS credentials of a specific resource.
+    syntax:
+      content: >-
+        function listServiceSAS(resourceGroupName: string, accountName: string,
+        parameters: ServiceSasParameters, options?: Object)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |
+            The name of the resource group within the
+            user's subscription. The name is case insensitive.
+        - id: accountName
+          type:
+            - string
+          description: >
+            The name of the storage account within the
+
+            specified resource group. Storage account names must be between 3
+            and 24
+
+            characters in length and use numbers and lower-case letters only.
+        - id: parameters
+          type:
+            - azure-arm-storage.ServiceSasParameters
+          description: |
+            The parameters to provide to list service SAS
+            credentials.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<azure-arm-storage.ListServiceSasResponse>
+    package: azure-arm-storage
   - uid: azure-arm-storage.StorageAccounts.listServiceSAS_1
     name: listServiceSAS
     children: []
@@ -1826,49 +1429,6 @@ items:
           type:
             - ServiceCallback<azure-arm-storage.ListServiceSasResponse>
           description: ''
-      return:
-        type:
-          - Promise<azure-arm-storage.ListServiceSasResponse>
-    package: azure-arm-storage
-  - uid: azure-arm-storage.StorageAccounts.listServiceSAS
-    name: listServiceSAS
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: List service SAS credentials of a specific resource.
-    syntax:
-      content: >-
-        function listServiceSAS(resourceGroupName: string, accountName: string,
-        parameters: ServiceSasParameters, options?: Object)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: |
-            The name of the resource group within the
-            user's subscription. The name is case insensitive.
-        - id: accountName
-          type:
-            - string
-          description: >
-            The name of the storage account within the
-
-            specified resource group. Storage account names must be between 3
-            and 24
-
-            characters in length and use numbers and lower-case letters only.
-        - id: parameters
-          type:
-            - azure-arm-storage.ServiceSasParameters
-          description: |
-            The parameters to provide to list service SAS
-            credentials.
-        - id: options
-          type:
-            - Object
-          description: ''
-          optional: true
       return:
         type:
           - Promise<azure-arm-storage.ListServiceSasResponse>
@@ -2408,37 +1968,6 @@ references:
       - name: CheckNameAvailabilityResult
         fullName: CheckNameAvailabilityResult
         uid: azure-arm-storage.CheckNameAvailabilityResult
-      - name: '>>'
-        fullName: '>>'
-  - uid: Promise<azure-arm-storage.StorageAccountManagementPolicies>
-    name: StorageAccountManagementPolicies>
-    spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: StorageAccountManagementPolicies
-        fullName: StorageAccountManagementPolicies
-        uid: azure-arm-storage.StorageAccountManagementPolicies
-      - name: '>'
-        fullName: '>'
-  - uid: ServiceCallback<azure-arm-storage.StorageAccountManagementPolicies>
-    name: StorageAccountManagementPolicies>
-    spec.typeScript:
-      - name: ServiceCallback<
-        fullName: ServiceCallback<
-      - name: StorageAccountManagementPolicies
-        fullName: StorageAccountManagementPolicies
-        uid: azure-arm-storage.StorageAccountManagementPolicies
-      - name: '>'
-        fullName: '>'
-  - uid: >-
-      Promise<HttpOperationResponse<azure-arm-storage.StorageAccountManagementPolicies>>
-    name: StorageAccountManagementPolicies>>
-    spec.typeScript:
-      - name: Promise<HttpOperationResponse<
-        fullName: Promise<HttpOperationResponse<
-      - name: StorageAccountManagementPolicies
-        fullName: StorageAccountManagementPolicies
-        uid: azure-arm-storage.StorageAccountManagementPolicies
       - name: '>>'
         fullName: '>>'
   - uid: Promise<azure-arm-storage.StorageAccountListResult>

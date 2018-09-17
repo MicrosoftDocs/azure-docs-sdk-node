@@ -6,8 +6,8 @@ ms.author: routlaw
 manager: angerobe
 ms.date: 05/03/2018
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
+ms.prod:
+ms.technology:
 ms.devlang: nodejs
 ms.service: event-grid
 ms.custom: devcenter

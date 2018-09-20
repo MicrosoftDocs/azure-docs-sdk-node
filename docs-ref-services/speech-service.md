@@ -1,8 +1,8 @@
 ---
 title: Speech Service SDK for Node.js
 description: Reference for Speech Service SDK for Node.js
-author: tfitzmac
-ms.author: tomfitz
+author: mahilleb-msft
+ms.author: mahilleb
 manager: timlt
 ms.date: 09/20/2018
 ms.topic: article

@@ -57,7 +57,7 @@ recognizer.recognizeOnceAsync(
 );
 ``` 
 
-Check out our [step-by-step quickstart](https://docs.microsoft.com/azure/cognitive-services/speech-service/quickstart-js-browser).
+Check out our [step-by-step quickstart](/azure/cognitive-services/speech-service/quickstart-js-browser).
 
 ## Samples
 

@@ -1,0 +1,437 @@
+### YamlMime:UniversalReference
+items:
+  - uid: '@azure/storage-blob.BlockBlobURL'
+    name: BlockBlobURL
+    fullName: BlockBlobURL
+    children:
+      - '@azure/storage-blob.BlockBlobURL.constructor'
+      - '@azure/storage-blob.BlockBlobURL.commitBlockList'
+      - '@azure/storage-blob.BlockBlobURL.fromBlobURL'
+      - '@azure/storage-blob.BlockBlobURL.fromContainerURL'
+      - '@azure/storage-blob.BlockBlobURL.getBlockList'
+      - '@azure/storage-blob.BlockBlobURL.stageBlock'
+      - '@azure/storage-blob.BlockBlobURL.stageBlockFromURL'
+      - '@azure/storage-blob.BlockBlobURL.upload'
+      - '@azure/storage-blob.BlockBlobURL.withPipeline'
+      - '@azure/storage-blob.BlockBlobURL.withSnapshot'
+    langs:
+      - typeScript
+    type: class
+    summary: BlockBlobURL defines a set of operations applicable to block blobs.
+    extends:
+      name: '@azure/storage-blob.BlobURL'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobURL.constructor'
+    name: BlockBlobURL
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Creates an instance of BlockBlobURL.
+    syntax:
+      content: 'new BlockBlobURL(url: string, pipeline: Pipeline)'
+      parameters:
+        - id: url
+          type:
+            - string
+          description: |-
+            A URL string pointing to Azure Storage block blob, such as
+                                "https://myaccount.blob.core.windows.net/mycontainer/blockblob". You can
+                                append a SAS if using AnonymousCredential, such as
+                                "https://myaccount.blob.core.windows.net/mycontainer/blockblob?sasString".
+        - id: pipeline
+          type:
+            - '@azure/storage-blob.Pipeline'
+          description: |-
+            Call StorageURL.newPipeline() to create a default
+                                       pipeline, or provide a customized pipeline.
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobURL.commitBlockList'
+    name: commitBlockList
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Writes a blob by specifying the list of block IDs that make up the blob.
+
+      In order to be written as part of a blob, a block must have been
+      successfully written
+
+      to the server in a prior stageBlock operation. You can call
+      commitBlockList to update a blob
+
+      by uploading only those blocks that have changed, then committing the new
+      and existing
+
+      blocks together. Any blocks not specified in the block list and
+      permanently deleted.
+    syntax:
+      content: >-
+        function commitBlockList(aborter: Aborter, blocks: string[], options?:
+        IBlockBlobCommitBlockListOptions)
+      parameters:
+        - id: aborter
+          type:
+            - '@azure/storage-blob.Aborter'
+          description: >-
+            Create a new Aborter instance with Aborter.None or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: blocks
+          type:
+            - 'string[]'
+          description: Array of 64-byte value that is base64-encoded
+        - id: options
+          type:
+            - '@azure/storage-blob.IBlockBlobCommitBlockListOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlockBlobCommitBlockListResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobURL.fromBlobURL'
+    name: fromBlobURL
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates a BlockBlobURL object from BlobURL instance.
+    syntax:
+      content: 'static function fromBlobURL(blobURL: BlobURL)'
+      parameters:
+        - id: blobURL
+          type:
+            - '@azure/storage-blob.BlobURL'
+          description: ''
+      return:
+        type:
+          - '@azure/storage-blob.BlockBlobURL'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobURL.fromContainerURL'
+    name: fromContainerURL
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates a BlockBlobURL object from ContainerURL instance.
+    syntax:
+      content: >-
+        static function fromContainerURL(containerURL: ContainerURL, blobName:
+        string)
+      parameters:
+        - id: containerURL
+          type:
+            - '@azure/storage-blob.ContainerURL'
+          description: ''
+        - id: blobName
+          type:
+            - string
+          description: ''
+      return:
+        type:
+          - '@azure/storage-blob.BlockBlobURL'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobURL.getBlockList'
+    name: getBlockList
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Returns the list of blocks that have been uploaded as part of a block blob
+      using the specified block list filter.
+    syntax:
+      content: >-
+        function getBlockList(aborter: Aborter, listType: BlockListType,
+        options?: IBlockBlobGetBlockListOptions)
+      parameters:
+        - id: aborter
+          type:
+            - '@azure/storage-blob.Aborter'
+          description: >-
+            Create a new Aborter instance with Aborter.None or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: listType
+          type:
+            - '@azure/storage-blob.BlockListType'
+          description: ''
+        - id: options
+          type:
+            - '@azure/storage-blob.IBlockBlobGetBlockListOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlockBlobGetBlockListResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobURL.stageBlock'
+    name: stageBlock
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Uploads the specified block to the block blob's "staging area" to be later
+      committed by a call to commitBlockList.
+    syntax:
+      content: >-
+        function stageBlock(aborter: Aborter, blockId: string, body:
+        HttpRequestBody, contentLength: number, options?:
+        IBlockBlobStageBlockOptions)
+      parameters:
+        - id: aborter
+          type:
+            - '@azure/storage-blob.Aborter'
+          description: >-
+            Create a new Aborter instance with Aborter.None or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: blockId
+          type:
+            - string
+          description: A 64-byte value that is base64-encoded
+        - id: body
+          type:
+            - HttpRequestBody
+          description: ''
+        - id: contentLength
+          type:
+            - number
+          description: ''
+        - id: options
+          type:
+            - '@azure/storage-blob.IBlockBlobStageBlockOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlockBlobStageBlockResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobURL.stageBlockFromURL'
+    name: stageBlockFromURL
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      The Stage Block From URL operation creates a new block to be committed as
+      part
+
+      of a blob where the contents are read from a URL.
+
+      This API is available starting in version 2018-03-28.
+    syntax:
+      content: >-
+        function stageBlockFromURL(aborter: Aborter, blockId: string, sourceURL:
+        string, offset: number, count?: number, options?:
+        IBlockBlobStageBlockFromURLOptions)
+      parameters:
+        - id: aborter
+          type:
+            - '@azure/storage-blob.Aborter'
+          description: >-
+            Create a new Aborter instance with Aborter.None or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: blockId
+          type:
+            - string
+          description: A 64-byte value that is base64-encoded
+        - id: sourceURL
+          type:
+            - string
+          description: |-
+            Specifies the URL of the blob. The value
+                                      may be a URL of up to 2 KB in length that specifies a blob.
+                                      The value should be URL-encoded as it would appear
+                                      in a request URI. The source blob must either be public
+                                      or must be authenticated via a shared access signature.
+                                      If the source blob is public, no authentication is required
+                                      to perform the operation. Here are some examples of source object URLs:
+                                      - https://myaccount.blob.core.windows.net/mycontainer/myblob
+                                      - https://myaccount.blob.core.windows.net/mycontainer/myblob?snapshot=<DateTime>
+        - id: offset
+          type:
+            - number
+          description: 'From which position of the blob to download, >= 0'
+        - id: count
+          type:
+            - number
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-blob.IBlockBlobStageBlockFromURLOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlockBlobStageBlockFromURLResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobURL.upload'
+    name: upload
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Creates a new block blob, or updates the content of an existing block
+      blob.
+
+      Updating an existing block blob overwrites any existing metadata on the
+      blob.
+
+      Partial updates are not supported; the content of the existing blob is
+
+      overwritten with the new content. To perform a partial update of a block
+      blob's,
+
+      use stageBlock and commitBlockList.
+
+      This is a non-parallel uploading method, please use
+      uploadFileToBlockBlob(),
+
+      uploadStreamToBlockBlob() or uploadBrowserDataToBlockBlob() for better
+      performance
+
+      with concurrency uploading.
+    syntax:
+      content: >-
+        function upload(aborter: Aborter, body: HttpRequestBody, contentLength:
+        number, options?: IBlockBlobUploadOptions)
+      parameters:
+        - id: aborter
+          type:
+            - '@azure/storage-blob.Aborter'
+          description: >-
+            Create a new Aborter instance with Aborter.None or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: body
+          type:
+            - HttpRequestBody
+          description: ''
+        - id: contentLength
+          type:
+            - number
+          description: ''
+        - id: options
+          type:
+            - '@azure/storage-blob.IBlockBlobUploadOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlockBlobUploadResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobURL.withPipeline'
+    name: withPipeline
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Creates a new BlockBlobURL object identical to the source but with the
+      specified request policy pipeline.
+    syntax:
+      content: 'function withPipeline(pipeline: Pipeline)'
+      parameters:
+        - id: pipeline
+          type:
+            - '@azure/storage-blob.Pipeline'
+          description: ''
+      return:
+        type:
+          - '@azure/storage-blob.BlockBlobURL'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobURL.withSnapshot'
+    name: withSnapshot
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Creates a new BlockBlobURL object identical to the source but with the
+      specified snapshot timestamp.
+      Provide "" will remove the snapshot and return a URL to the base blob.
+    syntax:
+      content: 'function withSnapshot(snapshot: string)'
+      parameters:
+        - id: snapshot
+          type:
+            - string
+          description: ''
+      return:
+        type:
+          - '@azure/storage-blob.BlockBlobURL'
+    package: '@azure/storage-blob'
+references:
+  - uid: '@azure/storage-blob.BlobURL'
+    name: BlobURL
+    spec.typeScript:
+      - name: BlobURL
+        fullName: BlobURL
+        uid: '@azure/storage-blob.BlobURL'
+  - uid: '@azure/storage-blob.Pipeline'
+    name: Pipeline
+    spec.typeScript:
+      - name: Pipeline
+        fullName: Pipeline
+        uid: '@azure/storage-blob.Pipeline'
+  - uid: '@azure/storage-blob.Aborter'
+    name: Aborter
+    spec.typeScript:
+      - name: Aborter
+        fullName: Aborter
+        uid: '@azure/storage-blob.Aborter'
+  - uid: '@azure/storage-blob.IBlockBlobCommitBlockListOptions'
+    name: IBlockBlobCommitBlockListOptions
+    spec.typeScript:
+      - name: IBlockBlobCommitBlockListOptions
+        fullName: IBlockBlobCommitBlockListOptions
+        uid: '@azure/storage-blob.IBlockBlobCommitBlockListOptions'
+  - uid: '@azure/storage-blob.BlockListType'
+    name: BlockListType
+    spec.typeScript:
+      - name: BlockListType
+        fullName: BlockListType
+        uid: '@azure/storage-blob.BlockListType'
+  - uid: '@azure/storage-blob.IBlockBlobGetBlockListOptions'
+    name: IBlockBlobGetBlockListOptions
+    spec.typeScript:
+      - name: IBlockBlobGetBlockListOptions
+        fullName: IBlockBlobGetBlockListOptions
+        uid: '@azure/storage-blob.IBlockBlobGetBlockListOptions'
+  - uid: '@azure/storage-blob.IBlockBlobStageBlockOptions'
+    name: IBlockBlobStageBlockOptions
+    spec.typeScript:
+      - name: IBlockBlobStageBlockOptions
+        fullName: IBlockBlobStageBlockOptions
+        uid: '@azure/storage-blob.IBlockBlobStageBlockOptions'
+  - uid: '@azure/storage-blob.IBlockBlobStageBlockFromURLOptions'
+    name: IBlockBlobStageBlockFromURLOptions
+    spec.typeScript:
+      - name: IBlockBlobStageBlockFromURLOptions
+        fullName: IBlockBlobStageBlockFromURLOptions
+        uid: '@azure/storage-blob.IBlockBlobStageBlockFromURLOptions'
+  - uid: '@azure/storage-blob.IBlockBlobUploadOptions'
+    name: IBlockBlobUploadOptions
+    spec.typeScript:
+      - name: IBlockBlobUploadOptions
+        fullName: IBlockBlobUploadOptions
+        uid: '@azure/storage-blob.IBlockBlobUploadOptions'
+  - uid: '@azure/storage-blob.BlockBlobURL'
+    name: BlockBlobURL
+    spec.typeScript:
+      - name: BlockBlobURL
+        fullName: BlockBlobURL
+        uid: '@azure/storage-blob.BlockBlobURL'
+  - uid: '@azure/storage-blob.ContainerURL'
+    name: ContainerURL
+    spec.typeScript:
+      - name: ContainerURL
+        fullName: ContainerURL
+        uid: '@azure/storage-blob.ContainerURL'

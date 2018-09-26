@@ -9,7 +9,6 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: active-directory
 ---
 
 # Azure Active Directory modules for Node.js

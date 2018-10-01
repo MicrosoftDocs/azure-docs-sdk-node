@@ -18,8 +18,6 @@ ms.topic: hub-page
 			<li style="
 					flex-basis: 180px;
 					text-align: center;
-					background-color: black;
-					font: white;
 					display: block;
 					margin-left: auto;
 					margin-top: 15px;
@@ -31,7 +29,7 @@ ms.topic: hub-page
 					<br>
 						<div class="cardText">
 						<h3 style="
-							color: white;
+							font-weight: bold;
 							font-size: large;
 						">Get started free &gt;</h3>
 					</div>
@@ -310,8 +308,6 @@ getTextAnalytics.end();
 			<li style="
 					flex-basis: 180px;
 					text-align: center;
-					background-color: black;
-					font: white;
 					display: block;
 					margin-left: auto;
 					margin-top: 15px;
@@ -323,7 +319,7 @@ getTextAnalytics.end();
 					<br>
 						<div class="cardText">
 						<h3 style="
-							color: white;
+							font-weight: bold;
 							font-size: large;
 						">Get started free &gt;</h3>
 					</div>

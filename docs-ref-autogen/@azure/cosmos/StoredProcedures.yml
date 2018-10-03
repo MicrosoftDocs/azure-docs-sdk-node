@@ -7,6 +7,7 @@ items:
       - '@azure/cosmos.StoredProcedures.container'
       - '@azure/cosmos.StoredProcedures.create'
       - '@azure/cosmos.StoredProcedures.query'
+      - '@azure/cosmos.StoredProcedures.query_1'
       - '@azure/cosmos.StoredProcedures.readAll'
       - '@azure/cosmos.StoredProcedures.upsert'
     langs:
@@ -94,7 +95,32 @@ items:
           optional: true
       return:
         type:
-          - '@azure/cosmos.QueryIterator<@azure/cosmos.StoredProcedureDefinition>'
+          - '@azure/cosmos.QueryIterator<any>'
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.StoredProcedures.query_1'
+    name: query
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Query all Stored Procedures.
+    syntax:
+      content: 'function query<T>(query: SqlQuerySpec, options?: FeedOptions)'
+      parameters:
+        - id: query
+          type:
+            - '@azure/cosmos.SqlQuerySpec'
+          description: >-
+            Query configuration for the operation. See <xref:SqlQuerySpec> for
+            more info on how to configure a query.
+        - id: options
+          type:
+            - '@azure/cosmos.FeedOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - '@azure/cosmos.QueryIterator<T>'
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.StoredProcedures.readAll'
     name: readAll
@@ -113,7 +139,9 @@ items:
           optional: true
       return:
         type:
-          - '@azure/cosmos.QueryIterator<@azure/cosmos.StoredProcedureDefinition>'
+          - >-
+            @azure/cosmos.QueryIterator<@azure/cosmos.StoredProcedureDefinition
+            & @azure/cosmos.Resource>
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.StoredProcedures.upsert'
     name: upsert
@@ -193,8 +221,26 @@ references:
       - name: FeedOptions
         fullName: FeedOptions
         uid: '@azure/cosmos.FeedOptions'
-  - uid: '@azure/cosmos.QueryIterator<@azure/cosmos.StoredProcedureDefinition>'
-    name: StoredProcedureDefinition>
+  - uid: '@azure/cosmos.QueryIterator<any>'
+    name: QueryIterator<any>
+    spec.typeScript:
+      - name: QueryIterator
+        fullName: QueryIterator
+        uid: '@azure/cosmos.QueryIterator'
+      - name: <any>
+        fullName: <any>
+  - uid: '@azure/cosmos.QueryIterator<T>'
+    name: QueryIterator<T>
+    spec.typeScript:
+      - name: QueryIterator
+        fullName: QueryIterator
+        uid: '@azure/cosmos.QueryIterator'
+      - name: <T>
+        fullName: <T>
+  - uid: >-
+      @azure/cosmos.QueryIterator<@azure/cosmos.StoredProcedureDefinition &
+      @azure/cosmos.Resource>
+    name: Resource>
     spec.typeScript:
       - name: QueryIterator
         fullName: QueryIterator
@@ -204,5 +250,10 @@ references:
       - name: StoredProcedureDefinition
         fullName: StoredProcedureDefinition
         uid: '@azure/cosmos.StoredProcedureDefinition'
+      - name: ' & '
+        fullName: ' & '
+      - name: Resource
+        fullName: Resource
+        uid: '@azure/cosmos.Resource'
       - name: '>'
         fullName: '>'

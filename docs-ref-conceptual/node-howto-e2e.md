@@ -105,13 +105,13 @@ The MongoDB connection string is hard-coded in declaration of the **database.loc
 
 	```javascript
 	mongoose.connect(database.localUrl);
-	```
+    ```
 
 	with this code:
 
 	```javascript
 	mongoose.connect(process.env.MONGODB_URL || database.localUrl);
-	```
+    ```
 
 Note that if you type the code in manually (instead of copy and paste), when you type the period after `process`, Visual Studio Code displays the available members of the Node.js **process** global API.
 

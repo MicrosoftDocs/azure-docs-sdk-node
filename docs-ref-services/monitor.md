@@ -44,7 +44,6 @@ msRestAzure
       console.dir(rules, { depth: null, colors: true });
     })
   });
-
 ```
 
 ### Samples

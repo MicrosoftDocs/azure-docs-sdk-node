@@ -1,6 +1,6 @@
 ---
-title: Azure modules for Node.js
-description: Overview of the Azure management and service modules for Node.js
+title: Azure modules for JavaScript
+description: Overview of the Azure management and service modules for JavaScript
 author: rloutlaw
 ms.author: routlaw
 manager: routlaw
@@ -11,9 +11,9 @@ ms.devlang: nodejs
 ms.service: azure-nodejs
 ---
 
-# Azure modules for Node.js
+# Azure modules for JavaScript
 
-Manage Azure resources and connect to services from your Node.js applications with the Azure modules for Node.js. The code is available as [npm modules](node-sdk-azure-install.md) for use in your projects. 
+Manage Azure resources and connect to services from your JavaScript applications with the Azure modules for JavaScript. The code is available as [npm modules](node-sdk-azure-install.md) for use in your projects. 
 
 ## Manage Azure resources
 
@@ -80,7 +80,7 @@ Review the [install instructions](node-sdk-azure-install.md) for a full list of 
 
 ## Connect to Azure services
 
-In addition to using the Azure modules to create and manage resources within Azure, you can also use packages to connect and use Azure cloud services in your apps. For example, you might update a table SQL Database or upload files to Azure Storage. Select the package you need for a particular service from the [complete list](node-sdk-azure-install.md) and visit the [Node.js developer center](https://azure.microsoft.com/develop/nodejs/) for tutorials and sample code to learn how to use the modules in your apps.
+In addition to using the Azure modules to create and manage resources within Azure, you can also use packages to connect and use Azure cloud services in your apps. For example, you might update a table SQL Database or upload files to Azure Storage. Select the package you need for a particular service from the [complete list](node-sdk-azure-install.md) and visit the [JavaScript developer center](https://azure.microsoft.com/develop/nodejs/) for tutorials and sample code to learn how to use the modules in your apps.
 
 For example, to print out the contents of every blob in an Azure storage container:
 

@@ -48,8 +48,6 @@ msRestAzure
     console.log('Details of lab:');
     console.dir(lab, { depth: null, colors: true });
   });
-
-
 ```
 
 ## Samples

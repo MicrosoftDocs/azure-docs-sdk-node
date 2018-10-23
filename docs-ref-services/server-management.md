@@ -29,8 +29,8 @@ Use npm to install the Azure Server Management module for Node.js
 npm install azure-arm-servermanagement
 ```
 
-##Example
+## Example
 
-##Samples
+## Samples
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

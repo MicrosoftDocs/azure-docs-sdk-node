@@ -49,7 +49,6 @@ msRestAzure
     console.dir(automationAccounts, { depth: null, colors: true })
   )
   .catch(err => console.log(err));
-
 ```
 
 ## Samples

@@ -49,7 +49,6 @@ msRestAzure
     console.log('List of vaults:');
     console.dir(vaults, { depth: null, colors: true });
   });
-  
 ```
 
 ## Samples

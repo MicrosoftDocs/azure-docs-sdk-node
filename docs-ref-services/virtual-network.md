@@ -51,7 +51,6 @@ msRestAzure
     console.log('List of virtual networks:');
     console.dir(networkList, { depth: null, colors: true });
   });
-
 ```
 
 ## Samples

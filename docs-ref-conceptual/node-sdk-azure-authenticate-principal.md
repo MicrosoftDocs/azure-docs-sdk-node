@@ -43,7 +43,7 @@ accomplished with the following steps:
 
 	```shell
 	$ az login
-	```
+    ```
 
 4. Calling `az login` results in a URL and a code. Browse to the specified URL, enter the code, and login with your Azure identity (this may happen automatically if you're already logged in). 
 You'll then be able to access your account via the CLI.
@@ -52,7 +52,7 @@ You'll then be able to access your account via the CLI.
 
 	```shell
 	$ az account list
-	```
+    ```
 
 	The following shows an example of the output:
 
@@ -70,7 +70,7 @@ You'll then be able to access your account via the CLI.
 			"type": "user"
 		}
 	}
-	```
+    ```
 
 	**Note the subscription ID as it will be used in Step 7.**
 
@@ -78,7 +78,7 @@ You'll then be able to access your account via the CLI.
 
 	```shell
 	$ az ad sp create-for-rbac
-	```
+    ```
 
 	The following shows an example of the output:
 
@@ -90,7 +90,7 @@ You'll then be able to access your account via the CLI.
 	"password": "<password>",
 	"tenant": "<tenant>"
 	}
-	```
+    ```
 
 	**Note the tenant, name, and password values as they'll be used in Step 7.**
 
@@ -104,7 +104,7 @@ with the values you obtained in steps 4 and 5.
 	export azureServicePrincipalTenantId='<tenant>'
 	export azureServicePrincipalClientId='<name>'
 	export azureServicePrincipalPassword='<password>'
-	```
+    ```
 
 	**Using PowerShell**
 
@@ -113,7 +113,7 @@ with the values you obtained in steps 4 and 5.
 	$env:azureServicePrincipalTenantId='<tenant>'
 	$env:azureServicePrincipalClientId='<name>'
 	$env:azureServicePrincipalPassword='<password>'
-	```
+    ```
 
 ## Create a service principal using the Azure SDK for Node.js
 

@@ -6,10 +6,10 @@ ms.author: tomfitz
 manager: timlt
 ms.date: 07/18/2017
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: Billing
+ms.service: billing
+ms.product: 
+ms.technology:
 ---
 
 # Azure Billing modules for Node.js

@@ -50,17 +50,16 @@ items:
       - typeScript
     summary: Closes the connection to an IoT hub.
     syntax:
-      content: 'function close(done?: Callback<Disconnected>)'
+      content: 'function close(done?: IncomingMessageCallback<Disconnected>)'
       parameters:
         - id: done
           type:
-            - azure-iothub.Client.Callback<Disconnected>
-          description: |
-            The function to call when the operation is
-                                       complete. `done` will be passed an Error object
-                                       argument, which will be null if the operation
-                                       completed successfully.
+            - azure-iothub.IncomingMessageCallback<Disconnected>
+          description: ''
           optional: true
+      return:
+        type:
+          - Promise<azure-iothub.ResultWithIncomingMessage<Disconnected>> | void
     package: azure-iothub
   - uid: azure-iothub.Client.fromConnectionString
     name: fromConnectionString
@@ -132,16 +131,21 @@ items:
       Returns a AmqpReceiver object which emits events when new feedback
       messages are received by the client.
     syntax:
-      content: 'function getFeedbackReceiver(done: Callback<ServiceReceiver>)'
+      content: >-
+        function getFeedbackReceiver(done?:
+        IncomingMessageCallback<ServiceReceiver>)
       parameters:
         - id: done
           type:
-            - azure-iothub.Client.Callback<azure-iothub.Client.ServiceReceiver>
-          description: |
-            The function to call when the operation is
-                                         complete. `done` will be called with two
-                                         arguments: an Error object (can be null) and a
-                                         AmqpReceiver object.
+            - >-
+              azure-iothub.IncomingMessageCallback<azure-iothub.Client.ServiceReceiver>
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<azure-iothub.ResultWithIncomingMessage<azure-iothub.Client.ServiceReceiver>>
+            | void
     package: azure-iothub
   - uid: azure-iothub.Client.getFileNotificationReceiver
     name: getFileNotificationReceiver
@@ -153,16 +157,21 @@ items:
       Returns a AmqpReceiver object which emits events when new file upload
       notifications are received by the client.
     syntax:
-      content: 'function getFileNotificationReceiver(done: Callback<ServiceReceiver>)'
+      content: >-
+        function getFileNotificationReceiver(done?:
+        IncomingMessageCallback<ServiceReceiver>)
       parameters:
         - id: done
           type:
-            - azure-iothub.Client.Callback<azure-iothub.Client.ServiceReceiver>
-          description: |
-            The function to call when the operation is
-                                         complete. `done` will be called with two
-                                         arguments: an Error object (can be null) and a
-                                         AmqpReceiver object.
+            - >-
+              azure-iothub.IncomingMessageCallback<azure-iothub.Client.ServiceReceiver>
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<azure-iothub.ResultWithIncomingMessage<azure-iothub.Client.ServiceReceiver>>
+            | void
     package: azure-iothub
   - uid: azure-iothub.Client.invokeDeviceMethod
     name: invokeDeviceMethod
@@ -174,7 +183,7 @@ items:
     syntax:
       content: >-
         function invokeDeviceMethod(deviceId: string, methodParams:
-        DeviceMethodParams, done?: Callback<any>)
+        DeviceMethodParams, done?: IncomingMessageCallback<any>)
       parameters:
         - id: deviceId
           type:
@@ -186,9 +195,8 @@ items:
           description: ''
         - id: done
           type:
-            - azure-iothub.Client.Callback<any>
-          description: |
-            The callback to call with the result of the method execution.
+            - azure-iothub.IncomingMessageCallback<any>
+          description: ''
           optional: true
     package: azure-iothub
   - uid: azure-iothub.Client.invokeDeviceMethod_1
@@ -201,7 +209,7 @@ items:
     syntax:
       content: >-
         function invokeDeviceMethod(deviceId: string, moduleId: string,
-        methodParams: DeviceMethodParams, done?: Callback<any>)
+        methodParams: DeviceMethodParams, done?: IncomingMessageCallback<any>)
       parameters:
         - id: deviceId
           type:
@@ -217,7 +225,7 @@ items:
           description: ''
         - id: done
           type:
-            - azure-iothub.Client.Callback<any>
+            - azure-iothub.IncomingMessageCallback<any>
           description: ''
           optional: true
     package: azure-iothub
@@ -229,17 +237,16 @@ items:
       - typeScript
     summary: Opens the connection to an IoT hub.
     syntax:
-      content: 'function open(done?: Callback<Connected>)'
+      content: 'function open(done?: IncomingMessageCallback<Connected>)'
       parameters:
         - id: done
           type:
-            - azure-iothub.Client.Callback<Connected>
-          description: |
-            The function to call when the operation is
-                                       complete. `done` will be passed an Error object
-                                       argument, which will be null if the operation
-                                       completed successfully.
+            - azure-iothub.IncomingMessageCallback<Connected>
+          description: ''
           optional: true
+      return:
+        type:
+          - Promise<azure-iothub.ResultWithIncomingMessage<Connected>> | void
     package: azure-iothub
   - uid: azure-iothub.Client.send
     name: send
@@ -251,7 +258,8 @@ items:
     syntax:
       content: >-
         function send(deviceId: string, message: Message |
-        Message.BufferConvertible, done?: Callback<MessageEnqueued>)
+        Message.BufferConvertible, done?:
+        IncomingMessageCallback<MessageEnqueued>)
       parameters:
         - id: deviceId
           type:
@@ -267,14 +275,14 @@ items:
                                          it will be converted.
         - id: done
           type:
-            - azure-iothub.Client.Callback<MessageEnqueued>
-          description: |
-            The function to call when the operation is
-                                         complete. `done` will be called with two
-                                         arguments: an Error object (can be null) and a
-                                         transport-specific response object useful for
-                                         logging or debugging.
+            - azure-iothub.IncomingMessageCallback<MessageEnqueued>
+          description: ''
           optional: true
+      return:
+        type:
+          - >-
+            Promise<azure-iothub.ResultWithIncomingMessage<MessageEnqueued>> |
+            void
     package: azure-iothub
   - uid: azure-iothub.Client.setRetryPolicy
     name: setRetryPolicy
@@ -360,20 +368,104 @@ references:
         uid: azure-iothub.Client.Callback
       - name: <MessageEnqueued>
         fullName: <MessageEnqueued>
+  - uid: azure-iothub.IncomingMessageCallback<Disconnected>
+    name: IncomingMessageCallback<Disconnected>
+    spec.typeScript:
+      - name: IncomingMessageCallback
+        fullName: IncomingMessageCallback
+        uid: azure-iothub.IncomingMessageCallback
+      - name: <Disconnected>
+        fullName: <Disconnected>
+  - uid: Promise<azure-iothub.ResultWithIncomingMessage<Disconnected>> | void
+    name: ResultWithIncomingMessage<Disconnected>> | void
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ResultWithIncomingMessage
+        fullName: ResultWithIncomingMessage
+        uid: azure-iothub.ResultWithIncomingMessage
+      - name: <Disconnected>> | void
+        fullName: <Disconnected>> | void
+  - uid: azure-iothub.IncomingMessageCallback<azure-iothub.Client.ServiceReceiver>
+    name: ServiceReceiver>
+    spec.typeScript:
+      - name: IncomingMessageCallback
+        fullName: IncomingMessageCallback
+        uid: azure-iothub.IncomingMessageCallback
+      - name: <
+        fullName: <
+      - name: ServiceReceiver
+        fullName: ServiceReceiver
+        uid: azure-iothub.Client.ServiceReceiver
+      - name: '>'
+        fullName: '>'
+  - uid: >-
+      Promise<azure-iothub.ResultWithIncomingMessage<azure-iothub.Client.ServiceReceiver>>
+      | void
+    name: ServiceReceiver>> | void
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ResultWithIncomingMessage
+        fullName: ResultWithIncomingMessage
+        uid: azure-iothub.ResultWithIncomingMessage
+      - name: <
+        fullName: <
+      - name: ServiceReceiver
+        fullName: ServiceReceiver
+        uid: azure-iothub.Client.ServiceReceiver
+      - name: '>> | void'
+        fullName: '>> | void'
   - uid: azure-iothub.DeviceMethodParams
     name: DeviceMethodParams
     spec.typeScript:
       - name: DeviceMethodParams
         fullName: DeviceMethodParams
         uid: azure-iothub.DeviceMethodParams
-  - uid: azure-iothub.Client.Callback<any>
-    name: Callback<any>
+  - uid: azure-iothub.IncomingMessageCallback<any>
+    name: IncomingMessageCallback<any>
     spec.typeScript:
-      - name: Callback
-        fullName: Callback
-        uid: azure-iothub.Client.Callback
+      - name: IncomingMessageCallback
+        fullName: IncomingMessageCallback
+        uid: azure-iothub.IncomingMessageCallback
       - name: <any>
         fullName: <any>
+  - uid: azure-iothub.IncomingMessageCallback<Connected>
+    name: IncomingMessageCallback<Connected>
+    spec.typeScript:
+      - name: IncomingMessageCallback
+        fullName: IncomingMessageCallback
+        uid: azure-iothub.IncomingMessageCallback
+      - name: <Connected>
+        fullName: <Connected>
+  - uid: Promise<azure-iothub.ResultWithIncomingMessage<Connected>> | void
+    name: ResultWithIncomingMessage<Connected>> | void
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ResultWithIncomingMessage
+        fullName: ResultWithIncomingMessage
+        uid: azure-iothub.ResultWithIncomingMessage
+      - name: <Connected>> | void
+        fullName: <Connected>> | void
+  - uid: azure-iothub.IncomingMessageCallback<MessageEnqueued>
+    name: IncomingMessageCallback<MessageEnqueued>
+    spec.typeScript:
+      - name: IncomingMessageCallback
+        fullName: IncomingMessageCallback
+        uid: azure-iothub.IncomingMessageCallback
+      - name: <MessageEnqueued>
+        fullName: <MessageEnqueued>
+  - uid: Promise<azure-iothub.ResultWithIncomingMessage<MessageEnqueued>> | void
+    name: ResultWithIncomingMessage<MessageEnqueued>> | void
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ResultWithIncomingMessage
+        fullName: ResultWithIncomingMessage
+        uid: azure-iothub.ResultWithIncomingMessage
+      - name: <MessageEnqueued>> | void
+        fullName: <MessageEnqueued>> | void
   - uid: azure-iothub.Client.TransportCtor
     name: TransportCtor
     spec.typeScript:

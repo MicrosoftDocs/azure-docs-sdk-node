@@ -72,17 +72,16 @@ items:
       Closes the transport connection and destroys the client resources.
       *Note: After calling this method the Client object cannot be reused.*
     syntax:
-      content: >-
-        function close(closeCallback?: (err?: Error, result?: Disconnected) =>
-        void)
+      content: 'function close(closeCallback?: Callback<Disconnected>)'
       parameters:
         - id: closeCallback
           type:
-            - '(err?: Error, result?: Disconnected) => void'
-          description: >
-            Function to call once the transport is disconnected and the client
-            closed.
+            - Callback<Disconnected>
+          description: ''
           optional: true
+      return:
+        type:
+          - Promise<Disconnected> | void
     package: azure-iot-device
   - uid: azure-iot-device.Client.fromAuthenticationProvider
     name: fromAuthenticationProvider
@@ -177,8 +176,8 @@ items:
     summary: Registers a callback for a method named `methodName`.
     syntax:
       content: >-
-        function onDeviceMethod(methodName: string, callback: (request:
-        DeviceMethodRequest, response: DeviceMethodResponse) => void)
+        function onDeviceMethod(methodName: string, callback:
+        DoubleValueCallback<DeviceMethodRequest, DeviceMethodResponse>)
       parameters:
         - id: methodName
           type:
@@ -187,8 +186,8 @@ items:
         - id: callback
           type:
             - >-
-              (request: DeviceMethodRequest, response: DeviceMethodResponse) =>
-              void
+              DoubleValueCallback<azure-iot-device.DeviceMethodRequest,
+              azure-iot-device.DeviceMethodResponse>
           description: >
             Function that shall be called whenever a method request for the
             method called `methodName` is received.
@@ -203,7 +202,7 @@ items:
     syntax:
       content: >-
         function uploadToBlob(blobName: string, stream: Stream, streamLength:
-        number, done: (err?: Error) => void)
+        number, callback?: ErrorCallback)
       parameters:
         - id: blobName
           type:
@@ -219,11 +218,14 @@ items:
           type:
             - number
           description: The size of the data to that should be uploaded to the blob.
-        - id: done
+        - id: callback
           type:
-            - '(err?: Error) => void'
-          description: |
-            The callback to call when the upload is complete.
+            - ErrorCallback
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<void> | void
     package: azure-iot-device
 references:
   - uid: azure-iot-device.DeviceTransport
@@ -232,3 +234,20 @@ references:
       - name: DeviceTransport
         fullName: DeviceTransport
         uid: azure-iot-device.DeviceTransport
+  - uid: >-
+      DoubleValueCallback<azure-iot-device.DeviceMethodRequest,
+      azure-iot-device.DeviceMethodResponse>
+    name: DeviceMethodResponse>
+    spec.typeScript:
+      - name: DoubleValueCallback<
+        fullName: DoubleValueCallback<
+      - name: DeviceMethodRequest
+        fullName: DeviceMethodRequest
+        uid: azure-iot-device.DeviceMethodRequest
+      - name: ', '
+        fullName: ', '
+      - name: DeviceMethodResponse
+        fullName: DeviceMethodResponse
+        uid: azure-iot-device.DeviceMethodResponse
+      - name: '>'
+        fullName: '>'

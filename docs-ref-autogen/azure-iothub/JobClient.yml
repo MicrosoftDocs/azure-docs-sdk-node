@@ -35,7 +35,9 @@ items:
       - typeScript
     summary: Cancels an existing job.
     syntax:
-      content: 'function cancelJob(jobId: string | number, done: JobClient.JobCallback)'
+      content: >-
+        function cancelJob(jobId: string | number, done?:
+        TripleValueCallback<any, any>)
       parameters:
         - id: jobId
           type:
@@ -43,13 +45,12 @@ items:
           description: The identifier of an existing job.
         - id: done
           type:
-            - azure-iothub.JobClient.JobCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), a
-                                           job object, and a transport-specific response
-                                           object useful for logging or debugging.
+            - 'TripleValueCallback<any, any>'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<azure-iothub.JobStatusResponse> | void
     package: azure-iothub
   - uid: azure-iothub.JobClient.createQuery
     name: createQuery
@@ -135,7 +136,9 @@ items:
       - typeScript
     summary: Requests information about an existing job.
     syntax:
-      content: 'function getJob(jobId: string | number, done: JobClient.JobCallback)'
+      content: >-
+        function getJob(jobId: string | number, done?: TripleValueCallback<any,
+        any>)
       parameters:
         - id: jobId
           type:
@@ -143,13 +146,12 @@ items:
           description: The identifier of an existing job.
         - id: done
           type:
-            - azure-iothub.JobClient.JobCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), a
-                                           job object, and a transport-specific response
-                                           object useful for logging or debugging.
+            - 'TripleValueCallback<any, any>'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<azure-iothub.JobStatusResponse> | void
     package: azure-iothub
   - uid: azure-iothub.JobClient.scheduleDeviceMethod
     name: scheduleDeviceMethod
@@ -162,8 +164,8 @@ items:
       content: >-
         function scheduleDeviceMethod(jobId: string | number, queryCondition:
         string, methodParams: DeviceMethodParams, jobStartTime?: Date |
-        JobClient.JobCallback, maxExecutionTimeInSeconds?: number |
-        JobClient.JobCallback, done?: JobClient.JobCallback)
+        TripleValueCallback<any, any>, maxExecutionTimeInSeconds?: number |
+        TripleValueCallback<any, any>, done?: TripleValueCallback<any, any>)
       parameters:
         - id: jobId
           type:
@@ -186,24 +188,22 @@ items:
                                                  - responseTimeoutInSeconds [optional] The number of seconds IoT Hub shall wait for the device
         - id: jobStartTime
           type:
-            - Date | azure-iothub.JobClient.JobCallback
-          description: Time time at which the job should start
+            - 'Date | TripleValueCallback<any, any>'
+          description: ''
           optional: true
         - id: maxExecutionTimeInSeconds
           type:
-            - number | azure-iothub.JobClient.JobCallback
-          description: The maximum time alloted for this job to run in seconds.
+            - 'number | TripleValueCallback<any, any>'
+          description: ''
           optional: true
         - id: done
           type:
-            - azure-iothub.JobClient.JobCallback
-          description: |
-            The function to call when the operation is
-                                                 complete. `done` will be called with three
-                                                 arguments: an Error object (can be null), a
-                                                 job object, and a transport-specific response
-                                                 object useful for logging or debugging.
+            - 'TripleValueCallback<any, any>'
+          description: ''
           optional: true
+      return:
+        type:
+          - Promise<azure-iothub.JobStatusResponse> | void
     package: azure-iothub
   - uid: azure-iothub.JobClient.scheduleTwinUpdate
     name: scheduleTwinUpdate
@@ -217,9 +217,9 @@ items:
     syntax:
       content: >-
         function scheduleTwinUpdate(jobId: string | number, queryCondition:
-        string, patch: any, jobStartTime?: Date | JobClient.JobCallback,
-        maxExecutionTimeInSeconds?: number | JobClient.JobCallback, done?:
-        JobClient.JobCallback)
+        string, patch: any, jobStartTime?: Date | TripleValueCallback<any, any>,
+        maxExecutionTimeInSeconds?: number | TripleValueCallback<any, any>,
+        done?: TripleValueCallback<any, any>)
       parameters:
         - id: jobId
           type:
@@ -237,32 +237,34 @@ items:
           description: The twin patch that should be applied to the twins.
         - id: jobStartTime
           type:
-            - Date | azure-iothub.JobClient.JobCallback
-          description: Time time at which the job should start
+            - 'Date | TripleValueCallback<any, any>'
+          description: ''
           optional: true
         - id: maxExecutionTimeInSeconds
           type:
-            - number | azure-iothub.JobClient.JobCallback
-          description: The maximum time alloted for this job to run in seconds.
+            - 'number | TripleValueCallback<any, any>'
+          description: ''
           optional: true
         - id: done
           type:
-            - azure-iothub.JobClient.JobCallback
-          description: |
-            The function to call when the operation is
-                                                 complete. `done` will be called with three
-                                                 arguments: an Error object (can be null), a
-                                                 job object, and a transport-specific response
-                                                 object useful for logging or debugging.
+            - 'TripleValueCallback<any, any>'
+          description: ''
           optional: true
+      return:
+        type:
+          - Promise<azure-iothub.JobStatusResponse> | void
     package: azure-iothub
 references:
-  - uid: azure-iothub.JobClient.JobCallback
-    name: JobCallback
+  - uid: Promise<azure-iothub.JobStatusResponse> | void
+    name: JobStatusResponse> | void
     spec.typeScript:
-      - name: JobCallback
-        fullName: JobCallback
-        uid: azure-iothub.JobClient.JobCallback
+      - name: Promise<
+        fullName: Promise<
+      - name: JobStatusResponse
+        fullName: JobStatusResponse
+        uid: azure-iothub.JobStatusResponse
+      - name: '> | void'
+        fullName: '> | void'
   - uid: azure-iothub.JobType
     name: JobType
     spec.typeScript:
@@ -287,22 +289,6 @@ references:
       - name: DeviceMethodParams
         fullName: DeviceMethodParams
         uid: azure-iothub.DeviceMethodParams
-  - uid: Date | azure-iothub.JobClient.JobCallback
-    name: JobCallback
-    spec.typeScript:
-      - name: 'Date | '
-        fullName: 'Date | '
-      - name: JobCallback
-        fullName: JobCallback
-        uid: azure-iothub.JobClient.JobCallback
-  - uid: number | azure-iothub.JobClient.JobCallback
-    name: JobCallback
-    spec.typeScript:
-      - name: 'number | '
-        fullName: 'number | '
-      - name: JobCallback
-        fullName: JobCallback
-        uid: azure-iothub.JobClient.JobCallback
   - uid: azure-iothub.JobClient
     name: JobClient
     spec.typeScript:

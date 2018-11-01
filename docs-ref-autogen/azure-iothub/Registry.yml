@@ -8,14 +8,12 @@ items:
       - azure-iothub.Registry.addDevices
       - azure-iothub.Registry.addModule
       - azure-iothub.Registry.applyConfigurationContentOnDevice
-      - azure-iothub.Registry.BulkDeviceIdentityCallback
       - azure-iothub.Registry.BulkRegistryOperationResult
       - azure-iothub.Registry.BulkRegistryOperationType
       - azure-iothub.Registry.cancelJob
       - azure-iothub.Registry.create
       - azure-iothub.Registry.createQuery
       - azure-iothub.Registry.delete
-      - azure-iothub.Registry.DeviceCallback
       - azure-iothub.Registry.DeviceDescription
       - azure-iothub.Registry.DeviceRegistryOperationError
       - azure-iothub.Registry.exportDevicesToBlob
@@ -74,8 +72,8 @@ items:
     summary: Add a configuration to an IoT hub.
     syntax:
       content: >-
-        function addConfiguration(configuration: Configuration, done:
-        Registry.ResponseCallback)
+        function addConfiguration(configuration: Configuration, done?:
+        HttpResponseCallback<any>)
       parameters:
         - id: configuration
           type:
@@ -85,14 +83,12 @@ items:
                                                  to add to the hub
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
-          description: |
-            The function to call when the operation is
-                                                 complete. `done` will be called with three
-                                                 arguments: an Error object (can be null), the
-                                                 body of the response, and a transport-specific
-                                                 response object useful for logging or
-                                                 debugging.
+            - HttpResponseCallback<any>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<any>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.addDevices
     name: addDevices
@@ -103,8 +99,8 @@ items:
     summary: Adds an array of devices.
     syntax:
       content: >-
-        function addDevices(devices: DeviceDescription[], done:
-        Registry.BulkDeviceIdentityCallback)
+        function addDevices(devices: DeviceDescription[], done?:
+        HttpResponseCallback<BulkRegistryOperationResult>)
       parameters:
         - id: devices
           type:
@@ -115,14 +111,15 @@ items:
                                            identifier.
         - id: done
           type:
-            - azure-iothub.Registry.BulkDeviceIdentityCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), a
-                                           BulkRegistryOperationResult
-                                           and a transport-specific response object useful
-                                           for logging or debugging.
+            - >-
+              HttpResponseCallback<azure-iothub.Registry.BulkRegistryOperationResult>
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<ResultWithHttpResponse<azure-iothub.Registry.BulkRegistryOperationResult>>
+            | void
     package: azure-iothub
   - uid: azure-iothub.Registry.addModule
     name: addModule
@@ -132,7 +129,7 @@ items:
       - typeScript
     summary: Add the given module to the registry.
     syntax:
-      content: 'function addModule(module: Module, done: Registry.ResponseCallback)'
+      content: 'function addModule(module: Module, done?: HttpResponseCallback<any>)'
       parameters:
         - id: module
           type:
@@ -140,14 +137,12 @@ items:
           description: Module object to add to the registry.
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), the
-                                           body of the response, and a transport-specific
-                                           response object useful for logging or
-                                           debugging.
+            - HttpResponseCallback<any>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<any>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.applyConfigurationContentOnDevice
     name: applyConfigurationContentOnDevice
@@ -159,7 +154,7 @@ items:
     syntax:
       content: >-
         function applyConfigurationContentOnDevice(deviceId: string, content:
-        ConfigurationContent, done: Registry.ResponseCallback)
+        ConfigurationContent, done?: HttpResponseCallback<any>)
       parameters:
         - id: deviceId
           type:
@@ -171,14 +166,12 @@ items:
           description: The Configuration to apply
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
-          description: |
-            The function to call when the operation is
-                                                     complete. `done` will be called with three
-                                                     arguments: an Error object (can be null), the
-                                                     body of the response, and a transport-specific
-                                                     response object useful for logging or
-                                                     debugging.
+            - HttpResponseCallback<any>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<any>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.cancelJob
     name: cancelJob
@@ -188,7 +181,7 @@ items:
       - typeScript
     summary: Cancel a bulk import/export job.
     syntax:
-      content: 'function cancelJob(jobId: string, done: Registry.JobCallback)'
+      content: 'function cancelJob(jobId: string, done?: Callback<JobStatus>)'
       parameters:
         - id: jobId
           type:
@@ -198,11 +191,12 @@ items:
             information.
         - id: done
           type:
-            - azure-iothub.Registry.JobCallback
-          description: >
-            The function to call with two arguments: an error object if an error
-            happened,
-                                         (null otherwise) and the (cancelled) status of the job whose identifier was passed as an argument.
+            - azure-iothub.Client.Callback<azure-iothub.Registry.JobStatus>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<azure-iothub.Registry.JobStatus> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.create
     name: create
@@ -213,8 +207,8 @@ items:
     summary: Creates a new device identity on an IoT hub.
     syntax:
       content: >-
-        function create(deviceInfo: DeviceDescription, done:
-        Registry.DeviceCallback)
+        function create(deviceInfo: DeviceDescription, done?:
+        HttpResponseCallback<Device>)
       parameters:
         - id: deviceInfo
           type:
@@ -224,15 +218,12 @@ items:
                                            with a valid device identifier.
         - id: done
           type:
-            - azure-iothub.Registry.DeviceCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), a
-                                           [Device](xref:azure-iothub.Device)
-                                           object representing the created device
-                                           identity, and a transport-specific response
-                                           object useful for logging or debugging.
+            - HttpResponseCallback<azure-iothub.Device>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<azure-iothub.Device>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.createQuery
     name: createQuery
@@ -269,7 +260,7 @@ items:
       - typeScript
     summary: Removes an existing device identity from an IoT hub.
     syntax:
-      content: 'function delete(deviceId: string, done: Registry.ResponseCallback)'
+      content: 'function delete(deviceId: string, done?: HttpResponseCallback<any>)'
       parameters:
         - id: deviceId
           type:
@@ -277,15 +268,12 @@ items:
           description: The identifier of an existing device identity.
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), an
-                                           always-null argument (for consistency with
-                                           the other methods), and a transport-specific
-                                           response object useful for logging or
-                                           debugging.
+            - HttpResponseCallback<any>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<any>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.exportDevicesToBlob
     name: exportDevicesToBlob
@@ -297,7 +285,7 @@ items:
     syntax:
       content: >-
         function exportDevicesToBlob(outputBlobContainerUri: string,
-        excludeKeys: boolean, done: Registry.JobCallback)
+        excludeKeys: boolean, done?: Callback<JobStatus>)
       parameters:
         - id: outputBlobContainerUri
           type:
@@ -313,11 +301,12 @@ items:
             exported data.
         - id: done
           type:
-            - azure-iothub.Registry.JobCallback
-          description: >
-            The function to call when the job has been created, with two
-            arguments: an error object if an
-                                                         an error happened, (null otherwise) and the job status that can be used to track progress of the devices export.
+            - azure-iothub.Client.Callback<azure-iothub.Registry.JobStatus>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<azure-iothub.Registry.JobStatus> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.fromConnectionString
     name: fromConnectionString
@@ -371,7 +360,7 @@ items:
       Requests information about an existing device identity
                          on an IoT hub.
     syntax:
-      content: 'function get(deviceId: string, done: Registry.DeviceCallback)'
+      content: 'function get(deviceId: string, done?: HttpResponseCallback<Device>)'
       parameters:
         - id: deviceId
           type:
@@ -379,15 +368,12 @@ items:
           description: The identifier of an existing device identity.
         - id: done
           type:
-            - azure-iothub.Registry.DeviceCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), a
-                                           [Device](xref:azure-iothub.Device)
-                                           object representing the created device
-                                           identity, and a transport-specific response
-                                           object useful for logging or debugging.
+            - HttpResponseCallback<azure-iothub.Device>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<azure-iothub.Device>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.getConfiguration
     name: getConfiguration
@@ -398,8 +384,8 @@ items:
     summary: Get a single configuration from an IoT Hub
     syntax:
       content: >-
-        function getConfiguration(configurationId: string, done: (err: Error,
-        configuration?: Configuration, response?: any) => void)
+        function getConfiguration(configurationId: string, done?:
+        HttpResponseCallback<Configuration>)
       parameters:
         - id: configurationId
           type:
@@ -407,12 +393,12 @@ items:
           description: The ID of the configuration you with to retrieve
         - id: done
           type:
-            - >-
-              (err: Error, configuration?: Configuration, response?: any) =>
-              void
-          description: |
-            The callback which will be called with either an Error object
-                                                 or a module:azure-iothub.Configuration object with the configuration details.
+            - HttpResponseCallback<azure-iothub.Configuration>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<azure-iothub.Configuration>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.getConfigurations
     name: getConfigurations
@@ -422,19 +408,16 @@ items:
       - typeScript
     summary: Get all configurations on an IoT Hub
     syntax:
-      content: >-
-        function getConfigurations(done: (err: Error, configurations?:
-        Configuration[], response?: any) => void)
+      content: 'function getConfigurations(done?: HttpResponseCallback<Configuration[]>)'
       parameters:
         - id: done
           type:
-            - >-
-              (err: Error, configurations?: Configuration[], response?: any) =>
-              void
-          description: |
-            The callback which will be called with either an Error object
-                                                 or an array of module:azure-iothub.Configuration objects
-                                                 for all the configurations.
+            - 'HttpResponseCallback<azure-iothub.Configuration[]>'
+          description: ''
+          optional: true
+      return:
+        type:
+          - 'Promise<ResultWithHttpResponse<azure-iothub.Configuration[]>> | void'
     package: azure-iothub
   - uid: azure-iothub.Registry.getJob
     name: getJob
@@ -444,7 +427,7 @@ items:
       - typeScript
     summary: Get the status of a bulk import/export job.
     syntax:
-      content: 'function getJob(jobId: string, done: Registry.JobCallback)'
+      content: 'function getJob(jobId: string, done: Callback<JobStatus>)'
       parameters:
         - id: jobId
           type:
@@ -454,11 +437,11 @@ items:
             information.
         - id: done
           type:
-            - azure-iothub.Registry.JobCallback
-          description: >
-            The function to call with two arguments: an error object if an error
-            happened,
-                                         (null otherwise) and the status of the job whose identifier was passed as an argument.
+            - azure-iothub.Client.Callback<azure-iothub.Registry.JobStatus>
+          description: ''
+      return:
+        type:
+          - Promise<azure-iothub.Registry.JobStatus> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.getModule
     name: getModule
@@ -469,8 +452,8 @@ items:
     summary: Get a single module from a device on an IoT Hub
     syntax:
       content: >-
-        function getModule(deviceId: string, moduleId: string, done: (err:
-        Error, module?: Module, response?: any) => void)
+        function getModule(deviceId: string, moduleId: string, done?:
+        HttpResponseCallback<Module>)
       parameters:
         - id: deviceId
           type:
@@ -482,10 +465,12 @@ items:
           description: Module ID to retrieve
         - id: done
           type:
-            - '(err: Error, module?: Module, response?: any) => void'
-          description: |
-            The callback which will be called with either an Error object
-                                         or the module:azure-iothub.Module object for the requested module
+            - HttpResponseCallback<azure-iothub.Module>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<azure-iothub.Module>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.getModulesOnDevice
     name: getModulesOnDevice
@@ -496,8 +481,8 @@ items:
     summary: Get a list of all modules on an IoT Hub device
     syntax:
       content: >-
-        function getModulesOnDevice(deviceId: string, done: (err: Error,
-        modules?: Module[], response?: any) => void)
+        function getModulesOnDevice(deviceId: string, done?:
+        HttpResponseCallback<Module[]>)
       parameters:
         - id: deviceId
           type:
@@ -505,11 +490,12 @@ items:
           description: ID of the device we're getting modules for
         - id: done
           type:
-            - '(err: Error, modules?: Module[], response?: any) => void'
-          description: |
-            The callback which will be called with either an Error object
-                                         or an array of module:azure-iothub.Module objects
-                                         for all the modules.
+            - 'HttpResponseCallback<azure-iothub.Module[]>'
+          description: ''
+          optional: true
+      return:
+        type:
+          - 'Promise<ResultWithHttpResponse<azure-iothub.Module[]>> | void'
     package: azure-iothub
   - uid: azure-iothub.Registry.getModuleTwin
     name: getModuleTwin
@@ -520,8 +506,8 @@ items:
     summary: Gets the Module Twin of the module with the specified module identifier.
     syntax:
       content: >-
-        function getModuleTwin(deviceId: string, moduleId: string, done: (err:
-        Error, twin?: Twin, response?: any) => void)
+        function getModuleTwin(deviceId: string, moduleId: string, done?:
+        HttpResponseCallback<Twin>)
       parameters:
         - id: deviceId
           type:
@@ -533,10 +519,12 @@ items:
           description: The module identifier.
         - id: done
           type:
-            - '(err: Error, twin?: Twin, response?: any) => void'
-          description: |-
-            The callback that will be called with either an Error object or
-                                            the module twin instance.
+            - HttpResponseCallback<azure-iothub.Twin>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<azure-iothub.Twin>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.getRegistryStatistics
     name: getRegistryStatistics
@@ -546,14 +534,20 @@ items:
       - typeScript
     summary: Gets statistics about the devices in the device identity registry.
     syntax:
-      content: 'function getRegistryStatistics(done: Callback<RegistryStatistics>)'
+      content: >-
+        function getRegistryStatistics(done?:
+        HttpResponseCallback<RegistryStatistics>)
       parameters:
         - id: done
           type:
-            - Callback<azure-iothub.Registry.RegistryStatistics>
-          description: |
-            The callback that will be called with either an Error object or
-                                          the device registry statistics.
+            - HttpResponseCallback<azure-iothub.Registry.RegistryStatistics>
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<ResultWithHttpResponse<azure-iothub.Registry.RegistryStatistics>>
+            | void
     package: azure-iothub
   - uid: azure-iothub.Registry.getTwin
     name: getTwin
@@ -563,7 +557,7 @@ items:
       - typeScript
     summary: Gets the Device Twin of the device with the specified device identifier.
     syntax:
-      content: 'function getTwin(deviceId: string, done: Registry.ResponseCallback)'
+      content: 'function getTwin(deviceId: string, done?: HttpResponseCallback<any>)'
       parameters:
         - id: deviceId
           type:
@@ -571,10 +565,12 @@ items:
           description: The device identifier.
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
-          description: |
-            The callback that will be called with either an Error object or
-                                            the device twin instance.
+            - HttpResponseCallback<any>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<any>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.importDevicesFromBlob
     name: importDevicesFromBlob
@@ -586,7 +582,7 @@ items:
     syntax:
       content: >-
         function importDevicesFromBlob(inputBlobContainerUri: string,
-        outputBlobContainerUri: string, done: Registry.JobCallback)
+        outputBlobContainerUri: string, done?: Callback<JobStatus>)
       parameters:
         - id: inputBlobContainerUri
           type:
@@ -602,11 +598,12 @@ items:
             import process.
         - id: done
           type:
-            - azure-iothub.Registry.JobCallback
-          description: >
-            The function to call when the job has been created, with two
-            arguments: an error object if an
-                                                         an error happened, (null otherwise) and the job status that can be used to track progress of the devices import.
+            - azure-iothub.Client.Callback<azure-iothub.Registry.JobStatus>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<azure-iothub.Registry.JobStatus> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.list
     name: list
@@ -618,20 +615,16 @@ items:
       Requests information about the first 1000 device
                          identities on an IoT hub.
     syntax:
-      content: 'function list(done: Callback<Device[]>)'
+      content: 'function list(done?: HttpResponseCallback<Device[]>)'
       parameters:
         - id: done
           type:
-            - 'Callback<azure-iothub.Device[]>'
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), an
-                                           array of
-                                           [Device](xref:azure-iothub.Device)
-                                           objects representing the listed device
-                                           identities, and a transport-specific response
-                                           object useful for logging or debugging.
+            - 'HttpResponseCallback<azure-iothub.Device[]>'
+          description: ''
+          optional: true
+      return:
+        type:
+          - 'Promise<ResultWithHttpResponse<azure-iothub.Device[]>> | void'
     package: azure-iothub
   - uid: azure-iothub.Registry.listJobs
     name: listJobs
@@ -641,15 +634,16 @@ items:
       - typeScript
     summary: 'List the last import/export jobs (including the active one, if any).'
     syntax:
-      content: 'function listJobs(done: Callback<any>)'
+      content: 'function listJobs(done?: HttpResponseCallback<any>)'
       parameters:
         - id: done
           type:
-            - Callback<any>
-          description: >
-            The function to call with two arguments: an error object if an error
-            happened,
-                                         (null otherwise) and the list of past jobs as an argument.
+            - HttpResponseCallback<any>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<any>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.removeConfiguration
     name: removeConfiguration
@@ -660,8 +654,8 @@ items:
     summary: Remove a configuration with the given ID from an IoT Hub
     syntax:
       content: >-
-        function removeConfiguration(configurationId: string, done:
-        Registry.ResponseCallback)
+        function removeConfiguration(configurationId: string, done?:
+        HttpResponseCallback<any>)
       parameters:
         - id: configurationId
           type:
@@ -669,14 +663,12 @@ items:
           description: ID of the configuration to remove
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
-          description: |
-            The function to call when the operation is
-                                                 complete. `done` will be called with three
-                                                 arguments: an Error object (can be null), the
-                                                 body of the response, and a transport-specific
-                                                 response object useful for logging or
-                                                 debugging.
+            - HttpResponseCallback<any>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<any>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.removeDevices
     name: removeDevices
@@ -688,7 +680,7 @@ items:
     syntax:
       content: >-
         function removeDevices(devices: DeviceDescription[], forceRemove:
-        boolean, done: Registry.BulkDeviceIdentityCallback)
+        boolean, done?: HttpResponseCallback<BulkRegistryOperationResult>)
       parameters:
         - id: devices
           type:
@@ -706,14 +698,15 @@ items:
                                            must match.
         - id: done
           type:
-            - azure-iothub.Registry.BulkDeviceIdentityCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), a
-                                           BulkRegistryOperationResult
-                                           and a transport-specific response object useful
-                                           for logging or debugging.
+            - >-
+              HttpResponseCallback<azure-iothub.Registry.BulkRegistryOperationResult>
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<ResultWithHttpResponse<azure-iothub.Registry.BulkRegistryOperationResult>>
+            | void
     package: azure-iothub
   - uid: azure-iothub.Registry.removeModule
     name: removeModule
@@ -723,7 +716,9 @@ items:
       - typeScript
     summary: Remove the given module from the registry
     syntax:
-      content: 'function removeModule(module: Module, done: Registry.ResponseCallback)'
+      content: >-
+        function removeModule(module: Module, done: TripleValueCallback<any,
+        any>)
       parameters:
         - id: module
           type:
@@ -731,14 +726,8 @@ items:
           description: ''
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), the
-                                           body of the response, and a transport-specific
-                                           response object useful for logging or
-                                           debugging.
+            - 'TripleValueCallback<any, any>'
+          description: ''
     package: azure-iothub
   - uid: azure-iothub.Registry.removeModule_1
     name: removeModule
@@ -750,7 +739,7 @@ items:
     syntax:
       content: >-
         function removeModule(deviceId: string, moduleId: string, done:
-        Registry.ResponseCallback)
+        TripleValueCallback<any, any>)
       parameters:
         - id: deviceId
           type:
@@ -762,7 +751,7 @@ items:
           description: ''
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
+            - 'TripleValueCallback<any, any>'
           description: ''
     package: azure-iothub
   - uid: azure-iothub.Registry.update
@@ -776,8 +765,8 @@ items:
                          the given device information.
     syntax:
       content: >-
-        function update(deviceInfo: DeviceDescription, done:
-        Registry.DeviceCallback)
+        function update(deviceInfo: DeviceDescription, done?:
+        HttpResponseCallback<Device>)
       parameters:
         - id: deviceInfo
           type:
@@ -788,15 +777,12 @@ items:
                                            identifier.
         - id: done
           type:
-            - azure-iothub.Registry.DeviceCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), a
-                                           [Device](xref:azure-iothub.Device)
-                                           object representing the updated device
-                                           identity, and a transport-specific response
-                                           object useful for logging or debugging.
+            - HttpResponseCallback<azure-iothub.Device>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<azure-iothub.Device>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.updateConfiguration
     name: updateConfiguration
@@ -808,7 +794,7 @@ items:
     syntax:
       content: >-
         function updateConfiguration(configuration: Configuration, done:
-        Registry.ResponseCallback)
+        HttpResponseCallback<any>)
       parameters:
         - id: configuration
           type:
@@ -818,14 +804,8 @@ items:
                                                  to add to the hub
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
-          description: |
-            The function to call when the operation is
-                                                 complete. `done` will be called with three
-                                                 arguments: an Error object (can be null), the
-                                                 body of the response, and a transport-specific
-                                                 response object useful for logging or
-                                                 debugging.
+            - HttpResponseCallback<any>
+          description: ''
     package: azure-iothub
   - uid: azure-iothub.Registry.updateConfiguration_1
     name: updateConfiguration
@@ -837,7 +817,7 @@ items:
     syntax:
       content: >-
         function updateConfiguration(configuration: Configuration, forceUpdate:
-        boolean, done: Registry.ResponseCallback)
+        boolean, done?: HttpResponseCallback<any>)
       parameters:
         - id: configuration
           type:
@@ -849,8 +829,9 @@ items:
           description: ''
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
+            - HttpResponseCallback<any>
           description: ''
+          optional: true
     package: azure-iothub
   - uid: azure-iothub.Registry.updateDevices
     name: updateDevices
@@ -862,7 +843,7 @@ items:
     syntax:
       content: >-
         function updateDevices(devices: DeviceDescription[], forceUpdate:
-        boolean, done?: Registry.BulkDeviceIdentityCallback)
+        boolean, done?: HttpResponseCallback<BulkRegistryOperationResult>)
       parameters:
         - id: devices
           type:
@@ -880,15 +861,15 @@ items:
                                            must match.
         - id: done
           type:
-            - azure-iothub.Registry.BulkDeviceIdentityCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), a
-                                           BulkRegistryOperationResult
-                                           and a transport-specific response object useful
-                                           for logging or debugging.
+            - >-
+              HttpResponseCallback<azure-iothub.Registry.BulkRegistryOperationResult>
+          description: ''
           optional: true
+      return:
+        type:
+          - >-
+            Promise<ResultWithHttpResponse<azure-iothub.Registry.BulkRegistryOperationResult>>
+            | void
     package: azure-iothub
   - uid: azure-iothub.Registry.updateModule
     name: updateModule
@@ -898,7 +879,9 @@ items:
       - typeScript
     summary: Update the given module object in the registry
     syntax:
-      content: 'function updateModule(module: Module, done: Registry.ResponseCallback)'
+      content: >-
+        function updateModule(module: Module, done: TripleValueCallback<any,
+        any>)
       parameters:
         - id: module
           type:
@@ -906,14 +889,8 @@ items:
           description: Module object to update.
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
-          description: |
-            The function to call when the operation is
-                                           complete. `done` will be called with three
-                                           arguments: an Error object (can be null), the
-                                           body of the response, and a transport-specific
-                                           response object useful for logging or
-                                           debugging.
+            - 'TripleValueCallback<any, any>'
+          description: ''
     package: azure-iothub
   - uid: azure-iothub.Registry.updateModule_1
     name: updateModule
@@ -925,7 +902,7 @@ items:
     syntax:
       content: >-
         function updateModule(module: Module, forceUpdate: boolean, done:
-        Registry.ResponseCallback)
+        HttpResponseCallback<any>)
       parameters:
         - id: module
           type:
@@ -937,7 +914,7 @@ items:
           description: ''
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
+            - HttpResponseCallback<any>
           description: ''
     package: azure-iothub
   - uid: azure-iothub.Registry.updateModuleTwin
@@ -950,7 +927,7 @@ items:
     syntax:
       content: >-
         function updateModuleTwin(deviceId: string, moduleId: string, patch:
-        any, etag: string, done: Registry.ResponseCallback)
+        any, etag: string, done?: HttpResponseCallback<any>)
       parameters:
         - id: deviceId
           type:
@@ -973,10 +950,12 @@ items:
                                              the module twin has been updated since the etag was obtained.
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
-          description: |-
-            The callback that will be called with either an Error object or
-                                             the module twin instance.
+            - HttpResponseCallback<any>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<any>> | void
     package: azure-iothub
   - uid: azure-iothub.Registry.updateTwin
     name: updateTwin
@@ -987,8 +966,8 @@ items:
     summary: Updates the Device Twin of a specific device with the given patch.
     syntax:
       content: >-
-        function updateTwin(deviceId: string, patch: any, etag: string, done:
-        Registry.ResponseCallback)
+        function updateTwin(deviceId: string, patch: any, etag: string, done?:
+        HttpResponseCallback<any>)
       parameters:
         - id: deviceId
           type:
@@ -1007,10 +986,12 @@ items:
                                             the device twin has been updated since the etag was obtained.
         - id: done
           type:
-            - azure-iothub.Registry.ResponseCallback
-          description: |
-            The callback that will be called with either an Error object or
-                                            the device twin instance.
+            - HttpResponseCallback<any>
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<ResultWithHttpResponse<any>> | void
     package: azure-iothub
 references:
   - uid: 'azure-iothub.Registry.DeviceRegistryOperationError[]'
@@ -1033,12 +1014,6 @@ references:
       - name: Configuration
         fullName: Configuration
         uid: azure-iothub.Configuration
-  - uid: azure-iothub.Registry.ResponseCallback
-    name: ResponseCallback
-    spec.typeScript:
-      - name: ResponseCallback
-        fullName: ResponseCallback
-        uid: azure-iothub.Registry.ResponseCallback
   - uid: 'azure-iothub.Registry.DeviceDescription[]'
     name: 'DeviceDescription[]'
     spec.typeScript:
@@ -1047,12 +1022,28 @@ references:
         uid: azure-iothub.Registry.DeviceDescription
       - name: '[]'
         fullName: '[]'
-  - uid: azure-iothub.Registry.BulkDeviceIdentityCallback
-    name: BulkDeviceIdentityCallback
+  - uid: HttpResponseCallback<azure-iothub.Registry.BulkRegistryOperationResult>
+    name: BulkRegistryOperationResult>
     spec.typeScript:
-      - name: BulkDeviceIdentityCallback
-        fullName: BulkDeviceIdentityCallback
-        uid: azure-iothub.Registry.BulkDeviceIdentityCallback
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
+      - name: BulkRegistryOperationResult
+        fullName: BulkRegistryOperationResult
+        uid: azure-iothub.Registry.BulkRegistryOperationResult
+      - name: '>'
+        fullName: '>'
+  - uid: >-
+      Promise<ResultWithHttpResponse<azure-iothub.Registry.BulkRegistryOperationResult>>
+      | void
+    name: BulkRegistryOperationResult>> | void
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: BulkRegistryOperationResult
+        fullName: BulkRegistryOperationResult
+        uid: azure-iothub.Registry.BulkRegistryOperationResult
+      - name: '>> | void'
+        fullName: '>> | void'
   - uid: azure-iothub.Module
     name: Module
     spec.typeScript:
@@ -1065,50 +1056,203 @@ references:
       - name: ConfigurationContent
         fullName: ConfigurationContent
         uid: azure-iothub.ConfigurationContent
-  - uid: azure-iothub.Registry.JobCallback
-    name: JobCallback
+  - uid: azure-iothub.Client.Callback<azure-iothub.Registry.JobStatus>
+    name: JobStatus>
     spec.typeScript:
-      - name: JobCallback
-        fullName: JobCallback
-        uid: azure-iothub.Registry.JobCallback
+      - name: Callback
+        fullName: Callback
+        uid: azure-iothub.Client.Callback
+      - name: <
+        fullName: <
+      - name: JobStatus
+        fullName: JobStatus
+        uid: azure-iothub.Registry.JobStatus
+      - name: '>'
+        fullName: '>'
+  - uid: Promise<azure-iothub.Registry.JobStatus> | void
+    name: JobStatus> | void
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: JobStatus
+        fullName: JobStatus
+        uid: azure-iothub.Registry.JobStatus
+      - name: '> | void'
+        fullName: '> | void'
   - uid: azure-iothub.Registry.DeviceDescription
     name: DeviceDescription
     spec.typeScript:
       - name: DeviceDescription
         fullName: DeviceDescription
         uid: azure-iothub.Registry.DeviceDescription
-  - uid: azure-iothub.Registry.DeviceCallback
-    name: DeviceCallback
+  - uid: HttpResponseCallback<azure-iothub.Device>
+    name: Device>
     spec.typeScript:
-      - name: DeviceCallback
-        fullName: DeviceCallback
-        uid: azure-iothub.Registry.DeviceCallback
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
+      - name: Device
+        fullName: Device
+        uid: azure-iothub.Device
+      - name: '>'
+        fullName: '>'
+  - uid: Promise<ResultWithHttpResponse<azure-iothub.Device>> | void
+    name: Device>> | void
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: Device
+        fullName: Device
+        uid: azure-iothub.Device
+      - name: '>> | void'
+        fullName: '>> | void'
   - uid: azure-iothub.Query
     name: Query
     spec.typeScript:
       - name: Query
         fullName: Query
         uid: azure-iothub.Query
-  - uid: Callback<azure-iothub.Registry.RegistryStatistics>
+  - uid: HttpResponseCallback<azure-iothub.Configuration>
+    name: Configuration>
+    spec.typeScript:
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
+      - name: Configuration
+        fullName: Configuration
+        uid: azure-iothub.Configuration
+      - name: '>'
+        fullName: '>'
+  - uid: Promise<ResultWithHttpResponse<azure-iothub.Configuration>> | void
+    name: Configuration>> | void
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: Configuration
+        fullName: Configuration
+        uid: azure-iothub.Configuration
+      - name: '>> | void'
+        fullName: '>> | void'
+  - uid: 'HttpResponseCallback<azure-iothub.Configuration[]>'
+    name: 'Configuration[]>'
+    spec.typeScript:
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
+      - name: Configuration
+        fullName: Configuration
+        uid: azure-iothub.Configuration
+      - name: '[]>'
+        fullName: '[]>'
+  - uid: 'Promise<ResultWithHttpResponse<azure-iothub.Configuration[]>> | void'
+    name: 'Configuration[]>> | void'
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: Configuration
+        fullName: Configuration
+        uid: azure-iothub.Configuration
+      - name: '[]>> | void'
+        fullName: '[]>> | void'
+  - uid: HttpResponseCallback<azure-iothub.Module>
+    name: Module>
+    spec.typeScript:
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
+      - name: Module
+        fullName: Module
+        uid: azure-iothub.Module
+      - name: '>'
+        fullName: '>'
+  - uid: Promise<ResultWithHttpResponse<azure-iothub.Module>> | void
+    name: Module>> | void
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: Module
+        fullName: Module
+        uid: azure-iothub.Module
+      - name: '>> | void'
+        fullName: '>> | void'
+  - uid: HttpResponseCallback<azure-iothub.Twin>
+    name: Twin>
+    spec.typeScript:
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
+      - name: Twin
+        fullName: Twin
+        uid: azure-iothub.Twin
+      - name: '>'
+        fullName: '>'
+  - uid: Promise<ResultWithHttpResponse<azure-iothub.Twin>> | void
+    name: Twin>> | void
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: Twin
+        fullName: Twin
+        uid: azure-iothub.Twin
+      - name: '>> | void'
+        fullName: '>> | void'
+  - uid: 'HttpResponseCallback<azure-iothub.Module[]>'
+    name: 'Module[]>'
+    spec.typeScript:
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
+      - name: Module
+        fullName: Module
+        uid: azure-iothub.Module
+      - name: '[]>'
+        fullName: '[]>'
+  - uid: 'Promise<ResultWithHttpResponse<azure-iothub.Module[]>> | void'
+    name: 'Module[]>> | void'
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: Module
+        fullName: Module
+        uid: azure-iothub.Module
+      - name: '[]>> | void'
+        fullName: '[]>> | void'
+  - uid: HttpResponseCallback<azure-iothub.Registry.RegistryStatistics>
     name: RegistryStatistics>
     spec.typeScript:
-      - name: Callback<
-        fullName: Callback<
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
       - name: RegistryStatistics
         fullName: RegistryStatistics
         uid: azure-iothub.Registry.RegistryStatistics
       - name: '>'
         fullName: '>'
-  - uid: 'Callback<azure-iothub.Device[]>'
+  - uid: >-
+      Promise<ResultWithHttpResponse<azure-iothub.Registry.RegistryStatistics>>
+      | void
+    name: RegistryStatistics>> | void
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: RegistryStatistics
+        fullName: RegistryStatistics
+        uid: azure-iothub.Registry.RegistryStatistics
+      - name: '>> | void'
+        fullName: '>> | void'
+  - uid: 'HttpResponseCallback<azure-iothub.Device[]>'
     name: 'Device[]>'
     spec.typeScript:
-      - name: Callback<
-        fullName: Callback<
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
       - name: Device
         fullName: Device
         uid: azure-iothub.Device
       - name: '[]>'
         fullName: '[]>'
+  - uid: 'Promise<ResultWithHttpResponse<azure-iothub.Device[]>> | void'
+    name: 'Device[]>> | void'
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: Device
+        fullName: Device
+        uid: azure-iothub.Device
+      - name: '[]>> | void'
+        fullName: '[]>> | void'
   - uid: azure-iothub.Registry
     name: Registry
     spec.typeScript:
@@ -1129,12 +1273,8 @@ references:
     name: RegistryStatistics
   - uid: azure-iothub.Registry.TransportConfig
     name: TransportConfig
-  - uid: azure-iothub.Registry.BulkDeviceIdentityCallback
-    name: BulkDeviceIdentityCallback
   - uid: azure-iothub.Registry.BulkRegistryOperationType
     name: BulkRegistryOperationType
-  - uid: azure-iothub.Registry.DeviceCallback
-    name: DeviceCallback
   - uid: azure-iothub.Registry.JobCallback
     name: JobCallback
   - uid: azure-iothub.Registry.ResponseCallback

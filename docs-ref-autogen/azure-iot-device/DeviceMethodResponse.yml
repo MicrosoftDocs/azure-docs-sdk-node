@@ -98,8 +98,8 @@ items:
                          as the status of the method call.
     syntax:
       content: >-
-        function send(status: number, payload?: any, done?: (err?: Error) =>
-        void)
+        function send(status: number, payload?: any | ErrorCallback, done?:
+        ErrorCallback)
       parameters:
         - id: status
           type:
@@ -109,19 +109,17 @@ items:
                                            service.
         - id: payload
           type:
-            - any
-          description: The payload of the method response.
+            - any | ErrorCallback
+          description: ''
           optional: true
         - id: done
           type:
-            - '(err?: Error) => void'
-          description: |
-            A callback function which will be
-                                           called once the response has been sent back to
-                                           the service. An error object is passed as an
-                                           argument to the function in case an error
-                                           occurs.
+            - ErrorCallback
+          description: ''
           optional: true
+      return:
+        type:
+          - Promise<void> | void
     package: azure-iot-device
   - uid: azure-iot-device.DeviceMethodResponse.status
     name: status

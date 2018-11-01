@@ -137,8 +137,7 @@ items:
     syntax:
       content: >-
         function createOrUpdateEnrollmentGroup(enrollmentGroup: EnrollmentGroup,
-        callback?: (err: Error, enrollmentGroup?: EnrollmentGroup, response?:
-        any) => void)
+        callback?: HttpResponseCallback<EnrollmentGroup>)
       parameters:
         - id: enrollmentGroup
           type:
@@ -147,11 +146,14 @@ items:
         - id: callback
           type:
             - >-
-              (err: Error, enrollmentGroup?: EnrollmentGroup, response?: any) =>
-              void
-          description: |
-            Invoked upon completion of the operation.
+              HttpResponseCallback<azure-iot-provisioning-service.EnrollmentGroup>
+          description: ''
           optional: true
+      return:
+        type:
+          - >-
+            Promise<ResultWithHttpResponse<azure-iot-provisioning-service.EnrollmentGroup>>
+            | void
     package: azure-iot-provisioning-service
   - uid: >-
       azure-iot-provisioning-service.ProvisioningServiceClient.createOrUpdateIndividualEnrollment
@@ -164,8 +166,8 @@ items:
     syntax:
       content: >-
         function createOrUpdateIndividualEnrollment(enrollment:
-        IndividualEnrollment, callback?: (err: Error, enrollment?:
-        IndividualEnrollment, response?: any) => void)
+        IndividualEnrollment, callback?:
+        HttpResponseCallback<IndividualEnrollment>)
       parameters:
         - id: enrollment
           type:
@@ -174,11 +176,14 @@ items:
         - id: callback
           type:
             - >-
-              (err: Error, enrollment?: IndividualEnrollment, response?: any) =>
-              void
-          description: |
-            Invoked upon completion of the operation.
+              HttpResponseCallback<azure-iot-provisioning-service.IndividualEnrollment>
+          description: ''
           optional: true
+      return:
+        type:
+          - >-
+            Promise<ResultWithHttpResponse<azure-iot-provisioning-service.IndividualEnrollment>>
+            | void
     package: azure-iot-provisioning-service
   - uid: >-
       azure-iot-provisioning-service.ProvisioningServiceClient.deleteDeviceRegistrationState
@@ -191,8 +196,8 @@ items:
     syntax:
       content: >-
         function deleteDeviceRegistrationState(idOrRegistrationState: string |
-        DeviceRegistrationState, etagOrCallback?: string | DeleteCallback,
-        deleteCallback?: DeleteCallback)
+        DeviceRegistrationState, etagOrCallback?: string | ErrorCallback,
+        deleteCallback?: ErrorCallback)
       parameters:
         - id: idOrRegistrationState
           type:
@@ -202,17 +207,19 @@ items:
             DeviceRegistrationState.
         - id: etagOrCallback
           type:
-            - string | azure-iot-provisioning-service.DeleteCallback
+            - string | ErrorCallback
           description: >-
             In the case of the first argument being a string this could be an
             etag (or the callback).
           optional: true
         - id: deleteCallback
           type:
-            - azure-iot-provisioning-service.DeleteCallback
-          description: |
-            Invoked upon completion of the operation.
+            - ErrorCallback
+          description: ''
           optional: true
+      return:
+        type:
+          - Promise<void> | void
     package: azure-iot-provisioning-service
   - uid: >-
       azure-iot-provisioning-service.ProvisioningServiceClient.deleteEnrollmentGroup
@@ -225,8 +232,8 @@ items:
     syntax:
       content: >-
         function deleteEnrollmentGroup(enrollmentGroupOrId: string |
-        EnrollmentGroup, etagOrCallback?: string | DeleteCallback,
-        deleteCallback?: DeleteCallback)
+        EnrollmentGroup, etagOrCallback?: string | ErrorCallback,
+        deleteCallback?: ErrorCallback)
       parameters:
         - id: enrollmentGroupOrId
           type:
@@ -236,17 +243,17 @@ items:
             Id.
         - id: etagOrCallback
           type:
-            - string | azure-iot-provisioning-service.DeleteCallback
-          description: >-
-            In the case of the first argument being a string this could be an
-            etag (or the callback).
+            - string | ErrorCallback
+          description: ''
           optional: true
         - id: deleteCallback
           type:
-            - azure-iot-provisioning-service.DeleteCallback
-          description: |
-            Invoked upon completion of the operation.
+            - ErrorCallback
+          description: ''
           optional: true
+      return:
+        type:
+          - Promise<void> | void
     package: azure-iot-provisioning-service
   - uid: >-
       azure-iot-provisioning-service.ProvisioningServiceClient.deleteIndividualEnrollment
@@ -259,8 +266,8 @@ items:
     syntax:
       content: >-
         function deleteIndividualEnrollment(enrollmentOrId: string |
-        IndividualEnrollment, etagOrCallback?: string | DeleteCallback,
-        deleteCallback?: DeleteCallback)
+        IndividualEnrollment, etagOrCallback?: string | ErrorCallback,
+        deleteCallback?: ErrorCallback)
       parameters:
         - id: enrollmentOrId
           type:
@@ -270,17 +277,19 @@ items:
             registration id.
         - id: etagOrCallback
           type:
-            - string | azure-iot-provisioning-service.DeleteCallback
+            - string | ErrorCallback
           description: >-
             In the case of the first argument being a string this could be an
             etag (or the callback).
           optional: true
         - id: deleteCallback
           type:
-            - azure-iot-provisioning-service.DeleteCallback
-          description: |
-            Invoked upon completion of the operation.
+            - ErrorCallback
+          description: ''
           optional: true
+      return:
+        type:
+          - Promise<void> | void
     package: azure-iot-provisioning-service
   - uid: >-
       azure-iot-provisioning-service.ProvisioningServiceClient.fromConnectionString
@@ -317,8 +326,8 @@ items:
     summary: Gets the device registration status.
     syntax:
       content: >-
-        function getDeviceRegistrationState(id: string, callback: (err: Error,
-        registrationState?: DeviceRegistrationState, response?: any) => void)
+        function getDeviceRegistrationState(id: string, callback?:
+        HttpResponseCallback<DeviceRegistrationState>)
       parameters:
         - id: id
           type:
@@ -327,10 +336,14 @@ items:
         - id: callback
           type:
             - >-
-              (err: Error, registrationState?: DeviceRegistrationState,
-              response?: any) => void
-          description: |
-            Invoked upon completion of the operation.
+              HttpResponseCallback<azure-iot-provisioning-service.DeviceRegistrationState>
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<ResultWithHttpResponse<azure-iot-provisioning-service.DeviceRegistrationState>>
+            | void
     package: azure-iot-provisioning-service
   - uid: >-
       azure-iot-provisioning-service.ProvisioningServiceClient.getEnrollmentGroup
@@ -342,8 +355,8 @@ items:
     summary: Get a device enrollment group.
     syntax:
       content: >-
-        function getEnrollmentGroup(id: string, getCallback: (err: Error,
-        enrollmentGroup: EnrollmentGroup, response?: any) => void)
+        function getEnrollmentGroup(id: string, getCallback?:
+        HttpResponseCallback<EnrollmentGroup>)
       parameters:
         - id: id
           type:
@@ -352,10 +365,14 @@ items:
         - id: getCallback
           type:
             - >-
-              (err: Error, enrollmentGroup: EnrollmentGroup, response?: any) =>
-              void
-          description: |
-            Invoked upon completion of the operation.
+              HttpResponseCallback<azure-iot-provisioning-service.EnrollmentGroup>
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<ResultWithHttpResponse<azure-iot-provisioning-service.EnrollmentGroup>>
+            | void
     package: azure-iot-provisioning-service
   - uid: >-
       azure-iot-provisioning-service.ProvisioningServiceClient.getIndividualEnrollment
@@ -367,8 +384,8 @@ items:
     summary: Get a device enrollment record.
     syntax:
       content: >-
-        function getIndividualEnrollment(id: string, getCallback: (err: Error,
-        enrollmentRecord?: IndividualEnrollment, response?: any) => void)
+        function getIndividualEnrollment(id: string, getCallback?:
+        HttpResponseCallback<IndividualEnrollment>)
       parameters:
         - id: id
           type:
@@ -377,10 +394,14 @@ items:
         - id: getCallback
           type:
             - >-
-              (err: Error, enrollmentRecord?: IndividualEnrollment, response?:
-              any) => void
-          description: |
-            Invoked upon completion of the operation.
+              HttpResponseCallback<azure-iot-provisioning-service.IndividualEnrollment>
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<ResultWithHttpResponse<azure-iot-provisioning-service.IndividualEnrollment>>
+            | void
     package: azure-iot-provisioning-service
   - uid: azure-iot-provisioning-service.ProvisioningServiceClient.constructor
     name: ProvisioningServiceClient
@@ -415,9 +436,8 @@ items:
     syntax:
       content: >-
         function runBulkEnrollmentOperation(bulkEnrollmentOperation:
-        BulkEnrollmentOperation, callback?: (err: Error,
-        bulkEnrollmentOperationResult?: BulkEnrollmentOperationResult,
-        response?: any) => void)
+        BulkEnrollmentOperation, callback?:
+        HttpResponseCallback<BulkEnrollmentOperationResult>)
       parameters:
         - id: bulkEnrollmentOperation
           type:
@@ -429,11 +449,15 @@ items:
         - id: callback
           type:
             - >-
-              (err: Error, bulkEnrollmentOperationResult?:
-              BulkEnrollmentOperationResult, response?: any) => void
+              HttpResponseCallback<azure-iot-provisioning-service.BulkEnrollmentOperationResult>
           description: |
             Invoked upon completion of the operation.
           optional: true
+      return:
+        type:
+          - >-
+            Promise<ResultWithHttpResponse<azure-iot-provisioning-service.BulkEnrollmentOperationResult>>
+            | void
     package: azure-iot-provisioning-service
 references:
   - uid: azure-iot-provisioning-service.QuerySpecification
@@ -454,12 +478,56 @@ references:
       - name: EnrollmentGroup
         fullName: EnrollmentGroup
         uid: azure-iot-provisioning-service.EnrollmentGroup
+  - uid: HttpResponseCallback<azure-iot-provisioning-service.EnrollmentGroup>
+    name: EnrollmentGroup>
+    spec.typeScript:
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
+      - name: EnrollmentGroup
+        fullName: EnrollmentGroup
+        uid: azure-iot-provisioning-service.EnrollmentGroup
+      - name: '>'
+        fullName: '>'
+  - uid: >-
+      Promise<ResultWithHttpResponse<azure-iot-provisioning-service.EnrollmentGroup>>
+      | void
+    name: EnrollmentGroup>> | void
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: EnrollmentGroup
+        fullName: EnrollmentGroup
+        uid: azure-iot-provisioning-service.EnrollmentGroup
+      - name: '>> | void'
+        fullName: '>> | void'
   - uid: azure-iot-provisioning-service.IndividualEnrollment
     name: IndividualEnrollment
     spec.typeScript:
       - name: IndividualEnrollment
         fullName: IndividualEnrollment
         uid: azure-iot-provisioning-service.IndividualEnrollment
+  - uid: HttpResponseCallback<azure-iot-provisioning-service.IndividualEnrollment>
+    name: IndividualEnrollment>
+    spec.typeScript:
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
+      - name: IndividualEnrollment
+        fullName: IndividualEnrollment
+        uid: azure-iot-provisioning-service.IndividualEnrollment
+      - name: '>'
+        fullName: '>'
+  - uid: >-
+      Promise<ResultWithHttpResponse<azure-iot-provisioning-service.IndividualEnrollment>>
+      | void
+    name: IndividualEnrollment>> | void
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: IndividualEnrollment
+        fullName: IndividualEnrollment
+        uid: azure-iot-provisioning-service.IndividualEnrollment
+      - name: '>> | void'
+        fullName: '>> | void'
   - uid: string | azure-iot-provisioning-service.DeviceRegistrationState
     name: DeviceRegistrationState
     spec.typeScript:
@@ -468,20 +536,6 @@ references:
       - name: DeviceRegistrationState
         fullName: DeviceRegistrationState
         uid: azure-iot-provisioning-service.DeviceRegistrationState
-  - uid: string | azure-iot-provisioning-service.DeleteCallback
-    name: DeleteCallback
-    spec.typeScript:
-      - name: 'string | '
-        fullName: 'string | '
-      - name: DeleteCallback
-        fullName: DeleteCallback
-        uid: azure-iot-provisioning-service.DeleteCallback
-  - uid: azure-iot-provisioning-service.DeleteCallback
-    name: DeleteCallback
-    spec.typeScript:
-      - name: DeleteCallback
-        fullName: DeleteCallback
-        uid: azure-iot-provisioning-service.DeleteCallback
   - uid: string | azure-iot-provisioning-service.EnrollmentGroup
     name: EnrollmentGroup
     spec.typeScript:
@@ -498,12 +552,58 @@ references:
       - name: IndividualEnrollment
         fullName: IndividualEnrollment
         uid: azure-iot-provisioning-service.IndividualEnrollment
+  - uid: >-
+      HttpResponseCallback<azure-iot-provisioning-service.DeviceRegistrationState>
+    name: DeviceRegistrationState>
+    spec.typeScript:
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
+      - name: DeviceRegistrationState
+        fullName: DeviceRegistrationState
+        uid: azure-iot-provisioning-service.DeviceRegistrationState
+      - name: '>'
+        fullName: '>'
+  - uid: >-
+      Promise<ResultWithHttpResponse<azure-iot-provisioning-service.DeviceRegistrationState>>
+      | void
+    name: DeviceRegistrationState>> | void
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: DeviceRegistrationState
+        fullName: DeviceRegistrationState
+        uid: azure-iot-provisioning-service.DeviceRegistrationState
+      - name: '>> | void'
+        fullName: '>> | void'
   - uid: azure-iot-provisioning-service.BulkEnrollmentOperation
     name: BulkEnrollmentOperation
     spec.typeScript:
       - name: BulkEnrollmentOperation
         fullName: BulkEnrollmentOperation
         uid: azure-iot-provisioning-service.BulkEnrollmentOperation
+  - uid: >-
+      HttpResponseCallback<azure-iot-provisioning-service.BulkEnrollmentOperationResult>
+    name: BulkEnrollmentOperationResult>
+    spec.typeScript:
+      - name: HttpResponseCallback<
+        fullName: HttpResponseCallback<
+      - name: BulkEnrollmentOperationResult
+        fullName: BulkEnrollmentOperationResult
+        uid: azure-iot-provisioning-service.BulkEnrollmentOperationResult
+      - name: '>'
+        fullName: '>'
+  - uid: >-
+      Promise<ResultWithHttpResponse<azure-iot-provisioning-service.BulkEnrollmentOperationResult>>
+      | void
+    name: BulkEnrollmentOperationResult>> | void
+    spec.typeScript:
+      - name: Promise<ResultWithHttpResponse<
+        fullName: Promise<ResultWithHttpResponse<
+      - name: BulkEnrollmentOperationResult
+        fullName: BulkEnrollmentOperationResult
+        uid: azure-iot-provisioning-service.BulkEnrollmentOperationResult
+      - name: '>> | void'
+        fullName: '>> | void'
   - uid: azure-iot-provisioning-service.ProvisioningServiceClient
     name: ProvisioningServiceClient
     spec.typeScript:

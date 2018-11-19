@@ -13,7 +13,11 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: >-
+      Represents health information reported on a health entity, such as
+      cluster, application or node,
+
+      with additional metadata added by the Health Manager.
     extends:
       name: azure-servicefabric.HealthInformation
     package: azure-servicefabric
@@ -24,7 +28,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'Returns true if the health event is expired, otherwise false.'
     optional: true
     syntax:
       content: 'isExpired?: boolean'
@@ -39,7 +43,26 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >
+      If the current health state is 'Error', this property returns the time at
+      which the health
+
+      report was first reported with 'Error'. For periodic reporting, many
+      reports with the same
+
+      state may have been generated however, this property returns only the date
+      and time at the
+
+      first 'Error' health report was received.
+
+      If the current health state is 'Ok' or 'Warning', returns the date and
+      time at which the
+
+      health state was last in 'Error', before transitioning to a different
+      state.
+
+
+      If the health state was never 'Error', the value will be zero date-time.
     optional: true
     syntax:
       content: 'lastErrorTransitionAt?: Date'
@@ -54,7 +77,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The date and time when the health report was last modified by the health
+      store.
     optional: true
     syntax:
       content: 'lastModifiedUtcTimestamp?: Date'
@@ -69,7 +94,25 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >
+      If the current health state is 'Ok', this property returns the time at
+      which the health report
+
+      was first reported with 'Ok'.
+
+      For periodic reporting, many reports with the same state may have been
+      generated.
+
+      This property returns the date and time when the first 'Ok' health report
+      was received.
+
+      If the current health state is 'Error' or 'Warning', returns the date and
+      time at which the
+
+      health state was last in 'Ok', before transitioning to a different state.
+
+
+      If the health state was never 'Ok', the value will be zero date-time.
     optional: true
     syntax:
       content: 'lastOkTransitionAt?: Date'
@@ -84,7 +127,25 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >
+      If the current health state is 'Warning', this property returns the time
+      at which the health
+
+      report was first reported with 'Warning'. For periodic reporting, many
+      reports with the same
+
+      state may have been generated however, this property returns only the date
+      and time at the
+
+      first 'Warning' health report was received.
+
+      If the current health state is 'Ok' or 'Error', returns the date and time
+      at which the health
+
+      state was last in 'Warning', before transitioning to a different state.
+
+
+      If the health state was never 'Warning', the value will be zero date-time.
     optional: true
     syntax:
       content: 'lastWarningTransitionAt?: Date'
@@ -99,7 +160,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The date and time when the health report was sent by the source.
     optional: true
     syntax:
       content: 'sourceUtcTimestamp?: Date'

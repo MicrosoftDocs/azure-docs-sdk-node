@@ -25,7 +25,7 @@ items:
     summary: ''
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.close'
-    name: close
+    name: close()
     children: []
     type: method
     langs:
@@ -52,13 +52,16 @@ items:
       the connection within a process.
     optional: true
     syntax:
-      content: 'connectionId?: string'
+      content: 'connectionId?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.createFromAadTokenCredentials'
-    name: createFromAadTokenCredentials
+    name: >-
+      createFromAadTokenCredentials(string, string, ApplicationTokenCredentials
+      | UserTokenCredentials | DeviceTokenCredentials | MSITokenCredentials,
+      ClientOptionsBase)
     children: []
     type: method
     langs:
@@ -101,7 +104,7 @@ items:
           - '@azure/event-hubs.EventHubClient'
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.createFromConnectionString'
-    name: createFromConnectionString
+    name: 'createFromConnectionString(string, undefined | string, ClientOptions)'
     children: []
     type: method
     langs:
@@ -110,7 +113,7 @@ items:
     syntax:
       content: >-
         static function createFromConnectionString(connectionString: string,
-        path?: string, options?: ClientOptions)
+        path?: undefined | string, options?: ClientOptions)
       parameters:
         - id: connectionString
           type:
@@ -120,7 +123,7 @@ items:
             'Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key'
         - id: path
           type:
-            - string
+            - undefined | string
           description: ''
           optional: true
         - id: options
@@ -133,7 +136,7 @@ items:
           - '@azure/event-hubs.EventHubClient'
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.createFromIotHubConnectionString'
-    name: createFromIotHubConnectionString
+    name: 'createFromIotHubConnectionString(string, ClientOptions)'
     children: []
     type: method
     langs:
@@ -160,7 +163,7 @@ items:
           - Promise<@azure/event-hubs.EventHubClient>
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.createFromTokenProvider'
-    name: createFromTokenProvider
+    name: 'createFromTokenProvider(string, string, TokenProvider, ClientOptionsBase)'
     children: []
     type: method
     langs:
@@ -195,7 +198,7 @@ items:
           - '@azure/event-hubs.EventHubClient'
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.constructor'
-    name: EventHubClient
+    name: 'EventHubClient(EventHubConnectionConfig, ClientOptions)'
     children: []
     type: constructor
     langs:
@@ -235,7 +238,7 @@ items:
           - string
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.getHubRuntimeInformation'
-    name: getHubRuntimeInformation
+    name: getHubRuntimeInformation()
     children: []
     type: method
     langs:
@@ -249,7 +252,7 @@ items:
           - Promise<@azure/event-hubs.EventHubRuntimeInformation>
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.getPartitionIds'
-    name: getPartitionIds
+    name: getPartitionIds()
     children: []
     type: method
     langs:
@@ -263,7 +266,7 @@ items:
           - Promise<Array<string>>
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.getPartitionInformation'
-    name: getPartitionInformation
+    name: getPartitionInformation(string | number)
     children: []
     type: method
     langs:
@@ -281,7 +284,7 @@ items:
           - Promise<@azure/event-hubs.EventHubPartitionRuntimeInformation>
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.receive'
-    name: receive
+    name: 'receive(string | number, OnMessage, OnError, ReceiveOptions)'
     children: []
     type: method
     langs:
@@ -321,7 +324,7 @@ items:
           - '@azure/event-hubs.ReceiveHandler'
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.receiveBatch'
-    name: receiveBatch
+    name: 'receiveBatch(string | number, number, undefined | number, ReceiveOptions)'
     children: []
     type: method
     langs:
@@ -335,7 +338,8 @@ items:
     syntax:
       content: >-
         function receiveBatch(partitionId: string | number, maxMessageCount:
-        number, maxWaitTimeInSeconds?: number, options?: ReceiveOptions)
+        number, maxWaitTimeInSeconds?: undefined | number, options?:
+        ReceiveOptions)
       parameters:
         - id: partitionId
           type:
@@ -347,7 +351,7 @@ items:
           description: The maximum message count. Must be a value greater than 0.
         - id: maxWaitTimeInSeconds
           type:
-            - number
+            - undefined | number
           description: ''
           optional: true
         - id: options
@@ -360,7 +364,7 @@ items:
           - 'Promise<@azure/event-hubs.EventData[]>'
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.send'
-    name: send
+    name: 'send(EventData, string | number)'
     children: []
     type: method
     langs:
@@ -383,7 +387,7 @@ items:
           - Promise<Delivery>
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClient.sendBatch'
-    name: sendBatch
+    name: 'sendBatch(EventData[], string | number)'
     children: []
     type: method
     langs:

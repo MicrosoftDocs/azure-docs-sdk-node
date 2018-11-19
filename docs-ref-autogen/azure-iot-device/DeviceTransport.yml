@@ -17,11 +17,11 @@ items:
       - azure-iot-device.DeviceTransport.enableMethods
       - azure-iot-device.DeviceTransport.enableTwinDesiredPropertiesUpdates
       - azure-iot-device.DeviceTransport.getTwin
-      - azure-iot-device.DeviceTransport.on
       - azure-iot-device.DeviceTransport.on_1
+      - azure-iot-device.DeviceTransport.on
+      - azure-iot-device.DeviceTransport.on_4
       - azure-iot-device.DeviceTransport.on_2
       - azure-iot-device.DeviceTransport.on_3
-      - azure-iot-device.DeviceTransport.on_4
       - azure-iot-device.DeviceTransport.onDeviceMethod
       - azure-iot-device.DeviceTransport.reject
       - azure-iot-device.DeviceTransport.sendEvent
@@ -37,10 +37,10 @@ items:
     type: interface
     summary: ''
     extends:
-      name: EventEmitter
+      name: any
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.abandon
-    name: abandon
+    name: 'abandon(Message, (err?: Error, results?: MessageAbandoned) => void)'
     children: []
     type: method
     langs:
@@ -61,7 +61,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.complete
-    name: complete
+    name: 'complete(Message, (err?: Error, result?: MessageCompleted) => void)'
     children: []
     type: method
     langs:
@@ -82,7 +82,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.connect
-    name: connect
+    name: 'connect((err?: Error, result?: Connected) => void)'
     children: []
     type: method
     langs:
@@ -97,7 +97,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.disableC2D
-    name: disableC2D
+    name: 'disableC2D((err?: Error) => void)'
     children: []
     type: method
     langs:
@@ -112,7 +112,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.disableInputMessages
-    name: disableInputMessages
+    name: 'disableInputMessages((err?: Error) => void)'
     children: []
     type: method
     langs:
@@ -127,7 +127,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.disableMethods
-    name: disableMethods
+    name: 'disableMethods((err?: Error) => void)'
     children: []
     type: method
     langs:
@@ -142,7 +142,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.disableTwinDesiredPropertiesUpdates
-    name: disableTwinDesiredPropertiesUpdates
+    name: 'disableTwinDesiredPropertiesUpdates((err?: Error) => void)'
     children: []
     type: method
     langs:
@@ -159,7 +159,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.disconnect
-    name: disconnect
+    name: 'disconnect((err?: Error, result?: Disconnected) => void)'
     children: []
     type: method
     langs:
@@ -174,7 +174,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.enableC2D
-    name: enableC2D
+    name: 'enableC2D((err?: Error) => void)'
     children: []
     type: method
     langs:
@@ -189,7 +189,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.enableInputMessages
-    name: enableInputMessages
+    name: 'enableInputMessages((err?: Error) => void)'
     children: []
     type: method
     langs:
@@ -204,7 +204,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.enableMethods
-    name: enableMethods
+    name: 'enableMethods((err?: Error) => void)'
     children: []
     type: method
     langs:
@@ -219,7 +219,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.enableTwinDesiredPropertiesUpdates
-    name: enableTwinDesiredPropertiesUpdates
+    name: 'enableTwinDesiredPropertiesUpdates((err?: Error) => void)'
     children: []
     type: method
     langs:
@@ -236,7 +236,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.getTwin
-    name: getTwin
+    name: 'getTwin((err?: Error, twin?: TwinProperties) => void)'
     children: []
     type: method
     langs:
@@ -250,30 +250,8 @@ items:
             - '(err?: Error, twin?: TwinProperties) => void'
           description: ''
     package: azure-iot-device
-  - uid: azure-iot-device.DeviceTransport.on
-    name: 'on'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: 'function on(type: "error", func: (err: Error) => void)'
-      parameters:
-        - id: type
-          type:
-            - '"error"'
-          description: ''
-        - id: func
-          type:
-            - '(err: Error) => void'
-          description: ''
-      return:
-        type:
-          - this
-    package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.on_1
-    name: 'on'
+    name: 'on("disconnect", (err?: Error) => void)'
     children: []
     type: method
     langs:
@@ -294,54 +272,30 @@ items:
         type:
           - this
     package: azure-iot-device
-  - uid: azure-iot-device.DeviceTransport.on_2
-    name: 'on'
+  - uid: azure-iot-device.DeviceTransport.on
+    name: 'on("error", (err: Error) => void)'
     children: []
     type: method
     langs:
       - typeScript
     summary: ''
     syntax:
-      content: 'function on(type: "message", func: (msg: Message) => void)'
+      content: 'function on(type: "error", func: (err: Error) => void)'
       parameters:
         - id: type
           type:
-            - '"message"'
+            - '"error"'
           description: ''
         - id: func
           type:
-            - '(msg: Message) => void'
-          description: ''
-      return:
-        type:
-          - this
-    package: azure-iot-device
-  - uid: azure-iot-device.DeviceTransport.on_3
-    name: 'on'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        function on(type: "twinDesiredPropertiesUpdate", func: (desiredProps:
-        any) => void)
-      parameters:
-        - id: type
-          type:
-            - '"twinDesiredPropertiesUpdate"'
-          description: ''
-        - id: func
-          type:
-            - '(desiredProps: any) => void'
+            - '(err: Error) => void'
           description: ''
       return:
         type:
           - this
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.on_4
-    name: 'on'
+    name: 'on("inputMessage", (inputName: string, msg: Message) => void)'
     children: []
     type: method
     langs:
@@ -364,8 +318,56 @@ items:
         type:
           - this
     package: azure-iot-device
+  - uid: azure-iot-device.DeviceTransport.on_2
+    name: 'on("message", (msg: Message) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function on(type: "message", func: (msg: Message) => void)'
+      parameters:
+        - id: type
+          type:
+            - '"message"'
+          description: ''
+        - id: func
+          type:
+            - '(msg: Message) => void'
+          description: ''
+      return:
+        type:
+          - this
+    package: azure-iot-device
+  - uid: azure-iot-device.DeviceTransport.on_3
+    name: 'on("twinDesiredPropertiesUpdate", (desiredProps: any) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function on(type: "twinDesiredPropertiesUpdate", func: (desiredProps:
+        any) => void)
+      parameters:
+        - id: type
+          type:
+            - '"twinDesiredPropertiesUpdate"'
+          description: ''
+        - id: func
+          type:
+            - '(desiredProps: any) => void'
+          description: ''
+      return:
+        type:
+          - this
+    package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.onDeviceMethod
-    name: onDeviceMethod
+    name: >-
+      onDeviceMethod(string, (request: MethodMessage, response:
+      DeviceMethodResponse) => void)
     children: []
     type: method
     langs:
@@ -386,7 +388,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.reject
-    name: reject
+    name: 'reject(Message, (err?: Error, results?: MessageRejected) => void)'
     children: []
     type: method
     langs:
@@ -407,7 +409,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.sendEvent
-    name: sendEvent
+    name: 'sendEvent(Message, (err?: Error, result?: MessageEnqueued) => void)'
     children: []
     type: method
     langs:
@@ -428,7 +430,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.sendEventBatch
-    name: sendEventBatch
+    name: 'sendEventBatch(Message[], (err?: Error, result?: MessageEnqueued) => void)'
     children: []
     type: method
     langs:
@@ -449,7 +451,9 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.sendMethodResponse
-    name: sendMethodResponse
+    name: >-
+      sendMethodResponse(DeviceMethodResponse, (err?: Error, result?: any) =>
+      void)
     children: []
     type: method
     langs:
@@ -471,7 +475,9 @@ items:
           optional: true
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.sendOutputEvent
-    name: sendOutputEvent
+    name: >-
+      sendOutputEvent(string, Message, (err?: Error, result?: MessageEnqueued)
+      => void)
     children: []
     type: method
     langs:
@@ -496,7 +502,9 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.sendOutputEventBatch
-    name: sendOutputEventBatch
+    name: >-
+      sendOutputEventBatch(string, Message[], (err?: Error, result?:
+      MessageEnqueued) => void)
     children: []
     type: method
     langs:
@@ -521,7 +529,9 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.setOptions
-    name: setOptions
+    name: >-
+      setOptions(DeviceClientOptions, (err?: Error, result?:
+      TransportConfigured) => void)
     children: []
     type: method
     langs:
@@ -542,7 +552,9 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.updateSharedAccessSignature
-    name: updateSharedAccessSignature
+    name: >-
+      updateSharedAccessSignature(string, (err?: Error, result?:
+      SharedAccessSignatureUpdated) => void)
     children: []
     type: method
     langs:
@@ -563,7 +575,7 @@ items:
           description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceTransport.updateTwinReportedProperties
-    name: updateTwinReportedProperties
+    name: 'updateTwinReportedProperties(any, (err?: Error) => void)'
     children: []
     type: method
     langs:

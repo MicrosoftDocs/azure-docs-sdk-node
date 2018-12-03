@@ -6,6 +6,7 @@ items:
     children:
       - '@azure/storage-blob.IDownloadFromBlobOptions.blobAccessConditions'
       - '@azure/storage-blob.IDownloadFromBlobOptions.blockSize'
+      - '@azure/storage-blob.IDownloadFromBlobOptions.maxRetryRequestsPerBlock'
       - '@azure/storage-blob.IDownloadFromBlobOptions.parallelism'
       - '@azure/storage-blob.IDownloadFromBlobOptions.progress'
     langs:
@@ -45,6 +46,41 @@ items:
     optional: true
     syntax:
       content: 'blockSize?: number'
+      return:
+        type:
+          - number
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.IDownloadFromBlobOptions.maxRetryRequestsPerBlock'
+    name: maxRetryRequestsPerBlock
+    fullName: maxRetryRequestsPerBlock
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >
+      Optional. ONLY AVAILABLE IN NODE.JS.
+
+      How many retries will perform when original block download stream
+      unexpected ends.
+
+      Above kind of ends will not trigger retry policy defined in a pipeline,
+
+      because they doesn't emit network errors.
+
+
+      With this option, every additional retry means an additional
+      FileURL.download() request will be made
+
+      from the broken point, until the requested block has been successfully
+      downloaded or
+
+      maxRetryRequestsPerBlock is reached.
+
+
+      Default value is 5, please set a larger value when in poor network.
+    optional: true
+    syntax:
+      content: 'maxRetryRequestsPerBlock?: number'
       return:
         type:
           - number

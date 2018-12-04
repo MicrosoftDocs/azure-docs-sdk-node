@@ -6,7 +6,13 @@ items:
     children:
       - azure-iothub.Query.continuationToken
       - azure-iothub.Query.hasMoreResults
+      - azure-iothub.Query.next_3
+      - azure-iothub.Query.next_1
+      - azure-iothub.Query.next_2
       - azure-iothub.Query.next
+      - azure-iothub.Query.nextAsTwin_3
+      - azure-iothub.Query.nextAsTwin_1
+      - azure-iothub.Query.nextAsTwin_2
       - azure-iothub.Query.nextAsTwin
     langs:
       - typeScript
@@ -49,8 +55,55 @@ items:
         type:
           - boolean
     package: azure-iothub
+  - uid: azure-iothub.Query.next_3
+    name: next()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Gets the next page of results for this query.
+    syntax:
+      content: function next()
+      parameters: []
+      return:
+        type:
+          - Promise<azure-iothub.ResultWithIncomingMessage<any>>
+    package: azure-iothub
+  - uid: azure-iothub.Query.next_1
+    name: next(IncomingMessageCallback<any>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Gets the next page of results for this query.
+    syntax:
+      content: 'function next(done: IncomingMessageCallback<any>)'
+      parameters:
+        - id: done
+          type:
+            - azure-iothub.IncomingMessageCallback<any>
+          description: ''
+    package: azure-iothub
+  - uid: azure-iothub.Query.next_2
+    name: next(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Gets the next page of results for this query.
+    syntax:
+      content: 'function next(continuationToken: string)'
+      parameters:
+        - id: continuationToken
+          type:
+            - string
+          description: ''
+      return:
+        type:
+          - Promise<azure-iothub.ResultWithIncomingMessage<any>>
+    package: azure-iothub
   - uid: azure-iothub.Query.next
-    name: 'next(string | IncomingMessageCallback<any>, IncomingMessageCallback<any>)'
+    name: 'next(string, IncomingMessageCallback<any>)'
     children: []
     type: method
     langs:
@@ -58,26 +111,67 @@ items:
     summary: Gets the next page of results for this query.
     syntax:
       content: >-
-        function next(continuationTokenOrCallback: string |
-        IncomingMessageCallback<any>, done?: IncomingMessageCallback<any>)
+        function next(continuationToken: string, done:
+        IncomingMessageCallback<any>)
       parameters:
-        - id: continuationTokenOrCallback
+        - id: continuationToken
           type:
-            - string | azure-iothub.IncomingMessageCallback<any>
-          description: ''
+            - string
+          description: Continuation Token used for paging through results (optional)
         - id: done
           type:
             - azure-iothub.IncomingMessageCallback<any>
           description: ''
-          optional: true
+    package: azure-iothub
+  - uid: azure-iothub.Query.nextAsTwin_3
+    name: nextAsTwin()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Gets the next page of results for this query and cast them as Twins.
+    syntax:
+      content: function nextAsTwin()
+      parameters: []
       return:
         type:
-          - Promise<azure-iothub.ResultWithIncomingMessage<any>> | void
+          - 'Promise<azure-iothub.ResultWithIncomingMessage<azure-iothub.Twin[]>>'
+    package: azure-iothub
+  - uid: azure-iothub.Query.nextAsTwin_1
+    name: 'nextAsTwin(IncomingMessageCallback<Twin[]>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Gets the next page of results for this query and cast them as Twins.
+    syntax:
+      content: 'function nextAsTwin(done: IncomingMessageCallback<Twin[]>)'
+      parameters:
+        - id: done
+          type:
+            - 'azure-iothub.IncomingMessageCallback<azure-iothub.Twin[]>'
+          description: ''
+    package: azure-iothub
+  - uid: azure-iothub.Query.nextAsTwin_2
+    name: nextAsTwin(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Gets the next page of results for this query and cast them as Twins.
+    syntax:
+      content: 'function nextAsTwin(continuationToken: string)'
+      parameters:
+        - id: continuationToken
+          type:
+            - string
+          description: ''
+      return:
+        type:
+          - 'Promise<azure-iothub.ResultWithIncomingMessage<azure-iothub.Twin[]>>'
     package: azure-iothub
   - uid: azure-iothub.Query.nextAsTwin
-    name: >-
-      nextAsTwin(string | IncomingMessageCallback<Twin[]>,
-      IncomingMessageCallback<Twin[]>)
+    name: 'nextAsTwin(string, IncomingMessageCallback<Twin[]>)'
     children: []
     type: method
     langs:
@@ -85,35 +179,19 @@ items:
     summary: Gets the next page of results for this query and cast them as Twins.
     syntax:
       content: >-
-        function nextAsTwin(continuationToken: string |
-        IncomingMessageCallback<Twin[]>, done?: IncomingMessageCallback<Twin[]>)
+        function nextAsTwin(continuationToken: string, done:
+        IncomingMessageCallback<Twin[]>)
       parameters:
         - id: continuationToken
           type:
-            - 'string | azure-iothub.IncomingMessageCallback<azure-iothub.Twin[]>'
+            - string
           description: Continuation Token used for paging through results (optional)
         - id: done
           type:
             - 'azure-iothub.IncomingMessageCallback<azure-iothub.Twin[]>'
           description: ''
-          optional: true
-      return:
-        type:
-          - >-
-            Promise<azure-iothub.ResultWithIncomingMessage<azure-iothub.Twin[]>>
-            | void
     package: azure-iothub
 references:
-  - uid: string | azure-iothub.IncomingMessageCallback<any>
-    name: IncomingMessageCallback<any>
-    spec.typeScript:
-      - name: 'string | '
-        fullName: 'string | '
-      - name: IncomingMessageCallback
-        fullName: IncomingMessageCallback
-        uid: azure-iothub.IncomingMessageCallback
-      - name: <any>
-        fullName: <any>
   - uid: azure-iothub.IncomingMessageCallback<any>
     name: IncomingMessageCallback<any>
     spec.typeScript:
@@ -122,31 +200,16 @@ references:
         uid: azure-iothub.IncomingMessageCallback
       - name: <any>
         fullName: <any>
-  - uid: Promise<azure-iothub.ResultWithIncomingMessage<any>> | void
-    name: ResultWithIncomingMessage<any>> | void
+  - uid: Promise<azure-iothub.ResultWithIncomingMessage<any>>
+    name: ResultWithIncomingMessage<any>>
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
       - name: ResultWithIncomingMessage
         fullName: ResultWithIncomingMessage
         uid: azure-iothub.ResultWithIncomingMessage
-      - name: <any>> | void
-        fullName: <any>> | void
-  - uid: 'string | azure-iothub.IncomingMessageCallback<azure-iothub.Twin[]>'
-    name: 'Twin[]>'
-    spec.typeScript:
-      - name: 'string | '
-        fullName: 'string | '
-      - name: IncomingMessageCallback
-        fullName: IncomingMessageCallback
-        uid: azure-iothub.IncomingMessageCallback
-      - name: <
-        fullName: <
-      - name: Twin
-        fullName: Twin
-        uid: azure-iothub.Twin
-      - name: '[]>'
-        fullName: '[]>'
+      - name: <any>>
+        fullName: <any>>
   - uid: 'azure-iothub.IncomingMessageCallback<azure-iothub.Twin[]>'
     name: 'Twin[]>'
     spec.typeScript:
@@ -160,10 +223,8 @@ references:
         uid: azure-iothub.Twin
       - name: '[]>'
         fullName: '[]>'
-  - uid: >-
-      Promise<azure-iothub.ResultWithIncomingMessage<azure-iothub.Twin[]>> |
-      void
-    name: 'Twin[]>> | void'
+  - uid: 'Promise<azure-iothub.ResultWithIncomingMessage<azure-iothub.Twin[]>>'
+    name: 'Twin[]>>'
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
@@ -175,5 +236,5 @@ references:
       - name: Twin
         fullName: Twin
         uid: azure-iothub.Twin
-      - name: '[]>> | void'
-        fullName: '[]>> | void'
+      - name: '[]>>'
+        fullName: '[]>>'

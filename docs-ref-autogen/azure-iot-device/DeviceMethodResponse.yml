@@ -8,7 +8,9 @@ items:
       - azure-iot-device.DeviceMethodResponse.isResponseComplete
       - azure-iot-device.DeviceMethodResponse.payload
       - azure-iot-device.DeviceMethodResponse.requestId
+      - azure-iot-device.DeviceMethodResponse.send_2
       - azure-iot-device.DeviceMethodResponse.send
+      - azure-iot-device.DeviceMethodResponse.send_1
       - azure-iot-device.DeviceMethodResponse.status
     langs:
       - typeScript
@@ -86,8 +88,8 @@ items:
         type:
           - string
     package: azure-iot-device
-  - uid: azure-iot-device.DeviceMethodResponse.send
-    name: 'send(number, any | ErrorCallback, ErrorCallback)'
+  - uid: azure-iot-device.DeviceMethodResponse.send_2
+    name: 'send(number, any)'
     children: []
     type: method
     langs:
@@ -97,9 +99,33 @@ items:
                          the underlying transport object using the status parameter
                          as the status of the method call.
     syntax:
-      content: >-
-        function send(status: number, payload?: any | ErrorCallback, done?:
-        ErrorCallback)
+      content: 'function send(status: number, payload?: any)'
+      parameters:
+        - id: status
+          type:
+            - number
+          description: ''
+        - id: payload
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<void>
+    package: azure-iot-device
+  - uid: azure-iot-device.DeviceMethodResponse.send
+    name: 'send(number, any, ErrorCallback)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Sends the device method's response back to the service via
+                         the underlying transport object using the status parameter
+                         as the status of the method call.
+    syntax:
+      content: 'function send(status: number, payload: any, done: ErrorCallback)'
       parameters:
         - id: status
           type:
@@ -109,17 +135,34 @@ items:
                                            service.
         - id: payload
           type:
-            - any | ErrorCallback
+            - any
           description: ''
-          optional: true
         - id: done
           type:
             - ErrorCallback
           description: ''
-          optional: true
-      return:
-        type:
-          - Promise<void> | void
+    package: azure-iot-device
+  - uid: azure-iot-device.DeviceMethodResponse.send_1
+    name: 'send(number, ErrorCallback)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Sends the device method's response back to the service via
+                         the underlying transport object using the status parameter
+                         as the status of the method call.
+    syntax:
+      content: 'function send(status: number, done: ErrorCallback)'
+      parameters:
+        - id: status
+          type:
+            - number
+          description: ''
+        - id: done
+          type:
+            - ErrorCallback
+          description: ''
     package: azure-iot-device
   - uid: azure-iot-device.DeviceMethodResponse.status
     name: status

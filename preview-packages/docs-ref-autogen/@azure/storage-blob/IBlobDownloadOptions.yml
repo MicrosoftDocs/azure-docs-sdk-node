@@ -5,6 +5,7 @@ items:
     fullName: IBlobDownloadOptions
     children:
       - '@azure/storage-blob.IBlobDownloadOptions.blobAccessConditions'
+      - '@azure/storage-blob.IBlobDownloadOptions.maxRetryRequests'
       - '@azure/storage-blob.IBlobDownloadOptions.progress'
       - '@azure/storage-blob.IBlobDownloadOptions.rangeGetContentMD5'
       - '@azure/storage-blob.IBlobDownloadOptions.snapshot'
@@ -27,6 +28,40 @@ items:
       return:
         type:
           - '@azure/storage-blob.IBlobAccessConditions'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.IBlobDownloadOptions.maxRetryRequests'
+    name: maxRetryRequests
+    fullName: maxRetryRequests
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >
+      Optional. ONLY AVAILABLE IN NODE.JS.
+
+      How many retries will perform when original body download stream
+      unexpected ends.
+
+      Above kind of ends will not trigger retry policy defined in a pipeline,
+
+      because they doesn't emit network errors.
+
+
+      With this option, every additional retry means an additional
+      FileURL.download() request will be made
+
+      from the broken point, until the requested range has been successfully
+      downloaded or maxRetryRequests is reached.
+
+
+      Default value is 5, please set a larger value when loading large files in
+      poor network.
+    optional: true
+    syntax:
+      content: 'maxRetryRequests?: number'
+      return:
+        type:
+          - number
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.IBlobDownloadOptions.progress'
     name: progress

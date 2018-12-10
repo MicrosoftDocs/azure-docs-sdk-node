@@ -4,6 +4,7 @@ items:
     name: ServiceResourceDescription
     fullName: ServiceResourceDescription
     children:
+      - azure-servicefabric.ServiceResourceDescription.autoScalingPolicies
       - azure-servicefabric.ServiceResourceDescription.codePackages
       - azure-servicefabric.ServiceResourceDescription.description
       - azure-servicefabric.ServiceResourceDescription.diagnostics
@@ -13,10 +14,27 @@ items:
       - azure-servicefabric.ServiceResourceDescription.osType
       - azure-servicefabric.ServiceResourceDescription.replicaCount
       - azure-servicefabric.ServiceResourceDescription.status
+      - azure-servicefabric.ServiceResourceDescription.statusDetails
+      - azure-servicefabric.ServiceResourceDescription.unhealthyEvaluation
     langs:
       - typeScript
     type: interface
-    summary: Describes a service fabric service resource.
+    summary: This type describes a service resource.
+    package: azure-servicefabric
+  - uid: azure-servicefabric.ServiceResourceDescription.autoScalingPolicies
+    name: autoScalingPolicies
+    fullName: autoScalingPolicies
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Auto scaling policies
+    optional: true
+    syntax:
+      content: 'autoScalingPolicies?: AutoScalingPolicy[]'
+      return:
+        type:
+          - 'azure-servicefabric.AutoScalingPolicy[]'
     package: azure-servicefabric
   - uid: azure-servicefabric.ServiceResourceDescription.codePackages
     name: codePackages
@@ -77,13 +95,10 @@ items:
       - typeScript
     type: property
     summary: >-
-      The health state of a Service Fabric entity such as Cluster, Node,
-      Application, Service,
+      Describes the health state of an application resource. Possible values
+      include: 'Invalid',
 
-      Partition, Replica etc. Possible values include: 'Invalid', 'Ok',
-      'Warning', 'Error',
-
-      'Unknown'
+      'Ok', 'Warning', 'Error', 'Unknown'
     optional: true
     syntax:
       content: 'healthState?: string'
@@ -98,7 +113,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Service resource name.
+    summary: Name of the Service resource.
     syntax:
       content: 'name: string'
       return:
@@ -128,7 +143,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      The Operating system type required by the code in service. Possible values
+      The operation system required by the code in service. Possible values
       include: 'Linux',
 
       'Windows'
@@ -163,10 +178,10 @@ items:
       - typeScript
     type: property
     summary: >-
-      Represents the status of the service. Possible values include: 'Unknown',
-      'Active',
+      Status of the service. Possible values include: 'Unknown', 'Ready',
+      'Upgrading', 'Creating',
 
-      'Upgrading', 'Deleting', 'Creating', 'Failed'
+      'Deleting', 'Failed'
     optional: true
     syntax:
       content: 'status?: string'
@@ -174,7 +189,49 @@ items:
         type:
           - string
     package: azure-servicefabric
+  - uid: azure-servicefabric.ServiceResourceDescription.statusDetails
+    name: statusDetails
+    fullName: statusDetails
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Gives additional information about the current status of the service.
+    optional: true
+    syntax:
+      content: 'statusDetails?: string'
+      return:
+        type:
+          - string
+    package: azure-servicefabric
+  - uid: azure-servicefabric.ServiceResourceDescription.unhealthyEvaluation
+    name: unhealthyEvaluation
+    fullName: unhealthyEvaluation
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      When the service's health state is not 'Ok', this additional details from
+      service fabric
+
+      Health Manager for the user to know why the service is marked unhealthy.
+    optional: true
+    syntax:
+      content: 'unhealthyEvaluation?: string'
+      return:
+        type:
+          - string
+    package: azure-servicefabric
 references:
+  - uid: 'azure-servicefabric.AutoScalingPolicy[]'
+    name: 'AutoScalingPolicy[]'
+    spec.typeScript:
+      - name: AutoScalingPolicy
+        fullName: AutoScalingPolicy
+        uid: azure-servicefabric.AutoScalingPolicy
+      - name: '[]'
+        fullName: '[]'
   - uid: 'azure-servicefabric.ContainerCodePackageProperties[]'
     name: 'ContainerCodePackageProperties[]'
     spec.typeScript:

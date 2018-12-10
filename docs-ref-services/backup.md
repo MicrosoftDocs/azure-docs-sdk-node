@@ -6,8 +6,6 @@ ms.author: markgal
 manager: carmonm
 ms.date: 07/18/2017
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: Backup
 ---

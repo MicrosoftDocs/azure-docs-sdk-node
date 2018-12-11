@@ -6,10 +6,9 @@ ms.author: carlrab
 manager: craigg
 ms.date: 07/18/2017
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: sql-database
+ms.subservice: development
 ---
 
 # Azure SQL modules for Node.js

@@ -4,32 +4,16 @@ items:
     name: StatefulServicePartitionInfo
     fullName: StatefulServicePartitionInfo
     children:
-      - >-
-        azure-servicefabric.StatefulServicePartitionInfo.currentConfigurationEpoch
       - azure-servicefabric.StatefulServicePartitionInfo.lastQuorumLossDuration
       - azure-servicefabric.StatefulServicePartitionInfo.minReplicaSetSize
+      - azure-servicefabric.StatefulServicePartitionInfo.primaryEpoch
       - azure-servicefabric.StatefulServicePartitionInfo.targetReplicaSetSize
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Information about a partition of a stateful Service Fabric service..
     extends:
       name: azure-servicefabric.ServicePartitionInfo
-    package: azure-servicefabric
-  - uid: azure-servicefabric.StatefulServicePartitionInfo.currentConfigurationEpoch
-    name: currentConfigurationEpoch
-    fullName: currentConfigurationEpoch
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'currentConfigurationEpoch?: Epoch'
-      return:
-        type:
-          - azure-servicefabric.Epoch
     package: azure-servicefabric
   - uid: azure-servicefabric.StatefulServicePartitionInfo.lastQuorumLossDuration
     name: lastQuorumLossDuration
@@ -38,7 +22,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The duration for which this partition was in quorum loss. If the partition
+      is currently in
+
+      quorum loss, it returns the duration since it has been in that state. This
+      field is using
+
+      ISO8601 format for specifying the duration.
     optional: true
     syntax:
       content: 'lastQuorumLossDuration?: Duration'
@@ -53,13 +44,38 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The minimum replica set size as a number.
     optional: true
     syntax:
       content: 'minReplicaSetSize?: number'
       return:
         type:
           - number
+    package: azure-servicefabric
+  - uid: azure-servicefabric.StatefulServicePartitionInfo.primaryEpoch
+    name: primaryEpoch
+    fullName: primaryEpoch
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      An Epoch is a configuration number for the partition as a whole. When the
+      configuration of the
+
+      replica set changes, for example when the Primary replica changes, the
+      operations that are
+
+      replicated from the new Primary replica are said to be a new Epoch from
+      the ones which were
+
+      sent by the old Primary replica.
+    optional: true
+    syntax:
+      content: 'primaryEpoch?: Epoch'
+      return:
+        type:
+          - azure-servicefabric.Epoch
     package: azure-servicefabric
   - uid: azure-servicefabric.StatefulServicePartitionInfo.targetReplicaSetSize
     name: targetReplicaSetSize
@@ -68,7 +84,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The target replica set size as a number.
     optional: true
     syntax:
       content: 'targetReplicaSetSize?: number'

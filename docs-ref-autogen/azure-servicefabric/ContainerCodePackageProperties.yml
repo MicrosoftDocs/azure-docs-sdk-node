@@ -15,13 +15,16 @@ items:
       - azure-servicefabric.ContainerCodePackageProperties.instanceView
       - azure-servicefabric.ContainerCodePackageProperties.labels
       - azure-servicefabric.ContainerCodePackageProperties.name
+      - >-
+        azure-servicefabric.ContainerCodePackageProperties.reliableCollectionsRefs
       - azure-servicefabric.ContainerCodePackageProperties.resources
       - azure-servicefabric.ContainerCodePackageProperties.settings
       - azure-servicefabric.ContainerCodePackageProperties.volumeRefs
+      - azure-servicefabric.ContainerCodePackageProperties.volumes
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Describes a container and its runtime properties.
     package: azure-servicefabric
   - uid: azure-servicefabric.ContainerCodePackageProperties.commands
     name: commands
@@ -30,7 +33,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Command array to execute within the container in exec form.
     optional: true
     syntax:
       content: 'commands?: string[]'
@@ -45,7 +48,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Reference to sinks in DiagnosticsDescription.
     optional: true
     syntax:
       content: 'diagnostics?: DiagnosticsRef'
@@ -60,7 +63,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The endpoints exposed by this container.
     optional: true
     syntax:
       content: 'endpoints?: EndpointProperties[]'
@@ -75,7 +78,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Override for the default entry point in the container.
     optional: true
     syntax:
       content: 'entrypoint?: string'
@@ -90,7 +93,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The environment variables to set in this container
     optional: true
     syntax:
       content: 'environmentVariables?: EnvironmentVariable[]'
@@ -105,7 +108,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The Container image to use.
     syntax:
       content: 'image: string'
       return:
@@ -119,7 +122,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Image registry credential.
     optional: true
     syntax:
       content: 'imageRegistryCredential?: ImageRegistryCredential'
@@ -134,7 +137,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Runtime information of a container instance.
     optional: true
     syntax:
       content: 'instanceView?: ContainerInstanceView'
@@ -149,7 +152,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The labels to set in this container.
     optional: true
     syntax:
       content: 'labels?: ContainerLabel[]'
@@ -164,12 +167,31 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The name of the code package.
     syntax:
       content: 'name: string'
       return:
         type:
           - string
+    package: azure-servicefabric
+  - uid: azure-servicefabric.ContainerCodePackageProperties.reliableCollectionsRefs
+    name: reliableCollectionsRefs
+    fullName: reliableCollectionsRefs
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      A list of ReliableCollection resources used by this particular code
+      package. Please refer to
+
+      ReliablecollectionsRef for more details.
+    optional: true
+    syntax:
+      content: 'reliableCollectionsRefs?: ReliableCollectionsRef[]'
+      return:
+        type:
+          - 'azure-servicefabric.ReliableCollectionsRef[]'
     package: azure-servicefabric
   - uid: azure-servicefabric.ContainerCodePackageProperties.resources
     name: resources
@@ -178,7 +200,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The resources required by this container.
     syntax:
       content: 'resources: ResourceRequirements'
       return:
@@ -192,7 +214,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The settings to set in this container. The setting file path can be
+      fetched from environment
+
+      variable "Fabric_SettingPath". The path for Windows container is
+      "C:\\secrets". The path for
+
+      Linux container is "/var/secrets".
     optional: true
     syntax:
       content: 'settings?: Setting[]'
@@ -207,13 +236,36 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Volumes to be attached to the container. The lifetime of these volumes is
+      independent of the
+
+      application's lifetime.
     optional: true
     syntax:
-      content: 'volumeRefs?: ContainerVolume[]'
+      content: 'volumeRefs?: VolumeReference[]'
       return:
         type:
-          - 'azure-servicefabric.ContainerVolume[]'
+          - 'azure-servicefabric.VolumeReference[]'
+    package: azure-servicefabric
+  - uid: azure-servicefabric.ContainerCodePackageProperties.volumes
+    name: volumes
+    fullName: volumes
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Volumes to be attached to the container. The lifetime of these volumes is
+      scoped to the
+
+      application's lifetime.
+    optional: true
+    syntax:
+      content: 'volumes?: ApplicationScopedVolume[]'
+      return:
+        type:
+          - 'azure-servicefabric.ApplicationScopedVolume[]'
     package: azure-servicefabric
 references:
   - uid: azure-servicefabric.DiagnosticsRef
@@ -258,6 +310,14 @@ references:
         uid: azure-servicefabric.ContainerLabel
       - name: '[]'
         fullName: '[]'
+  - uid: 'azure-servicefabric.ReliableCollectionsRef[]'
+    name: 'ReliableCollectionsRef[]'
+    spec.typeScript:
+      - name: ReliableCollectionsRef
+        fullName: ReliableCollectionsRef
+        uid: azure-servicefabric.ReliableCollectionsRef
+      - name: '[]'
+        fullName: '[]'
   - uid: azure-servicefabric.ResourceRequirements
     name: ResourceRequirements
     spec.typeScript:
@@ -272,11 +332,19 @@ references:
         uid: azure-servicefabric.Setting
       - name: '[]'
         fullName: '[]'
-  - uid: 'azure-servicefabric.ContainerVolume[]'
-    name: 'ContainerVolume[]'
+  - uid: 'azure-servicefabric.VolumeReference[]'
+    name: 'VolumeReference[]'
     spec.typeScript:
-      - name: ContainerVolume
-        fullName: ContainerVolume
-        uid: azure-servicefabric.ContainerVolume
+      - name: VolumeReference
+        fullName: VolumeReference
+        uid: azure-servicefabric.VolumeReference
+      - name: '[]'
+        fullName: '[]'
+  - uid: 'azure-servicefabric.ApplicationScopedVolume[]'
+    name: 'ApplicationScopedVolume[]'
+    spec.typeScript:
+      - name: ApplicationScopedVolume
+        fullName: ApplicationScopedVolume
+        uid: azure-servicefabric.ApplicationScopedVolume
       - name: '[]'
         fullName: '[]'

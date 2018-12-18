@@ -4,10 +4,14 @@ items:
     name: ServiceReceiver
     fullName: ServiceReceiver
     children:
+      - azure-iothub.ServiceReceiver.abandon_1
       - azure-iothub.ServiceReceiver.abandon
+      - azure-iothub.ServiceReceiver.complete_1
       - azure-iothub.ServiceReceiver.complete
+      - azure-iothub.ServiceReceiver.detach_1
       - azure-iothub.ServiceReceiver.detach
       - azure-iothub.ServiceReceiver.forceDetach
+      - azure-iothub.ServiceReceiver.reject_1
       - azure-iothub.ServiceReceiver.reject
       - azure-iothub.ServiceReceiver.constructor
     langs:
@@ -15,17 +19,35 @@ items:
     type: class
     summary: ''
     extends:
-      name: EventEmitter
+      name: any
+    package: azure-iothub
+  - uid: azure-iothub.ServiceReceiver.abandon_1
+    name: abandon(Message)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function abandon(message: Message)'
+      parameters:
+        - id: message
+          type:
+            - Message
+          description: ''
+      return:
+        type:
+          - Promise<MessageAbandoned>
     package: azure-iothub
   - uid: azure-iothub.ServiceReceiver.abandon
-    name: abandon
+    name: 'abandon(Message, Callback<MessageAbandoned>)'
     children: []
     type: method
     langs:
       - typeScript
     summary: ''
     syntax:
-      content: 'function abandon(message: Message, done?: Callback<MessageAbandoned>)'
+      content: 'function abandon(message: Message, done: Callback<MessageAbandoned>)'
       parameters:
         - id: message
           type:
@@ -33,22 +55,36 @@ items:
           description: ''
         - id: done
           type:
-            - azure-iothub.Client.Callback<MessageAbandoned>
+            - Callback<MessageAbandoned>
           description: ''
-          optional: true
+    package: azure-iothub
+  - uid: azure-iothub.ServiceReceiver.complete_1
+    name: complete(Message)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function complete(message: Message)'
+      parameters:
+        - id: message
+          type:
+            - Message
+          description: ''
       return:
         type:
-          - Promise<MessageAbandoned> | void
+          - Promise<MessageCompleted>
     package: azure-iothub
   - uid: azure-iothub.ServiceReceiver.complete
-    name: complete
+    name: 'complete(Message, Callback<MessageCompleted>)'
     children: []
     type: method
     langs:
       - typeScript
     summary: ''
     syntax:
-      content: 'function complete(message: Message, done?: Callback<MessageCompleted>)'
+      content: 'function complete(message: Message, done: Callback<MessageCompleted>)'
       parameters:
         - id: message
           type:
@@ -56,15 +92,25 @@ items:
           description: ''
         - id: done
           type:
-            - azure-iothub.Client.Callback<MessageCompleted>
+            - Callback<MessageCompleted>
           description: ''
-          optional: true
+    package: azure-iothub
+  - uid: azure-iothub.ServiceReceiver.detach_1
+    name: detach()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: function detach()
+      parameters: []
       return:
         type:
-          - Promise<MessageCompleted> | void
+          - Promise<void>
     package: azure-iothub
   - uid: azure-iothub.ServiceReceiver.detach
-    name: detach
+    name: detach(ErrorCallback)
     children: []
     type: method
     langs:
@@ -77,12 +123,9 @@ items:
           type:
             - ErrorCallback
           description: ''
-      return:
-        type:
-          - Promise<void> | void
     package: azure-iothub
   - uid: azure-iothub.ServiceReceiver.forceDetach
-    name: forceDetach
+    name: forceDetach(Error)
     children: []
     type: method
     langs:
@@ -97,15 +140,33 @@ items:
           description: ''
           optional: true
     package: azure-iothub
-  - uid: azure-iothub.ServiceReceiver.reject
-    name: reject
+  - uid: azure-iothub.ServiceReceiver.reject_1
+    name: reject(Message)
     children: []
     type: method
     langs:
       - typeScript
     summary: ''
     syntax:
-      content: 'function reject(message: Message, done?: Callback<MessageRejected>)'
+      content: 'function reject(message: Message)'
+      parameters:
+        - id: message
+          type:
+            - Message
+          description: ''
+      return:
+        type:
+          - Promise<MessageRejected>
+    package: azure-iothub
+  - uid: azure-iothub.ServiceReceiver.reject
+    name: 'reject(Message, Callback<MessageRejected>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function reject(message: Message, done: Callback<MessageRejected>)'
       parameters:
         - id: message
           type:
@@ -113,15 +174,11 @@ items:
           description: ''
         - id: done
           type:
-            - azure-iothub.Client.Callback<MessageRejected>
+            - Callback<MessageRejected>
           description: ''
-          optional: true
-      return:
-        type:
-          - Promise<MessageRejected> | void
     package: azure-iothub
   - uid: azure-iothub.ServiceReceiver.constructor
-    name: ServiceReceiver
+    name: ServiceReceiver(ReceiverLink)
     children: []
     type: constructor
     langs:
@@ -135,28 +192,3 @@ items:
             - ReceiverLink
           description: ''
     package: azure-iothub
-references:
-  - uid: azure-iothub.Client.Callback<MessageAbandoned>
-    name: Callback<MessageAbandoned>
-    spec.typeScript:
-      - name: Callback
-        fullName: Callback
-        uid: azure-iothub.Client.Callback
-      - name: <MessageAbandoned>
-        fullName: <MessageAbandoned>
-  - uid: azure-iothub.Client.Callback<MessageCompleted>
-    name: Callback<MessageCompleted>
-    spec.typeScript:
-      - name: Callback
-        fullName: Callback
-        uid: azure-iothub.Client.Callback
-      - name: <MessageCompleted>
-        fullName: <MessageCompleted>
-  - uid: azure-iothub.Client.Callback<MessageRejected>
-    name: Callback<MessageRejected>
-    spec.typeScript:
-      - name: Callback
-        fullName: Callback
-        uid: azure-iothub.Client.Callback
-      - name: <MessageRejected>
-        fullName: <MessageRejected>

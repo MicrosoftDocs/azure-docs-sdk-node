@@ -7,6 +7,8 @@ items:
       - >-
         azure-iot-device.SharedAccessSignatureAuthenticationProvider.fromSharedAccessSignature
       - >-
+        azure-iot-device.SharedAccessSignatureAuthenticationProvider.getDeviceCredentials_1
+      - >-
         azure-iot-device.SharedAccessSignatureAuthenticationProvider.getDeviceCredentials
       - azure-iot-device.SharedAccessSignatureAuthenticationProvider.stop
       - azure-iot-device.SharedAccessSignatureAuthenticationProvider.type
@@ -32,11 +34,11 @@ items:
 
       transports will use to authenticate with the Azure IoT hub instance.
     extends:
-      name: EventEmitter
+      name: any
     package: azure-iot-device
   - uid: >-
       azure-iot-device.SharedAccessSignatureAuthenticationProvider.fromSharedAccessSignature
-    name: fromSharedAccessSignature
+    name: fromSharedAccessSignature(string)
     children: []
     type: method
     langs:
@@ -58,8 +60,8 @@ items:
           - azure-iot-device.SharedAccessSignatureAuthenticationProvider
     package: azure-iot-device
   - uid: >-
-      azure-iot-device.SharedAccessSignatureAuthenticationProvider.getDeviceCredentials
-    name: getDeviceCredentials
+      azure-iot-device.SharedAccessSignatureAuthenticationProvider.getDeviceCredentials_1
+    name: getDeviceCredentials()
     children: []
     type: method
     langs:
@@ -68,19 +70,32 @@ items:
       This method is used by the transports to gets the most current device
       credentials in the form of a `TransportConfig` object.
     syntax:
-      content: 'function getDeviceCredentials(callback?: Callback<TransportConfig>)'
+      content: function getDeviceCredentials()
+      parameters: []
+      return:
+        type:
+          - Promise<TransportConfig>
+    package: azure-iot-device
+  - uid: >-
+      azure-iot-device.SharedAccessSignatureAuthenticationProvider.getDeviceCredentials
+    name: getDeviceCredentials(Callback<TransportConfig>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      This method is used by the transports to gets the most current device
+      credentials in the form of a `TransportConfig` object.
+    syntax:
+      content: 'function getDeviceCredentials(callback: Callback<TransportConfig>)'
       parameters:
         - id: callback
           type:
             - Callback<TransportConfig>
           description: ''
-          optional: true
-      return:
-        type:
-          - Promise<TransportConfig> | void
     package: azure-iot-device
   - uid: azure-iot-device.SharedAccessSignatureAuthenticationProvider.stop
-    name: stop
+    name: stop()
     children: []
     type: method
     langs:
@@ -108,7 +123,7 @@ items:
     package: azure-iot-device
   - uid: >-
       azure-iot-device.SharedAccessSignatureAuthenticationProvider.updateSharedAccessSignature
-    name: updateSharedAccessSignature
+    name: updateSharedAccessSignature(string)
     children: []
     type: method
     langs:

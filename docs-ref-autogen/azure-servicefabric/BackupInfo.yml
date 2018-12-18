@@ -14,11 +14,12 @@ items:
       - azure-servicefabric.BackupInfo.failureError
       - azure-servicefabric.BackupInfo.lsnOfLastBackupRecord
       - azure-servicefabric.BackupInfo.partitionInformation
+      - azure-servicefabric.BackupInfo.serviceManifestVersion
       - azure-servicefabric.BackupInfo.serviceName
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Represents a backup point which can be used to trigger a restore.
     package: azure-servicefabric
   - uid: azure-servicefabric.BackupInfo.applicationName
     name: applicationName
@@ -27,7 +28,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Name of the Service Fabric application this partition backup belongs to.
     optional: true
     syntax:
       content: 'applicationName?: string'
@@ -42,7 +43,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Unique backup chain ID. All backups part of the same chain has the same
+      backup chain id. A
+
+      backup chain is comprised of 1 full backup and multiple incremental
+      backups.
     optional: true
     syntax:
       content: 'backupChainId?: string'
@@ -57,7 +63,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Unique backup ID .
     optional: true
     syntax:
       content: 'backupId?: string'
@@ -72,7 +78,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'Location of the backup, relative to the backup store.'
     optional: true
     syntax:
       content: 'backupLocation?: string'
@@ -87,7 +93,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes the type of backup, whether its full or incremental. Possible
+      values include:
+
+      'Invalid', 'Full', 'Incremental'
     optional: true
     syntax:
       content: 'backupType?: string'
@@ -102,7 +112,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The date time when this backup was taken.
     optional: true
     syntax:
       content: 'creationTimeUtc?: Date'
@@ -117,13 +127,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Epoch of the last record in this backup.
     optional: true
     syntax:
-      content: 'epochOfLastBackupRecord?: BackupEpoch'
+      content: 'epochOfLastBackupRecord?: Epoch'
       return:
         type:
-          - azure-servicefabric.BackupEpoch
+          - azure-servicefabric.Epoch
     package: azure-servicefabric
   - uid: azure-servicefabric.BackupInfo.failureError
     name: failureError
@@ -132,7 +142,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Denotes the failure encountered in getting backup point information.
     optional: true
     syntax:
       content: 'failureError?: FabricErrorError'
@@ -147,7 +157,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: LSN of the last record in this backup.
     optional: true
     syntax:
       content: 'lsnOfLastBackupRecord?: string'
@@ -162,13 +172,28 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Information about the partition to which this backup belongs to
     optional: true
     syntax:
       content: 'partitionInformation?: PartitionInformation'
       return:
         type:
           - azure-servicefabric.PartitionInformation
+    package: azure-servicefabric
+  - uid: azure-servicefabric.BackupInfo.serviceManifestVersion
+    name: serviceManifestVersion
+    fullName: serviceManifestVersion
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Manifest Version of the service this partition backup belongs to.
+    optional: true
+    syntax:
+      content: 'serviceManifestVersion?: string'
+      return:
+        type:
+          - string
     package: azure-servicefabric
   - uid: azure-servicefabric.BackupInfo.serviceName
     name: serviceName
@@ -177,7 +202,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Name of the Service Fabric service this partition backup belongs to.
     optional: true
     syntax:
       content: 'serviceName?: string'
@@ -186,12 +211,12 @@ items:
           - string
     package: azure-servicefabric
 references:
-  - uid: azure-servicefabric.BackupEpoch
-    name: BackupEpoch
+  - uid: azure-servicefabric.Epoch
+    name: Epoch
     spec.typeScript:
-      - name: BackupEpoch
-        fullName: BackupEpoch
-        uid: azure-servicefabric.BackupEpoch
+      - name: Epoch
+        fullName: Epoch
+        uid: azure-servicefabric.Epoch
   - uid: azure-servicefabric.FabricErrorError
     name: FabricErrorError
     spec.typeScript:

@@ -8,6 +8,7 @@ items:
       - azure-arm-network.ApplicationGateway.autoscaleConfiguration
       - azure-arm-network.ApplicationGateway.backendAddressPools
       - azure-arm-network.ApplicationGateway.backendHttpSettingsCollection
+      - azure-arm-network.ApplicationGateway.customErrorConfigurations
       - azure-arm-network.ApplicationGateway.enableFips
       - azure-arm-network.ApplicationGateway.enableHttp2
       - azure-arm-network.ApplicationGateway.etag
@@ -15,12 +16,14 @@ items:
       - azure-arm-network.ApplicationGateway.frontendPorts
       - azure-arm-network.ApplicationGateway.gatewayIPConfigurations
       - azure-arm-network.ApplicationGateway.httpListeners
+      - azure-arm-network.ApplicationGateway.identity
       - azure-arm-network.ApplicationGateway.operationalState
       - azure-arm-network.ApplicationGateway.probes
       - azure-arm-network.ApplicationGateway.provisioningState
       - azure-arm-network.ApplicationGateway.redirectConfigurations
       - azure-arm-network.ApplicationGateway.requestRoutingRules
       - azure-arm-network.ApplicationGateway.resourceGuid
+      - azure-arm-network.ApplicationGateway.rewriteRuleSets
       - azure-arm-network.ApplicationGateway.sku
       - azure-arm-network.ApplicationGateway.sslCertificates
       - azure-arm-network.ApplicationGateway.sslPolicy
@@ -31,7 +34,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Application gateway resource
     extends:
       name: azure-arm-network.Resource
     package: azure-arm-network
@@ -42,7 +45,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Authentication certificates of the application gateway resource.
     optional: true
     syntax:
       content: >-
@@ -59,7 +62,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Autoscale Configuration.
     optional: true
     syntax:
       content: 'autoscaleConfiguration?: ApplicationGatewayAutoscaleConfiguration'
@@ -74,7 +77,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Backend address pool of the application gateway resource.
     optional: true
     syntax:
       content: 'backendAddressPools?: ApplicationGatewayBackendAddressPool[]'
@@ -89,13 +92,28 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Backend http settings of the application gateway resource.
     optional: true
     syntax:
       content: 'backendHttpSettingsCollection?: ApplicationGatewayBackendHttpSettings[]'
       return:
         type:
           - 'azure-arm-network.ApplicationGatewayBackendHttpSettings[]'
+    package: azure-arm-network
+  - uid: azure-arm-network.ApplicationGateway.customErrorConfigurations
+    name: customErrorConfigurations
+    fullName: customErrorConfigurations
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Custom error configurations of the application gateway resource.
+    optional: true
+    syntax:
+      content: 'customErrorConfigurations?: ApplicationGatewayCustomError[]'
+      return:
+        type:
+          - 'azure-arm-network.ApplicationGatewayCustomError[]'
     package: azure-arm-network
   - uid: azure-arm-network.ApplicationGateway.enableFips
     name: enableFips
@@ -104,7 +122,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Whether FIPS is enabled on the application gateway resource.
     optional: true
     syntax:
       content: 'enableFips?: boolean'
@@ -119,7 +137,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Whether HTTP2 is enabled on the application gateway resource.
     optional: true
     syntax:
       content: 'enableHttp2?: boolean'
@@ -134,7 +152,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: A unique read-only string that changes whenever the resource is updated.
     optional: true
     syntax:
       content: 'etag?: string'
@@ -149,7 +167,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Frontend IP addresses of the application gateway resource.
     optional: true
     syntax:
       content: 'frontendIPConfigurations?: ApplicationGatewayFrontendIPConfiguration[]'
@@ -164,7 +182,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Frontend ports of the application gateway resource.
     optional: true
     syntax:
       content: 'frontendPorts?: ApplicationGatewayFrontendPort[]'
@@ -179,7 +197,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Subnets of application the gateway resource.
     optional: true
     syntax:
       content: 'gatewayIPConfigurations?: ApplicationGatewayIPConfiguration[]'
@@ -194,13 +212,28 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Http listeners of the application gateway resource.
     optional: true
     syntax:
       content: 'httpListeners?: ApplicationGatewayHttpListener[]'
       return:
         type:
           - 'azure-arm-network.ApplicationGatewayHttpListener[]'
+    package: azure-arm-network
+  - uid: azure-arm-network.ApplicationGateway.identity
+    name: identity
+    fullName: identity
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: 'The identity of the application gateway, if configured.'
+    optional: true
+    syntax:
+      content: 'identity?: ManagedServiceIdentity'
+      return:
+        type:
+          - azure-arm-network.ManagedServiceIdentity
     package: azure-arm-network
   - uid: azure-arm-network.ApplicationGateway.operationalState
     name: operationalState
@@ -209,7 +242,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Operational state of the application gateway resource. Possible values
+      include: 'Stopped',
+
+      'Starting', 'Running', 'Stopping'
     optional: true
     syntax:
       content: 'operationalState?: string'
@@ -224,7 +261,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Probes of the application gateway resource.
     optional: true
     syntax:
       content: 'probes?: ApplicationGatewayProbe[]'
@@ -239,7 +276,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Provisioning state of the application gateway resource. Possible values
+      are: 'Updating',
+
+      'Deleting', and 'Failed'.
     optional: true
     syntax:
       content: 'provisioningState?: string'
@@ -254,7 +295,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Redirect configurations of the application gateway resource.
     optional: true
     syntax:
       content: 'redirectConfigurations?: ApplicationGatewayRedirectConfiguration[]'
@@ -269,7 +310,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Request routing rules of the application gateway resource.
     optional: true
     syntax:
       content: 'requestRoutingRules?: ApplicationGatewayRequestRoutingRule[]'
@@ -284,13 +325,28 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Resource GUID property of the application gateway resource.
     optional: true
     syntax:
       content: 'resourceGuid?: string'
       return:
         type:
           - string
+    package: azure-arm-network
+  - uid: azure-arm-network.ApplicationGateway.rewriteRuleSets
+    name: rewriteRuleSets
+    fullName: rewriteRuleSets
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Rewrite rules for the application gateway resource.
+    optional: true
+    syntax:
+      content: 'rewriteRuleSets?: ApplicationGatewayRewriteRuleSet[]'
+      return:
+        type:
+          - 'azure-arm-network.ApplicationGatewayRewriteRuleSet[]'
     package: azure-arm-network
   - uid: azure-arm-network.ApplicationGateway.sku
     name: sku
@@ -299,7 +355,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: SKU of the application gateway resource.
     optional: true
     syntax:
       content: 'sku?: ApplicationGatewaySku'
@@ -314,7 +370,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: SSL certificates of the application gateway resource.
     optional: true
     syntax:
       content: 'sslCertificates?: ApplicationGatewaySslCertificate[]'
@@ -329,7 +385,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: SSL policy of the application gateway resource.
     optional: true
     syntax:
       content: 'sslPolicy?: ApplicationGatewaySslPolicy'
@@ -344,7 +400,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Trusted Root certificates of the application gateway resource.
     optional: true
     syntax:
       content: 'trustedRootCertificates?: ApplicationGatewayTrustedRootCertificate[]'
@@ -359,7 +415,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: URL path map of the application gateway resource.
     optional: true
     syntax:
       content: 'urlPathMaps?: ApplicationGatewayUrlPathMap[]'
@@ -374,7 +430,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Web application firewall configuration.
     optional: true
     syntax:
       content: >-
@@ -392,7 +448,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      A list of availability zones denoting where the resource needs to come
+      from.
     optional: true
     syntax:
       content: 'zones?: string[]'
@@ -437,6 +495,14 @@ references:
         uid: azure-arm-network.ApplicationGatewayBackendHttpSettings
       - name: '[]'
         fullName: '[]'
+  - uid: 'azure-arm-network.ApplicationGatewayCustomError[]'
+    name: 'ApplicationGatewayCustomError[]'
+    spec.typeScript:
+      - name: ApplicationGatewayCustomError
+        fullName: ApplicationGatewayCustomError
+        uid: azure-arm-network.ApplicationGatewayCustomError
+      - name: '[]'
+        fullName: '[]'
   - uid: 'azure-arm-network.ApplicationGatewayFrontendIPConfiguration[]'
     name: 'ApplicationGatewayFrontendIPConfiguration[]'
     spec.typeScript:
@@ -469,6 +535,12 @@ references:
         uid: azure-arm-network.ApplicationGatewayHttpListener
       - name: '[]'
         fullName: '[]'
+  - uid: azure-arm-network.ManagedServiceIdentity
+    name: ManagedServiceIdentity
+    spec.typeScript:
+      - name: ManagedServiceIdentity
+        fullName: ManagedServiceIdentity
+        uid: azure-arm-network.ManagedServiceIdentity
   - uid: 'azure-arm-network.ApplicationGatewayProbe[]'
     name: 'ApplicationGatewayProbe[]'
     spec.typeScript:
@@ -491,6 +563,14 @@ references:
       - name: ApplicationGatewayRequestRoutingRule
         fullName: ApplicationGatewayRequestRoutingRule
         uid: azure-arm-network.ApplicationGatewayRequestRoutingRule
+      - name: '[]'
+        fullName: '[]'
+  - uid: 'azure-arm-network.ApplicationGatewayRewriteRuleSet[]'
+    name: 'ApplicationGatewayRewriteRuleSet[]'
+    spec.typeScript:
+      - name: ApplicationGatewayRewriteRuleSet
+        fullName: ApplicationGatewayRewriteRuleSet
+        uid: azure-arm-network.ApplicationGatewayRewriteRuleSet
       - name: '[]'
         fullName: '[]'
   - uid: azure-arm-network.ApplicationGatewaySku

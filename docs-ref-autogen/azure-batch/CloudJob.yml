@@ -16,6 +16,7 @@ items:
       - azure-batch.CloudJob.jobReleaseTask
       - azure-batch.CloudJob.lastModified
       - azure-batch.CloudJob.metadata
+      - azure-batch.CloudJob.networkConfiguration
       - azure-batch.CloudJob.onAllTasksComplete
       - azure-batch.CloudJob.onTaskFailure
       - azure-batch.CloudJob.poolInfo
@@ -39,7 +40,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Individual tasks can override an environment setting specified here by
+      specifying
+
+      the same setting name with a different value.
     optional: true
     syntax:
       content: 'commonEnvironmentSettings?: EnvironmentSetting[]'
@@ -99,7 +104,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This is an opaque string. You can use it to detect whether the job has
+      changed
+
+      between requests. In particular, you can be pass the ETag when updating a
+      job to specify that
+
+      your changes should take effect only if nobody else has modified the job
+      in the meantime.
     optional: true
     syntax:
       content: 'eTag?: string'
@@ -129,7 +142,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The ID is case-preserving and case-insensitive (that is, you may not have
+      two IDs
+
+      within an account that differ only by case).
     optional: true
     syntax:
       content: 'id?: string'
@@ -159,7 +176,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The Job Preparation task is a special task run on each node before any
+      other task
+
+      of the job.
     optional: true
     syntax:
       content: 'jobPreparationTask?: JobPreparationTask'
@@ -174,7 +195,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The Job Release task is a special task run at the end of the job on each
+      node
+
+      that has run any other task of the job.
     optional: true
     syntax:
       content: 'jobReleaseTask?: JobReleaseTask'
@@ -189,7 +214,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This is the last time at which the job level data, such as the job state
+      or
+
+      priority, changed. It does not factor in task-level changes such as adding
+      new tasks or tasks
+
+      changing state.
     optional: true
     syntax:
       content: 'lastModified?: Date'
@@ -204,13 +236,32 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The Batch service does not assign any meaning to metadata; it is solely
+      for the
+
+      use of user code.
     optional: true
     syntax:
       content: 'metadata?: MetadataItem[]'
       return:
         type:
           - 'azure-batch.MetadataItem[]'
+    package: azure-batch
+  - uid: azure-batch.CloudJob.networkConfiguration
+    name: networkConfiguration
+    fullName: networkConfiguration
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    optional: true
+    syntax:
+      content: 'networkConfiguration?: JobNetworkConfiguration'
+      return:
+        type:
+          - azure-batch.JobNetworkConfiguration
     package: azure-batch
   - uid: azure-batch.CloudJob.onAllTasksComplete
     name: onAllTasksComplete
@@ -219,7 +270,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The default is noaction. Possible values include: 'noAction',
+      'terminateJob'
     optional: true
     syntax:
       content: 'onAllTasksComplete?: string'
@@ -234,7 +287,18 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      A task is considered to have failed if has a failureInfo. A failureInfo is
+      set if
+
+      the task completes with a non-zero exit code after exhausting its retry
+      count, or if there was
+
+      an error starting the task, for example due to a resource file download
+      error. The default is
+
+      noaction. Possible values include: 'noAction',
+      'performExitOptionsJobAction'
     optional: true
     syntax:
       content: 'onTaskFailure?: string'
@@ -264,7 +328,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This property is not set if the job is in its initial Active state.
+      Possible
+
+      values include: 'active', 'disabling', 'disabled', 'enabling',
+      'terminating', 'completed',
+
+      'deleting'
     optional: true
     syntax:
       content: 'previousState?: string'
@@ -279,7 +350,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: This property is not set if the job is in its initial Active state.
     optional: true
     syntax:
       content: 'previousStateTransitionTime?: Date'
@@ -294,7 +365,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |-
+      Priority values can range from -1000 to 1000, with -1000 being the lowest
+      priority and 1000 being the highest priority. The default value is 0.
     optional: true
     syntax:
       content: 'priority?: number'
@@ -309,7 +382,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |-
+      Possible values include: 'active', 'disabling', 'disabled', 'enabling',
+      'terminating', 'completed', 'deleting'
     optional: true
     syntax:
       content: 'state?: string'
@@ -424,6 +499,12 @@ references:
         uid: azure-batch.MetadataItem
       - name: '[]'
         fullName: '[]'
+  - uid: azure-batch.JobNetworkConfiguration
+    name: JobNetworkConfiguration
+    spec.typeScript:
+      - name: JobNetworkConfiguration
+        fullName: JobNetworkConfiguration
+        uid: azure-batch.JobNetworkConfiguration
   - uid: azure-batch.PoolInformation
     name: PoolInformation
     spec.typeScript:

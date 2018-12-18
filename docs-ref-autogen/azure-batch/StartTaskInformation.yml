@@ -25,7 +25,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: This property is set only if the task runs in a container context.
     optional: true
     syntax:
       content: 'containerInfo?: TaskContainerExecutionInformation'
@@ -40,7 +40,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This is the end time of the most recent run of the start task, if that run
+      has
+
+      completed (even if that run failed and a retry is pending). This element
+      is not present if the
+
+      start task is currently running.
     optional: true
     syntax:
       content: 'endTime?: Date'
@@ -55,7 +62,22 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This property is set only if the start task is in the completed state. In
+
+      general, the exit code for a process reflects the specific convention
+      implemented by the
+
+      application developer for that process. If you use the exit code value to
+      make decisions in
+
+      your code, be sure that you know the exit code convention used by the
+      application process.
+
+      However, if the Batch service terminates the start task (due to timeout,
+      or user termination
+
+      via the API) you may see an operating system-defined exit code.
     optional: true
     syntax:
       content: 'exitCode?: number'
@@ -70,7 +92,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This property is set only if the task is in the completed state and
+      encountered a
+
+      failure.
     optional: true
     syntax:
       content: 'failureInfo?: TaskFailureInformation'
@@ -85,7 +111,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This element is present only if the task was retried (i.e. retryCount is
+
+      nonzero). If present, this is typically the same as startTime, but may be
+      different if the
+
+      task has been restarted for reasons other than retry; for example, if the
+      compute node was
+
+      rebooted during a retry, then the startTime is updated but the
+      lastRetryTime is not.
     optional: true
     syntax:
       content: 'lastRetryTime?: Date'
@@ -100,7 +136,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If the value is 'failed', then the details of the failure can be found in
+      the
+
+      failureInfo property. Possible values include: 'success', 'failure'
     optional: true
     syntax:
       content: 'result?: string'
@@ -115,7 +155,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Task application failures (non-zero exit code) are retried, pre-processing
+      errors
+
+      (the task could not be run) and file upload errors are not retried. The
+      Batch service will
+
+      retry the task up to the limit specified by the constraints.
     syntax:
       content: 'retryCount: number'
       return:
@@ -129,7 +176,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This value is reset every time the task is restarted or retried (that is,
+      this is
+
+      the most recent time at which the start task started running).
     syntax:
       content: 'startTime: Date'
       return:
@@ -143,7 +194,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'Possible values include: ''running'', ''completed'''
     syntax:
       content: 'state: string'
       return:

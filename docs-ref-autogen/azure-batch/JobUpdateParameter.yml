@@ -21,7 +21,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'If omitted, the constraints are cleared.'
     optional: true
     syntax:
       content: 'constraints?: JobConstraints'
@@ -36,7 +36,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If omitted, it takes the default value of an empty list; in effect, any
+      existing
+
+      metadata is deleted.
     optional: true
     syntax:
       content: 'metadata?: MetadataItem[]'
@@ -51,7 +55,29 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If omitted, the completion behavior is set to noaction. If the current
+      value is
+
+      terminatejob, this is an error because a job's completion behavior may not
+      be changed from
+
+      terminatejob to noaction. You may not change the value from terminatejob
+      to noaction - that
+
+      is, once you have engaged automatic job termination, you cannot turn it
+      off again. If you try
+
+      to do this, the request fails and Batch returns status code 400 (Bad
+      Request) and an 'invalid
+
+      property value' error response. If you do not specify this element in a
+      PUT request, it is
+
+      equivalent to passing noaction. This is an error if the current value is
+      terminatejob.
+
+      Possible values include: 'noAction', 'terminateJob'
     optional: true
     syntax:
       content: 'onAllTasksComplete?: string'
@@ -66,7 +92,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      You may change the pool for a job only when the job is disabled. The
+      Update Job
+
+      call will fail if you include the poolInfo element and the job is not
+      disabled. If you specify
+
+      an autoPoolSpecification specification in the poolInfo, only the keepAlive
+      property can be
+
+      updated, and then only if the auto pool has a poolLifetimeOption of job.
     syntax:
       content: 'poolInfo: PoolInformation'
       return:
@@ -80,7 +116,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Priority values can range from -1000 to 1000, with -1000 being the lowest
+
+      priority and 1000 being the highest priority. If omitted, it is set to the
+      default value 0.
     optional: true
     syntax:
       content: 'priority?: number'

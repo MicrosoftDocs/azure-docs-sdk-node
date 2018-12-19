@@ -4,7 +4,7 @@ description: Reference for Cognitive Services Speech SDK for JavaScript
 author: mahilleb-msft
 ms.author: mahilleb
 manager: wolfma
-ms.date: 09/24/2018
+ms.date: 12/18/2018
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -20,45 +20,73 @@ ms.component: speech-service
 To simplify the development of speech-enabled applications, Microsoft provides the Speech SDK for use with the [Speech service](https://aka.ms/csspeech).
 The Speech SDK provides consistent native Speech-to-Text and Speech Translation APIs.
 
-> [!NOTE]
-> The Cognitive Services Speech SDK is currently available only for browsers.
-> An NPM package will follow soon.
+### Install the npm module
 
-### Install the Speech SDK
+Install the Cognitive Services Speech SDK npm module
 
-Download the Speech SDK as a [.zip package](https://aka.ms/csspeech/jsbrowserpackage) and unpack it.
-This should result in a number of files being unpacked including a file named `microsoft.cognitiveservices.speech.sdk.bundle.js`.
-Load this file as a script resource in your web page to start using the Speech SDK:
-
-```html
-<script src="microsoft.cognitiveservices.speech.sdk.bundle.js"></script>
+```bash
+npm install microsoft-cognitiveservices-speech-sdk
 ```
 
 ### Example 
 
-The following code snippets illustrates how to do simple speech recognition from your browser:
+The following code snippets illustrates how to do simple speech recognition from a file:
 
 ```javascript 
-var SpeechSDK = window.SpeechSDK;
-var speechConfig = SpeechSDK.SpeechConfig.fromSubscription("your-subscription-key", "your-service-region");
-speechConfig.language = "en-US";
-var audioConfig = SpeechSDK.AudioConfig.fromDefaultMicrophoneInput();
-recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
+// Pull in the required packages.
+var sdk = require("microsoft-cognitiveservices-speech-sdk");
+var fs = require("fs");
 
+// Replace with your own subscription key, service region (e.g., "westus"), and
+// the name of the file you want to run through the speech recognizer.
+var subscriptionKey = "YourSubscriptionKey";
+var serviceRegion = "YourServiceRegion"; // e.g., "westus"
+var filename = "YourAudioFile.wav"; // 16000 Hz, Mono
+
+// Create the push stream we need for the speech sdk.
+var pushStream = sdk.AudioInputStream.createPushStream();
+
+// Open the file and push it to the push stream.
+fs.createReadStream(filename).on('data', function(arrayBuffer) {
+  pushStream.write(arrayBuffer.buffer);
+}).on('end', function() {
+  pushStream.close();
+});
+
+// We are done with the setup
+console.log("Now recognizing from: " + filename);
+
+// Create the audio-config pointing to our stream and
+// the speech config specifying the language.
+var audioConfig = sdk.AudioConfig.fromStreamInput(pushStream);
+var speechConfig = sdk.SpeechConfig.fromSubscription(subscriptionKey, serviceRegion);
+
+// Setting the recognition language to English.
+speechConfig.speechRecognitionLanguage = "en-US";
+
+// Create the speech recognizer.
+var recognizer = new sdk.SpeechRecognizer(speechConfig, audioConfig);
+
+// Start the recognizer and wait for a result.
 recognizer.recognizeOnceAsync(
   function (result) {
-    alert("Recognition result:" + JSON.stringify(result));
+    console.log(result);
+
     recognizer.close();
+    recognizer = undefined;
   },
   function (err) {
-    alert("An error occurred:" + JSON.stringify(err));
+    console.trace("err - " + err);
+
     recognizer.close();
-  }
-);
+    recognizer = undefined;
+  });
 ``` 
 
-Check out our [step-by-step quickstart](/azure/cognitive-services/speech-service/quickstart-js-browser).
+Check out our [step-by-step quickstart](/azure/cognitive-services/speech-service/quickstart-js-node).
 
 ## Samples
 
-Explore more samples in our [Speech SDK sample repository](https://aka.ms/csspeech/samples).
+* [Step-by-step quickstart for Node.js](/azure/cognitive-services/speech-service/quickstart-js-node).
+* [Step-by-step quickstart for the browser](/azure/cognitive-services/speech-service/quickstart-js-browser).
+* More samples can be found in our [Speech SDK sample repository](https://aka.ms/csspeech/samples).

@@ -37,7 +37,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Note that this is just a soft affinity. If the target node is busy or
+      unavailable
+
+      at the time the task is scheduled, then the task will be scheduled
+      elsewhere.
     optional: true
     syntax:
       content: 'affinityId?: string'
@@ -52,7 +57,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This is the time when the node was initially allocated and doesn't change
+      once
+
+      set. It is not updated when the node is service healed or preempted.
     optional: true
     syntax:
       content: 'allocationTime?: Date'
@@ -67,7 +76,24 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      For Windows compute nodes, the Batch service installs the certificates to
+      the
+
+      specified certificate store and location. For Linux compute nodes, the
+      certificates are stored
+
+      in a directory inside the task working directory and an environment
+      variable
+
+      AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this
+      location. For certificates
+
+      with visibility of 'remoteUser', a 'certs' directory is created in the
+      user's home directory
+
+      (e.g., /home/{user-name}/certs) and certificates are placed in that
+      directory.
     optional: true
     syntax:
       content: 'certificateReferences?: CertificateReference[]'
@@ -112,7 +138,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Every node that is added to a pool is assigned a unique ID. Whenever a
+      node is
+
+      removed from a pool, all of its local files are deleted, and the ID is
+      reclaimed and could be
+
+      reused for new nodes.
     optional: true
     syntax:
       content: 'id?: string'
@@ -127,7 +160,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Every node that is added to a pool is assigned a unique IP address.
+      Whenever a
+
+      node is removed from a pool, all of its local files are deleted, and the
+      IP address is
+
+      reclaimed and could be reused for new nodes.
     optional: true
     syntax:
       content: 'ipAddress?: string'
@@ -157,7 +197,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: This property may not be present if the node state is unusable.
     optional: true
     syntax:
       content: 'lastBootTime?: Date'
@@ -187,7 +227,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This property is present only if at least one task has run on this node
+      since it
+
+      was assigned to the pool.
     optional: true
     syntax:
       content: 'recentTasks?: TaskInformation[]'
@@ -217,7 +261,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'Possible values include: ''enabled'', ''disabled'''
     optional: true
     syntax:
       content: 'schedulingState?: string'
@@ -262,7 +306,20 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The low-priority node has been preempted. Tasks which were running on the
+      node
+
+      when it was pre-empted will be rescheduled when another node becomes
+      available. Possible
+
+      values include: 'idle', 'rebooting', 'reimaging', 'running', 'unusable',
+      'creating',
+
+      'starting', 'waitingForStartTask', 'startTaskFailed', 'unknown',
+      'leavingPool', 'offline',
+
+      'preempted'
     optional: true
     syntax:
       content: 'state?: string'
@@ -337,7 +394,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      For information about available sizes of virtual machines in pools, see
+      Choose a
+
+      VM size for compute nodes in an Azure Batch pool
+
+      (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).
     optional: true
     syntax:
       content: 'vmSize?: string'

@@ -21,7 +21,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'If omitted, the existing execution constraints are left unchanged.'
     optional: true
     syntax:
       content: 'constraints?: JobConstraints'
@@ -36,7 +36,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'If omitted, the existing job metadata is left unchanged.'
     optional: true
     syntax:
       content: 'metadata?: MetadataItem[]'
@@ -51,7 +51,21 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If omitted, the completion behavior is left unchanged. You may not change
+      the
+
+      value from terminatejob to noaction - that is, once you have engaged
+      automatic job
+
+      termination, you cannot turn it off again. If you try to do this, the
+      request fails with an
+
+      'invalid property value' error response; if you are calling the REST API
+      directly, the HTTP
+
+      status code is 400 (Bad Request). Possible values include: 'noAction',
+      'terminateJob'
     optional: true
     syntax:
       content: 'onAllTasksComplete?: string'
@@ -66,7 +80,20 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      You may change the pool for a job only when the job is disabled. The Patch
+      Job
+
+      call will fail if you include the poolInfo element and the job is not
+      disabled. If you specify
+
+      an autoPoolSpecification specification in the poolInfo, only the keepAlive
+      property can be
+
+      updated, and then only if the auto pool has a poolLifetimeOption of job.
+      If omitted, the job
+
+      continues to run on its current pool.
     optional: true
     syntax:
       content: 'poolInfo?: PoolInformation'
@@ -81,7 +108,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Priority values can range from -1000 to 1000, with -1000 being the lowest
+
+      priority and 1000 being the highest priority. If omitted, the priority of
+      the job is left
+
+      unchanged.
     optional: true
     syntax:
       content: 'priority?: number'

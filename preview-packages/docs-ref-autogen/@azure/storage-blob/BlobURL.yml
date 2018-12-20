@@ -447,7 +447,7 @@ items:
           - Promise<Models.BlobRenewLeaseResponse>
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobURL.setHTTPHeaders'
-    name: 'setHTTPHeaders(Aborter, IBlobSetHTTPHeadersOptions)'
+    name: 'setHTTPHeaders(Aborter, BlobHTTPHeaders, IBlobSetHTTPHeadersOptions)'
     children: []
     type: method
     langs:
@@ -455,14 +455,14 @@ items:
     summary: >-
       Sets system properties on the blob.
 
-      If no option provided, or no value provided for the blob HTTP headers in
-      the options,
+      If no value provided, or no value provided for the specificed blob HTTP
+      headers,
 
       these blob HTTP headers without a value will be cleared.
     syntax:
       content: >-
-        function setHTTPHeaders(aborter: Aborter, options?:
-        IBlobSetHTTPHeadersOptions)
+        function setHTTPHeaders(aborter: Aborter, blobHTTPHeaders?:
+        BlobHTTPHeaders, options?: IBlobSetHTTPHeadersOptions)
       parameters:
         - id: aborter
           type:
@@ -471,6 +471,11 @@ items:
             Create a new Aborter instance with Aborter.none or
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
+        - id: blobHTTPHeaders
+          type:
+            - '@azure/storage-blob.BlobHTTPHeaders'
+          description: ''
+          optional: true
         - id: options
           type:
             - '@azure/storage-blob.IBlobSetHTTPHeadersOptions'
@@ -481,7 +486,7 @@ items:
           - Promise<Models.BlobSetHTTPHeadersResponse>
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobURL.setMetadata'
-    name: 'setMetadata(Aborter, IBlobSetMetadataOptions)'
+    name: 'setMetadata(Aborter, IMetadata, IBlobSetMetadataOptions)'
     children: []
     type: method
     langs:
@@ -490,13 +495,12 @@ items:
       Sets user-defined metadata for the specified blob as one or more
       name-value pairs.
 
-      If no option provided, or no metadata defined in the option parameter, the
-      blob
+      If no option provided, or no metadata defined in the parameter, the blob
 
       metadata will be removed.
     syntax:
       content: >-
-        function setMetadata(aborter: Aborter, options?:
+        function setMetadata(aborter: Aborter, metadata?: IMetadata, options?:
         IBlobSetMetadataOptions)
       parameters:
         - id: aborter
@@ -506,6 +510,11 @@ items:
             Create a new Aborter instance with Aborter.none or
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
+        - id: metadata
+          type:
+            - '@azure/storage-blob.IMetadata'
+          description: ''
+          optional: true
         - id: options
           type:
             - '@azure/storage-blob.IBlobSetMetadataOptions'
@@ -755,12 +764,24 @@ references:
       - name: IBlobRenewLeaseOptions
         fullName: IBlobRenewLeaseOptions
         uid: '@azure/storage-blob.IBlobRenewLeaseOptions'
+  - uid: '@azure/storage-blob.BlobHTTPHeaders'
+    name: BlobHTTPHeaders
+    spec.typeScript:
+      - name: BlobHTTPHeaders
+        fullName: BlobHTTPHeaders
+        uid: '@azure/storage-blob.BlobHTTPHeaders'
   - uid: '@azure/storage-blob.IBlobSetHTTPHeadersOptions'
     name: IBlobSetHTTPHeadersOptions
     spec.typeScript:
       - name: IBlobSetHTTPHeadersOptions
         fullName: IBlobSetHTTPHeadersOptions
         uid: '@azure/storage-blob.IBlobSetHTTPHeadersOptions'
+  - uid: '@azure/storage-blob.IMetadata'
+    name: IMetadata
+    spec.typeScript:
+      - name: IMetadata
+        fullName: IMetadata
+        uid: '@azure/storage-blob.IMetadata'
   - uid: '@azure/storage-blob.IBlobSetMetadataOptions'
     name: IBlobSetMetadataOptions
     spec.typeScript:

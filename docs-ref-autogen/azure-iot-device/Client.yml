@@ -5,11 +5,13 @@ items:
     fullName: Client
     children:
       - azure-iot-device.Client.constructor
+      - azure-iot-device.Client.close_1
       - azure-iot-device.Client.close
       - azure-iot-device.Client.fromAuthenticationProvider
       - azure-iot-device.Client.fromConnectionString
       - azure-iot-device.Client.fromSharedAccessSignature
       - azure-iot-device.Client.onDeviceMethod
+      - azure-iot-device.Client.uploadToBlob_1
       - azure-iot-device.Client.uploadToBlob
     langs:
       - typeScript
@@ -62,6 +64,22 @@ items:
             An object that is capable of uploading a stream to a blob.
           optional: true
     package: azure-iot-device
+  - uid: azure-iot-device.Client.close_1
+    name: close()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |
+      Closes the transport connection and destroys the client resources.
+      *Note: After calling this method the Client object cannot be reused.*
+    syntax:
+      content: function close()
+      parameters: []
+      return:
+        type:
+          - Promise<Disconnected>
+    package: azure-iot-device
   - uid: azure-iot-device.Client.close
     name: close(Callback<Disconnected>)
     children: []
@@ -72,16 +90,12 @@ items:
       Closes the transport connection and destroys the client resources.
       *Note: After calling this method the Client object cannot be reused.*
     syntax:
-      content: 'function close(closeCallback?: Callback<Disconnected>)'
+      content: 'function close(closeCallback: Callback<Disconnected>)'
       parameters:
         - id: closeCallback
           type:
             - Callback<Disconnected>
           description: ''
-          optional: true
-      return:
-        type:
-          - Promise<Disconnected> | void
     package: azure-iot-device
   - uid: azure-iot-device.Client.fromAuthenticationProvider
     name: 'fromAuthenticationProvider(AuthenticationProvider, any)'
@@ -108,7 +122,7 @@ items:
             Transport protocol used to connect to IoT hub.
       return:
         type:
-          - any
+          - azure-iot-device.Client
     package: azure-iot-device
   - uid: azure-iot-device.Client.fromConnectionString
     name: 'fromConnectionString(string, any)'
@@ -137,7 +151,7 @@ items:
             A transport constructor.
       return:
         type:
-          - any
+          - azure-iot-device.Client
     package: azure-iot-device
   - uid: azure-iot-device.Client.fromSharedAccessSignature
     name: 'fromSharedAccessSignature(string, any)'
@@ -165,12 +179,12 @@ items:
           description: ''
       return:
         type:
-          - any
+          - azure-iot-device.Client
     package: azure-iot-device
   - uid: azure-iot-device.Client.onDeviceMethod
     name: >-
-      onDeviceMethod(string, DoubleValueCallback<DeviceMethodRequest,
-      DeviceMethodResponse>)
+      onDeviceMethod(string, (request: DeviceMethodRequest, response:
+      DeviceMethodResponse) => void)
     children: []
     type: method
     langs:
@@ -178,8 +192,8 @@ items:
     summary: Registers a callback for a method named `methodName`.
     syntax:
       content: >-
-        function onDeviceMethod(methodName: string, callback:
-        DoubleValueCallback<DeviceMethodRequest, DeviceMethodResponse>)
+        function onDeviceMethod(methodName: string, callback: (request:
+        DeviceMethodRequest, response: DeviceMethodResponse) => void)
       parameters:
         - id: methodName
           type:
@@ -188,11 +202,39 @@ items:
         - id: callback
           type:
             - >-
-              DoubleValueCallback<azure-iot-device.DeviceMethodRequest,
-              azure-iot-device.DeviceMethodResponse>
+              (request: DeviceMethodRequest, response: DeviceMethodResponse) =>
+              void
           description: >
             Function that shall be called whenever a method request for the
             method called `methodName` is received.
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.uploadToBlob_1
+    name: 'uploadToBlob(string, Stream, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: The `uploadToBlob` method uploads a stream to a blob.
+    syntax:
+      content: >-
+        function uploadToBlob(blobName: string, stream: Stream, streamLength:
+        number)
+      parameters:
+        - id: blobName
+          type:
+            - string
+          description: ''
+        - id: stream
+          type:
+            - Stream
+          description: ''
+        - id: streamLength
+          type:
+            - number
+          description: ''
+      return:
+        type:
+          - Promise<void>
     package: azure-iot-device
   - uid: azure-iot-device.Client.uploadToBlob
     name: 'uploadToBlob(string, Stream, number, ErrorCallback)'
@@ -204,7 +246,7 @@ items:
     syntax:
       content: >-
         function uploadToBlob(blobName: string, stream: Stream, streamLength:
-        number, callback?: ErrorCallback)
+        number, callback: ErrorCallback)
       parameters:
         - id: blobName
           type:
@@ -224,10 +266,6 @@ items:
           type:
             - ErrorCallback
           description: ''
-          optional: true
-      return:
-        type:
-          - Promise<void> | void
     package: azure-iot-device
 references:
   - uid: azure-iot-device.DeviceTransport
@@ -236,20 +274,9 @@ references:
       - name: DeviceTransport
         fullName: DeviceTransport
         uid: azure-iot-device.DeviceTransport
-  - uid: >-
-      DoubleValueCallback<azure-iot-device.DeviceMethodRequest,
-      azure-iot-device.DeviceMethodResponse>
-    name: DeviceMethodResponse>
+  - uid: azure-iot-device.Client
+    name: Client
     spec.typeScript:
-      - name: DoubleValueCallback<
-        fullName: DoubleValueCallback<
-      - name: DeviceMethodRequest
-        fullName: DeviceMethodRequest
-        uid: azure-iot-device.DeviceMethodRequest
-      - name: ', '
-        fullName: ', '
-      - name: DeviceMethodResponse
-        fullName: DeviceMethodResponse
-        uid: azure-iot-device.DeviceMethodResponse
-      - name: '>'
-        fullName: '>'
+      - name: Client
+        fullName: Client
+        uid: azure-iot-device.Client

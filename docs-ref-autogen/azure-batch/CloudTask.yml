@@ -33,7 +33,29 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: >-
+      Batch will retry tasks when a recovery operation is triggered on a compute
+      node.
+
+      Examples of recovery operations include (but are not limited to) when an
+      unhealthy compute node
+
+      is rebooted or a compute node disappeared due to host failure. Retries due
+      to recovery
+
+      operations are independent of and are not counted against the
+      maxTaskRetryCount. Even if the
+
+      maxTaskRetryCount is 0, an internal retry due to a recovery operation may
+      occur. Because of
+
+      this, all tasks should be idempotent. This means tasks need to tolerate
+      being interrupted and
+
+      restarted without causing any corruption or duplicate data. The best
+      practice for long running
+
+      tasks is to use some form of checkpointing.
     package: azure-batch
   - uid: azure-batch.CloudTask.affinityInfo
     name: affinityInfo
@@ -57,7 +79,20 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Application packages are downloaded and deployed to a shared directory,
+      not the
+
+      task working directory. Therefore, if a referenced package is already on
+      the compute node, and
+
+      is up to date, then it is not re-downloaded; the existing copy on the
+      compute node is used. If
+
+      a referenced application package cannot be installed, for example because
+      the package has been
+
+      deleted or because download failed, the task fails.
     optional: true
     syntax:
       content: 'applicationPackageReferences?: ApplicationPackageReference[]'
@@ -72,7 +107,22 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If this property is set, the Batch service provides the task with an
+
+      authentication token which can be used to authenticate Batch service
+      operations without
+
+      requiring an account access key. The token is provided via the
+      AZ_BATCH_AUTHENTICATION_TOKEN
+
+      environment variable. The operations that the task can carry out using the
+      token depend on the
+
+      settings. For example, a task can request job permissions in order to add
+      other tasks to the
+
+      job, or check the status of the job or of other tasks under the job.
     optional: true
     syntax:
       content: 'authenticationTokenSettings?: AuthenticationTokenSettings'
@@ -87,7 +137,31 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      For multi-instance tasks, the command line is executed as the primary
+      task, after
+
+      the primary task and all subtasks have finished executing the coordination
+      command line. The
+
+      command line does not run under a shell, and therefore cannot take
+      advantage of shell features
+
+      such as environment variable expansion. If you want to take advantage of
+      such features, you
+
+      should invoke the shell in the command line, for example using "cmd /c
+      MyCommand" in Windows
+
+      or "/bin/sh -c MyCommand" in Linux. If the command line refers to file
+      paths, it should use a
+
+      relative path (relative to the task working directory), or use the Batch
+      provided environment
+
+      variable
+
+      (https://docs.microsoft.com/en-us/azure/batch/batch-compute-node-environment-variables).
     optional: true
     syntax:
       content: 'commandLine?: string'
@@ -117,7 +191,23 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If the pool that will run this task has containerConfiguration set, this
+      must be
+
+      set as well. If the pool that will run this task doesn't have
+      containerConfiguration set, this
+
+      must not be set. When this is specified, all directories recursively below
+      the
+
+      AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node)
+      are mapped into the
+
+      container, all task environment variables are mapped into the container,
+      and the task command
+
+      line is executed in the container.
     optional: true
     syntax:
       content: 'containerSettings?: TaskContainerSettings'
@@ -147,7 +237,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This task will not be scheduled until all tasks that it depends on have
+      completed
+
+      successfully. If any of those tasks fail and exhaust their retry counts,
+      this task will never
+
+      be scheduled.
     optional: true
     syntax:
       content: 'dependsOn?: TaskDependencies'
@@ -162,7 +259,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The display name need not be unique and can contain any Unicode characters
+      up to
+
+      a maximum length of 1024.
     optional: true
     syntax:
       content: 'displayName?: string'
@@ -192,7 +293,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This is an opaque string. You can use it to detect whether the task has
+      changed
+
+      between requests. In particular, you can be pass the ETag when updating a
+      task to specify that
+
+      your changes should take effect only if nobody else has modified the task
+      in the meantime.
     optional: true
     syntax:
       content: 'eTag?: string'
@@ -222,7 +331,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: How the Batch service should respond when the task completes.
     optional: true
     syntax:
       content: 'exitConditions?: ExitConditions'
@@ -237,7 +346,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The ID can contain any combination of alphanumeric characters including
+      hyphens
+
+      and underscores, and cannot contain more than 64 characters.
     optional: true
     syntax:
       content: 'id?: string'
@@ -297,7 +410,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      For multi-instance tasks, the files will only be uploaded from the compute
+      node
+
+      on which the primary task is executed.
     optional: true
     syntax:
       content: 'outputFiles?: OutputFile[]'
@@ -312,7 +429,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This property is not set if the task is in its initial Active state.
+      Possible
+
+      values include: 'active', 'preparing', 'running', 'completed'
     optional: true
     syntax:
       content: 'previousState?: string'
@@ -327,7 +448,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: This property is not set if the task is in its initial Active state.
     optional: true
     syntax:
       content: 'previousStateTransitionTime?: Date'
@@ -342,7 +463,23 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      For multi-instance tasks, the resource files will only be downloaded to
+      the
+
+      compute node on which the primary task is executed. There is a maximum
+      size for the list of
+
+      resource files.  When the max size is exceeded, the request will fail and
+      the response error
+
+      code will be RequestEntityTooLarge. If this occurs, the collection of
+      ResourceFiles must be
+
+      reduced in size. This can be achieved using .zip files, Application
+      Packages, or Docker
+
+      Containers.
     optional: true
     syntax:
       content: 'resourceFiles?: ResourceFile[]'
@@ -357,7 +494,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'Possible values include: ''active'', ''preparing'', ''running'', ''completed'''
     optional: true
     syntax:
       content: 'state?: string'
@@ -417,7 +554,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'If omitted, the task runs as a non-administrative user unique to the task.'
     optional: true
     syntax:
       content: 'userIdentity?: UserIdentity'

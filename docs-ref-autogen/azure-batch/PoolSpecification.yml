@@ -36,7 +36,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The list of application licenses must be a subset of available Batch
+      service
+
+      application licenses. If a license is requested which is not supported,
+      pool creation will
+
+      fail. The permitted licenses available on the pool are 'maya', 'vray',
+      '3dsmax', 'arnold'. An
+
+      additional charge applies for each application license added to the pool.
     optional: true
     syntax:
       content: 'applicationLicenses?: string[]'
@@ -66,7 +76,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The default value is 15 minutes. The minimum and maximum value are 5
+      minutes and
+
+      168 hours respectively. If you specify a value less than 5 minutes or
+      greater than 168 hours,
+
+      the Batch service rejects the request with an invalid property value
+      error; if you are calling
+
+      the REST API directly, the HTTP status code is 400 (Bad Request).
     optional: true
     syntax:
       content: 'autoScaleEvaluationInterval?: Duration'
@@ -81,7 +101,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This property must not be specified if enableAutoScale is set to false. It
+      is
+
+      required if enableAutoScale is set to true. The formula is checked for
+      validity before the
+
+      pool is created. If the formula is not valid, the Batch service rejects
+      the request with
+
+      detailed error information.
     optional: true
     syntax:
       content: 'autoScaleFormula?: string'
@@ -96,7 +126,24 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      For Windows compute nodes, the Batch service installs the certificates to
+      the
+
+      specified certificate store and location. For Linux compute nodes, the
+      certificates are stored
+
+      in a directory inside the task working directory and an environment
+      variable
+
+      AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this
+      location. For certificates
+
+      with visibility of 'remoteUser', a 'certs' directory is created in the
+      user's home directory
+
+      (e.g., /home/{user-name}/certs) and certificates are placed in that
+      directory.
     optional: true
     syntax:
       content: 'certificateReferences?: CertificateReference[]'
@@ -111,7 +158,23 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This property must be specified if the pool needs to be created with Azure
+      PaaS
+
+      VMs. This property and virtualMachineConfiguration are mutually exclusive
+      and one of the
+
+      properties must be specified. If neither is specified then the Batch
+      service returns an error;
+
+      if you are calling the REST API directly, the HTTP status code is 400 (Bad
+      Request). This
+
+      property cannot be specified if the Batch account was created with its
+      poolAllocationMode
+
+      property set to 'UserSubscription'.
     optional: true
     syntax:
       content: 'cloudServiceConfiguration?: CloudServiceConfiguration'
@@ -126,7 +189,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The display name need not be unique and can contain any Unicode characters
+      up to
+
+      a maximum length of 1024.
     optional: true
     syntax:
       content: 'displayName?: string'
@@ -141,7 +208,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If false, at least one of targetDedicateNodes and targetLowPriorityNodes
+      must be
+
+      specified. If true, the autoScaleFormula element is required. The pool
+      automatically resizes
+
+      according to the formula. The default value is false.
     optional: true
     syntax:
       content: 'enableAutoScale?: boolean'
@@ -156,7 +230,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Enabling inter-node communication limits the maximum size of the pool due
+      to
+
+      deployment restrictions on the nodes of the pool. This may result in the
+      pool not reaching its
+
+      desired size. The default value is false.
     optional: true
     syntax:
       content: 'enableInterNodeCommunication?: boolean'
@@ -171,7 +252,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The default value is 1. The maximum value of this setting depends on the
+      size of
+
+      the compute nodes in the pool (the vmSize setting).
     optional: true
     syntax:
       content: 'maxTasksPerNode?: number'
@@ -186,7 +271,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The Batch service does not assign any meaning to metadata; it is solely
+      for the
+
+      use of user code.
     optional: true
     syntax:
       content: 'metadata?: MetadataItem[]'
@@ -216,7 +305,19 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This timeout applies only to manual scaling; it has no effect when
+
+      enableAutoScale is set to true. The default value is 15 minutes. The
+      minimum value is 5
+
+      minutes. If you specify a value less than 5 minutes, the Batch service
+      rejects the request
+
+      with an error; if you are calling the REST API directly, the HTTP status
+      code is 400 (Bad
+
+      Request).
     optional: true
     syntax:
       content: 'resizeTimeout?: Duration'
@@ -246,7 +347,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This property must not be specified if enableAutoScale is set to true. If
+
+      enableAutoScale is set to false, then you must set either
+      targetDedicatedNodes,
+
+      targetLowPriorityNodes, or both.
     optional: true
     syntax:
       content: 'targetDedicatedNodes?: number'
@@ -261,7 +368,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This property must not be specified if enableAutoScale is set to true. If
+
+      enableAutoScale is set to false, then you must set either
+      targetDedicatedNodes,
+
+      targetLowPriorityNodes, or both.
     optional: true
     syntax:
       content: 'targetLowPriorityNodes?: number'
@@ -306,7 +419,18 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This property must be specified if the pool needs to be created with Azure
+      IaaS
+
+      VMs. This property and cloudServiceConfiguration are mutually exclusive
+      and one of the
+
+      properties must be specified. If neither is specified then the Batch
+      service returns an error;
+
+      if you are calling the REST API directly, the HTTP status code is 400 (Bad
+      Request).
     optional: true
     syntax:
       content: 'virtualMachineConfiguration?: VirtualMachineConfiguration'
@@ -321,7 +445,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      For information about available sizes of virtual machines in pools, see
+      Choose a
+
+      VM size for compute nodes in an Azure Batch pool
+
+      (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).
     syntax:
       content: 'vmSize: string'
       return:

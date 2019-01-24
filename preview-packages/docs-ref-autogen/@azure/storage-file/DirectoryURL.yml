@@ -91,6 +91,10 @@ items:
                                 "https://myaccount.file.core.windows.net/myshare/mydirectory". You can
                                 append a SAS if using AnonymousCredential, such as
                                 "https://myaccount.file.core.windows.net/myshare/mydirectory?sasString".
+                                This method accepts an encoded URL or non-encoded URL pointing to a directory.
+                                Encoded URL string will NOT be escaped twice, only special characters in URL path will be escaped.
+                                However, if a directory name includes %, directory name must be encoded in the URL.
+                                Such as a directory named "mydir%", the URL should be "https://myaccount.file.core.windows.net/myshare/mydir%25".
         - id: pipeline
           type:
             - '@azure/storage-file.Pipeline'
@@ -104,7 +108,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a DirectoryURL object from an existing DirectoryURL
+    summary: Creates a DirectoryURL object from an existing DirectoryURL.
     syntax:
       content: >-
         static function fromDirectoryURL(directoryURL: DirectoryURL,
@@ -113,12 +117,12 @@ items:
         - id: directoryURL
           type:
             - '@azure/storage-file.DirectoryURL'
-          description: ''
+          description: A DirectoryURL object
         - id: directoryName
           type:
             - string
-          description: |+
-
+          description: |
+            A subdirectory name
       return:
         type:
           - '@azure/storage-file.DirectoryURL'
@@ -129,19 +133,19 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a DirectoryURL object from ShareURL
+    summary: Creates a DirectoryURL object from ShareURL.
     syntax:
       content: 'static function fromShareURL(shareURL: ShareURL, directoryName: string)'
       parameters:
         - id: shareURL
           type:
             - '@azure/storage-file.ShareURL'
-          description: ''
+          description: A ShareURL object
         - id: directoryName
           type:
             - string
-          description: |+
-
+          description: |
+            A directory name
       return:
         type:
           - '@azure/storage-file.DirectoryURL'

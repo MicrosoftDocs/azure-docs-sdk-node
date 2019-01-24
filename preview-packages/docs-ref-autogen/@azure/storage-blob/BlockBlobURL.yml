@@ -27,7 +27,16 @@ items:
     type: constructor
     langs:
       - typeScript
-    summary: Creates an instance of BlockBlobURL.
+    summary: >-
+      Creates an instance of BlockBlobURL.
+
+      This method accepts an encoded URL or non-encoded URL pointing to a block
+      blob.
+
+      Encoded URL string will NOT be escaped twice, only special characters in
+      URL path will be escaped.
+
+      If a blob name includes ? or %, blob name must be encoded in the URL.
     syntax:
       content: 'new BlockBlobURL(url: string, pipeline: Pipeline)'
       parameters:
@@ -39,6 +48,10 @@ items:
                                 "https://myaccount.blob.core.windows.net/mycontainer/blockblob". You can
                                 append a SAS if using AnonymousCredential, such as
                                 "https://myaccount.blob.core.windows.net/mycontainer/blockblob?sasString".
+                                This method accepts an encoded URL or non-encoded URL pointing to a blob.
+                                Encoded URL string will NOT be escaped twice, only special characters in URL path will be escaped.
+                                However, if a blob name includes ? or %, blob name must be encoded in the URL.
+                                Such as a blob named "my?blob%", the URL should be "https://myaccount.blob.core.windows.net/mycontainer/my%3Fblob%25".
         - id: pipeline
           type:
             - '@azure/storage-blob.Pipeline'
@@ -124,17 +137,17 @@ items:
         - id: containerURL
           type:
             - '@azure/storage-blob.ContainerURL'
-          description: ''
+          description: A ContainerURL object
         - id: blobName
           type:
             - string
-          description: ''
+          description: A block blob name
       return:
         type:
           - '@azure/storage-blob.BlockBlobURL'
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobURL.getBlockList'
-    name: 'getBlockList(Aborter, BlockListType, IBlockBlobGetBlockListOptions)'
+    name: 'getBlockList(Aborter, Models.BlockListType, IBlockBlobGetBlockListOptions)'
     children: []
     type: method
     langs:
@@ -144,7 +157,7 @@ items:
       using the specified block list filter.
     syntax:
       content: >-
-        function getBlockList(aborter: Aborter, listType: BlockListType,
+        function getBlockList(aborter: Aborter, listType: Models.BlockListType,
         options?: IBlockBlobGetBlockListOptions)
       parameters:
         - id: aborter
@@ -156,7 +169,7 @@ items:
                                      goto documents of Aborter for more examples about request cancellation
         - id: listType
           type:
-            - '@azure/storage-blob.BlockListType'
+            - Models.BlockListType
           description: ''
         - id: options
           type:
@@ -397,12 +410,6 @@ references:
       - name: IBlockBlobCommitBlockListOptions
         fullName: IBlockBlobCommitBlockListOptions
         uid: '@azure/storage-blob.IBlockBlobCommitBlockListOptions'
-  - uid: '@azure/storage-blob.BlockListType'
-    name: BlockListType
-    spec.typeScript:
-      - name: BlockListType
-        fullName: BlockListType
-        uid: '@azure/storage-blob.BlockListType'
   - uid: '@azure/storage-blob.IBlockBlobGetBlockListOptions'
     name: IBlockBlobGetBlockListOptions
     spec.typeScript:

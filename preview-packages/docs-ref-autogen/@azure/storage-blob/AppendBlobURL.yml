@@ -24,7 +24,16 @@ items:
     type: constructor
     langs:
       - typeScript
-    summary: Creates an instance of AppendBlobURL.
+    summary: >-
+      Creates an instance of AppendBlobURL.
+
+      This method accepts an encoded URL or non-encoded URL pointing to an
+      append blob.
+
+      Encoded URL string will NOT be escaped twice, only special characters in
+      URL path will be escaped.
+
+      If a blob name includes ? or %, blob name must be encoded in the URL.
     syntax:
       content: 'new AppendBlobURL(url: string, pipeline: Pipeline)'
       parameters:
@@ -36,6 +45,10 @@ items:
                                 "https://myaccount.blob.core.windows.net/mycontainer/appendblob". You can
                                 append a SAS if using AnonymousCredential, such as
                                 "https://myaccount.blob.core.windows.net/mycontainer/appendblob?sasString".
+                                This method accepts an encoded URL or non-encoded URL pointing to a blob.
+                                Encoded URL string will NOT be escaped twice, only special characters in URL path will be escaped.
+                                However, if a blob name includes ? or %, blob name must be encoded in the URL.
+                                Such as a blob named "my?blob%", the URL should be "https://myaccount.blob.core.windows.net/mycontainer/my%3Fblob%25".
         - id: pipeline
           type:
             - '@azure/storage-blob.Pipeline'
@@ -142,11 +155,11 @@ items:
         - id: containerURL
           type:
             - '@azure/storage-blob.ContainerURL'
-          description: ''
+          description: A ContainerURL object
         - id: blobName
           type:
             - string
-          description: ''
+          description: An append blob name
       return:
         type:
           - '@azure/storage-blob.AppendBlobURL'

@@ -129,11 +129,11 @@ items:
         - id: containerURL
           type:
             - '@azure/storage-blob.ContainerURL'
-          description: ''
+          description: A ContainerURL object
         - id: blobName
           type:
             - string
-          description: ''
+          description: A page blob name
       return:
         type:
           - '@azure/storage-blob.PageBlobURL'
@@ -227,7 +227,16 @@ items:
     type: constructor
     langs:
       - typeScript
-    summary: Creates an instance of PageBlobURL.
+    summary: >-
+      Creates an instance of PageBlobURL.
+
+      This method accepts an encoded URL or non-encoded URL pointing to a page
+      blob.
+
+      Encoded URL string will NOT be escaped twice, only special characters in
+      URL path will be escaped.
+
+      If a blob name includes ? or %, blob name must be encoded in the URL.
     syntax:
       content: 'new PageBlobURL(url: string, pipeline: Pipeline)'
       parameters:
@@ -239,6 +248,10 @@ items:
                                 "https://myaccount.blob.core.windows.net/mycontainer/pageblob". You can
                                 append a SAS if using AnonymousCredential, such as
                                 "https://myaccount.blob.core.windows.net/mycontainer/pageblob?sasString".
+                                This method accepts an encoded URL or non-encoded URL pointing to a blob.
+                                Encoded URL string will NOT be escaped twice, only special characters in URL path will be escaped.
+                                However, if a blob name includes ? or %, blob name must be encoded in the URL.
+                                Such as a blob named "my?blob%", the URL should be "https://myaccount.blob.core.windows.net/mycontainer/my%3Fblob%25".
         - id: pipeline
           type:
             - '@azure/storage-blob.Pipeline'
@@ -328,7 +341,7 @@ items:
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.PageBlobURL.updateSequenceNumber'
     name: >-
-      updateSequenceNumber(Aborter, SequenceNumberActionType, number,
+      updateSequenceNumber(Aborter, Models.SequenceNumberActionType, number,
       IPageBlobUpdateSequenceNumberOptions)
     children: []
     type: method
@@ -338,7 +351,7 @@ items:
     syntax:
       content: >-
         function updateSequenceNumber(aborter: Aborter, sequenceNumberAction:
-        SequenceNumberActionType, sequenceNumber?: number, options?:
+        Models.SequenceNumberActionType, sequenceNumber?: number, options?:
         IPageBlobUpdateSequenceNumberOptions)
       parameters:
         - id: aborter
@@ -350,7 +363,7 @@ items:
                                      goto documents of Aborter for more examples about request cancellation
         - id: sequenceNumberAction
           type:
-            - '@azure/storage-blob.SequenceNumberActionType'
+            - Models.SequenceNumberActionType
           description: ''
         - id: sequenceNumber
           type:
@@ -506,12 +519,6 @@ references:
       - name: IPageBlobStartCopyIncrementalOptions
         fullName: IPageBlobStartCopyIncrementalOptions
         uid: '@azure/storage-blob.IPageBlobStartCopyIncrementalOptions'
-  - uid: '@azure/storage-blob.SequenceNumberActionType'
-    name: SequenceNumberActionType
-    spec.typeScript:
-      - name: SequenceNumberActionType
-        fullName: SequenceNumberActionType
-        uid: '@azure/storage-blob.SequenceNumberActionType'
   - uid: '@azure/storage-blob.IPageBlobUpdateSequenceNumberOptions'
     name: IPageBlobUpdateSequenceNumberOptions
     spec.typeScript:

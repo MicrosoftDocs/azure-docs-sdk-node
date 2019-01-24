@@ -7,7 +7,9 @@ items:
       - msal.Utils.base64DecodeStringUrlSafe
       - msal.Utils.base64EncodeStringUrlSafe
       - msal.Utils.CanonicalizeUri
+      - msal.Utils.checkSSO
       - msal.Utils.compareObjects
+      - msal.Utils.constructUnifiedCacheExtraQueryParameter
       - msal.Utils.containsScope
       - msal.Utils.convertToLowerCase
       - msal.Utils.createNewGuid
@@ -26,6 +28,7 @@ items:
       - msal.Utils.now
       - msal.Utils.removeElement
       - msal.Utils.replaceFirstPath
+      - msal.Utils.urlRemoveQueryStringParameter
       - msal.Utils.utf8Encode
     langs:
       - typeScript
@@ -86,6 +89,24 @@ items:
         type:
           - string
     package: msal
+  - uid: msal.Utils.checkSSO
+    name: checkSSO(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'static function checkSSO(extraQueryParameters: string)'
+      parameters:
+        - id: extraQueryParameters
+          type:
+            - string
+          description: ''
+      return:
+        type:
+          - boolean
+    package: msal
   - uid: msal.Utils.compareObjects
     name: 'compareObjects(User, User)'
     children: []
@@ -107,6 +128,31 @@ items:
       return:
         type:
           - boolean
+    package: msal
+  - uid: msal.Utils.constructUnifiedCacheExtraQueryParameter
+    name: 'constructUnifiedCacheExtraQueryParameter(any, string)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        static function constructUnifiedCacheExtraQueryParameter(idTokenObject:
+        any, extraQueryParameters?: string)
+      parameters:
+        - id: idTokenObject
+          type:
+            - any
+          description: ''
+        - id: extraQueryParameters
+          type:
+            - string
+          description: ''
+          optional: true
+      return:
+        type:
+          - string
     package: msal
   - uid: msal.Utils.containsScope
     name: 'containsScope(Array<string>, Array<string>)'
@@ -430,13 +476,35 @@ items:
       - typeScript
     summary: ''
     syntax:
-      content: 'static function replaceFirstPath(href: string, tenantId: string)'
+      content: 'static function replaceFirstPath(url: string, tenantId: string)'
       parameters:
-        - id: href
+        - id: url
           type:
             - string
           description: ''
         - id: tenantId
+          type:
+            - string
+          description: ''
+      return:
+        type:
+          - string
+    package: msal
+  - uid: msal.Utils.urlRemoveQueryStringParameter
+    name: 'urlRemoveQueryStringParameter(string, string)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'static function urlRemoveQueryStringParameter(url: string, name: string)'
+      parameters:
+        - id: url
+          type:
+            - string
+          description: ''
+        - id: name
           type:
             - string
           description: ''

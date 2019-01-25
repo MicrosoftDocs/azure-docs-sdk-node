@@ -225,6 +225,10 @@ items:
                                 "https://myaccount.file.core.windows.net/myshare/mydirectory/file". You can
                                 append a SAS if using AnonymousCredential, such as
                                 "https://myaccount.file.core.windows.net/myshare/mydirectory/file?sasString".
+                                This method accepts an encoded URL or non-encoded URL pointing to a file.
+                                Encoded URL string will NOT be escaped twice, only special characters in URL path will be escaped.
+                                However, if a file or directory name includes %, file or directory name must be encoded in the URL.
+                                Such as a file named "myfile%", the URL should be "https://myaccount.file.core.windows.net/myshare/mydirectory/myfile%25".
         - id: pipeline
           type:
             - '@azure/storage-file.Pipeline'
@@ -247,11 +251,11 @@ items:
         - id: directoryURL
           type:
             - '@azure/storage-file.DirectoryURL'
-          description: ''
+          description: A DirectoryURL object
         - id: fileName
           type:
             - string
-          description: ''
+          description: A file name
       return:
         type:
           - '@azure/storage-file.FileURL'
@@ -476,15 +480,20 @@ items:
         - id: body
           type:
             - HttpRequestBody
-          description: ''
+          description: |-
+            Blob, string, ArrayBuffer, ArrayBufferView or a function
+                                          which returns a new Readable stream whose offset is from data source beginning.
         - id: offset
           type:
             - number
-          description: ''
+          description: Offset position of the destination Azure File to upload.
         - id: contentLength
           type:
             - number
-          description: ''
+          description: >-
+            Length of body in bytes. Use Buffer.byteLength() to calculate body
+            length for a
+                                          string including non non-Base64/Hex-encoded characters.
         - id: options
           type:
             - '@azure/storage-file.IFileUploadRangeOptions'

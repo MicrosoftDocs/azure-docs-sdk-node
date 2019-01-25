@@ -115,7 +115,15 @@ items:
     type: constructor
     langs:
       - typeScript
-    summary: Creates an instance of BlobURL.
+    summary: >-
+      Creates an instance of BlobURL.
+
+      This method accepts an encoded URL or non-encoded URL pointing to a blob.
+
+      Encoded URL string will NOT be escaped twice, only special characters in
+      URL path will be escaped.
+
+      If a blob name includes ? or %, blob name must be encoded in the URL.
     syntax:
       content: 'new BlobURL(url: string, pipeline: Pipeline)'
       parameters:
@@ -124,9 +132,13 @@ items:
             - string
           description: |-
             A URL string pointing to Azure Storage blob, such as
-                                "https://myaccount.blob.core.windows.net/mycontainer/blob". You can
-                                append a SAS if using AnonymousCredential, such as
+                                "https://myaccount.blob.core.windows.net/mycontainer/blob".
+                                You can append a SAS if using AnonymousCredential, such as
                                 "https://myaccount.blob.core.windows.net/mycontainer/blob?sasString".
+                                This method accepts an encoded URL or non-encoded URL pointing to a blob.
+                                Encoded URL string will NOT be escaped twice, only special characters in URL path will be escaped.
+                                However, if a blob name includes ? or %, blob name must be encoded in the URL.
+                                Such as a blob named "my?blob%", the URL should be "https://myaccount.blob.core.windows.net/mycontainer/my%3Fblob%25".
         - id: pipeline
           type:
             - '@azure/storage-blob.Pipeline'
@@ -283,15 +295,6 @@ items:
       * In Node.js, data returns in a Readable stream readableStreamBody
 
       * In browsers, data returns in a promise blobBody
-
-
-      WARNING: In Node.js, abort or network error during reading from response
-      stream will NOT
-
-      trigger any error, readable stream will end immediately. You need to check
-      downloaded data
-
-      length when stream ends.
     syntax:
       content: >-
         function download(aborter: Aborter, offset: number, count?: number,
@@ -337,11 +340,11 @@ items:
         - id: containerURL
           type:
             - '@azure/storage-blob.ContainerURL'
-          description: ''
+          description: A ContainerURL object
         - id: blobName
           type:
             - string
-          description: ''
+          description: A blob name
       return:
         type:
           - '@azure/storage-blob.BlobURL'
@@ -525,7 +528,7 @@ items:
           - Promise<Models.BlobSetMetadataResponse>
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobURL.setTier'
-    name: 'setTier(Aborter, AccessTier, IBlobSetTierOptions)'
+    name: 'setTier(Aborter, Models.AccessTier, IBlobSetTierOptions)'
     children: []
     type: method
     langs:
@@ -545,7 +548,7 @@ items:
       storage type. This operation does not update the blob's ETag.
     syntax:
       content: >-
-        function setTier(aborter: Aborter, tier: AccessTier, options?:
+        function setTier(aborter: Aborter, tier: Models.AccessTier, options?:
         IBlobSetTierOptions)
       parameters:
         - id: aborter
@@ -557,7 +560,7 @@ items:
                                      goto documents of Aborter for more examples about request cancellation
         - id: tier
           type:
-            - '@azure/storage-blob.AccessTier'
+            - Models.AccessTier
           description: ''
         - id: options
           type:
@@ -788,12 +791,6 @@ references:
       - name: IBlobSetMetadataOptions
         fullName: IBlobSetMetadataOptions
         uid: '@azure/storage-blob.IBlobSetMetadataOptions'
-  - uid: '@azure/storage-blob.AccessTier'
-    name: AccessTier
-    spec.typeScript:
-      - name: AccessTier
-        fullName: AccessTier
-        uid: '@azure/storage-blob.AccessTier'
   - uid: '@azure/storage-blob.IBlobSetTierOptions'
     name: IBlobSetTierOptions
     spec.typeScript:

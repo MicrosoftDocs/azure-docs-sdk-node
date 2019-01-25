@@ -11,6 +11,7 @@ items:
       - azure-arm-storage.StorageAccount.enableHttpsTrafficOnly
       - azure-arm-storage.StorageAccount.encryption
       - azure-arm-storage.StorageAccount.failoverInProgress
+      - azure-arm-storage.StorageAccount.geoReplicationStats
       - azure-arm-storage.StorageAccount.identity
       - azure-arm-storage.StorageAccount.isHnsEnabled
       - azure-arm-storage.StorageAccount.kind
@@ -27,7 +28,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: The storage account.
     extends:
       name: azure-arm-storage.TrackedResource
     package: azure-arm-storage
@@ -38,7 +39,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Required for storage accounts where kind = BlobStorage. The access tier
+      used for billing.
+
+      Possible values include: 'Hot', 'Cool'
     optional: true
     syntax:
       content: 'accessTier?: string'
@@ -53,7 +58,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Gets the creation date and time of the storage account in UTC.
     optional: true
     syntax:
       content: 'creationTime?: Date'
@@ -68,7 +73,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Gets the custom domain the user assigned to this storage account.
     optional: true
     syntax:
       content: 'customDomain?: CustomDomain'
@@ -83,7 +88,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Enables Azure Files AAD Integration for SMB if sets to true.
     optional: true
     syntax:
       content: 'enableAzureFilesAadIntegration?: boolean'
@@ -98,7 +103,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Allows https traffic only to storage service if sets to true.
     optional: true
     syntax:
       content: 'enableHttpsTrafficOnly?: boolean'
@@ -113,7 +118,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gets the encryption settings on the account. If unspecified, the account
+      is unencrypted.
     optional: true
     syntax:
       content: 'encryption?: Encryption'
@@ -128,13 +135,30 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If the failover is in progress, the value will be true, otherwise, it will
+      be null.
     optional: true
     syntax:
       content: 'failoverInProgress?: boolean'
       return:
         type:
           - boolean
+    package: azure-arm-storage
+  - uid: azure-arm-storage.StorageAccount.geoReplicationStats
+    name: geoReplicationStats
+    fullName: geoReplicationStats
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Geo Replication Stats
+    optional: true
+    syntax:
+      content: 'geoReplicationStats?: GeoReplicationStats'
+      return:
+        type:
+          - azure-arm-storage.GeoReplicationStats
     package: azure-arm-storage
   - uid: azure-arm-storage.StorageAccount.identity
     name: identity
@@ -143,7 +167,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The identity of the resource.
     optional: true
     syntax:
       content: 'identity?: Identity'
@@ -158,7 +182,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Account HierarchicalNamespace enabled if sets to true.
     optional: true
     syntax:
       content: 'isHnsEnabled?: boolean'
@@ -173,7 +197,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gets the Kind. Possible values include: 'Storage', 'StorageV2',
+      'BlobStorage', 'FileStorage',
+
+      'BlockBlobStorage'
     optional: true
     syntax:
       content: 'kind?: string'
@@ -188,7 +216,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gets the timestamp of the most recent instance of a failover to the
+      secondary location. Only
+
+      the most recent timestamp is retained. This element is not returned if
+      there has never been a
+
+      failover instance. Only available if the accountType is Standard_GRS or
+      Standard_RAGRS.
     optional: true
     syntax:
       content: 'lastGeoFailoverTime?: Date'
@@ -203,7 +239,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Network rule set
     optional: true
     syntax:
       content: 'networkRuleSet?: NetworkRuleSet'
@@ -218,7 +254,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gets the URLs that are used to perform a retrieval of a public blob,
+      queue, or table object.
+
+      Note that Standard_ZRS and Premium_LRS accounts only return the blob
+      endpoint.
     optional: true
     syntax:
       content: 'primaryEndpoints?: Endpoints'
@@ -233,7 +274,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Gets the location of the primary data center for the storage account.
     optional: true
     syntax:
       content: 'primaryLocation?: string'
@@ -248,7 +289,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gets the status of the storage account at the time the operation was
+      called. Possible values
+
+      include: 'Creating', 'ResolvingDNS', 'Succeeded'
     optional: true
     syntax:
       content: 'provisioningState?: string'
@@ -263,7 +308,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gets the URLs that are used to perform a retrieval of a public blob,
+      queue, or table object
+
+      from the secondary location of the storage account. Only available if the
+      SKU name is
+
+      Standard_RAGRS.
     optional: true
     syntax:
       content: 'secondaryEndpoints?: Endpoints'
@@ -278,7 +330,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gets the location of the geo-replicated secondary for the storage account.
+      Only available if
+
+      the accountType is Standard_GRS or Standard_RAGRS.
     optional: true
     syntax:
       content: 'secondaryLocation?: string'
@@ -293,7 +349,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Gets the SKU.
     optional: true
     syntax:
       content: 'sku?: Sku'
@@ -308,7 +364,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gets the status indicating whether the primary location of the storage
+      account is available or
+
+      unavailable. Possible values include: 'available', 'unavailable'
     optional: true
     syntax:
       content: 'statusOfPrimary?: string'
@@ -323,7 +383,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gets the status indicating whether the secondary location of the storage
+      account is available
+
+      or unavailable. Only available if the SKU name is Standard_GRS or
+      Standard_RAGRS. Possible
+
+      values include: 'available', 'unavailable'
     optional: true
     syntax:
       content: 'statusOfSecondary?: string'
@@ -350,6 +417,12 @@ references:
       - name: Encryption
         fullName: Encryption
         uid: azure-arm-storage.Encryption
+  - uid: azure-arm-storage.GeoReplicationStats
+    name: GeoReplicationStats
+    spec.typeScript:
+      - name: GeoReplicationStats
+        fullName: GeoReplicationStats
+        uid: azure-arm-storage.GeoReplicationStats
   - uid: azure-arm-storage.Identity
     name: Identity
     spec.typeScript:

@@ -24,6 +24,16 @@ items:
       - azure-arm-batch.ApplicationPackageOperations.get_1
       - >-
         azure-arm-batch.ApplicationPackageOperations.getWithHttpOperationResponse
+      - azure-arm-batch.ApplicationPackageOperations.list
+      - azure-arm-batch.ApplicationPackageOperations.list_2
+      - azure-arm-batch.ApplicationPackageOperations.list_1
+      - azure-arm-batch.ApplicationPackageOperations.listNext
+      - azure-arm-batch.ApplicationPackageOperations.listNext_2
+      - azure-arm-batch.ApplicationPackageOperations.listNext_1
+      - >-
+        azure-arm-batch.ApplicationPackageOperations.listNextWithHttpOperationResponse
+      - >-
+        azure-arm-batch.ApplicationPackageOperations.listWithHttpOperationResponse
     langs:
       - typeScript
     type: interface
@@ -39,7 +49,7 @@ items:
     syntax:
       content: >-
         function activate(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, format: string, options?:
+        applicationName: string, versionName: string, format: string, options?:
         Object)
       parameters:
         - id: resourceGroupName
@@ -53,16 +63,17 @@ items:
             - string
           description: |
             The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: |
-            The ID of the application.
-        - id: version
+            The name of the application. This must be
+            unique within the account.
+        - id: versionName
           type:
             - string
           description: |
-            The version of the application to activate.
+            The version of the application.
         - id: format
           type:
             - string
@@ -75,12 +86,12 @@ items:
           optional: true
       return:
         type:
-          - Promise<void>
+          - Promise<azure-arm-batch.ApplicationPackage>
     package: azure-arm-batch
   - uid: azure-arm-batch.ApplicationPackageOperations.activate_2
     name: >-
       activate(string, string, string, string, string, Object,
-      ServiceCallback<void>)
+      ServiceCallback<ApplicationPackage>)
     children: []
     type: method
     langs:
@@ -89,8 +100,8 @@ items:
     syntax:
       content: >-
         function activate(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, format: string, options: Object,
-        callback: ServiceCallback<void>)
+        applicationName: string, versionName: string, format: string, options:
+        Object, callback: ServiceCallback<ApplicationPackage>)
       parameters:
         - id: resourceGroupName
           type:
@@ -100,11 +111,11 @@ items:
           type:
             - string
           description: ''
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: ''
-        - id: version
+        - id: versionName
           type:
             - string
           description: ''
@@ -118,14 +129,16 @@ items:
           description: ''
         - id: callback
           type:
-            - ServiceCallback<void>
+            - ServiceCallback<azure-arm-batch.ApplicationPackage>
           description: ''
       return:
         type:
-          - Promise<void>
+          - Promise<azure-arm-batch.ApplicationPackage>
     package: azure-arm-batch
   - uid: azure-arm-batch.ApplicationPackageOperations.activate_1
-    name: 'activate(string, string, string, string, string, ServiceCallback<void>)'
+    name: >-
+      activate(string, string, string, string, string,
+      ServiceCallback<ApplicationPackage>)
     children: []
     type: method
     langs:
@@ -134,8 +147,8 @@ items:
     syntax:
       content: >-
         function activate(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, format: string, callback:
-        ServiceCallback<void>)
+        applicationName: string, versionName: string, format: string, callback:
+        ServiceCallback<ApplicationPackage>)
       parameters:
         - id: resourceGroupName
           type:
@@ -145,11 +158,11 @@ items:
           type:
             - string
           description: ''
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: ''
-        - id: version
+        - id: versionName
           type:
             - string
           description: ''
@@ -159,11 +172,11 @@ items:
           description: ''
         - id: callback
           type:
-            - ServiceCallback<void>
+            - ServiceCallback<azure-arm-batch.ApplicationPackage>
           description: ''
       return:
         type:
-          - Promise<void>
+          - Promise<azure-arm-batch.ApplicationPackage>
     package: azure-arm-batch
   - uid: >-
       azure-arm-batch.ApplicationPackageOperations.activateWithHttpOperationResponse
@@ -178,8 +191,8 @@ items:
     syntax:
       content: >-
         function activateWithHttpOperationResponse(resourceGroupName: string,
-        accountName: string, applicationId: string, version: string, format:
-        string, options?: Object)
+        accountName: string, applicationName: string, versionName: string,
+        format: string, options?: Object)
       parameters:
         - id: resourceGroupName
           type:
@@ -192,16 +205,17 @@ items:
             - string
           description: |
             The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: |
-            The ID of the application.
-        - id: version
+            The name of the application. This must be
+            unique within the account.
+        - id: versionName
           type:
             - string
           description: |
-            The version of the application to activate.
+            The version of the application.
         - id: format
           type:
             - string
@@ -214,7 +228,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<HttpOperationResponse<void>>
+          - Promise<HttpOperationResponse<azure-arm-batch.ApplicationPackage>>
     package: azure-arm-batch
   - uid: azure-arm-batch.ApplicationPackageOperations.create
     name: 'create(string, string, string, string, Object)'
@@ -226,7 +240,7 @@ items:
     syntax:
       content: >-
         function create(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, options?: Object)
+        applicationName: string, versionName: string, options?: Object)
       parameters:
         - id: resourceGroupName
           type:
@@ -239,12 +253,13 @@ items:
             - string
           description: |
             The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: |
-            The ID of the application.
-        - id: version
+            The name of the application. This must be
+            unique within the account.
+        - id: versionName
           type:
             - string
           description: |
@@ -270,7 +285,7 @@ items:
     syntax:
       content: >-
         function create(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, options: Object, callback:
+        applicationName: string, versionName: string, options: Object, callback:
         ServiceCallback<ApplicationPackage>)
       parameters:
         - id: resourceGroupName
@@ -281,11 +296,11 @@ items:
           type:
             - string
           description: ''
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: ''
-        - id: version
+        - id: versionName
           type:
             - string
           description: ''
@@ -313,7 +328,7 @@ items:
     syntax:
       content: >-
         function create(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, callback:
+        applicationName: string, versionName: string, callback:
         ServiceCallback<ApplicationPackage>)
       parameters:
         - id: resourceGroupName
@@ -324,11 +339,11 @@ items:
           type:
             - string
           description: ''
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: ''
-        - id: version
+        - id: versionName
           type:
             - string
           description: ''
@@ -351,8 +366,8 @@ items:
     syntax:
       content: >-
         function createWithHttpOperationResponse(resourceGroupName: string,
-        accountName: string, applicationId: string, version: string, options?:
-        Object)
+        accountName: string, applicationName: string, versionName: string,
+        options?: Object)
       parameters:
         - id: resourceGroupName
           type:
@@ -365,12 +380,13 @@ items:
             - string
           description: |
             The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: |
-            The ID of the application.
-        - id: version
+            The name of the application. This must be
+            unique within the account.
+        - id: versionName
           type:
             - string
           description: |
@@ -394,7 +410,7 @@ items:
     syntax:
       content: >-
         function deleteMethod(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, options?: Object)
+        applicationName: string, versionName: string, options?: Object)
       parameters:
         - id: resourceGroupName
           type:
@@ -407,16 +423,17 @@ items:
             - string
           description: |
             The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: |
-            The ID of the application.
-        - id: version
+            The name of the application. This must be
+            unique within the account.
+        - id: versionName
           type:
             - string
           description: |
-            The version of the application to delete.
+            The version of the application.
         - id: options
           type:
             - Object
@@ -438,7 +455,7 @@ items:
     syntax:
       content: >-
         function deleteMethod(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, options: Object, callback:
+        applicationName: string, versionName: string, options: Object, callback:
         ServiceCallback<void>)
       parameters:
         - id: resourceGroupName
@@ -449,11 +466,11 @@ items:
           type:
             - string
           description: ''
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: ''
-        - id: version
+        - id: versionName
           type:
             - string
           description: ''
@@ -479,7 +496,8 @@ items:
     syntax:
       content: >-
         function deleteMethod(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, callback: ServiceCallback<void>)
+        applicationName: string, versionName: string, callback:
+        ServiceCallback<void>)
       parameters:
         - id: resourceGroupName
           type:
@@ -489,11 +507,11 @@ items:
           type:
             - string
           description: ''
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: ''
-        - id: version
+        - id: versionName
           type:
             - string
           description: ''
@@ -518,8 +536,8 @@ items:
     syntax:
       content: >-
         function deleteMethodWithHttpOperationResponse(resourceGroupName:
-        string, accountName: string, applicationId: string, version: string,
-        options?: Object)
+        string, accountName: string, applicationName: string, versionName:
+        string, options?: Object)
       parameters:
         - id: resourceGroupName
           type:
@@ -532,16 +550,17 @@ items:
             - string
           description: |
             The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: |
-            The ID of the application.
-        - id: version
+            The name of the application. This must be
+            unique within the account.
+        - id: versionName
           type:
             - string
           description: |
-            The version of the application to delete.
+            The version of the application.
         - id: options
           type:
             - Object
@@ -561,7 +580,7 @@ items:
     syntax:
       content: >-
         function get(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, options?: Object)
+        applicationName: string, versionName: string, options?: Object)
       parameters:
         - id: resourceGroupName
           type:
@@ -574,12 +593,13 @@ items:
             - string
           description: |
             The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: |
-            The ID of the application.
-        - id: version
+            The name of the application. This must be
+            unique within the account.
+        - id: versionName
           type:
             - string
           description: |
@@ -605,7 +625,7 @@ items:
     syntax:
       content: >-
         function get(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, options: Object, callback:
+        applicationName: string, versionName: string, options: Object, callback:
         ServiceCallback<ApplicationPackage>)
       parameters:
         - id: resourceGroupName
@@ -616,11 +636,11 @@ items:
           type:
             - string
           description: ''
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: ''
-        - id: version
+        - id: versionName
           type:
             - string
           description: ''
@@ -646,7 +666,7 @@ items:
     syntax:
       content: >-
         function get(resourceGroupName: string, accountName: string,
-        applicationId: string, version: string, callback:
+        applicationName: string, versionName: string, callback:
         ServiceCallback<ApplicationPackage>)
       parameters:
         - id: resourceGroupName
@@ -657,11 +677,11 @@ items:
           type:
             - string
           description: ''
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: ''
-        - id: version
+        - id: versionName
           type:
             - string
           description: ''
@@ -683,8 +703,8 @@ items:
     syntax:
       content: >-
         function getWithHttpOperationResponse(resourceGroupName: string,
-        accountName: string, applicationId: string, version: string, options?:
-        Object)
+        accountName: string, applicationName: string, versionName: string,
+        options?: Object)
       parameters:
         - id: resourceGroupName
           type:
@@ -697,12 +717,13 @@ items:
             - string
           description: |
             The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type:
             - string
           description: |
-            The ID of the application.
-        - id: version
+            The name of the application. This must be
+            unique within the account.
+        - id: versionName
           type:
             - string
           description: |
@@ -715,6 +736,263 @@ items:
       return:
         type:
           - Promise<HttpOperationResponse<azure-arm-batch.ApplicationPackage>>
+    package: azure-arm-batch
+  - uid: azure-arm-batch.ApplicationPackageOperations.list
+    name: 'list(string, string, string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Lists all of the application packages in the specified application.
+    syntax:
+      content: >-
+        function list(resourceGroupName: string, accountName: string,
+        applicationName: string, options?: Object)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |
+            The name of the resource group that
+            contains the Batch account.
+        - id: accountName
+          type:
+            - string
+          description: |
+            The name of the Batch account.
+        - id: applicationName
+          type:
+            - string
+          description: |
+            The name of the application. This must be
+            unique within the account.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<azure-arm-batch.ListApplicationPackagesResult>
+    package: azure-arm-batch
+  - uid: azure-arm-batch.ApplicationPackageOperations.list_2
+    name: >-
+      list(string, string, string, Object,
+      ServiceCallback<ListApplicationPackagesResult>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Lists all of the application packages in the specified application.
+    syntax:
+      content: >-
+        function list(resourceGroupName: string, accountName: string,
+        applicationName: string, options: Object, callback:
+        ServiceCallback<ListApplicationPackagesResult>)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: ''
+        - id: accountName
+          type:
+            - string
+          description: ''
+        - id: applicationName
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - Object
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<azure-arm-batch.ListApplicationPackagesResult>
+          description: ''
+      return:
+        type:
+          - Promise<azure-arm-batch.ListApplicationPackagesResult>
+    package: azure-arm-batch
+  - uid: azure-arm-batch.ApplicationPackageOperations.list_1
+    name: >-
+      list(string, string, string,
+      ServiceCallback<ListApplicationPackagesResult>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Lists all of the application packages in the specified application.
+    syntax:
+      content: >-
+        function list(resourceGroupName: string, accountName: string,
+        applicationName: string, callback:
+        ServiceCallback<ListApplicationPackagesResult>)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: ''
+        - id: accountName
+          type:
+            - string
+          description: ''
+        - id: applicationName
+          type:
+            - string
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<azure-arm-batch.ListApplicationPackagesResult>
+          description: ''
+      return:
+        type:
+          - Promise<azure-arm-batch.ListApplicationPackagesResult>
+    package: azure-arm-batch
+  - uid: azure-arm-batch.ApplicationPackageOperations.listNext
+    name: 'listNext(string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Lists all of the application packages in the specified application.
+    syntax:
+      content: 'function listNext(nextPageLink: string, options?: Object)'
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<azure-arm-batch.ListApplicationPackagesResult>
+    package: azure-arm-batch
+  - uid: azure-arm-batch.ApplicationPackageOperations.listNext_2
+    name: 'listNext(string, Object, ServiceCallback<ListApplicationPackagesResult>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Lists all of the application packages in the specified application.
+    syntax:
+      content: >-
+        function listNext(nextPageLink: string, options: Object, callback:
+        ServiceCallback<ListApplicationPackagesResult>)
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - Object
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<azure-arm-batch.ListApplicationPackagesResult>
+          description: ''
+      return:
+        type:
+          - Promise<azure-arm-batch.ListApplicationPackagesResult>
+    package: azure-arm-batch
+  - uid: azure-arm-batch.ApplicationPackageOperations.listNext_1
+    name: 'listNext(string, ServiceCallback<ListApplicationPackagesResult>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Lists all of the application packages in the specified application.
+    syntax:
+      content: >-
+        function listNext(nextPageLink: string, callback:
+        ServiceCallback<ListApplicationPackagesResult>)
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<azure-arm-batch.ListApplicationPackagesResult>
+          description: ''
+      return:
+        type:
+          - Promise<azure-arm-batch.ListApplicationPackagesResult>
+    package: azure-arm-batch
+  - uid: >-
+      azure-arm-batch.ApplicationPackageOperations.listNextWithHttpOperationResponse
+    name: 'listNextWithHttpOperationResponse(string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Lists all of the application packages in the specified application.
+    syntax:
+      content: >-
+        function listNextWithHttpOperationResponse(nextPageLink: string,
+        options?: Object)
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: |
+            The NextLink from the previous successful call
+            to List operation.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<HttpOperationResponse<azure-arm-batch.ListApplicationPackagesResult>>
+    package: azure-arm-batch
+  - uid: azure-arm-batch.ApplicationPackageOperations.listWithHttpOperationResponse
+    name: 'listWithHttpOperationResponse(string, string, string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Lists all of the application packages in the specified application.
+    syntax:
+      content: >-
+        function listWithHttpOperationResponse(resourceGroupName: string,
+        accountName: string, applicationName: string, options?: Object)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: |
+            The name of the resource group that
+            contains the Batch account.
+        - id: accountName
+          type:
+            - string
+          description: |
+            The name of the Batch account.
+        - id: applicationName
+          type:
+            - string
+          description: |
+            The name of the application. This must be
+            unique within the account.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<HttpOperationResponse<azure-arm-batch.ListApplicationPackagesResult>>
     package: azure-arm-batch
 references:
   - uid: Promise<azure-arm-batch.ApplicationPackage>
@@ -745,5 +1023,36 @@ references:
       - name: ApplicationPackage
         fullName: ApplicationPackage
         uid: azure-arm-batch.ApplicationPackage
+      - name: '>>'
+        fullName: '>>'
+  - uid: Promise<azure-arm-batch.ListApplicationPackagesResult>
+    name: ListApplicationPackagesResult>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ListApplicationPackagesResult
+        fullName: ListApplicationPackagesResult
+        uid: azure-arm-batch.ListApplicationPackagesResult
+      - name: '>'
+        fullName: '>'
+  - uid: ServiceCallback<azure-arm-batch.ListApplicationPackagesResult>
+    name: ListApplicationPackagesResult>
+    spec.typeScript:
+      - name: ServiceCallback<
+        fullName: ServiceCallback<
+      - name: ListApplicationPackagesResult
+        fullName: ListApplicationPackagesResult
+        uid: azure-arm-batch.ListApplicationPackagesResult
+      - name: '>'
+        fullName: '>'
+  - uid: >-
+      Promise<HttpOperationResponse<azure-arm-batch.ListApplicationPackagesResult>>
+    name: ListApplicationPackagesResult>>
+    spec.typeScript:
+      - name: Promise<HttpOperationResponse<
+        fullName: Promise<HttpOperationResponse<
+      - name: ListApplicationPackagesResult
+        fullName: ListApplicationPackagesResult
+        uid: azure-arm-batch.ListApplicationPackagesResult
       - name: '>>'
         fullName: '>>'

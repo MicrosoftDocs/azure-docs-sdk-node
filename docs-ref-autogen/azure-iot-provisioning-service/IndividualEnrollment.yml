@@ -4,22 +4,60 @@ items:
     name: IndividualEnrollment
     fullName: IndividualEnrollment
     children:
+      - azure-iot-provisioning-service.IndividualEnrollment.allocationPolicy
       - azure-iot-provisioning-service.IndividualEnrollment.attestation
       - azure-iot-provisioning-service.IndividualEnrollment.capabilities
       - azure-iot-provisioning-service.IndividualEnrollment.createdDateTimeUtc
+      - >-
+        azure-iot-provisioning-service.IndividualEnrollment.customAllocationDefinition
       - azure-iot-provisioning-service.IndividualEnrollment.deviceId
       - azure-iot-provisioning-service.IndividualEnrollment.etag
       - azure-iot-provisioning-service.IndividualEnrollment.initialTwin
       - azure-iot-provisioning-service.IndividualEnrollment.iotHubHostName
+      - azure-iot-provisioning-service.IndividualEnrollment.iotHubs
       - >-
         azure-iot-provisioning-service.IndividualEnrollment.lastUpdatedDateTimeUtc
       - azure-iot-provisioning-service.IndividualEnrollment.provisioningStatus
       - azure-iot-provisioning-service.IndividualEnrollment.registrationId
       - azure-iot-provisioning-service.IndividualEnrollment.registrationState
+      - azure-iot-provisioning-service.IndividualEnrollment.reprovisionPolicy
     langs:
       - typeScript
     type: interface
     summary: The individual enrollment record.
+    package: azure-iot-provisioning-service
+  - uid: azure-iot-provisioning-service.IndividualEnrollment.allocationPolicy
+    name: allocationPolicy
+    fullName: allocationPolicy
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The allocation policy of this individual enrollment. This policy overrides
+      the tenant-level allocation policy.
+
+      - 'hashed': Linked IoT hubs are equally likely to have devices provisioned
+      to them.
+
+      - 'geoLatency':  Devices are provisioned to an IoT hub with the lowest
+      latency to the device.If multiple linked IoT hubs would provide the same
+      lowest latency, the provisioning service hashes devices across those hubs.
+
+      - 'static' : Specification of the desired IoT hub in the enrollment list
+      takes priority over the service-level allocation policy.
+
+      - 'custom': Devices are provisioned to an IoT hub based on your own custom
+      logic. The provisioning service passes information about the device to the
+      logic, and the logic returns the desired IoT hub as well as the desired
+      initial configuration. We recommend using Azure Functions to host your
+      logic.
+    optional: true
+    syntax:
+      content: 'allocationPolicy?: AllocationPolicyType'
+      return:
+        type:
+          - azure-iot-provisioning-service.AllocationPolicyType
     package: azure-iot-provisioning-service
   - uid: azure-iot-provisioning-service.IndividualEnrollment.attestation
     name: attestation
@@ -65,6 +103,22 @@ items:
       return:
         type:
           - string
+    package: azure-iot-provisioning-service
+  - uid: >-
+      azure-iot-provisioning-service.IndividualEnrollment.customAllocationDefinition
+    name: customAllocationDefinition
+    fullName: customAllocationDefinition
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Custom allocation definition.
+    optional: true
+    syntax:
+      content: 'customAllocationDefinition?: CustomAllocationDefinition'
+      return:
+        type:
+          - azure-iot-provisioning-service.CustomAllocationDefinition
     package: azure-iot-provisioning-service
   - uid: azure-iot-provisioning-service.IndividualEnrollment.deviceId
     name: deviceId
@@ -133,6 +187,22 @@ items:
         type:
           - string
     package: azure-iot-provisioning-service
+  - uid: azure-iot-provisioning-service.IndividualEnrollment.iotHubs
+    name: iotHubs
+    fullName: iotHubs
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The list of names of IoT hubs the device(s) in this resource can be
+      allocated to. It must be a subset of tenant level list of IoT hubs.
+    syntax:
+      content: 'iotHubs: string[]'
+      return:
+        type:
+          - 'string[]'
+    package: azure-iot-provisioning-service
   - uid: azure-iot-provisioning-service.IndividualEnrollment.lastUpdatedDateTimeUtc
     name: lastUpdatedDateTimeUtc
     fullName: lastUpdatedDateTimeUtc
@@ -195,7 +265,28 @@ items:
         type:
           - azure-iot-provisioning-service.DeviceRegistrationState
     package: azure-iot-provisioning-service
+  - uid: azure-iot-provisioning-service.IndividualEnrollment.reprovisionPolicy
+    name: reprovisionPolicy
+    fullName: reprovisionPolicy
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The behavior when a device is re-provisioned to an IoT hub.
+    optional: true
+    syntax:
+      content: 'reprovisionPolicy?: ReprovisionPolicy'
+      return:
+        type:
+          - azure-iot-provisioning-service.ReprovisionPolicy
+    package: azure-iot-provisioning-service
 references:
+  - uid: azure-iot-provisioning-service.AllocationPolicyType
+    name: AllocationPolicyType
+    spec.typeScript:
+      - name: AllocationPolicyType
+        fullName: AllocationPolicyType
+        uid: azure-iot-provisioning-service.AllocationPolicyType
   - uid: azure-iot-provisioning-service.AttestationMechanism
     name: AttestationMechanism
     spec.typeScript:
@@ -208,6 +299,12 @@ references:
       - name: DeviceCapabilities
         fullName: DeviceCapabilities
         uid: azure-iot-provisioning-service.DeviceCapabilities
+  - uid: azure-iot-provisioning-service.CustomAllocationDefinition
+    name: CustomAllocationDefinition
+    spec.typeScript:
+      - name: CustomAllocationDefinition
+        fullName: CustomAllocationDefinition
+        uid: azure-iot-provisioning-service.CustomAllocationDefinition
   - uid: azure-iot-provisioning-service.InitialTwin
     name: InitialTwin
     spec.typeScript:
@@ -226,3 +323,9 @@ references:
       - name: DeviceRegistrationState
         fullName: DeviceRegistrationState
         uid: azure-iot-provisioning-service.DeviceRegistrationState
+  - uid: azure-iot-provisioning-service.ReprovisionPolicy
+    name: ReprovisionPolicy
+    spec.typeScript:
+      - name: ReprovisionPolicy
+        fullName: ReprovisionPolicy
+        uid: azure-iot-provisioning-service.ReprovisionPolicy

@@ -5,6 +5,7 @@ items:
     fullName: StartTask
     children:
       - azure-arm-batch.StartTask.commandLine
+      - azure-arm-batch.StartTask.containerSettings
       - azure-arm-batch.StartTask.environmentSettings
       - azure-arm-batch.StartTask.maxTaskRetryCount
       - azure-arm-batch.StartTask.resourceFiles
@@ -22,13 +23,50 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The command line does not run under a shell, and therefore cannot take
+      advantage
+
+      of shell features such as environment variable expansion. If you want to
+      take advantage of
+
+      such features, you should invoke the shell in the command line, for
+      example using "cmd /c
+
+      MyCommand" in Windows or "/bin/sh -c MyCommand" in Linux. Required if any
+      other properties of
+
+      the startTask are specified.
     optional: true
     syntax:
       content: 'commandLine?: string'
       return:
         type:
           - string
+    package: azure-arm-batch
+  - uid: azure-arm-batch.StartTask.containerSettings
+    name: containerSettings
+    fullName: containerSettings
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      When this is specified, all directories recursively below the
+
+      AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node)
+      are mapped into the
+
+      container, all task environment variables are mapped into the container,
+      and the task command
+
+      line is executed in the container.
+    optional: true
+    syntax:
+      content: 'containerSettings?: TaskContainerSettings'
+      return:
+        type:
+          - azure-arm-batch.TaskContainerSettings
     package: azure-arm-batch
   - uid: azure-arm-batch.StartTask.environmentSettings
     name: environmentSettings
@@ -52,7 +90,23 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The Batch service retries a task if its exit code is nonzero. Note that
+      this
+
+      value specifically controls the number of retries. The Batch service will
+      try the task once,
+
+      and may then retry up to this limit. For example, if the maximum retry
+      count is 3, Batch tries
+
+      the task up to 4 times (one initial try and 3 retries). If the maximum
+      retry count is 0, the
+
+      Batch service does not retry the task. If the maximum retry count is -1,
+      the Batch service
+
+      retries the task without limit.
     optional: true
     syntax:
       content: 'maxTaskRetryCount?: number'
@@ -82,7 +136,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'If omitted, the task runs as a non-administrative user unique to the task.'
     optional: true
     syntax:
       content: 'userIdentity?: UserIdentity'
@@ -97,7 +151,29 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If true and the start task fails on a compute node, the Batch service
+      retries the
+
+      start task up to its maximum retry count (maxTaskRetryCount). If the task
+      has still not
+
+      completed successfully after all retries, then the Batch service marks the
+      compute node
+
+      unusable, and will not schedule tasks to it. This condition can be
+      detected via the node state
+
+      and scheduling error detail. If false, the Batch service will not wait for
+      the start task to
+
+      complete. In this case, other tasks can start executing on the compute
+      node while the start
+
+      task is still running; and even if the start task fails, new tasks will
+      continue to be
+
+      scheduled on the node. The default is false.
     optional: true
     syntax:
       content: 'waitForSuccess?: boolean'
@@ -106,6 +182,12 @@ items:
           - boolean
     package: azure-arm-batch
 references:
+  - uid: azure-arm-batch.TaskContainerSettings
+    name: TaskContainerSettings
+    spec.typeScript:
+      - name: TaskContainerSettings
+        fullName: TaskContainerSettings
+        uid: azure-arm-batch.TaskContainerSettings
   - uid: 'azure-arm-batch.EnvironmentSetting[]'
     name: 'EnvironmentSetting[]'
     spec.typeScript:

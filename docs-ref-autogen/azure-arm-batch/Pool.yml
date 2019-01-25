@@ -31,7 +31,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Contains information about a pool.
     extends:
       name: azure-arm-batch.ProxyResource
     package: azure-arm-batch
@@ -42,7 +42,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'Possible values include: ''Steady'', ''Resizing'', ''Stopping'''
     optional: true
     syntax:
       content: 'allocationState?: string'
@@ -72,7 +72,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The list of application licenses must be a subset of available Batch
+      service
+
+      application licenses. If a license is requested which is not supported,
+      pool creation will
+
+      fail.
     optional: true
     syntax:
       content: 'applicationLicenses?: string[]'
@@ -87,7 +94,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Changes to application packages affect all new compute nodes joining the
+      pool,
+
+      but do not affect compute nodes that are already in the pool until they
+      are rebooted or
+
+      reimaged.
     optional: true
     syntax:
       content: 'applicationPackages?: ApplicationPackageReference[]'
@@ -102,7 +116,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |-
+      This property is set only if the pool automatically scales, i.e.
+      autoScaleSettings are used.
     optional: true
     syntax:
       content: 'autoScaleRun?: AutoScaleRun'
@@ -117,7 +133,24 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      For Windows compute nodes, the Batch service installs the certificates to
+      the
+
+      specified certificate store and location. For Linux compute nodes, the
+      certificates are stored
+
+      in a directory inside the task working directory and an environment
+      variable
+
+      AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this
+      location. For certificates
+
+      with visibility of 'remoteUser', a 'certs' directory is created in the
+      user's home directory
+
+      (e.g., /home/{user-name}/certs) and certificates are placed in that
+      directory.
     optional: true
     syntax:
       content: 'certificates?: CertificateReference[]'
@@ -177,7 +210,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Using CloudServiceConfiguration specifies that the nodes should be
+      creating using
+
+      Azure Cloud Services (PaaS), while VirtualMachineConfiguration uses Azure
+      Virtual Machines
+
+      (IaaS).
     optional: true
     syntax:
       content: 'deploymentConfiguration?: DeploymentConfiguration'
@@ -192,7 +232,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The display name need not be unique and can contain any Unicode characters
+      up to
+
+      a maximum length of 1024.
     optional: true
     syntax:
       content: 'displayName?: string'
@@ -207,7 +251,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This imposes restrictions on which nodes can be assigned to the pool.
+      Enabling
+
+      this value can reduce the chance of the requested number of nodes to be
+      allocated in the pool.
+
+      If not specified, this value defaults to 'Disabled'. Possible values
+      include: 'Enabled',
+
+      'Disabled'
     optional: true
     syntax:
       content: 'interNodeCommunication?: string'
@@ -222,7 +276,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      This is the last time at which the pool level data, such as the
+
+      targetDedicatedNodes or autoScaleSettings, changed. It does not factor in
+      node-level changes
+
+      such as a compute node changing state.
     optional: true
     syntax:
       content: 'lastModified?: Date'
@@ -252,7 +312,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The Batch service does not assign any meaning to metadata; it is solely
+      for the
+
+      use of user code.
     optional: true
     syntax:
       content: 'metadata?: MetadataItem[]'
@@ -282,7 +346,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'Possible values include: ''Succeeded'', ''Deleting'''
     optional: true
     syntax:
       content: 'provisioningState?: string'
@@ -342,7 +406,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      In an PATCH (update) operation, this property can be set to an empty
+      object to
+
+      remove the start task from the pool.
     optional: true
     syntax:
       content: 'startTask?: StartTask'
@@ -387,7 +455,36 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      For information about available sizes of virtual machines for Cloud
+      Services
+
+      pools (pools created with cloudServiceConfiguration), see Sizes for Cloud
+      Services
+
+      (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/).
+      Batch
+
+      supports all Cloud Services VM sizes except ExtraSmall. For information
+      about available VM
+
+      sizes for pools using images from the Virtual Machines Marketplace (pools
+      created with
+
+      virtualMachineConfiguration) see Sizes for Virtual Machines (Linux)
+
+      (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/)
+      or Sizes
+
+      for Virtual Machines (Windows)
+
+      (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/).
+      Batch
+
+      supports all Azure VM sizes except STANDARD_A0 and those with premium
+      storage (STANDARD_GS,
+
+      STANDARD_DS, and STANDARD_DSV2 series).
     optional: true
     syntax:
       content: 'vmSize?: string'

@@ -5,7 +5,7 @@ author: rloutlaw
 manager: routlaw
 ms.author: routlaw
 ms.date: 06/17/2017
-ms.topic: get-started-article
+ms.topic: conceptual
 ms.prod: azure
 ms.devlang: nodejs
 ms.service: azure-nodejs

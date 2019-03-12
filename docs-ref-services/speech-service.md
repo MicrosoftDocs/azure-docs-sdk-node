@@ -10,7 +10,7 @@ ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: cognitive-services
-ms.component: speech-service
+ms.subservice: speech-service
 ---
 
 # Cognitive Services Speech SDK for JavaScript

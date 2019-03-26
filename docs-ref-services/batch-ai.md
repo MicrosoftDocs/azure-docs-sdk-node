@@ -15,4 +15,4 @@ ms.service: batch-ai
 # Batch AI Modules for Node.js
 
 >[!NOTE]
->**Azure Batch AI service has been retired.** The capabilities of Azure Batch AI are now available as a managed compute target in Azure Machine Learning service. For more information, see [What happened to Batch AI?](https://docs.microsoft.com/previous-versions/azure/batch-ai/overview-what-happened-batch-ai)
+>**Azure Batch AI service has been retired.** The capabilities of Azure Batch AI are now available as a managed compute target in Azure Machine Learning service. For more information, see [What happened to Batch AI?](https://aka.ms/batchai-retirement)

@@ -1,0 +1,1672 @@
+### YamlMime:UniversalReference
+items:
+  - uid: azure-cognitiveservices-face.SnapshotOperations
+    name: SnapshotOperations
+    fullName: SnapshotOperations
+    children:
+      - azure-cognitiveservices-face.SnapshotOperations.apply
+      - azure-cognitiveservices-face.SnapshotOperations.apply_2
+      - azure-cognitiveservices-face.SnapshotOperations.apply_1
+      - >-
+        azure-cognitiveservices-face.SnapshotOperations.applyWithHttpOperationResponse
+      - azure-cognitiveservices-face.SnapshotOperations.deleteMethod
+      - azure-cognitiveservices-face.SnapshotOperations.deleteMethod_2
+      - azure-cognitiveservices-face.SnapshotOperations.deleteMethod_1
+      - >-
+        azure-cognitiveservices-face.SnapshotOperations.deleteMethodWithHttpOperationResponse
+      - azure-cognitiveservices-face.SnapshotOperations.get
+      - azure-cognitiveservices-face.SnapshotOperations.get_2
+      - azure-cognitiveservices-face.SnapshotOperations.get_1
+      - azure-cognitiveservices-face.SnapshotOperations.getOperationStatus
+      - azure-cognitiveservices-face.SnapshotOperations.getOperationStatus_2
+      - azure-cognitiveservices-face.SnapshotOperations.getOperationStatus_1
+      - >-
+        azure-cognitiveservices-face.SnapshotOperations.getOperationStatusWithHttpOperationResponse
+      - >-
+        azure-cognitiveservices-face.SnapshotOperations.getWithHttpOperationResponse
+      - azure-cognitiveservices-face.SnapshotOperations.list
+      - azure-cognitiveservices-face.SnapshotOperations.list_2
+      - azure-cognitiveservices-face.SnapshotOperations.list_1
+      - >-
+        azure-cognitiveservices-face.SnapshotOperations.listWithHttpOperationResponse
+      - azure-cognitiveservices-face.SnapshotOperations.take
+      - azure-cognitiveservices-face.SnapshotOperations.take_2
+      - azure-cognitiveservices-face.SnapshotOperations.take_1
+      - >-
+        azure-cognitiveservices-face.SnapshotOperations.takeWithHttpOperationResponse
+      - azure-cognitiveservices-face.SnapshotOperations.update
+      - azure-cognitiveservices-face.SnapshotOperations.update_2
+      - azure-cognitiveservices-face.SnapshotOperations.update_1
+      - >-
+        azure-cognitiveservices-face.SnapshotOperations.updateWithHttpOperationResponse
+    langs:
+      - typeScript
+    type: interface
+    summary: ''
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.apply
+    name: 'apply(string, string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Submit an operation to apply a snapshot to current subscription. For each
+
+      snapshot, only subscriptions included in the applyScope of Snapshot - Take
+
+      can apply it.<br />
+
+      The snapshot interfaces are for users to backup and restore their face
+      data
+
+      from one face subscription to another, inside same region or across
+      regions.
+
+      The workflow contains two phases, user first calls Snapshot - Take to
+      create
+
+      a copy of the source object and store it as a snapshot, then calls
+      Snapshot
+
+      - Apply to paste the snapshot to target subscription. The snapshots are
+
+      stored in a centralized location (per Azure instance), so that they can be
+
+      applied cross accounts and regions.<br />
+
+      Applying snapshot is an asynchronous operation. An operation id can be
+
+      obtained from the "Operation-Location" field in response header, to be
+      used
+
+      in OperationStatus - Get for tracking the progress of applying the
+      snapshot.
+
+      The target object id will be included in the "resourceLocation" field in
+
+      OperationStatus - Get response when the operation status is
+      "succeeded".<br
+
+      />
+
+      Snapshot applying time depends on the number of person and face entries in
+
+      the snapshot object. It could be in seconds, or up to 1 hour for 1,000,000
+
+      persons with multiple faces.<br />
+
+      Snapshots will be automatically expired and cleaned in 48 hours after it
+      is
+
+      created by Snapshot - Take. So the target subscription is required to
+      apply
+
+      the snapshot in 48 hours since its creation.<br />
+
+      Applying a snapshot will not block any other operations against the target
+
+      object, however it is not recommended because the correctness cannot be
+
+      guaranteed during snapshot applying. After snapshot applying is completed,
+
+      all operations towards the target object can work as normal. Snapshot also
+
+      includes the training results of the source object, which means target
+
+      subscription the snapshot applied to does not need re-train the target
+
+      object before calling Identify/FindSimilar.<br />
+
+      One snapshot can be applied multiple times in parallel, while currently
+      only
+
+      CreateNew apply mode is supported, which means the apply operation will
+      fail
+
+      if target subscription already contains an object of same type and using
+      the
+
+      same objectId. Users can specify the "objectId" in request body to avoid
+
+      such conflicts.<br />
+
+      * Free-tier subscription quota: 100 apply operations per month.
+
+      * S0-tier subscription quota: 100 apply operations per day.
+    syntax:
+      content: 'function apply(snapshotId: string, objectId: string, options?: Object)'
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: |
+            Id referencing a particular snapshot.
+        - id: objectId
+          type:
+            - string
+          description: |
+            User specified target object id to be created from
+            the snapshot.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.apply_2
+    name: 'apply(string, string, Object, ServiceCallback<void>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Submit an operation to apply a snapshot to current subscription. For each
+
+      snapshot, only subscriptions included in the applyScope of Snapshot - Take
+
+      can apply it.<br />
+
+      The snapshot interfaces are for users to backup and restore their face
+      data
+
+      from one face subscription to another, inside same region or across
+      regions.
+
+      The workflow contains two phases, user first calls Snapshot - Take to
+      create
+
+      a copy of the source object and store it as a snapshot, then calls
+      Snapshot
+
+      - Apply to paste the snapshot to target subscription. The snapshots are
+
+      stored in a centralized location (per Azure instance), so that they can be
+
+      applied cross accounts and regions.<br />
+
+      Applying snapshot is an asynchronous operation. An operation id can be
+
+      obtained from the "Operation-Location" field in response header, to be
+      used
+
+      in OperationStatus - Get for tracking the progress of applying the
+      snapshot.
+
+      The target object id will be included in the "resourceLocation" field in
+
+      OperationStatus - Get response when the operation status is
+      "succeeded".<br
+
+      />
+
+      Snapshot applying time depends on the number of person and face entries in
+
+      the snapshot object. It could be in seconds, or up to 1 hour for 1,000,000
+
+      persons with multiple faces.<br />
+
+      Snapshots will be automatically expired and cleaned in 48 hours after it
+      is
+
+      created by Snapshot - Take. So the target subscription is required to
+      apply
+
+      the snapshot in 48 hours since its creation.<br />
+
+      Applying a snapshot will not block any other operations against the target
+
+      object, however it is not recommended because the correctness cannot be
+
+      guaranteed during snapshot applying. After snapshot applying is completed,
+
+      all operations towards the target object can work as normal. Snapshot also
+
+      includes the training results of the source object, which means target
+
+      subscription the snapshot applied to does not need re-train the target
+
+      object before calling Identify/FindSimilar.<br />
+
+      One snapshot can be applied multiple times in parallel, while currently
+      only
+
+      CreateNew apply mode is supported, which means the apply operation will
+      fail
+
+      if target subscription already contains an object of same type and using
+      the
+
+      same objectId. Users can specify the "objectId" in request body to avoid
+
+      such conflicts.<br />
+
+      * Free-tier subscription quota: 100 apply operations per month.
+
+      * S0-tier subscription quota: 100 apply operations per day.
+    syntax:
+      content: >-
+        function apply(snapshotId: string, objectId: string, options: Object,
+        callback: ServiceCallback<void>)
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: ''
+        - id: objectId
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - Object
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<void>
+          description: ''
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.apply_1
+    name: 'apply(string, string, ServiceCallback<void>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Submit an operation to apply a snapshot to current subscription. For each
+
+      snapshot, only subscriptions included in the applyScope of Snapshot - Take
+
+      can apply it.<br />
+
+      The snapshot interfaces are for users to backup and restore their face
+      data
+
+      from one face subscription to another, inside same region or across
+      regions.
+
+      The workflow contains two phases, user first calls Snapshot - Take to
+      create
+
+      a copy of the source object and store it as a snapshot, then calls
+      Snapshot
+
+      - Apply to paste the snapshot to target subscription. The snapshots are
+
+      stored in a centralized location (per Azure instance), so that they can be
+
+      applied cross accounts and regions.<br />
+
+      Applying snapshot is an asynchronous operation. An operation id can be
+
+      obtained from the "Operation-Location" field in response header, to be
+      used
+
+      in OperationStatus - Get for tracking the progress of applying the
+      snapshot.
+
+      The target object id will be included in the "resourceLocation" field in
+
+      OperationStatus - Get response when the operation status is
+      "succeeded".<br
+
+      />
+
+      Snapshot applying time depends on the number of person and face entries in
+
+      the snapshot object. It could be in seconds, or up to 1 hour for 1,000,000
+
+      persons with multiple faces.<br />
+
+      Snapshots will be automatically expired and cleaned in 48 hours after it
+      is
+
+      created by Snapshot - Take. So the target subscription is required to
+      apply
+
+      the snapshot in 48 hours since its creation.<br />
+
+      Applying a snapshot will not block any other operations against the target
+
+      object, however it is not recommended because the correctness cannot be
+
+      guaranteed during snapshot applying. After snapshot applying is completed,
+
+      all operations towards the target object can work as normal. Snapshot also
+
+      includes the training results of the source object, which means target
+
+      subscription the snapshot applied to does not need re-train the target
+
+      object before calling Identify/FindSimilar.<br />
+
+      One snapshot can be applied multiple times in parallel, while currently
+      only
+
+      CreateNew apply mode is supported, which means the apply operation will
+      fail
+
+      if target subscription already contains an object of same type and using
+      the
+
+      same objectId. Users can specify the "objectId" in request body to avoid
+
+      such conflicts.<br />
+
+      * Free-tier subscription quota: 100 apply operations per month.
+
+      * S0-tier subscription quota: 100 apply operations per day.
+    syntax:
+      content: >-
+        function apply(snapshotId: string, objectId: string, callback:
+        ServiceCallback<void>)
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: ''
+        - id: objectId
+          type:
+            - string
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<void>
+          description: ''
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: >-
+      azure-cognitiveservices-face.SnapshotOperations.applyWithHttpOperationResponse
+    name: 'applyWithHttpOperationResponse(string, string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Submit an operation to apply a snapshot to current subscription. For each
+
+      snapshot, only subscriptions included in the applyScope of Snapshot - Take
+
+      can apply it.<br />
+
+      The snapshot interfaces are for users to backup and restore their face
+      data
+
+      from one face subscription to another, inside same region or across
+      regions.
+
+      The workflow contains two phases, user first calls Snapshot - Take to
+      create
+
+      a copy of the source object and store it as a snapshot, then calls
+      Snapshot
+
+      - Apply to paste the snapshot to target subscription. The snapshots are
+
+      stored in a centralized location (per Azure instance), so that they can be
+
+      applied cross accounts and regions.<br />
+
+      Applying snapshot is an asynchronous operation. An operation id can be
+
+      obtained from the "Operation-Location" field in response header, to be
+      used
+
+      in OperationStatus - Get for tracking the progress of applying the
+      snapshot.
+
+      The target object id will be included in the "resourceLocation" field in
+
+      OperationStatus - Get response when the operation status is
+      "succeeded".<br
+
+      />
+
+      Snapshot applying time depends on the number of person and face entries in
+
+      the snapshot object. It could be in seconds, or up to 1 hour for 1,000,000
+
+      persons with multiple faces.<br />
+
+      Snapshots will be automatically expired and cleaned in 48 hours after it
+      is
+
+      created by Snapshot - Take. So the target subscription is required to
+      apply
+
+      the snapshot in 48 hours since its creation.<br />
+
+      Applying a snapshot will not block any other operations against the target
+
+      object, however it is not recommended because the correctness cannot be
+
+      guaranteed during snapshot applying. After snapshot applying is completed,
+
+      all operations towards the target object can work as normal. Snapshot also
+
+      includes the training results of the source object, which means target
+
+      subscription the snapshot applied to does not need re-train the target
+
+      object before calling Identify/FindSimilar.<br />
+
+      One snapshot can be applied multiple times in parallel, while currently
+      only
+
+      CreateNew apply mode is supported, which means the apply operation will
+      fail
+
+      if target subscription already contains an object of same type and using
+      the
+
+      same objectId. Users can specify the "objectId" in request body to avoid
+
+      such conflicts.<br />
+
+      * Free-tier subscription quota: 100 apply operations per month.
+
+      * S0-tier subscription quota: 100 apply operations per day.
+    syntax:
+      content: >-
+        function applyWithHttpOperationResponse(snapshotId: string, objectId:
+        string, options?: Object)
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: |
+            Id referencing a particular snapshot.
+        - id: objectId
+          type:
+            - string
+          description: |
+            User specified target object id to be created from
+            the snapshot.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<HttpOperationResponse<void>>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.deleteMethod
+    name: 'deleteMethod(string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Delete an existing snapshot according to the snapshotId. All object data
+      and
+
+      information in the snapshot will also be deleted. Only the source
+
+      subscription who took the snapshot can delete the snapshot. If the user
+      does
+
+      not delete a snapshot with this API, the snapshot will still be
+
+      automatically deleted in 48 hours after creation.
+    syntax:
+      content: 'function deleteMethod(snapshotId: string, options?: Object)'
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: |
+            Id referencing a particular snapshot.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.deleteMethod_2
+    name: 'deleteMethod(string, Object, ServiceCallback<void>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Delete an existing snapshot according to the snapshotId. All object data
+      and
+
+      information in the snapshot will also be deleted. Only the source
+
+      subscription who took the snapshot can delete the snapshot. If the user
+      does
+
+      not delete a snapshot with this API, the snapshot will still be
+
+      automatically deleted in 48 hours after creation.
+    syntax:
+      content: >-
+        function deleteMethod(snapshotId: string, options: Object, callback:
+        ServiceCallback<void>)
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - Object
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<void>
+          description: ''
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.deleteMethod_1
+    name: 'deleteMethod(string, ServiceCallback<void>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Delete an existing snapshot according to the snapshotId. All object data
+      and
+
+      information in the snapshot will also be deleted. Only the source
+
+      subscription who took the snapshot can delete the snapshot. If the user
+      does
+
+      not delete a snapshot with this API, the snapshot will still be
+
+      automatically deleted in 48 hours after creation.
+    syntax:
+      content: >-
+        function deleteMethod(snapshotId: string, callback:
+        ServiceCallback<void>)
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<void>
+          description: ''
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: >-
+      azure-cognitiveservices-face.SnapshotOperations.deleteMethodWithHttpOperationResponse
+    name: 'deleteMethodWithHttpOperationResponse(string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Delete an existing snapshot according to the snapshotId. All object data
+      and
+
+      information in the snapshot will also be deleted. Only the source
+
+      subscription who took the snapshot can delete the snapshot. If the user
+      does
+
+      not delete a snapshot with this API, the snapshot will still be
+
+      automatically deleted in 48 hours after creation.
+    syntax:
+      content: >-
+        function deleteMethodWithHttpOperationResponse(snapshotId: string,
+        options?: Object)
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: |
+            Id referencing a particular snapshot.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<HttpOperationResponse<void>>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.get
+    name: 'get(string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Retrieve information about a snapshot. Snapshot is only accessible to the
+      source subscription who took it, and target subscriptions included in the
+      applyScope in Snapshot - Take.
+    syntax:
+      content: 'function get(snapshotId: string, options?: Object)'
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: |
+            Id referencing a particular snapshot.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<azure-cognitiveservices-face.Snapshot>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.get_2
+    name: 'get(string, Object, ServiceCallback<Snapshot>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Retrieve information about a snapshot. Snapshot is only accessible to the
+      source subscription who took it, and target subscriptions included in the
+      applyScope in Snapshot - Take.
+    syntax:
+      content: >-
+        function get(snapshotId: string, options: Object, callback:
+        ServiceCallback<Snapshot>)
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - Object
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<azure-cognitiveservices-face.Snapshot>
+          description: ''
+      return:
+        type:
+          - Promise<azure-cognitiveservices-face.Snapshot>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.get_1
+    name: 'get(string, ServiceCallback<Snapshot>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Retrieve information about a snapshot. Snapshot is only accessible to the
+      source subscription who took it, and target subscriptions included in the
+      applyScope in Snapshot - Take.
+    syntax:
+      content: 'function get(snapshotId: string, callback: ServiceCallback<Snapshot>)'
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<azure-cognitiveservices-face.Snapshot>
+          description: ''
+      return:
+        type:
+          - Promise<azure-cognitiveservices-face.Snapshot>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.getOperationStatus
+    name: 'getOperationStatus(string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Retrieve the status of a take/apply snapshot operation.
+    syntax:
+      content: 'function getOperationStatus(operationId: string, options?: Object)'
+      parameters:
+        - id: operationId
+          type:
+            - string
+          description: |
+            Id referencing a particular take/apply snapshot
+            operation.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<azure-cognitiveservices-face.OperationStatus>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.getOperationStatus_2
+    name: 'getOperationStatus(string, Object, ServiceCallback<OperationStatus>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Retrieve the status of a take/apply snapshot operation.
+    syntax:
+      content: >-
+        function getOperationStatus(operationId: string, options: Object,
+        callback: ServiceCallback<OperationStatus>)
+      parameters:
+        - id: operationId
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - Object
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<azure-cognitiveservices-face.OperationStatus>
+          description: ''
+      return:
+        type:
+          - Promise<azure-cognitiveservices-face.OperationStatus>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.getOperationStatus_1
+    name: 'getOperationStatus(string, ServiceCallback<OperationStatus>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Retrieve the status of a take/apply snapshot operation.
+    syntax:
+      content: >-
+        function getOperationStatus(operationId: string, callback:
+        ServiceCallback<OperationStatus>)
+      parameters:
+        - id: operationId
+          type:
+            - string
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<azure-cognitiveservices-face.OperationStatus>
+          description: ''
+      return:
+        type:
+          - Promise<azure-cognitiveservices-face.OperationStatus>
+    package: azure-cognitiveservices-face
+  - uid: >-
+      azure-cognitiveservices-face.SnapshotOperations.getOperationStatusWithHttpOperationResponse
+    name: 'getOperationStatusWithHttpOperationResponse(string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Retrieve the status of a take/apply snapshot operation.
+    syntax:
+      content: >-
+        function getOperationStatusWithHttpOperationResponse(operationId:
+        string, options?: Object)
+      parameters:
+        - id: operationId
+          type:
+            - string
+          description: |
+            Id referencing a particular take/apply snapshot
+            operation.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<HttpOperationResponse<azure-cognitiveservices-face.OperationStatus>>
+    package: azure-cognitiveservices-face
+  - uid: >-
+      azure-cognitiveservices-face.SnapshotOperations.getWithHttpOperationResponse
+    name: 'getWithHttpOperationResponse(string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Retrieve information about a snapshot. Snapshot is only accessible to the
+      source subscription who took it, and target subscriptions included in the
+      applyScope in Snapshot - Take.
+    syntax:
+      content: >-
+        function getWithHttpOperationResponse(snapshotId: string, options?:
+        Object)
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: |
+            Id referencing a particular snapshot.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<HttpOperationResponse<azure-cognitiveservices-face.Snapshot>>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.list
+    name: list(Object)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      List all accessible snapshots with related information, including
+      snapshots
+
+      that were taken by the user, or snapshots to be applied to the user
+
+      (subscription id was included in the applyScope in Snapshot - Take).
+    syntax:
+      content: 'function list(options?: Object)'
+      parameters:
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - 'Promise<azure-cognitiveservices-face.Snapshot[]>'
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.list_2
+    name: 'list(Object, ServiceCallback<Snapshot[]>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      List all accessible snapshots with related information, including
+      snapshots
+
+      that were taken by the user, or snapshots to be applied to the user
+
+      (subscription id was included in the applyScope in Snapshot - Take).
+    syntax:
+      content: 'function list(options: Object, callback: ServiceCallback<Snapshot[]>)'
+      parameters:
+        - id: options
+          type:
+            - Object
+          description: ''
+        - id: callback
+          type:
+            - 'ServiceCallback<azure-cognitiveservices-face.Snapshot[]>'
+          description: ''
+      return:
+        type:
+          - 'Promise<azure-cognitiveservices-face.Snapshot[]>'
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.list_1
+    name: 'list(ServiceCallback<Snapshot[]>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      List all accessible snapshots with related information, including
+      snapshots
+
+      that were taken by the user, or snapshots to be applied to the user
+
+      (subscription id was included in the applyScope in Snapshot - Take).
+    syntax:
+      content: 'function list(callback: ServiceCallback<Snapshot[]>)'
+      parameters:
+        - id: callback
+          type:
+            - 'ServiceCallback<azure-cognitiveservices-face.Snapshot[]>'
+          description: ''
+      return:
+        type:
+          - 'Promise<azure-cognitiveservices-face.Snapshot[]>'
+    package: azure-cognitiveservices-face
+  - uid: >-
+      azure-cognitiveservices-face.SnapshotOperations.listWithHttpOperationResponse
+    name: listWithHttpOperationResponse(Object)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      List all accessible snapshots with related information, including
+      snapshots
+
+      that were taken by the user, or snapshots to be applied to the user
+
+      (subscription id was included in the applyScope in Snapshot - Take).
+    syntax:
+      content: 'function listWithHttpOperationResponse(options?: Object)'
+      parameters:
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<HttpOperationResponse<azure-cognitiveservices-face.Snapshot[]>>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.take
+    name: 'take(string, string, string[], Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Submit an operation to take a snapshot of face list, large face list,
+      person
+
+      group or large person group, with user-specified snapshot type, source
+
+      object id, apply scope and an optional user data.<br />
+
+      The snapshot interfaces are for users to backup and restore their face
+      data
+
+      from one face subscription to another, inside same region or across
+      regions.
+
+      The workflow contains two phases, user first calls Snapshot - Take to
+      create
+
+      a copy of the source object and store it as a snapshot, then calls
+      Snapshot
+
+      - Apply to paste the snapshot to target subscription. The snapshots are
+
+      stored in a centralized location (per Azure instance), so that they can be
+
+      applied cross accounts and regions.<br />
+
+      Taking snapshot is an asynchronous operation. An operation id can be
+
+      obtained from the "Operation-Location" field in response header, to be
+      used
+
+      in OperationStatus - Get for tracking the progress of creating the
+      snapshot.
+
+      The snapshot id will be included in the "resourceLocation" field in
+
+      OperationStatus - Get response when the operation status is
+      "succeeded".<br
+
+      />
+
+      Snapshot taking time depends on the number of person and face entries in
+      the
+
+      source object. It could be in seconds, or up to several hours for
+      1,000,000
+
+      persons with multiple faces.<br />
+
+      Snapshots will be automatically expired and cleaned in 48 hours after it
+      is
+
+      created by Snapshot - Take. User can delete the snapshot using Snapshot -
+
+      Delete by themselves any time before expiration.<br />
+
+      Taking snapshot for a certain object will not block any other operations
+
+      against the object. All read-only operations (Get/List and
+
+      Identify/FindSimilar/Verify) can be conducted as usual. For all writable
+
+      operations, including Add/Update/Delete the source object or its
+
+      persons/faces and Train, they are not blocked but not recommended because
+
+      writable updates may not be reflected on the snapshot during its taking.
+
+      After snapshot taking is completed, all readable and writable operations
+      can
+
+      work as normal. Snapshot will also include the training results of the
+
+      source object, which means target subscription the snapshot applied to
+      does
+
+      not need re-train the target object before calling
+      Identify/FindSimilar.<br
+
+      />
+
+      * Free-tier subscription quota: 100 take operations per month.
+
+      * S0-tier subscription quota: 100 take operations per day.
+    syntax:
+      content: >-
+        function take(type: string, objectId: string, applyScope: string[],
+        options?: Object)
+      parameters:
+        - id: type
+          type:
+            - string
+          description: |
+            User specified type for the source object to take
+            snapshot from. Currently FaceList, PersonGroup, LargeFaceList and
+            LargePersonGroup are supported. Possible values include: 'FaceList',
+            'LargeFaceList', 'LargePersonGroup', 'PersonGroup'
+        - id: objectId
+          type:
+            - string
+          description: |
+            User specified source object id to take snapshot
+            from.
+        - id: applyScope
+          type:
+            - 'string[]'
+          description: >
+            User specified array of target Face subscription
+
+            ids for the snapshot. For each snapshot, only subscriptions included
+            in the
+
+            applyScope of Snapshot - Take can apply it.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.take_2
+    name: 'take(string, string, string[], Object, ServiceCallback<void>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Submit an operation to take a snapshot of face list, large face list,
+      person
+
+      group or large person group, with user-specified snapshot type, source
+
+      object id, apply scope and an optional user data.<br />
+
+      The snapshot interfaces are for users to backup and restore their face
+      data
+
+      from one face subscription to another, inside same region or across
+      regions.
+
+      The workflow contains two phases, user first calls Snapshot - Take to
+      create
+
+      a copy of the source object and store it as a snapshot, then calls
+      Snapshot
+
+      - Apply to paste the snapshot to target subscription. The snapshots are
+
+      stored in a centralized location (per Azure instance), so that they can be
+
+      applied cross accounts and regions.<br />
+
+      Taking snapshot is an asynchronous operation. An operation id can be
+
+      obtained from the "Operation-Location" field in response header, to be
+      used
+
+      in OperationStatus - Get for tracking the progress of creating the
+      snapshot.
+
+      The snapshot id will be included in the "resourceLocation" field in
+
+      OperationStatus - Get response when the operation status is
+      "succeeded".<br
+
+      />
+
+      Snapshot taking time depends on the number of person and face entries in
+      the
+
+      source object. It could be in seconds, or up to several hours for
+      1,000,000
+
+      persons with multiple faces.<br />
+
+      Snapshots will be automatically expired and cleaned in 48 hours after it
+      is
+
+      created by Snapshot - Take. User can delete the snapshot using Snapshot -
+
+      Delete by themselves any time before expiration.<br />
+
+      Taking snapshot for a certain object will not block any other operations
+
+      against the object. All read-only operations (Get/List and
+
+      Identify/FindSimilar/Verify) can be conducted as usual. For all writable
+
+      operations, including Add/Update/Delete the source object or its
+
+      persons/faces and Train, they are not blocked but not recommended because
+
+      writable updates may not be reflected on the snapshot during its taking.
+
+      After snapshot taking is completed, all readable and writable operations
+      can
+
+      work as normal. Snapshot will also include the training results of the
+
+      source object, which means target subscription the snapshot applied to
+      does
+
+      not need re-train the target object before calling
+      Identify/FindSimilar.<br
+
+      />
+
+      * Free-tier subscription quota: 100 take operations per month.
+
+      * S0-tier subscription quota: 100 take operations per day.
+    syntax:
+      content: >-
+        function take(type: string, objectId: string, applyScope: string[],
+        options: Object, callback: ServiceCallback<void>)
+      parameters:
+        - id: type
+          type:
+            - string
+          description: ''
+        - id: objectId
+          type:
+            - string
+          description: ''
+        - id: applyScope
+          type:
+            - 'string[]'
+          description: ''
+        - id: options
+          type:
+            - Object
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<void>
+          description: ''
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.take_1
+    name: 'take(string, string, string[], ServiceCallback<void>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Submit an operation to take a snapshot of face list, large face list,
+      person
+
+      group or large person group, with user-specified snapshot type, source
+
+      object id, apply scope and an optional user data.<br />
+
+      The snapshot interfaces are for users to backup and restore their face
+      data
+
+      from one face subscription to another, inside same region or across
+      regions.
+
+      The workflow contains two phases, user first calls Snapshot - Take to
+      create
+
+      a copy of the source object and store it as a snapshot, then calls
+      Snapshot
+
+      - Apply to paste the snapshot to target subscription. The snapshots are
+
+      stored in a centralized location (per Azure instance), so that they can be
+
+      applied cross accounts and regions.<br />
+
+      Taking snapshot is an asynchronous operation. An operation id can be
+
+      obtained from the "Operation-Location" field in response header, to be
+      used
+
+      in OperationStatus - Get for tracking the progress of creating the
+      snapshot.
+
+      The snapshot id will be included in the "resourceLocation" field in
+
+      OperationStatus - Get response when the operation status is
+      "succeeded".<br
+
+      />
+
+      Snapshot taking time depends on the number of person and face entries in
+      the
+
+      source object. It could be in seconds, or up to several hours for
+      1,000,000
+
+      persons with multiple faces.<br />
+
+      Snapshots will be automatically expired and cleaned in 48 hours after it
+      is
+
+      created by Snapshot - Take. User can delete the snapshot using Snapshot -
+
+      Delete by themselves any time before expiration.<br />
+
+      Taking snapshot for a certain object will not block any other operations
+
+      against the object. All read-only operations (Get/List and
+
+      Identify/FindSimilar/Verify) can be conducted as usual. For all writable
+
+      operations, including Add/Update/Delete the source object or its
+
+      persons/faces and Train, they are not blocked but not recommended because
+
+      writable updates may not be reflected on the snapshot during its taking.
+
+      After snapshot taking is completed, all readable and writable operations
+      can
+
+      work as normal. Snapshot will also include the training results of the
+
+      source object, which means target subscription the snapshot applied to
+      does
+
+      not need re-train the target object before calling
+      Identify/FindSimilar.<br
+
+      />
+
+      * Free-tier subscription quota: 100 take operations per month.
+
+      * S0-tier subscription quota: 100 take operations per day.
+    syntax:
+      content: >-
+        function take(type: string, objectId: string, applyScope: string[],
+        callback: ServiceCallback<void>)
+      parameters:
+        - id: type
+          type:
+            - string
+          description: ''
+        - id: objectId
+          type:
+            - string
+          description: ''
+        - id: applyScope
+          type:
+            - 'string[]'
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<void>
+          description: ''
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: >-
+      azure-cognitiveservices-face.SnapshotOperations.takeWithHttpOperationResponse
+    name: 'takeWithHttpOperationResponse(string, string, string[], Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Submit an operation to take a snapshot of face list, large face list,
+      person
+
+      group or large person group, with user-specified snapshot type, source
+
+      object id, apply scope and an optional user data.<br />
+
+      The snapshot interfaces are for users to backup and restore their face
+      data
+
+      from one face subscription to another, inside same region or across
+      regions.
+
+      The workflow contains two phases, user first calls Snapshot - Take to
+      create
+
+      a copy of the source object and store it as a snapshot, then calls
+      Snapshot
+
+      - Apply to paste the snapshot to target subscription. The snapshots are
+
+      stored in a centralized location (per Azure instance), so that they can be
+
+      applied cross accounts and regions.<br />
+
+      Taking snapshot is an asynchronous operation. An operation id can be
+
+      obtained from the "Operation-Location" field in response header, to be
+      used
+
+      in OperationStatus - Get for tracking the progress of creating the
+      snapshot.
+
+      The snapshot id will be included in the "resourceLocation" field in
+
+      OperationStatus - Get response when the operation status is
+      "succeeded".<br
+
+      />
+
+      Snapshot taking time depends on the number of person and face entries in
+      the
+
+      source object. It could be in seconds, or up to several hours for
+      1,000,000
+
+      persons with multiple faces.<br />
+
+      Snapshots will be automatically expired and cleaned in 48 hours after it
+      is
+
+      created by Snapshot - Take. User can delete the snapshot using Snapshot -
+
+      Delete by themselves any time before expiration.<br />
+
+      Taking snapshot for a certain object will not block any other operations
+
+      against the object. All read-only operations (Get/List and
+
+      Identify/FindSimilar/Verify) can be conducted as usual. For all writable
+
+      operations, including Add/Update/Delete the source object or its
+
+      persons/faces and Train, they are not blocked but not recommended because
+
+      writable updates may not be reflected on the snapshot during its taking.
+
+      After snapshot taking is completed, all readable and writable operations
+      can
+
+      work as normal. Snapshot will also include the training results of the
+
+      source object, which means target subscription the snapshot applied to
+      does
+
+      not need re-train the target object before calling
+      Identify/FindSimilar.<br
+
+      />
+
+      * Free-tier subscription quota: 100 take operations per month.
+
+      * S0-tier subscription quota: 100 take operations per day.
+    syntax:
+      content: >-
+        function takeWithHttpOperationResponse(type: string, objectId: string,
+        applyScope: string[], options?: Object)
+      parameters:
+        - id: type
+          type:
+            - string
+          description: |
+            User specified type for the source object to take
+            snapshot from. Currently FaceList, PersonGroup, LargeFaceList and
+            LargePersonGroup are supported. Possible values include: 'FaceList',
+            'LargeFaceList', 'LargePersonGroup', 'PersonGroup'
+        - id: objectId
+          type:
+            - string
+          description: |
+            User specified source object id to take snapshot
+            from.
+        - id: applyScope
+          type:
+            - 'string[]'
+          description: >
+            User specified array of target Face subscription
+
+            ids for the snapshot. For each snapshot, only subscriptions included
+            in the
+
+            applyScope of Snapshot - Take can apply it.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<HttpOperationResponse<void>>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.update
+    name: 'update(string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Update the information of a snapshot. Only the source subscription who
+      took
+
+      the snapshot can update the snapshot.
+    syntax:
+      content: 'function update(snapshotId: string, options?: Object)'
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: |
+            Id referencing a particular snapshot.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.update_2
+    name: 'update(string, Object, ServiceCallback<void>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Update the information of a snapshot. Only the source subscription who
+      took
+
+      the snapshot can update the snapshot.
+    syntax:
+      content: >-
+        function update(snapshotId: string, options: Object, callback:
+        ServiceCallback<void>)
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - Object
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<void>
+          description: ''
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: azure-cognitiveservices-face.SnapshotOperations.update_1
+    name: 'update(string, ServiceCallback<void>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Update the information of a snapshot. Only the source subscription who
+      took
+
+      the snapshot can update the snapshot.
+    syntax:
+      content: 'function update(snapshotId: string, callback: ServiceCallback<void>)'
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<void>
+          description: ''
+      return:
+        type:
+          - Promise<void>
+    package: azure-cognitiveservices-face
+  - uid: >-
+      azure-cognitiveservices-face.SnapshotOperations.updateWithHttpOperationResponse
+    name: 'updateWithHttpOperationResponse(string, Object)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Update the information of a snapshot. Only the source subscription who
+      took
+
+      the snapshot can update the snapshot.
+    syntax:
+      content: >-
+        function updateWithHttpOperationResponse(snapshotId: string, options?:
+        Object)
+      parameters:
+        - id: snapshotId
+          type:
+            - string
+          description: |
+            Id referencing a particular snapshot.
+        - id: options
+          type:
+            - Object
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<HttpOperationResponse<void>>
+    package: azure-cognitiveservices-face
+references:
+  - uid: Promise<azure-cognitiveservices-face.Snapshot>
+    name: Snapshot>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: Snapshot
+        fullName: Snapshot
+        uid: azure-cognitiveservices-face.Snapshot
+      - name: '>'
+        fullName: '>'
+  - uid: ServiceCallback<azure-cognitiveservices-face.Snapshot>
+    name: Snapshot>
+    spec.typeScript:
+      - name: ServiceCallback<
+        fullName: ServiceCallback<
+      - name: Snapshot
+        fullName: Snapshot
+        uid: azure-cognitiveservices-face.Snapshot
+      - name: '>'
+        fullName: '>'
+  - uid: Promise<azure-cognitiveservices-face.OperationStatus>
+    name: OperationStatus>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: OperationStatus
+        fullName: OperationStatus
+        uid: azure-cognitiveservices-face.OperationStatus
+      - name: '>'
+        fullName: '>'
+  - uid: ServiceCallback<azure-cognitiveservices-face.OperationStatus>
+    name: OperationStatus>
+    spec.typeScript:
+      - name: ServiceCallback<
+        fullName: ServiceCallback<
+      - name: OperationStatus
+        fullName: OperationStatus
+        uid: azure-cognitiveservices-face.OperationStatus
+      - name: '>'
+        fullName: '>'
+  - uid: >-
+      Promise<HttpOperationResponse<azure-cognitiveservices-face.OperationStatus>>
+    name: OperationStatus>>
+    spec.typeScript:
+      - name: Promise<HttpOperationResponse<
+        fullName: Promise<HttpOperationResponse<
+      - name: OperationStatus
+        fullName: OperationStatus
+        uid: azure-cognitiveservices-face.OperationStatus
+      - name: '>>'
+        fullName: '>>'
+  - uid: Promise<HttpOperationResponse<azure-cognitiveservices-face.Snapshot>>
+    name: Snapshot>>
+    spec.typeScript:
+      - name: Promise<HttpOperationResponse<
+        fullName: Promise<HttpOperationResponse<
+      - name: Snapshot
+        fullName: Snapshot
+        uid: azure-cognitiveservices-face.Snapshot
+      - name: '>>'
+        fullName: '>>'
+  - uid: 'Promise<azure-cognitiveservices-face.Snapshot[]>'
+    name: 'Snapshot[]>'
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: Snapshot
+        fullName: Snapshot
+        uid: azure-cognitiveservices-face.Snapshot
+      - name: '[]>'
+        fullName: '[]>'
+  - uid: 'ServiceCallback<azure-cognitiveservices-face.Snapshot[]>'
+    name: 'Snapshot[]>'
+    spec.typeScript:
+      - name: ServiceCallback<
+        fullName: ServiceCallback<
+      - name: Snapshot
+        fullName: Snapshot
+        uid: azure-cognitiveservices-face.Snapshot
+      - name: '[]>'
+        fullName: '[]>'
+  - uid: 'Promise<HttpOperationResponse<azure-cognitiveservices-face.Snapshot[]>>'
+    name: 'Snapshot[]>>'
+    spec.typeScript:
+      - name: Promise<HttpOperationResponse<
+        fullName: Promise<HttpOperationResponse<
+      - name: Snapshot
+        fullName: Snapshot
+        uid: azure-cognitiveservices-face.Snapshot
+      - name: '[]>>'
+        fullName: '[]>>'

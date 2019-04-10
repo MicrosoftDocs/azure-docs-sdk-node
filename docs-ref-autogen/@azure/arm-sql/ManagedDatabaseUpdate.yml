@@ -11,6 +11,8 @@ items:
       - '@azure/arm-sql.ManagedDatabaseUpdate.defaultSecondaryLocation'
       - '@azure/arm-sql.ManagedDatabaseUpdate.earliestRestorePoint'
       - '@azure/arm-sql.ManagedDatabaseUpdate.failoverGroupId'
+      - '@azure/arm-sql.ManagedDatabaseUpdate.recoverableDatabaseId'
+      - '@azure/arm-sql.ManagedDatabaseUpdate.restorableDroppedDatabaseId'
       - '@azure/arm-sql.ManagedDatabaseUpdate.restorePointInTime'
       - '@azure/arm-sql.ManagedDatabaseUpdate.sourceDatabaseId'
       - '@azure/arm-sql.ManagedDatabaseUpdate.status'
@@ -20,7 +22,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: An managed database update.
     package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.ManagedDatabaseUpdate.catalogCollation'
     name: catalogCollation
@@ -29,7 +31,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Collation of the metadata catalog. Possible values include:
+      'DATABASE_DEFAULT',
+
+      'SQL_Latin1_General_CP1_CI_AS'
     optional: true
     syntax:
       content: 'catalogCollation?: CatalogCollationType'
@@ -44,7 +50,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Collation of the managed database.
     optional: true
     syntax:
       content: 'collation?: undefined | string'
@@ -59,7 +65,27 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Managed database create mode. PointInTimeRestore: Create a database by
+      restoring a point in
+
+      time backup of an existing database. SourceDatabaseName,
+      SourceManagedInstanceName and
+
+      PointInTime must be specified. RestoreExternalBackup: Create a database by
+      restoring from
+
+      external backup files. Collation, StorageContainerUri and
+      StorageContainerSasToken must be
+
+      specified. Recovery: Creates a database by restoring a geo-replicated
+      backup.
+
+      RecoverableDatabaseId must be specified as the recoverable database
+      resource ID to restore.
+
+      Possible values include: 'Default', 'RestoreExternalBackup',
+      'PointInTimeRestore', 'Recovery'
     optional: true
     syntax:
       content: 'createMode?: ManagedDatabaseCreateMode'
@@ -74,7 +100,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Creation date of the database.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'creationDate?: Date'
@@ -89,7 +119,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Geo paired region.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'defaultSecondaryLocation?: undefined | string'
@@ -104,7 +138,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Earliest restore point in time for point in time restore.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'earliestRestorePoint?: Date'
@@ -119,10 +157,51 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Instance Failover Group resource identifier that this managed database
+      belongs to.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'failoverGroupId?: undefined | string'
+      return:
+        type:
+          - undefined | string
+    package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.ManagedDatabaseUpdate.recoverableDatabaseId'
+    name: recoverableDatabaseId
+    fullName: recoverableDatabaseId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The resource identifier of the recoverable database associated with create
+      operation of this
+
+      database.
+    optional: true
+    syntax:
+      content: 'recoverableDatabaseId?: undefined | string'
+      return:
+        type:
+          - undefined | string
+    package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.ManagedDatabaseUpdate.restorableDroppedDatabaseId'
+    name: restorableDroppedDatabaseId
+    fullName: restorableDroppedDatabaseId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The restorable dropped database resource id to restore when creating this
+      database.
+    optional: true
+    syntax:
+      content: 'restorableDroppedDatabaseId?: undefined | string'
       return:
         type:
           - undefined | string
@@ -134,7 +213,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Conditional. If createMode is PointInTimeRestore, this value is required.
+      Specifies the point
+
+      in time (ISO8601 format) of the source database that will be restored to
+      create the new
+
+      database.
     optional: true
     syntax:
       content: 'restorePointInTime?: Date'
@@ -149,7 +235,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The resource identifier of the source database associated with create
+      operation of this
+
+      database.
     optional: true
     syntax:
       content: 'sourceDatabaseId?: undefined | string'
@@ -164,7 +254,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Status of the database. Possible values include: 'Online', 'Offline',
+      'Shutdown', 'Creating',
+
+      'Inaccessible', 'Updating'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'status?: ManagedDatabaseStatus'
@@ -179,7 +276,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Conditional. If createMode is RestoreExternalBackup, this value is
+      required. Specifies the
+
+      storage container sas token.
     optional: true
     syntax:
       content: 'storageContainerSasToken?: undefined | string'
@@ -194,7 +295,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Conditional. If createMode is RestoreExternalBackup, this value is
+      required. Specifies the uri
+
+      of the storage container where backups for this restore are stored.
     optional: true
     syntax:
       content: 'storageContainerUri?: undefined | string'
@@ -209,7 +314,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Resource tags.
     optional: true
     syntax:
       content: 'tags?: undefined | [key: string]: string'

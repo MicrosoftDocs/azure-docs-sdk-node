@@ -11,16 +11,19 @@ items:
       - '@azure/arm-sql.ManagedInstanceUpdate.dnsZonePartner'
       - '@azure/arm-sql.ManagedInstanceUpdate.fullyQualifiedDomainName'
       - '@azure/arm-sql.ManagedInstanceUpdate.licenseType'
+      - '@azure/arm-sql.ManagedInstanceUpdate.proxyOverride'
+      - '@azure/arm-sql.ManagedInstanceUpdate.publicDataEndpointEnabled'
       - '@azure/arm-sql.ManagedInstanceUpdate.sku'
       - '@azure/arm-sql.ManagedInstanceUpdate.state'
       - '@azure/arm-sql.ManagedInstanceUpdate.storageSizeInGB'
       - '@azure/arm-sql.ManagedInstanceUpdate.subnetId'
       - '@azure/arm-sql.ManagedInstanceUpdate.tags'
+      - '@azure/arm-sql.ManagedInstanceUpdate.timezoneId'
       - '@azure/arm-sql.ManagedInstanceUpdate.vCores'
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: An update request for an Azure SQL Database managed instance.
     package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.ManagedInstanceUpdate.administratorLogin'
     name: administratorLogin
@@ -29,7 +32,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Administrator username for the managed instance. Can only be specified
+      when the managed
+
+      instance is being created (and is required for creation).
     optional: true
     syntax:
       content: 'administratorLogin?: undefined | string'
@@ -44,7 +51,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The administrator login password (required for managed instance creation).
     optional: true
     syntax:
       content: 'administratorLoginPassword?: undefined | string'
@@ -59,7 +66,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Collation of the managed instance.
     optional: true
     syntax:
       content: 'collation?: undefined | string'
@@ -74,7 +81,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The Dns Zone that the managed instance is in.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'dnsZone?: undefined | string'
@@ -89,7 +100,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The resource id of another managed instance whose DNS zone this managed
+      instance will share
+
+      after creation.
     optional: true
     syntax:
       content: 'dnsZonePartner?: undefined | string'
@@ -104,7 +119,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The fully qualified domain name of the managed instance.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'fullyQualifiedDomainName?: undefined | string'
@@ -119,13 +138,47 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The license type. Possible values are 'LicenseIncluded' and 'BasePrice'.
     optional: true
     syntax:
       content: 'licenseType?: undefined | string'
       return:
         type:
           - undefined | string
+    package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.ManagedInstanceUpdate.proxyOverride'
+    name: proxyOverride
+    fullName: proxyOverride
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Connection type used for connecting to the instance. Possible values
+      include: 'Proxy',
+
+      'Redirect', 'Default'
+    optional: true
+    syntax:
+      content: 'proxyOverride?: ManagedInstanceProxyOverride'
+      return:
+        type:
+          - '@azure/arm-sql.ManagedInstanceProxyOverride'
+    package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.ManagedInstanceUpdate.publicDataEndpointEnabled'
+    name: publicDataEndpointEnabled
+    fullName: publicDataEndpointEnabled
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Whether or not the public data endpoint is enabled.
+    optional: true
+    syntax:
+      content: 'publicDataEndpointEnabled?: undefined | false | true'
+      return:
+        type:
+          - undefined | false | true
     package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.ManagedInstanceUpdate.sku'
     name: sku
@@ -134,7 +187,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Managed instance sku
     optional: true
     syntax:
       content: 'sku?: Sku'
@@ -149,7 +202,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The state of the managed instance.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'state?: undefined | string'
@@ -164,7 +221,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The maximum storage size in GB.
     optional: true
     syntax:
       content: 'storageSizeInGB?: undefined | number'
@@ -179,7 +236,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Subnet resource ID for the managed instance.
     optional: true
     syntax:
       content: 'subnetId?: undefined | string'
@@ -194,13 +251,47 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Resource tags.
     optional: true
     syntax:
       content: 'tags?: undefined | [key: string]: string'
       return:
         type:
           - 'undefined | [key: string]: string'
+    package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.ManagedInstanceUpdate.timezoneId'
+    name: timezoneId
+    fullName: timezoneId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Id of the timezone. Allowed values are timezones supported by Windows.
+
+      Windows keeps details on supported timezones, including the id, in
+      registry under
+
+      KEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Time Zones.
+
+      You can get those registry values via SQL Server by querying SELECT name
+      AS timezone_id FROM
+
+      sys.time_zone_info.
+
+      List of Ids can also be obtained by executing
+      [System.TimeZoneInfo]::GetSystemTimeZones() in
+
+      PowerShell.
+
+      An example of valid timezone id is "Pacific Standard Time" or "W. Europe
+      Standard Time".
+    optional: true
+    syntax:
+      content: 'timezoneId?: undefined | string'
+      return:
+        type:
+          - undefined | string
     package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.ManagedInstanceUpdate.vCores'
     name: vCores
@@ -209,7 +300,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The number of VCores.
     optional: true
     syntax:
       content: 'vCores?: undefined | number'
@@ -218,6 +309,12 @@ items:
           - undefined | number
     package: '@azure/arm-sql'
 references:
+  - uid: '@azure/arm-sql.ManagedInstanceProxyOverride'
+    name: ManagedInstanceProxyOverride
+    spec.typeScript:
+      - name: ManagedInstanceProxyOverride
+        fullName: ManagedInstanceProxyOverride
+        uid: '@azure/arm-sql.ManagedInstanceProxyOverride'
   - uid: '@azure/arm-sql.Sku'
     name: Sku
     spec.typeScript:

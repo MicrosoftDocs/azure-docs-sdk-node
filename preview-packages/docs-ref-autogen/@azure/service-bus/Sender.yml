@@ -7,21 +7,24 @@ items:
       - '@azure/service-bus.Sender.cancelScheduledMessage'
       - '@azure/service-bus.Sender.cancelScheduledMessages'
       - '@azure/service-bus.Sender.close'
+      - '@azure/service-bus.Sender.isClosed'
       - '@azure/service-bus.Sender.scheduleMessage'
       - '@azure/service-bus.Sender.scheduleMessages'
       - '@azure/service-bus.Sender.send'
       - '@azure/service-bus.Sender.sendBatch'
-      - '@azure/service-bus.Sender.constructor'
     langs:
       - typeScript
     type: class
     summary: >-
-      An abstraction over the underlying sender link.
-
-      This Sender can be used to send messages, schedule messages to be sent at
-      a later time
+      The Sender class can be used to send messages, schedule messages to be
+      sent at a later time
 
       and cancel such scheduled messages.
+
+      Use the `createSender` function on the QueueClient or TopicClient to
+      instantiate a Sender.
+
+      The Sender class is an abstraction over the underlying AMQP sender link.
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.Sender.cancelScheduledMessage'
     name: cancelScheduledMessage(Long)
@@ -69,13 +72,33 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Closes the underlying AMQP sender link.
+    summary: >-
+      Closes the underlying AMQP sender link.
+
+      Once closed, the sender cannot be used for any further operations.
+
+      Use the `createSender` function on the QueueClient or TopicClient to
+      instantiate a new Sender
     syntax:
       content: function close()
       parameters: []
       return:
         type:
           - Promise<void>
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.Sender.isClosed'
+    name: isClosed
+    fullName: isClosed
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: '{boolean} [isClosed] Denotes if close() was called on this sender.'
+    syntax:
+      content: 'isClosed: boolean'
+      return:
+        type:
+          - boolean
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.Sender.scheduleMessage'
     name: 'scheduleMessage(Date, SendableMessageInfo)'
@@ -161,10 +184,10 @@ items:
     langs:
       - typeScript
     summary: >
-      Sends the given messages in a batch i.e. in a single AMQP message after
-      creating an AMQP Sender
+      Sends the given messages in a single batch i.e. in a single AMQP message
+      after creating an AMQP
 
-      link if it doesnt already exists.
+      Sender link if it doesnt already exists.
 
       To send messages to a `session` and/or `partition` enabled Queue/Topic,
       set the `sessionId`
@@ -188,21 +211,6 @@ items:
       return:
         type:
           - Promise<void>
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.constructor'
-    name: Sender(ClientEntityContext)
-    children: []
-    type: constructor
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: 'new Sender(context: ClientEntityContext)'
-      parameters:
-        - id: context
-          type:
-            - ClientEntityContext
-          description: ''
     package: '@azure/service-bus'
 references:
   - uid: '@azure/service-bus.SendableMessageInfo'

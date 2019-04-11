@@ -6,24 +6,28 @@ items:
     children:
       - '@azure/service-bus.SubscriptionClient.addRule'
       - '@azure/service-bus.SubscriptionClient.close'
+      - '@azure/service-bus.SubscriptionClient.createReceiver'
+      - '@azure/service-bus.SubscriptionClient.createReceiver_1'
       - '@azure/service-bus.SubscriptionClient.defaultRuleName'
-      - '@azure/service-bus.SubscriptionClient.getReceiver'
+      - '@azure/service-bus.SubscriptionClient.entityPath'
       - '@azure/service-bus.SubscriptionClient.getRules'
-      - '@azure/service-bus.SubscriptionClient.getSessionReceiver'
+      - '@azure/service-bus.SubscriptionClient.id'
       - '@azure/service-bus.SubscriptionClient.peek'
       - '@azure/service-bus.SubscriptionClient.peekBySequenceNumber'
       - '@azure/service-bus.SubscriptionClient.removeRule'
-      - '@azure/service-bus.SubscriptionClient.constructor'
       - '@azure/service-bus.SubscriptionClient.subscriptionName'
-      - '@azure/service-bus.SubscriptionClient.topicPath'
+      - '@azure/service-bus.SubscriptionClient.topicName'
     langs:
       - typeScript
     type: class
     summary: >-
-      Describes the client that will maintain an AMQP connection to a ServiceBus
+      Describes the client that allows interacting with a Service Bus
       Subscription.
-    extends:
-      name: '@azure/service-bus.Client'
+
+      Use the `createSubscriptionClient` function on the Namespace object to
+      instantiate a
+
+      SubscriptionClient
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SubscriptionClient.addRule'
     name: 'addRule(string, boolean | string | CorrelationFilter, string)'
@@ -80,13 +84,91 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Closes the AMQP connection to the ServiceBus Subscription for this client.
+    summary: >-
+      Closes the AMQP link for the receivers created by this client.
+
+      Once closed, neither the SubscriptionClient nor its receivers can be used
+      for any
+
+      further operations. Use the `createSubscriptionClient` function on the
+      Namespace object to
+
+      instantiate a new SubscriptionClient.
     syntax:
       content: function close()
       parameters: []
       return:
         type:
           - Promise<void>
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.createReceiver'
+    name: createReceiver(ReceiveMode)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Creates a Receiver for receiving messages from a Subscription which does
+      not have sessions enabled.
+
+      Throws error if an open receiver already exists for this
+      SubscriptionClient.
+
+      Throws error if the Subscription has sessions enabled.
+    syntax:
+      content: 'function createReceiver(receiveMode: ReceiveMode)'
+      parameters:
+        - id: receiveMode
+          type:
+            - '@azure/service-bus.ReceiveMode'
+          description: >
+            An enum indicating the mode in which messages should be received.
+            Possible
+
+            values are `ReceiveMode.peekLock` and `ReceiveMode.receiveAndDelete`
+      return:
+        type:
+          - '@azure/service-bus.Receiver'
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.createReceiver_1'
+    name: 'createReceiver(ReceiveMode, SessionReceiverOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Creates a Receiver for receiving messages from a session enabled
+      Subscription. When no sessionId is
+
+      given, a random session among the available sessions is used.
+
+      Throws error if an open receiver already exists for given sessionId.
+
+      Throws error if the Subscription does not have sessions enabled.
+    syntax:
+      content: >-
+        function createReceiver(receiveMode: ReceiveMode, sessionOptions:
+        SessionReceiverOptions)
+      parameters:
+        - id: receiveMode
+          type:
+            - '@azure/service-bus.ReceiveMode'
+          description: >-
+            An enum indicating the mode in which messages should be received.
+            Possible
+
+            values are `ReceiveMode.peekLock` and `ReceiveMode.receiveAndDelete`
+        - id: sessionOptions
+          type:
+            - '@azure/service-bus.SessionReceiverOptions'
+          description: >
+            Options to provide sessionId and duration of automatic lock renewal
+            for
+
+            the session receiver.
+      return:
+        type:
+          - '@azure/service-bus.SessionReceiver'
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SubscriptionClient.defaultRuleName'
     name: defaultRuleName
@@ -102,27 +184,21 @@ items:
         type:
           - string
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.SubscriptionClient.getReceiver'
-    name: getReceiver(MessageReceiverOptions)
+  - uid: '@azure/service-bus.SubscriptionClient.entityPath'
+    name: entityPath
+    fullName: entityPath
     children: []
-    type: method
     langs:
       - typeScript
+    type: property
     summary: >-
-      Gets the Receiver to be used for receiving messages in batches or by
-      registering handlers.
+      {string} The entitypath for the Service Bus Subscription for which this
+      client is created.
     syntax:
-      content: 'function getReceiver(options?: MessageReceiverOptions)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/service-bus.MessageReceiverOptions'
-          description: |
-            Options for creating the receiver.
-          optional: true
+      content: 'entityPath: string'
       return:
         type:
-          - '@azure/service-bus.Receiver'
+          - string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SubscriptionClient.getRules'
     name: getRules()
@@ -138,35 +214,19 @@ items:
         type:
           - 'Promise<@azure/service-bus.RuleDescription[]>'
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.SubscriptionClient.getSessionReceiver'
-    name: getSessionReceiver(SessionReceiverOptions)
+  - uid: '@azure/service-bus.SubscriptionClient.id'
+    name: id
+    fullName: id
     children: []
-    type: method
     langs:
       - typeScript
-    summary: >-
-      Gets the SessionReceiver for receiving messages in batches or by
-      registering handlers from a
-
-      session enabled Subscription. When no sessionId is given, a random session
-      among the available
-
-      sessions is used.
+    type: property
+    summary: '{string} A unique identifier for the client.'
     syntax:
-      content: 'function getSessionReceiver(options?: SessionReceiverOptions)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/service-bus.SessionReceiverOptions'
-          description: >
-            Options to provide sessionId and ReceiveMode for receiving messages
-            from the
-
-            session enabled Servicebus Subscription.
-          optional: true
+      content: 'id: string'
       return:
         type:
-          - Promise<@azure/service-bus.SessionReceiver>
+          - string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SubscriptionClient.peek'
     name: peek(number)
@@ -189,9 +249,9 @@ items:
       It cannot be `Completed/Abandoned/Deferred/Deadlettered`. The lock on it
       cannot be renewed.
     syntax:
-      content: 'function peek(messageCount?: number)'
+      content: 'function peek(maxMessageCount?: number)'
       parameters:
-        - id: messageCount
+        - id: maxMessageCount
           type:
             - number
           description: ''
@@ -219,14 +279,14 @@ items:
       cannot be renewed.
     syntax:
       content: >-
-        function peekBySequenceNumber(fromSequenceNumber: Long, messageCount?:
-        number)
+        function peekBySequenceNumber(fromSequenceNumber: Long,
+        maxMessageCount?: number)
       parameters:
         - id: fromSequenceNumber
           type:
             - Long
           description: The sequence number from where to read the message.
-        - id: messageCount
+        - id: maxMessageCount
           type:
             - number
           description: ''
@@ -254,38 +314,6 @@ items:
         type:
           - Promise<void>
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.SubscriptionClient.constructor'
-    name: 'SubscriptionClient(string, string, ConnectionContext)'
-    children: []
-    type: constructor
-    langs:
-      - typeScript
-    summary: >-
-      Constructor for SubscriptionClient.
-
-      This is not meant for the user to call directly.
-
-      The user should use the `createSubscriptionClient` on the Namespace
-      instead.
-    syntax:
-      content: >-
-        new SubscriptionClient(topicPath: string, subscriptionName: string,
-        context: ConnectionContext)
-      parameters:
-        - id: topicPath
-          type:
-            - string
-          description: The Topic path.
-        - id: subscriptionName
-          type:
-            - string
-          description: The Subscription name.
-        - id: context
-          type:
-            - '@azure/service-bus.ConnectionContext'
-          description: |
-            The connection context to create the SubscriptionClient.
-    package: '@azure/service-bus'
   - uid: '@azure/service-bus.SubscriptionClient.subscriptionName'
     name: subscriptionName
     fullName: subscriptionName
@@ -293,40 +321,28 @@ items:
     langs:
       - typeScript
     type: property
-    summary: '{string} subscriptionName The subscription name.'
+    summary: '{string}  The subscription name.'
     syntax:
       content: 'subscriptionName: string'
       return:
         type:
           - string
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.SubscriptionClient.topicPath'
-    name: topicPath
-    fullName: topicPath
+  - uid: '@azure/service-bus.SubscriptionClient.topicName'
+    name: topicName
+    fullName: topicName
     children: []
     langs:
       - typeScript
     type: property
-    summary: '{string} topicPath The topic path.'
+    summary: '{string}  The topic name.'
     syntax:
-      content: 'topicPath: string'
+      content: 'topicName: string'
       return:
         type:
           - string
     package: '@azure/service-bus'
 references:
-  - uid: '@azure/service-bus.Client'
-    name: Client
-    spec.typeScript:
-      - name: Client
-        fullName: Client
-        uid: '@azure/service-bus.Client'
-  - uid: '@azure/service-bus.ConnectionContext'
-    name: ConnectionContext
-    spec.typeScript:
-      - name: ConnectionContext
-        fullName: ConnectionContext
-        uid: '@azure/service-bus.ConnectionContext'
   - uid: boolean | string | @azure/service-bus.CorrelationFilter
     name: CorrelationFilter
     spec.typeScript:
@@ -335,18 +351,30 @@ references:
       - name: CorrelationFilter
         fullName: CorrelationFilter
         uid: '@azure/service-bus.CorrelationFilter'
-  - uid: '@azure/service-bus.MessageReceiverOptions'
-    name: MessageReceiverOptions
+  - uid: '@azure/service-bus.ReceiveMode'
+    name: ReceiveMode
     spec.typeScript:
-      - name: MessageReceiverOptions
-        fullName: MessageReceiverOptions
-        uid: '@azure/service-bus.MessageReceiverOptions'
+      - name: ReceiveMode
+        fullName: ReceiveMode
+        uid: '@azure/service-bus.ReceiveMode'
   - uid: '@azure/service-bus.Receiver'
     name: Receiver
     spec.typeScript:
       - name: Receiver
         fullName: Receiver
         uid: '@azure/service-bus.Receiver'
+  - uid: '@azure/service-bus.SessionReceiverOptions'
+    name: SessionReceiverOptions
+    spec.typeScript:
+      - name: SessionReceiverOptions
+        fullName: SessionReceiverOptions
+        uid: '@azure/service-bus.SessionReceiverOptions'
+  - uid: '@azure/service-bus.SessionReceiver'
+    name: SessionReceiver
+    spec.typeScript:
+      - name: SessionReceiver
+        fullName: SessionReceiver
+        uid: '@azure/service-bus.SessionReceiver'
   - uid: 'Promise<@azure/service-bus.RuleDescription[]>'
     name: 'RuleDescription[]>'
     spec.typeScript:
@@ -357,22 +385,6 @@ references:
         uid: '@azure/service-bus.RuleDescription'
       - name: '[]>'
         fullName: '[]>'
-  - uid: '@azure/service-bus.SessionReceiverOptions'
-    name: SessionReceiverOptions
-    spec.typeScript:
-      - name: SessionReceiverOptions
-        fullName: SessionReceiverOptions
-        uid: '@azure/service-bus.SessionReceiverOptions'
-  - uid: Promise<@azure/service-bus.SessionReceiver>
-    name: SessionReceiver>
-    spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: SessionReceiver
-        fullName: SessionReceiver
-        uid: '@azure/service-bus.SessionReceiver'
-      - name: '>'
-        fullName: '>'
   - uid: 'Promise<@azure/service-bus.ReceivedMessageInfo[]>'
     name: 'ReceivedMessageInfo[]>'
     spec.typeScript:

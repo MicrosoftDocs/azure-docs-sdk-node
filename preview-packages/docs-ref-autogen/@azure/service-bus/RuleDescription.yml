@@ -22,10 +22,10 @@ items:
     summary: Action to perform if the message satisfies the filtering expression.
     optional: true
     syntax:
-      content: 'action?: SQLExpression'
+      content: 'action?: string'
       return:
         type:
-          - '@azure/service-bus.SQLExpression'
+          - string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.RuleDescription.filter'
     name: filter
@@ -34,15 +34,25 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Filter expression used to match messages.
+    summary: >-
+      Filter expression used to match messages. Supports 2 types:
+
+      - `string`: SQL-like condition expression that is evaluated in the broker
+      against the messages'
+
+      user-defined properties and system properties. All system properties must
+      be prefixed with
+
+      `sys.` in the condition expression.
+
+      - `CorrelationFilter`: Properties of the filter will be used to match with
+      the message properties.
     optional: true
     syntax:
-      content: 'filter?: SQLExpression | CorrelationFilter'
+      content: 'filter?: string | CorrelationFilter'
       return:
         type:
-          - >-
-            @azure/service-bus.SQLExpression |
-            @azure/service-bus.CorrelationFilter
+          - string | @azure/service-bus.CorrelationFilter
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.RuleDescription.name'
     name: name
@@ -59,20 +69,11 @@ items:
           - string
     package: '@azure/service-bus'
 references:
-  - uid: '@azure/service-bus.SQLExpression'
-    name: SQLExpression
-    spec.typeScript:
-      - name: SQLExpression
-        fullName: SQLExpression
-        uid: '@azure/service-bus.SQLExpression'
-  - uid: '@azure/service-bus.SQLExpression | @azure/service-bus.CorrelationFilter'
+  - uid: string | @azure/service-bus.CorrelationFilter
     name: CorrelationFilter
     spec.typeScript:
-      - name: SQLExpression
-        fullName: SQLExpression
-        uid: '@azure/service-bus.SQLExpression'
-      - name: ' | '
-        fullName: ' | '
+      - name: 'string | '
+        fullName: 'string | '
       - name: CorrelationFilter
         fullName: CorrelationFilter
         uid: '@azure/service-bus.CorrelationFilter'

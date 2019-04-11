@@ -5,19 +5,22 @@ items:
     fullName: QueueClient
     children:
       - '@azure/service-bus.QueueClient.close'
-      - '@azure/service-bus.QueueClient.getReceiver'
-      - '@azure/service-bus.QueueClient.getSender'
-      - '@azure/service-bus.QueueClient.getSessionReceiver'
+      - '@azure/service-bus.QueueClient.createReceiver'
+      - '@azure/service-bus.QueueClient.createReceiver_1'
+      - '@azure/service-bus.QueueClient.createSender'
+      - '@azure/service-bus.QueueClient.entityPath'
+      - '@azure/service-bus.QueueClient.getDeadLetterQueuePath'
+      - '@azure/service-bus.QueueClient.id'
       - '@azure/service-bus.QueueClient.peek'
       - '@azure/service-bus.QueueClient.peekBySequenceNumber'
     langs:
       - typeScript
     type: class
     summary: >-
-      Describes the client that will maintain an AMQP connection to a ServiceBus
-      Queue.
-    extends:
-      name: '@azure/service-bus.Client'
+      Describes the client that allows interacting with a Service Bus Queue.
+
+      Use the `createQueueClient` function on the Namespace object to
+      instantiate a QueueClient
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.QueueClient.close'
     name: close()
@@ -25,7 +28,16 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Closes the AMQP connection to the ServiceBus Queue for this client.
+    summary: >-
+      Closes all the AMQP links for sender/receivers created by this client.
+
+      Once closed, neither the QueueClient nor its sender/receivers can be used
+      for any
+
+      further operations. Use the `createQueueClient` function on the Namespace
+      object to
+
+      instantiate a new QueueClient
     syntax:
       content: function close()
       parameters: []
@@ -33,75 +45,149 @@ items:
         type:
           - Promise<void>
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.QueueClient.getReceiver'
-    name: getReceiver(MessageReceiverOptions)
+  - uid: '@azure/service-bus.QueueClient.createReceiver'
+    name: createReceiver(ReceiveMode)
     children: []
     type: method
     langs:
       - typeScript
-    summary: >-
-      Gets the Receiver to be used for receiving messages in batches or by
-      registering handlers.
+    summary: >
+      Creates a Receiver for receiving messages from a Queue which does not have
+      sessions enabled.
+
+      Throws error if an open receiver already exists for this QueueClient.
+
+      Throws error if the Queue has sessions enabled.
     syntax:
-      content: 'function getReceiver(options?: MessageReceiverOptions)'
+      content: 'function createReceiver(receiveMode: ReceiveMode)'
       parameters:
-        - id: options
+        - id: receiveMode
           type:
-            - '@azure/service-bus.MessageReceiverOptions'
-          description: |
-            Options for creating the receiver.
-          optional: true
+            - '@azure/service-bus.ReceiveMode'
+          description: >
+            An enum indicating the mode in which messages should be received.
+            Possible
+
+            values are `ReceiveMode.peekLock` and `ReceiveMode.receiveAndDelete`
       return:
         type:
           - '@azure/service-bus.Receiver'
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.QueueClient.getSender'
-    name: getSender()
+  - uid: '@azure/service-bus.QueueClient.createReceiver_1'
+    name: 'createReceiver(ReceiveMode, SessionReceiverOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Creates a Receiver for receiving messages from a session enabled Queue.
+      When no sessionId is
+
+      given, a random session among the available sessions is used.
+
+      Throws error if an open receiver already exists for given sessionId.
+
+      Throws error if the Queue does not have sessions enabled.
+    syntax:
+      content: >-
+        function createReceiver(receiveMode: ReceiveMode, sessionOptions:
+        SessionReceiverOptions)
+      parameters:
+        - id: receiveMode
+          type:
+            - '@azure/service-bus.ReceiveMode'
+          description: >-
+            An enum indicating the mode in which messages should be received.
+            Possible
+
+            values are `ReceiveMode.peekLock` and `ReceiveMode.receiveAndDelete`
+        - id: sessionOptions
+          type:
+            - '@azure/service-bus.SessionReceiverOptions'
+          description: >
+            Options to provide sessionId and duration of automatic lock renewal
+            for
+
+            the session receiver.
+      return:
+        type:
+          - '@azure/service-bus.SessionReceiver'
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.QueueClient.createSender'
+    name: createSender()
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Gets the Sender to be used for sending messages, scheduling messages to be
-      sent at a later time
+      Creates a Sender to be used for sending messages, scheduling messages to
+      be sent at a later time
 
       and cancelling such scheduled messages.
+
+      Throws error if an open sender already exists for this QueueClient.
     syntax:
-      content: function getSender()
+      content: function createSender()
       parameters: []
       return:
         type:
           - '@azure/service-bus.Sender'
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.QueueClient.getSessionReceiver'
-    name: getSessionReceiver(SessionReceiverOptions)
+  - uid: '@azure/service-bus.QueueClient.entityPath'
+    name: entityPath
+    fullName: entityPath
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      {string} The entitypath for the Service Bus Queue for which this client is
+      created.
+    syntax:
+      content: 'entityPath: string'
+      return:
+        type:
+          - string
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.QueueClient.getDeadLetterQueuePath'
+    name: getDeadLetterQueuePath(string)
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Gets the SessionReceiver for receiving messages in batches or by
-      registering handlers from a
+      Returns the corresponding dead letter queue name for the queue represented
+      by the given name.
 
-      session enabled Queue. When no sessionId is given, a random session among
-      the available
+      Use this in the `createQueueClient` function on the `ServiceBusClient`
+      instance to receive
 
-      sessions is used.
+      messages from the dead letter queue.
     syntax:
-      content: 'function getSessionReceiver(options?: SessionReceiverOptions)'
+      content: 'static function getDeadLetterQueuePath(queueName: string)'
       parameters:
-        - id: options
+        - id: queueName
           type:
-            - '@azure/service-bus.SessionReceiverOptions'
-          description: >
-            Options to provide sessionId and ReceiveMode for receiving messages
-            from the
+            - string
+          description: |+
 
-            session enabled Servicebus Queue.
-          optional: true
       return:
         type:
-          - Promise<@azure/service-bus.SessionReceiver>
+          - string
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.QueueClient.id'
+    name: id
+    fullName: id
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: '{string} A unique identifier for the client.'
+    syntax:
+      content: 'id: string'
+      return:
+        type:
+          - string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.QueueClient.peek'
     name: peek(number)
@@ -124,9 +210,9 @@ items:
       It cannot be `Completed/Abandoned/Deferred/Deadlettered`. The lock on it
       cannot be renewed.
     syntax:
-      content: 'function peek(messageCount?: number)'
+      content: 'function peek(maxMessageCount?: number)'
       parameters:
-        - id: messageCount
+        - id: maxMessageCount
           type:
             - number
           description: ''
@@ -154,14 +240,14 @@ items:
       cannot be renewed.
     syntax:
       content: >-
-        function peekBySequenceNumber(fromSequenceNumber: Long, messageCount?:
-        number)
+        function peekBySequenceNumber(fromSequenceNumber: Long,
+        maxMessageCount?: number)
       parameters:
         - id: fromSequenceNumber
           type:
             - Long
           description: The sequence number from where to read the message.
-        - id: messageCount
+        - id: maxMessageCount
           type:
             - number
           description: ''
@@ -171,46 +257,36 @@ items:
           - 'Promise<@azure/service-bus.ReceivedMessageInfo[]>'
     package: '@azure/service-bus'
 references:
-  - uid: '@azure/service-bus.Client'
-    name: Client
+  - uid: '@azure/service-bus.ReceiveMode'
+    name: ReceiveMode
     spec.typeScript:
-      - name: Client
-        fullName: Client
-        uid: '@azure/service-bus.Client'
-  - uid: '@azure/service-bus.MessageReceiverOptions'
-    name: MessageReceiverOptions
-    spec.typeScript:
-      - name: MessageReceiverOptions
-        fullName: MessageReceiverOptions
-        uid: '@azure/service-bus.MessageReceiverOptions'
+      - name: ReceiveMode
+        fullName: ReceiveMode
+        uid: '@azure/service-bus.ReceiveMode'
   - uid: '@azure/service-bus.Receiver'
     name: Receiver
     spec.typeScript:
       - name: Receiver
         fullName: Receiver
         uid: '@azure/service-bus.Receiver'
-  - uid: '@azure/service-bus.Sender'
-    name: Sender
-    spec.typeScript:
-      - name: Sender
-        fullName: Sender
-        uid: '@azure/service-bus.Sender'
   - uid: '@azure/service-bus.SessionReceiverOptions'
     name: SessionReceiverOptions
     spec.typeScript:
       - name: SessionReceiverOptions
         fullName: SessionReceiverOptions
         uid: '@azure/service-bus.SessionReceiverOptions'
-  - uid: Promise<@azure/service-bus.SessionReceiver>
-    name: SessionReceiver>
+  - uid: '@azure/service-bus.SessionReceiver'
+    name: SessionReceiver
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
       - name: SessionReceiver
         fullName: SessionReceiver
         uid: '@azure/service-bus.SessionReceiver'
-      - name: '>'
-        fullName: '>'
+  - uid: '@azure/service-bus.Sender'
+    name: Sender
+    spec.typeScript:
+      - name: Sender
+        fullName: Sender
+        uid: '@azure/service-bus.Sender'
   - uid: 'Promise<@azure/service-bus.ReceivedMessageInfo[]>'
     name: 'ReceivedMessageInfo[]>'
     spec.typeScript:

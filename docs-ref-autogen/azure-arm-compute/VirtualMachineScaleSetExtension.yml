@@ -9,6 +9,8 @@ items:
       - azure-arm-compute.VirtualMachineScaleSetExtension.forceUpdateTag
       - azure-arm-compute.VirtualMachineScaleSetExtension.name
       - azure-arm-compute.VirtualMachineScaleSetExtension.protectedSettings
+      - >-
+        azure-arm-compute.VirtualMachineScaleSetExtension.provisionAfterExtensions
       - azure-arm-compute.VirtualMachineScaleSetExtension.provisioningState
       - azure-arm-compute.VirtualMachineScaleSetExtension.publisher
       - azure-arm-compute.VirtualMachineScaleSetExtension.settings
@@ -17,7 +19,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Describes a Virtual Machine Scale Set Extension.
     extends:
       name: azure-arm-compute.SubResourceReadOnly
     package: azure-arm-compute
@@ -28,7 +30,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Indicates whether the extension should use a newer minor version if one is
+      available at
+
+      deployment time. Once deployed, however, the extension will not upgrade
+      minor versions unless
+
+      redeployed, even with this property set to true.
     optional: true
     syntax:
       content: 'autoUpgradeMinorVersion?: boolean'
@@ -43,7 +52,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If a value is provided and is different from the previous value, the
+      extension handler will be
+
+      forced to update even if the extension configuration has not changed.
     optional: true
     syntax:
       content: 'forceUpdateTag?: string'
@@ -58,7 +71,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The name of the extension.
     optional: true
     syntax:
       content: 'name?: string'
@@ -73,13 +86,34 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The extension can contain either protectedSettings or
+      protectedSettingsFromKeyVault or no
+
+      protected settings at all.
     optional: true
     syntax:
       content: 'protectedSettings?: any'
       return:
         type:
           - any
+    package: azure-arm-compute
+  - uid: azure-arm-compute.VirtualMachineScaleSetExtension.provisionAfterExtensions
+    name: provisionAfterExtensions
+    fullName: provisionAfterExtensions
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Collection of extension names after which this extension needs to be
+      provisioned.
+    optional: true
+    syntax:
+      content: 'provisionAfterExtensions?: string[]'
+      return:
+        type:
+          - 'string[]'
     package: azure-arm-compute
   - uid: azure-arm-compute.VirtualMachineScaleSetExtension.provisioningState
     name: provisioningState
@@ -88,7 +122,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'The provisioning state, which only appears in the response.'
     optional: true
     syntax:
       content: 'provisioningState?: string'
@@ -103,7 +137,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The name of the extension handler publisher.
     optional: true
     syntax:
       content: 'publisher?: string'
@@ -118,7 +152,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Json formatted public settings for the extension.
     optional: true
     syntax:
       content: 'settings?: any'
@@ -133,7 +167,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Specifies the type of the extension; an example is
+      "CustomScriptExtension".
     optional: true
     syntax:
       content: 'type?: string'
@@ -148,7 +184,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Specifies the version of the script handler.
     optional: true
     syntax:
       content: 'typeHandlerVersion?: string'

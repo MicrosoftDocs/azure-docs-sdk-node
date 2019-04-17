@@ -8,7 +8,9 @@ items:
       - azure-arm-compute.Disk.diskIOPSReadWrite
       - azure-arm-compute.Disk.diskMBpsReadWrite
       - azure-arm-compute.Disk.diskSizeGB
-      - azure-arm-compute.Disk.encryptionSettings
+      - azure-arm-compute.Disk.diskState
+      - azure-arm-compute.Disk.encryptionSettingsCollection
+      - azure-arm-compute.Disk.hyperVGeneration
       - azure-arm-compute.Disk.managedBy
       - azure-arm-compute.Disk.osType
       - azure-arm-compute.Disk.provisioningState
@@ -18,7 +20,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Disk resource.
     extends:
       name: azure-arm-compute.Resource
     package: azure-arm-compute
@@ -29,7 +31,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Disk source information. CreationData information cannot be changed after
+      the disk has been
+
+      created.
     syntax:
       content: 'creationData: CreationData'
       return:
@@ -43,7 +49,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The number of IOPS allowed for this disk; only settable for UltraSSD
+      disks. One operation can
+
+      transfer between 4k and 256k bytes.
     optional: true
     syntax:
       content: 'diskIOPSReadWrite?: number'
@@ -58,7 +68,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The bandwidth allowed for this disk; only settable for UltraSSD disks.
+      MBps means millions of
+
+      bytes per second - MB here uses the ISO notation, of powers of 10.
     optional: true
     syntax:
       content: 'diskMBpsReadWrite?: number'
@@ -73,7 +87,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If creationData.createOption is Empty, this field is mandatory and it
+      indicates the size of
+
+      the VHD to create. If this field is present for updates or creation with
+      other options, it
+
+      indicates a resize. Resizes are only allowed if the disk is not attached
+      to a running VM, and
+
+      can only increase the disk's size.
     optional: true
     syntax:
       content: 'diskSizeGB?: number'
@@ -81,20 +105,62 @@ items:
         type:
           - number
     package: azure-arm-compute
-  - uid: azure-arm-compute.Disk.encryptionSettings
-    name: encryptionSettings
-    fullName: encryptionSettings
+  - uid: azure-arm-compute.Disk.diskState
+    name: diskState
+    fullName: diskState
     children: []
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The state of the disk. Possible values include: 'Unattached', 'Attached',
+      'Reserved',
+
+      'ActiveSAS', 'ReadyToUpload', 'ActiveUpload'
     optional: true
     syntax:
-      content: 'encryptionSettings?: EncryptionSettings'
+      content: 'diskState?: string'
       return:
         type:
-          - azure-arm-compute.EncryptionSettings
+          - string
+    package: azure-arm-compute
+  - uid: azure-arm-compute.Disk.encryptionSettingsCollection
+    name: encryptionSettingsCollection
+    fullName: encryptionSettingsCollection
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Encryption settings collection used for Azure Disk Encryption, can contain
+      multiple encryption
+
+      settings per disk or snapshot.
+    optional: true
+    syntax:
+      content: 'encryptionSettingsCollection?: EncryptionSettingsCollection'
+      return:
+        type:
+          - azure-arm-compute.EncryptionSettingsCollection
+    package: azure-arm-compute
+  - uid: azure-arm-compute.Disk.hyperVGeneration
+    name: hyperVGeneration
+    fullName: hyperVGeneration
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The hypervisor generation of the Virtual Machine. Applicable to OS disks
+      only. Possible values
+
+      include: 'V1', 'V2'
+    optional: true
+    syntax:
+      content: 'hyperVGeneration?: string'
+      return:
+        type:
+          - string
     package: azure-arm-compute
   - uid: azure-arm-compute.Disk.managedBy
     name: managedBy
@@ -103,7 +169,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: A relative URI containing the ID of the VM that has the disk attached.
     optional: true
     syntax:
       content: 'managedBy?: string'
@@ -118,7 +184,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'The Operating System type. Possible values include: ''Windows'', ''Linux'''
     optional: true
     syntax:
       content: 'osType?: string'
@@ -133,7 +199,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The disk provisioning state.
     optional: true
     syntax:
       content: 'provisioningState?: string'
@@ -163,7 +229,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The time when the disk was created.
     optional: true
     syntax:
       content: 'timeCreated?: Date'
@@ -178,7 +244,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The Logical zone list for Disk.
     optional: true
     syntax:
       content: 'zones?: string[]'
@@ -199,12 +265,12 @@ references:
       - name: CreationData
         fullName: CreationData
         uid: azure-arm-compute.CreationData
-  - uid: azure-arm-compute.EncryptionSettings
-    name: EncryptionSettings
+  - uid: azure-arm-compute.EncryptionSettingsCollection
+    name: EncryptionSettingsCollection
     spec.typeScript:
-      - name: EncryptionSettings
-        fullName: EncryptionSettings
-        uid: azure-arm-compute.EncryptionSettings
+      - name: EncryptionSettingsCollection
+        fullName: EncryptionSettingsCollection
+        uid: azure-arm-compute.EncryptionSettingsCollection
   - uid: azure-arm-compute.DiskSku
     name: DiskSku
     spec.typeScript:

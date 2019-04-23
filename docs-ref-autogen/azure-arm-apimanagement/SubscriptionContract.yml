@@ -4,24 +4,40 @@ items:
     name: SubscriptionContract
     fullName: SubscriptionContract
     children:
+      - azure-arm-apimanagement.SubscriptionContract.allowTracing
       - azure-arm-apimanagement.SubscriptionContract.createdDate
       - azure-arm-apimanagement.SubscriptionContract.displayName
       - azure-arm-apimanagement.SubscriptionContract.endDate
       - azure-arm-apimanagement.SubscriptionContract.expirationDate
       - azure-arm-apimanagement.SubscriptionContract.notificationDate
+      - azure-arm-apimanagement.SubscriptionContract.ownerId
       - azure-arm-apimanagement.SubscriptionContract.primaryKey
-      - azure-arm-apimanagement.SubscriptionContract.productId
+      - azure-arm-apimanagement.SubscriptionContract.scope
       - azure-arm-apimanagement.SubscriptionContract.secondaryKey
       - azure-arm-apimanagement.SubscriptionContract.startDate
       - azure-arm-apimanagement.SubscriptionContract.state
       - azure-arm-apimanagement.SubscriptionContract.stateComment
-      - azure-arm-apimanagement.SubscriptionContract.userId
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Subscription details.
     extends:
       name: azure-arm-apimanagement.Resource
+    package: azure-arm-apimanagement
+  - uid: azure-arm-apimanagement.SubscriptionContract.allowTracing
+    name: allowTracing
+    fullName: allowTracing
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Determines whether tracing is enabled
+    optional: true
+    syntax:
+      content: 'allowTracing?: boolean'
+      return:
+        type:
+          - boolean
     package: azure-arm-apimanagement
   - uid: azure-arm-apimanagement.SubscriptionContract.createdDate
     name: createdDate
@@ -30,7 +46,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Subscription creation date. The date conforms to the following format:
+      `yyyy-MM-ddTHH:mm:ssZ`
+
+      as specified by the ISO 8601 standard.
     optional: true
     syntax:
       content: 'createdDate?: Date'
@@ -45,7 +65,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'The name of the subscription, or null if the subscription has no name.'
     optional: true
     syntax:
       content: 'displayName?: string'
@@ -60,7 +80,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Date when subscription was cancelled or expired. The setting is for audit
+      purposes only and
+
+      the subscription is not automatically cancelled. The subscription
+      lifecycle can be managed by
+
+      using the `state` property. The date conforms to the following format:
+      `yyyy-MM-ddTHH:mm:ssZ`
+
+      as specified by the ISO 8601 standard.
     optional: true
     syntax:
       content: 'endDate?: Date'
@@ -75,7 +105,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Subscription expiration date. The setting is for audit purposes only and
+      the subscription is
+
+      not automatically expired. The subscription lifecycle can be managed by
+      using the `state`
+
+      property. The date conforms to the following format:
+      `yyyy-MM-ddTHH:mm:ssZ` as specified by
+
+      the ISO 8601 standard.
     optional: true
     syntax:
       content: 'expirationDate?: Date'
@@ -90,13 +130,36 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Upcoming subscription expiration notification date. The date conforms to
+      the following format:
+
+      `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
     optional: true
     syntax:
       content: 'notificationDate?: Date'
       return:
         type:
           - Date
+    package: azure-arm-apimanagement
+  - uid: azure-arm-apimanagement.SubscriptionContract.ownerId
+    name: ownerId
+    fullName: ownerId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The user resource identifier of the subscription owner. The value is a
+      valid relative URL in
+
+      the format of /users/{userId} where {userId} is a user identifier.
+    optional: true
+    syntax:
+      content: 'ownerId?: string'
+      return:
+        type:
+          - string
     package: azure-arm-apimanagement
   - uid: azure-arm-apimanagement.SubscriptionContract.primaryKey
     name: primaryKey
@@ -105,23 +168,23 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Subscription primary key.
     syntax:
       content: 'primaryKey: string'
       return:
         type:
           - string
     package: azure-arm-apimanagement
-  - uid: azure-arm-apimanagement.SubscriptionContract.productId
-    name: productId
-    fullName: productId
+  - uid: azure-arm-apimanagement.SubscriptionContract.scope
+    name: scope
+    fullName: scope
     children: []
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'Scope like /products/{productId} or /apis or /apis/{apiId}.'
     syntax:
-      content: 'productId: string'
+      content: 'scope: string'
       return:
         type:
           - string
@@ -133,7 +196,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Subscription secondary key.
     syntax:
       content: 'secondaryKey: string'
       return:
@@ -147,7 +210,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Subscription activation date. The setting is for audit purposes only and
+      the subscription is
+
+      not automatically activated. The subscription lifecycle can be managed by
+      using the `state`
+
+      property. The date conforms to the following format:
+      `yyyy-MM-ddTHH:mm:ssZ` as specified by
+
+      the ISO 8601 standard.
     optional: true
     syntax:
       content: 'startDate?: Date'
@@ -162,7 +235,29 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Subscription state. Possible states are * active – the subscription is
+      active, * suspended –
+
+      the subscription is blocked, and the subscriber cannot call any APIs of
+      the product, *
+
+      submitted – the subscription request has been made by the developer, but
+      has not yet been
+
+      approved or rejected, * rejected – the subscription request has been
+      denied by an
+
+      administrator, * cancelled – the subscription has been cancelled by the
+      developer or
+
+      administrator, * expired – the subscription reached its expiration date
+      and was deactivated.
+
+      Possible values include: 'suspended', 'active', 'expired', 'submitted',
+      'rejected',
+
+      'cancelled'
     syntax:
       content: 'state: string'
       return:
@@ -176,24 +271,10 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Optional subscription comment added by an administrator.
     optional: true
     syntax:
       content: 'stateComment?: string'
-      return:
-        type:
-          - string
-    package: azure-arm-apimanagement
-  - uid: azure-arm-apimanagement.SubscriptionContract.userId
-    name: userId
-    fullName: userId
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    syntax:
-      content: 'userId: string'
       return:
         type:
           - string

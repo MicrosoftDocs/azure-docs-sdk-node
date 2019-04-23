@@ -19,11 +19,13 @@ items:
       - azure-arm-apimanagement.ApiContract.path
       - azure-arm-apimanagement.ApiContract.protocols
       - azure-arm-apimanagement.ApiContract.serviceUrl
+      - azure-arm-apimanagement.ApiContract.sourceApiId
       - azure-arm-apimanagement.ApiContract.subscriptionKeyParameterNames
+      - azure-arm-apimanagement.ApiContract.subscriptionRequired
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Api details.
     extends:
       name: azure-arm-apimanagement.Resource
     package: azure-arm-apimanagement
@@ -34,7 +36,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes the Revision of the Api. If no value is provided, default
+      revision 1 is created
     optional: true
     syntax:
       content: 'apiRevision?: string'
@@ -49,7 +53,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Description of the Api Revision.
     optional: true
     syntax:
       content: 'apiRevisionDescription?: string'
@@ -64,7 +68,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'Type of API. Possible values include: ''http'', ''soap'''
     optional: true
     syntax:
       content: 'apiType?: string'
@@ -79,7 +83,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Indicates the Version identifier of the API if the API is versioned
     optional: true
     syntax:
       content: 'apiVersion?: string'
@@ -94,7 +98,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Description of the Api Version.
     optional: true
     syntax:
       content: 'apiVersionDescription?: string'
@@ -109,7 +113,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Version set details
     optional: true
     syntax:
       content: 'apiVersionSet?: ApiVersionSetContractDetails'
@@ -124,7 +128,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: A resource identifier for the related ApiVersionSet.
     optional: true
     syntax:
       content: 'apiVersionSetId?: string'
@@ -139,7 +143,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Collection of authentication settings included into this API.
     optional: true
     syntax:
       content: 'authenticationSettings?: AuthenticationSettingsContract'
@@ -154,7 +158,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Description of the API. May include HTML formatting tags.
     optional: true
     syntax:
       content: 'description?: string'
@@ -169,7 +173,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: API name. Must be 1 to 300 characters long.
     optional: true
     syntax:
       content: 'displayName?: string'
@@ -184,7 +188,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Indicates if API revision is current api revision.
     optional: true
     syntax:
       content: 'isCurrent?: boolean'
@@ -199,7 +203,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Indicates if API revision is accessible via the gateway.
     optional: true
     syntax:
       content: 'isOnline?: boolean'
@@ -214,7 +218,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Relative URL uniquely identifying this API and all of its resource paths
+      within the API
+
+      Management service instance. It is appended to the API endpoint base URL
+      specified during the
+
+      service instance creation to form a public URL for this API.
     syntax:
       content: 'path: string'
       return:
@@ -228,7 +239,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Describes on which protocols the operations in this API can be invoked.
     optional: true
     syntax:
       content: 'protocols?: string[]'
@@ -243,10 +254,29 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Absolute URL of the backend service implementing this API. Cannot be more
+      than 2000 characters
+
+      long.
     optional: true
     syntax:
       content: 'serviceUrl?: string'
+      return:
+        type:
+          - string
+    package: azure-arm-apimanagement
+  - uid: azure-arm-apimanagement.ApiContract.sourceApiId
+    name: sourceApiId
+    fullName: sourceApiId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: API identifier of the source API.
+    optional: true
+    syntax:
+      content: 'sourceApiId?: string'
       return:
         type:
           - string
@@ -258,13 +288,30 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Protocols over which API is made available.
     optional: true
     syntax:
       content: 'subscriptionKeyParameterNames?: SubscriptionKeyParameterNamesContract'
       return:
         type:
           - azure-arm-apimanagement.SubscriptionKeyParameterNamesContract
+    package: azure-arm-apimanagement
+  - uid: azure-arm-apimanagement.ApiContract.subscriptionRequired
+    name: subscriptionRequired
+    fullName: subscriptionRequired
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Specifies whether an API or Product subscription is required for accessing
+      the API.
+    optional: true
+    syntax:
+      content: 'subscriptionRequired?: boolean'
+      return:
+        type:
+          - boolean
     package: azure-arm-apimanagement
 references:
   - uid: azure-arm-apimanagement.Resource

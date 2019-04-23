@@ -8,6 +8,8 @@ items:
       - azure-arm-apimanagement.ApiManagementServiceResource.certificates
       - azure-arm-apimanagement.ApiManagementServiceResource.createdAtUtc
       - azure-arm-apimanagement.ApiManagementServiceResource.customProperties
+      - >-
+        azure-arm-apimanagement.ApiManagementServiceResource.enableClientCertificate
       - azure-arm-apimanagement.ApiManagementServiceResource.etag
       - azure-arm-apimanagement.ApiManagementServiceResource.gatewayRegionalUrl
       - azure-arm-apimanagement.ApiManagementServiceResource.gatewayUrl
@@ -34,7 +36,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: A single API Management service resource in List or Get response.
     extends:
       name: azure-arm-apimanagement.ApimResource
     package: azure-arm-apimanagement
@@ -45,7 +47,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Additional datacenter locations of the API Management service.
     optional: true
     syntax:
       content: 'additionalLocations?: AdditionalLocation[]'
@@ -60,7 +62,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      List of Certificates that need to be installed in the API Management
+      service. Max supported
+
+      certificates that can be installed is 10.
     optional: true
     syntax:
       content: 'certificates?: CertificateConfiguration[]'
@@ -75,7 +81,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Creation UTC date of the API Management service.The date conforms to the
+      following format:
+
+      `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
     optional: true
     syntax:
       content: 'createdAtUtc?: Date'
@@ -90,13 +100,53 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Custom properties of the API Management service. Setting
+
+      `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168`
+      will disable the
+
+      cipher TLS_RSA_WITH_3DES_EDE_CBC_SHA for all TLS(1.0, 1.1 and 1.2).
+      Setting
+
+      `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11`
+      can be used to disable
+
+      just TLS 1.1 and setting
+
+      `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10`
+      can be used to disable
+
+      TLS 1.0 on an API Management service.
     optional: true
     syntax:
       content: 'customProperties?: [key: string]: string'
       return:
         type:
           - '[key: string]: string'
+    package: azure-arm-apimanagement
+  - uid: >-
+      azure-arm-apimanagement.ApiManagementServiceResource.enableClientCertificate
+    name: enableClientCertificate
+    fullName: enableClientCertificate
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Property only meant to be used for Consumption SKU Service. This enforces
+      a client certificate
+
+      to be presented on each request to the gateway. This also enables the
+      ability to authenticate
+
+      the certificate in the policy on the gateway.
+    optional: true
+    syntax:
+      content: 'enableClientCertificate?: boolean'
+      return:
+        type:
+          - boolean
     package: azure-arm-apimanagement
   - uid: azure-arm-apimanagement.ApiManagementServiceResource.etag
     name: etag
@@ -105,7 +155,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: ETag of the resource.
     optional: true
     syntax:
       content: 'etag?: string'
@@ -120,7 +170,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Gateway URL of the API Management service in the Default Region.
     optional: true
     syntax:
       content: 'gatewayRegionalUrl?: string'
@@ -135,7 +185,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Gateway URL of the API Management service.
     optional: true
     syntax:
       content: 'gatewayUrl?: string'
@@ -151,7 +201,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Custom hostname configuration of the API Management service.
     optional: true
     syntax:
       content: 'hostnameConfigurations?: HostnameConfiguration[]'
@@ -166,7 +216,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Managed service identity of the Api Management service.
     optional: true
     syntax:
       content: 'identity?: ApiManagementServiceIdentity'
@@ -181,7 +231,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Resource location.
     syntax:
       content: 'location: string'
       return:
@@ -195,7 +245,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Management API endpoint URL of the API Management service.
     optional: true
     syntax:
       content: 'managementApiUrl?: string'
@@ -211,7 +261,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Email address from which the notification will be sent.
     optional: true
     syntax:
       content: 'notificationSenderEmail?: string'
@@ -226,7 +276,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Publisher portal endpoint Url of the API Management service.
     optional: true
     syntax:
       content: 'portalUrl?: string'
@@ -241,7 +291,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Private Static Load Balanced IP addresses of the API Management service in
+      Primary region
+
+      which is deployed in an Internal Virtual Network. Available only for
+      Basic, Standard and
+
+      Premium SKU.
     optional: true
     syntax:
       content: 'privateIPAddresses?: string[]'
@@ -256,7 +313,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The current provisioning state of the API Management service which can be
+      one of the
+
+      following:
+
+      Created/Activating/Succeeded/Updating/Failed/Stopped/Terminating/TerminationFailed/Deleted.
     optional: true
     syntax:
       content: 'provisioningState?: string'
@@ -271,7 +334,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Public Static Load Balanced IP addresses of the API Management service in
+      Primary region.
+
+      Available only for Basic, Standard and Premium SKU.
     optional: true
     syntax:
       content: 'publicIPAddresses?: string[]'
@@ -286,7 +353,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Publisher email.
     syntax:
       content: 'publisherEmail: string'
       return:
@@ -300,7 +367,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Publisher name.
     syntax:
       content: 'publisherName: string'
       return:
@@ -314,7 +381,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: SCM endpoint URL of the API Management service.
     optional: true
     syntax:
       content: 'scmUrl?: string'
@@ -329,7 +396,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: SKU properties of the API Management service.
     syntax:
       content: 'sku: ApiManagementServiceSkuProperties'
       return:
@@ -344,7 +411,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The provisioning state of the API Management service, which is targeted by
+      the long running
+
+      operation started on the service.
     optional: true
     syntax:
       content: 'targetProvisioningState?: string'
@@ -360,7 +431,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Virtual network configuration of the API Management service.
     optional: true
     syntax:
       content: 'virtualNetworkConfiguration?: VirtualNetworkConfiguration'
@@ -375,7 +446,23 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The type of VPN in which API Management service needs to be configured in.
+      None (Default
+
+      Value) means the API Management service is not part of any Virtual
+      Network, External means the
+
+      API Management deployment is set up inside a Virtual Network having an
+      Internet Facing
+
+      Endpoint, and Internal means that API Management deployment is setup
+      inside a Virtual Network
+
+      having an Intranet Facing Endpoint only. Possible values include: 'None',
+      'External',
+
+      'Internal'
     optional: true
     syntax:
       content: 'virtualNetworkType?: string'

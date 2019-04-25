@@ -1,5 +1,5 @@
 ---
-title: Azure Mixed Reality Resource Management libraries for Node.js
+title: Azure Mixed Reality Resource Management Modules for Node.js
 description: Reference for Azure Mixed Reality Resource Management for Node.js
 author: Xiangyu Luo
 ms.author: xiangyul
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Mixed Reality
 ---
 
-# Azure Cosmos DB Modules for Node.js
+# Azure Mixed Reality Resource Management Modules for Node.js
 
 Microsoft provides a series of Azure services to empower Mixed Reality devices and applications. Currently, such services are provided:
 

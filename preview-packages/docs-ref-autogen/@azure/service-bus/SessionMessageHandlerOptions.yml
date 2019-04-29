@@ -11,7 +11,11 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: Describes the options to control receiving of messages in streaming mode.
+    summary: >-
+      Describes the options passed to `registerMessageHandler` method when
+      receiving messages from a
+
+      Queue/Subscription which has sessions enabled.
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SessionMessageHandlerOptions.autoComplete'
     name: autoComplete
@@ -21,21 +25,21 @@ items:
       - typeScript
     type: property
     summary: >-
-      {boolean} [autoComplete] Indicates whether the message (if not settled by
-      the user)
+      Indicates whether the `complete()` method on the message should
+      automatically be
 
-      should be automatically completed after the user provided onMessage
-      handler has been executed.
+      called by the sdk after the user provided onMessage handler has been
+      executed.
 
-      Completing a message, removes it from the Queue/Subscription.
+      Calling `complete()` on a message removes it from the Queue/Subscription.
 
       - **Default**: `true`.
     optional: true
     syntax:
-      content: 'autoComplete?: boolean'
+      content: 'autoComplete?: undefined | false | true'
       return:
         type:
-          - boolean
+          - undefined | false | true
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SessionMessageHandlerOptions.maxConcurrentCalls'
     name: maxConcurrentCalls
@@ -57,10 +61,10 @@ items:
       - **Default**: `1`.
     optional: true
     syntax:
-      content: 'maxConcurrentCalls?: number'
+      content: 'maxConcurrentCalls?: undefined | number'
       return:
         type:
-          - number
+          - undefined | number
     package: '@azure/service-bus'
   - uid: >-
       @azure/service-bus.SessionMessageHandlerOptions.newMessageWaitTimeoutInSeconds
@@ -71,30 +75,27 @@ items:
       - typeScript
     type: property
     summary: >-
-      {number} [newMessageWaitTimeoutInSeconds] The maximum amount of time the
-      receiver
+      The maximum amount of time the receiver will wait to receive a new
+      message. If no new
 
-      will wait to receive a new message. If no new message is received in this
-      time, then the
-
-      receiver will be closed.
+      message is received in this time, then the receiver will be closed.
 
 
-      Caution: When setting this value, take into account the time taken to
+      If this option is not provided, then receiver link will stay open until
+      manually closed.
+
+
+      **Caution**: When setting this value, take into account the time taken to
       process messages. Once
 
       the receiver is closed, operations like
       complete()/abandon()/defer()/deadletter() cannot be
 
       invoked on messages.
-
-
-      If this option is not provided, then receiver link will stay open until
-      manually closed.
     optional: true
     syntax:
-      content: 'newMessageWaitTimeoutInSeconds?: number'
+      content: 'newMessageWaitTimeoutInSeconds?: undefined | number'
       return:
         type:
-          - number
+          - undefined | number
     package: '@azure/service-bus'

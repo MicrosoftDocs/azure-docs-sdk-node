@@ -24,13 +24,13 @@ items:
       Describes the client that allows interacting with a Service Bus
       Subscription.
 
-      Use the `createSubscriptionClient` function on the Namespace object to
-      instantiate a
+      Use the `createSubscriptionClient` function on the ServiceBusClient object
+      to instantiate a
 
       SubscriptionClient
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SubscriptionClient.addRule'
-    name: 'addRule(string, boolean | string | CorrelationFilter, string)'
+    name: 'addRule(string, boolean | string | CorrelationFilter, undefined | string)'
     children: []
     type: method
     langs:
@@ -39,8 +39,8 @@ items:
       Adds a rule on the subscription as defined by the given rule name, filter
       and action.
 
-      Remember to remove the default true filter on the subscription before
-      adding a rule,
+      **Note**: Remove the default true filter on the subscription before adding
+      a rule,
 
       otherwise, the added rule will have no affect as the true filter will
       always result in
@@ -49,7 +49,7 @@ items:
     syntax:
       content: >-
         function addRule(ruleName: string, filter: boolean | string |
-        CorrelationFilter, sqlRuleActionExpression?: string)
+        CorrelationFilter, sqlRuleActionExpression?: undefined | string)
       parameters:
         - id: ruleName
           type:
@@ -66,7 +66,7 @@ items:
             syntax](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-sql-filter).
         - id: sqlRuleActionExpression
           type:
-            - string
+            - undefined | string
           description: >
             Action to perform if the message satisfies the filtering expression.
             For SQL Rule Action syntax,
@@ -90,10 +90,7 @@ items:
       Once closed, neither the SubscriptionClient nor its receivers can be used
       for any
 
-      further operations. Use the `createSubscriptionClient` function on the
-      Namespace object to
-
-      instantiate a new SubscriptionClient.
+      further operations.
     syntax:
       content: function close()
       parameters: []
@@ -125,7 +122,20 @@ items:
             An enum indicating the mode in which messages should be received.
             Possible
 
-            values are `ReceiveMode.peekLock` and `ReceiveMode.receiveAndDelete`
+            values are:
+
+            - `ReceiveMode.peekLock`: Once a message is received in this mode,
+            the receiver has a lock on
+
+            the message for a particular duration. If the message is not settled
+            by this time, it lands back
+
+            on Service Bus to be fetched by the next receive operation.
+
+            - `ReceiveMode.receiveAndDelete`: Messages received in this mode get
+            automatically removed from
+
+            Service Bus.
       return:
         type:
           - '@azure/service-bus.Receiver'
@@ -136,15 +146,15 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >
+    summary: >-
       Creates a Receiver for receiving messages from a session enabled
       Subscription. When no sessionId is
 
       given, a random session among the available sessions is used.
 
-      Throws error if an open receiver already exists for given sessionId.
+      - Throws error if an open receiver already exists for given sessionId.
 
-      Throws error if the Subscription does not have sessions enabled.
+      - Throws error if the Queue does not have sessions enabled.
     syntax:
       content: >-
         function createReceiver(receiveMode: ReceiveMode, sessionOptions:
@@ -157,7 +167,20 @@ items:
             An enum indicating the mode in which messages should be received.
             Possible
 
-            values are `ReceiveMode.peekLock` and `ReceiveMode.receiveAndDelete`
+            values are:
+
+            - `ReceiveMode.peekLock`: Once a message is received in this mode,
+            the receiver has a lock on
+
+            the message for a particular duration. If the message is not settled
+            by this time, it lands back
+
+            on Service Bus to be fetched by the next receive operation.
+
+            - `ReceiveMode.receiveAndDelete`: Messages received in this mode get
+            automatically removed from
+
+            Service Bus.
         - id: sessionOptions
           type:
             - '@azure/service-bus.SessionReceiverOptions'
@@ -177,7 +200,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: '{string} defaultRuleName Name of the default rule on the subscription.'
+    summary: defaultRuleName Name of the default rule on the subscription.
     syntax:
       content: 'defaultRuleName: string'
       return:
@@ -192,8 +215,8 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} The entitypath for the Service Bus Subscription for which this
-      client is created.
+      The path for the Service Bus Subscription for which this client is
+      created.
     syntax:
       content: 'entityPath: string'
       return:
@@ -221,7 +244,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: '{string} A unique identifier for the client.'
+    summary: A unique identifier for this client.
     syntax:
       content: 'id: string'
       return:
@@ -229,31 +252,31 @@ items:
           - string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SubscriptionClient.peek'
-    name: peek(number)
+    name: peek(undefined | number)
     children: []
     type: method
     langs:
       - typeScript
-    summary: >
+    summary: >-
       Fetches the next batch of active messages (including deferred but not
       deadlettered messages).
 
-      The first call to `peek()` fetches the first active message. Each
+      - The first call to `peek()` fetches the first active message. Each
       subsequent call fetches the
 
       subsequent message.
 
-      Unlike a `received` message, `peeked` message is a read-only version of
+      - Unlike a `received` message, `peeked` message is a read-only version of
       the message.
 
       It cannot be `Completed/Abandoned/Deferred/Deadlettered`. The lock on it
       cannot be renewed.
     syntax:
-      content: 'function peek(maxMessageCount?: number)'
+      content: 'function peek(maxMessageCount?: undefined | number)'
       parameters:
         - id: maxMessageCount
           type:
-            - number
+            - undefined | number
           description: ''
           optional: true
       return:
@@ -261,18 +284,18 @@ items:
           - 'Promise<@azure/service-bus.ReceivedMessageInfo[]>'
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SubscriptionClient.peekBySequenceNumber'
-    name: 'peekBySequenceNumber(Long, number)'
+    name: 'peekBySequenceNumber(Long, undefined | number)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: >
+    summary: >-
       Peeks the desired number of active messages (including deferred but not
       deadlettered messages)
 
       from the specified sequence number.
 
-      Unlike a `received` message, `peeked` message is a read-only version of
+      - Unlike a `received` message, `peeked` message is a read-only version of
       the message.
 
       It cannot be `Completed/Abandoned/Deferred/Deadlettered`. The lock on it
@@ -280,7 +303,7 @@ items:
     syntax:
       content: >-
         function peekBySequenceNumber(fromSequenceNumber: Long,
-        maxMessageCount?: number)
+        maxMessageCount?: undefined | number)
       parameters:
         - id: fromSequenceNumber
           type:
@@ -288,7 +311,7 @@ items:
           description: The sequence number from where to read the message.
         - id: maxMessageCount
           type:
-            - number
+            - undefined | number
           description: ''
           optional: true
       return:
@@ -301,7 +324,13 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Removes the rule on the subscription identified by the given rule name.
+    summary: >-
+      Removes the rule on the subscription identified by the given rule name.
+
+      **Note**: If all rules on a subscription are removed, then the
+      subscription will not receive
+
+      any more messages.
     syntax:
       content: 'function removeRule(ruleName: string)'
       parameters:
@@ -321,7 +350,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: '{string}  The subscription name.'
+    summary: The subscription name.
     syntax:
       content: 'subscriptionName: string'
       return:
@@ -335,7 +364,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: '{string}  The topic name.'
+    summary: The topic name.
     syntax:
       content: 'topicName: string'
       return:

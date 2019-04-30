@@ -20,8 +20,8 @@ items:
       - '@azure/service-bus.SendableMessageInfo.viaPartitionKey'
     langs:
       - typeScript
-    type: module
-    summary: Describes the message to be sent to ServiceBus.
+    type: interface
+    summary: Describes the message to be sent to Service Bus.
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SendableMessageInfo.body'
     name: body
@@ -30,7 +30,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: '{any} body - The message body that needs to be sent or is received.'
+    summary: The message body that needs to be sent or is received.
     syntax:
       content: 'body: any'
       return:
@@ -45,8 +45,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} [contentType] The content type of the message. Optionally
-      describes
+      The content type of the message. Optionally describes
 
       the payload of the message, with a descriptor following the format of
       RFC2045, Section 5, for
@@ -54,10 +53,10 @@ items:
       example "application/json".
     optional: true
     syntax:
-      content: 'contentType?: string'
+      content: 'contentType?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SendableMessageInfo.correlationId'
     name: correlationId
@@ -67,8 +66,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string | number | Buffer} [correlationId] The correlation identifier that
-      allows an
+      The correlation identifier that allows an
 
       application to specify a context for the message for the purposes of
       correlation, for example
@@ -92,7 +90,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} [label] The application specific label. This property enables the
+      The application specific label. This property enables the
 
       application to indicate the purpose of the message to the receiver in a
       standardized. fashion,
@@ -100,10 +98,10 @@ items:
       similar to an email subject line. The mapped AMQP property is "subject".
     optional: true
     syntax:
-      content: 'label?: string'
+      content: 'label?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SendableMessageInfo.messageId'
     name: messageId
@@ -113,7 +111,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string | number | Buffer} [messageId] The message identifier is an
+      The message identifier is an
 
       application-defined value that uniquely identifies the message and its
       payload.
@@ -135,27 +133,29 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} [partitionKey] The partition key for sending a message to a
+      The partition key for sending a message to a partitioned entity.
 
-      partitioned entity. Maximum length is 128 characters. For [partitioned
+      Maximum length is 128 characters. For [partitioned
       entities](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-partitioning),
 
-      etting this value enables assigning related messages to the same internal
+      setting this value enables assigning related messages to the same internal
       partition,
 
       so that submission sequence order is correctly recorded. The partition is
       chosen by a hash
 
-      function over this value and cannot be chosen directly. For session-aware
-      entities,
+      function over this value and cannot be chosen directly.
 
-      the `sessionId` property overrides this value.
+      - For session-aware entities, the `sessionId` property overrides this
+      value.
+
+      - For non partitioned entities, partition key will be ignored
     optional: true
     syntax:
-      content: 'partitionKey?: string'
+      content: 'partitionKey?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SendableMessageInfo.replyTo'
     name: replyTo
@@ -165,8 +165,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} [replyTo] The address of an entity to send replies to. This
-      optional and
+      The address of an entity to send replies to. This optional and
 
       application-defined value is a standard way to express a reply path to the
       receiver of the
@@ -180,10 +179,10 @@ items:
       Correlation](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messages-payloads?#message-routing-and-correlation).
     optional: true
     syntax:
-      content: 'replyTo?: string'
+      content: 'replyTo?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SendableMessageInfo.replyToSessionId'
     name: replyToSessionId
@@ -193,8 +192,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} [replyToSessionId] The session identifier augmenting the
-      `replyTo` address.
+      The session identifier augmenting the `replyTo` address.
 
       Maximum length is 128 characters. This value augments the ReplyTo
       information and specifies
@@ -205,10 +203,10 @@ items:
       Correlation](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messages-payloads?#message-routing-and-correlation).
     optional: true
     syntax:
-      content: 'replyToSessionId?: string'
+      content: 'replyToSessionId?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SendableMessageInfo.scheduledEnqueueTimeUtc'
     name: scheduledEnqueueTimeUtc
@@ -218,8 +216,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {Date} [scheduledEnqueueTimeUtc] The date and time in UTC at which the
-      message will
+      The date and time in UTC at which the message will
 
       be enqueued. This property returns the time in UTC; when setting the
       property, the
@@ -249,8 +246,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} [sessionId] The session identifier for a session-aware entity.
-      Maximum
+      The session identifier for a session-aware entity. Maximum
 
       length is 128 characters. For session-aware entities, this
       application-defined value specifies
@@ -267,10 +263,10 @@ items:
       Sessions](https://docs.microsoft.com/azure/service-bus-messaging/message-sessions).
     optional: true
     syntax:
-      content: 'sessionId?: string'
+      content: 'sessionId?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SendableMessageInfo.timeToLive'
     name: timeToLive
@@ -280,8 +276,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {number} [timeToLive] The message’s time to live value. This value is the
-      relative
+      The message’s time to live value. This value is the relative
 
       duration after which the message expires, starting from the instant the
       message has been
@@ -300,10 +295,10 @@ items:
       [Expiration](https://docs.microsoft.com/azure/service-bus-messaging/message-expiration).
     optional: true
     syntax:
-      content: 'timeToLive?: number'
+      content: 'timeToLive?: undefined | number'
       return:
         type:
-          - number
+          - undefined | number
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SendableMessageInfo.to'
     name: to
@@ -313,8 +308,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} [to] The "to" address. This property is reserved for future use
-      in routing
+      The "to" address. This property is reserved for future use in routing
 
       scenarios and presently ignored by the broker itself. Applications can use
       this value in
@@ -325,10 +319,10 @@ items:
       scenarios to indicate the intended logical destination of the message.
     optional: true
     syntax:
-      content: 'to?: string'
+      content: 'to?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SendableMessageInfo.userProperties'
     name: userProperties
@@ -337,17 +331,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: >-
-      {{ [key: string]: any }} [userProperties] The application specific
-      properties which can be
-
+    summary: |-
+      The application specific properties which can be
       used for custom message metadata.
     optional: true
     syntax:
-      content: 'userProperties?: [key: string]: any'
+      content: 'userProperties?: undefined | [key: string]: any'
       return:
         type:
-          - '[key: string]: any'
+          - 'undefined | [key: string]: any'
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SendableMessageInfo.viaPartitionKey'
     name: viaPartitionKey
@@ -357,8 +349,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} [viaPartitionKey] The partition key for sending a message into an
-      entity
+      The partition key for sending a message into an entity
 
       via a partitioned transfer queue. Maximum length is 128 characters. If a
       message is sent via a
@@ -375,8 +366,8 @@ items:
       Via](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-transactions#transfers-and-send-via).
     optional: true
     syntax:
-      content: 'viaPartitionKey?: string'
+      content: 'viaPartitionKey?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
     package: '@azure/service-bus'

@@ -14,12 +14,10 @@ items:
       - '@azure/service-bus.ReceivedMessageInfo.sequenceNumber'
     langs:
       - typeScript
-    type: module
-    summary: >-
-      Describes the module that is responsible for converting the message
-      received from ServiceBus
-
-      to/from AmqpMessage.
+    type: interface
+    summary: Describes the message received from Service Bus.
+    extends:
+      name: '@azure/service-bus.SendableMessageInfo'
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ReceivedMessageInfo.deadLetterSource'
     name: deadLetterSource
@@ -41,10 +39,10 @@ items:
       entity in which the message was dead-lettered.
     optional: true
     syntax:
-      content: 'deadLetterSource?: string'
+      content: 'deadLetterSource?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ReceivedMessageInfo.deliveryCount'
     name: deliveryCount
@@ -54,20 +52,19 @@ items:
       - typeScript
     type: property
     summary: >-
-      {number} [deliveryCount] The current delivery count. The value start from
-      1. Number
+      Number of deliveries that have been attempted for this message. The count
+      is
 
-      of deliveries that have been attempted for this message. The count is
-      incremented when a
+      incremented when a message lock expires, or the message is explicitly
+      abandoned using the
 
-      message lock expires, or the message is explicitly abandoned by the
-      receiver.
+      `abandon()` method on the message.
     optional: true
     syntax:
-      content: 'deliveryCount?: number'
+      content: 'deliveryCount?: undefined | number'
       return:
         type:
-          - number
+          - undefined | number
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ReceivedMessageInfo.enqueuedSequenceNumber'
     name: enqueuedSequenceNumber
@@ -77,8 +74,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {number} [enqueuedSequenceNumber] The original sequence number of the
-      message. For
+      The original sequence number of the message. For
 
       messages that have been auto-forwarded, this property reflects the
       sequence number that had
@@ -86,10 +82,10 @@ items:
       first been assigned to the message at its original point of submission.
     optional: true
     syntax:
-      content: 'enqueuedSequenceNumber?: number'
+      content: 'enqueuedSequenceNumber?: undefined | number'
       return:
         type:
-          - number
+          - undefined | number
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ReceivedMessageInfo.enqueuedTimeUtc'
     name: enqueuedTimeUtc
@@ -99,16 +95,8 @@ items:
       - typeScript
     type: property
     summary: >-
-      {Date} [enqueuedTimeUtc] The date and time of the sent message in UTC. The
-      UTC
-
-      instant at which the message has been accepted and stored in the entity.
-      This value can be
-
-      used as an authoritative and neutral arrival time indicator when the
-      receiver does not
-
-      want to trust the sender's clock.
+      The UTC instant at which the message has been accepted and stored in
+      Service Bus.
     optional: true
     syntax:
       content: 'enqueuedTimeUtc?: Date'
@@ -124,16 +112,13 @@ items:
       - typeScript
     type: property
     summary: >-
-      {Date} [expiresAtUtc] The date and time in UTC at which the message is set
-      to expire.
-
       The UTC instant at which the message is marked for removal and no longer
       available for
 
-      retrieval from the entity due to expiration. Expiry is controlled by the
-      `timeToLive` property
+      retrieval from the entity due to expiration. This property is computed
+      from 2 other properties
 
-      and this property is computed from `enqueuedTimeUtc` + `timeToLive`.
+      on the message: `enqueuedTimeUtc` + `timeToLive`.
     optional: true
     syntax:
       content: 'expiresAtUtc?: Date'
@@ -149,19 +134,18 @@ items:
       - typeScript
     type: property
     summary: >-
-      {Date} [lockedUntilUtc] The date and time in UTC until which the message
-      will be
+      The UTC instant until which the message is held locked in the
+      queue/subscription.
 
-      locked in the queue/subscription. For messages retrieved under a lock
-      (peek-lock receive mode,
+      When the lock expires, the `deliveryCount` is incremented and the message
+      is again available
 
-      not pre-settled) this property reflects the UTC instant until which the
-      message is held
+      for retrieval.
 
-      locked in the queue/subscription. When the lock expires, the
-      `deliveryCount` is incremented
+      - Not applicable when the message is received in
+      `ReceiveMode.receiveAndDelete`
 
-      and the message is again available for retrieval.
+      mode.
     optional: true
     syntax:
       content: 'lockedUntilUtc?: Date'
@@ -177,27 +161,25 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} [lockToken] The lock token for the current message. The lock
-      token is a
+      The lock token is a reference to the lock that is being held by the broker
+      in
 
-      reference to the lock that is being held by the broker in
-      `ReceiveMode.PeekLock` mode. Locks
+      `ReceiveMode.PeekLock` mode. Locks are used internally settle messages as
+      explained in the
 
-      are used to explicitly settle messages as explained in the [product
-      documentation in more
+      [product documentation in more
       detail](https://docs.microsoft.com/azure/service-bus-messaging/message-transfers-locks-settlement)
 
-      The token can also be used to pin the lock permanently through the
-      [Deferral
-      API](https://docs.microsoft.com/azure/service-bus-messaging/message-deferral)
+      - Not applicable when the message is received in
+      `ReceiveMode.receiveAndDelete`
 
-      and, with that, take the message out of the regular delivery state flow.
+      mode.
     optional: true
     syntax:
-      content: 'lockToken?: string'
+      content: 'lockToken?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ReceivedMessageInfo.sequenceNumber'
     name: sequenceNumber
@@ -207,8 +189,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {number} [sequenceNumber] The unique number assigned to a message by
-      Service Bus.
+      The unique number assigned to a message by Service Bus.
 
       The sequence number is a unique 64-bit integer assigned to a message as it
       is accepted
@@ -239,3 +220,10 @@ items:
         type:
           - Long
     package: '@azure/service-bus'
+references:
+  - uid: '@azure/service-bus.SendableMessageInfo'
+    name: SendableMessageInfo
+    spec.typeScript:
+      - name: SendableMessageInfo
+        fullName: SendableMessageInfo
+        uid: '@azure/service-bus.SendableMessageInfo'

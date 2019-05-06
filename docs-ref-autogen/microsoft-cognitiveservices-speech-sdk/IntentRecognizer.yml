@@ -12,14 +12,21 @@ items:
         microsoft-cognitiveservices-speech-sdk.IntentRecognizer.authorizationToken
       - microsoft-cognitiveservices-speech-sdk.IntentRecognizer.canceled
       - microsoft-cognitiveservices-speech-sdk.IntentRecognizer.close
+      - microsoft-cognitiveservices-speech-sdk.IntentRecognizer.enableTelemetry
       - microsoft-cognitiveservices-speech-sdk.IntentRecognizer.constructor
       - microsoft-cognitiveservices-speech-sdk.IntentRecognizer.properties
       - microsoft-cognitiveservices-speech-sdk.IntentRecognizer.recognized
       - >-
         microsoft-cognitiveservices-speech-sdk.IntentRecognizer.recognizeOnceAsync
       - microsoft-cognitiveservices-speech-sdk.IntentRecognizer.recognizing
+      - microsoft-cognitiveservices-speech-sdk.IntentRecognizer.sessionStarted
+      - microsoft-cognitiveservices-speech-sdk.IntentRecognizer.sessionStopped
+      - >-
+        microsoft-cognitiveservices-speech-sdk.IntentRecognizer.speechEndDetected
       - >-
         microsoft-cognitiveservices-speech-sdk.IntentRecognizer.speechRecognitionLanguage
+      - >-
+        microsoft-cognitiveservices-speech-sdk.IntentRecognizer.speechStartDetected
       - >-
         microsoft-cognitiveservices-speech-sdk.IntentRecognizer.startContinuousRecognitionAsync
       - >-
@@ -28,6 +35,7 @@ items:
         microsoft-cognitiveservices-speech-sdk.IntentRecognizer.stopContinuousRecognitionAsync
       - >-
         microsoft-cognitiveservices-speech-sdk.IntentRecognizer.stopKeywordRecognitionAsync
+      - microsoft-cognitiveservices-speech-sdk.IntentRecognizer.telemetryEnabled
     langs:
       - typeScript
     type: class
@@ -159,6 +167,25 @@ items:
       content: function close()
       parameters: []
     package: microsoft-cognitiveservices-speech-sdk
+  - uid: microsoft-cognitiveservices-speech-sdk.IntentRecognizer.enableTelemetry
+    name: enableTelemetry(boolean)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: This method globally enables or disables telemetry.
+    syntax:
+      content: 'static function enableTelemetry(enabled: boolean)'
+      parameters:
+        - id: enabled
+          type:
+            - boolean
+          description: |
+            Global setting for telemetry collection.
+            If set to true, telemetry information like microphone errors,
+            recognition errors are collected and sent to Microsoft.
+            If set to false, no telemetry is sent to Microsoft.
+    package: microsoft-cognitiveservices-speech-sdk
   - uid: microsoft-cognitiveservices-speech-sdk.IntentRecognizer.constructor
     name: 'IntentRecognizer(SpeechConfig, AudioConfig)'
     children: []
@@ -273,6 +300,54 @@ items:
             (sender: IntentRecognizer, event: IntentRecognitionEventArgs) =>
             void
     package: microsoft-cognitiveservices-speech-sdk
+  - uid: microsoft-cognitiveservices-speech-sdk.IntentRecognizer.sessionStarted
+    name: sessionStarted
+    fullName: sessionStarted
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Defines event handler for session started events.
+    syntax:
+      content: >-
+        public sessionStarted: (sender: Recognizer, event: SessionEventArgs) =>
+        void
+      return:
+        type:
+          - '(sender: Recognizer, event: SessionEventArgs) => void'
+    package: microsoft-cognitiveservices-speech-sdk
+  - uid: microsoft-cognitiveservices-speech-sdk.IntentRecognizer.sessionStopped
+    name: sessionStopped
+    fullName: sessionStopped
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Defines event handler for session stopped events.
+    syntax:
+      content: >-
+        public sessionStopped: (sender: Recognizer, event: SessionEventArgs) =>
+        void
+      return:
+        type:
+          - '(sender: Recognizer, event: SessionEventArgs) => void'
+    package: microsoft-cognitiveservices-speech-sdk
+  - uid: microsoft-cognitiveservices-speech-sdk.IntentRecognizer.speechEndDetected
+    name: speechEndDetected
+    fullName: speechEndDetected
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Defines event handler for speech stopped events.
+    syntax:
+      content: >-
+        public speechEndDetected: (sender: Recognizer, event:
+        RecognitionEventArgs) => void
+      return:
+        type:
+          - '(sender: Recognizer, event: RecognitionEventArgs) => void'
+    package: microsoft-cognitiveservices-speech-sdk
   - uid: >-
       microsoft-cognitiveservices-speech-sdk.IntentRecognizer.speechRecognitionLanguage
     name: speechRecognitionLanguage
@@ -287,6 +362,23 @@ items:
       return:
         type:
           - string
+    package: microsoft-cognitiveservices-speech-sdk
+  - uid: >-
+      microsoft-cognitiveservices-speech-sdk.IntentRecognizer.speechStartDetected
+    name: speechStartDetected
+    fullName: speechStartDetected
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Defines event handler for speech started events.
+    syntax:
+      content: >-
+        public speechStartDetected: (sender: Recognizer, event:
+        RecognitionEventArgs) => void
+      return:
+        type:
+          - '(sender: Recognizer, event: RecognitionEventArgs) => void'
     package: microsoft-cognitiveservices-speech-sdk
   - uid: >-
       microsoft-cognitiveservices-speech-sdk.IntentRecognizer.startContinuousRecognitionAsync
@@ -412,6 +504,20 @@ items:
           description: |
             Callback invoked in case of an error.
           optional: true
+    package: microsoft-cognitiveservices-speech-sdk
+  - uid: microsoft-cognitiveservices-speech-sdk.IntentRecognizer.telemetryEnabled
+    name: telemetryEnabled
+    fullName: telemetryEnabled
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: This method returns the current state of the telemetry setting.
+    syntax:
+      content: 'public static telemetryEnabled: boolean'
+      return:
+        type:
+          - boolean
     package: microsoft-cognitiveservices-speech-sdk
 references:
   - uid: microsoft-cognitiveservices-speech-sdk.Recognizer

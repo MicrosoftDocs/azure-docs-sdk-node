@@ -4,7 +4,13 @@ items:
     name: StatefulServiceReplicaHealth
     fullName: StatefulServiceReplicaHealth
     children:
+      - azure-servicefabric.StatefulServiceReplicaHealth.aggregatedHealthState
+      - azure-servicefabric.StatefulServiceReplicaHealth.healthEvents
+      - azure-servicefabric.StatefulServiceReplicaHealth.healthStatistics
+      - azure-servicefabric.StatefulServiceReplicaHealth.partitionId
       - azure-servicefabric.StatefulServiceReplicaHealth.replicaId
+      - azure-servicefabric.StatefulServiceReplicaHealth.serviceKind
+      - azure-servicefabric.StatefulServiceReplicaHealth.unhealthyEvaluations
     langs:
       - typeScript
     type: interface
@@ -15,6 +21,80 @@ items:
       unhealthy evaluations.
     extends:
       name: azure-servicefabric.ReplicaHealth
+    package: azure-servicefabric
+  - uid: azure-servicefabric.StatefulServiceReplicaHealth.aggregatedHealthState
+    name: aggregatedHealthState
+    fullName: aggregatedHealthState
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The HealthState representing the aggregated health state of the entity
+      computed by Health
+
+      Manager.
+
+      The health evaluation of the entity reflects all events reported on the
+      entity and its
+
+      children (if any).
+
+      The aggregation is done by applying the desired health policy. Possible
+      values include:
+
+      'Invalid', 'Ok', 'Warning', 'Error', 'Unknown'
+    optional: true
+    syntax:
+      content: 'aggregatedHealthState?: string'
+      return:
+        type:
+          - string
+    package: azure-servicefabric
+  - uid: azure-servicefabric.StatefulServiceReplicaHealth.healthEvents
+    name: healthEvents
+    fullName: healthEvents
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The list of health events reported on the entity.
+    optional: true
+    syntax:
+      content: 'healthEvents?: HealthEvent[]'
+      return:
+        type:
+          - 'azure-servicefabric.HealthEvent[]'
+    package: azure-servicefabric
+  - uid: azure-servicefabric.StatefulServiceReplicaHealth.healthStatistics
+    name: healthStatistics
+    fullName: healthStatistics
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Shows the health statistics for all children types of the queried entity.
+    optional: true
+    syntax:
+      content: 'healthStatistics?: HealthStatistics'
+      return:
+        type:
+          - azure-servicefabric.HealthStatistics
+    package: azure-servicefabric
+  - uid: azure-servicefabric.StatefulServiceReplicaHealth.partitionId
+    name: partitionId
+    fullName: partitionId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Id of the partition to which this replica belongs.
+    optional: true
+    syntax:
+      content: 'partitionId?: string'
+      return:
+        type:
+          - string
     package: azure-servicefabric
   - uid: azure-servicefabric.StatefulServiceReplicaHealth.replicaId
     name: replicaId
@@ -44,6 +124,39 @@ items:
         type:
           - string
     package: azure-servicefabric
+  - uid: azure-servicefabric.StatefulServiceReplicaHealth.serviceKind
+    name: serviceKind
+    fullName: serviceKind
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Polymorphic Discriminator
+    syntax:
+      content: 'serviceKind: string'
+      return:
+        type:
+          - string
+    package: azure-servicefabric
+  - uid: azure-servicefabric.StatefulServiceReplicaHealth.unhealthyEvaluations
+    name: unhealthyEvaluations
+    fullName: unhealthyEvaluations
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The unhealthy evaluations that show why the current aggregated health
+      state was returned by
+
+      Health Manager.
+    optional: true
+    syntax:
+      content: 'unhealthyEvaluations?: HealthEvaluationWrapper[]'
+      return:
+        type:
+          - 'azure-servicefabric.HealthEvaluationWrapper[]'
+    package: azure-servicefabric
 references:
   - uid: azure-servicefabric.ReplicaHealth
     name: ReplicaHealth
@@ -51,3 +164,25 @@ references:
       - name: ReplicaHealth
         fullName: ReplicaHealth
         uid: azure-servicefabric.ReplicaHealth
+  - uid: 'azure-servicefabric.HealthEvent[]'
+    name: 'HealthEvent[]'
+    spec.typeScript:
+      - name: HealthEvent
+        fullName: HealthEvent
+        uid: azure-servicefabric.HealthEvent
+      - name: '[]'
+        fullName: '[]'
+  - uid: azure-servicefabric.HealthStatistics
+    name: HealthStatistics
+    spec.typeScript:
+      - name: HealthStatistics
+        fullName: HealthStatistics
+        uid: azure-servicefabric.HealthStatistics
+  - uid: 'azure-servicefabric.HealthEvaluationWrapper[]'
+    name: 'HealthEvaluationWrapper[]'
+    spec.typeScript:
+      - name: HealthEvaluationWrapper
+        fullName: HealthEvaluationWrapper
+        uid: azure-servicefabric.HealthEvaluationWrapper
+      - name: '[]'
+        fullName: '[]'

@@ -7,8 +7,14 @@ items:
       - '@azure/event-processor-host.AzureBlobLease.constructor'
       - '@azure/event-processor-host.AzureBlobLease.blob'
       - '@azure/event-processor-host.AzureBlobLease.createFromPartitionId'
+      - '@azure/event-processor-host.AzureBlobLease.epoch'
       - '@azure/event-processor-host.AzureBlobLease.getInfo'
+      - '@azure/event-processor-host.AzureBlobLease.incrementEpoch'
+      - '@azure/event-processor-host.AzureBlobLease.isOwned'
+      - '@azure/event-processor-host.AzureBlobLease.isOwnedBy'
       - '@azure/event-processor-host.AzureBlobLease.offset'
+      - '@azure/event-processor-host.AzureBlobLease.owner'
+      - '@azure/event-processor-host.AzureBlobLease.partitionId'
       - '@azure/event-processor-host.AzureBlobLease.sequenceNumber'
       - '@azure/event-processor-host.AzureBlobLease.serialize'
       - '@azure/event-processor-host.AzureBlobLease.token'
@@ -72,6 +78,24 @@ items:
         type:
           - '@azure/event-processor-host.AzureBlobLease'
     package: '@azure/event-processor-host'
+  - uid: '@azure/event-processor-host.AzureBlobLease.epoch'
+    name: epoch
+    fullName: epoch
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      {number} epoch The epoch(time) of the lease, which is a value you can use
+      to
+
+      determine the most recent owner of a partition between competing nodes.
+    syntax:
+      content: 'epoch: number'
+      return:
+        type:
+          - number
+    package: '@azure/event-processor-host'
   - uid: '@azure/event-processor-host.AzureBlobLease.getInfo'
     name: getInfo()
     children: []
@@ -85,6 +109,56 @@ items:
       return:
         type:
           - '@azure/event-processor-host.LeaseInfo'
+    package: '@azure/event-processor-host'
+  - uid: '@azure/event-processor-host.AzureBlobLease.incrementEpoch'
+    name: incrementEpoch()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Increments the value of epoch by 1.
+    syntax:
+      content: function incrementEpoch()
+      parameters: []
+      return:
+        type:
+          - number
+    package: '@azure/event-processor-host'
+  - uid: '@azure/event-processor-host.AzureBlobLease.isOwned'
+    name: isOwned
+    fullName: isOwned
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      {boolean} isOwned Indicates wether the lease is owned. `true` if it is
+      owned by
+
+      someone; `false` otherwise.
+    syntax:
+      content: 'isOwned: boolean'
+      return:
+        type:
+          - boolean
+    package: '@azure/event-processor-host'
+  - uid: '@azure/event-processor-host.AzureBlobLease.isOwnedBy'
+    name: isOwnedBy(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Compares possibleOwner against this.owner
+    syntax:
+      content: 'function isOwnedBy(possibleOwner: string)'
+      parameters:
+        - id: possibleOwner
+          type:
+            - string
+          description: The owner name to check.
+      return:
+        type:
+          - boolean
     package: '@azure/event-processor-host'
   - uid: '@azure/event-processor-host.AzureBlobLease.offset'
     name: offset
@@ -100,6 +174,36 @@ items:
       return:
         type:
           - undefined | string
+    package: '@azure/event-processor-host'
+  - uid: '@azure/event-processor-host.AzureBlobLease.owner'
+    name: owner
+    fullName: owner
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: '{string} owner The host owner for the partition.'
+    syntax:
+      content: 'owner: string'
+      return:
+        type:
+          - string
+    package: '@azure/event-processor-host'
+  - uid: '@azure/event-processor-host.AzureBlobLease.partitionId'
+    name: partitionId
+    fullName: partitionId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      {string} partitionId The associated partitionId for which the lease is
+      held.
+    syntax:
+      content: 'partitionId: string'
+      return:
+        type:
+          - string
     package: '@azure/event-processor-host'
   - uid: '@azure/event-processor-host.AzureBlobLease.sequenceNumber'
     name: sequenceNumber

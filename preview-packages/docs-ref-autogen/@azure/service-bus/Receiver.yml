@@ -11,6 +11,7 @@ items:
       - '@azure/service-bus.Receiver.receiveDeferredMessage'
       - '@azure/service-bus.Receiver.receiveDeferredMessages'
       - '@azure/service-bus.Receiver.receiveMessages'
+      - '@azure/service-bus.Receiver.receiveMode'
       - '@azure/service-bus.Receiver.registerMessageHandler'
       - '@azure/service-bus.Receiver.renewMessageLock'
     langs:
@@ -75,7 +76,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: '{boolean} [isClosed] Denotes if close() was called on this receiver.'
+    summary: >-
+      Returns `true` if either the receiver or the client that created it has
+      been closed
     syntax:
       content: 'isClosed: boolean'
       return:
@@ -91,8 +94,8 @@ items:
     summary: >-
       Indicates whether the receiver is currently receiving messages or not.
 
-      When this returns true, registerMessageHandler() or receiveMessages()
-      calls cannot be made.
+      When this returns true, new `registerMessageHandler()` or
+      `receiveMessages()` calls cannot be made.
     syntax:
       content: function isReceivingMessages()
       parameters: []
@@ -106,14 +109,16 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Receives a deferred message identified by the given `sequenceNumber`.
+    summary: >-
+      Returns a promise that resolves to a deferred message identified by the
+      given `sequenceNumber`.
     syntax:
       content: 'function receiveDeferredMessage(sequenceNumber: Long)'
       parameters:
         - id: sequenceNumber
           type:
             - Long
-          description: The sequence number of the message that will be received.
+          description: The sequence number of the message that needs to be received.
       return:
         type:
           - Promise<@azure/service-bus.ServiceBusMessage | undefined>
@@ -125,34 +130,36 @@ items:
     langs:
       - typeScript
     summary: >-
-      Receives a list of deferred messages identified by given
-      `sequenceNumbers`.
+      Returns a promise that resolves to an array of deferred messages
+      identified by given `sequenceNumbers`.
     syntax:
       content: 'function receiveDeferredMessages(sequenceNumbers: Long[])'
       parameters:
         - id: sequenceNumbers
           type:
             - 'Long[]'
-          description: A list containing the sequence numbers to receive.
+          description: >-
+            An array of sequence numbers for the messages that need to be
+            received.
       return:
         type:
           - 'Promise<@azure/service-bus.ServiceBusMessage[]>'
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.Receiver.receiveMessages'
-    name: 'receiveMessages(number, number)'
+    name: 'receiveMessages(number, undefined | number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns a batch of messages based on given count and timeout over an AMQP
-      receiver link
+      Returns a promise that resolves to an array of messages based on given
+      count and timeout over
 
-      from a Queue/Subscription.
+      an AMQP receiver link from a Queue/Subscription.
     syntax:
       content: >-
         function receiveMessages(maxMessageCount: number, idleTimeoutInSeconds?:
-        number)
+        undefined | number)
       parameters:
         - id: maxMessageCount
           type:
@@ -160,7 +167,7 @@ items:
           description: The maximum number of messages to receive from Queue/Subscription.
         - id: idleTimeoutInSeconds
           type:
-            - number
+            - undefined | number
           description: >-
             The maximum wait time in seconds for which the Receiver
 
@@ -174,6 +181,20 @@ items:
       return:
         type:
           - 'Promise<@azure/service-bus.ServiceBusMessage[]>'
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.Receiver.receiveMode'
+    name: receiveMode
+    fullName: receiveMode
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Denotes receiveMode of this receiver.
+    syntax:
+      content: 'receiveMode: ReceiveMode'
+      return:
+        type:
+          - '@azure/service-bus.ReceiveMode'
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.Receiver.registerMessageHandler'
     name: 'registerMessageHandler(OnMessage, OnError, MessageHandlerOptions)'
@@ -229,14 +250,16 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >
+    summary: >-
       Renews the lock on the message for the duration as specified during the
       Queue/Subscription
 
-      creation. Check the `lockedUntilUtc` property on the message for the time
-      when the lock expires.
+      creation.
 
-      If a message is not settled (using either `complete()`, `defer()` or
+      - Check the `lockedUntilUtc` property on the message for the time when the
+      lock expires.
+
+      - If a message is not settled (using either `complete()`, `defer()` or
       `deadletter()`,
 
       before its lock expires, then the message lands back in the
@@ -257,6 +280,12 @@ items:
           - Promise<Date>
     package: '@azure/service-bus'
 references:
+  - uid: '@azure/service-bus.ReceiveMode'
+    name: ReceiveMode
+    spec.typeScript:
+      - name: ReceiveMode
+        fullName: ReceiveMode
+        uid: '@azure/service-bus.ReceiveMode'
   - uid: AsyncIterableIterator<@azure/service-bus.ServiceBusMessage>
     name: ServiceBusMessage>
     spec.typeScript:

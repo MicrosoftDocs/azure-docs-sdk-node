@@ -53,7 +53,7 @@ items:
     langs:
       - typeScript
     summary: >-
-      Cancels an array of messages that were scheduled to appear on a ServiceBus
+      Cancels multiple messages that were scheduled to appear on a ServiceBus
       Queue/Subscription.
     syntax:
       content: 'function cancelScheduledMessages(sequenceNumbers: Long[])'
@@ -61,7 +61,7 @@ items:
         - id: sequenceNumbers
           type:
             - 'Long[]'
-          description: An Array of sequence numbers of the message to be cancelled.
+          description: An Array of sequence numbers of the messages to be cancelled.
       return:
         type:
           - Promise<void>
@@ -93,7 +93,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: '{boolean} [isClosed] Denotes if close() was called on this sender.'
+    summary: >-
+      Returns `true` if either the sender or the client that created it has been
+      closed
     syntax:
       content: 'isClosed: boolean'
       return:
@@ -189,11 +191,12 @@ items:
 
       Sender link if it doesnt already exists.
 
-      To send messages to a `session` and/or `partition` enabled Queue/Topic,
+      - To send messages to a `session` and/or `partition` enabled Queue/Topic,
       set the `sessionId`
 
-      and/or `partitionKey` properties respectively on the messages. When doing
-      so, all
+      and/or `partitionKey` properties respectively on the messages.
+
+      - When doing so, all
 
       messages in the batch should have the same `sessionId` (if using sessions)
       and the same

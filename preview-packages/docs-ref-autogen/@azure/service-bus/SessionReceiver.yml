@@ -14,6 +14,7 @@ items:
       - '@azure/service-bus.SessionReceiver.receiveDeferredMessage'
       - '@azure/service-bus.SessionReceiver.receiveDeferredMessages'
       - '@azure/service-bus.SessionReceiver.receiveMessages'
+      - '@azure/service-bus.SessionReceiver.receiveMode'
       - '@azure/service-bus.SessionReceiver.registerMessageHandler'
       - '@azure/service-bus.SessionReceiver.renewSessionLock'
       - '@azure/service-bus.SessionReceiver.sessionId'
@@ -84,7 +85,11 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Gets the state of the MessageSession.
+    summary: >-
+      Gets the state of the Session. For more on session states, see
+
+      [Session
+      State](https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-sessions#message-session-state)
     syntax:
       content: function getState()
       parameters: []
@@ -99,7 +104,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: '{boolean} [isClosed] Denotes if close() was called on this receiver.'
+    summary: >-
+      Returns `true` if either the receiver or the client that created it has
+      been closed
     syntax:
       content: 'isClosed: boolean'
       return:
@@ -115,8 +122,8 @@ items:
     summary: >-
       Indicates whether the receiver is currently receiving messages or not.
 
-      When this returns true, registerMessageHandler() or receiveMessages()
-      calls cannot be made.
+      When this returns true, new `registerMessageHandler()` or
+      `receiveMessages()` calls cannot be made.
     syntax:
       content: function isReceivingMessages()
       parameters: []
@@ -125,31 +132,33 @@ items:
           - boolean
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SessionReceiver.peek'
-    name: peek(number)
+    name: peek(undefined | number)
     children: []
     type: method
     langs:
       - typeScript
-    summary: >
+    summary: >-
       Fetches the next batch of active messages (including deferred but not
       deadlettered messages) in
 
-      the current session. The first call to `peek()` fetches the first active
-      message. Each
+      the current session.
 
-      subsequent call fetches the subsequent message.
+      - The first call to `peek()` fetches the first active message. Each
+      subsequent call fetches the
 
-      Unlike a `received` message, `peeked` message is a read-only version of
+      subsequent message.
+
+      - Unlike a `received` message, `peeked` message is a read-only version of
       the message.
 
       It cannot be `Completed/Abandoned/Deferred/Deadlettered`. The lock on it
       cannot be renewed.
     syntax:
-      content: 'function peek(maxMessageCount?: number)'
+      content: 'function peek(maxMessageCount?: undefined | number)'
       parameters:
         - id: maxMessageCount
           type:
-            - number
+            - undefined | number
           description: The maximum number of messages to peek. Default value `1`.
           optional: true
       return:
@@ -157,18 +166,18 @@ items:
           - 'Promise<@azure/service-bus.ReceivedMessageInfo[]>'
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SessionReceiver.peekBySequenceNumber'
-    name: 'peekBySequenceNumber(Long, number)'
+    name: 'peekBySequenceNumber(Long, undefined | number)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: >
+    summary: >-
       Peeks the desired number of active messages (including deferred but not
       deadlettered messages)
 
       from the specified sequence number in the current session.
 
-      Unlike a `received` message, `peeked` message is a read-only version of
+      - Unlike a `received` message, `peeked` message is a read-only version of
       the message.
 
       It cannot be `Completed/Abandoned/Deferred/Deadlettered`. The lock on it
@@ -176,7 +185,7 @@ items:
     syntax:
       content: >-
         function peekBySequenceNumber(fromSequenceNumber: Long,
-        maxMessageCount?: number)
+        maxMessageCount?: undefined | number)
       parameters:
         - id: fromSequenceNumber
           type:
@@ -184,7 +193,7 @@ items:
           description: The sequence number from where to read the message.
         - id: maxMessageCount
           type:
-            - number
+            - undefined | number
           description: ''
           optional: true
       return:
@@ -197,14 +206,16 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Receives a deferred message identified by the given `sequenceNumber`.
+    summary: >-
+      Returns a promise that resolves to a deferred message identified by the
+      given `sequenceNumber`.
     syntax:
       content: 'function receiveDeferredMessage(sequenceNumber: Long)'
       parameters:
         - id: sequenceNumber
           type:
             - Long
-          description: The sequence number of the message that will be received.
+          description: The sequence number of the message that needs to be received.
       return:
         type:
           - Promise<@azure/service-bus.ServiceBusMessage | undefined>
@@ -216,34 +227,36 @@ items:
     langs:
       - typeScript
     summary: >-
-      Receives a list of deferred messages identified by given
-      `sequenceNumbers`.
+      Returns a promise that resolves to an array of deferred messages
+      identified by given `sequenceNumbers`.
     syntax:
       content: 'function receiveDeferredMessages(sequenceNumbers: Long[])'
       parameters:
         - id: sequenceNumbers
           type:
             - 'Long[]'
-          description: A list containing the sequence numbers to receive.
+          description: >-
+            An array of sequence numbers for the messages that need to be
+            received.
       return:
         type:
           - 'Promise<@azure/service-bus.ServiceBusMessage[]>'
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SessionReceiver.receiveMessages'
-    name: 'receiveMessages(number, number)'
+    name: 'receiveMessages(number, undefined | number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns a batch of messages based on given count and timeout over an AMQP
-      receiver link
+      Returns a promise that resolves to an array of messages based on given
+      count and timeout over
 
-      from a Queue/Subscription.
+      an AMQP receiver link from a Queue/Subscription.
     syntax:
       content: >-
         function receiveMessages(maxMessageCount: number, maxWaitTimeInSeconds?:
-        number)
+        undefined | number)
       parameters:
         - id: maxMessageCount
           type:
@@ -251,7 +264,7 @@ items:
           description: The maximum number of messages to receive from Queue/Subscription.
         - id: maxWaitTimeInSeconds
           type:
-            - number
+            - undefined | number
           description: >-
             The maximum wait time in seconds for which the Receiver
 
@@ -265,6 +278,20 @@ items:
       return:
         type:
           - 'Promise<@azure/service-bus.ServiceBusMessage[]>'
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.receiveMode'
+    name: receiveMode
+    fullName: receiveMode
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Denotes receiveMode of this receiver.
+    syntax:
+      content: 'receiveMode: ReceiveMode'
+      return:
+        type:
+          - '@azure/service-bus.ReceiveMode'
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.SessionReceiver.registerMessageHandler'
     name: 'registerMessageHandler(OnMessage, OnError, SessionMessageHandlerOptions)'
@@ -322,20 +349,20 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >
-      Renews the lock on the session.
+    summary: >-
+      Renews the lock on the session for the duration as specified during the
+      Queue/Subscription
 
-      Check the `sessionLockedUntilUtc` property on the reciever for the time
-      when the lock expires.
+      creation.
 
-      When the lock on the session expires
+      - Check the `sessionLockedUntilUtc` property on the SessionReceiver for
+      the time when the lock expires.
 
-      - no more messages can be received using this receiver
-
-      - messages already received but not settled will land back in the
-      Queue/Subscription for the
-
-      next receiver to receive
+      - When the lock on the session expires
+          - No more messages can be received using this receiver
+          - If a message is not settled (using either `complete()`, `defer()` or `deadletter()`,
+        before the session lock expires, then the message lands back in the Queue/Subscription for the next
+        receive operation.
     syntax:
       content: function renewSessionLock()
       parameters: []
@@ -350,7 +377,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: '{string} [sessionId] The sessionId for the message session.'
+    summary: >-
+      The sessionId for the message session.
+
+      Will return undefined until a AMQP receiver link has been successfully set
+      up for the session.
     syntax:
       content: 'sessionId: string | undefined'
       return:
@@ -365,8 +396,16 @@ items:
       - typeScript
     type: property
     summary: >-
-      {Date} [sessionLockedUntilUtc] The time in UTC until which the session is
-      locked.
+      The time in UTC until which the session is locked.
+
+      Everytime `renewSessionLock()` is called, this time gets updated to
+      current time plus the lock
+
+      duration as specified during the Queue/Subscription creation.
+
+
+      Will return undefined until a AMQP receiver link has been successfully set
+      up for the session.
     syntax:
       content: 'sessionLockedUntilUtc: Date | undefined'
       return:
@@ -379,7 +418,11 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Sets the state of the MessageSession.
+    summary: >-
+      Sets the state on the Session. For more on session states, see
+
+      [Session
+      State](https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-sessions#message-session-state)
     syntax:
       content: 'function setState(state: any)'
       parameters:
@@ -393,6 +436,12 @@ items:
           - Promise<void>
     package: '@azure/service-bus'
 references:
+  - uid: '@azure/service-bus.ReceiveMode'
+    name: ReceiveMode
+    spec.typeScript:
+      - name: ReceiveMode
+        fullName: ReceiveMode
+        uid: '@azure/service-bus.ReceiveMode'
   - uid: AsyncIterableIterator<@azure/service-bus.ServiceBusMessage>
     name: ServiceBusMessage>
     spec.typeScript:

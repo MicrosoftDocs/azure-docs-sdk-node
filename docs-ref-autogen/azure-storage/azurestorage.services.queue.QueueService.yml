@@ -18,6 +18,14 @@ items:
         azure-storage.azurestorage.services.queue.QueueService.createQueueIfNotExists_1
       - >-
         azure-storage.azurestorage.services.queue.QueueService.CreateQueueRequestOptions
+      - >-
+        azure-storage.azurestorage.services.queue.QueueService.defaultClientRequestTimeoutInMs
+      - >-
+        azure-storage.azurestorage.services.queue.QueueService.defaultLocationMode
+      - >-
+        azure-storage.azurestorage.services.queue.QueueService.defaultMaximumExecutionTimeInMs
+      - >-
+        azure-storage.azurestorage.services.queue.QueueService.defaultTimeoutIntervalInMs
       - azure-storage.azurestorage.services.queue.QueueService.deleteMessage_1
       - azure-storage.azurestorage.services.queue.QueueService.deleteMessage
       - azure-storage.azurestorage.services.queue.QueueService.deleteQueue_1
@@ -28,6 +36,8 @@ items:
         azure-storage.azurestorage.services.queue.QueueService.deleteQueueIfExists
       - azure-storage.azurestorage.services.queue.QueueService.doesQueueExist_1
       - azure-storage.azurestorage.services.queue.QueueService.doesQueueExist
+      - >-
+        azure-storage.azurestorage.services.queue.QueueService.enableGlobalHttpAgent
       - >-
         azure-storage.azurestorage.services.queue.QueueService.generateSharedAccessSignature
       - >-
@@ -63,6 +73,7 @@ items:
         azure-storage.azurestorage.services.queue.QueueService.listQueuesSegmentedWithPrefix_1
       - >-
         azure-storage.azurestorage.services.queue.QueueService.listQueuesSegmentedWithPrefix
+      - azure-storage.azurestorage.services.queue.QueueService.logger
       - azure-storage.azurestorage.services.queue.QueueService.messageEncoder
       - azure-storage.azurestorage.services.queue.QueueService.peekMessage_1
       - azure-storage.azurestorage.services.queue.QueueService.peekMessage
@@ -70,10 +81,12 @@ items:
       - azure-storage.azurestorage.services.queue.QueueService.peekMessages
       - >-
         azure-storage.azurestorage.services.queue.QueueService.PeekMessagesRequestOptions
+      - azure-storage.azurestorage.services.queue.QueueService.proxy
       - >-
         azure-storage.azurestorage.services.queue.QueueService.QueueMessageResult
       - azure-storage.azurestorage.services.queue.QueueService.QueueResult
       - azure-storage.azurestorage.services.queue.QueueService.constructor
+      - azure-storage.azurestorage.services.queue.QueueService.setProxy
       - azure-storage.azurestorage.services.queue.QueueService.setQueueAcl_1
       - azure-storage.azurestorage.services.queue.QueueService.setQueueAcl
       - >-
@@ -87,6 +100,7 @@ items:
       - azure-storage.azurestorage.services.queue.QueueService.updateMessage
       - >-
         azure-storage.azurestorage.services.queue.QueueService.UpdateMessageRequestOptions
+      - azure-storage.azurestorage.services.queue.QueueService.useNagleAlgorithm
       - azure-storage.azurestorage.services.queue.QueueService.withFilter
     langs:
       - typeScript
@@ -356,6 +370,71 @@ items:
                                                                                     `response` will contain information related to this operation.
           optional: true
     package: azure-storage
+  - uid: >-
+      azure-storage.azurestorage.services.queue.QueueService.defaultClientRequestTimeoutInMs
+    name: defaultClientRequestTimeoutInMs
+    fullName: defaultClientRequestTimeoutInMs
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The default timeout of client requests, in milliseconds, to use for the
+      request.
+    syntax:
+      content: 'defaultClientRequestTimeoutInMs: number'
+      return:
+        type:
+          - number
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.defaultLocationMode
+    name: defaultLocationMode
+    fullName: defaultLocationMode
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The default location mode for requests made via the service.
+    syntax:
+      content: 'defaultLocationMode: LocationMode'
+      return:
+        type:
+          - azure-storage.azurestorage.common.util.storageutilities.LocationMode
+    package: azure-storage
+  - uid: >-
+      azure-storage.azurestorage.services.queue.QueueService.defaultMaximumExecutionTimeInMs
+    name: defaultMaximumExecutionTimeInMs
+    fullName: defaultMaximumExecutionTimeInMs
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The default maximum execution time across all potential retries, for
+      requests made via the service.
+    syntax:
+      content: 'defaultMaximumExecutionTimeInMs: number'
+      return:
+        type:
+          - number
+    package: azure-storage
+  - uid: >-
+      azure-storage.azurestorage.services.queue.QueueService.defaultTimeoutIntervalInMs
+    name: defaultTimeoutIntervalInMs
+    fullName: defaultTimeoutIntervalInMs
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The default timeout interval, in milliseconds, to use for request made via
+      the service.
+    syntax:
+      content: 'defaultTimeoutIntervalInMs: number'
+      return:
+        type:
+          - number
+    package: azure-storage
   - uid: azure-storage.azurestorage.services.queue.QueueService.deleteMessage_1
     name: 'deleteMessage(string, string, string, ErrorOrResponse)'
     children: []
@@ -586,6 +665,25 @@ items:
                                                                                     will be true if the queue exists and false if not,
                                                                                     and `response` will contain information related to this operation.
           optional: true
+    package: azure-storage
+  - uid: >-
+      azure-storage.azurestorage.services.queue.QueueService.enableGlobalHttpAgent
+    name: enableGlobalHttpAgent
+    fullName: enableGlobalHttpAgent
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Determines whether global HTTP(s) agent is enabled; true to use Global
+      HTTP(s) agent; otherwise, false to use
+
+      http(s).Agent({keepAlive:true}).
+    syntax:
+      content: 'enableGlobalHttpAgent: boolean'
+      return:
+        type:
+          - boolean
     package: azure-storage
   - uid: >-
       azure-storage.azurestorage.services.queue.QueueService.generateSharedAccessSignature
@@ -1163,6 +1261,20 @@ items:
                                                                                     `entries`  gives a list of queues and the `continuationToken` is used for the next listing operation.
                                                                                     `response` will contain information related to this operation.
     package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.logger
+    name: logger
+    fullName: logger
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The logging settings object.
+    syntax:
+      content: 'logger: Logger'
+      return:
+        type:
+          - azure-storage.azurestorage.common.diagnostics.logger.Logger
+    package: azure-storage
   - uid: azure-storage.azurestorage.services.queue.QueueService.messageEncoder
     name: messageEncoder
     fullName: messageEncoder
@@ -1305,6 +1417,21 @@ items:
                                                                                     `response` will contain information related to this operation.
           optional: true
     package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.proxy
+    name: proxy
+    fullName: proxy
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The proxy object specified by caller.
+    syntax:
+      content: 'proxy: Proxy'
+      return:
+        type:
+          - >-
+            azure-storage.azurestorage.common.services.storageserviceclient.Proxy
+    package: azure-storage
   - uid: azure-storage.azurestorage.services.queue.QueueService.constructor
     name: 'QueueService(string, string, string | StorageHost, string, string)'
     children: []
@@ -1388,6 +1515,33 @@ items:
             - string
           description: ''
           optional: true
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.setProxy
+    name: setProxy(Proxy)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Sets proxy object specified by caller.
+    syntax:
+      content: 'function setProxy(proxy: Proxy)'
+      parameters:
+        - id: proxy
+          type:
+            - >-
+              azure-storage.azurestorage.common.services.storageserviceclient.Proxy
+          description: |
+            proxy to use for tunneling
+                                                   {
+                                                    host: hostname
+                                                    port: port number
+                                                    proxyAuth: 'user:password' for basic auth
+                                                    headers: {...} headers for proxy server
+                                                    key: key for proxy server
+                                                    ca: ca for proxy server
+                                                    cert: cert for proxy server
+                                                   }
+                                                   if null or undefined, clears proxy
     package: azure-storage
   - uid: azure-storage.azurestorage.services.queue.QueueService.setQueueAcl_1
     name: >-
@@ -1710,6 +1864,24 @@ items:
                                                                                     the message result information.
                                                                                     `response` will contain information related to this operation.
     package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.useNagleAlgorithm
+    name: useNagleAlgorithm
+    fullName: useNagleAlgorithm
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Determines whether the Nagle algorithm is used for requests made via the
+      Queue service; true to use the
+
+      Nagle algorithm; otherwise, false. The default value is false.
+    syntax:
+      content: 'useNagleAlgorithm: boolean'
+      return:
+        type:
+          - boolean
+    package: azure-storage
   - uid: azure-storage.azurestorage.services.queue.QueueService.withFilter
     name: withFilter(IFilter)
     children: []
@@ -1830,22 +2002,6 @@ references:
         uid: >-
           azure-storage.azurestorage.common.models.ServicePropertiesResult.ServiceProperties
   - uid: >-
-      azure-storage.azurestorage.common.models.ServicePropertiesResult.StaticWebsiteProperties
-    name: StaticWebsiteProperties
-    spec.typeScript:
-      - name: StaticWebsiteProperties
-        fullName: StaticWebsiteProperties
-        uid: >-
-          azure-storage.azurestorage.common.models.ServicePropertiesResult.StaticWebsiteProperties
-  - uid: >-
-      azure-storage.azurestorage.common.models.ServicePropertiesResult.RetentionPolicy
-    name: RetentionPolicy
-    spec.typeScript:
-      - name: RetentionPolicy
-        fullName: RetentionPolicy
-        uid: >-
-          azure-storage.azurestorage.common.models.ServicePropertiesResult.RetentionPolicy
-  - uid: >-
       azure-storage.azurestorage.common.models.ServicePropertiesResult.DeleteRetentionPolicyProperties
     name: DeleteRetentionPolicyProperties
     spec.typeScript:
@@ -1869,6 +2025,22 @@ references:
         fullName: LoggingProperties
         uid: >-
           azure-storage.azurestorage.common.models.ServicePropertiesResult.LoggingProperties
+  - uid: >-
+      azure-storage.azurestorage.common.models.ServicePropertiesResult.StaticWebsiteProperties
+    name: StaticWebsiteProperties
+    spec.typeScript:
+      - name: StaticWebsiteProperties
+        fullName: StaticWebsiteProperties
+        uid: >-
+          azure-storage.azurestorage.common.models.ServicePropertiesResult.StaticWebsiteProperties
+  - uid: >-
+      azure-storage.azurestorage.common.models.ServicePropertiesResult.RetentionPolicy
+    name: RetentionPolicy
+    spec.typeScript:
+      - name: RetentionPolicy
+        fullName: RetentionPolicy
+        uid: >-
+          azure-storage.azurestorage.common.models.ServicePropertiesResult.RetentionPolicy
   - uid: >-
       azure-storage.azurestorage.common.services.storageserviceclient.StorageServiceClient
     name: StorageServiceClient
@@ -2787,6 +2959,13 @@ references:
         fullName: TableEntityRequestOptions
         uid: >-
           azure-storage.azurestorage.services.table.TableService.TableEntityRequestOptions
+  - uid: azure-storage.azurestorage.services.table.TableService.PropertyResolver
+    name: PropertyResolver
+    spec.typeScript:
+      - name: PropertyResolver
+        fullName: PropertyResolver
+        uid: >-
+          azure-storage.azurestorage.services.table.TableService.PropertyResolver
   - uid: >-
       azure-storage.azurestorage.services.table.TableService.ListTablesContinuationToken
     name: ListTablesContinuationToken
@@ -2803,13 +2982,6 @@ references:
         fullName: TableContinuationToken
         uid: >-
           azure-storage.azurestorage.services.table.TableService.TableContinuationToken
-  - uid: azure-storage.azurestorage.services.table.TableService.PropertyResolver
-    name: PropertyResolver
-    spec.typeScript:
-      - name: PropertyResolver
-        fullName: PropertyResolver
-        uid: >-
-          azure-storage.azurestorage.services.table.TableService.PropertyResolver
   - uid: azure-storage.azurestorage.services.table.TableService.TableAccessPolicy
     name: TableAccessPolicy
     spec.typeScript:

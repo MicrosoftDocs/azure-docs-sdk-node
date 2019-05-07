@@ -65,7 +65,14 @@ items:
       - >-
         azure-storage.azurestorage.services.file.FileService.createWriteStreamToNewFile_1
       - >-
+        azure-storage.azurestorage.services.file.FileService.defaultClientRequestTimeoutInMs
+      - >-
         azure-storage.azurestorage.services.file.FileService.defaultEnableReuseSocket
+      - azure-storage.azurestorage.services.file.FileService.defaultLocationMode
+      - >-
+        azure-storage.azurestorage.services.file.FileService.defaultMaximumExecutionTimeInMs
+      - >-
+        azure-storage.azurestorage.services.file.FileService.defaultTimeoutIntervalInMs
       - azure-storage.azurestorage.services.file.FileService.deleteDirectory_1
       - azure-storage.azurestorage.services.file.FileService.deleteDirectory
       - >-
@@ -91,7 +98,10 @@ items:
       - azure-storage.azurestorage.services.file.FileService.doesFileExist
       - azure-storage.azurestorage.services.file.FileService.doesShareExist_1
       - azure-storage.azurestorage.services.file.FileService.doesShareExist
+      - >-
+        azure-storage.azurestorage.services.file.FileService.enableGlobalHttpAgent
       - azure-storage.azurestorage.services.file.FileService.FileResult
+      - azure-storage.azurestorage.services.file.FileService.constructor
       - azure-storage.azurestorage.services.file.FileService.FileServiceOptions
       - azure-storage.azurestorage.services.file.FileService.FileToText
       - >-
@@ -158,8 +168,10 @@ items:
         azure-storage.azurestorage.services.file.FileService.listSharesSegmentedWithPrefix_1
       - >-
         azure-storage.azurestorage.services.file.FileService.listSharesSegmentedWithPrefix
+      - azure-storage.azurestorage.services.file.FileService.logger
       - >-
         azure-storage.azurestorage.services.file.FileService.parallelOperationThreadCount
+      - azure-storage.azurestorage.services.file.FileService.proxy
       - azure-storage.azurestorage.services.file.FileService.resizeFile_1
       - azure-storage.azurestorage.services.file.FileService.resizeFile
       - >-
@@ -172,6 +184,7 @@ items:
       - azure-storage.azurestorage.services.file.FileService.setFileProperties
       - >-
         azure-storage.azurestorage.services.file.FileService.SetFilePropertiesRequestOptions
+      - azure-storage.azurestorage.services.file.FileService.setProxy
       - >-
         azure-storage.azurestorage.services.file.FileService.setServiceProperties_1
       - >-
@@ -190,6 +203,7 @@ items:
         azure-storage.azurestorage.services.file.FileService.singleFileThresholdInBytes
       - azure-storage.azurestorage.services.file.FileService.startCopyFile
       - azure-storage.azurestorage.services.file.FileService.startCopyFile_1
+      - azure-storage.azurestorage.services.file.FileService.useNagleAlgorithm
       - azure-storage.azurestorage.services.file.FileService.withFilter
     langs:
       - typeScript
@@ -1489,6 +1503,23 @@ items:
           - stream.Writable
     package: azure-storage
   - uid: >-
+      azure-storage.azurestorage.services.file.FileService.defaultClientRequestTimeoutInMs
+    name: defaultClientRequestTimeoutInMs
+    fullName: defaultClientRequestTimeoutInMs
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The default timeout of client requests, in milliseconds, to use for the
+      request.
+    syntax:
+      content: 'defaultClientRequestTimeoutInMs: number'
+      return:
+        type:
+          - number
+    package: azure-storage
+  - uid: >-
       azure-storage.azurestorage.services.file.FileService.defaultEnableReuseSocket
     name: defaultEnableReuseSocket
     fullName: defaultEnableReuseSocket
@@ -1502,6 +1533,54 @@ items:
       return:
         type:
           - boolean
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.file.FileService.defaultLocationMode
+    name: defaultLocationMode
+    fullName: defaultLocationMode
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The default location mode for requests made via the service.
+    syntax:
+      content: 'defaultLocationMode: LocationMode'
+      return:
+        type:
+          - azure-storage.azurestorage.common.util.storageutilities.LocationMode
+    package: azure-storage
+  - uid: >-
+      azure-storage.azurestorage.services.file.FileService.defaultMaximumExecutionTimeInMs
+    name: defaultMaximumExecutionTimeInMs
+    fullName: defaultMaximumExecutionTimeInMs
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The default maximum execution time across all potential retries, for
+      requests made via the service.
+    syntax:
+      content: 'defaultMaximumExecutionTimeInMs: number'
+      return:
+        type:
+          - number
+    package: azure-storage
+  - uid: >-
+      azure-storage.azurestorage.services.file.FileService.defaultTimeoutIntervalInMs
+    name: defaultTimeoutIntervalInMs
+    fullName: defaultTimeoutIntervalInMs
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The default timeout interval, in milliseconds, to use for request made via
+      the service.
+    syntax:
+      content: 'defaultTimeoutIntervalInMs: number'
+      return:
+        type:
+          - number
     package: azure-storage
   - uid: azure-storage.azurestorage.services.file.FileService.deleteDirectory_1
     name: 'deleteDirectory(string, string, ErrorOrResponse)'
@@ -2080,6 +2159,63 @@ items:
                                                                                 if an error occurs; otherwise `result` will
                                                                                 be true if the share exists, or false if the share does not exist.
                                                                                 `response` will contain information related to this operation.
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.file.FileService.enableGlobalHttpAgent
+    name: enableGlobalHttpAgent
+    fullName: enableGlobalHttpAgent
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Determines whether global HTTP(s) agent is enabled; true to use Global
+      HTTP(s) agent; otherwise, false to use
+
+      http(s).Agent({keepAlive:true}).
+    syntax:
+      content: 'enableGlobalHttpAgent: boolean'
+      return:
+        type:
+          - boolean
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.file.FileService.constructor
+    name: 'FileService(string, string, StorageHost, boolean, string)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Creates a new StorageServiceClient object.
+    syntax:
+      content: >-
+        new FileService(storageAccount?: string, storageAccessKey?: string,
+        host?: StorageHost, usePathStyleUri?: boolean, sasToken?: string)
+      parameters:
+        - id: storageAccount
+          type:
+            - string
+          description: The storage account.
+          optional: true
+        - id: storageAccessKey
+          type:
+            - string
+          description: The storage access key.
+          optional: true
+        - id: host
+          type:
+            - azure-storage.azurestorage.StorageHost
+          description: The host for the service.
+          optional: true
+        - id: usePathStyleUri
+          type:
+            - boolean
+          description: Boolean value indicating wether to use path style uris.
+          optional: true
+        - id: sasToken
+          type:
+            - string
+          description: |
+            The Shared Access Signature token.
+          optional: true
     package: azure-storage
   - uid: >-
       azure-storage.azurestorage.services.file.FileService.generateSharedAccessSignature
@@ -3377,6 +3513,20 @@ items:
                                                                                     `entries`  gives a list of shares and the `continuationToken` is used for the next listing operation.
                                                                                     `response` will contain information related to this operation.
     package: azure-storage
+  - uid: azure-storage.azurestorage.services.file.FileService.logger
+    name: logger
+    fullName: logger
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The logging settings object.
+    syntax:
+      content: 'logger: Logger'
+      return:
+        type:
+          - azure-storage.azurestorage.common.diagnostics.logger.Logger
+    package: azure-storage
   - uid: >-
       azure-storage.azurestorage.services.file.FileService.parallelOperationThreadCount
     name: parallelOperationThreadCount
@@ -3391,6 +3541,21 @@ items:
       return:
         type:
           - number
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.file.FileService.proxy
+    name: proxy
+    fullName: proxy
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The proxy object specified by caller.
+    syntax:
+      content: 'proxy: Proxy'
+      return:
+        type:
+          - >-
+            azure-storage.azurestorage.common.services.storageserviceclient.Proxy
     package: azure-storage
   - uid: azure-storage.azurestorage.services.file.FileService.resizeFile_1
     name: 'resizeFile(string, string, string, number, ErrorOrResult<FileResult>)'
@@ -3719,6 +3884,33 @@ items:
                                                                                     if an error occurs; otherwise `result` will contain
                                                                                     information about the file.
                                                                                     `response` will contain information related to this operation.
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.file.FileService.setProxy
+    name: setProxy(Proxy)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Sets proxy object specified by caller.
+    syntax:
+      content: 'function setProxy(proxy: Proxy)'
+      parameters:
+        - id: proxy
+          type:
+            - >-
+              azure-storage.azurestorage.common.services.storageserviceclient.Proxy
+          description: |
+            proxy to use for tunneling
+                                                   {
+                                                    host: hostname
+                                                    port: port number
+                                                    proxyAuth: 'user:password' for basic auth
+                                                    headers: {...} headers for proxy server
+                                                    key: key for proxy server
+                                                    ca: ca for proxy server
+                                                    cert: cert for proxy server
+                                                   }
+                                                   if null or undefined, clears proxy
     package: azure-storage
   - uid: >-
       azure-storage.azurestorage.services.file.FileService.setServiceProperties_1
@@ -4080,6 +4272,24 @@ items:
               azure-storage.azurestorage.ErrorOrResult<azure-storage.azurestorage.services.file.FileService.FileResult>
           description: ''
     package: azure-storage
+  - uid: azure-storage.azurestorage.services.file.FileService.useNagleAlgorithm
+    name: useNagleAlgorithm
+    fullName: useNagleAlgorithm
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Determines whether the Nagle algorithm is used for requests made via the
+      Queue service; true to use the
+
+      Nagle algorithm; otherwise, false. The default value is false.
+    syntax:
+      content: 'useNagleAlgorithm: boolean'
+      return:
+        type:
+          - boolean
+    package: azure-storage
   - uid: azure-storage.azurestorage.services.file.FileService.withFilter
     name: withFilter(IFilter)
     children: []
@@ -4200,22 +4410,6 @@ references:
         uid: >-
           azure-storage.azurestorage.common.models.ServicePropertiesResult.ServiceProperties
   - uid: >-
-      azure-storage.azurestorage.common.models.ServicePropertiesResult.StaticWebsiteProperties
-    name: StaticWebsiteProperties
-    spec.typeScript:
-      - name: StaticWebsiteProperties
-        fullName: StaticWebsiteProperties
-        uid: >-
-          azure-storage.azurestorage.common.models.ServicePropertiesResult.StaticWebsiteProperties
-  - uid: >-
-      azure-storage.azurestorage.common.models.ServicePropertiesResult.RetentionPolicy
-    name: RetentionPolicy
-    spec.typeScript:
-      - name: RetentionPolicy
-        fullName: RetentionPolicy
-        uid: >-
-          azure-storage.azurestorage.common.models.ServicePropertiesResult.RetentionPolicy
-  - uid: >-
       azure-storage.azurestorage.common.models.ServicePropertiesResult.DeleteRetentionPolicyProperties
     name: DeleteRetentionPolicyProperties
     spec.typeScript:
@@ -4239,6 +4433,22 @@ references:
         fullName: LoggingProperties
         uid: >-
           azure-storage.azurestorage.common.models.ServicePropertiesResult.LoggingProperties
+  - uid: >-
+      azure-storage.azurestorage.common.models.ServicePropertiesResult.StaticWebsiteProperties
+    name: StaticWebsiteProperties
+    spec.typeScript:
+      - name: StaticWebsiteProperties
+        fullName: StaticWebsiteProperties
+        uid: >-
+          azure-storage.azurestorage.common.models.ServicePropertiesResult.StaticWebsiteProperties
+  - uid: >-
+      azure-storage.azurestorage.common.models.ServicePropertiesResult.RetentionPolicy
+    name: RetentionPolicy
+    spec.typeScript:
+      - name: RetentionPolicy
+        fullName: RetentionPolicy
+        uid: >-
+          azure-storage.azurestorage.common.models.ServicePropertiesResult.RetentionPolicy
   - uid: >-
       azure-storage.azurestorage.common.services.storageserviceclient.StorageServiceClient
     name: StorageServiceClient
@@ -5157,6 +5367,13 @@ references:
         fullName: TableEntityRequestOptions
         uid: >-
           azure-storage.azurestorage.services.table.TableService.TableEntityRequestOptions
+  - uid: azure-storage.azurestorage.services.table.TableService.PropertyResolver
+    name: PropertyResolver
+    spec.typeScript:
+      - name: PropertyResolver
+        fullName: PropertyResolver
+        uid: >-
+          azure-storage.azurestorage.services.table.TableService.PropertyResolver
   - uid: >-
       azure-storage.azurestorage.services.table.TableService.ListTablesContinuationToken
     name: ListTablesContinuationToken
@@ -5173,13 +5390,6 @@ references:
         fullName: TableContinuationToken
         uid: >-
           azure-storage.azurestorage.services.table.TableService.TableContinuationToken
-  - uid: azure-storage.azurestorage.services.table.TableService.PropertyResolver
-    name: PropertyResolver
-    spec.typeScript:
-      - name: PropertyResolver
-        fullName: PropertyResolver
-        uid: >-
-          azure-storage.azurestorage.services.table.TableService.PropertyResolver
   - uid: azure-storage.azurestorage.services.table.TableService.TableAccessPolicy
     name: TableAccessPolicy
     spec.typeScript:
@@ -5522,8 +5732,19 @@ references:
       azure-storage.azurestorage.services.file.FileService.createWriteStreamToNewFile_1
     name: createWriteStreamToNewFile_1
   - uid: >-
+      azure-storage.azurestorage.services.file.FileService.defaultClientRequestTimeoutInMs
+    name: defaultClientRequestTimeoutInMs
+  - uid: >-
       azure-storage.azurestorage.services.file.FileService.defaultEnableReuseSocket
     name: defaultEnableReuseSocket
+  - uid: azure-storage.azurestorage.services.file.FileService.defaultLocationMode
+    name: defaultLocationMode
+  - uid: >-
+      azure-storage.azurestorage.services.file.FileService.defaultMaximumExecutionTimeInMs
+    name: defaultMaximumExecutionTimeInMs
+  - uid: >-
+      azure-storage.azurestorage.services.file.FileService.defaultTimeoutIntervalInMs
+    name: defaultTimeoutIntervalInMs
   - uid: azure-storage.azurestorage.services.file.FileService.deleteDirectory_1
     name: deleteDirectory_1
   - uid: azure-storage.azurestorage.services.file.FileService.deleteDirectory
@@ -5564,8 +5785,12 @@ references:
     name: doesShareExist_1
   - uid: azure-storage.azurestorage.services.file.FileService.doesShareExist
     name: doesShareExist
+  - uid: azure-storage.azurestorage.services.file.FileService.enableGlobalHttpAgent
+    name: enableGlobalHttpAgent
   - uid: azure-storage.azurestorage.services.file.FileService.FileResult
     name: FileResult
+  - uid: azure-storage.azurestorage.services.file.FileService.constructor
+    name: constructor
   - uid: >-
       azure-storage.azurestorage.services.file.FileService.generateSharedAccessSignature
     name: generateSharedAccessSignature
@@ -5657,9 +5882,13 @@ references:
   - uid: >-
       azure-storage.azurestorage.services.file.FileService.listSharesSegmentedWithPrefix
     name: listSharesSegmentedWithPrefix
+  - uid: azure-storage.azurestorage.services.file.FileService.logger
+    name: logger
   - uid: >-
       azure-storage.azurestorage.services.file.FileService.parallelOperationThreadCount
     name: parallelOperationThreadCount
+  - uid: azure-storage.azurestorage.services.file.FileService.proxy
+    name: proxy
   - uid: azure-storage.azurestorage.services.file.FileService.resizeFile_1
     name: resizeFile_1
   - uid: azure-storage.azurestorage.services.file.FileService.resizeFile
@@ -5677,6 +5906,8 @@ references:
     name: setFileProperties_1
   - uid: azure-storage.azurestorage.services.file.FileService.setFileProperties
     name: setFileProperties
+  - uid: azure-storage.azurestorage.services.file.FileService.setProxy
+    name: setProxy
   - uid: >-
       azure-storage.azurestorage.services.file.FileService.setServiceProperties_1
     name: setServiceProperties_1
@@ -5703,5 +5934,7 @@ references:
     name: startCopyFile
   - uid: azure-storage.azurestorage.services.file.FileService.startCopyFile_1
     name: startCopyFile_1
+  - uid: azure-storage.azurestorage.services.file.FileService.useNagleAlgorithm
+    name: useNagleAlgorithm
   - uid: azure-storage.azurestorage.services.file.FileService.withFilter
     name: withFilter

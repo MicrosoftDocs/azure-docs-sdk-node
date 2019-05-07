@@ -4,6 +4,7 @@ items:
     name: ServiceFabricClient
     fullName: ServiceFabricClient
     children:
+      - azure-servicefabric.ServiceFabricClient.addUserAgentInfo
       - azure-servicefabric.ServiceFabricClient.backupPartition
       - azure-servicefabric.ServiceFabricClient.backupPartition_2
       - azure-servicefabric.ServiceFabricClient.backupPartition_1
@@ -532,6 +533,7 @@ items:
       - azure-servicefabric.ServiceFabricClient.getNodeTransitionProgress_1
       - >-
         azure-servicefabric.ServiceFabricClient.getNodeTransitionProgressWithHttpOperationResponse
+      - azure-servicefabric.ServiceFabricClient.getPackageJsonInfo
       - >-
         azure-servicefabric.ServiceFabricClient.getPartitionBackupConfigurationInfo
       - >-
@@ -931,6 +933,10 @@ items:
       - azure-servicefabric.ServiceFabricClient.rollbackClusterUpgrade_1
       - >-
         azure-servicefabric.ServiceFabricClient.rollbackClusterUpgradeWithHttpOperationResponse
+      - azure-servicefabric.ServiceFabricClient.sendRequest_1
+      - azure-servicefabric.ServiceFabricClient.sendRequest
+      - >-
+        azure-servicefabric.ServiceFabricClient.sendRequestWithHttpOperationResponse
       - azure-servicefabric.ServiceFabricClient.constructor
       - >-
         azure-servicefabric.ServiceFabricClient.setUpgradeOrchestrationServiceState
@@ -1076,6 +1082,22 @@ items:
     summary: ''
     extends:
       name: ServiceClient
+    package: azure-servicefabric
+  - uid: azure-servicefabric.ServiceFabricClient.addUserAgentInfo
+    name: addUserAgentInfo(any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Adds custom information to user agent header
+    syntax:
+      content: 'function addUserAgentInfo(additionalUserAgentInfo: any)'
+      parameters:
+        - id: additionalUserAgentInfo
+          type:
+            - any
+          description: |
+            information to be added to user agent header, as string.
     package: azure-servicefabric
   - uid: azure-servicefabric.ServiceFabricClient.backupPartition
     name: 'backupPartition(string, Object)'
@@ -13123,6 +13145,30 @@ items:
           - >-
             Promise<HttpOperationResponse<azure-servicefabric.NodeTransitionProgress>>
     package: azure-servicefabric
+  - uid: azure-servicefabric.ServiceFabricClient.getPackageJsonInfo
+    name: getPackageJsonInfo(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Attempts to find package.json for the given azure nodejs package.
+
+      If found, returns the name and version of the package by reading the
+      package.json
+
+      If package.json is not found, returns a default value.
+    syntax:
+      content: 'function getPackageJsonInfo(managementClientDir: string)'
+      parameters:
+        - id: managementClientDir
+          type:
+            - string
+          description: pass the directory of the specific azure management client.
+      return:
+        type:
+          - Object
+    package: azure-servicefabric
   - uid: >-
       azure-servicefabric.ServiceFabricClient.getPartitionBackupConfigurationInfo
     name: 'getPartitionBackupConfigurationInfo(string, Object)'
@@ -22958,6 +23004,81 @@ items:
       return:
         type:
           - Promise<HttpOperationResponse<void>>
+    package: azure-servicefabric
+  - uid: azure-servicefabric.ServiceFabricClient.sendRequest_1
+    name: >-
+      sendRequest(PathTemplateBasedRequestPrepareOptions |
+      UrlBasedRequestPrepareOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function sendRequest<TResult>(options:
+        PathTemplateBasedRequestPrepareOptions | UrlBasedRequestPrepareOptions)
+      parameters:
+        - id: options
+          type:
+            - >-
+              PathTemplateBasedRequestPrepareOptions |
+              UrlBasedRequestPrepareOptions
+          description: ''
+      return:
+        type:
+          - Promise<TResult>
+    package: azure-servicefabric
+  - uid: azure-servicefabric.ServiceFabricClient.sendRequest
+    name: >-
+      sendRequest(PathTemplateBasedRequestPrepareOptions |
+      UrlBasedRequestPrepareOptions, ServiceCallback<TResult>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function sendRequest<TResult>(options:
+        PathTemplateBasedRequestPrepareOptions | UrlBasedRequestPrepareOptions,
+        callback: ServiceCallback<TResult>)
+      parameters:
+        - id: options
+          type:
+            - >-
+              PathTemplateBasedRequestPrepareOptions |
+              UrlBasedRequestPrepareOptions
+          description: ''
+        - id: callback
+          type:
+            - ServiceCallback<TResult>
+          description: ''
+    package: azure-servicefabric
+  - uid: >-
+      azure-servicefabric.ServiceFabricClient.sendRequestWithHttpOperationResponse
+    name: >-
+      sendRequestWithHttpOperationResponse(PathTemplateBasedRequestPrepareOptions
+      | UrlBasedRequestPrepareOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function sendRequestWithHttpOperationResponse<TResult>(options:
+        PathTemplateBasedRequestPrepareOptions | UrlBasedRequestPrepareOptions)
+      parameters:
+        - id: options
+          type:
+            - >-
+              PathTemplateBasedRequestPrepareOptions |
+              UrlBasedRequestPrepareOptions
+          description: ''
+      return:
+        type:
+          - Promise<HttpOperationResponse<TResult>>
     package: azure-servicefabric
   - uid: azure-servicefabric.ServiceFabricClient.constructor
     name: 'ServiceFabricClient(string, ServiceClientOptions)'

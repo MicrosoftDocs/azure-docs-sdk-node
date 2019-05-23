@@ -40,9 +40,9 @@ items:
       and action.
 
       **Note**: Remove the default true filter on the subscription before adding
-      a rule,
+      a rule.
 
-      otherwise, the added rule will have no affect as the true filter will
+      Otherwise, the added rule will have no affect as the true filter will
       always result in
 
       the subscription receiving all messages.
@@ -104,14 +104,17 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >
+    summary: >-
       Creates a Receiver for receiving messages from a Subscription which does
       not have sessions enabled.
 
-      Throws error if an open receiver already exists for this
+      - Throws error if an open receiver already exists for this
       SubscriptionClient.
 
-      Throws error if the Subscription has sessions enabled.
+      - Throws `InvalidOperationError` if the Subscription has sessions enabled
+      (in which case, use the
+
+      overload of this method which takes `sessionOptions` argument)
     syntax:
       content: 'function createReceiver(receiveMode: ReceiveMode)'
       parameters:
@@ -154,7 +157,13 @@ items:
 
       - Throws error if an open receiver already exists for given sessionId.
 
-      - Throws error if the Queue does not have sessions enabled.
+      - Throws `SessionCannotBeLockedError` if the Subscription does not have
+      sessions enabled (in which
+
+      case do not pass the `sessionOptions` argument) or if Service Bus is not
+      able to get a lock on
+
+      the session (in which case try again after some time)
     syntax:
       content: >-
         function createReceiver(receiveMode: ReceiveMode, sessionOptions:
@@ -200,7 +209,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: defaultRuleName Name of the default rule on the subscription.
+    summary: The name of the default rule on the subscription.
     syntax:
       content: 'defaultRuleName: string'
       return:
@@ -229,7 +238,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Get all the rules associated with the subscription
+    summary: Gets all rules associated with the subscription
     syntax:
       content: function getRules()
       parameters: []
@@ -327,7 +336,7 @@ items:
     summary: >-
       Removes the rule on the subscription identified by the given rule name.
 
-      **Note**: If all rules on a subscription are removed, then the
+      **Caution**: If all rules on a subscription are removed, then the
       subscription will not receive
 
       any more messages.
@@ -350,7 +359,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: The subscription name.
+    summary: The name of the Service Bus Subscription for which this client is created.
     syntax:
       content: 'subscriptionName: string'
       return:
@@ -364,7 +373,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: The topic name.
+    summary: >-
+      The name of the Service Bus Topic for whose Subscription, this client is
+      created.
     syntax:
       content: 'topicName: string'
       return:

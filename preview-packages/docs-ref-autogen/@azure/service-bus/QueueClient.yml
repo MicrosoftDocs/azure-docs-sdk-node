@@ -54,7 +54,10 @@ items:
 
       - Throws error if an open receiver already exists for this QueueClient.
 
-      - Throws error if the Queue has sessions enabled.
+      - Throws `InvalidOperationError` if the Queue has sessions enabled (in
+      which case, use the
+
+      overload of this method which takes `sessionOptions` argument)
     syntax:
       content: 'function createReceiver(receiveMode: ReceiveMode)'
       parameters:
@@ -97,7 +100,13 @@ items:
 
       - Throws error if an open receiver already exists for given sessionId.
 
-      - Throws error if the Queue does not have sessions enabled.
+      - Throws `SessionCannotBeLockedError` if the Queue does not have sessions
+      enabled (in which
+
+      case do not pass the `sessionOptions` argument) or if Service Bus is not
+      able to get a lock on
+
+      the session (in which case try again after some time)
     syntax:
       content: >-
         function createReceiver(receiveMode: ReceiveMode, sessionOptions:

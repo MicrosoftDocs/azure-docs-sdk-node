@@ -55,13 +55,20 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >-
+    summary: >
       Gets an async iterator over messages from the receiver.
 
-      While iterating, you will get `undefined` instead of a message, if the
-      iterator is not able to
+      Throws an error if there is another receive operation in progress on the
+      same receiver. If you
 
-      fetch a new message in over a minute.
+      are not sure whether there is another receive operation running, check the
+      `isReceivingMessages`
+
+      property on the receiver.
+
+
+      If the iterator is not able to fetch a new message in over a minute,
+      `undefined` will be returned.
     syntax:
       content: function getMessageIterator()
       parameters: []
@@ -77,8 +84,10 @@ items:
       - typeScript
     type: property
     summary: >-
-      Returns `true` if either the receiver or the client that created it has
-      been closed
+      Returns `true` if the receiver is closed. This can happen either because
+      the receiver
+
+      itself has been closed or the client that created it has been closed.
     syntax:
       content: 'isClosed: boolean'
       return:
@@ -151,11 +160,19 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >-
+    summary: >
       Returns a promise that resolves to an array of messages based on given
       count and timeout over
 
       an AMQP receiver link from a Queue/Subscription.
+
+      Throws an error if there is another receive operation in progress on the
+      same receiver. If you
+
+      are not sure whether there is another receive operation running, check the
+      `isReceivingMessages`
+
+      property on the receiver.
     syntax:
       content: >-
         function receiveMessages(maxMessageCount: number, idleTimeoutInSeconds?:
@@ -202,16 +219,21 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >-
+    summary: >
       Registers handlers to deal with the incoming stream of messages over an
       AMQP receiver link
 
       from a Queue/Subscription.
 
-      To stop receiving messages, call `close()` on the Receiver or set the
-      property
+      To stop receiving messages, call `close()` on the Receiver.
 
-      `newMessageWaitTimeoutInSeconds` in the options to provide a timeout.
+      Throws an error if there is another receive operation in progress on the
+      same receiver. If you
+
+      are not sure whether there is another receive operation running, check the
+      `isReceivingMessages`
+
+      property on the receiver.
     syntax:
       content: >-
         function registerMessageHandler(onMessage: OnMessage, onError: OnError,

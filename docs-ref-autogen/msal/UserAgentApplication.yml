@@ -15,8 +15,6 @@ items:
       - msal.UserAgentApplication.getLoginInProgress
       - msal.UserAgentApplication.getPostLogoutRedirectUri
       - msal.UserAgentApplication.getRedirectUri
-      - msal.UserAgentApplication.handleRedirectCallback_1
-      - msal.UserAgentApplication.handleRedirectCallback
       - msal.UserAgentApplication.loginPopup
       - msal.UserAgentApplication.loginRedirect
       - msal.UserAgentApplication.logout
@@ -24,8 +22,8 @@ items:
     langs:
       - typeScript
     type: class
-    summary: >-
-      UserAgentApplication class : <xref:UserAgentApplication>
+    summary: >
+      UserAgentApplication class
 
       Object Instance that the developer can use to make loginXX OR
       acquireTokenXX functions
@@ -57,8 +55,8 @@ items:
     langs:
       - typeScript
     summary: >-
-      Used when you want to obtain an access_token for your API by redirecting
-      the user to the authorization endpoint.
+      Use when you want to obtain an access_token for your API by redirecting
+      the user's browser window to the authorization endpoint.
     syntax:
       content: 'function acquireTokenRedirect(request: AuthenticationParameters)'
       parameters:
@@ -99,32 +97,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: >-
-      returns the authority, where authority is a URL indicating the directory
-      that MSAL can use to obtain tokens
-
-      - In Azure AD, this attribute is a URL indicating the Azure active
-      directory that MSAL uses to obtain tokens
-
-      It is of the form
-      https://login.microsoftonline.com/&lt;Enter_the_Tenant_Info_Here&gt;
-
-      If your application supports Accounts in one organizational directory,
-      replace "Enter_the_Tenant_Info_Here" value with the Tenant Id or Tenant
-      name (for example, contoso.microsoft.com)
-
-      If your application supports Accounts in any organizational directory,
-      replace "Enter_the_Tenant_Info_Here" value with organizations
-
-      If your application supports Accounts in any organizational directory and
-      personal Microsoft accounts, replace "Enter_the_Tenant_Info_Here" value
-      with common.
-
-      To restrict support to Personal Microsoft accounts only, replace
-      "Enter_the_Tenant_Info_Here" value with consumers.
-
-      - In Azure B2C, it is of the form
-      https://&lt;instance&gt;/tfp/&lt;tenant&gt;/<policyName>/
+    summary: Method to manage the authority URL.
     syntax:
       content: 'authority: string'
       return:
@@ -137,9 +110,10 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >-
-      Returns the signed in account (received from an account object created at
-      the time of login) or null when no state is found
+    summary: |-
+      Returns the signed in account
+      (the account object is created at the time of successful login)
+      or null when no state is found
     syntax:
       content: function getAccount()
       parameters: []
@@ -154,8 +128,8 @@ items:
     langs:
       - typeScript
     summary: >-
-      Used to filter all cached items and return a list of unique accounts based
-      on homeAccountIdentifier.
+      Use to get a list of unique accounts in MSAL cache based on
+      homeAccountIdentifier.
     syntax:
       content: function getAllAccounts()
       parameters: []
@@ -169,7 +143,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: returns the authority instance
+    summary: Get the current authority instance from the MSAL configuration object
     syntax:
       content: function getAuthorityInstance()
       parameters: []
@@ -241,46 +215,6 @@ items:
         type:
           - string
     package: msal
-  - uid: msal.UserAgentApplication.handleRedirectCallback_1
-    name: handleRedirectCallback(authResponseCallback)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Sets the callback functions for the redirect flow to send back the success
-      or error object.
-    syntax:
-      content: 'function handleRedirectCallback(authCallback: authResponseCallback)'
-      parameters:
-        - id: authCallback
-          type:
-            - authResponseCallback
-          description: ''
-    package: msal
-  - uid: msal.UserAgentApplication.handleRedirectCallback
-    name: 'handleRedirectCallback(tokenReceivedCallback, errorReceivedCallback)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Sets the callback functions for the redirect flow to send back the success
-      or error object.
-    syntax:
-      content: >-
-        function handleRedirectCallback(tokenReceivedCallback:
-        tokenReceivedCallback, errorReceivedCallback: errorReceivedCallback)
-      parameters:
-        - id: tokenReceivedCallback
-          type:
-            - tokenReceivedCallback
-          description: ''
-        - id: errorReceivedCallback
-          type:
-            - errorReceivedCallback
-          description: ''
-    package: msal
   - uid: msal.UserAgentApplication.loginPopup
     name: loginPopup(AuthenticationParameters)
     children: []
@@ -327,10 +261,10 @@ items:
     langs:
       - typeScript
     summary: >-
-      Used to log out the current user, and redirect the user to the
+      Use to log out the current user, and redirect the user to the
       postLogoutRedirectUri.
 
-      Defaults behaviour is to redirect the user to `window.location.href`.
+      Default behaviour is to redirect the user to `window.location.href`.
     syntax:
       content: function logout()
       parameters: []
@@ -341,9 +275,7 @@ items:
     type: constructor
     langs:
       - typeScript
-    summary: |-
-      Constructor for the <xref:UserAgentApplication> object
-      This is to be able to instantiate the <xref:UserAgentApplication> object
+    summary: ''
     syntax:
       content: 'new UserAgentApplication(configuration: Configuration)'
       parameters:

@@ -5,7 +5,9 @@ items:
     fullName: TaskSet
     children:
       - durable-functions.TaskSet.actions
+      - durable-functions.TaskSet.exception
       - durable-functions.TaskSet.isCompleted
+      - durable-functions.TaskSet.isFaulted
       - durable-functions.TaskSet.result
       - durable-functions.TaskSet.constructor
     langs:
@@ -27,6 +29,21 @@ items:
         type:
           - 'durable-functions.IAction[]'
     package: durable-functions
+  - uid: durable-functions.TaskSet.exception
+    name: exception
+    fullName: exception
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    optional: true
+    syntax:
+      content: 'exception?: unknown'
+      return:
+        type:
+          - unknown
+    package: durable-functions
   - uid: durable-functions.TaskSet.isCompleted
     name: isCompleted
     fullName: isCompleted
@@ -37,6 +54,20 @@ items:
     summary: ''
     syntax:
       content: 'isCompleted: boolean'
+      return:
+        type:
+          - boolean
+    package: durable-functions
+  - uid: durable-functions.TaskSet.isFaulted
+    name: isFaulted
+    fullName: isFaulted
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'isFaulted: boolean'
       return:
         type:
           - boolean
@@ -57,16 +88,22 @@ items:
           - unknown
     package: durable-functions
   - uid: durable-functions.TaskSet.constructor
-    name: 'TaskSet(boolean, IAction[], unknown)'
+    name: 'TaskSet(boolean, boolean, IAction[], unknown, unknown)'
     children: []
     type: constructor
     langs:
       - typeScript
     summary: ''
     syntax:
-      content: 'new TaskSet(isCompleted: boolean, actions: IAction[], result?: unknown)'
+      content: >-
+        new TaskSet(isCompleted: boolean, isFaulted: boolean, actions:
+        IAction[], result?: unknown, exception?: unknown)
       parameters:
         - id: isCompleted
+          type:
+            - boolean
+          description: ''
+        - id: isFaulted
           type:
             - boolean
           description: ''
@@ -75,6 +112,11 @@ items:
             - 'durable-functions.IAction[]'
           description: ''
         - id: result
+          type:
+            - unknown
+          description: ''
+          optional: true
+        - id: exception
           type:
             - unknown
           description: ''

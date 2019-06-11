@@ -10,6 +10,8 @@ items:
       - durable-functions.DurableOrchestrationClient.getStatus
       - durable-functions.DurableOrchestrationClient.getStatusAll
       - durable-functions.DurableOrchestrationClient.getStatusBy
+      - durable-functions.DurableOrchestrationClient.purgeInstanceHistory
+      - durable-functions.DurableOrchestrationClient.purgeInstanceHistoryBy
       - durable-functions.DurableOrchestrationClient.raiseEvent
       - durable-functions.DurableOrchestrationClient.rewind
       - durable-functions.DurableOrchestrationClient.startNew
@@ -81,7 +83,7 @@ items:
           description: ''
     package: durable-functions
   - uid: durable-functions.DurableOrchestrationClient.getStatus
-    name: 'getStatus(string, boolean, boolean)'
+    name: 'getStatus(string, boolean, boolean, boolean)'
     children: []
     type: method
     langs:
@@ -90,7 +92,7 @@ items:
     syntax:
       content: >-
         function getStatus(instanceId: string, showHistory?: boolean,
-        showHistoryOutput?: boolean)
+        showHistoryOutput?: boolean, showInput?: boolean)
       parameters:
         - id: instanceId
           type:
@@ -102,6 +104,11 @@ items:
           description: ''
           optional: true
         - id: showHistoryOutput
+          type:
+            - boolean
+          description: ''
+          optional: true
+        - id: showInput
           type:
             - boolean
           description: ''
@@ -151,6 +158,54 @@ items:
       return:
         type:
           - 'Promise<durable-functions.DurableOrchestrationStatus[]>'
+    package: durable-functions
+  - uid: durable-functions.DurableOrchestrationClient.purgeInstanceHistory
+    name: purgeInstanceHistory(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function purgeInstanceHistory(instanceId: string)'
+      parameters:
+        - id: instanceId
+          type:
+            - string
+          description: ''
+      return:
+        type:
+          - Promise<durable-functions.PurgeHistoryResult>
+    package: durable-functions
+  - uid: durable-functions.DurableOrchestrationClient.purgeInstanceHistoryBy
+    name: 'purgeInstanceHistoryBy(Date, Date, OrchestrationRuntimeStatus[])'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function purgeInstanceHistoryBy(createdTimeFrom: Date, createdTimeTo?:
+        Date, runtimeStatus?: OrchestrationRuntimeStatus[])
+      parameters:
+        - id: createdTimeFrom
+          type:
+            - Date
+          description: ''
+        - id: createdTimeTo
+          type:
+            - Date
+          description: ''
+          optional: true
+        - id: runtimeStatus
+          type:
+            - 'durable-functions.OrchestrationRuntimeStatus[]'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<durable-functions.PurgeHistoryResult>
     package: durable-functions
   - uid: durable-functions.DurableOrchestrationClient.raiseEvent
     name: 'raiseEvent(string, string, unknown, string, string)'
@@ -385,6 +440,16 @@ references:
         uid: durable-functions.OrchestrationRuntimeStatus
       - name: '[]'
         fullName: '[]'
+  - uid: Promise<durable-functions.PurgeHistoryResult>
+    name: PurgeHistoryResult>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: PurgeHistoryResult
+        fullName: PurgeHistoryResult
+        uid: durable-functions.PurgeHistoryResult
+      - name: '>'
+        fullName: '>'
   - uid: Promise<durable-functions.IHttpResponse>
     name: IHttpResponse>
     spec.typeScript:

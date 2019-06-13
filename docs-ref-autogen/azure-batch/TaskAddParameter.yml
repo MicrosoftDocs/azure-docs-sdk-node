@@ -23,28 +23,28 @@ items:
       - typeScript
     type: interface
     summary: >-
-      Batch will retry tasks when a recovery operation is triggered on a compute
-      node.
+      Batch will retry Tasks when a recovery operation is triggered on a Node.
+      Examples
 
-      Examples of recovery operations include (but are not limited to) when an
-      unhealthy compute node
+      of recovery operations include (but are not limited to) when an unhealthy
+      Node is rebooted or a
 
-      is rebooted or a compute node disappeared due to host failure. Retries due
-      to recovery
+      Compute Node disappeared due to host failure. Retries due to recovery
+      operations are independent
 
-      operations are independent of and are not counted against the
-      maxTaskRetryCount. Even if the
+      of and are not counted against the maxTaskRetryCount. Even if the
+      maxTaskRetryCount is 0, an
 
-      maxTaskRetryCount is 0, an internal retry due to a recovery operation may
-      occur. Because of
+      internal retry due to a recovery operation may occur. Because of this, all
+      Tasks should be
 
-      this, all tasks should be idempotent. This means tasks need to tolerate
-      being interrupted and
+      idempotent. This means Tasks need to tolerate being interrupted and
+      restarted without causing
 
-      restarted without causing any corruption or duplicate data. The best
-      practice for long running
+      any corruption or duplicate data. The best practice for long running Tasks
+      is to use some form
 
-      tasks is to use some form of checkpointing.
+      of checkpointing.
     package: azure-batch
   - uid: azure-batch.TaskAddParameter.affinityInfo
     name: affinityInfo
@@ -72,16 +72,16 @@ items:
       Application packages are downloaded and deployed to a shared directory,
       not the
 
-      task working directory. Therefore, if a referenced package is already on
-      the compute node, and
+      Task working directory. Therefore, if a referenced package is already on
+      the Node, and is up
 
-      is up to date, then it is not re-downloaded; the existing copy on the
-      compute node is used. If
+      to date, then it is not re-downloaded; the existing copy on the Compute
+      Node is used. If a
 
-      a referenced application package cannot be installed, for example because
-      the package has been
+      referenced Package cannot be installed, for example because the package
+      has been deleted or
 
-      deleted or because download failed, the task fails.
+      because download failed, the Task fails.
     optional: true
     syntax:
       content: 'applicationPackageReferences?: ApplicationPackageReference[]'
@@ -97,21 +97,21 @@ items:
       - typeScript
     type: property
     summary: >-
-      If this property is set, the Batch service provides the task with an
+      If this property is set, the Batch service provides the Task with an
 
       authentication token which can be used to authenticate Batch service
       operations without
 
-      requiring an account access key. The token is provided via the
+      requiring an Account access key. The token is provided via the
       AZ_BATCH_AUTHENTICATION_TOKEN
 
-      environment variable. The operations that the task can carry out using the
+      environment variable. The operations that the Task can carry out using the
       token depend on the
 
-      settings. For example, a task can request job permissions in order to add
-      other tasks to the
+      settings. For example, a Task can request Job permissions in order to add
+      other Tasks to the
 
-      job, or check the status of the job or of other tasks under the job.
+      Job, or check the status of the Job or of other Tasks under the Job.
     optional: true
     syntax:
       content: 'authenticationTokenSettings?: AuthenticationTokenSettings'
@@ -127,10 +127,10 @@ items:
       - typeScript
     type: property
     summary: >-
-      For multi-instance tasks, the command line is executed as the primary
-      task, after
+      For multi-instance Tasks, the command line is executed as the primary
+      Task, after
 
-      the primary task and all subtasks have finished executing the coordination
+      the primary Task and all subtasks have finished executing the coordination
       command line. The
 
       command line does not run under a shell, and therefore cannot take
@@ -145,7 +145,7 @@ items:
       or "/bin/sh -c MyCommand" in Linux. If the command line refers to file
       paths, it should use a
 
-      relative path (relative to the task working directory), or use the Batch
+      relative path (relative to the Task working directory), or use the Batch
       provided environment
 
       variable
@@ -168,7 +168,7 @@ items:
       If you do not specify constraints, the maxTaskRetryCount is the
       maxTaskRetryCount
 
-      specified for the job, the maxWallClockTime is infinite, and the
+      specified for the Job, the maxWallClockTime is infinite, and the
       retentionTime is 7 days.
     optional: true
     syntax:
@@ -185,10 +185,10 @@ items:
       - typeScript
     type: property
     summary: >-
-      If the pool that will run this task has containerConfiguration set, this
+      If the Pool that will run this Task has containerConfiguration set, this
       must be
 
-      set as well. If the pool that will run this task doesn't have
+      set as well. If the Pool that will run this Task doesn't have
       containerConfiguration set, this
 
       must not be set. When this is specified, all directories recursively below
@@ -197,10 +197,16 @@ items:
       AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node)
       are mapped into the
 
-      container, all task environment variables are mapped into the container,
-      and the task command
+      container, all Task environment variables are mapped into the container,
+      and the Task command
 
-      line is executed in the container.
+      line is executed in the container. Files produced in the container outside
+      of
+
+      AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning
+      that Batch file APIs
+
+      will not be able to access those files.
     optional: true
     syntax:
       content: 'containerSettings?: TaskContainerSettings'
@@ -216,13 +222,13 @@ items:
       - typeScript
     type: property
     summary: >-
-      This task will not be scheduled until all tasks that it depends on have
+      This Task will not be scheduled until all Tasks that it depends on have
       completed
 
-      successfully. If any of those tasks fail and exhaust their retry counts,
-      this task will never
+      successfully. If any of those Tasks fail and exhaust their retry counts,
+      this Task will never
 
-      be scheduled. If the job does not have usesTaskDependencies set to true,
+      be scheduled. If the Job does not have usesTaskDependencies set to true,
       and this element is
 
       present, the request fails with error code
@@ -275,7 +281,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: How the Batch service should respond when the task completes.
+    summary: How the Batch service should respond when the Task completes.
     optional: true
     syntax:
       content: 'exitConditions?: ExitConditions'
@@ -297,7 +303,7 @@ items:
       and underscores, and cannot contain more than 64 characters. The ID is
       case-preserving and
 
-      case-insensitive (that is, you may not have two IDs within a job that
+      case-insensitive (that is, you may not have two IDs within a Job that
       differ only by case).
     syntax:
       content: 'id: string'
@@ -328,10 +334,10 @@ items:
       - typeScript
     type: property
     summary: >-
-      For multi-instance tasks, the files will only be uploaded from the compute
-      node
+      For multi-instance Tasks, the files will only be uploaded from the Compute
+      Node
 
-      on which the primary task is executed.
+      on which the primary Task is executed.
     optional: true
     syntax:
       content: 'outputFiles?: OutputFile[]'
@@ -347,10 +353,10 @@ items:
       - typeScript
     type: property
     summary: >-
-      For multi-instance tasks, the resource files will only be downloaded to
+      For multi-instance Tasks, the resource files will only be downloaded to
       the
 
-      compute node on which the primary task is executed. There is a maximum
+      Compute Node on which the primary Task is executed. There is a maximum
       size for the list of
 
       resource files.  When the max size is exceeded, the request will fail and
@@ -377,7 +383,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: 'If omitted, the task runs as a non-administrative user unique to the task.'
+    summary: 'If omitted, the Task runs as a non-administrative user unique to the Task.'
     optional: true
     syntax:
       content: 'userIdentity?: UserIdentity'

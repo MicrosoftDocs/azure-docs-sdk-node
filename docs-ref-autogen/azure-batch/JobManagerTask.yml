@@ -22,58 +22,58 @@ items:
       - typeScript
     type: interface
     summary: >-
-      The Job Manager task is automatically started when the job is created. The
+      The Job Manager Task is automatically started when the Job is created. The
       Batch
 
-      service tries to schedule the Job Manager task before any other tasks in
-      the job. When shrinking
+      service tries to schedule the Job Manager Task before any other Tasks in
+      the Job. When shrinking
 
-      a pool, the Batch service tries to preserve compute nodes where Job
-      Manager tasks are running
+      a Pool, the Batch service tries to preserve Nodes where Job Manager Tasks
+      are running for as
 
-      for as long as possible (that is, nodes running 'normal' tasks are removed
-      before nodes running
+      long as possible (that is, Compute Nodes running 'normal' Tasks are
+      removed before Compute Nodes
 
-      Job Manager tasks). When a Job Manager task fails and needs to be
-      restarted, the system tries to
+      running Job Manager Tasks). When a Job Manager Task fails and needs to be
+      restarted, the system
 
-      schedule it at the highest priority. If there are no idle nodes available,
-      the system may
+      tries to schedule it at the highest priority. If there are no idle Compute
+      Nodes available, the
 
-      terminate one of the running tasks in the pool and return it to the queue
-      in order to make room
+      system may terminate one of the running Tasks in the Pool and return it to
+      the queue in order to
 
-      for the Job Manager task to restart. Note that a Job Manager task in one
-      job does not have
+      make room for the Job Manager Task to restart. Note that a Job Manager
+      Task in one Job does not
 
-      priority over tasks in other jobs. Across jobs, only job level priorities
-      are observed. For
+      have priority over Tasks in other Jobs. Across Jobs, only Job level
+      priorities are observed. For
 
-      example, if a Job Manager in a priority 0 job needs to be restarted, it
-      will not displace tasks
+      example, if a Job Manager in a priority 0 Job needs to be restarted, it
+      will not displace Tasks
 
-      of a priority 1 job. Batch will retry tasks when a recovery operation is
-      triggered on a compute
+      of a priority 1 Job. Batch will retry Tasks when a recovery operation is
+      triggered on a Node.
 
-      node. Examples of recovery operations include (but are not limited to)
-      when an unhealthy compute
+      Examples of recovery operations include (but are not limited to) when an
+      unhealthy Node is
 
-      node is rebooted or a compute node disappeared due to host failure.
-      Retries due to recovery
+      rebooted or a Compute Node disappeared due to host failure. Retries due to
+      recovery operations
 
-      operations are independent of and are not counted against the
-      maxTaskRetryCount. Even if the
+      are independent of and are not counted against the maxTaskRetryCount. Even
+      if the
 
       maxTaskRetryCount is 0, an internal retry due to a recovery operation may
       occur. Because of
 
-      this, all tasks should be idempotent. This means tasks need to tolerate
+      this, all Tasks should be idempotent. This means Tasks need to tolerate
       being interrupted and
 
       restarted without causing any corruption or duplicate data. The best
       practice for long running
 
-      tasks is to use some form of checkpointing.
+      Tasks is to use some form of checkpointing.
     package: azure-batch
   - uid: azure-batch.JobManagerTask.allowLowPriorityNode
     name: allowLowPriorityNode
@@ -98,19 +98,20 @@ items:
       - typeScript
     type: property
     summary: >-
-      Application packages are downloaded and deployed to a shared directory,
+      Application Packages are downloaded and deployed to a shared directory,
       not the
 
-      task working directory. Therefore, if a referenced package is already on
-      the compute node, and
+      Task working directory. Therefore, if a referenced Application Package is
+      already on the
 
-      is up to date, then it is not re-downloaded; the existing copy on the
-      compute node is used. If
+      Compute Node, and is up to date, then it is not re-downloaded; the
+      existing copy on the
 
-      a referenced application package cannot be installed, for example because
-      the package has been
+      Compute Compute Node is used. If a referenced Application Package cannot
+      be installed, for
 
-      deleted or because download failed, the task fails.
+      example because the package has been deleted or because download failed,
+      the Task fails.
     optional: true
     syntax:
       content: 'applicationPackageReferences?: ApplicationPackageReference[]'
@@ -126,21 +127,21 @@ items:
       - typeScript
     type: property
     summary: >-
-      If this property is set, the Batch service provides the task with an
+      If this property is set, the Batch service provides the Task with an
 
       authentication token which can be used to authenticate Batch service
       operations without
 
-      requiring an account access key. The token is provided via the
+      requiring an Account access key. The token is provided via the
       AZ_BATCH_AUTHENTICATION_TOKEN
 
-      environment variable. The operations that the task can carry out using the
+      environment variable. The operations that the Task can carry out using the
       token depend on the
 
-      settings. For example, a task can request job permissions in order to add
-      other tasks to the
+      settings. For example, a Task can request Job permissions in order to add
+      other Tasks to the
 
-      job, or check the status of the job or of other tasks under the job.
+      Job, or check the status of the Job or of other Tasks under the Job.
     optional: true
     syntax:
       content: 'authenticationTokenSettings?: AuthenticationTokenSettings'
@@ -168,7 +169,7 @@ items:
       MyCommand" in Windows or "/bin/sh -c MyCommand" in Linux. If the command
       line refers to file
 
-      paths, it should use a relative path (relative to the task working
+      paths, it should use a relative path (relative to the Task working
       directory), or use the
 
       Batch provided environment variable
@@ -203,10 +204,10 @@ items:
       - typeScript
     type: property
     summary: >-
-      If the pool that will run this task has containerConfiguration set, this
+      If the Pool that will run this Task has containerConfiguration set, this
       must be
 
-      set as well. If the pool that will run this task doesn't have
+      set as well. If the Pool that will run this Task doesn't have
       containerConfiguration set, this
 
       must not be set. When this is specified, all directories recursively below
@@ -215,10 +216,16 @@ items:
       AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node)
       are mapped into the
 
-      container, all task environment variables are mapped into the container,
-      and the task command
+      container, all Task environment variables are mapped into the container,
+      and the Task command
 
-      line is executed in the container.
+      line is executed in the container. Files produced in the container outside
+      of
+
+      AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning
+      that Batch file APIs
+
+      will not be able to access those files.
     optional: true
     syntax:
       content: 'containerSettings?: TaskContainerSettings'
@@ -286,29 +293,29 @@ items:
       - typeScript
     type: property
     summary: >-
-      If true, when the Job Manager task completes, the Batch service marks the
-      job as
+      If true, when the Job Manager Task completes, the Batch service marks the
+      Job as
 
-      complete. If any tasks are still running at this time (other than Job
-      Release), those tasks
+      complete. If any Tasks are still running at this time (other than Job
+      Release), those Tasks
 
-      are terminated. If false, the completion of the Job Manager task does not
-      affect the job
+      are terminated. If false, the completion of the Job Manager Task does not
+      affect the Job
 
       status. In this case, you should either use the onAllTasksComplete
       attribute to terminate the
 
-      job, or have a client or user terminate the job explicitly. An example of
+      Job, or have a client or user terminate the Job explicitly. An example of
       this is if the Job
 
-      Manager creates a set of tasks but then takes no further role in their
+      Manager creates a set of Tasks but then takes no further role in their
       execution. The default
 
       value is true. If you are using the onAllTasksComplete and onTaskFailure
       attributes to control
 
-      job lifetime, and using the Job Manager task only to create the tasks for
-      the job (not to
+      Job lifetime, and using the Job Manager Task only to create the Tasks for
+      the Job (not to
 
       monitor progress), then it is important to set killJobOnCompletion to
       false.
@@ -327,10 +334,10 @@ items:
       - typeScript
     type: property
     summary: >-
-      For multi-instance tasks, the files will only be uploaded from the compute
-      node
+      For multi-instance Tasks, the files will only be uploaded from the Compute
+      Node
 
-      on which the primary task is executed.
+      on which the primary Task is executed.
     optional: true
     syntax:
       content: 'outputFiles?: OutputFile[]'
@@ -346,7 +353,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      Files listed under this element are located in the task's working
+      Files listed under this element are located in the Task's working
       directory.
 
       There is a maximum size for the list of resource files.  When the max size
@@ -374,19 +381,19 @@ items:
       - typeScript
     type: property
     summary: >-
-      If true, no other tasks will run on the same compute node for as long as
-      the Job
+      If true, no other Tasks will run on the same Node for as long as the Job
+      Manager
 
-      Manager is running. If false, other tasks can run simultaneously with the
-      Job Manager on a
+      is running. If false, other Tasks can run simultaneously with the Job
+      Manager on a Compute
 
-      compute node. The Job Manager task counts normally against the node's
-      concurrent task limit,
+      Node. The Job Manager Task counts normally against the Compute Node's
+      concurrent Task limit,
 
-      so this is only relevant if the node allows multiple concurrent tasks. The
-      default value is
+      so this is only relevant if the Compute Node allows multiple concurrent
+      Tasks. The default
 
-      true.
+      value is true.
     optional: true
     syntax:
       content: 'runExclusive?: boolean'
@@ -401,7 +408,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: 'If omitted, the task runs as a non-administrative user unique to the task.'
+    summary: 'If omitted, the Task runs as a non-administrative user unique to the Task.'
     optional: true
     syntax:
       content: 'userIdentity?: UserIdentity'

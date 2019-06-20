@@ -6,15 +6,16 @@ items:
     children:
       - '@azure/arm-containerregistry.Registries.beginCreate'
       - '@azure/arm-containerregistry.Registries.beginDeleteMethod'
+      - '@azure/arm-containerregistry.Registries.beginGenerateCredentials'
       - '@azure/arm-containerregistry.Registries.beginImportImage'
       - '@azure/arm-containerregistry.Registries.beginScheduleRun'
       - '@azure/arm-containerregistry.Registries.beginUpdate'
-      - '@azure/arm-containerregistry.Registries.beginUpdatePolicies'
       - '@azure/arm-containerregistry.Registries.checkNameAvailability'
       - '@azure/arm-containerregistry.Registries.checkNameAvailability_2'
       - '@azure/arm-containerregistry.Registries.checkNameAvailability_1'
       - '@azure/arm-containerregistry.Registries.create'
       - '@azure/arm-containerregistry.Registries.deleteMethod'
+      - '@azure/arm-containerregistry.Registries.generateCredentials'
       - '@azure/arm-containerregistry.Registries.get'
       - '@azure/arm-containerregistry.Registries.get_2'
       - '@azure/arm-containerregistry.Registries.get_1'
@@ -37,9 +38,6 @@ items:
       - '@azure/arm-containerregistry.Registries.listNext'
       - '@azure/arm-containerregistry.Registries.listNext_2'
       - '@azure/arm-containerregistry.Registries.listNext_1'
-      - '@azure/arm-containerregistry.Registries.listPolicies'
-      - '@azure/arm-containerregistry.Registries.listPolicies_2'
-      - '@azure/arm-containerregistry.Registries.listPolicies_1'
       - '@azure/arm-containerregistry.Registries.listUsages'
       - '@azure/arm-containerregistry.Registries.listUsages_2'
       - '@azure/arm-containerregistry.Registries.listUsages_1'
@@ -49,7 +47,6 @@ items:
       - '@azure/arm-containerregistry.Registries.constructor'
       - '@azure/arm-containerregistry.Registries.scheduleRun'
       - '@azure/arm-containerregistry.Registries.update'
-      - '@azure/arm-containerregistry.Registries.updatePolicies'
     langs:
       - typeScript
     type: class
@@ -112,6 +109,44 @@ items:
           type:
             - string
           description: The name of the container registry.
+        - id: options
+          type:
+            - msRest.RequestOptionsBase
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<LROPoller>
+    package: '@azure/arm-containerregistry'
+  - uid: '@azure/arm-containerregistry.Registries.beginGenerateCredentials'
+    name: >-
+      beginGenerateCredentials(string, string, GenerateCredentialsParameters,
+      msRest.RequestOptionsBase)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Generate keys for a token of a specified container registry.
+    syntax:
+      content: >-
+        function beginGenerateCredentials(resourceGroupName: string,
+        registryName: string, generateCredentialsParameters:
+        GenerateCredentialsParameters, options?: msRest.RequestOptionsBase)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: >-
+            The name of the resource group to which the container registry
+            belongs.
+        - id: registryName
+          type:
+            - string
+          description: The name of the container registry.
+        - id: generateCredentialsParameters
+          type:
+            - '@azure/arm-containerregistry.GenerateCredentialsParameters'
+          description: The parameters for generating credentials.
         - id: options
           type:
             - msRest.RequestOptionsBase
@@ -232,46 +267,6 @@ items:
           type:
             - '@azure/arm-containerregistry.RegistryUpdateParameters'
           description: The parameters for updating a container registry.
-        - id: options
-          type:
-            - msRest.RequestOptionsBase
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<LROPoller>
-    package: '@azure/arm-containerregistry'
-  - uid: '@azure/arm-containerregistry.Registries.beginUpdatePolicies'
-    name: >-
-      beginUpdatePolicies(string, string, RegistryPolicies,
-      msRest.RequestOptionsBase)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Updates the policies for the specified container registry.
-    syntax:
-      content: >-
-        function beginUpdatePolicies(resourceGroupName: string, registryName:
-        string, registryPoliciesUpdateParameters: RegistryPolicies, options?:
-        msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: >-
-            The name of the resource group to which the container registry
-            belongs.
-        - id: registryName
-          type:
-            - string
-          description: The name of the container registry.
-        - id: registryPoliciesUpdateParameters
-          type:
-            - '@azure/arm-containerregistry.RegistryPolicies'
-          description: |-
-            The parameters for updating policies of a container
-            registry.
         - id: options
           type:
             - msRest.RequestOptionsBase
@@ -435,6 +430,44 @@ items:
       return:
         type:
           - Promise<RestResponse>
+    package: '@azure/arm-containerregistry'
+  - uid: '@azure/arm-containerregistry.Registries.generateCredentials'
+    name: >-
+      generateCredentials(string, string, GenerateCredentialsParameters,
+      msRest.RequestOptionsBase)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Generate keys for a token of a specified container registry.
+    syntax:
+      content: >-
+        function generateCredentials(resourceGroupName: string, registryName:
+        string, generateCredentialsParameters: GenerateCredentialsParameters,
+        options?: msRest.RequestOptionsBase)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: >-
+            The name of the resource group to which the container registry
+            belongs.
+        - id: registryName
+          type:
+            - string
+          description: The name of the container registry.
+        - id: generateCredentialsParameters
+          type:
+            - '@azure/arm-containerregistry.GenerateCredentialsParameters'
+          description: The parameters for generating credentials.
+        - id: options
+          type:
+            - msRest.RequestOptionsBase
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.RegistriesGenerateCredentialsResponse>
     package: '@azure/arm-containerregistry'
   - uid: '@azure/arm-containerregistry.Registries.get'
     name: 'get(string, string, msRest.RequestOptionsBase)'
@@ -1092,106 +1125,6 @@ items:
         type:
           - Promise<Models.RegistriesListNextResponse>
     package: '@azure/arm-containerregistry'
-  - uid: '@azure/arm-containerregistry.Registries.listPolicies'
-    name: 'listPolicies(string, string, msRest.RequestOptionsBase)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Lists the policies for the specified container registry.
-    syntax:
-      content: >-
-        function listPolicies(resourceGroupName: string, registryName: string,
-        options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: >-
-            The name of the resource group to which the container registry
-            belongs.
-        - id: registryName
-          type:
-            - string
-          description: The name of the container registry.
-        - id: options
-          type:
-            - msRest.RequestOptionsBase
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<Models.RegistriesListPoliciesResponse>
-    package: '@azure/arm-containerregistry'
-  - uid: '@azure/arm-containerregistry.Registries.listPolicies_2'
-    name: >-
-      listPolicies(string, string, RequestOptionsBase,
-      ServiceCallback<RegistryPolicies>)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        function listPolicies(resourceGroupName: string, registryName: string,
-        options: RequestOptionsBase, callback:
-        ServiceCallback<RegistryPolicies>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: >-
-            The name of the resource group to which the container registry
-            belongs.
-        - id: registryName
-          type:
-            - string
-          description: The name of the container registry.
-        - id: options
-          type:
-            - RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type:
-            - ServiceCallback<@azure/arm-containerregistry.RegistryPolicies>
-          description: |
-            The callback
-      return:
-        type:
-          - Promise<Models.RegistriesListPoliciesResponse>
-    package: '@azure/arm-containerregistry'
-  - uid: '@azure/arm-containerregistry.Registries.listPolicies_1'
-    name: 'listPolicies(string, string, ServiceCallback<RegistryPolicies>)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        function listPolicies(resourceGroupName: string, registryName: string,
-        callback: ServiceCallback<RegistryPolicies>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: >-
-            The name of the resource group to which the container registry
-            belongs.
-        - id: registryName
-          type:
-            - string
-          description: The name of the container registry.
-        - id: callback
-          type:
-            - ServiceCallback<@azure/arm-containerregistry.RegistryPolicies>
-          description: |
-            The callback
-      return:
-        type:
-          - Promise<Models.RegistriesListPoliciesResponse>
-    package: '@azure/arm-containerregistry'
   - uid: '@azure/arm-containerregistry.Registries.listUsages'
     name: 'listUsages(string, string, msRest.RequestOptionsBase)'
     children: []
@@ -1517,46 +1450,6 @@ items:
         type:
           - Promise<Models.RegistriesUpdateResponse>
     package: '@azure/arm-containerregistry'
-  - uid: '@azure/arm-containerregistry.Registries.updatePolicies'
-    name: >-
-      updatePolicies(string, string, RegistryPolicies,
-      msRest.RequestOptionsBase)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Updates the policies for the specified container registry.
-    syntax:
-      content: >-
-        function updatePolicies(resourceGroupName: string, registryName: string,
-        registryPoliciesUpdateParameters: RegistryPolicies, options?:
-        msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: >-
-            The name of the resource group to which the container registry
-            belongs.
-        - id: registryName
-          type:
-            - string
-          description: The name of the container registry.
-        - id: registryPoliciesUpdateParameters
-          type:
-            - '@azure/arm-containerregistry.RegistryPolicies'
-          description: |-
-            The parameters for updating policies of a container
-            registry.
-        - id: options
-          type:
-            - msRest.RequestOptionsBase
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<Models.RegistriesUpdatePoliciesResponse>
-    package: '@azure/arm-containerregistry'
 references:
   - uid: '@azure/arm-containerregistry.ContainerRegistryManagementClientContext'
     name: ContainerRegistryManagementClientContext
@@ -1570,6 +1463,12 @@ references:
       - name: Registry
         fullName: Registry
         uid: '@azure/arm-containerregistry.Registry'
+  - uid: '@azure/arm-containerregistry.GenerateCredentialsParameters'
+    name: GenerateCredentialsParameters
+    spec.typeScript:
+      - name: GenerateCredentialsParameters
+        fullName: GenerateCredentialsParameters
+        uid: '@azure/arm-containerregistry.GenerateCredentialsParameters'
   - uid: '@azure/arm-containerregistry.ImportImageParameters'
     name: ImportImageParameters
     spec.typeScript:
@@ -1582,12 +1481,6 @@ references:
       - name: RegistryUpdateParameters
         fullName: RegistryUpdateParameters
         uid: '@azure/arm-containerregistry.RegistryUpdateParameters'
-  - uid: '@azure/arm-containerregistry.RegistryPolicies'
-    name: RegistryPolicies
-    spec.typeScript:
-      - name: RegistryPolicies
-        fullName: RegistryPolicies
-        uid: '@azure/arm-containerregistry.RegistryPolicies'
   - uid: '@azure/arm-containerregistry.RegistryNameCheckRequest'
     name: RegistryNameCheckRequest
     spec.typeScript:
@@ -1643,16 +1536,6 @@ references:
       - name: RegistryListCredentialsResult
         fullName: RegistryListCredentialsResult
         uid: '@azure/arm-containerregistry.RegistryListCredentialsResult'
-      - name: '>'
-        fullName: '>'
-  - uid: ServiceCallback<@azure/arm-containerregistry.RegistryPolicies>
-    name: RegistryPolicies>
-    spec.typeScript:
-      - name: ServiceCallback<
-        fullName: ServiceCallback<
-      - name: RegistryPolicies
-        fullName: RegistryPolicies
-        uid: '@azure/arm-containerregistry.RegistryPolicies'
       - name: '>'
         fullName: '>'
   - uid: ServiceCallback<@azure/arm-containerregistry.RegistryUsageListResult>

@@ -21,7 +21,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Optional Parameters.
     extends:
       name: RequestOptionsBase
     package: '@azure/servicefabric'
@@ -67,7 +67,42 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      A flag that indicates whether the report should be sent immediately.
+
+      A health report is sent to a Service Fabric gateway Application, which
+      forwards to the health
+
+      store.
+
+      If Immediate is set to true, the report is sent immediately from HTTP
+      Gateway to the health
+
+      store, regardless of the fabric client settings that the HTTP Gateway
+      Application is using.
+
+      This is useful for critical reports that should be sent as soon as
+      possible.
+
+      Depending on timing and other conditions, sending the report may still
+      fail, for example if
+
+      the HTTP Gateway is closed or the message doesn't reach the Gateway.
+
+      If Immediate is set to false, the report is sent based on the health
+      client settings from the
+
+      HTTP Gateway. Therefore, it will be batched according to the
+      HealthReportSendInterval
+
+      configuration.
+
+      This is the recommended setting because it allows the health client to
+      optimize health
+
+      reporting messages to health store as well as health report processing.
+
+      By default, reports are not sent immediately. Default value: false.
     optional: true
     syntax:
       content: 'immediate?: undefined | false | true'
@@ -135,7 +170,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The server timeout for performing the operation in seconds. This timeout
+      specifies the time
+
+      duration that the client is willing to wait for the requested operation to
+      complete. The
+
+      default value for this parameter is 60 seconds. Default value: 60.
     optional: true
     syntax:
       content: 'timeoutParameter?: undefined | number'

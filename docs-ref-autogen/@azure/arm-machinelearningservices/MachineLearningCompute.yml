@@ -8,8 +8,7 @@ items:
         @azure/arm-machinelearningservices.MachineLearningCompute.beginCreateOrUpdate
       - >-
         @azure/arm-machinelearningservices.MachineLearningCompute.beginDeleteMethod
-      - >-
-        @azure/arm-machinelearningservices.MachineLearningCompute.beginSystemUpdate
+      - '@azure/arm-machinelearningservices.MachineLearningCompute.beginUpdate'
       - '@azure/arm-machinelearningservices.MachineLearningCompute.createOrUpdate'
       - '@azure/arm-machinelearningservices.MachineLearningCompute.deleteMethod'
       - '@azure/arm-machinelearningservices.MachineLearningCompute.get'
@@ -30,8 +29,11 @@ items:
       - '@azure/arm-machinelearningservices.MachineLearningCompute.listKeys'
       - '@azure/arm-machinelearningservices.MachineLearningCompute.listKeys_2'
       - '@azure/arm-machinelearningservices.MachineLearningCompute.listKeys_1'
+      - '@azure/arm-machinelearningservices.MachineLearningCompute.listNodes'
+      - '@azure/arm-machinelearningservices.MachineLearningCompute.listNodes_2'
+      - '@azure/arm-machinelearningservices.MachineLearningCompute.listNodes_1'
       - '@azure/arm-machinelearningservices.MachineLearningCompute.constructor'
-      - '@azure/arm-machinelearningservices.MachineLearningCompute.systemUpdate'
+      - '@azure/arm-machinelearningservices.MachineLearningCompute.update'
     langs:
       - typeScript
     type: class
@@ -87,7 +89,9 @@ items:
     package: '@azure/arm-machinelearningservices'
   - uid: >-
       @azure/arm-machinelearningservices.MachineLearningCompute.beginDeleteMethod
-    name: 'beginDeleteMethod(string, string, string, msRest.RequestOptionsBase)'
+    name: >-
+      beginDeleteMethod(string, string, string, Models.UnderlyingResourceAction,
+      msRest.RequestOptionsBase)
     children: []
     type: method
     langs:
@@ -96,7 +100,8 @@ items:
     syntax:
       content: >-
         function beginDeleteMethod(resourceGroupName: string, workspaceName:
-        string, computeName: string, options?: msRest.RequestOptionsBase)
+        string, computeName: string, underlyingResourceAction:
+        Models.UnderlyingResourceAction, options?: msRest.RequestOptionsBase)
       parameters:
         - id: resourceGroupName
           type:
@@ -110,6 +115,14 @@ items:
           type:
             - string
           description: Name of the Azure Machine Learning compute.
+        - id: underlyingResourceAction
+          type:
+            - Models.UnderlyingResourceAction
+          description: >-
+            Delete the underlying compute if 'Delete', or detach the
+
+            underlying compute from workspace if 'Detach'. Possible values
+            include: 'Delete', 'Detach'
         - id: options
           type:
             - msRest.RequestOptionsBase
@@ -119,18 +132,24 @@ items:
         type:
           - Promise<LROPoller>
     package: '@azure/arm-machinelearningservices'
-  - uid: >-
-      @azure/arm-machinelearningservices.MachineLearningCompute.beginSystemUpdate
-    name: 'beginSystemUpdate(string, string, string, msRest.RequestOptionsBase)'
+  - uid: '@azure/arm-machinelearningservices.MachineLearningCompute.beginUpdate'
+    name: >-
+      beginUpdate(string, string, string, ClusterUpdateParameters,
+      msRest.RequestOptionsBase)
     children: []
     type: method
     langs:
       - typeScript
-    summary: System Update On Machine Learning compute.
+    summary: >-
+      Updates properties of a compute. This call will overwrite a compute if it
+      exists. This is a
+
+      nonrecoverable operation.
     syntax:
       content: >-
-        function beginSystemUpdate(resourceGroupName: string, workspaceName:
-        string, computeName: string, options?: msRest.RequestOptionsBase)
+        function beginUpdate(resourceGroupName: string, workspaceName: string,
+        computeName: string, parameters: ClusterUpdateParameters, options?:
+        msRest.RequestOptionsBase)
       parameters:
         - id: resourceGroupName
           type:
@@ -144,6 +163,10 @@ items:
           type:
             - string
           description: Name of the Azure Machine Learning compute.
+        - id: parameters
+          type:
+            - '@azure/arm-machinelearningservices.ClusterUpdateParameters'
+          description: Additional parameters for cluster update.
         - id: options
           type:
             - msRest.RequestOptionsBase
@@ -201,7 +224,9 @@ items:
           - Promise<Models.MachineLearningComputeCreateOrUpdateResponse>
     package: '@azure/arm-machinelearningservices'
   - uid: '@azure/arm-machinelearningservices.MachineLearningCompute.deleteMethod'
-    name: 'deleteMethod(string, string, string, msRest.RequestOptionsBase)'
+    name: >-
+      deleteMethod(string, string, string, Models.UnderlyingResourceAction,
+      msRest.RequestOptionsBase)
     children: []
     type: method
     langs:
@@ -210,7 +235,8 @@ items:
     syntax:
       content: >-
         function deleteMethod(resourceGroupName: string, workspaceName: string,
-        computeName: string, options?: msRest.RequestOptionsBase)
+        computeName: string, underlyingResourceAction:
+        Models.UnderlyingResourceAction, options?: msRest.RequestOptionsBase)
       parameters:
         - id: resourceGroupName
           type:
@@ -224,6 +250,14 @@ items:
           type:
             - string
           description: Name of the Azure Machine Learning compute.
+        - id: underlyingResourceAction
+          type:
+            - Models.UnderlyingResourceAction
+          description: >-
+            Delete the underlying compute if 'Delete', or detach the
+
+            underlying compute from workspace if 'Detach'. Possible values
+            include: 'Delete', 'Detach'
         - id: options
           type:
             - msRest.RequestOptionsBase
@@ -650,35 +684,18 @@ items:
         type:
           - Promise<Models.MachineLearningComputeListKeysResponse>
     package: '@azure/arm-machinelearningservices'
-  - uid: '@azure/arm-machinelearningservices.MachineLearningCompute.constructor'
-    name: MachineLearningCompute(AzureMachineLearningWorkspacesContext)
-    children: []
-    type: constructor
-    langs:
-      - typeScript
-    summary: Create a MachineLearningCompute.
-    syntax:
-      content: >-
-        new MachineLearningCompute(client:
-        AzureMachineLearningWorkspacesContext)
-      parameters:
-        - id: client
-          type:
-            - >-
-              @azure/arm-machinelearningservices.AzureMachineLearningWorkspacesContext
-          description: |
-            Reference to the service client.
-    package: '@azure/arm-machinelearningservices'
-  - uid: '@azure/arm-machinelearningservices.MachineLearningCompute.systemUpdate'
-    name: 'systemUpdate(string, string, string, msRest.RequestOptionsBase)'
+  - uid: '@azure/arm-machinelearningservices.MachineLearningCompute.listNodes'
+    name: 'listNodes(string, string, string, msRest.RequestOptionsBase)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: System Update On Machine Learning compute.
+    summary: >-
+      Get the details (e.g IP address, port etc) of all the compute nodes in the
+      compute.
     syntax:
       content: >-
-        function systemUpdate(resourceGroupName: string, workspaceName: string,
+        function listNodes(resourceGroupName: string, workspaceName: string,
         computeName: string, options?: msRest.RequestOptionsBase)
       parameters:
         - id: resourceGroupName
@@ -700,7 +717,148 @@ items:
           optional: true
       return:
         type:
-          - Promise<Models.MachineLearningComputeSystemUpdateResponse>
+          - Promise<Models.MachineLearningComputeListNodesResponse>
+    package: '@azure/arm-machinelearningservices'
+  - uid: '@azure/arm-machinelearningservices.MachineLearningCompute.listNodes_2'
+    name: >-
+      listNodes(string, string, string, RequestOptionsBase,
+      ServiceCallback<AmlComputeNodesInformation>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function listNodes(resourceGroupName: string, workspaceName: string,
+        computeName: string, options: RequestOptionsBase, callback:
+        ServiceCallback<AmlComputeNodesInformation>)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: Name of the resource group in which workspace is located.
+        - id: workspaceName
+          type:
+            - string
+          description: Name of Azure Machine Learning workspace.
+        - id: computeName
+          type:
+            - string
+          description: Name of the Azure Machine Learning compute.
+        - id: options
+          type:
+            - RequestOptionsBase
+          description: The optional parameters
+        - id: callback
+          type:
+            - >-
+              ServiceCallback<@azure/arm-machinelearningservices.AmlComputeNodesInformation>
+          description: |
+            The callback
+      return:
+        type:
+          - Promise<Models.MachineLearningComputeListNodesResponse>
+    package: '@azure/arm-machinelearningservices'
+  - uid: '@azure/arm-machinelearningservices.MachineLearningCompute.listNodes_1'
+    name: >-
+      listNodes(string, string, string,
+      ServiceCallback<AmlComputeNodesInformation>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function listNodes(resourceGroupName: string, workspaceName: string,
+        computeName: string, callback:
+        ServiceCallback<AmlComputeNodesInformation>)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: Name of the resource group in which workspace is located.
+        - id: workspaceName
+          type:
+            - string
+          description: Name of Azure Machine Learning workspace.
+        - id: computeName
+          type:
+            - string
+          description: Name of the Azure Machine Learning compute.
+        - id: callback
+          type:
+            - >-
+              ServiceCallback<@azure/arm-machinelearningservices.AmlComputeNodesInformation>
+          description: |
+            The callback
+      return:
+        type:
+          - Promise<Models.MachineLearningComputeListNodesResponse>
+    package: '@azure/arm-machinelearningservices'
+  - uid: '@azure/arm-machinelearningservices.MachineLearningCompute.constructor'
+    name: MachineLearningCompute(AzureMachineLearningWorkspacesContext)
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Create a MachineLearningCompute.
+    syntax:
+      content: >-
+        new MachineLearningCompute(client:
+        AzureMachineLearningWorkspacesContext)
+      parameters:
+        - id: client
+          type:
+            - >-
+              @azure/arm-machinelearningservices.AzureMachineLearningWorkspacesContext
+          description: |
+            Reference to the service client.
+    package: '@azure/arm-machinelearningservices'
+  - uid: '@azure/arm-machinelearningservices.MachineLearningCompute.update'
+    name: >-
+      update(string, string, string, ClusterUpdateParameters,
+      msRest.RequestOptionsBase)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Updates properties of a compute. This call will overwrite a compute if it
+      exists. This is a
+
+      nonrecoverable operation.
+    syntax:
+      content: >-
+        function update(resourceGroupName: string, workspaceName: string,
+        computeName: string, parameters: ClusterUpdateParameters, options?:
+        msRest.RequestOptionsBase)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: Name of the resource group in which workspace is located.
+        - id: workspaceName
+          type:
+            - string
+          description: Name of Azure Machine Learning workspace.
+        - id: computeName
+          type:
+            - string
+          description: Name of the Azure Machine Learning compute.
+        - id: parameters
+          type:
+            - '@azure/arm-machinelearningservices.ClusterUpdateParameters'
+          description: Additional parameters for cluster update.
+        - id: options
+          type:
+            - msRest.RequestOptionsBase
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.MachineLearningComputeUpdateResponse>
     package: '@azure/arm-machinelearningservices'
 references:
   - uid: '@azure/arm-machinelearningservices.AzureMachineLearningWorkspacesContext'
@@ -716,6 +874,12 @@ references:
       - name: ComputeResource
         fullName: ComputeResource
         uid: '@azure/arm-machinelearningservices.ComputeResource'
+  - uid: '@azure/arm-machinelearningservices.ClusterUpdateParameters'
+    name: ClusterUpdateParameters
+    spec.typeScript:
+      - name: ClusterUpdateParameters
+        fullName: ClusterUpdateParameters
+        uid: '@azure/arm-machinelearningservices.ClusterUpdateParameters'
   - uid: ServiceCallback<@azure/arm-machinelearningservices.ComputeResource>
     name: ComputeResource>
     spec.typeScript:
@@ -745,3 +909,14 @@ references:
         fullName: MachineLearningComputeListByWorkspaceOptionalParams
         uid: >-
           @azure/arm-machinelearningservices.MachineLearningComputeListByWorkspaceOptionalParams
+  - uid: >-
+      ServiceCallback<@azure/arm-machinelearningservices.AmlComputeNodesInformation>
+    name: AmlComputeNodesInformation>
+    spec.typeScript:
+      - name: ServiceCallback<
+        fullName: ServiceCallback<
+      - name: AmlComputeNodesInformation
+        fullName: AmlComputeNodesInformation
+        uid: '@azure/arm-machinelearningservices.AmlComputeNodesInformation'
+      - name: '>'
+        fullName: '>'

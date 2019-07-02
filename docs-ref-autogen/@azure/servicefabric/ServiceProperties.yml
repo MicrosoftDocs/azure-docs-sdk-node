@@ -7,6 +7,7 @@ items:
       - '@azure/servicefabric.ServiceProperties.autoScalingPolicies'
       - '@azure/servicefabric.ServiceProperties.description'
       - '@azure/servicefabric.ServiceProperties.healthState'
+      - '@azure/servicefabric.ServiceProperties.identityRefs'
       - '@azure/servicefabric.ServiceProperties.replicaCount'
       - '@azure/servicefabric.ServiceProperties.status'
       - '@azure/servicefabric.ServiceProperties.statusDetails'
@@ -14,7 +15,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Describes properties of a service resource.
     package: '@azure/servicefabric'
   - uid: '@azure/servicefabric.ServiceProperties.autoScalingPolicies'
     name: autoScalingPolicies
@@ -23,7 +24,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Auto scaling policies
     optional: true
     syntax:
       content: 'autoScalingPolicies?: AutoScalingPolicy[]'
@@ -38,7 +39,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: User readable description of the service.
     optional: true
     syntax:
       content: 'description?: undefined | string'
@@ -53,13 +54,35 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes the health state of an application resource. Possible values
+      include: 'Invalid',
+
+      'Ok', 'Warning', 'Error', 'Unknown'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'healthState?: HealthState'
       return:
         type:
           - '@azure/servicefabric.HealthState'
+    package: '@azure/servicefabric'
+  - uid: '@azure/servicefabric.ServiceProperties.identityRefs'
+    name: identityRefs
+    fullName: identityRefs
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The service identity list.
+    optional: true
+    syntax:
+      content: 'identityRefs?: ServiceIdentity[]'
+      return:
+        type:
+          - '@azure/servicefabric.ServiceIdentity[]'
     package: '@azure/servicefabric'
   - uid: '@azure/servicefabric.ServiceProperties.replicaCount'
     name: replicaCount
@@ -68,7 +91,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The number of replicas of the service to create. Defaults to 1 if not
+      specified.
     optional: true
     syntax:
       content: 'replicaCount?: undefined | number'
@@ -83,7 +108,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Status of the service. Possible values include: 'Unknown', 'Ready',
+      'Upgrading', 'Creating',
+
+      'Deleting', 'Failed'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'status?: ResourceStatus'
@@ -98,7 +130,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gives additional information about the current status of the service.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'statusDetails?: undefined | string'
@@ -113,7 +149,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      When the service's health state is not 'Ok', this additional details from
+      service fabric
+
+      Health Manager for the user to know why the service is marked unhealthy.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'unhealthyEvaluation?: undefined | string'
@@ -136,6 +179,14 @@ references:
       - name: HealthState
         fullName: HealthState
         uid: '@azure/servicefabric.HealthState'
+  - uid: '@azure/servicefabric.ServiceIdentity[]'
+    name: 'ServiceIdentity[]'
+    spec.typeScript:
+      - name: ServiceIdentity
+        fullName: ServiceIdentity
+        uid: '@azure/servicefabric.ServiceIdentity'
+      - name: '[]'
+        fullName: '[]'
   - uid: '@azure/servicefabric.ResourceStatus'
     name: ResourceStatus
     spec.typeScript:

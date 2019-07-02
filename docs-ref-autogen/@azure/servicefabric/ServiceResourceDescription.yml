@@ -9,6 +9,7 @@ items:
       - '@azure/servicefabric.ServiceResourceDescription.description'
       - '@azure/servicefabric.ServiceResourceDescription.diagnostics'
       - '@azure/servicefabric.ServiceResourceDescription.healthState'
+      - '@azure/servicefabric.ServiceResourceDescription.identityRefs'
       - '@azure/servicefabric.ServiceResourceDescription.name'
       - '@azure/servicefabric.ServiceResourceDescription.networkRefs'
       - '@azure/servicefabric.ServiceResourceDescription.osType'
@@ -19,7 +20,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: This type describes a service resource.
     package: '@azure/servicefabric'
   - uid: '@azure/servicefabric.ServiceResourceDescription.autoScalingPolicies'
     name: autoScalingPolicies
@@ -28,7 +29,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Auto scaling policies
     optional: true
     syntax:
       content: 'autoScalingPolicies?: AutoScalingPolicy[]'
@@ -43,7 +44,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes the set of code packages that forms the service. A code package
+      describes the
+
+      container and the properties for running it. All the code packages are
+      started together on the
+
+      same host and share the same context (network, process etc.).
     syntax:
       content: 'codePackages: ContainerCodePackageProperties[]'
       return:
@@ -57,7 +65,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: User readable description of the service.
     optional: true
     syntax:
       content: 'description?: undefined | string'
@@ -72,7 +80,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Reference to sinks in DiagnosticsDescription.
     optional: true
     syntax:
       content: 'diagnostics?: DiagnosticsRef'
@@ -87,13 +95,35 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes the health state of an application resource. Possible values
+      include: 'Invalid',
+
+      'Ok', 'Warning', 'Error', 'Unknown'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'healthState?: HealthState'
       return:
         type:
           - '@azure/servicefabric.HealthState'
+    package: '@azure/servicefabric'
+  - uid: '@azure/servicefabric.ServiceResourceDescription.identityRefs'
+    name: identityRefs
+    fullName: identityRefs
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The service identity list.
+    optional: true
+    syntax:
+      content: 'identityRefs?: ServiceIdentity[]'
+      return:
+        type:
+          - '@azure/servicefabric.ServiceIdentity[]'
     package: '@azure/servicefabric'
   - uid: '@azure/servicefabric.ServiceResourceDescription.name'
     name: name
@@ -102,7 +132,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Name of the Service resource.
     syntax:
       content: 'name: string'
       return:
@@ -116,7 +146,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The names of the private networks that this service needs to be part of.
     optional: true
     syntax:
       content: 'networkRefs?: NetworkRef[]'
@@ -131,7 +161,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The operation system required by the code in service. Possible values
+      include: 'Linux',
+
+      'Windows'
     syntax:
       content: 'osType: OperatingSystemType'
       return:
@@ -145,7 +179,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The number of replicas of the service to create. Defaults to 1 if not
+      specified.
     optional: true
     syntax:
       content: 'replicaCount?: undefined | number'
@@ -160,7 +196,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Status of the service. Possible values include: 'Unknown', 'Ready',
+      'Upgrading', 'Creating',
+
+      'Deleting', 'Failed'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'status?: ResourceStatus'
@@ -175,7 +218,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gives additional information about the current status of the service.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'statusDetails?: undefined | string'
@@ -190,7 +237,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      When the service's health state is not 'Ok', this additional details from
+      service fabric
+
+      Health Manager for the user to know why the service is marked unhealthy.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'unhealthyEvaluation?: undefined | string'
@@ -227,6 +281,14 @@ references:
       - name: HealthState
         fullName: HealthState
         uid: '@azure/servicefabric.HealthState'
+  - uid: '@azure/servicefabric.ServiceIdentity[]'
+    name: 'ServiceIdentity[]'
+    spec.typeScript:
+      - name: ServiceIdentity
+        fullName: ServiceIdentity
+        uid: '@azure/servicefabric.ServiceIdentity'
+      - name: '[]'
+        fullName: '[]'
   - uid: '@azure/servicefabric.NetworkRef[]'
     name: 'NetworkRef[]'
     spec.typeScript:

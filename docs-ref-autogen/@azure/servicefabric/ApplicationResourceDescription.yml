@@ -8,6 +8,7 @@ items:
       - '@azure/servicefabric.ApplicationResourceDescription.description'
       - '@azure/servicefabric.ApplicationResourceDescription.diagnostics'
       - '@azure/servicefabric.ApplicationResourceDescription.healthState'
+      - '@azure/servicefabric.ApplicationResourceDescription.identity'
       - '@azure/servicefabric.ApplicationResourceDescription.name'
       - '@azure/servicefabric.ApplicationResourceDescription.serviceNames'
       - '@azure/servicefabric.ApplicationResourceDescription.services'
@@ -17,7 +18,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: This type describes a application resource.
     package: '@azure/servicefabric'
   - uid: '@azure/servicefabric.ApplicationResourceDescription.debugParams'
     name: debugParams
@@ -26,7 +27,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Internal - used by Visual Studio to setup the debugging session on the
+      local development
+
+      environment.
     optional: true
     syntax:
       content: 'debugParams?: undefined | string'
@@ -41,7 +46,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: User readable description of the application.
     optional: true
     syntax:
       content: 'description?: undefined | string'
@@ -56,7 +61,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes the diagnostics definition and usage for an application
+      resource.
     optional: true
     syntax:
       content: 'diagnostics?: DiagnosticsDescription'
@@ -71,13 +78,35 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes the health state of an application resource. Possible values
+      include: 'Invalid',
+
+      'Ok', 'Warning', 'Error', 'Unknown'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'healthState?: HealthState'
       return:
         type:
           - '@azure/servicefabric.HealthState'
+    package: '@azure/servicefabric'
+  - uid: '@azure/servicefabric.ApplicationResourceDescription.identity'
+    name: identity
+    fullName: identity
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Describes the identity of the application.
+    optional: true
+    syntax:
+      content: 'identity?: IdentityDescription'
+      return:
+        type:
+          - '@azure/servicefabric.IdentityDescription'
     package: '@azure/servicefabric'
   - uid: '@azure/servicefabric.ApplicationResourceDescription.name'
     name: name
@@ -86,7 +115,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Name of the Application resource.
     syntax:
       content: 'name: string'
       return:
@@ -100,7 +129,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Names of the services in the application.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'serviceNames?: string[]'
@@ -115,7 +148,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes the services in the application. This property is used to create
+      or modify services
+
+      of the application. On get only the name of the service is returned. The
+      service description
+
+      can be obtained by querying for the service resource.
     optional: true
     syntax:
       content: 'services?: ServiceResourceDescription[]'
@@ -130,7 +170,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Status of the application. Possible values include: 'Unknown', 'Ready',
+      'Upgrading',
+
+      'Creating', 'Deleting', 'Failed'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'status?: ResourceStatus'
@@ -145,7 +192,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Gives additional information about the current status of the application.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'statusDetails?: undefined | string'
@@ -160,7 +211,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      When the application's health state is not 'Ok', this additional details
+      from service fabric
+
+      Health Manager for the user to know why the application is marked
+      unhealthy.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'unhealthyEvaluation?: undefined | string'
@@ -181,6 +240,12 @@ references:
       - name: HealthState
         fullName: HealthState
         uid: '@azure/servicefabric.HealthState'
+  - uid: '@azure/servicefabric.IdentityDescription'
+    name: IdentityDescription
+    spec.typeScript:
+      - name: IdentityDescription
+        fullName: IdentityDescription
+        uid: '@azure/servicefabric.IdentityDescription'
   - uid: '@azure/servicefabric.ServiceResourceDescription[]'
     name: 'ServiceResourceDescription[]'
     spec.typeScript:

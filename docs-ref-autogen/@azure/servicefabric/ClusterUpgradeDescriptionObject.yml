@@ -16,13 +16,14 @@ items:
       - '@azure/servicefabric.ClusterUpgradeDescriptionObject.forceRestart'
       - '@azure/servicefabric.ClusterUpgradeDescriptionObject.monitoringPolicy'
       - '@azure/servicefabric.ClusterUpgradeDescriptionObject.rollingUpgradeMode'
+      - '@azure/servicefabric.ClusterUpgradeDescriptionObject.sortOrder'
       - '@azure/servicefabric.ClusterUpgradeDescriptionObject.upgradeKind'
       - >-
         @azure/servicefabric.ClusterUpgradeDescriptionObject.upgradeReplicaSetCheckTimeoutInSeconds
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Represents a ServiceFabric cluster upgrade
     package: '@azure/servicefabric'
   - uid: >-
       @azure/servicefabric.ClusterUpgradeDescriptionObject.applicationHealthPolicyMap
@@ -32,7 +33,24 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Defines a map that contains specific application health policies for
+      different applications.
+
+      Each entry specifies as key the application name and as value an
+      ApplicationHealthPolicy used
+
+      to evaluate the application health.
+
+      If an application is not specified in the map, the application health
+      evaluation uses the
+
+      ApplicationHealthPolicy found in its application manifest or the default
+      application health
+
+      policy (if no health policy is defined in the manifest).
+
+      The map is empty by default.
     optional: true
     syntax:
       content: 'applicationHealthPolicyMap?: ApplicationHealthPolicyMapItem[]'
@@ -47,7 +65,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Defines a health policy used to evaluate the health of the cluster or of a
+      cluster node.
     optional: true
     syntax:
       content: 'clusterHealthPolicy?: ClusterHealthPolicy'
@@ -63,7 +83,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Defines a health policy used to evaluate the health of the cluster during
+      a cluster upgrade.
     optional: true
     syntax:
       content: 'clusterUpgradeHealthPolicy?: ClusterUpgradeHealthPolicyObject'
@@ -78,7 +100,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The ServiceFabric code version of the cluster.
     optional: true
     syntax:
       content: 'codeVersion?: undefined | string'
@@ -93,7 +115,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The cluster configuration version (specified in the cluster manifest).
     optional: true
     syntax:
       content: 'configVersion?: undefined | string'
@@ -109,7 +131,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      When true, enables delta health evaluation rather than absolute health
+      evaluation after
+
+      completion of each upgrade domain.
     optional: true
     syntax:
       content: 'enableDeltaHealthEvaluation?: undefined | false | true'
@@ -124,7 +150,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      If true, then processes are forcefully restarted during upgrade even when
+      the code version has
+
+      not changed (the upgrade only changes configuration or data).
     optional: true
     syntax:
       content: 'forceRestart?: undefined | false | true'
@@ -139,7 +169,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Describes the parameters for monitoring an upgrade in Monitored mode.
     optional: true
     syntax:
       content: 'monitoringPolicy?: MonitoringPolicyDescription'
@@ -154,13 +184,41 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The mode used to monitor health during a rolling upgrade. The values are
+      UnmonitoredAuto,
+
+      UnmonitoredManual, and Monitored. Possible values include: 'Invalid',
+      'UnmonitoredAuto',
+
+      'UnmonitoredManual', 'Monitored'. Default value: 'UnmonitoredAuto'.
     optional: true
     syntax:
       content: 'rollingUpgradeMode?: UpgradeMode'
       return:
         type:
           - '@azure/servicefabric.UpgradeMode'
+    package: '@azure/servicefabric'
+  - uid: '@azure/servicefabric.ClusterUpgradeDescriptionObject.sortOrder'
+    name: sortOrder
+    fullName: sortOrder
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Defines the order in which an upgrade proceeds through the cluster.
+      Possible values include:
+
+      'Invalid', 'Default', 'Numeric', 'Lexicographical', 'ReverseNumeric',
+
+      'ReverseLexicographical'. Default value: 'Default'.
+    optional: true
+    syntax:
+      content: 'sortOrder?: UpgradeSortOrder'
+      return:
+        type:
+          - '@azure/servicefabric.UpgradeSortOrder'
     package: '@azure/servicefabric'
   - uid: '@azure/servicefabric.ClusterUpgradeDescriptionObject.upgradeKind'
     name: upgradeKind
@@ -169,7 +227,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The kind of upgrade out of the following possible values. Possible values
+      include: 'Invalid',
+
+      'Rolling'. Default value: 'Rolling'.
     optional: true
     syntax:
       content: 'upgradeKind?: UpgradeKind'
@@ -185,7 +247,20 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The maximum amount of time to block processing of an upgrade domain and
+      prevent loss of
+
+      availability when there are unexpected issues. When this timeout expires,
+      processing of the
+
+      upgrade domain will proceed regardless of availability loss issues. The
+      timeout is reset at
+
+      the start of each upgrade domain. Valid values are between 0 and
+      42949672925 inclusive.
+
+      (unsigned 32-bit integer).
     optional: true
     syntax:
       content: 'upgradeReplicaSetCheckTimeoutInSeconds?: undefined | number'
@@ -226,6 +301,12 @@ references:
       - name: UpgradeMode
         fullName: UpgradeMode
         uid: '@azure/servicefabric.UpgradeMode'
+  - uid: '@azure/servicefabric.UpgradeSortOrder'
+    name: UpgradeSortOrder
+    spec.typeScript:
+      - name: UpgradeSortOrder
+        fullName: UpgradeSortOrder
+        uid: '@azure/servicefabric.UpgradeSortOrder'
   - uid: '@azure/servicefabric.UpgradeKind'
     name: UpgradeKind
     spec.typeScript:

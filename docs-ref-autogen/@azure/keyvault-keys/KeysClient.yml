@@ -40,6 +40,16 @@ items:
 
       key will be downloaded. This operation requires the keys/backup
       permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      let backupContents = await client.backupKey("MyKey");
+
+      ```
     syntax:
       content: 'function backupKey(name: string, options?: RequestOptions)'
       parameters:
@@ -70,6 +80,16 @@ items:
       requires the keys/create
 
       permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      let result = await client.createEcKey("MyKey", { curve: "P-256" });
+
+      ```
     syntax:
       content: 'function createEcKey(name: string, options?: CreateEcKeyOptions)'
       parameters:
@@ -100,6 +120,18 @@ items:
       requires the keys/create
 
       permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      // Create an elliptic-curve key:
+
+      let result = await client.createKey("MyKey", "EC");
+
+      ```
     syntax:
       content: >-
         function createKey(name: string, keyType: JsonWebKeyType, options?:
@@ -136,6 +168,16 @@ items:
       requires the keys/create
 
       permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      let result = await client.createRsaKey("MyKey", { keySize: 2048 });
+
+      ```
     syntax:
       content: 'function createRsaKey(name: string, options?: CreateRsaKeyOptions)'
       parameters:
@@ -164,6 +206,16 @@ items:
 
       to an individual version of a key. This operation requires the keys/delete
       permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      let result = await client.deleteKey("MyKey");
+
+      ```
     syntax:
       content: 'function deleteKey(name: string, options?: RequestOptions)'
       parameters:
@@ -220,6 +272,16 @@ items:
       its attributes.
 
       This operation requires the keys/get permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      let key = await client.getDeletedKey("MyDeletedKey");
+
+      ```
     syntax:
       content: 'function getDeletedKey(name: string, options?: RequestOptions)'
       parameters:
@@ -247,6 +309,16 @@ items:
       operation requires
 
       the keys/get permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      let key = await client.getKey("MyKey");
+
+      ```
     syntax:
       content: 'function getKey(name: string, options?: GetKeyOptions)'
       parameters:
@@ -277,6 +349,18 @@ items:
       key. This operation
 
       requires the keys/import permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      // Key contents in myKeyContents
+
+      let result = await client.importKey("MyKey", myKeyContents);
+
+      ```
     syntax:
       content: >-
         function importKey(name: string, key: JsonWebKey, options?:
@@ -307,7 +391,18 @@ items:
     type: constructor
     langs:
       - typeScript
-    summary: Creates an instance of KeysClient.
+    summary: |-
+      Creates an instance of KeysClient.
+      Example usage:
+      ```ts
+      import { KeysClient } from "@azure/keyvault-keys";
+      import { EnvironmentCredential } from "@azure/identity";
+
+      let url = `https://<MY KEYVAULT HERE>.vault.azure.net`;
+      let credentials = new EnvironmentCredential();
+
+      let client = new KeysClient(url, credentials);
+      ```
     syntax:
       content: >-
         new KeysClient(url: string, credential: ServiceClientCredentials |
@@ -340,6 +435,19 @@ items:
 
       in the response. No values are returned for the keys. This operations
       requires the keys/list permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      for await (const keyAttr of client.listDeletedKeys()) {
+        const deletedKey = await client.getKey(keyAttr.name);
+        console.log("deleted key: ", deletedKey);
+      }
+
+      ```
     syntax:
       content: 'function listDeletedKeys(options?: GetKeysOptions)'
       parameters:
@@ -366,6 +474,19 @@ items:
 
       in the response. No values are returned for the keys. This operations
       requires the keys/list permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      for await (const keyAttr of client.listKeys()) {
+        const key = await client.getKey(keyAttr.name);
+        console.log("key: ", key);
+      }
+
+      ```
     syntax:
       content: 'function listKeys(options?: GetKeysOptions)'
       parameters:
@@ -391,6 +512,19 @@ items:
       identifier, attributes, and tags are provided
 
       in the response. This operation requires the keys/list permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      for await (const keyAttr of client.listKeyVersions("MyKey")) {
+        const key = await client.getKey(keyAttr.name);
+        console.log("key version: ", key);
+      }
+
+      ```
     syntax:
       content: 'function listKeyVersions(name: string, options?: GetKeysOptions)'
       parameters:
@@ -437,6 +571,20 @@ items:
       vault. This operation
 
       requires the keys/purge permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      await client.deleteKey("MyKey");
+
+      // ...
+
+      await client.purgeDeletedKey("MyKey");
+
+      ```
     syntax:
       content: 'function purgeDeletedKey(name: string, options?: RequestOptions)'
       parameters:
@@ -465,6 +613,20 @@ items:
 
       soft-delete enabled vault. This operation requires the keys/recover
       permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      await client.deleteKey("MyKey");
+
+      // ...
+
+      await client.recoverDeletedKey("MyKey");
+
+      ```
     syntax:
       content: 'function recoverDeletedKey(name: string, options?: RequestOptions)'
       parameters:
@@ -492,6 +654,20 @@ items:
       requires the
 
       keys/restore permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeysClient(url, credentials);
+
+      let backupContents = await client.backupKey("MyKey");
+
+      // ...
+
+      let key = await client.restoreKey(backupContents);
+
+      ```
     syntax:
       content: 'function restoreKey(backup: Uint8Array, options?: RequestOptions)'
       parameters:
@@ -522,6 +698,21 @@ items:
       itself cannot be
 
       changed. This operation requires the keys/set permission.
+
+      Example usage:
+
+      ```ts
+
+      let keyName = "MyKey";
+
+      let client = new KeysClient(url, credentials);
+
+      let key = await client.getKey(keyName);
+
+      let result = await client.updateKey(keyName, key.version, { enabled: false
+      });
+
+      ```
     syntax:
       content: >-
         function updateKey(name: string, keyVersion: string, options?:

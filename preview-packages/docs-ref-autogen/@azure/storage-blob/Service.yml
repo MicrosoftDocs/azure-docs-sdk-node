@@ -7,18 +7,21 @@ items:
       - '@azure/storage-blob.Service.getAccountInfo'
       - '@azure/storage-blob.Service.getAccountInfo_2'
       - '@azure/storage-blob.Service.getAccountInfo_1'
-      - '@azure/storage-blob.Service.getProperties_1'
       - '@azure/storage-blob.Service.getProperties'
+      - '@azure/storage-blob.Service.getProperties_1'
       - '@azure/storage-blob.Service.getProperties_2'
-      - '@azure/storage-blob.Service.getStatistics_1'
       - '@azure/storage-blob.Service.getStatistics'
+      - '@azure/storage-blob.Service.getStatistics_1'
       - '@azure/storage-blob.Service.getStatistics_2'
-      - '@azure/storage-blob.Service.listContainersSegment_1'
       - '@azure/storage-blob.Service.listContainersSegment'
+      - '@azure/storage-blob.Service.listContainersSegment_1'
       - '@azure/storage-blob.Service.listContainersSegment_2'
+      - '@azure/storage-blob.Service.listContainersSegmentNext'
+      - '@azure/storage-blob.Service.listContainersSegmentNext_1'
+      - '@azure/storage-blob.Service.listContainersSegmentNext_2'
       - '@azure/storage-blob.Service.constructor'
-      - '@azure/storage-blob.Service.setProperties_1'
       - '@azure/storage-blob.Service.setProperties'
+      - '@azure/storage-blob.Service.setProperties_1'
       - '@azure/storage-blob.Service.setProperties_2'
     langs:
       - typeScript
@@ -26,18 +29,18 @@ items:
     summary: Class representing a Service.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.Service.getAccountInfo'
-    name: getAccountInfo(RequestOptionsBase)
+    name: getAccountInfo(coreHttp.RequestOptionsBase)
     children: []
     type: method
     langs:
       - typeScript
     summary: Returns the sku name and account kind
     syntax:
-      content: 'function getAccountInfo(options?: RequestOptionsBase)'
+      content: 'function getAccountInfo(options?: coreHttp.RequestOptionsBase)'
       parameters:
         - id: options
           type:
-            - RequestOptionsBase
+            - coreHttp.RequestOptionsBase
           description: ''
           optional: true
       return:
@@ -88,6 +91,31 @@ items:
         type:
           - Promise<Models.ServiceGetAccountInfoResponse>
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.Service.getProperties'
+    name: getProperties(Models.ServiceGetPropertiesOptionalParams)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      gets the properties of a storage account's Blob service, including
+      properties for Storage
+
+      Analytics and CORS (Cross-Origin Resource Sharing) rules.
+    syntax:
+      content: >-
+        function getProperties(options?:
+        Models.ServiceGetPropertiesOptionalParams)
+      parameters:
+        - id: options
+          type:
+            - Models.ServiceGetPropertiesOptionalParams
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ServiceGetPropertiesResponse>
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.Service.getProperties_1'
     name: getProperties(ServiceCallback<StorageServiceProperties>)
     children: []
@@ -105,29 +133,6 @@ items:
             - ServiceCallback<@azure/storage-blob.StorageServiceProperties>
           description: |
             The callback
-      return:
-        type:
-          - Promise<Models.ServiceGetPropertiesResponse>
-    package: '@azure/storage-blob'
-  - uid: '@azure/storage-blob.Service.getProperties'
-    name: getProperties(ServiceGetPropertiesOptionalParams)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      gets the properties of a storage account's Blob service, including
-      properties for Storage
-
-      Analytics and CORS (Cross-Origin Resource Sharing) rules.
-    syntax:
-      content: 'function getProperties(options?: ServiceGetPropertiesOptionalParams)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/storage-blob.ServiceGetPropertiesOptionalParams'
-          description: ''
-          optional: true
       return:
         type:
           - Promise<Models.ServiceGetPropertiesResponse>
@@ -159,6 +164,34 @@ items:
         type:
           - Promise<Models.ServiceGetPropertiesResponse>
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.Service.getStatistics'
+    name: getStatistics(Models.ServiceGetStatisticsOptionalParams)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Retrieves statistics related to replication for the Blob service. It is
+      only available on the
+
+      secondary location endpoint when read-access geo-redundant replication is
+      enabled for the
+
+      storage account.
+    syntax:
+      content: >-
+        function getStatistics(options?:
+        Models.ServiceGetStatisticsOptionalParams)
+      parameters:
+        - id: options
+          type:
+            - Models.ServiceGetStatisticsOptionalParams
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ServiceGetStatisticsResponse>
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.Service.getStatistics_1'
     name: getStatistics(ServiceCallback<StorageServiceStats>)
     children: []
@@ -174,32 +207,6 @@ items:
             - ServiceCallback<@azure/storage-blob.StorageServiceStats>
           description: |
             The callback
-      return:
-        type:
-          - Promise<Models.ServiceGetStatisticsResponse>
-    package: '@azure/storage-blob'
-  - uid: '@azure/storage-blob.Service.getStatistics'
-    name: getStatistics(ServiceGetStatisticsOptionalParams)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Retrieves statistics related to replication for the Blob service. It is
-      only available on the
-
-      secondary location endpoint when read-access geo-redundant replication is
-      enabled for the
-
-      storage account.
-    syntax:
-      content: 'function getStatistics(options?: ServiceGetStatisticsOptionalParams)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/storage-blob.ServiceGetStatisticsOptionalParams'
-          description: ''
-          optional: true
       return:
         type:
           - Promise<Models.ServiceGetStatisticsResponse>
@@ -231,6 +238,31 @@ items:
         type:
           - Promise<Models.ServiceGetStatisticsResponse>
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.Service.listContainersSegment'
+    name: listContainersSegment(Models.ServiceListContainersSegmentOptionalParams)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      The List Containers Segment operation returns a list of the containers
+      under the specified
+
+      account
+    syntax:
+      content: >-
+        function listContainersSegment(options?:
+        Models.ServiceListContainersSegmentOptionalParams)
+      parameters:
+        - id: options
+          type:
+            - Models.ServiceListContainersSegmentOptionalParams
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ServiceListContainersSegmentResponse>
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.Service.listContainersSegment_1'
     name: listContainersSegment(ServiceCallback<ListContainersSegmentResponse>)
     children: []
@@ -248,31 +280,6 @@ items:
             - ServiceCallback<@azure/storage-blob.ListContainersSegmentResponse>
           description: |
             The callback
-      return:
-        type:
-          - Promise<Models.ServiceListContainersSegmentResponse>
-    package: '@azure/storage-blob'
-  - uid: '@azure/storage-blob.Service.listContainersSegment'
-    name: listContainersSegment(ServiceListContainersSegmentOptionalParams)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      The List Containers Segment operation returns a list of the containers
-      under the specified
-
-      account
-    syntax:
-      content: >-
-        function listContainersSegment(options?:
-        ServiceListContainersSegmentOptionalParams)
-      parameters:
-        - id: options
-          type:
-            - '@azure/storage-blob.ServiceListContainersSegmentOptionalParams'
-          description: ''
-          optional: true
       return:
         type:
           - Promise<Models.ServiceListContainersSegmentResponse>
@@ -305,6 +312,97 @@ items:
         type:
           - Promise<Models.ServiceListContainersSegmentResponse>
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.Service.listContainersSegmentNext'
+    name: >-
+      listContainersSegmentNext(string,
+      Models.ServiceListContainersSegmentNextOptionalParams)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      The List Containers Segment operation returns a list of the containers
+      under the specified
+
+      account
+    syntax:
+      content: >-
+        function listContainersSegmentNext(nextPageLink: string, options?:
+        Models.ServiceListContainersSegmentNextOptionalParams)
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: The NextLink from the previous successful call to List operation.
+        - id: options
+          type:
+            - Models.ServiceListContainersSegmentNextOptionalParams
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ServiceListContainersSegmentResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.Service.listContainersSegmentNext_1'
+    name: >-
+      listContainersSegmentNext(string,
+      ServiceCallback<ListContainersSegmentResponse>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function listContainersSegmentNext(nextPageLink: string, callback:
+        ServiceCallback<ListContainersSegmentResponse>)
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: The NextLink from the previous successful call to List operation.
+        - id: callback
+          type:
+            - ServiceCallback<@azure/storage-blob.ListContainersSegmentResponse>
+          description: |
+            The callback
+      return:
+        type:
+          - Promise<Models.ServiceListContainersSegmentResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.Service.listContainersSegmentNext_2'
+    name: >-
+      listContainersSegmentNext(string,
+      ServiceListContainersSegmentNextOptionalParams,
+      ServiceCallback<ListContainersSegmentResponse>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function listContainersSegmentNext(nextPageLink: string, options:
+        ServiceListContainersSegmentNextOptionalParams, callback:
+        ServiceCallback<ListContainersSegmentResponse>)
+      parameters:
+        - id: nextPageLink
+          type:
+            - string
+          description: The NextLink from the previous successful call to List operation.
+        - id: options
+          type:
+            - '@azure/storage-blob.ServiceListContainersSegmentNextOptionalParams'
+          description: The optional parameters
+        - id: callback
+          type:
+            - ServiceCallback<@azure/storage-blob.ListContainersSegmentResponse>
+          description: |
+            The callback
+      return:
+        type:
+          - Promise<Models.ServiceListContainersSegmentResponse>
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.Service.constructor'
     name: Service(StorageClientContext)
     children: []
@@ -320,6 +418,38 @@ items:
             - '@azure/storage-blob.StorageClientContext'
           description: |
             Reference to the service client.
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.Service.setProperties'
+    name: >-
+      setProperties(StorageServiceProperties,
+      Models.ServiceSetPropertiesOptionalParams)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Sets properties for a storage account's Blob service endpoint, including
+      properties for Storage
+
+      Analytics and CORS (Cross-Origin Resource Sharing) rules
+    syntax:
+      content: >-
+        function setProperties(storageServiceProperties:
+        StorageServiceProperties, options?:
+        Models.ServiceSetPropertiesOptionalParams)
+      parameters:
+        - id: storageServiceProperties
+          type:
+            - '@azure/storage-blob.StorageServiceProperties'
+          description: The StorageService properties.
+        - id: options
+          type:
+            - Models.ServiceSetPropertiesOptionalParams
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ServiceSetPropertiesResponse>
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.Service.setProperties_1'
     name: 'setProperties(StorageServiceProperties, ServiceCallback<void>)'
@@ -342,37 +472,6 @@ items:
             - ServiceCallback<void>
           description: |
             The callback
-      return:
-        type:
-          - Promise<Models.ServiceSetPropertiesResponse>
-    package: '@azure/storage-blob'
-  - uid: '@azure/storage-blob.Service.setProperties'
-    name: >-
-      setProperties(StorageServiceProperties,
-      ServiceSetPropertiesOptionalParams)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Sets properties for a storage account's Blob service endpoint, including
-      properties for Storage
-
-      Analytics and CORS (Cross-Origin Resource Sharing) rules
-    syntax:
-      content: >-
-        function setProperties(storageServiceProperties:
-        StorageServiceProperties, options?: ServiceSetPropertiesOptionalParams)
-      parameters:
-        - id: storageServiceProperties
-          type:
-            - '@azure/storage-blob.StorageServiceProperties'
-          description: The StorageService properties.
-        - id: options
-          type:
-            - '@azure/storage-blob.ServiceSetPropertiesOptionalParams'
-          description: ''
-          optional: true
       return:
         type:
           - Promise<Models.ServiceSetPropertiesResponse>
@@ -416,12 +515,6 @@ references:
       - name: StorageClientContext
         fullName: StorageClientContext
         uid: '@azure/storage-blob.StorageClientContext'
-  - uid: '@azure/storage-blob.ServiceGetPropertiesOptionalParams'
-    name: ServiceGetPropertiesOptionalParams
-    spec.typeScript:
-      - name: ServiceGetPropertiesOptionalParams
-        fullName: ServiceGetPropertiesOptionalParams
-        uid: '@azure/storage-blob.ServiceGetPropertiesOptionalParams'
   - uid: ServiceCallback<@azure/storage-blob.StorageServiceProperties>
     name: StorageServiceProperties>
     spec.typeScript:
@@ -432,12 +525,12 @@ references:
         uid: '@azure/storage-blob.StorageServiceProperties'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/storage-blob.ServiceGetStatisticsOptionalParams'
-    name: ServiceGetStatisticsOptionalParams
+  - uid: '@azure/storage-blob.ServiceGetPropertiesOptionalParams'
+    name: ServiceGetPropertiesOptionalParams
     spec.typeScript:
-      - name: ServiceGetStatisticsOptionalParams
-        fullName: ServiceGetStatisticsOptionalParams
-        uid: '@azure/storage-blob.ServiceGetStatisticsOptionalParams'
+      - name: ServiceGetPropertiesOptionalParams
+        fullName: ServiceGetPropertiesOptionalParams
+        uid: '@azure/storage-blob.ServiceGetPropertiesOptionalParams'
   - uid: ServiceCallback<@azure/storage-blob.StorageServiceStats>
     name: StorageServiceStats>
     spec.typeScript:
@@ -448,12 +541,12 @@ references:
         uid: '@azure/storage-blob.StorageServiceStats'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/storage-blob.ServiceListContainersSegmentOptionalParams'
-    name: ServiceListContainersSegmentOptionalParams
+  - uid: '@azure/storage-blob.ServiceGetStatisticsOptionalParams'
+    name: ServiceGetStatisticsOptionalParams
     spec.typeScript:
-      - name: ServiceListContainersSegmentOptionalParams
-        fullName: ServiceListContainersSegmentOptionalParams
-        uid: '@azure/storage-blob.ServiceListContainersSegmentOptionalParams'
+      - name: ServiceGetStatisticsOptionalParams
+        fullName: ServiceGetStatisticsOptionalParams
+        uid: '@azure/storage-blob.ServiceGetStatisticsOptionalParams'
   - uid: ServiceCallback<@azure/storage-blob.ListContainersSegmentResponse>
     name: ListContainersSegmentResponse>
     spec.typeScript:
@@ -464,6 +557,18 @@ references:
         uid: '@azure/storage-blob.ListContainersSegmentResponse'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/storage-blob.ServiceListContainersSegmentOptionalParams'
+    name: ServiceListContainersSegmentOptionalParams
+    spec.typeScript:
+      - name: ServiceListContainersSegmentOptionalParams
+        fullName: ServiceListContainersSegmentOptionalParams
+        uid: '@azure/storage-blob.ServiceListContainersSegmentOptionalParams'
+  - uid: '@azure/storage-blob.ServiceListContainersSegmentNextOptionalParams'
+    name: ServiceListContainersSegmentNextOptionalParams
+    spec.typeScript:
+      - name: ServiceListContainersSegmentNextOptionalParams
+        fullName: ServiceListContainersSegmentNextOptionalParams
+        uid: '@azure/storage-blob.ServiceListContainersSegmentNextOptionalParams'
   - uid: '@azure/storage-blob.StorageServiceProperties'
     name: StorageServiceProperties
     spec.typeScript:

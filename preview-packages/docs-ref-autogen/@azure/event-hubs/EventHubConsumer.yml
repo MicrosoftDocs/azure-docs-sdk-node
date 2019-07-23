@@ -1,0 +1,313 @@
+### YamlMime:UniversalReference
+items:
+  - uid: '@azure/event-hubs.EventHubConsumer'
+    name: EventHubConsumer
+    fullName: EventHubConsumer
+    children:
+      - '@azure/event-hubs.EventHubConsumer.close'
+      - '@azure/event-hubs.EventHubConsumer.consumerGroup'
+      - '@azure/event-hubs.EventHubConsumer.getEventIterator'
+      - '@azure/event-hubs.EventHubConsumer.isClosed'
+      - '@azure/event-hubs.EventHubConsumer.isReceivingMessages'
+      - '@azure/event-hubs.EventHubConsumer.ownerLevel'
+      - '@azure/event-hubs.EventHubConsumer.partitionId'
+      - '@azure/event-hubs.EventHubConsumer.receive'
+      - '@azure/event-hubs.EventHubConsumer.receiveBatch'
+    langs:
+      - typeScript
+    type: class
+    summary: >-
+      A consumer is responsible for reading `EventData` from a specific Event
+      Hub partition
+
+      in the context of a specific consumer group.
+
+      Multiple consumers are allowed on the same partition in a consumer group.
+
+      If there is a need to have an exclusive consumer for a partition in a
+      consumer group,
+
+      then specify the `ownerLevel` in the `options`.
+
+      Exclusive consumers were previously referred to as "Epoch Receivers".
+
+
+      The consumer can be used to receive messages in a batch or by registering
+      handlers.
+
+      Use the `createConsumer` function on the EventHubClient to instantiate an
+      EventHubConsumer.
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventHubConsumer.close'
+    name: close()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Closes the underlying AMQP receiver link.
+      Once closed, the consumer cannot be used for any further operations.
+      Use the `createConsumer` function on the EventHubClient to instantiate
+      a new EventHubConsumer.
+    syntax:
+      content: function close()
+      parameters: []
+      return:
+        type:
+          - Promise<void>
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventHubConsumer.consumerGroup'
+    name: consumerGroup
+    fullName: consumerGroup
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: |-
+      The name of the consumer group that this consumer is associated with.
+      Events will be read only in the context of this group.
+    syntax:
+      content: 'consumerGroup: string'
+      return:
+        type:
+          - string
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventHubConsumer.getEventIterator'
+    name: getEventIterator(EventIteratorOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Returns an async iterable that retrieves events.
+
+      The async iterable cannot indicate that it is done.
+
+      When using `for..await..of` to iterate over the events returned
+
+      by the async iterable, take care to exit the for loop after receiving the
+
+      desired number of messages, or provide an `AbortSignal` to control when to
+      exit the loop.
+    syntax:
+      content: 'function getEventIterator(options?: EventIteratorOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/event-hubs.EventIteratorOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - AsyncIterableIterator<@azure/event-hubs.ReceivedEventData>
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventHubConsumer.isClosed'
+    name: isClosed
+    fullName: isClosed
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Returns `true` if the consumer is closed. This can happen either because
+      the consumer
+
+      itself has been closed or the client that created it has been closed.
+    syntax:
+      content: 'isClosed: boolean'
+      return:
+        type:
+          - boolean
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventHubConsumer.isReceivingMessages'
+    name: isReceivingMessages
+    fullName: isReceivingMessages
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Indicates whether the consumer is currently receiving messages or not.
+
+      When this returns true, new `receive()` or `receiveBatch()` calls cannot
+      be made.
+    syntax:
+      content: 'isReceivingMessages: boolean'
+      return:
+        type:
+          - boolean
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventHubConsumer.ownerLevel'
+    name: ownerLevel
+    fullName: ownerLevel
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The owner level associated with an exclusive consumer; for a non-exclusive
+      consumer, this value will be null or undefined.
+
+
+      When provided, the owner level indicates that a consumer is intended to be
+      the exclusive receiver of events for the
+
+      requested partition and the associated consumer group.
+
+      When multiple consumers exist for the same partition/consumer group pair,
+      then the ones with lower or no
+
+      `ownerLevel` will get a `ReceiverDisconnectedError` during the next
+      attempted receive operation.
+    syntax:
+      content: 'ownerLevel: number | undefined'
+      return:
+        type:
+          - number | undefined
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventHubConsumer.partitionId'
+    name: partitionId
+    fullName: partitionId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The identifier of the Event Hub partition that this consumer is associated
+      with.
+
+      Events will be read only from this partition.
+    syntax:
+      content: 'partitionId: string'
+      return:
+        type:
+          - string
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventHubConsumer.receive'
+    name: 'receive(OnMessage, OnError, AbortSignalLike)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Starts the consumer by establishing an AMQP session and an AMQP receiver
+      link on the session. Messages will be passed to
+
+      the provided onMessage handler and error will be passed to the provided
+      onError handler.
+    syntax:
+      content: >-
+        function receive(onMessage: OnMessage, onError: OnError, abortSignal?:
+        AbortSignalLike)
+      parameters:
+        - id: onMessage
+          type:
+            - '@azure/event-hubs.OnMessage'
+          description: The message handler to receive event data objects.
+        - id: onError
+          type:
+            - '@azure/event-hubs.OnError'
+          description: |-
+            The error handler to receive an error that occurs
+            while receiving messages.
+        - id: abortSignal
+          type:
+            - AbortSignalLike
+          description: >-
+            An implementation of the `AbortSignalLike` interface to signal the
+            request to cancel the operation.
+
+            For example, use the &commat;azure/abort-controller to create an
+            `AbortSignal`.
+          optional: true
+      return:
+        type:
+          - '@azure/event-hubs.ReceiveHandler'
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventHubConsumer.receiveBatch'
+    name: 'receiveBatch(number, undefined | number, AbortSignalLike)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Receives a batch of EventData objects from an EventHub partition for a
+      given count and a given max wait time in seconds, whichever
+
+      happens first. This method can be used directly after creating the
+      consumer object and **MUST NOT** be used along with the `start()` method.
+    syntax:
+      content: >-
+        function receiveBatch(maxMessageCount: number, maxWaitTimeInSeconds?:
+        undefined | number, abortSignal?: AbortSignalLike)
+      parameters:
+        - id: maxMessageCount
+          type:
+            - number
+          description: >-
+            The maximum number of messages to receive in this batch. Must be a
+            value greater than 0.
+        - id: maxWaitTimeInSeconds
+          type:
+            - undefined | number
+          description: ''
+          optional: true
+        - id: abortSignal
+          type:
+            - AbortSignalLike
+          description: >
+            An implementation of the `AbortSignalLike` interface to signal the
+            request to cancel the operation.
+
+            For example, use the &commat;azure/abort-controller to create an
+            `AbortSignal`.
+          optional: true
+      return:
+        type:
+          - 'Promise<@azure/event-hubs.ReceivedEventData[]>'
+    package: '@azure/event-hubs'
+references:
+  - uid: '@azure/event-hubs.EventIteratorOptions'
+    name: EventIteratorOptions
+    spec.typeScript:
+      - name: EventIteratorOptions
+        fullName: EventIteratorOptions
+        uid: '@azure/event-hubs.EventIteratorOptions'
+  - uid: AsyncIterableIterator<@azure/event-hubs.ReceivedEventData>
+    name: ReceivedEventData>
+    spec.typeScript:
+      - name: AsyncIterableIterator<
+        fullName: AsyncIterableIterator<
+      - name: ReceivedEventData
+        fullName: ReceivedEventData
+        uid: '@azure/event-hubs.ReceivedEventData'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/event-hubs.OnMessage'
+    name: OnMessage
+    spec.typeScript:
+      - name: OnMessage
+        fullName: OnMessage
+        uid: '@azure/event-hubs.OnMessage'
+  - uid: '@azure/event-hubs.OnError'
+    name: OnError
+    spec.typeScript:
+      - name: OnError
+        fullName: OnError
+        uid: '@azure/event-hubs.OnError'
+  - uid: '@azure/event-hubs.ReceiveHandler'
+    name: ReceiveHandler
+    spec.typeScript:
+      - name: ReceiveHandler
+        fullName: ReceiveHandler
+        uid: '@azure/event-hubs.ReceiveHandler'
+  - uid: 'Promise<@azure/event-hubs.ReceivedEventData[]>'
+    name: 'ReceivedEventData[]>'
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ReceivedEventData
+        fullName: ReceivedEventData
+        uid: '@azure/event-hubs.ReceivedEventData'
+      - name: '[]>'
+        fullName: '[]>'

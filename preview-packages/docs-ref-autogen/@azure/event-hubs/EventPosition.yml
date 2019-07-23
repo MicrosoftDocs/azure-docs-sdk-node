@@ -1,0 +1,251 @@
+### YamlMime:UniversalReference
+items:
+  - uid: '@azure/event-hubs.EventPosition'
+    name: EventPosition
+    fullName: EventPosition
+    children:
+      - '@azure/event-hubs.EventPosition.earliest'
+      - '@azure/event-hubs.EventPosition.enqueuedTime'
+      - '@azure/event-hubs.EventPosition.fromEnqueuedTime'
+      - '@azure/event-hubs.EventPosition.fromOffset'
+      - '@azure/event-hubs.EventPosition.fromSequenceNumber'
+      - '@azure/event-hubs.EventPosition.isInclusive'
+      - '@azure/event-hubs.EventPosition.latest'
+      - '@azure/event-hubs.EventPosition.offset'
+      - '@azure/event-hubs.EventPosition.sequenceNumber'
+    langs:
+      - typeScript
+    type: class
+    summary: >-
+      Represents the position of an event in an Event Hub partition, typically
+      used in the creation of
+
+      an `EventHubProducer`.
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventPosition.earliest'
+    name: earliest()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Gets an instance of `EventPosition` corresponding to the location of the
+      the first event present in the partition.
+
+      Use this position to begin receiving from the first event that was
+      enqueued in the partition
+
+      which has not expired due to the retention policy.
+    syntax:
+      content: static function earliest()
+      parameters: []
+      return:
+        type:
+          - '@azure/event-hubs.EventPosition'
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventPosition.enqueuedTime'
+    name: enqueuedTime
+    fullName: enqueuedTime
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The enqueued time of the event identified by this position.
+
+      Expected to be undefined if the position is just created from a sequence
+      number or an offset.
+    optional: true
+    syntax:
+      content: 'enqueuedTime?: Date | number'
+      return:
+        type:
+          - Date | number
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventPosition.fromEnqueuedTime'
+    name: fromEnqueuedTime(Date | number)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Gets an instance of `EventPosition` corresponding to a specific date and
+      time within the partition to begin seeking an event;
+
+      the event enqueued after the requested `enqueuedTime` will become the
+      current position.
+    syntax:
+      content: 'static function fromEnqueuedTime(enqueuedTime: Date | number)'
+      parameters:
+        - id: enqueuedTime
+          type:
+            - Date | number
+          description: >-
+            The date and time, in UTC, from which the next available event
+            should be chosen.
+      return:
+        type:
+          - '@azure/event-hubs.EventPosition'
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventPosition.fromOffset'
+    name: 'fromOffset(string, undefined | false | true)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Gets an instance of `EventPosition` corresponding to the event in the
+      partition at the provided offset.
+    syntax:
+      content: >-
+        static function fromOffset(offset: string, isInclusive?: undefined |
+        false | true)
+      parameters:
+        - id: offset
+          type:
+            - string
+          description: >-
+            The offset of an event with respect to its relative position in the
+            partition.
+        - id: isInclusive
+          type:
+            - undefined | false | true
+          description: |-
+            If true, the specified event is included;
+            otherwise the next event is returned.
+            Default: `false`.
+          optional: true
+      return:
+        type:
+          - '@azure/event-hubs.EventPosition'
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventPosition.fromSequenceNumber'
+    name: 'fromSequenceNumber(number, undefined | false | true)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Gets an instance of `EventPosition` corresponding to the event in the
+      partition having a specified sequence number associated with it.
+    syntax:
+      content: >-
+        static function fromSequenceNumber(sequenceNumber: number, isInclusive?:
+        undefined | false | true)
+      parameters:
+        - id: sequenceNumber
+          type:
+            - number
+          description: >-
+            The sequence number assigned to an event when it was enqueued in the
+            partition.
+        - id: isInclusive
+          type:
+            - undefined | false | true
+          description: |-
+            If true, event with the `sequenceNumber` is included;
+            otherwise the next event in sequence will be received.
+            Default `false`.
+          optional: true
+      return:
+        type:
+          - '@azure/event-hubs.EventPosition'
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventPosition.isInclusive'
+    name: isInclusive
+    fullName: isInclusive
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Indicates if the specified offset is inclusive of the event which it
+      identifies.
+
+      This information is only relevent if the event position was identified by
+      an offset or sequence number.
+
+      Default value: `false`.
+    syntax:
+      content: 'isInclusive: boolean'
+      return:
+        type:
+          - boolean
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventPosition.latest'
+    name: latest()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Gets an instance of `EventPosition` corresponding to the end of the
+      partition, where no more events are currently enqueued.
+
+      Use this position to begin receiving from the next event to be enqueued in
+      the partion after an ``EventHubConsumer``
+
+      is created with this position.
+    syntax:
+      content: static function latest()
+      parameters: []
+      return:
+        type:
+          - '@azure/event-hubs.EventPosition'
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventPosition.offset'
+    name: offset
+    fullName: offset
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The offset of the event identified by this position.
+
+      Expected to be undefined if the position is just created from a sequence
+      number or an enqueued time.
+
+
+      The offset is the relative position for an event in the context of the
+      partition.
+
+      The offset should not be considered a stable value.
+
+      The same offset may refer to a different event as events reach the age
+      limit for
+
+      retention and are no longer visible within the partition.
+    optional: true
+    syntax:
+      content: 'offset?: undefined | string'
+      return:
+        type:
+          - undefined | string
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventPosition.sequenceNumber'
+    name: sequenceNumber
+    fullName: sequenceNumber
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The sequence number of the event identified by this poistion.
+
+      Expected to be undefined if the position is just created from an offset or
+      enqueued time.
+    optional: true
+    syntax:
+      content: 'sequenceNumber?: undefined | number'
+      return:
+        type:
+          - undefined | number
+    package: '@azure/event-hubs'
+references:
+  - uid: '@azure/event-hubs.EventPosition'
+    name: EventPosition
+    spec.typeScript:
+      - name: EventPosition
+        fullName: EventPosition
+        uid: '@azure/event-hubs.EventPosition'

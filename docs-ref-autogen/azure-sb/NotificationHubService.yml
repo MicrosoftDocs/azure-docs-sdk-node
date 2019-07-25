@@ -473,18 +473,51 @@ items:
   - uid: 'azure-sb.NotificationHubService#createOrUpdateInstallation'
     id: 'azure-sb.NotificationHubService#createOrUpdateInstallation'
     parent: azure-sb.NotificationHubService
-    name: 'createOrUpdateInstallation(installation, options, callback)'
+    name: >-
+      createOrUpdateInstallation(installation, templates, secondaryTiles,
+      options, callback)
     summary: Creates or updates a installation.
     fullName: >-
       azure-sb.NotificationHubService.createOrUpdateInstallation(installation,
-      options, callback)
+      templates, secondaryTiles, options, callback)
     type: Function
     syntax:
       parameters:
         - id: installation
           type:
-            - string
+            - object
           description: The installation to create/update.
+        - id: installation.installationId
+          type:
+            - string
+          description: GUID of the installation
+        - id: installation.platform
+          type:
+            - string
+          description: 'Can be {apns, wns, mpns, adm, gcm}.'
+        - id: installation.pushChannel
+          type:
+            - string
+          description: |-
+            The PNS handle for this installation, 
+                                                                          (in case of WNS the ChannelUri of the ApplicationTile)
+        - id: installation.tags
+          type:
+            - azure-sb.Array.<string>
+          description: An array of tags. Tags are strings as defined in hub specs.
+          optional: true
+        - id: templates
+          type:
+            - azure-sb.TemplateDictionary
+          description: >-
+            A JSON object representing a dictionary of templateNames to template
+            description.
+          optional: true
+        - id: secondaryTiles
+          type:
+            - azure-sb.TilesDictionary
+          description: ''
+          optional: true
         - id: options
           type:
             - object
@@ -497,9 +530,11 @@ items:
             - function
           description: |-
             `error` will contain information
-                                                                  if an error occurs; otherwise, `response`
-                                                                  will contain information related to this operation.
-      content: 'function createOrUpdateInstallation(installation, options, callback)'
+                                                                          if an error occurs; otherwise, `response`
+                                                                          will contain information related to this operation.
+      content: >-
+        function createOrUpdateInstallation(installation, templates,
+        secondaryTiles, options, callback)
     langs:
       - js
   - uid: 'azure-sb.NotificationHubService#patchInstallation'

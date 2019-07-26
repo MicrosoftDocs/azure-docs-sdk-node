@@ -4,36 +4,51 @@ items:
     name: PermissionResponse
     fullName: PermissionResponse
     children:
-      - '@azure/cosmos.PermissionResponse.body'
+      - '@azure/cosmos.PermissionResponse.activityId'
+      - '@azure/cosmos.PermissionResponse.etag'
       - '@azure/cosmos.PermissionResponse.headers'
       - '@azure/cosmos.PermissionResponse.permission'
-      - '@azure/cosmos.PermissionResponse.ref'
+      - '@azure/cosmos.PermissionResponse.constructor'
+      - '@azure/cosmos.PermissionResponse.requestCharge'
+      - '@azure/cosmos.PermissionResponse.resource'
+      - '@azure/cosmos.PermissionResponse.statusCode'
+      - '@azure/cosmos.PermissionResponse.substatus'
     langs:
       - typeScript
-    type: interface
+    type: class
     summary: ''
     extends:
       name: >-
-        @azure/cosmos.CosmosResponse<@azure/cosmos.PermissionDefinition &
-        @azure/cosmos.PermissionBody & @azure/cosmos.Resource,
-        @azure/cosmos.Permission>
+        @azure/cosmos.ResourceResponse<@azure/cosmos.PermissionDefinition &
+        @azure/cosmos.PermissionBody & @azure/cosmos.Resource>
     package: '@azure/cosmos'
-  - uid: '@azure/cosmos.PermissionResponse.body'
-    name: body
-    fullName: body
+  - uid: '@azure/cosmos.PermissionResponse.activityId'
+    name: activityId
+    fullName: activityId
     children: []
     langs:
       - typeScript
     type: property
     summary: ''
-    optional: true
     syntax:
-      content: 'body?: PermissionDefinition & PermissionBody & Resource'
+      content: 'activityId: string'
       return:
         type:
-          - >-
-            @azure/cosmos.PermissionDefinition & @azure/cosmos.PermissionBody &
-            @azure/cosmos.Resource
+          - string
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.PermissionResponse.etag'
+    name: etag
+    fullName: etag
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'etag: string'
+      return:
+        type:
+          - string
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.PermissionResponse.headers'
     name: headers
@@ -43,12 +58,11 @@ items:
       - typeScript
     type: property
     summary: ''
-    optional: true
     syntax:
-      content: 'headers?: IHeaders'
+      content: 'headers: CosmosHeaders_2'
       return:
         type:
-          - '@azure/cosmos.IHeaders'
+          - '@azure/cosmos.CosmosHeaders_2'
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.PermissionResponse.permission'
     name: permission
@@ -66,9 +80,87 @@ items:
         type:
           - '@azure/cosmos.Permission'
     package: '@azure/cosmos'
-  - uid: '@azure/cosmos.PermissionResponse.ref'
-    name: ref
-    fullName: ref
+  - uid: '@azure/cosmos.PermissionResponse.constructor'
+    name: >-
+      PermissionResponse(PermissionDefinition & PermissionBody & Resource,
+      CosmosHeaders, number, Permission)
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        new PermissionResponse(resource: PermissionDefinition & PermissionBody &
+        Resource, headers: CosmosHeaders, statusCode: number, permission:
+        Permission)
+      parameters:
+        - id: resource
+          type:
+            - >-
+              @azure/cosmos.PermissionDefinition & @azure/cosmos.PermissionBody
+              & @azure/cosmos.Resource
+          description: ''
+        - id: headers
+          type:
+            - '@azure/cosmos.CosmosHeaders'
+          description: ''
+        - id: statusCode
+          type:
+            - number
+          description: ''
+        - id: permission
+          type:
+            - '@azure/cosmos.Permission'
+          description: ''
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.PermissionResponse.requestCharge'
+    name: requestCharge
+    fullName: requestCharge
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'requestCharge: number'
+      return:
+        type:
+          - number
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.PermissionResponse.resource'
+    name: resource
+    fullName: resource
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'resource: PermissionDefinition & PermissionBody & Resource'
+      return:
+        type:
+          - >-
+            @azure/cosmos.PermissionDefinition & @azure/cosmos.PermissionBody &
+            @azure/cosmos.Resource
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.PermissionResponse.statusCode'
+    name: statusCode
+    fullName: statusCode
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'statusCode: StatusCode'
+      return:
+        type:
+          - StatusCode
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.PermissionResponse.substatus'
+    name: substatus
+    fullName: substatus
     children: []
     langs:
       - typeScript
@@ -76,21 +168,20 @@ items:
     summary: ''
     optional: true
     syntax:
-      content: 'ref?: Permission'
+      content: 'substatus?: SubStatusCode'
       return:
         type:
-          - '@azure/cosmos.Permission'
+          - SubStatusCode
     package: '@azure/cosmos'
 references:
   - uid: >-
-      @azure/cosmos.CosmosResponse<@azure/cosmos.PermissionDefinition &
-      @azure/cosmos.PermissionBody & @azure/cosmos.Resource,
-      @azure/cosmos.Permission>
-    name: Permission>
+      @azure/cosmos.ResourceResponse<@azure/cosmos.PermissionDefinition &
+      @azure/cosmos.PermissionBody & @azure/cosmos.Resource>
+    name: Resource>
     spec.typeScript:
-      - name: CosmosResponse
-        fullName: CosmosResponse
-        uid: '@azure/cosmos.CosmosResponse'
+      - name: ResourceResponse
+        fullName: ResourceResponse
+        uid: '@azure/cosmos.ResourceResponse'
       - name: <
         fullName: <
       - name: PermissionDefinition
@@ -106,11 +197,6 @@ references:
       - name: Resource
         fullName: Resource
         uid: '@azure/cosmos.Resource'
-      - name: ', '
-        fullName: ', '
-      - name: Permission
-        fullName: Permission
-        uid: '@azure/cosmos.Permission'
       - name: '>'
         fullName: '>'
   - uid: >-
@@ -131,15 +217,21 @@ references:
       - name: Resource
         fullName: Resource
         uid: '@azure/cosmos.Resource'
-  - uid: '@azure/cosmos.IHeaders'
-    name: IHeaders
+  - uid: '@azure/cosmos.CosmosHeaders'
+    name: CosmosHeaders
     spec.typeScript:
-      - name: IHeaders
-        fullName: IHeaders
-        uid: '@azure/cosmos.IHeaders'
+      - name: CosmosHeaders
+        fullName: CosmosHeaders
+        uid: '@azure/cosmos.CosmosHeaders'
   - uid: '@azure/cosmos.Permission'
     name: Permission
     spec.typeScript:
       - name: Permission
         fullName: Permission
         uid: '@azure/cosmos.Permission'
+  - uid: '@azure/cosmos.CosmosHeaders_2'
+    name: CosmosHeaders_2
+    spec.typeScript:
+      - name: CosmosHeaders_2
+        fullName: CosmosHeaders_2
+        uid: '@azure/cosmos.CosmosHeaders_2'

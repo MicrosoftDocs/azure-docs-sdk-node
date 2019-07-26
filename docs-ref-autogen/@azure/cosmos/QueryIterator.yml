@@ -4,14 +4,11 @@ items:
     name: QueryIterator
     fullName: QueryIterator<T>
     children:
-      - '@azure/cosmos.QueryIterator.current'
-      - '@azure/cosmos.QueryIterator.executeNext'
-      - '@azure/cosmos.QueryIterator.forEach'
+      - '@azure/cosmos.QueryIterator.fetchAll'
+      - '@azure/cosmos.QueryIterator.fetchNext'
       - '@azure/cosmos.QueryIterator.getAsyncIterator'
       - '@azure/cosmos.QueryIterator.hasMoreResults'
-      - '@azure/cosmos.QueryIterator.nextItem'
       - '@azure/cosmos.QueryIterator.reset'
-      - '@azure/cosmos.QueryIterator.toArray'
     langs:
       - typeScript
     type: class
@@ -23,62 +20,42 @@ items:
 
       in the Azure Cosmos DB database service.
     package: '@azure/cosmos'
-  - uid: '@azure/cosmos.QueryIterator.current'
-    name: current()
+  - uid: '@azure/cosmos.QueryIterator.fetchAll'
+    name: fetchAll()
     children: []
     type: method
     langs:
       - typeScript
-    summary: Retrieve the current element on the QueryIterator.
+    summary: Fetch all pages for the query and return a single FeedResponse.
     syntax:
-      content: function current()
+      content: function fetchAll()
       parameters: []
       return:
         type:
-          - Promise<@azure/cosmos.Response<T>>
+          - Promise<@azure/cosmos.FeedResponse<T>>
     package: '@azure/cosmos'
-  - uid: '@azure/cosmos.QueryIterator.executeNext'
-    name: executeNext()
+  - uid: '@azure/cosmos.QueryIterator.fetchNext'
+    name: fetchNext()
     children: []
     type: method
     langs:
       - typeScript
-    summary: >-
-      Retrieve the next batch of the feed and pass them as an array to a
-      function
+    summary: >
+      Retrieve the next batch from the feed.
+
+      This may or may not fetch more pages from the backend depending on your
+      settings
+
+      and the type of query. Aggregate queries will generally fetch all backend
+      pages
+
+      before returning the first batch of responses.
     syntax:
-      content: function executeNext()
+      content: function fetchNext()
       parameters: []
       return:
         type:
-          - 'Promise<@azure/cosmos.Response<T[]>>'
-    package: '@azure/cosmos'
-  - uid: '@azure/cosmos.QueryIterator.forEach'
-    name: 'forEach((result: T, headers?: IHeaders, index?: number) => boolean | void)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: |-
-      Calls a specified callback for each item returned from the query.
-      Runs serially; each callback blocks the next.
-    syntax:
-      content: >-
-        function forEach(callback: (result: T, headers?: IHeaders, index?:
-        number) => boolean | void)
-      parameters:
-        - id: callback
-          type:
-            - '(result: T, headers?: IHeaders, index?: number) => boolean | void'
-          description: |
-            Specified callback.
-            First param is the result,
-            second param (optional) is the current headers object state,
-            third param (optional) is current index.
-            No more callbacks will be called if one of them results false.
-      return:
-        type:
-          - Promise<void>
+          - Promise<@azure/cosmos.FeedResponse<T>>
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.QueryIterator.getAsyncIterator'
     name: getAsyncIterator()
@@ -104,7 +81,7 @@ items:
       parameters: []
       return:
         type:
-          - AsyncIterable<@azure/cosmos.Response<T>>
+          - AsyncIterable<@azure/cosmos.FeedResponse<T>>
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.QueryIterator.hasMoreResults'
     name: hasMoreResults()
@@ -112,36 +89,17 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: >-
+      Determine if there are still remaining resources to processs based on the
+      value of the continuation token or the\
+
+      elements remaining on the current batch in the QueryIterator.
     syntax:
       content: function hasMoreResults()
       parameters: []
       return:
         type:
           - boolean
-    package: '@azure/cosmos'
-    deprecated:
-      content: >-
-        Instead check if nextItem() or current() returns undefined.
-
-
-        Determine if there are still remaining resources to processs based on
-        the value of the continuation token or the\
-
-        elements remaining on the current batch in the QueryIterator.
-  - uid: '@azure/cosmos.QueryIterator.nextItem'
-    name: nextItem()
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Execute a provided function on the next element in the QueryIterator.
-    syntax:
-      content: function nextItem()
-      parameters: []
-      return:
-        type:
-          - Promise<@azure/cosmos.Response<T>>
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.QueryIterator.reset'
     name: reset()
@@ -156,50 +114,24 @@ items:
       content: function reset()
       parameters: []
     package: '@azure/cosmos'
-  - uid: '@azure/cosmos.QueryIterator.toArray'
-    name: toArray()
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Retrieve all the elements of the feed and pass them as an array to a
-      function
-    syntax:
-      content: function toArray()
-      parameters: []
-      return:
-        type:
-          - 'Promise<@azure/cosmos.Response<T[]>>'
-    package: '@azure/cosmos'
 references:
-  - uid: Promise<@azure/cosmos.Response<T>>
-    name: Response<T>>
+  - uid: Promise<@azure/cosmos.FeedResponse<T>>
+    name: FeedResponse<T>>
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
-      - name: Response
-        fullName: Response
-        uid: '@azure/cosmos.Response'
+      - name: FeedResponse
+        fullName: FeedResponse
+        uid: '@azure/cosmos.FeedResponse'
       - name: <T>>
         fullName: <T>>
-  - uid: 'Promise<@azure/cosmos.Response<T[]>>'
-    name: 'Response<T[]>>'
-    spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: Response
-        fullName: Response
-        uid: '@azure/cosmos.Response'
-      - name: '<T[]>>'
-        fullName: '<T[]>>'
-  - uid: AsyncIterable<@azure/cosmos.Response<T>>
-    name: Response<T>>
+  - uid: AsyncIterable<@azure/cosmos.FeedResponse<T>>
+    name: FeedResponse<T>>
     spec.typeScript:
       - name: AsyncIterable<
         fullName: AsyncIterable<
-      - name: Response
-        fullName: Response
-        uid: '@azure/cosmos.Response'
+      - name: FeedResponse
+        fullName: FeedResponse
+        uid: '@azure/cosmos.FeedResponse'
       - name: <T>>
         fullName: <T>>

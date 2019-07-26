@@ -4,22 +4,40 @@ items:
     name: FeedOptions
     fullName: FeedOptions
     children:
+      - '@azure/cosmos.FeedOptions.abortSignal'
       - '@azure/cosmos.FeedOptions.accessCondition'
-      - '@azure/cosmos.FeedOptions.a_im'
       - '@azure/cosmos.FeedOptions.continuation'
-      - '@azure/cosmos.FeedOptions.disableRUPerMinuteUsage'
-      - '@azure/cosmos.FeedOptions.enableCrossPartitionQuery'
       - '@azure/cosmos.FeedOptions.enableScanInQuery'
       - '@azure/cosmos.FeedOptions.initialHeaders'
       - '@azure/cosmos.FeedOptions.maxDegreeOfParallelism'
       - '@azure/cosmos.FeedOptions.maxItemCount'
-      - '@azure/cosmos.FeedOptions.partitionKey'
       - '@azure/cosmos.FeedOptions.populateQueryMetrics'
       - '@azure/cosmos.FeedOptions.sessionToken'
+      - '@azure/cosmos.FeedOptions.useIncrementalFeed'
     langs:
       - typeScript
     type: interface
     summary: The feed options and query methods.
+    extends:
+      name: '@azure/cosmos.SharedOptions'
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.FeedOptions.abortSignal'
+    name: abortSignal
+    fullName: abortSignal
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      abortSignal to pass to all underlying network requests created by this
+      method call. See
+      https://developer.mozilla.org/en-US/docs/Web/API/AbortController
+    optional: true
+    syntax:
+      content: 'abortSignal?: AbortSignal'
+      return:
+        type:
+          - AbortSignal
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.FeedOptions.accessCondition'
     name: accessCondition
@@ -36,23 +54,6 @@ items:
         type:
           - Object
     package: '@azure/cosmos'
-  - uid: '@azure/cosmos.FeedOptions.a_im'
-    name: a_im
-    fullName: a_im
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      Indicates a change feed request. Must be set to "Incremental feed", or
-      omitted otherwise.
-    optional: true
-    syntax:
-      content: 'a_im?: string'
-      return:
-        type:
-          - string
-    package: '@azure/cosmos'
   - uid: '@azure/cosmos.FeedOptions.continuation'
     name: continuation
     fullName: continuation
@@ -67,45 +68,6 @@ items:
       return:
         type:
           - string
-    package: '@azure/cosmos'
-  - uid: '@azure/cosmos.FeedOptions.disableRUPerMinuteUsage'
-    name: disableRUPerMinuteUsage
-    fullName: disableRUPerMinuteUsage
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      DisableRUPerMinuteUsage is used to enable/disable Request
-      Units(RUs)/minute capacity to serve
-
-      the request if regular provisioned RUs/second is exhausted.
-    optional: true
-    syntax:
-      content: 'disableRUPerMinuteUsage?: boolean'
-      return:
-        type:
-          - boolean
-    package: '@azure/cosmos'
-  - uid: '@azure/cosmos.FeedOptions.enableCrossPartitionQuery'
-    name: enableCrossPartitionQuery
-    fullName: enableCrossPartitionQuery
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >
-      A value indicating whether users are enabled to send more than one request
-      to execute the query in the Azure Cosmos DB database service.
-
-      More than one request is necessary if the query is not scoped to single
-      partition key value.
-    optional: true
-    syntax:
-      content: 'enableCrossPartitionQuery?: boolean'
-      return:
-        type:
-          - boolean
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.FeedOptions.enableScanInQuery'
     name: enableScanInQuery
@@ -136,10 +98,10 @@ items:
       Cosmos
     optional: true
     syntax:
-      content: 'initialHeaders?: IHeaders'
+      content: 'initialHeaders?: CosmosHeaders'
       return:
         type:
-          - '@azure/cosmos.IHeaders'
+          - '@azure/cosmos.CosmosHeaders'
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.FeedOptions.maxDegreeOfParallelism'
     name: maxDegreeOfParallelism
@@ -178,23 +140,6 @@ items:
         type:
           - number
     package: '@azure/cosmos'
-  - uid: '@azure/cosmos.FeedOptions.partitionKey'
-    name: partitionKey
-    fullName: partitionKey
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      Specifies a partition key definition for a particular path in the Azure
-      Cosmos DB database service.
-    optional: true
-    syntax:
-      content: 'partitionKey?: string'
-      return:
-        type:
-          - string
-    package: '@azure/cosmos'
   - uid: '@azure/cosmos.FeedOptions.populateQueryMetrics'
     name: populateQueryMetrics
     fullName: populateQueryMetrics
@@ -217,7 +162,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Token for use with Session consistency.
+    summary: >-
+      Enables/disables getting document container quota related stats for
+      document container read requests.
     optional: true
     syntax:
       content: 'sessionToken?: string'
@@ -225,10 +172,33 @@ items:
         type:
           - string
     package: '@azure/cosmos'
+  - uid: '@azure/cosmos.FeedOptions.useIncrementalFeed'
+    name: useIncrementalFeed
+    fullName: useIncrementalFeed
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Indicates a change feed request. Must be set to "Incremental feed", or
+      omitted otherwise.
+    optional: true
+    syntax:
+      content: 'useIncrementalFeed?: boolean'
+      return:
+        type:
+          - boolean
+    package: '@azure/cosmos'
 references:
-  - uid: '@azure/cosmos.IHeaders'
-    name: IHeaders
+  - uid: '@azure/cosmos.SharedOptions'
+    name: SharedOptions
     spec.typeScript:
-      - name: IHeaders
-        fullName: IHeaders
-        uid: '@azure/cosmos.IHeaders'
+      - name: SharedOptions
+        fullName: SharedOptions
+        uid: '@azure/cosmos.SharedOptions'
+  - uid: '@azure/cosmos.CosmosHeaders'
+    name: CosmosHeaders
+    spec.typeScript:
+      - name: CosmosHeaders
+        fullName: CosmosHeaders
+        uid: '@azure/cosmos.CosmosHeaders'

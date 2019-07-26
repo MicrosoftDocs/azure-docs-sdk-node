@@ -5,13 +5,14 @@ items:
     fullName: CosmosClientOptions
     children:
       - '@azure/cosmos.CosmosClientOptions.agent'
-      - '@azure/cosmos.CosmosClientOptions.auth'
       - '@azure/cosmos.CosmosClientOptions.connectionPolicy'
       - '@azure/cosmos.CosmosClientOptions.consistencyLevel'
       - '@azure/cosmos.CosmosClientOptions.defaultHeaders'
       - '@azure/cosmos.CosmosClientOptions.endpoint'
       - '@azure/cosmos.CosmosClientOptions.key'
-      - '@azure/cosmos.CosmosClientOptions.queryCompatibilityMode'
+      - '@azure/cosmos.CosmosClientOptions.permissionFeed'
+      - '@azure/cosmos.CosmosClientOptions.resourceTokens'
+      - '@azure/cosmos.CosmosClientOptions.tokenProvider'
     langs:
       - typeScript
     type: interface
@@ -24,30 +25,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      An optional custom http(s) Agent to be used in NodeJS enironments
+
+      Use an agent such as https://github.com/TooTallNate/node-proxy-agent if
+      you need to connect to Cosmos via a proxy
     optional: true
     syntax:
       content: 'agent?: Agent'
       return:
         type:
           - '@azure/cosmos.Agent'
-    package: '@azure/cosmos'
-  - uid: '@azure/cosmos.CosmosClientOptions.auth'
-    name: auth
-    fullName: auth
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      An object that is used for authenticating requests and must contains one
-      of the options
-    optional: true
-    syntax:
-      content: 'auth?: AuthOptions'
-      return:
-        type:
-          - '@azure/cosmos.AuthOptions'
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.CosmosClientOptions.connectionPolicy'
     name: connectionPolicy
@@ -63,10 +51,10 @@ items:
       if omitted.
     optional: true
     syntax:
-      content: 'connectionPolicy?: ConnectionPolicy | Object'
+      content: 'connectionPolicy?: ConnectionPolicy'
       return:
         type:
-          - '@azure/cosmos.ConnectionPolicy | Object'
+          - '@azure/cosmos.ConnectionPolicy'
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.CosmosClientOptions.consistencyLevel'
     name: consistencyLevel
@@ -95,10 +83,10 @@ items:
     summary: ''
     optional: true
     syntax:
-      content: 'defaultHeaders?: IHeaders'
+      content: 'defaultHeaders?: CosmosHeaders_2'
       return:
         type:
-          - '@azure/cosmos.IHeaders'
+          - '@azure/cosmos.CosmosHeaders_2'
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.CosmosClientOptions.endpoint'
     name: endpoint
@@ -121,7 +109,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: The account master or readonly key (alias of auth.key)
+    summary: The account master or readonly key
     optional: true
     syntax:
       content: 'key?: string'
@@ -129,20 +117,56 @@ items:
         type:
           - string
     package: '@azure/cosmos'
-  - uid: '@azure/cosmos.CosmosClientOptions.queryCompatibilityMode'
-    name: queryCompatibilityMode
-    fullName: queryCompatibilityMode
+  - uid: '@azure/cosmos.CosmosClientOptions.permissionFeed'
+    name: permissionFeed
+    fullName: permissionFeed
     children: []
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'An array of <xref:Permission> objects.'
     optional: true
     syntax:
-      content: 'queryCompatibilityMode?: QueryCompatibilityMode'
+      content: 'permissionFeed?: PermissionDefinition[]'
       return:
         type:
-          - '@azure/cosmos.QueryCompatibilityMode'
+          - '@azure/cosmos.PermissionDefinition[]'
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.CosmosClientOptions.resourceTokens'
+    name: resourceTokens
+    fullName: resourceTokens
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: |-
+      An object that contains resources tokens.
+      Keys for the object are resource Ids and values are the resource tokens.
+    optional: true
+    syntax:
+      content: 'resourceTokens?: [key: string]: string'
+      return:
+        type:
+          - '[key: string]: string'
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.CosmosClientOptions.tokenProvider'
+    name: tokenProvider
+    fullName: tokenProvider
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      A user supplied function for resolving header authorization tokens.
+
+      Allows users to generating their own auth tokens, potentially using a
+      separate service
+    optional: true
+    syntax:
+      content: 'tokenProvider?: TokenProvider'
+      return:
+        type:
+          - '@azure/cosmos.TokenProvider'
     package: '@azure/cosmos'
 references:
   - uid: '@azure/cosmos.Agent'
@@ -151,29 +175,29 @@ references:
       - name: Agent
         fullName: Agent
         uid: '@azure/cosmos.Agent'
-  - uid: '@azure/cosmos.AuthOptions'
-    name: AuthOptions
-    spec.typeScript:
-      - name: AuthOptions
-        fullName: AuthOptions
-        uid: '@azure/cosmos.AuthOptions'
-  - uid: '@azure/cosmos.ConnectionPolicy | Object'
-    name: ConnectionPolicy | Object
+  - uid: '@azure/cosmos.ConnectionPolicy'
+    name: ConnectionPolicy
     spec.typeScript:
       - name: ConnectionPolicy
         fullName: ConnectionPolicy
         uid: '@azure/cosmos.ConnectionPolicy'
-      - name: ' | Object'
-        fullName: ' | Object'
-  - uid: '@azure/cosmos.IHeaders'
-    name: IHeaders
+  - uid: '@azure/cosmos.CosmosHeaders_2'
+    name: CosmosHeaders_2
     spec.typeScript:
-      - name: IHeaders
-        fullName: IHeaders
-        uid: '@azure/cosmos.IHeaders'
-  - uid: '@azure/cosmos.QueryCompatibilityMode'
-    name: QueryCompatibilityMode
+      - name: CosmosHeaders_2
+        fullName: CosmosHeaders_2
+        uid: '@azure/cosmos.CosmosHeaders_2'
+  - uid: '@azure/cosmos.PermissionDefinition[]'
+    name: 'PermissionDefinition[]'
     spec.typeScript:
-      - name: QueryCompatibilityMode
-        fullName: QueryCompatibilityMode
-        uid: '@azure/cosmos.QueryCompatibilityMode'
+      - name: PermissionDefinition
+        fullName: PermissionDefinition
+        uid: '@azure/cosmos.PermissionDefinition'
+      - name: '[]'
+        fullName: '[]'
+  - uid: '@azure/cosmos.TokenProvider'
+    name: TokenProvider
+    spec.typeScript:
+      - name: TokenProvider
+        fullName: TokenProvider
+        uid: '@azure/cosmos.TokenProvider'

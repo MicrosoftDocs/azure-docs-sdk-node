@@ -4,33 +4,51 @@ items:
     name: TriggerResponse
     fullName: TriggerResponse
     children:
-      - '@azure/cosmos.TriggerResponse.body'
+      - '@azure/cosmos.TriggerResponse.activityId'
+      - '@azure/cosmos.TriggerResponse.etag'
       - '@azure/cosmos.TriggerResponse.headers'
-      - '@azure/cosmos.TriggerResponse.ref'
+      - '@azure/cosmos.TriggerResponse.requestCharge'
+      - '@azure/cosmos.TriggerResponse.resource'
+      - '@azure/cosmos.TriggerResponse.statusCode'
+      - '@azure/cosmos.TriggerResponse.substatus'
       - '@azure/cosmos.TriggerResponse.trigger'
+      - '@azure/cosmos.TriggerResponse.constructor'
     langs:
       - typeScript
-    type: interface
+    type: class
     summary: ''
     extends:
       name: >-
-        @azure/cosmos.CosmosResponse<@azure/cosmos.TriggerDefinition &
-        @azure/cosmos.Resource, @azure/cosmos.Trigger>
+        @azure/cosmos.ResourceResponse<@azure/cosmos.TriggerDefinition &
+        @azure/cosmos.Resource>
     package: '@azure/cosmos'
-  - uid: '@azure/cosmos.TriggerResponse.body'
-    name: body
-    fullName: body
+  - uid: '@azure/cosmos.TriggerResponse.activityId'
+    name: activityId
+    fullName: activityId
     children: []
     langs:
       - typeScript
     type: property
     summary: ''
-    optional: true
     syntax:
-      content: 'body?: TriggerDefinition & Resource'
+      content: 'activityId: string'
       return:
         type:
-          - '@azure/cosmos.TriggerDefinition & @azure/cosmos.Resource'
+          - string
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.TriggerResponse.etag'
+    name: etag
+    fullName: etag
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'etag: string'
+      return:
+        type:
+          - string
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.TriggerResponse.headers'
     name: headers
@@ -40,16 +58,57 @@ items:
       - typeScript
     type: property
     summary: ''
-    optional: true
     syntax:
-      content: 'headers?: IHeaders'
+      content: 'headers: CosmosHeaders_2'
       return:
         type:
-          - '@azure/cosmos.IHeaders'
+          - '@azure/cosmos.CosmosHeaders_2'
     package: '@azure/cosmos'
-  - uid: '@azure/cosmos.TriggerResponse.ref'
-    name: ref
-    fullName: ref
+  - uid: '@azure/cosmos.TriggerResponse.requestCharge'
+    name: requestCharge
+    fullName: requestCharge
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'requestCharge: number'
+      return:
+        type:
+          - number
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.TriggerResponse.resource'
+    name: resource
+    fullName: resource
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'resource: TriggerDefinition & Resource'
+      return:
+        type:
+          - '@azure/cosmos.TriggerDefinition & @azure/cosmos.Resource'
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.TriggerResponse.statusCode'
+    name: statusCode
+    fullName: statusCode
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'statusCode: StatusCode'
+      return:
+        type:
+          - StatusCode
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.TriggerResponse.substatus'
+    name: substatus
+    fullName: substatus
     children: []
     langs:
       - typeScript
@@ -57,10 +116,10 @@ items:
     summary: ''
     optional: true
     syntax:
-      content: 'ref?: Trigger'
+      content: 'substatus?: SubStatusCode'
       return:
         type:
-          - '@azure/cosmos.Trigger'
+          - SubStatusCode
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.TriggerResponse.trigger'
     name: trigger
@@ -78,15 +137,46 @@ items:
         type:
           - '@azure/cosmos.Trigger'
     package: '@azure/cosmos'
+  - uid: '@azure/cosmos.TriggerResponse.constructor'
+    name: >-
+      TriggerResponse(TriggerDefinition & Resource, CosmosHeaders, number,
+      Trigger)
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        new TriggerResponse(resource: TriggerDefinition & Resource, headers:
+        CosmosHeaders, statusCode: number, trigger: Trigger)
+      parameters:
+        - id: resource
+          type:
+            - '@azure/cosmos.TriggerDefinition & @azure/cosmos.Resource'
+          description: ''
+        - id: headers
+          type:
+            - '@azure/cosmos.CosmosHeaders'
+          description: ''
+        - id: statusCode
+          type:
+            - number
+          description: ''
+        - id: trigger
+          type:
+            - '@azure/cosmos.Trigger'
+          description: ''
+    package: '@azure/cosmos'
 references:
   - uid: >-
-      @azure/cosmos.CosmosResponse<@azure/cosmos.TriggerDefinition &
-      @azure/cosmos.Resource, @azure/cosmos.Trigger>
-    name: Trigger>
+      @azure/cosmos.ResourceResponse<@azure/cosmos.TriggerDefinition &
+      @azure/cosmos.Resource>
+    name: Resource>
     spec.typeScript:
-      - name: CosmosResponse
-        fullName: CosmosResponse
-        uid: '@azure/cosmos.CosmosResponse'
+      - name: ResourceResponse
+        fullName: ResourceResponse
+        uid: '@azure/cosmos.ResourceResponse'
       - name: <
         fullName: <
       - name: TriggerDefinition
@@ -97,11 +187,6 @@ references:
       - name: Resource
         fullName: Resource
         uid: '@azure/cosmos.Resource'
-      - name: ', '
-        fullName: ', '
-      - name: Trigger
-        fullName: Trigger
-        uid: '@azure/cosmos.Trigger'
       - name: '>'
         fullName: '>'
   - uid: '@azure/cosmos.TriggerDefinition & @azure/cosmos.Resource'
@@ -115,15 +200,21 @@ references:
       - name: Resource
         fullName: Resource
         uid: '@azure/cosmos.Resource'
-  - uid: '@azure/cosmos.IHeaders'
-    name: IHeaders
+  - uid: '@azure/cosmos.CosmosHeaders'
+    name: CosmosHeaders
     spec.typeScript:
-      - name: IHeaders
-        fullName: IHeaders
-        uid: '@azure/cosmos.IHeaders'
+      - name: CosmosHeaders
+        fullName: CosmosHeaders
+        uid: '@azure/cosmos.CosmosHeaders'
   - uid: '@azure/cosmos.Trigger'
     name: Trigger
     spec.typeScript:
       - name: Trigger
         fullName: Trigger
         uid: '@azure/cosmos.Trigger'
+  - uid: '@azure/cosmos.CosmosHeaders_2'
+    name: CosmosHeaders_2
+    spec.typeScript:
+      - name: CosmosHeaders_2
+        fullName: CosmosHeaders_2
+        uid: '@azure/cosmos.CosmosHeaders_2'

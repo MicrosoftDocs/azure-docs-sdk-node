@@ -7,12 +7,14 @@ items:
       - '@azure/arm-appservice.SitePatchResource.availabilityState'
       - '@azure/arm-appservice.SitePatchResource.clientAffinityEnabled'
       - '@azure/arm-appservice.SitePatchResource.clientCertEnabled'
+      - '@azure/arm-appservice.SitePatchResource.clientCertExclusionPaths'
       - '@azure/arm-appservice.SitePatchResource.cloningInfo'
       - '@azure/arm-appservice.SitePatchResource.containerSize'
       - '@azure/arm-appservice.SitePatchResource.dailyMemoryTimeQuota'
       - '@azure/arm-appservice.SitePatchResource.defaultHostName'
       - '@azure/arm-appservice.SitePatchResource.enabled'
       - '@azure/arm-appservice.SitePatchResource.enabledHostNames'
+      - '@azure/arm-appservice.SitePatchResource.geoDistributions'
       - '@azure/arm-appservice.SitePatchResource.hostingEnvironmentProfile'
       - '@azure/arm-appservice.SitePatchResource.hostNames'
       - '@azure/arm-appservice.SitePatchResource.hostNamesDisabled'
@@ -20,6 +22,8 @@ items:
       - '@azure/arm-appservice.SitePatchResource.httpsOnly'
       - '@azure/arm-appservice.SitePatchResource.hyperV'
       - '@azure/arm-appservice.SitePatchResource.id'
+      - '@azure/arm-appservice.SitePatchResource.identity'
+      - '@azure/arm-appservice.SitePatchResource.inProgressOperationId'
       - '@azure/arm-appservice.SitePatchResource.isDefaultContainer'
       - '@azure/arm-appservice.SitePatchResource.isXenon'
       - '@azure/arm-appservice.SitePatchResource.kind'
@@ -28,6 +32,7 @@ items:
       - '@azure/arm-appservice.SitePatchResource.name'
       - '@azure/arm-appservice.SitePatchResource.outboundIpAddresses'
       - '@azure/arm-appservice.SitePatchResource.possibleOutboundIpAddresses'
+      - '@azure/arm-appservice.SitePatchResource.redundancyMode'
       - '@azure/arm-appservice.SitePatchResource.repositorySiteName'
       - '@azure/arm-appservice.SitePatchResource.reserved'
       - '@azure/arm-appservice.SitePatchResource.resourceGroup'
@@ -44,7 +49,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: ARM resource for a site.
     extends:
       name: '@azure/arm-appservice.ProxyOnlyResource'
     package: '@azure/arm-appservice'
@@ -55,7 +60,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Management information availability state for the app. Possible values
+      include: 'Normal',
+
+      'Limited', 'DisasterRecoveryMode'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'availabilityState?: SiteAvailabilityState'
@@ -70,7 +82,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      <code>true</code> to enable client affinity; <code>false</code> to stop
+      sending session
+
+      affinity cookies, which route client requests in the same session to the
+      same instance.
+
+      Default is <code>true</code>.
     optional: true
     syntax:
       content: 'clientAffinityEnabled?: undefined | false | true'
@@ -85,13 +104,32 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      <code>true</code> to enable client certificate authentication (TLS mutual
+      authentication);
+
+      otherwise, <code>false</code>. Default is <code>false</code>.
     optional: true
     syntax:
       content: 'clientCertEnabled?: undefined | false | true'
       return:
         type:
           - undefined | false | true
+    package: '@azure/arm-appservice'
+  - uid: '@azure/arm-appservice.SitePatchResource.clientCertExclusionPaths'
+    name: clientCertExclusionPaths
+    fullName: clientCertExclusionPaths
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: client certificate authentication comma-separated exclusion paths
+    optional: true
+    syntax:
+      content: 'clientCertExclusionPaths?: undefined | string'
+      return:
+        type:
+          - undefined | string
     package: '@azure/arm-appservice'
   - uid: '@azure/arm-appservice.SitePatchResource.cloningInfo'
     name: cloningInfo
@@ -100,7 +138,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'If specified during app creation, the app is cloned from a source app.'
     optional: true
     syntax:
       content: 'cloningInfo?: CloningInfo'
@@ -115,7 +153,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Size of the function container.
     optional: true
     syntax:
       content: 'containerSize?: undefined | number'
@@ -130,7 +168,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Maximum allowed daily memory-time quota (applicable on dynamic apps only).
     optional: true
     syntax:
       content: 'dailyMemoryTimeQuota?: undefined | number'
@@ -145,7 +183,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Default hostname of the app. Read-only.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'defaultHostName?: undefined | string'
@@ -160,7 +202,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      <code>true</code> if the app is enabled; otherwise, <code>false</code>.
+      Setting this value to
+
+      false disables the app (takes the app offline).
     optional: true
     syntax:
       content: 'enabled?: undefined | false | true'
@@ -175,13 +221,37 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Enabled hostnames for the app.Hostnames need to be assigned (see
+      HostNames) AND enabled.
+
+      Otherwise,
+
+      the app is not served on those hostnames.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'enabledHostNames?: string[]'
       return:
         type:
           - 'string[]'
+    package: '@azure/arm-appservice'
+  - uid: '@azure/arm-appservice.SitePatchResource.geoDistributions'
+    name: geoDistributions
+    fullName: geoDistributions
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: GeoDistributions for this site
+    optional: true
+    syntax:
+      content: 'geoDistributions?: GeoDistribution[]'
+      return:
+        type:
+          - '@azure/arm-appservice.GeoDistribution[]'
     package: '@azure/arm-appservice'
   - uid: '@azure/arm-appservice.SitePatchResource.hostingEnvironmentProfile'
     name: hostingEnvironmentProfile
@@ -190,7 +260,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: App Service Environment to use for the app.
     optional: true
     syntax:
       content: 'hostingEnvironmentProfile?: HostingEnvironmentProfile'
@@ -205,7 +275,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Hostnames associated with the app.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'hostNames?: string[]'
@@ -220,7 +294,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      <code>true</code> to disable the public hostnames of the app; otherwise,
+      <code>false</code>.
+
+      If <code>true</code>, the app is only accessible via API management
+      process.
     optional: true
     syntax:
       content: 'hostNamesDisabled?: undefined | false | true'
@@ -235,7 +314,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Hostname SSL states are used to manage the SSL bindings for app's
+      hostnames.
     optional: true
     syntax:
       content: 'hostNameSslStates?: HostNameSslState[]'
@@ -250,7 +331,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      HttpsOnly: configures a web site to accept only https requests. Issues
+      redirect for
+
+      http requests
     optional: true
     syntax:
       content: 'httpsOnly?: undefined | false | true'
@@ -265,7 +350,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'Hyper-V sandbox. Default value: false.'
     optional: true
     syntax:
       content: 'hyperV?: undefined | false | true'
@@ -280,10 +365,48 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Resource Id.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'id?: undefined | string'
+      return:
+        type:
+          - undefined | string
+    package: '@azure/arm-appservice'
+  - uid: '@azure/arm-appservice.SitePatchResource.identity'
+    name: identity
+    fullName: identity
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    optional: true
+    syntax:
+      content: 'identity?: ManagedServiceIdentity'
+      return:
+        type:
+          - '@azure/arm-appservice.ManagedServiceIdentity'
+    package: '@azure/arm-appservice'
+  - uid: '@azure/arm-appservice.SitePatchResource.inProgressOperationId'
+    name: inProgressOperationId
+    fullName: inProgressOperationId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Specifies an operation id if this site has a pending operation.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
+    optional: true
+    syntax:
+      content: 'inProgressOperationId?: undefined | string'
       return:
         type:
           - undefined | string
@@ -295,7 +418,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      <code>true</code> if the app is a default container; otherwise,
+      <code>false</code>.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'isDefaultContainer?: undefined | false | true'
@@ -310,7 +438,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'Obsolete: Hyper-V sandbox. Default value: false.'
     optional: true
     syntax:
       content: 'isXenon?: undefined | false | true'
@@ -325,7 +453,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Kind of resource.
     optional: true
     syntax:
       content: 'kind?: undefined | string'
@@ -340,7 +468,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Last time the app was modified, in UTC. Read-only.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'lastModifiedTimeUtc?: Date'
@@ -355,7 +487,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Maximum number of workers.
+
+      This only applies to Functions container.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'maxNumberOfWorkers?: undefined | number'
@@ -370,7 +508,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Resource Name.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'name?: undefined | string'
@@ -385,7 +527,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      List of IP addresses that the app uses for outbound connections (e.g.
+      database access).
+
+      Includes VIPs from tenants that site can be hosted with current settings.
+      Read-only.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'outboundIpAddresses?: undefined | string'
@@ -400,13 +550,39 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      List of IP addresses that the app uses for outbound connections (e.g.
+      database access).
+
+      Includes VIPs from all tenants. Read-only.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'possibleOutboundIpAddresses?: undefined | string'
       return:
         type:
           - undefined | string
+    package: '@azure/arm-appservice'
+  - uid: '@azure/arm-appservice.SitePatchResource.redundancyMode'
+    name: redundancyMode
+    fullName: redundancyMode
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Site redundancy mode. Possible values include: 'None', 'Manual',
+      'Failover', 'ActiveActive',
+
+      'GeoRedundant'
+    optional: true
+    syntax:
+      content: 'redundancyMode?: RedundancyMode'
+      return:
+        type:
+          - '@azure/arm-appservice.RedundancyMode'
     package: '@azure/arm-appservice'
   - uid: '@azure/arm-appservice.SitePatchResource.repositorySiteName'
     name: repositorySiteName
@@ -415,7 +591,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Name of the repository site.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'repositorySiteName?: undefined | string'
@@ -430,7 +610,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      <code>true</code> if reserved; otherwise, <code>false</code>. Default
+      value: false.
     optional: true
     syntax:
       content: 'reserved?: undefined | false | true'
@@ -445,7 +627,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Name of the resource group the app belongs to. Read-only.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'resourceGroup?: undefined | string'
@@ -460,7 +646,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      <code>true</code> to stop SCM (KUDU) site when the app is stopped;
+      otherwise,
+
+      <code>false</code>. The default is <code>false</code>. Default value:
+      false.
     optional: true
     syntax:
       content: 'scmSiteAlsoStopped?: undefined | false | true'
@@ -475,7 +666,10 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Resource ID of the associated App Service plan, formatted as:
+
+      "/subscriptions/{subscriptionID}/resourceGroups/{groupName}/providers/Microsoft.Web/serverfarms/{appServicePlanName}".
     optional: true
     syntax:
       content: 'serverFarmId?: undefined | string'
@@ -490,7 +684,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Configuration of the app.
     optional: true
     syntax:
       content: 'siteConfig?: SiteConfig'
@@ -505,7 +699,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Status of the last deployment slot swap operation.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'slotSwapStatus?: SlotSwapStatus'
@@ -520,7 +718,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Current state of the app.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'state?: undefined | string'
@@ -535,7 +737,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      App suspended till in case memory-time quota is exceeded.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'suspendedTill?: Date'
@@ -550,7 +756,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Specifies which deployment slot this app will swap into. Read-only.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'targetSwapSlot?: undefined | string'
@@ -565,7 +775,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Azure Traffic Manager hostnames associated with the app. Read-only.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'trafficManagerHostNames?: string[]'
@@ -580,7 +794,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Resource type.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'type?: undefined | string'
@@ -595,7 +813,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      State indicating whether the app has exceeded its quota usage. Read-only.
+      Possible values
+
+      include: 'Normal', 'Exceeded'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'usageState?: UsageState'
@@ -622,6 +847,14 @@ references:
       - name: CloningInfo
         fullName: CloningInfo
         uid: '@azure/arm-appservice.CloningInfo'
+  - uid: '@azure/arm-appservice.GeoDistribution[]'
+    name: 'GeoDistribution[]'
+    spec.typeScript:
+      - name: GeoDistribution
+        fullName: GeoDistribution
+        uid: '@azure/arm-appservice.GeoDistribution'
+      - name: '[]'
+        fullName: '[]'
   - uid: '@azure/arm-appservice.HostNameSslState[]'
     name: 'HostNameSslState[]'
     spec.typeScript:
@@ -636,6 +869,18 @@ references:
       - name: HostingEnvironmentProfile
         fullName: HostingEnvironmentProfile
         uid: '@azure/arm-appservice.HostingEnvironmentProfile'
+  - uid: '@azure/arm-appservice.ManagedServiceIdentity'
+    name: ManagedServiceIdentity
+    spec.typeScript:
+      - name: ManagedServiceIdentity
+        fullName: ManagedServiceIdentity
+        uid: '@azure/arm-appservice.ManagedServiceIdentity'
+  - uid: '@azure/arm-appservice.RedundancyMode'
+    name: RedundancyMode
+    spec.typeScript:
+      - name: RedundancyMode
+        fullName: RedundancyMode
+        uid: '@azure/arm-appservice.RedundancyMode'
   - uid: '@azure/arm-appservice.SiteConfig'
     name: SiteConfig
     spec.typeScript:

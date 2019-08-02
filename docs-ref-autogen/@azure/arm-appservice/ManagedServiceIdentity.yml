@@ -4,29 +4,14 @@ items:
     name: ManagedServiceIdentity
     fullName: ManagedServiceIdentity
     children:
-      - '@azure/arm-appservice.ManagedServiceIdentity.identityIds'
       - '@azure/arm-appservice.ManagedServiceIdentity.principalId'
       - '@azure/arm-appservice.ManagedServiceIdentity.tenantId'
       - '@azure/arm-appservice.ManagedServiceIdentity.type'
+      - '@azure/arm-appservice.ManagedServiceIdentity.userAssignedIdentities'
     langs:
       - typeScript
     type: interface
-    summary: ''
-    package: '@azure/arm-appservice'
-  - uid: '@azure/arm-appservice.ManagedServiceIdentity.identityIds'
-    name: identityIds
-    fullName: identityIds
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'identityIds?: string[]'
-      return:
-        type:
-          - 'string[]'
+    summary: Managed service identity.
     package: '@azure/arm-appservice'
   - uid: '@azure/arm-appservice.ManagedServiceIdentity.principalId'
     name: principalId
@@ -35,7 +20,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Principal Id of managed service identity.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'principalId?: undefined | string'
@@ -50,7 +39,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Tenant of managed service identity.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'tenantId?: undefined | string'
@@ -65,13 +58,42 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Type of managed service identity. Possible values include:
+      'SystemAssigned', 'UserAssigned',
+
+      'SystemAssigned, UserAssigned', 'None'
     optional: true
     syntax:
       content: 'type?: ManagedServiceIdentityType'
       return:
         type:
           - '@azure/arm-appservice.ManagedServiceIdentityType'
+    package: '@azure/arm-appservice'
+  - uid: '@azure/arm-appservice.ManagedServiceIdentity.userAssignedIdentities'
+    name: userAssignedIdentities
+    fullName: userAssignedIdentities
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The list of user assigned identities associated with the resource. The
+      user identity
+
+      dictionary key references will be ARM resource ids in the form:
+
+      '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}
+    optional: true
+    syntax:
+      content: >-
+        userAssignedIdentities?: undefined | [key: string]:
+        ManagedServiceIdentityUserAssignedIdentitiesValue
+      return:
+        type:
+          - >-
+            undefined | [key: string]:
+            @azure/arm-appservice.ManagedServiceIdentityUserAssignedIdentitiesValue
     package: '@azure/arm-appservice'
 references:
   - uid: '@azure/arm-appservice.ManagedServiceIdentityType'
@@ -80,3 +102,14 @@ references:
       - name: ManagedServiceIdentityType
         fullName: ManagedServiceIdentityType
         uid: '@azure/arm-appservice.ManagedServiceIdentityType'
+  - uid: >-
+      undefined | [key: string]:
+      @azure/arm-appservice.ManagedServiceIdentityUserAssignedIdentitiesValue
+    name: ManagedServiceIdentityUserAssignedIdentitiesValue
+    spec.typeScript:
+      - name: 'undefined | [key: string]: '
+        fullName: 'undefined | [key: string]: '
+      - name: ManagedServiceIdentityUserAssignedIdentitiesValue
+        fullName: ManagedServiceIdentityUserAssignedIdentitiesValue
+        uid: >-
+          @azure/arm-appservice.ManagedServiceIdentityUserAssignedIdentitiesValue

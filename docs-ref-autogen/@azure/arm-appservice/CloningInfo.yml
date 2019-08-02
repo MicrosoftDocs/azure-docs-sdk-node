@@ -12,12 +12,13 @@ items:
       - '@azure/arm-appservice.CloningInfo.hostingEnvironment'
       - '@azure/arm-appservice.CloningInfo.overwrite'
       - '@azure/arm-appservice.CloningInfo.sourceWebAppId'
+      - '@azure/arm-appservice.CloningInfo.sourceWebAppLocation'
       - '@azure/arm-appservice.CloningInfo.trafficManagerProfileId'
       - '@azure/arm-appservice.CloningInfo.trafficManagerProfileName'
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Information needed for cloning operation.
     package: '@azure/arm-appservice'
   - uid: '@azure/arm-appservice.CloningInfo.appSettingsOverrides'
     name: appSettingsOverrides
@@ -26,7 +27,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Application setting overrides for cloned app. If specified, these settings
+      override the
+
+      settings cloned
+
+      from source app. Otherwise, application settings from source app are
+      retained.
     optional: true
     syntax:
       content: 'appSettingsOverrides?: undefined | [key: string]: string'
@@ -41,7 +49,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      <code>true</code> to clone custom hostnames from source app; otherwise,
+      <code>false</code>.
     optional: true
     syntax:
       content: 'cloneCustomHostNames?: undefined | false | true'
@@ -56,7 +66,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      <code>true</code> to clone source control from source app; otherwise,
+      <code>false</code>.
     optional: true
     syntax:
       content: 'cloneSourceControl?: undefined | false | true'
@@ -71,7 +83,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      <code>true</code> to configure load balancing for source and destination
+      app.
     optional: true
     syntax:
       content: 'configureLoadBalancing?: undefined | false | true'
@@ -86,7 +100,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Correlation ID of cloning operation. This ID ties multiple cloning
+      operations
+
+      together to use the same snapshot.
     optional: true
     syntax:
       content: 'correlationId?: undefined | string'
@@ -101,7 +119,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: App Service Environment.
     optional: true
     syntax:
       content: 'hostingEnvironment?: undefined | string'
@@ -116,7 +134,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      <code>true</code> to overwrite destination app; otherwise,
+      <code>false</code>.
     optional: true
     syntax:
       content: 'overwrite?: undefined | false | true'
@@ -131,12 +151,36 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      ARM resource ID of the source app. App resource ID is of the form
+
+      /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}
+
+      for production slots and
+
+      /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName}
+
+      for other slots.
     syntax:
       content: 'sourceWebAppId: string'
       return:
         type:
           - string
+    package: '@azure/arm-appservice'
+  - uid: '@azure/arm-appservice.CloningInfo.sourceWebAppLocation'
+    name: sourceWebAppLocation
+    fullName: sourceWebAppLocation
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: 'Location of source app ex: West US or North Europe'
+    optional: true
+    syntax:
+      content: 'sourceWebAppLocation?: undefined | string'
+      return:
+        type:
+          - undefined | string
     package: '@azure/arm-appservice'
   - uid: '@azure/arm-appservice.CloningInfo.trafficManagerProfileId'
     name: trafficManagerProfileId
@@ -145,7 +189,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      ARM resource ID of the Traffic Manager profile to use, if it exists.
+      Traffic Manager resource
+
+      ID is of the form
+
+      /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{profileName}.
     optional: true
     syntax:
       content: 'trafficManagerProfileId?: undefined | string'
@@ -160,7 +210,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Name of Traffic Manager profile to create. This is only needed if Traffic
+      Manager profile does
+
+      not already exist.
     optional: true
     syntax:
       content: 'trafficManagerProfileName?: undefined | string'

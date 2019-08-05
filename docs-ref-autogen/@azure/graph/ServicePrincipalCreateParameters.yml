@@ -7,20 +7,16 @@ items:
       - '@azure/graph.ServicePrincipalCreateParameters.accountEnabled'
       - '@azure/graph.ServicePrincipalCreateParameters.appId'
       - '@azure/graph.ServicePrincipalCreateParameters.appRoleAssignmentRequired'
-      - '@azure/graph.ServicePrincipalCreateParameters.displayName'
-      - '@azure/graph.ServicePrincipalCreateParameters.errorUrl'
-      - '@azure/graph.ServicePrincipalCreateParameters.homepage'
       - '@azure/graph.ServicePrincipalCreateParameters.keyCredentials'
       - '@azure/graph.ServicePrincipalCreateParameters.passwordCredentials'
-      - '@azure/graph.ServicePrincipalCreateParameters.publisherName'
-      - '@azure/graph.ServicePrincipalCreateParameters.replyUrls'
-      - '@azure/graph.ServicePrincipalCreateParameters.samlMetadataUrl'
-      - '@azure/graph.ServicePrincipalCreateParameters.servicePrincipalNames'
+      - '@azure/graph.ServicePrincipalCreateParameters.servicePrincipalType'
       - '@azure/graph.ServicePrincipalCreateParameters.tags'
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Request parameters for creating a new service principal.
+    extends:
+      name: '@azure/graph.ServicePrincipalBase'
     package: '@azure/graph'
   - uid: '@azure/graph.ServicePrincipalCreateParameters.accountEnabled'
     name: accountEnabled
@@ -29,7 +25,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: whether or not the service principal account is enabled
     optional: true
     syntax:
       content: 'accountEnabled?: undefined | false | true'
@@ -44,7 +40,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The application ID.
     syntax:
       content: 'appId: string'
       return:
@@ -58,58 +54,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Specifies whether an AppRoleAssignment to a user or group is required
+      before Azure AD will
+
+      issue a user or access token to the application.
     optional: true
     syntax:
       content: 'appRoleAssignmentRequired?: undefined | false | true'
       return:
         type:
           - undefined | false | true
-    package: '@azure/graph'
-  - uid: '@azure/graph.ServicePrincipalCreateParameters.displayName'
-    name: displayName
-    fullName: displayName
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'displayName?: undefined | string'
-      return:
-        type:
-          - undefined | string
-    package: '@azure/graph'
-  - uid: '@azure/graph.ServicePrincipalCreateParameters.errorUrl'
-    name: errorUrl
-    fullName: errorUrl
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'errorUrl?: undefined | string'
-      return:
-        type:
-          - undefined | string
-    package: '@azure/graph'
-  - uid: '@azure/graph.ServicePrincipalCreateParameters.homepage'
-    name: homepage
-    fullName: homepage
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'homepage?: undefined | string'
-      return:
-        type:
-          - undefined | string
     package: '@azure/graph'
   - uid: '@azure/graph.ServicePrincipalCreateParameters.keyCredentials'
     name: keyCredentials
@@ -118,7 +73,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The collection of key credentials associated with the service principal.
     optional: true
     syntax:
       content: 'keyCredentials?: KeyCredential[]'
@@ -133,7 +88,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The collection of password credentials associated with the service
+      principal.
     optional: true
     syntax:
       content: 'passwordCredentials?: PasswordCredential[]'
@@ -141,65 +98,20 @@ items:
         type:
           - '@azure/graph.PasswordCredential[]'
     package: '@azure/graph'
-  - uid: '@azure/graph.ServicePrincipalCreateParameters.publisherName'
-    name: publisherName
-    fullName: publisherName
+  - uid: '@azure/graph.ServicePrincipalCreateParameters.servicePrincipalType'
+    name: servicePrincipalType
+    fullName: servicePrincipalType
     children: []
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: the type of the service principal
     optional: true
     syntax:
-      content: 'publisherName?: undefined | string'
+      content: 'servicePrincipalType?: undefined | string'
       return:
         type:
           - undefined | string
-    package: '@azure/graph'
-  - uid: '@azure/graph.ServicePrincipalCreateParameters.replyUrls'
-    name: replyUrls
-    fullName: replyUrls
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'replyUrls?: string[]'
-      return:
-        type:
-          - 'string[]'
-    package: '@azure/graph'
-  - uid: '@azure/graph.ServicePrincipalCreateParameters.samlMetadataUrl'
-    name: samlMetadataUrl
-    fullName: samlMetadataUrl
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'samlMetadataUrl?: undefined | string'
-      return:
-        type:
-          - undefined | string
-    package: '@azure/graph'
-  - uid: '@azure/graph.ServicePrincipalCreateParameters.servicePrincipalNames'
-    name: servicePrincipalNames
-    fullName: servicePrincipalNames
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'servicePrincipalNames?: string[]'
-      return:
-        type:
-          - 'string[]'
     package: '@azure/graph'
   - uid: '@azure/graph.ServicePrincipalCreateParameters.tags'
     name: tags
@@ -208,7 +120,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Optional list of tags that you can apply to your service principals. Not
+      nullable.
     optional: true
     syntax:
       content: 'tags?: string[]'
@@ -217,6 +131,12 @@ items:
           - 'string[]'
     package: '@azure/graph'
 references:
+  - uid: '@azure/graph.ServicePrincipalBase'
+    name: ServicePrincipalBase
+    spec.typeScript:
+      - name: ServicePrincipalBase
+        fullName: ServicePrincipalBase
+        uid: '@azure/graph.ServicePrincipalBase'
   - uid: '@azure/graph.KeyCredential[]'
     name: 'KeyCredential[]'
     spec.typeScript:

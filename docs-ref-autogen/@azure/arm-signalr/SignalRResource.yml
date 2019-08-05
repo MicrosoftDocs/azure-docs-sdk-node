@@ -4,7 +4,9 @@ items:
     name: SignalRResource
     fullName: SignalRResource
     children:
+      - '@azure/arm-signalr.SignalRResource.cors'
       - '@azure/arm-signalr.SignalRResource.externalIP'
+      - '@azure/arm-signalr.SignalRResource.features'
       - '@azure/arm-signalr.SignalRResource.hostName'
       - '@azure/arm-signalr.SignalRResource.hostNamePrefix'
       - '@azure/arm-signalr.SignalRResource.id'
@@ -20,9 +22,24 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: A class represent a SignalR service resource.
     extends:
       name: '@azure/arm-signalr.TrackedResource'
+    package: '@azure/arm-signalr'
+  - uid: '@azure/arm-signalr.SignalRResource.cors'
+    name: cors
+    fullName: cors
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Cross-Origin Resource Sharing (CORS) settings.
+    optional: true
+    syntax:
+      content: 'cors?: SignalRCorsSettings'
+      return:
+        type:
+          - '@azure/arm-signalr.SignalRCorsSettings'
     package: '@azure/arm-signalr'
   - uid: '@azure/arm-signalr.SignalRResource.externalIP'
     name: externalIP
@@ -31,13 +48,48 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The publicly accessible IP of the SignalR service.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'externalIP?: undefined | string'
       return:
         type:
           - undefined | string
+    package: '@azure/arm-signalr'
+  - uid: '@azure/arm-signalr.SignalRResource.features'
+    name: features
+    fullName: features
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >
+      List of SignalR featureFlags. e.g. ServiceMode.
+
+      FeatureFlags that are not included in the parameters for the update
+      operation will not be
+
+      modified.
+
+      And the response will only include featureFlags that are explicitly set.
+
+      When a featureFlag is not explicitly set, SignalR service will use its
+      globally default value.
+
+      But keep in mind, the default value doesn't mean "false". It varies in
+      terms of different
+
+      FeatureFlags.
+    optional: true
+    syntax:
+      content: 'features?: SignalRFeature[]'
+      return:
+        type:
+          - '@azure/arm-signalr.SignalRFeature[]'
     package: '@azure/arm-signalr'
   - uid: '@azure/arm-signalr.SignalRResource.hostName'
     name: hostName
@@ -46,7 +98,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      FQDN of the SignalR service instance. Format: xxx.service.signalr.net
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'hostName?: undefined | string'
@@ -61,7 +117,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Prefix for the hostName of the SignalR service. Retained for future use.
+
+      The hostname will be of format:
+      &lt;hostNamePrefix&gt;.service.signalr.net.
     optional: true
     syntax:
       content: 'hostNamePrefix?: undefined | string'
@@ -76,7 +136,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Fully qualified resource Id for the resource.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'id?: undefined | string'
@@ -91,7 +155,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The GEO location of the SignalR service. e.g. West US | East US | North
+      Central US | South
+
+      Central US.
     optional: true
     syntax:
       content: 'location?: undefined | string'
@@ -106,7 +174,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The name of the resource.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'name?: undefined | string'
@@ -121,7 +193,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Provisioning state of the resource. Possible values include: 'Unknown',
+      'Succeeded', 'Failed',
+
+      'Canceled', 'Running', 'Creating', 'Updating', 'Deleting', 'Moving'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'provisioningState?: ProvisioningState'
@@ -136,7 +215,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The publicly accessible port of the SignalR service which is designed for
+      browser/client side
+
+      usage.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'publicPort?: undefined | number'
@@ -151,7 +237,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The publicly accessible port of the SignalR service which is designed for
+      customer server side
+
+      usage.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'serverPort?: undefined | number'
@@ -166,7 +259,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: SKU of the service.
     optional: true
     syntax:
       content: 'sku?: ResourceSku'
@@ -181,7 +274,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Tags of the service which is a list of key value pairs that describe the
+      resource.
     optional: true
     syntax:
       content: 'tags?: undefined | [key: string]: string'
@@ -196,7 +291,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The type of the service - e.g. "Microsoft.SignalRService/SignalR"
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'type?: undefined | string'
@@ -211,7 +310,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Version of the SignalR resource. Probably you need the same or higher
+      version of client SDKs.
     optional: true
     syntax:
       content: 'version?: undefined | string'
@@ -226,6 +327,20 @@ references:
       - name: TrackedResource
         fullName: TrackedResource
         uid: '@azure/arm-signalr.TrackedResource'
+  - uid: '@azure/arm-signalr.SignalRCorsSettings'
+    name: SignalRCorsSettings
+    spec.typeScript:
+      - name: SignalRCorsSettings
+        fullName: SignalRCorsSettings
+        uid: '@azure/arm-signalr.SignalRCorsSettings'
+  - uid: '@azure/arm-signalr.SignalRFeature[]'
+    name: 'SignalRFeature[]'
+    spec.typeScript:
+      - name: SignalRFeature
+        fullName: SignalRFeature
+        uid: '@azure/arm-signalr.SignalRFeature'
+      - name: '[]'
+        fullName: '[]'
   - uid: '@azure/arm-signalr.ProvisioningState'
     name: ProvisioningState
     spec.typeScript:

@@ -1,0 +1,255 @@
+### YamlMime:UniversalReference
+items:
+  - uid: '@azure/storage-queue.MessageIdClient'
+    name: MessageIdClient
+    fullName: MessageIdClient
+    children:
+      - '@azure/storage-queue.MessageIdClient.delete'
+      - '@azure/storage-queue.MessageIdClient.constructor_2'
+      - '@azure/storage-queue.MessageIdClient.constructor_1'
+      - '@azure/storage-queue.MessageIdClient.constructor'
+      - '@azure/storage-queue.MessageIdClient.update'
+      - '@azure/storage-queue.MessageIdClient.url'
+    langs:
+      - typeScript
+    type: class
+    summary: >-
+      A MessageIdClient represents a URL to a specific Azure Storage Queue
+      message allowing you to manipulate the message.
+    extends:
+      name: '@azure/storage-queue.StorageClient'
+    package: '@azure/storage-queue'
+  - uid: '@azure/storage-queue.MessageIdClient.delete'
+    name: 'delete(string, MessageIdDeleteOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Delete permanently removes the specified message from its queue.
+    syntax:
+      content: 'function delete(popReceipt: string, options?: MessageIdDeleteOptions)'
+      parameters:
+        - id: popReceipt
+          type:
+            - string
+          description: >-
+            A valid pop receipt value returned from an earlier call to the
+            dequeue messages or update message operation.
+        - id: options
+          type:
+            - '@azure/storage-queue.MessageIdDeleteOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.MessageIdDeleteResponse>
+    package: '@azure/storage-queue'
+  - uid: '@azure/storage-queue.MessageIdClient.constructor_2'
+    name: 'MessageIdClient(string, Pipeline)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Creates an instance of MessageIdClient.
+    syntax:
+      content: 'new MessageIdClient(url: string, pipeline: Pipeline)'
+      parameters:
+        - id: url
+          type:
+            - string
+          description: |-
+            A URL string pointing to Azure Storage queue's message, such as
+                                "https://myaccount.queue.core.windows.net/myqueue/messages/messageid". You can
+                                append a SAS if using AnonymousCredential, such as
+                                "https://myaccount.queue.core.windows.net/myqueue/messages/messageid?sasString".
+        - id: pipeline
+          type:
+            - '@azure/storage-queue.Pipeline'
+          description: |-
+            Call newPipeline() to create a default
+                                       pipeline, or provide a customized pipeline.
+    package: '@azure/storage-queue'
+  - uid: '@azure/storage-queue.MessageIdClient.constructor_1'
+    name: >-
+      MessageIdClient(string, SharedKeyCredential | AnonymousCredential |
+      TokenCredential, NewPipelineOptions)
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Creates an instance of MessageIdClient.
+    syntax:
+      content: >-
+        new MessageIdClient(url: string, credential?: SharedKeyCredential |
+        AnonymousCredential | TokenCredential, options?: NewPipelineOptions)
+      parameters:
+        - id: url
+          type:
+            - string
+          description: |-
+            A URL string pointing to Azure Storage queue's message, such as
+                                "https://myaccount.queue.core.windows.net/myqueue/messages/messageid". You can
+                                append a SAS if using AnonymousCredential, such as
+                                "https://myaccount.queue.core.windows.net/myqueue/messages/messageid?sasString".
+        - id: credential
+          type:
+            - >-
+              @azure/storage-queue.SharedKeyCredential |
+              @azure/storage-queue.AnonymousCredential | TokenCredential
+          description: >-
+            Such as AnonymousCredential, SharedKeyCredential,
+            RawTokenCredential,
+                                                             or a TokenCredential from @azure/identity. If not specified,
+                                                             AnonymousCredential is used.
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-queue.NewPipelineOptions'
+          description: ''
+          optional: true
+    package: '@azure/storage-queue'
+  - uid: '@azure/storage-queue.MessageIdClient.constructor'
+    name: 'MessageIdClient(string, string, string, NewPipelineOptions)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Creates an instance of MessageIdClient.
+    syntax:
+      content: >-
+        new MessageIdClient(connectionString: string, queueName: string,
+        messageId: string, options?: NewPipelineOptions)
+      parameters:
+        - id: connectionString
+          type:
+            - string
+          description: >-
+            Account connection string or a SAS connection string of an Azure
+            storage account.
+                                             [ Note - Account connection string can only be used in NODE.JS runtime. ]
+                                             Account connection string example -
+                                             `DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=accountKey;EndpointSuffix=core.windows.net`
+                                             SAS connection string example -
+                                             `BlobEndpoint=https://myaccount.blob.core.windows.net/;QueueEndpoint=https://myaccount.queue.core.windows.net/;FileEndpoint=https://myaccount.file.core.windows.net/;TableEndpoint=https://myaccount.table.core.windows.net/;SharedAccessSignature=sasString`
+        - id: queueName
+          type:
+            - string
+          description: Queue name.
+        - id: messageId
+          type:
+            - string
+          description: Message Id.
+        - id: options
+          type:
+            - '@azure/storage-queue.NewPipelineOptions'
+          description: ''
+          optional: true
+    package: '@azure/storage-queue'
+  - uid: '@azure/storage-queue.MessageIdClient.update'
+    name: 'update(string, string, undefined | number, MessageIdUpdateOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Update changes a message's visibility timeout and contents.
+
+      The message content is up to 64KB in size, and must be in a format that
+      can be included in an XML request with UTF-8 encoding.
+
+      To include markup in the message, the contents of the message must either
+      be XML-escaped or Base64-encode.
+    syntax:
+      content: >-
+        function update(popReceipt: string, message: string, visibilityTimeout?:
+        undefined | number, options?: MessageIdUpdateOptions)
+      parameters:
+        - id: popReceipt
+          type:
+            - string
+          description: >-
+            A valid pop receipt value returned from an earlier call to the
+            dequeue messages or update message operation.
+        - id: message
+          type:
+            - string
+          description: Message to update.
+        - id: visibilityTimeout
+          type:
+            - undefined | number
+          description: |-
+            Specifies the new visibility timeout value, in seconds,
+                                              relative to server time. The new value must be larger than or equal to 0,
+                                              and cannot be larger than 7 days. The visibility timeout of a message cannot
+                                              be set to a value later than the expiry time.
+                                              A message can be updated until it has been deleted or has expired.
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-queue.MessageIdUpdateOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.MessageIdUpdateResponse>
+    package: '@azure/storage-queue'
+  - uid: '@azure/storage-queue.MessageIdClient.url'
+    name: url
+    fullName: url
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: URL string value.
+    syntax:
+      content: 'url: string'
+      return:
+        type:
+          - string
+    package: '@azure/storage-queue'
+references:
+  - uid: '@azure/storage-queue.StorageClient'
+    name: StorageClient
+    spec.typeScript:
+      - name: StorageClient
+        fullName: StorageClient
+        uid: '@azure/storage-queue.StorageClient'
+  - uid: '@azure/storage-queue.NewPipelineOptions'
+    name: NewPipelineOptions
+    spec.typeScript:
+      - name: NewPipelineOptions
+        fullName: NewPipelineOptions
+        uid: '@azure/storage-queue.NewPipelineOptions'
+  - uid: >-
+      @azure/storage-queue.SharedKeyCredential |
+      @azure/storage-queue.AnonymousCredential | TokenCredential
+    name: AnonymousCredential | TokenCredential
+    spec.typeScript:
+      - name: SharedKeyCredential
+        fullName: SharedKeyCredential
+        uid: '@azure/storage-queue.SharedKeyCredential'
+      - name: ' | '
+        fullName: ' | '
+      - name: AnonymousCredential
+        fullName: AnonymousCredential
+        uid: '@azure/storage-queue.AnonymousCredential'
+      - name: ' | TokenCredential'
+        fullName: ' | TokenCredential'
+  - uid: '@azure/storage-queue.Pipeline'
+    name: Pipeline
+    spec.typeScript:
+      - name: Pipeline
+        fullName: Pipeline
+        uid: '@azure/storage-queue.Pipeline'
+  - uid: '@azure/storage-queue.MessageIdDeleteOptions'
+    name: MessageIdDeleteOptions
+    spec.typeScript:
+      - name: MessageIdDeleteOptions
+        fullName: MessageIdDeleteOptions
+        uid: '@azure/storage-queue.MessageIdDeleteOptions'
+  - uid: '@azure/storage-queue.MessageIdUpdateOptions'
+    name: MessageIdUpdateOptions
+    spec.typeScript:
+      - name: MessageIdUpdateOptions
+        fullName: MessageIdUpdateOptions
+        uid: '@azure/storage-queue.MessageIdUpdateOptions'

@@ -1,0 +1,778 @@
+### YamlMime:UniversalReference
+items:
+  - uid: '@azure/storage-blob.BlobClient'
+    name: BlobClient
+    fullName: BlobClient
+    children:
+      - '@azure/storage-blob.BlobClient.abortCopyFromURL'
+      - '@azure/storage-blob.BlobClient.constructor_2'
+      - '@azure/storage-blob.BlobClient.constructor_1'
+      - '@azure/storage-blob.BlobClient.constructor'
+      - '@azure/storage-blob.BlobClient.createSnapshot'
+      - '@azure/storage-blob.BlobClient.delete'
+      - '@azure/storage-blob.BlobClient.download'
+      - '@azure/storage-blob.BlobClient.downloadToBuffer'
+      - '@azure/storage-blob.BlobClient.downloadToFile'
+      - '@azure/storage-blob.BlobClient.getAppendBlobClient'
+      - '@azure/storage-blob.BlobClient.getBlockBlobClient'
+      - '@azure/storage-blob.BlobClient.getLeaseClient'
+      - '@azure/storage-blob.BlobClient.getPageBlobClient'
+      - '@azure/storage-blob.BlobClient.getProperties'
+      - '@azure/storage-blob.BlobClient.setHTTPHeaders'
+      - '@azure/storage-blob.BlobClient.setMetadata'
+      - '@azure/storage-blob.BlobClient.setTier'
+      - '@azure/storage-blob.BlobClient.startCopyFromURL'
+      - '@azure/storage-blob.BlobClient.undelete'
+      - '@azure/storage-blob.BlobClient.url'
+      - '@azure/storage-blob.BlobClient.withSnapshot'
+    langs:
+      - typeScript
+    type: class
+    summary: >-
+      A BlobClient represents a URL to an Azure Storage blob; the blob may be a
+      block blob,
+
+      append blob, or page blob.
+    extends:
+      name: '@azure/storage-blob.StorageClient'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.abortCopyFromURL'
+    name: 'abortCopyFromURL(string, BlobAbortCopyFromURLOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Aborts a pending Copy Blob operation, and leaves a destination blob with
+      zero
+
+      length and full metadata. Version 2012-02-12 and newer.
+    syntax:
+      content: >-
+        function abortCopyFromURL(copyId: string, options?:
+        BlobAbortCopyFromURLOptions)
+      parameters:
+        - id: copyId
+          type:
+            - string
+          description: Id of the Copy From URL operation.
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobAbortCopyFromURLOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlobAbortCopyFromURLResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.constructor_2'
+    name: 'BlobClient(string, Pipeline)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: >-
+      Creates an instance of BlobClient.
+
+      This method accepts an encoded URL or non-encoded URL pointing to a blob.
+
+      Encoded URL string will NOT be escaped twice, only special characters in
+      URL path will be escaped.
+
+      If a blob name includes ? or %, blob name must be encoded in the URL.
+    syntax:
+      content: 'new BlobClient(url: string, pipeline: Pipeline)'
+      parameters:
+        - id: url
+          type:
+            - string
+          description: |-
+            A Client string pointing to Azure Storage blob service, such as
+                                "https://myaccount.blob.core.windows.net". You can append a SAS
+                                if using AnonymousCredential, such as "https://myaccount.blob.core.windows.net?sasString".
+        - id: pipeline
+          type:
+            - '@azure/storage-blob.Pipeline'
+          description: |-
+            Call newPipeline() to create a default
+                                       pipeline, or provide a customized pipeline.
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.constructor_1'
+    name: >-
+      BlobClient(string, SharedKeyCredential | AnonymousCredential |
+      TokenCredential, NewPipelineOptions)
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: >-
+      Creates an instance of BlobClient.
+
+      This method accepts an encoded URL or non-encoded URL pointing to a blob.
+
+      Encoded URL string will NOT be escaped twice, only special characters in
+      URL path will be escaped.
+
+      If a blob name includes ? or %, blob name must be encoded in the URL.
+    syntax:
+      content: >-
+        new BlobClient(url: string, credential?: SharedKeyCredential |
+        AnonymousCredential | TokenCredential, options?: NewPipelineOptions)
+      parameters:
+        - id: url
+          type:
+            - string
+          description: |-
+            A Client string pointing to Azure Storage blob service, such as
+                                "https://myaccount.blob.core.windows.net". You can append a SAS
+                                if using AnonymousCredential, such as "https://myaccount.blob.core.windows.net?sasString".
+        - id: credential
+          type:
+            - >-
+              @azure/storage-blob.SharedKeyCredential |
+              @azure/storage-blob.AnonymousCredential | TokenCredential
+          description: >-
+            Such as AnonymousCredential, SharedKeyCredential,
+            RawTokenCredential,
+                                                             or a TokenCredential from @azure/identity. If not specified,
+                                                             AnonymousCredential is used.
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-blob.NewPipelineOptions'
+          description: ''
+          optional: true
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.constructor'
+    name: 'BlobClient(string, string, string, NewPipelineOptions)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Creates an instance of BlobClient from connection string.
+    syntax:
+      content: >-
+        new BlobClient(connectionString: string, containerName: string,
+        blobName: string, options?: NewPipelineOptions)
+      parameters:
+        - id: connectionString
+          type:
+            - string
+          description: >-
+            Account connection string or a SAS connection string of an Azure
+            storage account.
+                                             [ Note - Account connection string can only be used in NODE.JS runtime. ]
+                                             Account connection string example -
+                                             `DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=accountKey;EndpointSuffix=core.windows.net`
+                                             SAS connection string example -
+                                             `BlobEndpoint=https://myaccount.blob.core.windows.net/;QueueEndpoint=https://myaccount.queue.core.windows.net/;FileEndpoint=https://myaccount.file.core.windows.net/;TableEndpoint=https://myaccount.table.core.windows.net/;SharedAccessSignature=sasString`
+        - id: containerName
+          type:
+            - string
+          description: Container name.
+        - id: blobName
+          type:
+            - string
+          description: Blob name.
+        - id: options
+          type:
+            - '@azure/storage-blob.NewPipelineOptions'
+          description: ''
+          optional: true
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.createSnapshot'
+    name: createSnapshot(BlobCreateSnapshotOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates a read-only snapshot of a blob.
+    syntax:
+      content: 'function createSnapshot(options?: BlobCreateSnapshotOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobCreateSnapshotOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlobCreateSnapshotResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.delete'
+    name: delete(BlobDeleteOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Marks the specified blob or snapshot for deletion. The blob is later
+      deleted
+
+      during garbage collection. Note that in order to delete a blob, you must
+      delete
+
+      all of its snapshots. You can delete both at the same time with the Delete
+
+      Blob operation.
+    syntax:
+      content: 'function delete(options?: BlobDeleteOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobDeleteOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlobDeleteResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.download'
+    name: 'download(undefined | number, undefined | number, BlobDownloadOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Reads or downloads a blob from the system, including its metadata and
+      properties.
+
+      You can also call Get Blob to read a snapshot.
+
+      * In Node.js, data returns in a Readable stream readableStreamBody
+
+      * In browsers, data returns in a promise blobBody
+    syntax:
+      content: >-
+        function download(offset?: undefined | number, count?: undefined |
+        number, options?: BlobDownloadOptions)
+      parameters:
+        - id: offset
+          type:
+            - undefined | number
+          description: ''
+          optional: true
+        - id: count
+          type:
+            - undefined | number
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobDownloadOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlobDownloadResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.downloadToBuffer'
+    name: >-
+      downloadToBuffer(Buffer, number, undefined | number,
+      DownloadFromBlobOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      ONLY AVAILABLE IN NODE.JS RUNTIME.
+
+      Downloads an Azure Blob in parallel to a buffer.
+
+      Offset and count are optional, pass 0 for both to download the entire
+      blob.
+    syntax:
+      content: >-
+        function downloadToBuffer(buffer: Buffer, offset: number, count?:
+        undefined | number, options?: DownloadFromBlobOptions)
+      parameters:
+        - id: buffer
+          type:
+            - Buffer
+          description: 'Buffer to be fill, must have length larger than count'
+        - id: offset
+          type:
+            - number
+          description: From which position of the block blob to download
+        - id: count
+          type:
+            - undefined | number
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-blob.DownloadFromBlobOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<void>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.downloadToFile'
+    name: >-
+      downloadToFile(string, undefined | number, undefined | number,
+      BlobDownloadOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      ONLY AVAILABLE IN NODE.JS RUNTIME.
+
+      Downloads an Azure Blob to a local file.
+
+      Fails if the the given file path already exits.
+
+      Offset and count are optional, pass 0 and undefined respectively to
+      download the entire blob.
+    syntax:
+      content: >-
+        function downloadToFile(filePath: string, offset?: undefined | number,
+        count?: undefined | number, options?: BlobDownloadOptions)
+      parameters:
+        - id: filePath
+          type:
+            - string
+          description: ''
+        - id: offset
+          type:
+            - undefined | number
+          description: ''
+          optional: true
+        - id: count
+          type:
+            - undefined | number
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobDownloadOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlobDownloadResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.getAppendBlobClient'
+    name: getAppendBlobClient()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates a AppendBlobClient object.
+    syntax:
+      content: function getAppendBlobClient()
+      parameters: []
+      return:
+        type:
+          - '@azure/storage-blob.AppendBlobClient'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.getBlockBlobClient'
+    name: getBlockBlobClient()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates a BlockBlobClient object.
+    syntax:
+      content: function getBlockBlobClient()
+      parameters: []
+      return:
+        type:
+          - '@azure/storage-blob.BlockBlobClient'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.getLeaseClient'
+    name: getLeaseClient(undefined | string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Get a LeaseClient that manages leases on the blob.
+    syntax:
+      content: 'function getLeaseClient(proposeLeaseId?: undefined | string)'
+      parameters:
+        - id: proposeLeaseId
+          type:
+            - undefined | string
+          description: ''
+          optional: true
+      return:
+        type:
+          - '@azure/storage-blob.LeaseClient'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.getPageBlobClient'
+    name: getPageBlobClient()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates a PageBlobClient object.
+    syntax:
+      content: function getPageBlobClient()
+      parameters: []
+      return:
+        type:
+          - '@azure/storage-blob.PageBlobClient'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.getProperties'
+    name: getProperties(BlobGetPropertiesOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns all user-defined metadata, standard HTTP properties, and system
+      properties
+
+      for the blob. It does not return the content of the blob.
+    syntax:
+      content: 'function getProperties(options?: BlobGetPropertiesOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobGetPropertiesOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlobGetPropertiesResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.setHTTPHeaders'
+    name: 'setHTTPHeaders(Models.BlobHTTPHeaders, BlobSetHTTPHeadersOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Sets system properties on the blob.
+
+      If no value provided, or no value provided for the specificed blob HTTP
+      headers,
+
+      these blob HTTP headers without a value will be cleared.
+    syntax:
+      content: >-
+        function setHTTPHeaders(blobHTTPHeaders?: Models.BlobHTTPHeaders,
+        options?: BlobSetHTTPHeadersOptions)
+      parameters:
+        - id: blobHTTPHeaders
+          type:
+            - Models.BlobHTTPHeaders
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobSetHTTPHeadersOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlobSetHTTPHeadersResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.setMetadata'
+    name: 'setMetadata(Metadata, BlobSetMetadataOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Sets user-defined metadata for the specified blob as one or more
+      name-value pairs.
+
+      If no option provided, or no metadata defined in the parameter, the blob
+
+      metadata will be removed.
+    syntax:
+      content: >-
+        function setMetadata(metadata?: Metadata, options?:
+        BlobSetMetadataOptions)
+      parameters:
+        - id: metadata
+          type:
+            - '@azure/storage-blob.Metadata'
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobSetMetadataOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlobSetMetadataResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.setTier'
+    name: 'setTier(Models.AccessTier, BlobSetTierOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Sets the tier on a blob. The operation is allowed on a page blob in a
+      premium
+
+      storage account and on a block blob in a blob storage account (locally
+      redundant
+
+      storage only). A premium page blob's tier determines the allowed size,
+      IOPS,
+
+      and bandwidth of the blob. A block blob's tier determines Hot/Cool/Archive
+
+      storage type. This operation does not update the blob's ETag.
+    syntax:
+      content: 'function setTier(tier: Models.AccessTier, options?: BlobSetTierOptions)'
+      parameters:
+        - id: tier
+          type:
+            - Models.AccessTier
+          description: >-
+            The tier to be set on the blob. Valid values are Hot, Cool, or
+            Archive.
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobSetTierOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlobSetTierResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.startCopyFromURL'
+    name: 'startCopyFromURL(string, BlobStartCopyFromURLOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Copies a blob to a destination within the storage account.
+
+      In version 2012-02-12 and later, the source for a Copy Blob operation can
+      be
+
+      a committed blob in any Azure storage account.
+
+      Beginning with version 2015-02-21, the source for a Copy Blob operation
+      can be
+
+      an Azure file in any Azure storage account.
+
+      Only storage accounts created on or after June 7th, 2012 allow the Copy
+      Blob
+
+      operation to copy from another storage account.
+    syntax:
+      content: >-
+        function startCopyFromURL(copySource: string, options?:
+        BlobStartCopyFromURLOptions)
+      parameters:
+        - id: copySource
+          type:
+            - string
+          description: url to the ource Azure Blob/File.
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobStartCopyFromURLOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlobStartCopyFromURLResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.undelete'
+    name: undelete(BlobUndeleteOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Restores the contents and metadata of soft deleted blob and any associated
+
+      soft deleted snapshots. Undelete Blob is supported only on version
+      2017-07-29
+
+      or later.
+    syntax:
+      content: 'function undelete(options?: BlobUndeleteOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobUndeleteOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.BlobUndeleteResponse>
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.url'
+    name: url
+    fullName: url
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Encoded URL string value.
+    syntax:
+      content: 'url: string'
+      return:
+        type:
+          - string
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.withSnapshot'
+    name: withSnapshot(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates a new BlobClient object identical to the source but with the
+      specified snapshot timestamp.
+
+      Provide "" will remove the snapshot and return a Client to the base blob.
+    syntax:
+      content: 'function withSnapshot(snapshot: string)'
+      parameters:
+        - id: snapshot
+          type:
+            - string
+          description: The snapshot timestamp.
+      return:
+        type:
+          - '@azure/storage-blob.BlobClient'
+    package: '@azure/storage-blob'
+references:
+  - uid: '@azure/storage-blob.StorageClient'
+    name: StorageClient
+    spec.typeScript:
+      - name: StorageClient
+        fullName: StorageClient
+        uid: '@azure/storage-blob.StorageClient'
+  - uid: '@azure/storage-blob.NewPipelineOptions'
+    name: NewPipelineOptions
+    spec.typeScript:
+      - name: NewPipelineOptions
+        fullName: NewPipelineOptions
+        uid: '@azure/storage-blob.NewPipelineOptions'
+  - uid: >-
+      @azure/storage-blob.SharedKeyCredential |
+      @azure/storage-blob.AnonymousCredential | TokenCredential
+    name: AnonymousCredential | TokenCredential
+    spec.typeScript:
+      - name: SharedKeyCredential
+        fullName: SharedKeyCredential
+        uid: '@azure/storage-blob.SharedKeyCredential'
+      - name: ' | '
+        fullName: ' | '
+      - name: AnonymousCredential
+        fullName: AnonymousCredential
+        uid: '@azure/storage-blob.AnonymousCredential'
+      - name: ' | TokenCredential'
+        fullName: ' | TokenCredential'
+  - uid: '@azure/storage-blob.Pipeline'
+    name: Pipeline
+    spec.typeScript:
+      - name: Pipeline
+        fullName: Pipeline
+        uid: '@azure/storage-blob.Pipeline'
+  - uid: '@azure/storage-blob.BlobAbortCopyFromURLOptions'
+    name: BlobAbortCopyFromURLOptions
+    spec.typeScript:
+      - name: BlobAbortCopyFromURLOptions
+        fullName: BlobAbortCopyFromURLOptions
+        uid: '@azure/storage-blob.BlobAbortCopyFromURLOptions'
+  - uid: '@azure/storage-blob.BlobCreateSnapshotOptions'
+    name: BlobCreateSnapshotOptions
+    spec.typeScript:
+      - name: BlobCreateSnapshotOptions
+        fullName: BlobCreateSnapshotOptions
+        uid: '@azure/storage-blob.BlobCreateSnapshotOptions'
+  - uid: '@azure/storage-blob.BlobDeleteOptions'
+    name: BlobDeleteOptions
+    spec.typeScript:
+      - name: BlobDeleteOptions
+        fullName: BlobDeleteOptions
+        uid: '@azure/storage-blob.BlobDeleteOptions'
+  - uid: '@azure/storage-blob.BlobDownloadOptions'
+    name: BlobDownloadOptions
+    spec.typeScript:
+      - name: BlobDownloadOptions
+        fullName: BlobDownloadOptions
+        uid: '@azure/storage-blob.BlobDownloadOptions'
+  - uid: '@azure/storage-blob.DownloadFromBlobOptions'
+    name: DownloadFromBlobOptions
+    spec.typeScript:
+      - name: DownloadFromBlobOptions
+        fullName: DownloadFromBlobOptions
+        uid: '@azure/storage-blob.DownloadFromBlobOptions'
+  - uid: '@azure/storage-blob.AppendBlobClient'
+    name: AppendBlobClient
+    spec.typeScript:
+      - name: AppendBlobClient
+        fullName: AppendBlobClient
+        uid: '@azure/storage-blob.AppendBlobClient'
+  - uid: '@azure/storage-blob.BlockBlobClient'
+    name: BlockBlobClient
+    spec.typeScript:
+      - name: BlockBlobClient
+        fullName: BlockBlobClient
+        uid: '@azure/storage-blob.BlockBlobClient'
+  - uid: '@azure/storage-blob.LeaseClient'
+    name: LeaseClient
+    spec.typeScript:
+      - name: LeaseClient
+        fullName: LeaseClient
+        uid: '@azure/storage-blob.LeaseClient'
+  - uid: '@azure/storage-blob.PageBlobClient'
+    name: PageBlobClient
+    spec.typeScript:
+      - name: PageBlobClient
+        fullName: PageBlobClient
+        uid: '@azure/storage-blob.PageBlobClient'
+  - uid: '@azure/storage-blob.BlobGetPropertiesOptions'
+    name: BlobGetPropertiesOptions
+    spec.typeScript:
+      - name: BlobGetPropertiesOptions
+        fullName: BlobGetPropertiesOptions
+        uid: '@azure/storage-blob.BlobGetPropertiesOptions'
+  - uid: '@azure/storage-blob.BlobSetHTTPHeadersOptions'
+    name: BlobSetHTTPHeadersOptions
+    spec.typeScript:
+      - name: BlobSetHTTPHeadersOptions
+        fullName: BlobSetHTTPHeadersOptions
+        uid: '@azure/storage-blob.BlobSetHTTPHeadersOptions'
+  - uid: '@azure/storage-blob.Metadata'
+    name: Metadata
+    spec.typeScript:
+      - name: Metadata
+        fullName: Metadata
+        uid: '@azure/storage-blob.Metadata'
+  - uid: '@azure/storage-blob.BlobSetMetadataOptions'
+    name: BlobSetMetadataOptions
+    spec.typeScript:
+      - name: BlobSetMetadataOptions
+        fullName: BlobSetMetadataOptions
+        uid: '@azure/storage-blob.BlobSetMetadataOptions'
+  - uid: '@azure/storage-blob.BlobSetTierOptions'
+    name: BlobSetTierOptions
+    spec.typeScript:
+      - name: BlobSetTierOptions
+        fullName: BlobSetTierOptions
+        uid: '@azure/storage-blob.BlobSetTierOptions'
+  - uid: '@azure/storage-blob.BlobStartCopyFromURLOptions'
+    name: BlobStartCopyFromURLOptions
+    spec.typeScript:
+      - name: BlobStartCopyFromURLOptions
+        fullName: BlobStartCopyFromURLOptions
+        uid: '@azure/storage-blob.BlobStartCopyFromURLOptions'
+  - uid: '@azure/storage-blob.BlobUndeleteOptions'
+    name: BlobUndeleteOptions
+    spec.typeScript:
+      - name: BlobUndeleteOptions
+        fullName: BlobUndeleteOptions
+        uid: '@azure/storage-blob.BlobUndeleteOptions'
+  - uid: '@azure/storage-blob.BlobClient'
+    name: BlobClient
+    spec.typeScript:
+      - name: BlobClient
+        fullName: BlobClient
+        uid: '@azure/storage-blob.BlobClient'

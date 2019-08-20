@@ -1,22 +1,23 @@
 ---
-title: Azure Search modules for Node.js
-description: Reference for Azure Search modules for Node.js
+title: Azure Search resource management modules for Node.js
+description: Introduction to the Node.js resource management modules for Azure Search.
 author: HeidiSteen
+manager: nitinme
 ms.author: heidist
-manager: cgronlun
-ms.date: 07/18/2017
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+
+ms.date: 08/18/2019
+ms.topic: conceptual
 ms.devlang: nodejs
-ms.service: Search
+services: search
+ms.service: search
+
 ---
 
-# Azure Search modules for Node.js
+# Node.js resource management modules for Azure Search
 
-Azure Search is a cloud search-as-a-service solution that delegates server and infrastructure management to Microsoft, leaving you with a ready-to-use service that you can populate with your data and then use to add search to your application.
+Azure Search is a search-as-a-service cloud solution that gives developers APIs and tools for adding a rich search experience over private, heterogeneous content in web, mobile, and enterprise applications. This Node.js module provides resource management APIs for creating and updating a search service, managing access keys, and allocating replicas and partitionss. You cannot change tiers (SKU) or location with these APIs.
 
-Learn more about [Azure Search](https://docs.microsoft.com/azure/search/search-what-is-azure-search).
+For more information about the service and related features, see [Introduction to Azure Search](https://docs.microsoft.com/azure/search/search-what-is-azure-search), [Service administration for Azure Search](https://docs.microsoft.com/azure/search/search-manage), and [Quickstart: Create an Azure Search index in Node.js](https://docs.microsoft.com/azure/search/search-get-started-nodejs).
 
 ## Management package
 

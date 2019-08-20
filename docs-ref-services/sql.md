@@ -93,6 +93,6 @@ msRestAzure
 
 ## Samples
 
-[!INCLUDE [node-sql-samples](../docs-ref-conceptual/includes/sql-samples.md)]
+[!INCLUDE [node-sql-samples](includes/sql-samples.md)]
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

@@ -93,6 +93,6 @@ msRestAzure
 
 ## Samples
 
-[!INCLUDE [node-storage-samples](../docs-ref-conceptual/includes/storage-samples.md)]
+[!INCLUDE [node-storage-samples](includes/storage-samples.md)]
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

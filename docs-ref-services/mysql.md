@@ -52,6 +52,6 @@ connection.end();
 
 ## Samples
 
-[!INCLUDE [node-mysql-samples](../docs-ref-conceptual/includes/mysql-samples.md)]
+[!INCLUDE [node-mysql-samples](includes/mysql-samples.md)]
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

@@ -58,6 +58,6 @@ function createWebSite(webSiteName) {
 
 ## Samples
 
-[!INCLUDE [node-appservice-samples](../docs-ref-conceptual/includes/appservice-samples.md)]
+[!INCLUDE [node-appservice-samples](includes/appservice-samples.md)]
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

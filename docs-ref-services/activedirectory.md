@@ -62,6 +62,6 @@ context.acquireTokenWithClientCredentials(
 
 ## Samples
 
-[!INCLUDE [node-activedirectory-samples](../docs-ref-conceptual/includes/activedirectory-samples.md)]
+[!INCLUDE [node-activedirectory-samples](includes/activedirectory-samples.md)]
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

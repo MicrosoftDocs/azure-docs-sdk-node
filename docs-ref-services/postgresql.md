@@ -48,6 +48,6 @@ client.query(query, (err, res) => {
 
 ## Samples
 
-[!INCLUDE [node-postgresql-samples](../docs-ref-conceptual/includes/postgresql-samples.md)]
+[!INCLUDE [node-postgresql-samples](includes/postgresql-samples.md)]
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

@@ -1,6 +1,8 @@
 ## Azure for JavaScript & Node.js developers Documentation
 
-This repository contains the documentation for the "Azure for JavaScript & Node.js" development center, available at https://docs.microsoft.com/javascript/azure/
+This repository contains the reference documentation for the "Azure for JavaScript & Node.js" SDK.
+
+Conceptual documentation has been moved to https://github.com/microsoftdocs/azure-dev-docs - please contribute changes and file issues there.
 
 ### Legal Notices
 

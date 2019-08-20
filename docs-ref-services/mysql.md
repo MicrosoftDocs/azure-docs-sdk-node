@@ -52,6 +52,8 @@ connection.end();
 
 ## Samples
 
-[!INCLUDE [node-mysql-samples](includes/mysql-samples.md)]
+* [Create a connection to MySQL using Node.js](https://github.com/mysqljs/mysql/blob/master/Readme.md#establishing-connections)
+* [Perform queries using Node.js and MySQL](https://github.com/mysqljs/mysql/blob/master/Readme.md#performing-queries)
+* [MySQL transactions in Node.js](https://github.com/mysqljs/mysql/blob/master/Readme.md#transactions)
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

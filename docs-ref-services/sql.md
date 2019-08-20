@@ -93,6 +93,6 @@ msRestAzure
 
 ## Samples
 
-[!INCLUDE [node-sql-samples](includes/sql-samples.md)]
+- [Azure SQL Database: Use Node.js to connect and query data](https://docs.microsoft.com/azure/sql-database/sql-database-connect-query-nodejs)
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

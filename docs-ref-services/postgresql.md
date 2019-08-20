@@ -48,6 +48,8 @@ client.query(query, (err, res) => {
 
 ## Samples
 
-[!INCLUDE [node-postgresql-samples](includes/postgresql-samples.md)]
+| | |
+|--|--|
+| [Node.js code snippets using PostgreSQL](https://www.npmjs.com/package/pg) | Learn how to create a pool, execute a query, obtain an exclusive client, and more.
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

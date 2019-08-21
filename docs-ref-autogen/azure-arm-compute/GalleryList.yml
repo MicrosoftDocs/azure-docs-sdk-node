@@ -7,12 +7,20 @@ items:
       - azure-arm-compute.GalleryList.Array
       - azure-arm-compute.GalleryList.concat
       - azure-arm-compute.GalleryList.concat_1
+      - azure-arm-compute.GalleryList.copyWithin
+      - azure-arm-compute.GalleryList.entries
       - azure-arm-compute.GalleryList.every
-      - azure-arm-compute.GalleryList.filter_1
+      - azure-arm-compute.GalleryList.fill
       - azure-arm-compute.GalleryList.filter
+      - azure-arm-compute.GalleryList.filter_1
+      - azure-arm-compute.GalleryList.find
+      - azure-arm-compute.GalleryList.find_1
+      - azure-arm-compute.GalleryList.findIndex
       - azure-arm-compute.GalleryList.forEach
+      - azure-arm-compute.GalleryList.includes
       - azure-arm-compute.GalleryList.indexOf
       - azure-arm-compute.GalleryList.join
+      - azure-arm-compute.GalleryList.keys
       - azure-arm-compute.GalleryList.lastIndexOf
       - azure-arm-compute.GalleryList.length
       - azure-arm-compute.GalleryList.map
@@ -35,6 +43,7 @@ items:
       - azure-arm-compute.GalleryList.toLocaleString
       - azure-arm-compute.GalleryList.toString
       - azure-arm-compute.GalleryList.unshift
+      - azure-arm-compute.GalleryList.values
     langs:
       - typeScript
     type: interface
@@ -94,8 +103,63 @@ items:
         type:
           - 'azure-arm-compute.Gallery[]'
     package: azure-arm-compute
+  - uid: azure-arm-compute.GalleryList.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-compute
+  - uid: azure-arm-compute.GalleryList.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-compute
   - uid: azure-arm-compute.GalleryList.every
-    name: 'every((value: Gallery, index: number, array: Gallery[]) => boolean, any)'
+    name: 'every((value: Gallery, index: number, array: Gallery[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -104,11 +168,11 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: Gallery, index: number, array:
-        Gallery[]) => boolean, thisArg?: any)
+        Gallery[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Gallery, index: number, array: Gallery[]) => boolean'
+            - '(value: Gallery, index: number, array: Gallery[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -125,38 +189,43 @@ items:
         type:
           - boolean
     package: azure-arm-compute
-  - uid: azure-arm-compute.GalleryList.filter_1
-    name: 'filter((value: Gallery, index: number, array: Gallery[]) => any, any)'
+  - uid: azure-arm-compute.GalleryList.fill
+    name: 'fill(Gallery, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: Gallery, index: number, array:
-        Gallery[]) => any, thisArg?: any)
+      content: 'function fill(value: Gallery, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: Gallery, index: number, array: Gallery[]) => any'
+            - azure-arm-compute.Gallery
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-arm-compute.Gallery[]'
+          - this
     package: azure-arm-compute
   - uid: azure-arm-compute.GalleryList.filter
     name: 'filter((value: Gallery, index: number, array: Gallery[]) => boolean, any)'
@@ -191,6 +260,154 @@ items:
         type:
           - 'S[]'
     package: azure-arm-compute
+  - uid: azure-arm-compute.GalleryList.filter_1
+    name: 'filter((value: Gallery, index: number, array: Gallery[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: Gallery, index: number, array:
+        Gallery[]) => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - '(value: Gallery, index: number, array: Gallery[]) => unknown'
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-arm-compute.Gallery[]'
+    package: azure-arm-compute
+  - uid: azure-arm-compute.GalleryList.find
+    name: >-
+      find((this: void, value: Gallery, index: number, obj: Gallery[]) =>
+      boolean, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: Gallery, index: number,
+        obj: Gallery[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (this: void, value: Gallery, index: number, obj: Gallery[]) =>
+              boolean
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-compute
+  - uid: azure-arm-compute.GalleryList.find_1
+    name: 'find((value: Gallery, index: number, obj: Gallery[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: Gallery, index: number, obj: Gallery[])
+        => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Gallery, index: number, obj: Gallery[]) => unknown'
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-arm-compute.Gallery | undefined
+    package: azure-arm-compute
+  - uid: azure-arm-compute.GalleryList.findIndex
+    name: 'findIndex((value: Gallery, index: number, obj: Gallery[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: Gallery, index: number, obj:
+        Gallery[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Gallery, index: number, obj: Gallery[]) => unknown'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-compute
   - uid: azure-arm-compute.GalleryList.forEach
     name: 'forEach((value: Gallery, index: number, array: Gallery[]) => void, any)'
     children: []
@@ -217,6 +434,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-compute
+  - uid: azure-arm-compute.GalleryList.includes
+    name: 'includes(Gallery, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: Gallery, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-arm-compute.Gallery
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-compute
   - uid: azure-arm-compute.GalleryList.indexOf
     name: 'indexOf(Gallery, number)'
@@ -266,6 +510,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-compute
+  - uid: azure-arm-compute.GalleryList.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-compute
   - uid: azure-arm-compute.GalleryList.lastIndexOf
     name: 'lastIndexOf(Gallery, number)'
@@ -647,7 +905,7 @@ items:
           - 'azure-arm-compute.Gallery[]'
     package: azure-arm-compute
   - uid: azure-arm-compute.GalleryList.some
-    name: 'some((value: Gallery, index: number, array: Gallery[]) => boolean, any)'
+    name: 'some((value: Gallery, index: number, array: Gallery[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -658,11 +916,11 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: Gallery, index: number, array:
-        Gallery[]) => boolean, thisArg?: any)
+        Gallery[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Gallery, index: number, array: Gallery[]) => boolean'
+            - '(value: Gallery, index: number, array: Gallery[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -809,6 +1067,20 @@ items:
         type:
           - number
     package: azure-arm-compute
+  - uid: azure-arm-compute.GalleryList.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-arm-compute.Gallery>
+    package: azure-arm-compute
 references:
   - uid: Array<azure-arm-compute.Gallery>
     name: Gallery>
@@ -852,3 +1124,13 @@ references:
         uid: azure-arm-compute.Gallery
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-arm-compute.Gallery>
+    name: Gallery>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: Gallery
+        fullName: Gallery
+        uid: azure-arm-compute.Gallery
+      - name: '>'
+        fullName: '>'

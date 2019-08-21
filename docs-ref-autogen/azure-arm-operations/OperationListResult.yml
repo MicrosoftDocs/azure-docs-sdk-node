@@ -7,12 +7,20 @@ items:
       - azure-arm-operations.OperationListResult.Array
       - azure-arm-operations.OperationListResult.concat
       - azure-arm-operations.OperationListResult.concat_1
+      - azure-arm-operations.OperationListResult.copyWithin
+      - azure-arm-operations.OperationListResult.entries
       - azure-arm-operations.OperationListResult.every
-      - azure-arm-operations.OperationListResult.filter_1
+      - azure-arm-operations.OperationListResult.fill
       - azure-arm-operations.OperationListResult.filter
+      - azure-arm-operations.OperationListResult.filter_1
+      - azure-arm-operations.OperationListResult.find
+      - azure-arm-operations.OperationListResult.find_1
+      - azure-arm-operations.OperationListResult.findIndex
       - azure-arm-operations.OperationListResult.forEach
+      - azure-arm-operations.OperationListResult.includes
       - azure-arm-operations.OperationListResult.indexOf
       - azure-arm-operations.OperationListResult.join
+      - azure-arm-operations.OperationListResult.keys
       - azure-arm-operations.OperationListResult.lastIndexOf
       - azure-arm-operations.OperationListResult.length
       - azure-arm-operations.OperationListResult.map
@@ -34,6 +42,7 @@ items:
       - azure-arm-operations.OperationListResult.toLocaleString
       - azure-arm-operations.OperationListResult.toString
       - azure-arm-operations.OperationListResult.unshift
+      - azure-arm-operations.OperationListResult.values
     langs:
       - typeScript
     type: interface
@@ -93,9 +102,64 @@ items:
         type:
           - 'azure-arm-operations.Operation[]'
     package: azure-arm-operations
+  - uid: azure-arm-operations.OperationListResult.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-operations
+  - uid: azure-arm-operations.OperationListResult.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-operations
   - uid: azure-arm-operations.OperationListResult.every
     name: >-
-      every((value: Operation, index: number, array: Operation[]) => boolean,
+      every((value: Operation, index: number, array: Operation[]) => unknown,
       any)
     children: []
     type: method
@@ -105,11 +169,11 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: Operation, index: number, array:
-        Operation[]) => boolean, thisArg?: any)
+        Operation[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Operation, index: number, array: Operation[]) => boolean'
+            - '(value: Operation, index: number, array: Operation[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -126,38 +190,43 @@ items:
         type:
           - boolean
     package: azure-arm-operations
-  - uid: azure-arm-operations.OperationListResult.filter_1
-    name: 'filter((value: Operation, index: number, array: Operation[]) => any, any)'
+  - uid: azure-arm-operations.OperationListResult.fill
+    name: 'fill(Operation, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: Operation, index: number, array:
-        Operation[]) => any, thisArg?: any)
+      content: 'function fill(value: Operation, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: Operation, index: number, array: Operation[]) => any'
+            - azure-arm-operations.Operation
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-arm-operations.Operation[]'
+          - this
     package: azure-arm-operations
   - uid: azure-arm-operations.OperationListResult.filter
     name: >-
@@ -194,6 +263,158 @@ items:
         type:
           - 'S[]'
     package: azure-arm-operations
+  - uid: azure-arm-operations.OperationListResult.filter_1
+    name: >-
+      filter((value: Operation, index: number, array: Operation[]) => unknown,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: Operation, index: number, array:
+        Operation[]) => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - '(value: Operation, index: number, array: Operation[]) => unknown'
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-arm-operations.Operation[]'
+    package: azure-arm-operations
+  - uid: azure-arm-operations.OperationListResult.find
+    name: >-
+      find((this: void, value: Operation, index: number, obj: Operation[]) =>
+      boolean, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: Operation, index:
+        number, obj: Operation[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (this: void, value: Operation, index: number, obj: Operation[]) =>
+              boolean
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-operations
+  - uid: azure-arm-operations.OperationListResult.find_1
+    name: 'find((value: Operation, index: number, obj: Operation[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: Operation, index: number, obj:
+        Operation[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Operation, index: number, obj: Operation[]) => unknown'
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-arm-operations.Operation | undefined
+    package: azure-arm-operations
+  - uid: azure-arm-operations.OperationListResult.findIndex
+    name: >-
+      findIndex((value: Operation, index: number, obj: Operation[]) => unknown,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: Operation, index: number, obj:
+        Operation[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Operation, index: number, obj: Operation[]) => unknown'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-operations
   - uid: azure-arm-operations.OperationListResult.forEach
     name: >-
       forEach((value: Operation, index: number, array: Operation[]) => void,
@@ -222,6 +443,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-operations
+  - uid: azure-arm-operations.OperationListResult.includes
+    name: 'includes(Operation, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: Operation, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-arm-operations.Operation
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-operations
   - uid: azure-arm-operations.OperationListResult.indexOf
     name: 'indexOf(Operation, number)'
@@ -271,6 +519,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-operations
+  - uid: azure-arm-operations.OperationListResult.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-operations
   - uid: azure-arm-operations.OperationListResult.lastIndexOf
     name: 'lastIndexOf(Operation, number)'
@@ -637,7 +899,7 @@ items:
     package: azure-arm-operations
   - uid: azure-arm-operations.OperationListResult.some
     name: >-
-      some((value: Operation, index: number, array: Operation[]) => boolean,
+      some((value: Operation, index: number, array: Operation[]) => unknown,
       any)
     children: []
     type: method
@@ -649,11 +911,11 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: Operation, index: number, array:
-        Operation[]) => boolean, thisArg?: any)
+        Operation[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Operation, index: number, array: Operation[]) => boolean'
+            - '(value: Operation, index: number, array: Operation[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -800,6 +1062,20 @@ items:
         type:
           - number
     package: azure-arm-operations
+  - uid: azure-arm-operations.OperationListResult.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-arm-operations.Operation>
+    package: azure-arm-operations
 references:
   - uid: Array<azure-arm-operations.Operation>
     name: Operation>
@@ -843,3 +1119,13 @@ references:
         uid: azure-arm-operations.Operation
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-arm-operations.Operation>
+    name: Operation>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: Operation
+        fullName: Operation
+        uid: azure-arm-operations.Operation
+      - name: '>'
+        fullName: '>'

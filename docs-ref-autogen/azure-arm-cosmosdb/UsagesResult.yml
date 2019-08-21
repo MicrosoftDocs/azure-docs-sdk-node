@@ -7,12 +7,20 @@ items:
       - azure-arm-cosmosdb.UsagesResult.Array
       - azure-arm-cosmosdb.UsagesResult.concat
       - azure-arm-cosmosdb.UsagesResult.concat_1
+      - azure-arm-cosmosdb.UsagesResult.copyWithin
+      - azure-arm-cosmosdb.UsagesResult.entries
       - azure-arm-cosmosdb.UsagesResult.every
-      - azure-arm-cosmosdb.UsagesResult.filter_1
+      - azure-arm-cosmosdb.UsagesResult.fill
       - azure-arm-cosmosdb.UsagesResult.filter
+      - azure-arm-cosmosdb.UsagesResult.filter_1
+      - azure-arm-cosmosdb.UsagesResult.find
+      - azure-arm-cosmosdb.UsagesResult.find_1
+      - azure-arm-cosmosdb.UsagesResult.findIndex
       - azure-arm-cosmosdb.UsagesResult.forEach
+      - azure-arm-cosmosdb.UsagesResult.includes
       - azure-arm-cosmosdb.UsagesResult.indexOf
       - azure-arm-cosmosdb.UsagesResult.join
+      - azure-arm-cosmosdb.UsagesResult.keys
       - azure-arm-cosmosdb.UsagesResult.lastIndexOf
       - azure-arm-cosmosdb.UsagesResult.length
       - azure-arm-cosmosdb.UsagesResult.map
@@ -34,6 +42,7 @@ items:
       - azure-arm-cosmosdb.UsagesResult.toLocaleString
       - azure-arm-cosmosdb.UsagesResult.toString
       - azure-arm-cosmosdb.UsagesResult.unshift
+      - azure-arm-cosmosdb.UsagesResult.values
     langs:
       - typeScript
     type: interface
@@ -93,8 +102,63 @@ items:
         type:
           - 'azure-arm-cosmosdb.Usage[]'
     package: azure-arm-cosmosdb
+  - uid: azure-arm-cosmosdb.UsagesResult.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-cosmosdb
+  - uid: azure-arm-cosmosdb.UsagesResult.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-cosmosdb
   - uid: azure-arm-cosmosdb.UsagesResult.every
-    name: 'every((value: Usage, index: number, array: Usage[]) => boolean, any)'
+    name: 'every((value: Usage, index: number, array: Usage[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -103,11 +167,11 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: Usage, index: number, array: Usage[])
-        => boolean, thisArg?: any)
+        => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Usage, index: number, array: Usage[]) => boolean'
+            - '(value: Usage, index: number, array: Usage[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -124,38 +188,43 @@ items:
         type:
           - boolean
     package: azure-arm-cosmosdb
-  - uid: azure-arm-cosmosdb.UsagesResult.filter_1
-    name: 'filter((value: Usage, index: number, array: Usage[]) => any, any)'
+  - uid: azure-arm-cosmosdb.UsagesResult.fill
+    name: 'fill(Usage, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: Usage, index: number, array:
-        Usage[]) => any, thisArg?: any)
+      content: 'function fill(value: Usage, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: Usage, index: number, array: Usage[]) => any'
+            - azure-arm-cosmosdb.Usage
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-arm-cosmosdb.Usage[]'
+          - this
     package: azure-arm-cosmosdb
   - uid: azure-arm-cosmosdb.UsagesResult.filter
     name: 'filter((value: Usage, index: number, array: Usage[]) => boolean, any)'
@@ -190,6 +259,152 @@ items:
         type:
           - 'S[]'
     package: azure-arm-cosmosdb
+  - uid: azure-arm-cosmosdb.UsagesResult.filter_1
+    name: 'filter((value: Usage, index: number, array: Usage[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: Usage, index: number, array:
+        Usage[]) => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - '(value: Usage, index: number, array: Usage[]) => unknown'
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-arm-cosmosdb.Usage[]'
+    package: azure-arm-cosmosdb
+  - uid: azure-arm-cosmosdb.UsagesResult.find
+    name: >-
+      find((this: void, value: Usage, index: number, obj: Usage[]) => boolean,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: Usage, index: number,
+        obj: Usage[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(this: void, value: Usage, index: number, obj: Usage[]) => boolean'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-cosmosdb
+  - uid: azure-arm-cosmosdb.UsagesResult.find_1
+    name: 'find((value: Usage, index: number, obj: Usage[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: Usage, index: number, obj: Usage[]) =>
+        unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Usage, index: number, obj: Usage[]) => unknown'
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-arm-cosmosdb.Usage | undefined
+    package: azure-arm-cosmosdb
+  - uid: azure-arm-cosmosdb.UsagesResult.findIndex
+    name: 'findIndex((value: Usage, index: number, obj: Usage[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: Usage, index: number, obj:
+        Usage[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Usage, index: number, obj: Usage[]) => unknown'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-cosmosdb
   - uid: azure-arm-cosmosdb.UsagesResult.forEach
     name: 'forEach((value: Usage, index: number, array: Usage[]) => void, any)'
     children: []
@@ -216,6 +431,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-cosmosdb
+  - uid: azure-arm-cosmosdb.UsagesResult.includes
+    name: 'includes(Usage, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: Usage, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-arm-cosmosdb.Usage
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-cosmosdb
   - uid: azure-arm-cosmosdb.UsagesResult.indexOf
     name: 'indexOf(Usage, number)'
@@ -265,6 +507,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-cosmosdb
+  - uid: azure-arm-cosmosdb.UsagesResult.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-cosmosdb
   - uid: azure-arm-cosmosdb.UsagesResult.lastIndexOf
     name: 'lastIndexOf(Usage, number)'
@@ -626,7 +882,7 @@ items:
           - 'azure-arm-cosmosdb.Usage[]'
     package: azure-arm-cosmosdb
   - uid: azure-arm-cosmosdb.UsagesResult.some
-    name: 'some((value: Usage, index: number, array: Usage[]) => boolean, any)'
+    name: 'some((value: Usage, index: number, array: Usage[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -637,11 +893,11 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: Usage, index: number, array: Usage[])
-        => boolean, thisArg?: any)
+        => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Usage, index: number, array: Usage[]) => boolean'
+            - '(value: Usage, index: number, array: Usage[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -788,6 +1044,20 @@ items:
         type:
           - number
     package: azure-arm-cosmosdb
+  - uid: azure-arm-cosmosdb.UsagesResult.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-arm-cosmosdb.Usage>
+    package: azure-arm-cosmosdb
 references:
   - uid: Array<azure-arm-cosmosdb.Usage>
     name: Usage>
@@ -831,3 +1101,13 @@ references:
         uid: azure-arm-cosmosdb.Usage
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-arm-cosmosdb.Usage>
+    name: Usage>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: Usage
+        fullName: Usage
+        uid: azure-arm-cosmosdb.Usage
+      - name: '>'
+        fullName: '>'

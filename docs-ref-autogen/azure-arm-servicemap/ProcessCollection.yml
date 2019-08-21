@@ -7,12 +7,20 @@ items:
       - azure-arm-servicemap.ProcessCollection.Array
       - azure-arm-servicemap.ProcessCollection.concat
       - azure-arm-servicemap.ProcessCollection.concat_1
+      - azure-arm-servicemap.ProcessCollection.copyWithin
+      - azure-arm-servicemap.ProcessCollection.entries
       - azure-arm-servicemap.ProcessCollection.every
-      - azure-arm-servicemap.ProcessCollection.filter_1
+      - azure-arm-servicemap.ProcessCollection.fill
       - azure-arm-servicemap.ProcessCollection.filter
+      - azure-arm-servicemap.ProcessCollection.filter_1
+      - azure-arm-servicemap.ProcessCollection.find
+      - azure-arm-servicemap.ProcessCollection.find_1
+      - azure-arm-servicemap.ProcessCollection.findIndex
       - azure-arm-servicemap.ProcessCollection.forEach
+      - azure-arm-servicemap.ProcessCollection.includes
       - azure-arm-servicemap.ProcessCollection.indexOf
       - azure-arm-servicemap.ProcessCollection.join
+      - azure-arm-servicemap.ProcessCollection.keys
       - azure-arm-servicemap.ProcessCollection.lastIndexOf
       - azure-arm-servicemap.ProcessCollection.length
       - azure-arm-servicemap.ProcessCollection.map
@@ -35,6 +43,7 @@ items:
       - azure-arm-servicemap.ProcessCollection.toLocaleString
       - azure-arm-servicemap.ProcessCollection.toString
       - azure-arm-servicemap.ProcessCollection.unshift
+      - azure-arm-servicemap.ProcessCollection.values
     langs:
       - typeScript
     type: interface
@@ -94,8 +103,63 @@ items:
         type:
           - 'azure-arm-servicemap.Process[]'
     package: azure-arm-servicemap
+  - uid: azure-arm-servicemap.ProcessCollection.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-servicemap
+  - uid: azure-arm-servicemap.ProcessCollection.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-servicemap
   - uid: azure-arm-servicemap.ProcessCollection.every
-    name: 'every((value: Process, index: number, array: Process[]) => boolean, any)'
+    name: 'every((value: Process, index: number, array: Process[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -104,11 +168,11 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: Process, index: number, array:
-        Process[]) => boolean, thisArg?: any)
+        Process[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Process, index: number, array: Process[]) => boolean'
+            - '(value: Process, index: number, array: Process[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -125,38 +189,43 @@ items:
         type:
           - boolean
     package: azure-arm-servicemap
-  - uid: azure-arm-servicemap.ProcessCollection.filter_1
-    name: 'filter((value: Process, index: number, array: Process[]) => any, any)'
+  - uid: azure-arm-servicemap.ProcessCollection.fill
+    name: 'fill(Process, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: Process, index: number, array:
-        Process[]) => any, thisArg?: any)
+      content: 'function fill(value: Process, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: Process, index: number, array: Process[]) => any'
+            - azure-arm-servicemap.Process
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-arm-servicemap.Process[]'
+          - this
     package: azure-arm-servicemap
   - uid: azure-arm-servicemap.ProcessCollection.filter
     name: 'filter((value: Process, index: number, array: Process[]) => boolean, any)'
@@ -191,6 +260,154 @@ items:
         type:
           - 'S[]'
     package: azure-arm-servicemap
+  - uid: azure-arm-servicemap.ProcessCollection.filter_1
+    name: 'filter((value: Process, index: number, array: Process[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: Process, index: number, array:
+        Process[]) => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - '(value: Process, index: number, array: Process[]) => unknown'
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-arm-servicemap.Process[]'
+    package: azure-arm-servicemap
+  - uid: azure-arm-servicemap.ProcessCollection.find
+    name: >-
+      find((this: void, value: Process, index: number, obj: Process[]) =>
+      boolean, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: Process, index: number,
+        obj: Process[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (this: void, value: Process, index: number, obj: Process[]) =>
+              boolean
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-servicemap
+  - uid: azure-arm-servicemap.ProcessCollection.find_1
+    name: 'find((value: Process, index: number, obj: Process[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: Process, index: number, obj: Process[])
+        => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Process, index: number, obj: Process[]) => unknown'
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-arm-servicemap.Process | undefined
+    package: azure-arm-servicemap
+  - uid: azure-arm-servicemap.ProcessCollection.findIndex
+    name: 'findIndex((value: Process, index: number, obj: Process[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: Process, index: number, obj:
+        Process[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Process, index: number, obj: Process[]) => unknown'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-servicemap
   - uid: azure-arm-servicemap.ProcessCollection.forEach
     name: 'forEach((value: Process, index: number, array: Process[]) => void, any)'
     children: []
@@ -217,6 +434,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-servicemap
+  - uid: azure-arm-servicemap.ProcessCollection.includes
+    name: 'includes(Process, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: Process, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-arm-servicemap.Process
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-servicemap
   - uid: azure-arm-servicemap.ProcessCollection.indexOf
     name: 'indexOf(Process, number)'
@@ -266,6 +510,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-servicemap
+  - uid: azure-arm-servicemap.ProcessCollection.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-servicemap
   - uid: azure-arm-servicemap.ProcessCollection.lastIndexOf
     name: 'lastIndexOf(Process, number)'
@@ -643,7 +901,7 @@ items:
           - 'azure-arm-servicemap.Process[]'
     package: azure-arm-servicemap
   - uid: azure-arm-servicemap.ProcessCollection.some
-    name: 'some((value: Process, index: number, array: Process[]) => boolean, any)'
+    name: 'some((value: Process, index: number, array: Process[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -654,11 +912,11 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: Process, index: number, array:
-        Process[]) => boolean, thisArg?: any)
+        Process[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Process, index: number, array: Process[]) => boolean'
+            - '(value: Process, index: number, array: Process[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -805,6 +1063,20 @@ items:
         type:
           - number
     package: azure-arm-servicemap
+  - uid: azure-arm-servicemap.ProcessCollection.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-arm-servicemap.Process>
+    package: azure-arm-servicemap
 references:
   - uid: Array<azure-arm-servicemap.Process>
     name: Process>
@@ -848,3 +1120,13 @@ references:
         uid: azure-arm-servicemap.Process
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-arm-servicemap.Process>
+    name: Process>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: Process
+        fullName: Process
+        uid: azure-arm-servicemap.Process
+      - name: '>'
+        fullName: '>'

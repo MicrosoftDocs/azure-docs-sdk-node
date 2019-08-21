@@ -7,12 +7,20 @@ items:
       - azure-arm-resource.ResourceListResult.Array
       - azure-arm-resource.ResourceListResult.concat
       - azure-arm-resource.ResourceListResult.concat_1
+      - azure-arm-resource.ResourceListResult.copyWithin
+      - azure-arm-resource.ResourceListResult.entries
       - azure-arm-resource.ResourceListResult.every
-      - azure-arm-resource.ResourceListResult.filter_1
+      - azure-arm-resource.ResourceListResult.fill
       - azure-arm-resource.ResourceListResult.filter
+      - azure-arm-resource.ResourceListResult.filter_1
+      - azure-arm-resource.ResourceListResult.find
+      - azure-arm-resource.ResourceListResult.find_1
+      - azure-arm-resource.ResourceListResult.findIndex
       - azure-arm-resource.ResourceListResult.forEach
+      - azure-arm-resource.ResourceListResult.includes
       - azure-arm-resource.ResourceListResult.indexOf
       - azure-arm-resource.ResourceListResult.join
+      - azure-arm-resource.ResourceListResult.keys
       - azure-arm-resource.ResourceListResult.lastIndexOf
       - azure-arm-resource.ResourceListResult.length
       - azure-arm-resource.ResourceListResult.map
@@ -35,6 +43,7 @@ items:
       - azure-arm-resource.ResourceListResult.toLocaleString
       - azure-arm-resource.ResourceListResult.toString
       - azure-arm-resource.ResourceListResult.unshift
+      - azure-arm-resource.ResourceListResult.values
     langs:
       - typeScript
     type: interface
@@ -94,10 +103,65 @@ items:
         type:
           - 'azure-arm-resource.GenericResource[]'
     package: azure-arm-resource
+  - uid: azure-arm-resource.ResourceListResult.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-resource
+  - uid: azure-arm-resource.ResourceListResult.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-resource
   - uid: azure-arm-resource.ResourceListResult.every
     name: >-
       every((value: GenericResource, index: number, array: GenericResource[]) =>
-      boolean, any)
+      unknown, any)
     children: []
     type: method
     langs:
@@ -106,13 +170,13 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: GenericResource, index: number,
-        array: GenericResource[]) => boolean, thisArg?: any)
+        array: GenericResource[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
             - >-
               (value: GenericResource, index: number, array: GenericResource[])
-              => boolean
+              => unknown
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -129,42 +193,43 @@ items:
         type:
           - boolean
     package: azure-arm-resource
-  - uid: azure-arm-resource.ResourceListResult.filter_1
-    name: >-
-      filter((value: GenericResource, index: number, array: GenericResource[])
-      => any, any)
+  - uid: azure-arm-resource.ResourceListResult.fill
+    name: 'fill(GenericResource, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: GenericResource, index: number,
-        array: GenericResource[]) => any, thisArg?: any)
+      content: 'function fill(value: GenericResource, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - >-
-              (value: GenericResource, index: number, array: GenericResource[])
-              => any
+            - azure-arm-resource.GenericResource
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-arm-resource.GenericResource[]'
+          - this
     package: azure-arm-resource
   - uid: azure-arm-resource.ResourceListResult.filter
     name: >-
@@ -203,6 +268,166 @@ items:
         type:
           - 'S[]'
     package: azure-arm-resource
+  - uid: azure-arm-resource.ResourceListResult.filter_1
+    name: >-
+      filter((value: GenericResource, index: number, array: GenericResource[])
+      => unknown, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: GenericResource, index: number,
+        array: GenericResource[]) => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - >-
+              (value: GenericResource, index: number, array: GenericResource[])
+              => unknown
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-arm-resource.GenericResource[]'
+    package: azure-arm-resource
+  - uid: azure-arm-resource.ResourceListResult.find
+    name: >-
+      find((this: void, value: GenericResource, index: number, obj:
+      GenericResource[]) => boolean, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: GenericResource, index:
+        number, obj: GenericResource[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (this: void, value: GenericResource, index: number, obj:
+              GenericResource[]) => boolean
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-resource
+  - uid: azure-arm-resource.ResourceListResult.find_1
+    name: >-
+      find((value: GenericResource, index: number, obj: GenericResource[]) =>
+      unknown, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: GenericResource, index: number, obj:
+        GenericResource[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (value: GenericResource, index: number, obj: GenericResource[]) =>
+              unknown
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-arm-resource.GenericResource | undefined
+    package: azure-arm-resource
+  - uid: azure-arm-resource.ResourceListResult.findIndex
+    name: >-
+      findIndex((value: GenericResource, index: number, obj: GenericResource[])
+      => unknown, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: GenericResource, index: number,
+        obj: GenericResource[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (value: GenericResource, index: number, obj: GenericResource[]) =>
+              unknown
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-resource
   - uid: azure-arm-resource.ResourceListResult.forEach
     name: >-
       forEach((value: GenericResource, index: number, array: GenericResource[])
@@ -233,6 +458,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-resource
+  - uid: azure-arm-resource.ResourceListResult.includes
+    name: 'includes(GenericResource, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: GenericResource, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-arm-resource.GenericResource
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-resource
   - uid: azure-arm-resource.ResourceListResult.indexOf
     name: 'indexOf(GenericResource, number)'
@@ -282,6 +534,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-resource
+  - uid: azure-arm-resource.ResourceListResult.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-resource
   - uid: azure-arm-resource.ResourceListResult.lastIndexOf
     name: 'lastIndexOf(GenericResource, number)'
@@ -672,7 +938,7 @@ items:
   - uid: azure-arm-resource.ResourceListResult.some
     name: >-
       some((value: GenericResource, index: number, array: GenericResource[]) =>
-      boolean, any)
+      unknown, any)
     children: []
     type: method
     langs:
@@ -683,13 +949,13 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: GenericResource, index: number, array:
-        GenericResource[]) => boolean, thisArg?: any)
+        GenericResource[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
             - >-
               (value: GenericResource, index: number, array: GenericResource[])
-              => boolean
+              => unknown
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -840,6 +1106,20 @@ items:
         type:
           - number
     package: azure-arm-resource
+  - uid: azure-arm-resource.ResourceListResult.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-arm-resource.GenericResource>
+    package: azure-arm-resource
 references:
   - uid: Array<azure-arm-resource.GenericResource>
     name: GenericResource>
@@ -883,3 +1163,13 @@ references:
         uid: azure-arm-resource.GenericResource
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-arm-resource.GenericResource>
+    name: GenericResource>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: GenericResource
+        fullName: GenericResource
+        uid: azure-arm-resource.GenericResource
+      - name: '>'
+        fullName: '>'

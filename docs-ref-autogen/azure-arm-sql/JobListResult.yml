@@ -7,12 +7,20 @@ items:
       - azure-arm-sql.JobListResult.Array
       - azure-arm-sql.JobListResult.concat
       - azure-arm-sql.JobListResult.concat_1
+      - azure-arm-sql.JobListResult.copyWithin
+      - azure-arm-sql.JobListResult.entries
       - azure-arm-sql.JobListResult.every
-      - azure-arm-sql.JobListResult.filter_1
+      - azure-arm-sql.JobListResult.fill
       - azure-arm-sql.JobListResult.filter
+      - azure-arm-sql.JobListResult.filter_1
+      - azure-arm-sql.JobListResult.find
+      - azure-arm-sql.JobListResult.find_1
+      - azure-arm-sql.JobListResult.findIndex
       - azure-arm-sql.JobListResult.forEach
+      - azure-arm-sql.JobListResult.includes
       - azure-arm-sql.JobListResult.indexOf
       - azure-arm-sql.JobListResult.join
+      - azure-arm-sql.JobListResult.keys
       - azure-arm-sql.JobListResult.lastIndexOf
       - azure-arm-sql.JobListResult.length
       - azure-arm-sql.JobListResult.map
@@ -35,6 +43,7 @@ items:
       - azure-arm-sql.JobListResult.toLocaleString
       - azure-arm-sql.JobListResult.toString
       - azure-arm-sql.JobListResult.unshift
+      - azure-arm-sql.JobListResult.values
     langs:
       - typeScript
     type: interface
@@ -94,8 +103,63 @@ items:
         type:
           - 'azure-arm-sql.Job[]'
     package: azure-arm-sql
+  - uid: azure-arm-sql.JobListResult.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-sql
+  - uid: azure-arm-sql.JobListResult.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-sql
   - uid: azure-arm-sql.JobListResult.every
-    name: 'every((value: Job, index: number, array: Job[]) => boolean, any)'
+    name: 'every((value: Job, index: number, array: Job[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -104,11 +168,11 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: Job, index: number, array: Job[]) =>
-        boolean, thisArg?: any)
+        unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Job, index: number, array: Job[]) => boolean'
+            - '(value: Job, index: number, array: Job[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -125,38 +189,43 @@ items:
         type:
           - boolean
     package: azure-arm-sql
-  - uid: azure-arm-sql.JobListResult.filter_1
-    name: 'filter((value: Job, index: number, array: Job[]) => any, any)'
+  - uid: azure-arm-sql.JobListResult.fill
+    name: 'fill(Job, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: Job, index: number, array: Job[]) =>
-        any, thisArg?: any)
+      content: 'function fill(value: Job, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: Job, index: number, array: Job[]) => any'
+            - azure-arm-sql.Job
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-arm-sql.Job[]'
+          - this
     package: azure-arm-sql
   - uid: azure-arm-sql.JobListResult.filter
     name: 'filter((value: Job, index: number, array: Job[]) => boolean, any)'
@@ -191,6 +260,150 @@ items:
         type:
           - 'S[]'
     package: azure-arm-sql
+  - uid: azure-arm-sql.JobListResult.filter_1
+    name: 'filter((value: Job, index: number, array: Job[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: Job, index: number, array: Job[]) =>
+        unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - '(value: Job, index: number, array: Job[]) => unknown'
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-arm-sql.Job[]'
+    package: azure-arm-sql
+  - uid: azure-arm-sql.JobListResult.find
+    name: 'find((this: void, value: Job, index: number, obj: Job[]) => boolean, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: Job, index: number, obj:
+        Job[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(this: void, value: Job, index: number, obj: Job[]) => boolean'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-sql
+  - uid: azure-arm-sql.JobListResult.find_1
+    name: 'find((value: Job, index: number, obj: Job[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: Job, index: number, obj: Job[]) =>
+        unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Job, index: number, obj: Job[]) => unknown'
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-arm-sql.Job | undefined
+    package: azure-arm-sql
+  - uid: azure-arm-sql.JobListResult.findIndex
+    name: 'findIndex((value: Job, index: number, obj: Job[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: Job, index: number, obj: Job[]) =>
+        unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Job, index: number, obj: Job[]) => unknown'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-sql
   - uid: azure-arm-sql.JobListResult.forEach
     name: 'forEach((value: Job, index: number, array: Job[]) => void, any)'
     children: []
@@ -217,6 +430,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-sql
+  - uid: azure-arm-sql.JobListResult.includes
+    name: 'includes(Job, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: Job, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-arm-sql.Job
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-sql
   - uid: azure-arm-sql.JobListResult.indexOf
     name: 'indexOf(Job, number)'
@@ -266,6 +506,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-sql
+  - uid: azure-arm-sql.JobListResult.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-sql
   - uid: azure-arm-sql.JobListResult.lastIndexOf
     name: 'lastIndexOf(Job, number)'
@@ -641,7 +895,7 @@ items:
           - 'azure-arm-sql.Job[]'
     package: azure-arm-sql
   - uid: azure-arm-sql.JobListResult.some
-    name: 'some((value: Job, index: number, array: Job[]) => boolean, any)'
+    name: 'some((value: Job, index: number, array: Job[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -652,11 +906,11 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: Job, index: number, array: Job[]) =>
-        boolean, thisArg?: any)
+        unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Job, index: number, array: Job[]) => boolean'
+            - '(value: Job, index: number, array: Job[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -803,6 +1057,20 @@ items:
         type:
           - number
     package: azure-arm-sql
+  - uid: azure-arm-sql.JobListResult.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-arm-sql.Job>
+    package: azure-arm-sql
 references:
   - uid: Array<azure-arm-sql.Job>
     name: Job>
@@ -846,3 +1114,13 @@ references:
         uid: azure-arm-sql.Job
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-arm-sql.Job>
+    name: Job>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: Job
+        fullName: Job
+        uid: azure-arm-sql.Job
+      - name: '>'
+        fullName: '>'

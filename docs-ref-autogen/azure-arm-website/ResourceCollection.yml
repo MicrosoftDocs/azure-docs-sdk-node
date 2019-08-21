@@ -7,12 +7,20 @@ items:
       - azure-arm-website.ResourceCollection.Array
       - azure-arm-website.ResourceCollection.concat
       - azure-arm-website.ResourceCollection.concat_1
+      - azure-arm-website.ResourceCollection.copyWithin
+      - azure-arm-website.ResourceCollection.entries
       - azure-arm-website.ResourceCollection.every
-      - azure-arm-website.ResourceCollection.filter_1
+      - azure-arm-website.ResourceCollection.fill
       - azure-arm-website.ResourceCollection.filter
+      - azure-arm-website.ResourceCollection.filter_1
+      - azure-arm-website.ResourceCollection.find
+      - azure-arm-website.ResourceCollection.find_1
+      - azure-arm-website.ResourceCollection.findIndex
       - azure-arm-website.ResourceCollection.forEach
+      - azure-arm-website.ResourceCollection.includes
       - azure-arm-website.ResourceCollection.indexOf
       - azure-arm-website.ResourceCollection.join
+      - azure-arm-website.ResourceCollection.keys
       - azure-arm-website.ResourceCollection.lastIndexOf
       - azure-arm-website.ResourceCollection.length
       - azure-arm-website.ResourceCollection.map
@@ -35,6 +43,7 @@ items:
       - azure-arm-website.ResourceCollection.toLocaleString
       - azure-arm-website.ResourceCollection.toString
       - azure-arm-website.ResourceCollection.unshift
+      - azure-arm-website.ResourceCollection.values
     langs:
       - typeScript
     type: interface
@@ -94,8 +103,63 @@ items:
         type:
           - 'string[]'
     package: azure-arm-website
+  - uid: azure-arm-website.ResourceCollection.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-website
+  - uid: azure-arm-website.ResourceCollection.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-website
   - uid: azure-arm-website.ResourceCollection.every
-    name: 'every((value: string, index: number, array: string[]) => boolean, any)'
+    name: 'every((value: string, index: number, array: string[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -104,11 +168,11 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: string, index: number, array:
-        string[]) => boolean, thisArg?: any)
+        string[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: string, index: number, array: string[]) => boolean'
+            - '(value: string, index: number, array: string[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -125,38 +189,43 @@ items:
         type:
           - boolean
     package: azure-arm-website
-  - uid: azure-arm-website.ResourceCollection.filter_1
-    name: 'filter((value: string, index: number, array: string[]) => any, any)'
+  - uid: azure-arm-website.ResourceCollection.fill
+    name: 'fill(string, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: string, index: number, array:
-        string[]) => any, thisArg?: any)
+      content: 'function fill(value: string, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: string, index: number, array: string[]) => any'
+            - string
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'string[]'
+          - this
     package: azure-arm-website
   - uid: azure-arm-website.ResourceCollection.filter
     name: 'filter((value: string, index: number, array: string[]) => boolean, any)'
@@ -191,6 +260,154 @@ items:
         type:
           - 'S[]'
     package: azure-arm-website
+  - uid: azure-arm-website.ResourceCollection.filter_1
+    name: 'filter((value: string, index: number, array: string[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: string, index: number, array:
+        string[]) => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - '(value: string, index: number, array: string[]) => unknown'
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'string[]'
+    package: azure-arm-website
+  - uid: azure-arm-website.ResourceCollection.find
+    name: >-
+      find((this: void, value: string, index: number, obj: string[]) => boolean,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: string, index: number,
+        obj: string[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (this: void, value: string, index: number, obj: string[]) =>
+              boolean
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-website
+  - uid: azure-arm-website.ResourceCollection.find_1
+    name: 'find((value: string, index: number, obj: string[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: string, index: number, obj: string[])
+        => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: string, index: number, obj: string[]) => unknown'
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - string | undefined
+    package: azure-arm-website
+  - uid: azure-arm-website.ResourceCollection.findIndex
+    name: 'findIndex((value: string, index: number, obj: string[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: string, index: number, obj:
+        string[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: string, index: number, obj: string[]) => unknown'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-website
   - uid: azure-arm-website.ResourceCollection.forEach
     name: 'forEach((value: string, index: number, array: string[]) => void, any)'
     children: []
@@ -217,6 +434,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-website
+  - uid: azure-arm-website.ResourceCollection.includes
+    name: 'includes(string, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: string, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - string
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-website
   - uid: azure-arm-website.ResourceCollection.indexOf
     name: 'indexOf(string, number)'
@@ -266,6 +510,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-website
+  - uid: azure-arm-website.ResourceCollection.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-website
   - uid: azure-arm-website.ResourceCollection.lastIndexOf
     name: 'lastIndexOf(string, number)'
@@ -643,7 +901,7 @@ items:
           - 'string[]'
     package: azure-arm-website
   - uid: azure-arm-website.ResourceCollection.some
-    name: 'some((value: string, index: number, array: string[]) => boolean, any)'
+    name: 'some((value: string, index: number, array: string[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -654,11 +912,11 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: string, index: number, array:
-        string[]) => boolean, thisArg?: any)
+        string[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: string, index: number, array: string[]) => boolean'
+            - '(value: string, index: number, array: string[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -804,4 +1062,18 @@ items:
       return:
         type:
           - number
+    package: azure-arm-website
+  - uid: azure-arm-website.ResourceCollection.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<string>
     package: azure-arm-website

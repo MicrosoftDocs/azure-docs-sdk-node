@@ -7,12 +7,20 @@ items:
       - azure-arm-logic.WorkflowListResult.Array
       - azure-arm-logic.WorkflowListResult.concat
       - azure-arm-logic.WorkflowListResult.concat_1
+      - azure-arm-logic.WorkflowListResult.copyWithin
+      - azure-arm-logic.WorkflowListResult.entries
       - azure-arm-logic.WorkflowListResult.every
-      - azure-arm-logic.WorkflowListResult.filter_1
+      - azure-arm-logic.WorkflowListResult.fill
       - azure-arm-logic.WorkflowListResult.filter
+      - azure-arm-logic.WorkflowListResult.filter_1
+      - azure-arm-logic.WorkflowListResult.find
+      - azure-arm-logic.WorkflowListResult.find_1
+      - azure-arm-logic.WorkflowListResult.findIndex
       - azure-arm-logic.WorkflowListResult.forEach
+      - azure-arm-logic.WorkflowListResult.includes
       - azure-arm-logic.WorkflowListResult.indexOf
       - azure-arm-logic.WorkflowListResult.join
+      - azure-arm-logic.WorkflowListResult.keys
       - azure-arm-logic.WorkflowListResult.lastIndexOf
       - azure-arm-logic.WorkflowListResult.length
       - azure-arm-logic.WorkflowListResult.map
@@ -35,6 +43,7 @@ items:
       - azure-arm-logic.WorkflowListResult.toLocaleString
       - azure-arm-logic.WorkflowListResult.toString
       - azure-arm-logic.WorkflowListResult.unshift
+      - azure-arm-logic.WorkflowListResult.values
     langs:
       - typeScript
     type: interface
@@ -94,8 +103,63 @@ items:
         type:
           - 'azure-arm-logic.Workflow[]'
     package: azure-arm-logic
+  - uid: azure-arm-logic.WorkflowListResult.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-logic
+  - uid: azure-arm-logic.WorkflowListResult.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-logic
   - uid: azure-arm-logic.WorkflowListResult.every
-    name: 'every((value: Workflow, index: number, array: Workflow[]) => boolean, any)'
+    name: 'every((value: Workflow, index: number, array: Workflow[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -104,11 +168,11 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: Workflow, index: number, array:
-        Workflow[]) => boolean, thisArg?: any)
+        Workflow[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Workflow, index: number, array: Workflow[]) => boolean'
+            - '(value: Workflow, index: number, array: Workflow[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -125,38 +189,43 @@ items:
         type:
           - boolean
     package: azure-arm-logic
-  - uid: azure-arm-logic.WorkflowListResult.filter_1
-    name: 'filter((value: Workflow, index: number, array: Workflow[]) => any, any)'
+  - uid: azure-arm-logic.WorkflowListResult.fill
+    name: 'fill(Workflow, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: Workflow, index: number, array:
-        Workflow[]) => any, thisArg?: any)
+      content: 'function fill(value: Workflow, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: Workflow, index: number, array: Workflow[]) => any'
+            - azure-arm-logic.Workflow
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-arm-logic.Workflow[]'
+          - this
     package: azure-arm-logic
   - uid: azure-arm-logic.WorkflowListResult.filter
     name: >-
@@ -193,6 +262,158 @@ items:
         type:
           - 'S[]'
     package: azure-arm-logic
+  - uid: azure-arm-logic.WorkflowListResult.filter_1
+    name: >-
+      filter((value: Workflow, index: number, array: Workflow[]) => unknown,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: Workflow, index: number, array:
+        Workflow[]) => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - '(value: Workflow, index: number, array: Workflow[]) => unknown'
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-arm-logic.Workflow[]'
+    package: azure-arm-logic
+  - uid: azure-arm-logic.WorkflowListResult.find
+    name: >-
+      find((this: void, value: Workflow, index: number, obj: Workflow[]) =>
+      boolean, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: Workflow, index: number,
+        obj: Workflow[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (this: void, value: Workflow, index: number, obj: Workflow[]) =>
+              boolean
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-logic
+  - uid: azure-arm-logic.WorkflowListResult.find_1
+    name: 'find((value: Workflow, index: number, obj: Workflow[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: Workflow, index: number, obj:
+        Workflow[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Workflow, index: number, obj: Workflow[]) => unknown'
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-arm-logic.Workflow | undefined
+    package: azure-arm-logic
+  - uid: azure-arm-logic.WorkflowListResult.findIndex
+    name: >-
+      findIndex((value: Workflow, index: number, obj: Workflow[]) => unknown,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: Workflow, index: number, obj:
+        Workflow[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Workflow, index: number, obj: Workflow[]) => unknown'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-logic
   - uid: azure-arm-logic.WorkflowListResult.forEach
     name: 'forEach((value: Workflow, index: number, array: Workflow[]) => void, any)'
     children: []
@@ -219,6 +440,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-logic
+  - uid: azure-arm-logic.WorkflowListResult.includes
+    name: 'includes(Workflow, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: Workflow, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-arm-logic.Workflow
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-logic
   - uid: azure-arm-logic.WorkflowListResult.indexOf
     name: 'indexOf(Workflow, number)'
@@ -268,6 +516,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-logic
+  - uid: azure-arm-logic.WorkflowListResult.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-logic
   - uid: azure-arm-logic.WorkflowListResult.lastIndexOf
     name: 'lastIndexOf(Workflow, number)'
@@ -647,7 +909,7 @@ items:
           - 'azure-arm-logic.Workflow[]'
     package: azure-arm-logic
   - uid: azure-arm-logic.WorkflowListResult.some
-    name: 'some((value: Workflow, index: number, array: Workflow[]) => boolean, any)'
+    name: 'some((value: Workflow, index: number, array: Workflow[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -658,11 +920,11 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: Workflow, index: number, array:
-        Workflow[]) => boolean, thisArg?: any)
+        Workflow[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Workflow, index: number, array: Workflow[]) => boolean'
+            - '(value: Workflow, index: number, array: Workflow[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -809,6 +1071,20 @@ items:
         type:
           - number
     package: azure-arm-logic
+  - uid: azure-arm-logic.WorkflowListResult.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-arm-logic.Workflow>
+    package: azure-arm-logic
 references:
   - uid: Array<azure-arm-logic.Workflow>
     name: Workflow>
@@ -852,3 +1128,13 @@ references:
         uid: azure-arm-logic.Workflow
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-arm-logic.Workflow>
+    name: Workflow>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: Workflow
+        fullName: Workflow
+        uid: azure-arm-logic.Workflow
+      - name: '>'
+        fullName: '>'

@@ -7,12 +7,20 @@ items:
       - azure-graph.GroupListResult.Array
       - azure-graph.GroupListResult.concat
       - azure-graph.GroupListResult.concat_1
+      - azure-graph.GroupListResult.copyWithin
+      - azure-graph.GroupListResult.entries
       - azure-graph.GroupListResult.every
-      - azure-graph.GroupListResult.filter_1
+      - azure-graph.GroupListResult.fill
       - azure-graph.GroupListResult.filter
+      - azure-graph.GroupListResult.filter_1
+      - azure-graph.GroupListResult.find
+      - azure-graph.GroupListResult.find_1
+      - azure-graph.GroupListResult.findIndex
       - azure-graph.GroupListResult.forEach
+      - azure-graph.GroupListResult.includes
       - azure-graph.GroupListResult.indexOf
       - azure-graph.GroupListResult.join
+      - azure-graph.GroupListResult.keys
       - azure-graph.GroupListResult.lastIndexOf
       - azure-graph.GroupListResult.length
       - azure-graph.GroupListResult.map
@@ -35,6 +43,7 @@ items:
       - azure-graph.GroupListResult.toLocaleString
       - azure-graph.GroupListResult.toString
       - azure-graph.GroupListResult.unshift
+      - azure-graph.GroupListResult.values
     langs:
       - typeScript
     type: interface
@@ -94,8 +103,63 @@ items:
         type:
           - 'azure-graph.ADGroup[]'
     package: azure-graph
+  - uid: azure-graph.GroupListResult.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-graph
+  - uid: azure-graph.GroupListResult.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-graph
   - uid: azure-graph.GroupListResult.every
-    name: 'every((value: ADGroup, index: number, array: ADGroup[]) => boolean, any)'
+    name: 'every((value: ADGroup, index: number, array: ADGroup[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -104,11 +168,11 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: ADGroup, index: number, array:
-        ADGroup[]) => boolean, thisArg?: any)
+        ADGroup[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: ADGroup, index: number, array: ADGroup[]) => boolean'
+            - '(value: ADGroup, index: number, array: ADGroup[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -125,38 +189,43 @@ items:
         type:
           - boolean
     package: azure-graph
-  - uid: azure-graph.GroupListResult.filter_1
-    name: 'filter((value: ADGroup, index: number, array: ADGroup[]) => any, any)'
+  - uid: azure-graph.GroupListResult.fill
+    name: 'fill(ADGroup, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: ADGroup, index: number, array:
-        ADGroup[]) => any, thisArg?: any)
+      content: 'function fill(value: ADGroup, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: ADGroup, index: number, array: ADGroup[]) => any'
+            - azure-graph.ADGroup
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-graph.ADGroup[]'
+          - this
     package: azure-graph
   - uid: azure-graph.GroupListResult.filter
     name: 'filter((value: ADGroup, index: number, array: ADGroup[]) => boolean, any)'
@@ -191,6 +260,154 @@ items:
         type:
           - 'S[]'
     package: azure-graph
+  - uid: azure-graph.GroupListResult.filter_1
+    name: 'filter((value: ADGroup, index: number, array: ADGroup[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: ADGroup, index: number, array:
+        ADGroup[]) => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - '(value: ADGroup, index: number, array: ADGroup[]) => unknown'
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-graph.ADGroup[]'
+    package: azure-graph
+  - uid: azure-graph.GroupListResult.find
+    name: >-
+      find((this: void, value: ADGroup, index: number, obj: ADGroup[]) =>
+      boolean, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: ADGroup, index: number,
+        obj: ADGroup[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (this: void, value: ADGroup, index: number, obj: ADGroup[]) =>
+              boolean
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-graph
+  - uid: azure-graph.GroupListResult.find_1
+    name: 'find((value: ADGroup, index: number, obj: ADGroup[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: ADGroup, index: number, obj: ADGroup[])
+        => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: ADGroup, index: number, obj: ADGroup[]) => unknown'
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-graph.ADGroup | undefined
+    package: azure-graph
+  - uid: azure-graph.GroupListResult.findIndex
+    name: 'findIndex((value: ADGroup, index: number, obj: ADGroup[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: ADGroup, index: number, obj:
+        ADGroup[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: ADGroup, index: number, obj: ADGroup[]) => unknown'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-graph
   - uid: azure-graph.GroupListResult.forEach
     name: 'forEach((value: ADGroup, index: number, array: ADGroup[]) => void, any)'
     children: []
@@ -217,6 +434,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-graph
+  - uid: azure-graph.GroupListResult.includes
+    name: 'includes(ADGroup, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: ADGroup, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-graph.ADGroup
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-graph
   - uid: azure-graph.GroupListResult.indexOf
     name: 'indexOf(ADGroup, number)'
@@ -266,6 +510,20 @@ items:
       return:
         type:
           - string
+    package: azure-graph
+  - uid: azure-graph.GroupListResult.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-graph
   - uid: azure-graph.GroupListResult.lastIndexOf
     name: 'lastIndexOf(ADGroup, number)'
@@ -643,7 +901,7 @@ items:
           - 'azure-graph.ADGroup[]'
     package: azure-graph
   - uid: azure-graph.GroupListResult.some
-    name: 'some((value: ADGroup, index: number, array: ADGroup[]) => boolean, any)'
+    name: 'some((value: ADGroup, index: number, array: ADGroup[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -654,11 +912,11 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: ADGroup, index: number, array:
-        ADGroup[]) => boolean, thisArg?: any)
+        ADGroup[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: ADGroup, index: number, array: ADGroup[]) => boolean'
+            - '(value: ADGroup, index: number, array: ADGroup[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -805,6 +1063,20 @@ items:
         type:
           - number
     package: azure-graph
+  - uid: azure-graph.GroupListResult.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-graph.ADGroup>
+    package: azure-graph
 references:
   - uid: Array<azure-graph.ADGroup>
     name: ADGroup>
@@ -848,3 +1120,13 @@ references:
         uid: azure-graph.ADGroup
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-graph.ADGroup>
+    name: ADGroup>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: ADGroup
+        fullName: ADGroup
+        uid: azure-graph.ADGroup
+      - name: '>'
+        fullName: '>'

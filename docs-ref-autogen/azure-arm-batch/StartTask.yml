@@ -14,7 +14,20 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: >-
+      In some cases the start task may be re-run even though the node was not
+      rebooted.
+
+      Due to this, start tasks should be idempotent and exit gracefully if the
+      setup they're
+
+      performing has already been done. Special care should be taken to avoid
+      start tasks which create
+
+      breakaway process or install/launch services from the start task working
+      directory, as this will
+
+      block Batch from being able to re-run the start task.
     package: azure-arm-batch
   - uid: azure-arm-batch.StartTask.commandLine
     name: commandLine
@@ -173,7 +186,7 @@ items:
       task is still running; and even if the start task fails, new tasks will
       continue to be
 
-      scheduled on the node. The default is false.
+      scheduled on the node. The default is true.
     optional: true
     syntax:
       content: 'waitForSuccess?: boolean'

@@ -36,16 +36,16 @@ items:
       any corruption or duplicate data. The best practice for long running Tasks
       is to use some form
 
-      of checkpointing. In some cases the start Task may be re-run even though
-      the Compute Node was
+      of checkpointing. In some cases the StartTask may be re-run even though
+      the Compute Node was not
 
-      not rebooted. Special care should be taken to avoid start Tasks which
-      create breakaway process
+      rebooted. Special care should be taken to avoid StartTasks which create
+      breakaway process or
 
-      or install/launch services from the start Task working directory, as this
-      will block Batch from
+      install/launch services from the StartTask working directory, as this will
+      block Batch from
 
-      being able to re-run the start Task.
+      being able to re-run the StartTask.
     package: azure-batch
   - uid: azure-batch.StartTask.commandLine
     name: commandLine
@@ -195,28 +195,27 @@ items:
       - typeScript
     type: property
     summary: >-
-      If true and the start Task fails on a Node, the Batch service retries the
-      start
+      If true and the StartTask fails on a Node, the Batch service retries the
 
-      Task up to its maximum retry count (maxTaskRetryCount). If the Task has
-      still not completed
+      StartTask up to its maximum retry count (maxTaskRetryCount). If the Task
+      has still not
 
-      successfully after all retries, then the Batch service marks the Node
-      unusable, and will not
+      completed successfully after all retries, then the Batch service marks the
+      Node unusable, and
 
-      schedule Tasks to it. This condition can be detected via the Compute Node
-      state and failure
+      will not schedule Tasks to it. This condition can be detected via the
+      Compute Node state and
 
-      info details. If false, the Batch service will not wait for the start Task
-      to complete. In
+      failure info details. If false, the Batch service will not wait for the
+      StartTask to complete.
 
-      this case, other Tasks can start executing on the Compute Node while the
-      start Task is still
+      In this case, other Tasks can start executing on the Compute Node while
+      the StartTask is still
 
-      running; and even if the start Task fails, new Tasks will continue to be
+      running; and even if the StartTask fails, new Tasks will continue to be
       scheduled on the
 
-      Compute Node. The default is false.
+      Compute Node. The default is true.
     optional: true
     syntax:
       content: 'waitForSuccess?: boolean'

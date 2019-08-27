@@ -7,12 +7,20 @@ items:
       - azure-arm-servermanagement.NodeResources.Array
       - azure-arm-servermanagement.NodeResources.concat
       - azure-arm-servermanagement.NodeResources.concat_1
+      - azure-arm-servermanagement.NodeResources.copyWithin
+      - azure-arm-servermanagement.NodeResources.entries
       - azure-arm-servermanagement.NodeResources.every
-      - azure-arm-servermanagement.NodeResources.filter_1
+      - azure-arm-servermanagement.NodeResources.fill
       - azure-arm-servermanagement.NodeResources.filter
+      - azure-arm-servermanagement.NodeResources.filter_1
+      - azure-arm-servermanagement.NodeResources.find
+      - azure-arm-servermanagement.NodeResources.find_1
+      - azure-arm-servermanagement.NodeResources.findIndex
       - azure-arm-servermanagement.NodeResources.forEach
+      - azure-arm-servermanagement.NodeResources.includes
       - azure-arm-servermanagement.NodeResources.indexOf
       - azure-arm-servermanagement.NodeResources.join
+      - azure-arm-servermanagement.NodeResources.keys
       - azure-arm-servermanagement.NodeResources.lastIndexOf
       - azure-arm-servermanagement.NodeResources.length
       - azure-arm-servermanagement.NodeResources.map
@@ -35,6 +43,7 @@ items:
       - azure-arm-servermanagement.NodeResources.toLocaleString
       - azure-arm-servermanagement.NodeResources.toString
       - azure-arm-servermanagement.NodeResources.unshift
+      - azure-arm-servermanagement.NodeResources.values
     langs:
       - typeScript
     type: interface
@@ -94,10 +103,65 @@ items:
         type:
           - 'azure-arm-servermanagement.NodeResource[]'
     package: azure-arm-servermanagement
+  - uid: azure-arm-servermanagement.NodeResources.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-servermanagement
+  - uid: azure-arm-servermanagement.NodeResources.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-servermanagement
   - uid: azure-arm-servermanagement.NodeResources.every
     name: >-
       every((value: NodeResource, index: number, array: NodeResource[]) =>
-      boolean, any)
+      unknown, any)
     children: []
     type: method
     langs:
@@ -106,13 +170,13 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: NodeResource, index: number, array:
-        NodeResource[]) => boolean, thisArg?: any)
+        NodeResource[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
             - >-
               (value: NodeResource, index: number, array: NodeResource[]) =>
-              boolean
+              unknown
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -129,40 +193,43 @@ items:
         type:
           - boolean
     package: azure-arm-servermanagement
-  - uid: azure-arm-servermanagement.NodeResources.filter_1
-    name: >-
-      filter((value: NodeResource, index: number, array: NodeResource[]) => any,
-      any)
+  - uid: azure-arm-servermanagement.NodeResources.fill
+    name: 'fill(NodeResource, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: NodeResource, index: number, array:
-        NodeResource[]) => any, thisArg?: any)
+      content: 'function fill(value: NodeResource, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: NodeResource, index: number, array: NodeResource[]) => any'
+            - azure-arm-servermanagement.NodeResource
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-arm-servermanagement.NodeResource[]'
+          - this
     package: azure-arm-servermanagement
   - uid: azure-arm-servermanagement.NodeResources.filter
     name: >-
@@ -201,6 +268,166 @@ items:
         type:
           - 'S[]'
     package: azure-arm-servermanagement
+  - uid: azure-arm-servermanagement.NodeResources.filter_1
+    name: >-
+      filter((value: NodeResource, index: number, array: NodeResource[]) =>
+      unknown, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: NodeResource, index: number, array:
+        NodeResource[]) => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - >-
+              (value: NodeResource, index: number, array: NodeResource[]) =>
+              unknown
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-arm-servermanagement.NodeResource[]'
+    package: azure-arm-servermanagement
+  - uid: azure-arm-servermanagement.NodeResources.find
+    name: >-
+      find((this: void, value: NodeResource, index: number, obj: NodeResource[])
+      => boolean, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: NodeResource, index:
+        number, obj: NodeResource[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (this: void, value: NodeResource, index: number, obj:
+              NodeResource[]) => boolean
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-servermanagement
+  - uid: azure-arm-servermanagement.NodeResources.find_1
+    name: >-
+      find((value: NodeResource, index: number, obj: NodeResource[]) => unknown,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: NodeResource, index: number, obj:
+        NodeResource[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (value: NodeResource, index: number, obj: NodeResource[]) =>
+              unknown
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-arm-servermanagement.NodeResource | undefined
+    package: azure-arm-servermanagement
+  - uid: azure-arm-servermanagement.NodeResources.findIndex
+    name: >-
+      findIndex((value: NodeResource, index: number, obj: NodeResource[]) =>
+      unknown, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: NodeResource, index: number, obj:
+        NodeResource[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (value: NodeResource, index: number, obj: NodeResource[]) =>
+              unknown
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-servermanagement
   - uid: azure-arm-servermanagement.NodeResources.forEach
     name: >-
       forEach((value: NodeResource, index: number, array: NodeResource[]) =>
@@ -231,6 +458,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-servermanagement
+  - uid: azure-arm-servermanagement.NodeResources.includes
+    name: 'includes(NodeResource, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: NodeResource, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-arm-servermanagement.NodeResource
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-servermanagement
   - uid: azure-arm-servermanagement.NodeResources.indexOf
     name: 'indexOf(NodeResource, number)'
@@ -280,6 +534,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-servermanagement
+  - uid: azure-arm-servermanagement.NodeResources.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-servermanagement
   - uid: azure-arm-servermanagement.NodeResources.lastIndexOf
     name: 'lastIndexOf(NodeResource, number)'
@@ -665,7 +933,7 @@ items:
   - uid: azure-arm-servermanagement.NodeResources.some
     name: >-
       some((value: NodeResource, index: number, array: NodeResource[]) =>
-      boolean, any)
+      unknown, any)
     children: []
     type: method
     langs:
@@ -676,13 +944,13 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: NodeResource, index: number, array:
-        NodeResource[]) => boolean, thisArg?: any)
+        NodeResource[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
             - >-
               (value: NodeResource, index: number, array: NodeResource[]) =>
-              boolean
+              unknown
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -831,6 +1099,20 @@ items:
         type:
           - number
     package: azure-arm-servermanagement
+  - uid: azure-arm-servermanagement.NodeResources.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-arm-servermanagement.NodeResource>
+    package: azure-arm-servermanagement
 references:
   - uid: Array<azure-arm-servermanagement.NodeResource>
     name: NodeResource>
@@ -874,3 +1156,13 @@ references:
         uid: azure-arm-servermanagement.NodeResource
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-arm-servermanagement.NodeResource>
+    name: NodeResource>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: NodeResource
+        fullName: NodeResource
+        uid: azure-arm-servermanagement.NodeResource
+      - name: '>'
+        fullName: '>'

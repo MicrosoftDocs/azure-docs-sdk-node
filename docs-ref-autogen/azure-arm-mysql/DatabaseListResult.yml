@@ -7,12 +7,20 @@ items:
       - azure-arm-mysql.DatabaseListResult.Array
       - azure-arm-mysql.DatabaseListResult.concat
       - azure-arm-mysql.DatabaseListResult.concat_1
+      - azure-arm-mysql.DatabaseListResult.copyWithin
+      - azure-arm-mysql.DatabaseListResult.entries
       - azure-arm-mysql.DatabaseListResult.every
-      - azure-arm-mysql.DatabaseListResult.filter_1
+      - azure-arm-mysql.DatabaseListResult.fill
       - azure-arm-mysql.DatabaseListResult.filter
+      - azure-arm-mysql.DatabaseListResult.filter_1
+      - azure-arm-mysql.DatabaseListResult.find
+      - azure-arm-mysql.DatabaseListResult.find_1
+      - azure-arm-mysql.DatabaseListResult.findIndex
       - azure-arm-mysql.DatabaseListResult.forEach
+      - azure-arm-mysql.DatabaseListResult.includes
       - azure-arm-mysql.DatabaseListResult.indexOf
       - azure-arm-mysql.DatabaseListResult.join
+      - azure-arm-mysql.DatabaseListResult.keys
       - azure-arm-mysql.DatabaseListResult.lastIndexOf
       - azure-arm-mysql.DatabaseListResult.length
       - azure-arm-mysql.DatabaseListResult.map
@@ -34,6 +42,7 @@ items:
       - azure-arm-mysql.DatabaseListResult.toLocaleString
       - azure-arm-mysql.DatabaseListResult.toString
       - azure-arm-mysql.DatabaseListResult.unshift
+      - azure-arm-mysql.DatabaseListResult.values
     langs:
       - typeScript
     type: interface
@@ -93,8 +102,63 @@ items:
         type:
           - 'azure-arm-mysql.Database[]'
     package: azure-arm-mysql
+  - uid: azure-arm-mysql.DatabaseListResult.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-mysql
+  - uid: azure-arm-mysql.DatabaseListResult.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-mysql
   - uid: azure-arm-mysql.DatabaseListResult.every
-    name: 'every((value: Database, index: number, array: Database[]) => boolean, any)'
+    name: 'every((value: Database, index: number, array: Database[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -103,11 +167,11 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: Database, index: number, array:
-        Database[]) => boolean, thisArg?: any)
+        Database[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Database, index: number, array: Database[]) => boolean'
+            - '(value: Database, index: number, array: Database[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -124,38 +188,43 @@ items:
         type:
           - boolean
     package: azure-arm-mysql
-  - uid: azure-arm-mysql.DatabaseListResult.filter_1
-    name: 'filter((value: Database, index: number, array: Database[]) => any, any)'
+  - uid: azure-arm-mysql.DatabaseListResult.fill
+    name: 'fill(Database, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: Database, index: number, array:
-        Database[]) => any, thisArg?: any)
+      content: 'function fill(value: Database, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: Database, index: number, array: Database[]) => any'
+            - azure-arm-mysql.Database
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-arm-mysql.Database[]'
+          - this
     package: azure-arm-mysql
   - uid: azure-arm-mysql.DatabaseListResult.filter
     name: >-
@@ -192,6 +261,158 @@ items:
         type:
           - 'S[]'
     package: azure-arm-mysql
+  - uid: azure-arm-mysql.DatabaseListResult.filter_1
+    name: >-
+      filter((value: Database, index: number, array: Database[]) => unknown,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: Database, index: number, array:
+        Database[]) => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - '(value: Database, index: number, array: Database[]) => unknown'
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-arm-mysql.Database[]'
+    package: azure-arm-mysql
+  - uid: azure-arm-mysql.DatabaseListResult.find
+    name: >-
+      find((this: void, value: Database, index: number, obj: Database[]) =>
+      boolean, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: Database, index: number,
+        obj: Database[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (this: void, value: Database, index: number, obj: Database[]) =>
+              boolean
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-mysql
+  - uid: azure-arm-mysql.DatabaseListResult.find_1
+    name: 'find((value: Database, index: number, obj: Database[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: Database, index: number, obj:
+        Database[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Database, index: number, obj: Database[]) => unknown'
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-arm-mysql.Database | undefined
+    package: azure-arm-mysql
+  - uid: azure-arm-mysql.DatabaseListResult.findIndex
+    name: >-
+      findIndex((value: Database, index: number, obj: Database[]) => unknown,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: Database, index: number, obj:
+        Database[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Database, index: number, obj: Database[]) => unknown'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-mysql
   - uid: azure-arm-mysql.DatabaseListResult.forEach
     name: 'forEach((value: Database, index: number, array: Database[]) => void, any)'
     children: []
@@ -218,6 +439,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-mysql
+  - uid: azure-arm-mysql.DatabaseListResult.includes
+    name: 'includes(Database, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: Database, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-arm-mysql.Database
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-mysql
   - uid: azure-arm-mysql.DatabaseListResult.indexOf
     name: 'indexOf(Database, number)'
@@ -267,6 +515,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-mysql
+  - uid: azure-arm-mysql.DatabaseListResult.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-mysql
   - uid: azure-arm-mysql.DatabaseListResult.lastIndexOf
     name: 'lastIndexOf(Database, number)'
@@ -631,7 +893,7 @@ items:
           - 'azure-arm-mysql.Database[]'
     package: azure-arm-mysql
   - uid: azure-arm-mysql.DatabaseListResult.some
-    name: 'some((value: Database, index: number, array: Database[]) => boolean, any)'
+    name: 'some((value: Database, index: number, array: Database[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -642,11 +904,11 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: Database, index: number, array:
-        Database[]) => boolean, thisArg?: any)
+        Database[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Database, index: number, array: Database[]) => boolean'
+            - '(value: Database, index: number, array: Database[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -793,6 +1055,20 @@ items:
         type:
           - number
     package: azure-arm-mysql
+  - uid: azure-arm-mysql.DatabaseListResult.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-arm-mysql.Database>
+    package: azure-arm-mysql
 references:
   - uid: Array<azure-arm-mysql.Database>
     name: Database>
@@ -836,3 +1112,13 @@ references:
         uid: azure-arm-mysql.Database
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-arm-mysql.Database>
+    name: Database>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: Database
+        fullName: Database
+        uid: azure-arm-mysql.Database
+      - name: '>'
+        fullName: '>'

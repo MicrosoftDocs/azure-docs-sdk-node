@@ -21,6 +21,7 @@ items:
       - azure-arm-batch.Pool.lastModified
       - azure-arm-batch.Pool.maxTasksPerNode
       - azure-arm-batch.Pool.metadata
+      - azure-arm-batch.Pool.mountConfiguration
       - azure-arm-batch.Pool.name
       - azure-arm-batch.Pool.networkConfiguration
       - azure-arm-batch.Pool.provisioningState
@@ -99,13 +100,14 @@ items:
       - typeScript
     type: property
     summary: >-
-      Changes to application packages affect all new compute nodes joining the
-      pool,
+      Changes to application package references affect all new compute nodes
+      joining
 
-      but do not affect compute nodes that are already in the pool until they
-      are rebooted or
+      the pool, but do not affect compute nodes that are already in the pool
+      until they are rebooted
 
-      reimaged.
+      or reimaged. There is a maximum of 10 application package references on
+      any given pool.
     optional: true
     syntax:
       content: 'applicationPackages?: ApplicationPackageReference[]'
@@ -331,7 +333,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The default value is 1. The maximum value is the smaller of 4 times the
+      number of
+
+      cores of the vmSize of the pool or 256.
     optional: true
     syntax:
       content: 'maxTasksPerNode?: number'
@@ -357,6 +363,21 @@ items:
       return:
         type:
           - 'azure-arm-batch.MetadataItem[]'
+    package: azure-arm-batch
+  - uid: azure-arm-batch.Pool.mountConfiguration
+    name: mountConfiguration
+    fullName: mountConfiguration
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: 'This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.'
+    optional: true
+    syntax:
+      content: 'mountConfiguration?: MountConfiguration[]'
+      return:
+        type:
+          - 'azure-arm-batch.MountConfiguration[]'
     package: azure-arm-batch
   - uid: azure-arm-batch.Pool.name
     name: name
@@ -474,7 +495,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'If not specified, the default is spread.'
     optional: true
     syntax:
       content: 'taskSchedulingPolicy?: TaskSchedulingPolicy'
@@ -597,6 +618,14 @@ references:
       - name: MetadataItem
         fullName: MetadataItem
         uid: azure-arm-batch.MetadataItem
+      - name: '[]'
+        fullName: '[]'
+  - uid: 'azure-arm-batch.MountConfiguration[]'
+    name: 'MountConfiguration[]'
+    spec.typeScript:
+      - name: MountConfiguration
+        fullName: MountConfiguration
+        uid: azure-arm-batch.MountConfiguration
       - name: '[]'
         fullName: '[]'
   - uid: azure-arm-batch.NetworkConfiguration

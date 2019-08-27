@@ -5,9 +5,7 @@ author: mahilleb-msft
 ms.author: mahilleb
 manager: wolfma
 ms.date: 12/18/2018
-ms.topic: article
-ms.prod: azure
-ms.technology: azure
+ms.topic: reference
 ms.devlang: nodejs
 ms.service: cognitive-services
 ms.subservice: speech-service

@@ -7,12 +7,20 @@ items:
       - azure-arm-compute.DiskList.Array
       - azure-arm-compute.DiskList.concat
       - azure-arm-compute.DiskList.concat_1
+      - azure-arm-compute.DiskList.copyWithin
+      - azure-arm-compute.DiskList.entries
       - azure-arm-compute.DiskList.every
-      - azure-arm-compute.DiskList.filter_1
+      - azure-arm-compute.DiskList.fill
       - azure-arm-compute.DiskList.filter
+      - azure-arm-compute.DiskList.filter_1
+      - azure-arm-compute.DiskList.find
+      - azure-arm-compute.DiskList.find_1
+      - azure-arm-compute.DiskList.findIndex
       - azure-arm-compute.DiskList.forEach
+      - azure-arm-compute.DiskList.includes
       - azure-arm-compute.DiskList.indexOf
       - azure-arm-compute.DiskList.join
+      - azure-arm-compute.DiskList.keys
       - azure-arm-compute.DiskList.lastIndexOf
       - azure-arm-compute.DiskList.length
       - azure-arm-compute.DiskList.map
@@ -35,6 +43,7 @@ items:
       - azure-arm-compute.DiskList.toLocaleString
       - azure-arm-compute.DiskList.toString
       - azure-arm-compute.DiskList.unshift
+      - azure-arm-compute.DiskList.values
     langs:
       - typeScript
     type: interface
@@ -94,8 +103,63 @@ items:
         type:
           - 'azure-arm-compute.Disk[]'
     package: azure-arm-compute
+  - uid: azure-arm-compute.DiskList.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-compute
+  - uid: azure-arm-compute.DiskList.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-compute
   - uid: azure-arm-compute.DiskList.every
-    name: 'every((value: Disk, index: number, array: Disk[]) => boolean, any)'
+    name: 'every((value: Disk, index: number, array: Disk[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -104,11 +168,11 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: Disk, index: number, array: Disk[])
-        => boolean, thisArg?: any)
+        => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Disk, index: number, array: Disk[]) => boolean'
+            - '(value: Disk, index: number, array: Disk[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -125,38 +189,43 @@ items:
         type:
           - boolean
     package: azure-arm-compute
-  - uid: azure-arm-compute.DiskList.filter_1
-    name: 'filter((value: Disk, index: number, array: Disk[]) => any, any)'
+  - uid: azure-arm-compute.DiskList.fill
+    name: 'fill(Disk, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: Disk, index: number, array: Disk[])
-        => any, thisArg?: any)
+      content: 'function fill(value: Disk, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: Disk, index: number, array: Disk[]) => any'
+            - azure-arm-compute.Disk
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-arm-compute.Disk[]'
+          - this
     package: azure-arm-compute
   - uid: azure-arm-compute.DiskList.filter
     name: 'filter((value: Disk, index: number, array: Disk[]) => boolean, any)'
@@ -191,6 +260,152 @@ items:
         type:
           - 'S[]'
     package: azure-arm-compute
+  - uid: azure-arm-compute.DiskList.filter_1
+    name: 'filter((value: Disk, index: number, array: Disk[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: Disk, index: number, array: Disk[])
+        => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - '(value: Disk, index: number, array: Disk[]) => unknown'
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-arm-compute.Disk[]'
+    package: azure-arm-compute
+  - uid: azure-arm-compute.DiskList.find
+    name: >-
+      find((this: void, value: Disk, index: number, obj: Disk[]) => boolean,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: Disk, index: number,
+        obj: Disk[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(this: void, value: Disk, index: number, obj: Disk[]) => boolean'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-compute
+  - uid: azure-arm-compute.DiskList.find_1
+    name: 'find((value: Disk, index: number, obj: Disk[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: Disk, index: number, obj: Disk[]) =>
+        unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Disk, index: number, obj: Disk[]) => unknown'
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-arm-compute.Disk | undefined
+    package: azure-arm-compute
+  - uid: azure-arm-compute.DiskList.findIndex
+    name: 'findIndex((value: Disk, index: number, obj: Disk[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: Disk, index: number, obj: Disk[])
+        => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Disk, index: number, obj: Disk[]) => unknown'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-compute
   - uid: azure-arm-compute.DiskList.forEach
     name: 'forEach((value: Disk, index: number, array: Disk[]) => void, any)'
     children: []
@@ -217,6 +432,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-compute
+  - uid: azure-arm-compute.DiskList.includes
+    name: 'includes(Disk, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: Disk, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-arm-compute.Disk
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-compute
   - uid: azure-arm-compute.DiskList.indexOf
     name: 'indexOf(Disk, number)'
@@ -266,6 +508,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-compute
+  - uid: azure-arm-compute.DiskList.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-compute
   - uid: azure-arm-compute.DiskList.lastIndexOf
     name: 'lastIndexOf(Disk, number)'
@@ -645,7 +901,7 @@ items:
           - 'azure-arm-compute.Disk[]'
     package: azure-arm-compute
   - uid: azure-arm-compute.DiskList.some
-    name: 'some((value: Disk, index: number, array: Disk[]) => boolean, any)'
+    name: 'some((value: Disk, index: number, array: Disk[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -656,11 +912,11 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: Disk, index: number, array: Disk[]) =>
-        boolean, thisArg?: any)
+        unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Disk, index: number, array: Disk[]) => boolean'
+            - '(value: Disk, index: number, array: Disk[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -807,6 +1063,20 @@ items:
         type:
           - number
     package: azure-arm-compute
+  - uid: azure-arm-compute.DiskList.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-arm-compute.Disk>
+    package: azure-arm-compute
 references:
   - uid: Array<azure-arm-compute.Disk>
     name: Disk>
@@ -850,3 +1120,13 @@ references:
         uid: azure-arm-compute.Disk
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-arm-compute.Disk>
+    name: Disk>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: Disk
+        fullName: Disk
+        uid: azure-arm-compute.Disk
+      - name: '>'
+        fullName: '>'

@@ -7,12 +7,20 @@ items:
       - azure-arm-insights.IncidentListResult.Array
       - azure-arm-insights.IncidentListResult.concat
       - azure-arm-insights.IncidentListResult.concat_1
+      - azure-arm-insights.IncidentListResult.copyWithin
+      - azure-arm-insights.IncidentListResult.entries
       - azure-arm-insights.IncidentListResult.every
-      - azure-arm-insights.IncidentListResult.filter_1
+      - azure-arm-insights.IncidentListResult.fill
       - azure-arm-insights.IncidentListResult.filter
+      - azure-arm-insights.IncidentListResult.filter_1
+      - azure-arm-insights.IncidentListResult.find
+      - azure-arm-insights.IncidentListResult.find_1
+      - azure-arm-insights.IncidentListResult.findIndex
       - azure-arm-insights.IncidentListResult.forEach
+      - azure-arm-insights.IncidentListResult.includes
       - azure-arm-insights.IncidentListResult.indexOf
       - azure-arm-insights.IncidentListResult.join
+      - azure-arm-insights.IncidentListResult.keys
       - azure-arm-insights.IncidentListResult.lastIndexOf
       - azure-arm-insights.IncidentListResult.length
       - azure-arm-insights.IncidentListResult.map
@@ -35,6 +43,7 @@ items:
       - azure-arm-insights.IncidentListResult.toString
       - azure-arm-insights.IncidentListResult.unshift
       - azure-arm-insights.IncidentListResult.value
+      - azure-arm-insights.IncidentListResult.values
     langs:
       - typeScript
     type: interface
@@ -94,8 +103,63 @@ items:
         type:
           - 'azure-arm-insights.Incident[]'
     package: azure-arm-insights
+  - uid: azure-arm-insights.IncidentListResult.copyWithin
+    name: 'copyWithin(number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the this object after copying a section of the array identified by
+      start and end
+
+      to the same array starting at position target
+    syntax:
+      content: 'function copyWithin(target: number, start: number, end?: number)'
+      parameters:
+        - id: target
+          type:
+            - number
+          description: >-
+            If target is negative, it is treated as length+target where length
+            is the
+
+            length of the array.
+        - id: start
+          type:
+            - number
+          description: >-
+            If start is negative, it is treated as length+start. If end is
+            negative, it
+
+            is treated as length+end.
+        - id: end
+          type:
+            - number
+          description: >
+            If not specified, length of the this object is used as its default
+            value.
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-arm-insights
+  - uid: azure-arm-insights.IncidentListResult.entries
+    name: entries()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Returns an iterable of key, value pairs for every entry in the array'
+    syntax:
+      content: function entries()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<Object>
+    package: azure-arm-insights
   - uid: azure-arm-insights.IncidentListResult.every
-    name: 'every((value: Incident, index: number, array: Incident[]) => boolean, any)'
+    name: 'every((value: Incident, index: number, array: Incident[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -104,11 +168,11 @@ items:
     syntax:
       content: >-
         function every(callbackfn: (value: Incident, index: number, array:
-        Incident[]) => boolean, thisArg?: any)
+        Incident[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Incident, index: number, array: Incident[]) => boolean'
+            - '(value: Incident, index: number, array: Incident[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The every method
             calls the callbackfn function for each element in array1 until the
@@ -125,38 +189,43 @@ items:
         type:
           - boolean
     package: azure-arm-insights
-  - uid: azure-arm-insights.IncidentListResult.filter_1
-    name: 'filter((value: Incident, index: number, array: Incident[]) => any, any)'
+  - uid: azure-arm-insights.IncidentListResult.fill
+    name: 'fill(Incident, number, number)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Returns the elements of an array that meet the condition specified in a
-      callback function.
+      Returns the this object after filling the section identified by start and
+      end with value
     syntax:
-      content: >-
-        function filter(callbackfn: (value: Incident, index: number, array:
-        Incident[]) => any, thisArg?: any)
+      content: 'function fill(value: Incident, start?: number, end?: number)'
       parameters:
-        - id: callbackfn
+        - id: value
           type:
-            - '(value: Incident, index: number, array: Incident[]) => any'
+            - azure-arm-insights.Incident
+          description: value to fill array section with
+        - id: start
+          type:
+            - number
           description: >-
-            A function that accepts up to three arguments. The filter method
-            calls the callbackfn function one time for each element in the
-            array.
-        - id: thisArg
+            index to start filling the array at. If start is negative, it is
+            treated as
+
+            length+start where length is the length of the array.
+          optional: true
+        - id: end
           type:
-            - any
+            - number
           description: >
-            An object to which the this keyword can refer in the callbackfn
-            function. If thisArg is omitted, undefined is used as the this
-            value.
+            index to stop filling the array at. If end is negative, it is
+            treated as
+
+            length+end.
           optional: true
       return:
         type:
-          - 'azure-arm-insights.Incident[]'
+          - this
     package: azure-arm-insights
   - uid: azure-arm-insights.IncidentListResult.filter
     name: >-
@@ -193,6 +262,158 @@ items:
         type:
           - 'S[]'
     package: azure-arm-insights
+  - uid: azure-arm-insights.IncidentListResult.filter_1
+    name: >-
+      filter((value: Incident, index: number, array: Incident[]) => unknown,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the elements of an array that meet the condition specified in a
+      callback function.
+    syntax:
+      content: >-
+        function filter(callbackfn: (value: Incident, index: number, array:
+        Incident[]) => unknown, thisArg?: any)
+      parameters:
+        - id: callbackfn
+          type:
+            - '(value: Incident, index: number, array: Incident[]) => unknown'
+          description: >-
+            A function that accepts up to three arguments. The filter method
+            calls the callbackfn function one time for each element in the
+            array.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            An object to which the this keyword can refer in the callbackfn
+            function. If thisArg is omitted, undefined is used as the this
+            value.
+          optional: true
+      return:
+        type:
+          - 'azure-arm-insights.Incident[]'
+    package: azure-arm-insights
+  - uid: azure-arm-insights.IncidentListResult.find
+    name: >-
+      find((this: void, value: Incident, index: number, obj: Incident[]) =>
+      boolean, any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find<S>(predicate: (this: void, value: Incident, index: number,
+        obj: Incident[]) => boolean, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - >-
+              (this: void, value: Incident, index: number, obj: Incident[]) =>
+              boolean
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found, find
+
+            immediately returns that element value. Otherwise, find returns
+            undefined.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - S | undefined
+    package: azure-arm-insights
+  - uid: azure-arm-insights.IncidentListResult.find_1
+    name: 'find((value: Incident, index: number, obj: Incident[]) => unknown, any)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the value of the first element in the array where predicate is
+      true, and undefined
+
+      otherwise.
+    syntax:
+      content: >-
+        function find(predicate: (value: Incident, index: number, obj:
+        Incident[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Incident, index: number, obj: Incident[]) => unknown'
+          description: ''
+        - id: thisArg
+          type:
+            - any
+          description: ''
+          optional: true
+      return:
+        type:
+          - azure-arm-insights.Incident | undefined
+    package: azure-arm-insights
+  - uid: azure-arm-insights.IncidentListResult.findIndex
+    name: >-
+      findIndex((value: Incident, index: number, obj: Incident[]) => unknown,
+      any)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the index of the first element in the array where predicate is
+      true, and -1
+
+      otherwise.
+    syntax:
+      content: >-
+        function findIndex(predicate: (value: Incident, index: number, obj:
+        Incident[]) => unknown, thisArg?: any)
+      parameters:
+        - id: predicate
+          type:
+            - '(value: Incident, index: number, obj: Incident[]) => unknown'
+          description: >-
+            find calls predicate once for each element of the array, in
+            ascending
+
+            order, until it finds one where predicate returns true. If such an
+            element is found,
+
+            findIndex immediately returns that element index. Otherwise,
+            findIndex returns -1.
+        - id: thisArg
+          type:
+            - any
+          description: >
+            If provided, it will be used as the this value for each invocation
+            of
+
+            predicate. If it is not provided, undefined is used instead.
+          optional: true
+      return:
+        type:
+          - number
+    package: azure-arm-insights
   - uid: azure-arm-insights.IncidentListResult.forEach
     name: 'forEach((value: Incident, index: number, array: Incident[]) => void, any)'
     children: []
@@ -219,6 +440,33 @@ items:
             function. If thisArg is omitted, undefined is used as the this
             value.
           optional: true
+    package: azure-arm-insights
+  - uid: azure-arm-insights.IncidentListResult.includes
+    name: 'includes(Incident, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Determines whether an array includes a certain element, returning true or
+      false as appropriate.
+    syntax:
+      content: 'function includes(searchElement: Incident, fromIndex?: number)'
+      parameters:
+        - id: searchElement
+          type:
+            - azure-arm-insights.Incident
+          description: The element to search for.
+        - id: fromIndex
+          type:
+            - number
+          description: >
+            The position in this array at which to begin searching for
+            searchElement.
+          optional: true
+      return:
+        type:
+          - boolean
     package: azure-arm-insights
   - uid: azure-arm-insights.IncidentListResult.indexOf
     name: 'indexOf(Incident, number)'
@@ -268,6 +516,20 @@ items:
       return:
         type:
           - string
+    package: azure-arm-insights
+  - uid: azure-arm-insights.IncidentListResult.keys
+    name: keys()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of keys in the array
+    syntax:
+      content: function keys()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<number>
     package: azure-arm-insights
   - uid: azure-arm-insights.IncidentListResult.lastIndexOf
     name: 'lastIndexOf(Incident, number)'
@@ -632,7 +894,7 @@ items:
           - 'azure-arm-insights.Incident[]'
     package: azure-arm-insights
   - uid: azure-arm-insights.IncidentListResult.some
-    name: 'some((value: Incident, index: number, array: Incident[]) => boolean, any)'
+    name: 'some((value: Incident, index: number, array: Incident[]) => unknown, any)'
     children: []
     type: method
     langs:
@@ -643,11 +905,11 @@ items:
     syntax:
       content: >-
         function some(callbackfn: (value: Incident, index: number, array:
-        Incident[]) => boolean, thisArg?: any)
+        Incident[]) => unknown, thisArg?: any)
       parameters:
         - id: callbackfn
           type:
-            - '(value: Incident, index: number, array: Incident[]) => boolean'
+            - '(value: Incident, index: number, array: Incident[]) => unknown'
           description: >-
             A function that accepts up to three arguments. The some method calls
             the callbackfn function for each element in array1 until the
@@ -809,6 +1071,20 @@ items:
         type:
           - 'azure-arm-insights.Incident[]'
     package: azure-arm-insights
+  - uid: azure-arm-insights.IncidentListResult.values
+    name: values()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Returns an iterable of values in the array
+    syntax:
+      content: function values()
+      parameters: []
+      return:
+        type:
+          - IterableIterator<azure-arm-insights.Incident>
+    package: azure-arm-insights
 references:
   - uid: Array<azure-arm-insights.Incident>
     name: Incident>
@@ -852,3 +1128,13 @@ references:
         uid: azure-arm-insights.Incident
       - name: ' | undefined'
         fullName: ' | undefined'
+  - uid: IterableIterator<azure-arm-insights.Incident>
+    name: Incident>
+    spec.typeScript:
+      - name: IterableIterator<
+        fullName: IterableIterator<
+      - name: Incident
+        fullName: Incident
+        uid: azure-arm-insights.Incident
+      - name: '>'
+        fullName: '>'

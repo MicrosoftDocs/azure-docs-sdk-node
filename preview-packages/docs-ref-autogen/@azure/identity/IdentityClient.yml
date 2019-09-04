@@ -4,13 +4,14 @@ items:
     name: IdentityClient
     fullName: IdentityClient
     children:
-      - '@azure/identity.IdentityClient.authenticateClientCertificate'
-      - '@azure/identity.IdentityClient.authenticateClientSecret'
-      - '@azure/identity.IdentityClient.authenticateManagedIdentity'
+      - '@azure/identity.IdentityClient.authorityHost'
+      - '@azure/identity.IdentityClient.createWebResource'
       - '@azure/identity.IdentityClient.getDefaultOptions'
       - '@azure/identity.IdentityClient.constructor'
+      - '@azure/identity.IdentityClient.refreshAccessToken'
       - '@azure/identity.IdentityClient.sendOperationRequest'
       - '@azure/identity.IdentityClient.sendRequest'
+      - '@azure/identity.IdentityClient.sendTokenRequest'
     langs:
       - typeScript
     type: class
@@ -18,126 +19,37 @@ items:
     extends:
       name: ServiceClient
     package: '@azure/identity'
-  - uid: '@azure/identity.IdentityClient.authenticateClientCertificate'
-    name: >-
-      authenticateClientCertificate(string, string, string, string, string |
-      string[], GetTokenOptions)
+  - uid: '@azure/identity.IdentityClient.authorityHost'
+    name: authorityHost
+    fullName: authorityHost
     children: []
-    type: method
     langs:
       - typeScript
+    type: property
     summary: ''
     syntax:
-      content: >-
-        function authenticateClientCertificate(tenantId: string, clientId:
-        string, certificateString: string, certificateX5t: string, scopes:
-        string | string[], getTokenOptions?: GetTokenOptions)
-      parameters:
-        - id: tenantId
-          type:
-            - string
-          description: ''
-        - id: clientId
-          type:
-            - string
-          description: ''
-        - id: certificateString
-          type:
-            - string
-          description: ''
-        - id: certificateX5t
-          type:
-            - string
-          description: ''
-        - id: scopes
-          type:
-            - 'string | string[]'
-          description: ''
-        - id: getTokenOptions
-          type:
-            - GetTokenOptions
-          description: ''
-          optional: true
+      content: 'authorityHost: string'
       return:
         type:
-          - Promise<AccessToken | null>
+          - string
     package: '@azure/identity'
-  - uid: '@azure/identity.IdentityClient.authenticateClientSecret'
-    name: >-
-      authenticateClientSecret(string, string, string, string | string[],
-      GetTokenOptions)
+  - uid: '@azure/identity.IdentityClient.createWebResource'
+    name: createWebResource(RequestPrepareOptions)
     children: []
     type: method
     langs:
       - typeScript
     summary: ''
     syntax:
-      content: >-
-        function authenticateClientSecret(tenantId: string, clientId: string,
-        clientSecret: string, scopes: string | string[], getTokenOptions?:
-        GetTokenOptions)
+      content: 'function createWebResource(requestOptions: RequestPrepareOptions)'
       parameters:
-        - id: tenantId
+        - id: requestOptions
           type:
-            - string
+            - RequestPrepareOptions
           description: ''
-        - id: clientId
-          type:
-            - string
-          description: ''
-        - id: clientSecret
-          type:
-            - string
-          description: ''
-        - id: scopes
-          type:
-            - 'string | string[]'
-          description: ''
-        - id: getTokenOptions
-          type:
-            - GetTokenOptions
-          description: ''
-          optional: true
       return:
         type:
-          - Promise<AccessToken | null>
-    package: '@azure/identity'
-  - uid: '@azure/identity.IdentityClient.authenticateManagedIdentity'
-    name: >-
-      authenticateManagedIdentity(string | string[], boolean, string,
-      GetTokenOptions)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        function authenticateManagedIdentity(scopes: string | string[],
-        checkIfImdsEndpointAvailable: boolean, clientId?: string,
-        getTokenOptions?: GetTokenOptions)
-      parameters:
-        - id: scopes
-          type:
-            - 'string | string[]'
-          description: ''
-        - id: checkIfImdsEndpointAvailable
-          type:
-            - boolean
-          description: ''
-        - id: clientId
-          type:
-            - string
-          description: ''
-          optional: true
-        - id: getTokenOptions
-          type:
-            - GetTokenOptions
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<AccessToken | null>
+          - WebResource
     package: '@azure/identity'
   - uid: '@azure/identity.IdentityClient.getDefaultOptions'
     name: getDefaultOptions()
@@ -168,6 +80,56 @@ items:
             - '@azure/identity.IdentityClientOptions'
           description: ''
           optional: true
+    package: '@azure/identity'
+  - uid: '@azure/identity.IdentityClient.refreshAccessToken'
+    name: >-
+      refreshAccessToken(string, string, string, string | undefined, string |
+      undefined, (responseBody: any) => number, GetTokenOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function refreshAccessToken(tenantId: string, clientId: string, scopes:
+        string, refreshToken: string | undefined, clientSecret: string |
+        undefined, expiresOnParser?: (responseBody: any) => number, options?:
+        GetTokenOptions)
+      parameters:
+        - id: tenantId
+          type:
+            - string
+          description: ''
+        - id: clientId
+          type:
+            - string
+          description: ''
+        - id: scopes
+          type:
+            - string
+          description: ''
+        - id: refreshToken
+          type:
+            - string | undefined
+          description: ''
+        - id: clientSecret
+          type:
+            - string | undefined
+          description: ''
+        - id: expiresOnParser
+          type:
+            - '(responseBody: any) => number'
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - GetTokenOptions
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/identity.TokenResponse | null>
     package: '@azure/identity'
   - uid: '@azure/identity.IdentityClient.sendOperationRequest'
     name: >-
@@ -221,6 +183,31 @@ items:
         type:
           - Promise<HttpOperationResponse>
     package: '@azure/identity'
+  - uid: '@azure/identity.IdentityClient.sendTokenRequest'
+    name: 'sendTokenRequest(WebResource, (responseBody: any) => number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function sendTokenRequest(webResource: WebResource, expiresOnParser?:
+        (responseBody: any) => number)
+      parameters:
+        - id: webResource
+          type:
+            - WebResource
+          description: ''
+        - id: expiresOnParser
+          type:
+            - '(responseBody: any) => number'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/identity.TokenResponse | null>
+    package: '@azure/identity'
 references:
   - uid: '@azure/identity.IdentityClientOptions'
     name: IdentityClientOptions
@@ -228,3 +215,13 @@ references:
       - name: IdentityClientOptions
         fullName: IdentityClientOptions
         uid: '@azure/identity.IdentityClientOptions'
+  - uid: Promise<@azure/identity.TokenResponse | null>
+    name: TokenResponse | null>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: TokenResponse
+        fullName: TokenResponse
+        uid: '@azure/identity.TokenResponse'
+      - name: ' | null>'
+        fullName: ' | null>'

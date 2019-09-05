@@ -1,0 +1,687 @@
+### YamlMime:UniversalReference
+items:
+  - uid: '@azure/storage-file.ShareClient'
+    name: ShareClient
+    fullName: ShareClient
+    children:
+      - '@azure/storage-file.ShareClient.create'
+      - '@azure/storage-file.ShareClient.createDirectory'
+      - '@azure/storage-file.ShareClient.createFile'
+      - '@azure/storage-file.ShareClient.createSnapshot'
+      - '@azure/storage-file.ShareClient.delete'
+      - '@azure/storage-file.ShareClient.deleteDirectory'
+      - '@azure/storage-file.ShareClient.deleteFile'
+      - '@azure/storage-file.ShareClient.getAccessPolicy'
+      - '@azure/storage-file.ShareClient.getDirectoryClient'
+      - '@azure/storage-file.ShareClient.getProperties'
+      - '@azure/storage-file.ShareClient.getStatistics'
+      - '@azure/storage-file.ShareClient.rootDirectoryClient'
+      - '@azure/storage-file.ShareClient.setAccessPolicy'
+      - '@azure/storage-file.ShareClient.setMetadata'
+      - '@azure/storage-file.ShareClient.setQuota'
+      - '@azure/storage-file.ShareClient.constructor_1'
+      - '@azure/storage-file.ShareClient.constructor_2'
+      - '@azure/storage-file.ShareClient.constructor'
+      - '@azure/storage-file.ShareClient.url'
+      - '@azure/storage-file.ShareClient.withSnapshot'
+    langs:
+      - typeScript
+    type: class
+    summary: >-
+      A ShareClient represents a URL to the Azure Storage share allowing you to
+      manipulate its directories and files.
+    extends:
+      name: '@azure/storage-file.StorageClient'
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.create'
+    name: create(ShareCreateOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Creates a new share under the specified account. If the share with
+      the same name already exists, the operation fails.
+    syntax:
+      content: 'function create(options?: ShareCreateOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file.ShareCreateOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ShareCreateResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.createDirectory'
+    name: 'createDirectory(string, DirectoryCreateOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates a new subdirectory under this share.
+    syntax:
+      content: >-
+        function createDirectory(directoryName: string, options?:
+        DirectoryCreateOptions)
+      parameters:
+        - id: directoryName
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - '@azure/storage-file.DirectoryCreateOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Object>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.createFile'
+    name: 'createFile(string, number, FileCreateOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates a new file or replaces a file under the root directory of this
+      share.
+
+      Note it only initializes the file with no content.
+    syntax:
+      content: >-
+        function createFile(fileName: string, size: number, options?:
+        FileCreateOptions)
+      parameters:
+        - id: fileName
+          type:
+            - string
+          description: ''
+        - id: size
+          type:
+            - number
+          description: 'Specifies the maximum size in bytes for the file, up to 1 TB.'
+        - id: options
+          type:
+            - '@azure/storage-file.FileCreateOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Object>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.createSnapshot'
+    name: createSnapshot(ShareCreateSnapshotOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates a read-only snapshot of a share.
+    syntax:
+      content: 'function createSnapshot(options?: ShareCreateSnapshotOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file.ShareCreateSnapshotOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ShareCreateSnapshotResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.delete'
+    name: delete(ShareDeleteMethodOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Marks the specified share for deletion. The share and any directories or
+      files
+
+      contained within it are later deleted during garbage collection.
+    syntax:
+      content: 'function delete(options?: ShareDeleteMethodOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file.ShareDeleteMethodOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ShareDeleteResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.deleteDirectory'
+    name: 'deleteDirectory(string, DirectoryDeleteOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Removes the specified empty sub directory under this share.
+      Note that the directory must be empty before it can be deleted.
+    syntax:
+      content: >-
+        function deleteDirectory(directoryName: string, options?:
+        DirectoryDeleteOptions)
+      parameters:
+        - id: directoryName
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - '@azure/storage-file.DirectoryDeleteOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.DirectoryDeleteResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.deleteFile'
+    name: 'deleteFile(string, FileDeleteOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Removes a file under the root directory of this share from the storage
+      account.
+
+      When a file is successfully deleted, it is immediately removed from the
+      storage
+
+      account's index and is no longer accessible to clients. The file's data is
+      later
+
+      removed from the service during garbage collection.
+
+      Delete File will fail with status code 409 (Conflict) and error code
+      SharingViolation
+
+      if the file is open on an SMB client.
+
+
+      Delete File is not supported on a share snapshot, which is a read-only
+      copy of
+
+      a share. An attempt to perform this operation on a share snapshot will
+      fail with 400 (InvalidQueryParameterValue)
+    syntax:
+      content: 'function deleteFile(fileName: string, options?: FileDeleteOptions)'
+      parameters:
+        - id: fileName
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - '@azure/storage-file.FileDeleteOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.FileDeleteResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.getAccessPolicy'
+    name: getAccessPolicy(ShareGetAccessPolicyOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Gets the permissions for the specified share. The permissions indicate
+
+      whether share data may be accessed publicly.
+
+      WARNING: JavaScript Date will potential lost precision when parsing start
+      and expiry string.
+
+      For example, new Date("2018-12-31T03:44:23.8827891Z").toISOString() will
+      get "2018-12-31T03:44:23.882Z".
+    syntax:
+      content: 'function getAccessPolicy(options?: ShareGetAccessPolicyOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file.ShareGetAccessPolicyOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-file.ShareGetAccessPolicyResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.getDirectoryClient'
+    name: getDirectoryClient(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates a DirectoryClient object.
+    syntax:
+      content: 'function getDirectoryClient(directoryName: string)'
+      parameters:
+        - id: directoryName
+          type:
+            - string
+          description: A directory name
+      return:
+        type:
+          - '@azure/storage-file.DirectoryClient'
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.getProperties'
+    name: getProperties(ShareGetPropertiesOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Returns all user-defined metadata and system properties for the specified
+      share.
+    syntax:
+      content: 'function getProperties(options?: ShareGetPropertiesOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file.ShareGetPropertiesOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ShareGetPropertiesResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.getStatistics'
+    name: getStatistics(ShareGetStatisticsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Retrieves statistics related to the share.
+    syntax:
+      content: 'function getStatistics(options?: ShareGetStatisticsOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file.ShareGetStatisticsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ShareGetStatisticsResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.rootDirectoryClient'
+    name: rootDirectoryClient
+    fullName: rootDirectoryClient
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: |-
+      Gets the directory client for the root directory of this share.
+      Note that the root directory always exists and cannot be deleted.
+    syntax:
+      content: 'rootDirectoryClient: DirectoryClient'
+      return:
+        type:
+          - '@azure/storage-file.DirectoryClient'
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.setAccessPolicy'
+    name: 'setAccessPolicy(SignedIdentifier[], ShareSetAccessPolicyOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Sets the permissions for the specified share. The permissions indicate
+
+      whether directories or files in a share may be accessed publicly.
+
+      When you set permissions for a share, the existing permissions are
+      replaced.
+
+      If no shareAcl provided, the existing share ACL will be
+
+      removed.
+    syntax:
+      content: >-
+        function setAccessPolicy(shareAcl?: SignedIdentifier[], options?:
+        ShareSetAccessPolicyOptions)
+      parameters:
+        - id: shareAcl
+          type:
+            - '@azure/storage-file.SignedIdentifier[]'
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-file.ShareSetAccessPolicyOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ShareSetAccessPolicyResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.setMetadata'
+    name: 'setMetadata(Metadata, ShareSetMetadataOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Sets one or more user-defined name-value pairs for the specified share.
+
+      If no option provided, or no metadata defined in the option parameter, the
+      share
+
+      metadata will be removed.
+    syntax:
+      content: >-
+        function setMetadata(metadata?: Metadata, options?:
+        ShareSetMetadataOptions)
+      parameters:
+        - id: metadata
+          type:
+            - '@azure/storage-file.Metadata'
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-file.ShareSetMetadataOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ShareSetMetadataResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.setQuota'
+    name: 'setQuota(number, ShareSetQuotaOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Sets quota for the specified share.
+    syntax:
+      content: 'function setQuota(quotaInGB: number, options?: ShareSetQuotaOptions)'
+      parameters:
+        - id: quotaInGB
+          type:
+            - number
+          description: Specifies the maximum size of the share in gigabytes
+        - id: options
+          type:
+            - '@azure/storage-file.ShareSetQuotaOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.ShareSetQuotaResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.constructor_1'
+    name: 'ShareClient(string, Credential, NewPipelineOptions)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Creates an instance of ShareClient.
+    syntax:
+      content: >-
+        new ShareClient(url: string, credential?: Credential, options?:
+        NewPipelineOptions)
+      parameters:
+        - id: url
+          type:
+            - string
+          description: |-
+            A URL string pointing to Azure Storage file share, such as
+                                "https://myaccount.file.core.windows.net/share". You can
+                                append a SAS if using AnonymousCredential, such as
+                                "https://myaccount.file.core.windows.net/share?sasString".
+        - id: credential
+          type:
+            - '@azure/storage-file.Credential'
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-file.NewPipelineOptions'
+          description: ''
+          optional: true
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.constructor_2'
+    name: 'ShareClient(string, Pipeline)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Creates an instance of ShareClient.
+    syntax:
+      content: 'new ShareClient(url: string, pipeline: Pipeline)'
+      parameters:
+        - id: url
+          type:
+            - string
+          description: |-
+            A URL string pointing to Azure Storage file share, such as
+                                "https://myaccount.file.core.windows.net/share". You can
+                                append a SAS if using AnonymousCredential, such as
+                                "https://myaccount.file.core.windows.net/share?sasString".
+        - id: pipeline
+          type:
+            - '@azure/storage-file.Pipeline'
+          description: |-
+            Call newPipeline() to create a default
+                                       pipeline, or provide a customized pipeline.
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.constructor'
+    name: 'ShareClient(string, string, NewPipelineOptions)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: |-
+      Creates an instance of ShareClient.
+      Creates an instance of ShareClient.
+    syntax:
+      content: >-
+        new ShareClient(connectionString: string, shareName: string, options?:
+        NewPipelineOptions)
+      parameters:
+        - id: connectionString
+          type:
+            - string
+          description: >-
+            Account connection string or a SAS connection string of an Azure
+            storage account.
+                                             [ Note - Account connection string can only be used in NODE.JS runtime. ]
+                                             Account connection string example -
+                                             `DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=accountKey;EndpointSuffix=core.windows.net`
+                                             SAS connection string example -
+                                             `BlobEndpoint=https://myaccount.blob.core.windows.net/;QueueEndpoint=https://myaccount.queue.core.windows.net/;FileEndpoint=https://myaccount.file.core.windows.net/;TableEndpoint=https://myaccount.table.core.windows.net/;SharedAccessSignature=sasString`
+        - id: shareName
+          type:
+            - string
+          description: Share name.
+        - id: options
+          type:
+            - '@azure/storage-file.NewPipelineOptions'
+          description: ''
+          optional: true
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.url'
+    name: url
+    fullName: url
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: URL string value.
+    syntax:
+      content: 'url: string'
+      return:
+        type:
+          - string
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareClient.withSnapshot'
+    name: withSnapshot(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates a new ShareClient object identical to the source but with the
+      specified snapshot timestamp.
+
+      Provide "" will remove the snapshot and return a URL to the base share.
+    syntax:
+      content: 'function withSnapshot(snapshot: string)'
+      parameters:
+        - id: snapshot
+          type:
+            - string
+          description: The snapshot timestamp.
+      return:
+        type:
+          - '@azure/storage-file.ShareClient'
+    package: '@azure/storage-file'
+references:
+  - uid: '@azure/storage-file.StorageClient'
+    name: StorageClient
+    spec.typeScript:
+      - name: StorageClient
+        fullName: StorageClient
+        uid: '@azure/storage-file.StorageClient'
+  - uid: '@azure/storage-file.NewPipelineOptions'
+    name: NewPipelineOptions
+    spec.typeScript:
+      - name: NewPipelineOptions
+        fullName: NewPipelineOptions
+        uid: '@azure/storage-file.NewPipelineOptions'
+  - uid: '@azure/storage-file.Credential'
+    name: Credential
+    spec.typeScript:
+      - name: Credential
+        fullName: Credential
+        uid: '@azure/storage-file.Credential'
+  - uid: '@azure/storage-file.Pipeline'
+    name: Pipeline
+    spec.typeScript:
+      - name: Pipeline
+        fullName: Pipeline
+        uid: '@azure/storage-file.Pipeline'
+  - uid: '@azure/storage-file.DirectoryClient'
+    name: DirectoryClient
+    spec.typeScript:
+      - name: DirectoryClient
+        fullName: DirectoryClient
+        uid: '@azure/storage-file.DirectoryClient'
+  - uid: '@azure/storage-file.ShareCreateOptions'
+    name: ShareCreateOptions
+    spec.typeScript:
+      - name: ShareCreateOptions
+        fullName: ShareCreateOptions
+        uid: '@azure/storage-file.ShareCreateOptions'
+  - uid: '@azure/storage-file.DirectoryCreateOptions'
+    name: DirectoryCreateOptions
+    spec.typeScript:
+      - name: DirectoryCreateOptions
+        fullName: DirectoryCreateOptions
+        uid: '@azure/storage-file.DirectoryCreateOptions'
+  - uid: '@azure/storage-file.FileCreateOptions'
+    name: FileCreateOptions
+    spec.typeScript:
+      - name: FileCreateOptions
+        fullName: FileCreateOptions
+        uid: '@azure/storage-file.FileCreateOptions'
+  - uid: '@azure/storage-file.ShareCreateSnapshotOptions'
+    name: ShareCreateSnapshotOptions
+    spec.typeScript:
+      - name: ShareCreateSnapshotOptions
+        fullName: ShareCreateSnapshotOptions
+        uid: '@azure/storage-file.ShareCreateSnapshotOptions'
+  - uid: '@azure/storage-file.ShareDeleteMethodOptions'
+    name: ShareDeleteMethodOptions
+    spec.typeScript:
+      - name: ShareDeleteMethodOptions
+        fullName: ShareDeleteMethodOptions
+        uid: '@azure/storage-file.ShareDeleteMethodOptions'
+  - uid: '@azure/storage-file.DirectoryDeleteOptions'
+    name: DirectoryDeleteOptions
+    spec.typeScript:
+      - name: DirectoryDeleteOptions
+        fullName: DirectoryDeleteOptions
+        uid: '@azure/storage-file.DirectoryDeleteOptions'
+  - uid: '@azure/storage-file.FileDeleteOptions'
+    name: FileDeleteOptions
+    spec.typeScript:
+      - name: FileDeleteOptions
+        fullName: FileDeleteOptions
+        uid: '@azure/storage-file.FileDeleteOptions'
+  - uid: '@azure/storage-file.ShareGetAccessPolicyOptions'
+    name: ShareGetAccessPolicyOptions
+    spec.typeScript:
+      - name: ShareGetAccessPolicyOptions
+        fullName: ShareGetAccessPolicyOptions
+        uid: '@azure/storage-file.ShareGetAccessPolicyOptions'
+  - uid: Promise<@azure/storage-file.ShareGetAccessPolicyResponse>
+    name: ShareGetAccessPolicyResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ShareGetAccessPolicyResponse
+        fullName: ShareGetAccessPolicyResponse
+        uid: '@azure/storage-file.ShareGetAccessPolicyResponse'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/storage-file.ShareGetPropertiesOptions'
+    name: ShareGetPropertiesOptions
+    spec.typeScript:
+      - name: ShareGetPropertiesOptions
+        fullName: ShareGetPropertiesOptions
+        uid: '@azure/storage-file.ShareGetPropertiesOptions'
+  - uid: '@azure/storage-file.ShareGetStatisticsOptions'
+    name: ShareGetStatisticsOptions
+    spec.typeScript:
+      - name: ShareGetStatisticsOptions
+        fullName: ShareGetStatisticsOptions
+        uid: '@azure/storage-file.ShareGetStatisticsOptions'
+  - uid: '@azure/storage-file.SignedIdentifier[]'
+    name: 'SignedIdentifier[]'
+    spec.typeScript:
+      - name: SignedIdentifier
+        fullName: SignedIdentifier
+        uid: '@azure/storage-file.SignedIdentifier'
+      - name: '[]'
+        fullName: '[]'
+  - uid: '@azure/storage-file.ShareSetAccessPolicyOptions'
+    name: ShareSetAccessPolicyOptions
+    spec.typeScript:
+      - name: ShareSetAccessPolicyOptions
+        fullName: ShareSetAccessPolicyOptions
+        uid: '@azure/storage-file.ShareSetAccessPolicyOptions'
+  - uid: '@azure/storage-file.Metadata'
+    name: Metadata
+    spec.typeScript:
+      - name: Metadata
+        fullName: Metadata
+        uid: '@azure/storage-file.Metadata'
+  - uid: '@azure/storage-file.ShareSetMetadataOptions'
+    name: ShareSetMetadataOptions
+    spec.typeScript:
+      - name: ShareSetMetadataOptions
+        fullName: ShareSetMetadataOptions
+        uid: '@azure/storage-file.ShareSetMetadataOptions'
+  - uid: '@azure/storage-file.ShareSetQuotaOptions'
+    name: ShareSetQuotaOptions
+    spec.typeScript:
+      - name: ShareSetQuotaOptions
+        fullName: ShareSetQuotaOptions
+        uid: '@azure/storage-file.ShareSetQuotaOptions'
+  - uid: '@azure/storage-file.ShareClient'
+    name: ShareClient
+    spec.typeScript:
+      - name: ShareClient
+        fullName: ShareClient
+        uid: '@azure/storage-file.ShareClient'

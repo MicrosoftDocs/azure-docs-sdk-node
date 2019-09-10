@@ -5,8 +5,8 @@ items:
     fullName: Versions
     children:
       - '@azure/cognitiveservices-luis-authoring.Versions.clone'
-      - '@azure/cognitiveservices-luis-authoring.Versions.clone_1'
       - '@azure/cognitiveservices-luis-authoring.Versions.clone_2'
+      - '@azure/cognitiveservices-luis-authoring.Versions.clone_1'
       - '@azure/cognitiveservices-luis-authoring.Versions.deleteMethod'
       - '@azure/cognitiveservices-luis-authoring.Versions.deleteMethod_2'
       - '@azure/cognitiveservices-luis-authoring.Versions.deleteMethod_1'
@@ -38,18 +38,16 @@ items:
     summary: Class representing a Versions.
     package: '@azure/cognitiveservices-luis-authoring'
   - uid: '@azure/cognitiveservices-luis-authoring.Versions.clone'
-    name: 'clone(string, string, Models.VersionsCloneOptionalParams)'
+    name: 'clone(string, string, TaskUpdateObject, msRest.RequestOptionsBase)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: >-
-      Creates a new version using the current snapshot of the selected
-      application version.
+    summary: Creates a new version from the selected version.
     syntax:
       content: >-
-        function clone(appId: string, versionId: string, options?:
-        Models.VersionsCloneOptionalParams)
+        function clone(appId: string, versionId: string, versionCloneObject:
+        TaskUpdateObject, options?: msRest.RequestOptionsBase)
       parameters:
         - id: appId
           type:
@@ -59,17 +57,23 @@ items:
           type:
             - string
           description: The version ID.
+        - id: versionCloneObject
+          type:
+            - '@azure/cognitiveservices-luis-authoring.TaskUpdateObject'
+          description: A model containing the new version ID.
         - id: options
           type:
-            - Models.VersionsCloneOptionalParams
+            - msRest.RequestOptionsBase
           description: ''
           optional: true
       return:
         type:
           - Promise<Models.VersionsCloneResponse>
     package: '@azure/cognitiveservices-luis-authoring'
-  - uid: '@azure/cognitiveservices-luis-authoring.Versions.clone_1'
-    name: 'clone(string, string, ServiceCallback<string>)'
+  - uid: '@azure/cognitiveservices-luis-authoring.Versions.clone_2'
+    name: >-
+      clone(string, string, TaskUpdateObject, RequestOptionsBase,
+      ServiceCallback<string>)
     children: []
     type: method
     langs:
@@ -77,7 +81,8 @@ items:
     summary: ''
     syntax:
       content: >-
-        function clone(appId: string, versionId: string, callback:
+        function clone(appId: string, versionId: string, versionCloneObject:
+        TaskUpdateObject, options: RequestOptionsBase, callback:
         ServiceCallback<string>)
       parameters:
         - id: appId
@@ -88,6 +93,14 @@ items:
           type:
             - string
           description: The version ID.
+        - id: versionCloneObject
+          type:
+            - '@azure/cognitiveservices-luis-authoring.TaskUpdateObject'
+          description: A model containing the new version ID.
+        - id: options
+          type:
+            - RequestOptionsBase
+          description: The optional parameters
         - id: callback
           type:
             - ServiceCallback<string>
@@ -97,10 +110,8 @@ items:
         type:
           - Promise<Models.VersionsCloneResponse>
     package: '@azure/cognitiveservices-luis-authoring'
-  - uid: '@azure/cognitiveservices-luis-authoring.Versions.clone_2'
-    name: >-
-      clone(string, string, VersionsCloneOptionalParams,
-      ServiceCallback<string>)
+  - uid: '@azure/cognitiveservices-luis-authoring.Versions.clone_1'
+    name: 'clone(string, string, TaskUpdateObject, ServiceCallback<string>)'
     children: []
     type: method
     langs:
@@ -108,8 +119,8 @@ items:
     summary: ''
     syntax:
       content: >-
-        function clone(appId: string, versionId: string, options:
-        VersionsCloneOptionalParams, callback: ServiceCallback<string>)
+        function clone(appId: string, versionId: string, versionCloneObject:
+        TaskUpdateObject, callback: ServiceCallback<string>)
       parameters:
         - id: appId
           type:
@@ -119,11 +130,10 @@ items:
           type:
             - string
           description: The version ID.
-        - id: options
+        - id: versionCloneObject
           type:
-            - >-
-              @azure/cognitiveservices-luis-authoring.VersionsCloneOptionalParams
-          description: The optional parameters
+            - '@azure/cognitiveservices-luis-authoring.TaskUpdateObject'
+          description: A model containing the new version ID.
         - id: callback
           type:
             - ServiceCallback<string>
@@ -236,7 +246,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Deleted an unlabelled utterance.
+    summary: Deleted an unlabelled utterance in a version of the application.
     syntax:
       content: >-
         function deleteUnlabelledUtterance(appId: string, versionId: string,
@@ -439,7 +449,11 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Gets the version info.
+    summary: >-
+      Gets the version information such as date created, last modified date,
+      endpoint URL, count of
+
+      intents and entities, training and publishing status.
     syntax:
       content: >-
         function get(appId: string, versionId: string, options?:
@@ -626,7 +640,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Gets the application versions info.
+    summary: Gets a list of versions for this application ID.
     syntax:
       content: >-
         function list(appId: string, options?:
@@ -830,12 +844,12 @@ references:
       - name: LUISAuthoringClientContext
         fullName: LUISAuthoringClientContext
         uid: '@azure/cognitiveservices-luis-authoring.LUISAuthoringClientContext'
-  - uid: '@azure/cognitiveservices-luis-authoring.VersionsCloneOptionalParams'
-    name: VersionsCloneOptionalParams
+  - uid: '@azure/cognitiveservices-luis-authoring.TaskUpdateObject'
+    name: TaskUpdateObject
     spec.typeScript:
-      - name: VersionsCloneOptionalParams
-        fullName: VersionsCloneOptionalParams
-        uid: '@azure/cognitiveservices-luis-authoring.VersionsCloneOptionalParams'
+      - name: TaskUpdateObject
+        fullName: TaskUpdateObject
+        uid: '@azure/cognitiveservices-luis-authoring.TaskUpdateObject'
   - uid: ServiceCallback<@azure/cognitiveservices-luis-authoring.OperationStatus>
     name: OperationStatus>
     spec.typeScript:
@@ -895,9 +909,3 @@ references:
       - name: VersionsListOptionalParams
         fullName: VersionsListOptionalParams
         uid: '@azure/cognitiveservices-luis-authoring.VersionsListOptionalParams'
-  - uid: '@azure/cognitiveservices-luis-authoring.TaskUpdateObject'
-    name: TaskUpdateObject
-    spec.typeScript:
-      - name: TaskUpdateObject
-        fullName: TaskUpdateObject
-        uid: '@azure/cognitiveservices-luis-authoring.TaskUpdateObject'

@@ -4,18 +4,40 @@ items:
     name: RetryConfig
     fullName: RetryConfig<T>
     children:
+      - '@azure/core-amqp.RetryConfig.abortSignal'
       - '@azure/core-amqp.RetryConfig.connectionHost'
       - '@azure/core-amqp.RetryConfig.connectionId'
-      - '@azure/core-amqp.RetryConfig.delayInSeconds'
       - '@azure/core-amqp.RetryConfig.operation'
       - '@azure/core-amqp.RetryConfig.operationType'
-      - '@azure/core-amqp.RetryConfig.times'
+      - '@azure/core-amqp.RetryConfig.retryOptions'
     langs:
       - typeScript
     type: interface
     summary: >-
       Describes the parameters that need to be configured for the retry
       operation.
+    package: '@azure/core-amqp'
+  - uid: '@azure/core-amqp.RetryConfig.abortSignal'
+    name: abortSignal
+    fullName: abortSignal
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      {AbortSignalLike} [abortSignal] The `AbortSignal` associated with the
+      operation being retried on.
+
+      If this signal is fired during the wait time between retries, then the
+      `retry()` method will ensure that the wait is abandoned and the retry
+      process gets cancelled. If this signal is fired when the operation is in
+      progress, then the operation is expected to react to it.
+    optional: true
+    syntax:
+      content: 'abortSignal?: AbortSignalLike'
+      return:
+        type:
+          - AbortSignalLike
     package: '@azure/core-amqp'
   - uid: '@azure/core-amqp.RetryConfig.connectionHost'
     name: connectionHost
@@ -52,25 +74,6 @@ items:
         type:
           - string
     package: '@azure/core-amqp'
-  - uid: '@azure/core-amqp.RetryConfig.delayInSeconds'
-    name: delayInSeconds
-    fullName: delayInSeconds
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      {number} [delayInSeconds] Amount of time to wait in seconds before making
-      the
-
-      next attempt. Default: 15.
-    optional: true
-    syntax:
-      content: 'delayInSeconds?: undefined | number'
-      return:
-        type:
-          - undefined | number
-    package: '@azure/core-amqp'
   - uid: '@azure/core-amqp.RetryConfig.operation'
     name: operation
     fullName: operation
@@ -103,22 +106,22 @@ items:
         type:
           - '@azure/core-amqp.RetryOperationType'
     package: '@azure/core-amqp'
-  - uid: '@azure/core-amqp.RetryConfig.times'
-    name: times
-    fullName: times
+  - uid: '@azure/core-amqp.RetryConfig.retryOptions'
+    name: retryOptions
+    fullName: retryOptions
     children: []
     langs:
       - typeScript
     type: property
-    summary: |-
-      {number} [times] Number of times the operation needs to be retried in case
-      of error. Default: 3.
+    summary: >-
+      {RetryOptions} retryOptions The retry related options associated with
+      given operation execution.
     optional: true
     syntax:
-      content: 'times?: undefined | number'
+      content: 'retryOptions?: RetryOptions'
       return:
         type:
-          - undefined | number
+          - '@azure/core-amqp.RetryOptions'
     package: '@azure/core-amqp'
 references:
   - uid: '@azure/core-amqp.RetryOperationType'
@@ -127,3 +130,9 @@ references:
       - name: RetryOperationType
         fullName: RetryOperationType
         uid: '@azure/core-amqp.RetryOperationType'
+  - uid: '@azure/core-amqp.RetryOptions'
+    name: RetryOptions
+    spec.typeScript:
+      - name: RetryOptions
+        fullName: RetryOptions
+        uid: '@azure/core-amqp.RetryOptions'

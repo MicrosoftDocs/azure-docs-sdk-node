@@ -5,8 +5,10 @@ items:
     fullName: IBlobDownloadOptions
     children:
       - '@azure/storage-blob.IBlobDownloadOptions.blobAccessConditions'
+      - '@azure/storage-blob.IBlobDownloadOptions.customerProvidedKey'
       - '@azure/storage-blob.IBlobDownloadOptions.maxRetryRequests'
       - '@azure/storage-blob.IBlobDownloadOptions.progress'
+      - '@azure/storage-blob.IBlobDownloadOptions.rangeGetContentCrc64'
       - '@azure/storage-blob.IBlobDownloadOptions.rangeGetContentMD5'
       - '@azure/storage-blob.IBlobDownloadOptions.snapshot'
     langs:
@@ -28,6 +30,21 @@ items:
       return:
         type:
           - '@azure/storage-blob.IBlobAccessConditions'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.IBlobDownloadOptions.customerProvidedKey'
+    name: customerProvidedKey
+    fullName: customerProvidedKey
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    optional: true
+    syntax:
+      content: 'customerProvidedKey?: Models.CpkInfo'
+      return:
+        type:
+          - Models.CpkInfo
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.IBlobDownloadOptions.maxRetryRequests'
     name: maxRetryRequests
@@ -78,6 +95,27 @@ items:
         type:
           - 'undefined | (progress: TransferProgressEvent) => void'
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.IBlobDownloadOptions.rangeGetContentCrc64'
+    name: rangeGetContentCrc64
+    fullName: rangeGetContentCrc64
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >
+      When this is set to true and download range of blob, the service returns
+      the CRC64 hash for the range,
+
+      as long as the range is less than or equal to 4 MB in size.
+
+      rangeGetContentCrc64 and rangeGetContentMD5 cannot be set at same time.
+    optional: true
+    syntax:
+      content: 'rangeGetContentCrc64?: undefined | false | true'
+      return:
+        type:
+          - undefined | false | true
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.IBlobDownloadOptions.rangeGetContentMD5'
     name: rangeGetContentMD5
     fullName: rangeGetContentMD5
@@ -85,7 +123,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >
+      When this is set to true and download range of blob, the service returns
+      the MD5 hash for the range,
+
+      as long as the range is less than or equal to 4 MB in size.
+
+      rangeGetContentCrc64 and rangeGetContentMD5 cannot be set at same time.
     optional: true
     syntax:
       content: 'rangeGetContentMD5?: undefined | false | true'
@@ -100,7 +144,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      An opaque DateTime string value that, when present, specifies the blob
+      snapshot to retrieve.
     optional: true
     syntax:
       content: 'snapshot?: undefined | string'

@@ -44,10 +44,14 @@ key=$(az eventgrid topic key list --name <topic_name> -g gridResourceGroup --que
 var EventGridClient = require("azure-eventgrid");
 var msRestAzure = require('ms-rest-azure');
 var uuid = require('uuid').v4;
+var url = require('url');
 
 let topicCreds = new msRestAzure.TopicCredentials('your-topic-key');
 let EGClient = new EventGridClient(topicCreds, 'your-subscription-id');
-let topicHostName = 'your-topic-endpoint';
+let topicEndpoint = 'your-topic-endpoint';
+let topicUrl = url.parse(topicEndpoint, true);
+let topicHostName = topicUrl.host;
+
 let events = [
    {
    id: uuid(),

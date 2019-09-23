@@ -20,8 +20,10 @@ items:
       - '@azure/storage-file.FileURL.resize'
       - '@azure/storage-file.FileURL.setHTTPHeaders'
       - '@azure/storage-file.FileURL.setMetadata'
+      - '@azure/storage-file.FileURL.setProperties'
       - '@azure/storage-file.FileURL.startCopyFromURL'
       - '@azure/storage-file.FileURL.uploadRange'
+      - '@azure/storage-file.FileURL.uploadRangeFromURL'
       - '@azure/storage-file.FileURL.url'
       - '@azure/storage-file.FileURL.withPipeline'
     langs:
@@ -526,6 +528,32 @@ items:
         type:
           - Promise<Models.FileSetMetadataResponse>
     package: '@azure/storage-file'
+  - uid: '@azure/storage-file.FileURL.setProperties'
+    name: 'setProperties(Aborter, IFileProperties)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Sets properties on the file.
+    syntax:
+      content: 'function setProperties(aborter: Aborter, properties?: IFileProperties)'
+      parameters:
+        - id: aborter
+          type:
+            - '@azure/storage-file.Aborter'
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: properties
+          type:
+            - '@azure/storage-file.IFileProperties'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-file.ISetPropertiesResponse>
+    package: '@azure/storage-file'
   - uid: '@azure/storage-file.FileURL.startCopyFromURL'
     name: 'startCopyFromURL(Aborter, string, IFileStartCopyOptions)'
     children: []
@@ -598,7 +626,7 @@ items:
           description: >-
             Create a new Aborter instance with Aborter.none or
             Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
+                                     goto documents of Aborter for more examples about request cancellation.
         - id: body
           type:
             - HttpRequestBody
@@ -624,6 +652,53 @@ items:
       return:
         type:
           - Promise<Models.FileUploadRangeResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.FileURL.uploadRangeFromURL'
+    name: 'uploadRangeFromURL(Aborter, string, number, number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Upload a range of bytes to a file where the contents are read from a
+      another file's URL.
+
+      The range can be up to 4 MB in size.
+    syntax:
+      content: >-
+        function uploadRangeFromURL(aborter: Aborter, sourceURL: string,
+        sourceOffset: number, destOffset: number, count: number)
+      parameters:
+        - id: aborter
+          type:
+            - '@azure/storage-file.Aborter'
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation.
+        - id: sourceURL
+          type:
+            - string
+          description: >-
+            Specify a URL to the copy source, Shared Access Signature(SAS) maybe
+            needed for authentication.
+        - id: sourceOffset
+          type:
+            - number
+          description: >-
+            The source offset to copy from. Pass 0 to copy from the beginning of
+            source file.
+        - id: destOffset
+          type:
+            - number
+          description: Offset of destination file.
+        - id: count
+          type:
+            - number
+          description: Number of bytes to be uploaded from source file.
+      return:
+        type:
+          - Promise<Models.FileUploadRangeFromURLResponse>
     package: '@azure/storage-file'
   - uid: '@azure/storage-file.FileURL.url'
     name: url
@@ -724,6 +799,22 @@ references:
       - name: IMetadata
         fullName: IMetadata
         uid: '@azure/storage-file.IMetadata'
+  - uid: '@azure/storage-file.IFileProperties'
+    name: IFileProperties
+    spec.typeScript:
+      - name: IFileProperties
+        fullName: IFileProperties
+        uid: '@azure/storage-file.IFileProperties'
+  - uid: Promise<@azure/storage-file.ISetPropertiesResponse>
+    name: ISetPropertiesResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ISetPropertiesResponse
+        fullName: ISetPropertiesResponse
+        uid: '@azure/storage-file.ISetPropertiesResponse'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-file.IFileStartCopyOptions'
     name: IFileStartCopyOptions
     spec.typeScript:

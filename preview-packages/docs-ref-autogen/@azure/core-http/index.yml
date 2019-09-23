@@ -4,10 +4,7 @@ items:
     name: '@azure/core-http'
     summary: ''
     children:
-      - '@azure/core-http.AxiosHttpClient'
-      - '@azure/core-http.ProxyAgent'
-      - '@azure/core-http.createProxyAgent'
-      - '@azure/core-http.createTunnel'
+      - '@azure/core-http.BrowserFetchHttpClient'
       - '@azure/core-http.ExpiringAccessTokenCache'
       - '@azure/core-http.AccessTokenCache'
       - '@azure/core-http.ApiKeyCredentials'
@@ -16,6 +13,8 @@ items:
       - '@azure/core-http.Authenticator'
       - '@azure/core-http.ServiceClientCredentials'
       - '@azure/core-http.TopicCredentials'
+      - '@azure/core-http.FetchHttpClient'
+      - '@azure/core-http.parseHeaders'
       - '@azure/core-http.HttpClient'
       - '@azure/core-http.HttpHeaders'
       - '@azure/core-http.HttpHeader'
@@ -26,6 +25,7 @@ items:
       - '@azure/core-http.HttpPipelineLogLevel'
       - '@azure/core-http.ConsoleHttpPipelineLogger'
       - '@azure/core-http.HttpPipelineLogger'
+      - '@azure/core-http.NodeFetchHttpClient'
       - '@azure/core-http.OperationArguments'
       - '@azure/core-http.OperationParameter'
       - '@azure/core-http.OperationQueryParameter'
@@ -77,10 +77,15 @@ items:
       - '@azure/core-http.ThrottlingRetryPolicy'
       - '@azure/core-http.ResponseHandler'
       - '@azure/core-http.throttlingRetryPolicy'
+      - '@azure/core-http.TracingPolicy'
+      - '@azure/core-http.tracingPolicy'
       - '@azure/core-http.UserAgentPolicy'
       - '@azure/core-http.TelemetryInfo'
       - '@azure/core-http.getDefaultUserAgentValue'
       - '@azure/core-http.userAgentPolicy'
+      - '@azure/core-http.ProxyAgent'
+      - '@azure/core-http.createProxyAgent'
+      - '@azure/core-http.createTunnel'
       - '@azure/core-http.QueryCollectionFormat'
       - '@azure/core-http.RestError'
       - '@azure/core-http.Serializer'
@@ -128,6 +133,7 @@ items:
       - '@azure/core-http.executePromisesSequentially'
       - '@azure/core-http.generateUuid'
       - '@azure/core-http.isDuration'
+      - '@azure/core-http.isPrimitiveType'
       - '@azure/core-http.isValidUuid'
       - '@azure/core-http.mergeObjects'
       - '@azure/core-http.objectValues'
@@ -143,7 +149,6 @@ items:
       - '@azure/core-http.parseXML'
       - '@azure/core-http.stringifyXML'
       - '@azure/core-http.WebResource'
-      - '@azure/core-http.AbortSignalLike'
       - '@azure/core-http.ParameterValue'
       - '@azure/core-http.RequestOptionsBase'
       - '@azure/core-http.RequestPrepareOptions'
@@ -156,14 +161,8 @@ items:
     langs:
       - typeScript
 references:
-  - uid: '@azure/core-http.AxiosHttpClient'
-    name: AxiosHttpClient
-  - uid: '@azure/core-http.ProxyAgent'
-    name: ProxyAgent
-  - uid: '@azure/core-http.createProxyAgent'
-    name: 'createProxyAgent(string, ProxySettings, HttpHeaders)'
-  - uid: '@azure/core-http.createTunnel'
-    name: 'createTunnel(boolean, boolean, HttpsOverHttpsOptions)'
+  - uid: '@azure/core-http.BrowserFetchHttpClient'
+    name: BrowserFetchHttpClient
   - uid: '@azure/core-http.ExpiringAccessTokenCache'
     name: ExpiringAccessTokenCache
   - uid: '@azure/core-http.AccessTokenCache'
@@ -180,6 +179,10 @@ references:
     name: ServiceClientCredentials
   - uid: '@azure/core-http.TopicCredentials'
     name: TopicCredentials
+  - uid: '@azure/core-http.FetchHttpClient'
+    name: FetchHttpClient
+  - uid: '@azure/core-http.parseHeaders'
+    name: parseHeaders(Headers)
   - uid: '@azure/core-http.HttpClient'
     name: HttpClient
   - uid: '@azure/core-http.HttpHeaders'
@@ -200,6 +203,8 @@ references:
     name: ConsoleHttpPipelineLogger
   - uid: '@azure/core-http.HttpPipelineLogger'
     name: HttpPipelineLogger
+  - uid: '@azure/core-http.NodeFetchHttpClient'
+    name: NodeFetchHttpClient
   - uid: '@azure/core-http.OperationArguments'
     name: OperationArguments
   - uid: '@azure/core-http.OperationParameter'
@@ -302,6 +307,10 @@ references:
     name: ResponseHandler
   - uid: '@azure/core-http.throttlingRetryPolicy'
     name: throttlingRetryPolicy()
+  - uid: '@azure/core-http.TracingPolicy'
+    name: TracingPolicy
+  - uid: '@azure/core-http.tracingPolicy'
+    name: tracingPolicy()
   - uid: '@azure/core-http.UserAgentPolicy'
     name: UserAgentPolicy
   - uid: '@azure/core-http.TelemetryInfo'
@@ -310,6 +319,12 @@ references:
     name: getDefaultUserAgentValue()
   - uid: '@azure/core-http.userAgentPolicy'
     name: userAgentPolicy(TelemetryInfo)
+  - uid: '@azure/core-http.ProxyAgent'
+    name: ProxyAgent
+  - uid: '@azure/core-http.createProxyAgent'
+    name: 'createProxyAgent(string, ProxySettings, HttpHeaders)'
+  - uid: '@azure/core-http.createTunnel'
+    name: 'createTunnel(boolean, boolean, HttpsOverHttpsOptions)'
   - uid: '@azure/core-http.QueryCollectionFormat'
     name: QueryCollectionFormat
   - uid: '@azure/core-http.RestError'
@@ -408,6 +423,8 @@ references:
     name: generateUuid()
   - uid: '@azure/core-http.isDuration'
     name: isDuration(string)
+  - uid: '@azure/core-http.isPrimitiveType'
+    name: isPrimitiveType(any)
   - uid: '@azure/core-http.isValidUuid'
     name: isValidUuid(string)
   - uid: '@azure/core-http.mergeObjects'
@@ -438,8 +455,6 @@ references:
     name: 'stringifyXML(any, Object)'
   - uid: '@azure/core-http.WebResource'
     name: WebResource
-  - uid: '@azure/core-http.AbortSignalLike'
-    name: AbortSignalLike
   - uid: '@azure/core-http.ParameterValue'
     name: ParameterValue
   - uid: '@azure/core-http.RequestOptionsBase'

@@ -4,6 +4,7 @@ items:
     name: ServiceURL
     fullName: ServiceURL
     children:
+      - '@azure/storage-blob.ServiceURL.credential'
       - '@azure/storage-blob.ServiceURL.getAccountInfo'
       - '@azure/storage-blob.ServiceURL.getProperties'
       - '@azure/storage-blob.ServiceURL.getStatistics'
@@ -12,6 +13,7 @@ items:
       - '@azure/storage-blob.ServiceURL.newPipeline'
       - '@azure/storage-blob.ServiceURL.constructor'
       - '@azure/storage-blob.ServiceURL.setProperties'
+      - '@azure/storage-blob.ServiceURL.submitBatch'
       - '@azure/storage-blob.ServiceURL.url'
       - '@azure/storage-blob.ServiceURL.withPipeline'
     langs:
@@ -24,6 +26,20 @@ items:
       to manipulate blob containers.
     extends:
       name: '@azure/storage-blob.StorageURL'
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.ServiceURL.credential'
+    name: credential
+    fullName: credential
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Credential used for authentication and authorization.
+    syntax:
+      content: 'credential: Credential'
+      return:
+        type:
+          - '@azure/storage-blob.Credential'
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ServiceURL.getAccountInfo'
     name: getAccountInfo(Aborter)
@@ -264,6 +280,40 @@ items:
         type:
           - Promise<Models.ServiceSetPropertiesResponse>
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.ServiceURL.submitBatch'
+    name: >-
+      submitBatch(Aborter, BatchRequest,
+      Models.ServiceSubmitBatchOptionalParams)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Submit batch request which consists of multiple subrequests.
+    syntax:
+      content: >-
+        function submitBatch(aborter: Aborter, batchRequest: BatchRequest,
+        options?: Models.ServiceSubmitBatchOptionalParams)
+      parameters:
+        - id: aborter
+          type:
+            - '@azure/storage-blob.Aborter'
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation.
+        - id: batchRequest
+          type:
+            - '@azure/storage-blob.BatchRequest'
+          description: 'Supported batch request: BatchDeleteRequest or BatchSetTierRequest.'
+        - id: options
+          type:
+            - Models.ServiceSubmitBatchOptionalParams
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-blob.ServiceSubmitBatchResponse>
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ServiceURL.url'
     name: url
     fullName: url
@@ -311,6 +361,12 @@ references:
       - name: Pipeline
         fullName: Pipeline
         uid: '@azure/storage-blob.Pipeline'
+  - uid: '@azure/storage-blob.Credential'
+    name: Credential
+    spec.typeScript:
+      - name: Credential
+        fullName: Credential
+        uid: '@azure/storage-blob.Credential'
   - uid: '@azure/storage-blob.Aborter'
     name: Aborter
     spec.typeScript:
@@ -339,18 +395,28 @@ references:
       - name: StorageServiceProperties
         fullName: StorageServiceProperties
         uid: '@azure/storage-blob.StorageServiceProperties'
+  - uid: '@azure/storage-blob.BatchRequest'
+    name: BatchRequest
+    spec.typeScript:
+      - name: BatchRequest
+        fullName: BatchRequest
+        uid: '@azure/storage-blob.BatchRequest'
+  - uid: Promise<@azure/storage-blob.ServiceSubmitBatchResponse>
+    name: ServiceSubmitBatchResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ServiceSubmitBatchResponse
+        fullName: ServiceSubmitBatchResponse
+        uid: '@azure/storage-blob.ServiceSubmitBatchResponse'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-blob.ServiceURL'
     name: ServiceURL
     spec.typeScript:
       - name: ServiceURL
         fullName: ServiceURL
         uid: '@azure/storage-blob.ServiceURL'
-  - uid: '@azure/storage-blob.Credential'
-    name: Credential
-    spec.typeScript:
-      - name: Credential
-        fullName: Credential
-        uid: '@azure/storage-blob.Credential'
   - uid: '@azure/storage-blob.INewPipelineOptions'
     name: INewPipelineOptions
     spec.typeScript:

@@ -21,6 +21,8 @@ items:
         @azure/arm-network.NetworkInterfaceIPConfiguration.privateIPAddressVersion
       - >-
         @azure/arm-network.NetworkInterfaceIPConfiguration.privateIPAllocationMethod
+      - >-
+        @azure/arm-network.NetworkInterfaceIPConfiguration.privateLinkConnectionProperties
       - '@azure/arm-network.NetworkInterfaceIPConfiguration.provisioningState'
       - '@azure/arm-network.NetworkInterfaceIPConfiguration.publicIPAddress'
       - '@azure/arm-network.NetworkInterfaceIPConfiguration.subnet'
@@ -154,7 +156,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Gets whether this is a primary customer address on the network interface.
+    summary: Whether this is a primary customer address on the network interface.
     optional: true
     syntax:
       content: 'primary?: undefined | false | true'
@@ -185,13 +187,10 @@ items:
       - typeScript
     type: property
     summary: >-
-      Available from Api-Version 2016-03-30 onwards, it represents whether the
-      specific
+      Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4.
+      Possible values
 
-      ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values
-      include: 'IPv4',
-
-      'IPv6'
+      include: 'IPv4', 'IPv6'
     optional: true
     syntax:
       content: 'privateIPAddressVersion?: IPVersion'
@@ -217,6 +216,29 @@ items:
         type:
           - '@azure/arm-network.IPAllocationMethod'
     package: '@azure/arm-network'
+  - uid: >-
+      @azure/arm-network.NetworkInterfaceIPConfiguration.privateLinkConnectionProperties
+    name: privateLinkConnectionProperties
+    fullName: privateLinkConnectionProperties
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      PrivateLinkConnection properties for the network interface.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
+    optional: true
+    syntax:
+      content: >-
+        privateLinkConnectionProperties?:
+        NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
+      return:
+        type:
+          - >-
+            @azure/arm-network.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
+    package: '@azure/arm-network'
   - uid: '@azure/arm-network.NetworkInterfaceIPConfiguration.provisioningState'
     name: provisioningState
     fullName: provisioningState
@@ -226,15 +248,15 @@ items:
     type: property
     summary: >-
       The provisioning state of the network interface IP configuration. Possible
-      values are:
+      values include:
 
-      'Updating', 'Deleting', and 'Failed'.
+      'Succeeded', 'Updating', 'Deleting', 'Failed'
     optional: true
     syntax:
-      content: 'provisioningState?: undefined | string'
+      content: 'provisioningState?: ProvisioningState'
       return:
         type:
-          - undefined | string
+          - '@azure/arm-network.ProvisioningState'
     package: '@azure/arm-network'
   - uid: '@azure/arm-network.NetworkInterfaceIPConfiguration.publicIPAddress'
     name: publicIPAddress
@@ -332,6 +354,20 @@ references:
       - name: IPAllocationMethod
         fullName: IPAllocationMethod
         uid: '@azure/arm-network.IPAllocationMethod'
+  - uid: >-
+      @azure/arm-network.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
+    name: NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
+    spec.typeScript:
+      - name: NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
+        fullName: NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
+        uid: >-
+          @azure/arm-network.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
+  - uid: '@azure/arm-network.ProvisioningState'
+    name: ProvisioningState
+    spec.typeScript:
+      - name: ProvisioningState
+        fullName: ProvisioningState
+        uid: '@azure/arm-network.ProvisioningState'
   - uid: '@azure/arm-network.PublicIPAddress'
     name: PublicIPAddress
     spec.typeScript:

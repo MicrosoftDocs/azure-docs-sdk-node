@@ -5,7 +5,10 @@ items:
     fullName: IAppendBlobAppendBlockOptions
     children:
       - '@azure/storage-blob.IAppendBlobAppendBlockOptions.accessConditions'
+      - '@azure/storage-blob.IAppendBlobAppendBlockOptions.customerProvidedKey'
       - '@azure/storage-blob.IAppendBlobAppendBlockOptions.progress'
+      - >-
+        @azure/storage-blob.IAppendBlobAppendBlockOptions.transactionalContentCrc64
       - >-
         @azure/storage-blob.IAppendBlobAppendBlockOptions.transactionalContentMD5
     langs:
@@ -28,6 +31,21 @@ items:
         type:
           - '@azure/storage-blob.IAppendBlobAccessConditions'
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.IAppendBlobAppendBlockOptions.customerProvidedKey'
+    name: customerProvidedKey
+    fullName: customerProvidedKey
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    optional: true
+    syntax:
+      content: 'customerProvidedKey?: Models.CpkInfo'
+      return:
+        type:
+          - Models.CpkInfo
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.IAppendBlobAppendBlockOptions.progress'
     name: progress
     fullName: progress
@@ -43,6 +61,30 @@ items:
         type:
           - 'undefined | (progress: TransferProgressEvent) => void'
     package: '@azure/storage-blob'
+  - uid: >-
+      @azure/storage-blob.IAppendBlobAppendBlockOptions.transactionalContentCrc64
+    name: transactionalContentCrc64
+    fullName: transactionalContentCrc64
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >
+      A CRC64 hash of the append block content. This hash is used to verify the
+      integrity of the append block during transport.
+
+      When this is specified, the storage service compares the hash of the
+      content that has arrived with this value.
+
+      transactionalContentMD5 and transactionalContentCrc64 cannot be set at
+      same time.
+    optional: true
+    syntax:
+      content: 'transactionalContentCrc64?: Uint8Array'
+      return:
+        type:
+          - Uint8Array
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.IAppendBlobAppendBlockOptions.transactionalContentMD5'
     name: transactionalContentMD5
     fullName: transactionalContentMD5
@@ -50,7 +92,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >
+      An MD5 hash of the block content. This hash is used to verify the
+      integrity of the block during transport.
+
+      When this is specified, the storage service compares the hash of the
+      content that has arrived with this value.
+
+      transactionalContentMD5 and transactionalContentCrc64 cannot be set at
+      same time.
     optional: true
     syntax:
       content: 'transactionalContentMD5?: Uint8Array'

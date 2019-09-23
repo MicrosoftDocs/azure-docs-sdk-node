@@ -9,6 +9,7 @@ items:
       - '@azure/core-http.WebResource.clone'
       - '@azure/core-http.WebResource.formData'
       - '@azure/core-http.WebResource.headers'
+      - '@azure/core-http.WebResource.keepAlive'
       - '@azure/core-http.WebResource.method'
       - '@azure/core-http.WebResource.onDownloadProgress'
       - '@azure/core-http.WebResource.onUploadProgress'
@@ -18,6 +19,7 @@ items:
       - '@azure/core-http.WebResource.proxySettings'
       - '@azure/core-http.WebResource.query'
       - '@azure/core-http.WebResource.shouldDeserialize'
+      - '@azure/core-http.WebResource.spanOptions'
       - '@azure/core-http.WebResource.streamResponseBody'
       - '@azure/core-http.WebResource.timeout'
       - '@azure/core-http.WebResource.url'
@@ -48,7 +50,7 @@ items:
       content: 'abortSignal?: AbortSignalLike'
       return:
         type:
-          - '@azure/core-http.AbortSignalLike'
+          - AbortSignalLike
     package: '@azure/core-http'
   - uid: '@azure/core-http.WebResource.body'
     name: body
@@ -107,6 +109,21 @@ items:
       return:
         type:
           - '@azure/core-http.HttpHeaders'
+    package: '@azure/core-http'
+  - uid: '@azure/core-http.WebResource.keepAlive'
+    name: keepAlive
+    fullName: keepAlive
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    optional: true
+    syntax:
+      content: 'keepAlive?: boolean'
+      return:
+        type:
+          - boolean
     package: '@azure/core-http'
   - uid: '@azure/core-http.WebResource.method'
     name: method
@@ -171,12 +188,12 @@ items:
     syntax:
       content: >-
         operationResponseGetter?: (operationSpec: OperationSpec, response:
-        HttpOperationResponse) => OperationResponse
+        HttpOperationResponse) => undefined | OperationResponse
       return:
         type:
           - >-
             (operationSpec: OperationSpec, response: HttpOperationResponse) =>
-            OperationResponse
+            undefined | OperationResponse
     package: '@azure/core-http'
   - uid: '@azure/core-http.WebResource.operationSpec'
     name: operationSpec
@@ -262,6 +279,21 @@ items:
         type:
           - 'boolean | (response: HttpOperationResponse) => boolean'
     package: '@azure/core-http'
+  - uid: '@azure/core-http.WebResource.spanOptions'
+    name: spanOptions
+    fullName: spanOptions
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Options used to create a span when tracing is enabled.
+    optional: true
+    syntax:
+      content: 'spanOptions?: any'
+      return:
+        type:
+          - any
+    package: '@azure/core-http'
   - uid: '@azure/core-http.WebResource.streamResponseBody'
     name: streamResponseBody
     fullName: streamResponseBody
@@ -330,7 +362,7 @@ items:
       WebResource(string, HttpMethods, any, [key: string]: any, [key: string]:
       any | HttpHeaders, boolean, boolean, AbortSignalLike, number, (progress:
       TransferProgressEvent) => void, (progress: TransferProgressEvent) => void,
-      ProxySettings)
+      ProxySettings, boolean)
     children: []
     type: constructor
     langs:
@@ -343,7 +375,8 @@ items:
         streamResponseBody?: boolean, withCredentials?: boolean, abortSignal?:
         AbortSignalLike, timeout?: number, onUploadProgress?: (progress:
         TransferProgressEvent) => void, onDownloadProgress?: (progress:
-        TransferProgressEvent) => void, proxySettings?: ProxySettings)
+        TransferProgressEvent) => void, proxySettings?: ProxySettings,
+        keepAlive?: boolean)
       parameters:
         - id: url
           type:
@@ -382,7 +415,7 @@ items:
           optional: true
         - id: abortSignal
           type:
-            - '@azure/core-http.AbortSignalLike'
+            - AbortSignalLike
           description: ''
           optional: true
         - id: timeout
@@ -403,6 +436,11 @@ items:
         - id: proxySettings
           type:
             - '@azure/core-http.ProxySettings'
+          description: ''
+          optional: true
+        - id: keepAlive
+          type:
+            - boolean
           description: ''
           optional: true
     package: '@azure/core-http'
@@ -435,12 +473,6 @@ references:
       - name: HttpHeaders
         fullName: HttpHeaders
         uid: '@azure/core-http.HttpHeaders'
-  - uid: '@azure/core-http.AbortSignalLike'
-    name: AbortSignalLike
-    spec.typeScript:
-      - name: AbortSignalLike
-        fullName: AbortSignalLike
-        uid: '@azure/core-http.AbortSignalLike'
   - uid: '@azure/core-http.ProxySettings'
     name: ProxySettings
     spec.typeScript:

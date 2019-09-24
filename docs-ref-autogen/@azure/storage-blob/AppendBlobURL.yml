@@ -13,6 +13,7 @@ items:
       - '@azure/storage-blob.AppendBlobURL.changeLease'
       - '@azure/storage-blob.AppendBlobURL.create'
       - '@azure/storage-blob.AppendBlobURL.createSnapshot'
+      - '@azure/storage-blob.AppendBlobURL.credential'
       - '@azure/storage-blob.AppendBlobURL.delete'
       - '@azure/storage-blob.AppendBlobURL.download'
       - '@azure/storage-blob.AppendBlobURL.fromBlobURL'
@@ -367,6 +368,20 @@ items:
         type:
           - Promise<Models.BlobCreateSnapshotResponse>
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.AppendBlobURL.credential'
+    name: credential
+    fullName: credential
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Credential used for authentication and authorization.
+    syntax:
+      content: 'credential: Credential'
+      return:
+        type:
+          - '@azure/storage-blob.Credential'
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.AppendBlobURL.delete'
     name: 'delete(Aborter, IBlobDeleteOptions)'
     children: []
@@ -697,7 +712,9 @@ items:
           - Promise<Models.BlobSetMetadataResponse>
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.AppendBlobURL.setTier'
-    name: 'setTier(Aborter, Models.AccessTier, IBlobSetTierOptions)'
+    name: >-
+      setTier(Aborter, BlockBlobTier | PremiumPageBlobTier | string,
+      IBlobSetTierOptions)
     children: []
     type: method
     langs:
@@ -717,8 +734,8 @@ items:
       storage type. This operation does not update the blob's ETag.
     syntax:
       content: >-
-        function setTier(aborter: Aborter, tier: Models.AccessTier, options?:
-        IBlobSetTierOptions)
+        function setTier(aborter: Aborter, tier: BlockBlobTier |
+        PremiumPageBlobTier | string, options?: IBlobSetTierOptions)
       parameters:
         - id: aborter
           type:
@@ -729,7 +746,9 @@ items:
                                      goto documents of Aborter for more examples about request cancellation
         - id: tier
           type:
-            - Models.AccessTier
+            - >-
+              @azure/storage-blob.BlockBlobTier |
+              @azure/storage-blob.PremiumPageBlobTier | string
           description: ''
         - id: options
           type:
@@ -921,6 +940,12 @@ references:
       - name: Pipeline
         fullName: Pipeline
         uid: '@azure/storage-blob.Pipeline'
+  - uid: '@azure/storage-blob.Credential'
+    name: Credential
+    spec.typeScript:
+      - name: Credential
+        fullName: Credential
+        uid: '@azure/storage-blob.Credential'
   - uid: '@azure/storage-blob.Aborter'
     name: Aborter
     spec.typeScript:
@@ -1023,6 +1048,21 @@ references:
       - name: IBlobSetMetadataOptions
         fullName: IBlobSetMetadataOptions
         uid: '@azure/storage-blob.IBlobSetMetadataOptions'
+  - uid: >-
+      @azure/storage-blob.BlockBlobTier |
+      @azure/storage-blob.PremiumPageBlobTier | string
+    name: PremiumPageBlobTier | string
+    spec.typeScript:
+      - name: BlockBlobTier
+        fullName: BlockBlobTier
+        uid: '@azure/storage-blob.BlockBlobTier'
+      - name: ' | '
+        fullName: ' | '
+      - name: PremiumPageBlobTier
+        fullName: PremiumPageBlobTier
+        uid: '@azure/storage-blob.PremiumPageBlobTier'
+      - name: ' | string'
+        fullName: ' | string'
   - uid: '@azure/storage-blob.IBlobSetTierOptions'
     name: IBlobSetTierOptions
     spec.typeScript:
@@ -1053,12 +1093,6 @@ references:
       - name: ContainerURL
         fullName: ContainerURL
         uid: '@azure/storage-blob.ContainerURL'
-  - uid: '@azure/storage-blob.Credential'
-    name: Credential
-    spec.typeScript:
-      - name: Credential
-        fullName: Credential
-        uid: '@azure/storage-blob.Credential'
   - uid: '@azure/storage-blob.INewPipelineOptions'
     name: INewPipelineOptions
     spec.typeScript:

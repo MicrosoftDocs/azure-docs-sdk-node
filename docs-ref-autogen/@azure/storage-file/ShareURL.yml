@@ -5,10 +5,12 @@ items:
     fullName: ShareURL
     children:
       - '@azure/storage-file.ShareURL.create'
+      - '@azure/storage-file.ShareURL.createPermission'
       - '@azure/storage-file.ShareURL.createSnapshot'
       - '@azure/storage-file.ShareURL.delete'
       - '@azure/storage-file.ShareURL.fromServiceURL'
       - '@azure/storage-file.ShareURL.getAccessPolicy'
+      - '@azure/storage-file.ShareURL.getPermission'
       - '@azure/storage-file.ShareURL.getProperties'
       - '@azure/storage-file.ShareURL.getStatistics'
       - '@azure/storage-file.ShareURL.newPipeline'
@@ -55,6 +57,36 @@ items:
       return:
         type:
           - Promise<Models.ShareCreateResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareURL.createPermission'
+    name: 'createPermission(Aborter, string)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates a file permission (a security descriptor) at the share level.
+
+      The created security descriptor can be used for the files/directories in
+      the share.
+    syntax:
+      content: 'function createPermission(aborter: Aborter, filePermission: string)'
+      parameters:
+        - id: aborter
+          type:
+            - '@azure/storage-file.Aborter'
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                           goto documents of Aborter for more examples about request cancellation
+        - id: filePermission
+          type:
+            - string
+          description: |
+            File permission described in the SDDL
+      return:
+        type:
+          - Promise<Models.ShareCreatePermissionResponse>
     package: '@azure/storage-file'
   - uid: '@azure/storage-file.ShareURL.createSnapshot'
     name: 'createSnapshot(Aborter, IShareCreateSnapshotOptions)'
@@ -168,6 +200,37 @@ items:
       return:
         type:
           - Promise<@azure/storage-file.ShareGetAccessPolicyResponse>
+    package: '@azure/storage-file'
+  - uid: '@azure/storage-file.ShareURL.getPermission'
+    name: 'getPermission(Aborter, string)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Gets the Security Descriptor Definition Language (SDDL) for a given file
+      permission key
+
+      which indicates a security descriptor.
+    syntax:
+      content: 'function getPermission(aborter: Aborter, filePermissionKey: string)'
+      parameters:
+        - id: aborter
+          type:
+            - '@azure/storage-file.Aborter'
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                           goto documents of Aborter for more examples about request cancellation
+        - id: filePermissionKey
+          type:
+            - string
+          description: >
+            File permission key which indicates the security descriptor of the
+            permission.
+      return:
+        type:
+          - Promise<Models.ShareGetPermissionResponse>
     package: '@azure/storage-file'
   - uid: '@azure/storage-file.ShareURL.getProperties'
     name: getProperties(Aborter)

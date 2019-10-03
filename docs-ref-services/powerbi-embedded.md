@@ -1,8 +1,8 @@
 ---
 title: Azure PowerBI Embedded modules for Node.js
 description: Reference for Azure PowerBI Embedded modules for Node.js
-author: markingmyname
-ms.author: maghan
+author: rkarlin
+ms.author: rkarlin
 manager: kfile
 ms.date: 07/18/2017
 ms.topic: article

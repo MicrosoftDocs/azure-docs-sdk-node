@@ -7,20 +7,39 @@ items:
       - durable-functions.ActionType
       - durable-functions.CallActivityAction
       - durable-functions.CallActivityWithRetryAction
+      - durable-functions.CallEntityAction
+      - durable-functions.CallHttpAction
       - durable-functions.CallSubOrchestratorAction
       - durable-functions.CallSubOrchestratorWithRetryAction
       - durable-functions.ContinueAsNewAction
       - durable-functions.CreateTimerAction
+      - durable-functions.ExternalEventType
       - durable-functions.IAction
       - durable-functions.WaitForExternalEventAction
       - durable-functions.Constants
+      - durable-functions.DurableEntityBindingInfo
+      - durable-functions.DurableEntityContext
+      - durable-functions.DurableHttpRequest
+      - durable-functions.DurableHttpResponse
       - durable-functions.DurableOrchestrationBindingInfo
       - durable-functions.DurableOrchestrationClient
       - durable-functions.getClient
       - durable-functions.DurableOrchestrationContext
       - durable-functions.DurableOrchestrationStatus
+      - durable-functions.DurableLock
+      - durable-functions.EntityId
+      - durable-functions.EntityState
+      - durable-functions.EntityStateResponse
+      - durable-functions.LockState
+      - durable-functions.OperationResult
+      - durable-functions.RequestMessage
+      - durable-functions.ResponseMessage
+      - durable-functions.Signal
+      - durable-functions.Entity
+      - durable-functions.GetStatusOptions
       - durable-functions.GuidManager
       - durable-functions.EventRaisedEvent
+      - durable-functions.EventSentEvent
       - durable-functions.ExecutionStartedEvent
       - durable-functions.HistoryEvent
       - durable-functions.HistoryEventOptions
@@ -37,9 +56,10 @@ items:
       - durable-functions.TimerFiredEvent
       - durable-functions.HttpCreationPayload
       - durable-functions.HttpManagementPayload
-      - durable-functions.IFunctionContext
+      - durable-functions.IEntityFunctionContext
       - durable-functions.IHttpRequest
       - durable-functions.IHttpResponse
+      - durable-functions.IOrchestrationFunctionContext
       - durable-functions.IOrchestratorState
       - durable-functions.ITaskMethods
       - durable-functions.OrchestrationClientInputData
@@ -48,11 +68,15 @@ items:
       - durable-functions.OrchestratorState
       - durable-functions.PurgeHistoryResult
       - durable-functions.RetryOptions
+      - durable-functions.entity
       - durable-functions.orchestrator
       - durable-functions.Task
       - durable-functions.TaskSet
       - durable-functions.TimerTask
+      - durable-functions.ManagedIdentityTokenSource
+      - durable-functions.TokenSource
       - durable-functions.Utils
+      - durable-functions.WebhookUtils
     type: package
     langs:
       - typeScript
@@ -63,6 +87,10 @@ references:
     name: CallActivityAction
   - uid: durable-functions.CallActivityWithRetryAction
     name: CallActivityWithRetryAction
+  - uid: durable-functions.CallEntityAction
+    name: CallEntityAction
+  - uid: durable-functions.CallHttpAction
+    name: CallHttpAction
   - uid: durable-functions.CallSubOrchestratorAction
     name: CallSubOrchestratorAction
   - uid: durable-functions.CallSubOrchestratorWithRetryAction
@@ -71,12 +99,22 @@ references:
     name: ContinueAsNewAction
   - uid: durable-functions.CreateTimerAction
     name: CreateTimerAction
+  - uid: durable-functions.ExternalEventType
+    name: ExternalEventType
   - uid: durable-functions.IAction
     name: IAction
   - uid: durable-functions.WaitForExternalEventAction
     name: WaitForExternalEventAction
   - uid: durable-functions.Constants
     name: Constants
+  - uid: durable-functions.DurableEntityBindingInfo
+    name: DurableEntityBindingInfo
+  - uid: durable-functions.DurableEntityContext
+    name: DurableEntityContext
+  - uid: durable-functions.DurableHttpRequest
+    name: DurableHttpRequest
+  - uid: durable-functions.DurableHttpResponse
+    name: DurableHttpResponse
   - uid: durable-functions.DurableOrchestrationBindingInfo
     name: DurableOrchestrationBindingInfo
   - uid: durable-functions.DurableOrchestrationClient
@@ -87,10 +125,34 @@ references:
     name: DurableOrchestrationContext
   - uid: durable-functions.DurableOrchestrationStatus
     name: DurableOrchestrationStatus
+  - uid: durable-functions.DurableLock
+    name: DurableLock
+  - uid: durable-functions.EntityId
+    name: EntityId
+  - uid: durable-functions.EntityState
+    name: EntityState
+  - uid: durable-functions.EntityStateResponse
+    name: EntityStateResponse
+  - uid: durable-functions.LockState
+    name: LockState
+  - uid: durable-functions.OperationResult
+    name: OperationResult
+  - uid: durable-functions.RequestMessage
+    name: RequestMessage
+  - uid: durable-functions.ResponseMessage
+    name: ResponseMessage
+  - uid: durable-functions.Signal
+    name: Signal
+  - uid: durable-functions.Entity
+    name: Entity
+  - uid: durable-functions.GetStatusOptions
+    name: GetStatusOptions
   - uid: durable-functions.GuidManager
     name: GuidManager
   - uid: durable-functions.EventRaisedEvent
     name: EventRaisedEvent
+  - uid: durable-functions.EventSentEvent
+    name: EventSentEvent
   - uid: durable-functions.ExecutionStartedEvent
     name: ExecutionStartedEvent
   - uid: durable-functions.HistoryEvent
@@ -123,12 +185,14 @@ references:
     name: HttpCreationPayload
   - uid: durable-functions.HttpManagementPayload
     name: HttpManagementPayload
-  - uid: durable-functions.IFunctionContext
-    name: IFunctionContext
+  - uid: durable-functions.IEntityFunctionContext
+    name: IEntityFunctionContext
   - uid: durable-functions.IHttpRequest
     name: IHttpRequest
   - uid: durable-functions.IHttpResponse
     name: IHttpResponse
+  - uid: durable-functions.IOrchestrationFunctionContext
+    name: IOrchestrationFunctionContext
   - uid: durable-functions.IOrchestratorState
     name: IOrchestratorState
   - uid: durable-functions.ITaskMethods
@@ -145,13 +209,23 @@ references:
     name: PurgeHistoryResult
   - uid: durable-functions.RetryOptions
     name: RetryOptions
+  - uid: durable-functions.entity
+    name: 'entity((context: IEntityFunctionContext) => unknown)'
   - uid: durable-functions.orchestrator
-    name: 'orchestrator((context: IFunctionContext) => IterableIterator<unknown>)'
+    name: >-
+      orchestrator((context: IOrchestrationFunctionContext) =>
+      IterableIterator<unknown>)
   - uid: durable-functions.Task
     name: Task
   - uid: durable-functions.TaskSet
     name: TaskSet
   - uid: durable-functions.TimerTask
     name: TimerTask
+  - uid: durable-functions.ManagedIdentityTokenSource
+    name: ManagedIdentityTokenSource
+  - uid: durable-functions.TokenSource
+    name: TokenSource
   - uid: durable-functions.Utils
     name: Utils
+  - uid: durable-functions.WebhookUtils
+    name: WebhookUtils

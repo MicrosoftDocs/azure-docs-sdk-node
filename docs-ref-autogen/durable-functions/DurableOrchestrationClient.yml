@@ -13,7 +13,9 @@ items:
       - durable-functions.DurableOrchestrationClient.purgeInstanceHistory
       - durable-functions.DurableOrchestrationClient.purgeInstanceHistoryBy
       - durable-functions.DurableOrchestrationClient.raiseEvent
+      - durable-functions.DurableOrchestrationClient.readEntityState
       - durable-functions.DurableOrchestrationClient.rewind
+      - durable-functions.DurableOrchestrationClient.signalEntity
       - durable-functions.DurableOrchestrationClient.startNew
       - durable-functions.DurableOrchestrationClient.taskHubName
       - durable-functions.DurableOrchestrationClient.terminate
@@ -245,6 +247,36 @@ items:
         type:
           - Promise<void>
     package: durable-functions
+  - uid: durable-functions.DurableOrchestrationClient.readEntityState
+    name: 'readEntityState(EntityId, string, string)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function readEntityState<T>(entityId: EntityId, taskHubName?: string,
+        connectionName?: string)
+      parameters:
+        - id: entityId
+          type:
+            - durable-functions.EntityId
+          description: ''
+        - id: taskHubName
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: connectionName
+          type:
+            - string
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<durable-functions.EntityStateResponse<T>>
+    package: durable-functions
   - uid: durable-functions.DurableOrchestrationClient.rewind
     name: 'rewind(string, string)'
     children: []
@@ -263,6 +295,47 @@ items:
           type:
             - string
           description: ''
+      return:
+        type:
+          - Promise<void>
+    package: durable-functions
+  - uid: durable-functions.DurableOrchestrationClient.signalEntity
+    name: 'signalEntity(EntityId, string, unknown, string, string)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function signalEntity(entityId: EntityId, operationName?: string,
+        operationContent?: unknown, taskHubName?: string, connectionName?:
+        string)
+      parameters:
+        - id: entityId
+          type:
+            - durable-functions.EntityId
+          description: ''
+        - id: operationName
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: operationContent
+          type:
+            - unknown
+          description: ''
+          optional: true
+        - id: taskHubName
+          type:
+            - string
+          description: ''
+          optional: true
+        - id: connectionName
+          type:
+            - string
+          description: ''
+          optional: true
       return:
         type:
           - Promise<void>
@@ -450,6 +523,22 @@ references:
         uid: durable-functions.PurgeHistoryResult
       - name: '>'
         fullName: '>'
+  - uid: durable-functions.EntityId
+    name: EntityId
+    spec.typeScript:
+      - name: EntityId
+        fullName: EntityId
+        uid: durable-functions.EntityId
+  - uid: Promise<durable-functions.EntityStateResponse<T>>
+    name: EntityStateResponse<T>>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: EntityStateResponse
+        fullName: EntityStateResponse
+        uid: durable-functions.EntityStateResponse
+      - name: <T>>
+        fullName: <T>>
   - uid: Promise<durable-functions.IHttpResponse>
     name: IHttpResponse>
     spec.typeScript:

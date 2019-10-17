@@ -12,12 +12,16 @@ items:
       - '@azure/arm-sql.ManagedInstance.fullyQualifiedDomainName'
       - '@azure/arm-sql.ManagedInstance.id'
       - '@azure/arm-sql.ManagedInstance.identity'
+      - '@azure/arm-sql.ManagedInstance.instancePoolId'
       - '@azure/arm-sql.ManagedInstance.licenseType'
       - '@azure/arm-sql.ManagedInstance.location'
+      - '@azure/arm-sql.ManagedInstance.managedInstanceCreateMode'
       - '@azure/arm-sql.ManagedInstance.name'
       - '@azure/arm-sql.ManagedInstance.proxyOverride'
       - '@azure/arm-sql.ManagedInstance.publicDataEndpointEnabled'
+      - '@azure/arm-sql.ManagedInstance.restorePointInTime'
       - '@azure/arm-sql.ManagedInstance.sku'
+      - '@azure/arm-sql.ManagedInstance.sourceManagedInstanceId'
       - '@azure/arm-sql.ManagedInstance.state'
       - '@azure/arm-sql.ManagedInstance.storageSizeInGB'
       - '@azure/arm-sql.ManagedInstance.subnetId'
@@ -172,6 +176,21 @@ items:
         type:
           - '@azure/arm-sql.ResourceIdentity'
     package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.ManagedInstance.instancePoolId'
+    name: instancePoolId
+    fullName: instancePoolId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The Id of the instance pool this managed server belongs to.
+    optional: true
+    syntax:
+      content: 'instancePoolId?: undefined | string'
+      return:
+        type:
+          - undefined | string
+    package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.ManagedInstance.licenseType'
     name: licenseType
     fullName: licenseType
@@ -179,13 +198,20 @@ items:
     langs:
       - typeScript
     type: property
-    summary: The license type. Possible values are 'LicenseIncluded' and 'BasePrice'.
+    summary: >-
+      The license type. Possible values are 'LicenseIncluded' (regular price
+      inclusive of a new SQL
+
+      license) and 'BasePrice' (discounted AHB price for bringing your own SQL
+      licenses). Possible
+
+      values include: 'LicenseIncluded', 'BasePrice'
     optional: true
     syntax:
-      content: 'licenseType?: undefined | string'
+      content: 'licenseType?: ManagedInstanceLicenseType'
       return:
         type:
-          - undefined | string
+          - '@azure/arm-sql.ManagedInstanceLicenseType'
     package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.ManagedInstance.location'
     name: location
@@ -200,6 +226,33 @@ items:
       return:
         type:
           - string
+    package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.ManagedInstance.managedInstanceCreateMode'
+    name: managedInstanceCreateMode
+    fullName: managedInstanceCreateMode
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >
+      Specifies the mode of database creation.
+
+      Default: Regular instance creation.
+
+
+      Restore: Creates an instance by restoring a set of backups to specific
+      point in time.
+
+      RestorePointInTime and SourceManagedInstanceId must be specified. Possible
+      values include:
+
+      'Default', 'PointInTimeRestore'
+    optional: true
+    syntax:
+      content: 'managedInstanceCreateMode?: ManagedServerCreateMode'
+      return:
+        type:
+          - '@azure/arm-sql.ManagedServerCreateMode'
     package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.ManagedInstance.name'
     name: name
@@ -254,6 +307,25 @@ items:
         type:
           - undefined | false | true
     package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.ManagedInstance.restorePointInTime'
+    name: restorePointInTime
+    fullName: restorePointInTime
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Specifies the point in time (ISO8601 format) of the source database that
+      will be restored to
+
+      create the new database.
+    optional: true
+    syntax:
+      content: 'restorePointInTime?: Date'
+      return:
+        type:
+          - Date
+    package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.ManagedInstance.sku'
     name: sku
     fullName: sku
@@ -261,13 +333,34 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Managed instance sku
+    summary: >-
+      Managed instance SKU. Allowed values for sku.name: GP_Gen4, GP_Gen5,
+      BC_Gen4, BC_Gen5
     optional: true
     syntax:
       content: 'sku?: Sku'
       return:
         type:
           - '@azure/arm-sql.Sku'
+    package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.ManagedInstance.sourceManagedInstanceId'
+    name: sourceManagedInstanceId
+    fullName: sourceManagedInstanceId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The resource identifier of the source managed instance associated with
+      create operation of
+
+      this instance.
+    optional: true
+    syntax:
+      content: 'sourceManagedInstanceId?: undefined | string'
+      return:
+        type:
+          - undefined | string
     package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.ManagedInstance.state'
     name: state
@@ -295,7 +388,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: The maximum storage size in GB.
+    summary: >-
+      Storage size in GB. Minimum value: 32. Maximum value: 8192. Increments of
+      32 GB allowed only.
     optional: true
     syntax:
       content: 'storageSizeInGB?: undefined | number'
@@ -393,7 +488,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: The number of VCores.
+    summary: 'The number of vCores. Allowed values: 8, 16, 24, 32, 40, 64, 80.'
     optional: true
     syntax:
       content: 'vCores?: undefined | number'
@@ -414,6 +509,18 @@ references:
       - name: ResourceIdentity
         fullName: ResourceIdentity
         uid: '@azure/arm-sql.ResourceIdentity'
+  - uid: '@azure/arm-sql.ManagedInstanceLicenseType'
+    name: ManagedInstanceLicenseType
+    spec.typeScript:
+      - name: ManagedInstanceLicenseType
+        fullName: ManagedInstanceLicenseType
+        uid: '@azure/arm-sql.ManagedInstanceLicenseType'
+  - uid: '@azure/arm-sql.ManagedServerCreateMode'
+    name: ManagedServerCreateMode
+    spec.typeScript:
+      - name: ManagedServerCreateMode
+        fullName: ManagedServerCreateMode
+        uid: '@azure/arm-sql.ManagedServerCreateMode'
   - uid: '@azure/arm-sql.ManagedInstanceProxyOverride'
     name: ManagedInstanceProxyOverride
     spec.typeScript:

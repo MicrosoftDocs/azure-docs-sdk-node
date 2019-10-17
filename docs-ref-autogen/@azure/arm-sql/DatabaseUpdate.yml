@@ -4,6 +4,7 @@ items:
     name: DatabaseUpdate
     fullName: DatabaseUpdate
     children:
+      - '@azure/arm-sql.DatabaseUpdate.autoPauseDelay'
       - '@azure/arm-sql.DatabaseUpdate.catalogCollation'
       - '@azure/arm-sql.DatabaseUpdate.collation'
       - '@azure/arm-sql.DatabaseUpdate.createMode'
@@ -19,12 +20,16 @@ items:
       - '@azure/arm-sql.DatabaseUpdate.longTermRetentionBackupResourceId'
       - '@azure/arm-sql.DatabaseUpdate.maxLogSizeBytes'
       - '@azure/arm-sql.DatabaseUpdate.maxSizeBytes'
+      - '@azure/arm-sql.DatabaseUpdate.minCapacity'
+      - '@azure/arm-sql.DatabaseUpdate.pausedDate'
+      - '@azure/arm-sql.DatabaseUpdate.readReplicaCount'
       - '@azure/arm-sql.DatabaseUpdate.readScale'
       - '@azure/arm-sql.DatabaseUpdate.recoverableDatabaseId'
       - '@azure/arm-sql.DatabaseUpdate.recoveryServicesRecoveryPointId'
       - '@azure/arm-sql.DatabaseUpdate.requestedServiceObjectiveName'
       - '@azure/arm-sql.DatabaseUpdate.restorableDroppedDatabaseId'
       - '@azure/arm-sql.DatabaseUpdate.restorePointInTime'
+      - '@azure/arm-sql.DatabaseUpdate.resumedDate'
       - '@azure/arm-sql.DatabaseUpdate.sampleName'
       - '@azure/arm-sql.DatabaseUpdate.sku'
       - '@azure/arm-sql.DatabaseUpdate.sourceDatabaseDeletionDate'
@@ -36,6 +41,25 @@ items:
       - typeScript
     type: interface
     summary: A database resource.
+    package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.DatabaseUpdate.autoPauseDelay'
+    name: autoPauseDelay
+    fullName: autoPauseDelay
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Time in minutes after which database is automatically paused. A value of
+      -1 means that
+
+      automatic pause is disabled
+    optional: true
+    syntax:
+      content: 'autoPauseDelay?: undefined | number'
+      return:
+        type:
+          - undefined | number
     package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.DatabaseUpdate.catalogCollation'
     name: catalogCollation
@@ -376,6 +400,65 @@ items:
         type:
           - undefined | number
     package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.DatabaseUpdate.minCapacity'
+    name: minCapacity
+    fullName: minCapacity
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: 'Minimal capacity that database will always have allocated, if not paused'
+    optional: true
+    syntax:
+      content: 'minCapacity?: undefined | number'
+      return:
+        type:
+          - undefined | number
+    package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.DatabaseUpdate.pausedDate'
+    name: pausedDate
+    fullName: pausedDate
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The date when database was paused by user configuration or action (ISO8601
+      format). Null if
+
+      the database is ready.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
+    optional: true
+    syntax:
+      content: 'pausedDate?: Date'
+      return:
+        type:
+          - Date
+    package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.DatabaseUpdate.readReplicaCount'
+    name: readReplicaCount
+    fullName: readReplicaCount
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The number of readonly secondary replicas associated with the database to
+      which readonly
+
+      application intent connections may be routed. This property is only
+      settable for Hyperscale
+
+      edition databases.
+    optional: true
+    syntax:
+      content: 'readReplicaCount?: undefined | number'
+      return:
+        type:
+          - undefined | number
+    package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.DatabaseUpdate.readScale'
     name: readScale
     fullName: readScale
@@ -384,13 +467,14 @@ items:
       - typeScript
     type: property
     summary: >-
-      The state of read-only routing. If enabled, connections that have
-      application intent set to
+      If enabled, connections that have application intent set to readonly in
+      their connection
 
-      readonly in their connection string may be routed to a readonly secondary
-      replica in the same
+      string may be routed to a readonly secondary replica. This property is
+      only settable for
 
-      region. Possible values include: 'Enabled', 'Disabled'
+      Premium and Business Critical databases. Possible values include:
+      'Enabled', 'Disabled'
     optional: true
     syntax:
       content: 'readScale?: DatabaseReadScale'
@@ -493,6 +577,28 @@ items:
         type:
           - Date
     package: '@azure/arm-sql'
+  - uid: '@azure/arm-sql.DatabaseUpdate.resumedDate'
+    name: resumedDate
+    fullName: resumedDate
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The date when database was resumed by user action or database login
+      (ISO8601 format). Null if
+
+      the database is paused.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
+    optional: true
+    syntax:
+      content: 'resumedDate?: Date'
+      return:
+        type:
+          - Date
+    package: '@azure/arm-sql'
   - uid: '@azure/arm-sql.DatabaseUpdate.sampleName'
     name: sampleName
     fullName: sampleName
@@ -578,7 +684,8 @@ items:
       'Copying', 'Creating', 'Inaccessible', 'OfflineSecondary', 'Pausing',
       'Paused', 'Resuming',
 
-      'Scaling'
+      'Scaling', 'OfflineChangingDwPerformanceTiers',
+      'OnlineChangingDwPerformanceTiers', 'Disabled'
 
       **NOTE: This property will not be serialized. It can only be populated by
       the server.**

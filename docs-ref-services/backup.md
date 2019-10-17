@@ -1,8 +1,8 @@
 ---
 title: Azure Backup Modules for Node.js
 description: Reference for Azure Backup Modules for Node.js
-author: markgalioto
-ms.author: markgal
+author: dcurwin
+ms.author: dacurwin
 manager: carmonm
 ms.date: 07/18/2017
 ms.topic: article

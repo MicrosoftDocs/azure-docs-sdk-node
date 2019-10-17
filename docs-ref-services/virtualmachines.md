@@ -54,6 +54,9 @@ msRestAzure.interactiveLogin().then(credentials => {
 
 ## Samples
 
-[!INCLUDE [node-virtualmachines-samples](../docs-ref-conceptual/includes/virtualmachines-samples.md)]
+| | |
+|---|---|
+| **Virtual machine management** ||
+| [Azure virtual machines management sample with Node.js](https://github.com/Azure-Samples/compute-node-manage-vm) | Demonstrates how to create, list, restart, and delete virtual machines. |
 
 Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

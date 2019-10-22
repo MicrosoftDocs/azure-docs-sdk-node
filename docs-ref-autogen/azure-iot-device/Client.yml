@@ -6,25 +6,46 @@ items:
     children:
       - azure-iot-device.Client.abandon_1
       - azure-iot-device.Client.abandon
+      - azure-iot-device.Client.addListener
       - azure-iot-device.Client.constructor
       - azure-iot-device.Client.close_1
       - azure-iot-device.Client.close
       - azure-iot-device.Client.complete_1
       - azure-iot-device.Client.complete
+      - azure-iot-device.Client.defaultMaxListeners
+      - azure-iot-device.Client.emit
+      - azure-iot-device.Client.eventNames
       - azure-iot-device.Client.fromAuthenticationProvider
       - azure-iot-device.Client.fromConnectionString
       - azure-iot-device.Client.fromSharedAccessSignature
+      - azure-iot-device.Client.getBlobSharedAccessSignature_1
+      - azure-iot-device.Client.getBlobSharedAccessSignature
+      - azure-iot-device.Client.getMaxListeners
       - azure-iot-device.Client.getTwin_1
       - azure-iot-device.Client.getTwin
+      - azure-iot-device.Client.listenerCount
+      - azure-iot-device.Client.listenerCount
+      - azure-iot-device.Client.listeners
+      - azure-iot-device.Client.notifyBlobUploadStatus_1
+      - azure-iot-device.Client.notifyBlobUploadStatus
+      - azure-iot-device.Client.off
+      - azure-iot-device.Client.on
+      - azure-iot-device.Client.once
       - azure-iot-device.Client.onDeviceMethod
       - azure-iot-device.Client.open_1
       - azure-iot-device.Client.open
+      - azure-iot-device.Client.prependListener
+      - azure-iot-device.Client.prependOnceListener
+      - azure-iot-device.Client.rawListeners
       - azure-iot-device.Client.reject_1
       - azure-iot-device.Client.reject
+      - azure-iot-device.Client.removeAllListeners
+      - azure-iot-device.Client.removeListener
       - azure-iot-device.Client.sendEvent_1
       - azure-iot-device.Client.sendEvent
       - azure-iot-device.Client.sendEventBatch_1
       - azure-iot-device.Client.sendEventBatch
+      - azure-iot-device.Client.setMaxListeners
       - azure-iot-device.Client.setOptions_1
       - azure-iot-device.Client.setOptions
       - azure-iot-device.Client.setRetryPolicy
@@ -89,8 +110,32 @@ items:
             - Callback<MessageAbandoned>
           description: ''
     package: azure-iot-device
+  - uid: azure-iot-device.Client.addListener
+    name: 'addListener(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function addListener(event: string | symbol, listener: (args: any[]) =>
+        void)
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+    package: azure-iot-device
   - uid: azure-iot-device.Client.constructor
-    name: 'Client(DeviceTransport, string, BlobUploadClient)'
+    name: 'Client(DeviceTransport, string, BlobUploadClient, FileUploadInterface)'
     children: []
     type: constructor
     langs:
@@ -99,7 +144,8 @@ items:
     syntax:
       content: >-
         new Client(transport: DeviceTransport, connStr?: string,
-        blobUploadClient?: BlobUploadClient)
+        blobUploadClient?: BlobUploadClient, fileUploadApi?:
+        FileUploadInterface)
       parameters:
         - id: transport
           type:
@@ -119,8 +165,14 @@ items:
         - id: blobUploadClient
           type:
             - BlobUploadClient
-          description: |
-            An object that is capable of uploading a stream to a blob.
+          description: An object that is capable of uploading a stream to a blob.
+          optional: true
+        - id: fileUploadApi
+          type:
+            - FileUploadInterface
+          description: >
+            An object that is used for communicating with IoT Hub for Blob
+            Storage related actions.
           optional: true
     package: azure-iot-device
   - uid: azure-iot-device.Client.close_1
@@ -194,6 +246,56 @@ items:
           type:
             - Callback<MessageCompleted>
           description: ''
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.defaultMaxListeners
+    name: defaultMaxListeners
+    fullName: defaultMaxListeners
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    syntax:
+      content: 'static defaultMaxListeners: number'
+      return:
+        type:
+          - number
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.emit
+    name: 'emit(string | symbol, any[])'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function emit(event: string | symbol, args: any[])'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: args
+          type:
+            - 'any[]'
+          description: ''
+      return:
+        type:
+          - boolean
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.eventNames
+    name: eventNames()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: function eventNames()
+      parameters: []
+      return:
+        type:
+          - Array<string | symbol>
     package: azure-iot-device
   - uid: azure-iot-device.Client.fromAuthenticationProvider
     name: 'fromAuthenticationProvider(AuthenticationProvider, any)'
@@ -279,6 +381,65 @@ items:
         type:
           - azure-iot-device.Client
     package: azure-iot-device
+  - uid: azure-iot-device.Client.getBlobSharedAccessSignature_1
+    name: getBlobSharedAccessSignature(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      The `getBlobSharedAccessSignature` gets the linked storage account SAS
+      Token from IoT Hub
+    syntax:
+      content: 'function getBlobSharedAccessSignature(blobName: string)'
+      parameters:
+        - id: blobName
+          type:
+            - string
+          description: ''
+      return:
+        type:
+          - Promise<UploadParams>
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.getBlobSharedAccessSignature
+    name: 'getBlobSharedAccessSignature(string, Callback<UploadParams>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      The `getBlobSharedAccessSignature` gets the linked storage account SAS
+      Token from IoT Hub
+    syntax:
+      content: >-
+        function getBlobSharedAccessSignature(blobName: string, callback:
+        Callback<UploadParams>)
+      parameters:
+        - id: blobName
+          type:
+            - string
+          description: >-
+            The name to use for the blob that will be created with the content
+            of the stream.
+        - id: callback
+          type:
+            - Callback<UploadParams>
+          description: ''
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.getMaxListeners
+    name: getMaxListeners()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: function getMaxListeners()
+      parameters: []
+      return:
+        type:
+          - number
+    package: azure-iot-device
   - uid: azure-iot-device.Client.getTwin_1
     name: getTwin()
     children: []
@@ -307,6 +468,208 @@ items:
           type:
             - Callback<azure-iot-device.Twin>
           description: ''
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.listenerCount
+    name: 'listenerCount(EventEmitter, string | symbol)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        static function listenerCount(emitter: EventEmitter, event: string |
+        symbol)
+      parameters:
+        - id: emitter
+          type:
+            - EventEmitter
+          description: ''
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+      return:
+        type:
+          - number
+    package: azure-iot-device
+    deprecated:
+      content: since v4.0.0
+  - uid: azure-iot-device.Client.listenerCount
+    name: listenerCount(string | symbol)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function listenerCount(type: string | symbol)'
+      parameters:
+        - id: type
+          type:
+            - string | symbol
+          description: ''
+      return:
+        type:
+          - number
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.listeners
+    name: listeners(string | symbol)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function listeners(event: string | symbol)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+      return:
+        type:
+          - 'Function[]'
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.notifyBlobUploadStatus_1
+    name: 'notifyBlobUploadStatus(string, boolean, number, string)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      The `notifyBlobUploadStatus` method sends IoT Hub the result of a blob
+      upload.
+    syntax:
+      content: >-
+        function notifyBlobUploadStatus(correlationId: string, isSuccess:
+        boolean, statusCode: number, statusDescription: string)
+      parameters:
+        - id: correlationId
+          type:
+            - string
+          description: ''
+        - id: isSuccess
+          type:
+            - boolean
+          description: ''
+        - id: statusCode
+          type:
+            - number
+          description: ''
+        - id: statusDescription
+          type:
+            - string
+          description: ''
+      return:
+        type:
+          - Promise<void>
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.notifyBlobUploadStatus
+    name: 'notifyBlobUploadStatus(string, boolean, number, string, ErrorCallback)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      The `notifyBlobUploadStatus` method sends IoT Hub the result of a blob
+      upload.
+    syntax:
+      content: >-
+        function notifyBlobUploadStatus(correlationId: string, isSuccess:
+        boolean, statusCode: number, statusDescription: string, callback:
+        ErrorCallback)
+      parameters:
+        - id: correlationId
+          type:
+            - string
+          description: >-
+            An id for correlating a upload status to a specific blob. Generated
+            during the call to `getBlobSharedAccessSignature`.
+        - id: isSuccess
+          type:
+            - boolean
+          description: >-
+            The success or failure status from the storage blob operation
+            result.
+        - id: statusCode
+          type:
+            - number
+          description: The HTTP status code associated with the storage blob result.
+        - id: statusDescription
+          type:
+            - string
+          description: The description of the HTTP status code.
+        - id: callback
+          type:
+            - ErrorCallback
+          description: ''
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.off
+    name: 'off(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function off(event: string | symbol, listener: (args: any[]) => void)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.on
+    name: 'on(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function on(event: string | symbol, listener: (args: any[]) => void)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.once
+    name: 'once(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function once(event: string | symbol, listener: (args: any[]) => void)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
     package: azure-iot-device
   - uid: azure-iot-device.Client.onDeviceMethod
     name: >-
@@ -364,6 +727,72 @@ items:
             - Callback<Connected>
           description: ''
     package: azure-iot-device
+  - uid: azure-iot-device.Client.prependListener
+    name: 'prependListener(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function prependListener(event: string | symbol, listener: (args: any[])
+        => void)
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.prependOnceListener
+    name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function prependOnceListener(event: string | symbol, listener: (args:
+        any[]) => void)
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.rawListeners
+    name: rawListeners(string | symbol)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function rawListeners(event: string | symbol)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+      return:
+        type:
+          - 'Function[]'
+    package: azure-iot-device
   - uid: azure-iot-device.Client.reject_1
     name: reject(Message)
     children: []
@@ -402,6 +831,49 @@ items:
           type:
             - Callback<MessageRejected>
           description: ''
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.removeAllListeners
+    name: removeAllListeners(string | symbol)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function removeAllListeners(event?: string | symbol)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+          optional: true
+      return:
+        type:
+          - this
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.removeListener
+    name: 'removeListener(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function removeListener(event: string | symbol, listener: (args: any[])
+        => void)
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
     package: azure-iot-device
   - uid: azure-iot-device.Client.sendEvent_1
     name: sendEvent(Message)
@@ -480,6 +952,24 @@ items:
           type:
             - Callback<MessageEnqueued>
           description: ''
+    package: azure-iot-device
+  - uid: azure-iot-device.Client.setMaxListeners
+    name: setMaxListeners(number)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function setMaxListeners(n: number)'
+      parameters:
+        - id: 'n'
+          type:
+            - number
+          description: ''
+      return:
+        type:
+          - this
     package: azure-iot-device
   - uid: azure-iot-device.Client.setOptions_1
     name: setOptions(DeviceClientOptions)

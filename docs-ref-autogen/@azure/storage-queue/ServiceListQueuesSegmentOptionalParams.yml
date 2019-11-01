@@ -9,16 +9,17 @@ items:
         @azure/storage-queue.ServiceListQueuesSegmentOptionalParams.customHeaders
       - '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.include'
       - '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.marker'
-      - '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.maxresults'
+      - '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.maxPageSize'
       - >-
         @azure/storage-queue.ServiceListQueuesSegmentOptionalParams.onDownloadProgress
       - >-
         @azure/storage-queue.ServiceListQueuesSegmentOptionalParams.onUploadProgress
       - '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.prefix'
       - '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.requestId'
+      - '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.spanOptions'
       - '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.timeout'
       - >-
-        @azure/storage-queue.ServiceListQueuesSegmentOptionalParams.timeoutParameter
+        @azure/storage-queue.ServiceListQueuesSegmentOptionalParams.timeoutInSeconds
     langs:
       - typeScript
     type: interface
@@ -88,16 +89,18 @@ items:
       A string value that identifies the portion of the list of queues to be
       returned with the next
 
-      listing operation. The operation returns the NextMarker value within the
-      response body if the
+      listing operation. The operation returns the ContinuationToken value
+      within the response body
 
-      listing operation did not return all queues remaining to be listed with
-      the current page. The
+      if the listing operation did not return all queues remaining to be listed
+      with the current
 
-      NextMarker value can be used as the value for the marker parameter in a
-      subsequent call to
+      page. The ContinuationToken value can be used as the value for the marker
+      parameter in a
 
-      request the next page of list items. The marker value is opaque to the
+      subsequent call to request the next page of list items. The marker value
+      is opaque to the
+
       client.
     optional: true
     syntax:
@@ -106,9 +109,9 @@ items:
         type:
           - undefined | string
     package: '@azure/storage-queue'
-  - uid: '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.maxresults'
-    name: maxresults
-    fullName: maxresults
+  - uid: '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.maxPageSize'
+    name: maxPageSize
+    fullName: maxPageSize
     children: []
     langs:
       - typeScript
@@ -132,7 +135,7 @@ items:
       default of 5000.
     optional: true
     syntax:
-      content: 'maxresults?: undefined | number'
+      content: 'maxPageSize?: undefined | number'
       return:
         type:
           - undefined | number
@@ -207,6 +210,21 @@ items:
         type:
           - undefined | string
     package: '@azure/storage-queue'
+  - uid: '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.spanOptions'
+    name: spanOptions
+    fullName: spanOptions
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Options used to create a span when tracing is enabled.
+    optional: true
+    syntax:
+      content: 'spanOptions?: SpanOptions'
+      return:
+        type:
+          - SpanOptions
+    package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.ServiceListQueuesSegmentOptionalParams.timeout'
     name: timeout
     fullName: timeout
@@ -225,9 +243,9 @@ items:
           - undefined | number
     package: '@azure/storage-queue'
   - uid: >-
-      @azure/storage-queue.ServiceListQueuesSegmentOptionalParams.timeoutParameter
-    name: timeoutParameter
-    fullName: timeoutParameter
+      @azure/storage-queue.ServiceListQueuesSegmentOptionalParams.timeoutInSeconds
+    name: timeoutInSeconds
+    fullName: timeoutInSeconds
     children: []
     langs:
       - typeScript
@@ -241,7 +259,7 @@ items:
       Timeouts for Queue Service Operations.</a>
     optional: true
     syntax:
-      content: 'timeoutParameter?: undefined | number'
+      content: 'timeoutInSeconds?: undefined | number'
       return:
         type:
           - undefined | number

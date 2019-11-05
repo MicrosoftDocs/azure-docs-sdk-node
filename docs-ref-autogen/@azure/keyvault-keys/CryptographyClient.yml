@@ -7,26 +7,21 @@ items:
       - '@azure/keyvault-keys.CryptographyClient.constructor'
       - '@azure/keyvault-keys.CryptographyClient.decrypt'
       - '@azure/keyvault-keys.CryptographyClient.encrypt'
-      - '@azure/keyvault-keys.CryptographyClient.getDefaultPipeline'
-      - '@azure/keyvault-keys.CryptographyClient.getKey'
-      - '@azure/keyvault-keys.CryptographyClient.key'
-      - '@azure/keyvault-keys.CryptographyClient.pipeline'
       - '@azure/keyvault-keys.CryptographyClient.sign'
       - '@azure/keyvault-keys.CryptographyClient.signData'
       - '@azure/keyvault-keys.CryptographyClient.unwrapKey'
-      - '@azure/keyvault-keys.CryptographyClient.vaultBaseUrl'
       - '@azure/keyvault-keys.CryptographyClient.verify'
       - '@azure/keyvault-keys.CryptographyClient.verifyData'
       - '@azure/keyvault-keys.CryptographyClient.wrapKey'
     langs:
       - typeScript
     type: class
-    summary: The client to interact with the KeyVault cryptography functionality
+    summary: >-
+      A client used to perform cryptographic operations with Azure Key Vault
+      keys.
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CryptographyClient.constructor'
-    name: >-
-      CryptographyClient(string, string | JsonWebKey, TokenCredential,
-      ServiceClientOptions | NewPipelineOptions)
+    name: 'CryptographyClient(string | KeyVaultKey, TokenCredential, PipelineOptions)'
     children: []
     type: constructor
     langs:
@@ -35,42 +30,43 @@ items:
       Constructs a new instance of the Cryptography client for the given key
       Example usage:
       ```ts
-      import { CryptographyClient } from "@azure/keyvault-keys";
+      import { KeyClient, CryptographyClient } from "@azure/keyvault-keys";
       import { DefaultAzureCredential } from "@azure/identity";
 
-      let url = `https://<MY KEYVAULT HERE>.vault.azure.net`;
+      let vaultUrl = `https://<MY KEYVAULT HERE>.vault.azure.net`;
       let credentials = new DefaultAzureCredential();
 
-      let client = new CryptographyClient(url, keyUrl, credentials);
+      let keyClient = new KeyClient(vaultUrl, credentials);
+      let keyVaultKey = await keyClient.getKey("MyKey");
+
+      let client = new CryptographyClient(keyVaultKey.id, credentials);
       // or
-      let client = new CryptographyClient(url, jsonWebKey, credentials);
+      let client = new CryptographyClient(keyVaultKey, credentials);
       ```
     syntax:
       content: >-
-        new CryptographyClient(url: string, key: string | JsonWebKey,
-        credential: TokenCredential, pipelineOrOptions?: ServiceClientOptions |
-        NewPipelineOptions)
+        new CryptographyClient(key: string | KeyVaultKey, credential:
+        TokenCredential, pipelineOptions?: PipelineOptions)
       parameters:
-        - id: url
-          type:
-            - string
-          description: The url of the key vault service
         - id: key
           type:
-            - string | @azure/keyvault-keys.JsonWebKey
-          description: The key to use during cryptography tasks
+            - string | @azure/keyvault-keys.KeyVaultKey
+          description: The key to use during cryptography tasks.
         - id: credential
           type:
             - TokenCredential
-          description: The login credentials of the service
-        - id: pipelineOrOptions
+          description: >-
+            An object that implements the `TokenCredential` interface used to
+            authenticate requests to the service. Use the @azure/identity
+            package to create a credential that suits your needs.
+        - id: pipelineOptions
           type:
-            - ServiceClientOptions | @azure/keyvault-keys.NewPipelineOptions
+            - PipelineOptions
           description: ''
           optional: true
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CryptographyClient.decrypt'
-    name: 'decrypt(JsonWebKeyEncryptionAlgorithm, Uint8Array, DecryptOptions)'
+    name: 'decrypt(EncryptionAlgorithm, Uint8Array, DecryptOptions)'
     children: []
     type: method
     langs:
@@ -79,34 +75,33 @@ items:
       Decrypts the given ciphertext with the specified cryptography algorithm
       Example usage:
       ```ts
-      let client = new CryptographyClient(url, key, credentials);
+      let client = new CryptographyClient(keyVaultKey, credentials);
       let result = await client.decrypt("RSA1_5", encryptedBuffer);
       ```
     syntax:
       content: >-
-        function decrypt(algorithm: JsonWebKeyEncryptionAlgorithm, ciphertext:
-        Uint8Array, options?: DecryptOptions)
+        function decrypt(algorithm: EncryptionAlgorithm, ciphertext: Uint8Array,
+        options?: DecryptOptions)
       parameters:
         - id: algorithm
           type:
-            - '@azure/keyvault-keys.JsonWebKeyEncryptionAlgorithm'
-          description: The algorithm to use
+            - '@azure/keyvault-keys.EncryptionAlgorithm'
+          description: The algorithm to use.
         - id: ciphertext
           type:
             - Uint8Array
-          description: The ciphertext to decrypt
+          description: The text to decrypt.
         - id: options
           type:
             - '@azure/keyvault-keys.DecryptOptions'
-          description: |
-            Additional options
+          description: ''
           optional: true
       return:
         type:
           - Promise<@azure/keyvault-keys.DecryptResult>
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CryptographyClient.encrypt'
-    name: 'encrypt(JsonWebKeyEncryptionAlgorithm, Uint8Array, EncryptOptions)'
+    name: 'encrypt(EncryptionAlgorithm, Uint8Array, EncryptOptions)'
     children: []
     type: method
     langs:
@@ -115,119 +110,33 @@ items:
       Encrypts the given plaintext with the specified cryptography algorithm
       Example usage:
       ```ts
-      let client = new CryptographyClient(url, key, credentials);
+      let client = new CryptographyClient(keyVaultKey, credentials);
       let result = await client.encrypt("RSA1_5", Buffer.from("My Message"));
       ```
     syntax:
       content: >-
-        function encrypt(algorithm: JsonWebKeyEncryptionAlgorithm, plaintext:
-        Uint8Array, options?: EncryptOptions)
+        function encrypt(algorithm: EncryptionAlgorithm, plaintext: Uint8Array,
+        options?: EncryptOptions)
       parameters:
         - id: algorithm
           type:
-            - '@azure/keyvault-keys.JsonWebKeyEncryptionAlgorithm'
-          description: The algorithm to use
+            - '@azure/keyvault-keys.EncryptionAlgorithm'
+          description: The algorithm to use.
         - id: plaintext
           type:
             - Uint8Array
-          description: The text to encrypt
+          description: The text to encrypt.
         - id: options
           type:
             - '@azure/keyvault-keys.EncryptOptions'
-          description: |
-            Additional options
+          description: ''
           optional: true
       return:
         type:
           - Promise<@azure/keyvault-keys.EncryptResult>
     package: '@azure/keyvault-keys'
-  - uid: '@azure/keyvault-keys.CryptographyClient.getDefaultPipeline'
-    name: >-
-      getDefaultPipeline(ServiceClientCredentials | TokenCredential,
-      NewPipelineOptions)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      A static method used to create a new Pipeline object with the provided
-      Credential.
-    syntax:
-      content: >-
-        static function getDefaultPipeline(credential: ServiceClientCredentials
-        | TokenCredential, pipelineOptions?: NewPipelineOptions)
-      parameters:
-        - id: credential
-          type:
-            - ServiceClientCredentials | TokenCredential
-          description: ''
-        - id: pipelineOptions
-          type:
-            - '@azure/keyvault-keys.NewPipelineOptions'
-          description: ''
-          optional: true
-      return:
-        type:
-          - ServiceClientOptions
-    package: '@azure/keyvault-keys'
-  - uid: '@azure/keyvault-keys.CryptographyClient.getKey'
-    name: getKey(GetKeyOptions)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: |-
-      Retrieves the complete key from the key vault
-      Example usage:
-      ```ts
-      let client = new CryptographyClient(url, keyUrl, credentials);
-      let result = await client.getKey();
-      ```
-    syntax:
-      content: 'function getKey(options?: GetKeyOptions)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/keyvault-keys.GetKeyOptions'
-          description: |
-            Options for retrieving key
-          optional: true
-      return:
-        type:
-          - Promise<@azure/keyvault-keys.JsonWebKey>
-    package: '@azure/keyvault-keys'
-  - uid: '@azure/keyvault-keys.CryptographyClient.key'
-    name: key
-    fullName: key
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      If the key is a string, it's a URL, and we'll pass it to the service API
-      directly.
-    syntax:
-      content: 'key: string | JsonWebKey'
-      return:
-        type:
-          - string | @azure/keyvault-keys.JsonWebKey
-    package: '@azure/keyvault-keys'
-  - uid: '@azure/keyvault-keys.CryptographyClient.pipeline'
-    name: pipeline
-    fullName: pipeline
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: The options to create the connection to the service
-    syntax:
-      content: 'pipeline: ServiceClientOptions'
-      return:
-        type:
-          - ServiceClientOptions
-    package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CryptographyClient.sign'
-    name: 'sign(KeySignatureAlgorithm, Uint8Array, RequestOptions)'
+    name: 'sign(SignatureAlgorithm, Uint8Array, SignOptions)'
     children: []
     type: method
     langs:
@@ -236,34 +145,33 @@ items:
       Cryptographically sign the digest of a message
       Example usage:
       ```ts
-      let client = new CryptographyClient(url, key, credentials);
+      let client = new CryptographyClient(keyVaultKey, credentials);
       let result = await client.sign("RS256", digest);
       ```
     syntax:
       content: >-
-        function sign(algorithm: KeySignatureAlgorithm, digest: Uint8Array,
-        options?: RequestOptions)
+        function sign(algorithm: SignatureAlgorithm, digest: Uint8Array,
+        options?: SignOptions)
       parameters:
         - id: algorithm
           type:
-            - '@azure/keyvault-keys.KeySignatureAlgorithm'
-          description: The signing algorithm to use
+            - '@azure/keyvault-keys.SignatureAlgorithm'
+          description: The signing algorithm to use.
         - id: digest
           type:
             - Uint8Array
-          description: The digest of the data to sign
+          description: The digest of the data to sign.
         - id: options
           type:
-            - '@azure/keyvault-keys.RequestOptions'
-          description: |
-            Additional options
+            - '@azure/keyvault-keys.SignOptions'
+          description: ''
           optional: true
       return:
         type:
           - Promise<@azure/keyvault-keys.SignResult>
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CryptographyClient.signData'
-    name: 'signData(KeySignatureAlgorithm, Uint8Array, RequestOptions)'
+    name: 'signData(SignatureAlgorithm, Uint8Array, SignOptions)'
     children: []
     type: method
     langs:
@@ -272,34 +180,33 @@ items:
       Cryptographically sign a block of data
       Example usage:
       ```ts
-      let client = new CryptographyClient(url, key, credentials);
+      let client = new CryptographyClient(keyVaultKey, credentials);
       let result = await client.signData("RS256", message);
       ```
     syntax:
       content: >-
-        function signData(algorithm: KeySignatureAlgorithm, data: Uint8Array,
-        options?: RequestOptions)
+        function signData(algorithm: SignatureAlgorithm, data: Uint8Array,
+        options?: SignOptions)
       parameters:
         - id: algorithm
           type:
-            - '@azure/keyvault-keys.KeySignatureAlgorithm'
-          description: The signing algorithm to use
+            - '@azure/keyvault-keys.SignatureAlgorithm'
+          description: The signing algorithm to use.
         - id: data
           type:
             - Uint8Array
-          description: The data to sign
+          description: The data to sign.
         - id: options
           type:
-            - '@azure/keyvault-keys.RequestOptions'
-          description: |
-            Additional options
+            - '@azure/keyvault-keys.SignOptions'
+          description: ''
           optional: true
       return:
         type:
           - Promise<@azure/keyvault-keys.SignResult>
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CryptographyClient.unwrapKey'
-    name: 'unwrapKey(KeyWrapAlgorithm, Uint8Array, RequestOptions)'
+    name: 'unwrapKey(KeyWrapAlgorithm, Uint8Array, UnwrapKeyOptions)'
     children: []
     type: method
     langs:
@@ -308,48 +215,33 @@ items:
       Unwraps the given wrapped key using the specified cryptography algorithm
       Example usage:
       ```ts
-      let client = new CryptographyClient(url, key, credentials);
+      let client = new CryptographyClient(keyVaultKey, credentials);
       let result = await client.unwrapKey("RSA1_5", keyToUnwrap);
       ```
     syntax:
       content: >-
         function unwrapKey(algorithm: KeyWrapAlgorithm, encryptedKey:
-        Uint8Array, options?: RequestOptions)
+        Uint8Array, options?: UnwrapKeyOptions)
       parameters:
         - id: algorithm
           type:
             - '@azure/keyvault-keys.KeyWrapAlgorithm'
-          description: The decryption algorithm to use to unwrap the key
+          description: The decryption algorithm to use to unwrap the key.
         - id: encryptedKey
           type:
             - Uint8Array
-          description: The encrypted key to unwrap
+          description: The encrypted key to unwrap.
         - id: options
           type:
-            - '@azure/keyvault-keys.RequestOptions'
-          description: |
-            Additional options
+            - '@azure/keyvault-keys.UnwrapKeyOptions'
+          description: ''
           optional: true
       return:
         type:
           - Promise<@azure/keyvault-keys.UnwrapResult>
     package: '@azure/keyvault-keys'
-  - uid: '@azure/keyvault-keys.CryptographyClient.vaultBaseUrl'
-    name: vaultBaseUrl
-    fullName: vaultBaseUrl
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: The base URL to the vault
-    syntax:
-      content: 'vaultBaseUrl: string'
-      return:
-        type:
-          - string
-    package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CryptographyClient.verify'
-    name: 'verify(KeySignatureAlgorithm, Uint8Array, Uint8Array, RequestOptions)'
+    name: 'verify(SignatureAlgorithm, Uint8Array, Uint8Array, VerifyOptions)'
     children: []
     type: method
     langs:
@@ -358,38 +250,37 @@ items:
       Verify the signed message digest
       Example usage:
       ```ts
-      let client = new CryptographyClient(url, key, credentials);
+      let client = new CryptographyClient(keyVaultKey, credentials);
       let result = await client.verify("RS256", signedDigest, signature);
       ```
     syntax:
       content: >-
-        function verify(algorithm: KeySignatureAlgorithm, digest: Uint8Array,
-        signature: Uint8Array, options?: RequestOptions)
+        function verify(algorithm: SignatureAlgorithm, digest: Uint8Array,
+        signature: Uint8Array, options?: VerifyOptions)
       parameters:
         - id: algorithm
           type:
-            - '@azure/keyvault-keys.KeySignatureAlgorithm'
-          description: The signing algorithm to use to verify with
+            - '@azure/keyvault-keys.SignatureAlgorithm'
+          description: The signing algorithm to use to verify with.
         - id: digest
           type:
             - Uint8Array
-          description: The digest to verify
+          description: The digest to verify.
         - id: signature
           type:
             - Uint8Array
-          description: The signature to verify the digest against
+          description: The signature to verify the digest against.
         - id: options
           type:
-            - '@azure/keyvault-keys.RequestOptions'
-          description: |
-            Additional options
+            - '@azure/keyvault-keys.VerifyOptions'
+          description: ''
           optional: true
       return:
         type:
           - Promise<@azure/keyvault-keys.VerifyResult>
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CryptographyClient.verifyData'
-    name: 'verifyData(KeySignatureAlgorithm, Uint8Array, Uint8Array, RequestOptions)'
+    name: 'verifyData(SignatureAlgorithm, Uint8Array, Uint8Array, VerifyOptions)'
     children: []
     type: method
     langs:
@@ -398,38 +289,37 @@ items:
       Verify the signed block of data
       Example usage:
       ```ts
-      let client = new CryptographyClient(url, key, credentials);
+      let client = new CryptographyClient(keyVaultKey, credentials);
       let result = await client.verifyData("RS256", signedMessage, signature);
       ```
     syntax:
       content: >-
-        function verifyData(algorithm: KeySignatureAlgorithm, data: Uint8Array,
-        signature: Uint8Array, options?: RequestOptions)
+        function verifyData(algorithm: SignatureAlgorithm, data: Uint8Array,
+        signature: Uint8Array, options?: VerifyOptions)
       parameters:
         - id: algorithm
           type:
-            - '@azure/keyvault-keys.KeySignatureAlgorithm'
-          description: The algorithm to use to verify with
+            - '@azure/keyvault-keys.SignatureAlgorithm'
+          description: The algorithm to use to verify with.
         - id: data
           type:
             - Uint8Array
-          description: The signed block of data to verify
+          description: The signed block of data to verify.
         - id: signature
           type:
             - Uint8Array
-          description: The signature to verify the block against
+          description: The signature to verify the block against.
         - id: options
           type:
-            - '@azure/keyvault-keys.RequestOptions'
-          description: |
-            Additional options
+            - '@azure/keyvault-keys.VerifyOptions'
+          description: ''
           optional: true
       return:
         type:
           - Promise<@azure/keyvault-keys.VerifyResult>
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CryptographyClient.wrapKey'
-    name: 'wrapKey(KeyWrapAlgorithm, Uint8Array, RequestOptions)'
+    name: 'wrapKey(KeyWrapAlgorithm, Uint8Array, WrapKeyOptions)'
     children: []
     type: method
     langs:
@@ -438,55 +328,46 @@ items:
       Wraps the given key using the specified cryptography algorithm
       Example usage:
       ```ts
-      let client = new CryptographyClient(url, key, credentials);
+      let client = new CryptographyClient(keyVaultKey, credentials);
       let result = await client.wrapKey("RSA1_5", keyToWrap);
       ```
     syntax:
       content: >-
         function wrapKey(algorithm: KeyWrapAlgorithm, key: Uint8Array, options?:
-        RequestOptions)
+        WrapKeyOptions)
       parameters:
         - id: algorithm
           type:
             - '@azure/keyvault-keys.KeyWrapAlgorithm'
-          description: The encryption algorithm to use to wrap the given key
+          description: The encryption algorithm to use to wrap the given key.
         - id: key
           type:
             - Uint8Array
-          description: The key to wrap
+          description: The key to wrap.
         - id: options
           type:
-            - '@azure/keyvault-keys.RequestOptions'
-          description: |
-            Additional options
+            - '@azure/keyvault-keys.WrapKeyOptions'
+          description: ''
           optional: true
       return:
         type:
           - Promise<@azure/keyvault-keys.WrapResult>
     package: '@azure/keyvault-keys'
 references:
-  - uid: string | @azure/keyvault-keys.JsonWebKey
-    name: JsonWebKey
+  - uid: string | @azure/keyvault-keys.KeyVaultKey
+    name: KeyVaultKey
     spec.typeScript:
       - name: 'string | '
         fullName: 'string | '
-      - name: JsonWebKey
-        fullName: JsonWebKey
-        uid: '@azure/keyvault-keys.JsonWebKey'
-  - uid: ServiceClientOptions | @azure/keyvault-keys.NewPipelineOptions
-    name: NewPipelineOptions
+      - name: KeyVaultKey
+        fullName: KeyVaultKey
+        uid: '@azure/keyvault-keys.KeyVaultKey'
+  - uid: '@azure/keyvault-keys.EncryptionAlgorithm'
+    name: EncryptionAlgorithm
     spec.typeScript:
-      - name: 'ServiceClientOptions | '
-        fullName: 'ServiceClientOptions | '
-      - name: NewPipelineOptions
-        fullName: NewPipelineOptions
-        uid: '@azure/keyvault-keys.NewPipelineOptions'
-  - uid: '@azure/keyvault-keys.JsonWebKeyEncryptionAlgorithm'
-    name: JsonWebKeyEncryptionAlgorithm
-    spec.typeScript:
-      - name: JsonWebKeyEncryptionAlgorithm
-        fullName: JsonWebKeyEncryptionAlgorithm
-        uid: '@azure/keyvault-keys.JsonWebKeyEncryptionAlgorithm'
+      - name: EncryptionAlgorithm
+        fullName: EncryptionAlgorithm
+        uid: '@azure/keyvault-keys.EncryptionAlgorithm'
   - uid: '@azure/keyvault-keys.DecryptOptions'
     name: DecryptOptions
     spec.typeScript:
@@ -519,34 +400,18 @@ references:
         uid: '@azure/keyvault-keys.EncryptResult'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/keyvault-keys.GetKeyOptions'
-    name: GetKeyOptions
+  - uid: '@azure/keyvault-keys.SignatureAlgorithm'
+    name: SignatureAlgorithm
     spec.typeScript:
-      - name: GetKeyOptions
-        fullName: GetKeyOptions
-        uid: '@azure/keyvault-keys.GetKeyOptions'
-  - uid: Promise<@azure/keyvault-keys.JsonWebKey>
-    name: JsonWebKey>
+      - name: SignatureAlgorithm
+        fullName: SignatureAlgorithm
+        uid: '@azure/keyvault-keys.SignatureAlgorithm'
+  - uid: '@azure/keyvault-keys.SignOptions'
+    name: SignOptions
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: JsonWebKey
-        fullName: JsonWebKey
-        uid: '@azure/keyvault-keys.JsonWebKey'
-      - name: '>'
-        fullName: '>'
-  - uid: '@azure/keyvault-keys.KeySignatureAlgorithm'
-    name: KeySignatureAlgorithm
-    spec.typeScript:
-      - name: KeySignatureAlgorithm
-        fullName: KeySignatureAlgorithm
-        uid: '@azure/keyvault-keys.KeySignatureAlgorithm'
-  - uid: '@azure/keyvault-keys.RequestOptions'
-    name: RequestOptions
-    spec.typeScript:
-      - name: RequestOptions
-        fullName: RequestOptions
-        uid: '@azure/keyvault-keys.RequestOptions'
+      - name: SignOptions
+        fullName: SignOptions
+        uid: '@azure/keyvault-keys.SignOptions'
   - uid: Promise<@azure/keyvault-keys.SignResult>
     name: SignResult>
     spec.typeScript:
@@ -563,6 +428,12 @@ references:
       - name: KeyWrapAlgorithm
         fullName: KeyWrapAlgorithm
         uid: '@azure/keyvault-keys.KeyWrapAlgorithm'
+  - uid: '@azure/keyvault-keys.UnwrapKeyOptions'
+    name: UnwrapKeyOptions
+    spec.typeScript:
+      - name: UnwrapKeyOptions
+        fullName: UnwrapKeyOptions
+        uid: '@azure/keyvault-keys.UnwrapKeyOptions'
   - uid: Promise<@azure/keyvault-keys.UnwrapResult>
     name: UnwrapResult>
     spec.typeScript:
@@ -573,6 +444,12 @@ references:
         uid: '@azure/keyvault-keys.UnwrapResult'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/keyvault-keys.VerifyOptions'
+    name: VerifyOptions
+    spec.typeScript:
+      - name: VerifyOptions
+        fullName: VerifyOptions
+        uid: '@azure/keyvault-keys.VerifyOptions'
   - uid: Promise<@azure/keyvault-keys.VerifyResult>
     name: VerifyResult>
     spec.typeScript:
@@ -583,6 +460,12 @@ references:
         uid: '@azure/keyvault-keys.VerifyResult'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/keyvault-keys.WrapKeyOptions'
+    name: WrapKeyOptions
+    spec.typeScript:
+      - name: WrapKeyOptions
+        fullName: WrapKeyOptions
+        uid: '@azure/keyvault-keys.WrapKeyOptions'
   - uid: Promise<@azure/keyvault-keys.WrapResult>
     name: WrapResult>
     spec.typeScript:
@@ -593,9 +476,3 @@ references:
         uid: '@azure/keyvault-keys.WrapResult'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/keyvault-keys.NewPipelineOptions'
-    name: NewPipelineOptions
-    spec.typeScript:
-      - name: NewPipelineOptions
-        fullName: NewPipelineOptions
-        uid: '@azure/keyvault-keys.NewPipelineOptions'

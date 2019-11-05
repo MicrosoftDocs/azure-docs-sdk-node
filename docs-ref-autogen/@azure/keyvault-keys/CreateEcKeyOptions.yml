@@ -4,21 +4,38 @@ items:
     name: CreateEcKeyOptions
     fullName: CreateEcKeyOptions
     children:
+      - '@azure/keyvault-keys.CreateEcKeyOptions.abortSignal'
       - '@azure/keyvault-keys.CreateEcKeyOptions.curve'
       - '@azure/keyvault-keys.CreateEcKeyOptions.enabled'
-      - '@azure/keyvault-keys.CreateEcKeyOptions.expires'
+      - '@azure/keyvault-keys.CreateEcKeyOptions.expiresOn'
       - '@azure/keyvault-keys.CreateEcKeyOptions.hsm'
       - '@azure/keyvault-keys.CreateEcKeyOptions.keyOps'
       - '@azure/keyvault-keys.CreateEcKeyOptions.keySize'
       - '@azure/keyvault-keys.CreateEcKeyOptions.notBefore'
       - '@azure/keyvault-keys.CreateEcKeyOptions.requestOptions'
       - '@azure/keyvault-keys.CreateEcKeyOptions.tags'
+      - '@azure/keyvault-keys.CreateEcKeyOptions.tracingOptions'
     langs:
       - typeScript
     type: interface
     summary: ''
     extends:
       name: '@azure/keyvault-keys.CreateKeyOptions'
+    package: '@azure/keyvault-keys'
+  - uid: '@azure/keyvault-keys.CreateEcKeyOptions.abortSignal'
+    name: abortSignal
+    fullName: abortSignal
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The signal which can be used to abort requests.
+    optional: true
+    syntax:
+      content: 'abortSignal?: AbortSignalLike'
+      return:
+        type:
+          - AbortSignalLike
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CreateEcKeyOptions.curve'
     name: curve
@@ -27,13 +44,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |-
+      Elliptic curve name. For valid values, see JsonWebKeyCurveName.
+      Possible values include: 'P-256', 'P-384', 'P-521', 'P-256K'
     optional: true
     syntax:
-      content: 'curve?: JsonWebKeyCurveName'
+      content: 'curve?: KeyCurveName'
       return:
         type:
-          - '@azure/keyvault-keys.JsonWebKeyCurveName'
+          - '@azure/keyvault-keys.KeyCurveName'
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CreateEcKeyOptions.enabled'
     name: enabled
@@ -42,7 +61,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Determines whether the object is enabled.
     optional: true
     syntax:
       content: 'enabled?: undefined | false | true'
@@ -50,17 +69,17 @@ items:
         type:
           - undefined | false | true
     package: '@azure/keyvault-keys'
-  - uid: '@azure/keyvault-keys.CreateEcKeyOptions.expires'
-    name: expires
-    fullName: expires
+  - uid: '@azure/keyvault-keys.CreateEcKeyOptions.expiresOn'
+    name: expiresOn
+    fullName: expiresOn
     children: []
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Expiry date in UTC.
     optional: true
     syntax:
-      content: 'expires?: Date'
+      content: 'expiresOn?: Date'
       return:
         type:
           - Date
@@ -72,7 +91,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Whether to import as a hardware key (HSM) or software key.
     optional: true
     syntax:
       content: 'hsm?: undefined | false | true'
@@ -87,13 +106,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |-
+      Json web key operations. For more
+      information on possible key operations, see JsonWebKeyOperation.
     optional: true
     syntax:
-      content: 'keyOps?: JsonWebKeyOperation[]'
+      content: 'keyOps?: KeyOperation[]'
       return:
         type:
-          - '@azure/keyvault-keys.JsonWebKeyOperation[]'
+          - '@azure/keyvault-keys.KeyOperation[]'
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CreateEcKeyOptions.keySize'
     name: keySize
@@ -102,7 +123,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Size of the key
     optional: true
     syntax:
       content: 'keySize?: undefined | number'
@@ -117,7 +138,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Not before date in UTC.
     optional: true
     syntax:
       content: 'notBefore?: Date'
@@ -132,13 +153,13 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Options used when creating and sending HTTP requests for this operation.
     optional: true
     syntax:
-      content: 'requestOptions?: msRest.RequestOptionsBase'
+      content: 'requestOptions?: OperationRequestOptions'
       return:
         type:
-          - msRest.RequestOptionsBase
+          - OperationRequestOptions
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.CreateEcKeyOptions.tags'
     name: tags
@@ -147,13 +168,28 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Application specific metadata in the form of key-value pairs.
     optional: true
     syntax:
       content: 'tags?: undefined | [key: string]: string'
       return:
         type:
           - 'undefined | [key: string]: string'
+    package: '@azure/keyvault-keys'
+  - uid: '@azure/keyvault-keys.CreateEcKeyOptions.tracingOptions'
+    name: tracingOptions
+    fullName: tracingOptions
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Options used when tracing is enabled.
+    optional: true
+    syntax:
+      content: 'tracingOptions?: OperationTracingOptions'
+      return:
+        type:
+          - OperationTracingOptions
     package: '@azure/keyvault-keys'
 references:
   - uid: '@azure/keyvault-keys.CreateKeyOptions'
@@ -162,17 +198,17 @@ references:
       - name: CreateKeyOptions
         fullName: CreateKeyOptions
         uid: '@azure/keyvault-keys.CreateKeyOptions'
-  - uid: '@azure/keyvault-keys.JsonWebKeyCurveName'
-    name: JsonWebKeyCurveName
+  - uid: '@azure/keyvault-keys.KeyCurveName'
+    name: KeyCurveName
     spec.typeScript:
-      - name: JsonWebKeyCurveName
-        fullName: JsonWebKeyCurveName
-        uid: '@azure/keyvault-keys.JsonWebKeyCurveName'
-  - uid: '@azure/keyvault-keys.JsonWebKeyOperation[]'
-    name: 'JsonWebKeyOperation[]'
+      - name: KeyCurveName
+        fullName: KeyCurveName
+        uid: '@azure/keyvault-keys.KeyCurveName'
+  - uid: '@azure/keyvault-keys.KeyOperation[]'
+    name: 'KeyOperation[]'
     spec.typeScript:
-      - name: JsonWebKeyOperation
-        fullName: JsonWebKeyOperation
-        uid: '@azure/keyvault-keys.JsonWebKeyOperation'
+      - name: KeyOperation
+        fullName: KeyOperation
+        uid: '@azure/keyvault-keys.KeyOperation'
       - name: '[]'
         fullName: '[]'

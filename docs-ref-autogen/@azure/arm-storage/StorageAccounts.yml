@@ -27,8 +27,8 @@ items:
       - '@azure/arm-storage.StorageAccounts.listByResourceGroup_2'
       - '@azure/arm-storage.StorageAccounts.listByResourceGroup_1'
       - '@azure/arm-storage.StorageAccounts.listKeys'
-      - '@azure/arm-storage.StorageAccounts.listKeys_2'
       - '@azure/arm-storage.StorageAccounts.listKeys_1'
+      - '@azure/arm-storage.StorageAccounts.listKeys_2'
       - '@azure/arm-storage.StorageAccounts.listNext'
       - '@azure/arm-storage.StorageAccounts.listNext_2'
       - '@azure/arm-storage.StorageAccounts.listNext_1'
@@ -919,16 +919,20 @@ items:
           - Promise<Models.StorageAccountsListByResourceGroupResponse>
     package: '@azure/arm-storage'
   - uid: '@azure/arm-storage.StorageAccounts.listKeys'
-    name: 'listKeys(string, string, msRest.RequestOptionsBase)'
+    name: 'listKeys(string, string, Models.StorageAccountsListKeysOptionalParams)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: Lists the access keys for the specified storage account.
+    summary: >-
+      Lists the access keys or Kerberos keys (if active directory enabled) for
+      the specified storage
+
+      account.
     syntax:
       content: >-
         function listKeys(resourceGroupName: string, accountName: string,
-        options?: msRest.RequestOptionsBase)
+        options?: Models.StorageAccountsListKeysOptionalParams)
       parameters:
         - id: resourceGroupName
           type:
@@ -951,56 +955,9 @@ items:
             letters only.
         - id: options
           type:
-            - msRest.RequestOptionsBase
+            - Models.StorageAccountsListKeysOptionalParams
           description: ''
           optional: true
-      return:
-        type:
-          - Promise<Models.StorageAccountsListKeysResponse>
-    package: '@azure/arm-storage'
-  - uid: '@azure/arm-storage.StorageAccounts.listKeys_2'
-    name: >-
-      listKeys(string, string, RequestOptionsBase,
-      ServiceCallback<StorageAccountListKeysResult>)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        function listKeys(resourceGroupName: string, accountName: string,
-        options: RequestOptionsBase, callback:
-        ServiceCallback<StorageAccountListKeysResult>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: >-
-            The name of the resource group within the user's subscription. The
-            name
-
-            is case insensitive.
-        - id: accountName
-          type:
-            - string
-          description: >-
-            The name of the storage account within the specified resource group.
-            Storage
-
-            account names must be between 3 and 24 characters in length and use
-            numbers and lower-case
-
-            letters only.
-        - id: options
-          type:
-            - RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type:
-            - ServiceCallback<@azure/arm-storage.StorageAccountListKeysResult>
-          description: |
-            The callback
       return:
         type:
           - Promise<Models.StorageAccountsListKeysResponse>
@@ -1036,6 +993,53 @@ items:
             numbers and lower-case
 
             letters only.
+        - id: callback
+          type:
+            - ServiceCallback<@azure/arm-storage.StorageAccountListKeysResult>
+          description: |
+            The callback
+      return:
+        type:
+          - Promise<Models.StorageAccountsListKeysResponse>
+    package: '@azure/arm-storage'
+  - uid: '@azure/arm-storage.StorageAccounts.listKeys_2'
+    name: >-
+      listKeys(string, string, StorageAccountsListKeysOptionalParams,
+      ServiceCallback<StorageAccountListKeysResult>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function listKeys(resourceGroupName: string, accountName: string,
+        options: StorageAccountsListKeysOptionalParams, callback:
+        ServiceCallback<StorageAccountListKeysResult>)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: >-
+            The name of the resource group within the user's subscription. The
+            name
+
+            is case insensitive.
+        - id: accountName
+          type:
+            - string
+          description: >-
+            The name of the storage account within the specified resource group.
+            Storage
+
+            account names must be between 3 and 24 characters in length and use
+            numbers and lower-case
+
+            letters only.
+        - id: options
+          type:
+            - '@azure/arm-storage.StorageAccountsListKeysOptionalParams'
+          description: The optional parameters
         - id: callback
           type:
             - ServiceCallback<@azure/arm-storage.StorageAccountListKeysResult>
@@ -1280,7 +1284,9 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Regenerates one of the access keys for the specified storage account.
+    summary: >-
+      Regenerates one of the access keys or Kerberos keys for the specified
+      storage account.
     syntax:
       content: >-
         function regenerateKey(resourceGroupName: string, accountName: string,
@@ -1312,7 +1318,7 @@ items:
             The name of storage keys that want to be regenerated, possible
             values are key1,
 
-            key2.
+            key2, kerb1, kerb2.
         - id: options
           type:
             - msRest.RequestOptionsBase
@@ -1363,7 +1369,7 @@ items:
             The name of storage keys that want to be regenerated, possible
             values are key1,
 
-            key2.
+            key2, kerb1, kerb2.
         - id: options
           type:
             - RequestOptionsBase
@@ -1418,7 +1424,7 @@ items:
             The name of storage keys that want to be regenerated, possible
             values are key1,
 
-            key2.
+            key2, kerb1, kerb2.
         - id: callback
           type:
             - ServiceCallback<@azure/arm-storage.StorageAccountListKeysResult>
@@ -1813,6 +1819,12 @@ references:
         uid: '@azure/arm-storage.StorageAccountListKeysResult'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/arm-storage.StorageAccountsListKeysOptionalParams'
+    name: StorageAccountsListKeysOptionalParams
+    spec.typeScript:
+      - name: StorageAccountsListKeysOptionalParams
+        fullName: StorageAccountsListKeysOptionalParams
+        uid: '@azure/arm-storage.StorageAccountsListKeysOptionalParams'
   - uid: '@azure/arm-storage.ServiceSasParameters'
     name: ServiceSasParameters
     spec.typeScript:

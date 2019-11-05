@@ -9,7 +9,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: Cosmos DB
+ms.service: cosmos-db
 ---
 
 # Azure Cosmos DB Modules for Node.js

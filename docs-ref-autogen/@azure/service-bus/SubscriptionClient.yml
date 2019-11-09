@@ -1,0 +1,437 @@
+### YamlMime:UniversalReference
+items:
+  - uid: '@azure/service-bus.SubscriptionClient'
+    name: SubscriptionClient
+    fullName: SubscriptionClient
+    children:
+      - '@azure/service-bus.SubscriptionClient.addRule'
+      - '@azure/service-bus.SubscriptionClient.close'
+      - '@azure/service-bus.SubscriptionClient.createReceiver'
+      - '@azure/service-bus.SubscriptionClient.createReceiver_1'
+      - '@azure/service-bus.SubscriptionClient.defaultRuleName'
+      - '@azure/service-bus.SubscriptionClient.entityPath'
+      - '@azure/service-bus.SubscriptionClient.getRules'
+      - '@azure/service-bus.SubscriptionClient.id'
+      - '@azure/service-bus.SubscriptionClient.peek'
+      - '@azure/service-bus.SubscriptionClient.peekBySequenceNumber'
+      - '@azure/service-bus.SubscriptionClient.removeRule'
+      - '@azure/service-bus.SubscriptionClient.subscriptionName'
+      - '@azure/service-bus.SubscriptionClient.topicName'
+    langs:
+      - typeScript
+    type: class
+    summary: >-
+      Describes the client that allows interacting with a Service Bus
+      Subscription.
+
+      Use the `createSubscriptionClient` function on the ServiceBusClient object
+      to instantiate a
+
+      SubscriptionClient
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.addRule'
+    name: 'addRule(string, boolean | string | CorrelationFilter, undefined | string)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Adds a rule on the subscription as defined by the given rule name, filter
+      and action.
+
+      **Note**: Remove the default true filter on the subscription before adding
+      a rule.
+
+      Otherwise, the added rule will have no affect as the true filter will
+      always result in
+
+      the subscription receiving all messages.
+    syntax:
+      content: >-
+        function addRule(ruleName: string, filter: boolean | string |
+        CorrelationFilter, sqlRuleActionExpression?: undefined | string)
+      parameters:
+        - id: ruleName
+          type:
+            - string
+          description: Name of the rule
+        - id: filter
+          type:
+            - boolean | string | @azure/service-bus.CorrelationFilter
+          description: >-
+            A Boolean, SQL expression or a Correlation filter. For SQL Filter
+            syntax, see
+
+            [SQLFilter
+            syntax](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-sql-filter).
+        - id: sqlRuleActionExpression
+          type:
+            - undefined | string
+          description: >
+            Action to perform if the message satisfies the filtering expression.
+            For SQL Rule Action syntax,
+
+            see [SQLRuleAction
+            syntax](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-sql-rule-action).
+          optional: true
+      return:
+        type:
+          - Promise<void>
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.close'
+    name: close()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Closes the AMQP link for the receivers created by this client.
+
+      Once closed, neither the SubscriptionClient nor its receivers can be used
+      for any
+
+      further operations.
+    syntax:
+      content: function close()
+      parameters: []
+      return:
+        type:
+          - Promise<void>
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.createReceiver'
+    name: createReceiver(ReceiveMode)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates a Receiver for receiving messages from a Subscription which does
+      not have sessions enabled.
+
+      - Throws error if an open receiver already exists for this
+      SubscriptionClient.
+
+      - Throws `InvalidOperationError` if the Subscription has sessions enabled
+      (in which case, use the
+
+      overload of this method which takes `sessionOptions` argument)
+    syntax:
+      content: 'function createReceiver(receiveMode: ReceiveMode)'
+      parameters:
+        - id: receiveMode
+          type:
+            - '@azure/service-bus.ReceiveMode'
+          description: >
+            An enum indicating the mode in which messages should be received.
+            Possible
+
+            values are:
+
+            - `ReceiveMode.peekLock`: Once a message is received in this mode,
+            the receiver has a lock on
+
+            the message for a particular duration. If the message is not settled
+            by this time, it lands back
+
+            on Service Bus to be fetched by the next receive operation.
+
+            - `ReceiveMode.receiveAndDelete`: Messages received in this mode get
+            automatically removed from
+
+            Service Bus.
+      return:
+        type:
+          - '@azure/service-bus.Receiver'
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.createReceiver_1'
+    name: 'createReceiver(ReceiveMode, SessionReceiverOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates a Receiver for receiving messages from a session enabled
+      Subscription. When no sessionId is
+
+      given, a random session among the available sessions is used.
+
+      - Throws error if an open receiver already exists for given sessionId.
+
+      - Throws `SessionCannotBeLockedError` if the Subscription does not have
+      sessions enabled (in which
+
+      case do not pass the `sessionOptions` argument) or if Service Bus is not
+      able to get a lock on
+
+      the session (in which case try again after some time)
+    syntax:
+      content: >-
+        function createReceiver(receiveMode: ReceiveMode, sessionOptions:
+        SessionReceiverOptions)
+      parameters:
+        - id: receiveMode
+          type:
+            - '@azure/service-bus.ReceiveMode'
+          description: >-
+            An enum indicating the mode in which messages should be received.
+            Possible
+
+            values are:
+
+            - `ReceiveMode.peekLock`: Once a message is received in this mode,
+            the receiver has a lock on
+
+            the message for a particular duration. If the message is not settled
+            by this time, it lands back
+
+            on Service Bus to be fetched by the next receive operation.
+
+            - `ReceiveMode.receiveAndDelete`: Messages received in this mode get
+            automatically removed from
+
+            Service Bus.
+        - id: sessionOptions
+          type:
+            - '@azure/service-bus.SessionReceiverOptions'
+          description: >
+            Options to provide sessionId and duration of automatic lock renewal
+            for
+
+            the session receiver.
+      return:
+        type:
+          - '@azure/service-bus.SessionReceiver'
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.defaultRuleName'
+    name: defaultRuleName
+    fullName: defaultRuleName
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The name of the default rule on the subscription.
+    syntax:
+      content: 'defaultRuleName: string'
+      return:
+        type:
+          - string
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.entityPath'
+    name: entityPath
+    fullName: entityPath
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The path for the Service Bus Subscription for which this client is
+      created.
+    syntax:
+      content: 'entityPath: string'
+      return:
+        type:
+          - string
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.getRules'
+    name: getRules()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Gets all rules associated with the subscription
+    syntax:
+      content: function getRules()
+      parameters: []
+      return:
+        type:
+          - 'Promise<@azure/service-bus.RuleDescription[]>'
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.id'
+    name: id
+    fullName: id
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: A unique identifier for this client.
+    syntax:
+      content: 'id: string'
+      return:
+        type:
+          - string
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.peek'
+    name: peek(undefined | number)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Fetches the next batch of active messages (including deferred but not
+      deadlettered messages).
+
+      - The first call to `peek()` fetches the first active message. Each
+      subsequent call fetches the
+
+      subsequent message.
+
+      - Unlike a `received` message, `peeked` message is a read-only version of
+      the message.
+
+      It cannot be `Completed/Abandoned/Deferred/Deadlettered`. The lock on it
+      cannot be renewed.
+    syntax:
+      content: 'function peek(maxMessageCount?: undefined | number)'
+      parameters:
+        - id: maxMessageCount
+          type:
+            - undefined | number
+          description: ''
+          optional: true
+      return:
+        type:
+          - 'Promise<@azure/service-bus.ReceivedMessageInfo[]>'
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.peekBySequenceNumber'
+    name: 'peekBySequenceNumber(Long, undefined | number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Peeks the desired number of active messages (including deferred but not
+      deadlettered messages)
+
+      from the specified sequence number.
+
+      - Unlike a `received` message, `peeked` message is a read-only version of
+      the message.
+
+      It cannot be `Completed/Abandoned/Deferred/Deadlettered`. The lock on it
+      cannot be renewed.
+    syntax:
+      content: >-
+        function peekBySequenceNumber(fromSequenceNumber: Long,
+        maxMessageCount?: undefined | number)
+      parameters:
+        - id: fromSequenceNumber
+          type:
+            - Long
+          description: The sequence number from where to read the message.
+        - id: maxMessageCount
+          type:
+            - undefined | number
+          description: ''
+          optional: true
+      return:
+        type:
+          - 'Promise<@azure/service-bus.ReceivedMessageInfo[]>'
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.removeRule'
+    name: removeRule(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Removes the rule on the subscription identified by the given rule name.
+
+      **Caution**: If all rules on a subscription are removed, then the
+      subscription will not receive
+
+      any more messages.
+    syntax:
+      content: 'function removeRule(ruleName: string)'
+      parameters:
+        - id: ruleName
+          type:
+            - string
+          description: |+
+
+      return:
+        type:
+          - Promise<void>
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.subscriptionName'
+    name: subscriptionName
+    fullName: subscriptionName
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The name of the Service Bus Subscription for which this client is created.
+    syntax:
+      content: 'subscriptionName: string'
+      return:
+        type:
+          - string
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.topicName'
+    name: topicName
+    fullName: topicName
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The name of the Service Bus Topic for whose Subscription, this client is
+      created.
+    syntax:
+      content: 'topicName: string'
+      return:
+        type:
+          - string
+    package: '@azure/service-bus'
+references:
+  - uid: boolean | string | @azure/service-bus.CorrelationFilter
+    name: CorrelationFilter
+    spec.typeScript:
+      - name: 'boolean | string | '
+        fullName: 'boolean | string | '
+      - name: CorrelationFilter
+        fullName: CorrelationFilter
+        uid: '@azure/service-bus.CorrelationFilter'
+  - uid: '@azure/service-bus.ReceiveMode'
+    name: ReceiveMode
+    spec.typeScript:
+      - name: ReceiveMode
+        fullName: ReceiveMode
+        uid: '@azure/service-bus.ReceiveMode'
+  - uid: '@azure/service-bus.Receiver'
+    name: Receiver
+    spec.typeScript:
+      - name: Receiver
+        fullName: Receiver
+        uid: '@azure/service-bus.Receiver'
+  - uid: '@azure/service-bus.SessionReceiverOptions'
+    name: SessionReceiverOptions
+    spec.typeScript:
+      - name: SessionReceiverOptions
+        fullName: SessionReceiverOptions
+        uid: '@azure/service-bus.SessionReceiverOptions'
+  - uid: '@azure/service-bus.SessionReceiver'
+    name: SessionReceiver
+    spec.typeScript:
+      - name: SessionReceiver
+        fullName: SessionReceiver
+        uid: '@azure/service-bus.SessionReceiver'
+  - uid: 'Promise<@azure/service-bus.RuleDescription[]>'
+    name: 'RuleDescription[]>'
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: RuleDescription
+        fullName: RuleDescription
+        uid: '@azure/service-bus.RuleDescription'
+      - name: '[]>'
+        fullName: '[]>'
+  - uid: 'Promise<@azure/service-bus.ReceivedMessageInfo[]>'
+    name: 'ReceivedMessageInfo[]>'
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ReceivedMessageInfo
+        fullName: ReceivedMessageInfo
+        uid: '@azure/service-bus.ReceivedMessageInfo'
+      - name: '[]>'
+        fullName: '[]>'

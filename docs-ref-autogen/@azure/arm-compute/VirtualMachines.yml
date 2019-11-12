@@ -11,6 +11,7 @@ items:
       - '@azure/arm-compute.VirtualMachines.beginDeleteMethod'
       - '@azure/arm-compute.VirtualMachines.beginPerformMaintenance'
       - '@azure/arm-compute.VirtualMachines.beginPowerOff'
+      - '@azure/arm-compute.VirtualMachines.beginReapply'
       - '@azure/arm-compute.VirtualMachines.beginRedeploy'
       - '@azure/arm-compute.VirtualMachines.beginReimage'
       - '@azure/arm-compute.VirtualMachines.beginRestart'
@@ -35,8 +36,8 @@ items:
       - '@azure/arm-compute.VirtualMachines.list_2'
       - '@azure/arm-compute.VirtualMachines.list_1'
       - '@azure/arm-compute.VirtualMachines.listAll'
-      - '@azure/arm-compute.VirtualMachines.listAll_2'
       - '@azure/arm-compute.VirtualMachines.listAll_1'
+      - '@azure/arm-compute.VirtualMachines.listAll_2'
       - '@azure/arm-compute.VirtualMachines.listAllNext'
       - '@azure/arm-compute.VirtualMachines.listAllNext_2'
       - '@azure/arm-compute.VirtualMachines.listAllNext_1'
@@ -54,6 +55,7 @@ items:
       - '@azure/arm-compute.VirtualMachines.listNext_1'
       - '@azure/arm-compute.VirtualMachines.performMaintenance'
       - '@azure/arm-compute.VirtualMachines.powerOff'
+      - '@azure/arm-compute.VirtualMachines.reapply'
       - '@azure/arm-compute.VirtualMachines.redeploy'
       - '@azure/arm-compute.VirtualMachines.reimage'
       - '@azure/arm-compute.VirtualMachines.restart'
@@ -301,13 +303,44 @@ items:
         type:
           - Promise<LROPoller>
     package: '@azure/arm-compute'
+  - uid: '@azure/arm-compute.VirtualMachines.beginReapply'
+    name: 'beginReapply(string, string, msRest.RequestOptionsBase)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: The operation to reapply a virtual machine's state.
+    syntax:
+      content: >-
+        function beginReapply(resourceGroupName: string, vmName: string,
+        options?: msRest.RequestOptionsBase)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: vmName
+          type:
+            - string
+          description: The name of the virtual machine.
+        - id: options
+          type:
+            - msRest.RequestOptionsBase
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<LROPoller>
+    package: '@azure/arm-compute'
   - uid: '@azure/arm-compute.VirtualMachines.beginRedeploy'
     name: 'beginRedeploy(string, string, msRest.RequestOptionsBase)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: The operation to redeploy a virtual machine.
+    summary: >-
+      Shuts down the virtual machine, moves it to a new node, and powers it back
+      on.
     syntax:
       content: >-
         function beginRedeploy(resourceGroupName: string, vmName: string,
@@ -1025,7 +1058,7 @@ items:
           - Promise<Models.VirtualMachinesListResponse>
     package: '@azure/arm-compute'
   - uid: '@azure/arm-compute.VirtualMachines.listAll'
-    name: listAll(msRest.RequestOptionsBase)
+    name: listAll(Models.VirtualMachinesListAllOptionalParams)
     children: []
     type: method
     langs:
@@ -1036,38 +1069,13 @@ items:
 
       the response to get the next page of virtual machines.
     syntax:
-      content: 'function listAll(options?: msRest.RequestOptionsBase)'
+      content: 'function listAll(options?: Models.VirtualMachinesListAllOptionalParams)'
       parameters:
         - id: options
           type:
-            - msRest.RequestOptionsBase
+            - Models.VirtualMachinesListAllOptionalParams
           description: ''
           optional: true
-      return:
-        type:
-          - Promise<Models.VirtualMachinesListAllResponse>
-    package: '@azure/arm-compute'
-  - uid: '@azure/arm-compute.VirtualMachines.listAll_2'
-    name: 'listAll(RequestOptionsBase, ServiceCallback<VirtualMachineListResult>)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        function listAll(options: RequestOptionsBase, callback:
-        ServiceCallback<VirtualMachineListResult>)
-      parameters:
-        - id: options
-          type:
-            - RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type:
-            - ServiceCallback<@azure/arm-compute.VirtualMachineListResult>
-          description: |
-            The callback
       return:
         type:
           - Promise<Models.VirtualMachinesListAllResponse>
@@ -1082,6 +1090,33 @@ items:
     syntax:
       content: 'function listAll(callback: ServiceCallback<VirtualMachineListResult>)'
       parameters:
+        - id: callback
+          type:
+            - ServiceCallback<@azure/arm-compute.VirtualMachineListResult>
+          description: |
+            The callback
+      return:
+        type:
+          - Promise<Models.VirtualMachinesListAllResponse>
+    package: '@azure/arm-compute'
+  - uid: '@azure/arm-compute.VirtualMachines.listAll_2'
+    name: >-
+      listAll(VirtualMachinesListAllOptionalParams,
+      ServiceCallback<VirtualMachineListResult>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function listAll(options: VirtualMachinesListAllOptionalParams,
+        callback: ServiceCallback<VirtualMachineListResult>)
+      parameters:
+        - id: options
+          type:
+            - '@azure/arm-compute.VirtualMachinesListAllOptionalParams'
+          description: The optional parameters
         - id: callback
           type:
             - ServiceCallback<@azure/arm-compute.VirtualMachineListResult>
@@ -1594,13 +1629,44 @@ items:
         type:
           - Promise<RestResponse>
     package: '@azure/arm-compute'
+  - uid: '@azure/arm-compute.VirtualMachines.reapply'
+    name: 'reapply(string, string, msRest.RequestOptionsBase)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: The operation to reapply a virtual machine's state.
+    syntax:
+      content: >-
+        function reapply(resourceGroupName: string, vmName: string, options?:
+        msRest.RequestOptionsBase)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group.
+        - id: vmName
+          type:
+            - string
+          description: The name of the virtual machine.
+        - id: options
+          type:
+            - msRest.RequestOptionsBase
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<RestResponse>
+    package: '@azure/arm-compute'
   - uid: '@azure/arm-compute.VirtualMachines.redeploy'
     name: 'redeploy(string, string, msRest.RequestOptionsBase)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: The operation to redeploy a virtual machine.
+    summary: >-
+      Shuts down the virtual machine, moves it to a new node, and powers it back
+      on.
     syntax:
       content: >-
         function redeploy(resourceGroupName: string, vmName: string, options?:
@@ -1861,6 +1927,12 @@ references:
         uid: '@azure/arm-compute.VirtualMachineListResult'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/arm-compute.VirtualMachinesListAllOptionalParams'
+    name: VirtualMachinesListAllOptionalParams
+    spec.typeScript:
+      - name: VirtualMachinesListAllOptionalParams
+        fullName: VirtualMachinesListAllOptionalParams
+        uid: '@azure/arm-compute.VirtualMachinesListAllOptionalParams'
   - uid: ServiceCallback<@azure/arm-compute.VirtualMachineSizeListResult>
     name: VirtualMachineSizeListResult>
     spec.typeScript:

@@ -4,6 +4,10 @@ items:
     name: Items
     fullName: Items
     children:
+      - '@azure/cosmos.Items.changeFeed_1'
+      - '@azure/cosmos.Items.changeFeed_3'
+      - '@azure/cosmos.Items.changeFeed_2'
+      - '@azure/cosmos.Items.changeFeed'
       - '@azure/cosmos.Items.container'
       - '@azure/cosmos.Items.create'
       - '@azure/cosmos.Items.query'
@@ -12,14 +16,106 @@ items:
       - '@azure/cosmos.Items.readAll_1'
       - '@azure/cosmos.Items.readChangeFeed_1'
       - '@azure/cosmos.Items.readChangeFeed_3'
-      - '@azure/cosmos.Items.readChangeFeed_2'
       - '@azure/cosmos.Items.readChangeFeed'
+      - '@azure/cosmos.Items.readChangeFeed_2'
       - '@azure/cosmos.Items.upsert'
       - '@azure/cosmos.Items.upsert_1'
     langs:
       - typeScript
     type: class
     summary: 'Operations for creating new items, and reading/querying all items'
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.Items.changeFeed_1'
+    name: changeFeed(ChangeFeedOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Create a `ChangeFeedIterator` to iterate over pages of changes
+    syntax:
+      content: 'function changeFeed(changeFeedOptions?: ChangeFeedOptions)'
+      parameters:
+        - id: changeFeedOptions
+          type:
+            - '@azure/cosmos.ChangeFeedOptions'
+          description: |+
+
+          optional: true
+      return:
+        type:
+          - '@azure/cosmos.ChangeFeedIterator<any>'
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.Items.changeFeed_3'
+    name: changeFeed(ChangeFeedOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Create a `ChangeFeedIterator` to iterate over pages of changes
+    syntax:
+      content: 'function changeFeed<T>(changeFeedOptions?: ChangeFeedOptions)'
+      parameters:
+        - id: changeFeedOptions
+          type:
+            - '@azure/cosmos.ChangeFeedOptions'
+          description: |+
+
+          optional: true
+      return:
+        type:
+          - '@azure/cosmos.ChangeFeedIterator<T>'
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.Items.changeFeed_2'
+    name: 'changeFeed(string | number | boolean, ChangeFeedOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Create a `ChangeFeedIterator` to iterate over pages of changes
+    syntax:
+      content: >-
+        function changeFeed<T>(partitionKey: string | number | boolean,
+        changeFeedOptions?: ChangeFeedOptions)
+      parameters:
+        - id: partitionKey
+          type:
+            - string | number | boolean
+          description: ''
+        - id: changeFeedOptions
+          type:
+            - '@azure/cosmos.ChangeFeedOptions'
+          description: |+
+
+          optional: true
+      return:
+        type:
+          - '@azure/cosmos.ChangeFeedIterator<T>'
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.Items.changeFeed'
+    name: 'changeFeed(string | number | boolean, ChangeFeedOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Create a `ChangeFeedIterator` to iterate over pages of changes
+    syntax:
+      content: >-
+        function changeFeed(partitionKey: string | number | boolean,
+        changeFeedOptions?: ChangeFeedOptions)
+      parameters:
+        - id: partitionKey
+          type:
+            - string | number | boolean
+          description: ''
+        - id: changeFeedOptions
+          type:
+            - '@azure/cosmos.ChangeFeedOptions'
+          description: |+
+
+          optional: true
+      return:
+        type:
+          - '@azure/cosmos.ChangeFeedIterator<any>'
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.Items.container'
     name: container
@@ -107,7 +203,7 @@ items:
       - typeScript
     summary: Queries all items.
     syntax:
-      content: 'function query<T>(query: string | SqlQuerySpec, options: FeedOptions)'
+      content: 'function query<T>(query: string | SqlQuerySpec, options?: FeedOptions)'
       parameters:
         - id: query
           type:
@@ -121,6 +217,7 @@ items:
           description: >-
             Used for modifying the request (for instance, specifying the
             partition key).
+          optional: true
       return:
         type:
           - '@azure/cosmos.QueryIterator<T>'
@@ -201,6 +298,8 @@ items:
         type:
           - '@azure/cosmos.ChangeFeedIterator<any>'
     package: '@azure/cosmos'
+    deprecated:
+      content: Use `changeFeed` instead.
   - uid: '@azure/cosmos.Items.readChangeFeed_3'
     name: readChangeFeed(ChangeFeedOptions)
     children: []
@@ -221,31 +320,8 @@ items:
         type:
           - '@azure/cosmos.ChangeFeedIterator<T>'
     package: '@azure/cosmos'
-  - uid: '@azure/cosmos.Items.readChangeFeed_2'
-    name: 'readChangeFeed(string | number | boolean, ChangeFeedOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Create a `ChangeFeedIterator` to iterate over pages of changes
-    syntax:
-      content: >-
-        function readChangeFeed<T>(partitionKey: string | number | boolean,
-        changeFeedOptions: ChangeFeedOptions)
-      parameters:
-        - id: partitionKey
-          type:
-            - string | number | boolean
-          description: ''
-        - id: changeFeedOptions
-          type:
-            - '@azure/cosmos.ChangeFeedOptions'
-          description: |+
-
-      return:
-        type:
-          - '@azure/cosmos.ChangeFeedIterator<T>'
-    package: '@azure/cosmos'
+    deprecated:
+      content: Use `changeFeed` instead.
   - uid: '@azure/cosmos.Items.readChangeFeed'
     name: 'readChangeFeed(string | number | boolean, ChangeFeedOptions)'
     children: []
@@ -256,7 +332,34 @@ items:
     syntax:
       content: >-
         function readChangeFeed(partitionKey: string | number | boolean,
-        changeFeedOptions: ChangeFeedOptions)
+        changeFeedOptions?: ChangeFeedOptions)
+      parameters:
+        - id: partitionKey
+          type:
+            - string | number | boolean
+          description: ''
+        - id: changeFeedOptions
+          type:
+            - '@azure/cosmos.ChangeFeedOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - '@azure/cosmos.ChangeFeedIterator<any>'
+    package: '@azure/cosmos'
+    deprecated:
+      content: Use `changeFeed` instead.
+  - uid: '@azure/cosmos.Items.readChangeFeed_2'
+    name: 'readChangeFeed(string | number | boolean, ChangeFeedOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Create a `ChangeFeedIterator` to iterate over pages of changes
+    syntax:
+      content: >-
+        function readChangeFeed<T>(partitionKey: string | number | boolean,
+        changeFeedOptions?: ChangeFeedOptions)
       parameters:
         - id: partitionKey
           type:
@@ -267,10 +370,13 @@ items:
             - '@azure/cosmos.ChangeFeedOptions'
           description: |+
 
+          optional: true
       return:
         type:
-          - '@azure/cosmos.ChangeFeedIterator<any>'
+          - '@azure/cosmos.ChangeFeedIterator<T>'
     package: '@azure/cosmos'
+    deprecated:
+      content: Use `changeFeed` instead.
   - uid: '@azure/cosmos.Items.upsert'
     name: 'upsert(any, RequestOptions)'
     children: []
@@ -346,6 +452,28 @@ references:
       - name: Container
         fullName: Container
         uid: '@azure/cosmos.Container'
+  - uid: '@azure/cosmos.ChangeFeedOptions'
+    name: ChangeFeedOptions
+    spec.typeScript:
+      - name: ChangeFeedOptions
+        fullName: ChangeFeedOptions
+        uid: '@azure/cosmos.ChangeFeedOptions'
+  - uid: '@azure/cosmos.ChangeFeedIterator<any>'
+    name: ChangeFeedIterator<any>
+    spec.typeScript:
+      - name: ChangeFeedIterator
+        fullName: ChangeFeedIterator
+        uid: '@azure/cosmos.ChangeFeedIterator'
+      - name: <any>
+        fullName: <any>
+  - uid: '@azure/cosmos.ChangeFeedIterator<T>'
+    name: ChangeFeedIterator<T>
+    spec.typeScript:
+      - name: ChangeFeedIterator
+        fullName: ChangeFeedIterator
+        uid: '@azure/cosmos.ChangeFeedIterator'
+      - name: <T>
+        fullName: <T>
   - uid: '@azure/cosmos.RequestOptions'
     name: RequestOptions
     spec.typeScript:
@@ -405,28 +533,6 @@ references:
         uid: '@azure/cosmos.ItemDefinition'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/cosmos.ChangeFeedOptions'
-    name: ChangeFeedOptions
-    spec.typeScript:
-      - name: ChangeFeedOptions
-        fullName: ChangeFeedOptions
-        uid: '@azure/cosmos.ChangeFeedOptions'
-  - uid: '@azure/cosmos.ChangeFeedIterator<any>'
-    name: ChangeFeedIterator<any>
-    spec.typeScript:
-      - name: ChangeFeedIterator
-        fullName: ChangeFeedIterator
-        uid: '@azure/cosmos.ChangeFeedIterator'
-      - name: <any>
-        fullName: <any>
-  - uid: '@azure/cosmos.ChangeFeedIterator<T>'
-    name: ChangeFeedIterator<T>
-    spec.typeScript:
-      - name: ChangeFeedIterator
-        fullName: ChangeFeedIterator
-        uid: '@azure/cosmos.ChangeFeedIterator'
-      - name: <T>
-        fullName: <T>
   - uid: Promise<@azure/cosmos.ItemResponse<@azure/cosmos.ItemDefinition>>
     name: ItemDefinition>>
     spec.typeScript:

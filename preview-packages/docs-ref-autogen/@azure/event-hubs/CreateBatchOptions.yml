@@ -6,7 +6,9 @@ items:
     children:
       - '@azure/event-hubs.CreateBatchOptions.abortSignal'
       - '@azure/event-hubs.CreateBatchOptions.maxSizeInBytes'
+      - '@azure/event-hubs.CreateBatchOptions.partitionId'
       - '@azure/event-hubs.CreateBatchOptions.partitionKey'
+      - '@azure/event-hubs.CreateBatchOptions.tracingOptions'
     langs:
       - typeScript
     type: interface
@@ -35,6 +37,8 @@ items:
       }
 
       ```
+    extends:
+      name: '@azure/event-hubs.OperationOptions'
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.CreateBatchOptions.abortSignal'
     name: abortSignal
@@ -43,18 +47,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: >-
-      An implementation of the `AbortSignalLike` interface to signal the request
-      to cancel the operation.
-
-      For example, use the &commat;azure/abort-controller to create an
-      `AbortSignal`.
+    summary: The signal which can be used to abort requests.
     optional: true
     syntax:
       content: 'abortSignal?: AbortSignalLike'
       return:
         type:
           - AbortSignalLike
+        description: ''
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.CreateBatchOptions.maxSizeInBytes'
     name: maxSizeInBytes
@@ -72,6 +72,25 @@ items:
       return:
         type:
           - undefined | number
+        description: ''
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.CreateBatchOptions.partitionId'
+    name: partitionId
+    fullName: partitionId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: |-
+      The partition this batch will be sent to.
+      If this value is set then partitionKey can not be set.
+    optional: true
+    syntax:
+      content: 'partitionId?: undefined | string'
+      return:
+        type:
+          - undefined | string
+        description: ''
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.CreateBatchOptions.partitionKey'
     name: partitionKey
@@ -81,17 +100,40 @@ items:
       - typeScript
     type: property
     summary: >-
-      A value that is hashed to produce a partition assignment.
+      A value that is hashed to produce a partition assignment. It guarantees
+      that messages
 
-      It guarantees that messages with the same partitionKey end up in the same
-      partition.
+      with the same partitionKey end up in the same partition.
 
-      Specifying this will throw an error if the producer was created using a
-      `paritionId`.
+      If this value is set then partitionId can not be set.
     optional: true
     syntax:
       content: 'partitionKey?: undefined | string'
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.CreateBatchOptions.tracingOptions'
+    name: tracingOptions
+    fullName: tracingOptions
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Options for configuring tracing.
+    optional: true
+    syntax:
+      content: 'tracingOptions?: undefined | Object'
+      return:
+        type:
+          - undefined | Object
+        description: ''
+    package: '@azure/event-hubs'
+references:
+  - uid: '@azure/event-hubs.OperationOptions'
+    name: OperationOptions
+    spec.typeScript:
+      - name: OperationOptions
+        fullName: OperationOptions
+        uid: '@azure/event-hubs.OperationOptions'

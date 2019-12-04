@@ -4,17 +4,16 @@ items:
     name: EventDataBatch
     fullName: EventDataBatch
     children:
-      - '@azure/event-hubs.EventDataBatch.batchMessage'
       - '@azure/event-hubs.EventDataBatch.count'
-      - '@azure/event-hubs.EventDataBatch.partitionKey'
+      - '@azure/event-hubs.EventDataBatch.maxSizeInBytes'
       - '@azure/event-hubs.EventDataBatch.sizeInBytes'
       - '@azure/event-hubs.EventDataBatch.tryAdd'
     langs:
       - typeScript
-    type: class
-    summary: >-
-      A class representing a batch of events which can be passed to the `send`
-      method of a `EventProducer` instance.
+    type: interface
+    summary: >
+      A interface representing a batch of events which can be passed to the
+      `send` method of a `EventProducer` instance.
 
       This batch is ensured to be under the maximum message size supported by
       Azure Event Hubs service.
@@ -34,34 +33,6 @@ items:
       `false` after the upper limit is reached, therefore check the result
       before calling `tryAdd()` again.
     package: '@azure/event-hubs'
-  - uid: '@azure/event-hubs.EventDataBatch.batchMessage'
-    name: batchMessage
-    fullName: batchMessage
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      Represents the single AMQP message which is the result of encoding all the
-      events
-
-      added into the `EventDataBatch` instance.
-
-
-      This is not meant for the user to use directly.
-
-
-      When the `EventDataBatch` instance is passed to the `send()` method on the
-      `EventHubProducer`,
-
-      this single batched AMQP message is what gets sent over the wire to the
-      service.
-    syntax:
-      content: 'batchMessage: Buffer | undefined'
-      return:
-        type:
-          - Buffer | undefined
-    package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventDataBatch.count'
     name: count
     fullName: count
@@ -75,25 +46,22 @@ items:
       return:
         type:
           - number
+        description: ''
     package: '@azure/event-hubs'
-  - uid: '@azure/event-hubs.EventDataBatch.partitionKey'
-    name: partitionKey
-    fullName: partitionKey
+  - uid: '@azure/event-hubs.EventDataBatch.maxSizeInBytes'
+    name: maxSizeInBytes
+    fullName: maxSizeInBytes
     children: []
     langs:
       - typeScript
     type: property
-    summary: >-
-      The partitionKey set during `EventDataBatch` creation. This value is
-      hashed to
-
-      produce a partition assignment when the producer is created without a
-      `partitionId`
+    summary: 'The maximum size of the batch, in bytes.'
     syntax:
-      content: 'partitionKey: string | undefined'
+      content: 'maxSizeInBytes: number'
       return:
         type:
-          - string | undefined
+          - number
+        description: ''
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventDataBatch.sizeInBytes'
     name: sizeInBytes
@@ -112,6 +80,7 @@ items:
       return:
         type:
           - number
+        description: ''
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventDataBatch.tryAdd'
     name: 'tryAdd(EventData, TryAddOptions)'
@@ -142,6 +111,9 @@ items:
       return:
         type:
           - boolean
+        description: >-
+          A boolean value indicating if the event data has been added to the
+          batch or not.
     package: '@azure/event-hubs'
 references:
   - uid: '@azure/event-hubs.EventData'

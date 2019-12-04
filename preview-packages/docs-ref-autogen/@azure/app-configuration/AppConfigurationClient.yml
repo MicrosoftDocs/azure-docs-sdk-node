@@ -6,7 +6,7 @@ items:
     children:
       - '@azure/app-configuration.AppConfigurationClient.addConfigurationSetting'
       - '@azure/app-configuration.AppConfigurationClient.constructor'
-      - '@azure/app-configuration.AppConfigurationClient.clearReadOnly'
+      - '@azure/app-configuration.AppConfigurationClient.constructor_1'
       - >-
         @azure/app-configuration.AppConfigurationClient.deleteConfigurationSetting
       - '@azure/app-configuration.AppConfigurationClient.getConfigurationSetting'
@@ -59,48 +59,66 @@ items:
       return:
         type:
           - Promise<@azure/app-configuration.AddConfigurationSettingResponse>
+        description: ''
     package: '@azure/app-configuration'
   - uid: '@azure/app-configuration.AppConfigurationClient.constructor'
-    name: AppConfigurationClient(string)
+    name: 'AppConfigurationClient(string, AppConfigurationClientOptions)'
     children: []
     type: constructor
     langs:
       - typeScript
     summary: Initializes a new instance of the AppConfigurationClient class.
     syntax:
-      content: 'new AppConfigurationClient(connectionString: string)'
+      content: >-
+        new AppConfigurationClient(connectionString: string, options?:
+        AppConfigurationClientOptions)
       parameters:
         - id: connectionString
           type:
             - string
-          description: |
-            Connection string needed for a client to connect to Azure.
-    package: '@azure/app-configuration'
-  - uid: '@azure/app-configuration.AppConfigurationClient.clearReadOnly'
-    name: 'clearReadOnly(ConfigurationSettingId, ClearReadOnlyOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Makes the key's value writable again
-    syntax:
-      content: >-
-        function clearReadOnly(id: ConfigurationSettingId, options?:
-        ClearReadOnlyOptions)
-      parameters:
-        - id: id
-          type:
-            - '@azure/app-configuration.ConfigurationSettingId'
-          description: |
-            The id of the configuration setting to make writable.
+          description: Connection string needed for a client to connect to Azure.
         - id: options
           type:
-            - '@azure/app-configuration.ClearReadOnlyOptions'
-          description: ''
+            - '@azure/app-configuration.AppConfigurationClientOptions'
+          description: |
+            Options for the AppConfigurationClient.
           optional: true
-      return:
-        type:
-          - Promise<@azure/app-configuration.ClearReadOnlyResponse>
+    package: '@azure/app-configuration'
+  - uid: '@azure/app-configuration.AppConfigurationClient.constructor_1'
+    name: >-
+      AppConfigurationClient(string, TokenCredential,
+      AppConfigurationClientOptions)
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: |-
+      Initializes a new instance of the AppConfigurationClient class using
+      a TokenCredential.
+    syntax:
+      content: >-
+        new AppConfigurationClient(endpoint: string, tokenCredential:
+        TokenCredential, options?: AppConfigurationClientOptions)
+      parameters:
+        - id: endpoint
+          type:
+            - string
+          description: >-
+            The endpoint of the App Configuration service (ex:
+            https://sample.azconfig.io).
+        - id: tokenCredential
+          type:
+            - TokenCredential
+          description: >-
+            An object that implements the `TokenCredential` interface used to
+            authenticate requests to the service. Use the @azure/identity
+            package to create a credential that suits your needs.
+        - id: options
+          type:
+            - '@azure/app-configuration.AppConfigurationClientOptions'
+          description: |
+            Options for the AppConfigurationClient.
+          optional: true
     package: '@azure/app-configuration'
   - uid: '@azure/app-configuration.AppConfigurationClient.deleteConfigurationSetting'
     name: >-
@@ -139,6 +157,7 @@ items:
       return:
         type:
           - Promise<@azure/app-configuration.DeleteConfigurationSettingResponse>
+        description: ''
     package: '@azure/app-configuration'
   - uid: '@azure/app-configuration.AppConfigurationClient.getConfigurationSetting'
     name: >-
@@ -177,6 +196,7 @@ items:
       return:
         type:
           - Promise<@azure/app-configuration.GetConfigurationSettingResponse>
+        description: ''
     package: '@azure/app-configuration'
   - uid: '@azure/app-configuration.AppConfigurationClient.listConfigurationSettings'
     name: listConfigurationSettings(ListConfigurationSettingsOptions)
@@ -213,6 +233,7 @@ items:
           - >-
             PagedAsyncIterableIterator<@azure/app-configuration.ConfigurationSetting,
             @azure/app-configuration.ListConfigurationSettingPage>
+        description: ''
     package: '@azure/app-configuration'
   - uid: '@azure/app-configuration.AppConfigurationClient.listRevisions'
     name: listRevisions(ListRevisionsOptions)
@@ -241,6 +262,7 @@ items:
           - >-
             PagedAsyncIterableIterator<@azure/app-configuration.ConfigurationSetting,
             @azure/app-configuration.ListRevisionsPage>
+        description: ''
     package: '@azure/app-configuration'
   - uid: '@azure/app-configuration.AppConfigurationClient.setConfigurationSetting'
     name: >-
@@ -281,24 +303,29 @@ items:
       return:
         type:
           - Promise<@azure/app-configuration.SetConfigurationSettingResponse>
+        description: ''
     package: '@azure/app-configuration'
   - uid: '@azure/app-configuration.AppConfigurationClient.setReadOnly'
-    name: 'setReadOnly(ConfigurationSettingId, SetReadOnlyOptions)'
+    name: 'setReadOnly(ConfigurationSettingId, boolean, SetReadOnlyOptions)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: Sets a key's value to read only
+    summary: Sets or clears a key's read-only status.
     syntax:
       content: >-
-        function setReadOnly(id: ConfigurationSettingId, options?:
-        SetReadOnlyOptions)
+        function setReadOnly(id: ConfigurationSettingId, readOnly: boolean,
+        options?: SetReadOnlyOptions)
       parameters:
         - id: id
           type:
             - '@azure/app-configuration.ConfigurationSettingId'
           description: |
-            The id of the configuration setting to set to read-only.
+            The id of the configuration setting to modify.
+        - id: readOnly
+          type:
+            - boolean
+          description: ''
         - id: options
           type:
             - '@azure/app-configuration.SetReadOnlyOptions'
@@ -307,8 +334,15 @@ items:
       return:
         type:
           - Promise<@azure/app-configuration.SetReadOnlyResponse>
+        description: ''
     package: '@azure/app-configuration'
 references:
+  - uid: '@azure/app-configuration.AppConfigurationClientOptions'
+    name: AppConfigurationClientOptions
+    spec.typeScript:
+      - name: AppConfigurationClientOptions
+        fullName: AppConfigurationClientOptions
+        uid: '@azure/app-configuration.AppConfigurationClientOptions'
   - uid: '@azure/app-configuration.AddConfigurationSettingParam'
     name: AddConfigurationSettingParam
     spec.typeScript:
@@ -337,22 +371,6 @@ references:
       - name: ConfigurationSettingId
         fullName: ConfigurationSettingId
         uid: '@azure/app-configuration.ConfigurationSettingId'
-  - uid: '@azure/app-configuration.ClearReadOnlyOptions'
-    name: ClearReadOnlyOptions
-    spec.typeScript:
-      - name: ClearReadOnlyOptions
-        fullName: ClearReadOnlyOptions
-        uid: '@azure/app-configuration.ClearReadOnlyOptions'
-  - uid: Promise<@azure/app-configuration.ClearReadOnlyResponse>
-    name: ClearReadOnlyResponse>
-    spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: ClearReadOnlyResponse
-        fullName: ClearReadOnlyResponse
-        uid: '@azure/app-configuration.ClearReadOnlyResponse'
-      - name: '>'
-        fullName: '>'
   - uid: '@azure/app-configuration.DeleteConfigurationSettingOptions'
     name: DeleteConfigurationSettingOptions
     spec.typeScript:

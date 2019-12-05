@@ -199,10 +199,115 @@ items:
     type: method
     langs:
       - typeScript
-    summary: |-
+    summary: >
       Returns an async iterable iterator to list all the queues
+
       under the specified account.
+
       .byPage() returns an async iterable iterator to list the queues in pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      let i = 1;
+
+      for await (const item of queueServiceClient.listQueues()) {
+        console.log(`Queue${i}: ${item.name}`);
+        i++;
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = queueServiceClient.listQueues();
+
+      let item = await iterator.next();
+
+      while (!item.done) {
+        console.log(`Queue${i}: ${iterator.value.name}`);
+        i++;
+        item = await iterator.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const item2 of queueServiceClient.listQueues().byPage({
+      maxPageSize: 20 })) {
+        if (item2.queueItems) {
+          for (const queueItem of item2.queueItems) {
+            console.log(`Queue${i}: ${queueItem.name}`);
+            i++;
+          }
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = queueServiceClient.listQueues().byPage({ maxPageSize: 2 });
+
+      let item = (await iterator.next()).value;
+
+
+      // Prints 2 queue names
+
+      if (item.queueItems) {
+        for (const queueItem of item.queueItems) {
+          console.log(`Queue${i}: ${queueItem.name}`);
+          i++;
+        }
+      }
+
+      // Gets next marker
+
+      let marker = item.continuationToken;
+
+
+      // Passing next marker as continuationToken
+
+      iterator = queueServiceClient.listQueues().byPage({ continuationToken:
+      marker, maxPageSize: 10 });
+
+      item = (await iterator.next()).value;
+
+
+      // Prints 10 queue names
+
+      if (item.queueItems) {
+        for (const queueItem of item.queueItems) {
+          console.log(`Queue${i}: ${queueItem.name}`);
+          i++;
+        }
+      }
+
+      ```
     syntax:
       content: 'function listQueues(options?: ServiceListQueuesOptions)'
       parameters:

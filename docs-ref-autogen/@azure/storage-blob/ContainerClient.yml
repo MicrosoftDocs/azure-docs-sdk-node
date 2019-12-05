@@ -483,6 +483,98 @@ items:
 
       .byPage() returns an async iterable iterator to list the blobs by
       hierarchy in pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      for await (const item of containerClient.listBlobsByHierarchy("/")) {
+        if (item.kind === "prefix") {
+          console.log(`\tBlobPrefix: ${item.name}`);
+        } else {
+          console.log(`\tBlobItem: name - ${item.name}, last modified - ${item.properties.lastModified}`);
+        }
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let iter = await containerClient.listBlobsByHierarchy("/", { prefix:
+      "prefix1/" });
+
+      let entity = await iter.next();
+
+      while (!entity.done) {
+        let item = entity.value;
+        if (item.kind === "prefix") {
+          console.log(`\tBlobPrefix: ${item.name}`);
+        } else {
+          console.log(`\tBlobItem: name - ${item.name}, last modified - ${item.properties.lastModified}`);
+        }
+        entity = await iter.next();
+      }
+
+      ```js
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      console.log("Listing blobs by hierarchy by page");
+
+      for await (const response of
+      containerClient.listBlobsByHierarchy("/").byPage()) {
+        const segment = response.segment;
+        if (segment.blobPrefixes) {
+          for (const prefix of segment.blobPrefixes) {
+            console.log(`\tBlobPrefix: ${prefix.name}`);
+          }
+        }
+        for (const blob of response.segment.blobItems) {
+          console.log(`\tBlobItem: name - ${blob.name}, last modified - ${blob.properties.lastModified}`);
+        }
+      }
+
+      ```
+
+
+      Example using paging with a max page size:
+
+
+      ```js
+
+      console.log("Listing blobs by hierarchy by page, specifying a prefix and a
+      max page size");
+
+
+      let i = 1;
+
+      for await (const response of containerClient.listBlobsByHierarchy("/", {
+      prefix: "prefix2/sub1/"}).byPage({ maxPageSize: 2 })) {
+        console.log(`Page ${i++}`);
+        const segment = response.segment;
+
+        if (segment.blobPrefixes) {
+          for (const prefix of segment.blobPrefixes) {
+            console.log(`\tBlobPrefix: ${prefix.name}`);
+          }
+        }
+
+        for (const blob of response.segment.blobItems) {
+          console.log(`\tBlobItem: name - ${blob.name}, last modified - ${blob.properties.lastModified}`);
+        }
+      }
+
+      ```
     syntax:
       content: >-
         function listBlobsByHierarchy(delimiter: string, options?:
@@ -515,7 +607,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >-
+    summary: >
       Returns an async iterable iterator to list all the blobs
 
       under the specified account.
@@ -523,10 +615,103 @@ items:
       .byPage() returns an async iterable iterator to list the blobs in pages.
 
 
+      Example using `for await` syntax:
+
+
+      ```js
+
       // Get the containerClient before you run these snippets,
 
       // Can be obtained from
       `blobServiceClient.getContainerClient("<your-container-name>");`
+
+      let i = 1;
+
+      for await (const blob of containerClient.listBlobsFlat()) {
+        console.log(`Blob ${i++}: ${blob.name}`);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      let iter = containerClient.listBlobsFlat();
+
+      let blobItem = await iter.next();
+
+      while (!blobItem.done) {
+        console.log(`Blob ${i++}: ${blobItem.value.name}`);
+        blobItem = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const response of containerClient.listBlobsFlat().byPage({
+      maxPageSize: 20 })) {
+        for (const blob of response.segment.blobItems) {
+          console.log(`Blob ${i++}: ${blob.name}`);
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = containerClient.listBlobsFlat().byPage({ maxPageSize: 2 });
+
+      let response = (await iterator.next()).value;
+
+
+      // Prints 2 blob names
+
+      for (const blob of response.segment.blobItems) {
+        console.log(`Blob ${i++}: ${blob.name}`);
+      }
+
+
+      // Gets next marker
+
+      let marker = response.continuationToken;
+
+
+      // Passing next marker as continuationToken
+
+
+      iterator = containerClient.listBlobsFlat().byPage({ continuationToken:
+      marker, maxPageSize: 10 });
+
+      response = (await iterator.next()).value;
+
+
+      // Prints 10 blob names
+
+      for (const blob of response.segment.blobItems) {
+        console.log(`Blob ${i++}: ${blob.name}`);
+      }
+
+      ```
     syntax:
       content: 'function listBlobsFlat(options?: ContainerListBlobsOptions)'
       parameters:

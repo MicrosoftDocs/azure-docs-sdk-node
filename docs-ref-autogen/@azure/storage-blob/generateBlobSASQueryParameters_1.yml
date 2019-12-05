@@ -15,6 +15,32 @@ items:
 
       WARNING: identifier will be ignored when generating user delegation SAS,
       permissions and expiresOn are required.
+
+
+      Example usage:
+
+
+      ```js
+
+      // Generate user delegation SAS for a container
+
+      const userDelegationKey = await
+      blobServiceClient.getUserDelegationKey(startsOn, expiresOn);
+
+      const containerSAS = generateBlobSASQueryParameters({
+          containerName, // Required
+          permissions: ContainerSASPermissions.parse("racwdl"), // Required
+          startsOn, // Required. Date type
+          expiresOn, // Optional. Date type
+          ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
+          protocol: SASProtocol.HttpsAndHttp, // Optional
+          version: "2018-11-09" // Must >= 2018-11-09 to generate user delegation SAS
+        },
+        userDelegationKey, // UserDelegationKey
+        accountName
+      ).toString();
+
+      ```
     syntax:
       content: >-
         function generateBlobSASQueryParameters(blobSASSignatureValues:

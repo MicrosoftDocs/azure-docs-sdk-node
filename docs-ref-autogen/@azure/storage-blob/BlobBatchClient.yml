@@ -314,10 +314,34 @@ items:
     type: method
     langs:
       - typeScript
-    summary: |-
+    summary: |
       Submit batch request which consists of multiple subrequests.
       Get `blobBatchClient` and other details before running the snippets.
       `blobServiceClient.getBlobBatchClient()` gives the `blobBatchClient`
+
+      Example usage:
+
+      ```js
+      let batchRequest = new BlobBatch();
+      await batchRequest.deleteBlob(urlInString0, credential0);
+      await batchRequest.deleteBlob(urlInString1, credential1, {
+       deleteSnapshots: "include"
+      });
+      const batchResp = await blobBatchClient.submitBatch(batchRequest);
+      console.log(batchResp.subResponsesSucceededCount);
+      ```
+
+      Example using a lease:
+
+      ```js
+      let batchRequest = new BlobBatch();
+      await batchRequest.setBlobAccessTier(blockBlobClient0, "Cool");
+      await batchRequest.setBlobAccessTier(blockBlobClient1, "Cool", {
+       conditions: { leaseId: leaseId }
+      });
+      const batchResp = await blobBatchClient.submitBatch(batchRequest);
+      console.log(batchResp.subResponsesSucceededCount);
+      ```
     syntax:
       content: >-
         function submitBatch(batchRequest: BlobBatch, options?:

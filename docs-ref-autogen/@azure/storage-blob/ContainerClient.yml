@@ -49,6 +49,7 @@ items:
       return:
         type:
           - string
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.constructor_2'
     name: 'ContainerClient(string, Pipeline)'
@@ -188,6 +189,7 @@ items:
       return:
         type:
           - string
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.create'
     name: create(ContainerCreateOptions)
@@ -209,6 +211,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ContainerCreateResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.credential'
     name: credential
@@ -231,6 +234,7 @@ items:
           - >-
             @azure/storage-blob.StorageSharedKeyCredential |
             @azure/storage-blob.AnonymousCredential | TokenCredential
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.delete'
     name: delete(ContainerDeleteMethodOptions)
@@ -252,6 +256,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ContainerDeleteResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.deleteBlob'
     name: 'deleteBlob(string, BlobDeleteOptions)'
@@ -284,6 +289,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.BlobDeleteResponse>
+        description: Block blob deletion response data.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.exists'
     name: exists(ContainerExistsOptions)
@@ -313,6 +319,7 @@ items:
       return:
         type:
           - Promise<boolean>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.getAccessPolicy'
     name: getAccessPolicy(ContainerGetAccessPolicyOptions)
@@ -341,6 +348,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ContainerGetAccessPolicyResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.getAppendBlobClient'
     name: getAppendBlobClient(string)
@@ -359,6 +367,7 @@ items:
       return:
         type:
           - '@azure/storage-blob.AppendBlobClient'
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.getBlobClient'
     name: getBlobClient(string)
@@ -377,6 +386,7 @@ items:
       return:
         type:
           - '@azure/storage-blob.BlobClient'
+        description: A new BlobClient object for the given blob name.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.getBlobLeaseClient'
     name: getBlobLeaseClient(undefined | string)
@@ -396,6 +406,7 @@ items:
       return:
         type:
           - '@azure/storage-blob.BlobLeaseClient'
+        description: A new BlobLeaseClient object for managing leases on the container.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.getBlockBlobClient'
     name: getBlockBlobClient(string)
@@ -414,6 +425,7 @@ items:
       return:
         type:
           - '@azure/storage-blob.BlockBlobClient'
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.getPageBlobClient'
     name: getPageBlobClient(string)
@@ -432,6 +444,7 @@ items:
       return:
         type:
           - '@azure/storage-blob.PageBlobClient'
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.getProperties'
     name: getProperties(ContainerGetPropertiesOptions)
@@ -455,6 +468,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ContainerGetPropertiesResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.listBlobsByHierarchy'
     name: 'listBlobsByHierarchy(string, ContainerListBlobsOptions)'
@@ -469,6 +483,98 @@ items:
 
       .byPage() returns an async iterable iterator to list the blobs by
       hierarchy in pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      for await (const item of containerClient.listBlobsByHierarchy("/")) {
+        if (item.kind === "prefix") {
+          console.log(`\tBlobPrefix: ${item.name}`);
+        } else {
+          console.log(`\tBlobItem: name - ${item.name}, last modified - ${item.properties.lastModified}`);
+        }
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let iter = await containerClient.listBlobsByHierarchy("/", { prefix:
+      "prefix1/" });
+
+      let entity = await iter.next();
+
+      while (!entity.done) {
+        let item = entity.value;
+        if (item.kind === "prefix") {
+          console.log(`\tBlobPrefix: ${item.name}`);
+        } else {
+          console.log(`\tBlobItem: name - ${item.name}, last modified - ${item.properties.lastModified}`);
+        }
+        entity = await iter.next();
+      }
+
+      ```js
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      console.log("Listing blobs by hierarchy by page");
+
+      for await (const response of
+      containerClient.listBlobsByHierarchy("/").byPage()) {
+        const segment = response.segment;
+        if (segment.blobPrefixes) {
+          for (const prefix of segment.blobPrefixes) {
+            console.log(`\tBlobPrefix: ${prefix.name}`);
+          }
+        }
+        for (const blob of response.segment.blobItems) {
+          console.log(`\tBlobItem: name - ${blob.name}, last modified - ${blob.properties.lastModified}`);
+        }
+      }
+
+      ```
+
+
+      Example using paging with a max page size:
+
+
+      ```js
+
+      console.log("Listing blobs by hierarchy by page, specifying a prefix and a
+      max page size");
+
+
+      let i = 1;
+
+      for await (const response of containerClient.listBlobsByHierarchy("/", {
+      prefix: "prefix2/sub1/"}).byPage({ maxPageSize: 2 })) {
+        console.log(`Page ${i++}`);
+        const segment = response.segment;
+
+        if (segment.blobPrefixes) {
+          for (const prefix of segment.blobPrefixes) {
+            console.log(`\tBlobPrefix: ${prefix.name}`);
+          }
+        }
+
+        for (const blob of response.segment.blobItems) {
+          console.log(`\tBlobItem: name - ${blob.name}, last modified - ${blob.properties.lastModified}`);
+        }
+      }
+
+      ```
     syntax:
       content: >-
         function listBlobsByHierarchy(delimiter: string, options?:
@@ -489,6 +595,11 @@ items:
             PagedAsyncIterableIterator<Object & @azure/storage-blob.BlobPrefix |
             Object & @azure/storage-blob.BlobItem,
             @azure/storage-blob.ContainerListBlobHierarchySegmentResponse>
+        description: |-
+          {(PagedAsyncIterableIterator<
+            { kind: "prefix" } & BlobPrefix | { kind: "blob" } & BlobItem,
+              ContainerListBlobHierarchySegmentResponse
+            >)}
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.listBlobsFlat'
     name: listBlobsFlat(ContainerListBlobsOptions)
@@ -496,7 +607,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >-
+    summary: >
       Returns an async iterable iterator to list all the blobs
 
       under the specified account.
@@ -504,10 +615,103 @@ items:
       .byPage() returns an async iterable iterator to list the blobs in pages.
 
 
+      Example using `for await` syntax:
+
+
+      ```js
+
       // Get the containerClient before you run these snippets,
 
       // Can be obtained from
       `blobServiceClient.getContainerClient("<your-container-name>");`
+
+      let i = 1;
+
+      for await (const blob of containerClient.listBlobsFlat()) {
+        console.log(`Blob ${i++}: ${blob.name}`);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      let iter = containerClient.listBlobsFlat();
+
+      let blobItem = await iter.next();
+
+      while (!blobItem.done) {
+        console.log(`Blob ${i++}: ${blobItem.value.name}`);
+        blobItem = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const response of containerClient.listBlobsFlat().byPage({
+      maxPageSize: 20 })) {
+        for (const blob of response.segment.blobItems) {
+          console.log(`Blob ${i++}: ${blob.name}`);
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = containerClient.listBlobsFlat().byPage({ maxPageSize: 2 });
+
+      let response = (await iterator.next()).value;
+
+
+      // Prints 2 blob names
+
+      for (const blob of response.segment.blobItems) {
+        console.log(`Blob ${i++}: ${blob.name}`);
+      }
+
+
+      // Gets next marker
+
+      let marker = response.continuationToken;
+
+
+      // Passing next marker as continuationToken
+
+
+      iterator = containerClient.listBlobsFlat().byPage({ continuationToken:
+      marker, maxPageSize: 10 });
+
+      response = (await iterator.next()).value;
+
+
+      // Prints 10 blob names
+
+      for (const blob of response.segment.blobItems) {
+        console.log(`Blob ${i++}: ${blob.name}`);
+      }
+
+      ```
     syntax:
       content: 'function listBlobsFlat(options?: ContainerListBlobsOptions)'
       parameters:
@@ -521,6 +725,7 @@ items:
           - >-
             PagedAsyncIterableIterator<@azure/storage-blob.BlobItem,
             @azure/storage-blob.ContainerListBlobFlatSegmentResponse>
+        description: An asyncIterableIterator that supports paging.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.setAccessPolicy'
     name: >-
@@ -564,6 +769,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ContainerSetAccessPolicyResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.setMetadata'
     name: 'setMetadata(Metadata, ContainerSetMetadataOptions)'
@@ -597,6 +803,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ContainerSetMetadataResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.uploadBlockBlob'
     name: 'uploadBlockBlob(string, HttpRequestBody, number, BlockBlobUploadOptions)'
@@ -657,6 +864,9 @@ items:
       return:
         type:
           - Promise<Object>
+        description: >-
+          >} Block Blob upload response data and the corresponding
+          BlockBlobClient instance.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.url'
     name: url
@@ -671,6 +881,7 @@ items:
       return:
         type:
           - string
+        description: ''
     package: '@azure/storage-blob'
 references:
   - uid: '@azure/storage-blob.StorageClient'

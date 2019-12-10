@@ -98,6 +98,7 @@ items:
       return:
         type:
           - '@azure/storage-blob.BlobBatch'
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobBatchClient.deleteBlobs_1'
     name: 'deleteBlobs(BlobClient[], BlobDeleteOptions)'
@@ -136,6 +137,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.BlobBatchDeleteBlobsResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobBatchClient.deleteBlobs'
     name: >-
@@ -188,6 +190,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.BlobBatchDeleteBlobsResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobBatchClient.setBlobsAccessTier_1'
     name: 'setBlobsAccessTier(BlobClient[], AccessTier, BlobSetTierOptions)'
@@ -238,6 +241,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.BlobBatchSetBlobsAccessTierResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobBatchClient.setBlobsAccessTier'
     name: >-
@@ -302,6 +306,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.BlobBatchSetBlobsAccessTierResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobBatchClient.submitBatch'
     name: 'submitBatch(BlobBatch, BlobBatchSubmitBatchOptionalParams)'
@@ -309,10 +314,34 @@ items:
     type: method
     langs:
       - typeScript
-    summary: |-
+    summary: |
       Submit batch request which consists of multiple subrequests.
       Get `blobBatchClient` and other details before running the snippets.
       `blobServiceClient.getBlobBatchClient()` gives the `blobBatchClient`
+
+      Example usage:
+
+      ```js
+      let batchRequest = new BlobBatch();
+      await batchRequest.deleteBlob(urlInString0, credential0);
+      await batchRequest.deleteBlob(urlInString1, credential1, {
+       deleteSnapshots: "include"
+      });
+      const batchResp = await blobBatchClient.submitBatch(batchRequest);
+      console.log(batchResp.subResponsesSucceededCount);
+      ```
+
+      Example using a lease:
+
+      ```js
+      let batchRequest = new BlobBatch();
+      await batchRequest.setBlobAccessTier(blockBlobClient0, "Cool");
+      await batchRequest.setBlobAccessTier(blockBlobClient1, "Cool", {
+       conditions: { leaseId: leaseId }
+      });
+      const batchResp = await blobBatchClient.submitBatch(batchRequest);
+      console.log(batchResp.subResponsesSucceededCount);
+      ```
     syntax:
       content: >-
         function submitBatch(batchRequest: BlobBatch, options?:
@@ -330,6 +359,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.BlobBatchSubmitBatchResponse>
+        description: ''
     package: '@azure/storage-blob'
 references:
   - uid: >-

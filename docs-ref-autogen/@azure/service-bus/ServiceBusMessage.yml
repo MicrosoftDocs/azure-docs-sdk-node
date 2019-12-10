@@ -44,54 +44,11 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >
+    summary: >-
       The lock held on the message by the receiver is let go, making the message
       available again in
 
       Service Bus for another receive operation.
-
-      - Throws `SessionLockLostError` (for messages from a Queue/Subscription
-      with sessions enabled)
-
-      if the AMQP link with which the message was received is no longer alive.
-      This can
-
-      happen either because the lock on the session expired or the receiver was
-      explicitly closed by
-
-      the user or the AMQP link got closed by the library due to network loss or
-      service error.
-
-      - Throws `MessageLockLostError` (for messages from a Queue/Subscription
-      with sessions not enabled)
-
-      if the lock on the message has expired or the AMQP link with which the
-      message was received is
-
-      no longer alive. The latter can happen if the receiver was explicitly
-      closed by the user or the
-
-      AMQP link got closed by the library due to network loss or service error.
-
-      - Throws an error if the message is already settled. To avoid this error
-      check the `isSettled`
-
-      property on the message if you are not sure whether the message is
-      settled.
-
-      - Throws an error if used in `ReceiveAndDelete` mode because all messages
-      received in this mode
-
-      are pre-settled. To avoid this error, update your code to not settle a
-      message which is received
-
-      in this mode.
-
-      - Throws `ServiceUnavailableError` if Service Bus does not acknowledge the
-      request to settle
-
-      the message in time. The message may or may not have been settled
-      successfully.
     syntax:
       content: 'function abandon(propertiesToModify?: undefined | [key: string]: any)'
       parameters:
@@ -105,6 +62,7 @@ items:
       return:
         type:
           - Promise<void>
+        description: Promise<void>.
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.body'
     name: body
@@ -119,6 +77,7 @@ items:
       return:
         type:
           - any
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.clone'
     name: clone()
@@ -135,6 +94,7 @@ items:
       return:
         type:
           - '@azure/service-bus.SendableMessageInfo'
+        description: ServiceBusMessage
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.complete'
     name: complete()
@@ -142,57 +102,14 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >
-      Removes the message from Service Bus.
-
-      - Throws `SessionLockLostError` (for messages from a Queue/Subscription
-      with sessions enabled)
-
-      if the AMQP link with which the message was received is no longer alive.
-      This can
-
-      happen either because the lock on the session expired or the receiver was
-      explicitly closed by
-
-      the user or the AMQP link got closed by the library due to network loss or
-      service error.
-
-      - Throws `MessageLockLostError` (for messages from a Queue/Subscription
-      with sessions not enabled)
-
-      if the lock on the message has expired or the AMQP link with which the
-      message was received is
-
-      no longer alive. The latter can happen if the receiver was explicitly
-      closed by the user or the
-
-      AMQP link got closed by the library due to network loss or service error.
-
-      - Throws an error if the message is already settled. To avoid this error
-      check the `isSettled`
-
-      property on the message if you are not sure whether the message is
-      settled.
-
-      - Throws an error if used in `ReceiveAndDelete` mode because all messages
-      received in this mode
-
-      are pre-settled. To avoid this error, update your code to not settle a
-      message which is received
-
-      in this mode.
-
-      - Throws `ServiceUnavailableError` if Service Bus does not acknowledge the
-      request to settle
-
-      the message in time. The message may or may not have been settled
-      successfully.
+    summary: Removes the message from Service Bus.
     syntax:
       content: function complete()
       parameters: []
       return:
         type:
           - Promise<void>
+        description: Promise<void>.
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.contentType'
     name: contentType
@@ -214,6 +131,7 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.correlationId'
     name: correlationId
@@ -238,6 +156,7 @@ items:
       return:
         type:
           - string | number | Buffer
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.deadLetter'
     name: deadLetter(DeadLetterOptions)
@@ -245,55 +164,12 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >
+    summary: >-
       Moves the message to the deadletter sub-queue. To receive a deadletted
       message, create a new
 
       QueueClient/SubscriptionClient using the path for the deadletter
       sub-queue.
-
-      - Throws `SessionLockLostError` (for messages from a Queue/Subscription
-      with sessions enabled)
-
-      if the AMQP link with which the message was received is no longer alive.
-      This can
-
-      happen either because the lock on the session expired or the receiver was
-      explicitly closed by
-
-      the user or the AMQP link got closed by the library due to network loss or
-      service error.
-
-      - Throws `MessageLockLostError` (for messages from a Queue/Subscription
-      with sessions not enabled)
-
-      if the lock on the message has expired or the AMQP link with which the
-      message was received is
-
-      no longer alive. The latter can happen if the receiver was explicitly
-      closed by the user or the
-
-      AMQP link got closed by the library due to network loss or service error.
-
-      - Throws an error if the message is already settled. To avoid this error
-      check the `isSettled`
-
-      property on the message if you are not sure whether the message is
-      settled.
-
-      - Throws an error if used in `ReceiveAndDelete` mode because all messages
-      received in this mode
-
-      are pre-settled. To avoid this error, update your code to not settle a
-      message which is received
-
-      in this mode.
-
-      - Throws `ServiceUnavailableError` if Service Bus does not acknowledge the
-      request to settle
-
-      the message in time. The message may or may not have been settled
-      successfully.
     syntax:
       content: 'function deadLetter(options?: DeadLetterOptions)'
       parameters:
@@ -307,6 +183,7 @@ items:
       return:
         type:
           - Promise<void>
+        description: Promise<void>
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.deadLetterSource'
     name: deadLetterSource
@@ -321,7 +198,7 @@ items:
       was enqueued on, before it was deadlettered. Only set in messages that
       have been dead-lettered
 
-      and subsequently auto-forwarded from the dead-letter queue to another
+      and subsequently auto-forwarded from the dead-letter sub-queue to another
       entity. Indicates the
 
       entity in which the message was dead-lettered.
@@ -331,6 +208,7 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.defer'
     name: 'defer(undefined | [key: string]: any)'
@@ -338,55 +216,12 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >
+    summary: >-
       Defers the processing of the message. Save the `sequenceNumber` of the
       message, in order to
 
       receive it message again in the future using the `receiveDeferredMessage`
       method.
-
-      - Throws `SessionLockLostError` (for messages from a Queue/Subscription
-      with sessions enabled)
-
-      if the AMQP link with which the message was received is no longer alive.
-      This can
-
-      happen either because the lock on the session expired or the receiver was
-      explicitly closed by
-
-      the user or the AMQP link got closed by the library due to network loss or
-      service error.
-
-      - Throws `MessageLockLostError` (for messages from a Queue/Subscription
-      with sessions not enabled)
-
-      if the lock on the message has expired or the AMQP link with which the
-      message was received is
-
-      no longer alive. The latter can happen if the receiver was explicitly
-      closed by the user or the
-
-      AMQP link got closed by the library due to network loss or service error.
-
-      - Throws an error if the message is already settled. To avoid this error
-      check the `isSettled`
-
-      property on the message if you are not sure whether the message is
-      settled.
-
-      - Throws an error if used in `ReceiveAndDelete` mode because all messages
-      received in this mode
-
-      are pre-settled. To avoid this error, update your code to not settle a
-      message which is received
-
-      in this mode.
-
-      - Throws `ServiceUnavailableError` if Service Bus does not acknowledge the
-      request to settle
-
-      the message in time. The message may or may not have been settled
-      successfully.
     syntax:
       content: 'function defer(propertiesToModify?: undefined | [key: string]: any)'
       parameters:
@@ -399,6 +234,7 @@ items:
       return:
         type:
           - Promise<void>
+        description: Promise<void>
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.delivery'
     name: delivery
@@ -413,6 +249,7 @@ items:
       return:
         type:
           - Delivery
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.deliveryCount'
     name: deliveryCount
@@ -435,6 +272,7 @@ items:
       return:
         type:
           - undefined | number
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.enqueuedSequenceNumber'
     name: enqueuedSequenceNumber
@@ -456,6 +294,7 @@ items:
       return:
         type:
           - undefined | number
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.enqueuedTimeUtc'
     name: enqueuedTimeUtc
@@ -473,6 +312,7 @@ items:
       return:
         type:
           - Date
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.expiresAtUtc'
     name: expiresAtUtc
@@ -495,6 +335,7 @@ items:
       return:
         type:
           - Date
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.isSettled'
     name: isSettled
@@ -509,6 +350,7 @@ items:
       return:
         type:
           - boolean
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.label'
     name: label
@@ -530,6 +372,7 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.lockedUntilUtc'
     name: lockedUntilUtc
@@ -557,6 +400,7 @@ items:
       return:
         type:
           - Date
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.lockToken'
     name: lockToken
@@ -585,6 +429,7 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.messageId'
     name: messageId
@@ -615,6 +460,7 @@ items:
       return:
         type:
           - string | number | Buffer
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.partitionKey'
     name: partitionKey
@@ -645,6 +491,7 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.replyTo'
     name: replyTo
@@ -672,6 +519,7 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.replyToSessionId'
     name: replyToSessionId
@@ -696,6 +544,7 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.scheduledEnqueueTimeUtc'
     name: scheduledEnqueueTimeUtc
@@ -726,6 +575,7 @@ items:
       return:
         type:
           - Date
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.sequenceNumber'
     name: sequenceNumber
@@ -753,6 +603,7 @@ items:
       return:
         type:
           - Long
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.sessionId'
     name: sessionId
@@ -783,6 +634,7 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.timeToLive'
     name: timeToLive
@@ -815,6 +667,7 @@ items:
       return:
         type:
           - undefined | number
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.to'
     name: to
@@ -839,6 +692,7 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.userProperties'
     name: userProperties
@@ -854,6 +708,7 @@ items:
       return:
         type:
           - 'undefined | [key: string]: any'
+        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusMessage.viaPartitionKey'
     name: viaPartitionKey
@@ -884,6 +739,7 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/service-bus'
 references:
   - uid: '@azure/service-bus.SendableMessageInfo'

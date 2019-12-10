@@ -44,6 +44,7 @@ items:
       return:
         type:
           - string
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.constructor_1'
     name: 'BlobServiceClient(string, Pipeline)'
@@ -133,6 +134,7 @@ items:
       return:
         type:
           - Promise<Object>
+        description: '>} Container creation response and the corresponding container client.'
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.credential'
     name: credential
@@ -155,6 +157,7 @@ items:
           - >-
             @azure/storage-blob.StorageSharedKeyCredential |
             @azure/storage-blob.AnonymousCredential | TokenCredential
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.deleteContainer'
     name: 'deleteContainer(string, ContainerDeleteMethodOptions)'
@@ -180,6 +183,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ContainerDeleteResponse>
+        description: Container deletion response.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.fromConnectionString'
     name: 'fromConnectionString(string, StoragePipelineOptions)'
@@ -212,6 +216,7 @@ items:
       return:
         type:
           - '@azure/storage-blob.BlobServiceClient'
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.getAccountInfo'
     name: getAccountInfo(ServiceGetAccountInfoOptions)
@@ -240,6 +245,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ServiceGetAccountInfoResponse>
+        description: Response data for the Service Get Account Info operation.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.getBlobBatchClient'
     name: getBlobBatchClient()
@@ -254,6 +260,7 @@ items:
       return:
         type:
           - '@azure/storage-blob.BlobBatchClient'
+        description: A new BlobBatchClient object for this service.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.getContainerClient'
     name: getContainerClient(string)
@@ -272,6 +279,7 @@ items:
       return:
         type:
           - '@azure/storage-blob.ContainerClient'
+        description: A new ContainerClient object for the given container name.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.getProperties'
     name: getProperties(ServiceGetPropertiesOptions)
@@ -295,6 +303,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ServiceGetPropertiesResponse>
+        description: Response data for the Service Get Properties operation.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.getStatistics'
     name: getStatistics(ServiceGetStatisticsOptions)
@@ -321,6 +330,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ServiceGetStatisticsResponse>
+        description: Response data for the Service Get Statistics operation.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.getUserDelegationKey'
     name: 'getUserDelegationKey(Date, Date, ServiceGetUserDelegationKeyOptions)'
@@ -360,6 +370,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ServiceGetUserDelegationKeyResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.listContainers'
     name: listContainers(ServiceListContainersOptions)
@@ -374,6 +385,105 @@ items:
 
       .byPage() returns an async iterable iterator to list the containers in
       pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      let i = 1;
+
+      for await (const container of blobServiceClient.listContainers()) {
+        console.log(`Container ${i++}: ${container.name}`);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      const iter = blobServiceClient.listContainers();
+
+      let containerItem = await iter.next();
+
+      while (!containerItem.done) {
+        console.log(`Container ${i++}: ${containerItem.value.name}`);
+        containerItem = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const response of blobServiceClient.listContainers().byPage({
+      maxPageSize: 20 })) {
+        if (response.containerItems) {
+          for (const container of response.containerItems) {
+            console.log(`Container ${i++}: ${container.name}`);
+          }
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = blobServiceClient.listContainers().byPage({ maxPageSize: 2
+      });
+
+      let response = (await iterator.next()).value;
+
+
+      // Prints 2 container names
+
+      if (response.containerItems) {
+        for (const container of response.containerItems) {
+          console.log(`Container ${i++}: ${container.name}`);
+        }
+      }
+
+
+      // Gets next marker
+
+      let marker = response.continuationToken;
+
+      // Passing next marker as continuationToken
+
+      iterator = blobServiceClient
+        .listContainers()
+        .byPage({ continuationToken: marker, maxPageSize: 10 });
+      response = (await iterator.next()).value;
+
+
+      // Prints 10 container names
+
+      if (response.containerItems) {
+        for (const container of response.containerItems) {
+           console.log(`Container ${i++}: ${container.name}`);
+        }
+      }
+
+      ```
     syntax:
       content: 'function listContainers(options?: ServiceListContainersOptions)'
       parameters:
@@ -387,6 +497,7 @@ items:
           - >-
             PagedAsyncIterableIterator<@azure/storage-blob.ContainerItem,
             @azure/storage-blob.ServiceListContainersSegmentResponse>
+        description: An asyncIterableIterator that supports paging.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.setProperties'
     name: 'setProperties(BlobServiceProperties, ServiceSetPropertiesOptions)'
@@ -417,6 +528,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.ServiceSetPropertiesResponse>
+        description: Response data for the Service Set Properties operation.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobServiceClient.url'
     name: url
@@ -431,6 +543,7 @@ items:
       return:
         type:
           - string
+        description: ''
     package: '@azure/storage-blob'
 references:
   - uid: '@azure/storage-blob.StorageClient'

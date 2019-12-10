@@ -40,6 +40,7 @@ items:
       return:
         type:
           - string
+        description: ''
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueServiceClient.createQueue'
     name: 'createQueue(string, QueueCreateOptions)'
@@ -63,6 +64,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-queue.QueueCreateResponse>
+        description: Response data for the Queue create operation.
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueServiceClient.deleteQueue'
     name: 'deleteQueue(string, QueueDeleteOptions)'
@@ -86,6 +88,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-queue.QueueDeleteResponse>
+        description: Response data for the Queue delete operation.
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueServiceClient.fromConnectionString'
     name: 'fromConnectionString(string, StoragePipelineOptions)'
@@ -118,6 +121,7 @@ items:
       return:
         type:
           - '@azure/storage-queue.QueueServiceClient'
+        description: A new QueueServiceClient object from the given connection string.
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueServiceClient.getProperties'
     name: getProperties(ServiceGetPropertiesOptions)
@@ -141,6 +145,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-queue.ServiceGetPropertiesResponse>
+        description: Response data including the queue service properties.
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueServiceClient.getQueueClient'
     name: getQueueClient(string)
@@ -159,6 +164,7 @@ items:
       return:
         type:
           - '@azure/storage-queue.QueueClient'
+        description: a new QueueClient
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueServiceClient.getStatistics'
     name: getStatistics(ServiceGetStatisticsOptions)
@@ -185,6 +191,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-queue.ServiceGetStatisticsResponse>
+        description: Response data for get statistics the operation.
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueServiceClient.listQueues'
     name: listQueues(ServiceListQueuesOptions)
@@ -192,10 +199,115 @@ items:
     type: method
     langs:
       - typeScript
-    summary: |-
+    summary: >
       Returns an async iterable iterator to list all the queues
+
       under the specified account.
+
       .byPage() returns an async iterable iterator to list the queues in pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      let i = 1;
+
+      for await (const item of queueServiceClient.listQueues()) {
+        console.log(`Queue${i}: ${item.name}`);
+        i++;
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = queueServiceClient.listQueues();
+
+      let item = await iterator.next();
+
+      while (!item.done) {
+        console.log(`Queue${i}: ${iterator.value.name}`);
+        i++;
+        item = await iterator.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const item2 of queueServiceClient.listQueues().byPage({
+      maxPageSize: 20 })) {
+        if (item2.queueItems) {
+          for (const queueItem of item2.queueItems) {
+            console.log(`Queue${i}: ${queueItem.name}`);
+            i++;
+          }
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = queueServiceClient.listQueues().byPage({ maxPageSize: 2 });
+
+      let item = (await iterator.next()).value;
+
+
+      // Prints 2 queue names
+
+      if (item.queueItems) {
+        for (const queueItem of item.queueItems) {
+          console.log(`Queue${i}: ${queueItem.name}`);
+          i++;
+        }
+      }
+
+      // Gets next marker
+
+      let marker = item.continuationToken;
+
+
+      // Passing next marker as continuationToken
+
+      iterator = queueServiceClient.listQueues().byPage({ continuationToken:
+      marker, maxPageSize: 10 });
+
+      item = (await iterator.next()).value;
+
+
+      // Prints 10 queue names
+
+      if (item.queueItems) {
+        for (const queueItem of item.queueItems) {
+          console.log(`Queue${i}: ${queueItem.name}`);
+          i++;
+        }
+      }
+
+      ```
     syntax:
       content: 'function listQueues(options?: ServiceListQueuesOptions)'
       parameters:
@@ -209,6 +321,7 @@ items:
           - >-
             PagedAsyncIterableIterator<@azure/storage-queue.QueueItem,
             @azure/storage-queue.ServiceListQueuesSegmentResponse>
+        description: An asyncIterableIterator that supports paging.
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueServiceClient.constructor_1'
     name: 'QueueServiceClient(string, Pipeline)'
@@ -303,6 +416,7 @@ items:
       return:
         type:
           - Promise<@azure/storage-queue.ServiceSetPropertiesResponse>
+        description: Response data for the Set Properties operation.
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueServiceClient.url'
     name: url
@@ -317,6 +431,7 @@ items:
       return:
         type:
           - string
+        description: ''
     package: '@azure/storage-queue'
 references:
   - uid: '@azure/storage-queue.StorageClient'

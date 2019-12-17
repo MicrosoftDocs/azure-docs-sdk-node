@@ -11,14 +11,36 @@ items:
       - '@azure/event-hubs.EventHubProducerClient.constructor_1'
       - '@azure/event-hubs.EventHubProducerClient.constructor_2'
       - '@azure/event-hubs.EventHubProducerClient.fullyQualifiedNamespace'
+      - '@azure/event-hubs.EventHubProducerClient.getEventHubProperties'
       - '@azure/event-hubs.EventHubProducerClient.getPartitionIds'
-      - '@azure/event-hubs.EventHubProducerClient.getProperties'
+      - '@azure/event-hubs.EventHubProducerClient.getPartitionProperties'
       - '@azure/event-hubs.EventHubProducerClient.sendBatch'
-      - '@azure/event-hubs.EventHubProducerClient.sendBatch_1'
     langs:
       - typeScript
     type: class
-    summary: ''
+    summary: >+
+      The client is the main point of interaction with Azure Event Hubs service.
+
+      It offers connection to a specific Event Hub within the Event Hubs
+      namespace along with
+
+      operations for sending event data and inspecting the connected Event Hub.
+
+      There are multiple ways to create an `EventHubProducerClient`
+
+      - Use the connection string from the SAS policy created for your Event Hub
+      instance.
+
+      - Use the connection string from the SAS policy created for your Event Hub
+      namespace,
+
+      and the name of the Event Hub instance
+
+      - Use the fully qualified domain name of your Event Hub namespace like
+      `<yournamespace>.servicebus.windows.net`,
+
+      and a credentials object.
+
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubProducerClient.close'
     name: close()
@@ -35,6 +57,7 @@ items:
       return:
         type:
           - Promise<void>
+        description: Promise<void>
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubProducerClient.createBatch'
     name: createBatch(CreateBatchOptions)
@@ -71,6 +94,7 @@ items:
       return:
         type:
           - Promise<@azure/event-hubs.EventDataBatch>
+        description: Promise<EventDataBatch>
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubProducerClient.eventHubName'
     name: eventHubName
@@ -85,6 +109,7 @@ items:
       return:
         type:
           - string
+        description: ''
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubProducerClient.constructor'
     name: 'EventHubProducerClient(string, EventHubClientOptions)'
@@ -213,17 +238,14 @@ items:
     summary: ''
     syntax:
       content: >-
-        new EventHubProducerClient(host: string, eventHubName: string,
-        credential: TokenCredential, options?: EventHubClientOptions)
+        new EventHubProducerClient(fullyQualifiedNamespace: string,
+        eventHubName: string, credential: TokenCredential, options?:
+        EventHubClientOptions)
       parameters:
-        - id: host
+        - id: fullyQualifiedNamespace
           type:
             - string
-          description: >-
-            The fully qualified host name for the Event Hubs namespace. This is
-            likely to be similar to
-
-            <yournamespace>.servicebus.windows.net
+          description: ''
         - id: eventHubName
           type:
             - string
@@ -279,6 +301,27 @@ items:
       return:
         type:
           - string
+        description: ''
+    package: '@azure/event-hubs'
+  - uid: '@azure/event-hubs.EventHubProducerClient.getEventHubProperties'
+    name: getEventHubProperties(GetEventHubPropertiesOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Provides the Event Hub runtime information.
+    syntax:
+      content: 'function getEventHubProperties(options?: GetEventHubPropertiesOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/event-hubs.GetEventHubPropertiesOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/event-hubs.EventHubProperties>
+        description: A promise that resolves with EventHubProperties.
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubProducerClient.getPartitionIds'
     name: getPartitionIds(GetPartitionIdsOptions)
@@ -298,25 +341,33 @@ items:
       return:
         type:
           - Promise<Array<string>>
+        description: A promise that resolves with an Array of strings.
     package: '@azure/event-hubs'
-  - uid: '@azure/event-hubs.EventHubProducerClient.getProperties'
-    name: getProperties(GetPropertiesOptions)
+  - uid: '@azure/event-hubs.EventHubProducerClient.getPartitionProperties'
+    name: 'getPartitionProperties(string, GetPartitionPropertiesOptions)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: Provides the Event Hub runtime information.
+    summary: Provides information about the specified partition.
     syntax:
-      content: 'function getProperties(options?: GetPropertiesOptions)'
+      content: >-
+        function getPartitionProperties(partitionId: string, options?:
+        GetPartitionPropertiesOptions)
       parameters:
+        - id: partitionId
+          type:
+            - string
+          description: Partition ID for which partition information is required.
         - id: options
           type:
-            - '@azure/event-hubs.GetPropertiesOptions'
+            - '@azure/event-hubs.GetPartitionPropertiesOptions'
           description: ''
           optional: true
       return:
         type:
-          - Promise<@azure/event-hubs.EventHubProperties>
+          - Promise<@azure/event-hubs.PartitionProperties>
+        description: A promise that resoloves with PartitionProperties.
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubProducerClient.sendBatch'
     name: 'sendBatch(EventDataBatch, SendBatchOptions)'
@@ -349,46 +400,7 @@ items:
       return:
         type:
           - Promise<void>
-    package: '@azure/event-hubs'
-  - uid: '@azure/event-hubs.EventHubProducerClient.sendBatch_1'
-    name: 'sendBatch(EventDataBatch, string, SendBatchOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Sends a batch of events to the associated Event Hub to a specific
-      partition
-    syntax:
-      content: >-
-        function sendBatch(batch: EventDataBatch, partitionId: string, options?:
-        SendBatchOptions)
-      parameters:
-        - id: batch
-          type:
-            - '@azure/event-hubs.EventDataBatch'
-          description: >-
-            An instance of `EventDataBatch` that you can create using the
-            <xref:createBatch> method.
-        - id: partitionId
-          type:
-            - string
-          description: a partition id
-        - id: options
-          type:
-            - '@azure/event-hubs.SendBatchOptions'
-          description: >
-            The set of options that can be specified to influence the way in
-            which
-
-            events are sent to the associated Event Hub.
-
-            - `abortSignal`  : A signal the request to cancel the send
-            operation.
-          optional: true
-      return:
-        type:
-          - Promise<void>
+        description: Promise<void>
     package: '@azure/event-hubs'
 references:
   - uid: '@azure/event-hubs.EventHubClientOptions'
@@ -413,18 +425,12 @@ references:
         uid: '@azure/event-hubs.EventDataBatch'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/event-hubs.GetPartitionIdsOptions'
-    name: GetPartitionIdsOptions
+  - uid: '@azure/event-hubs.GetEventHubPropertiesOptions'
+    name: GetEventHubPropertiesOptions
     spec.typeScript:
-      - name: GetPartitionIdsOptions
-        fullName: GetPartitionIdsOptions
-        uid: '@azure/event-hubs.GetPartitionIdsOptions'
-  - uid: '@azure/event-hubs.GetPropertiesOptions'
-    name: GetPropertiesOptions
-    spec.typeScript:
-      - name: GetPropertiesOptions
-        fullName: GetPropertiesOptions
-        uid: '@azure/event-hubs.GetPropertiesOptions'
+      - name: GetEventHubPropertiesOptions
+        fullName: GetEventHubPropertiesOptions
+        uid: '@azure/event-hubs.GetEventHubPropertiesOptions'
   - uid: Promise<@azure/event-hubs.EventHubProperties>
     name: EventHubProperties>
     spec.typeScript:
@@ -433,6 +439,28 @@ references:
       - name: EventHubProperties
         fullName: EventHubProperties
         uid: '@azure/event-hubs.EventHubProperties'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/event-hubs.GetPartitionIdsOptions'
+    name: GetPartitionIdsOptions
+    spec.typeScript:
+      - name: GetPartitionIdsOptions
+        fullName: GetPartitionIdsOptions
+        uid: '@azure/event-hubs.GetPartitionIdsOptions'
+  - uid: '@azure/event-hubs.GetPartitionPropertiesOptions'
+    name: GetPartitionPropertiesOptions
+    spec.typeScript:
+      - name: GetPartitionPropertiesOptions
+        fullName: GetPartitionPropertiesOptions
+        uid: '@azure/event-hubs.GetPartitionPropertiesOptions'
+  - uid: Promise<@azure/event-hubs.PartitionProperties>
+    name: PartitionProperties>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: PartitionProperties
+        fullName: PartitionProperties
+        uid: '@azure/event-hubs.PartitionProperties'
       - name: '>'
         fullName: '>'
   - uid: '@azure/event-hubs.EventDataBatch'

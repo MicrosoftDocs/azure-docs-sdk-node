@@ -5,7 +5,8 @@ items:
     fullName: LifetimeAction
     children:
       - '@azure/keyvault-certificates.LifetimeAction.action'
-      - '@azure/keyvault-certificates.LifetimeAction.trigger'
+      - '@azure/keyvault-certificates.LifetimeAction.daysBeforeExpiry'
+      - '@azure/keyvault-certificates.LifetimeAction.lifetimePercentage'
     langs:
       - typeScript
     type: interface
@@ -23,36 +24,57 @@ items:
     summary: The action that will be executed.
     optional: true
     syntax:
-      content: 'action?: Action'
+      content: 'action?: CertificatePolicyAction'
       return:
         type:
-          - '@azure/keyvault-certificates.Action'
+          - '@azure/keyvault-certificates.CertificatePolicyAction'
+        description: ''
     package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.LifetimeAction.trigger'
-    name: trigger
-    fullName: trigger
+  - uid: '@azure/keyvault-certificates.LifetimeAction.daysBeforeExpiry'
+    name: daysBeforeExpiry
+    fullName: daysBeforeExpiry
     children: []
     langs:
       - typeScript
     type: property
-    summary: The condition that will execute the action.
+    summary: >-
+      Days before expiry to attempt renewal. Value should be between 1 and
+      validity_in_months
+
+      multiplied by 27. If validity_in_months is 36, then value should be
+      between 1 and 972 (36 *
+
+      27).
     optional: true
     syntax:
-      content: 'trigger?: Trigger'
+      content: 'daysBeforeExpiry?: undefined | number'
       return:
         type:
-          - '@azure/keyvault-certificates.Trigger'
+          - undefined | number
+        description: ''
+    package: '@azure/keyvault-certificates'
+  - uid: '@azure/keyvault-certificates.LifetimeAction.lifetimePercentage'
+    name: lifetimePercentage
+    fullName: lifetimePercentage
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Percentage of lifetime at which to trigger. Value should be between 1 and
+      99.
+    optional: true
+    syntax:
+      content: 'lifetimePercentage?: undefined | number'
+      return:
+        type:
+          - undefined | number
+        description: ''
     package: '@azure/keyvault-certificates'
 references:
-  - uid: '@azure/keyvault-certificates.Action'
-    name: Action
+  - uid: '@azure/keyvault-certificates.CertificatePolicyAction'
+    name: CertificatePolicyAction
     spec.typeScript:
-      - name: Action
-        fullName: Action
-        uid: '@azure/keyvault-certificates.Action'
-  - uid: '@azure/keyvault-certificates.Trigger'
-    name: Trigger
-    spec.typeScript:
-      - name: Trigger
-        fullName: Trigger
-        uid: '@azure/keyvault-certificates.Trigger'
+      - name: CertificatePolicyAction
+        fullName: CertificatePolicyAction
+        uid: '@azure/keyvault-certificates.CertificatePolicyAction'

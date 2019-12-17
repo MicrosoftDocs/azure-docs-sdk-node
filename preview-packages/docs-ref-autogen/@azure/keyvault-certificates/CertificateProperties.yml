@@ -8,10 +8,9 @@ items:
       - '@azure/keyvault-certificates.CertificateProperties.enabled'
       - '@azure/keyvault-certificates.CertificateProperties.expiresOn'
       - '@azure/keyvault-certificates.CertificateProperties.id'
-      - '@azure/keyvault-certificates.CertificateProperties.keyId'
       - '@azure/keyvault-certificates.CertificateProperties.name'
       - '@azure/keyvault-certificates.CertificateProperties.notBefore'
-      - '@azure/keyvault-certificates.CertificateProperties.secretId'
+      - '@azure/keyvault-certificates.CertificateProperties.recoveryLevel'
       - '@azure/keyvault-certificates.CertificateProperties.tags'
       - '@azure/keyvault-certificates.CertificateProperties.updatedOn'
       - '@azure/keyvault-certificates.CertificateProperties.vaultUrl'
@@ -20,7 +19,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: An interface representing the properties of a certificate
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateProperties.createdOn'
     name: createdOn
@@ -36,6 +35,7 @@ items:
       return:
         type:
           - Date
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateProperties.enabled'
     name: enabled
@@ -51,6 +51,7 @@ items:
       return:
         type:
           - undefined | false | true
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateProperties.expiresOn'
     name: expiresOn
@@ -66,6 +67,7 @@ items:
       return:
         type:
           - Date
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateProperties.id'
     name: id
@@ -74,31 +76,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: The certificate id.
+    summary: |-
+      Certificate identifier.
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'id?: undefined | string'
       return:
         type:
           - undefined | string
-    package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.CertificateProperties.keyId'
-    name: keyId
-    fullName: keyId
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: |-
-      The key id.
-      **NOTE: This property will not be serialized. It can only be populated by
-      the server.**
-    optional: true
-    syntax:
-      content: 'keyId?: undefined | string'
-      return:
-        type:
-          - undefined | string
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateProperties.name'
     name: name
@@ -108,11 +96,13 @@ items:
       - typeScript
     type: property
     summary: The name of certificate.
+    optional: true
     syntax:
-      content: 'name: string'
+      content: 'name?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateProperties.notBefore'
     name: notBefore
@@ -128,24 +118,39 @@ items:
       return:
         type:
           - Date
+        description: ''
     package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.CertificateProperties.secretId'
-    name: secretId
-    fullName: secretId
+  - uid: '@azure/keyvault-certificates.CertificateProperties.recoveryLevel'
+    name: recoveryLevel
+    fullName: recoveryLevel
     children: []
     langs:
       - typeScript
     type: property
-    summary: |-
-      The secret id.
+    summary: >-
+      Reflects the deletion recovery level currently in effect for certificates
+      in the current
+
+      vault. If it contains 'Purgeable', the certificate can be permanently
+      deleted by a privileged
+
+      user; otherwise, only the system can purge the certificate, at the end of
+      the retention
+
+      interval. Possible values include: 'Purgeable', 'Recoverable+Purgeable',
+      'Recoverable',
+
+      'Recoverable+ProtectedSubscription'
+
       **NOTE: This property will not be serialized. It can only be populated by
       the server.**
     optional: true
     syntax:
-      content: 'secretId?: undefined | string'
+      content: 'recoveryLevel?: DeletionRecoveryLevel'
       return:
         type:
-          - undefined | string
+          - '@azure/keyvault-certificates.DeletionRecoveryLevel'
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateProperties.tags'
     name: tags
@@ -163,6 +168,7 @@ items:
       return:
         type:
           - '@azure/keyvault-certificates.CertificateTags'
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateProperties.updatedOn'
     name: updatedOn
@@ -171,13 +177,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: When the object was updated.
+    summary: When the issuer was updated.
     optional: true
     syntax:
       content: 'updatedOn?: Date'
       return:
         type:
           - Date
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateProperties.vaultUrl'
     name: vaultUrl
@@ -187,11 +194,13 @@ items:
       - typeScript
     type: property
     summary: The vault URI.
+    optional: true
     syntax:
-      content: 'vaultUrl: string'
+      content: 'vaultUrl?: undefined | string'
       return:
         type:
-          - string
+          - undefined | string
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateProperties.version'
     name: version
@@ -207,6 +216,7 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateProperties.x509Thumbprint'
     name: x509Thumbprint
@@ -222,8 +232,15 @@ items:
       return:
         type:
           - Uint8Array
+        description: ''
     package: '@azure/keyvault-certificates'
 references:
+  - uid: '@azure/keyvault-certificates.DeletionRecoveryLevel'
+    name: DeletionRecoveryLevel
+    spec.typeScript:
+      - name: DeletionRecoveryLevel
+        fullName: DeletionRecoveryLevel
+        uid: '@azure/keyvault-certificates.DeletionRecoveryLevel'
   - uid: '@azure/keyvault-certificates.CertificateTags'
     name: CertificateTags
     spec.typeScript:

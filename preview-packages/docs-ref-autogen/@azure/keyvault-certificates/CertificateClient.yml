@@ -5,11 +5,12 @@ items:
     fullName: CertificateClient
     children:
       - '@azure/keyvault-certificates.CertificateClient.backupCertificate'
+      - '@azure/keyvault-certificates.CertificateClient.beginCreateCertificate'
+      - '@azure/keyvault-certificates.CertificateClient.beginDeleteCertificate'
       - >-
-        @azure/keyvault-certificates.CertificateClient.cancelCertificateOperation
+        @azure/keyvault-certificates.CertificateClient.beginRecoverDeletedCertificate
       - '@azure/keyvault-certificates.CertificateClient.constructor'
-      - '@azure/keyvault-certificates.CertificateClient.createCertificate'
-      - '@azure/keyvault-certificates.CertificateClient.deleteCertificate'
+      - '@azure/keyvault-certificates.CertificateClient.createIssuer'
       - >-
         @azure/keyvault-certificates.CertificateClient.deleteCertificateOperation
       - '@azure/keyvault-certificates.CertificateClient.deleteContacts'
@@ -22,19 +23,21 @@ items:
       - '@azure/keyvault-certificates.CertificateClient.getDeletedCertificate'
       - '@azure/keyvault-certificates.CertificateClient.getIssuer'
       - '@azure/keyvault-certificates.CertificateClient.importCertificate'
-      - '@azure/keyvault-certificates.CertificateClient.listCertificates'
-      - '@azure/keyvault-certificates.CertificateClient.listCertificateVersions'
       - '@azure/keyvault-certificates.CertificateClient.listDeletedCertificates'
-      - '@azure/keyvault-certificates.CertificateClient.listIssuers'
+      - >-
+        @azure/keyvault-certificates.CertificateClient.listPropertiesOfCertificates
+      - >-
+        @azure/keyvault-certificates.CertificateClient.listPropertiesOfCertificateVersions
+      - '@azure/keyvault-certificates.CertificateClient.listPropertiesOfIssuers'
       - '@azure/keyvault-certificates.CertificateClient.mergeCertificate'
       - '@azure/keyvault-certificates.CertificateClient.purgeDeletedCertificate'
-      - '@azure/keyvault-certificates.CertificateClient.recoverDeletedCertificate'
       - '@azure/keyvault-certificates.CertificateClient.restoreCertificateBackup'
       - '@azure/keyvault-certificates.CertificateClient.setContacts'
-      - '@azure/keyvault-certificates.CertificateClient.setIssuer'
-      - '@azure/keyvault-certificates.CertificateClient.updateCertificate'
       - '@azure/keyvault-certificates.CertificateClient.updateCertificatePolicy'
+      - >-
+        @azure/keyvault-certificates.CertificateClient.updateCertificateProperties
       - '@azure/keyvault-certificates.CertificateClient.updateIssuer'
+      - '@azure/keyvault-certificates.CertificateClient.vaultUrl'
     langs:
       - typeScript
     type: class
@@ -58,9 +61,9 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.createCertificate("MyCertificate", {
+      await client.beginCreateCertificate("MyCertificate", {
         issuerName: "Self",
-        subjectName: "cn=MyCert"
+        subject: "cn=MyCert"
       });
 
       const backup = await client.backupCertificate("MyCertificate");
@@ -82,17 +85,30 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/keyvault-certificates.BackupCertificateResult>
+          - Promise<Uint8Array | undefined>
+        description: ''
     package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.CertificateClient.cancelCertificateOperation'
-    name: 'cancelCertificateOperation(string, CancelCertificateOperationOptions)'
+  - uid: '@azure/keyvault-certificates.CertificateClient.beginCreateCertificate'
+    name: >-
+      beginCreateCertificate(string, CertificatePolicy,
+      BeginCreateCertificateOptions)
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Updates a certificate creation operation that is already in progress. This
-      operation requires the certificates/update permission.
+      Creates a new certificate. If this is the first version, the certificate
+      resource is created.
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the certificate is fully recovered.
+
+      **Note:** Sending `Self` as the `issuerName` of the certificate's policy
+      will create a self-signed certificate.
+
+
+      This operation requires the certificates/create permission.
+
 
       Example usage:
 
@@ -100,31 +116,214 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.createCertificate("MyCertificate", {
+      const certificatePolicy = {
         issuerName: "Self",
-        subjectName: "cn=MyCert"
-      });
+        subject: "cn=MyCert"
+      };
 
-      await client.cancelCertificateOperation("MyCertificate");
+      const createPoller = await client.beginCreateCertificate("MyCertificate",
+      certificatePolicy);
+
+
+      // The pending certificate can be obtained by calling the following
+      method:
+
+      const pendingCertificate = createPoller.getResult();
+
+
+      // Serializing the poller
+
+      const serialized = createPoller.toString();
+
+
+      // A new poller can be created with:
+
+      // const newPoller = await client.beginCreateCertificate("MyCertificate",
+      certificatePolicy, { resumeFrom: serialized });
+
+
+      // Waiting until it's done
+
+      const certificate = await createPoller.pollUntilDone();
+
+      console.log(certificate);
 
       ```
     syntax:
       content: >-
-        function cancelCertificateOperation(certificateName: string, options?:
-        CancelCertificateOperationOptions)
+        function beginCreateCertificate(certificateName: string,
+        certificatePolicy: CertificatePolicy, options?:
+        BeginCreateCertificateOptions)
       parameters:
         - id: certificateName
           type:
             - string
           description: The name of the certificate
+        - id: certificatePolicy
+          type:
+            - '@azure/keyvault-certificates.CertificatePolicy'
+          description: The certificate's policy
         - id: options
           type:
-            - '@azure/keyvault-certificates.CancelCertificateOperationOptions'
+            - '@azure/keyvault-certificates.BeginCreateCertificateOptions'
           description: ''
           optional: true
       return:
         type:
-          - Promise<@azure/keyvault-certificates.CertificateOperation>
+          - >-
+            Promise<PollerLike<PollOperationState<@azure/keyvault-certificates.KeyVaultCertificateWithPolicy>,
+            @azure/keyvault-certificates.KeyVaultCertificateWithPolicy>>
+        description: ''
+    package: '@azure/keyvault-certificates'
+  - uid: '@azure/keyvault-certificates.CertificateClient.beginDeleteCertificate'
+    name: 'beginDeleteCertificate(string, BeginDeleteCertificateOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      The DELETE operation applies to any certificate stored in Azure Key Vault.
+      DELETE cannot be applied
+
+      to an individual version of a certificate.
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the certificate is fully recovered.
+
+      This operation requires the certificates/delete permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      const createPoller = await client.beginCreateCertificate("MyCertificate",
+      {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      });
+
+      await createPoller.pollUntilDone();
+
+
+      const deletePoller = await client.beginDeleteCertificate("MyCertificate");
+
+
+      // Serializing the poller
+
+      const serialized = deletePoller.toString();
+
+
+      // A new poller can be created with:
+
+      // const newPoller = await client.beginDeleteCertificate("MyCertificate",
+      { resumeFrom: serialized });
+
+
+      // Waiting until it's done
+
+      const deletedCertificate = await deletePoller.pollUntilDone();
+
+      console.log(deletedCertificate);
+
+      ```
+    syntax:
+      content: >-
+        function beginDeleteCertificate(certificateName: string, options?:
+        BeginDeleteCertificateOptions)
+      parameters:
+        - id: certificateName
+          type:
+            - string
+          description: The name of the certificate.
+        - id: options
+          type:
+            - '@azure/keyvault-certificates.BeginDeleteCertificateOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<PollerLike<PollOperationState<@azure/keyvault-certificates.DeletedCertificate>,
+            @azure/keyvault-certificates.DeletedCertificate>>
+        description: ''
+    package: '@azure/keyvault-certificates'
+  - uid: >-
+      @azure/keyvault-certificates.CertificateClient.beginRecoverDeletedCertificate
+    name: >-
+      beginRecoverDeletedCertificate(string,
+      BeginRecoverDeletedCertificateOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Recovers the deleted certificate in the specified vault. This operation
+      can only be performed on a soft-delete enabled vault. This operation
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the certificate is fully recovered.
+
+      This operation requires the certificates/recover permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+
+      const deletePoller = await client.beginDeleteCertificate("MyCertificate");
+
+      await deletePoller.pollUntilDone();
+
+
+      const recoverPoller = await
+      client.beginRecoverDeletedCertificate("MyCertificate");
+
+
+      // Serializing the poller
+
+      const serialized = deletePoller.toString();
+
+
+      // A new poller can be created with:
+
+      // const newPoller = await
+      client.beginRecoverDeletedCertificate("MyCertificate", { resumeFrom:
+      serialized });
+
+
+      // Waiting until it's done
+
+      const certificate = await recoverPoller.pollUntilDone();
+
+      console.log(certificate);
+
+      ```
+    syntax:
+      content: >-
+        function beginRecoverDeletedCertificate(certificateName: string,
+        options?: BeginRecoverDeletedCertificateOptions)
+      parameters:
+        - id: certificateName
+          type:
+            - string
+          description: The name of the deleted certificate
+        - id: options
+          type:
+            - '@azure/keyvault-certificates.BeginRecoverDeletedCertificateOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<PollerLike<PollOperationState<@azure/keyvault-certificates.KeyVaultCertificate>,
+            @azure/keyvault-certificates.KeyVaultCertificate>>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.constructor'
     name: 'CertificateClient(string, TokenCredential, PipelineOptions)'
@@ -155,16 +354,17 @@ items:
           description: ''
           optional: true
     package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.CertificateClient.createCertificate'
-    name: 'createCertificate(string, CertificatePolicy, CreateCertificateOptions)'
+  - uid: '@azure/keyvault-certificates.CertificateClient.createIssuer'
+    name: 'createIssuer(string, string, CreateIssuerOptions)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Creates a new certificate. If this is the first version, the certificate
-      resource is created. This operation requires the certificates/create
-      permission.
+      The createIssuer operation adds or updates the specified certificate
+      issuer. This
+
+      operation requires the certificates/setissuers permission.
 
       Example usage:
 
@@ -172,78 +372,31 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.createCertificate("MyCertificate", {
-        issuerName: "Self",
-        subjectName: "cn=MyCert"
-      });
+      await client.createIssuer("IssuerName", "Provider");
 
       ```
     syntax:
       content: >-
-        function createCertificate(certificateName: string, certificatePolicy:
-        CertificatePolicy, options?: CreateCertificateOptions)
+        function createIssuer(issuerName: string, provider: string, options?:
+        CreateIssuerOptions)
       parameters:
-        - id: certificateName
+        - id: issuerName
           type:
             - string
-          description: The name of the certificate
-        - id: certificatePolicy
+          description: The name of the issuer.
+        - id: provider
           type:
-            - '@azure/keyvault-certificates.CertificatePolicy'
-          description: The certificate's policy
+            - string
+          description: The issuer provider.
         - id: options
           type:
-            - '@azure/keyvault-certificates.CreateCertificateOptions'
+            - '@azure/keyvault-certificates.CreateIssuerOptions'
           description: ''
           optional: true
       return:
         type:
-          - Promise<@azure/keyvault-certificates.KeyVaultCertificate>
-    package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.CertificateClient.deleteCertificate'
-    name: 'deleteCertificate(string, DeleteCertificateOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      The DELETE operation applies to any certificate stored in Azure Key Vault.
-      DELETE cannot be applied
-
-      to an individual version of a certificate. This operation requires the
-      certificates/delete permission.
-
-      Example usage:
-
-      ```ts
-
-      const client = new CertificateClient(url, credentials);
-
-      await client.createCertificate("MyCertificate", {
-        issuerName: "Self",
-        subjectName: "cn=MyCert"
-      });
-
-      await client.deleteCertificate("MyCertificate");
-
-      ```
-    syntax:
-      content: >-
-        function deleteCertificate(certificateName: string, options?:
-        DeleteCertificateOptions)
-      parameters:
-        - id: certificateName
-          type:
-            - string
-          description: The name of the certificate.
-        - id: options
-          type:
-            - '@azure/keyvault-certificates.DeleteCertificateOptions'
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<@azure/keyvault-certificates.DeletedCertificate>
+          - Promise<@azure/keyvault-certificates.CertificateIssuer>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.deleteCertificateOperation'
     name: 'deleteCertificateOperation(string, DeleteCertificateOperationOptions)'
@@ -264,9 +417,9 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.createCertificate("MyCertificate", {
+      await client.beginCreateCertificate("MyCertificate", {
         issuerName: "Self",
-        subjectName: "cn=MyCert"
+        subject: "cn=MyCert"
       });
 
       await client.deleteCertificateOperation("MyCertificate");
@@ -292,6 +445,7 @@ items:
       return:
         type:
           - Promise<@azure/keyvault-certificates.CertificateOperation>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.deleteContacts'
     name: deleteContacts(DeleteContactsOptions)
@@ -310,7 +464,7 @@ items:
       let client = new CertificateClient(url, credentials);
 
       await client.setContacts([{
-        emailAddress: "b@b.com",
+        email: "b@b.com",
         name: "b",
         phone: "222222222222"
       }]);
@@ -328,7 +482,10 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/keyvault-certificates.CertificateContacts>
+          - >-
+            Promise<@azure/keyvault-certificates.CertificateContact[] |
+            undefined>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.deleteIssuer'
     name: 'deleteIssuer(string, DeleteIssuerOptions)'
@@ -349,7 +506,7 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.setIssuer("IssuerName", "Provider");
+      await client.createIssuer("IssuerName", "Provider");
 
       await client.deleteIssuer("IssuerName");
 
@@ -369,6 +526,7 @@ items:
       return:
         type:
           - Promise<@azure/keyvault-certificates.CertificateIssuer>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.getCertificate'
     name: 'getCertificate(string, GetCertificateOptions)'
@@ -387,10 +545,12 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.createCertificate("MyCertificate", {
+      const poller = await client.beginCreateCertificate("MyCertificate", {
         issuerName: "Self",
-        subjectName: "cn=MyCert"
+        subject: "cn=MyCert"
       });
+
+      await poller.pollUntilDone();
 
       const certificate = await client.getCertificate("MyCertificate");
 
@@ -413,7 +573,8 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/keyvault-certificates.KeyVaultCertificate>
+          - Promise<@azure/keyvault-certificates.KeyVaultCertificateWithPolicy>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.getCertificateOperation'
     name: 'getCertificateOperation(string, GetCertificateOperationOptions)'
@@ -425,20 +586,30 @@ items:
       Gets the creation operation associated with a specified certificate. This
       operation requires the certificates/get permission.
 
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the certificate is fully recovered.
+
       Example usage:
 
       ```ts
 
       const client = new CertificateClient(url, credentials);
 
-      await client.createCertificate("MyCertificate", {
+      const createPoller = await client.beginCreateCertificate("MyCertificate",
+      {
         issuerName: "Self",
-        subjectName: "cn=MyCert"
+        subject: "cn=MyCert"
       });
 
-      const operation = await client.getCertificateOperation("MyCertificate");
+      const pendingCertificate = createPoller.getResult();
 
-      console.log(operation);
+      console.log(pendingCertificate);
+
+      const poller = await client.getCertificateOperation("MyCertificate");
+
+      const certificateOperation = poller.getResult();
+
+      console.log(certificateOperation);
 
       ```
     syntax:
@@ -457,7 +628,10 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/keyvault-certificates.CertificateOperation>
+          - >-
+            Promise<PollerLike<PollOperationState<@azure/keyvault-certificates.CertificateOperation>,
+            @azure/keyvault-certificates.CertificateOperation>>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.getCertificatePolicy'
     name: 'getCertificatePolicy(string, GetCertificatePolicyOptions)'
@@ -476,9 +650,9 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.createCertificate("MyCertificate", {
+      await client.beginCreateCertificate("MyCertificate", {
         issuerName: "Self",
-        subjectName: "cn=MyCert"
+        subject: "cn=MyCert"
       });
 
       const policy = await client.getCertificatePolicy("MyCertificate");
@@ -503,6 +677,7 @@ items:
       return:
         type:
           - Promise<@azure/keyvault-certificates.CertificatePolicy>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.getCertificateVersion'
     name: 'getCertificateVersion(string, string, GetCertificateVersionOptions)'
@@ -521,10 +696,12 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.createCertificate("MyCertificate", {
+      const poller = await client.beginCreateCertificate("MyCertificate", {
         issuerName: "Self",
-        subjectName: "cn=MyCert"
+        subject: "cn=MyCert"
       });
+
+      await poller.pollUntilDone();
 
       const certificateWithPolicy = await
       client.getCertificate("MyCertificate");
@@ -557,6 +734,7 @@ items:
       return:
         type:
           - Promise<@azure/keyvault-certificates.KeyVaultCertificate>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.getContacts'
     name: getContacts(GetContactsOptions)
@@ -595,7 +773,10 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/keyvault-certificates.CertificateContacts>
+          - >-
+            Promise<@azure/keyvault-certificates.CertificateContact[] |
+            undefined>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.getDeletedCertificate'
     name: 'getDeletedCertificate(string, GetDeletedCertificateOptions)'
@@ -636,6 +817,7 @@ items:
       return:
         type:
           - Promise<@azure/keyvault-certificates.DeletedCertificate>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.getIssuer'
     name: 'getIssuer(string, GetIssuerOptions)'
@@ -658,7 +840,7 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.setIssuer("IssuerName", "Provider");
+      await client.createIssuer("IssuerName", "Provider");
 
       const certificateIssuer = await client.getIssuer("IssuerName");
 
@@ -680,9 +862,10 @@ items:
       return:
         type:
           - Promise<@azure/keyvault-certificates.CertificateIssuer>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.importCertificate'
-    name: 'importCertificate(string, string, ImportCertificateOptions)'
+    name: 'importCertificate(string, Uint8Array, ImportCertificateOptions)'
     children: []
     type: method
     langs:
@@ -702,6 +885,8 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
+      // See: @azure/keyvault-secrets
+
       const certificateSecret = await secretClient.getSecret("MyCertificate");
 
       const base64EncodedCertificate = certificateSecret.value!;
@@ -711,17 +896,17 @@ items:
       ```
     syntax:
       content: >-
-        function importCertificate(certificateName: string,
-        base64EncodedCertificate: string, options?: ImportCertificateOptions)
+        function importCertificate(certificateName: string, certificateValue:
+        Uint8Array, options?: ImportCertificateOptions)
       parameters:
         - id: certificateName
           type:
             - string
           description: The name of the certificate
-        - id: base64EncodedCertificate
+        - id: certificateValue
           type:
-            - string
-          description: The base64 encoded certificate to import
+            - Uint8Array
+          description: ''
         - id: options
           type:
             - '@azure/keyvault-certificates.ImportCertificateOptions'
@@ -729,98 +914,8 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/keyvault-certificates.KeyVaultCertificate>
-    package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.CertificateClient.listCertificates'
-    name: listCertificates(ListCertificatesOptions)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Iterates the latest version of all certificates in the vault.  The full
-      certificate identifier and attributes are provided
-
-      in the response. No values are returned for the certificates. This
-      operations requires the certificates/list permission.
-
-      Example usage:
-
-      ```ts
-
-      const client = new CertificateClient(url, credentials);
-
-      // All in one call
-
-      for await (const certificate of client.listCertificates()) {
-        console.log(certificate);
-      }
-
-      // By pages
-
-      for await (const page of client.listCertificates().byPage()) {
-        for (const certificate of page) {
-          console.log(certificate);
-        }
-      }
-
-      ```
-    syntax:
-      content: 'function listCertificates(options?: ListCertificatesOptions)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/keyvault-certificates.ListCertificatesOptions'
-          description: ''
-          optional: true
-      return:
-        type:
-          - >-
-            PagedAsyncIterableIterator<@azure/keyvault-certificates.KeyVaultCertificate,
-            @azure/keyvault-certificates.KeyVaultCertificate[]>
-    package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.CertificateClient.listCertificateVersions'
-    name: 'listCertificateVersions(string, ListCertificateVersionsOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Returns the versions of a certificate in the specified key
-
-      vault. This operation requires the certificates/list permission.
-
-      Example usage:
-
-      ```ts
-
-      const client = new CertificateClient(url, credentials);
-
-      for await (const item of client.listCertificateVersions("MyCertificate"))
-      {
-        console.log(item.properties.version!);
-      }
-
-      ```
-    syntax:
-      content: >-
-        function listCertificateVersions(certificateName: string, options?:
-        ListCertificateVersionsOptions)
-      parameters:
-        - id: certificateName
-          type:
-            - string
-          description: The name of the certificate.
-        - id: options
-          type:
-            - '@azure/keyvault-certificates.ListCertificateVersionsOptions'
-          description: ''
-          optional: true
-      return:
-        type:
-          - >-
-            PagedAsyncIterableIterator<@azure/keyvault-certificates.KeyVaultCertificate,
-            @azure/keyvault-certificates.KeyVaultCertificate[]>
+          - Promise<@azure/keyvault-certificates.KeyVaultCertificateWithPolicy>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.listDeletedCertificates'
     name: listDeletedCertificates(ListDeletedCertificatesOptions)
@@ -842,13 +937,13 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      for await (const certificate of client.listDeletedCertificates()) {
-        console.log(certificate);
+      for await (const deletedCertificate of client.listDeletedCertificates()) {
+        console.log(deletedCertificate);
       }
 
       for await (const page of client.listDeletedCertificates().byPage()) {
-        for (const certificate of page) {
-          console.log(certificate);
+        for (const deletedCertificate of page) {
+          console.log(deletedCertificate);
         }
       }
 
@@ -868,9 +963,111 @@ items:
           - >-
             PagedAsyncIterableIterator<@azure/keyvault-certificates.DeletedCertificate,
             @azure/keyvault-certificates.DeletedCertificate[]>
+        description: ''
     package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.CertificateClient.listIssuers'
-    name: listIssuers(ListIssuersOptions)
+  - uid: >-
+      @azure/keyvault-certificates.CertificateClient.listPropertiesOfCertificates
+    name: listPropertiesOfCertificates(ListPropertiesOfCertificatesOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Iterates the latest version of all certificates in the vault.  The full
+      certificate identifier and attributes are provided
+
+      in the response. No values are returned for the certificates. This
+      operations requires the certificates/list permission.
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      // All in one call
+
+      for await (const certificateProperties of
+      client.listPropertiesOfCertificates()) {
+        console.log(certificateProperties);
+      }
+
+      // By pages
+
+      for await (const page of client.listPropertiesOfCertificates().byPage()) {
+        for (const certificateProperties of page) {
+          console.log(certificateProperties);
+        }
+      }
+
+      ```
+    syntax:
+      content: >-
+        function listPropertiesOfCertificates(options?:
+        ListPropertiesOfCertificatesOptions)
+      parameters:
+        - id: options
+          type:
+            - '@azure/keyvault-certificates.ListPropertiesOfCertificatesOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            PagedAsyncIterableIterator<@azure/keyvault-certificates.CertificateProperties,
+            @azure/keyvault-certificates.CertificateProperties[]>
+        description: ''
+    package: '@azure/keyvault-certificates'
+  - uid: >-
+      @azure/keyvault-certificates.CertificateClient.listPropertiesOfCertificateVersions
+    name: >-
+      listPropertiesOfCertificateVersions(string,
+      ListPropertiesOfCertificateVersionsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns the versions of a certificate in the specified key
+
+      vault. This operation requires the certificates/list permission.
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      for await (const certificateProperties of
+      client.listPropertiesOfCertificateVersions("MyCertificate")) {
+        console.log(certificateProperties.version!);
+      }
+
+      ```
+    syntax:
+      content: >-
+        function listPropertiesOfCertificateVersions(certificateName: string,
+        options?: ListPropertiesOfCertificateVersionsOptions)
+      parameters:
+        - id: certificateName
+          type:
+            - string
+          description: The name of the certificate.
+        - id: options
+          type:
+            - >-
+              @azure/keyvault-certificates.ListPropertiesOfCertificateVersionsOptions
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            PagedAsyncIterableIterator<@azure/keyvault-certificates.CertificateProperties,
+            @azure/keyvault-certificates.CertificateProperties[]>
+        description: ''
+    package: '@azure/keyvault-certificates'
+  - uid: '@azure/keyvault-certificates.CertificateClient.listPropertiesOfIssuers'
+    name: listPropertiesOfIssuers(ListPropertiesOfIssuersOptions)
     children: []
     type: method
     langs:
@@ -886,36 +1083,39 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.setIssuer("IssuerName", "Provider");
+      await client.createIssuer("IssuerName", "Provider");
 
       // All in one call
 
-      for await (const issuer of client.listIssuers()) {
-        console.log(issuer);
+      for await (const issuerProperties of client.listPropertiesOfIssuers()) {
+        console.log(issuerProperties);
       }
 
       // By pages
 
-      for await (const page of client.listIssuers().byPage()) {
-        for (const issuer of page) {
-          console.log(issuer);
+      for await (const page of client.listPropertiesOfIssuers().byPage()) {
+        for (const issuerProperties of page) {
+          console.log(issuerProperties);
         }
       }
 
       ```
     syntax:
-      content: 'function listIssuers(options?: ListIssuersOptions)'
+      content: >-
+        function listPropertiesOfIssuers(options?:
+        ListPropertiesOfIssuersOptions)
       parameters:
         - id: options
           type:
-            - '@azure/keyvault-certificates.ListIssuersOptions'
+            - '@azure/keyvault-certificates.ListPropertiesOfIssuersOptions'
           description: ''
           optional: true
       return:
         type:
           - >-
-            PagedAsyncIterableIterator<@azure/keyvault-certificates.CertificateIssuer,
-            @azure/keyvault-certificates.CertificateIssuer[]>
+            PagedAsyncIterableIterator<@azure/keyvault-certificates.IssuerProperties,
+            @azure/keyvault-certificates.IssuerProperties[]>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.mergeCertificate'
     name: 'mergeCertificate(string, Uint8Array[], MergeCertificateOptions)'
@@ -934,17 +1134,22 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.createCertificate("MyCertificate", {
+      await client.beginCreateCertificate("MyCertificate", {
         issuerName: "Unknown",
-        subjectName: "cn=MyCert"
+        subject: "cn=MyCert"
       });
 
-      const { csr } = await client.getCertificateOperation(certificateName);
+      const poller = await client.getCertificateOperation("MyCertificate");
+
+      const { csr } = poller.getResult();
 
       const base64Csr = Buffer.from(csr!).toString("base64");
 
       const wrappedCsr = ["-----BEGIN CERTIFICATE REQUEST-----", base64Csr,
       "-----END CERTIFICATE REQUEST-----"].join("\n");
+
+
+      const fs = require("fs");
 
       fs.writeFileSync("test.csr", wrappedCsr);
 
@@ -958,6 +1163,9 @@ items:
       // You can read more about how to create a fake certificate authority
       here: https://gist.github.com/Soarez/9688998
 
+
+      const childProcess = require("child_process");
+
       childProcess.execSync("openssl x509 -req -in test.csr -CA ca.crt -CAkey
       ca.key -CAcreateserial -out test.crt");
 
@@ -965,7 +1173,7 @@ items:
       fs.readFileSync("test.crt").toString().split("\n").slice(1, -1).join("");
 
 
-      await client.mergeCertificate(certificateName, [Buffer.from(base64Crt)]);
+      await client.mergeCertificate("MyCertificate", [Buffer.from(base64Crt)]);
 
       ```
     syntax:
@@ -988,7 +1196,8 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/keyvault-certificates.KeyVaultCertificate>
+          - Promise<@azure/keyvault-certificates.KeyVaultCertificateWithPolicy>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.purgeDeletedCertificate'
     name: 'purgeDeletedCertificate(string, PurgeDeletedCertificateOptions)'
@@ -1009,7 +1218,9 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.deleteCertificate("MyCertificate");
+      const deletePoller = await client.beginDeleteCertificate("MyCertificate");
+
+      await deletePoller.pollUntilDone();
 
       // Deleting a certificate takes time, make sure to wait before purging it
 
@@ -1033,50 +1244,7 @@ items:
       return:
         type:
           - Promise<null>
-    package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.CertificateClient.recoverDeletedCertificate'
-    name: 'recoverDeletedCertificate(string, RecoverDeletedCertificateOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Recovers the deleted certificate in the specified vault. This operation
-      can only be performed on a soft-delete enabled vault. This operation
-
-      requires the certificate/recover permission.
-
-      Example usage:
-
-      ```ts
-
-      const client = new CertificateClient(url, credentials);
-
-      await client.deleteCertificate("MyCertificate");
-
-      // Deleting a certificate takes time, make sure to wait before recovering
-      it
-
-      await client.recoverDeletedCertificate("MyCertificate");
-
-      ```
-    syntax:
-      content: >-
-        function recoverDeletedCertificate(certificateName: string, options?:
-        RecoverDeletedCertificateOptions)
-      parameters:
-        - id: certificateName
-          type:
-            - string
-          description: The name of the deleted certificate
-        - id: options
-          type:
-            - '@azure/keyvault-certificates.RecoverDeletedCertificateOptions'
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<@azure/keyvault-certificates.KeyVaultCertificate>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.restoreCertificateBackup'
     name: 'restoreCertificateBackup(Uint8Array, RestoreCertificateBackupOptions)'
@@ -1094,14 +1262,16 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.createCertificate("MyCertificate", {
+      await client.beginCreateCertificate("MyCertificate", {
         issuerName: "Self",
-        subjectName: "cn=MyCert"
+        subject: "cn=MyCert"
       });
 
       const backup = await client.backupCertificate("MyCertificate");
 
-      await client.deleteCertificate("MyCertificate");
+      const poller = await client.beginDeleteCertificate("MyCertificate");
+
+      await poller.pollUntilDone();
 
       // Some time is required before we're able to restore the certificate
 
@@ -1110,10 +1280,10 @@ items:
       ```
     syntax:
       content: >-
-        function restoreCertificateBackup(certificateBackup: Uint8Array,
-        options?: RestoreCertificateBackupOptions)
+        function restoreCertificateBackup(backup: Uint8Array, options?:
+        RestoreCertificateBackupOptions)
       parameters:
-        - id: certificateBackup
+        - id: backup
           type:
             - Uint8Array
           description: The back-up certificate to restore from
@@ -1124,10 +1294,11 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/keyvault-certificates.KeyVaultCertificate>
+          - Promise<@azure/keyvault-certificates.KeyVaultCertificateWithPolicy>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.setContacts'
-    name: 'setContacts(Contact[], SetContactsOptions)'
+    name: 'setContacts(CertificateContact[], SetContactsOptions)'
     children: []
     type: method
     langs:
@@ -1143,18 +1314,20 @@ items:
       let client = new CertificateClient(url, credentials);
 
       await client.setContacts([{
-        emailAddress: "b@b.com",
+        email: "b@b.com",
         name: "b",
         phone: "222222222222"
       }]);
 
       ```
     syntax:
-      content: 'function setContacts(contacts: Contact[], options?: SetContactsOptions)'
+      content: >-
+        function setContacts(contacts: CertificateContact[], options?:
+        SetContactsOptions)
       parameters:
         - id: contacts
           type:
-            - '@azure/keyvault-certificates.Contact[]'
+            - '@azure/keyvault-certificates.CertificateContact[]'
           description: The contacts to use
         - id: options
           type:
@@ -1163,104 +1336,10 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/keyvault-certificates.CertificateContacts>
-    package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.CertificateClient.setIssuer'
-    name: 'setIssuer(string, string, SetIssuerOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      The setIssuer operation adds or updates the specified certificate issuer.
-      This
-
-      operation requires the certificates/setissuers permission.
-
-      Example usage:
-
-      ```ts
-
-      const client = new CertificateClient(url, credentials);
-
-      await client.setIssuer("IssuerName", "Provider");
-
-      ```
-    syntax:
-      content: >-
-        function setIssuer(issuerName: string, provider: string, options?:
-        SetIssuerOptions)
-      parameters:
-        - id: issuerName
-          type:
-            - string
-          description: The name of the issuer.
-        - id: provider
-          type:
-            - string
-          description: The issuer provider.
-        - id: options
-          type:
-            - '@azure/keyvault-certificates.SetIssuerOptions'
-          description: ''
-          optional: true
-      return:
-        type:
-          - Promise<@azure/keyvault-certificates.CertificateIssuer>
-    package: '@azure/keyvault-certificates'
-  - uid: '@azure/keyvault-certificates.CertificateClient.updateCertificate'
-    name: 'updateCertificate(string, string, UpdateCertificateOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Applies the specified update on the given certificate; the only elements
-      updated are the
-
-      certificate's attributes. This operation requires the certificates/update
-      permission.
-
-      Example usage:
-
-      ```ts
-
-      const client = new CertificateClient(url, credentials);
-
-      await client.createCertificate("MyCertificate", {
-        issuerName: "Self",
-        subjectName: "cn=MyCert"
-      });
-
-      await client.updateCertificate("MyCertificate", "", {
-        tags: {
-          customTag: "value"
-        }
-      });
-
-      ```
-    syntax:
-      content: >-
-        function updateCertificate(certificateName: string, version: string,
-        options?: UpdateCertificateOptions)
-      parameters:
-        - id: certificateName
-          type:
-            - string
-          description: The name of the ceritificate
-        - id: version
-          type:
-            - string
-          description: The version of the certificate to update
-        - id: options
-          type:
-            - '@azure/keyvault-certificates.UpdateCertificateOptions'
-          description: |
-            The options, including what to update
-          optional: true
-      return:
-        type:
-          - Promise<@azure/keyvault-certificates.KeyVaultCertificate>
+          - >-
+            Promise<@azure/keyvault-certificates.CertificateContact[] |
+            undefined>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.updateCertificatePolicy'
     name: >-
@@ -1271,8 +1350,8 @@ items:
     langs:
       - typeScript
     summary: >-
-      Set specified members in the certificate policy. Leave others as null.
-      This operation requires the certificates/update permission.
+      Updates the certificate policy for the specified certificate. This
+      operation requires the certificates/update permission.
     syntax:
       content: >-
         function updateCertificatePolicy(certificateName: string, policy:
@@ -1294,6 +1373,62 @@ items:
       return:
         type:
           - Promise<@azure/keyvault-certificates.CertificatePolicy>
+        description: ''
+    package: '@azure/keyvault-certificates'
+  - uid: '@azure/keyvault-certificates.CertificateClient.updateCertificateProperties'
+    name: 'updateCertificateProperties(string, string, UpdateCertificateOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Applies the specified update on the given certificate; the only elements
+      updated are the
+
+      certificate's attributes. This operation requires the certificates/update
+      permission.
+
+      Example usage:
+
+      ```ts
+
+      const client = new CertificateClient(url, credentials);
+
+      await client.beginCreateCertificate("MyCertificate", {
+        issuerName: "Self",
+        subject: "cn=MyCert"
+      });
+
+      await client.updateCertificate("MyCertificate", "", {
+        tags: {
+          customTag: "value"
+        }
+      });
+
+      ```
+    syntax:
+      content: >-
+        function updateCertificateProperties(certificateName: string, version:
+        string, options?: UpdateCertificateOptions)
+      parameters:
+        - id: certificateName
+          type:
+            - string
+          description: The name of the certificate
+        - id: version
+          type:
+            - string
+          description: The version of the certificate to update
+        - id: options
+          type:
+            - '@azure/keyvault-certificates.UpdateCertificateOptions'
+          description: |
+            The options, including what to update
+          optional: true
+      return:
+        type:
+          - Promise<@azure/keyvault-certificates.KeyVaultCertificate>
+        description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.updateIssuer'
     name: 'updateIssuer(string, UpdateIssuerOptions)'
@@ -1313,7 +1448,7 @@ items:
 
       const client = new CertificateClient(url, credentials);
 
-      await client.setIssuer("IssuerName", "Provider");
+      await client.createIssuer("IssuerName", "Provider");
 
       await client.updateIssuer("IssuerName", {
         provider: "Provider2"
@@ -1335,6 +1470,22 @@ items:
       return:
         type:
           - Promise<@azure/keyvault-certificates.CertificateIssuer>
+        description: ''
+    package: '@azure/keyvault-certificates'
+  - uid: '@azure/keyvault-certificates.CertificateClient.vaultUrl'
+    name: vaultUrl
+    fullName: vaultUrl
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The base URL to the vault
+    syntax:
+      content: 'vaultUrl: string'
+      return:
+        type:
+          - string
+        description: ''
     package: '@azure/keyvault-certificates'
 references:
   - uid: '@azure/keyvault-certificates.BackupCertificateOptions'
@@ -1343,98 +1494,87 @@ references:
       - name: BackupCertificateOptions
         fullName: BackupCertificateOptions
         uid: '@azure/keyvault-certificates.BackupCertificateOptions'
-  - uid: Promise<@azure/keyvault-certificates.BackupCertificateResult>
-    name: BackupCertificateResult>
-    spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: BackupCertificateResult
-        fullName: BackupCertificateResult
-        uid: '@azure/keyvault-certificates.BackupCertificateResult'
-      - name: '>'
-        fullName: '>'
-  - uid: '@azure/keyvault-certificates.CancelCertificateOperationOptions'
-    name: CancelCertificateOperationOptions
-    spec.typeScript:
-      - name: CancelCertificateOperationOptions
-        fullName: CancelCertificateOperationOptions
-        uid: '@azure/keyvault-certificates.CancelCertificateOperationOptions'
-  - uid: Promise<@azure/keyvault-certificates.CertificateOperation>
-    name: CertificateOperation>
-    spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: CertificateOperation
-        fullName: CertificateOperation
-        uid: '@azure/keyvault-certificates.CertificateOperation'
-      - name: '>'
-        fullName: '>'
   - uid: '@azure/keyvault-certificates.CertificatePolicy'
     name: CertificatePolicy
     spec.typeScript:
       - name: CertificatePolicy
         fullName: CertificatePolicy
         uid: '@azure/keyvault-certificates.CertificatePolicy'
-  - uid: '@azure/keyvault-certificates.CreateCertificateOptions'
-    name: CreateCertificateOptions
+  - uid: '@azure/keyvault-certificates.BeginCreateCertificateOptions'
+    name: BeginCreateCertificateOptions
     spec.typeScript:
-      - name: CreateCertificateOptions
-        fullName: CreateCertificateOptions
-        uid: '@azure/keyvault-certificates.CreateCertificateOptions'
-  - uid: Promise<@azure/keyvault-certificates.KeyVaultCertificate>
-    name: KeyVaultCertificate>
+      - name: BeginCreateCertificateOptions
+        fullName: BeginCreateCertificateOptions
+        uid: '@azure/keyvault-certificates.BeginCreateCertificateOptions'
+  - uid: >-
+      Promise<PollerLike<PollOperationState<@azure/keyvault-certificates.KeyVaultCertificateWithPolicy>,
+      @azure/keyvault-certificates.KeyVaultCertificateWithPolicy>>
+    name: KeyVaultCertificateWithPolicy>>
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: KeyVaultCertificate
-        fullName: KeyVaultCertificate
-        uid: '@azure/keyvault-certificates.KeyVaultCertificate'
-      - name: '>'
-        fullName: '>'
-  - uid: '@azure/keyvault-certificates.DeleteCertificateOptions'
-    name: DeleteCertificateOptions
+      - name: Promise<PollerLike<PollOperationState<
+        fullName: Promise<PollerLike<PollOperationState<
+      - name: KeyVaultCertificateWithPolicy
+        fullName: KeyVaultCertificateWithPolicy
+        uid: '@azure/keyvault-certificates.KeyVaultCertificateWithPolicy'
+      - name: '>, '
+        fullName: '>, '
+      - name: KeyVaultCertificateWithPolicy
+        fullName: KeyVaultCertificateWithPolicy
+        uid: '@azure/keyvault-certificates.KeyVaultCertificateWithPolicy'
+      - name: '>>'
+        fullName: '>>'
+  - uid: '@azure/keyvault-certificates.BeginDeleteCertificateOptions'
+    name: BeginDeleteCertificateOptions
     spec.typeScript:
-      - name: DeleteCertificateOptions
-        fullName: DeleteCertificateOptions
-        uid: '@azure/keyvault-certificates.DeleteCertificateOptions'
-  - uid: Promise<@azure/keyvault-certificates.DeletedCertificate>
-    name: DeletedCertificate>
+      - name: BeginDeleteCertificateOptions
+        fullName: BeginDeleteCertificateOptions
+        uid: '@azure/keyvault-certificates.BeginDeleteCertificateOptions'
+  - uid: >-
+      Promise<PollerLike<PollOperationState<@azure/keyvault-certificates.DeletedCertificate>,
+      @azure/keyvault-certificates.DeletedCertificate>>
+    name: DeletedCertificate>>
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
+      - name: Promise<PollerLike<PollOperationState<
+        fullName: Promise<PollerLike<PollOperationState<
       - name: DeletedCertificate
         fullName: DeletedCertificate
         uid: '@azure/keyvault-certificates.DeletedCertificate'
-      - name: '>'
-        fullName: '>'
-  - uid: '@azure/keyvault-certificates.DeleteCertificateOperationOptions'
-    name: DeleteCertificateOperationOptions
+      - name: '>, '
+        fullName: '>, '
+      - name: DeletedCertificate
+        fullName: DeletedCertificate
+        uid: '@azure/keyvault-certificates.DeletedCertificate'
+      - name: '>>'
+        fullName: '>>'
+  - uid: '@azure/keyvault-certificates.BeginRecoverDeletedCertificateOptions'
+    name: BeginRecoverDeletedCertificateOptions
     spec.typeScript:
-      - name: DeleteCertificateOperationOptions
-        fullName: DeleteCertificateOperationOptions
-        uid: '@azure/keyvault-certificates.DeleteCertificateOperationOptions'
-  - uid: '@azure/keyvault-certificates.DeleteContactsOptions'
-    name: DeleteContactsOptions
+      - name: BeginRecoverDeletedCertificateOptions
+        fullName: BeginRecoverDeletedCertificateOptions
+        uid: '@azure/keyvault-certificates.BeginRecoverDeletedCertificateOptions'
+  - uid: >-
+      Promise<PollerLike<PollOperationState<@azure/keyvault-certificates.KeyVaultCertificate>,
+      @azure/keyvault-certificates.KeyVaultCertificate>>
+    name: KeyVaultCertificate>>
     spec.typeScript:
-      - name: DeleteContactsOptions
-        fullName: DeleteContactsOptions
-        uid: '@azure/keyvault-certificates.DeleteContactsOptions'
-  - uid: Promise<@azure/keyvault-certificates.CertificateContacts>
-    name: CertificateContacts>
+      - name: Promise<PollerLike<PollOperationState<
+        fullName: Promise<PollerLike<PollOperationState<
+      - name: KeyVaultCertificate
+        fullName: KeyVaultCertificate
+        uid: '@azure/keyvault-certificates.KeyVaultCertificate'
+      - name: '>, '
+        fullName: '>, '
+      - name: KeyVaultCertificate
+        fullName: KeyVaultCertificate
+        uid: '@azure/keyvault-certificates.KeyVaultCertificate'
+      - name: '>>'
+        fullName: '>>'
+  - uid: '@azure/keyvault-certificates.CreateIssuerOptions'
+    name: CreateIssuerOptions
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: CertificateContacts
-        fullName: CertificateContacts
-        uid: '@azure/keyvault-certificates.CertificateContacts'
-      - name: '>'
-        fullName: '>'
-  - uid: '@azure/keyvault-certificates.DeleteIssuerOptions'
-    name: DeleteIssuerOptions
-    spec.typeScript:
-      - name: DeleteIssuerOptions
-        fullName: DeleteIssuerOptions
-        uid: '@azure/keyvault-certificates.DeleteIssuerOptions'
+      - name: CreateIssuerOptions
+        fullName: CreateIssuerOptions
+        uid: '@azure/keyvault-certificates.CreateIssuerOptions'
   - uid: Promise<@azure/keyvault-certificates.CertificateIssuer>
     name: CertificateIssuer>
     spec.typeScript:
@@ -1445,18 +1585,83 @@ references:
         uid: '@azure/keyvault-certificates.CertificateIssuer'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/keyvault-certificates.DeleteCertificateOperationOptions'
+    name: DeleteCertificateOperationOptions
+    spec.typeScript:
+      - name: DeleteCertificateOperationOptions
+        fullName: DeleteCertificateOperationOptions
+        uid: '@azure/keyvault-certificates.DeleteCertificateOperationOptions'
+  - uid: Promise<@azure/keyvault-certificates.CertificateOperation>
+    name: CertificateOperation>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: CertificateOperation
+        fullName: CertificateOperation
+        uid: '@azure/keyvault-certificates.CertificateOperation'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/keyvault-certificates.DeleteContactsOptions'
+    name: DeleteContactsOptions
+    spec.typeScript:
+      - name: DeleteContactsOptions
+        fullName: DeleteContactsOptions
+        uid: '@azure/keyvault-certificates.DeleteContactsOptions'
+  - uid: 'Promise<@azure/keyvault-certificates.CertificateContact[] | undefined>'
+    name: 'CertificateContact[] | undefined>'
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: CertificateContact
+        fullName: CertificateContact
+        uid: '@azure/keyvault-certificates.CertificateContact'
+      - name: '[] | undefined>'
+        fullName: '[] | undefined>'
+  - uid: '@azure/keyvault-certificates.DeleteIssuerOptions'
+    name: DeleteIssuerOptions
+    spec.typeScript:
+      - name: DeleteIssuerOptions
+        fullName: DeleteIssuerOptions
+        uid: '@azure/keyvault-certificates.DeleteIssuerOptions'
   - uid: '@azure/keyvault-certificates.GetCertificateOptions'
     name: GetCertificateOptions
     spec.typeScript:
       - name: GetCertificateOptions
         fullName: GetCertificateOptions
         uid: '@azure/keyvault-certificates.GetCertificateOptions'
+  - uid: Promise<@azure/keyvault-certificates.KeyVaultCertificateWithPolicy>
+    name: KeyVaultCertificateWithPolicy>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: KeyVaultCertificateWithPolicy
+        fullName: KeyVaultCertificateWithPolicy
+        uid: '@azure/keyvault-certificates.KeyVaultCertificateWithPolicy'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/keyvault-certificates.GetCertificateOperationOptions'
     name: GetCertificateOperationOptions
     spec.typeScript:
       - name: GetCertificateOperationOptions
         fullName: GetCertificateOperationOptions
         uid: '@azure/keyvault-certificates.GetCertificateOperationOptions'
+  - uid: >-
+      Promise<PollerLike<PollOperationState<@azure/keyvault-certificates.CertificateOperation>,
+      @azure/keyvault-certificates.CertificateOperation>>
+    name: CertificateOperation>>
+    spec.typeScript:
+      - name: Promise<PollerLike<PollOperationState<
+        fullName: Promise<PollerLike<PollOperationState<
+      - name: CertificateOperation
+        fullName: CertificateOperation
+        uid: '@azure/keyvault-certificates.CertificateOperation'
+      - name: '>, '
+        fullName: '>, '
+      - name: CertificateOperation
+        fullName: CertificateOperation
+        uid: '@azure/keyvault-certificates.CertificateOperation'
+      - name: '>>'
+        fullName: '>>'
   - uid: '@azure/keyvault-certificates.GetCertificatePolicyOptions'
     name: GetCertificatePolicyOptions
     spec.typeScript:
@@ -1479,6 +1684,16 @@ references:
       - name: GetCertificateVersionOptions
         fullName: GetCertificateVersionOptions
         uid: '@azure/keyvault-certificates.GetCertificateVersionOptions'
+  - uid: Promise<@azure/keyvault-certificates.KeyVaultCertificate>
+    name: KeyVaultCertificate>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: KeyVaultCertificate
+        fullName: KeyVaultCertificate
+        uid: '@azure/keyvault-certificates.KeyVaultCertificate'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/keyvault-certificates.GetContactsOptions'
     name: GetContactsOptions
     spec.typeScript:
@@ -1491,6 +1706,16 @@ references:
       - name: GetDeletedCertificateOptions
         fullName: GetDeletedCertificateOptions
         uid: '@azure/keyvault-certificates.GetDeletedCertificateOptions'
+  - uid: Promise<@azure/keyvault-certificates.DeletedCertificate>
+    name: DeletedCertificate>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: DeletedCertificate
+        fullName: DeletedCertificate
+        uid: '@azure/keyvault-certificates.DeletedCertificate'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/keyvault-certificates.GetIssuerOptions'
     name: GetIssuerOptions
     spec.typeScript:
@@ -1503,35 +1728,6 @@ references:
       - name: ImportCertificateOptions
         fullName: ImportCertificateOptions
         uid: '@azure/keyvault-certificates.ImportCertificateOptions'
-  - uid: '@azure/keyvault-certificates.ListCertificateVersionsOptions'
-    name: ListCertificateVersionsOptions
-    spec.typeScript:
-      - name: ListCertificateVersionsOptions
-        fullName: ListCertificateVersionsOptions
-        uid: '@azure/keyvault-certificates.ListCertificateVersionsOptions'
-  - uid: >-
-      PagedAsyncIterableIterator<@azure/keyvault-certificates.KeyVaultCertificate,
-      @azure/keyvault-certificates.KeyVaultCertificate[]>
-    name: 'KeyVaultCertificate[]>'
-    spec.typeScript:
-      - name: PagedAsyncIterableIterator<
-        fullName: PagedAsyncIterableIterator<
-      - name: KeyVaultCertificate
-        fullName: KeyVaultCertificate
-        uid: '@azure/keyvault-certificates.KeyVaultCertificate'
-      - name: ', '
-        fullName: ', '
-      - name: KeyVaultCertificate
-        fullName: KeyVaultCertificate
-        uid: '@azure/keyvault-certificates.KeyVaultCertificate'
-      - name: '[]>'
-        fullName: '[]>'
-  - uid: '@azure/keyvault-certificates.ListCertificatesOptions'
-    name: ListCertificatesOptions
-    spec.typeScript:
-      - name: ListCertificatesOptions
-        fullName: ListCertificatesOptions
-        uid: '@azure/keyvault-certificates.ListCertificatesOptions'
   - uid: '@azure/keyvault-certificates.ListDeletedCertificatesOptions'
     name: ListDeletedCertificatesOptions
     spec.typeScript:
@@ -1555,27 +1751,57 @@ references:
         uid: '@azure/keyvault-certificates.DeletedCertificate'
       - name: '[]>'
         fullName: '[]>'
-  - uid: '@azure/keyvault-certificates.ListIssuersOptions'
-    name: ListIssuersOptions
+  - uid: '@azure/keyvault-certificates.ListPropertiesOfCertificateVersionsOptions'
+    name: ListPropertiesOfCertificateVersionsOptions
     spec.typeScript:
-      - name: ListIssuersOptions
-        fullName: ListIssuersOptions
-        uid: '@azure/keyvault-certificates.ListIssuersOptions'
+      - name: ListPropertiesOfCertificateVersionsOptions
+        fullName: ListPropertiesOfCertificateVersionsOptions
+        uid: >-
+          @azure/keyvault-certificates.ListPropertiesOfCertificateVersionsOptions
   - uid: >-
-      PagedAsyncIterableIterator<@azure/keyvault-certificates.CertificateIssuer,
-      @azure/keyvault-certificates.CertificateIssuer[]>
-    name: 'CertificateIssuer[]>'
+      PagedAsyncIterableIterator<@azure/keyvault-certificates.CertificateProperties,
+      @azure/keyvault-certificates.CertificateProperties[]>
+    name: 'CertificateProperties[]>'
     spec.typeScript:
       - name: PagedAsyncIterableIterator<
         fullName: PagedAsyncIterableIterator<
-      - name: CertificateIssuer
-        fullName: CertificateIssuer
-        uid: '@azure/keyvault-certificates.CertificateIssuer'
+      - name: CertificateProperties
+        fullName: CertificateProperties
+        uid: '@azure/keyvault-certificates.CertificateProperties'
       - name: ', '
         fullName: ', '
-      - name: CertificateIssuer
-        fullName: CertificateIssuer
-        uid: '@azure/keyvault-certificates.CertificateIssuer'
+      - name: CertificateProperties
+        fullName: CertificateProperties
+        uid: '@azure/keyvault-certificates.CertificateProperties'
+      - name: '[]>'
+        fullName: '[]>'
+  - uid: '@azure/keyvault-certificates.ListPropertiesOfCertificatesOptions'
+    name: ListPropertiesOfCertificatesOptions
+    spec.typeScript:
+      - name: ListPropertiesOfCertificatesOptions
+        fullName: ListPropertiesOfCertificatesOptions
+        uid: '@azure/keyvault-certificates.ListPropertiesOfCertificatesOptions'
+  - uid: '@azure/keyvault-certificates.ListPropertiesOfIssuersOptions'
+    name: ListPropertiesOfIssuersOptions
+    spec.typeScript:
+      - name: ListPropertiesOfIssuersOptions
+        fullName: ListPropertiesOfIssuersOptions
+        uid: '@azure/keyvault-certificates.ListPropertiesOfIssuersOptions'
+  - uid: >-
+      PagedAsyncIterableIterator<@azure/keyvault-certificates.IssuerProperties,
+      @azure/keyvault-certificates.IssuerProperties[]>
+    name: 'IssuerProperties[]>'
+    spec.typeScript:
+      - name: PagedAsyncIterableIterator<
+        fullName: PagedAsyncIterableIterator<
+      - name: IssuerProperties
+        fullName: IssuerProperties
+        uid: '@azure/keyvault-certificates.IssuerProperties'
+      - name: ', '
+        fullName: ', '
+      - name: IssuerProperties
+        fullName: IssuerProperties
+        uid: '@azure/keyvault-certificates.IssuerProperties'
       - name: '[]>'
         fullName: '[]>'
   - uid: '@azure/keyvault-certificates.MergeCertificateOptions'
@@ -1590,24 +1816,18 @@ references:
       - name: PurgeDeletedCertificateOptions
         fullName: PurgeDeletedCertificateOptions
         uid: '@azure/keyvault-certificates.PurgeDeletedCertificateOptions'
-  - uid: '@azure/keyvault-certificates.RecoverDeletedCertificateOptions'
-    name: RecoverDeletedCertificateOptions
-    spec.typeScript:
-      - name: RecoverDeletedCertificateOptions
-        fullName: RecoverDeletedCertificateOptions
-        uid: '@azure/keyvault-certificates.RecoverDeletedCertificateOptions'
   - uid: '@azure/keyvault-certificates.RestoreCertificateBackupOptions'
     name: RestoreCertificateBackupOptions
     spec.typeScript:
       - name: RestoreCertificateBackupOptions
         fullName: RestoreCertificateBackupOptions
         uid: '@azure/keyvault-certificates.RestoreCertificateBackupOptions'
-  - uid: '@azure/keyvault-certificates.Contact[]'
-    name: 'Contact[]'
+  - uid: '@azure/keyvault-certificates.CertificateContact[]'
+    name: 'CertificateContact[]'
     spec.typeScript:
-      - name: Contact
-        fullName: Contact
-        uid: '@azure/keyvault-certificates.Contact'
+      - name: CertificateContact
+        fullName: CertificateContact
+        uid: '@azure/keyvault-certificates.CertificateContact'
       - name: '[]'
         fullName: '[]'
   - uid: '@azure/keyvault-certificates.SetContactsOptions'
@@ -1616,24 +1836,18 @@ references:
       - name: SetContactsOptions
         fullName: SetContactsOptions
         uid: '@azure/keyvault-certificates.SetContactsOptions'
-  - uid: '@azure/keyvault-certificates.SetIssuerOptions'
-    name: SetIssuerOptions
-    spec.typeScript:
-      - name: SetIssuerOptions
-        fullName: SetIssuerOptions
-        uid: '@azure/keyvault-certificates.SetIssuerOptions'
-  - uid: '@azure/keyvault-certificates.UpdateCertificateOptions'
-    name: UpdateCertificateOptions
-    spec.typeScript:
-      - name: UpdateCertificateOptions
-        fullName: UpdateCertificateOptions
-        uid: '@azure/keyvault-certificates.UpdateCertificateOptions'
   - uid: '@azure/keyvault-certificates.UpdateCertificatePolicyOptions'
     name: UpdateCertificatePolicyOptions
     spec.typeScript:
       - name: UpdateCertificatePolicyOptions
         fullName: UpdateCertificatePolicyOptions
         uid: '@azure/keyvault-certificates.UpdateCertificatePolicyOptions'
+  - uid: '@azure/keyvault-certificates.UpdateCertificateOptions'
+    name: UpdateCertificateOptions
+    spec.typeScript:
+      - name: UpdateCertificateOptions
+        fullName: UpdateCertificateOptions
+        uid: '@azure/keyvault-certificates.UpdateCertificateOptions'
   - uid: '@azure/keyvault-certificates.UpdateIssuerOptions'
     name: UpdateIssuerOptions
     spec.typeScript:

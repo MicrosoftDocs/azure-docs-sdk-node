@@ -4,11 +4,9 @@ items:
     name: EventHubClientOptions
     fullName: EventHubClientOptions
     children:
-      - '@azure/event-hubs.EventHubClientOptions.dataTransformer'
       - '@azure/event-hubs.EventHubClientOptions.retryOptions'
       - '@azure/event-hubs.EventHubClientOptions.userAgent'
-      - '@azure/event-hubs.EventHubClientOptions.webSocket'
-      - '@azure/event-hubs.EventHubClientOptions.webSocketConstructorOptions'
+      - '@azure/event-hubs.EventHubClientOptions.webSocketOptions'
     langs:
       - typeScript
     type: interface
@@ -53,35 +51,6 @@ items:
 
       ```
     package: '@azure/event-hubs'
-  - uid: '@azure/event-hubs.EventHubClientOptions.dataTransformer'
-    name: dataTransformer
-    fullName: dataTransformer
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      The data transformer that will be used to encode and decode the sent and
-      received messages respectively.
-
-      If not provided then the `DefaultDataTransformer` is used which has the
-      below `encode` & `decode` features
-
-      - `encode`:
-         - If event body is a Buffer, then the event is sent without any data transformation
-         - Else, JSON.stringfy() is run on the body, and then converted to Buffer before sending the event
-         - If JSON.stringify() fails at this point, the send operation fails too.
-      - `decode`
-         - The body receivied via the AMQP protocol is always of type Buffer
-         - UTF-8 encoding is used to convert Buffer to string, and then JSON.parse() is run on it to get the event body
-         - If the JSON.parse() fails at this point, then the originally received Buffer object is returned in the event body.
-    optional: true
-    syntax:
-      content: 'dataTransformer?: DataTransformer'
-      return:
-        type:
-          - DataTransformer
-    package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClientOptions.retryOptions'
     name: retryOptions
     fullName: retryOptions
@@ -100,6 +69,7 @@ items:
       return:
         type:
           - RetryOptions
+        description: ''
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubClientOptions.userAgent'
     name: userAgent
@@ -119,52 +89,28 @@ items:
       return:
         type:
           - undefined | string
+        description: ''
     package: '@azure/event-hubs'
-  - uid: '@azure/event-hubs.EventHubClientOptions.webSocket'
-    name: webSocket
-    fullName: webSocket
+  - uid: '@azure/event-hubs.EventHubClientOptions.webSocketOptions'
+    name: webSocketOptions
+    fullName: webSocketOptions
     children: []
     langs:
       - typeScript
     type: property
-    summary: >-
-      The WebSocket constructor used to create an AMQP connection over a
-      WebSocket.
-
-      This option should be provided in the below scenarios:
-
-      - The TCP port 5671 which is what is used by the AMQP connection to Event
-      Hubs is blocked in your environment.
-
-      - Your application needs to be run behind a proxy server
-
-      - Your application needs to run in the browser and you want to provide
-      your own choice of Websocket implementation
-
-      instead of the built-in WebSocket in the browser.
+    summary: Options related to websockets
     optional: true
     syntax:
-      content: 'webSocket?: WebSocketImpl'
+      content: 'webSocketOptions?: WebSocketOptions'
       return:
         type:
-          - WebSocketImpl
+          - '@azure/event-hubs.WebSocketOptions'
+        description: ''
     package: '@azure/event-hubs'
-  - uid: '@azure/event-hubs.EventHubClientOptions.webSocketConstructorOptions'
-    name: webSocketConstructorOptions
-    fullName: webSocketConstructorOptions
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      Options to be passed to the WebSocket constructor when the underlying
-      `rhea` library instantiates
-
-      the WebSocket.
-    optional: true
-    syntax:
-      content: 'webSocketConstructorOptions?: any'
-      return:
-        type:
-          - any
-    package: '@azure/event-hubs'
+references:
+  - uid: '@azure/event-hubs.WebSocketOptions'
+    name: WebSocketOptions
+    spec.typeScript:
+      - name: WebSocketOptions
+        fullName: WebSocketOptions
+        uid: '@azure/event-hubs.WebSocketOptions'

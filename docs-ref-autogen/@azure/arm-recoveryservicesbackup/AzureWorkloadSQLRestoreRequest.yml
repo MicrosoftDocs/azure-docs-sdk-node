@@ -13,6 +13,8 @@ items:
       - >-
         @azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.propertyBag
       - >-
+        @azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.recoveryMode
+      - >-
         @azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.recoveryType
       - >-
         @azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.shouldUseAlternateTargetLocation
@@ -23,7 +25,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: AzureWorkload SQL -specific restore. Specifically for full/diff restore
     package: '@azure/arm-recoveryservicesbackup'
   - uid: >-
       @azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.alternateDirectoryPaths
@@ -33,7 +35,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Data directory details
     optional: true
     syntax:
       content: 'alternateDirectoryPaths?: SQLDataDirectoryMapping[]'
@@ -50,7 +52,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      SQL specific property where user can chose to set no-recovery when restore
+      operation is tried
     optional: true
     syntax:
       content: 'isNonRecoverable?: undefined | false | true'
@@ -67,7 +71,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Polymorphic Discriminator
     syntax:
       content: 'objectType: "AzureWorkloadSQLRestoreRequest"'
       return:
@@ -83,13 +87,34 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Workload specific property bag.
     optional: true
     syntax:
       content: 'propertyBag?: undefined | [key: string]: string'
       return:
         type:
           - 'undefined | [key: string]: string'
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.AzureWorkloadSQLRestoreRequest.recoveryMode
+    name: recoveryMode
+    fullName: recoveryMode
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Defines whether the current recovery mode is file restore or database
+      restore. Possible values
+
+      include: 'Invalid', 'FileRecovery', 'WorkloadRecovery'
+    optional: true
+    syntax:
+      content: 'recoveryMode?: RecoveryMode'
+      return:
+        type:
+          - '@azure/arm-recoveryservicesbackup.RecoveryMode'
         description: ''
     package: '@azure/arm-recoveryservicesbackup'
   - uid: >-
@@ -100,7 +125,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Type of this recovery. Possible values include: 'Invalid',
+      'OriginalLocation',
+
+      'AlternateLocation', 'RestoreDisks', 'Offline'
     optional: true
     syntax:
       content: 'recoveryType?: RecoveryType'
@@ -117,7 +146,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Default option set to true. If this is set to false, alternate data
+      directory must be provided
     optional: true
     syntax:
       content: 'shouldUseAlternateTargetLocation?: undefined | false | true'
@@ -134,7 +165,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Fully qualified ARM ID of the VM on which workload that was running is
+      being recovered.
     optional: true
     syntax:
       content: 'sourceResourceId?: undefined | string'
@@ -151,7 +184,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Details of target database
     optional: true
     syntax:
       content: 'targetInfo?: TargetRestoreInfo'
@@ -169,6 +202,12 @@ references:
         uid: '@azure/arm-recoveryservicesbackup.SQLDataDirectoryMapping'
       - name: '[]'
         fullName: '[]'
+  - uid: '@azure/arm-recoveryservicesbackup.RecoveryMode'
+    name: RecoveryMode
+    spec.typeScript:
+      - name: RecoveryMode
+        fullName: RecoveryMode
+        uid: '@azure/arm-recoveryservicesbackup.RecoveryMode'
   - uid: '@azure/arm-recoveryservicesbackup.RecoveryType'
     name: RecoveryType
     spec.typeScript:

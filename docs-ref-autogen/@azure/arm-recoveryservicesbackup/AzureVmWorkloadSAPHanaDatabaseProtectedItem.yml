@@ -14,9 +14,19 @@ items:
       - >-
         @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.createMode
       - >-
+        @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.deferredDeleteTimeInUTC
+      - >-
+        @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.deferredDeleteTimeRemaining
+      - >-
         @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.extendedInfo
       - >-
         @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.friendlyName
+      - >-
+        @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.isDeferredDeleteScheduleUpcoming
+      - >-
+        @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.isRehydrate
+      - >-
+        @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.isScheduledForDeferredDelete
       - >-
         @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.lastBackupErrorDetail
       - >-
@@ -50,7 +60,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Azure VM workload-specific protected item representing SAP HANA Database.
     package: '@azure/arm-recoveryservicesbackup'
   - uid: >-
       @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.backupManagementType
@@ -60,7 +70,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Type of backup management for the backed up item. Possible values include:
+      'Invalid',
+
+      'AzureIaasVM', 'MAB', 'DPM', 'AzureBackupServer', 'AzureSql',
+      'AzureStorage', 'AzureWorkload',
+
+      'DefaultBackup'
     optional: true
     syntax:
       content: 'backupManagementType?: BackupManagementType'
@@ -77,7 +94,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Name of the backup set the backup item belongs to
     optional: true
     syntax:
       content: 'backupSetName?: undefined | string'
@@ -94,7 +111,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Unique name of container
     optional: true
     syntax:
       content: 'containerName?: undefined | string'
@@ -111,13 +128,53 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Create mode to indicate recovery of existing soft deleted data source or
+      creation of new data
+
+      source. Possible values include: 'Invalid', 'Default', 'Recover'
     optional: true
     syntax:
       content: 'createMode?: CreateMode'
       return:
         type:
           - '@azure/arm-recoveryservicesbackup.CreateMode'
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.deferredDeleteTimeInUTC
+    name: deferredDeleteTimeInUTC
+    fullName: deferredDeleteTimeInUTC
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Time for deferred deletion in UTC
+    optional: true
+    syntax:
+      content: 'deferredDeleteTimeInUTC?: Date'
+      return:
+        type:
+          - Date
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.deferredDeleteTimeRemaining
+    name: deferredDeleteTimeRemaining
+    fullName: deferredDeleteTimeRemaining
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Time remaining before the DS marked for deferred delete is permanently
+      deleted
+    optional: true
+    syntax:
+      content: 'deferredDeleteTimeRemaining?: undefined | string'
+      return:
+        type:
+          - undefined | string
         description: ''
     package: '@azure/arm-recoveryservicesbackup'
   - uid: >-
@@ -128,7 +185,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Additional information for this backup item.
     optional: true
     syntax:
       content: 'extendedInfo?: AzureVmWorkloadProtectedItemExtendedInfo'
@@ -146,13 +203,64 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Friendly name of the DB represented by this backup item.
     optional: true
     syntax:
       content: 'friendlyName?: undefined | string'
       return:
         type:
           - undefined | string
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.isDeferredDeleteScheduleUpcoming
+    name: isDeferredDeleteScheduleUpcoming
+    fullName: isDeferredDeleteScheduleUpcoming
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Flag to identify whether the deferred deleted DS is to be purged soon
+    optional: true
+    syntax:
+      content: 'isDeferredDeleteScheduleUpcoming?: undefined | false | true'
+      return:
+        type:
+          - undefined | false | true
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.isRehydrate
+    name: isRehydrate
+    fullName: isRehydrate
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Flag to identify that deferred deleted DS is to be moved into Pause state
+    optional: true
+    syntax:
+      content: 'isRehydrate?: undefined | false | true'
+      return:
+        type:
+          - undefined | false | true
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.AzureVmWorkloadSAPHanaDatabaseProtectedItem.isScheduledForDeferredDelete
+    name: isScheduledForDeferredDelete
+    fullName: isScheduledForDeferredDelete
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Flag to identify whether the DS is scheduled for deferred delete
+    optional: true
+    syntax:
+      content: 'isScheduledForDeferredDelete?: undefined | false | true'
+      return:
+        type:
+          - undefined | false | true
         description: ''
     package: '@azure/arm-recoveryservicesbackup'
   - uid: >-
@@ -163,7 +271,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Error details in last backup
     optional: true
     syntax:
       content: 'lastBackupErrorDetail?: ErrorDetail'
@@ -180,7 +288,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Last backup operation status. Possible values: Healthy, Unhealthy.
+      Possible values include:
+
+      'Invalid', 'Healthy', 'Unhealthy', 'IRPending'
     optional: true
     syntax:
       content: 'lastBackupStatus?: LastBackupStatus'
@@ -197,7 +309,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Timestamp of the last backup operation on this backup item.
     optional: true
     syntax:
       content: 'lastBackupTime?: Date'
@@ -214,7 +326,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Timestamp when the last (latest) backup copy was created for this backup
+      item.
     optional: true
     syntax:
       content: 'lastRecoveryPoint?: Date'
@@ -231,7 +345,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Parent name of the DB such as Instance or Availability Group.
     optional: true
     syntax:
       content: 'parentName?: undefined | string'
@@ -248,7 +362,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Parent type of protected item, example: for a DB, standalone server or
+      distributed
     optional: true
     syntax:
       content: 'parentType?: undefined | string'
@@ -265,7 +381,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: ID of the backup policy with which this item is backed up.
     optional: true
     syntax:
       content: 'policyId?: undefined | string'
@@ -282,7 +398,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Data ID of the protected item.
     optional: true
     syntax:
       content: 'protectedItemDataSourceId?: undefined | string'
@@ -299,7 +415,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Health status of the backup item, evaluated based on last heartbeat
+      received. Possible values
+
+      include: 'Invalid', 'Healthy', 'Unhealthy', 'NotReachable', 'IRPending'
     optional: true
     syntax:
       content: 'protectedItemHealthStatus?: ProtectedItemHealthStatus'
@@ -316,7 +436,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Polymorphic Discriminator
     syntax:
       content: 'protectedItemType: "AzureVmWorkloadSAPHanaDatabase"'
       return:
@@ -332,7 +452,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Backup state of this backup item. Possible values include: 'Invalid',
+      'IRPending',
+
+      'Protected', 'ProtectionError', 'ProtectionStopped', 'ProtectionPaused'
     optional: true
     syntax:
       content: 'protectionState?: ProtectionState'
@@ -349,7 +473,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Backup status of this backup item.
     optional: true
     syntax:
       content: 'protectionStatus?: undefined | string'
@@ -366,7 +490,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Host/Cluster Name for instance or AG
     optional: true
     syntax:
       content: 'serverName?: undefined | string'
@@ -383,7 +507,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: ARM ID of the resource to be backed up.
     optional: true
     syntax:
       content: 'sourceResourceId?: undefined | string'
@@ -400,7 +524,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Type of workload this item represents. Possible values include: 'Invalid',
+      'VM', 'FileFolder',
+
+      'AzureSqlDb', 'SQLDB', 'Exchange', 'Sharepoint', 'VMwareVM',
+      'SystemState', 'Client',
+
+      'GenericDataSource', 'SQLDataBase', 'AzureFileShare', 'SAPHanaDatabase',
+      'SAPAseDatabase'
     optional: true
     syntax:
       content: 'workloadType?: DataSourceType'

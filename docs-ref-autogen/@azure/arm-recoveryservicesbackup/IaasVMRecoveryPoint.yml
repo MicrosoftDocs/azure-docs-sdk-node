@@ -18,6 +18,8 @@ items:
       - >-
         @azure/arm-recoveryservicesbackup.IaasVMRecoveryPoint.recoveryPointAdditionalInfo
       - >-
+        @azure/arm-recoveryservicesbackup.IaasVMRecoveryPoint.recoveryPointDiskConfiguration
+      - >-
         @azure/arm-recoveryservicesbackup.IaasVMRecoveryPoint.recoveryPointTierDetails
       - '@azure/arm-recoveryservicesbackup.IaasVMRecoveryPoint.recoveryPointTime'
       - '@azure/arm-recoveryservicesbackup.IaasVMRecoveryPoint.recoveryPointType'
@@ -27,7 +29,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: IaaS VM workload specific backup copy.
     package: '@azure/arm-recoveryservicesbackup'
   - uid: >-
       @azure/arm-recoveryservicesbackup.IaasVMRecoveryPoint.isInstantIlrSessionActive
@@ -37,7 +39,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Is the session to recover items from this backup copy still active.
     optional: true
     syntax:
       content: 'isInstantIlrSessionActive?: undefined | false | true'
@@ -54,7 +56,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Whether VM is with Managed Disks
     optional: true
     syntax:
       content: 'isManagedVirtualMachine?: undefined | false | true'
@@ -70,7 +72,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Identifies whether the VM was encrypted when the backup copy is created.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'isSourceVMEncrypted?: undefined | false | true'
@@ -86,7 +92,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Required details for recovering an encrypted VM. Applicable only when
+      IsSourceVMEncrypted is
+
+      true.
     optional: true
     syntax:
       content: 'keyAndSecret?: KeyAndSecretDetails'
@@ -102,7 +112,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Polymorphic Discriminator
     syntax:
       content: 'objectType: "IaasVMRecoveryPoint"'
       return:
@@ -118,7 +128,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Original Storage Account Option
     optional: true
     syntax:
       content: 'originalStorageAccountOption?: undefined | false | true'
@@ -134,7 +144,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: OS type
     optional: true
     syntax:
       content: 'osType?: undefined | string'
@@ -151,13 +161,34 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Additional information associated with this backup copy.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'recoveryPointAdditionalInfo?: undefined | string'
       return:
         type:
           - undefined | string
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.IaasVMRecoveryPoint.recoveryPointDiskConfiguration
+    name: recoveryPointDiskConfiguration
+    fullName: recoveryPointDiskConfiguration
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Disk configuration
+    optional: true
+    syntax:
+      content: 'recoveryPointDiskConfiguration?: RecoveryPointDiskConfiguration'
+      return:
+        type:
+          - '@azure/arm-recoveryservicesbackup.RecoveryPointDiskConfiguration'
         description: ''
     package: '@azure/arm-recoveryservicesbackup'
   - uid: >-
@@ -168,7 +199,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Recovery point tier information.
     optional: true
     syntax:
       content: 'recoveryPointTierDetails?: RecoveryPointTierInformation[]'
@@ -184,7 +215,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Time at which this backup copy was created.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'recoveryPointTime?: Date'
@@ -200,7 +235,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Type of the backup copy.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'recoveryPointType?: undefined | string'
@@ -216,7 +255,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Storage type of the VM whose backup copy is created.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'sourceVMStorageType?: undefined | string'
@@ -232,7 +275,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Virtual Machine Size
     optional: true
     syntax:
       content: 'virtualMachineSize?: undefined | string'
@@ -248,6 +291,12 @@ references:
       - name: KeyAndSecretDetails
         fullName: KeyAndSecretDetails
         uid: '@azure/arm-recoveryservicesbackup.KeyAndSecretDetails'
+  - uid: '@azure/arm-recoveryservicesbackup.RecoveryPointDiskConfiguration'
+    name: RecoveryPointDiskConfiguration
+    spec.typeScript:
+      - name: RecoveryPointDiskConfiguration
+        fullName: RecoveryPointDiskConfiguration
+        uid: '@azure/arm-recoveryservicesbackup.RecoveryPointDiskConfiguration'
   - uid: '@azure/arm-recoveryservicesbackup.RecoveryPointTierInformation[]'
     name: 'RecoveryPointTierInformation[]'
     spec.typeScript:

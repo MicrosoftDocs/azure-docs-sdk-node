@@ -9,10 +9,21 @@ items:
       - '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.backupSetName'
       - '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.containerName'
       - '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.createMode'
+      - >-
+        @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.deferredDeleteTimeInUTC
+      - >-
+        @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.deferredDeleteTimeRemaining
       - '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.extendedInfo'
+      - >-
+        @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.extendedProperties
       - '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.friendlyName'
       - '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.healthDetails'
       - '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.healthStatus'
+      - >-
+        @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.isDeferredDeleteScheduleUpcoming
+      - '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.isRehydrate'
+      - >-
+        @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.isScheduledForDeferredDelete
       - >-
         @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.lastBackupStatus
       - >-
@@ -36,7 +47,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: IaaS VM workload-specific backup item.
     package: '@azure/arm-recoveryservicesbackup'
   - uid: >-
       @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.backupManagementType
@@ -46,7 +57,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Type of backup management for the backed up item. Possible values include:
+      'Invalid',
+
+      'AzureIaasVM', 'MAB', 'DPM', 'AzureBackupServer', 'AzureSql',
+      'AzureStorage', 'AzureWorkload',
+
+      'DefaultBackup'
     optional: true
     syntax:
       content: 'backupManagementType?: BackupManagementType'
@@ -62,7 +80,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Name of the backup set the backup item belongs to
     optional: true
     syntax:
       content: 'backupSetName?: undefined | string'
@@ -78,7 +96,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Unique name of container
     optional: true
     syntax:
       content: 'containerName?: undefined | string'
@@ -94,13 +112,53 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Create mode to indicate recovery of existing soft deleted data source or
+      creation of new data
+
+      source. Possible values include: 'Invalid', 'Default', 'Recover'
     optional: true
     syntax:
       content: 'createMode?: CreateMode'
       return:
         type:
           - '@azure/arm-recoveryservicesbackup.CreateMode'
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.deferredDeleteTimeInUTC
+    name: deferredDeleteTimeInUTC
+    fullName: deferredDeleteTimeInUTC
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Time for deferred deletion in UTC
+    optional: true
+    syntax:
+      content: 'deferredDeleteTimeInUTC?: Date'
+      return:
+        type:
+          - Date
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.deferredDeleteTimeRemaining
+    name: deferredDeleteTimeRemaining
+    fullName: deferredDeleteTimeRemaining
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Time remaining before the DS marked for deferred delete is permanently
+      deleted
+    optional: true
+    syntax:
+      content: 'deferredDeleteTimeRemaining?: undefined | string'
+      return:
+        type:
+          - undefined | string
         description: ''
     package: '@azure/arm-recoveryservicesbackup'
   - uid: '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.extendedInfo'
@@ -110,7 +168,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Additional information for this backup item.
     optional: true
     syntax:
       content: 'extendedInfo?: AzureIaaSVMProtectedItemExtendedInfo'
@@ -120,6 +178,23 @@ items:
             @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItemExtendedInfo
         description: ''
     package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.extendedProperties
+    name: extendedProperties
+    fullName: extendedProperties
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ''
+    optional: true
+    syntax:
+      content: 'extendedProperties?: ExtendedProperties'
+      return:
+        type:
+          - '@azure/arm-recoveryservicesbackup.ExtendedProperties'
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
   - uid: '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.friendlyName'
     name: friendlyName
     fullName: friendlyName
@@ -127,7 +202,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Friendly name of the VM represented by this backup item.
     optional: true
     syntax:
       content: 'friendlyName?: undefined | string'
@@ -143,7 +218,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Health details on this backup item.
     optional: true
     syntax:
       content: 'healthDetails?: AzureIaaSVMHealthDetails[]'
@@ -159,13 +234,67 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Health status of protected item. Possible values include: 'Passed',
+      'ActionRequired',
+
+      'ActionSuggested', 'Invalid'
     optional: true
     syntax:
       content: 'healthStatus?: HealthStatus'
       return:
         type:
           - '@azure/arm-recoveryservicesbackup.HealthStatus'
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.isDeferredDeleteScheduleUpcoming
+    name: isDeferredDeleteScheduleUpcoming
+    fullName: isDeferredDeleteScheduleUpcoming
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Flag to identify whether the deferred deleted DS is to be purged soon
+    optional: true
+    syntax:
+      content: 'isDeferredDeleteScheduleUpcoming?: undefined | false | true'
+      return:
+        type:
+          - undefined | false | true
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.isRehydrate'
+    name: isRehydrate
+    fullName: isRehydrate
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Flag to identify that deferred deleted DS is to be moved into Pause state
+    optional: true
+    syntax:
+      content: 'isRehydrate?: undefined | false | true'
+      return:
+        type:
+          - undefined | false | true
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: >-
+      @azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItem.isScheduledForDeferredDelete
+    name: isScheduledForDeferredDelete
+    fullName: isScheduledForDeferredDelete
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Flag to identify whether the DS is scheduled for deferred delete
+    optional: true
+    syntax:
+      content: 'isScheduledForDeferredDelete?: undefined | false | true'
+      return:
+        type:
+          - undefined | false | true
         description: ''
     package: '@azure/arm-recoveryservicesbackup'
   - uid: >-
@@ -176,7 +305,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Last backup operation status.
     optional: true
     syntax:
       content: 'lastBackupStatus?: undefined | string'
@@ -192,7 +321,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Timestamp of the last backup operation on this backup item.
     optional: true
     syntax:
       content: 'lastBackupTime?: Date'
@@ -209,7 +338,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Timestamp when the last (latest) backup copy was created for this backup
+      item.
     optional: true
     syntax:
       content: 'lastRecoveryPoint?: Date'
@@ -225,7 +356,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: ID of the backup policy with which this item is backed up.
     optional: true
     syntax:
       content: 'policyId?: undefined | string'
@@ -242,7 +373,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Data ID of the protected item.
     optional: true
     syntax:
       content: 'protectedItemDataId?: undefined | string'
@@ -259,7 +390,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Polymorphic Discriminator
     syntax:
       content: 'protectedItemType: "AzureIaaSVMProtectedItem"'
       return:
@@ -274,7 +405,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Backup state of this backup item. Possible values include: 'Invalid',
+      'IRPending',
+
+      'Protected', 'ProtectionError', 'ProtectionStopped', 'ProtectionPaused'
     optional: true
     syntax:
       content: 'protectionState?: ProtectionState'
@@ -291,7 +426,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Backup status of this backup item.
     optional: true
     syntax:
       content: 'protectionStatus?: undefined | string'
@@ -308,7 +443,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: ARM ID of the resource to be backed up.
     optional: true
     syntax:
       content: 'sourceResourceId?: undefined | string'
@@ -325,7 +460,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Fully qualified ARM ID of the virtual machine represented by this item.
     optional: true
     syntax:
       content: 'virtualMachineId?: undefined | string'
@@ -341,7 +476,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Type of workload this item represents. Possible values include: 'Invalid',
+      'VM', 'FileFolder',
+
+      'AzureSqlDb', 'SQLDB', 'Exchange', 'Sharepoint', 'VMwareVM',
+      'SystemState', 'Client',
+
+      'GenericDataSource', 'SQLDataBase', 'AzureFileShare', 'SAPHanaDatabase',
+      'SAPAseDatabase'
     optional: true
     syntax:
       content: 'workloadType?: DataSourceType'
@@ -369,6 +512,12 @@ references:
       - name: AzureIaaSVMProtectedItemExtendedInfo
         fullName: AzureIaaSVMProtectedItemExtendedInfo
         uid: '@azure/arm-recoveryservicesbackup.AzureIaaSVMProtectedItemExtendedInfo'
+  - uid: '@azure/arm-recoveryservicesbackup.ExtendedProperties'
+    name: ExtendedProperties
+    spec.typeScript:
+      - name: ExtendedProperties
+        fullName: ExtendedProperties
+        uid: '@azure/arm-recoveryservicesbackup.ExtendedProperties'
   - uid: '@azure/arm-recoveryservicesbackup.AzureIaaSVMHealthDetails[]'
     name: 'AzureIaaSVMHealthDetails[]'
     spec.typeScript:

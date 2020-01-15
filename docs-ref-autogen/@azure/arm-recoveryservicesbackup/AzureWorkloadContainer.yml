@@ -11,6 +11,7 @@ items:
       - '@azure/arm-recoveryservicesbackup.AzureWorkloadContainer.friendlyName'
       - '@azure/arm-recoveryservicesbackup.AzureWorkloadContainer.healthStatus'
       - '@azure/arm-recoveryservicesbackup.AzureWorkloadContainer.lastUpdatedTime'
+      - '@azure/arm-recoveryservicesbackup.AzureWorkloadContainer.operationType'
       - >-
         @azure/arm-recoveryservicesbackup.AzureWorkloadContainer.registrationStatus
       - >-
@@ -19,7 +20,9 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: >-
+      Container for the workloads running inside Azure Compute or Classic
+      Compute.
     package: '@azure/arm-recoveryservicesbackup'
   - uid: >-
       @azure/arm-recoveryservicesbackup.AzureWorkloadContainer.backupManagementType
@@ -29,7 +32,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Type of backup management for the container. Possible values include:
+      'Invalid',
+
+      'AzureIaasVM', 'MAB', 'DPM', 'AzureBackupServer', 'AzureSql',
+      'AzureStorage', 'AzureWorkload',
+
+      'DefaultBackup'
     optional: true
     syntax:
       content: 'backupManagementType?: BackupManagementType'
@@ -45,12 +55,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Polymorphic Discriminator
     syntax:
-      content: 'containerType: "AzureWorkloadBackupRequest"'
+      content: 'containerType: "AzureWorkloadContainer"'
       return:
         type:
-          - '"AzureWorkloadBackupRequest"'
+          - '"AzureWorkloadContainer"'
         description: ''
     package: '@azure/arm-recoveryservicesbackup'
   - uid: '@azure/arm-recoveryservicesbackup.AzureWorkloadContainer.extendedInfo'
@@ -60,7 +70,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Additional details of a workload container.
     optional: true
     syntax:
       content: 'extendedInfo?: AzureWorkloadContainerExtendedInfo'
@@ -76,7 +86,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Friendly name of the container.
     optional: true
     syntax:
       content: 'friendlyName?: undefined | string'
@@ -92,7 +102,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Status of health of the container.
     optional: true
     syntax:
       content: 'healthStatus?: undefined | string'
@@ -108,13 +118,31 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Time stamp when this container was updated.
     optional: true
     syntax:
       content: 'lastUpdatedTime?: Date'
       return:
         type:
           - Date
+        description: ''
+    package: '@azure/arm-recoveryservicesbackup'
+  - uid: '@azure/arm-recoveryservicesbackup.AzureWorkloadContainer.operationType'
+    name: operationType
+    fullName: operationType
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Re-Do Operation. Possible values include: 'Invalid', 'Register',
+      'Reregister'
+    optional: true
+    syntax:
+      content: 'operationType?: OperationType'
+      return:
+        type:
+          - '@azure/arm-recoveryservicesbackup.OperationType'
         description: ''
     package: '@azure/arm-recoveryservicesbackup'
   - uid: >-
@@ -125,7 +153,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Status of registration of the container with the Recovery Services Vault.
     optional: true
     syntax:
       content: 'registrationStatus?: undefined | string'
@@ -141,7 +169,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: ARM ID of the virtual machine represented by this Azure Workload Container
     optional: true
     syntax:
       content: 'sourceResourceId?: undefined | string'
@@ -157,7 +185,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Workload type for which registration was sent. Possible values include:
+      'Invalid', 'VM',
+
+      'FileFolder', 'AzureSqlDb', 'SQLDB', 'Exchange', 'Sharepoint', 'VMwareVM',
+      'SystemState',
+
+      'Client', 'GenericDataSource', 'SQLDataBase', 'AzureFileShare',
+      'SAPHanaDatabase',
+
+      'SAPAseDatabase'
     optional: true
     syntax:
       content: 'workloadType?: WorkloadType'
@@ -179,6 +217,12 @@ references:
       - name: AzureWorkloadContainerExtendedInfo
         fullName: AzureWorkloadContainerExtendedInfo
         uid: '@azure/arm-recoveryservicesbackup.AzureWorkloadContainerExtendedInfo'
+  - uid: '@azure/arm-recoveryservicesbackup.OperationType'
+    name: OperationType
+    spec.typeScript:
+      - name: OperationType
+        fullName: OperationType
+        uid: '@azure/arm-recoveryservicesbackup.OperationType'
   - uid: '@azure/arm-recoveryservicesbackup.WorkloadType'
     name: WorkloadType
     spec.typeScript:

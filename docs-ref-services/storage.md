@@ -1,6 +1,6 @@
 ---
-title: Azure Storage modules for Node.js
-description: Reference for Azure Storage modules for Node.js
+title: Azure Storage modules for JavaScript
+description: Reference for Azure Storage modules for JavaScript
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
@@ -8,13 +8,13 @@ ms.date: 07/18/2017
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: nodejs
+ms.devlang: javascript
 ms.service: storage
 ---
 
-# Azure Storage modules for Node.js
+# Azure Storage libraries for JavaScript
 
-Azure Storage is a Microsoft-managed service providing cloud storage that is highly available, secure, durable, scalable, and redundant. The following libraries in JavaScript make it easy to consume Microsoft Azure Storage service.
+[Azure Storage](https://docs.microsoft.com/azure/storage/) is a Microsoft-managed service providing cloud storage that is highly available, secure, durable, scalable, and redundant. The following libraries in JavaScript make it easy to consume Microsoft Azure Storage service.
 
 ## Client Packages
 

@@ -4,7 +4,7 @@ description: Reference for Azure Storage modules for JavaScript
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
-ms.date: 07/18/2017
+ms.date: 01/16/2019
 ms.topic: article
 ms.prod: azure
 ms.technology: azure

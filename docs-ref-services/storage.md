@@ -33,7 +33,9 @@ npm install @azure/storage-blob
 ```
 and look at the examples from the links provided in the table above.
 
-Read more about the client packages here - [Azure Storage Client Libraries For JavaScript](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/)
+Read more about the client packages here - [Azure Storage Client Libraries For JavaScript](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/).
+
+Find more getting started guides at [Browse code samples](https://azure.microsoft.com/resources/samples/)
 
 ## Management Package
 
@@ -67,7 +69,3 @@ msRestAzure
   .then(accounts => console.dir(accounts, { depth: null, colors: true }))
   .catch(err => console.log(err));
 ```
-
-## Samples
-
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

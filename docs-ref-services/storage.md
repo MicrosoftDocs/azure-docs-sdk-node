@@ -18,7 +18,7 @@ Azure Storage is a Microsoft-managed service providing cloud storage that is hig
 
 ## Client Packages
 
-|Service| NPM link| Examples|Getting Started Guide|
+|Service| NPM package| Examples|Getting Started Guide|
 |---|---|---|--|--|
 |**Storage Blob**|[@azure/storage-blob](https://www.npmjs.com/package/@azure/storage-blob)|[storage-blob-typescript-examples](https://docs.microsoft.com/en-us/samples/azure/azure-sdk-for-js/storage-blob-typescript/)<br> [storage-blob-javascript-examples](https://docs.microsoft.com/en-us/samples/azure/azure-sdk-for-js/storage-blob-javascript/)|Read and write objects and files from [Azure Storage Blob](https://docs.microsoft.com/azure/storage/storage-nodejs-how-to-use-blob-storage)|
 |**Storage File Share**|[@azure/storage-file-share](https://www.npmjs.com/package/@azure/storage-file-share)|[storage-file-share-typescript-examples](https://docs.microsoft.com/en-us/samples/azure/azure-sdk-for-js/storage-file-share-typescript/)<br> [storage-file-share-javascript-examples](https://docs.microsoft.com/en-us/samples/azure/azure-sdk-for-js/storage-file-share-javascript/)|#ToBeAdded|

@@ -14,7 +14,7 @@ ms.service: storage
 
 # Azure Storage libraries for JavaScript
 
-[Azure Storage](https://docs.microsoft.com/azure/storage/) is a Microsoft-managed service providing cloud storage that is highly available, secure, durable, scalable, and redundant. The following libraries in JavaScript make it easy to consume Azure Storage service.
+[Azure Storage](https://docs.microsoft.com/azure/storage/) is a Microsoft managed service providing cloud storage that is highly available, secure, durable, scalable, and redundant. The following libraries in JavaScript make it easy to consume Azure Storage service.
 
 ## Client Packages
 

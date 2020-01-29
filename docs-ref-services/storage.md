@@ -1,62 +1,41 @@
 ---
-title: Azure Storage modules for Node.js
-description: Reference for Azure Storage modules for Node.js
+title: Azure Storage modules for JavaScript
+description: Reference for Azure Storage modules for JavaScript
 author: craigshoemaker
 ms.author: cshoe
 manager: routlaw
-ms.date: 07/18/2017
+ms.date: 01/16/2019
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: nodejs
+ms.devlang: javascript
 ms.service: storage
 ---
 
-# Azure Storage modules for Node.js
+# Azure Storage libraries for JavaScript
 
-Use the Azure Storage client module to:
+[Azure Storage](https://docs.microsoft.com/azure/storage/) is a Microsoft managed service providing cloud storage that is highly available, secure, durable, scalable, and redundant. The following libraries in JavaScript make it easy to consume Azure Storage service.
 
-- Read and write objects and files from [Azure Blob storage](https://docs.microsoft.com/azure/storage/storage-nodejs-how-to-use-blob-storage)
-- Send and receive messages between cloud-connected applications with [Azure Queue storage](https://docs.microsoft.com/azure/storage/storage-nodejs-how-to-use-queues)
-- Read and write large structured data with [Azure Table storage](https://docs.microsoft.com/azure/storage/storage-nodejs-how-to-use-table-storage)
+## Client Packages
 
-Create, update, and manage Azure Storage accounts and query and regenerate access keys from your Node.js apps with the management modules.
+|Service| NPM package| Examples|Getting Started Guide|
+|---|---|---|--|
+|**Storage Blob**|[@azure/storage-blob](https://www.npmjs.com/package/@azure/storage-blob)|[storage-blob-typescript-examples](https://docs.microsoft.com/samples/azure/azure-sdk-for-js/storage-blob-typescript/)<br> [storage-blob-javascript-examples](https://docs.microsoft.com/samples/azure/azure-sdk-for-js/storage-blob-javascript/)|Read and write objects and files from [Azure Storage Blob](https://docs.microsoft.com/azure/storage/storage-nodejs-how-to-use-blob-storage)|
+|**Storage File Share**|[@azure/storage-file-share](https://www.npmjs.com/package/@azure/storage-file-share)|[storage-file-share-typescript-examples](https://docs.microsoft.com/samples/azure/azure-sdk-for-js/storage-file-share-typescript/)<br> [storage-file-share-javascript-examples](https://docs.microsoft.com/samples/azure/azure-sdk-for-js/storage-file-share-javascript/)|[Readme - Azure Storage File Share](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-file-share/README.md)|
+|**Storage File Datalake**|[@azure/storage-file-datalake](https://www.npmjs.com/package/@azure/storage-file-datalake)|[storage-file-datalake-typescript-examples](https://docs.microsoft.com/samples/azure/azure-sdk-for-js/storage-file-datalake-typescript/)<br> [storage-file-datalake-javascript-examples](https://docs.microsoft.com/samples/azure/azure-sdk-for-js/storage-file-datalake-javascript/)|[Readme - Azure Storage File Datalake](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-file-datalake/README.md)|
+|**Storage Queue**|[@azure/storage-queue](https://www.npmjs.com/package/@azure/storage-queue)|[storage-queue-typescript-examples](https://docs.microsoft.com/samples/azure/azure-sdk-for-js/storage-queue-typescript/)<br> [storage-queue-javascript-examples](https://docs.microsoft.com/samples/azure/azure-sdk-for-js/storage-queue-javascript/)|Send and receive messages between cloud-connected applications with <br>[Azure Storage Queue](https://docs.microsoft.com/azure/storage/queues/storage-quickstart-queues-nodejs)|
+|**Storage Table**|[azure-storage](https://www.npmjs.com/package/azure-storage)<br>(Legacy)| - |Read and write large structured data with [Azure Storage Table](https://docs.microsoft.com/azure/storage/storage-nodejs-how-to-use-table-storage)|
+|||||
 
-## Client Package
-
-### Install the npm module
-
-Install the Azure storage client npm module
-
+Install the npm module with `npm install` followed by the `package-name`. For example,
 ```bash
-npm install azure-storage
+npm install @azure/storage-blob
 ```
+and look at the examples from the links provided in the table above.
 
-### Example
+Read more about the client packages here - [Azure Storage Client Libraries For JavaScript](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/).
 
-This example create a storage container and uploads a local file `data.txt` to it.
-
-```javascript
-const azure = require('azure-storage');
-const blobService = azure.createBlobService(storageConnectionString);
-
-const container = 'taskcontainer';
-const task = 'taskblob';
-const filename = 'data.txt';
-
-blobService.createContainerIfNotExists(container, error => {
-  if (error) return console.log(error);
-  blobService.createBlockBlobFromLocalFile(
-    container,
-    task,
-    filename,
-    (error, result) => {
-      if (error) return console.log(error);
-      console.dir(result, { depth: null, colors: true });
-    }
-  );
-});
-```
+Find more getting started guides at [Browse code samples](https://azure.microsoft.com/resources/samples/)
 
 ## Management Package
 
@@ -90,12 +69,3 @@ msRestAzure
   .then(accounts => console.dir(accounts, { depth: null, colors: true }))
   .catch(err => console.log(err));
 ```
-
-## Samples
-
-* [Getting Started with Azure Blob Service in Node.js](https://azure.microsoft.com/resources/samples/storage-blob-node-getting-started/)
-* [Getting Started with Azure File Service in Node.js](https://azure.microsoft.com/resources/samples/storage-file-node-getting-started/)
-* [Getting Started with Azure Queue Service in Node.js](https://azure.microsoft.com/resources/samples/storage-queue-node-getting-started/)
-* [Getting Started with Azure Table Service in Node.js](https://azure.microsoft.com/resources/samples/storage-table-node-getting-started/)
-
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.

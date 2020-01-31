@@ -19,6 +19,7 @@ items:
         microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.fromAuthorizationToken
       - >-
         microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.fromEndpoint
+      - microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.fromHost
       - >-
         microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.fromSubscription
       - >-
@@ -85,10 +86,10 @@ items:
       expires, the caller needs to refresh it by calling this setter with a new
       valid token.
     syntax:
-      content: 'public authorizationToken: string'
+      content: any authorizationToken
       return:
         type:
-          - string
+          - any
         description: ''
     package: microsoft-cognitiveservices-speech-sdk
   - uid: microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.close
@@ -134,14 +135,17 @@ items:
       - typeScript
     type: property
     summary: >-
+      Gets the endpoint ID of a customized speech model that is used for speech
+      recognition.
+
       Gets/Sets the endpoint ID of a customized speech model that is used for
       speech recognition.
     syntax:
-      content: 'public endpointId: string'
+      content: string endpointId
       return:
         type:
           - string
-        description: ''
+        description: The endpoint ID
     package: microsoft-cognitiveservices-speech-sdk
   - uid: >-
       microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.fromAuthorizationToken
@@ -231,6 +235,50 @@ items:
           - microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig
         description: A speech config instance.
     package: microsoft-cognitiveservices-speech-sdk
+  - uid: microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.fromHost
+    name: 'fromHost(URL, string)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates an instance of the speech config with specified host and
+      subscription key.
+
+      This method is intended only for users who use a non-default service host.
+      Standard resource path will be assumed.
+
+      For services with a non-standard resource path or no path at all, use
+      fromEndpoint instead.
+
+      Note: Query parameters are not allowed in the host URI and must be set by
+      other APIs.
+
+      Note: To use an authorization token with fromHost, use fromHost(URL),
+
+      and then set the AuthorizationToken property on the created SpeechConfig
+      instance.
+
+      Note: Added in version 1.9.0.
+    syntax:
+      content: 'static function fromHost(hostName: URL, subscriptionKey?: string)'
+      parameters:
+        - id: hostName
+          type:
+            - URL
+          description: ''
+        - id: subscriptionKey
+          type:
+            - string
+          description: >-
+            The subscription key. If a subscription key is not specified, an
+            authorization token must be set.
+          optional: true
+      return:
+        type:
+          - microsoft-cognitiveservices-speech-sdk.SpeechConfig
+        description: A speech factory instance.
+    package: microsoft-cognitiveservices-speech-sdk
   - uid: >-
       microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.fromSubscription
     name: 'fromSubscription(string, string)'
@@ -293,13 +341,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Gets/Sets the output format.
+    summary: |-
+      Gets output format.
+      Gets/Sets the output format.
     syntax:
-      content: 'public outputFormat: OutputFormat'
+      content: OutputFormat outputFormat
       return:
         type:
           - microsoft-cognitiveservices-speech-sdk.OutputFormat
-        description: ''
+        description: Returns the output format.
     package: microsoft-cognitiveservices-speech-sdk
   - uid: microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.region
     name: region
@@ -310,11 +360,11 @@ items:
     type: property
     summary: ''
     syntax:
-      content: 'public region: string'
+      content: string region
       return:
         type:
           - string
-        description: ''
+        description: The region set on the config.
     package: microsoft-cognitiveservices-speech-sdk
   - uid: >-
       microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.requestWordLevelTimestamps
@@ -458,10 +508,10 @@ items:
     type: property
     summary: Gets/Sets the speech recognition language.
     syntax:
-      content: 'public speechRecognitionLanguage: string'
+      content: any speechRecognitionLanguage
       return:
         type:
-          - string
+          - any
         description: ''
     package: microsoft-cognitiveservices-speech-sdk
   - uid: >-
@@ -474,11 +524,11 @@ items:
     type: property
     summary: ''
     syntax:
-      content: 'public subscriptionKey: string'
+      content: string subscriptionKey
       return:
         type:
           - string
-        description: ''
+        description: The subscription key set on the config.
     package: microsoft-cognitiveservices-speech-sdk
   - uid: >-
       microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig.targetLanguages
@@ -490,7 +540,7 @@ items:
     type: property
     summary: Gets the (text) target language to translate into.
     syntax:
-      content: 'public targetLanguages: string[]'
+      content: 'string[] targetLanguages'
       return:
         type:
           - 'string[]'
@@ -503,13 +553,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: 'Gets/Sets voice of the translated language, enable voice synthesis output.'
+    summary: |-
+      Gets the selected voice name.
+      Gets/Sets voice of the translated language, enable voice synthesis output.
     syntax:
-      content: 'public voiceName: string'
+      content: string voiceName
       return:
         type:
           - string
-        description: ''
+        description: The voice name.
     package: microsoft-cognitiveservices-speech-sdk
 references:
   - uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig

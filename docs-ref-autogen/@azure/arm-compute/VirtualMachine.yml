@@ -84,12 +84,16 @@ items:
       Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
 
       <br><br> Currently, a VM can only be added to availability set at creation
-      time. An existing
+      time. The
 
-      VM cannot be added to an availability set. <br><br>This property cannot
-      exist along with a
+      availability set to which the VM is being added should be under the same
+      resource group as the
 
-      non-null properties.virtualMachineScaleSet reference.
+      availability set resource. An existing VM cannot be added to an
+      availability set. <br><br>This
+
+      property cannot exist along with a non-null
+      properties.virtualMachineScaleSet reference.
     optional: true
     syntax:
       content: 'availabilitySet?: SubResource'
@@ -106,7 +110,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      Specifies the billing related details of a low priority virtual machine.
+      Specifies the billing related details of a Azure Spot virtual machine.
       <br><br>Minimum
 
       api-version: 2019-03-01.
@@ -144,13 +148,19 @@ items:
       - typeScript
     type: property
     summary: >-
-      Specifies the eviction policy for the low priority virtual machine. Only
-      supported value is
+      Specifies the eviction policy for the Azure Spot virtual machine and Azure
+      Spot scale set.
 
-      'Deallocate'. <br><br>Minimum api-version: 2019-03-01. Possible values
-      include: 'Deallocate',
+      <br><br>For Azure Spot virtual machines, the only supported value is
+      'Deallocate' and the
 
-      'Delete'
+      minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both
+      'Deallocate' and
+
+      'Delete' are supported and the minimum api-version is 2017-10-30-preview.
+      Possible values
+
+      include: 'Deallocate', 'Delete'
     optional: true
     syntax:
       content: 'evictionPolicy?: VirtualMachineEvictionPolicyTypes'
@@ -343,7 +353,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Specifies the operating system settings for the virtual machine.
+    summary: >-
+      Specifies the operating system settings used while creating the virtual
+      machine. Some of the
+
+      settings cannot be changed once VM is provisioned.
     optional: true
     syntax:
       content: 'osProfile?: OSProfile'
@@ -392,7 +406,7 @@ items:
       Specifies the priority for the virtual machine. <br><br>Minimum
       api-version: 2019-03-01.
 
-      Possible values include: 'Regular', 'Low'
+      Possible values include: 'Regular', 'Low', 'Spot'
     optional: true
     syntax:
       content: 'priority?: VirtualMachinePriorityTypes'

@@ -5,7 +5,7 @@ items:
     fullName: ConditionErrorNameMapper
     children:
       - '@azure/core-amqp.ConditionErrorNameMapper.amqp:connection:forced'
-      - '@azure/core-amqp.ConditionErrorNameMapper.system:error'
+      - '@azure/core-amqp.ConditionErrorNameMapper.amqp:connection:framing-error'
       - '@azure/core-amqp.ConditionErrorNameMapper.amqp:connection:redirect'
       - '@azure/core-amqp.ConditionErrorNameMapper.amqp:decode-error'
       - '@azure/core-amqp.ConditionErrorNameMapper.amqp:frame-size-too-small'
@@ -29,7 +29,7 @@ items:
       - '@azure/core-amqp.ConditionErrorNameMapper.amqp:session:errant-link'
       - '@azure/core-amqp.ConditionErrorNameMapper.amqp:session:handle-in-use'
       - '@azure/core-amqp.ConditionErrorNameMapper.amqp:session:unattached-handle'
-      - '@azure/core-amqp.ConditionErrorNameMapper.amqp:connection:framing-error'
+      - '@azure/core-amqp.ConditionErrorNameMapper.amqp:session:window-violation'
       - '@azure/core-amqp.ConditionErrorNameMapper.amqp:unauthorized-access'
       - >-
         @azure/core-amqp.ConditionErrorNameMapper.client.sender:not-enough-link-credit
@@ -66,7 +66,7 @@ items:
         @azure/core-amqp.ConditionErrorNameMapper.com.microsoft:session-lock-lost
       - '@azure/core-amqp.ConditionErrorNameMapper.com.microsoft:store-lock-lost'
       - '@azure/core-amqp.ConditionErrorNameMapper.com.microsoft:timeout'
-      - '@azure/core-amqp.ConditionErrorNameMapper.amqp:session:window-violation'
+      - '@azure/core-amqp.ConditionErrorNameMapper.system:error'
     langs:
       - typeScript
     type: enum
@@ -83,15 +83,14 @@ items:
     type: field
     numericValue: null
     package: '@azure/core-amqp'
-  - uid: '@azure/core-amqp.ConditionErrorNameMapper.system:error'
-    name: 'system:error'
+  - uid: '@azure/core-amqp.ConditionErrorNameMapper.amqp:connection:framing-error'
+    name: 'amqp:connection:framing-error'
     children: []
     langs:
       - typeScript
     summary: >-
-      Error is thrown when a low level system error is thrown by node.js.
-
-      <xref:https%3A%2F%2Fnodejs.org%2Fdist%2Flatest-v8.x%2Fdocs%2Fapi%2Fall.html%23errors_class_system_error>
+      Error is thrown when a valid frame header cannot be formed from the
+      incoming byte stream.
     type: field
     numericValue: null
     package: '@azure/core-amqp'
@@ -339,14 +338,12 @@ items:
     type: field
     numericValue: null
     package: '@azure/core-amqp'
-  - uid: '@azure/core-amqp.ConditionErrorNameMapper.amqp:connection:framing-error'
-    name: 'amqp:connection:framing-error'
+  - uid: '@azure/core-amqp.ConditionErrorNameMapper.amqp:session:window-violation'
+    name: 'amqp:session:window-violation'
     children: []
     langs:
       - typeScript
-    summary: >-
-      Error is thrown when a valid frame header cannot be formed from the
-      incoming byte stream.
+    summary: Error is thrown when the peer violated incoming window for the session.
     type: field
     numericValue: null
     package: '@azure/core-amqp'
@@ -582,12 +579,15 @@ items:
     type: field
     numericValue: null
     package: '@azure/core-amqp'
-  - uid: '@azure/core-amqp.ConditionErrorNameMapper.amqp:session:window-violation'
-    name: 'amqp:session:window-violation'
+  - uid: '@azure/core-amqp.ConditionErrorNameMapper.system:error'
+    name: 'system:error'
     children: []
     langs:
       - typeScript
-    summary: Error is thrown when the peer violated incoming window for the session.
+    summary: >-
+      Error is thrown when a low level system error is thrown by node.js.
+
+      <xref:https%3A%2F%2Fnodejs.org%2Fdist%2Flatest-v8.x%2Fdocs%2Fapi%2Fall.html%23errors_class_system_error>
     type: field
     numericValue: null
     package: '@azure/core-amqp'

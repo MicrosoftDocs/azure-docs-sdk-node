@@ -1,6 +1,6 @@
 ---
-title: Azure PostgreSQL modules for Node.js
-description: Reference for Azure PostgreSQL modules for Node.js
+title: Azure PostgreSQL modules for JavaScript
+description: Reference for Azure PostgreSQL modules for JavaScript
 author: rachel-msft
 ms.author: raagyema
 manager: sukamat
@@ -10,10 +10,10 @@ ms.devlang: nodejs
 ms.service: postgresql
 ---
 
-# Azure PostgreSQL modules for Node.js
+# Azure PostgreSQL modules for JavaScript
 
-The recommended client library for accessing Azure Database for PostgreSQL is the open-source [Node.js connection library for Azure Database for PostgreSQL](https://www.npmjs.com/package/pg). 
-This library is a non-blocking PostgreSQL client for Node.js, supporting pure JavaScript and optional native libpq bindings.
+The recommended client library for accessing Azure Database for PostgreSQL is the open-source [JavaScript connection library for Azure Database for PostgreSQL](https://www.npmjs.com/package/pg). 
+This library is a non-blocking PostgreSQL client for JavaScript, supporting pure JavaScript and optional native libpq bindings.
 
 Learn more about [Azure Database for PostgreSQL](https://docs.microsoft.com/azure/postgresql/)
 
@@ -31,7 +31,7 @@ npm install pg
 
 This example opens a client connection and executes a simple query.
 
-```javascript
+```JavaScript
 const pg = require('pg');
 
 const connectionString =
@@ -50,6 +50,6 @@ client.query(query, (err, res) => {
 
 | | |
 |--|--|
-| [Node.js code snippets using PostgreSQL](https://www.npmjs.com/package/pg) | Learn how to create a pool, execute a query, obtain an exclusive client, and more.
+| [JavaScript code snippets using PostgreSQL](https://www.npmjs.com/package/pg) | Learn how to create a pool, execute a query, obtain an exclusive client, and more.
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

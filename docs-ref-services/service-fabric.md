@@ -1,6 +1,6 @@
 ---
-title: Azure Service Fabric modules for Node.js
-description: Azure Service Fabric modules for Node.js reference
+title: Azure Service Fabric modules for JavaScript
+description: Azure Service Fabric modules for JavaScript reference
 author: rwike77
 ms.author: ryanwi
 manager: timlt
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Service Fabric
 ---
 
-# Azure Service Fabric modules for Node.js
+# Azure Service Fabric modules for JavaScript
 
 ## Overview
 
@@ -27,34 +27,13 @@ Learn more about [Azure Service Fabric](https://docs.microsoft.com/azure/service
 Install the Azure Service Fabric npm module
 
 ```bash
-npm install azure-arm-servicefabric
+npm install @azure/servicefabric
 ```
 
 ### Example
 
-This example shows how you can list the clusters for an Azure subscription.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const ServiceFabricManagement = require('azure-arm-servicefabric');
-
-const subscriptionId = 'your-subscription-id';
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const client = new ServiceFabricManagement(
-      credentials,
-      subscriptionId
-    );
-    return client.clusters.list();
-  })
-  .then(clusters => {
-    console.log('List of clusters:');
-    console.dir(clusters, { depth: null, colors: true });
-  });
-```
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/servicefabric)
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

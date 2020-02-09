@@ -1,6 +1,6 @@
 ---
-title: Azure Monitor modules for Node.js
-description: Reference for Azure Monitor modules for Node.js
+title: Azure Monitor modules for JavaScript
+description: Reference for Azure Monitor modules for JavaScript
 author: rbouche
 ms.author: robb
 manager: carmonm
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Monitor
 ---
 
-# Azure Monitor modules for Node.js
+# Azure Monitor modules for JavaScript
 
 Cloud applications are complex with many moving parts. Monitoring provides data to ensure that your application stays up and running in a healthy state. It also helps you to stave off potential problems or troubleshoot past ones. In addition, you can use monitoring data to gain deep insights about your application. That knowledge can help you to improve application performance or maintainability, or automate actions that would otherwise require manual intervention.
 
@@ -21,31 +21,13 @@ Cloud applications are complex with many moving parts. Monitoring provides data 
 ### Install npm module
 
 ```bash
-npm install azure-arm-monitor
+pm install @azure/arm-monitor
 ```
 
 ### Example
 
-This code example prints all the alerting rules associated with a resource group.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const monitorManagementClient = require('azure-arm-monitor');
-
-const subscriptionId = 'your-subscription-id';
-const resourceGroupName = 'your-resource-group-name';
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const client = new monitorManagementClient(credentials, subscriptionId);
-    client.alertRules.listByResourceGroup(resourceGroupName, rules => {
-      console.log('List of rules:');
-      console.dir(rules, { depth: null, colors: true });
-    })
-  });
-```
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-monitor)
 
 ### Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

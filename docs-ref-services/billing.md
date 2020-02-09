@@ -1,6 +1,6 @@
 ---
-title: Azure Billing modules for Node.js
-description: Reference for Azure Billing modules for Node.js
+title: Azure Billing modules for JavaScript
+description: Reference for Azure Billing modules for JavaScript
 author: tfitzmac
 ms.author: tomfitz
 manager: timlt
@@ -12,7 +12,7 @@ ms.product:
 ms.technology:
 ---
 
-# Azure Billing modules for Node.js
+# Azure Billing modules for JavaScript
 
 ## Overview
 The Azure Billing APIs provide access to your Azure billing information and invoices.
@@ -24,31 +24,12 @@ To use this API, the account admin must opt in via the Azure portal. See [Manage
 Install the Azure Billing npm module 
 
 ```bash
-npm install azure-arm-billing
+npm install @azure/ms-rest-nodeauth
 ```
 ### Example 
  
-This example prints a list of all of your past invoices.
- 
-```javascript 
-const msRestAzure = require('ms-rest-azure');
-const BillingManagement = require('azure-arm-billing');
-
-const subscriptionId = 'your-subscription-id';
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    let client = new BillingManagement(credentials, subscriptionId);
-    return client.invoices.list();
-  })
-  .then(invoices => {
-    console.log('List of invoices:');
-    console.dir(invoices, { depth: null, colors: true });
-  });
-``` 
-
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-billing)
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

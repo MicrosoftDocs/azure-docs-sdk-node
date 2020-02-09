@@ -1,6 +1,6 @@
 ---
-title: Azure Notification Hubs modules for Node.js
-description: Reference for Azure Notification Hubs modules for Node.js
+title: Azure Notification Hubs modules for JavaScript
+description: Reference for Azure Notification Hubs modules for JavaScript
 author: rloutlaw
 ms.author: ROutlaw
 manager: angrobe
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Notification Hubs
 ---
 
-# Azure Notification Hubs modules for Node.js
+# Azure Notification Hubs modules for JavaScript
 
 Azure Notification Hubs provide an easy-to-use, multi-platform, scaled-out push engine. With a single cross-platform API call, you can easily send targeted and personalized push notifications to any mobile platform from any cloud or on-premises backend.
 
@@ -31,33 +31,16 @@ Notification Hubs works great for both enterprise and consumer scenarios. Here a
 Install the Azure Notification Hubs module 
 
 ```bash
-npm install azure-arm-notificationhubs
+npm install @azure/arm-notificationhubs
 ```
 
 ### Example
 
-This example lists all notification hubs.
-
- ```javascript
-const msRestAzure = require('ms-rest-azure');
-const notificationHubsManagementClient = require('azure-arm-notificationhubs');
-
-const subscriptionId = 'your-subscription-id';
-const notificationHubNamespace = 'your-hub-namespace';
-const resourceGroup = 'your-resource-group';
-let notificationHubsClient;
-
-msRestAzure.interactiveLogin().then(credentials => {
-  notificationHubsClient = new notificationHubsManagementClient(credentials, subscriptionId);
-  notificationHubsClient.notificationHubs
-    .list(resourceGroup, notificationHubNamespace)
-    .then(notificationHubs => console.log('Retrieved notification hubs: ', notificationHubs));
-});
-```
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-notificationhubs)
 
 ## Samples
 
-* [App Service Mobile completed quickstart for Node.js backend](https://azure.microsoft.com/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
-* [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running Node.js](https://azure.microsoft.com/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
+* [App Service Mobile completed quickstart for JavaScript backend](https://azure.microsoft.com/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
+* [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running JavaScript](https://azure.microsoft.com/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

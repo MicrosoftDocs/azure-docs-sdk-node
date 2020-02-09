@@ -1,6 +1,6 @@
 ---
-title: Azure Virtual Network modules for Node.js
-description: Reference for Azure Virtual Network modules for Node.js
+title: Azure Virtual Network modules for JavaScript
+description: Reference for Azure Virtual Network modules for JavaScript
 author: jimdial
 ms.author: jdial
 manager: jeconnoc
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Virtual Network
 ---
 
-# Azure Virtual Network modules for Node.js
+# Azure Virtual Network modules for JavaScript
 
 ## Overview
 
@@ -27,32 +27,13 @@ Learn more about [Azure Virtual Network](https://docs.microsoft.com/azure/virtua
 Install the Azure Virtual Network npm module
 
 ```bash
-npm install azure-arm-network
+npm install @azure/arm-network
 ```
 
 ### Example
 
-This example gets and prints the list of virtual networks
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const NetworkManagementClient = require('azure-arm-network');
-
-const subscriptionId = 'your-subscription-id';
-const resourceGroup = 'your-resource-group-name';
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const client = new NetworkManagementClient(credentials, subscriptionId);
-    return client.virtualNetworks.list(resourceGroup);
-  })
-  .then(networkList => {
-    console.log('List of virtual networks:');
-    console.dir(networkList, { depth: null, colors: true });
-  });
-```
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-network)
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

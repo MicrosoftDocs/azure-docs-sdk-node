@@ -1,6 +1,6 @@
 ---
-title: Azure Mixed Reality Resource Management Modules for Node.js
-description: Reference for Azure Mixed Reality Resource Management for Node.js
+title: Azure Mixed Reality Resource Management Modules for JavaScript
+description: Reference for Azure Mixed Reality Resource Management for JavaScript
 author: Xiangyu Luo
 ms.author: xiangyul
 manager: dgriff
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Mixed Reality
 ---
 
-# Azure Mixed Reality Resource Management Modules for Node.js
+# Azure Mixed Reality Resource Management Modules for JavaScript
 
 Microsoft provides a series of Azure services to empower Mixed Reality devices and applications. Currently, such services are provided:
 
@@ -31,4 +31,4 @@ npm install @azure/arm-mixedreality
 
 ### Example
 
-See the examples on this [page](https://www.npmjs.com/package/@azure/arm-mixedreality).
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-mixedreality)

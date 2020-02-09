@@ -1,6 +1,6 @@
 ---
-title: Azure Redis Cache modules for Node.js
-description: Reference for Azure Redis Cache modules for Node.js
+title: Azure Redis Cache modules for JavaScript
+description: Reference for Azure Redis Cache modules for JavaScript
 author: wesmc7777
 ms.author: wesmc
 manager: cfowler
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Redis Cache
 ---
 
-# Azure Redis Cache modules for Node.js
+# Azure Redis Cache modules for JavaScript
 
 Azure Redis Cache is based on the popular open source Redis project. It gives you access to a secure, dedicated Redis instance, managed by Microsoft and accessible from your Azure apps.
 
@@ -24,7 +24,7 @@ Learn more about [Azure Redis Cache](https://docs.microsoft.com/azure/redis-cach
 
 ### Install the npm module
 
-Use npm to install the Redis module for Node.js
+Use npm to install the Redis module for JavaScript
 
 ```bash
 npm install redis
@@ -34,7 +34,7 @@ npm install redis
 
 This example connects to an Azure Redis Cache instance, stores a key/value pair and then reads the stored value by its key.
 
-```javascript
+```JavaScript
 const redis = require('redis');
 
 const client = redis.createClient(6380, '<name>.redis.cache.windows.net', {
@@ -55,31 +55,18 @@ client.get('key1', (err, reply) => {
 
 ### Install the npm module
 
-Use npm to install the Azure Redis Cache modules for Node.js
+Use npm to install the Azure Redis Cache modules for JavaScript
 
 ```bash
-npm install azure-arm-rediscache
+npm install @azure/arm-rediscache
 ```
 
 ### Example
 
-This example authenticates to Azure and lists all Redis Cache instances in a specified resource group.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const AzureMgmtRedisCache = require('azure-arm-rediscache');
-
-msRestAzure.interactiveLogin().then(credentials => {
-  const client = new AzureMgmtRedisCache(credentials, 'my-subscription-id');
-  client.redis.listByResourceGroup('testResourceGroup').then(result => {
-    console.log(result);
-  });
-});
-```
-
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-rediscache)
 
 ## Samples
 
-* [How to use Azure Redis Cache with Node.js](https://docs.microsoft.com/azure/redis-cache/cache-nodejs-get-started)
+* [How to use Azure Redis Cache with JavaScript](https://docs.microsoft.com/azure/redis-cache/cache-nodejs-get-started)
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

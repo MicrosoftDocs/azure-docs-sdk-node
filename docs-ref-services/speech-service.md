@@ -30,7 +30,7 @@ npm install microsoft-cognitiveservices-speech-sdk
 
 The following code snippets illustrates how to do simple speech recognition from a file:
 
-```javascript 
+```JavaScript 
 // Pull in the required packages.
 var sdk = require("microsoft-cognitiveservices-speech-sdk");
 var fs = require("fs");
@@ -85,6 +85,6 @@ Check out our [step-by-step quickstart](/azure/cognitive-services/speech-service
 
 ## Samples
 
-* [Step-by-step quickstart for Node.js](/azure/cognitive-services/speech-service/quickstart-js-node).
+* [Step-by-step quickstart for JavaScript](/azure/cognitive-services/speech-service/quickstart-js-node).
 * [Step-by-step quickstart for the browser](/azure/cognitive-services/speech-service/quickstart-js-browser).
 * More samples can be found in our [Speech SDK sample repository](https://aka.ms/csspeech/samples).

@@ -1,6 +1,6 @@
 ---
-title: Azure PowerBI Embedded modules for Node.js
-description: Reference for Azure PowerBI Embedded modules for Node.js
+title: Azure PowerBI Embedded modules for JavaScript
+description: Reference for Azure PowerBI Embedded modules for JavaScript
 author: rkarlin
 ms.author: rkarlin
 manager: kfile
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: PowerBI Embedded
 ---
 
-# Azure PowerBI Embedded modules for Node.js
+# Azure PowerBI Embedded modules for JavaScript
 
 With the Power BI Embedded Azure service, you can integrate Power BI reports right into your node application to create or edit charts and reports.
 
@@ -25,50 +25,13 @@ Learn more about [Power BI Embedded](https://powerbi.microsoft.com/documentation
 Install the Azure Power BI npm module
 
 ```bash
-npm install azure-arm-powerbiembedded
+npm install @azure/arm-powerbiembedded
 ```
 
 ### Example
 
-This example creates a workspace collection in an existing resource group.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const PowerBIEmbeddedManagementClient = require('azure-arm-powerbiembedded');
-
-const creationOptions = {
-  location: 'northcentralus',
-  tags: {
-    key1: 'value1',
-    key2: 'value2'
-  },
-  sku: {
-    name: 'S1',
-    teir: 'Standard'
-  }
-};
-
-const subscriptionId = 'your-subscription-id';
-const resourceGroup = 'your-resource-group-name';
-const workspace = 'workspace-collection-name';
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const client = new PowerBIEmbeddedManagementClient(
-      credentials,
-      subscriptionId
-    );
-    return client.workspaceCollections.create(
-      resourceGroup,
-      workspace,
-      creationOptions
-    );
-  })
-  .then(workspaces => console.dir(workspaces, { depth: null, colors: true }))
-  .catch(err => console.log(err));
-```
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-powerbiembedded)
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

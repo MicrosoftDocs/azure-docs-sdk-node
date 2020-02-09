@@ -1,6 +1,6 @@
 ---
-title: Azure Traffic Manager modules for Node.js
-description: Azure Traffic Manager modules for Node.js reference
+title: Azure Traffic Manager modules for JavaScript
+description: Azure Traffic Manager modules for JavaScript reference
 author: KumudD
 ms.author: kumud
 manager: jeconnoc
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Traffic Manager
 ---
 
-# Azure Traffic Manager modules for Node.js
+# Azure Traffic Manager modules for JavaScript
 
 ## Overview
 
@@ -27,30 +27,13 @@ Learn more about [Azure Traffic Manager](https://docs.microsoft.com/azure/traffi
 Install the Azure traffic manager npm module
 
 ```bash
-npm install azure-arm-trafficmanager
+npm install @azure/arm-trafficmanager
 ```
 
 ### Example
 
-This example lists all Traffic Managers for a given resource group.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const trafficManager = require('azure-arm-trafficmanager');
-
-const subscriptionId = 'your-subscription-id';
-
-msRestAzure.interactiveLogin().then(credentials => {
-  const client = new trafficManager(credentials, subscriptionId);
-  const resourceGroupName = 'resource-group-name';
-  client.profiles.listAllInResourceGroup(resourceGroupName).then(profiles => {
-    profiles.map(profile => {
-      console.log(`found profile : ${profile.name}`);
-    });
-  });
-});
-```
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-trafficmanager)
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

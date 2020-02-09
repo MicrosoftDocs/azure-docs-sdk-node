@@ -1,6 +1,6 @@
 ---
-title: Azure Container Registry modules for Node.js
-description: Reference for Azure Container Registry Modules for Node.js
+title: Azure Container Registry modules for JavaScript
+description: Reference for Azure Container Registry Modules for JavaScript
 author: mmacy
 ms.author: marsma
 manager: jeconnoc
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Container Registry
 ---
 
-# Azure Container Registry modules for Node.js
+# Azure Container Registry modules for JavaScript
 
 Azure Container Registry is a managed Docker registry service based on the open-source Docker Registry 2.0. Create and maintain Azure container registries to store and manage your private Docker container images. Use container registries in Azure with your existing container development and deployment pipelines, and draw on the body of Docker community expertise.
 
@@ -23,34 +23,13 @@ Azure Container Registry is a managed Docker registry service based on the open-
 Install the Azure container registry npm module
 
 ```bash
-npm install azure-arm-containerregistry
+npm install @azure/arm-containerregistry
 ```
 
 ### Example
 
-This example gets a list of the available containers.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const ContainerRegistryManagement = require('azure-arm-containerregistry');
-
-const subscriptionId = 'your-subscription-id';
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const manager = new ContainerRegistryManagement(
-      credentials,
-      subscriptionId
-    );
-    return manager.registries.list();
-  })
-  .then(registries => {
-    console.log('List of registries:');
-    console.dir(registries, { depth: null, colors: true });
-  });
-```
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-containerregistry)
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

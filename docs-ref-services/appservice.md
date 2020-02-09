@@ -1,6 +1,6 @@
 ---
-title: Azure App Service modules for Node.js
-description: Reference for Azure App Service modules for Node.js
+title: Azure App Service modules for JavaScript
+description: Reference for Azure App Service modules for JavaScript
 author: SyntaxC4
 ms.author: cfowler
 manager: jhubbard
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: appservice
 ---
 
-# Azure App Service modules for Node.js
+# Azure App Service modules for JavaScript
 
 ## Overview
 
@@ -24,43 +24,21 @@ App Service includes the web and mobile capabilities that we previously delivere
 
 ### Install the npm package
 
-Install the Azure App Service module for Node.js
+Install the Azure App Service module for JavaScript
 
 ```bash
-npm install azure-arm-website
+npm install @azure/arm-appservice
 ```
 
 ### Example
 
-This example creates a website on Azure using Node.js.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const webSiteManagementClient = require('azure-arm-website');
-
-const subscriptionId = 'your-subscription-id';
-const website = 'website001';
-const resourceGroup = 'your-resource-group';
-const hostingPlan = 'testHostingPlan';
-let webSiteClient;
-
-msRestAzure.interactiveLogin().then(credentials => {
-  webSiteClient = new webSiteManagementClient(credentials, subscriptionId);
-  createWebSite(website).then(website => console.log('Web Site created successfully', website));
-});
-
-function createWebSite(webSiteName) {
-  const parameters = { location: 'westus', serverFarmId: hostingPlan };
-  console.log(`Creating web site:  ${webSiteName}`);
-  return webSiteClient.webApps.createOrUpdate(resourceGroup, webSiteName, parameters, null);
-}
-```
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-appservice)
 
 ## Samples
 
-- [App Service Mobile completed quickstart for Node.js backend](https://azure.microsoft.com/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
-- [Manage Azure websites with Node.js](https://azure.microsoft.com/resources/samples/app-service-web-nodejs-manage/)
+- [App Service Mobile completed quickstart for JavaScript backend](https://azure.microsoft.com/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
+- [Manage Azure websites with JavaScript](https://azure.microsoft.com/resources/samples/app-service-web-nodejs-manage/)
 - [MEAN.js sample for Azure App Service](https://azure.microsoft.com/resources/samples/meanjs/)
 - [FoodTrucks - Node API App for Azure App Service](https://azure.microsoft.com/resources/samples/app-service-api-node-food-trucks/)
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

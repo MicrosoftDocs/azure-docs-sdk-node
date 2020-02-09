@@ -1,6 +1,6 @@
 ---
-title: Azure Analysis Services modules for Node.js
-description: Reference for Azure Analysis Services modules for Node.js
+title: Azure Analysis Services modules for JavaScript
+description: Reference for Azure Analysis Services modules for JavaScript
 author: Minewiskan
 ms.author: owend
 manager: kfile
@@ -12,10 +12,10 @@ ms.devlang: nodejs
 ms.service: Analysis Services
 ---
 
-# Azure Analysis Services modules for Node.js
+# Azure Analysis Services modules for JavaScript
 
 ## Overview
-This package provides a Node.js module that makes it easy to manage Microsoft Azure Analysis Services.
+This package provides a JavaScript module that makes it easy to manage Microsoft Azure Analysis Services.
 
 ## Management package
 
@@ -24,29 +24,13 @@ This package provides a Node.js module that makes it easy to manage Microsoft Az
 Install the Azure Analysis Services npm module
 
 ```bash
-npm install azure-arm-analysisservices
+npm install @azure/arm-analysisservices
 ```
 
 ### Example
 
-This example lists all available Analysis Service servers.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const analysisServicesManagement = require('azure-arm-analysisservices');
-
-const subscriptionId = 'your-subscription-id';
-let analysisServicesClient;
-
-msRestAzure.interactiveLogin().then(credentials => {
-  analysisServicesClient = new analysisServicesManagement(credentials, subscriptionId);
-
-  analysisServicesClient.servers
-    .list()
-    .then(servers => console.log('Retrieved analysis services servers: ', servers));
-});
-```
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-analysisservices)
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

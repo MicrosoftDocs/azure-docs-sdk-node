@@ -1,6 +1,6 @@
 ---
-title: Azure Authorization modules for Node.js
-description: Reference for Azure Authorization modules for Node.js
+title: Azure Authorization modules for JavaScript
+description: Reference for Azure Authorization modules for JavaScript
 author: rloutlaw
 ms.author: ROutlaw
 manager: angrobe
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Authorization
 ---
 
-# Azure Authorization modules for Node.js
+# Azure Authorization modules for JavaScript
 
 ## Overview
 
@@ -20,35 +20,21 @@ Azure App Service Authentication / Authorization is a feature that provides a wa
 
 ## Management package
 
-Use npm to install the Azure Authorization modules for Node.js
+Use npm to install the Azure Authorization modules for JavaScript
 
 ### Install the npm module
 
 Install the Azure authorization npm module
 
 ```bash
-npm install azure-arm-authorization
+npm install @azure/ms-rest-nodeauth
 ```
 
 ### Example
 
-This example lists all role assignments for the requested resource group.
+Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-authorization)
 
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const authorizationManagement = require('azure-arm-authorization');
-
-const resourceGroup = 'resource-group-name';
-const subscriptionId = 'your-subscription-id';
-
-msRestAzure.interactiveLogin().then(credentials => {
- const client = new authorizationManagement(credentials, subscriptionId);
- client.roleAssignments.listForResourceGroup(resourceGroupName).then(result => {
-   console.log(result);
- });
-});
-```
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.

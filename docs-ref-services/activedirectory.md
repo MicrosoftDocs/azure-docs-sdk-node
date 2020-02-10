@@ -1,6 +1,6 @@
 ---
-title: Azure Active Directory Modules for JavaScript
-description: Reference for Azure Active Directory Modules for JavaScript
+title: Azure Active Directory Modules for Node.js
+description: Reference for Azure Active Directory Modules for Node.js
 author: celestedg
 ms.author: celested
 manager: mtillman
@@ -11,14 +11,14 @@ ms.technology: azure
 ms.devlang: nodejs
 ---
 
-# Azure Active Directory modules for JavaScript
+# Azure Active Directory modules for Node.js
 
 ## Overview
 
 > [!IMPORTANT]
 > We strongly recommend that you use [Microsoft Graph](https://graph.microsoft.io/) instead of Azure AD Graph API to access Azure Active Directory resources. Our development efforts are now concentrated on Microsoft Graph and no further enhancements are planned for Azure AD Graph API. There are a very limited number of scenarios for which Azure AD Graph API might still be appropriate; for more information, see the [Microsoft Graph or the Azure AD Graph](https://dev.office.com/blogs/microsoft-graph-or-azure-ad-graph) blog post in the Office Dev Center.
 
-The [Azure Active Directory Authentication Library (ADAL) for JavaScript](https://www.npmjs.com/package/adal-node) enables JavaScript applications to authenticate to AAD in order to access AAD protected web resources.
+The [Azure Active Directory Authentication Library (ADAL) for Node.js](https://www.npmjs.com/package/adal-node) enables Node.js applications to authenticate to AAD in order to access AAD protected web resources.
 
 ## Client package
 
@@ -34,7 +34,7 @@ npm install adal-node
 
 This example from the [client credentials sample](https://github.com/MSOpenTech/azure-activedirectory-library-for-nodejs/blob/master/sample/client-credentials-sample.js) illustrates server-to-server authentication via client credentials.
 
-```JavaScript
+```Node.js
 const adal = require('adal-node').AuthenticationContext;
 
 const authorityHostUrl = 'https://login.windows.net';
@@ -68,4 +68,4 @@ context.acquireTokenWithClientCredentials(
 | [Securing a web API with Azure AD](https://azure.microsoft.com/resources/samples/active-directory-node-webapi/) | A NodeJS web API that is secured using Azure AD and OAuth 2.0 access tokens. |
 | [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/resources/samples/active-directory-node-webapp-openidconnect/) | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
 
-Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.
+For more code samples that use various Azure packages, explore the [Node.JS samples](https://azure.microsoft.com/resources/samples/?platform=nodejs).

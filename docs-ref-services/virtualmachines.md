@@ -30,7 +30,7 @@ npm install @azure/arm-compute
 
 ### Example
 
-Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-compute)
+Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-compute)
 
 ## Samples
 
@@ -39,4 +39,4 @@ Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-co
 | **Virtual machine management** ||
 | [Azure virtual machines management sample with JavaScript](https://github.com/Azure-Samples/compute-node-manage-vm) | Demonstrates how to create, list, restart, and delete virtual machines. |
 
-Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript).

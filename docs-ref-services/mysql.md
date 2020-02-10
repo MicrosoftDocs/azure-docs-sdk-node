@@ -56,7 +56,7 @@ connection.end();
 * [Perform queries using JavaScript and MySQL](https://github.com/mysqljs/mysql/blob/master/Readme.md#performing-queries)
 * [MySQL transactions in JavaScript](https://github.com/mysqljs/mysql/blob/master/Readme.md#transactions)
 
-Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript).
 
 ## Management SDK
 
@@ -70,4 +70,4 @@ npm install @azure/arm-mysql
 
 ### Example code
 
-Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-mysql)
+Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-mysql)

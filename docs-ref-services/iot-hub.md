@@ -36,11 +36,11 @@ npm install @azure/arm-iothub
 
 ### Example
 
-Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-iothub)
+Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-iothub)
 
 ## Samples
 
 - [Get started with the Raspberry Pi Azure IoT Starter Kit](https://azure.microsoft.com/resources/samples/iot-remote-monitoring-node-raspberrypi-getstartedkit/)
 - [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running JavaScript](https://azure.microsoft.com/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
 
-Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript).

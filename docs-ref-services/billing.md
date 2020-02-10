@@ -24,12 +24,12 @@ To use this API, the account admin must opt in via the Azure portal. See [Manage
 Install the Azure Billing npm module 
 
 ```bash
-npm install @azure/ms-rest-nodeauth
+npm install @azure/arm-billing
 ```
 ### Example 
  
-Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-billing)
+Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-billing)
 
 ## Samples
 
-Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript).

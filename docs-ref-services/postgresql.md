@@ -52,4 +52,4 @@ client.query(query, (err, res) => {
 |--|--|
 | [JavaScript code snippets using PostgreSQL](https://www.npmjs.com/package/pg) | Learn how to create a pool, execute a query, obtain an exclusive client, and more.
 
-Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript).

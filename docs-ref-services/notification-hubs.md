@@ -36,11 +36,11 @@ npm install @azure/arm-notificationhubs
 
 ### Example
 
-Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-notificationhubs)
+Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-notificationhubs)
 
 ## Samples
 
 * [App Service Mobile completed quickstart for JavaScript backend](https://azure.microsoft.com/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
 * [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running JavaScript](https://azure.microsoft.com/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
 
-Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript).

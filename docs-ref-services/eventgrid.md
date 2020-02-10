@@ -113,7 +113,7 @@ npm install @azure/arm-eventgrid
 
 ### Example code
 
-Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-eventgrid)
+Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-eventgrid)
 
 > [!div class="nextstepaction"]
 > [Explore the management APIs](/https://www.npmjs.com/package/@azure/arm-eventgrid)

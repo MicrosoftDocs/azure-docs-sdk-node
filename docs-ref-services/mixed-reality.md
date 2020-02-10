@@ -31,4 +31,4 @@ npm install @azure/arm-mixedreality
 
 ### Example
 
-Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-mixedreality)
+Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-mixedreality)

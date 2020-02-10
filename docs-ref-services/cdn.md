@@ -30,8 +30,8 @@ npm install @azure/arm-cdn
 
 ### Example
 
-Example can be found here: [Example](https://www.npmjs.com/package/@azure/arm-cdn)
+Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-cdn)
 
 ## Samples
 
-Explore more [sample JavaScript code](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript) you can use in your apps.
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript).

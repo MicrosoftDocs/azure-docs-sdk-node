@@ -1,6 +1,6 @@
 ---
-title: Azure Event Grid libraries for Node.js
-description: Reference for Azure Event Grid libraries for Node.js
+title: Azure Event Grid libraries for JavaScript
+description: Reference for Azure Event Grid libraries for JavaScript
 author: rloutlaw 
 ms.author: routlaw    
 manager: angerobe
@@ -13,7 +13,7 @@ ms.service: event-grid
 ms.custom: devcenter
 ---
 
-# Azure Event Grid libraries for Node.js
+# Azure Event Grid libraries for JavaScript
 
 Build event-driven applications that listen and react to events from Azure services and custom sources using simple HTTP-based event handling with Azure Event Grid.
 
@@ -40,7 +40,7 @@ endpoint=$(az eventgrid topic show --name <topic_name> -g gridResourceGroup --qu
 key=$(az eventgrid topic key list --name <topic_name> -g gridResourceGroup --query "key1" --output tsv)
 ```
 
-```javascript
+```JavaScript
 var EventGridClient = require("azure-eventgrid");
 var msRestAzure = require('ms-rest-azure');
 var uuid = require('uuid').v4;
@@ -70,7 +70,7 @@ return EGClient.publishEvents(topicHostName, events).then((result) => {
 
 This sample shows how to handle an event from Azure Storage:
 
-```javascript
+```JavaScript
 var http = require('http');
 
 module.exports = function (context, req) {
@@ -99,7 +99,7 @@ module.exports = function (context, req) {
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/javascript/api/overview/azure/eventgrid/client)
+> [Explore the client APIs](/JavaScript/api/overview/azure/eventgrid/client)
 
 ## Management SDK
 
@@ -108,32 +108,15 @@ Create, update, or delete Event Grid instances, topics, and subscriptions with t
 ### Installation
 
 ```
-npm install azure-arm-eventgrid
+npm install @azure/arm-eventgrid
 ```
 
-### Example code
+### Samples
 
-The following code creates an Event Grid topic `topic1` and returns the access keys associated with the newly created topic.
-
-```javascript
-var msRestAzure = require('ms-rest-azure');
-var EventGridManagementClient = require("azure-arm-eventgrid");
-
-msRestAzure.interactiveLogin(function(err, credentials) {
-    // Created the management client
-    let EGMClient = new EventGridManagementClient(credentials, 'your-subscription-id');
-    let topicResponse;
-    // created an enventgrid topic
-    return EGMClient.topics.createOrUpdate('resourceGroup', 'topic1', { location: 'westus' }).then((topicResponse) => {
-        return Promise.resolve(console.log('Created topic ', topicResponse));
-    }).then(() => {
-        // listed the access keys
-        return EGMClient.topics.listSharedAccessKeys('resourceGroup', 'topic1')}
-)};
-```
+Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-eventgrid)
 
 > [!div class="nextstepaction"]
-> [Explore the management APIs](/javascript/api/overview/azure/eventgrid/management)
+> [Explore the management APIs](/https://www.npmjs.com/package/@azure/arm-eventgrid)
 
 ## Learn more
 

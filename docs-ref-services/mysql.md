@@ -1,6 +1,6 @@
 ---
-title: Azure MySQL modules for Node.js
-description: Reference for Azure MySQL modules for Node.js
+title: Azure MySQL modules for JavaScript
+description: Reference for Azure MySQL modules for JavaScript
 author: ajlam
 ms.author: andrela
 ms.date: 07/18/2017
@@ -9,9 +9,9 @@ ms.devlang: nodejs
 ms.service: mysql
 ---
 
-# Azure MySQL modules for Node.js
+# Azure MySQL modules for JavaScript
 
-The recommended client library for accessing Azure Database for MySQL is the open-source [Node.js connection library for Azure Database for MySQL](https://github.com/sidorares/node-mysql2). 
+The recommended client library for accessing Azure Database for MySQL is the open-source [JavaScript connection library for Azure Database for MySQL](https://github.com/sidorares/node-mysql2). 
 
 Learn more about [Azure Database for MySQL](https://docs.microsoft.com/azure/MySQL/)
 
@@ -29,7 +29,7 @@ npm install mysql2
 
 This example connects to a MySQL database and performs a simple query to retrieve all customers.
 
-```javascript
+```JavaScript
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
@@ -52,8 +52,22 @@ connection.end();
 
 ## Samples
 
-* [Create a connection to MySQL using Node.js](https://github.com/mysqljs/mysql/blob/master/Readme.md#establishing-connections)
-* [Perform queries using Node.js and MySQL](https://github.com/mysqljs/mysql/blob/master/Readme.md#performing-queries)
-* [MySQL transactions in Node.js](https://github.com/mysqljs/mysql/blob/master/Readme.md#transactions)
+* [Create a connection to MySQL using JavaScript](https://github.com/mysqljs/mysql/blob/master/Readme.md#establishing-connections)
+* [Perform queries using JavaScript and MySQL](https://github.com/mysqljs/mysql/blob/master/Readme.md#performing-queries)
+* [MySQL transactions in JavaScript](https://github.com/mysqljs/mysql/blob/master/Readme.md#transactions)
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+
+## Management SDK
+
+Create, update, or delete MySQL instances using Management SDK
+
+### Installation
+
+```
+npm install @azure/arm-mysql
+```
+
+### Example code
+
+Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-mysql)

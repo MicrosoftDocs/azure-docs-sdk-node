@@ -1,6 +1,6 @@
 ---
-title: Azure Cognitive Services modules for Node.js
-description: Reference for Azure Cognitive Services modules for Node.js
+title: Azure Cognitive Services modules for JavaScript
+description: Reference for Azure Cognitive Services modules for JavaScript
 author: brapel
 ms.author: v-brapel
 manager: ehansen
@@ -30,7 +30,7 @@ Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/inst
 npm install azure-cognitiveservices-computervision
 ```
 
-[Learn more](/azure/cognitive-services/computer-vision/home) about the Computer Vision API and get started with the [Computer Vision API JavaScript quickstart](/azure/cognitive-services/computer-vision/quickstarts/javascript).
+[Learn more](/azure/cognitive-services/computer-vision/home) about the Computer Vision API and get started with the [Computer Vision API JavaScript quickstart](/azure/cognitive-services/computer-vision/quickstarts/JavaScript).
 
 ### Content Moderator
 
@@ -56,7 +56,7 @@ Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/inst
 npm install azure-cognitiveservices-face
 ```
 
-[Learn more](/azure/cognitive-services/face/overview) about the Face API and get started with the [Face API JavaScript quickstart](/azure/cognitive-services/Face/quickstarts/javascript).
+[Learn more](/azure/cognitive-services/face/overview) about the Face API and get started with the [Face API JavaScript quickstart](/azure/cognitive-services/Face/quickstarts/JavaScript).
 
 ## Search modules
 
@@ -72,7 +72,7 @@ Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/inst
 npm install azure-cognitiveservices-websearch
 ```
 
-[Learn more](/azure/cognitive-services/bing-web-search/overview) about the Bing Web Search API and get started with the [Web Search API Node.js quickstart](/azure/cognitive-services/bing-web-search/quickstarts/nodejs).
+[Learn more](/azure/cognitive-services/bing-web-search/overview) about the Bing Web Search API and get started with the [Web Search API JavaScript quickstart](/azure/cognitive-services/bing-web-search/quickstarts/nodejs).
 
 ### Image search
 
@@ -86,7 +86,7 @@ Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/inst
 npm install azure-cognitiveservices-imagesearch
 ```
 
-[Learn more](/azure/cognitive-services/bing-image-search/overview) about the Bing Image Search API and get started with the [Image Search API Node.js quickstart](/azure/cognitive-services/bing-image-search/quickstarts/nodejs).
+[Learn more](/azure/cognitive-services/bing-image-search/overview) about the Bing Image Search API and get started with the [Image Search API JavaScript quickstart](/azure/cognitive-services/bing-image-search/quickstarts/nodejs).
 
 
 ### Entity search
@@ -101,7 +101,7 @@ Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/inst
 npm install azure-cognitiveservices-entitysearch
 ```
 
-[Learn more](/azure/cognitive-services/bing-entities-search/search-the-web) about the Bing Entity Search API and get started with the [Entity Search API Node.js quickstart](/azure/cognitive-services/bing-entities-search/quickstarts/nodejs).
+[Learn more](/azure/cognitive-services/bing-entities-search/search-the-web) about the Bing Entity Search API and get started with the [Entity Search API JavaScript quickstart](/azure/cognitive-services/bing-entities-search/quickstarts/nodejs).
 
 ### Custom search
 
@@ -113,7 +113,7 @@ Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/inst
 npm install azure-cognitiveservices-customsearch
 ```
 
-[Learn more](/azure/cognitive-services/bing-custom-search/) about the Bing Custom Search service and get started with querying your custom search from your apps with the [Custom Search API Node.js quickstart](/azure/cognitive-services/bing-custom-search/call-endpoint-nodejs).
+[Learn more](/azure/cognitive-services/bing-custom-search/) about the Bing Custom Search service and get started with querying your custom search from your apps with the [Custom Search API JavaScript quickstart](/azure/cognitive-services/bing-custom-search/call-endpoint-nodejs).
 
 ### Video search
 
@@ -127,7 +127,7 @@ Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/inst
 npm install azure-cognitiveservices-videosearch
 ```
 
-[Learn more](/azure/cognitive-services/bing-video-search/search-the-web) about the Bing Video Search service and get started with the [Video Search API Node.js quickstart](/azure/cognitive-services/bing-video-search/nodejs).
+[Learn more](/azure/cognitive-services/bing-video-search/search-the-web) about the Bing Video Search service and get started with the [Video Search API JavaScript quickstart](/azure/cognitive-services/bing-video-search/nodejs).
 
 
 ### News search
@@ -163,7 +163,7 @@ Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/inst
 npm install azure-cognitiveservices-textanalytics
 ```
 
-[Learn more](/azure/cognitive-services/text-analytics/overview) about the Text Analytics API and get started with the [Text Analytics API Node.js quickstart](/azure/cognitive-services/text-analytics/quickstarts/nodejs).
+[Learn more](/azure/cognitive-services/text-analytics/overview) about the Text Analytics API and get started with the [Text Analytics API JavaScript quickstart](/azure/cognitive-services/text-analytics/quickstarts/nodejs).
 
 
 ### Spell Check
@@ -178,8 +178,8 @@ Get the JavaScript module with [npm](https://docs.npmjs.com/getting-started/inst
 npm install azure-cognitiveservices-spellcheck
 ```
 
-[Learn more](/azure/cognitive-services/bing-spell-check/proof-text) about the Spell Check API and get started with the [Spell Check API Node.js quickstart](/azure/cognitive-services/bing-spell-check/quickstarts/nodejs).
+[Learn more](/azure/cognitive-services/bing-spell-check/proof-text) about the Spell Check API and get started with the [Spell Check API JavaScript quickstart](/azure/cognitive-services/bing-spell-check/quickstarts/nodejs).
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

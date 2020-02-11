@@ -1,6 +1,6 @@
 ---
-title: Azure Advisor modules for Node.js
-description: Reference for Azure Advisor modules for Node.js
+title: Azure Advisor modules for JavaScript
+description: Reference for Azure Advisor modules for JavaScript
 author: KumudD
 ms.author: kumud
 manager: jeconnoc
@@ -10,7 +10,7 @@ ms.devlang: nodejs
 ms.service: Advisor
 ---
 
-# Azure Advisor modules for Node.js
+# Azure Advisor modules for JavaScript
 
 ## Overview
 
@@ -28,28 +28,12 @@ With Advisor, you can:
 Install the Azure Advisor npm module
 
 ```bash
-npm install azure-arm-advisor
-```
-
-### Example
-
-This example displays the list of recommendations from Azure Advisor.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const advisorManagement = require('azure-arm-advisor');
-
-const subscriptionId = 'your-subscription-id';
-
-msRestAzure.interactiveLogin().then(credentials => {
-  const client = new advisorManagement(credentials, subscriptionId);
-  client.recommendations.list().then(recommendations => {
-    console.log('List of recommendations:');
-    console.dir(recommendations, {depth: null, colors: true});
-  });
-});
+npm install @azure/arm-advisor
 ```
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-advisor)
+
+
+* For more code samples that use various Azure packages, explore the [Node.JS samples](https://docs.microsoft.com/samples/browse/?languages=nodejs).

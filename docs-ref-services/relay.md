@@ -1,6 +1,6 @@
 ---
-title: Azure Relay modules for Node.js
-description: Reference for Azure Relay modules for Node.js
+title: Azure Relay modules for JavaScript
+description: Reference for Azure Relay modules for JavaScript
 author: sethmanheim
 ms.author: sethm
 manager: timlt
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Relay
 ---
 
-# Azure Relay modules for Node.js
+# Azure Relay modules for JavaScript
 
 The Azure Relay service creates hybrid applications by enabling you to securely expose services that reside within a corporate enterprise network to the public cloud, without having to open a firewall connection, or require intrusive changes to a corporate network infrastructure. Relay supports a variety of different transport protocols and web services standards.
 
@@ -25,31 +25,11 @@ Learn more about [Azure Relay](https://docs.microsoft.com/azure/service-bus-rela
 Install the Azure Relay npm module
 
 ```bash
-npm install azure-arm-relay
-```
-
-### Example
-
-This example lists the namespaces for a Relay client.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const RelayManagement = require('azure-arm-relay');
-
-const subscriptionId = 'your-subscription-id';
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const client = new RelayManagement(credentials, subscriptionId);
-    return client.namespaces.list();
-  })
-  .then(namespaces => {
-    console.dir(namespaces, { depth: null, colors: true });
-  })
-  .catch(err => console.log(err));
+npm install @azure/arm-relay
 ```
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-relay)
+
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

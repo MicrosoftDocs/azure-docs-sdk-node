@@ -1,6 +1,6 @@
 ---
-title: Azure Operational Insights Modules for Node.js
-description: Reference for Azure Operational Insights Modules for Node.js
+title: Azure Operational Insights Modules for JavaScript
+description: Reference for Azure Operational Insights Modules for JavaScript
 author: MGoedtel
 ms.author: magoedte
 manager: carmonm
@@ -12,36 +12,16 @@ ms.devlang: nodejs
 ms.service: Operational Insights
 ---
 
-# Azure Operational Insights Modules for Node.js
+# Azure Operational Insights Modules for JavaScript
 
-Use npm to install the Azure Operational Insights module for Node.js
+Use npm to install the Azure Operational Insights module for JavaScript
 
 ```bash
-npm install azure-arm-operationalinsights
+npm install @azure/arm-operationalinsights
 ```
-
-### Example 
-
-This example creates a client, connects to Operational Insights and retreives a list of workspaces by a specified resource group.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const OperationalInsightsManagement = require('azure-arm-operationalinsights');
-
-const subscriptionId = 'your-subscription-id';
-
-msRestAzure.interactiveLogin().then(credentials => {
-    const client = new OperationalInsightsManagement(
-        credentials,
-        subscriptionId
-    );
-    return client.workspaces.listByResourceGroup('resource-group-name');
-})
-.then(workspaces => {
-    console.log(workspaces);
-});
-``` 
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-operationalinsights)
+
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

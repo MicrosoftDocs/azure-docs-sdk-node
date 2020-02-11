@@ -1,6 +1,6 @@
 ---
-title: Azure Automation Modules for Node.js
-description: Reference for Azure Automation Modules for Node.js
+title: Azure Automation Modules for JavaScript
+description: Reference for Azure Automation Modules for JavaScript
 author: eamonoreilly
 ms.author: eamono
 manager: nirb
@@ -10,7 +10,7 @@ ms.devlang: nodejs
 ms.service: Automation
 ---
 
-# Azure Automation Modules for Node.js
+# Azure Automation Modules for JavaScript
 
 ## Overview
 
@@ -20,35 +20,14 @@ Azure Automation provides a way for users to automate the manual, long-running, 
 
 ### Install the modules with npm
 
-Use npm to install the Azure Automation modules for Node.js
+Use npm to install the Azure Automation modules for JavaScript
 
 ```bash
-npm install azure-arm-automation
-```
-
-### Example
-
-This example lists the automation accounts.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const AutomationManagement = require('azure-arm-automation');
-
-const subcriptionId = 'your-subscription-id';
-const resourceGroup = 'your-resource-group';
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const client = new AutomationManagement(credentials, subcriptionId);
-    return client.automationAccounts.listByResourceGroup(resourceGroup);
-  })
-  .then(automationAccounts =>
-    console.dir(automationAccounts, { depth: null, colors: true })
-  )
-  .catch(err => console.log(err));
+npm install @azure/arm-automation
 ```
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-automation)
+
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

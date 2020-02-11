@@ -1,6 +1,6 @@
 ---
-title: Azure Scheduler modules for Node.js
-description: Reference for Azure Scheduler modules for Node.js
+title: Azure Scheduler modules for JavaScript
+description: Reference for Azure Scheduler modules for JavaScript
 author: rloutlaw
 ms.author: ROutlaw
 manager: angrobe
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Scheduler
 ---
 
-# Azure Scheduler modules for Node.js
+# Azure Scheduler modules for JavaScript
 
 Azure Scheduler creates, maintains, and invokes scheduled work via HTTP, HTTPS, a storage queue, or the [Azure Service Bus](/azure/service-bus-messaging/service-bus-messaging-overview).
 
@@ -30,28 +30,8 @@ Install the Azure Scheduler npm module
 npm install azure-arm-scheduler
 ```
 
-### Example
-
-This examples lists the current schedulers.
-
-```javascript
-const msRestAzure = require('ms-rest-azure')
-const SchedulerManagement = require('azure-arm-scheduler')
-
-msRestAzure.interactiveLogin().then(credentials => {
-    // Create a scheduler from the login credentials
-    let client = new SchedulerManagement(credentials, 'your-subscription-id')
-    // Get the full list of current jobs for the subscription
-    return client.jobCollections.listBySubscription()
-}).then(currentJobs => {
-    console.log("Current jobs:")
-    console.dir(currentJobs, {depth:null, colors:true})
-}).catch(error => {
-    console.log("An error occurred:")
-    console.dir(error, {depth:null, colors:true})
-})
-```
-
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/azure-arm-scheduler)
+
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

@@ -1,6 +1,6 @@
 ---
-title: Azure Site Recovery modules for Node.js
-description: Reference for Azure Site Recovery modules for Node.js
+title: Azure Site Recovery modules for JavaScript
+description: Reference for Azure Site Recovery modules for JavaScript
 author: rayne-wiselman
 ms.author: raynew
 manager: carmonm
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Site Recovery
 ---
 
-# Azure Site Recovery modules for Node.js
+# Azure Site Recovery modules for JavaScript
 
 Site Recovery allows you to automate replication of Azure VMs between regions, on-premises virtual machines and physical servers to Azure, and on-premises machines to a secondary datacenter.
 
@@ -25,32 +25,11 @@ Learn more about [Azure Site Recovery](https://docs.microsoft.com/azure/site-rec
 Install the Azure Site Recovery service npm module
 
 ```bash
-npm install azure-arm-recoveryservices
-```
-
-### Example
-
-This example lists the Site Recovery service for a resource group.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const RecoveryServicesManagement = require('azure-arm-recoveryservices');
-
-const subscriptionId = 'your-subscription-id';
-const resourceGroupName = 'your-resource-group-name';
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const client = new RecoveryServicesManagement(credentials, subscriptionId);
-    return client.vaults.listByResourceGroup(resourceGroupName);
-  })
-  .then(vaults => {
-    console.log('List of vaults:');
-    console.dir(vaults, { depth: null, colors: true });
-  });
+npm install @azure/arm-recoveryservices
 ```
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-recoveryservices)
+
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

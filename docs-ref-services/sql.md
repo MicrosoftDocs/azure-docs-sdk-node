@@ -1,6 +1,6 @@
 ---
-title: Azure SQL modules for Node.js
-description: Reference for Azure SQL modules for Node.js
+title: Azure SQL modules for JavaScript
+description: Reference for Azure SQL modules for JavaScript
 author: CarlRabeler
 ms.author: carlrab
 manager: craigg
@@ -11,9 +11,9 @@ ms.service: sql-database
 ms.subservice: development
 ---
 
-# Azure SQL modules for Node.js
+# Azure SQL modules for JavaScript
 
-Work with data stored in [Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) from Node.js.
+Work with data stored in [Azure SQL Database](https://docs.microsoft.com/azure/sql-database/sql-database-technical-overview) from JavaScript.
 The management library provides an interface to make it easy to manage Microsoft Azure SQL databases.
 
 ## Client package
@@ -30,7 +30,7 @@ npm install tedious
 
 This example connects to a SQL Server database and perform a simple query.
 
-```javascript
+```JavaScript
 const Connection = require('tedious').Connection;
 const Request = require('tedious').Request;
 
@@ -70,29 +70,13 @@ const executeStatement = () => {
 Install the Azure SQL Server management npm module
 
 ```
-npm install azure-arm-sql
+npm install @azure/arm-sql
 ```   
-
-### Example
-
-Authenticate, create a client, and list all servers.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const SQLManagement = require('azure-arm-sql');
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const client = new SQLManagement(credentials, 'your-subscription-id');
-    return client.servers.list();
-  })
-  .then(servers => console.dir(servers, { depth: null, colors: true }))
-  .catch(err => console.log(err));
-```
 
 ## Samples
 
-- [Azure SQL Database: Use Node.js to connect and query data](https://docs.microsoft.com/azure/sql-database/sql-database-connect-query-nodejs)
+- Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-sql)
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+- [Azure SQL Database: Use JavaScript to connect and query data](https://docs.microsoft.com/azure/sql-database/sql-database-connect-query-nodejs)
+
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

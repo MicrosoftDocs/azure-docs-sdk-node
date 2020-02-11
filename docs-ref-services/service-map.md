@@ -1,6 +1,6 @@
 ---
-title: Azure Service Map modules for Node.js
-description: Reference for Azure Service Map modules for Node.js
+title: Azure Service Map modules for JavaScript
+description: Reference for Azure Service Map modules for JavaScript
 author: bwren
 ms.author: bwren
 manager: carmonm
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Service Map
 ---
 
-# Azure Service Map modules for Node.js
+# Azure Service Map modules for JavaScript
 
 Service Map automatically discovers application components on Windows and Linux systems and maps the communication between services. Service Map shows connections between servers, processes, and ports across any TCP-connected architecture, with no configuration required other than the installation of an agent.
 
@@ -25,30 +25,11 @@ Learn more about [Azure Service Map](https://docs.microsoft.com/azure/operations
 Install the Azure Service Map npm module
 
 ```bash
-npm install azure-arm-servicemap
-```
-
-### Example
-
-This example lists all service maps for the specified resource group and workspace.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const serviceMapManagement = require('azure-arm-servicemap');
-
-const subscriptionId = 'your-subscription-id';
-const resourceGroup = 'your-resource-group';
-const workspace = 'your-workspace';
-let serviceMapClient;
-
-msRestAzure.interactiveLogin().then(credentials => {
-  serviceMapClient = new serviceMapManagement(credentials, subscriptionId);
-  serviceMapClient.machineGroups
-    .listByWorkspace(resourceGroup, workspace)
-    .then(machineGroups => console.log('Retrieved machine groups: ', machineGroups));
-});
+npm install @azure/arm-servicemap
 ```
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-servicemap)
+
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

@@ -34,7 +34,7 @@ npm install adal-node
 
 This example from the [client credentials sample](https://github.com/MSOpenTech/azure-activedirectory-library-for-nodejs/blob/master/sample/client-credentials-sample.js) illustrates server-to-server authentication via client credentials.
 
-```javascript
+```Node.js
 const adal = require('adal-node').AuthenticationContext;
 
 const authorityHostUrl = 'https://login.windows.net';
@@ -68,4 +68,4 @@ context.acquireTokenWithClientCredentials(
 | [Securing a web API with Azure AD](https://azure.microsoft.com/resources/samples/active-directory-node-webapi/) | A NodeJS web API that is secured using Azure AD and OAuth 2.0 access tokens. |
 | [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/resources/samples/active-directory-node-webapp-openidconnect/) | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+For more code samples that use various Azure packages, explore the [Node.JS samples](https://azure.microsoft.com/resources/samples/?platform=nodejs).

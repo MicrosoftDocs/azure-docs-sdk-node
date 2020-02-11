@@ -1,6 +1,6 @@
 ---
-title: Azure DNS modules for Node.js
-description: Reference for Azure DNS modules for Node.js
+title: Azure DNS modules for JavaScript
+description: Reference for Azure DNS modules for JavaScript
 author: KumudD
 ms.author: kumud
 manager: jeconnoc
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: DNS
 ---
 
-# Azure DNS modules for Node.js
+# Azure DNS modules for JavaScript
 
 Use Azure DNS to host your Domain Name System (DNS) domains in Azure. Manage your DNS records using the same credentials and billing and support contract as your other Azure services. Seamlessly integrate Azure-based services with corresponding DNS updates and streamline your end-to-end deployment process.
 
@@ -23,29 +23,11 @@ Use Azure DNS to host your Domain Name System (DNS) domains in Azure. Manage you
 Install the Azure DNS npm module
 
 ```bash
-npm install azure-arm-dns
-```
-
-### Example
-
-This example lists the DNS Management zones.
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const DNSManagement = require('azure-arm-dns');
-
-const subscriptionId = 'your-subscription-id';
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const client = new DNSManagement(credentials, subscriptionId);
-    return client.zones.list();
-  })
-  .then(zones => console.dir(zones, { depth: null, colors: true }))
-  .catch(err => console.log(err));
+npm install @azure/arm-dns
 ```
 
 ## Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-dns)
+
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

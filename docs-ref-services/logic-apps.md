@@ -1,6 +1,6 @@
 ---
-title: Azure Logic Apps modules for Node.js
-description: Reference for Azure Logic Apps modules for Node.js
+title: Azure Logic Apps modules for JavaScript
+description: Reference for Azure Logic Apps modules for JavaScript
 author: ecfan
 ms.author: estfan
 manager: cfowler
@@ -12,7 +12,7 @@ ms.devlang: nodejs
 ms.service: Logic Apps
 ---
 
-# Azure Logic Apps modules for Node.js
+# Azure Logic Apps modules for JavaScript
 
 Logic Apps provide a way to simplify and implement scalable integrations and workflows in the cloud. It provides a visual designer to model and automate your process as a series of steps known as a workflow. There are many connectors across the cloud and on-premises to quickly integrate across services and protocols. A logic app begins with a trigger (like 'When an account is added to Dynamics CRM') and after firing can begin many combinations of actions, conversions, and condition logic.
 
@@ -30,28 +30,14 @@ Logic Apps is a fully managed iPaaS (integration Platform as a Service) allowing
 
 ### Install the npm module
 
-Install the Azure logic module for Node.js
+Install the Azure logic module for JavaScript
 
 ```bash
-npm install azure-arm-logic
-```
-
-### Example
-
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const LogicManagement = require('azure-arm-logic');
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const subscriptionId = 'subscription-id';
-    const client = new LogicManagement(credentials, subscriptionId);
-    return client.workflows.listBySubscription();
-  })
-  .then(workflows => console.log(workflows));
+npm install @azure/arm-logic
 ```
 
 ### Samples
 
-Explore more [sample Node.js code](https://azure.microsoft.com/resources/samples/?platform=nodejs) you can use in your apps.
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-logic)
+
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

@@ -111,7 +111,7 @@ Create, update, or delete Event Grid instances, topics, and subscriptions with t
 npm install @azure/arm-eventgrid
 ```
 
-### Example code
+### Samples
 
 Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-eventgrid)
 

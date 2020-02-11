@@ -24,10 +24,8 @@ Cloud applications are complex with many moving parts. Monitoring provides data 
 pm install @azure/arm-monitor
 ```
 
-### Example
-
-Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-monitor)
-
 ### Samples
 
-For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript).
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-monitor)
+
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

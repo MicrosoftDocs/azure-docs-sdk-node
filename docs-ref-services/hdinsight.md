@@ -44,4 +44,4 @@ Examples for using this module in Node.js as well as browser applications can be
 
 ## Samples
 
-For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript).
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

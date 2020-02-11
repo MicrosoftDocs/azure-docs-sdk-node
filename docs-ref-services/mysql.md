@@ -56,7 +56,7 @@ connection.end();
 * [Perform queries using JavaScript and MySQL](https://github.com/mysqljs/mysql/blob/master/Readme.md#performing-queries)
 * [MySQL transactions in JavaScript](https://github.com/mysqljs/mysql/blob/master/Readme.md#transactions)
 
-For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript).
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
 
 ## Management SDK
 

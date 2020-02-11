@@ -25,10 +25,8 @@ This project provides a JavaScript package for accessing Azure. Right now it sup
 npm install @azure/arm-containerservice
 ```
 
-## How to use
+## Samples
 
-Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-containerservice)
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-containerservice)
 
-## Related projects
-
-- [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-node)
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

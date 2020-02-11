@@ -30,12 +30,11 @@ npm install @azure/arm-keyvault
 
 ### Example
 
-Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-keyvault)
 
 ## Samples
-
+- Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-keyvault)
 - [Getting started with Key Vault in JavaScript](https://azure.microsoft.com/resources/samples/key-vault-node-getting-started/)
 - [Manage Azure resources and resource groups with JavaScript](https://azure.microsoft.com/resources/samples/resource-manager-node-resources-and-groups/) 
 - [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/resources/samples/active-directory-node-webapp-openidconnect/) 
 
-For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/en-us/samples/browse/?languages=javascript).
+For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

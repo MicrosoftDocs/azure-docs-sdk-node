@@ -100,7 +100,7 @@ items:
       Returns `true` if either the sender or the client that created it has been
       closed
     syntax:
-      content: 'isClosed: boolean'
+      content: boolean isClosed
       return:
         type:
           - boolean
@@ -112,9 +112,23 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >-
+    summary: >
       Schedules given message to appear on Service Bus Queue/Subscription at a
       later time.
+
+      Please note that you need to explicitly encode the message body if you
+      intend to receive the message using a tool or library other than this
+      library.
+
+      For example:
+       1. Import DefaultDataTransformer and instantiate.
+           ```js
+             const dt = new DefaultDataTransformer();
+           ```
+       2. Use the `encode` method on the transformer to encode the message body before calling the scheduleMessage() method
+           ```js
+             message.body = dt.encode(message.body);
+           ```
     syntax:
       content: >-
         function scheduleMessage(scheduledEnqueueTimeUtc: Date, message:
@@ -149,9 +163,23 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >-
+    summary: >
       Schedules given messages to appear on Service Bus Queue/Subscription at a
       later time.
+
+      Please note that you need to explicitly encode the message body if you
+      intend to receive the message using a tool or library other than this
+      library.
+
+      For example:
+       1. Import DefaultDataTransformer and instantiate.
+           ```js
+             const dt = new DefaultDataTransformer();
+           ```
+       2. Use the `encode` method on the transformer to encode the message body before calling the scheduleMessage() method
+           ```js
+             message.body = dt.encode(message.body);
+           ```
     syntax:
       content: >-
         function scheduleMessages(scheduledEnqueueTimeUtc: Date, messages:

@@ -24,6 +24,7 @@ items:
       - '@azure/storage-blob.PageBlobClient.getPageBlobClient'
       - '@azure/storage-blob.PageBlobClient.getPageRanges'
       - '@azure/storage-blob.PageBlobClient.getPageRangesDiff'
+      - '@azure/storage-blob.PageBlobClient.getPageRangesDiffForManagedDisks'
       - '@azure/storage-blob.PageBlobClient.getProperties'
       - '@azure/storage-blob.PageBlobClient.name'
       - '@azure/storage-blob.PageBlobClient.constructor_2'
@@ -110,7 +111,10 @@ items:
       You can also cancel a copy before it is completed by calling
       `cancelOperation` on the poller.
 
-      Note that attempting to cancel a completed copy will result in an error
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
       being thrown.
 
       In version 2012-02-12 and later, the source for a Copy Blob operation can
@@ -191,7 +195,7 @@ items:
     type: property
     summary: The name of the storage container the blob is associated with.
     syntax:
-      content: 'containerName: string'
+      content: string containerName
       return:
         type:
           - string
@@ -658,6 +662,44 @@ items:
           - Promise<@azure/storage-blob.PageBlobGetPageRangesDiffResponse>
         description: Response data for the Page Blob Get Page Range Diff operation.
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.PageBlobClient.getPageRangesDiffForManagedDisks'
+    name: >-
+      getPageRangesDiffForManagedDisks(number, number, string,
+      PageBlobGetPageRangesDiffOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Gets the collection of page ranges that differ between a specified
+      snapshot and this page blob for managed disks.
+    syntax:
+      content: >-
+        function getPageRangesDiffForManagedDisks(offset: number, count: number,
+        prevSnapshotUrl: string, options?: PageBlobGetPageRangesDiffOptions)
+      parameters:
+        - id: offset
+          type:
+            - number
+          description: Starting byte position of the page blob
+        - id: count
+          type:
+            - number
+          description: Number of bytes to get ranges diff.
+        - id: prevSnapshotUrl
+          type:
+            - string
+          description: URL of snapshot to retrive the difference.
+        - id: options
+          type:
+            - '@azure/storage-blob.PageBlobGetPageRangesDiffOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-blob.PageBlobGetPageRangesDiffResponse>
+        description: Response data for the Page Blob Get Page Range Diff operation.
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.PageBlobClient.getProperties'
     name: getProperties(BlobGetPropertiesOptions)
     children: []
@@ -691,7 +733,7 @@ items:
     type: property
     summary: The name of the blob.
     syntax:
-      content: 'name: string'
+      content: string name
       return:
         type:
           - string

@@ -4,10 +4,12 @@ items:
     name: BlobEventsTrigger
     fullName: BlobEventsTrigger
     children:
+      - '@azure/arm-datafactory.BlobEventsTrigger.annotations'
       - '@azure/arm-datafactory.BlobEventsTrigger.blobPathBeginsWith'
       - '@azure/arm-datafactory.BlobEventsTrigger.blobPathEndsWith'
       - '@azure/arm-datafactory.BlobEventsTrigger.description'
       - '@azure/arm-datafactory.BlobEventsTrigger.events'
+      - '@azure/arm-datafactory.BlobEventsTrigger.ignoreEmptyBlobs'
       - '@azure/arm-datafactory.BlobEventsTrigger.pipelines'
       - '@azure/arm-datafactory.BlobEventsTrigger.runtimeState'
       - '@azure/arm-datafactory.BlobEventsTrigger.scope'
@@ -15,7 +17,23 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Trigger that runs every time a Blob event occurs.
+    package: '@azure/arm-datafactory'
+  - uid: '@azure/arm-datafactory.BlobEventsTrigger.annotations'
+    name: annotations
+    fullName: annotations
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: List of tags that can be used for describing the trigger.
+    optional: true
+    syntax:
+      content: 'annotations?: any[]'
+      return:
+        type:
+          - 'any[]'
+        description: ''
     package: '@azure/arm-datafactory'
   - uid: '@azure/arm-datafactory.BlobEventsTrigger.blobPathBeginsWith'
     name: blobPathBeginsWith
@@ -24,7 +42,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The blob path must begin with the pattern provided for trigger to fire.
+      For example,
+
+      '/records/blobs/december/' will only fire the trigger for blobs in the
+      december folder under
+
+      the records container. At least one of these must be provided:
+      blobPathBeginsWith,
+
+      blobPathEndsWith.
     optional: true
     syntax:
       content: 'blobPathBeginsWith?: undefined | string'
@@ -40,7 +68,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The blob path must end with the pattern provided for trigger to fire. For
+      example,
+
+      'december/boxes.csv' will only fire the trigger for blobs named boxes in a
+      december folder. At
+
+      least one of these must be provided: blobPathBeginsWith, blobPathEndsWith.
     optional: true
     syntax:
       content: 'blobPathEndsWith?: undefined | string'
@@ -56,7 +91,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Trigger description.
     optional: true
     syntax:
       content: 'description?: undefined | string'
@@ -72,12 +107,28 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The type of events that cause this trigger to fire.
     syntax:
       content: 'events: BlobEventTypes[]'
       return:
         type:
           - '@azure/arm-datafactory.BlobEventTypes[]'
+        description: ''
+    package: '@azure/arm-datafactory'
+  - uid: '@azure/arm-datafactory.BlobEventsTrigger.ignoreEmptyBlobs'
+    name: ignoreEmptyBlobs
+    fullName: ignoreEmptyBlobs
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: 'If set to true, blobs with zero bytes will be ignored.'
+    optional: true
+    syntax:
+      content: 'ignoreEmptyBlobs?: undefined | false | true'
+      return:
+        type:
+          - undefined | false | true
         description: ''
     package: '@azure/arm-datafactory'
   - uid: '@azure/arm-datafactory.BlobEventsTrigger.pipelines'
@@ -87,7 +138,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Pipelines that need to be started.
     optional: true
     syntax:
       content: 'pipelines?: TriggerPipelineReference[]'
@@ -103,7 +154,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Indicates if trigger is running or not. Updated when Start/Stop APIs are
+      called on the
+
+      Trigger. Possible values include: 'Started', 'Stopped', 'Disabled'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'runtimeState?: TriggerRuntimeState'
@@ -119,7 +177,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The ARM resource ID of the Storage Account.
     syntax:
       content: 'scope: string'
       return:
@@ -134,7 +192,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Polymorphic Discriminator
     syntax:
       content: 'type: "BlobEventsTrigger"'
       return:

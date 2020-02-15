@@ -5,7 +5,8 @@ items:
     fullName: ConditionErrorNameMapper
     children:
       - '@azure/amqp-common.ConditionErrorNameMapper.amqp:connection:forced'
-      - '@azure/amqp-common.ConditionErrorNameMapper.system:error'
+      - >-
+        @azure/amqp-common.ConditionErrorNameMapper.amqp:connection:framing-error
       - '@azure/amqp-common.ConditionErrorNameMapper.amqp:connection:redirect'
       - '@azure/amqp-common.ConditionErrorNameMapper.amqp:decode-error'
       - '@azure/amqp-common.ConditionErrorNameMapper.amqp:frame-size-too-small'
@@ -32,7 +33,7 @@ items:
       - >-
         @azure/amqp-common.ConditionErrorNameMapper.amqp:session:unattached-handle
       - >-
-        @azure/amqp-common.ConditionErrorNameMapper.amqp:connection:framing-error
+        @azure/amqp-common.ConditionErrorNameMapper.amqp:session:window-violation
       - '@azure/amqp-common.ConditionErrorNameMapper.amqp:unauthorized-access'
       - >-
         @azure/amqp-common.ConditionErrorNameMapper.client.sender:not-enough-link-credit
@@ -72,8 +73,7 @@ items:
       - >-
         @azure/amqp-common.ConditionErrorNameMapper.com.microsoft:store-lock-lost
       - '@azure/amqp-common.ConditionErrorNameMapper.com.microsoft:timeout'
-      - >-
-        @azure/amqp-common.ConditionErrorNameMapper.amqp:session:window-violation
+      - '@azure/amqp-common.ConditionErrorNameMapper.system:error'
     langs:
       - typeScript
     type: enum
@@ -90,15 +90,14 @@ items:
     type: field
     numericValue: null
     package: '@azure/amqp-common'
-  - uid: '@azure/amqp-common.ConditionErrorNameMapper.system:error'
-    name: 'system:error'
+  - uid: '@azure/amqp-common.ConditionErrorNameMapper.amqp:connection:framing-error'
+    name: 'amqp:connection:framing-error'
     children: []
     langs:
       - typeScript
     summary: >-
-      Error is thrown when a low level system error is thrown by node.js.
-
-      <xref:https%3A%2F%2Fnodejs.org%2Fdist%2Flatest-v8.x%2Fdocs%2Fapi%2Fall.html%23errors_class_system_error>
+      Error is thrown when a valid frame header cannot be formed from the
+      incoming byte stream.
     type: field
     numericValue: null
     package: '@azure/amqp-common'
@@ -356,14 +355,12 @@ items:
     type: field
     numericValue: null
     package: '@azure/amqp-common'
-  - uid: '@azure/amqp-common.ConditionErrorNameMapper.amqp:connection:framing-error'
-    name: 'amqp:connection:framing-error'
+  - uid: '@azure/amqp-common.ConditionErrorNameMapper.amqp:session:window-violation'
+    name: 'amqp:session:window-violation'
     children: []
     langs:
       - typeScript
-    summary: >-
-      Error is thrown when a valid frame header cannot be formed from the
-      incoming byte stream.
+    summary: Error is thrown when the peer violated incoming window for the session.
     type: field
     numericValue: null
     package: '@azure/amqp-common'
@@ -603,12 +600,15 @@ items:
     type: field
     numericValue: null
     package: '@azure/amqp-common'
-  - uid: '@azure/amqp-common.ConditionErrorNameMapper.amqp:session:window-violation'
-    name: 'amqp:session:window-violation'
+  - uid: '@azure/amqp-common.ConditionErrorNameMapper.system:error'
+    name: 'system:error'
     children: []
     langs:
       - typeScript
-    summary: Error is thrown when the peer violated incoming window for the session.
+    summary: >-
+      Error is thrown when a low level system error is thrown by node.js.
+
+      <xref:https%3A%2F%2Fnodejs.org%2Fdist%2Flatest-v8.x%2Fdocs%2Fapi%2Fall.html%23errors_class_system_error>
     type: field
     numericValue: null
     package: '@azure/amqp-common'

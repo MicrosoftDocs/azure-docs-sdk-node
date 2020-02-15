@@ -4,10 +4,11 @@ items:
     name: AnalyzeSentimentSuccessResult
     fullName: AnalyzeSentimentSuccessResult
     children:
-      - '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.documentScores'
+      - '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.error'
       - '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.id'
       - '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.sentences'
       - '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.sentiment'
+      - '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.sentimentScores'
       - '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.statistics'
     langs:
       - typeScript
@@ -18,21 +19,20 @@ items:
     extends:
       name: '@azure/ai-text-analytics.TextAnalyticsSuccessResult'
     package: '@azure/ai-text-analytics'
-  - uid: '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.documentScores'
-    name: documentScores
-    fullName: documentScores
+  - uid: '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.error'
+    name: error
+    fullName: error
     children: []
     langs:
       - typeScript
     type: property
-    summary: >-
-      Document level sentiment confidence scores between 0 and 1 for each
-      sentiment class.
+    summary: Discriminant to determine if that this is an error result.
+    optional: true
     syntax:
-      content: 'documentScores: SentimentConfidenceScorePerLabel'
+      content: 'error?: undefined'
       return:
         type:
-          - '@azure/ai-text-analytics.SentimentConfidenceScorePerLabel'
+          - undefined
         description: ''
     package: '@azure/ai-text-analytics'
   - uid: '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.id'
@@ -76,10 +76,27 @@ items:
       Predicted sentiment for document. Possible values
       include: 'positive', 'neutral', 'negative', 'mixed'
     syntax:
-      content: 'sentiment: DocumentSentimentValue'
+      content: 'sentiment: DocumentSentimentLabel'
       return:
         type:
-          - '@azure/ai-text-analytics.DocumentSentimentValue'
+          - '@azure/ai-text-analytics.DocumentSentimentLabel'
+        description: ''
+    package: '@azure/ai-text-analytics'
+  - uid: '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.sentimentScores'
+    name: sentimentScores
+    fullName: sentimentScores
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Document level sentiment confidence scores between 0 and 1 for each
+      sentiment class.
+    syntax:
+      content: 'sentimentScores: SentimentScorePerLabel'
+      return:
+        type:
+          - '@azure/ai-text-analytics.SentimentScorePerLabel'
         description: ''
     package: '@azure/ai-text-analytics'
   - uid: '@azure/ai-text-analytics.AnalyzeSentimentSuccessResult.statistics'
@@ -111,12 +128,6 @@ references:
       - name: TextAnalyticsSuccessResult
         fullName: TextAnalyticsSuccessResult
         uid: '@azure/ai-text-analytics.TextAnalyticsSuccessResult'
-  - uid: '@azure/ai-text-analytics.SentimentConfidenceScorePerLabel'
-    name: SentimentConfidenceScorePerLabel
-    spec.typeScript:
-      - name: SentimentConfidenceScorePerLabel
-        fullName: SentimentConfidenceScorePerLabel
-        uid: '@azure/ai-text-analytics.SentimentConfidenceScorePerLabel'
   - uid: '@azure/ai-text-analytics.SentenceSentiment[]'
     name: 'SentenceSentiment[]'
     spec.typeScript:
@@ -125,12 +136,18 @@ references:
         uid: '@azure/ai-text-analytics.SentenceSentiment'
       - name: '[]'
         fullName: '[]'
-  - uid: '@azure/ai-text-analytics.DocumentSentimentValue'
-    name: DocumentSentimentValue
+  - uid: '@azure/ai-text-analytics.DocumentSentimentLabel'
+    name: DocumentSentimentLabel
     spec.typeScript:
-      - name: DocumentSentimentValue
-        fullName: DocumentSentimentValue
-        uid: '@azure/ai-text-analytics.DocumentSentimentValue'
+      - name: DocumentSentimentLabel
+        fullName: DocumentSentimentLabel
+        uid: '@azure/ai-text-analytics.DocumentSentimentLabel'
+  - uid: '@azure/ai-text-analytics.SentimentScorePerLabel'
+    name: SentimentScorePerLabel
+    spec.typeScript:
+      - name: SentimentScorePerLabel
+        fullName: SentimentScorePerLabel
+        uid: '@azure/ai-text-analytics.SentimentScorePerLabel'
   - uid: '@azure/ai-text-analytics.TextDocumentStatistics'
     name: TextDocumentStatistics
     spec.typeScript:

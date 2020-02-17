@@ -12,6 +12,7 @@ items:
       - >-
         microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromAuthorizationToken
       - microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromEndpoint
+      - microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromHost
       - microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromSubscription
       - microsoft-cognitiveservices-speech-sdk.SpeechConfig.getProperty
       - microsoft-cognitiveservices-speech-sdk.SpeechConfig.outputFormat
@@ -39,6 +40,8 @@ items:
       - typeScript
     type: property
     summary: >-
+      Gets the authorization token.
+
       Gets/Sets the authorization token.
 
       Note: The caller needs to ensure that the authorization token is valid.
@@ -47,7 +50,7 @@ items:
       expires, the caller needs to refresh it by calling this setter with a new
       valid token.
     syntax:
-      content: 'public authorizationToken: string'
+      content: string authorizationToken
       return:
         type:
           - string
@@ -94,14 +97,17 @@ items:
       - typeScript
     type: property
     summary: >-
+      Gets the endpoint ID of a customized speech model that is used for speech
+      recognition.
+
       Gets/Sets the endpoint ID of a customized speech model that is used for
       speech recognition.
     syntax:
-      content: 'public endpointId: string'
+      content: string endpointId
       return:
         type:
           - string
-        description: ''
+        description: The endpoint ID
     package: microsoft-cognitiveservices-speech-sdk
   - uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromAuthorizationToken
     name: 'fromAuthorizationToken(string, string)'
@@ -189,6 +195,50 @@ items:
           - microsoft-cognitiveservices-speech-sdk.SpeechConfig
         description: A speech factory instance.
     package: microsoft-cognitiveservices-speech-sdk
+  - uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromHost
+    name: 'fromHost(URL, string)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates an instance of the speech config with specified host and
+      subscription key.
+
+      This method is intended only for users who use a non-default service host.
+      Standard resource path will be assumed.
+
+      For services with a non-standard resource path or no path at all, use
+      fromEndpoint instead.
+
+      Note: Query parameters are not allowed in the host URI and must be set by
+      other APIs.
+
+      Note: To use an authorization token with fromHost, use fromHost(URL),
+
+      and then set the AuthorizationToken property on the created SpeechConfig
+      instance.
+
+      Note: Added in version 1.9.0.
+    syntax:
+      content: 'static function fromHost(hostName: URL, subscriptionKey?: string)'
+      parameters:
+        - id: hostName
+          type:
+            - URL
+          description: ''
+        - id: subscriptionKey
+          type:
+            - string
+          description: >-
+            The subscription key. If a subscription key is not specified, an
+            authorization token must be set.
+          optional: true
+      return:
+        type:
+          - microsoft-cognitiveservices-speech-sdk.SpeechConfig
+        description: A speech factory instance.
+    package: microsoft-cognitiveservices-speech-sdk
   - uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromSubscription
     name: 'fromSubscription(string, string)'
     children: []
@@ -252,13 +302,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Gets/Sets the output format.
+    summary: |-
+      Gets output format.
+      Gets/Sets the output format.
     syntax:
-      content: 'public outputFormat: OutputFormat'
+      content: OutputFormat outputFormat
       return:
         type:
           - microsoft-cognitiveservices-speech-sdk.OutputFormat
-        description: ''
+        description: Returns the output format.
     package: microsoft-cognitiveservices-speech-sdk
   - uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.region
     name: region
@@ -269,11 +321,11 @@ items:
     type: property
     summary: ''
     syntax:
-      content: 'public region: string'
+      content: string region
       return:
         type:
           - string
-        description: ''
+        description: The region set on the config.
     package: microsoft-cognitiveservices-speech-sdk
   - uid: >-
       microsoft-cognitiveservices-speech-sdk.SpeechConfig.requestWordLevelTimestamps
@@ -413,9 +465,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Gets/Sets the input language.
+    summary: |-
+      Returns the configured language.
+      Gets/Sets the input language.
     syntax:
-      content: 'public speechRecognitionLanguage: string'
+      content: string speechRecognitionLanguage
       return:
         type:
           - string
@@ -430,11 +484,11 @@ items:
     type: property
     summary: ''
     syntax:
-      content: 'public subscriptionKey: string'
+      content: string subscriptionKey
       return:
         type:
           - string
-        description: ''
+        description: The subscription key set on the config.
     package: microsoft-cognitiveservices-speech-sdk
 references:
   - uid: microsoft-cognitiveservices-speech-sdk.OutputFormat

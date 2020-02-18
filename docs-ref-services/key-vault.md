@@ -9,7 +9,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: Key Vault
+ms.service: key-vault
 ---
 
 # Azure Key Vault modules for JavaScript

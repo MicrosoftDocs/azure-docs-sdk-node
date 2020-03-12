@@ -4,7 +4,7 @@ description: Reference for Azure Storage modules for JavaScript
 author: maggiepint
 ms.author: magpint
 manager: twolley
-ms.date: 02/28/2020
+ms.date: 03/12/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure

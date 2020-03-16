@@ -4,16 +4,19 @@ items:
     name: Topic
     fullName: Topic
     children:
-      - '@azure/arm-eventgrid.Topic.allowTrafficFromAllIPs'
       - '@azure/arm-eventgrid.Topic.endpoint'
       - '@azure/arm-eventgrid.Topic.id'
+      - '@azure/arm-eventgrid.Topic.identity'
       - '@azure/arm-eventgrid.Topic.inboundIpRules'
       - '@azure/arm-eventgrid.Topic.inputSchema'
       - '@azure/arm-eventgrid.Topic.inputSchemaMapping'
       - '@azure/arm-eventgrid.Topic.location'
       - '@azure/arm-eventgrid.Topic.metricResourceId'
       - '@azure/arm-eventgrid.Topic.name'
+      - '@azure/arm-eventgrid.Topic.privateEndpointConnections'
       - '@azure/arm-eventgrid.Topic.provisioningState'
+      - '@azure/arm-eventgrid.Topic.publicNetworkAccess'
+      - '@azure/arm-eventgrid.Topic.sku'
       - '@azure/arm-eventgrid.Topic.tags'
       - '@azure/arm-eventgrid.Topic.type'
     langs:
@@ -22,26 +25,6 @@ items:
     summary: EventGrid Topic
     extends:
       name: '@azure/arm-eventgrid.TrackedResource'
-    package: '@azure/arm-eventgrid'
-  - uid: '@azure/arm-eventgrid.Topic.allowTrafficFromAllIPs'
-    name: allowTrafficFromAllIPs
-    fullName: allowTrafficFromAllIPs
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      This determines if IP filtering rules ought to be evaluated or not. By
-      default it will not
-
-      evaluate and will allow traffic from all IPs.
-    optional: true
-    syntax:
-      content: 'allowTrafficFromAllIPs?: undefined | false | true'
-      return:
-        type:
-          - undefined | false | true
-        description: ''
     package: '@azure/arm-eventgrid'
   - uid: '@azure/arm-eventgrid.Topic.endpoint'
     name: endpoint
@@ -83,6 +66,22 @@ items:
           - undefined | string
         description: ''
     package: '@azure/arm-eventgrid'
+  - uid: '@azure/arm-eventgrid.Topic.identity'
+    name: identity
+    fullName: identity
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Identity information for the resource.
+    optional: true
+    syntax:
+      content: 'identity?: IdentityInfo'
+      return:
+        type:
+          - '@azure/arm-eventgrid.IdentityInfo'
+        description: ''
+    package: '@azure/arm-eventgrid'
   - uid: '@azure/arm-eventgrid.Topic.inboundIpRules'
     name: inboundIpRules
     fullName: inboundIpRules
@@ -91,10 +90,10 @@ items:
       - typeScript
     type: property
     summary: >-
-      This determines the IP filtering rules that ought to be applied when
-      events are received on
+      This can be used to restrict traffic from specific IPs instead of all IPs.
+      Note: These are
 
-      this topic.
+      considered only if PublicNetworkAccess is enabled.
     optional: true
     syntax:
       content: 'inboundIpRules?: InboundIpRule[]'
@@ -170,7 +169,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Metric resource id for the topic.
+    summary: >-
+      Metric resource id for the topic.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'metricResourceId?: undefined | string'
@@ -199,6 +202,22 @@ items:
           - undefined | string
         description: ''
     package: '@azure/arm-eventgrid'
+  - uid: '@azure/arm-eventgrid.Topic.privateEndpointConnections'
+    name: privateEndpointConnections
+    fullName: privateEndpointConnections
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: List of private endpoint connections.
+    optional: true
+    syntax:
+      content: 'privateEndpointConnections?: PrivateEndpointConnection[]'
+      return:
+        type:
+          - '@azure/arm-eventgrid.PrivateEndpointConnection[]'
+        description: ''
+    package: '@azure/arm-eventgrid'
   - uid: '@azure/arm-eventgrid.Topic.provisioningState'
     name: provisioningState
     fullName: provisioningState
@@ -220,6 +239,46 @@ items:
       return:
         type:
           - '@azure/arm-eventgrid.TopicProvisioningState'
+        description: ''
+    package: '@azure/arm-eventgrid'
+  - uid: '@azure/arm-eventgrid.Topic.publicNetworkAccess'
+    name: publicNetworkAccess
+    fullName: publicNetworkAccess
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      This determines if traffic is allowed over public network. By default it
+      is enabled.
+
+      You can further restrict to specific IPs by configuring <seealso
+
+      cref="P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.TopicProperties.InboundIpRules"
+
+      />. Possible values include: 'Enabled', 'Disabled'
+    optional: true
+    syntax:
+      content: 'publicNetworkAccess?: PublicNetworkAccess'
+      return:
+        type:
+          - '@azure/arm-eventgrid.PublicNetworkAccess'
+        description: ''
+    package: '@azure/arm-eventgrid'
+  - uid: '@azure/arm-eventgrid.Topic.sku'
+    name: sku
+    fullName: sku
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The Sku pricing tier for the topic.
+    optional: true
+    syntax:
+      content: 'sku?: ResourceSku'
+      return:
+        type:
+          - '@azure/arm-eventgrid.ResourceSku'
         description: ''
     package: '@azure/arm-eventgrid'
   - uid: '@azure/arm-eventgrid.Topic.tags'
@@ -265,6 +324,12 @@ references:
       - name: TrackedResource
         fullName: TrackedResource
         uid: '@azure/arm-eventgrid.TrackedResource'
+  - uid: '@azure/arm-eventgrid.IdentityInfo'
+    name: IdentityInfo
+    spec.typeScript:
+      - name: IdentityInfo
+        fullName: IdentityInfo
+        uid: '@azure/arm-eventgrid.IdentityInfo'
   - uid: '@azure/arm-eventgrid.InboundIpRule[]'
     name: 'InboundIpRule[]'
     spec.typeScript:
@@ -285,9 +350,29 @@ references:
       - name: InputSchemaMappingUnion
         fullName: InputSchemaMappingUnion
         uid: '@azure/arm-eventgrid.InputSchemaMappingUnion'
+  - uid: '@azure/arm-eventgrid.PrivateEndpointConnection[]'
+    name: 'PrivateEndpointConnection[]'
+    spec.typeScript:
+      - name: PrivateEndpointConnection
+        fullName: PrivateEndpointConnection
+        uid: '@azure/arm-eventgrid.PrivateEndpointConnection'
+      - name: '[]'
+        fullName: '[]'
   - uid: '@azure/arm-eventgrid.TopicProvisioningState'
     name: TopicProvisioningState
     spec.typeScript:
       - name: TopicProvisioningState
         fullName: TopicProvisioningState
         uid: '@azure/arm-eventgrid.TopicProvisioningState'
+  - uid: '@azure/arm-eventgrid.PublicNetworkAccess'
+    name: PublicNetworkAccess
+    spec.typeScript:
+      - name: PublicNetworkAccess
+        fullName: PublicNetworkAccess
+        uid: '@azure/arm-eventgrid.PublicNetworkAccess'
+  - uid: '@azure/arm-eventgrid.ResourceSku'
+    name: ResourceSku
+    spec.typeScript:
+      - name: ResourceSku
+        fullName: ResourceSku
+        uid: '@azure/arm-eventgrid.ResourceSku'

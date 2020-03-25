@@ -8,8 +8,7 @@ ms.author: heidist
 ms.date: 08/18/2019
 ms.topic: conceptual
 ms.devlang: nodejs
-services: search
-ms.service: search
+ms.service: cognitive-search
 
 ---
 

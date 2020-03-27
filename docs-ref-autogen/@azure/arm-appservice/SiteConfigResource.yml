@@ -6,12 +6,12 @@ items:
     children:
       - '@azure/arm-appservice.SiteConfigResource.alwaysOn'
       - '@azure/arm-appservice.SiteConfigResource.apiDefinition'
+      - '@azure/arm-appservice.SiteConfigResource.apiManagementConfig'
       - '@azure/arm-appservice.SiteConfigResource.appCommandLine'
       - '@azure/arm-appservice.SiteConfigResource.appSettings'
       - '@azure/arm-appservice.SiteConfigResource.autoHealEnabled'
       - '@azure/arm-appservice.SiteConfigResource.autoHealRules'
       - '@azure/arm-appservice.SiteConfigResource.autoSwapSlotName'
-      - '@azure/arm-appservice.SiteConfigResource.azureStorageAccounts'
       - '@azure/arm-appservice.SiteConfigResource.connectionStrings'
       - '@azure/arm-appservice.SiteConfigResource.cors'
       - '@azure/arm-appservice.SiteConfigResource.defaultDocuments'
@@ -20,6 +20,7 @@ items:
       - '@azure/arm-appservice.SiteConfigResource.experiments'
       - '@azure/arm-appservice.SiteConfigResource.ftpsState'
       - '@azure/arm-appservice.SiteConfigResource.handlerMappings'
+      - '@azure/arm-appservice.SiteConfigResource.healthCheckPath'
       - '@azure/arm-appservice.SiteConfigResource.http20Enabled'
       - '@azure/arm-appservice.SiteConfigResource.httpLoggingEnabled'
       - '@azure/arm-appservice.SiteConfigResource.id'
@@ -42,6 +43,7 @@ items:
       - '@azure/arm-appservice.SiteConfigResource.nodeVersion'
       - '@azure/arm-appservice.SiteConfigResource.numberOfWorkers'
       - '@azure/arm-appservice.SiteConfigResource.phpVersion'
+      - '@azure/arm-appservice.SiteConfigResource.preWarmedInstanceCount'
       - '@azure/arm-appservice.SiteConfigResource.publishingUsername'
       - '@azure/arm-appservice.SiteConfigResource.push'
       - '@azure/arm-appservice.SiteConfigResource.pythonVersion'
@@ -49,7 +51,6 @@ items:
       - '@azure/arm-appservice.SiteConfigResource.remoteDebuggingVersion'
       - '@azure/arm-appservice.SiteConfigResource.requestTracingEnabled'
       - '@azure/arm-appservice.SiteConfigResource.requestTracingExpirationTime'
-      - '@azure/arm-appservice.SiteConfigResource.reservedInstanceCount'
       - '@azure/arm-appservice.SiteConfigResource.scmIpSecurityRestrictions'
       - >-
         @azure/arm-appservice.SiteConfigResource.scmIpSecurityRestrictionsUseMain
@@ -99,6 +100,22 @@ items:
       return:
         type:
           - '@azure/arm-appservice.ApiDefinitionInfo'
+        description: ''
+    package: '@azure/arm-appservice'
+  - uid: '@azure/arm-appservice.SiteConfigResource.apiManagementConfig'
+    name: apiManagementConfig
+    fullName: apiManagementConfig
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Azure API management settings linked to the app.
+    optional: true
+    syntax:
+      content: 'apiManagementConfig?: ApiManagementConfig'
+      return:
+        type:
+          - '@azure/arm-appservice.ApiManagementConfig'
         description: ''
     package: '@azure/arm-appservice'
   - uid: '@azure/arm-appservice.SiteConfigResource.appCommandLine'
@@ -179,24 +196,6 @@ items:
       return:
         type:
           - undefined | string
-        description: ''
-    package: '@azure/arm-appservice'
-  - uid: '@azure/arm-appservice.SiteConfigResource.azureStorageAccounts'
-    name: azureStorageAccounts
-    fullName: azureStorageAccounts
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: User-provided Azure storage accounts.
-    optional: true
-    syntax:
-      content: 'azureStorageAccounts?: undefined | [key: string]: AzureStorageInfoValue'
-      return:
-        type:
-          - >-
-            undefined | [key: string]:
-            @azure/arm-appservice.AzureStorageInfoValue
         description: ''
     package: '@azure/arm-appservice'
   - uid: '@azure/arm-appservice.SiteConfigResource.connectionStrings'
@@ -329,6 +328,22 @@ items:
       return:
         type:
           - '@azure/arm-appservice.HandlerMapping[]'
+        description: ''
+    package: '@azure/arm-appservice'
+  - uid: '@azure/arm-appservice.SiteConfigResource.healthCheckPath'
+    name: healthCheckPath
+    fullName: healthCheckPath
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Health check path
+    optional: true
+    syntax:
+      content: 'healthCheckPath?: undefined | string'
+      return:
+        type:
+          - undefined | string
         description: ''
     package: '@azure/arm-appservice'
   - uid: '@azure/arm-appservice.SiteConfigResource.http20Enabled'
@@ -711,6 +726,24 @@ items:
           - undefined | string
         description: ''
     package: '@azure/arm-appservice'
+  - uid: '@azure/arm-appservice.SiteConfigResource.preWarmedInstanceCount'
+    name: preWarmedInstanceCount
+    fullName: preWarmedInstanceCount
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: |-
+      Number of preWarmed instances.
+      This setting only applies to the Consumption and Elastic Plans
+    optional: true
+    syntax:
+      content: 'preWarmedInstanceCount?: undefined | number'
+      return:
+        type:
+          - undefined | number
+        description: ''
+    package: '@azure/arm-appservice'
   - uid: '@azure/arm-appservice.SiteConfigResource.publishingUsername'
     name: publishingUsername
     fullName: publishingUsername
@@ -827,24 +860,6 @@ items:
           - Date
         description: ''
     package: '@azure/arm-appservice'
-  - uid: '@azure/arm-appservice.SiteConfigResource.reservedInstanceCount'
-    name: reservedInstanceCount
-    fullName: reservedInstanceCount
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: |-
-      Number of reserved instances.
-      This setting only applies to the Consumption Plan
-    optional: true
-    syntax:
-      content: 'reservedInstanceCount?: undefined | number'
-      return:
-        type:
-          - undefined | number
-        description: ''
-    package: '@azure/arm-appservice'
   - uid: '@azure/arm-appservice.SiteConfigResource.scmIpSecurityRestrictions'
     name: scmIpSecurityRestrictions
     fullName: scmIpSecurityRestrictions
@@ -891,7 +906,7 @@ items:
       'CodePlexGit', 'CodePlexHg', 'BitbucketGit', 'BitbucketHg', 'ExternalGit',
       'ExternalHg',
 
-      'OneDrive', 'VSO'
+      'OneDrive', 'VSO', 'VSTSRM'
     optional: true
     syntax:
       content: 'scmType?: ScmType'
@@ -1047,6 +1062,12 @@ references:
       - name: ApiDefinitionInfo
         fullName: ApiDefinitionInfo
         uid: '@azure/arm-appservice.ApiDefinitionInfo'
+  - uid: '@azure/arm-appservice.ApiManagementConfig'
+    name: ApiManagementConfig
+    spec.typeScript:
+      - name: ApiManagementConfig
+        fullName: ApiManagementConfig
+        uid: '@azure/arm-appservice.ApiManagementConfig'
   - uid: '@azure/arm-appservice.NameValuePair[]'
     name: 'NameValuePair[]'
     spec.typeScript:
@@ -1061,14 +1082,6 @@ references:
       - name: AutoHealRules
         fullName: AutoHealRules
         uid: '@azure/arm-appservice.AutoHealRules'
-  - uid: 'undefined | [key: string]: @azure/arm-appservice.AzureStorageInfoValue'
-    name: AzureStorageInfoValue
-    spec.typeScript:
-      - name: 'undefined | [key: string]: '
-        fullName: 'undefined | [key: string]: '
-      - name: AzureStorageInfoValue
-        fullName: AzureStorageInfoValue
-        uid: '@azure/arm-appservice.AzureStorageInfoValue'
   - uid: '@azure/arm-appservice.ConnStringInfo[]'
     name: 'ConnStringInfo[]'
     spec.typeScript:

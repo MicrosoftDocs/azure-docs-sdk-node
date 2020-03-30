@@ -25,6 +25,8 @@ items:
       - azure-iothub.Registry.DeviceRegistryOperationError
       - azure-iothub.Registry.exportDevicesToBlob_1
       - azure-iothub.Registry.exportDevicesToBlob
+      - azure-iothub.Registry.exportDevicesToBlobByIdentity_1
+      - azure-iothub.Registry.exportDevicesToBlobByIdentity
       - azure-iothub.Registry.fromConnectionString
       - azure-iothub.Registry.fromSharedAccessSignature
       - azure-iothub.Registry.get_1
@@ -47,6 +49,8 @@ items:
       - azure-iothub.Registry.getTwin
       - azure-iothub.Registry.importDevicesFromBlob_1
       - azure-iothub.Registry.importDevicesFromBlob
+      - azure-iothub.Registry.importDevicesFromBlobByIdentity_1
+      - azure-iothub.Registry.importDevicesFromBlobByIdentity
       - azure-iothub.Registry.JobCallback
       - azure-iothub.Registry.JobStatus
       - azure-iothub.Registry.list_1
@@ -457,6 +461,64 @@ items:
     syntax:
       content: >-
         function exportDevicesToBlob(outputBlobContainerUri: string,
+        excludeKeys: boolean, done: Callback<JobStatus>)
+      parameters:
+        - id: outputBlobContainerUri
+          type:
+            - string
+          description: >-
+            The URI to a container where a blob will be created with logs of the
+            export process.
+        - id: excludeKeys
+          type:
+            - boolean
+          description: >-
+            Boolean indicating whether security keys should be excluded from the
+            exported data.
+        - id: done
+          type:
+            - Callback<azure-iothub.Registry.JobStatus>
+          description: ''
+    package: azure-iothub
+  - uid: azure-iothub.Registry.exportDevicesToBlobByIdentity_1
+    name: 'exportDevicesToBlobByIdentity(string, boolean)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function exportDevicesToBlobByIdentity(outputBlobContainerUri: string,
+        excludeKeys: boolean)
+      parameters:
+        - id: outputBlobContainerUri
+          type:
+            - string
+          description: ''
+        - id: excludeKeys
+          type:
+            - boolean
+          description: ''
+      return:
+        type:
+          - Promise<azure-iothub.Registry.JobStatus>
+        description: ''
+    package: azure-iothub
+  - uid: azure-iothub.Registry.exportDevicesToBlobByIdentity
+    name: 'exportDevicesToBlobByIdentity(string, boolean, Callback<JobStatus>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Export devices to a blob in a bulk job using the configured identity. 
+      This API initially has limited availablity and is only is implemented in a
+      few regions.
+                           If a user wishes to try it out, they will need to set an Environment Variable of "EnabledStorageIdentity" and set it to "1"
+    syntax:
+      content: >-
+        function exportDevicesToBlobByIdentity(outputBlobContainerUri: string,
         excludeKeys: boolean, done: Callback<JobStatus>)
       parameters:
         - id: outputBlobContainerUri
@@ -912,6 +974,64 @@ items:
     syntax:
       content: >-
         function importDevicesFromBlob(inputBlobContainerUri: string,
+        outputBlobContainerUri: string, done: Callback<JobStatus>)
+      parameters:
+        - id: inputBlobContainerUri
+          type:
+            - string
+          description: >-
+            The URI to a container with a blob named 'devices.txt' containing a
+            list of devices to import.
+        - id: outputBlobContainerUri
+          type:
+            - string
+          description: >-
+            The URI to a container where a blob will be created with logs of the
+            import process.
+        - id: done
+          type:
+            - Callback<azure-iothub.Registry.JobStatus>
+          description: ''
+    package: azure-iothub
+  - uid: azure-iothub.Registry.importDevicesFromBlobByIdentity_1
+    name: 'importDevicesFromBlobByIdentity(string, string)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function importDevicesFromBlobByIdentity(inputBlobContainerUri: string,
+        outputBlobContainerUri: string)
+      parameters:
+        - id: inputBlobContainerUri
+          type:
+            - string
+          description: ''
+        - id: outputBlobContainerUri
+          type:
+            - string
+          description: ''
+      return:
+        type:
+          - Promise<azure-iothub.Registry.JobStatus>
+        description: ''
+    package: azure-iothub
+  - uid: azure-iothub.Registry.importDevicesFromBlobByIdentity
+    name: 'importDevicesFromBlobByIdentity(string, string, Callback<JobStatus>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Imports devices from a blob in bulk job using the configured identity. 
+      This API initially has limited availablity and is only is implemented in a
+      few regions.
+                           If a user wishes to try it out, they will need to set an Environment Variable of "EnabledStorageIdentity" and set it to "1"
+    syntax:
+      content: >-
+        function importDevicesFromBlobByIdentity(inputBlobContainerUri: string,
         outputBlobContainerUri: string, done: Callback<JobStatus>)
       parameters:
         - id: inputBlobContainerUri

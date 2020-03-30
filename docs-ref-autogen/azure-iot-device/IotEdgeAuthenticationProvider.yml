@@ -23,6 +23,7 @@ items:
       - azure-iot-device.IotEdgeAuthenticationProvider.removeAllListeners
       - azure-iot-device.IotEdgeAuthenticationProvider.removeListener
       - azure-iot-device.IotEdgeAuthenticationProvider.setMaxListeners
+      - azure-iot-device.IotEdgeAuthenticationProvider.setTokenRenewalValues
       - azure-iot-device.IotEdgeAuthenticationProvider.stop
       - azure-iot-device.IotEdgeAuthenticationProvider.type
     langs:
@@ -441,6 +442,47 @@ items:
         type:
           - this
         description: ''
+    package: azure-iot-device
+  - uid: azure-iot-device.IotEdgeAuthenticationProvider.setTokenRenewalValues
+    name: 'setTokenRenewalValues(number, number)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      This method allows the caller to set new values for the authentication
+      renewal.
+
+      This function completes synchronously, BUT, will cause actions to occur
+      asynchronously.
+
+      If the provider is already doing token renewals, for instance - if a
+      network connection has
+
+      been make, invoking this function will cause a new renewal to take place
+      on the almost immediately.
+
+      Depending on the protocol, this could cause a disconnect and reconnect to
+      occur.  However, if renewals
+
+      are NOT currently occurring, we simply save off the new values for use
+      later.
+    syntax:
+      content: >-
+        function setTokenRenewalValues(tokenValidTimeInSeconds: number,
+        tokenRenewalMarginInSeconds: number)
+      parameters:
+        - id: tokenValidTimeInSeconds
+          type:
+            - number
+          description: The number of seconds for which a token is supposed to be valid.
+        - id: tokenRenewalMarginInSeconds
+          type:
+            - number
+          description: >
+            The number of seconds before the end of the validity period during
+            which the `SharedAccessKeyAuthenticationProvider` should renew the
+            token.
     package: azure-iot-device
   - uid: azure-iot-device.IotEdgeAuthenticationProvider.stop
     name: stop()

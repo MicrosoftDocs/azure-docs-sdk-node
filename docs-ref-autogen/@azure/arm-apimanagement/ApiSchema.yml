@@ -5,9 +5,8 @@ items:
     fullName: ApiSchema
     children:
       - '@azure/arm-apimanagement.ApiSchema.constructor'
-      - '@azure/arm-apimanagement.ApiSchema.createOrUpdate_2'
+      - '@azure/arm-apimanagement.ApiSchema.beginCreateOrUpdate'
       - '@azure/arm-apimanagement.ApiSchema.createOrUpdate'
-      - '@azure/arm-apimanagement.ApiSchema.createOrUpdate_1'
       - '@azure/arm-apimanagement.ApiSchema.deleteMethod_2'
       - '@azure/arm-apimanagement.ApiSchema.deleteMethod'
       - '@azure/arm-apimanagement.ApiSchema.deleteMethod_1'
@@ -44,23 +43,20 @@ items:
           description: |
             Reference to the service client.
     package: '@azure/arm-apimanagement'
-  - uid: '@azure/arm-apimanagement.ApiSchema.createOrUpdate_2'
+  - uid: '@azure/arm-apimanagement.ApiSchema.beginCreateOrUpdate'
     name: >-
-      createOrUpdate(string, string, string, string,
-      SchemaCreateOrUpdateContract, ApiSchemaCreateOrUpdateOptionalParams,
-      ServiceCallback<SchemaContract>)
+      beginCreateOrUpdate(string, string, string, string, SchemaContract,
+      Models.ApiSchemaBeginCreateOrUpdateOptionalParams)
     children: []
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: Creates or updates schema configuration for the API.
     syntax:
       content: >-
-        function createOrUpdate(resourceGroupName: string, serviceName: string,
-        apiId: string, schemaId: string, parameters:
-        SchemaCreateOrUpdateContract, options:
-        ApiSchemaCreateOrUpdateOptionalParams, callback:
-        ServiceCallback<SchemaContract>)
+        function beginCreateOrUpdate(resourceGroupName: string, serviceName:
+        string, apiId: string, schemaId: string, parameters: SchemaContract,
+        options?: Models.ApiSchemaBeginCreateOrUpdateOptionalParams)
       parameters:
         - id: resourceGroupName
           type:
@@ -89,22 +85,21 @@ items:
             service instance.
         - id: parameters
           type:
-            - '@azure/arm-apimanagement.SchemaCreateOrUpdateContract'
+            - '@azure/arm-apimanagement.SchemaContract'
           description: The schema contents to apply.
         - id: options
           type:
-            - '@azure/arm-apimanagement.ApiSchemaCreateOrUpdateOptionalParams'
-          description: The optional parameters
-        - id: callback
-          type:
-            - ServiceCallback<@azure/arm-apimanagement.SchemaContract>
-          description: |
-            The callback
+            - Models.ApiSchemaBeginCreateOrUpdateOptionalParams
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<LROPoller>
+        description: Promise<msRestAzure.LROPoller>
     package: '@azure/arm-apimanagement'
   - uid: '@azure/arm-apimanagement.ApiSchema.createOrUpdate'
     name: >-
-      createOrUpdate(string, string, string, string,
-      SchemaCreateOrUpdateContract,
+      createOrUpdate(string, string, string, string, SchemaContract,
       Models.ApiSchemaCreateOrUpdateOptionalParams)
     children: []
     type: method
@@ -114,8 +109,7 @@ items:
     syntax:
       content: >-
         function createOrUpdate(resourceGroupName: string, serviceName: string,
-        apiId: string, schemaId: string, parameters:
-        SchemaCreateOrUpdateContract, options?:
+        apiId: string, schemaId: string, parameters: SchemaContract, options?:
         Models.ApiSchemaCreateOrUpdateOptionalParams)
       parameters:
         - id: resourceGroupName
@@ -145,7 +139,7 @@ items:
             service instance.
         - id: parameters
           type:
-            - '@azure/arm-apimanagement.SchemaCreateOrUpdateContract'
+            - '@azure/arm-apimanagement.SchemaContract'
           description: The schema contents to apply.
         - id: options
           type:
@@ -156,56 +150,6 @@ items:
         type:
           - Promise<Models.ApiSchemaCreateOrUpdateResponse>
         description: Promise<Models.ApiSchemaCreateOrUpdateResponse>
-    package: '@azure/arm-apimanagement'
-  - uid: '@azure/arm-apimanagement.ApiSchema.createOrUpdate_1'
-    name: >-
-      createOrUpdate(string, string, string, string,
-      SchemaCreateOrUpdateContract, ServiceCallback<SchemaContract>)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        function createOrUpdate(resourceGroupName: string, serviceName: string,
-        apiId: string, schemaId: string, parameters:
-        SchemaCreateOrUpdateContract, callback: ServiceCallback<SchemaContract>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group.
-        - id: serviceName
-          type:
-            - string
-          description: The name of the API Management service.
-        - id: apiId
-          type:
-            - string
-          description: >-
-            API revision identifier. Must be unique in the current API
-            Management service
-
-            instance. Non-current revision has ;rev=n as a suffix where n is the
-            revision number.
-        - id: schemaId
-          type:
-            - string
-          description: >-
-            Schema identifier within an API. Must be unique in the current API
-            Management
-
-            service instance.
-        - id: parameters
-          type:
-            - '@azure/arm-apimanagement.SchemaCreateOrUpdateContract'
-          description: The schema contents to apply.
-        - id: callback
-          type:
-            - ServiceCallback<@azure/arm-apimanagement.SchemaContract>
-          description: |
-            The callback
     package: '@azure/arm-apimanagement'
   - uid: '@azure/arm-apimanagement.ApiSchema.deleteMethod_2'
     name: >-
@@ -861,12 +805,18 @@ references:
       - name: ApiManagementClientContext
         fullName: ApiManagementClientContext
         uid: '@azure/arm-apimanagement.ApiManagementClientContext'
-  - uid: '@azure/arm-apimanagement.SchemaCreateOrUpdateContract'
-    name: SchemaCreateOrUpdateContract
+  - uid: '@azure/arm-apimanagement.SchemaContract'
+    name: SchemaContract
     spec.typeScript:
-      - name: SchemaCreateOrUpdateContract
-        fullName: SchemaCreateOrUpdateContract
-        uid: '@azure/arm-apimanagement.SchemaCreateOrUpdateContract'
+      - name: SchemaContract
+        fullName: SchemaContract
+        uid: '@azure/arm-apimanagement.SchemaContract'
+  - uid: '@azure/arm-apimanagement.ApiSchemaDeleteMethodOptionalParams'
+    name: ApiSchemaDeleteMethodOptionalParams
+    spec.typeScript:
+      - name: ApiSchemaDeleteMethodOptionalParams
+        fullName: ApiSchemaDeleteMethodOptionalParams
+        uid: '@azure/arm-apimanagement.ApiSchemaDeleteMethodOptionalParams'
   - uid: ServiceCallback<@azure/arm-apimanagement.SchemaContract>
     name: SchemaContract>
     spec.typeScript:
@@ -877,18 +827,6 @@ references:
         uid: '@azure/arm-apimanagement.SchemaContract'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/arm-apimanagement.ApiSchemaCreateOrUpdateOptionalParams'
-    name: ApiSchemaCreateOrUpdateOptionalParams
-    spec.typeScript:
-      - name: ApiSchemaCreateOrUpdateOptionalParams
-        fullName: ApiSchemaCreateOrUpdateOptionalParams
-        uid: '@azure/arm-apimanagement.ApiSchemaCreateOrUpdateOptionalParams'
-  - uid: '@azure/arm-apimanagement.ApiSchemaDeleteMethodOptionalParams'
-    name: ApiSchemaDeleteMethodOptionalParams
-    spec.typeScript:
-      - name: ApiSchemaDeleteMethodOptionalParams
-        fullName: ApiSchemaDeleteMethodOptionalParams
-        uid: '@azure/arm-apimanagement.ApiSchemaDeleteMethodOptionalParams'
   - uid: ServiceCallback<@azure/arm-apimanagement.SchemaCollection>
     name: SchemaCollection>
     spec.typeScript:

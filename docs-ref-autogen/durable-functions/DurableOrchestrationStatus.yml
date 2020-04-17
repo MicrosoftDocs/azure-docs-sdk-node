@@ -6,7 +6,6 @@ items:
     children:
       - durable-functions.DurableOrchestrationStatus.createdTime
       - durable-functions.DurableOrchestrationStatus.customStatus
-      - durable-functions.DurableOrchestrationStatus.constructor
       - durable-functions.DurableOrchestrationStatus.history
       - durable-functions.DurableOrchestrationStatus.input
       - durable-functions.DurableOrchestrationStatus.instanceId
@@ -17,7 +16,9 @@ items:
     langs:
       - typeScript
     type: class
-    summary: ''
+    summary: |
+      Represents the status of a durable orchestration instance.
+      Can be fetched using [[DurableOrchestrationClient]].[[getStatus]].
     package: durable-functions
   - uid: durable-functions.DurableOrchestrationStatus.createdTime
     name: createdTime
@@ -26,7 +27,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |
+      The time at which the orchestration instance was created.
+      If the orchestration instance is in the [[Pending]] status, this
+      time represents the time at which the orchestration instance was
+      scheduled.
     syntax:
       content: 'createdTime: Date'
       return:
@@ -41,7 +46,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |-
+      The custom status payload (if any) that was set by
+      [[DurableOrchestrationClient]].[[setCustomStatus]].
     optional: true
     syntax:
       content: 'customStatus?: unknown'
@@ -50,61 +57,6 @@ items:
           - unknown
         description: ''
     package: durable-functions
-  - uid: durable-functions.DurableOrchestrationStatus.constructor
-    name: >-
-      DurableOrchestrationStatus(string, string, Date, Date, unknown, unknown,
-      OrchestrationRuntimeStatus, unknown, unknown[] | undefined)
-    children: []
-    type: constructor
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        new DurableOrchestrationStatus(name: string, instanceId: string,
-        createdTime: Date, lastUpdatedTime: Date, input: unknown, output:
-        unknown, runtimeStatus: OrchestrationRuntimeStatus, customStatus?:
-        unknown, history?: unknown[] | undefined)
-      parameters:
-        - id: name
-          type:
-            - string
-          description: ''
-        - id: instanceId
-          type:
-            - string
-          description: ''
-        - id: createdTime
-          type:
-            - Date
-          description: ''
-        - id: lastUpdatedTime
-          type:
-            - Date
-          description: ''
-        - id: input
-          type:
-            - unknown
-          description: ''
-        - id: output
-          type:
-            - unknown
-          description: ''
-        - id: runtimeStatus
-          type:
-            - durable-functions.OrchestrationRuntimeStatus
-          description: ''
-        - id: customStatus
-          type:
-            - unknown
-          description: ''
-          optional: true
-        - id: history
-          type:
-            - 'unknown[] | undefined'
-          description: ''
-          optional: true
-    package: durable-functions
   - uid: durable-functions.DurableOrchestrationStatus.history
     name: history
     fullName: history
@@ -112,7 +64,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |
+      The execution history of the orchestration instance.
+      The history log can be large and is therefore `undefined` by
+      default. It is populated only when explicitly requested in the call
+      to [[DurableOrchestrationClient]].[[getStatus]].
     optional: true
     syntax:
       content: 'history?: unknown[] | undefined'
@@ -128,7 +84,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The input of the orchestration instance.
     syntax:
       content: 'input: unknown'
       return:
@@ -143,7 +99,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |
+      The unique ID of the instance.
+      The instance ID is generated and fixed when the orchestrator
+      function is scheduled. It can either auto-generated, in which case
+      it is formatted as a GUID, or it can be user-specified with any
+      format.
     syntax:
       content: 'instanceId: string'
       return:
@@ -158,7 +119,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |-
+      The time at which the orchestration instance last updated its
+      execution history.
     syntax:
       content: 'lastUpdatedTime: Date'
       return:
@@ -173,7 +136,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The orchestrator function name.
     syntax:
       content: 'name: string'
       return:
@@ -188,7 +151,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The output of the orchestration instance.
     syntax:
       content: 'output: unknown'
       return:
@@ -203,7 +166,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The runtime status of the orchestration instance.
     syntax:
       content: 'runtimeStatus: OrchestrationRuntimeStatus'
       return:

@@ -4,51 +4,24 @@ items:
     name: Task
     fullName: Task
     children:
-      - durable-functions.Task.action
-      - durable-functions.Task.completionIndex
       - durable-functions.Task.exception
-      - durable-functions.Task.id
       - durable-functions.Task.isCompleted
       - durable-functions.Task.isFaulted
       - durable-functions.Task.result
-      - durable-functions.Task.constructor
-      - durable-functions.Task.timestamp
-      - durable-functions.Task.yieldNewActions
     langs:
       - typeScript
     type: class
-    summary: ''
-    package: durable-functions
-  - uid: durable-functions.Task.action
-    name: action
-    fullName: action
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    syntax:
-      content: 'action: IAction'
-      return:
-        type:
-          - durable-functions.IAction
-        description: ''
-    package: durable-functions
-  - uid: durable-functions.Task.completionIndex
-    name: completionIndex
-    fullName: completionIndex
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'completionIndex?: number | undefined'
-      return:
-        type:
-          - number | undefined
-        description: ''
+    summary: |
+      Represents some pending action. Similar to a native JavaScript promise in
+      that it acts as a placeholder for outstanding asynchronous work, but has
+      a synchronous implementation and is specific to Durable Functions.
+      Tasks are only returned to an orchestration function when a
+      [[DurableOrchestrationContext]] operation is not called with `yield`. They
+      are useful for parallelization and timeout operations in conjunction with
+      Task.all and Task.any.
+
+      We discourage the usage of `instanceof`-style guards on this type,
+      as it is subject to change in the future.
     package: durable-functions
   - uid: durable-functions.Task.exception
     name: exception
@@ -57,29 +30,16 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |-
+      The error thrown when attempting to perform the task's action. If
+      the Task has not yet completed or has completed successfully,
+      `undefined`.
     optional: true
     syntax:
       content: 'exception?: Error | undefined'
       return:
         type:
           - Error | undefined
-        description: ''
-    package: durable-functions
-  - uid: durable-functions.Task.id
-    name: id
-    fullName: id
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'id?: number | undefined'
-      return:
-        type:
-          - number | undefined
         description: ''
     package: durable-functions
   - uid: durable-functions.Task.isCompleted
@@ -89,7 +49,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |-
+      Whether the task has completed. Note that completion is not
+      equivalent to success.
     syntax:
       content: 'isCompleted: boolean'
       return:
@@ -104,7 +66,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Whether the task faulted in some way due to error.
     syntax:
       content: 'isFaulted: boolean'
       return:
@@ -119,7 +81,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'The result of the task, if completed. Otherwise `undefined`.'
     optional: true
     syntax:
       content: 'result?: unknown'
@@ -128,102 +90,3 @@ items:
           - unknown
         description: ''
     package: durable-functions
-  - uid: durable-functions.Task.constructor
-    name: >-
-      Task(boolean, boolean, IAction, unknown, Date | undefined, number |
-      undefined, Error | undefined, number | undefined)
-    children: []
-    type: constructor
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        new Task(isCompleted: boolean, isFaulted: boolean, action: IAction,
-        result?: unknown, timestamp?: Date | undefined, id?: number | undefined,
-        exception?: Error | undefined, completionIndex?: number | undefined)
-      parameters:
-        - id: isCompleted
-          type:
-            - boolean
-          description: ''
-        - id: isFaulted
-          type:
-            - boolean
-          description: ''
-        - id: action
-          type:
-            - durable-functions.IAction
-          description: ''
-        - id: result
-          type:
-            - unknown
-          description: ''
-          optional: true
-        - id: timestamp
-          type:
-            - Date | undefined
-          description: ''
-          optional: true
-        - id: id
-          type:
-            - number | undefined
-          description: ''
-          optional: true
-        - id: exception
-          type:
-            - Error | undefined
-          description: ''
-          optional: true
-        - id: completionIndex
-          type:
-            - number | undefined
-          description: ''
-          optional: true
-    package: durable-functions
-  - uid: durable-functions.Task.timestamp
-    name: timestamp
-    fullName: timestamp
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'timestamp?: Date | undefined'
-      return:
-        type:
-          - Date | undefined
-        description: ''
-    package: durable-functions
-  - uid: durable-functions.Task.yieldNewActions
-    name: yieldNewActions()
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: function yieldNewActions()
-      parameters: []
-      return:
-        type:
-          - 'durable-functions.IAction[]'
-        description: ''
-    package: durable-functions
-references:
-  - uid: durable-functions.IAction
-    name: IAction
-    spec.typeScript:
-      - name: IAction
-        fullName: IAction
-        uid: durable-functions.IAction
-  - uid: 'durable-functions.IAction[]'
-    name: 'IAction[]'
-    spec.typeScript:
-      - name: IAction
-        fullName: IAction
-        uid: durable-functions.IAction
-      - name: '[]'
-        fullName: '[]'

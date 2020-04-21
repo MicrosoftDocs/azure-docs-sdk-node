@@ -18,7 +18,9 @@ items:
     langs:
       - typeScript
     type: class
-    summary: ''
+    summary: |-
+      Provides functionality for application code implementing an entity
+      operation.
     package: durable-functions
   - uid: durable-functions.DurableEntityContext.destructOnExit
     name: destructOnExit()
@@ -26,7 +28,7 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: Deletes this entity after this operation completes.
     syntax:
       content: function destructOnExit()
       parameters: []
@@ -38,7 +40,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Gets the id of the currently executing entity.
     syntax:
       content: 'entityId: EntityId'
       return:
@@ -53,7 +55,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Gets the key of the currently executing entity.
     syntax:
       content: 'entityKey: string'
       return:
@@ -68,7 +70,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Gets the name of the currently executing entity.
     syntax:
       content: 'entityName: string'
       return:
@@ -82,14 +84,17 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: |
+      Gets the input for this operation.
+      An operation invocation on an entity includes an operation name, which
+      states what operation to perform, and optionally an operation input.
     syntax:
       content: function getInput()
       parameters: []
       return:
         type:
           - unknown | undefined
-        description: ''
+        description: 'The operation input, or undefined if none.'
     package: durable-functions
   - uid: durable-functions.DurableEntityContext.getState
     name: getState(() => unknown)
@@ -97,19 +102,23 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: 'Gets the current state of this entity, for reading and/or writing.'
     syntax:
       content: 'function getState(initializer?: () => unknown)'
       parameters:
         - id: initializer
           type:
             - () => unknown
-          description: ''
+          description: |-
+            Provides an initial value to use for the state,
+            instead of TState's default.
           optional: true
       return:
         type:
           - unknown | undefined
-        description: ''
+        description: >-
+          The current state of this entity, or undefined if none has been set
+          yet.
     package: durable-functions
   - uid: durable-functions.DurableEntityContext.isNewlyConstructed
     name: isNewlyConstructed
@@ -118,7 +127,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |-
+      Whether this entity is freshly constructed, i.e. did not exist prior to
+      this operation being called.
     syntax:
       content: 'isNewlyConstructed: boolean'
       return:
@@ -133,7 +144,10 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |
+      Gets the name of the operation that was called.
+      An operation invocation on an entity includes an operation name, which
+      states what operation to perform, and optionally an operation input.
     syntax:
       content: 'operationName: string | undefined'
       return:
@@ -147,14 +161,15 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: Returns the given result to the caller of this operation.
     syntax:
       content: 'function return(result: unknown)'
       parameters:
         - id: result
           type:
             - unknown
-          description: ''
+          description: |
+            The result to return.
     package: durable-functions
   - uid: durable-functions.DurableEntityContext.setState
     name: setState(unknown)
@@ -162,14 +177,15 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: Sets the current state of this entity.
     syntax:
       content: 'function setState(state: unknown)'
       parameters:
         - id: state
           type:
             - unknown
-          description: ''
+          description: |
+            The state of the entity.
     package: durable-functions
   - uid: durable-functions.DurableEntityContext.signalEntity
     name: 'signalEntity(EntityId, string, unknown)'
@@ -177,7 +193,9 @@ items:
     type: method
     langs:
       - typeScript
-    summary: ''
+    summary: |-
+      Signals an entity to perform an operation, without waiting for a
+      response. Any result or exception is ignored (fire and forget).
     syntax:
       content: >-
         function signalEntity(entity: EntityId, operationName: string,
@@ -186,15 +204,16 @@ items:
         - id: entity
           type:
             - durable-functions.EntityId
-          description: ''
+          description: The target entity.
         - id: operationName
           type:
             - string
-          description: ''
+          description: The name of the operation.
         - id: operationInput
           type:
             - unknown
-          description: ''
+          description: |
+            The operation input.
           optional: true
     package: durable-functions
 references:

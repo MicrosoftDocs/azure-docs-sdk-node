@@ -1,18 +1,17 @@
 ---
-title: Azure Blob Storage for JavaScript Readme
-description: Reference for Azure Storage modules for JavaScript
+title: Azure Storage Blob client library for JavaScript
+keywords: Azure, JavaScript, SDK, API, storage, storage-blob
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 03/12/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: javascript
+ms.devlang: JavaScript
 ms.service: storage
 ---
+ # Azure Storage Blob client library for JavaScript - Version 12.1.1 
 
-# Azure Blob Storage for JavaScript Readme - Version 12.1.1
 
 Azure Storage Blob is Microsoft's object storage solution for the cloud. Blob storage is optimized for storing massive amounts of unstructured data. Unstructured data is data that does not adhere to a particular data model or definition, such as text or binary data.
 
@@ -38,7 +37,8 @@ Use the client libararies in this package to:
 
 ### Install the package
 
-The preferred way to install the Azure Storage Blob client library for JavaScript is to use the npm package manager. Type the following into a terminal window:
+The preferred way to install the Azure Storage Blob client library for JavaScript - Version 12.1.1 
+ is to use the npm package manager. Type the following into a terminal window:
 
 ```bash
 npm install @azure/storage-blob
@@ -47,14 +47,13 @@ npm install @azure/storage-blob
 ### Authenticate the client
 
 Azure Storage supports several ways to authenticate. In order to interact with the Azure Blob Storage service you'll need to create an instance of a Storage client - `BlobServiceClient`, `ContainerClient`, or `BlobClient` for example. See [samples for creating the `BlobServiceClient`](#create-the-blob-service-client) to learn more about authentication.
-
 - [Azure Active Directory](#with-defaultazurecredential-from-azureidentity-package)
 - [Shared Key](#with-storagesharedkeycredential)
 - [Shared access signatures](#with-sas-token)
 
 #### Azure Active Directory
 
-The Azure Blob Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/identity/identity/README.md) for more details and samples to get you started.
+The Azure Blob Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](/sdk/identity/identity/README.md) for more details and samples to get you started.
 
 ### Compatibility
 
@@ -81,6 +80,8 @@ This library depends on following ES features which need external polyfills load
 #### Differences between Node.js and browsers
 
 There are differences between Node.js and browsers runtime. When getting started with this library, pay attention to APIs or classes marked with _"ONLY AVAILABLE IN NODE.JS RUNTIME"_ or _"ONLY AVAILABLE IN BROWSERS"_.
+
+- If a blob holds compressed data in `gzip` or `deflate` format and its content encoding is set accordingly, downloading behavior is different between Node.js and browsers. In Node.js storage clients will download the blob in its compressed format, while in browsers the data will be downloaded in de-compressed format.
 
 ##### Features, interfaces, classes or functions only available in Node.js
 
@@ -338,7 +339,7 @@ async function main() {
 main();
 ```
 
-For a complete sample on iterating containers please see [samples/typescript/src/iterators-containers.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-blob/samples/typescript/src/iterators-containers.ts).
+For a complete sample on iterating containers please see [samples/iterators-containers.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-blob/samples/typescript/iterators-containers.ts).
 
 ### Create a blob by uploading data to
 
@@ -400,7 +401,7 @@ async function main() {
 main();
 ```
 
-For a complete sample on iterating blobs please see [samples/typescript/src/iterators-blobs.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-blob/samples/typescript/src/iterators-blobs.ts).
+For a complete sample on iterating blobs please see [samples/iterators-blobs.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-blob/samples/typescript/iterators-blobs.ts).
 
 ### Download a blob and convert it to a string (Node.js)
 
@@ -492,7 +493,7 @@ async function main() {
 main();
 ```
 
-A complete example of basic scenarios is at [samples/typescript/src/basic.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-blob/samples/typescript/src/basic.ts).
+A complete example of basic scenarios is at [samples/basic.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-blob/samples/typescript/basic.ts).
 
 ## Troubleshooting
 
@@ -511,3 +512,20 @@ More code samples:
 - [Blob Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob/samples/javascript)
 - [Blob Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob/samples/typescript)
 - [Blob Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob/test/)
+
+## Contributing
+
+This project welcomes contributions and suggestions. Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit <https://cla.microsoft.com.>
+
+When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fstorage%2Fstorage-blob%2FREADME.png)

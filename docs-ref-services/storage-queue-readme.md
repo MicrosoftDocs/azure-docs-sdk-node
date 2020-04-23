@@ -1,18 +1,17 @@
 ---
-title: Azure Storage Queues for JavaScript Readme
-description: Reference for Azure Storage modules for JavaScript
+title: Azure Storage Queue client library for JavaScript
+keywords: Azure, JavaScript, SDK, API, storage, storage-queue
 author: maggiepint
 ms.author: magpint
-manager: twolley
-ms.date: 03/12/2020
+ms.date: 04/16/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: javascript
+ms.devlang: JavaScript
 ms.service: storage
 ---
+ # Azure Storage Queue client library for JavaScript - Version 12.0.4 
 
-# Azure Storage Queues For JavaScript Readme -  Version 12.0.4
 
 Azure Storage Queue provides cloud messaging between application components. In designing applications for scale, application components are often decoupled, so that they can scale independently. Queue storage delivers asynchronous messaging for communication between application components, whether they are running in the cloud, on the desktop, on an on-premises server, or on a mobile device. Queue storage also supports managing asynchronous tasks and building process work flows.
 
@@ -34,9 +33,10 @@ Use the client libraries in this package to:
 
 **Prerequisites**: You must have an [Azure subscription](https://azure.microsoft.com/free/) and a [Storage Account](https://docs.microsoft.com/azure/storage/queues/storage-quickstart-queues-portal) to use this package. If you are using this package in a Node.js application, then Node.js version 8.0.0 or higher is required.
 
-### Install the package
+### Install the pacakge
 
-The preferred way to install the Azure Storage Queue client library for JavaScript is to use the npm package manager. Type the following into a terminal window:
+The preferred way to install the Azure Storage Queue client library for JavaScript - Version 12.0.4 
+ is to use the npm package manager. Type the following into a terminal window:
 
 ```bash
 npm install @azure/storage-queue
@@ -265,7 +265,7 @@ async function main() {
 main();
 ```
 
-For a complete sample on iterating queues please see [samples/typescript/iterators.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-queue/samples/typescript/src/iterators.ts).
+For a complete sample on iterating queues please see [samples/typescript/iterators.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-queue/samples/typescript/iterators.ts).
 
 ### Create a new queue
 
@@ -423,7 +423,7 @@ async function main() {
 main();
 ```
 
-A complete example of basic scenarios is at [samples/basic.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-queue/samples/typescript/src/basic.ts).
+A complete example of basic scenarios is at [samples/basic.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-queue/samples/typescript/basic.ts).
 
 ## Troubleshooting
 
@@ -441,3 +441,20 @@ More code samples
 
 - [Queue Storage Samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue/samples)
 - [Queue Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue/test)
+
+## Contributing
+
+This project welcomes contributions and suggestions. Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit <https://cla.microsoft.com.>
+
+When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fstorage%2Fstorage-queue%2FREADME.png)

@@ -36,7 +36,7 @@ Use the following version 4.x libraries to work with certificates, keys, and sec
 
 ### Version 1.x
 
-The source code for the Azure Key Vault libraries for .NET is available on [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault).
+The source code for the Azure Key Vault libraries for JavaScript is available on [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault).
 
 Use the following version 1.x libraries to work with certificates, keys, and secrets:
 

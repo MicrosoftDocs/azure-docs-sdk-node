@@ -42,5 +42,4 @@ Use the following version 1.x libraries to work with certificates, keys, and sec
 
 | Library | Reference | Package | Source |
 |--------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-|    arm-keyvault-profile-2019-03-01-hybrid    |    |    [npm](https://www.npmjs.com/package/@azure/arm-keyvault-profile-2019-03-01-hybrid)    |    [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/arm-keyvault-profile-2019-03-01-hybrid)    |
 |    arm-keyvault    |    [Reference](https://docs.microsoft.com/en-us/javascript/api/@azure/arm-keyvault/?view=azure-node-latest)    |    [npm](https://www.npmjs.com/package/@azure/arm-keyvault)    |    [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/arm-keyvault)    |

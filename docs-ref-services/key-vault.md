@@ -14,27 +14,33 @@ ms.service: key-vault
 
 # Azure Key Vault modules for JavaScript
 
-Azure Key Vault helps safeguard cryptographic keys and secrets used by cloud applications and services. By using Key Vault, you can encrypt keys and secrets (such as authentication keys, storage account keys, data encryption keys, .PFX files, and passwords) by using keys that are protected by hardware security modules (HSMs). For added assurance, you can import or generate keys in HSMs. If you choose to do this, Microsoft processes your keys in FIPS 140-2 Level 2 validated HSMs (hardware and firmware).
+The Azure Key Vault libraries for JavaScript offer a convenient interface for making calls to Azure Key Vault. For more information about Azure Key Vault, see [Introduction to Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/general/overview).
 
-Key Vault streamlines the key management process and enables you to maintain control of keys that access and encrypt your data. Developers can create keys for development and testing in minutes, and then seamlessly migrate them to production keys. Security administrators can grant (and revoke) permission to keys, as needed.
+## Libraries for data access
 
-## Management Package
+The latest version of the Azure Key Vault library is version 4.x. Microsoft recommends using version 4.x for new applications.
 
-### Install the npm module 
+If you cannot update existing applications to version 4.x, then Microsoft recommends using version 1.x.
 
-Install the Azure Key Vault npm module
+### Version 4.x
 
-```bash
-npm install @azure/arm-keyvault
-```
+The version 4.x libraries for JavaScript are part of the Azure SDK for JavaScript. The source code for the Key Vault libraries for JavaScript is available on [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault).
 
-### Example
+Use the following version 4.x libraries to work with certificates, keys, and secrets:
 
+| Library | Reference | Package | Source |
+|----------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+|    keyvault-certificates    |      [Reference](https://docs.microsoft.com/en-us/javascript/api/@azure/keyvault-certificates/?view=azure-node-latest)       |    [npm](https://www.npmjs.com/package/@azure/keyvault-certificates)    |    [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-certificates)    |
+|    keyvault-keys    |     [Reference](https://docs.microsoft.com/en-us/javascript/api/@azure/keyvault-keys/?view=azure-node-latest)    |    [npm](https://www.npmjs.com/package/@azure/keyvault-keys)      |     [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-keys)|
+|    keyvault-secrets   |    [Reference](https://docs.microsoft.com/en-us/javascript/api/@azure/keyvault-secrets/?view=azure-node-latest)    |    [npm](https://www.npmjs.com/package/@azure/keyvault-secrets)    |    [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-secrets)    |
 
-## Samples
-- Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-keyvault)
-- [Getting started with Key Vault in JavaScript](https://azure.microsoft.com/resources/samples/key-vault-node-getting-started/)
-- [Manage Azure resources and resource groups with JavaScript](https://azure.microsoft.com/resources/samples/resource-manager-node-resources-and-groups/) 
-- [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/resources/samples/active-directory-node-webapp-openidconnect/) 
+### Version 1.x
 
-For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+The source code for the Azure Key Vault libraries for .NET is available on [GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/keyvault).
+
+Use the following version 1.x libraries to work with certificates, keys, and secrets:
+
+| Library | Reference | Package | Source |
+|--------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+|    arm-keyvault-profile-2019-03-01-hybrid    |    |    [npm](https://www.npmjs.com/package/@azure/arm-keyvault-profile-2019-03-01-hybrid)    |    [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/arm-keyvault-profile-2019-03-01-hybrid)    |
+|    arm-keyvault    |    [Reference](https://docs.microsoft.com/en-us/javascript/api/@azure/arm-keyvault/?view=azure-node-latest)    |    [npm](https://www.npmjs.com/package/@azure/arm-keyvault)    |    [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/arm-keyvault)    |

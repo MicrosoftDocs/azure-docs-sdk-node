@@ -5,18 +5,17 @@ items:
     fullName: CustomRule
     children:
       - '@azure/arm-frontdoor.CustomRule.action'
-      - '@azure/arm-frontdoor.CustomRule.etag'
+      - '@azure/arm-frontdoor.CustomRule.enabledState'
       - '@azure/arm-frontdoor.CustomRule.matchConditions'
       - '@azure/arm-frontdoor.CustomRule.name'
       - '@azure/arm-frontdoor.CustomRule.priority'
       - '@azure/arm-frontdoor.CustomRule.rateLimitDurationInMinutes'
       - '@azure/arm-frontdoor.CustomRule.rateLimitThreshold'
       - '@azure/arm-frontdoor.CustomRule.ruleType'
-      - '@azure/arm-frontdoor.CustomRule.transforms'
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Defines contents of a web application rule
     package: '@azure/arm-frontdoor'
   - uid: '@azure/arm-frontdoor.CustomRule.action'
     name: action
@@ -25,28 +24,36 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes what action to be applied when rule matches. Possible values
+      include: 'Allow',
+
+      'Block', 'Log', 'Redirect'
     syntax:
-      content: 'action: Action'
+      content: 'action: ActionType'
       return:
         type:
-          - '@azure/arm-frontdoor.Action'
+          - '@azure/arm-frontdoor.ActionType'
         description: ''
     package: '@azure/arm-frontdoor'
-  - uid: '@azure/arm-frontdoor.CustomRule.etag'
-    name: etag
-    fullName: etag
+  - uid: '@azure/arm-frontdoor.CustomRule.enabledState'
+    name: enabledState
+    fullName: enabledState
     children: []
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes if the custom rule is in enabled or disabled state. Defaults to
+      Enabled if not
+
+      specified. Possible values include: 'Disabled', 'Enabled'
     optional: true
     syntax:
-      content: 'etag?: undefined | string'
+      content: 'enabledState?: CustomRuleEnabledState'
       return:
         type:
-          - undefined | string
+          - '@azure/arm-frontdoor.CustomRuleEnabledState'
         description: ''
     package: '@azure/arm-frontdoor'
   - uid: '@azure/arm-frontdoor.CustomRule.matchConditions'
@@ -56,12 +63,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: List of match conditions.
     syntax:
-      content: 'matchConditions: MatchCondition1[]'
+      content: 'matchConditions: MatchCondition[]'
       return:
         type:
-          - '@azure/arm-frontdoor.MatchCondition1[]'
+          - '@azure/arm-frontdoor.MatchCondition[]'
         description: ''
     package: '@azure/arm-frontdoor'
   - uid: '@azure/arm-frontdoor.CustomRule.name'
@@ -71,7 +78,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Describes the name of the rule.
     optional: true
     syntax:
       content: 'name?: undefined | string'
@@ -87,7 +94,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes priority of the rule. Rules with a lower value will be evaluated
+      before rules with a
+
+      higher value.
     syntax:
       content: 'priority: number'
       return:
@@ -102,7 +113,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Time window for resetting the rate limit count. Default is 1 minute.
     optional: true
     syntax:
       content: 'rateLimitDurationInMinutes?: undefined | number'
@@ -118,7 +129,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Number of allowed requests per client within the time window.
     optional: true
     syntax:
       content: 'rateLimitThreshold?: undefined | number'
@@ -134,7 +145,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Describes type of rule. Possible values include: 'MatchRule',
+      'RateLimitRule'
     syntax:
       content: 'ruleType: RuleType'
       return:
@@ -142,35 +155,25 @@ items:
           - '@azure/arm-frontdoor.RuleType'
         description: ''
     package: '@azure/arm-frontdoor'
-  - uid: '@azure/arm-frontdoor.CustomRule.transforms'
-    name: transforms
-    fullName: transforms
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: ''
-    optional: true
-    syntax:
-      content: 'transforms?: Transform[]'
-      return:
-        type:
-          - '@azure/arm-frontdoor.Transform[]'
-        description: ''
-    package: '@azure/arm-frontdoor'
 references:
-  - uid: '@azure/arm-frontdoor.Action'
-    name: Action
+  - uid: '@azure/arm-frontdoor.ActionType'
+    name: ActionType
     spec.typeScript:
-      - name: Action
-        fullName: Action
-        uid: '@azure/arm-frontdoor.Action'
-  - uid: '@azure/arm-frontdoor.MatchCondition1[]'
-    name: 'MatchCondition1[]'
+      - name: ActionType
+        fullName: ActionType
+        uid: '@azure/arm-frontdoor.ActionType'
+  - uid: '@azure/arm-frontdoor.CustomRuleEnabledState'
+    name: CustomRuleEnabledState
     spec.typeScript:
-      - name: MatchCondition1
-        fullName: MatchCondition1
-        uid: '@azure/arm-frontdoor.MatchCondition1'
+      - name: CustomRuleEnabledState
+        fullName: CustomRuleEnabledState
+        uid: '@azure/arm-frontdoor.CustomRuleEnabledState'
+  - uid: '@azure/arm-frontdoor.MatchCondition[]'
+    name: 'MatchCondition[]'
+    spec.typeScript:
+      - name: MatchCondition
+        fullName: MatchCondition
+        uid: '@azure/arm-frontdoor.MatchCondition'
       - name: '[]'
         fullName: '[]'
   - uid: '@azure/arm-frontdoor.RuleType'
@@ -179,11 +182,3 @@ references:
       - name: RuleType
         fullName: RuleType
         uid: '@azure/arm-frontdoor.RuleType'
-  - uid: '@azure/arm-frontdoor.Transform[]'
-    name: 'Transform[]'
-    spec.typeScript:
-      - name: Transform
-        fullName: Transform
-        uid: '@azure/arm-frontdoor.Transform'
-      - name: '[]'
-        fullName: '[]'

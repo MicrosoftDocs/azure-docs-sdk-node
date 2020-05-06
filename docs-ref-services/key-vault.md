@@ -22,7 +22,7 @@ The latest version of the Azure Key Vault library is version 4.x. Microsoft reco
 
 If you cannot update existing applications to version 4.x, then Microsoft recommends using version 1.x.
 
-### Version 4.x
+### Version 4.x.x
 
 The version 4.x libraries for JavaScript are part of the Azure SDK for JavaScript. The source code for the Key Vault libraries for JavaScript is available on [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault).
 
@@ -34,11 +34,9 @@ Use the following version 4.x libraries to work with certificates, keys, and sec
 |    keyvault-keys    |     [Reference](https://docs.microsoft.com/javascript/api/@azure/keyvault-keys/?view=azure-node-latest)    |    [npm](https://www.npmjs.com/package/@azure/keyvault-keys)      |     [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-keys)|
 |    keyvault-secrets   |    [Reference](https://docs.microsoft.com/javascript/api/@azure/keyvault-secrets/?view=azure-node-latest)    |    [npm](https://www.npmjs.com/package/@azure/keyvault-secrets)    |    [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-secrets)    |
 
-### Version 1.x
+## Libraries for resource management
 
-The source code for the Azure Key Vault libraries for JavaScript is available on [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault).
-
-Use the following version 1.x libraries to work with certificates, keys, and secrets:
+Use the following library to work with the Azure Key Vault resource provider:
 
 | Library | Reference | Package | Source |
 |--------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|

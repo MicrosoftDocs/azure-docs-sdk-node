@@ -12,7 +12,8 @@ items:
       - '@azure/service-bus.Sender.scheduleMessage'
       - '@azure/service-bus.Sender.scheduleMessages'
       - '@azure/service-bus.Sender.send'
-      - '@azure/service-bus.Sender.sendBatch'
+      - '@azure/service-bus.Sender.send_2'
+      - '@azure/service-bus.Sender.send_1'
     langs:
       - typeScript
     type: interface
@@ -28,7 +29,7 @@ items:
       The Sender class is an abstraction over the underlying AMQP sender link.
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.Sender.cancelScheduledMessage'
-    name: 'cancelScheduledMessage(Long_2, OperationOptions)'
+    name: 'cancelScheduledMessage(Long, OperationOptions)'
     children: []
     type: method
     langs:
@@ -38,12 +39,12 @@ items:
       Queue/Subscription.
     syntax:
       content: >-
-        function cancelScheduledMessage(sequenceNumber: Long_2, options?:
+        function cancelScheduledMessage(sequenceNumber: Long, options?:
         OperationOptions)
       parameters:
         - id: sequenceNumber
           type:
-            - Long_2
+            - Long
           description: The sequence number of the message to be cancelled.
         - id: options
           type:
@@ -56,7 +57,7 @@ items:
         description: Promise<void>
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.Sender.cancelScheduledMessages'
-    name: 'cancelScheduledMessages(Long_2[], OperationOptions)'
+    name: 'cancelScheduledMessages(Long[], OperationOptions)'
     children: []
     type: method
     langs:
@@ -66,12 +67,12 @@ items:
       Queue/Subscription.
     syntax:
       content: >-
-        function cancelScheduledMessages(sequenceNumbers: Long_2[], options?:
+        function cancelScheduledMessages(sequenceNumbers: Long[], options?:
         OperationOptions)
       parameters:
         - id: sequenceNumbers
           type:
-            - 'Long_2[]'
+            - 'Long[]'
           description: An Array of sequence numbers of the messages to be cancelled.
         - id: options
           type:
@@ -114,8 +115,8 @@ items:
       Creates an instance of `ServiceBusMessageBatch` to which one can add
       messages until the maximum supported size is reached.
 
-      The batch can be passed to the <xref:sendBatch> method to send the
-      messages to Azure Service Bus.
+      The batch can be passed to the <xref:send> method to send the messages to
+      Azure Service Bus.
     syntax:
       content: 'function createBatch(options?: CreateBatchOptions)'
       parameters:
@@ -179,7 +180,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<Long_2>
+          - Promise<Long>
         description: >-
           Promise<Long> - The sequence number of the message that was scheduled.
 
@@ -221,7 +222,7 @@ items:
           optional: true
       return:
         type:
-          - 'Promise<Long_2[]>'
+          - 'Promise<Long[]>'
         description: >-
           Promise<Long[]> - The sequence numbers of messages that were
           scheduled.
@@ -266,16 +267,29 @@ items:
           - Promise<void>
         description: Promise<void>
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.sendBatch'
-    name: 'sendBatch(ServiceBusMessageBatch, OperationOptions)'
+  - uid: '@azure/service-bus.Sender.send_2'
+    name: 'send(ServiceBusMessageBatch, OperationOptions)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: Sends a batch of messages to the associated service-bus entity.
+    summary: >
+      Sends a batch of messages to the associated service-bus entity after
+      creating an AMQP
+
+      Sender link if it doesn't already exist.
+
+      - To send messages to a `session` and/or `partition` enabled Queue/Topic,
+      set the `sessionId`
+
+      and/or `partitionKey` properties respectively on the messages.
+
+      - When doing so, all messages in the batch should have the same
+      `sessionId` (if using
+       sessions) and the same `partitionKey` (if using partitions).
     syntax:
       content: >-
-        function sendBatch(messageBatch: ServiceBusMessageBatch, options?:
+        function send(messageBatch: ServiceBusMessageBatch, options?:
         OperationOptions)
       parameters:
         - id: messageBatch
@@ -293,6 +307,43 @@ items:
         type:
           - Promise<void>
         description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.Sender.send_1'
+    name: 'send(ServiceBusMessage[], OperationOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Sends the given messages in a single batch i.e. in a single AMQP message
+      after creating an AMQP
+
+      Sender link if it doesn't already exist.
+
+      - To send messages to a `session` and/or `partition` enabled Queue/Topic,
+      set the `sessionId`
+
+      and/or `partitionKey` properties respectively on the messages.
+
+      - When doing so, all messages in the batch should have the same
+      `sessionId` (if using
+       sessions) and the same `partitionKey` (if using partitions).
+    syntax:
+      content: 'function send(messages: ServiceBusMessage[], options?: OperationOptions)'
+      parameters:
+        - id: messages
+          type:
+            - '@azure/service-bus.ServiceBusMessage[]'
+          description: An array of ServiceBusMessage objects to be sent in a Batch message.
+        - id: options
+          type:
+            - '@azure/service-bus.OperationOptions'
+          description: Options bag to pass an abort signal or tracing options.
+          optional: true
+      return:
+        type:
+          - Promise<void>
+        description: Promise<void>
     package: '@azure/service-bus'
 references:
   - uid: '@azure/service-bus.OperationOptions'

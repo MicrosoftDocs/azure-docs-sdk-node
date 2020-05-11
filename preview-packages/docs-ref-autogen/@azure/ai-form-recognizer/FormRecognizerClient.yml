@@ -1,0 +1,674 @@
+### YamlMime:UniversalReference
+items:
+  - uid: '@azure/ai-form-recognizer.FormRecognizerClient'
+    name: FormRecognizerClient
+    fullName: FormRecognizerClient
+    children:
+      - '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeContent'
+      - >-
+        @azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeContentFromUrl
+      - '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeForms'
+      - >-
+        @azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeFormsFromUrl
+      - '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeReceipts'
+      - >-
+        @azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeReceiptsFromUrl
+      - '@azure/ai-form-recognizer.FormRecognizerClient.endpointUrl'
+      - '@azure/ai-form-recognizer.FormRecognizerClient.constructor'
+      - '@azure/ai-form-recognizer.FormRecognizerClient.getFormTrainingClient'
+    langs:
+      - typeScript
+    type: class
+    summary: Client class for interacting with Azure Form Recognizer service.
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeContent'
+    name: >-
+      beginRecognizeContent(FormRecognizerRequestBody, ContentType,
+      BeginRecognizeContentOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Recognizes content, including text and table structure from a form
+      document.
+
+      This method returns a long running operation poller that allows you to
+      wait
+
+      indefinitely until the copy is completed.
+
+      You can also cancel a copy before it is completed by calling
+      `cancelOperation` on the poller.
+
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
+      being thrown.
+
+
+      Example usage:
+
+      ```ts
+
+      const path = "./Invoice_7.pdf";
+
+      const readStream = fs.createReadStream(path);
+
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeContent(readStream,
+      "application/pdf", {
+        onProgress: (state) => { console.log(`status: ${state.status}`); }
+      });
+
+
+      await poller.pollUntilDone();
+
+      const response = poller.getResult();
+
+
+      console.log(response.status);
+
+      console.log(response.pages);
+
+      ```
+    syntax:
+      content: >-
+        function beginRecognizeContent(data: FormRecognizerRequestBody,
+        contentType?: ContentType, options?: BeginRecognizeContentOptions)
+      parameters:
+        - id: data
+          type:
+            - '@azure/ai-form-recognizer.FormRecognizerRequestBody'
+          description: Input document
+        - id: contentType
+          type:
+            - '@azure/ai-form-recognizer.ContentType'
+          description: >-
+            Content type of the input. Supported types are "application/pdf",
+            "image/jpeg", "image/png", and "image/tiff";
+          optional: true
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.BeginRecognizeContentOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/ai-form-recognizer.ContentPollerLike>
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: >-
+      @azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeContentFromUrl
+    name: 'beginRecognizeContentFromUrl(string, BeginRecognizeContentOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Recognizes content, including text and table structure from a url to a
+      form document.
+
+      This method returns a long running operation poller that allows you to
+      wait
+
+      indefinitely until the copy is completed.
+
+      You can also cancel a copy before it is completed by calling
+      `cancelOperation` on the poller.
+
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
+      being thrown.
+
+
+      Example usage:
+
+      ```ts
+
+      const url = "<form document url>";
+
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeContentFromUrl(url, {
+        onProgress: (state) => { console.log(`status: ${state.status}`); }
+      });
+
+
+      await poller.pollUntilDone();
+
+      const response = poller.getResult();
+
+
+      console.log(response.status);
+
+      console.log(response.pages);
+
+      ```
+    syntax:
+      content: >-
+        function beginRecognizeContentFromUrl(documentUrl: string, options?:
+        BeginRecognizeContentOptions)
+      parameters:
+        - id: documentUrl
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.BeginRecognizeContentOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/ai-form-recognizer.ContentPollerLike>
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeForms'
+    name: >-
+      beginRecognizeForms(string, FormRecognizerRequestBody, ContentType,
+      BeginRecognizeFormsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Recognizes forms from a given document using a custom form model from
+      training.
+
+      This method returns a long running operation poller that allows you to
+      wait
+
+      indefinitely until the copy is completed.
+
+      You can also cancel a copy before it is completed by calling
+      `cancelOperation` on the poller.
+
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
+      being thrown.
+
+      Example usage:
+
+      ```ts
+
+      const path = "./Invoice_6.pdf";
+
+      const readStream = fs.createReadStream(path);
+
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeForms(modelId, readStream,
+      "application/pdf", {
+        onProgress: (state) => { console.log(`status: ${state.status}`); }
+      });
+
+      await poller.pollUntilDone();
+
+      const response = poller.getResult();
+
+      console.log(response.status);
+
+      ```
+    syntax:
+      content: >-
+        function beginRecognizeForms(modelId: string, data:
+        FormRecognizerRequestBody, contentType?: ContentType, options?:
+        BeginRecognizeFormsOptions)
+      parameters:
+        - id: modelId
+          type:
+            - string
+          description: Id of the custom form model to use
+        - id: data
+          type:
+            - '@azure/ai-form-recognizer.FormRecognizerRequestBody'
+          description: Input form document
+        - id: contentType
+          type:
+            - '@azure/ai-form-recognizer.ContentType'
+          description: >-
+            Content type of the input. Supported types are "application/pdf",
+            "image/jpeg", "image/png", and "image/tiff";
+          optional: true
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.BeginRecognizeFormsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/ai-form-recognizer.FormPollerLike>
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeFormsFromUrl'
+    name: 'beginRecognizeFormsFromUrl(string, string, BeginRecognizeFormsOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Recognizes forms from a url to a form document using a custom form model
+      from training.
+
+      This method returns a long running operation poller that allows you to
+      wait
+
+      indefinitely until the copy is completed.
+
+      You can also cancel a copy before it is completed by calling
+      `cancelOperation` on the poller.
+
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
+      being thrown.
+
+      Example usage:
+
+      ```ts
+
+      const url = "<form document url>";
+
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeFormsFromUrl(modelId, url, {
+        onProgress: (state) => { console.log(`status: ${state.status}`); }
+      });
+
+      await poller.pollUntilDone();
+
+      const response = poller.getResult();
+
+      console.log(response.status);
+
+      ```
+    syntax:
+      content: >-
+        function beginRecognizeFormsFromUrl(modelId: string, documentUrl:
+        string, options?: BeginRecognizeFormsOptions)
+      parameters:
+        - id: modelId
+          type:
+            - string
+          description: Id of the custom form model to use
+        - id: documentUrl
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.BeginRecognizeFormsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<PollerLike<PollOperationState<@azure/ai-form-recognizer.RecognizeFormResultResponse>,
+            @azure/ai-form-recognizer.RecognizeFormResultResponse>>
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeReceipts'
+    name: >-
+      beginRecognizeReceipts(FormRecognizerRequestBody, ContentType,
+      BeginRecognizeReceiptsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Recognizes data from receipts using pre-built receipt model, enabling you
+      to extract structure data
+
+      from receipts such as merchant name, merchant phone number, transaction
+      date, and more.
+
+      This method returns a long running operation poller that allows you to
+      wait
+
+      indefinitely until the copy is completed.
+
+      You can also cancel a copy before it is completed by calling
+      `cancelOperation` on the poller.
+
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
+      being thrown.
+
+
+      Example usage:
+
+      ```ts
+
+      const path = "./contoso-allinone.jpg";
+
+      const readStream = fs.createReadStream(path);
+
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeReceipts(readStream,
+      "image/jpeg", {
+        onProgress: (state) => { console.log(`status: ${state.status}`); }
+      });
+
+
+      await poller.pollUntilDone();
+
+      const response = poller.getResult();
+
+
+      console.log(`Response status ${response.status}`);
+
+      console.log("First receipt:")
+
+      console.log(response.receipts[0]);
+
+      console.log("Items:")
+
+      const usReceipt = toUSReceipt(response.receipts[0]);
+
+      console.table(usReceipt.items, ["name", "quantity", "price",
+      "totalPrice"]);
+
+      console.log("Raw 'MerchantAddress' fields:");
+
+      console.log(usReceipt.recognizedForm.fields["MerchantAddress"]);
+
+      ```
+    syntax:
+      content: >-
+        function beginRecognizeReceipts(data: FormRecognizerRequestBody,
+        contentType?: ContentType, options?: BeginRecognizeReceiptsOptions)
+      parameters:
+        - id: data
+          type:
+            - '@azure/ai-form-recognizer.FormRecognizerRequestBody'
+          description: Input document
+        - id: contentType
+          type:
+            - '@azure/ai-form-recognizer.ContentType'
+          description: >-
+            Content type of the input. Supported types are "application/pdf",
+            "image/jpeg", "image/png", and "image/tiff";
+          optional: true
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.BeginRecognizeReceiptsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/ai-form-recognizer.ReceiptPollerLike>
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: >-
+      @azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeReceiptsFromUrl
+    name: 'beginRecognizeReceiptsFromUrl(string, BeginRecognizeReceiptsOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Recognizes receipt information from a url using pre-built receipt model,
+      enabling you to extract structure data
+
+      from receipts such as merchant name, merchant phone number, transaction
+      date, and more.
+
+      This method returns a long running operation poller that allows you to
+      wait
+
+      indefinitely until the copy is completed.
+
+      You can also cancel a copy before it is completed by calling
+      `cancelOperation` on the poller.
+
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
+      being thrown.
+
+
+      Example usage:
+
+      ```ts
+
+      const receiptUrl = "<url to the receipt document>";
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeReceiptsFromUrl(
+        receiptUrl, {
+          includeTextDetails: true,
+          onProgress: (state) => { console.log(`analyzing status: ${state.status}`); }
+      });
+
+      await poller.pollUntilDone();
+
+      const response = poller.getResult();
+
+
+      console.log(`Response status ${response.status}`);
+
+      console.log("First receipt:")
+
+      console.log(response.receipts[0]);
+
+      console.log("Items:")
+
+      const usReceipt = toUSReceipt(response.receipts[0]);
+
+      console.table(usReceipt.items, ["name", "quantity", "price",
+      "totalPrice"]);
+
+      console.log("Raw 'MerchantAddress' fields:");
+
+      console.log(usReceipt.recognizedForm.fields["MerchantAddress"]);
+
+      ```
+    syntax:
+      content: >-
+        function beginRecognizeReceiptsFromUrl(documentUrl: string, options?:
+        BeginRecognizeReceiptsOptions)
+      parameters:
+        - id: documentUrl
+          type:
+            - string
+          description: url to the input receipt document
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.BeginRecognizeReceiptsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/ai-form-recognizer.ReceiptPollerLike>
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormRecognizerClient.endpointUrl'
+    name: endpointUrl
+    fullName: endpointUrl
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Url to an Azure Form Recognizer service endpoint
+    syntax:
+      content: 'endpointUrl: string'
+      return:
+        type:
+          - string
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormRecognizerClient.constructor'
+    name: 'FormRecognizerClient(string, KeyCredential, FormRecognizerClientOptions)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: >-
+      Creates an instance of FormRecognizerClient.
+
+      Example usage:
+
+      ```ts
+
+      import { FormRecognizerClient, AzureKeyCredential } from
+      "@azure/ai-form-recognizer";
+
+
+      const client = new FormRecognizerClient(
+         "<service endpoint>",
+         new AzureKeyCredential("<api key>")
+      );
+
+      ```
+    syntax:
+      content: >-
+        new FormRecognizerClient(endpointUrl: string, credential: KeyCredential,
+        options?: FormRecognizerClientOptions)
+      parameters:
+        - id: endpointUrl
+          type:
+            - string
+          description: Url to an Azure Form Recognizer service endpoint
+        - id: credential
+          type:
+            - KeyCredential
+          description: Used to authenticate requests to the service.
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.FormRecognizerClientOptions'
+          description: ''
+          optional: true
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormRecognizerClient.getFormTrainingClient'
+    name: getFormTrainingClient()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates an instance of <xref:FormTrainingClient> to perform training
+      operations
+
+      and to manage trained custom form models.
+    syntax:
+      content: function getFormTrainingClient()
+      parameters: []
+      return:
+        type:
+          - '@azure/ai-form-recognizer.FormTrainingClient'
+        description: ''
+    package: '@azure/ai-form-recognizer'
+references:
+  - uid: '@azure/ai-form-recognizer.FormRecognizerClientOptions'
+    name: FormRecognizerClientOptions
+    spec.typeScript:
+      - name: FormRecognizerClientOptions
+        fullName: FormRecognizerClientOptions
+        uid: '@azure/ai-form-recognizer.FormRecognizerClientOptions'
+  - uid: '@azure/ai-form-recognizer.FormRecognizerRequestBody'
+    name: FormRecognizerRequestBody
+    spec.typeScript:
+      - name: FormRecognizerRequestBody
+        fullName: FormRecognizerRequestBody
+        uid: '@azure/ai-form-recognizer.FormRecognizerRequestBody'
+  - uid: '@azure/ai-form-recognizer.ContentType'
+    name: ContentType
+    spec.typeScript:
+      - name: ContentType
+        fullName: ContentType
+        uid: '@azure/ai-form-recognizer.ContentType'
+  - uid: '@azure/ai-form-recognizer.BeginRecognizeContentOptions'
+    name: BeginRecognizeContentOptions
+    spec.typeScript:
+      - name: BeginRecognizeContentOptions
+        fullName: BeginRecognizeContentOptions
+        uid: '@azure/ai-form-recognizer.BeginRecognizeContentOptions'
+  - uid: Promise<@azure/ai-form-recognizer.ContentPollerLike>
+    name: ContentPollerLike>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ContentPollerLike
+        fullName: ContentPollerLike
+        uid: '@azure/ai-form-recognizer.ContentPollerLike'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/ai-form-recognizer.BeginRecognizeFormsOptions'
+    name: BeginRecognizeFormsOptions
+    spec.typeScript:
+      - name: BeginRecognizeFormsOptions
+        fullName: BeginRecognizeFormsOptions
+        uid: '@azure/ai-form-recognizer.BeginRecognizeFormsOptions'
+  - uid: Promise<@azure/ai-form-recognizer.FormPollerLike>
+    name: FormPollerLike>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: FormPollerLike
+        fullName: FormPollerLike
+        uid: '@azure/ai-form-recognizer.FormPollerLike'
+      - name: '>'
+        fullName: '>'
+  - uid: >-
+      Promise<PollerLike<PollOperationState<@azure/ai-form-recognizer.RecognizeFormResultResponse>,
+      @azure/ai-form-recognizer.RecognizeFormResultResponse>>
+    name: RecognizeFormResultResponse>>
+    spec.typeScript:
+      - name: Promise<PollerLike<PollOperationState<
+        fullName: Promise<PollerLike<PollOperationState<
+      - name: RecognizeFormResultResponse
+        fullName: RecognizeFormResultResponse
+        uid: '@azure/ai-form-recognizer.RecognizeFormResultResponse'
+      - name: '>, '
+        fullName: '>, '
+      - name: RecognizeFormResultResponse
+        fullName: RecognizeFormResultResponse
+        uid: '@azure/ai-form-recognizer.RecognizeFormResultResponse'
+      - name: '>>'
+        fullName: '>>'
+  - uid: '@azure/ai-form-recognizer.BeginRecognizeReceiptsOptions'
+    name: BeginRecognizeReceiptsOptions
+    spec.typeScript:
+      - name: BeginRecognizeReceiptsOptions
+        fullName: BeginRecognizeReceiptsOptions
+        uid: '@azure/ai-form-recognizer.BeginRecognizeReceiptsOptions'
+  - uid: Promise<@azure/ai-form-recognizer.ReceiptPollerLike>
+    name: ReceiptPollerLike>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ReceiptPollerLike
+        fullName: ReceiptPollerLike
+        uid: '@azure/ai-form-recognizer.ReceiptPollerLike'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/ai-form-recognizer.FormTrainingClient'
+    name: FormTrainingClient
+    spec.typeScript:
+      - name: FormTrainingClient
+        fullName: FormTrainingClient
+        uid: '@azure/ai-form-recognizer.FormTrainingClient'

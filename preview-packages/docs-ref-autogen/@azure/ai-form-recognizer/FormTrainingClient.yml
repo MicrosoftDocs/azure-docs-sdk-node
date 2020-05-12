@@ -1,0 +1,402 @@
+### YamlMime:UniversalReference
+items:
+  - uid: '@azure/ai-form-recognizer.FormTrainingClient'
+    name: FormTrainingClient
+    fullName: FormTrainingClient
+    children:
+      - '@azure/ai-form-recognizer.FormTrainingClient.beginTraining'
+      - '@azure/ai-form-recognizer.FormTrainingClient.deleteModel'
+      - '@azure/ai-form-recognizer.FormTrainingClient.endpointUrl'
+      - '@azure/ai-form-recognizer.FormTrainingClient.constructor'
+      - '@azure/ai-form-recognizer.FormTrainingClient.getAccountProperties'
+      - '@azure/ai-form-recognizer.FormTrainingClient.getModel'
+      - '@azure/ai-form-recognizer.FormTrainingClient.listModels'
+    langs:
+      - typeScript
+    type: class
+    summary: Client class for training and managing custom form models.
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormTrainingClient.beginTraining'
+    name: 'beginTraining(string, boolean, BeginTrainingOptions<FormModelResponse>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates and trains a custom form model.
+
+      This method returns a long running operation poller that allows you to
+      wait
+
+      indefinitely until the copy is completed.
+
+      You can also cancel a copy before it is completed by calling
+      `cancelOperation` on the poller.
+
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
+      being thrown.
+
+      Example usage:
+
+      ```ts
+
+      const blobContainerUrl = "<url to the blob container storing training
+      documents>";
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const trainingClient = client.getFormTrainingClient();
+
+
+      const poller = await trainingClient.beginTraining(blobContainerUrl, {
+        onProgress: (state) => { console.log("training status: "); console.log(state); }
+      });
+
+      await poller.pollUntilDone();
+
+      const response = poller.getResult();
+
+      console.log(response)
+
+      ```
+    syntax:
+      content: >-
+        function beginTraining(blobContainerUrl: string, useLabels?: boolean,
+        options?: BeginTrainingOptions<FormModelResponse>)
+      parameters:
+        - id: blobContainerUrl
+          type:
+            - string
+          description: >-
+            Accessible url to an Azure Storage Blob container storing the
+            training documents
+        - id: useLabels
+          type:
+            - boolean
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - >-
+              @azure/ai-form-recognizer.BeginTrainingOptions<@azure/ai-form-recognizer.FormModelResponse>
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<PollerLike<PollOperationState<@azure/ai-form-recognizer.FormModelResponse>,
+            @azure/ai-form-recognizer.FormModelResponse>>
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormTrainingClient.deleteModel'
+    name: 'deleteModel(string, DeleteModelOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Mark model for deletion. Model artifacts will be permanently removed
+      within 48 hours.
+    syntax:
+      content: 'function deleteModel(modelId: string, options?: DeleteModelOptions)'
+      parameters:
+        - id: modelId
+          type:
+            - string
+          description: Id of the model to mark for deletion
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.DeleteModelOptions'
+          description: |
+            Options to the Delete Model operation
+          optional: true
+      return:
+        type:
+          - Promise<RestResponse>
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormTrainingClient.endpointUrl'
+    name: endpointUrl
+    fullName: endpointUrl
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Url to an Azure Form Recognizer service endpoint
+    syntax:
+      content: 'endpointUrl: string'
+      return:
+        type:
+          - string
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormTrainingClient.constructor'
+    name: 'FormTrainingClient(string, KeyCredential, FormRecognizerClientOptions)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: >-
+      Creates an instance of FormTrainingClient.
+
+      Example usage:
+
+      ```ts
+
+      import {FormTrainingClient, AzureKeyCredential } from
+      "@azure/ai-form-recognizer";
+
+
+      const client = new FormTrainingClient(
+         "<service endpoint>",
+         new AzureKeyCredential("<api key>")
+      );
+
+      ```
+    syntax:
+      content: >-
+        new FormTrainingClient(endpointUrl: string, credential: KeyCredential,
+        options?: FormRecognizerClientOptions)
+      parameters:
+        - id: endpointUrl
+          type:
+            - string
+          description: Url to an Azure Form Recognizer service endpoint
+        - id: credential
+          type:
+            - KeyCredential
+          description: Used to authenticate requests to the service.
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.FormRecognizerClientOptions'
+          description: ''
+          optional: true
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormTrainingClient.getAccountProperties'
+    name: getAccountProperties(GetAccountPropertiesOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Retrieves summary information about the cognitive service account
+    syntax:
+      content: 'function getAccountProperties(options?: GetAccountPropertiesOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.GetAccountPropertiesOptions'
+          description: |
+            Options to GetSummary operation
+          optional: true
+      return:
+        type:
+          - Promise<@azure/ai-form-recognizer.AccountProperties>
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormTrainingClient.getModel'
+    name: 'getModel(string, GetModelOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Get detailed information about a custom model from training.
+    syntax:
+      content: 'function getModel(modelId: string, options?: GetModelOptions)'
+      parameters:
+        - id: modelId
+          type:
+            - string
+          description: Id of the model to get information
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.GetModelOptions'
+          description: |
+            Options to the Get Model operation
+          optional: true
+      return:
+        type:
+          - Promise<@azure/ai-form-recognizer.FormModelResponse>
+        description: ''
+    package: '@azure/ai-form-recognizer'
+  - uid: '@azure/ai-form-recognizer.FormTrainingClient.listModels'
+    name: listModels(ListModelsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Returns an async iterable iterator to list information about all models in
+      the cognitive service account.
+
+      .byPage() returns an async iterable iterator to list the blobs in pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      const client = new FormTrainingClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const result = client.listModels();
+
+      let i = 1;
+
+      for await (const model of result) {
+        console.log(`model ${i++}:`);
+        console.log(model);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      let iter = client.listModels();
+
+      let modelItem = await iter.next();
+
+      while (!modelItem.done) {
+        console.log(`model ${i++}: ${modelItem.value}`);
+        modelItem = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+       let i = 1;
+       for await (const response of client.listModels().byPage()) {
+         for (const modelInfo of response.modelList!) {
+           console.log(`model ${i++}: ${modelInfo.modelId}`);
+         }
+       }
+      ```
+    syntax:
+      content: 'function listModels(options?: ListModelsOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/ai-form-recognizer.ListModelsOptions'
+          description: |
+            Options to the List Models operation
+          optional: true
+      return:
+        type:
+          - >-
+            PagedAsyncIterableIterator<@azure/ai-form-recognizer.ModelInfo,
+            @azure/ai-form-recognizer.ListModelsResponseModel>
+        description: ''
+    package: '@azure/ai-form-recognizer'
+references:
+  - uid: '@azure/ai-form-recognizer.FormRecognizerClientOptions'
+    name: FormRecognizerClientOptions
+    spec.typeScript:
+      - name: FormRecognizerClientOptions
+        fullName: FormRecognizerClientOptions
+        uid: '@azure/ai-form-recognizer.FormRecognizerClientOptions'
+  - uid: >-
+      @azure/ai-form-recognizer.BeginTrainingOptions<@azure/ai-form-recognizer.FormModelResponse>
+    name: FormModelResponse>
+    spec.typeScript:
+      - name: BeginTrainingOptions
+        fullName: BeginTrainingOptions
+        uid: '@azure/ai-form-recognizer.BeginTrainingOptions'
+      - name: <
+        fullName: <
+      - name: FormModelResponse
+        fullName: FormModelResponse
+        uid: '@azure/ai-form-recognizer.FormModelResponse'
+      - name: '>'
+        fullName: '>'
+  - uid: >-
+      Promise<PollerLike<PollOperationState<@azure/ai-form-recognizer.FormModelResponse>,
+      @azure/ai-form-recognizer.FormModelResponse>>
+    name: FormModelResponse>>
+    spec.typeScript:
+      - name: Promise<PollerLike<PollOperationState<
+        fullName: Promise<PollerLike<PollOperationState<
+      - name: FormModelResponse
+        fullName: FormModelResponse
+        uid: '@azure/ai-form-recognizer.FormModelResponse'
+      - name: '>, '
+        fullName: '>, '
+      - name: FormModelResponse
+        fullName: FormModelResponse
+        uid: '@azure/ai-form-recognizer.FormModelResponse'
+      - name: '>>'
+        fullName: '>>'
+  - uid: '@azure/ai-form-recognizer.DeleteModelOptions'
+    name: DeleteModelOptions
+    spec.typeScript:
+      - name: DeleteModelOptions
+        fullName: DeleteModelOptions
+        uid: '@azure/ai-form-recognizer.DeleteModelOptions'
+  - uid: '@azure/ai-form-recognizer.GetAccountPropertiesOptions'
+    name: GetAccountPropertiesOptions
+    spec.typeScript:
+      - name: GetAccountPropertiesOptions
+        fullName: GetAccountPropertiesOptions
+        uid: '@azure/ai-form-recognizer.GetAccountPropertiesOptions'
+  - uid: Promise<@azure/ai-form-recognizer.AccountProperties>
+    name: AccountProperties>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: AccountProperties
+        fullName: AccountProperties
+        uid: '@azure/ai-form-recognizer.AccountProperties'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/ai-form-recognizer.GetModelOptions'
+    name: GetModelOptions
+    spec.typeScript:
+      - name: GetModelOptions
+        fullName: GetModelOptions
+        uid: '@azure/ai-form-recognizer.GetModelOptions'
+  - uid: Promise<@azure/ai-form-recognizer.FormModelResponse>
+    name: FormModelResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: FormModelResponse
+        fullName: FormModelResponse
+        uid: '@azure/ai-form-recognizer.FormModelResponse'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/ai-form-recognizer.ListModelsOptions'
+    name: ListModelsOptions
+    spec.typeScript:
+      - name: ListModelsOptions
+        fullName: ListModelsOptions
+        uid: '@azure/ai-form-recognizer.ListModelsOptions'
+  - uid: >-
+      PagedAsyncIterableIterator<@azure/ai-form-recognizer.ModelInfo,
+      @azure/ai-form-recognizer.ListModelsResponseModel>
+    name: ListModelsResponseModel>
+    spec.typeScript:
+      - name: PagedAsyncIterableIterator<
+        fullName: PagedAsyncIterableIterator<
+      - name: ModelInfo
+        fullName: ModelInfo
+        uid: '@azure/ai-form-recognizer.ModelInfo'
+      - name: ', '
+        fullName: ', '
+      - name: ListModelsResponseModel
+        fullName: ListModelsResponseModel
+        uid: '@azure/ai-form-recognizer.ListModelsResponseModel'
+      - name: '>'
+        fullName: '>'

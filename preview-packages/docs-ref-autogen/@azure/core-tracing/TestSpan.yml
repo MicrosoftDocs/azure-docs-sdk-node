@@ -5,6 +5,7 @@ items:
     fullName: TestSpan
     children:
       - '@azure/core-tracing.TestSpan.addEvent'
+      - '@azure/core-tracing.TestSpan.attributes'
       - '@azure/core-tracing.TestSpan.context'
       - '@azure/core-tracing.TestSpan.end'
       - '@azure/core-tracing.TestSpan.endCalled'
@@ -52,6 +53,21 @@ items:
           - this
         description: ''
     package: '@azure/core-tracing'
+  - uid: '@azure/core-tracing.TestSpan.attributes'
+    name: attributes
+    fullName: attributes
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: 'Known attributes, if any.'
+    syntax:
+      content: 'attributes: Attributes'
+      return:
+        type:
+          - Attributes
+        description: ''
+    package: '@azure/core-tracing'
   - uid: '@azure/core-tracing.TestSpan.context'
     name: context()
     children: []
@@ -64,7 +80,7 @@ items:
       parameters: []
       return:
         type:
-          - SpanContext
+          - OTSpanContext
         description: ''
     package: '@azure/core-tracing'
   - uid: '@azure/core-tracing.TestSpan.end'
@@ -169,13 +185,13 @@ items:
       - typeScript
     summary: Sets an attribute on the Span
     syntax:
-      content: 'function setAttribute(_key: string, _value: unknown)'
+      content: 'function setAttribute(key: string, value: unknown)'
       parameters:
-        - id: _key
+        - id: key
           type:
             - string
           description: the attribute key
-        - id: _value
+        - id: value
           type:
             - unknown
           description: |
@@ -193,9 +209,9 @@ items:
       - typeScript
     summary: Sets attributes on the Span
     syntax:
-      content: 'function setAttributes(_attributes: Attributes)'
+      content: 'function setAttributes(attributes: Attributes)'
       parameters:
-        - id: _attributes
+        - id: attributes
           type:
             - Attributes
           description: |
@@ -256,7 +272,7 @@ items:
         description: ''
     package: '@azure/core-tracing'
   - uid: '@azure/core-tracing.TestSpan.constructor'
-    name: 'TestSpan(TestTracer, string, SpanContext, SpanKind, string, TimeInput)'
+    name: 'TestSpan(TestTracer, string, OTSpanContext, SpanKind, string, TimeInput)'
     children: []
     type: constructor
     langs:
@@ -265,7 +281,7 @@ items:
     syntax:
       content: >-
         new TestSpan(parentTracer: TestTracer, name: string, context:
-        SpanContext, kind: SpanKind, parentSpanId?: string, startTime?:
+        OTSpanContext, kind: SpanKind, parentSpanId?: string, startTime?:
         TimeInput)
       parameters:
         - id: parentTracer
@@ -278,7 +294,7 @@ items:
           description: The name of the span.
         - id: context
           type:
-            - SpanContext
+            - OTSpanContext
           description: The SpanContext this span belongs to
         - id: kind
           type:

@@ -18,7 +18,6 @@ items:
       - '@azure/service-bus.ServiceBusClient.createSessionReceiver_1'
       - '@azure/service-bus.ServiceBusClient.createSessionReceiver_2'
       - '@azure/service-bus.ServiceBusClient.createSessionReceiver_3'
-      - '@azure/service-bus.ServiceBusClient.getSubscriptionRuleManager'
       - '@azure/service-bus.ServiceBusClient.constructor'
       - '@azure/service-bus.ServiceBusClient.constructor_1'
     langs:
@@ -291,26 +290,34 @@ items:
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusClient.createSender'
-    name: createSender(string)
+    name: 'createSender(string, CreateSenderOptions)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
       Creates a Sender which can be used to send messages, schedule messages to
-      be sent at a later time
+      be
 
-      and cancel such scheduled messages.
+      sent at a later time and cancel such scheduled messages.
     syntax:
-      content: 'function createSender(queueOrTopicName: string)'
+      content: >-
+        function createSender(queueOrTopicName: string, options?:
+        CreateSenderOptions)
       parameters:
         - id: queueOrTopicName
           type:
             - string
-          description: ''
+          description: The name of a queue or topic to send messages to.
+        - id: options
+          type:
+            - '@azure/service-bus.CreateSenderOptions'
+          description: |
+            Options for creating a sender.
+          optional: true
       return:
         type:
-          - '@azure/service-bus.Sender'
+          - Promise<@azure/service-bus.Sender>
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusClient.createSessionReceiver'
@@ -342,7 +349,7 @@ items:
       return:
         type:
           - >-
-            @azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessageWithLock>
+            Promise<@azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessageWithLock>>
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusClient.createSessionReceiver_1'
@@ -376,7 +383,7 @@ items:
       return:
         type:
           - >-
-            @azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessage>
+            Promise<@azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessage>>
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusClient.createSessionReceiver_2'
@@ -416,7 +423,7 @@ items:
       return:
         type:
           - >-
-            @azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessageWithLock>
+            Promise<@azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessageWithLock>>
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusClient.createSessionReceiver_3'
@@ -457,36 +464,7 @@ items:
       return:
         type:
           - >-
-            @azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessage>
-        description: ''
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusClient.getSubscriptionRuleManager'
-    name: 'getSubscriptionRuleManager(string, string)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Gets a SubscriptionRuleManager, which allows you to manage Service Bus
-      subscription rules.
-
-      More information about subscription rules can be found here:
-      https://docs.microsoft.com/en-us/azure/service-bus-messaging/topic-filters
-    syntax:
-      content: 'function getSubscriptionRuleManager(topic: string, subscription: string)'
-      parameters:
-        - id: topic
-          type:
-            - string
-          description: The topic for the subscription.
-        - id: subscription
-          type:
-            - string
-          description: |
-            The subscription.
-      return:
-        type:
-          - '@azure/service-bus.SubscriptionRuleManager'
+            Promise<@azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessage>>
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusClient.constructor'
@@ -583,12 +561,22 @@ references:
         uid: '@azure/service-bus.ReceivedMessage'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/service-bus.Sender'
-    name: Sender
+  - uid: '@azure/service-bus.CreateSenderOptions'
+    name: CreateSenderOptions
     spec.typeScript:
+      - name: CreateSenderOptions
+        fullName: CreateSenderOptions
+        uid: '@azure/service-bus.CreateSenderOptions'
+  - uid: Promise<@azure/service-bus.Sender>
+    name: Sender>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
       - name: Sender
         fullName: Sender
         uid: '@azure/service-bus.Sender'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/service-bus.CreateSessionReceiverOptions'
     name: CreateSessionReceiverOptions
     spec.typeScript:
@@ -596,9 +584,11 @@ references:
         fullName: CreateSessionReceiverOptions
         uid: '@azure/service-bus.CreateSessionReceiverOptions'
   - uid: >-
-      @azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessageWithLock>
-    name: ReceivedMessageWithLock>
+      Promise<@azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessageWithLock>>
+    name: ReceivedMessageWithLock>>
     spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
       - name: SessionReceiver
         fullName: SessionReceiver
         uid: '@azure/service-bus.SessionReceiver'
@@ -607,11 +597,14 @@ references:
       - name: ReceivedMessageWithLock
         fullName: ReceivedMessageWithLock
         uid: '@azure/service-bus.ReceivedMessageWithLock'
-      - name: '>'
-        fullName: '>'
-  - uid: '@azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessage>'
-    name: ReceivedMessage>
+      - name: '>>'
+        fullName: '>>'
+  - uid: >-
+      Promise<@azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessage>>
+    name: ReceivedMessage>>
     spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
       - name: SessionReceiver
         fullName: SessionReceiver
         uid: '@azure/service-bus.SessionReceiver'
@@ -620,11 +613,5 @@ references:
       - name: ReceivedMessage
         fullName: ReceivedMessage
         uid: '@azure/service-bus.ReceivedMessage'
-      - name: '>'
-        fullName: '>'
-  - uid: '@azure/service-bus.SubscriptionRuleManager'
-    name: SubscriptionRuleManager
-    spec.typeScript:
-      - name: SubscriptionRuleManager
-        fullName: SubscriptionRuleManager
-        uid: '@azure/service-bus.SubscriptionRuleManager'
+      - name: '>>'
+        fullName: '>>'

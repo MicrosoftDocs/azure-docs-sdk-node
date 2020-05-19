@@ -23,24 +23,29 @@ items:
       'BadRequestProjectUnsupportedDomainTypeChange',
       'BadRequestProjectUnsupportedExportPlatform',
 
+      'BadRequestProjectImagePreprocessingSettings',
+      'BadRequestProjectDuplicated',
+
       'BadRequestIterationName', 'BadRequestIterationNameNotUnique',
       'BadRequestIterationDescription',
 
-      'BadRequestIterationIsNotTrained', 'BadRequestWorkspaceCannotBeModified',
+      'BadRequestIterationIsNotTrained', 'BadRequestIterationValidationFailed',
 
-      'BadRequestWorkspaceNotDeletable', 'BadRequestTagName',
-      'BadRequestTagNameNotUnique',
+      'BadRequestWorkspaceCannotBeModified', 'BadRequestWorkspaceNotDeletable',
+      'BadRequestTagName',
 
-      'BadRequestTagDescription', 'BadRequestTagType',
-      'BadRequestMultipleNegativeTag',
+      'BadRequestTagNameNotUnique', 'BadRequestTagDescription',
+      'BadRequestTagType',
 
-      'BadRequestImageTags', 'BadRequestImageRegions',
+      'BadRequestMultipleNegativeTag', 'BadRequestImageTags',
+      'BadRequestImageRegions',
+
       'BadRequestNegativeAndRegularTagOnSameImage',
+      'BadRequestRequiredParamIsNull',
 
-      'BadRequestRequiredParamIsNull', 'BadRequestIterationIsPublished',
+      'BadRequestIterationIsPublished', 'BadRequestInvalidPublishName',
 
-      'BadRequestInvalidPublishName', 'BadRequestInvalidPublishTarget',
-      'BadRequestUnpublishFailed',
+      'BadRequestInvalidPublishTarget', 'BadRequestUnpublishFailed',
 
       'BadRequestIterationNotPublished', 'BadRequestSubscriptionApi',
       'BadRequestExceedProjectLimit',
@@ -89,10 +94,13 @@ items:
       'BadRequestPredictionInvalidApplicationName',
       'BadRequestPredictionInvalidQueryParameters',
 
-      'BadRequestInvalid', 'UnsupportedMediaType', 'Forbidden', 'ForbiddenUser',
+      'BadRequestInvalidImportToken', 'BadRequestExportWhileTraining',
+      'BadRequestInvalid',
 
-      'ForbiddenUserResource', 'ForbiddenUserSignupDisabled',
-      'ForbiddenUserSignupAllowanceExceeded',
+      'UnsupportedMediaType', 'Forbidden', 'ForbiddenUser',
+      'ForbiddenUserResource',
+
+      'ForbiddenUserSignupDisabled', 'ForbiddenUserSignupAllowanceExceeded',
 
       'ForbiddenUserDoesNotExist', 'ForbiddenUserDisabled',
       'ForbiddenUserInsufficientCapability',
@@ -106,29 +114,31 @@ items:
       'NotFoundTag', 'NotFoundImage', 'NotFoundDomain',
       'NotFoundApimSubscription', 'NotFoundInvalid',
 
-      'Conflict', 'ConflictInvalid', 'ErrorUnknown',
-      'ErrorProjectInvalidWorkspace',
+      'Conflict', 'ConflictInvalid', 'ErrorUnknown', 'ErrorIterationCopyFailed',
+
+      'ErrorPreparePerformanceMigrationFailed', 'ErrorProjectInvalidWorkspace',
 
       'ErrorProjectInvalidPipelineConfiguration', 'ErrorProjectInvalidDomain',
 
-      'ErrorProjectTrainingRequestFailed', 'ErrorProjectExportRequestFailed',
+      'ErrorProjectTrainingRequestFailed', 'ErrorProjectImportRequestFailed',
 
-      'ErrorFeaturizationServiceUnavailable', 'ErrorFeaturizationQueueTimeout',
+      'ErrorProjectExportRequestFailed', 'ErrorFeaturizationServiceUnavailable',
 
-      'ErrorFeaturizationInvalidFeaturizer',
+      'ErrorFeaturizationQueueTimeout', 'ErrorFeaturizationInvalidFeaturizer',
+
       'ErrorFeaturizationAugmentationUnavailable',
-
       'ErrorFeaturizationUnrecognizedJob',
-      'ErrorFeaturizationAugmentationError',
 
-      'ErrorExporterInvalidPlatform', 'ErrorExporterInvalidFeaturizer',
+      'ErrorFeaturizationAugmentationError', 'ErrorExporterInvalidPlatform',
 
-      'ErrorExporterInvalidClassifier', 'ErrorPredictionServiceUnavailable',
+      'ErrorExporterInvalidFeaturizer', 'ErrorExporterInvalidClassifier',
 
-      'ErrorPredictionModelNotFound', 'ErrorPredictionModelNotCached',
-      'ErrorPrediction',
+      'ErrorPredictionServiceUnavailable', 'ErrorPredictionModelNotFound',
 
-      'ErrorPredictionStorage', 'ErrorRegionProposal', 'ErrorInvalid'
+      'ErrorPredictionModelNotCached', 'ErrorPrediction',
+      'ErrorPredictionStorage',
+
+      'ErrorRegionProposal', 'ErrorInvalid'
     syntax:
       content: >-
         type CustomVisionErrorCodes = "NoError" | "BadRequest" |
@@ -138,9 +148,12 @@ items:
         "BadRequestProjectUnknownDomain" |
         "BadRequestProjectUnknownClassification" |
         "BadRequestProjectUnsupportedDomainTypeChange" |
-        "BadRequestProjectUnsupportedExportPlatform" | "BadRequestIterationName"
-        | "BadRequestIterationNameNotUnique" | "BadRequestIterationDescription"
-        | "BadRequestIterationIsNotTrained" |
+        "BadRequestProjectUnsupportedExportPlatform" |
+        "BadRequestProjectImagePreprocessingSettings" |
+        "BadRequestProjectDuplicated" | "BadRequestIterationName" |
+        "BadRequestIterationNameNotUnique" | "BadRequestIterationDescription" |
+        "BadRequestIterationIsNotTrained" |
+        "BadRequestIterationValidationFailed" |
         "BadRequestWorkspaceCannotBeModified" |
         "BadRequestWorkspaceNotDeletable" | "BadRequestTagName" |
         "BadRequestTagNameNotUnique" | "BadRequestTagDescription" |
@@ -176,20 +189,23 @@ items:
         "BadRequestPredictionTagsExceededCount" |
         "BadRequestPredictionResultsExceededCount" |
         "BadRequestPredictionInvalidApplicationName" |
-        "BadRequestPredictionInvalidQueryParameters" | "BadRequestInvalid" |
-        "UnsupportedMediaType" | "Forbidden" | "ForbiddenUser" |
-        "ForbiddenUserResource" | "ForbiddenUserSignupDisabled" |
-        "ForbiddenUserSignupAllowanceExceeded" | "ForbiddenUserDoesNotExist" |
-        "ForbiddenUserDisabled" | "ForbiddenUserInsufficientCapability" |
-        "ForbiddenDRModeEnabled" | "ForbiddenInvalid" | "NotFound" |
-        "NotFoundProject" | "NotFoundProjectDefaultIteration" |
-        "NotFoundIteration" | "NotFoundIterationPerformance" | "NotFoundTag" |
-        "NotFoundImage" | "NotFoundDomain" | "NotFoundApimSubscription" |
-        "NotFoundInvalid" | "Conflict" | "ConflictInvalid" | "ErrorUnknown" |
+        "BadRequestPredictionInvalidQueryParameters" |
+        "BadRequestInvalidImportToken" | "BadRequestExportWhileTraining" |
+        "BadRequestInvalid" | "UnsupportedMediaType" | "Forbidden" |
+        "ForbiddenUser" | "ForbiddenUserResource" |
+        "ForbiddenUserSignupDisabled" | "ForbiddenUserSignupAllowanceExceeded" |
+        "ForbiddenUserDoesNotExist" | "ForbiddenUserDisabled" |
+        "ForbiddenUserInsufficientCapability" | "ForbiddenDRModeEnabled" |
+        "ForbiddenInvalid" | "NotFound" | "NotFoundProject" |
+        "NotFoundProjectDefaultIteration" | "NotFoundIteration" |
+        "NotFoundIterationPerformance" | "NotFoundTag" | "NotFoundImage" |
+        "NotFoundDomain" | "NotFoundApimSubscription" | "NotFoundInvalid" |
+        "Conflict" | "ConflictInvalid" | "ErrorUnknown" |
+        "ErrorIterationCopyFailed" | "ErrorPreparePerformanceMigrationFailed" |
         "ErrorProjectInvalidWorkspace" |
         "ErrorProjectInvalidPipelineConfiguration" | "ErrorProjectInvalidDomain"
         | "ErrorProjectTrainingRequestFailed" |
-        "ErrorProjectExportRequestFailed" |
+        "ErrorProjectImportRequestFailed" | "ErrorProjectExportRequestFailed" |
         "ErrorFeaturizationServiceUnavailable" |
         "ErrorFeaturizationQueueTimeout" | "ErrorFeaturizationInvalidFeaturizer"
         | "ErrorFeaturizationAugmentationUnavailable" |

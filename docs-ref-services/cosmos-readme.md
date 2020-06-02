@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: JavaScript
-ms.service: cosmosdb
+ms.service: cosmos-db
 ---
  # Azure Cosmos DB client library for JavaScript - Version 3.6.3 
 

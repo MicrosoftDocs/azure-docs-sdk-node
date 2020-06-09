@@ -8,7 +8,9 @@ items:
       - '@azure/service-bus.Sender.cancelScheduledMessages'
       - '@azure/service-bus.Sender.close'
       - '@azure/service-bus.Sender.createBatch'
+      - '@azure/service-bus.Sender.entityPath'
       - '@azure/service-bus.Sender.isClosed'
+      - '@azure/service-bus.Sender.open'
       - '@azure/service-bus.Sender.scheduleMessage'
       - '@azure/service-bus.Sender.scheduleMessages'
       - '@azure/service-bus.Sender.send'
@@ -134,6 +136,21 @@ items:
           - Promise<@azure/service-bus.ServiceBusMessageBatch>
         description: ''
     package: '@azure/service-bus'
+  - uid: '@azure/service-bus.Sender.entityPath'
+    name: entityPath
+    fullName: entityPath
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Path of the entity for which the sender has been created.
+    syntax:
+      content: 'entityPath: string'
+      return:
+        type:
+          - string
+        description: ''
+    package: '@azure/service-bus'
   - uid: '@azure/service-bus.Sender.isClosed'
     name: isClosed
     fullName: isClosed
@@ -149,6 +166,35 @@ items:
       return:
         type:
           - boolean
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.Sender.open'
+    name: open(SenderOpenOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Opens the AMQP link to Azure Service Bus from the sender.
+
+      It is not necessary to call this method in order to use the sender. It is
+
+      recommended to call this before your first send() or sendBatch() call if
+      you
+
+      want to front load the work of setting up the AMQP link to the service.
+    syntax:
+      content: 'function open(options?: SenderOpenOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/service-bus.SenderOpenOptions'
+          description: |
+            Options bag to pass an abort signal.
+          optional: true
+      return:
+        type:
+          - Promise<void>
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.Sender.scheduleMessage'
@@ -368,6 +414,12 @@ references:
         uid: '@azure/service-bus.ServiceBusMessageBatch'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/service-bus.SenderOpenOptions'
+    name: SenderOpenOptions
+    spec.typeScript:
+      - name: SenderOpenOptions
+        fullName: SenderOpenOptions
+        uid: '@azure/service-bus.SenderOpenOptions'
   - uid: '@azure/service-bus.ServiceBusMessage'
     name: ServiceBusMessage
     spec.typeScript:

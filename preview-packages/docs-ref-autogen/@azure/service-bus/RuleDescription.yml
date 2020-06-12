@@ -10,11 +10,7 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: >-
-      Represents a Rule on a Subscription that is used to filter the incoming
-      message from the
-
-      Subscription.
+    summary: Represents all attributes of a rule entity
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.RuleDescription.action'
     name: action
@@ -23,13 +19,15 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Action to perform if the message satisfies the filtering expression.
+    summary: |-
+      The SQL like expression that can be executed on the message should the
+      associated filter apply.
     optional: true
     syntax:
-      content: 'action?: string'
+      content: 'action?: SqlRuleAction'
       return:
         type:
-          - string
+          - '@azure/service-bus.SqlRuleAction'
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.RuleDescription.filter'
@@ -40,24 +38,22 @@ items:
       - typeScript
     type: property
     summary: >-
-      Filter expression used to match messages. Supports 2 types:
+      Defines the filter expression that the rule evaluates. For `SqlRuleFilter`
+      input,
 
-      - `string`: SQL-like condition expression that is evaluated against the
-      messages'
+      the expression string is interpreted as a SQL92 expression which must
 
-      user-defined properties and system properties. All system properties will
-      be prefixed with
+      evaluate to True or False. Only one between a `CorrelationRuleFilter` or
 
-      `sys.` in the condition expression.
-
-      - `CorrelationFilter`: Properties of the filter will be used to match with
-      the message properties.
+      a `SqlRuleFilter` can be defined.
     optional: true
     syntax:
-      content: 'filter?: string | CorrelationFilter'
+      content: 'filter?: SqlRuleFilter | CorrelationRuleFilter'
       return:
         type:
-          - string | @azure/service-bus.CorrelationFilter
+          - >-
+            @azure/service-bus.SqlRuleFilter |
+            @azure/service-bus.CorrelationRuleFilter
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.RuleDescription.name'
@@ -67,7 +63,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Represents the name of the rule.
+    summary: Name of the rule
     syntax:
       content: 'name: string'
       return:
@@ -76,11 +72,22 @@ items:
         description: ''
     package: '@azure/service-bus'
 references:
-  - uid: string | @azure/service-bus.CorrelationFilter
-    name: CorrelationFilter
+  - uid: '@azure/service-bus.SqlRuleAction'
+    name: SqlRuleAction
     spec.typeScript:
-      - name: 'string | '
-        fullName: 'string | '
-      - name: CorrelationFilter
-        fullName: CorrelationFilter
-        uid: '@azure/service-bus.CorrelationFilter'
+      - name: SqlRuleAction
+        fullName: SqlRuleAction
+        uid: '@azure/service-bus.SqlRuleAction'
+  - uid: >-
+      @azure/service-bus.SqlRuleFilter |
+      @azure/service-bus.CorrelationRuleFilter
+    name: CorrelationRuleFilter
+    spec.typeScript:
+      - name: SqlRuleFilter
+        fullName: SqlRuleFilter
+        uid: '@azure/service-bus.SqlRuleFilter'
+      - name: ' | '
+        fullName: ' | '
+      - name: CorrelationRuleFilter
+        fullName: CorrelationRuleFilter
+        uid: '@azure/service-bus.CorrelationRuleFilter'

@@ -1,14 +1,14 @@
 ---
 title: Azure Event Hubs client library for Javascript
-keywords: Azure, JavaScript, SDK, API, eventhub, event-hubs
+keywords: Azure, Javascript, SDK, API,  @azure/event-hubs
 author: maggiepint
 ms.author: magpint
-ms.date: 04/16/2020
+ms.date: 05/10/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: JavaScript
-ms.service: eventhub
+ms.devlang: Javascript
+ms.service: 
 ---
 
 # Azure Event Hubs client library for Javascript - Version 5.2.1
@@ -494,3 +494,4 @@ directory for detailed examples of how to use this library to send and receive e
 If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Feventhub%2Fevent-hubs%2FREADME.png)
+

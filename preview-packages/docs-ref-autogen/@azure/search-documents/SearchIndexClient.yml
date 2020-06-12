@@ -2,29 +2,64 @@
 items:
   - uid: '@azure/search-documents.SearchIndexClient'
     name: SearchIndexClient
-    fullName: SearchIndexClient<T>
+    fullName: SearchIndexClient
     children:
+      - '@azure/search-documents.SearchIndexClient.analyzeText'
       - '@azure/search-documents.SearchIndexClient.apiVersion'
-      - '@azure/search-documents.SearchIndexClient.autocomplete'
-      - '@azure/search-documents.SearchIndexClient.countDocuments'
-      - '@azure/search-documents.SearchIndexClient.deleteDocuments'
+      - '@azure/search-documents.SearchIndexClient.createIndex'
+      - '@azure/search-documents.SearchIndexClient.createOrUpdateIndex'
+      - '@azure/search-documents.SearchIndexClient.createOrUpdateSynonymMap'
+      - '@azure/search-documents.SearchIndexClient.createSynonymMap'
+      - '@azure/search-documents.SearchIndexClient.deleteIndex'
+      - '@azure/search-documents.SearchIndexClient.deleteSynonymMap'
       - '@azure/search-documents.SearchIndexClient.endpoint'
-      - '@azure/search-documents.SearchIndexClient.getDocument'
-      - '@azure/search-documents.SearchIndexClient.indexDocuments'
-      - '@azure/search-documents.SearchIndexClient.indexName'
-      - '@azure/search-documents.SearchIndexClient.mergeDocuments'
-      - '@azure/search-documents.SearchIndexClient.mergeOrUploadDocuments'
-      - '@azure/search-documents.SearchIndexClient.search'
+      - '@azure/search-documents.SearchIndexClient.getIndex'
+      - '@azure/search-documents.SearchIndexClient.getIndexStatistics'
+      - '@azure/search-documents.SearchIndexClient.getSearchClient'
+      - '@azure/search-documents.SearchIndexClient.getServiceStatistics'
+      - '@azure/search-documents.SearchIndexClient.getSynonymMap'
+      - '@azure/search-documents.SearchIndexClient.listIndexes'
+      - '@azure/search-documents.SearchIndexClient.listIndexesNames'
+      - '@azure/search-documents.SearchIndexClient.listSynonymMaps'
+      - '@azure/search-documents.SearchIndexClient.listSynonymMapsNames'
       - '@azure/search-documents.SearchIndexClient.constructor'
-      - '@azure/search-documents.SearchIndexClient.suggest'
-      - '@azure/search-documents.SearchIndexClient.uploadDocuments'
     langs:
       - typeScript
     type: class
     summary: |-
-      Class used to perform operations against a search index,
-      including querying documents in the index as well as
-      adding, updating, and removing them.
+      Class to perform operations to manage
+      (create, update, list/delete)
+      indexes, & synonymmaps.
+    package: '@azure/search-documents'
+  - uid: '@azure/search-documents.SearchIndexClient.analyzeText'
+    name: 'analyzeText(string, string, AnalyzeTextOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Calls an analyzer or tokenizer manually on provided text.
+    syntax:
+      content: >-
+        function analyzeText(indexName: string, text: string, options:
+        AnalyzeTextOptions)
+      parameters:
+        - id: indexName
+          type:
+            - string
+          description: The name of the index that contains the field to analyze
+        - id: text
+          type:
+            - string
+          description: The text to break into tokens.
+        - id: options
+          type:
+            - '@azure/search-documents.AnalyzeTextOptions'
+          description: |
+            Additional arguments
+      return:
+        type:
+          - Promise<@azure/search-documents.AnalyzeResult>
+        description: ''
     package: '@azure/search-documents'
   - uid: '@azure/search-documents.SearchIndexClient.apiVersion'
     name: apiVersion
@@ -41,78 +76,164 @@ items:
           - string
         description: ''
     package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchIndexClient.autocomplete'
-    name: autocomplete(AutocompleteOptions<Fields>)
+  - uid: '@azure/search-documents.SearchIndexClient.createIndex'
+    name: 'createIndex(SearchIndex, CreateIndexOptions)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: |-
-      Based on a partial searchText from the user, return a list
-      of potential completion strings based on a specified suggester.
+    summary: Creates a new index.
     syntax:
-      content: 'function autocomplete<Fields>(options: AutocompleteOptions<Fields>)'
+      content: 'function createIndex(index: SearchIndex, options?: CreateIndexOptions)'
       parameters:
+        - id: index
+          type:
+            - '@azure/search-documents.SearchIndex'
+          description: The information describing the index to be created.
         - id: options
           type:
-            - '@azure/search-documents.AutocompleteOptions<Fields>'
+            - '@azure/search-documents.CreateIndexOptions'
           description: |
-            Options to the autocomplete operation.
-      return:
-        type:
-          - Promise<@azure/search-documents.AutocompleteResult>
-        description: ''
-    package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchIndexClient.countDocuments'
-    name: countDocuments(CountDocumentsOptions)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Retrieves the number of documents in the index.
-    syntax:
-      content: 'function countDocuments(options?: CountDocumentsOptions)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/search-documents.CountDocumentsOptions'
-          description: |
-            Options to the count operation.
+            Additional optional arguments.
           optional: true
       return:
         type:
-          - Promise<number>
+          - Promise<@azure/search-documents.SearchIndex>
         description: ''
     package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchIndexClient.deleteDocuments'
-    name: 'deleteDocuments(Object, string[], DeleteDocumentsOptions)'
+  - uid: '@azure/search-documents.SearchIndexClient.createOrUpdateIndex'
+    name: 'createOrUpdateIndex(SearchIndex, CreateOrUpdateIndexOptions)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: Delete a set of documents by their primary key.
+    summary: Creates a new index or modifies an existing one.
     syntax:
       content: >-
-        function deleteDocuments(keyName: Object, keyValues: string[], options?:
-        DeleteDocumentsOptions)
+        function createOrUpdateIndex(index: SearchIndex, options?:
+        CreateOrUpdateIndexOptions)
       parameters:
-        - id: keyName
+        - id: index
           type:
-            - Object
-          description: The name of their primary key in the index.
-        - id: keyValues
-          type:
-            - 'string[]'
-          description: The primary key values of documents to delete.
+            - '@azure/search-documents.SearchIndex'
+          description: The information describing the index to be created.
         - id: options
           type:
-            - '@azure/search-documents.DeleteDocumentsOptions'
+            - '@azure/search-documents.CreateOrUpdateIndexOptions'
           description: |
-            Additional options.
+            Additional optional arguments.
           optional: true
       return:
         type:
-          - Promise<@azure/search-documents.IndexDocumentsResult>
+          - Promise<@azure/search-documents.SearchIndex>
+        description: ''
+    package: '@azure/search-documents'
+  - uid: '@azure/search-documents.SearchIndexClient.createOrUpdateSynonymMap'
+    name: 'createOrUpdateSynonymMap(SynonymMap, CreateOrUpdateSynonymMapOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates a new SynonymMap or modifies an existing one.
+    syntax:
+      content: >-
+        function createOrUpdateSynonymMap(synonymMap: SynonymMap, options?:
+        CreateOrUpdateSynonymMapOptions)
+      parameters:
+        - id: synonymMap
+          type:
+            - '@azure/search-documents.SynonymMap'
+          description: The information describing the SynonymMap to be created.
+        - id: options
+          type:
+            - '@azure/search-documents.CreateOrUpdateSynonymMapOptions'
+          description: |
+            Additional optional arguments.
+          optional: true
+      return:
+        type:
+          - Promise<@azure/search-documents.SynonymMap>
+        description: ''
+    package: '@azure/search-documents'
+  - uid: '@azure/search-documents.SearchIndexClient.createSynonymMap'
+    name: 'createSynonymMap(SynonymMap, CreateSynonymMapOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates a new SynonymMap in a search service.
+    syntax:
+      content: >-
+        function createSynonymMap(synonymMap: SynonymMap, options?:
+        CreateSynonymMapOptions)
+      parameters:
+        - id: synonymMap
+          type:
+            - '@azure/search-documents.SynonymMap'
+          description: The synonymMap definition to create in a search service.
+        - id: options
+          type:
+            - '@azure/search-documents.CreateSynonymMapOptions'
+          description: |
+            Additional optional arguments.
+          optional: true
+      return:
+        type:
+          - Promise<@azure/search-documents.SynonymMap>
+        description: ''
+    package: '@azure/search-documents'
+  - uid: '@azure/search-documents.SearchIndexClient.deleteIndex'
+    name: 'deleteIndex(string | SearchIndex, DeleteIndexOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Deletes an existing index.
+    syntax:
+      content: >-
+        function deleteIndex(index: string | SearchIndex, options?:
+        DeleteIndexOptions)
+      parameters:
+        - id: index
+          type:
+            - string | @azure/search-documents.SearchIndex
+          description: ''
+        - id: options
+          type:
+            - '@azure/search-documents.DeleteIndexOptions'
+          description: |
+            Additional optional arguments.
+          optional: true
+      return:
+        type:
+          - Promise<void>
+        description: ''
+    package: '@azure/search-documents'
+  - uid: '@azure/search-documents.SearchIndexClient.deleteSynonymMap'
+    name: 'deleteSynonymMap(string | SynonymMap, DeleteSynonymMapOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Deletes an existing SynonymMap.
+    syntax:
+      content: >-
+        function deleteSynonymMap(synonymMap: string | SynonymMap, options?:
+        DeleteSynonymMapOptions)
+      parameters:
+        - id: synonymMap
+          type:
+            - string | @azure/search-documents.SynonymMap
+          description: ''
+        - id: options
+          type:
+            - '@azure/search-documents.DeleteSynonymMapOptions'
+          description: |
+            Additional optional arguments.
+          optional: true
+      return:
+        type:
+          - Promise<void>
         description: ''
     package: '@azure/search-documents'
   - uid: '@azure/search-documents.SearchIndexClient.endpoint'
@@ -130,176 +251,225 @@ items:
           - string
         description: ''
     package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchIndexClient.getDocument'
-    name: 'getDocument(string, GetDocumentOptions<Fields>)'
+  - uid: '@azure/search-documents.SearchIndexClient.getIndex'
+    name: 'getIndex(string, GetIndexOptions)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: Retrieve a particular document from the index by key.
+    summary: Retrieves information about an index.
     syntax:
-      content: >-
-        function getDocument<Fields>(key: string, options?:
-        GetDocumentOptions<Fields>)
+      content: 'function getIndex(indexName: string, options?: GetIndexOptions)'
       parameters:
-        - id: key
+        - id: indexName
           type:
             - string
-          description: The primary key value of the document
+          description: The name of the index.
         - id: options
           type:
-            - '@azure/search-documents.GetDocumentOptions<Fields>'
+            - '@azure/search-documents.GetIndexOptions'
           description: |
-            Additional options
+            Additional optional arguments.
           optional: true
       return:
         type:
-          - Promise<T>
+          - Promise<@azure/search-documents.SearchIndex>
         description: ''
     package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchIndexClient.indexDocuments'
-    name: 'indexDocuments(IndexDocumentsBatch<T>, IndexDocuments)'
+  - uid: '@azure/search-documents.SearchIndexClient.getIndexStatistics'
+    name: 'getIndexStatistics(string, GetIndexStatisticsOptions)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Perform a set of index modifications (upload, merge, mergeOrUpload,
-      delete)
+      Retrieves statistics about an index, such as the count of documents and
+      the size
 
-      for the given set of documents.
-
-      This operation may partially succeed and not all document operations will
-
-      be reflected in the index. If you would like to treat this as an
-      exception,
-
-      set the `throwOnAnyFailure` option to true.
-
-      For more details about how merging works, see:
-      https://docs.microsoft.com/en-us/rest/api/searchservice/AddUpdate-or-Delete-Documents
+      of index storage.
     syntax:
       content: >-
-        function indexDocuments(batch: IndexDocumentsBatch<T>, options?:
-        IndexDocuments)
+        function getIndexStatistics(indexName: string, options?:
+        GetIndexStatisticsOptions)
       parameters:
-        - id: batch
+        - id: indexName
           type:
-            - '@azure/search-documents.IndexDocumentsBatch<T>'
-          description: An array of actions to perform on the index.
+            - string
+          description: The name of the index.
         - id: options
           type:
-            - '@azure/search-documents.IndexDocuments'
+            - '@azure/search-documents.GetIndexStatisticsOptions'
           description: |
-            Additional options.
+            Additional optional arguments.
           optional: true
       return:
         type:
-          - Promise<@azure/search-documents.IndexDocumentsResult>
+          - Promise<@azure/search-documents.SearchIndexStatistics>
         description: ''
     package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchIndexClient.indexName'
-    name: indexName
-    fullName: indexName
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: The name of the index
-    syntax:
-      content: 'indexName: string'
-      return:
-        type:
-          - string
-        description: ''
-    package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchIndexClient.mergeDocuments'
-    name: 'mergeDocuments(T[], MergeDocumentsOptions)'
+  - uid: '@azure/search-documents.SearchIndexClient.getSearchClient'
+    name: 'getSearchClient(string, SearchClientOptions)'
     children: []
     type: method
     langs:
       - typeScript
-    summary: >-
-      Update a set of documents in the index.
-
-      For more details about how merging works, see
-      https://docs.microsoft.com/en-us/rest/api/searchservice/AddUpdate-or-Delete-Documents
-    syntax:
-      content: 'function mergeDocuments(documents: T[], options?: MergeDocumentsOptions)'
-      parameters:
-        - id: documents
-          type:
-            - 'T[]'
-          description: The updated documents.
-        - id: options
-          type:
-            - '@azure/search-documents.MergeDocumentsOptions'
-          description: |
-            Additional options.
-          optional: true
-      return:
-        type:
-          - Promise<@azure/search-documents.IndexDocumentsResult>
-        description: ''
-    package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchIndexClient.mergeOrUploadDocuments'
-    name: 'mergeOrUploadDocuments(T[], MergeOrUploadDocumentsOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Update a set of documents in the index or upload them if they don't exist.
-
-      For more details about how merging works, see
-      https://docs.microsoft.com/en-us/rest/api/searchservice/AddUpdate-or-Delete-Documents
+    summary: Retrieves the SearchClient corresponding to this SearchIndexClient
     syntax:
       content: >-
-        function mergeOrUploadDocuments(documents: T[], options?:
-        MergeOrUploadDocumentsOptions)
+        function getSearchClient<T>(indexName: string, options?:
+        SearchClientOptions)
       parameters:
-        - id: documents
+        - id: indexName
           type:
-            - 'T[]'
-          description: The updated documents.
+            - string
+          description: Name of the index
         - id: options
           type:
-            - '@azure/search-documents.MergeOrUploadDocumentsOptions'
+            - '@azure/search-documents.SearchClientOptions'
           description: |
-            Additional options.
+            SearchClient Options
           optional: true
       return:
         type:
-          - Promise<@azure/search-documents.IndexDocumentsResult>
+          - '@azure/search-documents.SearchClient<T>'
         description: ''
     package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchIndexClient.search'
-    name: search(SearchOptions<Fields>)
+  - uid: '@azure/search-documents.SearchIndexClient.getServiceStatistics'
+    name: getServiceStatistics(GetServiceStatisticsOptions)
     children: []
     type: method
     langs:
       - typeScript
-    summary: |-
-      Performs a search on the current index given
-      the specified arguments.
+    summary: >-
+      Retrieves statistics about the service, such as the count of documents,
+      index, etc.
     syntax:
-      content: 'function search<Fields>(options?: SearchOptions<Fields>)'
+      content: 'function getServiceStatistics(options?: GetServiceStatisticsOptions)'
       parameters:
         - id: options
           type:
-            - '@azure/search-documents.SearchOptions<Fields>'
+            - '@azure/search-documents.GetServiceStatisticsOptions'
           description: |
-            Options for the search operation.
+            Additional optional arguments.
           optional: true
       return:
         type:
-          - >-
-            Promise<@azure/search-documents.SearchDocumentsResult<Pick<T,
-            Fields>>>
+          - Promise<@azure/search-documents.SearchServiceStatistics>
+        description: ''
+    package: '@azure/search-documents'
+  - uid: '@azure/search-documents.SearchIndexClient.getSynonymMap'
+    name: 'getSynonymMap(string, GetSynonymMapsOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Retrieves information about a SynonymMap.
+    syntax:
+      content: >-
+        function getSynonymMap(synonymMapName: string, options?:
+        GetSynonymMapsOptions)
+      parameters:
+        - id: synonymMapName
+          type:
+            - string
+          description: The name of the SynonymMap.
+        - id: options
+          type:
+            - '@azure/search-documents.GetSynonymMapsOptions'
+          description: |
+            Additional optional arguments.
+          optional: true
+      return:
+        type:
+          - Promise<@azure/search-documents.SynonymMap>
+        description: ''
+    package: '@azure/search-documents'
+  - uid: '@azure/search-documents.SearchIndexClient.listIndexes'
+    name: listIndexes(ListIndexesOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Retrieves a list of existing indexes in the service.
+    syntax:
+      content: 'function listIndexes(options?: ListIndexesOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/search-documents.ListIndexesOptions'
+          description: |
+            Options to the list index operation.
+          optional: true
+      return:
+        type:
+          - '@azure/search-documents.IndexIterator'
+        description: ''
+    package: '@azure/search-documents'
+  - uid: '@azure/search-documents.SearchIndexClient.listIndexesNames'
+    name: listIndexesNames(ListIndexesOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Retrieves a list of names of existing indexes in the service.
+    syntax:
+      content: 'function listIndexesNames(options?: ListIndexesOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/search-documents.ListIndexesOptions'
+          description: |
+            Options to the list index operation.
+          optional: true
+      return:
+        type:
+          - '@azure/search-documents.IndexNameIterator'
+        description: ''
+    package: '@azure/search-documents'
+  - uid: '@azure/search-documents.SearchIndexClient.listSynonymMaps'
+    name: listSynonymMaps(ListSynonymMapsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Retrieves a list of existing SynonymMaps in the service.
+    syntax:
+      content: 'function listSynonymMaps(options?: ListSynonymMapsOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/search-documents.ListSynonymMapsOptions'
+          description: |
+            Options to the list SynonymMaps operation.
+          optional: true
+      return:
+        type:
+          - Promise<Array<@azure/search-documents.SynonymMap>>
+        description: ''
+    package: '@azure/search-documents'
+  - uid: '@azure/search-documents.SearchIndexClient.listSynonymMapsNames'
+    name: listSynonymMapsNames(ListSynonymMapsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Retrieves a list of names of existing SynonymMaps in the service.
+    syntax:
+      content: 'function listSynonymMapsNames(options?: ListSynonymMapsOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/search-documents.ListSynonymMapsOptions'
+          description: |
+            Options to the list SynonymMaps operation.
+          optional: true
+      return:
+        type:
+          - Promise<Array<string>>
         description: ''
     package: '@azure/search-documents'
   - uid: '@azure/search-documents.SearchIndexClient.constructor'
-    name: 'SearchIndexClient(string, string, KeyCredential, SearchIndexClientOptions)'
+    name: 'SearchIndexClient(string, KeyCredential, SearchIndexClientOptions)'
     children: []
     type: constructor
     langs:
@@ -317,24 +487,19 @@ items:
 
       const client = new SearchIndexClient(
         "<endpoint>",
-        "<indexName>",
         new AzureKeyCredential("<Admin Key>");
       );
 
       ```
     syntax:
       content: >-
-        new SearchIndexClient(endpoint: string, indexName: string, credential:
-        KeyCredential, options?: SearchIndexClientOptions)
+        new SearchIndexClient(endpoint: string, credential: KeyCredential,
+        options?: SearchIndexClientOptions)
       parameters:
         - id: endpoint
           type:
             - string
           description: The endpoint of the search service
-        - id: indexName
-          type:
-            - string
-          description: The name of the index
         - id: credential
           type:
             - KeyCredential
@@ -345,57 +510,6 @@ items:
           description: ''
           optional: true
     package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchIndexClient.suggest'
-    name: suggest(SuggestOptions<Fields>)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: |-
-      Returns a short list of suggestions based on the searchText
-      and specified suggester.
-    syntax:
-      content: 'function suggest<Fields>(options: SuggestOptions<Fields>)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/search-documents.SuggestOptions<Fields>'
-          description: |
-            Options for the suggest operation
-      return:
-        type:
-          - >-
-            Promise<@azure/search-documents.SuggestDocumentsResult<Pick<T,
-            Fields>>>
-        description: ''
-    package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchIndexClient.uploadDocuments'
-    name: 'uploadDocuments(T[], UploadDocumentsOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Upload an array of documents to the index.
-    syntax:
-      content: >-
-        function uploadDocuments(documents: T[], options?:
-        UploadDocumentsOptions)
-      parameters:
-        - id: documents
-          type:
-            - 'T[]'
-          description: The documents to upload.
-        - id: options
-          type:
-            - '@azure/search-documents.UploadDocumentsOptions'
-          description: |
-            Additional options.
-          optional: true
-      return:
-        type:
-          - Promise<@azure/search-documents.IndexDocumentsResult>
-        description: ''
-    package: '@azure/search-documents'
 references:
   - uid: '@azure/search-documents.SearchIndexClientOptions'
     name: SearchIndexClientOptions
@@ -403,119 +517,195 @@ references:
       - name: SearchIndexClientOptions
         fullName: SearchIndexClientOptions
         uid: '@azure/search-documents.SearchIndexClientOptions'
-  - uid: '@azure/search-documents.AutocompleteOptions<Fields>'
-    name: AutocompleteOptions<Fields>
+  - uid: '@azure/search-documents.AnalyzeTextOptions'
+    name: AnalyzeTextOptions
     spec.typeScript:
-      - name: AutocompleteOptions
-        fullName: AutocompleteOptions
-        uid: '@azure/search-documents.AutocompleteOptions'
-      - name: <Fields>
-        fullName: <Fields>
-  - uid: Promise<@azure/search-documents.AutocompleteResult>
-    name: AutocompleteResult>
+      - name: AnalyzeTextOptions
+        fullName: AnalyzeTextOptions
+        uid: '@azure/search-documents.AnalyzeTextOptions'
+  - uid: Promise<@azure/search-documents.AnalyzeResult>
+    name: AnalyzeResult>
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
-      - name: AutocompleteResult
-        fullName: AutocompleteResult
-        uid: '@azure/search-documents.AutocompleteResult'
+      - name: AnalyzeResult
+        fullName: AnalyzeResult
+        uid: '@azure/search-documents.AnalyzeResult'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/search-documents.CountDocumentsOptions'
-    name: CountDocumentsOptions
+  - uid: '@azure/search-documents.SearchIndex'
+    name: SearchIndex
     spec.typeScript:
-      - name: CountDocumentsOptions
-        fullName: CountDocumentsOptions
-        uid: '@azure/search-documents.CountDocumentsOptions'
-  - uid: '@azure/search-documents.DeleteDocumentsOptions'
-    name: DeleteDocumentsOptions
+      - name: SearchIndex
+        fullName: SearchIndex
+        uid: '@azure/search-documents.SearchIndex'
+  - uid: '@azure/search-documents.CreateIndexOptions'
+    name: CreateIndexOptions
     spec.typeScript:
-      - name: DeleteDocumentsOptions
-        fullName: DeleteDocumentsOptions
-        uid: '@azure/search-documents.DeleteDocumentsOptions'
-  - uid: Promise<@azure/search-documents.IndexDocumentsResult>
-    name: IndexDocumentsResult>
+      - name: CreateIndexOptions
+        fullName: CreateIndexOptions
+        uid: '@azure/search-documents.CreateIndexOptions'
+  - uid: Promise<@azure/search-documents.SearchIndex>
+    name: SearchIndex>
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
-      - name: IndexDocumentsResult
-        fullName: IndexDocumentsResult
-        uid: '@azure/search-documents.IndexDocumentsResult'
+      - name: SearchIndex
+        fullName: SearchIndex
+        uid: '@azure/search-documents.SearchIndex'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/search-documents.GetDocumentOptions<Fields>'
-    name: GetDocumentOptions<Fields>
+  - uid: '@azure/search-documents.CreateOrUpdateIndexOptions'
+    name: CreateOrUpdateIndexOptions
     spec.typeScript:
-      - name: GetDocumentOptions
-        fullName: GetDocumentOptions
-        uid: '@azure/search-documents.GetDocumentOptions'
-      - name: <Fields>
-        fullName: <Fields>
-  - uid: '@azure/search-documents.IndexDocumentsBatch<T>'
-    name: IndexDocumentsBatch<T>
+      - name: CreateOrUpdateIndexOptions
+        fullName: CreateOrUpdateIndexOptions
+        uid: '@azure/search-documents.CreateOrUpdateIndexOptions'
+  - uid: '@azure/search-documents.SynonymMap'
+    name: SynonymMap
     spec.typeScript:
-      - name: IndexDocumentsBatch
-        fullName: IndexDocumentsBatch
-        uid: '@azure/search-documents.IndexDocumentsBatch'
+      - name: SynonymMap
+        fullName: SynonymMap
+        uid: '@azure/search-documents.SynonymMap'
+  - uid: '@azure/search-documents.CreateOrUpdateSynonymMapOptions'
+    name: CreateOrUpdateSynonymMapOptions
+    spec.typeScript:
+      - name: CreateOrUpdateSynonymMapOptions
+        fullName: CreateOrUpdateSynonymMapOptions
+        uid: '@azure/search-documents.CreateOrUpdateSynonymMapOptions'
+  - uid: Promise<@azure/search-documents.SynonymMap>
+    name: SynonymMap>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: SynonymMap
+        fullName: SynonymMap
+        uid: '@azure/search-documents.SynonymMap'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/search-documents.CreateSynonymMapOptions'
+    name: CreateSynonymMapOptions
+    spec.typeScript:
+      - name: CreateSynonymMapOptions
+        fullName: CreateSynonymMapOptions
+        uid: '@azure/search-documents.CreateSynonymMapOptions'
+  - uid: string | @azure/search-documents.SearchIndex
+    name: SearchIndex
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - name: SearchIndex
+        fullName: SearchIndex
+        uid: '@azure/search-documents.SearchIndex'
+  - uid: '@azure/search-documents.DeleteIndexOptions'
+    name: DeleteIndexOptions
+    spec.typeScript:
+      - name: DeleteIndexOptions
+        fullName: DeleteIndexOptions
+        uid: '@azure/search-documents.DeleteIndexOptions'
+  - uid: string | @azure/search-documents.SynonymMap
+    name: SynonymMap
+    spec.typeScript:
+      - name: 'string | '
+        fullName: 'string | '
+      - name: SynonymMap
+        fullName: SynonymMap
+        uid: '@azure/search-documents.SynonymMap'
+  - uid: '@azure/search-documents.DeleteSynonymMapOptions'
+    name: DeleteSynonymMapOptions
+    spec.typeScript:
+      - name: DeleteSynonymMapOptions
+        fullName: DeleteSynonymMapOptions
+        uid: '@azure/search-documents.DeleteSynonymMapOptions'
+  - uid: '@azure/search-documents.GetIndexOptions'
+    name: GetIndexOptions
+    spec.typeScript:
+      - name: GetIndexOptions
+        fullName: GetIndexOptions
+        uid: '@azure/search-documents.GetIndexOptions'
+  - uid: '@azure/search-documents.GetIndexStatisticsOptions'
+    name: GetIndexStatisticsOptions
+    spec.typeScript:
+      - name: GetIndexStatisticsOptions
+        fullName: GetIndexStatisticsOptions
+        uid: '@azure/search-documents.GetIndexStatisticsOptions'
+  - uid: Promise<@azure/search-documents.SearchIndexStatistics>
+    name: SearchIndexStatistics>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: SearchIndexStatistics
+        fullName: SearchIndexStatistics
+        uid: '@azure/search-documents.SearchIndexStatistics'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/search-documents.SearchClientOptions'
+    name: SearchClientOptions
+    spec.typeScript:
+      - name: SearchClientOptions
+        fullName: SearchClientOptions
+        uid: '@azure/search-documents.SearchClientOptions'
+  - uid: '@azure/search-documents.SearchClient<T>'
+    name: SearchClient<T>
+    spec.typeScript:
+      - name: SearchClient
+        fullName: SearchClient
+        uid: '@azure/search-documents.SearchClient'
       - name: <T>
         fullName: <T>
-  - uid: '@azure/search-documents.IndexDocuments'
-    name: IndexDocuments
+  - uid: '@azure/search-documents.GetServiceStatisticsOptions'
+    name: GetServiceStatisticsOptions
     spec.typeScript:
-      - name: IndexDocuments
-        fullName: IndexDocuments
-        uid: '@azure/search-documents.IndexDocuments'
-  - uid: '@azure/search-documents.MergeDocumentsOptions'
-    name: MergeDocumentsOptions
-    spec.typeScript:
-      - name: MergeDocumentsOptions
-        fullName: MergeDocumentsOptions
-        uid: '@azure/search-documents.MergeDocumentsOptions'
-  - uid: '@azure/search-documents.MergeOrUploadDocumentsOptions'
-    name: MergeOrUploadDocumentsOptions
-    spec.typeScript:
-      - name: MergeOrUploadDocumentsOptions
-        fullName: MergeOrUploadDocumentsOptions
-        uid: '@azure/search-documents.MergeOrUploadDocumentsOptions'
-  - uid: '@azure/search-documents.SearchOptions<Fields>'
-    name: SearchOptions<Fields>
-    spec.typeScript:
-      - name: SearchOptions
-        fullName: SearchOptions
-        uid: '@azure/search-documents.SearchOptions'
-      - name: <Fields>
-        fullName: <Fields>
-  - uid: 'Promise<@azure/search-documents.SearchDocumentsResult<Pick<T, Fields>>>'
-    name: 'SearchDocumentsResult<Pick<T, Fields>>>'
+      - name: GetServiceStatisticsOptions
+        fullName: GetServiceStatisticsOptions
+        uid: '@azure/search-documents.GetServiceStatisticsOptions'
+  - uid: Promise<@azure/search-documents.SearchServiceStatistics>
+    name: SearchServiceStatistics>
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
-      - name: SearchDocumentsResult
-        fullName: SearchDocumentsResult
-        uid: '@azure/search-documents.SearchDocumentsResult'
-      - name: '<Pick<T, Fields>>>'
-        fullName: '<Pick<T, Fields>>>'
-  - uid: '@azure/search-documents.SuggestOptions<Fields>'
-    name: SuggestOptions<Fields>
+      - name: SearchServiceStatistics
+        fullName: SearchServiceStatistics
+        uid: '@azure/search-documents.SearchServiceStatistics'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/search-documents.GetSynonymMapsOptions'
+    name: GetSynonymMapsOptions
     spec.typeScript:
-      - name: SuggestOptions
-        fullName: SuggestOptions
-        uid: '@azure/search-documents.SuggestOptions'
-      - name: <Fields>
-        fullName: <Fields>
-  - uid: 'Promise<@azure/search-documents.SuggestDocumentsResult<Pick<T, Fields>>>'
-    name: 'SuggestDocumentsResult<Pick<T, Fields>>>'
+      - name: GetSynonymMapsOptions
+        fullName: GetSynonymMapsOptions
+        uid: '@azure/search-documents.GetSynonymMapsOptions'
+  - uid: '@azure/search-documents.ListIndexesOptions'
+    name: ListIndexesOptions
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: SuggestDocumentsResult
-        fullName: SuggestDocumentsResult
-        uid: '@azure/search-documents.SuggestDocumentsResult'
-      - name: '<Pick<T, Fields>>>'
-        fullName: '<Pick<T, Fields>>>'
-  - uid: '@azure/search-documents.UploadDocumentsOptions'
-    name: UploadDocumentsOptions
+      - name: ListIndexesOptions
+        fullName: ListIndexesOptions
+        uid: '@azure/search-documents.ListIndexesOptions'
+  - uid: '@azure/search-documents.IndexIterator'
+    name: IndexIterator
     spec.typeScript:
-      - name: UploadDocumentsOptions
-        fullName: UploadDocumentsOptions
-        uid: '@azure/search-documents.UploadDocumentsOptions'
+      - name: IndexIterator
+        fullName: IndexIterator
+        uid: '@azure/search-documents.IndexIterator'
+  - uid: '@azure/search-documents.IndexNameIterator'
+    name: IndexNameIterator
+    spec.typeScript:
+      - name: IndexNameIterator
+        fullName: IndexNameIterator
+        uid: '@azure/search-documents.IndexNameIterator'
+  - uid: '@azure/search-documents.ListSynonymMapsOptions'
+    name: ListSynonymMapsOptions
+    spec.typeScript:
+      - name: ListSynonymMapsOptions
+        fullName: ListSynonymMapsOptions
+        uid: '@azure/search-documents.ListSynonymMapsOptions'
+  - uid: Promise<Array<@azure/search-documents.SynonymMap>>
+    name: SynonymMap>>
+    spec.typeScript:
+      - name: Promise<Array<
+        fullName: Promise<Array<
+      - name: SynonymMap
+        fullName: SynonymMap
+        uid: '@azure/search-documents.SynonymMap'
+      - name: '>>'
+        fullName: '>>'

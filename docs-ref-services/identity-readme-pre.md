@@ -1,17 +1,17 @@
 ---
 title: Azure Identity client library for JavaScript
-keywords: Azure, JavaScript, SDK, API, identity, identity
+keywords: Azure, javascript, SDK, API, identity, @azure/identity, 
 author: maggiepint
 ms.author: magpint
-ms.date: 04/16/2020
+ms.date: 06/09/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: JavaScript
+ms.devlang: javascript
 ms.service: identity
 ---
 
-# Azure Identity client library for JavaScript - Version 1.0.2 
+## Azure Identity client library for JavaScript - Version 1.1.0-preview.4 
 
 
 This library simplifies authentication against Azure Active Directory for Azure SDK libraries.
@@ -68,14 +68,14 @@ Authenticating as a managed identity requires no configuration, but does require
 
 `DefaultAzureCredential` and `EnvironmentCredential` are configured for service principal authentication with these environment variables:
 
-| variable name                   | value                                                                                 |
-| ------------------------------- | ------------------------------------------------------------------------------------- |
-| `AZURE_CLIENT_ID`               | service principal's app id                                                            |
-| `AZURE_TENANT_ID`               | id of the principal's Azure Active Directory tenant                                   |
-| `AZURE_CLIENT_SECRET`           | one of the service principal's client secrets (implies `ClientSecretCredential`)      |
-| `AZURE_CLIENT_CERTIFICATE_PATH` | one of the service principal's client secrets (implies `ClientCertificateCredential`) |
-| `AZURE_USERNAME`                | the username of a user in the tenant (implies `UsernamePasswordCredential`)           |
-| `AZURE_PASSWORD`                | the password of the user specified in `AZURE_USERNAME`                                |
+| variable name                   | value                                                                                                |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `AZURE_CLIENT_ID`               | service principal's app id                                                                           |
+| `AZURE_TENANT_ID`               | id of the principal's Azure Active Directory tenant                                                  |
+| `AZURE_CLIENT_SECRET`           | one of the service principal's client secrets (implies `ClientSecretCredential`)                     |
+| `AZURE_CLIENT_CERTIFICATE_PATH` | path to a PEM-encoded certificate file including private key (implies `ClientCertificateCredential`) |
+| `AZURE_USERNAME`                | the username of a user in the tenant (implies `UsernamePasswordCredential`)                          |
+| `AZURE_PASSWORD`                | the password of the user specified in `AZURE_USERNAME`                                               |
 
 ## Examples
 
@@ -115,7 +115,7 @@ const credential = new EnvironmentCredential();
 
 ### Using the `AuthorizationCodeCredential`
 
-The `AuthorizationCodeCredential` takes more up-front work to use than the other credential types at this time. A full sample demonstrating how to use this credential can be found in [`samples/authorizationCodeSample.ts`](https://github.com/Azure/azure-sdk-for-js/tree/10c8acd23aa6716eed741fb796a23c7c7b084ca7/../../azure-sdk-for-js/sdk/identity/identity/samples/authorizationCodeSample.ts).
+The `AuthorizationCodeCredential` takes more up-front work to use than the other credential types at this time. A full sample demonstrating how to use this credential can be found in [`samples/authorizationCodeSample.ts`](https://github.com/Azure/azure-sdk-for-js/tree/d678c900664d3d1733b596d5831b80f88cf5ac9f/sdk/identity/identity/samples/authorizationCodeSample.ts).
 
 ### Chaining credentials
 
@@ -129,8 +129,8 @@ const secondCredential = new ClientSecretCredential(tenantId, anotherClientId, a
 const credentialChain = new ChainedTokenCredential(firstCredential, secondCredential);
 
 // The chain can be used anywhere a credential is required
-const { KeysClient } = require("@azure/keyvault-keys");
-const client = new KeysClient(vaultUrl, credentialChain);
+const { KeyClient } = require("@azure/keyvault-keys");
+const client = new KeyClient(vaultUrl, credentialChain);
 ```
 
 ## Troubleshooting
@@ -151,19 +151,7 @@ If you encounter bugs or have suggestions, please [open an issue](https://github
 
 ## Contributing
 
-This project welcomes contributions and suggestions. Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit [https://cla.microsoft.com](https://cla.microsoft.com).
-
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/tree/10c8acd23aa6716eed741fb796a23c7c7b084ca7/../../azure-sdk-for-js/CONTRIBUTING.md) to learn more about how to build and test the code.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
-or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [1]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-identity/1.0.0/classes/defaultazurecredential.html
 [2]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-identity/1.0.0/classes/managedidentitycredential.html
@@ -175,5 +163,5 @@ or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any addi
 [8]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-identity/1.0.0/classes/interactivebrowsercredential.html
 [9]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-identity/1.0.0/classes/usernamepasswordcredential.html
 
-
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fidentity%2Fidentity%2FREADME.png)
+

@@ -9,13 +9,14 @@ items:
       - >-
         @azure/arm-security.JitNetworkAccessRequestPort.allowedSourceAddressPrefixes
       - '@azure/arm-security.JitNetworkAccessRequestPort.endTimeUtc'
+      - '@azure/arm-security.JitNetworkAccessRequestPort.mappedPort'
       - '@azure/arm-security.JitNetworkAccessRequestPort.number'
       - '@azure/arm-security.JitNetworkAccessRequestPort.status'
       - '@azure/arm-security.JitNetworkAccessRequestPort.statusReason'
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: An interface representing JitNetworkAccessRequestPort.
     package: '@azure/arm-security'
   - uid: '@azure/arm-security.JitNetworkAccessRequestPort.allowedSourceAddressPrefix'
     name: allowedSourceAddressPrefix
@@ -24,7 +25,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Mutually exclusive with the "allowedSourceAddressPrefixes" parameter.
+      Should be an IP address
+
+      or CIDR, for example "192.168.0.3" or "192.168.0.0/16".
     optional: true
     syntax:
       content: 'allowedSourceAddressPrefix?: undefined | string'
@@ -41,7 +46,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Mutually exclusive with the "allowedSourceAddressPrefix" parameter.
     optional: true
     syntax:
       content: 'allowedSourceAddressPrefixes?: string[]'
@@ -57,12 +62,30 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The date & time at which the request ends in UTC
     syntax:
       content: 'endTimeUtc: Date'
       return:
         type:
           - Date
+        description: ''
+    package: '@azure/arm-security'
+  - uid: '@azure/arm-security.JitNetworkAccessRequestPort.mappedPort'
+    name: mappedPort
+    fullName: mappedPort
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The port which is mapped to this port's `number` in the Azure Firewall, if
+      applicable
+    optional: true
+    syntax:
+      content: 'mappedPort?: undefined | number'
+      return:
+        type:
+          - undefined | number
         description: ''
     package: '@azure/arm-security'
   - uid: '@azure/arm-security.JitNetworkAccessRequestPort.number'
@@ -87,7 +110,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'The status of the port. Possible values include: ''Revoked'', ''Initiated'''
     syntax:
       content: 'status: Status'
       return:
@@ -102,7 +125,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      A description of why the `status` has its value. Possible values include:
+      'Expired',
+
+      'UserRequested', 'NewerRequestInitiated'
     syntax:
       content: 'statusReason: StatusReason'
       return:

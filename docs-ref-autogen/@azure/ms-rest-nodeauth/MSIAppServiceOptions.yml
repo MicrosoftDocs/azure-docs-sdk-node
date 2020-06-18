@@ -4,6 +4,7 @@ items:
     name: MSIAppServiceOptions
     fullName: MSIAppServiceOptions
     children:
+      - '@azure/ms-rest-nodeauth.MSIAppServiceOptions.clientId'
       - '@azure/ms-rest-nodeauth.MSIAppServiceOptions.httpClient'
       - '@azure/ms-rest-nodeauth.MSIAppServiceOptions.msiApiVersion'
       - '@azure/ms-rest-nodeauth.MSIAppServiceOptions.msiEndpoint'
@@ -15,6 +16,26 @@ items:
     summary: ''
     extends:
       name: '@azure/ms-rest-nodeauth.MSIOptions'
+    package: '@azure/ms-rest-nodeauth'
+  - uid: '@azure/ms-rest-nodeauth.MSIAppServiceOptions.clientId'
+    name: clientId
+    fullName: clientId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      {string} [clientId] - The clientId of the managed identity you would like
+      the token for. Required, if
+
+      your app service has user-assigned managed identities.
+    optional: true
+    syntax:
+      content: 'clientId?: undefined | string'
+      return:
+        type:
+          - undefined | string
+        description: ''
     package: '@azure/ms-rest-nodeauth'
   - uid: '@azure/ms-rest-nodeauth.MSIAppServiceOptions.httpClient'
     name: httpClient
@@ -65,10 +86,8 @@ items:
       {string} [msiEndpoint] - The local URL from which your app can request
       tokens.
 
-      Either provide this parameter or set the environment variable
-      `MSI_ENDPOINT`.
-
-      For example: `export MSI_ENDPOINT="http://127.0.0.1:41741/MSI/token/"`
+      Unless this property is specified, any of the two environment variables
+      `IDENTITY_ENDPOINT` or `MSI_ENDPOINT` will be used as the default value.
     optional: true
     syntax:
       content: 'msiEndpoint?: undefined | string'
@@ -88,10 +107,8 @@ items:
       {string} [msiSecret] - The secret used in communication between your code
       and the local MSI agent.
 
-      Either provide this parameter or set the environment variable
-      `MSI_SECRET`.
-
-      For example: `export MSI_SECRET="69418689F1E342DD946CB82994CDA3CB"`
+      Unless this property is specified, any of the two environment variables
+      `IDENTITY_SECRET` or `MSI_SECRET` will be used as the default value.
     optional: true
     syntax:
       content: 'msiSecret?: undefined | string'

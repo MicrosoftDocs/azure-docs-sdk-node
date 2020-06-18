@@ -2,7 +2,7 @@
 items:
   - uid: '@azure/ai-form-recognizer.BeginTrainingPollState'
     name: BeginTrainingPollState
-    fullName: BeginTrainingPollState<T>
+    fullName: BeginTrainingPollState
     children:
       - '@azure/ai-form-recognizer.BeginTrainingPollState.client'
       - '@azure/ai-form-recognizer.BeginTrainingPollState.error'
@@ -17,9 +17,15 @@ items:
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: >
+      The state used by the poller returned from
+      <xref:FormTrainingClient.beginTraining>.
+
+      This state is passed into the user-specified `onProgress` callback
+
+      whenever copy progress is detected.
     extends:
-      name: PollOperationState<T>
+      name: PollOperationState<@azure/ai-form-recognizer.CustomFormModel>
     package: '@azure/ai-form-recognizer'
   - uid: '@azure/ai-form-recognizer.BeginTrainingPollState.client'
     name: client
@@ -28,12 +34,14 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The instance of <xref:TrainPollerClient> that is used when calling
+      <xref:FormTrainingClient.beginTraining>.
     syntax:
-      content: 'client: TrainPollerClient<T>'
+      content: 'client: TrainPollerClient'
       return:
         type:
-          - '@azure/ai-form-recognizer.TrainPollerClient<T>'
+          - '@azure/ai-form-recognizer.TrainPollerClient'
         description: ''
     package: '@azure/ai-form-recognizer'
   - uid: '@azure/ai-form-recognizer.BeginTrainingPollState.error'
@@ -107,7 +115,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The id of the custom form model being created from the training operation.
     optional: true
     syntax:
       content: 'modelId?: string'
@@ -126,10 +134,10 @@ items:
     summary: Will exist if the operation concluded in a result of an expected type.
     optional: true
     syntax:
-      content: 'result?: T'
+      content: 'result?: CustomFormModel'
       return:
         type:
-          - T
+          - '@azure/ai-form-recognizer.CustomFormModel'
         description: ''
     package: '@azure/ai-form-recognizer'
   - uid: '@azure/ai-form-recognizer.BeginTrainingPollState.source'
@@ -139,7 +147,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The accessible url to an Azure Blob Storage container holding the training
+      documents.
     syntax:
       content: 'source: string'
       return:
@@ -154,12 +164,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: the status of the created model.
     syntax:
-      content: 'status: ModelStatus'
+      content: 'status: CustomFormModelStatus'
       return:
         type:
-          - '@azure/ai-form-recognizer.ModelStatus'
+          - '@azure/ai-form-recognizer.CustomFormModelStatus'
         description: ''
     package: '@azure/ai-form-recognizer'
   - uid: '@azure/ai-form-recognizer.BeginTrainingPollState.trainModelOptions'
@@ -169,33 +179,47 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Option to filter training files.
     optional: true
     syntax:
-      content: 'trainModelOptions?: TrainModelOptions'
+      content: 'trainModelOptions?: TrainingFileFilter'
       return:
         type:
-          - '@azure/ai-form-recognizer.TrainModelOptions'
+          - '@azure/ai-form-recognizer.TrainingFileFilter'
         description: ''
     package: '@azure/ai-form-recognizer'
 references:
-  - uid: '@azure/ai-form-recognizer.TrainPollerClient<T>'
-    name: TrainPollerClient<T>
+  - uid: PollOperationState<@azure/ai-form-recognizer.CustomFormModel>
+    name: CustomFormModel>
+    spec.typeScript:
+      - name: PollOperationState<
+        fullName: PollOperationState<
+      - name: CustomFormModel
+        fullName: CustomFormModel
+        uid: '@azure/ai-form-recognizer.CustomFormModel'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/ai-form-recognizer.TrainPollerClient'
+    name: TrainPollerClient
     spec.typeScript:
       - name: TrainPollerClient
         fullName: TrainPollerClient
         uid: '@azure/ai-form-recognizer.TrainPollerClient'
-      - name: <T>
-        fullName: <T>
-  - uid: '@azure/ai-form-recognizer.ModelStatus'
-    name: ModelStatus
+  - uid: '@azure/ai-form-recognizer.CustomFormModel'
+    name: CustomFormModel
     spec.typeScript:
-      - name: ModelStatus
-        fullName: ModelStatus
-        uid: '@azure/ai-form-recognizer.ModelStatus'
-  - uid: '@azure/ai-form-recognizer.TrainModelOptions'
-    name: TrainModelOptions
+      - name: CustomFormModel
+        fullName: CustomFormModel
+        uid: '@azure/ai-form-recognizer.CustomFormModel'
+  - uid: '@azure/ai-form-recognizer.CustomFormModelStatus'
+    name: CustomFormModelStatus
     spec.typeScript:
-      - name: TrainModelOptions
-        fullName: TrainModelOptions
-        uid: '@azure/ai-form-recognizer.TrainModelOptions'
+      - name: CustomFormModelStatus
+        fullName: CustomFormModelStatus
+        uid: '@azure/ai-form-recognizer.CustomFormModelStatus'
+  - uid: '@azure/ai-form-recognizer.TrainingFileFilter'
+    name: TrainingFileFilter
+    spec.typeScript:
+      - name: TrainingFileFilter
+        fullName: TrainingFileFilter
+        uid: '@azure/ai-form-recognizer.TrainingFileFilter'

@@ -4,11 +4,12 @@ items:
     name: Receiver
     fullName: Receiver<ReceivedMessageT>
     children:
-      - '@azure/service-bus.Receiver.browseMessages'
       - '@azure/service-bus.Receiver.close'
       - '@azure/service-bus.Receiver.entityPath'
       - '@azure/service-bus.Receiver.getMessageIterator'
+      - '@azure/service-bus.Receiver.isClosed'
       - '@azure/service-bus.Receiver.isReceivingMessages'
+      - '@azure/service-bus.Receiver.peekMessages'
       - '@azure/service-bus.Receiver.receiveBatch'
       - '@azure/service-bus.Receiver.receiveDeferredMessage'
       - '@azure/service-bus.Receiver.receiveDeferredMessages'
@@ -18,45 +19,6 @@ items:
       - typeScript
     type: interface
     summary: A receiver that does not handle sessions.
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Receiver.browseMessages'
-    name: browseMessages(BrowseMessagesOptions)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Browse the next batch of active messages (including deferred but not
-      deadlettered messages) on the
-
-      queue or subscription without modifying them.
-
-      - The first call to `browseMessages()` fetches the first active message.
-      Each subsequent call fetches the
-
-      subsequent message.
-
-      - Unlike a "received" message, "browsed" message is a read-only version of
-      the message.
-
-      It cannot be `Completed/Abandoned/Deferred/Deadlettered`.
-    syntax:
-      content: 'function browseMessages(options?: BrowseMessagesOptions)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/service-bus.BrowseMessagesOptions'
-          description: >
-            Options that allow to specify the maximum number of messages to
-            browse,
-
-            the sequenceNumber to start browsing from or an abortSignal to abort
-            the operation.
-          optional: true
-      return:
-        type:
-          - 'Promise<@azure/service-bus.ReceivedMessage[]>'
-        description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.Receiver.close'
     name: close()
@@ -80,7 +42,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: Path for the client entity.
+    summary: Path of the entity for which the receiver has been created.
     syntax:
       content: 'entityPath: string'
       return:
@@ -109,6 +71,23 @@ items:
           - AsyncIterableIterator<ReceivedMessageT>
         description: ''
     package: '@azure/service-bus'
+  - uid: '@azure/service-bus.Receiver.isClosed'
+    name: isClosed
+    fullName: isClosed
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Returns `true` if either the receiver or the client that created it has
+      been closed
+    syntax:
+      content: 'isClosed: boolean'
+      return:
+        type:
+          - boolean
+        description: ''
+    package: '@azure/service-bus'
   - uid: '@azure/service-bus.Receiver.isReceivingMessages'
     name: isReceivingMessages()
     children: []
@@ -126,6 +105,45 @@ items:
       return:
         type:
           - boolean
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.Receiver.peekMessages'
+    name: peekMessages(PeekMessagesOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Peek the next batch of active messages (including deferred but not
+      deadlettered messages) on the
+
+      queue or subscription without modifying them.
+
+      - The first call to `peekMessages()` fetches the first active message.
+      Each subsequent call fetches the
+
+      subsequent message.
+
+      - Unlike a "received" message, "peeked" message is a read-only version of
+      the message.
+
+      It cannot be `Completed/Abandoned/Deferred/Deadlettered`.
+    syntax:
+      content: 'function peekMessages(options?: PeekMessagesOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/service-bus.PeekMessagesOptions'
+          description: >
+            Options that allow to specify the maximum number of messages to
+            peek,
+
+            the sequenceNumber to start peeking from or an abortSignal to abort
+            the operation.
+          optional: true
+      return:
+        type:
+          - 'Promise<@azure/service-bus.ReceivedMessage[]>'
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.Receiver.receiveBatch'
@@ -256,12 +274,18 @@ items:
           optional: true
     package: '@azure/service-bus'
 references:
-  - uid: '@azure/service-bus.BrowseMessagesOptions'
-    name: BrowseMessagesOptions
+  - uid: '@azure/service-bus.GetMessageIteratorOptions'
+    name: GetMessageIteratorOptions
     spec.typeScript:
-      - name: BrowseMessagesOptions
-        fullName: BrowseMessagesOptions
-        uid: '@azure/service-bus.BrowseMessagesOptions'
+      - name: GetMessageIteratorOptions
+        fullName: GetMessageIteratorOptions
+        uid: '@azure/service-bus.GetMessageIteratorOptions'
+  - uid: '@azure/service-bus.PeekMessagesOptions'
+    name: PeekMessagesOptions
+    spec.typeScript:
+      - name: PeekMessagesOptions
+        fullName: PeekMessagesOptions
+        uid: '@azure/service-bus.PeekMessagesOptions'
   - uid: 'Promise<@azure/service-bus.ReceivedMessage[]>'
     name: 'ReceivedMessage[]>'
     spec.typeScript:
@@ -272,12 +296,6 @@ references:
         uid: '@azure/service-bus.ReceivedMessage'
       - name: '[]>'
         fullName: '[]>'
-  - uid: '@azure/service-bus.GetMessageIteratorOptions'
-    name: GetMessageIteratorOptions
-    spec.typeScript:
-      - name: GetMessageIteratorOptions
-        fullName: GetMessageIteratorOptions
-        uid: '@azure/service-bus.GetMessageIteratorOptions'
   - uid: '@azure/service-bus.ReceiveBatchOptions'
     name: ReceiveBatchOptions
     spec.typeScript:

@@ -18,6 +18,7 @@ items:
       - '@azure/service-bus.ServiceBusClient.createSessionReceiver_1'
       - '@azure/service-bus.ServiceBusClient.createSessionReceiver_2'
       - '@azure/service-bus.ServiceBusClient.createSessionReceiver_3'
+      - '@azure/service-bus.ServiceBusClient.fullyQualifiedNamespace'
       - '@azure/service-bus.ServiceBusClient.constructor'
       - '@azure/service-bus.ServiceBusClient.constructor_1'
     langs:
@@ -57,7 +58,37 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a receiver for an Azure Service Bus queue's dead letter queue.
+    summary: >
+      Creates a receiver for an Azure Service Bus queue's dead letter queue in
+      peekLock mode.
+
+      In peekLock mode, the receiver has a lock on the message for the duration
+      specified on the
+
+      queue.
+
+
+      In peekLock mode, the receiver has a lock on the message for the duration
+      specified on the
+
+      queue. Messages that are not settled within the lock duration will be
+      redelivered.
+
+
+      You can settle a message by calling complete(), abandon() or defer()
+      methods on
+
+      the message.
+
+
+      See here for more information about dead letter queues:
+
+      https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-dead-letter-queues
+
+
+      More information about how peekLock and message settlement works here:
+
+      https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     syntax:
       content: >-
         function createDeadLetterReceiver(queueName: string, receiveMode:
@@ -71,7 +102,7 @@ items:
           type:
             - '"peekLock"'
           description: |
-            The receive mode to use (defaults to PeekLock)
+            The receive mode, defaulted to peekLock.
       return:
         type:
           - >-
@@ -84,7 +115,17 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a receiver for an Azure Service Bus queue's dead letter queue.
+    summary: >
+      Creates a receiver for an Azure Service Bus queue's dead letter queue in
+      receiveAndDelete mode.
+
+      In receiveAndDelete mode, messages are deleted from Service Bus as they
+      are received.
+
+
+      See here for more information about dead letter queues:
+
+      https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-dead-letter-queues
     syntax:
       content: >-
         function createDeadLetterReceiver(queueName: string, receiveMode:
@@ -98,7 +139,7 @@ items:
           type:
             - '"receiveAndDelete"'
           description: |
-            The receive mode to use (defaults to PeekLock)
+            The receive mode, defaulted to receiveAndDelete.
       return:
         type:
           - '@azure/service-bus.Receiver<@azure/service-bus.ReceivedMessage>'
@@ -110,9 +151,31 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >-
+    summary: >
       Creates a receiver for an Azure Service Bus subscription's dead letter
-      queue.
+      queue in peekLock mode.
+
+      In peekLock mode, the receiver has a lock on the message for the duration
+      specified on the
+
+      subscription. Messages that are not settled within the lock duration will
+      be redelivered.
+
+
+      You can settle a message by calling complete(), abandon() or defer()
+      methods on
+
+      the message.
+
+
+      See here for more information about dead letter queues:
+
+      https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-dead-letter-queues
+
+
+      More information about how peekLock and message settlement works here:
+
+      https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     syntax:
       content: >-
         function createDeadLetterReceiver(topicName: string, subscriptionName:
@@ -132,7 +195,7 @@ items:
           type:
             - '"peekLock"'
           description: |
-            The receive mode to use (defaults to PeekLock)
+            The receive mode, defaulted to peekLock.
       return:
         type:
           - >-
@@ -145,9 +208,17 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >-
+    summary: >
       Creates a receiver for an Azure Service Bus subscription's dead letter
-      queue.
+      queue in receiveAndDelete mode.
+
+      In receiveAndDelete mode, messages are deleted from Service Bus as they
+      are received.
+
+
+      See here for more information about dead letter queues:
+
+      https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-dead-letter-queues
     syntax:
       content: >-
         function createDeadLetterReceiver(topicName: string, subscriptionName:
@@ -167,7 +238,7 @@ items:
           type:
             - '"receiveAndDelete"'
           description: |
-            The receive mode to use (defaults to PeekLock)
+            The receive mode, defaulted to receiveAndDelete.
       return:
         type:
           - '@azure/service-bus.Receiver<@azure/service-bus.ReceivedMessage>'
@@ -179,7 +250,33 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a receiver for an Azure Service Bus queue.
+    summary: >
+      Creates a receiver for an Azure Service Bus queue in peekLock mode.
+
+      In peekLock mode, the receiver has a lock on the message for the duration
+      specified on the
+
+      queue.
+
+
+      Messages that are not settled within the lock duration will be redelivered
+      as many times as
+
+      the max delivery count set on the queue, after which they get sent to a
+      separate dead letter
+
+      queue.
+
+
+      You can settle a message by calling complete(), abandon(), defer() or
+      deadletter() methods on
+
+      the message.
+
+
+      More information about how peekLock and message settlement works here:
+
+      https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     syntax:
       content: 'function createReceiver(queueName: string, receiveMode: "peekLock")'
       parameters:
@@ -191,7 +288,7 @@ items:
           type:
             - '"peekLock"'
           description: |
-            The receive mode to use (defaults to PeekLock)
+            The receive mode, defaulted to peekLock.
       return:
         type:
           - >-
@@ -204,7 +301,12 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a receiver for an Azure Service Bus queue.
+    summary: >
+      Creates a receiver for an Azure Service Bus queue in receiveAndDelete
+      mode.
+
+      In receiveAndDelete mode, messages are deleted from Service Bus as they
+      are received.
     syntax:
       content: >-
         function createReceiver(queueName: string, receiveMode:
@@ -218,7 +320,7 @@ items:
           type:
             - '"receiveAndDelete"'
           description: |
-            The receive mode to use (defaults to PeekLock)
+            The receive mode, defaulted to receiveAndDelete.
       return:
         type:
           - '@azure/service-bus.Receiver<@azure/service-bus.ReceivedMessage>'
@@ -230,7 +332,33 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a receiver for an Azure Service Bus subscription.
+    summary: >
+      Creates a receiver for an Azure Service Bus subscription in peekLock mode.
+
+      In peekLock mode, the receiver has a lock on the message for the duration
+      specified on the
+
+      subscription.
+
+
+      Messages that are not settled within the lock duration will be redelivered
+      as many times as
+
+      the max delivery count set on the subscription, after which they get sent
+      to a separate dead letter
+
+      queue.
+
+
+      You can settle a message by calling complete(), abandon(), defer() or
+      deadletter() methods on
+
+      the message.
+
+
+      More information about how peekLock and message settlement works here:
+
+      https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     syntax:
       content: >-
         function createReceiver(topicName: string, subscriptionName: string,
@@ -250,7 +378,7 @@ items:
           type:
             - '"peekLock"'
           description: |
-            The receive mode to use (defaults to PeekLock)
+            The receive mode, defaulted to peekLock.
       return:
         type:
           - >-
@@ -263,7 +391,12 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a receiver for an Azure Service Bus subscription.
+    summary: >
+      Creates a receiver for an Azure Service Bus subscription in
+      receiveAndDelete mode.
+
+      In receiveAndDelete mode, messages are deleted from Service Bus as they
+      are received.
     syntax:
       content: >-
         function createReceiver(topicName: string, subscriptionName: string,
@@ -283,14 +416,14 @@ items:
           type:
             - '"receiveAndDelete"'
           description: |
-            The receive mode to use (defaults to PeekLock)
+            The receive mode, defaulted to receiveAndDelete.
       return:
         type:
           - '@azure/service-bus.Receiver<@azure/service-bus.ReceivedMessage>'
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusClient.createSender'
-    name: 'createSender(string, CreateSenderOptions)'
+    name: createSender(string)
     children: []
     type: method
     langs:
@@ -301,23 +434,16 @@ items:
 
       sent at a later time and cancel such scheduled messages.
     syntax:
-      content: >-
-        function createSender(queueOrTopicName: string, options?:
-        CreateSenderOptions)
+      content: 'function createSender(queueOrTopicName: string)'
       parameters:
         - id: queueOrTopicName
           type:
             - string
-          description: The name of a queue or topic to send messages to.
-        - id: options
-          type:
-            - '@azure/service-bus.CreateSenderOptions'
           description: |
-            Options for creating a sender.
-          optional: true
+            The name of a queue or topic to send messages to.
       return:
         type:
-          - Promise<@azure/service-bus.Sender>
+          - '@azure/service-bus.Sender'
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusClient.createSessionReceiver'
@@ -326,7 +452,34 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a receiver for an Azure Service Bus queue.
+    summary: >
+      Creates a receiver for a session enabled Azure Service Bus queue in
+      peekLock mode.
+
+      In peekLock mode, the receiver has a lock on the session for the duration
+      specified on the
+
+      queue.
+
+
+      Messages that are not settled within the lock duration will be redelivered
+      as many times as
+
+      the max delivery count set on the queue, after which they get sent to a
+      separate dead letter
+
+      queue.
+
+
+      You can settle a message by calling complete(), abandon(), defer() or
+      deadletter() methods on
+
+      the message.
+
+
+      More information about how peekLock and message settlement works here:
+
+      https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     syntax:
       content: >-
         function createSessionReceiver(queueName: string, receiveMode:
@@ -339,7 +492,7 @@ items:
         - id: receiveMode
           type:
             - '"peekLock"'
-          description: The receive mode to use (defaults to PeekLock)
+          description: 'The receive mode, defaulted to peekLock.'
         - id: options
           type:
             - '@azure/service-bus.CreateSessionReceiverOptions'
@@ -360,7 +513,12 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a receiver for an Azure Service Bus queue.
+    summary: >
+      Creates a receiver for a session enabled Azure Service Bus queue in
+      receiveAndDelete mode.
+
+      In receiveAndDelete mode, messages are deleted from Service Bus as they
+      are received.
     syntax:
       content: >-
         function createSessionReceiver(queueName: string, receiveMode:
@@ -373,7 +531,7 @@ items:
         - id: receiveMode
           type:
             - '"receiveAndDelete"'
-          description: The receive mode to use (defaults to PeekLock)
+          description: 'The receive mode, defaulted to receiveAndDelete.'
         - id: options
           type:
             - '@azure/service-bus.CreateSessionReceiverOptions'
@@ -394,7 +552,34 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a receiver for an Azure Service Bus subscription.
+    summary: >
+      Creates a receiver for a session enabled Azure Service Bus subscription in
+      peekLock mode.
+
+      In peekLock mode, the receiver has a lock on the session for the duration
+      specified on the
+
+      subscription.
+
+
+      Messages that are not settled within the lock duration will be redelivered
+      as many times as
+
+      the max delivery count set on the subscription, after which they get sent
+      to a separate dead letter
+
+      queue.
+
+
+      You can settle a message by calling complete(), abandon(), defer() or
+      deadletter() methods on
+
+      the message.
+
+
+      More information about how peekLock and message settlement works here:
+
+      https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
     syntax:
       content: >-
         function createSessionReceiver(topicName: string, subscriptionName:
@@ -413,7 +598,7 @@ items:
         - id: receiveMode
           type:
             - '"peekLock"'
-          description: The receive mode to use (defaults to PeekLock)
+          description: 'The receive mode, defaulted to peekLock.'
         - id: options
           type:
             - '@azure/service-bus.CreateSessionReceiverOptions'
@@ -434,7 +619,12 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Creates a receiver for an Azure Service Bus subscription.
+    summary: >
+      Creates a receiver for a session enabled Azure Service Bus subscription in
+      receiveAndDelete mode.
+
+      In receiveAndDelete mode, messages are deleted from Service Bus as they
+      are received.
     syntax:
       content: >-
         function createSessionReceiver(topicName: string, subscriptionName:
@@ -454,7 +644,7 @@ items:
         - id: receiveMode
           type:
             - '"receiveAndDelete"'
-          description: The receive mode to use (defaults to PeekLock)
+          description: 'The receive mode, defaulted to receiveAndDelete.'
         - id: options
           type:
             - '@azure/service-bus.CreateSessionReceiverOptions'
@@ -465,6 +655,25 @@ items:
         type:
           - >-
             Promise<@azure/service-bus.SessionReceiver<@azure/service-bus.ReceivedMessage>>
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.ServiceBusClient.fullyQualifiedNamespace'
+    name: fullyQualifiedNamespace
+    fullName: fullyQualifiedNamespace
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The fully qualified namespace of the Service Bus instance for which this
+      client is created.
+
+      This is likely to be similar to <yournamespace>.servicebus.windows.net.
+    syntax:
+      content: 'fullyQualifiedNamespace: string'
+      return:
+        type:
+          - string
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusClient.constructor'
@@ -521,6 +730,12 @@ items:
 
             with the Azure Service Bus. See &commat;azure/identity for creating
             the credentials.
+
+            If you're using an own implementation of the `TokenCredential`
+            interface against AAD, then set the "scopes" for service-bus
+
+            to be `["https://servicebus.azure.net//user_impersonation"]` to get
+            the appropriate token.
         - id: options
           type:
             - '@azure/service-bus.ServiceBusClientOptions'
@@ -561,22 +776,12 @@ references:
         uid: '@azure/service-bus.ReceivedMessage'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/service-bus.CreateSenderOptions'
-    name: CreateSenderOptions
+  - uid: '@azure/service-bus.Sender'
+    name: Sender
     spec.typeScript:
-      - name: CreateSenderOptions
-        fullName: CreateSenderOptions
-        uid: '@azure/service-bus.CreateSenderOptions'
-  - uid: Promise<@azure/service-bus.Sender>
-    name: Sender>
-    spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
       - name: Sender
         fullName: Sender
         uid: '@azure/service-bus.Sender'
-      - name: '>'
-        fullName: '>'
   - uid: '@azure/service-bus.CreateSessionReceiverOptions'
     name: CreateSessionReceiverOptions
     spec.typeScript:

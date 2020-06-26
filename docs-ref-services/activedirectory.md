@@ -4,7 +4,7 @@ description: Reference for Azure Active Directory Modules for Node.js
 author: celestedg
 ms.author: celested
 manager: mtillman
-ms.date: 07/18/2017
+ms.date: 06/26/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -65,7 +65,7 @@ context.acquireTokenWithClientCredentials(
 | | |
 |---|---|
 | **Azure Active Directory** ||
-| [Securing a web API with Azure AD](https://azure.microsoft.com/resources/samples/active-directory-node-webapi/) | A NodeJS web API that is secured using Azure AD and OAuth 2.0 access tokens. |
-| [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/resources/samples/active-directory-node-webapp-openidconnect/) | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
+| Securing a web API with Azure AD | A NodeJS web API that is secured using Azure AD and OAuth 2.0 access tokens. |
+| Integrating Azure AD into a NodeJS web application | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
 
 For more code samples that use various Azure packages, explore the [Node.JS samples](https://azure.microsoft.com/resources/samples/?platform=nodejs).

@@ -3,16 +3,15 @@ title: Azure Key Vault Secret client library for JavaScript
 keywords: Azure, JavaScript, SDK, API, keyvault, keyvault-secrets
 author: maggiepint
 ms.author: magpint
-ms.date: 04/16/2020
+ms.date: 06/10/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: JavaScript
 ms.service: keyvault
 ---
- 
-# Azure Key Vault Secret client library for JavaScript - Version 4.0.2 
 
+# Azure Key Vault Secret client library for JavaScript - Version 4.1.0-preview.1
 
 Azure Key Vault is a service that allows you to encrypt authentication keys, storage account keys, data encryption keys, .pfx files, and passwords by using secured keys.
 If you would like to know more about Azure Key Vault, you may want to review: [What is Azure Key Vault?](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview)
@@ -31,7 +30,7 @@ Use the client library for Azure Key Vault Secrets in your Node.js application t
 - Get all secrets.
 - Get all deleted secrets.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-secrets) | [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-secrets) | [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-secrets) | [Product documentation](https://azure.microsoft.com/en-us/services/key-vault/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/10c8acd23aa6716eed741fb796a23c7c7b084ca7/../../azure-sdk-for-js/sdk/keyvault/keyvault-secrets/samples)
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-secrets) | [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-secrets) | [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-secrets) | [Product documentation](https://azure.microsoft.com/en-us/services/key-vault/) | [Samples](https://github.com/azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.1.0-preview.1/sdk/keyvault/keyvault-secrets/samples)
 
 ## Getting started
 
@@ -45,7 +44,7 @@ You can deploy our sample template for Key Vault resources in Azure by clicking 
 
 Deploying these resources constitutes a purchase of Azure services that will be billed to your active account.
 
-To read more information about how this form works, and how to fill it, please read our [TEST_RESOURCES_README.md guide](https://github.com/Azure/azure-sdk-for-js/tree/10c8acd23aa6716eed741fb796a23c7c7b084ca7/../../azure-sdk-for-js/sdk/keyvault/TEST_RESOURCES_README.md).
+To read more information about how this form works, and how to fill it, please read our [TEST_RESOURCES_README.md guide](https://github.com/azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.1.0-preview.1/sdk/keyvault/TEST_RESOURCES_README.md).
 
 ### Install the package
 
@@ -518,9 +517,9 @@ setLogLevel("info");
 
 You can find more code samples through the following links:
 
-- [KeyVault Secrets Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/10c8acd23aa6716eed741fb796a23c7c7b084ca7/../../azure-sdk-for-js/sdk/keyvault/keyvault-secrets/samples/javascript)
-- [KeyVault Secrets Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/10c8acd23aa6716eed741fb796a23c7c7b084ca7/../../azure-sdk-for-js/sdk/keyvault/keyvault-secrets/samples/typescript)
-- [KeyVault Secrets Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/10c8acd23aa6716eed741fb796a23c7c7b084ca7/../../azure-sdk-for-js/sdk/keyvault/keyvault-secrets/test)
+- [KeyVault Secrets Samples (JavaScript)](https://github.com/azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.1.0-preview.1/sdk/keyvault/keyvault-secrets/samples/javascript)
+- [KeyVault Secrets Samples (TypeScript)](https://github.com/azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.1.0-preview.1/sdk/keyvault/keyvault-secrets/samples/typescript)
+- [KeyVault Secrets Test Cases](https://github.com/azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.1.0-preview.1/sdk/keyvault/keyvault-secrets/test)
 
 ## Contributing
 
@@ -545,6 +544,6 @@ Some of our tests aim to reproduce the behavior of our library against remotely
 available endpoints. These are executed using previously recorded HTTP request and
 responses.
 
-You can read more about the tests of this project [here](https://github.com/Azure/azure-sdk-for-js/tree/10c8acd23aa6716eed741fb796a23c7c7b084ca7/../../azure-sdk-for-js/sdk/keyvault/keyvault-secrets/test/README.md).
+You can read more about the tests of this project [here](https://github.com/azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.1.0-preview.1/sdk/keyvault/keyvault-secrets/test/README.md).
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-secrets%2FREADME.png)

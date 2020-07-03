@@ -1,6 +1,6 @@
 ---
 title: Azure Storage Blob Change Feed client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/storage-blob-changefeed, 
+keywords: Azure, javascript, SDK, API, @azure/storage-blob-changefeed, storage
 author: maggiepint
 ms.author: magpint
 ms.date: 07/03/2020
@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: storage
 ---
 
 # Azure Storage Blob Change Feed client library for JavaScript - Version 12.0.0-preview.1 

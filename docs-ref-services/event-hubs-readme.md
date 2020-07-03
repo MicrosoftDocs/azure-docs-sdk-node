@@ -1,17 +1,18 @@
 ---
 title: Azure Event Hubs client library for Javascript
-keywords: Azure, Javascript, SDK, API,  @azure/event-hubs
+keywords: Azure, javascript, SDK, API, @azure/event-hubs, eventhubs
 author: maggiepint
 ms.author: magpint
-ms.date: 05/10/2020
+ms.date: 06/30/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: Javascript
-ms.service: 
+ms.devlang: javascript
+ms.service: eventhubs
 ---
 
-# Azure Event Hubs client library for Javascript - Version 5.2.1
+# Azure Event Hubs client library for Javascript - Version 5.2.2 
+
 
 Azure Event Hubs is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers. This lets you process and analyze the massive amounts of data produced by your connected devices and applications. If you would like to know more about Azure Event Hubs, you may wish to review: [What is Event Hubs](https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-about)?
 
@@ -270,10 +271,11 @@ async function main() {
   // In this sample, we use the position of earliest available event to start from
   // Other common options to configure would be `maxBatchSize` and `maxWaitTimeInSeconds`
   const subscriptionOptions = {
-    startPosition: earliestEventPosition,
+    startPosition: earliestEventPosition
   };
 
-  const subscription = client.subscribe({
+  const subscription = client.subscribe(
+    {
       processEvents: (events, context) => {
         // event processing code goes here
       },
@@ -366,7 +368,7 @@ The `subscribe` method takes callbacks to process events as they are received fr
 To stop receiving events, you can call `close()` on the object returned by the `subscribe()` method.
 
 ```javascript
-const { EventHubConsumerClient } = require("@azure/event-hubs");
+const { EventHubConsumerClient, earliestEventPosition } = require("@azure/event-hubs");
 
 async function main() {
   const client = new EventHubConsumerClient(
@@ -379,10 +381,12 @@ async function main() {
   // In this sample, we use the position of earliest available event to start from
   // Other common options to configure would be `maxBatchSize` and `maxWaitTimeInSeconds`
   const subscriptionOptions = {
-    startPosition: earliestEventPosition,
+    startPosition: earliestEventPosition
   };
 
-  const subscription = client.subscribe(partitionIds[0], {
+  const subscription = client.subscribe(
+    partitionIds[0],
+    {
       processEvents: (events, context) => {
         // event processing code goes here
       },

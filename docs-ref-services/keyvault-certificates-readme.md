@@ -10,7 +10,8 @@ ms.technology: azure
 ms.devlang: JavaScript
 ms.service: keyvault
 ---
- # Azure Key Vault Certificates client library for JavaScript - Version 4.0.0 
+
+# Azure Key Vault Certificates client library for JavaScript - Version 4.0.0 
 
 
 Azure Key Vault is a service that allows you to encrypt authentication keys, storage account keys, data encryption keys, .pfx files, and passwords by using secured keys.

@@ -8,10 +8,13 @@ items:
       - '@azure/storage-file-datalake.DataLakeFileClient.append'
       - '@azure/storage-file-datalake.DataLakeFileClient.create_1'
       - '@azure/storage-file-datalake.DataLakeFileClient.create'
+      - '@azure/storage-file-datalake.DataLakeFileClient.createIfNotExists_1'
+      - '@azure/storage-file-datalake.DataLakeFileClient.createIfNotExists'
       - '@azure/storage-file-datalake.DataLakeFileClient.credential'
       - '@azure/storage-file-datalake.DataLakeFileClient.constructor_1'
       - '@azure/storage-file-datalake.DataLakeFileClient.constructor'
       - '@azure/storage-file-datalake.DataLakeFileClient.delete'
+      - '@azure/storage-file-datalake.DataLakeFileClient.deleteIfExists'
       - '@azure/storage-file-datalake.DataLakeFileClient.exists'
       - '@azure/storage-file-datalake.DataLakeFileClient.fileSystemName'
       - '@azure/storage-file-datalake.DataLakeFileClient.flush'
@@ -92,7 +95,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/storage-file-datalake.PathUpdateResponse>
+          - Promise<@azure/storage-file-datalake.FileAppendResponse>
         description: ''
     package: '@azure/storage-file-datalake'
   - uid: '@azure/storage-file-datalake.DataLakeFileClient.create_1'
@@ -139,6 +142,52 @@ items:
       return:
         type:
           - Promise<@azure/storage-file-datalake.PathCreateResponse>
+        description: ''
+    package: '@azure/storage-file-datalake'
+  - uid: '@azure/storage-file-datalake.DataLakeFileClient.createIfNotExists_1'
+    name: createIfNotExists(FileCreateIfNotExistsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Create a file if it doesn't already exists.
+    syntax:
+      content: 'function createIfNotExists(options?: FileCreateIfNotExistsOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file-datalake.FileCreateIfNotExistsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-file-datalake.FileCreateIfNotExistsResponse>
+        description: ''
+    package: '@azure/storage-file-datalake'
+  - uid: '@azure/storage-file-datalake.DataLakeFileClient.createIfNotExists'
+    name: 'createIfNotExists(PathResourceType, PathCreateIfNotExistsOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Create a file if it doesn't already exists.
+    syntax:
+      content: >-
+        function createIfNotExists(resourceType: PathResourceType, options?:
+        PathCreateIfNotExistsOptions)
+      parameters:
+        - id: resourceType
+          type:
+            - '@azure/storage-file-datalake.PathResourceType'
+          description: 'Resource type, must be "file" for DataLakeFileClient.'
+        - id: options
+          type:
+            - '@azure/storage-file-datalake.PathCreateIfNotExistsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-file-datalake.PathCreateIfNotExistsResponse>
         description: ''
     package: '@azure/storage-file-datalake'
   - uid: '@azure/storage-file-datalake.DataLakeFileClient.credential'
@@ -248,6 +297,33 @@ items:
           - Promise<@azure/storage-file-datalake.PathDeleteResponse>
         description: ''
     package: '@azure/storage-file-datalake'
+  - uid: '@azure/storage-file-datalake.DataLakeFileClient.deleteIfExists'
+    name: 'deleteIfExists(boolean, PathDeleteOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Delete current path (directory or file) if it exists.
+    syntax:
+      content: >-
+        function deleteIfExists(recursive?: boolean, options?:
+        PathDeleteOptions)
+      parameters:
+        - id: recursive
+          type:
+            - boolean
+          description: ''
+          optional: true
+        - id: options
+          type:
+            - '@azure/storage-file-datalake.PathDeleteOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-file-datalake.PathDeleteIfExistsResponse>
+        description: ''
+    package: '@azure/storage-file-datalake'
   - uid: '@azure/storage-file-datalake.DataLakeFileClient.exists'
     name: exists(PathExistsOptions)
     children: []
@@ -321,7 +397,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/storage-file-datalake.PathUpdateResponse>
+          - Promise<@azure/storage-file-datalake.PathFlushDataResponse>
         description: ''
     package: '@azure/storage-file-datalake'
   - uid: '@azure/storage-file-datalake.DataLakeFileClient.getAccessControl'
@@ -831,7 +907,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/storage-file-datalake.PathUpdateResponse>
+          - Promise<@azure/storage-file-datalake.PathFlushDataResponse>
         description: ''
     package: '@azure/storage-file-datalake'
   - uid: '@azure/storage-file-datalake.DataLakeFileClient.uploadFile'
@@ -859,7 +935,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/storage-file-datalake.PathUpdateResponse>
+          - Promise<@azure/storage-file-datalake.PathFlushDataResponse>
         description: ''
     package: '@azure/storage-file-datalake'
   - uid: '@azure/storage-file-datalake.DataLakeFileClient.uploadStream'
@@ -903,7 +979,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/storage-file-datalake.PathUpdateResponse>
+          - Promise<@azure/storage-file-datalake.PathFlushDataResponse>
         description: ''
     package: '@azure/storage-file-datalake'
   - uid: '@azure/storage-file-datalake.DataLakeFileClient.url'
@@ -961,14 +1037,14 @@ references:
       - name: FileAppendOptions
         fullName: FileAppendOptions
         uid: '@azure/storage-file-datalake.FileAppendOptions'
-  - uid: Promise<@azure/storage-file-datalake.PathUpdateResponse>
-    name: PathUpdateResponse>
+  - uid: Promise<@azure/storage-file-datalake.FileAppendResponse>
+    name: FileAppendResponse>
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
-      - name: PathUpdateResponse
-        fullName: PathUpdateResponse
-        uid: '@azure/storage-file-datalake.PathUpdateResponse'
+      - name: FileAppendResponse
+        fullName: FileAppendResponse
+        uid: '@azure/storage-file-datalake.FileAppendResponse'
       - name: '>'
         fullName: '>'
   - uid: '@azure/storage-file-datalake.PathResourceType'
@@ -1009,6 +1085,38 @@ references:
         uid: '@azure/storage-file-datalake.FileCreateResponse'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/storage-file-datalake.PathCreateIfNotExistsOptions'
+    name: PathCreateIfNotExistsOptions
+    spec.typeScript:
+      - name: PathCreateIfNotExistsOptions
+        fullName: PathCreateIfNotExistsOptions
+        uid: '@azure/storage-file-datalake.PathCreateIfNotExistsOptions'
+  - uid: Promise<@azure/storage-file-datalake.PathCreateIfNotExistsResponse>
+    name: PathCreateIfNotExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: PathCreateIfNotExistsResponse
+        fullName: PathCreateIfNotExistsResponse
+        uid: '@azure/storage-file-datalake.PathCreateIfNotExistsResponse'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/storage-file-datalake.FileCreateIfNotExistsOptions'
+    name: FileCreateIfNotExistsOptions
+    spec.typeScript:
+      - name: FileCreateIfNotExistsOptions
+        fullName: FileCreateIfNotExistsOptions
+        uid: '@azure/storage-file-datalake.FileCreateIfNotExistsOptions'
+  - uid: Promise<@azure/storage-file-datalake.FileCreateIfNotExistsResponse>
+    name: FileCreateIfNotExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: FileCreateIfNotExistsResponse
+        fullName: FileCreateIfNotExistsResponse
+        uid: '@azure/storage-file-datalake.FileCreateIfNotExistsResponse'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-file-datalake.PathDeleteOptions'
     name: PathDeleteOptions
     spec.typeScript:
@@ -1025,6 +1133,16 @@ references:
         uid: '@azure/storage-file-datalake.PathDeleteResponse'
       - name: '>'
         fullName: '>'
+  - uid: Promise<@azure/storage-file-datalake.PathDeleteIfExistsResponse>
+    name: PathDeleteIfExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: PathDeleteIfExistsResponse
+        fullName: PathDeleteIfExistsResponse
+        uid: '@azure/storage-file-datalake.PathDeleteIfExistsResponse'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-file-datalake.PathExistsOptions'
     name: PathExistsOptions
     spec.typeScript:
@@ -1037,6 +1155,16 @@ references:
       - name: FileFlushOptions
         fullName: FileFlushOptions
         uid: '@azure/storage-file-datalake.FileFlushOptions'
+  - uid: Promise<@azure/storage-file-datalake.PathFlushDataResponse>
+    name: PathFlushDataResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: PathFlushDataResponse
+        fullName: PathFlushDataResponse
+        uid: '@azure/storage-file-datalake.PathFlushDataResponse'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-file-datalake.PathGetAccessControlOptions'
     name: PathGetAccessControlOptions
     spec.typeScript:

@@ -10,9 +10,11 @@ items:
       - '@azure/storage-blob.ContainerClient.constructor'
       - '@azure/storage-blob.ContainerClient.containerName'
       - '@azure/storage-blob.ContainerClient.create'
+      - '@azure/storage-blob.ContainerClient.createIfNotExists'
       - '@azure/storage-blob.ContainerClient.credential'
       - '@azure/storage-blob.ContainerClient.delete'
       - '@azure/storage-blob.ContainerClient.deleteBlob'
+      - '@azure/storage-blob.ContainerClient.deleteIfExists'
       - '@azure/storage-blob.ContainerClient.exists'
       - '@azure/storage-blob.ContainerClient.getAccessPolicy'
       - '@azure/storage-blob.ContainerClient.getAppendBlobClient'
@@ -213,6 +215,28 @@ items:
           - Promise<@azure/storage-blob.ContainerCreateResponse>
         description: ''
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.ContainerClient.createIfNotExists'
+    name: createIfNotExists(ContainerCreateOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Creates a new container under the specified account. If the container with
+      the same name already exists, it is not changed.
+    syntax:
+      content: 'function createIfNotExists(options?: ContainerCreateOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-blob.ContainerCreateOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-blob.ContainerCreateIfNotExistsResponse>
+        description: ''
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.credential'
     name: credential
     fullName: credential
@@ -259,7 +283,7 @@ items:
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.deleteBlob'
-    name: 'deleteBlob(string, BlobDeleteOptions)'
+    name: 'deleteBlob(string, ContainerDeleteBlobOptions)'
     children: []
     type: method
     langs:
@@ -275,7 +299,9 @@ items:
 
       Blob operation.
     syntax:
-      content: 'function deleteBlob(blobName: string, options?: BlobDeleteOptions)'
+      content: >-
+        function deleteBlob(blobName: string, options?:
+        ContainerDeleteBlobOptions)
       parameters:
         - id: blobName
           type:
@@ -283,13 +309,37 @@ items:
           description: ''
         - id: options
           type:
-            - '@azure/storage-blob.BlobDeleteOptions'
+            - '@azure/storage-blob.ContainerDeleteBlobOptions'
           description: ''
           optional: true
       return:
         type:
           - Promise<@azure/storage-blob.BlobDeleteResponse>
         description: Block blob deletion response data.
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.ContainerClient.deleteIfExists'
+    name: deleteIfExists(ContainerDeleteMethodOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Marks the specified container for deletion if it exists. The container and
+      any blobs
+
+      contained within it are later deleted during garbage collection.
+    syntax:
+      content: 'function deleteIfExists(options?: ContainerDeleteMethodOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-blob.ContainerDeleteMethodOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-blob.ContainerDeleteIfExistsResponse>
+        description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.ContainerClient.exists'
     name: exists(ContainerExistsOptions)
@@ -298,7 +348,7 @@ items:
     langs:
       - typeScript
     summary: >
-      Returns true if the Azrue container resource represented by this client
+      Returns true if the Azure container resource represented by this client
       exists; false otherwise.
 
       NOTE: use this function with care since an existing container might be
@@ -506,8 +556,8 @@ items:
 
       ```js
 
-      let iter = await containerClient.listBlobsByHierarchy("/", { prefix:
-      "prefix1/" });
+      let iter = containerClient.listBlobsByHierarchy("/", { prefix: "prefix1/"
+      });
 
       let entity = await iter.next();
 
@@ -583,7 +633,7 @@ items:
         - id: delimiter
           type:
             - string
-          description: The charactor or string used to define the virtual hierarchy
+          description: The character or string used to define the virtual hierarchy
         - id: options
           type:
             - '@azure/storage-blob.ContainerListBlobsOptions'
@@ -943,6 +993,16 @@ references:
         uid: '@azure/storage-blob.ContainerCreateResponse'
       - name: '>'
         fullName: '>'
+  - uid: Promise<@azure/storage-blob.ContainerCreateIfNotExistsResponse>
+    name: ContainerCreateIfNotExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ContainerCreateIfNotExistsResponse
+        fullName: ContainerCreateIfNotExistsResponse
+        uid: '@azure/storage-blob.ContainerCreateIfNotExistsResponse'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-blob.ContainerDeleteMethodOptions'
     name: ContainerDeleteMethodOptions
     spec.typeScript:
@@ -959,12 +1019,12 @@ references:
         uid: '@azure/storage-blob.ContainerDeleteResponse'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/storage-blob.BlobDeleteOptions'
-    name: BlobDeleteOptions
+  - uid: '@azure/storage-blob.ContainerDeleteBlobOptions'
+    name: ContainerDeleteBlobOptions
     spec.typeScript:
-      - name: BlobDeleteOptions
-        fullName: BlobDeleteOptions
-        uid: '@azure/storage-blob.BlobDeleteOptions'
+      - name: ContainerDeleteBlobOptions
+        fullName: ContainerDeleteBlobOptions
+        uid: '@azure/storage-blob.ContainerDeleteBlobOptions'
   - uid: Promise<@azure/storage-blob.BlobDeleteResponse>
     name: BlobDeleteResponse>
     spec.typeScript:
@@ -973,6 +1033,16 @@ references:
       - name: BlobDeleteResponse
         fullName: BlobDeleteResponse
         uid: '@azure/storage-blob.BlobDeleteResponse'
+      - name: '>'
+        fullName: '>'
+  - uid: Promise<@azure/storage-blob.ContainerDeleteIfExistsResponse>
+    name: ContainerDeleteIfExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ContainerDeleteIfExistsResponse
+        fullName: ContainerDeleteIfExistsResponse
+        uid: '@azure/storage-blob.ContainerDeleteIfExistsResponse'
       - name: '>'
         fullName: '>'
   - uid: '@azure/storage-blob.ContainerExistsOptions'

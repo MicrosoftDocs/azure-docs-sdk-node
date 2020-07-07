@@ -37,11 +37,12 @@ items:
       'BadRequestTagNameNotUnique', 'BadRequestTagDescription',
       'BadRequestTagType',
 
-      'BadRequestMultipleNegativeTag', 'BadRequestImageTags',
-      'BadRequestImageRegions',
+      'BadRequestMultipleNegativeTag', 'BadRequestMultipleGeneralProductTag',
+      'BadRequestImageTags',
 
-      'BadRequestNegativeAndRegularTagOnSameImage',
-      'BadRequestRequiredParamIsNull',
+      'BadRequestImageRegions', 'BadRequestNegativeAndRegularTagOnSameImage',
+
+      'BadRequestUnsupportedDomain', 'BadRequestRequiredParamIsNull',
 
       'BadRequestIterationIsPublished', 'BadRequestInvalidPublishName',
 
@@ -60,12 +61,13 @@ items:
 
       'BadRequestImageStream', 'BadRequestImageUrl', 'BadRequestImageFormat',
 
-      'BadRequestImageSizeBytes', 'BadRequestImageExceededCount',
+      'BadRequestImageSizeBytes', 'BadRequestImageDimensions',
+      'BadRequestImageExceededCount',
+
       'BadRequestTrainingNotNeeded',
-
       'BadRequestTrainingNotNeededButTrainingPipelineUpdated',
-      'BadRequestTrainingValidationFailed',
 
+      'BadRequestTrainingValidationFailed',
       'BadRequestClassificationTrainingValidationFailed',
 
       'BadRequestMultiClassClassificationTrainingValidationFailed',
@@ -95,6 +97,11 @@ items:
       'BadRequestPredictionInvalidQueryParameters',
 
       'BadRequestInvalidImportToken', 'BadRequestExportWhileTraining',
+      'BadRequestImageMetadataKey',
+
+      'BadRequestImageMetadataValue', 'BadRequestOperationNotSupported',
+
+      'BadRequestInvalidArtifactUri', 'BadRequestCustomerManagedKeyRevoked',
       'BadRequestInvalid',
 
       'UnsupportedMediaType', 'Forbidden', 'ForbiddenUser',
@@ -138,7 +145,7 @@ items:
       'ErrorPredictionModelNotCached', 'ErrorPrediction',
       'ErrorPredictionStorage',
 
-      'ErrorRegionProposal', 'ErrorInvalid'
+      'ErrorRegionProposal', 'ErrorUnknownBaseModel', 'ErrorInvalid'
     syntax:
       content: >-
         type CustomVisionErrorCodes = "NoError" | "BadRequest" |
@@ -158,19 +165,21 @@ items:
         "BadRequestWorkspaceNotDeletable" | "BadRequestTagName" |
         "BadRequestTagNameNotUnique" | "BadRequestTagDescription" |
         "BadRequestTagType" | "BadRequestMultipleNegativeTag" |
-        "BadRequestImageTags" | "BadRequestImageRegions" |
-        "BadRequestNegativeAndRegularTagOnSameImage" |
-        "BadRequestRequiredParamIsNull" | "BadRequestIterationIsPublished" |
-        "BadRequestInvalidPublishName" | "BadRequestInvalidPublishTarget" |
-        "BadRequestUnpublishFailed" | "BadRequestIterationNotPublished" |
-        "BadRequestSubscriptionApi" | "BadRequestExceedProjectLimit" |
+        "BadRequestMultipleGeneralProductTag" | "BadRequestImageTags" |
+        "BadRequestImageRegions" | "BadRequestNegativeAndRegularTagOnSameImage"
+        | "BadRequestUnsupportedDomain" | "BadRequestRequiredParamIsNull" |
+        "BadRequestIterationIsPublished" | "BadRequestInvalidPublishName" |
+        "BadRequestInvalidPublishTarget" | "BadRequestUnpublishFailed" |
+        "BadRequestIterationNotPublished" | "BadRequestSubscriptionApi" |
+        "BadRequestExceedProjectLimit" |
         "BadRequestExceedIterationPerProjectLimit" |
         "BadRequestExceedTagPerProjectLimit" |
         "BadRequestExceedTagPerImageLimit" | "BadRequestExceededQuota" |
         "BadRequestCannotMigrateProjectWithName" | "BadRequestNotLimitedTrial" |
         "BadRequestImageBatch" | "BadRequestImageStream" | "BadRequestImageUrl"
         | "BadRequestImageFormat" | "BadRequestImageSizeBytes" |
-        "BadRequestImageExceededCount" | "BadRequestTrainingNotNeeded" |
+        "BadRequestImageDimensions" | "BadRequestImageExceededCount" |
+        "BadRequestTrainingNotNeeded" |
         "BadRequestTrainingNotNeededButTrainingPipelineUpdated" |
         "BadRequestTrainingValidationFailed" |
         "BadRequestClassificationTrainingValidationFailed" |
@@ -191,16 +200,18 @@ items:
         "BadRequestPredictionInvalidApplicationName" |
         "BadRequestPredictionInvalidQueryParameters" |
         "BadRequestInvalidImportToken" | "BadRequestExportWhileTraining" |
-        "BadRequestInvalid" | "UnsupportedMediaType" | "Forbidden" |
-        "ForbiddenUser" | "ForbiddenUserResource" |
-        "ForbiddenUserSignupDisabled" | "ForbiddenUserSignupAllowanceExceeded" |
-        "ForbiddenUserDoesNotExist" | "ForbiddenUserDisabled" |
-        "ForbiddenUserInsufficientCapability" | "ForbiddenDRModeEnabled" |
-        "ForbiddenInvalid" | "NotFound" | "NotFoundProject" |
-        "NotFoundProjectDefaultIteration" | "NotFoundIteration" |
-        "NotFoundIterationPerformance" | "NotFoundTag" | "NotFoundImage" |
-        "NotFoundDomain" | "NotFoundApimSubscription" | "NotFoundInvalid" |
-        "Conflict" | "ConflictInvalid" | "ErrorUnknown" |
+        "BadRequestImageMetadataKey" | "BadRequestImageMetadataValue" |
+        "BadRequestOperationNotSupported" | "BadRequestInvalidArtifactUri" |
+        "BadRequestCustomerManagedKeyRevoked" | "BadRequestInvalid" |
+        "UnsupportedMediaType" | "Forbidden" | "ForbiddenUser" |
+        "ForbiddenUserResource" | "ForbiddenUserSignupDisabled" |
+        "ForbiddenUserSignupAllowanceExceeded" | "ForbiddenUserDoesNotExist" |
+        "ForbiddenUserDisabled" | "ForbiddenUserInsufficientCapability" |
+        "ForbiddenDRModeEnabled" | "ForbiddenInvalid" | "NotFound" |
+        "NotFoundProject" | "NotFoundProjectDefaultIteration" |
+        "NotFoundIteration" | "NotFoundIterationPerformance" | "NotFoundTag" |
+        "NotFoundImage" | "NotFoundDomain" | "NotFoundApimSubscription" |
+        "NotFoundInvalid" | "Conflict" | "ConflictInvalid" | "ErrorUnknown" |
         "ErrorIterationCopyFailed" | "ErrorPreparePerformanceMigrationFailed" |
         "ErrorProjectInvalidWorkspace" |
         "ErrorProjectInvalidPipelineConfiguration" | "ErrorProjectInvalidDomain"
@@ -214,5 +225,6 @@ items:
         "ErrorExporterInvalidFeaturizer" | "ErrorExporterInvalidClassifier" |
         "ErrorPredictionServiceUnavailable" | "ErrorPredictionModelNotFound" |
         "ErrorPredictionModelNotCached" | "ErrorPrediction" |
-        "ErrorPredictionStorage" | "ErrorRegionProposal" | "ErrorInvalid"
+        "ErrorPredictionStorage" | "ErrorRegionProposal" |
+        "ErrorUnknownBaseModel" | "ErrorInvalid"
     package: '@azure/cognitiveservices-customvision-training'

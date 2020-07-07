@@ -14,6 +14,7 @@ items:
       - '@azure/storage-blob.BlobClient.createSnapshot'
       - '@azure/storage-blob.BlobClient.credential'
       - '@azure/storage-blob.BlobClient.delete'
+      - '@azure/storage-blob.BlobClient.deleteIfExists'
       - '@azure/storage-blob.BlobClient.download'
       - '@azure/storage-blob.BlobClient.downloadToBuffer_1'
       - '@azure/storage-blob.BlobClient.downloadToBuffer'
@@ -24,14 +25,17 @@ items:
       - '@azure/storage-blob.BlobClient.getBlockBlobClient'
       - '@azure/storage-blob.BlobClient.getPageBlobClient'
       - '@azure/storage-blob.BlobClient.getProperties'
+      - '@azure/storage-blob.BlobClient.getTags'
       - '@azure/storage-blob.BlobClient.name'
       - '@azure/storage-blob.BlobClient.setAccessTier'
       - '@azure/storage-blob.BlobClient.setHTTPHeaders'
       - '@azure/storage-blob.BlobClient.setMetadata'
+      - '@azure/storage-blob.BlobClient.setTags'
       - '@azure/storage-blob.BlobClient.syncCopyFromURL'
       - '@azure/storage-blob.BlobClient.undelete'
       - '@azure/storage-blob.BlobClient.url'
       - '@azure/storage-blob.BlobClient.withSnapshot'
+      - '@azure/storage-blob.BlobClient.withVersion'
     langs:
       - typeScript
     type: class
@@ -349,6 +353,35 @@ items:
           - Promise<@azure/storage-blob.BlobDeleteResponse>
         description: ''
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.deleteIfExists'
+    name: deleteIfExists(BlobDeleteOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Marks the specified blob or snapshot for deletion if it exists. The blob
+      is later deleted
+
+      during garbage collection. Note that in order to delete a blob, you must
+      delete
+
+      all of its snapshots. You can delete both at the same time with the Delete
+
+      Blob operation.
+    syntax:
+      content: 'function deleteIfExists(options?: BlobDeleteOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobDeleteOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-blob.BlobDeleteIfExistsResponse>
+        description: ''
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobClient.download'
     name: 'download(number, number, BlobDownloadOptions)'
     children: []
@@ -542,7 +575,7 @@ items:
     langs:
       - typeScript
     summary: >
-      Returns true if the Azrue blob resource represented by this client exists;
+      Returns true if the Azure blob resource represented by this client exists;
       false otherwise.
 
       NOTE: use this function with care since an existing blob might be deleted
@@ -654,6 +687,26 @@ items:
           - Promise<@azure/storage-blob.BlobGetPropertiesResponse>
         description: ''
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.getTags'
+    name: getTags(BlobGetTagsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Gets the tags associated with the underlying blob.
+    syntax:
+      content: 'function getTags(options?: BlobGetTagsOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobGetTagsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-blob.BlobGetTagsResponse>
+        description: ''
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobClient.name'
     name: name
     fullName: name
@@ -722,7 +775,7 @@ items:
     summary: >-
       Sets system properties on the blob.
 
-      If no value provided, or no value provided for the specificed blob HTTP
+      If no value provided, or no value provided for the specified blob HTTP
       headers,
 
       these blob HTTP headers without a value will be cleared.
@@ -777,6 +830,40 @@ items:
       return:
         type:
           - Promise<@azure/storage-blob.BlobSetMetadataResponse>
+        description: ''
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.setTags'
+    name: 'setTags(Tags, BlobSetTagsOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Sets tags on the underlying blob.
+
+      A blob can have up to 10 tags. Tag keys must be between 1 and 128
+      characters.  Tag values must be between 0 and 256 characters.
+
+      Valid tag key and value characters include lower and upper case letters,
+      digits (0-9),
+
+      space (' '), plus ('+'), minus ('-'), period ('.'), foward slash ('/'),
+      colon (':'), equals ('='), and underscore ('_').
+    syntax:
+      content: 'function setTags(tags: Tags, options?: BlobSetTagsOptions)'
+      parameters:
+        - id: tags
+          type:
+            - '@azure/storage-blob.Tags'
+          description: ''
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobSetTagsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-blob.BlobSetTagsResponse>
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobClient.syncCopyFromURL'
@@ -876,6 +963,27 @@ items:
         description: >-
           A new BlobClient object identical to the source but with the specified
           snapshot timestamp
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobClient.withVersion'
+    name: withVersion(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Creates a new BlobClient object pointing to a version of this blob.
+      Provide "" will remove the versionId and return a Client to the base blob.
+    syntax:
+      content: 'function withVersion(versionId: string)'
+      parameters:
+        - id: versionId
+          type:
+            - string
+          description: The versionId.
+      return:
+        type:
+          - '@azure/storage-blob.BlobClient'
+        description: A new BlobClient object pointing to the version of this blob.
     package: '@azure/storage-blob'
 references:
   - uid: '@azure/storage-blob.StorageClient'
@@ -982,6 +1090,16 @@ references:
         uid: '@azure/storage-blob.BlobDeleteResponse'
       - name: '>'
         fullName: '>'
+  - uid: Promise<@azure/storage-blob.BlobDeleteIfExistsResponse>
+    name: BlobDeleteIfExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: BlobDeleteIfExistsResponse
+        fullName: BlobDeleteIfExistsResponse
+        uid: '@azure/storage-blob.BlobDeleteIfExistsResponse'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-blob.BlobDownloadOptions'
     name: BlobDownloadOptions
     spec.typeScript:
@@ -1048,6 +1166,22 @@ references:
       - name: BlobGetPropertiesResponse
         fullName: BlobGetPropertiesResponse
         uid: '@azure/storage-blob.BlobGetPropertiesResponse'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/storage-blob.BlobGetTagsOptions'
+    name: BlobGetTagsOptions
+    spec.typeScript:
+      - name: BlobGetTagsOptions
+        fullName: BlobGetTagsOptions
+        uid: '@azure/storage-blob.BlobGetTagsOptions'
+  - uid: Promise<@azure/storage-blob.BlobGetTagsResponse>
+    name: BlobGetTagsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: BlobGetTagsResponse
+        fullName: BlobGetTagsResponse
+        uid: '@azure/storage-blob.BlobGetTagsResponse'
       - name: '>'
         fullName: '>'
   - uid: >-
@@ -1123,6 +1257,28 @@ references:
       - name: BlobSetMetadataResponse
         fullName: BlobSetMetadataResponse
         uid: '@azure/storage-blob.BlobSetMetadataResponse'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/storage-blob.Tags'
+    name: Tags
+    spec.typeScript:
+      - name: Tags
+        fullName: Tags
+        uid: '@azure/storage-blob.Tags'
+  - uid: '@azure/storage-blob.BlobSetTagsOptions'
+    name: BlobSetTagsOptions
+    spec.typeScript:
+      - name: BlobSetTagsOptions
+        fullName: BlobSetTagsOptions
+        uid: '@azure/storage-blob.BlobSetTagsOptions'
+  - uid: Promise<@azure/storage-blob.BlobSetTagsResponse>
+    name: BlobSetTagsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: BlobSetTagsResponse
+        fullName: BlobSetTagsResponse
+        uid: '@azure/storage-blob.BlobSetTagsResponse'
       - name: '>'
         fullName: '>'
   - uid: '@azure/storage-blob.BlobSyncCopyFromURLOptions'

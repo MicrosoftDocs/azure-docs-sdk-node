@@ -62,9 +62,7 @@ items:
       });
 
 
-      await poller.pollUntilDone();
-
-      const pages = poller.getResult();
+      const pages = await poller.pollUntilDone();
 
       ```
     syntax:
@@ -131,9 +129,7 @@ items:
       });
 
 
-      await poller.pollUntilDone();
-
-      const pages = poller.getResult();
+      const pages = await poller.pollUntilDone();
 
       ```
     syntax:
@@ -144,9 +140,9 @@ items:
         - id: formUrl
           type:
             - string
-          description: |-
-            Url to an accessible form document
-            ng", and "image/tiff";
+          description: >-
+            Url to an accessible form document. Supported document types include
+            PDF, JPEG, PNG, and TIFF.
         - id: options
           type:
             - '@azure/ai-form-recognizer.BeginRecognizeContentOptions'
@@ -197,9 +193,7 @@ items:
         onProgress: (state) => { console.log(`status: ${state.status}`); }
       });
 
-      await poller.pollUntilDone();
-
-      const forms = poller.getResult();
+      const forms = await poller.pollUntilDone();
 
       ```
     syntax:
@@ -272,9 +266,7 @@ items:
         onProgress: (state) => { console.log(`status: ${state.status}`); }
       });
 
-      await poller.pollUntilDone();
-
-      const forms = poller.getResult();
+      const forms = await poller.pollUntilDone();
 
       ```
     syntax:
@@ -289,9 +281,9 @@ items:
         - id: formUrl
           type:
             - string
-          description: |-
-            Url to an accessible form document
-            ng", and "image/tiff";
+          description: >-
+            Url to an accessible form document. Supported document types include
+            PDF, JPEG, PNG, and TIFF.
         - id: options
           type:
             - '@azure/ai-form-recognizer.BeginRecognizeFormsOptions'
@@ -351,9 +343,7 @@ items:
       });
 
 
-      await poller.pollUntilDone();
-
-      const receipts = poller.getResult();
+      const receipts = await poller.pollUntilDone();
        if (!receipts || receipts.length <= 0) {
          throw new Error("Expecting at lease one receipt in analysis result");
        }
@@ -362,25 +352,25 @@ items:
 
       console.log("First receipt:");
 
-      const receiptTypeField = receipt.recognizedForm.fields["ReceiptType"];
+      const receiptTypeField = receipt.fields["ReceiptType"];
 
       if (receiptTypeField.valueType === "string") {
         console.log(`  Receipt Type: '${receiptTypeField.value || "<missing>"}', with confidence of ${receiptTypeField.confidence}`);
       }
 
-      const merchantNameField = receipt.recognizedForm.fields["MerchantName"];
+      const merchantNameField = receipt.fields["MerchantName"];
 
       if (merchantNameField.valueType === "string") {
         console.log(`  Merchant Name: '${merchantNameField.value || "<missing>"}', with confidence of ${merchantNameField.confidence}`);
       }
 
-      const transactionDate = receipt.recognizedForm.fields["TransactionDate"];
+      const transactionDate = receipt.fields["TransactionDate"];
 
       if (transactionDate.valueType === "date") {
         console.log(`  Transaction Date: '${transactionDate.value || "<missing>"}', with confidence of ${transactionDate.confidence}`);
       }
 
-      const itemsField = receipt.recognizedForm.fields["Items"];
+      const itemsField = receipt.fields["Items"];
 
       if (itemsField.valueType === "array") {
         for (const itemField of itemsField.value || []) {
@@ -393,7 +383,7 @@ items:
        }
       }
 
-      const totalField = receipt.recognizedForm.fields["Total"];
+      const totalField = receipt.fields["Total"];
 
       if (totalField.valueType === "number") {
         console.log(`  Total: '${totalField.value || "<missing>"}', with confidence of ${totalField.confidence}`);
@@ -467,13 +457,11 @@ items:
 
       const poller = await client.beginRecognizeReceiptsFromUrl(
         url, {
-          includeTextDetails: true,
+          includeFieldElements: true,
           onProgress: (state) => { console.log(`analyzing status: ${state.status}`); }
       });
 
-      await poller.pollUntilDone();
-
-      const receipts = poller.getResult();
+      const receipts = await poller.pollUntilDone();
        if (!receipts || receipts.length <= 0) {
          throw new Error("Expecting at lease one receipt in analysis result");
        }
@@ -482,25 +470,25 @@ items:
 
       console.log("First receipt:");
 
-      const receiptTypeField = receipt.recognizedForm.fields["ReceiptType"];
+      const receiptTypeField = receipt.fields["ReceiptType"];
 
       if (receiptTypeField.valueType === "string") {
         console.log(`  Receipt Type: '${receiptTypeField.value || "<missing>"}', with confidence of ${receiptTypeField.confidence}`);
       }
 
-      const merchantNameField = receipt.recognizedForm.fields["MerchantName"];
+      const merchantNameField = receipt.fields["MerchantName"];
 
       if (merchantNameField.valueType === "string") {
         console.log(`  Merchant Name: '${merchantNameField.value || "<missing>"}', with confidence of ${merchantNameField.confidence}`);
       }
 
-      const transactionDate = receipt.recognizedForm.fields["TransactionDate"];
+      const transactionDate = receipt.fields["TransactionDate"];
 
       if (transactionDate.valueType === "date") {
         console.log(`  Transaction Date: '${transactionDate.value || "<missing>"}', with confidence of ${transactionDate.confidence}`);
       }
 
-      const itemsField = receipt.recognizedForm.fields["Items"];
+      const itemsField = receipt.fields["Items"];
 
       if (itemsField.valueType === "array") {
         for (const itemField of itemsField.value || []) {
@@ -513,7 +501,7 @@ items:
        }
       }
 
-      const totalField = receipt.recognizedForm.fields["Total"];
+      const totalField = receipt.fields["Total"];
 
       if (totalField.valueType === "number") {
         console.log(`  Total: '${totalField.value || "<missing>"}', with confidence of ${totalField.confidence}`);
@@ -528,7 +516,9 @@ items:
         - id: receiptUrl
           type:
             - string
-          description: url to the input receipt document
+          description: >-
+            Url to an accesssible receipt document. Supported document types
+            include PDF, JPEG, PNG, and TIFF.
         - id: options
           type:
             - '@azure/ai-form-recognizer.BeginRecognizeReceiptsOptions'

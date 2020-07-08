@@ -2,14 +2,14 @@
 items:
   - uid: '@azure/search-documents.SearchRequest'
     name: SearchRequest
-    fullName: SearchRequest<Fields>
+    fullName: SearchRequest
     children:
       - '@azure/search-documents.SearchRequest.facets'
       - '@azure/search-documents.SearchRequest.filter'
       - '@azure/search-documents.SearchRequest.highlightFields'
       - '@azure/search-documents.SearchRequest.highlightPostTag'
       - '@azure/search-documents.SearchRequest.highlightPreTag'
-      - '@azure/search-documents.SearchRequest.includeTotalResultCount'
+      - '@azure/search-documents.SearchRequest.includeTotalCount'
       - '@azure/search-documents.SearchRequest.minimumCoverage'
       - '@azure/search-documents.SearchRequest.orderBy'
       - '@azure/search-documents.SearchRequest.queryType'
@@ -17,6 +17,7 @@ items:
       - '@azure/search-documents.SearchRequest.scoringProfile'
       - '@azure/search-documents.SearchRequest.searchFields'
       - '@azure/search-documents.SearchRequest.searchMode'
+      - '@azure/search-documents.SearchRequest.searchText'
       - '@azure/search-documents.SearchRequest.select'
       - '@azure/search-documents.SearchRequest.skip'
       - '@azure/search-documents.SearchRequest.top'
@@ -124,9 +125,9 @@ items:
           - string
         description: ''
     package: '@azure/search-documents'
-  - uid: '@azure/search-documents.SearchRequest.includeTotalResultCount'
-    name: includeTotalResultCount
-    fullName: includeTotalResultCount
+  - uid: '@azure/search-documents.SearchRequest.includeTotalCount'
+    name: includeTotalCount
+    fullName: includeTotalCount
     children: []
     langs:
       - typeScript
@@ -141,7 +142,7 @@ items:
       approximation.
     optional: true
     syntax:
-      content: 'includeTotalResultCount?: boolean'
+      content: 'includeTotalCount?: boolean'
       return:
         type:
           - boolean
@@ -179,7 +180,8 @@ items:
       - typeScript
     type: property
     summary: >-
-      The list of OData $orderby expressions by which to sort the results. Each
+      The comma-separated list of OData $orderby expressions by which to sort
+      the results. Each
 
       expression can be either a field name or a call to either the
       geo.distance() or the
@@ -196,10 +198,10 @@ items:
       document match score. There can be at most 32 $orderby clauses.
     optional: true
     syntax:
-      content: 'orderBy?: string[]'
+      content: 'orderBy?: string'
       return:
         type:
-          - 'string[]'
+          - string
         description: ''
     package: '@azure/search-documents'
   - uid: '@azure/search-documents.SearchRequest.queryType'
@@ -214,7 +216,7 @@ items:
       'simple'. Use 'full' if
 
       your query uses the Lucene query syntax. Possible values include:
-      'simple', 'full'
+      'Simple', 'Full'
     optional: true
     syntax:
       content: 'queryType?: QueryType'
@@ -286,10 +288,10 @@ items:
       this parameter.
     optional: true
     syntax:
-      content: 'searchFields?: Fields[]'
+      content: 'searchFields?: string'
       return:
         type:
-          - 'Fields[]'
+          - string
         description: ''
     package: '@azure/search-documents'
   - uid: '@azure/search-documents.SearchRequest.searchMode'
@@ -303,13 +305,31 @@ items:
       A value that specifies whether any or all of the search terms must be
       matched in order to
 
-      count the document as a match. Possible values include: 'any', 'all'
+      count the document as a match. Possible values include: 'Any', 'All'
     optional: true
     syntax:
       content: 'searchMode?: SearchMode'
       return:
         type:
           - '@azure/search-documents.SearchMode'
+        description: ''
+    package: '@azure/search-documents'
+  - uid: '@azure/search-documents.SearchRequest.searchText'
+    name: searchText
+    fullName: searchText
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      A full-text search query expression; Use "*" or omit this parameter to
+      match all documents.
+    optional: true
+    syntax:
+      content: 'searchText?: string'
+      return:
+        type:
+          - string
         description: ''
     package: '@azure/search-documents'
   - uid: '@azure/search-documents.SearchRequest.select'
@@ -319,15 +339,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: |-
-      The list of fields to retrieve. If unspecified, all fields marked as
+    summary: >-
+      The comma-separated list of fields to retrieve. If unspecified, all fields
+      marked as
+
       retrievable in the schema are included.
     optional: true
     syntax:
-      content: 'select?: Fields[]'
+      content: 'select?: string'
       return:
         type:
-          - 'Fields[]'
+          - string
         description: ''
     package: '@azure/search-documents'
   - uid: '@azure/search-documents.SearchRequest.skip'

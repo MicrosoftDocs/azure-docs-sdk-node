@@ -4,18 +4,14 @@ items:
     name: Sender
     fullName: Sender
     children:
-      - '@azure/service-bus.Sender.cancelScheduledMessage'
       - '@azure/service-bus.Sender.cancelScheduledMessages'
       - '@azure/service-bus.Sender.close'
       - '@azure/service-bus.Sender.createBatch'
       - '@azure/service-bus.Sender.entityPath'
       - '@azure/service-bus.Sender.isClosed'
       - '@azure/service-bus.Sender.open'
-      - '@azure/service-bus.Sender.scheduleMessage'
       - '@azure/service-bus.Sender.scheduleMessages'
-      - '@azure/service-bus.Sender.send'
-      - '@azure/service-bus.Sender.send_2'
-      - '@azure/service-bus.Sender.send_1'
+      - '@azure/service-bus.Sender.sendMessages'
     langs:
       - typeScript
     type: interface
@@ -30,36 +26,8 @@ items:
 
       The Sender class is an abstraction over the underlying AMQP sender link.
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.cancelScheduledMessage'
-    name: 'cancelScheduledMessage(Long, OperationOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Cancels a message that was scheduled to appear on a ServiceBus
-      Queue/Subscription.
-    syntax:
-      content: >-
-        function cancelScheduledMessage(sequenceNumber: Long, options?:
-        OperationOptions)
-      parameters:
-        - id: sequenceNumber
-          type:
-            - Long
-          description: The sequence number of the message to be cancelled.
-        - id: options
-          type:
-            - '@azure/service-bus.OperationOptions'
-          description: Options bag to pass an abort signal or tracing options.
-          optional: true
-      return:
-        type:
-          - Promise<void>
-        description: Promise<void>
-    package: '@azure/service-bus'
   - uid: '@azure/service-bus.Sender.cancelScheduledMessages'
-    name: 'cancelScheduledMessages(Long[], OperationOptions)'
+    name: 'cancelScheduledMessages(Long | Long[], OperationOptionsBase)'
     children: []
     type: method
     langs:
@@ -69,16 +37,18 @@ items:
       Queue/Subscription.
     syntax:
       content: >-
-        function cancelScheduledMessages(sequenceNumbers: Long[], options?:
-        OperationOptions)
+        function cancelScheduledMessages(sequenceNumbers: Long | Long[],
+        options?: OperationOptionsBase)
       parameters:
         - id: sequenceNumbers
           type:
-            - 'Long[]'
-          description: An Array of sequence numbers of the messages to be cancelled.
+            - 'Long | Long[]'
+          description: >-
+            Sequence number or an array of sequence numbers of the messages to
+            be cancelled.
         - id: options
           type:
-            - '@azure/service-bus.OperationOptions'
+            - '@azure/service-bus.OperationOptionsBase'
           description: Options bag to pass an abort signal or tracing options.
           optional: true
       return:
@@ -174,14 +144,10 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >
+    summary: |
       Opens the AMQP link to Azure Service Bus from the sender.
-
       It is not necessary to call this method in order to use the sender. It is
-
-      recommended to call this before your first send() or sendBatch() call if
-      you
-
+      recommended to call this before your first sendMessages() call if you
       want to front load the work of setting up the AMQP link to the service.
     syntax:
       content: 'function open(options?: SenderOpenOptions)'
@@ -197,50 +163,10 @@ items:
           - Promise<void>
         description: ''
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.scheduleMessage'
-    name: 'scheduleMessage(Date, ServiceBusMessage, OperationOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Schedules given message to appear on Service Bus Queue/Subscription at a
-      later time.
-    syntax:
-      content: >-
-        function scheduleMessage(scheduledEnqueueTimeUtc: Date, message:
-        ServiceBusMessage, options?: OperationOptions)
-      parameters:
-        - id: scheduledEnqueueTimeUtc
-          type:
-            - Date
-          description: The UTC time at which the message should be enqueued.
-        - id: message
-          type:
-            - '@azure/service-bus.ServiceBusMessage'
-          description: The message that needs to be scheduled.
-        - id: options
-          type:
-            - '@azure/service-bus.OperationOptions'
-          description: Options bag to pass an abort signal or tracing options.
-          optional: true
-      return:
-        type:
-          - Promise<Long>
-        description: >-
-          Promise<Long> - The sequence number of the message that was scheduled.
-
-          You will need the sequence number if you intend to cancel the
-          scheduling of the message.
-
-          Save the `Long` type as-is in your application without converting to
-          number. Since JavaScript
-
-          only supports 53 bit numbers, converting the `Long` to number will
-          cause loss in precision.
-    package: '@azure/service-bus'
   - uid: '@azure/service-bus.Sender.scheduleMessages'
-    name: 'scheduleMessages(Date, ServiceBusMessage[], OperationOptions)'
+    name: >-
+      scheduleMessages(Date, ServiceBusMessage | ServiceBusMessage[],
+      OperationOptionsBase)
     children: []
     type: method
     langs:
@@ -251,7 +177,7 @@ items:
     syntax:
       content: >-
         function scheduleMessages(scheduledEnqueueTimeUtc: Date, messages:
-        ServiceBusMessage[], options?: OperationOptions)
+        ServiceBusMessage | ServiceBusMessage[], options?: OperationOptionsBase)
       parameters:
         - id: scheduledEnqueueTimeUtc
           type:
@@ -259,11 +185,13 @@ items:
           description: The UTC time at which the messages should be enqueued.
         - id: messages
           type:
-            - '@azure/service-bus.ServiceBusMessage[]'
-          description: Array of Messages that need to be scheduled.
+            - >-
+              @azure/service-bus.ServiceBusMessage |
+              @azure/service-bus.ServiceBusMessage[]
+          description: Message or an array of messages that need to be scheduled.
         - id: options
           type:
-            - '@azure/service-bus.OperationOptions'
+            - '@azure/service-bus.OperationOptionsBase'
           description: Options bag to pass an abort signal or tracing options.
           optional: true
       return:
@@ -282,108 +210,48 @@ items:
           only supports 53 bit numbers, converting the `Long` to number will
           cause loss in precision.
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.send'
-    name: 'send(ServiceBusMessage, OperationOptions)'
+  - uid: '@azure/service-bus.Sender.sendMessages'
+    name: >-
+      sendMessages(ServiceBusMessage | ServiceBusMessage[] |
+      ServiceBusMessageBatch, OperationOptionsBase)
     children: []
     type: method
     langs:
       - typeScript
     summary: >
-      Sends the given message after creating an AMQP Sender link if it doesnt
-      already exists.
+      Sends the given messages after creating an AMQP Sender link if it doesn't
+      already exist.
 
-      To send a message to a `session` and/or `partition` enabled Queue/Topic,
-      set the `sessionId`
-
-      and/or `partitionKey` properties respectively on the message.
-    syntax:
-      content: 'function send(message: ServiceBusMessage, options?: OperationOptions)'
-      parameters:
-        - id: message
-          type:
-            - '@azure/service-bus.ServiceBusMessage'
-          description: Message to send.
-        - id: options
-          type:
-            - '@azure/service-bus.OperationOptions'
-          description: Options bag to pass an abort signal or tracing options.
-          optional: true
-      return:
-        type:
-          - Promise<void>
-        description: Promise<void>
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.send_2'
-    name: 'send(ServiceBusMessageBatch, OperationOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >
-      Sends a batch of messages to the associated service-bus entity after
-      creating an AMQP
-
-      Sender link if it doesn't already exist.
+      Consider awaiting on open() beforehand to front load the work of link
+      creation if needed.
 
       - To send messages to a `session` and/or `partition` enabled Queue/Topic,
       set the `sessionId`
 
       and/or `partitionKey` properties respectively on the messages.
 
-      - When doing so, all messages in the batch should have the same
+      - All messages passed to the same sendMessages() call should have the same
       `sessionId` (if using
        sessions) and the same `partitionKey` (if using partitions).
     syntax:
       content: >-
-        function send(messageBatch: ServiceBusMessageBatch, options?:
-        OperationOptions)
-      parameters:
-        - id: messageBatch
-          type:
-            - '@azure/service-bus.ServiceBusMessageBatch'
-          description: >-
-            A batch of messages that you can create using the <xref:createBatch>
-            method.
-        - id: options
-          type:
-            - '@azure/service-bus.OperationOptions'
-          description: Options bag to pass an abort signal or tracing options.
-          optional: true
-      return:
-        type:
-          - Promise<void>
-        description: ''
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.send_1'
-    name: 'send(ServiceBusMessage[], OperationOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >
-      Sends the given messages in a single batch i.e. in a single AMQP message
-      after creating an AMQP
-
-      Sender link if it doesn't already exist.
-
-      - To send messages to a `session` and/or `partition` enabled Queue/Topic,
-      set the `sessionId`
-
-      and/or `partitionKey` properties respectively on the messages.
-
-      - When doing so, all messages in the batch should have the same
-      `sessionId` (if using
-       sessions) and the same `partitionKey` (if using partitions).
-    syntax:
-      content: 'function send(messages: ServiceBusMessage[], options?: OperationOptions)'
+        function sendMessages(messages: ServiceBusMessage | ServiceBusMessage[]
+        | ServiceBusMessageBatch, options?: OperationOptionsBase)
       parameters:
         - id: messages
           type:
-            - '@azure/service-bus.ServiceBusMessage[]'
-          description: An array of ServiceBusMessage objects to be sent in a Batch message.
+            - >-
+              @azure/service-bus.ServiceBusMessage |
+              @azure/service-bus.ServiceBusMessage[] |
+              @azure/service-bus.ServiceBusMessageBatch
+          description: >-
+            A single message or an array of messages or a batch of messages
+            created via the createBatch()
+
+            method to send.
         - id: options
           type:
-            - '@azure/service-bus.OperationOptions'
+            - '@azure/service-bus.OperationOptionsBase'
           description: Options bag to pass an abort signal or tracing options.
           optional: true
       return:
@@ -392,12 +260,12 @@ items:
         description: Promise<void>
     package: '@azure/service-bus'
 references:
-  - uid: '@azure/service-bus.OperationOptions'
-    name: OperationOptions
+  - uid: '@azure/service-bus.OperationOptionsBase'
+    name: OperationOptionsBase
     spec.typeScript:
-      - name: OperationOptions
-        fullName: OperationOptions
-        uid: '@azure/service-bus.OperationOptions'
+      - name: OperationOptionsBase
+        fullName: OperationOptionsBase
+        uid: '@azure/service-bus.OperationOptionsBase'
   - uid: '@azure/service-bus.CreateBatchOptions'
     name: CreateBatchOptions
     spec.typeScript:
@@ -420,23 +288,37 @@ references:
       - name: SenderOpenOptions
         fullName: SenderOpenOptions
         uid: '@azure/service-bus.SenderOpenOptions'
-  - uid: '@azure/service-bus.ServiceBusMessage'
-    name: ServiceBusMessage
-    spec.typeScript:
-      - name: ServiceBusMessage
-        fullName: ServiceBusMessage
-        uid: '@azure/service-bus.ServiceBusMessage'
-  - uid: '@azure/service-bus.ServiceBusMessage[]'
+  - uid: >-
+      @azure/service-bus.ServiceBusMessage |
+      @azure/service-bus.ServiceBusMessage[]
     name: 'ServiceBusMessage[]'
     spec.typeScript:
       - name: ServiceBusMessage
         fullName: ServiceBusMessage
         uid: '@azure/service-bus.ServiceBusMessage'
+      - name: ' | '
+        fullName: ' | '
+      - name: ServiceBusMessage
+        fullName: ServiceBusMessage
+        uid: '@azure/service-bus.ServiceBusMessage'
       - name: '[]'
         fullName: '[]'
-  - uid: '@azure/service-bus.ServiceBusMessageBatch'
+  - uid: >-
+      @azure/service-bus.ServiceBusMessage |
+      @azure/service-bus.ServiceBusMessage[] |
+      @azure/service-bus.ServiceBusMessageBatch
     name: ServiceBusMessageBatch
     spec.typeScript:
+      - name: ServiceBusMessage
+        fullName: ServiceBusMessage
+        uid: '@azure/service-bus.ServiceBusMessage'
+      - name: ' | '
+        fullName: ' | '
+      - name: ServiceBusMessage
+        fullName: ServiceBusMessage
+        uid: '@azure/service-bus.ServiceBusMessage'
+      - name: '[] | '
+        fullName: '[] | '
       - name: ServiceBusMessageBatch
         fullName: ServiceBusMessageBatch
         uid: '@azure/service-bus.ServiceBusMessageBatch'

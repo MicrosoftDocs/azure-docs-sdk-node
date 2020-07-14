@@ -1,17 +1,17 @@
 ---
-title: Azure App Configuration client library for JavaScript
-keywords: Azure, JavaScript, SDK, API, appconfiguration, app-configuration
+title: 
+keywords: Azure, javascript, SDK, API, @azure/app-configuration, 
 author: maggiepint
 ms.author: magpint
-ms.date: 04/16/2020
+ms.date: 07/07/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: JavaScript
-ms.service: appconfiguration
+ms.devlang: javascript
+ms.service: 
 ---
- # Azure App Configuration client library for JavaScript - Version 1.0.1 
 
+# App Configuration client library for JavaScript
 
 [Azure App Configuration](https://docs.microsoft.com/en-us/azure/azure-app-configuration/overview) is a managed service that helps developers centralize their application and feature settings simply and securely.
 
@@ -29,19 +29,18 @@ Use the client library for App Configuration to:
 
 ## Getting started
 
-### Currently supported environments
-
-- Node.js version 8.x.x or higher
-
-**Prerequisites**: You must have an [Azure Subscription](https://azure.microsoft.com) and an [App Configuration](https://docs.microsoft.com/en-us/azure/azure-app-configuration/) resource to use this package.
-
-### 1. Install the `@azure/app-configuration` package
+### Install the package
 
 ```bash
 npm install @azure/app-configuration
 ```
 
-### 2. Create an App Configuration resource
+### Prerequisites
+
+- You must have an [Azure Subscription](https://azure.microsoft.com) and an [App Configuration](https://docs.microsoft.com/en-us/azure/azure-app-configuration/) resource to use this package.
+- Node.js version 8.x.x or higher
+
+### Create an App Configuration resource
 
 You can use the [Azure Portal](https://portal.azure.com) or the [Azure CLI](https://docs.microsoft.com/cli/azure) to create an Azure App Configuration resource.
 
@@ -51,7 +50,7 @@ Example (Azure CLI):
 az appconfig create --name <app-configuration-resource-name> --resource-group <resource-group-name> --location eastus
 ```
 
-### 3. Create and authenticate an `AppConfigurationClient`
+### Authenticate the client
 
 AppConfigurationClient can authenticate using a [service principal](#authenticating-with-a-service-principal) or using a [connection string](#authenticating-with-a-connection-string).
 
@@ -105,7 +104,7 @@ This means this pattern works:
 
 ```typescript
 const setting = await client.getConfigurationSetting({
-  key: "hello",
+  key: "hello"
 });
 
 setting.value = "new value!";
@@ -124,7 +123,7 @@ or, for example, re-getting a setting:
 
 ```typescript
 let setting = await client.getConfigurationSetting({
-  key: "hello",
+  key: "hello"
 });
 
 // re-get the setting
@@ -149,11 +148,11 @@ async function run() {
     // Labels allow you to create variants of a key tailored
     // for specific use-cases like supporting multiple environments.
     // https://docs.microsoft.com/en-us/azure/azure-app-configuration/concept-key-value#label-keys
-    label: "optional-label",
+    label: "optional-label"
   });
 
   let retrievedSetting = await client.getConfigurationSetting("testkey", {
-    label: "optional-label",
+    label: "optional-label"
   });
 
   console.log("Retrieved value:", retrievedSetting.value);
@@ -177,25 +176,13 @@ More in-depth examples can be found in the [samples](https://github.com/Azure/az
 
 ## Contributing
 
-This project welcomes contributions and suggestions. Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
-
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
 If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This module's tests are a mixture of live and unit tests, which require you to have an Azure App Configuration instance. To execute the tests you'll need to run:
 
 1. `rush update`
 2. `rush build -t @azure/app-configuration`
-3. Create a .env file with these contents in the `sdk\appconfiguration\app-configuration` folder:  
+3. Create a .env file with these contents in the `sdk\appconfiguration\app-configuration` folder:
    `AZ_CONFIG_CONNECTION=connection string for your App Configuration instance`
 4. `cd sdk\appconfiguration\app-configuration`
 5. `npm run test`.
@@ -209,3 +196,4 @@ folder for more details.
 - [Azure App Configuration](https://docs.microsoft.com/en-us/azure/azure-app-configuration/overview)
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fappconfiguration%2Fapp-configuration%2FREADME.png)
+

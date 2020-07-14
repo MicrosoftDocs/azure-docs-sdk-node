@@ -10,7 +10,8 @@ ms.technology: azure
 ms.devlang: JavaScript
 ms.service: storage
 ---
- # Azure Storage Blob client library for JavaScript - Version 12.1.1 
+
+# Azure Storage Blob client library for JavaScript - Version 12.1.1 
 
 
 Azure Storage Blob is Microsoft's object storage solution for the cloud. Blob storage is optimized for storing massive amounts of unstructured data. Unstructured data is data that does not adhere to a particular data model or definition, such as text or binary data.

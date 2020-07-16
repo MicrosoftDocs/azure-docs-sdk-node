@@ -1,0 +1,437 @@
+### YamlMime:UniversalReference
+items:
+  - uid: '@azure/service-bus.SessionReceiver'
+    name: SessionReceiver
+    fullName: SessionReceiver<ReceivedMessageT>
+    children:
+      - '@azure/service-bus.SessionReceiver.close'
+      - '@azure/service-bus.SessionReceiver.entityPath'
+      - '@azure/service-bus.SessionReceiver.getMessageIterator'
+      - '@azure/service-bus.SessionReceiver.getState'
+      - '@azure/service-bus.SessionReceiver.isClosed'
+      - '@azure/service-bus.SessionReceiver.peekMessages'
+      - '@azure/service-bus.SessionReceiver.receiveDeferredMessages'
+      - '@azure/service-bus.SessionReceiver.receiveMessages'
+      - '@azure/service-bus.SessionReceiver.receiveMode'
+      - '@azure/service-bus.SessionReceiver.renewSessionLock'
+      - '@azure/service-bus.SessionReceiver.sessionId'
+      - '@azure/service-bus.SessionReceiver.sessionLockedUntilUtc'
+      - '@azure/service-bus.SessionReceiver.setState'
+      - '@azure/service-bus.SessionReceiver.subscribe'
+    langs:
+      - typeScript
+    type: interface
+    summary: 'A receiver that handles sessions, including renewing the session lock.'
+    extends:
+      name: '@azure/service-bus.Receiver<ReceivedMessageT>'
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.close'
+    name: close()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Closes the receiver.
+
+      Once closed, the receiver cannot be used for any further operations.
+
+      Use the `createReceiver()` method on the ServiceBusClient to create a new
+      Receiver.
+    syntax:
+      content: function close()
+      parameters: []
+      return:
+        type:
+          - Promise<void>
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.entityPath'
+    name: entityPath
+    fullName: entityPath
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Path of the entity for which the receiver has been created.
+    syntax:
+      content: 'entityPath: string'
+      return:
+        type:
+          - string
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.getMessageIterator'
+    name: getMessageIterator(GetMessageIteratorOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns an iterator that can be used to receive messages from Service Bus.
+
+      If the iterator is not able to fetch a new message in over a minute,
+      `undefined` will be returned.
+    syntax:
+      content: 'function getMessageIterator(options?: GetMessageIteratorOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/service-bus.GetMessageIteratorOptions'
+          description: >
+            A set of options to control the receive operation.
+
+            - `maxWaitTimeInMs`: The time to wait to receive the message in each
+            iteration.
+
+            - `abortSignal`: The signal to use to abort the ongoing operation.
+          optional: true
+      return:
+        type:
+          - AsyncIterableIterator<ReceivedMessageT>
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.getState'
+    name: getState(OperationOptionsBase)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Gets the state of the Session. For more on session states, see
+
+      [Session
+      State](https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-sessions#message-session-state)
+    syntax:
+      content: 'function getState(options?: OperationOptionsBase)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/service-bus.OperationOptionsBase'
+          description: Options bag to pass an abort signal or tracing options.
+          optional: true
+      return:
+        type:
+          - Promise<any>
+        description: The state of that session
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.isClosed'
+    name: isClosed
+    fullName: isClosed
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Returns `true` if either the receiver or the client that created it has
+      been closed
+    syntax:
+      content: 'isClosed: boolean'
+      return:
+        type:
+          - boolean
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.peekMessages'
+    name: 'peekMessages(number, PeekMessagesOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Peek the next batch of active messages (including deferred but not
+      deadlettered messages) on the
+
+      queue or subscription without modifying them.
+
+      - The first call to `peekMessages()` fetches the first active message.
+      Each subsequent call fetches the
+
+      subsequent message.
+
+      - Unlike a "received" message, "peeked" message is a read-only version of
+      the message.
+
+      It cannot be `Completed/Abandoned/Deferred/Deadlettered`.
+    syntax:
+      content: >-
+        function peekMessages(maxMessageCount: number, options?:
+        PeekMessagesOptions)
+      parameters:
+        - id: maxMessageCount
+          type:
+            - number
+          description: The maximum number of messages to peek.
+        - id: options
+          type:
+            - '@azure/service-bus.PeekMessagesOptions'
+          description: >
+            Options that allow to specify the maximum number of messages to
+            peek,
+
+            the sequenceNumber to start peeking from or an abortSignal to abort
+            the operation.
+          optional: true
+      return:
+        type:
+          - 'Promise<@azure/service-bus.ReceivedMessage[]>'
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.receiveDeferredMessages'
+    name: 'receiveDeferredMessages(Long | Long[], OperationOptionsBase)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns a promise that resolves to an array of deferred messages
+      identified by given `sequenceNumbers`.
+    syntax:
+      content: >-
+        function receiveDeferredMessages(sequenceNumbers: Long | Long[],
+        options?: OperationOptionsBase)
+      parameters:
+        - id: sequenceNumbers
+          type:
+            - 'Long | Long[]'
+          description: >-
+            The sequence number or an array of sequence numbers for the messages
+            that need to be received.
+        - id: options
+          type:
+            - '@azure/service-bus.OperationOptionsBase'
+          description: Options bag to pass an abort signal or tracing options.
+          optional: true
+      return:
+        type:
+          - 'Promise<ReceivedMessageT[]>'
+        description: |-
+          - Returns a list of messages identified by the given sequenceNumbers.
+          - Returns an empty list if no messages are found.
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.receiveMessages'
+    name: 'receiveMessages(number, ReceiveMessagesOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Returns a promise that resolves to an array of messages received from
+      Service Bus.
+    syntax:
+      content: >-
+        function receiveMessages(maxMessageCount: number, options?:
+        ReceiveMessagesOptions)
+      parameters:
+        - id: maxMessageCount
+          type:
+            - number
+          description: The maximum number of messages to receive.
+        - id: options
+          type:
+            - '@azure/service-bus.ReceiveMessagesOptions'
+          description: >-
+            A set of options to control the receive operation.
+
+            - `maxWaitTimeInMs`: The time to wait to receive the given number of
+            messages.
+
+            - `abortSignal`: The signal to use to abort the ongoing operation.
+          optional: true
+      return:
+        type:
+          - 'Promise<ReceivedMessageT[]>'
+        description: >-
+          Promise<ServiceBusMessage[]> A promise that resolves with an array of
+          messages.
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.receiveMode'
+    name: receiveMode
+    fullName: receiveMode
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: ReceiveMode provided to the client.
+    syntax:
+      content: 'receiveMode: "peekLock" | "receiveAndDelete"'
+      return:
+        type:
+          - '"peekLock" | "receiveAndDelete"'
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.renewSessionLock'
+    name: renewSessionLock(OperationOptionsBase)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Renews the lock on the session.
+    syntax:
+      content: 'function renewSessionLock(options?: OperationOptionsBase)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/service-bus.OperationOptionsBase'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Date>
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.sessionId'
+    name: sessionId
+    fullName: sessionId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The session ID.
+    syntax:
+      content: 'sessionId: string'
+      return:
+        type:
+          - string
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.sessionLockedUntilUtc'
+    name: sessionLockedUntilUtc
+    fullName: sessionLockedUntilUtc
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The time in UTC until which the session is locked.
+
+      Everytime `renewSessionLock()` is called, this time gets updated to
+      current time plus the lock
+
+      duration as specified during the Queue/Subscription creation.
+
+
+      Will return undefined until a AMQP receiver link has been successfully set
+      up for the session.
+    syntax:
+      content: 'sessionLockedUntilUtc: Date | undefined'
+      return:
+        type:
+          - Date | undefined
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.setState'
+    name: 'setState(any, OperationOptionsBase)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Sets the state on the Session. For more on session states, see
+
+      [Session
+      State](https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-sessions#message-session-state)
+    syntax:
+      content: 'function setState(state: any, options?: OperationOptionsBase)'
+      parameters:
+        - id: state
+          type:
+            - any
+          description: ''
+        - id: options
+          type:
+            - '@azure/service-bus.OperationOptionsBase'
+          description: Options bag to pass an abort signal or tracing options.
+          optional: true
+      return:
+        type:
+          - Promise<void>
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SessionReceiver.subscribe'
+    name: 'subscribe(MessageHandlers<ReceivedMessageT>, SubscribeOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Streams messages to message handlers.
+    syntax:
+      content: >-
+        function subscribe(handlers: MessageHandlers<ReceivedMessageT>,
+        options?: SubscribeOptions)
+      parameters:
+        - id: handlers
+          type:
+            - '@azure/service-bus.MessageHandlers<ReceivedMessageT>'
+          description: A handler that gets called for messages and errors.
+        - id: options
+          type:
+            - '@azure/service-bus.SubscribeOptions'
+          description: Options for subscribe.
+          optional: true
+      return:
+        type:
+          - Object
+        description: >-
+          An object that can be closed, sending any remaining messages to
+          `handlers` and
+
+          stopping new messages from arriving.
+    package: '@azure/service-bus'
+references:
+  - uid: '@azure/service-bus.Receiver<ReceivedMessageT>'
+    name: Receiver<ReceivedMessageT>
+    spec.typeScript:
+      - name: Receiver
+        fullName: Receiver
+        uid: '@azure/service-bus.Receiver'
+      - name: <ReceivedMessageT>
+        fullName: <ReceivedMessageT>
+  - uid: '@azure/service-bus.GetMessageIteratorOptions'
+    name: GetMessageIteratorOptions
+    spec.typeScript:
+      - name: GetMessageIteratorOptions
+        fullName: GetMessageIteratorOptions
+        uid: '@azure/service-bus.GetMessageIteratorOptions'
+  - uid: '@azure/service-bus.OperationOptionsBase'
+    name: OperationOptionsBase
+    spec.typeScript:
+      - name: OperationOptionsBase
+        fullName: OperationOptionsBase
+        uid: '@azure/service-bus.OperationOptionsBase'
+  - uid: '@azure/service-bus.PeekMessagesOptions'
+    name: PeekMessagesOptions
+    spec.typeScript:
+      - name: PeekMessagesOptions
+        fullName: PeekMessagesOptions
+        uid: '@azure/service-bus.PeekMessagesOptions'
+  - uid: 'Promise<@azure/service-bus.ReceivedMessage[]>'
+    name: 'ReceivedMessage[]>'
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: ReceivedMessage
+        fullName: ReceivedMessage
+        uid: '@azure/service-bus.ReceivedMessage'
+      - name: '[]>'
+        fullName: '[]>'
+  - uid: '@azure/service-bus.ReceiveMessagesOptions'
+    name: ReceiveMessagesOptions
+    spec.typeScript:
+      - name: ReceiveMessagesOptions
+        fullName: ReceiveMessagesOptions
+        uid: '@azure/service-bus.ReceiveMessagesOptions'
+  - uid: '@azure/service-bus.MessageHandlers<ReceivedMessageT>'
+    name: MessageHandlers<ReceivedMessageT>
+    spec.typeScript:
+      - name: MessageHandlers
+        fullName: MessageHandlers
+        uid: '@azure/service-bus.MessageHandlers'
+      - name: <ReceivedMessageT>
+        fullName: <ReceivedMessageT>
+  - uid: '@azure/service-bus.SubscribeOptions'
+    name: SubscribeOptions
+    spec.typeScript:
+      - name: SubscribeOptions
+        fullName: SubscribeOptions
+        uid: '@azure/service-bus.SubscribeOptions'

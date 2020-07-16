@@ -15,6 +15,7 @@ items:
       - '@azure/storage-blob.BlockBlobClient.createSnapshot'
       - '@azure/storage-blob.BlockBlobClient.credential'
       - '@azure/storage-blob.BlockBlobClient.delete'
+      - '@azure/storage-blob.BlockBlobClient.deleteIfExists'
       - '@azure/storage-blob.BlockBlobClient.download'
       - '@azure/storage-blob.BlockBlobClient.downloadToBuffer_1'
       - '@azure/storage-blob.BlockBlobClient.downloadToBuffer'
@@ -26,10 +27,13 @@ items:
       - '@azure/storage-blob.BlockBlobClient.getBlockList'
       - '@azure/storage-blob.BlockBlobClient.getPageBlobClient'
       - '@azure/storage-blob.BlockBlobClient.getProperties'
+      - '@azure/storage-blob.BlockBlobClient.getTags'
       - '@azure/storage-blob.BlockBlobClient.name'
+      - '@azure/storage-blob.BlockBlobClient.query'
       - '@azure/storage-blob.BlockBlobClient.setAccessTier'
       - '@azure/storage-blob.BlockBlobClient.setHTTPHeaders'
       - '@azure/storage-blob.BlockBlobClient.setMetadata'
+      - '@azure/storage-blob.BlockBlobClient.setTags'
       - '@azure/storage-blob.BlockBlobClient.stageBlock'
       - '@azure/storage-blob.BlockBlobClient.stageBlockFromURL'
       - '@azure/storage-blob.BlockBlobClient.syncCopyFromURL'
@@ -40,6 +44,7 @@ items:
       - '@azure/storage-blob.BlockBlobClient.uploadStream'
       - '@azure/storage-blob.BlockBlobClient.url'
       - '@azure/storage-blob.BlockBlobClient.withSnapshot'
+      - '@azure/storage-blob.BlockBlobClient.withVersion'
     langs:
       - typeScript
     type: class
@@ -405,8 +410,37 @@ items:
           - Promise<@azure/storage-blob.BlobDeleteResponse>
         description: ''
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobClient.deleteIfExists'
+    name: deleteIfExists(BlobDeleteOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Marks the specified blob or snapshot for deletion if it exists. The blob
+      is later deleted
+
+      during garbage collection. Note that in order to delete a blob, you must
+      delete
+
+      all of its snapshots. You can delete both at the same time with the Delete
+
+      Blob operation.
+    syntax:
+      content: 'function deleteIfExists(options?: BlobDeleteOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobDeleteOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-blob.BlobDeleteIfExistsResponse>
+        description: ''
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobClient.download'
-    name: 'download(undefined | number, undefined | number, BlobDownloadOptions)'
+    name: 'download(number, number, BlobDownloadOptions)'
     children: []
     type: method
     langs:
@@ -422,17 +456,17 @@ items:
       * In browsers, data returns in a promise blobBody
     syntax:
       content: >-
-        function download(offset?: undefined | number, count?: undefined |
-        number, options?: BlobDownloadOptions)
+        function download(offset?: number, count?: number, options?:
+        BlobDownloadOptions)
       parameters:
         - id: offset
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: count
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: options
@@ -442,13 +476,11 @@ items:
           optional: true
       return:
         type:
-          - Promise<BlobDownloadResponseModel>
+          - Promise<@azure/storage-blob.BlobDownloadResponseModel>
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobClient.downloadToBuffer_1'
-    name: >-
-      downloadToBuffer(Buffer, undefined | number, undefined | number,
-      BlobDownloadToBufferOptions)
+    name: 'downloadToBuffer(Buffer, number, number, BlobDownloadToBufferOptions)'
     children: []
     type: method
     langs:
@@ -471,8 +503,8 @@ items:
       consider <xref:downloadToFile>.
     syntax:
       content: >-
-        function downloadToBuffer(buffer: Buffer, offset?: undefined | number,
-        count?: undefined | number, options?: BlobDownloadToBufferOptions)
+        function downloadToBuffer(buffer: Buffer, offset?: number, count?:
+        number, options?: BlobDownloadToBufferOptions)
       parameters:
         - id: buffer
           type:
@@ -480,12 +512,12 @@ items:
           description: 'Buffer to be fill, must have length larger than count'
         - id: offset
           type:
-            - undefined | number
+            - number
           description: From which position of the block blob to download(in bytes)
           optional: true
         - id: count
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: options
@@ -499,9 +531,7 @@ items:
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobClient.downloadToBuffer'
-    name: >-
-      downloadToBuffer(undefined | number, undefined | number,
-      BlobDownloadToBufferOptions)
+    name: 'downloadToBuffer(number, number, BlobDownloadToBufferOptions)'
     children: []
     type: method
     langs:
@@ -524,17 +554,17 @@ items:
       consider <xref:downloadToFile>.
     syntax:
       content: >-
-        function downloadToBuffer(offset?: undefined | number, count?: undefined
-        | number, options?: BlobDownloadToBufferOptions)
+        function downloadToBuffer(offset?: number, count?: number, options?:
+        BlobDownloadToBufferOptions)
       parameters:
         - id: offset
           type:
-            - undefined | number
+            - number
           description: From which position of the block blob to download(in bytes)
           optional: true
         - id: count
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: options
@@ -548,9 +578,7 @@ items:
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobClient.downloadToFile'
-    name: >-
-      downloadToFile(string, undefined | number, undefined | number,
-      BlobDownloadOptions)
+    name: 'downloadToFile(string, number, number, BlobDownloadOptions)'
     children: []
     type: method
     langs:
@@ -566,8 +594,8 @@ items:
       download the entire blob.
     syntax:
       content: >-
-        function downloadToFile(filePath: string, offset?: undefined | number,
-        count?: undefined | number, options?: BlobDownloadOptions)
+        function downloadToFile(filePath: string, offset?: number, count?:
+        number, options?: BlobDownloadOptions)
       parameters:
         - id: filePath
           type:
@@ -575,12 +603,12 @@ items:
           description: ''
         - id: offset
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: count
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: options
@@ -590,7 +618,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<BlobDownloadResponseModel>
+          - Promise<@azure/storage-blob.BlobDownloadResponseModel>
         description: |-
           The response data for blob download operation,
                                                           but with readableStreamBody set to undefined since its
@@ -604,7 +632,7 @@ items:
     langs:
       - typeScript
     summary: >
-      Returns true if the Azrue blob resource represented by this client exists;
+      Returns true if the Azure blob resource represented by this client exists;
       false otherwise.
 
       NOTE: use this function with care since an existing blob might be deleted
@@ -643,18 +671,18 @@ items:
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobClient.getBlobLeaseClient'
-    name: getBlobLeaseClient(undefined | string)
+    name: getBlobLeaseClient(string)
     children: []
     type: method
     langs:
       - typeScript
     summary: 'Get a <xref:BlobLeaseClient> that manages leases on the blob.'
     syntax:
-      content: 'function getBlobLeaseClient(proposeLeaseId?: undefined | string)'
+      content: 'function getBlobLeaseClient(proposeLeaseId?: string)'
       parameters:
         - id: proposeLeaseId
           type:
-            - undefined | string
+            - string
           description: ''
           optional: true
       return:
@@ -746,6 +774,26 @@ items:
           - Promise<@azure/storage-blob.BlobGetPropertiesResponse>
         description: ''
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobClient.getTags'
+    name: getTags(BlobGetTagsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Gets the tags associated with the underlying blob.
+    syntax:
+      content: 'function getTags(options?: BlobGetTagsOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobGetTagsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-blob.BlobGetTagsResponse>
+        description: ''
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobClient.name'
     name: name
     fullName: name
@@ -759,6 +807,62 @@ items:
       return:
         type:
           - string
+        description: ''
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobClient.query'
+    name: 'query(string, BlockBlobQueryOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Quick query for a JSON or CSV formatted blob.
+
+      Example usage (Node.js):
+
+
+      ```js
+
+      // Query and convert a blob to a string
+
+      const queryBlockBlobResponse = await blockBlobClient.query("select * from
+      BlobStorage");
+
+      const downloaded = await
+      streamToString(queryBlockBlobResponse.readableStreamBody);
+
+      console.log("Query blob content:", downloaded);
+
+
+      async function streamToString(readableStream) {
+        return new Promise((resolve, reject) => {
+          const chunks = [];
+          readableStream.on("data", (data) => {
+            chunks.push(data.toString());
+          });
+          readableStream.on("end", () => {
+            resolve(chunks.join(""));
+          });
+          readableStream.on("error", reject);
+        });
+      }
+
+      ```
+    syntax:
+      content: 'function query(query: string, options?: BlockBlobQueryOptions)'
+      parameters:
+        - id: query
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - '@azure/storage-blob.BlockBlobQueryOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-blob.BlobDownloadResponseModel>
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobClient.setAccessTier'
@@ -814,7 +918,7 @@ items:
     summary: >-
       Sets system properties on the blob.
 
-      If no value provided, or no value provided for the specificed blob HTTP
+      If no value provided, or no value provided for the specified blob HTTP
       headers,
 
       these blob HTTP headers without a value will be cleared.
@@ -871,6 +975,40 @@ items:
           - Promise<@azure/storage-blob.BlobSetMetadataResponse>
         description: ''
     package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobClient.setTags'
+    name: 'setTags(Tags, BlobSetTagsOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Sets tags on the underlying blob.
+
+      A blob can have up to 10 tags. Tag keys must be between 1 and 128
+      characters.  Tag values must be between 0 and 256 characters.
+
+      Valid tag key and value characters include lower and upper case letters,
+      digits (0-9),
+
+      space (' '), plus ('+'), minus ('-'), period ('.'), foward slash ('/'),
+      colon (':'), equals ('='), and underscore ('_').
+    syntax:
+      content: 'function setTags(tags: Tags, options?: BlobSetTagsOptions)'
+      parameters:
+        - id: tags
+          type:
+            - '@azure/storage-blob.Tags'
+          description: ''
+        - id: options
+          type:
+            - '@azure/storage-blob.BlobSetTagsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-blob.BlobSetTagsResponse>
+        description: ''
+    package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobClient.stageBlock'
     name: 'stageBlock(string, HttpRequestBody, number, BlockBlobStageBlockOptions)'
     children: []
@@ -909,7 +1047,7 @@ items:
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobClient.stageBlockFromURL'
     name: >-
-      stageBlockFromURL(string, string, undefined | number, undefined | number,
+      stageBlockFromURL(string, string, number, number,
       BlockBlobStageBlockFromURLOptions)
     children: []
     type: method
@@ -925,8 +1063,7 @@ items:
     syntax:
       content: >-
         function stageBlockFromURL(blockId: string, sourceURL: string, offset?:
-        undefined | number, count?: undefined | number, options?:
-        BlockBlobStageBlockFromURLOptions)
+        number, count?: number, options?: BlockBlobStageBlockFromURLOptions)
       parameters:
         - id: blockId
           type:
@@ -947,12 +1084,12 @@ items:
                                       - https://myaccount.blob.core.windows.net/mycontainer/myblob?snapshot=<DateTime>
         - id: offset
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: count
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: options
@@ -1156,9 +1293,7 @@ items:
         description: Response data for the Blob Upload operation.
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobClient.uploadStream'
-    name: >-
-      uploadStream(Readable, undefined | number, undefined | number,
-      BlockBlobUploadStreamOptions)
+    name: 'uploadStream(Readable, number, number, BlockBlobUploadStreamOptions)'
     children: []
     type: method
     langs:
@@ -1172,9 +1307,8 @@ items:
          parameter, which will avoid Buffer.concat() operations.
     syntax:
       content: >-
-        function uploadStream(stream: Readable, bufferSize?: undefined | number,
-        maxConcurrency?: undefined | number, options?:
-        BlockBlobUploadStreamOptions)
+        function uploadStream(stream: Readable, bufferSize?: number,
+        maxConcurrency?: number, options?: BlockBlobUploadStreamOptions)
       parameters:
         - id: stream
           type:
@@ -1182,14 +1316,14 @@ items:
           description: Node.js Readable stream
         - id: bufferSize
           type:
-            - undefined | number
+            - number
           description: >-
             Size of every buffer allocated, also the block size in the uploaded
             block blob. Default value is 8MB
           optional: true
         - id: maxConcurrency
           type:
-            - undefined | number
+            - number
           description: >-
             Max concurrency indicates the max number of buffers that can be
             allocated,
@@ -1243,6 +1377,27 @@ items:
         description: >-
           A new BlockBlobClient object identical to the source but with the
           specified snapshot timestamp.
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlockBlobClient.withVersion'
+    name: withVersion(string)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Creates a new BlobClient object pointing to a version of this blob.
+      Provide "" will remove the versionId and return a Client to the base blob.
+    syntax:
+      content: 'function withVersion(versionId: string)'
+      parameters:
+        - id: versionId
+          type:
+            - string
+          description: The versionId.
+      return:
+        type:
+          - '@azure/storage-blob.BlobClient'
+        description: A new BlobClient object pointing to the version of this blob.
     package: '@azure/storage-blob'
 references:
   - uid: '@azure/storage-blob.BlobClient'
@@ -1365,12 +1520,32 @@ references:
         uid: '@azure/storage-blob.BlobDeleteResponse'
       - name: '>'
         fullName: '>'
+  - uid: Promise<@azure/storage-blob.BlobDeleteIfExistsResponse>
+    name: BlobDeleteIfExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: BlobDeleteIfExistsResponse
+        fullName: BlobDeleteIfExistsResponse
+        uid: '@azure/storage-blob.BlobDeleteIfExistsResponse'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-blob.BlobDownloadOptions'
     name: BlobDownloadOptions
     spec.typeScript:
       - name: BlobDownloadOptions
         fullName: BlobDownloadOptions
         uid: '@azure/storage-blob.BlobDownloadOptions'
+  - uid: Promise<@azure/storage-blob.BlobDownloadResponseModel>
+    name: BlobDownloadResponseModel>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: BlobDownloadResponseModel
+        fullName: BlobDownloadResponseModel
+        uid: '@azure/storage-blob.BlobDownloadResponseModel'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-blob.BlobDownloadToBufferOptions'
     name: BlobDownloadToBufferOptions
     spec.typeScript:
@@ -1445,6 +1620,28 @@ references:
         uid: '@azure/storage-blob.BlobGetPropertiesResponse'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/storage-blob.BlobGetTagsOptions'
+    name: BlobGetTagsOptions
+    spec.typeScript:
+      - name: BlobGetTagsOptions
+        fullName: BlobGetTagsOptions
+        uid: '@azure/storage-blob.BlobGetTagsOptions'
+  - uid: Promise<@azure/storage-blob.BlobGetTagsResponse>
+    name: BlobGetTagsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: BlobGetTagsResponse
+        fullName: BlobGetTagsResponse
+        uid: '@azure/storage-blob.BlobGetTagsResponse'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/storage-blob.BlockBlobQueryOptions'
+    name: BlockBlobQueryOptions
+    spec.typeScript:
+      - name: BlockBlobQueryOptions
+        fullName: BlockBlobQueryOptions
+        uid: '@azure/storage-blob.BlockBlobQueryOptions'
   - uid: >-
       @azure/storage-blob.BlockBlobTier |
       @azure/storage-blob.PremiumPageBlobTier | string
@@ -1518,6 +1715,28 @@ references:
       - name: BlobSetMetadataResponse
         fullName: BlobSetMetadataResponse
         uid: '@azure/storage-blob.BlobSetMetadataResponse'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/storage-blob.Tags'
+    name: Tags
+    spec.typeScript:
+      - name: Tags
+        fullName: Tags
+        uid: '@azure/storage-blob.Tags'
+  - uid: '@azure/storage-blob.BlobSetTagsOptions'
+    name: BlobSetTagsOptions
+    spec.typeScript:
+      - name: BlobSetTagsOptions
+        fullName: BlobSetTagsOptions
+        uid: '@azure/storage-blob.BlobSetTagsOptions'
+  - uid: Promise<@azure/storage-blob.BlobSetTagsResponse>
+    name: BlobSetTagsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: BlobSetTagsResponse
+        fullName: BlobSetTagsResponse
+        uid: '@azure/storage-blob.BlobSetTagsResponse'
       - name: '>'
         fullName: '>'
   - uid: '@azure/storage-blob.BlockBlobStageBlockOptions'

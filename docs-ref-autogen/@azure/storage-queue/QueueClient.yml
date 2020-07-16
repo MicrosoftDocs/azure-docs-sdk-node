@@ -7,8 +7,11 @@ items:
       - '@azure/storage-queue.QueueClient.accountName'
       - '@azure/storage-queue.QueueClient.clearMessages'
       - '@azure/storage-queue.QueueClient.create'
+      - '@azure/storage-queue.QueueClient.createIfNotExists'
       - '@azure/storage-queue.QueueClient.delete'
+      - '@azure/storage-queue.QueueClient.deleteIfExists'
       - '@azure/storage-queue.QueueClient.deleteMessage'
+      - '@azure/storage-queue.QueueClient.exists'
       - '@azure/storage-queue.QueueClient.getAccessPolicy'
       - '@azure/storage-queue.QueueClient.getProperties'
       - '@azure/storage-queue.QueueClient.name'
@@ -86,6 +89,30 @@ items:
           - Promise<@azure/storage-queue.QueueCreateResponse>
         description: Response data for the Queue create operation.
     package: '@azure/storage-queue'
+  - uid: '@azure/storage-queue.QueueClient.createIfNotExists'
+    name: createIfNotExists(QueueCreateOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates a new queue under the specified account if it doesn't already
+      exist.
+
+      If the queue already exists, it is not changed.
+    syntax:
+      content: 'function createIfNotExists(options?: QueueCreateOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-queue.QueueCreateOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-queue.QueueCreateIfNotExistsResponse>
+        description: ''
+    package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueClient.delete'
     name: delete(QueueDeleteOptions)
     children: []
@@ -105,6 +132,26 @@ items:
         type:
           - Promise<@azure/storage-queue.QueueDeleteResponse>
         description: Response data for the Queue delete operation.
+    package: '@azure/storage-queue'
+  - uid: '@azure/storage-queue.QueueClient.deleteIfExists'
+    name: deleteIfExists(QueueDeleteOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Deletes the specified queue permanently if it exists.
+    syntax:
+      content: 'function deleteIfExists(options?: QueueDeleteOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-queue.QueueDeleteOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-queue.QueueDeleteIfExistsResponse>
+        description: ''
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueClient.deleteMessage'
     name: 'deleteMessage(string, string, QueueDeleteMessageOptions)'
@@ -137,6 +184,35 @@ items:
         type:
           - Promise<@azure/storage-queue.QueueDeleteMessageResponse>
         description: Response data for the delete message operation.
+    package: '@azure/storage-queue'
+  - uid: '@azure/storage-queue.QueueClient.exists'
+    name: exists(QueueExistsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Returns true if the specified queue exists; false otherwise.
+
+      NOTE: use this function with care since an existing queue might be deleted
+      by other clients or
+
+      applications. Vice versa new queues might be added by other clients or
+      applications after this
+
+      function completes.
+    syntax:
+      content: 'function exists(options?: QueueExistsOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-queue.QueueExistsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<boolean>
+        description: ''
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueClient.getAccessPolicy'
     name: getAccessPolicy(QueueGetAccessPolicyOptions)
@@ -444,9 +520,7 @@ items:
         description: Response data for the Queue set metadata operation.
     package: '@azure/storage-queue'
   - uid: '@azure/storage-queue.QueueClient.updateMessage'
-    name: >-
-      updateMessage(string, string, string, undefined | number,
-      QueueUpdateMessageOptions)
+    name: 'updateMessage(string, string, string, number, QueueUpdateMessageOptions)'
     children: []
     type: method
     langs:
@@ -462,8 +536,7 @@ items:
     syntax:
       content: >-
         function updateMessage(messageId: string, popReceipt: string, message:
-        string, visibilityTimeout?: undefined | number, options?:
-        QueueUpdateMessageOptions)
+        string, visibilityTimeout?: number, options?: QueueUpdateMessageOptions)
       parameters:
         - id: messageId
           type:
@@ -481,7 +554,7 @@ items:
           description: Message to update.
         - id: visibilityTimeout
           type:
-            - undefined | number
+            - number
           description: |-
             Specifies the new visibility timeout value, in seconds,
                                               relative to server time. The new value must be larger than or equal to 0,
@@ -580,6 +653,16 @@ references:
         uid: '@azure/storage-queue.QueueCreateResponse'
       - name: '>'
         fullName: '>'
+  - uid: Promise<@azure/storage-queue.QueueCreateIfNotExistsResponse>
+    name: QueueCreateIfNotExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: QueueCreateIfNotExistsResponse
+        fullName: QueueCreateIfNotExistsResponse
+        uid: '@azure/storage-queue.QueueCreateIfNotExistsResponse'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-queue.QueueDeleteOptions'
     name: QueueDeleteOptions
     spec.typeScript:
@@ -594,6 +677,16 @@ references:
       - name: QueueDeleteResponse
         fullName: QueueDeleteResponse
         uid: '@azure/storage-queue.QueueDeleteResponse'
+      - name: '>'
+        fullName: '>'
+  - uid: Promise<@azure/storage-queue.QueueDeleteIfExistsResponse>
+    name: QueueDeleteIfExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: QueueDeleteIfExistsResponse
+        fullName: QueueDeleteIfExistsResponse
+        uid: '@azure/storage-queue.QueueDeleteIfExistsResponse'
       - name: '>'
         fullName: '>'
   - uid: '@azure/storage-queue.QueueDeleteMessageOptions'
@@ -612,6 +705,12 @@ references:
         uid: '@azure/storage-queue.QueueDeleteMessageResponse'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/storage-queue.QueueExistsOptions'
+    name: QueueExistsOptions
+    spec.typeScript:
+      - name: QueueExistsOptions
+        fullName: QueueExistsOptions
+        uid: '@azure/storage-queue.QueueExistsOptions'
   - uid: '@azure/storage-queue.QueueGetAccessPolicyOptions'
     name: QueueGetAccessPolicyOptions
     spec.typeScript:

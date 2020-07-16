@@ -10,11 +10,14 @@ items:
       - '@azure/arm-frontdoor.Backend.httpPort'
       - '@azure/arm-frontdoor.Backend.httpsPort'
       - '@azure/arm-frontdoor.Backend.priority'
+      - '@azure/arm-frontdoor.Backend.privateEndpointStatus'
+      - '@azure/arm-frontdoor.Backend.privateLinkAlias'
+      - '@azure/arm-frontdoor.Backend.privateLinkApprovalMessage'
       - '@azure/arm-frontdoor.Backend.weight'
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: Backend address of a frontDoor load balancer.
     package: '@azure/arm-frontdoor'
   - uid: '@azure/arm-frontdoor.Backend.address'
     name: address
@@ -23,7 +26,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Location of the backend (IP address or FQDN)
     optional: true
     syntax:
       content: 'address?: undefined | string'
@@ -39,7 +42,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The value to use as the host header sent to the backend. If blank or
+      unspecified, this
+
+      defaults to the incoming host.
     optional: true
     syntax:
       content: 'backendHostHeader?: undefined | string'
@@ -55,13 +62,17 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Whether to enable use of this backend. Permitted values are 'Enabled' or
+      'Disabled'. Possible
+
+      values include: 'Enabled', 'Disabled'
     optional: true
     syntax:
-      content: 'enabledState?: FrontDoorEnabledState'
+      content: 'enabledState?: BackendEnabledState'
       return:
         type:
-          - '@azure/arm-frontdoor.FrontDoorEnabledState'
+          - '@azure/arm-frontdoor.BackendEnabledState'
         description: ''
     package: '@azure/arm-frontdoor'
   - uid: '@azure/arm-frontdoor.Backend.httpPort'
@@ -71,7 +82,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The HTTP TCP port number. Must be between 1 and 65535.
     optional: true
     syntax:
       content: 'httpPort?: undefined | number'
@@ -87,7 +98,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The HTTPS TCP port number. Must be between 1 and 65535.
     optional: true
     syntax:
       content: 'httpsPort?: undefined | number'
@@ -103,13 +114,78 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      Priority to use for load balancing. Higher priorities will not be used for
+      load balancing if
+
+      any lower priority backend is healthy.
     optional: true
     syntax:
       content: 'priority?: undefined | number'
       return:
         type:
           - undefined | number
+        description: ''
+    package: '@azure/arm-frontdoor'
+  - uid: '@azure/arm-frontdoor.Backend.privateEndpointStatus'
+    name: privateEndpointStatus
+    fullName: privateEndpointStatus
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The Approval status for the connection to the Private Link. Possible
+      values include:
+
+      'Pending', 'Approved', 'Rejected', 'Disconnected', 'Timeout'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
+    optional: true
+    syntax:
+      content: 'privateEndpointStatus?: PrivateEndpointStatus'
+      return:
+        type:
+          - '@azure/arm-frontdoor.PrivateEndpointStatus'
+        description: ''
+    package: '@azure/arm-frontdoor'
+  - uid: '@azure/arm-frontdoor.Backend.privateLinkAlias'
+    name: privateLinkAlias
+    fullName: privateLinkAlias
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The Alias of the Private Link resource. Populating this optional field
+      indicates that this
+
+      backend is 'Private'
+    optional: true
+    syntax:
+      content: 'privateLinkAlias?: undefined | string'
+      return:
+        type:
+          - undefined | string
+        description: ''
+    package: '@azure/arm-frontdoor'
+  - uid: '@azure/arm-frontdoor.Backend.privateLinkApprovalMessage'
+    name: privateLinkApprovalMessage
+    fullName: privateLinkApprovalMessage
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      A custom message to be included in the approval request to connect to the
+      Private Link
+    optional: true
+    syntax:
+      content: 'privateLinkApprovalMessage?: undefined | string'
+      return:
+        type:
+          - undefined | string
         description: ''
     package: '@azure/arm-frontdoor'
   - uid: '@azure/arm-frontdoor.Backend.weight'
@@ -119,7 +195,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: Weight of this endpoint for load balancing purposes.
     optional: true
     syntax:
       content: 'weight?: undefined | number'
@@ -129,9 +205,15 @@ items:
         description: ''
     package: '@azure/arm-frontdoor'
 references:
-  - uid: '@azure/arm-frontdoor.FrontDoorEnabledState'
-    name: FrontDoorEnabledState
+  - uid: '@azure/arm-frontdoor.BackendEnabledState'
+    name: BackendEnabledState
     spec.typeScript:
-      - name: FrontDoorEnabledState
-        fullName: FrontDoorEnabledState
-        uid: '@azure/arm-frontdoor.FrontDoorEnabledState'
+      - name: BackendEnabledState
+        fullName: BackendEnabledState
+        uid: '@azure/arm-frontdoor.BackendEnabledState'
+  - uid: '@azure/arm-frontdoor.PrivateEndpointStatus'
+    name: PrivateEndpointStatus
+    spec.typeScript:
+      - name: PrivateEndpointStatus
+        fullName: PrivateEndpointStatus
+        uid: '@azure/arm-frontdoor.PrivateEndpointStatus'

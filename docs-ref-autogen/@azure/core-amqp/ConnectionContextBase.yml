@@ -2,8 +2,6 @@
 items:
   - uid: '@azure/core-amqp.ConnectionContextBase'
     name: ConnectionContextBase
-    langs:
-      - typeScript
     fullName: ConnectionContextBase
     children:
       - '@azure/core-amqp.ConnectionContextBase.cbsSession'
@@ -11,13 +9,19 @@ items:
       - '@azure/core-amqp.ConnectionContextBase.connection'
       - '@azure/core-amqp.ConnectionContextBase.connectionId'
       - '@azure/core-amqp.ConnectionContextBase.connectionLock'
-      - '@azure/core-amqp.ConnectionContextBase.create'
       - '@azure/core-amqp.ConnectionContextBase.dataTransformer'
       - '@azure/core-amqp.ConnectionContextBase.negotiateClaimLock'
+      - '@azure/core-amqp.ConnectionContextBase.refreshConnection'
       - '@azure/core-amqp.ConnectionContextBase.tokenCredential'
       - '@azure/core-amqp.ConnectionContextBase.wasConnectionCloseCalled'
-    type: module
-    summary: ''
+    langs:
+      - typeScript
+    type: interface
+    summary: >-
+      Provides contextual information like the underlying amqp connection, cbs
+      session, tokenProvider,
+
+      Connection config, data transformer, etc.
     package: '@azure/core-amqp'
   - uid: '@azure/core-amqp.ConnectionContextBase.cbsSession'
     name: cbsSession
@@ -97,37 +101,16 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} connectionLock The unqiue lock name per connection that is used
+      {string} connectionLock The unique lock name per connection that is used
       to
 
-      acquire the lock for establishing an aqmp connection per client if one
+      acquire the lock for establishing an amqp connection per client if one
       does not exist.
     syntax:
       content: 'connectionLock: string'
       return:
         type:
           - string
-        description: ''
-    package: '@azure/core-amqp'
-  - uid: '@azure/core-amqp.ConnectionContextBase.create'
-    name: create(CreateConnectionContextBaseParameters)
-    children: []
-    type: function
-    langs:
-      - typeScript
-    summary: Creates the base connection context.
-    syntax:
-      content: 'function create(parameters: CreateConnectionContextBaseParameters)'
-      parameters:
-        - id: parameters
-          type:
-            - '@azure/core-amqp.CreateConnectionContextBaseParameters'
-          description: |
-            Parameters to be provided to create
-            the base connection context.
-      return:
-        type:
-          - '@azure/core-amqp.ConnectionContextBase'
         description: ''
     package: '@azure/core-amqp'
   - uid: '@azure/core-amqp.ConnectionContextBase.dataTransformer'
@@ -161,7 +144,7 @@ items:
       - typeScript
     type: property
     summary: >-
-      {string} negotiateClaimLock The unqiue lock name per connection that is
+      {string} negotiateClaimLock The unique lock name per connection that is
       used to
 
       acquire the lock for negotiating cbs claim by an entity on that
@@ -171,6 +154,23 @@ items:
       return:
         type:
           - string
+        description: ''
+    package: '@azure/core-amqp'
+  - uid: '@azure/core-amqp.ConnectionContextBase.refreshConnection'
+    name: refreshConnection
+    fullName: refreshConnection
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Updates the context to use a new underlying AMQP connection and new cbs
+      session.
+    syntax:
+      content: 'refreshConnection: () => void'
+      return:
+        type:
+          - () => void
         description: ''
     package: '@azure/core-amqp'
   - uid: '@azure/core-amqp.ConnectionContextBase.tokenCredential'
@@ -238,35 +238,3 @@ references:
         uid: '@azure/core-amqp.SharedKeyCredential'
       - name: ' | TokenCredential'
         fullName: ' | TokenCredential'
-  - uid: '@azure/core-amqp.CreateConnectionContextBaseParameters'
-    name: CreateConnectionContextBaseParameters
-    spec.typeScript:
-      - name: CreateConnectionContextBaseParameters
-        fullName: CreateConnectionContextBaseParameters
-        uid: '@azure/core-amqp.CreateConnectionContextBaseParameters'
-  - uid: '@azure/core-amqp.ConnectionContextBase'
-    name: ConnectionContextBase
-    spec.typeScript:
-      - name: ConnectionContextBase
-        fullName: ConnectionContextBase
-        uid: '@azure/core-amqp.ConnectionContextBase'
-  - uid: '@azure/core-amqp.ConnectionContextBase.cbsSession'
-    name: cbsSession
-  - uid: '@azure/core-amqp.ConnectionContextBase.config'
-    name: config
-  - uid: '@azure/core-amqp.ConnectionContextBase.connection'
-    name: connection
-  - uid: '@azure/core-amqp.ConnectionContextBase.connectionId'
-    name: connectionId
-  - uid: '@azure/core-amqp.ConnectionContextBase.connectionLock'
-    name: connectionLock
-  - uid: '@azure/core-amqp.ConnectionContextBase.create'
-    name: create
-  - uid: '@azure/core-amqp.ConnectionContextBase.dataTransformer'
-    name: dataTransformer
-  - uid: '@azure/core-amqp.ConnectionContextBase.negotiateClaimLock'
-    name: negotiateClaimLock
-  - uid: '@azure/core-amqp.ConnectionContextBase.tokenCredential'
-    name: tokenCredential
-  - uid: '@azure/core-amqp.ConnectionContextBase.wasConnectionCloseCalled'
-    name: wasConnectionCloseCalled

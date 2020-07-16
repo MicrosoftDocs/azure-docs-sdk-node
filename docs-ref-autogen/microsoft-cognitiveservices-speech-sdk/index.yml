@@ -35,6 +35,7 @@ items:
       - microsoft-cognitiveservices-speech-sdk.AuthInfo
       - microsoft-cognitiveservices-speech-sdk.IAuthentication
       - microsoft-cognitiveservices-speech-sdk.IConnectionFactory
+      - microsoft-cognitiveservices-speech-sdk.ISynthesisConnectionFactory
       - microsoft-cognitiveservices-speech-sdk.IntentConnectionFactory
       - microsoft-cognitiveservices-speech-sdk.IntentServiceRecognizer
       - microsoft-cognitiveservices-speech-sdk.QueryParameterNames
@@ -75,6 +76,9 @@ items:
       - microsoft-cognitiveservices-speech-sdk.ISpeechDetected
       - microsoft-cognitiveservices-speech-sdk.SpeechHypothesis
       - microsoft-cognitiveservices-speech-sdk.ISpeechHypothesis
+      - microsoft-cognitiveservices-speech-sdk.SynthesisAudioMetadata
+      - microsoft-cognitiveservices-speech-sdk.ISynthesisAudioMetadata
+      - microsoft-cognitiveservices-speech-sdk.ISynthesisMetadata
       - microsoft-cognitiveservices-speech-sdk.TranslationHypothesis
       - microsoft-cognitiveservices-speech-sdk.ITranslationHypothesis
       - microsoft-cognitiveservices-speech-sdk.TranslationPhrase
@@ -95,6 +99,18 @@ items:
       - microsoft-cognitiveservices-speech-sdk.ITurnStart
       - microsoft-cognitiveservices-speech-sdk.ITurnStartContext
       - microsoft-cognitiveservices-speech-sdk.SpeechServiceRecognizer
+      - microsoft-cognitiveservices-speech-sdk.SpeechSynthesisConnectionFactory
+      - microsoft-cognitiveservices-speech-sdk.SynthesisAdapterBase
+      - microsoft-cognitiveservices-speech-sdk.ConnectingToSynthesisServiceEvent
+      - microsoft-cognitiveservices-speech-sdk.SpeechSynthesisEvent
+      - microsoft-cognitiveservices-speech-sdk.SynthesisStartedEvent
+      - microsoft-cognitiveservices-speech-sdk.SynthesisTriggeredEvent
+      - microsoft-cognitiveservices-speech-sdk.SynthesisTurn
+      - microsoft-cognitiveservices-speech-sdk.ISynthesisResponse
+      - microsoft-cognitiveservices-speech-sdk.ISynthesisResponseAudio
+      - microsoft-cognitiveservices-speech-sdk.ISynthesisResponseContext
+      - microsoft-cognitiveservices-speech-sdk.SynthesisServiceType
+      - microsoft-cognitiveservices-speech-sdk.SynthesizerConfig
       - microsoft-cognitiveservices-speech-sdk.ConversationConnectionFactory
       - microsoft-cognitiveservices-speech-sdk.ConversationConnectionMessage
       - microsoft-cognitiveservices-speech-sdk.ConversationManager
@@ -157,6 +173,7 @@ items:
       - microsoft-cognitiveservices-speech-sdk.AudioStreamNodeEvent
       - microsoft-cognitiveservices-speech-sdk.ChunkedArrayBufferStream
       - microsoft-cognitiveservices-speech-sdk.ConnectionClosedEvent
+      - microsoft-cognitiveservices-speech-sdk.ConnectionErrorEvent
       - microsoft-cognitiveservices-speech-sdk.ConnectionEstablishErrorEvent
       - microsoft-cognitiveservices-speech-sdk.ConnectionEstablishedEvent
       - microsoft-cognitiveservices-speech-sdk.ConnectionEvent
@@ -172,6 +189,7 @@ items:
       - microsoft-cognitiveservices-speech-sdk.ObjectDisposedError
       - microsoft-cognitiveservices-speech-sdk.EventSource
       - microsoft-cognitiveservices-speech-sdk.Events
+      - microsoft-cognitiveservices-speech-sdk.IAudioDestination
       - microsoft-cognitiveservices-speech-sdk.IAudioSource
       - microsoft-cognitiveservices-speech-sdk.IAudioStreamNode
       - microsoft-cognitiveservices-speech-sdk.ConnectionState
@@ -206,20 +224,30 @@ items:
       - microsoft-cognitiveservices-speech-sdk.IStreamChunk
       - microsoft-cognitiveservices-speech-sdk.ActivityReceivedEventArgs
       - microsoft-cognitiveservices-speech-sdk.AudioConfig
+      - microsoft-cognitiveservices-speech-sdk.AudioOutputConfigImpl
+      - microsoft-cognitiveservices-speech-sdk.AudioFileWriter
       - microsoft-cognitiveservices-speech-sdk.AudioInputStream
       - microsoft-cognitiveservices-speech-sdk.PullAudioInputStream
       - microsoft-cognitiveservices-speech-sdk.PushAudioInputStream
+      - microsoft-cognitiveservices-speech-sdk.AudioFormatTag
       - microsoft-cognitiveservices-speech-sdk.AudioOutputStream
       - microsoft-cognitiveservices-speech-sdk.PullAudioOutputStream
+      - microsoft-cognitiveservices-speech-sdk.PushAudioOutputStream
       - microsoft-cognitiveservices-speech-sdk.AudioStreamFormat
       - microsoft-cognitiveservices-speech-sdk.BaseAudioPlayer
+      - microsoft-cognitiveservices-speech-sdk.IPlayer
       - microsoft-cognitiveservices-speech-sdk.PullAudioInputStreamCallback
+      - microsoft-cognitiveservices-speech-sdk.PushAudioOutputStreamCallback
+      - microsoft-cognitiveservices-speech-sdk.SpeakerAudioDestination
       - microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig
       - microsoft-cognitiveservices-speech-sdk.CancellationDetails
       - microsoft-cognitiveservices-speech-sdk.CancellationErrorCode
       - microsoft-cognitiveservices-speech-sdk.CancellationReason
       - microsoft-cognitiveservices-speech-sdk.Connection
       - microsoft-cognitiveservices-speech-sdk.ConnectionEventArgs
+      - microsoft-cognitiveservices-speech-sdk.ConnectionMessage
+      - microsoft-cognitiveservices-speech-sdk.ConnectionMessageImpl
+      - microsoft-cognitiveservices-speech-sdk.ConnectionMessageEventArgs
       - microsoft-cognitiveservices-speech-sdk.CustomCommandsConfig
       - microsoft-cognitiveservices-speech-sdk.DialogServiceConfig
       - microsoft-cognitiveservices-speech-sdk.DialogServiceConfigImpl
@@ -252,6 +280,13 @@ items:
       - microsoft-cognitiveservices-speech-sdk.SpeechRecognitionEventArgs
       - microsoft-cognitiveservices-speech-sdk.SpeechRecognitionResult
       - microsoft-cognitiveservices-speech-sdk.SpeechRecognizer
+      - microsoft-cognitiveservices-speech-sdk.SpeechSynthesisEventArgs
+      - microsoft-cognitiveservices-speech-sdk.SpeechSynthesisOutputFormat
+      - microsoft-cognitiveservices-speech-sdk.SpeechSynthesisResult
+      - >-
+        microsoft-cognitiveservices-speech-sdk.SpeechSynthesisWordBoundaryEventArgs
+      - microsoft-cognitiveservices-speech-sdk.SpeechSynthesizer
+      - microsoft-cognitiveservices-speech-sdk.SynthesisRequest
       - microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig
       - microsoft-cognitiveservices-speech-sdk.Conversation
       - microsoft-cognitiveservices-speech-sdk.ConversationImpl
@@ -345,6 +380,8 @@ references:
     name: IAuthentication
   - uid: microsoft-cognitiveservices-speech-sdk.IConnectionFactory
     name: IConnectionFactory
+  - uid: microsoft-cognitiveservices-speech-sdk.ISynthesisConnectionFactory
+    name: ISynthesisConnectionFactory
   - uid: microsoft-cognitiveservices-speech-sdk.IntentConnectionFactory
     name: IntentConnectionFactory
   - uid: microsoft-cognitiveservices-speech-sdk.IntentServiceRecognizer
@@ -425,6 +462,12 @@ references:
     name: SpeechHypothesis
   - uid: microsoft-cognitiveservices-speech-sdk.ISpeechHypothesis
     name: ISpeechHypothesis
+  - uid: microsoft-cognitiveservices-speech-sdk.SynthesisAudioMetadata
+    name: SynthesisAudioMetadata
+  - uid: microsoft-cognitiveservices-speech-sdk.ISynthesisAudioMetadata
+    name: ISynthesisAudioMetadata
+  - uid: microsoft-cognitiveservices-speech-sdk.ISynthesisMetadata
+    name: ISynthesisMetadata
   - uid: microsoft-cognitiveservices-speech-sdk.TranslationHypothesis
     name: TranslationHypothesis
   - uid: microsoft-cognitiveservices-speech-sdk.ITranslationHypothesis
@@ -465,6 +508,30 @@ references:
     name: ITurnStartContext
   - uid: microsoft-cognitiveservices-speech-sdk.SpeechServiceRecognizer
     name: SpeechServiceRecognizer
+  - uid: microsoft-cognitiveservices-speech-sdk.SpeechSynthesisConnectionFactory
+    name: SpeechSynthesisConnectionFactory
+  - uid: microsoft-cognitiveservices-speech-sdk.SynthesisAdapterBase
+    name: SynthesisAdapterBase
+  - uid: microsoft-cognitiveservices-speech-sdk.ConnectingToSynthesisServiceEvent
+    name: ConnectingToSynthesisServiceEvent
+  - uid: microsoft-cognitiveservices-speech-sdk.SpeechSynthesisEvent
+    name: SpeechSynthesisEvent
+  - uid: microsoft-cognitiveservices-speech-sdk.SynthesisStartedEvent
+    name: SynthesisStartedEvent
+  - uid: microsoft-cognitiveservices-speech-sdk.SynthesisTriggeredEvent
+    name: SynthesisTriggeredEvent
+  - uid: microsoft-cognitiveservices-speech-sdk.SynthesisTurn
+    name: SynthesisTurn
+  - uid: microsoft-cognitiveservices-speech-sdk.ISynthesisResponse
+    name: ISynthesisResponse
+  - uid: microsoft-cognitiveservices-speech-sdk.ISynthesisResponseAudio
+    name: ISynthesisResponseAudio
+  - uid: microsoft-cognitiveservices-speech-sdk.ISynthesisResponseContext
+    name: ISynthesisResponseContext
+  - uid: microsoft-cognitiveservices-speech-sdk.SynthesisServiceType
+    name: SynthesisServiceType
+  - uid: microsoft-cognitiveservices-speech-sdk.SynthesizerConfig
+    name: SynthesizerConfig
   - uid: microsoft-cognitiveservices-speech-sdk.ConversationConnectionFactory
     name: ConversationConnectionFactory
   - uid: microsoft-cognitiveservices-speech-sdk.ConversationConnectionMessage
@@ -587,6 +654,8 @@ references:
     name: ChunkedArrayBufferStream
   - uid: microsoft-cognitiveservices-speech-sdk.ConnectionClosedEvent
     name: ConnectionClosedEvent
+  - uid: microsoft-cognitiveservices-speech-sdk.ConnectionErrorEvent
+    name: ConnectionErrorEvent
   - uid: microsoft-cognitiveservices-speech-sdk.ConnectionEstablishErrorEvent
     name: ConnectionEstablishErrorEvent
   - uid: microsoft-cognitiveservices-speech-sdk.ConnectionEstablishedEvent
@@ -617,6 +686,8 @@ references:
     name: EventSource
   - uid: microsoft-cognitiveservices-speech-sdk.Events
     name: Events
+  - uid: microsoft-cognitiveservices-speech-sdk.IAudioDestination
+    name: IAudioDestination
   - uid: microsoft-cognitiveservices-speech-sdk.IAudioSource
     name: IAudioSource
   - uid: microsoft-cognitiveservices-speech-sdk.IAudioStreamNode
@@ -685,22 +756,36 @@ references:
     name: ActivityReceivedEventArgs
   - uid: microsoft-cognitiveservices-speech-sdk.AudioConfig
     name: AudioConfig
+  - uid: microsoft-cognitiveservices-speech-sdk.AudioOutputConfigImpl
+    name: AudioOutputConfigImpl
+  - uid: microsoft-cognitiveservices-speech-sdk.AudioFileWriter
+    name: AudioFileWriter
   - uid: microsoft-cognitiveservices-speech-sdk.AudioInputStream
     name: AudioInputStream
   - uid: microsoft-cognitiveservices-speech-sdk.PullAudioInputStream
     name: PullAudioInputStream
   - uid: microsoft-cognitiveservices-speech-sdk.PushAudioInputStream
     name: PushAudioInputStream
+  - uid: microsoft-cognitiveservices-speech-sdk.AudioFormatTag
+    name: AudioFormatTag
   - uid: microsoft-cognitiveservices-speech-sdk.AudioOutputStream
     name: AudioOutputStream
   - uid: microsoft-cognitiveservices-speech-sdk.PullAudioOutputStream
     name: PullAudioOutputStream
+  - uid: microsoft-cognitiveservices-speech-sdk.PushAudioOutputStream
+    name: PushAudioOutputStream
   - uid: microsoft-cognitiveservices-speech-sdk.AudioStreamFormat
     name: AudioStreamFormat
   - uid: microsoft-cognitiveservices-speech-sdk.BaseAudioPlayer
     name: BaseAudioPlayer
+  - uid: microsoft-cognitiveservices-speech-sdk.IPlayer
+    name: IPlayer
   - uid: microsoft-cognitiveservices-speech-sdk.PullAudioInputStreamCallback
     name: PullAudioInputStreamCallback
+  - uid: microsoft-cognitiveservices-speech-sdk.PushAudioOutputStreamCallback
+    name: PushAudioOutputStreamCallback
+  - uid: microsoft-cognitiveservices-speech-sdk.SpeakerAudioDestination
+    name: SpeakerAudioDestination
   - uid: microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig
     name: BotFrameworkConfig
   - uid: microsoft-cognitiveservices-speech-sdk.CancellationDetails
@@ -713,6 +798,12 @@ references:
     name: Connection
   - uid: microsoft-cognitiveservices-speech-sdk.ConnectionEventArgs
     name: ConnectionEventArgs
+  - uid: microsoft-cognitiveservices-speech-sdk.ConnectionMessage
+    name: ConnectionMessage
+  - uid: microsoft-cognitiveservices-speech-sdk.ConnectionMessageImpl
+    name: ConnectionMessageImpl
+  - uid: microsoft-cognitiveservices-speech-sdk.ConnectionMessageEventArgs
+    name: ConnectionMessageEventArgs
   - uid: microsoft-cognitiveservices-speech-sdk.CustomCommandsConfig
     name: CustomCommandsConfig
   - uid: microsoft-cognitiveservices-speech-sdk.DialogServiceConfig
@@ -773,6 +864,19 @@ references:
     name: SpeechRecognitionResult
   - uid: microsoft-cognitiveservices-speech-sdk.SpeechRecognizer
     name: SpeechRecognizer
+  - uid: microsoft-cognitiveservices-speech-sdk.SpeechSynthesisEventArgs
+    name: SpeechSynthesisEventArgs
+  - uid: microsoft-cognitiveservices-speech-sdk.SpeechSynthesisOutputFormat
+    name: SpeechSynthesisOutputFormat
+  - uid: microsoft-cognitiveservices-speech-sdk.SpeechSynthesisResult
+    name: SpeechSynthesisResult
+  - uid: >-
+      microsoft-cognitiveservices-speech-sdk.SpeechSynthesisWordBoundaryEventArgs
+    name: SpeechSynthesisWordBoundaryEventArgs
+  - uid: microsoft-cognitiveservices-speech-sdk.SpeechSynthesizer
+    name: SpeechSynthesizer
+  - uid: microsoft-cognitiveservices-speech-sdk.SynthesisRequest
+    name: SynthesisRequest
   - uid: microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig
     name: SpeechTranslationConfig
   - uid: microsoft-cognitiveservices-speech-sdk.Conversation

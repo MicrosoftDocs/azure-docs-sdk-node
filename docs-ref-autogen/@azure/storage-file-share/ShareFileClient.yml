@@ -9,10 +9,12 @@ items:
       - '@azure/storage-file-share.ShareFileClient.clearRange'
       - '@azure/storage-file-share.ShareFileClient.create'
       - '@azure/storage-file-share.ShareFileClient.delete'
+      - '@azure/storage-file-share.ShareFileClient.deleteIfExists'
       - '@azure/storage-file-share.ShareFileClient.download'
       - '@azure/storage-file-share.ShareFileClient.downloadToBuffer'
       - '@azure/storage-file-share.ShareFileClient.downloadToBuffer_1'
       - '@azure/storage-file-share.ShareFileClient.downloadToFile'
+      - '@azure/storage-file-share.ShareFileClient.exists'
       - '@azure/storage-file-share.ShareFileClient.forceCloseAllHandles'
       - '@azure/storage-file-share.ShareFileClient.forceCloseHandle'
       - '@azure/storage-file-share.ShareFileClient.getProperties'
@@ -188,8 +190,49 @@ items:
           - Promise<@azure/storage-file-share.FileDeleteResponse>
         description: Response data for the File Delete operation.
     package: '@azure/storage-file-share'
+  - uid: '@azure/storage-file-share.ShareFileClient.deleteIfExists'
+    name: deleteIfExists(FileDeleteOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Removes the file from the storage account if it exists.
+
+      When a file is successfully deleted, it is immediately removed from the
+      storage
+
+      account's index and is no longer accessible to clients. The file's data is
+      later
+
+      removed from the service during garbage collection.
+
+      Delete File will fail with status code 409 (Conflict) and error code
+      SharingViolation
+
+      if the file is open on an SMB client.
+
+
+      Delete File is not supported on a share snapshot, which is a read-only
+      copy of
+
+      a share. An attempt to perform this operation on a share snapshot will
+      fail with 400 (InvalidQueryParameterValue)
+    syntax:
+      content: 'function deleteIfExists(options?: FileDeleteOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file-share.FileDeleteOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-file-share.FileDeleteIfExistsResponse>
+        description: ''
+    package: '@azure/storage-file-share'
   - uid: '@azure/storage-file-share.ShareFileClient.download'
-    name: 'download(undefined | number, undefined | number, FileDownloadOptions)'
+    name: 'download(number, number, FileDownloadOptions)'
     children: []
     type: method
     langs:
@@ -203,17 +246,17 @@ items:
       * In browsers, data returns in a promise `contentAsBlob`
     syntax:
       content: >-
-        function download(offset?: undefined | number, count?: undefined |
-        number, options?: FileDownloadOptions)
+        function download(offset?: number, count?: number, options?:
+        FileDownloadOptions)
       parameters:
         - id: offset
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: count
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: options
@@ -223,13 +266,11 @@ items:
           optional: true
       return:
         type:
-          - Promise<FileDownloadResponseModel>
+          - Promise<@azure/storage-file-share.FileDownloadResponseModel>
         description: Response data for the File Download operation.
     package: '@azure/storage-file-share'
   - uid: '@azure/storage-file-share.ShareFileClient.downloadToBuffer'
-    name: >-
-      downloadToBuffer(Buffer, undefined | number, undefined | number,
-      FileDownloadToBufferOptions)
+    name: 'downloadToBuffer(Buffer, number, number, FileDownloadToBufferOptions)'
     children: []
     type: method
     langs:
@@ -252,8 +293,8 @@ items:
       consider <xref:downloadToFile>.
     syntax:
       content: >-
-        function downloadToBuffer(buffer: Buffer, offset?: undefined | number,
-        count?: undefined | number, options?: FileDownloadToBufferOptions)
+        function downloadToBuffer(buffer: Buffer, offset?: number, count?:
+        number, options?: FileDownloadToBufferOptions)
       parameters:
         - id: buffer
           type:
@@ -261,12 +302,12 @@ items:
           description: 'Buffer to be fill, must have length larger than count'
         - id: offset
           type:
-            - undefined | number
+            - number
           description: From which position of the Azure File to download
           optional: true
         - id: count
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: options
@@ -280,9 +321,7 @@ items:
         description: ''
     package: '@azure/storage-file-share'
   - uid: '@azure/storage-file-share.ShareFileClient.downloadToBuffer_1'
-    name: >-
-      downloadToBuffer(undefined | number, undefined | number,
-      FileDownloadToBufferOptions)
+    name: 'downloadToBuffer(number, number, FileDownloadToBufferOptions)'
     children: []
     type: method
     langs:
@@ -304,17 +343,17 @@ items:
       consider <xref:downloadToFile>.
     syntax:
       content: >-
-        function downloadToBuffer(offset?: undefined | number, count?: undefined
-        | number, options?: FileDownloadToBufferOptions)
+        function downloadToBuffer(offset?: number, count?: number, options?:
+        FileDownloadToBufferOptions)
       parameters:
         - id: offset
           type:
-            - undefined | number
+            - number
           description: From which position of the Azure file to download
           optional: true
         - id: count
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: options
@@ -328,9 +367,7 @@ items:
         description: ''
     package: '@azure/storage-file-share'
   - uid: '@azure/storage-file-share.ShareFileClient.downloadToFile'
-    name: >-
-      downloadToFile(string, undefined | number, undefined | number,
-      FileDownloadOptions)
+    name: 'downloadToFile(string, number, number, FileDownloadOptions)'
     children: []
     type: method
     langs:
@@ -346,8 +383,8 @@ items:
       download the entire blob.
     syntax:
       content: >-
-        function downloadToFile(filePath: string, offset?: undefined | number,
-        count?: undefined | number, options?: FileDownloadOptions)
+        function downloadToFile(filePath: string, offset?: number, count?:
+        number, options?: FileDownloadOptions)
       parameters:
         - id: filePath
           type:
@@ -355,12 +392,12 @@ items:
           description: ''
         - id: offset
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: count
           type:
-            - undefined | number
+            - number
           description: ''
           optional: true
         - id: options
@@ -370,12 +407,41 @@ items:
           optional: true
       return:
         type:
-          - Promise<FileDownloadResponseModel>
+          - Promise<@azure/storage-file-share.FileDownloadResponseModel>
         description: |-
           The response data for blob download operation,
                                                           but with readableStreamBody set to undefined since its
                                                           content is already read and written into a local file
                                                           at the specified path.
+    package: '@azure/storage-file-share'
+  - uid: '@azure/storage-file-share.ShareFileClient.exists'
+    name: exists(FileExistsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Returns true if the specified file exists; false otherwise.
+
+      NOTE: use this function with care since an existing file might be deleted
+      by other clients or
+
+      applications. Vice versa new files might be added by other clients or
+      applications after this
+
+      function completes.
+    syntax:
+      content: 'function exists(options?: FileExistsOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file-share.FileExistsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<boolean>
+        description: ''
     package: '@azure/storage-file-share'
   - uid: '@azure/storage-file-share.ShareFileClient.forceCloseAllHandles'
     name: forceCloseAllHandles(FileForceCloseHandlesOptions)
@@ -470,18 +536,18 @@ items:
         description: ''
     package: '@azure/storage-file-share'
   - uid: '@azure/storage-file-share.ShareFileClient.getShareLeaseClient'
-    name: getShareLeaseClient(undefined | string)
+    name: getShareLeaseClient(string)
     children: []
     type: method
     langs:
       - typeScript
     summary: 'Get a <xref:ShareLeaseClient> that manages leases on the file.'
     syntax:
-      content: 'function getShareLeaseClient(proposeLeaseId?: undefined | string)'
+      content: 'function getShareLeaseClient(proposeLeaseId?: string)'
       parameters:
         - id: proposeLeaseId
           type:
-            - undefined | string
+            - string
           description: ''
           optional: true
       return:
@@ -925,8 +991,8 @@ items:
     package: '@azure/storage-file-share'
   - uid: '@azure/storage-file-share.ShareFileClient.uploadResetableStream'
     name: >-
-      uploadResetableStream((offset: number, count?: undefined | number) =>
-      ReadableStream, number, FileParallelUploadOptions)
+      uploadResetableStream((offset: number, count?: number) => ReadableStream,
+      number, FileParallelUploadOptions)
     children: []
     type: method
     langs:
@@ -944,12 +1010,12 @@ items:
     syntax:
       content: >-
         function uploadResetableStream(streamFactory: (offset: number, count?:
-        undefined | number) => ReadableStream, size: number, options?:
+        number) => ReadableStream, size: number, options?:
         FileParallelUploadOptions)
       parameters:
         - id: streamFactory
           type:
-            - '(offset: number, count?: undefined | number) => ReadableStream'
+            - '(offset: number, count?: number) => ReadableStream'
           description: |-
             Returns a Node.js Readable stream starting
                                                                              from the offset defined
@@ -1041,7 +1107,7 @@ items:
           type:
             - number
           description: |-
-            Size of file to be created. Maxium size allowed is 1TB.
+            Size of file to be created. Maximum size allowed is 1TB.
                                  If this value is larger than stream size, there will be empty bytes in file tail.
         - id: bufferSize
           type:
@@ -1170,18 +1236,44 @@ references:
         uid: '@azure/storage-file-share.FileDeleteResponse'
       - name: '>'
         fullName: '>'
+  - uid: Promise<@azure/storage-file-share.FileDeleteIfExistsResponse>
+    name: FileDeleteIfExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: FileDeleteIfExistsResponse
+        fullName: FileDeleteIfExistsResponse
+        uid: '@azure/storage-file-share.FileDeleteIfExistsResponse'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-file-share.FileDownloadOptions'
     name: FileDownloadOptions
     spec.typeScript:
       - name: FileDownloadOptions
         fullName: FileDownloadOptions
         uid: '@azure/storage-file-share.FileDownloadOptions'
+  - uid: Promise<@azure/storage-file-share.FileDownloadResponseModel>
+    name: FileDownloadResponseModel>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: FileDownloadResponseModel
+        fullName: FileDownloadResponseModel
+        uid: '@azure/storage-file-share.FileDownloadResponseModel'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-file-share.FileDownloadToBufferOptions'
     name: FileDownloadToBufferOptions
     spec.typeScript:
       - name: FileDownloadToBufferOptions
         fullName: FileDownloadToBufferOptions
         uid: '@azure/storage-file-share.FileDownloadToBufferOptions'
+  - uid: '@azure/storage-file-share.FileExistsOptions'
+    name: FileExistsOptions
+    spec.typeScript:
+      - name: FileExistsOptions
+        fullName: FileExistsOptions
+        uid: '@azure/storage-file-share.FileExistsOptions'
   - uid: '@azure/storage-file-share.FileForceCloseHandlesOptions'
     name: FileForceCloseHandlesOptions
     spec.typeScript:

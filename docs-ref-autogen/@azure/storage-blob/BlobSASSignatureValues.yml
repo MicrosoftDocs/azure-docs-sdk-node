@@ -19,6 +19,7 @@ items:
       - '@azure/storage-blob.BlobSASSignatureValues.snapshotTime'
       - '@azure/storage-blob.BlobSASSignatureValues.startsOn'
       - '@azure/storage-blob.BlobSASSignatureValues.version'
+      - '@azure/storage-blob.BlobSASSignatureValues.versionId'
     langs:
       - typeScript
     type: interface
@@ -37,13 +38,13 @@ items:
     type: property
     summary: >-
       Optional. The blob name of the SAS user may access. Required if
-      snapshotTime is provided.
+      snapshotTime or versionId is provided.
     optional: true
     syntax:
-      content: 'blobName?: undefined | string'
+      content: 'blobName?: string'
       return:
         type:
-          - undefined | string
+          - string
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobSASSignatureValues.cacheControl'
@@ -56,10 +57,10 @@ items:
     summary: Optional. The cache-control header for the SAS.
     optional: true
     syntax:
-      content: 'cacheControl?: undefined | string'
+      content: 'cacheControl?: string'
       return:
         type:
-          - undefined | string
+          - string
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobSASSignatureValues.containerName'
@@ -87,10 +88,10 @@ items:
     summary: Optional. The content-disposition header for the SAS.
     optional: true
     syntax:
-      content: 'contentDisposition?: undefined | string'
+      content: 'contentDisposition?: string'
       return:
         type:
-          - undefined | string
+          - string
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobSASSignatureValues.contentEncoding'
@@ -103,10 +104,10 @@ items:
     summary: Optional. The content-encoding header for the SAS.
     optional: true
     syntax:
-      content: 'contentEncoding?: undefined | string'
+      content: 'contentEncoding?: string'
       return:
         type:
-          - undefined | string
+          - string
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobSASSignatureValues.contentLanguage'
@@ -119,10 +120,10 @@ items:
     summary: Optional. The content-language header for the SAS.
     optional: true
     syntax:
-      content: 'contentLanguage?: undefined | string'
+      content: 'contentLanguage?: string'
       return:
         type:
-          - undefined | string
+          - string
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobSASSignatureValues.contentType'
@@ -135,10 +136,10 @@ items:
     summary: Optional. The content-type header for the SAS.
     optional: true
     syntax:
-      content: 'contentType?: undefined | string'
+      content: 'contentType?: string'
       return:
         type:
-          - undefined | string
+          - string
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobSASSignatureValues.expiresOn'
@@ -171,10 +172,10 @@ items:
       references if any.
     optional: true
     syntax:
-      content: 'identifier?: undefined | string'
+      content: 'identifier?: string'
       return:
         type:
-          - undefined | string
+          - string
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobSASSignatureValues.ipRange'
@@ -209,10 +210,12 @@ items:
       being accessed for help constructing the permissions string.
     optional: true
     syntax:
-      content: 'permissions?: BlobSASPermissions'
+      content: 'permissions?: BlobSASPermissions | ContainerSASPermissions'
       return:
         type:
-          - '@azure/storage-blob.BlobSASPermissions'
+          - >-
+            @azure/storage-blob.BlobSASPermissions |
+            @azure/storage-blob.ContainerSASPermissions
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobSASSignatureValues.protocol'
@@ -243,10 +246,10 @@ items:
       supported from API version 2018-11-09.
     optional: true
     syntax:
-      content: 'snapshotTime?: undefined | string'
+      content: 'snapshotTime?: string'
       return:
         type:
-          - undefined | string
+          - string
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlobSASSignatureValues.startsOn'
@@ -279,10 +282,28 @@ items:
       library.
     optional: true
     syntax:
-      content: 'version?: undefined | string'
+      content: 'version?: string'
       return:
         type:
-          - undefined | string
+          - string
+        description: ''
+    package: '@azure/storage-blob'
+  - uid: '@azure/storage-blob.BlobSASSignatureValues.versionId'
+    name: versionId
+    fullName: versionId
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Optional. VersionId of the blob version the SAS user may access. Only
+      supported from API version 2019-10-10.
+    optional: true
+    syntax:
+      content: 'versionId?: string'
+      return:
+        type:
+          - string
         description: ''
     package: '@azure/storage-blob'
 references:
@@ -292,12 +313,19 @@ references:
       - name: SasIPRange
         fullName: SasIPRange
         uid: '@azure/storage-blob.SasIPRange'
-  - uid: '@azure/storage-blob.BlobSASPermissions'
-    name: BlobSASPermissions
+  - uid: >-
+      @azure/storage-blob.BlobSASPermissions |
+      @azure/storage-blob.ContainerSASPermissions
+    name: ContainerSASPermissions
     spec.typeScript:
       - name: BlobSASPermissions
         fullName: BlobSASPermissions
         uid: '@azure/storage-blob.BlobSASPermissions'
+      - name: ' | '
+        fullName: ' | '
+      - name: ContainerSASPermissions
+        fullName: ContainerSASPermissions
+        uid: '@azure/storage-blob.ContainerSASPermissions'
   - uid: '@azure/storage-blob.SASProtocol'
     name: SASProtocol
     spec.typeScript:

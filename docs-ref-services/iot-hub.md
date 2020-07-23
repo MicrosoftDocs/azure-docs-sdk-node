@@ -9,7 +9,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: IoT Hub
+ms.service: iot-hub
 ---
 
 # Azure IoT Hub modules for JavaScript

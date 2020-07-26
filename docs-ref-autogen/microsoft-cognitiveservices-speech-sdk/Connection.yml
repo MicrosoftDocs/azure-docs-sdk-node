@@ -9,10 +9,12 @@ items:
       - microsoft-cognitiveservices-speech-sdk.Connection.connected
       - microsoft-cognitiveservices-speech-sdk.Connection.disconnected
       - microsoft-cognitiveservices-speech-sdk.Connection.fromRecognizer
+      - microsoft-cognitiveservices-speech-sdk.Connection.fromSynthesizer
       - microsoft-cognitiveservices-speech-sdk.Connection.messageReceived
       - microsoft-cognitiveservices-speech-sdk.Connection.messageSent
       - microsoft-cognitiveservices-speech-sdk.Connection.openConnection
       - microsoft-cognitiveservices-speech-sdk.Connection.receivedServiceMessage
+      - microsoft-cognitiveservices-speech-sdk.Connection.sendMessageAsync
       - microsoft-cognitiveservices-speech-sdk.Connection.setMessageProperty
     langs:
       - typeScript
@@ -45,7 +47,7 @@ items:
 
       status via Connected/Disconnected events.
 
-      Added in version 1.2.0.
+      Added in version 1.2.1.
     package: microsoft-cognitiveservices-speech-sdk
   - uid: microsoft-cognitiveservices-speech-sdk.Connection.close
     name: close()
@@ -101,8 +103,8 @@ items:
       - typeScript
     type: property
     summary: >-
-      The Diconnected event to indicate that the recognizer is disconnected from
-      service.
+      The Disconnected event to indicate that the recognizer is disconnected
+      from service.
     syntax:
       content: 'disconnected: (args: ConnectionEventArgs) => void'
       return:
@@ -128,6 +130,25 @@ items:
         type:
           - microsoft-cognitiveservices-speech-sdk.Connection
         description: The Connection instance of the recognizer.
+    package: microsoft-cognitiveservices-speech-sdk
+  - uid: microsoft-cognitiveservices-speech-sdk.Connection.fromSynthesizer
+    name: fromSynthesizer(SpeechSynthesizer)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Gets the Connection instance from the specified synthesizer.
+    syntax:
+      content: 'static function fromSynthesizer(synthesizer: SpeechSynthesizer)'
+      parameters:
+        - id: synthesizer
+          type:
+            - microsoft-cognitiveservices-speech-sdk.SpeechSynthesizer
+          description: The synthesizer associated with the connection.
+      return:
+        type:
+          - microsoft-cognitiveservices-speech-sdk.Connection
+        description: The Connection instance of the synthesizer.
     package: microsoft-cognitiveservices-speech-sdk
   - uid: microsoft-cognitiveservices-speech-sdk.Connection.messageReceived
     name: messageReceived
@@ -177,7 +198,7 @@ items:
       Note: On return, the connection might not be ready yet. Please subscribe
       to the Connected event to
 
-      be notfied when the connection is established.
+      be notified when the connection is established.
     syntax:
       content: function openConnection()
       parameters: []
@@ -200,6 +221,42 @@ items:
         type:
           - '(args: ServiceEventArgs) => void'
         description: ''
+    package: microsoft-cognitiveservices-speech-sdk
+  - uid: microsoft-cognitiveservices-speech-sdk.Connection.sendMessageAsync
+    name: >-
+      sendMessageAsync(string, string | ArrayBuffer, () => void, (error: string)
+      => void)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |-
+      Sends a message to the speech service.
+      Added in version 1.13.0.
+    syntax:
+      content: >-
+        function sendMessageAsync(path: string, payload: string | ArrayBuffer,
+        success?: () => void, error?: (error: string) => void)
+      parameters:
+        - id: path
+          type:
+            - string
+          description: The WebSocket path of the message
+        - id: payload
+          type:
+            - string | ArrayBuffer
+          description: The payload of the message. This is a json string or a ArrayBuffer.
+        - id: success
+          type:
+            - () => void
+          description: A callback to indicate success.
+          optional: true
+        - id: error
+          type:
+            - '(error: string) => void'
+          description: |
+            A callback to indicate an error.
+          optional: true
     package: microsoft-cognitiveservices-speech-sdk
   - uid: microsoft-cognitiveservices-speech-sdk.Connection.setMessageProperty
     name: 'setMessageProperty(string, string, string)'
@@ -242,3 +299,9 @@ references:
       - name: Connection
         fullName: Connection
         uid: microsoft-cognitiveservices-speech-sdk.Connection
+  - uid: microsoft-cognitiveservices-speech-sdk.SpeechSynthesizer
+    name: SpeechSynthesizer
+    spec.typeScript:
+      - name: SpeechSynthesizer
+        fullName: SpeechSynthesizer
+        uid: microsoft-cognitiveservices-speech-sdk.SpeechSynthesizer

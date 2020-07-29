@@ -1,17 +1,17 @@
 ---
 title: Azure Identity client library for JavaScript
-keywords: Azure, javascript, SDK, API, identity, @azure/identity, 
+keywords: Azure, javascript, SDK, API, @azure/identity, 
 author: maggiepint
 ms.author: magpint
-ms.date: 06/09/2020
+ms.date: 07/22/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: identity
+ms.service: 
 ---
 
-## Azure Identity client library for JavaScript - Version 1.1.0-preview.4 
+## Azure Identity client library for JavaScript - Version 1.1.0-preview.5 
 
 
 This library simplifies authentication against Azure Active Directory for Azure SDK libraries.
@@ -36,7 +36,7 @@ npm install --save @azure/identity
 
 ## Key concepts
 
-If this is your first time using `@azure/identity` or the Microsoft identity platform (Azure Active Directory), we recommend that you read [Using `@azure/identity` with Microsoft Identity Platform](/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
+If this is your first time using `@azure/identity` or the Microsoft identity platform (Azure Active Directory), we recommend that you read [Using `@azure/identity` with Microsoft Identity Platform](https://github.com/Azure/azure-sdk-for-js/blob/master/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
 
 ### Credentials
 
@@ -115,7 +115,7 @@ const credential = new EnvironmentCredential();
 
 ### Using the `AuthorizationCodeCredential`
 
-The `AuthorizationCodeCredential` takes more up-front work to use than the other credential types at this time. A full sample demonstrating how to use this credential can be found in [`samples/authorizationCodeSample.ts`](https://github.com/Azure/azure-sdk-for-js/tree/d678c900664d3d1733b596d5831b80f88cf5ac9f/sdk/identity/identity/samples/authorizationCodeSample.ts).
+The `AuthorizationCodeCredential` takes more up-front work to use than the other credential types at this time. A full sample demonstrating how to use this credential can be found in [`samples/authorizationCodeSample.ts`](samples/authorizationCodeSample.ts).
 
 ### Chaining credentials
 

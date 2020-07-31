@@ -15,6 +15,7 @@ items:
       - '@azure/service-bus.SubscriptionClient.peek'
       - '@azure/service-bus.SubscriptionClient.peekBySequenceNumber'
       - '@azure/service-bus.SubscriptionClient.removeRule'
+      - '@azure/service-bus.SubscriptionClient.constructor'
       - '@azure/service-bus.SubscriptionClient.subscriptionName'
       - '@azure/service-bus.SubscriptionClient.topicName'
     langs:
@@ -203,7 +204,7 @@ items:
     type: property
     summary: The name of the default rule on the subscription.
     syntax:
-      content: 'defaultRuleName: string'
+      content: 'defaultRuleName: string = "$Default"'
       return:
         type:
           - string
@@ -350,6 +351,37 @@ items:
           - Promise<void>
         description: ''
     package: '@azure/service-bus'
+  - uid: '@azure/service-bus.SubscriptionClient.constructor'
+    name: 'SubscriptionClient(string, string, ConnectionContext)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: >-
+      Constructor for SubscriptionClient.
+
+      This is not meant for the user to call directly.
+
+      The user should use the `createSubscriptionClient` on the Namespace
+      instead.
+    syntax:
+      content: >-
+        new SubscriptionClient(topicName: string, subscriptionName: string,
+        context: ConnectionContext)
+      parameters:
+        - id: topicName
+          type:
+            - string
+          description: The Topic name.
+        - id: subscriptionName
+          type:
+            - string
+          description: The Subscription name.
+        - id: context
+          type:
+            - '@azure/service-bus.ConnectionContext'
+          description: The connection context to create the SubscriptionClient.
+    package: '@azure/service-bus'
   - uid: '@azure/service-bus.SubscriptionClient.subscriptionName'
     name: subscriptionName
     fullName: subscriptionName
@@ -383,6 +415,12 @@ items:
         description: ''
     package: '@azure/service-bus'
 references:
+  - uid: '@azure/service-bus.ConnectionContext'
+    name: ConnectionContext
+    spec.typeScript:
+      - name: ConnectionContext
+        fullName: ConnectionContext
+        uid: '@azure/service-bus.ConnectionContext'
   - uid: boolean | string | @azure/service-bus.CorrelationFilter
     name: CorrelationFilter
     spec.typeScript:

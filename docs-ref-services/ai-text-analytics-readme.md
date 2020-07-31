@@ -1,17 +1,17 @@
 ---
 title: Azure Text Analytics client library for JavaScript
-keywords: Azure, javascript, SDK, API, textanalytics, @azure/ai-text-analytics, 
+keywords: Azure, javascript, SDK, API, @azure/ai-text-analytics, 
 author: maggiepint
 ms.author: magpint
-ms.date: 06/09/2020
+ms.date: 07/28/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: textanalytics
+ms.service: 
 ---
 
-# Azure Text Analytics client library for JavaScript - Version 1.0.0 
+# Azure Text Analytics client library for JavaScript - Version 5.0.0 
 
 
 [Azure TextAnalytics](https://azure.microsoft.com/services/cognitive-services/text-analytics/) is a cloud-based service that provides advanced natural language processing over raw text, and includes six main functions:
@@ -56,7 +56,7 @@ az cognitiveservices account create --kind TextAnalytics --resource-group <your-
 
 ### Install the `@azure/ai-text-analytics` package
 
-Install the Azure Text Analytics client library for JavaScript - Version 1.0.0 
+Install the Azure Text Analytics client library for JavaScript - Version 5.0.0 
  with `npm`:
 
 ```bash

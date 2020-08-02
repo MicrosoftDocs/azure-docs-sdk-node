@@ -7,9 +7,11 @@ items:
       - '@azure/arm-containerinstance.ContainerGroup.containers'
       - '@azure/arm-containerinstance.ContainerGroup.diagnostics'
       - '@azure/arm-containerinstance.ContainerGroup.dnsConfig'
+      - '@azure/arm-containerinstance.ContainerGroup.encryptionProperties'
       - '@azure/arm-containerinstance.ContainerGroup.id'
       - '@azure/arm-containerinstance.ContainerGroup.identity'
       - '@azure/arm-containerinstance.ContainerGroup.imageRegistryCredentials'
+      - '@azure/arm-containerinstance.ContainerGroup.initContainers'
       - '@azure/arm-containerinstance.ContainerGroup.instanceView'
       - '@azure/arm-containerinstance.ContainerGroup.ipAddress'
       - '@azure/arm-containerinstance.ContainerGroup.location'
@@ -18,13 +20,14 @@ items:
       - '@azure/arm-containerinstance.ContainerGroup.osType'
       - '@azure/arm-containerinstance.ContainerGroup.provisioningState'
       - '@azure/arm-containerinstance.ContainerGroup.restartPolicy'
+      - '@azure/arm-containerinstance.ContainerGroup.sku'
       - '@azure/arm-containerinstance.ContainerGroup.tags'
       - '@azure/arm-containerinstance.ContainerGroup.type'
       - '@azure/arm-containerinstance.ContainerGroup.volumes'
     langs:
       - typeScript
     type: interface
-    summary: ''
+    summary: A container group.
     extends:
       name: '@azure/arm-containerinstance.Resource'
     package: '@azure/arm-containerinstance'
@@ -35,7 +38,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The containers within the container group.
     syntax:
       content: 'containers: Container[]'
       return:
@@ -50,7 +53,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The diagnostic information for a container group.
     optional: true
     syntax:
       content: 'diagnostics?: ContainerGroupDiagnostics'
@@ -66,13 +69,29 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The DNS config information for a container group.
     optional: true
     syntax:
       content: 'dnsConfig?: DnsConfiguration'
       return:
         type:
           - '@azure/arm-containerinstance.DnsConfiguration'
+        description: ''
+    package: '@azure/arm-containerinstance'
+  - uid: '@azure/arm-containerinstance.ContainerGroup.encryptionProperties'
+    name: encryptionProperties
+    fullName: encryptionProperties
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The encryption properties for a container group.
+    optional: true
+    syntax:
+      content: 'encryptionProperties?: EncryptionProperties'
+      return:
+        type:
+          - '@azure/arm-containerinstance.EncryptionProperties'
         description: ''
     package: '@azure/arm-containerinstance'
   - uid: '@azure/arm-containerinstance.ContainerGroup.id'
@@ -82,7 +101,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The resource id.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'id?: undefined | string'
@@ -98,7 +121,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: 'The identity of the container group, if configured.'
     optional: true
     syntax:
       content: 'identity?: ContainerGroupIdentity'
@@ -114,13 +137,31 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The image registry credentials by which the container group is created
+      from.
     optional: true
     syntax:
       content: 'imageRegistryCredentials?: ImageRegistryCredential[]'
       return:
         type:
           - '@azure/arm-containerinstance.ImageRegistryCredential[]'
+        description: ''
+    package: '@azure/arm-containerinstance'
+  - uid: '@azure/arm-containerinstance.ContainerGroup.initContainers'
+    name: initContainers
+    fullName: initContainers
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The init containers for a container group.
+    optional: true
+    syntax:
+      content: 'initContainers?: InitContainerDefinition[]'
+      return:
+        type:
+          - '@azure/arm-containerinstance.InitContainerDefinition[]'
         description: ''
     package: '@azure/arm-containerinstance'
   - uid: '@azure/arm-containerinstance.ContainerGroup.instanceView'
@@ -130,7 +171,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The instance view of the container group. Only valid in response.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'instanceView?: ContainerGroupPropertiesInstanceView'
@@ -146,7 +191,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The IP address type of the container group.
     optional: true
     syntax:
       content: 'ipAddress?: IpAddress'
@@ -162,7 +207,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The resource location.
     optional: true
     syntax:
       content: 'location?: undefined | string'
@@ -178,7 +223,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The resource name.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'name?: undefined | string'
@@ -194,7 +243,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The network profile information for a container group.
     optional: true
     syntax:
       content: 'networkProfile?: ContainerGroupNetworkProfile'
@@ -210,7 +259,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The operating system type required by the containers in the container
+      group. Possible values
+
+      include: 'Windows', 'Linux'
     syntax:
       content: 'osType: OperatingSystemTypes'
       return:
@@ -225,7 +278,12 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The provisioning state of the container group. This only appears in the
+      response.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'provisioningState?: undefined | string'
@@ -241,13 +299,36 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: |-
+      Restart policy for all containers within the container group.
+      - `Always` Always restart
+      - `OnFailure` Restart on failure
+      - `Never` Never restart
+      . Possible values include: 'Always', 'OnFailure', 'Never'
     optional: true
     syntax:
       content: 'restartPolicy?: ContainerGroupRestartPolicy'
       return:
         type:
           - '@azure/arm-containerinstance.ContainerGroupRestartPolicy'
+        description: ''
+    package: '@azure/arm-containerinstance'
+  - uid: '@azure/arm-containerinstance.ContainerGroup.sku'
+    name: sku
+    fullName: sku
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The SKU for a container group. Possible values include: 'Standard',
+      'Dedicated'
+    optional: true
+    syntax:
+      content: 'sku?: ContainerGroupSku'
+      return:
+        type:
+          - '@azure/arm-containerinstance.ContainerGroupSku'
         description: ''
     package: '@azure/arm-containerinstance'
   - uid: '@azure/arm-containerinstance.ContainerGroup.tags'
@@ -257,7 +338,7 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: The resource tags.
     optional: true
     syntax:
       content: 'tags?: undefined | [key: string]: string'
@@ -273,7 +354,11 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The resource type.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
     optional: true
     syntax:
       content: 'type?: undefined | string'
@@ -289,7 +374,9 @@ items:
     langs:
       - typeScript
     type: property
-    summary: ''
+    summary: >-
+      The list of volumes that can be mounted by containers in this container
+      group.
     optional: true
     syntax:
       content: 'volumes?: Volume[]'
@@ -325,6 +412,12 @@ references:
       - name: DnsConfiguration
         fullName: DnsConfiguration
         uid: '@azure/arm-containerinstance.DnsConfiguration'
+  - uid: '@azure/arm-containerinstance.EncryptionProperties'
+    name: EncryptionProperties
+    spec.typeScript:
+      - name: EncryptionProperties
+        fullName: EncryptionProperties
+        uid: '@azure/arm-containerinstance.EncryptionProperties'
   - uid: '@azure/arm-containerinstance.ContainerGroupIdentity'
     name: ContainerGroupIdentity
     spec.typeScript:
@@ -337,6 +430,14 @@ references:
       - name: ImageRegistryCredential
         fullName: ImageRegistryCredential
         uid: '@azure/arm-containerinstance.ImageRegistryCredential'
+      - name: '[]'
+        fullName: '[]'
+  - uid: '@azure/arm-containerinstance.InitContainerDefinition[]'
+    name: 'InitContainerDefinition[]'
+    spec.typeScript:
+      - name: InitContainerDefinition
+        fullName: InitContainerDefinition
+        uid: '@azure/arm-containerinstance.InitContainerDefinition'
       - name: '[]'
         fullName: '[]'
   - uid: '@azure/arm-containerinstance.ContainerGroupPropertiesInstanceView'
@@ -369,6 +470,12 @@ references:
       - name: ContainerGroupRestartPolicy
         fullName: ContainerGroupRestartPolicy
         uid: '@azure/arm-containerinstance.ContainerGroupRestartPolicy'
+  - uid: '@azure/arm-containerinstance.ContainerGroupSku'
+    name: ContainerGroupSku
+    spec.typeScript:
+      - name: ContainerGroupSku
+        fullName: ContainerGroupSku
+        uid: '@azure/arm-containerinstance.ContainerGroupSku'
   - uid: '@azure/arm-containerinstance.Volume[]'
     name: 'Volume[]'
     spec.typeScript:

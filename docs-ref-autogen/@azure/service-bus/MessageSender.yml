@@ -1,0 +1,212 @@
+### YamlMime:TSType
+name: MessageSender
+uid: '@azure/service-bus.MessageSender'
+package: '@azure/service-bus'
+summary: ''
+fullName: MessageSender
+type: class
+constructors:
+  - name: MessageSender(ClientEntityContext)
+    uid: '@azure/service-bus.MessageSender.constructor'
+    package: '@azure/service-bus'
+    summary: Creates a new MessageSender instance.
+    syntax:
+      content: 'new MessageSender(context: ClientEntityContext)'
+      parameters:
+        - id: context
+          type: <xref uid="@azure/service-bus.ClientEntityContext" />
+          description: |
+            The client entity context.
+properties:
+  - name: address
+    uid: '@azure/service-bus.MessageSender.address'
+    package: '@azure/service-bus'
+    summary: |-
+      {string} address The client entity address in one of the following forms:
+
+      **Sender**
+      - `"<queue-name>"`.
+      - `"<topic-name>"`.
+
+      **Receiver**
+      - `"<queue-name>"`.
+      - `"<topic-name>"`.
+
+      **ManagementClient**
+      -`"$management"`.
+    fullName: address
+    syntax:
+      content: 'address: string'
+      return:
+        type: string
+        description: ''
+  - name: audience
+    uid: '@azure/service-bus.MessageSender.audience'
+    package: '@azure/service-bus'
+    summary: >-
+      {string} audience The client entity token audience in one of the following
+      forms:
+
+
+      **Sender**
+
+      - `"sb://<yournamespace>.servicebus.windows.net/<queue-name>"`
+
+      - `"sb://<yournamespace>.servicebus.windows.net/<topic-name>"`
+
+
+      **Receiver**
+
+      - `"sb://<yournamespace>.servicebus.windows.net/<queue-name>"`
+
+      - `"sb://<yournamespace>.servicebus.windows.net/<topic-name>"`
+
+
+      **ManagementClient**
+
+      -
+      `"sb://<your-namespace>.servicebus.windows.net/<queue-name>/$management"`.
+
+      -
+      `"sb://<your-namespace>.servicebus.windows.net/<topic-name>/$management"`.
+    fullName: audience
+    syntax:
+      content: 'audience: string'
+      return:
+        type: string
+        description: ''
+  - name: isConnecting
+    uid: '@azure/service-bus.MessageSender.isConnecting'
+    package: '@azure/service-bus'
+    summary: >-
+      {boolean} isConnecting Indicates whether the link is in the process of
+      connecting
+
+      (establishing) itself. Default value: `false`.
+    fullName: isConnecting
+    syntax:
+      content: 'isConnecting: boolean = false'
+      return:
+        type: boolean
+        description: ''
+  - name: name
+    uid: '@azure/service-bus.MessageSender.name'
+    package: '@azure/service-bus'
+    summary: |-
+      {string} id The unique name for the entity in the format:
+      `${name of the entity}-${guid}`.
+    fullName: name
+    syntax:
+      content: 'name: string'
+      return:
+        type: string
+        description: ''
+methods:
+  - name: close()
+    uid: '@azure/service-bus.MessageSender.close'
+    package: '@azure/service-bus'
+    summary: >-
+      Deletes the sender fromt the context. Clears the token renewal timer.
+      Closes the sender link.
+    syntax:
+      content: function close()
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>
+  - name: create(ClientEntityContext)
+    uid: '@azure/service-bus.MessageSender.create'
+    package: '@azure/service-bus'
+    summary: >-
+      Creates a new sender to the specifiec ServiceBus entity, and optionally to
+      a given
+
+      partition if it is not present in the context or returns the one present
+      in the context.
+    syntax:
+      content: 'static function create(context: ClientEntityContext)'
+      parameters:
+        - id: context
+          type: <xref uid="@azure/service-bus.ClientEntityContext" />
+          description: ''
+      return:
+        type: <xref uid="@azure/service-bus.MessageSender" />
+        description: ''
+  - name: isOpen()
+    uid: '@azure/service-bus.MessageSender.isOpen'
+    package: '@azure/service-bus'
+    summary: >-
+      Determines whether the AMQP sender link is open. If open then returns true
+      else returns false.
+    syntax:
+      content: function isOpen()
+      return:
+        type: boolean
+        description: boolean
+  - name: onDetached(AmqpError | Error)
+    uid: '@azure/service-bus.MessageSender.onDetached'
+    package: '@azure/service-bus'
+    summary: Will reconnect the sender link if necessary.
+    syntax:
+      content: 'function onDetached(senderError?: AmqpError | Error)'
+      parameters:
+        - id: senderError
+          type: AmqpError | Error
+          description: ''
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>.
+  - name: open(SenderOptions)
+    uid: '@azure/service-bus.MessageSender.open'
+    package: '@azure/service-bus'
+    summary: >
+      Initializes the underlying AMQP sender link from rhea associated with this
+
+      `MessageSender`.
+
+      If the underlying AMQP sender link is already open this method resolves
+      immediately.
+    syntax:
+      content: 'function open(options?: SenderOptions)'
+      parameters:
+        - id: options
+          type: SenderOptions
+          description: ''
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: send(SendableMessageInfo)
+    uid: '@azure/service-bus.MessageSender.send'
+    package: '@azure/service-bus'
+    summary: 'Sends the given message, with the given options on this link'
+    syntax:
+      content: 'function send(data: SendableMessageInfo)'
+      parameters:
+        - id: data
+          type: <xref uid="@azure/service-bus.SendableMessageInfo" />
+          description: Message to send.  Will be sent as UTF8-encoded JSON string.
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: 'sendBatch(SendableMessageInfo[])'
+    uid: '@azure/service-bus.MessageSender.sendBatch'
+    package: '@azure/service-bus'
+    summary: >-
+      Send a batch of Message to the ServiceBus in a single AMQP message. The
+      "message_annotations",
+
+      "application_properties" and "properties" of the first message will be set
+      as that
+
+      of the envelope (batch message).
+    syntax:
+      content: 'function sendBatch(inputMessages: SendableMessageInfo[])'
+      parameters:
+        - id: inputMessages
+          type: '<xref uid="@azure/service-bus.SendableMessageInfo" />[]'
+          description: |-
+            An array of Message objects to be sent in a
+            Batch message.
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+extends: <xref uid="@azure/service-bus.LinkEntity" />

@@ -1,35 +1,88 @@
-### YamlMime:UniversalReference
-items:
-  - uid: '@azure/core-http.bearerTokenAuthenticationPolicy'
-    name: 'bearerTokenAuthenticationPolicy(TokenCredential, string | string[])'
-    children: []
-    type: function
-    langs:
-      - typeScript
-    summary: Creates a new BearerTokenAuthenticationPolicy factory.
+### YamlMime:TSType
+name: BearerTokenAuthenticationPolicy
+uid: '@azure/core-http.BearerTokenAuthenticationPolicy'
+package: '@azure/core-http'
+summary: |-
+  Provides a RequestPolicy that can request a token from a TokenCredential
+  implementation and then apply it to the Authorization header of a request
+  as a Bearer token.
+fullName: BearerTokenAuthenticationPolicy
+type: class
+constructors:
+  - name: >-
+      BearerTokenAuthenticationPolicy(RequestPolicy, RequestPolicyOptions,
+      TokenCredential, string | string[], AccessTokenCache)
+    uid: '@azure/core-http.BearerTokenAuthenticationPolicy.constructor'
+    package: '@azure/core-http'
+    summary: Creates a new BearerTokenAuthenticationPolicy object.
     syntax:
       content: >-
-        function bearerTokenAuthenticationPolicy(credential: TokenCredential,
-        scopes: string | string[])
+        new BearerTokenAuthenticationPolicy(nextPolicy: RequestPolicy, options:
+        RequestPolicyOptions, credential: TokenCredential, scopes: string |
+        string[], tokenCache: AccessTokenCache)
       parameters:
+        - id: nextPolicy
+          type: <xref uid="@azure/core-http.RequestPolicy" />
+          description: The next RequestPolicy in the request pipeline.
+        - id: options
+          type: <xref uid="@azure/core-http.RequestPolicyOptions" />
+          description: Options for this RequestPolicy.
         - id: credential
-          type:
-            - TokenCredential
+          type: TokenCredential
           description: The TokenCredential implementation that can supply the bearer token.
         - id: scopes
-          type:
-            - 'string | string[]'
-          description: |
-            The scopes for which the bearer token applies.
-      return:
-        type:
-          - '@azure/core-http.RequestPolicyFactory'
-        description: ''
+          type: 'string | string[]'
+          description: The scopes for which the bearer token applies.
+        - id: tokenCache
+          type: <xref uid="@azure/core-http.AccessTokenCache" />
+          description: >
+            The cache for the most recent AccessToken returned from the
+            TokenCredential.
+methods:
+  - name: 'log(HttpPipelineLogLevel, string)'
+    uid: '@azure/core-http.BearerTokenAuthenticationPolicy.log'
     package: '@azure/core-http'
-references:
-  - uid: '@azure/core-http.RequestPolicyFactory'
-    name: RequestPolicyFactory
-    spec.typeScript:
-      - name: RequestPolicyFactory
-        fullName: RequestPolicyFactory
-        uid: '@azure/core-http.RequestPolicyFactory'
+    summary: >-
+      Attempt to log the provided message to the provided logger. If no logger
+      was provided or if
+
+      the log level does not meat the logger's threshold, then nothing will be
+      logged.
+    syntax:
+      content: 'function log(logLevel: HttpPipelineLogLevel, message: string)'
+      parameters:
+        - id: logLevel
+          type: <xref uid="@azure/core-http.HttpPipelineLogLevel" />
+          description: The log level of this log.
+        - id: message
+          type: string
+          description: |
+            The message of this log.
+  - name: sendRequest(WebResourceLike)
+    uid: '@azure/core-http.BearerTokenAuthenticationPolicy.sendRequest'
+    package: '@azure/core-http'
+    summary: Applies the Bearer token to the request through the Authorization header.
+    syntax:
+      content: 'function sendRequest(webResource: WebResourceLike)'
+      parameters:
+        - id: webResource
+          type: <xref uid="@azure/core-http.WebResourceLike" />
+          description: |+
+
+      return:
+        type: Promise&lt;<xref uid="@azure/core-http.HttpOperationResponse" />&gt;
+        description: ''
+  - name: shouldLog(HttpPipelineLogLevel)
+    uid: '@azure/core-http.BearerTokenAuthenticationPolicy.shouldLog'
+    package: '@azure/core-http'
+    summary: Get whether or not a log with the provided log level should be logged.
+    syntax:
+      content: 'function shouldLog(logLevel: HttpPipelineLogLevel)'
+      parameters:
+        - id: logLevel
+          type: <xref uid="@azure/core-http.HttpPipelineLogLevel" />
+          description: The log level of the log that will be logged.
+      return:
+        type: boolean
+        description: Whether or not a log with the provided log level should be logged.
+extends: <xref uid="@azure/core-http.BaseRequestPolicy" />

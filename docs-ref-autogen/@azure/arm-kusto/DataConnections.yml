@@ -5,6 +5,7 @@ items:
     fullName: DataConnections
     children:
       - '@azure/arm-kusto.DataConnections.beginCreateOrUpdate'
+      - '@azure/arm-kusto.DataConnections.beginDataConnectionValidationMethod'
       - '@azure/arm-kusto.DataConnections.beginDeleteMethod'
       - '@azure/arm-kusto.DataConnections.beginUpdate'
       - '@azure/arm-kusto.DataConnections.checkNameAvailability'
@@ -13,8 +14,6 @@ items:
       - '@azure/arm-kusto.DataConnections.createOrUpdate'
       - '@azure/arm-kusto.DataConnections.constructor'
       - '@azure/arm-kusto.DataConnections.dataConnectionValidationMethod'
-      - '@azure/arm-kusto.DataConnections.dataConnectionValidationMethod_2'
-      - '@azure/arm-kusto.DataConnections.dataConnectionValidationMethod_1'
       - '@azure/arm-kusto.DataConnections.deleteMethod'
       - '@azure/arm-kusto.DataConnections.get'
       - '@azure/arm-kusto.DataConnections.get_2'
@@ -62,6 +61,49 @@ items:
         - id: parameters
           type:
             - Models.DataConnectionUnion
+          description: >-
+            The data connection parameters supplied to the CreateOrUpdate
+            operation.
+        - id: options
+          type:
+            - msRest.RequestOptionsBase
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<LROPoller>
+        description: Promise<msRestAzure.LROPoller>
+    package: '@azure/arm-kusto'
+  - uid: '@azure/arm-kusto.DataConnections.beginDataConnectionValidationMethod'
+    name: >-
+      beginDataConnectionValidationMethod(string, string, string,
+      DataConnectionValidation, msRest.RequestOptionsBase)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Checks that the data connection parameters are valid.
+    syntax:
+      content: >-
+        function beginDataConnectionValidationMethod(resourceGroupName: string,
+        clusterName: string, databaseName: string, parameters:
+        DataConnectionValidation, options?: msRest.RequestOptionsBase)
+      parameters:
+        - id: resourceGroupName
+          type:
+            - string
+          description: The name of the resource group containing the Kusto cluster.
+        - id: clusterName
+          type:
+            - string
+          description: The name of the Kusto cluster.
+        - id: databaseName
+          type:
+            - string
+          description: The name of the database in the Kusto cluster.
+        - id: parameters
+          type:
+            - '@azure/arm-kusto.DataConnectionValidation'
           description: >-
             The data connection parameters supplied to the CreateOrUpdate
             operation.
@@ -390,94 +432,6 @@ items:
             Promise<Models.DataConnectionsDataConnectionValidationMethodResponse>
         description: Promise<Models.DataConnectionsDataConnectionValidationMethodResponse>
     package: '@azure/arm-kusto'
-  - uid: '@azure/arm-kusto.DataConnections.dataConnectionValidationMethod_2'
-    name: >-
-      dataConnectionValidationMethod(string, string, string,
-      DataConnectionValidation, RequestOptionsBase,
-      ServiceCallback<DataConnectionValidationListResult>)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        function dataConnectionValidationMethod(resourceGroupName: string,
-        clusterName: string, databaseName: string, parameters:
-        DataConnectionValidation, options: RequestOptionsBase, callback:
-        ServiceCallback<DataConnectionValidationListResult>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group containing the Kusto cluster.
-        - id: clusterName
-          type:
-            - string
-          description: The name of the Kusto cluster.
-        - id: databaseName
-          type:
-            - string
-          description: The name of the database in the Kusto cluster.
-        - id: parameters
-          type:
-            - '@azure/arm-kusto.DataConnectionValidation'
-          description: >-
-            The data connection parameters supplied to the CreateOrUpdate
-            operation.
-        - id: options
-          type:
-            - RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type:
-            - >-
-              ServiceCallback<@azure/arm-kusto.DataConnectionValidationListResult>
-          description: |
-            The callback
-    package: '@azure/arm-kusto'
-  - uid: '@azure/arm-kusto.DataConnections.dataConnectionValidationMethod_1'
-    name: >-
-      dataConnectionValidationMethod(string, string, string,
-      DataConnectionValidation,
-      ServiceCallback<DataConnectionValidationListResult>)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        function dataConnectionValidationMethod(resourceGroupName: string,
-        clusterName: string, databaseName: string, parameters:
-        DataConnectionValidation, callback:
-        ServiceCallback<DataConnectionValidationListResult>)
-      parameters:
-        - id: resourceGroupName
-          type:
-            - string
-          description: The name of the resource group containing the Kusto cluster.
-        - id: clusterName
-          type:
-            - string
-          description: The name of the Kusto cluster.
-        - id: databaseName
-          type:
-            - string
-          description: The name of the database in the Kusto cluster.
-        - id: parameters
-          type:
-            - '@azure/arm-kusto.DataConnectionValidation'
-          description: >-
-            The data connection parameters supplied to the CreateOrUpdate
-            operation.
-        - id: callback
-          type:
-            - >-
-              ServiceCallback<@azure/arm-kusto.DataConnectionValidationListResult>
-          description: |
-            The callback
-    package: '@azure/arm-kusto'
   - uid: '@azure/arm-kusto.DataConnections.deleteMethod'
     name: 'deleteMethod(string, string, string, string, msRest.RequestOptionsBase)'
     children: []
@@ -791,6 +745,12 @@ references:
       - name: KustoManagementClientContext
         fullName: KustoManagementClientContext
         uid: '@azure/arm-kusto.KustoManagementClientContext'
+  - uid: '@azure/arm-kusto.DataConnectionValidation'
+    name: DataConnectionValidation
+    spec.typeScript:
+      - name: DataConnectionValidation
+        fullName: DataConnectionValidation
+        uid: '@azure/arm-kusto.DataConnectionValidation'
   - uid: '@azure/arm-kusto.DataConnectionCheckNameRequest'
     name: DataConnectionCheckNameRequest
     spec.typeScript:
@@ -805,22 +765,6 @@ references:
       - name: CheckNameResult
         fullName: CheckNameResult
         uid: '@azure/arm-kusto.CheckNameResult'
-      - name: '>'
-        fullName: '>'
-  - uid: '@azure/arm-kusto.DataConnectionValidation'
-    name: DataConnectionValidation
-    spec.typeScript:
-      - name: DataConnectionValidation
-        fullName: DataConnectionValidation
-        uid: '@azure/arm-kusto.DataConnectionValidation'
-  - uid: ServiceCallback<@azure/arm-kusto.DataConnectionValidationListResult>
-    name: DataConnectionValidationListResult>
-    spec.typeScript:
-      - name: ServiceCallback<
-        fullName: ServiceCallback<
-      - name: DataConnectionValidationListResult
-        fullName: DataConnectionValidationListResult
-        uid: '@azure/arm-kusto.DataConnectionValidationListResult'
       - name: '>'
         fullName: '>'
   - uid: ServiceCallback<@azure/arm-kusto.DataConnectionListResult>

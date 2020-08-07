@@ -7,10 +7,13 @@ items:
       - '@azure/storage-file-share.ShareDirectoryClient.accountName'
       - '@azure/storage-file-share.ShareDirectoryClient.create'
       - '@azure/storage-file-share.ShareDirectoryClient.createFile'
+      - '@azure/storage-file-share.ShareDirectoryClient.createIfNotExists'
       - '@azure/storage-file-share.ShareDirectoryClient.createSubdirectory'
       - '@azure/storage-file-share.ShareDirectoryClient.delete'
       - '@azure/storage-file-share.ShareDirectoryClient.deleteFile'
+      - '@azure/storage-file-share.ShareDirectoryClient.deleteIfExists'
       - '@azure/storage-file-share.ShareDirectoryClient.deleteSubdirectory'
+      - '@azure/storage-file-share.ShareDirectoryClient.exists'
       - '@azure/storage-file-share.ShareDirectoryClient.forceCloseAllHandles'
       - '@azure/storage-file-share.ShareDirectoryClient.forceCloseHandle'
       - '@azure/storage-file-share.ShareDirectoryClient.getDirectoryClient'
@@ -101,6 +104,31 @@ items:
         type:
           - Promise<Object>
         description: '>} File creation response data and the corresponding file client.'
+    package: '@azure/storage-file-share'
+  - uid: '@azure/storage-file-share.ShareDirectoryClient.createIfNotExists'
+    name: createIfNotExists(DirectoryCreateOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Creates a new directory under the specified share or parent directory if
+      it does not already exists.
+
+      If the directory already exists, it is not modified.
+    syntax:
+      content: 'function createIfNotExists(options?: DirectoryCreateOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file-share.DirectoryCreateOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            Promise<@azure/storage-file-share.DirectoryCreateIfNotExistsResponse>
+        description: ''
     package: '@azure/storage-file-share'
   - uid: '@azure/storage-file-share.ShareDirectoryClient.createSubdirectory'
     name: 'createSubdirectory(string, DirectoryCreateOptions)'
@@ -199,6 +227,30 @@ items:
           - Promise<@azure/storage-file-share.FileDeleteResponse>
         description: File deletion response data.
     package: '@azure/storage-file-share'
+  - uid: '@azure/storage-file-share.ShareDirectoryClient.deleteIfExists'
+    name: deleteIfExists(DirectoryDeleteOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      Removes the specified empty directory if it exists. Note that the
+      directory must be empty before it can be
+
+      deleted.
+    syntax:
+      content: 'function deleteIfExists(options?: DirectoryDeleteOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file-share.DirectoryDeleteOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-file-share.DirectoryDeleteIfExistsResponse>
+        description: ''
+    package: '@azure/storage-file-share'
   - uid: '@azure/storage-file-share.ShareDirectoryClient.deleteSubdirectory'
     name: 'deleteSubdirectory(string, DirectoryDeleteOptions)'
     children: []
@@ -226,6 +278,35 @@ items:
         type:
           - Promise<@azure/storage-file-share.DirectoryDeleteResponse>
         description: Directory deletion response data.
+    package: '@azure/storage-file-share'
+  - uid: '@azure/storage-file-share.ShareDirectoryClient.exists'
+    name: exists(DirectoryExistsOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Returns true if the specified directory exists; false otherwise.
+
+      NOTE: use this function with care since an existing directory might be
+      deleted by other clients or
+
+      applications. Vice versa new directories might be added by other clients
+      or applications after this
+
+      function completes.
+    syntax:
+      content: 'function exists(options?: DirectoryExistsOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-file-share.DirectoryExistsOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<boolean>
+        description: ''
     package: '@azure/storage-file-share'
   - uid: '@azure/storage-file-share.ShareDirectoryClient.forceCloseAllHandles'
     name: forceCloseAllHandles(DirectoryForceCloseHandlesSegmentOptions)
@@ -383,7 +464,7 @@ items:
 
       let i = 1;
 
-      let iter = await directoryClient.listFilesAndDirectories();
+      let iter = directoryClient.listFilesAndDirectories();
 
       let entity = await iter.next();
 
@@ -532,7 +613,7 @@ items:
 
       let i = 1;
 
-      let iter = await dirClient.listHandles();
+      let iter = dirClient.listHandles();
 
       let handleItem = await iter.next();
 
@@ -844,6 +925,16 @@ references:
       - name: FileCreateOptions
         fullName: FileCreateOptions
         uid: '@azure/storage-file-share.FileCreateOptions'
+  - uid: Promise<@azure/storage-file-share.DirectoryCreateIfNotExistsResponse>
+    name: DirectoryCreateIfNotExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: DirectoryCreateIfNotExistsResponse
+        fullName: DirectoryCreateIfNotExistsResponse
+        uid: '@azure/storage-file-share.DirectoryCreateIfNotExistsResponse'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/storage-file-share.DirectoryDeleteOptions'
     name: DirectoryDeleteOptions
     spec.typeScript:
@@ -876,6 +967,22 @@ references:
         uid: '@azure/storage-file-share.FileDeleteResponse'
       - name: '>'
         fullName: '>'
+  - uid: Promise<@azure/storage-file-share.DirectoryDeleteIfExistsResponse>
+    name: DirectoryDeleteIfExistsResponse>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: DirectoryDeleteIfExistsResponse
+        fullName: DirectoryDeleteIfExistsResponse
+        uid: '@azure/storage-file-share.DirectoryDeleteIfExistsResponse'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/storage-file-share.DirectoryExistsOptions'
+    name: DirectoryExistsOptions
+    spec.typeScript:
+      - name: DirectoryExistsOptions
+        fullName: DirectoryExistsOptions
+        uid: '@azure/storage-file-share.DirectoryExistsOptions'
   - uid: '@azure/storage-file-share.DirectoryForceCloseHandlesSegmentOptions'
     name: DirectoryForceCloseHandlesSegmentOptions
     spec.typeScript:

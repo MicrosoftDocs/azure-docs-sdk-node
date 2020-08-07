@@ -6,6 +6,9 @@ items:
     children:
       - microsoft-cognitiveservices-speech-sdk.RecognitionResult.duration
       - microsoft-cognitiveservices-speech-sdk.RecognitionResult.errorDetails
+      - microsoft-cognitiveservices-speech-sdk.RecognitionResult.language
+      - >-
+        microsoft-cognitiveservices-speech-sdk.RecognitionResult.languageDetectionConfidence
       - microsoft-cognitiveservices-speech-sdk.RecognitionResult.offset
       - microsoft-cognitiveservices-speech-sdk.RecognitionResult.properties
       - microsoft-cognitiveservices-speech-sdk.RecognitionResult.reason
@@ -48,6 +51,37 @@ items:
         type:
           - string
         description: a brief description of an error.
+    package: microsoft-cognitiveservices-speech-sdk
+  - uid: microsoft-cognitiveservices-speech-sdk.RecognitionResult.language
+    name: language
+    fullName: language
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Primary Language detected.
+    syntax:
+      content: string language
+      return:
+        type:
+          - string
+        description: language detected.
+    package: microsoft-cognitiveservices-speech-sdk
+  - uid: >-
+      microsoft-cognitiveservices-speech-sdk.RecognitionResult.languageDetectionConfidence
+    name: languageDetectionConfidence
+    fullName: languageDetectionConfidence
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: 'Primary Language detection confidence (Unknown, Low, Medium, High).'
+    syntax:
+      content: string languageDetectionConfidence
+      return:
+        type:
+          - string
+        description: detection confidence strength.
     package: microsoft-cognitiveservices-speech-sdk
   - uid: microsoft-cognitiveservices-speech-sdk.RecognitionResult.offset
     name: offset
@@ -97,7 +131,7 @@ items:
   - uid: microsoft-cognitiveservices-speech-sdk.RecognitionResult.constructor
     name: >-
       RecognitionResult(string, ResultReason, string, number, number, string,
-      string, PropertyCollection)
+      string, string, string, PropertyCollection)
     children: []
     type: constructor
     langs:
@@ -106,8 +140,9 @@ items:
     syntax:
       content: >-
         new RecognitionResult(resultId?: string, reason?: ResultReason, text?:
-        string, duration?: number, offset?: number, errorDetails?: string,
-        json?: string, properties?: PropertyCollection)
+        string, duration?: number, offset?: number, language?: string,
+        languageDetectionConfidence?: string, errorDetails?: string, json?:
+        string, properties?: PropertyCollection)
       parameters:
         - id: resultId
           type:
@@ -133,6 +168,18 @@ items:
           type:
             - number
           description: The offset into the stream.
+          optional: true
+        - id: language
+          type:
+            - string
+          description: 'Primary Language detected, if provided.'
+          optional: true
+        - id: languageDetectionConfidence
+          type:
+            - string
+          description: >-
+            Primary Language confidence ("Unknown," "Low," "Medium," "High"...),
+            if provided.
           optional: true
         - id: errorDetails
           type:

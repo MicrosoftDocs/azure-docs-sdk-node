@@ -111,6 +111,12 @@ items:
       - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.exportProject_1
       - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.getArtifact
+      - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.getArtifact_2
+      - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.getArtifact_1
+      - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.getDomain
       - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.getDomain_2
@@ -129,6 +135,12 @@ items:
       - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.getExports_1
       - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImageCount
+      - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImageCount_1
+      - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImageCount_2
+      - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImagePerformanceCount
       - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImagePerformanceCount_1
@@ -146,6 +158,12 @@ items:
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImageRegionProposals_2
       - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImageRegionProposals_1
+      - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImages
+      - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImages_1
+      - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImages_2
       - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImagesByIds
       - >-
@@ -219,15 +237,15 @@ items:
       - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.importProject
       - >-
-        @azure/cognitiveservices-customvision-training.TrainingAPIClient.importProject_2
-      - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.importProject_1
+      - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.importProject_2
       - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.publishIteration
       - >-
-        @azure/cognitiveservices-customvision-training.TrainingAPIClient.publishIteration_2
-      - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.publishIteration_1
+      - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.publishIteration_2
       - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.queryPredictions
       - >-
@@ -283,6 +301,12 @@ items:
       - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.unpublishIteration_1
       - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.updateImageMetadata
+      - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.updateImageMetadata_2
+      - >-
+        @azure/cognitiveservices-customvision-training.TrainingAPIClient.updateImageMetadata_1
+      - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.updateIteration
       - >-
         @azure/cognitiveservices-customvision-training.TrainingAPIClient.updateIteration_2
@@ -323,6 +347,14 @@ items:
       region information.
 
       There is a limit of 64 entries in the batch.
+
+      If all regions are successful created, 200(OK) status code will be
+      returned.
+
+      Otherwise, 207 (Multi-Status) status code will be returned and detail
+      status for each region
+
+      will be listed in the response payload.
     syntax:
       content: >-
         function createImageRegions(projectId: string, batch:
@@ -436,7 +468,15 @@ items:
 
       multipart
 
-      multiple image files can be sent at once, with a maximum of 64 files
+      multiple image files can be sent at once, with a maximum of 64 files.
+
+      If all images are successful created, 200(OK) status code will be
+      returned.
+
+      Otherwise, 207 (Multi-Status) status code will be returned and detail
+      status for each image will
+
+      be listed in the response payload.
     syntax:
       content: >-
         function createImagesFromData(projectId: string, imageData:
@@ -555,6 +595,14 @@ items:
       There is a limit of 64
 
       images and 20 tags.
+
+      If all images are successful created, 200(OK) status code will be
+      returned.
+
+      Otherwise, 207 (Multi-Status) status code will be returned and detail
+      status for each image will
+
+      be listed in the response payload.
     syntax:
       content: >-
         function createImagesFromFiles(projectId: string, batch:
@@ -666,6 +714,14 @@ items:
       is a limit of 64
 
       images and 20 tags.
+
+      If all images are successful created, 200(OK) status code will be
+      returned.
+
+      Otherwise, 207 (Multi-Status) status code will be returned and detail
+      status for each image will
+
+      be listed in the response payload.
     syntax:
       content: >-
         function createImagesFromPredictions(projectId: string, batch:
@@ -678,7 +734,9 @@ items:
         - id: batch
           type:
             - '@azure/cognitiveservices-customvision-training.ImageIdCreateBatch'
-          description: Image and tag ids. Limited to 64 images and 20 tags per batch.
+          description: >-
+            Image, tag ids, and metadata. Limited to 64 images and 20 tags per
+            batch.
         - id: options
           type:
             - msRest.RequestOptionsBase
@@ -712,7 +770,9 @@ items:
         - id: batch
           type:
             - '@azure/cognitiveservices-customvision-training.ImageIdCreateBatch'
-          description: Image and tag ids. Limited to 64 images and 20 tags per batch.
+          description: >-
+            Image, tag ids, and metadata. Limited to 64 images and 20 tags per
+            batch.
         - id: options
           type:
             - RequestOptionsBase
@@ -746,7 +806,9 @@ items:
         - id: batch
           type:
             - '@azure/cognitiveservices-customvision-training.ImageIdCreateBatch'
-          description: Image and tag ids. Limited to 64 images and 20 tags per batch.
+          description: >-
+            Image, tag ids, and metadata. Limited to 64 images and 20 tags per
+            batch.
         - id: callback
           type:
             - >-
@@ -768,6 +830,14 @@ items:
       There is a limit of 64
 
       images and 20 tags.
+
+      If all images are successful created, 200(OK) status code will be
+      returned.
+
+      Otherwise, 207 (Multi-Status) status code will be returned and detail
+      status for each image will
+
+      be listed in the response payload.
     syntax:
       content: >-
         function createImagesFromUrls(projectId: string, batch:
@@ -780,7 +850,9 @@ items:
         - id: batch
           type:
             - '@azure/cognitiveservices-customvision-training.ImageUrlCreateBatch'
-          description: Image urls and tag ids. Limited to 64 images and 20 tags per batch.
+          description: >-
+            Image urls, tag ids, and metadata. Limited to 64 images and 20 tags
+            per batch.
         - id: options
           type:
             - msRest.RequestOptionsBase
@@ -814,7 +886,9 @@ items:
         - id: batch
           type:
             - '@azure/cognitiveservices-customvision-training.ImageUrlCreateBatch'
-          description: Image urls and tag ids. Limited to 64 images and 20 tags per batch.
+          description: >-
+            Image urls, tag ids, and metadata. Limited to 64 images and 20 tags
+            per batch.
         - id: options
           type:
             - RequestOptionsBase
@@ -848,7 +922,9 @@ items:
         - id: batch
           type:
             - '@azure/cognitiveservices-customvision-training.ImageUrlCreateBatch'
-          description: Image urls and tag ids. Limited to 64 images and 20 tags per batch.
+          description: >-
+            Image urls, tag ids, and metadata. Limited to 64 images and 20 tags
+            per batch.
         - id: callback
           type:
             - >-
@@ -1983,6 +2059,95 @@ items:
           description: |
             The callback
     package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.getArtifact
+    name: 'getArtifact(string, string, msRest.RequestOptionsBase)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function getArtifact(projectId: string, path: string, options?:
+        msRest.RequestOptionsBase)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: path
+          type:
+            - string
+          description: The relative path for artifact.
+        - id: options
+          type:
+            - msRest.RequestOptionsBase
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.GetArtifactResponse>
+        description: Promise<Models.GetArtifactResponse>
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.getArtifact_2
+    name: 'getArtifact(string, string, RequestOptionsBase, ServiceCallback<void>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function getArtifact(projectId: string, path: string, options:
+        RequestOptionsBase, callback: ServiceCallback<void>)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: path
+          type:
+            - string
+          description: The relative path for artifact.
+        - id: options
+          type:
+            - RequestOptionsBase
+          description: The optional parameters
+        - id: callback
+          type:
+            - ServiceCallback<void>
+          description: |
+            The callback
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.getArtifact_1
+    name: 'getArtifact(string, string, ServiceCallback<void>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function getArtifact(projectId: string, path: string, callback:
+        ServiceCallback<void>)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: path
+          type:
+            - string
+          description: The relative path for artifact.
+        - id: callback
+          type:
+            - ServiceCallback<void>
+          description: |
+            The callback
+    package: '@azure/cognitiveservices-customvision-training'
   - uid: '@azure/cognitiveservices-customvision-training.TrainingAPIClient.getDomain'
     name: 'getDomain(string, msRest.RequestOptionsBase)'
     children: []
@@ -2212,6 +2377,93 @@ items:
           type:
             - >-
               ServiceCallback<@azure/cognitiveservices-customvision-training.ExportModel[]>
+          description: |
+            The callback
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImageCount
+    name: 'getImageCount(string, Models.TrainingAPIClientGetImageCountOptionalParams)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      The filtering is on an and/or relationship. For example, if the provided
+      tag ids are for the
+
+      "Dog" and
+
+      "Cat" tags, then only images tagged with Dog and/or Cat will be returned
+    syntax:
+      content: >-
+        function getImageCount(projectId: string, options?:
+        Models.TrainingAPIClientGetImageCountOptionalParams)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: options
+          type:
+            - Models.TrainingAPIClientGetImageCountOptionalParams
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.GetImageCountResponse>
+        description: Promise<Models.GetImageCountResponse>
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImageCount_1
+    name: 'getImageCount(string, ServiceCallback<number>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function getImageCount(projectId: string, callback:
+        ServiceCallback<number>)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: callback
+          type:
+            - ServiceCallback<number>
+          description: |
+            The callback
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImageCount_2
+    name: >-
+      getImageCount(string, TrainingAPIClientGetImageCountOptionalParams,
+      ServiceCallback<number>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function getImageCount(projectId: string, options:
+        TrainingAPIClientGetImageCountOptionalParams, callback:
+        ServiceCallback<number>)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: options
+          type:
+            - >-
+              @azure/cognitiveservices-customvision-training.TrainingAPIClientGetImageCountOptionalParams
+          description: The optional parameters
+        - id: callback
+          type:
+            - ServiceCallback<number>
           description: |
             The callback
     package: '@azure/cognitiveservices-customvision-training'
@@ -2528,6 +2780,102 @@ items:
           type:
             - >-
               ServiceCallback<@azure/cognitiveservices-customvision-training.ImageRegionProposal>
+          description: |
+            The callback
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: '@azure/cognitiveservices-customvision-training.TrainingAPIClient.getImages'
+    name: 'getImages(string, Models.TrainingAPIClientGetImagesOptionalParams)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      This API supports batching and range selection. By default it will only
+      return first 50 images
+
+      matching images.
+
+      Use the {take} and {skip} parameters to control how many images to return
+      in a given batch.
+
+      The filtering is on an and/or relationship. For example, if the provided
+      tag ids are for the
+
+      "Dog" and
+
+      "Cat" tags, then only images tagged with Dog and/or Cat will be returned
+    syntax:
+      content: >-
+        function getImages(projectId: string, options?:
+        Models.TrainingAPIClientGetImagesOptionalParams)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: options
+          type:
+            - Models.TrainingAPIClientGetImagesOptionalParams
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.GetImagesResponse>
+        description: Promise<Models.GetImagesResponse>
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImages_1
+    name: 'getImages(string, ServiceCallback<Image[]>)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function getImages(projectId: string, callback:
+        ServiceCallback<Image[]>)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: callback
+          type:
+            - >-
+              ServiceCallback<@azure/cognitiveservices-customvision-training.Image[]>
+          description: |
+            The callback
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.getImages_2
+    name: >-
+      getImages(string, TrainingAPIClientGetImagesOptionalParams,
+      ServiceCallback<Image[]>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function getImages(projectId: string, options:
+        TrainingAPIClientGetImagesOptionalParams, callback:
+        ServiceCallback<Image[]>)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: options
+          type:
+            - >-
+              @azure/cognitiveservices-customvision-training.TrainingAPIClientGetImagesOptionalParams
+          description: The optional parameters
+        - id: callback
+          type:
+            - >-
+              ServiceCallback<@azure/cognitiveservices-customvision-training.Image[]>
           description: |
             The callback
     package: '@azure/cognitiveservices-customvision-training'
@@ -3579,7 +3927,7 @@ items:
     package: '@azure/cognitiveservices-customvision-training'
   - uid: >-
       @azure/cognitiveservices-customvision-training.TrainingAPIClient.importProject
-    name: 'importProject(string, msRest.RequestOptionsBase)'
+    name: 'importProject(string, Models.TrainingAPIClientImportProjectOptionalParams)'
     children: []
     type: method
     langs:
@@ -3588,7 +3936,7 @@ items:
     syntax:
       content: >-
         function importProject(token: string, options?:
-        msRest.RequestOptionsBase)
+        Models.TrainingAPIClientImportProjectOptionalParams)
       parameters:
         - id: token
           type:
@@ -3596,41 +3944,13 @@ items:
           description: Token generated from the export project call.
         - id: options
           type:
-            - msRest.RequestOptionsBase
+            - Models.TrainingAPIClientImportProjectOptionalParams
           description: ''
           optional: true
       return:
         type:
           - Promise<Models.ImportProjectResponse>
         description: Promise<Models.ImportProjectResponse>
-    package: '@azure/cognitiveservices-customvision-training'
-  - uid: >-
-      @azure/cognitiveservices-customvision-training.TrainingAPIClient.importProject_2
-    name: 'importProject(string, RequestOptionsBase, ServiceCallback<Project>)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        function importProject(token: string, options: RequestOptionsBase,
-        callback: ServiceCallback<Project>)
-      parameters:
-        - id: token
-          type:
-            - string
-          description: Token generated from the export project call.
-        - id: options
-          type:
-            - RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type:
-            - >-
-              ServiceCallback<@azure/cognitiveservices-customvision-training.Project>
-          description: |
-            The callback
     package: '@azure/cognitiveservices-customvision-training'
   - uid: >-
       @azure/cognitiveservices-customvision-training.TrainingAPIClient.importProject_1
@@ -3657,10 +3977,42 @@ items:
             The callback
     package: '@azure/cognitiveservices-customvision-training'
   - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.importProject_2
+    name: >-
+      importProject(string, TrainingAPIClientImportProjectOptionalParams,
+      ServiceCallback<Project>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function importProject(token: string, options:
+        TrainingAPIClientImportProjectOptionalParams, callback:
+        ServiceCallback<Project>)
+      parameters:
+        - id: token
+          type:
+            - string
+          description: Token generated from the export project call.
+        - id: options
+          type:
+            - >-
+              @azure/cognitiveservices-customvision-training.TrainingAPIClientImportProjectOptionalParams
+          description: The optional parameters
+        - id: callback
+          type:
+            - >-
+              ServiceCallback<@azure/cognitiveservices-customvision-training.Project>
+          description: |
+            The callback
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
       @azure/cognitiveservices-customvision-training.TrainingAPIClient.publishIteration
     name: >-
       publishIteration(string, string, string, string,
-      msRest.RequestOptionsBase)
+      Models.TrainingAPIClientPublishIterationOptionalParams)
     children: []
     type: method
     langs:
@@ -3670,7 +4022,7 @@ items:
       content: >-
         function publishIteration(projectId: string, iterationId: string,
         publishName: string, predictionId: string, options?:
-        msRest.RequestOptionsBase)
+        Models.TrainingAPIClientPublishIterationOptionalParams)
       parameters:
         - id: projectId
           type:
@@ -3690,55 +4042,13 @@ items:
           description: The id of the prediction resource to publish to.
         - id: options
           type:
-            - msRest.RequestOptionsBase
+            - Models.TrainingAPIClientPublishIterationOptionalParams
           description: ''
           optional: true
       return:
         type:
           - Promise<Models.PublishIterationResponse>
         description: Promise<Models.PublishIterationResponse>
-    package: '@azure/cognitiveservices-customvision-training'
-  - uid: >-
-      @azure/cognitiveservices-customvision-training.TrainingAPIClient.publishIteration_2
-    name: >-
-      publishIteration(string, string, string, string, RequestOptionsBase,
-      ServiceCallback<boolean>)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: ''
-    syntax:
-      content: >-
-        function publishIteration(projectId: string, iterationId: string,
-        publishName: string, predictionId: string, options: RequestOptionsBase,
-        callback: ServiceCallback<boolean>)
-      parameters:
-        - id: projectId
-          type:
-            - string
-          description: The project id.
-        - id: iterationId
-          type:
-            - string
-          description: The iteration id.
-        - id: publishName
-          type:
-            - string
-          description: The name to give the published iteration.
-        - id: predictionId
-          type:
-            - string
-          description: The id of the prediction resource to publish to.
-        - id: options
-          type:
-            - RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type:
-            - ServiceCallback<boolean>
-          description: |
-            The callback
     package: '@azure/cognitiveservices-customvision-training'
   - uid: >-
       @azure/cognitiveservices-customvision-training.TrainingAPIClient.publishIteration_1
@@ -3770,6 +4080,50 @@ items:
           type:
             - string
           description: The id of the prediction resource to publish to.
+        - id: callback
+          type:
+            - ServiceCallback<boolean>
+          description: |
+            The callback
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.publishIteration_2
+    name: >-
+      publishIteration(string, string, string, string,
+      TrainingAPIClientPublishIterationOptionalParams, ServiceCallback<boolean>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function publishIteration(projectId: string, iterationId: string,
+        publishName: string, predictionId: string, options:
+        TrainingAPIClientPublishIterationOptionalParams, callback:
+        ServiceCallback<boolean>)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: iterationId
+          type:
+            - string
+          description: The iteration id.
+        - id: publishName
+          type:
+            - string
+          description: The name to give the published iteration.
+        - id: predictionId
+          type:
+            - string
+          description: The id of the prediction resource to publish to.
+        - id: options
+          type:
+            - >-
+              @azure/cognitiveservices-customvision-training.TrainingAPIClientPublishIterationOptionalParams
+          description: The optional parameters
         - id: callback
           type:
             - ServiceCallback<boolean>
@@ -4713,6 +5067,136 @@ items:
             The callback
     package: '@azure/cognitiveservices-customvision-training'
   - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.updateImageMetadata
+    name: >-
+      updateImageMetadata(string, string[], [key: string]: string,
+      msRest.RequestOptionsBase)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >-
+      This API accepts a batch of image Ids, and metadata, to update images.
+      There is a limit of 64
+
+      images.
+    syntax:
+      content: >-
+        function updateImageMetadata(projectId: string, imageIds: string[],
+        metadata: [key: string]: string, options?: msRest.RequestOptionsBase)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: imageIds
+          type:
+            - 'string[]'
+          description: The list of image ids to update. Limited to 64.
+        - id: metadata
+          type:
+            - '[key: string]: string'
+          description: >-
+            The metadata to be updated to the specified images. Limited to 50
+            key-value
+
+            pairs per image. The length of key is limited to 256. The length of
+            value is limited to 512.
+        - id: options
+          type:
+            - msRest.RequestOptionsBase
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<Models.UpdateImageMetadataResponse>
+        description: Promise<Models.UpdateImageMetadataResponse>
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.updateImageMetadata_2
+    name: >-
+      updateImageMetadata(string, string[], [key: string]: string,
+      RequestOptionsBase, ServiceCallback<ImageMetadataUpdateSummary>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function updateImageMetadata(projectId: string, imageIds: string[],
+        metadata: [key: string]: string, options: RequestOptionsBase, callback:
+        ServiceCallback<ImageMetadataUpdateSummary>)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: imageIds
+          type:
+            - 'string[]'
+          description: The list of image ids to update. Limited to 64.
+        - id: metadata
+          type:
+            - '[key: string]: string'
+          description: >-
+            The metadata to be updated to the specified images. Limited to 50
+            key-value
+
+            pairs per image. The length of key is limited to 256. The length of
+            value is limited to 512.
+        - id: options
+          type:
+            - RequestOptionsBase
+          description: The optional parameters
+        - id: callback
+          type:
+            - >-
+              ServiceCallback<@azure/cognitiveservices-customvision-training.ImageMetadataUpdateSummary>
+          description: |
+            The callback
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClient.updateImageMetadata_1
+    name: >-
+      updateImageMetadata(string, string[], [key: string]: string,
+      ServiceCallback<ImageMetadataUpdateSummary>)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function updateImageMetadata(projectId: string, imageIds: string[],
+        metadata: [key: string]: string, callback:
+        ServiceCallback<ImageMetadataUpdateSummary>)
+      parameters:
+        - id: projectId
+          type:
+            - string
+          description: The project id.
+        - id: imageIds
+          type:
+            - 'string[]'
+          description: The list of image ids to update. Limited to 64.
+        - id: metadata
+          type:
+            - '[key: string]: string'
+          description: >-
+            The metadata to be updated to the specified images. Limited to 50
+            key-value
+
+            pairs per image. The length of key is limited to 256. The length of
+            value is limited to 512.
+        - id: callback
+          type:
+            - >-
+              ServiceCallback<@azure/cognitiveservices-customvision-training.ImageMetadataUpdateSummary>
+          description: |
+            The callback
+    package: '@azure/cognitiveservices-customvision-training'
+  - uid: >-
       @azure/cognitiveservices-customvision-training.TrainingAPIClient.updateIteration
     name: 'updateIteration(string, string, Iteration, msRest.RequestOptionsBase)'
     children: []
@@ -5199,6 +5683,14 @@ references:
       - name: '[]>'
         fullName: '[]>'
   - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClientGetImageCountOptionalParams
+    name: TrainingAPIClientGetImageCountOptionalParams
+    spec.typeScript:
+      - name: TrainingAPIClientGetImageCountOptionalParams
+        fullName: TrainingAPIClientGetImageCountOptionalParams
+        uid: >-
+          @azure/cognitiveservices-customvision-training.TrainingAPIClientGetImageCountOptionalParams
+  - uid: >-
       @azure/cognitiveservices-customvision-training.TrainingAPIClientGetImagePerformanceCountOptionalParams
     name: TrainingAPIClientGetImagePerformanceCountOptionalParams
     spec.typeScript:
@@ -5246,6 +5738,14 @@ references:
         uid: '@azure/cognitiveservices-customvision-training.Image'
       - name: '[]>'
         fullName: '[]>'
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClientGetImagesOptionalParams
+    name: TrainingAPIClientGetImagesOptionalParams
+    spec.typeScript:
+      - name: TrainingAPIClientGetImagesOptionalParams
+        fullName: TrainingAPIClientGetImagesOptionalParams
+        uid: >-
+          @azure/cognitiveservices-customvision-training.TrainingAPIClientGetImagesOptionalParams
   - uid: >-
       @azure/cognitiveservices-customvision-training.TrainingAPIClientGetImagesByIdsOptionalParams
     name: TrainingAPIClientGetImagesByIdsOptionalParams
@@ -5362,6 +5862,22 @@ references:
         fullName: TrainingAPIClientGetUntaggedImagesOptionalParams
         uid: >-
           @azure/cognitiveservices-customvision-training.TrainingAPIClientGetUntaggedImagesOptionalParams
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClientImportProjectOptionalParams
+    name: TrainingAPIClientImportProjectOptionalParams
+    spec.typeScript:
+      - name: TrainingAPIClientImportProjectOptionalParams
+        fullName: TrainingAPIClientImportProjectOptionalParams
+        uid: >-
+          @azure/cognitiveservices-customvision-training.TrainingAPIClientImportProjectOptionalParams
+  - uid: >-
+      @azure/cognitiveservices-customvision-training.TrainingAPIClientPublishIterationOptionalParams
+    name: TrainingAPIClientPublishIterationOptionalParams
+    spec.typeScript:
+      - name: TrainingAPIClientPublishIterationOptionalParams
+        fullName: TrainingAPIClientPublishIterationOptionalParams
+        uid: >-
+          @azure/cognitiveservices-customvision-training.TrainingAPIClientPublishIterationOptionalParams
   - uid: '@azure/cognitiveservices-customvision-training.PredictionQueryToken'
     name: PredictionQueryToken
     spec.typeScript:
@@ -5457,6 +5973,18 @@ references:
         fullName: TrainingAPIClientTrainProjectOptionalParams
         uid: >-
           @azure/cognitiveservices-customvision-training.TrainingAPIClientTrainProjectOptionalParams
+  - uid: >-
+      ServiceCallback<@azure/cognitiveservices-customvision-training.ImageMetadataUpdateSummary>
+    name: ImageMetadataUpdateSummary>
+    spec.typeScript:
+      - name: ServiceCallback<
+        fullName: ServiceCallback<
+      - name: ImageMetadataUpdateSummary
+        fullName: ImageMetadataUpdateSummary
+        uid: >-
+          @azure/cognitiveservices-customvision-training.ImageMetadataUpdateSummary
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/cognitiveservices-customvision-training.Iteration'
     name: Iteration
     spec.typeScript:

@@ -19,6 +19,10 @@ items:
       - >-
         @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.minCount
       - >-
+        @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.mode
+      - >-
+        @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.nodeImageVersion
+      - >-
         @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.nodeLabels
       - >-
         @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.nodeTaints
@@ -31,6 +35,8 @@ items:
       - >-
         @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.provisioningState
       - >-
+        @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.proximityPlacementGroupID
+      - >-
         @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.scaleSetEvictionPolicy
       - >-
         @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.scaleSetPriority
@@ -40,6 +46,8 @@ items:
         @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.tags
       - >-
         @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.type
+      - >-
+        @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.upgradeSettings
       - >-
         @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.vmSize
       - >-
@@ -77,14 +85,18 @@ items:
     type: property
     summary: >-
       Number of agents (VMs) to host docker containers. Allowed values must be
-      in the range of 1 to
+      in the range of 0 to
 
-      100 (inclusive). The default value is 1. Default value: 1.
+      100 (inclusive) for user pools and in the range of 1 to 100 (inclusive)
+      for system pools. The
+
+      default value is 1.
+    optional: true
     syntax:
-      content: 'count: number'
+      content: 'count?: undefined | number'
       return:
         type:
-          - number
+          - undefined | number
         description: ''
     package: '@azure/arm-containerservice'
   - uid: >-
@@ -170,6 +182,41 @@ items:
       return:
         type:
           - undefined | number
+        description: ''
+    package: '@azure/arm-containerservice'
+  - uid: '@azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.mode'
+    name: mode
+    fullName: mode
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      AgentPoolMode represents mode of an agent pool. Possible values include:
+      'System', 'User'
+    optional: true
+    syntax:
+      content: 'mode?: AgentPoolMode'
+      return:
+        type:
+          - '@azure/arm-containerservice.AgentPoolMode'
+        description: ''
+    package: '@azure/arm-containerservice'
+  - uid: >-
+      @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.nodeImageVersion
+    name: nodeImageVersion
+    fullName: nodeImageVersion
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Version of node image
+    optional: true
+    syntax:
+      content: 'nodeImageVersion?: undefined | string'
+      return:
+        type:
+          - undefined | string
         description: ''
     package: '@azure/arm-containerservice'
   - uid: >-
@@ -293,6 +340,23 @@ items:
         description: ''
     package: '@azure/arm-containerservice'
   - uid: >-
+      @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.proximityPlacementGroupID
+    name: proximityPlacementGroupID
+    fullName: proximityPlacementGroupID
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: The ID for Proximity Placement Group.
+    optional: true
+    syntax:
+      content: 'proximityPlacementGroupID?: undefined | string'
+      return:
+        type:
+          - undefined | string
+        description: ''
+    package: '@azure/arm-containerservice'
+  - uid: >-
       @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.scaleSetEvictionPolicy
     name: scaleSetEvictionPolicy
     fullName: scaleSetEvictionPolicy
@@ -301,13 +365,13 @@ items:
       - typeScript
     type: property
     summary: >-
-      ScaleSetEvictionPolicy to be used to specify eviction policy for Spot or
-      low priority virtual
+      ScaleSetEvictionPolicy to be used to specify eviction policy for Spot
+      virtual machine scale
 
-      machine scale set. Default to Delete. Possible values include: 'Delete',
-      'Deallocate'. Default
+      set. Default to Delete. Possible values include: 'Delete', 'Deallocate'.
+      Default value:
 
-      value: 'Delete'.
+      'Delete'.
     optional: true
     syntax:
       content: 'scaleSetEvictionPolicy?: ScaleSetEvictionPolicy'
@@ -328,8 +392,7 @@ items:
       ScaleSetPriority to be used to specify virtual machine scale set priority.
       Default to regular.
 
-      Possible values include: 'Spot', 'Low', 'Regular'. Default value:
-      'Regular'.
+      Possible values include: 'Spot', 'Regular'. Default value: 'Regular'.
     optional: true
     syntax:
       content: 'scaleSetPriority?: ScaleSetPriority'
@@ -396,6 +459,23 @@ items:
       return:
         type:
           - '@azure/arm-containerservice.AgentPoolType'
+        description: ''
+    package: '@azure/arm-containerservice'
+  - uid: >-
+      @azure/arm-containerservice.ManagedClusterAgentPoolProfileProperties.upgradeSettings
+    name: upgradeSettings
+    fullName: upgradeSettings
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: Settings for upgrading the agentpool
+    optional: true
+    syntax:
+      content: 'upgradeSettings?: AgentPoolUpgradeSettings'
+      return:
+        type:
+          - '@azure/arm-containerservice.AgentPoolUpgradeSettings'
         description: ''
     package: '@azure/arm-containerservice'
   - uid: >-
@@ -519,8 +599,9 @@ items:
 
       'Standard_ND24s', 'Standard_ND6s', 'Standard_NV12', 'Standard_NV24',
       'Standard_NV6'
+    optional: true
     syntax:
-      content: 'vmSize: ContainerServiceVMSizeTypes'
+      content: 'vmSize?: ContainerServiceVMSizeTypes'
       return:
         type:
           - '@azure/arm-containerservice.ContainerServiceVMSizeTypes'
@@ -544,6 +625,12 @@ items:
         description: ''
     package: '@azure/arm-containerservice'
 references:
+  - uid: '@azure/arm-containerservice.AgentPoolMode'
+    name: AgentPoolMode
+    spec.typeScript:
+      - name: AgentPoolMode
+        fullName: AgentPoolMode
+        uid: '@azure/arm-containerservice.AgentPoolMode'
   - uid: '@azure/arm-containerservice.OSType'
     name: OSType
     spec.typeScript:
@@ -568,6 +655,12 @@ references:
       - name: AgentPoolType
         fullName: AgentPoolType
         uid: '@azure/arm-containerservice.AgentPoolType'
+  - uid: '@azure/arm-containerservice.AgentPoolUpgradeSettings'
+    name: AgentPoolUpgradeSettings
+    spec.typeScript:
+      - name: AgentPoolUpgradeSettings
+        fullName: AgentPoolUpgradeSettings
+        uid: '@azure/arm-containerservice.AgentPoolUpgradeSettings'
   - uid: '@azure/arm-containerservice.ContainerServiceVMSizeTypes'
     name: ContainerServiceVMSizeTypes
     spec.typeScript:

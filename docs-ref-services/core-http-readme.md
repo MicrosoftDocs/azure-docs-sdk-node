@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: core
 ---
 
 # Azure Core HTTP client library for JavaScript - Version 1.1.6 

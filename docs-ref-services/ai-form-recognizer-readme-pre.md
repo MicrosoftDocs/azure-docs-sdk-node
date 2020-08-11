@@ -3,7 +3,7 @@ title: Azure Form Recognizer client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-form-recognizer, 
 author: maggiepint
 ms.author: magpint
-ms.date: 07/07/2020
+ms.date: 08/11/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Form Recognizer client library for JavaScript - Version 1.0.0-preview.4 
+# Azure Form Recognizer client library for JavaScript - Version 3.0.0-preview.1 
 
 
 Azure Cognitive Services [Form Recognizer](https://azure.microsoft.com/services/cognitive-services/form-recognizer/) is a cloud service that uses machine learning to recognize text and table data
@@ -20,6 +20,8 @@ from form documents. It includes the following main functionalities:
 * Custom models - Recognize field values and table data from forms. These models are trained with your own data, so they're tailored to your forms. You can then take these custom models and recognize forms. You can also manage the custom models you've created and see how close you are to the limit of custom models your account can hold.
 * Content API - Recognize text and table structures, along with their bounding box coordinates, from documents. Corresponds to the REST service's Layout API.
 * Prebuilt receipt model - Recognize data from sales receipts using a prebuilt model.
+
+**Note:** This package targets Azure Form Recognizer service API version 2.0.
 
 [Source code](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/formrecognizer/ai-form-recognizer/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/ai-form-recognizer) |
@@ -61,14 +63,12 @@ az cognitiveservices account create --kind FormRecognizer --resource-group <your
 
 ### Install the `@azure/ai-form-recognizer` package
 
-Install the Azure Form Recognizer client library for JavaScript - Version 1.0.0-preview.4 
+Install the Azure Form Recognizer client library for JavaScript - Version 3.0.0-preview.1 
  with `npm`:
 
 ```bash
 npm install @azure/ai-form-recognizer
 ```
-
-**Note:** This preview version targets Azure Form Recognizer service API version v2.0-preview.
 
 ### Create and authenticate a client
 
@@ -149,6 +149,12 @@ to illustrate using long-running operations [below](#Examples).
 ## Examples
 The following section provides several JavaScript code snippets illustrating common patterns used in the Form Recognizer client libraries.
 
+* [Recognize receipts](#recognize-receipts)
+* [Recognize content](#recognize-content)
+* [Train model](#train-model)
+* [Recognize forms using a custom model](#recognize-forms-using-a-custom-model)
+* [Listing all models](#listing-all-models)
+
 ### Recognize receipts
 
 Recognize data from sales receipts using the pre-built model.
@@ -177,7 +183,7 @@ async function main() {
 
   const receipt = receipts[0];
   console.log("First receipt:");
-  // For supported fields recognized by the service, please refer to https://westus2.dev.cognitive.microsoft.com/docs/services/form-recognizer-api-v2-preview/operations/GetAnalyzeReceiptResult.
+  // For a list of fields that are contained in the response, please refer to the "Supported fields" section at the following link: https://aka.ms/azsdk/formrecognizer/receiptfields
   const receiptTypeField = receipt.fields["ReceiptType"];
   if (receiptTypeField.valueType === "string") {
     console.log(`  Receipt Type: '${receiptTypeField.value || "<missing>"}', with confidence of ${receiptTypeField.confidence}`);
@@ -240,10 +246,8 @@ async function main() {
       `Page ${page.pageNumber}: width ${page.width} and height ${page.height} with unit ${page.unit}`
     );
     for (const table of page.tables) {
-      for (const row of table.rows) {
-        for (const cell of row.cells) {
-          console.log(`cell [${cell.rowIndex},${cell.columnIndex}] has text ${cell.text}`);
-        }
+      for (const cell of table.cells) {
+        console.log(`cell [${cell.rowIndex},${cell.columnIndex}] has text ${cell.text}`);
       }
     }
   }
@@ -335,10 +339,8 @@ async function main() {
       console.log(`Page number: ${page.pageNumber}`);
       console.log("Tables");
       for (const table of page.tables || []) {
-        for (const row of table.rows) {
-          for (const cell of row.cells) {
-            console.log(`cell (${cell.rowIndex},${cell.columnIndex}) ${cell.text}`);
-          }
+        for (const cell of table.cells) {
+          console.log(`cell (${cell.rowIndex},${cell.columnIndex}) ${cell.text}`);
         }
       }
     }

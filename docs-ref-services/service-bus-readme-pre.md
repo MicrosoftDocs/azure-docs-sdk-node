@@ -3,7 +3,7 @@ title: Azure Service Bus client library for Javascript
 keywords: Azure, javascript, SDK, API, @azure/service-bus, 
 author: maggiepint
 ms.author: magpint
-ms.date: 07/07/2020
+ms.date: 08/11/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Service Bus client library for Javascript - Version 7.0.0-preview.4 
+# Azure Service Bus client library for Javascript - Version 7.0.0-preview.5 
  (Preview)
 
 [Azure Service Bus](https://azure.microsoft.com/en-us/services/service-bus/) is a highly-reliable cloud messaging service from Microsoft.
@@ -21,7 +21,7 @@ Use the client library `@azure/service-bus` in your application to
 - Send messages to an Azure Service Bus Queue or Topic
 - Receive messages from an Azure Service Bus Queue or Subscription
 
-Resources for the v7.0.0-preview.4 of `@azure/service-bus`:
+Resources for the v7.0.0-preview.5 of `@azure/service-bus`:
 
 [Source code](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/servicebus/service-bus) |
 [Package (npm)](https://www.npmjs.com/package/@azure/service-bus) |
@@ -141,8 +141,16 @@ Once you have created an instance of a `ServiceBusClient` class, you can get a `
 using the [createReceiver][sbclient_createreceiver] method.
 
 ```javascript
-const receiver = serviceBusClient.createReceiver("my-queue", "peekLock");
+const receiver = serviceBusClient.createReceiver("my-queue");
 ```
+
+There are two `receiveMode`s available.
+
+- "peekLock" - In peekLock mode, the receiver has a lock on the message for the duration specified on the queue.
+- "receiveAndDelete" - In receiveAndDelete mode, messages are deleted from Service Bus as they are received.
+
+If the receiveMode is not provided in the options, it defaults to the "peekLock" mode.
+You can also [settle the messages](#settle-a-message) received in "peekLock" mode.
 
 You can use this receiver in one of 3 ways to receive messages:
 
@@ -231,7 +239,7 @@ There are two ways of choosing which session to open:
 1. Specify a `sessionId`, which locks a named session.
 
    ```javascript
-   const receiver = await serviceBusClient.createSessionReceiver("my-session-queue", "peekLock", {
+   const receiver = await serviceBusClient.createSessionReceiver("my-session-queue", {
      sessionId: "my-session"
    });
    ```
@@ -240,10 +248,12 @@ There are two ways of choosing which session to open:
    that is not already locked.
 
    ```javascript
-   const receiver = await serviceBusClient.createSessionReceiver("my-session-queue", "peekLock");
+   const receiver = await serviceBusClient.createSessionReceiver("my-session-queue");
    ```
 
    You can find the name of the session via the `sessionId` property on the `SessionReceiver`.
+   If the receiveMode is not provided in the options, it defaults to the "peekLock" mode.
+   You can also [settle the messages](#settle-a-message) received in "peekLock" mode.
 
 Once the receiver is created you can use choose between 3 ways to receive messages:
 
@@ -269,8 +279,10 @@ const serviceBusManagementClient = new ServiceBusManagementClient("<connectionSt
 const createQueueResponse = await serviceBusManagementClient.createQueue(queueName);
 console.log("Created queue with name - ", createQueueResponse.name);
 
-const queueRuntimeInfo = await serviceBusManagementClient.getQueueRuntimeInfo(queueName);
-console.log("Number of messages in the queue = ", queueRuntimeInfo.messageCount);
+const queueRuntimeProperties = await serviceBusManagementClient.getQueueRuntimeProperties(
+  queueName
+);
+console.log("Number of messages in the queue = ", queueRuntimeProperties.totalMessageCount);
 
 await serviceBusManagementClient.deleteQueue(queueName);
 ```
@@ -337,24 +349,24 @@ directory for detailed examples on how to use this library to send and receive m
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/tree/7dd46ad9b081183c1ebe8f028b40907ccfd63bec/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](../../../CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fservicebus%2Fservice-bus%2FREADME.png)
 
 [apiref]: https://aka.ms/azsdk/js/service-bus/docs
-[sbclient]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/classes/servicebusclient.html
-[sbclient_constructor]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/classes/servicebusclient.html#constructor
-[sbclient_createsender]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/classes/servicebusclient.html#createsender
-[sbclient_createreceiver]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/classes/servicebusclient.html#createreceiver
-[sbclient_createsessionreceiver]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/classes/servicebusclient.html#createsessionreceiver
-[sender]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/interfaces/sender.html
-[sender_send]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/interfaces/sender.html#sendmessages
-[receiver]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/interfaces/receiver.html
-[receiverreceivebatch]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/interfaces/receiver.html#receivemessages
-[receiver_subscribe]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/interfaces/receiver.html#subscribe
-[receiver_getmessageiterator]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/interfaces/receiver.html#getmessageiterator
-[sessionreceiver]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.4/interfaces/sessionreceiver.html
-[migrationguide]: https://github.com/Azure/azure-sdk-for-js/blob/%40azure/service-bus_7.0.0-preview.4/sdk/servicebus/service-bus/migrationguide.md
+[sbclient]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/classes/servicebusclient.html
+[sbclient_constructor]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/classes/servicebusclient.html#constructor
+[sbclient_createsender]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/classes/servicebusclient.html#createsender
+[sbclient_createreceiver]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/classes/servicebusclient.html#createreceiver
+[sbclient_createsessionreceiver]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/classes/servicebusclient.html#createsessionreceiver
+[sender]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/interfaces/sender.html
+[sender_send]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/interfaces/sender.html#sendmessages
+[receiver]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/interfaces/receiver.html
+[receiverreceivebatch]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/interfaces/receiver.html#receivemessages
+[receiver_subscribe]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/interfaces/receiver.html#subscribe
+[receiver_getmessageiterator]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/interfaces/receiver.html#getmessageiterator
+[sessionreceiver]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-service-bus/7.0.0-preview.5/interfaces/sessionreceiver.html
+[migrationguide]: https://github.com/Azure/azure-sdk-for-js/blob/%40azure/service-bus_7.0.0-preview.5/sdk/servicebus/service-bus/migrationguide.md
 [docsms_messagesessions]: https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-sessions
 [docsms_messagesessions_fifo]: https://docs.microsoft.com/en-us/azure/service-bus-messaging/message-sessions#first-in-first-out-fifo-pattern
 [queue_concept]: https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview#queues

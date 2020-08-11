@@ -25,6 +25,16 @@ properties:
       return:
         type: 'string[]'
         description: ''
+  - name: defaultOriginGroup
+    uid: '@azure/arm-cdn.Endpoint.defaultOriginGroup'
+    package: '@azure/arm-cdn'
+    summary: A reference to the origin group.
+    fullName: defaultOriginGroup
+    syntax:
+      content: 'defaultOriginGroup?: ResourceReference'
+      return:
+        type: <xref uid="@azure/arm-cdn.ResourceReference" />
+        description: ''
   - name: deliveryPolicy
     uid: '@azure/arm-cdn.Endpoint.deliveryPolicy'
     package: '@azure/arm-cdn'
@@ -175,18 +185,37 @@ properties:
       return:
         type: <xref uid="@azure/arm-cdn.OptimizationType" />
         description: ''
+  - name: originGroups
+    uid: '@azure/arm-cdn.Endpoint.originGroups'
+    package: '@azure/arm-cdn'
+    summary: >-
+      The origin groups comprising of origins that are used for load balancing
+      the traffic based on
+
+      availability.
+    fullName: originGroups
+    syntax:
+      content: 'originGroups?: DeepCreatedOriginGroup[]'
+      return:
+        type: '<xref uid="@azure/arm-cdn.DeepCreatedOriginGroup" />[]'
+        description: ''
   - name: originHostHeader
     uid: '@azure/arm-cdn.Endpoint.originHostHeader'
     package: '@azure/arm-cdn'
     summary: >-
-      The host header value sent to the origin with each request. If you leave
-      this blank, the
+      The host header value sent to the origin with each request. This property
+      at Endpoint is only
 
-      request hostname determines this value. Azure CDN origins, such as Web
-      Apps, Blob Storage, and
+      allowed when endpoint uses single origin and can be overridden by the same
+      property specified
 
-      Cloud Services require this host header value to match the origin hostname
-      by default.
+      at origin.If you leave this blank, the request hostname determines this
+      value. Azure CDN
+
+      origins, such as Web Apps, Blob Storage, and Cloud Services require this
+      host header value to
+
+      match the origin hostname by default.
     fullName: originHostHeader
     syntax:
       content: 'originHostHeader?: undefined | string'
@@ -225,7 +254,9 @@ properties:
       dynamic content and
 
       calculate the most optimal routes for the CDN. This is relative to the
-      origin path.
+      origin path. This
+
+      property is only relevant when using a single origin.
     fullName: probePath
     syntax:
       content: 'probePath?: undefined | string'
@@ -306,5 +337,32 @@ properties:
       content: 'type?: undefined | string'
       return:
         type: undefined | string
+        description: ''
+  - name: urlSigningKeys
+    uid: '@azure/arm-cdn.Endpoint.urlSigningKeys'
+    package: '@azure/arm-cdn'
+    summary: List of keys used to validate the signed URL hashes.
+    fullName: urlSigningKeys
+    syntax:
+      content: 'urlSigningKeys?: UrlSigningKey[]'
+      return:
+        type: '<xref uid="@azure/arm-cdn.UrlSigningKey" />[]'
+        description: ''
+  - name: webApplicationFirewallPolicyLink
+    uid: '@azure/arm-cdn.Endpoint.webApplicationFirewallPolicyLink'
+    package: '@azure/arm-cdn'
+    summary: >-
+      Defines the Web Application Firewall policy for the endpoint (if
+      applicable)
+    fullName: webApplicationFirewallPolicyLink
+    syntax:
+      content: >-
+        webApplicationFirewallPolicyLink?:
+        EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+      return:
+        type: >-
+          <xref
+          uid="@azure/arm-cdn.EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink"
+          />
         description: ''
 extends: <xref uid="@azure/arm-cdn.TrackedResource" />

@@ -13,17 +13,29 @@ summary: >-
 fullName: Origin
 type: interface
 properties:
+  - name: enabled
+    uid: '@azure/arm-cdn.Origin.enabled'
+    package: '@azure/arm-cdn'
+    summary: Origin is enabled for load balancing or not
+    fullName: enabled
+    syntax:
+      content: 'enabled?: undefined | false | true'
+      return:
+        type: undefined | false | true
+        description: ''
   - name: hostName
     uid: '@azure/arm-cdn.Origin.hostName'
     package: '@azure/arm-cdn'
     summary: >-
       The address of the origin. Domain names, IPv4 addresses, and IPv6
-      addresses are supported.
+      addresses are supported.This
+
+      should be unique across all origins in an endpoint.
     fullName: hostName
     syntax:
-      content: 'hostName: string'
+      content: 'hostName?: undefined | string'
       return:
-        type: string
+        type: undefined | string
         description: ''
   - name: httpPort
     uid: '@azure/arm-cdn.Origin.httpPort'
@@ -38,7 +50,7 @@ properties:
   - name: httpsPort
     uid: '@azure/arm-cdn.Origin.httpsPort'
     package: '@azure/arm-cdn'
-    summary: The value of the https port. Must be between 1 and 65535.
+    summary: The value of the HTTPS port. Must be between 1 and 65535.
     fullName: httpsPort
     syntax:
       content: 'httpsPort?: undefined | number'
@@ -59,16 +71,6 @@ properties:
       return:
         type: undefined | string
         description: ''
-  - name: location
-    uid: '@azure/arm-cdn.Origin.location'
-    package: '@azure/arm-cdn'
-    summary: Resource location.
-    fullName: location
-    syntax:
-      content: 'location: string'
-      return:
-        type: string
-        description: ''
   - name: name
     uid: '@azure/arm-cdn.Origin.name'
     package: '@azure/arm-cdn'
@@ -80,6 +82,112 @@ properties:
     fullName: name
     syntax:
       content: 'name?: undefined | string'
+      return:
+        type: undefined | string
+        description: ''
+  - name: originHostHeader
+    uid: '@azure/arm-cdn.Origin.originHostHeader'
+    package: '@azure/arm-cdn'
+    summary: >-
+      The host header value sent to the origin with each request. If you leave
+      this blank, the
+
+      request hostname determines this value. Azure CDN origins, such as Web
+      Apps, Blob Storage, and
+
+      Cloud Services require this host header value to match the origin hostname
+      by default. This
+
+      overrides the host header defined at Endpoint
+    fullName: originHostHeader
+    syntax:
+      content: 'originHostHeader?: undefined | string'
+      return:
+        type: undefined | string
+        description: ''
+  - name: priority
+    uid: '@azure/arm-cdn.Origin.priority'
+    package: '@azure/arm-cdn'
+    summary: >-
+      Priority of origin in given origin group for load balancing. Higher
+      priorities will not be
+
+      used for load balancing if any lower priority origin is healthy.Must be
+      between 1 and 5
+    fullName: priority
+    syntax:
+      content: 'priority?: undefined | number'
+      return:
+        type: undefined | number
+        description: ''
+  - name: privateEndpointStatus
+    uid: '@azure/arm-cdn.Origin.privateEndpointStatus'
+    package: '@azure/arm-cdn'
+    summary: >-
+      The approval status for the connection to the Private Link. Possible
+      values include:
+
+      'Pending', 'Approved', 'Rejected', 'Disconnected', 'Timeout'
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
+    fullName: privateEndpointStatus
+    syntax:
+      content: 'privateEndpointStatus?: PrivateEndpointStatus'
+      return:
+        type: <xref uid="@azure/arm-cdn.PrivateEndpointStatus" />
+        description: ''
+  - name: privateLinkAlias
+    uid: '@azure/arm-cdn.Origin.privateLinkAlias'
+    package: '@azure/arm-cdn'
+    summary: >-
+      The Alias of the Private Link resource. Populating this optional field
+      indicates that this
+
+      origin is 'Private'
+    fullName: privateLinkAlias
+    syntax:
+      content: 'privateLinkAlias?: undefined | string'
+      return:
+        type: undefined | string
+        description: ''
+  - name: privateLinkApprovalMessage
+    uid: '@azure/arm-cdn.Origin.privateLinkApprovalMessage'
+    package: '@azure/arm-cdn'
+    summary: >-
+      A custom message to be included in the approval request to connect to the
+      Private Link.
+    fullName: privateLinkApprovalMessage
+    syntax:
+      content: 'privateLinkApprovalMessage?: undefined | string'
+      return:
+        type: undefined | string
+        description: ''
+  - name: privateLinkLocation
+    uid: '@azure/arm-cdn.Origin.privateLinkLocation'
+    package: '@azure/arm-cdn'
+    summary: >-
+      The location of the Private Link resource. Required only if
+      'privateLinkResourceId' is
+
+      populated
+    fullName: privateLinkLocation
+    syntax:
+      content: 'privateLinkLocation?: undefined | string'
+      return:
+        type: undefined | string
+        description: ''
+  - name: privateLinkResourceId
+    uid: '@azure/arm-cdn.Origin.privateLinkResourceId'
+    package: '@azure/arm-cdn'
+    summary: >-
+      The Resource Id of the Private Link resource. Populating this optional
+      field indicates that
+
+      this backend is 'Private'
+    fullName: privateLinkResourceId
+    syntax:
+      content: 'privateLinkResourceId?: undefined | string'
       return:
         type: undefined | string
         description: ''
@@ -112,16 +220,6 @@ properties:
       return:
         type: <xref uid="@azure/arm-cdn.OriginResourceState" />
         description: ''
-  - name: tags
-    uid: '@azure/arm-cdn.Origin.tags'
-    package: '@azure/arm-cdn'
-    summary: Resource tags.
-    fullName: tags
-    syntax:
-      content: 'tags?: undefined | [key: string]: string'
-      return:
-        type: 'undefined | [key: string]: string'
-        description: ''
   - name: type
     uid: '@azure/arm-cdn.Origin.type'
     package: '@azure/arm-cdn'
@@ -136,4 +234,16 @@ properties:
       return:
         type: undefined | string
         description: ''
-extends: <xref uid="@azure/arm-cdn.TrackedResource" />
+  - name: weight
+    uid: '@azure/arm-cdn.Origin.weight'
+    package: '@azure/arm-cdn'
+    summary: >-
+      Weight of the origin in given origin group for load balancing. Must be
+      between 1 and 1000
+    fullName: weight
+    syntax:
+      content: 'weight?: undefined | number'
+      return:
+        type: undefined | number
+        description: ''
+extends: <xref uid="@azure/arm-cdn.ProxyResource" />

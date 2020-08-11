@@ -17,6 +17,51 @@ properties:
         type: <xref uid="@azure/cosmos.Container" />
         description: ''
 methods:
+  - name: 'bulk(OperationInput[], RequestOptions)'
+    uid: '@azure/cosmos.Items.bulk'
+    package: '@azure/cosmos'
+    summary: >
+      Execute bulk operations on items.
+
+      Bulk takes an array of Operations which are typed based on what the
+      operation does.
+
+      The choices are: Create, Upsert, Read, Replace, and Delete
+
+
+      Usage example:
+
+
+      // partitionKey is optional at the top level if present in the
+      resourceBody
+
+      const operations: OperationInput[] = [
+         {
+            operationType: "Create",
+            resourceBody: { id: "doc1", name: "sample", key: "A" }
+         },
+         {
+            operationType: "Upsert",
+            partitionKey: 'A',
+            resourceBody: { id: "doc2", name: "other", key: "A" }
+         }
+      ]
+
+
+      await database.container.items.bulk(operation)
+    syntax:
+      content: 'function bulk(operations: OperationInput[], options?: RequestOptions)'
+      parameters:
+        - id: operations
+          type: '<xref uid="@azure/cosmos.OperationInput" />[]'
+          description: ''
+        - id: options
+          type: <xref uid="@azure/cosmos.RequestOptions" />
+          description: |
+            Used for modifying the request.
+      return:
+        type: 'Promise&lt;<xref uid="@azure/cosmos.OperationResponse" />[]&gt;'
+        description: ''
   - name: changeFeed(ChangeFeedOptions)
     uid: '@azure/cosmos.Items.changeFeed_1'
     package: '@azure/cosmos'

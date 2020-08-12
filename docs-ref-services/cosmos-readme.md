@@ -11,7 +11,7 @@ ms.devlang: JavaScript
 ms.service: cosmos-db
 ---
 
-# Azure Cosmos DB client library for JavaScript/TypeScript - Version 3.8.0 
+# Azure Cosmos DB client library for JavaScript/TypeScript - Version 3.8.1
 
 [![latest npm badge](https://img.shields.io/npm/v/%40azure%2Fcosmos/latest.svg)][npm]
 [![Build Status](https://dev.azure.com/azure-sdk/public/_apis/build/status/js/js%20-%20cosmosdb%20-%20ci?branchName=master)](https://dev.azure.com/azure-sdk/public/_build/latest?definitionId=850&branchName=master)

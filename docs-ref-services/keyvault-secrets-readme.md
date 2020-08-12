@@ -532,9 +532,9 @@ setLogLevel("info");
 
 You can find more code samples through the following links:
 
-- [KeyVault Secrets Samples (JavaScript)](./samples/javascript)
-- [KeyVault Secrets Samples (TypeScript)](./samples/typescript)
-- [KeyVault Secrets Test Cases](./test/)
+- [KeyVault Secrets Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-secrets/samples/javascript)
+- [KeyVault Secrets Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-secrets/samples/typescript)
+- [KeyVault Secrets Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-secrets/test/)
 
 ## Contributing
 

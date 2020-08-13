@@ -15,7 +15,7 @@ ms.service:
 
 
 Azure Key Vault is a service that allows you to encrypt authentication keys, storage account keys, data encryption keys, .pfx files, and passwords by using secured keys.
-If you would like to know more about Azure Key Vault, you may want to review: [What is Azure Key Vault?](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-overview)
+If you would like to know more about Azure Key Vault, you may want to review: [What is Azure Key Vault?](https://docs.microsoft.com/azure/key-vault/key-vault-overview)
 
 Azure Key Vault Certificates allows you to securely manage, store and
 tightly control your certificates.
@@ -32,12 +32,12 @@ Use the client library for Azure Key Vault Certificates in your Node.js applicat
 
 > Note: This package cannot be used in the browser due to Azure Key Vault service limitations.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-certificates) | [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-certificates) | [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-certificates) | [Product documentation](https://azure.microsoft.com/en-us/services/key-vault/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-certificates/samples)
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-certificates) | [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-certificates) | [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-certificates) | [Product documentation](https://azure.microsoft.com/services/key-vault/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-certificates/samples)
 
 ## Getting started
 
 **Prerequisites**: You must have an [Azure subscription](https://azure.microsoft.com/free/) and a
-[Key Vault resource](https://docs.microsoft.com/en-us/azure/key-vault/quick-create-portal) to use this package.
+[Key Vault resource](https://docs.microsoft.com/azure/key-vault/quick-create-portal) to use this package.
 
 If you are using this package in a Node.js application, then use Node.js 8.x or higher.
 
@@ -147,7 +147,7 @@ const client = new CertificateClient(url, credential);
   query.
 - **Soft delete** allows Key Vaults to support deletion and purging as two
   separate steps, so deleted certificates are not immediately lost. This only happens if the Key Vault
-  has [soft-delete](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-ovw-soft-delete)
+  has [soft-delete](https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete)
   enabled.
 - A **Certificate backup** can be generated from any created certificate. These backups come as
   binary data, and can only be used to regenerate a previously deleted certificate.
@@ -548,7 +548,7 @@ main();
 The `beginDeleteCertificate` method sets a certificate up for deletion. This process will
 happen in the background as soon as the necessary resources are available.
 
-If [soft-delete](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-ovw-soft-delete)
+If [soft-delete](https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete)
 is enabled for the Key Vault, this operation will only label the certificate as a
 _deleted_ certificate. A deleted certificate can't be updated. They can only be either
 read, recovered or purged.
@@ -699,4 +699,3 @@ You can find more code samples through the following links:
 If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-certificates%2FREADME.png)
-

@@ -1,17 +1,18 @@
 ---
 title: Azure Cosmos DB client library for JavaScript
-keywords: Azure, JavaScript, SDK, API, cosmosdb, cosmos
+keywords: Azure, javascript, SDK, API, @azure/cosmos, 
 author: maggiepint
 ms.author: magpint
-ms.date: 08/10/2020
+ms.date: 08/14/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: JavaScript
-ms.service: cosmos-db
+ms.devlang: javascript
+ms.service: 
 ---
 
-# Azure Cosmos DB client library for JavaScript/TypeScript - Version 3.8.1
+# Azure Cosmos DB client library for JavaScript - Version 3.9.0 
+/TypeScript
 
 [![latest npm badge](https://img.shields.io/npm/v/%40azure%2Fcosmos/latest.svg)][npm]
 [![Build Status](https://dev.azure.com/azure-sdk/public/_apis/build/status/js/js%20-%20cosmosdb%20-%20ci?branchName=master)](https://dev.azure.com/azure-sdk/public/_build/latest?definitionId=850&branchName=master)
@@ -275,3 +276,4 @@ If you'd like to contribute to this library, please read the [contributing guide
 [cosmos_sql_queries]: https://docs.microsoft.com/azure/cosmos-db/how-to-sql-query
 [cosmos_ttl]: https://docs.microsoft.com/azure/cosmos-db/time-to-live
 [npm]: https://www.npmjs.com/package/@azure/cosmos
+

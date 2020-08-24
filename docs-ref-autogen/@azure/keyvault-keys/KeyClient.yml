@@ -471,7 +471,7 @@ items:
         description: ''
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.KeyClient.constructor'
-    name: 'KeyClient(string, TokenCredential, PipelineOptions)'
+    name: 'KeyClient(string, TokenCredential, KeyClientOptions)'
     children: []
     type: constructor
     langs:
@@ -491,7 +491,7 @@ items:
     syntax:
       content: >-
         new KeyClient(vaultUrl: string, credential: TokenCredential,
-        pipelineOptions?: PipelineOptions)
+        pipelineOptions?: KeyClientOptions)
       parameters:
         - id: vaultUrl
           type:
@@ -508,7 +508,7 @@ items:
             package to create a credential that suits your needs.
         - id: pipelineOptions
           type:
-            - PipelineOptions
+            - '@azure/keyvault-keys.KeyClientOptions'
           description: ''
           optional: true
     package: '@azure/keyvault-keys'
@@ -532,7 +532,6 @@ items:
       let client = new KeyClient(url, credentials);
 
       for await (const deletedKey of client.listDeletedKeys()) {
-        const deletedKey = await client.getKey(deletedKey.name);
         console.log("deleted key: ", deletedKey);
       }
 
@@ -547,9 +546,7 @@ items:
           optional: true
       return:
         type:
-          - >-
-            PagedAsyncIterableIterator<@azure/keyvault-keys.DeletedKey,
-            @azure/keyvault-keys.DeletedKey[]>
+          - PagedAsyncIterableIterator<@azure/keyvault-keys.DeletedKey>
         description: ''
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.KeyClient.listPropertiesOfKeys'
@@ -587,9 +584,7 @@ items:
           optional: true
       return:
         type:
-          - >-
-            PagedAsyncIterableIterator<@azure/keyvault-keys.KeyProperties,
-            @azure/keyvault-keys.KeyProperties[]>
+          - PagedAsyncIterableIterator<@azure/keyvault-keys.KeyProperties>
         description: ''
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.KeyClient.listPropertiesOfKeyVersions'
@@ -633,9 +628,7 @@ items:
           optional: true
       return:
         type:
-          - >-
-            PagedAsyncIterableIterator<@azure/keyvault-keys.KeyProperties,
-            @azure/keyvault-keys.KeyProperties[]>
+          - PagedAsyncIterableIterator<@azure/keyvault-keys.KeyProperties>
         description: ''
     package: '@azure/keyvault-keys'
   - uid: '@azure/keyvault-keys.KeyClient.purgeDeletedKey'
@@ -752,8 +745,8 @@ items:
 
       let key = await client.getKey(keyName);
 
-      let result = await client.updateKeyProperties(keyName, key.version, {
-      enabled: false });
+      let result = await client.updateKeyProperties(keyName,
+      key.properties.version, { enabled: false });
 
       ```
     syntax:
@@ -795,6 +788,12 @@ items:
         description: ''
     package: '@azure/keyvault-keys'
 references:
+  - uid: '@azure/keyvault-keys.KeyClientOptions'
+    name: KeyClientOptions
+    spec.typeScript:
+      - name: KeyClientOptions
+        fullName: KeyClientOptions
+        uid: '@azure/keyvault-keys.KeyClientOptions'
   - uid: '@azure/keyvault-keys.BackupKeyOptions'
     name: BackupKeyOptions
     spec.typeScript:
@@ -904,46 +903,32 @@ references:
       - name: ListDeletedKeysOptions
         fullName: ListDeletedKeysOptions
         uid: '@azure/keyvault-keys.ListDeletedKeysOptions'
-  - uid: >-
-      PagedAsyncIterableIterator<@azure/keyvault-keys.DeletedKey,
-      @azure/keyvault-keys.DeletedKey[]>
-    name: 'DeletedKey[]>'
+  - uid: PagedAsyncIterableIterator<@azure/keyvault-keys.DeletedKey>
+    name: DeletedKey>
     spec.typeScript:
       - name: PagedAsyncIterableIterator<
         fullName: PagedAsyncIterableIterator<
       - name: DeletedKey
         fullName: DeletedKey
         uid: '@azure/keyvault-keys.DeletedKey'
-      - name: ', '
-        fullName: ', '
-      - name: DeletedKey
-        fullName: DeletedKey
-        uid: '@azure/keyvault-keys.DeletedKey'
-      - name: '[]>'
-        fullName: '[]>'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/keyvault-keys.ListPropertiesOfKeyVersionsOptions'
     name: ListPropertiesOfKeyVersionsOptions
     spec.typeScript:
       - name: ListPropertiesOfKeyVersionsOptions
         fullName: ListPropertiesOfKeyVersionsOptions
         uid: '@azure/keyvault-keys.ListPropertiesOfKeyVersionsOptions'
-  - uid: >-
-      PagedAsyncIterableIterator<@azure/keyvault-keys.KeyProperties,
-      @azure/keyvault-keys.KeyProperties[]>
-    name: 'KeyProperties[]>'
+  - uid: PagedAsyncIterableIterator<@azure/keyvault-keys.KeyProperties>
+    name: KeyProperties>
     spec.typeScript:
       - name: PagedAsyncIterableIterator<
         fullName: PagedAsyncIterableIterator<
       - name: KeyProperties
         fullName: KeyProperties
         uid: '@azure/keyvault-keys.KeyProperties'
-      - name: ', '
-        fullName: ', '
-      - name: KeyProperties
-        fullName: KeyProperties
-        uid: '@azure/keyvault-keys.KeyProperties'
-      - name: '[]>'
-        fullName: '[]>'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/keyvault-keys.ListPropertiesOfKeysOptions'
     name: ListPropertiesOfKeysOptions
     spec.typeScript:

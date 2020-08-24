@@ -4,33 +4,34 @@ items:
     name: ServiceBusManagementClient
     fullName: ServiceBusManagementClient
     children:
-      - '@azure/service-bus.ServiceBusManagementClient.createQueue_1'
       - '@azure/service-bus.ServiceBusManagementClient.createQueue'
       - '@azure/service-bus.ServiceBusManagementClient.createRule'
+      - '@azure/service-bus.ServiceBusManagementClient.createRule_1'
       - '@azure/service-bus.ServiceBusManagementClient.createSubscription'
-      - '@azure/service-bus.ServiceBusManagementClient.createSubscription_1'
       - '@azure/service-bus.ServiceBusManagementClient.createTopic'
-      - '@azure/service-bus.ServiceBusManagementClient.createTopic_1'
       - '@azure/service-bus.ServiceBusManagementClient.deleteQueue'
       - '@azure/service-bus.ServiceBusManagementClient.deleteRule'
       - '@azure/service-bus.ServiceBusManagementClient.deleteSubscription'
       - '@azure/service-bus.ServiceBusManagementClient.deleteTopic'
       - '@azure/service-bus.ServiceBusManagementClient.getNamespaceProperties'
       - '@azure/service-bus.ServiceBusManagementClient.getQueue'
-      - '@azure/service-bus.ServiceBusManagementClient.getQueueRuntimeInfo'
-      - '@azure/service-bus.ServiceBusManagementClient.getQueues'
-      - '@azure/service-bus.ServiceBusManagementClient.getQueuesRuntimeInfo'
+      - '@azure/service-bus.ServiceBusManagementClient.getQueueRuntimeProperties'
       - '@azure/service-bus.ServiceBusManagementClient.getRule'
-      - '@azure/service-bus.ServiceBusManagementClient.getRules'
       - '@azure/service-bus.ServiceBusManagementClient.getSubscription'
-      - '@azure/service-bus.ServiceBusManagementClient.getSubscriptionRuntimeInfo'
-      - '@azure/service-bus.ServiceBusManagementClient.getSubscriptions'
       - >-
-        @azure/service-bus.ServiceBusManagementClient.getSubscriptionsRuntimeInfo
+        @azure/service-bus.ServiceBusManagementClient.getSubscriptionRuntimeProperties
       - '@azure/service-bus.ServiceBusManagementClient.getTopic'
-      - '@azure/service-bus.ServiceBusManagementClient.getTopicRuntimeInfo'
-      - '@azure/service-bus.ServiceBusManagementClient.getTopics'
-      - '@azure/service-bus.ServiceBusManagementClient.getTopicsRuntimeInfo'
+      - '@azure/service-bus.ServiceBusManagementClient.getTopicRuntimeProperties'
+      - '@azure/service-bus.ServiceBusManagementClient.listQueues'
+      - >-
+        @azure/service-bus.ServiceBusManagementClient.listQueuesRuntimeProperties
+      - '@azure/service-bus.ServiceBusManagementClient.listRules'
+      - '@azure/service-bus.ServiceBusManagementClient.listSubscriptions'
+      - >-
+        @azure/service-bus.ServiceBusManagementClient.listSubscriptionsRuntimeProperties
+      - '@azure/service-bus.ServiceBusManagementClient.listTopics'
+      - >-
+        @azure/service-bus.ServiceBusManagementClient.listTopicsRuntimeProperties
       - '@azure/service-bus.ServiceBusManagementClient.queueExists'
       - '@azure/service-bus.ServiceBusManagementClient.sendOperationRequest'
       - '@azure/service-bus.ServiceBusManagementClient.sendRequest'
@@ -56,64 +57,27 @@ items:
     extends:
       name: ServiceClient
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.createQueue_1'
-    name: 'createQueue(QueueDescription, OperationOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Creates a queue configured using the given options
-    syntax:
-      content: >-
-        function createQueue(queue: QueueDescription, operationOptions?:
-        OperationOptions)
-      parameters:
-        - id: queue
-          type:
-            - '@azure/service-bus.QueueDescription'
-          description: >-
-            Options to configure the Queue being created.
-
-            For example, you can configure a queue to support partitions or
-            sessions.
-        - id: operationOptions
-          type:
-            - OperationOptions
-          description: >-
-            The options that can be used to abort, trace and control other
-            configurations on the HTTP request.
-
-
-            Following are errors that can be expected from this operation
-          optional: true
-      return:
-        type:
-          - Promise<@azure/service-bus.QueueResponse>
-        description: ''
-    package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.createQueue'
-    name: 'createQueue(string, OperationOptions)'
+    name: 'createQueue(string, CreateQueueOptions)'
     children: []
     type: method
     langs:
       - typeScript
     summary: 'Creates a queue with given name, configured using the given options'
     syntax:
-      content: >-
-        function createQueue(queueName: string, operationOptions?:
-        OperationOptions)
+      content: 'function createQueue(queueName: string, options?: CreateQueueOptions)'
       parameters:
         - id: queueName
           type:
             - string
           description: ''
-        - id: operationOptions
+        - id: options
           type:
-            - OperationOptions
+            - '@azure/service-bus.CreateQueueOptions'
           description: >-
-            The options that can be used to abort, trace and control other
-            configurations on the HTTP request.
-
+            Options to configure the Queue being created(For example, you can
+            configure a queue to support partitions or sessions)
+             and the operation options that can be used to abort, trace and control other configurations on the HTTP request.
 
             Following are errors that can be expected from this operation
           optional: true
@@ -123,7 +87,9 @@ items:
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.createRule'
-    name: 'createRule(string, string, RuleDescription, OperationOptions)'
+    name: >-
+      createRule(string, string, string, SqlRuleFilter | CorrelationRuleFilter,
+      OperationOptions)
     children: []
     type: method
     langs:
@@ -131,8 +97,9 @@ items:
     summary: 'Creates a rule with given name, configured using the given options.'
     syntax:
       content: >-
-        function createRule(topicName: string, subscriptionName: string, rule:
-        RuleDescription, operationOptions?: OperationOptions)
+        function createRule(topicName: string, subscriptionName: string,
+        ruleName: string, ruleFilter: SqlRuleFilter | CorrelationRuleFilter,
+        operationOptions?: OperationOptions)
       parameters:
         - id: topicName
           type:
@@ -142,10 +109,70 @@ items:
           type:
             - string
           description: ''
-        - id: rule
+        - id: ruleName
           type:
-            - '@azure/service-bus.RuleDescription'
+            - string
           description: ''
+        - id: ruleFilter
+          type:
+            - >-
+              @azure/service-bus.SqlRuleFilter |
+              @azure/service-bus.CorrelationRuleFilter
+          description: Defines the filter expression that the rule evaluates.
+        - id: operationOptions
+          type:
+            - OperationOptions
+          description: >-
+            The options that can be used to abort, trace and control other
+            configurations on the HTTP request.
+
+
+            Following are errors that can be expected from this operation
+          optional: true
+      return:
+        type:
+          - Promise<@azure/service-bus.RuleResponse>
+        description: ''
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.ServiceBusManagementClient.createRule_1'
+    name: >-
+      createRule(string, string, string, SqlRuleFilter | CorrelationRuleFilter,
+      SqlRuleAction, OperationOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: 'Creates a rule with given name, configured using the given options.'
+    syntax:
+      content: >-
+        function createRule(topicName: string, subscriptionName: string,
+        ruleName: string, ruleFilter: SqlRuleFilter | CorrelationRuleFilter,
+        ruleAction: SqlRuleAction, operationOptions?: OperationOptions)
+      parameters:
+        - id: topicName
+          type:
+            - string
+          description: ''
+        - id: subscriptionName
+          type:
+            - string
+          description: ''
+        - id: ruleName
+          type:
+            - string
+          description: ''
+        - id: ruleFilter
+          type:
+            - >-
+              @azure/service-bus.SqlRuleFilter |
+              @azure/service-bus.CorrelationRuleFilter
+          description: Defines the filter expression that the rule evaluates.
+        - id: ruleAction
+          type:
+            - '@azure/service-bus.SqlRuleAction'
+          description: >-
+            The SQL like expression that can be executed on the message should
+            the associated filter apply.
         - id: operationOptions
           type:
             - OperationOptions
@@ -162,7 +189,7 @@ items:
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.createSubscription'
-    name: 'createSubscription(string, string, OperationOptions)'
+    name: 'createSubscription(string, string, CreateSubscriptionOptions)'
     children: []
     type: method
     langs:
@@ -171,7 +198,7 @@ items:
     syntax:
       content: >-
         function createSubscription(topicName: string, subscriptionName: string,
-        operationOptions?: OperationOptions)
+        options?: CreateSubscriptionOptions)
       parameters:
         - id: topicName
           type:
@@ -181,47 +208,15 @@ items:
           type:
             - string
           description: ''
-        - id: operationOptions
+        - id: options
           type:
-            - OperationOptions
+            - '@azure/service-bus.CreateSubscriptionOptions'
           description: >-
-            The options that can be used to abort, trace and control other
-            configurations on the HTTP request.
+            Options to configure the Subscription being created(For example, you
+            can configure a Subscription to support partitions or sessions)
 
-
-            Following are errors that can be expected from this operation
-          optional: true
-      return:
-        type:
-          - Promise<@azure/service-bus.SubscriptionResponse>
-        description: ''
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.createSubscription_1'
-    name: 'createSubscription(SubscriptionDescription, OperationOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: 'Creates a subscription with given name, configured using the given options'
-    syntax:
-      content: >-
-        function createSubscription(subscription: SubscriptionDescription,
-        operationOptions?: OperationOptions)
-      parameters:
-        - id: subscription
-          type:
-            - '@azure/service-bus.SubscriptionDescription'
-          description: >-
-            Options to configure the Subscription being created.
-
-            For example, you can configure a Subscription to support partitions
-            or sessions.
-        - id: operationOptions
-          type:
-            - OperationOptions
-          description: >-
-            The options that can be used to abort, trace and control other
-            configurations on the HTTP request.
+            and the operation options that can be used to abort, trace and
+            control other configurations on the HTTP request.
 
 
             Following are errors that can be expected from this operation
@@ -232,62 +227,28 @@ items:
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.createTopic'
-    name: 'createTopic(string, OperationOptions)'
+    name: 'createTopic(string, CreateTopicOptions)'
     children: []
     type: method
     langs:
       - typeScript
     summary: 'Creates a topic with given name, configured using the given options'
     syntax:
-      content: >-
-        function createTopic(topicName: string, operationOptions?:
-        OperationOptions)
+      content: 'function createTopic(topicName: string, options?: CreateTopicOptions)'
       parameters:
         - id: topicName
           type:
             - string
           description: ''
-        - id: operationOptions
+        - id: options
           type:
-            - OperationOptions
+            - '@azure/service-bus.CreateTopicOptions'
           description: >-
-            The options that can be used to abort, trace and control other
-            configurations on the HTTP request.
+            Options to configure the Topic being created(For example, you can
+            configure a topic to support partitions)
 
-
-            Following are errors that can be expected from this operation
-          optional: true
-      return:
-        type:
-          - Promise<@azure/service-bus.TopicResponse>
-        description: ''
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.createTopic_1'
-    name: 'createTopic(TopicDescription, OperationOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: 'Creates a topic with given name, configured using the given options'
-    syntax:
-      content: >-
-        function createTopic(topic: TopicDescription, operationOptions?:
-        OperationOptions)
-      parameters:
-        - id: topic
-          type:
-            - '@azure/service-bus.TopicDescription'
-          description: >-
-            Options to configure the Topic being created.
-
-            For example, you can configure a topic to support partitions or
-            sessions.
-        - id: operationOptions
-          type:
-            - OperationOptions
-          description: >-
-            The options that can be used to abort, trace and control other
-            configurations on the HTTP request.
+            and the operation options that can be used to abort, trace and
+            control other configurations on the HTTP request.
 
 
             Following are errors that can be expected from this operation
@@ -468,7 +429,7 @@ items:
       Returns an object representing the Queue and its properties.
 
       If you want to get the Queue runtime info like message count details, use
-      `getQueueRuntimeInfo` API.
+      `getQueueRuntimeProperties` API.
     syntax:
       content: >-
         function getQueue(queueName: string, operationOptions?:
@@ -493,8 +454,8 @@ items:
           - Promise<@azure/service-bus.QueueResponse>
         description: ''
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.getQueueRuntimeInfo'
-    name: 'getQueueRuntimeInfo(string, OperationOptions)'
+  - uid: '@azure/service-bus.ServiceBusManagementClient.getQueueRuntimeProperties'
+    name: 'getQueueRuntimeProperties(string, OperationOptions)'
     children: []
     type: method
     langs:
@@ -504,7 +465,7 @@ items:
       details.
     syntax:
       content: >-
-        function getQueueRuntimeInfo(queueName: string, operationOptions?:
+        function getQueueRuntimeProperties(queueName: string, operationOptions?:
         OperationOptions)
       parameters:
         - id: queueName
@@ -523,68 +484,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/service-bus.QueueRuntimeInfoResponse>
-        description: ''
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.getQueues'
-    name: getQueues(ListRequestOptions & OperationOptions)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Returns a list of objects, each representing a Queue along with its
-      properties.
-
-      If you want to get the runtime info of the queues like message count, use
-      `getQueuesRuntimeInfo` API instead.
-    syntax:
-      content: 'function getQueues(options?: ListRequestOptions & OperationOptions)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/service-bus.ListRequestOptions & OperationOptions'
-          description: >-
-            The options include the maxCount and the count of entities to skip,
-            the operation options that can be used to abort, trace and control
-            other configurations on the HTTP request.
-
-
-            Following are errors that can be expected from this operation
-          optional: true
-      return:
-        type:
-          - Promise<@azure/service-bus.QueuesResponse>
-        description: ''
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.getQueuesRuntimeInfo'
-    name: getQueuesRuntimeInfo(ListRequestOptions & OperationOptions)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Returns a list of objects, each representing a Queue's runtime info like
-      message count details.
-    syntax:
-      content: >-
-        function getQueuesRuntimeInfo(options?: ListRequestOptions &
-        OperationOptions)
-      parameters:
-        - id: options
-          type:
-            - '@azure/service-bus.ListRequestOptions & OperationOptions'
-          description: >-
-            The options include the maxCount and the count of entities to skip,
-            the operation options that can be used to abort, trace and control
-            other configurations on the HTTP request.
-
-
-            Following are errors that can be expected from this operation
-          optional: true
-      return:
-        type:
-          - Promise<@azure/service-bus.QueuesRuntimeInfoResponse>
+          - Promise<@azure/service-bus.QueueRuntimePropertiesResponse>
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.getRule'
@@ -628,42 +528,6 @@ items:
           - Promise<@azure/service-bus.RuleResponse>
         description: ''
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.getRules'
-    name: 'getRules(string, string, ListRequestOptions & OperationOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: Lists existing rules.
-    syntax:
-      content: >-
-        function getRules(topicName: string, subscriptionName: string, options?:
-        ListRequestOptions & OperationOptions)
-      parameters:
-        - id: topicName
-          type:
-            - string
-          description: ''
-        - id: subscriptionName
-          type:
-            - string
-          description: ''
-        - id: options
-          type:
-            - '@azure/service-bus.ListRequestOptions & OperationOptions'
-          description: >-
-            The options include the maxCount and the count of entities to skip,
-            the operation options that can be used to abort, trace and control
-            other configurations on the HTTP request.
-
-
-            Following are errors that can be expected from this operation
-          optional: true
-      return:
-        type:
-          - Promise<@azure/service-bus.RulesResponse>
-        description: ''
-    package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.getSubscription'
     name: 'getSubscription(string, string, OperationOptions)'
     children: []
@@ -674,7 +538,7 @@ items:
       Returns an object representing the Subscription and its properties.
 
       If you want to get the Subscription runtime info like message count
-      details, use `getSubscriptionRuntimeInfo` API.
+      details, use `getSubscriptionRuntimeProperties` API.
     syntax:
       content: >-
         function getSubscription(topicName: string, subscriptionName: string,
@@ -703,8 +567,9 @@ items:
           - Promise<@azure/service-bus.SubscriptionResponse>
         description: ''
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.getSubscriptionRuntimeInfo'
-    name: 'getSubscriptionRuntimeInfo(string, string, OperationOptions)'
+  - uid: >-
+      @azure/service-bus.ServiceBusManagementClient.getSubscriptionRuntimeProperties
+    name: 'getSubscriptionRuntimeProperties(string, string, OperationOptions)'
     children: []
     type: method
     langs:
@@ -714,8 +579,8 @@ items:
       count details.
     syntax:
       content: >-
-        function getSubscriptionRuntimeInfo(topicName: string, subscriptionName:
-        string, operationOptions?: OperationOptions)
+        function getSubscriptionRuntimeProperties(topicName: string,
+        subscriptionName: string, operationOptions?: OperationOptions)
       parameters:
         - id: topicName
           type:
@@ -737,78 +602,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/service-bus.SubscriptionRuntimeInfoResponse>
-        description: ''
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.getSubscriptions'
-    name: 'getSubscriptions(string, ListRequestOptions & OperationOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Returns a list of objects, each representing a Subscription along with its
-      properties.
-
-      If you want to get the runtime info of the subscriptions like message
-      count, use `getSubscriptionsRuntimeInfo` API instead.
-    syntax:
-      content: >-
-        function getSubscriptions(topicName: string, options?:
-        ListRequestOptions & OperationOptions)
-      parameters:
-        - id: topicName
-          type:
-            - string
-          description: ''
-        - id: options
-          type:
-            - '@azure/service-bus.ListRequestOptions & OperationOptions'
-          description: >-
-            The options include the maxCount and the count of entities to skip,
-            the operation options that can be used to abort, trace and control
-            other configurations on the HTTP request.
-
-
-            Following are errors that can be expected from this operation
-          optional: true
-      return:
-        type:
-          - Promise<@azure/service-bus.SubscriptionsResponse>
-        description: ''
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.getSubscriptionsRuntimeInfo'
-    name: 'getSubscriptionsRuntimeInfo(string, ListRequestOptions & OperationOptions)'
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Returns a list of objects, each representing a Subscription's runtime info
-      like message count details.
-    syntax:
-      content: >-
-        function getSubscriptionsRuntimeInfo(topicName: string, options?:
-        ListRequestOptions & OperationOptions)
-      parameters:
-        - id: topicName
-          type:
-            - string
-          description: ''
-        - id: options
-          type:
-            - '@azure/service-bus.ListRequestOptions & OperationOptions'
-          description: >-
-            The options include the maxCount and the count of entities to skip,
-            the operation options that can be used to abort, trace and control
-            other configurations on the HTTP request.
-
-
-            Following are errors that can be expected from this operation
-          optional: true
-      return:
-        type:
-          - Promise<@azure/service-bus.SubscriptionsRuntimeInfoResponse>
+          - Promise<@azure/service-bus.SubscriptionRuntimePropertiesResponse>
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.getTopic'
@@ -821,7 +615,7 @@ items:
       Returns an object representing the Topic and its properties.
 
       If you want to get the Topic runtime info like subscription count details,
-      use `getTopicRuntimeInfo` API.
+      use `getTopicRuntimeProperties` API.
     syntax:
       content: >-
         function getTopic(topicName: string, operationOptions?:
@@ -846,8 +640,8 @@ items:
           - Promise<@azure/service-bus.TopicResponse>
         description: ''
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.getTopicRuntimeInfo'
-    name: 'getTopicRuntimeInfo(string, OperationOptions)'
+  - uid: '@azure/service-bus.ServiceBusManagementClient.getTopicRuntimeProperties'
+    name: 'getTopicRuntimeProperties(string, OperationOptions)'
     children: []
     type: method
     langs:
@@ -857,7 +651,7 @@ items:
       count.
     syntax:
       content: >-
-        function getTopicRuntimeInfo(topicName: string, operationOptions?:
+        function getTopicRuntimeProperties(topicName: string, operationOptions?:
         OperationOptions)
       parameters:
         - id: topicName
@@ -876,69 +670,242 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/service-bus.TopicRuntimeInfoResponse>
+          - Promise<@azure/service-bus.TopicRuntimePropertiesResponse>
         description: ''
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.getTopics'
-    name: getTopics(ListRequestOptions & OperationOptions)
+  - uid: '@azure/service-bus.ServiceBusManagementClient.listQueues'
+    name: listQueues(OperationOptions)
     children: []
     type: method
     langs:
       - typeScript
-    summary: >-
-      Returns a list of objects, each representing a Topic along with its
-      properties.
-
-      If you want to get the runtime info of the topics like subscription count,
-      use `getTopicsRuntimeInfo` API instead.
+    summary: |
+      Returns an async iterable iterator to list all the queues.
+      .byPage() returns an async iterable iterator to list the queues in pages.
     syntax:
-      content: 'function getTopics(options?: ListRequestOptions & OperationOptions)'
+      content: 'function listQueues(options?: OperationOptions)'
       parameters:
         - id: options
           type:
-            - '@azure/service-bus.ListRequestOptions & OperationOptions'
-          description: >-
-            The options include the maxCount and the count of entities to skip,
-            the operation options that can be used to abort, trace and control
-            other configurations on the HTTP request.
-
-
-            Following are errors that can be expected from this operation
+            - OperationOptions
+          description: ''
           optional: true
       return:
         type:
-          - Promise<@azure/service-bus.TopicsResponse>
-        description: ''
+          - >-
+            PagedAsyncIterableIterator<@azure/service-bus.QueueProperties,
+            @azure/service-bus.EntitiesResponse<@azure/service-bus.QueueProperties>>
+        description: |-
+          {PagedAsyncIterableIterator<
+              QueueProperties,
+              EntitiesResponse<QueueProperties>,
+            >} An asyncIterableIterator that supports paging.
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.ServiceBusManagementClient.getTopicsRuntimeInfo'
-    name: getTopicsRuntimeInfo(ListRequestOptions & OperationOptions)
+  - uid: '@azure/service-bus.ServiceBusManagementClient.listQueuesRuntimeProperties'
+    name: listQueuesRuntimeProperties(OperationOptions)
     children: []
     type: method
     langs:
       - typeScript
-    summary: >-
-      Returns a list of objects, each representing a Topic's runtime info like
-      subscription count.
+    summary: >+
+      Returns an async iterable iterator to list runtime info of the queues.
+
+      .byPage() returns an async iterable iterator to list runtime info of the
+      queues in pages.
+
+    syntax:
+      content: 'function listQueuesRuntimeProperties(options?: OperationOptions)'
+      parameters:
+        - id: options
+          type:
+            - OperationOptions
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            PagedAsyncIterableIterator<@azure/service-bus.QueueRuntimeProperties,
+            @azure/service-bus.EntitiesResponse<@azure/service-bus.QueueRuntimeProperties>>
+        description: |-
+          {PagedAsyncIterableIterator<
+              QueueRuntimeProperties,
+              EntitiesResponse<QueueRuntimeProperties>,
+            >} An asyncIterableIterator that supports paging.
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.ServiceBusManagementClient.listRules'
+    name: 'listRules(string, string, OperationOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |
+      Returns an async iterable iterator to list all the rules
+      under the specified subscription.
+      .byPage() returns an async iterable iterator to list the rules in pages.
     syntax:
       content: >-
-        function getTopicsRuntimeInfo(options?: ListRequestOptions &
-        OperationOptions)
+        function listRules(topicName: string, subscriptionName: string,
+        options?: OperationOptions)
       parameters:
+        - id: topicName
+          type:
+            - string
+          description: ''
+        - id: subscriptionName
+          type:
+            - string
+          description: ''
         - id: options
           type:
-            - '@azure/service-bus.ListRequestOptions & OperationOptions'
-          description: >-
-            The options include the maxCount and the count of entities to skip,
-            the operation options that can be used to abort, trace and control
-            other configurations on the HTTP request.
-
-
-            Following are errors that can be expected from this operation
+            - OperationOptions
+          description: ''
           optional: true
       return:
         type:
-          - Promise<@azure/service-bus.TopicsRuntimeInfoResponse>
-        description: ''
+          - >-
+            PagedAsyncIterableIterator<@azure/service-bus.RuleProperties,
+            @azure/service-bus.EntitiesResponse<@azure/service-bus.RuleProperties>>
+        description: An asyncIterableIterator that supports paging.
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.ServiceBusManagementClient.listSubscriptions'
+    name: 'listSubscriptions(string, OperationOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Returns an async iterable iterator to list all the subscriptions
+
+      under the specified topic.
+
+      .byPage() returns an async iterable iterator to list the subscriptions in
+      pages.
+    syntax:
+      content: >-
+        function listSubscriptions(topicName: string, options?:
+        OperationOptions)
+      parameters:
+        - id: topicName
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - OperationOptions
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            PagedAsyncIterableIterator<@azure/service-bus.SubscriptionProperties,
+            @azure/service-bus.EntitiesResponse<@azure/service-bus.SubscriptionProperties>>
+        description: |-
+          {PagedAsyncIterableIterator<
+              SubscriptionProperties,
+              EntitiesResponse<SubscriptionProperties>
+            >} An asyncIterableIterator that supports paging.
+    package: '@azure/service-bus'
+  - uid: >-
+      @azure/service-bus.ServiceBusManagementClient.listSubscriptionsRuntimeProperties
+    name: 'listSubscriptionsRuntimeProperties(string, OperationOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Returns an async iterable iterator to list runtime info of the
+      subscriptions
+
+      under the specified topic.
+
+      .byPage() returns an async iterable iterator to list runtime info of
+      subscriptions in pages.
+    syntax:
+      content: >-
+        function listSubscriptionsRuntimeProperties(topicName: string, options?:
+        OperationOptions)
+      parameters:
+        - id: topicName
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - OperationOptions
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            PagedAsyncIterableIterator<@azure/service-bus.SubscriptionRuntimeProperties,
+            @azure/service-bus.EntitiesResponse<@azure/service-bus.SubscriptionRuntimeProperties>>
+        description: |-
+          {PagedAsyncIterableIterator<
+              SubscriptionRuntimeProperties,
+              EntitiesResponse<SubscriptionRuntimeProperties>,
+
+            >}  An asyncIterableIterator that supports paging.
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.ServiceBusManagementClient.listTopics'
+    name: listTopics(OperationOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: |+
+      Returns an async iterable iterator to list all the topics.
+      .byPage() returns an async iterable iterator to list the topics in pages.
+
+    syntax:
+      content: 'function listTopics(options?: OperationOptions)'
+      parameters:
+        - id: options
+          type:
+            - OperationOptions
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            PagedAsyncIterableIterator<@azure/service-bus.TopicProperties,
+            @azure/service-bus.EntitiesResponse<@azure/service-bus.TopicProperties>>
+        description: |-
+          {PagedAsyncIterableIterator<
+              TopicProperties,
+              EntitiesResponse<TopicProperties>,
+            >} An asyncIterableIterator that supports paging.
+    package: '@azure/service-bus'
+  - uid: '@azure/service-bus.ServiceBusManagementClient.listTopicsRuntimeProperties'
+    name: listTopicsRuntimeProperties(OperationOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >+
+      Returns an async iterable iterator to list runtime info of the topics.
+
+      .byPage() returns an async iterable iterator to list runtime info of the
+      topics in pages.
+
+    syntax:
+      content: 'function listTopicsRuntimeProperties(options?: OperationOptions)'
+      parameters:
+        - id: options
+          type:
+            - OperationOptions
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            PagedAsyncIterableIterator<@azure/service-bus.TopicRuntimeProperties,
+            @azure/service-bus.EntitiesResponse<@azure/service-bus.TopicRuntimeProperties>>
+        description: |-
+          {PagedAsyncIterableIterator<
+              TopicRuntimeProperties,
+              EntitiesResponse<TopicRuntimeProperties>,
+
+            >} An asyncIterableIterator that supports paging.
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.queueExists'
     name: 'queueExists(string, OperationOptions)'
@@ -1150,19 +1117,19 @@ items:
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.updateQueue'
-    name: 'updateQueue(QueueDescription, OperationOptions)'
+    name: 'updateQueue(QueueProperties, OperationOptions)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Updates the queue based on the queue description provided.
+      Updates the queue based on the queue properties provided.
 
-      All properties on the queue description must be set even though only a
-      subset of them are actually updatable.
+      All queue properties must be set even though only a subset of them are
+      actually updatable.
 
-      Therefore, the suggested flow is to use `getQueue()` to get the queue
-      description with all properties set,
+      Therefore, the suggested flow is to use `getQueue()` to get the complete
+      set of queue properties,
 
       update as needed and then pass it to `updateQueue()`.
 
@@ -1170,25 +1137,18 @@ items:
       more details.
     syntax:
       content: >-
-        function updateQueue(queue: QueueDescription, operationOptions?:
+        function updateQueue(queue: QueueProperties, operationOptions?:
         OperationOptions)
       parameters:
         - id: queue
           type:
-            - '@azure/service-bus.QueueDescription'
+            - '@azure/service-bus.QueueProperties'
           description: >-
-            Object representing the queue with one or more of the below
-            properties updated
+            Object representing the properties of the queue.
 
-            - defaultMessageTimeToLive
-
-            - lockDuration
-
-            - deadLetteringOnMessageExpiration
-
-            - duplicateDetectionHistoryTimeWindow
-
-            - maxDeliveryCount
+            `requiresSession`, `requiresDuplicateDetection`,
+            `enablePartitioning`, and `name` can't be updated after creating the
+            queue.
         - id: operationOptions
           type:
             - OperationOptions
@@ -1205,7 +1165,7 @@ items:
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.updateRule'
-    name: 'updateRule(string, string, RuleDescription, OperationOptions)'
+    name: 'updateRule(string, string, RuleProperties, OperationOptions)'
     children: []
     type: method
     langs:
@@ -1213,10 +1173,17 @@ items:
     summary: >-
       Updates properties on the Rule by the given name based on the given
       options.
+
+      All rule properties must be set even if one of them is being updated.
+
+      Therefore, the suggested flow is to use `getRule()` to get the complete
+      set of rule properties,
+
+      update as needed and then pass it to `updateRule()`.
     syntax:
       content: >-
         function updateRule(topicName: string, subscriptionName: string, rule:
-        RuleDescription, operationOptions?: OperationOptions)
+        RuleProperties, operationOptions?: OperationOptions)
       parameters:
         - id: topicName
           type:
@@ -1228,7 +1195,7 @@ items:
           description: ''
         - id: rule
           type:
-            - '@azure/service-bus.RuleDescription'
+            - '@azure/service-bus.RuleProperties'
           description: >-
             Options to configure the Rule being updated.
 
@@ -1250,35 +1217,34 @@ items:
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.updateSubscription'
-    name: 'updateSubscription(SubscriptionDescription, OperationOptions)'
+    name: 'updateSubscription(SubscriptionProperties, OperationOptions)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Updates the subscription based on the subscription description provided.
+      Updates the subscription based on the subscription properties provided.
 
-      All properties on the subscription description must be set even though
-      only a subset of them are actually updatable.
+      All subscription properties must be set even though only a subset of them
+      are actually updatable.
 
       Therefore, the suggested flow is to use `getSubscription()` to get the
-      subscription description with all properties set,
+      complete set of subscription properties,
 
       update as needed and then pass it to `updateSubscription()`.
     syntax:
       content: >-
-        function updateSubscription(subscription: SubscriptionDescription,
+        function updateSubscription(subscription: SubscriptionProperties,
         operationOptions?: OperationOptions)
       parameters:
         - id: subscription
           type:
-            - '@azure/service-bus.SubscriptionDescription'
+            - '@azure/service-bus.SubscriptionProperties'
           description: >-
-            Object representing the subscription with one or more of the below
-            properties updated
-              - lockDuration
-              - deadLetteringOnMessageExpiration
-              - maxDeliveryCount
+            Object representing the properties of the subscription.
+
+            `subscriptionName`, `topicName`, and `requiresSession` can't be
+            updated after creating the subscription.
         - id: operationOptions
           type:
             - OperationOptions
@@ -1295,19 +1261,19 @@ items:
         description: ''
     package: '@azure/service-bus'
   - uid: '@azure/service-bus.ServiceBusManagementClient.updateTopic'
-    name: 'updateTopic(TopicDescription, OperationOptions)'
+    name: 'updateTopic(TopicProperties, OperationOptions)'
     children: []
     type: method
     langs:
       - typeScript
     summary: >-
-      Updates the topic based on the topic description provided.
+      Updates the topic based on the topic properties provided.
 
-      All properties on the topic description must be set even though only a
-      subset of them are actually updatable.
+      All topic properties must be set even though only a subset of them are
+      actually updatable.
 
-      Therefore, the suggested flow is to use `getTopic()` to get the topic
-      description with all properties set,
+      Therefore, the suggested flow is to use `getTopic()` to get the complete
+      set of topic properties,
 
       update as needed and then pass it to `updateTopic()`.
 
@@ -1315,17 +1281,17 @@ items:
       more details.
     syntax:
       content: >-
-        function updateTopic(topic: TopicDescription, operationOptions?:
+        function updateTopic(topic: TopicProperties, operationOptions?:
         OperationOptions)
       parameters:
         - id: topic
           type:
-            - '@azure/service-bus.TopicDescription'
+            - '@azure/service-bus.TopicProperties'
           description: >-
-            Object representing the topic with one or more of the below
-            properties updated
-              - defaultMessageTimeToLive
-              - duplicateDetectionHistoryTimeWindow
+            Object representing the properties of the topic.
+
+            `requiresDuplicateDetection`, `enablePartitioning`, and `name` can't
+            be updated after creating the topic.
         - id: operationOptions
           type:
             - OperationOptions
@@ -1348,6 +1314,12 @@ references:
       - name: ServiceBusManagementClientOptions
         fullName: ServiceBusManagementClientOptions
         uid: '@azure/service-bus.ServiceBusManagementClientOptions'
+  - uid: '@azure/service-bus.CreateQueueOptions'
+    name: CreateQueueOptions
+    spec.typeScript:
+      - name: CreateQueueOptions
+        fullName: CreateQueueOptions
+        uid: '@azure/service-bus.CreateQueueOptions'
   - uid: Promise<@azure/service-bus.QueueResponse>
     name: QueueResponse>
     spec.typeScript:
@@ -1358,18 +1330,19 @@ references:
         uid: '@azure/service-bus.QueueResponse'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/service-bus.QueueDescription'
-    name: QueueDescription
+  - uid: >-
+      @azure/service-bus.SqlRuleFilter |
+      @azure/service-bus.CorrelationRuleFilter
+    name: CorrelationRuleFilter
     spec.typeScript:
-      - name: QueueDescription
-        fullName: QueueDescription
-        uid: '@azure/service-bus.QueueDescription'
-  - uid: '@azure/service-bus.RuleDescription'
-    name: RuleDescription
-    spec.typeScript:
-      - name: RuleDescription
-        fullName: RuleDescription
-        uid: '@azure/service-bus.RuleDescription'
+      - name: SqlRuleFilter
+        fullName: SqlRuleFilter
+        uid: '@azure/service-bus.SqlRuleFilter'
+      - name: ' | '
+        fullName: ' | '
+      - name: CorrelationRuleFilter
+        fullName: CorrelationRuleFilter
+        uid: '@azure/service-bus.CorrelationRuleFilter'
   - uid: Promise<@azure/service-bus.RuleResponse>
     name: RuleResponse>
     spec.typeScript:
@@ -1380,6 +1353,18 @@ references:
         uid: '@azure/service-bus.RuleResponse'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/service-bus.SqlRuleAction'
+    name: SqlRuleAction
+    spec.typeScript:
+      - name: SqlRuleAction
+        fullName: SqlRuleAction
+        uid: '@azure/service-bus.SqlRuleAction'
+  - uid: '@azure/service-bus.CreateSubscriptionOptions'
+    name: CreateSubscriptionOptions
+    spec.typeScript:
+      - name: CreateSubscriptionOptions
+        fullName: CreateSubscriptionOptions
+        uid: '@azure/service-bus.CreateSubscriptionOptions'
   - uid: Promise<@azure/service-bus.SubscriptionResponse>
     name: SubscriptionResponse>
     spec.typeScript:
@@ -1390,12 +1375,12 @@ references:
         uid: '@azure/service-bus.SubscriptionResponse'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/service-bus.SubscriptionDescription'
-    name: SubscriptionDescription
+  - uid: '@azure/service-bus.CreateTopicOptions'
+    name: CreateTopicOptions
     spec.typeScript:
-      - name: SubscriptionDescription
-        fullName: SubscriptionDescription
-        uid: '@azure/service-bus.SubscriptionDescription'
+      - name: CreateTopicOptions
+        fullName: CreateTopicOptions
+        uid: '@azure/service-bus.CreateTopicOptions'
   - uid: Promise<@azure/service-bus.TopicResponse>
     name: TopicResponse>
     spec.typeScript:
@@ -1406,12 +1391,6 @@ references:
         uid: '@azure/service-bus.TopicResponse'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/service-bus.TopicDescription'
-    name: TopicDescription
-    spec.typeScript:
-      - name: TopicDescription
-        fullName: TopicDescription
-        uid: '@azure/service-bus.TopicDescription'
   - uid: Promise<@azure/service-bus.Response>
     name: Response>
     spec.typeScript:
@@ -1432,111 +1411,211 @@ references:
         uid: '@azure/service-bus.NamespacePropertiesResponse'
       - name: '>'
         fullName: '>'
-  - uid: Promise<@azure/service-bus.QueueRuntimeInfoResponse>
-    name: QueueRuntimeInfoResponse>
+  - uid: Promise<@azure/service-bus.QueueRuntimePropertiesResponse>
+    name: QueueRuntimePropertiesResponse>
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
-      - name: QueueRuntimeInfoResponse
-        fullName: QueueRuntimeInfoResponse
-        uid: '@azure/service-bus.QueueRuntimeInfoResponse'
+      - name: QueueRuntimePropertiesResponse
+        fullName: QueueRuntimePropertiesResponse
+        uid: '@azure/service-bus.QueueRuntimePropertiesResponse'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/service-bus.ListRequestOptions & OperationOptions'
-    name: ListRequestOptions & OperationOptions
-    spec.typeScript:
-      - name: ListRequestOptions
-        fullName: ListRequestOptions
-        uid: '@azure/service-bus.ListRequestOptions'
-      - name: ' & OperationOptions'
-        fullName: ' & OperationOptions'
-  - uid: Promise<@azure/service-bus.QueuesResponse>
-    name: QueuesResponse>
+  - uid: Promise<@azure/service-bus.SubscriptionRuntimePropertiesResponse>
+    name: SubscriptionRuntimePropertiesResponse>
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
-      - name: QueuesResponse
-        fullName: QueuesResponse
-        uid: '@azure/service-bus.QueuesResponse'
+      - name: SubscriptionRuntimePropertiesResponse
+        fullName: SubscriptionRuntimePropertiesResponse
+        uid: '@azure/service-bus.SubscriptionRuntimePropertiesResponse'
       - name: '>'
         fullName: '>'
-  - uid: Promise<@azure/service-bus.QueuesRuntimeInfoResponse>
-    name: QueuesRuntimeInfoResponse>
+  - uid: Promise<@azure/service-bus.TopicRuntimePropertiesResponse>
+    name: TopicRuntimePropertiesResponse>
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
-      - name: QueuesRuntimeInfoResponse
-        fullName: QueuesRuntimeInfoResponse
-        uid: '@azure/service-bus.QueuesRuntimeInfoResponse'
+      - name: TopicRuntimePropertiesResponse
+        fullName: TopicRuntimePropertiesResponse
+        uid: '@azure/service-bus.TopicRuntimePropertiesResponse'
       - name: '>'
         fullName: '>'
-  - uid: Promise<@azure/service-bus.RulesResponse>
-    name: RulesResponse>
+  - uid: >-
+      PagedAsyncIterableIterator<@azure/service-bus.QueueProperties,
+      @azure/service-bus.EntitiesResponse<@azure/service-bus.QueueProperties>>
+    name: QueueProperties>>
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: RulesResponse
-        fullName: RulesResponse
-        uid: '@azure/service-bus.RulesResponse'
-      - name: '>'
-        fullName: '>'
-  - uid: Promise<@azure/service-bus.SubscriptionRuntimeInfoResponse>
-    name: SubscriptionRuntimeInfoResponse>
+      - name: PagedAsyncIterableIterator<
+        fullName: PagedAsyncIterableIterator<
+      - name: QueueProperties
+        fullName: QueueProperties
+        uid: '@azure/service-bus.QueueProperties'
+      - name: ', '
+        fullName: ', '
+      - name: EntitiesResponse
+        fullName: EntitiesResponse
+        uid: '@azure/service-bus.EntitiesResponse'
+      - name: <
+        fullName: <
+      - name: QueueProperties
+        fullName: QueueProperties
+        uid: '@azure/service-bus.QueueProperties'
+      - name: '>>'
+        fullName: '>>'
+  - uid: >-
+      PagedAsyncIterableIterator<@azure/service-bus.QueueRuntimeProperties,
+      @azure/service-bus.EntitiesResponse<@azure/service-bus.QueueRuntimeProperties>>
+    name: QueueRuntimeProperties>>
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: SubscriptionRuntimeInfoResponse
-        fullName: SubscriptionRuntimeInfoResponse
-        uid: '@azure/service-bus.SubscriptionRuntimeInfoResponse'
-      - name: '>'
-        fullName: '>'
-  - uid: Promise<@azure/service-bus.SubscriptionsResponse>
-    name: SubscriptionsResponse>
+      - name: PagedAsyncIterableIterator<
+        fullName: PagedAsyncIterableIterator<
+      - name: QueueRuntimeProperties
+        fullName: QueueRuntimeProperties
+        uid: '@azure/service-bus.QueueRuntimeProperties'
+      - name: ', '
+        fullName: ', '
+      - name: EntitiesResponse
+        fullName: EntitiesResponse
+        uid: '@azure/service-bus.EntitiesResponse'
+      - name: <
+        fullName: <
+      - name: QueueRuntimeProperties
+        fullName: QueueRuntimeProperties
+        uid: '@azure/service-bus.QueueRuntimeProperties'
+      - name: '>>'
+        fullName: '>>'
+  - uid: >-
+      PagedAsyncIterableIterator<@azure/service-bus.RuleProperties,
+      @azure/service-bus.EntitiesResponse<@azure/service-bus.RuleProperties>>
+    name: RuleProperties>>
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: SubscriptionsResponse
-        fullName: SubscriptionsResponse
-        uid: '@azure/service-bus.SubscriptionsResponse'
-      - name: '>'
-        fullName: '>'
-  - uid: Promise<@azure/service-bus.SubscriptionsRuntimeInfoResponse>
-    name: SubscriptionsRuntimeInfoResponse>
+      - name: PagedAsyncIterableIterator<
+        fullName: PagedAsyncIterableIterator<
+      - name: RuleProperties
+        fullName: RuleProperties
+        uid: '@azure/service-bus.RuleProperties'
+      - name: ', '
+        fullName: ', '
+      - name: EntitiesResponse
+        fullName: EntitiesResponse
+        uid: '@azure/service-bus.EntitiesResponse'
+      - name: <
+        fullName: <
+      - name: RuleProperties
+        fullName: RuleProperties
+        uid: '@azure/service-bus.RuleProperties'
+      - name: '>>'
+        fullName: '>>'
+  - uid: >-
+      PagedAsyncIterableIterator<@azure/service-bus.SubscriptionProperties,
+      @azure/service-bus.EntitiesResponse<@azure/service-bus.SubscriptionProperties>>
+    name: SubscriptionProperties>>
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: SubscriptionsRuntimeInfoResponse
-        fullName: SubscriptionsRuntimeInfoResponse
-        uid: '@azure/service-bus.SubscriptionsRuntimeInfoResponse'
-      - name: '>'
-        fullName: '>'
-  - uid: Promise<@azure/service-bus.TopicRuntimeInfoResponse>
-    name: TopicRuntimeInfoResponse>
+      - name: PagedAsyncIterableIterator<
+        fullName: PagedAsyncIterableIterator<
+      - name: SubscriptionProperties
+        fullName: SubscriptionProperties
+        uid: '@azure/service-bus.SubscriptionProperties'
+      - name: ', '
+        fullName: ', '
+      - name: EntitiesResponse
+        fullName: EntitiesResponse
+        uid: '@azure/service-bus.EntitiesResponse'
+      - name: <
+        fullName: <
+      - name: SubscriptionProperties
+        fullName: SubscriptionProperties
+        uid: '@azure/service-bus.SubscriptionProperties'
+      - name: '>>'
+        fullName: '>>'
+  - uid: >-
+      PagedAsyncIterableIterator<@azure/service-bus.SubscriptionRuntimeProperties,
+      @azure/service-bus.EntitiesResponse<@azure/service-bus.SubscriptionRuntimeProperties>>
+    name: SubscriptionRuntimeProperties>>
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: TopicRuntimeInfoResponse
-        fullName: TopicRuntimeInfoResponse
-        uid: '@azure/service-bus.TopicRuntimeInfoResponse'
-      - name: '>'
-        fullName: '>'
-  - uid: Promise<@azure/service-bus.TopicsResponse>
-    name: TopicsResponse>
+      - name: PagedAsyncIterableIterator<
+        fullName: PagedAsyncIterableIterator<
+      - name: SubscriptionRuntimeProperties
+        fullName: SubscriptionRuntimeProperties
+        uid: '@azure/service-bus.SubscriptionRuntimeProperties'
+      - name: ', '
+        fullName: ', '
+      - name: EntitiesResponse
+        fullName: EntitiesResponse
+        uid: '@azure/service-bus.EntitiesResponse'
+      - name: <
+        fullName: <
+      - name: SubscriptionRuntimeProperties
+        fullName: SubscriptionRuntimeProperties
+        uid: '@azure/service-bus.SubscriptionRuntimeProperties'
+      - name: '>>'
+        fullName: '>>'
+  - uid: >-
+      PagedAsyncIterableIterator<@azure/service-bus.TopicProperties,
+      @azure/service-bus.EntitiesResponse<@azure/service-bus.TopicProperties>>
+    name: TopicProperties>>
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: TopicsResponse
-        fullName: TopicsResponse
-        uid: '@azure/service-bus.TopicsResponse'
-      - name: '>'
-        fullName: '>'
-  - uid: Promise<@azure/service-bus.TopicsRuntimeInfoResponse>
-    name: TopicsRuntimeInfoResponse>
+      - name: PagedAsyncIterableIterator<
+        fullName: PagedAsyncIterableIterator<
+      - name: TopicProperties
+        fullName: TopicProperties
+        uid: '@azure/service-bus.TopicProperties'
+      - name: ', '
+        fullName: ', '
+      - name: EntitiesResponse
+        fullName: EntitiesResponse
+        uid: '@azure/service-bus.EntitiesResponse'
+      - name: <
+        fullName: <
+      - name: TopicProperties
+        fullName: TopicProperties
+        uid: '@azure/service-bus.TopicProperties'
+      - name: '>>'
+        fullName: '>>'
+  - uid: >-
+      PagedAsyncIterableIterator<@azure/service-bus.TopicRuntimeProperties,
+      @azure/service-bus.EntitiesResponse<@azure/service-bus.TopicRuntimeProperties>>
+    name: TopicRuntimeProperties>>
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: TopicsRuntimeInfoResponse
-        fullName: TopicsRuntimeInfoResponse
-        uid: '@azure/service-bus.TopicsRuntimeInfoResponse'
-      - name: '>'
-        fullName: '>'
+      - name: PagedAsyncIterableIterator<
+        fullName: PagedAsyncIterableIterator<
+      - name: TopicRuntimeProperties
+        fullName: TopicRuntimeProperties
+        uid: '@azure/service-bus.TopicRuntimeProperties'
+      - name: ', '
+        fullName: ', '
+      - name: EntitiesResponse
+        fullName: EntitiesResponse
+        uid: '@azure/service-bus.EntitiesResponse'
+      - name: <
+        fullName: <
+      - name: TopicRuntimeProperties
+        fullName: TopicRuntimeProperties
+        uid: '@azure/service-bus.TopicRuntimeProperties'
+      - name: '>>'
+        fullName: '>>'
+  - uid: '@azure/service-bus.QueueProperties'
+    name: QueueProperties
+    spec.typeScript:
+      - name: QueueProperties
+        fullName: QueueProperties
+        uid: '@azure/service-bus.QueueProperties'
+  - uid: '@azure/service-bus.RuleProperties'
+    name: RuleProperties
+    spec.typeScript:
+      - name: RuleProperties
+        fullName: RuleProperties
+        uid: '@azure/service-bus.RuleProperties'
+  - uid: '@azure/service-bus.SubscriptionProperties'
+    name: SubscriptionProperties
+    spec.typeScript:
+      - name: SubscriptionProperties
+        fullName: SubscriptionProperties
+        uid: '@azure/service-bus.SubscriptionProperties'
+  - uid: '@azure/service-bus.TopicProperties'
+    name: TopicProperties
+    spec.typeScript:
+      - name: TopicProperties
+        fullName: TopicProperties
+        uid: '@azure/service-bus.TopicProperties'

@@ -4,6 +4,7 @@ items:
     name: Items
     fullName: Items
     children:
+      - '@azure/cosmos.Items.bulk'
       - '@azure/cosmos.Items.changeFeed_1'
       - '@azure/cosmos.Items.changeFeed_3'
       - '@azure/cosmos.Items.changeFeed'
@@ -24,6 +25,59 @@ items:
       - typeScript
     type: class
     summary: 'Operations for creating new items, and reading/querying all items'
+    package: '@azure/cosmos'
+  - uid: '@azure/cosmos.Items.bulk'
+    name: 'bulk(OperationInput[], RequestOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Execute bulk operations on items.
+
+      Bulk takes an array of Operations which are typed based on what the
+      operation does.
+
+      The choices are: Create, Upsert, Read, Replace, and Delete
+
+
+      Usage example:
+
+
+      // partitionKey is optional at the top level if present in the
+      resourceBody
+
+      const operations: OperationInput[] = [
+         {
+            operationType: "Create",
+            resourceBody: { id: "doc1", name: "sample", key: "A" }
+         },
+         {
+            operationType: "Upsert",
+            partitionKey: 'A',
+            resourceBody: { id: "doc2", name: "other", key: "A" }
+         }
+      ]
+
+
+      await database.container.items.bulk(operation)
+    syntax:
+      content: 'function bulk(operations: OperationInput[], options?: RequestOptions)'
+      parameters:
+        - id: operations
+          type:
+            - '@azure/cosmos.OperationInput[]'
+          description: ''
+        - id: options
+          type:
+            - '@azure/cosmos.RequestOptions'
+          description: |
+            Used for modifying the request.
+          optional: true
+      return:
+        type:
+          - 'Promise<@azure/cosmos.OperationResponse[]>'
+        description: ''
     package: '@azure/cosmos'
   - uid: '@azure/cosmos.Items.changeFeed_1'
     name: changeFeed(ChangeFeedOptions)
@@ -468,6 +522,30 @@ references:
       - name: Container
         fullName: Container
         uid: '@azure/cosmos.Container'
+  - uid: '@azure/cosmos.OperationInput[]'
+    name: 'OperationInput[]'
+    spec.typeScript:
+      - name: OperationInput
+        fullName: OperationInput
+        uid: '@azure/cosmos.OperationInput'
+      - name: '[]'
+        fullName: '[]'
+  - uid: '@azure/cosmos.RequestOptions'
+    name: RequestOptions
+    spec.typeScript:
+      - name: RequestOptions
+        fullName: RequestOptions
+        uid: '@azure/cosmos.RequestOptions'
+  - uid: 'Promise<@azure/cosmos.OperationResponse[]>'
+    name: 'OperationResponse[]>'
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: OperationResponse
+        fullName: OperationResponse
+        uid: '@azure/cosmos.OperationResponse'
+      - name: '[]>'
+        fullName: '[]>'
   - uid: '@azure/cosmos.ChangeFeedOptions'
     name: ChangeFeedOptions
     spec.typeScript:
@@ -490,12 +568,6 @@ references:
         uid: '@azure/cosmos.ChangeFeedIterator'
       - name: <T>
         fullName: <T>
-  - uid: '@azure/cosmos.RequestOptions'
-    name: RequestOptions
-    spec.typeScript:
-      - name: RequestOptions
-        fullName: RequestOptions
-        uid: '@azure/cosmos.RequestOptions'
   - uid: Promise<@azure/cosmos.ItemResponse<T>>
     name: ItemResponse<T>>
     spec.typeScript:

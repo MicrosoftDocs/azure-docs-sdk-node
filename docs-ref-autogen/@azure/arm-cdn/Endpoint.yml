@@ -5,6 +5,7 @@ items:
     fullName: Endpoint
     children:
       - '@azure/arm-cdn.Endpoint.contentTypesToCompress'
+      - '@azure/arm-cdn.Endpoint.defaultOriginGroup'
       - '@azure/arm-cdn.Endpoint.deliveryPolicy'
       - '@azure/arm-cdn.Endpoint.geoFilters'
       - '@azure/arm-cdn.Endpoint.hostName'
@@ -15,6 +16,7 @@ items:
       - '@azure/arm-cdn.Endpoint.location'
       - '@azure/arm-cdn.Endpoint.name'
       - '@azure/arm-cdn.Endpoint.optimizationType'
+      - '@azure/arm-cdn.Endpoint.originGroups'
       - '@azure/arm-cdn.Endpoint.originHostHeader'
       - '@azure/arm-cdn.Endpoint.originPath'
       - '@azure/arm-cdn.Endpoint.origins'
@@ -24,6 +26,8 @@ items:
       - '@azure/arm-cdn.Endpoint.resourceState'
       - '@azure/arm-cdn.Endpoint.tags'
       - '@azure/arm-cdn.Endpoint.type'
+      - '@azure/arm-cdn.Endpoint.urlSigningKeys'
+      - '@azure/arm-cdn.Endpoint.webApplicationFirewallPolicyLink'
     langs:
       - typeScript
     type: interface
@@ -54,6 +58,22 @@ items:
       return:
         type:
           - 'string[]'
+        description: ''
+    package: '@azure/arm-cdn'
+  - uid: '@azure/arm-cdn.Endpoint.defaultOriginGroup'
+    name: defaultOriginGroup
+    fullName: defaultOriginGroup
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: A reference to the origin group.
+    optional: true
+    syntax:
+      content: 'defaultOriginGroup?: ResourceReference'
+      return:
+        type:
+          - '@azure/arm-cdn.ResourceReference'
         description: ''
     package: '@azure/arm-cdn'
   - uid: '@azure/arm-cdn.Endpoint.deliveryPolicy'
@@ -262,6 +282,26 @@ items:
           - '@azure/arm-cdn.OptimizationType'
         description: ''
     package: '@azure/arm-cdn'
+  - uid: '@azure/arm-cdn.Endpoint.originGroups'
+    name: originGroups
+    fullName: originGroups
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      The origin groups comprising of origins that are used for load balancing
+      the traffic based on
+
+      availability.
+    optional: true
+    syntax:
+      content: 'originGroups?: DeepCreatedOriginGroup[]'
+      return:
+        type:
+          - '@azure/arm-cdn.DeepCreatedOriginGroup[]'
+        description: ''
+    package: '@azure/arm-cdn'
   - uid: '@azure/arm-cdn.Endpoint.originHostHeader'
     name: originHostHeader
     fullName: originHostHeader
@@ -270,14 +310,19 @@ items:
       - typeScript
     type: property
     summary: >-
-      The host header value sent to the origin with each request. If you leave
-      this blank, the
+      The host header value sent to the origin with each request. This property
+      at Endpoint is only
 
-      request hostname determines this value. Azure CDN origins, such as Web
-      Apps, Blob Storage, and
+      allowed when endpoint uses single origin and can be overridden by the same
+      property specified
 
-      Cloud Services require this host header value to match the origin hostname
-      by default.
+      at origin.If you leave this blank, the request hostname determines this
+      value. Azure CDN
+
+      origins, such as Web Apps, Blob Storage, and Cloud Services require this
+      host header value to
+
+      match the origin hostname by default.
     optional: true
     syntax:
       content: 'originHostHeader?: undefined | string'
@@ -333,7 +378,9 @@ items:
       dynamic content and
 
       calculate the most optimal routes for the CDN. This is relative to the
-      origin path.
+      origin path. This
+
+      property is only relevant when using a single origin.
     optional: true
     syntax:
       content: 'probePath?: undefined | string'
@@ -447,6 +494,43 @@ items:
           - undefined | string
         description: ''
     package: '@azure/arm-cdn'
+  - uid: '@azure/arm-cdn.Endpoint.urlSigningKeys'
+    name: urlSigningKeys
+    fullName: urlSigningKeys
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: List of keys used to validate the signed URL hashes.
+    optional: true
+    syntax:
+      content: 'urlSigningKeys?: UrlSigningKey[]'
+      return:
+        type:
+          - '@azure/arm-cdn.UrlSigningKey[]'
+        description: ''
+    package: '@azure/arm-cdn'
+  - uid: '@azure/arm-cdn.Endpoint.webApplicationFirewallPolicyLink'
+    name: webApplicationFirewallPolicyLink
+    fullName: webApplicationFirewallPolicyLink
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Defines the Web Application Firewall policy for the endpoint (if
+      applicable)
+    optional: true
+    syntax:
+      content: >-
+        webApplicationFirewallPolicyLink?:
+        EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+      return:
+        type:
+          - >-
+            @azure/arm-cdn.EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+        description: ''
+    package: '@azure/arm-cdn'
 references:
   - uid: '@azure/arm-cdn.TrackedResource'
     name: TrackedResource
@@ -454,6 +538,12 @@ references:
       - name: TrackedResource
         fullName: TrackedResource
         uid: '@azure/arm-cdn.TrackedResource'
+  - uid: '@azure/arm-cdn.ResourceReference'
+    name: ResourceReference
+    spec.typeScript:
+      - name: ResourceReference
+        fullName: ResourceReference
+        uid: '@azure/arm-cdn.ResourceReference'
   - uid: '@azure/arm-cdn.EndpointPropertiesUpdateParametersDeliveryPolicy'
     name: EndpointPropertiesUpdateParametersDeliveryPolicy
     spec.typeScript:
@@ -474,6 +564,14 @@ references:
       - name: OptimizationType
         fullName: OptimizationType
         uid: '@azure/arm-cdn.OptimizationType'
+  - uid: '@azure/arm-cdn.DeepCreatedOriginGroup[]'
+    name: 'DeepCreatedOriginGroup[]'
+    spec.typeScript:
+      - name: DeepCreatedOriginGroup
+        fullName: DeepCreatedOriginGroup
+        uid: '@azure/arm-cdn.DeepCreatedOriginGroup'
+      - name: '[]'
+        fullName: '[]'
   - uid: '@azure/arm-cdn.DeepCreatedOrigin[]'
     name: 'DeepCreatedOrigin[]'
     spec.typeScript:
@@ -494,3 +592,19 @@ references:
       - name: EndpointResourceState
         fullName: EndpointResourceState
         uid: '@azure/arm-cdn.EndpointResourceState'
+  - uid: '@azure/arm-cdn.UrlSigningKey[]'
+    name: 'UrlSigningKey[]'
+    spec.typeScript:
+      - name: UrlSigningKey
+        fullName: UrlSigningKey
+        uid: '@azure/arm-cdn.UrlSigningKey'
+      - name: '[]'
+        fullName: '[]'
+  - uid: >-
+      @azure/arm-cdn.EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+    name: EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+    spec.typeScript:
+      - name: EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+        fullName: EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+        uid: >-
+          @azure/arm-cdn.EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink

@@ -325,7 +325,7 @@ items:
         description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.constructor'
-    name: 'CertificateClient(string, TokenCredential, PipelineOptions)'
+    name: 'CertificateClient(string, TokenCredential, CertificateClientOptions)'
     children: []
     type: constructor
     langs:
@@ -334,7 +334,7 @@ items:
     syntax:
       content: >-
         new CertificateClient(vaultUrl: string, credential: TokenCredential,
-        pipelineOptions?: PipelineOptions)
+        pipelineOptions?: CertificateClientOptions)
       parameters:
         - id: vaultUrl
           type:
@@ -349,7 +349,7 @@ items:
             package to create a credential that suits your needs.
         - id: pipelineOptions
           type:
-            - PipelineOptions
+            - '@azure/keyvault-certificates.CertificateClientOptions'
           description: ''
           optional: true
     package: '@azure/keyvault-certificates'
@@ -629,7 +629,7 @@ items:
       return:
         type:
           - >-
-            Promise<@azure/keyvault-certificates.KVPollerLike<@azure/keyvault-certificates.CertificateOperationState,
+            Promise<PollerLike<@azure/keyvault-certificates.CertificateOperationState,
             @azure/keyvault-certificates.KeyVaultCertificateWithPolicy>>
         description: ''
     package: '@azure/keyvault-certificates'
@@ -894,7 +894,17 @@ items:
 
       const base64EncodedCertificate = certificateSecret.value!;
 
-      await client.importCertificate("MyCertificate", base64EncodedCertificate);
+      let buffer: Uint8Array;
+
+
+      if (isNode) {
+        buffer = Buffer.from(base64EncodedCertificate, "base64");
+      } else {
+        buffer = Uint8Array.from(atob(base64EncodedCertificate), (c) => c.charCodeAt(0));
+      }
+
+
+      await client.importCertificate("MyCertificate", buffer);
 
       ```
     syntax:
@@ -909,7 +919,9 @@ items:
         - id: certificateBytes
           type:
             - Uint8Array
-          description: ''
+          description: >-
+            The PFX or ASCII PEM formatted value of the certificate containing
+            both the X.509 certificates and the private key
         - id: options
           type:
             - '@azure/keyvault-certificates.ImportCertificateOptions'
@@ -964,8 +976,7 @@ items:
       return:
         type:
           - >-
-            PagedAsyncIterableIterator<@azure/keyvault-certificates.DeletedCertificate,
-            @azure/keyvault-certificates.DeletedCertificate[]>
+            PagedAsyncIterableIterator<@azure/keyvault-certificates.DeletedCertificate>
         description: ''
     package: '@azure/keyvault-certificates'
   - uid: >-
@@ -1017,8 +1028,7 @@ items:
       return:
         type:
           - >-
-            PagedAsyncIterableIterator<@azure/keyvault-certificates.CertificateProperties,
-            @azure/keyvault-certificates.CertificateProperties[]>
+            PagedAsyncIterableIterator<@azure/keyvault-certificates.CertificateProperties>
         description: ''
     package: '@azure/keyvault-certificates'
   - uid: >-
@@ -1065,8 +1075,7 @@ items:
       return:
         type:
           - >-
-            PagedAsyncIterableIterator<@azure/keyvault-certificates.CertificateProperties,
-            @azure/keyvault-certificates.CertificateProperties[]>
+            PagedAsyncIterableIterator<@azure/keyvault-certificates.CertificateProperties>
         description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.listPropertiesOfIssuers'
@@ -1116,8 +1125,7 @@ items:
       return:
         type:
           - >-
-            PagedAsyncIterableIterator<@azure/keyvault-certificates.IssuerProperties,
-            @azure/keyvault-certificates.IssuerProperties[]>
+            PagedAsyncIterableIterator<@azure/keyvault-certificates.IssuerProperties>
         description: ''
     package: '@azure/keyvault-certificates'
   - uid: '@azure/keyvault-certificates.CertificateClient.mergeCertificate'
@@ -1491,6 +1499,12 @@ items:
         description: ''
     package: '@azure/keyvault-certificates'
 references:
+  - uid: '@azure/keyvault-certificates.CertificateClientOptions'
+    name: CertificateClientOptions
+    spec.typeScript:
+      - name: CertificateClientOptions
+        fullName: CertificateClientOptions
+        uid: '@azure/keyvault-certificates.CertificateClientOptions'
   - uid: '@azure/keyvault-certificates.BackupCertificateOptions'
     name: BackupCertificateOptions
     spec.typeScript:
@@ -1649,17 +1663,12 @@ references:
         fullName: GetCertificateOperationOptions
         uid: '@azure/keyvault-certificates.GetCertificateOperationOptions'
   - uid: >-
-      Promise<@azure/keyvault-certificates.KVPollerLike<@azure/keyvault-certificates.CertificateOperationState,
+      Promise<PollerLike<@azure/keyvault-certificates.CertificateOperationState,
       @azure/keyvault-certificates.KeyVaultCertificateWithPolicy>>
     name: KeyVaultCertificateWithPolicy>>
     spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: KVPollerLike
-        fullName: KVPollerLike
-        uid: '@azure/keyvault-certificates.KVPollerLike'
-      - name: <
-        fullName: <
+      - name: Promise<PollerLike<
+        fullName: Promise<PollerLike<
       - name: CertificateOperationState
         fullName: CertificateOperationState
         uid: '@azure/keyvault-certificates.CertificateOperationState'
@@ -1743,22 +1752,16 @@ references:
         fullName: ListDeletedCertificatesOptions
         uid: '@azure/keyvault-certificates.ListDeletedCertificatesOptions'
   - uid: >-
-      PagedAsyncIterableIterator<@azure/keyvault-certificates.DeletedCertificate,
-      @azure/keyvault-certificates.DeletedCertificate[]>
-    name: 'DeletedCertificate[]>'
+      PagedAsyncIterableIterator<@azure/keyvault-certificates.DeletedCertificate>
+    name: DeletedCertificate>
     spec.typeScript:
       - name: PagedAsyncIterableIterator<
         fullName: PagedAsyncIterableIterator<
       - name: DeletedCertificate
         fullName: DeletedCertificate
         uid: '@azure/keyvault-certificates.DeletedCertificate'
-      - name: ', '
-        fullName: ', '
-      - name: DeletedCertificate
-        fullName: DeletedCertificate
-        uid: '@azure/keyvault-certificates.DeletedCertificate'
-      - name: '[]>'
-        fullName: '[]>'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/keyvault-certificates.ListPropertiesOfCertificateVersionsOptions'
     name: ListPropertiesOfCertificateVersionsOptions
     spec.typeScript:
@@ -1767,22 +1770,16 @@ references:
         uid: >-
           @azure/keyvault-certificates.ListPropertiesOfCertificateVersionsOptions
   - uid: >-
-      PagedAsyncIterableIterator<@azure/keyvault-certificates.CertificateProperties,
-      @azure/keyvault-certificates.CertificateProperties[]>
-    name: 'CertificateProperties[]>'
+      PagedAsyncIterableIterator<@azure/keyvault-certificates.CertificateProperties>
+    name: CertificateProperties>
     spec.typeScript:
       - name: PagedAsyncIterableIterator<
         fullName: PagedAsyncIterableIterator<
       - name: CertificateProperties
         fullName: CertificateProperties
         uid: '@azure/keyvault-certificates.CertificateProperties'
-      - name: ', '
-        fullName: ', '
-      - name: CertificateProperties
-        fullName: CertificateProperties
-        uid: '@azure/keyvault-certificates.CertificateProperties'
-      - name: '[]>'
-        fullName: '[]>'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/keyvault-certificates.ListPropertiesOfCertificatesOptions'
     name: ListPropertiesOfCertificatesOptions
     spec.typeScript:
@@ -1795,23 +1792,16 @@ references:
       - name: ListPropertiesOfIssuersOptions
         fullName: ListPropertiesOfIssuersOptions
         uid: '@azure/keyvault-certificates.ListPropertiesOfIssuersOptions'
-  - uid: >-
-      PagedAsyncIterableIterator<@azure/keyvault-certificates.IssuerProperties,
-      @azure/keyvault-certificates.IssuerProperties[]>
-    name: 'IssuerProperties[]>'
+  - uid: PagedAsyncIterableIterator<@azure/keyvault-certificates.IssuerProperties>
+    name: IssuerProperties>
     spec.typeScript:
       - name: PagedAsyncIterableIterator<
         fullName: PagedAsyncIterableIterator<
       - name: IssuerProperties
         fullName: IssuerProperties
         uid: '@azure/keyvault-certificates.IssuerProperties'
-      - name: ', '
-        fullName: ', '
-      - name: IssuerProperties
-        fullName: IssuerProperties
-        uid: '@azure/keyvault-certificates.IssuerProperties'
-      - name: '[]>'
-        fullName: '[]>'
+      - name: '>'
+        fullName: '>'
   - uid: '@azure/keyvault-certificates.MergeCertificateOptions'
     name: MergeCertificateOptions
     spec.typeScript:

@@ -5,6 +5,7 @@ items:
     fullName: EndpointUpdateParameters
     children:
       - '@azure/arm-cdn.EndpointUpdateParameters.contentTypesToCompress'
+      - '@azure/arm-cdn.EndpointUpdateParameters.defaultOriginGroup'
       - '@azure/arm-cdn.EndpointUpdateParameters.deliveryPolicy'
       - '@azure/arm-cdn.EndpointUpdateParameters.geoFilters'
       - '@azure/arm-cdn.EndpointUpdateParameters.isCompressionEnabled'
@@ -16,6 +17,8 @@ items:
       - '@azure/arm-cdn.EndpointUpdateParameters.probePath'
       - '@azure/arm-cdn.EndpointUpdateParameters.queryStringCachingBehavior'
       - '@azure/arm-cdn.EndpointUpdateParameters.tags'
+      - '@azure/arm-cdn.EndpointUpdateParameters.urlSigningKeys'
+      - '@azure/arm-cdn.EndpointUpdateParameters.webApplicationFirewallPolicyLink'
     langs:
       - typeScript
     type: interface
@@ -39,6 +42,22 @@ items:
       return:
         type:
           - 'string[]'
+        description: ''
+    package: '@azure/arm-cdn'
+  - uid: '@azure/arm-cdn.EndpointUpdateParameters.defaultOriginGroup'
+    name: defaultOriginGroup
+    fullName: defaultOriginGroup
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: A reference to the origin group.
+    optional: true
+    syntax:
+      content: 'defaultOriginGroup?: ResourceReference'
+      return:
+        type:
+          - '@azure/arm-cdn.ResourceReference'
         description: ''
     package: '@azure/arm-cdn'
   - uid: '@azure/arm-cdn.EndpointUpdateParameters.deliveryPolicy'
@@ -178,14 +197,19 @@ items:
       - typeScript
     type: property
     summary: >-
-      The host header value sent to the origin with each request. If you leave
-      this blank, the
+      The host header value sent to the origin with each request. This property
+      at Endpoint is only
 
-      request hostname determines this value. Azure CDN origins, such as Web
-      Apps, Blob Storage, and
+      allowed when endpoint uses single origin and can be overridden by the same
+      property specified
 
-      Cloud Services require this host header value to match the origin hostname
-      by default.
+      at origin.If you leave this blank, the request hostname determines this
+      value. Azure CDN
+
+      origins, such as Web Apps, Blob Storage, and Cloud Services require this
+      host header value to
+
+      match the origin hostname by default.
     optional: true
     syntax:
       content: 'originHostHeader?: undefined | string'
@@ -226,7 +250,9 @@ items:
       dynamic content and
 
       calculate the most optimal routes for the CDN. This is relative to the
-      origin path.
+      origin path. This
+
+      property is only relevant when using a single origin.
     optional: true
     syntax:
       content: 'probePath?: undefined | string'
@@ -277,7 +303,50 @@ items:
           - 'undefined | [key: string]: string'
         description: ''
     package: '@azure/arm-cdn'
+  - uid: '@azure/arm-cdn.EndpointUpdateParameters.urlSigningKeys'
+    name: urlSigningKeys
+    fullName: urlSigningKeys
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: List of keys used to validate the signed URL hashes.
+    optional: true
+    syntax:
+      content: 'urlSigningKeys?: UrlSigningKey[]'
+      return:
+        type:
+          - '@azure/arm-cdn.UrlSigningKey[]'
+        description: ''
+    package: '@azure/arm-cdn'
+  - uid: '@azure/arm-cdn.EndpointUpdateParameters.webApplicationFirewallPolicyLink'
+    name: webApplicationFirewallPolicyLink
+    fullName: webApplicationFirewallPolicyLink
+    children: []
+    langs:
+      - typeScript
+    type: property
+    summary: >-
+      Defines the Web Application Firewall policy for the endpoint (if
+      applicable)
+    optional: true
+    syntax:
+      content: >-
+        webApplicationFirewallPolicyLink?:
+        EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+      return:
+        type:
+          - >-
+            @azure/arm-cdn.EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+        description: ''
+    package: '@azure/arm-cdn'
 references:
+  - uid: '@azure/arm-cdn.ResourceReference'
+    name: ResourceReference
+    spec.typeScript:
+      - name: ResourceReference
+        fullName: ResourceReference
+        uid: '@azure/arm-cdn.ResourceReference'
   - uid: '@azure/arm-cdn.EndpointPropertiesUpdateParametersDeliveryPolicy'
     name: EndpointPropertiesUpdateParametersDeliveryPolicy
     spec.typeScript:
@@ -304,3 +373,19 @@ references:
       - name: QueryStringCachingBehavior
         fullName: QueryStringCachingBehavior
         uid: '@azure/arm-cdn.QueryStringCachingBehavior'
+  - uid: '@azure/arm-cdn.UrlSigningKey[]'
+    name: 'UrlSigningKey[]'
+    spec.typeScript:
+      - name: UrlSigningKey
+        fullName: UrlSigningKey
+        uid: '@azure/arm-cdn.UrlSigningKey'
+      - name: '[]'
+        fullName: '[]'
+  - uid: >-
+      @azure/arm-cdn.EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+    name: EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+    spec.typeScript:
+      - name: EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+        fullName: EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink
+        uid: >-
+          @azure/arm-cdn.EndpointPropertiesUpdateParametersWebApplicationFirewallPolicyLink

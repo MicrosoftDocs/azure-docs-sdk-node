@@ -86,11 +86,14 @@ typeAliases:
   - '@azure/ms-rest-js.RawHttpHeaders'
   - '@azure/ms-rest-js.ParameterPath'
   - '@azure/ms-rest-js.RequestPolicyFactory'
+  - '@azure/ms-rest-js.ResponseHandler'
   - '@azure/ms-rest-js.TelemetryInfo'
   - '@azure/ms-rest-js.ProxyAgent'
   - '@azure/ms-rest-js.Mapper'
   - '@azure/ms-rest-js.MapperType'
   - '@azure/ms-rest-js.PropertyParent'
+  - '@azure/ms-rest-js.URLTokenType'
+  - '@azure/ms-rest-js.URLTokenizerState'
   - '@azure/ms-rest-js.HttpMethods'
   - '@azure/ms-rest-js.HttpRequestBody'
   - '@azure/ms-rest-js.TransferProgressEvent'
@@ -252,7 +255,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function generateClientRequestIdPolicy(requestIdHeaderName: string)'
+      content: 'function generateClientRequestIdPolicy(requestIdHeaderName?: string)'
       parameters:
         - id: requestIdHeaderName
           type: string
@@ -267,7 +270,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function logPolicy(logger: any)'
+      content: 'function logPolicy(logger?: any)'
       parameters:
         - id: logger
           type: any
@@ -326,36 +329,6 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getDefaultProxySettings(proxyUrl?: string)'
-      parameters:
-        - id: proxyUrl
-          type: string
-          description: ''
-      return:
-        type: <xref uid="@azure/ms-rest-js.ProxySettings" /> | undefined
-        description: ''
-  - name: proxyPolicy(ProxySettings)
-    uid: '@azure/ms-rest-js.proxyPolicy'
-    package: '@azure/ms-rest-js'
-    summary: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function proxyPolicy(proxySettings?: ProxySettings)'
-      parameters:
-        - id: proxySettings
-          type: <xref uid="@azure/ms-rest-js.ProxySettings" />
-          description: ''
-      return:
-        type: <xref uid="@azure/ms-rest-js.RequestPolicyFactory" />
-        description: ''
-  - name: getDefaultProxySettings(string)
-    uid: '@azure/ms-rest-js.getDefaultProxySettings'
-    package: '@azure/ms-rest-js'
-    summary: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
       content: 'function getDefaultProxySettings(_proxyUrl?: string)'
       parameters:
         - id: _proxyUrl
@@ -379,6 +352,36 @@ functions:
       return:
         type: <xref uid="@azure/ms-rest-js.RequestPolicyFactory" />
         description: ''
+  - name: getDefaultProxySettings(string)
+    uid: '@azure/ms-rest-js.getDefaultProxySettings'
+    package: '@azure/ms-rest-js'
+    summary: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getDefaultProxySettings(proxyUrl?: string)'
+      parameters:
+        - id: proxyUrl
+          type: string
+          description: ''
+      return:
+        type: <xref uid="@azure/ms-rest-js.ProxySettings" /> | undefined
+        description: ''
+  - name: proxyPolicy(ProxySettings)
+    uid: '@azure/ms-rest-js.proxyPolicy'
+    package: '@azure/ms-rest-js'
+    summary: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function proxyPolicy(proxySettings?: ProxySettings)'
+      parameters:
+        - id: proxySettings
+          type: <xref uid="@azure/ms-rest-js.ProxySettings" />
+          description: ''
+      return:
+        type: <xref uid="@azure/ms-rest-js.RequestPolicyFactory" />
+        description: ''
   - name: redirectPolicy(number)
     uid: '@azure/ms-rest-js.redirectPolicy'
     package: '@azure/ms-rest-js'
@@ -386,7 +389,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function redirectPolicy(maximumRetries: number)'
+      content: 'function redirectPolicy(maximumRetries?: number)'
       parameters:
         - id: maximumRetries
           type: number
@@ -401,7 +404,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function rpRegistrationPolicy(retryTimeout: number)'
+      content: 'function rpRegistrationPolicy(retryTimeout?: number)'
       parameters:
         - id: retryTimeout
           type: number
@@ -961,7 +964,7 @@ functions:
           type: string
           description: ''
       return:
-        type: Object
+        type: '[key: string]\: any'
         description: ''
   - name: promiseToCallback(Promise<any>)
     uid: '@azure/ms-rest-js.promiseToCallback'
@@ -1111,7 +1114,7 @@ functions:
           type: Object
           description: ''
       return:
-        type: any
+        type: string
         description: ''
   - name: parseXML(string)
     uid: '@azure/ms-rest-js.parseXML'

@@ -1,93 +1,62 @@
-### YamlMime:UniversalReference
-items:
-  - uid: '@azure/service-bus.RuleDescription'
-    name: RuleDescription
-    fullName: RuleDescription
-    children:
-      - '@azure/service-bus.RuleDescription.action'
-      - '@azure/service-bus.RuleDescription.filter'
-      - '@azure/service-bus.RuleDescription.name'
-    langs:
-      - typeScript
-    type: interface
-    summary: Represents all attributes of a rule entity
+### YamlMime:TSType
+name: RuleDescription
+uid: '@azure/service-bus.RuleDescription'
+package: '@azure/service-bus'
+summary: >-
+  Represents a Rule on a Subscription that is used to filter the incoming
+  message from the
+
+  Subscription.
+fullName: RuleDescription
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+  - name: action
+    uid: '@azure/service-bus.RuleDescription.action'
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.RuleDescription.action'
-    name: action
+    summary: Action to perform if the message satisfies the filtering expression.
     fullName: action
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: |-
-      The SQL like expression that can be executed on the message should the
-      associated filter apply.
-    optional: true
+    isPreview: false
+    isDeprecated: false
     syntax:
-      content: 'action?: SqlRuleAction'
+      content: 'action?: undefined | string'
       return:
-        type:
-          - '@azure/service-bus.SqlRuleAction'
+        type: undefined | string
         description: ''
+  - name: filter
+    uid: '@azure/service-bus.RuleDescription.filter'
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.RuleDescription.filter'
-    name: filter
-    fullName: filter
-    children: []
-    langs:
-      - typeScript
-    type: property
     summary: >-
-      Defines the filter expression that the rule evaluates. For `SqlRuleFilter`
-      input,
+      Filter expression used to match messages. Supports 2 types:
 
-      the expression string is interpreted as a SQL92 expression which must
+      - `string`: SQL-like condition expression that is evaluated against the
+      messages'
 
-      evaluate to True or False. Only one between a `CorrelationRuleFilter` or
+      user-defined properties and system properties. All system properties will
+      be prefixed with
 
-      a `SqlRuleFilter` can be defined.
-    optional: true
+      `sys.` in the condition expression.
+
+      - `CorrelationFilter`: Properties of the filter will be used to match with
+      the message properties.
+    fullName: filter
+    isPreview: false
+    isDeprecated: false
     syntax:
-      content: 'filter?: SqlRuleFilter | CorrelationRuleFilter'
+      content: 'filter?: string | CorrelationFilter'
       return:
-        type:
-          - >-
-            @azure/service-bus.SqlRuleFilter |
-            @azure/service-bus.CorrelationRuleFilter
+        type: string | <xref uid="@azure/service-bus.CorrelationFilter" />
         description: ''
+  - name: name
+    uid: '@azure/service-bus.RuleDescription.name'
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.RuleDescription.name'
-    name: name
+    summary: Represents the name of the rule.
     fullName: name
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: Name of the rule
+    isPreview: false
+    isDeprecated: false
     syntax:
       content: 'name: string'
       return:
-        type:
-          - string
+        type: string
         description: ''
-    package: '@azure/service-bus'
-references:
-  - uid: '@azure/service-bus.SqlRuleAction'
-    name: SqlRuleAction
-    spec.typeScript:
-      - name: SqlRuleAction
-        fullName: SqlRuleAction
-        uid: '@azure/service-bus.SqlRuleAction'
-  - uid: >-
-      @azure/service-bus.SqlRuleFilter |
-      @azure/service-bus.CorrelationRuleFilter
-    name: CorrelationRuleFilter
-    spec.typeScript:
-      - name: SqlRuleFilter
-        fullName: SqlRuleFilter
-        uid: '@azure/service-bus.SqlRuleFilter'
-      - name: ' | '
-        fullName: ' | '
-      - name: CorrelationRuleFilter
-        fullName: CorrelationRuleFilter
-        uid: '@azure/service-bus.CorrelationRuleFilter'

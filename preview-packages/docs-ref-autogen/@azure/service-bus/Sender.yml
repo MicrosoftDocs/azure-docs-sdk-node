@@ -1,67 +1,74 @@
-### YamlMime:UniversalReference
-items:
-  - uid: '@azure/service-bus.Sender'
-    name: Sender
-    fullName: Sender
-    children:
-      - '@azure/service-bus.Sender.cancelScheduledMessages'
-      - '@azure/service-bus.Sender.close'
-      - '@azure/service-bus.Sender.createBatch'
-      - '@azure/service-bus.Sender.entityPath'
-      - '@azure/service-bus.Sender.isClosed'
-      - '@azure/service-bus.Sender.open'
-      - '@azure/service-bus.Sender.scheduleMessages'
-      - '@azure/service-bus.Sender.sendMessages'
-    langs:
-      - typeScript
-    type: interface
-    summary: >-
-      A Sender can be used to send messages, schedule messages to be sent at a
-      later time
+### YamlMime:TSType
+name: Sender
+uid: '@azure/service-bus.Sender'
+package: '@azure/service-bus'
+summary: >-
+  The Sender class can be used to send messages, schedule messages to be sent at
+  a later time
 
-      and cancel such scheduled messages.
+  and cancel such scheduled messages.
 
-      Use the `createSender` function on the ServiceBusClient instantiate a
-      Sender.
+  Use the `createSender` function on the QueueClient or TopicClient to
+  instantiate a Sender.
 
-      The Sender class is an abstraction over the underlying AMQP sender link.
+  The Sender class is an abstraction over the underlying AMQP sender link.
+fullName: Sender
+isPreview: false
+isDeprecated: false
+type: class
+properties:
+  - name: isClosed
+    uid: '@azure/service-bus.Sender.isClosed'
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.cancelScheduledMessages'
-    name: 'cancelScheduledMessages(Long | Long[], OperationOptionsBase)'
-    children: []
-    type: method
-    langs:
-      - typeScript
+    summary: >-
+      Returns `true` if either the sender or the client that created it has been
+      closed
+    fullName: isClosed
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: boolean isClosed
+      return:
+        type: boolean
+        description: ''
+methods:
+  - name: cancelScheduledMessage(Long)
+    uid: '@azure/service-bus.Sender.cancelScheduledMessage'
+    package: '@azure/service-bus'
+    summary: >-
+      Cancels a message that was scheduled to appear on a ServiceBus
+      Queue/Subscription.
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function cancelScheduledMessage(sequenceNumber: Long)'
+      parameters:
+        - id: sequenceNumber
+          type: Long
+          description: The sequence number of the message to be cancelled.
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>
+  - name: 'cancelScheduledMessages(Long[])'
+    uid: '@azure/service-bus.Sender.cancelScheduledMessages'
+    package: '@azure/service-bus'
     summary: >-
       Cancels multiple messages that were scheduled to appear on a ServiceBus
       Queue/Subscription.
+    isPreview: false
+    isDeprecated: false
     syntax:
-      content: >-
-        function cancelScheduledMessages(sequenceNumbers: Long | Long[],
-        options?: OperationOptionsBase)
+      content: 'function cancelScheduledMessages(sequenceNumbers: Long[])'
       parameters:
         - id: sequenceNumbers
-          type:
-            - 'Long | Long[]'
-          description: >-
-            Sequence number or an array of sequence numbers of the messages to
-            be cancelled.
-        - id: options
-          type:
-            - '@azure/service-bus.OperationOptionsBase'
-          description: Options bag to pass an abort signal or tracing options.
-          optional: true
+          type: 'Long[]'
+          description: An Array of sequence numbers of the messages to be cancelled.
       return:
-        type:
-          - Promise<void>
+        type: Promise&lt;void&gt;
         description: Promise<void>
+  - name: close()
+    uid: '@azure/service-bus.Sender.close'
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.close'
-    name: close()
-    children: []
-    type: method
-    langs:
-      - typeScript
     summary: >-
       Closes the underlying AMQP sender link.
 
@@ -69,134 +76,113 @@ items:
 
       Use the `createSender` function on the QueueClient or TopicClient to
       instantiate a new Sender
+    isPreview: false
+    isDeprecated: false
     syntax:
       content: function close()
-      parameters: []
       return:
-        type:
-          - Promise<void>
+        type: Promise&lt;void&gt;
         description: ''
+  - name: open()
+    uid: '@azure/service-bus.Sender.open'
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.createBatch'
-    name: createBatch(CreateBatchOptions)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
-      Creates an instance of `ServiceBusMessageBatch` to which one can add
-      messages until the maximum supported size is reached.
-
-      The batch can be passed to the <xref:send> method to send the messages to
-      Azure Service Bus.
-    syntax:
-      content: 'function createBatch(options?: CreateBatchOptions)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/service-bus.CreateBatchOptions'
-          description: >
-            Configures the behavior of the batch.
-
-            - `maxSizeInBytes`: The upper limit for the size of batch. The
-            `tryAdd` function will return `false` after this limit is reached.
-          optional: true
-      return:
-        type:
-          - Promise<@azure/service-bus.ServiceBusMessageBatch>
-        description: ''
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.entityPath'
-    name: entityPath
-    fullName: entityPath
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: Path of the entity for which the sender has been created.
-    syntax:
-      content: 'entityPath: string'
-      return:
-        type:
-          - string
-        description: ''
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.isClosed'
-    name: isClosed
-    fullName: isClosed
-    children: []
-    langs:
-      - typeScript
-    type: property
-    summary: >-
-      Returns `true` if either the sender or the client that created it has been
-      closed
-    syntax:
-      content: 'isClosed: boolean'
-      return:
-        type:
-          - boolean
-        description: ''
-    package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.open'
-    name: open(SenderOpenOptions)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: |
+    summary: >
       Opens the AMQP link to Azure Service Bus from the sender.
+
       It is not necessary to call this method in order to use the sender. It is
-      recommended to call this before your first sendMessages() call if you
+
+      recommended to call this before your first send() or sendBatch() call if
+      you
+
       want to front load the work of setting up the AMQP link to the service.
+    isPreview: false
+    isDeprecated: false
     syntax:
-      content: 'function open(options?: SenderOpenOptions)'
-      parameters:
-        - id: options
-          type:
-            - '@azure/service-bus.SenderOpenOptions'
-          description: |
-            Options bag to pass an abort signal.
-          optional: true
+      content: function open()
       return:
-        type:
-          - Promise<void>
+        type: Promise&lt;void&gt;
         description: ''
+  - name: 'scheduleMessage(Date, SendableMessageInfo)'
+    uid: '@azure/service-bus.Sender.scheduleMessage'
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.scheduleMessages'
-    name: >-
-      scheduleMessages(Date, ServiceBusMessage | ServiceBusMessage[],
-      OperationOptionsBase)
-    children: []
-    type: method
-    langs:
-      - typeScript
-    summary: >-
+    summary: >
+      Schedules given message to appear on Service Bus Queue/Subscription at a
+      later time.
+
+      Please note that you need to explicitly encode the message body if you
+      intend to receive the message using a tool or library other than this
+      library.
+
+      For example:
+       1. Import DefaultDataTransformer and instantiate.
+           ```js
+             const dt = new DefaultDataTransformer();
+           ```
+       2. Use the `encode` method on the transformer to encode the message body before calling the scheduleMessage() method
+           ```js
+             message.body = dt.encode(message.body);
+           ```
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function scheduleMessage(scheduledEnqueueTimeUtc: Date, message:
+        SendableMessageInfo)
+      parameters:
+        - id: scheduledEnqueueTimeUtc
+          type: Date
+          description: The UTC time at which the message should be enqueued.
+        - id: message
+          type: <xref uid="@azure/service-bus.SendableMessageInfo" />
+          description: The message that needs to be scheduled.
+      return:
+        type: Promise&lt;Long&gt;
+        description: >-
+          Promise<Long> - The sequence number of the message that was scheduled.
+
+          You will need the sequence number if you intend to cancel the
+          scheduling of the message.
+
+          Save the `Long` type as-is in your application without converting to
+          number. Since JavaScript
+
+          only supports 53 bit numbers, converting the `Long` to number will
+          cause loss in precision.
+  - name: 'scheduleMessages(Date, SendableMessageInfo[])'
+    uid: '@azure/service-bus.Sender.scheduleMessages'
+    package: '@azure/service-bus'
+    summary: >
       Schedules given messages to appear on Service Bus Queue/Subscription at a
       later time.
+
+      Please note that you need to explicitly encode the message body if you
+      intend to receive the message using a tool or library other than this
+      library.
+
+      For example:
+       1. Import DefaultDataTransformer and instantiate.
+           ```js
+             const dt = new DefaultDataTransformer();
+           ```
+       2. Use the `encode` method on the transformer to encode the message body before calling the scheduleMessage() method
+           ```js
+             message.body = dt.encode(message.body);
+           ```
+    isPreview: false
+    isDeprecated: false
     syntax:
       content: >-
         function scheduleMessages(scheduledEnqueueTimeUtc: Date, messages:
-        ServiceBusMessage | ServiceBusMessage[], options?: OperationOptionsBase)
+        SendableMessageInfo[])
       parameters:
         - id: scheduledEnqueueTimeUtc
-          type:
-            - Date
+          type: Date
           description: The UTC time at which the messages should be enqueued.
         - id: messages
-          type:
-            - >-
-              @azure/service-bus.ServiceBusMessage |
-              @azure/service-bus.ServiceBusMessage[]
-          description: Message or an array of messages that need to be scheduled.
-        - id: options
-          type:
-            - '@azure/service-bus.OperationOptionsBase'
-          description: Options bag to pass an abort signal or tracing options.
-          optional: true
+          type: '<xref uid="@azure/service-bus.SendableMessageInfo" />[]'
+          description: Array of Messages that need to be scheduled.
       return:
-        type:
-          - 'Promise<Long[]>'
+        type: 'Promise&lt;Long[]&gt;'
         description: >-
           Promise<Long[]> - The sequence numbers of messages that were
           scheduled.
@@ -209,116 +195,58 @@ items:
 
           only supports 53 bit numbers, converting the `Long` to number will
           cause loss in precision.
+  - name: send(SendableMessageInfo)
+    uid: '@azure/service-bus.Sender.send'
     package: '@azure/service-bus'
-  - uid: '@azure/service-bus.Sender.sendMessages'
-    name: >-
-      sendMessages(ServiceBusMessage | ServiceBusMessage[] |
-      ServiceBusMessageBatch, OperationOptionsBase)
-    children: []
-    type: method
-    langs:
-      - typeScript
     summary: >
-      Sends the given messages after creating an AMQP Sender link if it doesn't
-      already exist.
+      Sends the given message after creating an AMQP Sender link if it doesnt
+      already exists.
 
-      Consider awaiting on open() beforehand to front load the work of link
-      creation if needed.
+      To send a message to a `session` and/or `partition` enabled Queue/Topic,
+      set the `sessionId`
+
+      and/or `partitionKey` properties respectively on the message.
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function send(message: SendableMessageInfo)'
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.SendableMessageInfo" />
+          description: Message to send.
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>
+  - name: 'sendBatch(SendableMessageInfo[])'
+    uid: '@azure/service-bus.Sender.sendBatch'
+    package: '@azure/service-bus'
+    summary: >
+      Sends the given messages in a single batch i.e. in a single AMQP message
+      after creating an AMQP
+
+      Sender link if it doesnt already exists.
 
       - To send messages to a `session` and/or `partition` enabled Queue/Topic,
       set the `sessionId`
 
       and/or `partitionKey` properties respectively on the messages.
 
-      - All messages passed to the same sendMessages() call should have the same
-      `sessionId` (if using
-       sessions) and the same `partitionKey` (if using partitions).
+      - When doing so, all
+
+      messages in the batch should have the same `sessionId` (if using sessions)
+      and the same
+
+      `partitionKey` (if using partitions).
+    isPreview: false
+    isDeprecated: false
     syntax:
-      content: >-
-        function sendMessages(messages: ServiceBusMessage | ServiceBusMessage[]
-        | ServiceBusMessageBatch, options?: OperationOptionsBase)
+      content: 'function sendBatch(messages: SendableMessageInfo[])'
       parameters:
         - id: messages
-          type:
-            - >-
-              @azure/service-bus.ServiceBusMessage |
-              @azure/service-bus.ServiceBusMessage[] |
-              @azure/service-bus.ServiceBusMessageBatch
+          type: '<xref uid="@azure/service-bus.SendableMessageInfo" />[]'
           description: >-
-            A single message or an array of messages or a batch of messages
-            created via the createBatch()
-
-            method to send.
-        - id: options
-          type:
-            - '@azure/service-bus.OperationOptionsBase'
-          description: Options bag to pass an abort signal or tracing options.
-          optional: true
+            An array of SendableMessageInfo objects to be sent in a Batch
+            message.
       return:
-        type:
-          - Promise<void>
+        type: Promise&lt;void&gt;
         description: Promise<void>
-    package: '@azure/service-bus'
-references:
-  - uid: '@azure/service-bus.OperationOptionsBase'
-    name: OperationOptionsBase
-    spec.typeScript:
-      - name: OperationOptionsBase
-        fullName: OperationOptionsBase
-        uid: '@azure/service-bus.OperationOptionsBase'
-  - uid: '@azure/service-bus.CreateBatchOptions'
-    name: CreateBatchOptions
-    spec.typeScript:
-      - name: CreateBatchOptions
-        fullName: CreateBatchOptions
-        uid: '@azure/service-bus.CreateBatchOptions'
-  - uid: Promise<@azure/service-bus.ServiceBusMessageBatch>
-    name: ServiceBusMessageBatch>
-    spec.typeScript:
-      - name: Promise<
-        fullName: Promise<
-      - name: ServiceBusMessageBatch
-        fullName: ServiceBusMessageBatch
-        uid: '@azure/service-bus.ServiceBusMessageBatch'
-      - name: '>'
-        fullName: '>'
-  - uid: '@azure/service-bus.SenderOpenOptions'
-    name: SenderOpenOptions
-    spec.typeScript:
-      - name: SenderOpenOptions
-        fullName: SenderOpenOptions
-        uid: '@azure/service-bus.SenderOpenOptions'
-  - uid: >-
-      @azure/service-bus.ServiceBusMessage |
-      @azure/service-bus.ServiceBusMessage[]
-    name: 'ServiceBusMessage[]'
-    spec.typeScript:
-      - name: ServiceBusMessage
-        fullName: ServiceBusMessage
-        uid: '@azure/service-bus.ServiceBusMessage'
-      - name: ' | '
-        fullName: ' | '
-      - name: ServiceBusMessage
-        fullName: ServiceBusMessage
-        uid: '@azure/service-bus.ServiceBusMessage'
-      - name: '[]'
-        fullName: '[]'
-  - uid: >-
-      @azure/service-bus.ServiceBusMessage |
-      @azure/service-bus.ServiceBusMessage[] |
-      @azure/service-bus.ServiceBusMessageBatch
-    name: ServiceBusMessageBatch
-    spec.typeScript:
-      - name: ServiceBusMessage
-        fullName: ServiceBusMessage
-        uid: '@azure/service-bus.ServiceBusMessage'
-      - name: ' | '
-        fullName: ' | '
-      - name: ServiceBusMessage
-        fullName: ServiceBusMessage
-        uid: '@azure/service-bus.ServiceBusMessage'
-      - name: '[] | '
-        fullName: '[] | '
-      - name: ServiceBusMessageBatch
-        fullName: ServiceBusMessageBatch
-        uid: '@azure/service-bus.ServiceBusMessageBatch'

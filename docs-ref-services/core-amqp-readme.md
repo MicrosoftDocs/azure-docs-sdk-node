@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/core-amqp, 
 author: maggiepint
 ms.author: magpint
-ms.date: 08/04/2020
+ms.date: 09/08/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -270,7 +270,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
 provided by the bot. You will only need to do this once across all repos using our CLA.
 
-If you'd like to contribute to this library, please read the [contributing guide](../../../CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/tree/9e0562d31ace429c390a4e8f4b1ba3f4f8225364/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or

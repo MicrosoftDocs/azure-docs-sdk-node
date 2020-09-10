@@ -476,7 +476,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/storage-blob.BlobDownloadResponseModel>
+          - Promise<@azure/storage-blob.BlobDownloadResponseParsed>
         description: ''
     package: '@azure/storage-blob'
   - uid: '@azure/storage-blob.BlockBlobClient.downloadToBuffer_1'
@@ -618,7 +618,7 @@ items:
           optional: true
       return:
         type:
-          - Promise<@azure/storage-blob.BlobDownloadResponseModel>
+          - Promise<@azure/storage-blob.BlobDownloadResponseParsed>
         description: |-
           The response data for blob download operation,
                                                           but with readableStreamBody set to undefined since its
@@ -816,7 +816,10 @@ items:
     langs:
       - typeScript
     summary: >
+      ONLY AVAILABLE IN NODE.JS RUNTIME.
+
       Quick query for a JSON or CSV formatted blob.
+
 
       Example usage (Node.js):
 
@@ -828,20 +831,20 @@ items:
       const queryBlockBlobResponse = await blockBlobClient.query("select * from
       BlobStorage");
 
-      const downloaded = await
-      streamToString(queryBlockBlobResponse.readableStreamBody);
+      const downloaded = (await
+      streamToBuffer(queryBlockBlobResponse.readableStreamBody)).toString();
 
       console.log("Query blob content:", downloaded);
 
 
-      async function streamToString(readableStream) {
+      async function streamToBuffer(readableStream) {
         return new Promise((resolve, reject) => {
           const chunks = [];
           readableStream.on("data", (data) => {
-            chunks.push(data.toString());
+            chunks.push(data instanceof Buffer ? data : Buffer.from(data));
           });
           readableStream.on("end", () => {
-            resolve(chunks.join(""));
+            resolve(Buffer.concat(chunks));
           });
           readableStream.on("error", reject);
         });
@@ -1536,14 +1539,14 @@ references:
       - name: BlobDownloadOptions
         fullName: BlobDownloadOptions
         uid: '@azure/storage-blob.BlobDownloadOptions'
-  - uid: Promise<@azure/storage-blob.BlobDownloadResponseModel>
-    name: BlobDownloadResponseModel>
+  - uid: Promise<@azure/storage-blob.BlobDownloadResponseParsed>
+    name: BlobDownloadResponseParsed>
     spec.typeScript:
       - name: Promise<
         fullName: Promise<
-      - name: BlobDownloadResponseModel
-        fullName: BlobDownloadResponseModel
-        uid: '@azure/storage-blob.BlobDownloadResponseModel'
+      - name: BlobDownloadResponseParsed
+        fullName: BlobDownloadResponseParsed
+        uid: '@azure/storage-blob.BlobDownloadResponseParsed'
       - name: '>'
         fullName: '>'
   - uid: '@azure/storage-blob.BlobDownloadToBufferOptions'
@@ -1642,6 +1645,16 @@ references:
       - name: BlockBlobQueryOptions
         fullName: BlockBlobQueryOptions
         uid: '@azure/storage-blob.BlockBlobQueryOptions'
+  - uid: Promise<@azure/storage-blob.BlobDownloadResponseModel>
+    name: BlobDownloadResponseModel>
+    spec.typeScript:
+      - name: Promise<
+        fullName: Promise<
+      - name: BlobDownloadResponseModel
+        fullName: BlobDownloadResponseModel
+        uid: '@azure/storage-blob.BlobDownloadResponseModel'
+      - name: '>'
+        fullName: '>'
   - uid: >-
       @azure/storage-blob.BlockBlobTier |
       @azure/storage-blob.PremiumPageBlobTier | string

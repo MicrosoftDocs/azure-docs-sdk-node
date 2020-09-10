@@ -87,7 +87,7 @@ items:
   - uid: '@azure/event-hubs.EventHubConsumerClient.constructor_1'
     name: >-
       EventHubConsumerClient(string, string, CheckpointStore,
-      EventHubClientOptions)
+      EventHubConsumerClientOptions)
     children: []
     type: constructor
     langs:
@@ -97,7 +97,7 @@ items:
       content: >-
         new EventHubConsumerClient(consumerGroup: string, connectionString:
         string, checkpointStore: CheckpointStore, options?:
-        EventHubClientOptions)
+        EventHubConsumerClientOptions)
       parameters:
         - id: consumerGroup
           type:
@@ -131,7 +131,7 @@ items:
             your application.
         - id: options
           type:
-            - '@azure/event-hubs.EventHubClientOptions'
+            - '@azure/event-hubs.EventHubConsumerClientOptions'
           description: >
             A set of options to apply when configuring the client.
 
@@ -149,7 +149,7 @@ items:
           optional: true
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubConsumerClient.constructor'
-    name: 'EventHubConsumerClient(string, string, EventHubClientOptions)'
+    name: 'EventHubConsumerClient(string, string, EventHubConsumerClientOptions)'
     children: []
     type: constructor
     langs:
@@ -158,7 +158,7 @@ items:
     syntax:
       content: >-
         new EventHubConsumerClient(consumerGroup: string, connectionString:
-        string, options?: EventHubClientOptions)
+        string, options?: EventHubConsumerClientOptions)
       parameters:
         - id: consumerGroup
           type:
@@ -180,7 +180,7 @@ items:
             'Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key;EntityPath=my-event-hub-name'.
         - id: options
           type:
-            - '@azure/event-hubs.EventHubClientOptions'
+            - '@azure/event-hubs.EventHubConsumerClientOptions'
           description: >
             A set of options to apply when configuring the client.
 
@@ -200,7 +200,7 @@ items:
   - uid: '@azure/event-hubs.EventHubConsumerClient.constructor_3'
     name: >-
       EventHubConsumerClient(string, string, string, CheckpointStore,
-      EventHubClientOptions)
+      EventHubConsumerClientOptions)
     children: []
     type: constructor
     langs:
@@ -210,7 +210,7 @@ items:
       content: >-
         new EventHubConsumerClient(consumerGroup: string, connectionString:
         string, eventHubName: string, checkpointStore: CheckpointStore,
-        options?: EventHubClientOptions)
+        options?: EventHubConsumerClientOptions)
       parameters:
         - id: consumerGroup
           type:
@@ -248,7 +248,7 @@ items:
             your application.
         - id: options
           type:
-            - '@azure/event-hubs.EventHubClientOptions'
+            - '@azure/event-hubs.EventHubConsumerClientOptions'
           description: >
             A set of options to apply when configuring the client.
 
@@ -266,7 +266,9 @@ items:
           optional: true
     package: '@azure/event-hubs'
   - uid: '@azure/event-hubs.EventHubConsumerClient.constructor_2'
-    name: 'EventHubConsumerClient(string, string, string, EventHubClientOptions)'
+    name: >-
+      EventHubConsumerClient(string, string, string,
+      EventHubConsumerClientOptions)
     children: []
     type: constructor
     langs:
@@ -275,7 +277,7 @@ items:
     syntax:
       content: >-
         new EventHubConsumerClient(consumerGroup: string, connectionString:
-        string, eventHubName: string, options?: EventHubClientOptions)
+        string, eventHubName: string, options?: EventHubConsumerClientOptions)
       parameters:
         - id: consumerGroup
           type:
@@ -301,7 +303,7 @@ items:
           description: The name of the specific Event Hub to connect the client to.
         - id: options
           type:
-            - '@azure/event-hubs.EventHubClientOptions'
+            - '@azure/event-hubs.EventHubConsumerClientOptions'
           description: >
             A set of options to apply when configuring the client.
 
@@ -321,7 +323,7 @@ items:
   - uid: '@azure/event-hubs.EventHubConsumerClient.constructor_5'
     name: >-
       EventHubConsumerClient(string, string, string, TokenCredential,
-      CheckpointStore, EventHubClientOptions)
+      CheckpointStore, EventHubConsumerClientOptions)
     children: []
     type: constructor
     langs:
@@ -332,7 +334,7 @@ items:
         new EventHubConsumerClient(consumerGroup: string,
         fullyQualifiedNamespace: string, eventHubName: string, credential:
         TokenCredential, checkpointStore: CheckpointStore, options?:
-        EventHubClientOptions)
+        EventHubConsumerClientOptions)
       parameters:
         - id: consumerGroup
           type:
@@ -373,7 +375,7 @@ items:
             your application.
         - id: options
           type:
-            - '@azure/event-hubs.EventHubClientOptions'
+            - '@azure/event-hubs.EventHubConsumerClientOptions'
           description: >
             A set of options to apply when configuring the client.
 
@@ -393,7 +395,7 @@ items:
   - uid: '@azure/event-hubs.EventHubConsumerClient.constructor_4'
     name: >-
       EventHubConsumerClient(string, string, string, TokenCredential,
-      EventHubClientOptions)
+      EventHubConsumerClientOptions)
     children: []
     type: constructor
     langs:
@@ -403,7 +405,7 @@ items:
       content: >-
         new EventHubConsumerClient(consumerGroup: string,
         fullyQualifiedNamespace: string, eventHubName: string, credential:
-        TokenCredential, options?: EventHubClientOptions)
+        TokenCredential, options?: EventHubConsumerClientOptions)
       parameters:
         - id: consumerGroup
           type:
@@ -432,7 +434,7 @@ items:
             creating the credentials.
         - id: options
           type:
-            - '@azure/event-hubs.EventHubClientOptions'
+            - '@azure/event-hubs.EventHubConsumerClientOptions'
           description: >
             A set of options to apply when configuring the client.
 
@@ -557,9 +559,28 @@ items:
     type: method
     langs:
       - typeScript
-    summary: |-
+    summary: >
       Subscribe to events from a single partition.
+
       Call close() on the returned object to stop receiving events.
+
+      Example usage:
+
+      ```ts
+
+      const client = new EventHubConsumerClient(consumerGroup, connectionString,
+      eventHubName);
+
+      const subscription = client.subscribe(
+       partitionId,
+       {
+         processEvents: (events, context) => { console.log("Received event count: ", events.length) },
+         processError: (err, context) => { console.log("Error: ", err) }
+       },
+       { startPosition: earliestEventPosition }
+      );
+
+      ```
     syntax:
       content: >-
         function subscribe(partitionId: string, handlers:
@@ -616,6 +637,24 @@ items:
 
 
       Call close() on the returned object to stop receiving events.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new EventHubConsumerClient(consumerGroup, connectionString,
+      eventHubName);
+
+      const subscription = client.subscribe(
+       {
+         processEvents: (events, context) => { console.log("Received event count: ", events.length) },
+         processError: (err, context) => { console.log("Error: ", err) }
+       },
+       { startPosition: earliestEventPosition }
+      );
+
+      ```
     syntax:
       content: >-
         function subscribe(handlers: SubscriptionEventHandlers, options?:
@@ -650,12 +689,12 @@ items:
         description: ''
     package: '@azure/event-hubs'
 references:
-  - uid: '@azure/event-hubs.EventHubClientOptions'
-    name: EventHubClientOptions
+  - uid: '@azure/event-hubs.EventHubConsumerClientOptions'
+    name: EventHubConsumerClientOptions
     spec.typeScript:
-      - name: EventHubClientOptions
-        fullName: EventHubClientOptions
-        uid: '@azure/event-hubs.EventHubClientOptions'
+      - name: EventHubConsumerClientOptions
+        fullName: EventHubConsumerClientOptions
+        uid: '@azure/event-hubs.EventHubConsumerClientOptions'
   - uid: '@azure/event-hubs.CheckpointStore'
     name: CheckpointStore
     spec.typeScript:

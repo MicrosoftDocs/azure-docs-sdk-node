@@ -63,12 +63,35 @@ items:
     type: method
     langs:
       - typeScript
-    summary: >-
+    summary: >
       Creates an instance of `EventDataBatch` to which one can add events until
       the maximum supported size is reached.
 
       The batch can be passed to the <xref:sendBatch> method of the
       `EventHubProducerClient` to be sent to Azure Event Hubs.
+
+      Example usage:
+
+      ```ts
+
+      const client = new EventHubProducerClient(connectionString);
+
+      let batch = await client.createBatch();
+
+      for (let i = 0; i < messages.length; i++) {
+       if (!batch.tryAdd(messages[i])) {
+         await client.sendBatch(batch);
+         batch = await client.createBatch();
+         if (!batch.tryAdd(messages[i])) {
+           throw new Error("Message too big to fit")
+         }
+         if (i === messages.length - 1) {
+           await client.sendBatch(batch);
+         }
+        }
+      }
+
+      ```
     syntax:
       content: 'function createBatch(options?: CreateBatchOptions)'
       parameters:
@@ -347,7 +370,25 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Sends a batch of events to the associated Event Hub.
+    summary: |-
+      Sends a batch of events to the associated Event Hub.
+      Example usage:
+      ```ts
+      const client = new EventHubProducerClient(connectionString);
+      let batch = await client.createBatch();
+      for (let i = 0; i < messages.length; i++) {
+       if (!batch.tryAdd(messages[i])) {
+         await client.sendBatch(batch);
+         batch = await client.createBatch();
+         if (!batch.tryAdd(messages[i])) {
+           throw new Error("Message too big to fit")
+         }
+         if (i === messages.length - 1) {
+           await client.sendBatch(batch);
+         }
+        }
+      }
+      ```
     syntax:
       content: 'function sendBatch(batch: EventDataBatch, options?: OperationOptions)'
       parameters:
@@ -379,7 +420,13 @@ items:
     type: method
     langs:
       - typeScript
-    summary: Sends an array of events to the associated Event Hub.
+    summary: |
+      Sends an array of events to the associated Event Hub.
+      Example usage:
+      ```ts
+      const client = new EventHubProducerClient(connectionString);
+      await client.sendBatch(messages);
+      ```
     syntax:
       content: 'function sendBatch(batch: EventData[], options?: SendBatchOptions)'
       parameters:

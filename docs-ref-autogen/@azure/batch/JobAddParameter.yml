@@ -1,0 +1,292 @@
+### YamlMime:TSType
+name: JobAddParameter
+uid: '@azure/batch.JobAddParameter'
+package: '@azure/batch'
+summary: An interface representing JobAddParameter.
+fullName: JobAddParameter
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+  - name: commonEnvironmentSettings
+    uid: '@azure/batch.JobAddParameter.commonEnvironmentSettings'
+    package: '@azure/batch'
+    summary: >-
+      The list of common environment variable settings. These environment
+      variables are set for all
+
+      tasks in the job (including the Job Manager, Job Preparation and Job
+      Release tasks).
+
+      Individual tasks can override an environment setting specified here by
+      specifying the same
+
+      setting name with a different value.
+    fullName: commonEnvironmentSettings
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'commonEnvironmentSettings?: EnvironmentSetting[]'
+      return:
+        type: '<xref uid="@azure/batch.EnvironmentSetting" />[]'
+        description: ''
+  - name: constraints
+    uid: '@azure/batch.JobAddParameter.constraints'
+    package: '@azure/batch'
+    summary: The execution constraints for the job.
+    fullName: constraints
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'constraints?: JobConstraints'
+      return:
+        type: <xref uid="@azure/batch.JobConstraints" />
+        description: ''
+  - name: displayName
+    uid: '@azure/batch.JobAddParameter.displayName'
+    package: '@azure/batch'
+    summary: >-
+      The display name for the job. The display name need not be unique and can
+      contain any Unicode
+
+      characters up to a maximum length of 1024.
+    fullName: displayName
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'displayName?: undefined | string'
+      return:
+        type: undefined | string
+        description: ''
+  - name: id
+    uid: '@azure/batch.JobAddParameter.id'
+    package: '@azure/batch'
+    summary: >-
+      A string that uniquely identifies the job within the account. The ID can
+      contain any
+
+      combination of alphanumeric characters including hyphens and underscores,
+      and cannot contain
+
+      more than 64 characters. The ID is case-preserving and case-insensitive
+      (that is, you may not
+
+      have two IDs within an account that differ only by case).
+    fullName: id
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'id: string'
+      return:
+        type: string
+        description: ''
+  - name: jobManagerTask
+    uid: '@azure/batch.JobAddParameter.jobManagerTask'
+    package: '@azure/batch'
+    summary: >-
+      Details of a Job Manager task to be launched when the job is started. If
+      the job does not
+
+      specify a Job Manager task, the user must explicitly add tasks to the job.
+      If the job does
+
+      specify a Job Manager task, the Batch service creates the Job Manager task
+      when the job is
+
+      created, and will try to schedule the Job Manager task before scheduling
+      other tasks in the
+
+      job. The Job Manager task's typical purpose is to control and/or monitor
+      job execution, for
+
+      example by deciding what additional tasks to run, determining when the
+      work is complete, etc.
+
+      (However, a Job Manager task is not restricted to these activities - it is
+      a fully-fledged
+
+      task in the system and perform whatever actions are required for the job.)
+      For example, a Job
+
+      Manager task might download a file specified as a parameter, analyze the
+      contents of that file
+
+      and submit additional tasks based on those contents.
+    fullName: jobManagerTask
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'jobManagerTask?: JobManagerTask'
+      return:
+        type: <xref uid="@azure/batch.JobManagerTask" />
+        description: ''
+  - name: jobPreparationTask
+    uid: '@azure/batch.JobAddParameter.jobPreparationTask'
+    package: '@azure/batch'
+    summary: >-
+      The Job Preparation task. If a job has a Job Preparation task, the Batch
+      service will run the
+
+      Job Preparation task on a compute node before starting any tasks of that
+      job on that compute
+
+      node.
+    fullName: jobPreparationTask
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'jobPreparationTask?: JobPreparationTask'
+      return:
+        type: <xref uid="@azure/batch.JobPreparationTask" />
+        description: ''
+  - name: jobReleaseTask
+    uid: '@azure/batch.JobAddParameter.jobReleaseTask'
+    package: '@azure/batch'
+    summary: >-
+      The Job Release task. A Job Release task cannot be specified without also
+      specifying a Job
+
+      Preparation task for the job. The Batch service runs the Job Release task
+      on the compute nodes
+
+      that have run the Job Preparation task. The primary purpose of the Job
+      Release task is to undo
+
+      changes to compute nodes made by the Job Preparation task. Example
+      activities include deleting
+
+      local files, or shutting down services that were started as part of job
+      preparation.
+    fullName: jobReleaseTask
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'jobReleaseTask?: JobReleaseTask'
+      return:
+        type: <xref uid="@azure/batch.JobReleaseTask" />
+        description: ''
+  - name: metadata
+    uid: '@azure/batch.JobAddParameter.metadata'
+    package: '@azure/batch'
+    summary: >-
+      A list of name-value pairs associated with the job as metadata. The Batch
+      service does not
+
+      assign any meaning to metadata; it is solely for the use of user code.
+    fullName: metadata
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'metadata?: MetadataItem[]'
+      return:
+        type: '<xref uid="@azure/batch.MetadataItem" />[]'
+        description: ''
+  - name: networkConfiguration
+    uid: '@azure/batch.JobAddParameter.networkConfiguration'
+    package: '@azure/batch'
+    summary: The network configuration for the job.
+    fullName: networkConfiguration
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'networkConfiguration?: JobNetworkConfiguration'
+      return:
+        type: <xref uid="@azure/batch.JobNetworkConfiguration" />
+        description: ''
+  - name: onAllTasksComplete
+    uid: '@azure/batch.JobAddParameter.onAllTasksComplete'
+    package: '@azure/batch'
+    summary: >-
+      The action the Batch service should take when all tasks in the job are in
+      the completed state.
+
+      Note that if a job contains no tasks, then all tasks are considered
+      complete. This option is
+
+      therefore most commonly used with a Job Manager task; if you want to use
+      automatic job
+
+      termination without a Job Manager, you should initially set
+      onAllTasksComplete to noaction and
+
+      update the job properties to set onAllTasksComplete to terminatejob once
+      you have finished
+
+      adding tasks. The default is noaction. Possible values include:
+      'noAction', 'terminateJob'
+    fullName: onAllTasksComplete
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'onAllTasksComplete?: OnAllTasksComplete'
+      return:
+        type: <xref uid="@azure/batch.OnAllTasksComplete" />
+        description: ''
+  - name: onTaskFailure
+    uid: '@azure/batch.JobAddParameter.onTaskFailure'
+    package: '@azure/batch'
+    summary: >-
+      The action the Batch service should take when any task in the job fails. A
+      task is considered
+
+      to have failed if has a failureInfo. A failureInfo is set if the task
+      completes with a
+
+      non-zero exit code after exhausting its retry count, or if there was an
+      error starting the
+
+      task, for example due to a resource file download error. The default is
+      noaction. Possible
+
+      values include: 'noAction', 'performExitOptionsJobAction'
+    fullName: onTaskFailure
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'onTaskFailure?: OnTaskFailure'
+      return:
+        type: <xref uid="@azure/batch.OnTaskFailure" />
+        description: ''
+  - name: poolInfo
+    uid: '@azure/batch.JobAddParameter.poolInfo'
+    package: '@azure/batch'
+    summary: The pool on which the Batch service runs the job's tasks.
+    fullName: poolInfo
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'poolInfo: PoolInformation'
+      return:
+        type: <xref uid="@azure/batch.PoolInformation" />
+        description: ''
+  - name: priority
+    uid: '@azure/batch.JobAddParameter.priority'
+    package: '@azure/batch'
+    summary: >-
+      The priority of the job. Priority values can range from -1000 to 1000,
+      with -1000 being the
+
+      lowest priority and 1000 being the highest priority. The default value is
+      0.
+    fullName: priority
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'priority?: undefined | number'
+      return:
+        type: undefined | number
+        description: ''
+  - name: usesTaskDependencies
+    uid: '@azure/batch.JobAddParameter.usesTaskDependencies'
+    package: '@azure/batch'
+    summary: >-
+      Whether tasks in the job can define dependencies on each other. The
+      default is false.
+    fullName: usesTaskDependencies
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'usesTaskDependencies?: undefined | false | true'
+      return:
+        type: undefined | false | true
+        description: ''

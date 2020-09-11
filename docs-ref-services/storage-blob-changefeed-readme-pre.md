@@ -28,7 +28,7 @@ Use the client libraries in this package to:
 [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob-changefeed_12.0.0-preview.2/sdk/storage/storage-blob-changefeed) |
 [Package (npm)](https://www.npmjs.com/package/@azure/storage-blob-changefeed/) |
 [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/storage-blob-changefeed) |
-[Product documentation](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-change-feed) |
+[Product documentation](https://docs.microsoft.com/azure/storage/blobs/storage-blob-change-feed) |
 [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob-changefeed_12.0.0-preview.2/sdk/storage/storage-blob-changefeed/samples) |
 
 ## Getting started
@@ -181,4 +181,3 @@ If you'd like to contribute to this library, please read the [contributing guide
 Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob-changefeed_12.0.0-preview.2/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fstorage%2Fstorage-blob-changefeed%2FREADME.png)
-

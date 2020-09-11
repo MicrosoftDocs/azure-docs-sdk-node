@@ -63,7 +63,7 @@ This library offers a client you can use to fetch the change events.
 
 - [Initialize the change feed client](#initialize-the-change-feed-client "Initialize the change feed client")
 - [Reading all events in the Change Feed](#reading-all-events-in-the-change-feed "Reading all events in the Change Feed")
-- [Resuming reading events with a cursor](#resuming-reading-events-with-a-cursor "Resuming reading events with a cursor")
+- [Resuming reading events with a continuationToken](#resuming-reading-events-with-a-continuationtoken "Resuming reading events with a continuationToken")
 - [Reading events within a time range](#reading-events-within-a-time-range "Reading events within a time range")
 
 ### Initialize the change feed client

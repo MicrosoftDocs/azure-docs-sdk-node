@@ -28,7 +28,7 @@ Use the client libraries in this package to:
 
 [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.2.0/sdk/storage/storage-blob) |
 [Package (npm)](https://www.npmjs.com/package/@azure/storage-blob/) |
-[API Reference Documentation](https://docs.microsoft.com/en-us/javascript/api/overview/azure/storage-overview) |
+[API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/storage-blob) |
 [Product documentation](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) |
 [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-blob_12.2.0/sdk/storage/storage-blob/samples) |
 [Azure Storage Blob REST APIs](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api)
@@ -537,4 +537,3 @@ If you'd like to contribute to this library, please read the [contributing guide
 Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.2.0/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fstorage%2Fstorage-blob%2FREADME.png)
-

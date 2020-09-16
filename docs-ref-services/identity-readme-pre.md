@@ -16,7 +16,7 @@ ms.service:
 
 This library simplifies authentication against Azure Active Directory for Azure SDK libraries.
 It provides a set of `TokenCredential` implementations which can be passed into SDK libraries
-to authenticate API requests. It supports token authentication using an Azure Active Directory [service principal](https://docs.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli) or [managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview).
+to authenticate API requests. It supports token authentication using an Azure Active Directory [service principal](https://docs.microsoft.com/cli/azure/create-an-azure-service-principal-azure-cli) or [managed identity](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview).
 
 ## Getting started
 
@@ -73,7 +73,7 @@ The `DefaultAzureCredential` is appropriate for most scenarios where the applica
 
 ![DefaultAzureCredential authentication flow][DefaultAuthFlow_image]
 
-- Environment - The `DefaultAzureCredential` will read account information specified via [environment variables](#Environment-variables) and use it to authenticate.
+- Environment - The `DefaultAzureCredential` will read account information specified via environment variables and use it to authenticate.
 - Managed Identity - If the application is deployed to an Azure host with Managed Identity enabled, the `DefaultAzureCredential` will authenticate with that account.
 - Visual Studio Code - If the developer has authenticated via the Visual Studio Code Azure Account plugin, the `DefaultAzureCredential` will authenticate with that account.
 - Azure CLI - If the developer has authenticated an account via the Azure CLI `az login` command, the `DefaultAzureCredential` will authenticate with that account.

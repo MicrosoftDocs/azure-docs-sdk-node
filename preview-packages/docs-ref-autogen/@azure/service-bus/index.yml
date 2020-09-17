@@ -4,8 +4,11 @@ items:
     name: '@azure/service-bus'
     summary: ''
     children:
+      - '@azure/service-bus.ServiceBusAdministrationClient'
       - '@azure/service-bus.ServiceBusClient'
-      - '@azure/service-bus.ServiceBusManagementClient'
+      - '@azure/service-bus.AmqpAnnotatedMessage'
+      - '@azure/service-bus.AmqpMessageHeader'
+      - '@azure/service-bus.AmqpMessageProperties'
       - '@azure/service-bus.CorrelationRuleFilter'
       - '@azure/service-bus.CreateBatchOptions'
       - '@azure/service-bus.CreateQueueOptions'
@@ -17,6 +20,7 @@ items:
       - '@azure/service-bus.EntitiesResponse'
       - '@azure/service-bus.GetMessageIteratorOptions'
       - '@azure/service-bus.MessageHandlerOptions'
+      - '@azure/service-bus.MessageHandlerOptionsBase'
       - '@azure/service-bus.MessageHandlers'
       - '@azure/service-bus.NamespaceProperties'
       - '@azure/service-bus.NamespacePropertiesResponse'
@@ -26,21 +30,18 @@ items:
       - '@azure/service-bus.QueueRuntimeProperties'
       - '@azure/service-bus.QueueRuntimePropertiesResponse'
       - '@azure/service-bus.ReceiveMessagesOptions'
-      - '@azure/service-bus.ReceivedMessage'
-      - '@azure/service-bus.ReceivedMessageWithLock'
-      - '@azure/service-bus.Receiver'
       - '@azure/service-bus.Response'
       - '@azure/service-bus.RuleProperties'
       - '@azure/service-bus.RuleResponse'
-      - '@azure/service-bus.Sender'
-      - '@azure/service-bus.SenderOpenOptions'
       - '@azure/service-bus.ServiceBusClientOptions'
-      - '@azure/service-bus.ServiceBusManagementClientOptions'
       - '@azure/service-bus.ServiceBusMessage'
       - '@azure/service-bus.ServiceBusMessageBatch'
-      - '@azure/service-bus.SessionMessageHandlerOptions'
-      - '@azure/service-bus.SessionReceiver'
-      - '@azure/service-bus.SessionReceiverOptions'
+      - '@azure/service-bus.ServiceBusReceivedMessage'
+      - '@azure/service-bus.ServiceBusReceivedMessageWithLock'
+      - '@azure/service-bus.ServiceBusReceiver'
+      - '@azure/service-bus.ServiceBusSender'
+      - '@azure/service-bus.ServiceBusSessionReceiver'
+      - '@azure/service-bus.SessionSubscribeOptions'
       - '@azure/service-bus.SqlRuleFilter'
       - '@azure/service-bus.SubscribeOptions'
       - '@azure/service-bus.SubscriptionProperties'
@@ -51,21 +52,26 @@ items:
       - '@azure/service-bus.TopicResponse'
       - '@azure/service-bus.TopicRuntimeProperties'
       - '@azure/service-bus.TopicRuntimePropertiesResponse'
-      - '@azure/service-bus.WaitTimeOptions'
       - '@azure/service-bus.AuthorizationRule'
       - '@azure/service-bus.EntityStatus'
       - '@azure/service-bus.OperationOptionsBase'
       - '@azure/service-bus.ReceiveMode'
-      - '@azure/service-bus.SqlParameter'
       - '@azure/service-bus.SqlRuleAction'
+      - '@azure/service-bus.SubQueue'
     type: package
     langs:
       - typeScript
 references:
+  - uid: '@azure/service-bus.ServiceBusAdministrationClient'
+    name: ServiceBusAdministrationClient
   - uid: '@azure/service-bus.ServiceBusClient'
     name: ServiceBusClient
-  - uid: '@azure/service-bus.ServiceBusManagementClient'
-    name: ServiceBusManagementClient
+  - uid: '@azure/service-bus.AmqpAnnotatedMessage'
+    name: AmqpAnnotatedMessage
+  - uid: '@azure/service-bus.AmqpMessageHeader'
+    name: AmqpMessageHeader
+  - uid: '@azure/service-bus.AmqpMessageProperties'
+    name: AmqpMessageProperties
   - uid: '@azure/service-bus.CorrelationRuleFilter'
     name: CorrelationRuleFilter
   - uid: '@azure/service-bus.CreateBatchOptions'
@@ -88,6 +94,8 @@ references:
     name: GetMessageIteratorOptions
   - uid: '@azure/service-bus.MessageHandlerOptions'
     name: MessageHandlerOptions
+  - uid: '@azure/service-bus.MessageHandlerOptionsBase'
+    name: MessageHandlerOptionsBase
   - uid: '@azure/service-bus.MessageHandlers'
     name: MessageHandlers
   - uid: '@azure/service-bus.NamespaceProperties'
@@ -106,36 +114,30 @@ references:
     name: QueueRuntimePropertiesResponse
   - uid: '@azure/service-bus.ReceiveMessagesOptions'
     name: ReceiveMessagesOptions
-  - uid: '@azure/service-bus.ReceivedMessage'
-    name: ReceivedMessage
-  - uid: '@azure/service-bus.ReceivedMessageWithLock'
-    name: ReceivedMessageWithLock
-  - uid: '@azure/service-bus.Receiver'
-    name: Receiver
   - uid: '@azure/service-bus.Response'
     name: Response
   - uid: '@azure/service-bus.RuleProperties'
     name: RuleProperties
   - uid: '@azure/service-bus.RuleResponse'
     name: RuleResponse
-  - uid: '@azure/service-bus.Sender'
-    name: Sender
-  - uid: '@azure/service-bus.SenderOpenOptions'
-    name: SenderOpenOptions
   - uid: '@azure/service-bus.ServiceBusClientOptions'
     name: ServiceBusClientOptions
-  - uid: '@azure/service-bus.ServiceBusManagementClientOptions'
-    name: ServiceBusManagementClientOptions
   - uid: '@azure/service-bus.ServiceBusMessage'
     name: ServiceBusMessage
   - uid: '@azure/service-bus.ServiceBusMessageBatch'
     name: ServiceBusMessageBatch
-  - uid: '@azure/service-bus.SessionMessageHandlerOptions'
-    name: SessionMessageHandlerOptions
-  - uid: '@azure/service-bus.SessionReceiver'
-    name: SessionReceiver
-  - uid: '@azure/service-bus.SessionReceiverOptions'
-    name: SessionReceiverOptions
+  - uid: '@azure/service-bus.ServiceBusReceivedMessage'
+    name: ServiceBusReceivedMessage
+  - uid: '@azure/service-bus.ServiceBusReceivedMessageWithLock'
+    name: ServiceBusReceivedMessageWithLock
+  - uid: '@azure/service-bus.ServiceBusReceiver'
+    name: ServiceBusReceiver
+  - uid: '@azure/service-bus.ServiceBusSender'
+    name: ServiceBusSender
+  - uid: '@azure/service-bus.ServiceBusSessionReceiver'
+    name: ServiceBusSessionReceiver
+  - uid: '@azure/service-bus.SessionSubscribeOptions'
+    name: SessionSubscribeOptions
   - uid: '@azure/service-bus.SqlRuleFilter'
     name: SqlRuleFilter
   - uid: '@azure/service-bus.SubscribeOptions'
@@ -156,8 +158,6 @@ references:
     name: TopicRuntimeProperties
   - uid: '@azure/service-bus.TopicRuntimePropertiesResponse'
     name: TopicRuntimePropertiesResponse
-  - uid: '@azure/service-bus.WaitTimeOptions'
-    name: WaitTimeOptions
   - uid: '@azure/service-bus.AuthorizationRule'
     name: AuthorizationRule
   - uid: '@azure/service-bus.EntityStatus'
@@ -166,7 +166,7 @@ references:
     name: OperationOptionsBase
   - uid: '@azure/service-bus.ReceiveMode'
     name: ReceiveMode
-  - uid: '@azure/service-bus.SqlParameter'
-    name: SqlParameter
   - uid: '@azure/service-bus.SqlRuleAction'
     name: SqlRuleAction
+  - uid: '@azure/service-bus.SubQueue'
+    name: SubQueue

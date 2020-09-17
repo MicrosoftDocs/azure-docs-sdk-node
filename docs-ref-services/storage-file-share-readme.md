@@ -1,16 +1,17 @@
 ---
 title: Azure Storage File Share client library for JavaScript
-keywords: Azure, JavaScript, SDK, API, storage, storage-file-share
+keywords: Azure, javascript, SDK, API, @azure/storage-file-share, 
 author: maggiepint
 ms.author: magpint
-ms.date: 04/16/2020
+ms.date: 09/09/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: JavaScript
-ms.service: storage
+ms.devlang: javascript
+ms.service: 
 ---
- # Azure Storage File Share client library for JavaScript - Version 12.1.1 
+
+# Azure Storage File Share client library for JavaScript - Version 12.2.0 
 
 
 Azure Files offers fully managed file shares in the cloud that are accessible via the industry standard Server Message Block (SMB) protocol. Azure file shares can be mounted concurrently by cloud or on-premises deployments of Windows, Linux, and macOS. Additionally, Azure file shares can be cached on Windows Servers with Azure File Sync for fast access near where the data is being used.
@@ -28,11 +29,11 @@ Use the client libraries in this package to:
 > It has been renamed to `@azure/storage-file-share` to better align with the upcoming new package
 > for Azure Storage Files DataLake and provide a consistent set of APIs for working with files on Azure.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-file-share) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.2.0/sdk/storage/storage-file-share) |
 [Package (npm)](https://www.npmjs.com/package/@azure/storage-file-share/) |
 [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/storage-file-share) |
 [Product documentation](https://docs.microsoft.com/azure/storage/files/storage-files-introduction) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-file-share/samples) |
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.2.0/sdk/storage/storage-file-share/samples) |
 [Azure Storage File REST APIs](https://docs.microsoft.com/rest/api/storageservices/file-service-rest-api)
 
 ## Getting started
@@ -72,7 +73,7 @@ This library depends on following ES features which need external polyfills load
 - `String.prototype.includes`
 - `Array.prototype.includes`
 - `Object.assign`
-- `Object.keys` (Override IE11's `Object.keys` with ES6 polyfill forcely to enable [ES6 behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys#Notes))
+- `Object.keys` (Overrides the IE11's `Object.keys` with a polyfill to enable the [ES6 behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys#Notes))
 - `Symbol`
 - `Symbol.iterator`
 
@@ -102,7 +103,19 @@ There are differences between Node.js and browsers runtime. When getting started
 
 ### JavaScript Bundle
 
-To use this client library in the browser, you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
+To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
+
+#### Special bundling notes for IE11
+
+Currently only `Parcel` and `Rollup` work well with Storage client libraries for IE11.
+
+If `Parcel` is used then no further work is needed. If using Rollup, an additional step is needed to transform the bundled output to the format that IE11 supports.
+
+Assuming `bundled-output.js` is the result from `Rollup`:
+
+```bash
+tsc --allowJS --target es5 bundled-output.js --outfile final-output.js
+```
 
 ### CORS
 
@@ -126,6 +139,15 @@ The following components and their corresponding client libraries make up the Az
 - A _file_ within the file share, which may be up to 1 TiB in size, represented by a `ShareFileClient`
 
 ## Examples
+
+- [Import the package](#import-the-package)
+- [Create the share service client](#create-the-share-service-client)
+- [List shares in the account](#list-shares-in-the-account)
+- [Create a new share and a directory](#create-a-new-share-and-a-directory)
+- [Create an azure file then upload to it](#create-an-azure-file-then-upload-to-it)
+- [List files and directories under a directory](#list-files-and-directories-under-a-directory)
+- [Download a file and convert it to a string (Node.js)](#download-a-file-and-convert-it-to-a-string-nodejs)
+- [Download a file and convert it to a string (Browsers)](#download-a-file-and-convert-it-to-a-string-browsers)
 
 ### Import the package
 
@@ -157,7 +179,7 @@ const account = "<account>";
 const accountKey = "<accountkey>";
 
 // Use StorageSharedKeyCredential with storage account and account key
-// StorageSharedKeyCredential is only avaiable in Node.js runtime, not in browsers
+// StorageSharedKeyCredential is only available in Node.js runtime, not in browsers
 const credential = new StorageSharedKeyCredential(account, accountKey);
 const serviceClient = new ShareServiceClient(
   // When using AnonymousCredential, following url should include a valid SAS
@@ -177,7 +199,7 @@ const account = "<account name>";
 const sas = "<service Shared Access Signature Token>";
 
 const serviceClientWithSAS = new ShareServiceClient(
-  `https://${account}.file.core.windows.net${sas}`,
+  `https://${account}.file.core.windows.net${sas}`
 );
 ```
 
@@ -225,7 +247,7 @@ const serviceClient = new ShareServiceClient(
 );
 
 async function main() {
-  let shareIter = await serviceClient.listShares();
+  let shareIter = serviceClient.listShares();
   let i = 1;
   let shareItem = await shareIter.next();
   while (!shareItem.done) {
@@ -359,7 +381,7 @@ const directoryName = "<directory name>";
 async function main() {
   const directoryClient = serviceClient.getShareClient(shareName).getDirectoryClient(directoryName);
 
-  let dirIter = await directoryClient.listFilesAndDirectories();
+  let dirIter = directoryClient.listFilesAndDirectories();
   let i = 1;
   let item = await dirIter.next();
   while (!item.done) {
@@ -375,7 +397,7 @@ async function main() {
 main();
 ```
 
-For a complete sample on iterating please see [samples/iterators-files-and-directories.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-file-share/samples/typescript/iterators-files-and-directories.ts).
+For a complete sample on iterating please see [samples/typescript/src/iterators-files-and-directories.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.2.0/sdk/storage/storage-file-share/samples/typescript/src/iterators-files-and-directories.ts).
 
 ### Download a file and convert it to a string (Node.js)
 
@@ -394,15 +416,15 @@ const serviceClient = new ShareServiceClient(
 const shareName = "<share name>";
 const fileName = "<file name>";
 
-// [Node.js only] A helper method used to read a Node.js readable stream into string
-async function streamToString(readableStream) {
+// [Node.js only] A helper method used to read a Node.js readable stream into a Buffer
+async function streamToBuffer(readableStream) {
   return new Promise((resolve, reject) => {
     const chunks = [];
     readableStream.on("data", (data) => {
-      chunks.push(data.toString());
+      chunks.push(data instanceof Buffer ? data : Buffer.from(data));
     });
     readableStream.on("end", () => {
-      resolve(chunks.join(""));
+      resolve(Buffer.concat(chunks));
     });
     readableStream.on("error", reject);
   });
@@ -417,7 +439,9 @@ async function main() {
   // In Node.js, get downloaded data by accessing downloadFileResponse.readableStreamBody
   const downloadFileResponse = await fileClient.download();
   console.log(
-    `Downloaded file content: ${await streamToString(downloadFileResponse.readableStreamBody)}`
+    `Downloaded file content: ${(
+      await streamToBuffer(downloadFileResponse.readableStreamBody)
+    ).toString()}`
   );
 }
 
@@ -434,24 +458,20 @@ const { ShareServiceClient } = require("@azure/storage-file-share");
 const account = "<account name>";
 const sas = "<service Shared Access Signature Token>";
 const shareName = "<share name>";
-const fileName = "<file name>"
+const fileName = "<file name>";
 
-const serviceClient = new ShareServiceClient(
-  `https://${account}.file.core.windows.net${sas}`
-);
+const serviceClient = new ShareServiceClient(`https://${account}.file.core.windows.net${sas}`);
 
 async function main() {
   const fileClient = serviceClient.getShareClient(shareName)
     .rootDirectoryClient
     .getFileClient(fileName);
 
-    // Get file content from position 0 to the end
-    // In browsers, get downloaded data by accessing downloadFileResponse.blobBody
+  // Get file content from position 0 to the end
+  // In browsers, get downloaded data by accessing downloadFileResponse.blobBody
   const downloadFileResponse = await fileClient.download(0);
   console.log(
-    `Downloaded file content: ${await blobToString(
-      await downloadFileResponse.blobBody
-    )}`
+    `Downloaded file content: ${await blobToString(await downloadFileResponse.blobBody)}`
   );
 }
 
@@ -467,10 +487,10 @@ async function blobToString(blob) {
   });
 }
 
-main()
+main();
 ```
 
-A complete example of basic scenarios is at [samples/basic.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-file-share/samples/typescript/basic.ts).
+A complete example of basic scenarios is at [samples/typescript/src/basic.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.2.0/sdk/storage/storage-file-share/samples/typescript/src/basic.ts).
 
 ## Troubleshooting
 
@@ -486,22 +506,15 @@ setLogLevel("info");
 
 More code samples
 
-- [File Share Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-file-share/samples/javascript)
-- [File Share Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-file-share/samples/typescript)
-- [File Share Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-file-share/test)
+- [File Share Storage Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.2.0/sdk/storage/storage-file-share/samples/javascript)
+- [File Share Storage Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.2.0/sdk/storage/storage-file-share/samples/typescript)
+- [File Share Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-share_12.2.0/sdk/storage/storage-file-share/test)
 
 ## Contributing
 
-This project welcomes contributions and suggestions. Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit <https://cla.microsoft.com.>
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-share_12.2.0/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fstorage%2Fstorage-file-share%2FREADME.png)
+

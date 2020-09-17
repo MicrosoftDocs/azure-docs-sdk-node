@@ -1,0 +1,263 @@
+### YamlMime:UniversalReference
+items:
+  - uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient'
+    name: BlobChangeFeedClient
+    fullName: BlobChangeFeedClient
+    children:
+      - '@azure/storage-blob-changefeed.BlobChangeFeedClient.constructor_1'
+      - '@azure/storage-blob-changefeed.BlobChangeFeedClient.constructor'
+      - '@azure/storage-blob-changefeed.BlobChangeFeedClient.fromConnectionString'
+      - '@azure/storage-blob-changefeed.BlobChangeFeedClient.listChanges'
+    langs:
+      - typeScript
+    type: class
+    summary: BlobChangeFeedClient.
+    package: '@azure/storage-blob-changefeed'
+  - uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient.constructor_1'
+    name: 'BlobChangeFeedClient(string, Pipeline)'
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Creates an instance of BlobChangeFeedClient.
+    syntax:
+      content: 'new BlobChangeFeedClient(url: string, pipeline: Pipeline)'
+      parameters:
+        - id: url
+          type:
+            - string
+          description: |-
+            A Client string pointing to Azure Storage blob service, such as
+                                "https://myaccount.blob.core.windows.net". You can append a SAS
+                                if using AnonymousCredential, such as "https://myaccount.blob.core.windows.net?sasString".
+        - id: pipeline
+          type:
+            - Pipeline
+          description: |-
+            Call newPipeline() to create a default
+                                       pipeline, or provide a customized pipeline.
+    package: '@azure/storage-blob-changefeed'
+  - uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient.constructor'
+    name: >-
+      BlobChangeFeedClient(string, StorageSharedKeyCredential |
+      AnonymousCredential | TokenCredential, StoragePipelineOptions)
+    children: []
+    type: constructor
+    langs:
+      - typeScript
+    summary: Creates an instance of BlobChangeFeedClient.
+    syntax:
+      content: >-
+        new BlobChangeFeedClient(url: string, credential?:
+        StorageSharedKeyCredential | AnonymousCredential | TokenCredential,
+        options?: StoragePipelineOptions)
+      parameters:
+        - id: url
+          type:
+            - string
+          description: |-
+            A Client string pointing to Azure Storage blob service, such as
+                                "https://myaccount.blob.core.windows.net". You can append a SAS
+                                if using AnonymousCredential, such as "https://myaccount.blob.core.windows.net?sasString".
+        - id: credential
+          type:
+            - StorageSharedKeyCredential | AnonymousCredential | TokenCredential
+          description: >-
+            Such as AnonymousCredential, StorageSharedKeyCredential or any
+            credential from the @azure/identity package to authenticate requests
+            to the service. You can also provide an object that implements the
+            TokenCredential interface. If not specified, AnonymousCredential is
+            used.
+          optional: true
+        - id: options
+          type:
+            - StoragePipelineOptions
+          description: ''
+          optional: true
+    package: '@azure/storage-blob-changefeed'
+  - uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient.fromConnectionString'
+    name: 'fromConnectionString(string, StoragePipelineOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: Creates an instance of BlobChangeFeedClient from connection string.
+    syntax:
+      content: >-
+        static function fromConnectionString(connectionString: string, options?:
+        StoragePipelineOptions)
+      parameters:
+        - id: connectionString
+          type:
+            - string
+          description: >-
+            Account connection string or a SAS connection string of an Azure
+            storage account.
+                                             [ Note - Account connection string can only be used in NODE.JS runtime. ]
+                                             Account connection string example -
+                                             `DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=accountKey;EndpointSuffix=core.windows.net`
+                                             SAS connection string example -
+                                             `BlobEndpoint=https://myaccount.blob.core.windows.net/;QueueEndpoint=https://myaccount.queue.core.windows.net/;FileEndpoint=https://myaccount.file.core.windows.net/;TableEndpoint=https://myaccount.table.core.windows.net/;SharedAccessSignature=sasString`
+        - id: options
+          type:
+            - StoragePipelineOptions
+          description: ''
+          optional: true
+      return:
+        type:
+          - '@azure/storage-blob-changefeed.BlobChangeFeedClient'
+        description: ''
+    package: '@azure/storage-blob-changefeed'
+  - uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient.listChanges'
+    name: listChanges(BlobChangeFeedListChangesOptions)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Returns an async iterable iterator to list all the change feed events
+
+      in the specified account.
+
+      .byPage() returns an async iterable iterator to list the change feed
+      events in pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      let i = 1;
+
+      for await (const event of blobChangeFeedClient.listChanges()) {
+        console.log(`Event ${i++}, type: ${event.eventType}`);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      const iter = blobChangeFeedClient.listChanges();
+
+      let eventItem = await iter.next();
+
+      while (!eventItem.done) {
+        console.log(`Event ${i++}, type: ${eventItem.eventType}`);
+        eventItem = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const eventPage of blobChangeFeedClient.listChanges().byPage({
+      maxPageSize: 20 })) {
+        if (eventPage.events) {
+          for (const event of eventPage.events) {
+            console.log(`Event ${i++}, type: ${event.eventType}`);
+          }
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = blobChangeFeedClient.listChanges().byPage({ maxPageSize: 2
+      });
+
+      let eventPage = (await iterator.next()).value;
+
+
+      if (eventPage.events) {
+        for (const container of eventPage.events) {
+          console.log(`Event ${i++}, type: ${event.eventType}`);
+        }
+      }
+
+
+      // Gets next marker
+
+      let marker = eventPage.continuationToken;
+
+      // Passing next marker as continuationToken
+
+      iterator = blobChangeFeedClient
+        .listChanges()
+        .byPage({ continuationToken: marker, maxPageSize: 10 });
+      eventPage = (await iterator.next()).value;
+
+
+      if (eventPage.events) {
+        for (const container of eventPage.events) {
+           console.log(`Event ${i++}, type: ${event.eventType}`);
+        }
+      }
+
+      ```
+    syntax:
+      content: 'function listChanges(options?: BlobChangeFeedListChangesOptions)'
+      parameters:
+        - id: options
+          type:
+            - '@azure/storage-blob-changefeed.BlobChangeFeedListChangesOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - >-
+            PagedAsyncIterableIterator<@azure/storage-blob-changefeed.BlobChangeFeedEvent,
+            @azure/storage-blob-changefeed.BlobChangeFeedEventPage>
+        description: An asyncIterableIterator that supports paging.
+    package: '@azure/storage-blob-changefeed'
+references:
+  - uid: '@azure/storage-blob-changefeed.BlobChangeFeedListChangesOptions'
+    name: BlobChangeFeedListChangesOptions
+    spec.typeScript:
+      - name: BlobChangeFeedListChangesOptions
+        fullName: BlobChangeFeedListChangesOptions
+        uid: '@azure/storage-blob-changefeed.BlobChangeFeedListChangesOptions'
+  - uid: >-
+      PagedAsyncIterableIterator<@azure/storage-blob-changefeed.BlobChangeFeedEvent,
+      @azure/storage-blob-changefeed.BlobChangeFeedEventPage>
+    name: BlobChangeFeedEventPage>
+    spec.typeScript:
+      - name: PagedAsyncIterableIterator<
+        fullName: PagedAsyncIterableIterator<
+      - name: BlobChangeFeedEvent
+        fullName: BlobChangeFeedEvent
+        uid: '@azure/storage-blob-changefeed.BlobChangeFeedEvent'
+      - name: ', '
+        fullName: ', '
+      - name: BlobChangeFeedEventPage
+        fullName: BlobChangeFeedEventPage
+        uid: '@azure/storage-blob-changefeed.BlobChangeFeedEventPage'
+      - name: '>'
+        fullName: '>'
+  - uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient'
+    name: BlobChangeFeedClient
+    spec.typeScript:
+      - name: BlobChangeFeedClient
+        fullName: BlobChangeFeedClient
+        uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient'

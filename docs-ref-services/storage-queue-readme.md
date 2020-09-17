@@ -1,16 +1,17 @@
 ---
 title: Azure Storage Queue client library for JavaScript
-keywords: Azure, JavaScript, SDK, API, storage, storage-queue
+keywords: Azure, javascript, SDK, API, @azure/storage-queue, 
 author: maggiepint
 ms.author: magpint
-ms.date: 04/16/2020
+ms.date: 09/09/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: JavaScript
-ms.service: storage
+ms.devlang: javascript
+ms.service: 
 ---
- # Azure Storage Queue client library for JavaScript - Version 12.0.4 
+
+# Azure Storage Queue client library for JavaScript - Version 12.1.0 
 
 
 Azure Storage Queue provides cloud messaging between application components. In designing applications for scale, application components are often decoupled, so that they can scale independently. Queue storage delivers asynchronous messaging for communication between application components, whether they are running in the cloud, on the desktop, on an on-premises server, or on a mobile device. Queue storage also supports managing asynchronous tasks and building process work flows.
@@ -22,20 +23,20 @@ Use the client libraries in this package to:
 - Create/List/Delete Queues
 - Send/Receive/Peek/Clear/Update/Delete Queue Messages
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-queue_12.1.0/sdk/storage/storage-queue) |
 [Package (npm)](https://www.npmjs.com/package/@azure/storage-queue) |
 [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/storage-queue) |
 [Product documentation](https://docs.microsoft.com/azure/storage/queues/storage-queues-introduction) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue/samples) |
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-queue_12.1.0/sdk/storage/storage-queue/samples) |
 [Azure Storage Queue REST APIs](https://docs.microsoft.com/rest/api/storageservices/queue-service-rest-api)
 
 ## Getting started
 
 **Prerequisites**: You must have an [Azure subscription](https://azure.microsoft.com/free/) and a [Storage Account](https://docs.microsoft.com/azure/storage/queues/storage-quickstart-queues-portal) to use this package. If you are using this package in a Node.js application, then Node.js version 8.0.0 or higher is required.
 
-### Install the pacakge
+### Install the package
 
-The preferred way to install the Azure Storage Queue client library for JavaScript - Version 12.0.4 
+The preferred way to install the Azure Storage Queue client library for JavaScript - Version 12.1.0 
  is to use the npm package manager. Type the following into a terminal window:
 
 ```bash
@@ -52,7 +53,7 @@ Azure Storage supports several ways to authenticate. In order to interact with t
 
 #### Azure Active Directory
 
-The Azure Queue Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](/sdk/identity/identity/README.md) for more details and samples to get you started.
+The Azure Queue Storage service supports the use of Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. Please see the [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-queue_12.1.0/sdk/identity/identity/README.md) for more details and samples to get you started.
 
 ### Compatibility
 
@@ -72,7 +73,7 @@ This library depends on following ES features which need external polyfills load
 - `String.prototype.includes`
 - `Array.prototype.includes`
 - `Object.assign`
-- `Object.keys` (Override IE11's `Object.keys` with ES6 polyfill forcely to enable [ES6 behavior](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/keys#Notes))
+- `Object.keys` (Overrides the IE11's `Object.keys` with a polyfill to enable the [ES6 behavior](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/keys#Notes))
 - `Symbol`
 - `Symbol.iterator`
 
@@ -90,7 +91,19 @@ There are differences between Node.js and browsers runtime. When getting started
 
 ### JavaScript Bundle
 
-To use this client library in the browser, you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
+To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
+
+#### Special bundling notes for IE11
+
+Currently only `Parcel` and `Rollup` work well with Storage client libraries for IE11.
+
+If `Parcel` is used  then no further work is needed. If using Rollup, an additional step is needed to transform the bundled output to the format that IE11 supports.
+
+Assuming `bundled-output.js` is the result from `Rollup`:
+
+```bash
+tsc --allowJS --target es5 bundled-output.js --outfile final-output.js
+```
 
 ### CORS
 
@@ -112,7 +125,7 @@ between connected clients.
 Key data types in our library related to these services are:
 
 - A `QueueServiceClient` represents a connection (via a URL) to a given _storage account_ in the Azure Storage Queue service and provides APIs for manipulating its queues. It is authenticated to the service and can be used to create `QueueClient` objects, as well as create, delete, list queues from the service.
-- A `QueueClient` represents a single _queue_ in the storage acccount. It can be used to manipulate the queue's messages, for example to send, receive, and peek messages in the queue.
+- A `QueueClient` represents a single _queue_ in the storage account. It can be used to manipulate the queue's messages, for example to send, receive, and peek messages in the queue.
 
 ## Examples
 
@@ -183,7 +196,7 @@ Alternatively, you instantiate a `QueueServiceClient` with a `StorageSharedKeyCr
   const accountKey = "<accountkey>";
 
   // Use StorageSharedKeyCredential with storage account and account key
-  // StorageSharedKeyCredential is only avaiable in Node.js runtime, not in browsers
+  // StorageSharedKeyCredential is only available in Node.js runtime, not in browsers
   const sharedKeyCredential = new StorageSharedKeyCredential(account, accountKey);
 
   const queueServiceClient = new QueueServiceClient(
@@ -253,7 +266,7 @@ const queueServiceClient = new QueueServiceClient(
 );
 
 async function main() {
-  let iter2 = await queueServiceClient.listQueues();
+  let iter2 = queueServiceClient.listQueues();
   let i = 1;
   let item = await iter2.next();
   while (!item.done) {
@@ -265,7 +278,7 @@ async function main() {
 main();
 ```
 
-For a complete sample on iterating queues please see [samples/typescript/iterators.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-queue/samples/typescript/iterators.ts).
+For a complete sample on iterating queues please see [samples/typescript/iterators.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-queue_12.1.0/sdk/storage/storage-queue/samples/typescript/src/iterators.ts).
 
 ### Create a new queue
 
@@ -388,7 +401,7 @@ async function main() {
       receivedMessageItem.popReceipt
     );
     console.log(
-      `Delete message succesfully, service assigned request Id: ${deleteMessageResponse.requestId}`
+      `Delete message successfully, service assigned request Id: ${deleteMessageResponse.requestId}`
     );
   }
 }
@@ -423,7 +436,7 @@ async function main() {
 main();
 ```
 
-A complete example of basic scenarios is at [samples/basic.ts](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/storage/storage-queue/samples/typescript/basic.ts).
+A complete example of basic scenarios is at [samples/basic.ts](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-queue_12.1.0/sdk/storage/storage-queue/samples/typescript/src/basic.ts).
 
 ## Troubleshooting
 
@@ -439,22 +452,14 @@ setLogLevel("info");
 
 More code samples
 
-- [Queue Storage Samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue/samples)
-- [Queue Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue/test)
+- [Queue Storage Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-queue_12.1.0/sdk/storage/storage-queue/samples)
+- [Queue Storage Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-queue_12.1.0/sdk/storage/storage-queue/test)
 
 ## Contributing
 
-This project welcomes contributions and suggestions. Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit <https://cla.microsoft.com.>
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-queue_12.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
+Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-queue_12.1.0/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fstorage%2Fstorage-queue%2FREADME.png)
+

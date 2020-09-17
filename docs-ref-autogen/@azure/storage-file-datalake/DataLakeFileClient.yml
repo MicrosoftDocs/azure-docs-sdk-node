@@ -24,6 +24,7 @@ items:
       - '@azure/storage-file-datalake.DataLakeFileClient.move'
       - '@azure/storage-file-datalake.DataLakeFileClient.move_1'
       - '@azure/storage-file-datalake.DataLakeFileClient.name'
+      - '@azure/storage-file-datalake.DataLakeFileClient.query'
       - '@azure/storage-file-datalake.DataLakeFileClient.read'
       - '@azure/storage-file-datalake.DataLakeFileClient.readToBuffer'
       - '@azure/storage-file-datalake.DataLakeFileClient.readToBuffer_1'
@@ -548,6 +549,61 @@ items:
       return:
         type:
           - string
+        description: ''
+    package: '@azure/storage-file-datalake'
+  - uid: '@azure/storage-file-datalake.DataLakeFileClient.query'
+    name: 'query(string, FileQueryOptions)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: >
+      Quick query for a JSON or CSV formatted file.
+
+      Example usage (Node.js):
+
+
+      ```js
+
+      // Query and convert a file to a string
+
+      const queryResponse = await fileClient.query("select * from BlobStorage");
+
+      const downloaded = (await
+      streamToBuffer(queryResponse.readableStreamBody)).toString();
+
+      console.log("Query file content:", downloaded);
+
+
+      async function streamToBuffer(readableStream) {
+        return new Promise((resolve, reject) => {
+          const chunks = [];
+          readableStream.on("data", (data) => {
+            chunks.push(data instanceof Buffer ? data : Buffer.from(data));
+          });
+          readableStream.on("end", () => {
+            resolve(Buffer.concat(chunks));
+          });
+          readableStream.on("error", reject);
+        });
+      }
+
+      ```
+    syntax:
+      content: 'function query(query: string, options?: FileQueryOptions)'
+      parameters:
+        - id: query
+          type:
+            - string
+          description: ''
+        - id: options
+          type:
+            - '@azure/storage-file-datalake.FileQueryOptions'
+          description: ''
+          optional: true
+      return:
+        type:
+          - Promise<@azure/storage-file-datalake.FileReadResponse>
         description: ''
     package: '@azure/storage-file-datalake'
   - uid: '@azure/storage-file-datalake.DataLakeFileClient.read'
@@ -1219,12 +1275,12 @@ references:
         uid: '@azure/storage-file-datalake.PathMoveResponse'
       - name: '>'
         fullName: '>'
-  - uid: '@azure/storage-file-datalake.FileReadOptions'
-    name: FileReadOptions
+  - uid: '@azure/storage-file-datalake.FileQueryOptions'
+    name: FileQueryOptions
     spec.typeScript:
-      - name: FileReadOptions
-        fullName: FileReadOptions
-        uid: '@azure/storage-file-datalake.FileReadOptions'
+      - name: FileQueryOptions
+        fullName: FileQueryOptions
+        uid: '@azure/storage-file-datalake.FileQueryOptions'
   - uid: Promise<@azure/storage-file-datalake.FileReadResponse>
     name: FileReadResponse>
     spec.typeScript:
@@ -1235,6 +1291,12 @@ references:
         uid: '@azure/storage-file-datalake.FileReadResponse'
       - name: '>'
         fullName: '>'
+  - uid: '@azure/storage-file-datalake.FileReadOptions'
+    name: FileReadOptions
+    spec.typeScript:
+      - name: FileReadOptions
+        fullName: FileReadOptions
+        uid: '@azure/storage-file-datalake.FileReadOptions'
   - uid: '@azure/storage-file-datalake.FileReadToBufferOptions'
     name: FileReadToBufferOptions
     spec.typeScript:

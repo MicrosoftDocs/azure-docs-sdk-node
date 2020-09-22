@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Storage Blob Change Feed client library for JavaScript - Version 12.0.0-preview.2 
+# Azure Storage Blob Change Feed client library for JavaScript - Version 12.0.0-preview.2
 
 
 > Server Version: 2019-12-12
@@ -37,8 +37,7 @@ Use the client libraries in this package to:
 
 ### Install the package
 
-The preferred way to install the Azure Storage Blob Change Feed client library for JavaScript - Version 12.0.0-preview.2 
- is to use the npm package manager. Type the following into a terminal window:
+The preferred way to install the Azure Storage Blob Change Feed client library for JavaScript is to use the npm package manager. Type the following into a terminal window:
 
 ```bash
 npm install @azure/storage-blob-changefeed

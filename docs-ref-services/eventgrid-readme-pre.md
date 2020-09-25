@@ -23,7 +23,7 @@ Use the client library to:
 - Generate Shared Access Signatures for Event Grid topics
 
 [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_3.0.0-beta.2/sdk/eventgrid/eventgrid/) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/eventgrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/eventgrid/v/next) |
 [API reference documentation](https://aka.ms/azsdk-js-eventgrid-ref-docs) |
 [Product documentation](https://docs.microsoft.com/azure/event-grid/) |
 [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_3.0.0-beta.2/sdk/eventgrid/eventgrid/samples)
@@ -272,4 +272,3 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [event_grid]: https://docs.microsoft.com/azure/event-grid
 [azure_portal]: https://portal.azure.com
-

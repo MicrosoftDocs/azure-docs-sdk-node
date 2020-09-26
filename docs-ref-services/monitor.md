@@ -1,15 +1,11 @@
 ---
 title: Azure Monitor modules for JavaScript
 description: Reference for Azure Monitor modules for JavaScript
-author: rbouche
-ms.author: robb
-manager: carmonm
+author: robb
+ms.author: rboucher
 ms.date: 07/18/2017
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
-ms.devlang: nodejs
-ms.service: Monitor
+ms.service: azure-monitor
 ---
 
 # Azure Monitor modules for JavaScript

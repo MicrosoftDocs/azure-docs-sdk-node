@@ -3,7 +3,7 @@ title: Azure Tables client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/data-tables, 
 author: maggiepint
 ms.author: magpint
-ms.date: 09/09/2020
+ms.date: 10/06/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,10 +11,10 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Tables client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Tables client library for JavaScript - Version 1.0.0-beta.2 
 
 
-[Azure Tables](https://azure.microsoft.com/en-us/services/storage/tables/) is a cloud-based service that stores structured NoSQL data, providing a key/attribute store with a schemaless design. Tables storage gives developers flexibility and scalability with all the best parts of Azure cloud.
+[Azure Tables](https://azure.microsoft.com/services/storage/tables/) is a cloud-based service that stores structured NoSQL data, providing a key/attribute store with a schemaless design. Tables storage gives developers flexibility and scalability with all the best parts of Azure cloud.
 
 Use the client library to:
 
@@ -30,7 +30,7 @@ Azure Cosmos DB provides a Table API for applications that are written for Azure
 - Automatic secondary indexing.
 - The Azure Tables client library can seamlessly target either Azure table storage or Azure Cosmos DB table service endpoints with no code changes.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_1.0.0-beta.1/sdk/tables/data-tables/) | [Package (NPM)](https://www.npmjs.com/package/@azure/data-tables) | [API reference documentation](https://aka.ms/js-docs) | [Product documentation](https://docs.microsoft.com/en-us/azure/storage/tables/table-storage-overview/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_1.0.0-beta.1/sdk/tables/data-tables/samples)
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_1.0.0-beta.2/sdk/tables/data-tables/) | [Package (NPM)](https://www.npmjs.com/package/@azure/data-tables) | [API reference documentation](https://aka.ms/js-docs) | [Product documentation](https://docs.microsoft.com/azure/storage/tables/table-storage-overview/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_1.0.0-beta.2/sdk/tables/data-tables/samples)
 
 ## Getting started
 
@@ -41,12 +41,11 @@ Currently supported environments:
 - Node.js version 8.x.x or higher
 - Latest versions of Safari, Chrome, Edge and Firefox
 
-You must have an [Azure subscription](https://azure.microsoft.com/free/) and a [Storage Account](https://docs.microsoft.com/en-us/azure/storage/tables/table-storage-quickstart-portal)  or an [Azure CosmosDB database](https://docs.microsoft.com/en-us/azure/cosmos-db/create-cosmosdb-resources-portal) to use this package.
+You must have an [Azure subscription](https://azure.microsoft.com/free/) and a [Storage Account](https://docs.microsoft.com/azure/storage/tables/table-storage-quickstart-portal)  or an [Azure CosmosDB database](https://docs.microsoft.com/azure/cosmos-db/create-cosmosdb-resources-portal) to use this package.
 
 ### Install the `@azure/data-tables` package
 
-The preferred way to install the Azure Tables client library for JavaScript - Version 1.0.0-beta.1 
- is to use the npm package manager. Type the following into a terminal window:
+The preferred way to install the Azure Tables client library for JavaScript is to use the npm package manager. Type the following into a terminal window:
 
 ```bash
 npm install @azure/data-tables
@@ -87,7 +86,7 @@ For example, you can create following CORS settings for debugging. But please cu
 
 ## Key concepts
 
-- `TableServiceClient` - Client that provides functions to interact at a Table Service level sucn as create, list and delete tables
+- `TableServiceClient` - Client that provides functions to interact at a Table Service level such as create, list and delete tables
 
 - `TableClient` - Client that provides functions to interact at an entity level such as create, list and delete entities within a table.
 
@@ -114,9 +113,9 @@ Common uses of the Table service include:
 
 ### Import the package
 
-to use the clients, import the package in your file:
+To use the clients, import the package in your file:
 
-```javascriopt
+```javascript
 const AzureTables = require("@azure/data-tables");
 ```
 
@@ -290,7 +289,7 @@ async function main() {
   let entitiesIter = client.listEntities();
   let i = 1;
   for await (const entity of entitiesIter) {
-    console.log(`Entity${i}: PartitionKey: ${entity.PartitionKey} RowKey: ${entity.RowKey}`);
+    console.log(`Entity${i}: PartitionKey: ${entity.partitionKey} RowKey: ${entity.rowKey}`);
     i++;
     // Output:
     // Entity1: PartitionKey: P1 RowKey: R1
@@ -339,7 +338,7 @@ main();
 ### General
 
 When you interact with Tables service using the Javascript/Typescript SDK, errors returned by the service correspond to the same HTTP status codes returned for REST API requests:
-[Storage Table Service Error Codes](https://docs.microsoft.com/en-us/rest/api/storageservices/table-service-error-codes)
+[Storage Table Service Error Codes](https://docs.microsoft.com/rest/api/storageservices/table-service-error-codes)
 
 ### Logging
 
@@ -369,7 +368,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/tables/README.png)
 

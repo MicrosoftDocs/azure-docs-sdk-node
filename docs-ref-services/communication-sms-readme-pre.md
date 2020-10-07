@@ -3,7 +3,7 @@ title: Azure Communication SMS client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-sms, 
 author: maggiepint
 ms.author: magpint
-ms.date: 09/22/2020
+ms.date: 10/06/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Communication SMS client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Communication SMS client library for JavaScript - Version 1.0.0-beta.2 
 
 
 Azure Communication SMS services gives developers the ability to send SMS messages from a phone number that can be purchased through Communication Services.
@@ -81,12 +81,12 @@ const response = await client.send({
 ## Next steps
 
 Please take a look at the
-[samples]<!--(https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.0.0-beta.1/sdk/communication/communication-sms/samples)-->
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.0.0-beta.2/sdk/communication/communication-sms/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

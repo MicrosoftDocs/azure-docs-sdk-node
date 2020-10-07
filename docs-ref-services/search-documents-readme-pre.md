@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: search
 ---
 
 # Azure Cognitive Search client library for JavaScript - Version 11.1.0-beta.1 
@@ -482,4 +482,3 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc].For mo
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-

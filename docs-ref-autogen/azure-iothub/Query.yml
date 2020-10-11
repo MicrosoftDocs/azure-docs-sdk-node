@@ -2,175 +2,108 @@
 name: Query
 uid: azure-iothub.Query
 package: azure-iothub
-summary: >-
-  Constructs a Query object that provides APIs to trigger the execution of a
-  device query.
-
-  SDK users should create queries using the
-  <xref:azure-iothub.JobClient.createQuery> and
-  <xref:azure-iothub.Registry.createQuery> APIs
-
-  and should not try to instantiate this class directly.
+summary: Class representing a Query.
 fullName: Query
 remarks: ''
 isPreview: false
 isDeprecated: false
 type: class
-properties:
-  - name: continuationToken
-    uid: azure-iothub.Query.continuationToken
+constructors:
+  - name: Query(IotHubGatewayServiceAPIsContext)
+    uid: azure-iothub.Query.constructor
     package: azure-iothub
-    summary: Token used to iterate over multiple pages of results.
-    fullName: continuationToken
+    summary: Create a Query.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'continuationToken: string'
-      return:
-        type: string
-        description: ''
-  - name: hasMoreResults
-    uid: azure-iothub.Query.hasMoreResults
-    package: azure-iothub
-    summary: Boolean indicating whether there are more results pages.
-    fullName: hasMoreResults
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'hasMoreResults: boolean'
-      return:
-        type: boolean
-        description: ''
+      content: 'new Query(client: IotHubGatewayServiceAPIsContext)'
+      parameters:
+        - id: client
+          type: <xref uid="azure-iothub.IotHubGatewayServiceAPIsContext" />
+          description: |
+            Reference to the service client.
 methods:
-  - name: next()
-    uid: azure-iothub.Query.next_3
+  - name: 'getTwins(QuerySpecification, QueryGetTwinsOptionalParams)'
+    uid: azure-iothub.Query.getTwins
     package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function next()
-      return:
-        type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;any&gt;&gt;
-        description: ''
-  - name: next(IncomingMessageCallback<any>)
-    uid: azure-iothub.Query.next_1
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function next(done: IncomingMessageCallback<any>)'
-      parameters:
-        - id: done
-          type: <xref uid="azure-iothub.IncomingMessageCallback" />&lt;any&gt;
-          description: ''
-  - name: next(string)
-    uid: azure-iothub.Query.next_2
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function next(continuationToken: string)'
-      parameters:
-        - id: continuationToken
-          type: string
-          description: ''
-      return:
-        type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;any&gt;&gt;
-        description: ''
-  - name: 'next(string, IncomingMessageCallback<any>)'
-    uid: azure-iothub.Query.next
-    package: azure-iothub
-    summary: Gets the next page of results for this query.
+    summary: >-
+      Query an IoT Hub to retrieve information regarding device twins using a
+      SQL-like language. See
+
+      https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language
+      for more information.
+
+      Pagination is supported. This returns information about device twins only.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function next(continuationToken: string, done:
-        IncomingMessageCallback<any>)
+        function getTwins(querySpecification: QuerySpecification, options?:
+        QueryGetTwinsOptionalParams)
       parameters:
-        - id: continuationToken
-          type: string
-          description: Continuation Token used for paging through results (optional)
-        - id: done
-          type: <xref uid="azure-iothub.IncomingMessageCallback" />&lt;any&gt;
-          description: ''
-  - name: nextAsTwin()
-    uid: azure-iothub.Query.nextAsTwin_3
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function nextAsTwin()
-      return:
-        type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;<xref uid="azure-iothub.Twin" />[]&gt;&gt;
-        description: ''
-  - name: 'nextAsTwin(IncomingMessageCallback<Twin[]>)'
-    uid: azure-iothub.Query.nextAsTwin_1
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function nextAsTwin(done: IncomingMessageCallback<Twin[]>)'
-      parameters:
-        - id: done
-          type: >-
-            <xref uid="azure-iothub.IncomingMessageCallback" />&lt;<xref
-            uid="azure-iothub.Twin" />[]&gt;
-          description: ''
-  - name: nextAsTwin(string)
-    uid: azure-iothub.Query.nextAsTwin_2
-    package: azure-iothub
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function nextAsTwin(continuationToken: string)'
-      parameters:
-        - id: continuationToken
-          type: string
+        - id: querySpecification
+          type: <xref uid="azure-iothub.QuerySpecification" />
+          description: >-
+            The query string. See
+
+            https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language
+            for more information.
+        - id: options
+          type: <xref uid="azure-iothub.QueryGetTwinsOptionalParams" />
           description: ''
       return:
-        type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;<xref uid="azure-iothub.Twin" />[]&gt;&gt;
-        description: ''
-  - name: 'nextAsTwin(string, IncomingMessageCallback<Twin[]>)'
-    uid: azure-iothub.Query.nextAsTwin
+        type: Promise&lt;<xref uid="Models.QueryGetTwinsResponse" />&gt;
+        description: Promise<Models.QueryGetTwinsResponse>
+  - name: >-
+      getTwins(QuerySpecification, QueryGetTwinsOptionalParams,
+      ServiceCallback<Twin[]>)
+    uid: azure-iothub.Query.getTwins_2
     package: azure-iothub
-    summary: Gets the next page of results for this query and cast them as Twins.
+    summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function nextAsTwin(continuationToken: string, done:
-        IncomingMessageCallback<Twin[]>)
+        function getTwins(querySpecification: QuerySpecification, options:
+        QueryGetTwinsOptionalParams, callback: ServiceCallback<Twin[]>)
       parameters:
-        - id: continuationToken
-          type: string
-          description: Continuation Token used for paging through results (optional)
-        - id: done
-          type: >-
-            <xref uid="azure-iothub.IncomingMessageCallback" />&lt;<xref
-            uid="azure-iothub.Twin" />[]&gt;
-          description: ''
+        - id: querySpecification
+          type: <xref uid="azure-iothub.QuerySpecification" />
+          description: >-
+            The query string. See
+
+            https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language
+            for more information.
+        - id: options
+          type: <xref uid="azure-iothub.QueryGetTwinsOptionalParams" />
+          description: The optional parameters
+        - id: callback
+          type: 'ServiceCallback&lt;<xref uid="azure-iothub.Twin" />[]&gt;'
+          description: |
+            The callback
+  - name: 'getTwins(QuerySpecification, ServiceCallback<Twin[]>)'
+    uid: azure-iothub.Query.getTwins_1
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getTwins(querySpecification: QuerySpecification, callback:
+        ServiceCallback<Twin[]>)
+      parameters:
+        - id: querySpecification
+          type: <xref uid="azure-iothub.QuerySpecification" />
+          description: >-
+            The query string. See
+
+            https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language
+            for more information.
+        - id: callback
+          type: 'ServiceCallback&lt;<xref uid="azure-iothub.Twin" />[]&gt;'
+          description: |
+            The callback

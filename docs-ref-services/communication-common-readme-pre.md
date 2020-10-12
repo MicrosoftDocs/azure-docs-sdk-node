@@ -3,7 +3,7 @@ title: Azure Communication Common client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-common, 
 author: maggiepint
 ms.author: magpint
-ms.date: 09/22/2020
+ms.date: 10/06/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Communication Common client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Communication Common client library for JavaScript - Version 1.0.0-beta.2 
 
 
 This package contains common code for Azure Communication Service libraries.
@@ -87,11 +87,11 @@ const userCredential = new AzureCommunicationUserCredential({
 
 ## Next steps
 
-- [Read more about Communication user access tokens](https://review.docs.microsoft.com/azure/project-spool/concepts/authentication?branch=pr-en-us-104477&tabs=javascript)
+- [Read more about Communication user access tokens](https://docs.microsoft.com/azure/communication-services/concepts/authentication?tabs=javascript)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

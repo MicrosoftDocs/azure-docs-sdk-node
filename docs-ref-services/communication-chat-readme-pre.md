@@ -3,7 +3,7 @@ title: Azure Communication Chat client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-chat, 
 author: maggiepint
 ms.author: magpint
-ms.date: 09/22/2020
+ms.date: 10/06/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,12 +11,12 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Communication Chat client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Communication Chat client library for JavaScript - Version 1.0.0-beta.2 
 
 
-Azure Communication Services for Chat let developers add Chat capabilities to their app. Use this client library to manage chat threads and their users, and send and receive Chat messages.
+Azure Communication Services for Chat lets developers add chat capabilities to their app. Use this client library to manage chat threads and their users, and send and receive chat messages.
 
-Read more about Azure Communication Services [here](https://review.docs.microsoft.com/azure/project-spool/overview?branch=pr-en-us-104477)
+Read more about Azure Communication Services [here](https://docs.microsoft.com/azure/communication-services/overview)
 
 ## Getting started
 
@@ -150,7 +150,7 @@ for await (const chatMessage of chatThreadClient.listMessages()) {
 
 Once a thread is created, you can then add and remove users from that thread. By adding users, you give them access to be able to send messages to the thread.
 You will need to start by getting a new access token and identity for that user. The user will need that access token in order to initialize their chat client.
-More information on tokens here: [Authenticate to Azure Communication Services](https://review.docs.microsoft.com/azure/project-spool/concepts/authentication?branch=pr-en-us-104477&tabs=javascript)
+More information on tokens here: [Authenticate to Azure Communication Services](https://docs.microsoft.com/azure/communication-services/concepts/authentication?tabs=javascript)
 
 ```JavaScript
 // Get a new token created for the user. The token response will contain a token and an identity for the user.
@@ -187,17 +187,15 @@ await chatThreadClient.removeMember({ communicationUserId: '<MEMBER_ID>' });
 
 In this quickstart you learned how to:
 
-> [!div class="checklist"]
->
-> - Create a chat client
-> - Create a thread with 2 users
-> - Send a message to the thread
-> - Receive messages from a thread
-> - Remove Users from a thread
+- Create a chat client
+- Create a thread with 2 users
+- Send a message to the thread
+- Receive messages from a thread
+- Remove Users from a thread
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

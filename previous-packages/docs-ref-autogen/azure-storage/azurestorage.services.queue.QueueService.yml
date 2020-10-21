@@ -4,6 +4,7 @@ items:
     name: QueueService
     fullName: QueueService
     children:
+      - azure-storage.azurestorage.services.queue.QueueService.addListener
       - azure-storage.azurestorage.services.queue.QueueService.clearMessages_1
       - azure-storage.azurestorage.services.queue.QueueService.clearMessages
       - azure-storage.azurestorage.services.queue.QueueService.createMessage
@@ -36,12 +37,15 @@ items:
         azure-storage.azurestorage.services.queue.QueueService.deleteQueueIfExists
       - azure-storage.azurestorage.services.queue.QueueService.doesQueueExist_1
       - azure-storage.azurestorage.services.queue.QueueService.doesQueueExist
+      - azure-storage.azurestorage.services.queue.QueueService.emit
       - >-
         azure-storage.azurestorage.services.queue.QueueService.enableGlobalHttpAgent
+      - azure-storage.azurestorage.services.queue.QueueService.eventNames
       - >-
         azure-storage.azurestorage.services.queue.QueueService.generateSharedAccessSignature
       - >-
         azure-storage.azurestorage.services.queue.QueueService.generateSharedAccessSignatureWithVersion
+      - azure-storage.azurestorage.services.queue.QueueService.getMaxListeners
       - azure-storage.azurestorage.services.queue.QueueService.getMessage_1
       - azure-storage.azurestorage.services.queue.QueueService.getMessage
       - >-
@@ -62,6 +66,8 @@ items:
       - azure-storage.azurestorage.services.queue.QueueService.getServiceStats_1
       - azure-storage.azurestorage.services.queue.QueueService.getServiceStats
       - azure-storage.azurestorage.services.queue.QueueService.getUrl
+      - azure-storage.azurestorage.services.queue.QueueService.listenerCount
+      - azure-storage.azurestorage.services.queue.QueueService.listeners
       - azure-storage.azurestorage.services.queue.QueueService.ListQueueResult
       - >-
         azure-storage.azurestorage.services.queue.QueueService.ListQueuesRequestOptions
@@ -75,17 +81,28 @@ items:
         azure-storage.azurestorage.services.queue.QueueService.listQueuesSegmentedWithPrefix
       - azure-storage.azurestorage.services.queue.QueueService.logger
       - azure-storage.azurestorage.services.queue.QueueService.messageEncoder
+      - azure-storage.azurestorage.services.queue.QueueService.off
+      - azure-storage.azurestorage.services.queue.QueueService.on
+      - azure-storage.azurestorage.services.queue.QueueService.once
       - azure-storage.azurestorage.services.queue.QueueService.peekMessage_1
       - azure-storage.azurestorage.services.queue.QueueService.peekMessage
       - azure-storage.azurestorage.services.queue.QueueService.peekMessages_1
       - azure-storage.azurestorage.services.queue.QueueService.peekMessages
       - >-
         azure-storage.azurestorage.services.queue.QueueService.PeekMessagesRequestOptions
+      - azure-storage.azurestorage.services.queue.QueueService.prependListener
+      - >-
+        azure-storage.azurestorage.services.queue.QueueService.prependOnceListener
       - azure-storage.azurestorage.services.queue.QueueService.proxy
       - >-
         azure-storage.azurestorage.services.queue.QueueService.QueueMessageResult
       - azure-storage.azurestorage.services.queue.QueueService.QueueResult
       - azure-storage.azurestorage.services.queue.QueueService.constructor
+      - azure-storage.azurestorage.services.queue.QueueService.rawListeners
+      - >-
+        azure-storage.azurestorage.services.queue.QueueService.removeAllListeners
+      - azure-storage.azurestorage.services.queue.QueueService.removeListener
+      - azure-storage.azurestorage.services.queue.QueueService.setMaxListeners
       - azure-storage.azurestorage.services.queue.QueueService.setProxy
       - azure-storage.azurestorage.services.queue.QueueService.setQueueAcl_1
       - azure-storage.azurestorage.services.queue.QueueService.setQueueAcl
@@ -109,6 +126,31 @@ items:
     extends:
       name: >-
         azure-storage.azurestorage.common.services.storageserviceclient.StorageServiceClient
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.addListener
+    name: 'addListener(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function addListener(event: string | symbol, listener: (args: any[]) =>
+        void)
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+        description: ''
     package: azure-storage
   - uid: azure-storage.azurestorage.services.queue.QueueService.clearMessages_1
     name: 'clearMessages(string, ErrorOrResponse)'
@@ -670,6 +712,29 @@ items:
                                                                                     and `response` will contain information related to this operation.
           optional: true
     package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.emit
+    name: 'emit(string | symbol, any[])'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function emit(event: string | symbol, args: any[])'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: args
+          type:
+            - 'any[]'
+          description: ''
+      return:
+        type:
+          - boolean
+        description: ''
+    package: azure-storage
   - uid: >-
       azure-storage.azurestorage.services.queue.QueueService.enableGlobalHttpAgent
     name: enableGlobalHttpAgent
@@ -688,6 +753,21 @@ items:
       return:
         type:
           - boolean
+        description: ''
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.eventNames
+    name: eventNames()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: function eventNames()
+      parameters: []
+      return:
+        type:
+          - Array<string | symbol>
         description: ''
     package: azure-storage
   - uid: >-
@@ -751,6 +831,21 @@ items:
         description: >-
           The shared access signature query string. Note this string does not
           contain the leading "?".
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.getMaxListeners
+    name: getMaxListeners()
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: function getMaxListeners()
+      parameters: []
+      return:
+        type:
+          - number
+        description: ''
     package: azure-storage
   - uid: azure-storage.azurestorage.services.queue.QueueService.getMessage_1
     name: 'getMessage(string, ErrorOrResult<QueueMessageResult>)'
@@ -1125,6 +1220,44 @@ items:
           - string
         description: ''
     package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.listenerCount
+    name: listenerCount(string | symbol)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function listenerCount(event: string | symbol)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+      return:
+        type:
+          - number
+        description: ''
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.listeners
+    name: listeners(string | symbol)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function listeners(event: string | symbol)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+      return:
+        type:
+          - 'Function[]'
+        description: ''
+    package: azure-storage
   - uid: >-
       azure-storage.azurestorage.services.queue.QueueService.listQueuesSegmented_1
     name: 'listQueuesSegmented(ContinuationToken, ErrorOrResult<ListQueueResult>)'
@@ -1303,6 +1436,75 @@ items:
           - azure-storage.azurestorage.services.queue.QueueMessageEncoder
         description: ''
     package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.off
+    name: 'off(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function off(event: string | symbol, listener: (args: any[]) => void)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+        description: ''
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.on
+    name: 'on(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function on(event: string | symbol, listener: (args: any[]) => void)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+        description: ''
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.once
+    name: 'once(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function once(event: string | symbol, listener: (args: any[]) => void)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+        description: ''
+    package: azure-storage
   - uid: azure-storage.azurestorage.services.queue.QueueService.peekMessage_1
     name: 'peekMessage(string, ErrorOrResult<QueueMessageResult>)'
     children: []
@@ -1431,6 +1633,56 @@ items:
                                                                                     `response` will contain information related to this operation.
           optional: true
     package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.prependListener
+    name: 'prependListener(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function prependListener(event: string | symbol, listener: (args: any[])
+        => void)
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+        description: ''
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.prependOnceListener
+    name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function prependOnceListener(event: string | symbol, listener: (args:
+        any[]) => void)
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+        description: ''
+    package: azure-storage
   - uid: azure-storage.azurestorage.services.queue.QueueService.proxy
     name: proxy
     fullName: proxy
@@ -1530,6 +1782,89 @@ items:
             - string
           description: ''
           optional: true
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.rawListeners
+    name: rawListeners(string | symbol)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function rawListeners(event: string | symbol)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+      return:
+        type:
+          - 'Function[]'
+        description: ''
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.removeAllListeners
+    name: removeAllListeners(string | symbol)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function removeAllListeners(event?: string | symbol)'
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+          optional: true
+      return:
+        type:
+          - this
+        description: ''
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.removeListener
+    name: 'removeListener(string | symbol, (args: any[]) => void)'
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: >-
+        function removeListener(event: string | symbol, listener: (args: any[])
+        => void)
+      parameters:
+        - id: event
+          type:
+            - string | symbol
+          description: ''
+        - id: listener
+          type:
+            - '(args: any[]) => void'
+          description: ''
+      return:
+        type:
+          - this
+        description: ''
+    package: azure-storage
+  - uid: azure-storage.azurestorage.services.queue.QueueService.setMaxListeners
+    name: setMaxListeners(number)
+    children: []
+    type: method
+    langs:
+      - typeScript
+    summary: ''
+    syntax:
+      content: 'function setMaxListeners(n: number)'
+      parameters:
+        - id: 'n'
+          type:
+            - number
+          description: ''
+      return:
+        type:
+          - this
+        description: ''
     package: azure-storage
   - uid: azure-storage.azurestorage.services.queue.QueueService.setProxy
     name: setProxy(Proxy)

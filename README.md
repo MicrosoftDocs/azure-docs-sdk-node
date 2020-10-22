@@ -4,6 +4,10 @@ This repository contains the reference documentation for the "Azure for JavaScri
 
 Conceptual documentation has been moved to https://github.com/microsoftdocs/azure-dev-docs - please contribute changes and file issues there.
 
+Reference documentation is generated from a CI job located [here.](https://apidrop.visualstudio.com/Content%20CI/_build?definitionId=3452&_a=summary).
+
+Package targeting is established in the `ci-configs` directory.
+
 ### Legal Notices
 
 Microsoft and any contributors grant you a license to the Microsoft documentation and other content

@@ -1,6 +1,6 @@
 ---
 title: Azure Communication Administration client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/communication-administration, 
+keywords: Azure, javascript, SDK, API, @azure/communication-administration, communication
 author: maggiepint
 ms.author: magpint
 ms.date: 10/06/2020
@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: communication
 ---
 
 # Azure Communication Administration client library for JavaScript - Version 1.0.0-beta.2 

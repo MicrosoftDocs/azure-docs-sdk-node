@@ -3,37 +3,37 @@ name: StartTask
 uid: '@azure/batch.StartTask'
 package: '@azure/batch'
 summary: >-
-  Batch will retry tasks when a recovery operation is triggered on a compute
-  node. Examples of
+  Batch will retry Tasks when a recovery operation is triggered on a Node.
+  Examples of recovery
 
-  recovery operations include (but are not limited to) when an unhealthy compute
-  node is rebooted
+  operations include (but are not limited to) when an unhealthy Node is rebooted
+  or a Compute Node
 
-  or a compute node disappeared due to host failure. Retries due to recovery
-  operations are
+  disappeared due to host failure. Retries due to recovery operations are
+  independent of and are
 
-  independent of and are not counted against the maxTaskRetryCount. Even if the
-  maxTaskRetryCount
+  not counted against the maxTaskRetryCount. Even if the maxTaskRetryCount is 0,
+  an internal retry
 
-  is 0, an internal retry due to a recovery operation may occur. Because of
-  this, all tasks should
+  due to a recovery operation may occur. Because of this, all Tasks should be
+  idempotent. This
 
-  be idempotent. This means tasks need to tolerate being interrupted and
-  restarted without causing
+  means Tasks need to tolerate being interrupted and restarted without causing
+  any corruption or
 
-  any corruption or duplicate data. The best practice for long running tasks is
-  to use some form
+  duplicate data. The best practice for long running Tasks is to use some form
+  of checkpointing.
 
-  of checkpointing. In some cases the start task may be re-run even though the
-  node was not
+  In some cases the StartTask may be re-run even though the Compute Node was not
+  rebooted. Special
 
-  rebooted. Special care should be taken to avoid start tasks which create
-  breakaway process or
+  care should be taken to avoid StartTasks which create breakaway process or
+  install/launch
 
-  install/launch services from the start task working directory, as this will
-  block Batch from
+  services from the StartTask working directory, as this will block Batch from
+  being able to
 
-  being able to re-run the start task.
+  re-run the StartTask.
 fullName: StartTask
 remarks: ''
 isPreview: false
@@ -44,7 +44,7 @@ properties:
     uid: '@azure/batch.StartTask.commandLine'
     package: '@azure/batch'
     summary: >-
-      The command line of the start task. The command line does not run under a
+      The command line of the StartTask. The command line does not run under a
       shell, and therefore
 
       cannot take advantage of shell features such as environment variable
@@ -56,7 +56,7 @@ properties:
       using "cmd /c MyCommand" in Windows or "/bin/sh -c MyCommand" in Linux. If
       the command line
 
-      refers to file paths, it should use a relative path (relative to the task
+      refers to file paths, it should use a relative path (relative to the Task
       working directory),
 
       or use the Batch provided environment variable
@@ -75,16 +75,22 @@ properties:
     uid: '@azure/batch.StartTask.containerSettings'
     package: '@azure/batch'
     summary: >-
-      The settings for the container under which the start task runs. When this
+      The settings for the container under which the StartTask runs. When this
       is specified, all
 
       directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of
       Azure Batch directories
 
-      on the node) are mapped into the container, all task environment variables
+      on the node) are mapped into the container, all Task environment variables
       are mapped into the
 
-      container, and the task command line is executed in the container.
+      container, and the Task command line is executed in the container. Files
+      produced in the
+
+      container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the
+      host disk, meaning
+
+      that Batch file APIs will not be able to access those files.
     fullName: containerSettings
     remarks: ''
     isPreview: false
@@ -97,7 +103,7 @@ properties:
   - name: environmentSettings
     uid: '@azure/batch.StartTask.environmentSettings'
     package: '@azure/batch'
-    summary: A list of environment variable settings for the start task.
+    summary: A list of environment variable settings for the StartTask.
     fullName: environmentSettings
     remarks: ''
     isPreview: false
@@ -111,22 +117,22 @@ properties:
     uid: '@azure/batch.StartTask.maxTaskRetryCount'
     package: '@azure/batch'
     summary: >-
-      The maximum number of times the task may be retried. The Batch service
-      retries a task if its
+      The maximum number of times the Task may be retried. The Batch service
+      retries a Task if its
 
       exit code is nonzero. Note that this value specifically controls the
       number of retries. The
 
-      Batch service will try the task once, and may then retry up to this limit.
+      Batch service will try the Task once, and may then retry up to this limit.
       For example, if the
 
-      maximum retry count is 3, Batch tries the task up to 4 times (one initial
+      maximum retry count is 3, Batch tries the Task up to 4 times (one initial
       try and 3 retries).
 
       If the maximum retry count is 0, the Batch service does not retry the
-      task. If the maximum
+      Task. If the maximum
 
-      retry count is -1, the Batch service retries the task without limit.
+      retry count is -1, the Batch service retries the Task without limit.
     fullName: maxTaskRetryCount
     remarks: ''
     isPreview: false
@@ -140,7 +146,7 @@ properties:
     uid: '@azure/batch.StartTask.resourceFiles'
     package: '@azure/batch'
     summary: >-
-      A list of files that the Batch service will download to the compute node
+      A list of files that the Batch service will download to the Compute Node
       before running the
 
       command line.  There is a maximum size for the list of resource files.
@@ -155,7 +161,7 @@ properties:
       using .zip files, Application Packages, or Docker Containers. Files listed
       under this element
 
-      are located in the task's working directory.
+      are located in the Task's working directory.
     fullName: resourceFiles
     remarks: ''
     isPreview: false
@@ -169,10 +175,10 @@ properties:
     uid: '@azure/batch.StartTask.userIdentity'
     package: '@azure/batch'
     summary: >-
-      The user identity under which the start task runs. If omitted, the task
+      The user identity under which the StartTask runs. If omitted, the Task
       runs as a
 
-      non-administrative user unique to the task.
+      non-administrative user unique to the Task.
     fullName: userIdentity
     remarks: ''
     isPreview: false
@@ -186,32 +192,32 @@ properties:
     uid: '@azure/batch.StartTask.waitForSuccess'
     package: '@azure/batch'
     summary: >-
-      Whether the Batch service should wait for the start task to complete
+      Whether the Batch service should wait for the StartTask to complete
       successfully (that is, to
 
-      exit with exit code 0) before scheduling any tasks on the compute node. If
-      true and the start
+      exit with exit code 0) before scheduling any Tasks on the Compute Node. If
+      true and the
 
-      task fails on a compute node, the Batch service retries the start task up
-      to its maximum retry
+      StartTask fails on a Node, the Batch service retries the StartTask up to
+      its maximum retry
 
-      count (maxTaskRetryCount). If the task has still not completed
+      count (maxTaskRetryCount). If the Task has still not completed
       successfully after all retries,
 
-      then the Batch service marks the compute node unusable, and will not
-      schedule tasks to it.
+      then the Batch service marks the Node unusable, and will not schedule
+      Tasks to it. This
 
-      This condition can be detected via the node state and failure info
+      condition can be detected via the Compute Node state and failure info
       details. If false, the
 
-      Batch service will not wait for the start task to complete. In this case,
-      other tasks can
+      Batch service will not wait for the StartTask to complete. In this case,
+      other Tasks can start
 
-      start executing on the compute node while the start task is still running;
-      and even if the
+      executing on the Compute Node while the StartTask is still running; and
+      even if the StartTask
 
-      start task fails, new tasks will continue to be scheduled on the node. The
-      default is false.
+      fails, new Tasks will continue to be scheduled on the Compute Node. The
+      default is true.
     fullName: waitForSuccess
     remarks: ''
     isPreview: false

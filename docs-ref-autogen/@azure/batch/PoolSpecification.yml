@@ -14,18 +14,18 @@ properties:
     package: '@azure/batch'
     summary: >-
       The list of application licenses the Batch service will make available on
-      each compute node in
+      each Compute Node in
 
-      the pool. The list of application licenses must be a subset of available
+      the Pool. The list of application licenses must be a subset of available
       Batch service
 
       application licenses. If a license is requested which is not supported,
-      pool creation will
+      Pool creation will
 
-      fail. The permitted licenses available on the pool are 'maya', 'vray',
+      fail. The permitted licenses available on the Pool are 'maya', 'vray',
       '3dsmax', 'arnold'. An
 
-      additional charge applies for each application license added to the pool.
+      additional charge applies for each application license added to the Pool.
     fullName: applicationLicenses
     remarks: ''
     isPreview: false
@@ -39,16 +39,16 @@ properties:
     uid: '@azure/batch.PoolSpecification.applicationPackageReferences'
     package: '@azure/batch'
     summary: >-
-      The list of application packages to be installed on each compute node in
-      the pool. Changes to
+      The list of Packages to be installed on each Compute Node in the Pool.
+      Changes to Package
 
-      application package references affect all new compute nodes joining the
-      pool, but do not
+      references affect all new Nodes joining the Pool, but do not affect
+      Compute Nodes that are
 
-      affect compute nodes that are already in the pool until they are rebooted
-      or reimaged. There
+      already in the Pool until they are rebooted or reimaged. There is a
+      maximum of 10 Package
 
-      is a maximum of 10 application package references on any given pool.
+      references on any given Pool.
     fullName: applicationPackageReferences
     remarks: ''
     isPreview: false
@@ -62,7 +62,7 @@ properties:
     uid: '@azure/batch.PoolSpecification.autoScaleEvaluationInterval'
     package: '@azure/batch'
     summary: >-
-      The time interval at which to automatically adjust the pool size according
+      The time interval at which to automatically adjust the Pool size according
       to the autoscale
 
       formula. The default value is 15 minutes. The minimum and maximum value
@@ -88,13 +88,13 @@ properties:
     uid: '@azure/batch.PoolSpecification.autoScaleFormula'
     package: '@azure/batch'
     summary: >-
-      The formula for the desired number of compute nodes in the pool. This
+      The formula for the desired number of Compute Nodes in the Pool. This
       property must not be
 
       specified if enableAutoScale is set to false. It is required if
       enableAutoScale is set to
 
-      true. The formula is checked for validity before the pool is created. If
+      true. The formula is checked for validity before the Pool is created. If
       the formula is not
 
       valid, the Batch service rejects the request with detailed error
@@ -112,25 +112,25 @@ properties:
     uid: '@azure/batch.PoolSpecification.certificateReferences'
     package: '@azure/batch'
     summary: >-
-      A list of certificates to be installed on each compute node in the pool.
-      For Windows compute
+      A list of Certificates to be installed on each Compute Node in the Pool.
+      For Windows Nodes,
 
-      nodes, the Batch service installs the certificates to the specified
-      certificate store and
+      the Batch service installs the Certificates to the specified Certificate
+      store and location.
 
-      location. For Linux compute nodes, the certificates are stored in a
-      directory inside the task
+      For Linux Compute Nodes, the Certificates are stored in a directory inside
+      the Task working
 
-      working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is
-      supplied to the
+      directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is
+      supplied to the Task to
 
-      task to query for this location. For certificates with visibility of
-      'remoteUser', a 'certs'
+      query for this location. For Certificates with visibility of 'remoteUser',
+      a 'certs' directory
 
-      directory is created in the user's home directory (e.g.,
-      /home/{user-name}/certs) and
+      is created in the user's home directory (e.g., /home/{user-name}/certs)
+      and Certificates are
 
-      certificates are placed in that directory.
+      placed in that directory.
     fullName: certificateReferences
     remarks: ''
     isPreview: false
@@ -144,8 +144,8 @@ properties:
     uid: '@azure/batch.PoolSpecification.cloudServiceConfiguration'
     package: '@azure/batch'
     summary: >-
-      The cloud service configuration for the pool. This property must be
-      specified if the pool
+      The cloud service configuration for the Pool. This property must be
+      specified if the Pool
 
       needs to be created with Azure PaaS VMs. This property and
       virtualMachineConfiguration are
@@ -157,7 +157,7 @@ properties:
       directly, the HTTP status
 
       code is 400 (Bad Request). This property cannot be specified if the Batch
-      account was created
+      Account was created
 
       with its poolAllocationMode property set to 'UserSubscription'.
     fullName: cloudServiceConfiguration
@@ -173,7 +173,7 @@ properties:
     uid: '@azure/batch.PoolSpecification.displayName'
     package: '@azure/batch'
     summary: >-
-      The display name for the pool. The display name need not be unique and can
+      The display name for the Pool. The display name need not be unique and can
       contain any Unicode
 
       characters up to a maximum length of 1024.
@@ -190,13 +190,13 @@ properties:
     uid: '@azure/batch.PoolSpecification.enableAutoScale'
     package: '@azure/batch'
     summary: >-
-      Whether the pool size should automatically adjust over time. If false, at
+      Whether the Pool size should automatically adjust over time. If false, at
       least one of
 
       targetDedicateNodes and targetLowPriorityNodes must be specified. If true,
       the
 
-      autoScaleFormula element is required. The pool automatically resizes
+      autoScaleFormula element is required. The Pool automatically resizes
       according to the formula.
 
       The default value is false.
@@ -213,14 +213,16 @@ properties:
     uid: '@azure/batch.PoolSpecification.enableInterNodeCommunication'
     package: '@azure/batch'
     summary: >-
-      Whether the pool permits direct communication between nodes. Enabling
-      inter-node communication
+      Whether the Pool permits direct communication between Compute Nodes.
+      Enabling inter-node
 
-      limits the maximum size of the pool due to deployment restrictions on the
-      nodes of the pool.
+      communication limits the maximum size of the Pool due to deployment
+      restrictions on the
 
-      This may result in the pool not reaching its desired size. The default
-      value is false.
+      Compute Nodes of the Pool. This may result in the Pool not reaching its
+      desired size. The
+
+      default value is false.
     fullName: enableInterNodeCommunication
     remarks: ''
     isPreview: false
@@ -230,31 +232,11 @@ properties:
       return:
         type: undefined | false | true
         description: ''
-  - name: maxTasksPerNode
-    uid: '@azure/batch.PoolSpecification.maxTasksPerNode'
-    package: '@azure/batch'
-    summary: >-
-      The maximum number of tasks that can run concurrently on a single compute
-      node in the pool.
-
-      The default value is 1. The maximum value is the smaller of 4 times the
-      number of cores of the
-
-      vmSize of the pool or 256.
-    fullName: maxTasksPerNode
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'maxTasksPerNode?: undefined | number'
-      return:
-        type: undefined | number
-        description: ''
   - name: metadata
     uid: '@azure/batch.PoolSpecification.metadata'
     package: '@azure/batch'
     summary: >-
-      A list of name-value pairs associated with the pool as metadata. The Batch
+      A list of name-value pairs associated with the Pool as metadata. The Batch
       service does not
 
       assign any meaning to metadata; it is solely for the use of user code.
@@ -267,10 +249,27 @@ properties:
       return:
         type: '<xref uid="@azure/batch.MetadataItem" />[]'
         description: ''
+  - name: mountConfiguration
+    uid: '@azure/batch.PoolSpecification.mountConfiguration'
+    package: '@azure/batch'
+    summary: >-
+      A list of file systems to mount on each node in the pool. This supports
+      Azure Files, NFS,
+
+      CIFS/SMB, and Blobfuse.
+    fullName: mountConfiguration
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'mountConfiguration?: MountConfiguration[]'
+      return:
+        type: '<xref uid="@azure/batch.MountConfiguration" />[]'
+        description: ''
   - name: networkConfiguration
     uid: '@azure/batch.PoolSpecification.networkConfiguration'
     package: '@azure/batch'
-    summary: The network configuration for the pool.
+    summary: The network configuration for the Pool.
     fullName: networkConfiguration
     remarks: ''
     isPreview: false
@@ -284,7 +283,7 @@ properties:
     uid: '@azure/batch.PoolSpecification.resizeTimeout'
     package: '@azure/batch'
     summary: >-
-      The timeout for allocation of compute nodes to the pool. This timeout
+      The timeout for allocation of Compute Nodes to the Pool. This timeout
       applies only to manual
 
       scaling; it has no effect when enableAutoScale is set to true. The default
@@ -310,10 +309,10 @@ properties:
     uid: '@azure/batch.PoolSpecification.startTask'
     package: '@azure/batch'
     summary: >-
-      A task to run on each compute node as it joins the pool. The task runs
-      when the node is added
+      A Task to run on each Compute Node as it joins the Pool. The Task runs
+      when the Compute Node
 
-      to the pool or when the node is restarted.
+      is added to the Pool or when the Compute Node is restarted.
     fullName: startTask
     remarks: ''
     isPreview: false
@@ -327,7 +326,7 @@ properties:
     uid: '@azure/batch.PoolSpecification.targetDedicatedNodes'
     package: '@azure/batch'
     summary: >-
-      The desired number of dedicated compute nodes in the pool. This property
+      The desired number of dedicated Compute Nodes in the Pool. This property
       must not be specified
 
       if enableAutoScale is set to true. If enableAutoScale is set to false,
@@ -347,7 +346,7 @@ properties:
     uid: '@azure/batch.PoolSpecification.targetLowPriorityNodes'
     package: '@azure/batch'
     summary: >-
-      The desired number of low-priority compute nodes in the pool. This
+      The desired number of low-priority Compute Nodes in the Pool. This
       property must not be
 
       specified if enableAutoScale is set to true. If enableAutoScale is set to
@@ -367,7 +366,7 @@ properties:
     uid: '@azure/batch.PoolSpecification.taskSchedulingPolicy'
     package: '@azure/batch'
     summary: >-
-      How tasks are distributed across compute nodes in a pool. If not
+      How Tasks are distributed across Compute Nodes in a Pool. If not
       specified, the default is
 
       spread.
@@ -380,10 +379,30 @@ properties:
       return:
         type: <xref uid="@azure/batch.TaskSchedulingPolicy" />
         description: ''
+  - name: taskSlotsPerNode
+    uid: '@azure/batch.PoolSpecification.taskSlotsPerNode'
+    package: '@azure/batch'
+    summary: >-
+      The number of task slots that can be used to run concurrent tasks on a
+      single compute node in
+
+      the pool. The default value is 1. The maximum value is the smaller of 4
+      times the number of
+
+      cores of the vmSize of the pool or 256.
+    fullName: taskSlotsPerNode
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'taskSlotsPerNode?: undefined | number'
+      return:
+        type: undefined | number
+        description: ''
   - name: userAccounts
     uid: '@azure/batch.PoolSpecification.userAccounts'
     package: '@azure/batch'
-    summary: The list of user accounts to be created on each node in the pool.
+    summary: The list of user Accounts to be created on each Compute Node in the Pool.
     fullName: userAccounts
     remarks: ''
     isPreview: false
@@ -397,8 +416,8 @@ properties:
     uid: '@azure/batch.PoolSpecification.virtualMachineConfiguration'
     package: '@azure/batch'
     summary: >-
-      The virtual machine configuration for the pool. This property must be
-      specified if the pool
+      The virtual machine configuration for the Pool. This property must be
+      specified if the Pool
 
       needs to be created with Azure IaaS VMs. This property and
       cloudServiceConfiguration are
@@ -423,13 +442,13 @@ properties:
     uid: '@azure/batch.PoolSpecification.vmSize'
     package: '@azure/batch'
     summary: >-
-      The size of the virtual machines in the pool. All virtual machines in a
-      pool are the same
+      The size of the virtual machines in the Pool. All virtual machines in a
+      Pool are the same
 
-      size. For information about available sizes of virtual machines in pools,
+      size. For information about available sizes of virtual machines in Pools,
       see Choose a VM size
 
-      for compute nodes in an Azure Batch pool
+      for Compute Nodes in an Azure Batch Pool
 
       (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).
     fullName: vmSize

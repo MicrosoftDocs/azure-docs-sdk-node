@@ -9,7 +9,7 @@ isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: ConversationImpl(SpeechTranslationConfig)
+  - name: 'ConversationImpl(SpeechTranslationConfig, string)'
     uid: microsoft-cognitiveservices-speech-sdk.ConversationImpl.constructor
     package: microsoft-cognitiveservices-speech-sdk
     summary: Create a conversation impl
@@ -17,15 +17,18 @@ constructors:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'new ConversationImpl(speechConfig: SpeechTranslationConfig)'
+      content: 'new ConversationImpl(speechConfig: SpeechTranslationConfig, id?: string)'
       parameters:
         - id: speechConfig
           type: >-
             <xref
             uid="microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig"
             />
-          description: |+
-
+          description: ''
+        - id: id
+          type: string
+          description: |
+            optional conversationId
 properties:
   - name: authorizationToken
     uid: microsoft-cognitiveservices-speech-sdk.ConversationImpl.authorizationToken
@@ -65,12 +68,11 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: ConversationTranslatorRecognizer connection
+      content: ConversationRecognizer connection
       return:
         type: >-
           <xref
-          uid="microsoft-cognitiveservices-speech-sdk.ConversationTranslatorRecognizer"
-          />
+          uid="microsoft-cognitiveservices-speech-sdk.ConversationRecognizer" />
         description: ''
   - name: conversationId
     uid: microsoft-cognitiveservices-speech-sdk.ConversationImpl.conversationId
@@ -84,6 +86,19 @@ properties:
       content: string conversationId
       return:
         type: string
+        description: ''
+  - name: conversationInfo
+    uid: microsoft-cognitiveservices-speech-sdk.ConversationImpl.conversationInfo
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: ''
+    fullName: conversationInfo
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: ConversationInfo conversationInfo
+      return:
+        type: <xref uid="microsoft-cognitiveservices-speech-sdk.ConversationInfo" />
         description: ''
   - name: conversationTranslator
     uid: >-
@@ -208,7 +223,46 @@ properties:
       return:
         type: string
         description: ''
+  - name: transcriberRecognizer
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.ConversationImpl.transcriberRecognizer
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: ''
+    fullName: transcriberRecognizer
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: TranscriberRecognizer transcriberRecognizer
+      return:
+        type: >-
+          <xref
+          uid="microsoft-cognitiveservices-speech-sdk.TranscriberRecognizer" />
+        description: ''
 methods:
+  - name: 'addParticipantAsync(IParticipant, Callback, Callback)'
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.ConversationImpl.addParticipantAsync
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: Join a conversation as a participant.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function addParticipantAsync(participant: IParticipant, cb?: Callback,
+        err?: Callback)
+      parameters:
+        - id: participant
+          type: <xref uid="microsoft-cognitiveservices-speech-sdk.IParticipant" />
+          description: participant to add
+        - id: cb
+          type: <xref uid="microsoft-cognitiveservices-speech-sdk.Callback" />
+          description: ''
+        - id: err
+          type: <xref uid="microsoft-cognitiveservices-speech-sdk.Callback" />
+          description: |+
+
   - name: 'changeNicknameAsync(string, Callback, Callback)'
     uid: >-
       microsoft-cognitiveservices-speech-sdk.ConversationImpl.changeNicknameAsync
@@ -232,6 +286,26 @@ methods:
           type: <xref uid="microsoft-cognitiveservices-speech-sdk.Callback" />
           description: |+
 
+  - name: connectTranscriberRecognizer(TranscriberRecognizer)
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.ConversationImpl.connectTranscriberRecognizer
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function connectTranscriberRecognizer(recognizer: TranscriberRecognizer)'
+      parameters:
+        - id: recognizer
+          type: >-
+            <xref
+            uid="microsoft-cognitiveservices-speech-sdk.TranscriberRecognizer"
+            />
+          description: ''
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
   - name: 'createConversationAsync(Callback, Callback)'
     uid: >-
       microsoft-cognitiveservices-speech-sdk.ConversationImpl.createConversationAsync
@@ -250,7 +324,9 @@ methods:
           type: <xref uid="microsoft-cognitiveservices-speech-sdk.Callback" />
           description: |+
 
-  - name: 'createConversationAsync(SpeechTranslationConfig, Callback, Callback)'
+  - name: >-
+      createConversationAsync(SpeechTranslationConfig, string | Callback,
+      Callback, Callback)
     uid: >-
       microsoft-cognitiveservices-speech-sdk.ConversationImpl.createConversationAsync
     package: microsoft-cognitiveservices-speech-sdk
@@ -261,7 +337,8 @@ methods:
     syntax:
       content: >-
         static function createConversationAsync(speechConfig:
-        SpeechTranslationConfig, cb?: Callback, err?: Callback)
+        SpeechTranslationConfig, arg2?: string | Callback, arg3?: Callback,
+        arg4?: Callback)
       parameters:
         - id: speechConfig
           type: >-
@@ -269,13 +346,17 @@ methods:
             uid="microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig"
             />
           description: ''
-        - id: cb
+        - id: arg2
+          type: >-
+            string | <xref uid="microsoft-cognitiveservices-speech-sdk.Callback"
+            />
+          description: ''
+        - id: arg3
           type: <xref uid="microsoft-cognitiveservices-speech-sdk.Callback" />
           description: ''
-        - id: err
+        - id: arg4
           type: <xref uid="microsoft-cognitiveservices-speech-sdk.Callback" />
-          description: |+
-
+          description: ''
       return:
         type: <xref uid="microsoft-cognitiveservices-speech-sdk.Conversation" />
         description: ''
@@ -297,6 +378,19 @@ methods:
           type: <xref uid="microsoft-cognitiveservices-speech-sdk.Callback" />
           description: |+
 
+  - name: deleteConversationImplAsync()
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.ConversationImpl.deleteConversationImplAsync
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function deleteConversationImplAsync()
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
   - name: dispose(string)
     uid: microsoft-cognitiveservices-speech-sdk.ConversationImpl.dispose
     package: microsoft-cognitiveservices-speech-sdk
@@ -328,6 +422,19 @@ methods:
           type: <xref uid="microsoft-cognitiveservices-speech-sdk.Callback" />
           description: |+
 
+  - name: endConversationImplAsync()
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.ConversationImpl.endConversationImplAsync
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function endConversationImplAsync()
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
   - name: isDisposed()
     uid: microsoft-cognitiveservices-speech-sdk.ConversationImpl.isDisposed
     package: microsoft-cognitiveservices-speech-sdk

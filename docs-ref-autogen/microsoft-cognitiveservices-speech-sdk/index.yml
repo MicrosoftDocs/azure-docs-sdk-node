@@ -74,6 +74,7 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.SynthesisTriggeredEvent
   - microsoft-cognitiveservices-speech-sdk.SynthesisTurn
   - microsoft-cognitiveservices-speech-sdk.SynthesizerConfig
+  - microsoft-cognitiveservices-speech-sdk.TranscriberConnectionFactory
   - microsoft-cognitiveservices-speech-sdk.ConversationConnectionConfig
   - microsoft-cognitiveservices-speech-sdk.ConversationConnectionFactory
   - microsoft-cognitiveservices-speech-sdk.ConversationConnectionMessage
@@ -88,6 +89,7 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.ParticipantEventArgs
   - microsoft-cognitiveservices-speech-sdk.ParticipantsListEventArgs
   - microsoft-cognitiveservices-speech-sdk.InternalParticipants
+  - microsoft-cognitiveservices-speech-sdk.ConversationRecognizerFactory
   - microsoft-cognitiveservices-speech-sdk.ConversationTranslatorRecognizer
   - microsoft-cognitiveservices-speech-sdk.ConversationWebsocketMessageFormatter
   - microsoft-cognitiveservices-speech-sdk.CommandResponsePayload
@@ -95,6 +97,8 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.ParticipantsListPayloadResponse
   - microsoft-cognitiveservices-speech-sdk.SpeechResponsePayload
   - microsoft-cognitiveservices-speech-sdk.TextResponsePayload
+  - microsoft-cognitiveservices-speech-sdk.TranscriberRecognizer
+  - microsoft-cognitiveservices-speech-sdk.TranscriptionServiceRecognizer
   - microsoft-cognitiveservices-speech-sdk.TranslationConnectionFactory
   - microsoft-cognitiveservices-speech-sdk.TranslationServiceRecognizer
   - microsoft-cognitiveservices-speech-sdk.WebsocketMessageFormatter
@@ -108,6 +112,7 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.AudioStreamNodeDetachedEvent
   - microsoft-cognitiveservices-speech-sdk.AudioStreamNodeErrorEvent
   - microsoft-cognitiveservices-speech-sdk.AudioStreamNodeEvent
+  - microsoft-cognitiveservices-speech-sdk.BackgroundEvent
   - microsoft-cognitiveservices-speech-sdk.ChunkedArrayBufferStream
   - microsoft-cognitiveservices-speech-sdk.ConnectionClosedEvent
   - microsoft-cognitiveservices-speech-sdk.ConnectionErrorEvent
@@ -120,6 +125,7 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.ServiceEvent
   - microsoft-cognitiveservices-speech-sdk.ConnectionMessage
   - microsoft-cognitiveservices-speech-sdk.ConnectionOpenResponse
+  - microsoft-cognitiveservices-speech-sdk.PlatformEmitter
   - microsoft-cognitiveservices-speech-sdk.ArgumentNullError
   - microsoft-cognitiveservices-speech-sdk.InvalidOperationError
   - microsoft-cognitiveservices-speech-sdk.ObjectDisposedError
@@ -145,8 +151,6 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.OCSPWSUpgradeStartedEvent
   - microsoft-cognitiveservices-speech-sdk.PlatformEvent
   - microsoft-cognitiveservices-speech-sdk.Deferred
-  - microsoft-cognitiveservices-speech-sdk.Promise
-  - microsoft-cognitiveservices-speech-sdk.PromiseHelper
   - microsoft-cognitiveservices-speech-sdk.PromiseResult
   - microsoft-cognitiveservices-speech-sdk.PromiseResultEventSource
   - microsoft-cognitiveservices-speech-sdk.Sink
@@ -175,11 +179,14 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig
   - microsoft-cognitiveservices-speech-sdk.CancellationDetails
   - microsoft-cognitiveservices-speech-sdk.CancellationDetailsBase
+  - microsoft-cognitiveservices-speech-sdk.CancellationEventArgsBase
   - microsoft-cognitiveservices-speech-sdk.Connection
   - microsoft-cognitiveservices-speech-sdk.ConnectionEventArgs
   - microsoft-cognitiveservices-speech-sdk.ConnectionMessage
   - microsoft-cognitiveservices-speech-sdk.ConnectionMessageImpl
   - microsoft-cognitiveservices-speech-sdk.ConnectionMessageEventArgs
+  - >-
+    microsoft-cognitiveservices-speech-sdk.ConversationTranscriptionCanceledEventArgs
   - microsoft-cognitiveservices-speech-sdk.CustomCommandsConfig
   - microsoft-cognitiveservices-speech-sdk.DialogServiceConfig
   - microsoft-cognitiveservices-speech-sdk.DialogServiceConfigImpl
@@ -207,6 +214,7 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.SpeechConfig
   - microsoft-cognitiveservices-speech-sdk.SpeechConfigImpl
   - microsoft-cognitiveservices-speech-sdk.SpeechRecognitionCanceledEventArgs
+  - microsoft-cognitiveservices-speech-sdk.ConversationTranscriptionEventArgs
   - microsoft-cognitiveservices-speech-sdk.SpeechRecognitionEventArgs
   - microsoft-cognitiveservices-speech-sdk.SpeechRecognitionResult
   - microsoft-cognitiveservices-speech-sdk.SpeechRecognizer
@@ -218,9 +226,12 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig
   - microsoft-cognitiveservices-speech-sdk.Conversation
   - microsoft-cognitiveservices-speech-sdk.ConversationImpl
+  - microsoft-cognitiveservices-speech-sdk.ConversationCommon
   - microsoft-cognitiveservices-speech-sdk.ConversationExpirationEventArgs
   - >-
     microsoft-cognitiveservices-speech-sdk.ConversationParticipantsChangedEventArgs
+  - microsoft-cognitiveservices-speech-sdk.ConversationTranscriber
+  - microsoft-cognitiveservices-speech-sdk.ConversationTranscriptionEventArgs
   - >-
     microsoft-cognitiveservices-speech-sdk.ConversationTranslationCanceledEventArgs
   - microsoft-cognitiveservices-speech-sdk.ConversationTranslationEventArgs
@@ -287,12 +298,12 @@ interfaces:
   - microsoft-cognitiveservices-speech-sdk.ISynthesisResponse
   - microsoft-cognitiveservices-speech-sdk.ISynthesisResponseAudio
   - microsoft-cognitiveservices-speech-sdk.ISynthesisResponseContext
+  - microsoft-cognitiveservices-speech-sdk.ConversationRecognizer
   - microsoft-cognitiveservices-speech-sdk.IChangeNicknameCommand
   - microsoft-cognitiveservices-speech-sdk.IClientMessage
   - microsoft-cognitiveservices-speech-sdk.ICommandMessage
   - microsoft-cognitiveservices-speech-sdk.IConversationResponseError
   - microsoft-cognitiveservices-speech-sdk.IConversationResponseErrorMessage
-  - microsoft-cognitiveservices-speech-sdk.IConversationTranslatorRecognizer
   - microsoft-cognitiveservices-speech-sdk.IEjectParticipantCommand
   - microsoft-cognitiveservices-speech-sdk.IInstantMessageCommand
   - microsoft-cognitiveservices-speech-sdk.IInternalConversation
@@ -308,6 +319,7 @@ interfaces:
   - microsoft-cognitiveservices-speech-sdk.ITextResponsePayload
   - microsoft-cognitiveservices-speech-sdk.ITranslationCommandMessage
   - microsoft-cognitiveservices-speech-sdk.ITranslationResponsePayload
+  - microsoft-cognitiveservices-speech-sdk.Emitter
   - microsoft-cognitiveservices-speech-sdk.IAudioDestination
   - microsoft-cognitiveservices-speech-sdk.IAudioSource
   - microsoft-cognitiveservices-speech-sdk.IAudioStreamNode
@@ -323,15 +335,20 @@ interfaces:
   - microsoft-cognitiveservices-speech-sdk.IWebsocketMessageFormatter
   - microsoft-cognitiveservices-speech-sdk.IList
   - microsoft-cognitiveservices-speech-sdk.IDeferred
-  - microsoft-cognitiveservices-speech-sdk.IPromise
   - microsoft-cognitiveservices-speech-sdk.IQueue
   - microsoft-cognitiveservices-speech-sdk.IStreamChunk
   - microsoft-cognitiveservices-speech-sdk.IWorkerTimers
   - microsoft-cognitiveservices-speech-sdk.IPlayer
-  - microsoft-cognitiveservices-speech-sdk.IConversation
+  - microsoft-cognitiveservices-speech-sdk.CancellationEventArgs
+  - microsoft-cognitiveservices-speech-sdk.ConversationHandler
+  - microsoft-cognitiveservices-speech-sdk.ConversationTranscriptionHandler
   - microsoft-cognitiveservices-speech-sdk.IConversationTranslator
+  - microsoft-cognitiveservices-speech-sdk.ConversationInfo
+  - microsoft-cognitiveservices-speech-sdk.IConversation
   - microsoft-cognitiveservices-speech-sdk.IParticipant
   - microsoft-cognitiveservices-speech-sdk.IUser
+  - microsoft-cognitiveservices-speech-sdk.TranscriptionParticipant
+  - microsoft-cognitiveservices-speech-sdk.VoiceSignature
   - microsoft-cognitiveservices-speech-sdk.IEnrollmentResultDetails
 functions:
   - name: 'check(any, (error: Error, res: any) => void)'
@@ -384,9 +401,7 @@ functions:
         err?: Callback)
       parameters:
         - id: promise
-          type: >-
-            <xref uid="microsoft-cognitiveservices-speech-sdk.Promise"
-            />&lt;T&gt;
+          type: Promise&lt;T&gt;
           description: ''
         - id: cb
           type: <xref uid="microsoft-cognitiveservices-speech-sdk.Callback" />
@@ -448,6 +463,29 @@ functions:
       return:
         type: any
         description: ''
+  - name: >-
+      marshalPromiseToCallbacks<T>(Promise<T>, (value: T) => void, (error:
+      string) => void)
+    uid: microsoft-cognitiveservices-speech-sdk.marshalPromiseToCallbacks
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function marshalPromiseToCallbacks<T>(promise: Promise<T>, cb?: (value:
+        T) => void, err?: (error: string) => void)
+      parameters:
+        - id: promise
+          type: Promise&lt;T&gt;
+          description: ''
+        - id: cb
+          type: '(value: T) =&gt; void'
+          description: ''
+        - id: err
+          type: '(error: string) =&gt; void'
+          description: ''
 enums:
   - microsoft-cognitiveservices-speech-sdk.RestRequestType
   - microsoft-cognitiveservices-speech-sdk.RecognitionCompletionStatus
@@ -478,4 +516,7 @@ enums:
   - microsoft-cognitiveservices-speech-sdk.ParticipantChangedReason
   - microsoft-cognitiveservices-speech-sdk.VoiceProfileType
 typeAliases:
+  - microsoft-cognitiveservices-speech-sdk.EventKey
+  - microsoft-cognitiveservices-speech-sdk.EventMap
+  - microsoft-cognitiveservices-speech-sdk.EventReceiver
   - microsoft-cognitiveservices-speech-sdk.Callback

@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/core-amqp, 
 author: maggiepint
 ms.author: magpint
-ms.date: 10/30/2020
+ms.date: 11/04/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -258,7 +258,7 @@ export DEBUG=azure:core-amqp:(error|warning),rhea-promise:error,rhea:events,rhea
 
 # Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-amqp_1.1.7/sdk/core/core-amqp/samples) directory for detailed samples.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-amqp_2.0.0-beta.1/sdk/core/core-amqp/samples) directory for detailed samples.
 
 # Contributing
 
@@ -270,7 +270,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
 provided by the bot. You will only need to do this once across all repos using our CLA.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_1.1.7/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_2.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or

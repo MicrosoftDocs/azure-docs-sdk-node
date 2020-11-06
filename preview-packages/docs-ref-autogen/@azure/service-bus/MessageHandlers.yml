@@ -3,13 +3,13 @@ name: MessageHandlers
 uid: '@azure/service-bus.MessageHandlers'
 package: '@azure/service-bus'
 summary: The general message handler interface (used for streamMessages).
-fullName: MessageHandlers<ReceivedMessageT>
+fullName: MessageHandlers
 remarks: ''
 isPreview: false
 isDeprecated: false
 type: interface
 methods:
-  - name: processError(Error)
+  - name: processError(ProcessErrorArgs)
     uid: '@azure/service-bus.MessageHandlers.processError'
     package: '@azure/service-bus'
     summary: Handler that processes errors that occur during receiving.
@@ -17,16 +17,17 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function processError(err: Error)'
+      content: 'function processError(args: ProcessErrorArgs)'
       parameters:
-        - id: err
-          type: Error
+        - id: args
+          type: <xref uid="@azure/service-bus.ProcessErrorArgs" />
           description: |
-            An error from Service Bus.
+            The error and additional context to indicate where
+            the error originated.
       return:
         type: Promise&lt;void&gt;
         description: ''
-  - name: processMessage(ReceivedMessageT)
+  - name: processMessage(ServiceBusReceivedMessage)
     uid: '@azure/service-bus.MessageHandlers.processMessage'
     package: '@azure/service-bus'
     summary: Handler that processes messages from service bus.
@@ -34,10 +35,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function processMessage(message: ReceivedMessageT)'
+      content: 'function processMessage(message: ServiceBusReceivedMessage)'
       parameters:
         - id: message
-          type: ReceivedMessageT
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
           description: |
             A message received from Service Bus.
       return:

@@ -16,9 +16,9 @@ ms.devlang: nodejs
 ## Overview
 
 > [!IMPORTANT]
-> We strongly recommend that you use [Microsoft Graph](https://graph.microsoft.io/) instead of Azure AD Graph API to access Azure Active Directory resources. Our development efforts are now concentrated on Microsoft Graph and no further enhancements are planned for Azure AD Graph API. There are a very limited number of scenarios for which Azure AD Graph API might still be appropriate; for more information, see the [Microsoft Graph or the Azure AD Graph](https://dev.office.com/blogs/microsoft-graph-or-azure-ad-graph) blog post in the Office Dev Center.
+> Use [Microsoft Graph](https://graph.microsoft.io/) instead of Azure AD Graph API to access Azure Active Directory resources. Our development efforts are now concentrated on Microsoft Graph and no further enhancements are planned for Azure AD Graph API. For more information, see [Migrate Azure AD Graph apps to Microsoft Graph](https://docs.microsoft.com/graph/migrate-azure-ad-graph-overview).
 
-The [Azure Active Directory Authentication Library (ADAL) for Node.js](https://www.npmjs.com/package/adal-node) enables Node.js applications to authenticate to AAD in order to access AAD protected web resources.
+The [Azure Active Directory Authentication Library (ADAL) for Node.js](https://www.npmjs.com/package/adal-node) enables Node.js applications to authenticate to Azure AD in order to access AAD protected web resources.
 
 ## Client package
 
@@ -65,7 +65,7 @@ context.acquireTokenWithClientCredentials(
 | | |
 |---|---|
 | **Azure Active Directory** ||
-| [Securing a web API with Azure AD](https://azure.microsoft.com/resources/samples/active-directory-node-webapi/) | A NodeJS web API that is secured using Azure AD and OAuth 2.0 access tokens. |
-| [Integrating Azure AD into a NodeJS web application](https://azure.microsoft.com/resources/samples/active-directory-node-webapp-openidconnect/) | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
+| Securing a web API with Azure AD | A NodeJS web API that is secured using Azure AD and OAuth 2.0 access tokens. |
+| Integrating Azure AD into a NodeJS web application | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
 
 For more code samples that use various Azure packages, explore the [Node.JS samples](https://azure.microsoft.com/resources/samples/?platform=nodejs).

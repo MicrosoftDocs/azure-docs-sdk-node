@@ -3,7 +3,7 @@ title: Azure Cognitive Search client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/search-documents, 
 author: maggiepint
 ms.author: magpint
-ms.date: 07/06/2020
+ms.date: 07/31/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Cognitive Search client library for JavaScript - Version 11.0.0 
+# Azure Cognitive Search client library for JavaScript - Version 11.0.2 
 
 
 [Azure Cognitive Search](https://docs.microsoft.com/azure/search/) is a search-as-a-service cloud solution that gives developers APIs and tools for adding a rich search experience over private, heterogeneous content in web, mobile, and enterprise applications.
@@ -33,11 +33,12 @@ Use the @azure/search-documents client library to:
 - Create and manage analyzers for advanced text analysis or multi-lingual content.
 - Optimize results through scoring profiles to factor in business logic or freshness.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/search/search/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/search/search-documents/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/search-documents) |
 [API reference documentation](https://aka.ms/azsdk/js/search/docs) |
 [REST API documentation](https://docs.microsoft.com/rest/api/searchservice/) |
-[Product documentation](https://docs.microsoft.com/azure/search/)
+[Product documentation](https://docs.microsoft.com/azure/search/) |
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/search/search-documents/samples)
 
 ## Getting started
 
@@ -122,7 +123,7 @@ async function main() {
   // Let's get the top 5 jobs related to Microsoft
   const searchResults = await client.search("Microsoft", { top: 5 });
   for await (const result of searchResults.results) {
-    console.log(`${result.business_title}\n${result.job_description}\n`);
+    console.log(`${result.document.business_title}\n${result.document.job_description}\n`);
   }
 }
 
@@ -168,7 +169,7 @@ Typically you will only wish to [show a subset of search results](https://docs.m
 
 ## Examples
 
-The following examples demonstrate the basics - please [check out our samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/search/search/samples) for much more.
+The following examples demonstrate the basics - please [check out our samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/search/search-documents/samples) for much more.
 
 * [Creating an index](#create-an-index)
 * [Retrieving a specific document from your index](#retrieve-a-specific-document-from-an-index)
@@ -358,9 +359,9 @@ async function main() {
   });
 
   for await (const result of searchResults.results) {
-    // result has HotelId, HotelName, and Rating.
-    // Trying to access result.Description would emit a TS error.
-    console.log(result.HotelName);
+    // result.document has HotelId, HotelName, and Rating.
+    // Trying to access result.document.Description would emit a TS error.
+    console.log(result.document.HotelName);
   }
 }
 
@@ -451,7 +452,7 @@ export AZURE_LOG_LEVEL=verbose*
 For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/core/logger).
 
 ## Next steps
-* [Go further with search-documents and our samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/search/search/samples)
+* [Go further with search-documents and our samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/search/search-documents/samples)
 * [Watch a demo or deep dive video](https://azure.microsoft.com/resources/videos/index/?services=search)
 * [Read more about the Azure Cognitive Search service](https://docs.microsoft.com/azure/search/search-what-is-azure-search)
 

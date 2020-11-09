@@ -1,20 +1,20 @@
 ---
 title: 
-keywords: Azure, javascript, SDK, API, @azure/core-amqp, core
+keywords: Azure, javascript, SDK, API, @azure/core-amqp, 
 author: maggiepint
 ms.author: magpint
-ms.date: 06/30/2020
+ms.date: 10/30/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: core
+ms.service: 
 ---
 
-# Azure Core AMQP client library for AMQP operations - Version 1.1.4
+# Azure Core AMQP client library for AMQP operations
 
 Azure Core AMQP is a library that provides common functionality for **Azure** Javascript
-libraries that use [AMQP protocol](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-amqp-protocol-guide)
+libraries that use [AMQP protocol](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-amqp-protocol-guide)
 like the ones for Azure Service Bus and Azure Event Hubs.
 
 ## Getting started
@@ -34,15 +34,15 @@ in your application.
 
 Some of the key features of Azure Core AMQP library are:
 
-- [Claims based Authorization](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-amqp-protocol-guide#claims-based-authorization)
-- Request-Response link for [sending request and receiving response over AMQP](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-amqp-protocol-guide#amqp-management)
+- [Claims based Authorization](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-amqp-protocol-guide#claims-based-authorization)
+- Request-Response link for [sending request and receiving response over AMQP](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-amqp-protocol-guide#amqp-management)
 - A Data Transformer class to encode given data to an AMQP message and decode a given AMQP message. Useful for sending and receiving messages that are not of type Buffer.
 - Error translation of AMQP error codes along with errors specific to Azure Service Bus and Azure Event Hubs.
 - RetryPolicy for retrying a given operation if a retryable error was encountered.
 
 ## Examples
 
-[Claims Based Authorization](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-amqp-protocol-guide#claims-based-authorization)
+[Claims Based Authorization](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-amqp-protocol-guide#claims-based-authorization)
 need to be done for every AMQP link that your application creates. The claims also has to be renewed periodically.
 For more details on CBS, please see the [CBS Specification](https://www.oasis-open.org/committees/download.php/62097/amqp-cbs-v1.0-wd05.doc).
 
@@ -187,7 +187,7 @@ main().catch((err) => console.log(err));
 
 ## Troubleshooting
 
-The core-amqp library depends on the [rhea-promise](https://github.com/amqp/rhea-promise) library for managing connections, and for sending and receiving events over the [AMQP](http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-complete-v1.0-os.pdf) protocol.
+The core-amqp library depends on the [rhea-promise](https://github.com/amqp/rhea-promise) library for managing connections, and for sending and receiving events over the [AMQP](https://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-complete-v1.0-os.pdf) protocol.
 
 ### Enable logs
 
@@ -258,7 +258,7 @@ export DEBUG=azure:core-amqp:(error|warning),rhea-promise:error,rhea:events,rhea
 
 # Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/core/core-amqp/samples) directory for detailed samples.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-amqp_1.1.7/sdk/core/core-amqp/samples) directory for detailed samples.
 
 # Contributing
 
@@ -270,7 +270,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
 provided by the bot. You will only need to do this once across all repos using our CLA.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/tree/d69ba6e007e17c71548a9b656b7cbe5d505714ff/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_1.1.7/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or

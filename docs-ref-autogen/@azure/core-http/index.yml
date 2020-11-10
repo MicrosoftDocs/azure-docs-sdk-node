@@ -93,6 +93,7 @@ interfaces:
   - '@azure/core-http.RetryData'
   - '@azure/core-http.RetryError'
   - '@azure/core-http.SanitizerOptions'
+  - '@azure/core-http.SerializerOptions'
   - '@azure/core-http.ServiceCallback'
   - '@azure/core-http.ParameterValue'
   - '@azure/core-http.RequestOptionsBase'
@@ -243,7 +244,7 @@ functions:
       return:
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
         description: ''
-  - name: deserializationPolicy(DeserializationContentTypes)
+  - name: 'deserializationPolicy(DeserializationContentTypes, SerializerOptions)'
     uid: '@azure/core-http.deserializationPolicy'
     package: '@azure/core-http'
     summary: >-
@@ -257,15 +258,20 @@ functions:
     syntax:
       content: >-
         function deserializationPolicy(deserializationContentTypes?:
-        DeserializationContentTypes)
+        DeserializationContentTypes, parsingOptions?: SerializerOptions)
       parameters:
         - id: deserializationContentTypes
           type: <xref uid="@azure/core-http.DeserializationContentTypes" />
           description: ''
+        - id: parsingOptions
+          type: <xref uid="@azure/core-http.SerializerOptions" />
+          description: ''
       return:
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
         description: ''
-  - name: 'deserializeResponseBody(string[], string[], HttpOperationResponse)'
+  - name: >-
+      deserializeResponseBody(string[], string[], HttpOperationResponse,
+      SerializerOptions)
     uid: '@azure/core-http.deserializeResponseBody'
     package: '@azure/core-http'
     summary: ''
@@ -275,7 +281,8 @@ functions:
     syntax:
       content: >-
         function deserializeResponseBody(jsonContentTypes: string[],
-        xmlContentTypes: string[], response: HttpOperationResponse)
+        xmlContentTypes: string[], response: HttpOperationResponse, options?:
+        SerializerOptions)
       parameters:
         - id: jsonContentTypes
           type: 'string[]'
@@ -285,6 +292,9 @@ functions:
           description: ''
         - id: response
           type: <xref uid="@azure/core-http.HttpOperationResponse" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/core-http.SerializerOptions" />
           description: ''
       return:
         type: Promise&lt;<xref uid="@azure/core-http.HttpOperationResponse" />&gt;
@@ -1359,7 +1369,7 @@ functions:
       return:
         type: boolean
         description: True if the URL is HTTPS; false otherwise.
-  - name: 'parseXML(string, Object)'
+  - name: 'parseXML(string, SerializerOptions)'
     uid: '@azure/core-http.parseXML'
     package: '@azure/core-http'
     summary: ''
@@ -1367,18 +1377,18 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function parseXML(str: string, opts?: Object)'
+      content: 'function parseXML(str: string, opts?: SerializerOptions)'
       parameters:
         - id: str
           type: string
           description: ''
         - id: opts
-          type: Object
+          type: <xref uid="@azure/core-http.SerializerOptions" />
           description: ''
       return:
         type: Promise&lt;any&gt;
         description: ''
-  - name: 'stringifyXML(any, Object)'
+  - name: 'stringifyXML(any, SerializerOptions)'
     uid: '@azure/core-http.stringifyXML'
     package: '@azure/core-http'
     summary: ''
@@ -1386,18 +1396,18 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function stringifyXML(content: any, opts?: Object)'
+      content: 'function stringifyXML(content: any, opts?: SerializerOptions)'
       parameters:
         - id: content
           type: any
           description: ''
         - id: opts
-          type: Object
+          type: <xref uid="@azure/core-http.SerializerOptions" />
           description: ''
       return:
         type: string
         description: ''
-  - name: 'parseXML(string, Object)'
+  - name: 'parseXML(string, SerializerOptions)'
     uid: '@azure/core-http.parseXML'
     package: '@azure/core-http'
     summary: Converts given XML string into JSON
@@ -1405,13 +1415,13 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function parseXML(str: string, opts?: Object)'
+      content: 'function parseXML(str: string, opts?: SerializerOptions)'
       parameters:
         - id: str
           type: string
           description: String containing the XML content to be parsed into JSON
         - id: opts
-          type: Object
+          type: <xref uid="@azure/core-http.SerializerOptions" />
           description: >
             Options that govern the parsing of given xml string
 
@@ -1420,7 +1430,7 @@ functions:
       return:
         type: Promise&lt;any&gt;
         description: ''
-  - name: 'stringifyXML(any, Object)'
+  - name: 'stringifyXML(any, SerializerOptions)'
     uid: '@azure/core-http.stringifyXML'
     package: '@azure/core-http'
     summary: Converts given JSON object to XML string
@@ -1428,13 +1438,13 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function stringifyXML(obj: any, opts?: Object)'
+      content: 'function stringifyXML(obj: any, opts?: SerializerOptions)'
       parameters:
         - id: obj
           type: any
           description: JSON object to be converted into XML string
         - id: opts
-          type: Object
+          type: <xref uid="@azure/core-http.SerializerOptions" />
           description: >
             Options that govern the parsing of given JSON object
 

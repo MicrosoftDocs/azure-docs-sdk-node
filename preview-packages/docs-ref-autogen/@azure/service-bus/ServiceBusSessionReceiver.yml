@@ -3,7 +3,7 @@ name: ServiceBusSessionReceiver
 uid: '@azure/service-bus.ServiceBusSessionReceiver'
 package: '@azure/service-bus'
 summary: 'A receiver that handles sessions, including renewing the session lock.'
-fullName: ServiceBusSessionReceiver<ReceivedMessageT>
+fullName: ServiceBusSessionReceiver
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -87,6 +87,33 @@ properties:
         type: Date
         description: ''
 methods:
+  - name: 'abandonMessage(ServiceBusReceivedMessage, [key: string]: any)'
+    uid: '@azure/service-bus.ServiceBusSessionReceiver.abandonMessage'
+    package: '@azure/service-bus'
+    summary: >-
+      The lock held on the message by the receiver is let go, making the message
+      available again in
+
+      Service Bus for another receive operation.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function abandonMessage(message: ServiceBusReceivedMessage,
+        propertiesToModify?: [key: string]: any)
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: ''
+        - id: propertiesToModify
+          type: '[key: string]\: any'
+          description: >
+            The properties of the message to modify while abandoning the
+            message.
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>.
   - name: close()
     uid: '@azure/service-bus.ServiceBusSessionReceiver.close'
     package: '@azure/service-bus'
@@ -105,6 +132,81 @@ methods:
       return:
         type: Promise&lt;void&gt;
         description: ''
+  - name: completeMessage(ServiceBusReceivedMessage)
+    uid: '@azure/service-bus.ServiceBusSessionReceiver.completeMessage'
+    package: '@azure/service-bus'
+    summary: Removes the message from Service Bus.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function completeMessage(message: ServiceBusReceivedMessage)'
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: ''
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>.
+  - name: >-
+      deadLetterMessage(ServiceBusReceivedMessage, DeadLetterOptions & [key:
+      string]: any)
+    uid: '@azure/service-bus.ServiceBusSessionReceiver.deadLetterMessage'
+    package: '@azure/service-bus'
+    summary: >-
+      Moves the message to the deadletter sub-queue. To receive a deadletted
+      message, create a new
+
+      QueueClient/SubscriptionClient using the path for the deadletter
+      sub-queue.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deadLetterMessage(message: ServiceBusReceivedMessage, options?:
+        DeadLetterOptions & [key: string]: any)
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: ''
+        - id: options
+          type: >-
+            <xref uid="@azure/service-bus.DeadLetterOptions" /> & [key: string]:
+            any
+          description: |
+            The DeadLetter options that can be provided while
+            rejecting the message.
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>
+  - name: 'deferMessage(ServiceBusReceivedMessage, [key: string]: any)'
+    uid: '@azure/service-bus.ServiceBusSessionReceiver.deferMessage'
+    package: '@azure/service-bus'
+    summary: >-
+      Defers the processing of the message. Save the `sequenceNumber` of the
+      message, in order to
+
+      receive it message again in the future using the `receiveDeferredMessage`
+      method.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deferMessage(message: ServiceBusReceivedMessage,
+        propertiesToModify?: [key: string]: any)
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: ''
+        - id: propertiesToModify
+          type: '[key: string]\: any'
+          description: |
+            The properties of the message to modify while deferring the message
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>
   - name: getMessageIterator(GetMessageIteratorOptions)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.getMessageIterator'
     package: '@azure/service-bus'
@@ -129,7 +231,9 @@ methods:
 
             - `abortSignal`: The signal to use to abort the ongoing operation.
       return:
-        type: AsyncIterableIterator&lt;ReceivedMessageT&gt;
+        type: >-
+          AsyncIterableIterator&lt;<xref
+          uid="@azure/service-bus.ServiceBusReceivedMessage" />&gt;
         description: ''
   - name: getSessionState(OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.getSessionState'
@@ -216,7 +320,9 @@ methods:
           type: <xref uid="@azure/service-bus.OperationOptionsBase" />
           description: Options bag to pass an abort signal or tracing options.
       return:
-        type: 'Promise&lt;ReceivedMessageT[]&gt;'
+        type: >-
+          Promise&lt;<xref uid="@azure/service-bus.ServiceBusReceivedMessage"
+          />[]&gt;
         description: |-
           - Returns a list of messages identified by the given sequenceNumbers.
           - Returns an empty list if no messages are found.
@@ -247,10 +353,43 @@ methods:
 
             - `abortSignal`: The signal to use to abort the ongoing operation.
       return:
-        type: 'Promise&lt;ReceivedMessageT[]&gt;'
+        type: >-
+          Promise&lt;<xref uid="@azure/service-bus.ServiceBusReceivedMessage"
+          />[]&gt;
         description: >-
           Promise<ReceivedMessageT[]> A promise that resolves with an array of
           messages.
+  - name: renewMessageLock(ServiceBusReceivedMessage)
+    uid: '@azure/service-bus.ServiceBusSessionReceiver.renewMessageLock'
+    package: '@azure/service-bus'
+    summary: >-
+      Renews the lock on the message for the duration as specified during the
+      Queue/Subscription
+
+      creation.
+
+      - Check the `lockedUntilUtc` property on the message for the time when the
+      lock expires.
+
+      - If a message is not settled (using either `complete()`, `defer()` or
+      `deadletter()`,
+
+      before its lock expires, then the message lands back in the
+      Queue/Subscription for the next
+
+      receive operation.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function renewMessageLock(message: ServiceBusReceivedMessage)'
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: ''
+      return:
+        type: Promise&lt;Date&gt;
+        description: Promise<Date> - New lock token expiry date and time in UTC format.
   - name: renewSessionLock(OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.renewSessionLock'
     package: '@azure/service-bus'
@@ -290,7 +429,7 @@ methods:
       return:
         type: Promise&lt;void&gt;
         description: ''
-  - name: 'subscribe(MessageHandlers<ReceivedMessageT>, SessionSubscribeOptions)'
+  - name: 'subscribe(MessageHandlers, SubscribeOptions)'
     uid: '@azure/service-bus.ServiceBusSessionReceiver.subscribe'
     package: '@azure/service-bus'
     summary: Streams messages to message handlers.
@@ -299,16 +438,14 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function subscribe(handlers: MessageHandlers<ReceivedMessageT>,
-        options?: SessionSubscribeOptions)
+        function subscribe(handlers: MessageHandlers, options?:
+        SubscribeOptions)
       parameters:
         - id: handlers
-          type: >-
-            <xref uid="@azure/service-bus.MessageHandlers"
-            />&lt;ReceivedMessageT&gt;
+          type: <xref uid="@azure/service-bus.MessageHandlers" />
           description: A handler that gets called for messages and errors.
         - id: options
-          type: <xref uid="@azure/service-bus.SessionSubscribeOptions" />
+          type: <xref uid="@azure/service-bus.SubscribeOptions" />
           description: Options for subscribe.
       return:
         type: Object
@@ -317,4 +454,4 @@ methods:
           `handlers` and
 
           stopping new messages from arriving.
-extends: <xref uid="@azure/service-bus.ServiceBusReceiver" />&lt;ReceivedMessageT&gt;
+extends: <xref uid="@azure/service-bus.ServiceBusReceiver" />

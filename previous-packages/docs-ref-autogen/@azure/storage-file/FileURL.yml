@@ -1,0 +1,646 @@
+### YamlMime:TSType
+name: FileURL
+uid: '@azure/storage-file.FileURL'
+package: '@azure/storage-file'
+summary: A FileURL represents a URL to an Azure Storage file.
+fullName: FileURL
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+constructors:
+  - name: 'FileURL(string, Pipeline)'
+    uid: '@azure/storage-file.FileURL.constructor'
+    package: '@azure/storage-file'
+    summary: Creates an instance of FileURL.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'new FileURL(url: string, pipeline: Pipeline)'
+      parameters:
+        - id: url
+          type: string
+          description: |-
+            A URL string pointing to Azure Storage file, such as
+                                "https://myaccount.file.core.windows.net/myshare/mydirectory/file". You can
+                                append a SAS if using AnonymousCredential, such as
+                                "https://myaccount.file.core.windows.net/myshare/mydirectory/file?sasString".
+                                This method accepts an encoded URL or non-encoded URL pointing to a file.
+                                Encoded URL string will NOT be escaped twice, only special characters in URL path will be escaped.
+                                However, if a file or directory name includes %, file or directory name must be encoded in the URL.
+                                Such as a file named "myfile%", the URL should be "https://myaccount.file.core.windows.net/myshare/mydirectory/myfile%25".
+        - id: pipeline
+          type: <xref uid="@azure/storage-file.Pipeline" />
+          description: |-
+            Call StorageURL.newPipeline() to create a default
+                                       pipeline, or provide a customized pipeline.
+properties:
+  - name: pipeline
+    uid: '@azure/storage-file.FileURL.pipeline'
+    package: '@azure/storage-file'
+    summary: Request policy pipeline.
+    fullName: pipeline
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        type: <xref uid="@azure/storage-file.Pipeline" />
+        description: ''
+  - name: url
+    uid: '@azure/storage-file.FileURL.url'
+    package: '@azure/storage-file'
+    summary: URL string value.
+    fullName: url
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'url: string'
+      return:
+        type: string
+        description: ''
+methods:
+  - name: 'abortCopyFromURL(Aborter, string)'
+    uid: '@azure/storage-file.FileURL.abortCopyFromURL'
+    package: '@azure/storage-file'
+    summary: >-
+      Aborts a pending Copy File operation, and leaves a destination file with
+      zero length and full
+
+      metadata.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function abortCopyFromURL(aborter: Aborter, copyId: string)'
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: copyId
+          type: string
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.FileAbortCopyResponse" />&gt;
+        description: ''
+  - name: 'clearRange(Aborter, number, number)'
+    uid: '@azure/storage-file.FileURL.clearRange'
+    package: '@azure/storage-file'
+    summary: |-
+      Clears the specified range and
+      releases the space used in storage for that range.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function clearRange(aborter: Aborter, offset: number, contentLength:
+        number)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: offset
+          type: number
+          description: ''
+        - id: contentLength
+          type: number
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.FileUploadRangeResponse" />&gt;
+        description: ''
+  - name: 'create(Aborter, number, IFileCreateOptions)'
+    uid: '@azure/storage-file.FileURL.create'
+    package: '@azure/storage-file'
+    summary: >-
+      Creates a new file or replaces a file. Note it only initializes the file
+      with no content.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function create(aborter: Aborter, size: number, options?:
+        IFileCreateOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: size
+          type: number
+          description: 'Specifies the maximum size in bytes for the file, up to 1 TB.'
+        - id: options
+          type: <xref uid="@azure/storage-file.IFileCreateOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.FileCreateResponse" />&gt;
+        description: ''
+  - name: delete(Aborter)
+    uid: '@azure/storage-file.FileURL.delete'
+    package: '@azure/storage-file'
+    summary: >
+      Removes the file from the storage account.
+
+      When a file is successfully deleted, it is immediately removed from the
+      storage
+
+      account's index and is no longer accessible to clients. The file's data is
+      later
+
+      removed from the service during garbage collection.
+
+      Delete File will fail with status code 409 (Conflict) and error code
+      SharingViolation
+
+      if the file is open on an SMB client.
+
+
+      Delete File is not supported on a share snapshot, which is a read-only
+      copy of
+
+      a share. An attempt to perform this operation on a share snapshot will
+      fail with 400 (InvalidQueryParameterValue)
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function delete(aborter: Aborter)'
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+      return:
+        type: Promise&lt;<xref uid="Models.FileDeleteResponse" />&gt;
+        description: ''
+  - name: 'download(Aborter, number, undefined | number, IFileDownloadOptions)'
+    uid: '@azure/storage-file.FileURL.download'
+    package: '@azure/storage-file'
+    summary: >
+      Reads or downloads a file from the system, including its metadata and
+      properties.
+
+      * In Node.js, data returns in a Readable stream `readableStreamBody`
+
+      * In browsers, data returns in a promise `blobBody`
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function download(aborter: Aborter, offset: number, count?: undefined |
+        number, options?: IFileDownloadOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: offset
+          type: number
+          description: 'From which position of the file to download, >= 0'
+        - id: count
+          type: undefined | number
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-file.IFileDownloadOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.FileDownloadResponse" />&gt;
+        description: ''
+  - name: 'forceCloseHandle(Aborter, string)'
+    uid: '@azure/storage-file.FileURL.forceCloseHandle'
+    package: '@azure/storage-file'
+    summary: Force close a specific handle for a file.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function forceCloseHandle(aborter: Aborter, handleId: string)'
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: handleId
+          type: string
+          description: |-
+            Specific handle ID, cannot be asterisk "*".
+                                     Use forceCloseHandlesSegment() to close all handles.
+      return:
+        type: Promise&lt;<xref uid="Models.FileForceCloseHandlesResponse" />&gt;
+        description: ''
+  - name: 'forceCloseHandlesSegment(Aborter, undefined | string)'
+    uid: '@azure/storage-file.FileURL.forceCloseHandlesSegment'
+    package: '@azure/storage-file'
+    summary: Force close all handles for a file.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function forceCloseHandlesSegment(aborter: Aborter, marker?: undefined |
+        string)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: marker
+          type: undefined | string
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.FileForceCloseHandlesResponse" />&gt;
+        description: ''
+  - name: 'fromDirectoryURL(DirectoryURL, string)'
+    uid: '@azure/storage-file.FileURL.fromDirectoryURL'
+    package: '@azure/storage-file'
+    summary: Creates a FileURL object from a DirectoryURL object.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromDirectoryURL(directoryURL: DirectoryURL, fileName:
+        string)
+      parameters:
+        - id: directoryURL
+          type: <xref uid="@azure/storage-file.DirectoryURL" />
+          description: A DirectoryURL object
+        - id: fileName
+          type: string
+          description: A file name
+      return:
+        type: <xref uid="@azure/storage-file.FileURL" />
+        description: ''
+  - name: getProperties(Aborter)
+    uid: '@azure/storage-file.FileURL.getProperties'
+    package: '@azure/storage-file'
+    summary: >-
+      Returns all user-defined metadata, standard HTTP properties, and system
+      properties
+
+      for the file. It does not return the content of the file.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getProperties(aborter: Aborter)'
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+      return:
+        type: Promise&lt;<xref uid="Models.FileGetPropertiesResponse" />&gt;
+        description: ''
+  - name: 'getRangeList(Aborter, IFileGetRangeListOptions)'
+    uid: '@azure/storage-file.FileURL.getRangeList'
+    package: '@azure/storage-file'
+    summary: Returns the list of valid ranges for a file.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getRangeList(aborter: Aborter, options?:
+        IFileGetRangeListOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: options
+          type: <xref uid="@azure/storage-file.IFileGetRangeListOptions" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-file.FileGetRangeListResponse"
+          />&gt;
+        description: ''
+  - name: >-
+      listHandlesSegment(Aborter, undefined | string,
+      IFileListHandlesSegmentOptions)
+    uid: '@azure/storage-file.FileURL.listHandlesSegment'
+    package: '@azure/storage-file'
+    summary: Lists handles for a file.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listHandlesSegment(aborter: Aborter, marker?: undefined |
+        string, options?: IFileListHandlesSegmentOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: marker
+          type: undefined | string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-file.IFileListHandlesSegmentOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.FileListHandlesResponse" />&gt;
+        description: ''
+  - name: 'newPipeline(Credential, INewPipelineOptions)'
+    uid: '@azure/storage-file.FileURL.newPipeline'
+    package: '@azure/storage-file'
+    summary: >-
+      A static method used to create a new Pipeline object with Credential
+      provided.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function newPipeline(credential: Credential, pipelineOptions?:
+        INewPipelineOptions)
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/storage-file.Credential" />
+          description: 'Such as AnonymousCredential, SharedKeyCredential.'
+        - id: pipelineOptions
+          type: <xref uid="@azure/storage-file.INewPipelineOptions" />
+          description: ''
+      return:
+        type: <xref uid="@azure/storage-file.Pipeline" />
+        description: A new Pipeline object.
+  - name: 'resize(Aborter, number)'
+    uid: '@azure/storage-file.FileURL.resize'
+    package: '@azure/storage-file'
+    summary: Resize file.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function resize(aborter: Aborter, length: number)'
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: length
+          type: number
+          description: |-
+            Resizes a file to the specified size in bytes.
+                                   If the specified byte value is less than the current size of the file,
+                                   then all ranges above the specified byte value are cleared.
+      return:
+        type: Promise&lt;<xref uid="Models.FileSetHTTPHeadersResponse" />&gt;
+        description: ''
+  - name: 'setHTTPHeaders(Aborter, IFileHTTPHeaders)'
+    uid: '@azure/storage-file.FileURL.setHTTPHeaders'
+    package: '@azure/storage-file'
+    summary: >-
+      Sets HTTP headers on the file.
+
+      If no option provided, or no value provided for the file HTTP headers in
+      the options,
+
+      these file HTTP headers without a value will be cleared.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setHTTPHeaders(aborter: Aborter, fileHTTPHeaders?:
+        IFileHTTPHeaders)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: fileHTTPHeaders
+          type: <xref uid="@azure/storage-file.IFileHTTPHeaders" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.FileSetHTTPHeadersResponse" />&gt;
+        description: ''
+  - name: 'setMetadata(Aborter, IMetadata)'
+    uid: '@azure/storage-file.FileURL.setMetadata'
+    package: '@azure/storage-file'
+    summary: |-
+      Updates user-defined metadata for the specified file.
+      If no metadata defined in the option parameter, the file
+      metadata will be removed.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function setMetadata(aborter: Aborter, metadata?: IMetadata)'
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: metadata
+          type: <xref uid="@azure/storage-file.IMetadata" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.FileSetMetadataResponse" />&gt;
+        description: ''
+  - name: 'setProperties(Aborter, IFileProperties)'
+    uid: '@azure/storage-file.FileURL.setProperties'
+    package: '@azure/storage-file'
+    summary: Sets properties on the file.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function setProperties(aborter: Aborter, properties?: IFileProperties)'
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: properties
+          type: <xref uid="@azure/storage-file.IFileProperties" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-file.ISetPropertiesResponse"
+          />&gt;
+        description: ''
+  - name: 'startCopyFromURL(Aborter, string, IFileStartCopyOptions)'
+    uid: '@azure/storage-file.FileURL.startCopyFromURL'
+    package: '@azure/storage-file'
+    summary: Copies a blob or file to a destination file within the storage account.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function startCopyFromURL(aborter: Aborter, copySource: string,
+        options?: IFileStartCopyOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: copySource
+          type: string
+          description: >-
+            Specifies the URL of the source file or blob, up to 2 KB in length.
+
+            To copy a file to another file within the same storage account, you
+            may use Shared Key to
+
+            authenticate the source file. If you are copying a file from another
+            storage account, or if you
+
+            are copying a blob from the same storage account or another storage
+            account, then you must
+
+            authenticate the source file or blob using a shared access
+            signature. If the source is a public
+
+            blob, no authentication is required to perform the copy operation. A
+            file in a share snapshot
+
+            can also be specified as a copy source.
+        - id: options
+          type: <xref uid="@azure/storage-file.IFileStartCopyOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.FileStartCopyResponse" />&gt;
+        description: ''
+  - name: >-
+      uploadRange(Aborter, HttpRequestBody, number, number,
+      IFileUploadRangeOptions)
+    uid: '@azure/storage-file.FileURL.uploadRange'
+    package: '@azure/storage-file'
+    summary: |-
+      Upload a range of bytes to a file. Both the start and count of the
+      range must be specified. The range can be up to 4 MB in size.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function uploadRange(aborter: Aborter, body: HttpRequestBody, offset:
+        number, contentLength: number, options?: IFileUploadRangeOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation.
+        - id: body
+          type: HttpRequestBody
+          description: |-
+            Blob, string, ArrayBuffer, ArrayBufferView or a function
+                                          which returns a new Readable stream whose offset is from data source beginning.
+        - id: offset
+          type: number
+          description: Offset position of the destination Azure File to upload.
+        - id: contentLength
+          type: number
+          description: >-
+            Length of body in bytes. Use Buffer.byteLength() to calculate body
+            length for a
+                                          string including non non-Base64/Hex-encoded characters.
+        - id: options
+          type: <xref uid="@azure/storage-file.IFileUploadRangeOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.FileUploadRangeResponse" />&gt;
+        description: ''
+  - name: 'uploadRangeFromURL(Aborter, string, number, number, number)'
+    uid: '@azure/storage-file.FileURL.uploadRangeFromURL'
+    package: '@azure/storage-file'
+    summary: >-
+      Upload a range of bytes to a file where the contents are read from a
+      another file's URL.
+
+      The range can be up to 4 MB in size.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function uploadRangeFromURL(aborter: Aborter, sourceURL: string,
+        sourceOffset: number, destOffset: number, count: number)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-file.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation.
+        - id: sourceURL
+          type: string
+          description: >-
+            Specify a URL to the copy source, Shared Access Signature(SAS) maybe
+            needed for authentication.
+        - id: sourceOffset
+          type: number
+          description: >-
+            The source offset to copy from. Pass 0 to copy from the beginning of
+            source file.
+        - id: destOffset
+          type: number
+          description: Offset of destination file.
+        - id: count
+          type: number
+          description: Number of bytes to be uploaded from source file.
+      return:
+        type: Promise&lt;<xref uid="Models.FileUploadRangeFromURLResponse" />&gt;
+        description: ''
+  - name: withPipeline(Pipeline)
+    uid: '@azure/storage-file.FileURL.withPipeline'
+    package: '@azure/storage-file'
+    summary: |-
+      Creates a new FileURL object identical to the source but with the
+      specified request policy pipeline.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function withPipeline(pipeline: Pipeline)'
+      parameters:
+        - id: pipeline
+          type: <xref uid="@azure/storage-file.Pipeline" />
+          description: ''
+      return:
+        type: <xref uid="@azure/storage-file.FileURL" />
+        description: ''
+extends: <xref uid="@azure/storage-file.StorageURL" />

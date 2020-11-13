@@ -1,6 +1,6 @@
 ---
 title: Azure Communication SMS client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/communication-sms, 
+keywords: Azure, javascript, SDK, API, @azure/communication-sms, communication
 author: maggiepint
 ms.author: magpint
 ms.date: 10/06/2020
@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: communication
 ---
 
 # Azure Communication SMS client library for JavaScript - Version 1.0.0-beta.2 

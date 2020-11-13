@@ -36,7 +36,7 @@ methods:
     syntax:
       content: >-
         function create(resourceGroupName: string, accountName: string,
-        applicationId: string, options: ApplicationCreateOptionalParams,
+        applicationName: string, options: ApplicationCreateOptionalParams,
         callback: ServiceCallback<Application>)
       parameters:
         - id: resourceGroupName
@@ -45,9 +45,9 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: options
           type: <xref uid="@azure/arm-batch.ApplicationCreateOptionalParams" />
           description: The optional parameters
@@ -65,7 +65,8 @@ methods:
     syntax:
       content: >-
         function create(resourceGroupName: string, accountName: string,
-        applicationId: string, options?: Models.ApplicationCreateOptionalParams)
+        applicationName: string, options?:
+        Models.ApplicationCreateOptionalParams)
       parameters:
         - id: resourceGroupName
           type: string
@@ -73,9 +74,9 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: options
           type: <xref uid="Models.ApplicationCreateOptionalParams" />
           description: ''
@@ -92,7 +93,7 @@ methods:
     syntax:
       content: >-
         function create(resourceGroupName: string, accountName: string,
-        applicationId: string, callback: ServiceCallback<Application>)
+        applicationName: string, callback: ServiceCallback<Application>)
       parameters:
         - id: resourceGroupName
           type: string
@@ -100,9 +101,9 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: callback
           type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Application" />&gt;
           description: |
@@ -117,7 +118,7 @@ methods:
     syntax:
       content: >-
         function deleteMethod(resourceGroupName: string, accountName: string,
-        applicationId: string, options?: msRest.RequestOptionsBase)
+        applicationName: string, options?: msRest.RequestOptionsBase)
       parameters:
         - id: resourceGroupName
           type: string
@@ -125,9 +126,9 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: options
           type: <xref uid="msRest.RequestOptionsBase" />
           description: ''
@@ -146,7 +147,7 @@ methods:
     syntax:
       content: >-
         function deleteMethod(resourceGroupName: string, accountName: string,
-        applicationId: string, options: RequestOptionsBase, callback:
+        applicationName: string, options: RequestOptionsBase, callback:
         ServiceCallback<void>)
       parameters:
         - id: resourceGroupName
@@ -155,9 +156,9 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: options
           type: RequestOptionsBase
           description: The optional parameters
@@ -175,7 +176,7 @@ methods:
     syntax:
       content: >-
         function deleteMethod(resourceGroupName: string, accountName: string,
-        applicationId: string, callback: ServiceCallback<void>)
+        applicationName: string, callback: ServiceCallback<void>)
       parameters:
         - id: resourceGroupName
           type: string
@@ -183,9 +184,9 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: callback
           type: ServiceCallback&lt;void&gt;
           description: |
@@ -200,7 +201,7 @@ methods:
     syntax:
       content: >-
         function get(resourceGroupName: string, accountName: string,
-        applicationId: string, options?: msRest.RequestOptionsBase)
+        applicationName: string, options?: msRest.RequestOptionsBase)
       parameters:
         - id: resourceGroupName
           type: string
@@ -208,9 +209,9 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: options
           type: <xref uid="msRest.RequestOptionsBase" />
           description: ''
@@ -229,7 +230,7 @@ methods:
     syntax:
       content: >-
         function get(resourceGroupName: string, accountName: string,
-        applicationId: string, options: RequestOptionsBase, callback:
+        applicationName: string, options: RequestOptionsBase, callback:
         ServiceCallback<Application>)
       parameters:
         - id: resourceGroupName
@@ -238,9 +239,9 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: options
           type: RequestOptionsBase
           description: The optional parameters
@@ -258,7 +259,7 @@ methods:
     syntax:
       content: >-
         function get(resourceGroupName: string, accountName: string,
-        applicationId: string, callback: ServiceCallback<Application>)
+        applicationName: string, callback: ServiceCallback<Application>)
       parameters:
         - id: resourceGroupName
           type: string
@@ -266,9 +267,9 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: callback
           type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Application" />&gt;
           description: |
@@ -419,9 +420,7 @@ methods:
             uid="@azure/arm-batch.ListApplicationsResult" />&gt;
           description: |
             The callback
-  - name: >-
-      update(string, string, string, ApplicationUpdateParameters,
-      msRest.RequestOptionsBase)
+  - name: 'update(string, string, string, Application, msRest.RequestOptionsBase)'
     uid: '@azure/arm-batch.ApplicationOperations.update'
     package: '@azure/arm-batch'
     summary: Updates settings for the specified application.
@@ -431,8 +430,8 @@ methods:
     syntax:
       content: >-
         function update(resourceGroupName: string, accountName: string,
-        applicationId: string, parameters: ApplicationUpdateParameters,
-        options?: msRest.RequestOptionsBase)
+        applicationName: string, parameters: Application, options?:
+        msRest.RequestOptionsBase)
       parameters:
         - id: resourceGroupName
           type: string
@@ -440,21 +439,21 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: parameters
-          type: <xref uid="@azure/arm-batch.ApplicationUpdateParameters" />
+          type: <xref uid="@azure/arm-batch.Application" />
           description: The parameters for the request.
         - id: options
           type: <xref uid="msRest.RequestOptionsBase" />
           description: ''
       return:
-        type: Promise&lt;RestResponse&gt;
-        description: Promise<msRest.RestResponse>
+        type: Promise&lt;<xref uid="Models.ApplicationUpdateResponse" />&gt;
+        description: Promise<Models.ApplicationUpdateResponse>
   - name: >-
-      update(string, string, string, ApplicationUpdateParameters,
-      RequestOptionsBase, ServiceCallback<void>)
+      update(string, string, string, Application, RequestOptionsBase,
+      ServiceCallback<Application>)
     uid: '@azure/arm-batch.ApplicationOperations.update_2'
     package: '@azure/arm-batch'
     summary: ''
@@ -464,8 +463,8 @@ methods:
     syntax:
       content: >-
         function update(resourceGroupName: string, accountName: string,
-        applicationId: string, parameters: ApplicationUpdateParameters, options:
-        RequestOptionsBase, callback: ServiceCallback<void>)
+        applicationName: string, parameters: Application, options:
+        RequestOptionsBase, callback: ServiceCallback<Application>)
       parameters:
         - id: resourceGroupName
           type: string
@@ -473,22 +472,20 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: parameters
-          type: <xref uid="@azure/arm-batch.ApplicationUpdateParameters" />
+          type: <xref uid="@azure/arm-batch.Application" />
           description: The parameters for the request.
         - id: options
           type: RequestOptionsBase
           description: The optional parameters
         - id: callback
-          type: ServiceCallback&lt;void&gt;
+          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Application" />&gt;
           description: |
             The callback
-  - name: >-
-      update(string, string, string, ApplicationUpdateParameters,
-      ServiceCallback<void>)
+  - name: 'update(string, string, string, Application, ServiceCallback<Application>)'
     uid: '@azure/arm-batch.ApplicationOperations.update_1'
     package: '@azure/arm-batch'
     summary: ''
@@ -498,8 +495,8 @@ methods:
     syntax:
       content: >-
         function update(resourceGroupName: string, accountName: string,
-        applicationId: string, parameters: ApplicationUpdateParameters,
-        callback: ServiceCallback<void>)
+        applicationName: string, parameters: Application, callback:
+        ServiceCallback<Application>)
       parameters:
         - id: resourceGroupName
           type: string
@@ -507,13 +504,13 @@ methods:
         - id: accountName
           type: string
           description: The name of the Batch account.
-        - id: applicationId
+        - id: applicationName
           type: string
-          description: The ID of the application.
+          description: The name of the application. This must be unique within the account.
         - id: parameters
-          type: <xref uid="@azure/arm-batch.ApplicationUpdateParameters" />
+          type: <xref uid="@azure/arm-batch.Application" />
           description: The parameters for the request.
         - id: callback
-          type: ServiceCallback&lt;void&gt;
+          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Application" />&gt;
           description: |
             The callback

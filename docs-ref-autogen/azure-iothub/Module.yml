@@ -2,7 +2,7 @@
 name: Module
 uid: azure-iothub.Module
 package: azure-iothub
-summary: ''
+summary: The module identity on a device.
 fullName: Module
 remarks: ''
 isPreview: false
@@ -12,80 +12,80 @@ properties:
   - name: authentication
     uid: azure-iothub.Module.authentication
     package: azure-iothub
-    summary: Contains the symmetric keys used to authenticate this module.
+    summary: >-
+      The authentication mechanism used by the module when connecting to the
+      service and edge hub.
     fullName: authentication
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'authentication?: Authentication'
+      content: 'authentication?: AuthenticationMechanism'
       return:
-        type: <xref uid="azure-iothub.Device.Authentication" />
+        type: <xref uid="azure-iothub.AuthenticationMechanism" />
         description: ''
   - name: cloudToDeviceMessageCount
     uid: azure-iothub.Module.cloudToDeviceMessageCount
     package: azure-iothub
-    summary: Number of c2d messages waiting to by delivered to the module.
+    summary: >-
+      The number of cloud-to-module messages currently queued to be sent to the
+      module.
     fullName: cloudToDeviceMessageCount
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'cloudToDeviceMessageCount?: string'
+      content: 'cloudToDeviceMessageCount?: number'
       return:
-        type: string
+        type: number
         description: ''
   - name: connectionState
     uid: azure-iothub.Module.connectionState
     package: azure-iothub
     summary: >-
-      Whether the module is 'connected' or 'disconnected'. It is not recommended
-      to use this property to determine if the module is actually connected
-      right now though,
-
-      since the module connection may have timed out and the IoT hub may not
-      have detected it.
+      The connection state of the device. Possible values include:
+      'Disconnected', 'Connected'
     fullName: connectionState
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'connectionState?: Device.ConnectionState'
+      content: 'connectionState?: ConnectionState2'
       return:
-        type: <xref uid="azure-iothub.Device.ConnectionState" />
+        type: <xref uid="azure-iothub.ConnectionState2" />
         description: ''
   - name: connectionStateUpdatedTime
     uid: azure-iothub.Module.connectionStateUpdatedTime
     package: azure-iothub
-    summary: Timestamp representing the last time `connectionState` changed.
+    summary: The date and time the connection state was last updated.
     fullName: connectionStateUpdatedTime
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'connectionStateUpdatedTime?: string'
+      content: 'connectionStateUpdatedTime?: Date'
       return:
-        type: string
+        type: Date
         description: ''
   - name: deviceId
     uid: azure-iothub.Module.deviceId
     package: azure-iothub
-    summary: >-
-      Unique device identifier as it exists in the Azure IoT hub device
-      registry.
+    summary: The unique identifier of the device.
     fullName: deviceId
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'deviceId: string'
+      content: 'deviceId?: string'
       return:
         type: string
         description: ''
   - name: etag
     uid: azure-iothub.Module.etag
     package: azure-iothub
-    summary: Weak entity tag assigned to this module identity description
+    summary: >-
+      The string representing a weak ETag for the module identity, as per
+      RFC7232.
     fullName: etag
     remarks: ''
     isPreview: false
@@ -99,8 +99,11 @@ properties:
     uid: azure-iothub.Module.generationId
     package: azure-iothub
     summary: >-
-      Used to disambiguate devices that have been deleted/recreated with the
-      same `moduleId`
+      The IoT Hub generated, case-sensitive string up to 128 characters long.
+      This value is used to
+
+      distinguish modules with the same moduleId, when they have been deleted
+      and re-created.
     fullName: generationId
     remarks: ''
     isPreview: false
@@ -113,22 +116,24 @@ properties:
   - name: lastActivityTime
     uid: azure-iothub.Module.lastActivityTime
     package: azure-iothub
-    summary: >-
-      Timestamp representing the last time the module authenticated, sent a
-      message, or received a message.
+    summary: 'The date and time the device last connected, received, or sent a message.'
     fullName: lastActivityTime
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'lastActivityTime?: string'
+      content: 'lastActivityTime?: Date'
       return:
-        type: string
+        type: Date
         description: ''
   - name: managedBy
     uid: azure-iothub.Module.managedBy
     package: azure-iothub
-    summary: Represents the modules managed by owner
+    summary: >-
+      Identifies who manages this module. For instance, this value is
+      \"IotEdge\" if the edge
+
+      runtime owns this module.
     fullName: managedBy
     remarks: ''
     isPreview: false
@@ -141,13 +146,13 @@ properties:
   - name: moduleId
     uid: azure-iothub.Module.moduleId
     package: azure-iothub
-    summary: Module ID
+    summary: The unique identifier of the module.
     fullName: moduleId
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'moduleId: string'
+      content: 'moduleId?: string'
       return:
         type: string
         description: ''

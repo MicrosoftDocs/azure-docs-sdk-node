@@ -18,12 +18,10 @@ classes:
   - '@azure/core-http.BearerTokenAuthenticationPolicy'
   - '@azure/core-http.DeserializationPolicy'
   - '@azure/core-http.DisableResponseDecompressionPolicy'
-  - '@azure/core-http.DisableResponseDecompressionPolicy'
   - '@azure/core-http.ExponentialRetryPolicy'
   - '@azure/core-http.GenerateClientRequestIdPolicy'
   - '@azure/core-http.KeepAlivePolicy'
   - '@azure/core-http.LogPolicy'
-  - '@azure/core-http.ProxyPolicy'
   - '@azure/core-http.ProxyPolicy'
   - '@azure/core-http.RedirectPolicy'
   - '@azure/core-http.BaseRequestPolicy'
@@ -120,7 +118,7 @@ typeAliases:
   - '@azure/core-http.HttpRequestBody'
   - '@azure/core-http.TransferProgressEvent'
 functions:
-  - name: parseHeaders(Headers)
+  - name: parseHeaders(XMLHttpRequest)
     uid: '@azure/core-http.parseHeaders'
     package: '@azure/core-http'
     summary: ''
@@ -128,10 +126,10 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function parseHeaders(headers: Headers)'
+      content: 'function parseHeaders(xhr: XMLHttpRequest)'
       parameters:
-        - id: headers
-          type: Headers
+        - id: xhr
+          type: XMLHttpRequest
           description: ''
       return:
         type: <xref uid="@azure/core-http.HttpHeadersLike" />
@@ -302,22 +300,6 @@ functions:
   - name: disableResponseDecompressionPolicy()
     uid: '@azure/core-http.disableResponseDecompressionPolicy'
     package: '@azure/core-http'
-    summary: >-
-      <xref:DisableResponseDecompressionPolicy> is not supported in browser and
-      attempting
-
-      to use it will results in error being thrown.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function disableResponseDecompressionPolicy()
-      return:
-        type: <xref uid="@azure/core-http.RequestPolicyFactory" />
-        description: ''
-  - name: disableResponseDecompressionPolicy()
-    uid: '@azure/core-http.disableResponseDecompressionPolicy'
-    package: '@azure/core-http'
     summary: |-
       Returns a request policy factory that can be used to create an instance of
       <xref:DisableResponseDecompressionPolicy>.
@@ -425,30 +407,6 @@ functions:
       return:
         type: '<xref uid="@azure/core-http.TelemetryInfo" />[]'
         description: ''
-  - name: getDefaultUserAgentKey()
-    uid: '@azure/core-http.getDefaultUserAgentKey'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function getDefaultUserAgentKey()
-      return:
-        type: string
-        description: ''
-  - name: getPlatformSpecificData()
-    uid: '@azure/core-http.getPlatformSpecificData'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function getPlatformSpecificData()
-      return:
-        type: '<xref uid="@azure/core-http.TelemetryInfo" />[]'
-        description: ''
   - name: ndJsonPolicy()
     uid: '@azure/core-http.ndJsonPolicy'
     package: '@azure/core-http'
@@ -458,38 +416,6 @@ functions:
     isDeprecated: false
     syntax:
       content: function ndJsonPolicy()
-      return:
-        type: <xref uid="@azure/core-http.RequestPolicyFactory" />
-        description: ''
-  - name: getDefaultProxySettings(string)
-    uid: '@azure/core-http.getDefaultProxySettings'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function getDefaultProxySettings(_proxyUrl?: string)'
-      parameters:
-        - id: _proxyUrl
-          type: string
-          description: ''
-      return:
-        type: <xref uid="@azure/core-http.ProxySettings" /> | undefined
-        description: ''
-  - name: proxyPolicy(ProxySettings)
-    uid: '@azure/core-http.proxyPolicy'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function proxyPolicy(_proxySettings?: ProxySettings)'
-      parameters:
-        - id: _proxySettings
-          type: <xref uid="@azure/core-http.ProxySettings" />
-          description: ''
       return:
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
         description: ''
@@ -934,57 +860,6 @@ functions:
       return:
         type: string
         description: ''
-  - name: decodeString(string)
-    uid: '@azure/core-http.decodeString'
-    package: '@azure/core-http'
-    summary: Decodes a base64 string into a byte array.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function decodeString(value: string)'
-      parameters:
-        - id: value
-          type: string
-          description: |
-            the base64 string to decode
-      return:
-        type: Uint8Array
-        description: ''
-  - name: encodeByteArray(Uint8Array)
-    uid: '@azure/core-http.encodeByteArray'
-    package: '@azure/core-http'
-    summary: Encodes a byte array in base64 format.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function encodeByteArray(value: Uint8Array)'
-      parameters:
-        - id: value
-          type: Uint8Array
-          description: |
-            the Uint8Aray to encode
-      return:
-        type: string
-        description: ''
-  - name: encodeString(string)
-    uid: '@azure/core-http.encodeString'
-    package: '@azure/core-http'
-    summary: Encodes a string in base64 format.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function encodeString(value: string)'
-      parameters:
-        - id: value
-          type: string
-          description: |
-            the string to encode
-      return:
-        type: string
-        description: ''
   - name: isNumber(any)
     uid: '@azure/core-http.isNumber'
     package: '@azure/core-http'
@@ -1372,44 +1247,6 @@ functions:
   - name: 'parseXML(string, SerializerOptions)'
     uid: '@azure/core-http.parseXML'
     package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function parseXML(str: string, opts?: SerializerOptions)'
-      parameters:
-        - id: str
-          type: string
-          description: ''
-        - id: opts
-          type: <xref uid="@azure/core-http.SerializerOptions" />
-          description: ''
-      return:
-        type: Promise&lt;any&gt;
-        description: ''
-  - name: 'stringifyXML(any, SerializerOptions)'
-    uid: '@azure/core-http.stringifyXML'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function stringifyXML(content: any, opts?: SerializerOptions)'
-      parameters:
-        - id: content
-          type: any
-          description: ''
-        - id: opts
-          type: <xref uid="@azure/core-http.SerializerOptions" />
-          description: ''
-      return:
-        type: string
-        description: ''
-  - name: 'parseXML(string, SerializerOptions)'
-    uid: '@azure/core-http.parseXML'
-    package: '@azure/core-http'
     summary: Converts given XML string into JSON
     remarks: ''
     isPreview: false
@@ -1468,22 +1305,6 @@ functions:
           description: ''
       return:
         type: boolean
-        description: ''
-  - name: parseHeaders(XMLHttpRequest)
-    uid: '@azure/core-http.parseHeaders'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function parseHeaders(xhr: XMLHttpRequest)'
-      parameters:
-        - id: xhr
-          type: XMLHttpRequest
-          description: ''
-      return:
-        type: <xref uid="@azure/core-http.HttpHeadersLike" />
         description: ''
 enums:
   - '@azure/core-http.HttpPipelineLogLevel'

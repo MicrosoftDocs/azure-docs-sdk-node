@@ -2,7 +2,9 @@
 name: ShareLeaseClient
 uid: '@azure/storage-file-share.ShareLeaseClient'
 package: '@azure/storage-file-share'
-summary: 'A client that manages leases for a <xref:ShareFileClient>.'
+summary: >-
+  A client that manages leases for a <xref:ShareFileClient> or
+  <xref:ShareClient>.
 fullName: ShareLeaseClient
 remarks: ''
 isPreview: false
@@ -57,7 +59,7 @@ methods:
     uid: '@azure/storage-file-share.ShareLeaseClient.acquireLease'
     package: '@azure/storage-file-share'
     summary: >-
-      The Lease File operation establishes and manages a lock on a file for
+      Establishes and manages a lock on a file, share or share snapshot for
       write and delete operations.
     remarks: ''
     isPreview: false
@@ -70,8 +72,9 @@ methods:
         - id: duration
           type: number
           description: >-
-            Specifies the duration of lease. The only allowed value is -1, for a
-            lease that never expires.
+            Specifies the duration of lease in seconds. For file, the only
+            allowed value is -1 for a lease that never expires. For share, must
+            be -1 or between 15 to 60.
         - id: options
           type: <xref uid="@azure/storage-file-share.LeaseOperationOptions" />
           description: ''
@@ -126,7 +129,7 @@ methods:
     package: '@azure/storage-file-share'
     summary: |-
       To free the lease if it is no longer needed so that another client may
-      immediately acquire a lease against the file.
+      immediately acquire a lease.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -141,3 +144,27 @@ methods:
           Promise&lt;<xref
           uid="@azure/storage-file-share.LeaseOperationResponse" />&gt;
         description: Response data for release lease operation.
+  - name: renewLease(LeaseOperationOptions)
+    uid: '@azure/storage-file-share.ShareLeaseClient.renewLease'
+    package: '@azure/storage-file-share'
+    summary: >-
+      To renew the lease. Only available for lease on share or share snapshot.
+
+      Note that the lease may be renewed even if it has expired as long as the
+      share has not been leased again since the expiration of that lease.
+
+      When you renew a lease, the lease duration clock resets.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function renewLease(options?: LeaseOperationOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-file-share.LeaseOperationOptions" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-share.LeaseOperationResponse" />&gt;
+        description: Response data for renew lease operation.

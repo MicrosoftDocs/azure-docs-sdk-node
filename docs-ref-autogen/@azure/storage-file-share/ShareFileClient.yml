@@ -200,7 +200,7 @@ methods:
       parameters:
         - id: size
           type: number
-          description: 'Specifies the maximum size in bytes for the file, up to 1 TB.'
+          description: 'Specifies the maximum size in bytes for the file, up to 4 TB.'
         - id: options
           type: <xref uid="@azure/storage-file-share.FileCreateOptions" />
           description: ''
@@ -551,6 +551,31 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileGetRangeListResponse" />&gt;
+        description: ''
+  - name: 'getRangeListDiff(string, FileGetRangeListOptions)'
+    uid: '@azure/storage-file-share.ShareFileClient.getRangeListDiff'
+    package: '@azure/storage-file-share'
+    summary: >-
+      Returns the list of ranges that differ between a previous share snapshot
+      and this file.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getRangeListDiff(prevShareSnapshot: string, options?:
+        FileGetRangeListOptions)
+      parameters:
+        - id: prevShareSnapshot
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-file-share.FileGetRangeListOptions" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-share.FileGetRangeListDiffResponse" />&gt;
         description: ''
   - name: getShareLeaseClient(string)
     uid: '@azure/storage-file-share.ShareFileClient.getShareLeaseClient'
@@ -959,7 +984,7 @@ methods:
         - id: size
           type: number
           description: |-
-            Size of file to be created. Maximum size allowed is 1TB.
+            Size of file to be created. Maximum size allowed is 4 TB.
                                  If this value is larger than stream size, there will be empty bytes in file tail.
         - id: bufferSize
           type: number
@@ -978,4 +1003,27 @@ methods:
       return:
         type: Promise&lt;void&gt;
         description: ''
+  - name: withShareSnapshot(string)
+    uid: '@azure/storage-file-share.ShareFileClient.withShareSnapshot'
+    package: '@azure/storage-file-share'
+    summary: >-
+      Creates a new ShareFileClient object identical to the source but with the
+      specified share snapshot timestamp.
+
+      Provide "" will remove the snapshot and return a URL to the base
+      ShareFileClient.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function withShareSnapshot(shareSnapshot: string)'
+      parameters:
+        - id: shareSnapshot
+          type: string
+          description: The share snapshot timestamp.
+      return:
+        type: <xref uid="@azure/storage-file-share.ShareFileClient" />
+        description: >-
+          A new ShareFileClient object identical to the source but with the
+          specified share snapshot timestamp.
 extends: <xref uid="@azure/storage-file-share.StorageClient" />

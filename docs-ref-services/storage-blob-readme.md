@@ -259,7 +259,7 @@ const { BlobServiceClient } = require("@azure/storage-blob");
 const account = "<account name>";
 const sas = "<service Shared Access Signature Token>";
 
-const blobServiceClient = new BlobServiceClient(`https://${account}.blob.core.windows.net${sas}`);
+const blobServiceClient = new BlobServiceClient(`https://${account}.blob.core.windows.net/?${sas}`);
 ```
 
 ### Create a new container

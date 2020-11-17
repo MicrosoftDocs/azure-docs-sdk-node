@@ -74,23 +74,207 @@ constructors:
           description: |
             Optional. Options to configure the HTTP pipeline.
 methods:
-  - name: 'cancelSearch(string, CancelSearchOptions)'
+  - name: 'beginPurchaseReservation(string, BeginPurchaseReservationOptions)'
     uid: >-
-      @azure/communication-administration.PhoneNumberAdministrationClient.cancelSearch
+      @azure/communication-administration.PhoneNumberAdministrationClient.beginPurchaseReservation
     package: '@azure/communication-administration'
-    summary: Cancels the search associated with a given id.
+    summary: >
+      Starts the purchase of the phone number(s) in the reservation associated
+      with a given id.
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the operation is complete.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new PhoneNumberAdministrationClient(CONNECTION_STRING);
+
+      const purchasePoller = await
+      client.beginPurchaseReservation(RESERVATION_ID);
+
+
+      // Serializing the poller
+
+      const serialized = purchasePoller.toString();
+
+
+      // Waiting until it's done
+
+      const results = await purchasePoller.pollUntilDone();
+
+      console.log(results);
+
+      ```
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function cancelSearch(searchId: string, options?: CancelSearchOptions)'
+      content: >-
+        function beginPurchaseReservation(reservationId: string, options?:
+        BeginPurchaseReservationOptions)
       parameters:
-        - id: searchId
+        - id: reservationId
           type: string
-          description: The id of the search returned by createSearch.
+          description: The id of the reservation to purchase.
         - id: options
           type: >-
-            <xref uid="@azure/communication-administration.CancelSearchOptions"
+            <xref
+            uid="@azure/communication-administration.BeginPurchaseReservationOptions"
+            />
+          description: |
+            Additional request options.
+      return:
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+        description: ''
+  - name: 'beginReleasePhoneNumbers(string[], BeginReleasePhoneNumbersOptions)'
+    uid: >-
+      @azure/communication-administration.PhoneNumberAdministrationClient.beginReleasePhoneNumbers
+    package: '@azure/communication-administration'
+    summary: >-
+      Starts the release of a list of acquired phone numbers.
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the operation is complete.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new PhoneNumberAdministrationClient(CONNECTION_STRING);
+
+      const releasePoller = await
+      client.beginReleasePhoneNumbers(PHONE_NUMBERS);
+
+
+      // Serializing the poller
+
+      const serialized = releasePoller.toString();
+
+
+      // Waiting until it's done
+
+      const results = await releasePoller.pollUntilDone();
+
+      console.log(results);
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginReleasePhoneNumbers(phoneNumbers: string[], options?:
+        BeginReleasePhoneNumbersOptions)
+      parameters:
+        - id: phoneNumbers
+          type: 'string[]'
+          description: The phone numbers to be released.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/communication-administration.BeginReleasePhoneNumbersOptions"
+            />
+          description: |
+            Additional request options.
+      return:
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/communication-administration.PhoneNumberRelease" />&gt;,
+          <xref uid="@azure/communication-administration.PhoneNumberRelease"
+          />&gt;&gt;
+        description: ''
+  - name: >-
+      beginReservePhoneNumbers(CreateReservationRequest,
+      BeginReservePhoneNumbersOptions)
+    uid: >-
+      @azure/communication-administration.PhoneNumberAdministrationClient.beginReservePhoneNumbers
+    package: '@azure/communication-administration'
+    summary: >
+      Starts a search for phone numbers given some constraints such as name or
+      area code.
+
+      The phone numbers that are found are reserved until you cancel, purchase
+      or the reservation expires.
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the operation is complete.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new PhoneNumberAdministrationClient(CONNECTION_STRING);
+
+      const reservePoller = await
+      client.beginReservePhoneNumbers(RESERVATION_REQUEST);
+
+
+      // Serializing the poller
+
+      const serialized = reservePoller.toString();
+
+
+      // Waiting until it's done
+
+      const results = await reservePoller.pollUntilDone();
+
+      console.log(results);
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginReservePhoneNumbers(reservationRequest:
+        CreateReservationRequest, options?: BeginReservePhoneNumbersOptions)
+      parameters:
+        - id: reservationRequest
+          type: >-
+            <xref
+            uid="@azure/communication-administration.CreateReservationRequest"
+            />
+          description: Request properties to constraint the search scope.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/communication-administration.BeginReservePhoneNumbersOptions"
+            />
+          description: |
+            Additional request options.
+      return:
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/communication-administration.PhoneNumberReservation"
+          />&gt;, <xref
+          uid="@azure/communication-administration.PhoneNumberReservation"
+          />&gt;&gt;
+        description: ''
+  - name: 'cancelReservation(string, CancelReservationOptions)'
+    uid: >-
+      @azure/communication-administration.PhoneNumberAdministrationClient.cancelReservation
+    package: '@azure/communication-administration'
+    summary: Cancels the reservation associated with a given id.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function cancelReservation(reservationId: string, options?:
+        CancelReservationOptions)
+      parameters:
+        - id: reservationId
+          type: string
+          description: The id of the reservation returned by createReservation.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/communication-administration.CancelReservationOptions"
             />
           description: |
             Additional request options.
@@ -131,38 +315,6 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/communication-administration.VoidResponse" />&gt;
-        description: ''
-  - name: 'createSearch(CreateSearchRequest, CreateSearchOptions)'
-    uid: >-
-      @azure/communication-administration.PhoneNumberAdministrationClient.createSearch
-    package: '@azure/communication-administration'
-    summary: >-
-      Starts a search for phone numbers given some constraints such as name or
-      area code.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createSearch(searchRequest: CreateSearchRequest, options?:
-        CreateSearchOptions)
-      parameters:
-        - id: searchRequest
-          type: >-
-            <xref uid="@azure/communication-administration.CreateSearchRequest"
-            />
-          description: Request properties to constraint the search scope.
-        - id: options
-          type: >-
-            <xref uid="@azure/communication-administration.CreateSearchOptions"
-            />
-          description: |
-            Additional request options.
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/communication-administration.CreatePhoneNumberSearchResponse"
-          />&gt;
         description: ''
   - name: 'getAreaCodes(GetAreaCodesRequest, GetAreaCodesOptions)'
     uid: >-
@@ -288,55 +440,35 @@ methods:
           uid="@azure/communication-administration.GetPhonePlanLocationOptionsResponse"
           />&gt;
         description: ''
-  - name: 'getRelease(string, GetReleaseOptions)'
+  - name: 'getReservation(string, GetReservationOptions)'
     uid: >-
-      @azure/communication-administration.PhoneNumberAdministrationClient.getRelease
+      @azure/communication-administration.PhoneNumberAdministrationClient.getReservation
     package: '@azure/communication-administration'
     summary: |-
-      Gets the release associated with a given id.
-      Use this function to query the status of releases.
+      Gets the reservation associated with a given id.
+      Use this function to query the status of a phone number reservation.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getRelease(releaseId: string, options?: GetReleaseOptions)'
+      content: >-
+        function getReservation(reservationId: string, options?:
+        GetReservationOptions)
       parameters:
-        - id: releaseId
+        - id: reservationId
           type: string
-          description: The id of the release returned by releasePhoneNumbers.
+          description: The id of the reservation returned by createReservation.
         - id: options
-          type: <xref uid="@azure/communication-administration.GetReleaseOptions" />
+          type: >-
+            <xref
+            uid="@azure/communication-administration.GetReservationOptions" />
           description: |
             Additional request options.
       return:
         type: >-
           Promise&lt;<xref
-          uid="@azure/communication-administration.GetReleaseResponse" />&gt;
-        description: ''
-  - name: 'getSearch(string, GetSearchOptions)'
-    uid: >-
-      @azure/communication-administration.PhoneNumberAdministrationClient.getSearch
-    package: '@azure/communication-administration'
-    summary: |-
-      Gets the search associated with a given id.
-      Use this function to query the status of a search.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function getSearch(searchId: string, options?: GetSearchOptions)'
-      parameters:
-        - id: searchId
-          type: string
-          description: The id of the search returned by createSearch.
-        - id: options
-          type: <xref uid="@azure/communication-administration.GetSearchOptions" />
-          description: |
-            Additional request options.
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/communication-administration.GetSearchResponse" />&gt;
+          uid="@azure/communication-administration.GetReservationResponse"
+          />&gt;
         description: ''
   - name: listPhoneNumbers(ListPhoneNumbersOptions)
     uid: >-
@@ -534,65 +666,6 @@ methods:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/communication-administration.PhoneNumberCountry" />&gt;
-        description: ''
-  - name: 'purchaseSearch(string, PurchaseSearchOptions)'
-    uid: >-
-      @azure/communication-administration.PhoneNumberAdministrationClient.purchaseSearch
-    package: '@azure/communication-administration'
-    summary: Purchases the search associated with a given id.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function purchaseSearch(searchId: string, options?:
-        PurchaseSearchOptions)
-      parameters:
-        - id: searchId
-          type: string
-          description: The id of the search returned by createSearch.
-        - id: options
-          type: >-
-            <xref
-            uid="@azure/communication-administration.PurchaseSearchOptions" />
-          description: |
-            Additional request options.
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/communication-administration.VoidResponse" />&gt;
-        description: ''
-  - name: 'releasePhoneNumbers(string[], ReleasePhoneNumberOptions)'
-    uid: >-
-      @azure/communication-administration.PhoneNumberAdministrationClient.releasePhoneNumbers
-    package: '@azure/communication-administration'
-    summary: |-
-      Request the release of a list of acquired phone numbers.
-      The response includes the id of the created release,
-      remember that id for subsequent calls to getRelease.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function releasePhoneNumbers(phoneNumbers: string[], options?:
-        ReleasePhoneNumberOptions)
-      parameters:
-        - id: phoneNumbers
-          type: 'string[]'
-          description: The phone numbers to be released.
-        - id: options
-          type: >-
-            <xref
-            uid="@azure/communication-administration.ReleasePhoneNumberOptions"
-            />
-          description: |
-            Additional request options.
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/communication-administration.ReleasePhoneNumbersResponse"
-          />&gt;
         description: ''
   - name: 'unconfigurePhoneNumber(string, UnconfigurePhoneNumberOptions)'
     uid: >-

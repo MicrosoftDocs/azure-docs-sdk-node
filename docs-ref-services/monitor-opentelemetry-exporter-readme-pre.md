@@ -3,7 +3,7 @@ title: Azure Monitor OpenTelemetry Exporter client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry-exporter, 
 author: maggiepint
 ms.author: magpint
-ms.date: 09/01/2020
+ms.date: 10/12/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Monitor OpenTelemetry Exporter client library for JavaScript - Version 1.0.0-preview.5 
+# Azure Monitor OpenTelemetry Exporter client library for JavaScript - Version 1.0.0-preview.6 
 
 
 [![npm version](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter.svg)](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter)
@@ -27,7 +27,7 @@ This exporter package assumes your application is [already instrumented](https:/
 ### Prerequisites
 
 You must have an [Azure subscription](https://azure.microsoft.com/free/) and a
-[Application Insights workspace](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview/) to use this package.
+[Application Insights workspace](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview/) to use this package.
 If you are using this package in a Node.js application, then use Node.js 8.x or higher.
 
 ### Distributed Tracing
@@ -44,24 +44,24 @@ const provider = new NodeTracerProvider({
   plugins: {
     https: {
       // Ignore Application Insights Ingestion Server
-      ignoreOutgoingUrls: [new RegExp(/dc.services.visualstudio.com/i)],
-    },
-  },
+      ignoreOutgoingUrls: [new RegExp(/dc.services.visualstudio.com/i)]
+    }
+  }
 });
 provider.register();
 
 // Create an exporter instance
 const exporter = new AzureMonitorTraceExporter({
   logger: provider.logger,
-  instrumentationKey: "ikey",
+  instrumentationKey: "ikey"
 });
 
 // Add the exporter to the provider
 provider.addSpanProcessor(
   new BatchSpanProcessor(exporter, {
     bufferTimeout: 15000,
-    bufferSize: 1000,
-  }),
+    bufferSize: 1000
+  })
 );
 ```
 
@@ -93,9 +93,9 @@ const provider = new NodeTracerProvider({
   plugins: {
     https: {
       // Ignore Application Insights Ingestion Server
-      ignoreOutgoingUrls: [new RegExp(/dc.services.visualstudio.com/i)],
-    },
-  },
+      ignoreOutgoingUrls: [new RegExp(/dc.services.visualstudio.com/i)]
+    }
+  }
 });
 ```
 
@@ -111,7 +111,7 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-preview.6/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/monitor/opentelemetry-exporter/README.png)
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/monitor/monitor-opentelemetry-exporter/README.png)
 

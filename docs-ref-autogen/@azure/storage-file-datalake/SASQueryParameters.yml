@@ -24,10 +24,33 @@ isPreview: false
 isDeprecated: false
 type: class
 constructors:
+  - name: 'SASQueryParameters(string, string, SASQueryParametersOptions)'
+    uid: '@azure/storage-file-datalake.SASQueryParameters.constructor_1'
+    package: '@azure/storage-file-datalake'
+    summary: Creates an instance of SASQueryParameters.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        new SASQueryParameters(version: string, signature: string, options?:
+        SASQueryParametersOptions)
+      parameters:
+        - id: version
+          type: string
+          description: Representing the storage version
+        - id: signature
+          type: string
+          description: Representing the signature for the SAS token
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-file-datalake.SASQueryParametersOptions"
+            />
+          description: ''
   - name: >-
       SASQueryParameters(string, string, string, string, string, SASProtocol,
       Date, Date, SasIPRange, string, string, string, string, string, string,
-      string, UserDelegationKey)
+      string, UserDelegationKey, number, string, string, string)
     uid: '@azure/storage-file-datalake.SASQueryParameters.constructor'
     package: '@azure/storage-file-datalake'
     summary: Creates an instance of SASQueryParameters.
@@ -41,7 +64,9 @@ constructors:
         SASProtocol, startsOn?: Date, expiresOn?: Date, ipRange?: SasIPRange,
         identifier?: string, resource?: string, cacheControl?: string,
         contentDisposition?: string, contentEncoding?: string, contentLanguage?:
-        string, contentType?: string, userDelegationKey?: UserDelegationKey)
+        string, contentType?: string, userDelegationKey?: UserDelegationKey,
+        directoryDepth?: number, preauthorizedAgentObjectId?: string,
+        agentObjectId?: string, correlationId?: string)
       parameters:
         - id: version
           type: string
@@ -94,7 +119,43 @@ constructors:
         - id: userDelegationKey
           type: <xref uid="@azure/storage-file-datalake.UserDelegationKey" />
           description: ''
+        - id: directoryDepth
+          type: number
+          description: ''
+        - id: preauthorizedAgentObjectId
+          type: string
+          description: ''
+        - id: agentObjectId
+          type: string
+          description: ''
+        - id: correlationId
+          type: string
+          description: ''
 properties:
+  - name: agentObjectId
+    uid: '@azure/storage-file-datalake.SASQueryParameters.agentObjectId'
+    package: '@azure/storage-file-datalake'
+    summary: >-
+      Unauthorized AAD Object ID in GUID format. The AAD Object ID of a user
+      that is assumed to be unauthorized by the owner of the User Delegation
+      Key.
+
+      The Azure Storage Service will perform an additional POSIX ACL check to
+      determine if the user is authorized to perform the requested operation.
+
+      This cannot be used in conjuction with
+      <xref:signedAuthorizedUserObjectId>.
+
+      This is only used for User Delegation SAS.
+    fullName: agentObjectId
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'agentObjectId?: string'
+      return:
+        type: string
+        description: ''
   - name: cacheControl
     uid: '@azure/storage-file-datalake.SASQueryParameters.cacheControl'
     package: '@azure/storage-file-datalake'
@@ -160,6 +221,41 @@ properties:
       return:
         type: string
         description: ''
+  - name: correlationId
+    uid: '@azure/storage-file-datalake.SASQueryParameters.correlationId'
+    package: '@azure/storage-file-datalake'
+    summary: >-
+      A GUID value that will be logged in the storage diagnostic logs and can be
+      used to correlate SAS generation with storage resource access.
+
+      This is only used for User Delegation SAS.
+    fullName: correlationId
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'correlationId?: string'
+      return:
+        type: string
+        description: ''
+  - name: directoryDepth
+    uid: '@azure/storage-file-datalake.SASQueryParameters.directoryDepth'
+    package: '@azure/storage-file-datalake'
+    summary: >-
+      Indicate the depth of the directory specified in the canonicalizedresource
+      field of the string-to-sign.
+
+      The depth of the directory is the number of directories beneath the root
+      folder.
+    fullName: directoryDepth
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'directoryDepth?: number'
+      return:
+        type: number
+        description: ''
   - name: expiresOn
     uid: '@azure/storage-file-datalake.SASQueryParameters.expiresOn'
     package: '@azure/storage-file-datalake'
@@ -220,6 +316,32 @@ properties:
       return:
         type: string
         description: ''
+  - name: preauthorizedAgentObjectId
+    uid: '@azure/storage-file-datalake.SASQueryParameters.preauthorizedAgentObjectId'
+    package: '@azure/storage-file-datalake'
+    summary: >-
+      Authorized AAD Object ID in GUID format. The AAD Object ID of a user
+      authorized by the owner of the User Delegation Key
+
+      to perform the action granted by the SAS. The Azure Storage service will
+      ensure that the owner of the user delegation key
+
+      has the required permissions before granting access but no additional
+      permission check for the user specified in
+
+      this value will be performed. This cannot be used in conjuction with
+      <xref:signedUnauthorizedUserObjectId>.
+
+      This is only used for User Delegation SAS.
+    fullName: preauthorizedAgentObjectId
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'preauthorizedAgentObjectId?: string'
+      return:
+        type: string
+        description: ''
   - name: protocol
     uid: '@azure/storage-file-datalake.SASQueryParameters.protocol'
     package: '@azure/storage-file-datalake'
@@ -237,7 +359,7 @@ properties:
     uid: '@azure/storage-file-datalake.SASQueryParameters.resource'
     package: '@azure/storage-file-datalake'
     summary: >-
-      Optional. The storage container or blob (only for
+      Optional. Specifies which resources are accessible via the SAS (only for
       <xref:BlobSASSignatureValues>).
     fullName: resource
     remarks: ''

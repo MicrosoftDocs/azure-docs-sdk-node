@@ -2,174 +2,108 @@
 name: Twin
 uid: azure-iothub.Twin
 package: azure-iothub
-summary: >-
-  The state information for a device or module. This is implicitly created and
-  deleted when the
+summary: >
+  A Device Twin is document describing the state of a device that is stored by
+  an Azure IoT hub and is available even if the device is offline.
 
-  corresponding device/ module identity is created or deleted in the IoT Hub.
+  It is built around 3 sections:
+    - Tags: key/value pairs only accessible from the service side
+    - Desired Properties: updated by a service and received by the device
+    - Reported Properties: updated by the device and received by the service.
+  Note that although it is a possibility, desired and reported properties do not
+  have to match
+
+  and that the logic to sync these two collections, if necessary, is left to the
+  user of the SDK.
+
+
+  For more information see [Understanding Device
+  Twins](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-device-twins).
+
+
+  The recommended way to obtain a <xref:azure-iothub.Twin> for a specific device
+  is to use the <xref:azure-iothub.Registry.getTwin> method.
 fullName: Twin
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: interface
+type: class
+constructors:
+  - name: 'Twin(DeviceIdentity | string, Registry)'
+    uid: azure-iothub.Twin.constructor
+    package: azure-iothub
+    summary: >-
+      Instantiates a new <xref:azure-iothub.Twin>. The recommended way to get a
+      new <xref:azure-iothub.Twin> object is to use the
+      <xref:azure-iothub.Registry.getTwin> method.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'new Twin(device: DeviceIdentity | string, registryClient: Registry)'
+      parameters:
+        - id: device
+          type: DeviceIdentity | string
+          description: >-
+            A device identifier string or an object describing the device. If an
+            Object,
+                                                it must contain a deviceId property.
+        - id: registryClient
+          type: <xref uid="azure-iothub.Registry" />
+          description: |
+            The HTTP registry client used to execute REST API calls.
 properties:
-  - name: authenticationType
-    uid: azure-iothub.Twin.authenticationType
-    package: azure-iothub
-    summary: >-
-      The authentication type used by the device. Possible values include:
-      'sas', 'selfSigned',
-
-      'certificateAuthority', 'none'
-    fullName: authenticationType
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'authenticationType?: AuthenticationType'
-      return:
-        type: <xref uid="azure-iothub.AuthenticationType" />
-        description: ''
-  - name: capabilities
-    uid: azure-iothub.Twin.capabilities
-    package: azure-iothub
-    summary: ''
-    fullName: capabilities
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'capabilities?: DeviceCapabilities'
-      return:
-        type: <xref uid="azure-iothub.DeviceCapabilities" />
-        description: ''
-  - name: cloudToDeviceMessageCount
-    uid: azure-iothub.Twin.cloudToDeviceMessageCount
-    package: azure-iothub
-    summary: The number of cloud-to-device messages sent.
-    fullName: cloudToDeviceMessageCount
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'cloudToDeviceMessageCount?: number'
-      return:
-        type: number
-        description: ''
-  - name: connectionState
-    uid: azure-iothub.Twin.connectionState
-    package: azure-iothub
-    summary: >-
-      The connection state of the device. Possible values include:
-      'Disconnected', 'Connected'
-    fullName: connectionState
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'connectionState?: ConnectionState1'
-      return:
-        type: <xref uid="azure-iothub.ConnectionState1" />
-        description: ''
-  - name: deviceEtag
-    uid: azure-iothub.Twin.deviceEtag
-    package: azure-iothub
-    summary: 'The string representing a ETag for the device, as per RFC7232.'
-    fullName: deviceEtag
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'deviceEtag?: string'
-      return:
-        type: string
-        description: ''
   - name: deviceId
     uid: azure-iothub.Twin.deviceId
     package: azure-iothub
     summary: >-
-      The unique identifier of the device in the identity registry of the IoT
-      Hub. It is a
-
-      case-sensitive string (up to 128 char long) of ASCII 7-bit alphanumeric
-      chars, and the
-
-      following special characters {'-', ':', '.', '+', '%', '_', '#', '*', '?',
-      '!', '(', ')', ',',
-
-      '=', '@', ';', '$', '''}.
+      Unique identifier of the device identity associated with the twin, as it
+      exists in the device identity registry.
     fullName: deviceId
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'deviceId?: string'
-      return:
-        type: string
-        description: ''
-  - name: deviceScope
-    uid: azure-iothub.Twin.deviceScope
-    package: azure-iothub
-    summary: The scope of the device.
-    fullName: deviceScope
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'deviceScope?: string'
+      content: 'deviceId: string'
       return:
         type: string
         description: ''
   - name: etag
     uid: azure-iothub.Twin.etag
     package: azure-iothub
-    summary: 'The string representing a ETag for the device twin, as per RFC7232.'
+    summary: >-
+      Tag used in optimistic concurrency to avoid multiple parallel editions of
+      the device twin.
     fullName: etag
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'etag?: string'
+      content: 'etag: string'
       return:
         type: string
         description: ''
-  - name: lastActivityTime
-    uid: azure-iothub.Twin.lastActivityTime
+  - name: modelId
+    uid: azure-iothub.Twin.modelId
     package: azure-iothub
     summary: >-
-      The date and time when the device last connected or received or sent a
-      message. The date and
-
-      time is sepecified in ISO8601 datetime format in UTC, for example,
-      2015-01-28T16:24:48.789Z.
-
-      This value is not updated if the device uses the HTTP/1 protocol to
-      perform messaging
-
-      operations.
-    fullName: lastActivityTime
+      Model Id of the device identity associated with the twin, as it exists in
+      the device identity registry.
+    fullName: modelId
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'lastActivityTime?: Date'
+      content: 'modelId?: string'
       return:
-        type: Date
+        type: string
         description: ''
   - name: moduleId
     uid: azure-iothub.Twin.moduleId
     package: azure-iothub
     summary: >-
-      The unique identifier of the module in the identity registry of the IoT
-      Hub. It is a
-
-      case-sensitive string (up to 128 char long) of ASCII 7-bit alphanumeric
-      chars, and the
-
-      following special characters {'-', ':', '.', '+', '%', '_', '#', '*', '?',
-      '!', '(', ')', ',',
-
-      '=', '@', ';', '$', '''}.
+      Module identifier for the module associated with the twin, as it exists in
+      the device identity registry.
     fullName: moduleId
     remarks: ''
     isPreview: false
@@ -179,123 +113,111 @@ properties:
       return:
         type: string
         description: ''
-  - name: parentScopes
-    uid: azure-iothub.Twin.parentScopes
-    package: azure-iothub
-    summary: >-
-      The scopes of the upper level edge devices if applicable. Only available
-      for edge devices.
-    fullName: parentScopes
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'parentScopes?: string[]'
-      return:
-        type: 'string[]'
-        description: ''
   - name: properties
     uid: azure-iothub.Twin.properties
     package: azure-iothub
-    summary: The desired and reported properties of the twin.
+    summary: >-
+      The desired and reported properties dictionnaries (respectively in
+      `properties.desired` and `properties.reported`).
     fullName: properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'properties?: TwinProperties'
+      content: 'properties: Object'
       return:
-        type: <xref uid="azure-iothub.TwinProperties" />
-        description: ''
-  - name: status
-    uid: azure-iothub.Twin.status
-    package: azure-iothub
-    summary: >-
-      The enabled status of the device. If disabled, the device cannot connect
-      to the service.
-
-      Possible values include: 'enabled', 'disabled'
-    fullName: status
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'status?: Status2'
-      return:
-        type: <xref uid="azure-iothub.Status2" />
-        description: ''
-  - name: statusReason
-    uid: azure-iothub.Twin.statusReason
-    package: azure-iothub
-    summary: 'The reason for the current status of the device, if any.'
-    fullName: statusReason
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'statusReason?: string'
-      return:
-        type: string
-        description: ''
-  - name: statusUpdateTime
-    uid: azure-iothub.Twin.statusUpdateTime
-    package: azure-iothub
-    summary: The date and time when the status of the device was last updated.
-    fullName: statusUpdateTime
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'statusUpdateTime?: Date'
-      return:
-        type: Date
+        type: Object
         description: ''
   - name: tags
     uid: azure-iothub.Twin.tags
     package: azure-iothub
     summary: >-
-      The collection of key-value pairs read and written by the solution back
-      end. They are not
-
-      visible to device apps. They keys are UTF-8 encoded, case-sensitive and
-      up-to 1KB in length.
-
-      Allowed characters exclude UNICODE control characters (segments C0 and
-      C1), '.', '$' and
-
-      space. The values are JSON objects, up-to 4KB in length.
+      Collection of key/value pairs that is available only on the service side
+      and can be used in queries to find specific devices.
     fullName: tags
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'tags?: [key: string]: any'
+      content: 'tags: [key: string]: string'
       return:
-        type: '[key: string]\: any'
+        type: '[key: string]\: string'
         description: ''
-  - name: version
-    uid: azure-iothub.Twin.version
+methods:
+  - name: get()
+    uid: azure-iothub.Twin.get_1
     package: azure-iothub
-    summary: The version for the device twin including tags and desired properties
-    fullName: version
+    summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'version?: number'
+      content: function get()
       return:
-        type: number
+        type: >-
+          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
+          />&lt;<xref uid="azure-iothub.Twin" />&gt;&gt;
         description: ''
-  - name: x509Thumbprint
-    uid: azure-iothub.Twin.x509Thumbprint
+  - name: get(IncomingMessageCallback<Twin>)
+    uid: azure-iothub.Twin.get
     package: azure-iothub
-    summary: The X509 thumbprint of the device.
-    fullName: x509Thumbprint
+    summary: Gets the latest version of this device twin from the IoT Hub service.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'x509Thumbprint?: X509Thumbprint'
+      content: 'function get(done: IncomingMessageCallback<Twin>)'
+      parameters:
+        - id: done
+          type: >-
+            <xref uid="azure-iothub.IncomingMessageCallback" />&lt;<xref
+            uid="azure-iothub.Twin" />&gt;
+          description: ''
+  - name: toJSON()
+    uid: azure-iothub.Twin.toJSON
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function toJSON()
       return:
-        type: <xref uid="azure-iothub.X509Thumbprint" />
+        type: object
         description: ''
+  - name: update(any)
+    uid: azure-iothub.Twin.update_1
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function update(patch: any)'
+      parameters:
+        - id: patch
+          type: any
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
+          />&lt;<xref uid="azure-iothub.Twin" />&gt;&gt;
+        description: ''
+  - name: 'update(any, IncomingMessageCallback<Twin>)'
+    uid: azure-iothub.Twin.update
+    package: azure-iothub
+    summary: Update the device twin with the patch provided as argument.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function update(patch: any, done: IncomingMessageCallback<Twin>)'
+      parameters:
+        - id: patch
+          type: any
+          description: Object containing the new values to apply to this device twin.
+        - id: done
+          type: >-
+            <xref uid="azure-iothub.IncomingMessageCallback" />&lt;<xref
+            uid="azure-iothub.Twin" />&gt;
+          description: ''

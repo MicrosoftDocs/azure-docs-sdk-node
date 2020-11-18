@@ -24,10 +24,31 @@ isPreview: false
 isDeprecated: false
 type: class
 constructors:
+  - name: 'SASQueryParameters(string, string, SASQueryParametersOptions)'
+    uid: '@azure/storage-blob.SASQueryParameters.constructor_1'
+    package: '@azure/storage-blob'
+    summary: Creates an instance of SASQueryParameters.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        new SASQueryParameters(version: string, signature: string, options?:
+        SASQueryParametersOptions)
+      parameters:
+        - id: version
+          type: string
+          description: Representing the storage version
+        - id: signature
+          type: string
+          description: Representing the signature for the SAS token
+        - id: options
+          type: <xref uid="@azure/storage-blob.SASQueryParametersOptions" />
+          description: ''
   - name: >-
       SASQueryParameters(string, string, string, string, string, SASProtocol,
       Date, Date, SasIPRange, string, string, string, string, string, string,
-      string, UserDelegationKey)
+      string, UserDelegationKey, string, string)
     uid: '@azure/storage-blob.SASQueryParameters.constructor'
     package: '@azure/storage-blob'
     summary: Creates an instance of SASQueryParameters.
@@ -41,7 +62,8 @@ constructors:
         SASProtocol, startsOn?: Date, expiresOn?: Date, ipRange?: SasIPRange,
         identifier?: string, resource?: string, cacheControl?: string,
         contentDisposition?: string, contentEncoding?: string, contentLanguage?:
-        string, contentType?: string, userDelegationKey?: UserDelegationKey)
+        string, contentType?: string, userDelegationKey?: UserDelegationKey,
+        preauthorizedAgentObjectId?: string, correlationId?: string)
       parameters:
         - id: version
           type: string
@@ -93,6 +115,12 @@ constructors:
           description: ''
         - id: userDelegationKey
           type: <xref uid="@azure/storage-blob.UserDelegationKey" />
+          description: ''
+        - id: preauthorizedAgentObjectId
+          type: string
+          description: ''
+        - id: correlationId
+          type: string
           description: ''
 properties:
   - name: cacheControl
@@ -160,6 +188,23 @@ properties:
       return:
         type: string
         description: ''
+  - name: correlationId
+    uid: '@azure/storage-blob.SASQueryParameters.correlationId'
+    package: '@azure/storage-blob'
+    summary: >-
+      A GUID value that will be logged in the storage diagnostic logs and can be
+      used to correlate SAS generation with storage resource access.
+
+      This is only used for User Delegation SAS.
+    fullName: correlationId
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'correlationId?: string'
+      return:
+        type: string
+        description: ''
   - name: expiresOn
     uid: '@azure/storage-blob.SASQueryParameters.expiresOn'
     package: '@azure/storage-blob'
@@ -220,6 +265,29 @@ properties:
       return:
         type: string
         description: ''
+  - name: preauthorizedAgentObjectId
+    uid: '@azure/storage-blob.SASQueryParameters.preauthorizedAgentObjectId'
+    package: '@azure/storage-blob'
+    summary: >-
+      Authorized AAD Object ID in GUID format. The AAD Object ID of a user
+      authorized by the owner of the User Delegation Key
+
+      to perform the action granted by the SAS. The Azure Storage service will
+      ensure that the owner of the user delegation key
+
+      has the required permissions before granting access but no additional
+      permission check for the user specified in
+
+      this value will be performed. This is only used for User Delegation SAS.
+    fullName: preauthorizedAgentObjectId
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'preauthorizedAgentObjectId?: string'
+      return:
+        type: string
+        description: ''
   - name: protocol
     uid: '@azure/storage-blob.SASQueryParameters.protocol'
     package: '@azure/storage-blob'
@@ -237,7 +305,7 @@ properties:
     uid: '@azure/storage-blob.SASQueryParameters.resource'
     package: '@azure/storage-blob'
     summary: >-
-      Optional. The storage container or blob (only for
+      Optional. Specifies which resources are accessible via the SAS (only for
       <xref:BlobSASSignatureValues>).
     fullName: resource
     remarks: ''

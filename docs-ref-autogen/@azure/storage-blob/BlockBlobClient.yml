@@ -1068,7 +1068,8 @@ methods:
       <xref:commitBlockList> to commit the block list.
     remarks: ''
     isPreview: false
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: 'Use <xref:uploadData> instead.'
     syntax:
       content: >-
         function uploadBrowserData(browserData: Blob | ArrayBuffer |
@@ -1085,6 +1086,44 @@ methods:
           Promise&lt;<xref uid="@azure/storage-blob.BlobUploadCommonResponse"
           />&gt;
         description: Response data for the Blob Upload operation.
+  - name: >-
+      uploadData(Buffer | Blob | ArrayBuffer | ArrayBufferView,
+      BlockBlobParallelUploadOptions)
+    uid: '@azure/storage-blob.BlockBlobClient.uploadData'
+    package: '@azure/storage-blob'
+    summary: >
+      Uploads a Buffer(Node.js)/Blob(browsers)/ArrayBuffer/ArrayBufferView
+      object to a BlockBlob.
+
+      When data length is no more than the specifiled
+      <xref:BlockBlobParallelUploadOptions.maxSingleShotSize> (default is
+
+      <xref:BLOCK_BLOB_MAX_UPLOAD_BLOB_BYTES>), this method will use 1
+      <xref:upload> call to finish the upload.
+
+      Otherwise, this method will call <xref:stageBlock> to upload blocks, and
+      finally call <xref:commitBlockList>
+
+      to commit the block list.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function uploadData(data: Buffer | Blob | ArrayBuffer | ArrayBufferView,
+        options?: BlockBlobParallelUploadOptions)
+      parameters:
+        - id: data
+          type: Buffer | Blob | ArrayBuffer | ArrayBufferView
+          description: 'Buffer(Node.js), Blob, ArrayBuffer or ArrayBufferView'
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlockBlobParallelUploadOptions" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.BlobUploadCommonResponse"
+          />&gt;
+        description: ''
   - name: 'uploadFile(string, BlockBlobParallelUploadOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.uploadFile'
     package: '@azure/storage-blob'

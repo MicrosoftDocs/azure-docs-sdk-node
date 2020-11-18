@@ -3,7 +3,7 @@ title: Azure Key Vault Certificates client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/keyvault-certificates, 
 author: maggiepint
 ms.author: magpint
-ms.date: 08/12/2020
+ms.date: 09/11/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Key Vault Certificates client library for JavaScript - Version 4.1.0 
+# Azure Key Vault Certificates client library for JavaScript - Version 4.2.0-beta.1 
 
 
 Azure Key Vault is a service that allows you to encrypt authentication keys, storage account keys, data encryption keys, .pfx files, and passwords by using secured keys.
@@ -32,7 +32,7 @@ Use the client library for Azure Key Vault Certificates in your Node.js applicat
 
 > Note: This package cannot be used in the browser due to Azure Key Vault service limitations.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-certificates) | [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-certificates) | [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-certificates) | [Product documentation](https://azure.microsoft.com/services/key-vault/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-certificates/samples)
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-certificates_4.2.0-beta.1/sdk/keyvault/keyvault-certificates) | [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-certificates) | [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-certificates) | [Product documentation](https://azure.microsoft.com/services/key-vault/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/cf3ffd7ed1d154753f206c95862100b9dfadfc17/sdk/keyvault/keyvault-certificates/samples)
 
 ## Getting started
 
@@ -105,7 +105,7 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
 
 ## Authenticating with Azure Active Directory
 
-The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.2.0-beta.1/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 Here's a quick example. First, import `DefaultAzureCredential` and `CertificateClient`:
 
@@ -180,7 +180,6 @@ tasks using Azure Key Vault Certificates. The scenarios that are covered here co
 - [Getting a Key Vault certificate](#getting-a-key-vault-certificate).
 - [Getting the full information of a certificate](#getting-the-full-information-of-a-certificate).
 - [Certificates in PEM format](#certificates-in-pem-format).
-- [List all versions of a certificate](#list-all-versions-of-a-certificate).
 - [List all certificates](#list-all-certificates).
 - [Updating a certificate](#updating-a-certificate).
 - [Deleting a certificate](#deleting-a-certificate).
@@ -690,12 +689,13 @@ setLogLevel("info");
 
 You can find more code samples through the following links:
 
-- [KeyVault Certificates Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-certificates/samples/javascript)
-- [KeyVault Certificates Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-certificates/samples/typescript)
-- [KeyVault Certificates Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/be34ac10374f5ec0c773fe50be79208f6d84d4d2/sdk/keyvault/keyvault-certificates/test/)
+- [KeyVault Certificates Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/tree/cf3ffd7ed1d154753f206c95862100b9dfadfc17/sdk/keyvault/keyvault-certificates/samples/javascript)
+- [KeyVault Certificates Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/tree/cf3ffd7ed1d154753f206c95862100b9dfadfc17/sdk/keyvault/keyvault-certificates/samples/typescript)
+- [KeyVault Certificates Test Cases](https://github.com/Azure/azure-sdk-for-js/tree/cf3ffd7ed1d154753f206c95862100b9dfadfc17/sdk/keyvault/keyvault-certificates/test)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.2.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-certificates%2FREADME.png)
+

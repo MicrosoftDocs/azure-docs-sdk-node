@@ -3,7 +3,7 @@ title: Azure Text Analytics client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-text-analytics, 
 author: maggiepint
 ms.author: magpint
-ms.date: 08/18/2020
+ms.date: 10/06/2020
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,17 +11,18 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Text Analytics client library for JavaScript - Version 5.0.1 
+# Azure Text Analytics client library for JavaScript - Version 5.1.0-beta.2 
 
 
 [Azure TextAnalytics](https://azure.microsoft.com/services/cognitive-services/text-analytics/) is a cloud-based service that provides advanced natural language processing over raw text, and includes six main functions:
 
-__Note:__ This SDK targets Azure Text Analytics service API version 3.0.
+__Note:__ This SDK targets Azure Text Analytics service API version 3.1.0-preview.2.
 
 - Language Detection
 - Sentiment Analysis
 - Key Phrase Extraction
 - Named Entity Recognition
+- Recognition of Personally Identifiable Information
 - Linked Entity Recognition
 
 Use the client library to:
@@ -31,11 +32,11 @@ Use the client library to:
 - Automatically extract key phrases to quickly identify the main points.
 - Identify and categorize entities in your text as people, places, organizations, date/time, quantities, percentages, currencies, and more.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/textanalytics/ai-text-analytics/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.2/sdk/textanalytics/ai-text-analytics/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/ai-text-analytics) |
 [API reference documentation](https://aka.ms/azsdk/js/textanalytics/docs) |
 [Product documentation](https://docs.microsoft.com/azure/cognitive-services/text-analytics/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/textanalytics/ai-text-analytics/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.2/sdk/textanalytics/ai-text-analytics/samples)
 
 ## Getting started
 
@@ -56,8 +57,7 @@ az cognitiveservices account create --kind TextAnalytics --resource-group <your-
 
 ### Install the `@azure/ai-text-analytics` package
 
-Install the Azure Text Analytics client library for JavaScript - Version 5.0.1 
- with `npm`:
+Install the Azure Text Analytics client library for JavaScript with `npm`:
 
 ```bash
 npm install @azure/ai-text-analytics
@@ -219,6 +219,8 @@ async function main() {
 main();
 ```
 
+To get more granular information about the opinions related to aspects of a product/service, also known as Aspect-based Sentiment Analysis in Natural Language Processing (NLP), see a sample on sentiment analysis with opinion mining [here][analyze_sentiment_opinion_mining_sample].
+
 ### Recognize Entities
 
 Recognize and categorize entities in text as people, places, organizations, dates/times, quantities, currencies, etc.
@@ -251,6 +253,36 @@ async function main() {
   }
 }
 
+main();
+```
+
+### Recognize PII Entities
+
+There is a separate endpoint and operation for recognizing Personally Identifiable Information (PII) in text such as Social Security Numbers, bank account information, credit card numbers, etc. Its usage is very similar to the standard entity recognition above:
+
+```javascript
+const { TextAnalyticsClient, TextAnalyticsApiKeyCredential } = require("@azure/ai-text-analytics");
+const client = new TextAnalyticsClient(
+  "<endpoint>",
+  new TextAnalyticsApiKeyCredential("<API key>")
+);
+const documents = [
+  "The employee's SSN is 555-55-5555.",
+  "The employee's phone number is (555) 555-5555."
+];
+async function main() {
+  const results = await client.recognizePiiEntities(documents, "en");
+  for (const result of results) {
+    if (result.error === undefined) {
+      console.log(" -- Recognized PII entities for input", result.id, "--");
+      for (const entity of result.entities) {
+        console.log(entity.text, ":", entity.category, "(Score:", entity.confidenceScore, ")");
+      }
+    } else {
+      console.error("Encountered an error:", result.error);
+    }
+  }
+}
 main();
 ```
 
@@ -376,17 +408,17 @@ You can set the following environment variable to get the debug logging output w
 export AZURE_LOG_LEVEL=verbose
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/textanalytics/ai-text-analytics/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.2/sdk/textanalytics/ai-text-analytics/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -398,10 +430,9 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [cognitive_resource]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/identity/identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.2/sdk/identity/identity
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/identity/identity#defaultazurecredential
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.2/sdk/identity/identity#defaultazurecredential
 [data_limits]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/overview#data-limits
-
-
+[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.2/sdk/textanalytics/ai-text-analytics/samples/typescript/src/analyzeSentimentWithOpinionMining.ts

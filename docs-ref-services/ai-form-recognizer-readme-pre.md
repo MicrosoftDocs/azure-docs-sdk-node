@@ -151,7 +151,7 @@ The following section provides several JavaScript code snippets illustrating com
 
 - [Recognize Forms Using a Custom Model](#recognize-forms-using-a-custom-model)
 - [Recognize Content](#recognize-content)
-- [Use Prebuilt Models](#use-prebuilt-models)
+- [Use Prebuilt Models](#using-prebuilt-models)
 - [Train a Model](#train-a-model)
 - [Listing All Models](#listing-all-models)
 
@@ -489,4 +489,3 @@ If you'd like to contribute to this library, please read the [contributing guide
 [fr-labeling-tool]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/quickstarts/label-tool
 [fr-train-without-labels]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/overview#train-without-labels
 [fr-train-with-labels]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/overview#train-with-labels
-

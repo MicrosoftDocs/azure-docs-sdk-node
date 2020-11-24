@@ -2,13 +2,28 @@
 name: ServiceBusMessage
 uid: '@azure/service-bus.ServiceBusMessage'
 package: '@azure/service-bus'
-summary: Describes the message received from Service Bus.
+summary: Describes the message to be sent to Service Bus.
 fullName: ServiceBusMessage
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: class
+type: interface
 properties:
+  - name: applicationProperties
+    uid: '@azure/service-bus.ServiceBusMessage.applicationProperties'
+    package: '@azure/service-bus'
+    summary: |-
+      The application specific properties which can be
+      used for custom message metadata.
+    fullName: applicationProperties
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'applicationProperties?: [key: string]: function'
+      return:
+        type: '[key: string]\: function'
+        description: ''
   - name: body
     uid: '@azure/service-bus.ServiceBusMessage.body'
     package: '@azure/service-bus'
@@ -37,9 +52,9 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'contentType?: undefined | string'
+      content: 'contentType?: string'
       return:
-        type: undefined | string
+        type: string
         description: ''
   - name: correlationId
     uid: '@azure/service-bus.ServiceBusMessage.correlationId'
@@ -63,198 +78,6 @@ properties:
       return:
         type: string | number | Buffer
         description: ''
-  - name: deadLetterSource
-    uid: '@azure/service-bus.ServiceBusMessage.deadLetterSource'
-    package: '@azure/service-bus'
-    summary: >-
-      The name of the queue or subscription that this message
-
-      was enqueued on, before it was deadlettered. Only set in messages that
-      have been dead-lettered
-
-      and subsequently auto-forwarded from the dead-letter sub-queue to another
-      entity. Indicates the
-
-      entity in which the message was dead-lettered.
-    fullName: deadLetterSource
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'deadLetterSource?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
-  - name: delivery
-    uid: '@azure/service-bus.ServiceBusMessage.delivery'
-    package: '@azure/service-bus'
-    summary: The associated delivery of the received message.
-    fullName: delivery
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'delivery: Delivery'
-      return:
-        type: Delivery
-        description: ''
-  - name: deliveryCount
-    uid: '@azure/service-bus.ServiceBusMessage.deliveryCount'
-    package: '@azure/service-bus'
-    summary: >-
-      Number of deliveries that have been attempted for this message. The count
-      is
-
-      incremented when a message lock expires, or the message is explicitly
-      abandoned using the
-
-      `abandon()` method on the message.
-    fullName: deliveryCount
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'deliveryCount?: undefined | number'
-      return:
-        type: undefined | number
-        description: ''
-  - name: enqueuedSequenceNumber
-    uid: '@azure/service-bus.ServiceBusMessage.enqueuedSequenceNumber'
-    package: '@azure/service-bus'
-    summary: >-
-      The original sequence number of the message. For
-
-      messages that have been auto-forwarded, this property reflects the
-      sequence number that had
-
-      first been assigned to the message at its original point of submission.
-    fullName: enqueuedSequenceNumber
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'enqueuedSequenceNumber?: undefined | number'
-      return:
-        type: undefined | number
-        description: ''
-  - name: enqueuedTimeUtc
-    uid: '@azure/service-bus.ServiceBusMessage.enqueuedTimeUtc'
-    package: '@azure/service-bus'
-    summary: >-
-      The UTC instant at which the message has been accepted and stored in
-      Service Bus.
-    fullName: enqueuedTimeUtc
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'enqueuedTimeUtc?: Date'
-      return:
-        type: Date
-        description: ''
-  - name: expiresAtUtc
-    uid: '@azure/service-bus.ServiceBusMessage.expiresAtUtc'
-    package: '@azure/service-bus'
-    summary: >-
-      The UTC instant at which the message is marked for removal and no longer
-      available for
-
-      retrieval from the entity due to expiration. This property is computed
-      from 2 other properties
-
-      on the message: `enqueuedTimeUtc` + `timeToLive`.
-    fullName: expiresAtUtc
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'expiresAtUtc?: Date'
-      return:
-        type: Date
-        description: ''
-  - name: isSettled
-    uid: '@azure/service-bus.ServiceBusMessage.isSettled'
-    package: '@azure/service-bus'
-    summary: Boolean denoting if the message has already been settled.
-    fullName: isSettled
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: boolean isSettled
-      return:
-        type: boolean
-        description: ''
-  - name: label
-    uid: '@azure/service-bus.ServiceBusMessage.label'
-    package: '@azure/service-bus'
-    summary: >-
-      The application specific label. This property enables the
-
-      application to indicate the purpose of the message to the receiver in a
-      standardized. fashion,
-
-      similar to an email subject line. The mapped AMQP property is "subject".
-    fullName: label
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'label?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
-  - name: lockedUntilUtc
-    uid: '@azure/service-bus.ServiceBusMessage.lockedUntilUtc'
-    package: '@azure/service-bus'
-    summary: >-
-      The UTC instant until which the message is held locked in the
-      queue/subscription.
-
-      When the lock expires, the `deliveryCount` is incremented and the message
-      is again available
-
-      for retrieval.
-
-      - Not applicable when the message is received in
-      `ReceiveMode.receiveAndDelete`
-
-      mode.
-    fullName: lockedUntilUtc
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'lockedUntilUtc?: Date'
-      return:
-        type: Date
-        description: ''
-  - name: lockToken
-    uid: '@azure/service-bus.ServiceBusMessage.lockToken'
-    package: '@azure/service-bus'
-    summary: >-
-      The lock token is a reference to the lock that is being held by the broker
-      in
-
-      `ReceiveMode.PeekLock` mode. Locks are used internally settle messages as
-      explained in the
-
-      [product documentation in more
-      detail](https://docs.microsoft.com/azure/service-bus-messaging/message-transfers-locks-settlement)
-
-      - Not applicable when the message is received in
-      `ReceiveMode.receiveAndDelete`
-
-      mode.
-    fullName: lockToken
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'lockToken?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
   - name: messageId
     uid: '@azure/service-bus.ServiceBusMessage.messageId'
     package: '@azure/service-bus'
@@ -262,18 +85,10 @@ properties:
       The message identifier is an
 
       application-defined value that uniquely identifies the message and its
-      payload. The identifier
+      payload.
 
-      is a free-form string and can reflect a GUID or an identifier derived from
-      the application
 
-      context. If enabled, the
-
-      [duplicate
-      detection](https://docs.microsoft.com/azure/service-bus-messaging/duplicate-detection)
-
-      identifies and removes second and further submissions of messages with the
-      same MessageId.
+      Note: Numbers that are not whole integers are not allowed.
     fullName: messageId
     remarks: ''
     isPreview: false
@@ -287,9 +102,9 @@ properties:
     uid: '@azure/service-bus.ServiceBusMessage.partitionKey'
     package: '@azure/service-bus'
     summary: >-
-      The partition key for sending a message to a
+      The partition key for sending a message to a partitioned entity.
 
-      partitioned entity. Maximum length is 128 characters. For [partitioned
+      Maximum length is 128 characters. For [partitioned
       entities](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-partitioning),
 
       setting this value enables assigning related messages to the same internal
@@ -298,18 +113,20 @@ properties:
       so that submission sequence order is correctly recorded. The partition is
       chosen by a hash
 
-      function over this value and cannot be chosen directly. For session-aware
-      entities,
+      function over this value and cannot be chosen directly.
 
-      the `sessionId` property overrides this value.
+      - For session-aware entities, the `sessionId` property overrides this
+      value.
+
+      - For non partitioned entities, partition key will be ignored
     fullName: partitionKey
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'partitionKey?: undefined | string'
+      content: 'partitionKey?: string'
       return:
-        type: undefined | string
+        type: string
         description: ''
   - name: replyTo
     uid: '@azure/service-bus.ServiceBusMessage.replyTo'
@@ -332,9 +149,9 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'replyTo?: undefined | string'
+      content: 'replyTo?: string'
       return:
-        type: undefined | string
+        type: string
         description: ''
   - name: replyToSessionId
     uid: '@azure/service-bus.ServiceBusMessage.replyToSessionId'
@@ -354,9 +171,9 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'replyToSessionId?: undefined | string'
+      content: 'replyToSessionId?: string'
       return:
-        type: undefined | string
+        type: string
         description: ''
   - name: scheduledEnqueueTimeUtc
     uid: '@azure/service-bus.ServiceBusMessage.scheduledEnqueueTimeUtc'
@@ -386,31 +203,6 @@ properties:
       return:
         type: Date
         description: ''
-  - name: sequenceNumber
-    uid: '@azure/service-bus.ServiceBusMessage.sequenceNumber'
-    package: '@azure/service-bus'
-    summary: >-
-      The unique number assigned to a message by Service Bus.
-
-      The sequence number is a unique 64-bit integer assigned to a message as it
-      is accepted
-
-      and stored by the broker and functions as its true identifier. For
-      partitioned entities,
-
-      the topmost 16 bits reflect the partition identifier. Sequence numbers
-      monotonically increase.
-
-      They roll over to 0 when the 48-64 bit range is exhausted.
-    fullName: sequenceNumber
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'sequenceNumber?: Long'
-      return:
-        type: Long
-        description: ''
   - name: sessionId
     uid: '@azure/service-bus.ServiceBusMessage.sessionId'
     package: '@azure/service-bus'
@@ -435,9 +227,28 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'sessionId?: undefined | string'
+      content: 'sessionId?: string'
       return:
-        type: undefined | string
+        type: string
+        description: ''
+  - name: subject
+    uid: '@azure/service-bus.ServiceBusMessage.subject'
+    package: '@azure/service-bus'
+    summary: >-
+      The application specific label. This property enables the
+
+      application to indicate the purpose of the message to the receiver in a
+      standardized. fashion,
+
+      similar to an email subject line. The mapped AMQP property is "subject".
+    fullName: subject
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'subject?: string'
+      return:
+        type: string
         description: ''
   - name: timeToLive
     uid: '@azure/service-bus.ServiceBusMessage.timeToLive'
@@ -465,9 +276,9 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'timeToLive?: undefined | number'
+      content: 'timeToLive?: number'
       return:
-        type: undefined | number
+        type: number
         description: ''
   - name: to
     uid: '@azure/service-bus.ServiceBusMessage.to'
@@ -487,144 +298,7 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'to?: undefined | string'
+      content: 'to?: string'
       return:
-        type: undefined | string
+        type: string
         description: ''
-  - name: userProperties
-    uid: '@azure/service-bus.ServiceBusMessage.userProperties'
-    package: '@azure/service-bus'
-    summary: The application specific properties.
-    fullName: userProperties
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'userProperties?: undefined | [key: string]: any'
-      return:
-        type: 'undefined | [key: string]: any'
-        description: ''
-  - name: viaPartitionKey
-    uid: '@azure/service-bus.ServiceBusMessage.viaPartitionKey'
-    package: '@azure/service-bus'
-    summary: >-
-      The partition key for sending a message into an entity
-
-      via a partitioned transfer queue. Maximum length is 128 characters. If a
-      message is sent via a
-
-      transfer queue in the scope of a transaction, this value selects the
-      transfer queue partition:
-
-      This is functionally equivalent to `partitionKey` property and ensures
-      that messages are kept
-
-      together and in order as they are transferred.
-
-      See [Transfers and Send
-      Via](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-transactions#transfers-and-send-via).
-    fullName: viaPartitionKey
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'viaPartitionKey?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
-methods:
-  - name: 'abandon(undefined | [key: string]: any)'
-    uid: '@azure/service-bus.ServiceBusMessage.abandon'
-    package: '@azure/service-bus'
-    summary: >-
-      The lock held on the message by the receiver is let go, making the message
-      available again in
-
-      Service Bus for another receive operation.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function abandon(propertiesToModify?: undefined | [key: string]: any)'
-      parameters:
-        - id: propertiesToModify
-          type: 'undefined | [key: string]: any'
-          description: >
-            The properties of the message to modify while abandoning the
-            message.
-      return:
-        type: Promise&lt;void&gt;
-        description: Promise<void>.
-  - name: clone()
-    uid: '@azure/service-bus.ServiceBusMessage.clone'
-    package: '@azure/service-bus'
-    summary: >-
-      Creates a clone of the current message to allow it to be re-sent to the
-      queue
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function clone()
-      return:
-        type: <xref uid="@azure/service-bus.SendableMessageInfo" />
-        description: ServiceBusMessage
-  - name: complete()
-    uid: '@azure/service-bus.ServiceBusMessage.complete'
-    package: '@azure/service-bus'
-    summary: Removes the message from Service Bus.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function complete()
-      return:
-        type: Promise&lt;void&gt;
-        description: Promise<void>.
-  - name: 'deadLetter(DeadLetterOptions & [key: string]: any)'
-    uid: '@azure/service-bus.ServiceBusMessage.deadLetter'
-    package: '@azure/service-bus'
-    summary: >-
-      Moves the message to the deadletter sub-queue. To receive a deadletted
-      message, create a new
-
-      QueueClient/SubscriptionClient using the path for the deadletter
-      sub-queue.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deadLetter(propertiesToModify?: DeadLetterOptions & [key:
-        string]: any)
-      parameters:
-        - id: propertiesToModify
-          type: >-
-            <xref uid="@azure/service-bus.DeadLetterOptions" /> & [key: string]:
-            any
-          description: ''
-      return:
-        type: Promise&lt;void&gt;
-        description: Promise<void>
-  - name: 'defer(undefined | [key: string]: any)'
-    uid: '@azure/service-bus.ServiceBusMessage.defer'
-    package: '@azure/service-bus'
-    summary: >-
-      Defers the processing of the message. Save the `sequenceNumber` of the
-      message, in order to
-
-      receive it message again in the future using the `receiveDeferredMessage`
-      method.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function defer(propertiesToModify?: undefined | [key: string]: any)'
-      parameters:
-        - id: propertiesToModify
-          type: 'undefined | [key: string]: any'
-          description: |
-            The properties of the message to modify while deferring the message
-      return:
-        type: Promise&lt;void&gt;
-        description: Promise<void>

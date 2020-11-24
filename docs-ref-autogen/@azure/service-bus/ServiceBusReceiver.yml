@@ -1,0 +1,361 @@
+### YamlMime:TSType
+name: ServiceBusReceiver
+uid: '@azure/service-bus.ServiceBusReceiver'
+package: '@azure/service-bus'
+summary: A receiver that does not handle sessions.
+fullName: ServiceBusReceiver
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+  - name: entityPath
+    uid: '@azure/service-bus.ServiceBusReceiver.entityPath'
+    package: '@azure/service-bus'
+    summary: Path of the entity for which the receiver has been created.
+    fullName: entityPath
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'entityPath: string'
+      return:
+        type: string
+        description: ''
+  - name: isClosed
+    uid: '@azure/service-bus.ServiceBusReceiver.isClosed'
+    package: '@azure/service-bus'
+    summary: >-
+      Returns `true` if either the receiver or the client that created it has
+      been closed.
+    fullName: isClosed
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'isClosed: boolean'
+      return:
+        type: boolean
+        description: ''
+  - name: receiveMode
+    uid: '@azure/service-bus.ServiceBusReceiver.receiveMode'
+    package: '@azure/service-bus'
+    summary: The receive mode used to create the receiver.
+    fullName: receiveMode
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'receiveMode: "peekLock" | "receiveAndDelete"'
+      return:
+        type: '"peekLock" | "receiveAndDelete"'
+        description: ''
+methods:
+  - name: 'abandonMessage(ServiceBusReceivedMessage, [key: string]: any)'
+    uid: '@azure/service-bus.ServiceBusReceiver.abandonMessage'
+    package: '@azure/service-bus'
+    summary: >-
+      The lock held on the message by the receiver is let go, making the message
+      available again in
+
+      Service Bus for another receive operation.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function abandonMessage(message: ServiceBusReceivedMessage,
+        propertiesToModify?: [key: string]: any)
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: ''
+        - id: propertiesToModify
+          type: '[key: string]\: any'
+          description: >
+            The properties of the message to modify while abandoning the
+            message.
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>.
+  - name: close()
+    uid: '@azure/service-bus.ServiceBusReceiver.close'
+    package: '@azure/service-bus'
+    summary: >-
+      Closes the receiver.
+
+      Once closed, the receiver cannot be used for any further operations.
+
+      Use the `createReceiver()` method on the ServiceBusClient to create a new
+      Receiver.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function close()
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: completeMessage(ServiceBusReceivedMessage)
+    uid: '@azure/service-bus.ServiceBusReceiver.completeMessage'
+    package: '@azure/service-bus'
+    summary: Removes the message from Service Bus.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function completeMessage(message: ServiceBusReceivedMessage)'
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: ''
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>.
+  - name: >-
+      deadLetterMessage(ServiceBusReceivedMessage, DeadLetterOptions & [key:
+      string]: any)
+    uid: '@azure/service-bus.ServiceBusReceiver.deadLetterMessage'
+    package: '@azure/service-bus'
+    summary: >-
+      Moves the message to the deadletter sub-queue. To receive a deadletted
+      message, create a new
+
+      QueueClient/SubscriptionClient using the path for the deadletter
+      sub-queue.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deadLetterMessage(message: ServiceBusReceivedMessage, options?:
+        DeadLetterOptions & [key: string]: any)
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: ''
+        - id: options
+          type: >-
+            <xref uid="@azure/service-bus.DeadLetterOptions" /> & [key: string]:
+            any
+          description: |
+            The DeadLetter options that can be provided while
+            rejecting the message.
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>
+  - name: 'deferMessage(ServiceBusReceivedMessage, [key: string]: any)'
+    uid: '@azure/service-bus.ServiceBusReceiver.deferMessage'
+    package: '@azure/service-bus'
+    summary: >-
+      Defers the processing of the message. Save the `sequenceNumber` of the
+      message, in order to
+
+      receive it message again in the future using the `receiveDeferredMessage`
+      method.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deferMessage(message: ServiceBusReceivedMessage,
+        propertiesToModify?: [key: string]: any)
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: ''
+        - id: propertiesToModify
+          type: '[key: string]\: any'
+          description: |
+            The properties of the message to modify while deferring the message
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void>
+  - name: getMessageIterator(GetMessageIteratorOptions)
+    uid: '@azure/service-bus.ServiceBusReceiver.getMessageIterator'
+    package: '@azure/service-bus'
+    summary: >-
+      Returns an iterator that can be used to receive messages from Service Bus.
+
+      If the iterator is not able to fetch a new message in over a minute,
+      `undefined` will be returned.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getMessageIterator(options?: GetMessageIteratorOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/service-bus.GetMessageIteratorOptions" />
+          description: >
+            A set of options to control the receive operation.
+
+            - `maxWaitTimeInMs`: The time to wait to receive the message in each
+            iteration.
+
+            - `abortSignal`: The signal to use to abort the ongoing operation.
+      return:
+        type: >-
+          AsyncIterableIterator&lt;<xref
+          uid="@azure/service-bus.ServiceBusReceivedMessage" />&gt;
+        description: ''
+  - name: 'peekMessages(number, PeekMessagesOptions)'
+    uid: '@azure/service-bus.ServiceBusReceiver.peekMessages'
+    package: '@azure/service-bus'
+    summary: >-
+      Peek the next batch of active messages (including deferred but not
+      deadlettered messages) on the
+
+      queue or subscription without modifying them.
+
+      - The first call to `peekMessages()` fetches the first active message.
+      Each subsequent call fetches the
+
+      subsequent message.
+
+      - Unlike a "received" message, "peeked" message is a read-only version of
+      the message.
+
+      It cannot be `Completed/Abandoned/Deferred/Deadlettered`.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function peekMessages(maxMessageCount: number, options?:
+        PeekMessagesOptions)
+      parameters:
+        - id: maxMessageCount
+          type: number
+          description: The maximum number of messages to peek.
+        - id: options
+          type: <xref uid="@azure/service-bus.PeekMessagesOptions" />
+          description: >
+            Options that allow to specify the maximum number of messages to
+            peek,
+
+            the sequenceNumber to start peeking from or an abortSignal to abort
+            the operation.
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/service-bus.ServiceBusReceivedMessage"
+          />[]&gt;
+        description: ''
+  - name: 'receiveDeferredMessages(Long | Long[], OperationOptionsBase)'
+    uid: '@azure/service-bus.ServiceBusReceiver.receiveDeferredMessages'
+    package: '@azure/service-bus'
+    summary: >-
+      Returns a promise that resolves to an array of deferred messages
+      identified by given `sequenceNumbers`.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function receiveDeferredMessages(sequenceNumbers: Long | Long[],
+        options?: OperationOptionsBase)
+      parameters:
+        - id: sequenceNumbers
+          type: 'Long | Long[]'
+          description: >-
+            The sequence number or an array of sequence numbers for the messages
+            that need to be received.
+        - id: options
+          type: <xref uid="@azure/service-bus.OperationOptionsBase" />
+          description: Options bag to pass an abort signal or tracing options.
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/service-bus.ServiceBusReceivedMessage"
+          />[]&gt;
+        description: |-
+          - Returns a list of messages identified by the given sequenceNumbers.
+          - Returns an empty list if no messages are found.
+  - name: 'receiveMessages(number, ReceiveMessagesOptions)'
+    uid: '@azure/service-bus.ServiceBusReceiver.receiveMessages'
+    package: '@azure/service-bus'
+    summary: >-
+      Returns a promise that resolves to an array of messages received from
+      Service Bus.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function receiveMessages(maxMessageCount: number, options?:
+        ReceiveMessagesOptions)
+      parameters:
+        - id: maxMessageCount
+          type: number
+          description: The maximum number of messages to receive.
+        - id: options
+          type: <xref uid="@azure/service-bus.ReceiveMessagesOptions" />
+          description: >-
+            A set of options to control the receive operation.
+
+            - `maxWaitTimeInMs`: The maximum time to wait for the first message
+            before returning an empty array if no messages are available.
+
+            - `abortSignal`: The signal to use to abort the ongoing operation.
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/service-bus.ServiceBusReceivedMessage"
+          />[]&gt;
+        description: >-
+          Promise<ServiceBusReceivedMessage[]> A promise that resolves with an
+          array of messages.
+  - name: renewMessageLock(ServiceBusReceivedMessage)
+    uid: '@azure/service-bus.ServiceBusReceiver.renewMessageLock'
+    package: '@azure/service-bus'
+    summary: >-
+      Renews the lock on the message for the duration as specified during the
+      Queue/Subscription
+
+      creation.
+
+      - Check the `lockedUntilUtc` property on the message for the time when the
+      lock expires.
+
+      - If a message is not settled (using either `complete()`, `defer()` or
+      `deadletter()`,
+
+      before its lock expires, then the message lands back in the
+      Queue/Subscription for the next
+
+      receive operation.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function renewMessageLock(message: ServiceBusReceivedMessage)'
+      parameters:
+        - id: message
+          type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
+          description: ''
+      return:
+        type: Promise&lt;Date&gt;
+        description: Promise<Date> - New lock token expiry date and time in UTC format.
+  - name: 'subscribe(MessageHandlers, SubscribeOptions)'
+    uid: '@azure/service-bus.ServiceBusReceiver.subscribe'
+    package: '@azure/service-bus'
+    summary: Streams messages to message handlers.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function subscribe(handlers: MessageHandlers, options?:
+        SubscribeOptions)
+      parameters:
+        - id: handlers
+          type: <xref uid="@azure/service-bus.MessageHandlers" />
+          description: A handler that gets called for messages and errors.
+        - id: options
+          type: <xref uid="@azure/service-bus.SubscribeOptions" />
+          description: Options for subscribe.
+      return:
+        type: Object
+        description: >-
+          An object that can be closed, sending any remaining messages to
+          `handlers` and
+
+          stopping new messages from arriving.

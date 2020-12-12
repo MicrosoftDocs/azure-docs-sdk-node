@@ -25,9 +25,9 @@ Use npm to install the Azure Service Bus module for JavaScript
 npm install @azure/service-bus
 ```
 
-See the documentation for this package [here](https://docs.microsoft.com/javascript/api/@azure/service-bus/?view=azure-node-latest).
+See the reference documentation for this package [here](https://docs.microsoft.com/javascript/api/@azure/service-bus/?view=azure-node-latest) or the readme for the package [here](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/servicebus/service-bus/README.md).
 
-For more code samples that use the @azure/service-bus package, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript&products=azure-service-bus).
+For more code samples that use the @azure/service-bus package, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript&products=azure-service-bus) or the [TypeScript samples](https://docs.microsoft.com/samples/browse/?languages=typescript&products=azure-service-bus).
 
 ## Management package
 Use npm to install the Azure Service Bus module for JavaScript

@@ -9,7 +9,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: Relay
+ms.service: service-bus-relay
 ---
 
 # Azure Relay modules for JavaScript

@@ -16,6 +16,18 @@ ms.service: Event Hub
 
 Azure Event Hubs is a highly scalable data streaming platform and event ingestion service capable of receiving and processing millions of events per second. Event Hubs can process and store events, data, or telemetry produced by distributed software and devices. Data sent to an event hub can be transformed and stored using any real-time analytics provider or batching/storage adapters. With the ability to provide publish-subscribe capabilities with low latency and at massive scale, Event Hubs serves as the "on ramp" for Big Data.
 
+## Client package
+
+Use npm to install the Azure Event Hubs module for JavaScript
+
+```bash
+npm install @azure/event-hubs
+```
+
+See the documentation for this package [here](https://docs.microsoft.com/javascript/api/overview/azure/event-hubs-readme?view=azure-node-latest).
+
+For more code samples that use the @azure/event-hubs package, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript&products=azure-event-hubs).
+
 ## Management Package
 
 ### Install the npm module 

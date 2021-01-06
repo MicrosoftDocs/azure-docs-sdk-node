@@ -13,13 +13,11 @@ ms.service:
 
 # Azure Storage Queue client library for JavaScript - Version 12.3.0-beta.1 
 
-
 Azure Storage Queue provides cloud messaging between application components. In designing applications for scale, application components are often decoupled, so that they can scale independently. Queue storage delivers asynchronous messaging for communication between application components, whether they are running in the cloud, on the desktop, on an on-premises server, or on a mobile device. Queue storage also supports managing asynchronous tasks and building process work flows.
 
 This project provides a client library in JavaScript that makes it easy to consume the Azure Storage Queue service.
 
 Use the client libraries in this package to:
-
 - Get/Set Queue Service Properties
 - Create/List/Delete Queues
 - Send/Receive/Peek/Clear/Update/Delete Queue Messages
@@ -460,6 +458,7 @@ More code samples
 If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-queue_12.3.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 Also refer to [Storage specific guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-queue_12.3.0-beta.1/sdk/storage/CONTRIBUTING.md) for additional information on setting up the test environment for storage libraries.
+
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fstorage%2Fstorage-queue%2FREADME.png)
 

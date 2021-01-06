@@ -55,21 +55,3 @@ npm install @azure/arm-storage
 
 Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-storage)
 
-```javascript
-const msRestAzure = require('ms-rest-azure');
-const storageManagementClient = require('azure-arm-storage');
-
-const subscriptionId = 'your-subscription-id';
-
-msRestAzure
-  .interactiveLogin()
-  .then(credentials => {
-    const client = new storageManagementClient(
-      credentials,
-      subscriptionId
-    );
-    return client.storageAccounts.list();
-  })
-  .then(accounts => console.dir(accounts, { depth: null, colors: true }))
-  .catch(err => console.log(err));
-```

@@ -28,6 +28,7 @@ Use the client libraries in this package to:
 [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/storage-file-datalake) |
 [Product documentation](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-introduction?toc=%2fazure%2fstorage%2fblobs%2ftoc.json) |
 [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/storage-file-datalake_12.3.0-beta.1/sdk/storage/storage-file-datalake/samples) |
+
 [Azure Storage Data Lake REST APIs](https://docs.microsoft.com/rest/api/storageservices/data-lake-storage-gen2)
 
 ## Getting started
@@ -94,6 +95,7 @@ There are differences between Node.js and browsers runtime. When getting started
   - `DataLakeFileClient.uploadStream()`
   - `DataLakeFileClient.readToBuffer()`
   - `DataLakeFileClient.readToFile()`
+
 
 ##### Features, interfaces, classes or functions only available in browsers
 
@@ -590,6 +592,7 @@ More code samples:
 ## Contributing
 
 If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-file-datalake_12.3.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fstorage%2Fstorage-blob%2FREADME.png)
 

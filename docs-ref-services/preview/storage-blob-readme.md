@@ -1,6 +1,6 @@
 ---
 title: Azure Storage Blob client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/storage-blob, 
+keywords: Azure, storage, javascript, SDK, API, @azure/storage-blob, 
 author: maggiepint
 ms.author: magpint
 ms.date: 12/10/2020
@@ -8,7 +8,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: storage
 ---
 
 # Azure Storage Blob client library for JavaScript - Version 12.4.0-beta.1 
@@ -202,6 +202,7 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 See the [Azure AD Auth sample](https://github.com/Azure/azure-sdk-for-js/blob/@azure/storage-blob_12.4.0-beta.1/sdk/storage/storage-blob/samples/javascript/azureAdAuth.js) for a complete example using this method.
+
 
 [Note - Above steps are only for Node.js]
 

@@ -14,32 +14,23 @@ ms.service: Event Hub
 
 # Azure Event Hub modules for JavaScript
 
-Azure Event Hubs is a highly scalable data streaming platform and event ingestion service capable of receiving and processing millions of events per second. Event Hubs can process and store events, data, or telemetry produced by distributed software and devices. Data sent to an event hub can be transformed and stored using any real-time analytics provider or batching/storage adapters. With the ability to provide publish-subscribe capabilities with low latency and at massive scale, Event Hubs serves as the "on ramp" for Big Data.
+[Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/) is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers. This lets you process and analyze the massive amounts of data produced by your connected devices and applications.
 
-## Client package
+## Libraries for resource management
 
-Use npm to install the Azure Event Hubs module for JavaScript
+To manage your Azure Event Hubs resources via the Azure Resource Manager, you would use the below package.
 
-```bash
-npm install @azure/event-hubs
-```
+| NPM Package                                                          | Reference                                                                                              |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| [@azure/arm-eventhub](https://npmjs.com/package/@azure/arm-eventhub) | [API Reference for @azure/arm-eventhub](https://docs.microsoft.com/javascript/api/@azure/arm-eventhub) |
 
-See the documentation for this package [here](https://docs.microsoft.com/javascript/api/overview/azure/event-hubs-readme?view=azure-node-latest).
+## Libraries for data access
 
-For more code samples that use the @azure/event-hubs package, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript&products=azure-event-hubs).
+To send and receive events from an Azure Event Hub instance, you would use the below packages.
 
-## Management Package
+| NPM Package                                                                                                  | Reference                                                                                                                                   | Samples                                                                                                                                                               |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [@azure/event-hubs](https://npmjs.com/package/@azure/event-hubs)                                             | [API Reference for @azure/event-hubs](https://docs.microsoft.com/javascript/api/@azure/event-hubs)                                          | [Samples for sending & receiving events](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/eventhub/event-hubs/samples)                                       |
+| [@azure/eventhubs-checkpointstore-blob](https://www.npmjs.com/package/@azure/eventhubs-checkpointstore-blob) | [API Reference for @azure/eventhubs-checkpointstore-blob](https://docs.microsoft.com/javascript/api/@azure/eventhubs-checkpointstore-blob/) | [Samples for using checkpoint store when receiving events](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/eventhub/eventhubs-checkpointstore-blob/samples) |
 
-### Install the npm module 
-
-Use npm to install the Azure Event Hub modules for JavaScript
-
-```bash
-npm install @azure/arm-eventhub
-```
-
-## Samples
-
-* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-eventhub)
-
-* For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+There is an older package `@azure/event-processor-host` meant for receiving events from multiple partitions such that the partition load is balanced across multiple instances of your application. This is done by making use Azure Storage Blob to store checkpoints. This package is deprecated and has been replaced by the packages listed in the above table. Follow the [migration guide](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/eventhub/event-hubs/migrationguide.md#migrating-from-eventprocessorhost-to-eventhubconsumerclient-for-receiving-events) to move your application off of this package.

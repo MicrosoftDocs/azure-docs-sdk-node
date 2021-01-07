@@ -3,12 +3,12 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/core-auth, 
 author: maggiepint
 ms.author: magpint
-ms.date: 06/30/2020
+ms.date: 01/07/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: core
+ms.service: 
 ---
 
 ## Azure Core Authentication
@@ -17,7 +17,7 @@ This library provides core interfaces and helper methods for authenticating with
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-auth_1.1.4/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcore%2Fcore-auth%2FREADME.png)
 

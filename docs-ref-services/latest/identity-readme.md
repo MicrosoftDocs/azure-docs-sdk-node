@@ -3,7 +3,7 @@ title: Azure Identity client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/identity, 
 author: maggiepint
 ms.author: magpint
-ms.date: 11/11/2020
+ms.date: 01/13/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-## Azure Identity client library for JavaScript - Version 1.2.0 
+## Azure Identity client library for JavaScript - Version 1.2.2 
 
 
 This library simplifies authentication against Azure Active Directory for Azure SDK libraries.
@@ -61,13 +61,13 @@ For systems without a default web browser, the `az login` command will use the d
 
 ## Key concepts
 
-If this is your first time using `@azure/identity` or the Microsoft identity platform (Azure Active Directory), we recommend that you read [Using `@azure/identity` with Microsoft Identity Platform](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity_1.2.0/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
+If this is your first time using `@azure/identity` or the Microsoft identity platform (Azure Active Directory), we recommend that you read [Using `@azure/identity` with Microsoft Identity Platform](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity_1.2.2/documentation/using-azure-identity.md) first. This document will give you a deeper understanding of the platform and how to configure your Azure account correctly.
 
 ### Credentials
 
 A credential is a class which contains or can obtain the data needed for a service client to authenticate requests. Service clients across Azure SDK accept credentials when they are constructed, and service clients use those credentials to authenticate requests to the service.
 
-The Azure Identity library focuses on OAuth authentication with Azure Active directory, and it offers a variety of credential classes capable of acquiring an AAD token to authenticate service requests. All of the credential classes in this library are implementations of the [TokenCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity_1.2.0/sdk/core/core-auth/src/tokenCredential.ts) abstract class, and any of them can be used by to construct service clients capable of authenticating with a TokenCredential.
+The Azure Identity library focuses on OAuth authentication with Azure Active directory, and it offers a variety of credential classes capable of acquiring an AAD token to authenticate service requests. All of the credential classes in this library are implementations of the [TokenCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity_1.2.2/sdk/core/core-auth/src/tokenCredential.ts) abstract class, and any of them can be used by to construct service clients capable of authenticating with a TokenCredential.
 
 See [Credential Classes](#credential-classes).
 
@@ -214,17 +214,6 @@ setLogLevel("info");
 
 ## Next steps
 
-### Client libraries supporting authentication with Azure Identity
-
-Currently, the following client libraries support authenticating with `TokenCredential` and the Azure Identity library. You can learn more about their use, and find additional documentation on use of these client libraries along samples with can be found in the links below.
-
-- [@azure/event-hubs](https://npmjs.com/package/@azure/event-hubs)
-- [@azure/keyvault-keys](https://npmjs.com/package/@azure/keyvault-keys)
-- [@azure/keyvault-secrets](https://npmjs.com/package/@azure/keyvault-secrets)
-- [@azure/keyvault-certificates](https://npmjs.com/package/@azure/keyvault-certificates)
-- [@azure/storage-blob](https://npmjs.com/package/@azure/storage-blob)
-- [@azure/storage-queue](https://npmjs.com/package/@azure/storage-queue)
-
 ### Read the documentation
 
 API documentation for this library can be found on our [documentation site](https://docs.microsoft.com/javascript/api/@azure/identity).
@@ -235,7 +224,7 @@ If you encounter bugs or have suggestions, please [open an issue](https://github
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/identity_1.2.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [1]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-identity/1.0.0/classes/defaultazurecredential.html
 [2]: https://azuresdkdocs.blob.core.windows.net/$web/javascript/azure-identity/1.0.0/classes/managedidentitycredential.html

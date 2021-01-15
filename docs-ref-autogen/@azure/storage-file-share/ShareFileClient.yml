@@ -512,6 +512,31 @@ methods:
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileForceCloseHandlesResponse" />&gt;
         description: ''
+  - name: generateSasUrl(FileGenerateSasUrlOptions)
+    uid: '@azure/storage-file-share.ShareFileClient.generateSasUrl'
+    package: '@azure/storage-file-share'
+    summary: >
+      Only available for clients constructed with a shared key credential.
+
+      Generates a Service Shared Access Signature (SAS) URI based on the client
+      properties
+
+      and parameters passed in. The SAS is signed by the shared key credential
+      of the client.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function generateSasUrl(options: FileGenerateSasUrlOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-file-share.FileGenerateSasUrlOptions" />
+          description: Optional parameters.
+      return:
+        type: string
+        description: >-
+          The SAS URI consisting of the URI to the resource represented by this
+          client, followed by the generated SAS token.
   - name: getProperties(FileGetPropertiesOptions)
     uid: '@azure/storage-file-share.ShareFileClient.getProperties'
     package: '@azure/storage-file-share'
@@ -758,7 +783,9 @@ methods:
       FileParallelUploadOptions)
     uid: '@azure/storage-file-share.ShareFileClient.uploadData'
     package: '@azure/storage-file-share'
-    summary: Uploads a Buffer(Node)/Blob/ArrayBuffer/ArrayBufferView to an Azure File.
+    summary: >-
+      Creates a new Azure File or replaces an existing Azure File, and then
+      uploads a Buffer(Node)/Blob/ArrayBuffer/ArrayBufferView to it.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -779,9 +806,11 @@ methods:
   - name: 'uploadFile(string, FileParallelUploadOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.uploadFile'
     package: '@azure/storage-file-share'
-    summary: |
+    summary: >
       ONLY AVAILABLE IN NODE.JS RUNTIME.
-      Uploads a local file to an Azure file.
+
+      Creates a new Azure File or replaces an existing Azure File, and then
+      uploads a local file to it.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -802,9 +831,14 @@ methods:
   - name: 'uploadRange(HttpRequestBody, number, number, FileUploadRangeOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.uploadRange'
     package: '@azure/storage-file-share'
-    summary: |-
-      Upload a range of bytes to a file. Both the start and count of the
-      range must be specified. The range can be up to 4 MB in size.
+    summary: >-
+      Upload a range of bytes to a file. This operation can only be called on an
+      existing file.
+
+      It won't change the size, properties or metadata of the file.
+
+      Both the start and count of the range must be specified. The range can be
+      up to 4 MB in size.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -956,10 +990,11 @@ methods:
     summary: >
       ONLY AVAILABLE IN NODE.JS RUNTIME.
 
-      Uploads a Node.js Readable stream into an Azure file.
+      Creates a new Azure File or replaces an existing Azure File, and then
+      uploads a Node.js Readable stream into it.
 
-      This method will try to create an Azure, then starts uploading chunk by
-      chunk.
+      This method will try to create an Azure File, then starts uploading chunk
+      by chunk.
 
       Size of chunk is defined by `bufferSize` parameter.
 

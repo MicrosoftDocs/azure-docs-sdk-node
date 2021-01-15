@@ -13,7 +13,6 @@ ms.service:
 
 # Azure Azure Digital Twins Core client library for JavaScript - Version 1.0.3 
 
-
 This package contains an isomorphic SDK for Azure Digital Twins API to provide access to the Azure Digital Twins service for managing twins, models, relationships, etc.
 
 ## Getting started
@@ -132,9 +131,7 @@ You can learn more about Azure Digital Twins by visiting [Azure Digital Twins Do
 
 ## Examples
 
-Please take a look at the Readme file in
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.3/sdk/digitaltwins/digital-twins-core/samples)
-directory for detailed examples on how to use this library.
+Please take a look at the Readme file in [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.3/sdk/digitaltwins/digital-twins-core/samples)
 
 ## Troubleshooting
 
@@ -152,8 +149,7 @@ For more detailed instructions on how to enable logs, you can look at the [@azur
 
 ## Next steps
 
-Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.3/sdk/digitaltwins/digital-twins-core/samples)
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.3/sdk/digitaltwins/digital-twins-core/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
@@ -163,5 +159,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
-  ![Impressions](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.3/sdk/digitaltwins/digital-twins-core/README.md)
+
+![Impressions](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.3/sdk/digitaltwins/digital-twins-core/README.md)
 

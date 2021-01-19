@@ -3,7 +3,7 @@ title: Azure Attestation client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/attestation, 
 author: maggiepint
 ms.author: magpint
-ms.date: 01/15/2021
+ms.date: 01/19/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Attestation client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Attestation client library for JavaScript - Version 1.0.0-beta.2 
 
 
 This package contains an isomorphic SDK for AttestationClient.
@@ -56,7 +56,7 @@ export AZURE_LOG_LEVEL=verbose
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/attestation_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/attestation_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

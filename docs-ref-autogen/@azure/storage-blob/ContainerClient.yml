@@ -17,8 +17,7 @@ constructors:
     summary: >-
       Creates an instance of ContainerClient.
 
-      This method accepts an encoded URL or non-encoded URL pointing to a page
-      blob.
+      This method accepts an URL pointing to a container.
 
       Encoded URL string will NOT be escaped twice, only special characters in
       URL path will be escaped.
@@ -33,14 +32,10 @@ constructors:
         - id: url
           type: string
           description: |-
-            A URL string pointing to Azure Storage page blob, such as
-                                "https://myaccount.blob.core.windows.net/mycontainer/pageblob". You can
+            A URL string pointing to Azure Storage container, such as
+                                "https://myaccount.blob.core.windows.net/mycontainer". You can
                                 append a SAS if using AnonymousCredential, such as
-                                "https://myaccount.blob.core.windows.net/mycontainer/pageblob?sasString".
-                                This method accepts an encoded URL or non-encoded URL pointing to a blob.
-                                Encoded URL string will NOT be escaped twice, only special characters in URL path will be escaped.
-                                However, if a blob name includes ? or %, blob name must be encoded in the URL.
-                                Such as a blob named "my?blob%", the URL should be "https://myaccount.blob.core.windows.net/mycontainer/my%3Fblob%25".
+                                "https://myaccount.blob.core.windows.net/mycontainer?sasString".
         - id: pipeline
           type: <xref uid="@azure/storage-blob.Pipeline" />
           description: |-
@@ -54,8 +49,7 @@ constructors:
     summary: >-
       Creates an instance of ContainerClient.
 
-      This method accepts an encoded URL or non-encoded URL pointing to a page
-      blob.
+      This method accepts an URL pointing to a container.
 
       Encoded URL string will NOT be escaped twice, only special characters in
       URL path will be escaped.
@@ -73,14 +67,10 @@ constructors:
         - id: url
           type: string
           description: |-
-            A URL string pointing to Azure Storage page blob, such as
-                                "https://myaccount.blob.core.windows.net/mycontainer/pageblob". You can
+            A URL string pointing to Azure Storage container, such as
+                                "https://myaccount.blob.core.windows.net/mycontainer". You can
                                 append a SAS if using AnonymousCredential, such as
-                                "https://myaccount.blob.core.windows.net/mycontainer/pageblob?sasString".
-                                This method accepts an encoded URL or non-encoded URL pointing to a blob.
-                                Encoded URL string will NOT be escaped twice, only special characters in URL path will be escaped.
-                                However, if a blob name includes ? or %, blob name must be encoded in the URL.
-                                Such as a blob named "my?blob%", the URL should be "https://myaccount.blob.core.windows.net/mycontainer/my%3Fblob%25".
+                                "https://myaccount.blob.core.windows.net/mycontainer?sasString".
         - id: credential
           type: >-
             <xref uid="@azure/storage-blob.StorageSharedKeyCredential" /> |
@@ -323,6 +313,32 @@ methods:
       return:
         type: Promise&lt;boolean&gt;
         description: ''
+  - name: generateSasUrl(ContainerGenerateSasUrlOptions)
+    uid: '@azure/storage-blob.ContainerClient.generateSasUrl'
+    package: '@azure/storage-blob'
+    summary: >
+      Only available for ContainerClient constructed with a shared key
+      credential.
+
+      Generates a Blob Container Service Shared Access Signature (SAS) URI based
+      on the client properties
+
+      and parameters passed in. The SAS is signed by the shared key credential
+      of the client.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function generateSasUrl(options: ContainerGenerateSasUrlOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-blob.ContainerGenerateSasUrlOptions" />
+          description: Optional parameters.
+      return:
+        type: Promise&lt;string&gt;
+        description: >-
+          The SAS URI consisting of the URI to the resource represented by this
+          client, followed by the generated SAS token.
   - name: getAccessPolicy(ContainerGetAccessPolicyOptions)
     uid: '@azure/storage-blob.ContainerClient.getAccessPolicy'
     package: '@azure/storage-blob'
@@ -500,7 +516,7 @@ methods:
         entity = await iter.next();
       }
 
-      ```js
+      ```
 
 
       Example using `byPage()`:
@@ -578,8 +594,7 @@ methods:
         description: |-
           {(PagedAsyncIterableIterator<
             { kind: "prefix" } & BlobPrefix | { kind: "blob" } & BlobItem,
-              ContainerListBlobHierarchySegmentResponse
-            >)}
+              ContainerListBlobHierarchySegmentResponse>)}
   - name: listBlobsFlat(ContainerListBlobsOptions)
     uid: '@azure/storage-blob.ContainerClient.listBlobsFlat'
     package: '@azure/storage-blob'

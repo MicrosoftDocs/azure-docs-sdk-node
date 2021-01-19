@@ -568,6 +568,31 @@ methods:
       return:
         type: Promise&lt;boolean&gt;
         description: ''
+  - name: generateSasUrl(BlobGenerateSasUrlOptions)
+    uid: '@azure/storage-blob.BlockBlobClient.generateSasUrl'
+    package: '@azure/storage-blob'
+    summary: >
+      Only available for BlobClient constructed with a shared key credential.
+
+      Generates a Blob Service Shared Access Signature (SAS) URI based on the
+      client properties
+
+      and parameters passed in. The SAS is signed by the shared key credential
+      of the client.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function generateSasUrl(options: BlobGenerateSasUrlOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobGenerateSasUrlOptions" />
+          description: Optional parameters.
+      return:
+        type: Promise&lt;string&gt;
+        description: >-
+          The SAS URI consisting of the URI to the resource represented by this
+          client, followed by the generated SAS token.
   - name: getAppendBlobClient()
     uid: '@azure/storage-blob.BlockBlobClient.getAppendBlobClient'
     package: '@azure/storage-blob'
@@ -976,6 +1001,51 @@ methods:
           Promise&lt;<xref uid="@azure/storage-blob.BlobCopyFromURLResponse"
           />&gt;
         description: ''
+  - name: 'syncUploadFromURL(string, BlockBlobSyncUploadFromURLOptions)'
+    uid: '@azure/storage-blob.BlockBlobClient.syncUploadFromURL'
+    package: '@azure/storage-blob'
+    summary: >-
+      Creates a new Block Blob where the contents of the blob are read from a
+      given URL.
+
+      This API is supported beginning with the 2020-04-08 version. Partial
+      updates
+
+      are not supported with Put Blob from URL; the content of an existing blob
+      is overwritten with
+
+      the content of the new blob.  To perform partial updates to a block blob’s
+      contents using a
+
+      source URL, use <xref:stageBlockFromURL> and <xref:commitBlockList>.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function syncUploadFromURL(sourceURL: string, options?:
+        BlockBlobSyncUploadFromURLOptions)
+      parameters:
+        - id: sourceURL
+          type: string
+          description: |-
+            Specifies the URL of the blob. The value
+                                      may be a URL of up to 2 KB in length that specifies a blob.
+                                      The value should be URL-encoded as it would appear
+                                      in a request URI. The source blob must either be public
+                                      or must be authenticated via a shared access signature.
+                                      If the source blob is public, no authentication is required
+                                      to perform the operation. Here are some examples of source object URLs:
+                                      - https://myaccount.blob.core.windows.net/mycontainer/myblob
+                                      - https://myaccount.blob.core.windows.net/mycontainer/myblob?snapshot=<DateTime>
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlockBlobSyncUploadFromURLOptions" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.BlockBlobPutBlobFromUrlResponse" />&gt;
+        description: Promise<Models.BlockBlobPutBlobFromUrlResponse>
   - name: undelete(BlobUndeleteOptions)
     uid: '@azure/storage-blob.BlockBlobClient.undelete'
     package: '@azure/storage-blob'

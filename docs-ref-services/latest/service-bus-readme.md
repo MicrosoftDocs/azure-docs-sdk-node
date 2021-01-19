@@ -1,17 +1,17 @@
 ---
 title: Azure Service Bus client library for Javascript
-keywords: Azure, , SDK, API, @azure/service-bus, 
+keywords: Azure, javascript, SDK, API, @azure/service-bus, 
 author: maggiepint
 ms.author: magpint
-ms.date: 11/23/2020
+ms.date: 01/13/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: 
+ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Service Bus client library for Javascript - Version 7.0.0 
+# Azure Service Bus client library for Javascript - Version 7.0.2 
 
 
 [Azure Service Bus](https://azure.microsoft.com/services/service-bus/) is a highly-reliable cloud messaging service from Microsoft.
@@ -22,13 +22,13 @@ Use the client library `@azure/service-bus` in your application to
 - Receive messages from an Azure Service Bus Queue or Subscription
 - Create/Get/Delete/Update/List Queues/Topics/Subscriptions/Rules in an Azure Service Bus namespace.
 
-Resources for the v7.0.0 of `@azure/service-bus`:
+Resources for `@azure/service-bus` version 7:
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0/sdk/servicebus/service-bus) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.2/sdk/servicebus/service-bus) |
 [Package (npm)](https://www.npmjs.com/package/@azure/service-bus) |
 [API Reference Documentation][apiref] |
 [Product documentation](https://azure.microsoft.com/services/service-bus/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0/sdk/servicebus/service-bus/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.2/sdk/servicebus/service-bus/samples)
 
 **NOTE**: If you are using version 1.1.10 or lower and want to migrate to the latest version
 of this package please look at our [migration guide to move from Service Bus V1 to Service Bus V7][migrationguide]
@@ -131,10 +131,11 @@ The following sections provide code snippets that cover some of the common tasks
 - [Send messages](#send-messages)
 - [Receive messages](#receive-messages)
 - [Settle a message](#settle-a-message)
+- [Dead letter queues](#dead-letter-queues)
 - [Send messages using Sessions](#send-messages-using-sessions)
 - [Receive messages from Sessions](#receive-messages-from-sessions)
 - [Manage resources of a service bus namespace](#manage-resources-of-a-service-bus-namespace)
-- [Additional samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0/sdk/servicebus/service-bus/samples)
+- [Additional samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.2/sdk/servicebus/service-bus/samples)
 
 ### Send messages
 
@@ -247,9 +248,42 @@ for await (let message of receiver.getMessageIterator()) {
 
 ### Settle a message
 
-Once you receive a message you can call `completeMessage()`, `abandonMessage()`, `deferMessage()` or `deadletterMessage()` on the receiver based on how you want to settle the message.
+Once you receive a message you can call [`completeMessage()`][receiver_complete], [`abandonMessage()`][receiver_abandon], [`deferMessage()`][receiver_defer] or [`deadLetterMessage()`][receiver_deadletter] on the receiver based on how you want to settle the message.
 
 To learn more, please read [Settling Received Messages](https://docs.microsoft.com/azure/service-bus-messaging/message-transfers-locks-settlement#settling-receive-operations)
+
+## Dead letter queues
+
+The dead letter queue is a **sub-queue**. Each queue or subscription has its own dead letter queue. Dead letter queues store
+messages that have been explicitly dead lettered (via [`receiver.deadLetterMessage()`][receiver_deadletter]), or messages that have exceeded
+their maximum delivery count.
+
+Creating a receiver for a dead letter sub-queue is similar to creating a receiver for a subscription or queue:
+
+```javascript
+// To receive from a queue's dead letter sub-queue
+const deadLetterReceiverForQueue = serviceBusClient.createReceiver("queue", {
+  subQueueType: "deadLetter"
+});
+
+// To receive from a subscription's dead letter sub-queue
+const deadLetterReceiverForSubscription = serviceBusClient.createReceiver("topic", "subscription", {
+  subQueueType: "deadLetter"
+});
+
+// Dead letter receivers work like any other receiver connected to a queue
+// ex:
+const messages = await deadLetterReceiverForQueue.receiveMessages(5);
+
+for (const message of messages) {
+  console.log(`Dead lettered message: ${message.body}`);
+}
+```
+
+Full samples demonstrating dead letter queues more thoroughly:
+
+- [Using receiver.deadLetterMessage() to explicitly send messages to the dead letter sub-queue](https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.0.2/sdk/servicebus/service-bus/samples/typescript/src/advanced/movingMessagesToDLQ.ts)
+- [Receiving messages from the dead letter sub-queue](https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.0.2/sdk/servicebus/service-bus/samples/typescript/src/advanced/processMessageFromDLQ.ts)
 
 ### Send messages using Sessions
 
@@ -338,7 +372,7 @@ console.log("Number of messages in the queue = ", queueRuntimeProperties.totalMe
 await serviceBusAdministrationClient.deleteQueue(queueName);
 ```
 
-- Sample for reference - [administrationClient.ts](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0/sdk/servicebus/service-bus/samples/typescript/src/advanced/administrationClient.ts)
+- Sample for reference - [administrationClient.ts](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.2/sdk/servicebus/service-bus/samples/typescript/src/advanced/administrationClient.ts)
 
 ## Troubleshooting
 
@@ -394,19 +428,19 @@ export DEBUG=azure:service-bus:error,azure-core-amqp:error,rhea-promise:error,rh
 
 ## Next Steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0/sdk/servicebus/service-bus/samples)
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.2/sdk/servicebus/service-bus/samples)
 directory for detailed examples on how to use this library to send and receive messages to/from
 [Service Bus Queues, Topics and Subscriptions](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview).
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.0.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fservicebus%2Fservice-bus%2FREADME.png)
 
-[apiref]: https://aka.ms/azsdk/js/service-bus/docs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.0.0/sdk/identity/identity/README.md
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.0/sdk/identity/identity#defaultazurecredential
+[apiref]: https://docs.microsoft.com/javascript/api/@azure/service-bus/
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.0.2/sdk/identity/identity/README.md
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/service-bus_7.0.2/sdk/identity/identity#defaultazurecredential
 [sbclient]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusclient
 [sbclient_constructor]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusclient#ServiceBusClient_string__ServiceBusClientOptions_
 [sbclient_tokencred_overload]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusclient#ServiceBusClient_string__TokenCredential__ServiceBusClientOptions_
@@ -419,8 +453,12 @@ If you'd like to contribute to this library, please read the [contributing guide
 [receiver_receivemessages]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusreceiver#receiveMessages_number__ReceiveMessagesOptions_
 [receiver_subscribe]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusreceiver#subscribe_MessageHandlers_ReceivedMessageT___SubscribeOptions_
 [receiver_getmessageiterator]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusreceiver#getMessageIterator_GetMessageIteratorOptions_
+[receiver_abandon]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusreceiver#abandonMessage_ServiceBusReceivedMessage___key__string___any_
+[receiver_complete]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusreceiver#completeMessage_ServiceBusReceivedMessage_
+[receiver_deadletter]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusreceiver#deadLetterMessage_ServiceBusReceivedMessage__DeadLetterOptions____key__string___any_
+[receiver_defer]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebusreceiver#deferMessage_ServiceBusReceivedMessage___key__string___any_
 [sessionreceiver]: https://docs.microsoft.com/javascript/api/@azure/service-bus/servicebussessionreceiver
-[migrationguide]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.0.0/sdk/servicebus/service-bus/migrationguide.md
+[migrationguide]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/service-bus_7.0.2/sdk/servicebus/service-bus/migrationguide.md
 [docsms_messagesessions]: https://docs.microsoft.com/azure/service-bus-messaging/message-sessions
 [docsms_messagesessions_fifo]: https://docs.microsoft.com/azure/service-bus-messaging/message-sessions#first-in-first-out-fifo-pattern
 [queue_concept]: https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview#queues

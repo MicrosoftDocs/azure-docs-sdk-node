@@ -3,7 +3,7 @@ title: Azure Azure Digital Twins Core client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/digital-twins-core, 
 author: maggiepint
 ms.author: magpint
-ms.date: 11/03/2020
+ms.date: 01/15/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,8 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Azure Digital Twins Core client library for JavaScript - Version 1.0.0 
-
+# Azure Azure Digital Twins Core client library for JavaScript - Version 1.0.3 
 
 This package contains an isomorphic SDK for Azure Digital Twins API to provide access to the Azure Digital Twins service for managing twins, models, relationships, etc.
 
@@ -132,9 +131,7 @@ You can learn more about Azure Digital Twins by visiting [Azure Digital Twins Do
 
 ## Examples
 
-Please take a look at the Readme file in
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.0/sdk/digitaltwins/digital-twins-core/samples)
-directory for detailed examples on how to use this library.
+Please take a look at the Readme file in [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.3/sdk/digitaltwins/digital-twins-core/samples)
 
 ## Troubleshooting
 
@@ -148,20 +145,20 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.3/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.0/sdk/digitaltwins/digital-twins-core/samples)
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.3/sdk/digitaltwins/digital-twins-core/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/digital-twins-core_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/digital-twins-core_1.0.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
-  ![Impressions](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.0/sdk/digitaltwins/digital-twins-core/README.md)
+
+![Impressions](https://github.com/Azure/azure-sdk-for-js/tree/@azure/digital-twins-core_1.0.3/sdk/digitaltwins/digital-twins-core/README.md)
 

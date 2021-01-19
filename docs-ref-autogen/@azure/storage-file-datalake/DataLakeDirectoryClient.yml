@@ -297,6 +297,33 @@ methods:
       return:
         type: Promise&lt;boolean&gt;
         description: ''
+  - name: generateSasUrl(DirectoryGenerateSasUrlOptions)
+    uid: '@azure/storage-file-datalake.DataLakeDirectoryClient.generateSasUrl'
+    package: '@azure/storage-file-datalake'
+    summary: >
+      Only available for clients constructed with a shared key credential.
+
+      Generates a Service Shared Access Signature (SAS) URI based on the client
+      properties
+
+      and parameters passed in. The SAS is signed by the shared key credential
+      of the client.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function generateSasUrl(options: DirectoryGenerateSasUrlOptions)'
+      parameters:
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/storage-file-datalake.DirectoryGenerateSasUrlOptions" />
+          description: Optional parameters.
+      return:
+        type: Promise&lt;string&gt;
+        description: >-
+          The SAS URI consisting of the URI to the resource represented by this
+          client, followed by the generated SAS token.
   - name: getAccessControl(PathGetAccessControlOptions)
     uid: '@azure/storage-file-datalake.DataLakeDirectoryClient.getAccessControl'
     package: '@azure/storage-file-datalake'
@@ -415,7 +442,8 @@ methods:
           type: string
           description: >-
             Destination directory path like "directory" or file path
-            "directory/file"
+            "directory/file".
+                                            If the destinationPath is authenticated with SAS, add the SAS to the destination path like "directory/file?sasToken".
         - id: options
           type: <xref uid="@azure/storage-file-datalake.PathMoveOptions" />
           description: ''
@@ -444,6 +472,7 @@ methods:
           description: >-
             Destination directory path like "directory" or file path
             "directory/file"
+                                            If the destinationPath is authenticated with SAS, add the SAS to the destination path like "directory/file?sasToken".
         - id: options
           type: <xref uid="@azure/storage-file-datalake.PathMoveOptions" />
           description: ''

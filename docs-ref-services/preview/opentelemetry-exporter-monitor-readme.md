@@ -3,7 +3,7 @@ title: Azure Monitor OpenTelemetry Exporter client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/opentelemetry-exporter-azure-monitor, 
 author: maggiepint
 ms.author: magpint
-ms.date: 01/14/2021
+ms.date: 01/20/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Monitor OpenTelemetry Exporter client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Monitor OpenTelemetry Exporter client library for JavaScript - Version 1.0.0-beta.2 
 
 
 [![npm version](https://badge.fury.io/js/%40microsoft%2Fopentelemetry-exporter-azure-monitor.svg)](https://badge.fury.io/js/%40microsoft%2Fopentelemetry-exporter-azure-monitor)
@@ -74,7 +74,7 @@ Coming Soon
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/opentelemetry-exporter-azure-monitor_1.0.0-beta.1/sdk/monitor/opentelemetry-exporter-azure-monitor/samples/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/opentelemetry-exporter-azure-monitor_1.0.0-beta.2/sdk/monitor/opentelemetry-exporter-azure-monitor/samples/) folder.
 
 ## Key concepts
 
@@ -110,7 +110,7 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/opentelemetry-exporter-azure-monitor_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/opentelemetry-exporter-azure-monitor_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/monitor/opentelemetry-exporter-azure-monitor/README.png)
 

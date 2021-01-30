@@ -42,7 +42,7 @@ a lot of the new features and performance improvements available in the latest v
 
 | NPM Package                                                        | Reference                                                                                            | Samples                                                                                                                              |
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| [@azure/service-bus v1](https://www.npmjs.com/package/@azure/service-bus/v/1.1.10) | [API Reference for @azure/service-bus v1](https://docs.microsoft.com/en-us/javascript/api/@azure/service-bus/?view=azure-node-legacy) | [Samples for sending & receiving messages v1](https://github.com/Azure/azure-sdk-for-js/tree/%40azure/service-bus_1.1.10/sdk/servicebus/service-bus/samples) |
+| [@azure/service-bus v1](https://www.npmjs.com/package/@azure/service-bus/v/1.1.10) | [API Reference for @azure/service-bus v1](https://docs.microsoft.com/javascript/api/@azure/service-bus/?view=azure-node-legacy) | [Samples for sending & receiving messages v1](https://github.com/Azure/azure-sdk-for-js/tree/%40azure/service-bus_1.1.10/sdk/servicebus/service-bus/samples) |
 
 ### v1 of azure-sb
 
@@ -50,6 +50,6 @@ There is a much older package `azure-sb` that allows you to send and receive mes
 
 | NPM Package                                                        | Reference                                                                                            | Samples                                                                                                                              |
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| [azure-sb](https://npmjs.com/package/azure-sb) | [API Reference for azure-sb](https://docs.microsoft.com/en-us/javascript/api/azure-sb/?view=azure-node-legacy) | [Samples for sending & receiving messages](https://www.npmjs.com/package/azure-sb#how-to-use) |
+| [azure-sb](https://npmjs.com/package/azure-sb) | [API Reference for azure-sb](https://docs.microsoft.com/javascript/api/azure-sb/?view=azure-node-legacy) | [Samples for sending & receiving messages](https://www.npmjs.com/package/azure-sb#how-to-use) |
 
 

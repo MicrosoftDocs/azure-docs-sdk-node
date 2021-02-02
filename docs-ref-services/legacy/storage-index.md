@@ -6,7 +6,7 @@ ms.author: cshoe
 manager: routlaw
 ms.date: 01/16/2019
 ms.topic: article
-ms.prod: azure
+ms.service: azure
 ms.devlang: javascript
 ---
 

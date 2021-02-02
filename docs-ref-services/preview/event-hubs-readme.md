@@ -5,9 +5,8 @@ author: maggiepint
 ms.author: magpint
 ms.date: 07/07/2020
 ms.topic: article
-ms.prod: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: azure
 ---
 
 # Azure Event Hubs client library for Javascript - Version 5.3.0-preview.1 

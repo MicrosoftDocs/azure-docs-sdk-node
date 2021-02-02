@@ -5,9 +5,8 @@ author: maggiepint
 ms.author: magpint
 ms.date: 09/08/2020
 ms.topic: article
-ms.prod: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: azure
 ---
 
 # Azure Azure Digital Twins client library for JavaScript - Version 1.0.0-preview.1 

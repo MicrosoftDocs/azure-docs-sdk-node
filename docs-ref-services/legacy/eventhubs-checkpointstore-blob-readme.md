@@ -5,9 +5,8 @@ author: maggiepint
 ms.author: magpint
 ms.date: 08/03/2020
 ms.topic: article
-ms.prod: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: azure
 ---
 
 # Azure Event Hubs Checkpoint Store library for Javascript using Storage Blobs

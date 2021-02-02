@@ -5,9 +5,8 @@ author: maggiepint
 ms.author: magpint
 ms.date: 07/07/2020
 ms.topic: article
-ms.prod: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: azure
 ---
 
 # App Configuration client library for JavaScript

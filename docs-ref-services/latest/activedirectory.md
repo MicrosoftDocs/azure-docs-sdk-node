@@ -6,8 +6,8 @@ ms.author: celested
 manager: mtillman
 ms.date: 02/01/2021
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
+ms.prod: applications
+ms.technology:
 ms.devlang: nodejs
 ---
 

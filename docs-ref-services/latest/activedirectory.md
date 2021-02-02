@@ -16,7 +16,7 @@ ms.devlang: nodejs
 ## Overview
 
 > [!IMPORTANT]
-> To help developers take advantage of all the identity features available in our platform, we recommend that you use the [Microsoft Authentication Library (MSAL)](https://docs.microsoft.com/azure/active-directory/develop/reference-v2-libraries) and the [Microsoft Graph API](https://docs.microsoft.com/graph/overview) in your application development. We are no longer adding any new features to ADAL and Azure AD Graph. We will continue to provide technical support and security updates but will no longer provide feature updates.
+> [ADAL is being deprecated](https://techcommunity.microsoft.com/t5/azure-active-directory-identity/update-your-applications-to-use-microsoft-authentication-library/ba-p/1257363). We recommend that you use the [Microsoft Authentication Library (MSAL)](https://docs.microsoft.com/azure/active-directory/develop/reference-v2-libraries) and the [Microsoft Graph API](https://docs.microsoft.com/graph/overview) in your application development instead.
 >
 > For more info, see these resources:
 > - Code samples for your platform - [Microsoft identity platform code samples](https://docs.microsoft.com/azure/active-directory/develop/sample-v2-code). 

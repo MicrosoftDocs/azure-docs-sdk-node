@@ -4,10 +4,7 @@ name: '@azure/ms-rest-nodeauth'
 summary: ''
 type: package
 classes:
-  - '@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials'
   - '@azure/ms-rest-nodeauth.ApplicationTokenCredentials'
-  - '@azure/ms-rest-nodeauth.ApplicationTokenCredentialsBase'
-  - '@azure/ms-rest-nodeauth.AzureCliCredentials'
   - '@azure/ms-rest-nodeauth.DeviceTokenCredentials'
   - '@azure/ms-rest-nodeauth.MSIAppServiceTokenCredentials'
   - '@azure/ms-rest-nodeauth.MSITokenCredentials'
@@ -15,23 +12,6 @@ classes:
   - '@azure/ms-rest-nodeauth.TokenCredentialsBase'
   - '@azure/ms-rest-nodeauth.TopicCredentials'
   - '@azure/ms-rest-nodeauth.UserTokenCredentials'
-interfaces:
-  - '@azure/ms-rest-nodeauth.AccessTokenOptions'
-  - '@azure/ms-rest-nodeauth.CliAccessToken'
-  - '@azure/ms-rest-nodeauth.ListAllSubscriptionOptions'
-  - '@azure/ms-rest-nodeauth.MSIAppServiceOptions'
-  - '@azure/ms-rest-nodeauth.MSIOptions'
-  - '@azure/ms-rest-nodeauth.MSITokenResponse'
-  - '@azure/ms-rest-nodeauth.MSIVmOptions'
-  - '@azure/ms-rest-nodeauth.TokenClientCredentials'
-  - '@azure/ms-rest-nodeauth.TokenResponse'
-  - '@azure/ms-rest-nodeauth.AuthResponse'
-  - '@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions'
-  - '@azure/ms-rest-nodeauth.InteractiveLoginOptions'
-  - '@azure/ms-rest-nodeauth.LoginWithAuthFileOptions'
-  - '@azure/ms-rest-nodeauth.LoginWithUsernamePasswordOptions'
-  - '@azure/ms-rest-nodeauth.LinkedSubscription'
-  - '@azure/ms-rest-nodeauth.LinkedUser'
 functions:
   - name: createAuthenticator(MSITokenCredentials)
     uid: '@azure/ms-rest-nodeauth.createAuthenticator'
@@ -49,41 +29,15 @@ functions:
       return:
         type: Authenticator
         description: ''
-  - name: execAz(string)
-    uid: '@azure/ms-rest-nodeauth.execAz'
-    package: '@azure/ms-rest-nodeauth'
-    summary: >-
-      Executes the azure cli command and returns the result. It will be
-      `undefined` if the command did
-
-      not return anything or a `JSON object` if the command did return
-      something.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function execAz(cmd: string)'
-      parameters:
-        - id: cmd
-          type: string
-          description: |
-            The az cli command to execute.
-      return:
-        type: Promise&lt;any&gt;
-        description: ''
   - name: interactive()
     uid: '@azure/ms-rest-nodeauth.interactive'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides a url and code that needs to be copy and pasted in a browser and
       authenticated over there. If successful, the user will get a
+
       DeviceTokenCredentials object and the list of subscriptions associated
       with that userId across all the applicable tenants.
-
-      When using personal accounts, the `domain` property in the `options`
-      parameter is required to be set to the Id of a tenant for that account.
-      Otherwise, the resulting credential will not be able to access the
-      account's resources.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -98,9 +52,9 @@ functions:
           callback else returns a Promise.
 
              {function} optionalCallback(err, credentials)
-                          {Error}                          [err]  - The Error object if an error occurred, null otherwise.
-                          {DeviceTokenCredentials} [credentials]  - The DeviceTokenCredentials object.
-                          {Array}                [subscriptions]  - List of associated subscriptions across all the applicable tenants.
+                          {Error}  [err]                           - The Error object if an error occurred, null otherwise.
+                          {DeviceTokenCredentials} [credentials]   - The DeviceTokenCredentials object.
+                          {Array}                [subscriptions]   - List of associated subscriptions across all the applicable tenants.
              {Promise} A promise is returned.
                       @resolve {DeviceTokenCredentials} The DeviceTokenCredentials object.
                       @reject {Error} - The error object.
@@ -363,19 +317,16 @@ functions:
 
       2. az cloud set –n <name of the environment>
 
-      3. az ad sp create-for-rbac --sdk-auth > auth.json // create sp with
-      secret
-       **OR**
-      3. az ad sp create-for-rbac --create-cert --sdk-auth > auth.json // create
-      sp with certificate
+      3. az ad sp create-for-rbac --sdk-auth > auth.json
 
       If the service principal is already created then login with service
       principal info:
 
-      4. az login --service-principal -u <clientId> -p <clientSecret> -t
+      3. az login --service-principal -u <clientId> -p <clientSecret> -t
       <tenantId>
 
-      5. az account show --sdk-auth > auth.json
+      4. az account show --sdk-auth > auth.json
+
 
       Authenticates using the service principal information provided in the auth
       file. This method will set
@@ -474,19 +425,16 @@ functions:
 
       2. az cloud set –n <name of the environment>
 
-      3. az ad sp create-for-rbac --sdk-auth > auth.json // create sp with
-      secret
-       **OR**
-      3. az ad sp create-for-rbac --create-cert --sdk-auth > auth.json // create
-      sp with certificate
+      3. az ad sp create-for-rbac --sdk-auth > auth.json
 
       If the service principal is already created then login with service
       principal info:
 
-      4. az login --service-principal -u <clientId> -p <clientSecret> -t
+      3. az login --service-principal -u <clientId> -p <clientSecret> -t
       <tenantId>
 
-      5. az account show --sdk-auth > auth.json
+      4. az account show --sdk-auth > auth.json
+
 
       Authenticates using the service principal information provided in the auth
       file. This method will set
@@ -509,21 +457,17 @@ functions:
       return:
         type: Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse" />&gt;
         description: >-
-          A Promise that resolves to AuthResponse, which contains "credentials"
+          A Promise that resolves to AuthResponse that contains "credentials"
           and optional "subscriptions" array and rejects with an Error.
   - name: withInteractiveWithAuthResponse(InteractiveLoginOptions)
     uid: '@azure/ms-rest-nodeauth.withInteractiveWithAuthResponse'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides a url and code that needs to be copy and pasted in a browser and
       authenticated over there. If successful, the user will get a
+
       DeviceTokenCredentials object and the list of subscriptions associated
       with that userId across all the applicable tenants.
-
-      When using personal accounts, the `domain` property in the `options`
-      parameter is required to be set to the Id of a tenant for that account.
-      Otherwise, the resulting credential will not be able to access the
-      account's resources.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -538,224 +482,15 @@ functions:
       return:
         type: Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse" />&gt;
         description: >-
-          A Promise that resolves to AuthResponse, which contains "credentials"
-          and optional "subscriptions" array and rejects with an Error.
-  - name: 'withServicePrincipalCertificate(string, string, string)'
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalCertificate'
-    package: '@azure/ms-rest-nodeauth'
-    summary: >
-      Provides an ApplicationTokenCertificateCredentials object and the list of
-      subscriptions associated with that servicePrincipalId/clientId across all
-      the applicable tenants.
-
-      When using personal accounts, the `domain` parameter is required to be set
-      to the Id of a tenant for that account. Otherwise, the resulting
-      credential will not be able to access the account's resources.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function withServicePrincipalCertificate(clientId: string,
-        certificateStringOrFilePath: string, domain: string)
-      parameters:
-        - id: clientId
-          type: string
-          description: >-
-            The active directory application client Id also known as the SPN
-            (ServicePrincipal Name).
-
-            See [Active Directory Quickstart for
-            .Net](https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/)
-
-            for an example.
-        - id: certificateStringOrFilePath
-          type: string
-          description: >-
-            A PEM encoded certificate and private key OR an absolute filepath to
-            the .pem file containing that information. For example:
-
-            - CertificateString: "-----BEGIN PRIVATE KEY-----\n<xxxxx>\n-----END
-            PRIVATE KEY-----\n-----BEGIN CERTIFICATE-----\n<yyyyy>\n-----END
-            CERTIFICATE-----\n"
-
-            - CertificateFilePath: **Absolute** file path of the .pem file.
-        - id: domain
-          type: string
-          description: The domain or tenant Id containing this application.
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
-          />&gt;
-        description: >-
-          If a callback was passed as the last parameter then it returns the
-          callback else returns a Promise.
-
-             {function} optionalCallback(err, credentials)
-                          {Error}  [err]                               - The Error object if an error occurred, null otherwise.
-                          {ApplicationTokenCertificateCredentials} [credentials]  - The ApplicationTokenCertificateCredentials object.
-                          {Array}                [subscriptions]       - List of associated subscriptions across all the applicable tenants.
-             {Promise} A promise is returned.
-                      @resolve {ApplicationTokenCertificateCredentials} The ApplicationTokenCertificateCredentials object.
-                      @reject {Error} - The error object.
-  - name: >-
-      withServicePrincipalCertificate(string, string, string,
-      AzureTokenCredentialsOptions)
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalCertificate_1'
-    package: '@azure/ms-rest-nodeauth'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function withServicePrincipalCertificate(clientId: string,
-        certificateStringOrFilePath: string, domain: string, options:
-        AzureTokenCredentialsOptions)
-      parameters:
-        - id: clientId
-          type: string
-          description: ''
-        - id: certificateStringOrFilePath
-          type: string
-          description: ''
-        - id: domain
-          type: string
-          description: ''
-        - id: options
-          type: <xref uid="@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions" />
-          description: ''
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" />&gt;
-        description: ''
-  - name: >-
-      withServicePrincipalCertificate(string, string, string,
-      AzureTokenCredentialsOptions, (err: Error, credentials:
-      ApplicationTokenCertificateCredentials, subscriptions:
-      Array<LinkedSubscription>) => void)
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalCertificate_2'
-    package: '@azure/ms-rest-nodeauth'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function withServicePrincipalCertificate(clientId: string,
-        certificateStringOrFilePath: string, domain: string, options:
-        AzureTokenCredentialsOptions, callback: (err: Error, credentials:
-        ApplicationTokenCertificateCredentials, subscriptions:
-        Array<LinkedSubscription>) => void)
-      parameters:
-        - id: clientId
-          type: string
-          description: ''
-        - id: certificateStringOrFilePath
-          type: string
-          description: ''
-        - id: domain
-          type: string
-          description: ''
-        - id: options
-          type: <xref uid="@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions" />
-          description: ''
-        - id: callback
-          type: >-
-            (err: Error, credentials: ApplicationTokenCertificateCredentials,
-            subscriptions: Array&lt;LinkedSubscription&gt;) =&gt; void
-          description: ''
-  - name: 'withServicePrincipalCertificate(string, string, string, any)'
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalCertificate_3'
-    package: '@azure/ms-rest-nodeauth'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function withServicePrincipalCertificate(clientId: string,
-        certificateStringOrFilePath: string, domain: string, callback: any)
-      parameters:
-        - id: clientId
-          type: string
-          description: ''
-        - id: certificateStringOrFilePath
-          type: string
-          description: ''
-        - id: domain
-          type: string
-          description: ''
-        - id: callback
-          type: any
-          description: ''
-  - name: >-
-      withServicePrincipalCertificateWithAuthResponse(string, string, string,
-      AzureTokenCredentialsOptions)
-    uid: '@azure/ms-rest-nodeauth.withServicePrincipalCertificateWithAuthResponse'
-    package: '@azure/ms-rest-nodeauth'
-    summary: >
-      Provides an ApplicationTokenCertificateCredentials object and the list of
-      subscriptions associated with that servicePrincipalId/clientId across all
-      the applicable tenants.
-
-      When using personal accounts, the `domain` parameter is required to be set
-      to the Id of a tenant for that account. Otherwise, the resulting
-      credential will not be able to access the account's resources.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function withServicePrincipalCertificateWithAuthResponse(clientId:
-        string, certificateStringOrFilePath: string, domain: string, options?:
-        AzureTokenCredentialsOptions)
-      parameters:
-        - id: clientId
-          type: string
-          description: >-
-            The active directory application client Id also known as the SPN
-            (ServicePrincipal Name).
-
-            See [Active Directory Quickstart for
-            .Net](https://azure.microsoft.com/en-us/documentation/articles/active-directory-devquickstarts-dotnet/)
-
-            for an example.
-        - id: certificateStringOrFilePath
-          type: string
-          description: >-
-            A PEM encoded certificate and private key OR an absolute filepath to
-            the .pem file containing that information. For example:
-
-            - CertificateString: "-----BEGIN PRIVATE KEY-----\n<xxxxx>\n-----END
-            PRIVATE KEY-----\n-----BEGIN CERTIFICATE-----\n<yyyyy>\n-----END
-            CERTIFICATE-----\n"
-
-            - CertificateFilePath: **Absolute** file path of the .pem file.
-        - id: domain
-          type: string
-          description: The domain or tenant Id containing this application.
-        - id: options
-          type: <xref uid="@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse" />&gt;
-        description: >-
-          A Promise that resolves to AuthResponse, which contains "credentials"
+          A Promise that resolves to AuthResponse that contains "credentials"
           and optional "subscriptions" array and rejects with an Error.
   - name: 'withServicePrincipalSecret(string, string, string)'
     uid: '@azure/ms-rest-nodeauth.withServicePrincipalSecret'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides an ApplicationTokenCredentials object and the list of
-      subscriptions associated with that servicePrincipalId/clientId across all
+      subscriptions associated with that servicePrinicpalId/clientId across all
       the applicable tenants.
-
-      When using personal accounts, the `domain` parameter is required to be set
-      to the Id of a tenant for that account. Otherwise, the resulting
-      credential will not be able to access the account's resources.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -767,7 +502,7 @@ functions:
         - id: clientId
           type: string
           description: >-
-            The active directory application client Id also known as the SPN
+            The active directory application client id also known as the SPN
             (ServicePrincipal Name).
 
             See [Active Directory Quickstart for
@@ -779,7 +514,7 @@ functions:
           description: The application secret for the service principal.
         - id: domain
           type: string
-          description: The domain or tenant Id containing this application.
+          description: The domain or tenant id containing this application.
       return:
         type: >-
           Promise&lt;<xref
@@ -789,9 +524,9 @@ functions:
           callback else returns a Promise.
 
              {function} optionalCallback(err, credentials)
-                          {Error}                               [err]  - The Error object if an error occurred, null otherwise.
+                          {Error}  [err]                               - The Error object if an error occurred, null otherwise.
                           {ApplicationTokenCredentials} [credentials]  - The ApplicationTokenCredentials object.
-                          {Array}                     [subscriptions]  - List of associated subscriptions across all the applicable tenants.
+                          {Array}                [subscriptions]       - List of associated subscriptions across all the applicable tenants.
              {Promise} A promise is returned.
                       @resolve {ApplicationTokenCredentials} The ApplicationTokenCredentials object.
                       @reject {Error} - The error object.
@@ -890,14 +625,10 @@ functions:
       AzureTokenCredentialsOptions)
     uid: '@azure/ms-rest-nodeauth.withServicePrincipalSecretWithAuthResponse'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides an ApplicationTokenCredentials object and the list of
-      subscriptions associated with that servicePrincipalId/clientId across all
+      subscriptions associated with that servicePrinicpalId/clientId across all
       the applicable tenants.
-
-      When using personal accounts, the `domain` parameter is required to be set
-      to the Id of a tenant for that account. Otherwise, the resulting
-      credential will not be able to access the account's resources.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -909,7 +640,7 @@ functions:
         - id: clientId
           type: string
           description: >-
-            The active directory application client Id also known as the SPN
+            The active directory application client id also known as the SPN
             (ServicePrincipal Name).
 
             See [Active Directory Quickstart for
@@ -921,30 +652,24 @@ functions:
           description: The application secret for the service principal.
         - id: domain
           type: string
-          description: The domain or tenant Id containing this application.
+          description: The domain or tenant id containing this application.
         - id: options
           type: <xref uid="@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions" />
           description: ''
       return:
         type: Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse" />&gt;
         description: >-
-          A Promise that resolves to AuthResponse, which contains "credentials"
+          A Promise that resolves to AuthResponse that contains "credentials"
           and optional "subscriptions" array and rejects with an Error.
   - name: 'withUsernamePassword(string, string)'
     uid: '@azure/ms-rest-nodeauth.withUsernamePassword'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides a UserTokenCredentials object and the list of subscriptions
       associated with that userId across all the applicable tenants.
 
       This method is applicable only for organizational ids that are not 2FA
       enabled otherwise please use interactive login.
-
-
-      When using personal accounts, the `domain` property in the `options`
-      parameter is required to be set to the Id of a tenant for that account.
-      Otherwise, the resulting credential will not be able to access the
-      account's resources.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -1059,17 +784,12 @@ functions:
       LoginWithUsernamePasswordOptions)
     uid: '@azure/ms-rest-nodeauth.withUsernamePasswordWithAuthResponse'
     package: '@azure/ms-rest-nodeauth'
-    summary: >
+    summary: >-
       Provides a UserTokenCredentials object and the list of subscriptions
       associated with that userId across all the applicable tenants.
 
       This method is applicable only for organizational ids that are not 2FA
       enabled otherwise please use interactive login.
-
-      When using personal accounts, the `domain` property in the `options`
-      parameter is required to be set to the Id of a tenant for that account.
-      Otherwise, the resulting credential will not be able to access the
-      account's resources.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -1092,8 +812,8 @@ functions:
       return:
         type: Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse" />&gt;
         description: >-
-          A Promise that resolves to AuthResponse, which contains `credentials`
-          and an optional `subscriptions` array, and rejects with an Error.
+          A Promise that resolves to AuthResponse that contains "credentials"
+          and optional "subscriptions" array and rejects with an Error.
   - name: 'buildTenantList(TokenCredentialsBase, undefined | string)'
     uid: '@azure/ms-rest-nodeauth.buildTenantList'
     package: '@azure/ms-rest-nodeauth'
@@ -1143,6 +863,20 @@ functions:
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.LinkedSubscription"
           />[]&gt;
         description: ''
+interfaces:
+  - '@azure/ms-rest-nodeauth.MSIAppServiceOptions'
+  - '@azure/ms-rest-nodeauth.MSIOptions'
+  - '@azure/ms-rest-nodeauth.MSITokenResponse'
+  - '@azure/ms-rest-nodeauth.MSIVmOptions'
+  - '@azure/ms-rest-nodeauth.TokenClientCredentials'
+  - '@azure/ms-rest-nodeauth.TokenResponse'
+  - '@azure/ms-rest-nodeauth.AuthResponse'
+  - '@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions'
+  - '@azure/ms-rest-nodeauth.InteractiveLoginOptions'
+  - '@azure/ms-rest-nodeauth.LoginWithAuthFileOptions'
+  - '@azure/ms-rest-nodeauth.LoginWithUsernamePasswordOptions'
+  - '@azure/ms-rest-nodeauth.LinkedSubscription'
+  - '@azure/ms-rest-nodeauth.LinkedUser'
 typeAliases:
   - '@azure/ms-rest-nodeauth.Callback'
   - '@azure/ms-rest-nodeauth.UserType'

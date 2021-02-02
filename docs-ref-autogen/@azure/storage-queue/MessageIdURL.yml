@@ -1,0 +1,195 @@
+### YamlMime:TSType
+name: MessageIdURL
+uid: '@azure/storage-queue.MessageIdURL'
+package: '@azure/storage-queue'
+summary: >-
+  A MessageIdURL represents a URL to a specific Azure Storage Queue message
+  allowing you to manipulate the message.
+fullName: MessageIdURL
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+constructors:
+  - name: 'MessageIdURL(string, Pipeline)'
+    uid: '@azure/storage-queue.MessageIdURL.constructor'
+    package: '@azure/storage-queue'
+    summary: Creates an instance of MessageIdURL.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'new MessageIdURL(url: string, pipeline: Pipeline)'
+      parameters:
+        - id: url
+          type: string
+          description: |-
+            A URL string pointing to Azure Storage queue's message, such as
+                                "https://myaccount.queue.core.windows.net/myqueue/messages/messageid". You can
+                                append a SAS if using AnonymousCredential, such as
+                                "https://myaccount.queue.core.windows.net/myqueue/messages/messageid?sasString".
+        - id: pipeline
+          type: <xref uid="@azure/storage-queue.Pipeline" />
+          description: |-
+            Call StorageURL.newPipeline() to create a default
+                                       pipeline, or provide a customized pipeline.
+properties:
+  - name: pipeline
+    uid: '@azure/storage-queue.MessageIdURL.pipeline'
+    package: '@azure/storage-queue'
+    summary: Request policy pipeline.
+    fullName: pipeline
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        type: <xref uid="@azure/storage-queue.Pipeline" />
+        description: ''
+  - name: url
+    uid: '@azure/storage-queue.MessageIdURL.url'
+    package: '@azure/storage-queue'
+    summary: URL string value.
+    fullName: url
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'url: string'
+      return:
+        type: string
+        description: ''
+methods:
+  - name: 'delete(Aborter, string)'
+    uid: '@azure/storage-queue.MessageIdURL.delete'
+    package: '@azure/storage-queue'
+    summary: Delete permanently removes the specified message from its queue.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function delete(aborter: Aborter, popReceipt: string)'
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-queue.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: popReceipt
+          type: string
+          description: >-
+            A valid pop receipt value returned from an earlier call to the
+            dequeue messages or update message operation.
+      return:
+        type: Promise&lt;<xref uid="Models.MessageIdDeleteResponse" />&gt;
+        description: ''
+  - name: 'fromMessagesURL(MessagesURL, string)'
+    uid: '@azure/storage-queue.MessageIdURL.fromMessagesURL'
+    package: '@azure/storage-queue'
+    summary: Creates a MessageIdURL object from MessagesURL
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromMessagesURL(messagesURL: MessagesURL, messageId:
+        string)
+      parameters:
+        - id: messagesURL
+          type: <xref uid="@azure/storage-queue.MessagesURL" />
+          description: ''
+        - id: messageId
+          type: string
+          description: |+
+
+      return:
+        type: <xref uid="@azure/storage-queue.MessageIdURL" />
+        description: ''
+  - name: 'newPipeline(Credential, INewPipelineOptions)'
+    uid: '@azure/storage-queue.MessageIdURL.newPipeline'
+    package: '@azure/storage-queue'
+    summary: >-
+      A static method used to create a new Pipeline object with Credential
+      provided.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function newPipeline(credential: Credential, pipelineOptions?:
+        INewPipelineOptions)
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/storage-queue.Credential" />
+          description: 'Such as AnonymousCredential, SharedKeyCredential or TokenCredential.'
+        - id: pipelineOptions
+          type: <xref uid="@azure/storage-queue.INewPipelineOptions" />
+          description: ''
+      return:
+        type: <xref uid="@azure/storage-queue.Pipeline" />
+        description: A new Pipeline object.
+  - name: 'update(Aborter, string, number, string)'
+    uid: '@azure/storage-queue.MessageIdURL.update'
+    package: '@azure/storage-queue'
+    summary: >-
+      Update changes a message's visibility timeout and contents.
+
+      The message content is up to 64KB in size, and must be in a format that
+      can be included in an XML request with UTF-8 encoding.
+
+      To include markup in the message, the contents of the message must either
+      be XML-escaped or Base64-encode.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function update(aborter: Aborter, popReceipt: string, visibilityTimeout:
+        number, message: string)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-queue.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: popReceipt
+          type: string
+          description: >-
+            A valid pop receipt value returned from an earlier call to the
+            dequeue messages or update message operation.
+        - id: visibilityTimeout
+          type: number
+          description: |-
+            Specifies the new visibility timeout value, in seconds,
+                                              relative to server time. The new value must be larger than or equal to 0,
+                                              and cannot be larger than 7 days. The visibility timeout of a message cannot
+                                              be set to a value later than the expiry time.
+                                              A message can be updated until it has been deleted or has expired.
+        - id: message
+          type: string
+          description: Message to update.
+      return:
+        type: Promise&lt;<xref uid="Models.MessageIdUpdateResponse" />&gt;
+        description: ''
+  - name: withPipeline(Pipeline)
+    uid: '@azure/storage-queue.MessageIdURL.withPipeline'
+    package: '@azure/storage-queue'
+    summary: |-
+      Creates a new MessageIdURL object identical to the source but with the
+      specified request policy pipeline.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function withPipeline(pipeline: Pipeline)'
+      parameters:
+        - id: pipeline
+          type: <xref uid="@azure/storage-queue.Pipeline" />
+          description: ''
+      return:
+        type: <xref uid="@azure/storage-queue.MessageIdURL" />
+        description: ''
+extends: <xref uid="@azure/storage-queue.StorageURL" />

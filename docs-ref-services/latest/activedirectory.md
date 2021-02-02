@@ -66,4 +66,4 @@ context.acquireTokenWithClientCredentials(
 
 ## Other samples
 
-For more code samples that use various Azure packages, explore the [Node.JS samples](https://azure.microsoft.com/resources/samples/?platform=nodejs).
+For more code samples that use various Azure packages, explore the [Node.js samples](https://docs.microsoft.com/samples/browse/?products=azure&terms=node.js).

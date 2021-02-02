@@ -1,10 +1,10 @@
 ---
 title: Azure Active Directory Modules for Node.js
 description: Reference for Azure Active Directory Modules for Node.js
-author: celestedg
+author: CelesteDG
 ms.author: celested
 manager: mtillman
-ms.date: 07/18/2017
+ms.date: 02/01/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -16,7 +16,11 @@ ms.devlang: nodejs
 ## Overview
 
 > [!IMPORTANT]
-> Use [Microsoft Graph](https://graph.microsoft.io/) instead of Azure AD Graph API to access Azure Active Directory resources. Our development efforts are now concentrated on Microsoft Graph and no further enhancements are planned for Azure AD Graph API. For more information, see [Migrate Azure AD Graph apps to Microsoft Graph](https://docs.microsoft.com/graph/migrate-azure-ad-graph-overview).
+> To help developers take advantage of all the identity features available in our platform, we recommend that you use the [Microsoft Authentication Library (MSAL)](https://docs.microsoft.com/azure/active-directory/develop/reference-v2-libraries) and the [Microsoft Graph API](https://docs.microsoft.com/graph/overview) in your application development. We are no longer adding any new features to ADAL and Azure AD Graph. We will continue to provide technical support and security updates but will no longer provide feature updates.
+>
+> For more info, see these resources:
+> - Code samples for your platform - [Microsoft identity platform code samples](https://docs.microsoft.com/azure/active-directory/develop/sample-v2-code). 
+> - Migration guidance - [Migrate to MSAL.js](https://docs.microsoft.com/azure/active-directory/develop/msal-compare-msal-js-and-adal-js) and [Migrate Azure AD Graph apps to Microsoft Graph](https://docs.microsoft.com/graph/migrate-azure-ad-graph-overview).
 
 The [Azure Active Directory Authentication Library (ADAL) for Node.js](https://www.npmjs.com/package/adal-node) enables Node.js applications to authenticate to Azure AD in order to access AAD protected web resources.
 
@@ -60,12 +64,6 @@ context.acquireTokenWithClientCredentials(
 );
 ```
 
-## Samples
-
-| | |
-|---|---|
-| **Azure Active Directory** ||
-| Securing a web API with Azure AD | A NodeJS web API that is secured using Azure AD and OAuth 2.0 access tokens. |
-| Integrating Azure AD into a NodeJS web application | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
+## Other samples
 
 For more code samples that use various Azure packages, explore the [Node.JS samples](https://azure.microsoft.com/resources/samples/?platform=nodejs).

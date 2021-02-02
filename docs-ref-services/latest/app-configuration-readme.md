@@ -1,5 +1,5 @@
 ---
-title: App Configuration client library for JavaScript
+title: Use App Configuration client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/app-configuration, 
 author: maggiepint
 ms.author: magpint

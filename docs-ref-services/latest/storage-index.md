@@ -7,7 +7,6 @@ manager: routlaw
 ms.date: 01/16/2019
 ms.topic: article
 ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: storage
 ---

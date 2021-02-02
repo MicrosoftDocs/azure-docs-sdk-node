@@ -6,7 +6,6 @@ ms.author: magpint
 ms.date: 09/08/2020
 ms.topic: article
 ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: 
 ---

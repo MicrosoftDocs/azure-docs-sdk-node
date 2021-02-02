@@ -1,12 +1,11 @@
 ---
-title: 
+title: Azure Event Hubs Checkpoint Store library for Javascript
 keywords: Azure, javascript, SDK, API, @azure/eventhubs-checkpointstore-blob, 
 author: maggiepint
 ms.author: magpint
 ms.date: 08/03/2020
 ms.topic: article
 ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: 
 ---

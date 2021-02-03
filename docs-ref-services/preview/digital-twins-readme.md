@@ -5,10 +5,8 @@ author: maggiepint
 ms.author: magpint
 ms.date: 09/08/2020
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: azure
 ---
 
 # Azure Azure Digital Twins client library for JavaScript - Version 1.0.0-preview.1 
@@ -128,7 +126,7 @@ See https://github.com/Azure/ms-rest-browserauth to learn how to authenticate to
 ## Key concepts
 
 Azure Digital Twins Preview is an Azure IoT service that creates comprehensive models of the physical environment. It can create spatial intelligence graphs to model the relationships and interactions between people, spaces, and devices.
-You can learn more about Azure Digital Twins by visiting [Azure Digital Twins Documentation](https://docs.microsoft.com/en-us/azure/digital-twins/)
+You can learn more about Azure Digital Twins by visiting [Azure Digital Twins Documentation](https://docs.microsoft.com/azure/digital-twins/)
 
 ## Examples
 

@@ -28,7 +28,7 @@ Notification Hubs works great for both enterprise and consumer scenarios. Here a
 
 ### Install the npm module
 
-Install the Azure Notification Hubs module 
+Install the Azure Notification Hubs module
 
 ```bash
 npm install @azure/arm-notificationhubs
@@ -37,7 +37,7 @@ npm install @azure/arm-notificationhubs
 ## Samples
 
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-notificationhubs)
-* [App Service Mobile completed quickstart for JavaScript backend](https://azure.microsoft.com/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
-* [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running JavaScript](https://azure.microsoft.com/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
+* [App Service Mobile completed quickstart for JavaScript backend](https://github.com/Azure-Samples/app-service-mobile-nodejs-backend-quickstart)
+* [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running JavaScript](https://github.com/Azure-Samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

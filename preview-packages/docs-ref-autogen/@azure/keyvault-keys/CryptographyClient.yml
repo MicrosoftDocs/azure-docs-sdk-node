@@ -2,13 +2,47 @@
 name: CryptographyClient
 uid: '@azure/keyvault-keys.CryptographyClient'
 package: '@azure/keyvault-keys'
-summary: A client used to perform cryptographic operations with Azure Key Vault keys.
+summary: |-
+  A client used to perform cryptographic operations on an Azure Key vault key
+  or a local <xref:JsonWebKey>.
 fullName: CryptographyClient
 remarks: ''
 isPreview: false
 isDeprecated: false
 type: class
 constructors:
+  - name: CryptographyClient(JsonWebKey)
+    uid: '@azure/keyvault-keys.CryptographyClient.constructor_1'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Constructs a new instance of the Cryptography client for the given key in
+      local mode.
+
+      Example usage:
+
+      ```ts
+
+      import { CryptographyClient } from "@azure/keyvault-keys";
+
+
+      const jsonWebKey: JsonWebKey = {
+        // ...
+      };
+
+      const client = new CryptographyClient(jsonWebKey);
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'new CryptographyClient(key: JsonWebKey)'
+      parameters:
+        - id: key
+          type: <xref uid="@azure/keyvault-keys.JsonWebKey" />
+          description: >-
+            The key to use during cryptography tasks. You can also pass the
+            identifier of the key i.e its url here.
   - name: >-
       CryptographyClient(string | KeyVaultKey, TokenCredential,
       CryptographyClientOptions)
@@ -48,22 +82,39 @@ constructors:
           type: TokenCredential
           description: >-
             An object that implements the `TokenCredential` interface used to
-            authenticate requests to the service. Use the @azure/identity
+            authenticate requests to the service. Use the \@azure/identity
             package to create a credential that suits your needs.
         - id: pipelineOptions
           type: <xref uid="@azure/keyvault-keys.CryptographyClientOptions" />
-          description: ''
+          description: |
+            Pipeline options used to configure Key Vault API requests.
+                                     Omit this parameter to use the default pipeline configuration.
 properties:
+  - name: keyId
+    uid: '@azure/keyvault-keys.CryptographyClient.keyId'
+    package: '@azure/keyvault-keys'
+    summary: The ID of the key used to perform cryptographic operations for the client.
+    fullName: keyId
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: string | undefined keyId
+      return:
+        type: string | undefined
+        description: ''
   - name: vaultUrl
     uid: '@azure/keyvault-keys.CryptographyClient.vaultUrl'
     package: '@azure/keyvault-keys'
-    summary: The base URL to the vault
+    summary: |-
+      The base URL to the vault.
+      Will be empty if called on a local key.
     fullName: vaultUrl
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'vaultUrl: string'
+      content: string vaultUrl
       return:
         type: string
         description: ''
@@ -94,7 +145,8 @@ methods:
           description: The text to decrypt.
         - id: options
           type: <xref uid="@azure/keyvault-keys.DecryptOptions" />
-          description: ''
+          description: |
+            Additional options.
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.DecryptResult" />&gt;
         description: ''
@@ -124,7 +176,8 @@ methods:
           description: The text to encrypt.
         - id: options
           type: <xref uid="@azure/keyvault-keys.EncryptOptions" />
-          description: ''
+          description: |
+            Additional options.
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.EncryptResult" />&gt;
         description: ''
@@ -154,7 +207,8 @@ methods:
           description: The digest of the data to sign.
         - id: options
           type: <xref uid="@azure/keyvault-keys.SignOptions" />
-          description: ''
+          description: |
+            Additional options.
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.SignResult" />&gt;
         description: ''
@@ -184,7 +238,8 @@ methods:
           description: The data to sign.
         - id: options
           type: <xref uid="@azure/keyvault-keys.SignOptions" />
-          description: ''
+          description: |
+            Additional options.
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.SignResult" />&gt;
         description: ''
@@ -214,7 +269,8 @@ methods:
           description: The encrypted key to unwrap.
         - id: options
           type: <xref uid="@azure/keyvault-keys.UnwrapKeyOptions" />
-          description: ''
+          description: |
+            Additional options.
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.UnwrapResult" />&gt;
         description: ''
@@ -247,7 +303,8 @@ methods:
           description: The signature to verify the digest against.
         - id: options
           type: <xref uid="@azure/keyvault-keys.VerifyOptions" />
-          description: ''
+          description: |
+            Additional options.
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.VerifyResult" />&gt;
         description: ''
@@ -280,7 +337,8 @@ methods:
           description: The signature to verify the block against.
         - id: options
           type: <xref uid="@azure/keyvault-keys.VerifyOptions" />
-          description: ''
+          description: |
+            Additional options.
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.VerifyResult" />&gt;
         description: ''
@@ -310,7 +368,8 @@ methods:
           description: The key to wrap.
         - id: options
           type: <xref uid="@azure/keyvault-keys.WrapKeyOptions" />
-          description: ''
+          description: |
+            Additional options.
       return:
         type: Promise&lt;<xref uid="@azure/keyvault-keys.WrapResult" />&gt;
         description: ''

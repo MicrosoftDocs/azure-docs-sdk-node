@@ -19,7 +19,8 @@ constructors:
       WebResource(string, HttpMethods, unknown, [key: string]: any, [key:
       string]: any | HttpHeadersLike, boolean, boolean, AbortSignalLike, number,
       (progress: TransferProgressEvent) => void, (progress:
-      TransferProgressEvent) => void, ProxySettings, boolean, boolean)
+      TransferProgressEvent) => void, ProxySettings, boolean, boolean,
+      Set<number>)
     uid: '@azure/core-http.WebResource.constructor'
     package: '@azure/core-http'
     summary: ''
@@ -35,7 +36,7 @@ constructors:
         onUploadProgress?: (progress: TransferProgressEvent) => void,
         onDownloadProgress?: (progress: TransferProgressEvent) => void,
         proxySettings?: ProxySettings, keepAlive?: boolean, decompressResponse?:
-        boolean)
+        boolean, streamResponseStatusCodes?: Set<number>)
       parameters:
         - id: url
           type: string
@@ -80,6 +81,9 @@ constructors:
           description: ''
         - id: decompressResponse
           type: boolean
+          description: ''
+        - id: streamResponseStatusCodes
+          type: Set&lt;number&gt;
           description: ''
 properties:
   - name: abortSignal
@@ -312,17 +316,35 @@ properties:
   - name: streamResponseBody
     uid: '@azure/core-http.WebResource.streamResponseBody'
     package: '@azure/core-http'
-    summary: >-
-      Whether or not the body of the HttpOperationResponse should be treated as
-      a stream.
+    summary: ''
     fullName: streamResponseBody
     remarks: ''
     isPreview: false
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: >-
+      Use streamResponseStatusCodes property instead.
+
+      Whether or not the body of the HttpOperationResponse should be treated as
+      a stream.
     syntax:
       content: 'streamResponseBody?: boolean'
       return:
         type: boolean
+        description: ''
+  - name: streamResponseStatusCodes
+    uid: '@azure/core-http.WebResource.streamResponseStatusCodes'
+    package: '@azure/core-http'
+    summary: >-
+      A list of status codes whose corresponding HttpOperationResponse body
+      should be treated as a stream.
+    fullName: streamResponseStatusCodes
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'streamResponseStatusCodes?: Set<number>'
+      return:
+        type: Set&lt;number&gt;
         description: ''
   - name: timeout
     uid: '@azure/core-http.WebResource.timeout'

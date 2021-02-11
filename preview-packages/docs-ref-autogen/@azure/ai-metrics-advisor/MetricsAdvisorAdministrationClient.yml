@@ -12,8 +12,8 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      MetricsAdvisorAdministrationClient(string, MetricsAdvisorKeyCredential,
-      MetricsAdvisorAdministrationClientOptions)
+      MetricsAdvisorAdministrationClient(string, TokenCredential |
+      MetricsAdvisorKeyCredential, MetricsAdvisorAdministrationClientOptions)
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.constructor'
     package: '@azure/ai-metrics-advisor'
     summary: >-
@@ -39,21 +39,24 @@ constructors:
     syntax:
       content: >-
         new MetricsAdvisorAdministrationClient(endpointUrl: string, credential:
-        MetricsAdvisorKeyCredential, options?:
+        TokenCredential | MetricsAdvisorKeyCredential, options?:
         MetricsAdvisorAdministrationClientOptions)
       parameters:
         - id: endpointUrl
           type: string
           description: Url to an Azure Metrics Advisor service endpoint
         - id: credential
-          type: <xref uid="@azure/ai-metrics-advisor.MetricsAdvisorKeyCredential" />
+          type: >-
+            TokenCredential | <xref
+            uid="@azure/ai-metrics-advisor.MetricsAdvisorKeyCredential" />
           description: Used to authenticate requests to the service.
         - id: options
           type: >-
             <xref
             uid="@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClientOptions"
             />
-          description: ''
+          description: |
+            Used to configure the Metrics Advisor client.
 properties:
   - name: endpointUrl
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.endpointUrl'
@@ -87,8 +90,7 @@ methods:
             Omit&lt;<xref
             uid="@azure/ai-metrics-advisor.AnomalyAlertConfiguration" />,
             "id"&gt;
-          description: |
-            the alert configuration object to create
+          description: The alert configuration object to create
         - id: options
           type: OperationOptions
           description: ''
@@ -97,12 +99,12 @@ methods:
           Promise&lt;<xref
           uid="@azure/ai-metrics-advisor.GetAnomalyAlertConfigurationResponse"
           />&gt;
-        description: ''
+        description: Response with Alert object
   - name: 'createDataFeed(DataFeedDescriptor, OperationOptions)'
     uid: >-
       @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createDataFeed
     package: '@azure/ai-metrics-advisor'
-    summary: Adds a new data feed for a specifc data source and provided settings
+    summary: Adds a new data feed for a specific data source and provided settings
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -121,7 +123,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetDataFeedResponse"
           />&gt;
-        description: ''
+        description: Response with Datafeed object
   - name: >-
       createDetectionConfig(Omit<AnomalyDetectionConfiguration, "id">,
       OperationOptions)
@@ -145,14 +147,13 @@ methods:
           description: The detection configuration object to create
         - id: options
           type: OperationOptions
-          description: |
-            The options parameter
+          description: The options parameter
       return:
         type: >-
           Promise&lt;<xref
           uid="@azure/ai-metrics-advisor.GetAnomalyDetectionConfigurationResponse"
           />&gt;
-        description: ''
+        description: Response with Detection Config object
   - name: 'createHook(EmailNotificationHook | WebNotificationHook, OperationOptions)'
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createHook'
     package: '@azure/ai-metrics-advisor'
@@ -174,13 +175,12 @@ methods:
             description, external link and hook parameter
         - id: options
           type: OperationOptions
-          description: |
-            The options parameter.
+          description: The options parameter.
       return:
         type: >-
           Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetHookResponse"
           />&gt;
-        description: ''
+        description: Response with Hook object
   - name: 'deleteAlertConfig(string, OperationOptions)'
     uid: >-
       @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.deleteAlertConfig
@@ -881,10 +881,7 @@ methods:
           description: |
             The options parameter
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ai-metrics-advisor.GetAnomalyAlertConfigurationResponse"
-          />&gt;
+        type: Promise&lt;RestResponse&gt;
         description: ''
   - name: 'updateDataFeed(string, DataFeedPatch, OperationOptions)'
     uid: >-
@@ -910,9 +907,7 @@ methods:
           description: |
             The options parameter.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetDataFeedResponse"
-          />&gt;
+        type: Promise&lt;RestResponse&gt;
         description: ''
   - name: >-
       updateDetectionConfig(string, Partial<Omit<AnomalyDetectionConfiguration,
@@ -948,10 +943,7 @@ methods:
           description: |
             The options parameter.
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ai-metrics-advisor.GetAnomalyDetectionConfigurationResponse"
-          />&gt;
+        type: Promise&lt;RestResponse&gt;
         description: ''
   - name: >-
       updateHook(string, EmailNotificationHookPatch | WebNotificationHookPatch,
@@ -982,7 +974,5 @@ methods:
           description: |
             The options parameter
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetHookResponse"
-          />&gt;
+        type: Promise&lt;RestResponse&gt;
         description: ''

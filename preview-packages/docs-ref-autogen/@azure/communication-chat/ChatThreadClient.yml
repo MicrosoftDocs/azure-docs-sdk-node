@@ -10,7 +10,7 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      ChatThreadClient(string, string, CommunicationUserCredential,
+      ChatThreadClient(string, string, CommunicationTokenCredential,
       ChatThreadClientOptions)
     uid: '@azure/communication-chat.ChatThreadClient.constructor'
     package: '@azure/communication-chat'
@@ -21,7 +21,7 @@ constructors:
     syntax:
       content: >-
         new ChatThreadClient(threadId: string, url: string, credential:
-        CommunicationUserCredential, options?: ChatThreadClientOptions)
+        CommunicationTokenCredential, options?: ChatThreadClientOptions)
       parameters:
         - id: threadId
           type: string
@@ -30,7 +30,7 @@ constructors:
           type: string
           description: ''
         - id: credential
-          type: CommunicationUserCredential
+          type: CommunicationTokenCredential
           description: ''
         - id: options
           type: <xref uid="@azure/communication-chat.ChatThreadClientOptions" />
@@ -50,31 +50,31 @@ properties:
         type: string
         description: ''
 methods:
-  - name: 'addMembers(AddMembersRequest, AddMembersOptions)'
-    uid: '@azure/communication-chat.ChatThreadClient.addMembers'
+  - name: 'addParticipants(AddChatParticipantsRequest, AddParticipantsOptions)'
+    uid: '@azure/communication-chat.ChatThreadClient.addParticipants'
     package: '@azure/communication-chat'
     summary: >-
-      Adds the details of thread members belonging to the thread identified by
-      threadId.
+      Adds the details of chat participants belonging to the thread identified
+      by threadId.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function addMembers(request: AddMembersRequest, options?:
-        AddMembersOptions)
+        function addParticipants(request: AddChatParticipantsRequest, options?:
+        AddParticipantsOptions)
       parameters:
         - id: request
-          type: <xref uid="@azure/communication-chat.AddMembersRequest" />
-          description: Thread members' details to add in the thread roster
+          type: <xref uid="@azure/communication-chat.AddChatParticipantsRequest" />
+          description: Thread participants' details to add in the thread roster
         - id: options
-          type: <xref uid="@azure/communication-chat.AddMembersOptions" />
+          type: <xref uid="@azure/communication-chat.AddParticipantsOptions" />
           description: |
             Operation options.
       return:
         type: >-
-          Promise&lt;<xref uid="@azure/communication-chat.OperationResponse"
-          />&gt;
+          Promise&lt;<xref
+          uid="@azure/communication-chat.AddChatParticipantsResult" />&gt;
         description: ''
   - name: 'deleteMessage(string, DeleteMessageOptions)'
     uid: '@azure/communication-chat.ChatThreadClient.deleteMessage'
@@ -133,27 +133,6 @@ methods:
           Promise&lt;<xref
           uid="@azure/communication-chat.GetChatMessageResponse" />&gt;
         description: ''
-  - name: listMembers(ListMembersOptions)
-    uid: '@azure/communication-chat.ChatThreadClient.listMembers'
-    package: '@azure/communication-chat'
-    summary: |-
-      Gets the members of the thread identified by threadId.
-      Returns the lists of the members.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function listMembers(options?: ListMembersOptions)'
-      parameters:
-        - id: options
-          type: <xref uid="@azure/communication-chat.ListMembersOptions" />
-          description: |
-            Operation options.
-      return:
-        type: >-
-          PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/communication-chat.ChatThreadMember" />&gt;
-        description: ''
   - name: listMessages(ListMessagesOptions)
     uid: '@azure/communication-chat.ChatThreadClient.listMessages'
     package: '@azure/communication-chat'
@@ -175,6 +154,27 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/communication-chat.ChatMessage" />&gt;
         description: ''
+  - name: listParticipants(ListParticipantsOptions)
+    uid: '@azure/communication-chat.ChatThreadClient.listParticipants'
+    package: '@azure/communication-chat'
+    summary: |-
+      Gets the participants of the thread identified by threadId.
+      Returns the lists of the participants.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function listParticipants(options?: ListParticipantsOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/communication-chat.ListParticipantsOptions" />
+          description: |
+            Operation options.
+      return:
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/communication-chat.ChatParticipant" />&gt;
+        description: ''
   - name: listReadReceipts(ListReadReceiptsOptions)
     uid: '@azure/communication-chat.ChatThreadClient.listReadReceipts'
     package: '@azure/communication-chat'
@@ -194,25 +194,25 @@ methods:
       return:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/communication-chat.ReadReceipt" />&gt;
+          uid="@azure/communication-chat.ChatMessageReadReceipt" />&gt;
         description: ''
-  - name: 'removeMember(CommunicationUser, RemoveMemberOptions)'
-    uid: '@azure/communication-chat.ChatThreadClient.removeMember'
+  - name: 'removeParticipant(CommunicationUserIdentifier, RemoveParticipantOptions)'
+    uid: '@azure/communication-chat.ChatThreadClient.removeParticipant'
     package: '@azure/communication-chat'
-    summary: Removes member from the thread identified by threadId.
+    summary: Removes participant from the thread identified by threadId.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function removeMember(member: CommunicationUser, options?:
-        RemoveMemberOptions)
+        function removeParticipant(participant: CommunicationUserIdentifier,
+        options?: RemoveParticipantOptions)
       parameters:
-        - id: member
-          type: CommunicationUser
-          description: Thread member to remove from the thread roster
+        - id: participant
+          type: CommunicationUserIdentifier
+          description: Thread participant to remove from the thread roster
         - id: options
-          type: <xref uid="@azure/communication-chat.RemoveMemberOptions" />
+          type: <xref uid="@azure/communication-chat.RemoveParticipantOptions" />
           description: |
             Operation options.
       return:
@@ -288,7 +288,7 @@ methods:
           type: >-
             <xref uid="@azure/communication-chat.SendTypingNotificationOptions"
             />
-          description: Operation options
+          description: '- Operation options'
       return:
         type: Promise&lt;boolean&gt;
         description: >-

@@ -3,7 +3,7 @@ title: Azure Key Vault Key client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/keyvault-keys, 
 author: maggiepint
 ms.author: magpint
-ms.date: 10/07/2020
+ms.date: 02/09/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,13 +11,13 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Key Vault Key client library for JavaScript - Version 4.2.0-beta.2 
+# Azure Key Vault Key client library for JavaScript - Version 4.2.0-beta.3 
 
 
 Azure Key Vault is a service that allows you to encrypt authentication keys, storage account keys, data encryption keys, .pfx files, and passwords by using secured keys.
 If you would like to know more about Azure Key Vault, you may want to review: [What is Azure Key Vault?](https://docs.microsoft.com/azure/key-vault/key-vault-overview)
 
-Azure Key Vault Key management allows you to create and control 
+Azure Key Vault Key management allows you to create and control
 encryption keys that encrypt your data.
 
 Use the client library for Azure Key Vault Keys in your Node.js application to:
@@ -37,9 +37,9 @@ Using the cryptography client available in this library you also have access to:
 - Wrapping keys
 - Unwrapping keys
 
-> Note: This package cannot be used in the browser due to Azure Key Vault service limitations.
+> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.2.0-beta.3/samples/cors/ts/README.md) for guidance.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-keys_4.2.0-beta.2/sdk/keyvault/keyvault-keys) | [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-keys) | [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-keys) | [Product documentation](https://azure.microsoft.com/services/key-vault/) | [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.2.0-beta.2/sdk/keyvault/keyvault-keys/samples)
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-keys_4.2.0-beta.3/sdk/keyvault/keyvault-keys) | [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-keys) | [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-keys) | [Product documentation](https://azure.microsoft.com/services/key-vault/) | [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.2.0-beta.3/sdk/keyvault/keyvault-keys/samples)
 
 ## Getting started
 
@@ -135,7 +135,7 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
 
 ## Authenticating with Azure Active Directory
 
-The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-keys_4.2.0-beta.2/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-keys_4.2.0-beta.3/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 Here's a quick example. First, import `DefaultAzureCredential` and `KeyClient`:
 
@@ -371,7 +371,7 @@ const client = new KeyClient(url, credential);
 const keyName = "MyKeyName";
 
 async function main() {
-  const poller = await client.beginDeleteKey(keyName)
+  const poller = await client.beginDeleteKey(keyName);
 
   // You can use the deleted key immediately:
   const deletedKey = poller.getResult();
@@ -385,7 +385,7 @@ async function main() {
   // Deleted keys can also be recovered or purged:
 
   // recoverDeletedKey also returns a poller, just like beginDeleteKey.
-  const recoverPoller = await client.beginRecoverDeletedKey(keyName)
+  const recoverPoller = await client.beginRecoverDeletedKey(keyName);
   await recoverPoller.pollUntilDone();
 
   // And here is how to purge a deleted key
@@ -567,7 +567,7 @@ const keysClient = new KeyClient(url, credential);
 async function main() {
   // Create or retrieve a key from the keyvault
   let myKey = await keysClient.createKey("MyKey", "RSA");
-  
+
   // Lastly, create our cryptography client and connect to the service
   // This example uses the URL that is part of the key we created (called key ID)
   const cryptographyClient = new CryptographyClient(myKey.id, credential);
@@ -821,13 +821,13 @@ setLogLevel("info");
 
 You can find more code samples through the following links:
 
-- [KeyVault Keys Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.2.0-beta.2/sdk/keyvault/keyvault-keys/samples/javascript)
-- [KeyVault Keys Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.2.0-beta.2/sdk/keyvault/keyvault-keys/samples/typescript)
-- [KeyVault Keys Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.2.0-beta.2/sdk/keyvault/keyvault-keys/test/)
+- [KeyVault Keys Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.2.0-beta.3/sdk/keyvault/keyvault-keys/samples/javascript)
+- [KeyVault Keys Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.2.0-beta.3/sdk/keyvault/keyvault-keys/samples/typescript)
+- [KeyVault Keys Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.2.0-beta.3/sdk/keyvault/keyvault-keys/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.2.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.2.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-keys%2FREADME.png)
 

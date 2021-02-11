@@ -12,8 +12,8 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      MetricsAdvisorClient(string, MetricsAdvisorKeyCredential,
-      MetricsAdvisorClientOptions)
+      MetricsAdvisorClient(string, TokenCredential |
+      MetricsAdvisorKeyCredential, MetricsAdvisorClientOptions)
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorClient.constructor'
     package: '@azure/ai-metrics-advisor'
     summary: >-
@@ -39,17 +39,21 @@ constructors:
     syntax:
       content: >-
         new MetricsAdvisorClient(endpointUrl: string, credential:
-        MetricsAdvisorKeyCredential, options?: MetricsAdvisorClientOptions)
+        TokenCredential | MetricsAdvisorKeyCredential, options?:
+        MetricsAdvisorClientOptions)
       parameters:
         - id: endpointUrl
           type: string
           description: Url to an Azure Metrics Advisor service endpoint
         - id: credential
-          type: <xref uid="@azure/ai-metrics-advisor.MetricsAdvisorKeyCredential" />
+          type: >-
+            TokenCredential | <xref
+            uid="@azure/ai-metrics-advisor.MetricsAdvisorKeyCredential" />
           description: Used to authenticate requests to the service.
         - id: options
           type: <xref uid="@azure/ai-metrics-advisor.MetricsAdvisorClientOptions" />
-          description: ''
+          description: |
+            Used to configure the Metrics Advisor client.
 properties:
   - name: endpointUrl
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorClient.endpointUrl'
@@ -79,20 +83,19 @@ methods:
       parameters:
         - id: feedback
           type: <xref uid="@azure/ai-metrics-advisor.MetricFeedbackUnion" />
-          description: content of the feedback
+          description: Content of the feedback
         - id: options
           type: OperationOptions
-          description: |
-            The options parameter
+          description: The options parameter
       return:
         type: >-
           Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetFeedbackResponse"
           />&gt;
-        description: ''
+        description: Response with Feedback object
   - name: 'getFeedback(string, OperationOptions)'
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorClient.getFeedback'
     package: '@azure/ai-metrics-advisor'
-    summary: Retrives a metric feedback for the given feedback id.
+    summary: Retrieves a metric feedback for the given feedback id.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -302,7 +305,7 @@ methods:
       parameters:
         - id: alertConfigId
           type: string
-          description: anomaly alerting configuration unique id
+          description: Anomaly alerting configuration unique id
         - id: startTime
           type: Date | string
           description: >-
@@ -527,14 +530,13 @@ methods:
           uid="@azure/ai-metrics-advisor.AnomaliesPageResponse" />&gt;
         description: ''
   - name: >-
-      listDimensionValuesForDetectionConfig(string, Date | string, Date |
-      string, string, ListDimensionValuesForDetectionConfigOptions)
-    uid: >-
-      @azure/ai-metrics-advisor.MetricsAdvisorClient.listDimensionValuesForDetectionConfig
+      listAnomalyDimensionValues(string, Date | string, Date | string, string,
+      ListAnomalyDimensionValuesOptions)
+    uid: '@azure/ai-metrics-advisor.MetricsAdvisorClient.listAnomalyDimensionValues'
     package: '@azure/ai-metrics-advisor'
     summary: >-
-      Returns an async iterable iterator to list dimension values for a
-      detection configuration.
+      Returns an async iterable iterator to list dimension values of anomalies
+      detected by a detection configuration.
 
       `.byPage()` returns an async iterable iterator to list the dimension
       values in pages.
@@ -548,7 +550,7 @@ methods:
       const client = new MetricsAdvisorClient(endpoint,
         new MetricsAdvisorKeyCredential(subscriptionKey, apiKey));
       const dimensionValues = client
-        .listDimensionValuesForDetectionConfiguration(detectionConfigId, startTime, endTime, dimensionName);
+        .listAnomalyDimensionValues(detectionConfigId, startTime, endTime, dimensionName);
       let i = 1;
 
       for await (const dv of dimensionValues) {
@@ -562,7 +564,7 @@ methods:
       ```js
 
       let iter = client
-        .listDimensionValuesForDetectionConfiguration(detectionConfigId, startTime, endTime, dimensionName);
+        .listAnomalyDimensionValues(detectionConfigId, startTime, endTime, dimensionName);
       let result = await iter.next();
 
       while (!result.done) {
@@ -579,7 +581,7 @@ methods:
       ```js
 
       const pages = client
-        .listDimensionValuesForDetectionConfiguration(
+        .listAnomalyDimensionValues(
           detectionConfigId,
           startTime,
           endTime,
@@ -606,9 +608,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listDimensionValuesForDetectionConfig(detectionConfigId:
-        string, startTime: Date | string, endTime: Date | string, dimensionName:
-        string, options?: ListDimensionValuesForDetectionConfigOptions)
+        function listAnomalyDimensionValues(detectionConfigId: string,
+        startTime: Date | string, endTime: Date | string, dimensionName: string,
+        options?: ListAnomalyDimensionValuesOptions)
       parameters:
         - id: detectionConfigId
           type: string
@@ -621,12 +623,11 @@ methods:
           description: The end of time range to query anomalies
         - id: dimensionName
           type: string
-          description: ''
+          description: Name of the dimension for anomaly detection config
         - id: options
           type: >-
             <xref
-            uid="@azure/ai-metrics-advisor.ListDimensionValuesForDetectionConfigOptions"
-            />
+            uid="@azure/ai-metrics-advisor.ListAnomalyDimensionValuesOptions" />
           description: |
             The options parameter.
       return:

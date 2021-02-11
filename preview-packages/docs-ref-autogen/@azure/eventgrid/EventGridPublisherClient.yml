@@ -3,19 +3,20 @@ name: EventGridPublisherClient
 uid: '@azure/eventgrid.EventGridPublisherClient'
 package: '@azure/eventgrid'
 summary: Client class for publishing events to the Event Grid Service.
-fullName: EventGridPublisherClient
+fullName: EventGridPublisherClient<T>
 remarks: ''
 isPreview: false
 isDeprecated: false
 type: class
 constructors:
   - name: >-
-      EventGridPublisherClient(string, KeyCredential | SignatureCredential,
+      EventGridPublisherClient(string, T, KeyCredential | SASCredential,
       EventGridPublisherClientOptions)
     uid: '@azure/eventgrid.EventGridPublisherClient.constructor'
     package: '@azure/eventgrid'
     summary: >
-      Creates an instance of EventGridPublisherClient.
+      Creates an instance of EventGridPublisherClient which sends events using
+      the Event Grid Schema.
 
       Example usage:
 
@@ -27,6 +28,7 @@ constructors:
 
       const client = new EventGridPublisherClient(
          "<service endpoint>",
+         "EventGrid",
          new AzureKeyCredential("<api key>")
       );
 
@@ -36,22 +38,27 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new EventGridPublisherClient(endpointUrl: string, credential:
-        KeyCredential | SignatureCredential, options?:
+        new EventGridPublisherClient(endpointUrl: string, inputSchema: T,
+        credential: KeyCredential | SASCredential, options?:
         EventGridPublisherClientOptions)
       parameters:
         - id: endpointUrl
           type: string
           description: >-
-            The URL to the EventGrid endpoint, e.g.
-            https://eg-topic.westus2-1.eventgrid.azure.net/api/events
+            The URL to the Event Grid endpoint, e.g.
+            https://eg-topic.westus2-1.eventgrid.azure.net/api/events.
+        - id: inputSchema
+          type: T
+          description: >-
+            The schema that the Event Grid endpoint is configured to accept. One
+            of "EventGrid", "CloudEvent", or "Custom".
         - id: credential
-          type: KeyCredential | <xref uid="@azure/eventgrid.SignatureCredential" />
+          type: KeyCredential | SASCredential
           description: Used to authenticate requests to the service.
         - id: options
           type: <xref uid="@azure/eventgrid.EventGridPublisherClientOptions" />
           description: |
-            Used to configure the Event Grid Client
+            Used to configure the Event Grid Client.
 properties:
   - name: apiVersion
     uid: '@azure/eventgrid.EventGridPublisherClient.apiVersion'
@@ -80,74 +87,27 @@ properties:
         type: string
         description: ''
 methods:
-  - name: 'sendCloudEvents(SendCloudEventInput<any>[], SendCloudEventsOptions)'
-    uid: '@azure/eventgrid.EventGridPublisherClient.sendCloudEvents'
+  - name: 'send(InputSchemaToInputTypeMap[T][], SendOptions)'
+    uid: '@azure/eventgrid.EventGridPublisherClient.send'
     package: '@azure/eventgrid'
-    summary: >-
-      Publishes events in the Cloud Events 1.0 schema. The topic must be
-      configured to expect events in the Cloud Events 1.0 schema.
+    summary: Sends events to a topic.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function sendCloudEvents(events: SendCloudEventInput<any>[], options?:
-        SendCloudEventsOptions)
+        function send(events: InputSchemaToInputTypeMap[T][], options?:
+        SendOptions)
       parameters:
         - id: events
-          type: '<xref uid="@azure/eventgrid.SendCloudEventInput" />&lt;any&gt;[]'
-          description: ''
+          type: 'InputSchemaToInputTypeMap[T][]'
+          description: >-
+            The events to send. The events should be in the schema used when
+            constructing the client.
         - id: options
-          type: <xref uid="@azure/eventgrid.SendCloudEventsOptions" />
-          description: ''
+          type: <xref uid="@azure/eventgrid.SendOptions" />
+          description: |
+            Options to control the underlying operation.
       return:
-        type: Promise&lt;<xref uid="@azure/eventgrid.SendEventsResponse" />&gt;
-        description: ''
-  - name: >-
-      sendCustomSchemaEvents(Record<string, any>[],
-      SendCustomSchemaEventsOptions)
-    uid: '@azure/eventgrid.EventGridPublisherClient.sendCustomSchemaEvents'
-    package: '@azure/eventgrid'
-    summary: >-
-      Publishes events written using a custom schema. The topic must be
-      configured to expect events in a custom schema.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function sendCustomSchemaEvents(events: Record<string, any>[], options?:
-        SendCustomSchemaEventsOptions)
-      parameters:
-        - id: events
-          type: 'Record&lt;string, any&gt;[]'
-          description: ''
-        - id: options
-          type: <xref uid="@azure/eventgrid.SendCustomSchemaEventsOptions" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="@azure/eventgrid.SendEventsResponse" />&gt;
-        description: ''
-  - name: 'sendEvents(SendEventGridEventInput<any>[], SendEventsOptions)'
-    uid: '@azure/eventgrid.EventGridPublisherClient.sendEvents'
-    package: '@azure/eventgrid'
-    summary: >-
-      Publishes events in the Event Grid scheama. The topic must be configured
-      to expect events in the Event Grid schema.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function sendEvents(events: SendEventGridEventInput<any>[], options?:
-        SendEventsOptions)
-      parameters:
-        - id: events
-          type: '<xref uid="@azure/eventgrid.SendEventGridEventInput" />&lt;any&gt;[]'
-          description: ''
-        - id: options
-          type: <xref uid="@azure/eventgrid.SendEventsOptions" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="@azure/eventgrid.SendEventsResponse" />&gt;
+        type: Promise&lt;void&gt;
         description: ''

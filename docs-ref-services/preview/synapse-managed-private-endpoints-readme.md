@@ -3,7 +3,7 @@ title: Azure Synapse Managed Private Endpoints client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/synapse-managed-private-endpoints, 
 author: maggiepint
 ms.author: magpint
-ms.date: 12/09/2020
+ms.date: 02/09/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-## Azure Synapse Managed Private Endpoints client library for JavaScript - Version 1.0.0-beta.1 
+## Azure Synapse Managed Private Endpoints client library for JavaScript - Version 1.0.0-beta.2 
 
 
 This package contains an isomorphic SDK for Managed Private Endpoints.
@@ -73,7 +73,7 @@ In the future, you'll find additional code samples here.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-managed-private-endpoints_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-managed-private-endpoints_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-keys%2FREADME.png)
 

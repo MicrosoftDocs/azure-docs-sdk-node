@@ -4,17 +4,15 @@ name: '@azure/ms-rest-js'
 summary: ''
 type: package
 classes:
-  - '@azure/ms-rest-js.BrowserFetchHttpClient'
+  - '@azure/ms-rest-js.AxiosHttpClient'
   - '@azure/ms-rest-js.ApiKeyCredentials'
   - '@azure/ms-rest-js.AzureIdentityCredentialAdapter'
   - '@azure/ms-rest-js.BasicAuthenticationCredentials'
   - '@azure/ms-rest-js.DomainCredentials'
   - '@azure/ms-rest-js.TokenCredentials'
   - '@azure/ms-rest-js.TopicCredentials'
-  - '@azure/ms-rest-js.FetchHttpClient'
   - '@azure/ms-rest-js.HttpHeaders'
   - '@azure/ms-rest-js.ConsoleHttpPipelineLogger'
-  - '@azure/ms-rest-js.NodeFetchHttpClient'
   - '@azure/ms-rest-js.AgentPolicy'
   - '@azure/ms-rest-js.DeserializationPolicy'
   - '@azure/ms-rest-js.ExponentialRetryPolicy'
@@ -39,12 +37,13 @@ classes:
   - '@azure/ms-rest-js.WebResource'
   - '@azure/ms-rest-js.XhrHttpClient'
 interfaces:
+  - '@azure/ms-rest-js.HttpsOverHttpsOptions'
+  - '@azure/ms-rest-js.HttpsProxyOptions'
   - '@azure/ms-rest-js.ApiKeyCredentialOptions'
   - '@azure/ms-rest-js.ServiceClientCredentials'
   - '@azure/ms-rest-js.TokenResponse'
   - '@azure/ms-rest-js.HttpClient'
   - '@azure/ms-rest-js.HttpHeader'
-  - '@azure/ms-rest-js.HttpHeadersLike'
   - '@azure/ms-rest-js.HttpOperationResponse'
   - '@azure/ms-rest-js.HttpResponse'
   - '@azure/ms-rest-js.RestResponse'
@@ -59,7 +58,6 @@ interfaces:
   - '@azure/ms-rest-js.RetryData'
   - '@azure/ms-rest-js.RetryError'
   - '@azure/ms-rest-js.RequestPolicy'
-  - '@azure/ms-rest-js.RequestPolicyOptionsLike'
   - '@azure/ms-rest-js.BaseMapper'
   - '@azure/ms-rest-js.CompositeMapper'
   - '@azure/ms-rest-js.CompositeMapperType'
@@ -81,15 +79,14 @@ interfaces:
   - '@azure/ms-rest-js.ParameterValue'
   - '@azure/ms-rest-js.RequestOptionsBase'
   - '@azure/ms-rest-js.RequestPrepareOptions'
-  - '@azure/ms-rest-js.WebResourceLike'
 typeAliases:
+  - '@azure/ms-rest-js.ProxyAgent'
   - '@azure/ms-rest-js.Authenticator'
   - '@azure/ms-rest-js.RawHttpHeaders'
   - '@azure/ms-rest-js.ParameterPath'
   - '@azure/ms-rest-js.RequestPolicyFactory'
   - '@azure/ms-rest-js.ResponseHandler'
   - '@azure/ms-rest-js.TelemetryInfo'
-  - '@azure/ms-rest-js.ProxyAgent'
   - '@azure/ms-rest-js.Mapper'
   - '@azure/ms-rest-js.MapperType'
   - '@azure/ms-rest-js.PropertyParent'
@@ -99,37 +96,53 @@ typeAliases:
   - '@azure/ms-rest-js.HttpRequestBody'
   - '@azure/ms-rest-js.TransferProgressEvent'
 functions:
-  - name: parseHeaders(XMLHttpRequest)
-    uid: '@azure/ms-rest-js.parseHeaders'
+  - name: 'createProxyAgent(string, ProxySettings, HttpHeaders)'
+    uid: '@azure/ms-rest-js.createProxyAgent'
     package: '@azure/ms-rest-js'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function parseHeaders(xhr: XMLHttpRequest)'
+      content: >-
+        function createProxyAgent(requestUrl: string, proxySettings:
+        ProxySettings, headers?: HttpHeaders)
       parameters:
-        - id: xhr
-          type: XMLHttpRequest
+        - id: requestUrl
+          type: string
+          description: ''
+        - id: proxySettings
+          type: <xref uid="@azure/ms-rest-js.ProxySettings" />
+          description: ''
+        - id: headers
+          type: <xref uid="@azure/ms-rest-js.HttpHeaders" />
           description: ''
       return:
-        type: <xref uid="@azure/ms-rest-js.HttpHeaders" />
+        type: <xref uid="@azure/ms-rest-js.ProxyAgent" />
         description: ''
-  - name: isHttpHeadersLike(any)
-    uid: '@azure/ms-rest-js.isHttpHeadersLike'
+  - name: 'createTunnel(boolean, boolean, HttpsOverHttpsOptions)'
+    uid: '@azure/ms-rest-js.createTunnel'
     package: '@azure/ms-rest-js'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isHttpHeadersLike(object?: any)'
+      content: >-
+        function createTunnel(isRequestHttps: boolean, isProxyHttps: boolean,
+        tunnelOptions: HttpsOverHttpsOptions)
       parameters:
-        - id: object
-          type: any
+        - id: isRequestHttps
+          type: boolean
+          description: ''
+        - id: isProxyHttps
+          type: boolean
+          description: ''
+        - id: tunnelOptions
+          type: <xref uid="@azure/ms-rest-js.HttpsOverHttpsOptions" />
           description: ''
       return:
-        type: boolean
+        type: Agent | Agent
         description: ''
   - name: getPathStringFromParameter(OperationParameter)
     uid: '@azure/ms-rest-js.getPathStringFromParameter'
@@ -476,54 +489,6 @@ functions:
       return:
         type: <xref uid="@azure/ms-rest-js.RequestPolicyFactory" />
         description: ''
-  - name: 'createProxyAgent(string, ProxySettings, HttpHeadersLike)'
-    uid: '@azure/ms-rest-js.createProxyAgent'
-    package: '@azure/ms-rest-js'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createProxyAgent(requestUrl: string, proxySettings:
-        ProxySettings, headers?: HttpHeadersLike)
-      parameters:
-        - id: requestUrl
-          type: string
-          description: ''
-        - id: proxySettings
-          type: <xref uid="@azure/ms-rest-js.ProxySettings" />
-          description: ''
-        - id: headers
-          type: <xref uid="@azure/ms-rest-js.HttpHeadersLike" />
-          description: ''
-      return:
-        type: <xref uid="@azure/ms-rest-js.ProxyAgent" />
-        description: ''
-  - name: 'createTunnel(boolean, boolean, HttpsOverHttpsOptions)'
-    uid: '@azure/ms-rest-js.createTunnel'
-    package: '@azure/ms-rest-js'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createTunnel(isRequestHttps: boolean, isProxyHttps: boolean,
-        tunnelOptions: HttpsOverHttpsOptions)
-      parameters:
-        - id: isRequestHttps
-          type: boolean
-          description: ''
-        - id: isProxyHttps
-          type: boolean
-          description: ''
-        - id: tunnelOptions
-          type: HttpsOverHttpsOptions
-          description: ''
-      return:
-        type: Agent | Agent
-        description: ''
   - name: serializeObject(any)
     uid: '@azure/ms-rest-js.serializeObject'
     package: '@azure/ms-rest-js'
@@ -620,7 +585,7 @@ functions:
         type: <xref uid="@azure/ms-rest-js.PropertyParent" />
         description: ''
   - name: >-
-      serializeRequestBody(ServiceClient, WebResourceLike, OperationArguments,
+      serializeRequestBody(ServiceClient, WebResource, OperationArguments,
       OperationSpec)
     uid: '@azure/ms-rest-js.serializeRequestBody'
     package: '@azure/ms-rest-js'
@@ -631,14 +596,14 @@ functions:
     syntax:
       content: >-
         function serializeRequestBody(serviceClient: ServiceClient, httpRequest:
-        WebResourceLike, operationArguments: OperationArguments, operationSpec:
+        WebResource, operationArguments: OperationArguments, operationSpec:
         OperationSpec)
       parameters:
         - id: serviceClient
           type: <xref uid="@azure/ms-rest-js.ServiceClient" />
           description: ''
         - id: httpRequest
-          type: <xref uid="@azure/ms-rest-js.WebResourceLike" />
+          type: <xref uid="@azure/ms-rest-js.WebResource" />
           description: ''
         - id: operationArguments
           type: <xref uid="@azure/ms-rest-js.OperationArguments" />
@@ -827,24 +792,6 @@ functions:
       return:
         type: boolean
         description: '`true` if valid, `false` otherwise.'
-  - name: isPrimitiveType(any)
-    uid: '@azure/ms-rest-js.isPrimitiveType'
-    package: '@azure/ms-rest-js'
-    summary: |-
-      Determines whether the given enity is a basic/primitive type
-      (string, number, boolean, null, undefined).
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function isPrimitiveType(value: any)'
-      parameters:
-        - id: value
-          type: any
-          description: Any entity
-      return:
-        type: boolean
-        description: 'boolean - true is it is primitive type, false otherwise.'
   - name: isValidUuid(string)
     uid: '@azure/ms-rest-js.isValidUuid'
     package: '@azure/ms-rest-js'
@@ -995,7 +942,7 @@ functions:
         description: >-
           The value where each instance of searchValue was replaced with
           replacedValue.
-  - name: stripRequest(WebResourceLike)
+  - name: stripRequest(WebResource)
     uid: '@azure/ms-rest-js.stripRequest'
     package: '@azure/ms-rest-js'
     summary: |-
@@ -1005,14 +952,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function stripRequest(request: WebResourceLike)'
+      content: 'function stripRequest(request: WebResource)'
       parameters:
         - id: request
-          type: <xref uid="@azure/ms-rest-js.WebResourceLike" />
+          type: <xref uid="@azure/ms-rest-js.WebResource" />
           description: |
             The Http Request object
       return:
-        type: <xref uid="@azure/ms-rest-js.WebResourceLike" />
+        type: <xref uid="@azure/ms-rest-js.WebResource" />
         description: The stripped version of Http Request.
   - name: stripResponse(HttpOperationResponse)
     uid: '@azure/ms-rest-js.stripResponse'
@@ -1084,21 +1031,21 @@ functions:
       return:
         type: string
         description: ''
-  - name: isWebResourceLike(any)
-    uid: '@azure/ms-rest-js.isWebResourceLike'
+  - name: parseHeaders(XMLHttpRequest)
+    uid: '@azure/ms-rest-js.parseHeaders'
     package: '@azure/ms-rest-js'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isWebResourceLike(object: any)'
+      content: 'function parseHeaders(xhr: XMLHttpRequest)'
       parameters:
-        - id: object
-          type: any
+        - id: xhr
+          type: XMLHttpRequest
           description: ''
       return:
-        type: boolean
+        type: <xref uid="@azure/ms-rest-js.HttpHeaders" />
         description: ''
 enums:
   - '@azure/ms-rest-js.HttpPipelineLogLevel'

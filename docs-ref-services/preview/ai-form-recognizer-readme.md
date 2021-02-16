@@ -1,17 +1,17 @@
 ---
 title: Azure Form Recognizer client library for JavaScript
-keywords: Azure, , SDK, API, @azure/ai-form-recognizer, 
+keywords: Azure, javascript, SDK, API, @azure/ai-form-recognizer, 
 author: maggiepint
 ms.author: magpint
-ms.date: 11/23/2020
+ms.date: 02/09/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: 
+ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Form Recognizer client library for JavaScript - Version 3.1.0-beta.1 
+# Azure Form Recognizer client library for JavaScript - Version 3.1.0-beta.2 
 
 
 Azure Cognitive Services [Form Recognizer](https://azure.microsoft.com/services/cognitive-services/form-recognizer/) uses cloud-based machine learning to extract structured data from form documents. Its features include:
@@ -22,11 +22,11 @@ Azure Cognitive Services [Form Recognizer](https://azure.microsoft.com/services/
 
 **Note:** This package targets Azure Form Recognizer service API version 2.x.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_3.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_3.1.0-beta.2/sdk/formrecognizer/ai-form-recognizer/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/ai-form-recognizer) |
 [API reference documentation](https://aka.ms/azsdk/js/formrecognizer/docs) |
 [Product documentation](https://docs.microsoft.com/azure/cognitive-services/form-recognizer/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_3.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_3.1.0-beta.2/sdk/formrecognizer/ai-form-recognizer/samples)
 
 ## Getting started
 
@@ -461,15 +461,15 @@ You can set the following environment variable to see debug logs when using this
 export DEBUG=azure*
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_3.1.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_3.1.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_3.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples) directory for detailed code samples that show how to use this library including several features and methods that are not shown in the "Examples" section above, such as copying and composing models.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_3.1.0-beta.2/sdk/formrecognizer/ai-form-recognizer/samples) directory for detailed code samples that show how to use this library including several features and methods that are not shown in the "Examples" section above, such as copying and composing models.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_3.1.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_3.1.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fformrecognizer%2Fai-form-recognizer%2FREADME.png)
 
@@ -477,15 +477,16 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [fr_or_cs_resource]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_3.1.0-beta.1/sdk/identity/identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_3.1.0-beta.2/sdk/identity/identity
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_3.1.0-beta.1/sdk/identity/identity#defaultazurecredential
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_3.1.0-beta.2/sdk/identity/identity#defaultazurecredential
 [quickstart_training]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/quickstarts/curl-train-extract#train-a-form-recognizer-model
 [quickstart_labeling]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/quickstarts/label-tool
-[labeled_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_3.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples/typescript/src/trainLabeledModel.ts
+[labeled_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_3.1.0-beta.2/sdk/formrecognizer/ai-form-recognizer/samples/typescript/src/trainLabeledModel.ts
 [multi_and_single_service]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows
 [azure_portal_create_fr_resource]: https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesFormRecognizer
 [azure_cli_create_fr_resource]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli?tabs=windows
 [fr-labeling-tool]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/quickstarts/label-tool
 [fr-train-without-labels]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/overview#train-without-labels
 [fr-train-with-labels]: https://docs.microsoft.com/azure/cognitive-services/form-recognizer/overview#train-with-labels
+

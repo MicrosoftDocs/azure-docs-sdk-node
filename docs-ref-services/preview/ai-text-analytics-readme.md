@@ -1,22 +1,22 @@
 ---
 title: Azure Text Analytics client library for JavaScript
-keywords: Azure, , SDK, API, @azure/ai-text-analytics, 
+keywords: Azure, javascript, SDK, API, @azure/ai-text-analytics, 
 author: maggiepint
 ms.author: magpint
-ms.date: 11/23/2020
+ms.date: 02/10/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
-ms.devlang: 
+ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Text Analytics client library for JavaScript - Version 5.1.0-beta.3 
+# Azure Text Analytics client library for JavaScript - Version 5.1.0-beta.4 
 
 
 [Azure TextAnalytics](https://azure.microsoft.com/services/cognitive-services/text-analytics/) is a cloud-based service that provides advanced natural language processing over raw text, and includes six main functions:
 
-**Note:** This SDK targets Azure Text Analytics service API version 3.1.0-preview.2.
+**Note:** This SDK targets Azure Text Analytics service API version 3.1.0-preview.3.
 
 - Language Detection
 - Sentiment Analysis
@@ -35,11 +35,11 @@ Use the client library to:
 - Identify and categorize entities in your text as people, places, organizations, date/time, quantities, percentages, currencies, healthcare specific, and more.
 - Perform multiple of the above tasks at once.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.3/sdk/textanalytics/ai-text-analytics/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.4/sdk/textanalytics/ai-text-analytics/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/ai-text-analytics) |
 [API reference documentation](https://aka.ms/azsdk/js/textanalytics/docs) |
 [Product documentation](https://docs.microsoft.com/azure/cognitive-services/text-analytics/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.3/sdk/textanalytics/ai-text-analytics/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.4/sdk/textanalytics/ai-text-analytics/samples)
 
 ## Getting started
 
@@ -420,7 +420,7 @@ const documents = [
 ];
 
 async function main() {
-  const poller = await client.beginAnalyzeHealthcare(documents);
+  const poller = await client.beginAnalyzeHealthcareEntities(documents);
   const results = await poller.pollUntilDone();
 
   for await (const result of results) {
@@ -437,9 +437,9 @@ async function main() {
 main();
 ```
 
-### Analyze
+### Analyze Batch Actions
 
-Analyze enables the application of multiple analyses at once.
+Analyze batch actions enables the application of multiple analyses (named actions) at once.
 
 ```javascript
 const { TextAnalyticsClient, AzureKeyCredential } = require("@azure/ai-text-analytics");
@@ -454,51 +454,56 @@ const documents = [
 ];
 
 async function main() {
-  const tasks = {
-    entityRecognitionTasks: [{ modelVersion: "latest" }],
-    entityRecognitionPiiTasks: [{ modelVersion: "latest" }],
-    keyPhraseExtractionTasks: [{ modelVersion: "latest" }]
+  const actions = {
+    recognizeEntitiesActions: [{ modelVersion: "latest" }],
+    recognizePiiEntitiesActions: [{ modelVersion: "latest" }],
+    extractKeyPhrasesActions: [{ modelVersion: "latest" }]
   };
-  const poller = await client.beginAnalyze(documents, tasks);
+  const poller = await client.beginAnalyzeBatchActions(documents, actions);
   const resultPages = await poller.pollUntilDone();
-
   for await (const page of resultPages) {
-    const keyPhrasesResults = page.keyPhrasesExtractionResults[0];
-    for (const doc of keyPhrasesResults) {
-      console.log(`- Document ${doc.id}`);
-      if (!doc.error) {
-        console.log("\tKey phrases:");
-        for (const phrase of doc.keyPhrases) {
-          console.log(`\t- ${phrase}`);
+    const keyPhrasesAction = page.extractKeyPhrasesResults[0];
+    if (!keyPhrasesAction.error) {
+      for (const doc of keyPhrasesAction.results) {
+        console.log(`- Document ${doc.id}`);
+        if (!doc.error) {
+          console.log("\tKey phrases:");
+          for (const phrase of doc.keyPhrases) {
+            console.log(`\t- ${phrase}`);
+          }
+        } else {
+          console.error("\tError:", doc.error);
         }
-      } else {
-        console.error("\tError:", doc.error);
       }
     }
 
-    const entitiesResults = page.entitiesRecognitionResults[0];
-    for (const doc of entitiesResults) {
-      console.log(`- Document ${doc.id}`);
-      if (!doc.error) {
-        console.log("\tEntities:");
-        for (const entity of doc.entities) {
-          console.log(`\t- Entity ${entity.text} of type ${entity.category}`);
+    const entitiesAction = page.recognizeEntitiesResults[0];
+    if (!entitiesAction.error) {
+      for (const doc of entitiesAction.results) {
+        console.log(`- Document ${doc.id}`);
+        if (!doc.error) {
+          console.log("\tEntities:");
+          for (const entity of doc.entities) {
+            console.log(`\t- Entity ${entity.text} of type ${entity.category}`);
+          }
+        } else {
+          console.error("\tError:", doc.error);
         }
-      } else {
-        console.error("\tError:", doc.error);
       }
     }
 
-    const piiEntitiesResults = page.piiEntitiesRecognitionResults[0];
-    for (const doc of piiEntitiesResults) {
-      console.log(`- Document ${doc.id}`);
-      if (!doc.error) {
-        console.log("\tPii Entities:");
-        for (const entity of doc.entities) {
-          console.log(`\t- Entity ${entity.text} of type ${entity.category}`);
+    const piiEntitiesAction = page.recognizePiiEntitiesResults[0];
+    if (!piiEntitiesAction.error) {
+      for (const doc of piiEntitiesAction.results) {
+        console.log(`- Document ${doc.id}`);
+        if (!doc.error) {
+          console.log("\tPii Entities:");
+          for (const entity of doc.entities) {
+            console.log(`\t- Entity ${entity.text} of type ${entity.category}`);
+          }
+        } else {
+          console.error("\tError:", doc.error);
         }
-      } else {
-        console.error("\tError:", doc.error);
       }
     }
   }
@@ -524,17 +529,17 @@ You can set the following environment variable to get the debug logging output w
 export AZURE_LOG_LEVEL=verbose
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.4/sdk/core/logger).
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.3/sdk/textanalytics/ai-text-analytics/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.4/sdk/textanalytics/ai-text-analytics/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -546,10 +551,10 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [cognitive_resource]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.3/sdk/identity/identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.4/sdk/identity/identity
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.3/sdk/identity/identity#defaultazurecredential
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.4/sdk/identity/identity#defaultazurecredential
 [data_limits]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/overview#data-limits
-[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.3/sdk/textanalytics/ai-text-analytics/samples/typescript/src/analyzeSentimentWithOpinionMining.ts
+[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.4/sdk/textanalytics/ai-text-analytics/samples/typescript/src/analyzeSentimentWithOpinionMining.ts
 

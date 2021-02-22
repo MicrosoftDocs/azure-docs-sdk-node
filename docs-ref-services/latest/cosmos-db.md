@@ -28,7 +28,7 @@ npm install @azure/arm-cosmosdb
 ## Samples
 
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-cosmosdb)
-* [Developing a JavaScript app using Azure Cosmos DB](https://docs.microsoft.com/en-us/samples/azure-samples/azure-cosmos-db-sql-api-nodejs-getting-started/azure-cosmos-db-sql-api-nodejs-getting-started/)
+* [Developing a JavaScript app using Azure Cosmos DB](https://docs.microsoft.com/samples/azure-samples/azure-cosmos-db-sql-api-nodejs-getting-started/azure-cosmos-db-sql-api-nodejs-getting-started/)
 * [Developing a JavaScript app using Azure Cosmos DB - Gremlin](https://azure.microsoft.com/resources/samples/azure-cosmos-db-graph-nodejs-getting-started/)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

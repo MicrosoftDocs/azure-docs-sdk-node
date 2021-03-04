@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/abort-controller, 
 author: maggiepint
 ms.author: magpint
-ms.date: 02/23/2021
+ms.date: 03/04/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -104,7 +104,7 @@ subTask.abort(); // aborts only subTask
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/abort-controller_1.0.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/abort-controller_1.0.4/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcore%2Fabort-controller%2FREADME.png)
 

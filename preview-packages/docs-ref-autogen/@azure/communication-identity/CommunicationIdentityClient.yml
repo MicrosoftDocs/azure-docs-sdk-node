@@ -11,7 +11,7 @@ isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'CommunicationIdentityClient(string, CommunicationIdentityOptions)'
+  - name: 'CommunicationIdentityClient(string, CommunicationIdentityClientOptions)'
     uid: '@azure/communication-identity.CommunicationIdentityClient.constructor'
     package: '@azure/communication-identity'
     summary: Initializes a new instance of the CommunicationIdentity class.
@@ -21,7 +21,7 @@ constructors:
     syntax:
       content: >-
         new CommunicationIdentityClient(connectionString: string, options?:
-        CommunicationIdentityOptions)
+        CommunicationIdentityClientOptions)
       parameters:
         - id: connectionString
           type: string
@@ -32,12 +32,13 @@ constructors:
         - id: options
           type: >-
             <xref
-            uid="@azure/communication-identity.CommunicationIdentityOptions" />
+            uid="@azure/communication-identity.CommunicationIdentityClientOptions"
+            />
           description: |
             Optional. Options to configure the HTTP pipeline.
   - name: >-
       CommunicationIdentityClient(string, KeyCredential,
-      CommunicationIdentityOptions)
+      CommunicationIdentityClientOptions)
     uid: '@azure/communication-identity.CommunicationIdentityClient.constructor_1'
     package: '@azure/communication-identity'
     summary: >-
@@ -48,10 +49,10 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new CommunicationIdentityClient(url: string, credential: KeyCredential,
-        options?: CommunicationIdentityOptions)
+        new CommunicationIdentityClient(endpoint: string, credential:
+        KeyCredential, options?: CommunicationIdentityClientOptions)
       parameters:
-        - id: url
+        - id: endpoint
           type: string
           description: >-
             The endpoint of the service (ex:
@@ -64,12 +65,13 @@ constructors:
         - id: options
           type: >-
             <xref
-            uid="@azure/communication-identity.CommunicationIdentityOptions" />
+            uid="@azure/communication-identity.CommunicationIdentityClientOptions"
+            />
           description: |
             Optional. Options to configure the HTTP pipeline.
   - name: >-
       CommunicationIdentityClient(string, TokenCredential,
-      CommunicationIdentityOptions)
+      CommunicationIdentityClientOptions)
     uid: '@azure/communication-identity.CommunicationIdentityClient.constructor_2'
     package: '@azure/communication-identity'
     summary: >-
@@ -80,10 +82,10 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new CommunicationIdentityClient(url: string, credential:
-        TokenCredential, options?: CommunicationIdentityOptions)
+        new CommunicationIdentityClient(endpoint: string, credential:
+        TokenCredential, options?: CommunicationIdentityClientOptions)
       parameters:
-        - id: url
+        - id: endpoint
           type: string
           description: >-
             The endpoint of the service (ex:
@@ -96,7 +98,8 @@ constructors:
         - id: options
           type: >-
             <xref
-            uid="@azure/communication-identity.CommunicationIdentityOptions" />
+            uid="@azure/communication-identity.CommunicationIdentityClientOptions"
+            />
           description: |
             Optional. Options to configure the HTTP pipeline.
 methods:
@@ -115,13 +118,11 @@ methods:
           description: |
             Additional options for the request.
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/communication-identity.CreateUserResponse" />&gt;
+        type: Promise&lt;CommunicationUserIdentifier&gt;
         description: ''
-  - name: 'createUserWithToken(TokenScope[], OperationOptions)'
+  - name: 'createUserAndToken(TokenScope[], OperationOptions)'
     uid: >-
-      @azure/communication-identity.CommunicationIdentityClient.createUserWithToken
+      @azure/communication-identity.CommunicationIdentityClient.createUserAndToken
     package: '@azure/communication-identity'
     summary: Creates a single user and a token simultaneously.
     remarks: ''
@@ -129,7 +130,7 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createUserWithToken(scopes: TokenScope[], options?:
+        function createUserAndToken(scopes: TokenScope[], options?:
         OperationOptions)
       parameters:
         - id: scopes
@@ -142,7 +143,7 @@ methods:
       return:
         type: >-
           Promise&lt;<xref
-          uid="@azure/communication-identity.CreateUserWithTokenResponse" />&gt;
+          uid="@azure/communication-identity.CommunicationUserToken" />&gt;
         description: ''
   - name: 'deleteUser(CommunicationUserIdentifier, OperationOptions)'
     uid: '@azure/communication-identity.CommunicationIdentityClient.deleteUser'
@@ -164,12 +165,10 @@ methods:
           description: |
             Additional options for the request.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/communication-identity.VoidResponse"
-          />&gt;
+        type: Promise&lt;void&gt;
         description: ''
-  - name: 'issueToken(CommunicationUserIdentifier, TokenScope[], OperationOptions)'
-    uid: '@azure/communication-identity.CommunicationIdentityClient.issueToken'
+  - name: 'getToken(CommunicationUserIdentifier, TokenScope[], OperationOptions)'
+    uid: '@azure/communication-identity.CommunicationIdentityClient.getToken'
     package: '@azure/communication-identity'
     summary: Creates a scoped user token.
     remarks: ''
@@ -177,12 +176,12 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function issueToken(user: CommunicationUserIdentifier, scopes:
+        function getToken(user: CommunicationUserIdentifier, scopes:
         TokenScope[], options?: OperationOptions)
       parameters:
         - id: user
           type: CommunicationUserIdentifier
-          description: The user whose tokens are being revoked.
+          description: The user whose tokens are being issued.
         - id: scopes
           type: '<xref uid="@azure/communication-identity.TokenScope" />[]'
           description: Scopes to include in the token.
@@ -193,7 +192,7 @@ methods:
       return:
         type: >-
           Promise&lt;<xref
-          uid="@azure/communication-identity.IssueTokenResponse" />&gt;
+          uid="@azure/communication-identity.CommunicationAccessToken" />&gt;
         description: ''
   - name: 'revokeTokens(CommunicationUserIdentifier, OperationOptions)'
     uid: '@azure/communication-identity.CommunicationIdentityClient.revokeTokens'
@@ -215,7 +214,5 @@ methods:
           description: |
             Additional options for the request.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/communication-identity.VoidResponse"
-          />&gt;
+        type: Promise&lt;void&gt;
         description: ''

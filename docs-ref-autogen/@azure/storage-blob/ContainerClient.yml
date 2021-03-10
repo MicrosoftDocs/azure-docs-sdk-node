@@ -38,7 +38,7 @@ constructors:
                                 "https://myaccount.blob.core.windows.net/mycontainer?sasString".
         - id: pipeline
           type: <xref uid="@azure/storage-blob.Pipeline" />
-          description: |-
+          description: |
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
   - name: >-
@@ -78,13 +78,14 @@ constructors:
             TokenCredential
           description: >-
             Such as AnonymousCredential, StorageSharedKeyCredential or any
-            credential from the @azure/identity package to authenticate requests
-            to the service. You can also provide an object that implements the
-            TokenCredential interface. If not specified, AnonymousCredential is
-            used.
+            credential from the `@azure/identity` package to authenticate
+            requests to the service. You can also provide an object that
+            implements the TokenCredential interface. If not specified,
+            AnonymousCredential is used.
         - id: options
           type: <xref uid="@azure/storage-blob.StoragePipelineOptions" />
-          description: ''
+          description: |
+            Optional. Options to configure the HTTP pipeline.
   - name: 'ContainerClient(string, string, StoragePipelineOptions)'
     uid: '@azure/storage-blob.ContainerClient.constructor'
     package: '@azure/storage-blob'
@@ -112,7 +113,8 @@ constructors:
           description: Container name.
         - id: options
           type: <xref uid="@azure/storage-blob.StoragePipelineOptions" />
-          description: ''
+          description: |
+            Optional. Options to configure the HTTP pipeline.
 properties:
   - name: accountName
     uid: '@azure/storage-blob.ContainerClient.accountName'
@@ -145,9 +147,9 @@ properties:
     package: '@azure/storage-blob'
     summary: >-
       Such as AnonymousCredential, StorageSharedKeyCredential or any credential
-      from the @azure/identity package to authenticate requests to the service.
-      You can also provide an object that implements the TokenCredential
-      interface. If not specified, AnonymousCredential is used.
+      from the `@azure/identity` package to authenticate requests to the
+      service. You can also provide an object that implements the
+      TokenCredential interface. If not specified, AnonymousCredential is used.
     fullName: credential
     remarks: ''
     isPreview: false
@@ -189,7 +191,25 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerCreateOptions" />
-          description: ''
+          description: >
+            Options to Container Create operation.
+
+
+
+            Example usage:
+
+
+            ```js
+
+            const containerClient =
+            blobServiceClient.getContainerClient("<container name>");
+
+            const createContainerResponse = await containerClient.create();
+
+            console.log("Container was created successfully",
+            createContainerResponse.requestId);
+
+            ```
       return:
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.ContainerCreateResponse"
@@ -209,7 +229,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerCreateOptions" />
-          description: ''
+          description: |
+            -
       return:
         type: >-
           Promise&lt;<xref
@@ -229,7 +250,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerDeleteMethodOptions" />
-          description: ''
+          description: |
+            Options to Container Delete operation.
       return:
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.ContainerDeleteResponse"
@@ -258,10 +280,10 @@ methods:
       parameters:
         - id: blobName
           type: string
-          description: ''
+          description: '-'
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerDeleteBlobOptions" />
-          description: ''
+          description: Options to Blob Delete operation.
       return:
         type: Promise&lt;<xref uid="@azure/storage-blob.BlobDeleteResponse" />&gt;
         description: Block blob deletion response data.
@@ -281,7 +303,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerDeleteMethodOptions" />
-          description: ''
+          description: |
+            Options to Container Delete operation.
       return:
         type: >-
           Promise&lt;<xref
@@ -309,7 +332,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerExistsOptions" />
-          description: ''
+          description: |
+            -
       return:
         type: Promise&lt;boolean&gt;
         description: ''
@@ -360,7 +384,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerGetAccessPolicyOptions" />
-          description: ''
+          description: |
+            Options to Container Get Access Policy operation.
       return:
         type: >-
           Promise&lt;<xref
@@ -378,10 +403,23 @@ methods:
       parameters:
         - id: blobName
           type: string
-          description: An append blob name
+          description: |
+            An append blob name
       return:
         type: <xref uid="@azure/storage-blob.AppendBlobClient" />
         description: ''
+  - name: getBlobBatchClient()
+    uid: '@azure/storage-blob.ContainerClient.getBlobBatchClient'
+    package: '@azure/storage-blob'
+    summary: Creates a BlobBatchClient object to conduct batch operations.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function getBlobBatchClient()
+      return:
+        type: <xref uid="@azure/storage-blob.BlobBatchClient" />
+        description: A new BlobBatchClient object for this container.
   - name: getBlobClient(string)
     uid: '@azure/storage-blob.ContainerClient.getBlobClient'
     package: '@azure/storage-blob'
@@ -410,7 +448,7 @@ methods:
       parameters:
         - id: proposeLeaseId
           type: string
-          description: ''
+          description: Initial proposed lease Id.
       return:
         type: <xref uid="@azure/storage-blob.BlobLeaseClient" />
         description: A new BlobLeaseClient object for managing leases on the container.
@@ -426,7 +464,26 @@ methods:
       parameters:
         - id: blobName
           type: string
-          description: A block blob name
+          description: >
+            A block blob name
+
+
+
+            Example usage:
+
+
+            ```js
+
+            const content = "Hello world!";
+
+
+            const blockBlobClient = containerClient.getBlockBlobClient("<blob
+            name>");
+
+            const uploadBlobResponse = await blockBlobClient.upload(content,
+            content.length);
+
+            ```
       return:
         type: <xref uid="@azure/storage-blob.BlockBlobClient" />
         description: ''
@@ -442,7 +499,8 @@ methods:
       parameters:
         - id: blobName
           type: string
-          description: A page blob name
+          description: |
+            A page blob name
       return:
         type: <xref uid="@azure/storage-blob.PageBlobClient" />
         description: ''
@@ -462,7 +520,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerGetPropertiesOptions" />
-          description: ''
+          description: |
+            Options to Container Get Properties operation.
       return:
         type: >-
           Promise&lt;<xref
@@ -583,7 +642,8 @@ methods:
           description: The character or string used to define the virtual hierarchy
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerListBlobsOptions" />
-          description: ''
+          description: |
+            Options to list blobs operation.
       return:
         type: >-
           PagedAsyncIterableIterator&lt;Object & <xref
@@ -591,10 +651,7 @@ methods:
           uid="@azure/storage-blob.BlobItem" />, <xref
           uid="@azure/storage-blob.ContainerListBlobHierarchySegmentResponse"
           />&gt;
-        description: |-
-          {(PagedAsyncIterableIterator<
-            { kind: "prefix" } & BlobPrefix | { kind: "blob" } & BlobItem,
-              ContainerListBlobHierarchySegmentResponse>)}
+        description: ''
   - name: listBlobsFlat(ContainerListBlobsOptions)
     uid: '@azure/storage-blob.ContainerClient.listBlobsFlat'
     package: '@azure/storage-blob'
@@ -711,7 +768,7 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerListBlobsOptions" />
-          description: ''
+          description: Options to list blobs.
       return:
         type: >-
           PagedAsyncIterableIterator&lt;<xref uid="@azure/storage-blob.BlobItem"
@@ -754,13 +811,16 @@ methods:
       parameters:
         - id: access
           type: <xref uid="@azure/storage-blob.PublicAccessType" />
-          description: ''
+          description: The level of public access to data in the container.
         - id: containerAcl
           type: '<xref uid="@azure/storage-blob.SignedIdentifier" />[]'
-          description: ''
+          description: >-
+            Array of elements each having a unique Id and details of the access
+            policy.
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerSetAccessPolicyOptions" />
-          description: ''
+          description: |
+            Options to Container Set Access Policy operation.
       return:
         type: >-
           Promise&lt;<xref
@@ -787,10 +847,13 @@ methods:
       parameters:
         - id: metadata
           type: <xref uid="@azure/storage-blob.Metadata" />
-          description: ''
+          description: |-
+            Replace existing metadata with this value.
+                                       If no value provided the existing metadata will be removed.
         - id: options
           type: <xref uid="@azure/storage-blob.ContainerSetMetadataOptions" />
-          description: ''
+          description: |
+            Options to Container Set Metadata operation.
       return:
         type: >-
           Promise&lt;<xref
@@ -846,10 +909,10 @@ methods:
                                           string including non non-Base64/Hex-encoded characters.
         - id: options
           type: <xref uid="@azure/storage-blob.BlockBlobUploadOptions" />
-          description: ''
+          description: Options to configure the Block Blob Upload operation.
       return:
         type: Promise&lt;Object&gt;
         description: >-
-          >} Block Blob upload response data and the corresponding
-          BlockBlobClient instance.
+          Block Blob upload response data and the corresponding BlockBlobClient
+          instance.
 extends: <xref uid="@azure/storage-blob.StorageClient" />

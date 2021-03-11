@@ -3,7 +3,7 @@ title: Azure Text Analytics client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-text-analytics, 
 author: maggiepint
 ms.author: magpint
-ms.date: 02/10/2021
+ms.date: 03/11/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Text Analytics client library for JavaScript - Version 5.1.0-beta.4 
+# Azure Text Analytics client library for JavaScript - Version 5.1.0-beta.5 
 
 
 [Azure TextAnalytics](https://azure.microsoft.com/services/cognitive-services/text-analytics/) is a cloud-based service that provides advanced natural language processing over raw text, and includes six main functions:
@@ -35,11 +35,11 @@ Use the client library to:
 - Identify and categorize entities in your text as people, places, organizations, date/time, quantities, percentages, currencies, healthcare specific, and more.
 - Perform multiple of the above tasks at once.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.4/sdk/textanalytics/ai-text-analytics/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.5/sdk/textanalytics/ai-text-analytics/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/ai-text-analytics) |
-[API reference documentation](https://aka.ms/azsdk/js/textanalytics/docs) |
+[API reference documentation](https://docs.microsoft.com/javascript/api/@azure/ai-text-analytics) |
 [Product documentation](https://docs.microsoft.com/azure/cognitive-services/text-analytics/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.4/sdk/textanalytics/ai-text-analytics/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.5/sdk/textanalytics/ai-text-analytics/samples)
 
 ## Getting started
 
@@ -514,32 +514,32 @@ main();
 
 ## Known Issues
 
-- Currently, the `beginAnalyze` API accepts `includeStatistics` in its options bag, a feature that was not yet supported by the service at the time of the current release. This feature is expected to be supported soon after the release.
 - `beginAnalyzeHealthcare` is still in gated preview and can not be used with AAD credentials. For more information, see (the Text Analytics for Health documentation)[https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-for-health?tabs=ner#request-access-to-the-public-preview].
+- At time of this SDK release, the `modelVersion` option to `beginAnalyzeHealthcareEntities` is ignored by the service. The service always processes the operation using the "latest" model.
 
 ## Troubleshooting
 
-### Enable logs
+### Logging
 
-You can set the following environment variable to get the debug logging output when using this library.
+Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-- Getting debug logs from the Azure Text Analytics client library
+```javascript
+import { setLogLevel } from "@azure/logger";
 
-```bash
-export AZURE_LOG_LEVEL=verbose
+setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.4/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.5/sdk/core/logger).
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.4/sdk/textanalytics/ai-text-analytics/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.5/sdk/textanalytics/ai-text-analytics/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.5/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -551,10 +551,10 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [cognitive_resource]: https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.4/sdk/identity/identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.5/sdk/identity/identity
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
 [register_aad_app]: https://docs.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.4/sdk/identity/identity#defaultazurecredential
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-text-analytics_5.1.0-beta.5/sdk/identity/identity#defaultazurecredential
 [data_limits]: https://docs.microsoft.com/azure/cognitive-services/text-analytics/overview#data-limits
-[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.4/sdk/textanalytics/ai-text-analytics/samples/typescript/src/analyzeSentimentWithOpinionMining.ts
+[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-text-analytics_5.1.0-beta.5/sdk/textanalytics/ai-text-analytics/samples/typescript/src/analyzeSentimentWithOpinionMining.ts
 

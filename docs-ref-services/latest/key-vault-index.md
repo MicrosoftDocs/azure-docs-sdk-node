@@ -12,8 +12,6 @@ ms.devlang: nodejs
 ms.service: key-vault
 ---
 
-# Azure Key Vault modules for JavaScript
-
 # Azure Key Vault client libraries for for JavaScript
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) is a Microsoft-managed service providing cloud keys, secrets, and certificate storage and utility that is highly available, secure, durable, scalable, and redundant.

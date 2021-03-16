@@ -30,7 +30,7 @@ constructors:
                                 "https://myaccount.queue.core.windows.net/myqueue?sasString".
         - id: pipeline
           type: <xref uid="@azure/storage-queue.Pipeline" />
-          description: |-
+          description: |
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
   - name: >-
@@ -61,13 +61,14 @@ constructors:
             TokenCredential
           description: >-
             Such as AnonymousCredential, StorageSharedKeyCredential or any
-            credential from the @azure/identity package to authenticate requests
-            to the service. You can also provide an object that implements the
-            TokenCredential interface. If not specified, AnonymousCredential is
-            used.
+            credential from the `@azure/identity` package to authenticate
+            requests to the service. You can also provide an object that
+            implements the TokenCredential interface. If not specified,
+            AnonymousCredential is used.
         - id: options
           type: <xref uid="@azure/storage-queue.StoragePipelineOptions" />
-          description: ''
+          description: |
+            Options to configure the HTTP pipeline.
   - name: 'QueueClient(string, string, StoragePipelineOptions)'
     uid: '@azure/storage-queue.QueueClient.constructor'
     package: '@azure/storage-queue'
@@ -95,7 +96,8 @@ constructors:
           description: Queue name.
         - id: options
           type: <xref uid="@azure/storage-queue.StoragePipelineOptions" />
-          description: ''
+          description: |
+            Options to configure the HTTP pipeline.
 properties:
   - name: accountName
     uid: '@azure/storage-queue.QueueClient.accountName'
@@ -149,7 +151,7 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.QueueClearMessagesOptions" />
-          description: ''
+          description: Options to clear messages operation.
       return:
         type: >-
           Promise&lt;<xref uid="@azure/storage-queue.QueueClearMessagesResponse"
@@ -167,10 +169,24 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.QueueCreateOptions" />
-          description: ''
+          description: Options to Queue create operation.
       return:
         type: Promise&lt;<xref uid="@azure/storage-queue.QueueCreateResponse" />&gt;
-        description: Response data for the Queue create operation.
+        description: >-
+          Response data for the Queue create operation.
+
+
+          Example usage:
+
+
+          ```js
+
+          const queueClient = queueServiceClient.getQueueClient("<new queue
+          name>");
+
+          const createQueueResponse = await queueClient.create();
+
+          ```
   - name: createIfNotExists(QueueCreateOptions)
     uid: '@azure/storage-queue.QueueClient.createIfNotExists'
     package: '@azure/storage-queue'
@@ -187,7 +203,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.QueueCreateOptions" />
-          description: ''
+          description: |
+            -
       return:
         type: >-
           Promise&lt;<xref
@@ -205,10 +222,20 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.QueueDeleteOptions" />
-          description: ''
+          description: Options to Queue delete operation.
       return:
         type: Promise&lt;<xref uid="@azure/storage-queue.QueueDeleteResponse" />&gt;
-        description: Response data for the Queue delete operation.
+        description: |-
+          Response data for the Queue delete operation.
+
+          Example usage:
+
+          ```js
+          const deleteQueueResponse = await queueClient.delete();
+          console.log(
+            "Delete queue successfully, service assigned request Id:", deleteQueueResponse.requestId
+          );
+          ```
   - name: deleteIfExists(QueueDeleteOptions)
     uid: '@azure/storage-queue.QueueClient.deleteIfExists'
     package: '@azure/storage-queue'
@@ -221,7 +248,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.QueueDeleteOptions" />
-          description: ''
+          description: |
+            -
       return:
         type: >-
           Promise&lt;<xref
@@ -249,7 +277,7 @@ methods:
             receive messages or update message operation.
         - id: options
           type: <xref uid="@azure/storage-queue.QueueDeleteMessageOptions" />
-          description: ''
+          description: Options to delete message operation.
       return:
         type: >-
           Promise&lt;<xref uid="@azure/storage-queue.QueueDeleteMessageResponse"
@@ -276,7 +304,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.QueueExistsOptions" />
-          description: ''
+          description: |
+            options to Exists operation.
       return:
         type: Promise&lt;boolean&gt;
         description: ''
@@ -325,7 +354,7 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.QueueGetAccessPolicyOptions" />
-          description: ''
+          description: Options to Queue get access policy operation.
       return:
         type: >-
           Promise&lt;<xref
@@ -345,7 +374,7 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.QueueGetPropertiesOptions" />
-          description: ''
+          description: Options to Queue get properties operation.
       return:
         type: >-
           Promise&lt;<xref uid="@azure/storage-queue.QueueGetPropertiesResponse"
@@ -365,12 +394,26 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.QueuePeekMessagesOptions" />
-          description: ''
+          description: Options to peek messages operation.
       return:
         type: >-
           Promise&lt;<xref uid="@azure/storage-queue.QueuePeekMessagesResponse"
           />&gt;
-        description: Response data for the peek messages operation.
+        description: >-
+          Response data for the peek messages operation.
+
+
+          Example usage:
+
+
+          ```js
+
+          const peekMessagesResponse = await queueClient.peekMessages();
+
+          console.log("The peeked message is:",
+          peekMessagesResponse.peekedMessageItems[0].messageText);
+
+          ```
   - name: receiveMessages(QueueReceiveMessageOptions)
     uid: '@azure/storage-queue.QueueClient.receiveMessages'
     package: '@azure/storage-queue'
@@ -385,12 +428,31 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.QueueReceiveMessageOptions" />
-          description: ''
+          description: Options to receive messages operation.
       return:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-queue.QueueReceiveMessageResponse" />&gt;
-        description: Response data for the receive messages operation.
+        description: |-
+          Response data for the receive messages operation.
+
+          Example usage:
+
+          ```js
+          const response = await queueClient.receiveMessages();
+          if (response.receivedMessageItems.length == 1) {
+            const receivedMessageItem = response.receivedMessageItems[0];
+            console.log("Processing & deleting message with content:", receivedMessageItem.messageText);
+            const deleteMessageResponse = await queueClient.deleteMessage(
+              receivedMessageItem.messageId,
+              receivedMessageItem.popReceipt
+            );
+            console.log(
+              "Delete message successfully, service assigned request Id:",
+              deleteMessageResponse.requestId
+            );
+          }
+          ```
   - name: 'sendMessage(string, QueueSendMessageOptions)'
     uid: '@azure/storage-queue.QueueClient.sendMessage'
     package: '@azure/storage-queue'
@@ -418,12 +480,29 @@ methods:
           description: Text of the message to send
         - id: options
           type: <xref uid="@azure/storage-queue.QueueSendMessageOptions" />
-          description: ''
+          description: Options to send messages operation.
       return:
         type: >-
           Promise&lt;<xref uid="@azure/storage-queue.QueueSendMessageResponse"
           />&gt;
-        description: Response data for the send messages operation.
+        description: >-
+          Response data for the send messages operation.
+
+
+          Example usage:
+
+
+          ```js
+
+          const sendMessageResponse = await queueClient.sendMessage("Hello
+          World!");
+
+          console.log(
+            "Sent message successfully, service assigned message Id:", sendMessageResponse.messageId,
+            "service assigned request Id:", sendMessageResponse.requestId
+          );
+
+          ```
   - name: 'setAccessPolicy(SignedIdentifier[], QueueSetAccessPolicyOptions)'
     uid: '@azure/storage-queue.QueueClient.setAccessPolicy'
     package: '@azure/storage-queue'
@@ -440,10 +519,10 @@ methods:
       parameters:
         - id: queueAcl
           type: '<xref uid="@azure/storage-queue.SignedIdentifier" />[]'
-          description: ''
+          description: '-'
         - id: options
           type: <xref uid="@azure/storage-queue.QueueSetAccessPolicyOptions" />
-          description: ''
+          description: Options to Queue set access policy operation.
       return:
         type: >-
           Promise&lt;<xref
@@ -469,10 +548,10 @@ methods:
       parameters:
         - id: metadata
           type: <xref uid="@azure/storage-queue.Metadata" />
-          description: ''
+          description: 'If no metadata provided, all existing metadata will be removed.'
         - id: options
           type: <xref uid="@azure/storage-queue.QueueSetMetadataOptions" />
-          description: ''
+          description: Options to Queue set metadata operation.
       return:
         type: >-
           Promise&lt;<xref uid="@azure/storage-queue.QueueSetMetadataResponse"
@@ -520,7 +599,7 @@ methods:
                                               A message can be updated until it has been deleted or has expired.
         - id: options
           type: <xref uid="@azure/storage-queue.QueueUpdateMessageOptions" />
-          description: ''
+          description: Options to update message operation.
       return:
         type: >-
           Promise&lt;<xref uid="@azure/storage-queue.QueueUpdateMessageResponse"

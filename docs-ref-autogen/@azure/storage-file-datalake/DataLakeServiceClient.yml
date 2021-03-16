@@ -30,7 +30,7 @@ constructors:
                                 if using AnonymousCredential, such as "https://myaccount.dfs.core.windows.net?sasString".
         - id: pipeline
           type: <xref uid="@azure/storage-file-datalake.Pipeline" />
-          description: |-
+          description: |
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
   - name: >-
@@ -59,10 +59,16 @@ constructors:
             <xref uid="@azure/storage-file-datalake.StorageSharedKeyCredential"
             /> | <xref uid="@azure/storage-file-datalake.AnonymousCredential" />
             | TokenCredential
-          description: ''
+          description: >-
+            Such as AnonymousCredential, StorageSharedKeyCredential or any
+            credential from the `@azure/identity` package to authenticate
+            requests to the service. You can also provide an object that
+            implements the TokenCredential interface. If not specified,
+            AnonymousCredential is used.
         - id: options
           type: <xref uid="@azure/storage-file-datalake.StoragePipelineOptions" />
-          description: ''
+          description: |
+            Optional. Options to configure the HTTP pipeline.
 properties:
   - name: accountName
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.accountName'
@@ -82,9 +88,9 @@ properties:
     package: '@azure/storage-file-datalake'
     summary: >-
       Such as AnonymousCredential, StorageSharedKeyCredential or any credential
-      from the @azure/identity package to authenticate requests to the service.
-      You can also provide an object that implements the TokenCredential
-      interface. If not specified, AnonymousCredential is used.
+      from the `@azure/identity` package to authenticate requests to the
+      service. You can also provide an object that implements the
+      TokenCredential interface. If not specified, AnonymousCredential is used.
     fullName: credential
     remarks: ''
     isPreview: false
@@ -113,6 +119,35 @@ properties:
         type: string
         description: ''
 methods:
+  - name: 'fromConnectionString(string, StoragePipelineOptions)'
+    uid: '@azure/storage-file-datalake.DataLakeServiceClient.fromConnectionString'
+    package: '@azure/storage-file-datalake'
+    summary: Creates an instance of DataLakeServiceClient from connection string.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromConnectionString(connectionString: string, options?:
+        StoragePipelineOptions)
+      parameters:
+        - id: connectionString
+          type: string
+          description: >-
+            Account connection string or a SAS connection string of an Azure
+            storage account.
+                                             [ Note - Account connection string can only be used in NODE.JS runtime. ]
+                                             Account connection string example -
+                                             `DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=accountKey;EndpointSuffix=core.windows.net`
+                                             SAS connection string example -
+                                             `BlobEndpoint=https://myaccount.blob.core.windows.net/;QueueEndpoint=https://myaccount.queue.core.windows.net/;FileEndpoint=https://myaccount.file.core.windows.net/;TableEndpoint=https://myaccount.table.core.windows.net/;SharedAccessSignature=sasString`
+        - id: options
+          type: <xref uid="@azure/storage-file-datalake.StoragePipelineOptions" />
+          description: |
+            Optional. Options to configure the HTTP pipeline.
+      return:
+        type: <xref uid="@azure/storage-file-datalake.DataLakeServiceClient" />
+        description: ''
   - name: >-
       generateAccountSasUrl(Date, AccountSASPermissions, string,
       ServiceGenerateAccountSasUrlOptions)
@@ -143,16 +178,18 @@ methods:
             invalid. Default to an hour later if not specified.
         - id: permissions
           type: <xref uid="@azure/storage-file-datalake.AccountSASPermissions" />
-          description: ''
+          description: Specifies the list of permissions to be associated with the SAS.
         - id: resourceTypes
           type: string
-          description: ''
+          description: >-
+            Specifies the resource types associated with the shared access
+            signature.
         - id: options
           type: >-
             <xref
             uid="@azure/storage-file-datalake.ServiceGenerateAccountSasUrlOptions"
             />
-          description: ''
+          description: Optional parameters.
       return:
         type: string
         description: >-
@@ -170,7 +207,8 @@ methods:
       parameters:
         - id: fileSystemName
           type: string
-          description: File system name.
+          description: |
+            File system name.
       return:
         type: <xref uid="@azure/storage-file-datalake.DataLakeFileSystemClient" />
         description: ''
@@ -207,7 +245,8 @@ methods:
             <xref
             uid="@azure/storage-file-datalake.ServiceGetUserDelegationKeyOptions"
             />
-          description: ''
+          description: |
+            -
       return:
         type: >-
           Promise&lt;<xref
@@ -332,12 +371,46 @@ methods:
           type: >-
             <xref
             uid="@azure/storage-file-datalake.ServiceListFileSystemsOptions" />
-          description: ''
+          description: |
+            -
       return:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/storage-file-datalake.FileSystemItem" />, <xref
           uid="@azure/storage-file-datalake.ServiceListFileSystemsSegmentResponse"
           />&gt;
+        description: ''
+  - name: 'undeleteFileSystem(string, string, ServiceUndeleteFileSystemOptions)'
+    uid: '@azure/storage-file-datalake.DataLakeServiceClient.undeleteFileSystem'
+    package: '@azure/storage-file-datalake'
+    summary: >-
+      Restore a previously deleted File System.
+
+      This API is only functional if Container Soft Delete is enabled for the
+      storage account.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function undeleteFileSystem(deletedFileSystemName: string,
+        deleteFileSystemVersion: string, options?:
+        ServiceUndeleteFileSystemOptions)
+      parameters:
+        - id: deletedFileSystemName
+          type: string
+          description: The name of the source File System.
+        - id: deleteFileSystemVersion
+          type: string
+          description: The new name of the File System.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/storage-file-datalake.ServiceUndeleteFileSystemOptions"
+            />
+          description: |
+            Options to configure File System Restore operation.
+      return:
+        type: Promise&lt;Object&gt;
         description: ''
 extends: <xref uid="@azure/storage-file-datalake.StorageClient" />

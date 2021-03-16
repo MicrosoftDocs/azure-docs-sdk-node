@@ -20,13 +20,13 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new ChatThreadClient(threadId: string, url: string, credential:
+        new ChatThreadClient(url: string, threadId: string, credential:
         CommunicationTokenCredential, options?: ChatThreadClientOptions)
       parameters:
-        - id: threadId
+        - id: url
           type: string
           description: ''
-        - id: url
+        - id: threadId
           type: string
           description: ''
         - id: credential
@@ -96,25 +96,14 @@ methods:
           description: |
             Operation options.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/communication-chat.OperationResponse"
-          />&gt;
+        type: Promise&lt;void&gt;
         description: ''
-  - name: dispose()
-    uid: '@azure/communication-chat.ChatThreadClient.dispose'
-    package: '@azure/communication-chat'
-    summary: Dispose method.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function dispose()
   - name: 'getMessage(string, GetMessageOptions)'
     uid: '@azure/communication-chat.ChatThreadClient.getMessage'
     package: '@azure/communication-chat'
     summary: |-
       Gets a chat message identified by messageId.
-      Returns the specific message.\
+      Returns the specific message.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -129,9 +118,7 @@ methods:
           description: |
             Operation options.
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/communication-chat.GetChatMessageResponse" />&gt;
+        type: Promise&lt;<xref uid="@azure/communication-chat.ChatMessage" />&gt;
         description: ''
   - name: listMessages(ListMessagesOptions)
     uid: '@azure/communication-chat.ChatThreadClient.listMessages'
@@ -196,7 +183,7 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/communication-chat.ChatMessageReadReceipt" />&gt;
         description: ''
-  - name: 'removeParticipant(CommunicationUserIdentifier, RemoveParticipantOptions)'
+  - name: 'removeParticipant(CommunicationIdentifier, RemoveParticipantOptions)'
     uid: '@azure/communication-chat.ChatThreadClient.removeParticipant'
     package: '@azure/communication-chat'
     summary: Removes participant from the thread identified by threadId.
@@ -205,20 +192,18 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function removeParticipant(participant: CommunicationUserIdentifier,
+        function removeParticipant(participant: CommunicationIdentifier,
         options?: RemoveParticipantOptions)
       parameters:
         - id: participant
-          type: CommunicationUserIdentifier
+          type: CommunicationIdentifier
           description: Thread participant to remove from the thread roster
         - id: options
           type: <xref uid="@azure/communication-chat.RemoveParticipantOptions" />
           description: |
             Operation options.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/communication-chat.OperationResponse"
-          />&gt;
+        type: Promise&lt;void&gt;
         description: ''
   - name: 'sendMessage(SendMessageRequest, SendMessageOptions)'
     uid: '@azure/communication-chat.ChatThreadClient.sendMessage'
@@ -243,8 +228,8 @@ methods:
             Operation options.
       return:
         type: >-
-          Promise&lt;<xref
-          uid="@azure/communication-chat.SendChatMessageResponse" />&gt;
+          Promise&lt;<xref uid="@azure/communication-chat.SendChatMessageResult"
+          />&gt;
         description: ''
   - name: 'sendReadReceipt(SendReadReceiptRequest, SendReadReceiptOptions)'
     uid: '@azure/communication-chat.ChatThreadClient.sendReadReceipt'
@@ -266,9 +251,7 @@ methods:
           description: |
             Operation options.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/communication-chat.OperationResponse"
-          />&gt;
+        type: Promise&lt;void&gt;
         description: ''
   - name: sendTypingNotification(SendTypingNotificationOptions)
     uid: '@azure/communication-chat.ChatThreadClient.sendTypingNotification'
@@ -314,26 +297,25 @@ methods:
           description: |
             Operation options.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/communication-chat.OperationResponse"
-          />&gt;
+        type: Promise&lt;void&gt;
         description: ''
-  - name: updateThread(UpdateThreadOptions)
-    uid: '@azure/communication-chat.ChatThreadClient.updateThread'
+  - name: 'updateTopic(string, UpdateTopicOptions)'
+    uid: '@azure/communication-chat.ChatThreadClient.updateTopic'
     package: '@azure/communication-chat'
-    summary: Updates a thread's properties.
+    summary: Updates a thread's topic.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function updateThread(options?: UpdateThreadOptions)'
+      content: 'function updateTopic(topic: string, options?: UpdateTopicOptions)'
       parameters:
+        - id: topic
+          type: string
+          description: The topic needs to be updated to.
         - id: options
-          type: <xref uid="@azure/communication-chat.UpdateThreadOptions" />
+          type: <xref uid="@azure/communication-chat.UpdateTopicOptions" />
           description: |
             Operation options.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/communication-chat.OperationResponse"
-          />&gt;
+        type: Promise&lt;void&gt;
         description: ''

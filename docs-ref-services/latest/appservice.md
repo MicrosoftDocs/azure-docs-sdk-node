@@ -34,9 +34,9 @@ npm install @azure/arm-appservice
 
 - Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-appservice)
 
-- [App Service Mobile completed quickstart for JavaScript backend](https://azure.microsoft.com/resources/samples/app-service-mobile-nodejs-backend-quickstart/)
+- [App Service Mobile completed quickstart for JavaScript backend](https://github.com/azure-samples/app-service-mobile-nodejs-backend-quickstart/)
 - [Manage Azure websites with JavaScript](https://azure.microsoft.com/resources/samples/app-service-web-nodejs-manage/)
 - [MEAN.js sample for Azure App Service](https://azure.microsoft.com/resources/samples/meanjs/)
-- [FoodTrucks - Node API App for Azure App Service](https://azure.microsoft.com/resources/samples/app-service-api-node-food-trucks/)
+- [FoodTrucks - Node API App for Azure App Service](https://github.com/azure-samples/app-service-api-node-food-trucks/)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

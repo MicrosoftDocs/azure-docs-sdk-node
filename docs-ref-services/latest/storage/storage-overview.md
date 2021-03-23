@@ -22,7 +22,7 @@ ms.service: storage
 | **Storage Queue** | [Reference](/javascript/api/overview/azure/storage/storage-queue-readme?view=az-storage-js-v12) | [@azure/storage-queue](https://www.npmjs.com/package/@azure/storage-queue) | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue) |
 |||||
 
-## Client Packages (2.X.X) - Legacy
+## Client Packages (10.X.X) - Legacy
 | Package Name | Reference | NPM package | Source |
 |---|---|---|--|
 | **Storage Blob** | [Reference](/javascript/api/overview/azure/storage/storage-blob-readme?view=az-storage-js-v10) | [@azure/storage-blob](https://www.npmjs.com/package/@azure/storage-blob/v/10.5.0) | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-blob) |

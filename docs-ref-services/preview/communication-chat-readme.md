@@ -3,7 +3,7 @@ title: Azure Communication Chat client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-chat, 
 author: maggiepint
 ms.author: magpint
-ms.date: 02/10/2021
+ms.date: 03/10/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Communication Chat client library for JavaScript - Version 1.0.0-beta.4 
+# Azure Communication Chat client library for JavaScript - Version 1.0.0-beta.5 
 
 
 Azure Communication Services for Chat lets developers add chat capabilities to their app. Use this client library to manage chat threads and their users, and send and receive chat messages.
@@ -31,6 +31,12 @@ Read more about Azure Communication Services [here](https://docs.microsoft.com/a
 ```bash
 npm install @azure/communication-chat
 ```
+
+### Browser support
+
+#### JavaScript Bundle
+
+To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
 
@@ -71,7 +77,7 @@ Use the `createThread` method to create a chat thread.
 - Use `topic` to give a thread topic;
 - Use `participants` to list the chat participants to be added to the thread;
 
-`createChatThreadResponse` is the response returned from creating a thread. It contains a `chatThread` which is the thread that was created, as well as an `errors` property which will contain information about invalid participants if they failed to be added to the thread.
+`createChatThreadResult` is the result returned from creating a thread. It contains a `chatThread` which is the thread that was created, as well as an `errors` property which will contain information about invalid participants if they failed to be added to the thread.
 
 ```Javascript
 let createChatThreadRequest =
@@ -80,17 +86,17 @@ let createChatThreadRequest =
     participants:
         [
             {
-                user: { communicationUserId: '<USER_ID_FOR_JACK>' },
+                id: { communicationUserId: '<USER_ID_FOR_JACK>' },
                 displayName: 'Jack'
             },
             {
-                user: { communicationUserId: '<USER_ID_FOR_GEETA>' },
+                id: { communicationUserId: '<USER_ID_FOR_GEETA>' },
                 displayName: 'Geeta'
             }
         ]
 };
-let createChatThreadResponse = await chatClient.createChatThread(createChatThreadRequest);
-let threadId = createChatThreadResponse.chatThread.id;
+let createChatThreadResult = await chatClient.createChatThread(createChatThreadRequest);
+let threadId = createChatThreadResult.chatThread.id;
 ```
 
 ### Send a message to the thread
@@ -106,7 +112,7 @@ Use `sendMessage` method to sends a message to a thread identified by threadId.
 - Use `senderDisplayName` to specify the display name of the sender;
 - Use `type` to specify the message type, such as 'text' or 'html' ;
 
-`sendChatMessageResponse` is the response returned from sending a message, it contains an ID, which is the unique ID of the message.
+`sendChatMessageResult` is the result returned from sending a message, it contains an ID, which is the unique ID of the message.
 
 ```JavaScript
 let sendMessageRequest =
@@ -118,8 +124,8 @@ let sendMessageOptions =
     senderDisplayName : 'Jack',
     type: 'text'
 };
-let sendChatMessageResponse = await chatThreadClient.sendMessage(sendMessageRequest, sendMessageOptions);
-let messageId = sendChatMessageResponse.id;
+let sendChatMessageResult = await chatThreadClient.sendMessage(sendMessageRequest, sendMessageOptions);
+let messageId = sendChatMessageResult.id;
 ```
 
 ### Receive messages from a thread
@@ -160,7 +166,7 @@ let addChatParticipantsRequest =
 {
     participants: [
         {
-            user: { communicationUserId: userTokenResponse.identity },
+            id: { communicationUserId: userTokenResponse.identity },
             displayName: '<NAME>',
             shareHistoryTime: '<TIME>'
         }
@@ -195,7 +201,7 @@ In this quickstart you learned how to:
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.0.0-beta.5/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

@@ -161,6 +161,7 @@ interfaces:
   - '@azure/storage-blob.ContainerListBlobsOptions'
   - '@azure/storage-blob.ContainerProperties'
   - '@azure/storage-blob.ContainerReleaseLeaseOptions'
+  - '@azure/storage-blob.ContainerRenameHeaders'
   - '@azure/storage-blob.ContainerRenewLeaseOptions'
   - '@azure/storage-blob.ContainerRequestConditions'
   - '@azure/storage-blob.ContainerSASPermissionsLike'
@@ -237,6 +238,7 @@ interfaces:
   - '@azure/storage-blob.ServiceGetUserDelegationKeyOptions'
   - '@azure/storage-blob.ServiceListContainersOptions'
   - '@azure/storage-blob.ServiceListContainersSegmentHeaders'
+  - '@azure/storage-blob.ServiceRenameContainerOptions'
   - '@azure/storage-blob.ServiceSetPropertiesHeaders'
   - '@azure/storage-blob.ServiceSetPropertiesOptions'
   - '@azure/storage-blob.ServiceSubmitBatchHeaders'
@@ -290,6 +292,7 @@ typeAliases:
   - '@azure/storage-blob.ContainerGetPropertiesResponse'
   - '@azure/storage-blob.ContainerListBlobFlatSegmentResponse'
   - '@azure/storage-blob.ContainerListBlobHierarchySegmentResponse'
+  - '@azure/storage-blob.ContainerRenameResponse'
   - '@azure/storage-blob.ContainerSetAccessPolicyResponse'
   - '@azure/storage-blob.ContainerSetMetadataResponse'
   - '@azure/storage-blob.ContainerUndeleteResponse'
@@ -351,10 +354,11 @@ functions:
       parameters:
         - id: accountSASSignatureValues
           type: <xref uid="@azure/storage-blob.AccountSASSignatureValues" />
-          description: ''
+          description: '-'
         - id: sharedKeyCredential
           type: <xref uid="@azure/storage-blob.StorageSharedKeyCredential" />
-          description: ''
+          description: |
+            -
       return:
         type: <xref uid="@azure/storage-blob.SASQueryParameters" />
         description: ''
@@ -480,10 +484,11 @@ functions:
       parameters:
         - id: blobSASSignatureValues
           type: <xref uid="@azure/storage-blob.BlobSASSignatureValues" />
-          description: ''
+          description: '-'
         - id: sharedKeyCredential
           type: <xref uid="@azure/storage-blob.StorageSharedKeyCredential" />
-          description: ''
+          description: |
+            -
       return:
         type: <xref uid="@azure/storage-blob.SASQueryParameters" />
         description: ''
@@ -518,7 +523,7 @@ functions:
           expiresOn, // Required. Date type
           ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
           protocol: SASProtocol.HttpsAndHttp, // Optional
-          version: "2018-11-09" // Must >= 2018-11-09 to generate user delegation SAS
+          version: "2018-11-09" // Must greater than or equal to 2018-11-09 to generate user delegation SAS
         },
         userDelegationKey, // UserDelegationKey
         accountName
@@ -536,13 +541,14 @@ functions:
       parameters:
         - id: blobSASSignatureValues
           type: <xref uid="@azure/storage-blob.BlobSASSignatureValues" />
-          description: ''
+          description: '-'
         - id: userDelegationKey
           type: <xref uid="@azure/storage-blob.UserDelegationKey" />
           description: Return value of `blobServiceClient.getUserDelegationKey()`
         - id: accountName
           type: string
-          description: ''
+          description: |
+            -
       return:
         type: <xref uid="@azure/storage-blob.SASQueryParameters" />
         description: ''
@@ -568,13 +574,13 @@ functions:
             TokenCredential
           description: >-
             Such as AnonymousCredential, StorageSharedKeyCredential or any
-            credential from the @azure/identity package to authenticate requests
-            to the service. You can also provide an object that implements the
-            TokenCredential interface. If not specified, AnonymousCredential is
-            used.
+            credential from the `@azure/identity` package to authenticate
+            requests to the service. You can also provide an object that
+            implements the TokenCredential interface. If not specified,
+            AnonymousCredential is used.
         - id: pipelineOptions
           type: <xref uid="@azure/storage-blob.StoragePipelineOptions" />
-          description: ''
+          description: Optional. Options.
       return:
         type: <xref uid="@azure/storage-blob.Pipeline" />
         description: A new Pipeline object.

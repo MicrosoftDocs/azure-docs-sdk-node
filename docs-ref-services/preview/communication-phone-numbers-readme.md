@@ -3,7 +3,7 @@ title: Azure Communication Phone Numbers client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-phone-numbers, 
 author: maggiepint
 ms.author: magpint
-ms.date: 03/10/2021
+ms.date: 03/29/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,12 +11,12 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Communication Phone Numbers client library for JavaScript - Version 1.0.0-beta.4 
+# Azure Communication Phone Numbers client library for JavaScript - Version 1.0.0-beta.5 
 
 
 The phone numbers library provides capabilities for phone number administration.
 
-Acquired phone numbers can come with many capabilities, depending on the country, number type and assignment type. Examples of capabilities are SMS inbound and outbound usage, PSTN inbound and outbound usage. Phone numbers can also be assigned to a bot via a webhook URL.
+Purchased phone numbers can come with many capabilities, depending on the country, number type and assignment type. Examples of capabilities are SMS inbound and outbound usage, PSTN inbound and outbound usage. Phone numbers can also be assigned to a bot via a webhook URL.
 
 ## Getting started
 
@@ -112,10 +112,10 @@ The following sections provide code snippets that cover some of the common tasks
 
 - [Search for available phone numbers](#search-for-available-phone-numbers)
 - [Purchase phone numbers from a search](#purchase-phone-numbers-from-a-search)
-- [Release an acquired phone number](#release-an-acquired-phone-number)
+- [Release a purchased phone number](#release-a-purchased-phone-number)
 - [Update phone number capabilities](#update-phone-number-capabilities)
-- [Get an acquired phone number](#get-an-acquired-phone-number)
-- [List acquired phone numbers](#list-acquired-phone-numbers)
+- [Get a purchased phone number](#get-a-purchased-phone-number)
+- [List purchased phone numbers](#list-purchased-phone-numbers)
 
 ### Search for available phone numbers
 
@@ -141,7 +141,7 @@ async function main() {
     quantity: 1
   };
 
-  const searchPoller = await client.beginSearchAvailablePhoneNumbers(countryCode, searchRequest);
+  const searchPoller = await client.beginSearchAvailablePhoneNumbers(searchRequest);
 
   // The search is underway. Wait to receive searchId.
   const searchResults = searchPoller.pollUntilDone();
@@ -176,7 +176,7 @@ async function main() {
     quantity: 1
   };
 
-  const searchPoller = await client.beginSearchAvailablePhoneNumbers(countryCode, searchRequest);
+  const searchPoller = await client.beginSearchAvailablePhoneNumbers(searchRequest);
 
   // The search is underway. Wait to receive searchId.
   const { searchId, phoneNumbers } = searchPoller.pollUntilDone();
@@ -191,9 +191,9 @@ async function main() {
 main();
 ```
 
-### Release an acquired phone number
+### Release a purchased phone number
 
-Use the `beginReleasePhoneNumber` method to release a previously acquired phone number. Released phone numbers will no longer be associated with the Communication Services resource, and will not be available for use with other operations (eg. SMS) of the resource. The phone number being released is required.
+Use the `beginReleasePhoneNumber` method to release a previously purchased phone number. Released phone numbers will no longer be associated with the Communication Services resource, and will not be available for use with other operations (eg. SMS) of the resource. The phone number being released is required.
 
 `beginReleasePhoneNumber` is a long running operation and returns a poller.
 
@@ -218,7 +218,7 @@ main();
 
 ### Update phone number capabilities
 
-Use the `beginUpdatePhoneNumberCapabilities` method to update the capabilities of an acquired phone number. Phone numbers can be configured to support inbound and/or outbound calling and sms, or neither.
+Use the `beginUpdatePhoneNumberCapabilities` method to update the capabilities of a purchased phone number. Phone numbers can be configured to support inbound and/or outbound calling and sms, or neither.
 
 `beginUpdatePhoneNumberCapabilities` is a long running operation and returns a poller.
 
@@ -250,9 +250,9 @@ async function main() {
 main();
 ```
 
-### Get an acquired phone number
+### Get a purchased phone number
 
-Use the `getPurchasedPhoneNumber` method to get information about an acquired phone number. This information includes the phone number's type, capabilities, cost, and purchase date.
+Use the `getPurchasedPhoneNumber` method to get information about a purchased phone number. This information includes the phone number's type, capabilities, cost, and purchase date.
 
 ```typescript
 import { PhoneNumbersClient } from "@azure/communication-phone-numbers";
@@ -266,15 +266,15 @@ async main function() {
   const phoneNumber = await client.getPurchasedPhoneNumber(phoneNumberToGet);
 
   console.log(`The id is the same as the phone number: ${phoneNumber.id}`);
-  console.log(`Phone number type is ${phoneNumber.type}`);
+  console.log(`Phone number type is ${phoneNumber.phoneNumberType}`);
 }
 
 main();
 ```
 
-### List acquired phone numbers
+### List purchased phone numbers
 
-Use the `listPurchasedPhoneNumbers` method to page through all acquired phone numbers.
+Use the `listPurchasedPhoneNumbers` method to page through all purchased phone numbers.
 
 ```typescript
 import { PhoneNumbersClient } from "@azure/communication-phone-numbers";
@@ -287,7 +287,7 @@ async main function() {
 
   for await (const phoneNumber of phoneNumbers) {
     console.log(`The id is the same as the phone number: ${phoneNumber.id}`);
-    console.log(`Phone number type is ${phoneNumber.type}`);
+    console.log(`Phone number type is ${phoneNumber.phoneNumberType}`);
   }
 }
 
@@ -299,12 +299,12 @@ main();
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.0.0-beta.4/sdk/communication/communication-phone-numbers/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.0.0-beta.5/sdk/communication/communication-phone-numbers/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.0.0-beta.5/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -314,9 +314,9 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.0.0-beta.4/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.0.0-beta.4/sdk/identity/identity
-[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.0.0-beta.4/sdk/identity/identity/README.md
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.0.0-beta.5/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.0.0-beta.5/sdk/identity/identity
+[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.0.0-beta.5/sdk/identity/identity/README.md
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-administration%2FREADME.png)
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-phone-numbers%2FREADME.png)
 

@@ -152,7 +152,10 @@ for (const city of cities) {
 To read a single item from a container, use [Item.read](https://docs.microsoft.com/javascript/api/@azure/cosmos/item?view=azure-node-latest#read-requestoptions-). This is a less expensive operation than using SQL to query by `id`.
 
 ```js
+// with default partitionKey
 await container.item("1").read();
+// with partitionKey value "A"
+await container.item("1", "A")
 ```
 
 ### Delete an item

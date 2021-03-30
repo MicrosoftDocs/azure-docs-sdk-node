@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/core-tracing, 
 author: maggiepint
 ms.author: magpint
-ms.date: 03/04/2021
+ms.date: 03/30/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -98,7 +98,7 @@ const result = await blobClient.download(undefined, undefined, {
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-tracing_1.0.0-preview.10/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-tracing_1.0.0-preview.11/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcore%2Fcore-tracing%2FREADME.png)
 

@@ -12,6 +12,8 @@ ms.devlang: JavaScript
 ms.service: storage
 ---
 
+## Azure Storage Modules for JavaScript
+
 ## Client Packages (12.X.X) - Latest
 
 | Package Name | Reference | NPM package | Source |
@@ -30,7 +32,7 @@ ms.service: storage
 | **Storage Queue** | [Reference](/javascript/api/overview/azure/storage/storage-queue-readme?view=az-storage-js-v10) | [@azure/storage-queue](https://www.npmjs.com/package/@azure/storage-queue/v/10.3.0) | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue) |
 |||||
 
-## Management
+## Management - Latest
 
 | Package Name | Reference | NPM package | Source |
 |---|---|---|--|

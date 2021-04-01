@@ -36,12 +36,11 @@ ms.service: storage
 | **Storage Queue** | [Reference](/javascript/api/overview/azure/storage/storage-queue-readme?view=az-storage-js-v10) | [@azure/storage-queue](https://www.npmjs.com/package/@azure/storage-queue/v/10.3.0) | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/storage-queue) |
 |||||
 
-## Management - Latest
+## Management - Legacy
 
 | Package Name | Reference | NPM package | Version | Source |
 |---|---|---|---|---|
-| **ARM Storage** | [Reference](/javascript/api/@azure/arm-storage/?view=azure-node-latest) | [@azure/arm-storage](https://www.npmjs.com/package/@azure/arm-storage) | 15.3.0 | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storage/arm-storage) |
-| **Storage Cache** | [Reference](/javascript/api/@azure/arm-storagecache/?view=azure-node-latest) | [@azure/arm-storagecache](https://www.npmjs.com/package/@azure/arm-storagecache) | 4.0.0 | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storagecache/arm-storagecache) |
-| **Storage Import/Export** | [Reference](/javascript/api/@azure/arm-storageimportexport/?view=azure-node-latest) | [@azure/arm-storageimportexport](https://www.npmjs.com/package/@azure/arm-storageimportexport) | 1.2.0 | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storageimportexport/arm-storageimportexport) |
-| **Storage Sync** | [Reference](/javascript/api/@azure/arm-storagesync/?view=azure-node-latest) | [@azure/arm-storagesync](https://www.npmjs.com/package/@azure/arm-storagesync) | 8.0.0 | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/storagesync/arm-storagesync) |
+| **ARM Storage** | [Reference](/javascript/api/@azure/arm-storage/?view=azure-node-latest) | [azure-arm-storage](https://www.npmjs.com/package/@azure/arm-storage) | 8.1.0 | [GitHub](https://github.com/azure/azure-sdk-for-node/tree/master/lib/services/storageManagement2) |
+| **Storage Import/Export** | [Reference](/javascript/api/@azure/arm-storageimportexport/?view=azure-node-latest) | [azure-arm-storageimportexport](https://www.npmjs.com/package/@azure/arm-storageimportexport) | 1.2.0 | [GitHub](https://github.com/Azure/azure-sdk-for-node/tree/master/lib/services/storageImportExportManagement) |
+| **Storage Sync** | [Reference](/javascript/api/@azure/arm-storagesync/?view=azure-node-latest) | [azure-arm-storagesync](https://www.npmjs.com/package/@azure/arm-storagesync) | 7.0.0 | [GitHub](https://github.com/azure/azure-sdk-for-node/tree/master/lib/services/storagesyncManagement) |
 |||||

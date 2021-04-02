@@ -17,7 +17,7 @@ ms.service: storage
 > [!NOTE]
 > Documentation in this table of contents is for Legacy package versions. To see documentation for the latest version, see [Azure Storage SDK for JavaScript - latest](?view=az-js-storage-v12)
 
-## Client packages - legacy
+## Client packages (10.x.x) - legacy
 
 | Reference                                                                    | Package                                                                             | Source                                                                                         |
 |------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|

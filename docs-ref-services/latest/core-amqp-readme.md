@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/core-amqp, 
 author: maggiepint
 ms.author: magpint
-ms.date: 02/08/2021
+ms.date: 03/30/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -44,7 +44,7 @@ Some of the key features of Azure Core AMQP library are:
 
 The core-amqp library depends on the [rhea-promise](https://github.com/amqp/rhea-promise) library for managing connections, and for sending and receiving events over the [AMQP](https://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-complete-v1.0-os.pdf) protocol.
 
-### Enable logs
+### Logging
 
 You can set the `AZURE_LOG_LEVEL` environment variable to one of the following values to enable logging to `stderr`:
 
@@ -121,7 +121,7 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
 provided by the bot. You will only need to do this once across all repos using our CLA.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_2.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-amqp_2.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or

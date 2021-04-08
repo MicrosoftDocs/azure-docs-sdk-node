@@ -9,7 +9,7 @@ isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'TestSpan(Tracer, string, OTSpanContext, SpanKind, string, TimeInput)'
+  - name: 'TestSpan(Tracer, string, SpanContext, SpanKind, string, TimeInput)'
     uid: '@azure/core-tracing.TestSpan.constructor'
     package: '@azure/core-tracing'
     summary: Starts a new Span.
@@ -18,26 +18,26 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new TestSpan(parentTracer: Tracer, name: string, context: OTSpanContext,
+        new TestSpan(parentTracer: Tracer, name: string, context: SpanContext,
         kind: SpanKind, parentSpanId?: string, startTime?: TimeInput)
       parameters:
         - id: parentTracer
-          type: Tracer
+          type: <xref uid="@azure/core-tracing.Tracer" />
           description: ''
         - id: name
           type: string
           description: The name of the span.
         - id: context
-          type: OTSpanContext
+          type: <xref uid="@azure/core-tracing.SpanContext" />
           description: The SpanContext this span belongs to
         - id: kind
-          type: SpanKind
+          type: <xref uid="@azure/core-tracing.SpanKind" />
           description: The SpanKind of this Span
         - id: parentSpanId
           type: string
           description: The identifier of the parent Span
         - id: startTime
-          type: TimeInput
+          type: <xref uid="@azure/core-tracing.TimeInput" />
           description: |
             The startTime of the event (defaults to now)
 properties:
@@ -50,9 +50,9 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'attributes: Attributes'
+      content: 'attributes: SpanAttributes'
       return:
-        type: Attributes
+        type: <xref uid="@azure/core-tracing.SpanAttributes" />
         description: ''
   - name: endCalled
     uid: '@azure/core-tracing.TestSpan.endCalled'
@@ -78,7 +78,7 @@ properties:
     syntax:
       content: 'kind: SpanKind'
       return:
-        type: SpanKind
+        type: <xref uid="@azure/core-tracing.SpanKind" />
         description: ''
   - name: name
     uid: '@azure/core-tracing.TestSpan.name'
@@ -117,7 +117,7 @@ properties:
     syntax:
       content: 'startTime: TimeInput'
       return:
-        type: TimeInput
+        type: <xref uid="@azure/core-tracing.TimeInput" />
         description: ''
   - name: status
     uid: '@azure/core-tracing.TestSpan.status'
@@ -128,12 +128,12 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'status: Status'
+      content: 'status: SpanStatus'
       return:
-        type: Status
+        type: <xref uid="@azure/core-tracing.SpanStatus" />
         description: ''
 methods:
-  - name: 'addEvent(string, Attributes)'
+  - name: 'addEvent(string, SpanAttributes)'
     uid: '@azure/core-tracing.TestSpan.addEvent'
     package: '@azure/core-tracing'
     summary: Adds an event to the Span
@@ -141,13 +141,13 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function addEvent(_name: string, _attributes?: Attributes)'
+      content: 'function addEvent(_name: string, _attributes?: SpanAttributes)'
       parameters:
         - id: _name
           type: string
           description: The name of the event
         - id: _attributes
-          type: Attributes
+          type: <xref uid="@azure/core-tracing.SpanAttributes" />
           description: |
             The associated attributes to add for this event
       return:
@@ -163,7 +163,7 @@ methods:
     syntax:
       content: function context()
       return:
-        type: OTSpanContext
+        type: <xref uid="@azure/core-tracing.SpanContext" />
         description: ''
   - name: end(number)
     uid: '@azure/core-tracing.TestSpan.end'
@@ -192,7 +192,23 @@ methods:
       return:
         type: boolean
         description: ''
-  - name: 'setAttribute(string, unknown)'
+  - name: 'recordException(Exception, TimeInput)'
+    uid: '@azure/core-tracing.TestSpan.recordException'
+    package: '@azure/core-tracing'
+    summary: Sets exception as a span event
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function recordException(_exception: Exception, _time?: TimeInput)'
+      parameters:
+        - id: _exception
+          type: <xref uid="@azure/core-tracing.Exception" />
+          description: ''
+        - id: _time
+          type: <xref uid="@azure/core-tracing.TimeInput" />
+          description: ''
+  - name: 'setAttribute(string, SpanAttributeValue)'
     uid: '@azure/core-tracing.TestSpan.setAttribute'
     package: '@azure/core-tracing'
     summary: Sets an attribute on the Span
@@ -200,19 +216,19 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setAttribute(key: string, value: unknown)'
+      content: 'function setAttribute(key: string, value: SpanAttributeValue)'
       parameters:
         - id: key
           type: string
           description: The attribute key
         - id: value
-          type: unknown
+          type: <xref uid="@azure/core-tracing.SpanAttributeValue" />
           description: |
             The attribute value
       return:
         type: this
         description: ''
-  - name: setAttributes(Attributes)
+  - name: setAttributes(SpanAttributes)
     uid: '@azure/core-tracing.TestSpan.setAttributes'
     package: '@azure/core-tracing'
     summary: Sets attributes on the Span
@@ -220,27 +236,27 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setAttributes(attributes: Attributes)'
+      content: 'function setAttributes(attributes: SpanAttributes)'
       parameters:
         - id: attributes
-          type: Attributes
+          type: <xref uid="@azure/core-tracing.SpanAttributes" />
           description: |
             The attributes to add
       return:
         type: this
         description: ''
-  - name: setStatus(Status)
+  - name: setStatus(SpanStatus)
     uid: '@azure/core-tracing.TestSpan.setStatus'
     package: '@azure/core-tracing'
-    summary: Sets a status on the span. Overrides the default of CanonicalCode.OK.
+    summary: Sets a status on the span. Overrides the default of SpanStatusCode.OK.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setStatus(status: Status)'
+      content: 'function setStatus(status: SpanStatus)'
       parameters:
         - id: status
-          type: Status
+          type: <xref uid="@azure/core-tracing.SpanStatus" />
           description: |
             The status to set.
       return:
@@ -256,7 +272,7 @@ methods:
     syntax:
       content: function tracer()
       return:
-        type: Tracer
+        type: <xref uid="@azure/core-tracing.Tracer" />
         description: ''
   - name: updateName(string)
     uid: '@azure/core-tracing.TestSpan.updateName'

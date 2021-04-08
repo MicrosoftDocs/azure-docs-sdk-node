@@ -78,7 +78,7 @@ methods:
       For a list of fields that are contained in the response, please refer to
       the documentation at the
 
-      following link: https://aka.ms/azsdk/formrecognizer/businesscardfields
+      following link: https://aka.ms/formrecognizer/businesscardfields
 
 
       This method returns a long running operation poller that allows you to
@@ -153,7 +153,7 @@ methods:
 
       For a list of fields that are contained in the response, please refer to
       the documentation at the following link:
-      https://aka.ms/azsdk/formrecognizer/businesscardfields
+      https://aka.ms/formrecognizer/businesscardfields
 
 
       This method returns a long running operation poller that allows you to
@@ -486,6 +486,155 @@ methods:
         type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
         description: ''
   - name: >-
+      beginRecognizeIdDocuments(FormRecognizerRequestBody,
+      BeginRecognizeIdDocumentsOptions)
+    uid: '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeIdDocuments'
+    package: '@azure/ai-form-recognizer'
+    summary: >
+      Recognizes data from identification documents using a pre-built ID
+
+      document model, enabling you to extract structured data from ID documents
+
+      such as first/last name, document number, expiration date, and more.
+
+      For a list of fields that are contained in the response, please refer to
+
+      the documentation at the following link:
+
+      https://aka.ms/formrecognizer/iddocumentfields
+
+
+      This method returns a long running operation poller that allows you to
+
+      wait indefinitely until the operation is completed.
+
+
+      Note that the onProgress callback will not be invoked if the operation
+
+      completes in the first request, and attempting to cancel a completed copy
+
+      will result in an error being thrown.
+
+
+      Example usage:
+
+
+      ```ts
+
+      const path = "./license.jpg";
+
+      const readStream = fs.createReadStream(path);
+
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeIdDocuments(readStream, {
+        onProgress: (state) => { console.log(`status: ${state.status}`); }
+      });
+
+
+      const [idDocument] = await poller.pollUntilDone();
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRecognizeIdDocuments(idDocument:
+        FormRecognizerRequestBody, options?: BeginRecognizeIdDocumentsOptions)
+      parameters:
+        - id: idDocument
+          type: <xref uid="@azure/ai-form-recognizer.FormRecognizerRequestBody" />
+          description: Input document
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginRecognizeIdDocumentsOptions" />
+          description: |
+            Options for the recognition operation
+      return:
+        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
+        description: ''
+  - name: 'beginRecognizeIdDocumentsFromUrl(string, BeginRecognizeIdDocumentsOptions)'
+    uid: >-
+      @azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeIdDocumentsFromUrl
+    package: '@azure/ai-form-recognizer'
+    summary: >
+      Recognizes identity document information from a url using pre-built ID
+
+      document model, enabling you to extract structured data from ID documents
+
+      such as first/last name, document number, expiration date, and more.
+
+      For a list of fields that are contained in the response, please refer to
+
+      the documentation at the following link:
+
+      https://aka.ms/formrecognizer/iddocumentfields
+
+
+      This method returns a long running operation poller that allows you to
+
+      wait indefinitely until the operation is completed.
+
+
+      Note that the onProgress callback will not be invoked if the operation
+
+      completes in the first request, and attempting to cancel a completed copy
+
+      will result in an error being thrown.
+
+
+      Example usage:
+
+      ```ts
+
+      const url = "<url to the identity document>";
+
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeIdDocumentsFromUrl(url, {
+        includeFieldElements: true,
+        onProgress: (state) => {
+          console.log(`analyzing status: ${state.status}`);
+        }
+      });
+
+
+      const [idDocument] = await poller.pollUntilDone();
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRecognizeIdDocumentsFromUrl(idDocumentUrl: string,
+        options?: BeginRecognizeIdDocumentsOptions)
+      parameters:
+        - id: idDocumentUrl
+          type: string
+          description: >-
+            Url to an identity document that is accessible from
+
+            the service. Must be a valid, encoded URL to a document of a
+            supported
+
+            content type.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginRecognizeIdDocumentsOptions" />
+          description: |
+            Options for the recognition operation
+      return:
+        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
+        description: ''
+  - name: >-
       beginRecognizeInvoices(FormRecognizerRequestBody,
       BeginRecognizeInvoicesOptions)
     uid: '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeInvoices'
@@ -499,7 +648,7 @@ methods:
 
       For a list of fields that are contained in the response, please refer to
       the documentation at the following link:
-      https://aka.ms/azsdk/formrecognizer/invoicefields
+      https://aka.ms/formrecognizer/invoicefields
 
 
       This method returns a long running operation poller that allows you to
@@ -572,7 +721,7 @@ methods:
 
       For a list of fields that are contained in the response, please refer to
       the documentation at the following link:
-      https://aka.ms/azsdk/formrecognizer/invoicefields
+      https://aka.ms/formrecognizer/invoicefields
 
 
       This method returns a long running operation poller that allows you to
@@ -646,7 +795,7 @@ methods:
 
       For a list of fields that are contained in the response, please refer to
       the documentation at the following link:
-      https://aka.ms/azsdk/formrecognizer/receiptfields
+      https://aka.ms/formrecognizer/receiptfields
 
 
       This method returns a long running operation poller that allows you to
@@ -720,7 +869,7 @@ methods:
       For a list of fields that are contained in the response, please refer to
       the documentation at the
 
-      following link: https://aka.ms/azsdk/formrecognizer/receiptfields
+      following link: https://aka.ms/formrecognizer/receiptfields
 
 
       This method returns a long running operation poller that allows you to

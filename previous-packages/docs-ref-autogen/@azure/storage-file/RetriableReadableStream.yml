@@ -52,18 +52,18 @@ constructors:
           type: <xref uid="@azure/storage-file.IRetriableReadableStreamOptions" />
           description: ''
 properties:
-  - name: defaultMaxListeners
-    uid: '@azure/storage-file.RetriableReadableStream.defaultMaxListeners'
+  - name: destroyed
+    uid: '@azure/storage-file.RetriableReadableStream.destroyed'
     package: '@azure/storage-file'
     summary: ''
-    fullName: defaultMaxListeners
+    fullName: destroyed
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static defaultMaxListeners: number'
+      content: 'destroyed: boolean'
       return:
-        type: number
+        type: boolean
         description: ''
   - name: readable
     uid: '@azure/storage-file.RetriableReadableStream.readable'
@@ -78,6 +78,45 @@ properties:
       return:
         type: boolean
         description: ''
+  - name: readableEncoding
+    uid: '@azure/storage-file.RetriableReadableStream.readableEncoding'
+    package: '@azure/storage-file'
+    summary: ''
+    fullName: readableEncoding
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readableEncoding: BufferEncoding | null'
+      return:
+        type: BufferEncoding | null
+        description: ''
+  - name: readableEnded
+    uid: '@azure/storage-file.RetriableReadableStream.readableEnded'
+    package: '@azure/storage-file'
+    summary: ''
+    fullName: readableEnded
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readableEnded: boolean'
+      return:
+        type: boolean
+        description: ''
+  - name: readableFlowing
+    uid: '@azure/storage-file.RetriableReadableStream.readableFlowing'
+    package: '@azure/storage-file'
+    summary: ''
+    fullName: readableFlowing
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readableFlowing: boolean | null'
+      return:
+        type: boolean | null
+        description: ''
   - name: readableHighWaterMark
     uid: '@azure/storage-file.RetriableReadableStream.readableHighWaterMark'
     package: '@azure/storage-file'
@@ -91,11 +130,46 @@ properties:
       return:
         type: number
         description: ''
-methods:
-  - name: 'addListener("close", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.addListener_1'
+  - name: readableLength
+    uid: '@azure/storage-file.RetriableReadableStream.readableLength'
     package: '@azure/storage-file'
     summary: ''
+    fullName: readableLength
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readableLength: number'
+      return:
+        type: number
+        description: ''
+  - name: readableObjectMode
+    uid: '@azure/storage-file.RetriableReadableStream.readableObjectMode'
+    package: '@azure/storage-file'
+    summary: ''
+    fullName: readableObjectMode
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readableObjectMode: boolean'
+      return:
+        type: boolean
+        description: ''
+methods:
+  - name: 'addListener("close", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.addListener'
+    package: '@azure/storage-file'
+    summary: |-
+      Event emitter
+      The defined events on documents including:
+      1. close
+      2. data
+      3. end
+      4. error
+      5. pause
+      6. readable
+      7. resume
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -111,29 +185,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'addListener("data", (chunk: Buffer | string) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.addListener_2'
+  - name: 'addListener("data", (chunk: any) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.addListener_1'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        function addListener(event: "data", listener: (chunk: Buffer | string)
-        => void)
+      content: 'function addListener(event: "data", listener: (chunk: any) => void)'
       parameters:
         - id: event
           type: '"data"'
           description: ''
         - id: listener
-          type: '(chunk: Buffer | string) =&gt; void'
+          type: '(chunk: any) =&gt; void'
           description: ''
       return:
         type: this
         description: ''
   - name: 'addListener("end", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.addListener_3'
+    uid: '@azure/storage-file.RetriableReadableStream.addListener_2'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -152,7 +224,7 @@ methods:
         type: this
         description: ''
   - name: 'addListener("error", (err: Error) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.addListener_5'
+    uid: '@azure/storage-file.RetriableReadableStream.addListener_3'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -170,8 +242,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'addListener("readable", () => void)'
+  - name: 'addListener("pause", () => void)'
     uid: '@azure/storage-file.RetriableReadableStream.addListener_4'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function addListener(event: "pause", listener: () => void)'
+      parameters:
+        - id: event
+          type: '"pause"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'addListener("readable", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.addListener_5'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -189,25 +280,39 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'addListener(string, (args: any[]) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.addListener'
+  - name: 'addListener("resume", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.addListener_6'
     package: '@azure/storage-file'
-    summary: |-
-      Event emitter
-      The defined events on documents including:
-      1. close
-      2. data
-      3. end
-      4. readable
-      5. error
+    summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function addListener(event: string, listener: (args: any[]) => void)'
+      content: 'function addListener(event: "resume", listener: () => void)'
       parameters:
         - id: event
-          type: string
+          type: '"resume"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'addListener(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.addListener_7'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function addListener(event: string | symbol, listener: (args: any[]) =>
+        void)
+      parameters:
+        - id: event
+          type: string | symbol
           description: ''
         - id: listener
           type: '(args: any[]) =&gt; void'
@@ -229,7 +334,7 @@ methods:
           type: Error
           description: ''
   - name: emit("close")
-    uid: '@azure/storage-file.RetriableReadableStream.emit_1'
+    uid: '@azure/storage-file.RetriableReadableStream.emit'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -244,27 +349,27 @@ methods:
       return:
         type: boolean
         description: ''
-  - name: 'emit("data", Buffer | string)'
-    uid: '@azure/storage-file.RetriableReadableStream.emit_2'
+  - name: 'emit("data", any)'
+    uid: '@azure/storage-file.RetriableReadableStream.emit_1'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function emit(event: "data", chunk: Buffer | string)'
+      content: 'function emit(event: "data", chunk: any)'
       parameters:
         - id: event
           type: '"data"'
           description: ''
         - id: chunk
-          type: Buffer | string
+          type: any
           description: ''
       return:
         type: boolean
         description: ''
   - name: emit("end")
-    uid: '@azure/storage-file.RetriableReadableStream.emit_3'
+    uid: '@azure/storage-file.RetriableReadableStream.emit_2'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -280,7 +385,7 @@ methods:
         type: boolean
         description: ''
   - name: 'emit("error", Error)'
-    uid: '@azure/storage-file.RetriableReadableStream.emit_5'
+    uid: '@azure/storage-file.RetriableReadableStream.emit_3'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -298,8 +403,24 @@ methods:
       return:
         type: boolean
         description: ''
-  - name: emit("readable")
+  - name: emit("pause")
     uid: '@azure/storage-file.RetriableReadableStream.emit_4'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function emit(event: "pause")'
+      parameters:
+        - id: event
+          type: '"pause"'
+          description: ''
+      return:
+        type: boolean
+        description: ''
+  - name: emit("readable")
+    uid: '@azure/storage-file.RetriableReadableStream.emit_5'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -314,8 +435,24 @@ methods:
       return:
         type: boolean
         description: ''
+  - name: emit("resume")
+    uid: '@azure/storage-file.RetriableReadableStream.emit_6'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function emit(event: "resume")'
+      parameters:
+        - id: event
+          type: '"resume"'
+          description: ''
+      return:
+        type: boolean
+        description: ''
   - name: 'emit(string | symbol, any[])'
-    uid: '@azure/storage-file.RetriableReadableStream.emit'
+    uid: '@azure/storage-file.RetriableReadableStream.emit_7'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -345,6 +482,27 @@ methods:
       return:
         type: Array&lt;string | symbol&gt;
         description: ''
+  - name: 'from(Iterable<any> | AsyncIterable<any>, ReadableOptions)'
+    uid: '@azure/storage-file.RetriableReadableStream.from'
+    package: '@azure/storage-file'
+    summary: A utility method for creating Readable Streams out of iterators.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function from(iterable: Iterable<any> | AsyncIterable<any>,
+        options?: ReadableOptions)
+      parameters:
+        - id: iterable
+          type: Iterable&lt;any&gt; | AsyncIterable&lt;any&gt;
+          description: ''
+        - id: options
+          type: ReadableOptions
+          description: ''
+      return:
+        type: Readable
+        description: ''
   - name: getMaxListeners()
     uid: '@azure/storage-file.RetriableReadableStream.getMaxListeners'
     package: '@azure/storage-file'
@@ -369,27 +527,6 @@ methods:
       return:
         type: boolean
         description: ''
-  - name: 'listenerCount(EventEmitter, string | symbol)'
-    uid: '@azure/storage-file.RetriableReadableStream.listenerCount'
-    package: '@azure/storage-file'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function listenerCount(emitter: EventEmitter, event: string |
-        symbol)
-      parameters:
-        - id: emitter
-          type: EventEmitter
-          description: ''
-        - id: event
-          type: string | symbol
-          description: ''
-      return:
-        type: number
-        description: ''
   - name: listenerCount(string | symbol)
     uid: '@azure/storage-file.RetriableReadableStream.listenerCount'
     package: '@azure/storage-file'
@@ -398,9 +535,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listenerCount(type: string | symbol)'
+      content: 'function listenerCount(event: string | symbol)'
       parameters:
-        - id: type
+        - id: event
           type: string | symbol
           description: ''
       return:
@@ -422,8 +559,27 @@ methods:
       return:
         type: 'Function[]'
         description: ''
+  - name: 'off(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.off'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function off(event: string | symbol, listener: (args: any[]) => void)'
+      parameters:
+        - id: event
+          type: string | symbol
+          description: ''
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: ''
+      return:
+        type: this
+        description: ''
   - name: 'on("close", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.on_1'
+    uid: '@azure/storage-file.RetriableReadableStream.on'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -441,27 +597,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'on("data", (chunk: Buffer | string) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.on_2'
+  - name: 'on("data", (chunk: any) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.on_1'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function on(event: "data", listener: (chunk: Buffer | string) => void)'
+      content: 'function on(event: "data", listener: (chunk: any) => void)'
       parameters:
         - id: event
           type: '"data"'
           description: ''
         - id: listener
-          type: '(chunk: Buffer | string) =&gt; void'
+          type: '(chunk: any) =&gt; void'
           description: ''
       return:
         type: this
         description: ''
   - name: 'on("end", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.on_3'
+    uid: '@azure/storage-file.RetriableReadableStream.on_2'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -480,7 +636,7 @@ methods:
         type: this
         description: ''
   - name: 'on("error", (err: Error) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.on_5'
+    uid: '@azure/storage-file.RetriableReadableStream.on_3'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -498,8 +654,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'on("readable", () => void)'
+  - name: 'on("pause", () => void)'
     uid: '@azure/storage-file.RetriableReadableStream.on_4'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function on(event: "pause", listener: () => void)'
+      parameters:
+        - id: event
+          type: '"pause"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'on("readable", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.on_5'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -517,18 +692,37 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'on(string, (args: any[]) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.on'
+  - name: 'on("resume", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.on_6'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function on(event: string, listener: (args: any[]) => void)'
+      content: 'function on(event: "resume", listener: () => void)'
       parameters:
         - id: event
-          type: string
+          type: '"resume"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'on(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.on_7'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function on(event: string | symbol, listener: (args: any[]) => void)'
+      parameters:
+        - id: event
+          type: string | symbol
           description: ''
         - id: listener
           type: '(args: any[]) =&gt; void'
@@ -537,7 +731,7 @@ methods:
         type: this
         description: ''
   - name: 'once("close", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.once_1'
+    uid: '@azure/storage-file.RetriableReadableStream.once'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -555,27 +749,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'once("data", (chunk: Buffer | string) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.once_2'
+  - name: 'once("data", (chunk: any) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.once_1'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function once(event: "data", listener: (chunk: Buffer | string) => void)'
+      content: 'function once(event: "data", listener: (chunk: any) => void)'
       parameters:
         - id: event
           type: '"data"'
           description: ''
         - id: listener
-          type: '(chunk: Buffer | string) =&gt; void'
+          type: '(chunk: any) =&gt; void'
           description: ''
       return:
         type: this
         description: ''
   - name: 'once("end", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.once_3'
+    uid: '@azure/storage-file.RetriableReadableStream.once_2'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -594,7 +788,7 @@ methods:
         type: this
         description: ''
   - name: 'once("error", (err: Error) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.once_5'
+    uid: '@azure/storage-file.RetriableReadableStream.once_3'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -612,8 +806,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'once("readable", () => void)'
+  - name: 'once("pause", () => void)'
     uid: '@azure/storage-file.RetriableReadableStream.once_4'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function once(event: "pause", listener: () => void)'
+      parameters:
+        - id: event
+          type: '"pause"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'once("readable", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.once_5'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -631,18 +844,37 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'once(string, (args: any[]) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.once'
+  - name: 'once("resume", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.once_6'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function once(event: string, listener: (args: any[]) => void)'
+      content: 'function once(event: "resume", listener: () => void)'
       parameters:
         - id: event
-          type: string
+          type: '"resume"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'once(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.once_7'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function once(event: string | symbol, listener: (args: any[]) => void)'
+      parameters:
+        - id: event
+          type: string | symbol
           description: ''
         - id: listener
           type: '(args: any[]) =&gt; void'
@@ -682,7 +914,7 @@ methods:
         type: T
         description: ''
   - name: 'prependListener("close", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.prependListener_1'
+    uid: '@azure/storage-file.RetriableReadableStream.prependListener'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -700,29 +932,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'prependListener("data", (chunk: Buffer | string) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.prependListener_2'
+  - name: 'prependListener("data", (chunk: any) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.prependListener_1'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        function prependListener(event: "data", listener: (chunk: Buffer |
-        string) => void)
+      content: 'function prependListener(event: "data", listener: (chunk: any) => void)'
       parameters:
         - id: event
           type: '"data"'
           description: ''
         - id: listener
-          type: '(chunk: Buffer | string) =&gt; void'
+          type: '(chunk: any) =&gt; void'
           description: ''
       return:
         type: this
         description: ''
   - name: 'prependListener("end", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.prependListener_3'
+    uid: '@azure/storage-file.RetriableReadableStream.prependListener_2'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -741,7 +971,7 @@ methods:
         type: this
         description: ''
   - name: 'prependListener("error", (err: Error) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.prependListener_5'
+    uid: '@azure/storage-file.RetriableReadableStream.prependListener_3'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -759,8 +989,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'prependListener("readable", () => void)'
+  - name: 'prependListener("pause", () => void)'
     uid: '@azure/storage-file.RetriableReadableStream.prependListener_4'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function prependListener(event: "pause", listener: () => void)'
+      parameters:
+        - id: event
+          type: '"pause"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'prependListener("readable", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.prependListener_5'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -778,18 +1027,39 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'prependListener(string, (args: any[]) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.prependListener'
+  - name: 'prependListener("resume", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.prependListener_6'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function prependListener(event: string, listener: (args: any[]) => void)'
+      content: 'function prependListener(event: "resume", listener: () => void)'
       parameters:
         - id: event
-          type: string
+          type: '"resume"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'prependListener(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.prependListener_7'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function prependListener(event: string | symbol, listener: (args: any[])
+        => void)
+      parameters:
+        - id: event
+          type: string | symbol
           description: ''
         - id: listener
           type: '(args: any[]) =&gt; void'
@@ -798,7 +1068,7 @@ methods:
         type: this
         description: ''
   - name: 'prependOnceListener("close", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener_1'
+    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -816,8 +1086,8 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'prependOnceListener("data", (chunk: Buffer | string) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener_2'
+  - name: 'prependOnceListener("data", (chunk: any) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener_1'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -825,20 +1095,20 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function prependOnceListener(event: "data", listener: (chunk: Buffer |
-        string) => void)
+        function prependOnceListener(event: "data", listener: (chunk: any) =>
+        void)
       parameters:
         - id: event
           type: '"data"'
           description: ''
         - id: listener
-          type: '(chunk: Buffer | string) =&gt; void'
+          type: '(chunk: any) =&gt; void'
           description: ''
       return:
         type: this
         description: ''
   - name: 'prependOnceListener("end", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener_3'
+    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener_2'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -857,7 +1127,7 @@ methods:
         type: this
         description: ''
   - name: 'prependOnceListener("error", (err: Error) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener_5'
+    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener_3'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -877,8 +1147,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'prependOnceListener("readable", () => void)'
+  - name: 'prependOnceListener("pause", () => void)'
     uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener_4'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function prependOnceListener(event: "pause", listener: () => void)'
+      parameters:
+        - id: event
+          type: '"pause"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'prependOnceListener("readable", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener_5'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -896,8 +1185,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'prependOnceListener(string, (args: any[]) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener'
+  - name: 'prependOnceListener("resume", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener_6'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function prependOnceListener(event: "resume", listener: () => void)'
+      parameters:
+        - id: event
+          type: '"resume"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.prependOnceListener_7'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -905,11 +1213,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function prependOnceListener(event: string, listener: (args: any[]) =>
-        void)
+        function prependOnceListener(event: string | symbol, listener: (args:
+        any[]) => void)
       parameters:
         - id: event
-          type: string
+          type: string | symbol
           description: ''
         - id: listener
           type: '(args: any[]) =&gt; void'
@@ -917,7 +1225,7 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'push(any, undefined | string)'
+  - name: 'push(any, BufferEncoding)'
     uid: '@azure/storage-file.RetriableReadableStream.push'
     package: '@azure/storage-file'
     summary: ''
@@ -925,16 +1233,32 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function push(chunk: any, encoding?: undefined | string)'
+      content: 'function push(chunk: any, encoding?: BufferEncoding)'
       parameters:
         - id: chunk
           type: any
           description: ''
         - id: encoding
-          type: undefined | string
+          type: BufferEncoding
           description: ''
       return:
         type: boolean
+        description: ''
+  - name: rawListeners(string | symbol)
+    uid: '@azure/storage-file.RetriableReadableStream.rawListeners'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function rawListeners(event: string | symbol)'
+      parameters:
+        - id: event
+          type: string | symbol
+          description: ''
+      return:
+        type: 'Function[]'
         description: ''
   - name: read(undefined | number)
     uid: '@azure/storage-file.RetriableReadableStream.read'
@@ -969,7 +1293,7 @@ methods:
         type: this
         description: ''
   - name: 'removeListener("close", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.removeListener_1'
+    uid: '@azure/storage-file.RetriableReadableStream.removeListener'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -987,29 +1311,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'removeListener("data", (chunk: Buffer | string) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.removeListener_2'
+  - name: 'removeListener("data", (chunk: any) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.removeListener_1'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        function removeListener(event: "data", listener: (chunk: Buffer |
-        string) => void)
+      content: 'function removeListener(event: "data", listener: (chunk: any) => void)'
       parameters:
         - id: event
           type: '"data"'
           description: ''
         - id: listener
-          type: '(chunk: Buffer | string) =&gt; void'
+          type: '(chunk: any) =&gt; void'
           description: ''
       return:
         type: this
         description: ''
   - name: 'removeListener("end", () => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.removeListener_3'
+    uid: '@azure/storage-file.RetriableReadableStream.removeListener_2'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -1028,7 +1350,7 @@ methods:
         type: this
         description: ''
   - name: 'removeListener("error", (err: Error) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.removeListener_5'
+    uid: '@azure/storage-file.RetriableReadableStream.removeListener_3'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -1046,8 +1368,27 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'removeListener("readable", () => void)'
+  - name: 'removeListener("pause", () => void)'
     uid: '@azure/storage-file.RetriableReadableStream.removeListener_4'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function removeListener(event: "pause", listener: () => void)'
+      parameters:
+        - id: event
+          type: '"pause"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'removeListener("readable", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.removeListener_5'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
@@ -1065,18 +1406,39 @@ methods:
       return:
         type: this
         description: ''
-  - name: 'removeListener(string, (args: any[]) => void)'
-    uid: '@azure/storage-file.RetriableReadableStream.removeListener'
+  - name: 'removeListener("resume", () => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.removeListener_6'
     package: '@azure/storage-file'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function removeListener(event: string, listener: (args: any[]) => void)'
+      content: 'function removeListener(event: "resume", listener: () => void)'
       parameters:
         - id: event
-          type: string
+          type: '"resume"'
+          description: ''
+        - id: listener
+          type: () =&gt; void
+          description: ''
+      return:
+        type: this
+        description: ''
+  - name: 'removeListener(string | symbol, (args: any[]) => void)'
+    uid: '@azure/storage-file.RetriableReadableStream.removeListener_7'
+    package: '@azure/storage-file'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function removeListener(event: string | symbol, listener: (args: any[])
+        => void)
+      parameters:
+        - id: event
+          type: string | symbol
           description: ''
         - id: listener
           type: '(args: any[]) =&gt; void'
@@ -1096,7 +1458,7 @@ methods:
       return:
         type: this
         description: ''
-  - name: setEncoding(string)
+  - name: setEncoding(BufferEncoding)
     uid: '@azure/storage-file.RetriableReadableStream.setEncoding'
     package: '@azure/storage-file'
     summary: ''
@@ -1104,10 +1466,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setEncoding(encoding: string)'
+      content: 'function setEncoding(encoding: BufferEncoding)'
       parameters:
         - id: encoding
-          type: string
+          type: BufferEncoding
           description: ''
       return:
         type: this
@@ -1128,7 +1490,7 @@ methods:
       return:
         type: this
         description: ''
-  - name: unpipe<T>(T)
+  - name: unpipe(NodeJS.WritableStream)
     uid: '@azure/storage-file.RetriableReadableStream.unpipe'
     package: '@azure/storage-file'
     summary: ''
@@ -1136,15 +1498,15 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function unpipe<T>(destination?: T)'
+      content: 'function unpipe(destination?: NodeJS.WritableStream)'
       parameters:
         - id: destination
-          type: T
+          type: <xref uid="NodeJS.WritableStream" />
           description: ''
       return:
         type: this
         description: ''
-  - name: unshift(any)
+  - name: 'unshift(any, BufferEncoding)'
     uid: '@azure/storage-file.RetriableReadableStream.unshift'
     package: '@azure/storage-file'
     summary: ''
@@ -1152,10 +1514,13 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function unshift(chunk: any)'
+      content: 'function unshift(chunk: any, encoding?: BufferEncoding)'
       parameters:
         - id: chunk
           type: any
+          description: ''
+        - id: encoding
+          type: BufferEncoding
           description: ''
   - name: wrap(ReadableStream)
     uid: '@azure/storage-file.RetriableReadableStream.wrap'

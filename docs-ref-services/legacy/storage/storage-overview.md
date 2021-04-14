@@ -34,3 +34,5 @@ ms.service: storage
 | [Storage Import/Export](/javascript/api/azure-arm-storageimportexport) | [azure-arm-storageimportexport@1.2.0](https://www.npmjs.com/package/@azure/arm-storageimportexport) | [GitHub](https://github.com/Azure/azure-sdk-for-node/tree/master/lib/services/storageImportExportManagement) |
 | [Storage Sync](/javascript/api/azure-arm-storagesync)                  | [azure-arm-storagesync@7.0.0](https://www.npmjs.com/package/@azure/arm-storagesync)                 | [GitHub](https://github.com/azure/azure-sdk-for-node/tree/master/lib/services/storagesyncManagement)         |
 |                                                                        |                                                                                                     |                                                                                                              |
+
+See [packages for other Azure services](/azure/developer/javascript/azure-sdk-library-package-index)

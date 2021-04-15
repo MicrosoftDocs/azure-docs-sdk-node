@@ -1,0 +1,1027 @@
+### YamlMime:TSType
+name: PageBlobURL
+uid: '@azure/storage-blob.PageBlobURL'
+package: '@azure/storage-blob'
+summary: PageBlobURL defines a set of operations applicable to page blobs.
+fullName: PageBlobURL
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+constructors:
+  - name: 'PageBlobURL(string, Pipeline)'
+    uid: '@azure/storage-blob.PageBlobURL.constructor'
+    package: '@azure/storage-blob'
+    summary: >-
+      Creates an instance of PageBlobURL.
+
+      This method accepts an encoded URL or non-encoded URL pointing to a page
+      blob.
+
+      Encoded URL string will NOT be escaped twice, only special characters in
+      URL path will be escaped.
+
+      If a blob name includes ? or %, blob name must be encoded in the URL.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'new PageBlobURL(url: string, pipeline: Pipeline)'
+      parameters:
+        - id: url
+          type: string
+          description: |-
+            A URL string pointing to Azure Storage page blob, such as
+                                "https://myaccount.blob.core.windows.net/mycontainer/pageblob". You can
+                                append a SAS if using AnonymousCredential, such as
+                                "https://myaccount.blob.core.windows.net/mycontainer/pageblob?sasString".
+                                This method accepts an encoded URL or non-encoded URL pointing to a blob.
+                                Encoded URL string will NOT be escaped twice, only special characters in URL path will be escaped.
+                                However, if a blob name includes ? or %, blob name must be encoded in the URL.
+                                Such as a blob named "my?blob%", the URL should be "https://myaccount.blob.core.windows.net/mycontainer/my%3Fblob%25".
+        - id: pipeline
+          type: <xref uid="@azure/storage-blob.Pipeline" />
+          description: |-
+            Call StorageURL.newPipeline() to create a default
+                                       pipeline, or provide a customized pipeline.
+properties:
+  - name: credential
+    uid: '@azure/storage-blob.PageBlobURL.credential'
+    package: '@azure/storage-blob'
+    summary: Credential used for authentication and authorization.
+    fullName: credential
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'credential: Credential'
+      return:
+        type: <xref uid="@azure/storage-blob.Credential" />
+        description: ''
+  - name: pipeline
+    uid: '@azure/storage-blob.PageBlobURL.pipeline'
+    package: '@azure/storage-blob'
+    summary: Request policy pipeline.
+    fullName: pipeline
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        type: <xref uid="@azure/storage-blob.Pipeline" />
+        description: ''
+  - name: url
+    uid: '@azure/storage-blob.PageBlobURL.url'
+    package: '@azure/storage-blob'
+    summary: Encoded URL string value.
+    fullName: url
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'url: string'
+      return:
+        type: string
+        description: ''
+methods:
+  - name: 'abortCopyFromURL(Aborter, string, IBlobAbortCopyFromURLOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.abortCopyFromURL'
+    package: '@azure/storage-blob'
+    summary: >-
+      Aborts a pending asynchronous Copy Blob operation, and leaves a
+      destination blob with zero
+
+      length and full metadata. Version 2012-02-12 and newer.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function abortCopyFromURL(aborter: Aborter, copyId: string, options?:
+        IBlobAbortCopyFromURLOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: copyId
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobAbortCopyFromURLOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobAbortCopyFromURLResponse" />&gt;
+        description: ''
+  - name: 'acquireLease(Aborter, string, number, IBlobAcquireLeaseOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.acquireLease'
+    package: '@azure/storage-blob'
+    summary: |-
+      Establishes and manages a lock on a blob for write and delete operations.
+      The lock duration can be 15 to 60 seconds, or can be infinite.
+      In versions prior to 2012-02-12, the lock duration is 60 seconds.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function acquireLease(aborter: Aborter, proposedLeaseId: string,
+        duration: number, options?: IBlobAcquireLeaseOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: proposedLeaseId
+          type: string
+          description: Can be specified in any valid GUID string format
+        - id: duration
+          type: number
+          description: 'The lock duration can be 15 to 60 seconds, or can be infinite'
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobAcquireLeaseOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobAcquireLeaseResponse" />&gt;
+        description: ''
+  - name: 'breakLease(Aborter, undefined | number, IBlobBreakLeaseOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.breakLease'
+    package: '@azure/storage-blob'
+    summary: |-
+      To end the lease but ensure that another client cannot acquire a new lease
+      until the current lease period has expired.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function breakLease(aborter: Aborter, breakPeriod?: undefined | number,
+        options?: IBlobBreakLeaseOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: breakPeriod
+          type: undefined | number
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobBreakLeaseOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobBreakLeaseResponse" />&gt;
+        description: ''
+  - name: 'changeLease(Aborter, string, string, IBlobChangeLeaseOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.changeLease'
+    package: '@azure/storage-blob'
+    summary: To change the ID of an existing lease.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function changeLease(aborter: Aborter, leaseId: string, proposedLeaseId:
+        string, options?: IBlobChangeLeaseOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: leaseId
+          type: string
+          description: ''
+        - id: proposedLeaseId
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobChangeLeaseOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobChangeLeaseResponse" />&gt;
+        description: ''
+  - name: 'clearPages(Aborter, number, number, IPageBlobClearPagesOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.clearPages'
+    package: '@azure/storage-blob'
+    summary: Frees the specified pages from the page blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function clearPages(aborter: Aborter, offset: number, count: number,
+        options?: IPageBlobClearPagesOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: offset
+          type: number
+          description: ''
+        - id: count
+          type: number
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IPageBlobClearPagesOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.PageBlobClearPagesResponse" />&gt;
+        description: ''
+  - name: 'create(Aborter, number, IPageBlobCreateOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.create'
+    package: '@azure/storage-blob'
+    summary: >-
+      Creates a page blob of the specified length. Call uploadPages to upload
+      data
+
+      data to a page blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function create(aborter: Aborter, size: number, options?:
+        IPageBlobCreateOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: size
+          type: number
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IPageBlobCreateOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.PageBlobCreateResponse" />&gt;
+        description: ''
+  - name: 'createSnapshot(Aborter, IBlobCreateSnapshotOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.createSnapshot'
+    package: '@azure/storage-blob'
+    summary: Creates a read-only snapshot of a blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createSnapshot(aborter: Aborter, options?:
+        IBlobCreateSnapshotOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobCreateSnapshotOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobCreateSnapshotResponse" />&gt;
+        description: ''
+  - name: 'delete(Aborter, IBlobDeleteOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.delete'
+    package: '@azure/storage-blob'
+    summary: >-
+      Marks the specified blob or snapshot for deletion. The blob is later
+      deleted
+
+      during garbage collection. Note that in order to delete a blob, you must
+      delete
+
+      all of its snapshots. You can delete both at the same time with the Delete
+
+      Blob operation.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function delete(aborter: Aborter, options?: IBlobDeleteOptions)'
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobDeleteOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobDeleteResponse" />&gt;
+        description: ''
+  - name: 'download(Aborter, number, undefined | number, IBlobDownloadOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.download'
+    package: '@azure/storage-blob'
+    summary: >
+      Reads or downloads a blob from the system, including its metadata and
+      properties.
+
+      You can also call Get Blob to read a snapshot.
+
+      * In Node.js, data returns in a Readable stream readableStreamBody
+
+      * In browsers, data returns in a promise blobBody
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function download(aborter: Aborter, offset: number, count?: undefined |
+        number, options?: IBlobDownloadOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: offset
+          type: number
+          description: 'From which position of the blob to download, >= 0'
+        - id: count
+          type: undefined | number
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobDownloadOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobDownloadResponse" />&gt;
+        description: ''
+  - name: fromBlobURL(BlobURL)
+    uid: '@azure/storage-blob.PageBlobURL.fromBlobURL'
+    package: '@azure/storage-blob'
+    summary: Creates a PageBlobURL object from BlobURL instance.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'static function fromBlobURL(blobURL: BlobURL)'
+      parameters:
+        - id: blobURL
+          type: <xref uid="@azure/storage-blob.BlobURL" />
+          description: ''
+      return:
+        type: <xref uid="@azure/storage-blob.PageBlobURL" />
+        description: ''
+  - name: 'fromContainerURL(ContainerURL, string)'
+    uid: '@azure/storage-blob.PageBlobURL.fromContainerURL'
+    package: '@azure/storage-blob'
+    summary: Creates a PageBlobURL object from ContainerURL instance.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromContainerURL(containerURL: ContainerURL, blobName:
+        string)
+      parameters:
+        - id: containerURL
+          type: <xref uid="@azure/storage-blob.ContainerURL" />
+          description: A ContainerURL object
+        - id: blobName
+          type: string
+          description: A page blob name
+      return:
+        type: <xref uid="@azure/storage-blob.PageBlobURL" />
+        description: ''
+  - name: 'getPageRanges(Aborter, number, number, IPageBlobGetPageRangesOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.getPageRanges'
+    package: '@azure/storage-blob'
+    summary: >-
+      Returns the list of valid page ranges for a page blob or snapshot of a
+      page blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getPageRanges(aborter: Aborter, offset: number, count: number,
+        options?: IPageBlobGetPageRangesOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: offset
+          type: number
+          description: ''
+        - id: count
+          type: number
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IPageBlobGetPageRangesOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.PageBlobGetPageRangesResponse" />&gt;
+        description: ''
+  - name: >-
+      getPageRangesDiff(Aborter, number, number, string,
+      IPageBlobGetPageRangesDiffOptions)
+    uid: '@azure/storage-blob.PageBlobURL.getPageRangesDiff'
+    package: '@azure/storage-blob'
+    summary: >-
+      Gets the collection of page ranges that differ between a specified
+      snapshot and this page blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getPageRangesDiff(aborter: Aborter, offset: number, count:
+        number, prevSnapshot: string, options?:
+        IPageBlobGetPageRangesDiffOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: offset
+          type: number
+          description: ''
+        - id: count
+          type: number
+          description: ''
+        - id: prevSnapshot
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IPageBlobGetPageRangesDiffOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.PageBlobGetPageRangesDiffResponse" />&gt;
+        description: ''
+  - name: 'getProperties(Aborter, IBlobGetPropertiesOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.getProperties'
+    package: '@azure/storage-blob'
+    summary: >-
+      Returns all user-defined metadata, standard HTTP properties, and system
+      properties
+
+      for the blob. It does not return the content of the blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getProperties(aborter: Aborter, options?:
+        IBlobGetPropertiesOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobGetPropertiesOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobGetPropertiesResponse" />&gt;
+        description: ''
+  - name: 'newPipeline(Credential, INewPipelineOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.newPipeline'
+    package: '@azure/storage-blob'
+    summary: >-
+      A static method used to create a new Pipeline object with Credential
+      provided.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function newPipeline(credential: Credential, pipelineOptions?:
+        INewPipelineOptions)
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/storage-blob.Credential" />
+          description: 'Such as AnonymousCredential, SharedKeyCredential or TokenCredential.'
+        - id: pipelineOptions
+          type: <xref uid="@azure/storage-blob.INewPipelineOptions" />
+          description: ''
+      return:
+        type: <xref uid="@azure/storage-blob.Pipeline" />
+        description: A new Pipeline object.
+  - name: 'releaseLease(Aborter, string, IBlobReleaseLeaseOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.releaseLease'
+    package: '@azure/storage-blob'
+    summary: >-
+      To free the lease if it is no longer needed so that another client may
+      immediately
+
+      acquire a lease against the blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function releaseLease(aborter: Aborter, leaseId: string, options?:
+        IBlobReleaseLeaseOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: leaseId
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobReleaseLeaseOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobReleaseLeaseResponse" />&gt;
+        description: ''
+  - name: 'renewLease(Aborter, string, IBlobRenewLeaseOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.renewLease'
+    package: '@azure/storage-blob'
+    summary: To renew an existing lease.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function renewLease(aborter: Aborter, leaseId: string, options?:
+        IBlobRenewLeaseOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: leaseId
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobRenewLeaseOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobRenewLeaseResponse" />&gt;
+        description: ''
+  - name: 'resize(Aborter, number, IPageBlobResizeOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.resize'
+    package: '@azure/storage-blob'
+    summary: >-
+      Resizes the page blob to the specified size (which must be a multiple of
+      512).
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function resize(aborter: Aborter, size: number, options?:
+        IPageBlobResizeOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: size
+          type: number
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IPageBlobResizeOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.PageBlobResizeResponse" />&gt;
+        description: ''
+  - name: >-
+      setHTTPHeaders(Aborter, Models.BlobHTTPHeaders,
+      IBlobSetHTTPHeadersOptions)
+    uid: '@azure/storage-blob.PageBlobURL.setHTTPHeaders'
+    package: '@azure/storage-blob'
+    summary: >-
+      Sets system properties on the blob.
+
+      If no value provided, or no value provided for the specificed blob HTTP
+      headers,
+
+      these blob HTTP headers without a value will be cleared.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setHTTPHeaders(aborter: Aborter, blobHTTPHeaders?:
+        Models.BlobHTTPHeaders, options?: IBlobSetHTTPHeadersOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: blobHTTPHeaders
+          type: <xref uid="Models.BlobHTTPHeaders" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobSetHTTPHeadersOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobSetHTTPHeadersResponse" />&gt;
+        description: ''
+  - name: 'setMetadata(Aborter, IMetadata, IBlobSetMetadataOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.setMetadata'
+    package: '@azure/storage-blob'
+    summary: >-
+      Sets user-defined metadata for the specified blob as one or more
+      name-value pairs.
+
+      If no option provided, or no metadata defined in the parameter, the blob
+
+      metadata will be removed.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setMetadata(aborter: Aborter, metadata?: IMetadata, options?:
+        IBlobSetMetadataOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: metadata
+          type: <xref uid="@azure/storage-blob.IMetadata" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobSetMetadataOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobSetMetadataResponse" />&gt;
+        description: ''
+  - name: >-
+      setTier(Aborter, BlockBlobTier | PremiumPageBlobTier | string,
+      IBlobSetTierOptions)
+    uid: '@azure/storage-blob.PageBlobURL.setTier'
+    package: '@azure/storage-blob'
+    summary: >-
+      Sets the tier on a blob. The operation is allowed on a page blob in a
+      premium
+
+      storage account and on a block blob in a blob storage account (locally
+      redundant
+
+      storage only). A premium page blob's tier determines the allowed size,
+      IOPS,
+
+      and bandwidth of the blob. A block blob's tier determines Hot/Cool/Archive
+
+      storage type. This operation does not update the blob's ETag.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setTier(aborter: Aborter, tier: BlockBlobTier |
+        PremiumPageBlobTier | string, options?: IBlobSetTierOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: tier
+          type: >-
+            <xref uid="@azure/storage-blob.BlockBlobTier" /> | <xref
+            uid="@azure/storage-blob.PremiumPageBlobTier" /> | string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobSetTierOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobSetTierResponse" />&gt;
+        description: ''
+  - name: 'startCopyFromURL(Aborter, string, IBlobStartCopyFromURLOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.startCopyFromURL'
+    package: '@azure/storage-blob'
+    summary: >-
+      Asynchronously copies a blob to a destination within the storage account.
+
+      In version 2012-02-12 and later, the source for a Copy Blob operation can
+      be
+
+      a committed blob in any Azure storage account.
+
+      Beginning with version 2015-02-21, the source for a Copy Blob operation
+      can be
+
+      an Azure file in any Azure storage account.
+
+      Only storage accounts created on or after June 7th, 2012 allow the Copy
+      Blob
+
+      operation to copy from another storage account.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function startCopyFromURL(aborter: Aborter, copySource: string,
+        options?: IBlobStartCopyFromURLOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: copySource
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobStartCopyFromURLOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobStartCopyFromURLResponse" />&gt;
+        description: ''
+  - name: >-
+      startCopyIncremental(Aborter, string,
+      IPageBlobStartCopyIncrementalOptions)
+    uid: '@azure/storage-blob.PageBlobURL.startCopyIncremental'
+    package: '@azure/storage-blob'
+    summary: >-
+      Begins an operation to start an incremental copy from one page blob's
+      snapshot to this page blob.
+
+      The snapshot is copied such that only the differential changes between the
+      previously
+
+      copied snapshot are transferred to the destination.
+
+      The copied snapshots are complete copies of the original snapshot and can
+      be read or copied from as usual.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function startCopyIncremental(aborter: Aborter, copySource: string,
+        options?: IPageBlobStartCopyIncrementalOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: copySource
+          type: string
+          description: |-
+            Specifies the name of the source page blob snapshot. For example,
+                                       https://myaccount.blob.core.windows.net/mycontainer/myblob?snapshot=<DateTime>
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-blob.IPageBlobStartCopyIncrementalOptions"
+            />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.PageBlobCopyIncrementalResponse" />&gt;
+        description: ''
+  - name: 'syncCopyFromURL(Aborter, string, IBlobSyncCopyFromURLOptions)'
+    uid: '@azure/storage-blob.PageBlobURL.syncCopyFromURL'
+    package: '@azure/storage-blob'
+    summary: >-
+      The synchronous Copy From URL operation copies a blob or an internet
+      resource to a new blob. It will not
+
+      return a response until the copy is complete.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function syncCopyFromURL(aborter: Aborter, copySource: string, options?:
+        IBlobSyncCopyFromURLOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: copySource
+          type: string
+          description: >-
+            The source URL to copy from, Shared Access Signature(SAS) maybe
+            needed for authentication
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlobSyncCopyFromURLOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.BlobCopyFromURLResponse" />&gt;
+        description: ''
+  - name: undelete(Aborter)
+    uid: '@azure/storage-blob.PageBlobURL.undelete'
+    package: '@azure/storage-blob'
+    summary: >-
+      Restores the contents and metadata of soft deleted blob and any associated
+
+      soft deleted snapshots. Undelete Blob is supported only on version
+      2017-07-29
+
+      or later.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function undelete(aborter: Aborter)'
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+      return:
+        type: Promise&lt;<xref uid="Models.BlobUndeleteResponse" />&gt;
+        description: ''
+  - name: >-
+      updateSequenceNumber(Aborter, Models.SequenceNumberActionType, undefined |
+      number, IPageBlobUpdateSequenceNumberOptions)
+    uid: '@azure/storage-blob.PageBlobURL.updateSequenceNumber'
+    package: '@azure/storage-blob'
+    summary: Sets a page blob's sequence number.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateSequenceNumber(aborter: Aborter, sequenceNumberAction:
+        Models.SequenceNumberActionType, sequenceNumber?: undefined | number,
+        options?: IPageBlobUpdateSequenceNumberOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: sequenceNumberAction
+          type: <xref uid="Models.SequenceNumberActionType" />
+          description: ''
+        - id: sequenceNumber
+          type: undefined | number
+          description: ''
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-blob.IPageBlobUpdateSequenceNumberOptions"
+            />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref uid="Models.PageBlobUpdateSequenceNumberResponse"
+          />&gt;
+        description: ''
+  - name: >-
+      uploadPages(Aborter, HttpRequestBody, number, number,
+      IPageBlobUploadPagesOptions)
+    uid: '@azure/storage-blob.PageBlobURL.uploadPages'
+    package: '@azure/storage-blob'
+    summary: >-
+      Writes 1 or more pages to the page blob. The start and end offsets must be
+      a multiple of 512.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function uploadPages(aborter: Aborter, body: HttpRequestBody, offset:
+        number, count: number, options?: IPageBlobUploadPagesOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: body
+          type: HttpRequestBody
+          description: ''
+        - id: offset
+          type: number
+          description: Offset of destination page blob
+        - id: count
+          type: number
+          description: 'Content length of the body, also number of bytes to be uploaded'
+        - id: options
+          type: <xref uid="@azure/storage-blob.IPageBlobUploadPagesOptions" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.PageBlobUploadPagesResponse" />&gt;
+        description: ''
+  - name: >-
+      uploadPagesFromURL(Aborter, string, number, number, number,
+      IPageBlobUploadPagesFromURLOptions)
+    uid: '@azure/storage-blob.PageBlobURL.uploadPagesFromURL'
+    package: '@azure/storage-blob'
+    summary: >-
+      The Upload Pages operation writes a range of pages to a page blob where
+      the
+
+      contents are read from a URL.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function uploadPagesFromURL(aborter: Aborter, sourceURL: string,
+        sourceOffset: number, destOffset: number, count: number, options?:
+        IPageBlobUploadPagesFromURLOptions)
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: sourceURL
+          type: string
+          description: >-
+            Specify a URL to the copy source, Shared Access Signature(SAS) maybe
+            needed for authentication
+        - id: sourceOffset
+          type: number
+          description: >-
+            The source offset to copy from. Pass 0 to copy from the beginning of
+            source page blob
+        - id: destOffset
+          type: number
+          description: Offset of destination page blob
+        - id: count
+          type: number
+          description: Number of bytes to be uploaded from source page blob
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-blob.IPageBlobUploadPagesFromURLOptions"
+            />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref uid="Models.PageBlobUploadPagesFromURLResponse"
+          />&gt;
+        description: ''
+  - name: withPipeline(Pipeline)
+    uid: '@azure/storage-blob.PageBlobURL.withPipeline'
+    package: '@azure/storage-blob'
+    summary: |-
+      Creates a new PageBlobURL object identical to the source but with the
+      specified request policy pipeline.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function withPipeline(pipeline: Pipeline)'
+      parameters:
+        - id: pipeline
+          type: <xref uid="@azure/storage-blob.Pipeline" />
+          description: ''
+      return:
+        type: <xref uid="@azure/storage-blob.PageBlobURL" />
+        description: ''
+  - name: withSnapshot(string)
+    uid: '@azure/storage-blob.PageBlobURL.withSnapshot'
+    package: '@azure/storage-blob'
+    summary: |-
+      Creates a new PageBlobURL object identical to the source but with the
+      specified snapshot timestamp.
+      Provide "" will remove the snapshot and return a URL to the base blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function withSnapshot(snapshot: string)'
+      parameters:
+        - id: snapshot
+          type: string
+          description: ''
+      return:
+        type: <xref uid="@azure/storage-blob.PageBlobURL" />
+        description: ''
+extends: <xref uid="@azure/storage-blob.BlobURL" />

@@ -3,7 +3,7 @@ title: Azure Anomaly Detector client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-anomaly-detector, 
 author: maggiepint
 ms.author: magpint
-ms.date: 09/18/2020
+ms.date: 04/17/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,16 +11,16 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Anomaly Detector client library for JavaScript - Version 3.0.0-beta.2 
+# Azure Anomaly Detector client library for JavaScript - Version 3.0.0-beta.3 
 
 
 [Azure AnomalyDetector](https://azure.microsoft.com/services/cognitive-services/anomaly-detector/) API enables you to monitor and detect abnormalities in your time series data with machine learning.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-anomaly-detector_3.0.0-beta.2/sdk/anomalydetector/ai-anomaly-detector/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-anomaly-detector_3.0.0-beta.3/sdk/anomalydetector/ai-anomaly-detector/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/ai-anomaly-detector) |
-[API reference documentation](https://aka.ms/azsdk/net/docs/ref/anomalydetector) |
+[API reference documentation](https://docs.microsoft.com/javascript/api/@azure/ai-anomaly-detector) |
 [Product documentation](https://docs.microsoft.com/azure/cognitive-services/anomaly-detector/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.2/sdk/anomalydetector/ai-anomaly-detector/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.3/sdk/anomalydetector/ai-anomaly-detector/samples)
 
 ## Key concepts
 
@@ -167,24 +167,26 @@ main().catch((err) => {
 });
 ```
 
-More Samples can be found [here](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.2/sdk/anomalydetector/ai-anomaly-detector/samples)
+More Samples can be found [here](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.3/sdk/anomalydetector/ai-anomaly-detector/samples)
 
 ## Troubleshooting
 
-### Enable logs
+### Logging
 
-You can set the following environment variable to see debug logs when using this library.
+Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
-- Getting debug logs from the Azure Anomaly Detector client library
+```javascript
+import { setLogLevel } from "@azure/logger";
 
-```bash
-export DEBUG=azure*
+setLogLevel("info");
 ```
+
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.3/sdk/core/logger).
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.2/sdk/anomalydetector/ai-anomaly-detector/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.3/sdk/anomalydetector/ai-anomaly-detector/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
@@ -201,5 +203,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-anomaly-detector_3.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-anomaly-detector_3.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 

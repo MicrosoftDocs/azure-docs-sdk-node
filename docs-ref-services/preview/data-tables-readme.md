@@ -3,7 +3,7 @@ title: Azure Tables client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/data-tables, 
 author: maggiepint
 ms.author: magpint
-ms.date: 02/09/2021
+ms.date: 04/06/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Tables client library for JavaScript - Version 1.0.0-beta.5 
+# Azure Tables client library for JavaScript - Version 12.0.0-beta.2 
 
 
 [Azure Tables](https://azure.microsoft.com/services/storage/tables/) is a cloud-based service that stores structured NoSQL data, providing a key/attribute store with a schemaless design. Tables storage gives developers flexibility and scalability with all the best parts of Azure cloud.
@@ -30,7 +30,7 @@ Azure Cosmos DB provides a Table API for applications that are written for Azure
 - Automatic secondary indexing.
 - The Azure Tables client library can seamlessly target either Azure table storage or Azure Cosmos DB table service endpoints with no code changes.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_1.0.0-beta.5/sdk/tables/data-tables/) | [Package (NPM)](https://www.npmjs.com/package/@azure/data-tables) | [API reference documentation](https://aka.ms/js-docs) | [Product documentation](https://docs.microsoft.com/azure/storage/tables/table-storage-overview/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_1.0.0-beta.5/sdk/tables/data-tables/samples)
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.0.0-beta.2/sdk/tables/data-tables/) | [Package (NPM)](https://www.npmjs.com/package/@azure/data-tables) | [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/data-tables) | [Product documentation](https://docs.microsoft.com/azure/storage/tables/table-storage-overview/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_12.0.0-beta.2/sdk/tables/data-tables/samples)
 
 ## Getting started
 
@@ -368,7 +368,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_1.0.0-beta.5/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/tables/README.png)
 

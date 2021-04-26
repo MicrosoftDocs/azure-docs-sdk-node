@@ -14,6 +14,9 @@ ms.service: key-vault
 
 ## Azure Key Vault SDK for JavaScript - preview
 
+> [!NOTE]
+> Documentation in this table of contents is for preview package versions. To see documentation for the latest stable version, see [Azure Key Vault SDK for JavaScript - latest](?view=az-js-keyvault-v4)
+
 ## Client packages (4.x.x) - preview
 
 | Reference                                                                                          | Package                                                                                          | Source                                                                                             |

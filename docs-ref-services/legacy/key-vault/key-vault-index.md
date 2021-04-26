@@ -21,10 +21,11 @@ ms.service: key-vault
 
 | Reference                                                                | Package                                                                      | Source                                                                                  |
 |--------------------------------------------------------------------------|------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
-| [Key Vault](/javascript/api/overview/azure/keyvault/storage-blob-readme) | [azure-keyvault@3.0.5](https://www.npmjs.com/package/azure-keyvault/v/3.0.5) | [GitHub](https://github.com/Azure/azure-sdk-for-node/tree/master/lib/services/keyVault) |
-
+| [Key Vault](/javascript/api/preview-docs/azure-keyvault/) | [azure-keyvault@3.0.5](https://www.npmjs.com/package/azure-keyvault/v/3.0.5) | [GitHub](https://github.com/Azure/azure-sdk-for-node/tree/master/lib/services/keyVault) |
+|                                                                          |                                                                              |                                                                                         |
 ## Management Packages - legacy
 
-| Reference                                        | Package                                                                     | Source                                                                                            |
-|--------------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| [ARM Key Vault](/javascript/api/azure-arm-storage) | [azure-arm-storage@8.1.0](https://www.npmjs.com/package/azure-arm-keyvault/v/1.2.0) | [GitHub](https://github.com/azure/azure-sdk-for-node/tree/master/lib/services/keyVaultManagement) ||
+| Reference                                          | Package                                                                             | Source                                                                                            |
+|----------------------------------------------------|-------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| [ARM Key Vault](/javascript/api/preview-docs/azure-arm-keyvault/) | [azure-arm-storage@8.1.0](https://www.npmjs.com/package/azure-arm-keyvault/v/1.2.0) | [GitHub](https://github.com/azure/azure-sdk-for-node/tree/master/lib/services/keyVaultManagement) |  |
+|                                                    |                                                                                     |                                                                                                   |

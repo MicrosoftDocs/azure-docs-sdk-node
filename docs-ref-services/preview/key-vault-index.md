@@ -12,30 +12,13 @@ ms.devlang: nodejs
 ms.service: key-vault
 ---
 
-# Azure Key Vault modules for JavaScript
+## Azure Key Vault SDK for JavaScript - preview
 
-The Azure Key Vault libraries for JavaScript offer a convenient interface for making calls to Azure Key Vault. For more information about Azure Key Vault, see [Introduction to Azure Key Vault](https://docs.microsoft.com/azure/key-vault/general/overview).
+## Client packages (4.x.x) - preview
 
-## Libraries for data access
-
-The latest version of the Azure Key Vault library is version 4.x.x. Microsoft recommends using version 4.x.x for new applications.
-
-### Version 4.x.x
-
-The version 4.x.x libraries for JavaScript are part of the Azure SDK for JavaScript. The source code for the Key Vault libraries for JavaScript is available on [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault).
-
-Use the following version 4.x.x libraries to work with certificates, keys, and secrets:
-
-| Library | Reference | Package | Source |
-|----------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-|    keyvault-certificates    |      [Reference](https://docs.microsoft.com/javascript/api/@azure/keyvault-certificates/?view=azure-node-latest)       |    [npm](https://www.npmjs.com/package/@azure/keyvault-certificates)    |    [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-certificates)    |
-|    keyvault-keys    |     [Reference](https://docs.microsoft.com/javascript/api/@azure/keyvault-keys/?view=azure-node-latest)    |    [npm](https://www.npmjs.com/package/@azure/keyvault-keys)      |     [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-keys)|
-|    keyvault-secrets   |    [Reference](https://docs.microsoft.com/javascript/api/@azure/keyvault-secrets/?view=azure-node-latest)    |    [npm](https://www.npmjs.com/package/@azure/keyvault-secrets)    |    [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-secrets)    |
-
-## Libraries for resource management
-
-Use the following library to work with the Azure Key Vault resource provider:
-
-| Library | Reference | Package | Source |
-|--------------------------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-|    arm-keyvault    |    [Reference](https://docs.microsoft.com/javascript/api/@azure/arm-keyvault/?view=azure-node-latest)    |    [npm](https://www.npmjs.com/package/@azure/arm-keyvault)    |    [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/arm-keyvault)    |
+| Reference                                                                                          | Package                                                                                          | Source                                                                                             |
+|----------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| [Key Vault Certificates](/javascript/api/preview-docs/overview/azure/key-vault/keyvault-certificates-readme?view=az-js-keyvault-v4-preview) | [@azure/keyvault-certificates@4.2.0-beta.3](https://www.npmjs.com/package/@azure/keyvault-certificates/v/4.2.0-beta.3) | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-certificates) |
+| [Key Vault Keys](/javascript/api/preview-docs/overview/azure/key-vault/keyvault-keys-readme?view=az-js-keyvault-v4-preview)                 | [@azure/keyvault-keys@4.2.0-beta.5](https://www.npmjs.com/package/@azure/keyvault-keys/v/4.2.0-beta.5)                 | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-keys)         |
+| [Key Vault Secrets](/javascript/api/preview-docs/overview/azure/key-vault/keyvault-secrets-readme?view=az-js-keyvault-v4-preview)           | [@azure/keyvault-secrets@4.2.0-beta.4](https://www.npmjs.com/package/@azure/keyvault-secrets/v/4.2.0-beta.4)           | [GitHub](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/keyvault/keyvault-secrets)      |
+|                                                                                                    |                                                                                                  |                                                                                                    |

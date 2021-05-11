@@ -81,7 +81,8 @@ recognizer.recognizeOnceAsync(
   });
 ``` 
 
-Check out our [step-by-step quickstart](/azure/cognitive-services/speech-service/quickstart-js-node).
+
+The previous example uses single-shot recognition, which recognizes a single utterance. You can also use [continuous recognition](/azure/cognitive-services/speech-service/get-started-speech-to-text?tabs=windowsinstall&pivots=programming-language-nodejs#continuous-recognition) to control when to stop recognizing. Check out our [step-by-step quickstart](/azure/cognitive-services/speech-service/quickstart-js-node) for many more options.
 
 ## Samples
 

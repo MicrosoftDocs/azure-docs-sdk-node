@@ -44,7 +44,9 @@ constructors:
           type: <xref uid="@azure/service-bus.ServiceBusClientOptions" />
           description: |
             Options for the service bus client.
-  - name: 'ServiceBusClient(string, TokenCredential, ServiceBusClientOptions)'
+  - name: >-
+      ServiceBusClient(string, TokenCredential | NamedKeyCredential |
+      SASCredential, ServiceBusClientOptions)
     uid: '@azure/service-bus.ServiceBusClient.constructor_1'
     package: '@azure/service-bus'
     summary: >-
@@ -62,7 +64,8 @@ constructors:
     syntax:
       content: >-
         new ServiceBusClient(fullyQualifiedNamespace: string, credential:
-        TokenCredential, options?: ServiceBusClientOptions)
+        TokenCredential | NamedKeyCredential | SASCredential, options?:
+        ServiceBusClientOptions)
       parameters:
         - id: fullyQualifiedNamespace
           type: string
@@ -70,7 +73,7 @@ constructors:
             The full namespace of your Service Bus instance which is
             likely to be similar to <yournamespace>.servicebus.windows.net.
         - id: credential
-          type: TokenCredential
+          type: TokenCredential | NamedKeyCredential | SASCredential
           description: >-
             A credential object used by the client to get the token to
             authenticate the connection
@@ -83,6 +86,20 @@ constructors:
 
             to be `["https://servicebus.azure.net//user_impersonation"]` to get
             the appropriate token.
+
+            Use the `AzureNamedKeyCredential` from &commat;azure/core-auth if
+            you want to pass in a `SharedAccessKeyName`
+
+            and `SharedAccessKey` without using a connection string. These
+            fields map to the `name` and `key` field respectively
+
+            in `AzureNamedKeyCredential`.
+
+            Use the `AzureSASCredential` from &commat;azure/core-auth if you
+            want to pass in a `SharedAccessSignature`
+
+            without using a connection string. This field maps to `signature` in
+            `AzureSASCredential`.
         - id: options
           type: <xref uid="@azure/service-bus.ServiceBusClientOptions" />
           description: |

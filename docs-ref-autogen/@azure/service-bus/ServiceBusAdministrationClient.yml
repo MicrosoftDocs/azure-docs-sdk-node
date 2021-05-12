@@ -35,7 +35,9 @@ constructors:
           type: PipelineOptions
           description: |
             PipelineOptions
-  - name: 'ServiceBusAdministrationClient(string, TokenCredential, PipelineOptions)'
+  - name: >-
+      ServiceBusAdministrationClient(string, TokenCredential |
+      NamedKeyCredential, PipelineOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.constructor_1'
     package: '@azure/service-bus'
     summary: Initializes a new instance of the ServiceBusAdministrationClient class.
@@ -45,7 +47,8 @@ constructors:
     syntax:
       content: >-
         new ServiceBusAdministrationClient(fullyQualifiedNamespace: string,
-        credential: TokenCredential, options?: PipelineOptions)
+        credential: TokenCredential | NamedKeyCredential, options?:
+        PipelineOptions)
       parameters:
         - id: fullyQualifiedNamespace
           type: string
@@ -53,7 +56,7 @@ constructors:
             The fully qualified namespace of your Service Bus instance which is
             likely to be similar to <yournamespace>.servicebus.windows.net.
         - id: credential
-          type: TokenCredential
+          type: TokenCredential | NamedKeyCredential
           description: >-
             A credential object used by the client to get the token to
             authenticate the connection
@@ -66,6 +69,14 @@ constructors:
 
             to be `["https://servicebus.azure.net//user_impersonation"]` to get
             the appropriate token.
+
+            Use the `AzureNamedKeyCredential` from &commat;azure/core-auth if
+            you want to pass in a `SharedAccessKeyName`
+
+            and `SharedAccessKey` without using a connection string. These
+            fields map to the `name` and `key` field respectively
+
+            in `AzureNamedKeyCredential`.
         - id: options
           type: PipelineOptions
           description: |

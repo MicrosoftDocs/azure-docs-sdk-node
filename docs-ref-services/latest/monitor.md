@@ -17,7 +17,7 @@ Cloud applications are complex with many moving parts. Monitoring provides data 
 ### Install npm module
 
 ```bash
-pm install @azure/arm-monitor
+npm install @azure/arm-monitor
 ```
 
 ### Samples

@@ -153,7 +153,7 @@
                 <a href="/javascript/api/overview/azure/iothubdeviceprovisioning?view=azure-node-latest" data-linktype="relative-path"> IoT Hub Device Provisioning </a>
             </li>
             <li class="has-three-text-columns-list-items is-unstyled">	
-                <a href="/javascript/api/overview/azure/key-vault-index?view=azure-node-latest" data-linktype="relative-path"> Key Vault </a>
+                <a href="/javascript/api/preview-docs/overview/azure/key-vault/key-vault-index?view=az-js-keyvault-v4" data-linktype="relative-path"> Key Vault </a>
             </li>
             <li class="has-three-text-columns-list-items is-unstyled">	
                 <a href="/javascript/api/overview/azure/activedirectory?view=azure-node-latest" data-linktype="relative-path"> Kusto </a>
@@ -287,7 +287,7 @@
                 <a href="/javascript/api/overview/azure/sqlvirtualmachine?view=azure-node-latest" data-linktype="relative-path"> SQL Virtual Machine </a>
             </li>
             <li class="has-three-text-columns-list-items is-unstyled">	
-                <a href="/javascript/api/preview-docs/overview/azure/storage/storage-overview?view=az-js-storage-v10" data-linktype="relative-path"> Storage </a>
+                <a href="/javascript/api/preview-docs/overview/azure/storage/storage-overview?view=az-js-storage-v12" data-linktype="relative-path"> Storage </a>
             </li>
             <li class="has-three-text-columns-list-items is-unstyled">	
                 <a href="/javascript/api/overview/azure/storsimple?view=azure-node-latest" data-linktype="relative-path"> StorSimple </a>

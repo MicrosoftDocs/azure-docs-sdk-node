@@ -35,7 +35,7 @@
                 <a href="/javascript/api/overview/azure/identity-readme?view=azure-node-preview" data-linktype="relative-path"> Identity </a>
             </li>
             <li class="has-three-text-columns-list-items is-unstyled">	
-                <a href="/javascript/api/overview/azure/key-vault-index?view=az-js-keyvault-v4-preview" data-linktype="relative-path"> Key Vault </a>
+                <a href="/javascript/api/preview-docs/overview/azure/key-vault/key-vault-index?view=az-js-keyvault-v4-preview" data-linktype="relative-path"> Key Vault </a>
             </li>
             <li class="has-three-text-columns-list-items is-unstyled">	
                 <a href="/javascript/api/overview/azure/ai-metrics-advisor-readme?view=azure-node-preview" data-linktype="relative-path"> Metrics Advisor </a>

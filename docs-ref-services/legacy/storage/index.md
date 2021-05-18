@@ -17,7 +17,7 @@
                 <a href="/javascript/api/preview-docs/overview/azure/key-vault/key-vault-index?view=az-js-keyvault-v3" data-linktype="relative-path"> Key Vault </a>
             </li>
             <li class="has-three-text-columns-list-items is-unstyled">	
-                <a href="/javascript/api/overview/azure/storage-overview?view=az-js-storage-v10" data-linktype="relative-path"> Storage </a>
+                <a href="/javascript/api/preview-docs/overview/azure/storage/storage-overview?view=az-js-storage-v10" data-linktype="relative-path"> Storage </a>
             </li>
             <li class="has-three-text-columns-list-items is-unstyled">	
                 <a href="/javascript/api/overview/azure/other?view=azure-node-legacy" data-linktype="relative-path"> Other </a>

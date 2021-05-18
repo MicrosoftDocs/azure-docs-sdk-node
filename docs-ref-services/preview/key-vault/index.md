@@ -47,9 +47,6 @@
                 <a href="/javascript/api/overview/azure/search?view=azure-node-preview" data-linktype="relative-path"> Search </a>
             </li>
             <li class="has-three-text-columns-list-items is-unstyled">	
-                <a href="/javascript/api/overview/azure/storage-overview?view=azure-node-preview" data-linktype="relative-path"> Storage </a>
-            </li>
-            <li class="has-three-text-columns-list-items is-unstyled">	
                 <a href="/javascript/api/overview/azure/data-tables-readme?view=azure-node-preview" data-linktype="relative-path"> Tables </a>
             </li>
             <li class="has-three-text-columns-list-items is-unstyled">	

@@ -3,7 +3,7 @@ title: Azure Tables client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/data-tables, 
 author: maggiepint
 ms.author: magpint
-ms.date: 04/06/2021
+ms.date: 05/18/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Tables client library for JavaScript - Version 12.0.0-beta.2 
+# Azure Tables client library for JavaScript - Version 12.0.0-beta.3 
 
 
 [Azure Tables](https://azure.microsoft.com/services/storage/tables/) is a cloud-based service that stores structured NoSQL data, providing a key/attribute store with a schemaless design. Tables storage gives developers flexibility and scalability with all the best parts of Azure cloud.
@@ -30,7 +30,7 @@ Azure Cosmos DB provides a Table API for applications that are written for Azure
 - Automatic secondary indexing.
 - The Azure Tables client library can seamlessly target either Azure table storage or Azure Cosmos DB table service endpoints with no code changes.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.0.0-beta.2/sdk/tables/data-tables/) | [Package (NPM)](https://www.npmjs.com/package/@azure/data-tables) | [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/data-tables) | [Product documentation](https://docs.microsoft.com/azure/storage/tables/table-storage-overview/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_12.0.0-beta.2/sdk/tables/data-tables/samples)
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.0.0-beta.3/sdk/tables/data-tables/) | [Package (NPM)](https://www.npmjs.com/package/@azure/data-tables) | [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/data-tables) | [Product documentation](https://docs.microsoft.com/azure/storage/tables/table-storage-overview/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_12.0.0-beta.3/sdk/tables/data-tables/samples)
 
 ## Getting started
 
@@ -41,7 +41,7 @@ Currently supported environments:
 - Node.js version 8.x.x or higher
 - Latest versions of Safari, Chrome, Edge and Firefox
 
-You must have an [Azure subscription](https://azure.microsoft.com/free/) and a [Storage Account](https://docs.microsoft.com/azure/storage/tables/table-storage-quickstart-portal)  or an [Azure CosmosDB database](https://docs.microsoft.com/azure/cosmos-db/create-cosmosdb-resources-portal) to use this package.
+You must have an [Azure subscription](https://azure.microsoft.com/free/) and a [Storage Account](https://docs.microsoft.com/azure/storage/tables/table-storage-quickstart-portal) or an [Azure CosmosDB database](https://docs.microsoft.com/azure/cosmos-db/create-cosmosdb-resources-portal) to use this package.
 
 ### Install the `@azure/data-tables` package
 
@@ -185,7 +185,7 @@ async function main() {
   let tablesIter = serviceClient.listTables();
   let i = 1;
   for await (const table of tablesIter) {
-    console.log(`Table${i}: ${table.tableName}`);
+    console.log(`Table${i}: ${table.name}`);
     i++;
     // Output:
     // Table1: testTable1
@@ -238,16 +238,12 @@ const { TableClient, TablesSharedKeyCredential } = require("@azure/data-tables")
 // Enter your storage account name and shared key
 const account = "<account>";
 const accountKey = "<accountkey>";
-const tableName = "<tableName>"
+const tableName = "<tableName>";
 
 // Use TablesSharedKeyCredential with storage account and account key
 // TablesSharedKeyCredential is only available in Node.js runtime, not in browsers
 const credential = new TablesSharedKeyCredential(account, accountKey);
-const client = new TableClient(
-  `https://${account}.table.core.windows.net`,
-  tableName,
-  credential
-);
+const client = new TableClient(`https://${account}.table.core.windows.net`, tableName, credential);
 ```
 
 #### TableClient with SAS Token
@@ -259,12 +255,9 @@ const { TableClient } = require("@azure/data-tables");
 
 const account = "<account name>";
 const sas = "<service Shared Access Signature Token>";
-const tableName = "<tableName>"
+const tableName = "<tableName>";
 
-const clientWithSAS = new TableClient(
-  `https://${account}.table.core.windows.net${sas}`,
-  tableName
-);
+const clientWithSAS = new TableClient(`https://${account}.table.core.windows.net${sas}`, tableName);
 ```
 
 #### List Entities in a table
@@ -276,14 +269,10 @@ const { TableClient, TablesSharedKeyCredential } = require("@azure/data-tables")
 
 const account = "<account>";
 const accountKey = "<accountkey>";
-const tableName = "<tableName>"
+const tableName = "<tableName>";
 
 const credential = new TablesSharedKeyCredential(account, accountKey);
-const client = new TableClient(
-  `https://${account}.table.core.windows.net`,
-  tableName,
-  credential
-);
+const client = new TableClient(`https://${account}.table.core.windows.net`, tableName, credential);
 
 async function main() {
   let entitiesIter = client.listEntities();
@@ -311,22 +300,18 @@ const { TableClient, TablesSharedKeyCredential } = require("@azure/data-tables")
 
 const account = "<account>";
 const accountKey = "<accountkey>";
-const tableName = "<tableName>"
+const tableName = "<tableName>";
 
 const credential = new TablesSharedKeyCredential(account, accountKey);
-const client = new TableClient(
-  `https://${account}.table.core.windows.net`,
-  tableName,
-  credential
-);
+const client = new TableClient(`https://${account}.table.core.windows.net`, tableName, credential);
 
 async function main() {
   const testEntity = {
-      partitionKey: "P1",
-      rowKey: "R1",
-      foo: "foo",
-      bar: 123
-  }
+    partitionKey: "P1",
+    rowKey: "R1",
+    foo: "foo",
+    bar: 123
+  };
   await client.createEntity(testEntity);
 }
 
@@ -368,7 +353,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/tables/README.png)
 

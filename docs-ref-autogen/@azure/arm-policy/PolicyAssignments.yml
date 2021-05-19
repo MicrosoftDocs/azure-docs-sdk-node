@@ -702,29 +702,34 @@ methods:
       with the given
 
       subscription that match the optional given $filter. Valid values for
-      $filter are: 'atScope()' or
+      $filter are: 'atScope()',
 
-      'policyDefinitionId eq '{value}''. If $filter is not provided, the
-      unfiltered list includes all
+      'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not
+      provided, the
 
-      policy assignments associated with the subscription, including those that
-      apply directly or from
+      unfiltered list includes all policy assignments associated with the
+      subscription, including
 
-      management groups that contain the given subscription, as well as any
-      applied to objects
+      those that apply directly or from management groups that contain the given
+      subscription, as well
 
-      contained within the subscription. If $filter=atScope() is provided, the
-      returned list includes
+      as any applied to objects contained within the subscription. If
+      $filter=atScope() is provided,
 
-      all policy assignments that apply to the subscription, which is everything
-      in the unfiltered
+      the returned list includes all policy assignments that apply to the
+      subscription, which is
 
-      list except those applied to objects contained within the subscription. If
+      everything in the unfiltered list except those applied to objects
+      contained within the
 
-      $filter=policyDefinitionId eq '{value}' is provided, the returned list
-      includes all policy
+      subscription. If $filter=atExactScope() is provided, the returned list
+      only includes all policy
 
-      assignments of the policy definition whose id is {value}.
+      assignments that at the subscription. If $filter=policyDefinitionId eq
+      '{value}' is provided,
+
+      the returned list includes all policy assignments of the policy definition
+      whose id is {value}.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -776,50 +781,50 @@ methods:
             uid="@azure/arm-policy.PolicyAssignmentListResult" />&gt;
           description: |
             The callback
-  - name: 'listForManagementGroup(string, string, msRest.RequestOptionsBase)'
+  - name: >-
+      listForManagementGroup(string,
+      Models.PolicyAssignmentsListForManagementGroupOptionalParams)
     uid: '@azure/arm-policy.PolicyAssignments.listForManagementGroup'
     package: '@azure/arm-policy'
     summary: >-
       This operation retrieves the list of all policy assignments applicable to
       the management group
 
-      that match the given $filter. Valid values for $filter are: 'atScope()' or
-      'policyDefinitionId
+      that match the given $filter. Valid values for $filter are: 'atScope()',
+      'atExactScope()' or
 
-      eq '{value}''. If $filter=atScope() is provided, the returned list
+      'policyDefinitionId eq '{value}''. If $filter=atScope() is provided, the
+      returned list includes
+
+      all policy assignments that are assigned to the management group or the
+      management group's
+
+      ancestors. If $filter=atExactScope() is provided, the returned list only
       includes all policy
 
-      assignments that are assigned to the management group or the management
-      group's ancestors. If
+      assignments that at the management group. If $filter=policyDefinitionId eq
+      '{value}' is
 
-      $filter=policyDefinitionId eq '{value}' is provided, the returned list
-      includes all policy
+      provided, the returned list includes all policy assignments of the policy
+      definition whose id is
 
-      assignments of the policy definition whose id is {value} that apply to the
-      management group.
+      {value} that apply to the management group.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function listForManagementGroup(managementGroupId: string, filter:
-        string, options?: msRest.RequestOptionsBase)
+        function listForManagementGroup(managementGroupId: string, options?:
+        Models.PolicyAssignmentsListForManagementGroupOptionalParams)
       parameters:
         - id: managementGroupId
           type: string
           description: The ID of the management group.
-        - id: filter
-          type: string
-          description: >-
-            The filter to apply on the operation. Valid values for $filter are:
-            'atScope()' or
-
-            'policyDefinitionId eq '{value}''. A filter is required when listing
-            policy assignments at
-
-            management group scope.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
+          type: >-
+            <xref
+            uid="Models.PolicyAssignmentsListForManagementGroupOptionalParams"
+            />
           description: ''
       return:
         type: >-
@@ -827,7 +832,8 @@ methods:
           uid="Models.PolicyAssignmentsListForManagementGroupResponse" />&gt;
         description: Promise<Models.PolicyAssignmentsListForManagementGroupResponse>
   - name: >-
-      listForManagementGroup(string, string, RequestOptionsBase,
+      listForManagementGroup(string,
+      PolicyAssignmentsListForManagementGroupOptionalParams,
       ServiceCallback<PolicyAssignmentListResult>)
     uid: '@azure/arm-policy.PolicyAssignments.listForManagementGroup_2'
     package: '@azure/arm-policy'
@@ -837,25 +843,18 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listForManagementGroup(managementGroupId: string, filter:
-        string, options: RequestOptionsBase, callback:
+        function listForManagementGroup(managementGroupId: string, options:
+        PolicyAssignmentsListForManagementGroupOptionalParams, callback:
         ServiceCallback<PolicyAssignmentListResult>)
       parameters:
         - id: managementGroupId
           type: string
           description: The ID of the management group.
-        - id: filter
-          type: string
-          description: >-
-            The filter to apply on the operation. Valid values for $filter are:
-            'atScope()' or
-
-            'policyDefinitionId eq '{value}''. A filter is required when listing
-            policy assignments at
-
-            management group scope.
         - id: options
-          type: RequestOptionsBase
+          type: >-
+            <xref
+            uid="@azure/arm-policy.PolicyAssignmentsListForManagementGroupOptionalParams"
+            />
           description: The optional parameters
         - id: callback
           type: >-
@@ -864,7 +863,7 @@ methods:
           description: |
             The callback
   - name: >-
-      listForManagementGroup(string, string,
+      listForManagementGroup(string,
       ServiceCallback<PolicyAssignmentListResult>)
     uid: '@azure/arm-policy.PolicyAssignments.listForManagementGroup_1'
     package: '@azure/arm-policy'
@@ -874,62 +873,62 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listForManagementGroup(managementGroupId: string, filter:
-        string, callback: ServiceCallback<PolicyAssignmentListResult>)
+        function listForManagementGroup(managementGroupId: string, callback:
+        ServiceCallback<PolicyAssignmentListResult>)
       parameters:
         - id: managementGroupId
           type: string
           description: The ID of the management group.
-        - id: filter
-          type: string
-          description: >-
-            The filter to apply on the operation. Valid values for $filter are:
-            'atScope()' or
-
-            'policyDefinitionId eq '{value}''. A filter is required when listing
-            policy assignments at
-
-            management group scope.
         - id: callback
           type: >-
             ServiceCallback&lt;<xref
             uid="@azure/arm-policy.PolicyAssignmentListResult" />&gt;
           description: |
             The callback
-  - name: 'listForManagementGroupNext(string, msRest.RequestOptionsBase)'
+  - name: >-
+      listForManagementGroupNext(string,
+      Models.PolicyAssignmentsListForManagementGroupNextOptionalParams)
     uid: '@azure/arm-policy.PolicyAssignments.listForManagementGroupNext'
     package: '@azure/arm-policy'
     summary: >-
       This operation retrieves the list of all policy assignments applicable to
       the management group
 
-      that match the given $filter. Valid values for $filter are: 'atScope()' or
-      'policyDefinitionId
+      that match the given $filter. Valid values for $filter are: 'atScope()',
+      'atExactScope()' or
 
-      eq '{value}''. If $filter=atScope() is provided, the returned list
+      'policyDefinitionId eq '{value}''. If $filter=atScope() is provided, the
+      returned list includes
+
+      all policy assignments that are assigned to the management group or the
+      management group's
+
+      ancestors. If $filter=atExactScope() is provided, the returned list only
       includes all policy
 
-      assignments that are assigned to the management group or the management
-      group's ancestors. If
+      assignments that at the management group. If $filter=policyDefinitionId eq
+      '{value}' is
 
-      $filter=policyDefinitionId eq '{value}' is provided, the returned list
-      includes all policy
+      provided, the returned list includes all policy assignments of the policy
+      definition whose id is
 
-      assignments of the policy definition whose id is {value} that apply to the
-      management group.
+      {value} that apply to the management group.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listForManagementGroupNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
+        Models.PolicyAssignmentsListForManagementGroupNextOptionalParams)
       parameters:
         - id: nextPageLink
           type: string
           description: The NextLink from the previous successful call to List operation.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
+          type: >-
+            <xref
+            uid="Models.PolicyAssignmentsListForManagementGroupNextOptionalParams"
+            />
           description: ''
       return:
         type: >-
@@ -938,7 +937,8 @@ methods:
           />&gt;
         description: Promise<Models.PolicyAssignmentsListForManagementGroupNextResponse>
   - name: >-
-      listForManagementGroupNext(string, RequestOptionsBase,
+      listForManagementGroupNext(string,
+      PolicyAssignmentsListForManagementGroupNextOptionalParams,
       ServiceCallback<PolicyAssignmentListResult>)
     uid: '@azure/arm-policy.PolicyAssignments.listForManagementGroupNext_2'
     package: '@azure/arm-policy'
@@ -949,14 +949,17 @@ methods:
     syntax:
       content: >-
         function listForManagementGroupNext(nextPageLink: string, options:
-        RequestOptionsBase, callback:
+        PolicyAssignmentsListForManagementGroupNextOptionalParams, callback:
         ServiceCallback<PolicyAssignmentListResult>)
       parameters:
         - id: nextPageLink
           type: string
           description: The NextLink from the previous successful call to List operation.
         - id: options
-          type: RequestOptionsBase
+          type: >-
+            <xref
+            uid="@azure/arm-policy.PolicyAssignmentsListForManagementGroupNextOptionalParams"
+            />
           description: The optional parameters
         - id: callback
           type: >-
@@ -999,49 +1002,53 @@ methods:
       resource in the given resource group and subscription that match the
       optional given $filter.
 
-      Valid values for $filter are: 'atScope()' or 'policyDefinitionId eq
-      '{value}''. If $filter is
+      Valid values for $filter are: 'atScope()', 'atExactScope()' or
+      'policyDefinitionId eq
 
-      not provided, the unfiltered list includes all policy assignments
-      associated with the resource,
+      '{value}''. If $filter is not provided, the unfiltered list includes all
+      policy assignments
 
-      including those that apply directly or from all containing scopes, as well
-      as any applied to
+      associated with the resource, including those that apply directly or from
+      all containing scopes,
 
-      resources contained within the resource. If $filter=atScope() is provided,
-      the returned list
+      as well as any applied to resources contained within the resource. If
+      $filter=atScope() is
 
-      includes all policy assignments that apply to the resource, which is
-      everything in the
+      provided, the returned list includes all policy assignments that apply to
+      the resource, which is
 
-      unfiltered list except those applied to resources contained within the
-      resource. If
+      everything in the unfiltered list except those applied to resources
+      contained within the
 
-      $filter=policyDefinitionId eq '{value}' is provided, the returned list
+      resource. If $filter=atExactScope() is provided, the returned list only
       includes all policy
 
-      assignments of the policy definition whose id is {value} that apply to the
-      resource. Three
+      assignments that at the resource level. If $filter=policyDefinitionId eq
+      '{value}' is provided,
 
-      parameters plus the resource name are used to identify a specific
-      resource. If the resource is
+      the returned list includes all policy assignments of the policy definition
+      whose id is {value}
 
-      not part of a parent resource (the more common case), the parent resource
-      path should not be
+      that apply to the resource. Three parameters plus the resource name are
+      used to identify a
 
-      provided (or provided as ''). For example a web app could be specified as
+      specific resource. If the resource is not part of a parent resource (the
+      more common case), the
 
-      ({resourceProviderNamespace} == 'Microsoft.Web', {parentResourcePath} ==
-      '', {resourceType} ==
+      parent resource path should not be provided (or provided as ''). For
+      example a web app could be
 
-      'sites', {resourceName} == 'MyWebApp'). If the resource is part of a
-      parent resource, then all
+      specified as ({resourceProviderNamespace} == 'Microsoft.Web',
+      {parentResourcePath} == '',
 
-      parameters should be provided. For example a virtual machine DNS name
-      could be specified as
+      {resourceType} == 'sites', {resourceName} == 'MyWebApp'). If the resource
+      is part of a parent
 
-      ({resourceProviderNamespace} == 'Microsoft.Compute', {parentResourcePath}
-      ==
+      resource, then all parameters should be provided. For example a virtual
+      machine DNS name could
+
+      be specified as ({resourceProviderNamespace} == 'Microsoft.Compute',
+      {parentResourcePath} ==
 
       'virtualMachines/MyVirtualMachine', {resourceType} == 'domainNames',
       {resourceName} ==
@@ -1207,29 +1214,34 @@ methods:
       group in the given subscription that match the optional given $filter.
       Valid values for $filter
 
-      are: 'atScope()' or 'policyDefinitionId eq '{value}''. If $filter is not
-      provided, the
+      are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''.
+      If $filter is not
 
-      unfiltered list includes all policy assignments associated with the
-      resource group, including
+      provided, the unfiltered list includes all policy assignments associated
+      with the resource
 
-      those that apply directly or apply from containing scopes, as well as any
-      applied to resources
+      group, including those that apply directly or apply from containing
+      scopes, as well as any
 
-      contained within the resource group. If $filter=atScope() is provided, the
-      returned list
+      applied to resources contained within the resource group. If
+      $filter=atScope() is provided, the
 
-      includes all policy assignments that apply to the resource group, which is
-      everything in the
+      returned list includes all policy assignments that apply to the resource
+      group, which is
 
-      unfiltered list except those applied to resources contained within the
-      resource group. If
+      everything in the unfiltered list except those applied to resources
+      contained within the
 
-      $filter=policyDefinitionId eq '{value}' is provided, the returned list
-      includes all policy
+      resource group. If $filter=atExactScope() is provided, the returned list
+      only includes all
 
-      assignments of the policy definition whose id is {value} that apply to the
-      resource group.
+      policy assignments that at the resource group. If
+      $filter=policyDefinitionId eq '{value}' is
+
+      provided, the returned list includes all policy assignments of the policy
+      definition whose id is
+
+      {value} that apply to the resource group.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -1303,7 +1315,9 @@ methods:
             uid="@azure/arm-policy.PolicyAssignmentListResult" />&gt;
           description: |
             The callback
-  - name: 'listForResourceGroupNext(string, msRest.RequestOptionsBase)'
+  - name: >-
+      listForResourceGroupNext(string,
+      Models.PolicyAssignmentsListForResourceGroupNextOptionalParams)
     uid: '@azure/arm-policy.PolicyAssignments.listForResourceGroupNext'
     package: '@azure/arm-policy'
     summary: >-
@@ -1313,42 +1327,50 @@ methods:
       group in the given subscription that match the optional given $filter.
       Valid values for $filter
 
-      are: 'atScope()' or 'policyDefinitionId eq '{value}''. If $filter is not
-      provided, the
+      are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''.
+      If $filter is not
 
-      unfiltered list includes all policy assignments associated with the
-      resource group, including
+      provided, the unfiltered list includes all policy assignments associated
+      with the resource
 
-      those that apply directly or apply from containing scopes, as well as any
-      applied to resources
+      group, including those that apply directly or apply from containing
+      scopes, as well as any
 
-      contained within the resource group. If $filter=atScope() is provided, the
-      returned list
+      applied to resources contained within the resource group. If
+      $filter=atScope() is provided, the
 
-      includes all policy assignments that apply to the resource group, which is
-      everything in the
+      returned list includes all policy assignments that apply to the resource
+      group, which is
 
-      unfiltered list except those applied to resources contained within the
-      resource group. If
+      everything in the unfiltered list except those applied to resources
+      contained within the
 
-      $filter=policyDefinitionId eq '{value}' is provided, the returned list
-      includes all policy
+      resource group. If $filter=atExactScope() is provided, the returned list
+      only includes all
 
-      assignments of the policy definition whose id is {value} that apply to the
-      resource group.
+      policy assignments that at the resource group. If
+      $filter=policyDefinitionId eq '{value}' is
+
+      provided, the returned list includes all policy assignments of the policy
+      definition whose id is
+
+      {value} that apply to the resource group.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listForResourceGroupNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
+        Models.PolicyAssignmentsListForResourceGroupNextOptionalParams)
       parameters:
         - id: nextPageLink
           type: string
           description: The NextLink from the previous successful call to List operation.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
+          type: >-
+            <xref
+            uid="Models.PolicyAssignmentsListForResourceGroupNextOptionalParams"
+            />
           description: ''
       return:
         type: >-
@@ -1356,7 +1378,8 @@ methods:
           uid="Models.PolicyAssignmentsListForResourceGroupNextResponse" />&gt;
         description: Promise<Models.PolicyAssignmentsListForResourceGroupNextResponse>
   - name: >-
-      listForResourceGroupNext(string, RequestOptionsBase,
+      listForResourceGroupNext(string,
+      PolicyAssignmentsListForResourceGroupNextOptionalParams,
       ServiceCallback<PolicyAssignmentListResult>)
     uid: '@azure/arm-policy.PolicyAssignments.listForResourceGroupNext_2'
     package: '@azure/arm-policy'
@@ -1367,14 +1390,17 @@ methods:
     syntax:
       content: >-
         function listForResourceGroupNext(nextPageLink: string, options:
-        RequestOptionsBase, callback:
+        PolicyAssignmentsListForResourceGroupNextOptionalParams, callback:
         ServiceCallback<PolicyAssignmentListResult>)
       parameters:
         - id: nextPageLink
           type: string
           description: The NextLink from the previous successful call to List operation.
         - id: options
-          type: RequestOptionsBase
+          type: >-
+            <xref
+            uid="@azure/arm-policy.PolicyAssignmentsListForResourceGroupNextOptionalParams"
+            />
           description: The optional parameters
         - id: callback
           type: >-
@@ -1405,7 +1431,9 @@ methods:
             uid="@azure/arm-policy.PolicyAssignmentListResult" />&gt;
           description: |
             The callback
-  - name: 'listForResourceNext(string, msRest.RequestOptionsBase)'
+  - name: >-
+      listForResourceNext(string,
+      Models.PolicyAssignmentsListForResourceNextOptionalParams)
     uid: '@azure/arm-policy.PolicyAssignments.listForResourceNext'
     package: '@azure/arm-policy'
     summary: >-
@@ -1415,49 +1443,53 @@ methods:
       resource in the given resource group and subscription that match the
       optional given $filter.
 
-      Valid values for $filter are: 'atScope()' or 'policyDefinitionId eq
-      '{value}''. If $filter is
+      Valid values for $filter are: 'atScope()', 'atExactScope()' or
+      'policyDefinitionId eq
 
-      not provided, the unfiltered list includes all policy assignments
-      associated with the resource,
+      '{value}''. If $filter is not provided, the unfiltered list includes all
+      policy assignments
 
-      including those that apply directly or from all containing scopes, as well
-      as any applied to
+      associated with the resource, including those that apply directly or from
+      all containing scopes,
 
-      resources contained within the resource. If $filter=atScope() is provided,
-      the returned list
+      as well as any applied to resources contained within the resource. If
+      $filter=atScope() is
 
-      includes all policy assignments that apply to the resource, which is
-      everything in the
+      provided, the returned list includes all policy assignments that apply to
+      the resource, which is
 
-      unfiltered list except those applied to resources contained within the
-      resource. If
+      everything in the unfiltered list except those applied to resources
+      contained within the
 
-      $filter=policyDefinitionId eq '{value}' is provided, the returned list
+      resource. If $filter=atExactScope() is provided, the returned list only
       includes all policy
 
-      assignments of the policy definition whose id is {value} that apply to the
-      resource. Three
+      assignments that at the resource level. If $filter=policyDefinitionId eq
+      '{value}' is provided,
 
-      parameters plus the resource name are used to identify a specific
-      resource. If the resource is
+      the returned list includes all policy assignments of the policy definition
+      whose id is {value}
 
-      not part of a parent resource (the more common case), the parent resource
-      path should not be
+      that apply to the resource. Three parameters plus the resource name are
+      used to identify a
 
-      provided (or provided as ''). For example a web app could be specified as
+      specific resource. If the resource is not part of a parent resource (the
+      more common case), the
 
-      ({resourceProviderNamespace} == 'Microsoft.Web', {parentResourcePath} ==
-      '', {resourceType} ==
+      parent resource path should not be provided (or provided as ''). For
+      example a web app could be
 
-      'sites', {resourceName} == 'MyWebApp'). If the resource is part of a
-      parent resource, then all
+      specified as ({resourceProviderNamespace} == 'Microsoft.Web',
+      {parentResourcePath} == '',
 
-      parameters should be provided. For example a virtual machine DNS name
-      could be specified as
+      {resourceType} == 'sites', {resourceName} == 'MyWebApp'). If the resource
+      is part of a parent
 
-      ({resourceProviderNamespace} == 'Microsoft.Compute', {parentResourcePath}
-      ==
+      resource, then all parameters should be provided. For example a virtual
+      machine DNS name could
+
+      be specified as ({resourceProviderNamespace} == 'Microsoft.Compute',
+      {parentResourcePath} ==
 
       'virtualMachines/MyVirtualMachine', {resourceType} == 'domainNames',
       {resourceName} ==
@@ -1478,13 +1510,15 @@ methods:
     syntax:
       content: >-
         function listForResourceNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
+        Models.PolicyAssignmentsListForResourceNextOptionalParams)
       parameters:
         - id: nextPageLink
           type: string
           description: The NextLink from the previous successful call to List operation.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
+          type: >-
+            <xref
+            uid="Models.PolicyAssignmentsListForResourceNextOptionalParams" />
           description: ''
       return:
         type: >-
@@ -1492,7 +1526,8 @@ methods:
           uid="Models.PolicyAssignmentsListForResourceNextResponse" />&gt;
         description: Promise<Models.PolicyAssignmentsListForResourceNextResponse>
   - name: >-
-      listForResourceNext(string, RequestOptionsBase,
+      listForResourceNext(string,
+      PolicyAssignmentsListForResourceNextOptionalParams,
       ServiceCallback<PolicyAssignmentListResult>)
     uid: '@azure/arm-policy.PolicyAssignments.listForResourceNext_2'
     package: '@azure/arm-policy'
@@ -1503,14 +1538,17 @@ methods:
     syntax:
       content: >-
         function listForResourceNext(nextPageLink: string, options:
-        RequestOptionsBase, callback:
+        PolicyAssignmentsListForResourceNextOptionalParams, callback:
         ServiceCallback<PolicyAssignmentListResult>)
       parameters:
         - id: nextPageLink
           type: string
           description: The NextLink from the previous successful call to List operation.
         - id: options
-          type: RequestOptionsBase
+          type: >-
+            <xref
+            uid="@azure/arm-policy.PolicyAssignmentsListForResourceNextOptionalParams"
+            />
           description: The optional parameters
         - id: callback
           type: >-
@@ -1539,7 +1577,7 @@ methods:
             uid="@azure/arm-policy.PolicyAssignmentListResult" />&gt;
           description: |
             The callback
-  - name: 'listNext(string, msRest.RequestOptionsBase)'
+  - name: 'listNext(string, Models.PolicyAssignmentsListNextOptionalParams)'
     uid: '@azure/arm-policy.PolicyAssignments.listNext'
     package: '@azure/arm-policy'
     summary: >-
@@ -1547,48 +1585,53 @@ methods:
       with the given
 
       subscription that match the optional given $filter. Valid values for
-      $filter are: 'atScope()' or
+      $filter are: 'atScope()',
 
-      'policyDefinitionId eq '{value}''. If $filter is not provided, the
-      unfiltered list includes all
+      'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not
+      provided, the
 
-      policy assignments associated with the subscription, including those that
-      apply directly or from
+      unfiltered list includes all policy assignments associated with the
+      subscription, including
 
-      management groups that contain the given subscription, as well as any
-      applied to objects
+      those that apply directly or from management groups that contain the given
+      subscription, as well
 
-      contained within the subscription. If $filter=atScope() is provided, the
-      returned list includes
+      as any applied to objects contained within the subscription. If
+      $filter=atScope() is provided,
 
-      all policy assignments that apply to the subscription, which is everything
-      in the unfiltered
+      the returned list includes all policy assignments that apply to the
+      subscription, which is
 
-      list except those applied to objects contained within the subscription. If
+      everything in the unfiltered list except those applied to objects
+      contained within the
 
-      $filter=policyDefinitionId eq '{value}' is provided, the returned list
-      includes all policy
+      subscription. If $filter=atExactScope() is provided, the returned list
+      only includes all policy
 
-      assignments of the policy definition whose id is {value}.
+      assignments that at the subscription. If $filter=policyDefinitionId eq
+      '{value}' is provided,
+
+      the returned list includes all policy assignments of the policy definition
+      whose id is {value}.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
+        Models.PolicyAssignmentsListNextOptionalParams)
       parameters:
         - id: nextPageLink
           type: string
           description: The NextLink from the previous successful call to List operation.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
+          type: <xref uid="Models.PolicyAssignmentsListNextOptionalParams" />
           description: ''
       return:
         type: Promise&lt;<xref uid="Models.PolicyAssignmentsListNextResponse" />&gt;
         description: Promise<Models.PolicyAssignmentsListNextResponse>
   - name: >-
-      listNext(string, RequestOptionsBase,
+      listNext(string, PolicyAssignmentsListNextOptionalParams,
       ServiceCallback<PolicyAssignmentListResult>)
     uid: '@azure/arm-policy.PolicyAssignments.listNext_2'
     package: '@azure/arm-policy'
@@ -1598,14 +1641,17 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listNext(nextPageLink: string, options: RequestOptionsBase,
-        callback: ServiceCallback<PolicyAssignmentListResult>)
+        function listNext(nextPageLink: string, options:
+        PolicyAssignmentsListNextOptionalParams, callback:
+        ServiceCallback<PolicyAssignmentListResult>)
       parameters:
         - id: nextPageLink
           type: string
           description: The NextLink from the previous successful call to List operation.
         - id: options
-          type: RequestOptionsBase
+          type: >-
+            <xref
+            uid="@azure/arm-policy.PolicyAssignmentsListNextOptionalParams" />
           description: The optional parameters
         - id: callback
           type: >-

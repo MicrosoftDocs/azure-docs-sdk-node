@@ -102,8 +102,39 @@ constructors:
             );
 
             ```
+properties:
+  - name: pipeline
+    uid: '@azure/data-tables.TableServiceClient.pipeline'
+    package: '@azure/data-tables'
+    summary: >-
+      Represents a pipeline for making a HTTP request to a URL.
+
+      Pipelines can have multiple policies to manage manipulating each request
+      before and after it is made to the server.
+    fullName: pipeline
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        type: Pipeline
+        description: ''
+  - name: url
+    uid: '@azure/data-tables.TableServiceClient.url'
+    package: '@azure/data-tables'
+    summary: Table Account URL
+    fullName: url
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'url: string'
+      return:
+        type: string
+        description: ''
 methods:
-  - name: 'createTable(string, CreateTableOptions)'
+  - name: 'createTable(string, OperationOptions)'
     uid: '@azure/data-tables.TableServiceClient.createTable'
     package: '@azure/data-tables'
     summary: Creates a new table under the given account.
@@ -111,21 +142,19 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createTable(tableName: string, options?: CreateTableOptions)'
+      content: 'function createTable(name: string, options?: OperationOptions)'
       parameters:
-        - id: tableName
+        - id: name
           type: string
           description: The name of the table.
         - id: options
-          type: <xref uid="@azure/data-tables.CreateTableOptions" />
+          type: OperationOptions
           description: |
             The options parameters.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/data-tables.CreateTableItemResponse"
-          />&gt;
+        type: Promise&lt;void&gt;
         description: ''
-  - name: 'deleteTable(string, DeleteTableOptions)'
+  - name: 'deleteTable(string, OperationOptions)'
     uid: '@azure/data-tables.TableServiceClient.deleteTable'
     package: '@azure/data-tables'
     summary: Operation permanently deletes the specified table.
@@ -133,17 +162,17 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function deleteTable(tableName: string, options?: DeleteTableOptions)'
+      content: 'function deleteTable(name: string, options?: OperationOptions)'
       parameters:
-        - id: tableName
+        - id: name
           type: string
           description: The name of the table.
         - id: options
-          type: <xref uid="@azure/data-tables.DeleteTableOptions" />
+          type: OperationOptions
           description: |
             The options parameters.
       return:
-        type: Promise&lt;<xref uid="@azure/data-tables.DeleteTableResponse" />&gt;
+        type: Promise&lt;void&gt;
         description: ''
   - name: 'fromConnectionString(string, TableServiceClientOptions)'
     uid: '@azure/data-tables.TableServiceClient.fromConnectionString'
@@ -173,35 +202,7 @@ methods:
       return:
         type: <xref uid="@azure/data-tables.TableServiceClient" />
         description: A new TableServiceClient from the given connection string.
-  - name: 'getAccessPolicy(string, GetAccessPolicyOptions)'
-    uid: '@azure/data-tables.TableServiceClient.getAccessPolicy'
-    package: '@azure/data-tables'
-    summary: >-
-      Retrieves details about any stored access policies specified on the table
-      that may be used with
-
-      Shared Access Signatures.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function getAccessPolicy(tableName: string, options?:
-        GetAccessPolicyOptions)
-      parameters:
-        - id: tableName
-          type: string
-          description: The name of the table.
-        - id: options
-          type: <xref uid="@azure/data-tables.GetAccessPolicyOptions" />
-          description: |
-            The options parameters.
-      return:
-        type: >-
-          Promise&lt;<xref uid="@azure/data-tables.GetAccessPolicyResponse"
-          />&gt;
-        description: ''
-  - name: getProperties(GetPropertiesOptions)
+  - name: getProperties(OperationOptions)
     uid: '@azure/data-tables.TableServiceClient.getProperties'
     package: '@azure/data-tables'
     summary: >-
@@ -213,16 +214,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperties(options?: GetPropertiesOptions)'
+      content: 'function getProperties(options?: OperationOptions)'
       parameters:
         - id: options
-          type: <xref uid="@azure/data-tables.GetPropertiesOptions" />
+          type: OperationOptions
           description: |
             The options parameters.
       return:
         type: Promise&lt;<xref uid="@azure/data-tables.GetPropertiesResponse" />&gt;
         description: ''
-  - name: getStatistics(GetStatisticsOptions)
+  - name: getStatistics(OperationOptions)
     uid: '@azure/data-tables.TableServiceClient.getStatistics'
     package: '@azure/data-tables'
     summary: >-
@@ -235,10 +236,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getStatistics(options?: GetStatisticsOptions)'
+      content: 'function getStatistics(options?: OperationOptions)'
       parameters:
         - id: options
-          type: <xref uid="@azure/data-tables.GetStatisticsOptions" />
+          type: OperationOptions
           description: |
             The options parameters.
       return:
@@ -260,35 +261,8 @@ methods:
             The options parameters.
       return:
         type: >-
-          PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/data-tables.TableResponseProperties" />, <xref
-          uid="@azure/data-tables.ListTableItemsResponse" />&gt;
-        description: ''
-  - name: 'setAccessPolicy(string, SetAccessPolicyOptions)'
-    uid: '@azure/data-tables.TableServiceClient.setAccessPolicy'
-    package: '@azure/data-tables'
-    summary: >-
-      Sets stored access policies for the table that may be used with Shared
-      Access Signatures.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function setAccessPolicy(tableName: string, options?:
-        SetAccessPolicyOptions)
-      parameters:
-        - id: tableName
-          type: string
-          description: The name of the table.
-        - id: options
-          type: <xref uid="@azure/data-tables.SetAccessPolicyOptions" />
-          description: |
-            The options parameters.
-      return:
-        type: >-
-          Promise&lt;<xref uid="@azure/data-tables.SetAccessPolicyResponse"
-          />&gt;
+          PagedAsyncIterableIterator&lt;<xref uid="@azure/data-tables.TableItem"
+          />, <xref uid="@azure/data-tables.TableItem" />[]&gt;
         description: ''
   - name: 'setProperties(ServiceProperties, SetPropertiesOptions)'
     uid: '@azure/data-tables.TableServiceClient.setProperties'

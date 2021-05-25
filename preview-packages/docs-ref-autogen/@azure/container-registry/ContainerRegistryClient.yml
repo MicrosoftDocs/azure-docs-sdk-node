@@ -9,6 +9,37 @@ isPreview: false
 isDeprecated: false
 type: class
 constructors:
+  - name: 'ContainerRegistryClient(string, ContainerRegistryClientOptions)'
+    uid: '@azure/container-registry.ContainerRegistryClient.constructor_1'
+    package: '@azure/container-registry'
+    summary: |-
+      Creates an instance of a ContainerRegistryClient to interact with
+      an Azure Container Registry that has anonymous pull access enabled.
+      Example usage:
+      ```ts
+      import { ContainerRegistryClient } from "@azure/container-registry";
+
+      const client = new ContainerRegistryClient(
+         "<container registry API endpoint>",
+      );
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        new ContainerRegistryClient(endpointUrl: string, options?:
+        ContainerRegistryClientOptions)
+      parameters:
+        - id: endpointUrl
+          type: string
+          description: the URL to the Container Registry endpoint
+        - id: options
+          type: >-
+            <xref uid="@azure/container-registry.ContainerRegistryClientOptions"
+            />
+          description: |
+            optional configuration used to send requests to the service
   - name: >-
       ContainerRegistryClient(string, TokenCredential,
       ContainerRegistryClientOptions)
@@ -47,16 +78,42 @@ constructors:
           description: |
             optional configuration used to send requests to the service
 properties:
-  - name: endpoint
-    uid: '@azure/container-registry.ContainerRegistryClient.endpoint'
+  - name: loginServer
+    uid: '@azure/container-registry.ContainerRegistryClient.loginServer'
     package: '@azure/container-registry'
-    summary: The Azure Container Registry endpoint.
-    fullName: endpoint
+    summary: The login server of the registry
+    fullName: loginServer
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'endpoint: string'
+      content: 'loginServer: string'
+      return:
+        type: string
+        description: ''
+  - name: name
+    uid: '@azure/container-registry.ContainerRegistryClient.name'
+    package: '@azure/container-registry'
+    summary: The name of the registry
+    fullName: name
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'name: string'
+      return:
+        type: string
+        description: ''
+  - name: registryUrl
+    uid: '@azure/container-registry.ContainerRegistryClient.registryUrl'
+    package: '@azure/container-registry'
+    summary: The Azure Container Registry endpoint.
+    fullName: registryUrl
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'registryUrl: string'
       return:
         type: string
         description: ''
@@ -70,10 +127,10 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function deleteRepository(name: string, options?:
+        function deleteRepository(repositoryName: string, options?:
         DeleteRepositoryOptions)
       parameters:
-        - id: name
+        - id: repositoryName
           type: string
           description: the name of repository to delete
         - id: options
@@ -85,31 +142,51 @@ methods:
           Promise&lt;<xref
           uid="@azure/container-registry.DeleteRepositoryResult" />&gt;
         description: ''
-  - name: getRepositoryClient(string)
-    uid: '@azure/container-registry.ContainerRegistryClient.getRepositoryClient'
+  - name: 'getArtifact(string, string)'
+    uid: '@azure/container-registry.ContainerRegistryClient.getArtifact'
+    package: '@azure/container-registry'
+    summary: 'Returns an artifact for given repository name, and a tag or digest.'
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getArtifact(repositoryName: string, tagOrDigest: string)'
+      parameters:
+        - id: repositoryName
+          type: string
+          description: the name of repository
+        - id: tagOrDigest
+          type: string
+          description: |
+            tag or digest of the artifact to retrieve
+      return:
+        type: <xref uid="@azure/container-registry.RegistryArtifact" />
+        description: ''
+  - name: getRepository(string)
+    uid: '@azure/container-registry.ContainerRegistryClient.getRepository'
     package: '@azure/container-registry'
     summary: Returns a ContainerRepositoryClient instance for the given repository.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getRepositoryClient(repository: string)'
+      content: 'function getRepository(repositoryName: string)'
       parameters:
-        - id: repository
+        - id: repositoryName
           type: string
-          description: ''
+          description: the name of repository to delete
       return:
-        type: <xref uid="@azure/container-registry.ContainerRepositoryClient" />
+        type: <xref uid="@azure/container-registry.ContainerRepository" />
         description: ''
-  - name: listRepositories(ListRepositoriesOptions)
-    uid: '@azure/container-registry.ContainerRegistryClient.listRepositories'
+  - name: listRepositoryNames(ListRepositoriesOptions)
+    uid: '@azure/container-registry.ContainerRegistryClient.listRepositoryNames'
     package: '@azure/container-registry'
     summary: |-
       Iterates repositories.
       Example usage:
       ```ts
       let client = new ContainerRegistryClient(url, credentials);
-      for await (const repository of client.listRepositories()) {
+      for await (const repository of client.listRepositoryNames()) {
         console.log("repository name: ", repository);
       }
       ```
@@ -117,7 +194,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listRepositories(options?: ListRepositoriesOptions)'
+      content: 'function listRepositoryNames(options?: ListRepositoriesOptions)'
       parameters:
         - id: options
           type: <xref uid="@azure/container-registry.ListRepositoriesOptions" />

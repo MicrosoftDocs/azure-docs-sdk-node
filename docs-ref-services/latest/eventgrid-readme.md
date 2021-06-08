@@ -3,7 +3,7 @@ title: Azure Event Grid client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/eventgrid, 
 author: maggiepint
 ms.author: magpint
-ms.date: 05/11/2021
+ms.date: 06/08/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Event Grid client library for JavaScript - Version 4.2.0 
+# Azure Event Grid client library for JavaScript - Version 4.3.0 
 
 
 [Azure Event Grid](https://azure.microsoft.com/services/event-grid/) is a cloud-based service that provides reliable event delivery at massive scale.
@@ -22,11 +22,11 @@ Use the client library to:
 - Decode and process events which were delivered to an Event Grid handler
 - Generate Shared Access Signatures for Event Grid topics
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_4.2.0/sdk/eventgrid/eventgrid/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_4.3.0/sdk/eventgrid/eventgrid/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/eventgrid/v/next) |
 [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/eventgrid/) |
 [Product documentation](https://docs.microsoft.com/azure/event-grid/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.2.0/sdk/eventgrid/eventgrid/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.3.0/sdk/eventgrid/eventgrid/samples)
 
 ## Getting started
 
@@ -188,6 +188,10 @@ When creating an instance of `EventGridDeserializer` you may supply custom deser
 
 This library supports distributed tracing using [`@azure/core-tracing`][azure-core-tracing-github]. When using distributed tracing, this library will create a span during a `send` operation. In addition, when sending events using the Cloud Events 1.0 schema, the SDK will add distributed tracing metadata to the events using the [Distributed Tracing extension][cloud-events-distributed-tracing-spec]. The values for the `traceparent` and `tracestate` extension properties correspond to the `traceparent` and `tracestate` headers from the HTTP request which sends the events. If an event already has a `traceparent` extension property it is not updated.
 
+### Event Grid on Kubernetes
+
+This library has been tested and validated on [Kubernetes using Azure Arc][eventgrid-on-kubernetes-using-azure-arc].
+
 ## Examples
 
 ### Publish a Custom Event to an Event Grid Topic using the Event Grid Schema
@@ -294,17 +298,17 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.2.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.3.0/sdk/core/logger).
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.2.0/sdk/eventgrid/eventgrid/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.3.0/sdk/eventgrid/eventgrid/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_4.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/eventgrid_4.3.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -316,6 +320,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [event_grid]: https://docs.microsoft.com/azure/event-grid
 [azure_portal]: https://portal.azure.com
-[azure-core-tracing-github]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.2.0/sdk/core/core-tracing
+[azure-core-tracing-github]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/eventgrid_4.3.0/sdk/core/core-tracing
 [cloud-events-distributed-tracing-spec]: https://github.com/cloudevents/spec/blob/master/extensions/distributed-tracing.md
+[eventgrid-on-kubernetes-using-azure-arc]: https://docs.microsoft.com/azure/event-grid/kubernetes/
 

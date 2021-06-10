@@ -42,7 +42,7 @@ To create events, authenticate, and post to topics, we recommend you use the lat
 
 ### Legacy Packages
 
- Since these version will only receive critical bug fixes and no new features, we recommend using the latest major version `@azure/eventgrid` instead.
+ Since these version will only receive critical bug fixes and no new features, we recommend using the latest major version of `@azure/eventgrid` instead.
 
 | NPM Package                                                        | Reference                                                                                            |   
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | 

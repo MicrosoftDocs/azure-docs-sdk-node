@@ -31,31 +31,23 @@ To manage your Azure Event Grid resources like Event Grid instances, topics, and
 
 Create events, authenticate, and post to topics using the below packages
 
-### v2 of @azure/eventgrid
+### Latest Packages
 
-To create events, authenticate, and post to topics, you would use the `@azure/eventgrid` package.
+To create events, authenticate, and post to topics, we recommend you use the latest version of the `@azure/eventgrid` package.
+
+| NPM Package                                                        | Samples | Reference                                                                                            |   
+| ------------------------------------------------------------------ | ------- | ---------------------------------------------------------------------------------------------------- | 
+| [@azure/eventgrid](https://www.npmjs.com/package/@azure/eventgrid) | [Samples for @azure/eventgrid](https://docs.microsoft.com/samples/azure/azure-sdk-for-js/eventgrid-javascript/) | [API Reference for @azure/eventgrid](https://docs.microsoft.com/javascript/api/@azure/eventgrid/) |
+
+
+### Legacy Packages
+
+ Since these version will only receive critical bug fixes and no new features, we recommend using the latest major version of `@azure/eventgrid` instead.
 
 | NPM Package                                                        | Reference                                                                                            |   
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | 
-| [@azure/eventgrid v2](https://npmjs.com/package/@azure/eventgrid) | [API Reference for @azure/eventgrid v2](https://docs.microsoft.com/javascript/api/@azure/eventgrid) | 
-
-### v3 of @azure/eventgrid (in preview)
-
-To create events, authenticate, and post to topics, you can also try latest version of the `@azure/eventgrid` i.e. v3. Since this version is still in preview, we do not recommend using this in your production environment until we release a stable version.
-
-| NPM Package                                                        | Reference                                                                                            |   
-| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | 
-| [@azure/eventgrid v3](https://www.npmjs.com/package/@azure/eventgrid/v/next) | [API Reference for @azure/eventgrid v3](https://docs.microsoft.com/en-us/javascript/api/@azure/eventgrid/?view=azure-node-preview) | 
-
-
-### v1 of azure-eventgrid
-
-To create events, authenticate, and post to topics, you can use the older `azure-event-grid` package as well. Since this package will only receive critical bug fixes and no new features, we recommend using the latest `@azure/eventgrid` instead
-
-| NPM Package                                                        | Reference                                                                                            | 
-| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | 
+| [@azure/eventgrid@2.0.0](https://www.npmjs.com/package/@azure/eventgrid/v/2.0.0) | [API Reference for @azure/eventgrid@2.0.0](https://docs.microsoft.com/javascript/api/@azure/eventgrid/?view=azure-node-legacy) |
 | [azure-event-grid](https://npmjs.com/package/azure-event-grid) | [API Reference for azure-event-grid](https://docs.microsoft.com/javascript/api/azure-event-grid) | 
-
 
 ## Learn more
 

@@ -100,7 +100,7 @@ methods:
           uid="@azure/ai-metrics-advisor.GetAnomalyAlertConfigurationResponse"
           />&gt;
         description: Response with Alert object
-  - name: 'createDataFeed(DataFeedDescriptor, OperationOptions)'
+  - name: 'createDataFeed(DataFeedDescriptor, CreateDataFeedOptions)'
     uid: >-
       @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createDataFeed
     package: '@azure/ai-metrics-advisor'
@@ -111,19 +111,44 @@ methods:
     syntax:
       content: >-
         function createDataFeed(feed: DataFeedDescriptor, operationOptions?:
-        OperationOptions)
+        CreateDataFeedOptions)
       parameters:
         - id: feed
           type: <xref uid="@azure/ai-metrics-advisor.DataFeedDescriptor" />
           description: the data feed object to create
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/ai-metrics-advisor.CreateDataFeedOptions" />
           description: ''
       return:
         type: >-
           Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetDataFeedResponse"
           />&gt;
         description: Response with Datafeed object
+  - name: 'createDatasourceCredential(DatasourceCredentialUnion, OperationOptions)'
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createDatasourceCredential
+    package: '@azure/ai-metrics-advisor'
+    summary: Creates data source credential for the given id
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createDatasourceCredential(datasourceCredential:
+        DatasourceCredentialUnion, options?: OperationOptions)
+      parameters:
+        - id: datasourceCredential
+          type: <xref uid="@azure/ai-metrics-advisor.DatasourceCredentialUnion" />
+          description: the credential entity object to create
+        - id: options
+          type: OperationOptions
+          description: |
+            The options parameter
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/ai-metrics-advisor.GetCredentialEntityResponse" />&gt;
+        description: ''
   - name: >-
       createDetectionConfig(Omit<AnomalyDetectionConfiguration, "id">,
       OperationOptions)
@@ -220,6 +245,29 @@ methods:
           type: OperationOptions
           description: |
             The options parameter.
+      return:
+        type: Promise&lt;RestResponse&gt;
+        description: ''
+  - name: 'deleteDatasourceCredential(string, OperationOptions)'
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.deleteDatasourceCredential
+    package: '@azure/ai-metrics-advisor'
+    summary: Deletes data source credential for the given id
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteDatasourceCredential(id: string, options?:
+        OperationOptions)
+      parameters:
+        - id: id
+          type: string
+          description: id of the credential entity to delete
+        - id: options
+          type: OperationOptions
+          description: |
+            The options parameter
       return:
         type: Promise&lt;RestResponse&gt;
         description: ''
@@ -338,6 +386,29 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/ai-metrics-advisor.GetIngestionProgressResponse" />&gt;
+        description: ''
+  - name: 'getDatasourceCredential(string, OperationOptions)'
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.getDatasourceCredential
+    package: '@azure/ai-metrics-advisor'
+    summary: Retrieves data source credential for the given id
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getDatasourceCredential(id: string, options?: OperationOptions)'
+      parameters:
+        - id: id
+          type: string
+          description: id of the credential entity to retrieve
+        - id: options
+          type: OperationOptions
+          description: |
+            The options parameter
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/ai-metrics-advisor.GetCredentialEntityResponse" />&gt;
         description: ''
   - name: 'getDetectionConfig(string, OperationOptions)'
     uid: >-
@@ -656,6 +727,97 @@ methods:
           uid="@azure/ai-metrics-advisor.DataFeed" />, <xref
           uid="@azure/ai-metrics-advisor.DataFeedsPageResponse" />&gt;
         description: ''
+  - name: listDatasourceCredential(ListDatasourceCredentialsOptions)
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.listDatasourceCredential
+    package: '@azure/ai-metrics-advisor'
+    summary: >
+      Returns an async iterable iterator to list data source credentials based
+      on options
+
+      `.byPage()` returns an async iterable iterator to list the credentials in
+      pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      const client = new MetricsAdvisorAdministrationClient(endpoint,
+        new MetricsAdvisorKeyCredential(subscriptionKey, apiKey));
+      const datasourceCredentialList = client.listDatasourceCredential();
+
+      let i = 1;
+
+      for await (const datasourceCredential of datasourceCredentialList){
+       console.log(`datasourceCredential ${i++}:`);
+       console.log(datasourceCredential);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let iter = client.listDatasourceCredential();
+
+      let result = await iter.next();
+
+      while (!result.done) {
+        console.dir(result);
+        result = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      const pages = client.listDatasourceCredential().byPage({ maxPageSize: 2
+      });
+
+      let page = await pages.next();
+
+      let i = 1;
+
+      while (!page.done) {
+       if (page.value) {
+         console.log(`-- page ${i++}`);
+         for (const credential of page.value) {
+           console.log("datasource credential-");
+           console.dir(credential);
+         }
+       }
+       page = await pages.next();
+      }
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listDatasourceCredential(options?:
+        ListDatasourceCredentialsOptions)
+      parameters:
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-metrics-advisor.ListDatasourceCredentialsOptions" />
+          description: ''
+      return:
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/ai-metrics-advisor.DatasourceCredentialUnion" />, <xref
+          uid="@azure/ai-metrics-advisor.CredentialsPageResponse" />&gt;
+        description: ''
   - name: 'listDetectionConfigs(string, OperationOptions)'
     uid: >-
       @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.listDetectionConfigs
@@ -910,8 +1072,38 @@ methods:
         type: Promise&lt;RestResponse&gt;
         description: ''
   - name: >-
-      updateDetectionConfig(string, Partial<Omit<AnomalyDetectionConfiguration,
-      "id" | "metricId">>, OperationOptions)
+      updateDatasourceCredential(string, DatasourceCredentialPatch,
+      OperationOptions)
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.updateDatasourceCredential
+    package: '@azure/ai-metrics-advisor'
+    summary: Updates data source credential for the given id
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateDatasourceCredential(id: string, patch:
+        DatasourceCredentialPatch, options?: OperationOptions)
+      parameters:
+        - id: id
+          type: string
+          description: id of the credential entity to update
+        - id: patch
+          type: <xref uid="@azure/ai-metrics-advisor.DatasourceCredentialPatch" />
+          description: >-
+            Input to the update credential entity operation
+            <xref:DataSourceCredentialPatch>
+        - id: options
+          type: OperationOptions
+          description: |
+            The options parameter
+      return:
+        type: Promise&lt;RestResponse&gt;
+        description: ''
+  - name: >-
+      updateDetectionConfig(string, AnomalyDetectionConfigurationPatch,
+      OperationOptions)
     uid: >-
       @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.updateDetectionConfig
     package: '@azure/ai-metrics-advisor'
@@ -924,17 +1116,16 @@ methods:
     syntax:
       content: >-
         function updateDetectionConfig(id: string, patch:
-        Partial<Omit<AnomalyDetectionConfiguration, "id" | "metricId">>,
-        options?: OperationOptions)
+        AnomalyDetectionConfigurationPatch, options?: OperationOptions)
       parameters:
         - id: id
           type: string
           description: id of the detection configuration for metric anomaly to update
         - id: patch
           type: >-
-            Partial&lt;Omit&lt;<xref
-            uid="@azure/ai-metrics-advisor.AnomalyDetectionConfiguration" />,
-            "id" | "metricId"&gt;&gt;
+            <xref
+            uid="@azure/ai-metrics-advisor.AnomalyDetectionConfigurationPatch"
+            />
           description: >-
             Input to the update anomaly detection configuration operation
             <xref:AnomalyDetectionConfigurationPatch>

@@ -9,19 +9,6 @@ isPreview: false
 isDeprecated: false
 type: interface
 properties:
-  - name: fullyQualifiedName
-    uid: '@azure/container-registry.ContainerRepository.fullyQualifiedName'
-    package: '@azure/container-registry'
-    summary: Registry name.
-    fullName: fullyQualifiedName
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'fullyQualifiedName: string'
-      return:
-        type: string
-        description: ''
   - name: name
     uid: '@azure/container-registry.ContainerRepository.name'
     package: '@azure/container-registry'
@@ -35,16 +22,16 @@ properties:
       return:
         type: string
         description: ''
-  - name: registryUrl
-    uid: '@azure/container-registry.ContainerRepository.registryUrl'
+  - name: registryEndpoint
+    uid: '@azure/container-registry.ContainerRepository.registryEndpoint'
     package: '@azure/container-registry'
     summary: The Azure Container Registry endpoint.
-    fullName: registryUrl
+    fullName: registryEndpoint
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'registryUrl: string'
+      content: 'registryEndpoint: string'
       return:
         type: string
         description: ''
@@ -64,9 +51,7 @@ methods:
           description: |
             optional configuration for the operation
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/container-registry.DeleteRepositoryResult" />&gt;
+        type: Promise&lt;void&gt;
         description: ''
   - name: getArtifact(string)
     uid: '@azure/container-registry.ContainerRepository.getArtifact'
@@ -103,11 +88,11 @@ methods:
             -
       return:
         type: >-
-          Promise&lt;<xref uid="@azure/container-registry.RepositoryProperties"
-          />&gt;
+          Promise&lt;<xref
+          uid="@azure/container-registry.ContainerRepositoryProperties" />&gt;
         description: ''
-  - name: listManifests(ListManifestsOptions)
-    uid: '@azure/container-registry.ContainerRepository.listManifests'
+  - name: listManifestProperties(ListManifestPropertiesOptions)
+    uid: '@azure/container-registry.ContainerRepository.listManifestProperties'
     package: '@azure/container-registry'
     summary: |-
       Iterates manifests.
@@ -115,7 +100,7 @@ methods:
       ```ts
       const client = new ContainerRegistryClient(url, credentials);
       const repository = client.getRepository(repositoryName)
-      for await (const manifest of repository.listManifests()) {
+      for await (const manifest of repository.listManifestProperties()) {
         console.log("manifest: ", manifest);
       }
       ```
@@ -123,10 +108,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listManifests(options?: ListManifestsOptions)'
+      content: 'function listManifestProperties(options?: ListManifestPropertiesOptions)'
       parameters:
         - id: options
-          type: <xref uid="@azure/container-registry.ListManifestsOptions" />
+          type: >-
+            <xref uid="@azure/container-registry.ListManifestPropertiesOptions"
+            />
           description: |
             -
       return:
@@ -134,24 +121,24 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/container-registry.ArtifactManifestProperties" />&gt;
         description: ''
-  - name: setProperties(SetRepositoryPropertiesOptions)
-    uid: '@azure/container-registry.ContainerRepository.setProperties'
+  - name: updateProperties(UpdateRepositoryPropertiesOptions)
+    uid: '@azure/container-registry.ContainerRepository.updateProperties'
     package: '@azure/container-registry'
     summary: Updates repository attributes.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setProperties(options: SetRepositoryPropertiesOptions)'
+      content: 'function updateProperties(options: UpdateRepositoryPropertiesOptions)'
       parameters:
         - id: options
           type: >-
-            <xref uid="@azure/container-registry.SetRepositoryPropertiesOptions"
-            />
+            <xref
+            uid="@azure/container-registry.UpdateRepositoryPropertiesOptions" />
           description: |
             -
       return:
         type: >-
-          Promise&lt;<xref uid="@azure/container-registry.RepositoryProperties"
-          />&gt;
+          Promise&lt;<xref
+          uid="@azure/container-registry.ContainerRepositoryProperties" />&gt;
         description: ''

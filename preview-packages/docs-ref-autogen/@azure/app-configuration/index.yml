@@ -7,19 +7,12 @@ classes:
   - '@azure/app-configuration.AppConfigurationClient'
 interfaces:
   - '@azure/app-configuration.AddConfigurationSettingOptions'
-  - '@azure/app-configuration.AddConfigurationSettingParam'
   - '@azure/app-configuration.AddConfigurationSettingResponse'
   - '@azure/app-configuration.AppConfigurationClientOptions'
-  - '@azure/app-configuration.ConfigurationSetting'
   - '@azure/app-configuration.ConfigurationSettingId'
-  - '@azure/app-configuration.ConfigurationSettingParam'
   - '@azure/app-configuration.DeleteConfigurationSettingOptions'
   - '@azure/app-configuration.DeleteConfigurationSettingResponse'
-  - '@azure/app-configuration.FeatureFlag'
-  - '@azure/app-configuration.FeatureFlagParam'
-  - '@azure/app-configuration.FeatureFlagPercentageClientFilter'
-  - '@azure/app-configuration.FeatureFlagTargetingClientFilter'
-  - '@azure/app-configuration.FeatureFlagTimeWindowClientFilter'
+  - '@azure/app-configuration.FeatureFlagValue'
   - '@azure/app-configuration.GetConfigurationHeaders'
   - '@azure/app-configuration.GetConfigurationSettingOptions'
   - '@azure/app-configuration.GetConfigurationSettingResponse'
@@ -33,60 +26,35 @@ interfaces:
   - '@azure/app-configuration.ListRevisionsPage'
   - '@azure/app-configuration.ListSettingsOptions'
   - '@azure/app-configuration.OptionalFields'
-  - '@azure/app-configuration.SecretReference'
-  - '@azure/app-configuration.SecretReferenceParam'
+  - '@azure/app-configuration.SecretReferenceValue'
   - '@azure/app-configuration.SetConfigurationSettingOptions'
-  - '@azure/app-configuration.SetConfigurationSettingParam'
   - '@azure/app-configuration.SetConfigurationSettingResponse'
   - '@azure/app-configuration.SetReadOnlyOptions'
   - '@azure/app-configuration.SetReadOnlyResponse'
   - '@azure/app-configuration.SyncTokenHeaderField'
 typeAliases:
+  - '@azure/app-configuration.AddConfigurationSettingParam'
+  - '@azure/app-configuration.ConfigurationSetting'
+  - '@azure/app-configuration.ConfigurationSettingParam'
   - '@azure/app-configuration.ConfigurationSettingResponse'
-  - '@azure/app-configuration.FeatureFlagType'
+  - '@azure/app-configuration.SetConfigurationSettingParam'
 functions:
-  - name: isFeatureFlag(ConfigurationSetting | FeatureFlag)
+  - name: isFeatureFlag(ConfigurationSetting)
     uid: '@azure/app-configuration.isFeatureFlag'
     package: '@azure/app-configuration'
     summary: >
-      FeatureFlag represents a configuration setting that stores a feature flag
-      value.
+      Lets you know if the ConfigurationSetting is a feature flag.
 
-      [More
-      Info](https://docs.microsoft.com/azure/azure-app-configuration/concept-feature-management)
-
-      This helper method tells you if the given setting is a feature flag.
+      [Checks if the content type is featureFlagContentType
+      `"application/vnd.microsoft.appconfig.ff+json;charset=utf-8"`]
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isFeatureFlag(setting: ConfigurationSetting | FeatureFlag)'
+      content: 'function isFeatureFlag(setting: ConfigurationSetting)'
       parameters:
         - id: setting
-          type: >-
-            <xref uid="@azure/app-configuration.ConfigurationSetting" /> | <xref
-            uid="@azure/app-configuration.FeatureFlag" />
-          description: ''
-      return:
-        type: boolean
-        description: ''
-  - name: 'isFeatureFlagClientFilter<T>(T, unknown)'
-    uid: '@azure/app-configuration.isFeatureFlagClientFilter'
-    package: '@azure/app-configuration'
-    summary: >-
-      This helper method tells you if the given client filter is a
-      FeatureFlagClientFilter.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function isFeatureFlagClientFilter<T>(type: T, obj: unknown)'
-      parameters:
-        - id: type
-          type: T
-          description: ''
-        - id: obj
-          type: unknown
+          type: <xref uid="@azure/app-configuration.ConfigurationSetting" />
           description: ''
       return:
         type: boolean
@@ -94,9 +62,11 @@ functions:
   - name: isSecretReference(ConfigurationSetting)
     uid: '@azure/app-configuration.isSecretReference'
     package: '@azure/app-configuration'
-    summary: >-
-      This helper method tells you if the given setting is a SecretReference
-      configuration setting.
+    summary: >
+      Lets you know if the ConfigurationSetting is a secret reference.
+
+      [Checks if the content type is secretReferenceContentType
+      `"application/vnd.microsoft.appconfig.keyvaultref+json;charset=utf-8"`]
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -108,4 +78,44 @@ functions:
           description: ''
       return:
         type: boolean
+        description: ''
+  - name: parseFeatureFlag(ConfigurationSetting)
+    uid: '@azure/app-configuration.parseFeatureFlag'
+    package: '@azure/app-configuration'
+    summary: >-
+      Takes the ConfigurationSetting as input and returns the
+      ConfigurationSetting<FeatureFlagValue> by parsing the value string.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function parseFeatureFlag(setting: ConfigurationSetting)'
+      parameters:
+        - id: setting
+          type: <xref uid="@azure/app-configuration.ConfigurationSetting" />
+          description: ''
+      return:
+        type: >-
+          <xref uid="@azure/app-configuration.ConfigurationSetting" />&lt;<xref
+          uid="@azure/app-configuration.FeatureFlagValue" />&gt;
+        description: ''
+  - name: parseSecretReference(ConfigurationSetting)
+    uid: '@azure/app-configuration.parseSecretReference'
+    package: '@azure/app-configuration'
+    summary: >-
+      Takes the ConfigurationSetting as input and returns the
+      ConfigurationSetting<SecretReferenceValue> by parsing the value string.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function parseSecretReference(setting: ConfigurationSetting)'
+      parameters:
+        - id: setting
+          type: <xref uid="@azure/app-configuration.ConfigurationSetting" />
+          description: ''
+      return:
+        type: >-
+          <xref uid="@azure/app-configuration.ConfigurationSetting" />&lt;<xref
+          uid="@azure/app-configuration.SecretReferenceValue" />&gt;
         description: ''

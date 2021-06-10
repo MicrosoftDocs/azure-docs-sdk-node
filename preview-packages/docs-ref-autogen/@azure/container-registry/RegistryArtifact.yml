@@ -2,36 +2,36 @@
 name: RegistryArtifact
 uid: '@azure/container-registry.RegistryArtifact'
 package: '@azure/container-registry'
-summary: The helper used to interact with the Container Registry service.
+summary: The helper used to interact with the Container Registry artifact.
 fullName: RegistryArtifact
 remarks: ''
 isPreview: false
 isDeprecated: false
 type: interface
 properties:
-  - name: fullyQualifiedName
-    uid: '@azure/container-registry.RegistryArtifact.fullyQualifiedName'
+  - name: fullyQualifiedReference
+    uid: '@azure/container-registry.RegistryArtifact.fullyQualifiedReference'
     package: '@azure/container-registry'
-    summary: fully qualified name of the artifact.
-    fullName: fullyQualifiedName
+    summary: fully qualified reference of the artifact.
+    fullName: fullyQualifiedReference
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'fullyQualifiedName: string'
+      content: 'fullyQualifiedReference: string'
       return:
         type: string
         description: ''
-  - name: registryUrl
-    uid: '@azure/container-registry.RegistryArtifact.registryUrl'
+  - name: registryEndpoint
+    uid: '@azure/container-registry.RegistryArtifact.registryEndpoint'
     package: '@azure/container-registry'
     summary: The Azure Container Registry endpoint.
-    fullName: registryUrl
+    fullName: registryEndpoint
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'registryUrl: string'
+      content: 'registryEndpoint: string'
       return:
         type: string
         description: ''
@@ -45,19 +45,6 @@ properties:
     isDeprecated: false
     syntax:
       content: 'repositoryName: string'
-      return:
-        type: string
-        description: ''
-  - name: tagOrDigest
-    uid: '@azure/container-registry.RegistryArtifact.tagOrDigest'
-    package: '@azure/container-registry'
-    summary: Registry name.
-    fullName: tagOrDigest
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'tagOrDigest: string'
       return:
         type: string
         description: ''
@@ -144,8 +131,8 @@ methods:
           Promise&lt;<xref uid="@azure/container-registry.ArtifactTagProperties"
           />&gt;
         description: ''
-  - name: listTags(ListTagsOptions)
-    uid: '@azure/container-registry.RegistryArtifact.listTags'
+  - name: listTagProperties(ListTagPropertiesOptions)
+    uid: '@azure/container-registry.RegistryArtifact.listTagProperties'
     package: '@azure/container-registry'
     summary: |-
       Iterates tags.
@@ -154,7 +141,7 @@ methods:
       const client = new ContainerRegistryClient(url, credentials);
       const repository = client.getRepository(repositoryName);
       const artifact = repository.getArtifact(digest)
-      for await (const tag of artifact.listTags()) {
+      for await (const tag of artifact.listTagProperties()) {
         console.log("tag: ", tag);
       }
       ```
@@ -162,10 +149,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listTags(options?: ListTagsOptions)'
+      content: 'function listTagProperties(options?: ListTagPropertiesOptions)'
       parameters:
         - id: options
-          type: <xref uid="@azure/container-registry.ListTagsOptions" />
+          type: <xref uid="@azure/container-registry.ListTagPropertiesOptions" />
           description: |
             -
       return:
@@ -173,20 +160,22 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/container-registry.ArtifactTagProperties" />&gt;
         description: ''
-  - name: setManifestProperties(SetManifestPropertiesOptions)
-    uid: '@azure/container-registry.RegistryArtifact.setManifestProperties'
+  - name: updateManifestProperties(UpdateManifestPropertiesOptions)
+    uid: '@azure/container-registry.RegistryArtifact.updateManifestProperties'
     package: '@azure/container-registry'
     summary: Updates manifest artifact attributes.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setManifestProperties(options?: SetManifestPropertiesOptions)'
+      content: >-
+        function updateManifestProperties(options?:
+        UpdateManifestPropertiesOptions)
       parameters:
         - id: options
           type: >-
-            <xref uid="@azure/container-registry.SetManifestPropertiesOptions"
-            />
+            <xref
+            uid="@azure/container-registry.UpdateManifestPropertiesOptions" />
           description: |
             -
       return:
@@ -194,21 +183,23 @@ methods:
           Promise&lt;<xref
           uid="@azure/container-registry.ArtifactManifestProperties" />&gt;
         description: ''
-  - name: 'setTagProperties(string, SetTagPropertiesOptions)'
-    uid: '@azure/container-registry.RegistryArtifact.setTagProperties'
+  - name: 'updateTagProperties(string, UpdateTagPropertiesOptions)'
+    uid: '@azure/container-registry.RegistryArtifact.updateTagProperties'
     package: '@azure/container-registry'
     summary: Updates tag properties.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setTagProperties(tag: string, options: SetTagPropertiesOptions)'
+      content: >-
+        function updateTagProperties(tag: string, options:
+        UpdateTagPropertiesOptions)
       parameters:
         - id: tag
           type: string
           description: name of the tag
         - id: options
-          type: <xref uid="@azure/container-registry.SetTagPropertiesOptions" />
+          type: <xref uid="@azure/container-registry.UpdateTagPropertiesOptions" />
           description: |
             -
       return:

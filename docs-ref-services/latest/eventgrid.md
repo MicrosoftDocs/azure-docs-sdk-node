@@ -35,9 +35,9 @@ Create events, authenticate, and post to topics using the below packages
 
 To create events, authenticate, and post to topics, we recommend you use the latest version of the `@azure/eventgrid` package.
 
-| NPM Package                                                        | Reference                                                                                            |   
-| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | 
-| [@azure/eventgrid](https://www.npmjs.com/package/@azure/eventgrid) | [API Reference for @azure/eventgrid v3](https://docs.microsoft.com/javascript/api/@azure/eventgrid/) |
+| NPM Package                                                        | Samples | Reference                                                                                            |   
+| ------------------------------------------------------------------ | ------- | ---------------------------------------------------------------------------------------------------- | 
+| [@azure/eventgrid](https://www.npmjs.com/package/@azure/eventgrid) | [Samples for @azure/eventgrid](https://docs.microsoft.com/en-us/samples/azure/azure-sdk-for-js/eventgrid-javascript/) | [API Reference for @azure/eventgrid](https://docs.microsoft.com/javascript/api/@azure/eventgrid/) |
 
 
 ### Legacy Packages
@@ -46,7 +46,7 @@ To create events, authenticate, and post to topics, we recommend you use the lat
 
 | NPM Package                                                        | Reference                                                                                            |   
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | 
-| [@azure/eventgrid@2.0.0](https://www.npmjs.com/package/@azure/eventgrid/v/2.0.0) | [API Reference for @azure/eventgrid v2](https://docs.microsoft.com/javascript/api/@azure/eventgrid/?view=azure-node-legacy) |
+| [@azure/eventgrid@2.0.0](https://www.npmjs.com/package/@azure/eventgrid/v/2.0.0) | [API Reference for @azure/eventgrid@2.0.0](https://docs.microsoft.com/javascript/api/@azure/eventgrid/?view=azure-node-legacy) |
 | [azure-event-grid](https://npmjs.com/package/azure-event-grid) | [API Reference for azure-event-grid](https://docs.microsoft.com/javascript/api/azure-event-grid) | 
 
 ## Learn more

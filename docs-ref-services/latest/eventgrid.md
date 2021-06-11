@@ -47,7 +47,7 @@ To create events, authenticate, and post to topics, we recommend you use the lat
 | NPM Package                                                        | Reference                                                                                            |   
 | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- | 
 | [@azure/eventgrid@2.0.0](https://www.npmjs.com/package/@azure/eventgrid/v/2.0.0) | [API Reference for @azure/eventgrid@2.0.0](https://docs.microsoft.com/javascript/api/@azure/eventgrid/?view=azure-node-legacy) |
-| [azure-event-grid](https://npmjs.com/package/azure-event-grid) | [API Reference for azure-event-grid](https://docs.microsoft.com/javascript/api/azure-event-grid) | 
+| [azure-event-grid](https://npmjs.com/package/azure-event-grid) | [API Reference for azure-event-grid](https://docs.microsoft.com/javascript/api/azure-eventgrid) | 
 
 ## Learn more
 

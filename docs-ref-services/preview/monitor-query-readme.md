@@ -3,7 +3,7 @@ title: Azure Monitor Workspace query client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-query, 
 author: maggiepint
 ms.author: magpint
-ms.date: 06/08/2021
+ms.date: 06/15/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Monitor Workspace query client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Monitor Workspace query client library for JavaScript - Version 1.0.0-beta.2 
 
 
 [Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/overview) is a comprehensive solution for collecting, analyzing, and acting on telemetry from your cloud and on-premises environments.
@@ -21,7 +21,7 @@ Use the client library for Azure Monitor to:
 - Query logs using the [Kusto query language][kusto_query_language]
 - Query metrics
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0-beta.1/sdk/monitor/monitor-query/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0-beta.2/sdk/monitor/monitor-query/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/monitor-query) |
 [API reference documentation]<!--(https://docs.microsoft.com/javascript/api/@azure/monitor-query)--> |
 [Product documentation][azure_monitor_product_documentation]
@@ -61,7 +61,7 @@ Authentication via service principal is done by:
 - Setting appropriate RBAC rules on your Azure Monitor resource.
   More information on Azure Monitor roles can be found [here][azure_monitor_roles].
 
-Using [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0-beta.1/sdk/identity/identity/README.md#defaultazurecredential)
+Using [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0-beta.2/sdk/identity/identity/README.md#defaultazurecredential)
 
 ```javascript
 const { DefaultAzureCredential } = require("@azure/identity");
@@ -74,7 +74,7 @@ const logsQueryClient = new LogsQueryClient(credential);
 const metricsQueryClient = new MetricsQueryClient(credential);
 ```
 
-More information about `@azure/identity` can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0-beta.1/sdk/identity/identity/README.md)
+More information about `@azure/identity` can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0-beta.2/sdk/identity/identity/README.md)
 
 ## Key concepts
 
@@ -137,7 +137,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
@@ -147,11 +147,11 @@ The following samples show you the various ways you can query your Log Analytics
 - [`logsQueryBatchSample.ts`]<!--[samples_logquerybatch_ts]--> - Run multiple queries, simultaneously, with a batch in a Monitor workspace
 - [`metricsQuerySample.ts`]<!--[samples_metricsquery_ts]--> - Query metrics in a Monitor workspace
 
-More in-depth examples can be found in the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.1/sdk/monitor/monitor-query/samples/v1/) folder on GitHub.
+More in-depth examples can be found in the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.2/sdk/monitor/monitor-query/samples/v1/) folder on GitHub.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This module's tests are a mixture of live and unit tests, which require you to have an Azure Monitor instance. To execute the tests you'll need to run:
 
@@ -162,7 +162,7 @@ This module's tests are a mixture of live and unit tests, which require you to h
 5. Open the `.env` file in an editor and fill in the values.
 6. `npm run test`.
 
-View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0-beta.1/sdk/monitor/monitor-query/test)
+View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0-beta.2/sdk/monitor/monitor-query/test)
 folder for more details.
 
 ## Related projects
@@ -182,8 +182,8 @@ folder for more details.
 [kusto_query_language]: https://docs.microsoft.com/azure/data-explorer/kusto/query/
 [msdocs_metrics_client]: https://docs.microsoft.com/javascript/api/@azure/monitor-query/metricsqueryclient
 [msdocs_logs_client]: https://docs.microsoft.com/javascript/api/@azure/monitor-query/logsqueryclient
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.1/sdk/monitor/monitor-query/samples
-[samples_logsquery_ts]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.1/sdk/monitor/monitor-query/samples/v1/typescript/src/logQuery.ts
-[samples_logquerybatch_ts]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.1/sdk/monitor/monitor-query/samples/v1/typescript/src/logQueryBatch.ts
-[samples_metricsquery_ts]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.1/sdk/monitor/monitor-query/samples/v1/typescript/src/metricsQuery.ts
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.2/sdk/monitor/monitor-query/samples
+[samples_logsquery_ts]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.2/sdk/monitor/monitor-query/samples/v1/typescript/src/logQuery.ts
+[samples_logquerybatch_ts]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.2/sdk/monitor/monitor-query/samples/v1/typescript/src/logQueryBatch.ts
+[samples_metricsquery_ts]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0-beta.2/sdk/monitor/monitor-query/samples/v1/typescript/src/metricsQuery.ts
 

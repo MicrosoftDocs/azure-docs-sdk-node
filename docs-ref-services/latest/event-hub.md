@@ -9,7 +9,7 @@ ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: Event Hub
+ms.service: event-hubs
 ---
 
 # Azure Event Hub modules for JavaScript

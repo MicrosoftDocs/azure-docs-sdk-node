@@ -1,13 +1,10 @@
 ---
 title: Azure Event Hub modules for JavaScript
 description: Reference for Azure Event Hub modules for JavaScript
-author: sethmanheim
-ms.author: sethm
-manager: timlt
-ms.date: 07/18/2017
+author: spelluru
+ms.author: spelluru
+ms.date: 06/18/2021
 ms.topic: article
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: event-hubs
 ---

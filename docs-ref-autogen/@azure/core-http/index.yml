@@ -15,15 +15,12 @@ classes:
   - '@azure/core-http.HttpHeaders'
   - '@azure/core-http.ConsoleHttpPipelineLogger'
   - '@azure/core-http.NodeFetchHttpClient'
-  - '@azure/core-http.BearerTokenAuthenticationPolicy'
   - '@azure/core-http.DeserializationPolicy'
-  - '@azure/core-http.DisableResponseDecompressionPolicy'
   - '@azure/core-http.DisableResponseDecompressionPolicy'
   - '@azure/core-http.ExponentialRetryPolicy'
   - '@azure/core-http.GenerateClientRequestIdPolicy'
   - '@azure/core-http.KeepAlivePolicy'
   - '@azure/core-http.LogPolicy'
-  - '@azure/core-http.ProxyPolicy'
   - '@azure/core-http.ProxyPolicy'
   - '@azure/core-http.RedirectPolicy'
   - '@azure/core-http.BaseRequestPolicy'
@@ -65,6 +62,7 @@ interfaces:
   - '@azure/core-http.OperationSpec'
   - '@azure/core-http.InternalPipelineOptions'
   - '@azure/core-http.PipelineOptions'
+  - '@azure/core-http.TokenCyclerOptions'
   - '@azure/core-http.DeserializationContentTypes'
   - '@azure/core-http.DeserializationOptions'
   - '@azure/core-http.RetryOptions'
@@ -93,6 +91,7 @@ interfaces:
   - '@azure/core-http.RetryData'
   - '@azure/core-http.RetryError'
   - '@azure/core-http.SanitizerOptions'
+  - '@azure/core-http.SerializerOptions'
   - '@azure/core-http.ServiceCallback'
   - '@azure/core-http.ParameterValue'
   - '@azure/core-http.RequestOptionsBase'
@@ -115,11 +114,12 @@ typeAliases:
   - '@azure/core-http.ProxyOptions'
   - '@azure/core-http.URLTokenType'
   - '@azure/core-http.URLTokenizerState'
+  - '@azure/core-http.UnknownObject'
   - '@azure/core-http.HttpMethods'
   - '@azure/core-http.HttpRequestBody'
   - '@azure/core-http.TransferProgressEvent'
 functions:
-  - name: parseHeaders(Headers)
+  - name: parseHeaders(XMLHttpRequest)
     uid: '@azure/core-http.parseHeaders'
     package: '@azure/core-http'
     summary: ''
@@ -127,15 +127,27 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function parseHeaders(headers: Headers)'
+      content: 'function parseHeaders(xhr: XMLHttpRequest)'
       parameters:
-        - id: headers
-          type: Headers
+        - id: xhr
+          type: XMLHttpRequest
           description: ''
       return:
         type: <xref uid="@azure/core-http.HttpHeadersLike" />
         description: ''
-  - name: isHttpHeadersLike(any)
+  - name: getCachedDefaultHttpClient()
+    uid: '@azure/core-http.getCachedDefaultHttpClient'
+    package: '@azure/core-http'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function getCachedDefaultHttpClient()
+      return:
+        type: <xref uid="@azure/core-http.HttpClient" />
+        description: ''
+  - name: isHttpHeadersLike(unknown)
     uid: '@azure/core-http.isHttpHeadersLike'
     package: '@azure/core-http'
     summary: ''
@@ -143,10 +155,10 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isHttpHeadersLike(object?: any)'
+      content: 'function isHttpHeadersLike(object?: unknown)'
       parameters:
         - id: object
-          type: any
+          type: unknown
           description: ''
       return:
         type: boolean
@@ -205,26 +217,28 @@ functions:
       return:
         type: string
         description: ''
-  - name: isStreamOperation(OperationSpec)
-    uid: '@azure/core-http.isStreamOperation'
+  - name: getStreamResponseStatusCodes(OperationSpec)
+    uid: '@azure/core-http.getStreamResponseStatusCodes'
     package: '@azure/core-http'
-    summary: ''
+    summary: Gets the list of status codes for streaming responses.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isStreamOperation(operationSpec: OperationSpec)'
+      content: 'function getStreamResponseStatusCodes(operationSpec: OperationSpec)'
       parameters:
         - id: operationSpec
           type: <xref uid="@azure/core-http.OperationSpec" />
           description: ''
       return:
-        type: boolean
+        type: Set&lt;number&gt;
         description: ''
   - name: 'bearerTokenAuthenticationPolicy(TokenCredential, string | string[])'
     uid: '@azure/core-http.bearerTokenAuthenticationPolicy'
     package: '@azure/core-http'
-    summary: Creates a new BearerTokenAuthenticationPolicy factory.
+    summary: |-
+      Creates a new factory for a RequestPolicy that applies a bearer token to
+      the requests' `Authorization` headers.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -243,7 +257,7 @@ functions:
       return:
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
         description: ''
-  - name: deserializationPolicy(DeserializationContentTypes)
+  - name: 'deserializationPolicy(DeserializationContentTypes, SerializerOptions)'
     uid: '@azure/core-http.deserializationPolicy'
     package: '@azure/core-http'
     summary: >-
@@ -257,15 +271,20 @@ functions:
     syntax:
       content: >-
         function deserializationPolicy(deserializationContentTypes?:
-        DeserializationContentTypes)
+        DeserializationContentTypes, parsingOptions?: SerializerOptions)
       parameters:
         - id: deserializationContentTypes
           type: <xref uid="@azure/core-http.DeserializationContentTypes" />
           description: ''
+        - id: parsingOptions
+          type: <xref uid="@azure/core-http.SerializerOptions" />
+          description: ''
       return:
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
         description: ''
-  - name: 'deserializeResponseBody(string[], string[], HttpOperationResponse)'
+  - name: >-
+      deserializeResponseBody(string[], string[], HttpOperationResponse,
+      SerializerOptions)
     uid: '@azure/core-http.deserializeResponseBody'
     package: '@azure/core-http'
     summary: ''
@@ -275,7 +294,8 @@ functions:
     syntax:
       content: >-
         function deserializeResponseBody(jsonContentTypes: string[],
-        xmlContentTypes: string[], response: HttpOperationResponse)
+        xmlContentTypes: string[], response: HttpOperationResponse, options?:
+        SerializerOptions)
       parameters:
         - id: jsonContentTypes
           type: 'string[]'
@@ -286,24 +306,11 @@ functions:
         - id: response
           type: <xref uid="@azure/core-http.HttpOperationResponse" />
           description: ''
+        - id: options
+          type: <xref uid="@azure/core-http.SerializerOptions" />
+          description: ''
       return:
         type: Promise&lt;<xref uid="@azure/core-http.HttpOperationResponse" />&gt;
-        description: ''
-  - name: disableResponseDecompressionPolicy()
-    uid: '@azure/core-http.disableResponseDecompressionPolicy'
-    package: '@azure/core-http'
-    summary: >-
-      <xref:DisableResponseDecompressionPolicy> is not supported in browser and
-      attempting
-
-      to use it will results in error being thrown.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function disableResponseDecompressionPolicy()
-      return:
-        type: <xref uid="@azure/core-http.RequestPolicyFactory" />
         description: ''
   - name: disableResponseDecompressionPolicy()
     uid: '@azure/core-http.disableResponseDecompressionPolicy'
@@ -415,30 +422,6 @@ functions:
       return:
         type: '<xref uid="@azure/core-http.TelemetryInfo" />[]'
         description: ''
-  - name: getDefaultUserAgentKey()
-    uid: '@azure/core-http.getDefaultUserAgentKey'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function getDefaultUserAgentKey()
-      return:
-        type: string
-        description: ''
-  - name: getPlatformSpecificData()
-    uid: '@azure/core-http.getPlatformSpecificData'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function getPlatformSpecificData()
-      return:
-        type: '<xref uid="@azure/core-http.TelemetryInfo" />[]'
-        description: ''
   - name: ndJsonPolicy()
     uid: '@azure/core-http.ndJsonPolicy'
     package: '@azure/core-http'
@@ -448,38 +431,6 @@ functions:
     isDeprecated: false
     syntax:
       content: function ndJsonPolicy()
-      return:
-        type: <xref uid="@azure/core-http.RequestPolicyFactory" />
-        description: ''
-  - name: getDefaultProxySettings(string)
-    uid: '@azure/core-http.getDefaultProxySettings'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function getDefaultProxySettings(_proxyUrl?: string)'
-      parameters:
-        - id: _proxyUrl
-          type: string
-          description: ''
-      return:
-        type: <xref uid="@azure/core-http.ProxySettings" /> | undefined
-        description: ''
-  - name: proxyPolicy(ProxySettings)
-    uid: '@azure/core-http.proxyPolicy'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function proxyPolicy(_proxySettings?: ProxySettings)'
-      parameters:
-        - id: _proxySettings
-          type: <xref uid="@azure/core-http.ProxySettings" />
-          description: ''
       return:
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
         description: ''
@@ -514,6 +465,18 @@ functions:
           description: ''
       return:
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
+        description: ''
+  - name: loadNoProxy()
+    uid: '@azure/core-http.loadNoProxy'
+    package: '@azure/core-http'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function loadNoProxy()
+      return:
+        type: 'string[]'
         description: ''
   - name: redirectPolicy(number)
     uid: '@azure/core-http.redirectPolicy'
@@ -710,7 +673,7 @@ functions:
       return:
         type: boolean
         description: ''
-  - name: serializeObject(any)
+  - name: serializeObject(unknown)
     uid: '@azure/core-http.serializeObject'
     package: '@azure/core-http'
     summary: ''
@@ -718,10 +681,10 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function serializeObject(toSerialize: any)'
+      content: 'function serializeObject(toSerialize: unknown)'
       parameters:
         - id: toSerialize
-          type: any
+          type: unknown
           description: ''
       return:
         type: any
@@ -886,7 +849,7 @@ functions:
         - id: value
           type: string
           description: |
-            the base64 string to decode
+            The base64 string to decode
       return:
         type: Uint8Array
         description: ''
@@ -903,7 +866,7 @@ functions:
         - id: value
           type: Uint8Array
           description: |
-            the Uint8Aray to encode
+            The Uint8Aray to encode
       return:
         type: string
         description: ''
@@ -920,62 +883,11 @@ functions:
         - id: value
           type: string
           description: |
-            the string to encode
+            The string to encode
       return:
         type: string
         description: ''
-  - name: decodeString(string)
-    uid: '@azure/core-http.decodeString'
-    package: '@azure/core-http'
-    summary: Decodes a base64 string into a byte array.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function decodeString(value: string)'
-      parameters:
-        - id: value
-          type: string
-          description: |
-            the base64 string to decode
-      return:
-        type: Uint8Array
-        description: ''
-  - name: encodeByteArray(Uint8Array)
-    uid: '@azure/core-http.encodeByteArray'
-    package: '@azure/core-http'
-    summary: Encodes a byte array in base64 format.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function encodeByteArray(value: Uint8Array)'
-      parameters:
-        - id: value
-          type: Uint8Array
-          description: |
-            the Uint8Aray to encode
-      return:
-        type: string
-        description: ''
-  - name: encodeString(string)
-    uid: '@azure/core-http.encodeString'
-    package: '@azure/core-http'
-    summary: Encodes a string in base64 format.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function encodeString(value: string)'
-      parameters:
-        - id: value
-          type: string
-          description: |
-            the string to encode
-      return:
-        type: string
-        description: ''
-  - name: isNumber(any)
+  - name: isNumber(unknown)
     uid: '@azure/core-http.isNumber'
     package: '@azure/core-http'
     summary: ''
@@ -983,10 +895,10 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isNumber(n: any)'
+      content: 'function isNumber(n: unknown)'
       parameters:
         - id: 'n'
-          type: any
+          type: unknown
           description: ''
       return:
         type: boolean
@@ -1043,14 +955,15 @@ functions:
           description: 'specifies retry interval, and its lower bound and upper bound.'
         - id: retryData
           type: <xref uid="@azure/core-http.RetryData" />
-          description: ''
+          description: The retry data.
         - id: err
           type: <xref uid="@azure/core-http.RetryError" />
-          description: ''
+          description: |
+            The operation"s error, if any.
       return:
         type: <xref uid="@azure/core-http.RetryData" />
         description: ''
-  - name: 'applyMixins(any, any[])'
+  - name: 'applyMixins(unknown, any[])'
     uid: '@azure/core-http.applyMixins'
     package: '@azure/core-http'
     summary: >-
@@ -1060,11 +973,11 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function applyMixins(targetCtor: any, sourceCtors: any[])'
+      content: 'function applyMixins(targetCtorParam: unknown, sourceCtors: any[])'
       parameters:
-        - id: targetCtor
-          type: any
-          description: The target object on which the properties need to be applied.
+        - id: targetCtorParam
+          type: unknown
+          description: ''
         - id: sourceCtors
           type: 'any[]'
           description: >
@@ -1087,7 +1000,7 @@ functions:
           type: T
           description: The value to be resolved with after a timeout of t milliseconds.
       return:
-        type: Promise&lt;T&gt;
+        type: Promise&lt;T | void&gt;
         description: Resolved promise
   - name: encodeUri(string)
     uid: '@azure/core-http.encodeUri'
@@ -1105,7 +1018,7 @@ functions:
       return:
         type: string
         description: The encoded URI.
-  - name: 'executePromisesSequentially(Array<any>, any)'
+  - name: 'executePromisesSequentially(Array<any>, unknown)'
     uid: '@azure/core-http.executePromisesSequentially'
     package: '@azure/core-http'
     summary: >-
@@ -1120,15 +1033,18 @@ functions:
     syntax:
       content: >-
         function executePromisesSequentially(promiseFactories: Array<any>,
-        kickstart: any)
+        kickstart: unknown)
       parameters:
         - id: promiseFactories
           type: Array&lt;any&gt;
-          description: |
-            An array of promise factories(A function that return a promise)
+          description: An array of promise factories(A function that return a promise)
         - id: kickstart
-          type: any
-          description: ''
+          type: unknown
+          description: >-
+            Input to the first promise that is used to kickstart the promise
+            chain.
+
+            If not provided then the promise chain starts with undefined.
       return:
         type: Promise&lt;any&gt;
         description: A chain of resolved or rejected promises
@@ -1176,7 +1092,25 @@ functions:
       return:
         type: boolean
         description: '`true` if valid, `false` otherwise.'
-  - name: isPrimitiveType(any)
+  - name: isObject(unknown)
+    uid: '@azure/core-http.isObject'
+    package: '@azure/core-http'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function isObject(input: unknown)'
+      parameters:
+        - id: input
+          type: unknown
+          description: ''
+      return:
+        type: boolean
+        description: >-
+          true when input is an object type that is not null, Array, RegExp, or
+          Date.
+  - name: isPrimitiveType(unknown)
     uid: '@azure/core-http.isPrimitiveType'
     package: '@azure/core-http'
     summary: |-
@@ -1186,14 +1120,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isPrimitiveType(value: any)'
+      content: 'function isPrimitiveType(value: unknown)'
       parameters:
         - id: value
-          type: any
+          type: unknown
           description: Any entity
       return:
         type: boolean
-        description: '- true is it is primitive type, false otherwise.'
+        description: 'true is it is primitive type, false otherwise.'
   - name: isValidUuid(string)
     uid: '@azure/core-http.isValidUuid'
     package: '@azure/core-http'
@@ -1206,12 +1140,11 @@ functions:
       parameters:
         - id: uuid
           type: string
-          description: |
-            The uuid as a string that needs to be validated
+          description: The uuid as a string that needs to be validated
       return:
         type: boolean
         description: True if the uuid is valid; false otherwise.
-  - name: 'prepareXMLRootList(any, string, string, string)'
+  - name: 'prepareXMLRootList(unknown, string, string, string)'
     uid: '@azure/core-http.prepareXMLRootList'
     package: '@azure/core-http'
     summary: ''
@@ -1220,11 +1153,11 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function prepareXMLRootList(obj: any, elementName: string,
+        function prepareXMLRootList(obj: unknown, elementName: string,
         xmlNamespaceKey?: string, xmlNamespace?: string)
       parameters:
         - id: obj
-          type: any
+          type: unknown
           description: ''
         - id: elementName
           type: string
@@ -1253,8 +1186,8 @@ functions:
           type: Promise&lt;any&gt;
           description: The Promise to be converted to a callback
       return:
-        type: Function
-        description: 'A function that takes the callback (cb: Function): void'
+        type: '(cb: Function) =&gt; void'
+        description: 'A function that takes the callback `(cb: Function) => void`'
   - name: promiseToServiceCallback<T>(Promise<HttpOperationResponse>)
     uid: '@azure/core-http.promiseToServiceCallback'
     package: '@azure/core-http'
@@ -1273,7 +1206,7 @@ functions:
             The Promise of HttpOperationResponse to be converted to a service
             callback
       return:
-        type: Function
+        type: '(cb: ServiceCallback&lt;T&gt;) =&gt; void'
         description: >-
           A function that takes the service callback (cb: ServiceCallback<T>):
           void
@@ -1319,8 +1252,7 @@ functions:
       parameters:
         - id: request
           type: <xref uid="@azure/core-http.WebResourceLike" />
-          description: |
-            The Http Request object
+          description: The Http Request object
       return:
         type: <xref uid="@azure/core-http.WebResourceLike" />
         description: The stripped version of Http Request.
@@ -1338,8 +1270,7 @@ functions:
       parameters:
         - id: response
           type: <xref uid="@azure/core-http.HttpOperationResponse" />
-          description: |
-            The Http Response
+          description: The Http Response
       return:
         type: any
         description: The stripped version of Http Response.
@@ -1359,45 +1290,7 @@ functions:
       return:
         type: boolean
         description: True if the URL is HTTPS; false otherwise.
-  - name: 'parseXML(string, Object)'
-    uid: '@azure/core-http.parseXML'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function parseXML(str: string, opts?: Object)'
-      parameters:
-        - id: str
-          type: string
-          description: ''
-        - id: opts
-          type: Object
-          description: ''
-      return:
-        type: Promise&lt;any&gt;
-        description: ''
-  - name: 'stringifyXML(any, Object)'
-    uid: '@azure/core-http.stringifyXML'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function stringifyXML(content: any, opts?: Object)'
-      parameters:
-        - id: content
-          type: any
-          description: ''
-        - id: opts
-          type: Object
-          description: ''
-      return:
-        type: string
-        description: ''
-  - name: 'parseXML(string, Object)'
+  - name: 'parseXML(string, SerializerOptions)'
     uid: '@azure/core-http.parseXML'
     package: '@azure/core-http'
     summary: Converts given XML string into JSON
@@ -1405,22 +1298,19 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function parseXML(str: string, opts?: Object)'
+      content: 'function parseXML(str: string, opts?: SerializerOptions)'
       parameters:
         - id: str
           type: string
           description: String containing the XML content to be parsed into JSON
         - id: opts
-          type: Object
-          description: >
+          type: <xref uid="@azure/core-http.SerializerOptions" />
+          description: |
             Options that govern the parsing of given xml string
-
-            `includeRoot` indicates whether the root element is to be included
-            or not in the output
       return:
         type: Promise&lt;any&gt;
         description: ''
-  - name: 'stringifyXML(any, Object)'
+  - name: 'stringifyXML(unknown, SerializerOptions)'
     uid: '@azure/core-http.stringifyXML'
     package: '@azure/core-http'
     summary: Converts given JSON object to XML string
@@ -1428,22 +1318,19 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function stringifyXML(obj: any, opts?: Object)'
+      content: 'function stringifyXML(obj: unknown, opts?: SerializerOptions)'
       parameters:
         - id: obj
-          type: any
+          type: unknown
           description: JSON object to be converted into XML string
         - id: opts
-          type: Object
-          description: >
+          type: <xref uid="@azure/core-http.SerializerOptions" />
+          description: |
             Options that govern the parsing of given JSON object
-
-            `rootName` indicates the name of the root element in the resulting
-            XML
       return:
         type: string
         description: ''
-  - name: isWebResourceLike(any)
+  - name: isWebResourceLike(unknown)
     uid: '@azure/core-http.isWebResourceLike'
     package: '@azure/core-http'
     summary: ''
@@ -1451,29 +1338,13 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isWebResourceLike(object: any)'
+      content: 'function isWebResourceLike(object: unknown)'
       parameters:
         - id: object
-          type: any
+          type: unknown
           description: ''
       return:
         type: boolean
-        description: ''
-  - name: parseHeaders(XMLHttpRequest)
-    uid: '@azure/core-http.parseHeaders'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function parseHeaders(xhr: XMLHttpRequest)'
-      parameters:
-        - id: xhr
-          type: XMLHttpRequest
-          description: ''
-      return:
-        type: <xref uid="@azure/core-http.HttpHeadersLike" />
         description: ''
 enums:
   - '@azure/core-http.HttpPipelineLogLevel'

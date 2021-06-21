@@ -12,8 +12,8 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      MetricsAdvisorAdministrationClient(string, MetricsAdvisorKeyCredential,
-      MetricsAdvisorAdministrationClientOptions)
+      MetricsAdvisorAdministrationClient(string, TokenCredential |
+      MetricsAdvisorKeyCredential, MetricsAdvisorAdministrationClientOptions)
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.constructor'
     package: '@azure/ai-metrics-advisor'
     summary: >-
@@ -39,21 +39,24 @@ constructors:
     syntax:
       content: >-
         new MetricsAdvisorAdministrationClient(endpointUrl: string, credential:
-        MetricsAdvisorKeyCredential, options?:
+        TokenCredential | MetricsAdvisorKeyCredential, options?:
         MetricsAdvisorAdministrationClientOptions)
       parameters:
         - id: endpointUrl
           type: string
           description: Url to an Azure Metrics Advisor service endpoint
         - id: credential
-          type: <xref uid="@azure/ai-metrics-advisor.MetricsAdvisorKeyCredential" />
+          type: >-
+            TokenCredential | <xref
+            uid="@azure/ai-metrics-advisor.MetricsAdvisorKeyCredential" />
           description: Used to authenticate requests to the service.
         - id: options
           type: >-
             <xref
             uid="@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClientOptions"
             />
-          description: ''
+          description: |
+            Used to configure the Metrics Advisor client.
 properties:
   - name: endpointUrl
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.endpointUrl'
@@ -69,11 +72,9 @@ properties:
         type: string
         description: ''
 methods:
-  - name: >-
-      createAnomalyAlertConfiguration(Omit<AnomalyAlertConfiguration, "id">,
-      OperationOptions)
+  - name: 'createAlertConfig(Omit<AnomalyAlertConfiguration, "id">, OperationOptions)'
     uid: >-
-      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createAnomalyAlertConfiguration
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createAlertConfig
     package: '@azure/ai-metrics-advisor'
     summary: Creates anomaly alerting configuration for a given metric
     remarks: ''
@@ -81,16 +82,15 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createAnomalyAlertConfiguration(config:
-        Omit<AnomalyAlertConfiguration, "id">, options?: OperationOptions)
+        function createAlertConfig(config: Omit<AnomalyAlertConfiguration,
+        "id">, options?: OperationOptions)
       parameters:
         - id: config
           type: >-
             Omit&lt;<xref
             uid="@azure/ai-metrics-advisor.AnomalyAlertConfiguration" />,
             "id"&gt;
-          description: |
-            the alert configuration object to create
+          description: The alert configuration object to create
         - id: options
           type: OperationOptions
           description: ''
@@ -99,69 +99,61 @@ methods:
           Promise&lt;<xref
           uid="@azure/ai-metrics-advisor.GetAnomalyAlertConfigurationResponse"
           />&gt;
-        description: ''
-  - name: >-
-      createDataFeed(Omit<DataFeed, "id" | "metricIds" | "isAdmin" | "status" |
-      "creator" | "createdTime">, OperationOptions)
+        description: Response with Alert object
+  - name: 'createDataFeed(DataFeedDescriptor, CreateDataFeedOptions)'
     uid: >-
       @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createDataFeed
     package: '@azure/ai-metrics-advisor'
-    summary: Adds a new data feed for a specifc data source and provided settings
+    summary: Adds a new data feed for a specific data source and provided settings
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function createDataFeed(feed: Omit<DataFeed, "id" | "metricIds" |
-        "isAdmin" | "status" | "creator" | "createdTime">, operationOptions?:
-        OperationOptions)
+        function createDataFeed(feed: DataFeedDescriptor, operationOptions?:
+        CreateDataFeedOptions)
       parameters:
         - id: feed
-          type: >-
-            Omit&lt;<xref uid="@azure/ai-metrics-advisor.DataFeed" />, "id" |
-            "metricIds" | "isAdmin" | "status" | "creator" | "createdTime"&gt;
+          type: <xref uid="@azure/ai-metrics-advisor.DataFeedDescriptor" />
           description: the data feed object to create
         - id: operationOptions
-          type: OperationOptions
+          type: <xref uid="@azure/ai-metrics-advisor.CreateDataFeedOptions" />
           description: ''
       return:
         type: >-
           Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetDataFeedResponse"
           />&gt;
-        description: ''
-  - name: 'createHook(EmailHook | WebhookHook, OperationOptions)'
-    uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createHook'
+        description: Response with Datafeed object
+  - name: 'createDatasourceCredential(DatasourceCredentialUnion, OperationOptions)'
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createDatasourceCredential
     package: '@azure/ai-metrics-advisor'
-    summary: Adds a new hook
+    summary: Creates data source credential for the given id
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function createHook(hookInfo: EmailHook | WebhookHook, options?:
-        OperationOptions)
+        function createDatasourceCredential(datasourceCredential:
+        DatasourceCredentialUnion, options?: OperationOptions)
       parameters:
-        - id: hookInfo
-          type: >-
-            <xref uid="@azure/ai-metrics-advisor.EmailHook" /> | <xref
-            uid="@azure/ai-metrics-advisor.WebhookHook" />
-          description: >-
-            Information for the new hook consists of the hook type, name,
-            description, external link and hook parameter
+        - id: datasourceCredential
+          type: <xref uid="@azure/ai-metrics-advisor.DatasourceCredentialUnion" />
+          description: the credential entity object to create
         - id: options
           type: OperationOptions
           description: |
-            The options parameter.
+            The options parameter
       return:
         type: >-
-          Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetHookResponse"
-          />&gt;
+          Promise&lt;<xref
+          uid="@azure/ai-metrics-advisor.GetCredentialEntityResponse" />&gt;
         description: ''
   - name: >-
-      createMetricAnomalyDetectionConfiguration(Omit<AnomalyDetectionConfiguration,
-      "id">, OperationOptions)
+      createDetectionConfig(Omit<AnomalyDetectionConfiguration, "id">,
+      OperationOptions)
     uid: >-
-      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createMetricAnomalyDetectionConfiguration
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createDetectionConfig
     package: '@azure/ai-metrics-advisor'
     summary: Creates an anomaly detection configuration for a given metric
     remarks: ''
@@ -169,7 +161,7 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createMetricAnomalyDetectionConfiguration(config:
+        function createDetectionConfig(config:
         Omit<AnomalyDetectionConfiguration, "id">, options?: OperationOptions)
       parameters:
         - id: config
@@ -180,26 +172,50 @@ methods:
           description: The detection configuration object to create
         - id: options
           type: OperationOptions
-          description: |
-            The options parameter
+          description: The options parameter
       return:
         type: >-
           Promise&lt;<xref
           uid="@azure/ai-metrics-advisor.GetAnomalyDetectionConfigurationResponse"
           />&gt;
-        description: ''
-  - name: 'deleteAnomalyAlertConfiguration(string, OperationOptions)'
+        description: Response with Detection Config object
+  - name: 'createHook(EmailNotificationHook | WebNotificationHook, OperationOptions)'
+    uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.createHook'
+    package: '@azure/ai-metrics-advisor'
+    summary: Adds a new hook
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createHook(hookInfo: EmailNotificationHook |
+        WebNotificationHook, options?: OperationOptions)
+      parameters:
+        - id: hookInfo
+          type: >-
+            <xref uid="@azure/ai-metrics-advisor.EmailNotificationHook" /> |
+            <xref uid="@azure/ai-metrics-advisor.WebNotificationHook" />
+          description: >-
+            Information for the new hook consists of the hook type, name,
+            description, external link and hook parameter
+        - id: options
+          type: OperationOptions
+          description: The options parameter.
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetHookResponse"
+          />&gt;
+        description: Response with Hook object
+  - name: 'deleteAlertConfig(string, OperationOptions)'
     uid: >-
-      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.deleteAnomalyAlertConfiguration
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.deleteAlertConfig
     package: '@azure/ai-metrics-advisor'
     summary: Deletes metric anomaly alert configuration for the given configuration id
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        function deleteAnomalyAlertConfiguration(id: string, options?:
-        OperationOptions)
+      content: 'function deleteAlertConfig(id: string, options?: OperationOptions)'
       parameters:
         - id: id
           type: string
@@ -232,6 +248,52 @@ methods:
       return:
         type: Promise&lt;RestResponse&gt;
         description: ''
+  - name: 'deleteDatasourceCredential(string, OperationOptions)'
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.deleteDatasourceCredential
+    package: '@azure/ai-metrics-advisor'
+    summary: Deletes data source credential for the given id
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteDatasourceCredential(id: string, options?:
+        OperationOptions)
+      parameters:
+        - id: id
+          type: string
+          description: id of the credential entity to delete
+        - id: options
+          type: OperationOptions
+          description: |
+            The options parameter
+      return:
+        type: Promise&lt;RestResponse&gt;
+        description: ''
+  - name: 'deleteDetectionConfig(string, OperationOptions)'
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.deleteDetectionConfig
+    package: '@azure/ai-metrics-advisor'
+    summary: >-
+      Deletes a metric anomaly detection configuration for the given
+      configuration id
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function deleteDetectionConfig(id: string, options?: OperationOptions)'
+      parameters:
+        - id: id
+          type: string
+          description: id of the detection configuration to delete
+        - id: options
+          type: OperationOptions
+          description: |
+            The options parameter.
+      return:
+        type: Promise&lt;RestResponse&gt;
+        description: ''
   - name: 'deleteHook(string, OperationOptions)'
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.deleteHook'
     package: '@azure/ai-metrics-advisor'
@@ -252,34 +314,9 @@ methods:
       return:
         type: Promise&lt;RestResponse&gt;
         description: ''
-  - name: 'deleteMetricAnomalyDetectionConfiguration(string, OperationOptions)'
+  - name: 'getAlertConfig(string, OperationOptions)'
     uid: >-
-      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.deleteMetricAnomalyDetectionConfiguration
-    package: '@azure/ai-metrics-advisor'
-    summary: >-
-      Deletes a metric anomaly detection configuration for the given
-      configuration id
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deleteMetricAnomalyDetectionConfiguration(id: string, options?:
-        OperationOptions)
-      parameters:
-        - id: id
-          type: string
-          description: id of the detection configuration to delete
-        - id: options
-          type: OperationOptions
-          description: |
-            The options parameter.
-      return:
-        type: Promise&lt;RestResponse&gt;
-        description: ''
-  - name: 'getAnomalyAlertConfiguration(string, OperationOptions)'
-    uid: >-
-      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.getAnomalyAlertConfiguration
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.getAlertConfig
     package: '@azure/ai-metrics-advisor'
     summary: >-
       Retrieves metric anomaly alert configuration for the given configuration
@@ -288,9 +325,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        function getAnomalyAlertConfiguration(id: string, options?:
-        OperationOptions)
+      content: 'function getAlertConfig(id: string, options?: OperationOptions)'
       parameters:
         - id: id
           type: string
@@ -350,7 +385,55 @@ methods:
       return:
         type: >-
           Promise&lt;<xref
-          uid="@azure/ai-metrics-advisor.GeneratedClientGetIngestionProgressResponse"
+          uid="@azure/ai-metrics-advisor.GetIngestionProgressResponse" />&gt;
+        description: ''
+  - name: 'getDatasourceCredential(string, OperationOptions)'
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.getDatasourceCredential
+    package: '@azure/ai-metrics-advisor'
+    summary: Retrieves data source credential for the given id
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getDatasourceCredential(id: string, options?: OperationOptions)'
+      parameters:
+        - id: id
+          type: string
+          description: id of the credential entity to retrieve
+        - id: options
+          type: OperationOptions
+          description: |
+            The options parameter
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/ai-metrics-advisor.GetCredentialEntityResponse" />&gt;
+        description: ''
+  - name: 'getDetectionConfig(string, OperationOptions)'
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.getDetectionConfig
+    package: '@azure/ai-metrics-advisor'
+    summary: >-
+      Retrieves metric anomaly detection configuration for the given
+      configuration id
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getDetectionConfig(id: string, options?: OperationOptions)'
+      parameters:
+        - id: id
+          type: string
+          description: id of the detection configuration to retrieve
+        - id: options
+          type: OperationOptions
+          description: |
+            The options parameter.
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/ai-metrics-advisor.GetAnomalyDetectionConfigurationResponse"
           />&gt;
         description: ''
   - name: 'getHook(string, OperationOptions)'
@@ -375,37 +458,9 @@ methods:
           Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetHookResponse"
           />&gt;
         description: ''
-  - name: 'getMetricAnomalyDetectionConfiguration(string, OperationOptions)'
+  - name: 'listAlertConfigs(string, OperationOptions)'
     uid: >-
-      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.getMetricAnomalyDetectionConfiguration
-    package: '@azure/ai-metrics-advisor'
-    summary: >-
-      Retrieves metric anomaly detection configuration for the given
-      configuration id
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function getMetricAnomalyDetectionConfiguration(id: string, options?:
-        OperationOptions)
-      parameters:
-        - id: id
-          type: string
-          description: id of the detection configuration to retrieve
-        - id: options
-          type: OperationOptions
-          description: |
-            The options parameter.
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ai-metrics-advisor.GetAnomalyDetectionConfigurationResponse"
-          />&gt;
-        description: ''
-  - name: 'listAnomalyAlertConfigurations(string, OperationOptions)'
-    uid: >-
-      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.listAnomalyAlertConfigurations
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.listAlertConfigs
     package: '@azure/ai-metrics-advisor'
     summary: >-
       Returns an async iterable iterator to list anamoly alert configurations
@@ -423,7 +478,7 @@ methods:
       const client = new MetricsAdvisorAdministrationClient(endpoint,
         new MetricsAdvisorKeyCredential(subscriptionKey, apiKey));
       const alertConfigurations =
-      client.listAnomalyAlertConfigurations(detectionConfigurationId);
+      client.listAlertConfigs(detectionConfigurationId);
 
       let i = 1;
 
@@ -440,8 +495,7 @@ methods:
 
       ```js
 
-      let iter =
-      client.listAnomalyAlertConfigurations(detectionConfigurationId);
+      let iter = client.listAlertConfigs(detectionConfigurationId);
 
       let result = await iter.next();
 
@@ -458,9 +512,8 @@ methods:
 
       ```js
 
-      const pages =
-      client.listAnomalyAlertConfigurations(detectionConfigurationId)
-        .byPage({ maxPageSize: 10 });
+      const pages = client.listAlertConfigs(detectionConfigurationId)
+        .byPage();
       let page = await pages.next();
 
       let i = 1;
@@ -468,7 +521,7 @@ methods:
       while (!page.done) {
        if (page.value.alertConfigurations) {
          console.log(`-- page ${i++}`);
-         for (const alert of page.value.alertConfigurations) {
+         for (const alert of page.value) {
            console.log(`${alert}`);
          }
        }
@@ -482,8 +535,8 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listAnomalyAlertConfigurations(detectionConfigId: string,
-        options?: OperationOptions)
+        function listAlertConfigs(detectionConfigId: string, options?:
+        OperationOptions)
       parameters:
         - id: detectionConfigId
           type: string
@@ -496,11 +549,11 @@ methods:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.AnomalyAlertConfiguration" />, <xref
-          uid="@azure/ai-metrics-advisor.ListAnomalyAlertConfigurationsPageResponse"
-          />, undefined&gt;
+          uid="@azure/ai-metrics-advisor.AlertConfigurationsPageResponse" />,
+          undefined&gt;
         description: ''
   - name: >-
-      listDataFeedIngestionStatus(string, Date, Date,
+      listDataFeedIngestionStatus(string, Date | string, Date | string,
       ListDataFeedIngestionStatusOptions)
     uid: >-
       @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.listDataFeedIngestionStatus
@@ -563,9 +616,9 @@ methods:
       let i = 1;
 
       while (!page.done) {
-       if (page.value.statusList) {
+       if (page.value) {
          console.log(`-- page ${i++}`);
-         for (const status of page.value.statusList) {
+         for (const status of page.value) {
            console.log("ingestion status-");
            console.dir(status);
          }
@@ -580,17 +633,18 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listDataFeedIngestionStatus(dataFeedId: string, startTime:
-        Date, endTime: Date, options?: ListDataFeedIngestionStatusOptions)
+        function listDataFeedIngestionStatus(dataFeedId: string, startTime: Date
+        | string, endTime: Date | string, options?:
+        ListDataFeedIngestionStatusOptions)
       parameters:
         - id: dataFeedId
           type: string
           description: data feed id for list of data feed ingestion status
         - id: startTime
-          type: Date
+          type: Date | string
           description: The start point of time range to query data ingestion status
         - id: endTime
-          type: Date
+          type: Date | string
           description: The end point of time range to query data ingestion status
         - id: options
           type: >-
@@ -603,8 +657,7 @@ methods:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.IngestionStatus" />, <xref
-          uid="@azure/ai-metrics-advisor.ListDataFeedIngestionStatusPageResponse"
-          />&gt;
+          uid="@azure/ai-metrics-advisor.IngestionStatusPageResponse" />&gt;
         description: ''
   - name: listDataFeeds(ListDataFeedsOptions)
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.listDataFeeds'
@@ -648,9 +701,9 @@ methods:
       let page = await pages.next();
       let i = 1;
       while (!page.done) {
-       if (page.value.dataFeeds) {
+       if (page.value) {
          console.log(`-- page ${i++}`);
-         for (const feed of page.value.dataFeeds) {
+         for (const feed of page.value) {
            console.log(`  ${feed.id} - ${feed.name}`);
          }
        }
@@ -672,7 +725,193 @@ methods:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.DataFeed" />, <xref
-          uid="@azure/ai-metrics-advisor.ListDataFeedsPageResponse" />&gt;
+          uid="@azure/ai-metrics-advisor.DataFeedsPageResponse" />&gt;
+        description: ''
+  - name: listDatasourceCredential(ListDatasourceCredentialsOptions)
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.listDatasourceCredential
+    package: '@azure/ai-metrics-advisor'
+    summary: >
+      Returns an async iterable iterator to list data source credentials based
+      on options
+
+      `.byPage()` returns an async iterable iterator to list the credentials in
+      pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      const client = new MetricsAdvisorAdministrationClient(endpoint,
+        new MetricsAdvisorKeyCredential(subscriptionKey, apiKey));
+      const datasourceCredentialList = client.listDatasourceCredential();
+
+      let i = 1;
+
+      for await (const datasourceCredential of datasourceCredentialList){
+       console.log(`datasourceCredential ${i++}:`);
+       console.log(datasourceCredential);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let iter = client.listDatasourceCredential();
+
+      let result = await iter.next();
+
+      while (!result.done) {
+        console.dir(result);
+        result = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      const pages = client.listDatasourceCredential().byPage({ maxPageSize: 2
+      });
+
+      let page = await pages.next();
+
+      let i = 1;
+
+      while (!page.done) {
+       if (page.value) {
+         console.log(`-- page ${i++}`);
+         for (const credential of page.value) {
+           console.log("datasource credential-");
+           console.dir(credential);
+         }
+       }
+       page = await pages.next();
+      }
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listDatasourceCredential(options?:
+        ListDatasourceCredentialsOptions)
+      parameters:
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-metrics-advisor.ListDatasourceCredentialsOptions" />
+          description: ''
+      return:
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/ai-metrics-advisor.DatasourceCredentialUnion" />, <xref
+          uid="@azure/ai-metrics-advisor.CredentialsPageResponse" />&gt;
+        description: ''
+  - name: 'listDetectionConfigs(string, OperationOptions)'
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.listDetectionConfigs
+    package: '@azure/ai-metrics-advisor'
+    summary: >-
+      Returns an async iterable iterator to list anomaly detection
+      configurations based on options
+
+      `.byPage()` returns an async iterable iterator to list the anomaly
+      detection configurations in pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      const client = new MetricsAdvisorAdministrationClient(endpoint,
+        new MetricsAdvisorKeyCredential(subscriptionKey, apiKey));
+      const anomalyDetectionList = client.listDetectionConfigs(metricId);
+
+      let i = 1;
+
+      for await (const anomaly of anomalyDetectionList){
+       console.log(`anomaly ${i++}:`);
+       console.log(anomaly);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let iter = client.listDetectionConfigs(metricId);
+
+      let result = await iter.next();
+
+      while (!result.done) {
+        console.log(` anomaly - ${result.value.id}, ${result.value.name}`);
+        result = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      const pages = client.listDetectionConfigs(metricId)
+        .byPage();
+      let page = await pages.next();
+
+      let i = 1;
+
+      while (!page.done) {
+       if (page.value) {
+         console.log(`-- page ${i++}`);
+         for (const detectionConfiguration of page.value) {
+           console.log("detection configuration-");
+           console.dir(detectionConfiguration);
+         }
+       }
+       page = await pages.next();
+      }
+
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listDetectionConfigs(metricId: string, options?:
+        OperationOptions)
+      parameters:
+        - id: metricId
+          type: string
+          description: metric id for list of anomaly detection configurations
+        - id: options
+          type: OperationOptions
+          description: |
+            The options parameter.
+      return:
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/ai-metrics-advisor.AnomalyDetectionConfiguration" />,
+          <xref
+          uid="@azure/ai-metrics-advisor.DetectionConfigurationsPageResponse"
+          />, undefined&gt;
         description: ''
   - name: listHooks(ListHooksOptions)
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.listHooks'
@@ -712,9 +951,9 @@ methods:
       let page = await pages.next();
       let i = 1;
       while (!page.done) {
-       if (page.value.hooks) {
+       if (page.value) {
          console.log(`-- page ${i++}`);
-         for (const hook of page.value.hooks) {
+         for (const hook of page.value) {
            console.log("hook-");
            console.dir(hook);
          }
@@ -736,106 +975,12 @@ methods:
       return:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/ai-metrics-advisor.HookUnion" />, <xref
-          uid="@azure/ai-metrics-advisor.ListHooksPageResponse" />&gt;
+          uid="@azure/ai-metrics-advisor.NotificationHookUnion" />, <xref
+          uid="@azure/ai-metrics-advisor.HooksPageResponse" />&gt;
         description: ''
-  - name: 'listMetricAnomalyDetectionConfigurations(string, OperationOptions)'
-    uid: >-
-      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.listMetricAnomalyDetectionConfigurations
-    package: '@azure/ai-metrics-advisor'
-    summary: >-
-      Returns an async iterable iterator to list anomaly detection
-      configurations based on options
-
-      `.byPage()` returns an async iterable iterator to list the anomaly
-      detection configurations in pages.
-
-
-      Example using `for await` syntax:
-
-
-      ```js
-
-      const client = new MetricsAdvisorAdministrationClient(endpoint,
-        new MetricsAdvisorKeyCredential(subscriptionKey, apiKey));
-      const anomalyDetectionList =
-      client.listMetricAnomalyDetectionConfigurations(metricId);
-
-      let i = 1;
-
-      for await (const anomaly of anomalyDetectionList){
-       console.log(`anomaly ${i++}:`);
-       console.log(anomaly);
-      }
-
-      ```
-
-
-      Example using `iter.next()`:
-
-
-      ```js
-
-      let iter = client.listMetricAnomalyDetectionConfigurations(metricId);
-
-      let result = await iter.next();
-
-      while (!result.done) {
-        console.log(` anomaly - ${result.value.id}, ${result.value.name}`);
-        result = await iter.next();
-      }
-
-      ```
-
-
-      Example using `byPage()`:
-
-
-      ```js
-
-      const pages = client.listMetricAnomalyDetectionConfigurations(metricId)
-        .byPage({ maxPageSize: 2 });
-      let page = await pages.next();
-
-      let i = 1;
-
-      while (!page.done) {
-       if (page.value.detectionConfigurations) {
-         console.log(`-- page ${i++}`);
-         for (const detectionConfiguration of page.value.detectionConfigurations) {
-           console.log("detection configuration-");
-           console.dir(detectionConfiguration);
-         }
-       }
-       page = await pages.next();
-      }
-
-
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listMetricAnomalyDetectionConfigurations(metricId: string,
-        options?: OperationOptions)
-      parameters:
-        - id: metricId
-          type: string
-          description: metric id for list of anomaly detection configurations
-        - id: options
-          type: OperationOptions
-          description: |
-            The options parameter.
-      return:
-        type: >-
-          PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/ai-metrics-advisor.AnomalyDetectionConfiguration" />,
-          <xref
-          uid="@azure/ai-metrics-advisor.ListAnomalyDetectionConfigurationsPageResponse"
-          />, undefined&gt;
-        description: ''
-  - name: 'refreshDataFeedIngestion(string, Date, Date, OperationOptions)'
+  - name: >-
+      refreshDataFeedIngestion(string, Date | string, Date | string,
+      OperationOptions)
     uid: >-
       @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.refreshDataFeedIngestion
     package: '@azure/ai-metrics-advisor'
@@ -847,17 +992,17 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function refreshDataFeedIngestion(dataFeedId: string, startTime: Date,
-        endTime: Date, options?: OperationOptions)
+        function refreshDataFeedIngestion(dataFeedId: string, startTime: Date |
+        string, endTime: Date | string, options?: OperationOptions)
       parameters:
         - id: dataFeedId
           type: string
           description: The data feed id for the ingestion progress to refresh or reset
         - id: startTime
-          type: Date
+          type: Date | string
           description: The start point of time range to query data ingestion status
         - id: endTime
-          type: Date
+          type: Date | string
           description: The end point of time range to query data ingestion status
         - id: options
           type: OperationOptions
@@ -867,10 +1012,10 @@ methods:
         type: Promise&lt;RestResponse&gt;
         description: ''
   - name: >-
-      updateAnomalyAlertConfiguration(string,
-      Partial<Omit<AnomalyAlertConfiguration, "id">>, OperationOptions)
+      updateAlertConfig(string, Partial<Omit<AnomalyAlertConfiguration, "id">>,
+      OperationOptions)
     uid: >-
-      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.updateAnomalyAlertConfiguration
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.updateAlertConfig
     package: '@azure/ai-metrics-advisor'
     summary: Updates an anomaly alert configuration for the given configuration id
     remarks: ''
@@ -878,7 +1023,7 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function updateAnomalyAlertConfiguration(id: string, patch:
+        function updateAlertConfig(id: string, patch:
         Partial<Omit<AnomalyAlertConfiguration, "id">>, options?:
         OperationOptions)
       parameters:
@@ -898,10 +1043,7 @@ methods:
           description: |
             The options parameter
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ai-metrics-advisor.GetAnomalyAlertConfigurationResponse"
-          />&gt;
+        type: Promise&lt;RestResponse&gt;
         description: ''
   - name: 'updateDataFeed(string, DataFeedPatch, OperationOptions)'
     uid: >-
@@ -927,47 +1069,43 @@ methods:
           description: |
             The options parameter.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetDataFeedResponse"
-          />&gt;
+        type: Promise&lt;RestResponse&gt;
         description: ''
-  - name: 'updateHook(string, EmailHookPatch | WebhookHookPatch, OperationOptions)'
-    uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.updateHook'
+  - name: >-
+      updateDatasourceCredential(string, DatasourceCredentialPatch,
+      OperationOptions)
+    uid: >-
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.updateDatasourceCredential
     package: '@azure/ai-metrics-advisor'
-    summary: Updates hook for the given hook id
+    summary: Updates data source credential for the given id
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function updateHook(id: string, patch: EmailHookPatch |
-        WebhookHookPatch, options?: OperationOptions)
+        function updateDatasourceCredential(id: string, patch:
+        DatasourceCredentialPatch, options?: OperationOptions)
       parameters:
         - id: id
           type: string
-          description: id of the hook to update
+          description: id of the credential entity to update
         - id: patch
-          type: >-
-            <xref uid="@azure/ai-metrics-advisor.EmailHookPatch" /> | <xref
-            uid="@azure/ai-metrics-advisor.WebhookHookPatch" />
+          type: <xref uid="@azure/ai-metrics-advisor.DatasourceCredentialPatch" />
           description: >-
-            Input to the update hook of type Email <xref:EmailHookPatch> or
-            WebHook <xref:WebhookHookPatch>
+            Input to the update credential entity operation
+            <xref:DataSourceCredentialPatch>
         - id: options
           type: OperationOptions
           description: |
             The options parameter
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/ai-metrics-advisor.GetHookResponse"
-          />&gt;
+        type: Promise&lt;RestResponse&gt;
         description: ''
   - name: >-
-      updateMetricAnomalyDetectionConfiguration(string,
-      Partial<Omit<AnomalyDetectionConfiguration, "id" | "metricId">>,
+      updateDetectionConfig(string, AnomalyDetectionConfigurationPatch,
       OperationOptions)
     uid: >-
-      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.updateMetricAnomalyDetectionConfiguration
+      @azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.updateDetectionConfig
     package: '@azure/ai-metrics-advisor'
     summary: >-
       Updates a metric anomaly detection configuration for the given
@@ -977,18 +1115,17 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function updateMetricAnomalyDetectionConfiguration(id: string, patch:
-        Partial<Omit<AnomalyDetectionConfiguration, "id" | "metricId">>,
-        options?: OperationOptions)
+        function updateDetectionConfig(id: string, patch:
+        AnomalyDetectionConfigurationPatch, options?: OperationOptions)
       parameters:
         - id: id
           type: string
           description: id of the detection configuration for metric anomaly to update
         - id: patch
           type: >-
-            Partial&lt;Omit&lt;<xref
-            uid="@azure/ai-metrics-advisor.AnomalyDetectionConfiguration" />,
-            "id" | "metricId"&gt;&gt;
+            <xref
+            uid="@azure/ai-metrics-advisor.AnomalyDetectionConfigurationPatch"
+            />
           description: >-
             Input to the update anomaly detection configuration operation
             <xref:AnomalyDetectionConfigurationPatch>
@@ -997,8 +1134,36 @@ methods:
           description: |
             The options parameter.
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ai-metrics-advisor.GetAnomalyDetectionConfigurationResponse"
-          />&gt;
+        type: Promise&lt;RestResponse&gt;
+        description: ''
+  - name: >-
+      updateHook(string, EmailNotificationHookPatch | WebNotificationHookPatch,
+      OperationOptions)
+    uid: '@azure/ai-metrics-advisor.MetricsAdvisorAdministrationClient.updateHook'
+    package: '@azure/ai-metrics-advisor'
+    summary: Updates hook for the given hook id
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateHook(id: string, patch: EmailNotificationHookPatch |
+        WebNotificationHookPatch, options?: OperationOptions)
+      parameters:
+        - id: id
+          type: string
+          description: id of the hook to update
+        - id: patch
+          type: >-
+            <xref uid="@azure/ai-metrics-advisor.EmailNotificationHookPatch" />
+            | <xref uid="@azure/ai-metrics-advisor.WebNotificationHookPatch" />
+          description: >-
+            Input to the update hook of type Email <xref:EmailHookPatch> or
+            WebHook <xref:WebhookHookPatch>
+        - id: options
+          type: OperationOptions
+          description: |
+            The options parameter
+      return:
+        type: Promise&lt;RestResponse&gt;
         description: ''

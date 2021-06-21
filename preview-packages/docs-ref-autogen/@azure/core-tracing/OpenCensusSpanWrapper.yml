@@ -23,7 +23,9 @@ constructors:
           type: OpenCensusSpan
           description: |
             A Span or RootSpan from OpenCensus
-  - name: 'OpenCensusSpanWrapper(OpenCensusTracerWrapper, string, OTSpanOptions)'
+  - name: >-
+      OpenCensusSpanWrapper(OpenCensusTracerWrapper, string, SpanOptions,
+      Context)
     uid: '@azure/core-tracing.OpenCensusSpanWrapper.constructor_1'
     package: '@azure/core-tracing'
     summary: Create a new OpenCensus Span and wrap it.
@@ -33,7 +35,7 @@ constructors:
     syntax:
       content: >-
         new OpenCensusSpanWrapper(tracer: OpenCensusTracerWrapper, name: string,
-        options?: OTSpanOptions)
+        options?: SpanOptions, context?: Context)
       parameters:
         - id: tracer
           type: <xref uid="@azure/core-tracing.OpenCensusTracerWrapper" />
@@ -44,11 +46,14 @@ constructors:
           type: string
           description: The name of the Span
         - id: options
-          type: OTSpanOptions
+          type: <xref uid="@azure/core-tracing.SpanOptions" />
+          description: Options for the Span
+        - id: context
+          type: <xref uid="@azure/core-tracing.Context" />
           description: |
-            Options for the Span
+            The context for the Span.
 methods:
-  - name: 'addEvent(string, Attributes)'
+  - name: 'addEvent(string, SpanAttributes)'
     uid: '@azure/core-tracing.OpenCensusSpanWrapper.addEvent'
     package: '@azure/core-tracing'
     summary: Adds an event to the Span
@@ -56,13 +61,13 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function addEvent(_name: string, _attributes?: Attributes)'
+      content: 'function addEvent(_name: string, _attributes?: SpanAttributes)'
       parameters:
         - id: _name
           type: string
           description: ''
         - id: _attributes
-          type: Attributes
+          type: <xref uid="@azure/core-tracing.SpanAttributes" />
           description: ''
       return:
         type: this
@@ -77,7 +82,7 @@ methods:
     syntax:
       content: function context()
       return:
-        type: OTSpanContext
+        type: <xref uid="@azure/core-tracing.SpanContext" />
         description: ''
   - name: end(number)
     uid: '@azure/core-tracing.OpenCensusSpanWrapper.end'
@@ -116,6 +121,22 @@ methods:
       return:
         type: boolean
         description: ''
+  - name: 'recordException(Exception, TimeInput)'
+    uid: '@azure/core-tracing.OpenCensusSpanWrapper.recordException'
+    package: '@azure/core-tracing'
+    summary: Sets exception as a span event
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function recordException(_exception: Exception, _time?: TimeInput)'
+      parameters:
+        - id: _exception
+          type: <xref uid="@azure/core-tracing.Exception" />
+          description: ''
+        - id: _time
+          type: <xref uid="@azure/core-tracing.TimeInput" />
+          description: ''
   - name: 'setAttribute(string, unknown)'
     uid: '@azure/core-tracing.OpenCensusSpanWrapper.setAttribute'
     package: '@azure/core-tracing'
@@ -128,15 +149,15 @@ methods:
       parameters:
         - id: key
           type: string
-          description: the attribute key
+          description: The attribute key
         - id: value
           type: unknown
           description: |
-            the attribute value
+            The attribute value
       return:
         type: this
         description: ''
-  - name: setAttributes(Attributes)
+  - name: setAttributes(SpanAttributes)
     uid: '@azure/core-tracing.OpenCensusSpanWrapper.setAttributes'
     package: '@azure/core-tracing'
     summary: Sets attributes on the Span
@@ -144,27 +165,27 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setAttributes(attributes: Attributes)'
+      content: 'function setAttributes(attributes: SpanAttributes)'
       parameters:
         - id: attributes
-          type: Attributes
+          type: <xref uid="@azure/core-tracing.SpanAttributes" />
           description: |
-            the attributes to add
+            The attributes to add
       return:
         type: this
         description: ''
-  - name: setStatus(Status)
+  - name: setStatus(SpanStatus)
     uid: '@azure/core-tracing.OpenCensusSpanWrapper.setStatus'
     package: '@azure/core-tracing'
-    summary: Sets a status on the span. Overrides the default of CanonicalCode.OK.
+    summary: Sets a status on the span. Overrides the default of SpanStatusCode.OK.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setStatus(status: Status)'
+      content: 'function setStatus(status: SpanStatus)'
       parameters:
         - id: status
-          type: Status
+          type: <xref uid="@azure/core-tracing.SpanStatus" />
           description: |
             The status to set.
       return:
@@ -183,7 +204,7 @@ methods:
         - id: name
           type: string
           description: |
-            the new Span name
+            The new Span name
       return:
         type: this
         description: ''

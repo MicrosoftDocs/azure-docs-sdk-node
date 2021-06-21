@@ -10,8 +10,8 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      ConsumptionManagementClient(ServiceClientCredentials, string,
-      Models.ConsumptionManagementClientOptions)
+      ConsumptionManagementClient(ServiceClientCredentials | TokenCredential,
+      string, Models.ConsumptionManagementClientOptions)
     uid: '@azure/arm-consumption.ConsumptionManagementClient.constructor'
     package: '@azure/arm-consumption'
     summary: Initializes a new instance of the ConsumptionManagementClient class.
@@ -20,13 +20,25 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new ConsumptionManagementClient(credentials: ServiceClientCredentials,
-        subscriptionId: string, options?:
+        new ConsumptionManagementClient(credentials: ServiceClientCredentials |
+        TokenCredential, subscriptionId: string, options?:
         Models.ConsumptionManagementClientOptions)
       parameters:
         - id: credentials
-          type: ServiceClientCredentials
-          description: Credentials needed for the client to connect to Azure.
+          type: ServiceClientCredentials | TokenCredential
+          description: >-
+            Credentials needed for the client to connect to Azure. Credentials
+
+            implementing the TokenCredential interface from the @azure/identity
+            package are recommended. For
+
+            more information about these credentials, see
+
+            <xref:https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40azure%2Fidentity>.
+            Credentials implementing the
+
+            ServiceClientCredentials interface from the older packages
+            @azure/ms-rest-nodeauth and
         - id: subscriptionId
           type: string
           description: Azure Subscription ID.
@@ -121,9 +133,9 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'credentials: ServiceClientCredentials'
+      content: 'credentials: ServiceClientCredentials | TokenCredential'
       return:
-        type: ServiceClientCredentials
+        type: ServiceClientCredentials | TokenCredential
         description: ''
   - name: forecasts
     uid: '@azure/arm-consumption.ConsumptionManagementClient.forecasts'
@@ -258,6 +270,19 @@ properties:
       content: 'tags: Tags'
       return:
         type: <xref uid="@azure/arm-consumption.Tags" />
+        description: ''
+  - name: tenants
+    uid: '@azure/arm-consumption.ConsumptionManagementClient.tenants'
+    package: '@azure/arm-consumption'
+    summary: ''
+    fullName: tenants
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'tenants: Tenants'
+      return:
+        type: <xref uid="@azure/arm-consumption.Tenants" />
         description: ''
   - name: usageDetails
     uid: '@azure/arm-consumption.ConsumptionManagementClient.usageDetails'
@@ -410,7 +435,7 @@ methods:
       return:
         type: Promise&lt;RestResponse&gt;
         description: ''
-  - name: sendRequest(RequestPrepareOptions | WebResource)
+  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
     uid: '@azure/arm-consumption.ConsumptionManagementClient.sendRequest'
     package: '@azure/arm-consumption'
     summary: Send the provided httpRequest.
@@ -418,10 +443,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function sendRequest(options: RequestPrepareOptions | WebResource)'
+      content: 'function sendRequest(options: RequestPrepareOptions | WebResourceLike)'
       parameters:
         - id: options
-          type: RequestPrepareOptions | WebResource
+          type: RequestPrepareOptions | WebResourceLike
           description: ''
       return:
         type: Promise&lt;HttpOperationResponse&gt;

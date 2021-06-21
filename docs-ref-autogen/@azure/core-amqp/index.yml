@@ -5,7 +5,6 @@ summary: ''
 type: package
 enums:
   - '@azure/core-amqp.ConditionErrorNameMapper'
-  - '@azure/core-amqp.ConditionStatusMapper'
   - '@azure/core-amqp.ErrorNameConditionMapper'
   - '@azure/core-amqp.RetryMode'
   - '@azure/core-amqp.RetryOperationType'
@@ -13,34 +12,26 @@ enums:
   - '@azure/core-amqp.TokenType'
 classes:
   - '@azure/core-amqp.CbsClient'
-  - '@azure/core-amqp.DefaultDataTransformer'
   - '@azure/core-amqp.MessagingError'
   - '@azure/core-amqp.RequestResponseLink'
-  - '@azure/core-amqp.SharedKeyCredential'
-  - '@azure/core-amqp.Timeout'
 interfaces:
-  - '@azure/core-amqp.AsyncLockOptions'
+  - '@azure/core-amqp.AcquireLockProperties'
+  - '@azure/core-amqp.AmqpAnnotatedMessage'
+  - '@azure/core-amqp.AmqpMessageHeader'
+  - '@azure/core-amqp.AmqpMessageProperties'
+  - '@azure/core-amqp.CancellableAsyncLock'
   - '@azure/core-amqp.CbsResponse'
   - '@azure/core-amqp.ConnectionConfig'
   - '@azure/core-amqp.ConnectionConfigOptions'
   - '@azure/core-amqp.ConnectionContextBase'
   - '@azure/core-amqp.ConnectionProperties'
   - '@azure/core-amqp.CreateConnectionContextBaseParameters'
-  - '@azure/core-amqp.DataTransformer'
-  - '@azure/core-amqp.EventHubConnectionConfig'
-  - '@azure/core-amqp.EventHubConnectionStringModel'
-  - '@azure/core-amqp.IotHubConnectionStringModel'
-  - '@azure/core-amqp.MessageHeader'
-  - '@azure/core-amqp.MessageProperties'
   - '@azure/core-amqp.NetworkSystemError'
   - '@azure/core-amqp.RetryConfig'
   - '@azure/core-amqp.RetryOptions'
   - '@azure/core-amqp.SendRequestOptions'
-  - '@azure/core-amqp.ServiceBusConnectionStringModel'
-  - '@azure/core-amqp.StorageConnectionStringModel'
   - '@azure/core-amqp.WebSocketOptions'
 typeAliases:
-  - '@azure/core-amqp.Func'
   - '@azure/core-amqp.ParsedOutput'
 functions:
   - name: 'delay<T>(number, AbortSignalLike, string, T)'
@@ -68,64 +59,26 @@ functions:
           type: T
           description: The value to be resolved with after a timeout of t milliseconds.
       return:
-        type: Promise&lt;T&gt;
+        type: Promise&lt;T | void&gt;
         description: '- Resolved promise'
-  - name: 'executePromisesSequentially(Array<any>, any)'
-    uid: '@azure/core-amqp.executePromisesSequentially'
+  - name: isMessagingError(Error | MessagingError)
+    uid: '@azure/core-amqp.isMessagingError'
     package: '@azure/core-amqp'
-    summary: ''
+    summary: Determines if an error is a MessagingError.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        function executePromisesSequentially(promiseFactories: Array<any>,
-        kickstart?: any)
+      content: 'function isMessagingError(error: Error | MessagingError)'
       parameters:
-        - id: promiseFactories
-          type: Array&lt;any&gt;
-          description: ''
-        - id: kickstart
-          type: any
-          description: ''
-      return:
-        type: Promise&lt;any&gt;
-        description: ''
-  - name: getNewAsyncLock(AsyncLockOptions)
-    uid: '@azure/core-amqp.getNewAsyncLock'
-    package: '@azure/core-amqp'
-    summary: Gets a new instance of the async lock with desired settings.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function getNewAsyncLock(options?: AsyncLockOptions)'
-      parameters:
-        - id: options
-          type: <xref uid="@azure/core-amqp.AsyncLockOptions" />
-          description: ''
-      return:
-        type: AsyncLock
-        description: AsyncLock
-  - name: isIotHubConnectionString(string)
-    uid: '@azure/core-amqp.isIotHubConnectionString'
-    package: '@azure/core-amqp'
-    summary: >-
-      Determines whether the given connection string is an iothub connection
-      string.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function isIotHubConnectionString(connectionString: string)'
-      parameters:
-        - id: connectionString
-          type: string
-          description: The connection string.
+        - id: error
+          type: Error | <xref uid="@azure/core-amqp.MessagingError" />
+          description: |
+            An error that can either be an Error or a MessagingError.
       return:
         type: boolean
-        description: boolean.
-  - name: isSystemError(any)
+        description: ''
+  - name: isSystemError(unknown)
     uid: '@azure/core-amqp.isSystemError'
     package: '@azure/core-amqp'
     summary: Checks whether the provided error is a node.js SystemError.
@@ -133,10 +86,10 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isSystemError(err: any)'
+      content: 'function isSystemError(err: unknown)'
       parameters:
         - id: err
-          type: any
+          type: unknown
           description: |
             An object that may contain error information.
       return:
@@ -151,7 +104,7 @@ functions:
       Connection strings have the following syntax:
 
 
-      ConnectionString ::= Part { ";" Part } [ ";" ] [ WhiteSpace ]
+      ConnectionString ::= `Part { ";" Part } [ ";" ] [ WhiteSpace ]`
 
       Part             ::= [ PartLiteral [ "=" PartLiteral ] ]
 
@@ -160,7 +113,7 @@ functions:
       Literal          ::= ? any sequence of characters except ; or = or
       WhiteSpace ?
 
-      WhiteSpace       ::= ? all whitespace characters including \r and \n ?
+      WhiteSpace       ::= ? all whitespace characters including `\r` and `\n` ?
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -173,26 +126,6 @@ functions:
       return:
         type: <xref uid="@azure/core-amqp.ParsedOutput" />&lt;T&gt;
         description: ParsedOutput<T>.
-  - name: 'randomNumberFromInterval(number, number)'
-    uid: '@azure/core-amqp.randomNumberFromInterval'
-    package: '@azure/core-amqp'
-    summary: Generates a random number between the given interval
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function randomNumberFromInterval(min: number, max: number)'
-      parameters:
-        - id: min
-          type: number
-          description: Min number of the range (inclusive).
-        - id: max
-          type: number
-          description: |
-            Max number of the range (inclusive).
-      return:
-        type: number
-        description: ''
   - name: retry<T>(RetryConfig<T>)
     uid: '@azure/core-amqp.retry'
     package: '@azure/core-amqp'

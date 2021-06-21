@@ -31,7 +31,9 @@ constructors:
   - name: 'EventHubProducerClient(string, EventHubClientOptions)'
     uid: '@azure/event-hubs.EventHubProducerClient.constructor'
     package: '@azure/event-hubs'
-    summary: ''
+    summary: |-
+      The `EventHubProducerClient` class is used to send events to an Event Hub.
+      Use the `options` parmeter to configure retry policy or proxy settings.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -70,7 +72,9 @@ constructors:
   - name: 'EventHubProducerClient(string, string, EventHubClientOptions)'
     uid: '@azure/event-hubs.EventHubProducerClient.constructor_1'
     package: '@azure/event-hubs'
-    summary: ''
+    summary: |-
+      The `EventHubProducerClient` class is used to send events to an Event Hub.
+      Use the `options` parmeter to configure retry policy or proxy settings.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -110,19 +114,21 @@ constructors:
             - `userAgent`      : A string to append to the built in user agent
             string that is passed to the service.
   - name: >-
-      EventHubProducerClient(string, string, TokenCredential,
-      EventHubClientOptions)
+      EventHubProducerClient(string, string, TokenCredential |
+      NamedKeyCredential | SASCredential, EventHubClientOptions)
     uid: '@azure/event-hubs.EventHubProducerClient.constructor_2'
     package: '@azure/event-hubs'
-    summary: ''
+    summary: |-
+      The `EventHubProducerClient` class is used to send events to an Event Hub.
+      Use the `options` parmeter to configure retry policy or proxy settings.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         new EventHubProducerClient(fullyQualifiedNamespace: string,
-        eventHubName: string, credential: TokenCredential, options?:
-        EventHubClientOptions)
+        eventHubName: string, credential: TokenCredential | NamedKeyCredential |
+        SASCredential, options?: EventHubClientOptions)
       parameters:
         - id: fullyQualifiedNamespace
           type: string
@@ -133,13 +139,29 @@ constructors:
           type: string
           description: The name of the specific Event Hub to connect the client to.
         - id: credential
-          type: TokenCredential
+          type: TokenCredential | NamedKeyCredential | SASCredential
           description: >-
             An credential object used by the client to get the token to
             authenticate the connection
 
-            with the Azure Event Hubs service. See &commat;azure/identity for
-            creating the credentials.
+            with the Azure Event Hubs service.
+
+            See &commat;azure/identity for creating credentials that support AAD
+            auth.
+
+            Use the `AzureNamedKeyCredential` from &commat;azure/core-auth if
+            you want to pass in a `SharedAccessKeyName`
+
+            and `SharedAccessKey` without using a connection string. These
+            fields map to the `name` and `key` field respectively
+
+            in `AzureNamedKeyCredential`.
+
+            Use the `AzureSASCredential` from &commat;azure/core-auth if you
+            want to pass in a `SharedAccessSignature`
+
+            without using a connection string. This field maps to `signature` in
+            `AzureSASCredential`.
         - id: options
           type: <xref uid="@azure/event-hubs.EventHubClientOptions" />
           description: >

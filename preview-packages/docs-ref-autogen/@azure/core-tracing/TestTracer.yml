@@ -23,7 +23,7 @@ methods:
           type: T
           description: An object to bind the scope.
         - id: _span
-          type: Span
+          type: <xref uid="@azure/core-tracing.Span" />
           description: |
             A specific Span to use. Otherwise, use the current one.
       return:
@@ -51,7 +51,7 @@ methods:
     syntax:
       content: function getCurrentSpan()
       return:
-        type: Span
+        type: <xref uid="@azure/core-tracing.Span" />
         description: ''
   - name: getKnownSpans()
     uid: '@azure/core-tracing.TestTracer.getKnownSpans'
@@ -96,7 +96,7 @@ methods:
       return:
         type: <xref uid="@azure/core-tracing.SpanGraph" />
         description: ''
-  - name: 'startSpan(string, OTSpanOptions)'
+  - name: 'startSpan(string, SpanOptions, Context)'
     uid: '@azure/core-tracing.TestTracer.startSpan'
     package: '@azure/core-tracing'
     summary: Starts a new Span.
@@ -104,15 +104,20 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function startSpan(name: string, options?: OTSpanOptions)'
+      content: >-
+        function startSpan(name: string, options?: SpanOptions, context?:
+        Context)
       parameters:
         - id: name
           type: string
           description: The name of the span.
         - id: options
-          type: OTSpanOptions
+          type: <xref uid="@azure/core-tracing.SpanOptions" />
           description: |
             The SpanOptions used during Span creation.
+        - id: context
+          type: <xref uid="@azure/core-tracing.Context" />
+          description: ''
       return:
         type: <xref uid="@azure/core-tracing.TestSpan" />
         description: ''
@@ -127,7 +132,7 @@ methods:
       content: 'function withSpan<T>(_span: Span, fn: T)'
       parameters:
         - id: _span
-          type: Span
+          type: <xref uid="@azure/core-tracing.Span" />
           description: The span that provides the context.
         - id: fn
           type: T

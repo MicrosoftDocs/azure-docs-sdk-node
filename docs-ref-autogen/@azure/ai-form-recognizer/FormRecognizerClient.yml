@@ -2,7 +2,7 @@
 name: FormRecognizerClient
 uid: '@azure/ai-form-recognizer.FormRecognizerClient'
 package: '@azure/ai-form-recognizer'
-summary: Client class for interacting with Azure Form Recognizer service.
+summary: Client class for interacting with the Azure Form Recognizer service.
 fullName: FormRecognizerClient
 remarks: ''
 isPreview: false
@@ -14,7 +14,7 @@ constructors:
       FormRecognizerClientOptions)
     uid: '@azure/ai-form-recognizer.FormRecognizerClient.constructor'
     package: '@azure/ai-form-recognizer'
-    summary: >-
+    summary: >
       Creates an instance of FormRecognizerClient.
 
       Example usage:
@@ -47,12 +47,13 @@ constructors:
           description: Used to authenticate requests to the service.
         - id: options
           type: <xref uid="@azure/ai-form-recognizer.FormRecognizerClientOptions" />
-          description: ''
+          description: |
+            Used to configure the Form Recognizer client.
 properties:
   - name: endpointUrl
     uid: '@azure/ai-form-recognizer.FormRecognizerClient.endpointUrl'
     package: '@azure/ai-form-recognizer'
-    summary: Url to an Azure Form Recognizer service endpoint
+    summary: URL to an Azure Form Recognizer service endpoint
     fullName: endpointUrl
     remarks: ''
     isPreview: false
@@ -63,6 +64,158 @@ properties:
         type: string
         description: ''
 methods:
+  - name: >-
+      beginRecognizeBusinessCards(FormRecognizerRequestBody,
+      BeginRecognizeBusinessCardsOptions)
+    uid: '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeBusinessCards'
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Recognizes data from business cards using a pre-built business card model,
+      enabling you to extract structured data
+
+      from business cards such as name, job title, phone numbers, etc.
+
+      For a list of fields that are contained in the response, please refer to
+      the documentation at the
+
+      following link: https://aka.ms/formrecognizer/businesscardfields
+
+
+      This method returns a long running operation poller that allows you to
+      wait
+
+      indefinitely until the operation is completed.
+
+
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
+      being thrown.
+
+
+      Example usage:
+
+      ```ts
+
+      const path = "./business-card-english.png";
+
+      const readStream = fs.createReadStream(path);
+
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeBusinessCards(readStream, {
+        contentType: "image/png",
+        onProgress: (state) => { console.log(`status: ${state.status}`); }
+      });
+
+
+      const [businessCard] = await poller.pollUntilDone();
+
+      ```
+
+
+      Recognizes business card information from a given document
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRecognizeBusinessCards(businessCard:
+        FormRecognizerRequestBody, options?: BeginRecognizeBusinessCardsOptions)
+      parameters:
+        - id: businessCard
+          type: <xref uid="@azure/ai-form-recognizer.FormRecognizerRequestBody" />
+          description: Input document
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginRecognizeBusinessCardsOptions"
+            />
+          description: |
+            Options for the recognition operation
+      return:
+        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
+        description: ''
+  - name: >-
+      beginRecognizeBusinessCardsFromUrl(string,
+      BeginRecognizeBusinessCardsOptions)
+    uid: >-
+      @azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeBusinessCardsFromUrl
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Recognizes business card information from a url using a pre-built business
+      card model, enabling you to extract structured data
+
+      from business cards such as name, job title, phone numbers, etc.
+
+      For a list of fields that are contained in the response, please refer to
+      the documentation at the following link:
+      https://aka.ms/formrecognizer/businesscardfields
+
+
+      This method returns a long running operation poller that allows you to
+      wait
+
+      indefinitely until the operation is completed.
+
+
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
+      being thrown.
+
+
+      Example usage:
+
+      ```ts
+
+      const url = "<url to the business card document>";
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeBusinessCardsFromUrl(url, {
+        includeFieldElements: true,
+        onProgress: (state) => {
+          console.log(`analyzing status: ${state.status}`);
+        }
+      });
+
+      const [businessCard] = await poller.pollUntilDone();
+
+      ```
+
+
+      Recognizes business card information from a given accessible url to a
+      document
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRecognizeBusinessCardsFromUrl(businessCardUrl: string,
+        options?: BeginRecognizeBusinessCardsOptions)
+      parameters:
+        - id: businessCardUrl
+          type: string
+          description: >-
+            Url to a business card document that is accessible from the service.
+            Must be a valid, encoded URL to a document of a supported content
+            type.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginRecognizeBusinessCardsOptions"
+            />
+          description: |
+            Options for the recognition operation
+      return:
+        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
+        description: ''
   - name: >-
       beginRecognizeContent(FormRecognizerRequestBody,
       BeginRecognizeContentOptions)
@@ -105,6 +258,8 @@ methods:
       const pages = await poller.pollUntilDone();
 
       ```
+
+      Recognizes content/layout information from a given document
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -120,7 +275,8 @@ methods:
           type: >-
             <xref uid="@azure/ai-form-recognizer.BeginRecognizeContentOptions"
             />
-          description: ''
+          description: |
+            Options to start content recognition operation
       return:
         type: >-
           Promise&lt;<xref uid="@azure/ai-form-recognizer.ContentPollerLike"
@@ -164,6 +320,9 @@ methods:
       const pages = await poller.pollUntilDone();
 
       ```
+
+
+      Recognizes content/layout information from a url to a form document
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -175,14 +334,14 @@ methods:
         - id: formUrl
           type: string
           description: >-
-            Url to a form document that is accessible from the service. Must be
-            a valid, encoded URL to one of the following supported document
-            types: PDF, JPEG, PNG, and TIFF.
+            Url to a document that is accessible from the service. Must be a
+            valid, encoded URL to a document of a supported content type.
         - id: options
           type: >-
             <xref uid="@azure/ai-form-recognizer.BeginRecognizeContentOptions"
             />
-          description: ''
+          description: |
+            Options for the content recognition operation
       return:
         type: >-
           Promise&lt;<xref uid="@azure/ai-form-recognizer.ContentPollerLike"
@@ -190,7 +349,7 @@ methods:
         description: ''
   - name: >-
       beginRecognizeCustomForms(string, FormRecognizerRequestBody,
-      BeginRecognizeFormsOptions)
+      BeginRecognizeCustomFormsOptions)
     uid: '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeCustomForms'
     package: '@azure/ai-form-recognizer'
     summary: >-
@@ -202,11 +361,13 @@ methods:
 
       indefinitely until the operation is completed.
 
+
       Note that the onProgress callback will not be invoked if the operation
       completes in the first
 
       request, and attempting to cancel a completed copy will result in an error
       being thrown.
+
 
       Example usage:
 
@@ -228,13 +389,16 @@ methods:
       const forms = await poller.pollUntilDone();
 
       ```
+
+      Recognizes form information from a given document using a custom form
+      model.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginRecognizeCustomForms(modelId: string, form:
-        FormRecognizerRequestBody, options?: BeginRecognizeFormsOptions)
+        FormRecognizerRequestBody, options?: BeginRecognizeCustomFormsOptions)
       parameters:
         - id: modelId
           type: string
@@ -243,31 +407,36 @@ methods:
           type: <xref uid="@azure/ai-form-recognizer.FormRecognizerRequestBody" />
           description: Input form document
         - id: options
-          type: <xref uid="@azure/ai-form-recognizer.BeginRecognizeFormsOptions" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginRecognizeCustomFormsOptions" />
+          description: |
+            Options to start the form recognition operation
       return:
         type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
         description: ''
   - name: >-
       beginRecognizeCustomFormsFromUrl(string, string,
-      BeginRecognizeFormsOptions)
+      BeginRecognizeCustomFormsOptions)
     uid: >-
       @azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeCustomFormsFromUrl
     package: '@azure/ai-form-recognizer'
     summary: >-
-      Recognizes forms from a url to a form document using a custom form model
-      from training.
+      Recognizes forms from a URL to a document using a custom form model from
+      training.
 
       This method returns a long running operation poller that allows you to
       wait
 
       indefinitely until the operation is completed.
 
+
       Note that the onProgress callback will not be invoked if the operation
       completes in the first
 
       request, and attempting to cancel a completed copy will result in an error
       being thrown.
+
 
       Example usage:
 
@@ -287,13 +456,17 @@ methods:
       const forms = await poller.pollUntilDone();
 
       ```
+
+
+      Recognizes form information from a url to a document using a custom form
+      model.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginRecognizeCustomFormsFromUrl(modelId: string, formUrl:
-        string, options?: BeginRecognizeFormsOptions)
+        string, options?: BeginRecognizeCustomFormsOptions)
       parameters:
         - id: modelId
           type: string
@@ -301,12 +474,316 @@ methods:
         - id: formUrl
           type: string
           description: >-
-            Url to a form document that is accessible from the service. Must be
-            a valid, encoded URL to one of the following supported document
-            types: PDF, JPEG, PNG, and TIFF.
+            Url to a document that is accessible from the service. Must be a
+            valid, encoded URL to a document of a supported content type.
         - id: options
-          type: <xref uid="@azure/ai-form-recognizer.BeginRecognizeFormsOptions" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginRecognizeCustomFormsOptions" />
+          description: |
+            Options for the recognition operation
+      return:
+        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
+        description: ''
+  - name: >-
+      beginRecognizeIdentityDocuments(FormRecognizerRequestBody,
+      BeginRecognizeIdentityDocumentsOptions)
+    uid: >-
+      @azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeIdentityDocuments
+    package: '@azure/ai-form-recognizer'
+    summary: >
+      Recognizes data from identification documents using a pre-built ID
+
+      document model, enabling you to extract structured data from ID documents
+
+      such as first/last name, document number, expiration date, and more.
+
+      For a list of fields that are contained in the response, please refer to
+
+      the documentation at the following link:
+
+      https://aka.ms/formrecognizer/iddocumentfields
+
+
+      This method returns a long running operation poller that allows you to
+
+      wait indefinitely until the operation is completed.
+
+
+      Note that the onProgress callback will not be invoked if the operation
+
+      completes in the first request, and attempting to cancel a completed copy
+
+      will result in an error being thrown.
+
+
+      Example usage:
+
+
+      ```ts
+
+      const path = "./license.jpg";
+
+      const readStream = fs.createReadStream(path);
+
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeIdentityDocuments(readStream, {
+        onProgress: (state) => { console.log(`status: ${state.status}`); }
+      });
+
+
+      const [identityDocument] = await poller.pollUntilDone();
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRecognizeIdentityDocuments(identityDocument:
+        FormRecognizerRequestBody, options?:
+        BeginRecognizeIdentityDocumentsOptions)
+      parameters:
+        - id: identityDocument
+          type: <xref uid="@azure/ai-form-recognizer.FormRecognizerRequestBody" />
+          description: Input document
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginRecognizeIdentityDocumentsOptions"
+            />
+          description: |
+            Options for the recognition operation
+      return:
+        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
+        description: ''
+  - name: >-
+      beginRecognizeIdentityDocumentsFromUrl(string,
+      BeginRecognizeIdentityDocumentsOptions)
+    uid: >-
+      @azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeIdentityDocumentsFromUrl
+    package: '@azure/ai-form-recognizer'
+    summary: >
+      Recognizes identity document information from a url using pre-built ID
+
+      document model, enabling you to extract structured data from ID documents
+
+      such as first/last name, document number, expiration date, and more.
+
+      For a list of fields that are contained in the response, please refer to
+
+      the documentation at the following link:
+
+      https://aka.ms/formrecognizer/iddocumentfields
+
+
+      This method returns a long running operation poller that allows you to
+
+      wait indefinitely until the operation is completed.
+
+
+      Note that the onProgress callback will not be invoked if the operation
+
+      completes in the first request, and attempting to cancel a completed copy
+
+      will result in an error being thrown.
+
+
+      Example usage:
+
+      ```ts
+
+      const url = "<url to the identity document>";
+
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeIdentityDocumentsFromUrl(url, {
+        includeFieldElements: true,
+        onProgress: (state) => {
+          console.log(`analyzing status: ${state.status}`);
+        }
+      });
+
+
+      const [identityDocument] = await poller.pollUntilDone();
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRecognizeIdentityDocumentsFromUrl(identityDocumentUrl:
+        string, options?: BeginRecognizeIdentityDocumentsOptions)
+      parameters:
+        - id: identityDocumentUrl
+          type: string
+          description: >-
+            Url to an identity document that is accessible from
+
+            the service. Must be a valid, encoded URL to a document of a
+            supported
+
+            content type.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginRecognizeIdentityDocumentsOptions"
+            />
+          description: |
+            Options for the recognition operation
+      return:
+        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
+        description: ''
+  - name: >-
+      beginRecognizeInvoices(FormRecognizerRequestBody,
+      BeginRecognizeInvoicesOptions)
+    uid: '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeInvoices'
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Recognizes data from invoices using a pre-built invoice model, enabling
+      you to extract structured data
+
+      from invoices such as customer address, vendor address, purchase order ID,
+      etc.
+
+      For a list of fields that are contained in the response, please refer to
+      the documentation at the following link:
+      https://aka.ms/formrecognizer/invoicefields
+
+
+      This method returns a long running operation poller that allows you to
+      wait
+
+      indefinitely until the operation is completed.
+
+
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
+      being thrown.
+
+
+      Example usage:
+
+      ```ts
+
+      const path = "./Invoice_1.pdf";
+
+      const readStream = fs.createReadStream(path);
+
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeInvoices(readStream, {
+        contentType: "application/pdf",
+        onProgress: (state) => { console.log(`status: ${state.status}`); }
+      });
+
+
+      const [invoice] = await poller.pollUntilDone();
+
+      ```
+
+
+      Recognizes invoice information from a given document
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRecognizeInvoices(invoice: FormRecognizerRequestBody,
+        options?: BeginRecognizeInvoicesOptions)
+      parameters:
+        - id: invoice
+          type: <xref uid="@azure/ai-form-recognizer.FormRecognizerRequestBody" />
+          description: Input document
+        - id: options
+          type: >-
+            <xref uid="@azure/ai-form-recognizer.BeginRecognizeInvoicesOptions"
+            />
+          description: |
+            Options for the recognition operation
+      return:
+        type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
+        description: ''
+  - name: 'beginRecognizeInvoicesFromUrl(string, BeginRecognizeInvoicesOptions)'
+    uid: >-
+      @azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeInvoicesFromUrl
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Recognizes invoice information from a URL using a pre-built invoice model,
+      enabling you to extract structured data
+
+      from invoices such as customer address, vendor address, purchase order ID,
+      etc.
+
+      For a list of fields that are contained in the response, please refer to
+      the documentation at the following link:
+      https://aka.ms/formrecognizer/invoicefields
+
+
+      This method returns a long running operation poller that allows you to
+      wait
+
+      indefinitely until the operation is completed.
+
+
+      Note that the onProgress callback will not be invoked if the operation
+      completes in the first
+
+      request, and attempting to cancel a completed copy will result in an error
+      being thrown.
+
+
+      Example usage:
+
+      ```ts
+
+      const url = "<url to the invoice document>";
+
+      const client = new FormRecognizerClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+      const poller = await client.beginRecognizeInvoicesFromUrl(url, {
+        includeFieldElements: true,
+        onProgress: (state) => {
+          console.log(`analyzing status: ${state.status}`);
+        }
+      });
+
+      const [invoice] = await poller.pollUntilDone();
+
+      ```
+
+
+      Recognizes invoice information from a given accessible url to a document
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRecognizeInvoicesFromUrl(invoiceUrl: string, options?:
+        BeginRecognizeInvoicesOptions)
+      parameters:
+        - id: invoiceUrl
+          type: string
+          description: >-
+            Url to an invoice document that is accessible from the service. Must
+            be a valid, encoded URL to a document of a supported content type.
+        - id: options
+          type: >-
+            <xref uid="@azure/ai-form-recognizer.BeginRecognizeInvoicesOptions"
+            />
+          description: |
+            Options for the recognition operation
       return:
         type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
         description: ''
@@ -316,21 +793,22 @@ methods:
     uid: '@azure/ai-form-recognizer.FormRecognizerClient.beginRecognizeReceipts'
     package: '@azure/ai-form-recognizer'
     summary: >-
-      Recognizes data from receipts using pre-built receipt model, enabling you
-      to extract structure data
+      Recognizes data from receipts using a pre-built receipt model, enabling
+      you to extract structured data
 
       from receipts such as merchant name, merchant phone number, transaction
       date, and more.
 
       For a list of fields that are contained in the response, please refer to
-      the "Supported fields" section at the following link:
-      https://aka.ms/azsdk/formrecognizer/receiptfields
+      the documentation at the following link:
+      https://aka.ms/formrecognizer/receiptfields
 
 
       This method returns a long running operation poller that allows you to
       wait
 
       indefinitely until the operation is completed.
+
 
       Note that the onProgress callback will not be invoked if the operation
       completes in the first
@@ -351,59 +829,18 @@ methods:
       const client = new FormRecognizerClient(endpoint, new
       AzureKeyCredential(apiKey));
 
-      const poller = await client.beginRecognizeReceipts(readStream,
-      "image/jpeg", {
+      const poller = await client.beginRecognizeReceipts(readStream, {
+        contentType: "image/jpeg",
         onProgress: (state) => { console.log(`status: ${state.status}`); }
       });
 
 
-      const receipts = await poller.pollUntilDone();
-       if (!receipts || receipts.length <= 0) {
-         throw new Error("Expecting at lease one receipt in analysis result");
-       }
-
-      const receipt = receipts[0];
-
-      console.log("First receipt:");
-
-      const receiptTypeField = receipt.fields["ReceiptType"];
-
-      if (receiptTypeField.valueType === "string") {
-        console.log(`  Receipt Type: '${receiptTypeField.value || "<missing>"}', with confidence of ${receiptTypeField.confidence}`);
-      }
-
-      const merchantNameField = receipt.fields["MerchantName"];
-
-      if (merchantNameField.valueType === "string") {
-        console.log(`  Merchant Name: '${merchantNameField.value || "<missing>"}', with confidence of ${merchantNameField.confidence}`);
-      }
-
-      const transactionDate = receipt.fields["TransactionDate"];
-
-      if (transactionDate.valueType === "date") {
-        console.log(`  Transaction Date: '${transactionDate.value || "<missing>"}', with confidence of ${transactionDate.confidence}`);
-      }
-
-      const itemsField = receipt.fields["Items"];
-
-      if (itemsField.valueType === "array") {
-        for (const itemField of itemsField.value || []) {
-          if (itemField.valueType === "object") {
-            const itemNameField = itemField.value!["Name"];
-            if (itemNameField.valueType === "string") {
-              console.log(`    Item Name: '${itemNameField.value || "<missing>"}', with confidence of ${itemNameField.confidence}`);
-            }
-          }
-       }
-      }
-
-      const totalField = receipt.fields["Total"];
-
-      if (totalField.valueType === "number") {
-        console.log(`  Total: '${totalField.value || "<missing>"}', with confidence of ${totalField.confidence}`);
-      }
+      const [receipt] = await poller.pollUntilDone();
 
       ```
+
+
+      Recognizes receipt information from a given document
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -419,7 +856,8 @@ methods:
           type: >-
             <xref uid="@azure/ai-form-recognizer.BeginRecognizeReceiptsOptions"
             />
-          description: ''
+          description: |
+            Options for the recognition operation
       return:
         type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
         description: ''
@@ -435,14 +873,16 @@ methods:
       date, and more.
 
       For a list of fields that are contained in the response, please refer to
-      the "Supported fields" section at the following link:
-      https://aka.ms/azsdk/formrecognizer/receiptfields
+      the documentation at the
+
+      following link: https://aka.ms/formrecognizer/receiptfields
 
 
       This method returns a long running operation poller that allows you to
       wait
 
       indefinitely until the operation is completed.
+
 
       Note that the onProgress callback will not be invoked if the operation
       completes in the first
@@ -460,59 +900,19 @@ methods:
       const client = new FormRecognizerClient(endpoint, new
       AzureKeyCredential(apiKey));
 
-      const poller = await client.beginRecognizeReceiptsFromUrl(
-        url, {
-          includeFieldElements: true,
-          onProgress: (state) => { console.log(`analyzing status: ${state.status}`); }
+      const poller = await client.beginRecognizeReceiptsFromUrl(url, {
+        includeFieldElements: true,
+        onProgress: (state) => {
+          console.log(`analyzing status: ${state.status}`);
+        }
       });
 
-      const receipts = await poller.pollUntilDone();
-       if (!receipts || receipts.length <= 0) {
-         throw new Error("Expecting at lease one receipt in analysis result");
-       }
-
-      const receipt = receipts[0];
-
-      console.log("First receipt:");
-
-      const receiptTypeField = receipt.fields["ReceiptType"];
-
-      if (receiptTypeField.valueType === "string") {
-        console.log(`  Receipt Type: '${receiptTypeField.value || "<missing>"}', with confidence of ${receiptTypeField.confidence}`);
-      }
-
-      const merchantNameField = receipt.fields["MerchantName"];
-
-      if (merchantNameField.valueType === "string") {
-        console.log(`  Merchant Name: '${merchantNameField.value || "<missing>"}', with confidence of ${merchantNameField.confidence}`);
-      }
-
-      const transactionDate = receipt.fields["TransactionDate"];
-
-      if (transactionDate.valueType === "date") {
-        console.log(`  Transaction Date: '${transactionDate.value || "<missing>"}', with confidence of ${transactionDate.confidence}`);
-      }
-
-      const itemsField = receipt.fields["Items"];
-
-      if (itemsField.valueType === "array") {
-        for (const itemField of itemsField.value || []) {
-          if (itemField.valueType === "object") {
-            const itemNameField = itemField.value!["Name"];
-            if (itemNameField.valueType === "string") {
-              console.log(`    Item Name: '${itemNameField.value || "<missing>"}', with confidence of ${itemNameField.confidence}`);
-            }
-          }
-       }
-      }
-
-      const totalField = receipt.fields["Total"];
-
-      if (totalField.valueType === "number") {
-        console.log(`  Total: '${totalField.value || "<missing>"}', with confidence of ${totalField.confidence}`);
-      }
+      const [receipt] = await poller.pollUntilDone();
 
       ```
+
+
+      Recognizes receipt information from a given accessible url to a document
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -525,13 +925,13 @@ methods:
           type: string
           description: >-
             Url to a receipt document that is accessible from the service. Must
-            be a valid, encoded URL to one of the following supported document
-            types: PDF, JPEG, PNG, and TIFF.
+            be a valid, encoded URL to a document of a supported content type.
         - id: options
           type: >-
             <xref uid="@azure/ai-form-recognizer.BeginRecognizeReceiptsOptions"
             />
-          description: ''
+          description: |
+            Options for the recognition operation
       return:
         type: Promise&lt;<xref uid="@azure/ai-form-recognizer.FormPollerLike" />&gt;
         description: ''

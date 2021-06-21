@@ -35,7 +35,9 @@ classes:
 interfaces:
   - '@azure/storage-file-share.AccessPolicy'
   - '@azure/storage-file-share.AccountSASSignatureValues'
+  - '@azure/storage-file-share.ClearRange'
   - '@azure/storage-file-share.CloseHandlesInfo'
+  - '@azure/storage-file-share.CommonGenerateSasUrlOptions'
   - '@azure/storage-file-share.CommonOptions'
   - '@azure/storage-file-share.CopyFileSmbInfo'
   - '@azure/storage-file-share.CorsRule'
@@ -80,6 +82,7 @@ interfaces:
   - '@azure/storage-file-share.FileExistsOptions'
   - '@azure/storage-file-share.FileForceCloseHandlesHeaders'
   - '@azure/storage-file-share.FileForceCloseHandlesOptions'
+  - '@azure/storage-file-share.FileGenerateSasUrlOptions'
   - '@azure/storage-file-share.FileGetPropertiesHeaders'
   - '@azure/storage-file-share.FileGetPropertiesOptions'
   - '@azure/storage-file-share.FileGetRangeListHeaders'
@@ -115,6 +118,7 @@ interfaces:
   - '@azure/storage-file-share.ListFilesAndDirectoriesSegmentResponse'
   - '@azure/storage-file-share.ListHandlesResponse'
   - '@azure/storage-file-share.ListSharesResponse'
+  - '@azure/storage-file-share.ListSharesResponseModel'
   - '@azure/storage-file-share.Metadata'
   - '@azure/storage-file-share.Metrics'
   - '@azure/storage-file-share.PipelineOptions'
@@ -122,6 +126,7 @@ interfaces:
   - '@azure/storage-file-share.RangeModel'
   - '@azure/storage-file-share.RetentionPolicy'
   - '@azure/storage-file-share.SasIPRange'
+  - '@azure/storage-file-share.ServiceGenerateAccountSasUrlOptions'
   - '@azure/storage-file-share.ServiceGetPropertiesHeaders'
   - '@azure/storage-file-share.ServiceGetPropertiesOptions'
   - '@azure/storage-file-share.ServiceListSharesOptions'
@@ -141,6 +146,8 @@ interfaces:
   - '@azure/storage-file-share.ShareDeleteIfExistsResponse'
   - '@azure/storage-file-share.ShareDeleteMethodOptions'
   - '@azure/storage-file-share.ShareExistsOptions'
+  - '@azure/storage-file-share.ShareFileRangeList'
+  - '@azure/storage-file-share.ShareGenerateSasUrlOptions'
   - '@azure/storage-file-share.ShareGetAccessPolicyHeaders'
   - '@azure/storage-file-share.ShareGetAccessPolicyOptions'
   - '@azure/storage-file-share.ShareGetPermissionHeaders'
@@ -150,18 +157,25 @@ interfaces:
   - '@azure/storage-file-share.ShareGetStatisticsHeaders'
   - '@azure/storage-file-share.ShareGetStatisticsOptions'
   - '@azure/storage-file-share.ShareItem'
+  - '@azure/storage-file-share.ShareItemInternal'
   - '@azure/storage-file-share.SharePermission'
-  - '@azure/storage-file-share.ShareProperties'
+  - '@azure/storage-file-share.SharePropertiesInternal'
+  - '@azure/storage-file-share.ShareProtocolSettings'
+  - '@azure/storage-file-share.ShareProtocols'
   - '@azure/storage-file-share.ShareSetAccessPolicyHeaders'
   - '@azure/storage-file-share.ShareSetAccessPolicyOptions'
   - '@azure/storage-file-share.ShareSetMetadataHeaders'
   - '@azure/storage-file-share.ShareSetMetadataOptions'
-  - '@azure/storage-file-share.ShareSetQuotaHeaders'
+  - '@azure/storage-file-share.ShareSetPropertiesHeaders'
+  - '@azure/storage-file-share.ShareSetPropertiesOptions'
   - '@azure/storage-file-share.ShareSetQuotaOptions'
+  - '@azure/storage-file-share.ShareSmbSettings'
   - '@azure/storage-file-share.ShareStats'
   - '@azure/storage-file-share.SignedIdentifier'
   - '@azure/storage-file-share.SignedIdentifierModel'
+  - '@azure/storage-file-share.SmbMultichannel'
   - '@azure/storage-file-share.SourceModifiedAccessConditions'
+  - '@azure/storage-file-share.StorageClientOptionalParams'
   - '@azure/storage-file-share.StoragePipelineOptions'
   - '@azure/storage-file-share.StorageRetryOptions'
 typeAliases:
@@ -183,6 +197,7 @@ typeAliases:
   - '@azure/storage-file-share.FileDownloadResponseModel'
   - '@azure/storage-file-share.FileForceCloseHandlesResponse'
   - '@azure/storage-file-share.FileGetPropertiesResponse'
+  - '@azure/storage-file-share.FileGetRangeListDiffResponse'
   - '@azure/storage-file-share.FileGetRangeListResponse'
   - '@azure/storage-file-share.FileListHandlesResponse'
   - '@azure/storage-file-share.FilePermissionInheritType'
@@ -202,6 +217,7 @@ typeAliases:
   - '@azure/storage-file-share.ServiceGetPropertiesResponse'
   - '@azure/storage-file-share.ServiceListSharesSegmentResponse'
   - '@azure/storage-file-share.ServiceSetPropertiesResponse'
+  - '@azure/storage-file-share.ShareAccessTier'
   - '@azure/storage-file-share.ShareCreatePermissionResponse'
   - '@azure/storage-file-share.ShareCreateResponse'
   - '@azure/storage-file-share.ShareCreateSnapshotResponse'
@@ -209,10 +225,15 @@ typeAliases:
   - '@azure/storage-file-share.ShareGetAccessPolicyResponse'
   - '@azure/storage-file-share.ShareGetPermissionResponse'
   - '@azure/storage-file-share.ShareGetPropertiesResponse'
+  - '@azure/storage-file-share.ShareGetPropertiesResponseModel'
   - '@azure/storage-file-share.ShareGetStatisticsResponse'
   - '@azure/storage-file-share.ShareGetStatisticsResponseModel'
+  - '@azure/storage-file-share.ShareProperties'
+  - '@azure/storage-file-share.ShareRootSquash'
   - '@azure/storage-file-share.ShareSetAccessPolicyResponse'
   - '@azure/storage-file-share.ShareSetMetadataResponse'
+  - '@azure/storage-file-share.ShareSetPropertiesResponse'
+  - '@azure/storage-file-share.ShareSetQuotaHeaders'
   - '@azure/storage-file-share.ShareSetQuotaResponse'
   - '@azure/storage-file-share.TimeNowType'
   - '@azure/storage-file-share.TimePreserveType'
@@ -243,7 +264,8 @@ functions:
           description: ''
         - id: sharedKeyCredential
           type: <xref uid="@azure/storage-file-share.StorageSharedKeyCredential" />
-          description: ''
+          description: |
+            -
       return:
         type: <xref uid="@azure/storage-file-share.SASQueryParameters" />
         description: ''
@@ -282,10 +304,11 @@ functions:
       parameters:
         - id: fileSASSignatureValues
           type: <xref uid="@azure/storage-file-share.FileSASSignatureValues" />
-          description: ''
+          description: '-'
         - id: sharedKeyCredential
           type: <xref uid="@azure/storage-file-share.StorageSharedKeyCredential" />
-          description: ''
+          description: |
+            -
       return:
         type: <xref uid="@azure/storage-file-share.SASQueryParameters" />
         description: ''
@@ -306,7 +329,7 @@ functions:
           description: 'Such as AnonymousCredential, StorageSharedKeyCredential.'
         - id: pipelineOptions
           type: <xref uid="@azure/storage-file-share.StoragePipelineOptions" />
-          description: ''
+          description: Optional. Options.
       return:
         type: <xref uid="@azure/storage-file-share.Pipeline" />
         description: A new Pipeline object.

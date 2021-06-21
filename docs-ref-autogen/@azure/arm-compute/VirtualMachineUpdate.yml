@@ -35,30 +35,28 @@ properties:
       to different nodes
 
       to maximize availability. For more information about availability sets,
-      see [Manage the
+      see [Availability sets
 
-      availability of virtual
+      overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview).
 
-      machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+      <br><br> For more information on Azure planned maintenance, see
+      [Maintenance and updates for
 
-      <br><br> For more information on Azure planned maintenance, see [Planned
-      maintenance for
+      Virtual Machines in
 
-      virtual machines in
+      Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates)
+      <br><br>
 
-      Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+      Currently, a VM can only be added to availability set at creation time.
+      The availability set
 
-      <br><br> Currently, a VM can only be added to availability set at creation
-      time. The
+      to which the VM is being added should be under the same resource group as
+      the availability set
 
-      availability set to which the VM is being added should be under the same
-      resource group as the
+      resource. An existing VM cannot be added to an availability set.
+      <br><br>This property cannot
 
-      availability set resource. An existing VM cannot be added to an
-      availability set. <br><br>This
-
-      property cannot exist along with a non-null
-      properties.virtualMachineScaleSet reference.
+      exist along with a non-null properties.virtualMachineScaleSet reference.
     fullName: availabilitySet
     remarks: ''
     isPreview: false
@@ -231,21 +229,24 @@ properties:
     package: '@azure/arm-compute'
     summary: >-
       Specifies that the image or disk that is being used was licensed
-      on-premises. This element is
+      on-premises. <br><br>
 
-      only used for images that contain the Windows Server operating system.
-      <br><br> Possible
+      Possible values for Windows Server operating system are: <br><br>
+      Windows_Client <br><br>
 
-      values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If
-      this element is
+      Windows_Server <br><br> Possible values for Linux Server operating system
+      are: <br><br>
 
-      included in a request for an update, the value must match the initial
-      value. This value cannot
+      RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more
+      information, see [Azure
 
-      be updated. <br><br> For more information, see [Azure Hybrid Use Benefit
-      for Windows
+      Hybrid Use Benefit for Windows
 
-      Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+      Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing)
+
+      <br><br> [Azure Hybrid Use Benefit for Linux
+
+      Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux)
 
       <br><br> Minimum api-version: 2015-06-15
     fullName: licenseType
@@ -313,6 +314,38 @@ properties:
       return:
         type: <xref uid="@azure/arm-compute.Plan" />
         description: ''
+  - name: platformFaultDomain
+    uid: '@azure/arm-compute.VirtualMachineUpdate.platformFaultDomain'
+    package: '@azure/arm-compute'
+    summary: >-
+      Specifies the scale set logical fault domain into which the Virtual
+      Machine will be created.
+
+      By default, the Virtual Machine will by automatically assigned to a fault
+      domain that best
+
+      maintains balance across available fault domains.<br><li>This is
+      applicable only if the
+
+      'virtualMachineScaleSet' property of this Virtual Machine is set.<li>The
+      Virtual Machine Scale
+
+      Set that is referenced, must have 'platformFaultDomainCount' &gt;
+      1.<li>This property cannot
+
+      be updated once the Virtual Machine is created.<li>Fault domain assignment
+      can be viewed in
+
+      the Virtual Machine Instance View.<br><br>Minimum api‐version: 2020‐12‐01
+    fullName: platformFaultDomain
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'platformFaultDomain?: undefined | number'
+      return:
+        type: undefined | number
+        description: ''
   - name: priority
     uid: '@azure/arm-compute.VirtualMachineUpdate.priority'
     package: '@azure/arm-compute'
@@ -364,6 +397,19 @@ properties:
       return:
         type: <xref uid="@azure/arm-compute.SubResource" />
         description: ''
+  - name: scheduledEventsProfile
+    uid: '@azure/arm-compute.VirtualMachineUpdate.scheduledEventsProfile'
+    package: '@azure/arm-compute'
+    summary: Specifies Scheduled Event related configurations.
+    fullName: scheduledEventsProfile
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'scheduledEventsProfile?: ScheduledEventsProfile'
+      return:
+        type: <xref uid="@azure/arm-compute.ScheduledEventsProfile" />
+        description: ''
   - name: securityProfile
     uid: '@azure/arm-compute.VirtualMachineUpdate.securityProfile'
     package: '@azure/arm-compute'
@@ -402,6 +448,23 @@ properties:
       content: 'tags?: undefined | [key: string]: string'
       return:
         type: 'undefined | [key: string]: string'
+        description: ''
+  - name: userData
+    uid: '@azure/arm-compute.VirtualMachineUpdate.userData'
+    package: '@azure/arm-compute'
+    summary: >-
+      UserData for the VM, which must be base-64 encoded. Customer should not
+      pass any secrets in
+
+      here. <br><br>Minimum api-version: 2021-03-01
+    fullName: userData
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'userData?: undefined | string'
+      return:
+        type: undefined | string
         description: ''
   - name: virtualMachineScaleSet
     uid: '@azure/arm-compute.VirtualMachineUpdate.virtualMachineScaleSet'

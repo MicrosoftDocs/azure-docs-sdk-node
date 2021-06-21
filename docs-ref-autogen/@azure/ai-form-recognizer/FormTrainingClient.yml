@@ -47,7 +47,8 @@ constructors:
           description: Used to authenticate requests to the service.
         - id: options
           type: <xref uid="@azure/ai-form-recognizer.FormRecognizerClientOptions" />
-          description: ''
+          description: |
+            Used to configure the client.
 properties:
   - name: endpointUrl
     uid: '@azure/ai-form-recognizer.FormTrainingClient.endpointUrl'
@@ -105,6 +106,8 @@ methods:
       const result = await poller.pollUntilDone();
 
       ```
+
+      Copies custom model to target resource
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -125,12 +128,90 @@ methods:
             `targetTrainingClient.getCopyAuthorization()`
         - id: options
           type: <xref uid="@azure/ai-form-recognizer.BeginCopyModelOptions" />
-          description: ''
+          description: |
+            Options to copy model operation
       return:
         type: >-
           Promise&lt;PollerLike&lt;<xref
           uid="@azure/ai-form-recognizer.CopyModelOperationState" />, <xref
           uid="@azure/ai-form-recognizer.CustomFormModelInfo" />&gt;&gt;
+        description: ''
+  - name: 'beginCreateComposedModel(string[], BeginCreateComposedModelOptions)'
+    uid: '@azure/ai-form-recognizer.FormTrainingClient.beginCreateComposedModel'
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Combines pre-existing models with labels into a single composed model.
+
+      The composed model will contain copies of all of its input submodels, and
+      it will
+
+      choose (using a machine learning algorithm) the most appropriate of its
+      input models
+
+      to use during form recognition.
+
+
+      This method returns a long-running operation poller that allows you to
+      wait
+
+      indefinitely until the operation is completed.
+
+
+      Notes:
+
+      - Only labeled models can be composed. Attempting to compose an unlabeled
+      model will
+        result in an error.
+      - the onProgress callback will not be invoked if the operation completes
+      in the first
+        request, and attempting to cancel a completed copy will result in an error being thrown.
+      - evena when the training operation fails, a model is still created in the
+      Azure Form
+        Recognizer resource.
+
+      Example usage:
+
+      ```ts
+
+      const modelIds = ["<model ID 1>", "<model ID 2>", "<model ID 3>"];
+
+      const trainingClient = new FormTrainingClient(endpoint, new
+      AzureKeyCredential(apiKey));
+
+
+      const poller = await trainingClient.beginCreateComposedModel(modelIds, {
+        modelName: "<optional name for the composed model>",
+        onProgress: (state) => { console.log("training status: "); console.log(state); }
+      });
+
+      const composedModel = await poller.pollUntilDone();
+
+      ```
+
+
+      Combines pre-existing models with labels into a single composed model.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginCreateComposedModel(modelIds: string[], options:
+        BeginCreateComposedModelOptions)
+      parameters:
+        - id: modelIds
+          type: 'string[]'
+          description: An array of model IDs within the Form Recognizer resouce to compose
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginCreateComposedModelOptions" />
+          description: |
+            Options to start the create composed model operation
+      return:
+        type: >-
+          Promise&lt;PollerLike&lt;<xref
+          uid="@azure/ai-form-recognizer.TrainingOperationState" />, <xref
+          uid="@azure/ai-form-recognizer.CustomFormModel" />&gt;&gt;
         description: ''
   - name: 'beginTraining(string, boolean, BeginTrainingOptions)'
     uid: '@azure/ai-form-recognizer.FormTrainingClient.beginTraining'
@@ -138,20 +219,35 @@ methods:
     summary: >-
       Creates and trains a custom form model.
 
-      This method returns a long running operation poller that allows you to
+      If the `useTrainingLabels` parameter is set to `true`, then the operation
+      will search
+
+      for label files in addition to the training documents, and it will create
+      a labeled
+
+      model with the field names specified by the labels. Otherwise, it will
+      create an
+
+      unlabeled model automatically that returns generated field names for the
+      items it
+
+      determines are fields within the document structure.
+
+
+      This method returns a long-running operation poller that allows you to
       wait
 
       indefinitely until the operation is completed.
 
-      Note that the onProgress callback will not be invoked if the operation
-      completes in the first
 
-      request, and attempting to cancel a completed copy will result in an error
-      being thrown.
+      Notes:
 
-      Note that when training operation fails, a model is still created in Azure
-      Form Recognizer resource.
-
+      - The onProgress callback will not be invoked if the operation completes
+      in the first
+        request, and attempting to cancel a completed copy will result in an error being thrown.
+      - Even when the training operation fails, a model is still created in the
+      Azure Form
+        Recognizer resource.
 
       Example usage:
 
@@ -172,6 +268,9 @@ methods:
       const model = await poller.pollUntilDone();
 
       ```
+
+
+      Creates and trains a custom form model.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -184,13 +283,14 @@ methods:
           type: string
           description: >-
             Accessible url to an Azure Storage Blob container storing the
-            training documents
+            training documents and optional label files
         - id: useTrainingLabels
           type: boolean
-          description: specifies whether to training the model using label files
+          description: Specifies whether or not to search for and train using label files
         - id: options
           type: <xref uid="@azure/ai-form-recognizer.BeginTrainingOptions" />
-          description: ''
+          description: |
+            Options to start the model training operation
       return:
         type: >-
           Promise&lt;PollerLike&lt;<xref
@@ -280,7 +380,7 @@ methods:
             Services.
         - id: options
           type: <xref uid="@azure/ai-form-recognizer.GetCopyAuthorizationOptions" />
-          description: ''
+          description: Options to get copy authorization operation
       return:
         type: >-
           Promise&lt;<xref uid="@azure/ai-form-recognizer.CopyAuthorization"

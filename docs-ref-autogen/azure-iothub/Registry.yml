@@ -336,8 +336,8 @@ methods:
         - id: outputBlobContainerUri
           type: string
           description: >-
-            The URI to a container where a blob will be created with logs of the
-            export process.
+            The URI to a container where a blob named 'devices.txt' will be
+            created containing the list of devices.
         - id: excludeKeys
           type: boolean
           description: >-
@@ -347,7 +347,7 @@ methods:
           type: Callback&lt;<xref uid="azure-iothub.Registry.JobStatus" />&gt;
           description: ''
   - name: 'exportDevicesToBlobByIdentity(string, boolean)'
-    uid: azure-iothub.Registry.exportDevicesToBlobByIdentity_1
+    uid: azure-iothub.Registry.exportDevicesToBlobByIdentity_2
     package: azure-iothub
     summary: ''
     remarks: ''
@@ -370,11 +370,7 @@ methods:
   - name: 'exportDevicesToBlobByIdentity(string, boolean, Callback<JobStatus>)'
     uid: azure-iothub.Registry.exportDevicesToBlobByIdentity
     package: azure-iothub
-    summary: >-
-      Export devices to a blob in a bulk job using the configured identity. 
-      This API initially has limited availablity and is only is implemented in a
-      few regions.
-                           If a user wishes to try it out, they will need to set an Environment Variable of "EnabledStorageIdentity" and set it to "1"
+    summary: Export devices to a blob in a bulk job using a configured identity.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -386,13 +382,64 @@ methods:
         - id: outputBlobContainerUri
           type: string
           description: >-
-            The URI to a container where a blob will be created with logs of the
-            export process.
+            The URI to a container where a blob named 'devices.txt' will be
+            created containing the list of devices.
         - id: excludeKeys
           type: boolean
           description: >-
             Boolean indicating whether security keys should be excluded from the
             exported data.
+        - id: done
+          type: Callback&lt;<xref uid="azure-iothub.Registry.JobStatus" />&gt;
+          description: ''
+  - name: 'exportDevicesToBlobByIdentity(string, boolean, string)'
+    uid: azure-iothub.Registry.exportDevicesToBlobByIdentity_3
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function exportDevicesToBlobByIdentity(outputBlobContainerUri: string,
+        excludeKeys: boolean, userAssignedIdentity: string)
+      parameters:
+        - id: outputBlobContainerUri
+          type: string
+          description: ''
+        - id: excludeKeys
+          type: boolean
+          description: ''
+        - id: userAssignedIdentity
+          type: string
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="azure-iothub.Registry.JobStatus" />&gt;
+        description: ''
+  - name: >-
+      exportDevicesToBlobByIdentity(string, boolean, string,
+      Callback<JobStatus>)
+    uid: azure-iothub.Registry.exportDevicesToBlobByIdentity_1
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function exportDevicesToBlobByIdentity(outputBlobContainerUri: string,
+        excludeKeys: boolean, userAssignedIdentity: string, done:
+        Callback<JobStatus>)
+      parameters:
+        - id: outputBlobContainerUri
+          type: string
+          description: ''
+        - id: excludeKeys
+          type: boolean
+          description: ''
+        - id: userAssignedIdentity
+          type: string
+          description: ''
         - id: done
           type: Callback&lt;<xref uid="azure-iothub.Registry.JobStatus" />&gt;
           description: ''
@@ -431,6 +478,29 @@ methods:
             A shared access signature which encapsulates
                                          the appropriate (read and/or write) Registry
                                          permissions.
+      return:
+        type: <xref uid="azure-iothub.Registry" />
+        description: ''
+  - name: 'fromTokenCredential(string, TokenCredential)'
+    uid: azure-iothub.Registry.fromTokenCredential
+    package: azure-iothub
+    summary: Constructs a Registry object from the given Azure TokenCredential.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromTokenCredential(hostName: string, tokenCredential:
+        TokenCredential)
+      parameters:
+        - id: hostName
+          type: string
+          description: Host name of the Azure service.
+        - id: tokenCredential
+          type: TokenCredential
+          description: |
+            An Azure TokenCredential used to authenticate
+                                                         with the Azure  service
       return:
         type: <xref uid="azure-iothub.Registry" />
         description: ''
@@ -803,7 +873,7 @@ methods:
           type: Callback&lt;<xref uid="azure-iothub.Registry.JobStatus" />&gt;
           description: ''
   - name: 'importDevicesFromBlobByIdentity(string, string)'
-    uid: azure-iothub.Registry.importDevicesFromBlobByIdentity_1
+    uid: azure-iothub.Registry.importDevicesFromBlobByIdentity_2
     package: azure-iothub
     summary: ''
     remarks: ''
@@ -826,11 +896,7 @@ methods:
   - name: 'importDevicesFromBlobByIdentity(string, string, Callback<JobStatus>)'
     uid: azure-iothub.Registry.importDevicesFromBlobByIdentity
     package: azure-iothub
-    summary: >-
-      Imports devices from a blob in bulk job using the configured identity. 
-      This API initially has limited availablity and is only is implemented in a
-      few regions.
-                           If a user wishes to try it out, they will need to set an Environment Variable of "EnabledStorageIdentity" and set it to "1"
+    summary: Imports devices from a blob in bulk job using a configured identity.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -849,6 +915,57 @@ methods:
           description: >-
             The URI to a container where a blob will be created with logs of the
             import process.
+        - id: done
+          type: Callback&lt;<xref uid="azure-iothub.Registry.JobStatus" />&gt;
+          description: ''
+  - name: 'importDevicesFromBlobByIdentity(string, string, string)'
+    uid: azure-iothub.Registry.importDevicesFromBlobByIdentity_3
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function importDevicesFromBlobByIdentity(inputBlobContainerUri: string,
+        outputBlobContainerUri: string, userAssignedIdentity: string)
+      parameters:
+        - id: inputBlobContainerUri
+          type: string
+          description: ''
+        - id: outputBlobContainerUri
+          type: string
+          description: ''
+        - id: userAssignedIdentity
+          type: string
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="azure-iothub.Registry.JobStatus" />&gt;
+        description: ''
+  - name: >-
+      importDevicesFromBlobByIdentity(string, string, string,
+      Callback<JobStatus>)
+    uid: azure-iothub.Registry.importDevicesFromBlobByIdentity_1
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function importDevicesFromBlobByIdentity(inputBlobContainerUri: string,
+        outputBlobContainerUri: string, userAssignedIdentity: string, done:
+        Callback<JobStatus>)
+      parameters:
+        - id: inputBlobContainerUri
+          type: string
+          description: ''
+        - id: outputBlobContainerUri
+          type: string
+          description: ''
+        - id: userAssignedIdentity
+          type: string
+          description: ''
         - id: done
           type: Callback&lt;<xref uid="azure-iothub.Registry.JobStatus" />&gt;
           description: ''
@@ -1094,6 +1211,14 @@ methods:
     summary: |-
       Updates an existing device identity on an IoT hub with
                          the given device information.
+                         The `deviceInfo` parameter must include all properties
+                         that are updatable.  For example, if updating the `status`
+                         property from `disabled` to `enabled`, the `deviceInfo`
+                         object should also have the statusReason, authentication
+                         (and its sub-properties), capabilities, and deviceScope
+                         set to the devices current values or those properties will
+                         be reset.  It is recommended that the get api is called
+                         first before doing an update.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -1217,7 +1342,16 @@ methods:
       HttpResponseCallback<BulkRegistryOperationResult>)
     uid: azure-iothub.Registry.updateDevices
     package: azure-iothub
-    summary: Updates an array of devices.
+    summary: |-
+      Updates an array of devices.
+                         The individual elements of the `devices` parameter must
+                         include all properties that are updatable.  For example,
+                         if updating the `status` property from `disabled` to
+                         `enabled`, the object should also have the statusReason,
+                         authentication (and its sub-properties), capabilities,
+                         and deviceScope set to the devices current values or those
+                         properties will be reset. It is recommended that the get
+                         api is called first before doing an update.
     remarks: ''
     isPreview: false
     isDeprecated: false

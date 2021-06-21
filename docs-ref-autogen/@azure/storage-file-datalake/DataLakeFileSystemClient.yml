@@ -30,7 +30,7 @@ constructors:
                                 if using AnonymousCredential, such as "https://myaccount.dfs.core.windows.net/filesystem?sasString".
         - id: pipeline
           type: <xref uid="@azure/storage-file-datalake.Pipeline" />
-          description: |-
+          description: |
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
   - name: >-
@@ -60,10 +60,16 @@ constructors:
             <xref uid="@azure/storage-file-datalake.StorageSharedKeyCredential"
             /> | <xref uid="@azure/storage-file-datalake.AnonymousCredential" />
             | TokenCredential
-          description: ''
+          description: >-
+            Such as AnonymousCredential, StorageSharedKeyCredential or any
+            credential from the `@azure/identity` package to authenticate
+            requests to the service. You can also provide an object that
+            implements the TokenCredential interface. If not specified,
+            AnonymousCredential is used.
         - id: options
           type: <xref uid="@azure/storage-file-datalake.StoragePipelineOptions" />
-          description: ''
+          description: |
+            Optional. Options to configure the HTTP pipeline.
 properties:
   - name: accountName
     uid: '@azure/storage-file-datalake.DataLakeFileSystemClient.accountName'
@@ -83,9 +89,9 @@ properties:
     package: '@azure/storage-file-datalake'
     summary: >-
       Such as AnonymousCredential, StorageSharedKeyCredential or any credential
-      from the @azure/identity package to authenticate requests to the service.
-      You can also provide an object that implements the TokenCredential
-      interface. If not specified, AnonymousCredential is used.
+      from the `@azure/identity` package to authenticate requests to the
+      service. You can also provide an object that implements the
+      TokenCredential interface. If not specified, AnonymousCredential is used.
     fullName: credential
     remarks: ''
     isPreview: false
@@ -143,7 +149,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-datalake.FileSystemCreateOptions" />
-          description: ''
+          description: |
+            Optional. Options when creating file system.
       return:
         type: >-
           Promise&lt;<xref
@@ -165,7 +172,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-datalake.FileSystemCreateOptions" />
-          description: ''
+          description: |
+            -
       return:
         type: >-
           Promise&lt;<xref
@@ -184,7 +192,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-datalake.FileSystemDeleteOptions" />
-          description: ''
+          description: |
+            Optional. Options when deleting file system.
       return:
         type: >-
           Promise&lt;<xref
@@ -202,7 +211,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-datalake.FileSystemDeleteOptions" />
-          description: ''
+          description: |
+            -
       return:
         type: >-
           Promise&lt;<xref
@@ -231,10 +241,40 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-datalake.FileSystemExistsOptions" />
-          description: ''
+          description: |
+            -
       return:
         type: Promise&lt;boolean&gt;
         description: ''
+  - name: generateSasUrl(FileSystemGenerateSasUrlOptions)
+    uid: '@azure/storage-file-datalake.DataLakeFileSystemClient.generateSasUrl'
+    package: '@azure/storage-file-datalake'
+    summary: >
+      Only available for DataLakeFileSystemClient constructed with a shared key
+      credential.
+
+      Generates a Service Shared Access Signature (SAS) URI based on the client
+      properties
+
+      and parameters passed in. The SAS is signed by the shared key credential
+      of the client.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function generateSasUrl(options: FileSystemGenerateSasUrlOptions)'
+      parameters:
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/storage-file-datalake.FileSystemGenerateSasUrlOptions"
+            />
+          description: Optional parameters.
+      return:
+        type: Promise&lt;string&gt;
+        description: >-
+          The SAS URI consisting of the URI to the resource represented by this
+          client, followed by the generated SAS token.
   - name: getAccessPolicy(FileSystemGetAccessPolicyOptions)
     uid: '@azure/storage-file-datalake.DataLakeFileSystemClient.getAccessPolicy'
     package: '@azure/storage-file-datalake'
@@ -260,7 +300,8 @@ methods:
             <xref
             uid="@azure/storage-file-datalake.FileSystemGetAccessPolicyOptions"
             />
-          description: ''
+          description: |
+            Optional. Options when getting file system access policy.
       return:
         type: >-
           Promise&lt;<xref
@@ -280,7 +321,8 @@ methods:
       parameters:
         - id: proposeLeaseId
           type: string
-          description: ''
+          description: |
+            Optional. Initial proposed lease Id.
       return:
         type: <xref uid="@azure/storage-file-datalake.DataLakeLeaseClient" />
         description: ''
@@ -296,7 +338,8 @@ methods:
       parameters:
         - id: directoryName
           type: string
-          description: ''
+          description: |
+            -
       return:
         type: <xref uid="@azure/storage-file-datalake.DataLakeDirectoryClient" />
         description: ''
@@ -312,7 +355,8 @@ methods:
       parameters:
         - id: fileName
           type: string
-          description: ''
+          description: |
+            -
       return:
         type: <xref uid="@azure/storage-file-datalake.DataLakeFileClient" />
         description: ''
@@ -344,11 +388,139 @@ methods:
           type: >-
             <xref
             uid="@azure/storage-file-datalake.FileSystemGetPropertiesOptions" />
-          description: ''
+          description: |
+            Optional. Options when getting file system properties.
       return:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-datalake.FileSystemGetPropertiesResponse"
+          />&gt;
+        description: ''
+  - name: listDeletedPaths(ListDeletedPathsOptions)
+    uid: '@azure/storage-file-datalake.DataLakeFileSystemClient.listDeletedPaths'
+    package: '@azure/storage-file-datalake'
+    summary: >
+      Returns an async iterable iterator to list all the paths (directories and
+      files)
+
+      under the specified file system.
+
+      .byPage() returns an async iterable iterator to list the paths in pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      // Get the fileSystemClient before you run these snippets,
+
+      // Can be obtained from
+      `serviceClient.getFileSystemClient("<your-filesystem-name>");`
+
+      let i = 1;
+
+      for await (const deletePath of fileSystemClient.listDeletedPaths()) {
+        console.log(`Path ${i++}: ${deletePath.name}`);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      let iter = fileSystemClient.listDeletedPaths();
+
+      let deletedPathItem = await iter.next();
+
+      while (!deletedPathItem.done) {
+        console.log(`Path ${i++}: ${deletedPathItem.value.name}`);
+        pathItem = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const response of fileSystemClient.listDeletedPaths().byPage({
+      maxPageSize: 20 })) {
+        for (const deletePath of response.pathItems) {
+          console.log(`Path ${i++}: ${deletePath.name}`);
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = fileSystemClient.listDeletedPaths().byPage({ maxPageSize: 2
+      });
+
+      let response = (await iterator.next()).value;
+
+
+      // Prints 2 path names
+
+      for (const path of response.pathItems) {
+        console.log(`Path ${i++}: ${path.name}}`);
+      }
+
+
+      // Gets next marker
+
+      let marker = response.continuationToken;
+
+
+      // Passing next marker as continuationToken
+
+
+      iterator = fileSystemClient.listDeletedPaths().byPage({ continuationToken:
+      marker, maxPageSize: 10 });
+
+      response = (await iterator.next()).value;
+
+
+      // Prints 10 path names
+
+      for (const deletePath of response.deletedPathItems) {
+        console.log(`Path ${i++}: ${deletePath.name}`);
+      }
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function listDeletedPaths(options?: ListDeletedPathsOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-file-datalake.ListDeletedPathsOptions" />
+          description: |
+            Optional. Options when listing deleted paths.
+      return:
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/storage-file-datalake.DeletedPath" />, <xref
+          uid="@azure/storage-file-datalake.FileSystemListDeletedPathsResponse"
           />&gt;
         description: ''
   - name: listPaths(ListPathsOptions)
@@ -468,7 +640,8 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-datalake.ListPathsOptions" />
-          description: ''
+          description: |
+            Optional. Options when listing paths.
       return:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
@@ -504,18 +677,21 @@ methods:
       parameters:
         - id: access
           type: <xref uid="@azure/storage-file-datalake.PublicAccessType" />
-          description: ''
+          description: Optional. The level of public access to data in the file system.
         - id: fileSystemAcl
           type: >-
             <xref uid="@azure/storage-file-datalake.SignedIdentifier"
             />&lt;<xref uid="@azure/storage-file-datalake.AccessPolicy" />&gt;[]
-          description: ''
+          description: >-
+            Optional. Array of elements each having a unique Id and details of
+            the access policy.
         - id: options
           type: >-
             <xref
             uid="@azure/storage-file-datalake.FileSystemSetAccessPolicyOptions"
             />
-          description: ''
+          description: |
+            Optional. Options when setting file system access policy.
       return:
         type: >-
           Promise&lt;<xref
@@ -543,16 +719,51 @@ methods:
       parameters:
         - id: metadata
           type: <xref uid="@azure/storage-file-datalake.Metadata" />
-          description: ''
+          description: |-
+            Replace existing metadata with this value.
+                                         If no value provided the existing metadata will be removed.
         - id: options
           type: >-
             <xref
             uid="@azure/storage-file-datalake.FileSystemSetMetadataOptions" />
-          description: ''
+          description: |
+            Optional. Options when setting file system metadata.
       return:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-datalake.FileSystemSetMetadataResponse"
+          />&gt;
+        description: ''
+  - name: 'undeletePath(string, string, FileSystemUndeletePathOption)'
+    uid: '@azure/storage-file-datalake.DataLakeFileSystemClient.undeletePath'
+    package: '@azure/storage-file-datalake'
+    summary: Restores a soft deleted path.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function undeletePath(deletedPath: string, deletionId: string, options?:
+        FileSystemUndeletePathOption)
+      parameters:
+        - id: deletedPath
+          type: string
+          description: |
+            Required.  The path of the deleted path.
+        - id: deletionId
+          type: string
+          description: |+
+            Required.  The deletion ID associated with the soft deleted path.
+
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/storage-file-datalake.FileSystemUndeletePathOption" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-datalake.FileSystemUndeletePathResponse"
           />&gt;
         description: ''
 extends: <xref uid="@azure/storage-file-datalake.StorageClient" />

@@ -56,13 +56,11 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createModels(models: any[], options?: OperationOptions)'
+      content: 'function createModels(dtdlModels: any[], options?: OperationOptions)'
       parameters:
-        - id: models
+        - id: dtdlModels
           type: 'any[]'
-          description: >-
-            The set of models to create. Each string corresponds to exactly one
-            model.
+          description: ''
         - id: options
           type: OperationOptions
           description: The operation options
@@ -92,7 +90,7 @@ methods:
       return:
         type: Promise&lt;RestResponse&gt;
         description: The http response.
-  - name: 'deleteDigitalTwin(string, string, OperationOptions)'
+  - name: 'deleteDigitalTwin(string, DigitalTwinsDeleteOptionalParams)'
     uid: '@azure/digital-twins-core.DigitalTwinsClient.deleteDigitalTwin'
     package: '@azure/digital-twins-core'
     summary: Delete a digital twin
@@ -101,22 +99,19 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function deleteDigitalTwin(digitalTwinId: string, etag?: string,
-        options?: OperationOptions)
+        function deleteDigitalTwin(digitalTwinId: string, options?:
+        DigitalTwinsDeleteOptionalParams)
       parameters:
         - id: digitalTwinId
           type: string
           description: The Id of the digital twin to delete.
-        - id: etag
-          type: string
-          description: >-
-            Only perform the operation if the entity's etag matches one of the
-            etags provided or * is
-
-            provided
         - id: options
-          type: OperationOptions
-          description: The operation options
+          type: >-
+            <xref
+            uid="@azure/digital-twins-core.DigitalTwinsDeleteOptionalParams" />
+          description: |-
+            Extended operation options including
+              ifMatch: Only perform the operation if the entity's etag matches one of the etags provided or * is provided.
       return:
         type: Promise&lt;RestResponse&gt;
         description: The http response.
@@ -134,7 +129,7 @@ methods:
       parameters:
         - id: eventRouteId
           type: string
-          description: The Id of the model to delete.
+          description: The Id of the eventRoute to delete.
         - id: options
           type: OperationOptions
           description: The operation options
@@ -160,7 +155,9 @@ methods:
       return:
         type: Promise&lt;RestResponse&gt;
         description: The http response.
-  - name: 'deleteRelationship(string, string, string, OperationOptions)'
+  - name: >-
+      deleteRelationship(string, string,
+      DigitalTwinsDeleteRelationshipOptionalParams)
     uid: '@azure/digital-twins-core.DigitalTwinsClient.deleteRelationship'
     package: '@azure/digital-twins-core'
     summary: Delete a relationship on a digital twin.
@@ -170,7 +167,7 @@ methods:
     syntax:
       content: >-
         function deleteRelationship(digitalTwinId: string, relationshipId:
-        string, etag?: string, options?: OperationOptions)
+        string, options?: DigitalTwinsDeleteRelationshipOptionalParams)
       parameters:
         - id: digitalTwinId
           type: string
@@ -178,14 +175,14 @@ methods:
         - id: relationshipId
           type: string
           description: The Id of the relationship to delete.
-        - id: etag
-          type: string
-          description: >-
-            Only perform the operation if the entity's etag matches one of the
-            etags provided or * is
         - id: options
-          type: OperationOptions
-          description: The operation options
+          type: >-
+            <xref
+            uid="@azure/digital-twins-core.DigitalTwinsDeleteRelationshipOptionalParams"
+            />
+          description: |-
+            The operation options
+              ifMatch: Only perform the operation if the entity's etag matches one of the etags provided or * is
       return:
         type: Promise&lt;RestResponse&gt;
         description: The http response.
@@ -279,12 +276,12 @@ methods:
           description: The Id of the model.
         - id: includeModelDefinition
           type: boolean
-          description: >-
-            When true the model definition will be returned as part of the
-            result. Default value: false.
+          description: ''
         - id: options
           type: OperationOptions
-          description: The operation options
+          description: |-
+            Extended operation options including
+             includeModelDefinition: When true the model definition will be returned as part of the result. Default value: false.
       return:
         type: >-
           Promise&lt;<xref
@@ -320,7 +317,7 @@ methods:
         description: >-
           The pageable list of application/json relationships belonging to the
           specified digital twin and the http response.
-  - name: 'listEventRoutes(number, OperationOptions)'
+  - name: 'listEventRoutes(number, OperationOptions & PageSettings)'
     uid: '@azure/digital-twins-core.DigitalTwinsClient.listEventRoutes'
     package: '@azure/digital-twins-core'
     summary: List the event routes in a digital twins instance.
@@ -330,7 +327,7 @@ methods:
     syntax:
       content: >-
         function listEventRoutes(resultsPerPage?: number, options?:
-        OperationOptions)
+        OperationOptions & PageSettings)
       parameters:
         - id: resultsPerPage
           type: number
@@ -340,7 +337,7 @@ methods:
 
             the requested max.
         - id: options
-          type: OperationOptions
+          type: OperationOptions & PageSettings
           description: ''
       return:
         type: >-
@@ -348,7 +345,7 @@ methods:
           uid="@azure/digital-twins-core.EventRoute" />, <xref
           uid="@azure/digital-twins-core.EventRoutesListNextResponse" />&gt;
         description: The application/json event route and the http response.
-  - name: 'listIncomingRelationships(string, OperationOptions)'
+  - name: 'listIncomingRelationships(string, OperationOptions & PageSettings)'
     uid: '@azure/digital-twins-core.DigitalTwinsClient.listIncomingRelationships'
     package: '@azure/digital-twins-core'
     summary: Retrieve all incoming relationships for a digital twin.
@@ -358,14 +355,14 @@ methods:
     syntax:
       content: >-
         function listIncomingRelationships(digitalTwinId: string, options?:
-        OperationOptions)
+        OperationOptions & PageSettings)
       parameters:
         - id: digitalTwinId
           type: string
           description: |
             The Id of the digital twin.
         - id: options
-          type: OperationOptions
+          type: OperationOptions & PageSettings
           description: ''
       return:
         type: >-
@@ -374,7 +371,7 @@ methods:
           uid="@azure/digital-twins-core.DigitalTwinsListIncomingRelationshipsResponse"
           />&gt;
         description: ''
-  - name: 'listModels(string[], boolean, number, OperationOptions)'
+  - name: 'listModels(string[], boolean, number, OperationOptions & PageSettings)'
     uid: '@azure/digital-twins-core.DigitalTwinsClient.listModels'
     package: '@azure/digital-twins-core'
     summary: Get the list of models
@@ -384,7 +381,8 @@ methods:
     syntax:
       content: >-
         function listModels(dependeciesFor?: string[], includeModelDefinition?:
-        boolean, resultsPerPage?: number, options?: OperationOptions)
+        boolean, resultsPerPage?: number, options?: OperationOptions &
+        PageSettings)
       parameters:
         - id: dependeciesFor
           type: 'string[]'
@@ -402,7 +400,7 @@ methods:
             The maximum number of items to retrieve per request. The server may
             choose to return less than the requested max.
         - id: options
-          type: OperationOptions
+          type: OperationOptions & PageSettings
           description: ''
       return:
         type: >-
@@ -449,7 +447,7 @@ methods:
     syntax:
       content: >-
         function publishComponentTelemetry(digitalTwinId: string, componentName:
-        string, payload: string, messageId?: string, options?: OperationOptions)
+        string, payload: string, messageId: string, options?: OperationOptions)
       parameters:
         - id: digitalTwinId
           type: string
@@ -498,7 +496,7 @@ methods:
       return:
         type: Promise&lt;RestResponse&gt;
         description: The http response.
-  - name: 'queryTwins(string, number, OperationOptions)'
+  - name: 'queryTwins(string, number, OperationOptions & PageSettings)'
     uid: '@azure/digital-twins-core.DigitalTwinsClient.queryTwins'
     package: '@azure/digital-twins-core'
     summary: Query for digital twins.
@@ -508,7 +506,7 @@ methods:
     syntax:
       content: >-
         function queryTwins(query: string, resultsPerPage?: number, options?:
-        OperationOptions)
+        OperationOptions & PageSettings)
       parameters:
         - id: query
           type: string
@@ -519,14 +517,16 @@ methods:
             The maximum number of items to retrieve per request. The server may
             choose to return less than the requested max.
         - id: options
-          type: OperationOptions
+          type: OperationOptions & PageSettings
           description: ''
       return:
         type: >-
           PagedAsyncIterableIterator&lt;any, <xref
           uid="@azure/digital-twins-core.QueryQueryTwinsResponse" />&gt;
         description: The pageable list of query results.
-  - name: 'updateComponent(string, string, any[], string, OperationOptions)'
+  - name: >-
+      updateComponent(string, string, any[],
+      DigitalTwinsUpdateComponentOptionalParams)
     uid: '@azure/digital-twins-core.DigitalTwinsClient.updateComponent'
     package: '@azure/digital-twins-core'
     summary: Update properties of a component on a digital twin using a JSON patch.
@@ -536,7 +536,7 @@ methods:
     syntax:
       content: >-
         function updateComponent(digitalTwinId: string, componentName: string,
-        jsonPatch: any[], etag?: string, options?: OperationOptions)
+        jsonPatch: any[], options?: DigitalTwinsUpdateComponentOptionalParams)
       parameters:
         - id: digitalTwinId
           type: string
@@ -549,22 +549,21 @@ methods:
           description: >-
             The application/json-patch+json operations to be performed on the
             specified digital twin's component.
-        - id: etag
-          type: string
-          description: >-
-            The etag of the component to update. Only perform the operation if
-            the entity's etag matches one of the etags provided or * is
-            provided.
         - id: options
-          type: OperationOptions
-          description: The operation options
+          type: >-
+            <xref
+            uid="@azure/digital-twins-core.DigitalTwinsUpdateComponentOptionalParams"
+            />
+          description: |-
+            Extended operation options including
+              ifMatch: Only perform the operation if the entity's etag matches one of the etags provided or * is provided.
       return:
         type: >-
           Promise&lt;<xref
           uid="@azure/digital-twins-core.DigitalTwinsUpdateComponentResponse"
           />&gt;
         description: The http response.
-  - name: 'updateDigitalTwin(string, any, string, OperationOptions)'
+  - name: 'updateDigitalTwin(string, any, DigitalTwinsUpdateOptionalParams)'
     uid: '@azure/digital-twins-core.DigitalTwinsClient.updateDigitalTwin'
     package: '@azure/digital-twins-core'
     summary: Update a digital twin using a json patch.
@@ -573,8 +572,8 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function updateDigitalTwin(digitalTwinId: string, jsonPatch: any, etag?:
-        string, options?: OperationOptions)
+        function updateDigitalTwin(digitalTwinId: string, jsonPatch: any,
+        options?: DigitalTwinsUpdateOptionalParams)
       parameters:
         - id: digitalTwinId
           type: string
@@ -589,22 +588,21 @@ methods:
             limited to add, replace and
 
             remove.
-        - id: etag
-          type: string
-          description: >-
-            Only perform the operation if the entity's etag matches one of the
-            etags provided or * is
-
-            provided
         - id: options
-          type: OperationOptions
-          description: The operation options
+          type: >-
+            <xref
+            uid="@azure/digital-twins-core.DigitalTwinsUpdateOptionalParams" />
+          description: |-
+            Extended operation options including
+              ifMatch: Only perform the operation if the entity's etag matches one of the etags provided or * is provided.
       return:
         type: >-
           Promise&lt;<xref
           uid="@azure/digital-twins-core.DigitalTwinsUpdateResponse" />&gt;
         description: The http response.
-  - name: 'updateRelationship(string, string, any[], string, OperationOptions)'
+  - name: >-
+      updateRelationship(string, string, any[],
+      DigitalTwinsUpdateRelationshipOptionalParams)
     uid: '@azure/digital-twins-core.DigitalTwinsClient.updateRelationship'
     package: '@azure/digital-twins-core'
     summary: >-
@@ -616,7 +614,8 @@ methods:
     syntax:
       content: >-
         function updateRelationship(digitalTwinId: string, relationshipId:
-        string, jsonPatch: any[], etag?: string, options?: OperationOptions)
+        string, jsonPatch: any[], options?:
+        DigitalTwinsUpdateRelationshipOptionalParams)
       parameters:
         - id: digitalTwinId
           type: string
@@ -629,23 +628,21 @@ methods:
           description: >-
             The application/json-patch+json operations to be performed on the
             specified digital twin's relationship.
-        - id: etag
-          type: string
-          description: >-
-            Only perform the operation if the entity's etag matches one of the
-            etags provided or * is
         - id: options
-          type: OperationOptions
+          type: >-
+            <xref
+            uid="@azure/digital-twins-core.DigitalTwinsUpdateRelationshipOptionalParams"
+            />
           description: |
-            The operation options
-            provided
+            Extended operation options
+              ifMatch: Only perform the operation if the entity's etag matches one of the etags provided or * is provided.
       return:
         type: >-
           Promise&lt;<xref
           uid="@azure/digital-twins-core.DigitalTwinsUpdateRelationshipResponse"
           />&gt;
         description: ''
-  - name: 'upsertDigitalTwin(string, string, OperationOptions)'
+  - name: 'upsertDigitalTwin(string, string, DigitalTwinsAddOptionalParams)'
     uid: '@azure/digital-twins-core.DigitalTwinsClient.upsertDigitalTwin'
     package: '@azure/digital-twins-core'
     summary: Create or update a digital twin
@@ -655,7 +652,7 @@ methods:
     syntax:
       content: >-
         function upsertDigitalTwin(digitalTwinId: string, digitalTwinJson:
-        string, options?: OperationOptions)
+        string, options?: DigitalTwinsAddOptionalParams)
       parameters:
         - id: digitalTwinId
           type: string
@@ -664,8 +661,12 @@ methods:
           type: string
           description: The application/json digital twin to create.
         - id: options
-          type: OperationOptions
-          description: The operation options
+          type: >-
+            <xref uid="@azure/digital-twins-core.DigitalTwinsAddOptionalParams"
+            />
+          description: |-
+            Extended operation options including
+             ifNoneMatch: Only perform the operation if the entity does not already exist.
       return:
         type: >-
           Promise&lt;<xref
@@ -700,7 +701,9 @@ methods:
       return:
         type: Promise&lt;RestResponse&gt;
         description: The http response.
-  - name: 'upsertRelationship(string, string, any, OperationOptions)'
+  - name: >-
+      upsertRelationship(string, string, any,
+      DigitalTwinsAddRelationshipOptionalParams)
     uid: '@azure/digital-twins-core.DigitalTwinsClient.upsertRelationship'
     package: '@azure/digital-twins-core'
     summary: Create or update a relationship on a digital twin.
@@ -710,7 +713,8 @@ methods:
     syntax:
       content: >-
         function upsertRelationship(digitalTwinId: string, relationshipId:
-        string, relationship: any, options?: OperationOptions)
+        string, relationship: any, options?:
+        DigitalTwinsAddRelationshipOptionalParams)
       parameters:
         - id: digitalTwinId
           type: string
@@ -722,9 +726,13 @@ methods:
           type: any
           description: ''
         - id: options
-          type: OperationOptions
+          type: >-
+            <xref
+            uid="@azure/digital-twins-core.DigitalTwinsAddRelationshipOptionalParams"
+            />
           description: |
-            The operation options
+            Extended operation options including
+             ifNoneMatch: Only perform the operation if the entity does not already exist.
       return:
         type: >-
           Promise&lt;<xref

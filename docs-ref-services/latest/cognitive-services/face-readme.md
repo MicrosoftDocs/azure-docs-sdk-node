@@ -1,13 +1,13 @@
 ---
 title: Face API 
+description: The Azure Face service client library for Node.js
 author: PatrickFarley
 ms.author: pafarley
 ms.date: 06/21/2021
 ms.topic: article
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: face-api
+ms.service: cognitiveservices
 ---
 
 # Azure Face API
@@ -42,4 +42,4 @@ Your app's `package.json` file will be updated with the dependencies.
 
 ## Next Steps
 
-Go to the Face service [Overview](https://docs.microsoft.com/azure/cognitive-services/face/overview) or follow a [quickstart](https://docs.microsoft.com/azure/cognitive-services/face/quickstarts/client-libraries) to get started.
+Go to the Face service [Overview](/azure/cognitive-services/face/overview) or follow a [quickstart](/azure/cognitive-services/face/quickstarts/client-libraries) to get started.

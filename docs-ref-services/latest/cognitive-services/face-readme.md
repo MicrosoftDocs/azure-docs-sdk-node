@@ -6,7 +6,7 @@ ms.author: pafarley
 ms.date: 06/21/2021
 ms.topic: article
 ms.prod: azure
-ms.technology: azure
+ms.technology:
 ms.devlang: javascript
 ms.service: 
 ---

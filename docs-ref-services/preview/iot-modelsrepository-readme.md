@@ -1,26 +1,27 @@
 ---
 title: Azure IoT Models Repository client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/iot-modelsrepository, 
+keywords: Azure, javascript, SDK, API, @azure/iot-modelsrepository, iot
 author: maggiepint
 ms.author: magpint
-ms.date: 05/28/2021
+ms.date: 07/08/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: iot
 ---
 
-# Azure IoT Models Repository client library for JavaScript - Version 1.0.0-beta.2 
+# Azure IoT Models Repository client library for JavaScript - Version dev 
 
 
 This package contains an isomorphic Client Library for Azure IoT Models Repository in JavaScript. Use the Azure IoT Models Repository library for JavaScript to pull DTDL files from remote endpoints.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/iot-modelsrepository_1.0.0-beta.2/sdk/iot/iot-modelsrepository) |
-[Package (npm)](https://www.npmjs.com/package/@azure/iot-modelsrepository/) |
-Samples
 
--------------------------------------
+Key links:
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/iot/iot-modelsrepository)
+- [Package (npm)](https://www.npmjs.com/package/@azure/iot-modelsrepository/)
+- Samples
+
 
 # Getting started
 
@@ -30,8 +31,10 @@ The Azure IoT Models Repository library for JavaScript provides functionality fo
 
 ### Currently supported environments
 
-- Node.js version 8.x.x or higher
-- Browser JavaScript
+- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- Latest versions of Safari, Chrome, Edge, and Firefox.
+
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### How to Install
 

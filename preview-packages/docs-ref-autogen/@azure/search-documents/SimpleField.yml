@@ -1,0 +1,335 @@
+### YamlMime:TSType
+name: SimpleField
+uid: '@azure/search-documents.SimpleField'
+package: '@azure/search-documents'
+summary: >-
+  Represents a field in an index definition, which describes the name, data
+  type, and search
+
+  behavior of a field.
+fullName: SimpleField
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+  - name: analyzerName
+    uid: '@azure/search-documents.SimpleField.analyzerName'
+    package: '@azure/search-documents'
+    summary: >-
+      The name of the language analyzer to use for the field. This option can be
+      used only with
+
+      searchable fields and it can't be set together with either searchAnalyzer
+      or indexAnalyzer.
+
+      Once the analyzer is chosen, it cannot be changed for the field.
+
+      KnownAnalyzerNames is an enum containing known values.
+    fullName: analyzerName
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'analyzerName?: LexicalAnalyzerName'
+      return:
+        type: <xref uid="@azure/search-documents.LexicalAnalyzerName" />
+        description: ''
+  - name: facetable
+    uid: '@azure/search-documents.SimpleField.facetable'
+    package: '@azure/search-documents'
+    summary: >-
+      A value indicating whether to enable the field to be referenced in facet
+      queries. Typically
+
+      used in a presentation of search results that includes hit count by
+      category (for example,
+
+      search for digital cameras and see hits by brand, by megapixels, by price,
+      and so on).
+
+      Fields of type Edm.GeographyPoint or Collection(Edm.GeographyPoint) cannot
+      be facetable.
+
+      Default is false for all other simple fields.
+    fullName: facetable
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'facetable?: boolean'
+      return:
+        type: boolean
+        description: ''
+  - name: filterable
+    uid: '@azure/search-documents.SimpleField.filterable'
+    package: '@azure/search-documents'
+    summary: >-
+      A value indicating whether to enable the field to be referenced in $filter
+      queries. Filterable
+
+      differs from searchable in how strings are handled. Fields of type
+      Edm.String or
+
+      Collection(Edm.String) that are filterable do not undergo word-breaking,
+      so comparisons are
+
+      for exact matches only. For example, if you set such a field f to "sunny
+      day", $filter=f eq
+
+      'sunny' will find no matches, but $filter=f eq 'sunny day' will.
+
+      Default is false.
+    fullName: filterable
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'filterable?: boolean'
+      return:
+        type: boolean
+        description: ''
+  - name: hidden
+    uid: '@azure/search-documents.SimpleField.hidden'
+    package: '@azure/search-documents'
+    summary: >-
+      A value indicating whether the field can be returned in a search result.
+      You can enable this
+
+      option if you want to use a field (for example, margin) as a filter,
+      sorting, or scoring
+
+      mechanism but do not want the field to be visible to the end user. This
+      property must be false
+
+      for key fields. This property can be changed on existing fields.
+
+      Disabling this property does not cause any increase in index storage
+      requirements.
+
+      Default is false.
+    fullName: hidden
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'hidden?: boolean'
+      return:
+        type: boolean
+        description: ''
+  - name: indexAnalyzerName
+    uid: '@azure/search-documents.SimpleField.indexAnalyzerName'
+    package: '@azure/search-documents'
+    summary: >-
+      The name of the analyzer used at indexing time for the field. This option
+      can be used only
+
+      with searchable fields. It must be set together with searchAnalyzer and it
+      cannot be set
+
+      together with the analyzer option. Once the analyzer is chosen, it cannot
+      be changed for the
+
+      field. KnownAnalyzerNames is an enum containing known values.
+    fullName: indexAnalyzerName
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'indexAnalyzerName?: LexicalAnalyzerName'
+      return:
+        type: <xref uid="@azure/search-documents.LexicalAnalyzerName" />
+        description: ''
+  - name: key
+    uid: '@azure/search-documents.SimpleField.key'
+    package: '@azure/search-documents'
+    summary: >-
+      A value indicating whether the field uniquely identifies documents in the
+      index. Exactly one
+
+      top-level field in each index must be chosen as the key field and it must
+      be of type
+
+      Edm.String. Key fields can be used to look up documents directly and
+      update or delete specific
+
+      documents. Default is false.
+    fullName: key
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'key?: boolean'
+      return:
+        type: boolean
+        description: ''
+  - name: name
+    uid: '@azure/search-documents.SimpleField.name'
+    package: '@azure/search-documents'
+    summary: >-
+      The name of the field, which must be unique within the fields collection
+      of the index or
+
+      parent field.
+    fullName: name
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'name: string'
+      return:
+        type: string
+        description: ''
+  - name: normalizerName
+    uid: '@azure/search-documents.SimpleField.normalizerName'
+    package: '@azure/search-documents'
+    summary: The name of the normalizer used at indexing time for the field.
+    fullName: normalizerName
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'normalizerName?: LexicalNormalizerName'
+      return:
+        type: <xref uid="@azure/search-documents.LexicalNormalizerName" />
+        description: ''
+  - name: searchable
+    uid: '@azure/search-documents.SimpleField.searchable'
+    package: '@azure/search-documents'
+    summary: >-
+      A value indicating whether the field is full-text searchable. This means
+      it will undergo
+
+      analysis such as word-breaking during indexing. If you set a searchable
+      field to a value like
+
+      "sunny day", internally it will be split into the individual tokens
+      "sunny" and "day". This
+
+      enables full-text searches for these terms. This property must be false
+      for simple
+
+      fields of other non-string data types.
+
+      Note: searchable fields consume extra space in your index since Azure
+      Cognitive Search will store an
+
+      additional tokenized version of the field value for full-text searches.
+
+      Defaults to false for simple fields.
+    fullName: searchable
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'searchable?: boolean'
+      return:
+        type: boolean
+        description: ''
+  - name: searchAnalyzerName
+    uid: '@azure/search-documents.SimpleField.searchAnalyzerName'
+    package: '@azure/search-documents'
+    summary: >-
+      The name of the analyzer used at search time for the field. This option
+      can be used only with
+
+      searchable fields. It must be set together with indexAnalyzer and it
+      cannot be set together
+
+      with the analyzer option. This analyzer can be updated on an existing
+      field.
+
+      KnownAnalyzerNames is an enum containing known values.
+    fullName: searchAnalyzerName
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'searchAnalyzerName?: LexicalAnalyzerName'
+      return:
+        type: <xref uid="@azure/search-documents.LexicalAnalyzerName" />
+        description: ''
+  - name: sortable
+    uid: '@azure/search-documents.SimpleField.sortable'
+    package: '@azure/search-documents'
+    summary: >-
+      A value indicating whether to enable the field to be referenced in
+      $orderby expressions. By
+
+      default Azure Cognitive Search sorts results by score, but in many
+      experiences users will want
+
+      to sort by fields in the documents. A simple field can be sortable only if
+      it is single-valued
+
+      (it has a single value in the scope of the parent document). Simple
+      collection fields cannot
+
+      be sortable, since they are multi-valued. Simple sub-fields of complex
+      collections are also
+
+      multi-valued, and therefore cannot be sortable. This is true whether it's
+      an immediate parent
+
+      field, or an ancestor field, that's the complex collection. The default
+      for sortable is false.
+    fullName: sortable
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'sortable?: boolean'
+      return:
+        type: boolean
+        description: ''
+  - name: synonymMapNames
+    uid: '@azure/search-documents.SimpleField.synonymMapNames'
+    package: '@azure/search-documents'
+    summary: >-
+      A list of the names of synonym maps to associate with this field. This
+      option can be used only
+
+      with searchable fields. Currently only one synonym map per field is
+      supported. Assigning a
+
+      synonym map to a field ensures that query terms targeting that field are
+      expanded at
+
+      query-time using the rules in the synonym map. This attribute can be
+      changed on existing
+
+      fields.
+    fullName: synonymMapNames
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'synonymMapNames?: string[]'
+      return:
+        type: 'string[]'
+        description: ''
+  - name: type
+    uid: '@azure/search-documents.SimpleField.type'
+    package: '@azure/search-documents'
+    summary: >-
+      The data type of the field. Possible values include: 'Edm.String',
+      'Edm.Int32', 'Edm.Int64',
+
+      'Edm.Double', 'Edm.Boolean', 'Edm.DateTimeOffset', 'Edm.GeographyPoint'
+
+      'Collection(Edm.String)', 'Collection(Edm.Int32)',
+      'Collection(Edm.Int64)',
+
+      'Collection(Edm.Double)', 'Collection(Edm.Boolean)',
+      'Collection(Edm.DateTimeOffset)',
+
+      'Collection(Edm.GeographyPoint)'
+    fullName: type
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'type: SearchFieldDataType'
+      return:
+        type: <xref uid="@azure/search-documents.SearchFieldDataType" />
+        description: ''

@@ -1,0 +1,408 @@
+### YamlMime:TSType
+name: KeyVaultAccessControlClient
+uid: '@azure/keyvault-admin.KeyVaultAccessControlClient'
+package: '@azure/keyvault-admin'
+summary: |-
+  The KeyVaultAccessControlClient provides methods to manage
+  access control and role assignments in any given Azure Key Vault instance.
+  The client supports creating, retrieving and deleting roles.
+fullName: KeyVaultAccessControlClient
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+constructors:
+  - name: >-
+      KeyVaultAccessControlClient(string, TokenCredential,
+      AccessControlClientOptions)
+    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.constructor'
+    package: '@azure/keyvault-admin'
+    summary: |-
+      Creates an instance of the KeyVaultAccessControlClient.
+      Example usage:
+      ```ts
+      import { KeyVaultAccessControlClient } from "@azure/keyvault-admin";
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      let vaultUrl = `https://<MY KEY VAULT HERE>.vault.azure.net`;
+      let credentials = new DefaultAzureCredential();
+
+      let client = new KeyVaultAccessControlClient(vaultUrl, credentials);
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        new KeyVaultAccessControlClient(vaultUrl: string, credential:
+        TokenCredential, options?: AccessControlClientOptions)
+      parameters:
+        - id: vaultUrl
+          type: string
+          description: >-
+            the URL of the Key Vault. It should have this shape:
+            `https://${your-key-vault-name}.vault.azure.net`
+        - id: credential
+          type: TokenCredential
+          description: >-
+            An object that implements the `TokenCredential` interface used to
+            authenticate requests to the service. Use the \@azure/identity
+            package to create a credential that suits your needs.
+        - id: options
+          type: <xref uid="@azure/keyvault-admin.AccessControlClientOptions" />
+          description: ''
+properties:
+  - name: vaultUrl
+    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.vaultUrl'
+    package: '@azure/keyvault-admin'
+    summary: The base URL to the vault
+    fullName: vaultUrl
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'vaultUrl: string'
+      return:
+        type: string
+        description: ''
+methods:
+  - name: >-
+      createRoleAssignment(KeyVaultRoleScope, string, string, string,
+      CreateRoleAssignmentOptions)
+    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.createRoleAssignment'
+    package: '@azure/keyvault-admin'
+    summary: >-
+      Creates a role assignment in an Azure Key Vault.
+
+      Example usage:
+
+      ```ts
+
+      const client = new KeyVaultAccessControlClient(url, credentials);
+
+      const roleDefinition = await client.listRoleDefinitions("/").next();
+
+      const principalId = "4871f6a6-374f-4b6b-8b0c-f5d84db823f6";
+
+      const result = await client.createRoleAssignment("/",
+      "295c179b-9ad3-4117-99cd-b1aa66cf4517", roleDefinition, principalId);
+
+      ```
+
+      Creates a new role assignment.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createRoleAssignment(roleScope: KeyVaultRoleScope, name:
+        string, roleDefinitionId: string, principalId: string, options?:
+        CreateRoleAssignmentOptions)
+      parameters:
+        - id: roleScope
+          type: <xref uid="@azure/keyvault-admin.KeyVaultRoleScope" />
+          description: The scope of the role assignment.
+        - id: name
+          type: string
+          description: The name of the role assignment. Must be a UUID.
+        - id: roleDefinitionId
+          type: string
+          description: The role definition ID used in the role assignment.
+        - id: principalId
+          type: string
+          description: >-
+            The principal ID assigned to the role. This maps to the ID inside
+            the Active Directory. It can point to a user, service principal, or
+            security group.
+        - id: options
+          type: <xref uid="@azure/keyvault-admin.CreateRoleAssignmentOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-admin.KeyVaultRoleAssignment"
+          />&gt;
+        description: ''
+  - name: >-
+      deleteRoleAssignment(KeyVaultRoleScope, string,
+      DeleteRoleAssignmentOptions)
+    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.deleteRoleAssignment'
+    package: '@azure/keyvault-admin'
+    summary: >-
+      Deletes role assignments previously created in an Azure Key Vault.
+
+      Example usage:
+
+      ```ts
+
+      const client = new KeyVaultAccessControlClient(url, credentials);
+
+      const roleAssignment = await client.createRoleAssignment("/",
+      "295c179b-9ad3-4117-99cd-b1aa66cf4517");
+
+      await client.deleteRoleAssignment(roleAssignment.properties.roleScope,
+      roleAssignment.name);
+
+      ```
+
+      Deletes an existing role assignment.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteRoleAssignment(roleScope: KeyVaultRoleScope, name:
+        string, options?: DeleteRoleAssignmentOptions)
+      parameters:
+        - id: roleScope
+          type: <xref uid="@azure/keyvault-admin.KeyVaultRoleScope" />
+          description: The scope of the role assignment.
+        - id: name
+          type: string
+          description: The name of the role assignment.
+        - id: options
+          type: <xref uid="@azure/keyvault-admin.DeleteRoleAssignmentOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: >-
+      deleteRoleDefinition(KeyVaultRoleScope, string,
+      DeleteRoleDefinitionOptions)
+    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.deleteRoleDefinition'
+    package: '@azure/keyvault-admin'
+    summary: >-
+      Deletes a custom role definition previously created in an Azure Key Vault.
+
+      Example usage:
+
+      ```ts
+
+      const client = new KeyVaultAccessControlClient(url, credentials);
+
+      const roleDefinition = await client.setRoleDefinition("/",
+      "23b8bb1a-39c0-4c89-a85b-dd3c99273a8a", []);
+
+      await client.deleteRoleDefinition("/", roleDefinition.name);
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteRoleDefinition(roleScope: KeyVaultRoleScope, name:
+        string, options?: DeleteRoleDefinitionOptions)
+      parameters:
+        - id: roleScope
+          type: <xref uid="@azure/keyvault-admin.KeyVaultRoleScope" />
+          description: The scope of the role definition.
+        - id: name
+          type: string
+          description: The name of the role definition to delete.
+        - id: options
+          type: <xref uid="@azure/keyvault-admin.DeleteRoleDefinitionOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: 'getRoleAssignment(KeyVaultRoleScope, string, GetRoleAssignmentOptions)'
+    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.getRoleAssignment'
+    package: '@azure/keyvault-admin'
+    summary: >-
+      Gets a role assignments previously created in an Azure Key Vault.
+
+      Example usage:
+
+      ```ts
+
+      const client = new KeyVaultAccessControlClient(url, credentials);
+
+      let roleAssignment = await client.createRoleAssignment("/",
+      "295c179b-9ad3-4117-99cd-b1aa66cf4517");
+
+      roleAssignment = const await
+      client.getRoleAssignment(roleAssignment.properties.roleScope,
+      roleAssignment.name);
+
+      console.log(roleAssignment);
+
+      ```
+
+      Gets an existing role assignment.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getRoleAssignment(roleScope: KeyVaultRoleScope, name: string,
+        options?: GetRoleAssignmentOptions)
+      parameters:
+        - id: roleScope
+          type: <xref uid="@azure/keyvault-admin.KeyVaultRoleScope" />
+          description: The scope of the role assignment.
+        - id: name
+          type: string
+          description: The name of the role assignment.
+        - id: options
+          type: <xref uid="@azure/keyvault-admin.GetRoleAssignmentOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-admin.KeyVaultRoleAssignment"
+          />&gt;
+        description: ''
+  - name: 'getRoleDefinition(KeyVaultRoleScope, string, GetRoleDefinitionOptions)'
+    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.getRoleDefinition'
+    package: '@azure/keyvault-admin'
+    summary: >-
+      Gets a role definition from Azure Key Vault.
+
+      Example usage:
+
+      ```
+
+      const client = new KeyVaultAccessControlClient(url, credentials);
+
+      const roleDefinition = await client.getRoleDefinition("/",
+      "b86a8fe4-44ce-4948-aee5-eccb2c155cd7");
+
+      console.log(roleDefinition);
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getRoleDefinition(roleScope: KeyVaultRoleScope, name: string,
+        options?: GetRoleDefinitionOptions)
+      parameters:
+        - id: roleScope
+          type: <xref uid="@azure/keyvault-admin.KeyVaultRoleScope" />
+          description: The scope of the role definition.
+        - id: name
+          type: string
+          description: The name of the role definition.
+        - id: options
+          type: <xref uid="@azure/keyvault-admin.GetRoleDefinitionOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-admin.KeyVaultRoleDefinition"
+          />&gt;
+        description: ''
+  - name: 'listRoleAssignments(KeyVaultRoleScope, ListRoleAssignmentsOptions)'
+    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.listRoleAssignments'
+    package: '@azure/keyvault-admin'
+    summary: |-
+      Iterates over all of the available role assignments in an Azure Key Vault.
+      Example usage:
+      ```ts
+      let client = new KeyVaultAccessControlClient(url, credentials);
+      for await (const roleAssignment of client.listRoleAssignments("/")) {
+        console.log("Role assignment: ", roleAssignment);
+      }
+      ```
+      Lists all of the role assignments in a given scope.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listRoleAssignments(roleScope: KeyVaultRoleScope, options?:
+        ListRoleAssignmentsOptions)
+      parameters:
+        - id: roleScope
+          type: <xref uid="@azure/keyvault-admin.KeyVaultRoleScope" />
+          description: The scope of the role assignments.
+        - id: options
+          type: <xref uid="@azure/keyvault-admin.ListRoleAssignmentsOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/keyvault-admin.KeyVaultRoleAssignment" />&gt;
+        description: ''
+  - name: 'listRoleDefinitions(KeyVaultRoleScope, ListRoleDefinitionsOptions)'
+    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.listRoleDefinitions'
+    package: '@azure/keyvault-admin'
+    summary: |-
+      Iterates over all of the available role definitions in an Azure Key Vault.
+      Example usage:
+      ```ts
+      let client = new KeyVaultAccessControlClient(url, credentials);
+      for await (const roleDefinitions of client.listRoleDefinitions("/")) {
+        console.log("Role definition: ", roleDefinitions);
+      }
+      ```
+      Lists all of the role definition in a given scope.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listRoleDefinitions(roleScope: KeyVaultRoleScope, options?:
+        ListRoleDefinitionsOptions)
+      parameters:
+        - id: roleScope
+          type: <xref uid="@azure/keyvault-admin.KeyVaultRoleScope" />
+          description: The scope of the role definition.
+        - id: options
+          type: <xref uid="@azure/keyvault-admin.ListRoleDefinitionsOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/keyvault-admin.KeyVaultRoleDefinition" />&gt;
+        description: ''
+  - name: 'setRoleDefinition(KeyVaultRoleScope, SetRoleDefinitionOptions)'
+    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.setRoleDefinition'
+    package: '@azure/keyvault-admin'
+    summary: >-
+      Creates or updates a role definition in an Azure Key Vault.
+
+      Example usage:
+
+      ```ts
+
+      const client = new KeyVaultAccessControlClient(url, credentials);
+
+      const permissions = [{ dataActions:
+      [KnownKeyVaultDataAction.BackupHsmKeys] }];
+
+      const roleDefinitionName = "23b8bb1a-39c0-4c89-a85b-dd3c99273a8a";
+
+      const roleDefinition = await
+      client.setRoleDefinition(KnownKeyVaultRoleScope.Global, { permissions,
+      roleDefinitionName });
+
+      console.log(roleDefinition);
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setRoleDefinition(roleScope: KeyVaultRoleScope, options?:
+        SetRoleDefinitionOptions)
+      parameters:
+        - id: roleScope
+          type: <xref uid="@azure/keyvault-admin.KeyVaultRoleScope" />
+          description: The scope of the role definition.
+        - id: options
+          type: <xref uid="@azure/keyvault-admin.SetRoleDefinitionOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/keyvault-admin.KeyVaultRoleDefinition"
+          />&gt;
+        description: ''

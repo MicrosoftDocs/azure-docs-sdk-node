@@ -1,17 +1,17 @@
 ---
 title: Azure Quantum Jobs client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/quantum-jobs, 
+keywords: Azure, javascript, SDK, API, @azure/quantum-jobs, quantum
 author: maggiepint
 ms.author: magpint
-ms.date: 02/05/2021
+ms.date: 07/09/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: quantum
 ---
 
-## Azure Quantum Jobs client library for JavaScript - Version 1.0.0-beta.1 
+## Azure Quantum Jobs client library for JavaScript - Version dev 
 
 
 This package contains an isomorphic SDK for QuantumJobClient.
@@ -21,7 +21,11 @@ Azure Quantum is a Microsoft Azure service that you can use to run quantum compu
 - Create, enumerate, and cancel quantum jobs
 - Enumerate provider status and quotas
 
-  [Source code][source] | [API reference documentation](https://docs.microsoft.com/qsharp/api/) | [Product documentation](https://docs.microsoft.com/azure/quantum/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/quantum-jobs_1.0.0-beta.1/sdk/quantum/quantum-jobs/samples)
+Key links:
+- [Source code][source]
+- [API reference documentation](https://docs.microsoft.com/qsharp/api/)
+- [Product documentation](https://docs.microsoft.com/azure/quantum/)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/quantum/quantum-jobs/samples)
 
 ## Getting started
 
@@ -37,15 +41,15 @@ npm install @azure/quantum-jobs
 
 ### Prerequisites
 
-- Node.js version 8.x.x or higher
+- [LTS versions of Node.js](https://nodejs.org/about/releases/)
 - [Azure subscription](https://azure.microsoft.com/free/)
 - [Azure Quantum Workspace][workspaces]
 
 ### Authenticate the client
 
-To authenticate with the service, you can use [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure/quantum-jobs_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential) from the `@azure/identity` library. This will try different authentication mechanisms based on the environment (e.g. Environment Variables, ManagedIdentity, CachedTokens) and finally, it will fallback to InteractiveBrowserCredential.
+To authenticate with the service, you can use [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential) from the `@azure/identity` library. This will try different authentication mechanisms based on the environment (e.g. Environment Variables, ManagedIdentity, CachedTokens) and finally, it will fallback to InteractiveBrowserCredential.
 
-The client also allows the user to override the above behavior by passing their own implementations of the [TokenCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/quantum-jobs_1.0.0-beta.1/sdk/core/core-auth/src/tokenCredential.ts).
+The client also allows the user to override the above behavior by passing their own implementations of the [TokenCredential](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/core/core-auth/src/tokenCredential.ts).
 
 `TokenCredential` is the default Authentication mechanism used by Azure SDKs.
 
@@ -209,12 +213,12 @@ All Quantum Jobs service operations will throw a RequestFailedException on failu
 
 <!-- LINKS -->
 
-[source]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/quantum-jobs_1.0.0-beta.1/sdk/quantum/quantum-jobs/src
+[source]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/quantum/quantum-jobs/src
 [resource-groups]: https://docs.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal
 [workspaces]: https://docs.microsoft.com/azure/quantum/how-to-create-quantum-workspaces-with-the-azure-portal
 [location]: https://azure.microsoft.com/global-infrastructure/services/?products=quantum
 [blob-storage]: https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction
-[contributing]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/quantum-jobs_1.0.0-beta.1/CONTRIBUTING.md
+[contributing]: https://github.com/Azure/azure-sdk-for-js/tree/main/CONTRIBUTING.md
 [subscriptions]: https://ms.portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade
 [credentials]: https://docs.microsoft.com/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credentials
 [style-guide-msft]: https://docs.microsoft.com/style-guide/capitalization

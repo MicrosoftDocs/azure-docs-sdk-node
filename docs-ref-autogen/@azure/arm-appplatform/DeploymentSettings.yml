@@ -13,10 +13,13 @@ properties:
     uid: '@azure/arm-appplatform.DeploymentSettings.cpu'
     package: '@azure/arm-appplatform'
     summary: >-
-      Required CPU, basic tier should be 1, standard tier should be in range (1,
-      4). Default value:
+      Required CPU. This should be 1 for Basic tier, and in range [1, 4] for
+      Standard tier. This is
 
-      1.
+      deprecated starting from API version 2021-06-01-preview. Please use the
+      resourceRequests field
+
+      to set the CPU size. Default value: 1.
     fullName: cpu
     remarks: ''
     isPreview: false
@@ -56,10 +59,13 @@ properties:
     uid: '@azure/arm-appplatform.DeploymentSettings.memoryInGB'
     package: '@azure/arm-appplatform'
     summary: >-
-      Required Memory size in GB, basic tier should be in range (1, 2), standard
-      tier should be in
+      Required Memory size in GB. This should be in range [1, 2] for Basic tier,
+      and in range [1, 8]
 
-      range (1, 8). Default value: 1.
+      for Standard tier. This is deprecated starting from API version
+      2021-06-01-preview. Please use
+
+      the resourceRequests field to set the the memory size. Default value: 1.
     fullName: memoryInGB
     remarks: ''
     isPreview: false
@@ -81,6 +87,26 @@ properties:
       content: 'netCoreMainEntryPath?: undefined | string'
       return:
         type: undefined | string
+        description: ''
+  - name: resourceRequests
+    uid: '@azure/arm-appplatform.DeploymentSettings.resourceRequests'
+    package: '@azure/arm-appplatform'
+    summary: >-
+      The requested resource quantity for required CPU and Memory. It is
+      recommended that using this
+
+      field to represent the required CPU and Memory, the old field cpu and
+      memoryInGB will be
+
+      deprecated later.
+    fullName: resourceRequests
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'resourceRequests?: ResourceRequests'
+      return:
+        type: <xref uid="@azure/arm-appplatform.ResourceRequests" />
         description: ''
   - name: runtimeVersion
     uid: '@azure/arm-appplatform.DeploymentSettings.runtimeVersion'

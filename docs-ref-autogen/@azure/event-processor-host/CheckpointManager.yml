@@ -1,0 +1,161 @@
+### YamlMime:TSType
+name: CheckpointManager
+uid: '@azure/event-processor-host.CheckpointManager'
+package: '@azure/event-processor-host'
+summary: ''
+fullName: CheckpointManager
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: interface
+methods:
+  - name: checkpointStoreExists()
+    uid: '@azure/event-processor-host.CheckpointManager.checkpointStoreExists'
+    package: '@azure/event-processor-host'
+    summary: Does the checkpoint store exist?
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function checkpointStoreExists()
+      return:
+        type: Promise&lt;boolean&gt;
+        description: 'Promise<boolean> `true` if it exists, `false` if it does not exist.'
+  - name: 'createAllCheckpointsIfNotExists(string[])'
+    uid: >-
+      @azure/event-processor-host.CheckpointManager.createAllCheckpointsIfNotExists
+    package: '@azure/event-processor-host'
+    summary: >
+      Creates the checkpoint HOLDERs for the given partitions. Does nothing for
+      any checkpoint
+
+      HOLDERs that already exist.
+
+      The semantics of this are complicated because it is possible to use the
+      same store for both
+
+      leases and checkpoints (the Azure Storage implementation does so) and it
+      is required to
+
+      have a lease for every partition but it is not required to have a
+      checkpoint for a partition.
+
+      It is a valid scenario to never use checkpoints at all, so it is important
+      for the store to
+
+      distinguish between creating the structure(s) that will hold a checkpoint
+      and actually creating
+
+      a checkpoint (storing an offset/sequence number pair in the structure).
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function createAllCheckpointsIfNotExists(partitionIds: string[])'
+      parameters:
+        - id: partitionIds
+          type: 'string[]'
+          description: List of partitions to create checkpoint HOLDERs for.
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+  - name: createCheckpointStoreIfNotExists()
+    uid: >-
+      @azure/event-processor-host.CheckpointManager.createCheckpointStoreIfNotExists
+    package: '@azure/event-processor-host'
+    summary: >-
+      Create the checkpoint store if it doesn't exist. Does nothing if it
+      exists.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function createCheckpointStoreIfNotExists()
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+  - name: deleteCheckpoint(string)
+    uid: '@azure/event-processor-host.CheckpointManager.deleteCheckpoint'
+    package: '@azure/event-processor-host'
+    summary: >-
+      Delete the stored checkpoint for the given partition. If there is no
+      stored checkpoint for the
+
+      given partition, that is treated as success. Deleting the checkpoint
+      HOLDER is allowed
+
+      but not required; your implementation is free to do whichever is more
+      convenient.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function deleteCheckpoint(partitionId: string)'
+      parameters:
+        - id: partitionId
+          type: string
+          description: The partitionId to delete the checkpoint from the store.
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+  - name: deleteCheckpointStore()
+    uid: '@azure/event-processor-host.CheckpointManager.deleteCheckpointStore'
+    package: '@azure/event-processor-host'
+    summary: Deletes the checkpoint store.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function deleteCheckpointStore()
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+  - name: getCheckpoint(string)
+    uid: '@azure/event-processor-host.CheckpointManager.getCheckpoint'
+    package: '@azure/event-processor-host'
+    summary: >-
+      Gets the checkpoint info associated with the given partition. Could return
+      undefined if no
+
+      checkpoint has been created for that partition.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getCheckpoint(partitionId: string)'
+      parameters:
+        - id: partitionId
+          type: string
+          description: The partitionId to get the checkpoint info for.
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/event-processor-host.CheckpointInfo" /> |
+          undefined&gt;
+        description: >-
+          Promise<CheckpointInfo | undefined> Checkpoint
+
+          info for the given partition, or undefined if none has been previously
+          stored.
+  - name: 'updateCheckpoint(CompleteLease, CheckpointInfo)'
+    uid: '@azure/event-processor-host.CheckpointManager.updateCheckpoint'
+    package: '@azure/event-processor-host'
+    summary: >-
+      Update the checkpoint in the store with the offset/sequenceNumber in the
+      provided checkpoint.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateCheckpoint(lease: CompleteLease, checkpoint:
+        CheckpointInfo)
+      parameters:
+        - id: lease
+          type: <xref uid="@azure/event-processor-host.CompleteLease" />
+          description: Partition information against which to perform a checkpoint.
+        - id: checkpoint
+          type: <xref uid="@azure/event-processor-host.CheckpointInfo" />
+          description: offset/sequeceNumber to update the store with
+      return:
+        type: Promise&lt;void&gt;
+        description: Promise<void> resolves with `undefined`; rejects with an `Error`.

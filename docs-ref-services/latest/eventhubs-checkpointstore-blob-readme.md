@@ -1,32 +1,47 @@
 ---
-title: Azure Event Hubs Checkpoint Store library for Javascript
-keywords: Azure, javascript, SDK, API, @azure/eventhubs-checkpointstore-blob, 
+title: Azure Event Hubs Checkpoint Store client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure/eventhubs-checkpointstore-blob, eventhubs
 author: maggiepint
 ms.author: magpint
-ms.date: 08/03/2020
+ms.date: 07/12/2021
 ms.topic: article
+ms.prod: azure
+ms.technology: azure
 ms.devlang: javascript
-ms.service: azure
+ms.service: eventhubs
 ---
 
-# Azure Event Hubs Checkpoint Store library for Javascript using Storage Blobs
+# Azure Event Hubs Checkpoint Store client library for JavaScript - Version dev 
+
 
 An Azure Blob storage based solution to store checkpoints and to aid in load balancing when using `EventHubConsumerClient` from the [@azure/event-hubs](https://www.npmjs.com/package/@azure/event-hubs) library
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/eventhub/eventhubs-checkpointstore-blob) | [Package (npm)](https://www.npmjs.com/package/@azure/eventhubs-checkpointstore-blob) | [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/eventhubs-checkpointstore-blob/) | [Samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/eventhub/eventhubs-checkpointstore-blob/samples)
+Key links:
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/eventhub/eventhubs-checkpointstore-blob)
+- [Package (npm)](https://www.npmjs.com/package/@azure/eventhubs-checkpointstore-blob)
+- [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/eventhubs-checkpointstore-blob/)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/eventhub/eventhubs-checkpointstore-blob/samples)
 
 ## Getting started
+
+### Currently supported environments
+
+- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- Latest versions of Safari, Chrome, Edge, and Firefox.
+
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
+
+### Prerequisites
+
+- An [Azure subscription](https://azure.microsoft.com/free/)
+- An [Event Hubs Namespace](https://docs.microsoft.com/azure/event-hubs/)
+- A [Storage account](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction)
 
 ### Install the package
 
 Install the Azure Event Hubs Checkpoint Store Blob library using npm
 
 `npm install @azure/eventhubs-checkpointstore-blob`
-
-**Prerequisites**: You must have an [Azure subscription](https://azure.microsoft.com/free/), an
-[Event Hubs Namespace](https://docs.microsoft.com/azure/event-hubs/) to use this package, and a [Storage account](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-introduction)
-
-If you are using this package in a Node.js application, then use Node.js 8.x or higher.
 
 ### Configure Typescript
 
@@ -90,52 +105,68 @@ interface along with code to call the `updateCheckpoint()` method.
 In this example, `SubscriptionHandlers` implements [SubscriptionEventHandlers](https://docs.microsoft.com/javascript/api/@azure/event-hubs/subscriptioneventhandlers) and also handles checkpointing.
 
 ```javascript
-import { ContainerClient } from "@azure/storage-blob";
-import { BlobCheckpointStore } from "@azure/eventhubs-checkpointstore-blob";
-import { EventHubConsumerClient } from "@azure/event-hubs";
+const { EventHubConsumerClient } = require("@azure/event-hubs");
+const { ContainerClient } = require("@azure/storage-blob");
+const { BlobCheckpointStore } = require("@azure/eventhubs-checkpointstore-blob");
 
-const consumerGroup = "consumer-group-name";
-const connectionString = "event-hub-connectionstring";
+const storageAccountConnectionString = "storage-account-connection-string";
+const containerName = "container-name";
+const eventHubConnectionString = "eventhub-connection-string";
+const consumerGroup = "my-consumer-group";
+const eventHubName = "eventHubName";
 
-const containerClient = new ContainerClient("storage-connection-string", "container-name");
+async function main() {
+  const blobContainerClient = new ContainerClient(storageAccountConnectionString, containerName);
 
-if (!(await containerClient.exists())) {
-  await containerClient.create(); // This can be skipped if the container already exists
-}
-
-const checkpointStore = new BlobCheckpointStore(containerClient);
-
-class SubscriptionHandlers {
-  async processEvents(event, context) {
-    // custom logic for processing events goes here
-
-    // Checkpointing will allow your service to restart and pick
-    // up from where it left off.
-    //
-    // You'll want to balance how often you checkpoint with the
-    // performance of your underlying checkpoint store.
-    await context.updateCheckpoint(event);
+  if (!(await blobContainerClient.exists())) {
+    await blobContainerClient.create();
   }
 
-  async processError(err, context) {
-    // handle any errors that occur during the course of
-    // this subscription
-    console.log(`Errors in subscription: ${err}`);
-  }
+  const checkpointStore = new BlobCheckpointStore(blobContainerClient);
+  const consumerClient = new EventHubConsumerClient(
+    consumerGroup,
+    eventHubConnectionString,
+    eventHubName,
+    checkpointStore
+  );
+
+  const subscription = consumerClient.subscribe({
+    processEvents: async (events, context) => {
+      // event processing code goes here
+      if (events.length === 0) {
+        // If the wait time expires (configured via options in maxWaitTimeInSeconds) Event Hubs
+        // will pass you an empty array.
+        return;
+      }
+
+      // Checkpointing will allow your service to pick up from
+      // where it left off when restarting.
+      //
+      // You'll want to balance how often you checkpoint with the
+      // performance of your underlying checkpoint store.
+      await context.updateCheckpoint(events[events.length - 1]);
+    },
+    processError: async (err, context) => {
+      // handle any errors that occur during the course of
+      // this subscription
+      console.log(`Errors in subscription to partition ${context.partitionId}: ${err}`);
+    }
+  });
+
+  // Wait for a few seconds to receive events before closing
+  await new Promise((resolve) => setTimeout(resolve, 10 * 1000));
+
+  await subscription.close();
+  await consumerClient.close();
+  console.log(`Exiting sample`);
 }
 
-const consumerClient = new EventHubConsumerClient(consumerGroup, connectionString, checkpointStore);
-
-const subscription = consumerClient.subscribe(new SubscriptionHandlers());
-
-// events will now flow into the handlers defined above
-// to stop the subscription:
-subscription.close();
+main();
 ```
 
 ## Troubleshooting
 
-### Enable logs
+### Logging
 
 You can set the `AZURE_LOG_LEVEL` environment variable to one of the following values to enable logging to `stderr`:
 
@@ -188,14 +219,14 @@ export DEBUG=azure:eventhubs-checkpointstore-blob:info
     node your-test-script.js &> out.log
     ```
 
-## Next Steps
+## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/eventhub/eventhubs-checkpointstore-blob/samples)
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/eventhub/eventhubs-checkpointstore-blob/samples)
 directory for detailed example.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Feventhub%2Feventhubs-checkpointstore-blob%2FREADME.png)
 

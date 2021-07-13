@@ -57,10 +57,13 @@ methods:
       To create the CallAgent, pass a CommunicationTokenCredential object
       provided from SDK.
 
-      Only one CallAgent can exists at any time. In order to create another
+      - The CallClient can only have one active CallAgent instance at a time.
 
-      CallAgent, you must get rid of the first one by calling its dispose()
-      method.
+      - You can create a new CallClient instance to create a new CallAgent.
+
+      - You can dispose of a CallClient's current active CallAgent, and call the
+      CallClient's
+        createCallAgent() method again to create a new CallAgent.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -82,8 +85,7 @@ methods:
         type: Promise&lt;CallAgent&gt;
         description: ''
   - name: >-
-      createView(string | undefined, CommunicationUserKind | PhoneNumberKind |
-      MicrosoftTeamsUserKind | UnknownIdentifierKind | undefined,
+      createView(string | undefined, CommunicationIdentifierKind | undefined,
       LocalVideoStreamState | RemoteVideoStreamState, CreateViewOptions)
     uid: '@azure/communication-react.StatefulCallClient.createView'
     package: '@azure/communication-react'
@@ -137,8 +139,7 @@ methods:
     syntax:
       content: >-
         function createView(callId: string | undefined, participantId:
-        CommunicationUserKind | PhoneNumberKind | MicrosoftTeamsUserKind |
-        UnknownIdentifierKind | undefined, stream: LocalVideoStreamState |
+        CommunicationIdentifierKind | undefined, stream: LocalVideoStreamState |
         RemoteVideoStreamState, options?: CreateViewOptions)
       parameters:
         - id: callId
@@ -147,9 +148,7 @@ methods:
             CallId for the given stream. Can be undefined if the stream is not
             part of any call.
         - id: participantId
-          type: >-
-            CommunicationUserKind | PhoneNumberKind | MicrosoftTeamsUserKind |
-            UnknownIdentifierKind | undefined
+          type: CommunicationIdentifierKind | undefined
           description: >-
             {@Link RemoteParticipant.identifier} associated with the given
             RemoteVideoStreamState. Could
@@ -170,8 +169,7 @@ methods:
         type: Promise&lt;void&gt;
         description: ''
   - name: >-
-      disposeView(string | undefined, CommunicationUserKind | PhoneNumberKind |
-      MicrosoftTeamsUserKind | UnknownIdentifierKind | undefined,
+      disposeView(string | undefined, CommunicationIdentifierKind | undefined,
       LocalVideoStreamState | RemoteVideoStreamState)
     uid: '@azure/communication-react.StatefulCallClient.disposeView'
     package: '@azure/communication-react'
@@ -215,8 +213,7 @@ methods:
     syntax:
       content: >-
         function disposeView(callId: string | undefined, participantId:
-        CommunicationUserKind | PhoneNumberKind | MicrosoftTeamsUserKind |
-        UnknownIdentifierKind | undefined, stream: LocalVideoStreamState |
+        CommunicationIdentifierKind | undefined, stream: LocalVideoStreamState |
         RemoteVideoStreamState)
       parameters:
         - id: callId
@@ -225,9 +222,7 @@ methods:
             CallId for the given stream. Can be undefined if the stream is not
             part of any call.
         - id: participantId
-          type: >-
-            CommunicationUserKind | PhoneNumberKind | MicrosoftTeamsUserKind |
-            UnknownIdentifierKind | undefined
+          type: CommunicationIdentifierKind | undefined
           description: >-
             {@Link RemoteParticipant.identifier} associated with the given
             RemoteVideoStreamState. Could
@@ -244,8 +239,6 @@ methods:
     summary: >-
       The DeviceManager is used to handle media devices such as cameras,
       microphones, and speakers.
-
-      Create the CallAgent first inorder to access the device manager.
     remarks: ''
     isPreview: false
     isDeprecated: false

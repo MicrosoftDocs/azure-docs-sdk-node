@@ -1,0 +1,668 @@
+### YamlMime:TSType
+name: EventProcessorHost
+uid: '@azure/event-processor-host.EventProcessorHost'
+package: '@azure/event-processor-host'
+summary: Describes the Event Processor Host to process events from an EventHub.
+fullName: EventProcessorHost
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+constructors:
+  - name: 'EventProcessorHost(string, EventProcessorHostOptions)'
+    uid: '@azure/event-processor-host.EventProcessorHost.constructor'
+    package: '@azure/event-processor-host'
+    summary: Creates a new host to process events from an Event Hub.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        new EventProcessorHost(hostName: string, options?:
+        EventProcessorHostOptions)
+      parameters:
+        - id: hostName
+          type: string
+          description: >-
+            Name of the processor host. MUST BE UNIQUE.
+
+            Strongly recommend including a Guid or a prefix with a guid to
+            ensure uniqueness. You can use
+
+            `EventProcessorHost.createHostName("your-prefix")`; Default:
+            `js-host-${uuid()}`.
+        - id: options
+          type: <xref uid="@azure/event-processor-host.EventProcessorHostOptions" />
+          description: ''
+properties:
+  - name: consumerGroup
+    uid: '@azure/event-processor-host.EventProcessorHost.consumerGroup'
+    package: '@azure/event-processor-host'
+    summary: Provides the consumer group name for the Event processor host.
+    fullName: consumerGroup
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: string consumerGroup
+      return:
+        type: string
+        description: ''
+  - name: hostName
+    uid: '@azure/event-processor-host.EventProcessorHost.hostName'
+    package: '@azure/event-processor-host'
+    summary: Provides the host name for the Event processor host.
+    fullName: hostName
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: string hostName
+      return:
+        type: string
+        description: ''
+  - name: receivingFromPartitions
+    uid: '@azure/event-processor-host.EventProcessorHost.receivingFromPartitions'
+    package: '@azure/event-processor-host'
+    summary: >
+      Provides a list of partitions the EPH is currently receiving messages
+      from.
+
+      The EPH will try to grab leases for more partitions during each scan that
+      happens once every
+
+      (configured) lease renew seconds. The number of EPH instances that are
+      being run
+
+      simultaneously to receive messages from the same consumer group within an
+      event hub also
+
+      influences the number of partitions that this instance of EPH is actively
+      receiving messages
+
+      from.
+    fullName: receivingFromPartitions
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'string[] receivingFromPartitions'
+      return:
+        type: 'string[]'
+        description: |-
+          Array<string> List of partitions that this EPH instance is currently
+          receiving messages from.
+methods:
+  - name: >-
+      createFromAadTokenCredentials(string, string, string, string, string,
+      ApplicationTokenCredentials | UserTokenCredentials |
+      DeviceTokenCredentials | MSITokenCredentials, FromTokenProviderOptions)
+    uid: >-
+      @azure/event-processor-host.EventProcessorHost.createFromAadTokenCredentials
+    package: '@azure/event-processor-host'
+    summary: Creates an EventProcessorHost instance from AAD token credentials.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function createFromAadTokenCredentials(hostName: string,
+        storageConnectionString: string, storageContainerName: string,
+        namespace: string, eventHubPath: string, credentials:
+        ApplicationTokenCredentials | UserTokenCredentials |
+        DeviceTokenCredentials | MSITokenCredentials, options?:
+        FromTokenProviderOptions)
+      parameters:
+        - id: hostName
+          type: string
+          description: >-
+            Name of the processor host. MUST BE UNIQUE.
+
+            Strongly recommend including a Guid or a prefix with a guid to
+            ensure uniqueness. You can use
+
+            `EventProcessorHost.createHostName("your-prefix")`; Default:
+            `js-host-${uuid()}`.
+        - id: storageConnectionString
+          type: string
+          description: >-
+            Connection string to Azure Storage account used for
+
+            leases and checkpointing. Example
+            DefaultEndpointsProtocol=https;AccountName=<account-name>;
+
+            AccountKey=<account-key>;EndpointSuffix=core.windows.net
+        - id: storageContainerName
+          type: string
+          description: |-
+            Azure Storage container name for use by built-in lease
+            and checkpoint manager.
+        - id: namespace
+          type: string
+          description: |-
+            Fully qualified domain name for Event Hubs.
+            Example: "{your-sb-namespace}.servicebus.windows.net"
+        - id: eventHubPath
+          type: string
+          description: The name of the EventHub.
+        - id: credentials
+          type: >-
+            ApplicationTokenCredentials | UserTokenCredentials |
+            DeviceTokenCredentials | MSITokenCredentials
+          description: >-
+            The AAD Token credentials. It can be one of the
+
+            following: ApplicationTokenCredentials | UserTokenCredentials |
+            DeviceTokenCredentials
+
+            | MSITokenCredentials.
+        - id: options
+          type: <xref uid="@azure/event-processor-host.FromTokenProviderOptions" />
+          description: ''
+      return:
+        type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
+        description: EventProcessorHost
+  - name: >-
+      createFromAadTokenCredentialsWithCustomCheckpointAndLeaseManager(string,
+      string, string, ApplicationTokenCredentials | UserTokenCredentials |
+      DeviceTokenCredentials | MSITokenCredentials, CheckpointManager,
+      LeaseManager, FromTokenProviderOptions)
+    uid: >-
+      @azure/event-processor-host.EventProcessorHost.createFromAadTokenCredentialsWithCustomCheckpointAndLeaseManager
+    package: '@azure/event-processor-host'
+    summary: >-
+      Creates an EventProcessorHost instance from AAD token credentials with the
+      given checkpoint manager
+
+      and lease manager.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function
+        createFromAadTokenCredentialsWithCustomCheckpointAndLeaseManager(hostName:
+        string, namespace: string, eventHubPath: string, credentials:
+        ApplicationTokenCredentials | UserTokenCredentials |
+        DeviceTokenCredentials | MSITokenCredentials, checkpointManager:
+        CheckpointManager, leaseManager: LeaseManager, options?:
+        FromTokenProviderOptions)
+      parameters:
+        - id: hostName
+          type: string
+          description: >-
+            Name of the processor host. MUST BE UNIQUE.
+
+            Strongly recommend including a Guid or a prefix with a guid to
+            ensure uniqueness. You can use
+
+            `EventProcessorHost.createHostName("your-prefix")`; Default:
+            `js-host-${uuid()}`.
+        - id: namespace
+          type: string
+          description: |-
+            Fully qualified domain name for Event Hubs.
+            Example: "{your-sb-namespace}.servicebus.windows.net"
+        - id: eventHubPath
+          type: string
+          description: The name of the EventHub.
+        - id: credentials
+          type: >-
+            ApplicationTokenCredentials | UserTokenCredentials |
+            DeviceTokenCredentials | MSITokenCredentials
+          description: >-
+            The AAD Token credentials. It can be one of the
+
+            following: ApplicationTokenCredentials | UserTokenCredentials |
+            DeviceTokenCredentials
+
+            | MSITokenCredentials.
+        - id: checkpointManager
+          type: <xref uid="@azure/event-processor-host.CheckpointManager" />
+          description: A manager to manage checkpoints.
+        - id: leaseManager
+          type: <xref uid="@azure/event-processor-host.LeaseManager" />
+          description: A manager to manage leases.
+        - id: options
+          type: <xref uid="@azure/event-processor-host.FromTokenProviderOptions" />
+          description: ''
+      return:
+        type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
+        description: EventProcessorHost
+  - name: >-
+      createFromConnectionString(string, string, string, string,
+      FromConnectionStringOptions)
+    uid: '@azure/event-processor-host.EventProcessorHost.createFromConnectionString'
+    package: '@azure/event-processor-host'
+    summary: >-
+      Creates an EventProcessorHost instance from the EventHub connection
+      string.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function createFromConnectionString(hostName: string,
+        storageConnectionString: string, storageContainerName: string,
+        eventHubConnectionString: string, options?: FromConnectionStringOptions)
+      parameters:
+        - id: hostName
+          type: string
+          description: >-
+            Name of the processor host. MUST BE UNIQUE.
+
+            Strongly recommend including a Guid or a prefix with a guid to
+            ensure uniqueness. You can use
+
+            `EventProcessorHost.createHostName("your-prefix")`; Default:
+            `js-host-${uuid()}`.
+        - id: storageConnectionString
+          type: string
+          description: >-
+            Connection string to Azure Storage account used for
+
+            leases and checkpointing. Example
+            DefaultEndpointsProtocol=https;AccountName=<account-name>;
+
+            AccountKey=<account-key>;EndpointSuffix=core.windows.net
+        - id: storageContainerName
+          type: string
+          description: |-
+            Azure Storage container name for use by built-in lease
+            and checkpoint manager.
+        - id: eventHubConnectionString
+          type: string
+          description: >-
+            Connection string for the Event Hub to receive from.
+
+            Example:
+            'Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;
+
+            SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key'
+        - id: options
+          type: >-
+            <xref uid="@azure/event-processor-host.FromConnectionStringOptions"
+            />
+          description: ''
+      return:
+        type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
+        description: EventProcessorHost
+  - name: >-
+      createFromConnectionStringWithCustomCheckpointAndLeaseManager(string,
+      string, CheckpointManager, LeaseManager, FromConnectionStringOptions)
+    uid: >-
+      @azure/event-processor-host.EventProcessorHost.createFromConnectionStringWithCustomCheckpointAndLeaseManager
+    package: '@azure/event-processor-host'
+    summary: >-
+      Creates an EventProcessorHost instance from the EventHub connection string
+      with the provided
+
+      checkpoint manager and lease manager.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function
+        createFromConnectionStringWithCustomCheckpointAndLeaseManager(hostName:
+        string, eventHubConnectionString: string, checkpointManager:
+        CheckpointManager, leaseManager: LeaseManager, options?:
+        FromConnectionStringOptions)
+      parameters:
+        - id: hostName
+          type: string
+          description: >-
+            Name of the processor host. MUST BE UNIQUE.
+
+            Strongly recommend including a Guid or a prefix with a guid to
+            ensure uniqueness. You can use
+
+            `EventProcessorHost.createHostName("your-prefix")`; Default:
+            `js-host-${uuid()}`.
+        - id: eventHubConnectionString
+          type: string
+          description: >-
+            Connection string for the Event Hub to receive from.
+
+            Example:
+            'Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;
+
+            SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key'
+        - id: checkpointManager
+          type: <xref uid="@azure/event-processor-host.CheckpointManager" />
+          description: A manager to manage checkpoints.
+        - id: leaseManager
+          type: <xref uid="@azure/event-processor-host.LeaseManager" />
+          description: A manager to manage leases.
+        - id: options
+          type: >-
+            <xref uid="@azure/event-processor-host.FromConnectionStringOptions"
+            />
+          description: ''
+      return:
+        type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
+        description: EventProcessorHost
+  - name: >-
+      createFromIotHubConnectionString(string, string, string, string,
+      FromIotHubConnectionStringOptions)
+    uid: >-
+      @azure/event-processor-host.EventProcessorHost.createFromIotHubConnectionString
+    package: '@azure/event-processor-host'
+    summary: Creates an EventProcessorHost instance from the IotHub connection string.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function createFromIotHubConnectionString(hostName: string,
+        storageConnectionString: string, storageContainerName: string,
+        iotHubConnectionString: string, options?:
+        FromIotHubConnectionStringOptions)
+      parameters:
+        - id: hostName
+          type: string
+          description: >-
+            Name of the processor host. MUST BE UNIQUE.
+
+            Strongly recommend including a Guid or a prefix with a guid to
+            ensure uniqueness. You can use
+
+            `EventProcessorHost.createHostName("your-prefix")`; Default:
+            `js-host-${uuid()}`.
+        - id: storageConnectionString
+          type: string
+          description: >-
+            Connection string to Azure Storage account used for
+
+            leases and checkpointing. Example
+            DefaultEndpointsProtocol=https;AccountName=<account-name>;
+
+            AccountKey=<account-key>;EndpointSuffix=core.windows.net
+        - id: storageContainerName
+          type: string
+          description: |-
+            Azure Storage container name for use by built-in lease
+            and checkpoint manager.
+        - id: iotHubConnectionString
+          type: string
+          description: >-
+            Connection string for the IotHub.
+
+            Example:
+            'Endpoint=iot-host-name;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key'
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/event-processor-host.FromIotHubConnectionStringOptions"
+            />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/event-processor-host.EventProcessorHost"
+          />&gt;
+        description: EventProcessorHost
+  - name: >-
+      createFromIotHubConnectionStringWithCustomCheckpointAndLeaseManager(string,
+      string, CheckpointManager, LeaseManager,
+      FromIotHubConnectionStringOptions)
+    uid: >-
+      @azure/event-processor-host.EventProcessorHost.createFromIotHubConnectionStringWithCustomCheckpointAndLeaseManager
+    package: '@azure/event-processor-host'
+    summary: >-
+      Creates an EventProcessorHost instance from the IotHub connection string
+      with the given
+
+      checkpoint manager and lease manager.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function
+        createFromIotHubConnectionStringWithCustomCheckpointAndLeaseManager(hostName:
+        string, iotHubConnectionString: string, checkpointManager:
+        CheckpointManager, leaseManager: LeaseManager, options?:
+        FromIotHubConnectionStringOptions)
+      parameters:
+        - id: hostName
+          type: string
+          description: >-
+            Name of the processor host. MUST BE UNIQUE.
+
+            Strongly recommend including a Guid or a prefix with a guid to
+            ensure uniqueness. You can use
+
+            `EventProcessorHost.createHostName("your-prefix")`; Default:
+            `js-host-${uuid()}`.
+        - id: iotHubConnectionString
+          type: string
+          description: >-
+            Connection string for the IotHub.
+
+            Example:
+            'Endpoint=iot-host-name;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key'
+        - id: checkpointManager
+          type: <xref uid="@azure/event-processor-host.CheckpointManager" />
+          description: A manager to manage checkpoints.
+        - id: leaseManager
+          type: <xref uid="@azure/event-processor-host.LeaseManager" />
+          description: A manager to manage leases.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/event-processor-host.FromIotHubConnectionStringOptions"
+            />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/event-processor-host.EventProcessorHost"
+          />&gt;
+        description: EventProcessorHost
+  - name: >-
+      createFromTokenProvider(string, string, string, string, string,
+      TokenProvider, FromTokenProviderOptions)
+    uid: '@azure/event-processor-host.EventProcessorHost.createFromTokenProvider'
+    package: '@azure/event-processor-host'
+    summary: Creates an EventProcessorHost instance from a TokenProvider.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function createFromTokenProvider(hostName: string,
+        storageConnectionString: string, storageContainerName: string,
+        namespace: string, eventHubPath: string, tokenProvider: TokenProvider,
+        options?: FromTokenProviderOptions)
+      parameters:
+        - id: hostName
+          type: string
+          description: >-
+            Name of the processor host. MUST BE UNIQUE.
+
+            Strongly recommend including a Guid or a prefix with a guid to
+            ensure uniqueness. You can use
+
+            `EventProcessorHost.createHostName("your-prefix")`; Default:
+            `js-host-${uuid()}`.
+        - id: storageConnectionString
+          type: string
+          description: >-
+            Connection string to Azure Storage account used for
+
+            leases and checkpointing. Example
+            DefaultEndpointsProtocol=https;AccountName=<account-name>;
+
+            AccountKey=<account-key>;EndpointSuffix=core.windows.net
+        - id: storageContainerName
+          type: string
+          description: |-
+            Azure Storage container name for use by built-in lease
+            and checkpoint manager.
+        - id: namespace
+          type: string
+          description: |-
+            Fully qualified domain name for Event Hubs.
+            Example: "{your-sb-namespace}.servicebus.windows.net"
+        - id: eventHubPath
+          type: string
+          description: The name of the EventHub.
+        - id: tokenProvider
+          type: TokenProvider
+          description: Your token provider that implements the TokenProvider interface.
+        - id: options
+          type: <xref uid="@azure/event-processor-host.FromTokenProviderOptions" />
+          description: ''
+      return:
+        type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
+        description: EventProcessorHost
+  - name: >-
+      createFromTokenProviderWithCustomCheckpointAndLeaseManager(string, string,
+      string, TokenProvider, CheckpointManager, LeaseManager,
+      FromTokenProviderOptions)
+    uid: >-
+      @azure/event-processor-host.EventProcessorHost.createFromTokenProviderWithCustomCheckpointAndLeaseManager
+    package: '@azure/event-processor-host'
+    summary: >-
+      Creates an EventProcessorHost instance from a TokenProvider with the
+      provided checkpoint manager
+
+      and lease manager.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function
+        createFromTokenProviderWithCustomCheckpointAndLeaseManager(hostName:
+        string, namespace: string, eventHubPath: string, tokenProvider:
+        TokenProvider, checkpointManager: CheckpointManager, leaseManager:
+        LeaseManager, options?: FromTokenProviderOptions)
+      parameters:
+        - id: hostName
+          type: string
+          description: >-
+            Name of the processor host. MUST BE UNIQUE.
+
+            Strongly recommend including a Guid or a prefix with a guid to
+            ensure uniqueness. You can use
+
+            `EventProcessorHost.createHostName("your-prefix")`; Default:
+            `js-host-${uuid()}`.
+        - id: namespace
+          type: string
+          description: |-
+            Fully qualified domain name for Event Hubs.
+            Example: "{your-sb-namespace}.servicebus.windows.net"
+        - id: eventHubPath
+          type: string
+          description: The name of the EventHub.
+        - id: tokenProvider
+          type: TokenProvider
+          description: Your token provider that implements the TokenProvider interface.
+        - id: checkpointManager
+          type: <xref uid="@azure/event-processor-host.CheckpointManager" />
+          description: A manager to manage checkpoints.
+        - id: leaseManager
+          type: <xref uid="@azure/event-processor-host.LeaseManager" />
+          description: A manager to manage leases.
+        - id: options
+          type: <xref uid="@azure/event-processor-host.FromTokenProviderOptions" />
+          description: ''
+      return:
+        type: <xref uid="@azure/event-processor-host.EventProcessorHost" />
+        description: EventProcessorHost
+  - name: createHostName(string)
+    uid: '@azure/event-processor-host.EventProcessorHost.createHostName'
+    package: '@azure/event-processor-host'
+    summary: Convenience method for generating unique host name.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'static function createHostName(prefix?: string)'
+      parameters:
+        - id: prefix
+          type: string
+          description: ''
+      return:
+        type: string
+        description: A unique host name
+  - name: getHubRuntimeInformation()
+    uid: '@azure/event-processor-host.EventProcessorHost.getHubRuntimeInformation'
+    package: '@azure/event-processor-host'
+    summary: Provides the eventhub runtime information.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function getHubRuntimeInformation()
+      return:
+        type: Promise&lt;EventHubRuntimeInformation&gt;
+        description: ''
+  - name: getPartitionIds()
+    uid: '@azure/event-processor-host.EventProcessorHost.getPartitionIds'
+    package: '@azure/event-processor-host'
+    summary: Provides an array of partitionIds.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function getPartitionIds()
+      return:
+        type: 'Promise&lt;string[]&gt;'
+        description: ''
+  - name: getPartitionInformation(string | number)
+    uid: '@azure/event-processor-host.EventProcessorHost.getPartitionInformation'
+    package: '@azure/event-processor-host'
+    summary: Provides information about the specified partition.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getPartitionInformation(partitionId: string | number)'
+      parameters:
+        - id: partitionId
+          type: string | number
+          description: |
+            Partition ID for which partition information is required.
+      return:
+        type: Promise&lt;EventHubPartitionRuntimeInformation&gt;
+        description: EventHubPartitionRuntimeInformation
+  - name: 'start(OnReceivedMessage, OnReceivedError)'
+    uid: '@azure/event-processor-host.EventProcessorHost.start'
+    package: '@azure/event-processor-host'
+    summary: >-
+      Starts the event processor host, fetching the list of partitions, and
+      attempting to grab leases
+
+      For each successful lease, it will get the details from the blob and start
+      a receiver at the
+
+      point where it left off previously.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function start(onMessage: OnReceivedMessage, onError: OnReceivedError)'
+      parameters:
+        - id: onMessage
+          type: <xref uid="@azure/event-processor-host.OnReceivedMessage" />
+          description: ''
+        - id: onError
+          type: <xref uid="@azure/event-processor-host.OnReceivedError" />
+          description: ''
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: stop()
+    uid: '@azure/event-processor-host.EventProcessorHost.stop'
+    package: '@azure/event-processor-host'
+    summary: Stops the EventProcessorHost from processing messages.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function stop()
+      return:
+        type: Promise&lt;void&gt;
+        description: ''

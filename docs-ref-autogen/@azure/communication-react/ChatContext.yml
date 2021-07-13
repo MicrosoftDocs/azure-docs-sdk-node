@@ -9,7 +9,7 @@ isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: ChatContext()
+  - name: ChatContext(number)
     uid: '@azure/communication-react.ChatContext.constructor'
     package: '@azure/communication-react'
     summary: ''
@@ -17,7 +17,11 @@ constructors:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: new ChatContext()
+      content: 'new ChatContext(maxListeners?: number)'
+      parameters:
+        - id: maxListeners
+          type: number
+          description: ''
 methods:
   - name: 'addReadReceipt(string, ChatMessageReadReceipt)'
     uid: '@azure/communication-react.ChatContext.addReadReceipt'
@@ -55,6 +59,36 @@ methods:
         - id: typingIndicator
           type: TypingIndicatorReceivedEvent
           description: ''
+  - name: >-
+      asyncTeeErrorToState<T>(() => Promise<T>, ChatErrorTargets,
+      ChatErrorTargets[])
+    uid: '@azure/communication-react.ChatContext.asyncTeeErrorToState'
+    package: '@azure/communication-react'
+    summary: |
+      Tees any errors encountered in an async function to the state.
+      If the function succeeds, clears associated errors from the state.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function asyncTeeErrorToState<T>(f: () => Promise<T>, target:
+        ChatErrorTargets, clearTargets?: ChatErrorTargets[])
+      parameters:
+        - id: f
+          type: () =&gt; Promise&lt;T&gt;
+          description: Async function to execute.
+        - id: target
+          type: <xref uid="@azure/communication-react.ChatErrorTargets" />
+          description: The error target to tee error to.
+        - id: clearTargets
+          type: '<xref uid="@azure/communication-react.ChatErrorTargets" />[]'
+          description: >-
+            The error targets to clear errors for if the function succeeds. By
+            default, clears errors for `target.
+      return:
+        type: Promise&lt;T&gt;
+        description: Result of calling `f`. Also re-raises any exceptions thrown from `f`.
   - name: batch(() => void)
     uid: '@azure/communication-react.ChatContext.batch'
     package: '@azure/communication-react'
@@ -247,7 +281,7 @@ methods:
         - id: message
           type: <xref uid="@azure/communication-react.ChatMessageWithStatus" />
           description: ''
-  - name: 'setChatMessages(string, Map<string, ChatMessageWithStatus>)'
+  - name: 'setChatMessages(string, [key: string]: ChatMessageWithStatus)'
     uid: '@azure/communication-react.ChatContext.setChatMessages'
     package: '@azure/communication-react'
     summary: ''
@@ -256,16 +290,16 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function setChatMessages(threadId: string, messages: Map<string,
-        ChatMessageWithStatus>)
+        function setChatMessages(threadId: string, messages: [key: string]:
+        ChatMessageWithStatus)
       parameters:
         - id: threadId
           type: string
           description: ''
         - id: messages
           type: >-
-            Map&lt;string, <xref
-            uid="@azure/communication-react.ChatMessageWithStatus" />&gt;
+            [key: string]\: <xref
+            uid="@azure/communication-react.ChatMessageWithStatus" />
           description: ''
   - name: 'setParticipant(string, ChatParticipant)'
     uid: '@azure/communication-react.ChatContext.setParticipant'

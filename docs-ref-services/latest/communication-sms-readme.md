@@ -1,17 +1,17 @@
 ---
 title: Azure Communication SMS client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/communication-sms, 
+keywords: Azure, javascript, SDK, API, @azure/communication-sms, communication
 author: maggiepint
 ms.author: magpint
-ms.date: 03/29/2021
+ms.date: 07/14/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: communication
 ---
 
-# Azure Communication SMS client library for JavaScript - Version 1.0.0 
+# Azure Communication SMS client library for JavaScript - Version dev 
 
 
 Azure Communication SMS services gives developers the ability to send SMS messages from a phone number that can be purchased through Communication Services.
@@ -149,13 +149,13 @@ try {
 
 ## Next steps
 
-- Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.0.0/sdk/communication/communication-sms/samples) directory for detailed examples on how to use this library.
+- Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-sms/samples) directory for detailed examples on how to use this library.
 - [Read more about SMS in Azure Communication Services][next_steps]
 - For a basic guide on how to configure Delivery Reporting for your SMS messages please refer to the [Handle SMS Events quickstart][handle_sms_events].
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -165,11 +165,11 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.0.0/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.0.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
 [get_phone_number_az_portal]: https://docs.microsoft.com/azure/communication-services/quickstarts/telephony-sms/get-phone-number
-[azure_communication-phone-numbers]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-sms_1.0.0/sdk/communication/communication-phone-numbers
-[azure_communication-phone-numbers_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-sms_1.0.0/sdk/communication/communication-phone-numbers/README.md
+[azure_communication-phone-numbers]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/communication/communication-phone-numbers
+[azure_communication-phone-numbers_readme]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers/README.md
 [handle_sms_events]: https://docs.microsoft.com/azure/communication-services/quickstarts/telephony-sms/handle-sms-events
 [next_steps]: https://docs.microsoft.com/azure/communication-services/quickstarts/telephony-sms/send?pivots=programming-language-javascript
 

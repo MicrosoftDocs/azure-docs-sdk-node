@@ -1,14 +1,14 @@
 ---
 title: 
-keywords: Azure, javascript, SDK, API, @azure/core-tracing, 
+keywords: Azure, javascript, SDK, API, @azure/core-tracing, core
 author: maggiepint
 ms.author: magpint
-ms.date: 06/30/2021
+ms.date: 07/15/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: core
 ---
 
 # Azure Core tracing library for JavaScript
@@ -80,7 +80,7 @@ If you run into issues while using this library, please feel free to [file an is
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-tracing_1.0.0-preview.12/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-tracing_1.0.0-preview.13/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcore%2Fcore-tracing%2FREADME.png)
 

@@ -47,6 +47,25 @@ constructors:
           type: <xref uid="@azure/digital-twins-core.DigitalTwinsClientOptions" />
           description: |
             Used to configure the service client.
+properties:
+  - name: decomissionModel
+    uid: '@azure/digital-twins-core.DigitalTwinsClient.decomissionModel'
+    package: '@azure/digital-twins-core'
+    summary: ''
+    fullName: decomissionModel
+    remarks: ''
+    isPreview: false
+    isDeprecated: true
+    customDeprecatedMessage: 'Please use <xref:DigitalTwinsClient.decommissionModel> instead.'
+    syntax:
+      content: >-
+        decomissionModel: (modelId: string, options?: OperationOptions) =>
+        Promise<RestResponse>
+      return:
+        type: >-
+          (modelId: string, options?: OperationOptions) =&gt;
+          Promise&lt;RestResponse&gt;
+        description: ''
 methods:
   - name: 'createModels(any[], OperationOptions)'
     uid: '@azure/digital-twins-core.DigitalTwinsClient.createModels'
@@ -69,15 +88,24 @@ methods:
           Promise&lt;<xref
           uid="@azure/digital-twins-core.DigitalTwinModelsAddResponse" />&gt;
         description: The created application/json models and the http response.
-  - name: 'decomissionModel(string, OperationOptions)'
-    uid: '@azure/digital-twins-core.DigitalTwinsClient.decomissionModel'
+  - name: 'decommissionModel(string, OperationOptions)'
+    uid: '@azure/digital-twins-core.DigitalTwinsClient.decommissionModel'
     package: '@azure/digital-twins-core'
-    summary: Decommission a model using a json patch.
+    summary: >-
+      Decommission a model using a json patch.
+
+      When a model is decommissioned, new digital twins will no longer be able
+      to be
+
+      defined by this model. However, existing digital twins may continue to use
+      this model.
+
+      Once a model is decommissioned, it may not be recommissioned.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function decomissionModel(modelId: string, options?: OperationOptions)'
+      content: 'function decommissionModel(modelId: string, options?: OperationOptions)'
       parameters:
         - id: modelId
           type: string
@@ -724,7 +752,7 @@ methods:
           description: The Id of the relationship to create.
         - id: relationship
           type: any
-          description: ''
+          description: The application/json relationship to be created.
         - id: options
           type: >-
             <xref

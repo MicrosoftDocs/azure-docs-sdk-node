@@ -3,7 +3,7 @@ title: Azure ManagementLink client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-links, links
 author: maggiepint
 ms.author: magpint
-ms.date: 07/15/2021
+ms.date: 07/16/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
@@ -11,14 +11,14 @@ ms.devlang: javascript
 ms.service: links
 ---
 
-# Azure ManagementLink client library for JavaScript - Version 30.0.0-beta.1 
+# Azure ManagementLink client library for JavaScript - Version dev 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ManagementLink client.
 
 Azure resources can be linked together to form logical relationships. You can establish links between resources belonging to different resource groups. However, all the linked resources must belong to the same subscription. Each resource can be linked to 50 other resources. If any of the linked resources are deleted or moved, the link owner must clean up the remaining link.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-links_30.0.0-beta.1/sdk/links/arm-links) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/links/arm-links) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-links) |
 [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-links) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -81,7 +81,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-links_30.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/core/logger).
 
 ## Next steps
 
@@ -89,7 +89,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-links_30.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/master/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -101,6 +101,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-links_30.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-links_30.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/master/sdk/identity/identity#defaultazurecredential
 

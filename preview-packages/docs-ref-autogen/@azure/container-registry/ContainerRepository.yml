@@ -94,15 +94,64 @@ methods:
   - name: listManifestProperties(ListManifestPropertiesOptions)
     uid: '@azure/container-registry.ContainerRepository.listManifestProperties'
     package: '@azure/container-registry'
-    summary: |-
-      Iterates manifests.
-      Example usage:
-      ```ts
-      const client = new ContainerRegistryClient(url, credentials);
+    summary: >-
+      Returns an async iterable iterator to list manifest properties.
+
+      Example using `for-await-of` syntax:
+
+
+      ```javascript
+
+      const client = new ContainerRegistryClient(url, credential);
+
       const repository = client.getRepository(repositoryName)
+
       for await (const manifest of repository.listManifestProperties()) {
         console.log("manifest: ", manifest);
       }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```javascript
+
+      const iter = repository.listManifestProperties();
+
+      let item = await iter.next();
+
+      while (!item.done) {
+        console.log("manifest properties: ", item.value);
+        item = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```javascript
+
+      const pages = repository.listManifestProperties().byPage({ maxPageSize: 2
+      });
+
+      let page = await pages.next();
+
+      let i = 1;
+
+      while (!page.done) {
+       if (page.value) {
+         console.log(`-- page ${i++}`);
+         for (const manifestProperties of page.value) {
+           console.log(`  manifest properties: ${manifestProperties}`);
+         }
+       }
+       page = await pages.next();
+      }
+
       ```
     remarks: ''
     isPreview: false

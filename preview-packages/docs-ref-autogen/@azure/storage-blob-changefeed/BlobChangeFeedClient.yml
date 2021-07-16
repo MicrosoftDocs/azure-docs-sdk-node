@@ -27,7 +27,7 @@ constructors:
                                 if using AnonymousCredential, such as "https://myaccount.blob.core.windows.net?sasString".
         - id: pipeline
           type: Pipeline
-          description: |-
+          description: |
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
   - name: >-
@@ -55,13 +55,52 @@ constructors:
           type: StorageSharedKeyCredential | AnonymousCredential | TokenCredential
           description: >-
             Such as AnonymousCredential, StorageSharedKeyCredential or any
-            credential from the @azure/identity package to authenticate requests
-            to the service. You can also provide an object that implements the
-            TokenCredential interface. If not specified, AnonymousCredential is
-            used.
+            credential from the `@azure/identity` package to authenticate
+            requests to the service. You can also provide an object that
+            implements the TokenCredential interface. If not specified,
+            AnonymousCredential is used.
         - id: options
           type: StoragePipelineOptions
-          description: ''
+          description: >
+            Optional. Options to configure the HTTP pipeline.
+
+
+            Example using DefaultAzureCredential from `@azure/identity`:
+
+
+            ```js
+
+            const account = "<storage account name>";
+
+
+            const defaultAzureCredential = new DefaultAzureCredential();
+
+
+            const blobChangeFeedClient = new BlobChangeFeedClient(
+              `https://${account}.blob.core.windows.net`,
+              defaultAzureCredential
+            );
+
+            ```
+
+
+            Example using an account name/key:
+
+
+            ```js
+
+            const account = "<storage account name>"
+
+            const sharedKeyCredential = new StorageSharedKeyCredential(account,
+            "<account key>");
+
+
+            const blobChangeFeedClient = new BlobChangeFeedClient(
+              `https://${account}.blob.core.windows.net`,
+              sharedKeyCredential
+            );
+
+            ```
 methods:
   - name: 'fromConnectionString(string, StoragePipelineOptions)'
     uid: '@azure/storage-blob-changefeed.BlobChangeFeedClient.fromConnectionString'
@@ -87,7 +126,8 @@ methods:
                                              `BlobEndpoint=https://myaccount.blob.core.windows.net/;QueueEndpoint=https://myaccount.queue.core.windows.net/;FileEndpoint=https://myaccount.file.core.windows.net/;TableEndpoint=https://myaccount.table.core.windows.net/;SharedAccessSignature=sasString`
         - id: options
           type: StoragePipelineOptions
-          description: ''
+          description: |
+            Optional. Options to configure the HTTP pipeline.
       return:
         type: <xref uid="@azure/storage-blob-changefeed.BlobChangeFeedClient" />
         description: ''
@@ -207,7 +247,7 @@ methods:
             <xref
             uid="@azure/storage-blob-changefeed.BlobChangeFeedListChangesOptions"
             />
-          description: ''
+          description: Options to list change feed events.
       return:
         type: >-
           PagedAsyncIterableIterator&lt;<xref

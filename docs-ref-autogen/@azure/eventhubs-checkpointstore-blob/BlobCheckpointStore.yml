@@ -25,7 +25,7 @@ constructors:
           type: ContainerClient
           description: ''
 methods:
-  - name: 'claimOwnership(PartitionOwnership[])'
+  - name: 'claimOwnership(PartitionOwnership[], OperationOptions)'
     uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.claimOwnership'
     package: '@azure/eventhubs-checkpointstore-blob'
     summary: >-
@@ -37,15 +37,24 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function claimOwnership(partitionOwnership: PartitionOwnership[])'
+      content: >-
+        function claimOwnership(partitionOwnership: PartitionOwnership[],
+        options?: OperationOptions)
       parameters:
         - id: partitionOwnership
           type: 'PartitionOwnership[]'
           description: The list of partition ownership this instance is claiming to own.
+        - id: options
+          type: OperationOptions
+          description: >-
+            A set of options that can be specified to influence the behavior of
+            this method.
+             - `abortSignal`: A signal used to request operation cancellation.
+             - `tracingOptions`: Options for configuring tracing.
       return:
         type: 'Promise&lt;PartitionOwnership[]&gt;'
         description: A list partitions this instance successfully claimed ownership.
-  - name: 'listCheckpoints(string, string, string)'
+  - name: 'listCheckpoints(string, string, string, OperationOptions)'
     uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.listCheckpoints'
     package: '@azure/eventhubs-checkpointstore-blob'
     summary: >-
@@ -57,7 +66,7 @@ methods:
     syntax:
       content: >-
         function listCheckpoints(fullyQualifiedNamespace: string, eventHubName:
-        string, consumerGroup: string)
+        string, consumerGroup: string, options?: OperationOptions)
       parameters:
         - id: fullyQualifiedNamespace
           type: string
@@ -71,12 +80,18 @@ methods:
           description: The event hub name.
         - id: consumerGroup
           type: string
-          description: |
-            The consumer group name.
+          description: The consumer group name.
+        - id: options
+          type: OperationOptions
+          description: >
+            A set of options that can be specified to influence the behavior of
+            this method.
+             - `abortSignal`: A signal used to request operation cancellation.
+             - `tracingOptions`: Options for configuring tracing.
       return:
         type: 'Promise&lt;Checkpoint[]&gt;'
         description: ''
-  - name: 'listOwnership(string, string, string)'
+  - name: 'listOwnership(string, string, string, OperationOptions)'
     uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.listOwnership'
     package: '@azure/eventhubs-checkpointstore-blob'
     summary: >-
@@ -94,7 +109,7 @@ methods:
     syntax:
       content: >-
         function listOwnership(fullyQualifiedNamespace: string, eventHubName:
-        string, consumerGroup: string)
+        string, consumerGroup: string, options?: OperationOptions)
       parameters:
         - id: fullyQualifiedNamespace
           type: string
@@ -109,12 +124,19 @@ methods:
         - id: consumerGroup
           type: string
           description: The consumer group name.
+        - id: options
+          type: OperationOptions
+          description: >-
+            A set of options that can be specified to influence the behavior of
+            this method.
+             - `abortSignal`: A signal used to request operation cancellation.
+             - `tracingOptions`: Options for configuring tracing.
       return:
         type: 'Promise&lt;PartitionOwnership[]&gt;'
         description: >-
           Partition ownership details of all the partitions that have had an
           owner.
-  - name: updateCheckpoint(Checkpoint)
+  - name: 'updateCheckpoint(Checkpoint, OperationOptions)'
     uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.updateCheckpoint'
     package: '@azure/eventhubs-checkpointstore-blob'
     summary: Updates the checkpoint in the data store for a partition.
@@ -122,11 +144,20 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function updateCheckpoint(checkpoint: Checkpoint)'
+      content: >-
+        function updateCheckpoint(checkpoint: Checkpoint, options?:
+        OperationOptions)
       parameters:
         - id: checkpoint
           type: Checkpoint
           description: The checkpoint.
+        - id: options
+          type: OperationOptions
+          description: >-
+            A set of options that can be specified to influence the behavior of
+            this method.
+             - `abortSignal`: A signal used to request operation cancellation.
+             - `tracingOptions`: Options for configuring tracing.
       return:
         type: Promise&lt;void&gt;
         description: The new etag on successful update.

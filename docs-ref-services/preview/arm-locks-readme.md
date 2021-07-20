@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: locks
 ---
 
-# Azure ManagementLock client library for JavaScript - Version dev 
+# Azure ManagementLock client library for JavaScript - Version 30.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ManagementLock client.

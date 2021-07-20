@@ -1,17 +1,17 @@
 ---
 title: Azure Communication Network Traversal client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/communication-network-traversal, 
+keywords: Azure, javascript, SDK, API, @azure/communication-network-traversal, communication
 author: maggiepint
 ms.author: magpint
-ms.date: 05/25/2021
+ms.date: 07/20/2021
 ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: communication
 ---
 
-# Azure Communication Network Traversal client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Communication Network Traversal client library for JavaScript - Version 1.0.0-beta.2 
 
 
 Azure Communication Network Traversal is managing tokens for Azure Communication Services. 
@@ -114,7 +114,7 @@ const config = relayClient.getRelayConfiguration(user);
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-network-traversal_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-network-traversal_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

@@ -7,11 +7,6 @@ enums:
   - '@azure/core-tracing.SpanKind'
   - '@azure/core-tracing.SpanStatusCode'
   - '@azure/core-tracing.TraceFlags'
-classes:
-  - '@azure/core-tracing.NoOpSpan'
-  - '@azure/core-tracing.NoOpTracer'
-  - '@azure/core-tracing.TestSpan'
-  - '@azure/core-tracing.TestTracer'
 interfaces:
   - '@azure/core-tracing.Context'
   - '@azure/core-tracing.ContextAPI'
@@ -23,8 +18,6 @@ interfaces:
   - '@azure/core-tracing.Span'
   - '@azure/core-tracing.SpanAttributes'
   - '@azure/core-tracing.SpanContext'
-  - '@azure/core-tracing.SpanGraph'
-  - '@azure/core-tracing.SpanGraphNode'
   - '@azure/core-tracing.SpanOptions'
   - '@azure/core-tracing.SpanStatus'
   - '@azure/core-tracing.TraceState'
@@ -106,9 +99,7 @@ functions:
   - name: getTracer()
     uid: '@azure/core-tracing.getTracer'
     package: '@azure/core-tracing'
-    summary: |-
-      Retrieves the active tracer, or returns a
-      no-op implementation if one is not set.
+    summary: Retrieves a tracer from the global tracer provider.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -117,6 +108,46 @@ functions:
       return:
         type: <xref uid="@azure/core-tracing.Tracer" />
         description: ''
+  - name: 'getTracer(string, string)'
+    uid: '@azure/core-tracing.getTracer_1'
+    package: '@azure/core-tracing'
+    summary: Retrieves a tracer from the global tracer provider.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getTracer(name: string, version?: string)'
+      parameters:
+        - id: name
+          type: string
+          description: ''
+        - id: version
+          type: string
+          description: ''
+      return:
+        type: <xref uid="@azure/core-tracing.Tracer" />
+        description: ''
+  - name: isSpanContextValid(SpanContext)
+    uid: '@azure/core-tracing.isSpanContextValid'
+    package: '@azure/core-tracing'
+    summary: >-
+      Returns true of the given <xref:SpanContext> is valid.
+
+      A valid <xref:SpanContext> is one which has a valid trace ID and span ID
+      as per the spec.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function isSpanContextValid(context: SpanContext)'
+      parameters:
+        - id: context
+          type: <xref uid="@azure/core-tracing.SpanContext" />
+          description: |
+            the <xref:SpanContext> to validate.
+      return:
+        type: boolean
+        description: 'true if the {@link SpanContext} is valid, false otherwise.'
   - name: 'setSpan(Context, Span)'
     uid: '@azure/core-tracing.setSpan'
     package: '@azure/core-tracing'
@@ -159,17 +190,3 @@ functions:
       return:
         type: <xref uid="@azure/core-tracing.Context" />
         description: ''
-  - name: setTracer(Tracer)
-    uid: '@azure/core-tracing.setTracer'
-    package: '@azure/core-tracing'
-    summary: 'Sets the global tracer, enabling tracing for the Azure SDK.'
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function setTracer(tracer: Tracer)'
-      parameters:
-        - id: tracer
-          type: <xref uid="@azure/core-tracing.Tracer" />
-          description: |
-            An OpenTelemetry Tracer instance.

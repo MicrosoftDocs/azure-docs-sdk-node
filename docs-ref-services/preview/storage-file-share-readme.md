@@ -4,7 +4,7 @@ keywords: Azure, javascript, SDK, API, @azure/storage-file-share,
 author: maggiepint
 ms.author: magpint
 ms.date: 12/10/2020
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript

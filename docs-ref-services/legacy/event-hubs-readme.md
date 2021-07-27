@@ -4,7 +4,7 @@ keywords: Azure, javascript, SDK, API, @azure/event-hubs,
 author: maggiepint
 ms.author: magpint
 ms.date: 02/02/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript

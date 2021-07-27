@@ -5,7 +5,7 @@ author: spelluru
 ms.author: spelluru
 manager: timlt
 ms.date: 03/04/2020
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs

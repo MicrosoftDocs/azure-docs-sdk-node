@@ -4,7 +4,7 @@ description: Reference for Azure MySQL modules for JavaScript
 author: ajlam
 ms.author: andrela
 ms.date: 07/18/2017
-ms.topic: article
+ms.topic: reference
 ms.devlang: nodejs
 ms.service: mysql
 ---

@@ -5,7 +5,7 @@ author: rayne-wiselman
 ms.author: raynew
 manager: carmonm
 ms.date: 07/18/2017
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs

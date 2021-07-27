@@ -5,7 +5,7 @@ author: rwike77
 ms.author: ryanwi
 manager: timlt
 ms.date: 11/12/2017
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs

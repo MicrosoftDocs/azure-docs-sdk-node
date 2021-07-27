@@ -6,7 +6,7 @@ manager: nitinme
 ms.author: heidist
 
 ms.date: 08/18/2019
-ms.topic: conceptual
+ms.topic: reference
 ms.devlang: nodejs
 ms.service: cognitive-search
 

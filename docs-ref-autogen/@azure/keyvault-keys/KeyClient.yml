@@ -1,0 +1,793 @@
+### YamlMime:TSType
+name: KeyClient
+uid: '@azure/keyvault-keys.KeyClient'
+package: '@azure/keyvault-keys'
+summary: >-
+  The KeyClient provides methods to manage <xref:KeyVaultKey> in the
+
+  Azure Key Vault. The client supports creating, retrieving, updating,
+
+  deleting, purging, backing up, restoring and listing KeyVaultKeys. The
+
+  client also supports listing <xref:DeletedKey> for a soft-delete enabled Azure
+  Key
+
+  Vault.
+fullName: KeyClient
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+constructors:
+  - name: 'KeyClient(string, TokenCredential, KeyClientOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.constructor'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Creates an instance of KeyClient.
+      Example usage:
+      ```ts
+      import { KeyClient } from "@azure/keyvault-keys";
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      let vaultUrl = `https://<MY KEYVAULT HERE>.vault.azure.net`;
+      let credentials = new DefaultAzureCredential();
+
+      let client = new KeyClient(vaultUrl, credentials);
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        new KeyClient(vaultUrl: string, credential: TokenCredential,
+        pipelineOptions?: KeyClientOptions)
+      parameters:
+        - id: vaultUrl
+          type: string
+          description: >-
+            the URL of the Key Vault. It should have this shape:
+            `https://${your-key-vault-name}.vault.azure.net`
+        - id: credential
+          type: TokenCredential
+          description: >-
+            An object that implements the `TokenCredential` interface used to
+            authenticate requests to the service. Use the \@azure/identity
+            package to create a credential that suits your needs.
+        - id: pipelineOptions
+          type: <xref uid="@azure/keyvault-keys.KeyClientOptions" />
+          description: >
+            Pipeline options used to configure Key Vault API requests. Omit this
+            parameter to use the default pipeline configuration.
+properties:
+  - name: vaultUrl
+    uid: '@azure/keyvault-keys.KeyClient.vaultUrl'
+    package: '@azure/keyvault-keys'
+    summary: The base URL to the vault
+    fullName: vaultUrl
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'vaultUrl: string'
+      return:
+        type: string
+        description: ''
+methods:
+  - name: 'backupKey(string, BackupKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.backupKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Requests that a backup of the specified key be downloaded to the client.
+      All versions of the
+
+      key will be downloaded. This operation requires the keys/backup
+      permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      let backupContents = await client.backupKey("MyKey");
+
+      ```
+
+      Backs up the specified key.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function backupKey(name: string, options?: BackupKeyOptions)'
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.BackupKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;Uint8Array | undefined&gt;
+        description: ''
+  - name: 'beginDeleteKey(string, BeginDeleteKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.beginDeleteKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The delete operation applies to any key stored in Azure Key Vault.
+      Individual versions
+
+      of a key can not be deleted, only all versions of a given key at once.
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the key is deleted.
+
+
+      This operation requires the keys/delete permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new KeyClient(url, credentials);
+
+      await client.createKey("MyKey", "EC");
+
+      const poller = await client.beginDeleteKey("MyKey");
+
+
+      // Serializing the poller
+
+      const serialized = poller.toString();
+
+      // A new poller can be created with:
+
+      // await client.beginDeleteKey("MyKey", { resumeFrom: serialized });
+
+
+      // Waiting until it's done
+
+      const deletedKey = await poller.pollUntilDone();
+
+      console.log(deletedKey);
+
+      ```
+
+      Deletes a key from a specified key vault.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function beginDeleteKey(name: string, options?: BeginDeleteKeyOptions)'
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.BeginDeleteKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/keyvault-keys.DeletedKey" />&gt;, <xref
+          uid="@azure/keyvault-keys.DeletedKey" />&gt;&gt;
+        description: ''
+  - name: 'beginRecoverDeletedKey(string, BeginRecoverDeletedKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.beginRecoverDeletedKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Recovers the deleted key in the specified vault. This operation can only
+      be performed on a
+
+      soft-delete enabled vault.
+
+      This function returns a Long Running Operation poller that allows you to
+      wait indefinitely until the deleted key is recovered.
+
+
+      This operation requires the keys/recover permission.
+
+
+      Example usage:
+
+      ```ts
+
+      const client = new KeyClient(url, credentials);
+
+      await client.createKey("MyKey", "EC");
+
+      const deletePoller = await client.beginDeleteKey("MyKey");
+
+      await deletePoller.pollUntilDone();
+
+      const poller = await client.beginRecoverDeletedKey("MyKey");
+
+
+      // Serializing the poller
+
+      const serialized = poller.toString();
+
+      // A new poller can be created with:
+
+      // await client.beginRecoverDeletedKey("MyKey", { resumeFrom: serialized
+      });
+
+
+      // Waiting until it's done
+
+      const key = await poller.pollUntilDone();
+
+      console.log(key);
+
+      ```
+
+      Recovers the deleted key to the latest version.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginRecoverDeletedKey(name: string, options?:
+        BeginRecoverDeletedKeyOptions)
+      parameters:
+        - id: name
+          type: string
+          description: The name of the deleted key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.BeginRecoverDeletedKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/keyvault-keys.DeletedKey" />&gt;, <xref
+          uid="@azure/keyvault-keys.DeletedKey" />&gt;&gt;
+        description: ''
+  - name: 'createEcKey(string, CreateEcKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.createEcKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The createEcKey method creates a new elliptic curve key in Azure Key
+      Vault. If the named key
+
+      already exists, Azure Key Vault creates a new version of the key. It
+      requires the keys/create
+
+      permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      let result = await client.createEcKey("MyKey", { curve: "P-256" });
+
+      ```
+
+      Creates a new key, stores it, then returns key parameters and properties
+      to the client.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function createEcKey(name: string, options?: CreateEcKeyOptions)'
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.CreateEcKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''
+  - name: 'createKey(string, KeyType, CreateKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.createKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The create key operation can be used to create any key type in Azure Key
+      Vault. If the named key
+
+      already exists, Azure Key Vault creates a new version of the key. It
+      requires the keys/create
+
+      permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      // Create an elliptic-curve key:
+
+      let result = await client.createKey("MyKey", "EC");
+
+      ```
+
+      Creates a new key, stores it, then returns key parameters and properties
+      to the client.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createKey(name: string, keyType: KeyType, options?:
+        CreateKeyOptions)
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: keyType
+          type: <xref uid="@azure/keyvault-keys.KeyType" />
+          description: >-
+            The type of the key. One of the following: 'EC', 'EC-HSM', 'RSA',
+            'RSA-HSM', 'oct'.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.CreateKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''
+  - name: 'createOctKey(string, CreateOctKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.createOctKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The createOctKey method creates a new OCT key in Azure Key Vault. If the
+      named key
+
+      already exists, Azure Key Vault creates a new version of the key. It
+      requires the keys/create
+
+      permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      let result = await client.createOctKey("MyKey", { hsm: true });
+
+      ```
+
+      Creates a new key, stores it, then returns key parameters and properties
+      to the client.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function createOctKey(name: string, options?: CreateOctKeyOptions)'
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.CreateOctKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''
+  - name: 'createRsaKey(string, CreateRsaKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.createRsaKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The createRSAKey method creates a new RSA key in Azure Key Vault. If the
+      named key
+
+      already exists, Azure Key Vault creates a new version of the key. It
+      requires the keys/create
+
+      permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      let result = await client.createRsaKey("MyKey", { keySize: 2048 });
+
+      ```
+
+      Creates a new key, stores it, then returns key parameters and properties
+      to the client.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function createRsaKey(name: string, options?: CreateRsaKeyOptions)'
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.CreateRsaKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''
+  - name: 'getDeletedKey(string, GetDeletedKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.getDeletedKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The getDeletedKey method returns the specified deleted key along with its
+      properties.
+
+      This operation requires the keys/get permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      let key = await client.getDeletedKey("MyDeletedKey");
+
+      ```
+
+      Gets the specified deleted key.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getDeletedKey(name: string, options?: GetDeletedKeyOptions)'
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.GetDeletedKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.DeletedKey" />&gt;
+        description: ''
+  - name: 'getKey(string, GetKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.getKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The getKey method gets a specified key and is applicable to any key stored
+      in Azure Key Vault.
+
+      This operation requires the keys/get permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      let key = await client.getKey("MyKey");
+
+      ```
+
+      Get a specified key from a given key vault.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getKey(name: string, options?: GetKeyOptions)'
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.GetKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''
+  - name: 'importKey(string, JsonWebKey, ImportKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.importKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The import key operation may be used to import any key type into an Azure
+      Key Vault. If the
+
+      named key already exists, Azure Key Vault creates a new version of the
+      key. This operation
+
+      requires the keys/import permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      // Key contents in myKeyContents
+
+      let result = await client.importKey("MyKey", myKeyContents);
+
+      ```
+
+      Imports an externally created key, stores it, and returns key parameters
+      and properties
+
+      to the client.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function importKey(name: string, key: JsonWebKey, options?:
+        ImportKeyOptions)
+      parameters:
+        - id: name
+          type: string
+          description: Name for the imported key.
+        - id: key
+          type: <xref uid="@azure/keyvault-keys.JsonWebKey" />
+          description: The JSON web key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.ImportKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''
+  - name: listDeletedKeys(ListDeletedKeysOptions)
+    uid: '@azure/keyvault-keys.KeyClient.listDeletedKeys'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Iterates the deleted keys in the vault.  The full key identifier and
+      properties are provided
+
+      in the response. No values are returned for the keys. This operations
+      requires the keys/list permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      for await (const deletedKey of client.listDeletedKeys()) {
+        console.log("deleted key: ", deletedKey);
+      }
+
+      ```
+
+      List all keys in the vault
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function listDeletedKeys(options?: ListDeletedKeysOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.ListDeletedKeysOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/keyvault-keys.DeletedKey" />&gt;
+        description: ''
+  - name: listPropertiesOfKeys(ListPropertiesOfKeysOptions)
+    uid: '@azure/keyvault-keys.KeyClient.listPropertiesOfKeys'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Iterates the latest version of all keys in the vault.  The full key
+      identifier and properties are provided
+
+      in the response. No values are returned for the keys. This operations
+      requires the keys/list permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      for await (const keyProperties of client.listPropertiesOfKeys()) {
+        const key = await client.getKey(keyProperties.name);
+        console.log("key: ", key);
+      }
+
+      ```
+
+      List all keys in the vault
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function listPropertiesOfKeys(options?: ListPropertiesOfKeysOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.ListPropertiesOfKeysOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/keyvault-keys.KeyProperties" />&gt;
+        description: ''
+  - name: 'listPropertiesOfKeyVersions(string, ListPropertiesOfKeyVersionsOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.listPropertiesOfKeyVersions'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Iterates all versions of the given key in the vault. The full key
+      identifier, properties, and tags are provided
+
+      in the response. This operation requires the keys/list permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      for await (const keyProperties of
+      client.listPropertiesOfKeyVersions("MyKey")) {
+        const key = await client.getKey(keyProperties.name);
+        console.log("key version: ", key);
+      }
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listPropertiesOfKeyVersions(name: string, options?:
+        ListPropertiesOfKeyVersionsOptions)
+      parameters:
+        - id: name
+          type: string
+          description: Name of the key to fetch versions for
+        - id: options
+          type: >-
+            <xref uid="@azure/keyvault-keys.ListPropertiesOfKeyVersionsOptions"
+            />
+          description: |
+            The optional parameters.
+      return:
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/keyvault-keys.KeyProperties" />&gt;
+        description: ''
+  - name: 'purgeDeletedKey(string, PurgeDeletedKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.purgeDeletedKey'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The purge deleted key operation removes the key permanently, without the
+      possibility of
+
+      recovery. This operation can only be enabled on a soft-delete enabled
+      vault. This operation
+
+      requires the keys/purge permission.
+
+      Example usage:
+
+      ```ts
+
+      const client = new KeyClient(url, credentials);
+
+      const deletePoller = await client.beginDeleteKey("MyKey")
+
+      await deletePoller.pollUntilDone();
+
+      await client.purgeDeletedKey("MyKey");
+
+      ```
+
+      Permanently deletes the specified key.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function purgeDeletedKey(name: string, options?: PurgeDeletedKeyOptions)'
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.PurgeDeletedKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: 'restoreKeyBackup(Uint8Array, RestoreKeyBackupOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.restoreKeyBackup'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Restores a backed up key, and all its versions, to a vault. This operation
+      requires the
+
+      keys/restore permission.
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(url, credentials);
+
+      let backupContents = await client.backupKey("MyKey");
+
+      // ...
+
+      let key = await client.restoreKeyBackup(backupContents);
+
+      ```
+
+      Restores a backed up key to a vault.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function restoreKeyBackup(backup: Uint8Array, options?:
+        RestoreKeyBackupOptions)
+      parameters:
+        - id: backup
+          type: Uint8Array
+          description: The backup blob associated with a key bundle.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.RestoreKeyBackupOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''
+  - name: 'updateKeyProperties(string, string, UpdateKeyPropertiesOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.updateKeyProperties'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The updateKeyProperties method changes specified properties of an existing
+      stored key. Properties that
+
+      are not specified in the request are left unchanged. The value of a key
+      itself cannot be
+
+      changed. This operation requires the keys/set permission.
+
+      Example usage:
+
+      ```ts
+
+      let keyName = "MyKey";
+
+      let client = new KeyClient(url, credentials);
+
+      let key = await client.getKey(keyName);
+
+      let result = await client.updateKeyProperties(keyName,
+      key.properties.version, { enabled: false });
+
+      ```
+
+      Updates the properties associated with a specified key in a given key
+      vault.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateKeyProperties(name: string, keyVersion: string, options?:
+        UpdateKeyPropertiesOptions)
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: keyVersion
+          type: string
+          description: The version of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.UpdateKeyPropertiesOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''

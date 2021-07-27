@@ -4,7 +4,7 @@ keywords: Azure, javascript, SDK, API, @azure/app-configuration,
 author: maggiepint
 ms.author: magpint
 ms.date: 07/07/2020
-ms.topic: article
+ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
 ---

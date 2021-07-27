@@ -4,7 +4,7 @@ keywords: Azure, javascript, SDK, API, @azure/communication-sms,
 author: maggiepint
 ms.author: magpint
 ms.date: 03/10/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript

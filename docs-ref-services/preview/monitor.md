@@ -4,7 +4,7 @@ description: Reference for Azure Monitor modules for JavaScript
 author: robb
 ms.author: rboucher
 ms.date: 07/18/2017
-ms.topic: article
+ms.topic: reference
 ms.service: azure-monitor
 ---
 

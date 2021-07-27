@@ -4,7 +4,7 @@ keywords: Azure, javascript, SDK, API, @azure/keyvault-keys,
 author: maggiepint
 ms.author: magpint
 ms.date: 08/12/2020
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript

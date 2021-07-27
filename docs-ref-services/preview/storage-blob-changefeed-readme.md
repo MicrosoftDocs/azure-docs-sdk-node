@@ -4,7 +4,7 @@ keywords: Azure, javascript, SDK, API, @azure/storage-blob-changefeed,
 author: maggiepint
 ms.author: magpint
 ms.date: 09/09/2020
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript

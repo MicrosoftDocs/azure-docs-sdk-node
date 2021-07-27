@@ -4,7 +4,7 @@ keywords: Azure, javascript, SDK, API, @azure/communication-network-traversal, c
 author: maggiepint
 ms.author: magpint
 ms.date: 07/20/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript

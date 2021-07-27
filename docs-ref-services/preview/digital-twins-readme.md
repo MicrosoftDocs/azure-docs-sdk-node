@@ -4,7 +4,7 @@ keywords: Azure, javascript, SDK, API, @azure/digital-twins,
 author: maggiepint
 ms.author: magpint
 ms.date: 09/08/2020
-ms.topic: article
+ms.topic: reference
 ms.devlang: javascript
 ms.service: azure
 ---

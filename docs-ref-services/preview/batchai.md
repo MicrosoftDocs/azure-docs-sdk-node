@@ -5,7 +5,7 @@ author: garyericson
 ms.author: garye
 manager: cjgronlund 
 ms.date: 03/26/2019
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs

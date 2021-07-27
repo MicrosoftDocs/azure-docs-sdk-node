@@ -5,7 +5,7 @@ ms.service: hdinsight
 author: jasonwhowell
 ms.author: jasonh
 manager: kfile
-ms.topic: article
+ms.topic: reference
 ms.devlang: nodejs
 ms.date: 07/18/2017
 ---

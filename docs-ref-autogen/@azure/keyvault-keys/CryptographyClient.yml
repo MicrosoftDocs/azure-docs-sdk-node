@@ -1,0 +1,456 @@
+### YamlMime:TSType
+name: CryptographyClient
+uid: '@azure/keyvault-keys.CryptographyClient'
+package: '@azure/keyvault-keys'
+summary: |-
+  A client used to perform cryptographic operations on an Azure Key vault key
+  or a local <xref:JsonWebKey>.
+fullName: CryptographyClient
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+constructors:
+  - name: CryptographyClient(JsonWebKey)
+    uid: '@azure/keyvault-keys.CryptographyClient.constructor_1'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Constructs a new instance of the Cryptography client for the given key in
+      local mode.
+
+      Example usage:
+
+      ```ts
+
+      import { CryptographyClient } from "@azure/keyvault-keys";
+
+
+      const jsonWebKey: JsonWebKey = {
+        // ...
+      };
+
+      const client = new CryptographyClient(jsonWebKey);
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'new CryptographyClient(key: JsonWebKey)'
+      parameters:
+        - id: key
+          type: <xref uid="@azure/keyvault-keys.JsonWebKey" />
+          description: >-
+            The key to use during cryptography tasks. You can also pass the
+            identifier of the key i.e its url here.
+  - name: >-
+      CryptographyClient(string | KeyVaultKey, TokenCredential,
+      CryptographyClientOptions)
+    uid: '@azure/keyvault-keys.CryptographyClient.constructor'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Constructs a new instance of the Cryptography client for the given key
+      Example usage:
+      ```ts
+      import { KeyClient, CryptographyClient } from "@azure/keyvault-keys";
+      import { DefaultAzureCredential } from "@azure/identity";
+
+      let vaultUrl = `https://<MY KEYVAULT HERE>.vault.azure.net`;
+      let credentials = new DefaultAzureCredential();
+
+      let keyClient = new KeyClient(vaultUrl, credentials);
+      let keyVaultKey = await keyClient.getKey("MyKey");
+
+      let client = new CryptographyClient(keyVaultKey.id, credentials);
+      // or
+      let client = new CryptographyClient(keyVaultKey, credentials);
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        new CryptographyClient(key: string | KeyVaultKey, credential:
+        TokenCredential, pipelineOptions?: CryptographyClientOptions)
+      parameters:
+        - id: key
+          type: string | <xref uid="@azure/keyvault-keys.KeyVaultKey" />
+          description: >-
+            The key to use during cryptography tasks. You can also pass the
+            identifier of the key i.e its url here.
+        - id: credential
+          type: TokenCredential
+          description: >-
+            An object that implements the `TokenCredential` interface used to
+            authenticate requests to the service. Use the \@azure/identity
+            package to create a credential that suits your needs.
+        - id: pipelineOptions
+          type: <xref uid="@azure/keyvault-keys.CryptographyClientOptions" />
+          description: |
+            Pipeline options used to configure Key Vault API requests.
+                                     Omit this parameter to use the default pipeline configuration.
+properties:
+  - name: keyID
+    uid: '@azure/keyvault-keys.CryptographyClient.keyID'
+    package: '@azure/keyvault-keys'
+    summary: The ID of the key used to perform cryptographic operations for the client.
+    fullName: keyID
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: string | undefined keyID
+      return:
+        type: string | undefined
+        description: ''
+  - name: vaultUrl
+    uid: '@azure/keyvault-keys.CryptographyClient.vaultUrl'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The base URL to the vault. If a local <xref:JsonWebKey> is used vaultUrl
+      will be empty.
+    fullName: vaultUrl
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: string vaultUrl
+      return:
+        type: string
+        description: ''
+methods:
+  - name: 'decrypt(DecryptParameters, DecryptOptions)'
+    uid: '@azure/keyvault-keys.CryptographyClient.decrypt'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Decrypts the given ciphertext with the specified decryption parameters.
+
+      Depending on the algorithm used in the decryption parameters, the set of
+      possible decryption parameters will change.
+
+      Example usage:
+
+      ```ts
+
+      let client = new CryptographyClient(keyVaultKey, credentials);
+
+      let result = await client.decrypt({ algorithm: "RSA1_5", ciphertext:
+      encryptedBuffer });
+
+      let result = await client.decrypt({ algorithm: "A256GCM", iv:
+      ivFromEncryptResult, authenticationTag: tagFromEncryptResult });
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function decrypt(decryptParameters: DecryptParameters, options?:
+        DecryptOptions)
+      parameters:
+        - id: decryptParameters
+          type: <xref uid="@azure/keyvault-keys.DecryptParameters" />
+          description: The decryption parameters.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.DecryptOptions" />
+          description: |
+            Additional options.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.DecryptResult" />&gt;
+        description: ''
+  - name: 'decrypt(EncryptionAlgorithm, Uint8Array, DecryptOptions)'
+    uid: '@azure/keyvault-keys.CryptographyClient.decrypt_1'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Decrypts the given ciphertext with the specified cryptography algorithm
+      Example usage:
+      ```ts
+      let client = new CryptographyClient(keyVaultKey, credentials);
+      let result = await client.decrypt("RSA1_5", encryptedBuffer);
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: true
+    customDeprecatedMessage: 'Use `decrypt({ algorithm, ciphertext }, options)` instead.'
+    syntax:
+      content: >-
+        function decrypt(algorithm: EncryptionAlgorithm, ciphertext: Uint8Array,
+        options?: DecryptOptions)
+      parameters:
+        - id: algorithm
+          type: <xref uid="@azure/keyvault-keys.EncryptionAlgorithm" />
+          description: The algorithm to use.
+        - id: ciphertext
+          type: Uint8Array
+          description: The text to decrypt.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.DecryptOptions" />
+          description: Additional options.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.DecryptResult" />&gt;
+        description: ''
+  - name: 'encrypt(EncryptionAlgorithm, Uint8Array, EncryptOptions)'
+    uid: '@azure/keyvault-keys.CryptographyClient.encrypt_1'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Encrypts the given plaintext with the specified cryptography algorithm
+      Example usage:
+      ```ts
+      let client = new CryptographyClient(keyVaultKey, credentials);
+      let result = await client.encrypt("RSA1_5", Buffer.from("My Message"));
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: true
+    customDeprecatedMessage: 'Use `encrypt({ algorithm, plaintext }, options)` instead.'
+    syntax:
+      content: >-
+        function encrypt(algorithm: EncryptionAlgorithm, plaintext: Uint8Array,
+        options?: EncryptOptions)
+      parameters:
+        - id: algorithm
+          type: <xref uid="@azure/keyvault-keys.EncryptionAlgorithm" />
+          description: The algorithm to use.
+        - id: plaintext
+          type: Uint8Array
+          description: The text to encrypt.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.EncryptOptions" />
+          description: Additional options.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.EncryptResult" />&gt;
+        description: ''
+  - name: 'encrypt(EncryptParameters, EncryptOptions)'
+    uid: '@azure/keyvault-keys.CryptographyClient.encrypt'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      Encrypts the given plaintext with the specified encryption parameters.
+
+      Depending on the algorithm set in the encryption parameters, the set of
+      possible encryption parameters will change.
+
+      Example usage:
+
+      ```ts
+
+      let client = new CryptographyClient(keyVaultKey, credentials);
+
+      let result = await client.encrypt({ algorithm: "RSA1_5", plaintext:
+      Buffer.from("My Message")});
+
+      let result = await client.encrypt({ algorithm: "A256GCM", plaintext:
+      Buffer.from("My Message"), additionalAuthenticatedData: Buffer.from("My
+      authenticated data")});
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function encrypt(encryptParameters: EncryptParameters, options?:
+        EncryptOptions)
+      parameters:
+        - id: encryptParameters
+          type: <xref uid="@azure/keyvault-keys.EncryptParameters" />
+          description: 'The encryption parameters, keyed on the encryption algorithm chosen.'
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.EncryptOptions" />
+          description: |
+            Additional options.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.EncryptResult" />&gt;
+        description: ''
+  - name: 'sign(SignatureAlgorithm, Uint8Array, SignOptions)'
+    uid: '@azure/keyvault-keys.CryptographyClient.sign'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Cryptographically sign the digest of a message
+      Example usage:
+      ```ts
+      let client = new CryptographyClient(keyVaultKey, credentials);
+      let result = await client.sign("RS256", digest);
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sign(algorithm: SignatureAlgorithm, digest: Uint8Array,
+        options?: SignOptions)
+      parameters:
+        - id: algorithm
+          type: <xref uid="@azure/keyvault-keys.SignatureAlgorithm" />
+          description: The signing algorithm to use.
+        - id: digest
+          type: Uint8Array
+          description: The digest of the data to sign.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.SignOptions" />
+          description: |
+            Additional options.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.SignResult" />&gt;
+        description: ''
+  - name: 'signData(SignatureAlgorithm, Uint8Array, SignOptions)'
+    uid: '@azure/keyvault-keys.CryptographyClient.signData'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Cryptographically sign a block of data
+      Example usage:
+      ```ts
+      let client = new CryptographyClient(keyVaultKey, credentials);
+      let result = await client.signData("RS256", message);
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function signData(algorithm: SignatureAlgorithm, data: Uint8Array,
+        options?: SignOptions)
+      parameters:
+        - id: algorithm
+          type: <xref uid="@azure/keyvault-keys.SignatureAlgorithm" />
+          description: The signing algorithm to use.
+        - id: data
+          type: Uint8Array
+          description: The data to sign.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.SignOptions" />
+          description: |
+            Additional options.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.SignResult" />&gt;
+        description: ''
+  - name: 'unwrapKey(KeyWrapAlgorithm, Uint8Array, UnwrapKeyOptions)'
+    uid: '@azure/keyvault-keys.CryptographyClient.unwrapKey'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Unwraps the given wrapped key using the specified cryptography algorithm
+      Example usage:
+      ```ts
+      let client = new CryptographyClient(keyVaultKey, credentials);
+      let result = await client.unwrapKey("RSA1_5", keyToUnwrap);
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function unwrapKey(algorithm: KeyWrapAlgorithm, encryptedKey:
+        Uint8Array, options?: UnwrapKeyOptions)
+      parameters:
+        - id: algorithm
+          type: <xref uid="@azure/keyvault-keys.KeyWrapAlgorithm" />
+          description: The decryption algorithm to use to unwrap the key.
+        - id: encryptedKey
+          type: Uint8Array
+          description: The encrypted key to unwrap.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.UnwrapKeyOptions" />
+          description: |
+            Additional options.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.UnwrapResult" />&gt;
+        description: ''
+  - name: 'verify(SignatureAlgorithm, Uint8Array, Uint8Array, VerifyOptions)'
+    uid: '@azure/keyvault-keys.CryptographyClient.verify'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Verify the signed message digest
+      Example usage:
+      ```ts
+      let client = new CryptographyClient(keyVaultKey, credentials);
+      let result = await client.verify("RS256", signedDigest, signature);
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function verify(algorithm: SignatureAlgorithm, digest: Uint8Array,
+        signature: Uint8Array, options?: VerifyOptions)
+      parameters:
+        - id: algorithm
+          type: <xref uid="@azure/keyvault-keys.SignatureAlgorithm" />
+          description: The signing algorithm to use to verify with.
+        - id: digest
+          type: Uint8Array
+          description: The digest to verify.
+        - id: signature
+          type: Uint8Array
+          description: The signature to verify the digest against.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.VerifyOptions" />
+          description: |
+            Additional options.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.VerifyResult" />&gt;
+        description: ''
+  - name: 'verifyData(SignatureAlgorithm, Uint8Array, Uint8Array, VerifyOptions)'
+    uid: '@azure/keyvault-keys.CryptographyClient.verifyData'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Verify the signed block of data
+      Example usage:
+      ```ts
+      let client = new CryptographyClient(keyVaultKey, credentials);
+      let result = await client.verifyData("RS256", signedMessage, signature);
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function verifyData(algorithm: SignatureAlgorithm, data: Uint8Array,
+        signature: Uint8Array, options?: VerifyOptions)
+      parameters:
+        - id: algorithm
+          type: <xref uid="@azure/keyvault-keys.SignatureAlgorithm" />
+          description: The algorithm to use to verify with.
+        - id: data
+          type: Uint8Array
+          description: The signed block of data to verify.
+        - id: signature
+          type: Uint8Array
+          description: The signature to verify the block against.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.VerifyOptions" />
+          description: |
+            Additional options.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.VerifyResult" />&gt;
+        description: ''
+  - name: 'wrapKey(KeyWrapAlgorithm, Uint8Array, WrapKeyOptions)'
+    uid: '@azure/keyvault-keys.CryptographyClient.wrapKey'
+    package: '@azure/keyvault-keys'
+    summary: |-
+      Wraps the given key using the specified cryptography algorithm
+      Example usage:
+      ```ts
+      let client = new CryptographyClient(keyVaultKey, credentials);
+      let result = await client.wrapKey("RSA1_5", keyToWrap);
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function wrapKey(algorithm: KeyWrapAlgorithm, key: Uint8Array, options?:
+        WrapKeyOptions)
+      parameters:
+        - id: algorithm
+          type: <xref uid="@azure/keyvault-keys.KeyWrapAlgorithm" />
+          description: The encryption algorithm to use to wrap the given key.
+        - id: key
+          type: Uint8Array
+          description: The key to wrap.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.WrapKeyOptions" />
+          description: |
+            Additional options.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.WrapResult" />&gt;
+        description: ''

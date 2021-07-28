@@ -1,0 +1,272 @@
+### YamlMime:TSType
+name: LROPoller
+uid: '@azure/synapse-artifacts.LROPoller'
+package: '@azure/synapse-artifacts'
+summary: ''
+fullName: LROPoller<TResult>
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: class
+constructors:
+  - name: LROPoller(Object)
+    uid: '@azure/synapse-artifacts.LROPoller.constructor'
+    package: '@azure/synapse-artifacts'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'new LROPoller(__namedParameters: Object)'
+      parameters:
+        - id: __namedParameters
+          type: Object
+          description: ''
+methods:
+  - name: cancelOperation(Object)
+    uid: '@azure/synapse-artifacts.LROPoller.cancelOperation'
+    package: '@azure/synapse-artifacts'
+    summary: >
+      Attempts to cancel the underlying operation.
+
+      It only optionally receives an object with an abortSignal property, from
+      \@azure/abort-controller's AbortSignalLike.
+
+
+      If it's called again before it finishes, it will throw an error.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function cancelOperation(options?: Object)'
+      parameters:
+        - id: options
+          type: Object
+          description: |
+            Optional properties passed to the operation's update method.
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: delay()
+    uid: '@azure/synapse-artifacts.LROPoller.delay'
+    package: '@azure/synapse-artifacts'
+    summary: >-
+      The method used by the poller to wait before attempting to update its
+      operation.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function delay()
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: getOperationState()
+    uid: '@azure/synapse-artifacts.LROPoller.getOperationState'
+    package: '@azure/synapse-artifacts'
+    summary: >
+      Returns the state of the operation.
+
+      Even though TState will be the same type inside any of the methods of any
+      extension of the Poller class,
+
+      implementations of the pollers can customize what's shared with the public
+      by writing their own
+
+      version of the `getOperationState` method, and by defining two types, one
+      representing the internal state of the poller
+
+      and a public type representing a safe to share subset of the properties of
+      the internal state.
+
+      Their definition of getOperationState can then return their public type.
+
+
+      Example:
+
+
+      ```ts
+
+      // Let's say we have our poller's operation state defined as:
+
+      interface MyOperationState extends PollOperationState<ResultType> {
+        privateProperty?: string;
+        publicProperty?: string;
+      }
+
+
+      // To allow us to have a true separation of public and private state, we
+      have to define another interface:
+
+      interface PublicState extends PollOperationState<ResultType> {
+        publicProperty?: string;
+      }
+
+
+      // Then, we define our Poller as follows:
+
+      export class MyPoller extends Poller<MyOperationState, ResultType> {
+        // ... More content is needed here ...
+
+        public getOperationState(): PublicState {
+          const state: PublicState = this.operation.state;
+          return {
+            // Properties from PollOperationState<TResult>
+            isStarted: state.isStarted,
+            isCompleted: state.isCompleted,
+            isCancelled: state.isCancelled,
+            error: state.error,
+            result: state.result,
+
+            // The only other property needed by PublicState.
+            publicProperty: state.publicProperty
+          }
+        }
+      }
+
+      ```
+
+
+      You can see this in the tests of this repository, go to the file:
+
+      `../test/utils/testPoller.ts`
+
+      and look for the getOperationState implementation.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function getOperationState()
+      return:
+        type: >-
+          <xref uid="@azure/synapse-artifacts.LROOperationState"
+          />&lt;TResult&gt;
+        description: ''
+  - name: getResult()
+    uid: '@azure/synapse-artifacts.LROPoller.getResult'
+    package: '@azure/synapse-artifacts'
+    summary: |-
+      Returns the result value of the operation,
+      regardless of the state of the poller.
+      It can return undefined or an incomplete form of the final TResult value
+      depending on the implementation.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function getResult()
+      return:
+        type: TResult | undefined
+        description: ''
+  - name: isDone()
+    uid: '@azure/synapse-artifacts.LROPoller.isDone'
+    package: '@azure/synapse-artifacts'
+    summary: Returns true if the poller has finished polling.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function isDone()
+      return:
+        type: boolean
+        description: ''
+  - name: isStopped()
+    uid: '@azure/synapse-artifacts.LROPoller.isStopped'
+    package: '@azure/synapse-artifacts'
+    summary: Returns true if the poller is stopped.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function isStopped()
+      return:
+        type: boolean
+        description: ''
+  - name: 'onProgress((state: LROOperationState<TResult>) => void)'
+    uid: '@azure/synapse-artifacts.LROPoller.onProgress'
+    package: '@azure/synapse-artifacts'
+    summary: >
+      Invokes the provided callback after each polling is completed,
+
+      sending the current state of the poller's operation.
+
+      It returns a method that can be used to stop receiving updates on the
+      given callback function.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function onProgress(callback: (state: LROOperationState<TResult>) =>
+        void)
+      parameters:
+        - id: callback
+          type: '(state: LROOperationState&lt;TResult&gt;) =&gt; void'
+          description: ''
+      return:
+        type: CancelOnProgress
+        description: ''
+  - name: poll(Object)
+    uid: '@azure/synapse-artifacts.LROPoller.poll'
+    package: '@azure/synapse-artifacts'
+    summary: >
+      Returns a promise that will resolve once a single polling request
+      finishes.
+
+      It does this by calling the update method of the Poller's operation.
+
+      It only optionally receives an object with an abortSignal property, from
+      \@azure/abort-controller's AbortSignalLike.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function poll(options?: Object)'
+      parameters:
+        - id: options
+          type: Object
+          description: |
+            Optional properties passed to the operation's update method.
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: pollUntilDone()
+    uid: '@azure/synapse-artifacts.LROPoller.pollUntilDone'
+    package: '@azure/synapse-artifacts'
+    summary: >-
+      Returns a promise that will resolve once the underlying operation is
+      completed.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function pollUntilDone()
+      return:
+        type: Promise&lt;TResult&gt;
+        description: ''
+  - name: stopPolling()
+    uid: '@azure/synapse-artifacts.LROPoller.stopPolling'
+    package: '@azure/synapse-artifacts'
+    summary: Stops the poller from continuing to poll.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function stopPolling()
+  - name: toString()
+    uid: '@azure/synapse-artifacts.LROPoller.toString'
+    package: '@azure/synapse-artifacts'
+    summary: |-
+      Returns a serialized version of the poller's operation
+      by invoking the operation's toString method.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function toString()
+      return:
+        type: string
+        description: ''
+extends: >-
+  Poller&lt;<xref uid="@azure/synapse-artifacts.LROOperationState"
+  />&lt;TResult&gt;, TResult&gt;

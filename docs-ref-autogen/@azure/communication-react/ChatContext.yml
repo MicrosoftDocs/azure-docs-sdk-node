@@ -59,36 +59,6 @@ methods:
         - id: typingIndicator
           type: TypingIndicatorReceivedEvent
           description: ''
-  - name: >-
-      asyncTeeErrorToState<T>(() => Promise<T>, ChatErrorTargets,
-      ChatErrorTargets[])
-    uid: '@azure/communication-react.ChatContext.asyncTeeErrorToState'
-    package: '@azure/communication-react'
-    summary: |
-      Tees any errors encountered in an async function to the state.
-      If the function succeeds, clears associated errors from the state.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function asyncTeeErrorToState<T>(f: () => Promise<T>, target:
-        ChatErrorTargets, clearTargets?: ChatErrorTargets[])
-      parameters:
-        - id: f
-          type: () =&gt; Promise&lt;T&gt;
-          description: Async function to execute.
-        - id: target
-          type: <xref uid="@azure/communication-react.ChatErrorTargets" />
-          description: The error target to tee error to.
-        - id: clearTargets
-          type: '<xref uid="@azure/communication-react.ChatErrorTargets" />[]'
-          description: >-
-            The error targets to clear errors for if the function succeeds. By
-            default, clears errors for `target.
-      return:
-        type: Promise&lt;T&gt;
-        description: Result of calling `f`. Also re-raises any exceptions thrown from `f`.
   - name: batch(() => void)
     uid: '@azure/communication-react.ChatContext.batch'
     package: '@azure/communication-react'
@@ -101,6 +71,19 @@ methods:
       parameters:
         - id: batchFunc
           type: () =&gt; void
+          description: ''
+  - name: 'clearError(ChatErrorTargets[])'
+    uid: '@azure/communication-react.ChatContext.clearError'
+    package: '@azure/communication-react'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function clearError(targets: ChatErrorTargets[])'
+      parameters:
+        - id: targets
+          type: '<xref uid="@azure/communication-react.ChatErrorTargets" />[]'
           description: ''
   - name: 'createThread(string, ChatThreadProperties)'
     uid: '@azure/communication-react.ChatContext.createThread'
@@ -437,3 +420,63 @@ methods:
         - id: topic
           type: string
           description: ''
+  - name: >-
+      withAsyncErrorTeedToState<Args>((args: Args) => Promise<R>,
+      ChatErrorTargets, ChatErrorTargets[])
+    uid: '@azure/communication-react.ChatContext.withAsyncErrorTeedToState'
+    package: '@azure/communication-react'
+    summary: |
+      Tees any errors encountered in an async function to the state.
+      If the function succeeds, clears associated errors from the state.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withAsyncErrorTeedToState<Args>(f: (args: Args) => Promise<R>,
+        target: ChatErrorTargets, clearTargets?: ChatErrorTargets[])
+      parameters:
+        - id: f
+          type: '(args: Args) =&gt; Promise&lt;R&gt;'
+          description: Async function to execute.
+        - id: target
+          type: <xref uid="@azure/communication-react.ChatErrorTargets" />
+          description: The error target to tee error to.
+        - id: clearTargets
+          type: '<xref uid="@azure/communication-react.ChatErrorTargets" />[]'
+          description: >-
+            The error targets to clear errors for if the function succeeds. By
+            default, clears errors for `target`.
+      return:
+        type: '(args: Args) =&gt; Promise&lt;R&gt;'
+        description: Result of calling `f`. Also re-raises any exceptions thrown from `f`.
+  - name: >-
+      withErrorTeedToState<Args>((args: Args) => R, ChatErrorTargets,
+      ChatErrorTargets[])
+    uid: '@azure/communication-react.ChatContext.withErrorTeedToState'
+    package: '@azure/communication-react'
+    summary: |
+      Tees any errors encountered in an function to the state.
+      If the function succeeds, clears associated errors from the state.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withErrorTeedToState<Args>(f: (args: Args) => R, target:
+        ChatErrorTargets, clearTargets?: ChatErrorTargets[])
+      parameters:
+        - id: f
+          type: '(args: Args) =&gt; R'
+          description: Function to execute.
+        - id: target
+          type: <xref uid="@azure/communication-react.ChatErrorTargets" />
+          description: The error target to tee error to.
+        - id: clearTargets
+          type: '<xref uid="@azure/communication-react.ChatErrorTargets" />[]'
+          description: >-
+            The error targets to clear errors for if the function succeeds. By
+            default, clears errors for `target`.
+      return:
+        type: '(args: Args) =&gt; R'
+        description: Result of calling `f`. Also re-raises any exceptions thrown from `f`.

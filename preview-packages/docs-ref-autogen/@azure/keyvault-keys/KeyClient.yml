@@ -499,7 +499,7 @@ methods:
 
       let client = new KeyClient(vaultUrl, credentials);
 
-      let bytes = await client.getRandomBytes(10);
+      let { bytes } = await client.getRandomBytes(10);
 
       ```
     remarks: ''
@@ -516,7 +516,7 @@ methods:
           description: |
             The optional parameters.
       return:
-        type: Promise&lt;Uint8Array&gt;
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.RandomBytes" />&gt;
         description: ''
   - name: 'importKey(string, JsonWebKey, ImportKeyOptions)'
     uid: '@azure/keyvault-keys.KeyClient.importKey'
@@ -731,6 +731,46 @@ methods:
       return:
         type: Promise&lt;void&gt;
         description: ''
+  - name: 'releaseKey(string, string, ReleaseKeyOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.releaseKey'
+    package: '@azure/keyvault-keys'
+    summary: >
+      Releases a key from a managed HSM.
+
+      The release key operation is applicable to all key types. The operation
+      requires the key to be marked exportable and the keys/release permission.
+
+
+      Example usage:
+
+      ```ts
+
+      let client = new KeyClient(vaultUrl, credentials);
+
+      let result = await client.releaseKey("myKey", target)
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function releaseKey(name: string, target: string, options?:
+        ReleaseKeyOptions)
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
+        - id: target
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.ReleaseKeyOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.ReleaseKeyResult" />&gt;
+        description: ''
   - name: 'restoreKeyBackup(Uint8Array, RestoreKeyBackupOptions)'
     uid: '@azure/keyvault-keys.KeyClient.restoreKeyBackup'
     package: '@azure/keyvault-keys'
@@ -791,7 +831,7 @@ methods:
 
       let keyName = "MyKey";
 
-      let client = new KeyClient(url, credentials);
+      let client = new KeyClient(vaultUrl, credentials);
 
       let key = await client.getKey(keyName);
 
@@ -816,6 +856,53 @@ methods:
         - id: keyVersion
           type: string
           description: The version of the key.
+        - id: options
+          type: <xref uid="@azure/keyvault-keys.UpdateKeyPropertiesOptions" />
+          description: |
+            The optional parameters.
+      return:
+        type: Promise&lt;<xref uid="@azure/keyvault-keys.KeyVaultKey" />&gt;
+        description: ''
+  - name: 'updateKeyProperties(string, UpdateKeyPropertiesOptions)'
+    uid: '@azure/keyvault-keys.KeyClient.updateKeyProperties_1'
+    package: '@azure/keyvault-keys'
+    summary: >-
+      The updateKeyProperties method changes specified properties of the latest
+      version of an existing stored key. Properties that
+
+      are not specified in the request are left unchanged. The value of a key
+      itself cannot be
+
+      changed. This operation requires the keys/set permission.
+
+      Example usage:
+
+      ```ts
+
+      let keyName = "MyKey";
+
+      let client = new KeyClient(vaultUrl, credentials);
+
+      let key = await client.getKey(keyName);
+
+      let result = await client.updateKeyProperties(keyName, { enabled: false
+      });
+
+      ```
+
+      Updates the properties associated with a specified key in a given key
+      vault.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function updateKeyProperties(name: string, options?:
+        UpdateKeyPropertiesOptions)
+      parameters:
+        - id: name
+          type: string
+          description: The name of the key.
         - id: options
           type: <xref uid="@azure/keyvault-keys.UpdateKeyPropertiesOptions" />
           description: |

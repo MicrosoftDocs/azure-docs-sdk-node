@@ -9,6 +9,20 @@ isPreview: false
 isDeprecated: false
 type: interface
 properties:
+  - name: allowInsecureConnection
+    uid: >-
+      @azure/synapse-access-control.AccessControlClientOptionalParams.allowInsecureConnection
+    package: '@azure/synapse-access-control'
+    summary: Set to true if the request is sent over HTTP instead of HTTPS
+    fullName: allowInsecureConnection
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'allowInsecureConnection?: boolean'
+      return:
+        type: boolean
+        description: ''
   - name: apiVersion
     uid: '@azure/synapse-access-control.AccessControlClientOptionalParams.apiVersion'
     package: '@azure/synapse-access-control'
@@ -18,28 +32,40 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'apiVersion?: undefined | string'
+      content: 'apiVersion?: string'
       return:
-        type: undefined | string
+        type: string
         description: ''
-  - name: clientRequestIdHeaderName
-    uid: >-
-      @azure/synapse-access-control.AccessControlClientOptionalParams.clientRequestIdHeaderName
+  - name: baseUri
+    uid: '@azure/synapse-access-control.AccessControlClientOptionalParams.baseUri'
     package: '@azure/synapse-access-control'
     summary: >-
-      If specified, a GenerateRequestIdPolicy will be added to the HTTP pipeline
-      that will add a
+      If specified, this is the base URI that requests will be made against for
+      this ServiceClient.
 
-      header to all outgoing requests with this header name and a random UUID as
-      the request ID.
-    fullName: clientRequestIdHeaderName
+      If it is not specified, then all OperationSpecs must contain a baseUrl
+      property.
+    fullName: baseUri
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'clientRequestIdHeaderName?: undefined | string'
+      content: 'baseUri?: string'
       return:
-        type: undefined | string
+        type: string
+        description: ''
+  - name: credential
+    uid: '@azure/synapse-access-control.AccessControlClientOptionalParams.credential'
+    package: '@azure/synapse-access-control'
+    summary: Credential used to authenticate the request.
+    fullName: credential
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'credential?: TokenCredential'
+      return:
+        type: TokenCredential
         description: ''
   - name: credentialScopes
     uid: >-
@@ -55,20 +81,6 @@ properties:
       return:
         type: 'string | string[]'
         description: ''
-  - name: deserializationContentTypes
-    uid: >-
-      @azure/synapse-access-control.AccessControlClientOptionalParams.deserializationContentTypes
-    package: '@azure/synapse-access-control'
-    summary: The content-types that will be associated with JSON or XML serialization.
-    fullName: deserializationContentTypes
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'deserializationContentTypes?: DeserializationContentTypes'
-      return:
-        type: DeserializationContentTypes
-        description: ''
   - name: endpoint
     uid: '@azure/synapse-access-control.AccessControlClientOptionalParams.endpoint'
     package: '@azure/synapse-access-control'
@@ -78,25 +90,9 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'endpoint?: undefined | string'
+      content: 'endpoint?: string'
       return:
-        type: undefined | string
-        description: ''
-  - name: generateClientRequestIdHeader
-    uid: >-
-      @azure/synapse-access-control.AccessControlClientOptionalParams.generateClientRequestIdHeader
-    package: '@azure/synapse-access-control'
-    summary: >-
-      Whether or not to generate a client request ID header for each HTTP
-      request.
-    fullName: generateClientRequestIdHeader
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'generateClientRequestIdHeader?: undefined | false | true'
-      return:
-        type: undefined | false | true
+        type: string
         description: ''
   - name: httpClient
     uid: '@azure/synapse-access-control.AccessControlClientOptionalParams.httpClient'
@@ -111,150 +107,89 @@ properties:
       return:
         type: HttpClient
         description: ''
-  - name: httpPipelineLogger
-    uid: >-
-      @azure/synapse-access-control.AccessControlClientOptionalParams.httpPipelineLogger
+  - name: pipeline
+    uid: '@azure/synapse-access-control.AccessControlClientOptionalParams.pipeline'
     package: '@azure/synapse-access-control'
-    summary: >-
-      The HttpPipelineLogger that can be used to debug RequestPolicies within
-      the HTTP pipeline.
-    fullName: httpPipelineLogger
+    summary: 'A customized pipeline to use, otherwise a default one will be created.'
+    fullName: pipeline
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'httpPipelineLogger?: HttpPipelineLogger'
+      content: 'pipeline?: Pipeline'
       return:
-        type: HttpPipelineLogger
+        type: Pipeline
         description: ''
-  - name: noRetryPolicy
+  - name: proxyOptions
     uid: >-
-      @azure/synapse-access-control.AccessControlClientOptionalParams.noRetryPolicy
+      @azure/synapse-access-control.AccessControlClientOptionalParams.proxyOptions
     package: '@azure/synapse-access-control'
-    summary: 'If set to true, turn off the default retry policy.'
-    fullName: noRetryPolicy
+    summary: Options to configure a proxy for outgoing requests.
+    fullName: proxyOptions
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'noRetryPolicy?: undefined | false | true'
-      return:
-        type: undefined | false | true
-        description: ''
-  - name: proxySettings
-    uid: >-
-      @azure/synapse-access-control.AccessControlClientOptionalParams.proxySettings
-    package: '@azure/synapse-access-control'
-    summary: Proxy settings which will be used for every HTTP request (Node.js only).
-    fullName: proxySettings
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'proxySettings?: ProxySettings'
+      content: 'proxyOptions?: ProxySettings'
       return:
         type: ProxySettings
         description: ''
-  - name: requestPolicyFactories
+  - name: redirectOptions
     uid: >-
-      @azure/synapse-access-control.AccessControlClientOptionalParams.requestPolicyFactories
+      @azure/synapse-access-control.AccessControlClientOptionalParams.redirectOptions
     package: '@azure/synapse-access-control'
-    summary: >-
-      An array of factories which get called to create the RequestPolicy
-      pipeline used to send a HTTP
-
-      request on the wire, or a function that takes in the
-      defaultRequestPolicyFactories and returns
-
-      the requestPolicyFactories that will be used.
-    fullName: requestPolicyFactories
+    summary: Options for how redirect responses are handled.
+    fullName: redirectOptions
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        requestPolicyFactories?: RequestPolicyFactory[] |
-        (defaultRequestPolicyFactories: RequestPolicyFactory[]) => void |
-        RequestPolicyFactory[]
+      content: 'redirectOptions?: RedirectPolicyOptions'
       return:
-        type: >-
-          RequestPolicyFactory[] | (defaultRequestPolicyFactories:
-          RequestPolicyFactory[]) =&gt; void | RequestPolicyFactory[]
+        type: RedirectPolicyOptions
         description: ''
-  - name: rpRegistrationRetryTimeout
+  - name: requestContentType
     uid: >-
-      @azure/synapse-access-control.AccessControlClientOptionalParams.rpRegistrationRetryTimeout
+      @azure/synapse-access-control.AccessControlClientOptionalParams.requestContentType
     package: '@azure/synapse-access-control'
-    summary: >-
-      Gets or sets the retry timeout in seconds for AutomaticRPRegistration.
-      Default value is 30.
-    fullName: rpRegistrationRetryTimeout
+    summary: |-
+      The default request content type for the service.
+      Used if no requestContentType is present on an OperationSpec.
+    fullName: requestContentType
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'rpRegistrationRetryTimeout?: undefined | number'
+      content: 'requestContentType?: string'
       return:
-        type: undefined | number
+        type: string
         description: ''
-  - name: userAgent
-    uid: '@azure/synapse-access-control.AccessControlClientOptionalParams.userAgent'
-    package: '@azure/synapse-access-control'
-    summary: >-
-      The string to be set to the telemetry header while sending the request, or
-      a function that
-
-      takes in the default user-agent string and returns the user-agent string
-      that will be used.
-    fullName: userAgent
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'userAgent?: string | (defaultUserAgent: string) => string'
-      return:
-        type: 'string | (defaultUserAgent: string) =&gt; string'
-        description: ''
-  - name: userAgentHeaderName
+  - name: retryOptions
     uid: >-
-      @azure/synapse-access-control.AccessControlClientOptionalParams.userAgentHeaderName
+      @azure/synapse-access-control.AccessControlClientOptionalParams.retryOptions
     package: '@azure/synapse-access-control'
-    summary: >-
-      The header name to use for the telemetry header while sending the request.
-      If this is not
-
-      specified, then "User-Agent" will be used when running on Node.js and
-      "x-ms-useragent" will
-
-      be used when running in a browser.
-    fullName: userAgentHeaderName
+    summary: Options that control how to retry failed requests.
+    fullName: retryOptions
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        userAgentHeaderName?: string | (defaultUserAgentHeaderName: string) =>
-        string
+      content: 'retryOptions?: ExponentialRetryPolicyOptions'
       return:
-        type: 'string | (defaultUserAgentHeaderName: string) =&gt; string'
+        type: ExponentialRetryPolicyOptions
         description: ''
-  - name: withCredentials
+  - name: userAgentOptions
     uid: >-
-      @azure/synapse-access-control.AccessControlClientOptionalParams.withCredentials
+      @azure/synapse-access-control.AccessControlClientOptionalParams.userAgentOptions
     package: '@azure/synapse-access-control'
-    summary: >-
-      Whether to include credentials in CORS requests in the browser.
-
-      See
-      https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials
-      for more information.
-    fullName: withCredentials
+    summary: Options for adding user agent details to outgoing requests.
+    fullName: userAgentOptions
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'withCredentials?: undefined | false | true'
+      content: 'userAgentOptions?: UserAgentPolicyOptions'
       return:
-        type: undefined | false | true
+        type: UserAgentPolicyOptions
         description: ''
 extends: ServiceClientOptions

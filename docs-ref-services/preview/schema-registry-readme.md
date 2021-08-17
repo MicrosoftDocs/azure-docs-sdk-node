@@ -1,17 +1,17 @@
 ---
 title: Azure Schema Registry client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/schema-registry, 
+keywords: Azure, javascript, SDK, API, @azure/schema-registry, eventhubs
 author: maggiepint
 ms.author: magpint
-ms.date: 09/09/2020
+ms.date: 08/17/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: eventhubs
 ---
 
-# Azure Schema Registry client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Schema Registry client library for JavaScript - Version 1.0.0-beta.2 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,
@@ -19,9 +19,16 @@ providing schema storage, versioning, and management. The registry is leveraged
 by serializers to reduce payload size while describing payload structure with
 schema identifiers rather than full schemas.
 
+Key links:
+
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.0-beta.2/sdk/schemaregistry/schema-registry)
+- [Package (npm)](https://www.npmjs.com/package/@azure/schema-registry)
+- [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/schema-registry)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.0-beta.2/sdk/schemaregistry/schema-registry/samples)
+
 ## Getting started
 
-- Node.js version 8.x.x or higher
+- [LTS versions of Node.js](https://nodejs.org/about/releases/)
 
 ### Prerequisites
 
@@ -72,13 +79,16 @@ schema registry.
 
 ### SchemaRegistry serializers
 
-- [@azure/schema-registry-avro](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.0-beta.1/sdk/schemaregistry/schema-registry-avro)
+- [@azure/schema-registry-avro](https://www.npmjs.com/package/@azure/schema-registry-avro)
   is a separate package that uses `SchemaRegistryClient` to pair schema ID along
   with Avro Binary Encoding.
 
 ## Examples
 
 ### Register a schema
+
+`registerSchema` sends a request to the service to register a schema, and then keeps
+a copy of the schema and its service ID in a local private cache.
 
 ```javascript
 const { DefaultAzureCredential } = require("@azure/identity");
@@ -99,6 +109,8 @@ console.log(registered.id);
 
 ### Get ID of existing schema
 
+`getSchemaId` will send a request to the service only if the local cache did not have the schema.
+
 ```javascript
 const { DefaultAzureCredential } = require("@azure/identity");
 const { SchemaRegistryClient } = require("@azure/schema-registry");
@@ -113,10 +125,14 @@ const description = {
 }
 
 const found = await client.getSchemaId(description);
-console.log(`Got schema ID=${found.id}`);
+if (found) {
+  console.log(`Got schema ID=${found.id}`);
+}
 ```
 
 ### Get content of existing schema by ID
+
+Similarly to `getSchemaId`, `getSchemaById` will send a request to the service only if the local cache did not have the schema ID.
 
 ```javascript
 const { DefaultAzureCredential } = require("@azure/identity");
@@ -124,7 +140,9 @@ const { SchemaRegistryClient } = require("@azure/schema-registry");
 
 const client = new SchemaRegistryClient("<endpoint>", new DefaultAzureCredential());
 const foundSchema = await client.getSchemaById("<id>");
-console.log(`Got schema content=${foundSchema.content}`);
+if (foundSchema) {
+  console.log(`Got schema content=${foundSchema.content}`);
+}
 ```
 
 ## Troubleshooting
@@ -145,7 +163,7 @@ setLogLevel("info");
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.0-beta.1/sdk/schemaregistry/schema-registry/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.0-beta.2/sdk/schemaregistry/schema-registry/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
@@ -168,7 +186,7 @@ FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact
 questions or comments.
 
 If you'd like to contribute to this library, please read the [contributing
-guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry_1.0.0-beta.1/CONTRIBUTING.md) to
+guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry_1.0.0-beta.2/CONTRIBUTING.md) to
 learn more about how to build and test the code.
 
 ## Related projects
@@ -180,7 +198,7 @@ learn more about how to build and test the code.
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.0-beta.1/sdk/identity/identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.0-beta.2/sdk/identity/identity
 [cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

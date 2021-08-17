@@ -10,7 +10,7 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      ArtifactsClientContext(TokenCredential | ServiceClientCredentials, string,
+      ArtifactsClientContext(TokenCredential, string,
       ArtifactsClientOptionalParams)
     uid: '@azure/synapse-artifacts.ArtifactsClientContext.constructor'
     package: '@azure/synapse-artifacts'
@@ -20,12 +20,11 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new ArtifactsClientContext(credentials: TokenCredential |
-        ServiceClientCredentials, endpoint: string, options?:
-        ArtifactsClientOptionalParams)
+        new ArtifactsClientContext(credentials: TokenCredential, endpoint:
+        string, options?: ArtifactsClientOptionalParams)
       parameters:
         - id: credentials
-          type: TokenCredential | ServiceClientCredentials
+          type: TokenCredential
           description: >-
             Subscription credentials which uniquely identify client
             subscription.
@@ -67,10 +66,21 @@ properties:
       return:
         type: string
         description: ''
+  - name: pipeline
+    uid: '@azure/synapse-artifacts.ArtifactsClientContext.pipeline'
+    package: '@azure/synapse-artifacts'
+    summary: The pipeline used by this client to make requests
+    fullName: pipeline
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        type: Pipeline
+        description: ''
 methods:
-  - name: >-
-      sendOperationRequest(OperationArguments, OperationSpec,
-      ServiceCallback<any>)
+  - name: 'sendOperationRequest<T>(OperationArguments, OperationSpec)'
     uid: '@azure/synapse-artifacts.ArtifactsClientContext.sendOperationRequest'
     package: '@azure/synapse-artifacts'
     summary: Send an HTTP request that is populated using the provided OperationSpec.
@@ -79,8 +89,8 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendOperationRequest(operationArguments: OperationArguments,
-        operationSpec: OperationSpec, callback?: ServiceCallback<any>)
+        function sendOperationRequest<T>(operationArguments: OperationArguments,
+        operationSpec: OperationSpec)
       parameters:
         - id: operationArguments
           type: OperationArguments
@@ -89,15 +99,12 @@ methods:
             populated from.
         - id: operationSpec
           type: OperationSpec
-          description: The OperationSpec to use to populate the httpRequest.
-        - id: callback
-          type: ServiceCallback&lt;any&gt;
           description: |
-            The callback to call when the response is received.
+            The OperationSpec to use to populate the httpRequest.
       return:
-        type: Promise&lt;RestResponse&gt;
+        type: Promise&lt;T&gt;
         description: ''
-  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
+  - name: sendRequest(PipelineRequest)
     uid: '@azure/synapse-artifacts.ArtifactsClientContext.sendRequest'
     package: '@azure/synapse-artifacts'
     summary: Send the provided httpRequest.
@@ -105,12 +112,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function sendRequest(options: RequestPrepareOptions | WebResourceLike)'
+      content: 'function sendRequest(request: PipelineRequest)'
       parameters:
-        - id: options
-          type: RequestPrepareOptions | WebResourceLike
+        - id: request
+          type: PipelineRequest
           description: ''
       return:
-        type: Promise&lt;HttpOperationResponse&gt;
+        type: Promise&lt;PipelineResponse&gt;
         description: ''
 extends: ServiceClient

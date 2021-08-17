@@ -9,6 +9,20 @@ isPreview: false
 isDeprecated: false
 type: interface
 properties:
+  - name: allowInsecureConnection
+    uid: >-
+      @azure/synapse-artifacts.ArtifactsClientOptionalParams.allowInsecureConnection
+    package: '@azure/synapse-artifacts'
+    summary: Set to true if the request is sent over HTTP instead of HTTPS
+    fullName: allowInsecureConnection
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'allowInsecureConnection?: boolean'
+      return:
+        type: boolean
+        description: ''
   - name: apiVersion
     uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.apiVersion'
     package: '@azure/synapse-artifacts'
@@ -22,24 +36,36 @@ properties:
       return:
         type: string
         description: ''
-  - name: clientRequestIdHeaderName
-    uid: >-
-      @azure/synapse-artifacts.ArtifactsClientOptionalParams.clientRequestIdHeaderName
+  - name: baseUri
+    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.baseUri'
     package: '@azure/synapse-artifacts'
     summary: >-
-      If specified, a GenerateRequestIdPolicy will be added to the HTTP pipeline
-      that will add a
+      If specified, this is the base URI that requests will be made against for
+      this ServiceClient.
 
-      header to all outgoing requests with this header name and a random UUID as
-      the request ID.
-    fullName: clientRequestIdHeaderName
+      If it is not specified, then all OperationSpecs must contain a baseUrl
+      property.
+    fullName: baseUri
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'clientRequestIdHeaderName?: string'
+      content: 'baseUri?: string'
       return:
         type: string
+        description: ''
+  - name: credential
+    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.credential'
+    package: '@azure/synapse-artifacts'
+    summary: Credential used to authenticate the request.
+    fullName: credential
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'credential?: TokenCredential'
+      return:
+        type: TokenCredential
         description: ''
   - name: credentialScopes
     uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.credentialScopes'
@@ -54,20 +80,6 @@ properties:
       return:
         type: 'string | string[]'
         description: ''
-  - name: deserializationContentTypes
-    uid: >-
-      @azure/synapse-artifacts.ArtifactsClientOptionalParams.deserializationContentTypes
-    package: '@azure/synapse-artifacts'
-    summary: The content-types that will be associated with JSON or XML serialization.
-    fullName: deserializationContentTypes
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'deserializationContentTypes?: DeserializationContentTypes'
-      return:
-        type: DeserializationContentTypes
-        description: ''
   - name: endpoint
     uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.endpoint'
     package: '@azure/synapse-artifacts'
@@ -80,22 +92,6 @@ properties:
       content: 'endpoint?: string'
       return:
         type: string
-        description: ''
-  - name: generateClientRequestIdHeader
-    uid: >-
-      @azure/synapse-artifacts.ArtifactsClientOptionalParams.generateClientRequestIdHeader
-    package: '@azure/synapse-artifacts'
-    summary: >-
-      Whether or not to generate a client request ID header for each HTTP
-      request.
-    fullName: generateClientRequestIdHeader
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'generateClientRequestIdHeader?: boolean'
-      return:
-        type: boolean
         description: ''
   - name: httpClient
     uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.httpClient'
@@ -110,145 +106,84 @@ properties:
       return:
         type: HttpClient
         description: ''
-  - name: httpPipelineLogger
-    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.httpPipelineLogger'
+  - name: pipeline
+    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.pipeline'
     package: '@azure/synapse-artifacts'
-    summary: >-
-      The HttpPipelineLogger that can be used to debug RequestPolicies within
-      the HTTP pipeline.
-    fullName: httpPipelineLogger
+    summary: 'A customized pipeline to use, otherwise a default one will be created.'
+    fullName: pipeline
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'httpPipelineLogger?: HttpPipelineLogger'
+      content: 'pipeline?: Pipeline'
       return:
-        type: HttpPipelineLogger
+        type: Pipeline
         description: ''
-  - name: noRetryPolicy
-    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.noRetryPolicy'
+  - name: proxyOptions
+    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.proxyOptions'
     package: '@azure/synapse-artifacts'
-    summary: 'If set to true, turn off the default retry policy.'
-    fullName: noRetryPolicy
+    summary: Options to configure a proxy for outgoing requests.
+    fullName: proxyOptions
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'noRetryPolicy?: boolean'
-      return:
-        type: boolean
-        description: ''
-  - name: proxySettings
-    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.proxySettings'
-    package: '@azure/synapse-artifacts'
-    summary: Proxy settings which will be used for every HTTP request (Node.js only).
-    fullName: proxySettings
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'proxySettings?: ProxySettings'
+      content: 'proxyOptions?: ProxySettings'
       return:
         type: ProxySettings
         description: ''
-  - name: requestPolicyFactories
-    uid: >-
-      @azure/synapse-artifacts.ArtifactsClientOptionalParams.requestPolicyFactories
+  - name: redirectOptions
+    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.redirectOptions'
     package: '@azure/synapse-artifacts'
-    summary: >-
-      An array of factories which get called to create the RequestPolicy
-      pipeline used to send a HTTP
-
-      request on the wire, or a function that takes in the
-      defaultRequestPolicyFactories and returns
-
-      the requestPolicyFactories that will be used.
-    fullName: requestPolicyFactories
+    summary: Options for how redirect responses are handled.
+    fullName: redirectOptions
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        requestPolicyFactories?: RequestPolicyFactory[] |
-        (defaultRequestPolicyFactories: RequestPolicyFactory[]) => void |
-        RequestPolicyFactory[]
+      content: 'redirectOptions?: RedirectPolicyOptions'
       return:
-        type: >-
-          RequestPolicyFactory[] | (defaultRequestPolicyFactories:
-          RequestPolicyFactory[]) =&gt; void | RequestPolicyFactory[]
+        type: RedirectPolicyOptions
         description: ''
-  - name: rpRegistrationRetryTimeout
-    uid: >-
-      @azure/synapse-artifacts.ArtifactsClientOptionalParams.rpRegistrationRetryTimeout
+  - name: requestContentType
+    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.requestContentType'
     package: '@azure/synapse-artifacts'
-    summary: >-
-      Gets or sets the retry timeout in seconds for AutomaticRPRegistration.
-      Default value is 30.
-    fullName: rpRegistrationRetryTimeout
+    summary: |-
+      The default request content type for the service.
+      Used if no requestContentType is present on an OperationSpec.
+    fullName: requestContentType
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'rpRegistrationRetryTimeout?: number'
+      content: 'requestContentType?: string'
       return:
-        type: number
+        type: string
         description: ''
-  - name: userAgent
-    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.userAgent'
+  - name: retryOptions
+    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.retryOptions'
     package: '@azure/synapse-artifacts'
-    summary: >-
-      The string to be set to the telemetry header while sending the request, or
-      a function that
-
-      takes in the default user-agent string and returns the user-agent string
-      that will be used.
-    fullName: userAgent
+    summary: Options that control how to retry failed requests.
+    fullName: retryOptions
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'userAgent?: string | (defaultUserAgent: string) => string'
+      content: 'retryOptions?: ExponentialRetryPolicyOptions'
       return:
-        type: 'string | (defaultUserAgent: string) =&gt; string'
+        type: ExponentialRetryPolicyOptions
         description: ''
-  - name: userAgentHeaderName
-    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.userAgentHeaderName'
+  - name: userAgentOptions
+    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.userAgentOptions'
     package: '@azure/synapse-artifacts'
-    summary: >-
-      The header name to use for the telemetry header while sending the request.
-      If this is not
-
-      specified, then "User-Agent" will be used when running on Node.js and
-      "x-ms-useragent" will
-
-      be used when running in a browser.
-    fullName: userAgentHeaderName
+    summary: Options for adding user agent details to outgoing requests.
+    fullName: userAgentOptions
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        userAgentHeaderName?: string | (defaultUserAgentHeaderName: string) =>
-        string
+      content: 'userAgentOptions?: UserAgentPolicyOptions'
       return:
-        type: 'string | (defaultUserAgentHeaderName: string) =&gt; string'
-        description: ''
-  - name: withCredentials
-    uid: '@azure/synapse-artifacts.ArtifactsClientOptionalParams.withCredentials'
-    package: '@azure/synapse-artifacts'
-    summary: >-
-      Whether to include credentials in CORS requests in the browser.
-
-      See
-      https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials
-      for more information.
-    fullName: withCredentials
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'withCredentials?: boolean'
-      return:
-        type: boolean
+        type: UserAgentPolicyOptions
         description: ''
 extends: ServiceClientOptions

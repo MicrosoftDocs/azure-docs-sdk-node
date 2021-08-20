@@ -62,28 +62,31 @@ methods:
   - name: batch(() => void)
     uid: '@azure/communication-react.ChatContext.batch'
     package: '@azure/communication-react'
-    summary: ''
+    summary: >
+      Batch updates to minimize `stateChanged` events across related operations.
+
+      - A maximum of one `stateChanged` event is emitted, at the end of the
+      operations.
+
+      - No `stateChanged` event is emitted if the state did not change through
+      the operations.
+
+      - In case of an exception, state is reset to the prior value and no
+      `stateChanged` event is emitted.
+
+
+      All operations finished in this batch should be synchronous.
+
+      This function is not reentrant -- do not call batch() from within another
+      batch().
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function batch(batchFunc: () => void)'
+      content: 'function batch(operations: () => void)'
       parameters:
-        - id: batchFunc
+        - id: operations
           type: () =&gt; void
-          description: ''
-  - name: 'clearError(ChatErrorTargets[])'
-    uid: '@azure/communication-react.ChatContext.clearError'
-    package: '@azure/communication-react'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function clearError(targets: ChatErrorTargets[])'
-      parameters:
-        - id: targets
-          type: '<xref uid="@azure/communication-react.ChatErrorTargets" />[]'
           description: ''
   - name: 'createThread(string, ChatThreadProperties)'
     uid: '@azure/communication-react.ChatContext.createThread'
@@ -220,6 +223,19 @@ methods:
       return:
         type: <xref uid="@azure/communication-react.ChatClientState" />
         description: ''
+  - name: modifyState(ChatStateModifier)
+    uid: '@azure/communication-react.ChatContext.modifyState'
+    package: '@azure/communication-react'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function modifyState(modifier: ChatStateModifier)'
+      parameters:
+        - id: modifier
+          type: <xref uid="@azure/communication-react.ChatStateModifier" />
+          description: ''
   - name: 'offStateChange((state: ChatClientState) => void)'
     uid: '@azure/communication-react.ChatContext.offStateChange'
     package: '@azure/communication-react'

@@ -65,7 +65,13 @@ properties:
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.loadBalancerSku'
     package: '@azure/arm-containerservice'
     summary: >-
-      The load balancer sku for the managed cluster. Possible values include:
+      The load balancer sku for the managed cluster. The default is 'standard'.
+      See [Azure Load
+
+      Balancer SKUs](https://docs.microsoft.com/azure/load-balancer/skus) for
+      more information about
+
+      the differences between load balancer SKUs. Possible values include:
       'standard', 'basic'
     fullName: loadBalancerSku
     remarks: ''
@@ -76,13 +82,30 @@ properties:
       return:
         type: <xref uid="@azure/arm-containerservice.LoadBalancerSku" />
         description: ''
+  - name: natGatewayProfile
+    uid: >-
+      @azure/arm-containerservice.ContainerServiceNetworkProfile.natGatewayProfile
+    package: '@azure/arm-containerservice'
+    summary: Profile of the cluster NAT gateway.
+    fullName: natGatewayProfile
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'natGatewayProfile?: ManagedClusterNATGatewayProfile'
+      return:
+        type: >-
+          <xref
+          uid="@azure/arm-containerservice.ManagedClusterNATGatewayProfile" />
+        description: ''
   - name: networkMode
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.networkMode'
     package: '@azure/arm-containerservice'
     summary: >-
-      Network mode used for building Kubernetes network. Possible values
-      include: 'transparent',
+      The network mode Azure CNI is configured with. This cannot be specified if
+      networkPlugin is
 
+      anything other than 'azure'. Possible values include: 'transparent',
       'bridge'
     fullName: networkMode
     remarks: ''
@@ -97,7 +120,7 @@ properties:
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.networkPlugin'
     package: '@azure/arm-containerservice'
     summary: >-
-      Network plugin used for building Kubernetes network. Possible values
+      Network plugin used for building the Kubernetes network. Possible values
       include: 'azure',
 
       'kubenet'. Default value: 'kubenet'.
@@ -114,7 +137,7 @@ properties:
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.networkPolicy'
     package: '@azure/arm-containerservice'
     summary: >-
-      Network policy used for building Kubernetes network. Possible values
+      Network policy used for building the Kubernetes network. Possible values
       include: 'calico',
 
       'azure'
@@ -131,10 +154,18 @@ properties:
     uid: '@azure/arm-containerservice.ContainerServiceNetworkProfile.outboundType'
     package: '@azure/arm-containerservice'
     summary: >-
-      The outbound (egress) routing method. Possible values include:
-      'loadBalancer',
+      The outbound (egress) routing method. This can only be set at cluster
+      creation time and cannot
 
-      'userDefinedRouting'. Default value: 'loadBalancer'.
+      be changed later. For more information see [egress outbound
+
+      type](https://docs.microsoft.com/azure/aks/egress-outboundtype). Possible
+      values include:
+
+      'loadBalancer', 'userDefinedRouting', 'managedNATGateway',
+      'userAssignedNATGateway'. Default
+
+      value: 'loadBalancer'.
     fullName: outboundType
     remarks: ''
     isPreview: false

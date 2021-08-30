@@ -3,15 +3,15 @@ title: Azure Communication Chat client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-chat, 
 author: maggiepint
 ms.author: magpint
-ms.date: 03/29/2021
-ms.topic: reference
+ms.date: 08/30/2021
+ms.topic: article
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Communication Chat client library for JavaScript - Version 1.0.0 
+# Azure Communication Chat client library for JavaScript - Version 1.0.1 
 
 
 Azure Communication Services for Chat lets developers add chat capabilities to their app. Use this client library to manage chat threads and their users, and send and receive chat messages.
@@ -214,7 +214,7 @@ In this quickstart you learned how to:
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

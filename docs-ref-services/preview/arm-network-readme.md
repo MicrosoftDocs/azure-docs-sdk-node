@@ -1,24 +1,24 @@
 ---
 title: Azure NetworkManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-network, network
+keywords: Azure, javascript, SDK, API, @azure/arm-network, virtualnetwork
 author: maggiepint
 ms.author: magpint
-ms.date: 07/16/2021
+ms.date: 09/06/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: network
+ms.service: virtualnetwork
 ---
 
-# Azure NetworkManagement client library for JavaScript - Version 30.0.0-beta.1 
+# Azure NetworkManagement client library for JavaScript - Version 30.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure NetworkManagement client.
 
 Network Client
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_30.0.0-beta.1/sdk/network/arm-network) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_30.0.0-beta.2/sdk/network/arm-network) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-network) |
 [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-network) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -61,7 +61,8 @@ Set the values of the client ID, tenant ID, and client secret of the AAD applica
 ```javascript
 const { NetworkManagementClient } = require("@azure/arm-network");
 const { DefaultAzureCredential } = require("@azure/identity");
-const client = new NetworkManagementClient("<endpoint>", new DefaultAzureCredential());
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
+const client = new NetworkManagementClient(new DefaultAzureCredential(), subscriptionId);
 ```
 
 ## Key concepts
@@ -81,7 +82,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_30.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_30.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
@@ -89,7 +90,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-network_30.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-network_30.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -101,6 +102,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_30.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_30.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_30.0.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-network_30.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

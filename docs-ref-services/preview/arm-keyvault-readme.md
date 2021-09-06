@@ -3,7 +3,7 @@ title: Azure KeyVaultManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-keyvault, keyvault
 author: maggiepint
 ms.author: magpint
-ms.date: 08/20/2021
+ms.date: 09/06/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: keyvault
 ---
 
-# Azure KeyVaultManagement client library for JavaScript - Version 30.0.0-beta.2 
+# Azure KeyVaultManagement client library for JavaScript - Version 30.0.0-beta.3 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure KeyVaultManagement client.
@@ -20,7 +20,7 @@ You can also follow this [link](https://github.com/Azure/azure-sdk-for-js/tree/f
 
 The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-keyvault_30.0.0-beta.2/sdk/keyvault/arm-keyvault) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-keyvault_30.0.0-beta.3/sdk/keyvault/arm-keyvault) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-keyvault) |
 [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-keyvault) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -86,7 +86,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-keyvault_30.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-keyvault_30.0.0-beta.3/sdk/core/logger).
 
 ## Next steps
 
@@ -94,7 +94,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-keyvault_30.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-keyvault_30.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -106,6 +106,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-keyvault_30.0.0-beta.2/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-keyvault_30.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-keyvault_30.0.0-beta.3/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-keyvault_30.0.0-beta.3/sdk/identity/identity#defaultazurecredential
 

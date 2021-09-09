@@ -66,6 +66,34 @@ properties:
       return:
         type: boolean
         description: ''
+  - name: readableAborted
+    uid: '@azure/core-http.ReportTransform.readableAborted'
+    package: '@azure/core-http'
+    summary: >-
+      Returns whether the stream was destroyed or errored before emitting
+      `'end'`.
+    fullName: readableAborted
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readableAborted: boolean'
+      return:
+        type: boolean
+        description: ''
+  - name: readableDidRead
+    uid: '@azure/core-http.ReportTransform.readableDidRead'
+    package: '@azure/core-http'
+    summary: Returns whether `'data'` has been emitted.
+    fullName: readableDidRead
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'readableDidRead: boolean'
+      return:
+        type: boolean
+        description: ''
   - name: readableEncoding
     uid: '@azure/core-http.ReportTransform.readableEncoding'
     package: '@azure/core-http'
@@ -656,26 +684,51 @@ methods:
       return:
         type: Array&lt;string | symbol&gt;
         description: ''
-  - name: 'from(Iterable<any> | AsyncIterable<any>, ReadableOptions)'
+  - name: >-
+      from(Stream | Blob | ArrayBuffer | string | Iterable<any> |
+      AsyncIterable<any> | AsyncGeneratorFunction | Promise<any> | Object)
     uid: '@azure/core-http.ReportTransform.from'
     package: '@azure/core-http'
-    summary: A utility method for creating Readable Streams out of iterators.
+    summary: >
+      A utility method for creating duplex streams.
+
+      - `Stream` converts writable stream into writable `Duplex` and readable
+      stream
+        to `Duplex`.
+      - `Blob` converts into readable `Duplex`.
+
+      - `string` converts into readable `Duplex`.
+
+      - `ArrayBuffer` converts into readable `Duplex`.
+
+      - `AsyncIterable` converts into a readable `Duplex`. Cannot yield `null`.
+
+      - `AsyncGeneratorFunction` converts into a readable/writable transform
+        `Duplex`. Must take a source `AsyncIterable` as first parameter. Cannot yield
+        `null`.
+      - `AsyncFunction` converts into a writable `Duplex`. Must return
+        either `null` or `undefined`
+      - `Object ({ writable, readable })` converts `readable` and
+        `writable` into `Stream` and then combines them into `Duplex` where the
+        `Duplex` will write to the `writable` and read from the `readable`.
+      - `Promise` converts into readable `Duplex`. Value `null` is ignored.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        static function from(iterable: Iterable<any> | AsyncIterable<any>,
-        options?: ReadableOptions)
+        static function from(src: Stream | Blob | ArrayBuffer | string |
+        Iterable<any> | AsyncIterable<any> | AsyncGeneratorFunction |
+        Promise<any> | Object)
       parameters:
-        - id: iterable
-          type: Iterable&lt;any&gt; | AsyncIterable&lt;any&gt;
-          description: ''
-        - id: options
-          type: ReadableOptions
+        - id: src
+          type: >-
+            Stream | Blob | ArrayBuffer | string | Iterable&lt;any&gt; |
+            AsyncIterable&lt;any&gt; | AsyncGeneratorFunction |
+            Promise&lt;any&gt; | Object
           description: ''
       return:
-        type: Readable
+        type: Duplex
         description: ''
   - name: getMaxListeners()
     uid: '@azure/core-http.ReportTransform.getMaxListeners'
@@ -693,6 +746,22 @@ methods:
       content: function getMaxListeners()
       return:
         type: number
+        description: ''
+  - name: isDisturbed(Readable | ReadableStream)
+    uid: '@azure/core-http.ReportTransform.isDisturbed'
+    package: '@azure/core-http'
+    summary: Returns whether the stream has been read from or cancelled.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'static function isDisturbed(stream: Readable | ReadableStream)'
+      parameters:
+        - id: stream
+          type: Readable | ReadableStream
+          description: ''
+      return:
+        type: boolean
         description: ''
   - name: isPaused()
     uid: '@azure/core-http.ReportTransform.isPaused'

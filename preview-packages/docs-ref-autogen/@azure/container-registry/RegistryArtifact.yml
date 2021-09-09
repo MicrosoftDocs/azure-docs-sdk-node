@@ -2,7 +2,17 @@
 name: RegistryArtifact
 uid: '@azure/container-registry.RegistryArtifact'
 package: '@azure/container-registry'
-summary: The helper used to interact with the Container Registry artifact.
+summary: >+
+  `Artifact` is the general term for items stored in a container registry,
+
+  and can include Docker images or other Open Container Initiative (OCI)
+  artifact types.
+
+  The <xref:RegistryArtifact> interface is a helper that groups information and
+  operations about an image
+
+  or artifact in a container registry.
+
 fullName: RegistryArtifact
 remarks: ''
 isPreview: false
@@ -52,7 +62,7 @@ methods:
   - name: delete(DeleteArtifactOptions)
     uid: '@azure/container-registry.RegistryArtifact.delete'
     package: '@azure/container-registry'
-    summary: Deletes this artifact.
+    summary: Deletes this registry artifact by deleting its manifest.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -69,7 +79,7 @@ methods:
   - name: 'deleteTag(string, DeleteTagOptions)'
     uid: '@azure/container-registry.RegistryArtifact.deleteTag'
     package: '@azure/container-registry'
-    summary: Deletes a tag.
+    summary: Deletes a tag. This removes the tag from the artifact and its manifest.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -78,7 +88,7 @@ methods:
       parameters:
         - id: tag
           type: string
-          description: the name of the tag to be deleted.
+          description: the name of the tag to delete.
         - id: options
           type: <xref uid="@azure/container-registry.DeleteTagOptions" />
           description: |
@@ -89,7 +99,9 @@ methods:
   - name: getManifestProperties(GetManifestPropertiesOptions)
     uid: '@azure/container-registry.RegistryArtifact.getManifestProperties'
     package: '@azure/container-registry'
-    summary: Retrieves properties of this registry artifact.
+    summary: >-
+      Retrieves the properties of the manifest that uniquely identifies this
+      artifact.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -110,7 +122,7 @@ methods:
   - name: 'getTagProperties(string, GetTagPropertiesOptions)'
     uid: '@azure/container-registry.RegistryArtifact.getTagProperties'
     package: '@azure/container-registry'
-    summary: Retrieves properties of a tag.
+    summary: Retrieves the properties of the specified tag.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -134,36 +146,56 @@ methods:
   - name: listTagProperties(ListTagPropertiesOptions)
     uid: '@azure/container-registry.RegistryArtifact.listTagProperties'
     package: '@azure/container-registry'
-    summary: |-
-      Returns an async iterable iterator to list tag properties.
+    summary: >-
+      Returns an async iterable iterator to list the tags that uniquely identify
+      this artifact and the properties of each.
+
       Example using `for-await-of` syntax:
 
+
       ```javascript
+
       const client = new ContainerRegistryClient(url, credentials);
+
       const repository = client.getRepository(repositoryName);
+
       const artifact = repository.getArtifact(digest)
+
       for await (const tag of artifact.listTagProperties()) {
         console.log("tag: ", tag);
       }
+
       ```
+
 
       Example using `iter.next()`:
 
+
       ```javascript
+
       const iter = artifact.listTagProperties();
+
       let item = await iter.next();
+
       while (!item.done) {
         console.log("tag properties: ", item.value);
         item = await iter.next();
       }
+
       ```
+
 
       Example using `byPage()`:
 
+
       ```javascript
+
       const pages = artifact.listTagProperties().byPage({ maxPageSize: 2 });
+
       let page = await pages.next();
+
       let i = 1;
+
       while (!page.done) {
        if (page.value) {
          console.log(`-- page ${i++}`);
@@ -173,6 +205,7 @@ methods:
        }
        page = await pages.next();
       }
+
       ```
     remarks: ''
     isPreview: false
@@ -193,7 +226,7 @@ methods:
     uid: '@azure/container-registry.RegistryArtifact.updateManifestProperties'
     package: '@azure/container-registry'
     summary: |-
-      Updates artifact manifest properties.
+      Updates the properties of the artifact's manifest.
       Example usage:
 
       ```javascript
@@ -229,7 +262,7 @@ methods:
     uid: '@azure/container-registry.RegistryArtifact.updateTagProperties'
     package: '@azure/container-registry'
     summary: |-
-      Updates tag properties.
+      Updates the properties of a given tag.
       Example usage:
 
       ```javascript
@@ -252,7 +285,7 @@ methods:
       parameters:
         - id: tag
           type: string
-          description: name of the tag
+          description: name of the tag to update properties on
         - id: options
           type: <xref uid="@azure/container-registry.UpdateTagPropertiesOptions" />
           description: |

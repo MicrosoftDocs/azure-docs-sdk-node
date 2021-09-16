@@ -1,17 +1,17 @@
 ---
 title: Azure Communication Chat client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/communication-chat, 
+keywords: Azure, javascript, SDK, API, @azure/communication-chat, communication
 author: maggiepint
 ms.author: magpint
-ms.date: 08/30/2021
-ms.topic: article
+ms.date: 09/16/2021
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: communication
 ---
 
-# Azure Communication Chat client library for JavaScript - Version 1.0.1 
+# Azure Communication Chat client library for JavaScript - Version 1.1.0 
 
 
 Azure Communication Services for Chat lets developers add chat capabilities to their app. Use this client library to manage chat threads and their users, and send and receive chat messages.
@@ -74,10 +74,10 @@ import { ChatClient } from '@azure/communication-chat';
 import { AzureCommunicationTokenCredential } from "@azure/communication-common";
 
 // Your unique Azure Communication service endpoint
-let endpointUrl = '<ENDPOINT>';
-let userAccessToken = '<USER_ACCESS_TOKEN>';
-let tokenCredential = new AzureCommunicationTokenCredential(userAccessToken);
-let chatClient = new ChatClient(endpointUrl, tokenCredential);
+const endpointUrl = '<ENDPOINT>';
+const userAccessToken = '<USER_ACCESS_TOKEN>';
+const tokenCredential = new AzureCommunicationTokenCredential(userAccessToken);
+const chatClient = new ChatClient(endpointUrl, tokenCredential);
 
 ```
 
@@ -103,16 +103,26 @@ const createChatThreadRequest = {
 const createChatThreadOptions = {
   participants: [
     {
-      id: '<USER_ID>',
+      id: { communicationUserId: '<USER_ID>' },
       displayName: '<USER_DISPLAY_NAME>'
     }
   ]
 };
-const createChatTtreadResult = await chatClient.createChatThread(
+const createChatThreadResult = await chatClient.createChatThread(
   createChatThreadRequest,
   createChatThreadOptions
 );
 const threadId = createChatThreadResult.chatThread.id;
+```
+
+### Create a ChatThreadClient
+
+The ChatThreadClient will allow you to perform operations specific to a chat thread, like update the chat thread topic, send a message, add participants to the chat thread, etc.
+
+You can initialize a new ChatThreadClient using the `getChatThreadClient` method of the ChatClient with an existing thread id:
+
+```Javascript
+const chatThreadClient = chatClient.getChatThreadClient(threadId);
 ```
 
 ### Send a message to the thread
@@ -214,7 +224,7 @@ In this quickstart you learned how to:
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

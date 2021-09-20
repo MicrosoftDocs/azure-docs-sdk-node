@@ -3,7 +3,7 @@ title: Azure SqlManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-sql, sql
 author: maggiepint
 ms.author: magpint
-ms.date: 09/06/2021
+ms.date: 09/17/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: sql
 ---
 
-# Azure SqlManagement client library for JavaScript - Version 30.0.0-beta.3 
+# Azure SqlManagement client library for JavaScript - Version 30.0.0-beta.4 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure SqlManagement client.
@@ -20,7 +20,7 @@ You can also follow this [link](https://github.com/Azure/azure-sdk-for-js/tree/f
 
 The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-sql_30.0.0-beta.3/sdk/sql/arm-sql) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-sql_30.0.0-beta.4/sdk/sql/arm-sql) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-sql) |
 [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-sql) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -82,11 +82,11 @@ const client = new SqlManagementClient(new DefaultAzureCredential(), subscriptio
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
 ```javascript
-import { setLogLevel } from "@azure/logger";
+const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-sql_30.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-sql_30.0.0-beta.4/sdk/core/logger).
 
 ## Next steps
 
@@ -94,7 +94,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-sql_30.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-sql_30.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -106,6 +106,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-sql_30.0.0-beta.3/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-sql_30.0.0-beta.3/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-sql_30.0.0-beta.4/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-sql_30.0.0-beta.4/sdk/identity/identity#defaultazurecredential
 

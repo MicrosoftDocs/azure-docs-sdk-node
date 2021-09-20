@@ -23,6 +23,7 @@ classes:
   - '@azure/identity.EnvironmentCredential'
   - '@azure/identity.InteractiveBrowserCredential'
   - '@azure/identity.ManagedIdentityCredential'
+  - '@azure/identity.OnBehalfOfCredential'
   - '@azure/identity.UsernamePasswordCredential'
   - '@azure/identity.VisualStudioCodeCredential'
 interfaces:
@@ -41,6 +42,9 @@ interfaces:
   - '@azure/identity.InteractiveBrowserCredentialBrowserOptions'
   - '@azure/identity.InteractiveBrowserCredentialOptions'
   - '@azure/identity.InteractiveCredentialOptions'
+  - '@azure/identity.OnBehalfOfCredentialCertificateConfiguration'
+  - '@azure/identity.OnBehalfOfCredentialOptions'
+  - '@azure/identity.OnBehalfOfCredentialSecretConfiguration'
   - '@azure/identity.TokenCachePersistenceOptions'
   - '@azure/identity.TokenCredentialOptions'
   - '@azure/identity.UsernamePasswordCredentialOptions'
@@ -48,7 +52,7 @@ interfaces:
 typeAliases:
   - '@azure/identity.BrowserLoginStyle'
   - '@azure/identity.DeviceCodePromptCallback'
-  - '@azure/identity.IdentityExtension'
+  - '@azure/identity.IdentityPlugin'
 functions:
   - name: deserializeAuthenticationRecord(string)
     uid: '@azure/identity.deserializeAuthenticationRecord'
@@ -139,14 +143,13 @@ functions:
       return:
         type: string
         description: ''
-  - name: useIdentityExtension(IdentityExtension)
-    uid: '@azure/identity.useIdentityExtension'
+  - name: useIdentityPlugin(IdentityPlugin)
+    uid: '@azure/identity.useIdentityPlugin'
     package: '@azure/identity'
     summary: >
-      Extend Azure Identity with additional functionality. Pass an extension
-      from
+      Extend Azure Identity with additional functionality. Pass a plugin from
 
-      an extension package, such as:
+      a plugin package, such as:
 
       - `@azure/identity-cache-persistence`: provides persistent token caching
 
@@ -158,18 +161,17 @@ functions:
 
       ```javascript
 
-      import { cachePersistenceExtension } from
+      import { cachePersistencePlugin } from
       "@azure/identity-cache-persistence";
 
 
-      import { useIdentityExtension, DefaultAzureCredential } from
+      import { useIdentityPlugin, DefaultAzureCredential } from
       "@azure/identity";
 
-      useIdentityExtension(persistence);
+      useIdentityPlugin(cachePersistencePlugin);
 
 
-      // The extension has the capability to extend `DefaultAzureCredential` and
-      to
+      // The plugin has the capability to extend `DefaultAzureCredential` and to
 
       // add middleware to the underlying credentials, such as persistence.
 
@@ -184,9 +186,9 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function useIdentityExtension(extension: IdentityExtension)'
+      content: 'function useIdentityPlugin(plugin: IdentityPlugin)'
       parameters:
-        - id: extension
-          type: <xref uid="@azure/identity.IdentityExtension" />
+        - id: plugin
+          type: <xref uid="@azure/identity.IdentityPlugin" />
           description: |
-            the extension to register
+            the plugin to register

@@ -13,7 +13,7 @@ isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'BlobClient(string, Pipeline)'
+  - name: 'BlobClient(string, PipelineLike)'
     uid: '@azure/storage-blob.BlobClient.constructor_2'
     package: '@azure/storage-blob'
     summary: >-
@@ -29,7 +29,7 @@ constructors:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'new BlobClient(url: string, pipeline: Pipeline)'
+      content: 'new BlobClient(url: string, pipeline: PipelineLike)'
       parameters:
         - id: url
           type: string
@@ -38,7 +38,7 @@ constructors:
                                 "https://myaccount.blob.core.windows.net". You can append a SAS
                                 if using AnonymousCredential, such as "https://myaccount.blob.core.windows.net?sasString".
         - id: pipeline
-          type: <xref uid="@azure/storage-blob.Pipeline" />
+          type: <xref uid="@azure/storage-blob.PipelineLike" />
           description: |
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
@@ -347,6 +347,29 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobDeleteIfExistsResponse"
           />&gt;
+        description: ''
+  - name: deleteImmutabilityPolicy(BlobDeleteImmutabilityPolicyOptions)
+    uid: '@azure/storage-blob.BlobClient.deleteImmutabilityPolicy'
+    package: '@azure/storage-blob'
+    summary: Delete the immutablility policy on the blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteImmutabilityPolicy(options?:
+        BlobDeleteImmutabilityPolicyOptions)
+      parameters:
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-blob.BlobDeleteImmutabilityPolicyOptions"
+            />
+          description: |
+            Optional options to delete immutability policy on the blob.
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.BlobDeleteImmutabilityPolicyResponse" />&gt;
         description: ''
   - name: 'download(number, number, BlobDownloadOptions)'
     uid: '@azure/storage-blob.BlobClient.download'
@@ -800,6 +823,9 @@ methods:
             If no value provided, or no value provided for
                                                               the specified blob HTTP headers, these blob HTTP
                                                               headers without a value will be cleared.
+                                                              A common header to set is `blobContentType`
+                                                              enabling the browser to provide functionality
+                                                              based on file type.
         - id: options
           type: <xref uid="@azure/storage-blob.BlobSetHTTPHeadersOptions" />
           description: |
@@ -807,6 +833,56 @@ methods:
       return:
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobSetHTTPHeadersResponse"
+          />&gt;
+        description: ''
+  - name: >-
+      setImmutabilityPolicy(BlobImmutabilityPolicy,
+      BlobSetImmutabilityPolicyOptions)
+    uid: '@azure/storage-blob.BlobClient.setImmutabilityPolicy'
+    package: '@azure/storage-blob'
+    summary: Set immutablility policy on the blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setImmutabilityPolicy(immutabilityPolicy:
+        BlobImmutabilityPolicy, options?: BlobSetImmutabilityPolicyOptions)
+      parameters:
+        - id: immutabilityPolicy
+          type: <xref uid="@azure/storage-blob.BlobImmutabilityPolicy" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobSetImmutabilityPolicyOptions" />
+          description: |
+            Optional options to set immutability policy on the blob.
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.BlobSetImmutabilityPolicyResponse" />&gt;
+        description: ''
+  - name: 'setLegalHold(boolean, BlobSetLegalHoldOptions)'
+    uid: '@azure/storage-blob.BlobClient.setLegalHold'
+    package: '@azure/storage-blob'
+    summary: Set legal hold on the blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setLegalHold(legalHoldEnabled: boolean, options?:
+        BlobSetLegalHoldOptions)
+      parameters:
+        - id: legalHoldEnabled
+          type: boolean
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobSetLegalHoldOptions" />
+          description: |
+            Optional options to set legal hold on the blob.
+      return:
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.BlobSetLegalHoldResponse"
           />&gt;
         description: ''
   - name: 'setMetadata(Metadata, BlobSetMetadataOptions)'

@@ -26,6 +26,35 @@ constructors:
           type: number
           description: ''
 methods:
+  - name: batch(() => void)
+    uid: '@azure/communication-react.CallContext.batch'
+    package: '@azure/communication-react'
+    summary: >
+      Batch updates to minimize `stateChanged` events across related operations.
+
+      - A maximum of one `stateChanged` event is emitted, at the end of the
+      operations.
+
+      - No `stateChanged` event is emitted if the state did not change through
+      the operations.
+
+      - In case of an exception, state is reset to the prior value and no
+      `stateChanged` event is emitted.
+
+
+      All operations finished in this batch should be synchronous.
+
+      This function is not reentrant -- do not call batch() from within another
+      batch().
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function batch(operations: () => void)'
+      parameters:
+        - id: operations
+          type: () =&gt; void
+          description: ''
   - name: clearCallRelatedState()
     uid: '@azure/communication-react.CallContext.clearCallRelatedState'
     package: '@azure/communication-react'
@@ -74,6 +103,19 @@ methods:
       return:
         type: <xref uid="@azure/communication-react.CallClientState" />
         description: ''
+  - name: modifyState(CallStateModifier)
+    uid: '@azure/communication-react.CallContext.modifyState'
+    package: '@azure/communication-react'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function modifyState(modifier: CallStateModifier)'
+      parameters:
+        - id: modifier
+          type: <xref uid="@azure/communication-react.CallStateModifier" />
+          description: ''
   - name: 'offStateChange((state: CallClientState) => void)'
     uid: '@azure/communication-react.CallContext.offStateChange'
     package: '@azure/communication-react'
@@ -151,6 +193,24 @@ methods:
       parameters:
         - id: callAgent
           type: <xref uid="@azure/communication-react.CallAgentState" />
+          description: ''
+  - name: 'setCallDominantSpeakers(string, DominantSpeakersInfo)'
+    uid: '@azure/communication-react.CallContext.setCallDominantSpeakers'
+    package: '@azure/communication-react'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setCallDominantSpeakers(callId: string, dominantSpeakers:
+        DominantSpeakersInfo)
+      parameters:
+        - id: callId
+          type: string
+          description: ''
+        - id: dominantSpeakers
+          type: DominantSpeakersInfo
           description: ''
   - name: 'setCallEnded(string, CallEndReason | undefined)'
     uid: '@azure/communication-react.CallContext.setCallEnded'
@@ -798,3 +858,63 @@ methods:
         - id: state
           type: <xref uid="@azure/communication-react.CallClientState" />
           description: ''
+  - name: >-
+      withAsyncErrorTeedToState<Args>((args: Args) => Promise<R>,
+      CallErrorTarget, CallErrorTarget[])
+    uid: '@azure/communication-react.CallContext.withAsyncErrorTeedToState'
+    package: '@azure/communication-react'
+    summary: |
+      Tees any errors encountered in an async function to the state.
+      If the function succeeds, clears associated errors from the state.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withAsyncErrorTeedToState<Args>(action: (args: Args) =>
+        Promise<R>, target: CallErrorTarget, clearTargets?: CallErrorTarget[])
+      parameters:
+        - id: action
+          type: '(args: Args) =&gt; Promise&lt;R&gt;'
+          description: Async function to execute.
+        - id: target
+          type: <xref uid="@azure/communication-react.CallErrorTarget" />
+          description: The error target to tee error to.
+        - id: clearTargets
+          type: '<xref uid="@azure/communication-react.CallErrorTarget" />[]'
+          description: >-
+            The error targets to clear errors for if the function succeeds. By
+            default, clears errors for `target`.
+      return:
+        type: '(args: Args) =&gt; Promise&lt;R&gt;'
+        description: Result of calling `f`. Also re-raises any exceptions thrown from `f`.
+  - name: >-
+      withErrorTeedToState<Args>((args: Args) => R, CallErrorTarget,
+      CallErrorTarget[])
+    uid: '@azure/communication-react.CallContext.withErrorTeedToState'
+    package: '@azure/communication-react'
+    summary: |
+      Tees any errors encountered in an function to the state.
+      If the function succeeds, clears associated errors from the state.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function withErrorTeedToState<Args>(action: (args: Args) => R, target:
+        CallErrorTarget, clearTargets?: CallErrorTarget[])
+      parameters:
+        - id: action
+          type: '(args: Args) =&gt; R'
+          description: Function to execute.
+        - id: target
+          type: <xref uid="@azure/communication-react.CallErrorTarget" />
+          description: The error target to tee error to.
+        - id: clearTargets
+          type: '<xref uid="@azure/communication-react.CallErrorTarget" />[]'
+          description: >-
+            The error targets to clear errors for if the function succeeds. By
+            default, clears errors for `target`.
+      return:
+        type: '(args: Args) =&gt; R'
+        description: Result of calling `f`. Also re-raises any exceptions thrown from `f`.

@@ -2,37 +2,29 @@
 name: ChatAdapter
 uid: '@azure/communication-react.ChatAdapter'
 package: '@azure/communication-react'
-summary: ''
+summary: Chat Composite Adapter interface.
 fullName: ChatAdapter
 remarks: ''
 isPreview: false
 isDeprecated: false
 type: interface
 methods:
-  - name: 'clearErrors(ErrorType[])'
-    uid: '@azure/communication-react.ChatAdapter.clearErrors'
-    package: '@azure/communication-react'
-    summary: >-
-      Clear errors for given error types from
-      <xref:ChatAdapter.getState.latestErrors>.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function clearErrors(errorTypes: ErrorType[])'
-      parameters:
-        - id: errorTypes
-          type: '<xref uid="@azure/communication-react.ErrorType" />[]'
-          description: ''
-  - name: dispose()
-    uid: '@azure/communication-react.ChatAdapter.dispose'
+  - name: deleteMessage(string)
+    uid: '@azure/communication-react.ChatAdapter.deleteMessage'
     package: '@azure/communication-react'
     summary: ''
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function dispose()
+      content: 'function deleteMessage(messageId: string)'
+      parameters:
+        - id: messageId
+          type: string
+          description: ''
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
   - name: fetchInitialData()
     uid: '@azure/communication-react.ChatAdapter.fetchInitialData'
     package: '@azure/communication-react'
@@ -44,18 +36,6 @@ methods:
       content: function fetchInitialData()
       return:
         type: Promise&lt;void&gt;
-        description: ''
-  - name: getState()
-    uid: '@azure/communication-react.ChatAdapter.getState'
-    package: '@azure/communication-react'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function getState()
-      return:
-        type: <xref uid="@azure/communication-react.ChatState" />
         description: ''
   - name: loadPreviousChatMessages(number)
     uid: '@azure/communication-react.ChatAdapter.loadPreviousChatMessages'
@@ -73,7 +53,7 @@ methods:
       return:
         type: Promise&lt;boolean&gt;
         description: ''
-  - name: 'off("error", ChatErrorListener)'
+  - name: 'off("error", (e: AdapterError) => void)'
     uid: '@azure/communication-react.ChatAdapter.off_6'
     package: '@azure/communication-react'
     summary: ''
@@ -81,13 +61,13 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function off(event: "error", listener: ChatErrorListener)'
+      content: 'function off(event: "error", listener: (e: AdapterError) => void)'
       parameters:
         - id: event
           type: '"error"'
           description: ''
         - id: listener
-          type: <xref uid="@azure/communication-react.ChatErrorListener" />
+          type: '(e: AdapterError) =&gt; void'
           description: ''
   - name: 'off("messageRead", MessageReadListener)'
     uid: '@azure/communication-react.ChatAdapter.off_2'
@@ -193,20 +173,7 @@ methods:
         - id: listener
           type: <xref uid="@azure/communication-react.TopicChangedListener" />
           description: ''
-  - name: 'offStateChange((state: ChatState) => void)'
-    uid: '@azure/communication-react.ChatAdapter.offStateChange'
-    package: '@azure/communication-react'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function offStateChange(handler: (state: ChatState) => void)'
-      parameters:
-        - id: handler
-          type: '(state: ChatState) =&gt; void'
-          description: ''
-  - name: 'on("error", ChatErrorListener)'
+  - name: 'on("error", (e: AdapterError) => void)'
     uid: '@azure/communication-react.ChatAdapter.on_6'
     package: '@azure/communication-react'
     summary: ''
@@ -214,13 +181,13 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function on(event: "error", listener: ChatErrorListener)'
+      content: 'function on(event: "error", listener: (e: AdapterError) => void)'
       parameters:
         - id: event
           type: '"error"'
           description: ''
         - id: listener
-          type: <xref uid="@azure/communication-react.ChatErrorListener" />
+          type: '(e: AdapterError) =&gt; void'
           description: ''
   - name: 'on("messageRead", MessageReadListener)'
     uid: '@azure/communication-react.ChatAdapter.on_2'
@@ -324,19 +291,6 @@ methods:
         - id: listener
           type: <xref uid="@azure/communication-react.TopicChangedListener" />
           description: ''
-  - name: 'onStateChange((state: ChatState) => void)'
-    uid: '@azure/communication-react.ChatAdapter.onStateChange'
-    package: '@azure/communication-react'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function onStateChange(handler: (state: ChatState) => void)'
-      parameters:
-        - id: handler
-          type: '(state: ChatState) =&gt; void'
-          description: ''
   - name: removeParticipant(string)
     uid: '@azure/communication-react.ChatAdapter.removeParticipant'
     package: '@azure/communication-react'
@@ -413,3 +367,23 @@ methods:
       return:
         type: Promise&lt;void&gt;
         description: ''
+  - name: 'updateMessage(string, string)'
+    uid: '@azure/communication-react.ChatAdapter.updateMessage'
+    package: '@azure/communication-react'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function updateMessage(messageId: string, content: string)'
+      parameters:
+        - id: messageId
+          type: string
+          description: ''
+        - id: content
+          type: string
+          description: ''
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+extends: <xref uid="@azure/communication-react.ChatAdapterThreadManagement" />

@@ -94,16 +94,13 @@ functions:
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.DeviceTokenCredentials"
           />&gt;
         description: >-
-          If a callback was passed as the last parameter then it returns the
-          callback else returns a Promise.
+          If a callback was passed as the last parameter then it returns void
+          else returns a Promise.
 
-             {function} optionalCallback(err, credentials)
-                          {Error}                          [err]  - The Error object if an error occurred, null otherwise.
-                          {DeviceTokenCredentials} [credentials]  - The DeviceTokenCredentials object.
-                          {Array}                [subscriptions]  - List of associated subscriptions across all the applicable tenants.
-             {Promise} A promise is returned.
-                      @resolve {DeviceTokenCredentials} The DeviceTokenCredentials object.
-                      @reject {Error} - The error object.
+          The callback is called with the resulting DeviceTokenCredentials
+          object and a list of
+
+          associated subscriptions across all the applicable tenants.
   - name: interactive(InteractiveLoginOptions)
     uid: '@azure/ms-rest-nodeauth.interactive_1'
     package: '@azure/ms-rest-nodeauth'
@@ -172,15 +169,11 @@ functions:
           Promise&lt;<xref
           uid="@azure/ms-rest-nodeauth.MSIAppServiceTokenCredentials" />&gt;
         description: >-
-          If a callback was passed as the last parameter then it returns the
-          callback else returns a Promise.
+          If a callback was passed as the last parameter then it returns void
+          else returns a Promise.
 
-             {function} optionalCallback(err, credentials)
-                          {Error}  [err]                               - The Error object if an error occurred, null otherwise.
-                          {object} [tokenResponse]                     - The tokenResponse (tokenType and accessToken are the two important properties)
-             {Promise} A promise is returned.
-                      @resolve {object} - tokenResponse.
-                      @reject {Error} - error object.
+          The callback is called with the resulting
+          MSIAppServiceTokenCredentials object.
   - name: loginWithAppServiceMSI(MSIAppServiceOptions)
     uid: '@azure/ms-rest-nodeauth.loginWithAppServiceMSI_1'
     package: '@azure/ms-rest-nodeauth'
@@ -286,15 +279,11 @@ functions:
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials"
           />&gt;
         description: >-
-          If a callback was passed as the last parameter then it returns the
-          callback else returns a Promise.
+          If a callback was passed as the last parameter then it returns void
+          else returns a Promise.
 
-             {function} optionalCallback(err, credentials)
-                          {Error}  [err]                               - The Error object if an error occurred, null otherwise.
-                          {object} [tokenResponse]                     - The tokenResponse (tokenType and accessToken are the two important properties)
-             {Promise} A promise is returned.
-                      @resolve {object} - tokenResponse.
-                      @reject {Error} - error object.
+          The callback is called with the resulting MSIVmTokenCredentials
+          object.
   - name: loginWithVmMSI(MSIVmOptions)
     uid: '@azure/ms-rest-nodeauth.loginWithVmMSI_1'
     package: '@azure/ms-rest-nodeauth'
@@ -391,19 +380,19 @@ functions:
       content: function withAuthFile()
       return:
         type: >-
-          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.TokenCredentialsBase"
+          Promise&lt;<xref
+          uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" /> | <xref
+          uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;
         description: >-
-          If a callback was passed as the last parameter then it returns the
-          callback else returns a Promise.
+          If a callback was passed as the last parameter then it returns void
+          else returns a Promise.
 
-             {function} optionalCallback(err, credentials)
-                          {Error}  [err]                               - The Error object if an error occurred, null otherwise.
-                          {ApplicationTokenCredentials} [credentials]  - The ApplicationTokenCredentials object.
-                          {Array}                [subscriptions]       - List of associated subscriptions across all the applicable tenants.
-             {Promise} A promise is returned.
-                      @resolve {ApplicationTokenCredentials} The ApplicationTokenCredentials object.
-                      @reject {Error} - The error object.
+          The callback is called with the resulting ApplicationTokenCredentials
+          or ApplicationTokenCertificateCredentials
+
+          object and a list of associated subscriptions across all the
+          applicable tenants.
   - name: withAuthFile(LoginWithAuthFileOptions)
     uid: '@azure/ms-rest-nodeauth.withAuthFile_1'
     package: '@azure/ms-rest-nodeauth'
@@ -419,13 +408,15 @@ functions:
           description: ''
       return:
         type: >-
-          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.TokenCredentialsBase"
+          Promise&lt;<xref
+          uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" /> | <xref
+          uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;
         description: ''
   - name: >-
       withAuthFile(LoginWithAuthFileOptions, (err: Error, credentials:
-      ApplicationTokenCredentials, subscriptions: Array<LinkedSubscription>) =>
-      void)
+      ApplicationTokenCredentials | ApplicationTokenCertificateCredentials,
+      subscriptions: Array<LinkedSubscription>) => void)
     uid: '@azure/ms-rest-nodeauth.withAuthFile_2'
     package: '@azure/ms-rest-nodeauth'
     summary: ''
@@ -435,7 +426,8 @@ functions:
     syntax:
       content: >-
         function withAuthFile(options: LoginWithAuthFileOptions, callback: (err:
-        Error, credentials: ApplicationTokenCredentials, subscriptions:
+        Error, credentials: ApplicationTokenCredentials |
+        ApplicationTokenCertificateCredentials, subscriptions:
         Array<LinkedSubscription>) => void)
       parameters:
         - id: options
@@ -443,8 +435,9 @@ functions:
           description: ''
         - id: callback
           type: >-
-            (err: Error, credentials: ApplicationTokenCredentials,
-            subscriptions: Array&lt;LinkedSubscription&gt;) =&gt; void
+            (err: Error, credentials: ApplicationTokenCredentials |
+            ApplicationTokenCertificateCredentials, subscriptions:
+            Array&lt;LinkedSubscription&gt;) =&gt; void
           description: ''
   - name: withAuthFile(any)
     uid: '@azure/ms-rest-nodeauth.withAuthFile_3'
@@ -507,7 +500,12 @@ functions:
           type: <xref uid="@azure/ms-rest-nodeauth.LoginWithAuthFileOptions" />
           description: Optional parameters
       return:
-        type: Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse" />&gt;
+        type: >-
+          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
+          />&lt;<xref uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials"
+          /> | <xref
+          uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
+          />&gt;&gt;
         description: >-
           A Promise that resolves to AuthResponse, which contains "credentials"
           and optional "subscriptions" array and rejects with an Error.
@@ -537,7 +535,10 @@ functions:
           description: |
             Object representing optional parameters.
       return:
-        type: Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse" />&gt;
+        type: >-
+          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
+          />&lt;<xref uid="@azure/ms-rest-nodeauth.DeviceTokenCredentials"
+          />&gt;&gt;
         description: >-
           A Promise that resolves to AuthResponse, which contains "credentials"
           and optional "subscriptions" array and rejects with an Error.
@@ -590,16 +591,13 @@ functions:
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;
         description: >-
-          If a callback was passed as the last parameter then it returns the
-          callback else returns a Promise.
+          If a callback was passed as the last parameter then it returns void
+          else returns a Promise.
 
-             {function} optionalCallback(err, credentials)
-                          {Error}  [err]                               - The Error object if an error occurred, null otherwise.
-                          {ApplicationTokenCertificateCredentials} [credentials]  - The ApplicationTokenCertificateCredentials object.
-                          {Array}                [subscriptions]       - List of associated subscriptions across all the applicable tenants.
-             {Promise} A promise is returned.
-                      @resolve {ApplicationTokenCertificateCredentials} The ApplicationTokenCertificateCredentials object.
-                      @reject {Error} - The error object.
+          The callback is called with the resulting
+          ApplicationTokenCertificateCredentials object and a list of
+
+          associated subscriptions across all the applicable tenants.
   - name: >-
       withServicePrincipalCertificate(string, string, string,
       AzureTokenCredentialsOptions)
@@ -630,7 +628,8 @@ functions:
       return:
         type: >-
           Promise&lt;<xref
-          uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" />&gt;
+          uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
+          />&gt;
         description: ''
   - name: >-
       withServicePrincipalCertificate(string, string, string,
@@ -742,7 +741,11 @@ functions:
           type: <xref uid="@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions" />
           description: Object representing optional parameters.
       return:
-        type: Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse" />&gt;
+        type: >-
+          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
+          />&lt;<xref
+          uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
+          />&gt;&gt;
         description: >-
           A Promise that resolves to AuthResponse, which contains "credentials"
           and optional "subscriptions" array and rejects with an Error.
@@ -786,16 +789,13 @@ functions:
           Promise&lt;<xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" />&gt;
         description: >-
-          If a callback was passed as the last parameter then it returns the
-          callback else returns a Promise.
+          If a callback was passed as the last parameter then it returns void
+          else returns a Promise.
 
-             {function} optionalCallback(err, credentials)
-                          {Error}                               [err]  - The Error object if an error occurred, null otherwise.
-                          {ApplicationTokenCredentials} [credentials]  - The ApplicationTokenCredentials object.
-                          {Array}                     [subscriptions]  - List of associated subscriptions across all the applicable tenants.
-             {Promise} A promise is returned.
-                      @resolve {ApplicationTokenCredentials} The ApplicationTokenCredentials object.
-                      @reject {Error} - The error object.
+          The callback is called with the resulting ApplicationTokenCredentials
+          object and a list of
+
+          associated subscriptions across all the applicable tenants.
   - name: >-
       withServicePrincipalSecret(string, string, string,
       AzureTokenCredentialsOptions)
@@ -927,7 +927,10 @@ functions:
           type: <xref uid="@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions" />
           description: Object representing optional parameters.
       return:
-        type: Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse" />&gt;
+        type: >-
+          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
+          />&lt;<xref uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials"
+          />&gt;&gt;
         description: >-
           A Promise that resolves to AuthResponse, which contains "credentials"
           and optional "subscriptions" array and rejects with an Error.
@@ -963,16 +966,13 @@ functions:
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.UserTokenCredentials"
           />&gt;
         description: >-
-          If a callback was passed as the last parameter then it returns the
-          callback else returns a Promise.
+          If a callback was passed as the last parameter then it returns void
+          else returns a Promise.
 
-             {function} optionalCallback(err, credentials)
-                          {Error}  [err]                         - The Error object if an error occurred, null otherwise.
-                          {UserTokenCredentials} [credentials]   - The UserTokenCredentials object.
-                          {Array}                [subscriptions] - List of associated subscriptions across all the applicable tenants.
-             {Promise} A promise is returned.
-                      @resolve {UserTokenCredentials} The UserTokenCredentials object.
-                      @reject {Error} - The error object.
+          The callback is called with the resulting UserTokenCredentials object
+          and a list of
+
+          associated subscriptions across all the applicable tenants.
   - name: 'withUsernamePassword(string, string, LoginWithUsernamePasswordOptions)'
     uid: '@azure/ms-rest-nodeauth.withUsernamePassword_1'
     package: '@azure/ms-rest-nodeauth'
@@ -1091,7 +1091,10 @@ functions:
             />
           description: Object representing optional parameters.
       return:
-        type: Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse" />&gt;
+        type: >-
+          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
+          />&lt;<xref uid="@azure/ms-rest-nodeauth.UserTokenCredentials"
+          />&gt;&gt;
         description: >-
           A Promise that resolves to AuthResponse, which contains `credentials`
           and an optional `subscriptions` array, and rejects with an Error.

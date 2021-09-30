@@ -15,7 +15,7 @@ interfaces:
   - '@azure/keyvault-secrets.GetDeletedSecretOptions'
   - '@azure/keyvault-secrets.GetSecretOptions'
   - '@azure/keyvault-secrets.KeyVaultSecret'
-  - '@azure/keyvault-secrets.KeyVaultSecretId'
+  - '@azure/keyvault-secrets.KeyVaultSecretIdentifier'
   - '@azure/keyvault-secrets.ListDeletedSecretsOptions'
   - '@azure/keyvault-secrets.ListPropertiesOfSecretVersionsOptions'
   - '@azure/keyvault-secrets.ListPropertiesOfSecretsOptions'
@@ -28,3 +28,33 @@ interfaces:
   - '@azure/keyvault-secrets.UpdateSecretPropertiesOptions'
 typeAliases:
   - '@azure/keyvault-secrets.DeletionRecoveryLevel'
+functions:
+  - name: parseKeyVaultSecretIdentifier(string)
+    uid: '@azure/keyvault-secrets.parseKeyVaultSecretIdentifier'
+    package: '@azure/keyvault-secrets'
+    summary: |-
+      Parses the given Key Vault Secret Id. An example is:
+        https://<keyvault-name>.vault.azure.net/secrets/<secret-name>/<unique-version-id>
+
+      On parsing the above Id, this function returns:
+      ```ts
+        {
+           sourceId: "https://<keyvault-name>.vault.azure.net/secrets/<secret-name>/<unique-version-id>",
+           vaultUrl: "https://<keyvault-name>.vault.azure.net",
+           version: "<unique-version-id>",
+           name: "<secret-name>"
+        }
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function parseKeyVaultSecretIdentifier(id: string)'
+      parameters:
+        - id: id
+          type: string
+          description: |
+            The Id of the Key Vault Secret.
+      return:
+        type: <xref uid="@azure/keyvault-secrets.KeyVaultSecretIdentifier" />
+        description: ''

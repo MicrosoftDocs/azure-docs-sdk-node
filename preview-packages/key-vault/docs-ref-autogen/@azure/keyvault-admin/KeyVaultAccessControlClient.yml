@@ -140,11 +140,8 @@ methods:
       const roleAssignment = await client.createRoleAssignment("/",
       "295c179b-9ad3-4117-99cd-b1aa66cf4517");
 
-      const deletedRoleAssignment = await
-      client.deleteRoleAssignment(roleAssignment.properties.roleScope,
+      await client.deleteRoleAssignment(roleAssignment.properties.roleScope,
       roleAssignment.name);
-
-      console.log(deletedRoleAssignment);
 
       ```
 
@@ -168,9 +165,7 @@ methods:
           description: |
             The optional parameters.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/keyvault-admin.KeyVaultRoleAssignment"
-          />&gt;
+        type: Promise&lt;void&gt;
         description: ''
   - name: >-
       deleteRoleDefinition(KeyVaultRoleScope, string,
@@ -186,13 +181,10 @@ methods:
 
       const client = new KeyVaultAccessControlClient(url, credentials);
 
-      const roleDefinition = await client.upsertRoleDefintion("/",
+      const roleDefinition = await client.setRoleDefinition("/",
       "23b8bb1a-39c0-4c89-a85b-dd3c99273a8a", []);
 
-      const deletedRoleDefinition = await client.deleteRoleDefinition("/",
-      roleDefinition.name);
-
-      console.log(deletedRoleDefinition);
+      await client.deleteRoleDefinition("/", roleDefinition.name);
 
       ```
     remarks: ''
@@ -214,9 +206,7 @@ methods:
           description: |
             The optional parameters.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/keyvault-admin.KeyVaultRoleDefinition"
-          />&gt;
+        type: Promise&lt;void&gt;
         description: ''
   - name: 'getRoleAssignment(KeyVaultRoleScope, string, GetRoleAssignmentOptions)'
     uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.getRoleAssignment'
@@ -372,13 +362,11 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/keyvault-admin.KeyVaultRoleDefinition" />&gt;
         description: ''
-  - name: >-
-      upsertRoleDefinition(KeyVaultRoleScope, string, KeyVaultPermission[],
-      string, UpsertRoleDefinitionOptions)
-    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.upsertRoleDefinition'
+  - name: 'setRoleDefinition(KeyVaultRoleScope, SetRoleDefinitionOptions)'
+    uid: '@azure/keyvault-admin.KeyVaultAccessControlClient.setRoleDefinition'
     package: '@azure/keyvault-admin'
     summary: >-
-      Upserts a role definition in an Azure Key Vault.
+      Creates or updates a role definition in an Azure Key Vault.
 
       Example usage:
 
@@ -387,10 +375,13 @@ methods:
       const client = new KeyVaultAccessControlClient(url, credentials);
 
       const permissions = [{ dataActions:
-      "Microsoft.KeyVault/managedHsm/backup/start/action" }];
+      [KnownKeyVaultDataAction.BackupHsmKeys] }];
 
-      const roleDefinition = await client.upsertRoleDefintion("/",
-      "23b8bb1a-39c0-4c89-a85b-dd3c99273a8a", permissions);
+      const roleDefinitionName = "23b8bb1a-39c0-4c89-a85b-dd3c99273a8a";
+
+      const roleDefinition = await
+      client.setRoleDefinition(KnownKeyVaultRoleScope.Global, { permissions,
+      roleDefinitionName });
 
       console.log(roleDefinition);
 
@@ -400,24 +391,14 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function upsertRoleDefinition(roleScope: KeyVaultRoleScope, name:
-        string, permissions: KeyVaultPermission[], description?: string,
-        options?: UpsertRoleDefinitionOptions)
+        function setRoleDefinition(roleScope: KeyVaultRoleScope, options?:
+        SetRoleDefinitionOptions)
       parameters:
         - id: roleScope
           type: <xref uid="@azure/keyvault-admin.KeyVaultRoleScope" />
           description: The scope of the role definition.
-        - id: name
-          type: string
-          description: The name of the role definition. Must be a UUID.
-        - id: permissions
-          type: '<xref uid="@azure/keyvault-admin.KeyVaultPermission" />[]'
-          description: 'The set of <xref:KeyVaultPermission> for this role definition.'
-        - id: description
-          type: string
-          description: The role definition description.
         - id: options
-          type: <xref uid="@azure/keyvault-admin.UpsertRoleDefinitionOptions" />
+          type: <xref uid="@azure/keyvault-admin.SetRoleDefinitionOptions" />
           description: |
             The optional parameters.
       return:

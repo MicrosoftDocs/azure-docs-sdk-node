@@ -3,7 +3,7 @@ title: Azure Key Vault Key client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/keyvault-keys, keyvault
 author: maggiepint
 ms.author: magpint
-ms.date: 08/10/2021
+ms.date: 10/05/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: keyvault
 ---
 
-# Azure Key Vault Key client library for JavaScript - Version 4.4.0-beta.1 
+# Azure Key Vault Key client library for JavaScript - Version 4.4.0-beta.2 
 
 
 Azure Key Vault is a service that allows you to encrypt authentication keys, storage account keys, data encryption keys, .pfx files, and passwords by using secured keys.
@@ -41,6 +41,7 @@ Using the cryptography client available in this library you also have access to:
 > Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document][cors] for guidance.
 
 Key links:
+
 - [Source code][package-gh]
 - [Package (npm)][package-npm]
 - [API Reference Documentation][docs]
@@ -175,7 +176,7 @@ az keyvault security-domain download --hsm-name <your-key-vault-name> --sd-wrapp
 
 ## Authenticating with Azure Active Directory
 
-The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-keys_4.4.0-beta.1/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-keys_4.4.0-beta.2/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 Here's a quick example. First, import `DefaultAzureCredential` and `KeyClient`:
 
@@ -489,6 +490,44 @@ async function main() {
   }
 
   console.log(`The key ${keyName} is fully deleted`);
+}
+
+main();
+```
+
+### Configuring Automatic Key Rotation
+
+Using the KeyClient, you can configure automatic key rotation for a key by specifying the rotation policy.
+In addition, KeyClient provides a method to rotate a key on-demand by creating a new version of the given key.
+
+```javascript
+const { DefaultAzureCredential } = require("@azure/identity");
+const { KeyClient } = require("@azure/keyvault-keys");
+
+const vaultUrl = `https://<YOUR KEYVAULT NAME>.vault.azure.net`;
+const client = new KeyClient(url, new DefaultAzureCredential());
+
+async function main() {
+  const keyName = "MyKeyName";
+
+  // Set the key's automated rotation policy to rotate the key 30 days before expiry.
+  const policy = await client.updateKeyRotationPolicy(key.name, {
+    lifetimeActions: [
+      {
+        action: "Rotate",
+        timeBeforeExpiry: "P30D"
+      }
+    ],
+    // You may also specify the duration after which any newly rotated key will expire.
+    // In this case, any new key versions will expire after 90 days.
+    expiresIn: "P90D"
+  });
+
+  // You can get the current key rotation policy of a given key by calling the getKeyRotationPolicy method.
+  const currentPolicy = await client.getKeyRotationPolicy(key.name);
+
+  // Finally, you can rotate a key on-demand by creating a new version of the given key.
+  const rotatedKey = await client.rotateKey(key.name);
 }
 
 main();
@@ -863,23 +902,23 @@ setLogLevel("info");
 
 You can find more code samples through the following links:
 
-- [KeyVault Keys Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.1/sdk/keyvault/keyvault-keys/samples/v4/javascript)
-- [KeyVault Keys Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.1/sdk/keyvault/keyvault-keys/samples/v4/typescript)
-- [KeyVault Keys Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.1/sdk/keyvault/keyvault-keys/test/)
+- [KeyVault Keys Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.2/sdk/keyvault/keyvault-keys/samples/v4/javascript)
+- [KeyVault Keys Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.2/sdk/keyvault/keyvault-keys/samples/v4/typescript)
+- [KeyVault Keys Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.2/sdk/keyvault/keyvault-keys/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [aboutkeys]: https://docs.microsoft.com/azure/key-vault/keys/about-keys
 [keyvault]: https://docs.microsoft.com/azure/key-vault/key-vault-overview
 [managedhsm]: https://docs.microsoft.com/azure/key-vault/managed-hsm/overview
-[cors]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.1/samples/cors/ts/README.md
-[package-gh]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-keys_4.4.0-beta.1/sdk/keyvault/keyvault-keys
+[cors]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.2/samples/cors/ts/README.md
+[package-gh]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-keys_4.4.0-beta.2/sdk/keyvault/keyvault-keys
 [package-npm]: https://www.npmjs.com/package/@azure/keyvault-keys
 [docs]: https://docs.microsoft.com/javascript/api/@azure/keyvault-keys
 [docs-service]: https://azure.microsoft.com/services/key-vault/
-[samples]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.1/sdk/keyvault/keyvault-keys/samples
+[samples]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-keys_4.4.0-beta.2/sdk/keyvault/keyvault-keys/samples
 [tscompileroptions]: https://www.typescriptlang.org/docs/handbook/compiler-options.html
 [azure-sub]: https://azure.microsoft.com/free/
 [azure-cli]: https://docs.microsoft.com/cli/azure

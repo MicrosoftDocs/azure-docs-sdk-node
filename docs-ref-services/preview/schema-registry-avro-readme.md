@@ -1,17 +1,17 @@
 ---
 title: Azure Schema Registry Avro serializer client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/schema-registry-avro, eventhubs
+keywords: Azure, javascript, SDK, API, @azure/schema-registry-avro, schemaregistry
 author: maggiepint
 ms.author: magpint
-ms.date: 08/17/2021
+ms.date: 10/05/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: eventhubs
+ms.service: schemaregistry
 ---
 
-# Azure Schema Registry Avro serializer client library for JavaScript - Version 1.0.0-beta.2 
+# Azure Schema Registry Avro serializer client library for JavaScript - Version 1.0.0-beta.3 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,
@@ -21,10 +21,10 @@ Schema Registry schema identifiers and Avro-encoded data.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.2/sdk/schemaregistry/schema-registry-avro)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.3/sdk/schemaregistry/schema-registry-avro)
 - [Package (npm)](https://www.npmjs.com/package/@azure/schema-registry-avro)
 - [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/schema-registry-avro)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.2/sdk/schemaregistry/schema-registry-avro/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.3/sdk/schemaregistry/schema-registry-avro/samples)
 
 ## Getting started
 
@@ -50,7 +50,7 @@ npm install @azure/schema-registry-avro
 Provides API to serialize to and deserialize from Avro Binary Encoding plus a
 header with schema ID. Uses
 `SchemaRegistryClient` from the [@azure/schema-registry](https://www.npmjs.com/package/@azure/schema-registry) package
-to get schema IDs from schema content or vice versa. The provided API has internal cache to avoid calling the schema registry service when possible.
+to get schema IDs from schema definition or vice versa. The provided API has internal cache to avoid calling the schema registry service when possible.
 
 ### Message format
 
@@ -85,7 +85,7 @@ const { SchemaRegistryClient } = require("@azure/schema-registry");
 const { SchemaRegistryAvroSerializer } = require("@azure/schema-registry-avro");
 
 const client = new SchemaRegistryClient("<endpoint>", new DefaultAzureCredential());
-const serializer = new SchemaRegistryAvroSerializer(client, "<group>");
+const serializer = new SchemaRegistryAvroSerializer(client, { groupName: "<group>" });
 
 // Example Avro schema
 const schema = JSON.stringify({
@@ -123,7 +123,7 @@ setLogLevel("info");
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.2/sdk/schemaregistry/schema-registry-avro/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.3/sdk/schemaregistry/schema-registry-avro/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
@@ -146,7 +146,7 @@ FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact
 questions or comments.
 
 If you'd like to contribute to this library, please read the [contributing
-guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry-avro_1.0.0-beta.2/CONTRIBUTING.md) to
+guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry-avro_1.0.0-beta.3/CONTRIBUTING.md) to
 learn more about how to build and test the code.
 
 ## Related projects
@@ -158,7 +158,6 @@ learn more about how to build and test the code.
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.2/sdk/identity/identity
-[cognitive_auth]: https://docs.microsoft.com/azure/cognitive-services/authentication
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.3/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry-avro_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential
 

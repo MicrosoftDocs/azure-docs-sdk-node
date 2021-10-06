@@ -18,14 +18,14 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new SchemaRegistryClient(endpoint: string, credential: TokenCredential,
-        options?: SchemaRegistryClientOptions)
+        new SchemaRegistryClient(fullyQualifiedNamespace: string, credential:
+        TokenCredential, options?: SchemaRegistryClientOptions)
       parameters:
-        - id: endpoint
+        - id: fullyQualifiedNamespace
           type: string
           description: |-
-            The Schema Registry service endpoint URL, for example
-                              https://mynamespace.servicebus.windows.net.
+            The Schema Registry service qualified namespace URL, for example
+                                             https://mynamespace.servicebus.windows.net.
         - id: credential
           type: TokenCredential
           description: Credential to authenticate requests to the service.
@@ -34,35 +34,35 @@ constructors:
           description: |
             Options to configure API requests to the service.
 properties:
-  - name: endpoint
-    uid: '@azure/schema-registry.SchemaRegistryClient.endpoint'
+  - name: fullyQualifiedNamespace
+    uid: '@azure/schema-registry.SchemaRegistryClient.fullyQualifiedNamespace'
     package: '@azure/schema-registry'
-    summary: The Schema Registry service endpoint URL.
-    fullName: endpoint
+    summary: The Schema Registry service fully qualified namespace URL.
+    fullName: fullyQualifiedNamespace
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'endpoint: string'
+      content: 'fullyQualifiedNamespace: string'
       return:
         type: string
         description: ''
 methods:
-  - name: 'getSchemaById(string, GetSchemaByIdOptions)'
-    uid: '@azure/schema-registry.SchemaRegistryClient.getSchemaById'
+  - name: 'getSchema(string, GetSchemaOptions)'
+    uid: '@azure/schema-registry.SchemaRegistryClient.getSchema'
     package: '@azure/schema-registry'
     summary: Gets an existing schema by ID.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getSchemaById(id: string, options?: GetSchemaByIdOptions)'
+      content: 'function getSchema(id: string, options?: GetSchemaOptions)'
       parameters:
         - id: id
           type: string
           description: Unique schema ID.
         - id: options
-          type: <xref uid="@azure/schema-registry.GetSchemaByIdOptions" />
+          type: <xref uid="@azure/schema-registry.GetSchemaOptions" />
           description: ''
       return:
         type: >-
@@ -71,29 +71,29 @@ methods:
         description: >-
           Schema with given ID or undefined if no schema was found with the
           given ID.
-  - name: 'getSchemaId(SchemaDescription, GetSchemaIdOptions)'
-    uid: '@azure/schema-registry.SchemaRegistryClient.getSchemaId'
+  - name: 'getSchemaProperties(SchemaDescription, GetSchemaPropertiesOptions)'
+    uid: '@azure/schema-registry.SchemaRegistryClient.getSchemaProperties'
     package: '@azure/schema-registry'
     summary: |-
       Gets the ID of an existing schema with matching name, group, type, and
-      content.
+      definition.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getSchemaId(schema: SchemaDescription, options?:
-        GetSchemaIdOptions)
+        function getSchemaProperties(schema: SchemaDescription, options?:
+        GetSchemaPropertiesOptions)
       parameters:
         - id: schema
           type: <xref uid="@azure/schema-registry.SchemaDescription" />
           description: Schema to match.
         - id: options
-          type: <xref uid="@azure/schema-registry.GetSchemaIdOptions" />
+          type: <xref uid="@azure/schema-registry.GetSchemaPropertiesOptions" />
           description: ''
       return:
         type: >-
-          Promise&lt;<xref uid="@azure/schema-registry.SchemaId" /> |
+          Promise&lt;<xref uid="@azure/schema-registry.SchemaProperties" /> |
           undefined&gt;
         description: Matched schema's ID or undefined if no matching schema was found.
   - name: 'registerSchema(SchemaDescription, RegisterSchemaOptions)'
@@ -123,5 +123,5 @@ methods:
           type: <xref uid="@azure/schema-registry.RegisterSchemaOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="@azure/schema-registry.SchemaId" />&gt;
+        type: Promise&lt;<xref uid="@azure/schema-registry.SchemaProperties" />&gt;
         description: Registered schema's ID.

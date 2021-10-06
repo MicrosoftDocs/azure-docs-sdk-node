@@ -12,7 +12,7 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      SchemaRegistryAvroSerializer(SchemaRegistry, string,
+      SchemaRegistryAvroSerializer(SchemaRegistry,
       SchemaRegistryAvroSerializerOptions)
     uid: '@azure/schema-registry-avro.SchemaRegistryAvroSerializer.constructor'
     package: '@azure/schema-registry-avro'
@@ -22,19 +22,14 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new SchemaRegistryAvroSerializer(registry: SchemaRegistry, schemaGroup:
-        string, options?: SchemaRegistryAvroSerializerOptions)
+        new SchemaRegistryAvroSerializer(client: SchemaRegistry, options?:
+        SchemaRegistryAvroSerializerOptions)
       parameters:
-        - id: registry
+        - id: client
           type: SchemaRegistry
           description: |
             Schema Registry where schemas are registered and obtained.
                             Usually this is a SchemaRegistryClient instance.
-        - id: schemaGroup
-          type: string
-          description: |
-            The schema group to use when making requests to the
-                               registry.
         - id: options
           type: >-
             <xref
@@ -42,7 +37,7 @@ constructors:
             />
           description: ''
 methods:
-  - name: deserialize<T>(Buffer)
+  - name: deserialize(Buffer | Blob | Uint8Array)
     uid: '@azure/schema-registry-avro.SchemaRegistryAvroSerializer.deserialize'
     package: '@azure/schema-registry-avro'
     summary: Deserializes a value from a buffer.
@@ -50,13 +45,13 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function deserialize<T>(buffer: Buffer)'
+      content: 'function deserialize(input: Buffer | Blob | Uint8Array)'
       parameters:
-        - id: buffer
-          type: Buffer
-          description: The buffer with the serialized value.
+        - id: input
+          type: Buffer | Blob | Uint8Array
+          description: ''
       return:
-        type: Promise&lt;T&gt;
+        type: Promise&lt;unknown&gt;
         description: The deserialized value.
   - name: 'serialize(unknown, string)'
     uid: '@azure/schema-registry-avro.SchemaRegistryAvroSerializer.serialize'
@@ -75,5 +70,5 @@ methods:
           type: string
           description: The Avro schema to use.
       return:
-        type: Promise&lt;Buffer&gt;
+        type: Promise&lt;Uint8Array&gt;
         description: A new buffer with the serialized value

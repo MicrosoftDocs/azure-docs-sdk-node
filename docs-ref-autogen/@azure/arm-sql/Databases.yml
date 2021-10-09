@@ -25,45 +25,6 @@ constructors:
             Reference to the service client.
 methods:
   - name: >-
-      beginCreateImportOperation(string, string, string, ImportExtensionRequest,
-      msRest.RequestOptionsBase)
-    uid: '@azure/arm-sql.Databases.beginCreateImportOperation'
-    package: '@azure/arm-sql'
-    summary: >-
-      Creates an import operation that imports a bacpac into an existing
-      database. The existing
-
-      database must be empty.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginCreateImportOperation(resourceGroupName: string,
-        serverName: string, databaseName: string, parameters:
-        ImportExtensionRequest, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: |-
-            The name of the resource group that contains the resource. You can
-            obtain this value from the Azure Resource Manager API or the portal.
-        - id: serverName
-          type: string
-          description: The name of the server.
-        - id: databaseName
-          type: string
-          description: The name of the database to import into
-        - id: parameters
-          type: <xref uid="@azure/arm-sql.ImportExtensionRequest" />
-          description: The required parameters for importing a Bacpac into a database.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: >-
       beginCreateOrUpdate(string, string, string, Database,
       msRest.RequestOptionsBase)
     uid: '@azure/arm-sql.Databases.beginCreateOrUpdate'
@@ -128,19 +89,19 @@ methods:
         type: Promise&lt;LROPoller&gt;
         description: Promise<msRestAzure.LROPoller>
   - name: >-
-      beginExportMethod(string, string, string, ExportRequest,
+      beginExportMethod(string, string, string, ExportDatabaseDefinition,
       msRest.RequestOptionsBase)
     uid: '@azure/arm-sql.Databases.beginExportMethod'
     package: '@azure/arm-sql'
-    summary: Exports a database to a bacpac.
+    summary: Exports a database.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginExportMethod(resourceGroupName: string, serverName:
-        string, databaseName: string, parameters: ExportRequest, options?:
-        msRest.RequestOptionsBase)
+        string, databaseName: string, parameters: ExportDatabaseDefinition,
+        options?: msRest.RequestOptionsBase)
       parameters:
         - id: resourceGroupName
           type: string
@@ -152,10 +113,10 @@ methods:
           description: The name of the server.
         - id: databaseName
           type: string
-          description: The name of the database to be exported.
+          description: The name of the database.
         - id: parameters
-          type: <xref uid="@azure/arm-sql.ExportRequest" />
-          description: The required parameters for exporting a database.
+          type: <xref uid="@azure/arm-sql.ExportDatabaseDefinition" />
+          description: The database export request parameters.
         - id: options
           type: <xref uid="msRest.RequestOptionsBase" />
           description: ''
@@ -195,8 +156,8 @@ methods:
         type: Promise&lt;LROPoller&gt;
         description: Promise<msRestAzure.LROPoller>
   - name: >-
-      beginImportMethod(string, string, ImportRequest,
-      msRest.RequestOptionsBase)
+      beginImportMethod(string, string, string,
+      ImportExistingDatabaseDefinition, msRest.RequestOptionsBase)
     uid: '@azure/arm-sql.Databases.beginImportMethod'
     package: '@azure/arm-sql'
     summary: Imports a bacpac into a new database.
@@ -206,7 +167,8 @@ methods:
     syntax:
       content: >-
         function beginImportMethod(resourceGroupName: string, serverName:
-        string, parameters: ImportRequest, options?: msRest.RequestOptionsBase)
+        string, databaseName: string, parameters:
+        ImportExistingDatabaseDefinition, options?: msRest.RequestOptionsBase)
       parameters:
         - id: resourceGroupName
           type: string
@@ -216,9 +178,12 @@ methods:
         - id: serverName
           type: string
           description: The name of the server.
+        - id: databaseName
+          type: string
+          description: The name of the database.
         - id: parameters
-          type: <xref uid="@azure/arm-sql.ImportRequest" />
-          description: The required parameters for importing a Bacpac into a database.
+          type: <xref uid="@azure/arm-sql.ImportExistingDatabaseDefinition" />
+          description: The database import request parameters.
         - id: options
           type: <xref uid="msRest.RequestOptionsBase" />
           description: ''
@@ -351,47 +316,6 @@ methods:
         type: Promise&lt;LROPoller&gt;
         description: Promise<msRestAzure.LROPoller>
   - name: >-
-      createImportOperation(string, string, string, ImportExtensionRequest,
-      msRest.RequestOptionsBase)
-    uid: '@azure/arm-sql.Databases.createImportOperation'
-    package: '@azure/arm-sql'
-    summary: >-
-      Creates an import operation that imports a bacpac into an existing
-      database. The existing
-
-      database must be empty.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createImportOperation(resourceGroupName: string, serverName:
-        string, databaseName: string, parameters: ImportExtensionRequest,
-        options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: |-
-            The name of the resource group that contains the resource. You can
-            obtain this value from the Azure Resource Manager API or the portal.
-        - id: serverName
-          type: string
-          description: The name of the server.
-        - id: databaseName
-          type: string
-          description: The name of the database to import into
-        - id: parameters
-          type: <xref uid="@azure/arm-sql.ImportExtensionRequest" />
-          description: The required parameters for importing a Bacpac into a database.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: >-
-          Promise&lt;<xref uid="Models.DatabasesCreateImportOperationResponse"
-          />&gt;
-        description: Promise<Models.DatabasesCreateImportOperationResponse>
-  - name: >-
       createOrUpdate(string, string, string, Database,
       msRest.RequestOptionsBase)
     uid: '@azure/arm-sql.Databases.createOrUpdate'
@@ -456,18 +380,18 @@ methods:
         type: Promise&lt;RestResponse&gt;
         description: Promise<msRest.RestResponse>
   - name: >-
-      exportMethod(string, string, string, ExportRequest,
+      exportMethod(string, string, string, ExportDatabaseDefinition,
       msRest.RequestOptionsBase)
     uid: '@azure/arm-sql.Databases.exportMethod'
     package: '@azure/arm-sql'
-    summary: Exports a database to a bacpac.
+    summary: Exports a database.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function exportMethod(resourceGroupName: string, serverName: string,
-        databaseName: string, parameters: ExportRequest, options?:
+        databaseName: string, parameters: ExportDatabaseDefinition, options?:
         msRest.RequestOptionsBase)
       parameters:
         - id: resourceGroupName
@@ -480,10 +404,10 @@ methods:
           description: The name of the server.
         - id: databaseName
           type: string
-          description: The name of the database to be exported.
+          description: The name of the database.
         - id: parameters
-          type: <xref uid="@azure/arm-sql.ExportRequest" />
-          description: The required parameters for exporting a database.
+          type: <xref uid="@azure/arm-sql.ExportDatabaseDefinition" />
+          description: The database export request parameters.
         - id: options
           type: <xref uid="msRest.RequestOptionsBase" />
           description: ''
@@ -606,7 +530,9 @@ methods:
           type: ServiceCallback&lt;<xref uid="@azure/arm-sql.Database" />&gt;
           description: |
             The callback
-  - name: 'importMethod(string, string, ImportRequest, msRest.RequestOptionsBase)'
+  - name: >-
+      importMethod(string, string, string, ImportExistingDatabaseDefinition,
+      msRest.RequestOptionsBase)
     uid: '@azure/arm-sql.Databases.importMethod'
     package: '@azure/arm-sql'
     summary: Imports a bacpac into a new database.
@@ -616,7 +542,8 @@ methods:
     syntax:
       content: >-
         function importMethod(resourceGroupName: string, serverName: string,
-        parameters: ImportRequest, options?: msRest.RequestOptionsBase)
+        databaseName: string, parameters: ImportExistingDatabaseDefinition,
+        options?: msRest.RequestOptionsBase)
       parameters:
         - id: resourceGroupName
           type: string
@@ -626,9 +553,12 @@ methods:
         - id: serverName
           type: string
           description: The name of the server.
+        - id: databaseName
+          type: string
+          description: The name of the database.
         - id: parameters
-          type: <xref uid="@azure/arm-sql.ImportRequest" />
-          description: The required parameters for importing a Bacpac into a database.
+          type: <xref uid="@azure/arm-sql.ImportExistingDatabaseDefinition" />
+          description: The database import request parameters.
         - id: options
           type: <xref uid="msRest.RequestOptionsBase" />
           description: ''
@@ -803,34 +733,8 @@ methods:
             />&gt;
           description: |
             The callback
-  - name: 'listByServer(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-sql.Databases.listByServer'
-    package: '@azure/arm-sql'
-    summary: Gets a list of databases.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByServer(resourceGroupName: string, serverName: string,
-        options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: |-
-            The name of the resource group that contains the resource. You can
-            obtain this value from the Azure Resource Manager API or the portal.
-        - id: serverName
-          type: string
-          description: The name of the server.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.DatabasesListByServerResponse" />&gt;
-        description: Promise<Models.DatabasesListByServerResponse>
   - name: >-
-      listByServer(string, string, RequestOptionsBase,
+      listByServer(string, string, DatabasesListByServerOptionalParams,
       ServiceCallback<DatabaseListResult>)
     uid: '@azure/arm-sql.Databases.listByServer_2'
     package: '@azure/arm-sql'
@@ -841,7 +745,7 @@ methods:
     syntax:
       content: >-
         function listByServer(resourceGroupName: string, serverName: string,
-        options: RequestOptionsBase, callback:
+        options: DatabasesListByServerOptionalParams, callback:
         ServiceCallback<DatabaseListResult>)
       parameters:
         - id: resourceGroupName
@@ -853,7 +757,7 @@ methods:
           type: string
           description: The name of the server.
         - id: options
-          type: RequestOptionsBase
+          type: <xref uid="@azure/arm-sql.DatabasesListByServerOptionalParams" />
           description: The optional parameters
         - id: callback
           type: >-
@@ -861,6 +765,32 @@ methods:
             />&gt;
           description: |
             The callback
+  - name: 'listByServer(string, string, Models.DatabasesListByServerOptionalParams)'
+    uid: '@azure/arm-sql.Databases.listByServer'
+    package: '@azure/arm-sql'
+    summary: Gets a list of databases.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByServer(resourceGroupName: string, serverName: string,
+        options?: Models.DatabasesListByServerOptionalParams)
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: |-
+            The name of the resource group that contains the resource. You can
+            obtain this value from the Azure Resource Manager API or the portal.
+        - id: serverName
+          type: string
+          description: The name of the server.
+        - id: options
+          type: <xref uid="Models.DatabasesListByServerOptionalParams" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.DatabasesListByServerResponse" />&gt;
+        description: Promise<Models.DatabasesListByServerResponse>
   - name: 'listByServer(string, string, ServiceCallback<DatabaseListResult>)'
     uid: '@azure/arm-sql.Databases.listByServer_1'
     package: '@azure/arm-sql'
@@ -887,29 +817,8 @@ methods:
             />&gt;
           description: |
             The callback
-  - name: 'listByServerNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-sql.Databases.listByServerNext'
-    package: '@azure/arm-sql'
-    summary: Gets a list of databases.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByServerNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.DatabasesListByServerNextResponse" />&gt;
-        description: Promise<Models.DatabasesListByServerNextResponse>
   - name: >-
-      listByServerNext(string, RequestOptionsBase,
+      listByServerNext(string, DatabasesListByServerNextOptionalParams,
       ServiceCallback<DatabaseListResult>)
     uid: '@azure/arm-sql.Databases.listByServerNext_2'
     package: '@azure/arm-sql'
@@ -920,6 +829,188 @@ methods:
     syntax:
       content: >-
         function listByServerNext(nextPageLink: string, options:
+        DatabasesListByServerNextOptionalParams, callback:
+        ServiceCallback<DatabaseListResult>)
+      parameters:
+        - id: nextPageLink
+          type: string
+          description: The NextLink from the previous successful call to List operation.
+        - id: options
+          type: >-
+            <xref uid="@azure/arm-sql.DatabasesListByServerNextOptionalParams"
+            />
+          description: The optional parameters
+        - id: callback
+          type: >-
+            ServiceCallback&lt;<xref uid="@azure/arm-sql.DatabaseListResult"
+            />&gt;
+          description: |
+            The callback
+  - name: 'listByServerNext(string, Models.DatabasesListByServerNextOptionalParams)'
+    uid: '@azure/arm-sql.Databases.listByServerNext'
+    package: '@azure/arm-sql'
+    summary: Gets a list of databases.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByServerNext(nextPageLink: string, options?:
+        Models.DatabasesListByServerNextOptionalParams)
+      parameters:
+        - id: nextPageLink
+          type: string
+          description: The NextLink from the previous successful call to List operation.
+        - id: options
+          type: <xref uid="Models.DatabasesListByServerNextOptionalParams" />
+          description: ''
+      return:
+        type: Promise&lt;<xref uid="Models.DatabasesListByServerNextResponse" />&gt;
+        description: Promise<Models.DatabasesListByServerNextResponse>
+  - name: 'listByServerNext(string, ServiceCallback<DatabaseListResult>)'
+    uid: '@azure/arm-sql.Databases.listByServerNext_1'
+    package: '@azure/arm-sql'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByServerNext(nextPageLink: string, callback:
+        ServiceCallback<DatabaseListResult>)
+      parameters:
+        - id: nextPageLink
+          type: string
+          description: The NextLink from the previous successful call to List operation.
+        - id: callback
+          type: >-
+            ServiceCallback&lt;<xref uid="@azure/arm-sql.DatabaseListResult"
+            />&gt;
+          description: |
+            The callback
+  - name: 'listInaccessibleByServer(string, string, msRest.RequestOptionsBase)'
+    uid: '@azure/arm-sql.Databases.listInaccessibleByServer'
+    package: '@azure/arm-sql'
+    summary: Gets a list of inaccessible databases in a logical server
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listInaccessibleByServer(resourceGroupName: string, serverName:
+        string, options?: msRest.RequestOptionsBase)
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: |-
+            The name of the resource group that contains the resource. You can
+            obtain this value from the Azure Resource Manager API or the portal.
+        - id: serverName
+          type: string
+          description: The name of the server.
+        - id: options
+          type: <xref uid="msRest.RequestOptionsBase" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="Models.DatabasesListInaccessibleByServerResponse" />&gt;
+        description: Promise<Models.DatabasesListInaccessibleByServerResponse>
+  - name: >-
+      listInaccessibleByServer(string, string, RequestOptionsBase,
+      ServiceCallback<DatabaseListResult>)
+    uid: '@azure/arm-sql.Databases.listInaccessibleByServer_2'
+    package: '@azure/arm-sql'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listInaccessibleByServer(resourceGroupName: string, serverName:
+        string, options: RequestOptionsBase, callback:
+        ServiceCallback<DatabaseListResult>)
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: |-
+            The name of the resource group that contains the resource. You can
+            obtain this value from the Azure Resource Manager API or the portal.
+        - id: serverName
+          type: string
+          description: The name of the server.
+        - id: options
+          type: RequestOptionsBase
+          description: The optional parameters
+        - id: callback
+          type: >-
+            ServiceCallback&lt;<xref uid="@azure/arm-sql.DatabaseListResult"
+            />&gt;
+          description: |
+            The callback
+  - name: >-
+      listInaccessibleByServer(string, string,
+      ServiceCallback<DatabaseListResult>)
+    uid: '@azure/arm-sql.Databases.listInaccessibleByServer_1'
+    package: '@azure/arm-sql'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listInaccessibleByServer(resourceGroupName: string, serverName:
+        string, callback: ServiceCallback<DatabaseListResult>)
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: |-
+            The name of the resource group that contains the resource. You can
+            obtain this value from the Azure Resource Manager API or the portal.
+        - id: serverName
+          type: string
+          description: The name of the server.
+        - id: callback
+          type: >-
+            ServiceCallback&lt;<xref uid="@azure/arm-sql.DatabaseListResult"
+            />&gt;
+          description: |
+            The callback
+  - name: 'listInaccessibleByServerNext(string, msRest.RequestOptionsBase)'
+    uid: '@azure/arm-sql.Databases.listInaccessibleByServerNext'
+    package: '@azure/arm-sql'
+    summary: Gets a list of inaccessible databases in a logical server
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listInaccessibleByServerNext(nextPageLink: string, options?:
+        msRest.RequestOptionsBase)
+      parameters:
+        - id: nextPageLink
+          type: string
+          description: The NextLink from the previous successful call to List operation.
+        - id: options
+          type: <xref uid="msRest.RequestOptionsBase" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="Models.DatabasesListInaccessibleByServerNextResponse" />&gt;
+        description: Promise<Models.DatabasesListInaccessibleByServerNextResponse>
+  - name: >-
+      listInaccessibleByServerNext(string, RequestOptionsBase,
+      ServiceCallback<DatabaseListResult>)
+    uid: '@azure/arm-sql.Databases.listInaccessibleByServerNext_2'
+    package: '@azure/arm-sql'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listInaccessibleByServerNext(nextPageLink: string, options:
         RequestOptionsBase, callback: ServiceCallback<DatabaseListResult>)
       parameters:
         - id: nextPageLink
@@ -934,8 +1025,8 @@ methods:
             />&gt;
           description: |
             The callback
-  - name: 'listByServerNext(string, ServiceCallback<DatabaseListResult>)'
-    uid: '@azure/arm-sql.Databases.listByServerNext_1'
+  - name: 'listInaccessibleByServerNext(string, ServiceCallback<DatabaseListResult>)'
+    uid: '@azure/arm-sql.Databases.listInaccessibleByServerNext_1'
     package: '@azure/arm-sql'
     summary: ''
     remarks: ''
@@ -943,7 +1034,7 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listByServerNext(nextPageLink: string, callback:
+        function listInaccessibleByServerNext(nextPageLink: string, callback:
         ServiceCallback<DatabaseListResult>)
       parameters:
         - id: nextPageLink

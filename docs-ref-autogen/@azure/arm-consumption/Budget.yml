@@ -22,23 +22,6 @@ properties:
       return:
         type: number
         description: ''
-  - name: category
-    uid: '@azure/arm-consumption.Budget.category'
-    package: '@azure/arm-consumption'
-    summary: >-
-      The category of the budget, whether the budget tracks cost or usage.
-      Possible values include:
-
-      'Cost', 'Usage'
-    fullName: category
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'category: CategoryType'
-      return:
-        type: <xref uid="@azure/arm-consumption.CategoryType" />
-        description: ''
   - name: currentSpend
     uid: '@azure/arm-consumption.Budget.currentSpend'
     package: '@azure/arm-consumption'
@@ -73,18 +56,35 @@ properties:
       return:
         type: undefined | string
         description: ''
-  - name: filters
-    uid: '@azure/arm-consumption.Budget.filters'
+  - name: filter
+    uid: '@azure/arm-consumption.Budget.filter'
     package: '@azure/arm-consumption'
-    summary: 'May be used to filter budgets by resource group, resource, or meter.'
-    fullName: filters
+    summary: May be used to filter budgets by user-specified dimensions and/or tags.
+    fullName: filter
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'filters?: Filters'
+      content: 'filter?: BudgetFilter'
       return:
-        type: <xref uid="@azure/arm-consumption.Filters" />
+        type: <xref uid="@azure/arm-consumption.BudgetFilter" />
+        description: ''
+  - name: forecastSpend
+    uid: '@azure/arm-consumption.Budget.forecastSpend'
+    package: '@azure/arm-consumption'
+    summary: >-
+      The forecasted cost which is being tracked for a budget.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
+    fullName: forecastSpend
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'forecastSpend?: ForecastSpend'
+      return:
+        type: <xref uid="@azure/arm-consumption.ForecastSpend" />
         description: ''
   - name: id
     uid: '@azure/arm-consumption.Budget.id'
@@ -146,7 +146,13 @@ properties:
       The time covered by a budget. Tracking of the amount will be reset based
       on the time grain.
 
-      Possible values include: 'Monthly', 'Quarterly', 'Annually'
+      BillingMonth, BillingQuarter, and BillingAnnual are only supported by WD
+      customers. Possible
+
+      values include: 'Monthly', 'Quarterly', 'Annually', 'BillingMonth',
+      'BillingQuarter',
+
+      'BillingAnnual'
     fullName: timeGrain
     remarks: ''
     isPreview: false
@@ -166,10 +172,10 @@ properties:
       less than the end date. Budget start date must be on or after June 1,
       2017. Future start date
 
-      should not be more than three months. Past start date should  be selected
-      within the timegrain
+      should not be more than twelve months. Past start date should  be selected
+      within the
 
-      period. There are no restrictions on the end date.
+      timegrain period. There are no restrictions on the end date.
     fullName: timePeriod
     remarks: ''
     isPreview: false

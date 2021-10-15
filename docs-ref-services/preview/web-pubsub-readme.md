@@ -1,17 +1,17 @@
 ---
 title: Azure Web PubSub service client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/web-pubsub, 
+keywords: Azure, javascript, SDK, API, @azure/web-pubsub, webpubsub
 author: maggiepint
 ms.author: magpint
-ms.date: 05/20/2021
-ms.topic: article
+ms.date: 07/07/2021
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: webpubsub
 ---
 
-# Azure Web PubSub service client library for JavaScript - Version 1.0.0-beta.2 
+# Azure Web PubSub service client library for JavaScript - Version 1.0.0-beta.3 
 
 
 [Azure Web PubSub](https://aka.ms/awps/doc) is a service that enables you to build real-time messaging web applications using WebSockets and the publish-subscribe pattern. Any platform supporting WebSocket APIs can connect to the service easily, e.g. web pages, mobile applications, edge devices, etc. The service manages the WebSocket connections for you and allows up to 100K concurrent connections. It provides powerful APIs for you to manage these clients and deliver real-time messages.
@@ -39,17 +39,18 @@ Use the library to:
 - Close connections
 - Grant/revoke/check permissions for an existing connection
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.0.0-beta.2/sdk/web-pubsub/web-pubsub) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/web-pubsub) |
-[API reference documentation](https://aka.ms/awps/sdk/js) |
-[Product documentation](https://aka.ms/awps/doc) |
-[Samples][samples_ref]
+Key links:
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.0.0-beta.3/sdk/web-pubsub/web-pubsub)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/web-pubsub)
+- [API reference documentation](https://aka.ms/awps/sdk/js)
+- [Product documentation](https://aka.ms/awps/doc)
+- [Samples][samples_ref]
 
 ## Getting started
 
 ### Currently supported environments
 
-- [Node.js](https://nodejs.org/) version 8.x.x or higher
+- [LTS versions of Node.js](https://nodejs.org/about/releases/)
 
 ### Prerequisites
 
@@ -132,6 +133,18 @@ const payload = new Uint8Array(10);
 await serviceClient.sendToAll(payload.buffer);
 ```
 
+### Access the raw HTTP response for an operation
+
+```js
+const { WebPubSubServiceClient } = require("@azure/web-pubsub");
+
+function onResponse(rawResponse: FullOperationResponse): void {
+  console.log(rawResponse);
+}
+const serviceClient = new WebPubSubServiceClient("<ConnectionString>", "<hubName>");
+await serviceClient.sendToAll({ message: "Hello world!" }, { onResponse });
+```
+
 ## Troubleshooting
 
 ### Enable logs
@@ -144,7 +157,7 @@ You can set the following environment variable to get the debug logs when using 
 export AZURE_LOG_LEVEL=verbose
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.0.0-beta.3/sdk/core/logger).
 
 ## Next steps
 
@@ -154,12 +167,12 @@ directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
 [azure_sub]: https://azure.microsoft.com/free/
-[samples_ref]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.0.0-beta.2/sdk/web-pubsub/web-pubsub/samples
+[samples_ref]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub_1.0.0-beta.3/sdk/web-pubsub/web-pubsub/samples
 

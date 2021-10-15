@@ -5,7 +5,7 @@ author: Xiangyu Luo
 ms.author: xiangyul
 manager: dgriff
 ms.date: 04/16/2019
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs

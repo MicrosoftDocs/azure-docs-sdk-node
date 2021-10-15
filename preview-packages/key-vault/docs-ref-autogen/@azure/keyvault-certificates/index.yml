@@ -35,7 +35,7 @@ interfaces:
   - '@azure/keyvault-certificates.IssuerParameters'
   - '@azure/keyvault-certificates.IssuerProperties'
   - '@azure/keyvault-certificates.KeyVaultCertificate'
-  - '@azure/keyvault-certificates.KeyVaultCertificateId'
+  - '@azure/keyvault-certificates.KeyVaultCertificateIdentifier'
   - '@azure/keyvault-certificates.KeyVaultCertificatePollOperationState'
   - '@azure/keyvault-certificates.KeyVaultCertificateWithPolicy'
   - '@azure/keyvault-certificates.LifetimeAction'
@@ -87,3 +87,35 @@ typeAliases:
   - '@azure/keyvault-certificates.SetContactsOptions'
   - '@azure/keyvault-certificates.SubjectAlternativeNames'
   - '@azure/keyvault-certificates.UpdateCertificatePolicyOptions'
+functions:
+  - name: parseKeyVaultCertificateIdentifier(string)
+    uid: '@azure/keyvault-certificates.parseKeyVaultCertificateIdentifier'
+    package: '@azure/keyvault-certificates'
+    summary: |-
+      Parses the given Key Vault Certificate Id. An example is:
+        https://<keyvault-name>.vault.azure.net/certificates/<certificate-name>/<unique-version-id>
+
+      On parsing the above Id, this function returns:
+      ```ts
+        {
+           sourceId: "https://<keyvault-name>.vault.azure.net/certificates/<certificate-name>/<unique-version-id>",
+           vaultUrl: "https://<keyvault-name>.vault.azure.net",
+           version: "<unique-version-id>",
+           name: "<certificate-name>"
+        }
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function parseKeyVaultCertificateIdentifier(id: string)'
+      parameters:
+        - id: id
+          type: string
+          description: |
+            The Id of the Key Vault Certificate.
+      return:
+        type: >-
+          <xref uid="@azure/keyvault-certificates.KeyVaultCertificateIdentifier"
+          />
+        description: ''

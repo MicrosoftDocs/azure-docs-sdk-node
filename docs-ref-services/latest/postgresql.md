@@ -5,7 +5,7 @@ author: rachel-msft
 ms.author: raagyema
 manager: sukamat
 ms.date: 07/18/2017
-ms.topic: article
+ms.topic: reference
 ms.devlang: nodejs
 ms.service: postgresql
 ---

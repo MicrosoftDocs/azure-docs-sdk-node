@@ -5,8 +5,10 @@ summary: ''
 type: package
 enums:
   - '@azure/identity.AzureAuthorityHosts'
+  - '@azure/identity.RegionalAuthority'
 classes:
   - '@azure/identity.AggregateAuthenticationError'
+  - '@azure/identity.ApplicationCredential'
   - '@azure/identity.AuthenticationError'
   - '@azure/identity.AuthenticationRequiredError'
   - '@azure/identity.AuthorizationCodeCredential'
@@ -21,23 +23,36 @@ classes:
   - '@azure/identity.EnvironmentCredential'
   - '@azure/identity.InteractiveBrowserCredential'
   - '@azure/identity.ManagedIdentityCredential'
+  - '@azure/identity.OnBehalfOfCredential'
   - '@azure/identity.UsernamePasswordCredential'
+  - '@azure/identity.VisualStudioCodeCredential'
 interfaces:
+  - '@azure/identity.ApplicationCredentialOptions'
   - '@azure/identity.AuthenticationRecord'
+  - '@azure/identity.AzureCliCredentialOptions'
+  - '@azure/identity.AzurePowerShellCredentialOptions'
   - '@azure/identity.ClientCertificateCredentialOptions'
   - '@azure/identity.ClientSecretCredentialOptions'
+  - '@azure/identity.CredentialPersistenceOptions'
   - '@azure/identity.DefaultAzureCredentialOptions'
   - '@azure/identity.DeviceCodeCredentialOptions'
   - '@azure/identity.DeviceCodeInfo'
+  - '@azure/identity.EnvironmentCredentialOptions'
   - '@azure/identity.ErrorResponse'
+  - '@azure/identity.InteractiveBrowserCredentialBrowserOptions'
+  - '@azure/identity.InteractiveBrowserCredentialOptions'
   - '@azure/identity.InteractiveCredentialOptions'
+  - '@azure/identity.OnBehalfOfCredentialCertificateConfiguration'
+  - '@azure/identity.OnBehalfOfCredentialOptions'
+  - '@azure/identity.OnBehalfOfCredentialSecretConfiguration'
+  - '@azure/identity.TokenCachePersistenceOptions'
   - '@azure/identity.TokenCredentialOptions'
   - '@azure/identity.UsernamePasswordCredentialOptions'
+  - '@azure/identity.VisualStudioCodeCredentialOptions'
 typeAliases:
   - '@azure/identity.BrowserLoginStyle'
   - '@azure/identity.DeviceCodePromptCallback'
-  - '@azure/identity.InteractiveBrowserCredentialBrowserOptions'
-  - '@azure/identity.InteractiveBrowserCredentialOptions'
+  - '@azure/identity.IdentityPlugin'
 functions:
   - name: deserializeAuthenticationRecord(string)
     uid: '@azure/identity.deserializeAuthenticationRecord'
@@ -128,3 +143,52 @@ functions:
       return:
         type: string
         description: ''
+  - name: useIdentityPlugin(IdentityPlugin)
+    uid: '@azure/identity.useIdentityPlugin'
+    package: '@azure/identity'
+    summary: >
+      Extend Azure Identity with additional functionality. Pass a plugin from
+
+      a plugin package, such as:
+
+      - `@azure/identity-cache-persistence`: provides persistent token caching
+
+      - `@azure/identity-vscode`: provides the dependencies of
+        `VisualStudioCodeCredential` and enables it
+
+      Example:
+
+
+      ```javascript
+
+      import { cachePersistencePlugin } from
+      "@azure/identity-cache-persistence";
+
+
+      import { useIdentityPlugin, DefaultAzureCredential } from
+      "@azure/identity";
+
+      useIdentityPlugin(cachePersistencePlugin);
+
+
+      // The plugin has the capability to extend `DefaultAzureCredential` and to
+
+      // add middleware to the underlying credentials, such as persistence.
+
+      const credential = new DefaultAzureCredential({
+        tokenCachePersistenceOptions: {
+          enabled: true
+        }
+      });
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function useIdentityPlugin(plugin: IdentityPlugin)'
+      parameters:
+        - id: plugin
+          type: <xref uid="@azure/identity.IdentityPlugin" />
+          description: |
+            the plugin to register

@@ -10,7 +10,7 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      SubscriptionClient(ServiceClientCredentials,
+      SubscriptionClient(ServiceClientCredentials | TokenCredential,
       Models.SubscriptionClientOptions)
     uid: '@azure/arm-subscriptions.SubscriptionClient.constructor'
     package: '@azure/arm-subscriptions'
@@ -20,12 +20,24 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new SubscriptionClient(credentials: ServiceClientCredentials, options?:
-        Models.SubscriptionClientOptions)
+        new SubscriptionClient(credentials: ServiceClientCredentials |
+        TokenCredential, options?: Models.SubscriptionClientOptions)
       parameters:
         - id: credentials
-          type: ServiceClientCredentials
-          description: Credentials needed for the client to connect to Azure.
+          type: ServiceClientCredentials | TokenCredential
+          description: >-
+            Credentials needed for the client to connect to Azure. Credentials
+
+            implementing the TokenCredential interface from the @azure/identity
+            package are recommended. For
+
+            more information about these credentials, see
+
+            <xref:https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40azure%2Fidentity>.
+            Credentials implementing the
+
+            ServiceClientCredentials interface from the older packages
+            @azure/ms-rest-nodeauth and
         - id: options
           type: <xref uid="Models.SubscriptionClientOptions" />
           description: ''
@@ -65,9 +77,9 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'credentials: ServiceClientCredentials'
+      content: 'credentials: ServiceClientCredentials | TokenCredential'
       return:
-        type: ServiceClientCredentials
+        type: ServiceClientCredentials | TokenCredential
         description: ''
   - name: longRunningOperationRetryTimeout
     uid: >-

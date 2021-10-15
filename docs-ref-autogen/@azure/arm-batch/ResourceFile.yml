@@ -121,19 +121,18 @@ properties:
       storageContainerUrl and httpUrl
 
       properties are mutually exclusive and one of them must be specified. If
-      the URL is Azure Blob
+      the URL points to
 
-      Storage, it must be readable using anonymous access; that is, the Batch
-      service does not
+      Azure Blob Storage, it must be readable from compute nodes. There are
+      three ways to get such a
 
-      present any credentials when downloading the blob. There are two ways to
-      get such a URL for a
+      URL for a blob in Azure storage: include a Shared Access Signature (SAS)
+      granting read
 
-      blob in Azure storage: include a Shared Access Signature (SAS) granting
-      read permissions on
+      permissions on the blob, use a managed identity with read permission, or
+      set the ACL for the
 
-      the blob, or set the ACL for the blob or its container to allow public
-      access.
+      blob or its container to allow public access.
     fullName: httpUrl
     remarks: ''
     isPreview: false
@@ -142,6 +141,23 @@ properties:
       content: 'httpUrl?: undefined | string'
       return:
         type: undefined | string
+        description: ''
+  - name: identityReference
+    uid: '@azure/arm-batch.ResourceFile.identityReference'
+    package: '@azure/arm-batch'
+    summary: >-
+      The reference to the user assigned identity to use to access Azure Blob
+      Storage specified by
+
+      storageContainerUrl or httpUrl.
+    fullName: identityReference
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'identityReference?: ComputeNodeIdentityReference'
+      return:
+        type: <xref uid="@azure/arm-batch.ComputeNodeIdentityReference" />
         description: ''
   - name: storageContainerUrl
     uid: '@azure/arm-batch.ResourceFile.storageContainerUrl'
@@ -153,19 +169,16 @@ properties:
       storageContainerUrl and httpUrl properties are mutually exclusive and one
       of them must be
 
-      specified. This URL must be readable and listable using anonymous access;
-      that is, the Batch
+      specified. This URL must be readable and listable from compute nodes.
+      There are three ways to
 
-      service does not present any credentials when downloading the blob. There
-      are two ways to get
+      get such a URL for a container in Azure storage: include a Shared Access
+      Signature (SAS)
 
-      such a URL for a blob in Azure storage: include a Shared Access Signature
-      (SAS) granting read
+      granting read and list permissions on the container, use a managed
+      identity with read and list
 
-      and list permissions on the blob, or set the ACL for the blob or its
-      container to allow public
-
-      access.
+      permissions, or set the ACL for the container to allow public access.
     fullName: storageContainerUrl
     remarks: ''
     isPreview: false

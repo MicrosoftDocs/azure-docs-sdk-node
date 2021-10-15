@@ -31,8 +31,8 @@ constructors:
           description: |
             Options for the LogsClient.
 methods:
-  - name: 'queryLogs(string, string, string, QueryLogsOptions)'
-    uid: '@azure/monitor-query.LogsQueryClient.queryLogs'
+  - name: 'query(string, string, TimeInterval, LogsQueryOptions)'
+    uid: '@azure/monitor-query.LogsQueryClient.query'
     package: '@azure/monitor-query'
     summary: Queries logs in a Log Analytics Workspace.
     remarks: ''
@@ -40,50 +40,50 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function queryLogs(workspaceId: string, query: string, timespan: string,
-        options?: QueryLogsOptions)
+        function query(workspaceId: string, query: string, timespan:
+        TimeInterval, options?: LogsQueryOptions)
       parameters:
         - id: workspaceId
           type: string
           description: The 'Workspace Id' for the Log Analytics Workspace
         - id: query
           type: string
-          description: A Log Analytics Query
+          description: A Kusto query.
         - id: timespan
-          type: string
+          type: <xref uid="@azure/monitor-query.TimeInterval" />
           description: >-
             The timespan over which to query data. This is an ISO8601 time
-            period value.  This timespan is applied in addition to any that are
+            period value. This timespan is applied in addition to any that are
             specified in the query expression.
              Some common durations can be found in the `Durations` object.
         - id: options
-          type: <xref uid="@azure/monitor-query.QueryLogsOptions" />
+          type: <xref uid="@azure/monitor-query.LogsQueryOptions" />
           description: Options to adjust various aspects of the request.
       return:
-        type: Promise&lt;<xref uid="@azure/monitor-query.QueryLogsResult" />&gt;
+        type: Promise&lt;<xref uid="@azure/monitor-query.LogsQueryResult" />&gt;
         description: The result of the query.
-  - name: 'queryLogsBatch(QueryLogsBatch, QueryLogsBatchOptions)'
-    uid: '@azure/monitor-query.LogsQueryClient.queryLogsBatch'
+  - name: 'queryBatch(QueryBatch[], LogsQueryBatchOptions)'
+    uid: '@azure/monitor-query.LogsQueryClient.queryBatch'
     package: '@azure/monitor-query'
-    summary: 'Query logs with multiple queries, in a batch.'
+    summary: 'Query Logs with multiple queries, in a batch.'
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function queryLogsBatch(batch: QueryLogsBatch, options?:
-        QueryLogsBatchOptions)
+        function queryBatch(batch: QueryBatch[], options?:
+        LogsQueryBatchOptions)
       parameters:
         - id: batch
-          type: <xref uid="@azure/monitor-query.QueryLogsBatch" />
+          type: '<xref uid="@azure/monitor-query.QueryBatch" />[]'
           description: >-
-            A batch of queries to run. Each query can be configured to run
-            against separate workspaces.
+            A batch of Kusto queries to execute. Each query can be configured to
+            run against separate workspaces.
         - id: options
-          type: <xref uid="@azure/monitor-query.QueryLogsBatchOptions" />
+          type: <xref uid="@azure/monitor-query.LogsQueryBatchOptions" />
           description: Options for querying logs in a batch.
       return:
         type: >-
-          Promise&lt;<xref uid="@azure/monitor-query.QueryLogsBatchResult"
+          Promise&lt;<xref uid="@azure/monitor-query.LogsQueryBatchResult"
           />&gt;
-        description: The log query results for all the queries.
+        description: The Logs query results for all the queries.

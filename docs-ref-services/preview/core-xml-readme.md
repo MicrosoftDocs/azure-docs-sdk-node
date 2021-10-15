@@ -4,7 +4,7 @@ keywords: Azure, javascript, SDK, API, @azure/core-xml,
 author: maggiepint
 ms.author: magpint
 ms.date: 02/05/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript

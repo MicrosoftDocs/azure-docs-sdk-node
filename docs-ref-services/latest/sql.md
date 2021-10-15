@@ -5,7 +5,7 @@ author: CarlRabeler
 ms.author: carlrab
 manager: craigg
 ms.date: 07/18/2017
-ms.topic: article
+ms.topic: reference
 ms.devlang: nodejs
 ms.service: sql-database
 ms.subservice: development

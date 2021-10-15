@@ -23,6 +23,63 @@ properties:
         type: <xref uid="@azure/cosmos.Container" />
         description: ''
 methods:
+  - name: 'batch(OperationInput[], string, RequestOptions)'
+    uid: '@azure/cosmos.Items.batch'
+    package: '@azure/cosmos'
+    summary: >
+      Execute transactional batch operations on items.
+
+      Batch takes an array of Operations which are typed based on what the
+      operation does. Batch is transactional and will rollback all operations if
+      one fails.
+
+      The choices are: Create, Upsert, Read, Replace, and Delete
+
+
+      Usage example:
+
+      ```typescript
+
+      // partitionKey is required as a second argument to batch, but defaults to
+      the default partition key
+
+      const operations: OperationInput[] = [
+         {
+            operationType: "Create",
+            resourceBody: { id: "doc1", name: "sample", key: "A" }
+         },
+         {
+            operationType: "Upsert",
+            partitionKey: 'A',
+            resourceBody: { id: "doc2", name: "other", key: "A" }
+         }
+      ]
+
+
+      await database.container.items.batch(operations)
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function batch(operations: OperationInput[], partitionKey?: string,
+        options?: RequestOptions)
+      parameters:
+        - id: operations
+          type: '<xref uid="@azure/cosmos.OperationInput" />[]'
+          description: List of operations. Limit 100
+        - id: partitionKey
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/cosmos.RequestOptions" />
+          description: |
+            Used for modifying the request
+      return:
+        type: Promise&lt;Response&lt;any&gt;&gt;
+        description: ''
   - name: 'bulk(OperationInput[], BulkOptions, RequestOptions)'
     uid: '@azure/cosmos.Items.bulk'
     package: '@azure/cosmos'

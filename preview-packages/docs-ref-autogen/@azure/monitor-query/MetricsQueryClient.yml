@@ -31,54 +31,135 @@ constructors:
           description: |
             Options for the client like controlling request retries.
 methods:
-  - name: 'getMetricDefinitions(string, GetMetricDefinitionsOptions)'
-    uid: '@azure/monitor-query.MetricsQueryClient.getMetricDefinitions'
+  - name: 'listMetricDefinitions(string, ListMetricDefinitionsOptions)'
+    uid: '@azure/monitor-query.MetricsQueryClient.listMetricDefinitions'
     package: '@azure/monitor-query'
-    summary: 'Get a list of metric definitions, given a resource URI.'
+    summary: >2-
+        /**
+      Returns an async iterable iterator to list metric definitions.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      const metricsQueryClient = new MetricsQueryClient(tokenCredential);
+
+      const metricDefinitions = client.listMetricDefinitions(resourceUri,
+      options);
+
+      let i = 1;
+
+      for await (const metricDefinition of metricDefinitions) {
+        console.log(`metricDefinition ${i++}:`);
+        console.log(metricDefinition);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let iter = client.listMetricDefinitions(resourceUri, options);
+
+      let result = await iter.next();
+
+      while (!result.done) {
+        console.log(` metricDefinitions - ${result.value.id}, ${result.value.name}`);
+        result = await iter.next();
+      }
+
+      ```
+
+
+      Get a list of metric definitions, given a resource URI.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getMetricDefinitions(resourceUri: string, options?:
-        GetMetricDefinitionsOptions)
+        function listMetricDefinitions(resourceUri: string, options?:
+        ListMetricDefinitionsOptions)
       parameters:
         - id: resourceUri
           type: string
           description: The resource URI to get metric definitions for.
         - id: options
-          type: <xref uid="@azure/monitor-query.GetMetricDefinitionsOptions" />
+          type: <xref uid="@azure/monitor-query.ListMetricDefinitionsOptions" />
           description: Options for getting metric definitions.
       return:
         type: >-
-          Promise&lt;<xref uid="@azure/monitor-query.GetMetricDefinitionsResult"
-          />&gt;
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/monitor-query.MetricDefinition" />&gt;
         description: Metric definitions for a given resource URI.
-  - name: 'getMetricNamespaces(string, GetMetricNamespacesOptions)'
-    uid: '@azure/monitor-query.MetricsQueryClient.getMetricNamespaces'
+  - name: 'listMetricNamespaces(string, ListMetricNamespacesOptions)'
+    uid: '@azure/monitor-query.MetricsQueryClient.listMetricNamespaces'
     package: '@azure/monitor-query'
-    summary: 'Get a list of metric namespaces, given a resource URI.'
+    summary: >-
+      Returns an async iterable iterator to list metric namespaces.
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      const metricsQueryClient = new MetricsQueryClient(tokenCredential);
+
+      const metricNamespaces = client.listMetricNamespaces(resourceUri,
+      options);
+
+      let i = 1;
+
+      for await (const metricNamespace of metricNamespaces) {
+        console.log(`metricNamespace ${i++}:`);
+        console.log(metricNamespace);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let iter = client.listMetricNamespaces(resourceUri, options);
+
+      let result = await iter.next();
+
+      while (!result.done) {
+        console.log(` metricNamespace - ${result.value.id}, ${result.value.name}`);
+        result = await iter.next();
+      }
+
+      ```
+
+      Get a list of metric namespaces, given a resource URI.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function getMetricNamespaces(resourceUri: string, options?:
-        GetMetricNamespacesOptions)
+        function listMetricNamespaces(resourceUri: string, options?:
+        ListMetricNamespacesOptions)
       parameters:
         - id: resourceUri
           type: string
           description: The resource URI to get metric namespaces for.
         - id: options
-          type: <xref uid="@azure/monitor-query.GetMetricNamespacesOptions" />
+          type: <xref uid="@azure/monitor-query.ListMetricNamespacesOptions" />
           description: Options for getting metric namespaces.
       return:
         type: >-
-          Promise&lt;<xref uid="@azure/monitor-query.GetMetricNamespacesResult"
-          />&gt;
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/monitor-query.MetricNamespace_2" />&gt;
         description: Metric namespaces for a given resource URI.
-  - name: 'queryMetrics(string, string, QueryMetricsOptions)'
-    uid: '@azure/monitor-query.MetricsQueryClient.queryMetrics'
+  - name: 'query(string, string[], MetricsQueryOptions)'
+    uid: '@azure/monitor-query.MetricsQueryClient.query'
     package: '@azure/monitor-query'
     summary: 'Query metrics, given a resource URI'
     remarks: ''
@@ -86,18 +167,18 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function queryMetrics(resourceUri: string, timespan: string, options?:
-        QueryMetricsOptions)
+        function query(resourceUri: string, metricNames: string[], options?:
+        MetricsQueryOptions)
       parameters:
         - id: resourceUri
           type: string
           description: The resource URI to query.
-        - id: timespan
-          type: string
-          description: The enclosing timespan for metrics.
+        - id: metricNames
+          type: 'string[]'
+          description: The names of the metrics to retrieve.
         - id: options
-          type: <xref uid="@azure/monitor-query.QueryMetricsOptions" />
+          type: <xref uid="@azure/monitor-query.MetricsQueryOptions" />
           description: Options for querying metrics.
       return:
-        type: Promise&lt;<xref uid="@azure/monitor-query.QueryMetricsResult" />&gt;
+        type: Promise&lt;<xref uid="@azure/monitor-query.MetricsQueryResult" />&gt;
         description: A response containing metrics.

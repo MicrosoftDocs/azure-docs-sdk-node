@@ -5,7 +5,7 @@ author: iainfoulds
 ms.author: iainfou
 manager: jeconnoc
 ms.date: 07/18/2017
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs

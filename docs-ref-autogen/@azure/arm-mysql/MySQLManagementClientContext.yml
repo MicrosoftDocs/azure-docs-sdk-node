@@ -10,8 +10,8 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      MySQLManagementClientContext(ServiceClientCredentials, string,
-      Models.MySQLManagementClientOptions)
+      MySQLManagementClientContext(ServiceClientCredentials | TokenCredential,
+      string, Models.MySQLManagementClientOptions)
     uid: '@azure/arm-mysql.MySQLManagementClientContext.constructor'
     package: '@azure/arm-mysql'
     summary: Initializes a new instance of the MySQLManagementClient class.
@@ -20,15 +20,28 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new MySQLManagementClientContext(credentials: ServiceClientCredentials,
-        subscriptionId: string, options?: Models.MySQLManagementClientOptions)
+        new MySQLManagementClientContext(credentials: ServiceClientCredentials |
+        TokenCredential, subscriptionId: string, options?:
+        Models.MySQLManagementClientOptions)
       parameters:
         - id: credentials
-          type: ServiceClientCredentials
-          description: Credentials needed for the client to connect to Azure.
+          type: ServiceClientCredentials | TokenCredential
+          description: >-
+            Credentials needed for the client to connect to Azure. Credentials
+
+            implementing the TokenCredential interface from the @azure/identity
+            package are recommended. For
+
+            more information about these credentials, see
+
+            <xref:https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40azure%2Fidentity>.
+            Credentials implementing the
+
+            ServiceClientCredentials interface from the older packages
+            @azure/ms-rest-nodeauth and
         - id: subscriptionId
           type: string
-          description: The subscription ID that identifies an Azure subscription.
+          description: The ID of the target subscription.
         - id: options
           type: <xref uid="Models.MySQLManagementClientOptions" />
           description: ''
@@ -46,19 +59,6 @@ properties:
       return:
         type: string
         description: ''
-  - name: apiVersion
-    uid: '@azure/arm-mysql.MySQLManagementClientContext.apiVersion'
-    package: '@azure/arm-mysql'
-    summary: ''
-    fullName: apiVersion
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'apiVersion?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
   - name: credentials
     uid: '@azure/arm-mysql.MySQLManagementClientContext.credentials'
     package: '@azure/arm-mysql'
@@ -68,9 +68,9 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'credentials: ServiceClientCredentials'
+      content: 'credentials: ServiceClientCredentials | TokenCredential'
       return:
-        type: ServiceClientCredentials
+        type: ServiceClientCredentials | TokenCredential
         description: ''
   - name: longRunningOperationRetryTimeout
     uid: >-
@@ -239,7 +239,7 @@ methods:
       return:
         type: Promise&lt;RestResponse&gt;
         description: ''
-  - name: sendRequest(RequestPrepareOptions | WebResource)
+  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
     uid: '@azure/arm-mysql.MySQLManagementClientContext.sendRequest'
     package: '@azure/arm-mysql'
     summary: Send the provided httpRequest.
@@ -247,10 +247,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function sendRequest(options: RequestPrepareOptions | WebResource)'
+      content: 'function sendRequest(options: RequestPrepareOptions | WebResourceLike)'
       parameters:
         - id: options
-          type: RequestPrepareOptions | WebResource
+          type: RequestPrepareOptions | WebResourceLike
           description: ''
       return:
         type: Promise&lt;HttpOperationResponse&gt;

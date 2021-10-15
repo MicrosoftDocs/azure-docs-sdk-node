@@ -2,64 +2,73 @@
 name: DatabaseSecurityAlertPolicy
 uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy'
 package: '@azure/arm-sql'
-summary: Contains information about a database Threat Detection policy.
+summary: A database security alert policy.
 fullName: DatabaseSecurityAlertPolicy
 remarks: ''
 isPreview: false
 isDeprecated: false
 type: interface
 properties:
+  - name: creationTime
+    uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.creationTime'
+    package: '@azure/arm-sql'
+    summary: >-
+      Specifies the UTC creation time of the policy.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
+    fullName: creationTime
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'creationTime?: Date'
+      return:
+        type: Date
+        description: ''
   - name: disabledAlerts
     uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.disabledAlerts'
     package: '@azure/arm-sql'
     summary: >-
-      Specifies the semicolon-separated list of alerts that are disabled, or
-      empty string to disable
+      Specifies an array of alerts that are disabled. Allowed values are:
+      Sql_Injection,
 
-      no alerts. Possible values: Sql_Injection; Sql_Injection_Vulnerability;
-      Access_Anomaly;
-
-      Data_Exfiltration; Unsafe_Action.
+      Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration,
+      Unsafe_Action, Brute_Force
     fullName: disabledAlerts
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'disabledAlerts?: undefined | string'
+      content: 'disabledAlerts?: string[]'
       return:
-        type: undefined | string
+        type: 'string[]'
         description: ''
   - name: emailAccountAdmins
     uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.emailAccountAdmins'
     package: '@azure/arm-sql'
-    summary: >-
-      Specifies that the alert is sent to the account administrators. Possible
-      values include:
-
-      'Enabled', 'Disabled'
+    summary: Specifies that the alert is sent to the account administrators.
     fullName: emailAccountAdmins
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'emailAccountAdmins?: SecurityAlertPolicyEmailAccountAdmins'
+      content: 'emailAccountAdmins?: undefined | false | true'
       return:
-        type: <xref uid="@azure/arm-sql.SecurityAlertPolicyEmailAccountAdmins" />
+        type: undefined | false | true
         description: ''
   - name: emailAddresses
     uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.emailAddresses'
     package: '@azure/arm-sql'
-    summary: >-
-      Specifies the semicolon-separated list of e-mail addresses to which the
-      alert is sent.
+    summary: Specifies an array of e-mail addresses to which the alert is sent.
     fullName: emailAddresses
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'emailAddresses?: undefined | string'
+      content: 'emailAddresses?: string[]'
       return:
-        type: undefined | string
+        type: 'string[]'
         description: ''
   - name: id
     uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.id'
@@ -75,36 +84,6 @@ properties:
     isDeprecated: false
     syntax:
       content: 'id?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
-  - name: kind
-    uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.kind'
-    package: '@azure/arm-sql'
-    summary: >-
-      Resource kind.
-
-      **NOTE: This property will not be serialized. It can only be populated by
-      the server.**
-    fullName: kind
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'kind?: undefined | string'
-      return:
-        type: undefined | string
-        description: ''
-  - name: location
-    uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.location'
-    package: '@azure/arm-sql'
-    summary: The geo-location where the resource lives
-    fullName: location
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'location?: undefined | string'
       return:
         type: undefined | string
         description: ''
@@ -142,28 +121,26 @@ properties:
     uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.state'
     package: '@azure/arm-sql'
     summary: >-
-      Specifies the state of the policy. If state is Enabled, storageEndpoint
-      and
+      Specifies the state of the policy, whether it is enabled or disabled or a
+      policy has not been
 
-      storageAccountAccessKey are required. Possible values include: 'New',
-      'Enabled', 'Disabled'
+      applied yet on the specific database. Possible values include: 'Enabled',
+      'Disabled'
     fullName: state
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'state: SecurityAlertPolicyState'
+      content: 'state: SecurityAlertsPolicyState'
       return:
-        type: <xref uid="@azure/arm-sql.SecurityAlertPolicyState" />
+        type: <xref uid="@azure/arm-sql.SecurityAlertsPolicyState" />
         description: ''
   - name: storageAccountAccessKey
     uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.storageAccountAccessKey'
     package: '@azure/arm-sql'
     summary: >-
       Specifies the identifier key of the Threat Detection audit storage
-      account. If state is
-
-      Enabled, storageAccountAccessKey is required.
+      account.
     fullName: storageAccountAccessKey
     remarks: ''
     isPreview: false
@@ -180,10 +157,7 @@ properties:
       Specifies the blob storage endpoint (e.g.
       https://MyAccount.blob.core.windows.net). This blob
 
-      storage will hold all Threat Detection audit logs. If state is Enabled,
-      storageEndpoint is
-
-      required.
+      storage will hold all Threat Detection audit logs.
     fullName: storageEndpoint
     remarks: ''
     isPreview: false
@@ -192,6 +166,23 @@ properties:
       content: 'storageEndpoint?: undefined | string'
       return:
         type: undefined | string
+        description: ''
+  - name: systemData
+    uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.systemData'
+    package: '@azure/arm-sql'
+    summary: >-
+      SystemData of SecurityAlertPolicyResource.
+
+      **NOTE: This property will not be serialized. It can only be populated by
+      the server.**
+    fullName: systemData
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'systemData?: SystemData'
+      return:
+        type: <xref uid="@azure/arm-sql.SystemData" />
         description: ''
   - name: type
     uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.type'
@@ -209,22 +200,5 @@ properties:
       content: 'type?: undefined | string'
       return:
         type: undefined | string
-        description: ''
-  - name: useServerDefault
-    uid: '@azure/arm-sql.DatabaseSecurityAlertPolicy.useServerDefault'
-    package: '@azure/arm-sql'
-    summary: >-
-      Specifies whether to use the default server policy. Possible values
-      include: 'Enabled',
-
-      'Disabled'
-    fullName: useServerDefault
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'useServerDefault?: SecurityAlertPolicyUseServerDefault'
-      return:
-        type: <xref uid="@azure/arm-sql.SecurityAlertPolicyUseServerDefault" />
         description: ''
 extends: <xref uid="@azure/arm-sql.ProxyResource" />

@@ -1,17 +1,17 @@
 ---
 title: Azure Key Vault Certificates client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/keyvault-certificates, 
+keywords: Azure, javascript, SDK, API, @azure/keyvault-certificates, keyvault
 author: maggiepint
 ms.author: magpint
-ms.date: 06/15/2021
-ms.topic: article
+ms.date: 07/29/2021
+ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: keyvault
 ---
 
-# Azure Key Vault Certificates client library for JavaScript - Version 4.2.0 
+# Azure Key Vault Certificates client library for JavaScript - Version 4.3.0 
 
 
 Azure Key Vault is a cloud service that provides secure storage and automated management of certificates used throughout a cloud application. Multiple certificates, and multiple versions of the same certificate, can be kept in the Azure Key Vault. Each certificate in the vault has a policy associated with it which controls the issuance and lifetime of the certificate, along with actions to be taken as certificates near expiry.
@@ -28,23 +28,31 @@ Use the client library for Azure Key Vault Certificates in your Node.js applicat
 - Get all certificates.
 - Get all deleted certificates.
 
-> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.2.0/samples/cors/ts/README.md) for guidance.
+> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.3.0/samples/cors/ts/README.md) for guidance.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-certificates_4.2.0/sdk/keyvault/keyvault-certificates) | [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-certificates) | [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-certificates) | [Product documentation](https://azure.microsoft.com/services/key-vault/) | [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.2.0/sdk/keyvault/keyvault-certificates/samples)
+Key links:
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-certificates_4.3.0/sdk/keyvault/keyvault-certificates)
+- [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-certificates)
+- [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-certificates)
+- [Product documentation](https://azure.microsoft.com/services/key-vault/)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.3.0/sdk/keyvault/keyvault-certificates/samples)
 
 ## Getting started
+
+### Currently supported environments
+
+- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+
+### Prerequisites
+
+- An [Azure subscription](https://azure.microsoft.com/free/)
+- A [Key Vault resource](https://docs.microsoft.com/azure/key-vault/quick-create-portal)
 
 ### Install the package
 
 Install the Azure Key Vault Certificates client library using npm
 
 `npm install @azure/keyvault-certificates`
-
-### Prerequisites
-
-- An [Azure subscription](https://azure.microsoft.com/free/).
-- An existing Azure Key Vault. If you need to create an Azure Key Vault, you can use the [Azure CLI](https://docs.microsoft.com/azure/key-vault/general/quick-create-cli).
-- Use [Node.js](https://nodejs.org/) 10.x or higher.
 
 ### Install the identity library
 
@@ -106,7 +114,7 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
 
 ## Authenticating with Azure Active Directory
 
-The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.2.0/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.3.0/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 Here's a quick example. First, import `DefaultAzureCredential` and `CertificateClient`:
 
@@ -692,13 +700,13 @@ setLogLevel("info");
 
 You can find more code samples through the following links:
 
-- [KeyVault Certificates Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.2.0/sdk/keyvault/keyvault-certificates/samples/v4/javascript)
-- [KeyVault Certificates Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.2.0/sdk/keyvault/keyvault-certificates/samples/v4/typescript)
-- [KeyVault Certificates Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.2.0/sdk/keyvault/keyvault-certificates/test/)
+- [KeyVault Certificates Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.3.0/sdk/keyvault/keyvault-certificates/samples/v4/javascript)
+- [KeyVault Certificates Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.3.0/sdk/keyvault/keyvault-certificates/samples/v4/typescript)
+- [KeyVault Certificates Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.3.0/sdk/keyvault/keyvault-certificates/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-certificates_4.3.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-certificates%2FREADME.png)
 

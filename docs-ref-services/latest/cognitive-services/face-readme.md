@@ -4,7 +4,7 @@ description: The Azure Face service client library for Node.js
 author: PatrickFarley
 ms.author: pafarley
 ms.date: 06/21/2021
-ms.topic: article
+ms.topic: reference
 ms.prod: azure
 ms.technology:
 ms.devlang: javascript

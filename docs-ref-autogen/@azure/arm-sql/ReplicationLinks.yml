@@ -104,6 +104,46 @@ methods:
       return:
         type: Promise&lt;LROPoller&gt;
         description: Promise<msRestAzure.LROPoller>
+  - name: >-
+      beginUnlink(string, string, string, string, UnlinkParameters,
+      msRest.RequestOptionsBase)
+    uid: '@azure/arm-sql.ReplicationLinks.beginUnlink'
+    package: '@azure/arm-sql'
+    summary: Deletes a database replication link in forced or friendly way.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginUnlink(resourceGroupName: string, serverName: string,
+        databaseName: string, linkId: string, parameters: UnlinkParameters,
+        options?: msRest.RequestOptionsBase)
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: |-
+            The name of the resource group that contains the resource. You can
+            obtain this value from the Azure Resource Manager API or the portal.
+        - id: serverName
+          type: string
+          description: The name of the server.
+        - id: databaseName
+          type: string
+          description: >-
+            The name of the database that has the replication link to be failed
+            over.
+        - id: linkId
+          type: string
+          description: The ID of the replication link to be failed over.
+        - id: parameters
+          type: <xref uid="@azure/arm-sql.UnlinkParameters" />
+          description: The required parameters for unlinking replication link.
+        - id: options
+          type: <xref uid="msRest.RequestOptionsBase" />
+          description: ''
+      return:
+        type: Promise&lt;LROPoller&gt;
+        description: Promise<msRestAzure.LROPoller>
   - name: 'deleteMethod(string, string, string, string, msRest.RequestOptionsBase)'
     uid: '@azure/arm-sql.ReplicationLinks.deleteMethod'
     package: '@azure/arm-sql'
@@ -292,7 +332,7 @@ methods:
   - name: 'get(string, string, string, string, msRest.RequestOptionsBase)'
     uid: '@azure/arm-sql.ReplicationLinks.get'
     package: '@azure/arm-sql'
-    summary: Gets a database replication link.
+    summary: Gets a replication link.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -312,10 +352,10 @@ methods:
           description: The name of the server.
         - id: databaseName
           type: string
-          description: The name of the database to get the link for.
+          description: The name of the database.
         - id: linkId
           type: string
-          description: The replication link ID to be retrieved.
+          description: The name of the replication link.
         - id: options
           type: <xref uid="msRest.RequestOptionsBase" />
           description: ''
@@ -347,10 +387,10 @@ methods:
           description: The name of the server.
         - id: databaseName
           type: string
-          description: The name of the database to get the link for.
+          description: The name of the database.
         - id: linkId
           type: string
-          description: The replication link ID to be retrieved.
+          description: The name of the replication link.
         - id: options
           type: RequestOptionsBase
           description: The optional parameters
@@ -381,10 +421,10 @@ methods:
           description: The name of the server.
         - id: databaseName
           type: string
-          description: The name of the database to get the link for.
+          description: The name of the database.
         - id: linkId
           type: string
-          description: The replication link ID to be retrieved.
+          description: The name of the replication link.
         - id: callback
           type: ServiceCallback&lt;<xref uid="@azure/arm-sql.ReplicationLink" />&gt;
           description: |
@@ -392,7 +432,7 @@ methods:
   - name: 'listByDatabase(string, string, string, msRest.RequestOptionsBase)'
     uid: '@azure/arm-sql.ReplicationLinks.listByDatabase'
     package: '@azure/arm-sql'
-    summary: Lists a database's replication links.
+    summary: Gets a list of replication links on database.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -411,7 +451,7 @@ methods:
           description: The name of the server.
         - id: databaseName
           type: string
-          description: The name of the database to retrieve links for.
+          description: The name of the database.
         - id: options
           type: <xref uid="msRest.RequestOptionsBase" />
           description: ''
@@ -445,7 +485,7 @@ methods:
           description: The name of the server.
         - id: databaseName
           type: string
-          description: The name of the database to retrieve links for.
+          description: The name of the database.
         - id: options
           type: RequestOptionsBase
           description: The optional parameters
@@ -480,10 +520,278 @@ methods:
           description: The name of the server.
         - id: databaseName
           type: string
-          description: The name of the database to retrieve links for.
+          description: The name of the database.
         - id: callback
           type: >-
             ServiceCallback&lt;<xref
             uid="@azure/arm-sql.ReplicationLinkListResult" />&gt;
           description: |
             The callback
+  - name: 'listByDatabaseNext(string, msRest.RequestOptionsBase)'
+    uid: '@azure/arm-sql.ReplicationLinks.listByDatabaseNext'
+    package: '@azure/arm-sql'
+    summary: Gets a list of replication links on database.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByDatabaseNext(nextPageLink: string, options?:
+        msRest.RequestOptionsBase)
+      parameters:
+        - id: nextPageLink
+          type: string
+          description: The NextLink from the previous successful call to List operation.
+        - id: options
+          type: <xref uid="msRest.RequestOptionsBase" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref
+          uid="Models.ReplicationLinksListByDatabaseNextResponse" />&gt;
+        description: Promise<Models.ReplicationLinksListByDatabaseNextResponse>
+  - name: >-
+      listByDatabaseNext(string, RequestOptionsBase,
+      ServiceCallback<ReplicationLinkListResult>)
+    uid: '@azure/arm-sql.ReplicationLinks.listByDatabaseNext_2'
+    package: '@azure/arm-sql'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByDatabaseNext(nextPageLink: string, options:
+        RequestOptionsBase, callback:
+        ServiceCallback<ReplicationLinkListResult>)
+      parameters:
+        - id: nextPageLink
+          type: string
+          description: The NextLink from the previous successful call to List operation.
+        - id: options
+          type: RequestOptionsBase
+          description: The optional parameters
+        - id: callback
+          type: >-
+            ServiceCallback&lt;<xref
+            uid="@azure/arm-sql.ReplicationLinkListResult" />&gt;
+          description: |
+            The callback
+  - name: 'listByDatabaseNext(string, ServiceCallback<ReplicationLinkListResult>)'
+    uid: '@azure/arm-sql.ReplicationLinks.listByDatabaseNext_1'
+    package: '@azure/arm-sql'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByDatabaseNext(nextPageLink: string, callback:
+        ServiceCallback<ReplicationLinkListResult>)
+      parameters:
+        - id: nextPageLink
+          type: string
+          description: The NextLink from the previous successful call to List operation.
+        - id: callback
+          type: >-
+            ServiceCallback&lt;<xref
+            uid="@azure/arm-sql.ReplicationLinkListResult" />&gt;
+          description: |
+            The callback
+  - name: 'listByServer(string, string, msRest.RequestOptionsBase)'
+    uid: '@azure/arm-sql.ReplicationLinks.listByServer'
+    package: '@azure/arm-sql'
+    summary: Gets a list of replication links.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByServer(resourceGroupName: string, serverName: string,
+        options?: msRest.RequestOptionsBase)
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: |-
+            The name of the resource group that contains the resource. You can
+            obtain this value from the Azure Resource Manager API or the portal.
+        - id: serverName
+          type: string
+          description: The name of the server.
+        - id: options
+          type: <xref uid="msRest.RequestOptionsBase" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref uid="Models.ReplicationLinksListByServerResponse"
+          />&gt;
+        description: Promise<Models.ReplicationLinksListByServerResponse>
+  - name: >-
+      listByServer(string, string, RequestOptionsBase,
+      ServiceCallback<ReplicationLinkListResult>)
+    uid: '@azure/arm-sql.ReplicationLinks.listByServer_2'
+    package: '@azure/arm-sql'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByServer(resourceGroupName: string, serverName: string,
+        options: RequestOptionsBase, callback:
+        ServiceCallback<ReplicationLinkListResult>)
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: |-
+            The name of the resource group that contains the resource. You can
+            obtain this value from the Azure Resource Manager API or the portal.
+        - id: serverName
+          type: string
+          description: The name of the server.
+        - id: options
+          type: RequestOptionsBase
+          description: The optional parameters
+        - id: callback
+          type: >-
+            ServiceCallback&lt;<xref
+            uid="@azure/arm-sql.ReplicationLinkListResult" />&gt;
+          description: |
+            The callback
+  - name: 'listByServer(string, string, ServiceCallback<ReplicationLinkListResult>)'
+    uid: '@azure/arm-sql.ReplicationLinks.listByServer_1'
+    package: '@azure/arm-sql'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByServer(resourceGroupName: string, serverName: string,
+        callback: ServiceCallback<ReplicationLinkListResult>)
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: |-
+            The name of the resource group that contains the resource. You can
+            obtain this value from the Azure Resource Manager API or the portal.
+        - id: serverName
+          type: string
+          description: The name of the server.
+        - id: callback
+          type: >-
+            ServiceCallback&lt;<xref
+            uid="@azure/arm-sql.ReplicationLinkListResult" />&gt;
+          description: |
+            The callback
+  - name: 'listByServerNext(string, msRest.RequestOptionsBase)'
+    uid: '@azure/arm-sql.ReplicationLinks.listByServerNext'
+    package: '@azure/arm-sql'
+    summary: Gets a list of replication links.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByServerNext(nextPageLink: string, options?:
+        msRest.RequestOptionsBase)
+      parameters:
+        - id: nextPageLink
+          type: string
+          description: The NextLink from the previous successful call to List operation.
+        - id: options
+          type: <xref uid="msRest.RequestOptionsBase" />
+          description: ''
+      return:
+        type: >-
+          Promise&lt;<xref uid="Models.ReplicationLinksListByServerNextResponse"
+          />&gt;
+        description: Promise<Models.ReplicationLinksListByServerNextResponse>
+  - name: >-
+      listByServerNext(string, RequestOptionsBase,
+      ServiceCallback<ReplicationLinkListResult>)
+    uid: '@azure/arm-sql.ReplicationLinks.listByServerNext_2'
+    package: '@azure/arm-sql'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByServerNext(nextPageLink: string, options:
+        RequestOptionsBase, callback:
+        ServiceCallback<ReplicationLinkListResult>)
+      parameters:
+        - id: nextPageLink
+          type: string
+          description: The NextLink from the previous successful call to List operation.
+        - id: options
+          type: RequestOptionsBase
+          description: The optional parameters
+        - id: callback
+          type: >-
+            ServiceCallback&lt;<xref
+            uid="@azure/arm-sql.ReplicationLinkListResult" />&gt;
+          description: |
+            The callback
+  - name: 'listByServerNext(string, ServiceCallback<ReplicationLinkListResult>)'
+    uid: '@azure/arm-sql.ReplicationLinks.listByServerNext_1'
+    package: '@azure/arm-sql'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByServerNext(nextPageLink: string, callback:
+        ServiceCallback<ReplicationLinkListResult>)
+      parameters:
+        - id: nextPageLink
+          type: string
+          description: The NextLink from the previous successful call to List operation.
+        - id: callback
+          type: >-
+            ServiceCallback&lt;<xref
+            uid="@azure/arm-sql.ReplicationLinkListResult" />&gt;
+          description: |
+            The callback
+  - name: >-
+      unlink(string, string, string, string, UnlinkParameters,
+      msRest.RequestOptionsBase)
+    uid: '@azure/arm-sql.ReplicationLinks.unlink'
+    package: '@azure/arm-sql'
+    summary: Deletes a database replication link in forced or friendly way.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function unlink(resourceGroupName: string, serverName: string,
+        databaseName: string, linkId: string, parameters: UnlinkParameters,
+        options?: msRest.RequestOptionsBase)
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: |-
+            The name of the resource group that contains the resource. You can
+            obtain this value from the Azure Resource Manager API or the portal.
+        - id: serverName
+          type: string
+          description: The name of the server.
+        - id: databaseName
+          type: string
+          description: >-
+            The name of the database that has the replication link to be failed
+            over.
+        - id: linkId
+          type: string
+          description: The ID of the replication link to be failed over.
+        - id: parameters
+          type: <xref uid="@azure/arm-sql.UnlinkParameters" />
+          description: The required parameters for unlinking replication link.
+        - id: options
+          type: <xref uid="msRest.RequestOptionsBase" />
+          description: ''
+      return:
+        type: Promise&lt;RestResponse&gt;
+        description: Promise<msRest.RestResponse>

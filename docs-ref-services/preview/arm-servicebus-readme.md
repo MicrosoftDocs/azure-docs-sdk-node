@@ -3,7 +3,7 @@ title: Azure ServiceBusManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-servicebus, servicebus
 author: maggiepint
 ms.author: magpint
-ms.date: 09/09/2021
+ms.date: 10/15/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,14 +11,14 @@ ms.devlang: javascript
 ms.service: servicebus
 ---
 
-# Azure ServiceBusManagement client library for JavaScript - Version 30.0.0-beta.1 
+# Azure ServiceBusManagement client library for JavaScript - Version 5.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ServiceBusManagement client.
 
 Azure Service Bus client for managing Namespace, IPFilter Rules, VirtualNetworkRules and Zone Redundant
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicebus_30.0.0-beta.1/sdk/servicebus/arm-servicebus) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicebus_5.0.0-beta.1/sdk/servicebus/arm-servicebus) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-servicebus) |
 [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-servicebus) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -83,7 +83,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicebus_30.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicebus_5.0.0-beta.1/sdk/core/logger).
 
 ## Next steps
 
@@ -91,7 +91,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicebus_30.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicebus_5.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -103,6 +103,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicebus_30.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicebus_30.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicebus_5.0.0-beta.1/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicebus_5.0.0-beta.1/sdk/identity/identity#defaultazurecredential
 

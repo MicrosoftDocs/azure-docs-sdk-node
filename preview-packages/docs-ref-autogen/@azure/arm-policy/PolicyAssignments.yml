@@ -384,41 +384,6 @@ methods:
           uid="@azure/arm-policy.PolicyAssignment" />&gt;
         description: ''
   - name: >-
-      listForManagementGroupNext(string, string,
-      PolicyAssignmentsListForManagementGroupNextOptionalParams)
-    uid: '@azure/arm-policy.PolicyAssignments.listForManagementGroupNext'
-    package: '@azure/arm-policy'
-    summary: ListForManagementGroupNext
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listForManagementGroupNext(managementGroupId: string, nextLink:
-        string, options?:
-        PolicyAssignmentsListForManagementGroupNextOptionalParams)
-      parameters:
-        - id: managementGroupId
-          type: string
-          description: The ID of the management group.
-        - id: nextLink
-          type: string
-          description: >-
-            The nextLink from the previous successful call to the
-            ListForManagementGroup method.
-        - id: options
-          type: >-
-            <xref
-            uid="@azure/arm-policy.PolicyAssignmentsListForManagementGroupNextOptionalParams"
-            />
-          description: |
-            The options parameters.
-      return:
-        type: >-
-          PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/arm-policy.PolicyAssignment" />&gt;
-        description: ''
-  - name: >-
       listForResource(string, string, string, string, string,
       PolicyAssignmentsListForResourceOptionalParams)
     uid: '@azure/arm-policy.PolicyAssignments.listForResource'
@@ -592,116 +557,106 @@ methods:
           uid="@azure/arm-policy.PolicyAssignment" />&gt;
         description: ''
   - name: >-
-      listForResourceGroupNext(string, string,
-      PolicyAssignmentsListForResourceGroupNextOptionalParams)
-    uid: '@azure/arm-policy.PolicyAssignments.listForResourceGroupNext'
+      update(string, string, PolicyAssignmentUpdate,
+      PolicyAssignmentsUpdateOptionalParams)
+    uid: '@azure/arm-policy.PolicyAssignments.update'
     package: '@azure/arm-policy'
-    summary: ListForResourceGroupNext
+    summary: >-
+      This operation updates a policy assignment with the given scope and name.
+      Policy assignments apply
+
+      to all resources contained within their scope. For example, when you
+      assign a policy at resource
+
+      group scope, that policy applies to all resources in the group.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function listForResourceGroupNext(resourceGroupName: string, nextLink:
-        string, options?:
-        PolicyAssignmentsListForResourceGroupNextOptionalParams)
+        function update(scope: string, policyAssignmentName: string, parameters:
+        PolicyAssignmentUpdate, options?: PolicyAssignmentsUpdateOptionalParams)
       parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains policy assignments.
-        - id: nextLink
+        - id: scope
           type: string
           description: >-
-            The nextLink from the previous successful call to the
-            ListForResourceGroup method.
+            The scope of the policy assignment. Valid scopes are: management
+            group (format:
+                         '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format:
+                         '/subscriptions/{subscriptionId}'), resource group (format:
+                         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format:
+                         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'
+        - id: policyAssignmentName
+          type: string
+          description: The name of the policy assignment.
+        - id: parameters
+          type: <xref uid="@azure/arm-policy.PolicyAssignmentUpdate" />
+          description: Parameters for policy assignment patch request.
         - id: options
           type: >-
-            <xref
-            uid="@azure/arm-policy.PolicyAssignmentsListForResourceGroupNextOptionalParams"
+            <xref uid="@azure/arm-policy.PolicyAssignmentsUpdateOptionalParams"
             />
           description: |
             The options parameters.
       return:
         type: >-
-          PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/arm-policy.PolicyAssignment" />&gt;
+          Promise&lt;<xref
+          uid="@azure/arm-policy.PolicyAssignmentsUpdateResponse" />&gt;
         description: ''
   - name: >-
-      listForResourceNext(string, string, string, string, string, string,
-      PolicyAssignmentsListForResourceNextOptionalParams)
-    uid: '@azure/arm-policy.PolicyAssignments.listForResourceNext'
+      updateById(string, PolicyAssignmentUpdate,
+      PolicyAssignmentsUpdateByIdOptionalParams)
+    uid: '@azure/arm-policy.PolicyAssignments.updateById'
     package: '@azure/arm-policy'
-    summary: ListForResourceNext
+    summary: >-
+      This operation updates the policy assignment with the given ID. Policy
+      assignments made on a scope
+
+      apply to all resources contained in that scope. For example, when you
+      assign a policy to a resource
+
+      group that policy applies to all resources in the group. Policy assignment
+      IDs have this format:
+
+      '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.
+      Valid scopes
+
+      are: management group (format:
+
+      '/providers/Microsoft.Management/managementGroups/{managementGroup}'),
+      subscription (format:
+
+      '/subscriptions/{subscriptionId}'), resource group (format:
+
+      '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or
+      resource (format:
+
+      '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function listForResourceNext(resourceGroupName: string,
-        resourceProviderNamespace: string, parentResourcePath: string,
-        resourceType: string, resourceName: string, nextLink: string, options?:
-        PolicyAssignmentsListForResourceNextOptionalParams)
+        function updateById(policyAssignmentId: string, parameters:
+        PolicyAssignmentUpdate, options?:
+        PolicyAssignmentsUpdateByIdOptionalParams)
       parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group containing the resource.
-        - id: resourceProviderNamespace
+        - id: policyAssignmentId
           type: string
           description: |-
-            The namespace of the resource provider. For example, the namespace
-                                             of a virtual machine is Microsoft.Compute (from Microsoft.Compute/virtualMachines)
-        - id: parentResourcePath
-          type: string
-          description: The parent resource path. Use empty string if there is none.
-        - id: resourceType
-          type: string
-          description: >-
-            The resource type name. For example the type name of a web app is
-            'sites' (from
-                                Microsoft.Web/sites).
-        - id: resourceName
-          type: string
-          description: The name of the resource.
-        - id: nextLink
-          type: string
-          description: >-
-            The nextLink from the previous successful call to the
-            ListForResource method.
+            The ID of the policy assignment to update. Use the format
+                                      '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.
+        - id: parameters
+          type: <xref uid="@azure/arm-policy.PolicyAssignmentUpdate" />
+          description: Parameters for policy assignment patch request.
         - id: options
           type: >-
             <xref
-            uid="@azure/arm-policy.PolicyAssignmentsListForResourceNextOptionalParams"
-            />
+            uid="@azure/arm-policy.PolicyAssignmentsUpdateByIdOptionalParams" />
           description: |
             The options parameters.
       return:
         type: >-
-          PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/arm-policy.PolicyAssignment" />&gt;
-        description: ''
-  - name: 'listNext(string, PolicyAssignmentsListNextOptionalParams)'
-    uid: '@azure/arm-policy.PolicyAssignments.listNext'
-    package: '@azure/arm-policy'
-    summary: ListNext
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextLink: string, options?:
-        PolicyAssignmentsListNextOptionalParams)
-      parameters:
-        - id: nextLink
-          type: string
-          description: The nextLink from the previous successful call to the List method.
-        - id: options
-          type: >-
-            <xref
-            uid="@azure/arm-policy.PolicyAssignmentsListNextOptionalParams" />
-          description: |
-            The options parameters.
-      return:
-        type: >-
-          PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/arm-policy.PolicyAssignment" />&gt;
+          Promise&lt;<xref
+          uid="@azure/arm-policy.PolicyAssignmentsUpdateByIdResponse" />&gt;
         description: ''

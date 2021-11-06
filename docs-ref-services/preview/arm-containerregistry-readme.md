@@ -1,8 +1,8 @@
 ---
 title: Azure ContainerRegistryManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-containerregistry, containerregistry
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 11/05/2021
 ms.topic: reference
 ms.prod: azure

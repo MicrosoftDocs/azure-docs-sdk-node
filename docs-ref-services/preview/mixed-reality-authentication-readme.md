@@ -1,8 +1,8 @@
 ---
 title: Azure Mixed Reality Authentication client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/mixed-reality-authentication, mixedreality
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 09/21/2021
 ms.topic: reference
 ms.prod: azure

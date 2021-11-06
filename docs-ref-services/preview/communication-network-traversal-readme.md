@@ -1,8 +1,8 @@
 ---
 title: Azure Communication Network Traversal client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-network-traversal, communication
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 07/20/2021
 ms.topic: reference
 ms.prod: azure

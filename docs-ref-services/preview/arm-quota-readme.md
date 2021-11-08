@@ -1,8 +1,8 @@
 ---
 title: Azure Service client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-quota, quota
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 11/02/2021
 ms.topic: reference
 ms.prod: azure

@@ -1,8 +1,8 @@
 ---
 title: Azure Anomaly Detector client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-anomaly-detector, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 04/17/2021
 ms.topic: reference
 ms.prod: azure

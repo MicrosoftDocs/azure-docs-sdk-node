@@ -1,8 +1,8 @@
 ---
 title: Azure Core XML client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/core-xml, core
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 08/06/2021
 ms.topic: reference
 ms.prod: azure

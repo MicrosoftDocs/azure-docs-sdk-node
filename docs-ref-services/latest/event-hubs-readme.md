@@ -1,8 +1,8 @@
 ---
 title: Azure Event Hubs client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/event-hubs, eventhubs
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 07/07/2021
 ms.topic: reference
 ms.prod: azure

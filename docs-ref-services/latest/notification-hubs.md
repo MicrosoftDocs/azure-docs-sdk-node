@@ -1,8 +1,8 @@
 ---
 title: Azure Notification Hubs modules for JavaScript
 description: Reference for Azure Notification Hubs modules for JavaScript
-author: rloutlaw
-ms.author: ROutlaw
+author: ramya-rao-a
+ms.author: ramyar
 manager: angrobe
 ms.date: 07/18/2017
 ms.topic: reference

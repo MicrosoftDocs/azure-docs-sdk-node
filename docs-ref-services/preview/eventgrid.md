@@ -1,8 +1,8 @@
 ---
 title: Azure Event Grid libraries for JavaScript
 description: Reference for Azure Event Grid libraries for JavaScript
-author: rloutlaw 
-ms.author: routlaw    
+author: ramya-rao-a
+ms.author: ramyar
 manager: angerobe
 ms.date: 05/03/2018
 ms.topic: reference

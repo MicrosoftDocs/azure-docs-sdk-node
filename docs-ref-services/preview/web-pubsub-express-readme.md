@@ -1,8 +1,8 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-express, webpubsub
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 08/02/2021
 ms.topic: reference
 ms.prod: azure

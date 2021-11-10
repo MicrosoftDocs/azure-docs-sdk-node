@@ -521,10 +521,11 @@ methods:
     package: '@azure/keyvault-keys'
     summary: |
       Gets the rotation policy of a Key Vault Key.
+      By default, all keys have a policy that will notify 30 days before expiry.
+      This operation requires the keys/get permission.
       Example usage:
       ```ts
       let client = new KeyClient(vaultUrl, credentials);
-      await client.updateKeyRotationPolicy("MyKey", myPolicy);
       let result = await client.getKeyRotationPolicy("myKey");
       ```
     remarks: ''
@@ -552,6 +553,8 @@ methods:
       Gets the requested number of bytes containing random values from a managed
       HSM.
 
+      This operation requires the managedHsm/rng permission.
+
       Example usage:
 
       ```ts
@@ -575,7 +578,7 @@ methods:
           description: |
             The optional parameters.
       return:
-        type: Promise&lt;<xref uid="@azure/keyvault-keys.RandomBytes" />&gt;
+        type: Promise&lt;Uint8Array&gt;
         description: ''
   - name: 'importKey(string, JsonWebKey_2, ImportKeyOptions)'
     uid: '@azure/keyvault-keys.KeyClient.importKey'
@@ -814,13 +817,13 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function releaseKey(name: string, target: string, options?:
-        ReleaseKeyOptions)
+        function releaseKey(name: string, targetAttestationToken: string,
+        options?: ReleaseKeyOptions)
       parameters:
         - id: name
           type: string
           description: The name of the key.
-        - id: target
+        - id: targetAttestationToken
           type: string
           description: The attestation assertion for the target of the key release.
         - id: options
@@ -1008,6 +1011,7 @@ methods:
     package: '@azure/keyvault-keys'
     summary: |
       Updates the rotation policy of a Key Vault Key.
+      This operation requires the keys/update permission.
       Example usage:
       ```ts
       let client = new KeyClient(vaultUrl, credentials);

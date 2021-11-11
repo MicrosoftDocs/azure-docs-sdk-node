@@ -1,9 +1,9 @@
 ---
 title: Azure Tables client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/data-tables, tables
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 09/07/2021
+author: maggiepint
+ms.author: magpint
+ms.date: 11/11/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: tables
 ---
 
-# Azure Tables client library for JavaScript - Version 12.1.2 
+# Azure Tables client library for JavaScript - Version 13.0.0 
 
 
 [Azure Tables](https://azure.microsoft.com/services/storage/tables/) is a cloud-based service that stores structured NoSQL data, providing a key/attribute store with a schemaless design. Tables storage gives developers flexibility and scalability with all the best parts of Azure cloud.
@@ -31,11 +31,11 @@ Azure Cosmos DB provides a Table API for applications that are written for Azure
 - The Azure Tables client library can seamlessly target either Azure table storage or Azure Cosmos DB table service endpoints with no code changes.
 
 Key links:
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.1.2/sdk/tables/data-tables/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.0.0/sdk/tables/data-tables/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/data-tables)
 - [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/data-tables)
 - [Product documentation](https://docs.microsoft.com/azure/storage/tables/table-storage-overview/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_12.1.2/sdk/tables/data-tables/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_13.0.0/sdk/tables/data-tables/samples)
 
 ## Getting started
 
@@ -144,7 +144,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.1.2/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.0.0/sdk/identity/identity/README.md)
 
 ```javascript
 const { TableServiceClient } = require("@azure/data-tables");
@@ -268,7 +268,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.1.2/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.0.0/sdk/identity/identity/README.md)
 
 ```javascript
 const { TableClient } = require("@azure/data-tables");
@@ -365,6 +365,38 @@ async function main() {
 main();
 ```
 
+## Azurite and Storage Emulator
+
+The Azure Tables Client SDK also works with Azurite, an Azure Storage and Tables API compatible server emulator. Please refer to the ([Azurite repository](https://github.com/Azure/Azurite#azurite-v3)) on how to get started using it.
+
+### Connecting to Azurite with Connection String shortcut
+The easiest way to connect to Azurite from your application is to configure a connection string that references the shortcut `UseDevelopmentStorage=true`. The shortcut is equivalent to the full connection string for the emulator, which specifies the account name, the account key, and the emulator endpoints for each of the Azure Storage services: ([see more](https://github.com/Azure/Azurite#http-connection-strings)). Using this shortcut, the Azure Tables Client SDK would setup the default connection string and `allowInsecureConnection` in the client options.
+
+```typescript
+import { TableClient } from "@azure/data-tables"
+
+const connectionString = "UseDevelopmentStorage=true";
+const client = TableClient.fromConnectionString(connectionString, "myTable");
+```
+
+### Connecting to Azurite without Connection String shortcut
+You can connect to azurite manually without using the connection string shortcut by specifying the service URL and `AzureNamedKeyCredential` or a custom connection string. However, `allowInsecureConnection` will need to be set manually in case Azurite runs in an `http` endpoint.
+
+```typescript
+import { TableClient, AzureNamedKeyCredential } from "@azure/data-tables"
+
+const client = new TableClient(
+  "<Azurite-http-table-endpoint>",
+  "myTable",
+  new AzureNamedKeyCredential(
+    "<Azurite-account-name>",
+    "<Azurite-account-key>"
+  ),
+  { allowInsecureConnection: true }
+);
+```
+
+
 ## Troubleshooting
 
 ### General
@@ -400,7 +432,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.1.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/tables/README.png)
 

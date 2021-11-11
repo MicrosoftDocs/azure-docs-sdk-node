@@ -1,8 +1,8 @@
 ---
 title: Azure SQL modules for JavaScript
 description: Reference for Azure SQL modules for JavaScript
-author: CarlRabeler
-ms.author: carlrab
+author: rothja
+ms.author: jroth
 manager: craigg
 ms.date: 07/18/2017
 ms.topic: reference

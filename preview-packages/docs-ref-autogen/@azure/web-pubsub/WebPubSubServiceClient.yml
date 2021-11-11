@@ -10,8 +10,8 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      WebPubSubServiceClient(string, AzureKeyCredential, string,
-      HubAdminClientOptions)
+      WebPubSubServiceClient(string, AzureKeyCredential | TokenCredential,
+      string, WebPubSubServiceClientOptions)
     uid: '@azure/web-pubsub.WebPubSubServiceClient.constructor_1'
     package: '@azure/web-pubsub'
     summary: >
@@ -38,22 +38,23 @@ constructors:
     syntax:
       content: >-
         new WebPubSubServiceClient(endpoint: string, credential:
-        AzureKeyCredential, hubName: string, options?: HubAdminClientOptions)
+        AzureKeyCredential | TokenCredential, hubName: string, options?:
+        WebPubSubServiceClientOptions)
       parameters:
         - id: endpoint
           type: string
           description: The endpoint to connect to
         - id: credential
-          type: AzureKeyCredential
+          type: AzureKeyCredential | TokenCredential
           description: An AzureKeyCredential holding your service key
         - id: hubName
           type: string
           description: 'The name of the hub to connect to. If omitted, ''_default'' is used.'
         - id: options
-          type: <xref uid="@azure/web-pubsub.HubAdminClientOptions" />
+          type: <xref uid="@azure/web-pubsub.WebPubSubServiceClientOptions" />
           description: |
             Options to configure the http pipeline
-  - name: 'WebPubSubServiceClient(string, string, HubAdminClientOptions)'
+  - name: 'WebPubSubServiceClient(string, string, WebPubSubServiceClientOptions)'
     uid: '@azure/web-pubsub.WebPubSubServiceClient.constructor'
     package: '@azure/web-pubsub'
     summary: >
@@ -77,7 +78,7 @@ constructors:
     syntax:
       content: >-
         new WebPubSubServiceClient(connectionString: string, hubName: string,
-        options?: HubAdminClientOptions)
+        options?: WebPubSubServiceClientOptions)
       parameters:
         - id: connectionString
           type: string
@@ -86,7 +87,7 @@ constructors:
           type: string
           description: 'The name of the hub to connect to. If omitted, ''_default'' is used.'
         - id: options
-          type: <xref uid="@azure/web-pubsub.HubAdminClientOptions" />
+          type: <xref uid="@azure/web-pubsub.WebPubSubServiceClientOptions" />
           description: |
             Options to configure the http pipeline
 properties:
@@ -130,7 +131,24 @@ properties:
         type: string
         description: ''
 methods:
-  - name: 'closeConnection(string, CloseConnectionOptions)'
+  - name: closeAllConnections(HubCloseAllConnectionsOptions)
+    uid: '@azure/web-pubsub.WebPubSubServiceClient.closeAllConnections'
+    package: '@azure/web-pubsub'
+    summary: Close all connections to this hub
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function closeAllConnections(options?: HubCloseAllConnectionsOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/web-pubsub.HubCloseAllConnectionsOptions" />
+          description: |
+            Additional options
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: 'closeConnection(string, HubCloseConnectionOptions)'
     uid: '@azure/web-pubsub.WebPubSubServiceClient.closeConnection'
     package: '@azure/web-pubsub'
     summary: Close a specific connection to this hub
@@ -140,36 +158,78 @@ methods:
     syntax:
       content: >-
         function closeConnection(connectionId: string, options?:
-        CloseConnectionOptions)
+        HubCloseConnectionOptions)
       parameters:
         - id: connectionId
           type: string
           description: Connection id to close
         - id: options
-          type: <xref uid="@azure/web-pubsub.CloseConnectionOptions" />
+          type: <xref uid="@azure/web-pubsub.HubCloseConnectionOptions" />
           description: |
             Additional options
       return:
         type: Promise&lt;void&gt;
         description: ''
-  - name: getAuthenticationToken(GetAuthenticationTokenOptions)
-    uid: '@azure/web-pubsub.WebPubSubServiceClient.getAuthenticationToken'
+  - name: 'closeUserConnections(string, HubCloseUserConnectionsOptions)'
+    uid: '@azure/web-pubsub.WebPubSubServiceClient.closeUserConnections'
     package: '@azure/web-pubsub'
-    summary: Auth the client connection with userId and custom claims if any
+    summary: Close all connections with the given user id
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getAuthenticationToken(options?: GetAuthenticationTokenOptions)'
+      content: >-
+        function closeUserConnections(userId: string, options?:
+        HubCloseUserConnectionsOptions)
+      parameters:
+        - id: userId
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/web-pubsub.HubCloseUserConnectionsOptions" />
+          description: |
+            Additional options
+      return:
+        type: Promise&lt;void&gt;
+        description: ''
+  - name: 'connectionExists(string, HasConnectionOptions)'
+    uid: '@azure/web-pubsub.WebPubSubServiceClient.connectionExists'
+    package: '@azure/web-pubsub'
+    summary: Check if a specific connection is connected to this hub
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function connectionExists(connectionId: string, options?:
+        HasConnectionOptions)
+      parameters:
+        - id: connectionId
+          type: string
+          description: Connection id to check
+        - id: options
+          type: <xref uid="@azure/web-pubsub.HasConnectionOptions" />
+          description: |
+            Additional options
+      return:
+        type: Promise&lt;boolean&gt;
+        description: ''
+  - name: getClientAccessToken(GenerateClientTokenOptions)
+    uid: '@azure/web-pubsub.WebPubSubServiceClient.getClientAccessToken'
+    package: '@azure/web-pubsub'
+    summary: Generate a token for a client to connect to the Azure Web PubSub service.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getClientAccessToken(options?: GenerateClientTokenOptions)'
       parameters:
         - id: options
-          type: <xref uid="@azure/web-pubsub.GetAuthenticationTokenOptions" />
+          type: <xref uid="@azure/web-pubsub.GenerateClientTokenOptions" />
           description: |
-            The options that the client has
+            Additional options
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/web-pubsub.GetAuthenticationTokenResponse" />&gt;
+        type: Promise&lt;<xref uid="@azure/web-pubsub.ClientTokenResponse" />&gt;
         description: ''
   - name: 'grantPermission(string, Permission, HubGrantPermissionOptions)'
     uid: '@azure/web-pubsub.WebPubSubServiceClient.grantPermission'
@@ -213,37 +273,15 @@ methods:
       return:
         type: <xref uid="@azure/web-pubsub.WebPubSubGroup" />
         description: ''
-  - name: 'hasConnection(string, HasConnectionOptions)'
-    uid: '@azure/web-pubsub.WebPubSubServiceClient.hasConnection'
-    package: '@azure/web-pubsub'
-    summary: Check if a specific connection is connected to this hub
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function hasConnection(connectionId: string, options?:
-        HasConnectionOptions)
-      parameters:
-        - id: connectionId
-          type: string
-          description: Connection id to check
-        - id: options
-          type: <xref uid="@azure/web-pubsub.HasConnectionOptions" />
-          description: |
-            Additional options
-      return:
-        type: Promise&lt;boolean&gt;
-        description: ''
-  - name: 'hasGroup(string, HubHasGroupOptions)'
-    uid: '@azure/web-pubsub.WebPubSubServiceClient.hasGroup'
+  - name: 'groupExists(string, HubHasGroupOptions)'
+    uid: '@azure/web-pubsub.WebPubSubServiceClient.groupExists'
     package: '@azure/web-pubsub'
     summary: Check if a particular group exists (i.e. has active connections).
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function hasGroup(groupName: string, options?: HubHasGroupOptions)'
+      content: 'function groupExists(groupName: string, options?: HubHasGroupOptions)'
       parameters:
         - id: groupName
           type: string
@@ -280,27 +318,7 @@ methods:
       return:
         type: Promise&lt;boolean&gt;
         description: ''
-  - name: 'hasUser(string, HubHasUserOptions)'
-    uid: '@azure/web-pubsub.WebPubSubServiceClient.hasUser'
-    package: '@azure/web-pubsub'
-    summary: Check if a particular user is connected to this hub.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function hasUser(username: string, options?: HubHasUserOptions)'
-      parameters:
-        - id: username
-          type: string
-          description: The user name to check for
-        - id: options
-          type: <xref uid="@azure/web-pubsub.HubHasUserOptions" />
-          description: |
-            Additional options
-      return:
-        type: Promise&lt;boolean&gt;
-        description: ''
-  - name: 'removeUserFromAllGroups(string, CloseConnectionOptions)'
+  - name: 'removeUserFromAllGroups(string, HubCloseConnectionOptions)'
     uid: '@azure/web-pubsub.WebPubSubServiceClient.removeUserFromAllGroups'
     package: '@azure/web-pubsub'
     summary: Remove a specific user from all groups they are joined to
@@ -310,13 +328,13 @@ methods:
     syntax:
       content: >-
         function removeUserFromAllGroups(userId: string, options?:
-        CloseConnectionOptions)
+        HubCloseConnectionOptions)
       parameters:
         - id: userId
           type: string
           description: The user id to remove from all groups
         - id: options
-          type: <xref uid="@azure/web-pubsub.CloseConnectionOptions" />
+          type: <xref uid="@azure/web-pubsub.HubCloseConnectionOptions" />
           description: |
             Additional options
       return:
@@ -567,4 +585,24 @@ methods:
             Additional options
       return:
         type: Promise&lt;void&gt;
+        description: ''
+  - name: 'userExists(string, HubHasUserOptions)'
+    uid: '@azure/web-pubsub.WebPubSubServiceClient.userExists'
+    package: '@azure/web-pubsub'
+    summary: Check if a particular user is connected to this hub.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function userExists(username: string, options?: HubHasUserOptions)'
+      parameters:
+        - id: username
+          type: string
+          description: The user name to check for
+        - id: options
+          type: <xref uid="@azure/web-pubsub.HubHasUserOptions" />
+          description: |
+            Additional options
+      return:
+        type: Promise&lt;boolean&gt;
         description: ''

@@ -1,8 +1,8 @@
 ---
 title: Azure Storage modules for JavaScript
 description: Reference for Azure Storage modules for JavaScript
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 manager: twolley
 ms.date: 02/27/2020
 ms.topic: reference

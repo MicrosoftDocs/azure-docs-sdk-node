@@ -1,8 +1,8 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-databricks, databricks
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 11/01/2021
 ms.topic: reference
 ms.prod: azure

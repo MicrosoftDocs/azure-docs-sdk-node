@@ -1,8 +1,8 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/identity-vscode, identity
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 09/10/2021
 ms.topic: reference
 ms.prod: azure

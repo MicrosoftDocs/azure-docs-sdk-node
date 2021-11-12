@@ -51,26 +51,44 @@ methods:
   - name: 'getSchema(string, GetSchemaOptions)'
     uid: '@azure/schema-registry.SchemaRegistryClient.getSchema'
     package: '@azure/schema-registry'
-    summary: Gets an existing schema by ID.
+    summary: >
+      Gets an existing schema by ID. If the schema was not found, a RestError
+      with
+
+      status code 404 will be thrown, which could be caught as follows:
+
+      ```js
+
+      ...
+
+      } catch (e) {
+
+      if (typeof e === "object" && e.statusCode === 404) {
+
+      ...;
+
+      }
+
+      throw e;
+
+      }
+
+      ```
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getSchema(id: string, options?: GetSchemaOptions)'
+      content: 'function getSchema(schemaId: string, options?: GetSchemaOptions)'
       parameters:
-        - id: id
+        - id: schemaId
           type: string
           description: Unique schema ID.
         - id: options
           type: <xref uid="@azure/schema-registry.GetSchemaOptions" />
           description: ''
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/schema-registry.Schema" /> |
-          undefined&gt;
-        description: >-
-          Schema with given ID or undefined if no schema was found with the
-          given ID.
+        type: Promise&lt;<xref uid="@azure/schema-registry.Schema" />&gt;
+        description: Schema with given ID.
   - name: 'getSchemaProperties(SchemaDescription, GetSchemaPropertiesOptions)'
     uid: '@azure/schema-registry.SchemaRegistryClient.getSchemaProperties'
     package: '@azure/schema-registry'
@@ -92,10 +110,8 @@ methods:
           type: <xref uid="@azure/schema-registry.GetSchemaPropertiesOptions" />
           description: ''
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/schema-registry.SchemaProperties" /> |
-          undefined&gt;
-        description: Matched schema's ID or undefined if no matching schema was found.
+        type: Promise&lt;<xref uid="@azure/schema-registry.SchemaProperties" />&gt;
+        description: Matched schema's ID.
   - name: 'registerSchema(SchemaDescription, RegisterSchemaOptions)'
     uid: '@azure/schema-registry.SchemaRegistryClient.registerSchema'
     package: '@azure/schema-registry'

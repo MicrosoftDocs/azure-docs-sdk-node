@@ -1,5 +1,5 @@
 ---
-title: Azure Event Hubs Checkpoint Store library for Javascript
+title: Azure Event Hubs Checkpoint Store library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/eventhubs-checkpointstore-blob, 
 author: ramya-rao-a
 ms.author: ramyar
@@ -9,7 +9,7 @@ ms.devlang: javascript
 ms.service: azure
 ---
 
-# Azure Event Hubs Checkpoint Store library for Javascript using Storage Blobs
+# Azure Event Hubs Checkpoint Store library for Javacript using Storage Blobs
 
 An Azure Blob storage based solution to store checkpoints and to aid in load balancing when using `EventHubConsumerClient` from the [@azure/event-hubs](https://www.npmjs.com/package/@azure/event-hubs) library
 
@@ -28,7 +28,7 @@ Install the Azure Event Hubs Checkpoint Store Blob library using npm
 
 If you are using this package in a Node.js application, then use Node.js 8.x or higher.
 
-### Configure Typescript
+### Configure TypeScript
 
 TypeScript users need to have Node type definitions installed:
 

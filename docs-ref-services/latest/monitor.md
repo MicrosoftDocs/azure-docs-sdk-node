@@ -24,4 +24,18 @@ npm install @azure/arm-monitor
 
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-monitor)
 
-* For more code samples that use various Azure packages, explore the [JavaScript samples](/samples/browse/?languages=javascript).
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/monitor/arm-monitor#sample-code).
+
+## Client Package
+
+### Install npm module
+
+```bash
+npm install @azure/monitor-query
+```
+
+### Samples
+
+* Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/monitor-query)
+
+* For more code samples that use various Azure packages, explore the [JavaScript samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0/sdk/monitor/monitor-query/samples/v1).

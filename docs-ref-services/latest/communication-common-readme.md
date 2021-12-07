@@ -45,7 +45,7 @@ It is up to you the developer to first create valid user tokens with the Azure C
 
 `CommunicationTokenCredential` is only the interface, please always use the `AzureCommunicationTokenCredential` constructor to create a credential and take advantage of the built-in refresh logic.
 
-`tokenRefresher` callback should return string with a bare JWT token.
+`tokenRefresher` callback should return raw string with a JWT token.
 
 ## Examples
 

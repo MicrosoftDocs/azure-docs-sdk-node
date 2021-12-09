@@ -16,7 +16,7 @@ functions:
     syntax:
       content: >-
         function createWithSharedAccessKey(hostName: string, deviceId: string,
-        symmetricKey: string)
+        symmetricKey: string): string
       parameters:
         - id: hostName
           type: string
@@ -27,11 +27,12 @@ functions:
         - id: symmetricKey
           type: string
           description: >
-            Symmetric key used to generate the <xref:SharedAccessSignature> that
+            Symmetric key used to generate the
+            <xref:azure-iot-device.Client.fromSharedAccessSignature> that
             authenticate the connection.
       return:
-        type: string
         description: ''
+        type: string
   - name: 'createWithX509Certificate(string, string)'
     uid: azure-iot-device.createWithX509Certificate
     package: azure-iot-device
@@ -42,7 +43,9 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createWithX509Certificate(hostName: string, deviceId: string)'
+      content: >-
+        function createWithX509Certificate(hostName: string, deviceId: string):
+        string
       parameters:
         - id: hostName
           type: string
@@ -52,28 +55,28 @@ functions:
           description: |
             Unique device identifier.
       return:
-        type: string
         description: ''
+        type: string
   - name: parse(string)
     uid: azure-iot-device.parse
     package: azure-iot-device
     summary: >-
       Parses a string in the format of a Shared Access Signature token and
-      returns a <xref:SharedAccessSignature>.
+      returns a <xref:azure-iot-device.Client.fromSharedAccessSignature>.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function parse(source: string)'
+      content: 'function parse(source: string): SharedAccessSignature'
       parameters:
         - id: source
           type: string
           description: A shared access signature string.
       return:
-        type: SharedAccessSignature
         description: >-
           An object containing the different shared access signature properties
           extracted from the string given as a parameter
+        type: SharedAccessSignature
   - name: 'createDeviceMethodExchange(DeviceMethodRequest, DeviceMethodResponse)'
     uid: azure-iot-device.createDeviceMethodExchange
     package: azure-iot-device
@@ -84,7 +87,7 @@ functions:
     syntax:
       content: >-
         function createDeviceMethodExchange(request: DeviceMethodRequest,
-        response: DeviceMethodResponse)
+        response: DeviceMethodResponse): DeviceMethodExchange
       parameters:
         - id: request
           type: <xref uid="azure-iot-device.DeviceMethodRequest" />
@@ -93,8 +96,8 @@ functions:
           type: <xref uid="azure-iot-device.DeviceMethodResponse" />
           description: ''
       return:
-        type: <xref uid="azure-iot-device.DeviceMethodExchange" />
         description: ''
+        type: <xref uid="azure-iot-device.DeviceMethodExchange" />
   - name: 'create(string, string, string, string | number)'
     uid: azure-iot-device.create
     package: azure-iot-device
@@ -107,7 +110,7 @@ functions:
     syntax:
       content: >-
         function create(host: string, deviceId: string, key: string, expiry:
-        string | number)
+        string | number): SharedAccessSignature
       parameters:
         - id: host
           type: string
@@ -123,8 +126,8 @@ functions:
           description: |
             Expiry time for the token that will be created.
       return:
-        type: SharedAccessSignature
         description: A shared access signature to be used to connect with an Azure IoT hub.
+        type: SharedAccessSignature
   - name: getUserAgentString(NoErrorCallback<string>)
     uid: azure-iot-device.getUserAgentString
     package: azure-iot-device
@@ -146,10 +149,10 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getUserAgentString()
+      content: 'function getUserAgentString(): Promise<string>'
       return:
-        type: Promise&lt;string&gt;
         description: ''
+        type: Promise&lt;string&gt;
   - name: 'getUserAgentString(string, NoErrorCallback<string>)'
     uid: azure-iot-device.getUserAgentString_2
     package: azure-iot-device
@@ -176,14 +179,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getUserAgentString(productInfo: string)'
+      content: 'function getUserAgentString(productInfo: string): Promise<string>'
       parameters:
         - id: productInfo
           type: string
           description: ''
       return:
-        type: Promise&lt;string&gt;
         description: ''
+        type: Promise&lt;string&gt;
 classes:
   - azure-iot-device.Client
   - azure-iot-device.DeviceMethodRequest

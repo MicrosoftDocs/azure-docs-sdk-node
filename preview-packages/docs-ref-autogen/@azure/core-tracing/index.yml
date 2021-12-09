@@ -38,14 +38,14 @@ functions:
     syntax:
       content: >-
         function extractSpanContextFromTraceParentHeader(traceParentHeader:
-        string)
+        string): SpanContext | undefined
       parameters:
         - id: traceParentHeader
           type: string
           description: ''
       return:
-        type: <xref uid="@azure/core-tracing.SpanContext" /> | undefined
         description: The `SpanContext` generated from the `traceparent` value.
+        type: <xref uid="@azure/core-tracing.SpanContext" /> | undefined
   - name: getSpan(Context)
     uid: '@azure/core-tracing.getSpan'
     package: '@azure/core-tracing'
@@ -54,15 +54,15 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getSpan(context: Context)'
+      content: 'function getSpan(context: Context): Span | undefined'
       parameters:
         - id: context
           type: <xref uid="@azure/core-tracing.Context" />
           description: |
             context to get span from
       return:
-        type: <xref uid="@azure/core-tracing.Span" /> | undefined
         description: ''
+        type: <xref uid="@azure/core-tracing.Span" /> | undefined
   - name: getSpanContext(Context)
     uid: '@azure/core-tracing.getSpanContext'
     package: '@azure/core-tracing'
@@ -71,15 +71,15 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getSpanContext(context: Context)'
+      content: 'function getSpanContext(context: Context): SpanContext | undefined'
       parameters:
         - id: context
           type: <xref uid="@azure/core-tracing.Context" />
           description: |
             context to get values from
       return:
-        type: <xref uid="@azure/core-tracing.SpanContext" /> | undefined
         description: ''
+        type: <xref uid="@azure/core-tracing.SpanContext" /> | undefined
   - name: getTraceParentHeader(SpanContext)
     uid: '@azure/core-tracing.getTraceParentHeader'
     package: '@azure/core-tracing'
@@ -88,14 +88,16 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getTraceParentHeader(spanContext: SpanContext)'
+      content: >-
+        function getTraceParentHeader(spanContext: SpanContext): string |
+        undefined
       parameters:
         - id: spanContext
           type: <xref uid="@azure/core-tracing.SpanContext" />
           description: Contains context for a specific span.
       return:
-        type: string | undefined
         description: The `spanContext` represented as a `traceparent` value.
+        type: string | undefined
   - name: getTracer()
     uid: '@azure/core-tracing.getTracer'
     package: '@azure/core-tracing'
@@ -104,10 +106,10 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getTracer()
+      content: 'function getTracer(): Tracer'
       return:
-        type: <xref uid="@azure/core-tracing.Tracer" />
         description: ''
+        type: <xref uid="@azure/core-tracing.Tracer" />
   - name: 'getTracer(string, string)'
     uid: '@azure/core-tracing.getTracer_1'
     package: '@azure/core-tracing'
@@ -116,7 +118,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getTracer(name: string, version?: string)'
+      content: 'function getTracer(name: string, version?: string): Tracer'
       parameters:
         - id: name
           type: string
@@ -125,29 +127,29 @@ functions:
           type: string
           description: ''
       return:
-        type: <xref uid="@azure/core-tracing.Tracer" />
         description: ''
+        type: <xref uid="@azure/core-tracing.Tracer" />
   - name: isSpanContextValid(SpanContext)
     uid: '@azure/core-tracing.isSpanContextValid'
     package: '@azure/core-tracing'
     summary: >-
-      Returns true of the given <xref:SpanContext> is valid.
+      Returns true of the given <xref:@azure/core-tracing.SpanContext> is valid.
 
-      A valid <xref:SpanContext> is one which has a valid trace ID and span ID
-      as per the spec.
+      A valid <xref:@azure/core-tracing.SpanContext> is one which has a valid
+      trace ID and span ID as per the spec.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isSpanContextValid(context: SpanContext)'
+      content: 'function isSpanContextValid(context: SpanContext): boolean'
       parameters:
         - id: context
           type: <xref uid="@azure/core-tracing.SpanContext" />
           description: |
-            the <xref:SpanContext> to validate.
+            the <xref:@azure/core-tracing.SpanContext> to validate.
       return:
-        type: boolean
         description: 'true if the {@link SpanContext} is valid, false otherwise.'
+        type: boolean
   - name: 'setSpan(Context, Span)'
     uid: '@azure/core-tracing.setSpan'
     package: '@azure/core-tracing'
@@ -156,7 +158,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setSpan(context: Context, span: Span)'
+      content: 'function setSpan(context: Context, span: Span): Context'
       parameters:
         - id: context
           type: <xref uid="@azure/core-tracing.Context" />
@@ -166,8 +168,8 @@ functions:
           description: |
             span to set active
       return:
-        type: <xref uid="@azure/core-tracing.Context" />
         description: ''
+        type: <xref uid="@azure/core-tracing.Context" />
   - name: 'setSpanContext(Context, SpanContext)'
     uid: '@azure/core-tracing.setSpanContext'
     package: '@azure/core-tracing'
@@ -178,7 +180,9 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setSpanContext(context: Context, spanContext: SpanContext)'
+      content: >-
+        function setSpanContext(context: Context, spanContext: SpanContext):
+        Context
       parameters:
         - id: context
           type: <xref uid="@azure/core-tracing.Context" />
@@ -188,5 +192,5 @@ functions:
           description: |
             span context to be wrapped
       return:
-        type: <xref uid="@azure/core-tracing.Context" />
         description: ''
+        type: <xref uid="@azure/core-tracing.Context" />

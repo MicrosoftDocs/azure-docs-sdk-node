@@ -45,8 +45,8 @@ properties:
     syntax:
       content: 'pipeline: Pipeline'
       return:
-        type: <xref uid="@azure/storage-file.Pipeline" />
         description: ''
+        type: <xref uid="@azure/storage-file.Pipeline" />
   - name: url
     uid: '@azure/storage-file.ShareURL.url'
     package: '@azure/storage-file'
@@ -58,8 +58,8 @@ properties:
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: 'create(Aborter, IShareCreateOptions)'
     uid: '@azure/storage-file.ShareURL.create'
@@ -67,11 +67,15 @@ methods:
     summary: |-
       Creates a new share under the specified account. If the share with
       the same name already exists, the operation fails.
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/create-share
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function create(aborter: Aborter, options?: IShareCreateOptions)'
+      content: >-
+        function create(aborter: Aborter, options?: IShareCreateOptions):
+        Promise<Models.ShareCreateResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -83,8 +87,8 @@ methods:
           type: <xref uid="@azure/storage-file.IShareCreateOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ShareCreateResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ShareCreateResponse" />&gt;
   - name: 'createPermission(Aborter, string)'
     uid: '@azure/storage-file.ShareURL.createPermission'
     package: '@azure/storage-file'
@@ -93,11 +97,17 @@ methods:
 
       The created security descriptor can be used for the files/directories in
       the share.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/create-permission
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createPermission(aborter: Aborter, filePermission: string)'
+      content: >-
+        function createPermission(aborter: Aborter, filePermission: string):
+        Promise<Models.ShareCreatePermissionResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -110,8 +120,8 @@ methods:
           description: |
             File permission described in the SDDL
       return:
-        type: Promise&lt;<xref uid="Models.ShareCreatePermissionResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ShareCreatePermissionResponse" />&gt;
   - name: 'createSnapshot(Aborter, IShareCreateSnapshotOptions)'
     uid: '@azure/storage-file.ShareURL.createSnapshot'
     package: '@azure/storage-file'
@@ -122,7 +132,8 @@ methods:
     syntax:
       content: >-
         function createSnapshot(aborter: Aborter, options?:
-        IShareCreateSnapshotOptions)
+        IShareCreateSnapshotOptions):
+        Promise<Models.ShareCreateSnapshotResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -134,8 +145,8 @@ methods:
           type: <xref uid="@azure/storage-file.IShareCreateSnapshotOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ShareCreateSnapshotResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ShareCreateSnapshotResponse" />&gt;
   - name: 'delete(Aborter, IShareDeleteMethodOptions)'
     uid: '@azure/storage-file.ShareURL.delete'
     package: '@azure/storage-file'
@@ -144,11 +155,16 @@ methods:
       files
 
       contained within it are later deleted during garbage collection.
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-share
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function delete(aborter: Aborter, options?: IShareDeleteMethodOptions)'
+      content: >-
+        function delete(aborter: Aborter, options?: IShareDeleteMethodOptions):
+        Promise<Models.ShareDeleteResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -160,8 +176,8 @@ methods:
           type: <xref uid="@azure/storage-file.IShareDeleteMethodOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ShareDeleteResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ShareDeleteResponse" />&gt;
   - name: 'fromServiceURL(ServiceURL, string)'
     uid: '@azure/storage-file.ShareURL.fromServiceURL'
     package: '@azure/storage-file'
@@ -172,7 +188,7 @@ methods:
     syntax:
       content: >-
         static function fromServiceURL(serviceURL: ServiceURL, shareName:
-        string)
+        string): ShareURL
       parameters:
         - id: serviceURL
           type: <xref uid="@azure/storage-file.ServiceURL" />
@@ -182,12 +198,12 @@ methods:
           description: |+
 
       return:
-        type: <xref uid="@azure/storage-file.ShareURL" />
         description: ''
+        type: <xref uid="@azure/storage-file.ShareURL" />
   - name: getAccessPolicy(Aborter)
     uid: '@azure/storage-file.ShareURL.getAccessPolicy'
     package: '@azure/storage-file'
-    summary: >
+    summary: >-
       Gets the permissions for the specified share. The permissions indicate
 
       whether share data may be accessed publicly.
@@ -197,11 +213,18 @@ methods:
 
       For example, new Date("2018-12-31T03:44:23.8827891Z").toISOString() will
       get "2018-12-31T03:44:23.882Z".
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-share-acl
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getAccessPolicy(aborter: Aborter)'
+      content: >-
+        function getAccessPolicy(aborter: Aborter):
+        Promise<ShareGetAccessPolicyResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -210,10 +233,10 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file.ShareGetAccessPolicyResponse" />&gt;
-        description: ''
   - name: 'getPermission(Aborter, string)'
     uid: '@azure/storage-file.ShareURL.getPermission'
     package: '@azure/storage-file'
@@ -222,11 +245,17 @@ methods:
       permission key
 
       which indicates a security descriptor.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-permission
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getPermission(aborter: Aborter, filePermissionKey: string)'
+      content: >-
+        function getPermission(aborter: Aborter, filePermissionKey: string):
+        Promise<Models.ShareGetPermissionResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -240,19 +269,26 @@ methods:
             File permission key which indicates the security descriptor of the
             permission.
       return:
-        type: Promise&lt;<xref uid="Models.ShareGetPermissionResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ShareGetPermissionResponse" />&gt;
   - name: getProperties(Aborter)
     uid: '@azure/storage-file.ShareURL.getProperties'
     package: '@azure/storage-file'
-    summary: |-
+    summary: >-
       Returns all user-defined metadata and system properties for the specified
+
       share.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-share-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperties(aborter: Aborter)'
+      content: >-
+        function getProperties(aborter: Aborter):
+        Promise<Models.ShareGetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -261,8 +297,8 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
-        type: Promise&lt;<xref uid="Models.ShareGetPropertiesResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ShareGetPropertiesResponse" />&gt;
   - name: getStatistics(Aborter)
     uid: '@azure/storage-file.ShareURL.getStatistics'
     package: '@azure/storage-file'
@@ -271,7 +307,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getStatistics(aborter: Aborter)'
+      content: >-
+        function getStatistics(aborter: Aborter):
+        Promise<ShareGetStatisticsResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -280,10 +318,10 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-file.ShareGetStatisticsResponse"
           />&gt;
-        description: ''
   - name: 'newPipeline(Credential, INewPipelineOptions)'
     uid: '@azure/storage-file.ShareURL.newPipeline'
     package: '@azure/storage-file'
@@ -296,7 +334,7 @@ methods:
     syntax:
       content: >-
         static function newPipeline(credential: Credential, pipelineOptions?:
-        INewPipelineOptions)
+        INewPipelineOptions): Pipeline
       parameters:
         - id: credential
           type: <xref uid="@azure/storage-file.Credential" />
@@ -305,8 +343,8 @@ methods:
           type: <xref uid="@azure/storage-file.INewPipelineOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-file.Pipeline" />
         description: A new Pipeline object.
+        type: <xref uid="@azure/storage-file.Pipeline" />
   - name: 'setAccessPolicy(Aborter, ISignedIdentifier[])'
     uid: '@azure/storage-file.ShareURL.setAccessPolicy'
     package: '@azure/storage-file'
@@ -321,13 +359,17 @@ methods:
       If no shareAcl provided, the existing share ACL will be
 
       removed.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-share-acl
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setAccessPolicy(aborter: Aborter, shareAcl?:
-        ISignedIdentifier[])
+        ISignedIdentifier[]): Promise<Models.ShareSetAccessPolicyResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -339,8 +381,8 @@ methods:
           type: '<xref uid="@azure/storage-file.ISignedIdentifier" />[]'
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ShareSetAccessPolicyResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ShareSetAccessPolicyResponse" />&gt;
   - name: 'setMetadata(Aborter, IMetadata)'
     uid: '@azure/storage-file.ShareURL.setMetadata'
     package: '@azure/storage-file'
@@ -351,11 +393,17 @@ methods:
       share
 
       metadata will be removed.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-share-metadata
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setMetadata(aborter: Aborter, metadata?: IMetadata)'
+      content: >-
+        function setMetadata(aborter: Aborter, metadata?: IMetadata):
+        Promise<Models.ShareSetMetadataResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -367,8 +415,8 @@ methods:
           type: <xref uid="@azure/storage-file.IMetadata" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ShareSetMetadataResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ShareSetMetadataResponse" />&gt;
   - name: 'setQuota(Aborter, number)'
     uid: '@azure/storage-file.ShareURL.setQuota'
     package: '@azure/storage-file'
@@ -377,7 +425,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setQuota(aborter: Aborter, quotaInGB: number)'
+      content: >-
+        function setQuota(aborter: Aborter, quotaInGB: number):
+        Promise<Models.ShareSetQuotaResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -389,8 +439,8 @@ methods:
           type: number
           description: Specifies the maximum size of the share in gigabytes
       return:
-        type: Promise&lt;<xref uid="Models.ShareSetQuotaResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ShareSetQuotaResponse" />&gt;
   - name: withPipeline(Pipeline)
     uid: '@azure/storage-file.ShareURL.withPipeline'
     package: '@azure/storage-file'
@@ -401,14 +451,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withPipeline(pipeline: Pipeline)'
+      content: 'function withPipeline(pipeline: Pipeline): ShareURL'
       parameters:
         - id: pipeline
           type: <xref uid="@azure/storage-file.Pipeline" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-file.ShareURL" />
         description: ''
+        type: <xref uid="@azure/storage-file.ShareURL" />
   - name: withSnapshot(string)
     uid: '@azure/storage-file.ShareURL.withSnapshot'
     package: '@azure/storage-file'
@@ -421,14 +471,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withSnapshot(snapshot: string)'
+      content: 'function withSnapshot(snapshot: string): ShareURL'
       parameters:
         - id: snapshot
           type: string
           description: ''
       return:
-        type: <xref uid="@azure/storage-file.ShareURL" />
         description: >-
           A new ShareURL object identical to the source but with the specified
           snapshot timestamp
+        type: <xref uid="@azure/storage-file.ShareURL" />
 extends: <xref uid="@azure/storage-file.StorageURL" />

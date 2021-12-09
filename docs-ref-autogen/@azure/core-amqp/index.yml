@@ -44,7 +44,7 @@ functions:
     syntax:
       content: >-
         function delay<T>(delayInMs: number, abortSignal?: AbortSignalLike,
-        abortErrorMsg?: string, value?: T)
+        abortErrorMsg?: string, value?: T): Promise<T | void>
       parameters:
         - id: delayInMs
           type: number
@@ -59,8 +59,8 @@ functions:
           type: T
           description: The value to be resolved with after a timeout of t milliseconds.
       return:
-        type: Promise&lt;T | void&gt;
         description: '- Resolved promise'
+        type: Promise&lt;T | void&gt;
   - name: isMessagingError(Error | MessagingError)
     uid: '@azure/core-amqp.isMessagingError'
     package: '@azure/core-amqp'
@@ -69,15 +69,15 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isMessagingError(error: Error | MessagingError)'
+      content: 'function isMessagingError(error: Error | MessagingError): boolean'
       parameters:
         - id: error
           type: Error | <xref uid="@azure/core-amqp.MessagingError" />
           description: |
             An error that can either be an Error or a MessagingError.
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: isSystemError(unknown)
     uid: '@azure/core-amqp.isSystemError'
     package: '@azure/core-amqp'
@@ -86,15 +86,15 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isSystemError(err: unknown)'
+      content: 'function isSystemError(err: unknown): boolean'
       parameters:
         - id: err
           type: unknown
           description: |
             An object that may contain error information.
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: parseConnectionString<T>(string)
     uid: '@azure/core-amqp.parseConnectionString'
     package: '@azure/core-amqp'
@@ -118,14 +118,16 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function parseConnectionString<T>(connectionString: string)'
+      content: >-
+        function parseConnectionString<T>(connectionString: string):
+        ParsedOutput<T>
       parameters:
         - id: connectionString
           type: string
           description: The connection string to be parsed.
       return:
-        type: <xref uid="@azure/core-amqp.ParsedOutput" />&lt;T&gt;
         description: ParsedOutput<T>.
+        type: <xref uid="@azure/core-amqp.ParsedOutput" />&lt;T&gt;
   - name: retry<T>(RetryConfig<T>)
     uid: '@azure/core-amqp.retry'
     package: '@azure/core-amqp'
@@ -152,15 +154,15 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function retry<T>(config: RetryConfig<T>)'
+      content: 'function retry<T>(config: RetryConfig<T>): Promise<T>'
       parameters:
         - id: config
           type: <xref uid="@azure/core-amqp.RetryConfig" />&lt;T&gt;
           description: |
             Parameters to configure retry operation
       return:
-        type: Promise&lt;T&gt;
         description: Promise<T>.
+        type: Promise&lt;T&gt;
   - name: translate(AmqpError | Error)
     uid: '@azure/core-amqp.translate'
     package: '@azure/core-amqp'
@@ -173,11 +175,11 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function translate(err: AmqpError | Error)'
+      content: 'function translate(err: AmqpError | Error): MessagingError | Error'
       parameters:
         - id: err
           type: AmqpError | Error
           description: The amqp error that was received.
       return:
-        type: <xref uid="@azure/core-amqp.MessagingError" /> | Error
         description: MessagingError object.
+        type: <xref uid="@azure/core-amqp.MessagingError" /> | Error

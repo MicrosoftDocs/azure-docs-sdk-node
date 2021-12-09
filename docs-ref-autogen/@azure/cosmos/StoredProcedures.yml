@@ -24,8 +24,8 @@ properties:
     syntax:
       content: 'container: Container'
       return:
-        type: <xref uid="@azure/cosmos.Container" />
         description: ''
+        type: <xref uid="@azure/cosmos.Container" />
 methods:
   - name: 'create(StoredProcedureDefinition, RequestOptions)'
     uid: '@azure/cosmos.StoredProcedures.create'
@@ -50,7 +50,7 @@ methods:
     syntax:
       content: >-
         function create(body: StoredProcedureDefinition, options?:
-        RequestOptions)
+        RequestOptions): Promise<StoredProcedureResponse>
       parameters:
         - id: body
           type: <xref uid="@azure/cosmos.StoredProcedureDefinition" />
@@ -59,66 +59,133 @@ methods:
           type: <xref uid="@azure/cosmos.RequestOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="@azure/cosmos.StoredProcedureResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.StoredProcedureResponse" />&gt;
   - name: 'query(SqlQuerySpec, FeedOptions)'
     uid: '@azure/cosmos.StoredProcedures.query'
     package: '@azure/cosmos'
-    summary: Query all Stored Procedures.
+    summary: >+
+      Query all Stored Procedures.
+
+
+      **Example**
+
+
+      Read all stored procedures to array.
+
+      ```typescript
+
+      const querySpec: SqlQuerySpec = {
+        query: "SELECT * FROM root r WHERE r.id = @sproc",
+        parameters: [
+          {name: "@sproc", value: "Todo"}
+        ]
+      };
+
+      const {body: sprocList} = await
+      containers.storedProcedures.query(querySpec).fetchAll();
+
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function query(query: SqlQuerySpec, options?: FeedOptions)'
+      content: >-
+        function query(query: SqlQuerySpec, options?: FeedOptions):
+        QueryIterator<any>
       parameters:
         - id: query
           type: <xref uid="@azure/cosmos.SqlQuerySpec" />
           description: >-
-            Query configuration for the operation. See <xref:SqlQuerySpec> for
-            more info on how to configure a query.
+            Query configuration for the operation. See
+            <xref:@azure/cosmos.SqlQuerySpec> for more info on how to configure
+            a query.
         - id: options
           type: <xref uid="@azure/cosmos.FeedOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;any&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;any&gt;
   - name: 'query<T>(SqlQuerySpec, FeedOptions)'
     uid: '@azure/cosmos.StoredProcedures.query_1'
     package: '@azure/cosmos'
-    summary: Query all Stored Procedures.
+    summary: >+
+      Query all Stored Procedures.
+
+
+      **Example**
+
+
+      Read all stored procedures to array.
+
+      ```typescript
+
+      const querySpec: SqlQuerySpec = {
+        query: "SELECT * FROM root r WHERE r.id = @sproc",
+        parameters: [
+          {name: "@sproc", value: "Todo"}
+        ]
+      };
+
+      const {body: sprocList} = await
+      containers.storedProcedures.query(querySpec).fetchAll();
+
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function query<T>(query: SqlQuerySpec, options?: FeedOptions)'
+      content: >-
+        function query<T>(query: SqlQuerySpec, options?: FeedOptions):
+        QueryIterator<T>
       parameters:
         - id: query
           type: <xref uid="@azure/cosmos.SqlQuerySpec" />
           description: >-
-            Query configuration for the operation. See <xref:SqlQuerySpec> for
-            more info on how to configure a query.
+            Query configuration for the operation. See
+            <xref:@azure/cosmos.SqlQuerySpec> for more info on how to configure
+            a query.
         - id: options
           type: <xref uid="@azure/cosmos.FeedOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;T&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;T&gt;
   - name: readAll(FeedOptions)
     uid: '@azure/cosmos.StoredProcedures.readAll'
     package: '@azure/cosmos'
-    summary: Read all stored procedures.
+    summary: >+
+      Read all stored procedures.
+
+
+      **Example**
+
+
+      Read all stored procedures to array.
+
+      ```typescript
+
+      const {body: sprocList} = await
+      containers.storedProcedures.readAll().fetchAll();
+
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function readAll(options?: FeedOptions)'
+      content: >-
+        function readAll(options?: FeedOptions):
+        QueryIterator<StoredProcedureDefinition & Resource>
       parameters:
         - id: options
           type: <xref uid="@azure/cosmos.FeedOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           <xref uid="@azure/cosmos.QueryIterator" />&lt;<xref
           uid="@azure/cosmos.StoredProcedureDefinition" /> & <xref
           uid="@azure/cosmos.Resource" />&gt;
-        description: ''

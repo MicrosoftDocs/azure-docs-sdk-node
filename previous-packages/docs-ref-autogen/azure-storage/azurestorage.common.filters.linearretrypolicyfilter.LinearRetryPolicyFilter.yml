@@ -14,7 +14,15 @@ constructors:
     uid: >-
       azure-storage.azurestorage.common.filters.linearretrypolicyfilter.LinearRetryPolicyFilter.constructor
     package: azure-storage
-    summary: Creates a new LinearRetryPolicyFilter instance.
+    summary: |+
+      Creates a new LinearRetryPolicyFilter instance.
+
+      **Example**
+
+      var azure = require('azure-storage');
+      var retryOperations = new azure.LinearRetryPolicyFilter();
+      var blobService = azure.createBlobService().withFilter(retryOperations)
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -40,8 +48,8 @@ properties:
     syntax:
       content: 'static DEFAULT_CLIENT_RETRY_COUNT: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: DEFAULT_CLIENT_RETRY_INTERVAL
     uid: >-
       azure-storage.azurestorage.common.filters.linearretrypolicyfilter.LinearRetryPolicyFilter.DEFAULT_CLIENT_RETRY_INTERVAL
@@ -54,8 +62,8 @@ properties:
     syntax:
       content: 'static DEFAULT_CLIENT_RETRY_INTERVAL: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: retryCount
     uid: >-
       azure-storage.azurestorage.common.filters.linearretrypolicyfilter.LinearRetryPolicyFilter.retryCount
@@ -68,8 +76,8 @@ properties:
     syntax:
       content: 'retryCount: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: retryInterval
     uid: >-
       azure-storage.azurestorage.common.filters.linearretrypolicyfilter.LinearRetryPolicyFilter.retryInterval
@@ -82,8 +90,8 @@ properties:
     syntax:
       content: 'retryInterval: number'
       return:
-        type: number
         description: ''
+        type: number
 methods:
   - name: 'handle(RequestOptions, Next)'
     uid: >-
@@ -115,7 +123,7 @@ methods:
     syntax:
       content: >-
         function shouldRetry(statusCode: number, retryData:
-        IRetryRequestOptions)
+        IRetryRequestOptions): { retryInterval: number, retryable: boolean }
       parameters:
         - id: statusCode
           type: number
@@ -127,7 +135,7 @@ methods:
             />
           description: The retry data.
       return:
-        type: Object
         description: >-
           Information about whether the operation qualifies for a retry and the
           retryInterval.
+        type: '{ retryInterval: number, retryable: boolean }'

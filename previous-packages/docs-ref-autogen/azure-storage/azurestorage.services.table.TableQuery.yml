@@ -12,12 +12,20 @@ methods:
   - name: 'and(string, any[])'
     uid: azure-storage.azurestorage.services.table.TableQuery.and
     package: azure-storage
-    summary: Specifies an AND where condition.
+    summary: |+
+      Specifies an AND where condition.
+
+      **Example**
+
+      var tableQuery = new TableQuery()
+                           .where('Name == ? or Name <= ?', 'Person1', 'Person2');
+                           .and('Age >= ?', 18);
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function and(condition: string, args: any[])'
+      content: 'function and(condition: string, args: any[]): TableQuery'
       parameters:
         - id: condition
           type: string
@@ -26,17 +34,25 @@ methods:
           type: 'any[]'
           description: ''
       return:
-        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />
         description: A table query object with the and clause.
+        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />
   - name: 'or(string, any[])'
     uid: azure-storage.azurestorage.services.table.TableQuery.or
     package: azure-storage
-    summary: Specifies an OR where condition.
+    summary: |+
+      Specifies an OR where condition.
+
+      **Example**
+
+      var tableQuery = new TableQuery()
+                           .where('Name == ? or Name <= ?', 'Person1', 'Person2');
+                           .or('Age >= ?', 18);
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function or(condition: string, args: any[])'
+      content: 'function or(condition: string, args: any[]): TableQuery'
       parameters:
         - id: condition
           type: string
@@ -45,26 +61,33 @@ methods:
           type: 'any[]'
           description: ''
       return:
-        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />
         description: A table query object with the or clause.
+        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />
   - name: 'select(string[])'
     uid: azure-storage.azurestorage.services.table.TableQuery.select
     package: azure-storage
-    summary: >-
+    summary: >+
       Specifies the select clause. If no arguments are given, all fields will be
       selected.
+
+
+      **Example**
+
+
+      var tableQuery = new TableQuery().select('field1', 'field2');
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function select(args: string[])'
+      content: 'function select(args: string[]): TableQuery'
       parameters:
         - id: args
           type: 'string[]'
           description: ''
       return:
-        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />
         description: A table query object with the select clause.
+        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />
   - name: 'select(string[])'
     uid: azure-storage.azurestorage.services.table.TableQuery.select_1
     package: azure-storage
@@ -73,30 +96,51 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function select(args: string[])'
+      content: 'function select(args: string[]): TableQuery'
       parameters:
         - id: args
           type: 'string[]'
           description: ''
       return:
-        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />
         description: ''
+        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />
   - name: top(number)
     uid: azure-storage.azurestorage.services.table.TableQuery.top
     package: azure-storage
-    summary: Specifies the top clause.
+    summary: >+
+      Specifies the top clause.
+
+
+      **Example**
+
+
+      var tableQuery = new TableQuery().top(10);
+
+
+      // tasktable should already exist and have entities
+
+      tableService.queryEntities('tasktable', tableQuery, null
+      \/*currentToken*\/, function(error, result) {
+        if(!error) {
+          var entities = result.entities; // there will be 10 or less entities
+          // do stuff with the returned entities if there are any
+          // if result.continuationToken exists, to get the next 10 (or less) entities
+          // call queryEntities as above, but with the returned token instead of null
+        }
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function top(top: number)'
+      content: 'function top(top: number): TableQuery'
       parameters:
         - id: top
           type: number
           description: The number of items to fetch.
       return:
-        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />
         description: A table query object with the top clause.
+        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />
   - name: toQueryObject()
     uid: azure-storage.azurestorage.services.table.TableQuery.toQueryObject
     package: azure-storage
@@ -105,14 +149,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function toQueryObject()
+      content: 'function toQueryObject(): Object'
       return:
-        type: Object
         description: JSON object representing the query string arguments for the query.
+        type: Object
   - name: 'where(string, any[])'
     uid: azure-storage.azurestorage.services.table.TableQuery.where
     package: azure-storage
-    summary: >
+    summary: >+
       Specifies the where clause.
 
       Valid type specifier strings include: ?string?, ?bool?, ?int32?, ?double?,
@@ -120,11 +164,41 @@ methods:
 
       A type must be specified for guid, int64, and binaries or the filter
       produced will be incorrect.
+
+
+
+      **Example**
+
+
+      var tableQuery = new TableQuery().where(TableQuery.guidFilter('GuidField',
+      QueryComparisons.EQUAL, guidVal));
+
+      OR
+
+      var tableQuery = new TableQuery().where('Name == ? or Name <= ?', name1,
+      name2);
+
+      OR
+
+      var tableQuery = new TableQuery().where('Name == ?string? && Value ==
+      ?int64?, name1, int64Val);
+
+
+      // tasktable should already exist and have entities
+
+      tableService.queryEntities('tasktable', tableQuery, null
+      \/*currentToken*\/, function(error, result, response) {
+        if(!error) {
+          var entities = result.entities;
+          // do stuff with the returned entities if there are any
+        }
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function where(condition: string, args: any[])'
+      content: 'function where(condition: string, args: any[]): TableQuery'
       parameters:
         - id: condition
           type: string
@@ -133,5 +207,5 @@ methods:
           type: 'any[]'
           description: ''
       return:
-        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />
         description: A table query object with the where clause.
+        type: <xref uid="azure-storage.azurestorage.services.table.TableQuery" />

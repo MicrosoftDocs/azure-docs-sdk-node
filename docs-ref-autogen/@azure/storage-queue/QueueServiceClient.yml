@@ -125,8 +125,8 @@ properties:
     syntax:
       content: 'accountName: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: url
     uid: '@azure/storage-queue.QueueServiceClient.url'
     package: '@azure/storage-queue'
@@ -138,18 +138,25 @@ properties:
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: 'createQueue(string, QueueCreateOptions)'
     uid: '@azure/storage-queue.QueueServiceClient.createQueue'
     package: '@azure/storage-queue'
-    summary: Creates a new queue under the specified account.
+    summary: >-
+      Creates a new queue under the specified account.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/create-queue4
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createQueue(queueName: string, options?: QueueCreateOptions)'
+      content: >-
+        function createQueue(queueName: string, options?: QueueCreateOptions):
+        Promise<QueueCreateResponse>
       parameters:
         - id: queueName
           type: string
@@ -158,17 +165,24 @@ methods:
           type: <xref uid="@azure/storage-queue.QueueCreateOptions" />
           description: Options to Queue create operation.
       return:
-        type: Promise&lt;<xref uid="@azure/storage-queue.QueueCreateResponse" />&gt;
         description: Response data for the Queue create operation.
+        type: Promise&lt;<xref uid="@azure/storage-queue.QueueCreateResponse" />&gt;
   - name: 'deleteQueue(string, QueueDeleteOptions)'
     uid: '@azure/storage-queue.QueueServiceClient.deleteQueue'
     package: '@azure/storage-queue'
-    summary: Deletes the specified queue permanently.
+    summary: >-
+      Deletes the specified queue permanently.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/delete-queue3
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function deleteQueue(queueName: string, options?: QueueDeleteOptions)'
+      content: >-
+        function deleteQueue(queueName: string, options?: QueueDeleteOptions):
+        Promise<QueueDeleteResponse>
       parameters:
         - id: queueName
           type: string
@@ -177,8 +191,8 @@ methods:
           type: <xref uid="@azure/storage-queue.QueueDeleteOptions" />
           description: Options to Queue delete operation.
       return:
-        type: Promise&lt;<xref uid="@azure/storage-queue.QueueDeleteResponse" />&gt;
         description: Response data for the Queue delete operation.
+        type: Promise&lt;<xref uid="@azure/storage-queue.QueueDeleteResponse" />&gt;
   - name: 'fromConnectionString(string, StoragePipelineOptions)'
     uid: '@azure/storage-queue.QueueServiceClient.fromConnectionString'
     package: '@azure/storage-queue'
@@ -189,7 +203,7 @@ methods:
     syntax:
       content: >-
         static function fromConnectionString(connectionString: string, options?:
-        StoragePipelineOptions)
+        StoragePipelineOptions): QueueServiceClient
       parameters:
         - id: connectionString
           type: string
@@ -205,14 +219,14 @@ methods:
           type: <xref uid="@azure/storage-queue.StoragePipelineOptions" />
           description: Options to configure the HTTP pipeline.
       return:
-        type: <xref uid="@azure/storage-queue.QueueServiceClient" />
         description: A new QueueServiceClient object from the given connection string.
+        type: <xref uid="@azure/storage-queue.QueueServiceClient" />
   - name: >-
       generateAccountSasUrl(Date, AccountSASPermissions, string,
       ServiceGenerateAccountSasUrlOptions)
     uid: '@azure/storage-queue.QueueServiceClient.generateAccountSasUrl'
     package: '@azure/storage-queue'
-    summary: >
+    summary: >-
       Only available for QueueServiceClient constructed with a shared key
       credential.
 
@@ -221,6 +235,11 @@ methods:
 
       and parameters passed in. The SAS is signed by the shared key credential
       of the client.
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/create-account-sas
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -228,7 +247,7 @@ methods:
       content: >-
         function generateAccountSasUrl(expiresOn?: Date, permissions?:
         AccountSASPermissions, resourceTypes?: string, options?:
-        ServiceGenerateAccountSasUrlOptions)
+        ServiceGenerateAccountSasUrlOptions): string
       parameters:
         - id: expiresOn
           type: Date
@@ -249,10 +268,10 @@ methods:
             />
           description: Optional parameters.
       return:
-        type: string
         description: >-
           An account SAS URI consisting of the URI to the resource represented
           by this client, followed by the generated SAS token.
+        type: string
   - name: getProperties(ServiceGetPropertiesOptions)
     uid: '@azure/storage-queue.QueueServiceClient.getProperties'
     package: '@azure/storage-queue'
@@ -261,35 +280,40 @@ methods:
       properties
 
       for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-queue-service-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperties(options?: ServiceGetPropertiesOptions)'
+      content: >-
+        function getProperties(options?: ServiceGetPropertiesOptions):
+        Promise<ServiceGetPropertiesResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.ServiceGetPropertiesOptions" />
           description: Options to get properties operation.
       return:
+        description: Response data including the queue service properties.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-queue.ServiceGetPropertiesResponse" />&gt;
-        description: Response data including the queue service properties.
   - name: getQueueClient(string)
     uid: '@azure/storage-queue.QueueServiceClient.getQueueClient'
     package: '@azure/storage-queue'
-    summary: 'Creates a <xref:QueueClient> object.'
+    summary: 'Creates a <xref:@azure/storage-queue.QueueClient> object.'
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getQueueClient(queueName: string)'
+      content: 'function getQueueClient(queueName: string): QueueClient'
       parameters:
         - id: queueName
           type: string
           description: '-'
       return:
-        type: <xref uid="@azure/storage-queue.QueueClient" />
         description: >-
           a new QueueClient
 
@@ -305,6 +329,7 @@ methods:
           const createQueueResponse = await queueClient.create();
 
           ```
+        type: <xref uid="@azure/storage-queue.QueueClient" />
   - name: getStatistics(ServiceGetStatisticsOptions)
     uid: '@azure/storage-queue.QueueServiceClient.getStatistics'
     package: '@azure/storage-queue'
@@ -316,20 +341,26 @@ methods:
       geo-redundant
 
       replication is enabled for the storage account.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-queue-service-stats
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getStatistics(options?: ServiceGetStatisticsOptions)'
+      content: >-
+        function getStatistics(options?: ServiceGetStatisticsOptions):
+        Promise<ServiceGetStatisticsResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.ServiceGetStatisticsOptions" />
           description: Options to get statistics operation.
       return:
+        description: Response data for get statistics the operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-queue.ServiceGetStatisticsResponse" />&gt;
-        description: Response data for get statistics the operation.
   - name: listQueues(ServiceListQueuesOptions)
     uid: '@azure/storage-queue.QueueServiceClient.listQueues'
     package: '@azure/storage-queue'
@@ -446,17 +477,19 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listQueues(options?: ServiceListQueuesOptions)'
+      content: >-
+        function listQueues(options?: ServiceListQueuesOptions):
+        PagedAsyncIterableIterator<QueueItem, ServiceListQueuesSegmentResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-queue.ServiceListQueuesOptions" />
           description: Options to list queues operation.
       return:
+        description: An asyncIterableIterator that supports paging.
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/storage-queue.QueueItem" />, <xref
           uid="@azure/storage-queue.ServiceListQueuesSegmentResponse" />&gt;
-        description: An asyncIterableIterator that supports paging.
   - name: 'setProperties(QueueServiceProperties, ServiceGetPropertiesOptions)'
     uid: '@azure/storage-queue.QueueServiceClient.setProperties'
     package: '@azure/storage-queue'
@@ -466,13 +499,17 @@ methods:
 
       for Storage Analytics, CORS (Cross-Origin Resource Sharing) rules and soft
       delete settings.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-queue-service-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setProperties(properties: QueueServiceProperties, options?:
-        ServiceGetPropertiesOptions)
+        ServiceGetPropertiesOptions): Promise<ServiceSetPropertiesResponse>
       parameters:
         - id: properties
           type: <xref uid="@azure/storage-queue.QueueServiceProperties" />
@@ -481,8 +518,8 @@ methods:
           type: <xref uid="@azure/storage-queue.ServiceGetPropertiesOptions" />
           description: Options to set properties operation.
       return:
+        description: Response data for the Set Properties operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-queue.ServiceSetPropertiesResponse" />&gt;
-        description: Response data for the Set Properties operation.
 extends: <xref uid="@azure/storage-queue.StorageClient" />

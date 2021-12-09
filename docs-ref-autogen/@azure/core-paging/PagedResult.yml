@@ -3,7 +3,7 @@ name: PagedResult
 uid: '@azure/core-paging.PagedResult'
 package: '@azure/core-paging'
 summary: An interface that describes how to communicate with the service.
-fullName: PagedResult<TPage>
+fullName: 'PagedResult<TPage, TPageSettings, TLink>'
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -24,8 +24,8 @@ properties:
     syntax:
       content: 'byPage?: (settings?: TPageSettings) => AsyncIterableIterator<TPage>'
       return:
-        type: '(settings?: TPageSettings) =&gt; AsyncIterableIterator&lt;TPage&gt;'
         description: ''
+        type: '(settings?: TPageSettings) =&gt; AsyncIterableIterator&lt;TPage&gt;'
   - name: firstPageLink
     uid: '@azure/core-paging.PagedResult.firstPageLink'
     package: '@azure/core-paging'
@@ -37,8 +37,8 @@ properties:
     syntax:
       content: 'firstPageLink: TLink'
       return:
-        type: TLink
         description: ''
+        type: TLink
   - name: getPage
     uid: '@azure/core-paging.PagedResult.getPage'
     package: '@azure/core-paging'
@@ -48,7 +48,11 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'getPage: (pageLink: TLink, maxPageSize?: number) => Promise<Object>'
+      content: >-
+        getPage: (pageLink: TLink, maxPageSize?: number) => Promise<{
+        nextPageLink?: TLink, page: TPage }>
       return:
-        type: '(pageLink: TLink, maxPageSize?: number) =&gt; Promise&lt;Object&gt;'
         description: ''
+        type: >-
+          (pageLink: TLink, maxPageSize?: number) =&gt; Promise&lt;{
+          nextPageLink?: TLink, page: TPage }&gt;

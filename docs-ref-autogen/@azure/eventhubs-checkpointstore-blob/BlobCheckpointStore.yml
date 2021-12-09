@@ -37,14 +37,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function claimOwnership(partitionOwnership: PartitionOwnership[])'
+      content: >-
+        function claimOwnership(partitionOwnership: PartitionOwnership[]):
+        Promise<PartitionOwnership[]>
       parameters:
         - id: partitionOwnership
           type: 'PartitionOwnership[]'
           description: The list of partition ownership this instance is claiming to own.
       return:
-        type: 'Promise&lt;PartitionOwnership[]&gt;'
         description: A list partitions this instance successfully claimed ownership.
+        type: 'Promise&lt;PartitionOwnership[]&gt;'
   - name: 'listCheckpoints(string, string, string)'
     uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.listCheckpoints'
     package: '@azure/eventhubs-checkpointstore-blob'
@@ -57,7 +59,7 @@ methods:
     syntax:
       content: >-
         function listCheckpoints(fullyQualifiedNamespace: string, eventHubName:
-        string, consumerGroup: string)
+        string, consumerGroup: string): Promise<Checkpoint[]>
       parameters:
         - id: fullyQualifiedNamespace
           type: string
@@ -74,8 +76,8 @@ methods:
           description: |
             The consumer group name.
       return:
-        type: 'Promise&lt;Checkpoint[]&gt;'
         description: ''
+        type: 'Promise&lt;Checkpoint[]&gt;'
   - name: 'listOwnership(string, string, string)'
     uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.listOwnership'
     package: '@azure/eventhubs-checkpointstore-blob'
@@ -94,7 +96,7 @@ methods:
     syntax:
       content: >-
         function listOwnership(fullyQualifiedNamespace: string, eventHubName:
-        string, consumerGroup: string)
+        string, consumerGroup: string): Promise<PartitionOwnership[]>
       parameters:
         - id: fullyQualifiedNamespace
           type: string
@@ -110,10 +112,10 @@ methods:
           type: string
           description: The consumer group name.
       return:
-        type: 'Promise&lt;PartitionOwnership[]&gt;'
         description: >-
           Partition ownership details of all the partitions that have had an
           owner.
+        type: 'Promise&lt;PartitionOwnership[]&gt;'
   - name: updateCheckpoint(Checkpoint)
     uid: '@azure/eventhubs-checkpointstore-blob.BlobCheckpointStore.updateCheckpoint'
     package: '@azure/eventhubs-checkpointstore-blob'
@@ -122,11 +124,11 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function updateCheckpoint(checkpoint: Checkpoint)'
+      content: 'function updateCheckpoint(checkpoint: Checkpoint): Promise<void>'
       parameters:
         - id: checkpoint
           type: Checkpoint
           description: The checkpoint.
       return:
-        type: Promise&lt;void&gt;
         description: The new etag on successful update.
+        type: Promise&lt;void&gt;

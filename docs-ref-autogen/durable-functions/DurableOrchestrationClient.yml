@@ -40,8 +40,8 @@ properties:
     syntax:
       content: 'taskHubName: string'
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: 'createCheckStatusResponse(IHttpRequest | HttpRequest | undefined, string)'
     uid: durable-functions.DurableOrchestrationClient.createCheckStatusResponse
@@ -55,7 +55,7 @@ methods:
     syntax:
       content: >-
         function createCheckStatusResponse(request: IHttpRequest | HttpRequest |
-        undefined, instanceId: string)
+        undefined, instanceId: string): IHttpResponse
       parameters:
         - id: request
           type: >-
@@ -68,10 +68,10 @@ methods:
           type: string
           description: The ID of the orchestration instance to check.
       return:
-        type: <xref uid="durable-functions.IHttpResponse" />
         description: |-
           An HTTP 202 response with a Location header and a payload
            containing instance management URLs.
+        type: <xref uid="durable-functions.IHttpResponse" />
   - name: createHttpManagementPayload(string)
     uid: durable-functions.DurableOrchestrationClient.createHttpManagementPayload
     package: durable-functions
@@ -82,15 +82,17 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createHttpManagementPayload(instanceId: string)'
+      content: >-
+        function createHttpManagementPayload(instanceId: string):
+        HttpManagementPayload
       parameters:
         - id: instanceId
           type: string
           description: |
             The ID of the orchestration instance to check.
       return:
-        type: <xref uid="durable-functions.HttpManagementPayload" />
         description: ''
+        type: <xref uid="durable-functions.HttpManagementPayload" />
   - name: 'getStatus(string, boolean, boolean, boolean)'
     uid: durable-functions.DurableOrchestrationClient.getStatus
     package: durable-functions
@@ -101,7 +103,8 @@ methods:
     syntax:
       content: >-
         function getStatus(instanceId: string, showHistory?: boolean,
-        showHistoryOutput?: boolean, showInput?: boolean)
+        showHistoryOutput?: boolean, showInput?: boolean):
+        Promise<DurableOrchestrationStatus>
       parameters:
         - id: instanceId
           type: string
@@ -120,10 +123,10 @@ methods:
           type: boolean
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="durable-functions.DurableOrchestrationStatus"
           />&gt;
-        description: ''
   - name: getStatusAll()
     uid: durable-functions.DurableOrchestrationClient.getStatusAll
     package: durable-functions
@@ -132,12 +135,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getStatusAll()
+      content: 'function getStatusAll(): Promise<DurableOrchestrationStatus[]>'
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="durable-functions.DurableOrchestrationStatus"
           />[]&gt;
-        description: ''
   - name: >-
       getStatusBy(Date | undefined, Date | undefined,
       OrchestrationRuntimeStatus[])
@@ -152,7 +155,8 @@ methods:
     syntax:
       content: >-
         function getStatusBy(createdTimeFrom: Date | undefined, createdTimeTo:
-        Date | undefined, runtimeStatus: OrchestrationRuntimeStatus[])
+        Date | undefined, runtimeStatus: OrchestrationRuntimeStatus[]):
+        Promise<DurableOrchestrationStatus[]>
       parameters:
         - id: createdTimeFrom
           type: Date | undefined
@@ -170,10 +174,10 @@ methods:
             Return orchestration instances which match any of
              the runtimeStatus values in this array.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="durable-functions.DurableOrchestrationStatus"
           />[]&gt;
-        description: ''
   - name: purgeInstanceHistory(string)
     uid: durable-functions.DurableOrchestrationClient.purgeInstanceHistory
     package: durable-functions
@@ -182,15 +186,17 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function purgeInstanceHistory(instanceId: string)'
+      content: >-
+        function purgeInstanceHistory(instanceId: string):
+        Promise<PurgeHistoryResult>
       parameters:
         - id: instanceId
           type: string
           description: |
             The ID of the orchestration instance to purge.
       return:
-        type: Promise&lt;<xref uid="durable-functions.PurgeHistoryResult" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="durable-functions.PurgeHistoryResult" />&gt;
   - name: 'purgeInstanceHistoryBy(Date, Date, OrchestrationRuntimeStatus[])'
     uid: durable-functions.DurableOrchestrationClient.purgeInstanceHistoryBy
     package: durable-functions
@@ -201,7 +207,8 @@ methods:
     syntax:
       content: >-
         function purgeInstanceHistoryBy(createdTimeFrom: Date, createdTimeTo?:
-        Date, runtimeStatus?: OrchestrationRuntimeStatus[])
+        Date, runtimeStatus?: OrchestrationRuntimeStatus[]):
+        Promise<PurgeHistoryResult>
       parameters:
         - id: createdTimeFrom
           type: Date
@@ -219,8 +226,8 @@ methods:
             List of runtime statuses for querying instances for
              purging. Only Completed, Terminated or Failed will be processed.
       return:
-        type: Promise&lt;<xref uid="durable-functions.PurgeHistoryResult" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="durable-functions.PurgeHistoryResult" />&gt;
   - name: 'raiseEvent(string, string, unknown, string, string)'
     uid: durable-functions.DurableOrchestrationClient.raiseEvent
     package: durable-functions
@@ -231,7 +238,7 @@ methods:
     syntax:
       content: >-
         function raiseEvent(instanceId: string, eventName: string, eventData:
-        unknown, taskHubName?: string, connectionName?: string)
+        unknown, taskHubName?: string, connectionName?: string): Promise<void>
       parameters:
         - id: instanceId
           type: string
@@ -255,7 +262,6 @@ methods:
             The name of the connection string associated with
              `taskHubName.`
       return:
-        type: Promise&lt;void&gt;
         description: >-
           A promise that resolves when the event notification message has
            been enqueued.
@@ -271,6 +277,7 @@ methods:
           If the specified instance is not found or not running, this operation
 
           will have no effect.
+        type: Promise&lt;void&gt;
   - name: 'readEntityState<T>(EntityId, string, string)'
     uid: durable-functions.DurableOrchestrationClient.readEntityState
     package: durable-functions
@@ -284,7 +291,7 @@ methods:
     syntax:
       content: >-
         function readEntityState<T>(entityId: EntityId, taskHubName?: string,
-        connectionName?: string)
+        connectionName?: string): Promise<EntityStateResponse<T>>
       parameters:
         - id: entityId
           type: <xref uid="durable-functions.EntityId" />
@@ -298,10 +305,10 @@ methods:
             The name of the connection string associated with
             [taskHubName].
       return:
+        description: A response containing the current state of the entity.
         type: >-
           Promise&lt;<xref uid="durable-functions.EntityStateResponse"
           />&lt;T&gt;&gt;
-        description: A response containing the current state of the entity.
   - name: 'rewind(string, string, string, string)'
     uid: durable-functions.DurableOrchestrationClient.rewind
     package: durable-functions
@@ -312,7 +319,7 @@ methods:
     syntax:
       content: >-
         function rewind(instanceId: string, reason: string, taskHubName?:
-        string, connectionName?: string)
+        string, connectionName?: string): Promise<void>
       parameters:
         - id: instanceId
           type: string
@@ -327,11 +334,11 @@ methods:
           type: string
           description: ''
       return:
-        type: Promise&lt;void&gt;
         description: |-
           A promise that resolves when the rewind message is enqueued.
 
           This feature is currently in preview.
+        type: Promise&lt;void&gt;
   - name: 'signalEntity(EntityId, string, unknown, string, string)'
     uid: durable-functions.DurableOrchestrationClient.signalEntity
     package: durable-functions
@@ -343,7 +350,7 @@ methods:
       content: >-
         function signalEntity(entityId: EntityId, operationName?: string,
         operationContent?: unknown, taskHubName?: string, connectionName?:
-        string)
+        string): Promise<void>
       parameters:
         - id: entityId
           type: <xref uid="durable-functions.EntityId" />
@@ -362,8 +369,8 @@ methods:
           description: |
             The name of the connection string associated with [taskHubName].
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: 'startNew(string, string, unknown)'
     uid: durable-functions.DurableOrchestrationClient.startNew
     package: durable-functions
@@ -377,7 +384,7 @@ methods:
     syntax:
       content: >-
         function startNew(orchestratorFunctionName: string, instanceId?: string,
-        input?: unknown)
+        input?: unknown): Promise<string>
       parameters:
         - id: orchestratorFunctionName
           type: string
@@ -396,8 +403,8 @@ methods:
             JSON-serializable input value for the orchestrator
              function.
       return:
-        type: Promise&lt;string&gt;
         description: The ID of the new orchestration instance.
+        type: Promise&lt;string&gt;
   - name: 'terminate(string, string)'
     uid: durable-functions.DurableOrchestrationClient.terminate
     package: durable-functions
@@ -406,7 +413,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function terminate(instanceId: string, reason: string)'
+      content: 'function terminate(instanceId: string, reason: string): Promise<void>'
       parameters:
         - id: instanceId
           type: string
@@ -415,13 +422,13 @@ methods:
           type: string
           description: The reason for terminating the orchestration instance.
       return:
-        type: Promise&lt;void&gt;
         description: |-
           A promise that resolves when the terminate message is enqueued.
 
           Terminating an orchestration instance has no effect on any in-flight
           activity function executions or sub-orchestrations that were started
           by the current orchestration instance.
+        type: Promise&lt;void&gt;
   - name: >-
       waitForCompletionOrCreateCheckStatusResponse(HttpRequest, string, number,
       number)
@@ -442,7 +449,7 @@ methods:
       content: >-
         function waitForCompletionOrCreateCheckStatusResponse(request:
         HttpRequest, instanceId: string, timeoutInMilliseconds?: number,
-        retryIntervalInMilliseconds?: number)
+        retryIntervalInMilliseconds?: number): Promise<IHttpResponse>
       parameters:
         - id: request
           type: HttpRequest
@@ -461,5 +468,5 @@ methods:
             The timeout between checks for output
              from the durable function. The default value is 1 second.
       return:
-        type: Promise&lt;<xref uid="durable-functions.IHttpResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="durable-functions.IHttpResponse" />&gt;

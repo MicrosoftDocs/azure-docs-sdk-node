@@ -1,24 +1,23 @@
 ---
 title: Azure AppPlatformManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-appplatform, appplatform
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/27/2021
+keywords: Azure, javascript, SDK, API, @azure/arm-appplatform, springcloud
+author: qiaozha
+ms.author: qiaozha
+ms.date: 12/13/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: appplatform
+ms.service: springcloud
 ---
-
-# Azure AppPlatformManagement client library for JavaScript - Version 2.0.0-beta.1 
+# Azure AppPlatformManagement client library for JavaScript - Version 2.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure AppPlatformManagement client.
 
 REST API for Azure Spring Cloud
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appplatform_2.0.0-beta.1/sdk/appplatform/arm-appplatform) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appplatform_2.0.0-beta.2/sdk/appplatform/arm-appplatform) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-appplatform) |
 [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-appplatform) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -47,7 +46,7 @@ npm install @azure/arm-appplatform
 To create a client object to access the Azure AppPlatformManagement API, you will need the `endpoint` of your Azure AppPlatformManagement resource and a `credential`. The Azure AppPlatformManagement client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure AppPlatformManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-appplatform_2.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-appplatform_2.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -67,6 +66,10 @@ const subscriptionId = "00000000-0000-0000-0000-000000000000";
 const client = new AppPlatformManagementClient(new DefaultAzureCredential(), subscriptionId);
 ```
 
+
+### JavaScript Bundle
+To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
+
 ## Key concepts
 
 ### AppPlatformManagementClient
@@ -84,7 +87,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appplatform_2.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appplatform_2.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
@@ -92,7 +95,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-appplatform_2.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-appplatform_2.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -104,6 +107,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appplatform_2.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appplatform_2.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appplatform_2.0.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-appplatform_2.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

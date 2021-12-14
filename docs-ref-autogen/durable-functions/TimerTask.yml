@@ -2,12 +2,51 @@
 name: TimerTask
 uid: durable-functions.TimerTask
 package: durable-functions
-summary: |
+summary: |+
   Returned from [[DurableOrchestrationClient]].[[createTimer]] if the call is
   not `yield`-ed. Represents a pending timer. See documentation on [[Task]]
   for more information.
   All pending timers must be completed or canceled for an orchestration to
   complete.
+
+
+  **Example**
+
+  Cancel a timer
+  ```javascript
+  // calculate expiration date
+  const timeoutTask = context.df.createTimer(expirationDate);
+
+  // do some work
+
+  if (!timeoutTask.isCompleted) {
+      timeoutTask.cancel();
+  }
+  ```
+
+
+
+  **Example**
+
+  Create a timeout
+  ```javascript
+  const now = Date.now();
+  const expiration = new Date(now.valueOf()).setMinutes(now.getMinutes() + 30);
+
+  const timeoutTask = context.df.createTimer(expirationDate);
+  const otherTask = context.df.callActivity("DoWork");
+
+  const winner = yield context.df.Task.any([timeoutTask, otherTask]);
+
+  if (winner === otherTask) {
+      // do some more work
+  }
+
+  if (!timeoutTask.isCompleted) {
+      timeoutTask.cancel();
+  }
+  ```
+
 fullName: TimerTask
 remarks: ''
 isPreview: false
@@ -28,8 +67,8 @@ properties:
     syntax:
       content: 'exception?: Error | undefined'
       return:
-        type: Error | undefined
         description: ''
+        type: Error | undefined
   - name: isCanceled
     uid: durable-functions.TimerTask.isCanceled
     package: durable-functions
@@ -41,8 +80,8 @@ properties:
     syntax:
       content: boolean isCanceled
       return:
-        type: boolean
         description: Whether or not the timer has been canceled.
+        type: boolean
   - name: isCompleted
     uid: durable-functions.TimerTask.isCompleted
     package: durable-functions
@@ -56,8 +95,8 @@ properties:
     syntax:
       content: 'isCompleted: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: isFaulted
     uid: durable-functions.TimerTask.isFaulted
     package: durable-functions
@@ -69,8 +108,8 @@ properties:
     syntax:
       content: 'isFaulted: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: result
     uid: durable-functions.TimerTask.result
     package: durable-functions
@@ -82,8 +121,8 @@ properties:
     syntax:
       content: 'result?: unknown'
       return:
-        type: unknown
         description: ''
+        type: unknown
 methods:
   - name: cancel()
     uid: durable-functions.TimerTask.cancel

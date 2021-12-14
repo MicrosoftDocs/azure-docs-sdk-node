@@ -23,10 +23,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function fetchAll()
+      content: 'function fetchAll(): Promise<FeedResponse<T>>'
       return:
-        type: Promise&lt;<xref uid="@azure/cosmos.FeedResponse" />&lt;T&gt;&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.FeedResponse" />&lt;T&gt;&gt;
   - name: fetchNext()
     uid: '@azure/cosmos.QueryIterator.fetchNext'
     package: '@azure/cosmos'
@@ -44,36 +44,60 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function fetchNext()
+      content: 'function fetchNext(): Promise<FeedResponse<T>>'
       return:
-        type: Promise&lt;<xref uid="@azure/cosmos.FeedResponse" />&lt;T&gt;&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.FeedResponse" />&lt;T&gt;&gt;
   - name: getAsyncIterator()
     uid: '@azure/cosmos.QueryIterator.getAsyncIterator'
     package: '@azure/cosmos'
-    summary: |
+    summary: >+
       Gets an async iterator that will yield results until completion.
+
       NOTE: AsyncIterators are a very new feature and you might need to
+
       use polyfils/etc. in order to use them in your code.
 
+
       If you're using TypeScript, you can use the following polyfill as long
+
       as you target ES6 or higher and are running on Node 6 or higher.
 
+
       ```typescript
+
       if (!Symbol || !Symbol.asyncIterator) {
         (Symbol as any).asyncIterator = Symbol.for("Symbol.asyncIterator");
       }
+
       ```
+
+
+
+      **Example**
+
+
+      Iterate over all databases
+
+      ```typescript
+
+      for await(const { resources: db } of
+      client.databases.readAll().getAsyncIterator()) {
+        console.log(`Got ${db} from AsyncIterator`);
+      }
+
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getAsyncIterator()
+      content: 'function getAsyncIterator(): AsyncIterable<FeedResponse<T>>'
       return:
+        description: ''
         type: >-
           AsyncIterable&lt;<xref uid="@azure/cosmos.FeedResponse"
           />&lt;T&gt;&gt;
-        description: ''
   - name: hasMoreResults()
     uid: '@azure/cosmos.QueryIterator.hasMoreResults'
     package: '@azure/cosmos'
@@ -86,10 +110,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function hasMoreResults()
+      content: 'function hasMoreResults(): boolean'
       return:
-        type: boolean
         description: true if there is other elements to process in the QueryIterator.
+        type: boolean
   - name: reset()
     uid: '@azure/cosmos.QueryIterator.reset'
     package: '@azure/cosmos'

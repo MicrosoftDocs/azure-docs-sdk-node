@@ -45,8 +45,8 @@ properties:
     syntax:
       content: Connection connection
       return:
-        type: Connection
         description: Connection.
+        type: Connection
   - name: receiver
     uid: '@azure/core-amqp.RequestResponseLink.receiver'
     package: '@azure/core-amqp'
@@ -58,8 +58,8 @@ properties:
     syntax:
       content: 'receiver: Receiver'
       return:
-        type: Receiver
         description: ''
+        type: Receiver
   - name: sender
     uid: '@azure/core-amqp.RequestResponseLink.sender'
     package: '@azure/core-amqp'
@@ -71,8 +71,8 @@ properties:
     syntax:
       content: 'sender: Sender'
       return:
-        type: Sender
         description: ''
+        type: Sender
   - name: session
     uid: '@azure/core-amqp.RequestResponseLink.session'
     package: '@azure/core-amqp'
@@ -84,8 +84,8 @@ properties:
     syntax:
       content: 'session: Session'
       return:
-        type: Session
         description: ''
+        type: Session
 methods:
   - name: close()
     uid: '@azure/core-amqp.RequestResponseLink.close'
@@ -95,11 +95,13 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function close()
+      content: 'function close(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void>
-  - name: 'create(Connection, SenderOptions, ReceiverOptions, Object)'
+        type: Promise&lt;void&gt;
+  - name: >-
+      create(Connection, SenderOptions, ReceiverOptions, { abortSignal?:
+      AbortSignalLike })
     uid: '@azure/core-amqp.RequestResponseLink.create'
     package: '@azure/core-amqp'
     summary: Creates an amqp request/response link.
@@ -109,7 +111,8 @@ methods:
     syntax:
       content: >-
         static function create(connection: Connection, senderOptions:
-        SenderOptions, receiverOptions: ReceiverOptions, createOptions?: Object)
+        SenderOptions, receiverOptions: ReceiverOptions, createOptions?: {
+        abortSignal?: AbortSignalLike }): Promise<RequestResponseLink>
       parameters:
         - id: connection
           type: Connection
@@ -121,14 +124,14 @@ methods:
           type: ReceiverOptions
           description: Options that must be provided to create the receiver link.
         - id: createOptions
-          type: Object
+          type: '{ abortSignal?: AbortSignalLike }'
           description: >-
             Optional parameters that can be used to affect this method's
             behavior.
                For example, `abortSignal` can be passed to allow cancelling an in-progress `create` invocation.
       return:
-        type: Promise&lt;<xref uid="@azure/core-amqp.RequestResponseLink" />&gt;
         description: Promise<RequestResponseLink>
+        type: Promise&lt;<xref uid="@azure/core-amqp.RequestResponseLink" />&gt;
   - name: isOpen()
     uid: '@azure/core-amqp.RequestResponseLink.isOpen'
     package: '@azure/core-amqp'
@@ -139,10 +142,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function isOpen()
+      content: 'function isOpen(): boolean'
       return:
-        type: boolean
         description: 'boolean - `true` - `open`, `false` - `closed`.'
+        type: boolean
   - name: remove()
     uid: '@azure/core-amqp.RequestResponseLink.remove'
     package: '@azure/core-amqp'
@@ -165,7 +168,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function sendRequest(request: Message, options?: SendRequestOptions)'
+      content: >-
+        function sendRequest(request: Message, options?: SendRequestOptions):
+        Promise<Message>
       parameters:
         - id: request
           type: Message
@@ -174,5 +179,5 @@ methods:
           type: <xref uid="@azure/core-amqp.SendRequestOptions" />
           description: Options that can be provided while sending a request.
       return:
-        type: Promise&lt;Message&gt;
         description: Promise<Message> The AMQP (response) message.
+        type: Promise&lt;Message&gt;

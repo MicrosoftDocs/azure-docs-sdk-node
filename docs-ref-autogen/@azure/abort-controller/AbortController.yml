@@ -2,11 +2,75 @@
 name: AbortController
 uid: '@azure/abort-controller.AbortController'
 package: '@azure/abort-controller'
-summary: >-
+summary: >+
   An AbortController provides an AbortSignal and the associated controls to
   signal
 
   that an asynchronous operation should be aborted.
+
+
+  **Example**
+
+
+  Abort an operation when another event fires
+
+  ```ts
+
+  const controller = new AbortController();
+
+  const signal = controller.signal;
+
+  doAsyncWork(signal);
+
+  button.addEventListener('click', () => controller.abort());
+
+  ```
+
+
+
+
+  **Example**
+
+
+  Share aborter cross multiple operations in 30s
+
+  ```ts
+
+  // Upload the same data to 2 different data centers at the same time,
+
+  // abort another when any of them is finished
+
+  const controller = AbortController.withTimeout(30 * 1000);
+
+  doAsyncWork(controller.signal).then(controller.abort);
+
+  doAsyncWork(controller.signal).then(controller.abort);
+
+  ```
+
+
+
+
+  **Example**
+
+
+  Cascaded aborting
+
+  ```ts
+
+  // All operations can't take more than 30 seconds
+
+  const aborter = Aborter.timeout(30 * 1000);
+
+
+  // Following 2 operations can't take more than 25 seconds
+
+  await doAsyncWork(aborter.withTimeout(25 * 1000));
+
+  await doAsyncWork(aborter.withTimeout(25 * 1000));
+
+  ```
+
 fullName: AbortController
 remarks: ''
 isPreview: false
@@ -57,8 +121,8 @@ properties:
     syntax:
       content: AbortSignal signal
       return:
-        type: <xref uid="@azure/abort-controller.AbortSignal" />
         description: ''
+        type: <xref uid="@azure/abort-controller.AbortSignal" />
 methods:
   - name: abort()
     uid: '@azure/abort-controller.AbortController.abort'
@@ -81,12 +145,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static function timeout(ms: number)'
+      content: 'static function timeout(ms: number): AbortSignal'
       parameters:
         - id: ms
           type: number
           description: |
             Elapsed time in milliseconds to trigger an abort.
       return:
-        type: <xref uid="@azure/abort-controller.AbortSignal" />
         description: ''
+        type: <xref uid="@azure/abort-controller.AbortSignal" />

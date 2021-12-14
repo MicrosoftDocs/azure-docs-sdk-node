@@ -91,8 +91,8 @@ properties:
     syntax:
       content: 'endpoint: string'
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: 'deleteRepository(string, DeleteRepositoryOptions)'
     uid: '@azure/container-registry.ContainerRegistryClient.deleteRepository'
@@ -106,7 +106,7 @@ methods:
     syntax:
       content: >-
         function deleteRepository(repositoryName: string, options?:
-        DeleteRepositoryOptions)
+        DeleteRepositoryOptions): Promise<void>
       parameters:
         - id: repositoryName
           type: string
@@ -116,19 +116,22 @@ methods:
           description: |
             optional configuration for the operation
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: 'getArtifact(string, string)'
     uid: '@azure/container-registry.ContainerRegistryClient.getArtifact'
     package: '@azure/container-registry'
     summary: >-
-      Returns an instance of <xref:RegistryArtifact> for calling service methods
-      related to the artifact specified by `repositoryName` and `tagOrDigest`.
+      Returns an instance of <xref:@azure/container-registry.RegistryArtifact>
+      for calling service methods related to the artifact specified by
+      `repositoryName` and `tagOrDigest`.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getArtifact(repositoryName: string, tagOrDigest: string)'
+      content: >-
+        function getArtifact(repositoryName: string, tagOrDigest: string):
+        RegistryArtifact
       parameters:
         - id: repositoryName
           type: string
@@ -138,27 +141,28 @@ methods:
           description: |
             tag or digest of the artifact to retrieve
       return:
-        type: <xref uid="@azure/container-registry.RegistryArtifact" />
         description: ''
+        type: <xref uid="@azure/container-registry.RegistryArtifact" />
   - name: getRepository(string)
     uid: '@azure/container-registry.ContainerRegistryClient.getRepository'
     package: '@azure/container-registry'
     summary: >-
-      Returns an instance of <xref:ContainerRepository> for calling service
+      Returns an instance of
+      <xref:@azure/container-registry.ContainerRepository> for calling service
       methods related to the repository specified by `repositoryName`.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getRepository(repositoryName: string)'
+      content: 'function getRepository(repositoryName: string): ContainerRepository'
       parameters:
         - id: repositoryName
           type: string
           description: |
             the name of repository
       return:
-        type: <xref uid="@azure/container-registry.ContainerRepository" />
         description: ''
+        type: <xref uid="@azure/container-registry.ContainerRepository" />
   - name: listRepositoryNames(ListRepositoriesOptions)
     uid: '@azure/container-registry.ContainerRegistryClient.listRepositoryNames'
     package: '@azure/container-registry'
@@ -222,14 +226,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listRepositoryNames(options?: ListRepositoriesOptions)'
+      content: >-
+        function listRepositoryNames(options?: ListRepositoriesOptions):
+        PagedAsyncIterableIterator<string, RepositoryPageResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/container-registry.ListRepositoriesOptions" />
           description: |
             -
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;string, <xref
           uid="@azure/container-registry.RepositoryPageResponse" />&gt;
-        description: ''

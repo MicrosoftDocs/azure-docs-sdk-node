@@ -2,7 +2,7 @@
 name: Task
 uid: durable-functions.Task
 package: durable-functions
-summary: |
+summary: |+
   Represents some pending action. Similar to a native JavaScript promise in
   that it acts as a placeholder for outstanding asynchronous work, but has
   a synchronous implementation and is specific to Durable Functions.
@@ -13,6 +13,36 @@ summary: |
 
   We discourage the usage of `instanceof`-style guards on this type,
   as it is subject to change in the future.
+
+
+  **Example**
+
+  Wait for all parallel operations to complete
+  ```javascript
+  const operations = context.df.callActivity("GetOperations");
+
+  const tasks = [];
+  for (const operation of operations) {
+      tasks.push(context.df.callActivity("DoOperation", operation));
+  }
+
+  const results = yield context.df.Task.all(tasks);
+  ```
+
+
+
+  **Example**
+
+  Return the result of the first of two operations to complete
+  ```javascript
+  const taskA = context.df.callActivity("DoWorkA");
+  const taskB = context.df.callActivity("DoWorkB");
+
+  const firstDone = yield context.df.Task.any([taskA, taskB]);
+
+  return firstDone.result;
+  ```
+
 fullName: Task
 remarks: ''
 isPreview: false
@@ -33,8 +63,8 @@ properties:
     syntax:
       content: 'exception?: Error | undefined'
       return:
-        type: Error | undefined
         description: ''
+        type: Error | undefined
   - name: isCompleted
     uid: durable-functions.Task.isCompleted
     package: durable-functions
@@ -48,8 +78,8 @@ properties:
     syntax:
       content: 'isCompleted: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: isFaulted
     uid: durable-functions.Task.isFaulted
     package: durable-functions
@@ -61,8 +91,8 @@ properties:
     syntax:
       content: 'isFaulted: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: result
     uid: durable-functions.Task.result
     package: durable-functions
@@ -74,5 +104,5 @@ properties:
     syntax:
       content: 'result?: unknown'
       return:
-        type: unknown
         description: ''
+        type: unknown

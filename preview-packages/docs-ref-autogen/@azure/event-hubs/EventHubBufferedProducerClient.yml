@@ -234,8 +234,8 @@ properties:
     syntax:
       content: string eventHubName
       return:
-        type: string
         description: ''
+        type: string
   - name: fullyQualifiedNamespace
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.fullyQualifiedNamespace'
     package: '@azure/event-hubs'
@@ -247,8 +247,8 @@ properties:
     syntax:
       content: string fullyQualifiedNamespace
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: close(BufferedCloseOptions)
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.close'
@@ -268,14 +268,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function close(options?: BufferedCloseOptions)'
+      content: 'function close(options?: BufferedCloseOptions): Promise<void>'
       parameters:
         - id: options
           type: <xref uid="@azure/event-hubs.BufferedCloseOptions" />
           description: The set of options to apply to the operation call.
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void>
+        type: Promise&lt;void&gt;
   - name: 'enqueueEvent(EventData | AmqpAnnotatedMessage, EnqueueEventOptions)'
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.enqueueEvent'
     package: '@azure/event-hubs'
@@ -300,7 +300,7 @@ methods:
     syntax:
       content: >-
         function enqueueEvent(event: EventData | AmqpAnnotatedMessage, options?:
-        EnqueueEventOptions)
+        EnqueueEventOptions): Promise<number>
       parameters:
         - id: event
           type: <xref uid="@azure/event-hubs.EventData" /> | AmqpAnnotatedMessage
@@ -321,10 +321,10 @@ methods:
             - `partitionKey` : A value that is hashed to produce a partition
             assignment. If set, `partitionId` can not be set.
       return:
-        type: Promise&lt;number&gt;
         description: >-
           The total number of events that are currently buffered and waiting to
           be published, across all partitions.
+        type: Promise&lt;number&gt;
   - name: 'enqueueEvents(EventData[] | AmqpAnnotatedMessage[], EnqueueEventOptions)'
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.enqueueEvents'
     package: '@azure/event-hubs'
@@ -349,13 +349,15 @@ methods:
     syntax:
       content: >-
         function enqueueEvents(events: EventData[] | AmqpAnnotatedMessage[],
-        options?: EnqueueEventOptions)
+        options?: EnqueueEventOptions): Promise<number>
       parameters:
         - id: events
           type: >-
             <xref uid="@azure/event-hubs.EventData" />[] |
             AmqpAnnotatedMessage[]
-          description: 'An array of <xref:EventData> or `AmqpAnnotatedMessage`.'
+          description: >-
+            An array of <xref:@azure/event-hubs.EventData> or
+            `AmqpAnnotatedMessage`.
         - id: options
           type: <xref uid="@azure/event-hubs.EnqueueEventOptions" />
           description: >-
@@ -372,10 +374,10 @@ methods:
             - `partitionKey` : A value that is hashed to produce a partition
             assignment. If set, `partitionId` can not be set.
       return:
-        type: Promise&lt;number&gt;
         description: >-
           The total number of events that are currently buffered and waiting to
           be published, across all partitions.
+        type: Promise&lt;number&gt;
   - name: flush(BufferedFlushOptions)
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.flush'
     package: '@azure/event-hubs'
@@ -388,15 +390,15 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function flush(options?: BufferedFlushOptions)'
+      content: 'function flush(options?: BufferedFlushOptions): Promise<void>'
       parameters:
         - id: options
           type: <xref uid="@azure/event-hubs.BufferedFlushOptions" />
           description: |
             The set of options to apply to the operation call.
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: getEventHubProperties(GetEventHubPropertiesOptions)
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.getEventHubProperties'
     package: '@azure/event-hubs'
@@ -405,14 +407,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getEventHubProperties(options?: GetEventHubPropertiesOptions)'
+      content: >-
+        function getEventHubProperties(options?: GetEventHubPropertiesOptions):
+        Promise<EventHubProperties>
       parameters:
         - id: options
           type: <xref uid="@azure/event-hubs.GetEventHubPropertiesOptions" />
           description: The set of options to apply to the operation call.
       return:
-        type: Promise&lt;<xref uid="@azure/event-hubs.EventHubProperties" />&gt;
         description: A promise that resolves with information about the Event Hub instance.
+        type: Promise&lt;<xref uid="@azure/event-hubs.EventHubProperties" />&gt;
   - name: getPartitionIds(GetPartitionIdsOptions)
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.getPartitionIds'
     package: '@azure/event-hubs'
@@ -421,18 +425,20 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getPartitionIds(options?: GetPartitionIdsOptions)'
+      content: >-
+        function getPartitionIds(options?: GetPartitionIdsOptions):
+        Promise<Array<string>>
       parameters:
         - id: options
           type: <xref uid="@azure/event-hubs.GetPartitionIdsOptions" />
           description: The set of options to apply to the operation call.
       return:
-        type: Promise&lt;Array&lt;string&gt;&gt;
         description: >-
           A promise that resolves with an Array of strings representing the id
           for
 
           each partition associated with the Event Hub.
+        type: Promise&lt;Array&lt;string&gt;&gt;
   - name: 'getPartitionProperties(string, GetPartitionPropertiesOptions)'
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.getPartitionProperties'
     package: '@azure/event-hubs'
@@ -443,7 +449,7 @@ methods:
     syntax:
       content: >-
         function getPartitionProperties(partitionId: string, options?:
-        GetPartitionPropertiesOptions)
+        GetPartitionPropertiesOptions): Promise<PartitionProperties>
       parameters:
         - id: partitionId
           type: string
@@ -452,7 +458,7 @@ methods:
           type: <xref uid="@azure/event-hubs.GetPartitionPropertiesOptions" />
           description: The set of options to apply to the operation call.
       return:
-        type: Promise&lt;<xref uid="@azure/event-hubs.PartitionProperties" />&gt;
         description: >-
           A promise that resolves with information about the state of the
           partition .
+        type: Promise&lt;<xref uid="@azure/event-hubs.PartitionProperties" />&gt;

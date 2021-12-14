@@ -3,8 +3,9 @@ name: BlobLeaseClient
 uid: '@azure/storage-blob.BlobLeaseClient'
 package: '@azure/storage-blob'
 summary: >-
-  A client that manages leases for a <xref:ContainerClient> or a
-  <xref:BlobClient>.
+  A client that manages leases for a
+  <xref:@azure/storage-blob.BlobServiceClient.getContainerClient> or a
+  <xref:@azure/storage-blob.AppendBlobClient>.
 fullName: BlobLeaseClient
 remarks: ''
 isPreview: false
@@ -44,8 +45,8 @@ properties:
     syntax:
       content: string leaseId
       return:
-        type: string
         description: ''
+        type: string
   - name: url
     uid: '@azure/storage-blob.BlobLeaseClient.url'
     package: '@azure/storage-blob'
@@ -57,8 +58,8 @@ properties:
     syntax:
       content: string url
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: 'acquireLease(number, LeaseOperationOptions)'
     uid: '@azure/storage-blob.BlobLeaseClient.acquireLease'
@@ -70,11 +71,22 @@ methods:
       for write and delete operations.
 
       The lock duration can be 15 to 60 seconds, or can be infinite.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/lease-container
+
+      and
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/lease-blob
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function acquireLease(duration: number, options?: LeaseOperationOptions)'
+      content: >-
+        function acquireLease(duration: number, options?:
+        LeaseOperationOptions): Promise<LeaseOperationResponse>
       parameters:
         - id: duration
           type: number
@@ -83,23 +95,33 @@ methods:
           type: <xref uid="@azure/storage-blob.LeaseOperationOptions" />
           description: option to configure lease management operations.
       return:
+        description: Response data for acquire lease operation.
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.LeaseOperationResponse"
           />&gt;
-        description: Response data for acquire lease operation.
   - name: 'breakLease(number, LeaseOperationOptions)'
     uid: '@azure/storage-blob.BlobLeaseClient.breakLease'
     package: '@azure/storage-blob'
-    summary: |-
+    summary: >-
       To end the lease but ensure that another client cannot acquire a new lease
+
       until the current lease period has expired.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/lease-container
+
+      and
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/lease-blob
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function breakLease(breakPeriod: number, options?:
-        LeaseOperationOptions)
+        LeaseOperationOptions): Promise<LeaseOperationResponse>
       parameters:
         - id: breakPeriod
           type: number
@@ -108,21 +130,31 @@ methods:
           type: <xref uid="@azure/storage-blob.LeaseOperationOptions" />
           description: Optional options to configure lease management operations.
       return:
+        description: Response data for break lease operation.
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.LeaseOperationResponse"
           />&gt;
-        description: Response data for break lease operation.
   - name: 'changeLease(string, LeaseOperationOptions)'
     uid: '@azure/storage-blob.BlobLeaseClient.changeLease'
     package: '@azure/storage-blob'
-    summary: To change the ID of the lease.
+    summary: >-
+      To change the ID of the lease.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/lease-container
+
+      and
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/lease-blob
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function changeLease(proposedLeaseId: string, options?:
-        LeaseOperationOptions)
+        LeaseOperationOptions): Promise<LeaseOperationResponse>
       parameters:
         - id: proposedLeaseId
           type: string
@@ -131,43 +163,65 @@ methods:
           type: <xref uid="@azure/storage-blob.LeaseOperationOptions" />
           description: option to configure lease management operations.
       return:
+        description: Response data for change lease operation.
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.LeaseOperationResponse"
           />&gt;
-        description: Response data for change lease operation.
   - name: releaseLease(LeaseOperationOptions)
     uid: '@azure/storage-blob.BlobLeaseClient.releaseLease'
     package: '@azure/storage-blob'
-    summary: |-
+    summary: >-
       To free the lease if it is no longer needed so that another client may
+
       immediately acquire a lease against the container or the blob.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/lease-container
+
+      and
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/lease-blob
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function releaseLease(options?: LeaseOperationOptions)'
+      content: >-
+        function releaseLease(options?: LeaseOperationOptions):
+        Promise<LeaseOperationResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.LeaseOperationOptions" />
           description: option to configure lease management operations.
       return:
+        description: Response data for release lease operation.
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.LeaseOperationResponse"
           />&gt;
-        description: Response data for release lease operation.
   - name: renewLease(LeaseOperationOptions)
     uid: '@azure/storage-blob.BlobLeaseClient.renewLease'
     package: '@azure/storage-blob'
-    summary: To renew the lease.
+    summary: >-
+      To renew the lease.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/lease-container
+
+      and
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/lease-blob
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function renewLease(options?: LeaseOperationOptions)'
+      content: 'function renewLease(options?: LeaseOperationOptions): Promise<Lease>'
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.LeaseOperationOptions" />
           description: Optional option to configure lease management operations.
       return:
-        type: Promise&lt;<xref uid="@azure/storage-blob.Lease" />&gt;
         description: Response data for renew lease operation.
+        type: Promise&lt;<xref uid="@azure/storage-blob.Lease" />&gt;

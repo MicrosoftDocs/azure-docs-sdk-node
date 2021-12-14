@@ -3,7 +3,7 @@ name: GenericPollOperation
 uid: '@azure/arm-resources.GenericPollOperation'
 package: '@azure/arm-resources'
 summary: ''
-fullName: GenericPollOperation<TResult>
+fullName: 'GenericPollOperation<TResult, TState>'
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -47,10 +47,10 @@ properties:
     syntax:
       content: 'state: TState & ResumablePollOperationState<TResult>'
       return:
+        description: ''
         type: >-
           TState & <xref uid="@azure/arm-resources.ResumablePollOperationState"
           />&lt;TResult&gt;
-        description: ''
 methods:
   - name: cancel()
     uid: '@azure/arm-resources.GenericPollOperation.cancel'
@@ -60,10 +60,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function cancel()
+      content: 'function cancel(): Promise<PollOperation<TState, TResult>>'
       return:
-        type: 'Promise&lt;PollOperation&lt;TState, TResult&gt;&gt;'
         description: ''
+        type: 'Promise&lt;PollOperation&lt;TState, TResult&gt;&gt;'
   - name: setPollerConfig(PollerConfig)
     uid: '@azure/arm-resources.GenericPollOperation.setPollerConfig'
     package: '@azure/arm-resources'
@@ -85,11 +85,13 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function toString()
+      content: 'function toString(): string'
       return:
-        type: string
         description: ''
-  - name: update(undefined | Object)
+        type: string
+  - name: >-
+      update(undefined | { abortSignal?: AbortSignalLike | undefined,
+      fireProgress?: (state: TState) => void | undefined })
     uid: '@azure/arm-resources.GenericPollOperation.update'
     package: '@azure/arm-resources'
     summary: |-
@@ -110,11 +112,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function update(options?: undefined | Object)'
+      content: >-
+        function update(options?: undefined | { abortSignal?: AbortSignalLike |
+        undefined, fireProgress?: (state: TState) => void | undefined }):
+        Promise<PollOperation<TState, TResult>>
       parameters:
         - id: options
-          type: undefined | Object
+          type: >-
+            undefined | { abortSignal?: AbortSignalLike | undefined,
+            fireProgress?: (state: TState) =&gt; void | undefined }
           description: ''
       return:
-        type: 'Promise&lt;PollOperation&lt;TState, TResult&gt;&gt;'
         description: ''
+        type: 'Promise&lt;PollOperation&lt;TState, TResult&gt;&gt;'

@@ -24,8 +24,8 @@ properties:
     syntax:
       content: 'leaseDuration: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: leaseRenewInterval
     uid: '@azure/event-processor-host.LeaseManager.leaseRenewInterval'
     package: '@azure/event-processor-host'
@@ -52,8 +52,8 @@ properties:
     syntax:
       content: 'leaseRenewInterval: number'
       return:
-        type: number
         description: ''
+        type: number
 methods:
   - name: acquireLease(CompleteLease)
     uid: '@azure/event-processor-host.LeaseManager.acquireLease'
@@ -89,7 +89,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function acquireLease(lease: CompleteLease)'
+      content: 'function acquireLease(lease: CompleteLease): Promise<boolean>'
       parameters:
         - id: lease
           type: <xref uid="@azure/event-processor-host.CompleteLease" />
@@ -97,8 +97,8 @@ methods:
             Lease info for the desired partition as previously obtained from
             `getLease()`.
       return:
-        type: Promise&lt;boolean&gt;
         description: Promise<boolean> `true` if acquired successfully; `false` otherwise.
+        type: Promise&lt;boolean&gt;
   - name: 'createAllLeasesIfNotExists(string[])'
     uid: '@azure/event-processor-host.LeaseManager.createAllLeasesIfNotExists'
     package: '@azure/event-processor-host'
@@ -111,14 +111,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createAllLeasesIfNotExists(partitionIds: string[])'
+      content: >-
+        function createAllLeasesIfNotExists(partitionIds: string[]):
+        Promise<void>
       parameters:
         - id: partitionIds
           type: 'string[]'
           description: ids of partitions to create lease info for
       return:
-        type: Promise&lt;void&gt;
         description: 'Promise<void> undefined on success, rejects on error.'
+        type: Promise&lt;void&gt;
   - name: createLeaseStoreIfNotExists()
     uid: '@azure/event-processor-host.LeaseManager.createLeaseStoreIfNotExists'
     package: '@azure/event-processor-host'
@@ -127,10 +129,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function createLeaseStoreIfNotExists()
+      content: 'function createLeaseStoreIfNotExists(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void>  resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: deleteLease(CompleteLease)
     uid: '@azure/event-processor-host.LeaseManager.deleteLease'
     package: '@azure/event-processor-host'
@@ -143,7 +145,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function deleteLease(lease: CompleteLease)'
+      content: 'function deleteLease(lease: CompleteLease): Promise<void>'
       parameters:
         - id: lease
           type: <xref uid="@azure/event-processor-host.CompleteLease" />
@@ -151,8 +153,8 @@ methods:
             Lease info for the desired partition as previously obtained from
             `getLease()`.
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: deleteLeaseStore()
     uid: '@azure/event-processor-host.LeaseManager.deleteLeaseStore'
     package: '@azure/event-processor-host'
@@ -161,10 +163,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function deleteLeaseStore()
+      content: 'function deleteLeaseStore(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: getAllLeases()
     uid: '@azure/event-processor-host.LeaseManager.getAllLeases'
     package: '@azure/event-processor-host'
@@ -184,10 +186,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getAllLeases()
+      content: 'function getAllLeases(): Promise<BaseLease[]>'
       return:
-        type: 'Promise&lt;<xref uid="@azure/event-processor-host.BaseLease" />[]&gt;'
         description: 'Promise<BaseLease[]>'
+        type: 'Promise&lt;<xref uid="@azure/event-processor-host.BaseLease" />[]&gt;'
   - name: getLease(string)
     uid: '@azure/event-processor-host.LeaseManager.getLease'
     package: '@azure/event-processor-host'
@@ -200,16 +202,18 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getLease(partitionId: string)'
+      content: >-
+        function getLease(partitionId: string): Promise<CompleteLease |
+        undefined>
       parameters:
         - id: partitionId
           type: string
           description: Partition id to get the lease for.
       return:
+        description: Promise<Lease | undefined>
         type: >-
           Promise&lt;<xref uid="@azure/event-processor-host.CompleteLease" /> |
           undefined&gt;
-        description: Promise<Lease | undefined>
   - name: leaseStoreExists()
     uid: '@azure/event-processor-host.LeaseManager.leaseStoreExists'
     package: '@azure/event-processor-host'
@@ -218,10 +222,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function leaseStoreExists()
+      content: 'function leaseStoreExists(): Promise<boolean>'
       return:
-        type: Promise&lt;boolean&gt;
         description: 'Promise<boolean> `true` if it exists, `false` if it does not exist.'
+        type: Promise&lt;boolean&gt;
   - name: releaseLease(CompleteLease)
     uid: '@azure/event-processor-host.LeaseManager.releaseLease'
     package: '@azure/event-processor-host'
@@ -236,7 +240,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function releaseLease(lease: CompleteLease)'
+      content: 'function releaseLease(lease: CompleteLease): Promise<void>'
       parameters:
         - id: lease
           type: <xref uid="@azure/event-processor-host.CompleteLease" />
@@ -244,8 +248,8 @@ methods:
             Lease info for the desired partition as previously obtained from
             `getLease()`.
       return:
-        type: Promise&lt;void&gt;
         description: Promise<void> resolves with `undefined`; rejects with an `Error`.
+        type: Promise&lt;void&gt;
   - name: renewLease(CompleteLease)
     uid: '@azure/event-processor-host.LeaseManager.renewLease'
     package: '@azure/event-processor-host'
@@ -269,14 +273,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function renewLease(lease: CompleteLease)'
+      content: 'function renewLease(lease: CompleteLease): Promise<boolean>'
       parameters:
         - id: lease
           type: <xref uid="@azure/event-processor-host.CompleteLease" />
           description: lease to be renewed.
       return:
-        type: Promise&lt;boolean&gt;
         description: Promise<boolean> `true` if renewed successfully; `false` otherwise.
+        type: Promise&lt;boolean&gt;
   - name: updateLease(CompleteLease)
     uid: '@azure/event-processor-host.LeaseManager.updateLease'
     package: '@azure/event-processor-host'
@@ -295,11 +299,11 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function updateLease(lease: CompleteLease)'
+      content: 'function updateLease(lease: CompleteLease): Promise<boolean>'
       parameters:
         - id: lease
           type: <xref uid="@azure/event-processor-host.CompleteLease" />
           description: New lease information to be stored.
       return:
-        type: Promise&lt;boolean&gt;
         description: Promise<boolean> `true` if updated successfully; `false` otherwise.
+        type: Promise&lt;boolean&gt;

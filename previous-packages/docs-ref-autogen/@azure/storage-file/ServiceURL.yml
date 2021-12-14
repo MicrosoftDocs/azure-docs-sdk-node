@@ -44,8 +44,8 @@ properties:
     syntax:
       content: 'pipeline: Pipeline'
       return:
-        type: <xref uid="@azure/storage-file.Pipeline" />
         description: ''
+        type: <xref uid="@azure/storage-file.Pipeline" />
   - name: url
     uid: '@azure/storage-file.ServiceURL.url'
     package: '@azure/storage-file'
@@ -57,8 +57,8 @@ properties:
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: getProperties(Aborter)
     uid: '@azure/storage-file.ServiceURL.getProperties'
@@ -68,11 +68,17 @@ methods:
       properties
 
       for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-file-service-properties}
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperties(aborter: Aborter)'
+      content: >-
+        function getProperties(aborter: Aborter):
+        Promise<Models.ServiceGetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -81,8 +87,8 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
-        type: Promise&lt;<xref uid="Models.ServiceGetPropertiesResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ServiceGetPropertiesResponse" />&gt;
   - name: >-
       listSharesSegment(Aborter, undefined | string,
       IServiceListSharesSegmentOptions)
@@ -99,7 +105,8 @@ methods:
     syntax:
       content: >-
         function listSharesSegment(aborter: Aborter, marker?: undefined |
-        string, options?: IServiceListSharesSegmentOptions)
+        string, options?: IServiceListSharesSegmentOptions):
+        Promise<Models.ServiceListSharesSegmentResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -114,8 +121,8 @@ methods:
           type: <xref uid="@azure/storage-file.IServiceListSharesSegmentOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ServiceListSharesSegmentResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ServiceListSharesSegmentResponse" />&gt;
   - name: 'newPipeline(Credential, INewPipelineOptions)'
     uid: '@azure/storage-file.ServiceURL.newPipeline'
     package: '@azure/storage-file'
@@ -128,7 +135,7 @@ methods:
     syntax:
       content: >-
         static function newPipeline(credential: Credential, pipelineOptions?:
-        INewPipelineOptions)
+        INewPipelineOptions): Pipeline
       parameters:
         - id: credential
           type: <xref uid="@azure/storage-file.Credential" />
@@ -137,8 +144,8 @@ methods:
           type: <xref uid="@azure/storage-file.INewPipelineOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-file.Pipeline" />
         description: A new Pipeline object.
+        type: <xref uid="@azure/storage-file.Pipeline" />
   - name: 'setProperties(Aborter, StorageServiceProperties)'
     uid: '@azure/storage-file.ServiceURL.setProperties'
     package: '@azure/storage-file'
@@ -148,13 +155,17 @@ methods:
 
       for Storage Analytics, CORS (Cross-Origin Resource Sharing) rules and soft
       delete settings.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-file-service-properties}
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setProperties(aborter: Aborter, properties:
-        StorageServiceProperties)
+        StorageServiceProperties): Promise<Models.ServiceSetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -166,8 +177,8 @@ methods:
           type: <xref uid="@azure/storage-file.StorageServiceProperties" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ServiceSetPropertiesResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ServiceSetPropertiesResponse" />&gt;
   - name: withPipeline(Pipeline)
     uid: '@azure/storage-file.ServiceURL.withPipeline'
     package: '@azure/storage-file'
@@ -178,12 +189,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withPipeline(pipeline: Pipeline)'
+      content: 'function withPipeline(pipeline: Pipeline): ServiceURL'
       parameters:
         - id: pipeline
           type: <xref uid="@azure/storage-file.Pipeline" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-file.ServiceURL" />
         description: ''
+        type: <xref uid="@azure/storage-file.ServiceURL" />
 extends: <xref uid="@azure/storage-file.StorageURL" />

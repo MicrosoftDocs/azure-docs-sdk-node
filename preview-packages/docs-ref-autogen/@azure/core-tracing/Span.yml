@@ -8,7 +8,7 @@ summary: |
   in-process function calls to sub-components. A Trace has a single, top-level
   "root" Span that in turn may have zero or more child Spans, which in turn
   may have children.
-  Spans are created by the <xref:Tracer.startSpan> method.
+  Spans are created by the <xref:@azure/core-tracing.Tracer.startSpan> method.
 fullName: Span
 remarks: ''
 isPreview: false
@@ -25,7 +25,7 @@ methods:
     syntax:
       content: >-
         function addEvent(name: string, attributesOrStartTime?: SpanAttributes |
-        TimeInput, startTime?: TimeInput)
+        TimeInput, startTime?: TimeInput): this
       parameters:
         - id: name
           type: string
@@ -43,8 +43,8 @@ methods:
           description: |
             start time of the event.
       return:
-        type: this
         description: ''
+        type: this
   - name: end(TimeInput)
     uid: '@azure/core-tracing.Span.end'
     package: '@azure/core-tracing'
@@ -74,12 +74,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function isRecording()
+      content: 'function isRecording(): boolean'
       return:
-        type: boolean
         description: |-
           true if this Span is active and recording information like events
               with the `AddEvent` operation and attributes using `setAttributes`.
+        type: boolean
   - name: 'recordException(Exception, TimeInput)'
     uid: '@azure/core-tracing.Span.recordException'
     package: '@azure/core-tracing'
@@ -108,7 +108,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setAttribute(key: string, value: SpanAttributeValue)'
+      content: 'function setAttribute(key: string, value: SpanAttributeValue): this'
       parameters:
         - id: key
           type: string
@@ -119,8 +119,8 @@ methods:
             the value for this attribute. Setting a value null or
                          undefined is invalid and will result in undefined behavior.
       return:
-        type: this
         description: ''
+        type: this
   - name: setAttributes(SpanAttributes)
     uid: '@azure/core-tracing.Span.setAttributes'
     package: '@azure/core-tracing'
@@ -129,7 +129,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setAttributes(attributes: SpanAttributes)'
+      content: 'function setAttributes(attributes: SpanAttributes): this'
       parameters:
         - id: attributes
           type: <xref uid="@azure/core-tracing.SpanAttributes" />
@@ -138,66 +138,74 @@ methods:
                               null or undefined attribute values
                               are invalid and will result in undefined behavior.
       return:
-        type: this
         description: ''
+        type: this
   - name: setStatus(SpanStatus)
     uid: '@azure/core-tracing.Span.setStatus'
     package: '@azure/core-tracing'
     summary: >-
       Sets a status to the span. If used, this will override the default Span
 
-      status. Default is <xref:SpanStatusCode.UNSET>. SetStatus overrides the
-      value
+      status. Default is <xref:@azure/core-tracing.SpanStatusCode.UNSET>.
+      SetStatus overrides the value
 
       of previous calls to SetStatus on the Span.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setStatus(status: SpanStatus)'
+      content: 'function setStatus(status: SpanStatus): this'
       parameters:
         - id: status
           type: <xref uid="@azure/core-tracing.SpanStatus" />
           description: |
             the SpanStatus to set.
       return:
-        type: this
         description: ''
+        type: this
   - name: spanContext()
     uid: '@azure/core-tracing.Span.spanContext'
     package: '@azure/core-tracing'
-    summary: |
-      Returns the <xref:SpanContext> object associated with this Span.
+    summary: >
+      Returns the <xref:@azure/core-tracing.SpanContext> object associated with
+      this Span.
+
       Get an immutable, serializable identifier for this span that can be used
+
       to create new child spans. Returned SpanContext is usable even after the
+
       span ends.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function spanContext()
+      content: 'function spanContext(): SpanContext'
       return:
-        type: <xref uid="@azure/core-tracing.SpanContext" />
         description: the SpanContext object associated with this Span.
+        type: <xref uid="@azure/core-tracing.SpanContext" />
   - name: updateName(string)
     uid: '@azure/core-tracing.Span.updateName'
     package: '@azure/core-tracing'
-    summary: |
+    summary: >
       Updates the Span name.
-      This will override the name provided via <xref:Tracer.startSpan>.
+
+      This will override the name provided via
+      <xref:@azure/core-tracing.Tracer.startSpan>.
+
 
       Upon this update, any sampling behavior based on Span name will depend on
+
       the implementation.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function updateName(name: string)'
+      content: 'function updateName(name: string): this'
       parameters:
         - id: name
           type: string
           description: |
             the Span name.
       return:
-        type: this
         description: ''
+        type: this

@@ -5,13 +5,13 @@ package: '@azure/core-lro'
 summary: >-
   Abstract representation of a poller, intended to expose just the minimal API
   that the user needs to work with.
-fullName: PollerLike<TState>
+fullName: 'PollerLike<TState, TResult>'
 remarks: ''
 isPreview: false
 isDeprecated: false
 type: interface
 methods:
-  - name: cancelOperation(Object)
+  - name: 'cancelOperation({ abortSignal?: AbortSignalLike })'
     uid: '@azure/core-lro.PollerLike.cancelOperation'
     package: '@azure/core-lro'
     summary: Attempts to cancel the underlying operation.
@@ -19,14 +19,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function cancelOperation(options?: Object)'
+      content: >-
+        function cancelOperation(options?: { abortSignal?: AbortSignalLike }):
+        Promise<void>
       parameters:
         - id: options
-          type: Object
+          type: '{ abortSignal?: AbortSignalLike }'
           description: ''
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: getOperationState()
     uid: '@azure/core-lro.PollerLike.getOperationState'
     package: '@azure/core-lro'
@@ -38,10 +40,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getOperationState()
+      content: 'function getOperationState(): TState'
       return:
-        type: TState
         description: ''
+        type: TState
   - name: getResult()
     uid: '@azure/core-lro.PollerLike.getResult'
     package: '@azure/core-lro'
@@ -54,10 +56,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getResult()
+      content: 'function getResult(): TResult | undefined'
       return:
-        type: TResult | undefined
         description: ''
+        type: TResult | undefined
   - name: isDone()
     uid: '@azure/core-lro.PollerLike.isDone'
     package: '@azure/core-lro'
@@ -66,10 +68,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function isDone()
+      content: 'function isDone(): boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: isStopped()
     uid: '@azure/core-lro.PollerLike.isStopped'
     package: '@azure/core-lro'
@@ -78,10 +80,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function isStopped()
+      content: 'function isStopped(): boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: 'onProgress((state: TState) => void)'
     uid: '@azure/core-lro.PollerLike.onProgress'
     package: '@azure/core-lro'
@@ -96,15 +98,15 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function onProgress(callback: (state: TState) => void)'
+      content: 'function onProgress(callback: (state: TState) => void): CancelOnProgress'
       parameters:
         - id: callback
           type: '(state: TState) =&gt; void'
           description: ''
       return:
-        type: <xref uid="@azure/core-lro.CancelOnProgress" />
         description: ''
-  - name: poll(Object)
+        type: <xref uid="@azure/core-lro.CancelOnProgress" />
+  - name: 'poll({ abortSignal?: AbortSignalLike })'
     uid: '@azure/core-lro.PollerLike.poll'
     package: '@azure/core-lro'
     summary: >-
@@ -116,14 +118,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function poll(options?: Object)'
+      content: >-
+        function poll(options?: { abortSignal?: AbortSignalLike }):
+        Promise<void>
       parameters:
         - id: options
-          type: Object
+          type: '{ abortSignal?: AbortSignalLike }'
           description: ''
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: pollUntilDone()
     uid: '@azure/core-lro.PollerLike.pollUntilDone'
     package: '@azure/core-lro'
@@ -134,10 +138,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function pollUntilDone()
+      content: 'function pollUntilDone(): Promise<TResult>'
       return:
-        type: Promise&lt;TResult&gt;
         description: ''
+        type: Promise&lt;TResult&gt;
   - name: stopPolling()
     uid: '@azure/core-lro.PollerLike.stopPolling'
     package: '@azure/core-lro'
@@ -157,7 +161,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function toString()
+      content: 'function toString(): string'
       return:
-        type: string
         description: ''
+        type: string

@@ -2,31 +2,16 @@
 name: SecurityRules
 uid: '@azure/arm-network.SecurityRules'
 package: '@azure/arm-network'
-summary: Class representing a SecurityRules.
+summary: Interface representing a SecurityRules.
 fullName: SecurityRules
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: SecurityRules(NetworkManagementClientContext)
-    uid: '@azure/arm-network.SecurityRules.constructor'
-    package: '@azure/arm-network'
-    summary: Create a SecurityRules.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'new SecurityRules(client: NetworkManagementClientContext)'
-      parameters:
-        - id: client
-          type: <xref uid="@azure/arm-network.NetworkManagementClientContext" />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
   - name: >-
       beginCreateOrUpdate(string, string, string, SecurityRule,
-      msRest.RequestOptionsBase)
+      SecurityRulesCreateOrUpdateOptionalParams)
     uid: '@azure/arm-network.SecurityRules.beginCreateOrUpdate'
     package: '@azure/arm-network'
     summary: >-
@@ -40,7 +25,9 @@ methods:
         function beginCreateOrUpdate(resourceGroupName: string,
         networkSecurityGroupName: string, securityRuleName: string,
         securityRuleParameters: SecurityRule, options?:
-        msRest.RequestOptionsBase)
+        SecurityRulesCreateOrUpdateOptionalParams):
+        Promise<PollerLike<PollOperationState<SecurityRulesCreateOrUpdateResponse>,
+        SecurityRulesCreateOrUpdateResponse>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -55,45 +42,25 @@ methods:
           type: <xref uid="@azure/arm-network.SecurityRule" />
           description: |-
             Parameters supplied to the create or update network security rule
-            operation.
+                                          operation.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-network.SecurityRulesCreateOrUpdateOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: 'beginDeleteMethod(string, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-network.SecurityRules.beginDeleteMethod'
-    package: '@azure/arm-network'
-    summary: Deletes the specified network security rule.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginDeleteMethod(resourceGroupName: string,
-        networkSecurityGroupName: string, securityRuleName: string, options?:
-        msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: networkSecurityGroupName
-          type: string
-          description: The name of the network security group.
-        - id: securityRuleName
-          type: string
-          description: The name of the security rule.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-network.SecurityRulesCreateOrUpdateResponse" />&gt;,
+          <xref uid="@azure/arm-network.SecurityRulesCreateOrUpdateResponse"
+          />&gt;&gt;
   - name: >-
-      createOrUpdate(string, string, string, SecurityRule,
-      msRest.RequestOptionsBase)
-    uid: '@azure/arm-network.SecurityRules.createOrUpdate'
+      beginCreateOrUpdateAndWait(string, string, string, SecurityRule,
+      SecurityRulesCreateOrUpdateOptionalParams)
+    uid: '@azure/arm-network.SecurityRules.beginCreateOrUpdateAndWait'
     package: '@azure/arm-network'
     summary: >-
       Creates or updates a security rule in the specified network security
@@ -103,10 +70,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrUpdate(resourceGroupName: string,
+        function beginCreateOrUpdateAndWait(resourceGroupName: string,
         networkSecurityGroupName: string, securityRuleName: string,
         securityRuleParameters: SecurityRule, options?:
-        msRest.RequestOptionsBase)
+        SecurityRulesCreateOrUpdateOptionalParams):
+        Promise<SecurityRulesCreateOrUpdateResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -121,17 +89,21 @@ methods:
           type: <xref uid="@azure/arm-network.SecurityRule" />
           description: |-
             Parameters supplied to the create or update network security rule
-            operation.
+                                          operation.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-network.SecurityRulesCreateOrUpdateOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.SecurityRulesCreateOrUpdateResponse"
-          />&gt;
-        description: Promise<Models.SecurityRulesCreateOrUpdateResponse>
-  - name: 'deleteMethod(string, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-network.SecurityRules.deleteMethod'
+          Promise&lt;<xref
+          uid="@azure/arm-network.SecurityRulesCreateOrUpdateResponse" />&gt;
+  - name: 'beginDelete(string, string, string, SecurityRulesDeleteOptionalParams)'
+    uid: '@azure/arm-network.SecurityRules.beginDelete'
     package: '@azure/arm-network'
     summary: Deletes the specified network security rule.
     remarks: ''
@@ -139,9 +111,10 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function deleteMethod(resourceGroupName: string,
+        function beginDelete(resourceGroupName: string,
         networkSecurityGroupName: string, securityRuleName: string, options?:
-        msRest.RequestOptionsBase)
+        SecurityRulesDeleteOptionalParams):
+        Promise<PollerLike<PollOperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -153,12 +126,44 @@ methods:
           type: string
           description: The name of the security rule.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-network.SecurityRulesDeleteOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;RestResponse&gt;
-        description: Promise<msRest.RestResponse>
-  - name: 'get(string, string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+  - name: >-
+      beginDeleteAndWait(string, string, string,
+      SecurityRulesDeleteOptionalParams)
+    uid: '@azure/arm-network.SecurityRules.beginDeleteAndWait'
+    package: '@azure/arm-network'
+    summary: Deletes the specified network security rule.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteAndWait(resourceGroupName: string,
+        networkSecurityGroupName: string, securityRuleName: string, options?:
+        SecurityRulesDeleteOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group.
+        - id: networkSecurityGroupName
+          type: string
+          description: The name of the network security group.
+        - id: securityRuleName
+          type: string
+          description: The name of the security rule.
+        - id: options
+          type: <xref uid="@azure/arm-network.SecurityRulesDeleteOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: 'get(string, string, string, SecurityRulesGetOptionalParams)'
     uid: '@azure/arm-network.SecurityRules.get'
     package: '@azure/arm-network'
     summary: Get the specified network security rule.
@@ -168,7 +173,8 @@ methods:
     syntax:
       content: >-
         function get(resourceGroupName: string, networkSecurityGroupName:
-        string, securityRuleName: string, options?: msRest.RequestOptionsBase)
+        string, securityRuleName: string, options?:
+        SecurityRulesGetOptionalParams): Promise<SecurityRulesGetResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -180,73 +186,15 @@ methods:
           type: string
           description: The name of the security rule.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-network.SecurityRulesGetOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.SecurityRulesGetResponse" />&gt;
-        description: Promise<Models.SecurityRulesGetResponse>
-  - name: >-
-      get(string, string, string, RequestOptionsBase,
-      ServiceCallback<SecurityRule>)
-    uid: '@azure/arm-network.SecurityRules.get_2'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, networkSecurityGroupName:
-        string, securityRuleName: string, options: RequestOptionsBase, callback:
-        ServiceCallback<SecurityRule>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: networkSecurityGroupName
-          type: string
-          description: The name of the network security group.
-        - id: securityRuleName
-          type: string
-          description: The name of the security rule.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-network.SecurityRule"
-            />&gt;
-          description: |
-            The callback
-  - name: 'get(string, string, string, ServiceCallback<SecurityRule>)'
-    uid: '@azure/arm-network.SecurityRules.get_1'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, networkSecurityGroupName:
-        string, securityRuleName: string, callback:
-        ServiceCallback<SecurityRule>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: networkSecurityGroupName
-          type: string
-          description: The name of the network security group.
-        - id: securityRuleName
-          type: string
-          description: The name of the security rule.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-network.SecurityRule"
-            />&gt;
-          description: |
-            The callback
-  - name: 'list(string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-network.SecurityRulesGetResponse"
+          />&gt;
+  - name: 'list(string, string, SecurityRulesListOptionalParams)'
     uid: '@azure/arm-network.SecurityRules.list'
     package: '@azure/arm-network'
     summary: Gets all security rules in a network security group.
@@ -256,7 +204,8 @@ methods:
     syntax:
       content: >-
         function list(resourceGroupName: string, networkSecurityGroupName:
-        string, options?: msRest.RequestOptionsBase)
+        string, options?: SecurityRulesListOptionalParams):
+        PagedAsyncIterableIterator<SecurityRule>
       parameters:
         - id: resourceGroupName
           type: string
@@ -265,130 +214,11 @@ methods:
           type: string
           description: The name of the network security group.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-network.SecurityRulesListOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.SecurityRulesListResponse" />&gt;
-        description: Promise<Models.SecurityRulesListResponse>
-  - name: >-
-      list(string, string, RequestOptionsBase,
-      ServiceCallback<SecurityRuleListResult>)
-    uid: '@azure/arm-network.SecurityRules.list_2'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(resourceGroupName: string, networkSecurityGroupName:
-        string, options: RequestOptionsBase, callback:
-        ServiceCallback<SecurityRuleListResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: networkSecurityGroupName
-          type: string
-          description: The name of the network security group.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-network.SecurityRuleListResult" />&gt;
-          description: |
-            The callback
-  - name: 'list(string, string, ServiceCallback<SecurityRuleListResult>)'
-    uid: '@azure/arm-network.SecurityRules.list_1'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(resourceGroupName: string, networkSecurityGroupName:
-        string, callback: ServiceCallback<SecurityRuleListResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: networkSecurityGroupName
-          type: string
-          description: The name of the network security group.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-network.SecurityRuleListResult" />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-network.SecurityRules.listNext'
-    package: '@azure/arm-network'
-    summary: Gets all security rules in a network security group.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.SecurityRulesListNextResponse" />&gt;
-        description: Promise<Models.SecurityRulesListNextResponse>
-  - name: >-
-      listNext(string, RequestOptionsBase,
-      ServiceCallback<SecurityRuleListResult>)
-    uid: '@azure/arm-network.SecurityRules.listNext_2'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options: RequestOptionsBase,
-        callback: ServiceCallback<SecurityRuleListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-network.SecurityRuleListResult" />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, ServiceCallback<SecurityRuleListResult>)'
-    uid: '@azure/arm-network.SecurityRules.listNext_1'
-    package: '@azure/arm-network'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, callback:
-        ServiceCallback<SecurityRuleListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-network.SecurityRuleListResult" />&gt;
-          description: |
-            The callback
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/arm-network.SecurityRule" />&gt;

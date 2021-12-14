@@ -300,14 +300,16 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getBodyAsText(batchResponse: Models.ServiceSubmitBatchResponse)'
+      content: >-
+        function getBodyAsText(batchResponse:
+        Models.ServiceSubmitBatchResponse): Promise<string>
       parameters:
         - id: batchResponse
           type: <xref uid="Models.ServiceSubmitBatchResponse" />
           description: ''
       return:
-        type: Promise&lt;string&gt;
         description: ''
+        type: Promise&lt;string&gt;
   - name: utf8ByteLength(string)
     uid: '@azure/storage-blob.utf8ByteLength'
     package: '@azure/storage-blob'
@@ -316,33 +318,39 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function utf8ByteLength(str: string)'
+      content: 'function utf8ByteLength(str: string): number'
       parameters:
         - id: str
           type: string
           description: ''
       return:
-        type: number
         description: ''
+        type: number
   - name: >-
       generateAccountSASQueryParameters(IAccountSASSignatureValues,
       SharedKeyCredential)
     uid: '@azure/storage-blob.generateAccountSASQueryParameters'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       ONLY AVAILABLE IN NODE.JS RUNTIME.
 
-      Generates a <xref:SASQueryParameters> object which contains all SAS query
-      parameters needed to make an actual
+      Generates a <xref:@azure/storage-blob.generateAccountSASQueryParameters>
+      object which contains all SAS query parameters needed to make an actual
 
       REST request.
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-an-account-sas
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function generateAccountSASQueryParameters(accountSASSignatureValues:
-        IAccountSASSignatureValues, sharedKeyCredential: SharedKeyCredential)
+        IAccountSASSignatureValues, sharedKeyCredential: SharedKeyCredential):
+        SASQueryParameters
       parameters:
         - id: accountSASSignatureValues
           type: <xref uid="@azure/storage-blob.IAccountSASSignatureValues" />
@@ -351,14 +359,14 @@ functions:
           type: <xref uid="@azure/storage-blob.SharedKeyCredential" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
         description: ''
+        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
   - name: >-
       generateBlobSASQueryParameters(IBlobSASSignatureValues,
       SharedKeyCredential)
     uid: '@azure/storage-blob.generateBlobSASQueryParameters'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >+
       ONLY AVAILABLE IN NODE.JS RUNTIME.
 
       Creates an instance of SASQueryParameters.
@@ -378,13 +386,92 @@ functions:
       if you initial with
 
       this constructor.
+
+
+
+      **Example**
+
+
+      // Generate service level SAS for a container
+
+      const containerSAS = generateBlobSASQueryParameters({
+          containerName, // Required
+          permissions: ContainerSASPermissions.parse("racwdl").toString(), // Required
+          startTime: new Date(), // Required
+          expiryTime: tmr, // Optional. Date type
+          ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
+          protocol: SASProtocol.HTTPSandHTTP, // Optional
+          version: "2016-05-31" // Optional
+        },
+        sharedKeyCredential // SharedKeyCredential
+      ).toString();
+
+
+
+
+      **Example**
+
+
+      // Generate service level SAS for a container with identifier
+
+      // startTime & permissions are optional when identifier is provided
+
+      const identifier = "unique-id";
+
+      await containerURL.setAccessPolicy(Aborter.none, undefined, [
+        {
+          accessPolicy: {
+            expiry: tmr, // Date type
+            permission: ContainerSASPermissions.parse("racwdl").toString(),
+            start: now // Date type
+          },
+          id: identifier
+        }
+      ]);
+
+
+      const containerSAS = generateBlobSASQueryParameters(
+        {
+          containerName, // Required
+          identifier // Required
+        },
+        sharedKeyCredential // SharedKeyCredential
+      ).toString();
+
+
+
+
+      **Example**
+
+
+      // Generate service level SAS for a blob
+
+      const blobSAS = generateBlobSASQueryParameters({
+          containerName, // Required
+          blobName, // Required
+          permissions: BlobSASPermissions.parse("racwd").toString(), // Required
+          startTime: new Date(), // Required
+          expiryTime: tmr, // Optional. Date type
+          cacheControl: "cache-control-override", // Optional
+          contentDisposition: "content-disposition-override", // Optional
+          contentEncoding: "content-encoding-override", // Optional
+          contentLanguage: "content-language-override", // Optional
+          contentType: "content-type-override", // Optional
+          ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
+          protocol: SASProtocol.HTTPSandHTTP, // Optional
+          version: "2016-05-31" // Optional
+        },
+        sharedKeyCredential // SharedKeyCredential
+      ).toString();
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function generateBlobSASQueryParameters(blobSASSignatureValues:
-        IBlobSASSignatureValues, sharedKeyCredential: SharedKeyCredential)
+        IBlobSASSignatureValues, sharedKeyCredential: SharedKeyCredential):
+        SASQueryParameters
       parameters:
         - id: blobSASSignatureValues
           type: <xref uid="@azure/storage-blob.IBlobSASSignatureValues" />
@@ -393,20 +480,44 @@ functions:
           type: <xref uid="@azure/storage-blob.SharedKeyCredential" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
         description: ''
+        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
   - name: >-
       generateBlobSASQueryParameters(IBlobSASSignatureValues, UserDelegationKey,
       string)
     uid: '@azure/storage-blob.generateBlobSASQueryParameters_1'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >+
       ONLY AVAILABLE IN NODE.JS RUNTIME.
 
       Creates an instance of SASQueryParameters.
 
       WARNING: identifier will be ignored when generating user delegation SAS,
       permissions and expiryTime are required.
+
+
+
+      **Example**
+
+
+      // Generate user delegation SAS for a container
+
+      const userDelegationKey = await serviceURL.getUserDelegationKey(aborter,
+      startTime, expiryTime);
+
+      const containerSAS = generateBlobSASQueryParameters({
+          containerName, // Required
+          permissions: ContainerSASPermissions.parse("racwdl").toString(), // Required
+          startTime, // Required. Date type
+          expiryTime, // Optional. Date type
+          ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
+          protocol: SASProtocol.HTTPSandHTTP, // Optional
+          version: "2018-11-09" // Must >= 2018-11-09 to generate user delegation SAS
+        },
+        userDelegationKey, // UserDelegationKey
+        accountName
+      ).toString();
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -414,7 +525,7 @@ functions:
       content: >-
         function generateBlobSASQueryParameters(blobSASSignatureValues:
         IBlobSASSignatureValues, userDelegationKey: UserDelegationKey,
-        accountName: string)
+        accountName: string): SASQueryParameters
       parameters:
         - id: blobSASSignatureValues
           type: <xref uid="@azure/storage-blob.IBlobSASSignatureValues" />
@@ -426,8 +537,8 @@ functions:
           type: string
           description: ''
       return:
-        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
         description: ''
+        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
   - name: ipRangeToString(IIPRange)
     uid: '@azure/storage-blob.ipRangeToString'
     package: '@azure/storage-blob'
@@ -438,14 +549,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function ipRangeToString(ipRange: IIPRange)'
+      content: 'function ipRangeToString(ipRange: IIPRange): string'
       parameters:
         - id: ipRange
           type: <xref uid="@azure/storage-blob.IIPRange" />
           description: ''
       return:
-        type: string
         description: ''
+        type: string
   - name: rangeToString(IRange)
     uid: '@azure/storage-blob.rangeToString'
     package: '@azure/storage-blob'
@@ -456,14 +567,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function rangeToString(iRange: IRange)'
+      content: 'function rangeToString(iRange: IRange): string'
       parameters:
         - id: iRange
           type: <xref uid="@azure/storage-blob.IRange" />
           description: ''
       return:
-        type: string
         description: ''
+        type: string
   - name: >-
       uploadBrowserDataToBlockBlob(Aborter, Blob | ArrayBuffer |
       ArrayBufferView, BlockBlobURL, IUploadToBlockBlobOptions)
@@ -490,7 +601,7 @@ functions:
       content: >-
         function uploadBrowserDataToBlockBlob(aborter: Aborter, browserData:
         Blob | ArrayBuffer | ArrayBufferView, blockBlobURL: BlockBlobURL,
-        options?: IUploadToBlockBlobOptions)
+        options?: IUploadToBlockBlobOptions): Promise<BlobUploadCommonResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -508,10 +619,10 @@ functions:
           type: <xref uid="@azure/storage-blob.IUploadToBlockBlobOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobUploadCommonResponse"
           />&gt;
-        description: ''
   - name: >-
       downloadBlobToBuffer(Aborter, Buffer, BlobURL, number, undefined | number,
       IDownloadFromBlobOptions)
@@ -531,7 +642,7 @@ functions:
       content: >-
         function downloadBlobToBuffer(aborter: Aborter, buffer: Buffer, blobURL:
         BlobURL, offset: number, count?: undefined | number, options?:
-        IDownloadFromBlobOptions)
+        IDownloadFromBlobOptions): Promise<void>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -555,8 +666,8 @@ functions:
           type: <xref uid="@azure/storage-blob.IDownloadFromBlobOptions" />
           description: ''
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: >-
       uploadFileToBlockBlob(Aborter, string, BlockBlobURL,
       IUploadToBlockBlobOptions)
@@ -581,7 +692,8 @@ functions:
     syntax:
       content: >-
         function uploadFileToBlockBlob(aborter: Aborter, filePath: string,
-        blockBlobURL: BlockBlobURL, options?: IUploadToBlockBlobOptions)
+        blockBlobURL: BlockBlobURL, options?: IUploadToBlockBlobOptions):
+        Promise<BlobUploadCommonResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -599,10 +711,10 @@ functions:
           type: <xref uid="@azure/storage-blob.IUploadToBlockBlobOptions" />
           description: ''
       return:
+        description: ICommonResponse
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobUploadCommonResponse"
           />&gt;
-        description: ICommonResponse
   - name: >-
       uploadStreamToBlockBlob(Aborter, Readable, BlockBlobURL, number, number,
       IUploadStreamToBlockBlobOptions)
@@ -622,7 +734,8 @@ functions:
       content: >-
         function uploadStreamToBlockBlob(aborter: Aborter, stream: Readable,
         blockBlobURL: BlockBlobURL, bufferSize: number, maxBuffers: number,
-        options?: IUploadStreamToBlockBlobOptions)
+        options?: IUploadStreamToBlockBlobOptions):
+        Promise<BlobUploadCommonResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-blob.Aborter" />
@@ -650,10 +763,10 @@ functions:
           type: <xref uid="@azure/storage-blob.IUploadStreamToBlockBlobOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobUploadCommonResponse"
           />&gt;
-        description: ''
   - name: 'ensureCpkIfSpecified(CpkInfo | undefined, boolean)'
     uid: '@azure/storage-blob.ensureCpkIfSpecified'
     package: '@azure/storage-blob'
@@ -682,7 +795,7 @@ functions:
     syntax:
       content: >-
         function toAccessTier(tier: BlockBlobTier | PremiumPageBlobTier | string
-        | undefined)
+        | undefined): Models.AccessTier | undefined
       parameters:
         - id: tier
           type: >-
@@ -691,8 +804,8 @@ functions:
             undefined
           description: ''
       return:
-        type: Models
         description: ''
+        type: <xref uid="Models.AccessTier" /> | undefined
   - name: NewRetryPolicyFactory(IRetryOptions)
     uid: '@azure/storage-blob.NewRetryPolicyFactory'
     package: '@azure/storage-blob'
@@ -701,14 +814,16 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function NewRetryPolicyFactory(retryOptions?: IRetryOptions)'
+      content: >-
+        function NewRetryPolicyFactory(retryOptions?: IRetryOptions):
+        RequestPolicyFactory
       parameters:
         - id: retryOptions
           type: <xref uid="@azure/storage-blob.IRetryOptions" />
           description: ''
       return:
-        type: RequestPolicyFactory
         description: ''
+        type: RequestPolicyFactory
   - name: blobToArrayBuffer(Blob)
     uid: '@azure/storage-blob.blobToArrayBuffer'
     package: '@azure/storage-blob'
@@ -717,14 +832,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function blobToArrayBuffer(blob: Blob)'
+      content: 'function blobToArrayBuffer(blob: Blob): Promise<ArrayBuffer>'
       parameters:
         - id: blob
           type: Blob
           description: ''
       return:
-        type: Promise&lt;ArrayBuffer&gt;
         description: ''
+        type: Promise&lt;ArrayBuffer&gt;
   - name: blobToString(Blob)
     uid: '@azure/storage-blob.blobToString'
     package: '@azure/storage-blob'
@@ -733,14 +848,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function blobToString(blob: Blob)'
+      content: 'function blobToString(blob: Blob): Promise<string>'
       parameters:
         - id: blob
           type: Blob
           description: ''
       return:
-        type: Promise&lt;string&gt;
         description: ''
+        type: Promise&lt;string&gt;
   - name: 'appendToURLPath(string, string)'
     uid: '@azure/storage-blob.appendToURLPath'
     package: '@azure/storage-blob'
@@ -753,7 +868,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function appendToURLPath(url: string, name: string)'
+      content: 'function appendToURLPath(url: string, name: string): string'
       parameters:
         - id: url
           type: string
@@ -762,8 +877,8 @@ functions:
           type: string
           description: String to be appended to URL
       return:
-        type: string
         description: An updated URL string
+        type: string
   - name: base64decode(string)
     uid: '@azure/storage-blob.base64decode'
     package: '@azure/storage-blob'
@@ -772,14 +887,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function base64decode(encodedString: string)'
+      content: 'function base64decode(encodedString: string): string'
       parameters:
         - id: encodedString
           type: string
           description: ''
       return:
-        type: string
         description: ''
+        type: string
   - name: base64encode(string)
     uid: '@azure/storage-blob.base64encode'
     package: '@azure/storage-blob'
@@ -788,14 +903,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function base64encode(content: string)'
+      content: 'function base64encode(content: string): string'
       parameters:
         - id: content
           type: string
           description: ''
       return:
-        type: string
         description: ''
+        type: string
   - name: 'delay(number, AbortSignalLike, Error)'
     uid: '@azure/storage-blob.delay'
     package: '@azure/storage-blob'
@@ -806,7 +921,7 @@ functions:
     syntax:
       content: >-
         function delay(timeInMs: number, aborter?: AbortSignalLike, abortError?:
-        Error)
+        Error): Promise<unknown>
       parameters:
         - id: timeInMs
           type: number
@@ -818,12 +933,12 @@ functions:
           type: Error
           description: ''
       return:
-        type: Promise&lt;unknown&gt;
         description: ''
+        type: Promise&lt;unknown&gt;
   - name: escapeURLPath(string)
     uid: '@azure/storage-blob.escapeURLPath'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       Reserved URL characters must be properly escaped for Storage services like
       Blob or File.
 
@@ -917,18 +1032,27 @@ functions:
       We will apply strategy one, and call encodeURIComponent for these
       parameters like blobName. Because what customers passes in is a plain name
       instead of a URL.
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-shares--directories--files--and-metadata
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function escapeURLPath(url: string)'
+      content: 'function escapeURLPath(url: string): string'
       parameters:
         - id: url
           type: string
           description: ''
       return:
-        type: string
         description: ''
+        type: string
   - name: 'generateBlockID(string, number)'
     uid: '@azure/storage-blob.generateBlockID'
     package: '@azure/storage-blob'
@@ -937,7 +1061,9 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function generateBlockID(blockIDPrefix: string, blockIndex: number)'
+      content: >-
+        function generateBlockID(blockIDPrefix: string, blockIndex: number):
+        string
       parameters:
         - id: blockIDPrefix
           type: string
@@ -946,8 +1072,8 @@ functions:
           type: number
           description: ''
       return:
-        type: string
         description: ''
+        type: string
   - name: 'getURLParameter(string, string)'
     uid: '@azure/storage-blob.getURLParameter'
     package: '@azure/storage-blob'
@@ -956,7 +1082,9 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getURLParameter(url: string, name: string)'
+      content: >-
+        function getURLParameter(url: string, name: string): string | string[] |
+        undefined
       parameters:
         - id: url
           type: string
@@ -965,8 +1093,8 @@ functions:
           type: string
           description: ''
       return:
-        type: 'string | string[] | undefined'
         description: ''
+        type: 'string | string[] | undefined'
   - name: getURLPath(string)
     uid: '@azure/storage-blob.getURLPath'
     package: '@azure/storage-blob'
@@ -975,14 +1103,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getURLPath(url: string)'
+      content: 'function getURLPath(url: string): string | undefined'
       parameters:
         - id: url
           type: string
           description: Source URL string
       return:
-        type: string | undefined
         description: ''
+        type: string | undefined
   - name: getURLPathAndQuery(string)
     uid: '@azure/storage-blob.getURLPathAndQuery'
     package: '@azure/storage-blob'
@@ -991,14 +1119,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getURLPathAndQuery(url: string)'
+      content: 'function getURLPathAndQuery(url: string): string | undefined'
       parameters:
         - id: url
           type: string
           description: Source URL string
       return:
-        type: string | undefined
         description: ''
+        type: string | undefined
   - name: getURLQueries(string)
     uid: '@azure/storage-blob.getURLQueries'
     package: '@azure/storage-blob'
@@ -1007,14 +1135,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getURLQueries(url: string)'
+      content: 'function getURLQueries(url: string): [key: string]: string'
       parameters:
         - id: url
           type: string
           description: ''
       return:
-        type: '[key: string]\: string'
         description: ''
+        type: '[key: string]\: string'
   - name: getURLScheme(string)
     uid: '@azure/storage-blob.getURLScheme'
     package: '@azure/storage-blob'
@@ -1023,14 +1151,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getURLScheme(url: string)'
+      content: 'function getURLScheme(url: string): string | undefined'
       parameters:
         - id: url
           type: string
           description: Source URL string
       return:
-        type: string | undefined
         description: ''
+        type: string | undefined
   - name: 'iEqual(string, string)'
     uid: '@azure/storage-blob.iEqual'
     package: '@azure/storage-blob'
@@ -1039,7 +1167,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function iEqual(str1: string, str2: string)'
+      content: 'function iEqual(str1: string, str2: string): boolean'
       parameters:
         - id: str1
           type: string
@@ -1048,8 +1176,8 @@ functions:
           type: string
           description: ''
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: 'padStart(string, number, undefined | string)'
     uid: '@azure/storage-blob.padStart'
     package: '@azure/storage-blob'
@@ -1060,7 +1188,7 @@ functions:
     syntax:
       content: >-
         function padStart(currentString: string, targetLength: number,
-        padString?: undefined | string)
+        padString?: undefined | string): string
       parameters:
         - id: currentString
           type: string
@@ -1072,8 +1200,8 @@ functions:
           type: undefined | string
           description: ''
       return:
-        type: string
         description: ''
+        type: string
   - name: 'setURLHost(string, string)'
     uid: '@azure/storage-blob.setURLHost'
     package: '@azure/storage-blob'
@@ -1082,7 +1210,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setURLHost(url: string, host: string)'
+      content: 'function setURLHost(url: string, host: string): string'
       parameters:
         - id: url
           type: string
@@ -1091,8 +1219,8 @@ functions:
           type: string
           description: New host string
       return:
-        type: string
         description: An updated URL string
+        type: string
   - name: 'setURLParameter(string, string, undefined | string)'
     uid: '@azure/storage-blob.setURLParameter'
     package: '@azure/storage-blob'
@@ -1108,7 +1236,7 @@ functions:
     syntax:
       content: >-
         function setURLParameter(url: string, name: string, value?: undefined |
-        string)
+        string): string
       parameters:
         - id: url
           type: string
@@ -1120,8 +1248,8 @@ functions:
           type: undefined | string
           description: ''
       return:
-        type: string
         description: An updated URL string
+        type: string
   - name: 'truncatedISO8061Date(Date, undefined | false | true)'
     uid: '@azure/storage-blob.truncatedISO8061Date'
     package: '@azure/storage-blob'
@@ -1132,7 +1260,7 @@ functions:
     syntax:
       content: >-
         function truncatedISO8061Date(date: Date, withMilliseconds?: undefined |
-        false | true)
+        false | true): string
       parameters:
         - id: date
           type: Date
@@ -1141,10 +1269,10 @@ functions:
           type: undefined | false | true
           description: ''
       return:
-        type: string
         description: >-
           Date string in ISO8061 format, with or without 7 milliseconds
           component
+        type: string
   - name: 'streamToBuffer(ReadableStream, Buffer, number, number, undefined | string)'
     uid: '@azure/storage-blob.streamToBuffer'
     package: '@azure/storage-blob'
@@ -1155,7 +1283,7 @@ functions:
     syntax:
       content: >-
         function streamToBuffer(stream: ReadableStream, buffer: Buffer, offset:
-        number, end: number, encoding?: undefined | string)
+        number, end: number, encoding?: undefined | string): Promise<void>
       parameters:
         - id: stream
           type: ReadableStream
@@ -1173,8 +1301,8 @@ functions:
           type: undefined | string
           description: ''
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: 'streamToBuffer2(ReadableStream, Buffer, undefined | string)'
     uid: '@azure/storage-blob.streamToBuffer2'
     package: '@azure/storage-blob'
@@ -1185,7 +1313,7 @@ functions:
     syntax:
       content: >-
         function streamToBuffer2(stream: ReadableStream, buffer: Buffer,
-        encoding?: undefined | string)
+        encoding?: undefined | string): Promise<number>
       parameters:
         - id: stream
           type: ReadableStream
@@ -1197,8 +1325,8 @@ functions:
           type: undefined | string
           description: ''
       return:
-        type: Promise&lt;number&gt;
         description: with the count of bytes read.
+        type: Promise&lt;number&gt;
 typeAliases:
   - '@azure/storage-blob.BlobDownloadResponse'
   - '@azure/storage-blob.ContainerGetAccessPolicyResponse'

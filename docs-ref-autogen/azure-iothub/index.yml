@@ -169,21 +169,21 @@ functions:
     package: azure-iothub
     summary: >-
       Parses a string in the format of a Shared Access Signature token and
-      returns a <xref:SharedAccessSignature>.
+      returns a <xref:azure-iothub.Client.fromSharedAccessSignature>.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function parse(source: string)'
+      content: 'function parse(source: string): SharedAccessSignature'
       parameters:
         - id: source
           type: string
           description: A shared access signature string.
       return:
-        type: SharedAccessSignature
         description: >-
           An object containing the different shared access signature properties
           extracted from the string given as a parameter
+        type: SharedAccessSignature
   - name: 'createResultWithIncomingMessage<TResult>(TResult, IncomingMessage)'
     uid: azure-iothub.createResultWithIncomingMessage
     package: azure-iothub
@@ -194,7 +194,7 @@ functions:
     syntax:
       content: >-
         function createResultWithIncomingMessage<TResult>(result: TResult,
-        message: IncomingMessage)
+        message: IncomingMessage): ResultWithIncomingMessage<TResult>
       parameters:
         - id: result
           type: TResult
@@ -203,8 +203,8 @@ functions:
           type: IncomingMessage
           description: ''
       return:
-        type: <xref uid="azure-iothub.ResultWithIncomingMessage" />&lt;TResult&gt;
         description: ''
+        type: <xref uid="azure-iothub.ResultWithIncomingMessage" />&lt;TResult&gt;
   - name: 'createJobStatusResponse(any, any)'
     uid: azure-iothub.createJobStatusResponse
     package: azure-iothub
@@ -213,7 +213,9 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createJobStatusResponse(jobStatus: any, response: any)'
+      content: >-
+        function createJobStatusResponse(jobStatus: any, response: any):
+        JobStatusResponse
       parameters:
         - id: jobStatus
           type: any
@@ -222,8 +224,8 @@ functions:
           type: any
           description: ''
       return:
-        type: <xref uid="azure-iothub.JobStatusResponse" />
         description: ''
+        type: <xref uid="azure-iothub.JobStatusResponse" />
   - name: 'create(string, string, string, string | number)'
     uid: azure-iothub.create
     package: azure-iothub
@@ -236,7 +238,7 @@ functions:
     syntax:
       content: >-
         function create(host: string, policy: string, key: string, expiry:
-        string | number)
+        string | number): SharedAccessSignature
       parameters:
         - id: host
           type: string
@@ -256,5 +258,5 @@ functions:
           description: |
             Expiry time for the token that will be created.
       return:
-        type: SharedAccessSignature
         description: A shared access signature to be used to connect with an Azure IoT hub.
+        type: SharedAccessSignature

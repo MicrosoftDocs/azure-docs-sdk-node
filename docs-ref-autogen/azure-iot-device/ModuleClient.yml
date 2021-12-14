@@ -27,14 +27,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function abandon(message: Message)'
+      content: 'function abandon(message: Message): Promise<MessageAbandoned>'
       parameters:
         - id: message
           type: Message
           description: ''
       return:
-        type: Promise&lt;MessageAbandoned&gt;
         description: ''
+        type: Promise&lt;MessageAbandoned&gt;
   - name: 'abandon(Message, Callback<MessageAbandoned>)'
     uid: azure-iot-device.ModuleClient.abandon
     package: azure-iot-device
@@ -63,7 +63,7 @@ methods:
     syntax:
       content: >-
         function addListener(eventName: string | symbol, listener: (args: any[])
-        => void)
+        => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -72,8 +72,8 @@ methods:
           type: '(args: any[]) =&gt; void'
           description: ''
       return:
-        type: this
         description: ''
+        type: this
   - name: close()
     uid: azure-iot-device.ModuleClient.close_1
     package: azure-iot-device
@@ -82,10 +82,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function close()
+      content: 'function close(): Promise<Disconnected>'
       return:
-        type: Promise&lt;Disconnected&gt;
         description: ''
+        type: Promise&lt;Disconnected&gt;
   - name: close(Callback<Disconnected>)
     uid: azure-iot-device.ModuleClient.close
     package: azure-iot-device
@@ -111,14 +111,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function complete(message: Message)'
+      content: 'function complete(message: Message): Promise<MessageCompleted>'
       parameters:
         - id: message
           type: Message
           description: ''
       return:
-        type: Promise&lt;MessageCompleted&gt;
         description: ''
+        type: Promise&lt;MessageCompleted&gt;
   - name: 'complete(Message, Callback<MessageCompleted>)'
     uid: azure-iot-device.ModuleClient.complete
     package: azure-iot-device
@@ -206,7 +206,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function emit(eventName: string | symbol, args: any[])'
+      content: 'function emit(eventName: string | symbol, args: any[]): boolean'
       parameters:
         - id: eventName
           type: string | symbol
@@ -215,8 +215,8 @@ methods:
           type: 'any[]'
           description: ''
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: eventNames()
     uid: azure-iot-device.ModuleClient.eventNames
     package: azure-iot-device
@@ -239,10 +239,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function eventNames()
+      content: 'function eventNames(): Array<string | symbol>'
       return:
-        type: Array&lt;string | symbol&gt;
         description: ''
+        type: Array&lt;string | symbol&gt;
   - name: 'fromAuthenticationProvider(AuthenticationProvider, any)'
     uid: azure-iot-device.ModuleClient.fromAuthenticationProvider
     package: azure-iot-device
@@ -255,7 +255,7 @@ methods:
     syntax:
       content: >-
         static function fromAuthenticationProvider(authenticationProvider:
-        AuthenticationProvider, transportCtor: any)
+        AuthenticationProvider, transportCtor: any): ModuleClient
       parameters:
         - id: authenticationProvider
           type: AuthenticationProvider
@@ -265,8 +265,8 @@ methods:
           description: |
             Transport protocol used to connect to IoT hub.
       return:
-        type: <xref uid="azure-iot-device.ModuleClient" />
         description: ''
+        type: <xref uid="azure-iot-device.ModuleClient" />
   - name: 'fromConnectionString(string, any)'
     uid: azure-iot-device.ModuleClient.fromConnectionString
     package: azure-iot-device
@@ -279,7 +279,7 @@ methods:
     syntax:
       content: >-
         static function fromConnectionString(connStr: string, transportCtor:
-        any)
+        any): ModuleClient
       parameters:
         - id: connStr
           type: string
@@ -291,8 +291,8 @@ methods:
           description: |
             A transport constructor.
       return:
-        type: <xref uid="azure-iot-device.ModuleClient" />
         description: ''
+        type: <xref uid="azure-iot-device.ModuleClient" />
   - name: fromEnvironment(any)
     uid: azure-iot-device.ModuleClient.fromEnvironment_1
     package: azure-iot-device
@@ -301,14 +301,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static function fromEnvironment(transportCtor: any)'
+      content: >-
+        static function fromEnvironment(transportCtor: any):
+        Promise<ModuleClient>
       parameters:
         - id: transportCtor
           type: any
           description: ''
       return:
-        type: Promise&lt;<xref uid="azure-iot-device.ModuleClient" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="azure-iot-device.ModuleClient" />&gt;
   - name: 'fromEnvironment(any, Callback<ModuleClient>)'
     uid: azure-iot-device.ModuleClient.fromEnvironment
     package: azure-iot-device
@@ -355,7 +357,7 @@ methods:
     syntax:
       content: >-
         static function fromSharedAccessSignature(sharedAccessSignature: string,
-        transportCtor: any)
+        transportCtor: any): ModuleClient
       parameters:
         - id: sharedAccessSignature
           type: string
@@ -366,8 +368,8 @@ methods:
           type: any
           description: ''
       return:
-        type: <xref uid="azure-iot-device.ModuleClient" />
         description: ''
+        type: <xref uid="azure-iot-device.ModuleClient" />
   - name: getMaxListeners()
     uid: azure-iot-device.ModuleClient.getMaxListeners
     package: azure-iot-device
@@ -376,15 +378,15 @@ methods:
       either
 
       set by `emitter.setMaxListeners(n)` or defaults to
-      <xref:defaultMaxListeners>.
+      <xref:azure-iot-device.DeviceTransport.defaultMaxListeners>.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getMaxListeners()
+      content: 'function getMaxListeners(): number'
       return:
-        type: number
         description: ''
+        type: number
   - name: getTwin()
     uid: azure-iot-device.ModuleClient.getTwin_1
     package: azure-iot-device
@@ -393,10 +395,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getTwin()
+      content: 'function getTwin(): Promise<Twin>'
       return:
-        type: Promise&lt;<xref uid="azure-iot-device.Twin" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="azure-iot-device.Twin" />&gt;
   - name: getTwin(Callback<Twin>)
     uid: azure-iot-device.ModuleClient.getTwin
     package: azure-iot-device
@@ -418,7 +420,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function invokeMethod(deviceId: string, methodParams: MethodParams)'
+      content: >-
+        function invokeMethod(deviceId: string, methodParams: MethodParams):
+        Promise<MethodResult>
       parameters:
         - id: deviceId
           type: string
@@ -427,8 +431,8 @@ methods:
           type: <xref uid="azure-iot-device.MethodParams" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="azure-iot-device.MethodResult" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="azure-iot-device.MethodResult" />&gt;
   - name: 'invokeMethod(string, MethodParams, Callback<MethodResult>)'
     uid: azure-iot-device.ModuleClient.invokeMethod
     package: azure-iot-device
@@ -464,7 +468,7 @@ methods:
     syntax:
       content: >-
         function invokeMethod(deviceId: string, moduleId: string, methodParams:
-        MethodParams)
+        MethodParams): Promise<MethodResult>
       parameters:
         - id: deviceId
           type: string
@@ -476,8 +480,8 @@ methods:
           type: <xref uid="azure-iot-device.MethodParams" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="azure-iot-device.MethodResult" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="azure-iot-device.MethodResult" />&gt;
   - name: 'invokeMethod(string, string, MethodParams, Callback<MethodResult>)'
     uid: azure-iot-device.ModuleClient.invokeMethod_1
     package: azure-iot-device
@@ -510,15 +514,15 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listenerCount(eventName: string | symbol)'
+      content: 'function listenerCount(eventName: string | symbol): number'
       parameters:
         - id: eventName
           type: string | symbol
           description: |
             The name of the event being listened for
       return:
-        type: number
         description: ''
+        type: number
   - name: listeners(string | symbol)
     uid: azure-iot-device.ModuleClient.listeners
     package: azure-iot-device
@@ -535,14 +539,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listeners(eventName: string | symbol)'
+      content: 'function listeners(eventName: string | symbol): Function[]'
       parameters:
         - id: eventName
           type: string | symbol
           description: ''
       return:
-        type: 'Function[]'
         description: ''
+        type: 'Function[]'
   - name: 'off(string | symbol, (args: any[]) => void)'
     uid: azure-iot-device.ModuleClient.off
     package: azure-iot-device
@@ -553,7 +557,7 @@ methods:
     syntax:
       content: >-
         function off(eventName: string | symbol, listener: (args: any[]) =>
-        void)
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -562,8 +566,8 @@ methods:
           type: '(args: any[]) =&gt; void'
           description: ''
       return:
-        type: this
         description: ''
+        type: this
   - name: 'on(string | symbol, (args: any[]) => void)'
     uid: azure-iot-device.ModuleClient.on
     package: azure-iot-device
@@ -618,7 +622,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function on(eventName: string | symbol, listener: (args: any[]) => void)'
+      content: >-
+        function on(eventName: string | symbol, listener: (args: any[]) =>
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -628,8 +634,8 @@ methods:
           description: |
             The callback function
       return:
-        type: this
         description: ''
+        type: this
   - name: 'once(string | symbol, (args: any[]) => void)'
     uid: azure-iot-device.ModuleClient.once
     package: azure-iot-device
@@ -682,7 +688,7 @@ methods:
     syntax:
       content: >-
         function once(eventName: string | symbol, listener: (args: any[]) =>
-        void)
+        void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -692,8 +698,8 @@ methods:
           description: |
             The callback function
       return:
-        type: this
         description: ''
+        type: this
   - name: >-
       onMethod(string, DoubleValueCallback<DeviceMethodRequest,
       DeviceMethodResponse>)
@@ -727,10 +733,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function open()
+      content: 'function open(): Promise<Connected>'
       return:
-        type: Promise&lt;Connected&gt;
         description: ''
+        type: Promise&lt;Connected&gt;
   - name: open(Callback<Connected>)
     uid: azure-iot-device.ModuleClient.open
     package: azure-iot-device
@@ -775,7 +781,7 @@ methods:
     syntax:
       content: >-
         function prependListener(eventName: string | symbol, listener: (args:
-        any[]) => void)
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -785,8 +791,8 @@ methods:
           description: |
             The callback function
       return:
-        type: this
         description: ''
+        type: this
   - name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
     uid: azure-iot-device.ModuleClient.prependOnceListener
     package: azure-iot-device
@@ -813,7 +819,7 @@ methods:
     syntax:
       content: >-
         function prependOnceListener(eventName: string | symbol, listener:
-        (args: any[]) => void)
+        (args: any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -823,8 +829,8 @@ methods:
           description: |
             The callback function
       return:
-        type: this
         description: ''
+        type: this
   - name: rawListeners(string | symbol)
     uid: azure-iot-device.ModuleClient.rawListeners
     package: azure-iot-device
@@ -858,14 +864,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function rawListeners(eventName: string | symbol)'
+      content: 'function rawListeners(eventName: string | symbol): Function[]'
       parameters:
         - id: eventName
           type: string | symbol
           description: ''
       return:
-        type: 'Function[]'
         description: ''
+        type: 'Function[]'
   - name: reject(Message)
     uid: azure-iot-device.ModuleClient.reject_1
     package: azure-iot-device
@@ -874,14 +880,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function reject(message: Message)'
+      content: 'function reject(message: Message): Promise<MessageRejected>'
       parameters:
         - id: message
           type: Message
           description: ''
       return:
-        type: Promise&lt;MessageRejected&gt;
         description: ''
+        type: Promise&lt;MessageRejected&gt;
   - name: 'reject(Message, Callback<MessageRejected>)'
     uid: azure-iot-device.ModuleClient.reject
     package: azure-iot-device
@@ -914,14 +920,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function removeAllListeners(event?: string | symbol)'
+      content: 'function removeAllListeners(event?: string | symbol): this'
       parameters:
         - id: event
           type: string | symbol
           description: ''
       return:
-        type: this
         description: ''
+        type: this
   - name: 'removeListener(string | symbol, (args: any[]) => void)'
     uid: azure-iot-device.ModuleClient.removeListener
     package: azure-iot-device
@@ -1067,7 +1073,7 @@ methods:
     syntax:
       content: >-
         function removeListener(eventName: string | symbol, listener: (args:
-        any[]) => void)
+        any[]) => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -1076,8 +1082,8 @@ methods:
           type: '(args: any[]) =&gt; void'
           description: ''
       return:
-        type: this
         description: ''
+        type: this
   - name: sendEvent(Message)
     uid: azure-iot-device.ModuleClient.sendEvent_1
     package: azure-iot-device
@@ -1086,14 +1092,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function sendEvent(message: Message)'
+      content: 'function sendEvent(message: Message): Promise<MessageEnqueued>'
       parameters:
         - id: message
           type: Message
           description: ''
       return:
-        type: Promise&lt;MessageEnqueued&gt;
         description: ''
+        type: Promise&lt;MessageEnqueued&gt;
   - name: 'sendEvent(Message, Callback<MessageEnqueued>)'
     uid: azure-iot-device.ModuleClient.sendEvent
     package: azure-iot-device
@@ -1120,14 +1126,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function sendEventBatch(messages: Message[])'
+      content: 'function sendEventBatch(messages: Message[]): Promise<MessageEnqueued>'
       parameters:
         - id: messages
           type: 'Message[]'
           description: ''
       return:
-        type: Promise&lt;MessageEnqueued&gt;
         description: ''
+        type: Promise&lt;MessageEnqueued&gt;
   - name: 'sendEventBatch(Message[], Callback<MessageEnqueued>)'
     uid: azure-iot-device.ModuleClient.sendEventBatch
     package: azure-iot-device
@@ -1154,7 +1160,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function sendOutputEvent(outputName: string, message: Message)'
+      content: >-
+        function sendOutputEvent(outputName: string, message: Message):
+        Promise<MessageEnqueued>
       parameters:
         - id: outputName
           type: string
@@ -1163,8 +1171,8 @@ methods:
           type: Message
           description: ''
       return:
-        type: Promise&lt;MessageEnqueued&gt;
         description: ''
+        type: Promise&lt;MessageEnqueued&gt;
   - name: 'sendOutputEvent(string, Message, Callback<MessageEnqueued>)'
     uid: azure-iot-device.ModuleClient.sendOutputEvent
     package: azure-iot-device
@@ -1194,7 +1202,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function sendOutputEventBatch(outputName: string, messages: Message[])'
+      content: >-
+        function sendOutputEventBatch(outputName: string, messages: Message[]):
+        Promise<MessageEnqueued>
       parameters:
         - id: outputName
           type: string
@@ -1203,8 +1213,8 @@ methods:
           type: 'Message[]'
           description: ''
       return:
-        type: Promise&lt;MessageEnqueued&gt;
         description: ''
+        type: Promise&lt;MessageEnqueued&gt;
   - name: 'sendOutputEventBatch(string, Message[], Callback<MessageEnqueued>)'
     uid: azure-iot-device.ModuleClient.sendOutputEventBatch
     package: azure-iot-device
@@ -1246,14 +1256,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setMaxListeners(n: number)'
+      content: 'function setMaxListeners(n: number): this'
       parameters:
         - id: 'n'
           type: number
           description: ''
       return:
-        type: this
         description: ''
+        type: this
   - name: setOptions(DeviceClientOptions)
     uid: azure-iot-device.ModuleClient.setOptions_1
     package: azure-iot-device
@@ -1262,14 +1272,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setOptions(options: DeviceClientOptions)'
+      content: >-
+        function setOptions(options: DeviceClientOptions):
+        Promise<TransportConfigured>
       parameters:
         - id: options
           type: <xref uid="azure-iot-device.DeviceClientOptions" />
           description: ''
       return:
-        type: Promise&lt;TransportConfigured&gt;
         description: ''
+        type: Promise&lt;TransportConfigured&gt;
   - name: 'setOptions(DeviceClientOptions, Callback<TransportConfigured>)'
     uid: azure-iot-device.ModuleClient.setOptions
     package: azure-iot-device
@@ -1286,7 +1298,7 @@ methods:
       parameters:
         - id: options
           type: <xref uid="azure-iot-device.DeviceClientOptions" />
-          description: 'A <xref:DeviceClientOptions> object.'
+          description: 'A <xref:azure-iot-device.DeviceClientOptions> object.'
         - id: done
           type: Callback&lt;TransportConfigured&gt;
           description: ''
@@ -1314,14 +1326,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setTransportOptions(options: any)'
+      content: 'function setTransportOptions(options: any): Promise<TransportConfigured>'
       parameters:
         - id: options
           type: any
           description: ''
       return:
-        type: Promise&lt;TransportConfigured&gt;
         description: ''
+        type: Promise&lt;TransportConfigured&gt;
   - name: 'setTransportOptions(any, Callback<TransportConfigured>)'
     uid: azure-iot-device.ModuleClient.setTransportOptions
     package: azure-iot-device

@@ -10,8 +10,8 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      PostgreSQLManagementClient(ServiceClientCredentials | TokenCredential,
-      string, Models.PostgreSQLManagementClientOptions)
+      PostgreSQLManagementClient(TokenCredential, string,
+      PostgreSQLManagementClientOptionalParams)
     uid: '@azure/arm-postgresql.PostgreSQLManagementClient.constructor'
     package: '@azure/arm-postgresql'
     summary: Initializes a new instance of the PostgreSQLManagementClient class.
@@ -20,42 +20,36 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new PostgreSQLManagementClient(credentials: ServiceClientCredentials |
-        TokenCredential, subscriptionId: string, options?:
-        Models.PostgreSQLManagementClientOptions)
+        new PostgreSQLManagementClient(credentials: TokenCredential,
+        subscriptionId: string, options?:
+        PostgreSQLManagementClientOptionalParams)
       parameters:
         - id: credentials
-          type: ServiceClientCredentials | TokenCredential
+          type: TokenCredential
           description: >-
-            Credentials needed for the client to connect to Azure. Credentials
-
-            implementing the TokenCredential interface from the @azure/identity
-            package are recommended. For
-
-            more information about these credentials, see
-
-            https://www.npmjs.com/package/@azure/identity. Credentials
-            implementing the
-
-            ServiceClientCredentials interface from the older packages
-            @azure/ms-rest-nodeauth and
+            Subscription credentials which uniquely identify client
+            subscription.
         - id: subscriptionId
           type: string
           description: The ID of the target subscription.
         - id: options
-          type: <xref uid="Models.PostgreSQLManagementClientOptions" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-postgresql.PostgreSQLManagementClientOptionalParams"
+            />
+          description: |
+            The parameter options
 properties:
-  - name: acceptLanguage
-    uid: '@azure/arm-postgresql.PostgreSQLManagementClient.acceptLanguage'
+  - name: $host
+    uid: '@azure/arm-postgresql.PostgreSQLManagementClient.$host'
     package: '@azure/arm-postgresql'
     summary: ''
-    fullName: acceptLanguage
+    fullName: $host
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'acceptLanguage: string'
+      content: '$host: string'
       return:
         description: ''
         type: string
@@ -85,19 +79,6 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-postgresql.Configurations" />
-  - name: credentials
-    uid: '@azure/arm-postgresql.PostgreSQLManagementClient.credentials'
-    package: '@azure/arm-postgresql'
-    summary: ''
-    fullName: credentials
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'credentials: ServiceClientCredentials | TokenCredential'
-      return:
-        description: ''
-        type: ServiceClientCredentials | TokenCredential
   - name: databases
     uid: '@azure/arm-postgresql.PostgreSQLManagementClient.databases'
     package: '@azure/arm-postgresql'
@@ -151,22 +132,6 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-postgresql.LogFiles" />
-  - name: longRunningOperationRetryTimeout
-    uid: >-
-      @azure/arm-postgresql.PostgreSQLManagementClient.longRunningOperationRetryTimeout
-    package: '@azure/arm-postgresql'
-    summary: >-
-      The retry timeout in seconds for Long Running Operations. Default value is
-      30.
-    fullName: longRunningOperationRetryTimeout
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'longRunningOperationRetryTimeout?: undefined | number'
-      return:
-        description: ''
-        type: undefined | number
   - name: operations
     uid: '@azure/arm-postgresql.PostgreSQLManagementClient.operations'
     package: '@azure/arm-postgresql'
@@ -180,6 +145,19 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-postgresql.Operations" />
+  - name: pipeline
+    uid: '@azure/arm-postgresql.PostgreSQLManagementClient.pipeline'
+    package: '@azure/arm-postgresql'
+    summary: The pipeline used by this client to make requests
+    fullName: pipeline
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        description: ''
+        type: Pipeline
   - name: privateEndpointConnections
     uid: >-
       @azure/arm-postgresql.PostgreSQLManagementClient.privateEndpointConnections
@@ -340,119 +318,7 @@ properties:
         description: ''
         type: <xref uid="@azure/arm-postgresql.VirtualNetworkRules" />
 methods:
-  - name: >-
-      beginLongRunningRequest(RequestPrepareOptions | WebResource,
-      RequestOptionsBase)
-    uid: '@azure/arm-postgresql.PostgreSQLManagementClient.beginLongRunningRequest'
-    package: '@azure/arm-postgresql'
-    summary: >-
-      Send the initial request of a LRO (long running operation) and get back an
-
-      HttpLongRunningOperationResponse that provides methods for polling the LRO
-      and checking if the
-
-      LRO is finished.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginLongRunningRequest(request: RequestPrepareOptions |
-        WebResource, options?: RequestOptionsBase): Promise<LROPoller>
-      parameters:
-        - id: request
-          type: RequestPrepareOptions | WebResource
-          description: The request object
-        - id: options
-          type: RequestOptionsBase
-          description: ''
-      return:
-        description: |-
-          The HttpLongRunningOperationResponse
-          that provides methods for interacting with the LRO.
-        type: Promise&lt;LROPoller&gt;
-  - name: restoreLROPoller(LROPollState)
-    uid: '@azure/arm-postgresql.PostgreSQLManagementClient.restoreLROPoller'
-    package: '@azure/arm-postgresql'
-    summary: >-
-      Restore an LROPoller from the provided LROPollState. This method can be
-      used to recreate an
-
-      LROPoller on a different process or machine.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function restoreLROPoller(lroPollState: LROPollState): LROPoller'
-      parameters:
-        - id: lroPollState
-          type: LROPollState
-          description: ''
-      return:
-        description: ''
-        type: LROPoller
-  - name: >-
-      sendLongRunningRequest(RequestPrepareOptions | WebResource,
-      RequestOptionsBase)
-    uid: '@azure/arm-postgresql.PostgreSQLManagementClient.sendLongRunningRequest'
-    package: '@azure/arm-postgresql'
-    summary: >-
-      Provides a mechanism to make a request that will poll and provide the
-      final result.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function sendLongRunningRequest(request: RequestPrepareOptions |
-        WebResource, options?: RequestOptionsBase):
-        Promise<HttpOperationResponse>
-      parameters:
-        - id: request
-          type: RequestPrepareOptions | WebResource
-          description: The request object
-        - id: options
-          type: RequestOptionsBase
-          description: ''
-      return:
-        description: >-
-          The HttpOperationResponse containing the final polling request,
-          response and the responseBody.
-        type: Promise&lt;HttpOperationResponse&gt;
-  - name: 'sendLRORequest(OperationArguments, OperationSpec, RequestOptionsBase)'
-    uid: '@azure/arm-postgresql.PostgreSQLManagementClient.sendLRORequest'
-    package: '@azure/arm-postgresql'
-    summary: >-
-      Send the initial request of a LRO (long running operation) and get back an
-
-      LROPoller that provides methods for polling the LRO and checking if the
-      LRO is finished.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function sendLRORequest(operationArguments: OperationArguments,
-        operationSpec: OperationSpec, options?: RequestOptionsBase):
-        Promise<LROPoller>
-      parameters:
-        - id: operationArguments
-          type: OperationArguments
-          description: The arguments to the operation.
-        - id: operationSpec
-          type: OperationSpec
-          description: The specification for the operation.
-        - id: options
-          type: RequestOptionsBase
-          description: Additional options to be sent while making the request.
-      return:
-        description: >-
-          The LROPoller object that provides methods for interacting with the
-          LRO.
-        type: Promise&lt;LROPoller&gt;
-  - name: >-
-      sendOperationRequest(OperationArguments, OperationSpec,
-      ServiceCallback<any>)
+  - name: 'sendOperationRequest<T>(OperationArguments, OperationSpec)'
     uid: '@azure/arm-postgresql.PostgreSQLManagementClient.sendOperationRequest'
     package: '@azure/arm-postgresql'
     summary: Send an HTTP request that is populated using the provided OperationSpec.
@@ -461,9 +327,8 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendOperationRequest(operationArguments: OperationArguments,
-        operationSpec: OperationSpec, callback?: ServiceCallback<any>):
-        Promise<RestResponse>
+        function sendOperationRequest<T>(operationArguments: OperationArguments,
+        operationSpec: OperationSpec): Promise<T>
       parameters:
         - id: operationArguments
           type: OperationArguments
@@ -472,15 +337,12 @@ methods:
             populated from.
         - id: operationSpec
           type: OperationSpec
-          description: The OperationSpec to use to populate the httpRequest.
-        - id: callback
-          type: ServiceCallback&lt;any&gt;
           description: |
-            The callback to call when the response is received.
+            The OperationSpec to use to populate the httpRequest.
       return:
         description: ''
-        type: Promise&lt;RestResponse&gt;
-  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
+        type: Promise&lt;T&gt;
+  - name: sendRequest(PipelineRequest)
     uid: '@azure/arm-postgresql.PostgreSQLManagementClient.sendRequest'
     package: '@azure/arm-postgresql'
     summary: Send the provided httpRequest.
@@ -489,13 +351,13 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendRequest(options: RequestPrepareOptions | WebResourceLike):
-        Promise<HttpOperationResponse>
+        function sendRequest(request: PipelineRequest):
+        Promise<PipelineResponse>
       parameters:
-        - id: options
-          type: RequestPrepareOptions | WebResourceLike
+        - id: request
+          type: PipelineRequest
           description: ''
       return:
         description: ''
-        type: Promise&lt;HttpOperationResponse&gt;
-extends: <xref uid="@azure/arm-postgresql.PostgreSQLManagementClientContext" />
+        type: Promise&lt;PipelineResponse&gt;
+extends: ServiceClient

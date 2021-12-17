@@ -31,9 +31,8 @@ properties:
     package: '@azure/arm-servicefabric'
     summary: >-
       The capacity tags applied to the nodes in the node type, the cluster
-      resource manager uses
-
-      these tags to understand how much resource a node has.
+      resource manager uses these tags to understand how much resource a node
+      has.
     fullName: capacities
     remarks: ''
     isPreview: false
@@ -59,22 +58,13 @@ properties:
   - name: durabilityLevel
     uid: '@azure/arm-servicefabric.NodeTypeDescription.durabilityLevel'
     package: '@azure/arm-servicefabric'
-    summary: >
+    summary: >+
       The durability level of the node type. Learn about
-
       [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
+        - Bronze - No privileges. This is the default.
+        - Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.
+        - Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc.
 
-      - Bronze - No privileges. This is the default.
-
-      - Silver - The infrastructure jobs can be paused for a duration of 10
-      minutes per UD.
-
-      - Gold - The infrastructure jobs can be paused for a duration of 2 hours
-      per UD. Gold
-
-      durability can be enabled only on full node VM skus like D15_V2, G5 etc.
-
-      . Possible values include: 'Bronze', 'Silver', 'Gold'
     fullName: durabilityLevel
     remarks: ''
     isPreview: false
@@ -117,10 +107,8 @@ properties:
     package: '@azure/arm-servicefabric'
     summary: >-
       The node type on which system services will run. Only one node type should
-      be marked as
-
-      primary. Primary node type cannot be deleted or changed for existing
-      clusters.
+      be marked as primary. Primary node type cannot be deleted or changed for
+      existing clusters.
     fullName: isPrimary
     remarks: ''
     isPreview: false
@@ -130,6 +118,32 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: isStateless
+    uid: '@azure/arm-servicefabric.NodeTypeDescription.isStateless'
+    package: '@azure/arm-servicefabric'
+    summary: Indicates if the node type can only host Stateless workloads.
+    fullName: isStateless
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'isStateless?: undefined | false | true'
+      return:
+        description: ''
+        type: undefined | false | true
+  - name: multipleAvailabilityZones
+    uid: '@azure/arm-servicefabric.NodeTypeDescription.multipleAvailabilityZones'
+    package: '@azure/arm-servicefabric'
+    summary: Indicates if the node type is enabled to support multiple zones.
+    fullName: multipleAvailabilityZones
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'multipleAvailabilityZones?: undefined | false | true'
+      return:
+        description: ''
+        type: undefined | false | true
   - name: name
     uid: '@azure/arm-servicefabric.NodeTypeDescription.name'
     package: '@azure/arm-servicefabric'
@@ -148,9 +162,7 @@ properties:
     package: '@azure/arm-servicefabric'
     summary: >-
       The placement tags applied to nodes in the node type, which can be used to
-      indicate where
-
-      certain services (workload) should run.
+      indicate where certain services (workload) should run.
     fullName: placementProperties
     remarks: ''
     isPreview: false
@@ -177,10 +189,12 @@ properties:
     uid: '@azure/arm-servicefabric.NodeTypeDescription.vmInstanceCount'
     package: '@azure/arm-servicefabric'
     summary: >-
-      The number of nodes in the node type. This count should match the capacity
-      property in the
-
-      corresponding VirtualMachineScaleSet resource.
+      VMInstanceCount should be 1 to n, where n indicates the number of VM
+      instances corresponding to this nodeType. VMInstanceCount = 0 can be done
+      only in these scenarios: NodeType is a secondary nodeType. Durability =
+      Bronze or Durability >= Bronze and InfrastructureServiceManager = true. If
+      VMInstanceCount = 0, implies the VMs for this nodeType will not be used
+      for the initial cluster size computation.
     fullName: vmInstanceCount
     remarks: ''
     isPreview: false

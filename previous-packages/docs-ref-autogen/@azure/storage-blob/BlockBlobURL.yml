@@ -84,7 +84,7 @@ properties:
       return:
         description: ''
         type: string
-methods:
+inheritedMethods:
   - name: 'abortCopyFromURL(Aborter, string, IBlobAbortCopyFromURLOptions)'
     uid: '@azure/storage-blob.BlockBlobURL.abortCopyFromURL'
     package: '@azure/storage-blob'
@@ -223,50 +223,6 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="Models.BlobChangeLeaseResponse" />&gt;
-  - name: 'commitBlockList(Aborter, string[], IBlockBlobCommitBlockListOptions)'
-    uid: '@azure/storage-blob.BlockBlobURL.commitBlockList'
-    package: '@azure/storage-blob'
-    summary: >-
-      Writes a blob by specifying the list of block IDs that make up the blob.
-
-      In order to be written as part of a blob, a block must have been
-      successfully written
-
-      to the server in a prior stageBlock operation. You can call
-      commitBlockList to update a blob
-
-      by uploading only those blocks that have changed, then committing the new
-      and existing
-
-      blocks together. Any blocks not specified in the block list and
-      permanently deleted.
-
-
-      See https://docs.microsoft.com/rest/api/storageservices/put-block-list
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function commitBlockList(aborter: Aborter, blocks: string[], options?:
-        IBlockBlobCommitBlockListOptions):
-        Promise<Models.BlockBlobCommitBlockListResponse>
-      parameters:
-        - id: aborter
-          type: <xref uid="@azure/storage-blob.Aborter" />
-          description: >-
-            Create a new Aborter instance with Aborter.none or
-            Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
-        - id: blocks
-          type: 'string[]'
-          description: Array of 64-byte value that is base64-encoded
-        - id: options
-          type: <xref uid="@azure/storage-blob.IBlockBlobCommitBlockListOptions" />
-          description: ''
-      return:
-        description: ''
-        type: Promise&lt;<xref uid="Models.BlockBlobCommitBlockListResponse" />&gt;
   - name: 'createSnapshot(Aborter, IBlobCreateSnapshotOptions)'
     uid: '@azure/storage-blob.BlockBlobURL.createSnapshot'
     package: '@azure/storage-blob'
@@ -375,75 +331,6 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="Models.BlobDownloadResponse" />&gt;
-  - name: fromBlobURL(BlobURL)
-    uid: '@azure/storage-blob.BlockBlobURL.fromBlobURL'
-    package: '@azure/storage-blob'
-    summary: Creates a BlockBlobURL object from BlobURL instance.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'static function fromBlobURL(blobURL: BlobURL): BlockBlobURL'
-      parameters:
-        - id: blobURL
-          type: <xref uid="@azure/storage-blob.BlobURL" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@azure/storage-blob.BlockBlobURL" />
-  - name: 'fromContainerURL(ContainerURL, string)'
-    uid: '@azure/storage-blob.BlockBlobURL.fromContainerURL'
-    package: '@azure/storage-blob'
-    summary: Creates a BlockBlobURL object from ContainerURL instance.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function fromContainerURL(containerURL: ContainerURL, blobName:
-        string): BlockBlobURL
-      parameters:
-        - id: containerURL
-          type: <xref uid="@azure/storage-blob.ContainerURL" />
-          description: A ContainerURL object
-        - id: blobName
-          type: string
-          description: A block blob name
-      return:
-        description: ''
-        type: <xref uid="@azure/storage-blob.BlockBlobURL" />
-  - name: 'getBlockList(Aborter, Models.BlockListType, IBlockBlobGetBlockListOptions)'
-    uid: '@azure/storage-blob.BlockBlobURL.getBlockList'
-    package: '@azure/storage-blob'
-    summary: |-
-      Returns the list of blocks that have been uploaded as part of a block blob
-      using the specified block list filter.
-
-      See https://docs.microsoft.com/rest/api/storageservices/get-block-list
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function getBlockList(aborter: Aborter, listType: Models.BlockListType,
-        options?: IBlockBlobGetBlockListOptions):
-        Promise<Models.BlockBlobGetBlockListResponse>
-      parameters:
-        - id: aborter
-          type: <xref uid="@azure/storage-blob.Aborter" />
-          description: >-
-            Create a new Aborter instance with Aborter.none or
-            Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
-        - id: listType
-          type: <xref uid="Models.BlockListType" />
-          description: ''
-        - id: options
-          type: <xref uid="@azure/storage-blob.IBlockBlobGetBlockListOptions" />
-          description: ''
-      return:
-        description: ''
-        type: Promise&lt;<xref uid="Models.BlockBlobGetBlockListResponse" />&gt;
   - name: 'getProperties(Aborter, IBlobGetPropertiesOptions)'
     uid: '@azure/storage-blob.BlockBlobURL.getProperties'
     package: '@azure/storage-blob'
@@ -688,110 +575,6 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="Models.BlobSetTierResponse" />&gt;
-  - name: >-
-      stageBlock(Aborter, string, HttpRequestBody, number,
-      IBlockBlobStageBlockOptions)
-    uid: '@azure/storage-blob.BlockBlobURL.stageBlock'
-    package: '@azure/storage-blob'
-    summary: |-
-      Uploads the specified block to the block blob's "staging area" to be later
-      committed by a call to commitBlockList.
-
-      See https://docs.microsoft.com/rest/api/storageservices/put-block
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function stageBlock(aborter: Aborter, blockId: string, body:
-        HttpRequestBody, contentLength: number, options?:
-        IBlockBlobStageBlockOptions):
-        Promise<Models.BlockBlobStageBlockResponse>
-      parameters:
-        - id: aborter
-          type: <xref uid="@azure/storage-blob.Aborter" />
-          description: >-
-            Create a new Aborter instance with Aborter.none or
-            Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
-        - id: blockId
-          type: string
-          description: A 64-byte value that is base64-encoded
-        - id: body
-          type: HttpRequestBody
-          description: ''
-        - id: contentLength
-          type: number
-          description: ''
-        - id: options
-          type: <xref uid="@azure/storage-blob.IBlockBlobStageBlockOptions" />
-          description: ''
-      return:
-        description: ''
-        type: Promise&lt;<xref uid="Models.BlockBlobStageBlockResponse" />&gt;
-  - name: >-
-      stageBlockFromURL(Aborter, string, string, number, undefined | number,
-      IBlockBlobStageBlockFromURLOptions)
-    uid: '@azure/storage-blob.BlockBlobURL.stageBlockFromURL'
-    package: '@azure/storage-blob'
-    summary: >-
-      The Stage Block From URL operation creates a new block to be committed as
-      part
-
-      of a blob where the contents are read from a URL.
-
-      This API is available starting in version 2018-03-28.
-
-
-      See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/put-block-from-url
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function stageBlockFromURL(aborter: Aborter, blockId: string, sourceURL:
-        string, offset: number, count?: undefined | number, options?:
-        IBlockBlobStageBlockFromURLOptions):
-        Promise<Models.BlockBlobStageBlockFromURLResponse>
-      parameters:
-        - id: aborter
-          type: <xref uid="@azure/storage-blob.Aborter" />
-          description: >-
-            Create a new Aborter instance with Aborter.none or
-            Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
-        - id: blockId
-          type: string
-          description: A 64-byte value that is base64-encoded
-        - id: sourceURL
-          type: string
-          description: |-
-            Specifies the URL of the blob. The value
-                                      may be a URL of up to 2 KB in length that specifies a blob.
-                                      The value should be URL-encoded as it would appear
-                                      in a request URI. The source blob must either be public
-                                      or must be authenticated via a shared access signature.
-                                      If the source blob is public, no authentication is required
-                                      to perform the operation. Here are some examples of source object URLs:
-                                      - https://myaccount.blob.core.windows.net/mycontainer/myblob
-                                      - https://myaccount.blob.core.windows.net/mycontainer/myblob?snapshot=<DateTime>
-        - id: offset
-          type: number
-          description: 'From which position of the blob to download, >= 0'
-        - id: count
-          type: undefined | number
-          description: ''
-        - id: options
-          type: >-
-            <xref uid="@azure/storage-blob.IBlockBlobStageBlockFromURLOptions"
-            />
-          description: ''
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref uid="Models.BlockBlobStageBlockFromURLResponse"
-          />&gt;
   - name: 'startCopyFromURL(Aborter, string, IBlobStartCopyFromURLOptions)'
     uid: '@azure/storage-blob.BlockBlobURL.startCopyFromURL'
     package: '@azure/storage-blob'
@@ -907,6 +690,224 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="Models.BlobUndeleteResponse" />&gt;
+methods:
+  - name: 'commitBlockList(Aborter, string[], IBlockBlobCommitBlockListOptions)'
+    uid: '@azure/storage-blob.BlockBlobURL.commitBlockList'
+    package: '@azure/storage-blob'
+    summary: >-
+      Writes a blob by specifying the list of block IDs that make up the blob.
+
+      In order to be written as part of a blob, a block must have been
+      successfully written
+
+      to the server in a prior stageBlock operation. You can call
+      commitBlockList to update a blob
+
+      by uploading only those blocks that have changed, then committing the new
+      and existing
+
+      blocks together. Any blocks not specified in the block list and
+      permanently deleted.
+
+
+      See https://docs.microsoft.com/rest/api/storageservices/put-block-list
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function commitBlockList(aborter: Aborter, blocks: string[], options?:
+        IBlockBlobCommitBlockListOptions):
+        Promise<Models.BlockBlobCommitBlockListResponse>
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: blocks
+          type: 'string[]'
+          description: Array of 64-byte value that is base64-encoded
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlockBlobCommitBlockListOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="Models.BlockBlobCommitBlockListResponse" />&gt;
+  - name: fromBlobURL(BlobURL)
+    uid: '@azure/storage-blob.BlockBlobURL.fromBlobURL'
+    package: '@azure/storage-blob'
+    summary: Creates a BlockBlobURL object from BlobURL instance.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'static function fromBlobURL(blobURL: BlobURL): BlockBlobURL'
+      parameters:
+        - id: blobURL
+          type: <xref uid="@azure/storage-blob.BlobURL" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-blob.BlockBlobURL" />
+  - name: 'fromContainerURL(ContainerURL, string)'
+    uid: '@azure/storage-blob.BlockBlobURL.fromContainerURL'
+    package: '@azure/storage-blob'
+    summary: Creates a BlockBlobURL object from ContainerURL instance.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromContainerURL(containerURL: ContainerURL, blobName:
+        string): BlockBlobURL
+      parameters:
+        - id: containerURL
+          type: <xref uid="@azure/storage-blob.ContainerURL" />
+          description: A ContainerURL object
+        - id: blobName
+          type: string
+          description: A block blob name
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-blob.BlockBlobURL" />
+  - name: 'getBlockList(Aborter, Models.BlockListType, IBlockBlobGetBlockListOptions)'
+    uid: '@azure/storage-blob.BlockBlobURL.getBlockList'
+    package: '@azure/storage-blob'
+    summary: |-
+      Returns the list of blocks that have been uploaded as part of a block blob
+      using the specified block list filter.
+
+      See https://docs.microsoft.com/rest/api/storageservices/get-block-list
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getBlockList(aborter: Aborter, listType: Models.BlockListType,
+        options?: IBlockBlobGetBlockListOptions):
+        Promise<Models.BlockBlobGetBlockListResponse>
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: listType
+          type: <xref uid="Models.BlockListType" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlockBlobGetBlockListOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="Models.BlockBlobGetBlockListResponse" />&gt;
+  - name: >-
+      stageBlock(Aborter, string, HttpRequestBody, number,
+      IBlockBlobStageBlockOptions)
+    uid: '@azure/storage-blob.BlockBlobURL.stageBlock'
+    package: '@azure/storage-blob'
+    summary: |-
+      Uploads the specified block to the block blob's "staging area" to be later
+      committed by a call to commitBlockList.
+
+      See https://docs.microsoft.com/rest/api/storageservices/put-block
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function stageBlock(aborter: Aborter, blockId: string, body:
+        HttpRequestBody, contentLength: number, options?:
+        IBlockBlobStageBlockOptions):
+        Promise<Models.BlockBlobStageBlockResponse>
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: blockId
+          type: string
+          description: A 64-byte value that is base64-encoded
+        - id: body
+          type: HttpRequestBody
+          description: ''
+        - id: contentLength
+          type: number
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.IBlockBlobStageBlockOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="Models.BlockBlobStageBlockResponse" />&gt;
+  - name: >-
+      stageBlockFromURL(Aborter, string, string, number, undefined | number,
+      IBlockBlobStageBlockFromURLOptions)
+    uid: '@azure/storage-blob.BlockBlobURL.stageBlockFromURL'
+    package: '@azure/storage-blob'
+    summary: >-
+      The Stage Block From URL operation creates a new block to be committed as
+      part
+
+      of a blob where the contents are read from a URL.
+
+      This API is available starting in version 2018-03-28.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/put-block-from-url
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function stageBlockFromURL(aborter: Aborter, blockId: string, sourceURL:
+        string, offset: number, count?: undefined | number, options?:
+        IBlockBlobStageBlockFromURLOptions):
+        Promise<Models.BlockBlobStageBlockFromURLResponse>
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-blob.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: blockId
+          type: string
+          description: A 64-byte value that is base64-encoded
+        - id: sourceURL
+          type: string
+          description: |-
+            Specifies the URL of the blob. The value
+                                      may be a URL of up to 2 KB in length that specifies a blob.
+                                      The value should be URL-encoded as it would appear
+                                      in a request URI. The source blob must either be public
+                                      or must be authenticated via a shared access signature.
+                                      If the source blob is public, no authentication is required
+                                      to perform the operation. Here are some examples of source object URLs:
+                                      - https://myaccount.blob.core.windows.net/mycontainer/myblob
+                                      - https://myaccount.blob.core.windows.net/mycontainer/myblob?snapshot=<DateTime>
+        - id: offset
+          type: number
+          description: 'From which position of the blob to download, >= 0'
+        - id: count
+          type: undefined | number
+          description: ''
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-blob.IBlockBlobStageBlockFromURLOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="Models.BlockBlobStageBlockFromURLResponse"
+          />&gt;
   - name: 'upload(Aborter, HttpRequestBody, number, IBlockBlobUploadOptions)'
     uid: '@azure/storage-blob.BlockBlobURL.upload'
     package: '@azure/storage-blob'

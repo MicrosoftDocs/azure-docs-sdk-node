@@ -2,7 +2,7 @@
 name: BaselinesListOptionalParams
 uid: '@azure/arm-monitor.BaselinesListOptionalParams'
 package: '@azure/arm-monitor'
-summary: Optional Parameters.
+summary: Optional parameters.
 fullName: BaselinesListOptionalParams
 remarks: ''
 isPreview: false
@@ -35,47 +35,25 @@ properties:
       return:
         description: ''
         type: undefined | string
-  - name: customHeaders
-    uid: '@azure/arm-monitor.BaselinesListOptionalParams.customHeaders'
-    package: '@azure/arm-monitor'
-    summary: |-
-      {object} [customHeaders] User defined custom request headers that
-      will be applied before the request is sent.
-    fullName: customHeaders
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'customHeaders?: undefined | [key: string]: string'
-      return:
-        description: ''
-        type: 'undefined | [key: string]: string'
   - name: filter
     uid: '@azure/arm-monitor.BaselinesListOptionalParams.filter'
     package: '@azure/arm-monitor'
     summary: >-
-      The **$filter** is used to reduce the set of metric data
-      returned.<br>Example:<br>Metric
-
-      contains metadata A, B and C.<br>- Return all time series of C where A =
-      a1 and B = b1 or
-
-      b2<br>**$filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>-
-      Invalid
-
-      variant:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B =
-      ‘b2’**<br>This is invalid
-
-      because the logical or operator cannot separate two different metadata
-      names.<br>- Return all
-
-      time series where A = a1, B = b1 and C = c1:<br>**$filter=A eq ‘a1’ and B
-      eq ‘b1’ and C eq
-
-      ‘c1’**<br>- Return all time series where A = a1<br>**$filter=A eq ‘a1’ and
-      B eq ‘*’ and C eq
-
-      ‘*’**.
+      The **$filter** is used to reduce the set of metric data returned.
+      Example: Metric contains metadata A, B and C. - Return all time series of
+      C where A = a1 and B = b1 or b2 **$filter=A eq 'a1' and B eq 'b1' or B eq
+      'b2' and C eq '*'** - Invalid variant: **$filter=A eq 'a1' and B eq 'b1'
+      and C eq '*' or B = 'b2'** This is invalid because the logical or operator
+      cannot separate two different metadata names. - Return all time series
+      where A = a1, B = b1 and C = c1: **$filter=A eq 'a1' and B eq 'b1' and C
+      eq 'c1'** - Return all time series where A = a1 **$filter=A eq 'a1' and B
+      eq '*' and C eq '*'**. Special case: When dimension name or dimension
+      value uses round brackets. Eg: When dimension name is **dim (test) 1**
+      Instead of using $filter= "dim (test) 1 eq '*' " use **$filter= "dim
+      %2528test%2529 1 eq '*' "** When dimension name is **dim (test) 3** and
+      dimension value is **dim3 (test) val** Instead of using $filter= "dim
+      (test) 3 eq 'dim3 (test) val' " use **$filter= "dim %2528test%2529 3 eq
+      'dim3 %2528test%2529 val' "**
     fullName: filter
     remarks: ''
     isPreview: false
@@ -101,7 +79,10 @@ properties:
   - name: metricnames
     uid: '@azure/arm-monitor.BaselinesListOptionalParams.metricnames'
     package: '@azure/arm-monitor'
-    summary: The names of the metrics (comma separated) to retrieve.
+    summary: >-
+      The names of the metrics (comma separated) to retrieve. Special case: If a
+      metricname itself has a comma in it then use %2 to indicate it. Eg:
+      'Metric,Name1' should be **'Metric%2Name1'**
     fullName: metricnames
     remarks: ''
     isPreview: false
@@ -124,42 +105,41 @@ properties:
       return:
         description: ''
         type: undefined | string
-  - name: onDownloadProgress
-    uid: '@azure/arm-monitor.BaselinesListOptionalParams.onDownloadProgress'
+  - name: onResponse
+    uid: '@azure/arm-monitor.BaselinesListOptionalParams.onResponse'
     package: '@azure/arm-monitor'
-    summary: Callback which fires upon download progress.
-    fullName: onDownloadProgress
+    summary: |-
+      A function to be called each time a response is received from the server
+      while performing the requested operation.
+      May be called multiple times.
+    fullName: onResponse
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: >-
-        onDownloadProgress?: undefined | (progress: TransferProgressEvent) =>
-        void
+      content: 'onResponse?: RawResponseCallback'
       return:
         description: ''
-        type: 'undefined | (progress: TransferProgressEvent) =&gt; void'
-  - name: onUploadProgress
-    uid: '@azure/arm-monitor.BaselinesListOptionalParams.onUploadProgress'
+        type: RawResponseCallback
+  - name: requestOptions
+    uid: '@azure/arm-monitor.BaselinesListOptionalParams.requestOptions'
     package: '@azure/arm-monitor'
-    summary: Callback which fires upon upload progress.
-    fullName: onUploadProgress
+    summary: Options used when creating and sending HTTP requests for this operation.
+    fullName: requestOptions
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'onUploadProgress?: undefined | (progress: TransferProgressEvent) => void'
+      content: 'requestOptions?: OperationRequestOptions'
       return:
         description: ''
-        type: 'undefined | (progress: TransferProgressEvent) =&gt; void'
+        type: OperationRequestOptions
   - name: resultType
     uid: '@azure/arm-monitor.BaselinesListOptionalParams.resultType'
     package: '@azure/arm-monitor'
     summary: >-
       Allows retrieving only metadata of the baseline. On data request all
       information is retrieved.
-
-      Possible values include: 'Data', 'Metadata'
     fullName: resultType
     remarks: ''
     isPreview: false
@@ -182,25 +162,23 @@ properties:
       return:
         description: ''
         type: undefined | string
-  - name: timeout
-    uid: '@azure/arm-monitor.BaselinesListOptionalParams.timeout'
+  - name: serializerOptions
+    uid: '@azure/arm-monitor.BaselinesListOptionalParams.serializerOptions'
     package: '@azure/arm-monitor'
-    summary: >-
-      The number of milliseconds a request can take before automatically being
-      terminated.
-    fullName: timeout
+    summary: Options to override serialization/de-serialization behavior.
+    fullName: serializerOptions
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'timeout?: undefined | number'
+      content: 'serializerOptions?: SerializerOptions'
       return:
         description: ''
-        type: undefined | number
+        type: SerializerOptions
   - name: timespan
     uid: '@azure/arm-monitor.BaselinesListOptionalParams.timespan'
     package: '@azure/arm-monitor'
-    summary: |-
+    summary: >-
       The timespan of the query. It is a string with the following format
       'startDateTime_ISO/endDateTime_ISO'.
     fullName: timespan
@@ -212,4 +190,17 @@ properties:
       return:
         description: ''
         type: undefined | string
-extends: RequestOptionsBase
+  - name: tracingOptions
+    uid: '@azure/arm-monitor.BaselinesListOptionalParams.tracingOptions'
+    package: '@azure/arm-monitor'
+    summary: Options used when tracing is enabled.
+    fullName: tracingOptions
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'tracingOptions?: OperationTracingOptions'
+      return:
+        description: ''
+        type: OperationTracingOptions
+extends: OperationOptions

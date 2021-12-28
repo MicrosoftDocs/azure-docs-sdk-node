@@ -2,30 +2,15 @@
 name: PoolOperations
 uid: '@azure/arm-batch.PoolOperations'
 package: '@azure/arm-batch'
-summary: Class representing a PoolOperations.
+summary: Interface representing a PoolOperations.
 fullName: PoolOperations
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: PoolOperations(BatchManagementClientContext)
-    uid: '@azure/arm-batch.PoolOperations.constructor'
-    package: '@azure/arm-batch'
-    summary: Create a PoolOperations.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'new PoolOperations(client: BatchManagementClientContext)'
-      parameters:
-        - id: client
-          type: <xref uid="@azure/arm-batch.BatchManagementClientContext" />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
-  - name: 'beginDeleteMethod(string, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-batch.PoolOperations.beginDeleteMethod'
+  - name: 'beginDelete(string, string, string, PoolDeleteOptionalParams)'
+    uid: '@azure/arm-batch.PoolOperations.beginDelete'
     package: '@azure/arm-batch'
     summary: Deletes the specified pool.
     remarks: ''
@@ -33,9 +18,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function beginDeleteMethod(resourceGroupName: string, accountName:
-        string, poolName: string, options?: msRest.RequestOptionsBase):
-        Promise<LROPoller>
+        function beginDelete(resourceGroupName: string, accountName: string,
+        poolName: string, options?: PoolDeleteOptionalParams):
+        Promise<PollerLike<PollOperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -47,12 +32,42 @@ methods:
           type: string
           description: The pool name. This must be unique within the account.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-batch.PoolDeleteOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
-  - name: 'create(string, string, string, Pool, Models.PoolCreateOptionalParams)'
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+  - name: 'beginDeleteAndWait(string, string, string, PoolDeleteOptionalParams)'
+    uid: '@azure/arm-batch.PoolOperations.beginDeleteAndWait'
+    package: '@azure/arm-batch'
+    summary: Deletes the specified pool.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteAndWait(resourceGroupName: string, accountName:
+        string, poolName: string, options?: PoolDeleteOptionalParams):
+        Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group that contains the Batch account.
+        - id: accountName
+          type: string
+          description: The name of the Batch account.
+        - id: poolName
+          type: string
+          description: The pool name. This must be unique within the account.
+        - id: options
+          type: <xref uid="@azure/arm-batch.PoolDeleteOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: 'create(string, string, string, Pool, PoolCreateOptionalParams)'
     uid: '@azure/arm-batch.PoolOperations.create'
     package: '@azure/arm-batch'
     summary: Creates a new pool inside the specified account.
@@ -62,41 +77,8 @@ methods:
     syntax:
       content: >-
         function create(resourceGroupName: string, accountName: string,
-        poolName: string, parameters: Pool, options?:
-        Models.PoolCreateOptionalParams): Promise<Models.PoolCreateResponse>
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: poolName
-          type: string
-          description: The pool name. This must be unique within the account.
-        - id: parameters
-          type: <xref uid="@azure/arm-batch.Pool" />
-          description: Additional parameters for pool creation.
-        - id: options
-          type: <xref uid="Models.PoolCreateOptionalParams" />
-          description: ''
-      return:
-        description: Promise<Models.PoolCreateResponse>
-        type: Promise&lt;<xref uid="Models.PoolCreateResponse" />&gt;
-  - name: >-
-      create(string, string, string, Pool, PoolCreateOptionalParams,
-      ServiceCallback<Pool>)
-    uid: '@azure/arm-batch.PoolOperations.create_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function create(resourceGroupName: string, accountName: string,
-        poolName: string, parameters: Pool, options: PoolCreateOptionalParams,
-        callback: ServiceCallback<Pool>)
+        poolName: string, parameters: Pool, options?: PoolCreateOptionalParams):
+        Promise<PoolCreateResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -112,68 +94,14 @@ methods:
           description: Additional parameters for pool creation.
         - id: options
           type: <xref uid="@azure/arm-batch.PoolCreateOptionalParams" />
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Pool" />&gt;
           description: |
-            The callback
-  - name: 'create(string, string, string, Pool, ServiceCallback<Pool>)'
-    uid: '@azure/arm-batch.PoolOperations.create_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function create(resourceGroupName: string, accountName: string,
-        poolName: string, parameters: Pool, callback: ServiceCallback<Pool>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: poolName
-          type: string
-          description: The pool name. This must be unique within the account.
-        - id: parameters
-          type: <xref uid="@azure/arm-batch.Pool" />
-          description: Additional parameters for pool creation.
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Pool" />&gt;
-          description: |
-            The callback
-  - name: 'deleteMethod(string, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-batch.PoolOperations.deleteMethod'
-    package: '@azure/arm-batch'
-    summary: Deletes the specified pool.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deleteMethod(resourceGroupName: string, accountName: string,
-        poolName: string, options?: msRest.RequestOptionsBase):
-        Promise<Models.PoolDeleteResponse>
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: poolName
-          type: string
-          description: The pool name. This must be unique within the account.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+            The options parameters.
       return:
-        description: Promise<Models.PoolDeleteResponse>
-        type: Promise&lt;<xref uid="Models.PoolDeleteResponse" />&gt;
-  - name: 'disableAutoScale(string, string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-batch.PoolCreateResponse" />&gt;
+  - name: >-
+      disableAutoScale(string, string, string,
+      PoolDisableAutoScaleOptionalParams)
     uid: '@azure/arm-batch.PoolOperations.disableAutoScale'
     package: '@azure/arm-batch'
     summary: Disables automatic scaling for a pool.
@@ -183,8 +111,8 @@ methods:
     syntax:
       content: >-
         function disableAutoScale(resourceGroupName: string, accountName:
-        string, poolName: string, options?: msRest.RequestOptionsBase):
-        Promise<Models.PoolDisableAutoScaleResponse>
+        string, poolName: string, options?: PoolDisableAutoScaleOptionalParams):
+        Promise<PoolDisableAutoScaleResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -196,68 +124,15 @@ methods:
           type: string
           description: The pool name. This must be unique within the account.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-batch.PoolDisableAutoScaleOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.PoolDisableAutoScaleResponse>
-        type: Promise&lt;<xref uid="Models.PoolDisableAutoScaleResponse" />&gt;
-  - name: >-
-      disableAutoScale(string, string, string, RequestOptionsBase,
-      ServiceCallback<Pool>)
-    uid: '@azure/arm-batch.PoolOperations.disableAutoScale_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function disableAutoScale(resourceGroupName: string, accountName:
-        string, poolName: string, options: RequestOptionsBase, callback:
-        ServiceCallback<Pool>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: poolName
-          type: string
-          description: The pool name. This must be unique within the account.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Pool" />&gt;
-          description: |
-            The callback
-  - name: 'disableAutoScale(string, string, string, ServiceCallback<Pool>)'
-    uid: '@azure/arm-batch.PoolOperations.disableAutoScale_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function disableAutoScale(resourceGroupName: string, accountName:
-        string, poolName: string, callback: ServiceCallback<Pool>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: poolName
-          type: string
-          description: The pool name. This must be unique within the account.
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Pool" />&gt;
-          description: |
-            The callback
-  - name: 'get(string, string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-batch.PoolDisableAutoScaleResponse"
+          />&gt;
+  - name: 'get(string, string, string, PoolGetOptionalParams)'
     uid: '@azure/arm-batch.PoolOperations.get'
     package: '@azure/arm-batch'
     summary: Gets information about the specified pool.
@@ -267,8 +142,7 @@ methods:
     syntax:
       content: >-
         function get(resourceGroupName: string, accountName: string, poolName:
-        string, options?: msRest.RequestOptionsBase):
-        Promise<Models.PoolGetResponse>
+        string, options?: PoolGetOptionalParams): Promise<PoolGetResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -280,67 +154,13 @@ methods:
           type: string
           description: The pool name. This must be unique within the account.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-batch.PoolGetOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.PoolGetResponse>
-        type: Promise&lt;<xref uid="Models.PoolGetResponse" />&gt;
-  - name: 'get(string, string, string, RequestOptionsBase, ServiceCallback<Pool>)'
-    uid: '@azure/arm-batch.PoolOperations.get_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, accountName: string, poolName:
-        string, options: RequestOptionsBase, callback: ServiceCallback<Pool>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: poolName
-          type: string
-          description: The pool name. This must be unique within the account.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Pool" />&gt;
-          description: |
-            The callback
-  - name: 'get(string, string, string, ServiceCallback<Pool>)'
-    uid: '@azure/arm-batch.PoolOperations.get_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, accountName: string, poolName:
-        string, callback: ServiceCallback<Pool>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: poolName
-          type: string
-          description: The pool name. This must be unique within the account.
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Pool" />&gt;
-          description: |
-            The callback
-  - name: >-
-      listByBatchAccount(string, string,
-      Models.PoolListByBatchAccountOptionalParams)
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-batch.PoolGetResponse" />&gt;
+  - name: 'listByBatchAccount(string, string, PoolListByBatchAccountOptionalParams)'
     uid: '@azure/arm-batch.PoolOperations.listByBatchAccount'
     package: '@azure/arm-batch'
     summary: Lists all of the pools in the specified account.
@@ -350,35 +170,8 @@ methods:
     syntax:
       content: >-
         function listByBatchAccount(resourceGroupName: string, accountName:
-        string, options?: Models.PoolListByBatchAccountOptionalParams):
-        Promise<Models.PoolListByBatchAccountResponse>
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: options
-          type: <xref uid="Models.PoolListByBatchAccountOptionalParams" />
-          description: ''
-      return:
-        description: Promise<Models.PoolListByBatchAccountResponse>
-        type: Promise&lt;<xref uid="Models.PoolListByBatchAccountResponse" />&gt;
-  - name: >-
-      listByBatchAccount(string, string, PoolListByBatchAccountOptionalParams,
-      ServiceCallback<ListPoolsResult>)
-    uid: '@azure/arm-batch.PoolOperations.listByBatchAccount_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByBatchAccount(resourceGroupName: string, accountName:
-        string, options: PoolListByBatchAccountOptionalParams, callback:
-        ServiceCallback<ListPoolsResult>)
+        string, options?: PoolListByBatchAccountOptionalParams):
+        PagedAsyncIterableIterator<Pool>
       parameters:
         - id: resourceGroupName
           type: string
@@ -388,141 +181,39 @@ methods:
           description: The name of the Batch account.
         - id: options
           type: <xref uid="@azure/arm-batch.PoolListByBatchAccountOptionalParams" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-batch.ListPoolsResult"
-            />&gt;
           description: |
-            The callback
-  - name: 'listByBatchAccount(string, string, ServiceCallback<ListPoolsResult>)'
-    uid: '@azure/arm-batch.PoolOperations.listByBatchAccount_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByBatchAccount(resourceGroupName: string, accountName:
-        string, callback: ServiceCallback<ListPoolsResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-batch.ListPoolsResult"
-            />&gt;
-          description: |
-            The callback
-  - name: >-
-      listByBatchAccountNext(string,
-      Models.PoolListByBatchAccountNextOptionalParams)
-    uid: '@azure/arm-batch.PoolOperations.listByBatchAccountNext'
-    package: '@azure/arm-batch'
-    summary: Lists all of the pools in the specified account.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByBatchAccountNext(nextPageLink: string, options?:
-        Models.PoolListByBatchAccountNextOptionalParams):
-        Promise<Models.PoolListByBatchAccountNextResponse>
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="Models.PoolListByBatchAccountNextOptionalParams" />
-          description: ''
+            The options parameters.
       return:
-        description: Promise<Models.PoolListByBatchAccountNextResponse>
-        type: >-
-          Promise&lt;<xref uid="Models.PoolListByBatchAccountNextResponse"
-          />&gt;
-  - name: >-
-      listByBatchAccountNext(string, PoolListByBatchAccountNextOptionalParams,
-      ServiceCallback<ListPoolsResult>)
-    uid: '@azure/arm-batch.PoolOperations.listByBatchAccountNext_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByBatchAccountNext(nextPageLink: string, options:
-        PoolListByBatchAccountNextOptionalParams, callback:
-        ServiceCallback<ListPoolsResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: >-
-            <xref
-            uid="@azure/arm-batch.PoolListByBatchAccountNextOptionalParams" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-batch.ListPoolsResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listByBatchAccountNext(string, ServiceCallback<ListPoolsResult>)'
-    uid: '@azure/arm-batch.PoolOperations.listByBatchAccountNext_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByBatchAccountNext(nextPageLink: string, callback:
-        ServiceCallback<ListPoolsResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-batch.ListPoolsResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'stopResize(string, string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-batch.Pool" />&gt;
+  - name: 'stopResize(string, string, string, PoolStopResizeOptionalParams)'
     uid: '@azure/arm-batch.PoolOperations.stopResize'
     package: '@azure/arm-batch'
     summary: >-
       This does not restore the pool to its previous state before the resize
-      operation: it only stops
+      operation: it only stops any
 
-      any further changes being made, and the pool maintains its current state.
-      After stopping, the
+      further changes being made, and the pool maintains its current state.
+      After stopping, the pool
 
-      pool stabilizes at the number of nodes it was at when the stop operation
-      was done. During the
+      stabilizes at the number of nodes it was at when the stop operation was
+      done. During the stop
 
-      stop operation, the pool allocation state changes first to stopping and
-      then to steady. A resize
+      operation, the pool allocation state changes first to stopping and then to
+      steady. A resize
 
       operation need not be an explicit resize pool request; this API can also
-      be used to halt the
+      be used to halt the initial
 
-      initial sizing of the pool when it is created.
+      sizing of the pool when it is created.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function stopResize(resourceGroupName: string, accountName: string,
-        poolName: string, options?: msRest.RequestOptionsBase):
-        Promise<Models.PoolStopResizeResponse>
+        poolName: string, options?: PoolStopResizeOptionalParams):
+        Promise<PoolStopResizeResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -534,68 +225,13 @@ methods:
           type: string
           description: The pool name. This must be unique within the account.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-batch.PoolStopResizeOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.PoolStopResizeResponse>
-        type: Promise&lt;<xref uid="Models.PoolStopResizeResponse" />&gt;
-  - name: >-
-      stopResize(string, string, string, RequestOptionsBase,
-      ServiceCallback<Pool>)
-    uid: '@azure/arm-batch.PoolOperations.stopResize_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function stopResize(resourceGroupName: string, accountName: string,
-        poolName: string, options: RequestOptionsBase, callback:
-        ServiceCallback<Pool>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: poolName
-          type: string
-          description: The pool name. This must be unique within the account.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Pool" />&gt;
-          description: |
-            The callback
-  - name: 'stopResize(string, string, string, ServiceCallback<Pool>)'
-    uid: '@azure/arm-batch.PoolOperations.stopResize_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function stopResize(resourceGroupName: string, accountName: string,
-        poolName: string, callback: ServiceCallback<Pool>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: poolName
-          type: string
-          description: The pool name. This must be unique within the account.
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Pool" />&gt;
-          description: |
-            The callback
-  - name: 'update(string, string, string, Pool, Models.PoolUpdateOptionalParams)'
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-batch.PoolStopResizeResponse" />&gt;
+  - name: 'update(string, string, string, Pool, PoolUpdateOptionalParams)'
     uid: '@azure/arm-batch.PoolOperations.update'
     package: '@azure/arm-batch'
     summary: Updates the properties of an existing pool.
@@ -605,8 +241,8 @@ methods:
     syntax:
       content: >-
         function update(resourceGroupName: string, accountName: string,
-        poolName: string, parameters: Pool, options?:
-        Models.PoolUpdateOptionalParams): Promise<Models.PoolUpdateResponse>
+        poolName: string, parameters: Pool, options?: PoolUpdateOptionalParams):
+        Promise<PoolUpdateResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -622,81 +258,11 @@ methods:
           description: >-
             Pool properties that should be updated. Properties that are supplied
             will be
-
-            updated, any property not supplied will be unchanged.
-        - id: options
-          type: <xref uid="Models.PoolUpdateOptionalParams" />
-          description: ''
-      return:
-        description: Promise<Models.PoolUpdateResponse>
-        type: Promise&lt;<xref uid="Models.PoolUpdateResponse" />&gt;
-  - name: >-
-      update(string, string, string, Pool, PoolUpdateOptionalParams,
-      ServiceCallback<Pool>)
-    uid: '@azure/arm-batch.PoolOperations.update_2'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function update(resourceGroupName: string, accountName: string,
-        poolName: string, parameters: Pool, options: PoolUpdateOptionalParams,
-        callback: ServiceCallback<Pool>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: poolName
-          type: string
-          description: The pool name. This must be unique within the account.
-        - id: parameters
-          type: <xref uid="@azure/arm-batch.Pool" />
-          description: >-
-            Pool properties that should be updated. Properties that are supplied
-            will be
-
-            updated, any property not supplied will be unchanged.
+                              updated, any property not supplied will be unchanged.
         - id: options
           type: <xref uid="@azure/arm-batch.PoolUpdateOptionalParams" />
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Pool" />&gt;
           description: |
-            The callback
-  - name: 'update(string, string, string, Pool, ServiceCallback<Pool>)'
-    uid: '@azure/arm-batch.PoolOperations.update_1'
-    package: '@azure/arm-batch'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function update(resourceGroupName: string, accountName: string,
-        poolName: string, parameters: Pool, callback: ServiceCallback<Pool>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group that contains the Batch account.
-        - id: accountName
-          type: string
-          description: The name of the Batch account.
-        - id: poolName
-          type: string
-          description: The pool name. This must be unique within the account.
-        - id: parameters
-          type: <xref uid="@azure/arm-batch.Pool" />
-          description: >-
-            Pool properties that should be updated. Properties that are supplied
-            will be
-
-            updated, any property not supplied will be unchanged.
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-batch.Pool" />&gt;
-          description: |
-            The callback
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-batch.PoolUpdateResponse" />&gt;

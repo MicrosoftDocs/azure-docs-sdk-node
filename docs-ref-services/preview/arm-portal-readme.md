@@ -3,22 +3,21 @@ title: Azure Service client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-portal, portal
 author: qiaozha
 ms.author: qiaozha
-ms.date: 11/30/2021
+ms.date: 12/29/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: portal
 ---
-
-# Azure Service client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Service client library for JavaScript - Version 1.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Service client.
 
 Allows creation and deletion of Azure Shared Dashboards.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-portal_1.0.0-beta.1/sdk/portal/arm-portal) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-portal_1.0.0-beta.2/sdk/portal/arm-portal) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-portal) |
 [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-portal?view=azure-node-preview) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -47,7 +46,7 @@ npm install @azure/arm-portal
 To create a client object to access the Azure Service API, you will need the `endpoint` of your Azure Service resource and a `credential`. The Azure Service client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure Service resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-portal_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-portal_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -88,7 +87,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-portal_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-portal_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
@@ -96,7 +95,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-portal_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-portal_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -108,6 +107,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-portal_1.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-portal_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-portal_1.0.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-portal_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

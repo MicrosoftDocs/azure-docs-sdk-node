@@ -200,7 +200,7 @@ properties:
       return:
         description: ''
         type: string
-methods:
+inheritedMethods:
   - name: 'abortCopyFromURL(string, BlobAbortCopyFromURLOptions)'
     uid: '@azure/storage-blob.AppendBlobClient.abortCopyFromURL'
     package: '@azure/storage-blob'
@@ -233,114 +233,6 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.BlobAbortCopyFromURLResponse" />&gt;
-  - name: 'appendBlock(HttpRequestBody, number, AppendBlobAppendBlockOptions)'
-    uid: '@azure/storage-blob.AppendBlobClient.appendBlock'
-    package: '@azure/storage-blob'
-    summary: |-
-      Commits a new block of data to the end of the existing append blob.
-
-      See https://docs.microsoft.com/rest/api/storageservices/append-block
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function appendBlock(body: HttpRequestBody, contentLength: number,
-        options?: AppendBlobAppendBlockOptions):
-        Promise<AppendBlobAppendBlockResponse>
-      parameters:
-        - id: body
-          type: HttpRequestBody
-          description: Data to be appended.
-        - id: contentLength
-          type: number
-          description: Length of the body in bytes.
-        - id: options
-          type: <xref uid="@azure/storage-blob.AppendBlobAppendBlockOptions" />
-          description: >
-            Options to the Append Block operation.
-
-
-
-            Example usage:
-
-
-            ```js
-
-            const content = "Hello World!";
-
-
-            // Create a new append blob and append data to the blob.
-
-            const newAppendBlobClient =
-            containerClient.getAppendBlobClient("<blob name>");
-
-            await newAppendBlobClient.create();
-
-            await newAppendBlobClient.appendBlock(content, content.length);
-
-
-            // Append data to an existing append blob.
-
-            const existingAppendBlobClient =
-            containerClient.getAppendBlobClient("<blob name>");
-
-            await existingAppendBlobClient.appendBlock(content, content.length);
-
-            ```
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-blob.AppendBlobAppendBlockResponse" />&gt;
-  - name: >-
-      appendBlockFromURL(string, number, number,
-      AppendBlobAppendBlockFromURLOptions)
-    uid: '@azure/storage-blob.AppendBlobClient.appendBlockFromURL'
-    package: '@azure/storage-blob'
-    summary: >-
-      The Append Block operation commits a new block of data to the end of an
-      existing append blob
-
-      where the contents are read from a source url.
-
-
-      See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/append-block-from-url
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function appendBlockFromURL(sourceURL: string, sourceOffset: number,
-        count: number, options?: AppendBlobAppendBlockFromURLOptions):
-        Promise<AppendBlobAppendBlockFromUrlResponse>
-      parameters:
-        - id: sourceURL
-          type: string
-          description: |-
-            -
-                            The url to the blob that will be the source of the copy. A source blob in the same storage account can
-                            be authenticated via Shared Key. However, if the source is a blob in another account, the source blob
-                            must either be public or must be authenticated via a shared access signature. If the source blob is
-                            public, no authentication is required to perform the operation.
-        - id: sourceOffset
-          type: number
-          description: Offset in source to be appended
-        - id: count
-          type: number
-          description: Number of bytes to be appended as a block
-        - id: options
-          type: >-
-            <xref uid="@azure/storage-blob.AppendBlobAppendBlockFromURLOptions"
-            />
-          description: |
-            -
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-blob.AppendBlobAppendBlockFromUrlResponse" />&gt;
   - name: 'beginCopyFromURL(string, BlobBeginCopyFromURLOptions)'
     uid: '@azure/storage-blob.AppendBlobClient.beginCopyFromURL'
     package: '@azure/storage-blob'
@@ -481,78 +373,6 @@ methods:
           Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
           uid="@azure/storage-blob.BlobBeginCopyFromURLResponse" />&gt;, <xref
           uid="@azure/storage-blob.BlobBeginCopyFromURLResponse" />&gt;&gt;
-  - name: create(AppendBlobCreateOptions)
-    uid: '@azure/storage-blob.AppendBlobClient.create'
-    package: '@azure/storage-blob'
-    summary: >-
-      Creates a 0-length append blob. Call AppendBlock to append data to an
-      append blob.
-
-
-      See https://docs.microsoft.com/rest/api/storageservices/put-blob
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function create(options?: AppendBlobCreateOptions):
-        Promise<AppendBlobCreateResponse>
-      parameters:
-        - id: options
-          type: <xref uid="@azure/storage-blob.AppendBlobCreateOptions" />
-          description: >
-            Options to the Append Block Create operation.
-
-
-
-            Example usage:
-
-
-            ```js
-
-            const appendBlobClient = containerClient.getAppendBlobClient("<blob
-            name>");
-
-            await appendBlobClient.create();
-
-            ```
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-blob.AppendBlobCreateResponse"
-          />&gt;
-  - name: createIfNotExists(AppendBlobCreateIfNotExistsOptions)
-    uid: '@azure/storage-blob.AppendBlobClient.createIfNotExists'
-    package: '@azure/storage-blob'
-    summary: >-
-      Creates a 0-length append blob. Call AppendBlock to append data to an
-      append blob.
-
-      If the blob with the same name already exists, the content of the existing
-      blob will remain unchanged.
-
-
-      See https://docs.microsoft.com/rest/api/storageservices/put-blob
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createIfNotExists(options?:
-        AppendBlobCreateIfNotExistsOptions):
-        Promise<AppendBlobCreateIfNotExistsResponse>
-      parameters:
-        - id: options
-          type: >-
-            <xref uid="@azure/storage-blob.AppendBlobCreateIfNotExistsOptions"
-            />
-          description: |
-            -
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-blob.AppendBlobCreateIfNotExistsResponse" />&gt;
   - name: createSnapshot(BlobCreateSnapshotOptions)
     uid: '@azure/storage-blob.AppendBlobClient.createSnapshot'
     package: '@azure/storage-blob'
@@ -1090,27 +910,6 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/storage-blob.BlobGetTagsResponse" />&gt;
-  - name: seal(AppendBlobSealOptions)
-    uid: '@azure/storage-blob.AppendBlobClient.seal'
-    package: '@azure/storage-blob'
-    summary: 'Seals the append blob, making it read only.'
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function seal(options?: AppendBlobSealOptions):
-        Promise<AppendBlobAppendBlockResponse>
-      parameters:
-        - id: options
-          type: <xref uid="@azure/storage-blob.AppendBlobSealOptions" />
-          description: |
-            -
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-blob.AppendBlobAppendBlockResponse" />&gt;
   - name: >-
       setAccessTier(BlockBlobTier | PremiumPageBlobTier | string,
       BlobSetTierOptions)
@@ -1377,6 +1176,226 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/storage-blob.BlobUndeleteResponse" />&gt;
+  - name: withVersion(string)
+    uid: '@azure/storage-blob.AppendBlobClient.withVersion'
+    package: '@azure/storage-blob'
+    summary: |-
+      Creates a new BlobClient object pointing to a version of this blob.
+      Provide "" will remove the versionId and return a Client to the base blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function withVersion(versionId: string): BlobClient'
+      parameters:
+        - id: versionId
+          type: string
+          description: The versionId.
+      return:
+        description: A new BlobClient object pointing to the version of this blob.
+        type: <xref uid="@azure/storage-blob.BlobClient" />
+methods:
+  - name: 'appendBlock(HttpRequestBody, number, AppendBlobAppendBlockOptions)'
+    uid: '@azure/storage-blob.AppendBlobClient.appendBlock'
+    package: '@azure/storage-blob'
+    summary: |-
+      Commits a new block of data to the end of the existing append blob.
+
+      See https://docs.microsoft.com/rest/api/storageservices/append-block
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function appendBlock(body: HttpRequestBody, contentLength: number,
+        options?: AppendBlobAppendBlockOptions):
+        Promise<AppendBlobAppendBlockResponse>
+      parameters:
+        - id: body
+          type: HttpRequestBody
+          description: Data to be appended.
+        - id: contentLength
+          type: number
+          description: Length of the body in bytes.
+        - id: options
+          type: <xref uid="@azure/storage-blob.AppendBlobAppendBlockOptions" />
+          description: >
+            Options to the Append Block operation.
+
+
+
+            Example usage:
+
+
+            ```js
+
+            const content = "Hello World!";
+
+
+            // Create a new append blob and append data to the blob.
+
+            const newAppendBlobClient =
+            containerClient.getAppendBlobClient("<blob name>");
+
+            await newAppendBlobClient.create();
+
+            await newAppendBlobClient.appendBlock(content, content.length);
+
+
+            // Append data to an existing append blob.
+
+            const existingAppendBlobClient =
+            containerClient.getAppendBlobClient("<blob name>");
+
+            await existingAppendBlobClient.appendBlock(content, content.length);
+
+            ```
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.AppendBlobAppendBlockResponse" />&gt;
+  - name: >-
+      appendBlockFromURL(string, number, number,
+      AppendBlobAppendBlockFromURLOptions)
+    uid: '@azure/storage-blob.AppendBlobClient.appendBlockFromURL'
+    package: '@azure/storage-blob'
+    summary: >-
+      The Append Block operation commits a new block of data to the end of an
+      existing append blob
+
+      where the contents are read from a source url.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/append-block-from-url
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function appendBlockFromURL(sourceURL: string, sourceOffset: number,
+        count: number, options?: AppendBlobAppendBlockFromURLOptions):
+        Promise<AppendBlobAppendBlockFromUrlResponse>
+      parameters:
+        - id: sourceURL
+          type: string
+          description: |-
+            -
+                            The url to the blob that will be the source of the copy. A source blob in the same storage account can
+                            be authenticated via Shared Key. However, if the source is a blob in another account, the source blob
+                            must either be public or must be authenticated via a shared access signature. If the source blob is
+                            public, no authentication is required to perform the operation.
+        - id: sourceOffset
+          type: number
+          description: Offset in source to be appended
+        - id: count
+          type: number
+          description: Number of bytes to be appended as a block
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-blob.AppendBlobAppendBlockFromURLOptions"
+            />
+          description: |
+            -
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.AppendBlobAppendBlockFromUrlResponse" />&gt;
+  - name: create(AppendBlobCreateOptions)
+    uid: '@azure/storage-blob.AppendBlobClient.create'
+    package: '@azure/storage-blob'
+    summary: >-
+      Creates a 0-length append blob. Call AppendBlock to append data to an
+      append blob.
+
+
+      See https://docs.microsoft.com/rest/api/storageservices/put-blob
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function create(options?: AppendBlobCreateOptions):
+        Promise<AppendBlobCreateResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-blob.AppendBlobCreateOptions" />
+          description: >
+            Options to the Append Block Create operation.
+
+
+
+            Example usage:
+
+
+            ```js
+
+            const appendBlobClient = containerClient.getAppendBlobClient("<blob
+            name>");
+
+            await appendBlobClient.create();
+
+            ```
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.AppendBlobCreateResponse"
+          />&gt;
+  - name: createIfNotExists(AppendBlobCreateIfNotExistsOptions)
+    uid: '@azure/storage-blob.AppendBlobClient.createIfNotExists'
+    package: '@azure/storage-blob'
+    summary: >-
+      Creates a 0-length append blob. Call AppendBlock to append data to an
+      append blob.
+
+      If the blob with the same name already exists, the content of the existing
+      blob will remain unchanged.
+
+
+      See https://docs.microsoft.com/rest/api/storageservices/put-blob
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createIfNotExists(options?:
+        AppendBlobCreateIfNotExistsOptions):
+        Promise<AppendBlobCreateIfNotExistsResponse>
+      parameters:
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-blob.AppendBlobCreateIfNotExistsOptions"
+            />
+          description: |
+            -
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.AppendBlobCreateIfNotExistsResponse" />&gt;
+  - name: seal(AppendBlobSealOptions)
+    uid: '@azure/storage-blob.AppendBlobClient.seal'
+    package: '@azure/storage-blob'
+    summary: 'Seals the append blob, making it read only.'
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function seal(options?: AppendBlobSealOptions):
+        Promise<AppendBlobAppendBlockResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-blob.AppendBlobSealOptions" />
+          description: |
+            -
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.AppendBlobAppendBlockResponse" />&gt;
   - name: withSnapshot(string)
     uid: '@azure/storage-blob.AppendBlobClient.withSnapshot'
     package: '@azure/storage-blob'
@@ -1398,22 +1417,4 @@ methods:
           A new AppendBlobClient object identical to the source but with the
           specified snapshot timestamp.
         type: <xref uid="@azure/storage-blob.AppendBlobClient" />
-  - name: withVersion(string)
-    uid: '@azure/storage-blob.AppendBlobClient.withVersion'
-    package: '@azure/storage-blob'
-    summary: |-
-      Creates a new BlobClient object pointing to a version of this blob.
-      Provide "" will remove the versionId and return a Client to the base blob.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function withVersion(versionId: string): BlobClient'
-      parameters:
-        - id: versionId
-          type: string
-          description: The versionId.
-      return:
-        description: A new BlobClient object pointing to the version of this blob.
-        type: <xref uid="@azure/storage-blob.BlobClient" />
 extends: <xref uid="@azure/storage-blob.BlobClient" />

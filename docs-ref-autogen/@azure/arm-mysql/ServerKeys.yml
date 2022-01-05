@@ -2,31 +2,16 @@
 name: ServerKeys
 uid: '@azure/arm-mysql.ServerKeys'
 package: '@azure/arm-mysql'
-summary: Class representing a ServerKeys.
+summary: Interface representing a ServerKeys.
 fullName: ServerKeys
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: ServerKeys(MySQLManagementClientContext)
-    uid: '@azure/arm-mysql.ServerKeys.constructor'
-    package: '@azure/arm-mysql'
-    summary: Create a ServerKeys.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'new ServerKeys(client: MySQLManagementClientContext)'
-      parameters:
-        - id: client
-          type: <xref uid="@azure/arm-mysql.MySQLManagementClientContext" />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
   - name: >-
-      beginCreateOrUpdate(string, string, ServerKey, string,
-      msRest.RequestOptionsBase)
+      beginCreateOrUpdate(string, string, string, ServerKey,
+      ServerKeysCreateOrUpdateOptionalParams)
     uid: '@azure/arm-mysql.ServerKeys.beginCreateOrUpdate'
     package: '@azure/arm-mysql'
     summary: Creates or updates a MySQL Server key.
@@ -36,8 +21,10 @@ methods:
     syntax:
       content: >-
         function beginCreateOrUpdate(serverName: string, keyName: string,
-        parameters: ServerKey, resourceGroupName: string, options?:
-        msRest.RequestOptionsBase): Promise<LROPoller>
+        resourceGroupName: string, parameters: ServerKey, options?:
+        ServerKeysCreateOrUpdateOptionalParams):
+        Promise<PollerLike<PollOperationState<ServerKeysCreateOrUpdateResponse>,
+        ServerKeysCreateOrUpdateResponse>>
       parameters:
         - id: serverName
           type: string
@@ -47,50 +34,28 @@ methods:
           description: >-
             The name of the MySQL Server key to be operated on (updated or
             created).
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group. The name is case insensitive.
         - id: parameters
           type: <xref uid="@azure/arm-mysql.ServerKey" />
           description: The requested MySQL Server key resource state.
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref uid="@azure/arm-mysql.ServerKeysCreateOrUpdateOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
-  - name: 'beginDeleteMethod(string, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-mysql.ServerKeys.beginDeleteMethod'
-    package: '@azure/arm-mysql'
-    summary: Deletes the MySQL Server key with the given name.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginDeleteMethod(serverName: string, keyName: string,
-        resourceGroupName: string, options?: msRest.RequestOptionsBase):
-        Promise<LROPoller>
-      parameters:
-        - id: serverName
-          type: string
-          description: The name of the server.
-        - id: keyName
-          type: string
-          description: The name of the MySQL Server key to be deleted.
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-mysql.ServerKeysCreateOrUpdateResponse" />&gt;, <xref
+          uid="@azure/arm-mysql.ServerKeysCreateOrUpdateResponse" />&gt;&gt;
   - name: >-
-      createOrUpdate(string, string, ServerKey, string,
-      msRest.RequestOptionsBase)
-    uid: '@azure/arm-mysql.ServerKeys.createOrUpdate'
+      beginCreateOrUpdateAndWait(string, string, string, ServerKey,
+      ServerKeysCreateOrUpdateOptionalParams)
+    uid: '@azure/arm-mysql.ServerKeys.beginCreateOrUpdateAndWait'
     package: '@azure/arm-mysql'
     summary: Creates or updates a MySQL Server key.
     remarks: ''
@@ -98,10 +63,10 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrUpdate(serverName: string, keyName: string, parameters:
-        ServerKey, resourceGroupName: string, options?:
-        msRest.RequestOptionsBase):
-        Promise<Models.ServerKeysCreateOrUpdateResponse>
+        function beginCreateOrUpdateAndWait(serverName: string, keyName: string,
+        resourceGroupName: string, parameters: ServerKey, options?:
+        ServerKeysCreateOrUpdateOptionalParams):
+        Promise<ServerKeysCreateOrUpdateResponse>
       parameters:
         - id: serverName
           type: string
@@ -111,20 +76,25 @@ methods:
           description: >-
             The name of the MySQL Server key to be operated on (updated or
             created).
-        - id: parameters
-          type: <xref uid="@azure/arm-mysql.ServerKey" />
-          description: The requested MySQL Server key resource state.
         - id: resourceGroupName
           type: string
           description: The name of the resource group. The name is case insensitive.
+        - id: parameters
+          type: <xref uid="@azure/arm-mysql.ServerKey" />
+          description: The requested MySQL Server key resource state.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref uid="@azure/arm-mysql.ServerKeysCreateOrUpdateOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.ServerKeysCreateOrUpdateResponse>
-        type: Promise&lt;<xref uid="Models.ServerKeysCreateOrUpdateResponse" />&gt;
-  - name: 'deleteMethod(string, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-mysql.ServerKeys.deleteMethod'
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-mysql.ServerKeysCreateOrUpdateResponse" />&gt;
+  - name: 'beginDelete(string, string, string, ServerKeysDeleteOptionalParams)'
+    uid: '@azure/arm-mysql.ServerKeys.beginDelete'
     package: '@azure/arm-mysql'
     summary: Deletes the MySQL Server key with the given name.
     remarks: ''
@@ -132,9 +102,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function deleteMethod(serverName: string, keyName: string,
-        resourceGroupName: string, options?: msRest.RequestOptionsBase):
-        Promise<RestResponse>
+        function beginDelete(serverName: string, keyName: string,
+        resourceGroupName: string, options?: ServerKeysDeleteOptionalParams):
+        Promise<PollerLike<PollOperationState<void>, void>>
       parameters:
         - id: serverName
           type: string
@@ -146,12 +116,42 @@ methods:
           type: string
           description: The name of the resource group. The name is case insensitive.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-mysql.ServerKeysDeleteOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<msRest.RestResponse>
-        type: Promise&lt;RestResponse&gt;
-  - name: 'get(string, string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+  - name: 'beginDeleteAndWait(string, string, string, ServerKeysDeleteOptionalParams)'
+    uid: '@azure/arm-mysql.ServerKeys.beginDeleteAndWait'
+    package: '@azure/arm-mysql'
+    summary: Deletes the MySQL Server key with the given name.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteAndWait(serverName: string, keyName: string,
+        resourceGroupName: string, options?: ServerKeysDeleteOptionalParams):
+        Promise<void>
+      parameters:
+        - id: serverName
+          type: string
+          description: The name of the server.
+        - id: keyName
+          type: string
+          description: The name of the MySQL Server key to be deleted.
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group. The name is case insensitive.
+        - id: options
+          type: <xref uid="@azure/arm-mysql.ServerKeysDeleteOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: 'get(string, string, string, ServerKeysGetOptionalParams)'
     uid: '@azure/arm-mysql.ServerKeys.get'
     package: '@azure/arm-mysql'
     summary: Gets a MySQL Server key.
@@ -161,8 +161,8 @@ methods:
     syntax:
       content: >-
         function get(resourceGroupName: string, serverName: string, keyName:
-        string, options?: msRest.RequestOptionsBase):
-        Promise<Models.ServerKeysGetResponse>
+        string, options?: ServerKeysGetOptionalParams):
+        Promise<ServerKeysGetResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -174,68 +174,13 @@ methods:
           type: string
           description: The name of the MySQL Server key to be retrieved.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-mysql.ServerKeysGetOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.ServerKeysGetResponse>
-        type: Promise&lt;<xref uid="Models.ServerKeysGetResponse" />&gt;
-  - name: >-
-      get(string, string, string, RequestOptionsBase,
-      ServiceCallback<ServerKey>)
-    uid: '@azure/arm-mysql.ServerKeys.get_2'
-    package: '@azure/arm-mysql'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, serverName: string, keyName:
-        string, options: RequestOptionsBase, callback:
-        ServiceCallback<ServerKey>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: serverName
-          type: string
-          description: The name of the server.
-        - id: keyName
-          type: string
-          description: The name of the MySQL Server key to be retrieved.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-mysql.ServerKey" />&gt;
-          description: |
-            The callback
-  - name: 'get(string, string, string, ServiceCallback<ServerKey>)'
-    uid: '@azure/arm-mysql.ServerKeys.get_1'
-    package: '@azure/arm-mysql'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, serverName: string, keyName:
-        string, callback: ServiceCallback<ServerKey>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: serverName
-          type: string
-          description: The name of the server.
-        - id: keyName
-          type: string
-          description: The name of the MySQL Server key to be retrieved.
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-mysql.ServerKey" />&gt;
-          description: |
-            The callback
-  - name: 'list(string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-mysql.ServerKeysGetResponse" />&gt;
+  - name: 'list(string, string, ServerKeysListOptionalParams)'
     uid: '@azure/arm-mysql.ServerKeys.list'
     package: '@azure/arm-mysql'
     summary: Gets a list of  Server keys.
@@ -245,7 +190,7 @@ methods:
     syntax:
       content: >-
         function list(resourceGroupName: string, serverName: string, options?:
-        msRest.RequestOptionsBase): Promise<Models.ServerKeysListResponse>
+        ServerKeysListOptionalParams): PagedAsyncIterableIterator<ServerKey>
       parameters:
         - id: resourceGroupName
           type: string
@@ -254,127 +199,11 @@ methods:
           type: string
           description: The name of the server.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-mysql.ServerKeysListOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.ServerKeysListResponse>
-        type: Promise&lt;<xref uid="Models.ServerKeysListResponse" />&gt;
-  - name: >-
-      list(string, string, RequestOptionsBase,
-      ServiceCallback<ServerKeyListResult>)
-    uid: '@azure/arm-mysql.ServerKeys.list_2'
-    package: '@azure/arm-mysql'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(resourceGroupName: string, serverName: string, options:
-        RequestOptionsBase, callback: ServiceCallback<ServerKeyListResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: serverName
-          type: string
-          description: The name of the server.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-mysql.ServerKeyListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'list(string, string, ServiceCallback<ServerKeyListResult>)'
-    uid: '@azure/arm-mysql.ServerKeys.list_1'
-    package: '@azure/arm-mysql'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(resourceGroupName: string, serverName: string, callback:
-        ServiceCallback<ServerKeyListResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: serverName
-          type: string
-          description: The name of the server.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-mysql.ServerKeyListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-mysql.ServerKeys.listNext'
-    package: '@azure/arm-mysql'
-    summary: Gets a list of  Server keys.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase): Promise<Models.ServerKeysListNextResponse>
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<Models.ServerKeysListNextResponse>
-        type: Promise&lt;<xref uid="Models.ServerKeysListNextResponse" />&gt;
-  - name: 'listNext(string, RequestOptionsBase, ServiceCallback<ServerKeyListResult>)'
-    uid: '@azure/arm-mysql.ServerKeys.listNext_2'
-    package: '@azure/arm-mysql'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options: RequestOptionsBase,
-        callback: ServiceCallback<ServerKeyListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-mysql.ServerKeyListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, ServiceCallback<ServerKeyListResult>)'
-    uid: '@azure/arm-mysql.ServerKeys.listNext_1'
-    package: '@azure/arm-mysql'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, callback:
-        ServiceCallback<ServerKeyListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-mysql.ServerKeyListResult"
-            />&gt;
-          description: |
-            The callback
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-mysql.ServerKey"
+          />&gt;

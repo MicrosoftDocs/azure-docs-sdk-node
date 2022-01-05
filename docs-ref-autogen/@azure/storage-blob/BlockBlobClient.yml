@@ -200,7 +200,7 @@ properties:
       return:
         description: ''
         type: string
-methods:
+inheritedMethods:
   - name: 'abortCopyFromURL(string, BlobAbortCopyFromURLOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.abortCopyFromURL'
     package: '@azure/storage-blob'
@@ -373,47 +373,6 @@ methods:
           Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
           uid="@azure/storage-blob.BlobBeginCopyFromURLResponse" />&gt;, <xref
           uid="@azure/storage-blob.BlobBeginCopyFromURLResponse" />&gt;&gt;
-  - name: 'commitBlockList(string[], BlockBlobCommitBlockListOptions)'
-    uid: '@azure/storage-blob.BlockBlobClient.commitBlockList'
-    package: '@azure/storage-blob'
-    summary: >-
-      Writes a blob by specifying the list of block IDs that make up the blob.
-
-      In order to be written as part of a blob, a block must have been
-      successfully written
-
-      to the server in a prior
-      <xref:@azure/storage-blob.BlockBlobClient.stageBlock> operation. You can
-      call <xref:@azure/storage-blob.BlockBlobClient.commitBlockList> to
-
-      update a blob by uploading only those blocks that have changed, then
-      committing the new and existing
-
-      blocks together. Any blocks not specified in the block list and
-      permanently deleted.
-
-
-      See https://docs.microsoft.com/rest/api/storageservices/put-block-list
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function commitBlockList(blocks: string[], options?:
-        BlockBlobCommitBlockListOptions):
-        Promise<BlockBlobCommitBlockListResponse>
-      parameters:
-        - id: blocks
-          type: 'string[]'
-          description: Array of 64-byte value that is base64-encoded
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlockBlobCommitBlockListOptions" />
-          description: Options to the Block Blob Commit Block List operation.
-      return:
-        description: Response data for the Block Blob Commit Block List operation.
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-blob.BlockBlobCommitBlockListResponse" />&gt;
   - name: createSnapshot(BlobCreateSnapshotOptions)
     uid: '@azure/storage-blob.BlockBlobClient.createSnapshot'
     package: '@azure/storage-blob'
@@ -878,35 +837,6 @@ methods:
       return:
         description: ''
         type: <xref uid="@azure/storage-blob.BlockBlobClient" />
-  - name: 'getBlockList(BlockListType, BlockBlobGetBlockListOptions)'
-    uid: '@azure/storage-blob.BlockBlobClient.getBlockList'
-    package: '@azure/storage-blob'
-    summary: |-
-      Returns the list of blocks that have been uploaded as part of a block blob
-      using the specified block list filter.
-
-      See https://docs.microsoft.com/rest/api/storageservices/get-block-list
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function getBlockList(listType: BlockListType, options?:
-        BlockBlobGetBlockListOptions): Promise<BlockBlobGetBlockListResponse>
-      parameters:
-        - id: listType
-          type: <xref uid="@azure/storage-blob.BlockListType" />
-          description: |-
-            Specifies whether to return the list of committed blocks,
-                                                   the list of uncommitted blocks, or both lists together.
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlockBlobGetBlockListOptions" />
-          description: Options to the Block Blob Get Block List operation.
-      return:
-        description: Response data for the Block Blob Get Block List operation.
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-blob.BlockBlobGetBlockListResponse" />&gt;
   - name: getPageBlobClient()
     uid: '@azure/storage-blob.BlockBlobClient.getPageBlobClient'
     package: '@azure/storage-blob'
@@ -980,65 +910,6 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/storage-blob.BlobGetTagsResponse" />&gt;
-  - name: 'query(string, BlockBlobQueryOptions)'
-    uid: '@azure/storage-blob.BlockBlobClient.query'
-    package: '@azure/storage-blob'
-    summary: >
-      ONLY AVAILABLE IN NODE.JS RUNTIME.
-
-      Quick query for a JSON or CSV formatted blob.
-
-
-      Example usage (Node.js):
-
-
-      ```js
-
-      // Query and convert a blob to a string
-
-      const queryBlockBlobResponse = await blockBlobClient.query("select * from
-      BlobStorage");
-
-      const downloaded = (await
-      streamToBuffer(queryBlockBlobResponse.readableStreamBody)).toString();
-
-      console.log("Query blob content:", downloaded);
-
-
-      async function streamToBuffer(readableStream) {
-        return new Promise((resolve, reject) => {
-          const chunks = [];
-          readableStream.on("data", (data) => {
-            chunks.push(data instanceof Buffer ? data : Buffer.from(data));
-          });
-          readableStream.on("end", () => {
-            resolve(Buffer.concat(chunks));
-          });
-          readableStream.on("error", reject);
-        });
-      }
-
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function query(query: string, options?: BlockBlobQueryOptions):
-        Promise<BlobDownloadResponseModel>
-      parameters:
-        - id: query
-          type: string
-          description: '-'
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlockBlobQueryOptions" />
-          description: |
-            -
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-blob.BlobDownloadResponseModel"
-          />&gt;
   - name: >-
       setAccessTier(BlockBlobTier | PremiumPageBlobTier | string,
       BlobSetTierOptions)
@@ -1242,6 +1113,217 @@ methods:
       return:
         description: ''
         type: Promise&lt;<xref uid="@azure/storage-blob.BlobSetTagsResponse" />&gt;
+  - name: 'syncCopyFromURL(string, BlobSyncCopyFromURLOptions)'
+    uid: '@azure/storage-blob.BlockBlobClient.syncCopyFromURL'
+    package: '@azure/storage-blob'
+    summary: >-
+      The synchronous Copy From URL operation copies a blob or an internet
+      resource to a new blob. It will not
+
+      return a response until the copy is complete.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/copy-blob-from-url
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function syncCopyFromURL(copySource: string, options?:
+        BlobSyncCopyFromURLOptions): Promise<BlobCopyFromURLResponse>
+      parameters:
+        - id: copySource
+          type: string
+          description: >-
+            The source URL to copy from, Shared Access Signature(SAS) maybe
+            needed for authentication
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobSyncCopyFromURLOptions" />
+          description: |
+            -
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.BlobCopyFromURLResponse"
+          />&gt;
+  - name: undelete(BlobUndeleteOptions)
+    uid: '@azure/storage-blob.BlockBlobClient.undelete'
+    package: '@azure/storage-blob'
+    summary: >-
+      Restores the contents and metadata of soft deleted blob and any associated
+
+      soft deleted snapshots. Undelete Blob is supported only on version
+      2017-07-29
+
+      or later.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/undelete-blob
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function undelete(options?: BlobUndeleteOptions):
+        Promise<BlobUndeleteResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobUndeleteOptions" />
+          description: |
+            Optional options to Blob Undelete operation.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/storage-blob.BlobUndeleteResponse" />&gt;
+  - name: withVersion(string)
+    uid: '@azure/storage-blob.BlockBlobClient.withVersion'
+    package: '@azure/storage-blob'
+    summary: |-
+      Creates a new BlobClient object pointing to a version of this blob.
+      Provide "" will remove the versionId and return a Client to the base blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function withVersion(versionId: string): BlobClient'
+      parameters:
+        - id: versionId
+          type: string
+          description: The versionId.
+      return:
+        description: A new BlobClient object pointing to the version of this blob.
+        type: <xref uid="@azure/storage-blob.BlobClient" />
+methods:
+  - name: 'commitBlockList(string[], BlockBlobCommitBlockListOptions)'
+    uid: '@azure/storage-blob.BlockBlobClient.commitBlockList'
+    package: '@azure/storage-blob'
+    summary: >-
+      Writes a blob by specifying the list of block IDs that make up the blob.
+
+      In order to be written as part of a blob, a block must have been
+      successfully written
+
+      to the server in a prior
+      <xref:@azure/storage-blob.BlockBlobClient.stageBlock> operation. You can
+      call <xref:@azure/storage-blob.BlockBlobClient.commitBlockList> to
+
+      update a blob by uploading only those blocks that have changed, then
+      committing the new and existing
+
+      blocks together. Any blocks not specified in the block list and
+      permanently deleted.
+
+
+      See https://docs.microsoft.com/rest/api/storageservices/put-block-list
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function commitBlockList(blocks: string[], options?:
+        BlockBlobCommitBlockListOptions):
+        Promise<BlockBlobCommitBlockListResponse>
+      parameters:
+        - id: blocks
+          type: 'string[]'
+          description: Array of 64-byte value that is base64-encoded
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlockBlobCommitBlockListOptions" />
+          description: Options to the Block Blob Commit Block List operation.
+      return:
+        description: Response data for the Block Blob Commit Block List operation.
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.BlockBlobCommitBlockListResponse" />&gt;
+  - name: 'getBlockList(BlockListType, BlockBlobGetBlockListOptions)'
+    uid: '@azure/storage-blob.BlockBlobClient.getBlockList'
+    package: '@azure/storage-blob'
+    summary: |-
+      Returns the list of blocks that have been uploaded as part of a block blob
+      using the specified block list filter.
+
+      See https://docs.microsoft.com/rest/api/storageservices/get-block-list
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getBlockList(listType: BlockListType, options?:
+        BlockBlobGetBlockListOptions): Promise<BlockBlobGetBlockListResponse>
+      parameters:
+        - id: listType
+          type: <xref uid="@azure/storage-blob.BlockListType" />
+          description: |-
+            Specifies whether to return the list of committed blocks,
+                                                   the list of uncommitted blocks, or both lists together.
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlockBlobGetBlockListOptions" />
+          description: Options to the Block Blob Get Block List operation.
+      return:
+        description: Response data for the Block Blob Get Block List operation.
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.BlockBlobGetBlockListResponse" />&gt;
+  - name: 'query(string, BlockBlobQueryOptions)'
+    uid: '@azure/storage-blob.BlockBlobClient.query'
+    package: '@azure/storage-blob'
+    summary: >
+      ONLY AVAILABLE IN NODE.JS RUNTIME.
+
+      Quick query for a JSON or CSV formatted blob.
+
+
+      Example usage (Node.js):
+
+
+      ```js
+
+      // Query and convert a blob to a string
+
+      const queryBlockBlobResponse = await blockBlobClient.query("select * from
+      BlobStorage");
+
+      const downloaded = (await
+      streamToBuffer(queryBlockBlobResponse.readableStreamBody)).toString();
+
+      console.log("Query blob content:", downloaded);
+
+
+      async function streamToBuffer(readableStream) {
+        return new Promise((resolve, reject) => {
+          const chunks = [];
+          readableStream.on("data", (data) => {
+            chunks.push(data instanceof Buffer ? data : Buffer.from(data));
+          });
+          readableStream.on("end", () => {
+            resolve(Buffer.concat(chunks));
+          });
+          readableStream.on("error", reject);
+        });
+      }
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function query(query: string, options?: BlockBlobQueryOptions):
+        Promise<BlobDownloadResponseModel>
+      parameters:
+        - id: query
+          type: string
+          description: '-'
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlockBlobQueryOptions" />
+          description: |
+            -
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.BlobDownloadResponseModel"
+          />&gt;
   - name: 'stageBlock(string, HttpRequestBody, number, BlockBlobStageBlockOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.stageBlock'
     package: '@azure/storage-blob'
@@ -1334,40 +1416,6 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.BlockBlobStageBlockFromURLResponse" />&gt;
-  - name: 'syncCopyFromURL(string, BlobSyncCopyFromURLOptions)'
-    uid: '@azure/storage-blob.BlockBlobClient.syncCopyFromURL'
-    package: '@azure/storage-blob'
-    summary: >-
-      The synchronous Copy From URL operation copies a blob or an internet
-      resource to a new blob. It will not
-
-      return a response until the copy is complete.
-
-
-      See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/copy-blob-from-url
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function syncCopyFromURL(copySource: string, options?:
-        BlobSyncCopyFromURLOptions): Promise<BlobCopyFromURLResponse>
-      parameters:
-        - id: copySource
-          type: string
-          description: >-
-            The source URL to copy from, Shared Access Signature(SAS) maybe
-            needed for authentication
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobSyncCopyFromURLOptions" />
-          description: |
-            -
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-blob.BlobCopyFromURLResponse"
-          />&gt;
   - name: 'syncUploadFromURL(string, BlockBlobSyncUploadFromURLOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.syncUploadFromURL'
     package: '@azure/storage-blob'
@@ -1417,35 +1465,6 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.BlockBlobPutBlobFromUrlResponse" />&gt;
-  - name: undelete(BlobUndeleteOptions)
-    uid: '@azure/storage-blob.BlockBlobClient.undelete'
-    package: '@azure/storage-blob'
-    summary: >-
-      Restores the contents and metadata of soft deleted blob and any associated
-
-      soft deleted snapshots. Undelete Blob is supported only on version
-      2017-07-29
-
-      or later.
-
-
-      See
-      https://docs.microsoft.com/en-us/rest/api/storageservices/undelete-blob
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function undelete(options?: BlobUndeleteOptions):
-        Promise<BlobUndeleteResponse>
-      parameters:
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobUndeleteOptions" />
-          description: |
-            Optional options to Blob Undelete operation.
-      return:
-        description: ''
-        type: Promise&lt;<xref uid="@azure/storage-blob.BlobUndeleteResponse" />&gt;
   - name: 'upload(HttpRequestBody, number, BlockBlobUploadOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.upload'
     package: '@azure/storage-blob'
@@ -1718,22 +1737,4 @@ methods:
           A new BlockBlobClient object identical to the source but with the
           specified snapshot timestamp.
         type: <xref uid="@azure/storage-blob.BlockBlobClient" />
-  - name: withVersion(string)
-    uid: '@azure/storage-blob.BlockBlobClient.withVersion'
-    package: '@azure/storage-blob'
-    summary: |-
-      Creates a new BlobClient object pointing to a version of this blob.
-      Provide "" will remove the versionId and return a Client to the base blob.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function withVersion(versionId: string): BlobClient'
-      parameters:
-        - id: versionId
-          type: string
-          description: The versionId.
-      return:
-        description: A new BlobClient object pointing to the version of this blob.
-        type: <xref uid="@azure/storage-blob.BlobClient" />
 extends: <xref uid="@azure/storage-blob.BlobClient" />

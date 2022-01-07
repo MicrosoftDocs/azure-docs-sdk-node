@@ -4,17 +4,15 @@ name: '@azure/core-http'
 summary: ''
 type: package
 classes:
-  - '@azure/core-http.BrowserFetchHttpClient'
   - '@azure/core-http.ExpiringAccessTokenCache'
   - '@azure/core-http.AccessTokenRefresher'
   - '@azure/core-http.ApiKeyCredentials'
   - '@azure/core-http.BasicAuthenticationCredentials'
   - '@azure/core-http.TopicCredentials'
-  - '@azure/core-http.FetchHttpClient'
-  - '@azure/core-http.ReportTransform'
   - '@azure/core-http.HttpHeaders'
   - '@azure/core-http.ConsoleHttpPipelineLogger'
   - '@azure/core-http.NodeFetchHttpClient'
+  - '@azure/core-http.ReportTransform'
   - '@azure/core-http.DeserializationPolicy'
   - '@azure/core-http.DisableResponseDecompressionPolicy'
   - '@azure/core-http.ExponentialRetryPolicy'
@@ -99,10 +97,10 @@ interfaces:
   - '@azure/core-http.WebResourceLike'
 typeAliases:
   - '@azure/core-http.Authenticator'
+  - '@azure/core-http.RawHttpHeaders'
   - '@azure/core-http.CommonRequestInfo'
   - '@azure/core-http.CommonRequestInit'
   - '@azure/core-http.CommonResponse'
-  - '@azure/core-http.RawHttpHeaders'
   - '@azure/core-http.ParameterPath'
   - '@azure/core-http.RequestPolicyFactory'
   - '@azure/core-http.ResponseHandler'
@@ -119,22 +117,6 @@ typeAliases:
   - '@azure/core-http.HttpRequestBody'
   - '@azure/core-http.TransferProgressEvent'
 functions:
-  - name: parseHeaders(XMLHttpRequest)
-    uid: '@azure/core-http.parseHeaders'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function parseHeaders(xhr: XMLHttpRequest): HttpHeadersLike'
-      parameters:
-        - id: xhr
-          type: XMLHttpRequest
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@azure/core-http.HttpHeadersLike" />
   - name: getCachedDefaultHttpClient()
     uid: '@azure/core-http.getCachedDefaultHttpClient'
     package: '@azure/core-http'
@@ -163,6 +145,22 @@ functions:
       return:
         description: ''
         type: boolean
+  - name: parseHeaders(XMLHttpRequest)
+    uid: '@azure/core-http.parseHeaders'
+    package: '@azure/core-http'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function parseHeaders(xhr: XMLHttpRequest): HttpHeadersLike'
+      parameters:
+        - id: xhr
+          type: XMLHttpRequest
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/core-http.HttpHeadersLike" />
   - name: operationOptionsToRequestOptionsBase<T>(T)
     uid: '@azure/core-http.operationOptionsToRequestOptionsBase'
     package: '@azure/core-http'
@@ -294,7 +292,10 @@ functions:
       SerializerOptions)
     uid: '@azure/core-http.deserializeResponseBody'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Given a particular set of content types to parse as either JSON or XML,
+      consumes the HTTP response to produce the result object defined by the
+      request's <xref:@azure/core-http.OperationSpec>.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -306,18 +307,22 @@ functions:
       parameters:
         - id: jsonContentTypes
           type: 'string[]'
-          description: ''
+          description: Response content types to parse the body as JSON.
         - id: xmlContentTypes
           type: 'string[]'
-          description: ''
+          description: Response content types to parse the body as XML.
         - id: response
           type: <xref uid="@azure/core-http.HttpOperationResponse" />
-          description: ''
+          description: HTTP Response from the pipeline.
         - id: options
           type: <xref uid="@azure/core-http.SerializerOptions" />
-          description: ''
+          description: >-
+            Options to the serializer, mostly for configuring the XML parser if
+            needed.
       return:
-        description: ''
+        description: >-
+          A parsed {@link HttpOperationResponse} object that can be returned by
+          the {@link ServiceClient}.
         type: Promise&lt;<xref uid="@azure/core-http.HttpOperationResponse" />&gt;
   - name: disableResponseDecompressionPolicy()
     uid: '@azure/core-http.disableResponseDecompressionPolicy'
@@ -336,7 +341,10 @@ functions:
   - name: 'exponentialRetryPolicy(number, number, number)'
     uid: '@azure/core-http.exponentialRetryPolicy'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Policy that retries the request as many times as configured for as long as
+      the max retry time interval specified, each retry waiting longer to begin
+      than the last time.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -347,20 +355,21 @@ functions:
       parameters:
         - id: retryCount
           type: number
-          description: ''
+          description: Maximum number of retries.
         - id: retryInterval
           type: number
-          description: ''
+          description: Base time between retries.
         - id: maxRetryInterval
           type: number
-          description: ''
+          description: |
+            Maximum time to wait between retries.
       return:
         description: ''
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
   - name: generateClientRequestIdPolicy(string)
     uid: '@azure/core-http.generateClientRequestIdPolicy'
     package: '@azure/core-http'
-    summary: ''
+    summary: Creates a policy that assigns a unique request id to outgoing requests.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -371,14 +380,18 @@ functions:
       parameters:
         - id: requestIdHeaderName
           type: string
-          description: ''
+          description: >
+            The name of the header to use when assigning the unique id to the
+            request.
       return:
         description: ''
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
   - name: keepAlivePolicy(KeepAliveOptions)
     uid: '@azure/core-http.keepAlivePolicy'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Creates a policy that controls whether HTTP connections are maintained on
+      future requests.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -389,14 +402,18 @@ functions:
       parameters:
         - id: keepAliveOptions
           type: <xref uid="@azure/core-http.KeepAliveOptions" />
-          description: ''
+          description: >-
+            Keep alive options. By default, HTTP connections are maintained for
+            future requests.
       return:
-        description: ''
+        description: 'An instance of the {@link KeepAlivePolicy}'
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
   - name: logPolicy(LogPolicyOptions)
     uid: '@azure/core-http.logPolicy'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Creates a policy that logs information about the outgoing request and the
+      incoming responses.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -407,9 +424,9 @@ functions:
       parameters:
         - id: loggingOptions
           type: <xref uid="@azure/core-http.LogPolicyOptions" />
-          description: ''
+          description: Logging options.
       return:
-        description: ''
+        description: 'An instance of the {@link LogPolicy}'
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
   - name: getDefaultUserAgentKey()
     uid: '@azure/core-http.getDefaultUserAgentKey'
@@ -450,7 +467,10 @@ functions:
   - name: getDefaultProxySettings(string)
     uid: '@azure/core-http.getDefaultProxySettings'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Converts a given URL of a proxy server into `ProxySettings` or attempts to
+      retrieve `ProxySettings` from the current environment if one is not
+      passed.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -461,9 +481,9 @@ functions:
       parameters:
         - id: proxyUrl
           type: string
-          description: ''
+          description: URL of the proxy
       return:
-        description: ''
+        description: 'The default proxy settings, or undefined.'
         type: <xref uid="@azure/core-http.ProxySettings" /> | undefined
   - name: 'proxyPolicy(ProxySettings, { customNoProxyList?: string[] })'
     uid: '@azure/core-http.proxyPolicy'
@@ -505,7 +525,10 @@ functions:
   - name: redirectPolicy(number)
     uid: '@azure/core-http.redirectPolicy'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Creates a redirect policy, which sends a repeats the request to a new
+      destination if a response arrives with a "location" header, and a status
+      code between 300 and 307.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -514,9 +537,9 @@ functions:
       parameters:
         - id: maximumRetries
           type: number
-          description: ''
+          description: Maximum number of redirects to follow.
       return:
-        description: ''
+        description: 'An instance of the {@link RedirectPolicy}'
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
   - name: rpRegistrationPolicy(number)
     uid: '@azure/core-http.rpRegistrationPolicy'
@@ -539,7 +562,9 @@ functions:
   - name: signingPolicy(ServiceClientCredentials)
     uid: '@azure/core-http.signingPolicy'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Creates a policy that signs outgoing requests by calling to the provided
+      `authenticationProvider`'s `signRequest` method.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -550,14 +575,16 @@ functions:
       parameters:
         - id: authenticationProvider
           type: <xref uid="@azure/core-http.ServiceClientCredentials" />
-          description: ''
+          description: The authentication provider.
       return:
-        description: ''
+        description: 'An instance of the {@link SigningPolicy}.'
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
   - name: 'systemErrorRetryPolicy(number, number, number, number)'
     uid: '@azure/core-http.systemErrorRetryPolicy'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      A policy that retries when there's a system error, identified by the codes
+      "ETIMEDOUT", "ESOCKETTIMEDOUT", "ECONNREFUSED", "ECONNRESET" or "ENOENT".
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -569,23 +596,37 @@ functions:
       parameters:
         - id: retryCount
           type: number
-          description: ''
+          description: Maximum number of retries.
         - id: retryInterval
           type: number
-          description: ''
+          description: 'The client retry interval, in milliseconds.'
         - id: minRetryInterval
           type: number
-          description: ''
+          description: 'The minimum retry interval, in milliseconds.'
         - id: maxRetryInterval
           type: number
-          description: ''
+          description: 'The maximum retry interval, in milliseconds.'
       return:
-        description: ''
+        description: 'An instance of the {@link SystemErrorRetryPolicy}'
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
   - name: throttlingRetryPolicy()
     uid: '@azure/core-http.throttlingRetryPolicy'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Creates a policy that re-sends the request if the response indicates the
+      request failed because of throttling reasons.
+
+      For example, if the response contains a `Retry-After` header, it will
+      retry sending the request based on the value of that header.
+
+      To learn more, please refer to
+
+      https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-manager-request-limits,
+
+      https://docs.microsoft.com/en-us/azure/azure-subscription-service-limits
+      and
+
+      https://docs.microsoft.com/en-us/azure/virtual-machines/troubleshooting/troubleshooting-throttling-errors
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -597,7 +638,7 @@ functions:
   - name: tracingPolicy(TracingPolicyOptions)
     uid: '@azure/core-http.tracingPolicy'
     package: '@azure/core-http'
-    summary: ''
+    summary: Creates a policy that wraps outgoing requests with a tracing span.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -608,14 +649,18 @@ functions:
       parameters:
         - id: tracingOptions
           type: <xref uid="@azure/core-http.TracingPolicyOptions" />
-          description: ''
+          description: Tracing options.
       return:
-        description: ''
+        description: 'An instance of the {@link TracingPolicy} class.'
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
   - name: getDefaultUserAgentValue()
     uid: '@azure/core-http.getDefaultUserAgentValue'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      The default approach to generate user agents.
+
+      Uses static information from this package, plus system information
+      available from the runtime.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -627,7 +672,9 @@ functions:
   - name: userAgentPolicy(TelemetryInfo)
     uid: '@azure/core-http.userAgentPolicy'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Returns a policy that adds the user agent header to outgoing requests
+      based on the given <xref:@azure/core-http.TelemetryInfo>.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -638,9 +685,9 @@ functions:
       parameters:
         - id: userAgentData
           type: <xref uid="@azure/core-http.TelemetryInfo" />
-          description: ''
+          description: Telemetry information.
       return:
-        description: ''
+        description: 'A new {@link UserAgentPolicy}.'
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
   - name: 'createProxyAgent(string, ProxySettings, HttpHeadersLike)'
     uid: '@azure/core-http.createProxyAgent'
@@ -709,7 +756,9 @@ functions:
   - name: serializeObject(unknown)
     uid: '@azure/core-http.serializeObject'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Utility function that serializes an object that might contain binary
+      information into a plain object, array or a string.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -725,7 +774,7 @@ functions:
   - name: 'createPipelineFromOptions(InternalPipelineOptions, RequestPolicyFactory)'
     uid: '@azure/core-http.createPipelineFromOptions'
     package: '@azure/core-http'
-    summary: ''
+    summary: Creates an HTTP pipeline based on the given options.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -737,17 +786,25 @@ functions:
       parameters:
         - id: pipelineOptions
           type: <xref uid="@azure/core-http.InternalPipelineOptions" />
-          description: ''
+          description: >-
+            Defines options that are used to configure policies in the HTTP
+            pipeline for an SDK client.
         - id: authPolicyFactory
           type: <xref uid="@azure/core-http.RequestPolicyFactory" />
-          description: ''
+          description: >-
+            An optional authentication policy factory to use for signing
+            requests.
       return:
-        description: ''
+        description: >-
+          A set of options that can be passed to create a new {@link
+          ServiceClient}.
         type: <xref uid="@azure/core-http.ServiceClientOptions" />
   - name: 'flattenResponse(HttpOperationResponse, OperationResponse | undefined)'
     uid: '@azure/core-http.flattenResponse'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Parses an <xref:@azure/core-http.HttpOperationResponse> into a normalized
+      HTTP response object (<xref:@azure/core-http.RestResponse>).
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -758,12 +815,12 @@ functions:
       parameters:
         - id: _response
           type: <xref uid="@azure/core-http.HttpOperationResponse" />
-          description: ''
+          description: Wrapper object for http response.
         - id: responseSpec
           type: <xref uid="@azure/core-http.OperationResponse" /> | undefined
-          description: ''
+          description: Mappers for how to parse the response properties.
       return:
-        description: ''
+        description: '- A normalized response object.'
         type: <xref uid="@azure/core-http.RestResponse" />
   - name: >-
       getOperationArgumentValueFromParameterPath(ServiceClient,

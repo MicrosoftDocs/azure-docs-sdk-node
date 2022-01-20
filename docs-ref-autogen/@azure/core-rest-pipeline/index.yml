@@ -12,6 +12,7 @@ interfaces:
   - '@azure/core-rest-pipeline.AuthorizeRequestOptions'
   - '@azure/core-rest-pipeline.BearerTokenAuthenticationPolicyOptions'
   - '@azure/core-rest-pipeline.ChallengeCallbacks'
+  - '@azure/core-rest-pipeline.DefaultRetryPolicyOptions'
   - '@azure/core-rest-pipeline.ExponentialRetryPolicyOptions'
   - '@azure/core-rest-pipeline.HttpClient'
   - '@azure/core-rest-pipeline.HttpHeaders'
@@ -23,10 +24,16 @@ interfaces:
   - '@azure/core-rest-pipeline.PipelineRequest'
   - '@azure/core-rest-pipeline.PipelineRequestOptions'
   - '@azure/core-rest-pipeline.PipelineResponse'
+  - '@azure/core-rest-pipeline.PipelineRetryOptions'
   - '@azure/core-rest-pipeline.ProxySettings'
   - '@azure/core-rest-pipeline.RedirectPolicyOptions'
   - '@azure/core-rest-pipeline.RestErrorOptions'
+  - '@azure/core-rest-pipeline.RetryInformation'
+  - '@azure/core-rest-pipeline.RetryModifiers'
+  - '@azure/core-rest-pipeline.RetryPolicyOptions'
+  - '@azure/core-rest-pipeline.RetryStrategy'
   - '@azure/core-rest-pipeline.SystemErrorRetryPolicyOptions'
+  - '@azure/core-rest-pipeline.ThrottlingRetryPolicyOptions'
   - '@azure/core-rest-pipeline.TracingPolicyOptions'
   - '@azure/core-rest-pipeline.UserAgentPolicyOptions'
 typeAliases:
@@ -168,6 +175,33 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
+  - name: defaultRetryPolicy(DefaultRetryPolicyOptions)
+    uid: '@azure/core-rest-pipeline.defaultRetryPolicy'
+    package: '@azure/core-rest-pipeline'
+    summary: >-
+      A policy that retries according to three strategies:
+
+      - When the server sends a 429 response with a Retry-After header.
+
+      - When there are errors in the underlying transport layer (e.g. DNS lookup
+      failures).
+
+      - Or otherwise if the outgoing request fails, it will retry with an
+      exponentially increasing delay.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function defaultRetryPolicy(options?: DefaultRetryPolicyOptions):
+        PipelinePolicy
+      parameters:
+        - id: options
+          type: <xref uid="@azure/core-rest-pipeline.DefaultRetryPolicyOptions" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
   - name: exponentialRetryPolicy(ExponentialRetryPolicyOptions)
     uid: '@azure/core-rest-pipeline.exponentialRetryPolicy'
     package: '@azure/core-rest-pipeline'
@@ -304,6 +338,29 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
+  - name: 'retryPolicy(RetryStrategy[], RetryPolicyOptions)'
+    uid: '@azure/core-rest-pipeline.retryPolicy'
+    package: '@azure/core-rest-pipeline'
+    summary: >-
+      retryPolicy is a generic policy to enable retrying requests when certain
+      conditions are met
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function retryPolicy(strategies: RetryStrategy[], options?:
+        RetryPolicyOptions): PipelinePolicy
+      parameters:
+        - id: strategies
+          type: '<xref uid="@azure/core-rest-pipeline.RetryStrategy" />[]'
+          description: ''
+        - id: options
+          type: <xref uid="@azure/core-rest-pipeline.RetryPolicyOptions" />
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
   - name: setClientRequestIdPolicy(string)
     uid: '@azure/core-rest-pipeline.setClientRequestIdPolicy'
     package: '@azure/core-rest-pipeline'
@@ -353,7 +410,7 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />
-  - name: throttlingRetryPolicy()
+  - name: throttlingRetryPolicy(ThrottlingRetryPolicyOptions)
     uid: '@azure/core-rest-pipeline.throttlingRetryPolicy'
     package: '@azure/core-rest-pipeline'
     summary: >
@@ -372,7 +429,16 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function throttlingRetryPolicy(): PipelinePolicy'
+      content: >-
+        function throttlingRetryPolicy(options?: ThrottlingRetryPolicyOptions):
+        PipelinePolicy
+      parameters:
+        - id: options
+          type: >-
+            <xref uid="@azure/core-rest-pipeline.ThrottlingRetryPolicyOptions"
+            />
+          description: |
+            Options that configure retry logic.
       return:
         description: ''
         type: <xref uid="@azure/core-rest-pipeline.PipelinePolicy" />

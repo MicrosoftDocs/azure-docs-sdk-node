@@ -46,6 +46,69 @@ typeAliases:
   - '@azure/core-client.QueryCollectionFormat'
   - '@azure/core-client.RawResponseCallback'
 functions:
+  - name: authorizeRequestOnClaimChallenge(AuthorizeRequestOnChallengeOptions)
+    uid: '@azure/core-client.authorizeRequestOnClaimChallenge'
+    package: '@azure/core-client'
+    summary: >
+      This function can be used as a callback for the
+      `bearerTokenAuthenticationPolicy` of `@azure/core-rest-pipeline`, to
+      support CAE challenges:
+
+      [Continuous Access
+      Evaluation](https://docs.microsoft.com/azure/active-directory/conditional-access/concept-continuous-access-evaluation).
+
+      Call the `bearerTokenAuthenticationPolicy` with the following options:
+
+
+      ```ts
+
+      import { bearerTokenAuthenticationPolicy } from
+      "@azure/core-rest-pipeline";
+
+      import { authorizeRequestOnClaimChallenge } from "@azure/core-client";
+
+
+      const bearerTokenAuthenticationPolicy = bearerTokenAuthenticationPolicy({
+        authorizeRequestOnChallenge: authorizeRequestOnClaimChallenge
+      });
+
+      ```
+
+
+      Once provided, the `bearerTokenAuthenticationPolicy` policy will
+      internally handle Continuous Access Evaluation (CAE) challenges.
+
+      When it can't complete a challenge it will return the 401 (unauthorized)
+      response from ARM.
+
+
+      Example challenge with claims:
+
+
+      ```
+
+      Bearer authorization_uri="https://login.windows-ppe.net/",
+      error="invalid_token",
+
+      error_description="User session has been revoked",
+
+      claims="eyJhY2Nlc3NfdG9rZW4iOnsibmJmIjp7ImVzc2VudGlhbCI6dHJ1ZSwgInZhbHVlIjoiMTYwMzc0MjgwMCJ9fX0="
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function authorizeRequestOnClaimChallenge(onChallengeOptions:
+        AuthorizeRequestOnChallengeOptions): Promise<boolean>
+      parameters:
+        - id: onChallengeOptions
+          type: AuthorizeRequestOnChallengeOptions
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;boolean&gt;
   - name: createClientPipeline(InternalClientPipelineOptions)
     uid: '@azure/core-client.createClientPipeline'
     package: '@azure/core-client'

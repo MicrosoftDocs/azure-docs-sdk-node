@@ -1,16 +1,15 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-express, webpubsub
-author: maggiepint
-ms.author: magpint
-ms.date: 11/11/2021
+author: xirzec
+ms.author: xirzec
+ms.date: 01/20/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: webpubsub
 ---
-
 # Azure Web PubSub CloudEvents handlers for Express
 
 [Azure Web PubSub service](https://aka.ms/awps/doc) is an Azure-managed service that helps developers easily build web applications with real-time features and publish-subscribe pattern. Any scenario that requires real-time publish-subscribe messaging between server and clients or among clients can use Azure Web PubSub service. Traditional real-time features that often require polling from server or submitting HTTP requests can also use Azure Web PubSub service.
@@ -21,7 +20,7 @@ When a WebSocket connection connects, the Web PubSub service transforms the conn
 
 Details about the terms used here are described in [Key concepts](#key-concepts) section.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.0/sdk/web-pubsub/web-pubsub-express) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.1/sdk/web-pubsub/web-pubsub-express) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/web-pubsub-express) |
 [API reference documentation](https://aka.ms/awps/sdk/js) |
 [Product documentation](https://aka.ms/awps/doc) |
@@ -200,7 +199,7 @@ You can set the following environment variable to get the debug logs when using 
 export AZURE_LOG_LEVEL=verbose
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-express_1.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-express_1.0.1/sdk/core/logger).
 
 ### Live Trace
 
@@ -214,7 +213,7 @@ directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

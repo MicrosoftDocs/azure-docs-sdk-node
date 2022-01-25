@@ -2,33 +2,16 @@
 name: PrivateZones
 uid: '@azure/arm-privatedns.PrivateZones'
 package: '@azure/arm-privatedns'
-summary: Class representing a PrivateZones.
+summary: Interface representing a PrivateZones.
 fullName: PrivateZones
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: PrivateZones(PrivateDnsManagementClientContext)
-    uid: '@azure/arm-privatedns.PrivateZones.constructor'
-    package: '@azure/arm-privatedns'
-    summary: Create a PrivateZones.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'new PrivateZones(client: PrivateDnsManagementClientContext)'
-      parameters:
-        - id: client
-          type: >-
-            <xref uid="@azure/arm-privatedns.PrivateDnsManagementClientContext"
-            />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
   - name: >-
       beginCreateOrUpdate(string, string, PrivateZone,
-      Models.PrivateZonesBeginCreateOrUpdateOptionalParams)
+      PrivateZonesCreateOrUpdateOptionalParams)
     uid: '@azure/arm-privatedns.PrivateZones.beginCreateOrUpdate'
     package: '@azure/arm-privatedns'
     summary: >-
@@ -43,8 +26,9 @@ methods:
       content: >-
         function beginCreateOrUpdate(resourceGroupName: string, privateZoneName:
         string, parameters: PrivateZone, options?:
-        Models.PrivateZonesBeginCreateOrUpdateOptionalParams):
-        Promise<LROPoller>
+        PrivateZonesCreateOrUpdateOptionalParams):
+        Promise<PollerLike<PollOperationState<PrivateZonesCreateOrUpdateResponse>,
+        PrivateZonesCreateOrUpdateResponse>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -56,83 +40,23 @@ methods:
           type: <xref uid="@azure/arm-privatedns.PrivateZone" />
           description: Parameters supplied to the CreateOrUpdate operation.
         - id: options
-          type: <xref uid="Models.PrivateZonesBeginCreateOrUpdateOptionalParams" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-privatedns.PrivateZonesCreateOrUpdateOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-privatedns.PrivateZonesCreateOrUpdateResponse" />&gt;,
+          <xref uid="@azure/arm-privatedns.PrivateZonesCreateOrUpdateResponse"
+          />&gt;&gt;
   - name: >-
-      beginDeleteMethod(string, string,
-      Models.PrivateZonesBeginDeleteMethodOptionalParams)
-    uid: '@azure/arm-privatedns.PrivateZones.beginDeleteMethod'
-    package: '@azure/arm-privatedns'
-    summary: >-
-      Deletes a Private DNS zone. WARNING: All DNS records in the zone will also
-      be deleted. This
-
-      operation cannot be undone. Private DNS zone cannot be deleted unless all
-      virtual network links
-
-      to it are removed.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginDeleteMethod(resourceGroupName: string, privateZoneName:
-        string, options?: Models.PrivateZonesBeginDeleteMethodOptionalParams):
-        Promise<LROPoller>
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: privateZoneName
-          type: string
-          description: The name of the Private DNS zone (without a terminating dot).
-        - id: options
-          type: <xref uid="Models.PrivateZonesBeginDeleteMethodOptionalParams" />
-          description: ''
-      return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
-  - name: >-
-      beginUpdate(string, string, PrivateZone,
-      Models.PrivateZonesBeginUpdateOptionalParams)
-    uid: '@azure/arm-privatedns.PrivateZones.beginUpdate'
-    package: '@azure/arm-privatedns'
-    summary: >-
-      Updates a Private DNS zone. Does not modify virtual network links or DNS
-      records within the
-
-      zone.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginUpdate(resourceGroupName: string, privateZoneName: string,
-        parameters: PrivateZone, options?:
-        Models.PrivateZonesBeginUpdateOptionalParams): Promise<LROPoller>
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: privateZoneName
-          type: string
-          description: The name of the Private DNS zone (without a terminating dot).
-        - id: parameters
-          type: <xref uid="@azure/arm-privatedns.PrivateZone" />
-          description: Parameters supplied to the Update operation.
-        - id: options
-          type: <xref uid="Models.PrivateZonesBeginUpdateOptionalParams" />
-          description: ''
-      return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
-  - name: >-
-      createOrUpdate(string, string, PrivateZone,
-      Models.PrivateZonesCreateOrUpdateOptionalParams)
-    uid: '@azure/arm-privatedns.PrivateZones.createOrUpdate'
+      beginCreateOrUpdateAndWait(string, string, PrivateZone,
+      PrivateZonesCreateOrUpdateOptionalParams)
+    uid: '@azure/arm-privatedns.PrivateZones.beginCreateOrUpdateAndWait'
     package: '@azure/arm-privatedns'
     summary: >-
       Creates or updates a Private DNS zone. Does not modify Links to virtual
@@ -144,10 +68,10 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrUpdate(resourceGroupName: string, privateZoneName:
-        string, parameters: PrivateZone, options?:
-        Models.PrivateZonesCreateOrUpdateOptionalParams):
-        Promise<Models.PrivateZonesCreateOrUpdateResponse>
+        function beginCreateOrUpdateAndWait(resourceGroupName: string,
+        privateZoneName: string, parameters: PrivateZone, options?:
+        PrivateZonesCreateOrUpdateOptionalParams):
+        Promise<PrivateZonesCreateOrUpdateResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -159,34 +83,36 @@ methods:
           type: <xref uid="@azure/arm-privatedns.PrivateZone" />
           description: Parameters supplied to the CreateOrUpdate operation.
         - id: options
-          type: <xref uid="Models.PrivateZonesCreateOrUpdateOptionalParams" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-privatedns.PrivateZonesCreateOrUpdateOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.PrivateZonesCreateOrUpdateResponse>
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.PrivateZonesCreateOrUpdateResponse"
-          />&gt;
-  - name: >-
-      deleteMethod(string, string,
-      Models.PrivateZonesDeleteMethodOptionalParams)
-    uid: '@azure/arm-privatedns.PrivateZones.deleteMethod'
+          Promise&lt;<xref
+          uid="@azure/arm-privatedns.PrivateZonesCreateOrUpdateResponse" />&gt;
+  - name: 'beginDelete(string, string, PrivateZonesDeleteOptionalParams)'
+    uid: '@azure/arm-privatedns.PrivateZones.beginDelete'
     package: '@azure/arm-privatedns'
     summary: >-
       Deletes a Private DNS zone. WARNING: All DNS records in the zone will also
       be deleted. This
 
       operation cannot be undone. Private DNS zone cannot be deleted unless all
-      virtual network links
+      virtual network links to
 
-      to it are removed.
+      it are removed.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function deleteMethod(resourceGroupName: string, privateZoneName:
-        string, options?: Models.PrivateZonesDeleteMethodOptionalParams):
-        Promise<RestResponse>
+        function beginDelete(resourceGroupName: string, privateZoneName: string,
+        options?: PrivateZonesDeleteOptionalParams):
+        Promise<PollerLike<PollOperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -195,27 +121,32 @@ methods:
           type: string
           description: The name of the Private DNS zone (without a terminating dot).
         - id: options
-          type: <xref uid="Models.PrivateZonesDeleteMethodOptionalParams" />
-          description: ''
+          type: >-
+            <xref uid="@azure/arm-privatedns.PrivateZonesDeleteOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        description: Promise<msRest.RestResponse>
-        type: Promise&lt;RestResponse&gt;
-  - name: 'get(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-privatedns.PrivateZones.get'
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+  - name: 'beginDeleteAndWait(string, string, PrivateZonesDeleteOptionalParams)'
+    uid: '@azure/arm-privatedns.PrivateZones.beginDeleteAndWait'
     package: '@azure/arm-privatedns'
     summary: >-
-      Gets a Private DNS zone. Retrieves the zone properties, but not the
-      virtual networks links or
+      Deletes a Private DNS zone. WARNING: All DNS records in the zone will also
+      be deleted. This
 
-      the record sets within the zone.
+      operation cannot be undone. Private DNS zone cannot be deleted unless all
+      virtual network links to
+
+      it are removed.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function get(resourceGroupName: string, privateZoneName: string,
-        options?: msRest.RequestOptionsBase):
-        Promise<Models.PrivateZonesGetResponse>
+        function beginDeleteAndWait(resourceGroupName: string, privateZoneName:
+        string, options?: PrivateZonesDeleteOptionalParams): Promise<void>
       parameters:
         - id: resourceGroupName
           type: string
@@ -224,354 +155,29 @@ methods:
           type: string
           description: The name of the Private DNS zone (without a terminating dot).
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<Models.PrivateZonesGetResponse>
-        type: Promise&lt;<xref uid="Models.PrivateZonesGetResponse" />&gt;
-  - name: 'get(string, string, RequestOptionsBase, ServiceCallback<PrivateZone>)'
-    uid: '@azure/arm-privatedns.PrivateZones.get_2'
-    package: '@azure/arm-privatedns'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, privateZoneName: string,
-        options: RequestOptionsBase, callback: ServiceCallback<PrivateZone>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: privateZoneName
-          type: string
-          description: The name of the Private DNS zone (without a terminating dot).
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
           type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-privatedns.PrivateZone"
-            />&gt;
-          description: |
-            The callback
-  - name: 'get(string, string, ServiceCallback<PrivateZone>)'
-    uid: '@azure/arm-privatedns.PrivateZones.get_1'
-    package: '@azure/arm-privatedns'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, privateZoneName: string,
-        callback: ServiceCallback<PrivateZone>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: privateZoneName
-          type: string
-          description: The name of the Private DNS zone (without a terminating dot).
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-privatedns.PrivateZone"
-            />&gt;
-          description: |
-            The callback
-  - name: list(Models.PrivateZonesListOptionalParams)
-    uid: '@azure/arm-privatedns.PrivateZones.list'
-    package: '@azure/arm-privatedns'
-    summary: Lists the Private DNS zones in all resource groups in a subscription.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(options?: Models.PrivateZonesListOptionalParams):
-        Promise<Models.PrivateZonesListResponse>
-      parameters:
-        - id: options
-          type: <xref uid="Models.PrivateZonesListOptionalParams" />
-          description: ''
-      return:
-        description: Promise<Models.PrivateZonesListResponse>
-        type: Promise&lt;<xref uid="Models.PrivateZonesListResponse" />&gt;
-  - name: >-
-      list(PrivateZonesListOptionalParams,
-      ServiceCallback<PrivateZoneListResult>)
-    uid: '@azure/arm-privatedns.PrivateZones.list_2'
-    package: '@azure/arm-privatedns'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(options: PrivateZonesListOptionalParams, callback:
-        ServiceCallback<PrivateZoneListResult>)
-      parameters:
-        - id: options
-          type: <xref uid="@azure/arm-privatedns.PrivateZonesListOptionalParams" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-privatedns.PrivateZoneListResult" />&gt;
-          description: |
-            The callback
-  - name: list(ServiceCallback<PrivateZoneListResult>)
-    uid: '@azure/arm-privatedns.PrivateZones.list_1'
-    package: '@azure/arm-privatedns'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function list(callback: ServiceCallback<PrivateZoneListResult>)'
-      parameters:
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-privatedns.PrivateZoneListResult" />&gt;
-          description: |
-            The callback
-  - name: >-
-      listByResourceGroup(string,
-      Models.PrivateZonesListByResourceGroupOptionalParams)
-    uid: '@azure/arm-privatedns.PrivateZones.listByResourceGroup'
-    package: '@azure/arm-privatedns'
-    summary: Lists the Private DNS zones within a resource group.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroup(resourceGroupName: string, options?:
-        Models.PrivateZonesListByResourceGroupOptionalParams):
-        Promise<Models.PrivateZonesListByResourceGroupResponse>
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: options
-          type: <xref uid="Models.PrivateZonesListByResourceGroupOptionalParams" />
-          description: ''
-      return:
-        description: Promise<Models.PrivateZonesListByResourceGroupResponse>
-        type: >-
-          Promise&lt;<xref uid="Models.PrivateZonesListByResourceGroupResponse"
-          />&gt;
-  - name: >-
-      listByResourceGroup(string, PrivateZonesListByResourceGroupOptionalParams,
-      ServiceCallback<PrivateZoneListResult>)
-    uid: '@azure/arm-privatedns.PrivateZones.listByResourceGroup_2'
-    package: '@azure/arm-privatedns'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroup(resourceGroupName: string, options:
-        PrivateZonesListByResourceGroupOptionalParams, callback:
-        ServiceCallback<PrivateZoneListResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: options
-          type: >-
-            <xref
-            uid="@azure/arm-privatedns.PrivateZonesListByResourceGroupOptionalParams"
+            <xref uid="@azure/arm-privatedns.PrivateZonesDeleteOptionalParams"
             />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-privatedns.PrivateZoneListResult" />&gt;
           description: |
-            The callback
-  - name: 'listByResourceGroup(string, ServiceCallback<PrivateZoneListResult>)'
-    uid: '@azure/arm-privatedns.PrivateZones.listByResourceGroup_1'
-    package: '@azure/arm-privatedns'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroup(resourceGroupName: string, callback:
-        ServiceCallback<PrivateZoneListResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-privatedns.PrivateZoneListResult" />&gt;
-          description: |
-            The callback
-  - name: 'listByResourceGroupNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-privatedns.PrivateZones.listByResourceGroupNext'
-    package: '@azure/arm-privatedns'
-    summary: Lists the Private DNS zones within a resource group.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase):
-        Promise<Models.PrivateZonesListByResourceGroupNextResponse>
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+            The options parameters.
       return:
-        description: Promise<Models.PrivateZonesListByResourceGroupNextResponse>
-        type: >-
-          Promise&lt;<xref
-          uid="Models.PrivateZonesListByResourceGroupNextResponse" />&gt;
-  - name: >-
-      listByResourceGroupNext(string, RequestOptionsBase,
-      ServiceCallback<PrivateZoneListResult>)
-    uid: '@azure/arm-privatedns.PrivateZones.listByResourceGroupNext_2'
-    package: '@azure/arm-privatedns'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, options:
-        RequestOptionsBase, callback: ServiceCallback<PrivateZoneListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-privatedns.PrivateZoneListResult" />&gt;
-          description: |
-            The callback
-  - name: 'listByResourceGroupNext(string, ServiceCallback<PrivateZoneListResult>)'
-    uid: '@azure/arm-privatedns.PrivateZones.listByResourceGroupNext_1'
-    package: '@azure/arm-privatedns'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, callback:
-        ServiceCallback<PrivateZoneListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-privatedns.PrivateZoneListResult" />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-privatedns.PrivateZones.listNext'
-    package: '@azure/arm-privatedns'
-    summary: Lists the Private DNS zones in all resource groups in a subscription.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase): Promise<Models.PrivateZonesListNextResponse>
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<Models.PrivateZonesListNextResponse>
-        type: Promise&lt;<xref uid="Models.PrivateZonesListNextResponse" />&gt;
-  - name: >-
-      listNext(string, RequestOptionsBase,
-      ServiceCallback<PrivateZoneListResult>)
-    uid: '@azure/arm-privatedns.PrivateZones.listNext_2'
-    package: '@azure/arm-privatedns'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options: RequestOptionsBase,
-        callback: ServiceCallback<PrivateZoneListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-privatedns.PrivateZoneListResult" />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, ServiceCallback<PrivateZoneListResult>)'
-    uid: '@azure/arm-privatedns.PrivateZones.listNext_1'
-    package: '@azure/arm-privatedns'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, callback:
-        ServiceCallback<PrivateZoneListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-privatedns.PrivateZoneListResult" />&gt;
-          description: |
-            The callback
-  - name: >-
-      update(string, string, PrivateZone,
-      Models.PrivateZonesUpdateOptionalParams)
-    uid: '@azure/arm-privatedns.PrivateZones.update'
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: 'beginUpdate(string, string, PrivateZone, PrivateZonesUpdateOptionalParams)'
+    uid: '@azure/arm-privatedns.PrivateZones.beginUpdate'
     package: '@azure/arm-privatedns'
     summary: >-
       Updates a Private DNS zone. Does not modify virtual network links or DNS
-      records within the
-
-      zone.
+      records within the zone.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function update(resourceGroupName: string, privateZoneName: string,
-        parameters: PrivateZone, options?:
-        Models.PrivateZonesUpdateOptionalParams):
-        Promise<Models.PrivateZonesUpdateResponse>
+        function beginUpdate(resourceGroupName: string, privateZoneName: string,
+        parameters: PrivateZone, options?: PrivateZonesUpdateOptionalParams):
+        Promise<PollerLike<PollOperationState<PrivateZonesUpdateResponse>,
+        PrivateZonesUpdateResponse>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -583,8 +189,132 @@ methods:
           type: <xref uid="@azure/arm-privatedns.PrivateZone" />
           description: Parameters supplied to the Update operation.
         - id: options
-          type: <xref uid="Models.PrivateZonesUpdateOptionalParams" />
-          description: ''
+          type: >-
+            <xref uid="@azure/arm-privatedns.PrivateZonesUpdateOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.PrivateZonesUpdateResponse>
-        type: Promise&lt;<xref uid="Models.PrivateZonesUpdateResponse" />&gt;
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-privatedns.PrivateZonesUpdateResponse" />&gt;, <xref
+          uid="@azure/arm-privatedns.PrivateZonesUpdateResponse" />&gt;&gt;
+  - name: >-
+      beginUpdateAndWait(string, string, PrivateZone,
+      PrivateZonesUpdateOptionalParams)
+    uid: '@azure/arm-privatedns.PrivateZones.beginUpdateAndWait'
+    package: '@azure/arm-privatedns'
+    summary: >-
+      Updates a Private DNS zone. Does not modify virtual network links or DNS
+      records within the zone.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginUpdateAndWait(resourceGroupName: string, privateZoneName:
+        string, parameters: PrivateZone, options?:
+        PrivateZonesUpdateOptionalParams): Promise<PrivateZonesUpdateResponse>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group.
+        - id: privateZoneName
+          type: string
+          description: The name of the Private DNS zone (without a terminating dot).
+        - id: parameters
+          type: <xref uid="@azure/arm-privatedns.PrivateZone" />
+          description: Parameters supplied to the Update operation.
+        - id: options
+          type: >-
+            <xref uid="@azure/arm-privatedns.PrivateZonesUpdateOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-privatedns.PrivateZonesUpdateResponse" />&gt;
+  - name: 'get(string, string, PrivateZonesGetOptionalParams)'
+    uid: '@azure/arm-privatedns.PrivateZones.get'
+    package: '@azure/arm-privatedns'
+    summary: >-
+      Gets a Private DNS zone. Retrieves the zone properties, but not the
+      virtual networks links or the
+
+      record sets within the zone.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function get(resourceGroupName: string, privateZoneName: string,
+        options?: PrivateZonesGetOptionalParams):
+        Promise<PrivateZonesGetResponse>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group.
+        - id: privateZoneName
+          type: string
+          description: The name of the Private DNS zone (without a terminating dot).
+        - id: options
+          type: <xref uid="@azure/arm-privatedns.PrivateZonesGetOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-privatedns.PrivateZonesGetResponse"
+          />&gt;
+  - name: list(PrivateZonesListOptionalParams)
+    uid: '@azure/arm-privatedns.PrivateZones.list'
+    package: '@azure/arm-privatedns'
+    summary: Lists the Private DNS zones in all resource groups in a subscription.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function list(options?: PrivateZonesListOptionalParams):
+        PagedAsyncIterableIterator<PrivateZone>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/arm-privatedns.PrivateZonesListOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/arm-privatedns.PrivateZone" />&gt;
+  - name: 'listByResourceGroup(string, PrivateZonesListByResourceGroupOptionalParams)'
+    uid: '@azure/arm-privatedns.PrivateZones.listByResourceGroup'
+    package: '@azure/arm-privatedns'
+    summary: Lists the Private DNS zones within a resource group.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listByResourceGroup(resourceGroupName: string, options?:
+        PrivateZonesListByResourceGroupOptionalParams):
+        PagedAsyncIterableIterator<PrivateZone>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-privatedns.PrivateZonesListByResourceGroupOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/arm-privatedns.PrivateZone" />&gt;

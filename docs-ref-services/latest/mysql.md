@@ -31,6 +31,7 @@ This example connects to a MySQL database and performs a simple query to retriev
 
 ```JavaScript
 const mysql = require('mysql2');
+const fs = require('fs');
 
 const connection = mysql.createConnection({
   host: 'mysqldemo.mysql.database.azure.com',
@@ -38,7 +39,7 @@ const connection = mysql.createConnection({
   password: 'your_password',
   database: 'my_db',
   port: 3306,
-  ssl: true
+  ssl: {ca: fs.readFileSync("your_path_to_ca_cert_file_BaltimoreCyberTrustRoot.crt.pem")}
 });
 
 connection.connect();

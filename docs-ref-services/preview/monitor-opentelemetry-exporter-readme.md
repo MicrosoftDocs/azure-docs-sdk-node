@@ -1,24 +1,23 @@
 ---
 title: Azure Monitor OpenTelemetry Exporter client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-opentelemetry-exporter, monitor
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/05/2021
+author: hectorhdzg
+ms.author: hectorh
+ms.date: 02/09/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: monitor
 ---
-
-# Azure Monitor OpenTelemetry Exporter client library for JavaScript - Version 1.0.0-beta.5 
+# Azure Monitor OpenTelemetry Exporter client library for JavaScript - Version 1.0.0-beta.6 
 
 
 [![npm version](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter.svg)](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter)
 
 ## Getting started
 
-This exporter package assumes your application is [already instrumented](https://github.com/open-telemetry/opentelemetry-js/blob/master/getting-started/README.md) with the OpenTelemetry SDK. Once you are ready to export OpenTelemetry data, you can add this exporter to your application.
+This exporter package assumes your application is [already instrumented](https://opentelemetry.io/docs/js/getting-started/) with the OpenTelemetry SDK. Once you are ready to export OpenTelemetry data, you can add this exporter to your application.
 
 ### Install the package
 
@@ -29,7 +28,7 @@ This exporter package assumes your application is [already instrumented](https:/
 - [LTS versions of Node.js](https://nodejs.org/about/releases/)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.5/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.6/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -80,7 +79,7 @@ Coming Soon
 
 ## Examples
 
-For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.5/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
+For complete samples of a few champion scenarios, see the [`samples/`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-opentelemetry-exporter_1.0.0-beta.6/sdk/monitor/monitor-opentelemetry-exporter/samples/) folder.
 
 ## Key concepts
 
@@ -116,7 +115,7 @@ If you cannot your library in the registry, feel free to suggest a new plugin re
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.5/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-opentelemetry-exporter_1.0.0-beta.6/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/monitor/monitor-opentelemetry-exporter/README.png)
 

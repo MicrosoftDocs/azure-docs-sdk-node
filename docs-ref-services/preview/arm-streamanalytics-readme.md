@@ -8,7 +8,7 @@ ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: streamanalytics
+ms.service: stream-analytics
 ---
 
 # Azure Stream Analytics Management client library for JavaScript - Version 3.0.0-beta.1 

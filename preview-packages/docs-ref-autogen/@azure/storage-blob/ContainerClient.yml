@@ -367,6 +367,146 @@ methods:
       return:
         description: ''
         type: Promise&lt;boolean&gt;
+  - name: 'findBlobsByTags(string, ContainerFindBlobByTagsOptions)'
+    uid: '@azure/storage-blob.ContainerClient.findBlobsByTags'
+    package: '@azure/storage-blob'
+    summary: >
+      Returns an async iterable iterator to find all blobs with specified tag
+
+      under the specified container.
+
+      .byPage() returns an async iterable iterator to list the blobs in pages.
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      let i = 1;
+
+      for await (const blob of
+      containerClient.findBlobsByTags("tagkey='tagvalue'")) {
+        console.log(`Blob ${i++}: ${blob.name}`);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      const iter = containerClient.findBlobsByTags("tagkey='tagvalue'");
+
+      let blobItem = await iter.next();
+
+      while (!blobItem.done) {
+        console.log(`Blob ${i++}: ${blobItem.value.name}`);
+        blobItem = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const response of
+      containerClient.findBlobsByTags("tagkey='tagvalue'").byPage({ maxPageSize:
+      20 })) {
+        if (response.blobs) {
+          for (const blob of response.blobs) {
+            console.log(`Blob ${i++}: ${blob.name}`);
+          }
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator =
+      containerClient.findBlobsByTags("tagkey='tagvalue'").byPage({ maxPageSize:
+      2 });
+
+      let response = (await iterator.next()).value;
+
+
+      // Prints 2 blob names
+
+      if (response.blobs) {
+        for (const blob of response.blobs) {
+          console.log(`Blob ${i++}: ${blob.name}`);
+        }
+      }
+
+
+      // Gets next marker
+
+      let marker = response.continuationToken;
+
+      // Passing next marker as continuationToken
+
+      iterator = containerClient
+        .findBlobsByTags("tagkey='tagvalue'")
+        .byPage({ continuationToken: marker, maxPageSize: 10 });
+      response = (await iterator.next()).value;
+
+
+      // Prints blob names
+
+      if (response.blobs) {
+        for (const blob of response.blobs) {
+           console.log(`Blob ${i++}: ${blob.name}`);
+        }
+      }
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function findBlobsByTags(tagFilterSqlExpression: string, options?:
+        ContainerFindBlobByTagsOptions):
+        PagedAsyncIterableIterator<FilterBlobItem,
+        ContainerFindBlobsByTagsSegmentResponse>
+      parameters:
+        - id: tagFilterSqlExpression
+          type: string
+          description: >-
+            The where parameter enables the caller to query blobs whose tags
+            match a given expression.
+                                                    The given expression must evaluate to true for a blob to be returned in the results.
+                                                    The[OData - ABNF] filter syntax rule defines the formal grammar for the value of the where query parameter;
+                                                    however, only a subset of the OData filter syntax is supported in the Blob service.
+        - id: options
+          type: <xref uid="@azure/storage-blob.ContainerFindBlobByTagsOptions" />
+          description: |
+            Options to find blobs by tags.
+      return:
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/storage-blob.FilterBlobItem" />, <xref
+          uid="@azure/storage-blob.ContainerFindBlobsByTagsSegmentResponse"
+          />&gt;
   - name: generateSasUrl(ContainerGenerateSasUrlOptions)
     uid: '@azure/storage-blob.ContainerClient.generateSasUrl'
     package: '@azure/storage-blob'
@@ -616,7 +756,7 @@ methods:
         if (item.kind === "prefix") {
           console.log(`\tBlobPrefix: ${item.name}`);
         } else {
-          console.log(`\tBlobItem: name - ${item.name}, last modified - ${item.properties.lastModified}`);
+          console.log(`\tBlobItem: name - ${item.name}`);
         }
       }
 
@@ -638,7 +778,7 @@ methods:
         if (item.kind === "prefix") {
           console.log(`\tBlobPrefix: ${item.name}`);
         } else {
-          console.log(`\tBlobItem: name - ${item.name}, last modified - ${item.properties.lastModified}`);
+          console.log(`\tBlobItem: name - ${item.name}`);
         }
         entity = await iter.next();
       }
@@ -662,7 +802,7 @@ methods:
           }
         }
         for (const blob of response.segment.blobItems) {
-          console.log(`\tBlobItem: name - ${blob.name}, last modified - ${blob.properties.lastModified}`);
+          console.log(`\tBlobItem: name - ${blob.name}`);
         }
       }
 
@@ -680,8 +820,9 @@ methods:
 
       let i = 1;
 
-      for await (const response of containerClient.listBlobsByHierarchy("/", {
-      prefix: "prefix2/sub1/"}).byPage({ maxPageSize: 2 })) {
+      for await (const response of containerClient
+        .listBlobsByHierarchy("/", { prefix: "prefix2/sub1/" })
+        .byPage({ maxPageSize: 2 })) {
         console.log(`Page ${i++}`);
         const segment = response.segment;
 
@@ -692,7 +833,7 @@ methods:
         }
 
         for (const blob of response.segment.blobItems) {
-          console.log(`\tBlobItem: name - ${blob.name}, last modified - ${blob.properties.lastModified}`);
+          console.log(`\tBlobItem: name - ${blob.name}`);
         }
       }
 

@@ -1,9 +1,9 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-express, webpubsub
-author: xirzec
-ms.author: xirzec
-ms.date: 01/20/2022
+author: vicancy
+ms.author: lianwei
+ms.date: 02/14/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -20,7 +20,7 @@ When a WebSocket connection connects, the Web PubSub service transforms the conn
 
 Details about the terms used here are described in [Key concepts](#key-concepts) section.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.1/sdk/web-pubsub/web-pubsub-express) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.2/sdk/web-pubsub/web-pubsub-express) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/web-pubsub-express) |
 [API reference documentation](https://aka.ms/awps/sdk/js) |
 [Product documentation](https://aka.ms/awps/doc) |
@@ -199,7 +199,7 @@ You can set the following environment variable to get the debug logs when using 
 export AZURE_LOG_LEVEL=verbose
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-express_1.0.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-express_1.0.2/sdk/core/logger).
 
 ### Live Trace
 
@@ -213,7 +213,7 @@ directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-express_1.0.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

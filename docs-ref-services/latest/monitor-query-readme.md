@@ -1,22 +1,21 @@
 ---
 title: Azure Monitor Query client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-query, monitor
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 10/07/2021
+author: KarishmaGhiya
+ms.author: kaghiya
+ms.date: 02/10/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: monitor
 ---
-
-# Azure Monitor Query client library for JavaScript - Version 1.0.0 
+# Azure Monitor Query client library for JavaScript - Version 1.0.1 
 
 
 The Azure Monitor Query client library is used to execute read-only queries against [Azure Monitor][azure_monitor_overview]'s two data platforms:
 
-- [Logs](https://docs.microsoft.com/azure/azure-monitor/logs/data-platform-logs) - Collects and organizes log and performance data from monitored resources. Data from different sources such as platform logs from Azure services, log and performance data from virtual machines agents, and usage and performance data from apps can be consolidated into a single [Azure Log Analytics workspace](https://docs.microsoft.com/azure/azure-monitor/logs/data-platform-logs#log-analytics-workspaces). The various data types can be analyzed together using the [Kusto Query Language][kusto_query_language].
+- [Logs](https://docs.microsoft.com/azure/azure-monitor/logs/data-platform-logs) - Collects and organizes log and performance data from monitored resources. Data from different sources such as platform logs from Azure services, log and performance data from virtual machines agents, and usage and performance data from apps can be consolidated into a single [Azure Log Analytics workspace](https://docs.microsoft.com/azure/azure-monitor/logs/data-platform-logs#log-analytics-and-workspaces). The various data types can be analyzed together using the [Kusto Query Language][kusto_query_language].
 - [Metrics](https://docs.microsoft.com/azure/azure-monitor/essentials/data-platform-metrics) - Collects numeric data from monitored resources into a time series database. Metrics are numerical values that are collected at regular intervals and describe some aspect of a system at a particular time. Metrics are lightweight and capable of supporting near real-time scenarios, making them particularly useful for alerting and fast detection of issues.
 
 **Resources:**
@@ -35,7 +34,7 @@ The Azure Monitor Query client library is used to execute read-only queries agai
 - [LTS versions of Node.js](https://nodejs.org/about/releases/)
 - Latest versions of Safari, Chrome, Edge, and Firefox
 
-For more details, see our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0/SUPPORT.md).
+For more details, see our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.1/SUPPORT.md).
 
 ### Prerequisites
 
@@ -53,7 +52,7 @@ npm install @azure/monitor-query
 
 ### Create the client
 
-An authenticated client is required to query Logs or Metrics. To authenticate, the following example uses [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0/sdk/identity/identity/README.md#defaultazurecredential) from the [@azure/identity](https://www.npmjs.com/package/@azure/identity) package.
+An authenticated client is required to query Logs or Metrics. To authenticate, the following example uses [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.1/sdk/identity/identity/README.md#defaultazurecredential) from the [@azure/identity](https://www.npmjs.com/package/@azure/identity) package.
 
 ```ts
 import { DefaultAzureCredential } from "@azure/identity";
@@ -74,7 +73,7 @@ For examples of Logs and Metrics queries, see the [Examples](#examples) section.
 
 ### Logs query rate limits and throttling
 
-The Log Analytics service applies throttling when the request rate is too high. Limits, such as the maximum number of rows returned, are also applied on the Kusto queries. For more information, see [Rate and query limits](https://dev.loganalytics.io/documentation/Using-the-API/Limits).
+The Log Analytics service applies throttling when the request rate is too high. Limits, such as the maximum number of rows returned, are also applied on the Kusto queries. For more information, see [Query API](https://docs.microsoft.com/azure/azure-monitor/service-limits#la-query-api).
 
 ### Metrics data structure
 
@@ -106,7 +105,7 @@ The `LogsQueryClient` can be used to query a Log Analytics workspace using the [
 
 ```ts
 import { DefaultAzureCredential } from "@azure/identity";
-import { Durations, LogsQueryClient } from "@azure/monitor-query";
+import { Durations, LogsQueryClient, LogsQueryResultStatus, LogsTable } from "@azure/monitor-query";
 
 const azureLogAnalyticsWorkspaceId = "<the Workspace Id for your Azure Log Analytics resource>";
 const logsQueryClient = new LogsQueryClient(new DefaultAzureCredential());
@@ -203,7 +202,7 @@ async function processTables(tablesFromResult: LogsTable[]) {
 }
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQuery.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.1/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQuery.ts).
 
 ### Batch logs query
 
@@ -246,7 +245,7 @@ export async function main() {
 
   const result = await logsQueryClient.queryBatch(queriesBatch);
 
-  if (result.results == null) {
+  if (result == null) {
     throw new Error("No response for query");
   }
 
@@ -381,7 +380,7 @@ async function processTables(tablesFromResult: LogsTable[]) {
 }
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryBatch.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.1/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryBatch.ts).
 
 For information on request throttling at the Log Analytics service level, see [Rate limits](https://dev.loganalytics.io/documentation/Using-the-API/Limits).
 
@@ -448,7 +447,7 @@ AppEvents | order by TenantId
 AppEvents | filter TenantId == "<workspace2>"
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryMultipleWorkspaces.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.1/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryMultipleWorkspaces.ts).
 
 ### Metrics query
 
@@ -607,7 +606,7 @@ main().catch((err) => {
 });
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0/sdk/monitor/monitor-query/samples/v1/typescript/src/metricsQuery.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.1/sdk/monitor/monitor-query/samples/v1/typescript/src/metricsQuery.ts).
 
 ## Troubleshooting
 
@@ -621,7 +620,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For detailed instructions on how to enable logs, see the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0/sdk/core/logger).
+For detailed instructions on how to enable logs, see the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.1/sdk/core/logger).
 
 ## Next steps
 
@@ -629,7 +628,7 @@ To learn more about Azure Monitor, see the [Azure Monitor service documentation]
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This module's tests are a mixture of live and unit tests, which require you to have an Azure Monitor instance. To execute the tests, you'll need to run:
 
@@ -640,7 +639,7 @@ This module's tests are a mixture of live and unit tests, which require you to h
 5. Open the `.env` file in an editor and fill in the values.
 6. `npm run test`.
 
-For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0/sdk/monitor/monitor-query/test) folder.
+For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.1/sdk/monitor/monitor-query/test) folder.
 
 ## Related projects
 
@@ -652,10 +651,10 @@ For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blo
 [azure_monitor_create_using_portal]: https://docs.microsoft.com/azure/azure-monitor/logs/quick-create-workspace
 [azure_monitor_overview]: https://docs.microsoft.com/azure/azure-monitor/overview
 [azure_subscription]: https://azure.microsoft.com/free/
-[changelog]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0/sdk/monitor/monitor-query/CHANGELOG.md
+[changelog]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.1/sdk/monitor/monitor-query/CHANGELOG.md
 [kusto_query_language]: https://docs.microsoft.com/azure/data-explorer/kusto/query/
 [msdocs_apiref]: https://docs.microsoft.com/javascript/api/@azure/monitor-query
 [package]: https://www.npmjs.com/package/@azure/monitor-query
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.0/sdk/monitor/monitor-query/samples
-[source]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.0/sdk/monitor/monitor-query/
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.1/sdk/monitor/monitor-query/samples
+[source]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.1/sdk/monitor/monitor-query/
 

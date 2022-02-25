@@ -37,18 +37,22 @@ This example connects to an Azure Redis Cache instance, stores a key/value pair 
 ```JavaScript
 const redis = require('redis');
 
-const client = redis.createClient(6380, '<name>.redis.cache.windows.net', {
-  auth_pass: '<key>',
-  tls: { servername: '<name>.redis.cache.windows.net' }
-});
+async function sample() 
+{
+    var client = redis.createClient(
+    {
+        // rediss for TLS
+        url: "rediss://<name>.redis.cache.windows.net:6380",
+        password: "<key>",
+    });
+    await client.connect();
 
-client.set('key1', 'value', (err, reply) => {
-  console.log(reply);
-});
-
-client.get('key1', (err, reply) => {
-  console.log(reply);
-});
+    console.log(await client.set('key1', 'value'));
+    console.log(await client.get('key1'));
+    console.log("\nDone");
+    process.exit();
+}
+sample();
 ```
 
 ## Management package

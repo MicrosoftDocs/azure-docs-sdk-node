@@ -55,9 +55,9 @@ sample();
 
 ## Management package
 
-### Install the npm module
+### Install the npm module for Azure Cache for Redis
 
-Use npm to install the Azure Redis Cache modules for JavaScript
+Use npm to install the Azure Cache for Redis modules for JavaScript
 
 ```bash
 npm install @azure/arm-rediscache

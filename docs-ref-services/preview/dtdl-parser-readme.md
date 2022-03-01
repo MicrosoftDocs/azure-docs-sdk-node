@@ -2,18 +2,18 @@
 title: Azure Model Parser client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/dtdl-parser, digitaltwins
 author: johngallardo
-ms.author: johngallardo
-ms.date: 02/02/2022
+ms.author: jgalla
+ms.date: 02/23/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: digitaltwins
 ---
-# Azure Model Parser client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Model Parser client library for JavaScript - Version 1.0.0-beta.2 
 
 
-Use this library to parse your DTDL models and validate their structure conforms to the DTDL specification. 
+Use this library to parse your DTDL models and validate their structure conforms to the DTDL specification.
 
 The Digital Twin Definition Language (DTDL) defines a JSON-LD based schema for creating Digital Twin models. As the DTDL specification evolves, this parser will be updated accordingly. A key characteristic of Azure Digital Twins is the ability to define your own vocabulary and build your twin graph in the self-defined terms of your business. This capability is provided through user-provided models. You can think of models as the nouns in a description of your world.
 
@@ -26,7 +26,7 @@ Learn more about DTDL [here](https://docs.microsoft.com/azure/digital-twins/conc
 - [LTS versions of Node.js](https://nodejs.org/about/releases/)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/dtdl-parser_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/dtdl-parser_1.0.0-beta.2/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -50,10 +50,6 @@ If you have not already written a DTDL model, you can access the full repository
 
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
-### Further examples
-
-Top-level examples usually include things like creating and authenticating the main Client. If your service supports multiple means of authenticating (e.g. key-based and Azure Active Directory) you can give a separate example of each.
-
 ## Key concepts
 
 ### DTDL Parser
@@ -66,31 +62,29 @@ You can learn more about DTDL for models by reading "Learn about twin models and
 
 ### Parse a DTDL Model
 
-To parse a sample DTDL model, either start with one you have already written or use one located in the public DTDL database (referenced above). Once you have installed the package via `npm`, create a TypeScript sample:
+To parse a sample DTDL model, either start with one you have already written or use one located in the public DTDL database. Let's grab a sample model from the models repository:
 
-```javascript
-import * as fs from "fs";
-import { createParser, ModelParsingOption } from "@azure/dtdl-parser";
-
+```js
+// example.js
 async function main() {
-  const rawDtdlDigest: string = fs.readFileSync(
-    "./samples-dev/InterfaceContentsEmbeddedV2.json",
-    "utf-8"
-  );
+  const client = new ModelsRepositoryClient();
+  const dtmi = "dtmi:com:example:TemperatureController;1";
+  const models = await client.getModels(dtmi);
+
   const modelParser = createParser(ModelParsingOption.PermitAnyTopLevelElement);
   modelParser.options = ModelParsingOption.PermitAnyTopLevelElement;
-  const modelDict = await modelParser.parse([rawDtdlDigest]);
-  console.log(modelDict);
-  Object.entries(modelDict).forEach(([key, value]) => {
-    console.log(key);
-    console.log(typeof value);
+  Object.entries(models).forEach(([key, value]) => {
+    console.log(`dtmi: ${key}`);
+    const modelDict = await modelParser.parse([value]);
+    Object.entries(modelDict).forEach(([key2, value2]) => {
+      console.log(key2);
+    });
   });
 }
 
 main().catch((err) => {
-  console.error("The sample encountered an error:", err);
+  console.error("The sample encountered an error:", err); 
 });
-
 ```
 
 ## Troubleshooting
@@ -107,15 +101,15 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/dtdl-parser_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/dtdl-parser_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/dtdl-parser_1.0.0-beta.1/sdk/digitaltwins/dtdl-parser/samples) directory for detailed examples that demonstrate how to use the client libraries.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/dtdl-parser_1.0.0-beta.2/sdk/digitaltwins/dtdl-parser/samples) directory for detailed examples that demonstrate how to use the client libraries.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/dtdl-parser_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/dtdl-parser_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

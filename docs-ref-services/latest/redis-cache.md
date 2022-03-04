@@ -1,9 +1,8 @@
 ---
 title: Azure Redis Cache modules for JavaScript
 description: Reference for Azure Redis Cache modules for JavaScript
-author: wesmc7777
-ms.author: wesmc
-manager: cfowler
+author: flang-msft
+ms.author: franlanglois
 ms.date: 02/25/2022
 ms.topic: reference
 ms.devlang: nodejs

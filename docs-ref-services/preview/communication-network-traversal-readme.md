@@ -1,17 +1,16 @@
 ---
 title: Azure Communication Network Traversal client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-network-traversal, communication
-author: maggiepint
-ms.author: magpint
-ms.date: 11/18/2021
+author: AriZavala2
+ms.author: arzavala
+ms.date: 03/11/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: communication
 ---
-
-# Azure Communication Network Traversal client library for JavaScript - Version 1.0.0-beta.3 
+# Azure Communication Network Traversal client library for JavaScript - Version 1.1.0-beta.1 
 
 
 Azure Communication Network Traversal is managing tokens for Azure Communication Services. 
@@ -106,19 +105,19 @@ const user = await client.createUser();
 Use the `getConfigurationRelay` method to get new TURN credentials providing a user
 
 ```typescript
-const config = relayClient.getRelayConfiguration(user);
+const config = await relayClient.getRelayConfiguration(user);
 ```
 
 Also you can call the `getConfigurationRelay` method without providing a user
 
 ```typescript
-const config = relayClient.getRelayConfiguration();
+const config = await relayClient.getRelayConfiguration();
 ```
 
 You can specify a RouteType when calling `getConfigurationRelay`
 
 ```typescript
-const config = relayClient.getRelayConfiguration(user, "nearest");
+const config = await relayClient.getRelayConfiguration(user, "nearest");
 ```
 
 ## Troubleshooting
@@ -126,12 +125,12 @@ const config = relayClient.getRelayConfiguration(user, "nearest");
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-network-traversal_1.0.0-beta.3/sdk/communication/communication-network-traversal/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-network-traversal_1.1.0-beta.1/sdk/communication/communication-network-traversal/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-network-traversal_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-network-traversal_1.1.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

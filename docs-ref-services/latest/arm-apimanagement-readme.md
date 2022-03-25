@@ -8,7 +8,7 @@ ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: apimanagement
+ms.service: api-management
 ---
 # Azure ApiManagement client library for JavaScript - Version 8.0.0 
 

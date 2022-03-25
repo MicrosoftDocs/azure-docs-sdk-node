@@ -5,7 +5,6 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 12/13/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: api-management

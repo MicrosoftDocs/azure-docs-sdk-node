@@ -6,7 +6,6 @@ author: dlepow
 ms.author: danlep
 ms.date: 03/28/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: api-management
 ---
@@ -57,7 +56,7 @@ npm install @azure/identity
 You will also need to **register a new AAD application and grant access to Azure ApiManagement** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
-For more information about how to create an Azure AD Application check out [this guide](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
+For more information about how to create an Azure AD Application check out [this guide](/azure/active-directory/develop/howto-create-service-principal-portal).
 
 ```javascript
 const { ApiManagementClient } = require("@azure/arm-apimanagement");

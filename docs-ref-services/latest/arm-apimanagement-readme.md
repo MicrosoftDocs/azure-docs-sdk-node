@@ -1,9 +1,10 @@
 ---
 title: Azure ApiManagement client library for JavaScript
+description: Reference documentation for the JavaScript client library for Azure API Management
 keywords: Azure, javascript, SDK, API, @azure/arm-apimanagement, apimanagement
-author: qiaozha
-ms.author: qiaozha
-ms.date: 12/13/2021
+author: dlepow
+ms.author: danlep
+ms.date: 03/28/2022
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
@@ -18,7 +19,7 @@ ApiManagement Client
 
 [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-apimanagement_8.0.0/sdk/apimanagement/arm-apimanagement) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-apimanagement) |
-[API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-apimanagement) |
+[API reference documentation](/javascript/api/@azure/arm-apimanagement) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -102,7 +103,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fapimanagement%2Farm-apimanagement%2FREADME.png)
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com

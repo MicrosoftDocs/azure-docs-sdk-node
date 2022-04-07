@@ -479,7 +479,7 @@ const client = new TableClient(
 
 ### General
 
-When you interact with Tables service using the Javascript/Typescript SDK, errors returned by the service correspond to the same HTTP status codes returned for REST API requests:
+When you interact with Tables service using the JavaScript/TypeScript SDK, errors returned by the service correspond to the same HTTP status codes returned for REST API requests:
 [Storage Table Service Error Codes](https://docs.microsoft.com/rest/api/storageservices/table-service-error-codes)
 
 ### Logging

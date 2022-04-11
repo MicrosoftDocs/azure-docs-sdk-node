@@ -2,76 +2,48 @@
 name: SourceControlConfigurations
 uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations'
 package: '@azure/arm-kubernetesconfiguration'
-summary: Class representing a SourceControlConfigurations.
+summary: Interface representing a SourceControlConfigurations.
 fullName: SourceControlConfigurations
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: SourceControlConfigurations(SourceControlConfigurationClientContext)
-    uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations.constructor'
-    package: '@azure/arm-kubernetesconfiguration'
-    summary: Create a SourceControlConfigurations.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        new SourceControlConfigurations(client:
-        SourceControlConfigurationClientContext)
-      parameters:
-        - id: client
-          type: >-
-            <xref
-            uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationClientContext"
-            />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
   - name: >-
-      beginDeleteMethod(string, Models.ClusterRp17,
-      Models.ClusterResourceName17, string, string, msRest.RequestOptionsBase)
-    uid: >-
-      @azure/arm-kubernetesconfiguration.SourceControlConfigurations.beginDeleteMethod
+      beginDelete(string, string, string, string, string,
+      SourceControlConfigurationsDeleteOptionalParams)
+    uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations.beginDelete'
     package: '@azure/arm-kubernetesconfiguration'
     summary: >-
       This will delete the YAML file used to set up the Source control
-      configuration, thus stopping
+      configuration, thus stopping future
 
-      future sync from the source repo.
+      sync from the source repo.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function beginDeleteMethod(resourceGroupName: string, clusterRp:
-        Models.ClusterRp17, clusterResourceName: Models.ClusterResourceName17,
-        clusterName: string, sourceControlConfigurationName: string, options?:
-        msRest.RequestOptionsBase): Promise<LROPoller>
+        function beginDelete(resourceGroupName: string, clusterRp: string,
+        clusterResourceName: string, clusterName: string,
+        sourceControlConfigurationName: string, options?:
+        SourceControlConfigurationsDeleteOptionalParams):
+        Promise<PollerLike<PollOperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
           description: The name of the resource group. The name is case insensitive.
         - id: clusterRp
-          type: <xref uid="Models.ClusterRp17" />
+          type: string
           description: >-
-            The Kubernetes cluster RP - either Microsoft.ContainerService (for
-            AKS
-
-            clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).
-            Possible values include:
-
-            'Microsoft.ContainerService', 'Microsoft.Kubernetes'
+            The Kubernetes cluster RP - i.e. Microsoft.ContainerService,
+            Microsoft.Kubernetes,
+                             Microsoft.HybridContainerService.
         - id: clusterResourceName
-          type: <xref uid="Models.ClusterResourceName17" />
-          description: >-
-            The Kubernetes cluster resource name - either managedClusters (for
-
-            AKS clusters) or connectedClusters (for OnPrem K8S clusters).
-            Possible values include:
-
-            'managedClusters', 'connectedClusters'
+          type: string
+          description: |-
+            The Kubernetes cluster resource name - i.e. managedClusters,
+                                       connectedClusters, provisionedClusters.
         - id: clusterName
           type: string
           description: The name of the kubernetes cluster.
@@ -79,14 +51,70 @@ methods:
           type: string
           description: Name of the Source Control Configuration.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationsDeleteOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
   - name: >-
-      createOrUpdate(string, Models.ClusterRp16, Models.ClusterResourceName16,
-      string, string, SourceControlConfiguration, msRest.RequestOptionsBase)
+      beginDeleteAndWait(string, string, string, string, string,
+      SourceControlConfigurationsDeleteOptionalParams)
+    uid: >-
+      @azure/arm-kubernetesconfiguration.SourceControlConfigurations.beginDeleteAndWait
+    package: '@azure/arm-kubernetesconfiguration'
+    summary: >-
+      This will delete the YAML file used to set up the Source control
+      configuration, thus stopping future
+
+      sync from the source repo.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteAndWait(resourceGroupName: string, clusterRp:
+        string, clusterResourceName: string, clusterName: string,
+        sourceControlConfigurationName: string, options?:
+        SourceControlConfigurationsDeleteOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group. The name is case insensitive.
+        - id: clusterRp
+          type: string
+          description: >-
+            The Kubernetes cluster RP - i.e. Microsoft.ContainerService,
+            Microsoft.Kubernetes,
+                             Microsoft.HybridContainerService.
+        - id: clusterResourceName
+          type: string
+          description: |-
+            The Kubernetes cluster resource name - i.e. managedClusters,
+                                       connectedClusters, provisionedClusters.
+        - id: clusterName
+          type: string
+          description: The name of the kubernetes cluster.
+        - id: sourceControlConfigurationName
+          type: string
+          description: Name of the Source Control Configuration.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationsDeleteOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: >-
+      createOrUpdate(string, string, string, string, string,
+      SourceControlConfiguration,
+      SourceControlConfigurationsCreateOrUpdateOptionalParams)
     uid: >-
       @azure/arm-kubernetesconfiguration.SourceControlConfigurations.createOrUpdate
     package: '@azure/arm-kubernetesconfiguration'
@@ -96,35 +124,27 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrUpdate(resourceGroupName: string, clusterRp:
-        Models.ClusterRp16, clusterResourceName: Models.ClusterResourceName16,
-        clusterName: string, sourceControlConfigurationName: string,
-        sourceControlConfiguration: SourceControlConfiguration, options?:
-        msRest.RequestOptionsBase):
-        Promise<Models.SourceControlConfigurationsCreateOrUpdateResponse>
+        function createOrUpdate(resourceGroupName: string, clusterRp: string,
+        clusterResourceName: string, clusterName: string,
+        sourceControlConfigurationName: string, sourceControlConfiguration:
+        SourceControlConfiguration, options?:
+        SourceControlConfigurationsCreateOrUpdateOptionalParams):
+        Promise<SourceControlConfigurationsCreateOrUpdateResponse>
       parameters:
         - id: resourceGroupName
           type: string
           description: The name of the resource group. The name is case insensitive.
         - id: clusterRp
-          type: <xref uid="Models.ClusterRp16" />
+          type: string
           description: >-
-            The Kubernetes cluster RP - either Microsoft.ContainerService (for
-            AKS
-
-            clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).
-            Possible values include:
-
-            'Microsoft.ContainerService', 'Microsoft.Kubernetes'
+            The Kubernetes cluster RP - i.e. Microsoft.ContainerService,
+            Microsoft.Kubernetes,
+                             Microsoft.HybridContainerService.
         - id: clusterResourceName
-          type: <xref uid="Models.ClusterResourceName16" />
-          description: >-
-            The Kubernetes cluster resource name - either managedClusters (for
-
-            AKS clusters) or connectedClusters (for OnPrem K8S clusters).
-            Possible values include:
-
-            'managedClusters', 'connectedClusters'
+          type: string
+          description: |-
+            The Kubernetes cluster resource name - i.e. managedClusters,
+                                       connectedClusters, provisionedClusters.
         - id: clusterName
           type: string
           description: The name of the kubernetes cluster.
@@ -138,195 +158,21 @@ methods:
             />
           description: Properties necessary to Create KubernetesConfiguration.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationsCreateOrUpdateOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.SourceControlConfigurationsCreateOrUpdateResponse>
+        description: ''
         type: >-
           Promise&lt;<xref
-          uid="Models.SourceControlConfigurationsCreateOrUpdateResponse" />&gt;
+          uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationsCreateOrUpdateResponse"
+          />&gt;
   - name: >-
-      createOrUpdate(string, Models.ClusterRp16, Models.ClusterResourceName16,
-      string, string, SourceControlConfiguration, RequestOptionsBase,
-      ServiceCallback<SourceControlConfiguration>)
-    uid: >-
-      @azure/arm-kubernetesconfiguration.SourceControlConfigurations.createOrUpdate_2
-    package: '@azure/arm-kubernetesconfiguration'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createOrUpdate(resourceGroupName: string, clusterRp:
-        Models.ClusterRp16, clusterResourceName: Models.ClusterResourceName16,
-        clusterName: string, sourceControlConfigurationName: string,
-        sourceControlConfiguration: SourceControlConfiguration, options:
-        RequestOptionsBase, callback:
-        ServiceCallback<SourceControlConfiguration>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: clusterRp
-          type: <xref uid="Models.ClusterRp16" />
-          description: >-
-            The Kubernetes cluster RP - either Microsoft.ContainerService (for
-            AKS
-
-            clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).
-            Possible values include:
-
-            'Microsoft.ContainerService', 'Microsoft.Kubernetes'
-        - id: clusterResourceName
-          type: <xref uid="Models.ClusterResourceName16" />
-          description: >-
-            The Kubernetes cluster resource name - either managedClusters (for
-
-            AKS clusters) or connectedClusters (for OnPrem K8S clusters).
-            Possible values include:
-
-            'managedClusters', 'connectedClusters'
-        - id: clusterName
-          type: string
-          description: The name of the kubernetes cluster.
-        - id: sourceControlConfigurationName
-          type: string
-          description: Name of the Source Control Configuration.
-        - id: sourceControlConfiguration
-          type: >-
-            <xref
-            uid="@azure/arm-kubernetesconfiguration.SourceControlConfiguration"
-            />
-          description: Properties necessary to Create KubernetesConfiguration.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-kubernetesconfiguration.SourceControlConfiguration"
-            />&gt;
-          description: |
-            The callback
-  - name: >-
-      createOrUpdate(string, Models.ClusterRp16, Models.ClusterResourceName16,
-      string, string, SourceControlConfiguration,
-      ServiceCallback<SourceControlConfiguration>)
-    uid: >-
-      @azure/arm-kubernetesconfiguration.SourceControlConfigurations.createOrUpdate_1
-    package: '@azure/arm-kubernetesconfiguration'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createOrUpdate(resourceGroupName: string, clusterRp:
-        Models.ClusterRp16, clusterResourceName: Models.ClusterResourceName16,
-        clusterName: string, sourceControlConfigurationName: string,
-        sourceControlConfiguration: SourceControlConfiguration, callback:
-        ServiceCallback<SourceControlConfiguration>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: clusterRp
-          type: <xref uid="Models.ClusterRp16" />
-          description: >-
-            The Kubernetes cluster RP - either Microsoft.ContainerService (for
-            AKS
-
-            clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).
-            Possible values include:
-
-            'Microsoft.ContainerService', 'Microsoft.Kubernetes'
-        - id: clusterResourceName
-          type: <xref uid="Models.ClusterResourceName16" />
-          description: >-
-            The Kubernetes cluster resource name - either managedClusters (for
-
-            AKS clusters) or connectedClusters (for OnPrem K8S clusters).
-            Possible values include:
-
-            'managedClusters', 'connectedClusters'
-        - id: clusterName
-          type: string
-          description: The name of the kubernetes cluster.
-        - id: sourceControlConfigurationName
-          type: string
-          description: Name of the Source Control Configuration.
-        - id: sourceControlConfiguration
-          type: >-
-            <xref
-            uid="@azure/arm-kubernetesconfiguration.SourceControlConfiguration"
-            />
-          description: Properties necessary to Create KubernetesConfiguration.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-kubernetesconfiguration.SourceControlConfiguration"
-            />&gt;
-          description: |
-            The callback
-  - name: >-
-      deleteMethod(string, Models.ClusterRp17, Models.ClusterResourceName17,
-      string, string, msRest.RequestOptionsBase)
-    uid: >-
-      @azure/arm-kubernetesconfiguration.SourceControlConfigurations.deleteMethod
-    package: '@azure/arm-kubernetesconfiguration'
-    summary: >-
-      This will delete the YAML file used to set up the Source control
-      configuration, thus stopping
-
-      future sync from the source repo.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deleteMethod(resourceGroupName: string, clusterRp:
-        Models.ClusterRp17, clusterResourceName: Models.ClusterResourceName17,
-        clusterName: string, sourceControlConfigurationName: string, options?:
-        msRest.RequestOptionsBase): Promise<RestResponse>
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: clusterRp
-          type: <xref uid="Models.ClusterRp17" />
-          description: >-
-            The Kubernetes cluster RP - either Microsoft.ContainerService (for
-            AKS
-
-            clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).
-            Possible values include:
-
-            'Microsoft.ContainerService', 'Microsoft.Kubernetes'
-        - id: clusterResourceName
-          type: <xref uid="Models.ClusterResourceName17" />
-          description: >-
-            The Kubernetes cluster resource name - either managedClusters (for
-
-            AKS clusters) or connectedClusters (for OnPrem K8S clusters).
-            Possible values include:
-
-            'managedClusters', 'connectedClusters'
-        - id: clusterName
-          type: string
-          description: The name of the kubernetes cluster.
-        - id: sourceControlConfigurationName
-          type: string
-          description: Name of the Source Control Configuration.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<msRest.RestResponse>
-        type: Promise&lt;RestResponse&gt;
-  - name: >-
-      get(string, Models.ClusterRp15, Models.ClusterResourceName15, string,
-      string, msRest.RequestOptionsBase)
+      get(string, string, string, string, string,
+      SourceControlConfigurationsGetOptionalParams)
     uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations.get'
     package: '@azure/arm-kubernetesconfiguration'
     summary: Gets details of the Source Control Configuration.
@@ -335,34 +181,26 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function get(resourceGroupName: string, clusterRp: Models.ClusterRp15,
-        clusterResourceName: Models.ClusterResourceName15, clusterName: string,
+        function get(resourceGroupName: string, clusterRp: string,
+        clusterResourceName: string, clusterName: string,
         sourceControlConfigurationName: string, options?:
-        msRest.RequestOptionsBase):
-        Promise<Models.SourceControlConfigurationsGetResponse>
+        SourceControlConfigurationsGetOptionalParams):
+        Promise<SourceControlConfigurationsGetResponse>
       parameters:
         - id: resourceGroupName
           type: string
           description: The name of the resource group. The name is case insensitive.
         - id: clusterRp
-          type: <xref uid="Models.ClusterRp15" />
+          type: string
           description: >-
-            The Kubernetes cluster RP - either Microsoft.ContainerService (for
-            AKS
-
-            clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).
-            Possible values include:
-
-            'Microsoft.ContainerService', 'Microsoft.Kubernetes'
+            The Kubernetes cluster RP - i.e. Microsoft.ContainerService,
+            Microsoft.Kubernetes,
+                             Microsoft.HybridContainerService.
         - id: clusterResourceName
-          type: <xref uid="Models.ClusterResourceName15" />
-          description: >-
-            The Kubernetes cluster resource name - either managedClusters (for
-
-            AKS clusters) or connectedClusters (for OnPrem K8S clusters).
-            Possible values include:
-
-            'managedClusters', 'connectedClusters'
+          type: string
+          description: |-
+            The Kubernetes cluster resource name - i.e. managedClusters,
+                                       connectedClusters, provisionedClusters.
         - id: clusterName
           type: string
           description: The name of the kubernetes cluster.
@@ -370,121 +208,21 @@ methods:
           type: string
           description: Name of the Source Control Configuration.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationsGetOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.SourceControlConfigurationsGetResponse>
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.SourceControlConfigurationsGetResponse"
+          Promise&lt;<xref
+          uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationsGetResponse"
           />&gt;
   - name: >-
-      get(string, Models.ClusterRp15, Models.ClusterResourceName15, string,
-      string, RequestOptionsBase, ServiceCallback<SourceControlConfiguration>)
-    uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations.get_2'
-    package: '@azure/arm-kubernetesconfiguration'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, clusterRp: Models.ClusterRp15,
-        clusterResourceName: Models.ClusterResourceName15, clusterName: string,
-        sourceControlConfigurationName: string, options: RequestOptionsBase,
-        callback: ServiceCallback<SourceControlConfiguration>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: clusterRp
-          type: <xref uid="Models.ClusterRp15" />
-          description: >-
-            The Kubernetes cluster RP - either Microsoft.ContainerService (for
-            AKS
-
-            clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).
-            Possible values include:
-
-            'Microsoft.ContainerService', 'Microsoft.Kubernetes'
-        - id: clusterResourceName
-          type: <xref uid="Models.ClusterResourceName15" />
-          description: >-
-            The Kubernetes cluster resource name - either managedClusters (for
-
-            AKS clusters) or connectedClusters (for OnPrem K8S clusters).
-            Possible values include:
-
-            'managedClusters', 'connectedClusters'
-        - id: clusterName
-          type: string
-          description: The name of the kubernetes cluster.
-        - id: sourceControlConfigurationName
-          type: string
-          description: Name of the Source Control Configuration.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-kubernetesconfiguration.SourceControlConfiguration"
-            />&gt;
-          description: |
-            The callback
-  - name: >-
-      get(string, Models.ClusterRp15, Models.ClusterResourceName15, string,
-      string, ServiceCallback<SourceControlConfiguration>)
-    uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations.get_1'
-    package: '@azure/arm-kubernetesconfiguration'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, clusterRp: Models.ClusterRp15,
-        clusterResourceName: Models.ClusterResourceName15, clusterName: string,
-        sourceControlConfigurationName: string, callback:
-        ServiceCallback<SourceControlConfiguration>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: clusterRp
-          type: <xref uid="Models.ClusterRp15" />
-          description: >-
-            The Kubernetes cluster RP - either Microsoft.ContainerService (for
-            AKS
-
-            clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).
-            Possible values include:
-
-            'Microsoft.ContainerService', 'Microsoft.Kubernetes'
-        - id: clusterResourceName
-          type: <xref uid="Models.ClusterResourceName15" />
-          description: >-
-            The Kubernetes cluster resource name - either managedClusters (for
-
-            AKS clusters) or connectedClusters (for OnPrem K8S clusters).
-            Possible values include:
-
-            'managedClusters', 'connectedClusters'
-        - id: clusterName
-          type: string
-          description: The name of the kubernetes cluster.
-        - id: sourceControlConfigurationName
-          type: string
-          description: Name of the Source Control Configuration.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-kubernetesconfiguration.SourceControlConfiguration"
-            />&gt;
-          description: |
-            The callback
-  - name: >-
-      list(string, Models.ClusterRp18, Models.ClusterResourceName18, string,
-      msRest.RequestOptionsBase)
+      list(string, string, string, string,
+      SourceControlConfigurationsListOptionalParams)
     uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations.list'
     package: '@azure/arm-kubernetesconfiguration'
     summary: List all Source Control Configurations.
@@ -493,212 +231,38 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function list(resourceGroupName: string, clusterRp: Models.ClusterRp18,
-        clusterResourceName: Models.ClusterResourceName18, clusterName: string,
-        options?: msRest.RequestOptionsBase):
-        Promise<Models.SourceControlConfigurationsListResponse>
+        function list(resourceGroupName: string, clusterRp: string,
+        clusterResourceName: string, clusterName: string, options?:
+        SourceControlConfigurationsListOptionalParams):
+        PagedAsyncIterableIterator<SourceControlConfiguration>
       parameters:
         - id: resourceGroupName
           type: string
           description: The name of the resource group. The name is case insensitive.
         - id: clusterRp
-          type: <xref uid="Models.ClusterRp18" />
+          type: string
           description: >-
-            The Kubernetes cluster RP - either Microsoft.ContainerService (for
-            AKS
-
-            clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).
-            Possible values include:
-
-            'Microsoft.ContainerService', 'Microsoft.Kubernetes'
+            The Kubernetes cluster RP - i.e. Microsoft.ContainerService,
+            Microsoft.Kubernetes,
+                             Microsoft.HybridContainerService.
         - id: clusterResourceName
-          type: <xref uid="Models.ClusterResourceName18" />
-          description: >-
-            The Kubernetes cluster resource name - either managedClusters (for
-
-            AKS clusters) or connectedClusters (for OnPrem K8S clusters).
-            Possible values include:
-
-            'managedClusters', 'connectedClusters'
+          type: string
+          description: |-
+            The Kubernetes cluster resource name - i.e. managedClusters,
+                                       connectedClusters, provisionedClusters.
         - id: clusterName
           type: string
           description: The name of the kubernetes cluster.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationsListOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.SourceControlConfigurationsListResponse>
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.SourceControlConfigurationsListResponse"
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/arm-kubernetesconfiguration.SourceControlConfiguration"
           />&gt;
-  - name: >-
-      list(string, Models.ClusterRp18, Models.ClusterResourceName18, string,
-      RequestOptionsBase, ServiceCallback<SourceControlConfigurationList>)
-    uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations.list_2'
-    package: '@azure/arm-kubernetesconfiguration'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(resourceGroupName: string, clusterRp: Models.ClusterRp18,
-        clusterResourceName: Models.ClusterResourceName18, clusterName: string,
-        options: RequestOptionsBase, callback:
-        ServiceCallback<SourceControlConfigurationList>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: clusterRp
-          type: <xref uid="Models.ClusterRp18" />
-          description: >-
-            The Kubernetes cluster RP - either Microsoft.ContainerService (for
-            AKS
-
-            clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).
-            Possible values include:
-
-            'Microsoft.ContainerService', 'Microsoft.Kubernetes'
-        - id: clusterResourceName
-          type: <xref uid="Models.ClusterResourceName18" />
-          description: >-
-            The Kubernetes cluster resource name - either managedClusters (for
-
-            AKS clusters) or connectedClusters (for OnPrem K8S clusters).
-            Possible values include:
-
-            'managedClusters', 'connectedClusters'
-        - id: clusterName
-          type: string
-          description: The name of the kubernetes cluster.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationList"
-            />&gt;
-          description: |
-            The callback
-  - name: >-
-      list(string, Models.ClusterRp18, Models.ClusterResourceName18, string,
-      ServiceCallback<SourceControlConfigurationList>)
-    uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations.list_1'
-    package: '@azure/arm-kubernetesconfiguration'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(resourceGroupName: string, clusterRp: Models.ClusterRp18,
-        clusterResourceName: Models.ClusterResourceName18, clusterName: string,
-        callback: ServiceCallback<SourceControlConfigurationList>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: clusterRp
-          type: <xref uid="Models.ClusterRp18" />
-          description: >-
-            The Kubernetes cluster RP - either Microsoft.ContainerService (for
-            AKS
-
-            clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).
-            Possible values include:
-
-            'Microsoft.ContainerService', 'Microsoft.Kubernetes'
-        - id: clusterResourceName
-          type: <xref uid="Models.ClusterResourceName18" />
-          description: >-
-            The Kubernetes cluster resource name - either managedClusters (for
-
-            AKS clusters) or connectedClusters (for OnPrem K8S clusters).
-            Possible values include:
-
-            'managedClusters', 'connectedClusters'
-        - id: clusterName
-          type: string
-          description: The name of the kubernetes cluster.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationList"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations.listNext'
-    package: '@azure/arm-kubernetesconfiguration'
-    summary: List all Source Control Configurations.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase):
-        Promise<Models.SourceControlConfigurationsListNextResponse>
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<Models.SourceControlConfigurationsListNextResponse>
-        type: >-
-          Promise&lt;<xref
-          uid="Models.SourceControlConfigurationsListNextResponse" />&gt;
-  - name: >-
-      listNext(string, RequestOptionsBase,
-      ServiceCallback<SourceControlConfigurationList>)
-    uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations.listNext_2'
-    package: '@azure/arm-kubernetesconfiguration'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options: RequestOptionsBase,
-        callback: ServiceCallback<SourceControlConfigurationList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationList"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, ServiceCallback<SourceControlConfigurationList>)'
-    uid: '@azure/arm-kubernetesconfiguration.SourceControlConfigurations.listNext_1'
-    package: '@azure/arm-kubernetesconfiguration'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, callback:
-        ServiceCallback<SourceControlConfigurationList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-kubernetesconfiguration.SourceControlConfigurationList"
-            />&gt;
-          description: |
-            The callback

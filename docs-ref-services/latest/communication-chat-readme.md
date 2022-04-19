@@ -1,16 +1,16 @@
 ---
 title: Azure Communication Chat client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-chat, communication
-author: LuChen-Microsoft
-ms.author: luc
-ms.date: 02/09/2022
+author: petrsvihlik
+ms.author: petrsvihlik
+ms.date: 04/05/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Chat client library for JavaScript - Version 1.1.2 
+# Azure Communication Chat client library for JavaScript - Version 1.2.0 
 
 
 Azure Communication Services for Chat lets developers add chat capabilities to their app. Use this client library to manage chat threads and their users, and send and receive chat messages.
@@ -209,6 +209,25 @@ await chatThreadClient.removeParticipant({ communicationUserId: '<MEMBER_ID>' })
 
 ```
 
+### Subscribe to connection status of real time notifications
+Subscription to events `realTimeNotificationConnected` and `realTimeNotificationDisconnected` allows you to know when the connection to the call server is active.
+
+```JavaScript
+
+// subscribe to realTimeNotificationConnected event
+chatClient.on('realTimeNotificationConnected', () => {
+  console.log("Real time notification is now connected!");
+  // your code here
+});
+
+// subscribe to realTimeNotificationDisconnected event
+chatClient.on('realTimeNotificationDisconnected', () => {
+  console.log("Real time notification is now disconnected!");
+  // your code here
+});
+
+```
+
 ## Troubleshooting
 
 ## Next steps
@@ -223,7 +242,7 @@ In this quickstart you learned how to:
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.1.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-chat_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

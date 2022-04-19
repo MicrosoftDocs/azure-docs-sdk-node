@@ -10,7 +10,7 @@ isDeprecated: false
 type: interface
 methods:
   - name: >-
-      getResourceGroupLevelTask(string, string,
+      getResourceGroupLevelTask(string, string, string,
       TasksGetResourceGroupLevelTaskOptionalParams)
     uid: '@azure/arm-security.Tasks.getResourceGroupLevelTask'
     package: '@azure/arm-security'
@@ -22,8 +22,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function getResourceGroupLevelTask(resourceGroupName: string, taskName:
-        string, options?: TasksGetResourceGroupLevelTaskOptionalParams):
+        function getResourceGroupLevelTask(resourceGroupName: string,
+        ascLocation: string, taskName: string, options?:
+        TasksGetResourceGroupLevelTaskOptionalParams):
         Promise<TasksGetResourceGroupLevelTaskResponse>
       parameters:
         - id: resourceGroupName
@@ -32,6 +33,12 @@ methods:
             The name of the resource group within the user's subscription. The
             name is
                                      case insensitive.
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: taskName
           type: string
           description: 'Name of the task object, will be a GUID'
@@ -49,7 +56,7 @@ methods:
           uid="@azure/arm-security.TasksGetResourceGroupLevelTaskResponse"
           />&gt;
   - name: >-
-      getSubscriptionLevelTask(string,
+      getSubscriptionLevelTask(string, string,
       TasksGetSubscriptionLevelTaskOptionalParams)
     uid: '@azure/arm-security.Tasks.getSubscriptionLevelTask'
     package: '@azure/arm-security'
@@ -61,10 +68,16 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function getSubscriptionLevelTask(taskName: string, options?:
-        TasksGetSubscriptionLevelTaskOptionalParams):
+        function getSubscriptionLevelTask(ascLocation: string, taskName: string,
+        options?: TasksGetSubscriptionLevelTaskOptionalParams):
         Promise<TasksGetSubscriptionLevelTaskResponse>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: taskName
           type: string
           description: 'Name of the task object, will be a GUID'
@@ -103,7 +116,7 @@ methods:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/arm-security.SecurityTask" />&gt;
-  - name: listByHomeRegion(TasksListByHomeRegionOptionalParams)
+  - name: 'listByHomeRegion(string, TasksListByHomeRegionOptionalParams)'
     uid: '@azure/arm-security.Tasks.listByHomeRegion'
     package: '@azure/arm-security'
     summary: >-
@@ -114,10 +127,16 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listByHomeRegion(options?:
+        function listByHomeRegion(ascLocation: string, options?:
         TasksListByHomeRegionOptionalParams):
         PagedAsyncIterableIterator<SecurityTask>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: options
           type: >-
             <xref uid="@azure/arm-security.TasksListByHomeRegionOptionalParams"
@@ -129,7 +148,9 @@ methods:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/arm-security.SecurityTask" />&gt;
-  - name: 'listByResourceGroup(string, TasksListByResourceGroupOptionalParams)'
+  - name: >-
+      listByResourceGroup(string, string,
+      TasksListByResourceGroupOptionalParams)
     uid: '@azure/arm-security.Tasks.listByResourceGroup'
     package: '@azure/arm-security'
     summary: >-
@@ -140,8 +161,8 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listByResourceGroup(resourceGroupName: string, options?:
-        TasksListByResourceGroupOptionalParams):
+        function listByResourceGroup(resourceGroupName: string, ascLocation:
+        string, options?: TasksListByResourceGroupOptionalParams):
         PagedAsyncIterableIterator<SecurityTask>
       parameters:
         - id: resourceGroupName
@@ -150,6 +171,12 @@ methods:
             The name of the resource group within the user's subscription. The
             name is
                                      case insensitive.
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: options
           type: >-
             <xref
@@ -162,7 +189,8 @@ methods:
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/arm-security.SecurityTask" />&gt;
   - name: >-
-      updateResourceGroupLevelTaskState(string, string, Enum15,
+      updateResourceGroupLevelTaskState(string, string, string,
+      TaskUpdateActionType,
       TasksUpdateResourceGroupLevelTaskStateOptionalParams)
     uid: '@azure/arm-security.Tasks.updateResourceGroupLevelTaskState'
     package: '@azure/arm-security'
@@ -175,7 +203,8 @@ methods:
     syntax:
       content: >-
         function updateResourceGroupLevelTaskState(resourceGroupName: string,
-        taskName: string, taskUpdateActionType: Enum15, options?:
+        ascLocation: string, taskName: string, taskUpdateActionType:
+        TaskUpdateActionType, options?:
         TasksUpdateResourceGroupLevelTaskStateOptionalParams): Promise<void>
       parameters:
         - id: resourceGroupName
@@ -184,11 +213,17 @@ methods:
             The name of the resource group within the user's subscription. The
             name is
                                      case insensitive.
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: taskName
           type: string
           description: 'Name of the task object, will be a GUID'
         - id: taskUpdateActionType
-          type: <xref uid="@azure/arm-security.Enum15" />
+          type: <xref uid="@azure/arm-security.TaskUpdateActionType" />
           description: Type of the action to do on the task
         - id: options
           type: >-
@@ -201,7 +236,7 @@ methods:
         description: ''
         type: Promise&lt;void&gt;
   - name: >-
-      updateSubscriptionLevelTaskState(string, Enum15,
+      updateSubscriptionLevelTaskState(string, string, TaskUpdateActionType,
       TasksUpdateSubscriptionLevelTaskStateOptionalParams)
     uid: '@azure/arm-security.Tasks.updateSubscriptionLevelTaskState'
     package: '@azure/arm-security'
@@ -213,15 +248,21 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function updateSubscriptionLevelTaskState(taskName: string,
-        taskUpdateActionType: Enum15, options?:
+        function updateSubscriptionLevelTaskState(ascLocation: string, taskName:
+        string, taskUpdateActionType: TaskUpdateActionType, options?:
         TasksUpdateSubscriptionLevelTaskStateOptionalParams): Promise<void>
       parameters:
+        - id: ascLocation
+          type: string
+          description: >-
+            The location where ASC stores the data of the subscription. can be
+            retrieved from
+                               Get locations
         - id: taskName
           type: string
           description: 'Name of the task object, will be a GUID'
         - id: taskUpdateActionType
-          type: <xref uid="@azure/arm-security.Enum15" />
+          type: <xref uid="@azure/arm-security.TaskUpdateActionType" />
           description: Type of the action to do on the task
         - id: options
           type: >-

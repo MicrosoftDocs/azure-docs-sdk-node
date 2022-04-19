@@ -3,14 +3,14 @@ title: Azure Tables client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/data-tables, tables
 author: joheredi
 ms.author: joheredi
-ms.date: 04/07/2022
+ms.date: 04/15/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: tables
 ---
-# Azure Tables client library for JavaScript - Version 13.1.0 
+# Azure Tables client library for JavaScript - Version 13.1.1 
 
 
 [Azure Tables](https://azure.microsoft.com/services/storage/tables/) is a cloud-based service that stores structured NoSQL data, providing a key/attribute store with a schemaless design. Tables storage gives developers flexibility and scalability with all the best parts of Azure cloud.
@@ -31,11 +31,11 @@ Azure Cosmos DB provides a Table API for applications that are written for Azure
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.0/sdk/tables/data-tables/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.1/sdk/tables/data-tables/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/data-tables)
 - [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/data-tables)
 - [Product documentation](https://docs.microsoft.com/azure/storage/tables/table-storage-overview/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_13.1.0/sdk/tables/data-tables/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_13.1.1/sdk/tables/data-tables/samples)
 
 ## Getting started
 
@@ -163,7 +163,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.0/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.1/sdk/identity/identity/README.md)
 
 ```javascript
 const { TableServiceClient } = require("@azure/data-tables");
@@ -318,7 +318,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.0/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.1/sdk/identity/identity/README.md)
 
 ```javascript
 const { TableClient } = require("@azure/data-tables");
@@ -366,7 +366,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.0/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.1/sdk/identity/identity/README.md)
 
 ```javascript
 const { TableClient } = require("@azure/data-tables");
@@ -510,7 +510,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/tables/README.png)
 

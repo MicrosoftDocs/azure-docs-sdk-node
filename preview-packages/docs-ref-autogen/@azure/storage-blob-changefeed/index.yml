@@ -6,13 +6,56 @@ type: package
 classes:
   - '@azure/storage-blob-changefeed.BlobChangeFeedClient'
   - '@azure/storage-blob-changefeed.BlobChangeFeedEventPage'
+  - '@azure/storage-blob-changefeed.AvroReaderFactory'
+  - '@azure/storage-blob-changefeed.ChangeFeed'
+  - '@azure/storage-blob-changefeed.ChangeFeedFactory'
+  - '@azure/storage-blob-changefeed.Chunk'
+  - '@azure/storage-blob-changefeed.ChunkFactory'
+  - '@azure/storage-blob-changefeed.LazyLoadingBlobStream'
+  - '@azure/storage-blob-changefeed.LazyLoadingBlobStreamFactory'
+  - '@azure/storage-blob-changefeed.Segment'
+  - '@azure/storage-blob-changefeed.SegmentFactory'
+  - '@azure/storage-blob-changefeed.Shard'
+  - '@azure/storage-blob-changefeed.ShardFactory'
+  - '@azure/storage-blob-changefeed.SimpleTokenCredential'
+  - '@azure/storage-blob-changefeed.AvroParser'
+  - '@azure/storage-blob-changefeed.AvroType'
+  - '@azure/storage-blob-changefeed.AvroReadable'
+  - '@azure/storage-blob-changefeed.AvroReadableFromBlob'
+  - '@azure/storage-blob-changefeed.AvroReadableFromStream'
+  - '@azure/storage-blob-changefeed.AvroReader'
 interfaces:
   - '@azure/storage-blob-changefeed.BlobChangeFeedEvent'
   - '@azure/storage-blob-changefeed.BlobChangeFeedEventData'
   - '@azure/storage-blob-changefeed.BlobChangeFeedListChangesOptions'
+  - '@azure/storage-blob-changefeed.BlobOperationResult'
+  - '@azure/storage-blob-changefeed.BlobPropertyChange'
+  - '@azure/storage-blob-changefeed.BlobTagsChange'
+  - '@azure/storage-blob-changefeed.ChangeFeedEventPreviousInfo'
+  - '@azure/storage-blob-changefeed.ChangeFeedGetChangeOptions'
+  - '@azure/storage-blob-changefeed.ChunkGetChangeOptions'
+  - '@azure/storage-blob-changefeed.CreateChunkOptions'
+  - '@azure/storage-blob-changefeed.LazyLoadingBlobStreamOptions'
+  - '@azure/storage-blob-changefeed.SegmentGetChangeOptions'
+  - '@azure/storage-blob-changefeed.CreateSegmentOptions'
+  - '@azure/storage-blob-changefeed.SegmentManifest'
+  - '@azure/storage-blob-changefeed.ShardGetChangeOptions'
+  - '@azure/storage-blob-changefeed.CreateShardOptions'
+  - '@azure/storage-blob-changefeed.ChangeFeedCursor'
+  - '@azure/storage-blob-changefeed.SegmentCursor'
+  - '@azure/storage-blob-changefeed.ShardCursor'
+  - '@azure/storage-blob-changefeed.GetSegmentsInYearOptions'
+  - '@azure/storage-blob-changefeed.GetYearsPathsOptions'
+  - '@azure/storage-blob-changefeed.AvroParserReadOptions'
+  - '@azure/storage-blob-changefeed.AvroReadableReadOptions'
+  - '@azure/storage-blob-changefeed.AvroParseOptions'
+  - '@azure/storage-blob-changefeed.KeyValuePair'
 typeAliases:
+  - '@azure/storage-blob-changefeed.AccessTier'
   - '@azure/storage-blob-changefeed.BlobChangeFeedEventType'
   - '@azure/storage-blob-changefeed.BlobType'
+  - '@azure/storage-blob-changefeed.UpdatedBlobProperties'
+  - '@azure/storage-blob-changefeed.BlobMetadata'
 functions:
   - name: >-
       newPipeline(StorageSharedKeyCredential | AnonymousCredential |
@@ -33,13 +76,539 @@ functions:
           type: StorageSharedKeyCredential | AnonymousCredential | TokenCredential
           description: >-
             Such as AnonymousCredential, StorageSharedKeyCredential or any
-            credential from the @azure/identity package to authenticate requests
-            to the service. You can also provide an object that implements the
-            TokenCredential interface. If not specified, AnonymousCredential is
-            used.
+            credential from the `@azure/identity` package to authenticate
+            requests to the service. You can also provide an object that
+            implements the TokenCredential interface. If not specified,
+            AnonymousCredential is used.
         - id: pipelineOptions
           type: StoragePipelineOptions
-          description: ''
+          description: Optional. Options.
       return:
         description: A new Pipeline object.
         type: Pipeline
+  - name: main()
+    uid: '@azure/storage-blob-changefeed.main'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function main(): Promise<void>'
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: blobToString(Blob)
+    uid: '@azure/storage-blob-changefeed.blobToString'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function blobToString(blob: Blob): Promise<string>'
+      parameters:
+        - id: blob
+          type: Blob
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;string&gt;
+  - name: bodyToAvroReadable()
+    uid: '@azure/storage-blob-changefeed.bodyToAvroReadable'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: function bodyToAvroReadable()
+  - name: >-
+      bodyToString({ blobBody?: Promise<Blob>, readableStreamBody?:
+      ReadableStream }, number)
+    uid: '@azure/storage-blob-changefeed.bodyToString'
+    package: '@azure/storage-blob-changefeed'
+    summary: |-
+      Read body from downloading operation methods to string.
+      Works in both Node.js and browsers.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function bodyToString(response: { blobBody?: Promise<Blob>,
+        readableStreamBody?: ReadableStream }, length?: number): Promise<string>
+      parameters:
+        - id: response
+          type: >-
+            { blobBody?: Promise&lt;Blob&gt;, readableStreamBody?:
+            ReadableStream }
+          description: Convenience layer methods response with downloaded body
+        - id: length
+          type: number
+          description: |
+            Length of Readable stream, needed for Node.js environment
+      return:
+        description: ''
+        type: Promise&lt;string&gt;
+  - name: ceilToNearestHour(Date | undefined)
+    uid: '@azure/storage-blob-changefeed.ceilToNearestHour'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function ceilToNearestHour(date: Date | undefined): Date | undefined'
+      parameters:
+        - id: date
+          type: Date | undefined
+          description: ''
+      return:
+        description: ''
+        type: Date | undefined
+  - name: floorToNearestHour(Date | undefined)
+    uid: '@azure/storage-blob-changefeed.floorToNearestHour'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function floorToNearestHour(date: Date | undefined): Date | undefined'
+      parameters:
+        - id: date
+          type: Date | undefined
+          description: ''
+      return:
+        description: ''
+        type: Date | undefined
+  - name: getHost(string)
+    uid: '@azure/storage-blob-changefeed.getHost'
+    package: '@azure/storage-blob-changefeed'
+    summary: Get host from an URL string.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getHost(url: string): string | undefined'
+      parameters:
+        - id: url
+          type: string
+          description: |
+            Source URL string
+      return:
+        description: ''
+        type: string | undefined
+  - name: >-
+      getSegmentsInYear(ContainerClient, number, Date, Date,
+      GetSegmentsInYearOptions)
+    uid: '@azure/storage-blob-changefeed.getSegmentsInYear'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getSegmentsInYear(containerClient: ContainerClient, year:
+        number, startTime?: Date, endTime?: Date, options?:
+        GetSegmentsInYearOptions): Promise<string[]>
+      parameters:
+        - id: containerClient
+          type: ContainerClient
+          description: ''
+        - id: year
+          type: number
+          description: ''
+        - id: startTime
+          type: Date
+          description: ''
+        - id: endTime
+          type: Date
+          description: ''
+        - id: options
+          type: >-
+            <xref uid="@azure/storage-blob-changefeed.GetSegmentsInYearOptions"
+            />
+          description: ''
+      return:
+        description: ''
+        type: 'Promise&lt;string[]&gt;'
+  - name: getURI(string)
+    uid: '@azure/storage-blob-changefeed.getURI'
+    package: '@azure/storage-blob-changefeed'
+    summary: Get URI from an URL string.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getURI(url: string): string'
+      parameters:
+        - id: url
+          type: string
+          description: |
+            Source URL string
+      return:
+        description: ''
+        type: string
+  - name: 'getYearsPaths(ContainerClient, GetYearsPathsOptions)'
+    uid: '@azure/storage-blob-changefeed.getYearsPaths'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getYearsPaths(containerClient: ContainerClient, options?:
+        GetYearsPathsOptions): Promise<number[]>
+      parameters:
+        - id: containerClient
+          type: ContainerClient
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob-changefeed.GetYearsPathsOptions" />
+          description: ''
+      return:
+        description: ''
+        type: 'Promise&lt;number[]&gt;'
+  - name: hashString(string)
+    uid: '@azure/storage-blob-changefeed.hashString'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function hashString(str: string): number'
+      parameters:
+        - id: str
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: number
+  - name: 'minDate(Date, Date)'
+    uid: '@azure/storage-blob-changefeed.minDate'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function minDate(dateA: Date, dateB?: Date): Date'
+      parameters:
+        - id: dateA
+          type: Date
+          description: ''
+        - id: dateB
+          type: Date
+          description: ''
+      return:
+        description: ''
+        type: Date
+  - name: parseDateFromSegmentPath(string)
+    uid: '@azure/storage-blob-changefeed.parseDateFromSegmentPath'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function parseDateFromSegmentPath(segmentPath: string): Date'
+      parameters:
+        - id: segmentPath
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: Date
+  - name: 'rawEventToBlobChangeFeedEvent(Record<string, any>)'
+    uid: '@azure/storage-blob-changefeed.rawEventToBlobChangeFeedEvent'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function rawEventToBlobChangeFeedEvent(rawEvent: Record<string, any>):
+        BlobChangeFeedEvent
+      parameters:
+        - id: rawEvent
+          type: 'Record&lt;string, any&gt;'
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-blob-changefeed.BlobChangeFeedEvent" />
+  - name: streamToAvroReadable(ReadableStream)
+    uid: '@azure/storage-blob-changefeed.streamToAvroReadable'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function streamToAvroReadable(readableStream: ReadableStream):
+        AvroReadable
+      parameters:
+        - id: readableStream
+          type: ReadableStream
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-blob-changefeed.AvroReadable" />
+  - name: getAlternateBSU()
+    uid: '@azure/storage-blob-changefeed.getAlternateBSU'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getAlternateBSU(): BlobServiceClient'
+      return:
+        description: ''
+        type: BlobServiceClient
+  - name: getBSU()
+    uid: '@azure/storage-blob-changefeed.getBSU'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getBSU(): BlobServiceClient'
+      return:
+        description: ''
+        type: BlobServiceClient
+  - name: 'getBlobChangeFeedClient(string, string)'
+    uid: '@azure/storage-blob-changefeed.getBlobChangeFeedClient'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getBlobChangeFeedClient(accountType?: string,
+        accountNameSuffix?: string): BlobChangeFeedClient
+      parameters:
+        - id: accountType
+          type: string
+          description: ''
+        - id: accountNameSuffix
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-blob-changefeed.BlobChangeFeedClient" />
+  - name: getConnectionStringFromEnvironment()
+    uid: '@azure/storage-blob-changefeed.getConnectionStringFromEnvironment'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getConnectionStringFromEnvironment(): string'
+      return:
+        description: ''
+        type: string
+  - name: 'getGenericBSU(string, string)'
+    uid: '@azure/storage-blob-changefeed.getGenericBSU'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getGenericBSU(accountType: string, accountNameSuffix?: string):
+        BlobServiceClient
+      parameters:
+        - id: accountType
+          type: string
+          description: ''
+        - id: accountNameSuffix
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: BlobServiceClient
+  - name: getGenericCredential(string)
+    uid: '@azure/storage-blob-changefeed.getGenericCredential'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getGenericCredential(accountType: string):
+        StorageSharedKeyCredential
+      parameters:
+        - id: accountType
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: StorageSharedKeyCredential
+  - name: getTokenBSU()
+    uid: '@azure/storage-blob-changefeed.getTokenBSU'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getTokenBSU(): BlobServiceClient'
+      return:
+        description: ''
+        type: BlobServiceClient
+  - name: getTokenCredential()
+    uid: '@azure/storage-blob-changefeed.getTokenCredential'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getTokenCredential(): TokenCredential'
+      return:
+        description: ''
+        type: TokenCredential
+  - name: base64decode(string)
+    uid: '@azure/storage-blob-changefeed.base64decode'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function base64decode(encodedString: string): string'
+      parameters:
+        - id: encodedString
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: string
+  - name: base64encode(string)
+    uid: '@azure/storage-blob-changefeed.base64encode'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function base64encode(content: string): string'
+      parameters:
+        - id: content
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: string
+  - name: getUniqueName(string)
+    uid: '@azure/storage-blob-changefeed.getUniqueName'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getUniqueName(prefix: string): string'
+      parameters:
+        - id: prefix
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: string
+  - name: isBrowser()
+    uid: '@azure/storage-blob-changefeed.isBrowser'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function isBrowser(): boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: 'isSuperSet(BlobMetadata, BlobMetadata)'
+    uid: '@azure/storage-blob-changefeed.isSuperSet'
+    package: '@azure/storage-blob-changefeed'
+    summary: Validate if m1 is super set of m2.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function isSuperSet(m1?: BlobMetadata, m2?: BlobMetadata): boolean'
+      parameters:
+        - id: m1
+          type: <xref uid="@azure/storage-blob-changefeed.BlobMetadata" />
+          description: BlobMetadata
+        - id: m2
+          type: <xref uid="@azure/storage-blob-changefeed.BlobMetadata" />
+          description: |
+            BlobMetadata
+      return:
+        description: ''
+        type: boolean
+  - name: sleep(number)
+    uid: '@azure/storage-blob-changefeed.sleep'
+    package: '@azure/storage-blob-changefeed'
+    summary: Sleep for seconds.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function sleep(seconds: number): Promise<void>'
+      parameters:
+        - id: seconds
+          type: number
+          description: |
+            duration to sleep in seconds
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: streamToString(Readable)
+    uid: '@azure/storage-blob-changefeed.streamToString'
+    package: '@azure/storage-blob-changefeed'
+    summary: Read text content from a stream as string
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function streamToString(stream: Readable): Promise<string>'
+      parameters:
+        - id: stream
+          type: Readable
+          description: stream to read from
+      return:
+        description: a utf-8 string that is the whole content of the stream
+        type: Promise&lt;string&gt;
+  - name: 'arraysEqual(Uint8Array, Uint8Array)'
+    uid: '@azure/storage-blob-changefeed.arraysEqual'
+    package: '@azure/storage-blob-changefeed'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function arraysEqual(a: Uint8Array, b: Uint8Array): boolean'
+      parameters:
+        - id: a
+          type: Uint8Array
+          description: ''
+        - id: b
+          type: Uint8Array
+          description: ''
+      return:
+        description: ''
+        type: boolean

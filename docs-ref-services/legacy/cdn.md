@@ -9,7 +9,7 @@ ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: CDN
+ms.service: azure-cdn
 ---
 
 # Azure CDN modules for JavaScript

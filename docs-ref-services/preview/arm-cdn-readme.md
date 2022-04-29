@@ -8,7 +8,7 @@ ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: cdn
+ms.service: azure-cdn
 ---
 
 # Azure CdnManagement client library for JavaScript - Version 6.0.0-beta.1 

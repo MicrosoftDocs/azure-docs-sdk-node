@@ -8,7 +8,7 @@ ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: search
+ms.service: cognitive-search
 ---
 
 # Azure SearchManagement client library for JavaScript - Version 3.0.0-beta.1 

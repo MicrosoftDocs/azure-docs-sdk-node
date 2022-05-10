@@ -3,10 +3,8 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/core-http-compat, core
 author: xirzec
 ms.author: jeffish
-ms.date: 03/29/2022
+ms.date: 05/05/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: core
 ---

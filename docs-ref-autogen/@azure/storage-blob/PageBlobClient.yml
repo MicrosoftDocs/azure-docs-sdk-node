@@ -1373,6 +1373,280 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.PageBlobGetPageRangesDiffResponse" />&gt;
+  - name: 'listPageRanges(number, number, PageBlobListPageRangesOptions)'
+    uid: '@azure/storage-blob.PageBlobClient.listPageRanges'
+    package: '@azure/storage-blob'
+    summary: >-
+      Returns an async iterable iterator to list of page ranges for a page blob.
+
+
+      See https://docs.microsoft.com/rest/api/storageservices/get-page-ranges
+
+       .byPage() returns an async iterable iterator to list of page ranges for a page blob.
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      // Get the pageBlobClient before you run these snippets,
+
+      // Can be obtained from
+      `blobServiceClient.getContainerClient("<your-container-name>").getPageBlobClient("<your-blob-name>");`
+
+      let i = 1;
+
+      for await (const pageRange of pageBlobClient.listPageRanges()) {
+        console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      let iter = pageBlobClient.listPageRanges();
+
+      let pageRangeItem = await iter.next();
+
+      while (!pageRangeItem.done) {
+        console.log(`Page range ${i++}: ${pageRangeItem.value.start} - ${pageRangeItem.value.end}, IsClear: ${pageRangeItem.value.isClear}`);
+        pageRangeItem = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const response of pageBlobClient.listPageRanges().byPage({
+      maxPageSize: 20 })) {
+        for (const pageRange of response) {
+          console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = pageBlobClient.listPageRanges().byPage({ maxPageSize: 2 });
+
+      let response = (await iterator.next()).value;
+
+
+      // Prints 2 page ranges
+
+      for (const pageRange of response) {
+        console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+      }
+
+
+      // Gets next marker
+
+      let marker = response.continuationToken;
+
+
+      // Passing next marker as continuationToken
+
+
+      iterator = pageBlobClient.listPageRanges().byPage({ continuationToken:
+      marker, maxPageSize: 10 });
+
+      response = (await iterator.next()).value;
+
+
+      // Prints 10 page ranges
+
+      for (const blob of response) {
+        console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+      }
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listPageRanges(offset?: number, count?: number, options?:
+        PageBlobListPageRangesOptions):
+        PagedAsyncIterableIterator<PageRangeInfo,
+        PageBlobGetPageRangesResponseModel>
+      parameters:
+        - id: offset
+          type: number
+          description: Starting byte position of the page ranges.
+        - id: count
+          type: number
+          description: Number of bytes to get.
+        - id: options
+          type: <xref uid="@azure/storage-blob.PageBlobListPageRangesOptions" />
+          description: Options to the Page Blob Get Ranges operation.
+      return:
+        description: An asyncIterableIterator that supports paging.
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/storage-blob.PageRangeInfo" />, <xref
+          uid="@azure/storage-blob.PageBlobGetPageRangesResponseModel" />&gt;
+  - name: >-
+      listPageRangesDiff(number, number, string,
+      PageBlobListPageRangesDiffOptions)
+    uid: '@azure/storage-blob.PageBlobClient.listPageRangesDiff'
+    package: '@azure/storage-blob'
+    summary: >-
+      Returns an async iterable iterator to list of page ranges that differ
+      between a specified snapshot and this page blob.
+
+
+      See https://docs.microsoft.com/rest/api/storageservices/get-page-ranges
+
+       .byPage() returns an async iterable iterator to list of page ranges that differ between a specified snapshot and this page blob.
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      // Get the pageBlobClient before you run these snippets,
+
+      // Can be obtained from
+      `blobServiceClient.getContainerClient("<your-container-name>").getPageBlobClient("<your-blob-name>");`
+
+      let i = 1;
+
+      for await (const pageRange of pageBlobClient.listPageRangesDiff()) {
+        console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      let iter = pageBlobClient.listPageRangesDiff();
+
+      let pageRangeItem = await iter.next();
+
+      while (!pageRangeItem.done) {
+        console.log(`Page range ${i++}: ${pageRangeItem.value.start} - ${pageRangeItem.value.end}, IsClear: ${pageRangeItem.value.isClear}`);
+        pageRangeItem = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const response of pageBlobClient.listPageRangesDiff().byPage({
+      maxPageSize: 20 })) {
+        for (const pageRange of response) {
+          console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator = pageBlobClient.listPageRangesDiff().byPage({ maxPageSize: 2
+      });
+
+      let response = (await iterator.next()).value;
+
+
+      // Prints 2 page ranges
+
+      for (const pageRange of response) {
+        console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+      }
+
+
+      // Gets next marker
+
+      let marker = response.continuationToken;
+
+
+      // Passing next marker as continuationToken
+
+
+      iterator = pageBlobClient.listPageRangesDiff().byPage({ continuationToken:
+      marker, maxPageSize: 10 });
+
+      response = (await iterator.next()).value;
+
+
+      // Prints 10 page ranges
+
+      for (const blob of response) {
+        console.log(`Page range ${i++}: ${pageRange.start} - ${pageRange.end}`);
+      }
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listPageRangesDiff(offset: number, count: number, prevSnapshot:
+        string, options?: PageBlobListPageRangesDiffOptions):
+        PagedAsyncIterableIterator<PageRangeInfo,
+        PageBlobGetPageRangesDiffResponseModel>
+      parameters:
+        - id: offset
+          type: number
+          description: Starting byte position of the page ranges.
+        - id: count
+          type: number
+          description: Number of bytes to get.
+        - id: prevSnapshot
+          type: string
+          description: Timestamp of snapshot to retrieve the difference.
+        - id: options
+          type: <xref uid="@azure/storage-blob.PageBlobListPageRangesDiffOptions" />
+          description: Options to the Page Blob Get Ranges operation.
+      return:
+        description: An asyncIterableIterator that supports paging.
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/storage-blob.PageRangeInfo" />, <xref
+          uid="@azure/storage-blob.PageBlobGetPageRangesDiffResponseModel"
+          />&gt;
   - name: 'resize(number, PageBlobResizeOptions)'
     uid: '@azure/storage-blob.PageBlobClient.resize'
     package: '@azure/storage-blob'

@@ -1,15 +1,14 @@
 ---
+author: jeremymeng
 title: Azure Service Bus Modules for JavaScript
-description: Reference for Azure Service Bus Modules for JavaScript
-author: spelluru
-ms.author: spelluru
-manager: timlt
-ms.date: 03/04/2020
-ms.topic: reference
-ms.service: azure
 ms.devlang: nodejs
+manager: timlt
+ms.topic: reference
+ms.service: servicebus
+ms.author: yumeng
+ms.date: 03/04/2020
+description: Reference for Azure Service Bus Modules for JavaScript
 ---
-
 # Azure Service Bus Modules for JavaScript
 
 [Azure Service Bus](https://azure.microsoft.com/services/service-bus/) is a highly-reliable cloud messaging service from Microsoft and a fully managed enterprise integration message broker.

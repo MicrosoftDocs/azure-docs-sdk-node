@@ -1,0 +1,3 @@
+| Reference | Package | Source |
+|---|---|---|
+|[Resource Management - MySQL](arm-mysql-readme)|[@azure/arm-mysql](https://www.npmjs.com/package/@azure/arm-mysql)|[Github](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/mysql/arm-mysql)|

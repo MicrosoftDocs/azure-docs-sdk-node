@@ -1,15 +1,14 @@
 ---
+author: xirzec
 title: Azure Automation Modules for JavaScript
-description: Reference for Azure Automation Modules for JavaScript
-author: eamonoreilly
-ms.author: eamono
-manager: nirb
-ms.date: 07/18/2017
-ms.topic: reference
 ms.devlang: nodejs
-ms.service: Automation
+manager: nirb
+ms.topic: reference
+ms.service: automation
+ms.author: jeffish
+ms.date: 07/18/2017
+description: Reference for Azure Automation Modules for JavaScript
 ---
-
 # Azure Automation Modules for JavaScript
 
 ## Overview

@@ -1,17 +1,16 @@
 ---
+author: dpwatrous
 title: Batch AI Modules for JavaScript
-description: Reference for Batch AI modules for JavaScript
-author: garyericson
-ms.author: garye
-manager: cjgronlund 
-ms.date: 03/26/2019
+ms.devlang: nodejs
+manager: cjgronlund
 ms.topic: reference
 ms.prod: azure
+ms.service: batchai
 ms.technology: azure
-ms.devlang: nodejs
-ms.service: batch-ai
+ms.author: dawatrou
+ms.date: 03/26/2019
+description: Reference for Batch AI modules for JavaScript
 ---
-
 # Batch AI Modules for JavaScript
 
 >[!NOTE]

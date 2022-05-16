@@ -1,17 +1,16 @@
 ---
+author: xirzec
 title: Azure Resource Manager modules for JavaScript
-description: Reference for Azure Resource Manager modules for JavaScript
-author: tfitzmac
-ms.author: tomfitz
+ms.devlang: nodejs
 manager: timlt
-ms.date: 07/18/2017
 ms.topic: reference
 ms.prod: azure
+ms.service: resources
 ms.technology: azure
-ms.devlang: nodejs
-ms.service: Resources
+ms.author: jeffish
+ms.date: 07/18/2017
+description: Reference for Azure Resource Manager modules for JavaScript
 ---
-
 # Azure Resource modules for JavaScript
 
 Azure Resource Manager enables you to deploy and manage the infrastructure for your Azure solutions. Organize related resources in resource groups and deploy your resources via JSON templates.

@@ -1,0 +1,3 @@
+| Reference | Package | Source |
+|---|---|---|
+|[Resource Management - Cosmos DB](arm-cosmosdb-readme)|[@azure/arm-cosmosdb](https://www.npmjs.com/package/@azure/arm-cosmosdb)|[Github](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cosmosdb/arm-cosmosdb)|

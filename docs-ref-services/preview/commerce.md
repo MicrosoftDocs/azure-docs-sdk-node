@@ -1,17 +1,16 @@
 ---
+author: xirzec
 title: Azure Commerce modules for JavaScript
-description: Reference for Azure Commerce modules for JavaScript
-author: ramya-rao-a
-ms.author: ramyar
+ms.devlang: nodejs
 manager: angrobew
-ms.date: 07/18/2017
 ms.topic: reference
 ms.prod: azure
+ms.service: commerce
 ms.technology: azure
-ms.devlang: nodejs
-ms.service: Commerce
+ms.author: jeffish
+ms.date: 07/18/2017
+description: Reference for Azure Commerce modules for JavaScript
 ---
-
 # Azure Commerce modules for JavaScript
 
 ## Overview

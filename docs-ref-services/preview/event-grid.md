@@ -1,18 +1,17 @@
 ---
-title: Azure Event Grid libraries for JavaScript
-description: Reference for Azure Event Grid libraries for JavaScript
-author: ramya-rao-a
-ms.author: ramyar
-manager: angerobe
-ms.date: 05/03/2018
+ms.prod: 
 ms.topic: reference
-ms.prod:
-ms.technology:
-ms.devlang: nodejs
-ms.service: event-grid
+manager: angerobe
 ms.custom: devcenter
+ms.technology: 
+ms.author: matell
+ms.devlang: nodejs
+author: ellismg
+ms.date: 05/03/2018
+description: Reference for Azure Event Grid libraries for JavaScript
+ms.service: eventgrid
+title: Azure Event Grid libraries for JavaScript
 ---
-
 # Azure Event Grid libraries for JavaScript
 
 Build event-driven applications that listen and react to events from Azure services and custom sources using simple HTTP-based event handling with Azure Event Grid.

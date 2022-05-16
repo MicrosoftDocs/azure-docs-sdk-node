@@ -1,17 +1,16 @@
 ---
+author: YoDaMa
 title: Azure IoT Hub modules for JavaScript
-description: Reference for Azure IoT Hub modules for JavaScript
-author: dominicbetts
-ms.author: dobett
+ms.devlang: nodejs
 manager: timlt
-ms.date: 07/18/2017
 ms.topic: reference
 ms.prod: azure
+ms.service: iothub
 ms.technology: azure
-ms.devlang: nodejs
-ms.service: iot-hub
+ms.author: yomaguir
+ms.date: 07/18/2017
+description: Reference for Azure IoT Hub modules for JavaScript
 ---
-
 # Azure IoT Hub modules for JavaScript
 
 Azure IoT Hub is a fully managed service that enables reliable and secure bidirectional communications between millions of IoT devices and a solution back end. Azure IoT Hub:

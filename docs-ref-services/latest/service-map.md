@@ -1,17 +1,16 @@
 ---
+author: xirzec
 title: Azure Service Map modules for JavaScript
-description: Reference for Azure Service Map modules for JavaScript
-author: bwren
-ms.author: bwren
+ms.devlang: nodejs
 manager: carmonm
-ms.date: 07/18/2017
 ms.topic: reference
 ms.prod: azure
+ms.service: servicemap
 ms.technology: azure
-ms.devlang: nodejs
-ms.service: Service Map
+ms.author: jeffish
+ms.date: 07/18/2017
+description: Reference for Azure Service Map modules for JavaScript
 ---
-
 # Azure Service Map modules for JavaScript
 
 Service Map automatically discovers application components on Windows and Linux systems and maps the communication between services. Service Map shows connections between servers, processes, and ports across any TCP-connected architecture, with no configuration required other than the installation of an agent.

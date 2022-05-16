@@ -1,17 +1,16 @@
 ---
+author: jeremymeng
 title: Azure Container Registry modules for JavaScript
-description: Reference for Azure Container Registry Modules for JavaScript
-author: mmacy
-ms.author: marsma
+ms.devlang: nodejs
 manager: jeconnoc
-ms.date: 07/18/2017
 ms.topic: reference
 ms.prod: azure
+ms.service: containerregistry
 ms.technology: azure
-ms.devlang: nodejs
-ms.service: Container Registry
+ms.author: yumeng
+ms.date: 07/18/2017
+description: Reference for Azure Container Registry Modules for JavaScript
 ---
-
 # Azure Container Registry modules for JavaScript
 
 Azure Container Registry is a managed Docker registry service based on the open-source Docker Registry 2.0. Create and maintain Azure container registries to store and manage your private Docker container images. Use container registries in Azure with your existing container development and deployment pipelines, and draw on the body of Docker community expertise.

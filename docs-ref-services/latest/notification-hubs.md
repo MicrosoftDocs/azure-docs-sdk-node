@@ -1,17 +1,16 @@
 ---
+author: xirzec
 title: Azure Notification Hubs modules for JavaScript
-description: Reference for Azure Notification Hubs modules for JavaScript
-author: ramya-rao-a
-ms.author: ramyar
+ms.devlang: nodejs
 manager: angrobe
-ms.date: 07/18/2017
 ms.topic: reference
 ms.prod: azure
+ms.service: notificationhubs
 ms.technology: azure
-ms.devlang: nodejs
-ms.service: Notification Hubs
+ms.author: jeffish
+ms.date: 07/18/2017
+description: Reference for Azure Notification Hubs modules for JavaScript
 ---
-
 # Azure Notification Hubs modules for JavaScript
 
 Azure Notification Hubs provide an easy-to-use, multi-platform, scaled-out push engine. With a single cross-platform API call, you can easily send targeted and personalized push notifications to any mobile platform from any cloud or on-premises backend.

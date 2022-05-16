@@ -1,0 +1,3 @@
+| Reference | Package | Source |
+|---|---|---|
+|[Resource Management - Extendedlocation](arm-extendedlocation-readme)|[@azure/arm-extendedlocation](https://www.npmjs.com/package/@azure/arm-extendedlocation)|[Github](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/extendedlocation/arm-extendedlocation)|

@@ -1,17 +1,16 @@
 ---
+author: xirzec
 title: Azure App Service modules for JavaScript
-description: Reference for Azure App Service modules for JavaScript
-author: SyntaxC4
-ms.author: cfowler
+ms.devlang: nodejs
 manager: jhubbard
-ms.date: 07/18/2017
 ms.topic: reference
 ms.prod: azure
-ms.technology: azure
-ms.devlang: nodejs
 ms.service: appservice
+ms.technology: azure
+ms.author: jeffish
+ms.date: 07/18/2017
+description: Reference for Azure App Service modules for JavaScript
 ---
-
 # Azure App Service modules for JavaScript
 
 ## Overview

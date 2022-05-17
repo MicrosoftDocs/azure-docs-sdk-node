@@ -16,7 +16,9 @@ isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'ServiceBusAdministrationClient(string, PipelineOptions)'
+  - name: >-
+      ServiceBusAdministrationClient(string,
+      ServiceBusAdministrationClientOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.constructor'
     package: '@azure/service-bus'
     summary: Initializes a new instance of the ServiceBusAdministrationClient class.
@@ -26,18 +28,20 @@ constructors:
     syntax:
       content: >-
         new ServiceBusAdministrationClient(connectionString: string, options?:
-        PipelineOptions)
+        ServiceBusAdministrationClientOptions)
       parameters:
         - id: connectionString
           type: string
           description: The connection string needed for the client to connect to Azure.
         - id: options
-          type: PipelineOptions
+          type: >-
+            <xref uid="@azure/service-bus.ServiceBusAdministrationClientOptions"
+            />
           description: |
             PipelineOptions
   - name: >-
       ServiceBusAdministrationClient(string, TokenCredential |
-      NamedKeyCredential, PipelineOptions)
+      NamedKeyCredential, ServiceBusAdministrationClientOptions)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.constructor_1'
     package: '@azure/service-bus'
     summary: Initializes a new instance of the ServiceBusAdministrationClient class.
@@ -48,7 +52,7 @@ constructors:
       content: >-
         new ServiceBusAdministrationClient(fullyQualifiedNamespace: string,
         credential: TokenCredential | NamedKeyCredential, options?:
-        PipelineOptions)
+        ServiceBusAdministrationClientOptions)
       parameters:
         - id: fullyQualifiedNamespace
           type: string
@@ -78,13 +82,27 @@ constructors:
 
             in `AzureNamedKeyCredential`.
         - id: options
-          type: PipelineOptions
+          type: >-
+            <xref uid="@azure/service-bus.ServiceBusAdministrationClientOptions"
+            />
           description: |
             PipelineOptions
+properties:
+  - name: pipeline
+    uid: '@azure/service-bus.ServiceBusAdministrationClient.pipeline'
+    package: '@azure/service-bus'
+    summary: The pipeline used by this client to make requests
+    fullName: pipeline
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        description: ''
+        type: Pipeline
 inheritedMethods:
-  - name: >-
-      sendOperationRequest(OperationArguments, OperationSpec,
-      ServiceCallback<any>)
+  - name: 'sendOperationRequest<T>(OperationArguments, OperationSpec)'
     uid: '@azure/service-bus.ServiceBusAdministrationClient.sendOperationRequest'
     package: '@azure/service-bus'
     summary: Send an HTTP request that is populated using the provided OperationSpec.
@@ -93,9 +111,8 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendOperationRequest(operationArguments: OperationArguments,
-        operationSpec: OperationSpec, callback?: ServiceCallback<any>):
-        Promise<RestResponse>
+        function sendOperationRequest<T>(operationArguments: OperationArguments,
+        operationSpec: OperationSpec): Promise<T>
       parameters:
         - id: operationArguments
           type: OperationArguments
@@ -104,15 +121,12 @@ inheritedMethods:
             populated from.
         - id: operationSpec
           type: OperationSpec
-          description: The OperationSpec to use to populate the httpRequest.
-        - id: callback
-          type: ServiceCallback&lt;any&gt;
           description: |
-            The callback to call when the response is received.
+            The OperationSpec to use to populate the httpRequest.
       return:
         description: ''
-        type: Promise&lt;RestResponse&gt;
-  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
+        type: Promise&lt;T&gt;
+  - name: sendRequest(PipelineRequest)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.sendRequest'
     package: '@azure/service-bus'
     summary: Send the provided httpRequest.
@@ -121,15 +135,15 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendRequest(options: RequestPrepareOptions | WebResourceLike):
-        Promise<HttpOperationResponse>
+        function sendRequest(request: PipelineRequest):
+        Promise<PipelineResponse>
       parameters:
-        - id: options
-          type: RequestPrepareOptions | WebResourceLike
+        - id: request
+          type: PipelineRequest
           description: ''
       return:
         description: ''
-        type: Promise&lt;HttpOperationResponse&gt;
+        type: Promise&lt;PipelineResponse&gt;
 methods:
   - name: 'createQueue(string, CreateQueueOptions)'
     uid: '@azure/service-bus.ServiceBusAdministrationClient.createQueue'
@@ -1017,8 +1031,8 @@ methods:
       update the desired properties in it, and then pass the modified object to
       `updateQueue()`.
 
-      See https://docs.microsoft.com/rest/api/servicebus/update-queue for more
-      details.
+      The properties that cannot be updated are marked as readonly in the
+      `QueueProperties` interface.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -1113,6 +1127,9 @@ methods:
       Therefore, the suggested flow is to use the output from
       `getSubscription()`, update the desired properties in it, and then pass
       the modified object to `updateSubscription()`.
+
+      The properties that cannot be updated are marked as readonly in the
+      `SubscriptionProperties` interface.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -1158,8 +1175,8 @@ methods:
       update the desired properties in it, and then pass the modified object to
       `updateTopic()`.
 
-      See https://docs.microsoft.com/rest/api/servicebus/update-topic for more
-      details.
+      The properties that cannot be updated are marked as readonly in the
+      `TopicProperties` interface.
     remarks: ''
     isPreview: false
     isDeprecated: false

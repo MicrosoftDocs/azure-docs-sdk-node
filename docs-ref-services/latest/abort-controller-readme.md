@@ -1,23 +1,27 @@
 ---
-title: 
-keywords: Azure, javascript, SDK, API, @azure/abort-controller, 
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 03/04/2021
+title: Azure Abort Controller client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure/abort-controller, core
+author: xirzec
+ms.author: jeffish
+ms.date: 05/05/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: core
 ---
+# Azure Abort Controller client library for JavaScript - Version 1.1.0 
 
-# Azure Abort Controller library for JavaScript
 
 The `@azure/abort-controller` package provides `AbortController` and `AbortSignal` classes. These classes are compatible
 with the [AbortController](https://developer.mozilla.org/docs/Web/API/AbortController) built into modern browsers
 and the `AbortSignal` used by [fetch](https://developer.mozilla.org/docs/Web/API/Fetch_API).
 Use the `AbortController` class to create an instance of the `AbortSignal` class that can be used to cancel an operation
 in an Azure SDK that accept a parameter of type `AbortSignalLike`.
+
+Key links:
+
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/abort-controller_1.1.0/sdk/core/abort-controller)
+- [Package (npm)](https://www.npmjs.com/package/@azure/abort-controller)
+- [API Reference Documentation](/javascript/api/overview/azure/abort-controller-readme)
 
 ## Getting started
 
@@ -102,9 +106,17 @@ allTasksController.abort(); // aborts allTasksSignal, subTask
 subTask.abort(); // aborts only subTask
 ```
 
+## Next steps
+
+You can build and run the tests locally by executing `rushx test`. Explore the `test` folder to see advanced usage and behavior of the public classes.
+
+## Troubleshooting
+
+If you run into issues while using this library, please feel free to [file an issue](https://github.com/Azure/azure-sdk-for-js/issues/new).
+
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/abort-controller_1.0.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/abort-controller_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcore%2Fabort-controller%2FREADME.png)
 

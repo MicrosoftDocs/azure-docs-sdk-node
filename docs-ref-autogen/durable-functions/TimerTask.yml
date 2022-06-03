@@ -20,6 +20,9 @@ summary: |+
   // do some work
 
   if (!timeoutTask.isCompleted) {
+      // An orchestration won't get marked as completed until all its scheduled
+      // tasks have returned, or been cancelled. Therefore, it is important
+      // to cancel timers when they're no longer needed
       timeoutTask.cancel();
   }
   ```
@@ -43,6 +46,9 @@ summary: |+
   }
 
   if (!timeoutTask.isCompleted) {
+      // An orchestration won't get marked as completed until all its scheduled
+      // tasks have returned, or been cancelled. Therefore, it is important
+      // to cancel timers when they're no longer needed
       timeoutTask.cancel();
   }
   ```
@@ -51,24 +57,23 @@ fullName: TimerTask
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: class
+type: interface
 properties:
-  - name: exception
-    uid: durable-functions.TimerTask.exception
+  - name: cancel
+    uid: durable-functions.TimerTask.cancel
     package: durable-functions
     summary: |-
-      The error thrown when attempting to perform the task's action. If
-      the Task has not yet completed or has completed successfully,
-      `undefined`.
-    fullName: exception
+      Indicates the timer should be canceled. This request will execute on the
+      next `yield` or `return` statement.
+    fullName: cancel
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'exception?: Error | undefined'
+      content: 'cancel: () => void'
       return:
         description: ''
-        type: Error | undefined
+        type: () =&gt; void
   - name: isCanceled
     uid: durable-functions.TimerTask.isCanceled
     package: durable-functions
@@ -78,9 +83,9 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: boolean isCanceled
+      content: 'isCanceled: boolean'
       return:
-        description: Whether or not the timer has been canceled.
+        description: ''
         type: boolean
   - name: isCompleted
     uid: durable-functions.TimerTask.isCompleted
@@ -123,16 +128,4 @@ properties:
       return:
         description: ''
         type: unknown
-methods:
-  - name: cancel()
-    uid: durable-functions.TimerTask.cancel
-    package: durable-functions
-    summary: |-
-      Indicates the timer should be canceled. This request will execute on the
-      next `yield` or `return` statement.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function cancel()
 extends: <xref uid="durable-functions.Task" />

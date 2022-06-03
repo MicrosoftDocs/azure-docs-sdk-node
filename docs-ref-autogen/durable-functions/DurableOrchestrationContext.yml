@@ -13,7 +13,8 @@ type: class
 constructors:
   - name: >-
       DurableOrchestrationContext(HistoryEvent[], string, Date, boolean, string
-      | undefined, unknown)
+      | undefined, string | undefined, string | undefined, number | undefined,
+      ReplaySchema, unknown, TaskOrchestrationExecutor)
     uid: durable-functions.DurableOrchestrationContext.constructor
     package: durable-functions
     summary: ''
@@ -24,7 +25,11 @@ constructors:
       content: >-
         new DurableOrchestrationContext(state: HistoryEvent[], instanceId:
         string, currentUtcDateTime: Date, isReplaying: boolean,
-        parentInstanceId: string | undefined, input: unknown)
+        parentInstanceId: string | undefined, longRunningTimerIntervalDuration:
+        string | undefined, maximumShortTimerDuration: string | undefined,
+        defaultHttpAsyncRequestSleepTimeMillseconds: number | undefined,
+        schemaVersion: ReplaySchema, input: unknown, taskOrchestratorExecutor:
+        TaskOrchestrationExecutor)
       parameters:
         - id: state
           type: 'HistoryEvent[]'
@@ -41,8 +46,23 @@ constructors:
         - id: parentInstanceId
           type: string | undefined
           description: ''
+        - id: longRunningTimerIntervalDuration
+          type: string | undefined
+          description: ''
+        - id: maximumShortTimerDuration
+          type: string | undefined
+          description: ''
+        - id: defaultHttpAsyncRequestSleepTimeMillseconds
+          type: number | undefined
+          description: ''
+        - id: schemaVersion
+          type: ReplaySchema
+          description: ''
         - id: input
           type: unknown
+          description: ''
+        - id: taskOrchestratorExecutor
+          type: TaskOrchestrationExecutor
           description: ''
 properties:
   - name: currentUtcDateTime
@@ -145,10 +165,10 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'Task: ITaskMethods'
+      content: 'Task: { all: (tasks: Task[]) => Task, any: (tasks: Task[]) => Task }'
       return:
         description: ''
-        type: <xref uid="durable-functions.ITaskMethods" />
+        type: '{ all: (tasks: Task[]) =&gt; Task, any: (tasks: Task[]) =&gt; Task }'
 methods:
   - name: 'callActivity(string, unknown)'
     uid: durable-functions.DurableOrchestrationContext.callActivity
@@ -230,7 +250,7 @@ methods:
         type: <xref uid="durable-functions.Task" />
   - name: >-
       callHttp(string, string, string | object, [key: string]: string,
-      TokenSource)
+      TokenSource, boolean)
     uid: durable-functions.DurableOrchestrationContext.callHttp
     package: durable-functions
     summary: Schedules a durable HTTP call to the specified endpoint.
@@ -240,8 +260,8 @@ methods:
     syntax:
       content: >-
         function callHttp(method: string, uri: string, content?: string |
-        object, headers?: [key: string]: string, tokenSource?: TokenSource):
-        Task
+        object, headers?: [key: string]: string, tokenSource?: TokenSource,
+        asynchronousPatternEnabled?: boolean): Task
       parameters:
         - id: method
           type: string
@@ -257,6 +277,9 @@ methods:
           description: ''
         - id: tokenSource
           type: <xref uid="durable-functions.TokenSource" />
+          description: ''
+        - id: asynchronousPatternEnabled
+          type: boolean
           description: ''
       return:
         description: ''
@@ -333,14 +356,11 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function continueAsNew(input: unknown): Task'
+      content: 'function continueAsNew(input: unknown)'
       parameters:
         - id: input
           type: unknown
           description: ''
-      return:
-        description: ''
-        type: <xref uid="durable-functions.Task" />
   - name: createTimer(Date)
     uid: durable-functions.DurableOrchestrationContext.createTimer
     package: durable-functions

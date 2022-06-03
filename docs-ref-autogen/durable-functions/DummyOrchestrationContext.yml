@@ -14,8 +14,8 @@ isDeprecated: false
 type: class
 constructors:
   - name: >-
-      DummyOrchestrationContext(string, HistoryEvent[] | undefined, any, Date,
-      boolean, string)
+      DummyOrchestrationContext(string, HistoryEvent[] | undefined, any, string,
+      string, number, ReplaySchema, boolean, string)
     uid: durable-functions.DummyOrchestrationContext.constructor
     package: durable-functions
     summary: |-
@@ -28,8 +28,11 @@ constructors:
     syntax:
       content: >-
         new DummyOrchestrationContext(instanceId?: string, history?:
-        HistoryEvent[] | undefined, input?: any, currentUtcDateTime?: Date,
-        isReplaying?: boolean, parentInstanceId?: string)
+        HistoryEvent[] | undefined, input?: any,
+        longRunningTimerIntervalDuration?: string, maximumShortTimerDuration?:
+        string, defaultHttpAsyncRequestSleepTimeMillseconds?: number,
+        schemaVersion?: ReplaySchema, isReplaying?: boolean, parentInstanceId?:
+        string)
       parameters:
         - id: instanceId
           type: string
@@ -40,9 +43,24 @@ constructors:
         - id: input
           type: any
           description: The input to the orchestration
-        - id: currentUtcDateTime
-          type: Date
-          description: The deterministic date at the beginning of orchestration replay
+        - id: longRunningTimerIntervalDuration
+          type: string
+          description: >-
+            The duration to break smaller timers into if a long timer exceeds
+            the maximum allowed duration
+        - id: maximumShortTimerDuration
+          type: string
+          description: >-
+            The maximum duration for a timer allowed by the underlying storage
+            infrastructure
+        - id: defaultHttpAsyncRequestSleepTimeMillseconds
+          type: number
+          description: ''
+        - id: schemaVersion
+          type: ReplaySchema
+          description: >-
+            The schema version currently used after being negotiated with the
+            extension
         - id: isReplaying
           type: boolean
           description: >-

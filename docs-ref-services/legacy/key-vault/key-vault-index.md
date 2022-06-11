@@ -27,5 +27,5 @@ ms.service: key-vault
 
 | Reference                                          | Package                                                                             | Source                                                                                            |
 |----------------------------------------------------|-------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| [ARM Key Vault](/javascript/api/preview-docs/azure-arm-keyvault/) | [azure-arm-storage@8.1.0](https://www.npmjs.com/package/azure-arm-keyvault/v/1.2.0) | [GitHub](https://github.com/azure/azure-sdk-for-node/tree/master/lib/services/keyVaultManagement) |  |
+| [ARM Key Vault](/javascript/api/preview-docs/azure-arm-keyvault/) | [azure-arm-keyvault@1.2.0](https://www.npmjs.com/package/azure-arm-keyvault/v/1.2.0) | [GitHub](https://github.com/azure/azure-sdk-for-node/tree/master/lib/services/keyVaultManagement) |  |
 |                                                    |                                                                                     |                                                                                                   |

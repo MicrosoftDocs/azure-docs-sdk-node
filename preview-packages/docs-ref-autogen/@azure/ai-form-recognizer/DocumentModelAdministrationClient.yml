@@ -207,13 +207,13 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function beginComposeModel(modelId: string, componentModels:
+        function beginComposeModel(modelId: string, componentModelIds:
         Iterable<string>, options?: BuildModelOptions): Promise<TrainingPoller>
       parameters:
         - id: modelId
           type: string
           description: the unique ID of the model to create
-        - id: componentModels
+        - id: componentModelIds
           type: Iterable&lt;string&gt;
           description: >-
             an Iterable of strings representing the unique model IDs of the
@@ -226,8 +226,9 @@ methods:
           a long-running operation (poller) that will eventually produce the
           created model information or an error
         type: Promise&lt;<xref uid="@azure/ai-form-recognizer.TrainingPoller" />&gt;
-  - name: 'beginCopyModel(string, CopyAuthorization, CopyModelOptions)'
-    uid: '@azure/ai-form-recognizer.DocumentModelAdministrationClient.beginCopyModel'
+  - name: 'beginCopyModelTo(string, CopyAuthorization, CopyModelOptions)'
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.beginCopyModelTo
     package: '@azure/ai-form-recognizer'
     summary: >
       Copies a model with the given ID into the resource and model ID encoded by
@@ -268,7 +269,7 @@ methods:
       // Finally, use the _source_ client to copy the model and await the copy
       operation
 
-      const poller = await sourceClient.beginCopyModel("<source model ID>");
+      const poller = await sourceClient.beginCopyModelTo("<source model ID>");
 
 
       // Model copying, like all other model creation operations, returns a
@@ -292,7 +293,7 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function beginCopyModel(sourceModelId: string, authorization:
+        function beginCopyModelTo(sourceModelId: string, authorization:
         CopyAuthorization, options?: CopyModelOptions): Promise<TrainingPoller>
       parameters:
         - id: sourceModelId
@@ -350,7 +351,7 @@ methods:
     package: '@azure/ai-form-recognizer'
     summary: >
       Creates an authorization to copy a model into the resource, used with the
-      `beginCopyModel` method.
+      `beginCopyModelTo` method.
 
       The `CopyAuthorization` grants another cognitive service resource the
       right to create a model in this client's

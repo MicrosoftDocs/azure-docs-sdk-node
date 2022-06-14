@@ -62,9 +62,8 @@ context.acquireTokenWithClientCredentials(
 
 ## Samples
 
-| | |
+| **Azure Active Directory** | **Description** |
 |---|---|
-| **Azure Active Directory** ||
 | Securing a web API with Azure AD | A NodeJS web API that is secured using Azure AD and OAuth 2.0 access tokens. |
 | Integrating Azure AD into a NodeJS web application | A NodeJS web application that authenticates Azure AD users with OpenID Connect. |
 

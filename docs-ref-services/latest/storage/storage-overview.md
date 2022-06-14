@@ -12,7 +12,7 @@ ms.devlang: JavaScript
 ms.service: storage
 ---
 
-## Azure Storage SDK for JavaScript - latest
+# Azure Storage SDK for JavaScript - latest
 
 ## Client packages (12.x.x) - latest
 

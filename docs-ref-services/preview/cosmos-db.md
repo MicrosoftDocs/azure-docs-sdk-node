@@ -1,14 +1,13 @@
 ---
-title: Azure Cosmos DB Modules for JavaScript
-description: Reference for Azure Cosmos DB modules for JavaScript
-author: SnehaGunda
-ms.author: sngun
-ms.date: 03/20/2018
+title: Azure Cosmos DB SDK for JavaScript
+description: Reference for Azure Cosmos DB SDK for JavaScript
+author: jay-most
+ms.author: jasam
+ms.date: 06/15/2022
 ms.topic: reference
-ms.devlang: nodejs
-ms.service: cosmos-db
+ms.devlang: JavaScript
+ms.service: cosmosdb
 ---
-
 # Azure Cosmos DB Modules for JavaScript
 
 Azure Cosmos DB is Microsoft's globally distributed, multi-model database. Azure Cosmos DB enables you to elastically and independently scale throughput and storage across any number of Azure's geographic regions. It offers throughput, latency, availability, and consistency guarantees with comprehensive service level agreements (SLAs), something no other database service can offer.

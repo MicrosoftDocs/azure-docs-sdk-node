@@ -1,17 +1,13 @@
 ---
-title: Azure Event Hub modules for JavaScript
-description: Reference for Azure Event Hub modules for JavaScript
-author: sethmanheim
-ms.author: sethm
-manager: timlt
-ms.date: 07/18/2017
+title: Azure Event Hubs SDK for JavaScript
+description: Reference for Azure Event Hubs SDK for JavaScript
+author: jeremymeng
+ms.author: yumeng
+ms.date: 06/15/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
-ms.devlang: nodejs
-ms.service: Event Hub
+ms.devlang: javascript
+ms.service: eventhubs
 ---
-
 # Azure Event Hub modules for JavaScript
 
 [Azure Event Hubs](https://azure.microsoft.com/services/event-hubs/) is a highly scalable publish-subscribe service that can ingest millions of events per second and stream them to multiple consumers. This lets you process and analyze the massive amounts of data produced by your connected devices and applications.

@@ -3,7 +3,7 @@ title: Azure Key Vault Secret client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/keyvault-secrets, keyvault
 author: maggiepint
 ms.author: magpint
-ms.date: 09/07/2021
+ms.date: 11/09/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: keyvault
 ---
 
-# Azure Key Vault Secret client library for JavaScript - Version 4.4.0-beta.1 
+# Azure Key Vault Secret client library for JavaScript - Version 4.4.0-beta.2 
 
 
 Azure Key Vault is a service that allows you to encrypt authentication keys, storage account keys, data encryption keys, .pfx files, and passwords by using secured keys.
@@ -31,14 +31,14 @@ Use the client library for Azure Key Vault Secrets in your Node.js application t
 - Get all secrets.
 - Get all deleted secrets.
 
-> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.1/samples/cors/ts/README.md) for guidance.
+> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.2/samples/cors/ts/README.md) for guidance.
 
 Key links:
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.4.0-beta.1/sdk/keyvault/keyvault-secrets)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.4.0-beta.2/sdk/keyvault/keyvault-secrets)
 - [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-secrets)
 - [API Reference Documentation](https://docs.microsoft.com/javascript/api/@azure/keyvault-secrets)
 - [Product documentation](https://azure.microsoft.com/services/key-vault/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.4.0-beta.1/sdk/keyvault/keyvault-secrets/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.4.0-beta.2/sdk/keyvault/keyvault-secrets/samples)
 
 ## Getting started
 
@@ -135,7 +135,7 @@ Use the [Azure Cloud Shell](https://shell.azure.com/bash) snippet below to creat
 
 ## Authenticating with Azure Active Directory
 
-The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.1/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.2/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 Here's a quick example. First, import `DefaultAzureCredential` and `SecretClient`:
 
@@ -543,13 +543,13 @@ setLogLevel("info");
 
 You can find more code samples through the following links:
 
-- [KeyVault Secrets Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.1/sdk/keyvault/keyvault-secrets/samples/v4/javascript)
-- [KeyVault Secrets Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.1/sdk/keyvault/keyvault-secrets/samples/v4/typescript)
-- [KeyVault Secrets Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.1/sdk/keyvault/keyvault-secrets/test/)
+- [KeyVault Secrets Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.2/sdk/keyvault/keyvault-secrets/samples/v4/javascript)
+- [KeyVault Secrets Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.2/sdk/keyvault/keyvault-secrets/samples/v4/typescript)
+- [KeyVault Secrets Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.2/sdk/keyvault/keyvault-secrets/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.4.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-secrets%2FREADME.png)
 

@@ -35,7 +35,7 @@ constructors:
           description: |-
             Call StorageURL.newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
-properties:
+inheritedProperties:
   - name: pipeline
     uid: '@azure/storage-file.FileURL.pipeline'
     package: '@azure/storage-file'
@@ -47,8 +47,8 @@ properties:
     syntax:
       content: 'pipeline: Pipeline'
       return:
-        type: <xref uid="@azure/storage-file.Pipeline" />
         description: ''
+        type: <xref uid="@azure/storage-file.Pipeline" />
   - name: url
     uid: '@azure/storage-file.FileURL.url'
     package: '@azure/storage-file'
@@ -60,8 +60,32 @@ properties:
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
+        type: string
+inheritedMethods:
+  - name: 'newPipeline(Credential, INewPipelineOptions)'
+    uid: '@azure/storage-file.FileURL.newPipeline'
+    package: '@azure/storage-file'
+    summary: >-
+      A static method used to create a new Pipeline object with Credential
+      provided.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function newPipeline(credential: Credential, pipelineOptions?:
+        INewPipelineOptions): Pipeline
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/storage-file.Credential" />
+          description: 'Such as AnonymousCredential, SharedKeyCredential.'
+        - id: pipelineOptions
+          type: <xref uid="@azure/storage-file.INewPipelineOptions" />
+          description: ''
+      return:
+        description: A new Pipeline object.
+        type: <xref uid="@azure/storage-file.Pipeline" />
 methods:
   - name: 'abortCopyFromURL(Aborter, string)'
     uid: '@azure/storage-file.FileURL.abortCopyFromURL'
@@ -71,11 +95,17 @@ methods:
       zero length and full
 
       metadata.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/abort-copy-file
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function abortCopyFromURL(aborter: Aborter, copyId: string)'
+      content: >-
+        function abortCopyFromURL(aborter: Aborter, copyId: string):
+        Promise<Models.FileAbortCopyResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -87,8 +117,8 @@ methods:
           type: string
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.FileAbortCopyResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileAbortCopyResponse" />&gt;
   - name: 'clearRange(Aborter, number, number)'
     uid: '@azure/storage-file.FileURL.clearRange'
     package: '@azure/storage-file'
@@ -101,7 +131,7 @@ methods:
     syntax:
       content: >-
         function clearRange(aborter: Aborter, offset: number, contentLength:
-        number)
+        number): Promise<Models.FileUploadRangeResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -116,21 +146,24 @@ methods:
           type: number
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.FileUploadRangeResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileUploadRangeResponse" />&gt;
   - name: 'create(Aborter, number, IFileCreateOptions)'
     uid: '@azure/storage-file.FileURL.create'
     package: '@azure/storage-file'
     summary: >-
       Creates a new file or replaces a file. Note it only initializes the file
       with no content.
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/create-file
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function create(aborter: Aborter, size: number, options?:
-        IFileCreateOptions)
+        IFileCreateOptions): Promise<Models.FileCreateResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -145,12 +178,12 @@ methods:
           type: <xref uid="@azure/storage-file.IFileCreateOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.FileCreateResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileCreateResponse" />&gt;
   - name: delete(Aborter)
     uid: '@azure/storage-file.FileURL.delete'
     package: '@azure/storage-file'
-    summary: >
+    summary: >-
       Removes the file from the storage account.
 
       When a file is successfully deleted, it is immediately removed from the
@@ -172,11 +205,15 @@ methods:
 
       a share. An attempt to perform this operation on a share snapshot will
       fail with 400 (InvalidQueryParameterValue)
+
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-file2
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function delete(aborter: Aborter)'
+      content: 'function delete(aborter: Aborter): Promise<Models.FileDeleteResponse>'
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -185,25 +222,30 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
-        type: Promise&lt;<xref uid="Models.FileDeleteResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileDeleteResponse" />&gt;
   - name: 'download(Aborter, number, undefined | number, IFileDownloadOptions)'
     uid: '@azure/storage-file.FileURL.download'
     package: '@azure/storage-file'
-    summary: >
+    summary: >-
       Reads or downloads a file from the system, including its metadata and
       properties.
 
       * In Node.js, data returns in a Readable stream `readableStreamBody`
 
       * In browsers, data returns in a promise `blobBody`
+
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/get-file
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function download(aborter: Aborter, offset: number, count?: undefined |
-        number, options?: IFileDownloadOptions)
+        number, options?: IFileDownloadOptions):
+        Promise<Models.FileDownloadResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -221,17 +263,24 @@ methods:
           type: <xref uid="@azure/storage-file.IFileDownloadOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.FileDownloadResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileDownloadResponse" />&gt;
   - name: 'forceCloseHandle(Aborter, string)'
     uid: '@azure/storage-file.FileURL.forceCloseHandle'
     package: '@azure/storage-file'
-    summary: Force close a specific handle for a file.
+    summary: >-
+      Force close a specific handle for a file.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/force-close-handles
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function forceCloseHandle(aborter: Aborter, handleId: string)'
+      content: >-
+        function forceCloseHandle(aborter: Aborter, handleId: string):
+        Promise<Models.FileForceCloseHandlesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -245,19 +294,24 @@ methods:
             Specific handle ID, cannot be asterisk "*".
                                      Use forceCloseHandlesSegment() to close all handles.
       return:
-        type: Promise&lt;<xref uid="Models.FileForceCloseHandlesResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileForceCloseHandlesResponse" />&gt;
   - name: 'forceCloseHandlesSegment(Aborter, undefined | string)'
     uid: '@azure/storage-file.FileURL.forceCloseHandlesSegment'
     package: '@azure/storage-file'
-    summary: Force close all handles for a file.
+    summary: >-
+      Force close all handles for a file.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/force-close-handles
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function forceCloseHandlesSegment(aborter: Aborter, marker?: undefined |
-        string)
+        string): Promise<Models.FileForceCloseHandlesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -269,8 +323,8 @@ methods:
           type: undefined | string
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.FileForceCloseHandlesResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileForceCloseHandlesResponse" />&gt;
   - name: 'fromDirectoryURL(DirectoryURL, string)'
     uid: '@azure/storage-file.FileURL.fromDirectoryURL'
     package: '@azure/storage-file'
@@ -281,7 +335,7 @@ methods:
     syntax:
       content: >-
         static function fromDirectoryURL(directoryURL: DirectoryURL, fileName:
-        string)
+        string): FileURL
       parameters:
         - id: directoryURL
           type: <xref uid="@azure/storage-file.DirectoryURL" />
@@ -290,8 +344,8 @@ methods:
           type: string
           description: A file name
       return:
-        type: <xref uid="@azure/storage-file.FileURL" />
         description: ''
+        type: <xref uid="@azure/storage-file.FileURL" />
   - name: getProperties(Aborter)
     uid: '@azure/storage-file.FileURL.getProperties'
     package: '@azure/storage-file'
@@ -300,11 +354,17 @@ methods:
       properties
 
       for the file. It does not return the content of the file.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-file-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperties(aborter: Aborter)'
+      content: >-
+        function getProperties(aborter: Aborter):
+        Promise<Models.FileGetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -313,8 +373,8 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
-        type: Promise&lt;<xref uid="Models.FileGetPropertiesResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileGetPropertiesResponse" />&gt;
   - name: 'getRangeList(Aborter, IFileGetRangeListOptions)'
     uid: '@azure/storage-file.FileURL.getRangeList'
     package: '@azure/storage-file'
@@ -325,7 +385,7 @@ methods:
     syntax:
       content: >-
         function getRangeList(aborter: Aborter, options?:
-        IFileGetRangeListOptions)
+        IFileGetRangeListOptions): Promise<FileGetRangeListResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -337,23 +397,27 @@ methods:
           type: <xref uid="@azure/storage-file.IFileGetRangeListOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-file.FileGetRangeListResponse"
           />&gt;
-        description: ''
   - name: >-
       listHandlesSegment(Aborter, undefined | string,
       IFileListHandlesSegmentOptions)
     uid: '@azure/storage-file.FileURL.listHandlesSegment'
     package: '@azure/storage-file'
-    summary: Lists handles for a file.
+    summary: |-
+      Lists handles for a file.
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/list-handles
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listHandlesSegment(aborter: Aborter, marker?: undefined |
-        string, options?: IFileListHandlesSegmentOptions)
+        string, options?: IFileListHandlesSegmentOptions):
+        Promise<Models.FileListHandlesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -368,40 +432,24 @@ methods:
           type: <xref uid="@azure/storage-file.IFileListHandlesSegmentOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.FileListHandlesResponse" />&gt;
         description: ''
-  - name: 'newPipeline(Credential, INewPipelineOptions)'
-    uid: '@azure/storage-file.FileURL.newPipeline'
+        type: Promise&lt;<xref uid="Models.FileListHandlesResponse" />&gt;
+  - name: 'resize(Aborter, number)'
+    uid: '@azure/storage-file.FileURL.resize'
     package: '@azure/storage-file'
     summary: >-
-      A static method used to create a new Pipeline object with Credential
-      provided.
+      Resize file.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-file-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        static function newPipeline(credential: Credential, pipelineOptions?:
-        INewPipelineOptions)
-      parameters:
-        - id: credential
-          type: <xref uid="@azure/storage-file.Credential" />
-          description: 'Such as AnonymousCredential, SharedKeyCredential.'
-        - id: pipelineOptions
-          type: <xref uid="@azure/storage-file.INewPipelineOptions" />
-          description: ''
-      return:
-        type: <xref uid="@azure/storage-file.Pipeline" />
-        description: A new Pipeline object.
-  - name: 'resize(Aborter, number)'
-    uid: '@azure/storage-file.FileURL.resize'
-    package: '@azure/storage-file'
-    summary: Resize file.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function resize(aborter: Aborter, length: number)'
+        function resize(aborter: Aborter, length: number):
+        Promise<Models.FileSetHTTPHeadersResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -416,8 +464,8 @@ methods:
                                    If the specified byte value is less than the current size of the file,
                                    then all ranges above the specified byte value are cleared.
       return:
-        type: Promise&lt;<xref uid="Models.FileSetHTTPHeadersResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileSetHTTPHeadersResponse" />&gt;
   - name: 'setHTTPHeaders(Aborter, IFileHTTPHeaders)'
     uid: '@azure/storage-file.FileURL.setHTTPHeaders'
     package: '@azure/storage-file'
@@ -428,13 +476,17 @@ methods:
       the options,
 
       these file HTTP headers without a value will be cleared.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-file-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setHTTPHeaders(aborter: Aborter, fileHTTPHeaders?:
-        IFileHTTPHeaders)
+        IFileHTTPHeaders): Promise<Models.FileSetHTTPHeadersResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -446,20 +498,28 @@ methods:
           type: <xref uid="@azure/storage-file.IFileHTTPHeaders" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.FileSetHTTPHeadersResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileSetHTTPHeadersResponse" />&gt;
   - name: 'setMetadata(Aborter, IMetadata)'
     uid: '@azure/storage-file.FileURL.setMetadata'
     package: '@azure/storage-file'
-    summary: |-
+    summary: >-
       Updates user-defined metadata for the specified file.
+
       If no metadata defined in the option parameter, the file
+
       metadata will be removed.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-file-metadata
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setMetadata(aborter: Aborter, metadata?: IMetadata)'
+      content: >-
+        function setMetadata(aborter: Aborter, metadata?: IMetadata):
+        Promise<Models.FileSetMetadataResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -471,17 +531,24 @@ methods:
           type: <xref uid="@azure/storage-file.IMetadata" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.FileSetMetadataResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileSetMetadataResponse" />&gt;
   - name: 'setProperties(Aborter, IFileProperties)'
     uid: '@azure/storage-file.FileURL.setProperties'
     package: '@azure/storage-file'
-    summary: Sets properties on the file.
+    summary: >-
+      Sets properties on the file.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-file-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setProperties(aborter: Aborter, properties?: IFileProperties)'
+      content: >-
+        function setProperties(aborter: Aborter, properties?: IFileProperties):
+        Promise<ISetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -493,10 +560,10 @@ methods:
           type: <xref uid="@azure/storage-file.IFileProperties" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-file.ISetPropertiesResponse"
           />&gt;
-        description: ''
   - name: 'startCopyFromURL(Aborter, string, IFileStartCopyOptions)'
     uid: '@azure/storage-file.FileURL.startCopyFromURL'
     package: '@azure/storage-file'
@@ -507,7 +574,7 @@ methods:
     syntax:
       content: >-
         function startCopyFromURL(aborter: Aborter, copySource: string,
-        options?: IFileStartCopyOptions)
+        options?: IFileStartCopyOptions): Promise<Models.FileStartCopyResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -540,8 +607,8 @@ methods:
           type: <xref uid="@azure/storage-file.IFileStartCopyOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.FileStartCopyResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileStartCopyResponse" />&gt;
   - name: >-
       uploadRange(Aborter, HttpRequestBody, number, number,
       IFileUploadRangeOptions)
@@ -556,7 +623,8 @@ methods:
     syntax:
       content: >-
         function uploadRange(aborter: Aborter, body: HttpRequestBody, offset:
-        number, contentLength: number, options?: IFileUploadRangeOptions)
+        number, contentLength: number, options?: IFileUploadRangeOptions):
+        Promise<Models.FileUploadRangeResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -582,8 +650,8 @@ methods:
           type: <xref uid="@azure/storage-file.IFileUploadRangeOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.FileUploadRangeResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileUploadRangeResponse" />&gt;
   - name: 'uploadRangeFromURL(Aborter, string, number, number, number)'
     uid: '@azure/storage-file.FileURL.uploadRangeFromURL'
     package: '@azure/storage-file'
@@ -598,7 +666,8 @@ methods:
     syntax:
       content: >-
         function uploadRangeFromURL(aborter: Aborter, sourceURL: string,
-        sourceOffset: number, destOffset: number, count: number)
+        sourceOffset: number, destOffset: number, count: number):
+        Promise<Models.FileUploadRangeFromURLResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-file.Aborter" />
@@ -623,8 +692,8 @@ methods:
           type: number
           description: Number of bytes to be uploaded from source file.
       return:
-        type: Promise&lt;<xref uid="Models.FileUploadRangeFromURLResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.FileUploadRangeFromURLResponse" />&gt;
   - name: withPipeline(Pipeline)
     uid: '@azure/storage-file.FileURL.withPipeline'
     package: '@azure/storage-file'
@@ -635,12 +704,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withPipeline(pipeline: Pipeline)'
+      content: 'function withPipeline(pipeline: Pipeline): FileURL'
       parameters:
         - id: pipeline
           type: <xref uid="@azure/storage-file.Pipeline" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-file.FileURL" />
         description: ''
+        type: <xref uid="@azure/storage-file.FileURL" />
 extends: <xref uid="@azure/storage-file.StorageURL" />

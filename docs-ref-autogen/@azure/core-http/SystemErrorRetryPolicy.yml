@@ -2,7 +2,9 @@
 name: SystemErrorRetryPolicy
 uid: '@azure/core-http.SystemErrorRetryPolicy'
 package: '@azure/core-http'
-summary: ''
+summary: >-
+  A policy that retries when there's a system error, identified by the codes
+  "ETIMEDOUT", "ESOCKETTIMEDOUT", "ECONNREFUSED", "ECONNRESET" or "ENOENT".
 fullName: SystemErrorRetryPolicy
 remarks: ''
 isPreview: false
@@ -54,8 +56,8 @@ properties:
     syntax:
       content: 'maxRetryInterval: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: minRetryInterval
     uid: '@azure/core-http.SystemErrorRetryPolicy.minRetryInterval'
     package: '@azure/core-http'
@@ -67,8 +69,8 @@ properties:
     syntax:
       content: 'minRetryInterval: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: retryCount
     uid: '@azure/core-http.SystemErrorRetryPolicy.retryCount'
     package: '@azure/core-http'
@@ -80,8 +82,8 @@ properties:
     syntax:
       content: 'retryCount: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: retryInterval
     uid: '@azure/core-http.SystemErrorRetryPolicy.retryInterval'
     package: '@azure/core-http'
@@ -93,9 +95,9 @@ properties:
     syntax:
       content: 'retryInterval: number'
       return:
-        type: number
         description: ''
-methods:
+        type: number
+inheritedMethods:
   - name: 'log(HttpPipelineLogLevel, string)'
     uid: '@azure/core-http.SystemErrorRetryPolicy.log'
     package: '@azure/core-http'
@@ -118,22 +120,6 @@ methods:
           type: string
           description: |
             The message of this log.
-  - name: sendRequest(WebResourceLike)
-    uid: '@azure/core-http.SystemErrorRetryPolicy.sendRequest'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function sendRequest(request: WebResourceLike)'
-      parameters:
-        - id: request
-          type: <xref uid="@azure/core-http.WebResourceLike" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="@azure/core-http.HttpOperationResponse" />&gt;
-        description: ''
   - name: shouldLog(HttpPipelineLogLevel)
     uid: '@azure/core-http.SystemErrorRetryPolicy.shouldLog'
     package: '@azure/core-http'
@@ -142,12 +128,31 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function shouldLog(logLevel: HttpPipelineLogLevel)'
+      content: 'function shouldLog(logLevel: HttpPipelineLogLevel): boolean'
       parameters:
         - id: logLevel
           type: <xref uid="@azure/core-http.HttpPipelineLogLevel" />
           description: The log level of the log that will be logged.
       return:
-        type: boolean
         description: Whether or not a log with the provided log level should be logged.
+        type: boolean
+methods:
+  - name: sendRequest(WebResourceLike)
+    uid: '@azure/core-http.SystemErrorRetryPolicy.sendRequest'
+    package: '@azure/core-http'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendRequest(request: WebResourceLike):
+        Promise<HttpOperationResponse>
+      parameters:
+        - id: request
+          type: <xref uid="@azure/core-http.WebResourceLike" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/core-http.HttpOperationResponse" />&gt;
 extends: <xref uid="@azure/core-http.BaseRequestPolicy" />

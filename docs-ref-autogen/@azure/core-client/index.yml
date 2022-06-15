@@ -6,6 +6,7 @@ type: package
 classes:
   - '@azure/core-client.ServiceClient'
 interfaces:
+  - '@azure/core-client.AdditionalPolicyConfig'
   - '@azure/core-client.BaseMapper'
   - '@azure/core-client.CommonClientOptions'
   - '@azure/core-client.CompositeMapper'
@@ -46,6 +47,69 @@ typeAliases:
   - '@azure/core-client.QueryCollectionFormat'
   - '@azure/core-client.RawResponseCallback'
 functions:
+  - name: authorizeRequestOnClaimChallenge(AuthorizeRequestOnChallengeOptions)
+    uid: '@azure/core-client.authorizeRequestOnClaimChallenge'
+    package: '@azure/core-client'
+    summary: >
+      This function can be used as a callback for the
+      `bearerTokenAuthenticationPolicy` of `@azure/core-rest-pipeline`, to
+      support CAE challenges:
+
+      [Continuous Access
+      Evaluation](https://docs.microsoft.com/azure/active-directory/conditional-access/concept-continuous-access-evaluation).
+
+      Call the `bearerTokenAuthenticationPolicy` with the following options:
+
+
+      ```ts
+
+      import { bearerTokenAuthenticationPolicy } from
+      "@azure/core-rest-pipeline";
+
+      import { authorizeRequestOnClaimChallenge } from "@azure/core-client";
+
+
+      const bearerTokenAuthenticationPolicy = bearerTokenAuthenticationPolicy({
+        authorizeRequestOnChallenge: authorizeRequestOnClaimChallenge
+      });
+
+      ```
+
+
+      Once provided, the `bearerTokenAuthenticationPolicy` policy will
+      internally handle Continuous Access Evaluation (CAE) challenges.
+
+      When it can't complete a challenge it will return the 401 (unauthorized)
+      response from ARM.
+
+
+      Example challenge with claims:
+
+
+      ```
+
+      Bearer authorization_uri="https://login.windows-ppe.net/",
+      error="invalid_token",
+
+      error_description="User session has been revoked",
+
+      claims="eyJhY2Nlc3NfdG9rZW4iOnsibmJmIjp7ImVzc2VudGlhbCI6dHJ1ZSwgInZhbHVlIjoiMTYwMzc0MjgwMCJ9fX0="
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function authorizeRequestOnClaimChallenge(onChallengeOptions:
+        AuthorizeRequestOnChallengeOptions): Promise<boolean>
+      parameters:
+        - id: onChallengeOptions
+          type: AuthorizeRequestOnChallengeOptions
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;boolean&gt;
   - name: createClientPipeline(InternalClientPipelineOptions)
     uid: '@azure/core-client.createClientPipeline'
     package: '@azure/core-client'
@@ -57,15 +121,17 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createClientPipeline(options?: InternalClientPipelineOptions)'
+      content: >-
+        function createClientPipeline(options?: InternalClientPipelineOptions):
+        Pipeline
       parameters:
         - id: options
           type: <xref uid="@azure/core-client.InternalClientPipelineOptions" />
           description: |
             Options to customize the created pipeline.
       return:
-        type: Pipeline
         description: ''
+        type: Pipeline
   - name: 'createSerializer([key: string]: any, boolean)'
     uid: '@azure/core-client.createSerializer'
     package: '@azure/core-client'
@@ -76,7 +142,7 @@ functions:
     syntax:
       content: >-
         function createSerializer(modelMappers?: [key: string]: any, isXML?:
-        boolean)
+        boolean): Serializer
       parameters:
         - id: modelMappers
           type: '[key: string]\: any'
@@ -86,8 +152,8 @@ functions:
           description: |
             If XML should be supported
       return:
-        type: <xref uid="@azure/core-client.Serializer" />
         description: ''
+        type: <xref uid="@azure/core-client.Serializer" />
   - name: deserializationPolicy(DeserializationPolicyOptions)
     uid: '@azure/core-client.deserializationPolicy'
     package: '@azure/core-client'
@@ -98,14 +164,16 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function deserializationPolicy(options?: DeserializationPolicyOptions)'
+      content: >-
+        function deserializationPolicy(options?: DeserializationPolicyOptions):
+        PipelinePolicy
       parameters:
         - id: options
           type: <xref uid="@azure/core-client.DeserializationPolicyOptions" />
           description: ''
       return:
-        type: PipelinePolicy
         description: ''
+        type: PipelinePolicy
   - name: serializationPolicy(SerializationPolicyOptions)
     uid: '@azure/core-client.serializationPolicy'
     package: '@azure/core-client'
@@ -116,11 +184,13 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function serializationPolicy(options?: SerializationPolicyOptions)'
+      content: >-
+        function serializationPolicy(options?: SerializationPolicyOptions):
+        PipelinePolicy
       parameters:
         - id: options
           type: <xref uid="@azure/core-client.SerializationPolicyOptions" />
           description: ''
       return:
-        type: PipelinePolicy
         description: ''
+        type: PipelinePolicy

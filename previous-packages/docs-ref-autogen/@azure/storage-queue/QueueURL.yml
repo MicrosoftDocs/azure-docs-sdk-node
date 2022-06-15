@@ -31,7 +31,7 @@ constructors:
           description: |-
             Call StorageURL.newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
-properties:
+inheritedProperties:
   - name: pipeline
     uid: '@azure/storage-queue.QueueURL.pipeline'
     package: '@azure/storage-queue'
@@ -43,8 +43,8 @@ properties:
     syntax:
       content: 'pipeline: Pipeline'
       return:
-        type: <xref uid="@azure/storage-queue.Pipeline" />
         description: ''
+        type: <xref uid="@azure/storage-queue.Pipeline" />
   - name: url
     uid: '@azure/storage-queue.QueueURL.url'
     package: '@azure/storage-queue'
@@ -56,122 +56,9 @@ properties:
     syntax:
       content: 'url: string'
       return:
+        description: ''
         type: string
-        description: ''
-methods:
-  - name: 'create(Aborter, IQueueCreateOptions)'
-    uid: '@azure/storage-queue.QueueURL.create'
-    package: '@azure/storage-queue'
-    summary: Creates a new queue under the specified account.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function create(aborter: Aborter, options?: IQueueCreateOptions)'
-      parameters:
-        - id: aborter
-          type: <xref uid="@azure/storage-queue.Aborter" />
-          description: >-
-            Create a new Aborter instance with Aborter.none or
-            Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
-        - id: options
-          type: <xref uid="@azure/storage-queue.IQueueCreateOptions" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.QueueCreateResponse" />&gt;
-        description: ''
-  - name: delete(Aborter)
-    uid: '@azure/storage-queue.QueueURL.delete'
-    package: '@azure/storage-queue'
-    summary: Deletes the specified queue permanently.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function delete(aborter: Aborter)'
-      parameters:
-        - id: aborter
-          type: <xref uid="@azure/storage-queue.Aborter" />
-          description: >-
-            Create a new Aborter instance with Aborter.none or
-            Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
-      return:
-        type: Promise&lt;<xref uid="Models.QueueDeleteResponse" />&gt;
-        description: ''
-  - name: 'fromServiceURL(ServiceURL, string)'
-    uid: '@azure/storage-queue.QueueURL.fromServiceURL'
-    package: '@azure/storage-queue'
-    summary: Creates a QueueURL object from ServiceURL
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function fromServiceURL(serviceURL: ServiceURL, queueName:
-        string)
-      parameters:
-        - id: serviceURL
-          type: <xref uid="@azure/storage-queue.ServiceURL" />
-          description: ''
-        - id: queueName
-          type: string
-          description: |+
-
-      return:
-        type: <xref uid="@azure/storage-queue.QueueURL" />
-        description: ''
-  - name: getAccessPolicy(Aborter)
-    uid: '@azure/storage-queue.QueueURL.getAccessPolicy'
-    package: '@azure/storage-queue'
-    summary: >
-      Gets details about any stored access policies specified on the queue that
-      may be used with Shared Access Signatures.
-
-      WARNING: JavaScript Date will potential lost precision when parsing start
-      and expiry string.
-
-      For example, new Date("2018-12-31T03:44:23.8827891Z").toISOString() will
-      get "2018-12-31T03:44:23.882Z".
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function getAccessPolicy(aborter: Aborter)'
-      parameters:
-        - id: aborter
-          type: <xref uid="@azure/storage-queue.Aborter" />
-          description: >-
-            Create a new Aborter instance with Aborter.none or
-            Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-queue.QueueGetAccessPolicyResponse" />&gt;
-        description: ''
-  - name: getProperties(Aborter)
-    uid: '@azure/storage-queue.QueueURL.getProperties'
-    package: '@azure/storage-queue'
-    summary: |-
-      Gets all user-defined metadata and system properties for the specified
-      queue. Metadata is associated with the queue as name-values pairs.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function getProperties(aborter: Aborter)'
-      parameters:
-        - id: aborter
-          type: <xref uid="@azure/storage-queue.Aborter" />
-          description: >-
-            Create a new Aborter instance with Aborter.none or
-            Aborter.timeout(),
-                                     goto documents of Aborter for more examples about request cancellation
-      return:
-        type: Promise&lt;<xref uid="Models.QueueGetPropertiesResponse" />&gt;
-        description: ''
+inheritedMethods:
   - name: 'newPipeline(Credential, INewPipelineOptions)'
     uid: '@azure/storage-queue.QueueURL.newPipeline'
     package: '@azure/storage-queue'
@@ -184,7 +71,7 @@ methods:
     syntax:
       content: >-
         static function newPipeline(credential: Credential, pipelineOptions?:
-        INewPipelineOptions)
+        INewPipelineOptions): Pipeline
       parameters:
         - id: credential
           type: <xref uid="@azure/storage-queue.Credential" />
@@ -193,21 +80,165 @@ methods:
           type: <xref uid="@azure/storage-queue.INewPipelineOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-queue.Pipeline" />
         description: A new Pipeline object.
+        type: <xref uid="@azure/storage-queue.Pipeline" />
+methods:
+  - name: 'create(Aborter, IQueueCreateOptions)'
+    uid: '@azure/storage-queue.QueueURL.create'
+    package: '@azure/storage-queue'
+    summary: >-
+      Creates a new queue under the specified account.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/create-queue4
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function create(aborter: Aborter, options?: IQueueCreateOptions):
+        Promise<Models.QueueCreateResponse>
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-queue.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+        - id: options
+          type: <xref uid="@azure/storage-queue.IQueueCreateOptions" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="Models.QueueCreateResponse" />&gt;
+  - name: delete(Aborter)
+    uid: '@azure/storage-queue.QueueURL.delete'
+    package: '@azure/storage-queue'
+    summary: >-
+      Deletes the specified queue permanently.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/delete-queue3
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function delete(aborter: Aborter): Promise<Models.QueueDeleteResponse>'
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-queue.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="Models.QueueDeleteResponse" />&gt;
+  - name: 'fromServiceURL(ServiceURL, string)'
+    uid: '@azure/storage-queue.QueueURL.fromServiceURL'
+    package: '@azure/storage-queue'
+    summary: Creates a QueueURL object from ServiceURL
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromServiceURL(serviceURL: ServiceURL, queueName:
+        string): QueueURL
+      parameters:
+        - id: serviceURL
+          type: <xref uid="@azure/storage-queue.ServiceURL" />
+          description: ''
+        - id: queueName
+          type: string
+          description: |+
+
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-queue.QueueURL" />
+  - name: getAccessPolicy(Aborter)
+    uid: '@azure/storage-queue.QueueURL.getAccessPolicy'
+    package: '@azure/storage-queue'
+    summary: >-
+      Gets details about any stored access policies specified on the queue that
+      may be used with Shared Access Signatures.
+
+      WARNING: JavaScript Date will potential lost precision when parsing start
+      and expiry string.
+
+      For example, new Date("2018-12-31T03:44:23.8827891Z").toISOString() will
+      get "2018-12-31T03:44:23.882Z".
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-queue-acl
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getAccessPolicy(aborter: Aborter):
+        Promise<QueueGetAccessPolicyResponse>
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-queue.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-queue.QueueGetAccessPolicyResponse" />&gt;
+  - name: getProperties(Aborter)
+    uid: '@azure/storage-queue.QueueURL.getProperties'
+    package: '@azure/storage-queue'
+    summary: >-
+      Gets all user-defined metadata and system properties for the specified
+
+      queue. Metadata is associated with the queue as name-values pairs.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-queue-metadata
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getProperties(aborter: Aborter):
+        Promise<Models.QueueGetPropertiesResponse>
+      parameters:
+        - id: aborter
+          type: <xref uid="@azure/storage-queue.Aborter" />
+          description: >-
+            Create a new Aborter instance with Aborter.none or
+            Aborter.timeout(),
+                                     goto documents of Aborter for more examples about request cancellation
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="Models.QueueGetPropertiesResponse" />&gt;
   - name: 'setAccessPolicy(Aborter, ISignedIdentifier[])'
     uid: '@azure/storage-queue.QueueURL.setAccessPolicy'
     package: '@azure/storage-queue'
     summary: >-
       Sets stored access policies for the queue that may be used with Shared
       Access Signatures.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-queue-acl
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setAccessPolicy(aborter: Aborter, queueAcl?:
-        ISignedIdentifier[])
+        ISignedIdentifier[]): Promise<Models.QueueSetAccessPolicyResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
@@ -219,8 +250,8 @@ methods:
           type: '<xref uid="@azure/storage-queue.ISignedIdentifier" />[]'
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.QueueSetAccessPolicyResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.QueueSetAccessPolicyResponse" />&gt;
   - name: 'setMetadata(Aborter, IMetadata)'
     uid: '@azure/storage-queue.QueueURL.setMetadata'
     package: '@azure/storage-queue'
@@ -231,11 +262,17 @@ methods:
       queue
 
       metadata will be removed.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-queue-metadata
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setMetadata(aborter: Aborter, metadata?: IMetadata)'
+      content: >-
+        function setMetadata(aborter: Aborter, metadata?: IMetadata):
+        Promise<Models.QueueSetMetadataResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
@@ -247,8 +284,8 @@ methods:
           type: <xref uid="@azure/storage-queue.IMetadata" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.QueueSetMetadataResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.QueueSetMetadataResponse" />&gt;
   - name: withPipeline(Pipeline)
     uid: '@azure/storage-queue.QueueURL.withPipeline'
     package: '@azure/storage-queue'
@@ -259,12 +296,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withPipeline(pipeline: Pipeline)'
+      content: 'function withPipeline(pipeline: Pipeline): QueueURL'
       parameters:
         - id: pipeline
           type: <xref uid="@azure/storage-queue.Pipeline" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-queue.QueueURL" />
         description: ''
+        type: <xref uid="@azure/storage-queue.QueueURL" />
 extends: <xref uid="@azure/storage-queue.StorageURL" />

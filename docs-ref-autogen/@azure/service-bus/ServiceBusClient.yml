@@ -120,8 +120,8 @@ properties:
     syntax:
       content: 'fullyQualifiedNamespace: string'
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: 'acceptNextSession(string, ServiceBusSessionReceiverOptions)'
     uid: '@azure/service-bus.ServiceBusClient.acceptNextSession'
@@ -157,7 +157,7 @@ methods:
     syntax:
       content: >-
         function acceptNextSession(queueName: string, options?:
-        ServiceBusSessionReceiverOptions)
+        ServiceBusSessionReceiverOptions): Promise<ServiceBusSessionReceiver>
       parameters:
         - id: queueName
           type: string
@@ -168,10 +168,10 @@ methods:
             Options include receiveMode(defaulted to peekLock), options to
             create session receiver.
       return:
+        description: 'A receiver that can be used to receive, peek and settle messages.'
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusSessionReceiver"
           />&gt;
-        description: 'A receiver that can be used to receive, peek and settle messages.'
   - name: 'acceptNextSession(string, string, ServiceBusSessionReceiverOptions)'
     uid: '@azure/service-bus.ServiceBusClient.acceptNextSession_1'
     package: '@azure/service-bus'
@@ -206,7 +206,8 @@ methods:
     syntax:
       content: >-
         function acceptNextSession(topicName: string, subscriptionName: string,
-        options?: ServiceBusSessionReceiverOptions)
+        options?: ServiceBusSessionReceiverOptions):
+        Promise<ServiceBusSessionReceiver>
       parameters:
         - id: topicName
           type: string
@@ -222,10 +223,10 @@ methods:
             Options include receiveMode(defaulted to peekLock), options to
             create session receiver.
       return:
+        description: 'A receiver that can be used to receive, peek and settle messages.'
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusSessionReceiver"
           />&gt;
-        description: 'A receiver that can be used to receive, peek and settle messages.'
   - name: 'acceptSession(string, string, ServiceBusSessionReceiverOptions)'
     uid: '@azure/service-bus.ServiceBusClient.acceptSession'
     package: '@azure/service-bus'
@@ -259,7 +260,7 @@ methods:
     syntax:
       content: >-
         function acceptSession(queueName: string, sessionId: string, options?:
-        ServiceBusSessionReceiverOptions)
+        ServiceBusSessionReceiverOptions): Promise<ServiceBusSessionReceiver>
       parameters:
         - id: queueName
           type: string
@@ -273,10 +274,10 @@ methods:
             Options include receiveMode(defaulted to peekLock), options to
             create session receiver.
       return:
+        description: 'A receiver that can be used to receive, peek and settle messages.'
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusSessionReceiver"
           />&gt;
-        description: 'A receiver that can be used to receive, peek and settle messages.'
   - name: 'acceptSession(string, string, string, ServiceBusSessionReceiverOptions)'
     uid: '@azure/service-bus.ServiceBusClient.acceptSession_1'
     package: '@azure/service-bus'
@@ -310,7 +311,8 @@ methods:
     syntax:
       content: >-
         function acceptSession(topicName: string, subscriptionName: string,
-        sessionId: string, options?: ServiceBusSessionReceiverOptions)
+        sessionId: string, options?: ServiceBusSessionReceiverOptions):
+        Promise<ServiceBusSessionReceiver>
       parameters:
         - id: topicName
           type: string
@@ -329,10 +331,10 @@ methods:
             Options include receiveMode(defaulted to peekLock), options to
             create session receiver.
       return:
+        description: 'A receiver that can be used to receive, peek and settle messages.'
         type: >-
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusSessionReceiver"
           />&gt;
-        description: 'A receiver that can be used to receive, peek and settle messages.'
   - name: close()
     uid: '@azure/service-bus.ServiceBusClient.close'
     package: '@azure/service-bus'
@@ -347,10 +349,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function close()
+      content: 'function close(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: 'createReceiver(string, ServiceBusReceiverOptions)'
     uid: '@azure/service-bus.ServiceBusClient.createReceiver'
     package: '@azure/service-bus'
@@ -403,7 +405,7 @@ methods:
     syntax:
       content: >-
         function createReceiver(queueName: string, options?:
-        ServiceBusReceiverOptions)
+        ServiceBusReceiverOptions): ServiceBusReceiver
       parameters:
         - id: queueName
           type: string
@@ -412,8 +414,8 @@ methods:
           type: <xref uid="@azure/service-bus.ServiceBusReceiverOptions" />
           description: 'Options to pass the receiveMode, defaulted to peekLock.'
       return:
-        type: <xref uid="@azure/service-bus.ServiceBusReceiver" />
         description: 'A receiver that can be used to receive, peek and settle messages.'
+        type: <xref uid="@azure/service-bus.ServiceBusReceiver" />
   - name: 'createReceiver(string, string, ServiceBusReceiverOptions)'
     uid: '@azure/service-bus.ServiceBusClient.createReceiver_1'
     package: '@azure/service-bus'
@@ -467,7 +469,7 @@ methods:
     syntax:
       content: >-
         function createReceiver(topicName: string, subscriptionName: string,
-        options?: ServiceBusReceiverOptions)
+        options?: ServiceBusReceiverOptions): ServiceBusReceiver
       parameters:
         - id: topicName
           type: string
@@ -481,8 +483,8 @@ methods:
           type: <xref uid="@azure/service-bus.ServiceBusReceiverOptions" />
           description: 'Options to pass the receiveMode, defaulted to peekLock.'
       return:
-        type: <xref uid="@azure/service-bus.ServiceBusReceiver" />
         description: 'A receiver that can be used to receive, peek and settle messages.'
+        type: <xref uid="@azure/service-bus.ServiceBusReceiver" />
   - name: createSender(string)
     uid: '@azure/service-bus.ServiceBusClient.createSender'
     package: '@azure/service-bus'
@@ -498,12 +500,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createSender(queueOrTopicName: string)'
+      content: 'function createSender(queueOrTopicName: string): ServiceBusSender'
       parameters:
         - id: queueOrTopicName
           type: string
           description: |
             The name of a queue or topic to send messages to.
       return:
-        type: <xref uid="@azure/service-bus.ServiceBusSender" />
         description: ''
+        type: <xref uid="@azure/service-bus.ServiceBusSender" />

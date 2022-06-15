@@ -127,19 +127,6 @@ constructors:
           description: |
             Optional. Options to configure the HTTP pipeline.
 properties:
-  - name: accountName
-    uid: '@azure/storage-blob.BlockBlobClient.accountName'
-    package: '@azure/storage-blob'
-    summary: ''
-    fullName: accountName
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'accountName: string'
-      return:
-        type: string
-        description: ''
   - name: containerName
     uid: '@azure/storage-blob.BlockBlobClient.containerName'
     package: '@azure/storage-blob'
@@ -151,8 +138,35 @@ properties:
     syntax:
       content: string containerName
       return:
-        type: string
         description: ''
+        type: string
+  - name: name
+    uid: '@azure/storage-blob.BlockBlobClient.name'
+    package: '@azure/storage-blob'
+    summary: The name of the blob.
+    fullName: name
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: string name
+      return:
+        description: ''
+        type: string
+inheritedProperties:
+  - name: accountName
+    uid: '@azure/storage-blob.BlockBlobClient.accountName'
+    package: '@azure/storage-blob'
+    summary: ''
+    fullName: accountName
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'accountName: string'
+      return:
+        description: ''
+        type: string
   - name: credential
     uid: '@azure/storage-blob.BlockBlobClient.credential'
     package: '@azure/storage-blob'
@@ -170,23 +184,10 @@ properties:
         credential: StorageSharedKeyCredential | AnonymousCredential |
         TokenCredential
       return:
+        description: ''
         type: >-
           <xref uid="@azure/storage-blob.StorageSharedKeyCredential" /> | <xref
           uid="@azure/storage-blob.AnonymousCredential" /> | TokenCredential
-        description: ''
-  - name: name
-    uid: '@azure/storage-blob.BlockBlobClient.name'
-    package: '@azure/storage-blob'
-    summary: The name of the blob.
-    fullName: name
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: string name
-      return:
-        type: string
-        description: ''
   - name: url
     uid: '@azure/storage-blob.BlockBlobClient.url'
     package: '@azure/storage-blob'
@@ -198,9 +199,9 @@ properties:
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
-methods:
+        type: string
+inheritedMethods:
   - name: 'abortCopyFromURL(string, BlobAbortCopyFromURLOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.abortCopyFromURL'
     package: '@azure/storage-blob'
@@ -209,13 +210,17 @@ methods:
       destination blob with zero
 
       length and full metadata. Version 2012-02-12 and newer.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/abort-copy-blob
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function abortCopyFromURL(copyId: string, options?:
-        BlobAbortCopyFromURLOptions)
+        BlobAbortCopyFromURLOptions): Promise<BlobAbortCopyFromURLResponse>
       parameters:
         - id: copyId
           type: string
@@ -225,10 +230,10 @@ methods:
           description: |
             Optional options to the Blob Abort Copy From URL operation.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.BlobAbortCopyFromURLResponse" />&gt;
-        description: ''
   - name: 'beginCopyFromURL(string, BlobBeginCopyFromURLOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.beginCopyFromURL'
     package: '@azure/storage-blob'
@@ -263,13 +268,98 @@ methods:
       Blob
 
       operation to copy from another storage account.
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/copy-blob
+
+
+      Example using automatic polling:
+
+
+      ```js
+
+      const copyPoller = await blobClient.beginCopyFromURL('url');
+
+      const result = await copyPoller.pollUntilDone();
+
+      ```
+
+
+      Example using manual polling:
+
+
+      ```js
+
+      const copyPoller = await blobClient.beginCopyFromURL('url');
+
+      while (!poller.isDone()) {
+         await poller.poll();
+      }
+
+      const result = copyPoller.getResult();
+
+      ```
+
+
+      Example using progress updates:
+
+
+      ```js
+
+      const copyPoller = await blobClient.beginCopyFromURL('url', {
+        onProgress(state) {
+          console.log(`Progress: ${state.copyProgress}`);
+        }
+      });
+
+      const result = await copyPoller.pollUntilDone();
+
+      ```
+
+
+      Example using a changing polling interval (default 15 seconds):
+
+
+      ```js
+
+      const copyPoller = await blobClient.beginCopyFromURL('url', {
+        intervalInMs: 1000 // poll blob every 1 second for copy progress
+      });
+
+      const result = await copyPoller.pollUntilDone();
+
+      ```
+
+
+      Example using copy cancellation:
+
+
+      ```js
+
+      const copyPoller = await blobClient.beginCopyFromURL('url');
+
+      // cancel operation after starting it.
+
+      try {
+        await copyPoller.cancelOperation();
+        // calls to get the result now throw PollerCancelledError
+        await copyPoller.getResult();
+      } catch (err) {
+        if (err.name === 'PollerCancelledError') {
+          console.log('The copy was cancelled.');
+        }
+      }
+
+      ```
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginCopyFromURL(copySource: string, options?:
-        BlobBeginCopyFromURLOptions)
+        BlobBeginCopyFromURLOptions):
+        Promise<PollerLike<PollOperationState<BlobBeginCopyFromURLResponse>,
+        BlobBeginCopyFromURLResponse>>
       parameters:
         - id: copySource
           type: string
@@ -279,66 +369,37 @@ methods:
           description: |
             Optional options to the Blob Start Copy From URL operation.
       return:
+        description: ''
         type: >-
           Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
           uid="@azure/storage-blob.BlobBeginCopyFromURLResponse" />&gt;, <xref
           uid="@azure/storage-blob.BlobBeginCopyFromURLResponse" />&gt;&gt;
-        description: ''
-  - name: 'commitBlockList(string[], BlockBlobCommitBlockListOptions)'
-    uid: '@azure/storage-blob.BlockBlobClient.commitBlockList'
+  - name: createSnapshot(BlobCreateSnapshotOptions)
+    uid: '@azure/storage-blob.BlockBlobClient.createSnapshot'
     package: '@azure/storage-blob'
     summary: >-
-      Writes a blob by specifying the list of block IDs that make up the blob.
+      Creates a read-only snapshot of a blob.
 
-      In order to be written as part of a blob, a block must have been
-      successfully written
 
-      to the server in a prior <xref:stageBlock> operation. You can call
-      <xref:commitBlockList> to
-
-      update a blob by uploading only those blocks that have changed, then
-      committing the new and existing
-
-      blocks together. Any blocks not specified in the block list and
-      permanently deleted.
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/snapshot-blob
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function commitBlockList(blocks: string[], options?:
-        BlockBlobCommitBlockListOptions)
-      parameters:
-        - id: blocks
-          type: 'string[]'
-          description: Array of 64-byte value that is base64-encoded
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlockBlobCommitBlockListOptions" />
-          description: Options to the Block Blob Commit Block List operation.
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-blob.BlockBlobCommitBlockListResponse" />&gt;
-        description: Response data for the Block Blob Commit Block List operation.
-  - name: createSnapshot(BlobCreateSnapshotOptions)
-    uid: '@azure/storage-blob.BlockBlobClient.createSnapshot'
-    package: '@azure/storage-blob'
-    summary: Creates a read-only snapshot of a blob.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function createSnapshot(options?: BlobCreateSnapshotOptions)'
+        function createSnapshot(options?: BlobCreateSnapshotOptions):
+        Promise<BlobCreateSnapshotResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.BlobCreateSnapshotOptions" />
           description: |
             Optional options to the Blob Create Snapshot operation.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobCreateSnapshotResponse"
           />&gt;
-        description: ''
   - name: delete(BlobDeleteOptions)
     uid: '@azure/storage-blob.BlockBlobClient.delete'
     package: '@azure/storage-blob'
@@ -352,19 +413,24 @@ methods:
       all of its snapshots. You can delete both at the same time with the Delete
 
       Blob operation.
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-blob
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function delete(options?: BlobDeleteOptions)'
+      content: >-
+        function delete(options?: BlobDeleteOptions):
+        Promise<BlobDeleteResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.BlobDeleteOptions" />
           description: |
             Optional options to Blob Delete operation.
       return:
-        type: Promise&lt;<xref uid="@azure/storage-blob.BlobDeleteResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/storage-blob.BlobDeleteResponse" />&gt;
   - name: deleteIfExists(BlobDeleteOptions)
     uid: '@azure/storage-blob.BlockBlobClient.deleteIfExists'
     package: '@azure/storage-blob'
@@ -378,21 +444,26 @@ methods:
       all of its snapshots. You can delete both at the same time with the Delete
 
       Blob operation.
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-blob
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function deleteIfExists(options?: BlobDeleteOptions)'
+      content: >-
+        function deleteIfExists(options?: BlobDeleteOptions):
+        Promise<BlobDeleteIfExistsResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.BlobDeleteOptions" />
           description: |
             Optional options to Blob Delete operation.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobDeleteIfExistsResponse"
           />&gt;
-        description: ''
   - name: deleteImmutabilityPolicy(BlobDeleteImmutabilityPolicyOptions)
     uid: '@azure/storage-blob.BlockBlobClient.deleteImmutabilityPolicy'
     package: '@azure/storage-blob'
@@ -403,7 +474,8 @@ methods:
     syntax:
       content: >-
         function deleteImmutabilityPolicy(options?:
-        BlobDeleteImmutabilityPolicyOptions)
+        BlobDeleteImmutabilityPolicyOptions):
+        Promise<BlobDeleteImmutabilityPolicyResponse>
       parameters:
         - id: options
           type: >-
@@ -412,14 +484,14 @@ methods:
           description: |
             Optional options to delete immutability policy on the blob.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.BlobDeleteImmutabilityPolicyResponse" />&gt;
-        description: ''
   - name: 'download(number, number, BlobDownloadOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.download'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       Reads or downloads a blob from the system, including its metadata and
       properties.
 
@@ -428,13 +500,17 @@ methods:
       * In Node.js, data returns in a Readable stream readableStreamBody
 
       * In browsers, data returns in a promise blobBody
+
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function download(offset?: number, count?: number, options?:
-        BlobDownloadOptions)
+        BlobDownloadOptions): Promise<BlobDownloadResponseParsed>
       parameters:
         - id: offset
           type: number
@@ -526,10 +602,10 @@ methods:
 
             ```
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobDownloadResponseParsed"
           />&gt;
-        description: ''
   - name: 'downloadToBuffer(Buffer, number, number, BlobDownloadToBufferOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.downloadToBuffer_1'
     package: '@azure/storage-blob'
@@ -548,14 +624,14 @@ methods:
       gigabytes on 64-bit systems due to limitations of Node.js/V8. For blobs
       larger than this size,
 
-      consider <xref:downloadToFile>.
+      consider <xref:@azure/storage-blob.AppendBlobClient.downloadToFile>.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function downloadToBuffer(buffer: Buffer, offset?: number, count?:
-        number, options?: BlobDownloadToBufferOptions)
+        number, options?: BlobDownloadToBufferOptions): Promise<Buffer>
       parameters:
         - id: buffer
           type: Buffer
@@ -573,8 +649,8 @@ methods:
           description: |
             BlobDownloadToBufferOptions
       return:
-        type: Promise&lt;Buffer&gt;
         description: ''
+        type: Promise&lt;Buffer&gt;
   - name: 'downloadToBuffer(number, number, BlobDownloadToBufferOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.downloadToBuffer'
     package: '@azure/storage-blob'
@@ -593,14 +669,14 @@ methods:
       gigabytes on 64-bit systems due to limitations of Node.js/V8. For blobs
       larger than this size,
 
-      consider <xref:downloadToFile>.
+      consider <xref:@azure/storage-blob.AppendBlobClient.downloadToFile>.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function downloadToBuffer(offset?: number, count?: number, options?:
-        BlobDownloadToBufferOptions)
+        BlobDownloadToBufferOptions): Promise<Buffer>
       parameters:
         - id: offset
           type: number
@@ -615,8 +691,8 @@ methods:
           description: |
             BlobDownloadToBufferOptions
       return:
-        type: Promise&lt;Buffer&gt;
         description: ''
+        type: Promise&lt;Buffer&gt;
   - name: 'downloadToFile(string, number, number, BlobDownloadOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.downloadToFile'
     package: '@azure/storage-blob'
@@ -635,7 +711,8 @@ methods:
     syntax:
       content: >-
         function downloadToFile(filePath: string, offset?: number, count?:
-        number, options?: BlobDownloadOptions)
+        number, options?: BlobDownloadOptions):
+        Promise<BlobDownloadResponseParsed>
       parameters:
         - id: filePath
           type: string
@@ -652,14 +729,14 @@ methods:
           type: <xref uid="@azure/storage-blob.BlobDownloadOptions" />
           description: Options to Blob download options.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-blob.BlobDownloadResponseParsed"
-          />&gt;
         description: |-
           The response data for blob download operation,
                                                           but with readableStreamBody set to undefined since its
                                                           content is already read and written into a local file
                                                           at the specified path.
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.BlobDownloadResponseParsed"
+          />&gt;
   - name: exists(BlobExistsOptions)
     uid: '@azure/storage-blob.BlockBlobClient.exists'
     package: '@azure/storage-blob'
@@ -678,19 +755,19 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function exists(options?: BlobExistsOptions)'
+      content: 'function exists(options?: BlobExistsOptions): Promise<boolean>'
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.BlobExistsOptions" />
           description: |
             options to Exists operation.
       return:
-        type: Promise&lt;boolean&gt;
         description: ''
+        type: Promise&lt;boolean&gt;
   - name: generateSasUrl(BlobGenerateSasUrlOptions)
     uid: '@azure/storage-blob.BlockBlobClient.generateSasUrl'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       Only available for BlobClient constructed with a shared key credential.
 
       Generates a Blob Service Shared Access Signature (SAS) URI based on the
@@ -698,20 +775,27 @@ methods:
 
       and parameters passed in. The SAS is signed by the shared key credential
       of the client.
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function generateSasUrl(options: BlobGenerateSasUrlOptions)'
+      content: >-
+        function generateSasUrl(options: BlobGenerateSasUrlOptions):
+        Promise<string>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.BlobGenerateSasUrlOptions" />
           description: Optional parameters.
       return:
-        type: Promise&lt;string&gt;
         description: >-
           The SAS URI consisting of the URI to the resource represented by this
           client, followed by the generated SAS token.
+        type: Promise&lt;string&gt;
   - name: getAppendBlobClient()
     uid: '@azure/storage-blob.BlockBlobClient.getAppendBlobClient'
     package: '@azure/storage-blob'
@@ -720,26 +804,28 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getAppendBlobClient()
+      content: 'function getAppendBlobClient(): AppendBlobClient'
       return:
-        type: <xref uid="@azure/storage-blob.AppendBlobClient" />
         description: ''
+        type: <xref uid="@azure/storage-blob.AppendBlobClient" />
   - name: getBlobLeaseClient(string)
     uid: '@azure/storage-blob.BlockBlobClient.getBlobLeaseClient'
     package: '@azure/storage-blob'
-    summary: 'Get a <xref:BlobLeaseClient> that manages leases on the blob.'
+    summary: >-
+      Get a <xref:@azure/storage-blob.AppendBlobClient.getBlobLeaseClient> that
+      manages leases on the blob.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getBlobLeaseClient(proposeLeaseId?: string)'
+      content: 'function getBlobLeaseClient(proposeLeaseId?: string): BlobLeaseClient'
       parameters:
         - id: proposeLeaseId
           type: string
           description: Initial proposed lease Id.
       return:
-        type: <xref uid="@azure/storage-blob.BlobLeaseClient" />
         description: A new BlobLeaseClient object for managing leases on the blob.
+        type: <xref uid="@azure/storage-blob.BlobLeaseClient" />
   - name: getBlockBlobClient()
     uid: '@azure/storage-blob.BlockBlobClient.getBlockBlobClient'
     package: '@azure/storage-blob'
@@ -748,23 +834,424 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getBlockBlobClient()
+      content: 'function getBlockBlobClient(): BlockBlobClient'
       return:
-        type: <xref uid="@azure/storage-blob.BlockBlobClient" />
         description: ''
+        type: <xref uid="@azure/storage-blob.BlockBlobClient" />
+  - name: getPageBlobClient()
+    uid: '@azure/storage-blob.BlockBlobClient.getPageBlobClient'
+    package: '@azure/storage-blob'
+    summary: Creates a PageBlobClient object.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getPageBlobClient(): PageBlobClient'
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-blob.PageBlobClient" />
+  - name: getProperties(BlobGetPropertiesOptions)
+    uid: '@azure/storage-blob.BlockBlobClient.getProperties'
+    package: '@azure/storage-blob'
+    summary: >-
+      Returns all user-defined metadata, standard HTTP properties, and system
+      properties
+
+      for the blob. It does not return the content of the blob.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob-properties
+
+
+      WARNING: The `metadata` object returned in the response will have its keys
+      in lowercase, even if
+
+      they originally contained uppercase characters. This differs from the
+      metadata keys returned by
+
+      the methods of
+      <xref:@azure/storage-blob.BlobServiceClient.getContainerClient> that list
+      blobs using the `includeMetadata` option, which
+
+      will retain their original casing.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getProperties(options?: BlobGetPropertiesOptions):
+        Promise<BlobGetPropertiesResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobGetPropertiesOptions" />
+          description: |
+            Optional options to Get Properties operation.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.BlobGetPropertiesResponse"
+          />&gt;
+  - name: getTags(BlobGetTagsOptions)
+    uid: '@azure/storage-blob.BlockBlobClient.getTags'
+    package: '@azure/storage-blob'
+    summary: Gets the tags associated with the underlying blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getTags(options?: BlobGetTagsOptions):
+        Promise<BlobGetTagsResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobGetTagsOptions" />
+          description: |
+            -
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/storage-blob.BlobGetTagsResponse" />&gt;
+  - name: >-
+      setAccessTier(BlockBlobTier | PremiumPageBlobTier | string,
+      BlobSetTierOptions)
+    uid: '@azure/storage-blob.BlockBlobClient.setAccessTier'
+    package: '@azure/storage-blob'
+    summary: >-
+      Sets the tier on a blob. The operation is allowed on a page blob in a
+      premium
+
+      storage account and on a block blob in a blob storage account (locally
+      redundant
+
+      storage only). A premium page blob's tier determines the allowed size,
+      IOPS,
+
+      and bandwidth of the blob. A block blob's tier determines Hot/Cool/Archive
+
+      storage type. This operation does not update the blob's ETag.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-tier
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setAccessTier(tier: BlockBlobTier | PremiumPageBlobTier |
+        string, options?: BlobSetTierOptions): Promise<BlobSetTierResponse>
+      parameters:
+        - id: tier
+          type: >-
+            <xref uid="@azure/storage-blob.BlockBlobTier" /> | <xref
+            uid="@azure/storage-blob.PremiumPageBlobTier" /> | string
+          description: >-
+            The tier to be set on the blob. Valid values are Hot, Cool, or
+            Archive.
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobSetTierOptions" />
+          description: |
+            Optional options to the Blob Set Tier operation.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/storage-blob.BlobSetTierResponse" />&gt;
+  - name: 'setHTTPHeaders(BlobHTTPHeaders, BlobSetHTTPHeadersOptions)'
+    uid: '@azure/storage-blob.BlockBlobClient.setHTTPHeaders'
+    package: '@azure/storage-blob'
+    summary: >-
+      Sets system properties on the blob.
+
+      If no value provided, or no value provided for the specified blob HTTP
+      headers,
+
+      these blob HTTP headers without a value will be cleared.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-properties
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setHTTPHeaders(blobHTTPHeaders?: BlobHTTPHeaders, options?:
+        BlobSetHTTPHeadersOptions): Promise<BlobSetHTTPHeadersResponse>
+      parameters:
+        - id: blobHTTPHeaders
+          type: <xref uid="@azure/storage-blob.BlobHTTPHeaders" />
+          description: |-
+            If no value provided, or no value provided for
+                                                              the specified blob HTTP headers, these blob HTTP
+                                                              headers without a value will be cleared.
+                                                              A common header to set is `blobContentType`
+                                                              enabling the browser to provide functionality
+                                                              based on file type.
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobSetHTTPHeadersOptions" />
+          description: |
+            Optional options to Blob Set HTTP Headers operation.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.BlobSetHTTPHeadersResponse"
+          />&gt;
+  - name: >-
+      setImmutabilityPolicy(BlobImmutabilityPolicy,
+      BlobSetImmutabilityPolicyOptions)
+    uid: '@azure/storage-blob.BlockBlobClient.setImmutabilityPolicy'
+    package: '@azure/storage-blob'
+    summary: Set immutablility policy on the blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setImmutabilityPolicy(immutabilityPolicy:
+        BlobImmutabilityPolicy, options?: BlobSetImmutabilityPolicyOptions):
+        Promise<BlobSetImmutabilityPolicyResponse>
+      parameters:
+        - id: immutabilityPolicy
+          type: <xref uid="@azure/storage-blob.BlobImmutabilityPolicy" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobSetImmutabilityPolicyOptions" />
+          description: |
+            Optional options to set immutability policy on the blob.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.BlobSetImmutabilityPolicyResponse" />&gt;
+  - name: 'setLegalHold(boolean, BlobSetLegalHoldOptions)'
+    uid: '@azure/storage-blob.BlockBlobClient.setLegalHold'
+    package: '@azure/storage-blob'
+    summary: Set legal hold on the blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setLegalHold(legalHoldEnabled: boolean, options?:
+        BlobSetLegalHoldOptions): Promise<BlobSetLegalHoldResponse>
+      parameters:
+        - id: legalHoldEnabled
+          type: boolean
+          description: ''
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobSetLegalHoldOptions" />
+          description: |
+            Optional options to set legal hold on the blob.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.BlobSetLegalHoldResponse"
+          />&gt;
+  - name: 'setMetadata(Metadata, BlobSetMetadataOptions)'
+    uid: '@azure/storage-blob.BlockBlobClient.setMetadata'
+    package: '@azure/storage-blob'
+    summary: >-
+      Sets user-defined metadata for the specified blob as one or more
+      name-value pairs.
+
+      If no option provided, or no metadata defined in the parameter, the blob
+
+      metadata will be removed.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-metadata
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setMetadata(metadata?: Metadata, options?:
+        BlobSetMetadataOptions): Promise<BlobSetMetadataResponse>
+      parameters:
+        - id: metadata
+          type: <xref uid="@azure/storage-blob.Metadata" />
+          description: |-
+            Replace existing metadata with this value.
+                                          If no value provided the existing metadata will be removed.
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobSetMetadataOptions" />
+          description: |
+            Optional options to Set Metadata operation.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.BlobSetMetadataResponse"
+          />&gt;
+  - name: 'setTags(Tags, BlobSetTagsOptions)'
+    uid: '@azure/storage-blob.BlockBlobClient.setTags'
+    package: '@azure/storage-blob'
+    summary: >-
+      Sets tags on the underlying blob.
+
+      A blob can have up to 10 tags. Tag keys must be between 1 and 128
+      characters.  Tag values must be between 0 and 256 characters.
+
+      Valid tag key and value characters include lower and upper case letters,
+      digits (0-9),
+
+      space (' '), plus ('+'), minus ('-'), period ('.'), foward slash ('/'),
+      colon (':'), equals ('='), and underscore ('_').
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function setTags(tags: Tags, options?: BlobSetTagsOptions):
+        Promise<BlobSetTagsResponse>
+      parameters:
+        - id: tags
+          type: <xref uid="@azure/storage-blob.Tags" />
+          description: '-'
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobSetTagsOptions" />
+          description: |
+            -
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/storage-blob.BlobSetTagsResponse" />&gt;
+  - name: 'syncCopyFromURL(string, BlobSyncCopyFromURLOptions)'
+    uid: '@azure/storage-blob.BlockBlobClient.syncCopyFromURL'
+    package: '@azure/storage-blob'
+    summary: >-
+      The synchronous Copy From URL operation copies a blob or an internet
+      resource to a new blob. It will not
+
+      return a response until the copy is complete.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/copy-blob-from-url
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function syncCopyFromURL(copySource: string, options?:
+        BlobSyncCopyFromURLOptions): Promise<BlobCopyFromURLResponse>
+      parameters:
+        - id: copySource
+          type: string
+          description: >-
+            The source URL to copy from, Shared Access Signature(SAS) maybe
+            needed for authentication
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobSyncCopyFromURLOptions" />
+          description: |
+            -
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.BlobCopyFromURLResponse"
+          />&gt;
+  - name: undelete(BlobUndeleteOptions)
+    uid: '@azure/storage-blob.BlockBlobClient.undelete'
+    package: '@azure/storage-blob'
+    summary: >-
+      Restores the contents and metadata of soft deleted blob and any associated
+
+      soft deleted snapshots. Undelete Blob is supported only on version
+      2017-07-29
+
+      or later.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/undelete-blob
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function undelete(options?: BlobUndeleteOptions):
+        Promise<BlobUndeleteResponse>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlobUndeleteOptions" />
+          description: |
+            Optional options to Blob Undelete operation.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/storage-blob.BlobUndeleteResponse" />&gt;
+  - name: withVersion(string)
+    uid: '@azure/storage-blob.BlockBlobClient.withVersion'
+    package: '@azure/storage-blob'
+    summary: |-
+      Creates a new BlobClient object pointing to a version of this blob.
+      Provide "" will remove the versionId and return a Client to the base blob.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function withVersion(versionId: string): BlobClient'
+      parameters:
+        - id: versionId
+          type: string
+          description: The versionId.
+      return:
+        description: A new BlobClient object pointing to the version of this blob.
+        type: <xref uid="@azure/storage-blob.BlobClient" />
+methods:
+  - name: 'commitBlockList(string[], BlockBlobCommitBlockListOptions)'
+    uid: '@azure/storage-blob.BlockBlobClient.commitBlockList'
+    package: '@azure/storage-blob'
+    summary: >-
+      Writes a blob by specifying the list of block IDs that make up the blob.
+
+      In order to be written as part of a blob, a block must have been
+      successfully written
+
+      to the server in a prior
+      <xref:@azure/storage-blob.BlockBlobClient.stageBlock> operation. You can
+      call <xref:@azure/storage-blob.BlockBlobClient.commitBlockList> to
+
+      update a blob by uploading only those blocks that have changed, then
+      committing the new and existing
+
+      blocks together. Any blocks not specified in the block list and
+      permanently deleted.
+
+
+      See https://docs.microsoft.com/rest/api/storageservices/put-block-list
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function commitBlockList(blocks: string[], options?:
+        BlockBlobCommitBlockListOptions):
+        Promise<BlockBlobCommitBlockListResponse>
+      parameters:
+        - id: blocks
+          type: 'string[]'
+          description: Array of 64-byte value that is base64-encoded
+        - id: options
+          type: <xref uid="@azure/storage-blob.BlockBlobCommitBlockListOptions" />
+          description: Options to the Block Blob Commit Block List operation.
+      return:
+        description: Response data for the Block Blob Commit Block List operation.
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-blob.BlockBlobCommitBlockListResponse" />&gt;
   - name: 'getBlockList(BlockListType, BlockBlobGetBlockListOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.getBlockList'
     package: '@azure/storage-blob'
     summary: |-
       Returns the list of blocks that have been uploaded as part of a block blob
       using the specified block list filter.
+
+      See https://docs.microsoft.com/rest/api/storageservices/get-block-list
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getBlockList(listType: BlockListType, options?:
-        BlockBlobGetBlockListOptions)
+        BlockBlobGetBlockListOptions): Promise<BlockBlobGetBlockListResponse>
       parameters:
         - id: listType
           type: <xref uid="@azure/storage-blob.BlockListType" />
@@ -775,62 +1262,10 @@ methods:
           type: <xref uid="@azure/storage-blob.BlockBlobGetBlockListOptions" />
           description: Options to the Block Blob Get Block List operation.
       return:
+        description: Response data for the Block Blob Get Block List operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.BlockBlobGetBlockListResponse" />&gt;
-        description: Response data for the Block Blob Get Block List operation.
-  - name: getPageBlobClient()
-    uid: '@azure/storage-blob.BlockBlobClient.getPageBlobClient'
-    package: '@azure/storage-blob'
-    summary: Creates a PageBlobClient object.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function getPageBlobClient()
-      return:
-        type: <xref uid="@azure/storage-blob.PageBlobClient" />
-        description: ''
-  - name: getProperties(BlobGetPropertiesOptions)
-    uid: '@azure/storage-blob.BlockBlobClient.getProperties'
-    package: '@azure/storage-blob'
-    summary: >-
-      Returns all user-defined metadata, standard HTTP properties, and system
-      properties
-
-      for the blob. It does not return the content of the blob.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function getProperties(options?: BlobGetPropertiesOptions)'
-      parameters:
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobGetPropertiesOptions" />
-          description: |
-            Optional options to Get Properties operation.
-      return:
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-blob.BlobGetPropertiesResponse"
-          />&gt;
-        description: ''
-  - name: getTags(BlobGetTagsOptions)
-    uid: '@azure/storage-blob.BlockBlobClient.getTags'
-    package: '@azure/storage-blob'
-    summary: Gets the tags associated with the underlying blob.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function getTags(options?: BlobGetTagsOptions)'
-      parameters:
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobGetTagsOptions" />
-          description: |
-            -
-      return:
-        type: Promise&lt;<xref uid="@azure/storage-blob.BlobGetTagsResponse" />&gt;
-        description: ''
   - name: 'query(string, BlockBlobQueryOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.query'
     package: '@azure/storage-blob'
@@ -874,7 +1309,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function query(query: string, options?: BlockBlobQueryOptions)'
+      content: >-
+        function query(query: string, options?: BlockBlobQueryOptions):
+        Promise<BlobDownloadResponseModel>
       parameters:
         - id: query
           type: string
@@ -884,211 +1321,26 @@ methods:
           description: |
             -
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobDownloadResponseModel"
           />&gt;
-        description: ''
-  - name: >-
-      setAccessTier(BlockBlobTier | PremiumPageBlobTier | string,
-      BlobSetTierOptions)
-    uid: '@azure/storage-blob.BlockBlobClient.setAccessTier'
-    package: '@azure/storage-blob'
-    summary: >-
-      Sets the tier on a blob. The operation is allowed on a page blob in a
-      premium
-
-      storage account and on a block blob in a blob storage account (locally
-      redundant
-
-      storage only). A premium page blob's tier determines the allowed size,
-      IOPS,
-
-      and bandwidth of the blob. A block blob's tier determines Hot/Cool/Archive
-
-      storage type. This operation does not update the blob's ETag.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function setAccessTier(tier: BlockBlobTier | PremiumPageBlobTier |
-        string, options?: BlobSetTierOptions)
-      parameters:
-        - id: tier
-          type: >-
-            <xref uid="@azure/storage-blob.BlockBlobTier" /> | <xref
-            uid="@azure/storage-blob.PremiumPageBlobTier" /> | string
-          description: >-
-            The tier to be set on the blob. Valid values are Hot, Cool, or
-            Archive.
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobSetTierOptions" />
-          description: |
-            Optional options to the Blob Set Tier operation.
-      return:
-        type: Promise&lt;<xref uid="@azure/storage-blob.BlobSetTierResponse" />&gt;
-        description: ''
-  - name: 'setHTTPHeaders(BlobHTTPHeaders, BlobSetHTTPHeadersOptions)'
-    uid: '@azure/storage-blob.BlockBlobClient.setHTTPHeaders'
-    package: '@azure/storage-blob'
-    summary: >-
-      Sets system properties on the blob.
-
-      If no value provided, or no value provided for the specified blob HTTP
-      headers,
-
-      these blob HTTP headers without a value will be cleared.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function setHTTPHeaders(blobHTTPHeaders?: BlobHTTPHeaders, options?:
-        BlobSetHTTPHeadersOptions)
-      parameters:
-        - id: blobHTTPHeaders
-          type: <xref uid="@azure/storage-blob.BlobHTTPHeaders" />
-          description: |-
-            If no value provided, or no value provided for
-                                                              the specified blob HTTP headers, these blob HTTP
-                                                              headers without a value will be cleared.
-                                                              A common header to set is `blobContentType`
-                                                              enabling the browser to provide functionality
-                                                              based on file type.
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobSetHTTPHeadersOptions" />
-          description: |
-            Optional options to Blob Set HTTP Headers operation.
-      return:
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-blob.BlobSetHTTPHeadersResponse"
-          />&gt;
-        description: ''
-  - name: >-
-      setImmutabilityPolicy(BlobImmutabilityPolicy,
-      BlobSetImmutabilityPolicyOptions)
-    uid: '@azure/storage-blob.BlockBlobClient.setImmutabilityPolicy'
-    package: '@azure/storage-blob'
-    summary: Set immutablility policy on the blob.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function setImmutabilityPolicy(immutabilityPolicy:
-        BlobImmutabilityPolicy, options?: BlobSetImmutabilityPolicyOptions)
-      parameters:
-        - id: immutabilityPolicy
-          type: <xref uid="@azure/storage-blob.BlobImmutabilityPolicy" />
-          description: ''
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobSetImmutabilityPolicyOptions" />
-          description: |
-            Optional options to set immutability policy on the blob.
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-blob.BlobSetImmutabilityPolicyResponse" />&gt;
-        description: ''
-  - name: 'setLegalHold(boolean, BlobSetLegalHoldOptions)'
-    uid: '@azure/storage-blob.BlockBlobClient.setLegalHold'
-    package: '@azure/storage-blob'
-    summary: Set legal hold on the blob.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function setLegalHold(legalHoldEnabled: boolean, options?:
-        BlobSetLegalHoldOptions)
-      parameters:
-        - id: legalHoldEnabled
-          type: boolean
-          description: ''
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobSetLegalHoldOptions" />
-          description: |
-            Optional options to set legal hold on the blob.
-      return:
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-blob.BlobSetLegalHoldResponse"
-          />&gt;
-        description: ''
-  - name: 'setMetadata(Metadata, BlobSetMetadataOptions)'
-    uid: '@azure/storage-blob.BlockBlobClient.setMetadata'
-    package: '@azure/storage-blob'
-    summary: >-
-      Sets user-defined metadata for the specified blob as one or more
-      name-value pairs.
-
-      If no option provided, or no metadata defined in the parameter, the blob
-
-      metadata will be removed.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function setMetadata(metadata?: Metadata, options?:
-        BlobSetMetadataOptions)
-      parameters:
-        - id: metadata
-          type: <xref uid="@azure/storage-blob.Metadata" />
-          description: |-
-            Replace existing metadata with this value.
-                                          If no value provided the existing metadata will be removed.
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobSetMetadataOptions" />
-          description: |
-            Optional options to Set Metadata operation.
-      return:
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-blob.BlobSetMetadataResponse"
-          />&gt;
-        description: ''
-  - name: 'setTags(Tags, BlobSetTagsOptions)'
-    uid: '@azure/storage-blob.BlockBlobClient.setTags'
-    package: '@azure/storage-blob'
-    summary: >-
-      Sets tags on the underlying blob.
-
-      A blob can have up to 10 tags. Tag keys must be between 1 and 128
-      characters.  Tag values must be between 0 and 256 characters.
-
-      Valid tag key and value characters include lower and upper case letters,
-      digits (0-9),
-
-      space (' '), plus ('+'), minus ('-'), period ('.'), foward slash ('/'),
-      colon (':'), equals ('='), and underscore ('_').
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function setTags(tags: Tags, options?: BlobSetTagsOptions)'
-      parameters:
-        - id: tags
-          type: <xref uid="@azure/storage-blob.Tags" />
-          description: '-'
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobSetTagsOptions" />
-          description: |
-            -
-      return:
-        type: Promise&lt;<xref uid="@azure/storage-blob.BlobSetTagsResponse" />&gt;
-        description: ''
   - name: 'stageBlock(string, HttpRequestBody, number, BlockBlobStageBlockOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.stageBlock'
     package: '@azure/storage-blob'
     summary: |-
       Uploads the specified block to the block blob's "staging area" to be later
       committed by a call to commitBlockList.
+
+      See https://docs.microsoft.com/rest/api/storageservices/put-block
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function stageBlock(blockId: string, body: HttpRequestBody,
-        contentLength: number, options?: BlockBlobStageBlockOptions)
+        contentLength: number, options?: BlockBlobStageBlockOptions):
+        Promise<BlockBlobStageBlockResponse>
       parameters:
         - id: blockId
           type: string
@@ -1103,10 +1355,10 @@ methods:
           type: <xref uid="@azure/storage-blob.BlockBlobStageBlockOptions" />
           description: Options to the Block Blob Stage Block operation.
       return:
+        description: Response data for the Block Blob Stage Block operation.
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlockBlobStageBlockResponse"
           />&gt;
-        description: Response data for the Block Blob Stage Block operation.
   - name: >-
       stageBlockFromURL(string, string, number, number,
       BlockBlobStageBlockFromURLOptions)
@@ -1119,13 +1371,18 @@ methods:
       of a blob where the contents are read from a URL.
 
       This API is available starting in version 2018-03-28.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/put-block-from-url
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function stageBlockFromURL(blockId: string, sourceURL: string, offset?:
-        number, count?: number, options?: BlockBlobStageBlockFromURLOptions)
+        number, count?: number, options?: BlockBlobStageBlockFromURLOptions):
+        Promise<BlockBlobStageBlockFromURLResponse>
       parameters:
         - id: blockId
           type: string
@@ -1156,40 +1413,10 @@ methods:
           type: <xref uid="@azure/storage-blob.BlockBlobStageBlockFromURLOptions" />
           description: Options to the Block Blob Stage Block From URL operation.
       return:
+        description: Response data for the Block Blob Stage Block From URL operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.BlockBlobStageBlockFromURLResponse" />&gt;
-        description: Response data for the Block Blob Stage Block From URL operation.
-  - name: 'syncCopyFromURL(string, BlobSyncCopyFromURLOptions)'
-    uid: '@azure/storage-blob.BlockBlobClient.syncCopyFromURL'
-    package: '@azure/storage-blob'
-    summary: >-
-      The synchronous Copy From URL operation copies a blob or an internet
-      resource to a new blob. It will not
-
-      return a response until the copy is complete.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function syncCopyFromURL(copySource: string, options?:
-        BlobSyncCopyFromURLOptions)
-      parameters:
-        - id: copySource
-          type: string
-          description: >-
-            The source URL to copy from, Shared Access Signature(SAS) maybe
-            needed for authentication
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobSyncCopyFromURLOptions" />
-          description: |
-            -
-      return:
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-blob.BlobCopyFromURLResponse"
-          />&gt;
-        description: ''
   - name: 'syncUploadFromURL(string, BlockBlobSyncUploadFromURLOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.syncUploadFromURL'
     package: '@azure/storage-blob'
@@ -1206,14 +1433,17 @@ methods:
       the content of the new blob.  To perform partial updates to a block blob’s
       contents using a
 
-      source URL, use <xref:stageBlockFromURL> and <xref:commitBlockList>.
+      source URL, use
+      <xref:@azure/storage-blob.BlockBlobClient.stageBlockFromURL> and
+      <xref:@azure/storage-blob.BlockBlobClient.commitBlockList>.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function syncUploadFromURL(sourceURL: string, options?:
-        BlockBlobSyncUploadFromURLOptions)
+        BlockBlobSyncUploadFromURLOptions):
+        Promise<BlockBlobPutBlobFromUrlResponse>
       parameters:
         - id: sourceURL
           type: string
@@ -1232,37 +1462,14 @@ methods:
           description: |
             Optional parameters.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.BlockBlobPutBlobFromUrlResponse" />&gt;
-        description: ''
-  - name: undelete(BlobUndeleteOptions)
-    uid: '@azure/storage-blob.BlockBlobClient.undelete'
-    package: '@azure/storage-blob'
-    summary: >-
-      Restores the contents and metadata of soft deleted blob and any associated
-
-      soft deleted snapshots. Undelete Blob is supported only on version
-      2017-07-29
-
-      or later.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function undelete(options?: BlobUndeleteOptions)'
-      parameters:
-        - id: options
-          type: <xref uid="@azure/storage-blob.BlobUndeleteOptions" />
-          description: |
-            Optional options to Blob Undelete operation.
-      return:
-        type: Promise&lt;<xref uid="@azure/storage-blob.BlobUndeleteResponse" />&gt;
-        description: ''
   - name: 'upload(HttpRequestBody, number, BlockBlobUploadOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.upload'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       Creates a new block blob, or updates the content of an existing block
       blob.
 
@@ -1274,20 +1481,28 @@ methods:
       overwritten with the new content. To perform a partial update of a block
       blob's,
 
-      use <xref:stageBlock> and <xref:commitBlockList>.
+      use <xref:@azure/storage-blob.BlockBlobClient.stageBlock> and
+      <xref:@azure/storage-blob.BlockBlobClient.commitBlockList>.
 
-      This is a non-parallel uploading method, please use <xref:uploadFile>,
+      This is a non-parallel uploading method, please use
+      <xref:@azure/storage-blob.BlockBlobClient.uploadFile>,
 
-      <xref:uploadStream> or <xref:uploadBrowserData> for better performance
+      <xref:@azure/storage-blob.BlockBlobClient.uploadStream> or
+      <xref:@azure/storage-blob.BlockBlobClient.uploadBrowserData> for better
+      performance
 
       with concurrency uploading.
+
+
+
+      See https://docs.microsoft.com/rest/api/storageservices/put-blob
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function upload(body: HttpRequestBody, contentLength: number, options?:
-        BlockBlobUploadOptions)
+        BlockBlobUploadOptions): Promise<BlockBlobUploadResponse>
       parameters:
         - id: body
           type: HttpRequestBody
@@ -1304,9 +1519,6 @@ methods:
           type: <xref uid="@azure/storage-blob.BlockBlobUploadOptions" />
           description: Options to the Block Blob Upload operation.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-blob.BlockBlobUploadResponse"
-          />&gt;
         description: >-
           Response data for the Block Blob Upload operation.
 
@@ -1322,6 +1534,9 @@ methods:
           content.length);
 
           ```
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-blob.BlockBlobUploadResponse"
+          />&gt;
   - name: >-
       uploadBrowserData(Blob | ArrayBuffer | ArrayBufferView,
       BlockBlobParallelUploadOptions)
@@ -1337,14 +1552,17 @@ methods:
       When buffer length lesser than or equal to 256MB, this method will use 1
       upload call to finish the upload.
 
-      Otherwise, this method will call <xref:stageBlock> to upload blocks, and
-      finally call
+      Otherwise, this method will call
+      <xref:@azure/storage-blob.BlockBlobClient.stageBlock> to upload blocks,
+      and finally call
 
-      <xref:commitBlockList> to commit the block list.
+      <xref:@azure/storage-blob.BlockBlobClient.commitBlockList> to commit the
+      block list.
 
 
-      A common <xref:BlockBlobParallelUploadOptions.blobHTTPHeaders> option to
-      set is
+      A common
+      <xref:@azure/storage-blob.BlockBlobParallelUploadOptions.blobHTTPHeaders>
+      option to set is
 
       `blobContentType`, enabling the browser to provide
 
@@ -1352,11 +1570,12 @@ methods:
     remarks: ''
     isPreview: false
     isDeprecated: true
-    customDeprecatedMessage: 'Use <xref:uploadData> instead.'
+    customDeprecatedMessage: 'Use <xref:@azure/storage-blob.BlockBlobClient.uploadData> instead.'
     syntax:
       content: >-
         function uploadBrowserData(browserData: Blob | ArrayBuffer |
-        ArrayBufferView, options?: BlockBlobParallelUploadOptions)
+        ArrayBufferView, options?: BlockBlobParallelUploadOptions):
+        Promise<BlobUploadCommonResponse>
       parameters:
         - id: browserData
           type: Blob | ArrayBuffer | ArrayBufferView
@@ -1365,10 +1584,10 @@ methods:
           type: <xref uid="@azure/storage-blob.BlockBlobParallelUploadOptions" />
           description: Options to upload browser data.
       return:
+        description: Response data for the Blob Upload operation.
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobUploadCommonResponse"
           />&gt;
-        description: Response data for the Blob Upload operation.
   - name: >-
       uploadData(Buffer | Blob | ArrayBuffer | ArrayBufferView,
       BlockBlobParallelUploadOptions)
@@ -1379,19 +1598,24 @@ methods:
       object to a BlockBlob.
 
       When data length is no more than the specifiled
-      <xref:BlockBlobParallelUploadOptions.maxSingleShotSize> (default is
+      <xref:@azure/storage-blob.BlockBlobParallelUploadOptions.maxSingleShotSize>
+      (default is
 
       <xref:BLOCK_BLOB_MAX_UPLOAD_BLOB_BYTES>), this method will use 1
-      <xref:upload> call to finish the upload.
+      <xref:@azure/storage-blob.BlockBlobClient.upload> call to finish the
+      upload.
 
-      Otherwise, this method will call <xref:stageBlock> to upload blocks, and
-      finally call <xref:commitBlockList>
+      Otherwise, this method will call
+      <xref:@azure/storage-blob.BlockBlobClient.stageBlock> to upload blocks,
+      and finally call
+      <xref:@azure/storage-blob.BlockBlobClient.commitBlockList>
 
       to commit the block list.
 
 
-      A common <xref:BlockBlobParallelUploadOptions.blobHTTPHeaders> option to
-      set is
+      A common
+      <xref:@azure/storage-blob.BlockBlobParallelUploadOptions.blobHTTPHeaders>
+      option to set is
 
       `blobContentType`, enabling the browser to provide
 
@@ -1402,7 +1626,8 @@ methods:
     syntax:
       content: >-
         function uploadData(data: Buffer | Blob | ArrayBuffer | ArrayBufferView,
-        options?: BlockBlobParallelUploadOptions)
+        options?: BlockBlobParallelUploadOptions):
+        Promise<BlobUploadCommonResponse>
       parameters:
         - id: data
           type: Buffer | Blob | ArrayBuffer | ArrayBufferView
@@ -1412,10 +1637,10 @@ methods:
           description: |
             -
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobUploadCommonResponse"
           />&gt;
-        description: ''
   - name: 'uploadFile(string, BlockBlobParallelUploadOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.uploadFile'
     package: '@azure/storage-blob'
@@ -1438,7 +1663,7 @@ methods:
     syntax:
       content: >-
         function uploadFile(filePath: string, options?:
-        BlockBlobParallelUploadOptions)
+        BlockBlobParallelUploadOptions): Promise<BlobUploadCommonResponse>
       parameters:
         - id: filePath
           type: string
@@ -1447,10 +1672,10 @@ methods:
           type: <xref uid="@azure/storage-blob.BlockBlobParallelUploadOptions" />
           description: Options to Upload to Block Blob operation.
       return:
+        description: Response data for the Blob Upload operation.
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobUploadCommonResponse"
           />&gt;
-        description: Response data for the Blob Upload operation.
   - name: 'uploadStream(Readable, number, number, BlockBlobUploadStreamOptions)'
     uid: '@azure/storage-blob.BlockBlobClient.uploadStream'
     package: '@azure/storage-blob'
@@ -1467,7 +1692,8 @@ methods:
     syntax:
       content: >-
         function uploadStream(stream: Readable, bufferSize?: number,
-        maxConcurrency?: number, options?: BlockBlobUploadStreamOptions)
+        maxConcurrency?: number, options?: BlockBlobUploadStreamOptions):
+        Promise<BlobUploadCommonResponse>
       parameters:
         - id: stream
           type: Readable
@@ -1487,10 +1713,10 @@ methods:
           type: <xref uid="@azure/storage-blob.BlockBlobUploadStreamOptions" />
           description: Options to Upload Stream to Block Blob operation.
       return:
+        description: Response data for the Blob Upload operation.
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.BlobUploadCommonResponse"
           />&gt;
-        description: Response data for the Blob Upload operation.
   - name: withSnapshot(string)
     uid: '@azure/storage-blob.BlockBlobClient.withSnapshot'
     package: '@azure/storage-blob'
@@ -1502,32 +1728,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withSnapshot(snapshot: string)'
+      content: 'function withSnapshot(snapshot: string): BlockBlobClient'
       parameters:
         - id: snapshot
           type: string
           description: The snapshot timestamp.
       return:
-        type: <xref uid="@azure/storage-blob.BlockBlobClient" />
         description: >-
           A new BlockBlobClient object identical to the source but with the
           specified snapshot timestamp.
-  - name: withVersion(string)
-    uid: '@azure/storage-blob.BlockBlobClient.withVersion'
-    package: '@azure/storage-blob'
-    summary: |-
-      Creates a new BlobClient object pointing to a version of this blob.
-      Provide "" will remove the versionId and return a Client to the base blob.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function withVersion(versionId: string)'
-      parameters:
-        - id: versionId
-          type: string
-          description: The versionId.
-      return:
-        type: <xref uid="@azure/storage-blob.BlobClient" />
-        description: A new BlobClient object pointing to the version of this blob.
+        type: <xref uid="@azure/storage-blob.BlockBlobClient" />
 extends: <xref uid="@azure/storage-blob.BlobClient" />

@@ -2,7 +2,7 @@
 name: NodeFetchHttpClient
 uid: '@azure/core-http.NodeFetchHttpClient'
 package: '@azure/core-http'
-summary: ''
+summary: An HTTP client that uses `node-fetch`.
 fullName: NodeFetchHttpClient
 remarks: ''
 isPreview: false
@@ -12,12 +12,14 @@ methods:
   - name: 'fetch(CommonRequestInfo, CommonRequestInit)'
     uid: '@azure/core-http.NodeFetchHttpClient.fetch'
     package: '@azure/core-http'
-    summary: ''
+    summary: Uses `node-fetch` to perform the request.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function fetch(input: CommonRequestInfo, init?: CommonRequestInit)'
+      content: >-
+        function fetch(input: CommonRequestInfo, init?: CommonRequestInit):
+        Promise<CommonResponse>
       parameters:
         - id: input
           type: <xref uid="@azure/core-http.CommonRequestInfo" />
@@ -26,54 +28,63 @@ methods:
           type: <xref uid="@azure/core-http.CommonRequestInit" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="@azure/core-http.CommonResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/core-http.CommonResponse" />&gt;
   - name: prepareRequest(WebResourceLike)
     uid: '@azure/core-http.NodeFetchHttpClient.prepareRequest'
     package: '@azure/core-http'
-    summary: ''
+    summary: Prepares a request based on the provided web resource.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function prepareRequest(httpRequest: WebResourceLike)'
+      content: >-
+        function prepareRequest(httpRequest: WebResourceLike):
+        Promise<Partial<RequestInit>>
       parameters:
         - id: httpRequest
           type: <xref uid="@azure/core-http.WebResourceLike" />
           description: ''
       return:
-        type: Promise&lt;Partial&lt;RequestInit&gt;&gt;
         description: ''
+        type: Promise&lt;Partial&lt;RequestInit&gt;&gt;
   - name: processRequest(HttpOperationResponse)
     uid: '@azure/core-http.NodeFetchHttpClient.processRequest'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Process an HTTP response. Handles persisting a cookie for subsequent
+      requests if the response has a "Set-Cookie" header.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function processRequest(operationResponse: HttpOperationResponse)'
+      content: >-
+        function processRequest(operationResponse: HttpOperationResponse):
+        Promise<void>
       parameters:
         - id: operationResponse
           type: <xref uid="@azure/core-http.HttpOperationResponse" />
           description: ''
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: sendRequest(WebResourceLike)
     uid: '@azure/core-http.NodeFetchHttpClient.sendRequest'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Provides minimum viable error handling and the logic that executes the
+      abstract methods.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function sendRequest(httpRequest: WebResourceLike)'
+      content: >-
+        function sendRequest(httpRequest: WebResourceLike):
+        Promise<HttpOperationResponse>
       parameters:
         - id: httpRequest
           type: <xref uid="@azure/core-http.WebResourceLike" />
-          description: ''
+          description: Object representing the outgoing HTTP request.
       return:
+        description: An object representing the incoming HTTP response.
         type: Promise&lt;<xref uid="@azure/core-http.HttpOperationResponse" />&gt;
-        description: ''
-extends: <xref uid="@azure/core-http.FetchHttpClient" />

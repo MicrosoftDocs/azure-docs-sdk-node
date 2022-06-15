@@ -5,10 +5,8 @@ summary: ''
 type: package
 enums:
   - '@azure/identity.AzureAuthorityHosts'
-  - '@azure/identity.RegionalAuthority'
 classes:
   - '@azure/identity.AggregateAuthenticationError'
-  - '@azure/identity.ApplicationCredential'
   - '@azure/identity.AuthenticationError'
   - '@azure/identity.AuthenticationRequiredError'
   - '@azure/identity.AuthorizationCodeCredential'
@@ -27,32 +25,39 @@ classes:
   - '@azure/identity.UsernamePasswordCredential'
   - '@azure/identity.VisualStudioCodeCredential'
 interfaces:
-  - '@azure/identity.ApplicationCredentialOptions'
   - '@azure/identity.AuthenticationRecord'
+  - '@azure/identity.AuthenticationRequiredErrorOptions'
   - '@azure/identity.AzureCliCredentialOptions'
   - '@azure/identity.AzurePowerShellCredentialOptions'
   - '@azure/identity.ClientCertificateCredentialOptions'
+  - '@azure/identity.ClientCertificatePEMCertificate'
+  - '@azure/identity.ClientCertificatePEMCertificatePath'
   - '@azure/identity.ClientSecretCredentialOptions'
   - '@azure/identity.CredentialPersistenceOptions'
+  - '@azure/identity.DefaultAzureCredentialClientIdOptions'
   - '@azure/identity.DefaultAzureCredentialOptions'
+  - '@azure/identity.DefaultAzureCredentialResourceIdOptions'
   - '@azure/identity.DeviceCodeCredentialOptions'
   - '@azure/identity.DeviceCodeInfo'
   - '@azure/identity.EnvironmentCredentialOptions'
   - '@azure/identity.ErrorResponse'
-  - '@azure/identity.InteractiveBrowserCredentialBrowserOptions'
-  - '@azure/identity.InteractiveBrowserCredentialOptions'
+  - '@azure/identity.InteractiveBrowserCredentialInBrowserOptions'
+  - '@azure/identity.InteractiveBrowserCredentialNodeOptions'
   - '@azure/identity.InteractiveCredentialOptions'
-  - '@azure/identity.OnBehalfOfCredentialCertificateConfiguration'
-  - '@azure/identity.OnBehalfOfCredentialOptions'
-  - '@azure/identity.OnBehalfOfCredentialSecretConfiguration'
+  - '@azure/identity.ManagedIdentityCredentialClientIdOptions'
+  - '@azure/identity.ManagedIdentityCredentialResourceIdOptions'
+  - '@azure/identity.OnBehalfOfCredentialCertificateOptions'
+  - '@azure/identity.OnBehalfOfCredentialSecretOptions'
   - '@azure/identity.TokenCachePersistenceOptions'
   - '@azure/identity.TokenCredentialOptions'
   - '@azure/identity.UsernamePasswordCredentialOptions'
   - '@azure/identity.VisualStudioCodeCredentialOptions'
 typeAliases:
   - '@azure/identity.BrowserLoginStyle'
+  - '@azure/identity.ClientCertificateCredentialPEMConfiguration'
   - '@azure/identity.DeviceCodePromptCallback'
   - '@azure/identity.IdentityPlugin'
+  - '@azure/identity.OnBehalfOfCredentialOptions'
 functions:
   - name: deserializeAuthenticationRecord(string)
     uid: '@azure/identity.deserializeAuthenticationRecord'
@@ -86,26 +91,30 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function deserializeAuthenticationRecord(serializedRecord: string)'
+      content: >-
+        function deserializeAuthenticationRecord(serializedRecord: string):
+        AuthenticationRecord
       parameters:
         - id: serializedRecord
           type: string
           description: Authentication record previously serialized into string.
       return:
-        type: <xref uid="@azure/identity.AuthenticationRecord" />
         description: AuthenticationRecord.
+        type: <xref uid="@azure/identity.AuthenticationRecord" />
   - name: getDefaultAzureCredential()
     uid: '@azure/identity.getDefaultAzureCredential'
     package: '@azure/identity'
-    summary: 'Returns a new instance of the <xref:DefaultAzureCredential>.'
+    summary: >-
+      Returns a new instance of the
+      <xref:@azure/identity.DefaultAzureCredential>.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getDefaultAzureCredential()
+      content: 'function getDefaultAzureCredential(): TokenCredential'
       return:
-        type: TokenCredential
         description: ''
+        type: TokenCredential
   - name: serializeAuthenticationRecord(AuthenticationRecord)
     uid: '@azure/identity.serializeAuthenticationRecord'
     package: '@azure/identity'
@@ -135,14 +144,16 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function serializeAuthenticationRecord(record: AuthenticationRecord)'
+      content: >-
+        function serializeAuthenticationRecord(record: AuthenticationRecord):
+        string
       parameters:
         - id: record
           type: <xref uid="@azure/identity.AuthenticationRecord" />
           description: ''
       return:
-        type: string
         description: ''
+        type: string
   - name: useIdentityPlugin(IdentityPlugin)
     uid: '@azure/identity.useIdentityPlugin'
     package: '@azure/identity'

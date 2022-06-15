@@ -2,33 +2,14 @@
 name: MoveCollections
 uid: '@azure/arm-resourcemover.MoveCollections'
 package: '@azure/arm-resourcemover'
-summary: Class representing a MoveCollections.
+summary: Interface representing a MoveCollections.
 fullName: MoveCollections
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: MoveCollections(ResourceMoverServiceAPIContext)
-    uid: '@azure/arm-resourcemover.MoveCollections.constructor'
-    package: '@azure/arm-resourcemover'
-    summary: Create a MoveCollections.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'new MoveCollections(client: ResourceMoverServiceAPIContext)'
-      parameters:
-        - id: client
-          type: >-
-            <xref uid="@azure/arm-resourcemover.ResourceMoverServiceAPIContext"
-            />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
-  - name: >-
-      beginBulkRemove(string, string,
-      Models.MoveCollectionsBeginBulkRemoveOptionalParams)
+  - name: 'beginBulkRemove(string, string, MoveCollectionsBulkRemoveOptionalParams)'
     uid: '@azure/arm-resourcemover.MoveCollections.beginBulkRemove'
     package: '@azure/arm-resourcemover'
     summary: >-
@@ -36,16 +17,18 @@ methods:
       collection. The
 
       orchestration is done by service. To aid the user to prerequisite the
-      operation the client can
+      operation the client can call
 
-      call operation with validateOnly property set to true.
+      operation with validateOnly property set to true.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginBulkRemove(resourceGroupName: string, moveCollectionName:
-        string, options?: Models.MoveCollectionsBeginBulkRemoveOptionalParams)
+        string, options?: MoveCollectionsBulkRemoveOptionalParams):
+        Promise<PollerLike<PollOperationState<MoveCollectionsBulkRemoveResponse>,
+        MoveCollectionsBulkRemoveResponse>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -54,24 +37,225 @@ methods:
           type: string
           description: ''
         - id: options
-          type: <xref uid="Models.MoveCollectionsBeginBulkRemoveOptionalParams" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsBulkRemoveOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsBulkRemoveResponse"
+          />&gt;, <xref
+          uid="@azure/arm-resourcemover.MoveCollectionsBulkRemoveResponse"
+          />&gt;&gt;
   - name: >-
-      beginCommit(string, string,
-      Models.MoveCollectionsBeginCommitOptionalParams)
+      beginBulkRemoveAndWait(string, string,
+      MoveCollectionsBulkRemoveOptionalParams)
+    uid: '@azure/arm-resourcemover.MoveCollections.beginBulkRemoveAndWait'
+    package: '@azure/arm-resourcemover'
+    summary: >-
+      Removes the set of move resources included in the request body from move
+      collection. The
+
+      orchestration is done by service. To aid the user to prerequisite the
+      operation the client can call
+
+      operation with validateOnly property set to true.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginBulkRemoveAndWait(resourceGroupName: string,
+        moveCollectionName: string, options?:
+        MoveCollectionsBulkRemoveOptionalParams):
+        Promise<MoveCollectionsBulkRemoveResponse>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: ''
+        - id: moveCollectionName
+          type: string
+          description: ''
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsBulkRemoveOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsBulkRemoveResponse"
+          />&gt;
+  - name: 'beginCommit(string, string, MoveCollectionsCommitOptionalParams)'
     uid: '@azure/arm-resourcemover.MoveCollections.beginCommit'
     package: '@azure/arm-resourcemover'
     summary: >-
       Commits the set of resources included in the request body. The commit
+      operation is triggered on the
+
+      moveResources in the moveState 'CommitPending' or 'CommitFailed', on a
+      successful completion the
+
+      moveResource moveState do a transition to Committed. To aid the user to
+      prerequisite the operation
+
+      the client can call operation with validateOnly property set to true.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginCommit(resourceGroupName: string, moveCollectionName:
+        string, options?: MoveCollectionsCommitOptionalParams):
+        Promise<PollerLike<PollOperationState<MoveCollectionsCommitResponse>,
+        MoveCollectionsCommitResponse>>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The Resource Group Name.
+        - id: moveCollectionName
+          type: string
+          description: The Move Collection Name.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsCommitOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsCommitResponse" />&gt;,
+          <xref uid="@azure/arm-resourcemover.MoveCollectionsCommitResponse"
+          />&gt;&gt;
+  - name: 'beginCommitAndWait(string, string, MoveCollectionsCommitOptionalParams)'
+    uid: '@azure/arm-resourcemover.MoveCollections.beginCommitAndWait'
+    package: '@azure/arm-resourcemover'
+    summary: >-
+      Commits the set of resources included in the request body. The commit
+      operation is triggered on the
+
+      moveResources in the moveState 'CommitPending' or 'CommitFailed', on a
+      successful completion the
+
+      moveResource moveState do a transition to Committed. To aid the user to
+      prerequisite the operation
+
+      the client can call operation with validateOnly property set to true.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginCommitAndWait(resourceGroupName: string,
+        moveCollectionName: string, options?:
+        MoveCollectionsCommitOptionalParams):
+        Promise<MoveCollectionsCommitResponse>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The Resource Group Name.
+        - id: moveCollectionName
+          type: string
+          description: The Move Collection Name.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsCommitOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsCommitResponse" />&gt;
+  - name: 'beginDelete(string, string, MoveCollectionsDeleteOptionalParams)'
+    uid: '@azure/arm-resourcemover.MoveCollections.beginDelete'
+    package: '@azure/arm-resourcemover'
+    summary: Deletes a move collection.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDelete(resourceGroupName: string, moveCollectionName:
+        string, options?: MoveCollectionsDeleteOptionalParams):
+        Promise<PollerLike<PollOperationState<MoveCollectionsDeleteResponse>,
+        MoveCollectionsDeleteResponse>>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The Resource Group Name.
+        - id: moveCollectionName
+          type: string
+          description: The Move Collection Name.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsDeleteOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsDeleteResponse" />&gt;,
+          <xref uid="@azure/arm-resourcemover.MoveCollectionsDeleteResponse"
+          />&gt;&gt;
+  - name: 'beginDeleteAndWait(string, string, MoveCollectionsDeleteOptionalParams)'
+    uid: '@azure/arm-resourcemover.MoveCollections.beginDeleteAndWait'
+    package: '@azure/arm-resourcemover'
+    summary: Deletes a move collection.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteAndWait(resourceGroupName: string,
+        moveCollectionName: string, options?:
+        MoveCollectionsDeleteOptionalParams):
+        Promise<MoveCollectionsDeleteResponse>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The Resource Group Name.
+        - id: moveCollectionName
+          type: string
+          description: The Move Collection Name.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsDeleteOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsDeleteResponse" />&gt;
+  - name: 'beginDiscard(string, string, MoveCollectionsDiscardOptionalParams)'
+    uid: '@azure/arm-resourcemover.MoveCollections.beginDiscard'
+    package: '@azure/arm-resourcemover'
+    summary: >-
+      Discards the set of resources included in the request body. The discard
       operation is triggered on
 
-      the moveResources in the moveState 'CommitPending' or 'CommitFailed', on a
-      successful completion
+      the moveResources in the moveState 'CommitPending' or 'DiscardFailed', on
+      a successful completion
 
-      the moveResource moveState do a transition to Committed. To aid the user
+      the moveResource moveState do a transition to MovePending. To aid the user
       to prerequisite the
 
       operation the client can call operation with validateOnly property set to
@@ -81,8 +265,10 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function beginCommit(resourceGroupName: string, moveCollectionName:
-        string, options?: Models.MoveCollectionsBeginCommitOptionalParams)
+        function beginDiscard(resourceGroupName: string, moveCollectionName:
+        string, options?: MoveCollectionsDiscardOptionalParams):
+        Promise<PollerLike<PollOperationState<MoveCollectionsDiscardResponse>,
+        MoveCollectionsDiscardResponse>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -91,22 +277,43 @@ methods:
           type: string
           description: The Move Collection Name.
         - id: options
-          type: <xref uid="Models.MoveCollectionsBeginCommitOptionalParams" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsDiscardOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: 'beginDeleteMethod(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-resourcemover.MoveCollections.beginDeleteMethod'
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsDiscardResponse" />&gt;,
+          <xref uid="@azure/arm-resourcemover.MoveCollectionsDiscardResponse"
+          />&gt;&gt;
+  - name: 'beginDiscardAndWait(string, string, MoveCollectionsDiscardOptionalParams)'
+    uid: '@azure/arm-resourcemover.MoveCollections.beginDiscardAndWait'
     package: '@azure/arm-resourcemover'
-    summary: Deletes a move collection.
+    summary: >-
+      Discards the set of resources included in the request body. The discard
+      operation is triggered on
+
+      the moveResources in the moveState 'CommitPending' or 'DiscardFailed', on
+      a successful completion
+
+      the moveResource moveState do a transition to MovePending. To aid the user
+      to prerequisite the
+
+      operation the client can call operation with validateOnly property set to
+      true.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function beginDeleteMethod(resourceGroupName: string,
-        moveCollectionName: string, options?: msRest.RequestOptionsBase)
+        function beginDiscardAndWait(resourceGroupName: string,
+        moveCollectionName: string, options?:
+        MoveCollectionsDiscardOptionalParams):
+        Promise<MoveCollectionsDiscardResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -115,22 +322,121 @@ methods:
           type: string
           description: The Move Collection Name.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsDiscardOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsDiscardResponse" />&gt;
   - name: >-
-      beginDiscard(string, string,
-      Models.MoveCollectionsBeginDiscardOptionalParams)
-    uid: '@azure/arm-resourcemover.MoveCollections.beginDiscard'
+      beginInitiateMove(string, string,
+      MoveCollectionsInitiateMoveOptionalParams)
+    uid: '@azure/arm-resourcemover.MoveCollections.beginInitiateMove'
     package: '@azure/arm-resourcemover'
     summary: >-
-      Discards the set of resources included in the request body. The discard
-      operation is triggered
+      Moves the set of resources included in the request body. The move
+      operation is triggered after the
 
-      on the moveResources in the moveState 'CommitPending' or 'DiscardFailed',
-      on a successful
+      moveResources are in the moveState 'MovePending' or 'MoveFailed', on a
+      successful completion the
+
+      moveResource moveState do a transition to CommitPending. To aid the user
+      to prerequisite the
+
+      operation the client can call operation with validateOnly property set to
+      true.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginInitiateMove(resourceGroupName: string,
+        moveCollectionName: string, options?:
+        MoveCollectionsInitiateMoveOptionalParams):
+        Promise<PollerLike<PollOperationState<MoveCollectionsInitiateMoveResponse>,
+        MoveCollectionsInitiateMoveResponse>>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The Resource Group Name.
+        - id: moveCollectionName
+          type: string
+          description: The Move Collection Name.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsInitiateMoveOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsInitiateMoveResponse"
+          />&gt;, <xref
+          uid="@azure/arm-resourcemover.MoveCollectionsInitiateMoveResponse"
+          />&gt;&gt;
+  - name: >-
+      beginInitiateMoveAndWait(string, string,
+      MoveCollectionsInitiateMoveOptionalParams)
+    uid: '@azure/arm-resourcemover.MoveCollections.beginInitiateMoveAndWait'
+    package: '@azure/arm-resourcemover'
+    summary: >-
+      Moves the set of resources included in the request body. The move
+      operation is triggered after the
+
+      moveResources are in the moveState 'MovePending' or 'MoveFailed', on a
+      successful completion the
+
+      moveResource moveState do a transition to CommitPending. To aid the user
+      to prerequisite the
+
+      operation the client can call operation with validateOnly property set to
+      true.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginInitiateMoveAndWait(resourceGroupName: string,
+        moveCollectionName: string, options?:
+        MoveCollectionsInitiateMoveOptionalParams):
+        Promise<MoveCollectionsInitiateMoveResponse>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The Resource Group Name.
+        - id: moveCollectionName
+          type: string
+          description: The Move Collection Name.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsInitiateMoveOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsInitiateMoveResponse"
+          />&gt;
+  - name: 'beginPrepare(string, string, MoveCollectionsPrepareOptionalParams)'
+    uid: '@azure/arm-resourcemover.MoveCollections.beginPrepare'
+    package: '@azure/arm-resourcemover'
+    summary: >-
+      Initiates prepare for the set of resources included in the request body.
+      The prepare operation is on
+
+      the moveResources that are in the moveState 'PreparePending' or
+      'PrepareFailed', on a successful
 
       completion the moveResource moveState do a transition to MovePending. To
       aid the user to
@@ -142,8 +448,10 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function beginDiscard(resourceGroupName: string, moveCollectionName:
-        string, options?: Models.MoveCollectionsBeginDiscardOptionalParams)
+        function beginPrepare(resourceGroupName: string, moveCollectionName:
+        string, options?: MoveCollectionsPrepareOptionalParams):
+        Promise<PollerLike<PollOperationState<MoveCollectionsPrepareResponse>,
+        MoveCollectionsPrepareResponse>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -152,75 +460,43 @@ methods:
           type: string
           description: The Move Collection Name.
         - id: options
-          type: <xref uid="Models.MoveCollectionsBeginDiscardOptionalParams" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsPrepareOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: >-
-      beginInitiateMove(string, string,
-      Models.MoveCollectionsBeginInitiateMoveOptionalParams)
-    uid: '@azure/arm-resourcemover.MoveCollections.beginInitiateMove'
-    package: '@azure/arm-resourcemover'
-    summary: >-
-      Moves the set of resources included in the request body. The move
-      operation is triggered after
-
-      the moveResources are in the moveState 'MovePending' or 'MoveFailed', on a
-      successful completion
-
-      the moveResource moveState do a transition to CommitPending. To aid the
-      user to prerequisite the
-
-      operation the client can call operation with validateOnly property set to
-      true.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginInitiateMove(resourceGroupName: string,
-        moveCollectionName: string, options?:
-        Models.MoveCollectionsBeginInitiateMoveOptionalParams)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: options
-          type: <xref uid="Models.MoveCollectionsBeginInitiateMoveOptionalParams" />
-          description: ''
-      return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: >-
-      beginPrepare(string, string,
-      Models.MoveCollectionsBeginPrepareOptionalParams)
-    uid: '@azure/arm-resourcemover.MoveCollections.beginPrepare'
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsPrepareResponse" />&gt;,
+          <xref uid="@azure/arm-resourcemover.MoveCollectionsPrepareResponse"
+          />&gt;&gt;
+  - name: 'beginPrepareAndWait(string, string, MoveCollectionsPrepareOptionalParams)'
+    uid: '@azure/arm-resourcemover.MoveCollections.beginPrepareAndWait'
     package: '@azure/arm-resourcemover'
     summary: >-
       Initiates prepare for the set of resources included in the request body.
-      The prepare operation
+      The prepare operation is on
 
-      is on the moveResources that are in the moveState 'PreparePending' or
-      'PrepareFailed', on a
+      the moveResources that are in the moveState 'PreparePending' or
+      'PrepareFailed', on a successful
 
-      successful completion the moveResource moveState do a transition to
-      MovePending. To aid the user
+      completion the moveResource moveState do a transition to MovePending. To
+      aid the user to
 
-      to prerequisite the operation the client can call operation with
-      validateOnly property set to
-
-      true.
+      prerequisite the operation the client can call operation with validateOnly
+      property set to true.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function beginPrepare(resourceGroupName: string, moveCollectionName:
-        string, options?: Models.MoveCollectionsBeginPrepareOptionalParams)
+        function beginPrepareAndWait(resourceGroupName: string,
+        moveCollectionName: string, options?:
+        MoveCollectionsPrepareOptionalParams):
+        Promise<MoveCollectionsPrepareResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -229,12 +505,20 @@ methods:
           type: string
           description: The Move Collection Name.
         - id: options
-          type: <xref uid="Models.MoveCollectionsBeginPrepareOptionalParams" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsPrepareOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: 'beginResolveDependencies(string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsPrepareResponse" />&gt;
+  - name: >-
+      beginResolveDependencies(string, string,
+      MoveCollectionsResolveDependenciesOptionalParams)
     uid: '@azure/arm-resourcemover.MoveCollections.beginResolveDependencies'
     package: '@azure/arm-resourcemover'
     summary: >-
@@ -246,7 +530,10 @@ methods:
     syntax:
       content: >-
         function beginResolveDependencies(resourceGroupName: string,
-        moveCollectionName: string, options?: msRest.RequestOptionsBase)
+        moveCollectionName: string, options?:
+        MoveCollectionsResolveDependenciesOptionalParams):
+        Promise<PollerLike<PollOperationState<MoveCollectionsResolveDependenciesResponse>,
+        MoveCollectionsResolveDependenciesResponse>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -255,64 +542,37 @@ methods:
           type: string
           description: The Move Collection Name.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsResolveDependenciesOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: 'bulkRemove(string, string, Models.MoveCollectionsBulkRemoveOptionalParams)'
-    uid: '@azure/arm-resourcemover.MoveCollections.bulkRemove'
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsResolveDependenciesResponse"
+          />&gt;, <xref
+          uid="@azure/arm-resourcemover.MoveCollectionsResolveDependenciesResponse"
+          />&gt;&gt;
+  - name: >-
+      beginResolveDependenciesAndWait(string, string,
+      MoveCollectionsResolveDependenciesOptionalParams)
+    uid: '@azure/arm-resourcemover.MoveCollections.beginResolveDependenciesAndWait'
     package: '@azure/arm-resourcemover'
     summary: >-
-      Removes the set of move resources included in the request body from move
-      collection. The
-
-      orchestration is done by service. To aid the user to prerequisite the
-      operation the client can
-
-      call operation with validateOnly property set to true.
+      Computes, resolves and validate the dependencies of the moveResources in
+      the move collection.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function bulkRemove(resourceGroupName: string, moveCollectionName:
-        string, options?: Models.MoveCollectionsBulkRemoveOptionalParams)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: ''
-        - id: moveCollectionName
-          type: string
-          description: ''
-        - id: options
-          type: <xref uid="Models.MoveCollectionsBulkRemoveOptionalParams" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.MoveCollectionsBulkRemoveResponse" />&gt;
-        description: Promise<Models.MoveCollectionsBulkRemoveResponse>
-  - name: 'commit(string, string, Models.MoveCollectionsCommitOptionalParams)'
-    uid: '@azure/arm-resourcemover.MoveCollections.commit'
-    package: '@azure/arm-resourcemover'
-    summary: >-
-      Commits the set of resources included in the request body. The commit
-      operation is triggered on
-
-      the moveResources in the moveState 'CommitPending' or 'CommitFailed', on a
-      successful completion
-
-      the moveResource moveState do a transition to Committed. To aid the user
-      to prerequisite the
-
-      operation the client can call operation with validateOnly property set to
-      true.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function commit(resourceGroupName: string, moveCollectionName: string,
-        options?: Models.MoveCollectionsCommitOptionalParams)
+        function beginResolveDependenciesAndWait(resourceGroupName: string,
+        moveCollectionName: string, options?:
+        MoveCollectionsResolveDependenciesOptionalParams):
+        Promise<MoveCollectionsResolveDependenciesResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -321,12 +581,19 @@ methods:
           type: string
           description: The Move Collection Name.
         - id: options
-          type: <xref uid="Models.MoveCollectionsCommitOptionalParams" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsResolveDependenciesOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.MoveCollectionsCommitResponse" />&gt;
-        description: Promise<Models.MoveCollectionsCommitResponse>
-  - name: 'create(string, string, Models.MoveCollectionsCreateOptionalParams)'
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsResolveDependenciesResponse"
+          />&gt;
+  - name: 'create(string, string, MoveCollectionsCreateOptionalParams)'
     uid: '@azure/arm-resourcemover.MoveCollections.create'
     package: '@azure/arm-resourcemover'
     summary: Creates or updates a move collection.
@@ -336,34 +603,8 @@ methods:
     syntax:
       content: >-
         function create(resourceGroupName: string, moveCollectionName: string,
-        options?: Models.MoveCollectionsCreateOptionalParams)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: options
-          type: <xref uid="Models.MoveCollectionsCreateOptionalParams" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.MoveCollectionsCreateResponse" />&gt;
-        description: Promise<Models.MoveCollectionsCreateResponse>
-  - name: >-
-      create(string, string, MoveCollectionsCreateOptionalParams,
-      ServiceCallback<MoveCollection>)
-    uid: '@azure/arm-resourcemover.MoveCollections.create_2'
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function create(resourceGroupName: string, moveCollectionName: string,
-        options: MoveCollectionsCreateOptionalParams, callback:
-        ServiceCallback<MoveCollection>)
+        options?: MoveCollectionsCreateOptionalParams):
+        Promise<MoveCollectionsCreateResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -376,99 +617,14 @@ methods:
             <xref
             uid="@azure/arm-resourcemover.MoveCollectionsCreateOptionalParams"
             />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollection" />&gt;
           description: |
-            The callback
-  - name: 'create(string, string, ServiceCallback<MoveCollection>)'
-    uid: '@azure/arm-resourcemover.MoveCollections.create_1'
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function create(resourceGroupName: string, moveCollectionName: string,
-        callback: ServiceCallback<MoveCollection>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollection" />&gt;
-          description: |
-            The callback
-  - name: 'deleteMethod(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-resourcemover.MoveCollections.deleteMethod'
-    package: '@azure/arm-resourcemover'
-    summary: Deletes a move collection.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deleteMethod(resourceGroupName: string, moveCollectionName:
-        string, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+            The options parameters.
       return:
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.MoveCollectionsDeleteMethodResponse"
-          />&gt;
-        description: Promise<Models.MoveCollectionsDeleteMethodResponse>
-  - name: 'discard(string, string, Models.MoveCollectionsDiscardOptionalParams)'
-    uid: '@azure/arm-resourcemover.MoveCollections.discard'
-    package: '@azure/arm-resourcemover'
-    summary: >-
-      Discards the set of resources included in the request body. The discard
-      operation is triggered
-
-      on the moveResources in the moveState 'CommitPending' or 'DiscardFailed',
-      on a successful
-
-      completion the moveResource moveState do a transition to MovePending. To
-      aid the user to
-
-      prerequisite the operation the client can call operation with validateOnly
-      property set to true.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function discard(resourceGroupName: string, moveCollectionName: string,
-        options?: Models.MoveCollectionsDiscardOptionalParams)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: options
-          type: <xref uid="Models.MoveCollectionsDiscardOptionalParams" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.MoveCollectionsDiscardResponse" />&gt;
-        description: Promise<Models.MoveCollectionsDiscardResponse>
-  - name: 'get(string, string, msRest.RequestOptionsBase)'
+          Promise&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsCreateResponse" />&gt;
+  - name: 'get(string, string, MoveCollectionsGetOptionalParams)'
     uid: '@azure/arm-resourcemover.MoveCollections.get'
     package: '@azure/arm-resourcemover'
     summary: Gets the move collection.
@@ -478,7 +634,8 @@ methods:
     syntax:
       content: >-
         function get(resourceGroupName: string, moveCollectionName: string,
-        options?: msRest.RequestOptionsBase)
+        options?: MoveCollectionsGetOptionalParams):
+        Promise<MoveCollectionsGetResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -487,102 +644,19 @@ methods:
           type: string
           description: The Move Collection Name.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.MoveCollectionsGetResponse" />&gt;
-        description: Promise<Models.MoveCollectionsGetResponse>
-  - name: 'get(string, string, RequestOptionsBase, ServiceCallback<MoveCollection>)'
-    uid: '@azure/arm-resourcemover.MoveCollections.get_2'
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, moveCollectionName: string,
-        options: RequestOptionsBase, callback: ServiceCallback<MoveCollection>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollection" />&gt;
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsGetOptionalParams" />
           description: |
-            The callback
-  - name: 'get(string, string, ServiceCallback<MoveCollection>)'
-    uid: '@azure/arm-resourcemover.MoveCollections.get_1'
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, moveCollectionName: string,
-        callback: ServiceCallback<MoveCollection>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollection" />&gt;
-          description: |
-            The callback
-  - name: >-
-      initiateMove(string, string,
-      Models.MoveCollectionsInitiateMoveOptionalParams)
-    uid: '@azure/arm-resourcemover.MoveCollections.initiateMove'
-    package: '@azure/arm-resourcemover'
-    summary: >-
-      Moves the set of resources included in the request body. The move
-      operation is triggered after
-
-      the moveResources are in the moveState 'MovePending' or 'MoveFailed', on a
-      successful completion
-
-      the moveResource moveState do a transition to CommitPending. To aid the
-      user to prerequisite the
-
-      operation the client can call operation with validateOnly property set to
-      true.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function initiateMove(resourceGroupName: string, moveCollectionName:
-        string, options?: Models.MoveCollectionsInitiateMoveOptionalParams)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: options
-          type: <xref uid="Models.MoveCollectionsInitiateMoveOptionalParams" />
-          description: ''
+            The options parameters.
       return:
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.MoveCollectionsInitiateMoveResponse"
-          />&gt;
-        description: Promise<Models.MoveCollectionsInitiateMoveResponse>
-  - name: 'listMoveCollectionsByResourceGroup(string, msRest.RequestOptionsBase)'
+          Promise&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsGetResponse" />&gt;
+  - name: >-
+      listMoveCollectionsByResourceGroup(string,
+      MoveCollectionsListMoveCollectionsByResourceGroupOptionalParams)
     uid: >-
       @azure/arm-resourcemover.MoveCollections.listMoveCollectionsByResourceGroup
     package: '@azure/arm-resourcemover'
@@ -593,152 +667,27 @@ methods:
     syntax:
       content: >-
         function listMoveCollectionsByResourceGroup(resourceGroupName: string,
-        options?: msRest.RequestOptionsBase)
+        options?:
+        MoveCollectionsListMoveCollectionsByResourceGroupOptionalParams):
+        PagedAsyncIterableIterator<MoveCollection>
       parameters:
         - id: resourceGroupName
           type: string
           description: The Resource Group Name.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsListMoveCollectionsByResourceGroupOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
+        description: ''
         type: >-
-          Promise&lt;<xref
-          uid="Models.MoveCollectionsListMoveCollectionsByResourceGroupResponse"
-          />&gt;
-        description: >-
-          Promise<Models.MoveCollectionsListMoveCollectionsByResourceGroupResponse>
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollection" />&gt;
   - name: >-
-      listMoveCollectionsByResourceGroup(string, RequestOptionsBase,
-      ServiceCallback<MoveCollectionResultList>)
-    uid: >-
-      @azure/arm-resourcemover.MoveCollections.listMoveCollectionsByResourceGroup_2
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listMoveCollectionsByResourceGroup(resourceGroupName: string,
-        options: RequestOptionsBase, callback:
-        ServiceCallback<MoveCollectionResultList>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollectionResultList" />&gt;
-          description: |
-            The callback
-  - name: >-
-      listMoveCollectionsByResourceGroup(string,
-      ServiceCallback<MoveCollectionResultList>)
-    uid: >-
-      @azure/arm-resourcemover.MoveCollections.listMoveCollectionsByResourceGroup_1
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listMoveCollectionsByResourceGroup(resourceGroupName: string,
-        callback: ServiceCallback<MoveCollectionResultList>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollectionResultList" />&gt;
-          description: |
-            The callback
-  - name: 'listMoveCollectionsByResourceGroupNext(string, msRest.RequestOptionsBase)'
-    uid: >-
-      @azure/arm-resourcemover.MoveCollections.listMoveCollectionsByResourceGroupNext
-    package: '@azure/arm-resourcemover'
-    summary: Get all the Move Collections in the resource group.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listMoveCollectionsByResourceGroupNext(nextPageLink: string,
-        options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="Models.MoveCollectionsListMoveCollectionsByResourceGroupNextResponse"
-          />&gt;
-        description: >-
-          Promise<Models.MoveCollectionsListMoveCollectionsByResourceGroupNextResponse>
-  - name: >-
-      listMoveCollectionsByResourceGroupNext(string, RequestOptionsBase,
-      ServiceCallback<MoveCollectionResultList>)
-    uid: >-
-      @azure/arm-resourcemover.MoveCollections.listMoveCollectionsByResourceGroupNext_2
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listMoveCollectionsByResourceGroupNext(nextPageLink: string,
-        options: RequestOptionsBase, callback:
-        ServiceCallback<MoveCollectionResultList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollectionResultList" />&gt;
-          description: |
-            The callback
-  - name: >-
-      listMoveCollectionsByResourceGroupNext(string,
-      ServiceCallback<MoveCollectionResultList>)
-    uid: >-
-      @azure/arm-resourcemover.MoveCollections.listMoveCollectionsByResourceGroupNext_1
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listMoveCollectionsByResourceGroupNext(nextPageLink: string,
-        callback: ServiceCallback<MoveCollectionResultList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollectionResultList" />&gt;
-          description: |
-            The callback
-  - name: listMoveCollectionsBySubscription(msRest.RequestOptionsBase)
+      listMoveCollectionsBySubscription(MoveCollectionsListMoveCollectionsBySubscriptionOptionalParams)
     uid: '@azure/arm-resourcemover.MoveCollections.listMoveCollectionsBySubscription'
     package: '@azure/arm-resourcemover'
     summary: Get all the Move Collections in the subscription.
@@ -748,141 +697,24 @@ methods:
     syntax:
       content: >-
         function listMoveCollectionsBySubscription(options?:
-        msRest.RequestOptionsBase)
+        MoveCollectionsListMoveCollectionsBySubscriptionOptionalParams):
+        PagedAsyncIterableIterator<MoveCollection>
       parameters:
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsListMoveCollectionsBySubscriptionOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
+        description: ''
         type: >-
-          Promise&lt;<xref
-          uid="Models.MoveCollectionsListMoveCollectionsBySubscriptionResponse"
-          />&gt;
-        description: >-
-          Promise<Models.MoveCollectionsListMoveCollectionsBySubscriptionResponse>
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollection" />&gt;
   - name: >-
-      listMoveCollectionsBySubscription(RequestOptionsBase,
-      ServiceCallback<MoveCollectionResultList>)
-    uid: >-
-      @azure/arm-resourcemover.MoveCollections.listMoveCollectionsBySubscription_2
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listMoveCollectionsBySubscription(options: RequestOptionsBase,
-        callback: ServiceCallback<MoveCollectionResultList>)
-      parameters:
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollectionResultList" />&gt;
-          description: |
-            The callback
-  - name: >-
-      listMoveCollectionsBySubscription(ServiceCallback<MoveCollectionResultList>)
-    uid: >-
-      @azure/arm-resourcemover.MoveCollections.listMoveCollectionsBySubscription_1
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listMoveCollectionsBySubscription(callback:
-        ServiceCallback<MoveCollectionResultList>)
-      parameters:
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollectionResultList" />&gt;
-          description: |
-            The callback
-  - name: 'listMoveCollectionsBySubscriptionNext(string, msRest.RequestOptionsBase)'
-    uid: >-
-      @azure/arm-resourcemover.MoveCollections.listMoveCollectionsBySubscriptionNext
-    package: '@azure/arm-resourcemover'
-    summary: Get all the Move Collections in the subscription.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listMoveCollectionsBySubscriptionNext(nextPageLink: string,
-        options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="Models.MoveCollectionsListMoveCollectionsBySubscriptionNextResponse"
-          />&gt;
-        description: >-
-          Promise<Models.MoveCollectionsListMoveCollectionsBySubscriptionNextResponse>
-  - name: >-
-      listMoveCollectionsBySubscriptionNext(string, RequestOptionsBase,
-      ServiceCallback<MoveCollectionResultList>)
-    uid: >-
-      @azure/arm-resourcemover.MoveCollections.listMoveCollectionsBySubscriptionNext_2
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listMoveCollectionsBySubscriptionNext(nextPageLink: string,
-        options: RequestOptionsBase, callback:
-        ServiceCallback<MoveCollectionResultList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollectionResultList" />&gt;
-          description: |
-            The callback
-  - name: >-
-      listMoveCollectionsBySubscriptionNext(string,
-      ServiceCallback<MoveCollectionResultList>)
-    uid: >-
-      @azure/arm-resourcemover.MoveCollections.listMoveCollectionsBySubscriptionNext_1
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listMoveCollectionsBySubscriptionNext(nextPageLink: string,
-        callback: ServiceCallback<MoveCollectionResultList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollectionResultList" />&gt;
-          description: |
-            The callback
-  - name: 'listRequiredFor(string, string, string, msRest.RequestOptionsBase)'
+      listRequiredFor(string, string, string,
+      MoveCollectionsListRequiredForOptionalParams)
     uid: '@azure/arm-resourcemover.MoveCollections.listRequiredFor'
     package: '@azure/arm-resourcemover'
     summary: List of the move resources for which an arm resource is required for.
@@ -892,7 +724,9 @@ methods:
     syntax:
       content: >-
         function listRequiredFor(resourceGroupName: string, moveCollectionName:
-        string, sourceId: string, options?: msRest.RequestOptionsBase)
+        string, sourceId: string, options?:
+        MoveCollectionsListRequiredForOptionalParams):
+        Promise<MoveCollectionsListRequiredForResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -904,142 +738,19 @@ methods:
           type: string
           description: The sourceId for which the api is invoked.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: >-
-          Promise&lt;<xref uid="Models.MoveCollectionsListRequiredForResponse"
-          />&gt;
-        description: Promise<Models.MoveCollectionsListRequiredForResponse>
-  - name: >-
-      listRequiredFor(string, string, string, RequestOptionsBase,
-      ServiceCallback<RequiredForResourcesCollection>)
-    uid: '@azure/arm-resourcemover.MoveCollections.listRequiredFor_2'
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listRequiredFor(resourceGroupName: string, moveCollectionName:
-        string, sourceId: string, options: RequestOptionsBase, callback:
-        ServiceCallback<RequiredForResourcesCollection>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: sourceId
-          type: string
-          description: The sourceId for which the api is invoked.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
           type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.RequiredForResourcesCollection" />&gt;
+            <xref
+            uid="@azure/arm-resourcemover.MoveCollectionsListRequiredForOptionalParams"
+            />
           description: |
-            The callback
-  - name: >-
-      listRequiredFor(string, string, string,
-      ServiceCallback<RequiredForResourcesCollection>)
-    uid: '@azure/arm-resourcemover.MoveCollections.listRequiredFor_1'
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listRequiredFor(resourceGroupName: string, moveCollectionName:
-        string, sourceId: string, callback:
-        ServiceCallback<RequiredForResourcesCollection>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: sourceId
-          type: string
-          description: The sourceId for which the api is invoked.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.RequiredForResourcesCollection" />&gt;
-          description: |
-            The callback
-  - name: 'prepare(string, string, Models.MoveCollectionsPrepareOptionalParams)'
-    uid: '@azure/arm-resourcemover.MoveCollections.prepare'
-    package: '@azure/arm-resourcemover'
-    summary: >-
-      Initiates prepare for the set of resources included in the request body.
-      The prepare operation
-
-      is on the moveResources that are in the moveState 'PreparePending' or
-      'PrepareFailed', on a
-
-      successful completion the moveResource moveState do a transition to
-      MovePending. To aid the user
-
-      to prerequisite the operation the client can call operation with
-      validateOnly property set to
-
-      true.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prepare(resourceGroupName: string, moveCollectionName: string,
-        options?: Models.MoveCollectionsPrepareOptionalParams)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: options
-          type: <xref uid="Models.MoveCollectionsPrepareOptionalParams" />
-          description: ''
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.MoveCollectionsPrepareResponse" />&gt;
-        description: Promise<Models.MoveCollectionsPrepareResponse>
-  - name: 'resolveDependencies(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-resourcemover.MoveCollections.resolveDependencies'
-    package: '@azure/arm-resourcemover'
-    summary: >-
-      Computes, resolves and validate the dependencies of the moveResources in
-      the move collection.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function resolveDependencies(resourceGroupName: string,
-        moveCollectionName: string, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
+        description: ''
         type: >-
           Promise&lt;<xref
-          uid="Models.MoveCollectionsResolveDependenciesResponse" />&gt;
-        description: Promise<Models.MoveCollectionsResolveDependenciesResponse>
-  - name: 'update(string, string, Models.MoveCollectionsUpdateOptionalParams)'
+          uid="@azure/arm-resourcemover.MoveCollectionsListRequiredForResponse"
+          />&gt;
+  - name: 'update(string, string, MoveCollectionsUpdateOptionalParams)'
     uid: '@azure/arm-resourcemover.MoveCollections.update'
     package: '@azure/arm-resourcemover'
     summary: Updates a move collection.
@@ -1049,34 +760,8 @@ methods:
     syntax:
       content: >-
         function update(resourceGroupName: string, moveCollectionName: string,
-        options?: Models.MoveCollectionsUpdateOptionalParams)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: options
-          type: <xref uid="Models.MoveCollectionsUpdateOptionalParams" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.MoveCollectionsUpdateResponse" />&gt;
-        description: Promise<Models.MoveCollectionsUpdateResponse>
-  - name: >-
-      update(string, string, MoveCollectionsUpdateOptionalParams,
-      ServiceCallback<MoveCollection>)
-    uid: '@azure/arm-resourcemover.MoveCollections.update_2'
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function update(resourceGroupName: string, moveCollectionName: string,
-        options: MoveCollectionsUpdateOptionalParams, callback:
-        ServiceCallback<MoveCollection>)
+        options?: MoveCollectionsUpdateOptionalParams):
+        Promise<MoveCollectionsUpdateResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -1089,34 +774,10 @@ methods:
             <xref
             uid="@azure/arm-resourcemover.MoveCollectionsUpdateOptionalParams"
             />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollection" />&gt;
           description: |
-            The callback
-  - name: 'update(string, string, ServiceCallback<MoveCollection>)'
-    uid: '@azure/arm-resourcemover.MoveCollections.update_1'
-    package: '@azure/arm-resourcemover'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function update(resourceGroupName: string, moveCollectionName: string,
-        callback: ServiceCallback<MoveCollection>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The Resource Group Name.
-        - id: moveCollectionName
-          type: string
-          description: The Move Collection Name.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-resourcemover.MoveCollection" />&gt;
-          description: |
-            The callback
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-resourcemover.MoveCollectionsUpdateResponse" />&gt;

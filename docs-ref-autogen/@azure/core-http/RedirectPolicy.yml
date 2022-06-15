@@ -2,7 +2,9 @@
 name: RedirectPolicy
 uid: '@azure/core-http.RedirectPolicy'
 package: '@azure/core-http'
-summary: ''
+summary: >-
+  Resends the request to a new destination if a response arrives with a
+  "location" header, and a status code between 300 and 307.
 fullName: RedirectPolicy
 remarks: ''
 isPreview: false
@@ -42,9 +44,9 @@ properties:
     syntax:
       content: 'maxRetries: number'
       return:
-        type: number
         description: ''
-methods:
+        type: number
+inheritedMethods:
   - name: 'log(HttpPipelineLogLevel, string)'
     uid: '@azure/core-http.RedirectPolicy.log'
     package: '@azure/core-http'
@@ -67,22 +69,6 @@ methods:
           type: string
           description: |
             The message of this log.
-  - name: sendRequest(WebResourceLike)
-    uid: '@azure/core-http.RedirectPolicy.sendRequest'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function sendRequest(request: WebResourceLike)'
-      parameters:
-        - id: request
-          type: <xref uid="@azure/core-http.WebResourceLike" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="@azure/core-http.HttpOperationResponse" />&gt;
-        description: ''
   - name: shouldLog(HttpPipelineLogLevel)
     uid: '@azure/core-http.RedirectPolicy.shouldLog'
     package: '@azure/core-http'
@@ -91,12 +77,31 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function shouldLog(logLevel: HttpPipelineLogLevel)'
+      content: 'function shouldLog(logLevel: HttpPipelineLogLevel): boolean'
       parameters:
         - id: logLevel
           type: <xref uid="@azure/core-http.HttpPipelineLogLevel" />
           description: The log level of the log that will be logged.
       return:
-        type: boolean
         description: Whether or not a log with the provided log level should be logged.
+        type: boolean
+methods:
+  - name: sendRequest(WebResourceLike)
+    uid: '@azure/core-http.RedirectPolicy.sendRequest'
+    package: '@azure/core-http'
+    summary: ''
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendRequest(request: WebResourceLike):
+        Promise<HttpOperationResponse>
+      parameters:
+        - id: request
+          type: <xref uid="@azure/core-http.WebResourceLike" />
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/core-http.HttpOperationResponse" />&gt;
 extends: <xref uid="@azure/core-http.BaseRequestPolicy" />

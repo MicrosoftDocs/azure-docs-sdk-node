@@ -4,41 +4,21 @@ name: '@azure-rest/core-client'
 summary: ''
 type: package
 interfaces:
+  - '@azure-rest/core-client.AdditionalPolicyConfig'
   - '@azure-rest/core-client.CertificateCredential'
   - '@azure-rest/core-client.Client'
+  - '@azure-rest/core-client.ResourceMethods'
 typeAliases:
   - '@azure-rest/core-client.ClientOptions'
+  - '@azure-rest/core-client.HttpBrowserStreamResponse'
+  - '@azure-rest/core-client.HttpNodeStreamResponse'
   - '@azure-rest/core-client.HttpResponse'
+  - '@azure-rest/core-client.PathParameters'
+  - '@azure-rest/core-client.PathUnchecked'
   - '@azure-rest/core-client.PathUncheckedResponse'
   - '@azure-rest/core-client.RequestParameters'
-  - '@azure-rest/core-client.RouteParams'
+  - '@azure-rest/core-client.StreamableMethod'
 functions:
-  - name: >-
-      createDefaultPipeline(string, TokenCredential | KeyCredential,
-      ClientOptions)
-    uid: '@azure-rest/core-client.createDefaultPipeline'
-    package: '@azure-rest/core-client'
-    summary: Creates a default rest pipeline to re-use accross Rest Level Clients
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createDefaultPipeline(baseUrl: string, credential?:
-        TokenCredential | KeyCredential, options?: ClientOptions)
-      parameters:
-        - id: baseUrl
-          type: string
-          description: ''
-        - id: credential
-          type: TokenCredential | KeyCredential
-          description: ''
-        - id: options
-          type: <xref uid="@azure-rest/core-client.ClientOptions" />
-          description: ''
-      return:
-        type: Pipeline
-        description: ''
   - name: 'createRestError(string, PathUncheckedResponse)'
     uid: '@azure-rest/core-client.createRestError'
     package: '@azure-rest/core-client'
@@ -49,7 +29,7 @@ functions:
     syntax:
       content: >-
         function createRestError(message: string, response:
-        PathUncheckedResponse)
+        PathUncheckedResponse): RestError
       parameters:
         - id: message
           type: string
@@ -58,8 +38,8 @@ functions:
           type: <xref uid="@azure-rest/core-client.PathUncheckedResponse" />
           description: ''
       return:
-        type: RestError
         description: ''
+        type: RestError
   - name: 'getClient(string, ClientOptions)'
     uid: '@azure-rest/core-client.getClient'
     package: '@azure-rest/core-client'
@@ -68,7 +48,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getClient(baseUrl: string, options?: ClientOptions)'
+      content: 'function getClient(baseUrl: string, options?: ClientOptions): Client'
       parameters:
         - id: baseUrl
           type: string
@@ -78,8 +58,8 @@ functions:
           description: |
             Client options
       return:
-        type: <xref uid="@azure-rest/core-client.Client" />
         description: ''
+        type: <xref uid="@azure-rest/core-client.Client" />
   - name: 'getClient(string, TokenCredential | KeyCredential, ClientOptions)'
     uid: '@azure-rest/core-client.getClient_1'
     package: '@azure-rest/core-client'
@@ -90,7 +70,7 @@ functions:
     syntax:
       content: >-
         function getClient(baseUrl: string, credentials?: TokenCredential |
-        KeyCredential, options?: ClientOptions)
+        KeyCredential, options?: ClientOptions): Client
       parameters:
         - id: baseUrl
           type: string
@@ -103,8 +83,8 @@ functions:
           description: |
             Client options
       return:
-        type: <xref uid="@azure-rest/core-client.Client" />
         description: ''
+        type: <xref uid="@azure-rest/core-client.Client" />
   - name: isCertificateCredential(unknown)
     uid: '@azure-rest/core-client.isCertificateCredential'
     package: '@azure-rest/core-client'
@@ -113,12 +93,12 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isCertificateCredential(credential: unknown)'
+      content: 'function isCertificateCredential(credential: unknown): boolean'
       parameters:
         - id: credential
           type: unknown
           description: |
             The assumed CertificateCredential to be tested.
       return:
-        type: boolean
         description: ''
+        type: boolean

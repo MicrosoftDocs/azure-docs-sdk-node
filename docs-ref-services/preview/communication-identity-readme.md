@@ -1,17 +1,16 @@
 ---
 title: Azure Communication Identity client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/communication-identity, 
-author: maggiepint
-ms.author: magpint
-ms.date: 03/10/2021
+keywords: Azure, javascript, SDK, API, @azure/communication-identity, communication
+author: petrsvihlik
+ms.author: petrsvihlik
+ms.date: 04/05/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: communication
 ---
-
-# Azure Communication Identity client library for JavaScript - Version 1.0.0-beta.5 
+# Azure Communication Identity client library for JavaScript - Version 1.1.0-beta.2 
 
 
 The identity library is used for managing users and tokens for Azure Communication Services.
@@ -69,6 +68,7 @@ const client = new CommunicationIdentityClient(connectionString);
 ### Using a `TokenCredential`
 
 ```typescript
+import { DefaultAzureCredential } from "@azure/identity";
 import { CommunicationIdentityClient } from "@azure/communication-identity";
 
 const credential = new DefaultAzureCredential();
@@ -109,7 +109,7 @@ let { token } = await client.getToken(user, ["chat"]);
 To refresh the user token, issue another token with the same user.
 
 ```typescript
-{ token } = await client.getToken(user, ["chat"]);
+let { token } = await client.getToken(user, ["chat"]);
 ```
 
 ### Creating a user and a token in a single request
@@ -117,7 +117,7 @@ To refresh the user token, issue another token with the same user.
 For convenience, use `createUserAndToken` to create a new user and issue a token with one function call. This translates into a single web request as opposed to creating a user first and then issuing a token.
 
 ```typescript
-let { user, token } = await client.createUserWithToken(["chat"]);
+let { user, token } = await client.createUserAndToken(["chat"]);
 ```
 
 ### Revoking tokens for a user
@@ -136,17 +136,25 @@ Use the `deleteUser` method to delete a user.
 await client.deleteUser(user);
 ```
 
+### Exchanging AAD access token of a Teams User for a Communication access token
+
+Use `getTokenForTeamsUser` method to exchange an AAD access token of a Teams user for a new `CommunicationAccessToken` with a matching expiration time.
+
+```typescript
+await client.getTokenForTeamsUser('<aad-access-token-of-a-teams-user>');
+```
+
 ## Troubleshooting
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.0.0-beta.5/sdk/communication/communication-identity/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.1.0-beta.2/sdk/communication/communication-identity/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.0.0-beta.5/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.1.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

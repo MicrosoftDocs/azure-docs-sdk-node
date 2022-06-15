@@ -1,17 +1,16 @@
 ---
 title: Azure Synapse Artifacts client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/synapse-artifacts, synapseanalytics
-author: maggiepint
-ms.author: magpint
-ms.date: 10/05/2021
+keywords: Azure, javascript, SDK, API, @azure/synapse-artifacts, synapse
+author: joheredi
+ms.author: joheredi
+ms.date: 04/17/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: synapseanalytics
+ms.service: synapse
 ---
-
-## Azure Synapse Artifacts client library for JavaScript - Version 1.0.0-beta.6 
+## Azure Synapse Artifacts client library for JavaScript - Version 1.0.0-beta.10 
 
 
 This package contains an isomorphic SDK for Artifacts.
@@ -29,7 +28,7 @@ npm install @azure/synapse-artifacts
 - [LTS versions of Node.js](https://nodejs.org/about/releases/)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-artifacts_1.0.0-beta.6/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-artifacts_1.0.0-beta.10/SUPPORT.md) for more details.
 
 ## Key concepts
 
@@ -43,7 +42,7 @@ export async function main(): Promise<void> {
   const credential = new DefaultAzureCredential();
 
   let client = new ArtifactsClient(credential, "https://mysynapse.dev.azuresynapse.net");
-  let list = await client.pipeline.listPipelinesByWorkspace();
+  let list = await client.pipelineOperations.listPipelinesByWorkspace();
   for await (let item of list) {
     console.log("item:", item);
   }
@@ -72,7 +71,7 @@ In the future, you'll find additional code samples here.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-artifacts_1.0.0-beta.6/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-artifacts_1.0.0-beta.10/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-keys%2FREADME.png)
 

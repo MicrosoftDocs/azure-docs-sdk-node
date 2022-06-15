@@ -41,14 +41,16 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createAuthenticator(credentials: MSITokenCredentials)'
+      content: >-
+        function createAuthenticator(credentials: MSITokenCredentials):
+        Authenticator
       parameters:
         - id: credentials
           type: <xref uid="@azure/ms-rest-nodeauth.MSITokenCredentials" />
           description: ''
       return:
-        type: Authenticator
         description: ''
+        type: Authenticator
   - name: 'execAz(string[])'
     uid: '@azure/ms-rest-nodeauth.execAz'
     package: '@azure/ms-rest-nodeauth'
@@ -62,15 +64,15 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function execAz(cmdArguments: string[])'
+      content: 'function execAz(cmdArguments: string[]): Promise<any>'
       parameters:
         - id: cmdArguments
           type: 'string[]'
           description: |
             Arguments to the az cli command to execute.
       return:
-        type: Promise&lt;any&gt;
         description: ''
+        type: Promise&lt;any&gt;
   - name: interactive()
     uid: '@azure/ms-rest-nodeauth.interactive'
     package: '@azure/ms-rest-nodeauth'
@@ -88,11 +90,8 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function interactive()
+      content: 'function interactive(): Promise<DeviceTokenCredentials>'
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.DeviceTokenCredentials"
-          />&gt;
         description: >-
           If a callback was passed as the last parameter then it returns void
           else returns a Promise.
@@ -101,6 +100,9 @@ functions:
           object and a list of
 
           associated subscriptions across all the applicable tenants.
+        type: >-
+          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.DeviceTokenCredentials"
+          />&gt;
   - name: interactive(InteractiveLoginOptions)
     uid: '@azure/ms-rest-nodeauth.interactive_1'
     package: '@azure/ms-rest-nodeauth'
@@ -109,16 +111,18 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function interactive(options: InteractiveLoginOptions)'
+      content: >-
+        function interactive(options: InteractiveLoginOptions):
+        Promise<DeviceTokenCredentials>
       parameters:
         - id: options
           type: <xref uid="@azure/ms-rest-nodeauth.InteractiveLoginOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.DeviceTokenCredentials"
           />&gt;
-        description: ''
   - name: >-
       interactive(InteractiveLoginOptions, (err: Error, credentials:
       DeviceTokenCredentials, subscriptions: Array<LinkedSubscription>) => void)
@@ -163,17 +167,19 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function loginWithAppServiceMSI()
+      content: >-
+        function loginWithAppServiceMSI():
+        Promise<MSIAppServiceTokenCredentials>
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ms-rest-nodeauth.MSIAppServiceTokenCredentials" />&gt;
         description: >-
           If a callback was passed as the last parameter then it returns void
           else returns a Promise.
 
           The callback is called with the resulting
           MSIAppServiceTokenCredentials object.
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/ms-rest-nodeauth.MSIAppServiceTokenCredentials" />&gt;
   - name: loginWithAppServiceMSI(MSIAppServiceOptions)
     uid: '@azure/ms-rest-nodeauth.loginWithAppServiceMSI_1'
     package: '@azure/ms-rest-nodeauth'
@@ -182,16 +188,18 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function loginWithAppServiceMSI(options: MSIAppServiceOptions)'
+      content: >-
+        function loginWithAppServiceMSI(options: MSIAppServiceOptions):
+        Promise<MSIAppServiceTokenCredentials>
       parameters:
         - id: options
           type: <xref uid="@azure/ms-rest-nodeauth.MSIAppServiceOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/ms-rest-nodeauth.MSIAppServiceTokenCredentials" />&gt;
-        description: ''
   - name: >-
       loginWithAppServiceMSI(MSIAppServiceOptions,
       Callback<MSIAppServiceTokenCredentials>)
@@ -273,17 +281,17 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function loginWithVmMSI()
+      content: 'function loginWithVmMSI(): Promise<MSIVmTokenCredentials>'
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials"
-          />&gt;
         description: >-
           If a callback was passed as the last parameter then it returns void
           else returns a Promise.
 
           The callback is called with the resulting MSIVmTokenCredentials
           object.
+        type: >-
+          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials"
+          />&gt;
   - name: loginWithVmMSI(MSIVmOptions)
     uid: '@azure/ms-rest-nodeauth.loginWithVmMSI_1'
     package: '@azure/ms-rest-nodeauth'
@@ -292,16 +300,18 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function loginWithVmMSI(options: MSIVmOptions)'
+      content: >-
+        function loginWithVmMSI(options: MSIVmOptions):
+        Promise<MSIVmTokenCredentials>
       parameters:
         - id: options
           type: <xref uid="@azure/ms-rest-nodeauth.MSIVmOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.MSIVmTokenCredentials"
           />&gt;
-        description: ''
   - name: 'loginWithVmMSI(MSIVmOptions, Callback<MSIVmTokenCredentials>)'
     uid: '@azure/ms-rest-nodeauth.loginWithVmMSI_2'
     package: '@azure/ms-rest-nodeauth'
@@ -377,13 +387,10 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function withAuthFile()
+      content: >-
+        function withAuthFile(): Promise<ApplicationTokenCredentials |
+        ApplicationTokenCertificateCredentials>
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" /> | <xref
-          uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
-          />&gt;
         description: >-
           If a callback was passed as the last parameter then it returns void
           else returns a Promise.
@@ -393,6 +400,11 @@ functions:
 
           object and a list of associated subscriptions across all the
           applicable tenants.
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" /> | <xref
+          uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
+          />&gt;
   - name: withAuthFile(LoginWithAuthFileOptions)
     uid: '@azure/ms-rest-nodeauth.withAuthFile_1'
     package: '@azure/ms-rest-nodeauth'
@@ -401,18 +413,21 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withAuthFile(options: LoginWithAuthFileOptions)'
+      content: >-
+        function withAuthFile(options: LoginWithAuthFileOptions):
+        Promise<ApplicationTokenCredentials |
+        ApplicationTokenCertificateCredentials>
       parameters:
         - id: options
           type: <xref uid="@azure/ms-rest-nodeauth.LoginWithAuthFileOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" /> | <xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;
-        description: ''
   - name: >-
       withAuthFile(LoginWithAuthFileOptions, (err: Error, credentials:
       ApplicationTokenCredentials | ApplicationTokenCertificateCredentials,
@@ -494,21 +509,23 @@ functions:
     syntax:
       content: >-
         function withAuthFileWithAuthResponse(options?:
-        LoginWithAuthFileOptions)
+        LoginWithAuthFileOptions):
+        Promise<AuthResponse<ApplicationTokenCredentials |
+        ApplicationTokenCertificateCredentials>>
       parameters:
         - id: options
           type: <xref uid="@azure/ms-rest-nodeauth.LoginWithAuthFileOptions" />
           description: Optional parameters
       return:
+        description: >-
+          A Promise that resolves to AuthResponse, which contains "credentials"
+          and optional "subscriptions" array and rejects with an Error.
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
           />&lt;<xref uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials"
           /> | <xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;&gt;
-        description: >-
-          A Promise that resolves to AuthResponse, which contains "credentials"
-          and optional "subscriptions" array and rejects with an Error.
   - name: withInteractiveWithAuthResponse(InteractiveLoginOptions)
     uid: '@azure/ms-rest-nodeauth.withInteractiveWithAuthResponse'
     package: '@azure/ms-rest-nodeauth'
@@ -528,20 +545,20 @@ functions:
     syntax:
       content: >-
         function withInteractiveWithAuthResponse(options?:
-        InteractiveLoginOptions)
+        InteractiveLoginOptions): Promise<AuthResponse<DeviceTokenCredentials>>
       parameters:
         - id: options
           type: <xref uid="@azure/ms-rest-nodeauth.InteractiveLoginOptions" />
           description: |
             Object representing optional parameters.
       return:
+        description: >-
+          A Promise that resolves to AuthResponse, which contains "credentials"
+          and optional "subscriptions" array and rejects with an Error.
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
           />&lt;<xref uid="@azure/ms-rest-nodeauth.DeviceTokenCredentials"
           />&gt;&gt;
-        description: >-
-          A Promise that resolves to AuthResponse, which contains "credentials"
-          and optional "subscriptions" array and rejects with an Error.
   - name: 'withServicePrincipalCertificate(string, string, string)'
     uid: '@azure/ms-rest-nodeauth.withServicePrincipalCertificate'
     package: '@azure/ms-rest-nodeauth'
@@ -559,7 +576,8 @@ functions:
     syntax:
       content: >-
         function withServicePrincipalCertificate(clientId: string,
-        certificateStringOrFilePath: string, domain: string)
+        certificateStringOrFilePath: string, domain: string):
+        Promise<ApplicationTokenCertificateCredentials>
       parameters:
         - id: clientId
           type: string
@@ -586,10 +604,6 @@ functions:
           type: string
           description: The domain or tenant Id containing this application.
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
-          />&gt;
         description: >-
           If a callback was passed as the last parameter then it returns void
           else returns a Promise.
@@ -598,6 +612,10 @@ functions:
           ApplicationTokenCertificateCredentials object and a list of
 
           associated subscriptions across all the applicable tenants.
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
+          />&gt;
   - name: >-
       withServicePrincipalCertificate(string, string, string,
       AzureTokenCredentialsOptions)
@@ -611,7 +629,8 @@ functions:
       content: >-
         function withServicePrincipalCertificate(clientId: string,
         certificateStringOrFilePath: string, domain: string, options:
-        AzureTokenCredentialsOptions)
+        AzureTokenCredentialsOptions):
+        Promise<ApplicationTokenCertificateCredentials>
       parameters:
         - id: clientId
           type: string
@@ -626,11 +645,11 @@ functions:
           type: <xref uid="@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;
-        description: ''
   - name: >-
       withServicePrincipalCertificate(string, string, string,
       AzureTokenCredentialsOptions, (err: Error, credentials:
@@ -711,7 +730,8 @@ functions:
       content: >-
         function withServicePrincipalCertificateWithAuthResponse(clientId:
         string, certificateStringOrFilePath: string, domain: string, options?:
-        AzureTokenCredentialsOptions)
+        AzureTokenCredentialsOptions):
+        Promise<AuthResponse<ApplicationTokenCertificateCredentials>>
       parameters:
         - id: clientId
           type: string
@@ -741,14 +761,14 @@ functions:
           type: <xref uid="@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions" />
           description: Object representing optional parameters.
       return:
+        description: >-
+          A Promise that resolves to AuthResponse, which contains "credentials"
+          and optional "subscriptions" array and rejects with an Error.
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
           />&lt;<xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCertificateCredentials"
           />&gt;&gt;
-        description: >-
-          A Promise that resolves to AuthResponse, which contains "credentials"
-          and optional "subscriptions" array and rejects with an Error.
   - name: 'withServicePrincipalSecret(string, string, string)'
     uid: '@azure/ms-rest-nodeauth.withServicePrincipalSecret'
     package: '@azure/ms-rest-nodeauth'
@@ -766,7 +786,7 @@ functions:
     syntax:
       content: >-
         function withServicePrincipalSecret(clientId: string, secret: string,
-        domain: string)
+        domain: string): Promise<ApplicationTokenCredentials>
       parameters:
         - id: clientId
           type: string
@@ -785,9 +805,6 @@ functions:
           type: string
           description: The domain or tenant Id containing this application.
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" />&gt;
         description: >-
           If a callback was passed as the last parameter then it returns void
           else returns a Promise.
@@ -796,6 +813,9 @@ functions:
           object and a list of
 
           associated subscriptions across all the applicable tenants.
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" />&gt;
   - name: >-
       withServicePrincipalSecret(string, string, string,
       AzureTokenCredentialsOptions)
@@ -808,7 +828,8 @@ functions:
     syntax:
       content: >-
         function withServicePrincipalSecret(clientId: string, secret: string,
-        domain: string, options: AzureTokenCredentialsOptions)
+        domain: string, options: AzureTokenCredentialsOptions):
+        Promise<ApplicationTokenCredentials>
       parameters:
         - id: clientId
           type: string
@@ -823,10 +844,10 @@ functions:
           type: <xref uid="@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials" />&gt;
-        description: ''
   - name: >-
       withServicePrincipalSecret(string, string, string,
       AzureTokenCredentialsOptions, (err: Error, credentials:
@@ -905,7 +926,8 @@ functions:
     syntax:
       content: >-
         function withServicePrincipalSecretWithAuthResponse(clientId: string,
-        secret: string, domain: string, options?: AzureTokenCredentialsOptions)
+        secret: string, domain: string, options?: AzureTokenCredentialsOptions):
+        Promise<AuthResponse<ApplicationTokenCredentials>>
       parameters:
         - id: clientId
           type: string
@@ -927,13 +949,13 @@ functions:
           type: <xref uid="@azure/ms-rest-nodeauth.AzureTokenCredentialsOptions" />
           description: Object representing optional parameters.
       return:
+        description: >-
+          A Promise that resolves to AuthResponse, which contains "credentials"
+          and optional "subscriptions" array and rejects with an Error.
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
           />&lt;<xref uid="@azure/ms-rest-nodeauth.ApplicationTokenCredentials"
           />&gt;&gt;
-        description: >-
-          A Promise that resolves to AuthResponse, which contains "credentials"
-          and optional "subscriptions" array and rejects with an Error.
   - name: 'withUsernamePassword(string, string)'
     uid: '@azure/ms-rest-nodeauth.withUsernamePassword'
     package: '@azure/ms-rest-nodeauth'
@@ -953,7 +975,9 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withUsernamePassword(username: string, password: string)'
+      content: >-
+        function withUsernamePassword(username: string, password: string):
+        Promise<UserTokenCredentials>
       parameters:
         - id: username
           type: string
@@ -962,9 +986,6 @@ functions:
           type: string
           description: The password for the Organization Id account.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.UserTokenCredentials"
-          />&gt;
         description: >-
           If a callback was passed as the last parameter then it returns void
           else returns a Promise.
@@ -973,6 +994,9 @@ functions:
           and a list of
 
           associated subscriptions across all the applicable tenants.
+        type: >-
+          Promise&lt;<xref uid="@azure/ms-rest-nodeauth.UserTokenCredentials"
+          />&gt;
   - name: 'withUsernamePassword(string, string, LoginWithUsernamePasswordOptions)'
     uid: '@azure/ms-rest-nodeauth.withUsernamePassword_1'
     package: '@azure/ms-rest-nodeauth'
@@ -983,7 +1007,8 @@ functions:
     syntax:
       content: >-
         function withUsernamePassword(username: string, password: string,
-        options: LoginWithUsernamePasswordOptions)
+        options: LoginWithUsernamePasswordOptions):
+        Promise<UserTokenCredentials>
       parameters:
         - id: username
           type: string
@@ -997,10 +1022,10 @@ functions:
             />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.UserTokenCredentials"
           />&gt;
-        description: ''
   - name: 'withUsernamePassword(string, string, any)'
     uid: '@azure/ms-rest-nodeauth.withUsernamePassword_2'
     package: '@azure/ms-rest-nodeauth'
@@ -1077,7 +1102,8 @@ functions:
     syntax:
       content: >-
         function withUsernamePasswordWithAuthResponse(username: string,
-        password: string, options?: LoginWithUsernamePasswordOptions)
+        password: string, options?: LoginWithUsernamePasswordOptions):
+        Promise<AuthResponse<UserTokenCredentials>>
       parameters:
         - id: username
           type: string
@@ -1091,13 +1117,13 @@ functions:
             />
           description: Object representing optional parameters.
       return:
+        description: >-
+          A Promise that resolves to AuthResponse, which contains `credentials`
+          and an optional `subscriptions` array, and rejects with an Error.
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.AuthResponse"
           />&lt;<xref uid="@azure/ms-rest-nodeauth.UserTokenCredentials"
           />&gt;&gt;
-        description: >-
-          A Promise that resolves to AuthResponse, which contains `credentials`
-          and an optional `subscriptions` array, and rejects with an Error.
   - name: 'buildTenantList(TokenCredentialsBase, undefined | string)'
     uid: '@azure/ms-rest-nodeauth.buildTenantList'
     package: '@azure/ms-rest-nodeauth'
@@ -1108,7 +1134,7 @@ functions:
     syntax:
       content: >-
         function buildTenantList(credentials: TokenCredentialsBase, apiVersion?:
-        undefined | string)
+        undefined | string): Promise<string[]>
       parameters:
         - id: credentials
           type: <xref uid="@azure/ms-rest-nodeauth.TokenCredentialsBase" />
@@ -1117,10 +1143,10 @@ functions:
           type: undefined | string
           description: default value 2016-06-01
       return:
-        type: 'Promise&lt;string[]&gt;'
         description: >-
           A promise that resolves to an array of tenantIds and rejects with an
           error.
+        type: 'Promise&lt;string[]&gt;'
   - name: >-
       getSubscriptionsFromTenants(TokenCredentialsBase, string[], undefined |
       string)
@@ -1133,7 +1159,8 @@ functions:
     syntax:
       content: >-
         function getSubscriptionsFromTenants(credentials: TokenCredentialsBase,
-        tenantList: string[], apiVersion?: undefined | string)
+        tenantList: string[], apiVersion?: undefined | string):
+        Promise<LinkedSubscription[]>
       parameters:
         - id: credentials
           type: <xref uid="@azure/ms-rest-nodeauth.TokenCredentialsBase" />
@@ -1145,10 +1172,10 @@ functions:
           type: undefined | string
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/ms-rest-nodeauth.LinkedSubscription"
           />[]&gt;
-        description: ''
 typeAliases:
   - '@azure/ms-rest-nodeauth.Callback'
   - '@azure/ms-rest-nodeauth.UserType'

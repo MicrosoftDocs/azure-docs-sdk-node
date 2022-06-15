@@ -41,7 +41,6 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.RecognitionStartedEvent
   - microsoft-cognitiveservices-speech-sdk.RecognitionTriggeredEvent
   - microsoft-cognitiveservices-speech-sdk.SpeechRecognitionEvent
-  - microsoft-cognitiveservices-speech-sdk.Context
   - microsoft-cognitiveservices-speech-sdk.Device
   - microsoft-cognitiveservices-speech-sdk.OS
   - microsoft-cognitiveservices-speech-sdk.RecognizerConfig
@@ -75,6 +74,7 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.SpeechSynthesisEvent
   - microsoft-cognitiveservices-speech-sdk.SynthesisStartedEvent
   - microsoft-cognitiveservices-speech-sdk.SynthesisTriggeredEvent
+  - microsoft-cognitiveservices-speech-sdk.SynthesisRestAdapter
   - microsoft-cognitiveservices-speech-sdk.SynthesisTurn
   - microsoft-cognitiveservices-speech-sdk.SynthesizerConfig
   - microsoft-cognitiveservices-speech-sdk.TranscriberConnectionFactory
@@ -141,9 +141,9 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.OCSPCacheFetchErrorEvent
   - microsoft-cognitiveservices-speech-sdk.OCSPCacheHitEvent
   - microsoft-cognitiveservices-speech-sdk.OCSPCacheMissEvent
+  - microsoft-cognitiveservices-speech-sdk.OCSPCacheUpdateCompleteEvent
   - microsoft-cognitiveservices-speech-sdk.OCSPCacheUpdateErrorEvent
   - microsoft-cognitiveservices-speech-sdk.OCSPCacheUpdateNeededEvent
-  - microsoft-cognitiveservices-speech-sdk.OCSPCacheUpdatehCompleteEvent
   - microsoft-cognitiveservices-speech-sdk.OCSPDiskCacheHitEvent
   - microsoft-cognitiveservices-speech-sdk.OCSPDiskCacheStoreEvent
   - microsoft-cognitiveservices-speech-sdk.OCSPEvent
@@ -191,6 +191,7 @@ classes:
   - >-
     microsoft-cognitiveservices-speech-sdk.ConversationTranscriptionCanceledEventArgs
   - microsoft-cognitiveservices-speech-sdk.CustomCommandsConfig
+  - microsoft-cognitiveservices-speech-sdk.Diagnostics
   - microsoft-cognitiveservices-speech-sdk.DialogServiceConfig
   - microsoft-cognitiveservices-speech-sdk.DialogServiceConfigImpl
   - microsoft-cognitiveservices-speech-sdk.DialogServiceConnector
@@ -231,6 +232,8 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.SpeechSynthesizer
   - microsoft-cognitiveservices-speech-sdk.SynthesisRequest
   - microsoft-cognitiveservices-speech-sdk.SpeechTranslationConfig
+  - microsoft-cognitiveservices-speech-sdk.SynthesisResult
+  - microsoft-cognitiveservices-speech-sdk.SynthesisVoicesResult
   - microsoft-cognitiveservices-speech-sdk.Conversation
   - microsoft-cognitiveservices-speech-sdk.ConversationImpl
   - microsoft-cognitiveservices-speech-sdk.ConversationCommon
@@ -254,6 +257,7 @@ classes:
   - microsoft-cognitiveservices-speech-sdk.TranslationSynthesisResult
   - microsoft-cognitiveservices-speech-sdk.Translations
   - microsoft-cognitiveservices-speech-sdk.TurnStatusReceivedEventArgs
+  - microsoft-cognitiveservices-speech-sdk.VoiceInfo
   - microsoft-cognitiveservices-speech-sdk.VoiceProfile
   - microsoft-cognitiveservices-speech-sdk.VoiceProfileClient
   - >-
@@ -278,6 +282,7 @@ interfaces:
   - microsoft-cognitiveservices-speech-sdk.IAuthentication
   - microsoft-cognitiveservices-speech-sdk.IConnectionFactory
   - microsoft-cognitiveservices-speech-sdk.ISynthesisConnectionFactory
+  - microsoft-cognitiveservices-speech-sdk.Context
   - microsoft-cognitiveservices-speech-sdk.ISpeechConfigAudio
   - microsoft-cognitiveservices-speech-sdk.ISpeechConfigAudioDevice
   - microsoft-cognitiveservices-speech-sdk.IActivityPayloadResponse
@@ -350,16 +355,20 @@ interfaces:
   - microsoft-cognitiveservices-speech-sdk.IWorkerTimers
   - microsoft-cognitiveservices-speech-sdk.IPlayer
   - microsoft-cognitiveservices-speech-sdk.CancellationEventArgs
+  - microsoft-cognitiveservices-speech-sdk.DetailResult
+  - microsoft-cognitiveservices-speech-sdk.WordResult
   - microsoft-cognitiveservices-speech-sdk.ConversationHandler
   - microsoft-cognitiveservices-speech-sdk.ConversationTranscriptionHandler
   - microsoft-cognitiveservices-speech-sdk.IConversationTranslator
   - microsoft-cognitiveservices-speech-sdk.ConversationInfo
+  - microsoft-cognitiveservices-speech-sdk.ConversationProperties
   - microsoft-cognitiveservices-speech-sdk.IConversation
   - microsoft-cognitiveservices-speech-sdk.IParticipant
   - microsoft-cognitiveservices-speech-sdk.IUser
   - microsoft-cognitiveservices-speech-sdk.TranscriptionParticipant
   - microsoft-cognitiveservices-speech-sdk.VoiceSignature
   - microsoft-cognitiveservices-speech-sdk.EnrollmentResultDetails
+  - microsoft-cognitiveservices-speech-sdk.EnrollmentResultJSON
 functions:
   - name: 'check(any, (error: Error, res: any) => void)'
     uid: microsoft-cognitiveservices-speech-sdk.check
@@ -369,7 +378,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function check(options: any, cb: (error: Error, res: any) => void)'
+      content: 'function check(options: any, cb: (error: Error, res: any) => void): any'
       parameters:
         - id: options
           type: any
@@ -378,8 +387,8 @@ functions:
           type: '(error: Error, res: any) =&gt; void'
           description: ''
       return:
-        type: any
         description: ''
+        type: any
   - name: 'verify(VerifyOptions, (error: string, res: any) => void)'
     uid: microsoft-cognitiveservices-speech-sdk.verify
     package: microsoft-cognitiveservices-speech-sdk
@@ -440,6 +449,8 @@ enums:
   - microsoft-cognitiveservices-speech-sdk.AudioFormatTag
   - microsoft-cognitiveservices-speech-sdk.CancellationErrorCode
   - microsoft-cognitiveservices-speech-sdk.CancellationReason
+  - microsoft-cognitiveservices-speech-sdk.LanguageIdMode
+  - microsoft-cognitiveservices-speech-sdk.LanguageIdPriority
   - microsoft-cognitiveservices-speech-sdk.NoMatchReason
   - microsoft-cognitiveservices-speech-sdk.OutputFormat
   - microsoft-cognitiveservices-speech-sdk.ProfanityOption
@@ -449,9 +460,12 @@ enums:
   - microsoft-cognitiveservices-speech-sdk.ResultReason
   - microsoft-cognitiveservices-speech-sdk.ServicePropertyChannel
   - microsoft-cognitiveservices-speech-sdk.SpeakerRecognitionResultType
+  - microsoft-cognitiveservices-speech-sdk.SpeechSynthesisBoundaryType
   - microsoft-cognitiveservices-speech-sdk.SpeechSynthesisOutputFormat
   - microsoft-cognitiveservices-speech-sdk.SpeechState
   - microsoft-cognitiveservices-speech-sdk.ParticipantChangedReason
+  - microsoft-cognitiveservices-speech-sdk.SynthesisVoiceGender
+  - microsoft-cognitiveservices-speech-sdk.SynthesisVoiceType
   - microsoft-cognitiveservices-speech-sdk.VoiceProfileType
 typeAliases:
   - microsoft-cognitiveservices-speech-sdk.Callback

@@ -20,7 +20,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getSchema(id: string, options?: GetSchemaOptions)'
+      content: >-
+        function getSchema(id: string, options?: GetSchemaOptions):
+        Promise<Schema | undefined>
       parameters:
         - id: id
           type: string
@@ -29,12 +31,12 @@ methods:
           type: <xref uid="@azure/schema-registry.GetSchemaOptions" />
           description: ''
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/schema-registry.Schema" /> |
-          undefined&gt;
         description: >-
           Schema with given ID or undefined if no schema was found with the
           given ID.
+        type: >-
+          Promise&lt;<xref uid="@azure/schema-registry.Schema" /> |
+          undefined&gt;
   - name: 'getSchemaProperties(SchemaDescription, GetSchemaPropertiesOptions)'
     uid: '@azure/schema-registry.SchemaRegistry.getSchemaProperties'
     package: '@azure/schema-registry'
@@ -47,7 +49,7 @@ methods:
     syntax:
       content: >-
         function getSchemaProperties(schema: SchemaDescription, options?:
-        GetSchemaPropertiesOptions)
+        GetSchemaPropertiesOptions): Promise<SchemaProperties | undefined>
       parameters:
         - id: schema
           type: <xref uid="@azure/schema-registry.SchemaDescription" />
@@ -56,10 +58,10 @@ methods:
           type: <xref uid="@azure/schema-registry.GetSchemaPropertiesOptions" />
           description: ''
       return:
+        description: Matched schema's ID or undefined if no matching schema was found.
         type: >-
           Promise&lt;<xref uid="@azure/schema-registry.SchemaProperties" /> |
           undefined&gt;
-        description: Matched schema's ID or undefined if no matching schema was found.
   - name: 'registerSchema(SchemaDescription, RegisterSchemaOptions)'
     uid: '@azure/schema-registry.SchemaRegistry.registerSchema'
     package: '@azure/schema-registry'
@@ -78,7 +80,7 @@ methods:
     syntax:
       content: >-
         function registerSchema(schema: SchemaDescription, options?:
-        RegisterSchemaOptions)
+        RegisterSchemaOptions): Promise<SchemaProperties>
       parameters:
         - id: schema
           type: <xref uid="@azure/schema-registry.SchemaDescription" />
@@ -87,5 +89,5 @@ methods:
           type: <xref uid="@azure/schema-registry.RegisterSchemaOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="@azure/schema-registry.SchemaProperties" />&gt;
         description: Registered schema's ID.
+        type: Promise&lt;<xref uid="@azure/schema-registry.SchemaProperties" />&gt;

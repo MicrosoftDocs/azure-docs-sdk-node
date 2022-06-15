@@ -2,31 +2,16 @@
 name: Redis
 uid: '@azure/arm-rediscache.Redis'
 package: '@azure/arm-rediscache'
-summary: Class representing a Redis.
+summary: Interface representing a Redis.
 fullName: Redis
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: Redis(RedisManagementClientContext)
-    uid: '@azure/arm-rediscache.Redis.constructor'
-    package: '@azure/arm-rediscache'
-    summary: Create a Redis.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'new Redis(client: RedisManagementClientContext)'
-      parameters:
-        - id: client
-          type: <xref uid="@azure/arm-rediscache.RedisManagementClientContext" />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
   - name: >-
       beginCreate(string, string, RedisCreateParameters,
-      msRest.RequestOptionsBase)
+      RedisCreateOptionalParams)
     uid: '@azure/arm-rediscache.Redis.beginCreate'
     package: '@azure/arm-rediscache'
     summary: >-
@@ -38,7 +23,9 @@ methods:
     syntax:
       content: >-
         function beginCreate(resourceGroupName: string, name: string,
-        parameters: RedisCreateParameters, options?: msRest.RequestOptionsBase)
+        parameters: RedisCreateParameters, options?: RedisCreateOptionalParams):
+        Promise<PollerLike<PollOperationState<RedisCreateResponse>,
+        RedisCreateResponse>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -50,13 +37,52 @@ methods:
           type: <xref uid="@azure/arm-rediscache.RedisCreateParameters" />
           description: Parameters supplied to the Create Redis operation.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-rediscache.RedisCreateOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: 'beginDeleteMethod(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-rediscache.Redis.beginDeleteMethod'
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-rediscache.RedisCreateResponse" />&gt;, <xref
+          uid="@azure/arm-rediscache.RedisCreateResponse" />&gt;&gt;
+  - name: >-
+      beginCreateAndWait(string, string, RedisCreateParameters,
+      RedisCreateOptionalParams)
+    uid: '@azure/arm-rediscache.Redis.beginCreateAndWait'
+    package: '@azure/arm-rediscache'
+    summary: >-
+      Create or replace (overwrite/recreate, with potential downtime) an
+      existing Redis cache.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginCreateAndWait(resourceGroupName: string, name: string,
+        parameters: RedisCreateParameters, options?: RedisCreateOptionalParams):
+        Promise<RedisCreateResponse>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group.
+        - id: name
+          type: string
+          description: The name of the Redis cache.
+        - id: parameters
+          type: <xref uid="@azure/arm-rediscache.RedisCreateParameters" />
+          description: Parameters supplied to the Create Redis operation.
+        - id: options
+          type: <xref uid="@azure/arm-rediscache.RedisCreateOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-rediscache.RedisCreateResponse"
+          />&gt;
+  - name: 'beginDelete(string, string, RedisDeleteOptionalParams)'
+    uid: '@azure/arm-rediscache.Redis.beginDelete'
     package: '@azure/arm-rediscache'
     summary: Deletes a Redis cache.
     remarks: ''
@@ -64,8 +90,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function beginDeleteMethod(resourceGroupName: string, name: string,
-        options?: msRest.RequestOptionsBase)
+        function beginDelete(resourceGroupName: string, name: string, options?:
+        RedisDeleteOptionalParams): Promise<PollerLike<PollOperationState<void>,
+        void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -74,14 +101,40 @@ methods:
           type: string
           description: The name of the Redis cache.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-rediscache.RedisDeleteOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+  - name: 'beginDeleteAndWait(string, string, RedisDeleteOptionalParams)'
+    uid: '@azure/arm-rediscache.Redis.beginDeleteAndWait'
+    package: '@azure/arm-rediscache'
+    summary: Deletes a Redis cache.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteAndWait(resourceGroupName: string, name: string,
+        options?: RedisDeleteOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group.
+        - id: name
+          type: string
+          description: The name of the Redis cache.
+        - id: options
+          type: <xref uid="@azure/arm-rediscache.RedisDeleteOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: >-
       beginExportData(string, string, ExportRDBParameters,
-      msRest.RequestOptionsBase)
+      RedisExportDataOptionalParams)
     uid: '@azure/arm-rediscache.Redis.beginExportData'
     package: '@azure/arm-rediscache'
     summary: Export data from the redis cache to blobs in a container.
@@ -91,7 +144,9 @@ methods:
     syntax:
       content: >-
         function beginExportData(resourceGroupName: string, name: string,
-        parameters: ExportRDBParameters, options?: msRest.RequestOptionsBase)
+        parameters: ExportRDBParameters, options?:
+        RedisExportDataOptionalParams):
+        Promise<PollerLike<PollOperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -103,14 +158,46 @@ methods:
           type: <xref uid="@azure/arm-rediscache.ExportRDBParameters" />
           description: Parameters for Redis export operation.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-rediscache.RedisExportDataOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+  - name: >-
+      beginExportDataAndWait(string, string, ExportRDBParameters,
+      RedisExportDataOptionalParams)
+    uid: '@azure/arm-rediscache.Redis.beginExportDataAndWait'
+    package: '@azure/arm-rediscache'
+    summary: Export data from the redis cache to blobs in a container.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginExportDataAndWait(resourceGroupName: string, name: string,
+        parameters: ExportRDBParameters, options?:
+        RedisExportDataOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group.
+        - id: name
+          type: string
+          description: The name of the Redis cache.
+        - id: parameters
+          type: <xref uid="@azure/arm-rediscache.ExportRDBParameters" />
+          description: Parameters for Redis export operation.
+        - id: options
+          type: <xref uid="@azure/arm-rediscache.RedisExportDataOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: >-
       beginImportData(string, string, ImportRDBParameters,
-      msRest.RequestOptionsBase)
+      RedisImportDataOptionalParams)
     uid: '@azure/arm-rediscache.Redis.beginImportData'
     package: '@azure/arm-rediscache'
     summary: Import data into Redis cache.
@@ -120,7 +207,9 @@ methods:
     syntax:
       content: >-
         function beginImportData(resourceGroupName: string, name: string,
-        parameters: ImportRDBParameters, options?: msRest.RequestOptionsBase)
+        parameters: ImportRDBParameters, options?:
+        RedisImportDataOptionalParams):
+        Promise<PollerLike<PollOperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -132,14 +221,46 @@ methods:
           type: <xref uid="@azure/arm-rediscache.ImportRDBParameters" />
           description: Parameters for Redis import operation.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-rediscache.RedisImportDataOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+  - name: >-
+      beginImportDataAndWait(string, string, ImportRDBParameters,
+      RedisImportDataOptionalParams)
+    uid: '@azure/arm-rediscache.Redis.beginImportDataAndWait'
+    package: '@azure/arm-rediscache'
+    summary: Import data into Redis cache.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginImportDataAndWait(resourceGroupName: string, name: string,
+        parameters: ImportRDBParameters, options?:
+        RedisImportDataOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group.
+        - id: name
+          type: string
+          description: The name of the Redis cache.
+        - id: parameters
+          type: <xref uid="@azure/arm-rediscache.ImportRDBParameters" />
+          description: Parameters for Redis import operation.
+        - id: options
+          type: <xref uid="@azure/arm-rediscache.RedisImportDataOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: >-
       checkNameAvailability(CheckNameAvailabilityParameters,
-      msRest.RequestOptionsBase)
+      RedisCheckNameAvailabilityOptionalParams)
     uid: '@azure/arm-rediscache.Redis.checkNameAvailability'
     package: '@azure/arm-rediscache'
     summary: Checks that the redis cache name is valid and is not already in use.
@@ -149,158 +270,28 @@ methods:
     syntax:
       content: >-
         function checkNameAvailability(parameters:
-        CheckNameAvailabilityParameters, options?: msRest.RequestOptionsBase)
+        CheckNameAvailabilityParameters, options?:
+        RedisCheckNameAvailabilityOptionalParams): Promise<void>
       parameters:
         - id: parameters
           type: <xref uid="@azure/arm-rediscache.CheckNameAvailabilityParameters" />
           description: >-
             Parameters supplied to the CheckNameAvailability Redis operation.
             The only
-
-            supported resource type is 'Microsoft.Cache/redis'
+                              supported resource type is 'Microsoft.Cache/redis'
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;RestResponse&gt;
-        description: Promise<msRest.RestResponse>
-  - name: >-
-      checkNameAvailability(CheckNameAvailabilityParameters, RequestOptionsBase,
-      ServiceCallback<void>)
-    uid: '@azure/arm-rediscache.Redis.checkNameAvailability_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function checkNameAvailability(parameters:
-        CheckNameAvailabilityParameters, options: RequestOptionsBase, callback:
-        ServiceCallback<void>)
-      parameters:
-        - id: parameters
-          type: <xref uid="@azure/arm-rediscache.CheckNameAvailabilityParameters" />
-          description: >-
-            Parameters supplied to the CheckNameAvailability Redis operation.
-            The only
-
-            supported resource type is 'Microsoft.Cache/redis'
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;void&gt;
+          type: >-
+            <xref
+            uid="@azure/arm-rediscache.RedisCheckNameAvailabilityOptionalParams"
+            />
           description: |
-            The callback
-  - name: >-
-      checkNameAvailability(CheckNameAvailabilityParameters,
-      ServiceCallback<void>)
-    uid: '@azure/arm-rediscache.Redis.checkNameAvailability_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function checkNameAvailability(parameters:
-        CheckNameAvailabilityParameters, callback: ServiceCallback<void>)
-      parameters:
-        - id: parameters
-          type: <xref uid="@azure/arm-rediscache.CheckNameAvailabilityParameters" />
-          description: >-
-            Parameters supplied to the CheckNameAvailability Redis operation.
-            The only
-
-            supported resource type is 'Microsoft.Cache/redis'
-        - id: callback
-          type: ServiceCallback&lt;void&gt;
-          description: |
-            The callback
-  - name: 'create(string, string, RedisCreateParameters, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-rediscache.Redis.create'
-    package: '@azure/arm-rediscache'
-    summary: >-
-      Create or replace (overwrite/recreate, with potential downtime) an
-      existing Redis cache.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function create(resourceGroupName: string, name: string, parameters:
-        RedisCreateParameters, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: parameters
-          type: <xref uid="@azure/arm-rediscache.RedisCreateParameters" />
-          description: Parameters supplied to the Create Redis operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.RedisCreateResponse" />&gt;
-        description: Promise<Models.RedisCreateResponse>
-  - name: 'deleteMethod(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-rediscache.Redis.deleteMethod'
-    package: '@azure/arm-rediscache'
-    summary: Deletes a Redis cache.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deleteMethod(resourceGroupName: string, name: string, options?:
-        msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;RestResponse&gt;
-        description: Promise<msRest.RestResponse>
-  - name: 'exportData(string, string, ExportRDBParameters, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-rediscache.Redis.exportData'
-    package: '@azure/arm-rediscache'
-    summary: Export data from the redis cache to blobs in a container.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function exportData(resourceGroupName: string, name: string, parameters:
-        ExportRDBParameters, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: parameters
-          type: <xref uid="@azure/arm-rediscache.ExportRDBParameters" />
-          description: Parameters for Redis export operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;RestResponse&gt;
-        description: Promise<msRest.RestResponse>
+        description: ''
+        type: Promise&lt;void&gt;
   - name: >-
       forceReboot(string, string, RedisRebootParameters,
-      msRest.RequestOptionsBase)
+      RedisForceRebootOptionalParams)
     uid: '@azure/arm-rediscache.Redis.forceReboot'
     package: '@azure/arm-rediscache'
     summary: >-
@@ -314,7 +305,9 @@ methods:
     syntax:
       content: >-
         function forceReboot(resourceGroupName: string, name: string,
-        parameters: RedisRebootParameters, options?: msRest.RequestOptionsBase)
+        parameters: RedisRebootParameters, options?:
+        RedisForceRebootOptionalParams):
+        Promise<RedisForceRebootOperationResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -326,75 +319,15 @@ methods:
           type: <xref uid="@azure/arm-rediscache.RedisRebootParameters" />
           description: Specifies which Redis node(s) to reboot.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-rediscache.RedisForceRebootOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.RedisForceRebootResponse2" />&gt;
-        description: Promise<Models.RedisForceRebootResponse2>
-  - name: >-
-      forceReboot(string, string, RedisRebootParameters, RequestOptionsBase,
-      ServiceCallback<RedisForceRebootResponse>)
-    uid: '@azure/arm-rediscache.Redis.forceReboot_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function forceReboot(resourceGroupName: string, name: string,
-        parameters: RedisRebootParameters, options: RequestOptionsBase,
-        callback: ServiceCallback<RedisForceRebootResponse>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: parameters
-          type: <xref uid="@azure/arm-rediscache.RedisRebootParameters" />
-          description: Specifies which Redis node(s) to reboot.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-rediscache.RedisForceRebootResponse" />&gt;
-          description: |
-            The callback
-  - name: >-
-      forceReboot(string, string, RedisRebootParameters,
-      ServiceCallback<RedisForceRebootResponse>)
-    uid: '@azure/arm-rediscache.Redis.forceReboot_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function forceReboot(resourceGroupName: string, name: string,
-        parameters: RedisRebootParameters, callback:
-        ServiceCallback<RedisForceRebootResponse>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: parameters
-          type: <xref uid="@azure/arm-rediscache.RedisRebootParameters" />
-          description: Specifies which Redis node(s) to reboot.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-rediscache.RedisForceRebootResponse" />&gt;
-          description: |
-            The callback
-  - name: 'get(string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-rediscache.RedisForceRebootOperationResponse" />&gt;
+  - name: 'get(string, string, RedisGetOptionalParams)'
     uid: '@azure/arm-rediscache.Redis.get'
     package: '@azure/arm-rediscache'
     summary: Gets a Redis cache (resource description).
@@ -404,7 +337,7 @@ methods:
     syntax:
       content: >-
         function get(resourceGroupName: string, name: string, options?:
-        msRest.RequestOptionsBase)
+        RedisGetOptionalParams): Promise<RedisGetResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -413,90 +346,13 @@ methods:
           type: string
           description: The name of the Redis cache.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.RedisGetResponse" />&gt;
-        description: Promise<Models.RedisGetResponse>
-  - name: 'get(string, string, RequestOptionsBase, ServiceCallback<RedisResource>)'
-    uid: '@azure/arm-rediscache.Redis.get_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, name: string, options:
-        RequestOptionsBase, callback: ServiceCallback<RedisResource>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisResource"
-            />&gt;
+          type: <xref uid="@azure/arm-rediscache.RedisGetOptionalParams" />
           description: |
-            The callback
-  - name: 'get(string, string, ServiceCallback<RedisResource>)'
-    uid: '@azure/arm-rediscache.Redis.get_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, name: string, callback:
-        ServiceCallback<RedisResource>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisResource"
-            />&gt;
-          description: |
-            The callback
-  - name: 'importData(string, string, ImportRDBParameters, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-rediscache.Redis.importData'
-    package: '@azure/arm-rediscache'
-    summary: Import data into Redis cache.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function importData(resourceGroupName: string, name: string, parameters:
-        ImportRDBParameters, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: parameters
-          type: <xref uid="@azure/arm-rediscache.ImportRDBParameters" />
-          description: Parameters for Redis import operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+            The options parameters.
       return:
-        type: Promise&lt;RestResponse&gt;
-        description: Promise<msRest.RestResponse>
-  - name: 'listByResourceGroup(string, msRest.RequestOptionsBase)'
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-rediscache.RedisGetResponse" />&gt;
+  - name: 'listByResourceGroup(string, RedisListByResourceGroupOptionalParams)'
     uid: '@azure/arm-rediscache.Redis.listByResourceGroup'
     package: '@azure/arm-rediscache'
     summary: Lists all Redis caches in a resource group.
@@ -506,135 +362,25 @@ methods:
     syntax:
       content: >-
         function listByResourceGroup(resourceGroupName: string, options?:
-        msRest.RequestOptionsBase)
+        RedisListByResourceGroupOptionalParams):
+        PagedAsyncIterableIterator<RedisResource>
       parameters:
         - id: resourceGroupName
           type: string
           description: The name of the resource group.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.RedisListByResourceGroupResponse" />&gt;
-        description: Promise<Models.RedisListByResourceGroupResponse>
-  - name: >-
-      listByResourceGroup(string, RequestOptionsBase,
-      ServiceCallback<RedisListResult>)
-    uid: '@azure/arm-rediscache.Redis.listByResourceGroup_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroup(resourceGroupName: string, options:
-        RequestOptionsBase, callback: ServiceCallback<RedisListResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
           type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisListResult"
-            />&gt;
+            <xref
+            uid="@azure/arm-rediscache.RedisListByResourceGroupOptionalParams"
+            />
           description: |
-            The callback
-  - name: 'listByResourceGroup(string, ServiceCallback<RedisListResult>)'
-    uid: '@azure/arm-rediscache.Redis.listByResourceGroup_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroup(resourceGroupName: string, callback:
-        ServiceCallback<RedisListResult>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listByResourceGroupNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-rediscache.Redis.listByResourceGroupNext'
-    package: '@azure/arm-rediscache'
-    summary: Lists all Redis caches in a resource group.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+            The options parameters.
       return:
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.RedisListByResourceGroupNextResponse"
-          />&gt;
-        description: Promise<Models.RedisListByResourceGroupNextResponse>
-  - name: >-
-      listByResourceGroupNext(string, RequestOptionsBase,
-      ServiceCallback<RedisListResult>)
-    uid: '@azure/arm-rediscache.Redis.listByResourceGroupNext_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, options:
-        RequestOptionsBase, callback: ServiceCallback<RedisListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listByResourceGroupNext(string, ServiceCallback<RedisListResult>)'
-    uid: '@azure/arm-rediscache.Redis.listByResourceGroupNext_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, callback:
-        ServiceCallback<RedisListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: listBySubscription(msRest.RequestOptionsBase)
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/arm-rediscache.RedisResource" />&gt;
+  - name: listBySubscription(RedisListBySubscriptionOptionalParams)
     uid: '@azure/arm-rediscache.Redis.listBySubscription'
     package: '@azure/arm-rediscache'
     summary: Gets all Redis caches in the specified subscription.
@@ -642,122 +388,23 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listBySubscription(options?: msRest.RequestOptionsBase)'
-      parameters:
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.RedisListBySubscriptionResponse" />&gt;
-        description: Promise<Models.RedisListBySubscriptionResponse>
-  - name: 'listBySubscription(RequestOptionsBase, ServiceCallback<RedisListResult>)'
-    uid: '@azure/arm-rediscache.Redis.listBySubscription_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
       content: >-
-        function listBySubscription(options: RequestOptionsBase, callback:
-        ServiceCallback<RedisListResult>)
+        function listBySubscription(options?:
+        RedisListBySubscriptionOptionalParams):
+        PagedAsyncIterableIterator<RedisResource>
       parameters:
         - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
           type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisListResult"
-            />&gt;
+            <xref
+            uid="@azure/arm-rediscache.RedisListBySubscriptionOptionalParams" />
           description: |
-            The callback
-  - name: listBySubscription(ServiceCallback<RedisListResult>)
-    uid: '@azure/arm-rediscache.Redis.listBySubscription_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function listBySubscription(callback: ServiceCallback<RedisListResult>)'
-      parameters:
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listBySubscriptionNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-rediscache.Redis.listBySubscriptionNext'
-    package: '@azure/arm-rediscache'
-    summary: Gets all Redis caches in the specified subscription.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listBySubscriptionNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+            The options parameters.
       return:
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.RedisListBySubscriptionNextResponse"
-          />&gt;
-        description: Promise<Models.RedisListBySubscriptionNextResponse>
-  - name: >-
-      listBySubscriptionNext(string, RequestOptionsBase,
-      ServiceCallback<RedisListResult>)
-    uid: '@azure/arm-rediscache.Redis.listBySubscriptionNext_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listBySubscriptionNext(nextPageLink: string, options:
-        RequestOptionsBase, callback: ServiceCallback<RedisListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listBySubscriptionNext(string, ServiceCallback<RedisListResult>)'
-    uid: '@azure/arm-rediscache.Redis.listBySubscriptionNext_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listBySubscriptionNext(nextPageLink: string, callback:
-        ServiceCallback<RedisListResult>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisListResult"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listKeys(string, string, msRest.RequestOptionsBase)'
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/arm-rediscache.RedisResource" />&gt;
+  - name: 'listKeys(string, string, RedisListKeysOptionalParams)'
     uid: '@azure/arm-rediscache.Redis.listKeys'
     package: '@azure/arm-rediscache'
     summary: >-
@@ -771,7 +418,7 @@ methods:
     syntax:
       content: >-
         function listKeys(resourceGroupName: string, name: string, options?:
-        msRest.RequestOptionsBase)
+        RedisListKeysOptionalParams): Promise<RedisListKeysResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -780,67 +427,17 @@ methods:
           type: string
           description: The name of the Redis cache.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-rediscache.RedisListKeysOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.RedisListKeysResponse" />&gt;
-        description: Promise<Models.RedisListKeysResponse>
-  - name: >-
-      listKeys(string, string, RequestOptionsBase,
-      ServiceCallback<RedisAccessKeys>)
-    uid: '@azure/arm-rediscache.Redis.listKeys_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listKeys(resourceGroupName: string, name: string, options:
-        RequestOptionsBase, callback: ServiceCallback<RedisAccessKeys>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisAccessKeys"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listKeys(string, string, ServiceCallback<RedisAccessKeys>)'
-    uid: '@azure/arm-rediscache.Redis.listKeys_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listKeys(resourceGroupName: string, name: string, callback:
-        ServiceCallback<RedisAccessKeys>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisAccessKeys"
-            />&gt;
-          description: |
-            The callback
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-rediscache.RedisListKeysResponse"
+          />&gt;
   - name: >-
       listUpgradeNotifications(string, string, number,
-      msRest.RequestOptionsBase)
+      RedisListUpgradeNotificationsOptionalParams)
     uid: '@azure/arm-rediscache.Redis.listUpgradeNotifications'
     package: '@azure/arm-rediscache'
     summary: Gets any upgrade notifications for a Redis cache.
@@ -850,7 +447,9 @@ methods:
     syntax:
       content: >-
         function listUpgradeNotifications(resourceGroupName: string, name:
-        string, history: number, options?: msRest.RequestOptionsBase)
+        string, history: number, options?:
+        RedisListUpgradeNotificationsOptionalParams):
+        PagedAsyncIterableIterator<UpgradeNotification>
       parameters:
         - id: resourceGroupName
           type: string
@@ -862,161 +461,20 @@ methods:
           type: number
           description: how many minutes in past to look for upgrade notifications
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-rediscache.RedisListUpgradeNotificationsOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.RedisListUpgradeNotificationsResponse"
-          />&gt;
-        description: Promise<Models.RedisListUpgradeNotificationsResponse>
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/arm-rediscache.UpgradeNotification" />&gt;
   - name: >-
-      listUpgradeNotifications(string, string, number, RequestOptionsBase,
-      ServiceCallback<NotificationListResponse>)
-    uid: '@azure/arm-rediscache.Redis.listUpgradeNotifications_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listUpgradeNotifications(resourceGroupName: string, name:
-        string, history: number, options: RequestOptionsBase, callback:
-        ServiceCallback<NotificationListResponse>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: history
-          type: number
-          description: how many minutes in past to look for upgrade notifications
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-rediscache.NotificationListResponse" />&gt;
-          description: |
-            The callback
-  - name: >-
-      listUpgradeNotifications(string, string, number,
-      ServiceCallback<NotificationListResponse>)
-    uid: '@azure/arm-rediscache.Redis.listUpgradeNotifications_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listUpgradeNotifications(resourceGroupName: string, name:
-        string, history: number, callback:
-        ServiceCallback<NotificationListResponse>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: history
-          type: number
-          description: how many minutes in past to look for upgrade notifications
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-rediscache.NotificationListResponse" />&gt;
-          description: |
-            The callback
-  - name: 'listUpgradeNotificationsNext(string, number, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-rediscache.Redis.listUpgradeNotificationsNext'
-    package: '@azure/arm-rediscache'
-    summary: Gets any upgrade notifications for a Redis cache.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listUpgradeNotificationsNext(nextPageLink: string, history:
-        number, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: history
-          type: number
-          description: how many minutes in past to look for upgrade notifications
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: >-
-          Promise&lt;<xref
-          uid="Models.RedisListUpgradeNotificationsNextResponse" />&gt;
-        description: Promise<Models.RedisListUpgradeNotificationsNextResponse>
-  - name: >-
-      listUpgradeNotificationsNext(string, number, RequestOptionsBase,
-      ServiceCallback<NotificationListResponse>)
-    uid: '@azure/arm-rediscache.Redis.listUpgradeNotificationsNext_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listUpgradeNotificationsNext(nextPageLink: string, history:
-        number, options: RequestOptionsBase, callback:
-        ServiceCallback<NotificationListResponse>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: history
-          type: number
-          description: how many minutes in past to look for upgrade notifications
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-rediscache.NotificationListResponse" />&gt;
-          description: |
-            The callback
-  - name: >-
-      listUpgradeNotificationsNext(string, number,
-      ServiceCallback<NotificationListResponse>)
-    uid: '@azure/arm-rediscache.Redis.listUpgradeNotificationsNext_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listUpgradeNotificationsNext(nextPageLink: string, history:
-        number, callback: ServiceCallback<NotificationListResponse>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: history
-          type: number
-          description: how many minutes in past to look for upgrade notifications
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-rediscache.NotificationListResponse" />&gt;
-          description: |
-            The callback
-  - name: >-
-      regenerateKey(string, string, Models.RedisKeyType,
-      msRest.RequestOptionsBase)
+      regenerateKey(string, string, RedisRegenerateKeyParameters,
+      RedisRegenerateKeyOptionalParams)
     uid: '@azure/arm-rediscache.Redis.regenerateKey'
     package: '@azure/arm-rediscache'
     summary: >-
@@ -1029,8 +487,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function regenerateKey(resourceGroupName: string, name: string, keyType:
-        Models.RedisKeyType, options?: msRest.RequestOptionsBase)
+        function regenerateKey(resourceGroupName: string, name: string,
+        parameters: RedisRegenerateKeyParameters, options?:
+        RedisRegenerateKeyOptionalParams): Promise<RedisRegenerateKeyResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -1038,90 +497,21 @@ methods:
         - id: name
           type: string
           description: The name of the Redis cache.
-        - id: keyType
-          type: <xref uid="Models.RedisKeyType" />
-          description: >-
-            The Redis access key to regenerate. Possible values include:
-            'Primary',
-
-            'Secondary'
+        - id: parameters
+          type: <xref uid="@azure/arm-rediscache.RedisRegenerateKeyParameters" />
+          description: Specifies which key to regenerate.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref uid="@azure/arm-rediscache.RedisRegenerateKeyOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.RedisRegenerateKeyResponse" />&gt;
-        description: Promise<Models.RedisRegenerateKeyResponse>
-  - name: >-
-      regenerateKey(string, string, Models.RedisKeyType, RequestOptionsBase,
-      ServiceCallback<RedisAccessKeys>)
-    uid: '@azure/arm-rediscache.Redis.regenerateKey_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function regenerateKey(resourceGroupName: string, name: string, keyType:
-        Models.RedisKeyType, options: RequestOptionsBase, callback:
-        ServiceCallback<RedisAccessKeys>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: keyType
-          type: <xref uid="Models.RedisKeyType" />
-          description: >-
-            The Redis access key to regenerate. Possible values include:
-            'Primary',
-
-            'Secondary'
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisAccessKeys"
-            />&gt;
-          description: |
-            The callback
-  - name: >-
-      regenerateKey(string, string, Models.RedisKeyType,
-      ServiceCallback<RedisAccessKeys>)
-    uid: '@azure/arm-rediscache.Redis.regenerateKey_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function regenerateKey(resourceGroupName: string, name: string, keyType:
-        Models.RedisKeyType, callback: ServiceCallback<RedisAccessKeys>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: keyType
-          type: <xref uid="Models.RedisKeyType" />
-          description: >-
-            The Redis access key to regenerate. Possible values include:
-            'Primary',
-
-            'Secondary'
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisAccessKeys"
-            />&gt;
-          description: |
-            The callback
-  - name: 'update(string, string, RedisUpdateParameters, msRest.RequestOptionsBase)'
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-rediscache.RedisRegenerateKeyResponse" />&gt;
+  - name: 'update(string, string, RedisUpdateParameters, RedisUpdateOptionalParams)'
     uid: '@azure/arm-rediscache.Redis.update'
     package: '@azure/arm-rediscache'
     summary: Update an existing Redis cache.
@@ -1131,7 +521,8 @@ methods:
     syntax:
       content: >-
         function update(resourceGroupName: string, name: string, parameters:
-        RedisUpdateParameters, options?: msRest.RequestOptionsBase)
+        RedisUpdateParameters, options?: RedisUpdateOptionalParams):
+        Promise<RedisUpdateResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -1143,70 +534,11 @@ methods:
           type: <xref uid="@azure/arm-rediscache.RedisUpdateParameters" />
           description: Parameters supplied to the Update Redis operation.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-rediscache.RedisUpdateOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.RedisUpdateResponse" />&gt;
-        description: Promise<Models.RedisUpdateResponse>
-  - name: >-
-      update(string, string, RedisUpdateParameters, RequestOptionsBase,
-      ServiceCallback<RedisResource>)
-    uid: '@azure/arm-rediscache.Redis.update_2'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function update(resourceGroupName: string, name: string, parameters:
-        RedisUpdateParameters, options: RequestOptionsBase, callback:
-        ServiceCallback<RedisResource>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: parameters
-          type: <xref uid="@azure/arm-rediscache.RedisUpdateParameters" />
-          description: Parameters supplied to the Update Redis operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisResource"
-            />&gt;
-          description: |
-            The callback
-  - name: >-
-      update(string, string, RedisUpdateParameters,
-      ServiceCallback<RedisResource>)
-    uid: '@azure/arm-rediscache.Redis.update_1'
-    package: '@azure/arm-rediscache'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function update(resourceGroupName: string, name: string, parameters:
-        RedisUpdateParameters, callback: ServiceCallback<RedisResource>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group.
-        - id: name
-          type: string
-          description: The name of the Redis cache.
-        - id: parameters
-          type: <xref uid="@azure/arm-rediscache.RedisUpdateParameters" />
-          description: Parameters supplied to the Update Redis operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-rediscache.RedisResource"
-            />&gt;
-          description: |
-            The callback
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-rediscache.RedisUpdateResponse"
+          />&gt;

@@ -1,8 +1,8 @@
 ---
 title: Azure Purview Account REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/purview-account, purview
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 09/01/2021
 ms.topic: reference
 ms.prod: azure

@@ -69,7 +69,7 @@ constructors:
           type: <xref uid="@azure/storage-file-datalake.StoragePipelineOptions" />
           description: |
             Optional. Options to configure the HTTP pipeline.
-properties:
+inheritedProperties:
   - name: accountName
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.accountName'
     package: '@azure/storage-file-datalake'
@@ -81,8 +81,8 @@ properties:
     syntax:
       content: 'accountName: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: credential
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.credential'
     package: '@azure/storage-file-datalake'
@@ -100,11 +100,11 @@ properties:
         credential: StorageSharedKeyCredential | AnonymousCredential |
         TokenCredential
       return:
+        description: ''
         type: >-
           <xref uid="@azure/storage-file-datalake.StorageSharedKeyCredential" />
           | <xref uid="@azure/storage-file-datalake.AnonymousCredential" /> |
           TokenCredential
-        description: ''
   - name: url
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.url'
     package: '@azure/storage-file-datalake'
@@ -116,8 +116,8 @@ properties:
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: 'fromConnectionString(string, StoragePipelineOptions)'
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.fromConnectionString'
@@ -129,7 +129,7 @@ methods:
     syntax:
       content: >-
         static function fromConnectionString(connectionString: string, options?:
-        StoragePipelineOptions)
+        StoragePipelineOptions): DataLakeServiceClient
       parameters:
         - id: connectionString
           type: string
@@ -146,14 +146,14 @@ methods:
           description: |
             Optional. Options to configure the HTTP pipeline.
       return:
-        type: <xref uid="@azure/storage-file-datalake.DataLakeServiceClient" />
         description: ''
+        type: <xref uid="@azure/storage-file-datalake.DataLakeServiceClient" />
   - name: >-
       generateAccountSasUrl(Date, AccountSASPermissions, string,
       ServiceGenerateAccountSasUrlOptions)
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.generateAccountSasUrl'
     package: '@azure/storage-file-datalake'
-    summary: >
+    summary: >-
       Only available for DataLakeServiceClient constructed with a shared key
       credential.
 
@@ -162,6 +162,11 @@ methods:
 
       and parameters passed in. The SAS is signed by the shared key credential
       of the client.
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/create-account-sas
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -169,7 +174,7 @@ methods:
       content: >-
         function generateAccountSasUrl(expiresOn?: Date, permissions?:
         AccountSASPermissions, resourceTypes?: string, options?:
-        ServiceGenerateAccountSasUrlOptions)
+        ServiceGenerateAccountSasUrlOptions): string
       parameters:
         - id: expiresOn
           type: Date
@@ -191,27 +196,31 @@ methods:
             />
           description: Optional parameters.
       return:
-        type: string
         description: >-
           An account SAS URI consisting of the URI to the resource represented
           by this client, followed by the generated SAS token.
+        type: string
   - name: getFileSystemClient(string)
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.getFileSystemClient'
     package: '@azure/storage-file-datalake'
-    summary: 'Creates a <xref:DataLakeFileSystemClient> object.'
+    summary: >-
+      Creates a <xref:@azure/storage-file-datalake.DataLakeFileSystemClient>
+      object.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getFileSystemClient(fileSystemName: string)'
+      content: >-
+        function getFileSystemClient(fileSystemName: string):
+        DataLakeFileSystemClient
       parameters:
         - id: fileSystemName
           type: string
           description: |
             File system name.
       return:
-        type: <xref uid="@azure/storage-file-datalake.DataLakeFileSystemClient" />
         description: ''
+        type: <xref uid="@azure/storage-file-datalake.DataLakeFileSystemClient" />
   - name: getProperties(ServiceGetPropertiesOptions)
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.getProperties'
     package: '@azure/storage-file-datalake'
@@ -220,35 +229,75 @@ methods:
       including properties
 
       for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob-service-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperties(options?: ServiceGetPropertiesOptions)'
+      content: >-
+        function getProperties(options?: ServiceGetPropertiesOptions):
+        Promise<DataLakeServiceGetPropertiesResponse>
       parameters:
         - id: options
           type: ServiceGetPropertiesOptions
           description: Options to the Service Get Properties operation.
       return:
-        type: Promise&lt;DataLakeServiceGetPropertiesResponse&gt;
         description: Response data for the Service Get Properties operation.
+        type: Promise&lt;DataLakeServiceGetPropertiesResponse&gt;
   - name: 'getUserDelegationKey(Date, Date, ServiceGetUserDelegationKeyOptions)'
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.getUserDelegationKey'
     package: '@azure/storage-file-datalake'
-    summary: >
+    summary: >-
       ONLY AVAILABLE WHEN USING BEARER TOKEN AUTHENTICATION (TokenCredential).
 
       Retrieves a user delegation key for the Data Lake service. This is only a
       valid operation when using
 
       bearer token authentication.
+
+
+
+      **Example**
+
+
+      ```js
+
+      // Generate user delegation SAS for a file system
+
+      const userDelegationKey = await
+      dataLakeServiceClient.getUserDelegationKey(startsOn, expiresOn);
+
+      const fileSystemSAS = generateDataLakeSASQueryParameters({
+          fileSystemName, // Required
+          permissions: FileSystemSASPermissions.parse("racwdl"), // Required
+          startsOn, // Required. Date type
+          expiresOn, // Optional. Date type
+          ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
+          protocol: SASProtocol.HttpsAndHttp, // Optional
+          version: "2018-11-09" // Must greater than or equal to 2018-11-09 to generate user delegation SAS
+        },
+        userDelegationKey, // UserDelegationKey
+        accountName
+      ).toString();
+
+      ```
+
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-user-delegation-key
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getUserDelegationKey(startsOn: Date, expiresOn: Date, options?:
-        ServiceGetUserDelegationKeyOptions)
+        ServiceGetUserDelegationKeyOptions):
+        Promise<ServiceGetUserDelegationKeyResponse>
       parameters:
         - id: startsOn
           type: Date
@@ -268,15 +317,15 @@ methods:
           description: |
             -
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-datalake.ServiceGetUserDelegationKeyResponse"
           />&gt;
-        description: ''
   - name: listFileSystems(ServiceListFileSystemsOptions)
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.listFileSystems'
     package: '@azure/storage-file-datalake'
-    summary: >
+    summary: >-
       Returns an async iterable iterator to list all the file systems
 
       under the specified account.
@@ -381,11 +430,19 @@ methods:
       }
 
       ```
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/list-containers2
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listFileSystems(options?: ServiceListFileSystemsOptions)'
+      content: >-
+        function listFileSystems(options?: ServiceListFileSystemsOptions):
+        PagedAsyncIterableIterator<FileSystemItem,
+        ServiceListFileSystemsSegmentResponse>
       parameters:
         - id: options
           type: >-
@@ -394,12 +451,12 @@ methods:
           description: |
             -
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/storage-file-datalake.FileSystemItem" />, <xref
           uid="@azure/storage-file-datalake.ServiceListFileSystemsSegmentResponse"
           />&gt;
-        description: ''
   - name: 'setProperties(DataLakeServiceProperties, ServiceSetPropertiesOptions)'
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.setProperties'
     package: '@azure/storage-file-datalake'
@@ -409,13 +466,17 @@ methods:
 
       for Storage Analytics, CORS (Cross-Origin Resource Sharing) rules and soft
       delete settings.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-service-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setProperties(properties: DataLakeServiceProperties, options?:
-        ServiceSetPropertiesOptions)
+        ServiceSetPropertiesOptions): Promise<ServiceSetPropertiesResponse>
       parameters:
         - id: properties
           type: DataLakeServiceProperties
@@ -424,8 +485,8 @@ methods:
           type: ServiceSetPropertiesOptions
           description: Options to the Service Set Properties operation.
       return:
-        type: Promise&lt;ServiceSetPropertiesResponse&gt;
         description: Response data for the Service Set Properties operation.
+        type: Promise&lt;ServiceSetPropertiesResponse&gt;
   - name: 'undeleteFileSystem(string, string, ServiceUndeleteFileSystemOptions)'
     uid: '@azure/storage-file-datalake.DataLakeServiceClient.undeleteFileSystem'
     package: '@azure/storage-file-datalake'
@@ -441,7 +502,9 @@ methods:
       content: >-
         function undeleteFileSystem(deletedFileSystemName: string,
         deleteFileSystemVersion: string, options?:
-        ServiceUndeleteFileSystemOptions)
+        ServiceUndeleteFileSystemOptions): Promise<{ fileSystemClient:
+        DataLakeFileSystemClient, fileSystemUndeleteResponse:
+        FileSystemUndeleteResponse }>
       parameters:
         - id: deletedFileSystemName
           type: string
@@ -457,6 +520,8 @@ methods:
           description: |
             Options to configure File System Restore operation.
       return:
-        type: Promise&lt;Object&gt;
         description: ''
+        type: >-
+          Promise&lt;{ fileSystemClient: DataLakeFileSystemClient,
+          fileSystemUndeleteResponse: FileSystemUndeleteResponse }&gt;
 extends: <xref uid="@azure/storage-file-datalake.StorageClient" />

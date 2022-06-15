@@ -13,7 +13,7 @@ isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'BlobServiceClient(string, Pipeline)'
+  - name: 'BlobServiceClient(string, PipelineLike)'
     uid: '@azure/storage-blob.BlobServiceClient.constructor_1'
     package: '@azure/storage-blob'
     summary: Creates an instance of BlobServiceClient.
@@ -21,7 +21,7 @@ constructors:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'new BlobServiceClient(url: string, pipeline: Pipeline)'
+      content: 'new BlobServiceClient(url: string, pipeline: PipelineLike)'
       parameters:
         - id: url
           type: string
@@ -30,7 +30,7 @@ constructors:
                                 "https://myaccount.blob.core.windows.net". You can append a SAS
                                 if using AnonymousCredential, such as "https://myaccount.blob.core.windows.net?sasString".
         - id: pipeline
-          type: <xref uid="@azure/storage-blob.Pipeline" />
+          type: <xref uid="@azure/storage-blob.PipelineLike" />
           description: |
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
@@ -108,7 +108,7 @@ constructors:
             );
 
             ```
-properties:
+inheritedProperties:
   - name: accountName
     uid: '@azure/storage-blob.BlobServiceClient.accountName'
     package: '@azure/storage-blob'
@@ -120,8 +120,8 @@ properties:
     syntax:
       content: 'accountName: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: credential
     uid: '@azure/storage-blob.BlobServiceClient.credential'
     package: '@azure/storage-blob'
@@ -139,10 +139,10 @@ properties:
         credential: StorageSharedKeyCredential | AnonymousCredential |
         TokenCredential
       return:
+        description: ''
         type: >-
           <xref uid="@azure/storage-blob.StorageSharedKeyCredential" /> | <xref
           uid="@azure/storage-blob.AnonymousCredential" /> | TokenCredential
-        description: ''
   - name: url
     uid: '@azure/storage-blob.BlobServiceClient.url'
     package: '@azure/storage-blob'
@@ -154,8 +154,8 @@ properties:
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: 'createContainer(string, ContainerCreateOptions)'
     uid: '@azure/storage-blob.BlobServiceClient.createContainer'
@@ -167,7 +167,8 @@ methods:
     syntax:
       content: >-
         function createContainer(containerName: string, options?:
-        ContainerCreateOptions)
+        ContainerCreateOptions): Promise<{ containerClient: ContainerClient,
+        containerCreateResponse: ContainerCreateResponse }>
       parameters:
         - id: containerName
           type: string
@@ -176,8 +177,10 @@ methods:
           type: <xref uid="@azure/storage-blob.ContainerCreateOptions" />
           description: Options to configure Container Create operation.
       return:
-        type: Promise&lt;Object&gt;
         description: Container creation response and the corresponding container client.
+        type: >-
+          Promise&lt;{ containerClient: ContainerClient,
+          containerCreateResponse: ContainerCreateResponse }&gt;
   - name: 'deleteContainer(string, ContainerDeleteMethodOptions)'
     uid: '@azure/storage-blob.BlobServiceClient.deleteContainer'
     package: '@azure/storage-blob'
@@ -188,7 +191,7 @@ methods:
     syntax:
       content: >-
         function deleteContainer(containerName: string, options?:
-        ContainerDeleteMethodOptions)
+        ContainerDeleteMethodOptions): Promise<ContainerDeleteResponse>
       parameters:
         - id: containerName
           type: string
@@ -197,24 +200,135 @@ methods:
           type: <xref uid="@azure/storage-blob.ContainerDeleteMethodOptions" />
           description: Options to configure Container Delete operation.
       return:
+        description: Container deletion response.
         type: >-
           Promise&lt;<xref uid="@azure/storage-blob.ContainerDeleteResponse"
           />&gt;
-        description: Container deletion response.
   - name: 'findBlobsByTags(string, ServiceFindBlobByTagsOptions)'
     uid: '@azure/storage-blob.BlobServiceClient.findBlobsByTags'
     package: '@azure/storage-blob'
-    summary: |
+    summary: >-
       Returns an async iterable iterator to find all blobs with specified tag
+
       under the specified account.
+
       .byPage() returns an async iterable iterator to list the blobs in pages.
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob-service-properties
+
+
+      Example using `for await` syntax:
+
+
+      ```js
+
+      let i = 1;
+
+      for await (const blob of
+      blobServiceClient.findBlobsByTags("tagkey='tagvalue'")) {
+        console.log(`Blob ${i++}: ${container.name}`);
+      }
+
+      ```
+
+
+      Example using `iter.next()`:
+
+
+      ```js
+
+      let i = 1;
+
+      const iter = blobServiceClient.findBlobsByTags("tagkey='tagvalue'");
+
+      let blobItem = await iter.next();
+
+      while (!blobItem.done) {
+        console.log(`Blob ${i++}: ${blobItem.value.name}`);
+        blobItem = await iter.next();
+      }
+
+      ```
+
+
+      Example using `byPage()`:
+
+
+      ```js
+
+      // passing optional maxPageSize in the page settings
+
+      let i = 1;
+
+      for await (const response of
+      blobServiceClient.findBlobsByTags("tagkey='tagvalue'").byPage({
+      maxPageSize: 20 })) {
+        if (response.blobs) {
+          for (const blob of response.blobs) {
+            console.log(`Blob ${i++}: ${blob.name}`);
+          }
+        }
+      }
+
+      ```
+
+
+      Example using paging with a marker:
+
+
+      ```js
+
+      let i = 1;
+
+      let iterator =
+      blobServiceClient.findBlobsByTags("tagkey='tagvalue'").byPage({
+      maxPageSize: 2 });
+
+      let response = (await iterator.next()).value;
+
+
+      // Prints 2 blob names
+
+      if (response.blobs) {
+        for (const blob of response.blobs) {
+          console.log(`Blob ${i++}: ${blob.name}`);
+        }
+      }
+
+
+      // Gets next marker
+
+      let marker = response.continuationToken;
+
+      // Passing next marker as continuationToken
+
+      iterator = blobServiceClient
+        .findBlobsByTags("tagkey='tagvalue'")
+        .byPage({ continuationToken: marker, maxPageSize: 10 });
+      response = (await iterator.next()).value;
+
+
+      // Prints blob names
+
+      if (response.blobs) {
+        for (const blob of response.blobs) {
+           console.log(`Blob ${i++}: ${blob.name}`);
+        }
+      }
+
+      ```
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function findBlobsByTags(tagFilterSqlExpression: string, options?:
-        ServiceFindBlobByTagsOptions)
+        ServiceFindBlobByTagsOptions):
+        PagedAsyncIterableIterator<FilterBlobItem,
+        ServiceFindBlobsByTagsSegmentResponse>
       parameters:
         - id: tagFilterSqlExpression
           type: string
@@ -229,11 +343,11 @@ methods:
           description: |
             Options to find blobs by tags.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/storage-blob.FilterBlobItem" />, <xref
           uid="@azure/storage-blob.ServiceFindBlobsByTagsSegmentResponse" />&gt;
-        description: ''
   - name: 'fromConnectionString(string, StoragePipelineOptions)'
     uid: '@azure/storage-blob.BlobServiceClient.fromConnectionString'
     package: '@azure/storage-blob'
@@ -244,7 +358,7 @@ methods:
     syntax:
       content: >-
         static function fromConnectionString(connectionString: string, options?:
-        StoragePipelineOptions)
+        StoragePipelineOptions): BlobServiceClient
       parameters:
         - id: connectionString
           type: string
@@ -261,14 +375,14 @@ methods:
           description: |
             Optional. Options to configure the HTTP pipeline.
       return:
-        type: <xref uid="@azure/storage-blob.BlobServiceClient" />
         description: ''
+        type: <xref uid="@azure/storage-blob.BlobServiceClient" />
   - name: >-
       generateAccountSasUrl(Date, AccountSASPermissions, string,
       ServiceGenerateAccountSasUrlOptions)
     uid: '@azure/storage-blob.BlobServiceClient.generateAccountSasUrl'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       Only available for BlobServiceClient constructed with a shared key
       credential.
 
@@ -277,6 +391,11 @@ methods:
 
       and parameters passed in. The SAS is signed by the shared key credential
       of the client.
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/create-account-sas
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -284,7 +403,7 @@ methods:
       content: >-
         function generateAccountSasUrl(expiresOn?: Date, permissions?:
         AccountSASPermissions, resourceTypes?: string, options?:
-        ServiceGenerateAccountSasUrlOptions)
+        ServiceGenerateAccountSasUrlOptions): string
       parameters:
         - id: expiresOn
           type: Date
@@ -305,10 +424,10 @@ methods:
             />
           description: Optional parameters.
       return:
-        type: string
         description: >-
           An account SAS URI consisting of the URI to the resource represented
           by this client, followed by the generated SAS token.
+        type: string
   - name: getAccountInfo(ServiceGetAccountInfoOptions)
     uid: '@azure/storage-blob.BlobServiceClient.getAccountInfo'
     package: '@azure/storage-blob'
@@ -322,47 +441,57 @@ methods:
       beginning
 
       with version 2018-03-28.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-account-information
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getAccountInfo(options?: ServiceGetAccountInfoOptions)'
+      content: >-
+        function getAccountInfo(options?: ServiceGetAccountInfoOptions):
+        Promise<ServiceGetAccountInfoResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ServiceGetAccountInfoOptions" />
           description: Options to the Service Get Account Info operation.
       return:
+        description: Response data for the Service Get Account Info operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.ServiceGetAccountInfoResponse" />&gt;
-        description: Response data for the Service Get Account Info operation.
   - name: getBlobBatchClient()
     uid: '@azure/storage-blob.BlobServiceClient.getBlobBatchClient'
     package: '@azure/storage-blob'
-    summary: Creates a BlobBatchClient object to conduct batch operations.
+    summary: |-
+      Creates a BlobBatchClient object to conduct batch operations.
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/blob-batch
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getBlobBatchClient()
+      content: 'function getBlobBatchClient(): BlobBatchClient'
       return:
-        type: <xref uid="@azure/storage-blob.BlobBatchClient" />
         description: A new BlobBatchClient object for this service.
+        type: <xref uid="@azure/storage-blob.BlobBatchClient" />
   - name: getContainerClient(string)
     uid: '@azure/storage-blob.BlobServiceClient.getContainerClient'
     package: '@azure/storage-blob'
-    summary: 'Creates a <xref:ContainerClient> object'
+    summary: >-
+      Creates a <xref:@azure/storage-blob.BlobServiceClient.getContainerClient>
+      object
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getContainerClient(containerName: string)'
+      content: 'function getContainerClient(containerName: string): ContainerClient'
       parameters:
         - id: containerName
           type: string
           description: A container name
       return:
-        type: <xref uid="@azure/storage-blob.ContainerClient" />
         description: >-
           A new ContainerClient object for the given container name.
 
@@ -376,6 +505,7 @@ methods:
           blobServiceClient.getContainerClient("<container name>");
 
           ```
+        type: <xref uid="@azure/storage-blob.ContainerClient" />
   - name: getProperties(ServiceGetPropertiesOptions)
     uid: '@azure/storage-blob.BlobServiceClient.getProperties'
     package: '@azure/storage-blob'
@@ -384,20 +514,26 @@ methods:
       properties
 
       for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob-service-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperties(options?: ServiceGetPropertiesOptions)'
+      content: >-
+        function getProperties(options?: ServiceGetPropertiesOptions):
+        Promise<ServiceGetPropertiesResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ServiceGetPropertiesOptions" />
           description: Options to the Service Get Properties operation.
       return:
+        description: Response data for the Service Get Properties operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.ServiceGetPropertiesResponse" />&gt;
-        description: Response data for the Service Get Properties operation.
   - name: getStatistics(ServiceGetStatisticsOptions)
     uid: '@azure/storage-blob.BlobServiceClient.getStatistics'
     package: '@azure/storage-blob'
@@ -409,37 +545,49 @@ methods:
       geo-redundant
 
       replication is enabled for the storage account.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob-service-stats
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getStatistics(options?: ServiceGetStatisticsOptions)'
+      content: >-
+        function getStatistics(options?: ServiceGetStatisticsOptions):
+        Promise<ServiceGetStatisticsResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ServiceGetStatisticsOptions" />
           description: Options to the Service Get Statistics operation.
       return:
+        description: Response data for the Service Get Statistics operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.ServiceGetStatisticsResponse" />&gt;
-        description: Response data for the Service Get Statistics operation.
   - name: 'getUserDelegationKey(Date, Date, ServiceGetUserDelegationKeyOptions)'
     uid: '@azure/storage-blob.BlobServiceClient.getUserDelegationKey'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       ONLY AVAILABLE WHEN USING BEARER TOKEN AUTHENTICATION (TokenCredential).
 
       Retrieves a user delegation key for the Blob service. This is only a valid
       operation when using
 
       bearer token authentication.
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-user-delegation-key
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function getUserDelegationKey(startsOn: Date, expiresOn: Date, options?:
-        ServiceGetUserDelegationKeyOptions)
+        ServiceGetUserDelegationKeyOptions):
+        Promise<ServiceGetUserDelegationKeyResponse>
       parameters:
         - id: startsOn
           type: Date
@@ -457,10 +605,10 @@ methods:
             />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.ServiceGetUserDelegationKeyResponse" />&gt;
-        description: ''
   - name: listContainers(ServiceListContainersOptions)
     uid: '@azure/storage-blob.BlobServiceClient.listContainers'
     package: '@azure/storage-blob'
@@ -574,17 +722,20 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listContainers(options?: ServiceListContainersOptions)'
+      content: >-
+        function listContainers(options?: ServiceListContainersOptions):
+        PagedAsyncIterableIterator<ContainerItem,
+        ServiceListContainersSegmentResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-blob.ServiceListContainersOptions" />
           description: Options to list containers.
       return:
+        description: An asyncIterableIterator that supports paging.
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/storage-blob.ContainerItem" />, <xref
           uid="@azure/storage-blob.ServiceListContainersSegmentResponse" />&gt;
-        description: An asyncIterableIterator that supports paging.
   - name: 'setProperties(BlobServiceProperties, ServiceSetPropertiesOptions)'
     uid: '@azure/storage-blob.BlobServiceClient.setProperties'
     package: '@azure/storage-blob'
@@ -594,13 +745,17 @@ methods:
 
       for Storage Analytics, CORS (Cross-Origin Resource Sharing) rules and soft
       delete settings.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-service-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setProperties(properties: BlobServiceProperties, options?:
-        ServiceSetPropertiesOptions)
+        ServiceSetPropertiesOptions): Promise<ServiceSetPropertiesResponse>
       parameters:
         - id: properties
           type: <xref uid="@azure/storage-blob.BlobServiceProperties" />
@@ -609,10 +764,10 @@ methods:
           type: <xref uid="@azure/storage-blob.ServiceSetPropertiesOptions" />
           description: Options to the Service Set Properties operation.
       return:
+        description: Response data for the Service Set Properties operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-blob.ServiceSetPropertiesResponse" />&gt;
-        description: Response data for the Service Set Properties operation.
   - name: 'undeleteContainer(string, string, ServiceUndeleteContainerOptions)'
     uid: '@azure/storage-blob.BlobServiceClient.undeleteContainer'
     package: '@azure/storage-blob'
@@ -628,7 +783,8 @@ methods:
       content: >-
         function undeleteContainer(deletedContainerName: string,
         deletedContainerVersion: string, options?:
-        ServiceUndeleteContainerOptions)
+        ServiceUndeleteContainerOptions): Promise<{ containerClient:
+        ContainerClient, containerUndeleteResponse: ContainerUndeleteResponse }>
       parameters:
         - id: deletedContainerName
           type: string
@@ -642,6 +798,8 @@ methods:
           type: <xref uid="@azure/storage-blob.ServiceUndeleteContainerOptions" />
           description: Options to configure Container Restore operation.
       return:
-        type: Promise&lt;Object&gt;
         description: Container deletion response.
+        type: >-
+          Promise&lt;{ containerClient: ContainerClient,
+          containerUndeleteResponse: ContainerUndeleteResponse }&gt;
 extends: <xref uid="@azure/storage-blob.StorageClient" />

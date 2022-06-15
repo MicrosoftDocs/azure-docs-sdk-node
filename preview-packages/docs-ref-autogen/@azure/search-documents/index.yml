@@ -70,6 +70,7 @@ interfaces:
   - '@azure/search-documents.CaptionResult'
   - '@azure/search-documents.ComplexField'
   - '@azure/search-documents.CorsOptions'
+  - '@azure/search-documents.CreateOrUpdateAliasOptions'
   - '@azure/search-documents.CreateOrUpdateIndexOptions'
   - '@azure/search-documents.CreateOrUpdateSkillsetOptions'
   - '@azure/search-documents.CreateOrUpdateSynonymMapOptions'
@@ -78,6 +79,7 @@ interfaces:
   - '@azure/search-documents.CustomAnalyzer'
   - '@azure/search-documents.CustomEntity'
   - '@azure/search-documents.CustomEntityAlias'
+  - '@azure/search-documents.DeleteAliasOptions'
   - '@azure/search-documents.DeleteDataSourceConnectionOptions'
   - '@azure/search-documents.DeleteIndexOptions'
   - '@azure/search-documents.DeleteIndexerOptions'
@@ -93,8 +95,8 @@ interfaces:
   - '@azure/search-documents.IndexDocumentsClient'
   - '@azure/search-documents.IndexDocumentsOptions'
   - '@azure/search-documents.IndexDocumentsResult'
-  - '@azure/search-documents.IndexerCurrentState'
   - '@azure/search-documents.IndexerExecutionResult'
+  - '@azure/search-documents.IndexerState'
   - '@azure/search-documents.IndexingParameters'
   - '@azure/search-documents.IndexingParametersConfiguration'
   - '@azure/search-documents.IndexingResult'
@@ -108,9 +110,12 @@ interfaces:
   - '@azure/search-documents.OutputFieldMappingEntry'
   - '@azure/search-documents.PatternAnalyzer'
   - '@azure/search-documents.PatternTokenizer'
-  - '@azure/search-documents.ResetDocsOptions'
+  - '@azure/search-documents.PrioritizedFields'
+  - '@azure/search-documents.ResetDocumentsOptions'
+  - '@azure/search-documents.ResetSkillsOptions'
   - '@azure/search-documents.ResourceCounter'
   - '@azure/search-documents.ScoringProfile'
+  - '@azure/search-documents.SearchAlias'
   - '@azure/search-documents.SearchClientOptions'
   - '@azure/search-documents.SearchDocumentsPageResult'
   - '@azure/search-documents.SearchDocumentsResult'
@@ -137,6 +142,9 @@ interfaces:
   - '@azure/search-documents.SearchResourceEncryptionKey'
   - '@azure/search-documents.SearchServiceStatistics'
   - '@azure/search-documents.SearchSuggester'
+  - '@azure/search-documents.SemanticConfiguration'
+  - '@azure/search-documents.SemanticField'
+  - '@azure/search-documents.SemanticSettings'
   - '@azure/search-documents.ServiceCounters'
   - '@azure/search-documents.ServiceLimits'
   - '@azure/search-documents.Similarity'
@@ -147,11 +155,13 @@ interfaces:
   - '@azure/search-documents.TagScoringParameters'
   - '@azure/search-documents.TextWeights'
 typeAliases:
+  - '@azure/search-documents.AliasIterator'
   - '@azure/search-documents.AnalyzeTextOptions'
   - '@azure/search-documents.Answers'
   - '@azure/search-documents.AsciiFoldingTokenFilter'
   - '@azure/search-documents.AutocompleteMode'
   - '@azure/search-documents.AutocompleteOptions'
+  - '@azure/search-documents.AzureMachineLearningSkill'
   - '@azure/search-documents.BM25Similarity'
   - '@azure/search-documents.BlobIndexerDataToExtract'
   - '@azure/search-documents.BlobIndexerImageAction'
@@ -170,6 +180,7 @@ typeAliases:
   - '@azure/search-documents.ComplexDataType'
   - '@azure/search-documents.ConditionalSkill'
   - '@azure/search-documents.CountDocumentsOptions'
+  - '@azure/search-documents.CreateAliasOptions'
   - '@azure/search-documents.CreateDataSourceConnectionOptions'
   - '@azure/search-documents.CreateIndexOptions'
   - '@azure/search-documents.CreateIndexerOptions'
@@ -194,6 +205,7 @@ typeAliases:
   - '@azure/search-documents.EntityRecognitionSkillLanguage'
   - '@azure/search-documents.EntityRecognitionSkillV3'
   - '@azure/search-documents.FreshnessScoringFunction'
+  - '@azure/search-documents.GetAliasOptions'
   - '@azure/search-documents.GetDataSourceConnectionOptions'
   - '@azure/search-documents.GetIndexOptions'
   - '@azure/search-documents.GetIndexStatisticsOptions'
@@ -228,6 +240,7 @@ typeAliases:
   - '@azure/search-documents.LexicalTokenizer'
   - '@azure/search-documents.LimitTokenFilter'
   - '@azure/search-documents.LineEnding'
+  - '@azure/search-documents.ListAliasesOptions'
   - '@azure/search-documents.ListDataSourceConnectionsOptions'
   - '@azure/search-documents.ListIndexersOptions'
   - '@azure/search-documents.ListIndexesOptions'
@@ -261,7 +274,6 @@ typeAliases:
   - '@azure/search-documents.QueryType'
   - '@azure/search-documents.RegexFlags'
   - '@azure/search-documents.ResetIndexerOptions'
-  - '@azure/search-documents.ResetSkillsOptions'
   - '@azure/search-documents.RunIndexerOptions'
   - '@azure/search-documents.ScoringFunction'
   - '@azure/search-documents.ScoringFunctionAggregation'
@@ -269,6 +281,7 @@ typeAliases:
   - '@azure/search-documents.ScoringStatistics'
   - '@azure/search-documents.SearchField'
   - '@azure/search-documents.SearchFieldDataType'
+  - '@azure/search-documents.SearchIndexAlias'
   - '@azure/search-documents.SearchIndexerDataIdentity'
   - '@azure/search-documents.SearchIndexerDataNoneIdentity'
   - '@azure/search-documents.SearchIndexerDataSourceType'
@@ -333,7 +346,9 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createSynonymMapFromFile(name: string, filePath: string)'
+      content: >-
+        function createSynonymMapFromFile(name: string, filePath: string):
+        Promise<SynonymMap>
       parameters:
         - id: name
           type: string
@@ -342,8 +357,8 @@ functions:
           type: string
           description: Path of the file that contains the Synonyms (seperated by new lines)
       return:
-        type: Promise&lt;<xref uid="@azure/search-documents.SynonymMap" />&gt;
         description: SynonymMap object
+        type: Promise&lt;<xref uid="@azure/search-documents.SynonymMap" />&gt;
   - name: 'odata(TemplateStringsArray, unknown[])'
     uid: '@azure/search-documents.odata'
     package: '@azure/search-documents'
@@ -370,7 +385,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function odata(strings: TemplateStringsArray, values: unknown[])'
+      content: 'function odata(strings: TemplateStringsArray, values: unknown[]): string'
       parameters:
         - id: strings
           type: TemplateStringsArray
@@ -380,5 +395,5 @@ functions:
           description: |
             Array of values for the expression
       return:
-        type: string
         description: ''
+        type: string

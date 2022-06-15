@@ -2,31 +2,16 @@
 name: Policies
 uid: '@azure/arm-frontdoor.Policies'
 package: '@azure/arm-frontdoor'
-summary: Class representing a Policies.
+summary: Interface representing a Policies.
 fullName: Policies
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: Policies(FrontDoorManagementClientContext)
-    uid: '@azure/arm-frontdoor.Policies.constructor'
-    package: '@azure/arm-frontdoor'
-    summary: Create a Policies.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'new Policies(client: FrontDoorManagementClientContext)'
-      parameters:
-        - id: client
-          type: <xref uid="@azure/arm-frontdoor.FrontDoorManagementClientContext" />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
   - name: >-
       beginCreateOrUpdate(string, string, WebApplicationFirewallPolicy,
-      msRest.RequestOptionsBase)
+      PoliciesCreateOrUpdateOptionalParams)
     uid: '@azure/arm-frontdoor.Policies.beginCreateOrUpdate'
     package: '@azure/arm-frontdoor'
     summary: >-
@@ -39,7 +24,9 @@ methods:
       content: >-
         function beginCreateOrUpdate(resourceGroupName: string, policyName:
         string, parameters: WebApplicationFirewallPolicy, options?:
-        msRest.RequestOptionsBase)
+        PoliciesCreateOrUpdateOptionalParams):
+        Promise<PollerLike<PollOperationState<PoliciesCreateOrUpdateResponse>,
+        PoliciesCreateOrUpdateResponse>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -51,39 +38,22 @@ methods:
           type: <xref uid="@azure/arm-frontdoor.WebApplicationFirewallPolicy" />
           description: Policy to be created.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-frontdoor.PoliciesCreateOrUpdateOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
-  - name: 'beginDeleteMethod(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-frontdoor.Policies.beginDeleteMethod'
-    package: '@azure/arm-frontdoor'
-    summary: Deletes Policy
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginDeleteMethod(resourceGroupName: string, policyName:
-        string, options?: msRest.RequestOptionsBase)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: Name of the Resource group within the Azure subscription.
-        - id: policyName
-          type: string
-          description: The name of the Web Application Firewall Policy.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;LROPoller&gt;
-        description: Promise<msRestAzure.LROPoller>
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-frontdoor.PoliciesCreateOrUpdateResponse" />&gt;,
+          <xref uid="@azure/arm-frontdoor.PoliciesCreateOrUpdateResponse"
+          />&gt;&gt;
   - name: >-
-      createOrUpdate(string, string, WebApplicationFirewallPolicy,
-      msRest.RequestOptionsBase)
-    uid: '@azure/arm-frontdoor.Policies.createOrUpdate'
+      beginCreateOrUpdateAndWait(string, string, WebApplicationFirewallPolicy,
+      PoliciesCreateOrUpdateOptionalParams)
+    uid: '@azure/arm-frontdoor.Policies.beginCreateOrUpdateAndWait'
     package: '@azure/arm-frontdoor'
     summary: >-
       Create or update policy with specified rule set name within a resource
@@ -93,9 +63,10 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createOrUpdate(resourceGroupName: string, policyName: string,
-        parameters: WebApplicationFirewallPolicy, options?:
-        msRest.RequestOptionsBase)
+        function beginCreateOrUpdateAndWait(resourceGroupName: string,
+        policyName: string, parameters: WebApplicationFirewallPolicy, options?:
+        PoliciesCreateOrUpdateOptionalParams):
+        Promise<PoliciesCreateOrUpdateResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -107,13 +78,18 @@ methods:
           type: <xref uid="@azure/arm-frontdoor.WebApplicationFirewallPolicy" />
           description: Policy to be created.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-frontdoor.PoliciesCreateOrUpdateOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.PoliciesCreateOrUpdateResponse" />&gt;
-        description: Promise<Models.PoliciesCreateOrUpdateResponse>
-  - name: 'deleteMethod(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-frontdoor.Policies.deleteMethod'
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-frontdoor.PoliciesCreateOrUpdateResponse" />&gt;
+  - name: 'beginDelete(string, string, PoliciesDeleteOptionalParams)'
+    uid: '@azure/arm-frontdoor.Policies.beginDelete'
     package: '@azure/arm-frontdoor'
     summary: Deletes Policy
     remarks: ''
@@ -121,8 +97,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function deleteMethod(resourceGroupName: string, policyName: string,
-        options?: msRest.RequestOptionsBase)
+        function beginDelete(resourceGroupName: string, policyName: string,
+        options?: PoliciesDeleteOptionalParams):
+        Promise<PollerLike<PollOperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -131,12 +108,38 @@ methods:
           type: string
           description: The name of the Web Application Firewall Policy.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-frontdoor.PoliciesDeleteOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;RestResponse&gt;
-        description: Promise<msRest.RestResponse>
-  - name: 'get(string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+  - name: 'beginDeleteAndWait(string, string, PoliciesDeleteOptionalParams)'
+    uid: '@azure/arm-frontdoor.Policies.beginDeleteAndWait'
+    package: '@azure/arm-frontdoor'
+    summary: Deletes Policy
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteAndWait(resourceGroupName: string, policyName:
+        string, options?: PoliciesDeleteOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: Name of the Resource group within the Azure subscription.
+        - id: policyName
+          type: string
+          description: The name of the Web Application Firewall Policy.
+        - id: options
+          type: <xref uid="@azure/arm-frontdoor.PoliciesDeleteOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: 'get(string, string, PoliciesGetOptionalParams)'
     uid: '@azure/arm-frontdoor.Policies.get'
     package: '@azure/arm-frontdoor'
     summary: Retrieve protection policy with specified name within a resource group.
@@ -146,7 +149,7 @@ methods:
     syntax:
       content: >-
         function get(resourceGroupName: string, policyName: string, options?:
-        msRest.RequestOptionsBase)
+        PoliciesGetOptionalParams): Promise<PoliciesGetResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -155,66 +158,13 @@ methods:
           type: string
           description: The name of the Web Application Firewall Policy.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-frontdoor.PoliciesGetOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.PoliciesGetResponse" />&gt;
-        description: Promise<Models.PoliciesGetResponse>
-  - name: >-
-      get(string, string, RequestOptionsBase,
-      ServiceCallback<WebApplicationFirewallPolicy>)
-    uid: '@azure/arm-frontdoor.Policies.get_2'
-    package: '@azure/arm-frontdoor'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, policyName: string, options:
-        RequestOptionsBase, callback:
-        ServiceCallback<WebApplicationFirewallPolicy>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: Name of the Resource group within the Azure subscription.
-        - id: policyName
-          type: string
-          description: The name of the Web Application Firewall Policy.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-frontdoor.WebApplicationFirewallPolicy" />&gt;
-          description: |
-            The callback
-  - name: 'get(string, string, ServiceCallback<WebApplicationFirewallPolicy>)'
-    uid: '@azure/arm-frontdoor.Policies.get_1'
-    package: '@azure/arm-frontdoor'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, policyName: string, callback:
-        ServiceCallback<WebApplicationFirewallPolicy>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: Name of the Resource group within the Azure subscription.
-        - id: policyName
-          type: string
-          description: The name of the Web Application Firewall Policy.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-frontdoor.WebApplicationFirewallPolicy" />&gt;
-          description: |
-            The callback
-  - name: 'list(string, msRest.RequestOptionsBase)'
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-frontdoor.PoliciesGetResponse" />&gt;
+  - name: 'list(string, PoliciesListOptionalParams)'
     uid: '@azure/arm-frontdoor.Policies.list'
     package: '@azure/arm-frontdoor'
     summary: Lists all of the protection policies within a resource group.
@@ -224,129 +174,18 @@ methods:
     syntax:
       content: >-
         function list(resourceGroupName: string, options?:
-        msRest.RequestOptionsBase)
+        PoliciesListOptionalParams):
+        PagedAsyncIterableIterator<WebApplicationFirewallPolicy>
       parameters:
         - id: resourceGroupName
           type: string
           description: Name of the Resource group within the Azure subscription.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-frontdoor.PoliciesListOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        type: Promise&lt;<xref uid="Models.PoliciesListResponse" />&gt;
-        description: Promise<Models.PoliciesListResponse>
-  - name: >-
-      list(string, RequestOptionsBase,
-      ServiceCallback<WebApplicationFirewallPolicyList>)
-    uid: '@azure/arm-frontdoor.Policies.list_2'
-    package: '@azure/arm-frontdoor'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(resourceGroupName: string, options: RequestOptionsBase,
-        callback: ServiceCallback<WebApplicationFirewallPolicyList>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: Name of the Resource group within the Azure subscription.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-frontdoor.WebApplicationFirewallPolicyList" />&gt;
-          description: |
-            The callback
-  - name: 'list(string, ServiceCallback<WebApplicationFirewallPolicyList>)'
-    uid: '@azure/arm-frontdoor.Policies.list_1'
-    package: '@azure/arm-frontdoor'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function list(resourceGroupName: string, callback:
-        ServiceCallback<WebApplicationFirewallPolicyList>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: Name of the Resource group within the Azure subscription.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-frontdoor.WebApplicationFirewallPolicyList" />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-frontdoor.Policies.listNext'
-    package: '@azure/arm-frontdoor'
-    summary: Lists all of the protection policies within a resource group.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        type: Promise&lt;<xref uid="Models.PoliciesListNextResponse" />&gt;
-        description: Promise<Models.PoliciesListNextResponse>
-  - name: >-
-      listNext(string, RequestOptionsBase,
-      ServiceCallback<WebApplicationFirewallPolicyList>)
-    uid: '@azure/arm-frontdoor.Policies.listNext_2'
-    package: '@azure/arm-frontdoor'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, options: RequestOptionsBase,
-        callback: ServiceCallback<WebApplicationFirewallPolicyList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-frontdoor.WebApplicationFirewallPolicyList" />&gt;
-          description: |
-            The callback
-  - name: 'listNext(string, ServiceCallback<WebApplicationFirewallPolicyList>)'
-    uid: '@azure/arm-frontdoor.Policies.listNext_1'
-    package: '@azure/arm-frontdoor'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listNext(nextPageLink: string, callback:
-        ServiceCallback<WebApplicationFirewallPolicyList>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref
-            uid="@azure/arm-frontdoor.WebApplicationFirewallPolicyList" />&gt;
-          description: |
-            The callback
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/arm-frontdoor.WebApplicationFirewallPolicy" />&gt;

@@ -1,17 +1,14 @@
 ---
 title: Azure Tables client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/data-tables, tables
-author: maggiepint
-ms.author: magpint
-ms.date: 09/07/2021
+author: joheredi
+ms.author: joheredi
+ms.date: 06/07/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: tables
 ---
-
-# Azure Tables client library for JavaScript - Version 12.1.2 
+# Azure Tables client library for JavaScript - Version 13.1.2 
 
 
 [Azure Tables](https://azure.microsoft.com/services/storage/tables/) is a cloud-based service that stores structured NoSQL data, providing a key/attribute store with a schemaless design. Tables storage gives developers flexibility and scalability with all the best parts of Azure cloud.
@@ -31,11 +28,12 @@ Azure Cosmos DB provides a Table API for applications that are written for Azure
 - The Azure Tables client library can seamlessly target either Azure table storage or Azure Cosmos DB table service endpoints with no code changes.
 
 Key links:
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.1.2/sdk/tables/data-tables/)
+
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.2/sdk/tables/data-tables/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/data-tables)
-- [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/data-tables)
-- [Product documentation](https://docs.microsoft.com/azure/storage/tables/table-storage-overview/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_12.1.2/sdk/tables/data-tables/samples)
+- [API reference documentation](/javascript/api/@azure/data-tables)
+- [Product documentation](/azure/storage/tables/table-storage-overview/)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/data-tables_13.1.2/sdk/tables/data-tables/samples)
 
 ## Getting started
 
@@ -46,7 +44,7 @@ Currently supported environments:
 - LTS versions of Node.js
 - Latest versions of Safari, Chrome, Edge and Firefox
 
-You must have an [Azure subscription](https://azure.microsoft.com/free/) and a [Storage Account](https://docs.microsoft.com/azure/storage/tables/table-storage-quickstart-portal) or an [Azure CosmosDB database](https://docs.microsoft.com/azure/cosmos-db/create-cosmosdb-resources-portal) to use this package.
+You must have an [Azure subscription](https://azure.microsoft.com/free/) and a [Storage Account](/azure/storage/tables/table-storage-quickstart-portal) or an [Azure CosmosDB database](/azure/cosmos-db/create-cosmosdb-resources-portal) to use this package.
 
 ### Install the `@azure/data-tables` package
 
@@ -81,7 +79,7 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 #### CORS
 
-You need to set up [Cross-Origin Resource Sharing (CORS)](https://docs.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) rules for your storage account if you need to develop for browsers. Go to Azure portal and Azure Storage Explorer, find your storage account, create new CORS rules for blob/queue/file/table service(s).
+You need to set up [Cross-Origin Resource Sharing (CORS)](/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services) rules for your storage account if you need to develop for browsers. Go to Azure portal and Azure Storage Explorer, find your storage account, create new CORS rules for blob/queue/file/table service(s).
 
 For example, you can create following CORS settings for debugging. But please customize the settings carefully according to your requirements in production environment.
 
@@ -136,7 +134,26 @@ const { TableServiceClient, AzureNamedKeyCredential } = require("@azure/data-tab
 
 The `TableServiceClient` requires a URL to the table service and an access credential. It also optionally accepts some settings in the `options` parameter.
 
+#### `TableServiceClient` with AzureNamedKeyCredential
+
+You can instantiate a `TableServiceClient` with a `AzureNamedKeyCredential` by passing account-name and account-key as arguments. (The account-name and account-key can be obtained from the azure portal.)
+[ONLY AVAILABLE IN NODE.JS RUNTIME]
+
+```javascript
+const { TableServiceClient, AzureNamedKeyCredential } = require("@azure/data-tables");
+
+const account = "<account>";
+const accountKey = "<accountkey>";
+
+const credential = new AzureNamedKeyCredential(account, accountKey);
+const serviceClient = new TableServiceClient(
+  `https://${account}.table.core.windows.net`,
+  credential
+);
+```
+
 #### `TableServiceClient` with TokenCredential (AAD)
+
 Azure Tables provides integration with Azure Active Directory (Azure AD) for identity-based authentication of requests
 to the Table service when targeting a Storage endpoint. With Azure AD, you can use role-based access control (RBAC) to
 grant access to your Azure Table resources to users, groups, or applications.
@@ -144,7 +161,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.1.2/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.2/sdk/identity/identity/README.md)
 
 ```javascript
 const { TableServiceClient } = require("@azure/data-tables");
@@ -216,6 +233,30 @@ main();
 #### Create a new table
 
 You can create a table through a `TableServiceClient` instance calling the `createTable` function. This function takes the name of the table to create as a parameter.
+Note that `createTable` won't throw an error when the table already exists.
+
+```javascript
+const { TableServiceClient, AzureNamedKeyCredential } = require("@azure/data-tables");
+
+const account = "<account>";
+const accountKey = "<accountkey>";
+
+const credential = new AzureNamedKeyCredential(account, accountKey);
+const serviceClient = new TableServiceClient(
+  `https://${account}.table.core.windows.net`,
+  credential
+);
+
+async function main() {
+  const tableName = `newtable`;
+  // If the table 'newTable' already exists, createTable doesn't throw
+  await serviceClient.createTable(tableName);
+}
+
+main();
+```
+
+Here is a sample that demonstrates how to test if the table already exists when attempting to create it:
 
 ```javascript
 const { TableServiceClient, AzureNamedKeyCredential } = require("@azure/data-tables");
@@ -231,7 +272,13 @@ const serviceClient = new TableServiceClient(
 
 async function main() {
   const tableName = `newtable${new Date().getTime()}`;
-  await serviceClient.createTable(tableName);
+  await serviceClient.createTable(tableName, {
+    onResponse: (response) => {
+      if (response.status === 409) {
+        console.log(`Table ${tableName} already exists`);
+      }
+    }
+  });
 }
 
 main();
@@ -261,6 +308,7 @@ const client = new TableClient(`https://${account}.table.core.windows.net`, tabl
 ```
 
 #### `TableClient` with `TokenCredential` (Azure Active Directory)
+
 Azure Tables provides integration with Azure Active Directory (Azure AD) for identity-based authentication of requests
 to the Table service when targeting a Storage endpoint. With Azure AD, you can use role-based access control (RBAC) to
 grant access to your Azure Table resources to users, groups, or applications.
@@ -268,7 +316,7 @@ grant access to your Azure Table resources to users, groups, or applications.
 To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
 
 With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
-To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.1.2/sdk/identity/identity/README.md)
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.2/sdk/identity/identity/README.md)
 
 ```javascript
 const { TableClient } = require("@azure/data-tables");
@@ -304,6 +352,36 @@ const clientWithSAS = new TableClient(
   `https://${account}.table.core.windows.net`,
   tableName,
   new AzureSASCredential(sas)
+);
+```
+
+#### `TableClient` with TokenCredential (AAD)
+
+Azure Tables provides integration with Azure Active Directory (Azure AD) for identity-based authentication of requests
+to the Table service when targeting a Storage endpoint. With Azure AD, you can use role-based access control (RBAC) to
+grant access to your Azure Table resources to users, groups, or applications.
+
+To access a table resource with a `TokenCredential`, the authenticated identity should have either the "Storage Table Data Contributor" or "Storage Table Data Reader" role.
+
+With the `@azure/identity` package, you can seamlessly authorize requests in both development and production environments.
+To learn more about Azure AD integration in Azure Storage, see the [Azure.Identity README](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.2/sdk/identity/identity/README.md)
+
+```javascript
+const { TableClient } = require("@azure/data-tables");
+const { DefaultAzureCredential } = require("@azure/identity");
+
+// DefaultAzureCredential expects the following three environment variables:
+// - AZURE_TENANT_ID: The tenant ID in Azure Active Directory
+// - AZURE_CLIENT_ID: The application (client) ID registered in the AAD tenant
+// - AZURE_CLIENT_SECRET: The client secret for the registered application
+const credential = new DefaultAzureCredential();
+const account = "<account name>";
+const tableName = "<tableName>";
+
+const clientWithAAD = new TableClient(
+  `https://${account}.table.core.windows.net`,
+  tableName,
+  credential
 );
 ```
 
@@ -365,12 +443,42 @@ async function main() {
 main();
 ```
 
+## Azurite and Storage Emulator
+
+The Azure Tables Client SDK also works with Azurite, an Azure Storage and Tables API compatible server emulator. Please refer to the ([Azurite repository](https://github.com/Azure/Azurite#azurite-v3)) on how to get started using it.
+
+### Connecting to Azurite with Connection String shortcut
+
+The easiest way to connect to Azurite from your application is to configure a connection string that references the shortcut `UseDevelopmentStorage=true`. The shortcut is equivalent to the full connection string for the emulator, which specifies the account name, the account key, and the emulator endpoints for each of the Azure Storage services: ([see more](https://github.com/Azure/Azurite#http-connection-strings)). Using this shortcut, the Azure Tables Client SDK would setup the default connection string and `allowInsecureConnection` in the client options.
+
+```typescript
+import { TableClient } from "@azure/data-tables";
+
+const connectionString = "UseDevelopmentStorage=true";
+const client = TableClient.fromConnectionString(connectionString, "myTable");
+```
+
+### Connecting to Azurite without Connection String shortcut
+
+You can connect to azurite manually without using the connection string shortcut by specifying the service URL and `AzureNamedKeyCredential` or a custom connection string. However, `allowInsecureConnection` will need to be set manually in case Azurite runs in an `http` endpoint.
+
+```typescript
+import { TableClient, AzureNamedKeyCredential } from "@azure/data-tables";
+
+const client = new TableClient(
+  "<Azurite-http-table-endpoint>",
+  "myTable",
+  new AzureNamedKeyCredential("<Azurite-account-name>", "<Azurite-account-key>"),
+  { allowInsecureConnection: true }
+);
+```
+
 ## Troubleshooting
 
 ### General
 
 When you interact with Tables service using the Javascript/Typescript SDK, errors returned by the service correspond to the same HTTP status codes returned for REST API requests:
-[Storage Table Service Error Codes](https://docs.microsoft.com/rest/api/storageservices/table-service-error-codes)
+[Storage Table Service Error Codes](/rest/api/storageservices/table-service-error-codes)
 
 ### Logging
 
@@ -400,7 +508,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_12.1.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/data-tables_13.1.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js/sdk/tables/README.png)
 

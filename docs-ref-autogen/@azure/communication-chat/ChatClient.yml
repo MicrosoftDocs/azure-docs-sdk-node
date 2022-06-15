@@ -23,7 +23,7 @@ constructors:
       parameters:
         - id: endpoint
           type: string
-          description: The url of the Communication Services resouce.
+          description: The url of the Communication Services resource.
         - id: credential
           type: CommunicationTokenCredential
           description: >-
@@ -46,7 +46,7 @@ methods:
     syntax:
       content: >-
         function createChatThread(request: CreateChatThreadRequest, options?:
-        CreateChatThreadOptions)
+        CreateChatThreadOptions): Promise<CreateChatThreadResult>
       parameters:
         - id: request
           type: <xref uid="@azure/communication-chat.CreateChatThreadRequest" />
@@ -56,10 +56,10 @@ methods:
           description: |
             Operation options.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/communication-chat.CreateChatThreadResult" />&gt;
-        description: ''
   - name: 'deleteChatThread(string, DeleteChatThreadOptions)'
     uid: '@azure/communication-chat.ChatClient.deleteChatThread'
     package: '@azure/communication-chat'
@@ -70,7 +70,7 @@ methods:
     syntax:
       content: >-
         function deleteChatThread(threadId: string, options?:
-        DeleteChatThreadOptions)
+        DeleteChatThreadOptions): Promise<void>
       parameters:
         - id: threadId
           type: string
@@ -80,8 +80,8 @@ methods:
           description: |
             Operation options.
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: getChatThreadClient(string)
     uid: '@azure/communication-chat.ChatClient.getChatThreadClient'
     package: '@azure/communication-chat'
@@ -90,15 +90,15 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getChatThreadClient(threadId: string)'
+      content: 'function getChatThreadClient(threadId: string): ChatThreadClient'
       parameters:
         - id: threadId
           type: string
           description: |
             Thread ID for the ChatThreadClient
       return:
-        type: <xref uid="@azure/communication-chat.ChatThreadClient" />
         description: ''
+        type: <xref uid="@azure/communication-chat.ChatThreadClient" />
   - name: listChatThreads(ListChatThreadsOptions)
     uid: '@azure/communication-chat.ChatClient.listChatThreads'
     package: '@azure/communication-chat'
@@ -107,17 +107,19 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listChatThreads(options?: ListChatThreadsOptions)'
+      content: >-
+        function listChatThreads(options?: ListChatThreadsOptions):
+        PagedAsyncIterableIterator<ChatThreadItem>
       parameters:
         - id: options
           type: <xref uid="@azure/communication-chat.ListChatThreadsOptions" />
           description: |
             List chat threads options.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/communication-chat.ChatThreadItem" />&gt;
-        description: ''
   - name: 'off("chatMessageDeleted", (e: ChatMessageDeletedEvent) => void)'
     uid: '@azure/communication-chat.ChatClient.off_2'
     package: '@azure/communication-chat'
@@ -493,6 +495,44 @@ methods:
           type: '(e: ReadReceiptReceivedEvent) =&gt; void'
           description: |
             The listener to handle the event.
+  - name: 'on("realTimeNotificationConnected", () => void)'
+    uid: '@azure/communication-chat.ChatClient.on_10'
+    package: '@azure/communication-chat'
+    summary: Subscribe function for realTimeNotificationConnected.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function on(event: "realTimeNotificationConnected", listener: () =>
+        void)
+      parameters:
+        - id: event
+          type: '"realTimeNotificationConnected"'
+          description: The realTimeNotificationConnected Event
+        - id: listener
+          type: () =&gt; void
+          description: |
+            The listener to handle the event.
+  - name: 'on("realTimeNotificationDisconnected", () => void)'
+    uid: '@azure/communication-chat.ChatClient.on_11'
+    package: '@azure/communication-chat'
+    summary: Subscribe function for realTimeNotificationDisconnected.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function on(event: "realTimeNotificationDisconnected", listener: () =>
+        void)
+      parameters:
+        - id: event
+          type: '"realTimeNotificationDisconnected"'
+          description: The realTimeNotificationDisconnected Event
+        - id: listener
+          type: () =&gt; void
+          description: |
+            The listener to handle the event.
   - name: 'on("typingIndicatorReceived", (e: TypingIndicatorReceivedEvent) => void)'
     uid: '@azure/communication-chat.ChatClient.on_3'
     package: '@azure/communication-chat'
@@ -524,10 +564,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function startRealtimeNotifications()
+      content: 'function startRealtimeNotifications(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: stopRealtimeNotifications()
     uid: '@azure/communication-chat.ChatClient.stopRealtimeNotifications'
     package: '@azure/communication-chat'
@@ -538,7 +578,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function stopRealtimeNotifications()
+      content: 'function stopRealtimeNotifications(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;

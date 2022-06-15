@@ -2,7 +2,7 @@
 name: Aborter
 uid: '@azure/storage-file.Aborter'
 package: '@azure/storage-file'
-summary: >
+summary: >+
   An aborter instance implements AbortSignal interface, can abort HTTP requests.
 
   - Call Aborter.none to create a new Aborter instance without timeout.
@@ -22,6 +22,62 @@ summary: >
 
   - Call aborter.getValue(key) to search and get value with corresponding key
   from current aborter to all parents.
+
+
+
+  **Example**
+
+
+  // Abort without timeout
+
+  await fileURL.uploadRange(Aborter.none, buf, 0, buf.length);
+
+
+
+
+  **Example**
+
+
+  // Abort container create in 1000ms
+
+  await fileURL.uploadRange(Aborter.timeout(1000), buf, 0, buf.length);
+
+
+
+
+  **Example**
+
+
+  // Share aborter cross multiple operations in 30s
+
+  // Upload the same data to 2 different data centers at the same time, abort
+  another when any of them is finished
+
+  const aborter = Aborter.timeout(30 * 1000);
+
+  fileURL1.uploadRange(aborter, buf, 0, buf.length).then(aborter.abort);
+
+  fileURL2.uploadRange(aborter, buf, 0, buf.length).then(aborter.abort);
+
+
+
+
+  **Example**
+
+
+  // Cascaded aborting
+
+  // All operations can't take more than 30 seconds
+
+  const aborter = Aborter.timeout(30 * 1000);
+
+
+  // Following 2 operations can't take more than 25 seconds
+
+  await fileURL.uploadRange(aborter.withTimeout(25 * 1000), buf, 0, buf.length);
+
+  await fileURL.uploadRange(aborter.withTimeout(25 * 1000), buf, 0, buf.length);
+
 fullName: Aborter
 remarks: ''
 isPreview: false
@@ -39,8 +95,8 @@ properties:
     syntax:
       content: 'aborted: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: none
     uid: '@azure/storage-file.Aborter.none'
     package: '@azure/storage-file'
@@ -52,8 +108,8 @@ properties:
     syntax:
       content: 'static none: Aborter'
       return:
-        type: <xref uid="@azure/storage-file.Aborter" />
         description: ''
+        type: <xref uid="@azure/storage-file.Aborter" />
   - name: onabort
     uid: '@azure/storage-file.Aborter.onabort'
     package: '@azure/storage-file'
@@ -65,8 +121,8 @@ properties:
     syntax:
       content: 'onabort: (this: AbortSignalLike, ev: any) => any | null'
       return:
-        type: '(this: AbortSignalLike, ev: any) =&gt; any | null'
         description: ''
+        type: '(this: AbortSignalLike, ev: any) =&gt; any | null'
 methods:
   - name: abort()
     uid: '@azure/storage-file.Aborter.abort'
@@ -111,10 +167,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function dispatchEvent()
+      content: 'function dispatchEvent(): boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: getValue(string)
     uid: '@azure/storage-file.Aborter.getValue'
     package: '@azure/storage-file'
@@ -129,14 +185,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getValue(key: string)'
+      content: >-
+        function getValue(key: string): string | number | boolean | null |
+        undefined
       parameters:
         - id: key
           type: string
           description: ''
       return:
-        type: string | number | boolean | null | undefined
         description: ''
+        type: string | number | boolean | null | undefined
   - name: 'removeEventListener("abort", (this: AbortSignalLike, ev: any) => any)'
     uid: '@azure/storage-file.Aborter.removeEventListener'
     package: '@azure/storage-file'
@@ -165,14 +223,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static function timeout(timeout: number)'
+      content: 'static function timeout(timeout: number): Aborter'
       parameters:
         - id: timeout
           type: number
           description: ''
       return:
-        type: <xref uid="@azure/storage-file.Aborter" />
         description: ''
+        type: <xref uid="@azure/storage-file.Aborter" />
   - name: withTimeout(number)
     uid: '@azure/storage-file.Aborter.withTimeout'
     package: '@azure/storage-file'
@@ -194,14 +252,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withTimeout(timeout: number)'
+      content: 'function withTimeout(timeout: number): Aborter'
       parameters:
         - id: timeout
           type: number
           description: ''
       return:
-        type: <xref uid="@azure/storage-file.Aborter" />
         description: The new Aborter instance created.
+        type: <xref uid="@azure/storage-file.Aborter" />
   - name: 'withValue(string, string | number | boolean | null)'
     uid: '@azure/storage-file.Aborter.withValue'
     package: '@azure/storage-file'
@@ -228,7 +286,7 @@ methods:
     syntax:
       content: >-
         function withValue(key: string, value?: string | number | boolean |
-        null)
+        null): Aborter
       parameters:
         - id: key
           type: string
@@ -237,5 +295,5 @@ methods:
           type: string | number | boolean | null
           description: ''
       return:
-        type: <xref uid="@azure/storage-file.Aborter" />
         description: ''
+        type: <xref uid="@azure/storage-file.Aborter" />

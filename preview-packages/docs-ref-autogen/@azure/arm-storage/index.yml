@@ -101,7 +101,7 @@ typeAliases:
   - '@azure/arm-storage.InventoryRuleType'
   - '@azure/arm-storage.KeyPermission'
   - '@azure/arm-storage.KeySource'
-  - '@azure/arm-storage.KeyType'
+  - '@azure/arm-storage.KeyType_2'
   - '@azure/arm-storage.Kind'
   - '@azure/arm-storage.LargeFileSharesState'
   - '@azure/arm-storage.LeaseContainerRequestAction'
@@ -125,7 +125,7 @@ typeAliases:
   - '@azure/arm-storage.ObjectReplicationPolicy'
   - '@azure/arm-storage.ObjectType'
   - '@azure/arm-storage.OperationsListResponse'
-  - '@azure/arm-storage.Permissions'
+  - '@azure/arm-storage.Permissions_2'
   - '@azure/arm-storage.PrivateEndpointConnection'
   - '@azure/arm-storage.PrivateEndpointConnectionProvisioningState'
   - '@azure/arm-storage.PrivateEndpointConnectionsGetResponse'
@@ -194,6 +194,8 @@ typeAliases:
   - '@azure/arm-storage.LroResourceLocationConfig'
   - '@azure/arm-storage.LroStatus'
   - '@azure/arm-storage.ResumablePollOperationState'
+  - '@azure/arm-storage.KeyType'
+  - '@azure/arm-storage.Permissions'
 functions:
   - name: >-
       createPollingMethod<TResult>(SendOperationFn<TResult>,
@@ -210,7 +212,8 @@ functions:
         function createPollingMethod<TResult>(sendOperationFn:
         SendOperationFn<TResult>, GetLroStatusFromResponse:
         GetLroStatusFromResponse<TResult>, args: OperationArguments, spec:
-        OperationSpec, mode?: LroMode)
+        OperationSpec, mode?: LroMode): (path?: undefined | string) =>
+        Promise<LroStatus<TResult>>
       parameters:
         - id: sendOperationFn
           type: <xref uid="@azure/arm-storage.SendOperationFn" />&lt;TResult&gt;
@@ -228,10 +231,10 @@ functions:
           type: <xref uid="@azure/arm-storage.LroMode" />
           description: ''
       return:
+        description: ''
         type: >-
           (path?: undefined | string) =&gt;
           Promise&lt;LroStatus&lt;TResult&gt;&gt;
-        description: ''
   - name: getSpecPath(OperationSpec)
     uid: '@azure/arm-storage.getSpecPath'
     package: '@azure/arm-storage'
@@ -240,14 +243,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getSpecPath(spec: OperationSpec)'
+      content: 'function getSpecPath(spec: OperationSpec): string'
       parameters:
         - id: spec
           type: OperationSpec
           description: ''
       return:
-        type: string
         description: ''
+        type: string
   - name: shouldDeserializeLro(undefined | string)
     uid: '@azure/arm-storage.shouldDeserializeLro'
     package: '@azure/arm-storage'
@@ -262,14 +265,14 @@ functions:
     syntax:
       content: >-
         function shouldDeserializeLro(lroResourceLocationConfig?: undefined |
-        string)
+        string): (response: FullOperationResponse) => boolean
       parameters:
         - id: lroResourceLocationConfig
           type: undefined | string
           description: ''
       return:
-        type: '(response: FullOperationResponse) =&gt; boolean'
         description: ''
+        type: '(response: FullOperationResponse) =&gt; boolean'
   - name: >-
       processAzureAsyncOperationResult<TResult>(LongRunningOperation<TResult>,
       undefined | string, LroResourceLocationConfig)
@@ -283,7 +286,8 @@ functions:
       content: >-
         function processAzureAsyncOperationResult<TResult>(lro:
         LongRunningOperation<TResult>, resourceLocation?: undefined | string,
-        lroResourceLocationConfig?: LroResourceLocationConfig)
+        lroResourceLocationConfig?: LroResourceLocationConfig): (rawResponse:
+        RawResponse, flatResponse: TResult) => LroStatus<TResult>
       parameters:
         - id: lro
           type: >-
@@ -297,10 +301,10 @@ functions:
           type: <xref uid="@azure/arm-storage.LroResourceLocationConfig" />
           description: ''
       return:
+        description: ''
         type: >-
           (rawResponse: RawResponse, flatResponse: TResult) =&gt;
           LroStatus&lt;TResult&gt;
-        description: ''
   - name: isBodyPollingDone(RawResponse)
     uid: '@azure/arm-storage.isBodyPollingDone'
     package: '@azure/arm-storage'
@@ -309,14 +313,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isBodyPollingDone(rawResponse: RawResponse)'
+      content: 'function isBodyPollingDone(rawResponse: RawResponse): boolean'
       parameters:
         - id: rawResponse
           type: <xref uid="@azure/arm-storage.RawResponse" />
           description: ''
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: 'processBodyPollingOperationResult<TResult>(RawResponse, TResult)'
     uid: '@azure/arm-storage.processBodyPollingOperationResult'
     package: '@azure/arm-storage'
@@ -331,7 +335,7 @@ functions:
     syntax:
       content: >-
         function processBodyPollingOperationResult<TResult>(rawResponse:
-        RawResponse, flatResponse: TResult)
+        RawResponse, flatResponse: TResult): LroStatus<TResult>
       parameters:
         - id: rawResponse
           type: <xref uid="@azure/arm-storage.RawResponse" />
@@ -340,8 +344,8 @@ functions:
           type: TResult
           description: ''
       return:
-        type: <xref uid="@azure/arm-storage.LroStatus" />&lt;TResult&gt;
         description: ''
+        type: <xref uid="@azure/arm-storage.LroStatus" />&lt;TResult&gt;
   - name: 'processLocationPollingOperationResult<TResult>(RawResponse, TResult)'
     uid: '@azure/arm-storage.processLocationPollingOperationResult'
     package: '@azure/arm-storage'
@@ -352,7 +356,7 @@ functions:
     syntax:
       content: >-
         function processLocationPollingOperationResult<TResult>(rawResponse:
-        RawResponse, flatResponse: TResult)
+        RawResponse, flatResponse: TResult): LroStatus<TResult>
       parameters:
         - id: rawResponse
           type: <xref uid="@azure/arm-storage.RawResponse" />
@@ -361,8 +365,8 @@ functions:
           type: TResult
           description: ''
       return:
-        type: <xref uid="@azure/arm-storage.LroStatus" />&lt;TResult&gt;
         description: ''
+        type: <xref uid="@azure/arm-storage.LroStatus" />&lt;TResult&gt;
   - name: 'processPassthroughOperationResult<TResult>(RawResponse, TResult)'
     uid: '@azure/arm-storage.processPassthroughOperationResult'
     package: '@azure/arm-storage'
@@ -373,7 +377,7 @@ functions:
     syntax:
       content: >-
         function processPassthroughOperationResult<TResult>(rawResponse:
-        RawResponse, flatResponse: TResult)
+        RawResponse, flatResponse: TResult): LroStatus<TResult>
       parameters:
         - id: rawResponse
           type: <xref uid="@azure/arm-storage.RawResponse" />
@@ -382,8 +386,8 @@ functions:
           type: TResult
           description: ''
       return:
-        type: <xref uid="@azure/arm-storage.LroStatus" />&lt;TResult&gt;
         description: ''
+        type: <xref uid="@azure/arm-storage.LroStatus" />&lt;TResult&gt;
   - name: 'getPollingUrl(RawResponse, string)'
     uid: '@azure/arm-storage.getPollingUrl'
     package: '@azure/arm-storage'
@@ -402,7 +406,9 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getPollingUrl(rawResponse: RawResponse, defaultPath: string)'
+      content: >-
+        function getPollingUrl(rawResponse: RawResponse, defaultPath: string):
+        string
       parameters:
         - id: rawResponse
           type: <xref uid="@azure/arm-storage.RawResponse" />
@@ -411,8 +417,8 @@ functions:
           type: string
           description: ''
       return:
-        type: string
         description: ''
+        type: string
   - name: 'inferLroMode(string, string, RawResponse)'
     uid: '@azure/arm-storage.inferLroMode'
     package: '@azure/arm-storage'
@@ -423,7 +429,7 @@ functions:
     syntax:
       content: >-
         function inferLroMode(requestPath: string, requestMethod: string,
-        rawResponse: RawResponse)
+        rawResponse: RawResponse): LroConfig
       parameters:
         - id: requestPath
           type: string
@@ -435,8 +441,8 @@ functions:
           type: <xref uid="@azure/arm-storage.RawResponse" />
           description: ''
       return:
-        type: <xref uid="@azure/arm-storage.LroConfig" />
         description: ''
+        type: <xref uid="@azure/arm-storage.LroConfig" />
   - name: isUnexpectedInitialResponse(RawResponse)
     uid: '@azure/arm-storage.isUnexpectedInitialResponse'
     package: '@azure/arm-storage'
@@ -445,14 +451,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isUnexpectedInitialResponse(rawResponse: RawResponse)'
+      content: 'function isUnexpectedInitialResponse(rawResponse: RawResponse): boolean'
       parameters:
         - id: rawResponse
           type: <xref uid="@azure/arm-storage.RawResponse" />
           description: ''
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: isUnexpectedPollingResponse(RawResponse)
     uid: '@azure/arm-storage.isUnexpectedPollingResponse'
     package: '@azure/arm-storage'
@@ -461,14 +467,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isUnexpectedPollingResponse(rawResponse: RawResponse)'
+      content: 'function isUnexpectedPollingResponse(rawResponse: RawResponse): boolean'
       parameters:
         - id: rawResponse
           type: <xref uid="@azure/arm-storage.RawResponse" />
           description: ''
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: >-
       createGetLroStatusFromResponse<TResult>(LongRunningOperation<TResult>,
       LroConfig, LroResourceLocationConfig)
@@ -482,7 +488,8 @@ functions:
       content: >-
         function createGetLroStatusFromResponse<TResult>(lroPrimitives:
         LongRunningOperation<TResult>, config: LroConfig,
-        lroResourceLocationConfig?: LroResourceLocationConfig)
+        lroResourceLocationConfig?: LroResourceLocationConfig):
+        GetLroStatusFromResponse<TResult>
       parameters:
         - id: lroPrimitives
           type: >-
@@ -496,10 +503,10 @@ functions:
           type: <xref uid="@azure/arm-storage.LroResourceLocationConfig" />
           description: ''
       return:
+        description: ''
         type: >-
           <xref uid="@azure/arm-storage.GetLroStatusFromResponse"
           />&lt;TResult&gt;
-        description: ''
   - name: >-
       createInitializeState<TResult>(ResumablePollOperationState<TResult>,
       string, string)
@@ -513,7 +520,8 @@ functions:
       content: >-
         function createInitializeState<TResult>(state:
         ResumablePollOperationState<TResult>, requestPath: string,
-        requestMethod: string)
+        requestMethod: string): (rawResponse: RawResponse, flatResponse:
+        unknown) => boolean
       parameters:
         - id: state
           type: >-
@@ -527,8 +535,8 @@ functions:
           type: string
           description: ''
       return:
-        type: '(rawResponse: RawResponse, flatResponse: unknown) =&gt; boolean'
         description: callback that initializes the state of the polling operation
+        type: '(rawResponse: RawResponse, flatResponse: unknown) =&gt; boolean'
   - name: 'createPollForLROStatus<TResult>(LongRunningOperation<TResult>, LroConfig)'
     uid: '@azure/arm-storage.createPollForLROStatus'
     package: '@azure/arm-storage'
@@ -539,7 +547,8 @@ functions:
     syntax:
       content: >-
         function createPollForLROStatus<TResult>(lroPrimitives:
-        LongRunningOperation<TResult>, config: LroConfig)
+        LongRunningOperation<TResult>, config: LroConfig): (pollingURL: string,
+        pollerConfig: PollerConfig) => Promise<LroStatus<TResult>>
       parameters:
         - id: lroPrimitives
           type: >-
@@ -550,10 +559,10 @@ functions:
           type: <xref uid="@azure/arm-storage.LroConfig" />
           description: ''
       return:
+        description: ''
         type: >-
           (pollingURL: string, pollerConfig: PollerConfig) =&gt;
           Promise&lt;LroStatus&lt;TResult&gt;&gt;
-        description: ''
 enums:
   - '@azure/arm-storage.KnownBlobInventoryPolicyName'
   - '@azure/arm-storage.KnownBlobRestoreProgressStatus'

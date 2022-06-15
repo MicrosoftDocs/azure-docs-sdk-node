@@ -3,7 +3,7 @@ name: LroEngine
 uid: '@azure/arm-storage.LroEngine'
 package: '@azure/arm-storage'
 summary: 'The LRO Engine, a class that performs polling.'
-fullName: LroEngine<TResult>
+fullName: 'LroEngine<TResult, TState>'
 remarks: ''
 isPreview: false
 isDeprecated: false
@@ -29,8 +29,8 @@ constructors:
         - id: options
           type: <xref uid="@azure/arm-storage.LroEngineOptions" />
           description: ''
-methods:
-  - name: cancelOperation(undefined | Object)
+inheritedMethods:
+  - name: 'cancelOperation(undefined | { abortSignal?: AbortSignalLike })'
     uid: '@azure/arm-storage.LroEngine.cancelOperation'
     package: '@azure/arm-storage'
     summary: >
@@ -45,29 +45,17 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function cancelOperation(options?: undefined | Object)'
+      content: >-
+        function cancelOperation(options?: undefined | { abortSignal?:
+        AbortSignalLike }): Promise<void>
       parameters:
         - id: options
-          type: undefined | Object
+          type: 'undefined | { abortSignal?: AbortSignalLike }'
           description: |
             Optional properties passed to the operation's update method.
       return:
-        type: Promise&lt;void&gt;
         description: ''
-  - name: delay()
-    uid: '@azure/arm-storage.LroEngine.delay'
-    package: '@azure/arm-storage'
-    summary: >-
-      The method used by the poller to wait before attempting to update its
-      operation.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function delay()
-      return:
         type: Promise&lt;void&gt;
-        description: ''
   - name: getOperationState()
     uid: '@azure/arm-storage.LroEngine.getOperationState'
     package: '@azure/arm-storage'
@@ -143,10 +131,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getOperationState()
+      content: 'function getOperationState(): TState'
       return:
-        type: TState
         description: ''
+        type: TState
   - name: getResult()
     uid: '@azure/arm-storage.LroEngine.getResult'
     package: '@azure/arm-storage'
@@ -159,10 +147,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getResult()
+      content: 'function getResult(): TResult | undefined'
       return:
-        type: TResult | undefined
         description: ''
+        type: TResult | undefined
   - name: isDone()
     uid: '@azure/arm-storage.LroEngine.isDone'
     package: '@azure/arm-storage'
@@ -171,10 +159,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function isDone()
+      content: 'function isDone(): boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: isStopped()
     uid: '@azure/arm-storage.LroEngine.isStopped'
     package: '@azure/arm-storage'
@@ -183,10 +171,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function isStopped()
+      content: 'function isStopped(): boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: 'onProgress((state: TState) => void)'
     uid: '@azure/arm-storage.LroEngine.onProgress'
     package: '@azure/arm-storage'
@@ -201,15 +189,15 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function onProgress(callback: (state: TState) => void)'
+      content: 'function onProgress(callback: (state: TState) => void): CancelOnProgress'
       parameters:
         - id: callback
           type: '(state: TState) =&gt; void'
           description: ''
       return:
-        type: CancelOnProgress
         description: ''
-  - name: poll(undefined | Object)
+        type: CancelOnProgress
+  - name: 'poll(undefined | { abortSignal?: AbortSignalLike })'
     uid: '@azure/arm-storage.LroEngine.poll'
     package: '@azure/arm-storage'
     summary: >
@@ -224,15 +212,17 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function poll(options?: undefined | Object)'
+      content: >-
+        function poll(options?: undefined | { abortSignal?: AbortSignalLike }):
+        Promise<void>
       parameters:
         - id: options
-          type: undefined | Object
+          type: 'undefined | { abortSignal?: AbortSignalLike }'
           description: |
             Optional properties passed to the operation's update method.
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: pollUntilDone()
     uid: '@azure/arm-storage.LroEngine.pollUntilDone'
     package: '@azure/arm-storage'
@@ -243,10 +233,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function pollUntilDone()
+      content: 'function pollUntilDone(): Promise<TResult>'
       return:
-        type: Promise&lt;TResult&gt;
         description: ''
+        type: Promise&lt;TResult&gt;
   - name: stopPolling()
     uid: '@azure/arm-storage.LroEngine.stopPolling'
     package: '@azure/arm-storage'
@@ -266,8 +256,23 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function toString()
+      content: 'function toString(): string'
       return:
-        type: string
         description: ''
+        type: string
+methods:
+  - name: delay()
+    uid: '@azure/arm-storage.LroEngine.delay'
+    package: '@azure/arm-storage'
+    summary: >-
+      The method used by the poller to wait before attempting to update its
+      operation.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function delay(): Promise<void>'
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
 extends: 'Poller&lt;TState, TResult&gt;'

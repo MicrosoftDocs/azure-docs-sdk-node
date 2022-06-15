@@ -32,7 +32,7 @@ constructors:
           description: |-
             Call StorageURL.newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
-properties:
+inheritedProperties:
   - name: pipeline
     uid: '@azure/storage-queue.ServiceURL.pipeline'
     package: '@azure/storage-queue'
@@ -44,8 +44,8 @@ properties:
     syntax:
       content: 'pipeline: Pipeline'
       return:
-        type: <xref uid="@azure/storage-queue.Pipeline" />
         description: ''
+        type: <xref uid="@azure/storage-queue.Pipeline" />
   - name: url
     uid: '@azure/storage-queue.ServiceURL.url'
     package: '@azure/storage-queue'
@@ -57,8 +57,32 @@ properties:
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
+        type: string
+inheritedMethods:
+  - name: 'newPipeline(Credential, INewPipelineOptions)'
+    uid: '@azure/storage-queue.ServiceURL.newPipeline'
+    package: '@azure/storage-queue'
+    summary: >-
+      A static method used to create a new Pipeline object with Credential
+      provided.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function newPipeline(credential: Credential, pipelineOptions?:
+        INewPipelineOptions): Pipeline
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/storage-queue.Credential" />
+          description: 'Such as AnonymousCredential, SharedKeyCredential or TokenCredential.'
+        - id: pipelineOptions
+          type: <xref uid="@azure/storage-queue.INewPipelineOptions" />
+          description: ''
+      return:
+        description: A new Pipeline object.
+        type: <xref uid="@azure/storage-queue.Pipeline" />
 methods:
   - name: getProperties(Aborter)
     uid: '@azure/storage-queue.ServiceURL.getProperties'
@@ -68,11 +92,17 @@ methods:
       properties
 
       for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-queue-service-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperties(aborter: Aborter)'
+      content: >-
+        function getProperties(aborter: Aborter):
+        Promise<Models.ServiceGetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
@@ -81,8 +111,8 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
-        type: Promise&lt;<xref uid="Models.ServiceGetPropertiesResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ServiceGetPropertiesResponse" />&gt;
   - name: getStatistics(Aborter)
     uid: '@azure/storage-queue.ServiceURL.getStatistics'
     package: '@azure/storage-queue'
@@ -94,31 +124,44 @@ methods:
       geo-redundant
 
       replication is enabled for the storage account.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-queue-service-stats
+
+       @param {Aborter} aborter Create a new Aborter instance with Aborter.none or Aborter.timeout(),
+                               goto documents of Aborter for more examples about request cancellation
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getStatistics(aborter: Aborter)'
+      content: >-
+        function getStatistics(aborter: Aborter):
+        Promise<Models.ServiceGetStatisticsResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ServiceGetStatisticsResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ServiceGetStatisticsResponse" />&gt;
   - name: >-
       listQueuesSegment(Aborter, undefined | string,
       IServiceListQueuesSegmentOptions)
     uid: '@azure/storage-queue.ServiceURL.listQueuesSegment'
     package: '@azure/storage-queue'
-    summary: Returns a list of the queues under the specified account.
+    summary: |-
+      Returns a list of the queues under the specified account.
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/list-queues1
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function listQueuesSegment(aborter: Aborter, marker?: undefined |
-        string, options?: IServiceListQueuesSegmentOptions)
+        string, options?: IServiceListQueuesSegmentOptions):
+        Promise<Models.ServiceListQueuesSegmentResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
@@ -133,31 +176,8 @@ methods:
           type: <xref uid="@azure/storage-queue.IServiceListQueuesSegmentOptions" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ServiceListQueuesSegmentResponse" />&gt;
         description: ''
-  - name: 'newPipeline(Credential, INewPipelineOptions)'
-    uid: '@azure/storage-queue.ServiceURL.newPipeline'
-    package: '@azure/storage-queue'
-    summary: >-
-      A static method used to create a new Pipeline object with Credential
-      provided.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function newPipeline(credential: Credential, pipelineOptions?:
-        INewPipelineOptions)
-      parameters:
-        - id: credential
-          type: <xref uid="@azure/storage-queue.Credential" />
-          description: 'Such as AnonymousCredential, SharedKeyCredential or TokenCredential.'
-        - id: pipelineOptions
-          type: <xref uid="@azure/storage-queue.INewPipelineOptions" />
-          description: ''
-      return:
-        type: <xref uid="@azure/storage-queue.Pipeline" />
-        description: A new Pipeline object.
+        type: Promise&lt;<xref uid="Models.ServiceListQueuesSegmentResponse" />&gt;
   - name: 'setProperties(Aborter, StorageServiceProperties)'
     uid: '@azure/storage-queue.ServiceURL.setProperties'
     package: '@azure/storage-queue'
@@ -167,13 +187,17 @@ methods:
 
       for Storage Analytics, CORS (Cross-Origin Resource Sharing) rules and soft
       delete settings.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-queue-service-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setProperties(aborter: Aborter, properties:
-        StorageServiceProperties)
+        StorageServiceProperties): Promise<Models.ServiceSetPropertiesResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
@@ -185,8 +209,8 @@ methods:
           type: <xref uid="@azure/storage-queue.StorageServiceProperties" />
           description: ''
       return:
-        type: Promise&lt;<xref uid="Models.ServiceSetPropertiesResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.ServiceSetPropertiesResponse" />&gt;
   - name: withPipeline(Pipeline)
     uid: '@azure/storage-queue.ServiceURL.withPipeline'
     package: '@azure/storage-queue'
@@ -197,12 +221,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withPipeline(pipeline: Pipeline)'
+      content: 'function withPipeline(pipeline: Pipeline): ServiceURL'
       parameters:
         - id: pipeline
           type: <xref uid="@azure/storage-queue.Pipeline" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-queue.ServiceURL" />
         description: ''
+        type: <xref uid="@azure/storage-queue.ServiceURL" />
 extends: <xref uid="@azure/storage-queue.StorageURL" />

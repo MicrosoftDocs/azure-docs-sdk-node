@@ -2,12 +2,50 @@
 name: CosmosClient
 uid: '@azure/cosmos.CosmosClient'
 package: '@azure/cosmos'
-summary: >-
+summary: >+
   Provides a client-side logical representation of the Azure Cosmos DB database
   account.
 
   This client is used to configure and execute requests in the Azure Cosmos DB
   database service.
+
+
+  **Example**
+
+
+  Instantiate a client and create a new database
+
+  ```typescript
+
+  const client = new CosmosClient({endpoint: "<URL HERE>", auth: {masterKey:
+  "<KEY HERE>"}});
+
+  await client.databases.create({id: "<datbase name here>"});
+
+  ```
+
+
+
+
+  **Example**
+
+
+  Instantiate a client with custom Connection Policy
+
+  ```typescript
+
+  const connectionPolicy = new ConnectionPolicy();
+
+  connectionPolicy.RequestTimeout = 10000;
+
+  const client = new CosmosClient({
+     endpoint: "<URL HERE>",
+     auth: {masterKey: "<KEY HERE>"},
+     connectionPolicy
+  });
+
+  ```
+
 fullName: CosmosClient
 remarks: ''
 isPreview: false
@@ -18,8 +56,9 @@ constructors:
     uid: '@azure/cosmos.CosmosClient.constructor_1'
     package: '@azure/cosmos'
     summary: >-
-      Creates a new <xref:CosmosClient> object. See <xref:CosmosClientOptions>
-      for more details on what options you can use.
+      Creates a new <xref:@azure/cosmos.CosmosClient> object. See
+      <xref:@azure/cosmos.CosmosClientOptions> for more details on what options
+      you can use.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -34,8 +73,8 @@ constructors:
     uid: '@azure/cosmos.CosmosClient.constructor'
     package: '@azure/cosmos'
     summary: >-
-      Creates a new <xref:CosmosClient> object from a connection string. Your
-      database connection string can be found in the Azure Portal
+      Creates a new <xref:@azure/cosmos.CosmosClient> object from a connection
+      string. Your database connection string can be found in the Azure Portal
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -49,11 +88,26 @@ properties:
   - name: databases
     uid: '@azure/cosmos.CosmosClient.databases'
     package: '@azure/cosmos'
-    summary: >
+    summary: >+
       Used for creating new databases, or querying/reading all databases.
 
       Use `.database(id)` to read, replace, or delete a specific, existing
       database by id.
+
+
+
+      **Example**
+
+
+      Create a new database
+
+      ```typescript
+
+      const {resource: databaseDefinition, database} = await
+      client.databases.create({id: "<name here>"});
+
+      ```
+
     fullName: databases
     remarks: ''
     isPreview: false
@@ -61,8 +115,8 @@ properties:
     syntax:
       content: 'databases: Databases'
       return:
-        type: <xref uid="@azure/cosmos.Databases" />
         description: ''
+        type: <xref uid="@azure/cosmos.Databases" />
   - name: offers
     uid: '@azure/cosmos.CosmosClient.offers'
     package: '@azure/cosmos'
@@ -76,30 +130,59 @@ properties:
     syntax:
       content: 'offers: Offers'
       return:
-        type: <xref uid="@azure/cosmos.Offers" />
         description: ''
+        type: <xref uid="@azure/cosmos.Offers" />
 methods:
   - name: database(string)
     uid: '@azure/cosmos.CosmosClient.database'
     package: '@azure/cosmos'
-    summary: >
+    summary: >+
       Used for reading, updating, or deleting a existing database by id or
       accessing containers belonging to that database.
 
       This does not make a network call. Use `.read` to get info about the
-      database after getting the <xref:Database> object.
+      database after getting the <xref:@azure/cosmos.Database> object.
+
+
+
+      **Example**
+
+
+      Create a new container off of an existing database
+
+      ```typescript
+
+      const container = client.database("<database
+      id>").containers.create("<container id>");
+
+      ```
+
+
+
+
+      **Example**
+
+
+      Delete an existing database
+
+      ```typescript
+
+      await client.database("<id here>").delete();
+
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function database(id: string)'
+      content: 'function database(id: string): Database'
       parameters:
         - id: id
           type: string
           description: The id of the database.
       return:
-        type: <xref uid="@azure/cosmos.Database" />
         description: ''
+        type: <xref uid="@azure/cosmos.Database" />
   - name: dispose()
     uid: '@azure/cosmos.CosmosClient.dispose'
     package: '@azure/cosmos'
@@ -115,22 +198,25 @@ methods:
     uid: '@azure/cosmos.CosmosClient.getDatabaseAccount'
     package: '@azure/cosmos'
     summary: >-
-      Get information about the current <xref:DatabaseAccount> (including which
+      Get information about the current
+      <xref:@azure/cosmos.CosmosClient.getDatabaseAccount> (including which
       regions are supported, etc.)
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getDatabaseAccount(options?: RequestOptions)'
+      content: >-
+        function getDatabaseAccount(options?: RequestOptions):
+        Promise<ResourceResponse<DatabaseAccount>>
       parameters:
         - id: options
           type: <xref uid="@azure/cosmos.RequestOptions" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/cosmos.ResourceResponse" />&lt;<xref
           uid="@azure/cosmos.DatabaseAccount" />&gt;&gt;
-        description: ''
   - name: getReadEndpoint()
     uid: '@azure/cosmos.CosmosClient.getReadEndpoint'
     package: '@azure/cosmos'
@@ -144,10 +230,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getReadEndpoint()
+      content: 'function getReadEndpoint(): Promise<string>'
       return:
-        type: Promise&lt;string&gt;
         description: ''
+        type: Promise&lt;string&gt;
   - name: getReadEndpoints()
     uid: '@azure/cosmos.CosmosClient.getReadEndpoints'
     package: '@azure/cosmos'
@@ -161,10 +247,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getReadEndpoints()
+      content: 'function getReadEndpoints(): Promise<Object>'
       return:
-        type: Promise&lt;Object&gt;
         description: ''
+        type: Promise&lt;Object&gt;
   - name: getWriteEndpoint()
     uid: '@azure/cosmos.CosmosClient.getWriteEndpoint'
     package: '@azure/cosmos'
@@ -178,10 +264,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getWriteEndpoint()
+      content: 'function getWriteEndpoint(): Promise<string>'
       return:
-        type: Promise&lt;string&gt;
         description: ''
+        type: Promise&lt;string&gt;
   - name: getWriteEndpoints()
     uid: '@azure/cosmos.CosmosClient.getWriteEndpoints'
     package: '@azure/cosmos'
@@ -194,10 +280,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function getWriteEndpoints()
+      content: 'function getWriteEndpoints(): Promise<Object>'
       return:
-        type: Promise&lt;Object&gt;
         description: ''
+        type: Promise&lt;Object&gt;
   - name: offer(string)
     uid: '@azure/cosmos.CosmosClient.offer'
     package: '@azure/cosmos'
@@ -206,12 +292,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function offer(id: string)'
+      content: 'function offer(id: string): Offer'
       parameters:
         - id: id
           type: string
           description: |
             The id of the offer.
       return:
-        type: <xref uid="@azure/cosmos.Offer" />
         description: ''
+        type: <xref uid="@azure/cosmos.Offer" />

@@ -15,8 +15,8 @@ classes:
   - '@azure/storage-file-datalake.AccountSASServices'
   - '@azure/storage-file-datalake.AnonymousCredential'
   - '@azure/storage-file-datalake.AnonymousCredentialPolicy'
-  - '@azure/storage-file-datalake.Credential'
   - '@azure/storage-file-datalake.CredentialPolicy'
+  - '@azure/storage-file-datalake.Credential_2'
   - '@azure/storage-file-datalake.DataLakeAclChangeFailedError'
   - '@azure/storage-file-datalake.DataLakeDirectoryClient'
   - '@azure/storage-file-datalake.DataLakeFileClient'
@@ -49,6 +49,7 @@ interfaces:
   - '@azure/storage-file-datalake.BlobPropertiesModel'
   - '@azure/storage-file-datalake.CommonGenerateSasUrlOptions'
   - '@azure/storage-file-datalake.CommonOptions'
+  - '@azure/storage-file-datalake.CpkInfo'
   - '@azure/storage-file-datalake.DataLakeRequestConditions'
   - '@azure/storage-file-datalake.DataLakeSASSignatureValues'
   - '@azure/storage-file-datalake.DeletedPath'
@@ -162,6 +163,7 @@ typeAliases:
   - '@azure/storage-file-datalake.AccessControlType'
   - '@azure/storage-file-datalake.CopyStatusType'
   - '@azure/storage-file-datalake.CredentialPolicyCreator'
+  - '@azure/storage-file-datalake.EncryptionAlgorithmType'
   - '@azure/storage-file-datalake.FileAppendResponse'
   - '@azure/storage-file-datalake.FileExpiryMode'
   - '@azure/storage-file-datalake.FileQueryArrowConfiguration'
@@ -205,13 +207,18 @@ functions:
       StorageSharedKeyCredential)
     uid: '@azure/storage-file-datalake.generateAccountSASQueryParameters'
     package: '@azure/storage-file-datalake'
-    summary: >
+    summary: >-
       ONLY AVAILABLE IN NODE.JS RUNTIME.
 
-      Generates a <xref:SASQueryParameters> object which contains all SAS query
-      parameters needed to make an actual
+      Generates a <xref:@azure/storage-file-datalake.SASQueryParameters> object
+      which contains all SAS query parameters needed to make an actual
 
       REST request.
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-an-account-sas
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -219,7 +226,7 @@ functions:
       content: >-
         function generateAccountSASQueryParameters(accountSASSignatureValues:
         AccountSASSignatureValues, sharedKeyCredential:
-        StorageSharedKeyCredential)
+        StorageSharedKeyCredential): SASQueryParameters
       parameters:
         - id: accountSASSignatureValues
           type: >-
@@ -233,14 +240,14 @@ functions:
           description: |
             -
       return:
-        type: <xref uid="@azure/storage-file-datalake.SASQueryParameters" />
         description: ''
+        type: <xref uid="@azure/storage-file-datalake.SASQueryParameters" />
   - name: >-
       generateDataLakeSASQueryParameters(DataLakeSASSignatureValues,
       StorageSharedKeyCredential)
     uid: '@azure/storage-file-datalake.generateDataLakeSASQueryParameters'
     package: '@azure/storage-file-datalake'
-    summary: >-
+    summary: >+
       ONLY AVAILABLE IN NODE.JS RUNTIME.
 
       Creates an instance of SASQueryParameters.
@@ -263,6 +270,62 @@ functions:
 
 
       Fill in the required details before running the following snippets.
+
+
+      **Example**
+
+
+      ```js
+
+      // Generate service level SAS for a file system
+
+      const containerSAS = generateDataLakeSASQueryParameters({
+          fileSystemName, // Required
+          permissions: ContainerSASPermissions.parse("racwdl"), // Required
+          startsOn: new Date(), // Optional
+          expiresOn: new Date(new Date().valueOf() + 86400), // Required. Date type
+          ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
+          protocol: SASProtocol.HttpsAndHttp, // Optional
+          version: "2016-05-31" // Optional
+        },
+        sharedKeyCredential // StorageSharedKeyCredential - `new StorageSharedKeyCredential(account, accountKey)`
+      ).toString();
+
+      ```
+
+
+      // Fill in the required details before running the snippet.
+
+
+
+
+      **Example**
+
+
+      ```js
+
+      // Generate service level SAS for a file
+
+      const fileSAS = generateDataLakeSASQueryParameters({
+          fileSystemName, // Required
+          fileName, // Required
+          permissions: DataLakeSASPermissions.parse("racwd"), // Required
+          startsOn: new Date(), // Optional
+          expiresOn: new Date(new Date().valueOf() + 86400), // Required. Date type
+          cacheControl: "cache-control-override", // Optional
+          contentDisposition: "content-disposition-override", // Optional
+          contentEncoding: "content-encoding-override", // Optional
+          contentLanguage: "content-language-override", // Optional
+          contentType: "content-type-override", // Optional
+          ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
+          protocol: SASProtocol.HttpsAndHttp, // Optional
+          version: "2016-05-31" // Optional
+        },
+        sharedKeyCredential // StorageSharedKeyCredential - `new StorageSharedKeyCredential(account, accountKey)`
+      ).toString();
+
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -270,7 +333,7 @@ functions:
       content: >-
         function generateDataLakeSASQueryParameters(dataLakeSASSignatureValues:
         DataLakeSASSignatureValues, sharedKeyCredential:
-        StorageSharedKeyCredential)
+        StorageSharedKeyCredential): SASQueryParameters
       parameters:
         - id: dataLakeSASSignatureValues
           type: >-
@@ -284,20 +347,48 @@ functions:
           description: |
             -
       return:
-        type: <xref uid="@azure/storage-file-datalake.SASQueryParameters" />
         description: ''
+        type: <xref uid="@azure/storage-file-datalake.SASQueryParameters" />
   - name: >-
       generateDataLakeSASQueryParameters(DataLakeSASSignatureValues,
       UserDelegationKey, string)
     uid: '@azure/storage-file-datalake.generateDataLakeSASQueryParameters_1'
     package: '@azure/storage-file-datalake'
-    summary: >
+    summary: >+
       ONLY AVAILABLE IN NODE.JS RUNTIME.
 
       Creates an instance of SASQueryParameters.
 
       WARNING: identifier will be ignored when generating user delegation SAS,
       permissions and expiresOn are required.
+
+
+
+      **Example**
+
+
+      ```js
+
+      // Generate user delegation SAS for a file system
+
+      const userDelegationKey = await
+      dataLakeServiceClient.getUserDelegationKey(startsOn, expiresOn);
+
+      const fileSystemSAS = generateDataLakeSASQueryParameters({
+          fileSystemName, // Required
+          permissions: FileSystemSASPermissions.parse("racwdl"), // Required
+          startsOn, // Optional. Date type
+          expiresOn, // Required. Date type
+          ipRange: { start: "0.0.0.0", end: "255.255.255.255" }, // Optional
+          protocol: SASProtocol.HttpsAndHttp, // Optional
+          version: "2018-11-09" // Must greater than or equal to 2018-11-09 to generate user delegation SAS
+        },
+        userDelegationKey, // UserDelegationKey
+        accountName
+      ).toString();
+
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -305,7 +396,7 @@ functions:
       content: >-
         function generateDataLakeSASQueryParameters(dataLakeSASSignatureValues:
         DataLakeSASSignatureValues, userDelegationKey: UserDelegationKey,
-        accountName: string)
+        accountName: string): SASQueryParameters
       parameters:
         - id: dataLakeSASSignatureValues
           type: >-
@@ -320,8 +411,8 @@ functions:
           description: |
             -
       return:
-        type: <xref uid="@azure/storage-file-datalake.SASQueryParameters" />
         description: ''
+        type: <xref uid="@azure/storage-file-datalake.SASQueryParameters" />
   - name: >-
       newPipeline(StorageSharedKeyCredential | AnonymousCredential |
       TokenCredential, StoragePipelineOptions)
@@ -335,7 +426,7 @@ functions:
       content: >-
         function newPipeline(credential?: StorageSharedKeyCredential |
         AnonymousCredential | TokenCredential, pipelineOptions?:
-        StoragePipelineOptions)
+        StoragePipelineOptions): Pipeline
       parameters:
         - id: credential
           type: >-
@@ -352,5 +443,5 @@ functions:
           type: <xref uid="@azure/storage-file-datalake.StoragePipelineOptions" />
           description: Optional. Options.
       return:
-        type: <xref uid="@azure/storage-file-datalake.Pipeline" />
         description: A new Pipeline object.
+        type: <xref uid="@azure/storage-file-datalake.Pipeline" />

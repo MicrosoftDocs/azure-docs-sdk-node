@@ -46,6 +46,7 @@ interfaces:
   - '@azure/eventgrid.ContainerRegistryArtifactEventData'
   - '@azure/eventgrid.ContainerRegistryArtifactEventTarget'
   - '@azure/eventgrid.ContainerRegistryEventActor'
+  - '@azure/eventgrid.ContainerRegistryEventConnectedRegistry'
   - '@azure/eventgrid.ContainerRegistryEventData'
   - '@azure/eventgrid.ContainerRegistryEventRequest'
   - '@azure/eventgrid.ContainerRegistryEventSource'
@@ -63,6 +64,9 @@ interfaces:
   - '@azure/eventgrid.EventGridEvent'
   - '@azure/eventgrid.EventHubCaptureFileCreatedEventData'
   - '@azure/eventgrid.GenerateSharedAccessSignatureOptions'
+  - '@azure/eventgrid.HealthcareFhirResourceCreatedEventData'
+  - '@azure/eventgrid.HealthcareFhirResourceDeletedEventData'
+  - '@azure/eventgrid.HealthcareFhirResourceUpdatedEventData'
   - '@azure/eventgrid.InputSchemaToInputTypeMap'
   - '@azure/eventgrid.KeyVaultAccessPolicyChangedEventData'
   - '@azure/eventgrid.KeyVaultCertificateExpiredEventData'
@@ -105,9 +109,11 @@ interfaces:
   - '@azure/eventgrid.ResourceActionCancelEventData'
   - '@azure/eventgrid.ResourceActionFailureEventData'
   - '@azure/eventgrid.ResourceActionSuccessEventData'
+  - '@azure/eventgrid.ResourceAuthorization'
   - '@azure/eventgrid.ResourceDeleteCancelEventData'
   - '@azure/eventgrid.ResourceDeleteFailureEventData'
   - '@azure/eventgrid.ResourceDeleteSuccessEventData'
+  - '@azure/eventgrid.ResourceHttpRequest'
   - '@azure/eventgrid.ResourceWriteCancelEventData'
   - '@azure/eventgrid.ResourceWriteFailureEventData'
   - '@azure/eventgrid.ResourceWriteSuccessEventData'
@@ -172,6 +178,7 @@ typeAliases:
   - '@azure/eventgrid.ContainerRegistryImageDeletedEventData'
   - '@azure/eventgrid.ContainerRegistryImagePushedEventData'
   - '@azure/eventgrid.EventGridPublisherClientOptions'
+  - '@azure/eventgrid.HealthcareFhirResourceType'
   - '@azure/eventgrid.InputSchema'
   - '@azure/eventgrid.IotHubDeviceConnectedEventData'
   - '@azure/eventgrid.IotHubDeviceCreatedEventData'
@@ -200,6 +207,9 @@ typeAliases:
   - '@azure/eventgrid.MediaJobRetry'
   - '@azure/eventgrid.MediaJobScheduledEventData'
   - '@azure/eventgrid.MediaJobState'
+  - '@azure/eventgrid.RecordingChannelType'
+  - '@azure/eventgrid.RecordingContentType'
+  - '@azure/eventgrid.RecordingFormatType'
   - '@azure/eventgrid.SendOptions'
   - '@azure/eventgrid.StampKind'
 functions:
@@ -221,7 +231,7 @@ functions:
       content: >-
         function generateSharedAccessSignature(endpointUrl: string, credential:
         KeyCredential, expiresOnUtc: Date, options?:
-        GenerateSharedAccessSignatureOptions)
+        GenerateSharedAccessSignatureOptions): Promise<string>
       parameters:
         - id: endpointUrl
           type: string
@@ -239,8 +249,8 @@ functions:
           description: |
             Options to control how the signature is generated.
       return:
-        type: Promise&lt;string&gt;
         description: ''
+        type: Promise&lt;string&gt;
   - name: 'isSystemEvent<T>(T, EventGridEvent<unknown>)'
     uid: '@azure/eventgrid.isSystemEvent'
     package: '@azure/eventgrid'
@@ -256,7 +266,9 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isSystemEvent<T>(eventType: T, event: EventGridEvent<unknown>)'
+      content: >-
+        function isSystemEvent<T>(eventType: T, event: EventGridEvent<unknown>):
+        boolean
       parameters:
         - id: eventType
           type: T
@@ -268,8 +280,8 @@ functions:
           description: |
             The event to test.
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: 'isSystemEvent<T>(T, CloudEvent<unknown>)'
     uid: '@azure/eventgrid.isSystemEvent_1'
     package: '@azure/eventgrid'
@@ -285,7 +297,9 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isSystemEvent<T>(eventType: T, event: CloudEvent<unknown>)'
+      content: >-
+        function isSystemEvent<T>(eventType: T, event: CloudEvent<unknown>):
+        boolean
       parameters:
         - id: eventType
           type: T
@@ -297,5 +311,5 @@ functions:
           description: |
             The event to test.
       return:
-        type: boolean
         description: ''
+        type: boolean

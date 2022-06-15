@@ -66,8 +66,8 @@ properties:
     syntax:
       content: 'endpointUrl: string'
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: 'addFeedback(MetricFeedbackUnion, OperationOptions)'
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorClient.addFeedback'
@@ -79,7 +79,7 @@ methods:
     syntax:
       content: >-
         function addFeedback(feedback: MetricFeedbackUnion, options?:
-        OperationOptions)
+        OperationOptions): Promise<MetricFeedbackUnion>
       parameters:
         - id: feedback
           type: <xref uid="@azure/ai-metrics-advisor.MetricFeedbackUnion" />
@@ -88,10 +88,10 @@ methods:
           type: OperationOptions
           description: The options parameter
       return:
+        description: Response with Feedback object
         type: >-
           Promise&lt;<xref uid="@azure/ai-metrics-advisor.MetricFeedbackUnion"
           />&gt;
-        description: Response with Feedback object
   - name: 'getFeedback(string, OperationOptions)'
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorClient.getFeedback'
     package: '@azure/ai-metrics-advisor'
@@ -100,7 +100,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getFeedback(id: string, options?: OperationOptions)'
+      content: >-
+        function getFeedback(id: string, options?: OperationOptions):
+        Promise<MetricFeedbackUnion>
       parameters:
         - id: id
           type: string
@@ -110,10 +112,10 @@ methods:
           description: |
             The options parameter
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/ai-metrics-advisor.MetricFeedbackUnion"
           />&gt;
-        description: ''
   - name: 'getIncidentRootCauses(string, string, OperationOptions)'
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorClient.getIncidentRootCauses'
     package: '@azure/ai-metrics-advisor'
@@ -124,7 +126,8 @@ methods:
     syntax:
       content: >-
         function getIncidentRootCauses(detectionConfigId: string, incidentId:
-        string, options?: OperationOptions)
+        string, options?: OperationOptions):
+        Promise<GetIncidentRootCauseResponse>
       parameters:
         - id: detectionConfigId
           type: string
@@ -137,10 +140,10 @@ methods:
           description: |
             The options parameter
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/ai-metrics-advisor.GetIncidentRootCauseResponse" />&gt;
-        description: ''
   - name: >-
       getMetricEnrichedSeriesData(string, DimensionKey[], Date | string, Date |
       string, GetMetricEnrichedSeriesDataOptions)
@@ -154,7 +157,8 @@ methods:
       content: >-
         function getMetricEnrichedSeriesData(detectionConfigId: string,
         seriesKey: DimensionKey[], startTime: Date | string, endTime: Date |
-        string, options?: GetMetricEnrichedSeriesDataOptions)
+        string, options?: GetMetricEnrichedSeriesDataOptions):
+        Promise<GetMetricEnrichedSeriesDataResponse>
       parameters:
         - id: detectionConfigId
           type: string
@@ -176,11 +180,11 @@ methods:
           description: |
             The options parameter.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/ai-metrics-advisor.GetMetricEnrichedSeriesDataResponse"
           />&gt;
-        description: ''
   - name: >-
       getMetricSeriesData(string, DimensionKey[], Date | string, Date | string,
       GetMetricSeriesDataOptions)
@@ -194,7 +198,8 @@ methods:
       content: >-
         function getMetricSeriesData(metricId: string, seriesKey:
         DimensionKey[], startTime: Date | string, endTime: Date | string,
-        options?: GetMetricSeriesDataOptions)
+        options?: GetMetricSeriesDataOptions):
+        Promise<GetMetricSeriesDataResponse>
       parameters:
         - id: metricId
           type: string
@@ -213,10 +218,10 @@ methods:
           description: |
             The options parameter
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/ai-metrics-advisor.GetMetricSeriesDataResponse" />&gt;
-        description: ''
   - name: >-
       listAlerts(string, Date | string, Date | string, AlertQueryTimeMode,
       ListAlertsOptions)
@@ -301,7 +306,8 @@ methods:
       content: >-
         function listAlerts(alertConfigId: string, startTime: Date | string,
         endTime: Date | string, timeMode: AlertQueryTimeMode, options?:
-        ListAlertsOptions)
+        ListAlertsOptions): PagedAsyncIterableIterator<AnomalyAlert,
+        AlertsPageResponse>
       parameters:
         - id: alertConfigId
           type: string
@@ -324,11 +330,11 @@ methods:
           description: |
             The options parameter.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.AnomalyAlert" />, <xref
           uid="@azure/ai-metrics-advisor.AlertsPageResponse" />&gt;
-        description: ''
   - name: >-
       listAnomaliesForAlert(AnomalyAlert,
       ListAnomaliesForAlertConfigurationOptions)
@@ -409,7 +415,8 @@ methods:
     syntax:
       content: >-
         function listAnomaliesForAlert(alert: AnomalyAlert, options?:
-        ListAnomaliesForAlertConfigurationOptions)
+        ListAnomaliesForAlertConfigurationOptions):
+        PagedAsyncIterableIterator<DataPointAnomaly, AnomaliesPageResponse>
       parameters:
         - id: alert
           type: <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" />
@@ -422,11 +429,11 @@ methods:
           description: |
             The options parameter.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.DataPointAnomaly" />, <xref
           uid="@azure/ai-metrics-advisor.AnomaliesPageResponse" />&gt;
-        description: ''
   - name: >-
       listAnomaliesForDetectionConfiguration(string, Date | string, Date |
       string, ListAnomaliesForDetectionConfigurationOptions)
@@ -514,7 +521,8 @@ methods:
       content: >-
         function listAnomaliesForDetectionConfiguration(detectionConfigId:
         string, startTime: Date | string, endTime: Date | string, options?:
-        ListAnomaliesForDetectionConfigurationOptions)
+        ListAnomaliesForDetectionConfigurationOptions):
+        PagedAsyncIterableIterator<DataPointAnomaly, AnomaliesPageResponse>
       parameters:
         - id: detectionConfigId
           type: string
@@ -533,11 +541,11 @@ methods:
           description: |
             The options parameter.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.DataPointAnomaly" />, <xref
           uid="@azure/ai-metrics-advisor.AnomaliesPageResponse" />&gt;
-        description: ''
   - name: >-
       listAnomalyDimensionValues(string, Date | string, Date | string, string,
       ListAnomalyDimensionValuesOptions)
@@ -619,7 +627,8 @@ methods:
       content: >-
         function listAnomalyDimensionValues(detectionConfigId: string,
         startTime: Date | string, endTime: Date | string, dimensionName: string,
-        options?: ListAnomalyDimensionValuesOptions)
+        options?: ListAnomalyDimensionValuesOptions):
+        PagedAsyncIterableIterator<string, DimensionValuesPageResponse>
       parameters:
         - id: detectionConfigId
           type: string
@@ -640,10 +649,10 @@ methods:
           description: |
             The options parameter.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;string, <xref
           uid="@azure/ai-metrics-advisor.DimensionValuesPageResponse" />&gt;
-        description: ''
   - name: 'listFeedback(string, ListFeedbackOptions)'
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorClient.listFeedback'
     package: '@azure/ai-metrics-advisor'
@@ -717,7 +726,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listFeedback(metricId: string, options?: ListFeedbackOptions)'
+      content: >-
+        function listFeedback(metricId: string, options?: ListFeedbackOptions):
+        PagedAsyncIterableIterator<MetricFeedbackUnion,
+        MetricFeedbackPageResponse>
       parameters:
         - id: metricId
           type: string
@@ -727,11 +739,11 @@ methods:
           description: |
             The options parameter
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.MetricFeedbackUnion" />, <xref
           uid="@azure/ai-metrics-advisor.MetricFeedbackPageResponse" />&gt;
-        description: ''
   - name: 'listIncidentsForAlert(AnomalyAlert, ListIncidentsForAlertOptions)'
     uid: '@azure/ai-metrics-advisor.MetricsAdvisorClient.listIncidentsForAlert'
     package: '@azure/ai-metrics-advisor'
@@ -809,7 +821,8 @@ methods:
     syntax:
       content: >-
         function listIncidentsForAlert(alert: AnomalyAlert, options?:
-        ListIncidentsForAlertOptions)
+        ListIncidentsForAlertOptions):
+        PagedAsyncIterableIterator<AnomalyIncident, IncidentsPageResponse>
       parameters:
         - id: alert
           type: <xref uid="@azure/ai-metrics-advisor.AnomalyAlert" />
@@ -821,11 +834,11 @@ methods:
           description: |
             The options parameter.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.AnomalyIncident" />, <xref
           uid="@azure/ai-metrics-advisor.IncidentsPageResponse" />&gt;
-        description: ''
   - name: >-
       listIncidentsForDetectionConfiguration(string, Date | string, Date |
       string, ListIncidentsForDetectionConfigurationOptions)
@@ -910,7 +923,8 @@ methods:
       content: >-
         function listIncidentsForDetectionConfiguration(detectionConfigId:
         string, startTime: Date | string, endTime: Date | string, options?:
-        ListIncidentsForDetectionConfigurationOptions)
+        ListIncidentsForDetectionConfigurationOptions):
+        PagedAsyncIterableIterator<AnomalyIncident, IncidentsPageResponse>
       parameters:
         - id: detectionConfigId
           type: string
@@ -929,11 +943,11 @@ methods:
           description: |
             The options parameter.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.AnomalyIncident" />, <xref
           uid="@azure/ai-metrics-advisor.IncidentsPageResponse" />&gt;
-        description: ''
   - name: >-
       listMetricDimensionValues(string, string,
       ListMetricDimensionValuesOptions)
@@ -1013,7 +1027,8 @@ methods:
     syntax:
       content: >-
         function listMetricDimensionValues(metricId: string, dimensionName:
-        string, options?: ListMetricDimensionValuesOptions)
+        string, options?: ListMetricDimensionValuesOptions):
+        PagedAsyncIterableIterator<string, DimensionValuesPageResponse>
       parameters:
         - id: metricId
           type: string
@@ -1028,10 +1043,10 @@ methods:
           description: |
             The options parameter.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;string, <xref
           uid="@azure/ai-metrics-advisor.DimensionValuesPageResponse" />&gt;
-        description: ''
   - name: >-
       listMetricEnrichmentStatus(string, Date | string, Date | string,
       ListMetricEnrichmentStatusOptions)
@@ -1114,7 +1129,9 @@ methods:
       content: >-
         function listMetricEnrichmentStatus(metricId: string, startTime: Date |
         string, endTime: Date | string, options?:
-        ListMetricEnrichmentStatusOptions)
+        ListMetricEnrichmentStatusOptions):
+        PagedAsyncIterableIterator<EnrichmentStatus,
+        MetricEnrichmentStatusPageResponse>
       parameters:
         - id: metricId
           type: string
@@ -1132,12 +1149,12 @@ methods:
           description: |
             The options parameter.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.EnrichmentStatus" />, <xref
           uid="@azure/ai-metrics-advisor.MetricEnrichmentStatusPageResponse"
           />&gt;
-        description: ''
   - name: >-
       listMetricSeriesDefinitions(string, Date | string,
       ListMetricSeriesDefinitionsOptions)
@@ -1218,7 +1235,9 @@ methods:
     syntax:
       content: >-
         function listMetricSeriesDefinitions(metricId: string, activeSince: Date
-        | string, options?: ListMetricSeriesDefinitionsOptions)
+        | string, options?: ListMetricSeriesDefinitionsOptions):
+        PagedAsyncIterableIterator<MetricSeriesDefinition,
+        MetricSeriesPageResponse>
       parameters:
         - id: metricId
           type: string
@@ -1234,8 +1253,8 @@ methods:
           description: |
             The options parameter.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/ai-metrics-advisor.MetricSeriesDefinition" />, <xref
           uid="@azure/ai-metrics-advisor.MetricSeriesPageResponse" />&gt;
-        description: ''

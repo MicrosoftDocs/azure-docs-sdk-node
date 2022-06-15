@@ -101,7 +101,8 @@ methods:
     syntax:
       content: >-
         function attestOpenEnclave(report: Uint8Array | Buffer | Blob, options?:
-        AttestOpenEnclaveOptions)
+        AttestOpenEnclaveOptions):
+        Promise<AttestationResponse<AttestationResult>>
       parameters:
         - id: report
           type: Uint8Array | Buffer | Blob
@@ -110,13 +111,13 @@ methods:
           type: <xref uid="@azure/attestation.AttestOpenEnclaveOptions" />
           description: Operation options for the attestOpenEnclave API call.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/attestation.AttestationResponse"
-          />&lt;<xref uid="@azure/attestation.AttestationResult" />&gt;&gt;
         description: >-
           Returns an AttestationResponse whose body is an AttestationResult
           describing
              the claims returned by the attestation service.
+        type: >-
+          Promise&lt;<xref uid="@azure/attestation.AttestationResponse"
+          />&lt;<xref uid="@azure/attestation.AttestationResult" />&gt;&gt;
   - name: 'attestSgxEnclave(Uint8Array | Buffer | Blob, AttestSgxEnclaveOptions)'
     uid: '@azure/attestation.AttestationClient.attestSgxEnclave'
     package: '@azure/attestation'
@@ -127,7 +128,8 @@ methods:
     syntax:
       content: >-
         function attestSgxEnclave(quote: Uint8Array | Buffer | Blob, options?:
-        AttestSgxEnclaveOptions)
+        AttestSgxEnclaveOptions):
+        Promise<AttestationResponse<AttestationResult>>
       parameters:
         - id: quote
           type: Uint8Array | Buffer | Blob
@@ -136,29 +138,57 @@ methods:
           type: <xref uid="@azure/attestation.AttestSgxEnclaveOptions" />
           description: Operation options for the attestOpenEnclave API call.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/attestation.AttestationResponse"
-          />&lt;<xref uid="@azure/attestation.AttestationResult" />&gt;&gt;
         description: >-
           Returns an AttestationResponse whose body is an AttestationResult
           describing
              the claims returned by the attestation service.
+        type: >-
+          Promise&lt;<xref uid="@azure/attestation.AttestationResponse"
+          />&lt;<xref uid="@azure/attestation.AttestationResult" />&gt;&gt;
   - name: 'attestTpm(string, AttestTpmOptions)'
     uid: '@azure/attestation.AttestationClient.attestTpm'
     package: '@azure/attestation'
-    summary: >
+    summary: >+
       Attest a TPM based enclave.
 
       See the  [| TPM Attestation Protocol
       Reference](https://docs.microsoft.com/en-us/azure/attestation/virtualization-based-security-protocol)
       for more information.
+
+
+
+      **Example**
+
+
+      For example, the initial call for a TPM attestation operation is:
+
+
+      ```js
+
+      const encodedPayload = JSON.stringify({ payload: { type: "aikcert" } });
+
+      const result = await client.attestTpm(encodedPayload);
+
+      ```
+
+
+      where stringToBytes converts the string to UTF8.
+
+
+      Note that the attestTpm requires an attestation client which is configured
+      with
+
+      authentication credentials.
+
     remarks: >-
       The incoming requests to the TPM attestation API are stringified JSON
       objects.
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function attestTpm(request: string, options?: AttestTpmOptions)'
+      content: >-
+        function attestTpm(request: string, options?: AttestTpmOptions):
+        Promise<string>
       parameters:
         - id: request
           type: string
@@ -169,10 +199,10 @@ methods:
           type: <xref uid="@azure/attestation.AttestTpmOptions" />
           description: Pipeline options for TPM attestation request.
       return:
-        type: Promise&lt;string&gt;
         description: >-
           A structure containing the response from the TPM attestation, Utf8
           encoded.
+        type: Promise&lt;string&gt;
   - name: getAttestationSigners(AttestationClientOperationOptions)
     uid: '@azure/attestation.AttestationClient.getAttestationSigners'
     package: '@azure/attestation'
@@ -187,16 +217,16 @@ methods:
     syntax:
       content: >-
         function getAttestationSigners(options?:
-        AttestationClientOperationOptions)
+        AttestationClientOperationOptions): Promise<AttestationSigner[]>
       parameters:
         - id: options
           type: <xref uid="@azure/attestation.AttestationClientOperationOptions" />
           description: Client operation options.
       return:
-        type: 'Promise&lt;<xref uid="@azure/attestation.AttestationSigner" />[]&gt;'
         description: >-
           the set of AttestationSigners which may be used to sign attestation
           tokens.
+        type: 'Promise&lt;<xref uid="@azure/attestation.AttestationSigner" />[]&gt;'
   - name: getOpenIdMetadata(AttestationClientOperationOptions)
     uid: '@azure/attestation.AttestationClient.getOpenIdMetadata'
     package: '@azure/attestation'
@@ -207,11 +237,13 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getOpenIdMetadata(options?: AttestationClientOperationOptions)'
+      content: >-
+        function getOpenIdMetadata(options?: AttestationClientOperationOptions):
+        Promise<Record<string, unknown>>
       parameters:
         - id: options
           type: <xref uid="@azure/attestation.AttestationClientOperationOptions" />
           description: Client operation options.
       return:
-        type: 'Promise&lt;Record&lt;string, unknown&gt;&gt;'
         description: The OpenID metadata discovery document for the attestation service.
+        type: 'Promise&lt;Record&lt;string, unknown&gt;&gt;'

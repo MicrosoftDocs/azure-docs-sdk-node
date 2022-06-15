@@ -43,7 +43,7 @@ constructors:
         - id: options
           type: RequestPolicyOptions
           description: ''
-methods:
+inheritedMethods:
   - name: 'log(HttpPipelineLogLevel, string)'
     uid: '@azure/storage-file.BrowserPolicy.log'
     package: '@azure/storage-file'
@@ -66,22 +66,6 @@ methods:
           type: string
           description: |
             The message of this log.
-  - name: sendRequest(WebResource)
-    uid: '@azure/storage-file.BrowserPolicy.sendRequest'
-    package: '@azure/storage-file'
-    summary: Sends out request.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function sendRequest(request: WebResource)'
-      parameters:
-        - id: request
-          type: WebResource
-          description: ''
-      return:
-        type: Promise&lt;HttpOperationResponse&gt;
-        description: ''
   - name: shouldLog(HttpPipelineLogLevel)
     uid: '@azure/storage-file.BrowserPolicy.shouldLog'
     package: '@azure/storage-file'
@@ -90,12 +74,31 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function shouldLog(logLevel: HttpPipelineLogLevel)'
+      content: 'function shouldLog(logLevel: HttpPipelineLogLevel): boolean'
       parameters:
         - id: logLevel
           type: HttpPipelineLogLevel
           description: The log level of the log that will be logged.
       return:
-        type: boolean
         description: Whether or not a log with the provided log level should be logged.
+        type: boolean
+methods:
+  - name: sendRequest(WebResource)
+    uid: '@azure/storage-file.BrowserPolicy.sendRequest'
+    package: '@azure/storage-file'
+    summary: Sends out request.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function sendRequest(request: WebResource):
+        Promise<HttpOperationResponse>
+      parameters:
+        - id: request
+          type: WebResource
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;HttpOperationResponse&gt;
 extends: BaseRequestPolicy

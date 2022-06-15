@@ -60,12 +60,13 @@ properties:
     fullName: apiVersion
     remarks: ''
     isPreview: false
-    isDeprecated: false
+    isDeprecated: true
+    customDeprecatedMessage: 'use {@Link serviceVersion} instead'
     syntax:
       content: 'apiVersion: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: endpoint
     uid: '@azure/search-documents.SearchIndexClient.endpoint'
     package: '@azure/search-documents'
@@ -77,8 +78,21 @@ properties:
     syntax:
       content: 'endpoint: string'
       return:
-        type: string
         description: ''
+        type: string
+  - name: serviceVersion
+    uid: '@azure/search-documents.SearchIndexClient.serviceVersion'
+    package: '@azure/search-documents'
+    summary: The API version to use when communicating with the service.
+    fullName: serviceVersion
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'serviceVersion: string'
+      return:
+        description: ''
+        type: string
 methods:
   - name: 'analyzeText(string, AnalyzeTextOptions)'
     uid: '@azure/search-documents.SearchIndexClient.analyzeText'
@@ -88,7 +102,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function analyzeText(indexName: string, options: AnalyzeTextOptions)'
+      content: >-
+        function analyzeText(indexName: string, options: AnalyzeTextOptions):
+        Promise<AnalyzeResult>
       parameters:
         - id: indexName
           type: string
@@ -98,8 +114,30 @@ methods:
           description: |
             Additional arguments
       return:
-        type: Promise&lt;<xref uid="@azure/search-documents.AnalyzeResult" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.AnalyzeResult" />&gt;
+  - name: 'createAlias(SearchIndexAlias, CreateAliasOptions)'
+    uid: '@azure/search-documents.SearchIndexClient.createAlias'
+    package: '@azure/search-documents'
+    summary: Creates a new search alias.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createAlias(alias: SearchIndexAlias, options?:
+        CreateAliasOptions): Promise<SearchIndexAlias>
+      parameters:
+        - id: alias
+          type: <xref uid="@azure/search-documents.SearchIndexAlias" />
+          description: The definition of the alias to create.
+        - id: options
+          type: <xref uid="@azure/search-documents.CreateAliasOptions" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.SearchIndexAlias" />&gt;
   - name: 'createIndex(SearchIndex, CreateIndexOptions)'
     uid: '@azure/search-documents.SearchIndexClient.createIndex'
     package: '@azure/search-documents'
@@ -108,7 +146,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function createIndex(index: SearchIndex, options?: CreateIndexOptions)'
+      content: >-
+        function createIndex(index: SearchIndex, options?: CreateIndexOptions):
+        Promise<SearchIndex>
       parameters:
         - id: index
           type: <xref uid="@azure/search-documents.SearchIndex" />
@@ -118,8 +158,30 @@ methods:
           description: |
             Additional optional arguments.
       return:
-        type: Promise&lt;<xref uid="@azure/search-documents.SearchIndex" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.SearchIndex" />&gt;
+  - name: 'createOrUpdateAlias(SearchIndexAlias, CreateOrUpdateAliasOptions)'
+    uid: '@azure/search-documents.SearchIndexClient.createOrUpdateAlias'
+    package: '@azure/search-documents'
+    summary: Creates a new search alias or updates an alias if it already exists.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function createOrUpdateAlias(alias: SearchIndexAlias, options?:
+        CreateOrUpdateAliasOptions): Promise<SearchIndexAlias>
+      parameters:
+        - id: alias
+          type: <xref uid="@azure/search-documents.SearchIndexAlias" />
+          description: The definition of the alias to create or update.
+        - id: options
+          type: <xref uid="@azure/search-documents.CreateOrUpdateAliasOptions" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.SearchIndexAlias" />&gt;
   - name: 'createOrUpdateIndex(SearchIndex, CreateOrUpdateIndexOptions)'
     uid: '@azure/search-documents.SearchIndexClient.createOrUpdateIndex'
     package: '@azure/search-documents'
@@ -130,7 +192,7 @@ methods:
     syntax:
       content: >-
         function createOrUpdateIndex(index: SearchIndex, options?:
-        CreateOrUpdateIndexOptions)
+        CreateOrUpdateIndexOptions): Promise<SearchIndex>
       parameters:
         - id: index
           type: <xref uid="@azure/search-documents.SearchIndex" />
@@ -140,8 +202,8 @@ methods:
           description: |
             Additional optional arguments.
       return:
-        type: Promise&lt;<xref uid="@azure/search-documents.SearchIndex" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.SearchIndex" />&gt;
   - name: 'createOrUpdateSynonymMap(SynonymMap, CreateOrUpdateSynonymMapOptions)'
     uid: '@azure/search-documents.SearchIndexClient.createOrUpdateSynonymMap'
     package: '@azure/search-documents'
@@ -152,7 +214,7 @@ methods:
     syntax:
       content: >-
         function createOrUpdateSynonymMap(synonymMap: SynonymMap, options?:
-        CreateOrUpdateSynonymMapOptions)
+        CreateOrUpdateSynonymMapOptions): Promise<SynonymMap>
       parameters:
         - id: synonymMap
           type: <xref uid="@azure/search-documents.SynonymMap" />
@@ -164,8 +226,8 @@ methods:
           description: |
             Additional optional arguments.
       return:
-        type: Promise&lt;<xref uid="@azure/search-documents.SynonymMap" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.SynonymMap" />&gt;
   - name: 'createSynonymMap(SynonymMap, CreateSynonymMapOptions)'
     uid: '@azure/search-documents.SearchIndexClient.createSynonymMap'
     package: '@azure/search-documents'
@@ -176,7 +238,7 @@ methods:
     syntax:
       content: >-
         function createSynonymMap(synonymMap: SynonymMap, options?:
-        CreateSynonymMapOptions)
+        CreateSynonymMapOptions): Promise<SynonymMap>
       parameters:
         - id: synonymMap
           type: <xref uid="@azure/search-documents.SynonymMap" />
@@ -186,8 +248,34 @@ methods:
           description: |
             Additional optional arguments.
       return:
-        type: Promise&lt;<xref uid="@azure/search-documents.SynonymMap" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.SynonymMap" />&gt;
+  - name: 'deleteAlias(string | SearchIndexAlias, DeleteAliasOptions)'
+    uid: '@azure/search-documents.SearchIndexClient.deleteAlias'
+    package: '@azure/search-documents'
+    summary: >-
+      Deletes a search alias and its associated mapping to an index. This
+      operation is permanent, with no
+
+      recovery option. The mapped index is untouched by this operation.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteAlias(alias: string | SearchIndexAlias, options?:
+        DeleteAliasOptions): Promise<void>
+      parameters:
+        - id: alias
+          type: string | <xref uid="@azure/search-documents.SearchIndexAlias" />
+          description: Alias/Name name of the alias to delete.
+        - id: options
+          type: <xref uid="@azure/search-documents.DeleteAliasOptions" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: 'deleteIndex(string | SearchIndex, DeleteIndexOptions)'
     uid: '@azure/search-documents.SearchIndexClient.deleteIndex'
     package: '@azure/search-documents'
@@ -198,7 +286,7 @@ methods:
     syntax:
       content: >-
         function deleteIndex(index: string | SearchIndex, options?:
-        DeleteIndexOptions)
+        DeleteIndexOptions): Promise<void>
       parameters:
         - id: index
           type: string | <xref uid="@azure/search-documents.SearchIndex" />
@@ -208,8 +296,8 @@ methods:
           description: |
             Additional optional arguments.
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: 'deleteSynonymMap(string | SynonymMap, DeleteSynonymMapOptions)'
     uid: '@azure/search-documents.SearchIndexClient.deleteSynonymMap'
     package: '@azure/search-documents'
@@ -220,7 +308,7 @@ methods:
     syntax:
       content: >-
         function deleteSynonymMap(synonymMap: string | SynonymMap, options?:
-        DeleteSynonymMapOptions)
+        DeleteSynonymMapOptions): Promise<void>
       parameters:
         - id: synonymMap
           type: string | <xref uid="@azure/search-documents.SynonymMap" />
@@ -230,8 +318,30 @@ methods:
           description: |
             Additional optional arguments.
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
+  - name: 'getAlias(string, GetAliasOptions)'
+    uid: '@azure/search-documents.SearchIndexClient.getAlias'
+    package: '@azure/search-documents'
+    summary: Retrieves an alias definition.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getAlias(aliasName: string, options?: GetAliasOptions):
+        Promise<SearchIndexAlias>
+      parameters:
+        - id: aliasName
+          type: string
+          description: The name of the alias to retrieve.
+        - id: options
+          type: <xref uid="@azure/search-documents.GetAliasOptions" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.SearchIndexAlias" />&gt;
   - name: 'getIndex(string, GetIndexOptions)'
     uid: '@azure/search-documents.SearchIndexClient.getIndex'
     package: '@azure/search-documents'
@@ -240,7 +350,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getIndex(indexName: string, options?: GetIndexOptions)'
+      content: >-
+        function getIndex(indexName: string, options?: GetIndexOptions):
+        Promise<SearchIndex>
       parameters:
         - id: indexName
           type: string
@@ -250,8 +362,8 @@ methods:
           description: |
             Additional optional arguments.
       return:
-        type: Promise&lt;<xref uid="@azure/search-documents.SearchIndex" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.SearchIndex" />&gt;
   - name: 'getIndexStatistics(string, GetIndexStatisticsOptions)'
     uid: '@azure/search-documents.SearchIndexClient.getIndexStatistics'
     package: '@azure/search-documents'
@@ -266,7 +378,7 @@ methods:
     syntax:
       content: >-
         function getIndexStatistics(indexName: string, options?:
-        GetIndexStatisticsOptions)
+        GetIndexStatisticsOptions): Promise<SearchIndexStatistics>
       parameters:
         - id: indexName
           type: string
@@ -276,10 +388,10 @@ methods:
           description: |
             Additional optional arguments.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.SearchIndexStatistics"
           />&gt;
-        description: ''
   - name: 'getSearchClient<T>(string, SearchClientOptions)'
     uid: '@azure/search-documents.SearchIndexClient.getSearchClient'
     package: '@azure/search-documents'
@@ -290,7 +402,7 @@ methods:
     syntax:
       content: >-
         function getSearchClient<T>(indexName: string, options?:
-        SearchClientOptions)
+        SearchClientOptions): SearchClient<T>
       parameters:
         - id: indexName
           type: string
@@ -300,8 +412,8 @@ methods:
           description: |
             SearchClient Options
       return:
-        type: <xref uid="@azure/search-documents.SearchClient" />&lt;T&gt;
         description: ''
+        type: <xref uid="@azure/search-documents.SearchClient" />&lt;T&gt;
   - name: getServiceStatistics(GetServiceStatisticsOptions)
     uid: '@azure/search-documents.SearchIndexClient.getServiceStatistics'
     package: '@azure/search-documents'
@@ -312,17 +424,19 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getServiceStatistics(options?: GetServiceStatisticsOptions)'
+      content: >-
+        function getServiceStatistics(options?: GetServiceStatisticsOptions):
+        Promise<SearchServiceStatistics>
       parameters:
         - id: options
           type: <xref uid="@azure/search-documents.GetServiceStatisticsOptions" />
           description: |
             Additional optional arguments.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.SearchServiceStatistics"
           />&gt;
-        description: ''
   - name: 'getSynonymMap(string, GetSynonymMapsOptions)'
     uid: '@azure/search-documents.SearchIndexClient.getSynonymMap'
     package: '@azure/search-documents'
@@ -333,7 +447,7 @@ methods:
     syntax:
       content: >-
         function getSynonymMap(synonymMapName: string, options?:
-        GetSynonymMapsOptions)
+        GetSynonymMapsOptions): Promise<SynonymMap>
       parameters:
         - id: synonymMapName
           type: string
@@ -343,8 +457,25 @@ methods:
           description: |
             Additional optional arguments.
       return:
-        type: Promise&lt;<xref uid="@azure/search-documents.SynonymMap" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/search-documents.SynonymMap" />&gt;
+  - name: listAliases(ListAliasesOptions)
+    uid: '@azure/search-documents.SearchIndexClient.listAliases'
+    package: '@azure/search-documents'
+    summary: Lists all aliases available for a search service.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function listAliases(options?: ListAliasesOptions): AliasIterator'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/search-documents.ListAliasesOptions" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: <xref uid="@azure/search-documents.AliasIterator" />
   - name: listIndexes(ListIndexesOptions)
     uid: '@azure/search-documents.SearchIndexClient.listIndexes'
     package: '@azure/search-documents'
@@ -353,15 +484,15 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listIndexes(options?: ListIndexesOptions)'
+      content: 'function listIndexes(options?: ListIndexesOptions): IndexIterator'
       parameters:
         - id: options
           type: <xref uid="@azure/search-documents.ListIndexesOptions" />
           description: |
             Options to the list index operation.
       return:
-        type: <xref uid="@azure/search-documents.IndexIterator" />
         description: ''
+        type: <xref uid="@azure/search-documents.IndexIterator" />
   - name: listIndexesNames(ListIndexesOptions)
     uid: '@azure/search-documents.SearchIndexClient.listIndexesNames'
     package: '@azure/search-documents'
@@ -370,15 +501,17 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listIndexesNames(options?: ListIndexesOptions)'
+      content: >-
+        function listIndexesNames(options?: ListIndexesOptions):
+        IndexNameIterator
       parameters:
         - id: options
           type: <xref uid="@azure/search-documents.ListIndexesOptions" />
           description: |
             Options to the list index operation.
       return:
-        type: <xref uid="@azure/search-documents.IndexNameIterator" />
         description: ''
+        type: <xref uid="@azure/search-documents.IndexNameIterator" />
   - name: listSynonymMaps(ListSynonymMapsOptions)
     uid: '@azure/search-documents.SearchIndexClient.listSynonymMaps'
     package: '@azure/search-documents'
@@ -387,17 +520,19 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listSynonymMaps(options?: ListSynonymMapsOptions)'
+      content: >-
+        function listSynonymMaps(options?: ListSynonymMapsOptions):
+        Promise<Array<SynonymMap>>
       parameters:
         - id: options
           type: <xref uid="@azure/search-documents.ListSynonymMapsOptions" />
           description: |
             Options to the list SynonymMaps operation.
       return:
+        description: ''
         type: >-
           Promise&lt;Array&lt;<xref uid="@azure/search-documents.SynonymMap"
           />&gt;&gt;
-        description: ''
   - name: listSynonymMapsNames(ListSynonymMapsOptions)
     uid: '@azure/search-documents.SearchIndexClient.listSynonymMapsNames'
     package: '@azure/search-documents'
@@ -406,12 +541,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listSynonymMapsNames(options?: ListSynonymMapsOptions)'
+      content: >-
+        function listSynonymMapsNames(options?: ListSynonymMapsOptions):
+        Promise<Array<string>>
       parameters:
         - id: options
           type: <xref uid="@azure/search-documents.ListSynonymMapsOptions" />
           description: |
             Options to the list SynonymMaps operation.
       return:
-        type: Promise&lt;Array&lt;string&gt;&gt;
         description: ''
+        type: Promise&lt;Array&lt;string&gt;&gt;

@@ -2,7 +2,7 @@
 name: JobDetails
 uid: '@azure/arm-storageimportexport.JobDetails'
 package: '@azure/arm-storageimportexport'
-summary: ''
+summary: Specifies the job properties
 fullName: JobDetails
 remarks: ''
 isPreview: false
@@ -12,7 +12,9 @@ properties:
   - name: backupDriveManifest
     uid: '@azure/arm-storageimportexport.JobDetails.backupDriveManifest'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: >-
+      Default value is false. Indicates whether the manifest files on the drives
+      should be copied to block blobs.
     fullName: backupDriveManifest
     remarks: ''
     isPreview: false
@@ -20,12 +22,12 @@ properties:
     syntax:
       content: 'backupDriveManifest?: undefined | false | true'
       return:
-        type: undefined | false | true
         description: ''
+        type: undefined | false | true
   - name: cancelRequested
     uid: '@azure/arm-storageimportexport.JobDetails.cancelRequested'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: Indicates whether a request has been submitted to cancel the job.
     fullName: cancelRequested
     remarks: ''
     isPreview: false
@@ -33,25 +35,31 @@ properties:
     syntax:
       content: 'cancelRequested?: undefined | false | true'
       return:
-        type: undefined | false | true
         description: ''
+        type: undefined | false | true
   - name: deliveryPackage
     uid: '@azure/arm-storageimportexport.JobDetails.deliveryPackage'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: >-
+      Contains information about the package being shipped by the customer to
+      the Microsoft data center.
     fullName: deliveryPackage
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'deliveryPackage?: PackageInfomation'
+      content: 'deliveryPackage?: DeliveryPackageInformation'
       return:
-        type: <xref uid="@azure/arm-storageimportexport.PackageInfomation" />
         description: ''
+        type: >-
+          <xref uid="@azure/arm-storageimportexport.DeliveryPackageInformation"
+          />
   - name: diagnosticsPath
     uid: '@azure/arm-storageimportexport.JobDetails.diagnosticsPath'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: >-
+      The virtual blob directory to which the copy logs and backups of drive
+      manifest files (if enabled) will be stored.
     fullName: diagnosticsPath
     remarks: ''
     isPreview: false
@@ -59,12 +67,14 @@ properties:
     syntax:
       content: 'diagnosticsPath?: undefined | string'
       return:
-        type: undefined | string
         description: ''
+        type: undefined | string
   - name: driveList
     uid: '@azure/arm-storageimportexport.JobDetails.driveList'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: >-
+      List of up to ten drives that comprise the job. The drive list is a
+      required element for an import job; it is not specified for export jobs.
     fullName: driveList
     remarks: ''
     isPreview: false
@@ -72,25 +82,43 @@ properties:
     syntax:
       content: 'driveList?: DriveStatus[]'
       return:
-        type: '<xref uid="@azure/arm-storageimportexport.DriveStatus" />[]'
         description: ''
-  - name: exportProperty
-    uid: '@azure/arm-storageimportexport.JobDetails.exportProperty'
+        type: '<xref uid="@azure/arm-storageimportexport.DriveStatus" />[]'
+  - name: encryptionKey
+    uid: '@azure/arm-storageimportexport.JobDetails.encryptionKey'
     package: '@azure/arm-storageimportexport'
-    summary: ''
-    fullName: exportProperty
+    summary: Contains information about the encryption key.
+    fullName: encryptionKey
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'exportProperty?: ExportModel'
+      content: 'encryptionKey?: EncryptionKeyDetails'
       return:
-        type: <xref uid="@azure/arm-storageimportexport.ExportModel" />
         description: ''
+        type: <xref uid="@azure/arm-storageimportexport.EncryptionKeyDetails" />
+  - name: export
+    uid: '@azure/arm-storageimportexport.JobDetails.export'
+    package: '@azure/arm-storageimportexport'
+    summary: >-
+      A property containing information about the blobs to be exported for an
+      export job. This property is included for export jobs only.
+    fullName: export
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'export?: Export'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-storageimportexport.Export" />
   - name: incompleteBlobListUri
     uid: '@azure/arm-storageimportexport.JobDetails.incompleteBlobListUri'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: >-
+      A blob path that points to a block blob containing a list of blob names
+      that were not exported due to insufficient drive space. If all blobs were
+      exported successfully, then this element is not included in the response.
     fullName: incompleteBlobListUri
     remarks: ''
     isPreview: false
@@ -98,12 +126,12 @@ properties:
     syntax:
       content: 'incompleteBlobListUri?: undefined | string'
       return:
-        type: undefined | string
         description: ''
+        type: undefined | string
   - name: jobType
     uid: '@azure/arm-storageimportexport.JobDetails.jobType'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: The type of job
     fullName: jobType
     remarks: ''
     isPreview: false
@@ -111,12 +139,14 @@ properties:
     syntax:
       content: 'jobType?: undefined | string'
       return:
-        type: undefined | string
         description: ''
+        type: undefined | string
   - name: logLevel
     uid: '@azure/arm-storageimportexport.JobDetails.logLevel'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: >-
+      Default value is Error. Indicates whether error logging or verbose logging
+      will be enabled.
     fullName: logLevel
     remarks: ''
     isPreview: false
@@ -124,12 +154,12 @@ properties:
     syntax:
       content: 'logLevel?: undefined | string'
       return:
-        type: undefined | string
         description: ''
+        type: undefined | string
   - name: percentComplete
     uid: '@azure/arm-storageimportexport.JobDetails.percentComplete'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: Overall percentage completed for the job.
     fullName: percentComplete
     remarks: ''
     isPreview: false
@@ -137,12 +167,12 @@ properties:
     syntax:
       content: 'percentComplete?: undefined | number'
       return:
-        type: undefined | number
         description: ''
+        type: undefined | number
   - name: provisioningState
     uid: '@azure/arm-storageimportexport.JobDetails.provisioningState'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: Specifies the provisioning state of the job.
     fullName: provisioningState
     remarks: ''
     isPreview: false
@@ -150,12 +180,12 @@ properties:
     syntax:
       content: 'provisioningState?: undefined | string'
       return:
-        type: undefined | string
         description: ''
+        type: undefined | string
   - name: returnAddress
     uid: '@azure/arm-storageimportexport.JobDetails.returnAddress'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: Specifies the return address information for the job.
     fullName: returnAddress
     remarks: ''
     isPreview: false
@@ -163,25 +193,29 @@ properties:
     syntax:
       content: 'returnAddress?: ReturnAddress'
       return:
-        type: <xref uid="@azure/arm-storageimportexport.ReturnAddress" />
         description: ''
+        type: <xref uid="@azure/arm-storageimportexport.ReturnAddress" />
   - name: returnPackage
     uid: '@azure/arm-storageimportexport.JobDetails.returnPackage'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: >-
+      Contains information about the package being shipped from the Microsoft
+      data center to the customer to return the drives. The format is the same
+      as the deliveryPackage property above. This property is not included if
+      the drives have not yet been returned.
     fullName: returnPackage
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'returnPackage?: PackageInfomation'
+      content: 'returnPackage?: PackageInformation'
       return:
-        type: <xref uid="@azure/arm-storageimportexport.PackageInfomation" />
         description: ''
+        type: <xref uid="@azure/arm-storageimportexport.PackageInformation" />
   - name: returnShipping
     uid: '@azure/arm-storageimportexport.JobDetails.returnShipping'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: Specifies the return carrier and customer's account with the carrier.
     fullName: returnShipping
     remarks: ''
     isPreview: false
@@ -189,12 +223,14 @@ properties:
     syntax:
       content: 'returnShipping?: ReturnShipping'
       return:
-        type: <xref uid="@azure/arm-storageimportexport.ReturnShipping" />
         description: ''
+        type: <xref uid="@azure/arm-storageimportexport.ReturnShipping" />
   - name: shippingInformation
     uid: '@azure/arm-storageimportexport.JobDetails.shippingInformation'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: >-
+      Contains information about the Microsoft datacenter to which the drives
+      should be shipped.
     fullName: shippingInformation
     remarks: ''
     isPreview: false
@@ -202,12 +238,12 @@ properties:
     syntax:
       content: 'shippingInformation?: ShippingInformation'
       return:
-        type: <xref uid="@azure/arm-storageimportexport.ShippingInformation" />
         description: ''
+        type: <xref uid="@azure/arm-storageimportexport.ShippingInformation" />
   - name: state
     uid: '@azure/arm-storageimportexport.JobDetails.state'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: Current state of the job.
     fullName: state
     remarks: ''
     isPreview: false
@@ -215,12 +251,14 @@ properties:
     syntax:
       content: 'state?: undefined | string'
       return:
-        type: undefined | string
         description: ''
+        type: undefined | string
   - name: storageAccountId
     uid: '@azure/arm-storageimportexport.JobDetails.storageAccountId'
     package: '@azure/arm-storageimportexport'
-    summary: ''
+    summary: >-
+      The resource identifier of the storage account where data will be imported
+      to or exported from.
     fullName: storageAccountId
     remarks: ''
     isPreview: false
@@ -228,5 +266,5 @@ properties:
     syntax:
       content: 'storageAccountId?: undefined | string'
       return:
-        type: undefined | string
         description: ''
+        type: undefined | string

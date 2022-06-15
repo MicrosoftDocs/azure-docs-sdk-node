@@ -29,8 +29,8 @@ properties:
     syntax:
       content: string authorizationToken
       return:
-        type: string
         description: ''
+        type: string
   - name: endpointId
     uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.endpointId
     package: microsoft-cognitiveservices-speech-sdk
@@ -47,8 +47,8 @@ properties:
     syntax:
       content: string endpointId
       return:
-        type: string
         description: The endpoint ID
+        type: string
   - name: outputFormat
     uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.outputFormat
     package: microsoft-cognitiveservices-speech-sdk
@@ -73,8 +73,8 @@ properties:
     syntax:
       content: OutputFormat outputFormat
       return:
-        type: <xref uid="microsoft-cognitiveservices-speech-sdk.OutputFormat" />
         description: Returns the output format.
+        type: <xref uid="microsoft-cognitiveservices-speech-sdk.OutputFormat" />
   - name: region
     uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.region
     package: microsoft-cognitiveservices-speech-sdk
@@ -86,8 +86,8 @@ properties:
     syntax:
       content: string region
       return:
-        type: string
         description: The region set on the config.
+        type: string
   - name: speechRecognitionLanguage
     uid: >-
       microsoft-cognitiveservices-speech-sdk.SpeechConfig.speechRecognitionLanguage
@@ -102,8 +102,8 @@ properties:
     syntax:
       content: string speechRecognitionLanguage
       return:
-        type: string
         description: ''
+        type: string
   - name: speechSynthesisLanguage
     uid: >-
       microsoft-cognitiveservices-speech-sdk.SpeechConfig.speechSynthesisLanguage
@@ -118,10 +118,10 @@ properties:
     syntax:
       content: string speechSynthesisLanguage
       return:
-        type: string
         description: |-
           Returns the speech synthesis language.
           Added in version 1.11.0.
+        type: string
   - name: speechSynthesisOutputFormat
     uid: >-
       microsoft-cognitiveservices-speech-sdk.SpeechConfig.speechSynthesisOutputFormat
@@ -136,13 +136,13 @@ properties:
     syntax:
       content: SpeechSynthesisOutputFormat speechSynthesisOutputFormat
       return:
+        description: |-
+          Returns the speech synthesis output format
+          Added in version 1.11.0.
         type: >-
           <xref
           uid="microsoft-cognitiveservices-speech-sdk.SpeechSynthesisOutputFormat"
           />
-        description: |-
-          Returns the speech synthesis output format
-          Added in version 1.11.0.
   - name: speechSynthesisVoiceName
     uid: >-
       microsoft-cognitiveservices-speech-sdk.SpeechConfig.speechSynthesisVoiceName
@@ -159,10 +159,10 @@ properties:
     syntax:
       content: string speechSynthesisVoiceName
       return:
-        type: string
         description: |-
           Returns the speech synthesis voice.
           Added in version 1.11.0.
+        type: string
   - name: subscriptionKey
     uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.subscriptionKey
     package: microsoft-cognitiveservices-speech-sdk
@@ -174,8 +174,8 @@ properties:
     syntax:
       content: string subscriptionKey
       return:
-        type: string
         description: The subscription key set on the config.
+        type: string
 methods:
   - name: close()
     uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.close
@@ -213,20 +213,31 @@ methods:
 
       Note: The caller needs to ensure that the authorization token is valid.
       Before the authorization token
-            expires, the caller needs to refresh it by calling this setter with a new valid token.
+
+      expires, the caller needs to refresh it by calling this setter with a new
+      valid token.
+
       Note: Please use a token derived from your LanguageUnderstanding
       subscription key in case you want
-            to use the Intent recognizer. As configuration values are copied when creating a new recognizer,
-            the new token value will not apply to recognizers that have already been created. For recognizers
-            that have been created before, you need to set authorization token of the corresponding recognizer
-            to refresh the token. Otherwise, the recognizers will encounter errors during recognition.
+
+      to use the Intent recognizer. As configuration values are copied when
+      creating a new recognizer,
+
+      the new token value will not apply to recognizers that have already been
+      created. For recognizers
+
+      that have been created before, you need to set authorization token of the
+      corresponding recognizer
+
+      to refresh the token. Otherwise, the recognizers will encounter errors
+      during recognition.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         static function fromAuthorizationToken(authorizationToken: string,
-        region: string)
+        region: string): SpeechConfig
       parameters:
         - id: authorizationToken
           type: string
@@ -237,8 +248,8 @@ methods:
             The region name (see the <a
             href="https://aka.ms/csspeech/region">region page</a>).
       return:
-        type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
         description: A speech factory instance.
+        type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
   - name: 'fromEndpoint(URL, string)'
     uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromEndpoint
     package: microsoft-cognitiveservices-speech-sdk
@@ -257,18 +268,29 @@ methods:
 
       For example, if language is defined in the uri as query parameter
       "language=de-DE", and also set by
-                   SpeechConfig.speechRecognitionLanguage = "en-US", the language setting in uri takes precedence,
-                   and the effective language is "de-DE". Only the parameters that are not specified in the
-                   endpoint URL can be set by other APIs.
+
+      SpeechConfig.speechRecognitionLanguage = "en-US", the language setting in
+      uri takes precedence,
+
+      and the effective language is "de-DE". Only the parameters that are not
+      specified in the
+
+      endpoint URL can be set by other APIs.
+
       Note: To use authorization token with fromEndpoint, pass an empty string
       to the subscriptionKey in the
-            fromEndpoint method, and then set authorizationToken="token" on the created SpeechConfig instance to
-            use the authorization token.
+
+      fromEndpoint method, and then set authorizationToken="token" on the
+      created SpeechConfig instance to
+
+      use the authorization token.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static function fromEndpoint(endpoint: URL, subscriptionKey?: string)'
+      content: >-
+        static function fromEndpoint(endpoint: URL, subscriptionKey?: string):
+        SpeechConfig
       parameters:
         - id: endpoint
           type: URL
@@ -279,8 +301,8 @@ methods:
             The subscription key. If a subscription key is not specified, an
             authorization token must be set.
       return:
-        type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
         description: A speech factory instance.
+        type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
   - name: 'fromHost(URL, string)'
     uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromHost
     package: microsoft-cognitiveservices-speech-sdk
@@ -307,7 +329,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static function fromHost(hostName: URL, subscriptionKey?: string)'
+      content: >-
+        static function fromHost(hostName: URL, subscriptionKey?: string):
+        SpeechConfig
       parameters:
         - id: hostName
           type: URL
@@ -318,8 +342,8 @@ methods:
             The subscription key. If a subscription key is not specified, an
             authorization token must be set.
       return:
-        type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
         description: A speech factory instance.
+        type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
   - name: 'fromSubscription(string, string)'
     uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.fromSubscription
     package: microsoft-cognitiveservices-speech-sdk
@@ -335,7 +359,7 @@ methods:
     syntax:
       content: >-
         static function fromSubscription(subscriptionKey: string, region:
-        string)
+        string): SpeechConfig
       parameters:
         - id: subscriptionKey
           type: string
@@ -346,8 +370,8 @@ methods:
             The region name (see the <a
             href="https://aka.ms/csspeech/region">region page</a>).
       return:
-        type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
         description: The speech factory
+        type: <xref uid="microsoft-cognitiveservices-speech-sdk.SpeechConfig" />
   - name: 'getProperty(string, string)'
     uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.getProperty
     package: microsoft-cognitiveservices-speech-sdk
@@ -356,7 +380,7 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperty(name: string, def?: string)'
+      content: 'function getProperty(name: string, def?: string): string'
       parameters:
         - id: name
           type: string
@@ -365,8 +389,8 @@ methods:
           type: string
           description: The value to return in case the property is not known.
       return:
-        type: string
         description: 'The current value, or provided default, of the given property.'
+        type: string
   - name: requestWordLevelTimestamps()
     uid: >-
       microsoft-cognitiveservices-speech-sdk.SpeechConfig.requestWordLevelTimestamps
@@ -392,7 +416,7 @@ methods:
             <xref uid="microsoft-cognitiveservices-speech-sdk.ProfanityOption"
             />
           description: ''
-  - name: 'setProperty(string, string)'
+  - name: 'setProperty(string | PropertyId, string)'
     uid: microsoft-cognitiveservices-speech-sdk.SpeechConfig.setProperty
     package: microsoft-cognitiveservices-speech-sdk
     summary: Sets an arbitrary property.
@@ -400,10 +424,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setProperty(name: string, value: string)'
+      content: 'function setProperty(name: string | PropertyId, value: string)'
       parameters:
         - id: name
-          type: string
+          type: >-
+            string | <xref
+            uid="microsoft-cognitiveservices-speech-sdk.PropertyId" />
           description: The name of the property to set.
         - id: value
           type: string

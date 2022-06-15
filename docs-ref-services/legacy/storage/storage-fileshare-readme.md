@@ -1,8 +1,8 @@
 ---
 title: Azure Files for JavaScript Readme
 description: Reference for Azure Storage modules for JavaScript
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 manager: twolley
 ms.date: 03/12/2020
 ms.topic: reference

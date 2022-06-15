@@ -33,7 +33,7 @@ constructors:
           description: |-
             Call StorageURL.newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
-properties:
+inheritedProperties:
   - name: pipeline
     uid: '@azure/storage-queue.MessagesURL.pipeline'
     package: '@azure/storage-queue'
@@ -45,8 +45,8 @@ properties:
     syntax:
       content: 'pipeline: Pipeline'
       return:
-        type: <xref uid="@azure/storage-queue.Pipeline" />
         description: ''
+        type: <xref uid="@azure/storage-queue.Pipeline" />
   - name: url
     uid: '@azure/storage-queue.MessagesURL.url'
     package: '@azure/storage-queue'
@@ -58,18 +58,47 @@ properties:
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
-methods:
-  - name: clear(Aborter)
-    uid: '@azure/storage-queue.MessagesURL.clear'
+        type: string
+inheritedMethods:
+  - name: 'newPipeline(Credential, INewPipelineOptions)'
+    uid: '@azure/storage-queue.MessagesURL.newPipeline'
     package: '@azure/storage-queue'
-    summary: Clear deletes all messages from a queue.
+    summary: >-
+      A static method used to create a new Pipeline object with Credential
+      provided.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function clear(aborter: Aborter)'
+      content: >-
+        static function newPipeline(credential: Credential, pipelineOptions?:
+        INewPipelineOptions): Pipeline
+      parameters:
+        - id: credential
+          type: <xref uid="@azure/storage-queue.Credential" />
+          description: 'Such as AnonymousCredential, SharedKeyCredential or TokenCredential.'
+        - id: pipelineOptions
+          type: <xref uid="@azure/storage-queue.INewPipelineOptions" />
+          description: ''
+      return:
+        description: A new Pipeline object.
+        type: <xref uid="@azure/storage-queue.Pipeline" />
+methods:
+  - name: clear(Aborter)
+    uid: '@azure/storage-queue.MessagesURL.clear'
+    package: '@azure/storage-queue'
+    summary: >-
+      Clear deletes all messages from a queue.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/clear-messages
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function clear(aborter: Aborter): Promise<Models.MessagesClearResponse>'
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
@@ -78,19 +107,22 @@ methods:
             Aborter.timeout(),
                                      goto documents of Aborter for more examples about request cancellation
       return:
-        type: Promise&lt;<xref uid="Models.MessagesClearResponse" />&gt;
         description: ''
+        type: Promise&lt;<xref uid="Models.MessagesClearResponse" />&gt;
   - name: 'dequeue(Aborter, Models.MessagesDequeueOptionalParams)'
     uid: '@azure/storage-queue.MessagesURL.dequeue'
     package: '@azure/storage-queue'
-    summary: Dequeue retrieves one or more messages from the front of the queue.
+    summary: |-
+      Dequeue retrieves one or more messages from the front of the queue.
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/get-messages
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function dequeue(aborter: Aborter, options?:
-        Models.MessagesDequeueOptionalParams)
+        Models.MessagesDequeueOptionalParams): Promise<MessagesDequeueResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
@@ -102,10 +134,10 @@ methods:
           type: <xref uid="Models.MessagesDequeueOptionalParams" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-queue.MessagesDequeueResponse"
           />&gt;
-        description: ''
   - name: 'enqueue(Aborter, string, Models.MessagesEnqueueOptionalParams)'
     uid: '@azure/storage-queue.MessagesURL.enqueue'
     package: '@azure/storage-queue'
@@ -120,13 +152,16 @@ methods:
 
       To include markup in the message, the contents of the message must either
       be XML-escaped or Base64-encode.
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/put-message
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function enqueue(aborter: Aborter, messageText: string, options?:
-        Models.MessagesEnqueueOptionalParams)
+        Models.MessagesEnqueueOptionalParams): Promise<MessagesEnqueueResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
@@ -141,10 +176,10 @@ methods:
           type: <xref uid="Models.MessagesEnqueueOptionalParams" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-queue.MessagesEnqueueResponse"
           />&gt;
-        description: ''
   - name: fromQueueURL(QueueURL)
     uid: '@azure/storage-queue.MessagesURL.fromQueueURL'
     package: '@azure/storage-queue'
@@ -153,50 +188,31 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'static function fromQueueURL(queueURL: QueueURL)'
+      content: 'static function fromQueueURL(queueURL: QueueURL): MessagesURL'
       parameters:
         - id: queueURL
           type: <xref uid="@azure/storage-queue.QueueURL" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-queue.MessagesURL" />
         description: ''
-  - name: 'newPipeline(Credential, INewPipelineOptions)'
-    uid: '@azure/storage-queue.MessagesURL.newPipeline'
-    package: '@azure/storage-queue'
-    summary: >-
-      A static method used to create a new Pipeline object with Credential
-      provided.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        static function newPipeline(credential: Credential, pipelineOptions?:
-        INewPipelineOptions)
-      parameters:
-        - id: credential
-          type: <xref uid="@azure/storage-queue.Credential" />
-          description: 'Such as AnonymousCredential, SharedKeyCredential or TokenCredential.'
-        - id: pipelineOptions
-          type: <xref uid="@azure/storage-queue.INewPipelineOptions" />
-          description: ''
-      return:
-        type: <xref uid="@azure/storage-queue.Pipeline" />
-        description: A new Pipeline object.
+        type: <xref uid="@azure/storage-queue.MessagesURL" />
   - name: 'peek(Aborter, Models.MessagesPeekOptionalParams)'
     uid: '@azure/storage-queue.MessagesURL.peek'
     package: '@azure/storage-queue'
     summary: >-
       Peek retrieves one or more messages from the front of the queue but does
       not alter the visibility of the message.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/peek-messages
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function peek(aborter: Aborter, options?:
-        Models.MessagesPeekOptionalParams)
+        Models.MessagesPeekOptionalParams): Promise<MessagesPeekResponse>
       parameters:
         - id: aborter
           type: <xref uid="@azure/storage-queue.Aborter" />
@@ -208,10 +224,10 @@ methods:
           type: <xref uid="Models.MessagesPeekOptionalParams" />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-queue.MessagesPeekResponse"
           />&gt;
-        description: ''
   - name: withPipeline(Pipeline)
     uid: '@azure/storage-queue.MessagesURL.withPipeline'
     package: '@azure/storage-queue'
@@ -222,12 +238,12 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withPipeline(pipeline: Pipeline)'
+      content: 'function withPipeline(pipeline: Pipeline): MessagesURL'
       parameters:
         - id: pipeline
           type: <xref uid="@azure/storage-queue.Pipeline" />
           description: ''
       return:
-        type: <xref uid="@azure/storage-queue.MessagesURL" />
         description: ''
+        type: <xref uid="@azure/storage-queue.MessagesURL" />
 extends: <xref uid="@azure/storage-queue.StorageURL" />

@@ -1,8 +1,8 @@
 ---
 title: Azure Communication Identity client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-identity, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 03/29/2021
 ms.topic: reference
 ms.prod: azure

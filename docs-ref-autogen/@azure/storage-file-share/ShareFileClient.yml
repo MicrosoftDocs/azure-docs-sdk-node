@@ -9,7 +9,7 @@ isPreview: false
 isDeprecated: false
 type: class
 constructors:
-  - name: 'ShareFileClient(string, Credential, StoragePipelineOptions)'
+  - name: 'ShareFileClient(string, Credential_2, StoragePipelineOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.constructor'
     package: '@azure/storage-file-share'
     summary: Creates an instance of ShareFileClient.
@@ -18,7 +18,7 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new ShareFileClient(url: string, credential?: Credential, options?:
+        new ShareFileClient(url: string, credential?: Credential_2, options?:
         StoragePipelineOptions)
       parameters:
         - id: url
@@ -33,7 +33,7 @@ constructors:
                                 However, if a file or directory name includes %, file or directory name must be encoded in the URL.
                                 Such as a file named "myfile%", the URL should be "https://myaccount.file.core.windows.net/myshare/mydirectory/myfile%25".
         - id: credential
-          type: <xref uid="@azure/storage-file-share.Credential" />
+          type: <xref uid="@azure/storage-file-share.Credential_2" />
           description: |-
             Such as AnonymousCredential or StorageSharedKeyCredential.
                                              If not specified, AnonymousCredential is used.
@@ -68,19 +68,6 @@ constructors:
             Call newPipeline() to create a default
                                        pipeline, or provide a customized pipeline.
 properties:
-  - name: accountName
-    uid: '@azure/storage-file-share.ShareFileClient.accountName'
-    package: '@azure/storage-file-share'
-    summary: ''
-    fullName: accountName
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'accountName: string'
-      return:
-        type: string
-        description: ''
   - name: name
     uid: '@azure/storage-file-share.ShareFileClient.name'
     package: '@azure/storage-file-share'
@@ -92,8 +79,8 @@ properties:
     syntax:
       content: string name
       return:
-        type: string
         description: ''
+        type: string
   - name: path
     uid: '@azure/storage-file-share.ShareFileClient.path'
     package: '@azure/storage-file-share'
@@ -105,8 +92,8 @@ properties:
     syntax:
       content: string path
       return:
-        type: string
         description: ''
+        type: string
   - name: shareName
     uid: '@azure/storage-file-share.ShareFileClient.shareName'
     package: '@azure/storage-file-share'
@@ -118,8 +105,22 @@ properties:
     syntax:
       content: string shareName
       return:
-        type: string
         description: ''
+        type: string
+inheritedProperties:
+  - name: accountName
+    uid: '@azure/storage-file-share.ShareFileClient.accountName'
+    package: '@azure/storage-file-share'
+    summary: ''
+    fullName: accountName
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'accountName: string'
+      return:
+        description: ''
+        type: string
   - name: url
     uid: '@azure/storage-file-share.ShareFileClient.url'
     package: '@azure/storage-file-share'
@@ -131,8 +132,8 @@ properties:
     syntax:
       content: 'url: string'
       return:
-        type: string
         description: ''
+        type: string
 methods:
   - name: 'abortCopyFromURL(string, FileAbortCopyFromURLOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.abortCopyFromURL'
@@ -142,13 +143,17 @@ methods:
       zero length and full
 
       metadata.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/abort-copy-file
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function abortCopyFromURL(copyId: string, options?:
-        FileAbortCopyFromURLOptions)
+        FileAbortCopyFromURLOptions): Promise<FileAbortCopyResponse>
       parameters:
         - id: copyId
           type: string
@@ -158,10 +163,10 @@ methods:
           description: |
             Options to File Abort Copy From URL operation.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-file-share.FileAbortCopyResponse"
           />&gt;
-        description: ''
   - name: 'clearRange(number, number, FileClearRangeOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.clearRange'
     package: '@azure/storage-file-share'
@@ -174,7 +179,7 @@ methods:
     syntax:
       content: >-
         function clearRange(offset: number, contentLength: number, options?:
-        FileClearRangeOptions)
+        FileClearRangeOptions): Promise<FileUploadRangeResponse>
       parameters:
         - id: offset
           type: number
@@ -187,21 +192,26 @@ methods:
           description: |
             Options to File Clear Range operation.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileUploadRangeResponse" />&gt;
-        description: ''
   - name: 'create(number, FileCreateOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.create'
     package: '@azure/storage-file-share'
     summary: >-
       Creates a new file or replaces a file. Note it only initializes the file
       with no content.
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/create-file
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function create(size: number, options?: FileCreateOptions)'
+      content: >-
+        function create(size: number, options?: FileCreateOptions):
+        Promise<FileCreateResponse>
       parameters:
         - id: size
           type: number
@@ -210,9 +220,6 @@ methods:
           type: <xref uid="@azure/storage-file-share.FileCreateOptions" />
           description: Options to File Create operation.
       return:
-        type: >-
-          Promise&lt;<xref uid="@azure/storage-file-share.FileCreateResponse"
-          />&gt;
         description: |-
           Response data for the File Create  operation.
 
@@ -229,10 +236,13 @@ methods:
           await fileClient.uploadRange(content, 0, content.length);
           console.log("Updated file successfully!")
           ```
+        type: >-
+          Promise&lt;<xref uid="@azure/storage-file-share.FileCreateResponse"
+          />&gt;
   - name: delete(FileDeleteOptions)
     uid: '@azure/storage-file-share.ShareFileClient.delete'
     package: '@azure/storage-file-share'
-    summary: >
+    summary: >-
       Removes the file from the storage account.
 
       When a file is successfully deleted, it is immediately removed from the
@@ -254,24 +264,30 @@ methods:
 
       a share. An attempt to perform this operation on a share snapshot will
       fail with 400 (InvalidQueryParameterValue)
+
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-file2
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function delete(options?: FileDeleteOptions)'
+      content: >-
+        function delete(options?: FileDeleteOptions):
+        Promise<FileDeleteResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-share.FileDeleteOptions" />
           description: Options to File Delete operation.
       return:
+        description: Response data for the File Delete operation.
         type: >-
           Promise&lt;<xref uid="@azure/storage-file-share.FileDeleteResponse"
           />&gt;
-        description: Response data for the File Delete operation.
   - name: deleteIfExists(FileDeleteOptions)
     uid: '@azure/storage-file-share.ShareFileClient.deleteIfExists'
     package: '@azure/storage-file-share'
-    summary: >
+    summary: >-
       Removes the file from the storage account if it exists.
 
       When a file is successfully deleted, it is immediately removed from the
@@ -293,38 +309,48 @@ methods:
 
       a share. An attempt to perform this operation on a share snapshot will
       fail with 400 (InvalidQueryParameterValue)
+
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/delete-file2
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function deleteIfExists(options?: FileDeleteOptions)'
+      content: >-
+        function deleteIfExists(options?: FileDeleteOptions):
+        Promise<FileDeleteIfExistsResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-share.FileDeleteOptions" />
           description: |
             -
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileDeleteIfExistsResponse" />&gt;
-        description: ''
   - name: 'download(number, number, FileDownloadOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.download'
     package: '@azure/storage-file-share'
-    summary: >
+    summary: >-
       Reads or downloads a file from the system, including its metadata and
       properties.
 
       * In Node.js, data returns in a Readable stream `readableStreamBody`
 
       * In browsers, data returns in a promise `contentAsBlob`
+
+
+
+      See https://docs.microsoft.com/en-us/rest/api/storageservices/get-file
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function download(offset?: number, count?: number, options?:
-        FileDownloadOptions)
+        FileDownloadOptions): Promise<FileDownloadResponseModel>
       parameters:
         - id: offset
           type: number
@@ -340,9 +366,6 @@ methods:
           type: <xref uid="@azure/storage-file-share.FileDownloadOptions" />
           description: Options to File Download operation.
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-file-share.FileDownloadResponseModel" />&gt;
         description: |-
           Response data for the File Download operation.
 
@@ -393,6 +416,9 @@ methods:
             });
           }
           ```
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-share.FileDownloadResponseModel" />&gt;
   - name: 'downloadToBuffer(Buffer, number, number, FileDownloadToBufferOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.downloadToBuffer'
     package: '@azure/storage-file-share'
@@ -411,14 +437,14 @@ methods:
       gigabytes on 64-bit systems due to limitations of Node.js/V8. For files
       larger than this size,
 
-      consider <xref:downloadToFile>.
+      consider <xref:@azure/storage-file-share.ShareFileClient.downloadToFile>.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function downloadToBuffer(buffer: Buffer, offset?: number, count?:
-        number, options?: FileDownloadToBufferOptions)
+        number, options?: FileDownloadToBufferOptions): Promise<Buffer>
       parameters:
         - id: buffer
           type: Buffer
@@ -436,8 +462,8 @@ methods:
           description: |
             -
       return:
-        type: Promise&lt;Buffer&gt;
         description: ''
+        type: Promise&lt;Buffer&gt;
   - name: 'downloadToBuffer(number, number, FileDownloadToBufferOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.downloadToBuffer_1'
     package: '@azure/storage-file-share'
@@ -455,14 +481,14 @@ methods:
       gigabytes on 64-bit systems due to limitations of Node.js/V8. For files
       larger than this size,
 
-      consider <xref:downloadToFile>.
+      consider <xref:@azure/storage-file-share.ShareFileClient.downloadToFile>.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function downloadToBuffer(offset?: number, count?: number, options?:
-        FileDownloadToBufferOptions)
+        FileDownloadToBufferOptions): Promise<Buffer>
       parameters:
         - id: offset
           type: number
@@ -477,8 +503,8 @@ methods:
           description: |
             -
       return:
-        type: Promise&lt;Buffer&gt;
         description: ''
+        type: Promise&lt;Buffer&gt;
   - name: 'downloadToFile(string, number, number, FileDownloadOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.downloadToFile'
     package: '@azure/storage-file-share'
@@ -497,7 +523,8 @@ methods:
     syntax:
       content: >-
         function downloadToFile(filePath: string, offset?: number, count?:
-        number, options?: FileDownloadOptions)
+        number, options?: FileDownloadOptions):
+        Promise<FileDownloadResponseModel>
       parameters:
         - id: filePath
           type: string
@@ -514,14 +541,14 @@ methods:
           type: <xref uid="@azure/storage-file-share.FileDownloadOptions" />
           description: Options to Blob download options.
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-file-share.FileDownloadResponseModel" />&gt;
         description: |-
           The response data for blob download operation,
                                                           but with readableStreamBody set to undefined since its
                                                           content is already read and written into a local file
                                                           at the specified path.
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-share.FileDownloadResponseModel" />&gt;
   - name: exists(FileExistsOptions)
     uid: '@azure/storage-file-share.ShareFileClient.exists'
     package: '@azure/storage-file-share'
@@ -539,24 +566,31 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function exists(options?: FileExistsOptions)'
+      content: 'function exists(options?: FileExistsOptions): Promise<boolean>'
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-share.FileExistsOptions" />
           description: |
             options to Exists operation.
       return:
-        type: Promise&lt;boolean&gt;
         description: ''
+        type: Promise&lt;boolean&gt;
   - name: forceCloseAllHandles(FileForceCloseHandlesOptions)
     uid: '@azure/storage-file-share.ShareFileClient.forceCloseAllHandles'
     package: '@azure/storage-file-share'
-    summary: Force close all handles for a file.
+    summary: >-
+      Force close all handles for a file.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/force-close-handles
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function forceCloseAllHandles(options?: FileForceCloseHandlesOptions)'
+      content: >-
+        function forceCloseAllHandles(options?: FileForceCloseHandlesOptions):
+        Promise<CloseHandlesInfo>
       parameters:
         - id: options
           type: >-
@@ -565,21 +599,26 @@ methods:
           description: |
             Options to force close handles operation.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-file-share.CloseHandlesInfo"
           />&gt;
-        description: ''
   - name: 'forceCloseHandle(string, FileForceCloseHandlesOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.forceCloseHandle'
     package: '@azure/storage-file-share'
-    summary: Force close a specific handle for a file.
+    summary: >-
+      Force close a specific handle for a file.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/force-close-handles
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function forceCloseHandle(handleId: string, options?:
-        FileForceCloseHandlesOptions)
+        FileForceCloseHandlesOptions): Promise<FileForceCloseHandlesResponse>
       parameters:
         - id: handleId
           type: string
@@ -592,14 +631,14 @@ methods:
             />
           description: ''
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileForceCloseHandlesResponse" />&gt;
-        description: ''
   - name: generateSasUrl(FileGenerateSasUrlOptions)
     uid: '@azure/storage-file-share.ShareFileClient.generateSasUrl'
     package: '@azure/storage-file-share'
-    summary: >
+    summary: >-
       Only available for clients constructed with a shared key credential.
 
       Generates a Service Shared Access Signature (SAS) URI based on the client
@@ -607,20 +646,25 @@ methods:
 
       and parameters passed in. The SAS is signed by the shared key credential
       of the client.
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-a-service-sas
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function generateSasUrl(options: FileGenerateSasUrlOptions)'
+      content: 'function generateSasUrl(options: FileGenerateSasUrlOptions): string'
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-share.FileGenerateSasUrlOptions" />
           description: Optional parameters.
       return:
-        type: string
         description: >-
           The SAS URI consisting of the URI to the resource represented by this
           client, followed by the generated SAS token.
+        type: string
   - name: getProperties(FileGetPropertiesOptions)
     uid: '@azure/storage-file-share.ShareFileClient.getProperties'
     package: '@azure/storage-file-share'
@@ -629,20 +673,26 @@ methods:
       properties
 
       for the file. It does not return the content of the file.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/get-file-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getProperties(options?: FileGetPropertiesOptions)'
+      content: >-
+        function getProperties(options?: FileGetPropertiesOptions):
+        Promise<FileGetPropertiesResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-share.FileGetPropertiesOptions" />
           description: Options to File Get Properties operation.
       return:
+        description: Response data for the File Get Properties operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileGetPropertiesResponse" />&gt;
-        description: Response data for the File Get Properties operation.
   - name: getRangeList(FileGetRangeListOptions)
     uid: '@azure/storage-file-share.ShareFileClient.getRangeList'
     package: '@azure/storage-file-share'
@@ -651,17 +701,19 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getRangeList(options?: FileGetRangeListOptions)'
+      content: >-
+        function getRangeList(options?: FileGetRangeListOptions):
+        Promise<FileGetRangeListResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-share.FileGetRangeListOptions" />
           description: |
             Options to File Get range List operation.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileGetRangeListResponse" />&gt;
-        description: ''
   - name: 'getRangeListDiff(string, FileGetRangeListOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.getRangeListDiff'
     package: '@azure/storage-file-share'
@@ -674,7 +726,7 @@ methods:
     syntax:
       content: >-
         function getRangeListDiff(prevShareSnapshot: string, options?:
-        FileGetRangeListOptions)
+        FileGetRangeListOptions): Promise<FileGetRangeListDiffResponse>
       parameters:
         - id: prevShareSnapshot
           type: string
@@ -686,26 +738,28 @@ methods:
           description: |
             -
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileGetRangeListDiffResponse" />&gt;
-        description: ''
   - name: getShareLeaseClient(string)
     uid: '@azure/storage-file-share.ShareFileClient.getShareLeaseClient'
     package: '@azure/storage-file-share'
-    summary: 'Get a <xref:ShareLeaseClient> that manages leases on the file.'
+    summary: >-
+      Get a <xref:@azure/storage-file-share.ShareFileClient.getShareLeaseClient>
+      that manages leases on the file.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getShareLeaseClient(proposeLeaseId?: string)'
+      content: 'function getShareLeaseClient(proposeLeaseId?: string): ShareLeaseClient'
       parameters:
         - id: proposeLeaseId
           type: string
           description: Initial proposed lease Id.
       return:
-        type: <xref uid="@azure/storage-file-share.ShareLeaseClient" />
         description: A new ShareLeaseClient object for managing leases on the file.
+        type: <xref uid="@azure/storage-file-share.ShareLeaseClient" />
   - name: listHandles(FileListHandlesOptions)
     uid: '@azure/storage-file-share.ShareFileClient.listHandles'
     package: '@azure/storage-file-share'
@@ -717,7 +771,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listHandles(options?: FileListHandlesOptions)'
+      content: >-
+        function listHandles(options?: FileListHandlesOptions):
+        PagedAsyncIterableIterator<HandleItem, FileListHandlesResponse>
       parameters:
         - id: options
           type: <xref uid="@azure/storage-file-share.FileListHandlesOptions" />
@@ -726,20 +782,65 @@ methods:
 
             An asyncIterableIterator that supports paging.
       return:
+        description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/storage-file-share.HandleItem" />, <xref
           uid="@azure/storage-file-share.FileListHandlesResponse" />&gt;
-        description: ''
-  - name: 'resize(number, FileResizeOptions)'
-    uid: '@azure/storage-file-share.ShareFileClient.resize'
+  - name: 'rename(string, FileRenameOptions)'
+    uid: '@azure/storage-file-share.ShareFileClient.rename'
     package: '@azure/storage-file-share'
-    summary: Resize file.
+    summary: |-
+      Renames a file.
+      This API only supports renaming a file in the same share.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function resize(length: number, options?: FileResizeOptions)'
+      content: >-
+        function rename(destinationPath: string, options?: FileRenameOptions):
+        Promise<{ destinationFileClient: ShareFileClient, fileRenameResponse:
+        FileRenameResponse }>
+      parameters:
+        - id: destinationPath
+          type: string
+          description: >-
+            Specifies the destination path to rename to. The path will be
+            encoded to put into a URL to specify the destination.
+        - id: options
+          type: <xref uid="@azure/storage-file-share.FileRenameOptions" />
+          description: Options for the renaming operation.
+      return:
+        description: |-
+          Response data for the file renaming operation.
+
+          Example usage:
+
+          ```js
+
+          // Rename the file
+          await fileClient.rename(destinationPath);
+          console.log("Renamed file successfully!");
+          ```
+        type: >-
+          Promise&lt;{ destinationFileClient: ShareFileClient,
+          fileRenameResponse: FileRenameResponse }&gt;
+  - name: 'resize(number, FileResizeOptions)'
+    uid: '@azure/storage-file-share.ShareFileClient.resize'
+    package: '@azure/storage-file-share'
+    summary: >-
+      Resize file.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-file-properties
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function resize(length: number, options?: FileResizeOptions):
+        Promise<FileSetHTTPHeadersResponse>
       parameters:
         - id: length
           type: number
@@ -751,10 +852,10 @@ methods:
           type: <xref uid="@azure/storage-file-share.FileResizeOptions" />
           description: Options to File Resize operation.
       return:
+        description: Response data for the File Set HTTP Headers operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileSetHTTPHeadersResponse" />&gt;
-        description: Response data for the File Set HTTP Headers operation.
   - name: 'setHttpHeaders(FileHttpHeaders, FileSetHttpHeadersOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.setHttpHeaders'
     package: '@azure/storage-file-share'
@@ -765,13 +866,17 @@ methods:
       the options,
 
       these file HTTP headers without a value will be cleared.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-file-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setHttpHeaders(fileHttpHeaders?: FileHttpHeaders, options?:
-        FileSetHttpHeadersOptions)
+        FileSetHttpHeadersOptions): Promise<FileSetHTTPHeadersResponse>
       parameters:
         - id: fileHttpHeaders
           type: <xref uid="@azure/storage-file-share.FileHttpHeaders" />
@@ -780,24 +885,30 @@ methods:
           type: <xref uid="@azure/storage-file-share.FileSetHttpHeadersOptions" />
           description: Options to File Set HTTP Headers operation.
       return:
+        description: Response data for the File Set HTTP Headers operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileSetHTTPHeadersResponse" />&gt;
-        description: Response data for the File Set HTTP Headers operation.
   - name: 'setMetadata(Metadata, FileSetMetadataOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.setMetadata'
     package: '@azure/storage-file-share'
-    summary: |-
+    summary: >-
       Updates user-defined metadata for the specified file.
+
       If no metadata defined in the option parameter, the file
+
       metadata will be removed.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-file-metadata
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function setMetadata(metadata?: Metadata, options?:
-        FileSetMetadataOptions)
+        FileSetMetadataOptions): Promise<FileSetMetadataResponse>
       parameters:
         - id: metadata
           type: <xref uid="@azure/storage-file-share.Metadata" />
@@ -808,19 +919,26 @@ methods:
           type: <xref uid="@azure/storage-file-share.FileSetMetadataOptions" />
           description: Options to File Set Metadata operation.
       return:
+        description: Response data for the File Set Metadata operation.
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileSetMetadataResponse" />&gt;
-        description: Response data for the File Set Metadata operation.
   - name: setProperties(FileProperties)
     uid: '@azure/storage-file-share.ShareFileClient.setProperties'
     package: '@azure/storage-file-share'
-    summary: Sets properties on the file.
+    summary: >-
+      Sets properties on the file.
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/set-file-properties
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function setProperties(properties?: FileProperties)'
+      content: >-
+        function setProperties(properties?: FileProperties):
+        Promise<SetPropertiesResponse>
       parameters:
         - id: properties
           type: <xref uid="@azure/storage-file-share.FileProperties" />
@@ -830,10 +948,10 @@ methods:
                                                   For other file properties(e.g. fileAttributes), if no values are provided,
                                                   existing values will be preserved.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-file-share.SetPropertiesResponse"
           />&gt;
-        description: ''
   - name: 'startCopyFromURL(string, FileStartCopyOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.startCopyFromURL'
     package: '@azure/storage-file-share'
@@ -844,7 +962,7 @@ methods:
     syntax:
       content: >-
         function startCopyFromURL(copySource: string, options?:
-        FileStartCopyOptions)
+        FileStartCopyOptions): Promise<FileStartCopyResponse>
       parameters:
         - id: copySource
           type: string
@@ -872,10 +990,10 @@ methods:
           description: |
             Options to File Start Copy operation.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/storage-file-share.FileStartCopyResponse"
           />&gt;
-        description: ''
   - name: >-
       uploadData(Buffer | Blob | ArrayBuffer | ArrayBufferView,
       FileParallelUploadOptions)
@@ -890,7 +1008,7 @@ methods:
     syntax:
       content: >-
         function uploadData(data: Buffer | Blob | ArrayBuffer | ArrayBufferView,
-        options?: FileParallelUploadOptions)
+        options?: FileParallelUploadOptions): Promise<void>
       parameters:
         - id: data
           type: Buffer | Blob | ArrayBuffer | ArrayBufferView
@@ -900,8 +1018,8 @@ methods:
           description: |
             -
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: 'uploadFile(string, FileParallelUploadOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.uploadFile'
     package: '@azure/storage-file-share'
@@ -916,7 +1034,7 @@ methods:
     syntax:
       content: >-
         function uploadFile(filePath: string, options?:
-        FileParallelUploadOptions)
+        FileParallelUploadOptions): Promise<void>
       parameters:
         - id: filePath
           type: string
@@ -926,8 +1044,8 @@ methods:
           description: |
             -
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: 'uploadRange(HttpRequestBody, number, number, FileUploadRangeOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.uploadRange'
     package: '@azure/storage-file-share'
@@ -945,7 +1063,8 @@ methods:
     syntax:
       content: >-
         function uploadRange(body: HttpRequestBody, offset: number,
-        contentLength: number, options?: FileUploadRangeOptions)
+        contentLength: number, options?: FileUploadRangeOptions):
+        Promise<FileUploadRangeResponse>
       parameters:
         - id: body
           type: HttpRequestBody
@@ -965,9 +1084,6 @@ methods:
           type: <xref uid="@azure/storage-file-share.FileUploadRangeOptions" />
           description: Options to File Upload Range operation.
       return:
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/storage-file-share.FileUploadRangeResponse" />&gt;
         description: |-
           Response data for the File Upload Range operation.
 
@@ -984,6 +1100,9 @@ methods:
           await fileClient.uploadRange(content, 0, content.length);
           console.log("Updated file successfully!")
           ```
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/storage-file-share.FileUploadRangeResponse" />&gt;
   - name: >-
       uploadRangeFromURL(string, number, number, number,
       FileUploadRangeFromURLOptions)
@@ -1001,7 +1120,7 @@ methods:
       content: >-
         function uploadRangeFromURL(sourceURL: string, sourceOffset: number,
         destOffset: number, count: number, options?:
-        FileUploadRangeFromURLOptions)
+        FileUploadRangeFromURLOptions): Promise<FileUploadRangeFromURLResponse>
       parameters:
         - id: sourceURL
           type: string
@@ -1026,10 +1145,10 @@ methods:
           description: |
             Options to configure File - Upload Range from URL operation.
       return:
+        description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/storage-file-share.FileUploadRangeFromURLResponse" />&gt;
-        description: ''
   - name: >-
       uploadResetableStream((offset: number, count?: number) => ReadableStream,
       number, FileParallelUploadOptions)
@@ -1052,7 +1171,7 @@ methods:
       content: >-
         function uploadResetableStream(streamFactory: (offset: number, count?:
         number) => ReadableStream, size: number, options?:
-        FileParallelUploadOptions)
+        FileParallelUploadOptions): Promise<void>
       parameters:
         - id: streamFactory
           type: '(offset: number, count?: number) =&gt; ReadableStream'
@@ -1067,8 +1186,8 @@ methods:
           description: |
             -
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: >-
       uploadSeekableBlob((offset: number, size: number) => Blob, number,
       FileParallelUploadOptions)
@@ -1087,7 +1206,8 @@ methods:
     syntax:
       content: >-
         function uploadSeekableBlob(blobFactory: (offset: number, size: number)
-        => Blob, size: number, options?: FileParallelUploadOptions)
+        => Blob, size: number, options?: FileParallelUploadOptions):
+        Promise<void>
       parameters:
         - id: blobFactory
           type: '(offset: number, size: number) =&gt; Blob'
@@ -1100,8 +1220,8 @@ methods:
           description: |
             -
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: 'uploadStream(Readable, number, number, number, FileUploadStreamOptions)'
     uid: '@azure/storage-file-share.ShareFileClient.uploadStream'
     package: '@azure/storage-file-share'
@@ -1129,7 +1249,8 @@ methods:
     syntax:
       content: >-
         function uploadStream(stream: Readable, size: number, bufferSize:
-        number, maxBuffers: number, options?: FileUploadStreamOptions)
+        number, maxBuffers: number, options?: FileUploadStreamOptions):
+        Promise<void>
       parameters:
         - id: stream
           type: Readable
@@ -1155,8 +1276,8 @@ methods:
           description: |
             -
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: withShareSnapshot(string)
     uid: '@azure/storage-file-share.ShareFileClient.withShareSnapshot'
     package: '@azure/storage-file-share'
@@ -1170,14 +1291,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withShareSnapshot(shareSnapshot: string)'
+      content: 'function withShareSnapshot(shareSnapshot: string): ShareFileClient'
       parameters:
         - id: shareSnapshot
           type: string
           description: The share snapshot timestamp.
       return:
-        type: <xref uid="@azure/storage-file-share.ShareFileClient" />
         description: >-
           A new ShareFileClient object identical to the source but with the
           specified share snapshot timestamp.
+        type: <xref uid="@azure/storage-file-share.ShareFileClient" />
 extends: <xref uid="@azure/storage-file-share.StorageClient" />

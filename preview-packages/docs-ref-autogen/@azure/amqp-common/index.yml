@@ -42,14 +42,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isSystemError(err: any)'
+      content: 'function isSystemError(err: any): boolean'
       parameters:
         - id: err
           type: any
           description: ''
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: translate(AmqpError | Error)
     uid: '@azure/amqp-common.translate'
     package: '@azure/amqp-common'
@@ -60,14 +60,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function translate(err: AmqpError | Error)'
+      content: 'function translate(err: AmqpError | Error): MessagingError'
       parameters:
         - id: err
           type: AmqpError | Error
           description: The amqp error that was received.
       return:
-        type: <xref uid="@azure/amqp-common.MessagingError" />
         description: MessagingError object.
+        type: <xref uid="@azure/amqp-common.MessagingError" />
   - name: retry<T>(RetryConfig<T>)
     uid: '@azure/amqp-common.retry'
     package: '@azure/amqp-common'
@@ -81,15 +81,15 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function retry<T>(config: RetryConfig<T>)'
+      content: 'function retry<T>(config: RetryConfig<T>): Promise<T>'
       parameters:
         - id: config
           type: <xref uid="@azure/amqp-common.RetryConfig" />&lt;T&gt;
           description: |
             Parameters to configure retry operation.
       return:
-        type: Promise&lt;T&gt;
         description: Promise<T>.
+        type: Promise&lt;T&gt;
   - name: 'delay<T>(number, T)'
     uid: '@azure/amqp-common.delay'
     package: '@azure/amqp-common'
@@ -98,7 +98,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function delay<T>(t: number, value?: T)'
+      content: 'function delay<T>(t: number, value?: T): Promise<T>'
       parameters:
         - id: t
           type: number
@@ -107,8 +107,8 @@ functions:
           type: T
           description: The value to be resolved with after a timeout of t milliseconds.
       return:
-        type: Promise&lt;T&gt;
         description: '- Resolved promise'
+        type: Promise&lt;T&gt;
   - name: 'executePromisesSequentially(Array<any>, any)'
     uid: '@azure/amqp-common.executePromisesSequentially'
     package: '@azure/amqp-common'
@@ -119,7 +119,7 @@ functions:
     syntax:
       content: >-
         function executePromisesSequentially(promiseFactories: Array<any>,
-        kickstart?: any)
+        kickstart?: any): Promise<any>
       parameters:
         - id: promiseFactories
           type: Array&lt;any&gt;
@@ -128,8 +128,8 @@ functions:
           type: any
           description: ''
       return:
-        type: Promise&lt;any&gt;
         description: ''
+        type: Promise&lt;any&gt;
   - name: getNewAsyncLock(AsyncLockOptions)
     uid: '@azure/amqp-common.getNewAsyncLock'
     package: '@azure/amqp-common'
@@ -138,14 +138,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getNewAsyncLock(options?: AsyncLockOptions)'
+      content: 'function getNewAsyncLock(options?: AsyncLockOptions): AsyncLock'
       parameters:
         - id: options
           type: <xref uid="@azure/amqp-common.AsyncLockOptions" />
           description: ''
       return:
-        type: AsyncLock
         description: AsyncLock
+        type: AsyncLock
   - name: isIotHubConnectionString(string)
     uid: '@azure/amqp-common.isIotHubConnectionString'
     package: '@azure/amqp-common'
@@ -156,14 +156,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isIotHubConnectionString(connectionString: string)'
+      content: 'function isIotHubConnectionString(connectionString: string): boolean'
       parameters:
         - id: connectionString
           type: string
           description: The connection string.
       return:
-        type: boolean
         description: boolean.
+        type: boolean
   - name: parseConnectionString<T>(string)
     uid: '@azure/amqp-common.parseConnectionString'
     package: '@azure/amqp-common'
@@ -187,14 +187,16 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function parseConnectionString<T>(connectionString: string)'
+      content: >-
+        function parseConnectionString<T>(connectionString: string):
+        ParsedOutput<T>
       parameters:
         - id: connectionString
           type: string
           description: The connection string to be parsed.
       return:
-        type: <xref uid="@azure/amqp-common.ParsedOutput" />&lt;T&gt;
         description: ParsedOutput<T>.
+        type: <xref uid="@azure/amqp-common.ParsedOutput" />&lt;T&gt;
   - name: 'randomNumberFromInterval(number, number)'
     uid: '@azure/amqp-common.randomNumberFromInterval'
     package: '@azure/amqp-common'
@@ -203,7 +205,7 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function randomNumberFromInterval(min: number, max: number)'
+      content: 'function randomNumberFromInterval(min: number, max: number): number'
       parameters:
         - id: min
           type: number
@@ -213,8 +215,8 @@ functions:
           description: |
             Max number of the range (inclusive).
       return:
-        type: number
         description: ''
+        type: number
 typeAliases:
   - '@azure/amqp-common.Func'
   - '@azure/amqp-common.ParsedOutput'

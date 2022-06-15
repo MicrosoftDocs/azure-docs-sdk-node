@@ -1,26 +1,26 @@
 ---
 title: Azure Anomaly Detector client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/ai-anomaly-detector, 
-author: maggiepint
-ms.author: magpint
-ms.date: 04/17/2021
+keywords: Azure, javascript, SDK, API, @azure/ai-anomaly-detector, anomalydetector
+author: ramya-rao-a
+ms.author: ramya-rao-a
+ms.date: 01/21/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: anomalydetector
 ---
-
-# Azure Anomaly Detector client library for JavaScript - Version 3.0.0-beta.3 
+# Azure Anomaly Detector client library for JavaScript - Version 3.0.0-beta.5 
 
 
 [Azure AnomalyDetector](https://azure.microsoft.com/services/cognitive-services/anomaly-detector/) API enables you to monitor and detect abnormalities in your time series data with machine learning.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-anomaly-detector_3.0.0-beta.3/sdk/anomalydetector/ai-anomaly-detector/) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/ai-anomaly-detector) |
-[API reference documentation](https://docs.microsoft.com/javascript/api/@azure/ai-anomaly-detector) |
-[Product documentation](https://docs.microsoft.com/azure/cognitive-services/anomaly-detector/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.3/sdk/anomalydetector/ai-anomaly-detector/samples)
+Key links:
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-anomaly-detector_3.0.0-beta.5/sdk/anomalydetector/ai-anomaly-detector/)
+- [Package (NPM)](https://www.npmjs.com/package/@azure/ai-anomaly-detector)
+- [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/ai-anomaly-detector)
+- [Product documentation](https://docs.microsoft.com/azure/cognitive-services/anomaly-detector/)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.5/sdk/anomalydetector/ai-anomaly-detector/samples)
 
 ## Key concepts
 
@@ -34,7 +34,10 @@ The `AnomalyDetectorClient` provides methods for anomaly detection:
 
 ### Currently supported environments
 
-- Node.js version 8.x.x or higher
+- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- Latest versions of Safari, Chrome, Edge, and Firefox.
+
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-anomaly-detector_3.0.0-beta.5/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -167,7 +170,7 @@ main().catch((err) => {
 });
 ```
 
-More Samples can be found [here](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.3/sdk/anomalydetector/ai-anomaly-detector/samples)
+More Samples can be found [here](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.5/sdk/anomalydetector/ai-anomaly-detector/samples)
 
 ## Troubleshooting
 
@@ -181,12 +184,12 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.5/sdk/core/logger).
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.3/sdk/anomalydetector/ai-anomaly-detector/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-anomaly-detector_3.0.0-beta.5/sdk/anomalydetector/ai-anomaly-detector/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
@@ -203,5 +206,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-anomaly-detector_3.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-anomaly-detector_3.0.0-beta.5/CONTRIBUTING.md) to learn more about how to build and test the code.
 

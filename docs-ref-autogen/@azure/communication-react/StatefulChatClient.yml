@@ -2,13 +2,18 @@
 name: StatefulChatClient
 uid: '@azure/communication-react.StatefulChatClient'
 package: '@azure/communication-react'
-summary: ''
+summary: >
+  Defines the methods that allow {@Link @azure/communication-chat#ChatClient} to
+  be used with a centralized generated state.
+
+  The interface provides access to proxied state and also allows registering a
+  handler for state change events.
 fullName: StatefulChatClient
 remarks: ''
 isPreview: false
 isDeprecated: false
 type: interface
-methods:
+inheritedMethods:
   - name: 'createChatThread(CreateChatThreadRequest, CreateChatThreadOptions)'
     uid: '@azure/communication-react.StatefulChatClient.createChatThread'
     package: '@azure/communication-react'
@@ -21,7 +26,7 @@ methods:
     syntax:
       content: >-
         function createChatThread(request: CreateChatThreadRequest, options?:
-        CreateChatThreadOptions)
+        CreateChatThreadOptions): Promise<CreateChatThreadResult>
       parameters:
         - id: request
           type: CreateChatThreadRequest
@@ -31,8 +36,8 @@ methods:
           description: |
             Operation options.
       return:
-        type: Promise&lt;CreateChatThreadResult&gt;
         description: ''
+        type: Promise&lt;CreateChatThreadResult&gt;
   - name: 'deleteChatThread(string, DeleteChatThreadOptions)'
     uid: '@azure/communication-react.StatefulChatClient.deleteChatThread'
     package: '@azure/communication-react'
@@ -43,7 +48,7 @@ methods:
     syntax:
       content: >-
         function deleteChatThread(threadId: string, options?:
-        DeleteChatThreadOptions)
+        DeleteChatThreadOptions): Promise<void>
       parameters:
         - id: threadId
           type: string
@@ -53,8 +58,8 @@ methods:
           description: |
             Operation options.
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: getChatThreadClient(string)
     uid: '@azure/communication-react.StatefulChatClient.getChatThreadClient'
     package: '@azure/communication-react'
@@ -63,27 +68,15 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getChatThreadClient(threadId: string)'
+      content: 'function getChatThreadClient(threadId: string): ChatThreadClient'
       parameters:
         - id: threadId
           type: string
           description: |
             Thread ID for the ChatThreadClient
       return:
+        description: ''
         type: ChatThreadClient
-        description: ''
-  - name: getState()
-    uid: '@azure/communication-react.StatefulChatClient.getState'
-    package: '@azure/communication-react'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function getState()
-      return:
-        type: <xref uid="@azure/communication-react.ChatClientState" />
-        description: ''
   - name: listChatThreads(ListChatThreadsOptions)
     uid: '@azure/communication-react.StatefulChatClient.listChatThreads'
     package: '@azure/communication-react'
@@ -92,15 +85,17 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function listChatThreads(options?: ListChatThreadsOptions)'
+      content: >-
+        function listChatThreads(options?: ListChatThreadsOptions):
+        PagedAsyncIterableIterator<ChatThreadItem>
       parameters:
         - id: options
           type: ListChatThreadsOptions
           description: |
             List chat threads options.
       return:
-        type: PagedAsyncIterableIterator&lt;ChatThreadItem&gt;
         description: ''
+        type: PagedAsyncIterableIterator&lt;ChatThreadItem&gt;
   - name: 'off("chatMessageDeleted", (e: ChatMessageDeletedEvent) => void)'
     uid: '@azure/communication-react.StatefulChatClient.off_2'
     package: '@azure/communication-react'
@@ -293,19 +288,6 @@ methods:
           type: '(e: TypingIndicatorReceivedEvent) =&gt; void'
           description: |
             The listener to handle the event.
-  - name: 'offStateChange((state: ChatClientState) => void)'
-    uid: '@azure/communication-react.StatefulChatClient.offStateChange'
-    package: '@azure/communication-react'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function offStateChange(handler: (state: ChatClientState) => void)'
-      parameters:
-        - id: handler
-          type: '(state: ChatClientState) =&gt; void'
-          description: ''
   - name: 'on("chatMessageDeleted", (e: ChatMessageDeletedEvent) => void)'
     uid: '@azure/communication-react.StatefulChatClient.on_2'
     package: '@azure/communication-react'
@@ -510,19 +492,6 @@ methods:
           type: '(e: TypingIndicatorReceivedEvent) =&gt; void'
           description: |
             The listener to handle the event.
-  - name: 'onStateChange((state: ChatClientState) => void)'
-    uid: '@azure/communication-react.StatefulChatClient.onStateChange'
-    package: '@azure/communication-react'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function onStateChange(handler: (state: ChatClientState) => void)'
-      parameters:
-        - id: handler
-          type: '(state: ChatClientState) =&gt; void'
-          description: ''
   - name: startRealtimeNotifications()
     uid: '@azure/communication-react.StatefulChatClient.startRealtimeNotifications'
     package: '@azure/communication-react'
@@ -533,10 +502,10 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function startRealtimeNotifications()
+      content: 'function startRealtimeNotifications(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
   - name: stopRealtimeNotifications()
     uid: '@azure/communication-react.StatefulChatClient.stopRealtimeNotifications'
     package: '@azure/communication-react'
@@ -547,8 +516,53 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: function stopRealtimeNotifications()
+      content: 'function stopRealtimeNotifications(): Promise<void>'
       return:
-        type: Promise&lt;void&gt;
         description: ''
+        type: Promise&lt;void&gt;
+methods:
+  - name: getState()
+    uid: '@azure/communication-react.StatefulChatClient.getState'
+    package: '@azure/communication-react'
+    summary: >-
+      Holds all the state that we could proxy from ChatClient {@Link
+      @azure/communication-chat#ChatClient} as
+
+      ChatClientState {@Link ChatClientState}.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getState(): ChatClientState'
+      return:
+        description: ''
+        type: <xref uid="@azure/communication-react.ChatClientState" />
+  - name: 'offStateChange((state: ChatClientState) => void)'
+    uid: '@azure/communication-react.StatefulChatClient.offStateChange'
+    package: '@azure/communication-react'
+    summary: Allows unregistering for 'stateChanged' events.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function offStateChange(handler: (state: ChatClientState) => void)'
+      parameters:
+        - id: handler
+          type: '(state: ChatClientState) =&gt; void'
+          description: |
+            Original callback to be unsubscribed.
+  - name: 'onStateChange((state: ChatClientState) => void)'
+    uid: '@azure/communication-react.StatefulChatClient.onStateChange'
+    package: '@azure/communication-react'
+    summary: Allows a handler to be registered for 'stateChanged' events.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function onStateChange(handler: (state: ChatClientState) => void)'
+      parameters:
+        - id: handler
+          type: '(state: ChatClientState) =&gt; void'
+          description: |
+            Callback to receive the state.
 extends: ChatClient

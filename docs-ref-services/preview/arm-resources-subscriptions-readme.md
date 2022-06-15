@@ -1,24 +1,24 @@
 ---
 title: Azure Subscription client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-resources-subscriptions, resources-subscriptions
-author: maggiepint
-ms.author: magpint
-ms.date: 08/26/2021
+keywords: Azure, javascript, SDK, API, @azure/arm-resources-subscriptions, resourcessubscriptions
+author: ramya-rao-a
+ms.author: ramyar
+ms.date: 10/20/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: resources-subscriptions
+ms.service: resourcessubscriptions
 ---
 
-# Azure Subscription client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Subscription client library for JavaScript - Version 2.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Subscription client.
 
 All resource groups and resources exist within subscriptions. These operation enable you get information about your subscriptions and tenants. A tenant is a dedicated instance of Azure Active Directory (Azure AD) for your organization.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-resources-subscriptions_1.0.0-beta.1/sdk/resources-subscriptions/arm-resources-subscriptions) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-resources-subscriptions_2.0.0-beta.1/sdk/resources-subscriptions/arm-resources-subscriptions) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-resources-subscriptions) |
 [API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-resources-subscriptions) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -84,7 +84,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-resources-subscriptions_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-resources-subscriptions_2.0.0-beta.1/sdk/core/logger).
 
 ## Next steps
 
@@ -92,7 +92,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-resources-subscriptions_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-resources-subscriptions_2.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -104,6 +104,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-resources-subscriptions_1.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-resources-subscriptions_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-resources-subscriptions_2.0.0-beta.1/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-resources-subscriptions_2.0.0-beta.1/sdk/identity/identity#defaultazurecredential
 

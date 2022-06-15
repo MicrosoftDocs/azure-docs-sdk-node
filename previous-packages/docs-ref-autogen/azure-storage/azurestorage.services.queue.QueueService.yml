@@ -83,6 +83,22 @@ constructors:
           type: string
           description: ''
 properties:
+  - name: messageEncoder
+    uid: azure-storage.azurestorage.services.queue.QueueService.messageEncoder
+    package: azure-storage
+    summary: '{boolean} QueueService#queueMessagEncoder'
+    fullName: messageEncoder
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'messageEncoder: QueueMessageEncoder'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="azure-storage.azurestorage.services.queue.QueueMessageEncoder" />
+inheritedProperties:
   - name: defaultClientRequestTimeoutInMs
     uid: >-
       azure-storage.azurestorage.services.queue.QueueService.defaultClientRequestTimeoutInMs
@@ -97,8 +113,8 @@ properties:
     syntax:
       content: 'defaultClientRequestTimeoutInMs: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: defaultLocationMode
     uid: azure-storage.azurestorage.services.queue.QueueService.defaultLocationMode
     package: azure-storage
@@ -110,11 +126,11 @@ properties:
     syntax:
       content: 'defaultLocationMode: LocationMode'
       return:
+        description: ''
         type: >-
           <xref
           uid="azure-storage.azurestorage.common.util.storageutilities.LocationMode"
           />
-        description: ''
   - name: defaultMaximumExecutionTimeInMs
     uid: >-
       azure-storage.azurestorage.services.queue.QueueService.defaultMaximumExecutionTimeInMs
@@ -129,8 +145,8 @@ properties:
     syntax:
       content: 'defaultMaximumExecutionTimeInMs: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: defaultTimeoutIntervalInMs
     uid: >-
       azure-storage.azurestorage.services.queue.QueueService.defaultTimeoutIntervalInMs
@@ -145,8 +161,8 @@ properties:
     syntax:
       content: 'defaultTimeoutIntervalInMs: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: enableGlobalHttpAgent
     uid: >-
       azure-storage.azurestorage.services.queue.QueueService.enableGlobalHttpAgent
@@ -163,8 +179,8 @@ properties:
     syntax:
       content: 'enableGlobalHttpAgent: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: host
     uid: azure-storage.azurestorage.services.queue.QueueService.host
     package: azure-storage
@@ -176,8 +192,8 @@ properties:
     syntax:
       content: 'host: StorageHost'
       return:
-        type: <xref uid="azure-storage.azurestorage.StorageHost" />
         description: ''
+        type: <xref uid="azure-storage.azurestorage.StorageHost" />
   - name: logger
     uid: azure-storage.azurestorage.services.queue.QueueService.logger
     package: azure-storage
@@ -189,25 +205,10 @@ properties:
     syntax:
       content: 'logger: Logger'
       return:
+        description: ''
         type: >-
           <xref
           uid="azure-storage.azurestorage.common.diagnostics.logger.Logger" />
-        description: ''
-  - name: messageEncoder
-    uid: azure-storage.azurestorage.services.queue.QueueService.messageEncoder
-    package: azure-storage
-    summary: '{boolean} QueueService#queueMessagEncoder'
-    fullName: messageEncoder
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'messageEncoder: QueueMessageEncoder'
-      return:
-        type: >-
-          <xref
-          uid="azure-storage.azurestorage.services.queue.QueueMessageEncoder" />
-        description: ''
   - name: proxy
     uid: azure-storage.azurestorage.services.queue.QueueService.proxy
     package: azure-storage
@@ -219,11 +220,11 @@ properties:
     syntax:
       content: 'proxy: Proxy'
       return:
+        description: ''
         type: >-
           <xref
           uid="azure-storage.azurestorage.common.services.storageserviceclient.Proxy"
           />
-        description: ''
   - name: useNagleAlgorithm
     uid: azure-storage.azurestorage.services.queue.QueueService.useNagleAlgorithm
     package: azure-storage
@@ -239,9 +240,9 @@ properties:
     syntax:
       content: 'useNagleAlgorithm: boolean'
       return:
-        type: boolean
         description: ''
-methods:
+        type: boolean
+inheritedMethods:
   - name: 'addListener(string | symbol, (args: any[]) => void)'
     uid: azure-storage.azurestorage.services.queue.QueueService.addListener
     package: azure-storage
@@ -252,7 +253,7 @@ methods:
     syntax:
       content: >-
         function addListener(eventName: string | symbol, listener: (args: any[])
-        => void)
+        => void): this
       parameters:
         - id: eventName
           type: string | symbol
@@ -261,8 +262,681 @@ methods:
           type: '(args: any[]) =&gt; void'
           description: ''
       return:
-        type: this
         description: ''
+        type: this
+  - name: 'emit(string | symbol, any[])'
+    uid: azure-storage.azurestorage.services.queue.QueueService.emit
+    package: azure-storage
+    summary: >-
+      Synchronously calls each of the listeners registered for the event
+      named`eventName`, in the order they were registered, passing the supplied
+      arguments
+
+      to each.
+
+      Returns `true` if the event had listeners, `false` otherwise.
+
+
+      ```js
+
+      const EventEmitter = require('events');
+
+      const myEmitter = new EventEmitter();
+
+
+      // First listener
+
+      myEmitter.on('event', function firstListener() {
+        console.log('Helloooo! first listener');
+      });
+
+      // Second listener
+
+      myEmitter.on('event', function secondListener(arg1, arg2) {
+        console.log(`event with parameters ${arg1}, ${arg2} in second listener`);
+      });
+
+      // Third listener
+
+      myEmitter.on('event', function thirdListener(...args) {
+        const parameters = args.join(', ');
+        console.log(`event with parameters ${parameters} in third listener`);
+      });
+
+
+      console.log(myEmitter.listeners('event'));
+
+
+      myEmitter.emit('event', 1, 2, 3, 4, 5);
+
+
+      // Prints:
+
+      // [
+
+      //   [Function: firstListener],
+
+      //   [Function: secondListener],
+
+      //   [Function: thirdListener]
+
+      // ]
+
+      // Helloooo! first listener
+
+      // event with parameters 1, 2 in second listener
+
+      // event with parameters 1, 2, 3, 4, 5 in third listener
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function emit(eventName: string | symbol, args: any[]): boolean'
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: args
+          type: 'any[]'
+          description: ''
+      return:
+        description: ''
+        type: boolean
+  - name: eventNames()
+    uid: azure-storage.azurestorage.services.queue.QueueService.eventNames
+    package: azure-storage
+    summary: |-
+      Returns an array listing the events for which the emitter has registered
+      listeners. The values in the array are strings or `Symbol`s.
+      ```js
+      const EventEmitter = require('events');
+      const myEE = new EventEmitter();
+      myEE.on('foo', () => {});
+      myEE.on('bar', () => {});
+
+      const sym = Symbol('symbol');
+      myEE.on(sym, () => {});
+
+      console.log(myEE.eventNames());
+      // Prints: [ 'foo', 'bar', Symbol(symbol) ]
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function eventNames(): Array<string | symbol>'
+      return:
+        description: ''
+        type: Array&lt;string | symbol&gt;
+  - name: getMaxListeners()
+    uid: azure-storage.azurestorage.services.queue.QueueService.getMaxListeners
+    package: azure-storage
+    summary: >-
+      Returns the current max listener value for the `EventEmitter` which is
+      either
+
+      set by `emitter.setMaxListeners(n)` or defaults to
+      <xref:defaultMaxListeners>.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getMaxListeners(): number'
+      return:
+        description: ''
+        type: number
+  - name: listenerCount(string | symbol)
+    uid: azure-storage.azurestorage.services.queue.QueueService.listenerCount
+    package: azure-storage
+    summary: Returns the number of listeners listening to the event named `eventName`.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function listenerCount(eventName: string | symbol): number'
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: |
+            The name of the event being listened for
+      return:
+        description: ''
+        type: number
+  - name: listeners(string | symbol)
+    uid: azure-storage.azurestorage.services.queue.QueueService.listeners
+    package: azure-storage
+    summary: |-
+      Returns a copy of the array of listeners for the event named `eventName`.
+      ```js
+      server.on('connection', (stream) => {
+        console.log('someone connected!');
+      });
+      console.log(util.inspect(server.listeners('connection')));
+      // Prints: [ [Function] ]
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function listeners(eventName: string | symbol): Function[]'
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+      return:
+        description: ''
+        type: 'Function[]'
+  - name: 'off(string | symbol, (args: any[]) => void)'
+    uid: azure-storage.azurestorage.services.queue.QueueService.off
+    package: azure-storage
+    summary: Alias for `emitter.removeListener()`.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function off(eventName: string | symbol, listener: (args: any[]) =>
+        void): this
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: 'on(string | symbol, (args: any[]) => void)'
+    uid: azure-storage.azurestorage.services.queue.QueueService.on
+    package: azure-storage
+    summary: >-
+      Adds the `listener` function to the end of the listeners array for the
+
+      event named `eventName`. No checks are made to see if the `listener` has
+
+      already been added. Multiple calls passing the same combination of
+      `eventName`and `listener` will result in the `listener` being added, and
+      called, multiple
+
+      times.
+
+      ```js
+
+      server.on('connection', (stream) => {
+        console.log('someone connected!');
+      });
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+
+
+      By default, event listeners are invoked in the order they are added.
+      The`emitter.prependListener()` method can be used as an alternative to add
+      the
+
+      event listener to the beginning of the listeners array.
+
+
+      ```js
+
+      const myEE = new EventEmitter();
+
+      myEE.on('foo', () => console.log('a'));
+
+      myEE.prependListener('foo', () => console.log('b'));
+
+      myEE.emit('foo');
+
+      // Prints:
+
+      //   b
+
+      //   a
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function on(eventName: string | symbol, listener: (args: any[]) =>
+        void): this
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: The name of the event.
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: |
+            The callback function
+      return:
+        description: ''
+        type: this
+  - name: 'once(string | symbol, (args: any[]) => void)'
+    uid: azure-storage.azurestorage.services.queue.QueueService.once
+    package: azure-storage
+    summary: >-
+      Adds a **one-time**`listener` function for the event named `eventName`.
+      The
+
+      next time `eventName` is triggered, this listener is removed and then
+      invoked.
+
+      ```js
+
+      server.once('connection', (stream) => {
+        console.log('Ah, we have our first user!');
+      });
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+
+
+      By default, event listeners are invoked in the order they are added.
+      The`emitter.prependOnceListener()` method can be used as an alternative to
+      add the
+
+      event listener to the beginning of the listeners array.
+
+
+      ```js
+
+      const myEE = new EventEmitter();
+
+      myEE.once('foo', () => console.log('a'));
+
+      myEE.prependOnceListener('foo', () => console.log('b'));
+
+      myEE.emit('foo');
+
+      // Prints:
+
+      //   b
+
+      //   a
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function once(eventName: string | symbol, listener: (args: any[]) =>
+        void): this
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: The name of the event.
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: |
+            The callback function
+      return:
+        description: ''
+        type: this
+  - name: 'prependListener(string | symbol, (args: any[]) => void)'
+    uid: azure-storage.azurestorage.services.queue.QueueService.prependListener
+    package: azure-storage
+    summary: >-
+      Adds the `listener` function to the _beginning_ of the listeners array for
+      the
+
+      event named `eventName`. No checks are made to see if the `listener` has
+
+      already been added. Multiple calls passing the same combination of
+      `eventName`and `listener` will result in the `listener` being added, and
+      called, multiple
+
+      times.
+
+      ```js
+
+      server.prependListener('connection', (stream) => {
+        console.log('someone connected!');
+      });
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function prependListener(eventName: string | symbol, listener: (args:
+        any[]) => void): this
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: The name of the event.
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: |
+            The callback function
+      return:
+        description: ''
+        type: this
+  - name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
+    uid: azure-storage.azurestorage.services.queue.QueueService.prependOnceListener
+    package: azure-storage
+    summary: >-
+      Adds a **one-time**`listener` function for the event named `eventName` to
+      the_beginning_ of the listeners array. The next time `eventName` is
+      triggered, this
+
+      listener is removed, and then invoked.
+
+      ```js
+
+      server.prependOnceListener('connection', (stream) => {
+        console.log('Ah, we have our first user!');
+      });
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function prependOnceListener(eventName: string | symbol, listener:
+        (args: any[]) => void): this
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: The name of the event.
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: |
+            The callback function
+      return:
+        description: ''
+        type: this
+  - name: rawListeners(string | symbol)
+    uid: azure-storage.azurestorage.services.queue.QueueService.rawListeners
+    package: azure-storage
+    summary: |-
+      Returns a copy of the array of listeners for the event named `eventName`,
+      including any wrappers (such as those created by `.once()`).
+      ```js
+      const emitter = new EventEmitter();
+      emitter.once('log', () => console.log('log once'));
+
+      // Returns a new Array with a function `onceWrapper` which has a property
+      // `listener` which contains the original listener bound above
+      const listeners = emitter.rawListeners('log');
+      const logFnWrapper = listeners[0];
+
+      // Logs "log once" to the console and does not unbind the `once` event
+      logFnWrapper.listener();
+
+      // Logs "log once" to the console and removes the listener
+      logFnWrapper();
+
+      emitter.on('log', () => console.log('log persistently'));
+      // Will return a new Array with a single function bound by `.on()` above
+      const newListeners = emitter.rawListeners('log');
+
+      // Logs "log persistently" twice
+      newListeners[0]();
+      emitter.emit('log');
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function rawListeners(eventName: string | symbol): Function[]'
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+      return:
+        description: ''
+        type: 'Function[]'
+  - name: removeAllListeners(string | symbol)
+    uid: azure-storage.azurestorage.services.queue.QueueService.removeAllListeners
+    package: azure-storage
+    summary: |-
+      Removes all listeners, or those of the specified `eventName`.
+      It is bad practice to remove listeners added elsewhere in the code,
+      particularly when the `EventEmitter` instance was created by some other
+      component or module (e.g. sockets or file streams).
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function removeAllListeners(event?: string | symbol): this'
+      parameters:
+        - id: event
+          type: string | symbol
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: 'removeListener(string | symbol, (args: any[]) => void)'
+    uid: azure-storage.azurestorage.services.queue.QueueService.removeListener
+    package: azure-storage
+    summary: >-
+      Removes the specified `listener` from the listener array for the event
+      named`eventName`.
+
+      ```js
+
+      const callback = (stream) => {
+        console.log('someone connected!');
+      };
+
+      server.on('connection', callback);
+
+      // ...
+
+      server.removeListener('connection', callback);
+
+      ```
+
+
+      `removeListener()` will remove, at most, one instance of a listener from
+      the
+
+      listener array. If any single listener has been added multiple times to
+      the
+
+      listener array for the specified `eventName`, then `removeListener()` must
+      be
+
+      called multiple times to remove each instance.
+
+
+      Once an event is emitted, all listeners attached to it at the
+
+      time of emitting are called in order. This implies that
+      any`removeListener()` or `removeAllListeners()` calls _after_ emitting
+      and_before_ the last listener finishes execution will
+
+      not remove them from`emit()` in progress. Subsequent events behave as
+      expected.
+
+
+      ```js
+
+      const myEmitter = new MyEmitter();
+
+
+      const callbackA = () => {
+        console.log('A');
+        myEmitter.removeListener('event', callbackB);
+      };
+
+
+      const callbackB = () => {
+        console.log('B');
+      };
+
+
+      myEmitter.on('event', callbackA);
+
+
+      myEmitter.on('event', callbackB);
+
+
+      // callbackA removes listener callbackB but it will still be called.
+
+      // Internal listener array at time of emit [callbackA, callbackB]
+
+      myEmitter.emit('event');
+
+      // Prints:
+
+      //   A
+
+      //   B
+
+
+      // callbackB is now removed.
+
+      // Internal listener array [callbackA]
+
+      myEmitter.emit('event');
+
+      // Prints:
+
+      //   A
+
+      ```
+
+
+      Because listeners are managed using an internal array, calling this will
+
+      change the position indices of any listener registered _after_ the
+      listener
+
+      being removed. This will not impact the order in which listeners are
+      called,
+
+      but it means that any copies of the listener array as returned by
+
+      the `emitter.listeners()` method will need to be recreated.
+
+
+      When a single function has been added as a handler multiple times for a
+      single
+
+      event (as in the example below), `removeListener()` will remove the most
+
+      recently added instance. In the example the `once('ping')`listener is
+      removed:
+
+
+      ```js
+
+      const ee = new EventEmitter();
+
+
+      function pong() {
+        console.log('pong');
+      }
+
+
+      ee.on('ping', pong);
+
+      ee.once('ping', pong);
+
+      ee.removeListener('ping', pong);
+
+
+      ee.emit('ping');
+
+      ee.emit('ping');
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function removeListener(eventName: string | symbol, listener: (args:
+        any[]) => void): this
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: setMaxListeners(number)
+    uid: azure-storage.azurestorage.services.queue.QueueService.setMaxListeners
+    package: azure-storage
+    summary: >-
+      By default `EventEmitter`s will print a warning if more than `10`
+      listeners are
+
+      added for a particular event. This is a useful default that helps finding
+
+      memory leaks. The `emitter.setMaxListeners()` method allows the limit to
+      be
+
+      modified for this specific `EventEmitter` instance. The value can be set
+      to`Infinity` (or `0`) to indicate an unlimited number of listeners.
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function setMaxListeners(n: number): this'
+      parameters:
+        - id: 'n'
+          type: number
+          description: ''
+      return:
+        description: ''
+        type: this
+  - name: setProxy(Proxy)
+    uid: azure-storage.azurestorage.services.queue.QueueService.setProxy
+    package: azure-storage
+    summary: Sets proxy object specified by caller.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function setProxy(proxy: Proxy)'
+      parameters:
+        - id: proxy
+          type: >-
+            <xref
+            uid="azure-storage.azurestorage.common.services.storageserviceclient.Proxy"
+            />
+          description: |
+            proxy to use for tunneling
+                                                   {
+                                                    host: hostname
+                                                    port: port number
+                                                    proxyAuth: 'user:password' for basic auth
+                                                    headers: {...} headers for proxy server
+                                                    key: key for proxy server
+                                                    ca: ca for proxy server
+                                                    cert: cert for proxy server
+                                                   }
+                                                   if null or undefined, clears proxy
+methods:
   - name: 'clearMessages(string, ErrorOrResponse)'
     uid: azure-storage.azurestorage.services.queue.QueueService.clearMessages_1
     package: azure-storage
@@ -311,7 +985,7 @@ methods:
       ErrorOrResult<QueueMessageResult>)
     uid: azure-storage.azurestorage.services.queue.QueueService.createMessage
     package: azure-storage
-    summary: >-
+    summary: >+
       Adds a new message to the back of the message queue.
 
       The encoded message can be up to 64KB in size for versions 2011-08-18 and
@@ -322,6 +996,21 @@ methods:
 
       Queue messages are encoded by default. See queueService.messageEncoder to
       set encoding defaults.
+
+
+      **Example**
+
+
+      var azure = require('azure-storage');
+
+      var queueService = azure.createQueueService();
+
+      queueService.createMessage('taskqueue', 'Hello world!', function(error) {
+        if(!error) {
+          // Message inserted
+        }
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -356,7 +1045,7 @@ methods:
   - name: 'createMessage(string, string | Buffer, ErrorOrResult<QueueMessageResult>)'
     uid: azure-storage.azurestorage.services.queue.QueueService.createMessage_1
     package: azure-storage
-    summary: >-
+    summary: >+
       Adds a new message to the back of the message queue.
 
       The encoded message can be up to 64KB in size for versions 2011-08-18 and
@@ -367,6 +1056,21 @@ methods:
 
       Queue messages are encoded by default. See queueService.messageEncoder to
       set encoding defaults.
+
+
+      **Example**
+
+
+      var azure = require('azure-storage');
+
+      var queueService = azure.createQueueService();
+
+      queueService.createMessage('taskqueue', 'Hello world!', function(error) {
+        if(!error) {
+          // Message inserted
+        }
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -451,7 +1155,19 @@ methods:
     uid: >-
       azure-storage.azurestorage.services.queue.QueueService.createQueueIfNotExists
     package: azure-storage
-    summary: Creates a new queue under the given account if it doesn't exist.
+    summary: |+
+      Creates a new queue under the given account if it doesn't exist.
+
+      **Example**
+
+      var azure = require('azure-storage');
+      var queueService = azure.createQueueService();
+      queueService.createQueueIfNotExists('taskqueue', function(error) {
+        if(!error) {
+          // Queue created or exists
+        }
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -483,7 +1199,19 @@ methods:
     uid: >-
       azure-storage.azurestorage.services.queue.QueueService.createQueueIfNotExists_1
     package: azure-storage
-    summary: Creates a new queue under the given account if it doesn't exist.
+    summary: |+
+      Creates a new queue under the given account if it doesn't exist.
+
+      **Example**
+
+      var azure = require('azure-storage');
+      var queueService = azure.createQueueService();
+      queueService.createQueueIfNotExists('taskqueue', function(error) {
+        if(!error) {
+          // Queue created or exists
+        }
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -710,112 +1438,6 @@ methods:
                                                                                     if an error occurs; otherwise, `result`
                                                                                     will be true if the queue exists and false if not,
                                                                                     and `response` will contain information related to this operation.
-  - name: 'emit(string | symbol, any[])'
-    uid: azure-storage.azurestorage.services.queue.QueueService.emit
-    package: azure-storage
-    summary: >-
-      Synchronously calls each of the listeners registered for the event
-      named`eventName`, in the order they were registered, passing the supplied
-      arguments
-
-      to each.
-
-      Returns `true` if the event had listeners, `false` otherwise.
-
-
-      ```js
-
-      const EventEmitter = require('events');
-
-      const myEmitter = new EventEmitter();
-
-
-      // First listener
-
-      myEmitter.on('event', function firstListener() {
-        console.log('Helloooo! first listener');
-      });
-
-      // Second listener
-
-      myEmitter.on('event', function secondListener(arg1, arg2) {
-        console.log(`event with parameters ${arg1}, ${arg2} in second listener`);
-      });
-
-      // Third listener
-
-      myEmitter.on('event', function thirdListener(...args) {
-        const parameters = args.join(', ');
-        console.log(`event with parameters ${parameters} in third listener`);
-      });
-
-
-      console.log(myEmitter.listeners('event'));
-
-
-      myEmitter.emit('event', 1, 2, 3, 4, 5);
-
-
-      // Prints:
-
-      // [
-
-      //   [Function: firstListener],
-
-      //   [Function: secondListener],
-
-      //   [Function: thirdListener]
-
-      // ]
-
-      // Helloooo! first listener
-
-      // event with parameters 1, 2 in second listener
-
-      // event with parameters 1, 2, 3, 4, 5 in third listener
-
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function emit(eventName: string | symbol, args: any[])'
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: ''
-        - id: args
-          type: 'any[]'
-          description: ''
-      return:
-        type: boolean
-        description: ''
-  - name: eventNames()
-    uid: azure-storage.azurestorage.services.queue.QueueService.eventNames
-    package: azure-storage
-    summary: |-
-      Returns an array listing the events for which the emitter has registered
-      listeners. The values in the array are strings or `Symbol`s.
-      ```js
-      const EventEmitter = require('events');
-      const myEE = new EventEmitter();
-      myEE.on('foo', () => {});
-      myEE.on('bar', () => {});
-
-      const sym = Symbol('symbol');
-      myEE.on(sym, () => {});
-
-      console.log(myEE.eventNames());
-      // Prints: [ 'foo', 'bar', Symbol(symbol) ]
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function eventNames()
-      return:
-        type: Array&lt;string | symbol&gt;
-        description: ''
   - name: 'generateSharedAccessSignature(string, SharedAccessPolicy)'
     uid: >-
       azure-storage.azurestorage.services.queue.QueueService.generateSharedAccessSignature
@@ -827,7 +1449,7 @@ methods:
     syntax:
       content: >-
         function generateSharedAccessSignature(queue: string,
-        sharedAccessPolicy: SharedAccessPolicy)
+        sharedAccessPolicy: SharedAccessPolicy): string
       parameters:
         - id: queue
           type: string
@@ -836,10 +1458,10 @@ methods:
           type: <xref uid="azure-storage.azurestorage.common.SharedAccessPolicy" />
           description: The shared access policy.
       return:
-        type: string
         description: >-
           The shared access signature query string. Note this string does not
           contain the leading "?".
+        type: string
   - name: >-
       generateSharedAccessSignatureWithVersion(string, SharedAccessPolicy,
       string)
@@ -853,7 +1475,7 @@ methods:
     syntax:
       content: >-
         function generateSharedAccessSignatureWithVersion(queue: string,
-        sharedAccessPolicy: SharedAccessPolicy, sasVersion: string)
+        sharedAccessPolicy: SharedAccessPolicy, sasVersion: string): string
       parameters:
         - id: queue
           type: string
@@ -865,33 +1487,39 @@ methods:
           type: string
           description: ''
       return:
-        type: string
         description: >-
           The shared access signature query string. Note this string does not
           contain the leading "?".
-  - name: getMaxListeners()
-    uid: azure-storage.azurestorage.services.queue.QueueService.getMaxListeners
-    package: azure-storage
-    summary: >-
-      Returns the current max listener value for the `EventEmitter` which is
-      either
-
-      set by `emitter.setMaxListeners(n)` or defaults to
-      <xref:defaultMaxListeners>.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: function getMaxListeners()
-      return:
-        type: number
-        description: ''
+        type: string
   - name: 'getMessage(string, ErrorOrResult<QueueMessageResult>)'
     uid: azure-storage.azurestorage.services.queue.QueueService.getMessage_1
     package: azure-storage
-    summary: >-
+    summary: >+
       Retrieves a message from the queue and makes it invisible to other
       consumers.
+
+
+      **Example**
+
+
+      var azure = require('azure-storage');
+
+      var queueService = azure.createQueueService();
+
+      var queueName = 'taskqueue';
+
+      queueService.getMessage(queueName, function(error, serverMessages) {
+        if(!error) {
+          // Process the message in less than 30 seconds, the message
+          // text is available in serverMessages.messagetext
+          queueService.deleteMessage(queueName, serverMessages.messageId, serverMessages.popReceipt, function(error) {
+            if(!error){
+                // Message deleted
+            }
+          });
+        }
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -918,9 +1546,32 @@ methods:
       ErrorOrResult<QueueMessageResult>)
     uid: azure-storage.azurestorage.services.queue.QueueService.getMessage
     package: azure-storage
-    summary: >-
+    summary: >+
       Retrieves a message from the queue and makes it invisible to other
       consumers.
+
+
+      **Example**
+
+
+      var azure = require('azure-storage');
+
+      var queueService = azure.createQueueService();
+
+      var queueName = 'taskqueue';
+
+      queueService.getMessage(queueName, function(error, serverMessage) {
+        if(!error) {
+          // Process the message in less than 30 seconds, the message
+          // text is available in serverMessage.messagetext
+          queueService.deleteMessage(queueName, serverMessage.messageId, serverMessage.popReceipt, function(error) {
+            if(!error){
+                // Message deleted
+            }
+          });
+        }
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -951,9 +1602,32 @@ methods:
   - name: 'getMessages(string, ErrorOrResult<QueueMessageResult[]>)'
     uid: azure-storage.azurestorage.services.queue.QueueService.getMessages_1
     package: azure-storage
-    summary: >-
+    summary: >+
       Retrieves messages from the queue and makes them invisible to other
       consumers.
+
+
+      **Example**
+
+
+      var azure = require('azure-storage');
+
+      var queueService = azure.createQueueService();
+
+      var queueName = 'taskqueue';
+
+      queueService.getMessages(queueName, function(error, serverMessages) {
+        if(!error) {
+          // Process the message in less than 30 seconds, the message
+          // text is available in serverMessages[0].messagetext
+          queueService.deleteMessage(queueName, serverMessages[0].messageId, serverMessages[0].popReceipt, function(error) {
+            if(!error){
+                // Message deleted
+            }
+          });
+        }
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -980,9 +1654,32 @@ methods:
       ErrorOrResult<QueueMessageResult[]>)
     uid: azure-storage.azurestorage.services.queue.QueueService.getMessages
     package: azure-storage
-    summary: >-
+    summary: >+
       Retrieves messages from the queue and makes them invisible to other
       consumers.
+
+
+      **Example**
+
+
+      var azure = require('azure-storage');
+
+      var queueService = azure.createQueueService();
+
+      var queueName = 'taskqueue';
+
+      queueService.getMessages(queueName, function(error, serverMessages) {
+        if(!error) {
+          // Process the message in less than 30 seconds, the message
+          // text is available in serverMessages[0].messagetext
+          queueService.deleteMessage(queueName, serverMessages[0].messageId, serverMessages[0].popReceipt, function(error) {
+            if(!error){
+                // Message deleted
+            }
+          });
+        }
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -1220,7 +1917,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function getUrl(queue: string, sasToken?: string, primary?: boolean)'
+      content: >-
+        function getUrl(queue: string, sasToken?: string, primary?: boolean):
+        string
       parameters:
         - id: queue
           type: string
@@ -1232,49 +1931,8 @@ methods:
           type: boolean
           description: ''
       return:
+        description: ''
         type: string
-        description: ''
-  - name: listenerCount(string | symbol)
-    uid: azure-storage.azurestorage.services.queue.QueueService.listenerCount
-    package: azure-storage
-    summary: Returns the number of listeners listening to the event named `eventName`.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function listenerCount(eventName: string | symbol)'
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: |
-            The name of the event being listened for
-      return:
-        type: number
-        description: ''
-  - name: listeners(string | symbol)
-    uid: azure-storage.azurestorage.services.queue.QueueService.listeners
-    package: azure-storage
-    summary: |-
-      Returns a copy of the array of listeners for the event named `eventName`.
-      ```js
-      server.on('connection', (stream) => {
-        console.log('someone connected!');
-      });
-      console.log(util.inspect(server.listeners('connection')));
-      // Prints: [ [Function] ]
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function listeners(eventName: string | symbol)'
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: ''
-      return:
-        type: 'Function[]'
-        description: ''
   - name: 'listQueuesSegmented(ContinuationToken, ErrorOrResult<ListQueueResult>)'
     uid: >-
       azure-storage.azurestorage.services.queue.QueueService.listQueuesSegmented_1
@@ -1419,157 +2077,6 @@ methods:
                                                                                     if an error occurs; otherwise `result` will contain `entries` and `continuationToken`.
                                                                                     `entries`  gives a list of queues and the `continuationToken` is used for the next listing operation.
                                                                                     `response` will contain information related to this operation.
-  - name: 'off(string | symbol, (args: any[]) => void)'
-    uid: azure-storage.azurestorage.services.queue.QueueService.off
-    package: azure-storage
-    summary: Alias for `emitter.removeListener()`.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function off(eventName: string | symbol, listener: (args: any[]) =>
-        void)
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: ''
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: 'on(string | symbol, (args: any[]) => void)'
-    uid: azure-storage.azurestorage.services.queue.QueueService.on
-    package: azure-storage
-    summary: >-
-      Adds the `listener` function to the end of the listeners array for the
-
-      event named `eventName`. No checks are made to see if the `listener` has
-
-      already been added. Multiple calls passing the same combination of
-      `eventName`and `listener` will result in the `listener` being added, and
-      called, multiple
-
-      times.
-
-      ```js
-
-      server.on('connection', (stream) => {
-        console.log('someone connected!');
-      });
-
-      ```
-
-
-      Returns a reference to the `EventEmitter`, so that calls can be chained.
-
-
-      By default, event listeners are invoked in the order they are added.
-      The`emitter.prependListener()` method can be used as an alternative to add
-      the
-
-      event listener to the beginning of the listeners array.
-
-
-      ```js
-
-      const myEE = new EventEmitter();
-
-      myEE.on('foo', () => console.log('a'));
-
-      myEE.prependListener('foo', () => console.log('b'));
-
-      myEE.emit('foo');
-
-      // Prints:
-
-      //   b
-
-      //   a
-
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function on(eventName: string | symbol, listener: (args: any[]) => void)'
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: The name of the event.
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
-      return:
-        type: this
-        description: ''
-  - name: 'once(string | symbol, (args: any[]) => void)'
-    uid: azure-storage.azurestorage.services.queue.QueueService.once
-    package: azure-storage
-    summary: >-
-      Adds a **one-time**`listener` function for the event named `eventName`.
-      The
-
-      next time `eventName` is triggered, this listener is removed and then
-      invoked.
-
-      ```js
-
-      server.once('connection', (stream) => {
-        console.log('Ah, we have our first user!');
-      });
-
-      ```
-
-
-      Returns a reference to the `EventEmitter`, so that calls can be chained.
-
-
-      By default, event listeners are invoked in the order they are added.
-      The`emitter.prependOnceListener()` method can be used as an alternative to
-      add the
-
-      event listener to the beginning of the listeners array.
-
-
-      ```js
-
-      const myEE = new EventEmitter();
-
-      myEE.once('foo', () => console.log('a'));
-
-      myEE.prependOnceListener('foo', () => console.log('b'));
-
-      myEE.emit('foo');
-
-      // Prints:
-
-      //   b
-
-      //   a
-
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function once(eventName: string | symbol, listener: (args: any[]) =>
-        void)
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: The name of the event.
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
-      return:
-        type: this
-        description: ''
   - name: 'peekMessage(string, ErrorOrResult<QueueMessageResult>)'
     uid: azure-storage.azurestorage.services.queue.QueueService.peekMessage_1
     package: azure-storage
@@ -1690,367 +2197,49 @@ methods:
                                                                                     if an error occurs; otherwise `result` will contain
                                                                                     the messages.
                                                                                     `response` will contain information related to this operation.
-  - name: 'prependListener(string | symbol, (args: any[]) => void)'
-    uid: azure-storage.azurestorage.services.queue.QueueService.prependListener
-    package: azure-storage
-    summary: >-
-      Adds the `listener` function to the _beginning_ of the listeners array for
-      the
-
-      event named `eventName`. No checks are made to see if the `listener` has
-
-      already been added. Multiple calls passing the same combination of
-      `eventName`and `listener` will result in the `listener` being added, and
-      called, multiple
-
-      times.
-
-      ```js
-
-      server.prependListener('connection', (stream) => {
-        console.log('someone connected!');
-      });
-
-      ```
-
-
-      Returns a reference to the `EventEmitter`, so that calls can be chained.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prependListener(eventName: string | symbol, listener: (args:
-        any[]) => void)
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: The name of the event.
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
-      return:
-        type: this
-        description: ''
-  - name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
-    uid: azure-storage.azurestorage.services.queue.QueueService.prependOnceListener
-    package: azure-storage
-    summary: >-
-      Adds a **one-time**`listener` function for the event named `eventName` to
-      the_beginning_ of the listeners array. The next time `eventName` is
-      triggered, this
-
-      listener is removed, and then invoked.
-
-      ```js
-
-      server.prependOnceListener('connection', (stream) => {
-        console.log('Ah, we have our first user!');
-      });
-
-      ```
-
-
-      Returns a reference to the `EventEmitter`, so that calls can be chained.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function prependOnceListener(eventName: string | symbol, listener:
-        (args: any[]) => void)
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: The name of the event.
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
-      return:
-        type: this
-        description: ''
-  - name: rawListeners(string | symbol)
-    uid: azure-storage.azurestorage.services.queue.QueueService.rawListeners
-    package: azure-storage
-    summary: |-
-      Returns a copy of the array of listeners for the event named `eventName`,
-      including any wrappers (such as those created by `.once()`).
-      ```js
-      const emitter = new EventEmitter();
-      emitter.once('log', () => console.log('log once'));
-
-      // Returns a new Array with a function `onceWrapper` which has a property
-      // `listener` which contains the original listener bound above
-      const listeners = emitter.rawListeners('log');
-      const logFnWrapper = listeners[0];
-
-      // Logs "log once" to the console and does not unbind the `once` event
-      logFnWrapper.listener();
-
-      // Logs "log once" to the console and removes the listener
-      logFnWrapper();
-
-      emitter.on('log', () => console.log('log persistently'));
-      // Will return a new Array with a single function bound by `.on()` above
-      const newListeners = emitter.rawListeners('log');
-
-      // Logs "log persistently" twice
-      newListeners[0]();
-      emitter.emit('log');
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function rawListeners(eventName: string | symbol)'
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: ''
-      return:
-        type: 'Function[]'
-        description: ''
-  - name: removeAllListeners(string | symbol)
-    uid: azure-storage.azurestorage.services.queue.QueueService.removeAllListeners
-    package: azure-storage
-    summary: |-
-      Removes all listeners, or those of the specified `eventName`.
-      It is bad practice to remove listeners added elsewhere in the code,
-      particularly when the `EventEmitter` instance was created by some other
-      component or module (e.g. sockets or file streams).
-
-      Returns a reference to the `EventEmitter`, so that calls can be chained.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function removeAllListeners(event?: string | symbol)'
-      parameters:
-        - id: event
-          type: string | symbol
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: 'removeListener(string | symbol, (args: any[]) => void)'
-    uid: azure-storage.azurestorage.services.queue.QueueService.removeListener
-    package: azure-storage
-    summary: >-
-      Removes the specified `listener` from the listener array for the event
-      named`eventName`.
-
-      ```js
-
-      const callback = (stream) => {
-        console.log('someone connected!');
-      };
-
-      server.on('connection', callback);
-
-      // ...
-
-      server.removeListener('connection', callback);
-
-      ```
-
-
-      `removeListener()` will remove, at most, one instance of a listener from
-      the
-
-      listener array. If any single listener has been added multiple times to
-      the
-
-      listener array for the specified `eventName`, then `removeListener()` must
-      be
-
-      called multiple times to remove each instance.
-
-
-      Once an event is emitted, all listeners attached to it at the
-
-      time of emitting are called in order. This implies that
-      any`removeListener()` or `removeAllListeners()` calls _after_ emitting
-      and_before_ the last listener finishes execution will
-
-      not remove them from`emit()` in progress. Subsequent events behave as
-      expected.
-
-
-      ```js
-
-      const myEmitter = new MyEmitter();
-
-
-      const callbackA = () => {
-        console.log('A');
-        myEmitter.removeListener('event', callbackB);
-      };
-
-
-      const callbackB = () => {
-        console.log('B');
-      };
-
-
-      myEmitter.on('event', callbackA);
-
-
-      myEmitter.on('event', callbackB);
-
-
-      // callbackA removes listener callbackB but it will still be called.
-
-      // Internal listener array at time of emit [callbackA, callbackB]
-
-      myEmitter.emit('event');
-
-      // Prints:
-
-      //   A
-
-      //   B
-
-
-      // callbackB is now removed.
-
-      // Internal listener array [callbackA]
-
-      myEmitter.emit('event');
-
-      // Prints:
-
-      //   A
-
-      ```
-
-
-      Because listeners are managed using an internal array, calling this will
-
-      change the position indices of any listener registered _after_ the
-      listener
-
-      being removed. This will not impact the order in which listeners are
-      called,
-
-      but it means that any copies of the listener array as returned by
-
-      the `emitter.listeners()` method will need to be recreated.
-
-
-      When a single function has been added as a handler multiple times for a
-      single
-
-      event (as in the example below), `removeListener()` will remove the most
-
-      recently added instance. In the example the `once('ping')`listener is
-      removed:
-
-
-      ```js
-
-      const ee = new EventEmitter();
-
-
-      function pong() {
-        console.log('pong');
-      }
-
-
-      ee.on('ping', pong);
-
-      ee.once('ping', pong);
-
-      ee.removeListener('ping', pong);
-
-
-      ee.emit('ping');
-
-      ee.emit('ping');
-
-      ```
-
-
-      Returns a reference to the `EventEmitter`, so that calls can be chained.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function removeListener(eventName: string | symbol, listener: (args:
-        any[]) => void)
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: ''
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: setMaxListeners(number)
-    uid: azure-storage.azurestorage.services.queue.QueueService.setMaxListeners
-    package: azure-storage
-    summary: >-
-      By default `EventEmitter`s will print a warning if more than `10`
-      listeners are
-
-      added for a particular event. This is a useful default that helps finding
-
-      memory leaks. The `emitter.setMaxListeners()` method allows the limit to
-      be
-
-      modified for this specific `EventEmitter` instance. The value can be set
-      to`Infinity` (or `0`) to indicate an unlimited number of listeners.
-
-      Returns a reference to the `EventEmitter`, so that calls can be chained.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function setMaxListeners(n: number)'
-      parameters:
-        - id: 'n'
-          type: number
-          description: ''
-      return:
-        type: this
-        description: ''
-  - name: setProxy(Proxy)
-    uid: azure-storage.azurestorage.services.queue.QueueService.setProxy
-    package: azure-storage
-    summary: Sets proxy object specified by caller.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function setProxy(proxy: Proxy)'
-      parameters:
-        - id: proxy
-          type: >-
-            <xref
-            uid="azure-storage.azurestorage.common.services.storageserviceclient.Proxy"
-            />
-          description: |
-            proxy to use for tunneling
-                                                   {
-                                                    host: hostname
-                                                    port: port number
-                                                    proxyAuth: 'user:password' for basic auth
-                                                    headers: {...} headers for proxy server
-                                                    key: key for proxy server
-                                                    ca: ca for proxy server
-                                                    cert: cert for proxy server
-                                                   }
-                                                   if null or undefined, clears proxy
   - name: >-
       setQueueAcl(string, [key: string]: AccessPolicy,
       ErrorOrResult<QueueResult>)
     uid: azure-storage.azurestorage.services.queue.QueueService.setQueueAcl_1
     package: azure-storage
-    summary: Updates the queue's ACL.
+    summary: >+
+      Updates the queue's ACL.
+
+
+      **Example**
+
+
+      var azure = require('azure-storage');
+
+      var SharedAccessPermissions =
+      azure.QueueUtilities.SharedAccessPermissions;
+
+      var queueService = azure.createQueueService();
+
+      var sharedAccessPolicy = [
+
+      {AccessPolicy: {
+          Permissions: PROCESS,
+          Start: startDate,
+          Expiry: expiryDate
+        },
+        Id: processOnly,
+      },
+
+      {AccessPolicy: {
+          Permissions: SharedAccessPermissions.PROCESS + SharedAccessPermissions.DELETE,
+          Start: startDate,
+          Expiry: expiryDate
+        },
+        Id: processAndDelete,
+      }];
+
+
+      queueService.setQueueAcl(queueName, sharedAccessPolicy, function(error,
+      queueResult, response) {
+          // do whatever
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -2082,7 +2271,44 @@ methods:
       ErrorOrResult<QueueResult>)
     uid: azure-storage.azurestorage.services.queue.QueueService.setQueueAcl
     package: azure-storage
-    summary: Updates the queue's ACL.
+    summary: >+
+      Updates the queue's ACL.
+
+
+      **Example**
+
+
+      var azure = require('azure-storage');
+
+      var SharedAccessPermissions =
+      azure.QueueUtilities.SharedAccessPermissions;
+
+      var queueService = azure.createQueueService();
+
+      var sharedAccessPolicy = [
+
+      {AccessPolicy: {
+          Permissions: PROCESS,
+          Start: startDate,
+          Expiry: expiryDate
+        },
+        Id: processOnly,
+      },
+
+      {AccessPolicy: {
+          Permissions: SharedAccessPermissions.PROCESS + SharedAccessPermissions.DELETE,
+          Start: startDate,
+          Expiry: expiryDate
+        },
+        Id: processAndDelete,
+      }];
+
+
+      queueService.setQueueAcl(queueName, sharedAccessPolicy, function(error,
+      queueResult, response) {
+          // do whatever
+      });
+
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -2381,14 +2607,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function withFilter(newFilter: IFilter)'
+      content: 'function withFilter(newFilter: IFilter): QueueService'
       parameters:
         - id: newFilter
           type: <xref uid="azure-storage.azurestorage.common.filters.IFilter" />
           description: ''
       return:
-        type: <xref uid="azure-storage.azurestorage.services.queue.QueueService" />
         description: A new service client with the filter applied.
+        type: <xref uid="azure-storage.azurestorage.services.queue.QueueService" />
 extends: >-
   <xref
   uid="azure-storage.azurestorage.common.services.storageserviceclient.StorageServiceClient"

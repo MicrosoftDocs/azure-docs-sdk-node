@@ -50,8 +50,8 @@ properties:
     syntax:
       content: '$host: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: apiVersion
     uid: '@azure/arm-resources.ResourceManagementClientContext.apiVersion'
     package: '@azure/arm-resources'
@@ -63,21 +63,8 @@ properties:
     syntax:
       content: 'apiVersion: string'
       return:
+        description: ''
         type: string
-        description: ''
-  - name: pipeline
-    uid: '@azure/arm-resources.ResourceManagementClientContext.pipeline'
-    package: '@azure/arm-resources'
-    summary: The pipeline used by this client to make requests
-    fullName: pipeline
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'pipeline: Pipeline'
-      return:
-        type: Pipeline
-        description: ''
   - name: subscriptionId
     uid: '@azure/arm-resources.ResourceManagementClientContext.subscriptionId'
     package: '@azure/arm-resources'
@@ -89,9 +76,23 @@ properties:
     syntax:
       content: 'subscriptionId: string'
       return:
-        type: string
         description: ''
-methods:
+        type: string
+inheritedProperties:
+  - name: pipeline
+    uid: '@azure/arm-resources.ResourceManagementClientContext.pipeline'
+    package: '@azure/arm-resources'
+    summary: The pipeline used by this client to make requests
+    fullName: pipeline
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        description: ''
+        type: Pipeline
+inheritedMethods:
   - name: 'sendOperationRequest<T>(OperationArguments, OperationSpec)'
     uid: '@azure/arm-resources.ResourceManagementClientContext.sendOperationRequest'
     package: '@azure/arm-resources'
@@ -102,7 +103,7 @@ methods:
     syntax:
       content: >-
         function sendOperationRequest<T>(operationArguments: OperationArguments,
-        operationSpec: OperationSpec)
+        operationSpec: OperationSpec): Promise<T>
       parameters:
         - id: operationArguments
           type: OperationArguments
@@ -114,8 +115,8 @@ methods:
           description: |
             The OperationSpec to use to populate the httpRequest.
       return:
-        type: Promise&lt;T&gt;
         description: ''
+        type: Promise&lt;T&gt;
   - name: sendRequest(PipelineRequest)
     uid: '@azure/arm-resources.ResourceManagementClientContext.sendRequest'
     package: '@azure/arm-resources'
@@ -124,12 +125,14 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function sendRequest(request: PipelineRequest)'
+      content: >-
+        function sendRequest(request: PipelineRequest):
+        Promise<PipelineResponse>
       parameters:
         - id: request
           type: PipelineRequest
           description: ''
       return:
-        type: Promise&lt;PipelineResponse&gt;
         description: ''
+        type: Promise&lt;PipelineResponse&gt;
 extends: ServiceClient

@@ -7,6 +7,7 @@ enums:
   - '@azure/storage-blob.BlockBlobTier'
   - '@azure/storage-blob.PremiumPageBlobTier'
   - '@azure/storage-blob.SASProtocol'
+  - '@azure/storage-blob.StorageBlobAudience'
   - '@azure/storage-blob.StorageRetryPolicyType'
 classes:
   - '@azure/storage-blob.AccountSASPermissions'
@@ -24,8 +25,8 @@ classes:
   - '@azure/storage-blob.BlockBlobClient'
   - '@azure/storage-blob.ContainerClient'
   - '@azure/storage-blob.ContainerSASPermissions'
-  - '@azure/storage-blob.Credential'
   - '@azure/storage-blob.CredentialPolicy'
+  - '@azure/storage-blob.Credential_2'
   - '@azure/storage-blob.PageBlobClient'
   - '@azure/storage-blob.Pipeline'
   - '@azure/storage-blob.SASQueryParameters'
@@ -143,6 +144,7 @@ interfaces:
   - '@azure/storage-blob.BlockBlobUploadOptions'
   - '@azure/storage-blob.BlockBlobUploadStreamOptions'
   - '@azure/storage-blob.BlockList'
+  - '@azure/storage-blob.ClearRange'
   - '@azure/storage-blob.CommonGenerateSasUrlOptions'
   - '@azure/storage-blob.CommonOptions'
   - '@azure/storage-blob.ContainerAcquireLeaseOptions'
@@ -158,6 +160,8 @@ interfaces:
   - '@azure/storage-blob.ContainerDeleteMethodOptions'
   - '@azure/storage-blob.ContainerEncryptionScope'
   - '@azure/storage-blob.ContainerExistsOptions'
+  - '@azure/storage-blob.ContainerFilterBlobsHeaders'
+  - '@azure/storage-blob.ContainerFindBlobByTagsOptions'
   - '@azure/storage-blob.ContainerGenerateSasUrlOptions'
   - '@azure/storage-blob.ContainerGetAccessPolicyHeaders'
   - '@azure/storage-blob.ContainerGetAccessPolicyOptions'
@@ -216,6 +220,8 @@ interfaces:
   - '@azure/storage-blob.PageBlobGetPageRangesHeaders'
   - '@azure/storage-blob.PageBlobGetPageRangesOptions'
   - '@azure/storage-blob.PageBlobGetPageRangesResponse'
+  - '@azure/storage-blob.PageBlobListPageRangesDiffOptions'
+  - '@azure/storage-blob.PageBlobListPageRangesOptions'
   - '@azure/storage-blob.PageBlobRequestConditions'
   - '@azure/storage-blob.PageBlobResizeHeaders'
   - '@azure/storage-blob.PageBlobResizeOptions'
@@ -227,10 +233,13 @@ interfaces:
   - '@azure/storage-blob.PageBlobUploadPagesHeaders'
   - '@azure/storage-blob.PageBlobUploadPagesOptions'
   - '@azure/storage-blob.PageList'
+  - '@azure/storage-blob.PageList_2'
+  - '@azure/storage-blob.PageRange'
+  - '@azure/storage-blob.PageRangeInfo'
   - '@azure/storage-blob.ParsedBatchResponse'
   - '@azure/storage-blob.PipelineLike'
   - '@azure/storage-blob.PipelineOptions'
-  - '@azure/storage-blob.Range'
+  - '@azure/storage-blob.Range_2'
   - '@azure/storage-blob.RetentionPolicy'
   - '@azure/storage-blob.SASQueryParametersOptions'
   - '@azure/storage-blob.SasIPRange'
@@ -275,6 +284,7 @@ typeAliases:
   - '@azure/storage-blob.BlobBatchSetBlobsAccessTierResponse'
   - '@azure/storage-blob.BlobBatchSubmitBatchResponse'
   - '@azure/storage-blob.BlobCopyFromURLResponse'
+  - '@azure/storage-blob.BlobCopySourceTags'
   - '@azure/storage-blob.BlobCreateSnapshotResponse'
   - '@azure/storage-blob.BlobDeleteImmutabilityPolicyResponse'
   - '@azure/storage-blob.BlobDeleteResponse'
@@ -303,6 +313,7 @@ typeAliases:
   - '@azure/storage-blob.BlockListType'
   - '@azure/storage-blob.ContainerCreateResponse'
   - '@azure/storage-blob.ContainerDeleteResponse'
+  - '@azure/storage-blob.ContainerFindBlobsByTagsSegmentResponse'
   - '@azure/storage-blob.ContainerGetAccessPolicyResponse'
   - '@azure/storage-blob.ContainerGetPropertiesResponse'
   - '@azure/storage-blob.ContainerListBlobFlatSegmentResponse'
@@ -321,12 +332,12 @@ typeAliases:
   - '@azure/storage-blob.LeaseOperationResponse'
   - '@azure/storage-blob.LeaseStateType'
   - '@azure/storage-blob.LeaseStatusType'
-  - '@azure/storage-blob.ListBlobsIncludeItem'
-  - '@azure/storage-blob.ListContainersIncludeType'
   - '@azure/storage-blob.ObjectReplicationStatus'
   - '@azure/storage-blob.PageBlobClearPagesResponse'
   - '@azure/storage-blob.PageBlobCopyIncrementalResponse'
   - '@azure/storage-blob.PageBlobCreateResponse'
+  - '@azure/storage-blob.PageBlobGetPageRangesDiffResponseModel'
+  - '@azure/storage-blob.PageBlobGetPageRangesResponseModel'
   - '@azure/storage-blob.PageBlobResizeResponse'
   - '@azure/storage-blob.PageBlobUpdateSequenceNumberResponse'
   - '@azure/storage-blob.PageBlobUploadPagesFromURLResponse'
@@ -351,13 +362,18 @@ functions:
       StorageSharedKeyCredential)
     uid: '@azure/storage-blob.generateAccountSASQueryParameters'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       ONLY AVAILABLE IN NODE.JS RUNTIME.
 
-      Generates a <xref:SASQueryParameters> object which contains all SAS query
-      parameters needed to make an actual
+      Generates a <xref:@azure/storage-blob.SASQueryParameters> object which
+      contains all SAS query parameters needed to make an actual
 
       REST request.
+
+
+
+      See
+      https://docs.microsoft.com/en-us/rest/api/storageservices/constructing-an-account-sas
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -365,7 +381,7 @@ functions:
       content: >-
         function generateAccountSASQueryParameters(accountSASSignatureValues:
         AccountSASSignatureValues, sharedKeyCredential:
-        StorageSharedKeyCredential)
+        StorageSharedKeyCredential): SASQueryParameters
       parameters:
         - id: accountSASSignatureValues
           type: <xref uid="@azure/storage-blob.AccountSASSignatureValues" />
@@ -375,8 +391,8 @@ functions:
           description: |
             -
       return:
-        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
         description: ''
+        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
   - name: >-
       generateBlobSASQueryParameters(BlobSASSignatureValues,
       StorageSharedKeyCredential)
@@ -495,7 +511,8 @@ functions:
     syntax:
       content: >-
         function generateBlobSASQueryParameters(blobSASSignatureValues:
-        BlobSASSignatureValues, sharedKeyCredential: StorageSharedKeyCredential)
+        BlobSASSignatureValues, sharedKeyCredential:
+        StorageSharedKeyCredential): SASQueryParameters
       parameters:
         - id: blobSASSignatureValues
           type: <xref uid="@azure/storage-blob.BlobSASSignatureValues" />
@@ -505,8 +522,8 @@ functions:
           description: |
             -
       return:
-        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
         description: ''
+        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
   - name: >-
       generateBlobSASQueryParameters(BlobSASSignatureValues, UserDelegationKey,
       string)
@@ -552,7 +569,7 @@ functions:
       content: >-
         function generateBlobSASQueryParameters(blobSASSignatureValues:
         BlobSASSignatureValues, userDelegationKey: UserDelegationKey,
-        accountName: string)
+        accountName: string): SASQueryParameters
       parameters:
         - id: blobSASSignatureValues
           type: <xref uid="@azure/storage-blob.BlobSASSignatureValues" />
@@ -565,8 +582,8 @@ functions:
           description: |
             -
       return:
-        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
         description: ''
+        type: <xref uid="@azure/storage-blob.SASQueryParameters" />
   - name: isPipelineLike(unknown)
     uid: '@azure/storage-blob.isPipelineLike'
     package: '@azure/storage-blob'
@@ -575,14 +592,14 @@ functions:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function isPipelineLike(pipeline: unknown)'
+      content: 'function isPipelineLike(pipeline: unknown): boolean'
       parameters:
         - id: pipeline
           type: unknown
           description: An argument that may be a Pipeline
       return:
-        type: boolean
         description: true when the argument satisfies the Pipeline contract
+        type: boolean
   - name: >-
       newPipeline(StorageSharedKeyCredential | AnonymousCredential |
       TokenCredential, StoragePipelineOptions)
@@ -596,7 +613,7 @@ functions:
       content: >-
         function newPipeline(credential?: StorageSharedKeyCredential |
         AnonymousCredential | TokenCredential, pipelineOptions?:
-        StoragePipelineOptions)
+        StoragePipelineOptions): Pipeline
       parameters:
         - id: credential
           type: >-
@@ -613,5 +630,5 @@ functions:
           type: <xref uid="@azure/storage-blob.StoragePipelineOptions" />
           description: Optional. Options.
       return:
-        type: <xref uid="@azure/storage-blob.Pipeline" />
         description: A new Pipeline object.
+        type: <xref uid="@azure/storage-blob.Pipeline" />

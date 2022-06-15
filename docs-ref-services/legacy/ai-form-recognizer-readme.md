@@ -1,8 +1,8 @@
 ---
 title: Azure Form Recognizer client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-form-recognizer, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 08/20/2020
 ms.topic: reference
 ms.prod: azure

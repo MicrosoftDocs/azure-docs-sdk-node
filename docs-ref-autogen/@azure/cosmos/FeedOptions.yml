@@ -9,22 +9,6 @@ isPreview: false
 isDeprecated: false
 type: interface
 properties:
-  - name: abortSignal
-    uid: '@azure/cosmos.FeedOptions.abortSignal'
-    package: '@azure/cosmos'
-    summary: >-
-      abortSignal to pass to all underlying network requests created by this
-      method call. See
-      https://developer.mozilla.org/en-US/docs/Web/API/AbortController
-    fullName: abortSignal
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'abortSignal?: AbortSignal'
-      return:
-        type: AbortSignal
-        description: ''
   - name: accessCondition
     uid: '@azure/cosmos.FeedOptions.accessCondition'
     package: '@azure/cosmos'
@@ -34,10 +18,10 @@ properties:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'accessCondition?: Object'
+      content: 'accessCondition?: { condition: string, type: string }'
       return:
-        type: Object
         description: ''
+        type: '{ condition: string, type: string }'
   - name: bufferItems
     uid: '@azure/cosmos.FeedOptions.bufferItems'
     package: '@azure/cosmos'
@@ -65,8 +49,8 @@ properties:
     syntax:
       content: 'bufferItems?: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: continuation
     uid: '@azure/cosmos.FeedOptions.continuation'
     package: '@azure/cosmos'
@@ -79,8 +63,8 @@ properties:
     syntax:
       content: 'continuation?: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: continuationToken
     uid: '@azure/cosmos.FeedOptions.continuationToken'
     package: '@azure/cosmos'
@@ -92,8 +76,8 @@ properties:
     syntax:
       content: 'continuationToken?: string'
       return:
-        type: string
         description: ''
+        type: string
   - name: continuationTokenLimitInKB
     uid: '@azure/cosmos.FeedOptions.continuationTokenLimitInKB'
     package: '@azure/cosmos'
@@ -116,8 +100,8 @@ properties:
     syntax:
       content: 'continuationTokenLimitInKB?: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: enableScanInQuery
     uid: '@azure/cosmos.FeedOptions.enableScanInQuery'
     package: '@azure/cosmos'
@@ -134,8 +118,8 @@ properties:
     syntax:
       content: 'enableScanInQuery?: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
   - name: forceQueryPlan
     uid: '@azure/cosmos.FeedOptions.forceQueryPlan'
     package: '@azure/cosmos'
@@ -167,23 +151,8 @@ properties:
     syntax:
       content: 'forceQueryPlan?: boolean'
       return:
+        description: ''
         type: boolean
-        description: ''
-  - name: initialHeaders
-    uid: '@azure/cosmos.FeedOptions.initialHeaders'
-    package: '@azure/cosmos'
-    summary: >-
-      (Advanced use case) Initial headers to start with when sending requests to
-      Cosmos
-    fullName: initialHeaders
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'initialHeaders?: CosmosHeaders'
-      return:
-        type: <xref uid="@azure/cosmos.CosmosHeaders" />
-        description: ''
   - name: maxDegreeOfParallelism
     uid: '@azure/cosmos.FeedOptions.maxDegreeOfParallelism'
     package: '@azure/cosmos'
@@ -202,8 +171,8 @@ properties:
     syntax:
       content: 'maxDegreeOfParallelism?: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: maxItemCount
     uid: '@azure/cosmos.FeedOptions.maxItemCount'
     package: '@azure/cosmos'
@@ -230,8 +199,8 @@ properties:
     syntax:
       content: 'maxItemCount?: number'
       return:
-        type: number
         description: ''
+        type: number
   - name: partitionKey
     uid: '@azure/cosmos.FeedOptions.partitionKey'
     package: '@azure/cosmos'
@@ -257,8 +226,8 @@ properties:
     syntax:
       content: 'partitionKey?: any'
       return:
-        type: any
         description: ''
+        type: any
   - name: populateQueryMetrics
     uid: '@azure/cosmos.FeedOptions.populateQueryMetrics'
     package: '@azure/cosmos'
@@ -276,23 +245,8 @@ properties:
     syntax:
       content: 'populateQueryMetrics?: boolean'
       return:
+        description: ''
         type: boolean
-        description: ''
-  - name: sessionToken
-    uid: '@azure/cosmos.FeedOptions.sessionToken'
-    package: '@azure/cosmos'
-    summary: >-
-      Enables/disables getting document container quota related stats for
-      document container read requests.
-    fullName: sessionToken
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'sessionToken?: string'
-      return:
-        type: string
-        description: ''
   - name: useIncrementalFeed
     uid: '@azure/cosmos.FeedOptions.useIncrementalFeed'
     package: '@azure/cosmos'
@@ -308,6 +262,71 @@ properties:
     syntax:
       content: 'useIncrementalFeed?: boolean'
       return:
-        type: boolean
         description: ''
+        type: boolean
+inheritedProperties:
+  - name: abortSignal
+    uid: '@azure/cosmos.FeedOptions.abortSignal'
+    package: '@azure/cosmos'
+    summary: >+
+      abortSignal to pass to all underlying network requests created by this
+      method call. See
+      https://developer.mozilla.org/en-US/docs/Web/API/AbortController
+
+
+      **Example**
+
+
+      Cancel a read request
+
+      ```typescript
+
+      const controller = new AbortController()
+
+      const {result: item} = await items.query('SELECT * from c', { abortSignal:
+      controller.signal});
+
+      controller.abort()
+
+      ```
+
+    fullName: abortSignal
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'abortSignal?: AbortSignal_2'
+      return:
+        description: ''
+        type: AbortSignal_2
+  - name: initialHeaders
+    uid: '@azure/cosmos.FeedOptions.initialHeaders'
+    package: '@azure/cosmos'
+    summary: >-
+      (Advanced use case) Initial headers to start with when sending requests to
+      Cosmos
+    fullName: initialHeaders
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'initialHeaders?: CosmosHeaders'
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.CosmosHeaders" />
+  - name: sessionToken
+    uid: '@azure/cosmos.FeedOptions.sessionToken'
+    package: '@azure/cosmos'
+    summary: >-
+      Enables/disables getting document container quota related stats for
+      document container read requests.
+    fullName: sessionToken
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'sessionToken?: string'
+      return:
+        description: ''
+        type: string
 extends: <xref uid="@azure/cosmos.SharedOptions" />

@@ -2,7 +2,12 @@
 name: Items
 uid: '@azure/cosmos.Items'
 package: '@azure/cosmos'
-summary: 'Operations for creating new items, and reading/querying all items'
+summary: >-
+  Operations for creating new items, and reading/querying all items
+
+
+  See <xref:@azure/cosmos.Item> for reading, replacing, or deleting an existing
+  container; use `.item(id)`.
 fullName: Items
 remarks: ''
 isPreview: false
@@ -20,8 +25,8 @@ properties:
     syntax:
       content: 'container: Container'
       return:
-        type: <xref uid="@azure/cosmos.Container" />
         description: ''
+        type: <xref uid="@azure/cosmos.Container" />
 methods:
   - name: 'batch(OperationInput[], string, RequestOptions)'
     uid: '@azure/cosmos.Items.batch'
@@ -65,7 +70,7 @@ methods:
     syntax:
       content: >-
         function batch(operations: OperationInput[], partitionKey?: string,
-        options?: RequestOptions)
+        options?: RequestOptions): Promise<Response_2<any>>
       parameters:
         - id: operations
           type: '<xref uid="@azure/cosmos.OperationInput" />[]'
@@ -78,8 +83,8 @@ methods:
           description: |
             Used for modifying the request
       return:
-        type: Promise&lt;Response&lt;any&gt;&gt;
         description: ''
+        type: Promise&lt;Response_2&lt;any&gt;&gt;
   - name: 'bulk(OperationInput[], BulkOptions, RequestOptions)'
     uid: '@azure/cosmos.Items.bulk'
     package: '@azure/cosmos'
@@ -121,7 +126,7 @@ methods:
     syntax:
       content: >-
         function bulk(operations: OperationInput[], bulkOptions?: BulkOptions,
-        options?: RequestOptions)
+        options?: RequestOptions): Promise<OperationResponse[]>
       parameters:
         - id: operations
           type: '<xref uid="@azure/cosmos.OperationInput" />[]'
@@ -138,8 +143,8 @@ methods:
           description: |
             Used for modifying the request.
       return:
-        type: 'Promise&lt;<xref uid="@azure/cosmos.OperationResponse" />[]&gt;'
         description: ''
+        type: 'Promise&lt;<xref uid="@azure/cosmos.OperationResponse" />[]&gt;'
   - name: changeFeed(ChangeFeedOptions)
     uid: '@azure/cosmos.Items.changeFeed_1'
     package: '@azure/cosmos'
@@ -148,25 +153,39 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function changeFeed(changeFeedOptions?: ChangeFeedOptions)'
+      content: >-
+        function changeFeed(changeFeedOptions?: ChangeFeedOptions):
+        ChangeFeedIterator<any>
       parameters:
         - id: changeFeedOptions
           type: <xref uid="@azure/cosmos.ChangeFeedOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;any&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;any&gt;
   - name: 'changeFeed(string | number | boolean, ChangeFeedOptions)'
     uid: '@azure/cosmos.Items.changeFeed'
     package: '@azure/cosmos'
-    summary: Create a `ChangeFeedIterator` to iterate over pages of changes
+    summary: |+
+      Create a `ChangeFeedIterator` to iterate over pages of changes
+
+      **Example**
+
+      Read from the beginning of the change feed.
+      ```javascript
+      const iterator = items.readChangeFeed({ startFromBeginning: true });
+      const firstPage = await iterator.fetchNext();
+      const firstPageResults = firstPage.result
+      const secondPage = await iterator.fetchNext();
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function changeFeed(partitionKey: string | number | boolean,
-        changeFeedOptions?: ChangeFeedOptions)
+        changeFeedOptions?: ChangeFeedOptions): ChangeFeedIterator<any>
       parameters:
         - id: partitionKey
           type: string | number | boolean
@@ -175,8 +194,8 @@ methods:
           type: <xref uid="@azure/cosmos.ChangeFeedOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;any&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;any&gt;
   - name: changeFeed<T>(ChangeFeedOptions)
     uid: '@azure/cosmos.Items.changeFeed_3'
     package: '@azure/cosmos'
@@ -185,14 +204,16 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function changeFeed<T>(changeFeedOptions?: ChangeFeedOptions)'
+      content: >-
+        function changeFeed<T>(changeFeedOptions?: ChangeFeedOptions):
+        ChangeFeedIterator<T>
       parameters:
         - id: changeFeedOptions
           type: <xref uid="@azure/cosmos.ChangeFeedOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;T&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;T&gt;
   - name: 'changeFeed<T>(string | number | boolean, ChangeFeedOptions)'
     uid: '@azure/cosmos.Items.changeFeed_2'
     package: '@azure/cosmos'
@@ -203,7 +224,7 @@ methods:
     syntax:
       content: >-
         function changeFeed<T>(partitionKey: string | number | boolean,
-        changeFeedOptions?: ChangeFeedOptions)
+        changeFeedOptions?: ChangeFeedOptions): ChangeFeedIterator<T>
       parameters:
         - id: partitionKey
           type: string | number | boolean
@@ -212,8 +233,8 @@ methods:
           type: <xref uid="@azure/cosmos.ChangeFeedOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;T&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;T&gt;
   - name: 'create<T>(T, RequestOptions)'
     uid: '@azure/cosmos.Items.create'
     package: '@azure/cosmos'
@@ -232,7 +253,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function create<T>(body: T, options?: RequestOptions)'
+      content: >-
+        function create<T>(body: T, options?: RequestOptions):
+        Promise<ItemResponse<T>>
       parameters:
         - id: body
           type: T
@@ -245,67 +268,124 @@ methods:
             Used for modifying the request (for instance, specifying the
             partition key).
       return:
-        type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;
   - name: 'query(string | SqlQuerySpec, FeedOptions)'
     uid: '@azure/cosmos.Items.query'
     package: '@azure/cosmos'
-    summary: Queries all items.
+    summary: |+
+      Queries all items.
+
+      **Example**
+
+      Read all items to array.
+      ```typescript
+      const querySpec: SqlQuerySpec = {
+        query: "SELECT * FROM Families f WHERE f.lastName = @lastName",
+        parameters: [
+          {name: "@lastName", value: "Hendricks"}
+        ]
+      };
+      const {result: items} = await items.query(querySpec).fetchAll();
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function query(query: string | SqlQuerySpec, options?: FeedOptions)'
+      content: >-
+        function query(query: string | SqlQuerySpec, options?: FeedOptions):
+        QueryIterator<any>
       parameters:
         - id: query
           type: string | <xref uid="@azure/cosmos.SqlQuerySpec" />
           description: >-
-            Query configuration for the operation. See <xref:SqlQuerySpec> for
-            more info on how to configure a query.
+            Query configuration for the operation. See
+            <xref:@azure/cosmos.SqlQuerySpec> for more info on how to configure
+            a query.
         - id: options
           type: <xref uid="@azure/cosmos.FeedOptions" />
           description: >-
             Used for modifying the request (for instance, specifying the
             partition key).
       return:
-        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;any&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;any&gt;
   - name: 'query<T>(string | SqlQuerySpec, FeedOptions)'
     uid: '@azure/cosmos.Items.query_1'
     package: '@azure/cosmos'
-    summary: Queries all items.
+    summary: >+
+      Queries all items.
+
+
+      **Example**
+
+
+      Read all items to array.
+
+      ```typescript
+
+      const querySpec: SqlQuerySpec = {
+        query: "SELECT firstname FROM Families f WHERE f.lastName = @lastName",
+        parameters: [
+          {name: "@lastName", value: "Hendricks"}
+        ]
+      };
+
+      const {result: items} = await items.query<{firstName:
+      string}>(querySpec).fetchAll();
+
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function query<T>(query: string | SqlQuerySpec, options?: FeedOptions)'
+      content: >-
+        function query<T>(query: string | SqlQuerySpec, options?: FeedOptions):
+        QueryIterator<T>
       parameters:
         - id: query
           type: string | <xref uid="@azure/cosmos.SqlQuerySpec" />
           description: >-
-            Query configuration for the operation. See <xref:SqlQuerySpec> for
-            more info on how to configure a query.
+            Query configuration for the operation. See
+            <xref:@azure/cosmos.SqlQuerySpec> for more info on how to configure
+            a query.
         - id: options
           type: <xref uid="@azure/cosmos.FeedOptions" />
           description: >-
             Used for modifying the request (for instance, specifying the
             partition key).
       return:
-        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;T&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;T&gt;
   - name: readAll(FeedOptions)
     uid: '@azure/cosmos.Items.readAll'
     package: '@azure/cosmos'
-    summary: >
+    summary: >+
       Read all items.
 
       There is no set schema for JSON items. They may contain any number of
       custom properties.
+
+
+
+      **Example**
+
+
+      Read all items to array.
+
+      ```typescript
+
+      const {body: containerList} = await items.readAll().fetchAll();
+
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function readAll(options?: FeedOptions)'
+      content: 'function readAll(options?: FeedOptions): QueryIterator<ItemDefinition>'
       parameters:
         - id: options
           type: <xref uid="@azure/cosmos.FeedOptions" />
@@ -313,14 +393,14 @@ methods:
             Used for modifying the request (for instance, specifying the
             partition key).
       return:
+        description: ''
         type: >-
           <xref uid="@azure/cosmos.QueryIterator" />&lt;<xref
           uid="@azure/cosmos.ItemDefinition" />&gt;
-        description: ''
   - name: readAll<T>(FeedOptions)
     uid: '@azure/cosmos.Items.readAll_1'
     package: '@azure/cosmos'
-    summary: >
+    summary: >+
       Read all items.
 
       Any provided type, T, is not necessarily enforced by the SDK.
@@ -331,11 +411,25 @@ methods:
 
       There is no set schema for JSON items. They may contain any number of
       custom properties.
+
+
+
+      **Example**
+
+
+      Read all items to array.
+
+      ```typescript
+
+      const {body: containerList} = await items.readAll().fetchAll();
+
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function readAll<T>(options?: FeedOptions)'
+      content: 'function readAll<T>(options?: FeedOptions): QueryIterator<T>'
       parameters:
         - id: options
           type: <xref uid="@azure/cosmos.FeedOptions" />
@@ -343,8 +437,8 @@ methods:
             Used for modifying the request (for instance, specifying the
             partition key).
       return:
-        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;T&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.QueryIterator" />&lt;T&gt;
   - name: readChangeFeed(ChangeFeedOptions)
     uid: '@azure/cosmos.Items.readChangeFeed_1'
     package: '@azure/cosmos'
@@ -354,18 +448,32 @@ methods:
     isDeprecated: true
     customDeprecatedMessage: Use `changeFeed` instead.
     syntax:
-      content: 'function readChangeFeed(changeFeedOptions?: ChangeFeedOptions)'
+      content: >-
+        function readChangeFeed(changeFeedOptions?: ChangeFeedOptions):
+        ChangeFeedIterator<any>
       parameters:
         - id: changeFeedOptions
           type: <xref uid="@azure/cosmos.ChangeFeedOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;any&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;any&gt;
   - name: 'readChangeFeed(string | number | boolean, ChangeFeedOptions)'
     uid: '@azure/cosmos.Items.readChangeFeed'
     package: '@azure/cosmos'
-    summary: Create a `ChangeFeedIterator` to iterate over pages of changes
+    summary: |+
+      Create a `ChangeFeedIterator` to iterate over pages of changes
+
+      **Example**
+
+      Read from the beginning of the change feed.
+      ```javascript
+      const iterator = items.readChangeFeed({ startFromBeginning: true });
+      const firstPage = await iterator.fetchNext();
+      const firstPageResults = firstPage.result
+      const secondPage = await iterator.fetchNext();
+      ```
+
     remarks: ''
     isPreview: false
     isDeprecated: true
@@ -373,7 +481,7 @@ methods:
     syntax:
       content: >-
         function readChangeFeed(partitionKey: string | number | boolean,
-        changeFeedOptions?: ChangeFeedOptions)
+        changeFeedOptions?: ChangeFeedOptions): ChangeFeedIterator<any>
       parameters:
         - id: partitionKey
           type: string | number | boolean
@@ -382,8 +490,8 @@ methods:
           type: <xref uid="@azure/cosmos.ChangeFeedOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;any&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;any&gt;
   - name: readChangeFeed<T>(ChangeFeedOptions)
     uid: '@azure/cosmos.Items.readChangeFeed_3'
     package: '@azure/cosmos'
@@ -393,14 +501,16 @@ methods:
     isDeprecated: true
     customDeprecatedMessage: Use `changeFeed` instead.
     syntax:
-      content: 'function readChangeFeed<T>(changeFeedOptions?: ChangeFeedOptions)'
+      content: >-
+        function readChangeFeed<T>(changeFeedOptions?: ChangeFeedOptions):
+        ChangeFeedIterator<T>
       parameters:
         - id: changeFeedOptions
           type: <xref uid="@azure/cosmos.ChangeFeedOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;T&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;T&gt;
   - name: 'readChangeFeed<T>(string | number | boolean, ChangeFeedOptions)'
     uid: '@azure/cosmos.Items.readChangeFeed_2'
     package: '@azure/cosmos'
@@ -412,7 +522,7 @@ methods:
     syntax:
       content: >-
         function readChangeFeed<T>(partitionKey: string | number | boolean,
-        changeFeedOptions?: ChangeFeedOptions)
+        changeFeedOptions?: ChangeFeedOptions): ChangeFeedIterator<T>
       parameters:
         - id: partitionKey
           type: string | number | boolean
@@ -421,8 +531,8 @@ methods:
           type: <xref uid="@azure/cosmos.ChangeFeedOptions" />
           description: ''
       return:
-        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;T&gt;
         description: ''
+        type: <xref uid="@azure/cosmos.ChangeFeedIterator" />&lt;T&gt;
   - name: 'upsert(unknown, RequestOptions)'
     uid: '@azure/cosmos.Items.upsert'
     package: '@azure/cosmos'
@@ -435,7 +545,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function upsert(body: unknown, options?: RequestOptions)'
+      content: >-
+        function upsert(body: unknown, options?: RequestOptions):
+        Promise<ItemResponse<ItemDefinition>>
       parameters:
         - id: body
           type: unknown
@@ -448,10 +560,10 @@ methods:
             Used for modifying the request (for instance, specifying the
             partition key).
       return:
+        description: ''
         type: >-
           Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;<xref
           uid="@azure/cosmos.ItemDefinition" />&gt;&gt;
-        description: ''
   - name: 'upsert<T>(T, RequestOptions)'
     uid: '@azure/cosmos.Items.upsert_1'
     package: '@azure/cosmos'
@@ -470,7 +582,9 @@ methods:
     isPreview: false
     isDeprecated: false
     syntax:
-      content: 'function upsert<T>(body: T, options?: RequestOptions)'
+      content: >-
+        function upsert<T>(body: T, options?: RequestOptions):
+        Promise<ItemResponse<T>>
       parameters:
         - id: body
           type: T
@@ -483,5 +597,5 @@ methods:
             Used for modifying the request (for instance, specifying the
             partition key).
       return:
-        type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;
         description: ''
+        type: Promise&lt;<xref uid="@azure/cosmos.ItemResponse" />&lt;T&gt;&gt;

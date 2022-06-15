@@ -14,10 +14,18 @@ remarks: ''
 isPreview: false
 isDeprecated: false
 syntax: >-
-  type CallingHandlers = { onCreateLocalStreamView: Object,
-  onCreateRemoteStreamView: Object, onDisposeLocalStreamView: Object,
-  onDisposeRemoteStreamView: Object, onHangUp: Object, onParticipantRemove:
-  Object, onSelectCamera: Object, onSelectMicrophone: Object, onSelectSpeaker:
-  Object, onStartCall: Object, onStartLocalVideo: Object, onStartScreenShare:
-  Object, onStopScreenShare: Object, onToggleCamera: Object, onToggleMicrophone:
-  Object, onToggleScreenShare: Object }
+  type CallingHandlers = { onCreateLocalStreamView: (options?:
+  VideoStreamOptions) => Promise<void>, onCreateRemoteStreamView: (userId:
+  string, options?: VideoStreamOptions) => Promise<void>,
+  onDisposeLocalStreamView: () => Promise<void>, onDisposeRemoteStreamView:
+  (userId: string) => Promise<void>, onHangUp: () => Promise<void>,
+  onRemoveParticipant: (userId: string) => Promise<void>, onSelectCamera:
+  (device: VideoDeviceInfo, options?: VideoStreamOptions) => Promise<void>,
+  onSelectMicrophone: (device: AudioDeviceInfo) => Promise<void>,
+  onSelectSpeaker: (device: AudioDeviceInfo) => Promise<void>, onStartCall:
+  (participants: CommunicationUserIdentifier | PhoneNumberIdentifier |
+  UnknownIdentifier[], options?: StartCallOptions) => Call | undefined,
+  onStartLocalVideo: () => Promise<void>, onStartScreenShare: () =>
+  Promise<void>, onStopScreenShare: () => Promise<void>, onToggleCamera:
+  (options?: VideoStreamOptions) => Promise<void>, onToggleMicrophone: () =>
+  Promise<void>, onToggleScreenShare: () => Promise<void> }

@@ -2,7 +2,10 @@
 name: Identity
 uid: '@azure/arm-policy.Identity'
 package: '@azure/arm-policy'
-summary: Identity for the resource.
+summary: >-
+  Identity for the resource.  Policy assignments support a maximum of one
+  identity.  That is either a system assigned identity or a single user assigned
+  identity.
 fullName: Identity
 remarks: ''
 isPreview: false
@@ -13,7 +16,8 @@ properties:
     uid: '@azure/arm-policy.Identity.principalId'
     package: '@azure/arm-policy'
     summary: >-
-      The principal ID of the resource identity.
+      The principal ID of the resource identity.  This property will only be
+      provided for a system assigned identity
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -24,13 +28,14 @@ properties:
     syntax:
       content: 'principalId?: undefined | string'
       return:
-        type: undefined | string
         description: ''
+        type: undefined | string
   - name: tenantId
     uid: '@azure/arm-policy.Identity.tenantId'
     package: '@azure/arm-policy'
     summary: >-
-      The tenant ID of the resource identity.
+      The tenant ID of the resource identity.  This property will only be
+      provided for a system assigned identity
 
       NOTE: This property will not be serialized. It can only be populated by
       the server.
@@ -41,14 +46,14 @@ properties:
     syntax:
       content: 'tenantId?: undefined | string'
       return:
-        type: undefined | string
         description: ''
+        type: undefined | string
   - name: type
     uid: '@azure/arm-policy.Identity.type'
     package: '@azure/arm-policy'
     summary: >-
-      The identity type. This is the only required field when adding a system
-      assigned identity to a resource.
+      The identity type. This is the only required field when adding a system or
+      user assigned identity to a resource.
     fullName: type
     remarks: ''
     isPreview: false
@@ -56,5 +61,25 @@ properties:
     syntax:
       content: 'type?: ResourceIdentityType'
       return:
-        type: <xref uid="@azure/arm-policy.ResourceIdentityType" />
         description: ''
+        type: <xref uid="@azure/arm-policy.ResourceIdentityType" />
+  - name: userAssignedIdentities
+    uid: '@azure/arm-policy.Identity.userAssignedIdentities'
+    package: '@azure/arm-policy'
+    summary: >-
+      The user identity associated with the policy. The user identity dictionary
+      key references will be ARM resource ids in the form:
+      '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+    fullName: userAssignedIdentities
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        userAssignedIdentities?: undefined | [key: string]:
+        UserAssignedIdentitiesValue
+      return:
+        description: ''
+        type: >-
+          undefined | [key: string]: <xref
+          uid="@azure/arm-policy.UserAssignedIdentitiesValue" />

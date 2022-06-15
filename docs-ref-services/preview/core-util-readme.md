@@ -1,8 +1,8 @@
 ---
 title: Azure Core Util client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/core-util, 
-author: maggiepint
-ms.author: magpint
+author: ramya-rao-a
+ms.author: ramyar
 ms.date: 05/07/2021
 ms.topic: reference
 ms.prod: azure

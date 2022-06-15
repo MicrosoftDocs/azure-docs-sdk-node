@@ -5,7 +5,7 @@ author: EmmaZhu
 ms.author: emmazhu
 ms.date: 06/15/2022
 ms.topic: reference
-ms.devlang: JavaScript
+ms.devlang: javascript
 ms.service: storage
 ---
 # Azure Storage Library for JavaScript

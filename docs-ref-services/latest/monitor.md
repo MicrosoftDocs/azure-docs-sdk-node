@@ -5,7 +5,7 @@ author: hectorhdzg
 ms.author: hectorh
 ms.date: 06/15/2022
 ms.topic: reference
-ms.devlang: JavaScript
+ms.devlang: javascript
 ms.service: monitor
 ---
 # Azure Monitor modules for JavaScript

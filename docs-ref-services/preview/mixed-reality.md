@@ -1,17 +1,13 @@
 ---
-title: Azure Mixed Reality Resource Management Modules for JavaScript
-description: Reference for Azure Mixed Reality Resource Management for JavaScript
-author: Xiangyu Luo
-ms.author: xiangyul
-manager: dgriff
-ms.date: 04/16/2019
+title: Azure Mixed Reality SDK for JavaScript
+description: Reference for Azure Mixed Reality SDK for JavaScript
+author: craigktreasure
+ms.author: crtreasu
+ms.date: 06/15/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
-ms.devlang: nodejs
-ms.service: Mixed Reality
+ms.devlang: JavaScript
+ms.service: mixedreality
 ---
-
 # Azure Mixed Reality Resource Management Modules for JavaScript
 
 Microsoft provides a series of Azure services to empower Mixed Reality devices and applications. Currently, such services are provided:

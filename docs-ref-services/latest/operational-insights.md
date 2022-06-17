@@ -1,17 +1,13 @@
 ---
-title: Azure Operational Insights Modules for JavaScript
-description: Reference for Azure Operational Insights Modules for JavaScript
-author: MGoedtel
-ms.author: magoedte
-manager: carmonm
-ms.date: 07/18/2017
+title: Azure Operational Insights SDK for JavaScript
+description: Reference for Azure Operational Insights SDK for JavaScript
+author: xirzec
+ms.author: jeffish
+ms.date: 06/15/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
-ms.devlang: nodejs
-ms.service: Operational Insights
+ms.devlang: javascript
+ms.service: operationalinsights
 ---
-
 # Azure Operational Insights Modules for JavaScript
 
 Use npm to install the Azure Operational Insights module for JavaScript

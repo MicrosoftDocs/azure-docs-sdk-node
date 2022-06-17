@@ -1471,13 +1471,12 @@ inheritedMethods:
     uid: '@azure/storage-blob-changefeed.LazyLoadingBlobStream.read'
     package: '@azure/storage-blob-changefeed'
     summary: >-
-      The `readable.read()` method pulls some data out of the internal buffer
-      and
+      The `readable.read()` method reads data out of the internal buffer and
 
-      returns it. If no data available to be read, `null` is returned. By
+      returns it. If no data is available to be read, `null` is returned. By
       default,
 
-      the data will be returned as a `Buffer` object unless an encoding has been
+      the data is returned as a `Buffer` object unless an encoding has been
 
       specified using the `readable.setEncoding()` method or the stream is
       operating
@@ -2033,7 +2032,7 @@ inheritedMethods:
           let chunk;
           while (null !== (chunk = stream.read())) {
             const str = decoder.write(chunk);
-            if (str.match(/\n\n/)) {
+            if (str.includes('\n\n')) {
               // Found the header boundary.
               const split = str.split(/\n\n/);
               header += split.shift();
@@ -2046,10 +2045,10 @@ inheritedMethods:
                 stream.unshift(buf);
               // Now the body of the message can be read from the stream.
               callback(null, header, stream);
-            } else {
-              // Still reading the header.
-              header += str;
+              return;
             }
+            // Still reading the header.
+            header += str;
           }
         }
       }

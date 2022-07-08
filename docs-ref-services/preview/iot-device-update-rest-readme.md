@@ -1,16 +1,14 @@
 ---
 title: Azure Device Update for IoT Hub Rest Client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/iot-device-update, deviceupdate
-author: ramya-rao-a
-ms.author: ramya-rao-a
-ms.date: 01/21/2022
+author: xirzec
+ms.author: jeffish
+ms.date: 07/08/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: deviceupdate
 ---
-# Azure Device Update for IoT Hub Rest Client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Device Update for IoT Hub Rest Client library for JavaScript - Version 1.0.0-beta.2 
 
 
 The library provides access to the Device Update for IoT Hub service that enables customers to publish updates for their IoT devices to the cloud, and then deploy these updates to their devices (approve updates to groups of devices managed and provisioned in IoT Hub).
@@ -111,13 +109,13 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/iot-device-update_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/iot-device-update_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -125,14 +123,14 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fdeviceupdate%2Fiot-device-update%2FREADME.png)
 
-[device_update_product_documentation]: https://docs.microsoft.com/azure/iot-hub-device-update/
-[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/iot-device-update_1.0.0-beta.1/documentation/rest-clients.md
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0-beta.1/sdk/deviceupdate/iot-device-update-rest
+[device_update_product_documentation]: /azure/iot-hub-device-update/
+[rest_client]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/iot-device-update_1.0.0-beta.2/documentation/rest-clients.md
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0-beta.2/sdk/deviceupdate/iot-device-update-rest
 [npm]: https://www.npmjs.com/org/azure-rest
 [ref_docs]: https://azure.github.io/azure-sdk-for-js
 [azure_subscription]: https://azure.microsoft.com/free/
-[authenticate_with_token]: https://docs.microsoft.com/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-an-authentication-token
-[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0-beta.1/sdk/identity/identity#credentials
+[authenticate_with_token]: /azure/cognitive-services/authentication?tabs=powershell#authenticate-with-an-authentication-token
+[azure_identity_credentials]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0-beta.2/sdk/identity/identity#credentials
 [azure_identity_npm]: https://www.npmjs.com/package/@azure/identity
-[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[default_azure_credential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/iot-device-update_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

@@ -87,10 +87,22 @@ constructors:
             />
           description: |
             PipelineOptions
+inheritedProperties:
+  - name: pipeline
+    uid: '@azure/service-bus.ServiceBusAdministrationClient.pipeline'
+    package: '@azure/service-bus'
+    summary: The pipeline used by this client to make requests
+    fullName: pipeline
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'pipeline: Pipeline'
+      return:
+        description: ''
+        type: Pipeline
 inheritedMethods:
-  - name: >-
-      sendOperationRequest(OperationArguments, OperationSpec,
-      ServiceCallback<any>)
+  - name: 'sendOperationRequest<T>(OperationArguments, OperationSpec)'
     uid: '@azure/service-bus.ServiceBusAdministrationClient.sendOperationRequest'
     package: '@azure/service-bus'
     summary: Send an HTTP request that is populated using the provided OperationSpec.
@@ -99,9 +111,8 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendOperationRequest(operationArguments: OperationArguments,
-        operationSpec: OperationSpec, callback?: ServiceCallback<any>):
-        Promise<RestResponse>
+        function sendOperationRequest<T>(operationArguments: OperationArguments,
+        operationSpec: OperationSpec): Promise<T>
       parameters:
         - id: operationArguments
           type: OperationArguments
@@ -110,15 +121,12 @@ inheritedMethods:
             populated from.
         - id: operationSpec
           type: OperationSpec
-          description: The OperationSpec to use to populate the httpRequest.
-        - id: callback
-          type: ServiceCallback&lt;any&gt;
           description: |
-            The callback to call when the response is received.
+            The OperationSpec to use to populate the httpRequest.
       return:
         description: ''
-        type: Promise&lt;RestResponse&gt;
-  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
+        type: Promise&lt;T&gt;
+  - name: sendRequest(PipelineRequest)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.sendRequest'
     package: '@azure/service-bus'
     summary: Send the provided httpRequest.
@@ -127,15 +135,15 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendRequest(options: RequestPrepareOptions | WebResourceLike):
-        Promise<HttpOperationResponse>
+        function sendRequest(request: PipelineRequest):
+        Promise<PipelineResponse>
       parameters:
-        - id: options
-          type: RequestPrepareOptions | WebResourceLike
+        - id: request
+          type: PipelineRequest
           description: ''
       return:
         description: ''
-        type: Promise&lt;HttpOperationResponse&gt;
+        type: Promise&lt;PipelineResponse&gt;
 methods:
   - name: 'createQueue(string, CreateQueueOptions)'
     uid: '@azure/service-bus.ServiceBusAdministrationClient.createQueue'

@@ -19,7 +19,7 @@ constructors:
     syntax:
       content: >-
         new CertificateClient(vaultUrl: string, credential: TokenCredential,
-        pipelineOptions?: CertificateClientOptions)
+        clientOptions?: CertificateClientOptions)
       parameters:
         - id: vaultUrl
           type: string
@@ -30,7 +30,7 @@ constructors:
             An object that implements the `TokenCredential` interface used to
             authenticate requests to the service. Use the \@azure/identity
             package to create a credential that suits your needs.
-        - id: pipelineOptions
+        - id: clientOptions
           type: <xref uid="@azure/keyvault-certificates.CertificateClientOptions" />
           description: |
             Pipeline options used to configure Key Vault API requests.
@@ -1430,6 +1430,11 @@ methods:
         subject: "cn=MyCert"
       });
 
+
+      // You may pass an empty string for version which will update
+
+      // the latest version of the certificate
+
       await client.updateCertificateProperties("MyCertificate", "", {
         tags: {
           customTag: "value"
@@ -1453,7 +1458,9 @@ methods:
           description: The name of the certificate
         - id: version
           type: string
-          description: The version of the certificate to update
+          description: >-
+            The version of the certificate to update (an empty string will
+            update the latest version)
         - id: options
           type: <xref uid="@azure/keyvault-certificates.UpdateCertificateOptions" />
           description: |

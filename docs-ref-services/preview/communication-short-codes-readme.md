@@ -3,14 +3,12 @@ title: Azure Communication Short Codes client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-tools/communication-short-codes, communication
 author: petrsvihlik
 ms.author: petrsvihlik
-ms.date: 04/01/2022
+ms.date: 07/12/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Short Codes client library for JavaScript - Version 1.0.0-beta.2 
+# Azure Communication Short Codes client library for JavaScript - Version 1.0.0-beta.3 
 
 
 The phone numbers library provides capabilities for short codes administration.
@@ -20,7 +18,7 @@ The phone numbers library provides capabilities for short codes administration.
 ### Prerequisites
 
 - An [Azure subscription][azure_sub].
-- An existing Communication Services resource. If you need to create the resource, you can use the [Azure Portal][azure_portal], the[Azure PowerShell][azure_powershell], or the [Azure CLI][azure_cli].
+- An existing Communication Services resource. If you need to create the resource, you can use the [Azure Portal][azure_portal], the [Azure PowerShell][azure_powershell], or the [Azure CLI][azure_cli].
 
 ### Installing
 
@@ -298,24 +296,24 @@ main();
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.2/sdk/communication/communication-short-codes/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.3/sdk/communication/communication-short-codes/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_powershell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-short-codes_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-short-codes_1.0.0-beta.2/sdk/identity/identity
-[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.2/sdk/identity/identity/README.md
+[azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-short-codes_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-short-codes_1.0.0-beta.3/sdk/identity/identity
+[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.3/sdk/identity/identity/README.md
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-phone-numbers%2FREADME.png)
 

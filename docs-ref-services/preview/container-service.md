@@ -1,12 +1,13 @@
 ---
+ms.devlang: javascript
+ms.data: 07/20/2022
 title: Azure Container Service SDK for JavaScript
 description: Reference for Azure Container Service SDK for JavaScript
-author: xirzec
-ms.author: jeffish
-ms.date: 06/15/2022
 ms.topic: reference
-ms.devlang: JavaScript
 ms.service: containerservice
+ms.author: jeffish
+author: xirzec
+ms.date: 06/15/2022
 ---
 # Microsoft Azure SDK for JavaScript - ContainerServiceClient
 This project provides a JavaScript package for accessing Azure. Right now it supports:
@@ -24,4 +25,3 @@ npm install @azure/arm-containerservice
 ## Samples
 
 * Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-containerservice)
-

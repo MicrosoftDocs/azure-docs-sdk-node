@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: synapseanalytics
 ---
 
-## Azure Synapse Access Control client library for JavaScript - Version 1.0.0-beta.3 
+## Azure Synapse Access Control client library for JavaScript - version 1.0.0-beta.3 
 
 
 This package contains an isomorphic SDK for Access Control.

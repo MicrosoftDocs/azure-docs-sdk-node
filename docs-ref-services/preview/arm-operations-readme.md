@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: operationsmanagement
 ---
-# Azure OperationsManagement client library for JavaScript - Version 4.0.0-beta.3 
+# Azure OperationsManagement client library for JavaScript - version 4.0.0-beta.3 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure OperationsManagement client.

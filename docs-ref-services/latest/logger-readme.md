@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: core
 ---
 
-# Azure Logger client library for JavaScript - Version 1.0.3 
+# Azure Logger client library for JavaScript - version 1.0.3 
 
 
 The `@azure/logger` package can be used to enable logging in the Azure SDKs for JavaScript.

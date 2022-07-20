@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: mysql
 ---
 
-# Azure MySQLManagement client library for JavaScript - Version 5.0.0-beta.1 
+# Azure MySQLManagement client library for JavaScript - version 5.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure MySQLManagement client.

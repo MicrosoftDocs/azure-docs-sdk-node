@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Communication Identity client library for JavaScript - Version 1.0.0 
+# Azure Communication Identity client library for JavaScript - version 1.0.0 
 
 
 The identity library is used for managing users and tokens for Azure Communication Services.

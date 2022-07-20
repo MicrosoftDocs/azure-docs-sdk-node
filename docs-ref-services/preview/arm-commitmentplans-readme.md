@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: machinelearning
 ---
-# Azure ML Commitment Plans Management client library for JavaScript - Version 2.0.0-beta.2 
+# Azure ML Commitment Plans Management client library for JavaScript - version 2.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ML Commitment Plans Management client.

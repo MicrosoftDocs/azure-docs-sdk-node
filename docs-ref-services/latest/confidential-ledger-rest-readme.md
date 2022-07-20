@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: confidentialledger
 ---
-# Azure Confidential Ledger REST client library for JavaScript - Version 1.0.0 
+# Azure Confidential Ledger REST client library for JavaScript - version 1.0.0 
 
 
 Azure Confidential Ledger provides a service for logging to an immutable, tamper-proof ledger. As part of the [Azure Confidential Computing][azure_confidential_computing]

@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: applicationinsights
 ---
-# Azure ApplicationInsightsManagement client library for JavaScript - Version 5.0.0-beta.4 
+# Azure ApplicationInsightsManagement client library for JavaScript - version 5.0.0-beta.4 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ApplicationInsightsManagement client.

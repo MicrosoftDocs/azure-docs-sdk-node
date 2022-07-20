@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: hanaonazure
 ---
-# Azure HanaManagement client library for JavaScript - Version 4.0.0-beta.2 
+# Azure HanaManagement client library for JavaScript - version 4.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure HanaManagement client.

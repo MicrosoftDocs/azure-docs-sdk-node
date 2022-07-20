@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: search
 ---
-# Azure Cognitive Search client library for JavaScript - Version 11.3.0-beta.7 
+# Azure Cognitive Search client library for JavaScript - version 11.3.0-beta.7 
 
 
 [Azure Cognitive Search](https://docs.microsoft.com/azure/search/) is a search-as-a-service cloud solution that gives developers APIs and tools for adding a rich search experience over private, heterogeneous content in web, mobile, and enterprise applications.

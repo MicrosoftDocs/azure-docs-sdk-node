@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: schemaregistry
 ---
-# Azure Schema Registry Avro Serializer client library for JavaScript - Version 1.0.0-beta.8 
+# Azure Schema Registry Avro Serializer client library for JavaScript - version 1.0.0-beta.8 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,

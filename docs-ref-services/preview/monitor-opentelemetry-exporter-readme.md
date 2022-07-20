@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor OpenTelemetry Exporter client library for JavaScript - Version 1.0.0-beta.8 
+# Azure Monitor OpenTelemetry Exporter client library for JavaScript - version 1.0.0-beta.8 
 
 
 [![npm version](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter.svg)](https://badge.fury.io/js/%40azure%2Fmonitor-opentelemetry-exporter)

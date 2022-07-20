@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: operationalinsights
 ---
-# Azure OperationalInsightsManagement client library for JavaScript - Version 9.0.0-beta.1 
+# Azure OperationalInsightsManagement client library for JavaScript - version 9.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure OperationalInsightsManagement client.

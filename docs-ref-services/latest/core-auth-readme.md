@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: core
 ---
 
-# Azure Core Authentication client library for JavaScript - Version 1.3.2 
+# Azure Core Authentication client library for JavaScript - version 1.3.2 
 
 
 The `@azure/core-auth` package provides core interfaces and helper methods for authenticating with Azure services using Azure Active Directory and other authentication schemes common across the Azure SDK. As a "core" library, it shouldn't need to be added as a dependency to any user code, only other Azure SDK libraries.

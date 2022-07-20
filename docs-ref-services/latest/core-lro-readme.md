@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: other
 ---
-# Azure Core LRO client library for JavaScript - Version 2.2.4 
+# Azure Core LRO client library for JavaScript - version 2.2.4 
 
 
 `@azure/core-lro` is a JavaScript library that manages long running operations (LROs) against Azure services. Until completion, such operations require consecutive calls to Azure services to update a local representation of the remote operation status.

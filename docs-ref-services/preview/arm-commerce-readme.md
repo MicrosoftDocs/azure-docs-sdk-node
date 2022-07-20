@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: commerce
 ---
-# Azure UsageManagement client library for JavaScript - Version 4.0.0-beta.2 
+# Azure UsageManagement client library for JavaScript - version 4.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure UsageManagement client.

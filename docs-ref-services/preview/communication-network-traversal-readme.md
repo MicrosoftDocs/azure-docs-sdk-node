@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Network Traversal client library for JavaScript - Version 1.1.0-beta.1 
+# Azure Communication Network Traversal client library for JavaScript - version 1.1.0-beta.1 
 
 
 Azure Communication Network Traversal is managing tokens for Azure Communication Services. 

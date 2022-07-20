@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: servicefabricmesh
 ---
-# Azure ServiceFabricMeshManagement client library for JavaScript - Version 3.0.0-beta.3 
+# Azure ServiceFabricMeshManagement client library for JavaScript - version 3.0.0-beta.3 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ServiceFabricMeshManagement client.

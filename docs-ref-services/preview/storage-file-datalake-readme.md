@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
 ---
-# Azure Storage File Data Lake client library for JavaScript - Version 12.10.0-beta.1 
+# Azure Storage File Data Lake client library for JavaScript - version 12.10.0-beta.1 
 
 
 Azure Data Lake Storage (ADLS) includes all the capabilities required to make it easy for developers, data scientists, and analysts to store data of any size, shape, and speed, and do all types of processing and analytics across platforms and languages. It removes the complexities of ingesting and storing all of your data while making it faster to get up and running with batch, streaming, and interactive analytics.

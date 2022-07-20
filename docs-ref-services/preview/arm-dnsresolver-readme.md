@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: dnsresolver
 ---
-# Azure DnsResolverManagement client library for JavaScript - Version 1.0.0-beta.3 
+# Azure DnsResolverManagement client library for JavaScript - version 1.0.0-beta.3 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure DnsResolverManagement client.

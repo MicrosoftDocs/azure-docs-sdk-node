@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: resourceconnector
 ---
-# Azure ResourceConnectorManagement client library for JavaScript - Version 1.0.0-beta.1 
+# Azure ResourceConnectorManagement client library for JavaScript - version 1.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ResourceConnectorManagement client.

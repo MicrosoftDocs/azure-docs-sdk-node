@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: search
 ---
 
-# Azure SearchManagement client library for JavaScript - Version 3.0.0-beta.1 
+# Azure SearchManagement client library for JavaScript - version 3.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure SearchManagement client.

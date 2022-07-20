@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: marketplaceordering
 ---
-# Azure MarketplaceOrderingAgreements client library for JavaScript - Version 3.1.0 
+# Azure MarketplaceOrderingAgreements client library for JavaScript - version 3.1.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure MarketplaceOrderingAgreements client.

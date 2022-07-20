@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: features
 ---
-# Azure Feature client library for JavaScript - Version 3.0.1 
+# Azure Feature client library for JavaScript - version 3.0.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Feature client.

@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: mixedreality
 ---
 
-# Azure Mixed Reality Authentication client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Mixed Reality Authentication client library for JavaScript - version 1.0.0-beta.1 
 
 
 Mixed Reality services, like Azure Spatial Anchors, Azure Remote Rendering, and others, use the Mixed Reality security

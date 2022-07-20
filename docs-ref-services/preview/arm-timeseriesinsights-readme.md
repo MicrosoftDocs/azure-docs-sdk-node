@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: timeseriesinsights
 ---
-# Azure TimeSeriesInsights client library for JavaScript - Version 2.1.0-beta.1 
+# Azure TimeSeriesInsights client library for JavaScript - version 2.1.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure TimeSeriesInsights client.

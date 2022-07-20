@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: devspaces
 ---
-# Azure DevSpacesManagement client library for JavaScript - Version 2.0.0 
+# Azure DevSpacesManagement client library for JavaScript - version 2.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure DevSpacesManagement client.

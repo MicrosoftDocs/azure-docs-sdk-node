@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: metricsadvisor
 ---
 
-# Azure Metrics Advisor client library for JavaScript - Version 1.0.0 
+# Azure Metrics Advisor client library for JavaScript - version 1.0.0 
 
 
 Metrics Advisor is a part of Azure Cognitive Services that uses AI perform data monitoring and anomaly detection in time series data. The service automates the process of applying models to your data, and provides a set of APIs web-based workspace for data ingestion, anomaly detection, and diagnostics - without needing to know machine learning. Use Metrics Advisor to:

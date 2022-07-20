@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: core
 ---
-# Azure Abort Controller client library for JavaScript - Version 1.1.0 
+# Azure Abort Controller client library for JavaScript - version 1.1.0 
 
 
 The `@azure/abort-controller` package provides `AbortController` and `AbortSignal` classes. These classes are compatible

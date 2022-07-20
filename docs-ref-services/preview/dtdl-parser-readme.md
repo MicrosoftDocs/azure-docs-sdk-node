@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: digitaltwins
 ---
-# Azure Model Parser client library for JavaScript - Version 1.0.0-beta.2 
+# Azure Model Parser client library for JavaScript - version 1.0.0-beta.2 
 
 
 Use this library to parse your DTDL models and validate their structure conforms to the DTDL specification.

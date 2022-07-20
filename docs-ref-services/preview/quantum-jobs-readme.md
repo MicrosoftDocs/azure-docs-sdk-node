@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-## Azure Quantum Jobs client library for JavaScript - Version 1.0.0-beta.1 
+## Azure Quantum Jobs client library for JavaScript - version 1.0.0-beta.1 
 
 
 This package contains an isomorphic SDK for QuantumJobClient.

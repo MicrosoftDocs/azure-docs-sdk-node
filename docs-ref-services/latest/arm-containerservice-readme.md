@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: containerservice
 ---
-# Azure ContainerService client library for JavaScript - Version 16.1.0 
+# Azure ContainerService client library for JavaScript - version 16.1.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ContainerService client.

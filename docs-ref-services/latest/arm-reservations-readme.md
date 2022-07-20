@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: reservations
 ---
-# Azure Service client library for JavaScript - Version 7.1.0 
+# Azure Service client library for JavaScript - version 7.1.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Service client.

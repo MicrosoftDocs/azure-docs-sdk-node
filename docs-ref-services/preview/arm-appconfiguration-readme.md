@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: appconfiguration
 ---
-# Azure AppConfigurationManagement client library for JavaScript - Version 3.0.0-beta.4 
+# Azure AppConfigurationManagement client library for JavaScript - version 3.0.0-beta.4 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure AppConfigurationManagement client.

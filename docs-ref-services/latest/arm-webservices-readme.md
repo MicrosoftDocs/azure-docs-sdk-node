@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: machinelearning
 ---
-# Azure ML Web Services Management client library for JavaScript - Version 1.0.1 
+# Azure ML Web Services Management client library for JavaScript - version 1.0.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ML Web Services Management client.

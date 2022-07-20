@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Communication Phone Numbers client library for JavaScript - Version 1.0.0 
+# Azure Communication Phone Numbers client library for JavaScript - version 1.0.0 
 
 
 The phone numbers library provides capabilities for phone number administration.

@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: containerinstance
 ---
-# Azure ContainerInstanceManagement client library for JavaScript - Version 8.2.0 
+# Azure ContainerInstanceManagement client library for JavaScript - version 8.2.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ContainerInstanceManagement client.

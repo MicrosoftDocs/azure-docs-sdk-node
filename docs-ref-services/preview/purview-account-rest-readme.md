@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: purview
 ---
 
-# Azure Purview Account REST client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Purview Account REST client library for JavaScript - version 1.0.0-beta.1 
 
 
 Azure Purview Account is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Account helps organizations get more value from their existing investments.

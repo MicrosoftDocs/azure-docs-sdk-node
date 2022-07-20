@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Form Recognizer client library for JavaScript - Version 3.0.0 
+# Azure Form Recognizer client library for JavaScript - version 3.0.0 
 
 
 Azure Cognitive Services [Form Recognizer](https://azure.microsoft.com/services/cognitive-services/form-recognizer/) is a cloud service that uses machine learning to recognize text and table data
@@ -63,7 +63,7 @@ az cognitiveservices account create --kind FormRecognizer --resource-group <your
 
 ### Install the `@azure/ai-form-recognizer` package
 
-Install the Azure Form Recognizer client library for JavaScript - Version 3.0.0 
+Install the Azure Form Recognizer client library for JavaScript - version 3.0.0 
  with `npm`:
 
 ```bash

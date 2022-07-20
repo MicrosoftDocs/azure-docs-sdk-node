@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: storage
 ---
 
-# Azure StorageManagement client library for JavaScript - Version 17.0.0-beta.1 
+# Azure StorageManagement client library for JavaScript - version 17.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure StorageManagement client.

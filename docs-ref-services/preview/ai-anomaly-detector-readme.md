@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: anomalydetector
 ---
-# Azure Anomaly Detector client library for JavaScript - Version 3.0.0-beta.5 
+# Azure Anomaly Detector client library for JavaScript - version 3.0.0-beta.5 
 
 
 [Azure AnomalyDetector](https://azure.microsoft.com/services/cognitive-services/anomaly-detector/) API enables you to monitor and detect abnormalities in your time series data with machine learning.

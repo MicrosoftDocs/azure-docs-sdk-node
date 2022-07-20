@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: formrecognizer
 ---
 
-# Azure Form Recognizer client library for JavaScript - Version 3.2.0 
+# Azure Form Recognizer client library for JavaScript - version 3.2.0 
 
 
 Azure Cognitive Services [Form Recognizer](https://azure.microsoft.com/services/cognitive-services/form-recognizer/) uses cloud-based machine learning to extract structured data from form documents. Its features include:

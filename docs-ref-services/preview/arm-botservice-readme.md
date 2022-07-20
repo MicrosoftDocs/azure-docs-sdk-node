@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: botservice
 ---
-# Azure Bot client library for JavaScript - Version 4.0.0-beta.4 
+# Azure Bot client library for JavaScript - version 4.0.0-beta.4 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Bot client.

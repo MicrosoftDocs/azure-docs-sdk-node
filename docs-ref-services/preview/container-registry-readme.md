@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: containerregistry
 ---
-# Azure Container Registry client library for JavaScript - Version 1.1.0-beta.1 
+# Azure Container Registry client library for JavaScript - version 1.1.0-beta.1 
 
 
 Azure Container Registry allows you to store and manage container images and artifacts in a private registry for all types of container deployments.

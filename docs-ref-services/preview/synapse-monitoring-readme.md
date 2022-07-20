@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-## Azure Synapse Monitoring client library for JavaScript - Version 1.0.0-beta.2 
+## Azure Synapse Monitoring client library for JavaScript - version 1.0.0-beta.2 
 
 
 This package contains an isomorphic SDK for Monitoring.

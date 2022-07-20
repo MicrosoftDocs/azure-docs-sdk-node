@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: powerbidedicated
 ---
-# Azure PowerBIDedicated client library for JavaScript - Version 4.0.0 
+# Azure PowerBIDedicated client library for JavaScript - version 4.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure PowerBIDedicated client.

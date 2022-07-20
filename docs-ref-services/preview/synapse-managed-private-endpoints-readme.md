@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: synapseanalytics
 ---
 
-## Azure Synapse Managed Private Endpoints client library for JavaScript - Version 1.0.0-beta.4 
+## Azure Synapse Managed Private Endpoints client library for JavaScript - version 1.0.0-beta.4 
 
 
 This package contains an isomorphic SDK for Managed Private Endpoints.

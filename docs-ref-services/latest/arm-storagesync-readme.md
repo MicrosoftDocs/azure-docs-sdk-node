@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storagesync
 ---
-# Azure Service client library for JavaScript - Version 9.0.1 
+# Azure Service client library for JavaScript - version 9.0.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Service client.

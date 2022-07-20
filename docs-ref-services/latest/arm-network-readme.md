@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: network
 ---
-# Azure NetworkManagement client library for JavaScript - Version 28.0.0 
+# Azure NetworkManagement client library for JavaScript - version 28.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure NetworkManagement client.

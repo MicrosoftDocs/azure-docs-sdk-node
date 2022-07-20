@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: textanalytics
 ---
-# Azure Text Analysis client library for JavaScript - Version 6.0.0-beta.1 
+# Azure Text Analysis client library for JavaScript - version 6.0.0-beta.1 
 
 
 [Azure Cognitive Service for Language](https://azure.microsoft.com/services/cognitive-services/language-service/) is a cloud-based service that provides advanced natural language processing over raw text, and includes the following main features:

@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: postgresql
 ---
 
-# Azure PostgreSQLManagement client library for JavaScript - Version 6.0.0-beta.1 
+# Azure PostgreSQLManagement client library for JavaScript - version 6.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure PostgreSQLManagement client.

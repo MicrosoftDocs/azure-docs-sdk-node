@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: kusto
 ---
-# Azure KustoManagement client library for JavaScript - Version 7.1.2 
+# Azure KustoManagement client library for JavaScript - version 7.1.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure KustoManagement client.

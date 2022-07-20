@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor Query client library for JavaScript - Version 1.0.2 
+# Azure Monitor Query client library for JavaScript - version 1.0.2 
 
 
 The Azure Monitor Query client library is used to execute read-only queries against [Azure Monitor][azure_monitor_overview]'s two data platforms:

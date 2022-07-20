@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: education
 ---
-# Azure EducationManagement client library for JavaScript - Version 1.0.0-beta.2 
+# Azure EducationManagement client library for JavaScript - version 1.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure EducationManagement client.

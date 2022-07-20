@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: vmwarecloudsimple
 ---
-# Azure VMwareCloudSimple client library for JavaScript - Version 3.0.1 
+# Azure VMwareCloudSimple client library for JavaScript - version 3.0.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure VMwareCloudSimple client.

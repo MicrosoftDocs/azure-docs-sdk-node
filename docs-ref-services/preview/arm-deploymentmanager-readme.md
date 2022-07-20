@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: deploymentmanager
 ---
-# Azure Service client library for JavaScript - Version 4.0.0-beta.3 
+# Azure Service client library for JavaScript - version 4.0.0-beta.3 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Service client.

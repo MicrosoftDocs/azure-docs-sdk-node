@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: logic
 ---
 
-# Azure LogicManagement client library for JavaScript - Version 8.0.0-beta.1 
+# Azure LogicManagement client library for JavaScript - version 8.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure LogicManagement client.

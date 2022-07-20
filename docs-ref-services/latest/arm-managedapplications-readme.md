@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: managedapplications
 ---
-# Azure Application client library for JavaScript - Version 2.0.1 
+# Azure Application client library for JavaScript - version 2.0.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Application client.

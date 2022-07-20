@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: datafactory
 ---
 
-# Azure DataFactoryManagement client library for JavaScript - Version 10.0.0-beta.1 
+# Azure DataFactoryManagement client library for JavaScript - version 10.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure DataFactoryManagement client.

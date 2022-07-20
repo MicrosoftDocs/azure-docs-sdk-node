@@ -11,7 +11,7 @@ ms.devlang:
 ms.service: 
 ---
 
-# Azure Service Bus client library for Javascript - Version 7.0.0 
+# Azure Service Bus client library for JavaScript - version 7.0.0 
 
 
 [Azure Service Bus](https://azure.microsoft.com/services/service-bus/) is a highly-reliable cloud messaging service from Microsoft.

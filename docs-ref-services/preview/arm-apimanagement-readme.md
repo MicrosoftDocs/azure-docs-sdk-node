@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: apimanagement
 ---
 
-# Azure ApiManagement client library for JavaScript - Version 8.0.0-beta.2 
+# Azure ApiManagement client library for JavaScript - version 8.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ApiManagement client.

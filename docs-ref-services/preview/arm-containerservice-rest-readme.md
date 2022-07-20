@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: containerservice
 ---
-# Azure ContainerService client library for JavaScript - Version 1.0.0-beta.1 
+# Azure ContainerService client library for JavaScript - version 1.0.0-beta.1 
 
 
 Container Service Client

@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Tables client library for JavaScript - Version 12.0.0-beta.3 
+# Azure Tables client library for JavaScript - version 12.0.0-beta.3 
 
 
 [Azure Tables](https://azure.microsoft.com/services/storage/tables/) is a cloud-based service that stores structured NoSQL data, providing a key/attribute store with a schemaless design. Tables storage gives developers flexibility and scalability with all the best parts of Azure cloud.

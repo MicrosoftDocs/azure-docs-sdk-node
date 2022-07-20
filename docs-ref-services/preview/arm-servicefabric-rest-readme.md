@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: servicefabric
 ---
-# Azure ServiceFabric client library for JavaScript - Version 1.0.0-beta.1 
+# Azure ServiceFabric client library for JavaScript - version 1.0.0-beta.1 
 
 
 Service Fabric Client

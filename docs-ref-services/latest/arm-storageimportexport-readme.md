@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: storageimportexport
 ---
-# Azure StorageImportExport client library for JavaScript - Version 2.0.2 
+# Azure StorageImportExport client library for JavaScript - version 2.0.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure StorageImportExport client.

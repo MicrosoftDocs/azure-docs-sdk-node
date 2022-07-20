@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: purview
 ---
-# Azure Purview Catalog REST client library for JavaScript - Version 1.0.0-beta.5 
+# Azure Purview Catalog REST client library for JavaScript - version 1.0.0-beta.5 
 
 
 Azure Purview Catalog is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Catalog helps organizations get more value from their existing investments.

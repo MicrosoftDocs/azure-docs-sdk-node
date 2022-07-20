@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: datamigration
 ---
-# Azure DataMigrationManagement client library for JavaScript - Version 3.0.0-beta.2 
+# Azure DataMigrationManagement client library for JavaScript - version 3.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure DataMigrationManagement client.

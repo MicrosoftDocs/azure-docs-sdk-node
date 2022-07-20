@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Core Util client library for JavaScript - Version 1.0.0-beta.1 
+# Azure Core Util client library for JavaScript - version 1.0.0-beta.1 
  (Experimental)
 
 This library is intended to provide various shared utility functions for client SDK packages.

@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: recoveryservicessiterecovery
 ---
-# Azure SiteRecoveryManagement client library for JavaScript - Version 4.0.0 
+# Azure SiteRecoveryManagement client library for JavaScript - version 4.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure SiteRecoveryManagement client.

@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: mysql
 ---
-# Azure MySQLManagementFlexibleServer client library for JavaScript - Version 3.0.0 
+# Azure MySQLManagementFlexibleServer client library for JavaScript - version 3.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure MySQLManagementFlexibleServer client.

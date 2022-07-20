@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: compute
 ---
-# Azure ComputeManagement client library for JavaScript - Version 19.1.0 
+# Azure ComputeManagement client library for JavaScript - version 19.1.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ComputeManagement client.

@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: batch
 ---
 
-# Azure BatchManagement client library for JavaScript - Version 7.0.0-beta.1 
+# Azure BatchManagement client library for JavaScript - version 7.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure BatchManagement client.

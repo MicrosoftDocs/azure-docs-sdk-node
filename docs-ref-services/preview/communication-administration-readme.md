@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Communication Administration client library for JavaScript - Version 1.0.0-beta.3 
+# Azure Communication Administration client library for JavaScript - version 1.0.0-beta.3 
 
 
 The administration library is used for managing users and tokens for Azure Communication Services. This library also provides capabilities for phone number administration.

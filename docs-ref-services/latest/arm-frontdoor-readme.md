@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: frontdoor
 ---
-# Azure FrontDoorManagement client library for JavaScript - Version 5.0.1 
+# Azure FrontDoorManagement client library for JavaScript - version 5.0.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure FrontDoorManagement client.

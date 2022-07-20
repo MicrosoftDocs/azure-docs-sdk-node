@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: visualstudio
 ---
-# Azure Visual Studio Resource Provider client library for JavaScript - Version 4.0.0-beta.1 
+# Azure Visual Studio Resource Provider client library for JavaScript - version 4.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Visual Studio Resource Provider client.

@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: privatedns
 ---
-# Azure PrivateDnsManagement client library for JavaScript - Version 3.0.1 
+# Azure PrivateDnsManagement client library for JavaScript - version 3.0.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure PrivateDnsManagement client.

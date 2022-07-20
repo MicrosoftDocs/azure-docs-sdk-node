@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: recoveryservicesbackup
 ---
-# Azure Recovery Services Backup client library for JavaScript - Version 9.0.0 
+# Azure Recovery Services Backup client library for JavaScript - version 9.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Recovery Services Backup client.

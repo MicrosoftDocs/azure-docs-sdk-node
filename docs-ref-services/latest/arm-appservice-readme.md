@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: appservice
 ---
-# Azure WebSiteManagement client library for JavaScript - Version 13.0.0 
+# Azure WebSiteManagement client library for JavaScript - version 13.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure WebSiteManagement client.

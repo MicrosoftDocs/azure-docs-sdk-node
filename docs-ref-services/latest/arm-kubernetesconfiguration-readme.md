@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: kubernetesconfiguration
 ---
-# Azure SourceControlConfiguration client library for JavaScript - Version 5.0.0 
+# Azure SourceControlConfiguration client library for JavaScript - version 5.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure SourceControlConfiguration client.

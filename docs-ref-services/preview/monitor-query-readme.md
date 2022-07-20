@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: monitor
 ---
 
-# Azure Monitor Workspace query client library for JavaScript - Version 1.0.0-beta.5 
+# Azure Monitor Workspace query client library for JavaScript - version 1.0.0-beta.5 
 
 
 [Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/overview) is a comprehensive solution for collecting, analyzing, and acting on telemetry from your cloud and on-premises environments. This service helps you maximize the availability and performance of your apps.

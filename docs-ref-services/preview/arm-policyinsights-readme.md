@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: policyinsights
 ---
-# Azure PolicyInsights client library for JavaScript - Version 6.0.0-beta.1 
+# Azure PolicyInsights client library for JavaScript - version 6.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure PolicyInsights client.

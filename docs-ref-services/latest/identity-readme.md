@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: identity
 ---
-# Azure Identity client library for JavaScript - Version 2.1.0 
+# Azure Identity client library for JavaScript - version 2.1.0 
 
 
 The Azure Identity library provides [Azure Active Directory (Azure AD)](/azure/active-directory/fundamentals/active-directory-whatis) token authentication through a set of convenient [TokenCredential](/javascript/api/@azure/core-auth/tokencredential) implementations.

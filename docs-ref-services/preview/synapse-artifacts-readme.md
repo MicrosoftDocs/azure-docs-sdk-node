@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: synapse
 ---
-## Azure Synapse Artifacts client library for JavaScript - Version 1.0.0-beta.10 
+## Azure Synapse Artifacts client library for JavaScript - version 1.0.0-beta.10 
 
 
 This package contains an isomorphic SDK for Artifacts.

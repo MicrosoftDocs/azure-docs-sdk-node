@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: managementgroups
 ---
-# Azure Service client library for JavaScript - Version 2.0.1 
+# Azure Service client library for JavaScript - version 2.0.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Service client.

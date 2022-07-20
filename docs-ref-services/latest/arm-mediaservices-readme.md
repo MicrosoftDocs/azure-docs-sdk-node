@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: mediaservices
 ---
-# Azure Media client library for JavaScript - Version 12.0.0 
+# Azure Media client library for JavaScript - version 12.0.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Media client.

@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: virtualnetwork
 ---
 
-# Azure NetworkManagement client library for JavaScript - Version 26.0.0-beta.2 
+# Azure NetworkManagement client library for JavaScript - version 26.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure NetworkManagement client.

@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: links
 ---
 
-# Azure ManagementLink client library for JavaScript - Version 2.0.0-beta.1 
+# Azure ManagementLink client library for JavaScript - version 2.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ManagementLink client.

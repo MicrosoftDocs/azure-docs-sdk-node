@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: powerbiembedded
 ---
-# Azure Power BI Embedded Management client library for JavaScript - Version 2.0.1 
+# Azure Power BI Embedded Management client library for JavaScript - version 2.0.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Power BI Embedded Management client.

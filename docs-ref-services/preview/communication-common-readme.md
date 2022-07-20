@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Communication Common client library for JavaScript - Version 1.0.0-beta.6 
+# Azure Communication Common client library for JavaScript - version 1.0.0-beta.6 
 
 
 This package contains common code for Azure Communication Service libraries.

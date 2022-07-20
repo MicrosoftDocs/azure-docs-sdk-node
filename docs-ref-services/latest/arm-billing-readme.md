@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: billing
 ---
-# Azure BillingManagement client library for JavaScript - Version 4.0.1 
+# Azure BillingManagement client library for JavaScript - version 4.0.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure BillingManagement client.

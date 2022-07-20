@@ -8,7 +8,7 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitiveservices
 ---
-# Azure CognitiveServicesManagement client library for JavaScript - Version 7.2.0 
+# Azure CognitiveServicesManagement client library for JavaScript - version 7.2.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure CognitiveServicesManagement client.

@@ -10,7 +10,7 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: app
 ---
-# Azure ContainerApps API client library for JavaScript - Version 1.0.0-beta.1 
+# Azure ContainerApps API client library for JavaScript - version 1.0.0-beta.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ContainerApps API client.

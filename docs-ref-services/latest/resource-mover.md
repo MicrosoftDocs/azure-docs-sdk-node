@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Resource Mover SDK for JavaScript
-ms.service: resourcemover
-ms.devlang: javascript
 author: xirzec
+ms.service: resourcemover
 ms.topic: reference
+description: Reference for Azure Resource Mover SDK for JavaScript
+ms.devlang: javascript
 title: Azure Resource Mover SDK for JavaScript
-ms.data: 07/21/2022
 ms.author: jeffish
+ms.data: 07/22/2022
 ---
 # Azure Resource Mover SDK for JavaScript - latest
 

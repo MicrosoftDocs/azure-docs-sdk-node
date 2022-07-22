@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Quota SDK for JavaScript
-ms.service: quota
-ms.devlang: javascript
 author: xirzec
+ms.service: quota
 ms.topic: reference
+description: Reference for Azure Quota SDK for JavaScript
+ms.devlang: javascript
 title: Azure Quota SDK for JavaScript
-ms.data: 07/21/2022
 ms.author: jeffish
+ms.data: 07/22/2022
 ---
 # Azure Quota SDK for JavaScript - preview
 

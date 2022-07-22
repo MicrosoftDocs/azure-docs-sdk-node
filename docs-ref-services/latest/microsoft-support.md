@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Microsoft Support SDK for JavaScript
-ms.service: microsoftsupport
-ms.devlang: javascript
 author: xirzec
+ms.service: microsoftsupport
 ms.topic: reference
+description: Reference for Azure Microsoft Support SDK for JavaScript
+ms.devlang: javascript
 title: Azure Microsoft Support SDK for JavaScript
-ms.data: 07/21/2022
 ms.author: jeffish
+ms.data: 07/22/2022
 ---
 # Azure Microsoft Support SDK for JavaScript - latest
 

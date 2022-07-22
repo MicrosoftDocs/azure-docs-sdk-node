@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Application Insights SDK for JavaScript
-ms.service: applicationinsights
-ms.devlang: javascript
 author: xirzec
+ms.service: applicationinsights
 ms.topic: reference
+description: Reference for Azure Application Insights SDK for JavaScript
+ms.devlang: javascript
 title: Azure Application Insights SDK for JavaScript
-ms.data: 07/21/2022
 ms.author: jeffish
+ms.data: 07/22/2022
 ---
 # Azure Application Insights SDK for JavaScript - preview
 

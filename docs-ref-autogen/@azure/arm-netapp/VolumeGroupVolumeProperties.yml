@@ -208,8 +208,9 @@ properties:
     uid: '@azure/arm-netapp.VolumeGroupVolumeProperties.encryptionKeySource'
     package: '@azure/arm-netapp'
     summary: >-
-      Source of key used to encrypt data in volume. Possible values
-      (case-insensitive) are: 'Microsoft.NetApp'
+      Source of key used to encrypt data in volume. Applicable if NetApp account
+      has encryption.keySource = 'Microsoft.KeyVault'. Possible values
+      (case-insensitive) are: 'Microsoft.NetApp, Microsoft.KeyVault'
     fullName: encryptionKeySource
     remarks: ''
     isPreview: false
@@ -307,6 +308,23 @@ properties:
       return:
         description: ''
         type: undefined | false | true
+  - name: keyVaultPrivateEndpointResourceId
+    uid: >-
+      @azure/arm-netapp.VolumeGroupVolumeProperties.keyVaultPrivateEndpointResourceId
+    package: '@azure/arm-netapp'
+    summary: >-
+      The resource ID of private endpoint for KeyVault. It must reside in the
+      same VNET as the volume. Only applicable if encryptionKeySource =
+      'Microsoft.KeyVault'.
+    fullName: keyVaultPrivateEndpointResourceId
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'keyVaultPrivateEndpointResourceId?: undefined | string'
+      return:
+        description: ''
+        type: undefined | string
   - name: ldapEnabled
     uid: '@azure/arm-netapp.VolumeGroupVolumeProperties.ldapEnabled'
     package: '@azure/arm-netapp'
@@ -608,7 +626,7 @@ properties:
     uid: '@azure/arm-netapp.VolumeGroupVolumeProperties.throughputMibps'
     package: '@azure/arm-netapp'
     summary: >-
-      Maximum throughput in Mibps that can be achieved by this volume and this
+      Maximum throughput in MiB/s that can be achieved by this volume and this
       will be accepted as input only for manual qosType volume
     fullName: throughputMibps
     remarks: ''

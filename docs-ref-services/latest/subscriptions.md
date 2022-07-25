@@ -1,12 +1,12 @@
 ---
-author: xirzec
 ms.service: subscriptions
+ms.data: 07/25/2022
 ms.topic: reference
-description: Reference for Azure Subscriptions SDK for JavaScript
 ms.devlang: javascript
-title: Azure Subscriptions SDK for JavaScript
 ms.author: jeffish
-ms.data: 07/22/2022
+author: xirzec
+title: Azure Subscriptions SDK for JavaScript
+description: Reference for Azure Subscriptions SDK for JavaScript
 ---
 # Azure Subscriptions SDK for JavaScript - latest
 

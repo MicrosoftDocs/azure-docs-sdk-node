@@ -1,12 +1,12 @@
 ---
-author: xirzec
 ms.service: workloads
+ms.data: 07/25/2022
 ms.topic: reference
-description: Reference for Azure Workloads SDK for JavaScript
 ms.devlang: javascript
-title: Azure Workloads SDK for JavaScript
 ms.author: jeffish
-ms.data: 07/22/2022
+author: xirzec
+title: Azure Workloads SDK for JavaScript
+description: Reference for Azure Workloads SDK for JavaScript
 ---
 # Azure Workloads SDK for JavaScript - preview
 

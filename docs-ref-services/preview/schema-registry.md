@@ -1,12 +1,12 @@
 ---
-author: deyaaeldeen
 ms.service: schemaregistry
+ms.data: 07/25/2022
 ms.topic: reference
-description: Reference for Azure Schema Registry SDK for JavaScript
 ms.devlang: javascript
-title: Azure Schema Registry SDK for JavaScript
 ms.author: dealmaha
-ms.data: 07/22/2022
+author: deyaaeldeen
+title: Azure Schema Registry SDK for JavaScript
+description: Reference for Azure Schema Registry SDK for JavaScript
 ---
 # Azure Schema Registry SDK for JavaScript - preview
 

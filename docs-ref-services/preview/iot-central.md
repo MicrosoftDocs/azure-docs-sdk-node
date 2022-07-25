@@ -1,12 +1,12 @@
 ---
-author: YoDaMa
 ms.service: iotcentral
+ms.data: 07/25/2022
 ms.topic: reference
-description: Reference for Azure IoT Central SDK for JavaScript
 ms.devlang: javascript
-title: Azure IoT Central SDK for JavaScript
 ms.author: YoDaMa
-ms.data: 07/22/2022
+author: YoDaMa
+title: Azure IoT Central SDK for JavaScript
+description: Reference for Azure IoT Central SDK for JavaScript
 ---
 # Azure IoT Central SDK for JavaScript - preview
 

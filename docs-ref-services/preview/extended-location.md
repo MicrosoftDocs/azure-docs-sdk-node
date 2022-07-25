@@ -1,12 +1,12 @@
 ---
-author: xirzec
 ms.service: extendedlocation
+ms.data: 07/25/2022
 ms.topic: reference
-description: Reference for Azure Extended Location SDK for JavaScript
 ms.devlang: javascript
-title: Azure Extended Location SDK for JavaScript
 ms.author: jeffish
-ms.data: 07/22/2022
+author: xirzec
+title: Azure Extended Location SDK for JavaScript
+description: Reference for Azure Extended Location SDK for JavaScript
 ---
 # Azure Extended Location SDK for JavaScript - preview
 

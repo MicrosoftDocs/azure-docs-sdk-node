@@ -1,12 +1,12 @@
 ---
-author: xirzec
 ms.service: hybridcompute
+ms.data: 07/25/2022
 ms.topic: reference
-description: Reference for Azure Hybrid Compute SDK for JavaScript
 ms.devlang: javascript
-title: Azure Hybrid Compute SDK for JavaScript
 ms.author: jeffish
-ms.data: 07/22/2022
+author: xirzec
+title: Azure Hybrid Compute SDK for JavaScript
+description: Reference for Azure Hybrid Compute SDK for JavaScript
 ---
 # Azure Hybrid Compute SDK for JavaScript - latest
 

@@ -1,12 +1,12 @@
 ---
-ms.service: orbital
-ms.data: 07/25/2022
-ms.topic: reference
-ms.devlang: javascript
-ms.author: jeffish
-author: xirzec
-title: Azure Orbital SDK for JavaScript
 description: Reference for Azure Orbital SDK for JavaScript
+author: xirzec
+ms.data: 07/26/2022
+ms.author: jeffish
+ms.devlang: javascript
+ms.topic: reference
+title: Azure Orbital SDK for JavaScript
+ms.service: orbital
 ---
 # Azure Orbital SDK for JavaScript - latest
 

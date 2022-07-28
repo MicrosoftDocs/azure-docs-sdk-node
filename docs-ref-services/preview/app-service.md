@@ -1,12 +1,12 @@
 ---
 ms.service: appservice
+ms.data: 07/28/2022
+ms.author: jeffish
 ms.devlang: javascript
 title: Azure App Service SDK for JavaScript
-ms.topic: reference
-ms.author: jeffish
 author: xirzec
 description: Reference for Azure App Service SDK for JavaScript
-ms.data: 07/27/2022
+ms.topic: reference
 ms.date: 06/15/2022
 ---
 # Azure App Service modules for JavaScript

@@ -1,12 +1,12 @@
 ---
 ms.service: appconfiguration
+ms.data: 07/28/2022
+ms.author: sanallur
 ms.devlang: javascript
 title: Azure App Configuration SDK for JavaScript
-ms.topic: reference
-ms.author: sanallur
 author: HarshaNalluru
 description: Reference for Azure App Configuration SDK for JavaScript
-ms.data: 07/27/2022
+ms.topic: reference
 ---
 # Azure App Configuration SDK for JavaScript - latest
 

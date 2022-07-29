@@ -1,12 +1,12 @@
 ---
 ms.service: digitaltwins
-ms.data: 07/28/2022
-ms.author: jgalla
 ms.devlang: javascript
-title: Azure Digital Twins SDK for JavaScript
-author: johngallardo
 description: Reference for Azure Digital Twins SDK for JavaScript
+ms.author: jgalla
+ms.data: 07/29/2022
+title: Azure Digital Twins SDK for JavaScript
 ms.topic: reference
+author: johngallardo
 ---
 # Azure Digital Twins SDK for JavaScript - latest
 

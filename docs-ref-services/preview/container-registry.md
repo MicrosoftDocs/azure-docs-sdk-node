@@ -1,12 +1,12 @@
 ---
-ms.service: containerregistry
-ms.data: 08/01/2022
-ms.devlang: javascript
 author: jeremymeng
-description: Reference for Azure Container Registry SDK for JavaScript
 title: Azure Container Registry SDK for JavaScript
-ms.topic: reference
+description: Reference for Azure Container Registry SDK for JavaScript
+ms.data: 08/02/2022
 ms.author: yumeng
+ms.devlang: javascript
+ms.service: containerregistry
+ms.topic: reference
 ms.date: 06/15/2022
 ---
 # Azure Container Registry modules for JavaScript

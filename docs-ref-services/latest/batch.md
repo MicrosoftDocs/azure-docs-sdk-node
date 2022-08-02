@@ -1,12 +1,12 @@
 ---
-ms.service: batch
-ms.data: 08/01/2022
-ms.devlang: javascript
 author: dpwatrous
-description: Reference for Azure Batch SDK for JavaScript
 title: Azure Batch SDK for JavaScript
-ms.topic: reference
+description: Reference for Azure Batch SDK for JavaScript
+ms.data: 08/02/2022
 ms.author: dawatrou
+ms.devlang: javascript
+ms.service: batch
+ms.topic: reference
 ---
 # Azure Batch SDK for JavaScript - latest
 

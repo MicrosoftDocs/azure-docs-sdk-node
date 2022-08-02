@@ -1,12 +1,12 @@
 ---
-ms.service: webpubsub
-ms.data: 08/01/2022
-ms.devlang: javascript
 author: xirzec
-description: Reference for Azure Web PubSub SDK for JavaScript
 title: Azure Web PubSub SDK for JavaScript
-ms.topic: reference
+description: Reference for Azure Web PubSub SDK for JavaScript
+ms.data: 08/02/2022
 ms.author: jeffish
+ms.devlang: javascript
+ms.service: webpubsub
+ms.topic: reference
 ---
 # Azure Web PubSub SDK for JavaScript - preview
 

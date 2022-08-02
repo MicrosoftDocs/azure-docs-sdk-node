@@ -1,12 +1,12 @@
 ---
-ms.service: datacatalog
-ms.data: 08/01/2022
-ms.devlang: javascript
 author: xirzec
-description: Reference for Azure Data Catalog SDK for JavaScript
 title: Azure Data Catalog SDK for JavaScript
-ms.topic: reference
+description: Reference for Azure Data Catalog SDK for JavaScript
+ms.data: 08/02/2022
 ms.author: jeffish
+ms.devlang: javascript
+ms.service: datacatalog
+ms.topic: reference
 ---
 # Azure Data Catalog SDK for JavaScript - latest
 

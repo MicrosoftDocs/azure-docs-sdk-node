@@ -1,12 +1,12 @@
 ---
-ms.service: formrecognizer
-ms.data: 08/01/2022
-ms.devlang: javascript
 author: witemple-msft
-description: Reference for Azure Form Recognizer SDK for JavaScript
 title: Azure Form Recognizer SDK for JavaScript
-ms.topic: reference
+description: Reference for Azure Form Recognizer SDK for JavaScript
+ms.data: 08/02/2022
 ms.author: witemple
+ms.devlang: javascript
+ms.service: formrecognizer
+ms.topic: reference
 ---
 # Azure Form Recognizer SDK for JavaScript - preview
 

@@ -1,12 +1,12 @@
 ---
-ms.service: network
-ms.data: 08/01/2022
-ms.devlang: javascript
 author: xirzec
-description: Reference for Azure Network SDK for JavaScript
 title: Azure Network SDK for JavaScript
-ms.topic: reference
+description: Reference for Azure Network SDK for JavaScript
+ms.data: 08/02/2022
 ms.author: jeffish
+ms.devlang: javascript
+ms.service: network
+ms.topic: reference
 ---
 # Azure Network SDK for JavaScript - preview
 

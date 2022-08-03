@@ -1,16 +1,14 @@
 ---
 title: Azure Communication Common client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-common, communication
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 03/08/2022
+author: petrsvihlik
+ms.author: petrsvihlik
+ms.date: 08/03/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Common client library for JavaScript - version 2.0.0 
+# Azure Communication Common client library for JavaScript - version 2.1.0 
 
 
 This package contains common code for Azure Communication Service libraries.
@@ -101,22 +99,22 @@ const tokenCredential = new AzureCommunicationTokenCredential({
 
 ## Next steps
 
-- [Read more about Communication user access tokens](https://docs.microsoft.com/azure/communication-services/concepts/authentication?tabs=javascript)
+- [Read more about Communication user access tokens](/azure/communication-services/concepts/authentication?tabs=javascript)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_2.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-common_2.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_powershell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[invalid_token_sdk]: https://docs.microsoft.com/javascript/api/@azure/communication-identity/communicationaccesstoken#@azure-communication-identity-communicationaccesstoken-token
-[invalid_token_rest]: https://docs.microsoft.com/rest/api/communication/communicationidentity/communication-identity/issue-access-token#communicationidentityaccesstoken
+[azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
+[invalid_token_sdk]: /javascript/api/@azure/communication-identity/communicationaccesstoken#@azure-communication-identity-communicationaccesstoken-token
+[invalid_token_rest]: /rest/api/communication/communication-identity/issue-access-token#communicationidentityaccesstoken
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-sms%2FREADME.png)
 

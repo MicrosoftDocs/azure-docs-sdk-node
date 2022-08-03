@@ -1,12 +1,12 @@
 ---
-author: xirzec
 title: Azure Mobilenetwork SDK for JavaScript
-description: Reference for Azure Mobilenetwork SDK for JavaScript
-ms.data: 08/02/2022
 ms.author: jeffish
-ms.devlang: javascript
-ms.service: mobilenetwork
 ms.topic: reference
+description: Reference for Azure Mobilenetwork SDK for JavaScript
+author: xirzec
+ms.service: mobilenetwork
+ms.data: 08/03/2022
+ms.devlang: javascript
 ---
 # Azure Mobilenetwork SDK for JavaScript - preview
 

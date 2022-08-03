@@ -1,12 +1,12 @@
 ---
-author: xirzec
 title: Azure Data Box SDK for JavaScript
-description: Reference for Azure Data Box SDK for JavaScript
-ms.data: 08/02/2022
 ms.author: jeffish
-ms.devlang: javascript
-ms.service: databox
 ms.topic: reference
+description: Reference for Azure Data Box SDK for JavaScript
+author: xirzec
+ms.service: databox
+ms.data: 08/03/2022
+ms.devlang: javascript
 ---
 # Azure Data Box SDK for JavaScript - preview
 

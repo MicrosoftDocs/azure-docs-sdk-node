@@ -1,12 +1,12 @@
 ---
-title: Azure IoT Hub SDK for JavaScript
-ms.author: jeffish
 ms.topic: reference
-description: Reference for Azure IoT Hub SDK for JavaScript
-author: xirzec
-ms.service: iothub
-ms.data: 08/03/2022
 ms.devlang: javascript
+title: Azure IoT Hub SDK for JavaScript
+ms.data: 08/04/2022
+author: xirzec
+description: Reference for Azure IoT Hub SDK for JavaScript
+ms.service: iothub
+ms.author: jeffish
 ms.date: 06/15/2022
 ---
 # Azure IoT Hub modules for JavaScript

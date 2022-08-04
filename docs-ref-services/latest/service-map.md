@@ -1,12 +1,12 @@
 ---
-title: Azure Service Map SDK for JavaScript
-ms.author: jeffish
 ms.topic: reference
-description: Reference for Azure Service Map SDK for JavaScript
-author: xirzec
-ms.service: servicemap
-ms.data: 08/03/2022
 ms.devlang: javascript
+title: Azure Service Map SDK for JavaScript
+ms.data: 08/04/2022
+author: xirzec
+description: Reference for Azure Service Map SDK for JavaScript
+ms.service: servicemap
+ms.author: jeffish
 ms.date: 06/15/2022
 ---
 # Azure Service Map modules for JavaScript

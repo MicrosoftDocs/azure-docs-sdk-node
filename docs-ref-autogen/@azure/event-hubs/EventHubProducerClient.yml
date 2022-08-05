@@ -231,25 +231,6 @@ methods:
       <xref:@azure/event-hubs.EventHubProducerClient.sendBatch> method of the
       `EventHubProducerClient` to be sent to Azure Event Hubs.
 
-      Events with different values for partitionKey or partitionId will need to
-      be put into different batches.
-
-      To simplify such batch management across partitions or to have the client
-      automatically batch events
-
-      and send them in specific intervals, use `EventHubBufferedProducerClient`
-      instead.
-
-
-      The below example assumes you have an array of events at hand to be
-      batched safely.
-
-      If you have events coming in one by one, `EventHubBufferedProducerClient`
-      is recommended instead
-
-      for effecient management of batches.
-
-
       Example usage:
 
       ```ts
@@ -366,37 +347,12 @@ methods:
   - name: 'sendBatch(EventDataBatch, OperationOptions)'
     uid: '@azure/event-hubs.EventHubProducerClient.sendBatch_1'
     package: '@azure/event-hubs'
-    summary: >-
-      Sends a batch of events created using
-      `EventHubProducerClient.createBatch()` to the associated Event Hub.
-
-      Events with different values for partitionKey or partitionId will need to
-      be put into different batches.
-
-      To simplify such batch management across partitions or to have the client
-      automatically batch events
-
-      and send them in specific intervals, use `EventHubBufferedProducerClient`
-      instead.
-
-
-      The below example assumes you have an array of events at hand to be
-      batched safely.
-
-      If you have events coming in one by one, `EventHubBufferedProducerClient`
-      is recommended instead
-
-      for effecient management of batches.
-
-
+    summary: |-
+      Sends a batch of events to the associated Event Hub.
       Example usage:
-
       ```ts
-
       const client = new EventHubProducerClient(connectionString);
-
       let batch = await client.createBatch();
-
       for (let i = 0; i < messages.length; i++) {
        if (!batch.tryAdd(messages[i])) {
          await client.sendBatch(batch);
@@ -409,7 +365,6 @@ methods:
          }
         }
       }
-
       ```
     remarks: ''
     isPreview: false
@@ -439,28 +394,12 @@ methods:
   - name: 'sendBatch(EventData[] | AmqpAnnotatedMessage[], SendBatchOptions)'
     uid: '@azure/event-hubs.EventHubProducerClient.sendBatch'
     package: '@azure/event-hubs'
-    summary: >
-      Sends an array of events as a batch to the associated Event Hub.
-
-      Azure Event Hubs has a limit on the size of the batch that can be sent
-      which if exceeded
-
-      will result in an error with code `MessageTooLargeError`.
-
-      To safely send within batch size limits, use
-      `EventHubProducerClient.createBatch()` or
-
-      `EventHubBufferedProducerClient` instead.
-
-
+    summary: |
+      Sends an array of events to the associated Event Hub.
       Example usage:
-
       ```ts
-
       const client = new EventHubProducerClient(connectionString);
-
       await client.sendBatch(messages);
-
       ```
     remarks: ''
     isPreview: false

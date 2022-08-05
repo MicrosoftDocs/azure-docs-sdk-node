@@ -12,23 +12,27 @@ syntax: |
     state: ChatClientState,
     props: ChatBaseSelectorProps
   ) =>
-    | { displayName: string, userId: string }
+    | { myUserId: string, participants: ParticipantListParticipant[] }
     | ((
         state: ChatClientState,
         props: ChatBaseSelectorProps
       ) =>
-        | { messages: Message[], showMessageStatus: boolean, userId: string }
+        | { activeErrorMessages: ActiveErrorMessage[] }
         | ((
             state: ChatClientState,
             props: ChatBaseSelectorProps
           ) =>
-            | { typingUsers: CommunicationParticipant[] }
+            | { displayName: string, userId: string }
             | ((
                 state: ChatClientState,
                 props: ChatBaseSelectorProps
               ) =>
-                | { myUserId: string, participants: ParticipantListParticipant[] }
+                | {
+                    messages: Message[],
+                    showMessageStatus: boolean,
+                    userId: string,
+                  }
                 | ((
                     state: ChatClientState,
                     props: ChatBaseSelectorProps
-                  ) => { activeErrorMessages: ActiveErrorMessage[] }))))
+                  ) => { typingUsers: CommunicationParticipant[] }))))

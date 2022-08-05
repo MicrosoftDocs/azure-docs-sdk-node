@@ -10,11 +10,29 @@ isDeprecated: false
 syntax: |
   type ChatMessageComponentProps = {
     disableEditing?: boolean,
+    fileDownloadHandler?: FileDownloadHandler,
     inlineAcceptRejectEditButtons: boolean,
     message: ChatMessage,
     messageContainerStyle?: ComponentSlotStyle,
+    messageStatus?: string,
+    onActionButtonClick: (
+      message: ChatMessage,
+      setMessageReadBy: (readBy: { displayName: string, id: string }[]) => void
+    ) => void,
     onDeleteMessage?: (messageId: string) => Promise<void>,
-    onUpdateMessage?: (messageId: string, content: string) => Promise<void>,
+    onDisplayDateTimeString?: (messageDate: Date) => string,
+    onRenderAvatar?: OnRenderAvatarCallback,
+    onRenderFileDownloads?: (userId: string, message: ChatMessage) => Element,
+    onSendMessage?: (content: string) => Promise<void>,
+    onUpdateMessage?: (
+      messageId: string,
+      content: string,
+      metadata?: Record<string, string>,
+      options?: { attachedFilesMetadata?: FileMetadata[] }
+    ) => Promise<void>,
+    remoteParticipantsCount?: number,
     showDate?: boolean,
+    showMessageStatus?: boolean,
     strings: MessageThreadStrings,
+    userId: string,
   }

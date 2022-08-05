@@ -87,22 +87,10 @@ constructors:
             />
           description: |
             PipelineOptions
-inheritedProperties:
-  - name: pipeline
-    uid: '@azure/service-bus.ServiceBusAdministrationClient.pipeline'
-    package: '@azure/service-bus'
-    summary: The pipeline used by this client to make requests
-    fullName: pipeline
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'pipeline: Pipeline'
-      return:
-        description: ''
-        type: Pipeline
 inheritedMethods:
-  - name: 'sendOperationRequest<T>(OperationArguments, OperationSpec)'
+  - name: >-
+      sendOperationRequest(OperationArguments, OperationSpec,
+      ServiceCallback<any>)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.sendOperationRequest'
     package: '@azure/service-bus'
     summary: Send an HTTP request that is populated using the provided OperationSpec.
@@ -111,8 +99,9 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendOperationRequest<T>(operationArguments: OperationArguments,
-        operationSpec: OperationSpec): Promise<T>
+        function sendOperationRequest(operationArguments: OperationArguments,
+        operationSpec: OperationSpec, callback?: ServiceCallback<any>):
+        Promise<RestResponse>
       parameters:
         - id: operationArguments
           type: OperationArguments
@@ -121,12 +110,16 @@ inheritedMethods:
             populated from.
         - id: operationSpec
           type: OperationSpec
+          description: The OperationSpec to use to populate the httpRequest.
+        - id: callback
+          type: ServiceCallback&lt;any&gt;
           description: |
-            The OperationSpec to use to populate the httpRequest.
+            The callback to call when the response is received.
       return:
         description: ''
-        type: Promise&lt;T&gt;
-  - name: sendRequest(PipelineRequest)
+        type: Promise&lt;RestResponse&gt;
+    inheritanceDescription: <b>Inherited From</b> ServiceClient.sendOperationRequest
+  - name: sendRequest(RequestPrepareOptions | WebResourceLike)
     uid: '@azure/service-bus.ServiceBusAdministrationClient.sendRequest'
     package: '@azure/service-bus'
     summary: Send the provided httpRequest.
@@ -135,15 +128,16 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendRequest(request: PipelineRequest):
-        Promise<PipelineResponse>
+        function sendRequest(options: RequestPrepareOptions | WebResourceLike):
+        Promise<HttpOperationResponse>
       parameters:
-        - id: request
-          type: PipelineRequest
+        - id: options
+          type: RequestPrepareOptions | WebResourceLike
           description: ''
       return:
         description: ''
-        type: Promise&lt;PipelineResponse&gt;
+        type: Promise&lt;HttpOperationResponse&gt;
+    inheritanceDescription: <b>Inherited From</b> ServiceClient.sendRequest
 methods:
   - name: 'createQueue(string, CreateQueueOptions)'
     uid: '@azure/service-bus.ServiceBusAdministrationClient.createQueue'
@@ -1031,8 +1025,8 @@ methods:
       update the desired properties in it, and then pass the modified object to
       `updateQueue()`.
 
-      The properties that cannot be updated are marked as readonly in the
-      `QueueProperties` interface.
+      See https://docs.microsoft.com/rest/api/servicebus/update-queue for more
+      details.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -1127,9 +1121,6 @@ methods:
       Therefore, the suggested flow is to use the output from
       `getSubscription()`, update the desired properties in it, and then pass
       the modified object to `updateSubscription()`.
-
-      The properties that cannot be updated are marked as readonly in the
-      `SubscriptionProperties` interface.
     remarks: ''
     isPreview: false
     isDeprecated: false
@@ -1175,8 +1166,8 @@ methods:
       update the desired properties in it, and then pass the modified object to
       `updateTopic()`.
 
-      The properties that cannot be updated are marked as readonly in the
-      `TopicProperties` interface.
+      See https://docs.microsoft.com/rest/api/servicebus/update-topic for more
+      details.
     remarks: ''
     isPreview: false
     isDeprecated: false

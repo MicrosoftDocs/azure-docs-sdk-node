@@ -1,11 +1,11 @@
 ---
-ms.topic: reference
+ms.service: apimanagement
 ms.devlang: javascript
 title: Azure API Management SDK for JavaScript
-ms.data: 08/04/2022
+ms.topic: reference
+ms.data: 08/05/2022
 author: xirzec
 description: Reference for Azure API Management SDK for JavaScript
-ms.service: apimanagement
 ms.author: jeffish
 ---
 # Azure API Management SDK for JavaScript - latest

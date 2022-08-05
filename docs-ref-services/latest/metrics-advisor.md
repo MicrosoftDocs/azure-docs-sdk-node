@@ -1,11 +1,11 @@
 ---
-ms.topic: reference
+ms.service: metricsadvisor
 ms.devlang: javascript
 title: Azure Metrics Advisor SDK for JavaScript
-ms.data: 08/04/2022
+ms.topic: reference
+ms.data: 08/05/2022
 author: KarishmaGhiya
 description: Reference for Azure Metrics Advisor SDK for JavaScript
-ms.service: metricsadvisor
 ms.author: kaghiya
 ---
 # Azure Metrics Advisor SDK for JavaScript - latest

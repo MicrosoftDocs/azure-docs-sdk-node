@@ -1,11 +1,11 @@
 ---
-ms.topic: reference
+ms.service: activedirectory
 ms.devlang: javascript
 title: Azure Active Directory SDK for JavaScript
-ms.data: 08/04/2022
+ms.topic: reference
+ms.data: 08/05/2022
 author: xirzec
 description: Reference for Azure Active Directory SDK for JavaScript
-ms.service: activedirectory
 ms.author: jeffish
 ms.date: 06/15/2022
 ---

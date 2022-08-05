@@ -1,11 +1,11 @@
 ---
-ms.topic: reference
+ms.service: contentdeliverynetwork
 ms.devlang: javascript
 title: Azure Content Delivery Network SDK for JavaScript
-ms.data: 08/04/2022
+ms.topic: reference
+ms.data: 08/05/2022
 author: xirzec
 description: Reference for Azure Content Delivery Network SDK for JavaScript
-ms.service: contentdeliverynetwork
 ms.author: jeffish
 ---
 # Azure Content Delivery Network SDK for JavaScript - preview

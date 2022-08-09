@@ -1,12 +1,12 @@
 ---
-ms.service: containerservice
-ms.data: 08/08/2022
 description: Reference for Azure Container Service SDK for JavaScript
-ms.author: jeffish
-ms.topic: reference
-author: xirzec
-title: Azure Container Service SDK for JavaScript
 ms.devlang: javascript
+ms.service: containerservice
+ms.data: 08/09/2022
+title: Azure Container Service SDK for JavaScript
+ms.topic: reference
+ms.author: jeffish
+author: xirzec
 ms.date: 06/15/2022
 ---
 # Microsoft Azure SDK for JavaScript - ContainerServiceClient

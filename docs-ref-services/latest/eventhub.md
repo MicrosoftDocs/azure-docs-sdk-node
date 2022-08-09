@@ -1,12 +1,12 @@
 ---
-ms.service: eventhub
-ms.data: 08/08/2022
 description: Reference for Azure Eventhub SDK for JavaScript
-ms.author: yumeng
-ms.topic: reference
-author: jeremymeng
-title: Azure Eventhub SDK for JavaScript
 ms.devlang: javascript
+ms.service: eventhub
+ms.data: 08/09/2022
+title: Azure Eventhub SDK for JavaScript
+ms.topic: reference
+ms.author: yumeng
+author: jeremymeng
 ---
 # Azure Eventhub SDK for JavaScript - latest
 

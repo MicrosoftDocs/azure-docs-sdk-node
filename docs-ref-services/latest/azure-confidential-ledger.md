@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Azure Confidential Ledger SDK for JavaScript
-ms.service: azureconfidentialledger
-title: Azure Azure Confidential Ledger SDK for JavaScript
-ms.topic: reference
-ms.devlang: javascript
-ms.data: 08/10/2022
-author: xirzec
 ms.author: jeffish
+ms.service: azureconfidentialledger
+ms.data: 08/11/2022
+description: Reference for Azure Azure Confidential Ledger SDK for JavaScript
+title: Azure Azure Confidential Ledger SDK for JavaScript
+author: xirzec
+ms.devlang: javascript
+ms.topic: reference
 ---
 # Azure Azure Confidential Ledger SDK for JavaScript - latest
 

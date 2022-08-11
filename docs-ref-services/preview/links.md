@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Links SDK for JavaScript
-ms.service: links
-title: Azure Links SDK for JavaScript
-ms.topic: reference
-ms.devlang: javascript
-ms.data: 08/10/2022
-author: xirzec
 ms.author: jeffish
+ms.service: links
+ms.data: 08/11/2022
+description: Reference for Azure Links SDK for JavaScript
+title: Azure Links SDK for JavaScript
+author: xirzec
+ms.devlang: javascript
+ms.topic: reference
 ---
 # Azure Links SDK for JavaScript - preview
 

@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Attestation SDK for JavaScript
-ms.service: attestation
-title: Azure Attestation SDK for JavaScript
-ms.topic: reference
-ms.devlang: javascript
-ms.data: 08/10/2022
-author: LarryOsterman
 ms.author: larryo
+ms.service: attestation
+ms.data: 08/11/2022
+description: Reference for Azure Attestation SDK for JavaScript
+title: Azure Attestation SDK for JavaScript
+author: LarryOsterman
+ms.devlang: javascript
+ms.topic: reference
 ---
 # Azure Attestation SDK for JavaScript - latest
 

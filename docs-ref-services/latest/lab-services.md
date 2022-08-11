@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Lab Services SDK for JavaScript
-ms.service: labservices
-title: Azure Lab Services SDK for JavaScript
-ms.topic: reference
-ms.devlang: javascript
-ms.data: 08/10/2022
-author: xirzec
 ms.author: jeffish
+ms.service: labservices
+ms.data: 08/11/2022
+description: Reference for Azure Lab Services SDK for JavaScript
+title: Azure Lab Services SDK for JavaScript
+author: xirzec
+ms.devlang: javascript
+ms.topic: reference
 ---
 # Azure Lab Services SDK for JavaScript - latest
 

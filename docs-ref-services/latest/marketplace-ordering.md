@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
 ms.service: marketplaceordering
-ms.data: 08/11/2022
-description: Reference for Azure Marketplace Ordering SDK for JavaScript
-title: Azure Marketplace Ordering SDK for JavaScript
 author: xirzec
-ms.devlang: javascript
+title: Azure Marketplace Ordering SDK for JavaScript
+ms.data: 08/12/2022
 ms.topic: reference
+ms.devlang: javascript
+ms.author: jeffish
+description: Reference for Azure Marketplace Ordering SDK for JavaScript
 ---
 # Azure Marketplace Ordering SDK for JavaScript - latest
 

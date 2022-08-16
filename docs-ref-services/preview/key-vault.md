@@ -1,12 +1,12 @@
 ---
-ms.service: keyvault
-author: timovv
-title: Azure Key Vault SDK for JavaScript
 ms.author: timov
-description: Reference for Azure Key Vault SDK for JavaScript
-ms.data: 08/15/2022
+title: Azure Key Vault SDK for JavaScript
+ms.service: keyvault
+ms.data: 08/16/2022
+author: timovv
 ms.topic: reference
 ms.devlang: javascript
+description: Reference for Azure Key Vault SDK for JavaScript
 ---
 # Azure Key Vault SDK for JavaScript - preview
 

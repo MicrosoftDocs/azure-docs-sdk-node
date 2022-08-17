@@ -8,7 +8,7 @@ title: Azure Dashboard SDK for JavaScript
 ms.devlang: javascript
 ms.topic: reference
 ---
-# Azure Dashboard SDK for JavaScript - preview
+# Azure Dashboard SDK for JavaScript - latest
 
-## Management packages - preview
+## Management packages - latest
 [!INCLUDE [mgmt-packages](dashboard-mgmt-index.md)]

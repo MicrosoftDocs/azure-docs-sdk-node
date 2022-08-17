@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
-title: Azure Dns SDK for JavaScript
-ms.service: dns
-ms.data: 08/16/2022
+ms.data: 08/17/2022
 author: xirzec
-ms.topic: reference
+ms.service: dns
+ms.author: jeffish
+description: Reference for Azure DNS SDK for JavaScript
+title: Azure DNS SDK for JavaScript
 ms.devlang: javascript
-description: Reference for Azure Dns SDK for JavaScript
+ms.topic: reference
 ms.date: 06/15/2022
 ---
 # Azure DNS modules for JavaScript

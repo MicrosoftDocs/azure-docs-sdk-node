@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
-title: Azure Deployment Manager SDK for JavaScript
-ms.service: deploymentmanager
-ms.data: 08/16/2022
+ms.data: 08/17/2022
 author: xirzec
-ms.topic: reference
-ms.devlang: javascript
+ms.service: deploymentmanager
+ms.author: jeffish
 description: Reference for Azure Deployment Manager SDK for JavaScript
+title: Azure Deployment Manager SDK for JavaScript
+ms.devlang: javascript
+ms.topic: reference
 ---
 # Azure Deployment Manager SDK for JavaScript - preview
 

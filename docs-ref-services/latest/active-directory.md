@@ -1,12 +1,12 @@
 ---
-ms.service: activedirectory
-description: Reference for Azure Active Directory SDK for JavaScript
-ms.topic: reference
-ms.data: 08/18/2022
-title: Azure Active Directory SDK for JavaScript
+ms.data: 08/19/2022
 ms.author: jeffish
-ms.devlang: javascript
+description: Reference for Azure Active Directory SDK for JavaScript
 author: xirzec
+ms.topic: reference
+ms.service: activedirectory
+title: Azure Active Directory SDK for JavaScript
+ms.devlang: javascript
 ms.date: 06/15/2022
 ---
 # Azure Active Directory modules for Node.js

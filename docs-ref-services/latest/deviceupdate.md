@@ -8,7 +8,7 @@ title: Azure Deviceupdate SDK for JavaScript
 ms.data: 08/22/2022
 author: xirzec
 ---
-# Azure Deviceupdate SDK for JavaScript - preview
+# Azure Deviceupdate SDK for JavaScript - latest
 
-## Management packages - preview
+## Management packages - latest
 [!INCLUDE [mgmt-packages](deviceupdate-mgmt-index.md)]

@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/monitor-ingestion, monitor
 author: hectorhdzg
 ms.author: hectorh
-ms.date: 07/19/2022
+ms.date: 08/23/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
@@ -15,10 +15,10 @@ The Azure Monitor Ingestion client library is used to send custom logs to [Azure
 This library allows you to send data from virtually any source to supported built-in tables or to custom tables that you create in Log Analytics workspace. You can even extend the schema of built-in tables with custom columns.
 
 **Resources:**
-* [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0-beta.1/sdk/monitor/monitor-ingestion/src)
+* [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0-beta.2/sdk/monitor/monitor-ingestion/src)
 * [Package (NPM)](https://www.npmjs.com/)
 * [Service documentation][azure_monitor_overview]
-* [Change log](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0-beta.1/sdk/monitor/monitor-ingestion/CHANGELOG.md)
+* [Change log](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0-beta.2/sdk/monitor/monitor-ingestion/CHANGELOG.md)
 
 ## Getting started
 
@@ -139,7 +139,7 @@ module.exports = { main };
 ```
 ### Verify logs
 
-You can verify that your data has been uploaded correctly by using the [@azure/monitor-query](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0-beta.1/sdk/monitor/monitor-query/README.md#install-the-package) library. Run the [Upload custom logs](#upload-custom-logs) sample first before verifying the logs. 
+You can verify that your data has been uploaded correctly by using the [@azure/monitor-query](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0-beta.2/sdk/monitor/monitor-query/README.md#install-the-package) library. Run the [Upload custom logs](#upload-custom-logs) sample first before verifying the logs. 
 
 ```js
 // Copyright (c) Microsoft Corporation.
@@ -198,14 +198,14 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For detailed instructions on how to enable logs, see the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-ingestion_1.0.0-beta.1/sdk/core/logger).
+For detailed instructions on how to enable logs, see the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-ingestion_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 To learn more about Azure Monitor, see the [Azure Monitor service documentation][azure_monitor_overview].
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-ingestion_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 <!-- LINKS -->
 [azure_monitor_overview]: /azure/azure-monitor/overview

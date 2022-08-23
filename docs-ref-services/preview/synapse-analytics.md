@@ -1,12 +1,12 @@
 ---
-ms.author: joheredi
+ms.data: 08/23/2022
+ms.devlang: javascript
 description: Reference for Azure Synapse Analytics SDK for JavaScript
+ms.author: joheredi
 ms.service: synapseanalytics
 ms.topic: reference
-ms.devlang: javascript
-title: Azure Synapse Analytics SDK for JavaScript
-ms.data: 08/22/2022
 author: joheredi
+title: Azure Synapse Analytics SDK for JavaScript
 ---
 # Azure Synapse Analytics SDK for JavaScript - preview
 

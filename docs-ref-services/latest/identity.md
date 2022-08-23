@@ -1,12 +1,12 @@
 ---
-ms.author: kaghiya
+ms.data: 08/23/2022
+ms.devlang: javascript
 description: Reference for Azure Identity SDK for JavaScript
+ms.author: kaghiya
 ms.service: identity
 ms.topic: reference
-ms.devlang: javascript
-title: Azure Identity SDK for JavaScript
-ms.data: 08/22/2022
 author: KarishmaGhiya
+title: Azure Identity SDK for JavaScript
 ---
 # Azure Identity SDK for JavaScript - latest
 

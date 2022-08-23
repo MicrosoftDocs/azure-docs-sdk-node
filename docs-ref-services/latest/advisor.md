@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
+ms.data: 08/23/2022
+ms.devlang: javascript
 description: Reference for Azure Advisor SDK for JavaScript
+ms.author: jeffish
 ms.service: advisor
 ms.topic: reference
-ms.devlang: javascript
-title: Azure Advisor SDK for JavaScript
-ms.data: 08/22/2022
 author: xirzec
+title: Azure Advisor SDK for JavaScript
 ms.date: 06/15/2022
 ---
 # Azure Advisor modules for JavaScript

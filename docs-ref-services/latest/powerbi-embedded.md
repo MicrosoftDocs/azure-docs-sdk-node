@@ -1,12 +1,12 @@
 ---
-ms.data: 08/23/2022
-ms.devlang: javascript
-description: Reference for Azure PowerBI Embedded SDK for JavaScript
-ms.author: jeffish
-ms.service: powerbiembedded
 ms.topic: reference
+ms.service: powerbiembedded
+ms.data: 08/24/2022
+ms.author: jeffish
 author: xirzec
+description: Reference for Azure PowerBI Embedded SDK for JavaScript
 title: Azure PowerBI Embedded SDK for JavaScript
+ms.devlang: javascript
 ---
 # Azure PowerBI Embedded SDK for JavaScript - latest
 

@@ -1,9 +1,9 @@
 ---
 ms.topic: reference
-ms.service: kusto
-ms.data: 08/24/2022
-ms.author: jeffish
 author: xirzec
+ms.service: kusto
+ms.author: jeffish
+ms.data: 08/25/2022
 description: Reference for Azure Kusto SDK for JavaScript
 title: Azure Kusto SDK for JavaScript
 ms.devlang: javascript

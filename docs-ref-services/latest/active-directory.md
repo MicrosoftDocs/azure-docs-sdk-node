@@ -1,9 +1,9 @@
 ---
 ms.topic: reference
-ms.service: activedirectory
-ms.data: 08/24/2022
-ms.author: jeffish
 author: xirzec
+ms.service: activedirectory
+ms.author: jeffish
+ms.data: 08/25/2022
 description: Reference for Azure Active Directory SDK for JavaScript
 title: Azure Active Directory SDK for JavaScript
 ms.devlang: javascript

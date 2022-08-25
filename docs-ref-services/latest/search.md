@@ -1,9 +1,9 @@
 ---
 ms.topic: reference
-ms.service: search
-ms.data: 08/24/2022
-ms.author: sarajama
 author: sarangan12
+ms.service: search
+ms.author: sarajama
+ms.data: 08/25/2022
 description: Reference for Azure Search SDK for JavaScript
 title: Azure Search SDK for JavaScript
 ms.devlang: javascript

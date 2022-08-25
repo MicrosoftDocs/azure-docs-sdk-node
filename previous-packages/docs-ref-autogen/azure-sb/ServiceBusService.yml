@@ -1,0 +1,1552 @@
+### YamlMime:UniversalReference
+items:
+  - uid: azure-sb.ServiceBusService
+    id: azure-sb.ServiceBusService
+    name: ServiceBusService
+    summary: "The ServiceBusServices allows you to work with Microsoft Azure Service Bus.\rService Bus provides both queues for sending and receiving messages, as well as push notifications for mobile devices.\r\rService Bus queues provide both standard message queue functionality as well as publish/subscribe functioanlity.\rFor more information on Service Bus queues, as well as task focused information on using them from Node.js applications, see\r[How to Use Service Bus Queues](https://www.windowsazure.com/en-us/develop/nodejs/how-to-guides/service-bus-queues/)\rand [How to Use Service Bus Topics/Subscriptions](https://www.windowsazure.com/en-us/develop/nodejs/how-to-guides/service-bus-topics/).\r\rService Bus provides push notifications through the Notification Hub.\rWhile the ServiceBusService can be used to manage Notification Hubs, you must use\rthe <xref:azure-sb.NotificationHubService> to send messages to mobile devices."
+    fullName: azure-sb.ServiceBusService
+    type: Class
+    children:
+      - azure-sb.ServiceBusService.#ctor
+      - azure-sb.ServiceBusService#receiveQueueMessage
+      - azure-sb.ServiceBusService#receiveSubscriptionMessage
+      - azure-sb.ServiceBusService#deleteMessage
+      - azure-sb.ServiceBusService#unlockMessage
+      - azure-sb.ServiceBusService#renewLockForMessage
+      - azure-sb.ServiceBusService#sendQueueMessage
+      - azure-sb.ServiceBusService#sendTopicMessage
+      - azure-sb.ServiceBusService#createQueue
+      - azure-sb.ServiceBusService#createQueueIfNotExists
+      - azure-sb.ServiceBusService#deleteQueue
+      - azure-sb.ServiceBusService#formatDeadLetterPath
+      - azure-sb.ServiceBusService#getQueue
+      - azure-sb.ServiceBusService#listQueues
+      - azure-sb.ServiceBusService#createTopic
+      - azure-sb.ServiceBusService#createTopicIfNotExists
+      - azure-sb.ServiceBusService#deleteTopic
+      - azure-sb.ServiceBusService#getTopic
+      - azure-sb.ServiceBusService#listTopics
+      - azure-sb.ServiceBusService#createSubscription
+      - azure-sb.ServiceBusService#deleteSubscription
+      - azure-sb.ServiceBusService#getSubscription
+      - azure-sb.ServiceBusService#listSubscriptions
+      - azure-sb.ServiceBusService#createRule
+      - azure-sb.ServiceBusService#deleteRule
+      - azure-sb.ServiceBusService#getRule
+      - azure-sb.ServiceBusService#listRules
+      - azure-sb.ServiceBusService#createNotificationHub
+      - azure-sb.ServiceBusService#getNotificationHub
+      - azure-sb.ServiceBusService#listNotificationHubs
+      - azure-sb.ServiceBusService#deleteNotificationHub
+    langs:
+      - js
+  - id: azure-sb.ServiceBusService.#ctor
+    uid: azure-sb.ServiceBusService.#ctor
+    parent: azure-sb.ServiceBusService
+    name: >-
+      ServiceBusService(configOrNamespaceOrConnectionString, accessKey, issuer,
+      acsNamespace, host, authenticationProvider)
+    fullName: >-
+      azure-sb.ServiceBusService.ServiceBusService(configOrNamespaceOrConnectionString,
+      accessKey, issuer, acsNamespace, host, authenticationProvider)
+    summary: "Creates a new ServiceBusService object.\r\rThe azure module will read the environment variables AZURE_SERVICEBUS_NAMESPACE and AZURE_SERVICEBUS_ACCESS_KEY\rfor information required to connect to your Microsoft Azure Service Bus.\rIf these environment variables are not set, you must specify the account information\rwhen creating a ServiceBusService object."
+    type: Constructor
+    syntax:
+      parameters:
+        - id: configOrNamespaceOrConnectionString
+          type:
+            - string
+          description: The service bus namespace or the connection string.
+          optional: true
+        - id: accessKey
+          type:
+            - string
+          description: The password. Only necessary if no connection string passed.
+          optional: true
+        - id: issuer
+          type:
+            - string
+          description: The issuer.
+          optional: true
+        - id: acsNamespace
+          type:
+            - string
+          description: >-
+            The acs namespace. Usually the same as the sb namespace with "-sb"
+            suffix.
+          optional: true
+        - id: host
+          type:
+            - string
+          description: The host address.
+          optional: true
+        - id: authenticationProvider
+          type:
+            - object
+          description: The authentication provider.
+          optional: true
+      content: >-
+        new ServiceBusService(configOrNamespaceOrConnectionString, accessKey,
+        issuer, acsNamespace, host, authenticationProvider)
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#receiveQueueMessage
+    id: azure-sb.ServiceBusService#receiveQueueMessage
+    parent: azure-sb.ServiceBusService
+    name: 'receiveQueueMessage(queuePath, options, callback)'
+    summary: Receives a queue message.
+    fullName: >-
+      azure-sb.ServiceBusService.receiveQueueMessage(queuePath, options,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: queuePath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the queue to which the
+            message will be sent.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.isPeekLock
+          type:
+            - azure-sb.bool
+          description: >-
+            Boolean value indicating if the message should be peeked or
+            received.
+          optional: true
+        - id: options.timeoutIntervalInS
+          type:
+            - azure-sb.int
+          description: 'The timeout interval, in seconds, to use for the request.'
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                if an error occurs; otherwise `receivequeuemessageresult` will contain\r                                                                                the message result information.\r                                                                                `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function receiveQueueMessage(queuePath, options, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#receiveSubscriptionMessage
+    id: azure-sb.ServiceBusService#receiveSubscriptionMessage
+    parent: azure-sb.ServiceBusService
+    name: 'receiveSubscriptionMessage(topicPath, subscriptionPath, options, callback)'
+    summary: Receives a subscription message.
+    fullName: >-
+      azure-sb.ServiceBusService.receiveSubscriptionMessage(topicPath,
+      subscriptionPath, options, callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: A string object that represents the name of the topic to receive.
+        - id: subscriptionPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the subscription from
+            the message will be received.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.isPeekLock
+          type:
+            - azure-sb.bool
+          description: >-
+            Boolean value indicating if the message should be peeked or
+            received.
+          optional: true
+        - id: options.timeoutIntervalInS
+          type:
+            - azure-sb.int
+          description: 'The timeout interval, in seconds, to use for the request.'
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                if an error occurs; otherwise `receivetopicmessageresult` will contain\r                                                                                the message result information.\r                                                                                `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: >-
+        function receiveSubscriptionMessage(topicPath, subscriptionPath,
+        options, callback)
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#deleteMessage
+    id: azure-sb.ServiceBusService#deleteMessage
+    parent: azure-sb.ServiceBusService
+    name: 'deleteMessage(message, callback)'
+    summary: Deletes a message.
+    fullName: 'azure-sb.ServiceBusService.deleteMessage(message, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: message
+          type:
+            - object
+            - string
+          description: The message object or a string with the message location.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                      if an error occurs; otherwise `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function deleteMessage(message, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#unlockMessage
+    id: azure-sb.ServiceBusService#unlockMessage
+    parent: azure-sb.ServiceBusService
+    name: 'unlockMessage(message, callback)'
+    summary: Unlocks a message.
+    fullName: 'azure-sb.ServiceBusService.unlockMessage(message, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: message
+          type:
+            - object
+            - string
+          description: The message object or a string with the message location.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                    if an error occurs; otherwise `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function unlockMessage(message, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#renewLockForMessage
+    id: azure-sb.ServiceBusService#renewLockForMessage
+    parent: azure-sb.ServiceBusService
+    name: 'renewLockForMessage(message, callback)'
+    summary: Renew-lock for message.
+    fullName: 'azure-sb.ServiceBusService.renewLockForMessage(message, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: message
+          type:
+            - object
+            - string
+          description: The message object or a string with the message location.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                    if an error occurs; otherwise `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function renewLockForMessage(message, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#sendQueueMessage
+    id: azure-sb.ServiceBusService#sendQueueMessage
+    parent: azure-sb.ServiceBusService
+    name: 'sendQueueMessage(queuePath, message, callback)'
+    summary: Sends a queue message.
+    fullName: 'azure-sb.ServiceBusService.sendQueueMessage(queuePath, message, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: queuePath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the queue to which the
+            message will be sent.
+        - id: message
+          type:
+            - object
+            - string
+          description: A message object that represents the message to send.
+        - id: message.body
+          type:
+            - string
+          description: The message's text.
+          optional: true
+        - id: message.customProperties
+          type:
+            - object
+          description: The message's custom properties.
+          optional: true
+        - id: message.brokerProperties.CorrelationId
+          type:
+            - string
+          description: The message's correlation identifier.
+          optional: true
+        - id: message.brokerProperties.SessionId
+          type:
+            - string
+          description: The session identifier.
+          optional: true
+        - id: message.brokerProperties.MessageId
+          type:
+            - string
+          description: The message's identifier.
+          optional: true
+        - id: message.brokerProperties.Label
+          type:
+            - string
+          description: The message's label.
+          optional: true
+        - id: message.brokerProperties.ReplyTo
+          type:
+            - string
+          description: The message's reply to.
+          optional: true
+        - id: message.brokerProperties.TimeToLive
+          type:
+            - string
+          description: The message's time to live.
+          optional: true
+        - id: message.brokerProperties.To
+          type:
+            - string
+          description: The message's to.
+          optional: true
+        - id: message.brokerProperties.ScheduledEnqueueTimeUtc
+          type:
+            - string
+          description: The message's scheduled enqueue time in UTC.
+          optional: true
+        - id: message.brokerProperties.ReplyToSessionId
+          type:
+            - string
+          description: The message's reply to session identifier.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                if an error occurs; otherwise `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function sendQueueMessage(queuePath, message, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#sendTopicMessage
+    id: azure-sb.ServiceBusService#sendTopicMessage
+    parent: azure-sb.ServiceBusService
+    name: 'sendTopicMessage(topicPath, message, callback)'
+    summary: Sends a topic message.
+    fullName: 'azure-sb.ServiceBusService.sendTopicMessage(topicPath, message, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the topic to which the
+            message will be sent.
+        - id: message
+          type:
+            - object
+            - string
+          description: A message object that represents the message to send.
+        - id: message.body
+          type:
+            - string
+          description: The message's text.
+          optional: true
+        - id: message.customProperties
+          type:
+            - object
+          description: The message's custom properties.
+          optional: true
+        - id: message.brokerProperties.CorrelationId
+          type:
+            - string
+          description: The message's correlation identifier.
+          optional: true
+        - id: message.brokerProperties.SessionId
+          type:
+            - string
+          description: The session identifier.
+          optional: true
+        - id: message.brokerProperties.MessageId
+          type:
+            - string
+          description: The message's identifier.
+          optional: true
+        - id: message.brokerProperties.Label
+          type:
+            - string
+          description: The message's label.
+          optional: true
+        - id: message.brokerProperties.ReplyTo
+          type:
+            - string
+          description: The message's reply to.
+          optional: true
+        - id: message.brokerProperties.TimeToLive
+          type:
+            - string
+          description: The message's time to live.
+          optional: true
+        - id: message.brokerProperties.To
+          type:
+            - string
+          description: The message's to.
+          optional: true
+        - id: message.brokerProperties.ScheduledEnqueueTimeUtc
+          type:
+            - string
+          description: The message's scheduled enqueue time in UTC.
+          optional: true
+        - id: message.brokerProperties.ReplyToSessionId
+          type:
+            - string
+          description: The message's reply to session identifier.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                  if an error occurs; otherwise `receivetopicmessageresult` will contain\r                                                                                  the message result information.\r                                                                                  `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function sendTopicMessage(topicPath, message, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#createQueue
+    id: azure-sb.ServiceBusService#createQueue
+    parent: azure-sb.ServiceBusService
+    name: 'createQueue(queuePath, options, callback)'
+    summary: Creates a queue.
+    fullName: 'azure-sb.ServiceBusService.createQueue(queuePath, options, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: queuePath
+          type:
+            - string
+          description: A string object that represents the name of the queue to create.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.MaxSizeInMegaBytes
+          type:
+            - azure-sb.int
+          description: >-
+            Specifies the maximum queue size in megabytes. Any attempt to
+            enqueue a message that will cause the queue to exceed this value
+            will fail.
+          optional: true
+        - id: options.DefaultMessageTimeToLive
+          type:
+            - azure-sb.PTnHnMnS
+          description: >-
+            Depending on whether DeadLettering is enabled, a message is
+            automatically moved to the DeadLetterQueue or deleted if it has been
+            stored in the queue for longer than the specified time. This value
+            is overwritten by a TTL specified on the message if and only if the
+            message TTL is smaller than the TTL set on the queue. This value is
+            immutable after the Queue has been created.
+          optional: true
+        - id: options.LockDuration
+          type:
+            - azure-sb.PTnHnMnS
+          description: >-
+            Determines the amount of time in seconds in which a message should
+            be locked for processing by a receiver. After this period, the
+            message is unlocked and available for consumption by the next
+            receiver. Settable only at queue creation time.
+          optional: true
+        - id: options.RequiresSession
+          type:
+            - azure-sb.bool
+          description: >-
+            Settable only at queue creation time. If set to true, the queue will
+            be session-aware and only SessionReceiver will be supported.
+            Session-aware queues are not supported through REST.
+          optional: true
+        - id: options.RequiresDuplicateDetection
+          type:
+            - azure-sb.bool
+          description: Settable only at queue creation time.
+          optional: true
+        - id: options.DeadLetteringOnMessageExpiration
+          type:
+            - azure-sb.bool
+          description: >-
+            This field controls how the Service Bus handles a message whose TTL
+            has expired. If it is enabled and a message expires, the Service Bus
+            moves the message from the queue into the queue’s dead-letter
+            sub-queue. If disabled, message will be permanently deleted from the
+            queue. Settable only at queue creation time.
+          optional: true
+        - id: options.DuplicateDetectionHistoryTimeWindow
+          type:
+            - azure-sb.bool
+          description: >-
+            Specifies the time span during which the Service Bus detects message
+            duplication.
+          optional: true
+        - id: options.EnablePartitioning
+          type:
+            - azure-sb.bool
+          description: Specifies whether the queue should be partitioned.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                  if an error occurs; otherwise `createqueueresult` will contain\r                                                                                  the new queue information.\r                                                                                  `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function createQueue(queuePath, options, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#createQueueIfNotExists
+    id: azure-sb.ServiceBusService#createQueueIfNotExists
+    parent: azure-sb.ServiceBusService
+    name: 'createQueueIfNotExists(queuePath, options, callback)'
+    summary: Creates a queue if it doesn't already exists.
+    fullName: >-
+      azure-sb.ServiceBusService.createQueueIfNotExists(queuePath, options,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: queuePath
+          type:
+            - string
+          description: A string object that represents the name of the queue to delete.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.MaxSizeInMegaBytes
+          type:
+            - azure-sb.int
+          description: >-
+            Specifies the maximum queue size in megabytes. Any attempt to
+            enqueue a message that will cause the queue to exceed this value
+            will fail.
+          optional: true
+        - id: options.DefaultMessageTimeToLive
+          type:
+            - azure-sb.PTnHnMnS
+          description: >-
+            Depending on whether DeadLettering is enabled, a message is
+            automatically moved to the DeadLetterQueue or deleted if it has been
+            stored in the queue for longer than the specified time. This value
+            is overwritten by a TTL specified on the message if and only if the
+            message TTL is smaller than the TTL set on the queue. This value is
+            immutable after the Queue has been created.
+          optional: true
+        - id: options.LockDuration
+          type:
+            - azure-sb.PTnHnMnS
+          description: >-
+            Determines the amount of time in seconds in which a message should
+            be locked for processing by a receiver. After this period, the
+            message is unlocked and available for consumption by the next
+            receiver. Settable only at queue creation time.
+          optional: true
+        - id: options.RequiresSession
+          type:
+            - azure-sb.bool
+          description: >-
+            Settable only at queue creation time. If set to true, the queue will
+            be session-aware and only SessionReceiver will be supported.
+            Session-aware queues are not supported through REST.
+          optional: true
+        - id: options.RequiresDuplicateDetection
+          type:
+            - azure-sb.bool
+          description: Settable only at queue creation time.
+          optional: true
+        - id: options.DeadLetteringOnMessageExpiration
+          type:
+            - azure-sb.bool
+          description: >-
+            This field controls how the Service Bus handles a message whose TTL
+            has expired. If it is enabled and a message expires, the Service Bus
+            moves the message from the queue into the queue’s dead-letter
+            sub-queue. If disabled, message will be permanently deleted from the
+            queue. Settable only at queue creation time.
+          optional: true
+        - id: options.DuplicateDetectionHistoryTimeWindow
+          type:
+            - azure-sb.bool
+          description: >-
+            Specifies the time span during which the Service Bus detects message
+            duplication.
+          optional: true
+        - id: options.EnablePartitioning
+          type:
+            - azure-sb.bool
+          description: Specifies whether the queue should be partitioned.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                  if an error occurs; otherwise `queueCreated` will contain\r                                                                                  the new queue information.\r                                                                                  `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function createQueueIfNotExists(queuePath, options, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#deleteQueue
+    id: azure-sb.ServiceBusService#deleteQueue
+    parent: azure-sb.ServiceBusService
+    name: 'deleteQueue(queuePath, callback)'
+    summary: Deletes a queue.
+    fullName: 'azure-sb.ServiceBusService.deleteQueue(queuePath, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: queuePath
+          type:
+            - string
+          description: A string object that represents the name of the queue to delete.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                     if an error occurs; otherwise `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function deleteQueue(queuePath, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#formatDeadLetterPath
+    id: azure-sb.ServiceBusService#formatDeadLetterPath
+    parent: azure-sb.ServiceBusService
+    name: formatDeadLetterPath(queuePath)
+    summary: Formats a queue path to point towards its dead letter queue.
+    fullName: azure-sb.ServiceBusService.formatDeadLetterPath(queuePath)
+    type: Function
+    syntax:
+      parameters:
+        - id: queuePath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the queue whose dead
+            letter path you want.
+      return:
+        type:
+          - string
+        description: The path to the queue's dead letter queue
+      content: function formatDeadLetterPath(queuePath)
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#getQueue
+    id: azure-sb.ServiceBusService#getQueue
+    parent: azure-sb.ServiceBusService
+    name: 'getQueue(queuePath, callback)'
+    summary: Retrieves a queue.
+    fullName: 'azure-sb.ServiceBusService.getQueue(queuePath, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: queuePath
+          type:
+            - string
+          description: A string object that represents the name of the queue to retrieve.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                  if an error occurs; otherwise `queueresult` will contain\r                                                                                  the queue information.\r                                                                                  `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function getQueue(queuePath, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#listQueues
+    id: azure-sb.ServiceBusService#listQueues
+    parent: azure-sb.ServiceBusService
+    name: 'listQueues(options, callback)'
+    summary: Returns a list of queues.
+    fullName: 'azure-sb.ServiceBusService.listQueues(options, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.top
+          type:
+            - azure-sb.int
+          description: The top clause for listing queues.
+          optional: true
+        - id: options.skip
+          type:
+            - azure-sb.int
+          description: The skip clause for listing queues.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                      if an error occurs; otherwise `listqueueresult` will contain\r                                                                      the list of queues.\r                                                                      `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function listQueues(options, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#createTopic
+    id: azure-sb.ServiceBusService#createTopic
+    parent: azure-sb.ServiceBusService
+    name: 'createTopic(topic, options, callback)'
+    summary: Creates a topic.
+    fullName: 'azure-sb.ServiceBusService.createTopic(topic, options, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: topic
+          type:
+            - azure-sb.TopicInfo
+          description: A Topic object that represents the topic to create.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.MaxSizeInMegabytes
+          type:
+            - azure-sb.int
+          description: >-
+            Specifies the maximum topic size in megabytes. Any attempt to
+            enqueue a message that will cause the topic to exceed this value
+            will fail. All messages that are stored in the topic or any of its
+            subscriptions count towards this value. Multiple copies of a message
+            that reside in one or multiple subscriptions count as a single
+            messages. For example, if message m exists once in subscription s1
+            and twice in subscription s2, m is counted as a single message.
+          optional: true
+        - id: options.DefaultMessageTimeToLive
+          type:
+            - azure-sb.PTnHnMnS
+          description: >-
+            Determines how long a message lives in the associated subscriptions.
+            Subscriptions inherit the TTL from the topic unless they are created
+            explicitly with a smaller TTL. Based on whether dead-lettering is
+            enabled, a message whose TTL has expired will either be moved to the
+            subscription’s associated DeadLtterQueue or will be permanently
+            deleted.
+          optional: true
+        - id: options.RequiresDuplicateDetection
+          type:
+            - azure-sb.bool
+          description: >-
+            If enabled, the topic will detect duplicate messages within the time
+            span specified by the DuplicateDetectionHistoryTimeWindow property.
+            Settable only at topic creation time.
+          optional: true
+        - id: options.DuplicateDetectionHistoryTimeWindow
+          type:
+            - azure-sb.PTnHnMnS
+          description: >-
+            Specifies the time span during which the Service Bus will detect
+            message duplication.
+          optional: true
+        - id: options.EnableBatchedOperations
+          type:
+            - azure-sb.bool
+          description: Specifies if batched operations should be allowed.
+          optional: true
+        - id: options.SizeInBytes
+          type:
+            - azure-sb.int
+          description: Specifies the topic size in bytes.
+          optional: true
+        - id: options.SupportOrdering
+          type:
+            - azure-sb.bool
+          description: Specifies whether the topic supports message ordering.
+          optional: true
+        - id: options.EnablePartitioning
+          type:
+            - azure-sb.bool
+          description: Specifies whether the topic should be partitioned
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                        if an error occurs; otherwise `createtopicresult` will contain\r                                                                                        the new topic information.\r                                                                                        `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function createTopic(topic, options, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#createTopicIfNotExists
+    id: azure-sb.ServiceBusService#createTopicIfNotExists
+    parent: azure-sb.ServiceBusService
+    name: 'createTopicIfNotExists(topic, options, callback)'
+    summary: Creates a topic if it doesn't exists.
+    fullName: >-
+      azure-sb.ServiceBusService.createTopicIfNotExists(topic, options,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: topic
+          type:
+            - azure-sb.TopicInfo
+          description: A Topic object that represents the topic to create.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.MaxSizeInMegabytes
+          type:
+            - azure-sb.int
+          description: >-
+            Specifies the maximum topic size in megabytes. Any attempt to
+            enqueue a message that will cause the topic to exceed this value
+            will fail. All messages that are stored in the topic or any of its
+            subscriptions count towards this value. Multiple copies of a message
+            that reside in one or multiple subscriptions count as a single
+            messages. For example, if message m exists once in subscription s1
+            and twice in subscription s2, m is counted as a single message.
+          optional: true
+        - id: options.DefaultMessageTimeToLive
+          type:
+            - azure-sb.PTnHnMnS
+          description: >-
+            Determines how long a message lives in the associated subscriptions.
+            Subscriptions inherit the TTL from the topic unless they are created
+            explicitly with a smaller TTL. Based on whether dead-lettering is
+            enabled, a message whose TTL has expired will either be moved to the
+            subscription’s associated DeadLtterQueue or will be permanently
+            deleted.
+          optional: true
+        - id: options.RequiresDuplicateDetection
+          type:
+            - azure-sb.bool
+          description: >-
+            If enabled, the topic will detect duplicate messages within the time
+            span specified by the DuplicateDetectionHistoryTimeWindow property.
+            Settable only at topic creation time.
+          optional: true
+        - id: options.DuplicateDetectionHistoryTimeWindow
+          type:
+            - azure-sb.PTnHnMnS
+          description: >-
+            Specifies the time span during which the Service Bus will detect
+            message duplication.
+          optional: true
+        - id: options.MaxSubscriptionsPerTopic
+          type:
+            - azure-sb.int
+          description: >-
+            Specifies the maximum number of subscriptions that can be associated
+            with the topic.
+          optional: true
+        - id: options.MaxSqlFiltersPerTopic
+          type:
+            - azure-sb.int
+          description: >-
+            Specifies the maximum number of SQL filter expressions (in total)
+            that can be added to the subscriptions associated with the topic.
+          optional: true
+        - id: options.MaxCorrelationFiltersPerTopic
+          type:
+            - azure-sb.int
+          description: >-
+            Specifies the maximum number of correlation filter expressions (in
+            total) that can be added to the subscriptions associated with the
+            topic.
+          optional: true
+        - id: options.EnableDeadLetteringOnMessageExpiration
+          type:
+            - azure-sb.bool
+          description: Settable only at topic creation time.
+          optional: true
+        - id: options.EnableDeadLetteringOnFilterEvaluationExceptions
+          type:
+            - azure-sb.bool
+          description: Settable only at topic creation time.
+          optional: true
+        - id: options.SupportOrdering
+          type:
+            - azure-sb.bool
+          description: Specifies whether the topic supports message ordering.
+          optional: true
+        - id: options.EnablePartitioning
+          type:
+            - azure-sb.bool
+          description: Specifies whether the topic should be partitioned
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                        if an error occurs; otherwise `topicCreated` will contain\r                                                                                        the new topic information.\r                                                                                        `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function createTopicIfNotExists(topic, options, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#deleteTopic
+    id: azure-sb.ServiceBusService#deleteTopic
+    parent: azure-sb.ServiceBusService
+    name: 'deleteTopic(topicPath, callback)'
+    summary: Deletes a topic.
+    fullName: 'azure-sb.ServiceBusService.deleteTopic(topicPath, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: >-
+            A <code>String</code> object that represents the name of the queue
+            to delete.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                    if an error occurs; otherwise `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function deleteTopic(topicPath, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#getTopic
+    id: azure-sb.ServiceBusService#getTopic
+    parent: azure-sb.ServiceBusService
+    name: 'getTopic(topicPath, callback)'
+    summary: Retrieves a topic.
+    fullName: 'azure-sb.ServiceBusService.getTopic(topicPath, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: >-
+            A <code>String</code> object that represents the name of the topic
+            to retrieve.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                 if an error occurs; otherwise `gettopicresult` will contain\r                                                                 the topic information.\r                                                                 `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function getTopic(topicPath, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#listTopics
+    id: azure-sb.ServiceBusService#listTopics
+    parent: azure-sb.ServiceBusService
+    name: 'listTopics(options, callback)'
+    summary: Returns a list of topics.
+    fullName: 'azure-sb.ServiceBusService.listTopics(options, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.top
+          type:
+            - azure-sb.int
+          description: The number of topics to fetch.
+          optional: true
+        - id: options.skip
+          type:
+            - azure-sb.int
+          description: The number of topics to skip.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                      if an error occurs; otherwise `listtopicsresult` will contain\r                                                                      the list of topics.\r                                                                      `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function listTopics(options, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#createSubscription
+    id: azure-sb.ServiceBusService#createSubscription
+    parent: azure-sb.ServiceBusService
+    name: 'createSubscription(topicPath, subscriptionPath, options, callback)'
+    summary: Creates a subscription.
+    fullName: >-
+      azure-sb.ServiceBusService.createSubscription(topicPath, subscriptionPath,
+      options, callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the topic for the
+            subscription.
+        - id: subscriptionPath
+          type:
+            - string
+          description: A string object that represents the name of the subscription.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.LockDuration
+          type:
+            - azure-sb.PTnHnMnS
+          description: >-
+            The default lock duration is applied to subscriptions that do not
+            define a lock duration. Settable only at subscription creation time.
+          optional: true
+        - id: options.RequiresSession
+          type:
+            - azure-sb.bool
+          description: >-
+            Settable only at subscription creation time. If set to true, the
+            subscription will be session-aware and only SessionReceiver will be
+            supported. Session-aware subscription are not supported through
+            REST.
+          optional: true
+        - id: options.DefaultMessageTimeToLive
+          type:
+            - azure-sb.PTnHnMnS
+          description: >-
+            Determines how long a message lives in the subscription. Based on
+            whether dead-lettering is enabled, a message whose TTL has expired
+            will either be moved to the subscription’s associated DeadLtterQueue
+            or permanently deleted.
+          optional: true
+        - id: options.EnableDeadLetteringOnMessageExpiration
+          type:
+            - azure-sb.bool
+          description: >-
+            This field controls how the Service Bus handles a message whose TTL
+            has expired. If it is enabled and a message expires, the Service Bus
+            moves the message from the queue into the subscription’s dead-letter
+            sub-queue. If disabled, message will be permanently deleted from the
+            subscription’s main queue. Settable only at subscription creation
+            time.
+          optional: true
+        - id: options.EnableDeadLetteringOnFilterEvaluationExceptions
+          type:
+            - azure-sb.bool
+          description: >-
+            Determines how the Service Bus handles a message that causes an
+            exception during a subscription’s filter evaluation. If the value is
+            set to true, the message that caused the exception will be moved to
+            the subscription’s dead-letter queue. Otherwise, it will be
+            discarded. By default this parameter is set to true, allowing the
+            user a chance to investigate the cause of the exception. It can
+            occur from a malformed message or some incorrect assumptions being
+            made in the filter about the form of the message. Settable only at
+            topic creation time.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                  if an error occurs; otherwise `createsubscriptionresult` will contain\r                                                                                  the new subscription information.\r                                                                                  `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: >-
+        function createSubscription(topicPath, subscriptionPath, options,
+        callback)
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#deleteSubscription
+    id: azure-sb.ServiceBusService#deleteSubscription
+    parent: azure-sb.ServiceBusService
+    name: 'deleteSubscription(topicPath, subscriptionPath, callback)'
+    summary: Deletes a subscription.
+    fullName: >-
+      azure-sb.ServiceBusService.deleteSubscription(topicPath, subscriptionPath,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the topic for the
+            subscription.
+        - id: subscriptionPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the subscription to
+            delete.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                    if an error occurs; otherwise `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function deleteSubscription(topicPath, subscriptionPath, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#getSubscription
+    id: azure-sb.ServiceBusService#getSubscription
+    parent: azure-sb.ServiceBusService
+    name: 'getSubscription(topicPath, subscriptionPath, callback)'
+    summary: Retrieves a subscription.
+    fullName: >-
+      azure-sb.ServiceBusService.getSubscription(topicPath, subscriptionPath,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the topic for the
+            subscription.
+        - id: subscriptionPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the subscription to
+            retrieve.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                if an error occurs; otherwise `getsubscriptionresult` will contain\r                                                                                the subscription information.\r                                                                                `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function getSubscription(topicPath, subscriptionPath, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#listSubscriptions
+    id: azure-sb.ServiceBusService#listSubscriptions
+    parent: azure-sb.ServiceBusService
+    name: 'listSubscriptions(topicPath, options, callback)'
+    summary: Returns a list of subscriptions.
+    fullName: 'azure-sb.ServiceBusService.listSubscriptions(topicPath, options, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the topic for the
+            subscriptions to retrieve.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.top
+          type:
+            - azure-sb.int
+          description: The number of topics to fetch.
+          optional: true
+        - id: options.skip
+          type:
+            - azure-sb.int
+          description: The number of topics to skip.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                      if an error occurs; otherwise `listsubscriptionresult` will contain\r                                                                      the list of subscriptions.\r                                                                      `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function listSubscriptions(topicPath, options, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#createRule
+    id: azure-sb.ServiceBusService#createRule
+    parent: azure-sb.ServiceBusService
+    name: 'createRule(topicPath, subscriptionPath, rulePath, options, callback)'
+    summary: Creates a rule.
+    fullName: >-
+      azure-sb.ServiceBusService.createRule(topicPath, subscriptionPath,
+      rulePath, options, callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the topic for the
+            subscription.
+        - id: subscriptionPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the subscription for
+            which the rule will be created.
+        - id: rulePath
+          type:
+            - string
+          description: A string object that represents the name of the rule to be created.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.trueFilter
+          type:
+            - string
+          description: Defines the expression that the rule evaluates as a true filter.
+          optional: true
+        - id: options.falseFilter
+          type:
+            - string
+          description: Defines the expression that the rule evaluates as a false filter.
+          optional: true
+        - id: options.sqlExpressionFilter
+          type:
+            - string
+          description: >-
+            Defines the expression that the rule evaluates. The expression
+            string is interpreted as a SQL92 expression which must evaluate to
+            True or False. Only one between a correlation and a sql expression
+            can be defined.
+          optional: true
+        - id: options.correlationIdFilter
+          type:
+            - string
+          description: >-
+            Defines the expression that the rule evaluates. Only the messages
+            whose CorrelationId match the CorrelationId set in the filter
+            expression are allowed. Only one between a correlation and a sql
+            expression can be defined.
+          optional: true
+        - id: options.sqlRuleAction
+          type:
+            - string
+          description: >-
+            Defines the expression that the rule evaluates. If the rule is of
+            type SQL, the expression string is interpreted as a SQL92 expression
+            which must evaluate to True or False. If the rule is of type
+            CorrelationFilterExpression then only the messages whose
+            CorrelationId match the CorrelationId set in the filter expression
+            are allowed.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                            if an error occurs; otherwise `createruleresults` will contain\r                                                                            the new rule information.\r                                                                            `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: >-
+        function createRule(topicPath, subscriptionPath, rulePath, options,
+        callback)
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#deleteRule
+    id: azure-sb.ServiceBusService#deleteRule
+    parent: azure-sb.ServiceBusService
+    name: 'deleteRule(topicPath, subscriptionPath, rulePath, callback)'
+    summary: Deletes a rule.
+    fullName: >-
+      azure-sb.ServiceBusService.deleteRule(topicPath, subscriptionPath,
+      rulePath, callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the topic for the
+            subscription.
+        - id: subscriptionPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the subscription for
+            which the rule will be deleted.
+        - id: rulePath
+          type:
+            - string
+          description: A string object that represents the name of the rule to delete.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                if an error occurs; otherwise `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function deleteRule(topicPath, subscriptionPath, rulePath, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#getRule
+    id: azure-sb.ServiceBusService#getRule
+    parent: azure-sb.ServiceBusService
+    name: 'getRule(topicPath, subscriptionPath, rulePath, callback)'
+    summary: Retrieves a rule.
+    fullName: >-
+      azure-sb.ServiceBusService.getRule(topicPath, subscriptionPath, rulePath,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the topic for the
+            subscription.
+        - id: subscriptionPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the subscription for
+            which the rule will be retrieved.
+        - id: rulePath
+          type:
+            - string
+          description: A string object that represents the name of the rule to retrieve.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                                if an error occurs; otherwise `getruleresult` will contain\r                                                                                the rule information.\r                                                                                `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function getRule(topicPath, subscriptionPath, rulePath, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#listRules
+    id: azure-sb.ServiceBusService#listRules
+    parent: azure-sb.ServiceBusService
+    name: 'listRules(topicPath, subscriptionPath, options, callback)'
+    summary: Returns a list of rules.
+    fullName: >-
+      azure-sb.ServiceBusService.listRules(topicPath, subscriptionPath, options,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: topicPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the topic for the
+            subscription.
+        - id: subscriptionPath
+          type:
+            - string
+          description: >-
+            A string object that represents the name of the subscription whose
+            rules are being retrieved.
+        - id: options
+          type:
+            - object
+          description: The request options.
+          optional: true
+        - id: options.top
+          type:
+            - azure-sb.int
+          description: The number of topics to fetch.
+          optional: true
+        - id: options.skip
+          type:
+            - azure-sb.int
+          description: The number of topics to skip.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                      if an error occurs; otherwise `listrulesresult` will contain\r                                                                      the list of rules.\r                                                                      `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function listRules(topicPath, subscriptionPath, options, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#createNotificationHub
+    id: azure-sb.ServiceBusService#createNotificationHub
+    parent: azure-sb.ServiceBusService
+    name: 'createNotificationHub(hubPath, options, callback)'
+    summary: Creates a notification hub.
+    fullName: >-
+      azure-sb.ServiceBusService.createNotificationHub(hubPath, options,
+      callback)
+    type: Function
+    syntax:
+      parameters:
+        - id: hubPath
+          type:
+            - string
+          description: A string object that represents the name of the notification hub.
+        - id: options
+          type:
+            - object
+          description: The request options or callback function.
+          optional: true
+        - id: options.wns
+          type:
+            - object
+          description: An object with the key value pairs for the WNS credentials.
+          optional: true
+        - id: options.apns
+          type:
+            - object
+          description: An object with the key value pairs for the APNS credentials.
+          optional: true
+        - id: options.gcm
+          type:
+            - object
+          description: An object with the key value pairs for the GCM credentials.
+          optional: true
+        - id: options.mpns
+          type:
+            - object
+          description: An object with the key value pairs for the MPNS credentials.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                      if an error occurs; otherwise `result` will contain\r                                                      the new notification hub information.\r                                                      `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function createNotificationHub(hubPath, options, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#getNotificationHub
+    id: azure-sb.ServiceBusService#getNotificationHub
+    parent: azure-sb.ServiceBusService
+    name: 'getNotificationHub(hubPath, callback)'
+    summary: Gets a notification hub.
+    fullName: 'azure-sb.ServiceBusService.getNotificationHub(hubPath, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: hubPath
+          type:
+            - string
+          description: A string object that represents the name of the notification hub.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                                            if an error occurs; otherwise `result` will contain\r                                                                            the notification hub information.\r                                                                            `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function getNotificationHub(hubPath, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#listNotificationHubs
+    id: azure-sb.ServiceBusService#listNotificationHubs
+    parent: azure-sb.ServiceBusService
+    name: 'listNotificationHubs(options, callback)'
+    summary: Returns a list of notification hubs.
+    fullName: 'azure-sb.ServiceBusService.listNotificationHubs(options, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: options
+          type:
+            - object
+          description: The request options or callback function.
+          optional: true
+        - id: options.top
+          type:
+            - azure-sb.int
+          description: The number of topics to fetch.
+          optional: true
+        - id: options.skip
+          type:
+            - azure-sb.int
+          description: The number of topics to skip.
+          optional: true
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                                      if an error occurs; otherwise `result` will contain\r                                                      the list of notification hubs.\r                                                      `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function listNotificationHubs(options, callback)'
+    langs:
+      - js
+  - uid: azure-sb.ServiceBusService#deleteNotificationHub
+    id: azure-sb.ServiceBusService#deleteNotificationHub
+    parent: azure-sb.ServiceBusService
+    name: 'deleteNotificationHub(hubPath, callback)'
+    summary: Deletes a notification hub.
+    fullName: 'azure-sb.ServiceBusService.deleteNotificationHub(hubPath, callback)'
+    type: Function
+    syntax:
+      parameters:
+        - id: hubPath
+          type:
+            - string
+          description: A string object that represents the name of the notification hub.
+        - id: callback
+          type:
+            - function
+          description: "`error` will contain information\r                                             if an error occurs; otherwise `response` will contain information related to this operation."
+      return:
+        type:
+          - undefined
+        description: ''
+      content: 'function deleteNotificationHub(hubPath, callback)'
+    langs:
+      - js

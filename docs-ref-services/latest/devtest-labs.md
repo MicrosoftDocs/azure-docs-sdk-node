@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-author: xirzec
-ms.service: devtestlabs
-ms.author: jeffish
-ms.data: 08/25/2022
-description: Reference for Azure DevTest Labs SDK for JavaScript
-title: Azure DevTest Labs SDK for JavaScript
 ms.devlang: javascript
+ms.author: jeffish
+ms.service: devtestlabs
+description: Reference for Azure DevTest Labs SDK for JavaScript
+author: xirzec
+ms.topic: reference
+title: Azure DevTest Labs SDK for JavaScript
+ms.data: 08/26/2022
 ms.date: 06/15/2022
 ---
 # Azure DevTest Labs modules for JavaScript

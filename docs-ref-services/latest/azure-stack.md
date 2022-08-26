@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-author: xirzec
-ms.service: azurestack
-ms.author: jeffish
-ms.data: 08/25/2022
-description: Reference for Azure Azure Stack SDK for JavaScript
-title: Azure Azure Stack SDK for JavaScript
 ms.devlang: javascript
+ms.author: jeffish
+ms.service: azurestack
+description: Reference for Azure Azure Stack SDK for JavaScript
+author: xirzec
+ms.topic: reference
+title: Azure Azure Stack SDK for JavaScript
+ms.data: 08/26/2022
 ---
 # Azure Azure Stack SDK for JavaScript - latest
 

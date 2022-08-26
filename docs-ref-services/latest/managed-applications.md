@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-author: xirzec
-ms.service: managedapplications
-ms.author: jeffish
-ms.data: 08/25/2022
-description: Reference for Azure Managed Applications SDK for JavaScript
-title: Azure Managed Applications SDK for JavaScript
 ms.devlang: javascript
+ms.author: jeffish
+ms.service: managedapplications
+description: Reference for Azure Managed Applications SDK for JavaScript
+author: xirzec
+ms.topic: reference
+title: Azure Managed Applications SDK for JavaScript
+ms.data: 08/26/2022
 ---
 # Azure Managed Applications SDK for JavaScript - latest
 

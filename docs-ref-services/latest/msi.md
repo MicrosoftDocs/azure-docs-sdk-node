@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-author: xirzec
-ms.service: msi
-ms.author: jeffish
-ms.data: 08/25/2022
-description: Reference for Azure MSI SDK for JavaScript
-title: Azure MSI SDK for JavaScript
 ms.devlang: javascript
+ms.author: jeffish
+ms.service: msi
+description: Reference for Azure MSI SDK for JavaScript
+author: xirzec
+ms.topic: reference
+title: Azure MSI SDK for JavaScript
+ms.data: 08/26/2022
 ---
 # Azure MSI SDK for JavaScript - latest
 

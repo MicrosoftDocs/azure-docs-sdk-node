@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-author: xirzec
-ms.service: workspaces
-ms.author: jeffish
-ms.data: 08/25/2022
-description: Reference for Azure Workspaces SDK for JavaScript
-title: Azure Workspaces SDK for JavaScript
 ms.devlang: javascript
+ms.author: jeffish
+ms.service: workspaces
+description: Reference for Azure Workspaces SDK for JavaScript
+author: xirzec
+ms.topic: reference
+title: Azure Workspaces SDK for JavaScript
+ms.data: 08/26/2022
 ---
 # Azure Workspaces SDK for JavaScript - latest
 

@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-author: xirzec
-ms.service: hanaonazure
-ms.author: jeffish
-ms.data: 08/25/2022
-description: Reference for Azure Hana on Azure SDK for JavaScript
-title: Azure Hana on Azure SDK for JavaScript
 ms.devlang: javascript
+ms.author: jeffish
+ms.service: hanaonazure
+description: Reference for Azure Hana on Azure SDK for JavaScript
+author: xirzec
+ms.topic: reference
+title: Azure Hana on Azure SDK for JavaScript
+ms.data: 08/26/2022
 ---
 # Azure Hana on Azure SDK for JavaScript - latest
 

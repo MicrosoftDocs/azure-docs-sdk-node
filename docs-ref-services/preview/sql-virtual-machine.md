@@ -1,12 +1,12 @@
 ---
-ms.devlang: javascript
 ms.author: jeffish
-ms.service: sqlvirtualmachine
-description: Reference for Azure SQL Virtual Machine SDK for JavaScript
 author: xirzec
-ms.topic: reference
 title: Azure SQL Virtual Machine SDK for JavaScript
-ms.data: 08/26/2022
+ms.service: sqlvirtualmachine
+ms.topic: reference
+description: Reference for Azure SQL Virtual Machine SDK for JavaScript
+ms.data: 08/29/2022
+ms.devlang: javascript
 ---
 # Azure SQL Virtual Machine SDK for JavaScript - preview
 

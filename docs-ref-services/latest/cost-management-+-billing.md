@@ -1,12 +1,12 @@
 ---
-ms.devlang: javascript
 ms.author: jeffish
-ms.service: costmanagement+billing
-description: Reference for Azure Cost Management + Billing SDK for JavaScript
 author: xirzec
-ms.topic: reference
 title: Azure Cost Management + Billing SDK for JavaScript
-ms.data: 08/26/2022
+ms.service: costmanagement+billing
+ms.topic: reference
+description: Reference for Azure Cost Management + Billing SDK for JavaScript
+ms.data: 08/29/2022
+ms.devlang: javascript
 ---
 # Azure Cost Management + Billing SDK for JavaScript - latest
 

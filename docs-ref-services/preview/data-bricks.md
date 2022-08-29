@@ -1,12 +1,12 @@
 ---
-ms.devlang: javascript
 ms.author: jeffish
-ms.service: databricks
-description: Reference for Azure Data Bricks SDK for JavaScript
 author: xirzec
-ms.topic: reference
 title: Azure Data Bricks SDK for JavaScript
-ms.data: 08/26/2022
+ms.service: databricks
+ms.topic: reference
+description: Reference for Azure Data Bricks SDK for JavaScript
+ms.data: 08/29/2022
+ms.devlang: javascript
 ---
 # Azure Data Bricks SDK for JavaScript - preview
 

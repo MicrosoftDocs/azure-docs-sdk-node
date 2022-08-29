@@ -1,12 +1,12 @@
 ---
-ms.devlang: javascript
-ms.author: jasam
-ms.service: cosmosdb
-description: Reference for Azure Cosmos DB SDK for JavaScript
-author: jay-most
-ms.topic: reference
+ms.author: kuthapar
+author: kushagraThapar
 title: Azure Cosmos DB SDK for JavaScript
-ms.data: 08/26/2022
+ms.service: cosmosdb
+ms.topic: reference
+description: Reference for Azure Cosmos DB SDK for JavaScript
+ms.data: 08/29/2022
+ms.devlang: javascript
 ms.date: 06/15/2022
 ---
 # Azure Cosmos DB Modules for JavaScript

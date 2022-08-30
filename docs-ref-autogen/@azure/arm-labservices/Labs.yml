@@ -2,29 +2,14 @@
 name: Labs
 uid: '@azure/arm-labservices.Labs'
 package: '@azure/arm-labservices'
-summary: Class representing a Labs.
+summary: Interface representing a Labs.
 fullName: Labs
 remarks: ''
 isPreview: false
 isDeprecated: false
-type: class
-constructors:
-  - name: Labs(LabServicesClientContext)
-    uid: '@azure/arm-labservices.Labs.constructor'
-    package: '@azure/arm-labservices'
-    summary: Create a Labs.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'new Labs(client: LabServicesClientContext)'
-      parameters:
-        - id: client
-          type: <xref uid="@azure/arm-labservices.LabServicesClientContext" />
-          description: |
-            Reference to the service client.
+type: interface
 methods:
-  - name: 'beginCreateOrUpdate(Lab, string, string, msRest.RequestOptionsBase)'
+  - name: 'beginCreateOrUpdate(string, string, Lab, LabsCreateOrUpdateOptionalParams)'
     uid: '@azure/arm-labservices.Labs.beginCreateOrUpdate'
     package: '@azure/arm-labservices'
     summary: Operation to create or update a lab resource.
@@ -33,13 +18,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function beginCreateOrUpdate(body: Lab, resourceGroupName: string,
-        labName: string, options?: msRest.RequestOptionsBase):
-        Promise<LROPoller>
+        function beginCreateOrUpdate(resourceGroupName: string, labName: string,
+        body: Lab, options?: LabsCreateOrUpdateOptionalParams):
+        Promise<PollerLike<PollOperationState<LabsCreateOrUpdateResponse>,
+        LabsCreateOrUpdateResponse>>
       parameters:
-        - id: body
-          type: <xref uid="@azure/arm-labservices.Lab" />
-          description: The request body.
         - id: resourceGroupName
           type: string
           description: The name of the resource group. The name is case insensitive.
@@ -47,17 +30,63 @@ methods:
           type: string
           description: >-
             The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
+            lab plan. Used in
+                           resource URIs.
+        - id: body
+          type: <xref uid="@azure/arm-labservices.Lab" />
+          description: The request body.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: >-
+            <xref uid="@azure/arm-labservices.LabsCreateOrUpdateOptionalParams"
+            />
+          description: |
+            The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
-  - name: 'beginDeleteMethod(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-labservices.Labs.beginDeleteMethod'
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-labservices.LabsCreateOrUpdateResponse" />&gt;, <xref
+          uid="@azure/arm-labservices.LabsCreateOrUpdateResponse" />&gt;&gt;
+  - name: >-
+      beginCreateOrUpdateAndWait(string, string, Lab,
+      LabsCreateOrUpdateOptionalParams)
+    uid: '@azure/arm-labservices.Labs.beginCreateOrUpdateAndWait'
+    package: '@azure/arm-labservices'
+    summary: Operation to create or update a lab resource.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginCreateOrUpdateAndWait(resourceGroupName: string, labName:
+        string, body: Lab, options?: LabsCreateOrUpdateOptionalParams):
+        Promise<LabsCreateOrUpdateResponse>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group. The name is case insensitive.
+        - id: labName
+          type: string
+          description: >-
+            The name of the lab that uniquely identifies it within containing
+            lab plan. Used in
+                           resource URIs.
+        - id: body
+          type: <xref uid="@azure/arm-labservices.Lab" />
+          description: The request body.
+        - id: options
+          type: >-
+            <xref uid="@azure/arm-labservices.LabsCreateOrUpdateOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-labservices.LabsCreateOrUpdateResponse" />&gt;
+  - name: 'beginDelete(string, string, LabsDeleteOptionalParams)'
+    uid: '@azure/arm-labservices.Labs.beginDelete'
     package: '@azure/arm-labservices'
     summary: Operation to delete a lab resource.
     remarks: ''
@@ -65,8 +94,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function beginDeleteMethod(resourceGroupName: string, labName: string,
-        options?: msRest.RequestOptionsBase): Promise<LROPoller>
+        function beginDelete(resourceGroupName: string, labName: string,
+        options?: LabsDeleteOptionalParams):
+        Promise<PollerLike<PollOperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -75,30 +105,57 @@ methods:
           type: string
           description: >-
             The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
+            lab plan. Used in
+                           resource URIs.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-labservices.LabsDeleteOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
-  - name: 'beginPublish(string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+  - name: 'beginDeleteAndWait(string, string, LabsDeleteOptionalParams)'
+    uid: '@azure/arm-labservices.Labs.beginDeleteAndWait'
+    package: '@azure/arm-labservices'
+    summary: Operation to delete a lab resource.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginDeleteAndWait(resourceGroupName: string, labName: string,
+        options?: LabsDeleteOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group. The name is case insensitive.
+        - id: labName
+          type: string
+          description: >-
+            The name of the lab that uniquely identifies it within containing
+            lab plan. Used in
+                           resource URIs.
+        - id: options
+          type: <xref uid="@azure/arm-labservices.LabsDeleteOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: 'beginPublish(string, string, LabsPublishOptionalParams)'
     uid: '@azure/arm-labservices.Labs.beginPublish'
     package: '@azure/arm-labservices'
     summary: >-
       Publish or re-publish a lab. This will create or update all lab resources,
-      such as virtual
-
-      machines.
+      such as virtual machines.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function beginPublish(resourceGroupName: string, labName: string,
-        options?: msRest.RequestOptionsBase): Promise<LROPoller>
+        options?: LabsPublishOptionalParams):
+        Promise<PollerLike<PollOperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -107,16 +164,46 @@ methods:
           type: string
           description: >-
             The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
+            lab plan. Used in
+                           resource URIs.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-labservices.LabsPublishOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
-  - name: 'beginSyncGroup(string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+  - name: 'beginPublishAndWait(string, string, LabsPublishOptionalParams)'
+    uid: '@azure/arm-labservices.Labs.beginPublishAndWait'
+    package: '@azure/arm-labservices'
+    summary: >-
+      Publish or re-publish a lab. This will create or update all lab resources,
+      such as virtual machines.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginPublishAndWait(resourceGroupName: string, labName: string,
+        options?: LabsPublishOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group. The name is case insensitive.
+        - id: labName
+          type: string
+          description: >-
+            The name of the lab that uniquely identifies it within containing
+            lab plan. Used in
+                           resource URIs.
+        - id: options
+          type: <xref uid="@azure/arm-labservices.LabsPublishOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: 'beginSyncGroup(string, string, LabsSyncGroupOptionalParams)'
     uid: '@azure/arm-labservices.Labs.beginSyncGroup'
     package: '@azure/arm-labservices'
     summary: Action used to manually kick off an AAD group sync job.
@@ -126,7 +213,8 @@ methods:
     syntax:
       content: >-
         function beginSyncGroup(resourceGroupName: string, labName: string,
-        options?: msRest.RequestOptionsBase): Promise<LROPoller>
+        options?: LabsSyncGroupOptionalParams):
+        Promise<PollerLike<PollOperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -135,16 +223,44 @@ methods:
           type: string
           description: >-
             The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
+            lab plan. Used in
+                           resource URIs.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-labservices.LabsSyncGroupOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
-  - name: 'beginUpdate(LabUpdate, string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+  - name: 'beginSyncGroupAndWait(string, string, LabsSyncGroupOptionalParams)'
+    uid: '@azure/arm-labservices.Labs.beginSyncGroupAndWait'
+    package: '@azure/arm-labservices'
+    summary: Action used to manually kick off an AAD group sync job.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginSyncGroupAndWait(resourceGroupName: string, labName:
+        string, options?: LabsSyncGroupOptionalParams): Promise<void>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group. The name is case insensitive.
+        - id: labName
+          type: string
+          description: >-
+            The name of the lab that uniquely identifies it within containing
+            lab plan. Used in
+                           resource URIs.
+        - id: options
+          type: <xref uid="@azure/arm-labservices.LabsSyncGroupOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: 'beginUpdate(string, string, LabUpdate, LabsUpdateOptionalParams)'
     uid: '@azure/arm-labservices.Labs.beginUpdate'
     package: '@azure/arm-labservices'
     summary: Operation to update a lab resource.
@@ -153,13 +269,46 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function beginUpdate(body: LabUpdate, resourceGroupName: string,
-        labName: string, options?: msRest.RequestOptionsBase):
-        Promise<LROPoller>
+        function beginUpdate(resourceGroupName: string, labName: string, body:
+        LabUpdate, options?: LabsUpdateOptionalParams):
+        Promise<PollerLike<PollOperationState<LabsUpdateResponse>,
+        LabsUpdateResponse>>
       parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group. The name is case insensitive.
+        - id: labName
+          type: string
+          description: >-
+            The name of the lab that uniquely identifies it within containing
+            lab plan. Used in
+                           resource URIs.
         - id: body
           type: <xref uid="@azure/arm-labservices.LabUpdate" />
           description: The request body.
+        - id: options
+          type: <xref uid="@azure/arm-labservices.LabsUpdateOptionalParams" />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-labservices.LabsUpdateResponse" />&gt;, <xref
+          uid="@azure/arm-labservices.LabsUpdateResponse" />&gt;&gt;
+  - name: 'beginUpdateAndWait(string, string, LabUpdate, LabsUpdateOptionalParams)'
+    uid: '@azure/arm-labservices.Labs.beginUpdateAndWait'
+    package: '@azure/arm-labservices'
+    summary: Operation to update a lab resource.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginUpdateAndWait(resourceGroupName: string, labName: string,
+        body: LabUpdate, options?: LabsUpdateOptionalParams):
+        Promise<LabsUpdateResponse>
+      parameters:
         - id: resourceGroupName
           type: string
           description: The name of the resource group. The name is case insensitive.
@@ -167,76 +316,21 @@ methods:
           type: string
           description: >-
             The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<msRestAzure.LROPoller>
-        type: Promise&lt;LROPoller&gt;
-  - name: 'createOrUpdate(Lab, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-labservices.Labs.createOrUpdate'
-    package: '@azure/arm-labservices'
-    summary: Operation to create or update a lab resource.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createOrUpdate(body: Lab, resourceGroupName: string, labName:
-        string, options?: msRest.RequestOptionsBase):
-        Promise<Models.LabsCreateOrUpdateResponse>
-      parameters:
+            lab plan. Used in
+                           resource URIs.
         - id: body
-          type: <xref uid="@azure/arm-labservices.Lab" />
+          type: <xref uid="@azure/arm-labservices.LabUpdate" />
           description: The request body.
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: labName
-          type: string
-          description: >-
-            The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-labservices.LabsUpdateOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.LabsCreateOrUpdateResponse>
-        type: Promise&lt;<xref uid="Models.LabsCreateOrUpdateResponse" />&gt;
-  - name: 'deleteMethod(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-labservices.Labs.deleteMethod'
-    package: '@azure/arm-labservices'
-    summary: Operation to delete a lab resource.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function deleteMethod(resourceGroupName: string, labName: string,
-        options?: msRest.RequestOptionsBase): Promise<RestResponse>
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: labName
-          type: string
-          description: >-
-            The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<msRest.RestResponse>
-        type: Promise&lt;RestResponse&gt;
-  - name: 'get(string, string, msRest.RequestOptionsBase)'
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-labservices.LabsUpdateResponse"
+          />&gt;
+  - name: 'get(string, string, LabsGetOptionalParams)'
     uid: '@azure/arm-labservices.Labs.get'
     package: '@azure/arm-labservices'
     summary: Returns the properties of a lab resource.
@@ -246,7 +340,7 @@ methods:
     syntax:
       content: >-
         function get(resourceGroupName: string, labName: string, options?:
-        msRest.RequestOptionsBase): Promise<Models.LabsGetResponse>
+        LabsGetOptionalParams): Promise<LabsGetResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -255,71 +349,16 @@ methods:
           type: string
           description: >-
             The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
+            lab plan. Used in
+                           resource URIs.
         - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
+          type: <xref uid="@azure/arm-labservices.LabsGetOptionalParams" />
+          description: |
+            The options parameters.
       return:
-        description: Promise<Models.LabsGetResponse>
-        type: Promise&lt;<xref uid="Models.LabsGetResponse" />&gt;
-  - name: 'get(string, string, RequestOptionsBase, ServiceCallback<Lab>)'
-    uid: '@azure/arm-labservices.Labs.get_2'
-    package: '@azure/arm-labservices'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, labName: string, options:
-        RequestOptionsBase, callback: ServiceCallback<Lab>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: labName
-          type: string
-          description: >-
-            The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-labservices.Lab" />&gt;
-          description: |
-            The callback
-  - name: 'get(string, string, ServiceCallback<Lab>)'
-    uid: '@azure/arm-labservices.Labs.get_1'
-    package: '@azure/arm-labservices'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function get(resourceGroupName: string, labName: string, callback:
-        ServiceCallback<Lab>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: labName
-          type: string
-          description: >-
-            The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
-        - id: callback
-          type: ServiceCallback&lt;<xref uid="@azure/arm-labservices.Lab" />&gt;
-          description: |
-            The callback
-  - name: 'listByResourceGroup(string, msRest.RequestOptionsBase)'
+        description: ''
+        type: Promise&lt;<xref uid="@azure/arm-labservices.LabsGetResponse" />&gt;
+  - name: 'listByResourceGroup(string, LabsListByResourceGroupOptionalParams)'
     uid: '@azure/arm-labservices.Labs.listByResourceGroup'
     package: '@azure/arm-labservices'
     summary: Returns a list of all labs in a resource group.
@@ -329,163 +368,24 @@ methods:
     syntax:
       content: >-
         function listByResourceGroup(resourceGroupName: string, options?:
-        msRest.RequestOptionsBase):
-        Promise<Models.LabsListByResourceGroupResponse>
+        LabsListByResourceGroupOptionalParams): PagedAsyncIterableIterator<Lab>
       parameters:
         - id: resourceGroupName
           type: string
           description: The name of the resource group. The name is case insensitive.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<Models.LabsListByResourceGroupResponse>
-        type: Promise&lt;<xref uid="Models.LabsListByResourceGroupResponse" />&gt;
-  - name: >-
-      listByResourceGroup(string, RequestOptionsBase,
-      ServiceCallback<PagedLabs>)
-    uid: '@azure/arm-labservices.Labs.listByResourceGroup_2'
-    package: '@azure/arm-labservices'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroup(resourceGroupName: string, options:
-        RequestOptionsBase, callback: ServiceCallback<PagedLabs>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-labservices.PagedLabs"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listByResourceGroup(string, ServiceCallback<PagedLabs>)'
-    uid: '@azure/arm-labservices.Labs.listByResourceGroup_1'
-    package: '@azure/arm-labservices'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroup(resourceGroupName: string, callback:
-        ServiceCallback<PagedLabs>)
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-labservices.PagedLabs"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listByResourceGroupNext(string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-labservices.Labs.listByResourceGroupNext'
-    package: '@azure/arm-labservices'
-    summary: Returns a list of all labs in a resource group.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, options?:
-        msRest.RequestOptionsBase):
-        Promise<Models.LabsListByResourceGroupNextResponse>
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<Models.LabsListByResourceGroupNextResponse>
-        type: >-
-          Promise&lt;<xref uid="Models.LabsListByResourceGroupNextResponse"
-          />&gt;
-  - name: >-
-      listByResourceGroupNext(string, RequestOptionsBase,
-      ServiceCallback<PagedLabs>)
-    uid: '@azure/arm-labservices.Labs.listByResourceGroupNext_2'
-    package: '@azure/arm-labservices'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, options:
-        RequestOptionsBase, callback: ServiceCallback<PagedLabs>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: RequestOptionsBase
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-labservices.PagedLabs"
-            />&gt;
-          description: |
-            The callback
-  - name: 'listByResourceGroupNext(string, ServiceCallback<PagedLabs>)'
-    uid: '@azure/arm-labservices.Labs.listByResourceGroupNext_1'
-    package: '@azure/arm-labservices'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listByResourceGroupNext(nextPageLink: string, callback:
-        ServiceCallback<PagedLabs>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-labservices.PagedLabs"
-            />&gt;
-          description: |
-            The callback
-  - name: >-
-      listBySubscription(LabsListBySubscriptionOptionalParams,
-      ServiceCallback<PagedLabs>)
-    uid: '@azure/arm-labservices.Labs.listBySubscription_2'
-    package: '@azure/arm-labservices'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listBySubscription(options:
-        LabsListBySubscriptionOptionalParams, callback:
-        ServiceCallback<PagedLabs>)
-      parameters:
         - id: options
           type: >-
             <xref
-            uid="@azure/arm-labservices.LabsListBySubscriptionOptionalParams" />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-labservices.PagedLabs"
-            />&gt;
+            uid="@azure/arm-labservices.LabsListByResourceGroupOptionalParams"
+            />
           description: |
-            The callback
-  - name: listBySubscription(Models.LabsListBySubscriptionOptionalParams)
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-labservices.Lab"
+          />&gt;
+  - name: listBySubscription(LabsListBySubscriptionOptionalParams)
     uid: '@azure/arm-labservices.Labs.listBySubscription'
     package: '@azure/arm-labservices'
     summary: Returns a list of all labs for a subscription.
@@ -495,197 +395,16 @@ methods:
     syntax:
       content: >-
         function listBySubscription(options?:
-        Models.LabsListBySubscriptionOptionalParams):
-        Promise<Models.LabsListBySubscriptionResponse>
+        LabsListBySubscriptionOptionalParams): PagedAsyncIterableIterator<Lab>
       parameters:
-        - id: options
-          type: <xref uid="Models.LabsListBySubscriptionOptionalParams" />
-          description: ''
-      return:
-        description: Promise<Models.LabsListBySubscriptionResponse>
-        type: Promise&lt;<xref uid="Models.LabsListBySubscriptionResponse" />&gt;
-  - name: listBySubscription(ServiceCallback<PagedLabs>)
-    uid: '@azure/arm-labservices.Labs.listBySubscription_1'
-    package: '@azure/arm-labservices'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: 'function listBySubscription(callback: ServiceCallback<PagedLabs>)'
-      parameters:
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-labservices.PagedLabs"
-            />&gt;
-          description: |
-            The callback
-  - name: >-
-      listBySubscriptionNext(string, LabsListBySubscriptionNextOptionalParams,
-      ServiceCallback<PagedLabs>)
-    uid: '@azure/arm-labservices.Labs.listBySubscriptionNext_2'
-    package: '@azure/arm-labservices'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listBySubscriptionNext(nextPageLink: string, options:
-        LabsListBySubscriptionNextOptionalParams, callback:
-        ServiceCallback<PagedLabs>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
         - id: options
           type: >-
             <xref
-            uid="@azure/arm-labservices.LabsListBySubscriptionNextOptionalParams"
-            />
-          description: The optional parameters
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-labservices.PagedLabs"
-            />&gt;
+            uid="@azure/arm-labservices.LabsListBySubscriptionOptionalParams" />
           description: |
-            The callback
-  - name: >-
-      listBySubscriptionNext(string,
-      Models.LabsListBySubscriptionNextOptionalParams)
-    uid: '@azure/arm-labservices.Labs.listBySubscriptionNext'
-    package: '@azure/arm-labservices'
-    summary: Returns a list of all labs for a subscription.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listBySubscriptionNext(nextPageLink: string, options?:
-        Models.LabsListBySubscriptionNextOptionalParams):
-        Promise<Models.LabsListBySubscriptionNextResponse>
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: options
-          type: <xref uid="Models.LabsListBySubscriptionNextOptionalParams" />
-          description: ''
+            The options parameters.
       return:
-        description: Promise<Models.LabsListBySubscriptionNextResponse>
+        description: ''
         type: >-
-          Promise&lt;<xref uid="Models.LabsListBySubscriptionNextResponse"
+          PagedAsyncIterableIterator&lt;<xref uid="@azure/arm-labservices.Lab"
           />&gt;
-  - name: 'listBySubscriptionNext(string, ServiceCallback<PagedLabs>)'
-    uid: '@azure/arm-labservices.Labs.listBySubscriptionNext_1'
-    package: '@azure/arm-labservices'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function listBySubscriptionNext(nextPageLink: string, callback:
-        ServiceCallback<PagedLabs>)
-      parameters:
-        - id: nextPageLink
-          type: string
-          description: The NextLink from the previous successful call to List operation.
-        - id: callback
-          type: >-
-            ServiceCallback&lt;<xref uid="@azure/arm-labservices.PagedLabs"
-            />&gt;
-          description: |
-            The callback
-  - name: 'publish(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-labservices.Labs.publish'
-    package: '@azure/arm-labservices'
-    summary: >-
-      Publish or re-publish a lab. This will create or update all lab resources,
-      such as virtual
-
-      machines.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function publish(resourceGroupName: string, labName: string, options?:
-        msRest.RequestOptionsBase): Promise<RestResponse>
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: labName
-          type: string
-          description: >-
-            The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<msRest.RestResponse>
-        type: Promise&lt;RestResponse&gt;
-  - name: 'syncGroup(string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-labservices.Labs.syncGroup'
-    package: '@azure/arm-labservices'
-    summary: Action used to manually kick off an AAD group sync job.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function syncGroup(resourceGroupName: string, labName: string, options?:
-        msRest.RequestOptionsBase): Promise<RestResponse>
-      parameters:
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: labName
-          type: string
-          description: >-
-            The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<msRest.RestResponse>
-        type: Promise&lt;RestResponse&gt;
-  - name: 'update(LabUpdate, string, string, msRest.RequestOptionsBase)'
-    uid: '@azure/arm-labservices.Labs.update'
-    package: '@azure/arm-labservices'
-    summary: Operation to update a lab resource.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function update(body: LabUpdate, resourceGroupName: string, labName:
-        string, options?: msRest.RequestOptionsBase):
-        Promise<Models.LabsUpdateResponse>
-      parameters:
-        - id: body
-          type: <xref uid="@azure/arm-labservices.LabUpdate" />
-          description: The request body.
-        - id: resourceGroupName
-          type: string
-          description: The name of the resource group. The name is case insensitive.
-        - id: labName
-          type: string
-          description: >-
-            The name of the lab that uniquely identifies it within containing
-            lab account.
-
-            Used in resource URIs.
-        - id: options
-          type: <xref uid="msRest.RequestOptionsBase" />
-          description: ''
-      return:
-        description: Promise<Models.LabsUpdateResponse>
-        type: Promise&lt;<xref uid="Models.LabsUpdateResponse" />&gt;

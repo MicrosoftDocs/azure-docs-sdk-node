@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
-author: xirzec
-title: Azure farmbeats SDK for JavaScript
-ms.service: farmbeats
-ms.topic: reference
-description: Reference for Azure farmbeats SDK for JavaScript
-ms.data: 08/29/2022
 ms.devlang: javascript
+title: Azure farmbeats SDK for JavaScript
+ms.topic: reference
+ms.author: jeffish
+ms.data: 08/31/2022
+author: xirzec
+ms.service: farmbeats
+description: Reference for Azure farmbeats SDK for JavaScript
 ---
 # Azure farmbeats SDK for JavaScript - preview
 

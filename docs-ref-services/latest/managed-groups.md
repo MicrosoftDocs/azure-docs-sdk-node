@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
-author: xirzec
-title: Azure Managed Groups SDK for JavaScript
-ms.service: managedgroups
-ms.topic: reference
-description: Reference for Azure Managed Groups SDK for JavaScript
-ms.data: 08/29/2022
 ms.devlang: javascript
+title: Azure Managed Groups SDK for JavaScript
+ms.topic: reference
+ms.author: jeffish
+ms.data: 08/31/2022
+author: xirzec
+ms.service: managedgroups
+description: Reference for Azure Managed Groups SDK for JavaScript
 ---
 # Azure Managed Groups SDK for JavaScript - latest
 

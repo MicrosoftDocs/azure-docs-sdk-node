@@ -1,11 +1,11 @@
 ---
-ms.devlang: javascript
-title: Azure Devcenter SDK for JavaScript
-ms.topic: reference
-ms.author: jeffish
-ms.data: 08/31/2022
 author: xirzec
+ms.topic: reference
+ms.devlang: javascript
 ms.service: devcenter
+ms.author: jeffish
+ms.data: 09/01/2022
+title: Azure Devcenter SDK for JavaScript
 description: Reference for Azure Devcenter SDK for JavaScript
 ---
 # Azure Devcenter SDK for JavaScript - preview

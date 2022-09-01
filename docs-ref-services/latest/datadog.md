@@ -1,11 +1,11 @@
 ---
-ms.devlang: javascript
-title: Azure Datadog SDK for JavaScript
-ms.topic: reference
-ms.author: jeffish
-ms.data: 08/31/2022
 author: xirzec
+ms.topic: reference
+ms.devlang: javascript
 ms.service: datadog
+ms.author: jeffish
+ms.data: 09/01/2022
+title: Azure Datadog SDK for JavaScript
 description: Reference for Azure Datadog SDK for JavaScript
 ---
 # Azure Datadog SDK for JavaScript - latest

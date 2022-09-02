@@ -1,12 +1,12 @@
 ---
-author: xirzec
-ms.topic: reference
-ms.devlang: javascript
-ms.service: frontdoor
-ms.author: jeffish
-ms.data: 09/01/2022
-title: Azure Front Door SDK for JavaScript
 description: Reference for Azure Front Door SDK for JavaScript
+ms.topic: reference
+ms.data: 09/02/2022
+ms.devlang: javascript
+title: Azure Front Door SDK for JavaScript
+ms.author: jeffish
+ms.service: frontdoor
+author: xirzec
 ---
 # Azure Front Door SDK for JavaScript - latest
 

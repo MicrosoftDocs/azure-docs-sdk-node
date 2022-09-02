@@ -1,12 +1,12 @@
 ---
-author: jeremymeng
-ms.topic: reference
-ms.devlang: javascript
-ms.service: servicebus
-ms.author: yumeng
-ms.data: 09/01/2022
-title: Azure Service Bus SDK for JavaScript
 description: Reference for Azure Service Bus SDK for JavaScript
+ms.topic: reference
+ms.data: 09/02/2022
+ms.devlang: javascript
+title: Azure Service Bus SDK for JavaScript
+ms.author: yumeng
+ms.service: servicebus
+author: jeremymeng
 ms.date: 06/15/2022
 ---
 # Azure Service Bus Modules for JavaScript

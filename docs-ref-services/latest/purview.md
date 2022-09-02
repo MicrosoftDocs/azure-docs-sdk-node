@@ -1,12 +1,12 @@
 ---
-author: qiaozha
-ms.topic: reference
-ms.devlang: javascript
-ms.service: purview
-ms.author: qiaozha
-ms.data: 09/01/2022
-title: Azure Purview SDK for JavaScript
 description: Reference for Azure Purview SDK for JavaScript
+ms.topic: reference
+ms.data: 09/02/2022
+ms.devlang: javascript
+title: Azure Purview SDK for JavaScript
+ms.author: qiaozha
+ms.service: purview
+author: qiaozha
 ---
 # Azure Purview SDK for JavaScript - latest
 

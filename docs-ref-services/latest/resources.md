@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Resources SDK for JavaScript
-ms.topic: reference
-ms.data: 09/02/2022
-ms.devlang: javascript
 title: Azure Resources SDK for JavaScript
-ms.author: jeffish
-ms.service: resources
 author: xirzec
+ms.data: 09/05/2022
+description: Reference for Azure Resources SDK for JavaScript
+ms.service: resources
+ms.topic: reference
+ms.author: jeffish
+ms.devlang: javascript
 ms.date: 06/15/2022
 ---
 # Azure Resource modules for JavaScript

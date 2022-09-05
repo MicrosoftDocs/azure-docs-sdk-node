@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Redis Cache SDK for JavaScript
-ms.topic: reference
-ms.data: 09/02/2022
-ms.devlang: javascript
 title: Azure Redis Cache SDK for JavaScript
-ms.author: jeffish
-ms.service: cache
 author: xirzec
+ms.data: 09/05/2022
+description: Reference for Azure Redis Cache SDK for JavaScript
+ms.service: cache
+ms.topic: reference
+ms.author: jeffish
+ms.devlang: javascript
 ms.date: 06/15/2022
 ---
 # Azure Redis Cache modules for JavaScript

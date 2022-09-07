@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Azureadexternalidentities SDK for JavaScript
-ms.service: azureadexternalidentities
 ms.author: jeffish
 author: xirzec
 title: Azure Azureadexternalidentities SDK for JavaScript
-ms.devlang: javascript
-ms.data: 09/06/2022
+ms.data: 09/07/2022
+description: Reference for Azure Azureadexternalidentities SDK for JavaScript
+ms.service: azureadexternalidentities
 ms.topic: reference
+ms.devlang: javascript
 ---
 # Azure Azureadexternalidentities SDK for JavaScript - latest
 

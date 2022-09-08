@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
-author: xirzec
-title: Azure Databoxedge SDK for JavaScript
-ms.data: 09/07/2022
-description: Reference for Azure Databoxedge SDK for JavaScript
-ms.service: databoxedge
 ms.topic: reference
+description: Reference for Azure Databoxedge SDK for JavaScript
+ms.author: jeffish
 ms.devlang: javascript
+title: Azure Databoxedge SDK for JavaScript
+ms.service: databoxedge
+ms.data: 09/08/2022
+author: xirzec
 ---
 # Azure Databoxedge SDK for JavaScript - latest
 

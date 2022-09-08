@@ -8,7 +8,7 @@ ms.service: cognitiveserviceforlanguage
 ms.data: 09/08/2022
 author: xirzec
 ---
-# Azure Cognitive Service For Language SDK for JavaScript - preview
+# Azure Cognitive Service For Language SDK for JavaScript - latest
 
-## Client packages - preview
+## Client packages - latest
 [!INCLUDE [client-packages](cognitive-service-for-language-client-index.md)]

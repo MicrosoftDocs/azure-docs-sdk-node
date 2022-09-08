@@ -64,7 +64,7 @@ properties:
         description: ''
         type: boolean
 methods:
-  - name: 'cancelScheduledMessages(Long_2 | Long_2[], OperationOptionsBase)'
+  - name: 'cancelScheduledMessages(Long | Long[], OperationOptionsBase)'
     uid: '@azure/service-bus.ServiceBusSender.cancelScheduledMessages'
     package: '@azure/service-bus'
     summary: >-
@@ -75,11 +75,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function cancelScheduledMessages(sequenceNumbers: Long_2 | Long_2[],
+        function cancelScheduledMessages(sequenceNumbers: Long | Long[],
         options?: OperationOptionsBase): Promise<void>
       parameters:
         - id: sequenceNumbers
-          type: 'Long_2 | Long_2[]'
+          type: 'Long | Long[]'
           description: >-
             Sequence number or an array of sequence numbers of the messages to
             be cancelled.
@@ -152,7 +152,7 @@ methods:
         function scheduleMessages(messages: ServiceBusMessage |
         ServiceBusMessage[] | AmqpAnnotatedMessage | AmqpAnnotatedMessage[],
         scheduledEnqueueTimeUtc: Date, options?: OperationOptionsBase):
-        Promise<Long_2[]>
+        Promise<Long[]>
       parameters:
         - id: messages
           type: >-
@@ -178,7 +178,7 @@ methods:
 
           only supports 53 bit numbers, converting the `Long` to number will
           cause loss in precision.
-        type: 'Promise&lt;Long_2[]&gt;'
+        type: 'Promise&lt;Long[]&gt;'
   - name: >-
       sendMessages(ServiceBusMessage | ServiceBusMessage[] |
       ServiceBusMessageBatch | AmqpAnnotatedMessage | AmqpAnnotatedMessage[],
@@ -197,6 +197,19 @@ methods:
       - All messages passed to the same sendMessages() call should have the same
       `sessionId` (if using
        sessions) and the same `partitionKey` (if using partitions).
+
+      **Note:**
+
+         __If you want to send messages of size greater than 1MB, please send individual messages instead of sending a batched message or an array of messages like below.__
+
+       `await sender.sendMessages(message);`
+
+      __This is because the batched messages are not capable of sending the
+      larger messages yet. You'll hit the `force detached` error in this case
+      otherwise. Read
+      [service-bus-premium-messaging#large-messages-support](https://docs.microsoft.com/en-us/azure/service-bus-messaging/service-bus-premium-messaging#large-messages-support).
+      More info at
+      [#23014](https://github.com/Azure/azure-sdk-for-js/pull/23014).__
     remarks: ''
     isPreview: false
     isDeprecated: false

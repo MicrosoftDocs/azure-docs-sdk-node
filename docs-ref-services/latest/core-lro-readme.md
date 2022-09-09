@@ -3,12 +3,12 @@ title: Azure Core LRO client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/core-lro, core
 author: xirzec
 ms.author: jeffish
-ms.date: 09/02/2022
+ms.date: 09/09/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: core
 ---
-# Azure Core LRO client library for JavaScript - version 2.3.0 
+# Azure Core LRO client library for JavaScript - version 2.3.1 
 
 
 `@azure/core-lro` is a JavaScript library that manages long running operations (LROs) against Azure services. Until completion, such operations require consecutive calls to Azure services to update a local representation of the remote operation status.
@@ -18,10 +18,10 @@ ms.service: core
 `@azure/core-lro` is made following our [Long Running Operations guidelines](https://azure.github.io/azure-sdk/typescript_design.html#ts-lro)
 
 Key links:
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-lro_2.3.0/sdk/core/core-lro)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-lro_2.3.1/sdk/core/core-lro)
 - [Package (npm)](https://www.npmjs.com/package/@azure/core-lro) 
 - [API Reference Documentation](/javascript/api/@azure/core-lro) 
-- [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-lro_2.3.0/sdk/core/core-lro/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-lro_2.3.1/sdk/core/core-lro/samples)
 
 ## Getting started
 
@@ -70,8 +70,8 @@ for more information.
 
 You will be able to find some working examples of an implementation of an operation and a poller in:
 
-- [The `@azure/core-lro` samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-lro_2.3.0/sdk/core/core-lro/samples).
-- [The `@azure/core-lro` tests](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-lro_2.3.0/sdk/core/core-lro/test).
+- [The `@azure/core-lro` samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-lro_2.3.1/sdk/core/core-lro/samples).
+- [The `@azure/core-lro` tests](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-lro_2.3.1/sdk/core/core-lro/test).
 
 ## Troubleshooting
 
@@ -79,15 +79,15 @@ You will be able to find some working examples of an implementation of an operat
 
 Logs can be added at the discretion of the library implementing the Long Running Operation poller.
 Packages inside of [azure-sdk-for-js](https://github.com/Azure/azure-sdk-for-js) use
-[@azure/logger](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-lro_2.3.0/sdk/core/logger).
+[@azure/logger](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-lro_2.3.1/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-lro_2.3.0/sdk/core/core-lro/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-lro_2.3.1/sdk/core/core-lro/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-lro_2.3.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/core-lro_2.3.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ### Testing
 

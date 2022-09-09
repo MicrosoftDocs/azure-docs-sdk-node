@@ -1,12 +1,12 @@
 ---
+ms.data: 09/09/2022
 ms.topic: reference
-description: Reference for Azure SignalR SDK for JavaScript
-ms.author: jeffish
 ms.devlang: javascript
-title: Azure SignalR SDK for JavaScript
 ms.service: signalr
-ms.data: 09/08/2022
+ms.author: jeffish
+title: Azure SignalR SDK for JavaScript
 author: xirzec
+description: Reference for Azure SignalR SDK for JavaScript
 ---
 # Azure SignalR SDK for JavaScript - latest
 

@@ -32,13 +32,11 @@ interfaces:
   - '@azure/notification-hubs.BrowserTemplateRegistrationDescription'
   - '@azure/notification-hubs.DeviceTokenInstallation'
   - '@azure/notification-hubs.EntityOperationOptions'
-  - '@azure/notification-hubs.FcmRegistrationDescription'
-  - '@azure/notification-hubs.FcmTemplateRegistrationDescription'
+  - '@azure/notification-hubs.FcmLegacyInstallation'
+  - '@azure/notification-hubs.FcmLegacyNotification'
   - '@azure/notification-hubs.FirebaseLegacyAndroidNativePayload'
   - '@azure/notification-hubs.FirebaseLegacyAppleNativePayload'
-  - '@azure/notification-hubs.FirebaseLegacyInstallation'
   - '@azure/notification-hubs.FirebaseLegacyNativeMessage'
-  - '@azure/notification-hubs.FirebaseLegacyNotification'
   - '@azure/notification-hubs.FirebaseLegacyWebNativePayload'
   - '@azure/notification-hubs.GcmRegistrationDescription'
   - '@azure/notification-hubs.GcmTemplateRegistrationDescription'
@@ -59,6 +57,7 @@ interfaces:
   - '@azure/notification-hubs.RegistrationQueryLimitOptions'
   - '@azure/notification-hubs.RegistrationQueryOptions'
   - '@azure/notification-hubs.RegistrationQueryResponse'
+  - '@azure/notification-hubs.RegistrationResult'
   - '@azure/notification-hubs.SendOperationOptions'
   - '@azure/notification-hubs.TemplateNotification'
   - '@azure/notification-hubs.TemplateRegistrationDescription'
@@ -144,21 +143,21 @@ functions:
   - name: buildFirebaseLegacyNativeMessage(FirebaseLegacyNativeMessage)
     uid: '@azure/notification-hubs.buildFirebaseLegacyNativeMessage'
     package: '@azure/notification-hubs'
-    summary: Creates a FirebaseLegacyNotification from a native Firebase payload.
+    summary: Creates a FcmLegacyNotification from a native Firebase payload.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
         function buildFirebaseLegacyNativeMessage(nativeMessage:
-        FirebaseLegacyNativeMessage): FirebaseLegacyNotification
+        FirebaseLegacyNativeMessage): FcmLegacyNotification
       parameters:
         - id: nativeMessage
           type: <xref uid="@azure/notification-hubs.FirebaseLegacyNativeMessage" />
           description: The native message payload to send to Notification Hubs.
       return:
-        description: The FirebaseLegacyNotification to send to Notification Hubs.
-        type: <xref uid="@azure/notification-hubs.FirebaseLegacyNotification" />
+        description: The FcmLegacyNotification to send to Notification Hubs.
+        type: <xref uid="@azure/notification-hubs.FcmLegacyNotification" />
   - name: buildWindowsBadgeNativeMessage(WindowsBadgeNativeMessage)
     uid: '@azure/notification-hubs.buildWindowsBadgeNativeMessage'
     package: '@azure/notification-hubs'
@@ -544,57 +543,8 @@ functions:
           <xref
           uid="@azure/notification-hubs.BrowserTemplateRegistrationDescription"
           />
-  - name: 'createFcmRegistrationDescription(Omit<FcmRegistrationDescription, "type">)'
-    uid: '@azure/notification-hubs.createFcmRegistrationDescription'
-    package: '@azure/notification-hubs'
-    summary: Creates an FCM registration description.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createFcmRegistrationDescription(description:
-        Omit<FcmRegistrationDescription, "type">): FcmRegistrationDescription
-      parameters:
-        - id: description
-          type: >-
-            Omit&lt;<xref
-            uid="@azure/notification-hubs.FcmRegistrationDescription" />,
-            "type"&gt;
-          description: A partial FCM registration description.
-      return:
-        description: A created FCM registration description.
-        type: <xref uid="@azure/notification-hubs.FcmRegistrationDescription" />
-  - name: >-
-      createFcmTemplateRegistrationDescription(Omit<FcmTemplateRegistrationDescription,
-      "type">)
-    uid: '@azure/notification-hubs.createFcmTemplateRegistrationDescription'
-    package: '@azure/notification-hubs'
-    summary: Creates an FCM template registration description.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createFcmTemplateRegistrationDescription(description:
-        Omit<FcmTemplateRegistrationDescription, "type">):
-        FcmTemplateRegistrationDescription
-      parameters:
-        - id: description
-          type: >-
-            Omit&lt;<xref
-            uid="@azure/notification-hubs.FcmTemplateRegistrationDescription"
-            />, "type"&gt;
-          description: A partial FCM template registration description.
-      return:
-        description: A created FCM template registration description.
-        type: >-
-          <xref
-          uid="@azure/notification-hubs.FcmTemplateRegistrationDescription" />
-  - name: >-
-      createFirebaseLegacyInstallation(Omit<FirebaseLegacyInstallation,
-      "platform">)
-    uid: '@azure/notification-hubs.createFirebaseLegacyInstallation'
+  - name: 'createFcmLegacyInstallation(Omit<FcmLegacyInstallation, "platform">)'
+    uid: '@azure/notification-hubs.createFcmLegacyInstallation'
     package: '@azure/notification-hubs'
     summary: Creates a Firebase legacy HTTP based installation.
     remarks: ''
@@ -602,25 +552,23 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createFirebaseLegacyInstallation(installation:
-        Omit<FirebaseLegacyInstallation, "platform">):
-        FirebaseLegacyInstallation
+        function createFcmLegacyInstallation(installation:
+        Omit<FcmLegacyInstallation, "platform">): FcmLegacyInstallation
       parameters:
         - id: installation
           type: >-
-            Omit&lt;<xref
-            uid="@azure/notification-hubs.FirebaseLegacyInstallation" />,
-            "platform"&gt;
+            Omit&lt;<xref uid="@azure/notification-hubs.FcmLegacyInstallation"
+            />, "platform"&gt;
           description: >-
             A partial installation used to create the Firebase Legacy HTTP
             installation.
       return:
         description: The newly created Baidu installation.
-        type: <xref uid="@azure/notification-hubs.FirebaseLegacyInstallation" />
+        type: <xref uid="@azure/notification-hubs.FcmLegacyInstallation" />
   - name: >-
-      createFirebaseLegacyNotification(Omit<FirebaseLegacyNotification,
-      "platform" | "contentType">)
-    uid: '@azure/notification-hubs.createFirebaseLegacyNotification'
+      createFcmLegacyNotification(Omit<FcmLegacyNotification, "platform" |
+      "contentType">)
+    uid: '@azure/notification-hubs.createFcmLegacyNotification'
     package: '@azure/notification-hubs'
     summary: Creates a notification to send to Firebase.
     remarks: ''
@@ -628,32 +576,30 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createFirebaseLegacyNotification(notification:
-        Omit<FirebaseLegacyNotification, "platform" | "contentType">):
-        FirebaseLegacyNotification
+        function createFcmLegacyNotification(notification:
+        Omit<FcmLegacyNotification, "platform" | "contentType">):
+        FcmLegacyNotification
       parameters:
         - id: notification
           type: >-
-            Omit&lt;<xref
-            uid="@azure/notification-hubs.FirebaseLegacyNotification" />,
-            "platform" | "contentType"&gt;
+            Omit&lt;<xref uid="@azure/notification-hubs.FcmLegacyNotification"
+            />, "platform" | "contentType"&gt;
           description: A partial message used to create a message for Firebase.
       return:
         description: A newly created Firebase.
-        type: <xref uid="@azure/notification-hubs.FirebaseLegacyNotification" />
-  - name: 'createGcmRegistrationDescription(Omit<GcmRegistrationDescription, "type">)'
-    uid: '@azure/notification-hubs.createGcmRegistrationDescription'
+        type: <xref uid="@azure/notification-hubs.FcmLegacyNotification" />
+  - name: >-
+      createFcmLegacyRegistrationDescription(Omit<GcmRegistrationDescription,
+      "type">)
+    uid: '@azure/notification-hubs.createFcmLegacyRegistrationDescription'
     package: '@azure/notification-hubs'
-    summary: ''
+    summary: Creates a Firebase Legacy registration description.
     remarks: ''
     isPreview: false
-    isDeprecated: true
-    customDeprecatedMessage: |-
-      Use createFcmRegistrationDescription instead.
-      Creates a GCM registration description.
+    isDeprecated: false
     syntax:
       content: >-
-        function createGcmRegistrationDescription(description:
+        function createFcmLegacyRegistrationDescription(description:
         Omit<GcmRegistrationDescription, "type">): GcmRegistrationDescription
       parameters:
         - id: description
@@ -666,20 +612,17 @@ functions:
         description: A created GCM registration description.
         type: <xref uid="@azure/notification-hubs.GcmRegistrationDescription" />
   - name: >-
-      createGcmTemplateRegistrationDescription(Omit<GcmTemplateRegistrationDescription,
+      createFcmLegacyTemplateRegistrationDescription(Omit<GcmTemplateRegistrationDescription,
       "type">)
-    uid: '@azure/notification-hubs.createGcmTemplateRegistrationDescription'
+    uid: '@azure/notification-hubs.createFcmLegacyTemplateRegistrationDescription'
     package: '@azure/notification-hubs'
-    summary: ''
+    summary: Creates a GCM template registration description.
     remarks: ''
     isPreview: false
-    isDeprecated: true
-    customDeprecatedMessage: |-
-      Use createFcmTemplateRegistrationDescription instead.
-      Creates a GCM template registration description.
+    isDeprecated: false
     syntax:
       content: >-
-        function createGcmTemplateRegistrationDescription(description:
+        function createFcmLegacyTemplateRegistrationDescription(description:
         Omit<GcmTemplateRegistrationDescription, "type">):
         GcmTemplateRegistrationDescription
       parameters:
@@ -694,61 +637,6 @@ functions:
         type: >-
           <xref
           uid="@azure/notification-hubs.GcmTemplateRegistrationDescription" />
-  - name: >-
-      createMpnsRegistrationDescription(Omit<MpnsRegistrationDescription,
-      "type">)
-    uid: '@azure/notification-hubs.createMpnsRegistrationDescription'
-    package: '@azure/notification-hubs'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: true
-    customDeprecatedMessage: |-
-      Windows Phone is no longer supported.
-      Creates an MPNS registration description.
-    syntax:
-      content: >-
-        function createMpnsRegistrationDescription(description:
-        Omit<MpnsRegistrationDescription, "type">): MpnsRegistrationDescription
-      parameters:
-        - id: description
-          type: >-
-            Omit&lt;<xref
-            uid="@azure/notification-hubs.MpnsRegistrationDescription" />,
-            "type"&gt;
-          description: A partial MPNS registration description.
-      return:
-        description: A created MPNS registration description.
-        type: <xref uid="@azure/notification-hubs.MpnsRegistrationDescription" />
-  - name: >-
-      createMpnsTemplateRegistrationDescription(Omit<MpnsTemplateRegistrationDescription,
-      "type">)
-    uid: '@azure/notification-hubs.createMpnsTemplateRegistrationDescription'
-    package: '@azure/notification-hubs'
-    summary: ''
-    remarks: ''
-    isPreview: false
-    isDeprecated: true
-    customDeprecatedMessage: |-
-      Windows Phone is no longer supported.
-      Creates an MPNS template registration description.
-    syntax:
-      content: >-
-        function createMpnsTemplateRegistrationDescription(description:
-        Omit<MpnsTemplateRegistrationDescription, "type">):
-        MpnsTemplateRegistrationDescription
-      parameters:
-        - id: description
-          type: >-
-            Omit&lt;<xref
-            uid="@azure/notification-hubs.MpnsTemplateRegistrationDescription"
-            />, "type"&gt;
-          description: A partial MPNS template registration description.
-      return:
-        description: A created MPNS template registration description.
-        type: >-
-          <xref
-          uid="@azure/notification-hubs.MpnsTemplateRegistrationDescription" />
   - name: >-
       createTemplateNotification(Omit<TemplateNotification, "platform" |
       "contentType">)

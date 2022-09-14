@@ -1,12 +1,12 @@
 ---
-ms.service: dashboard
 author: xirzec
-ms.data: 09/13/2022
+title: Azure Dashboard SDK for JavaScript
+ms.service: dashboard
+ms.topic: reference
 ms.devlang: javascript
 description: Reference for Azure Dashboard SDK for JavaScript
-ms.topic: reference
+ms.data: 09/14/2022
 ms.author: jeffish
-title: Azure Dashboard SDK for JavaScript
 ---
 # Azure Dashboard SDK for JavaScript - latest
 

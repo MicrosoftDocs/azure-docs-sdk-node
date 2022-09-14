@@ -1,12 +1,12 @@
 ---
-ms.service: mariadb
 author: xirzec
-ms.data: 09/13/2022
+title: Azure Maria DB SDK for JavaScript
+ms.service: mariadb
+ms.topic: reference
 ms.devlang: javascript
 description: Reference for Azure Maria DB SDK for JavaScript
-ms.topic: reference
+ms.data: 09/14/2022
 ms.author: jeffish
-title: Azure Maria DB SDK for JavaScript
 ---
 # Azure Maria DB SDK for JavaScript - latest
 

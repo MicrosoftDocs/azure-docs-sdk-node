@@ -1,12 +1,12 @@
 ---
-ms.service: policy
 author: xirzec
-ms.data: 09/13/2022
+title: Azure Policy SDK for JavaScript
+ms.service: policy
+ms.topic: reference
 ms.devlang: javascript
 description: Reference for Azure Policy SDK for JavaScript
-ms.topic: reference
+ms.data: 09/14/2022
 ms.author: jeffish
-title: Azure Policy SDK for JavaScript
 ---
 # Azure Policy SDK for JavaScript - preview
 

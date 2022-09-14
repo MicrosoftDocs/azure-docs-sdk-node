@@ -1,12 +1,12 @@
 ---
-ms.service: streamanalytics
 author: xirzec
-ms.data: 09/13/2022
+title: Azure Stream Analytics SDK for JavaScript
+ms.service: streamanalytics
+ms.topic: reference
 ms.devlang: javascript
 description: Reference for Azure Stream Analytics SDK for JavaScript
-ms.topic: reference
+ms.data: 09/14/2022
 ms.author: jeffish
-title: Azure Stream Analytics SDK for JavaScript
 ---
 # Azure Stream Analytics SDK for JavaScript - preview
 

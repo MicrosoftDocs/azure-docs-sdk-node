@@ -1,12 +1,12 @@
 ---
-ms.data: 09/15/2022
-ms.topic: reference
 ms.author: jeffish
+ms.topic: reference
 title: Azure Migrate SDK for JavaScript
-ms.service: migrate
-author: xirzec
+ms.data: 09/16/2022
 description: Reference for Azure Migrate SDK for JavaScript
+author: xirzec
 ms.devlang: javascript
+ms.service: migrate
 ---
 # Azure Migrate SDK for JavaScript - latest
 

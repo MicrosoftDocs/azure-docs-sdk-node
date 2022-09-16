@@ -1,12 +1,12 @@
 ---
-ms.data: 09/15/2022
-ms.topic: reference
 ms.author: jeffish
+ms.topic: reference
 title: Azure NetApp Files SDK for JavaScript
-ms.service: netappfiles
-author: xirzec
+ms.data: 09/16/2022
 description: Reference for Azure NetApp Files SDK for JavaScript
+author: xirzec
 ms.devlang: javascript
+ms.service: netappfiles
 ---
 # Azure NetApp Files SDK for JavaScript - latest
 

@@ -1,12 +1,12 @@
 ---
-ms.data: 09/15/2022
-ms.topic: reference
 ms.author: jeffish
+ms.topic: reference
 title: Azure Mysql-Flexible SDK for JavaScript
-ms.service: mysql-flexible
-author: xirzec
+ms.data: 09/16/2022
 description: Reference for Azure Mysql-Flexible SDK for JavaScript
+author: xirzec
 ms.devlang: javascript
+ms.service: mysql-flexible
 ---
 # Azure Mysql-Flexible SDK for JavaScript - latest
 

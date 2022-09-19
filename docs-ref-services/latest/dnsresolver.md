@@ -8,7 +8,7 @@ ms.devlang: javascript
 author: xirzec
 title: Azure Dnsresolver SDK for JavaScript
 ---
-# Azure Dnsresolver SDK for JavaScript - preview
+# Azure Dnsresolver SDK for JavaScript - latest
 
-## Management packages - preview
+## Management packages - latest
 [!INCLUDE [mgmt-packages](dnsresolver-mgmt-index.md)]

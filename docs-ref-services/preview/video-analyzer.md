@@ -1,12 +1,12 @@
 ---
 ms.author: jeffish
-ms.topic: reference
-title: Azure Video Analyzer SDK for JavaScript
-ms.data: 09/16/2022
-description: Reference for Azure Video Analyzer SDK for JavaScript
-author: xirzec
-ms.devlang: javascript
+ms.data: 09/19/2022
 ms.service: videoanalyzer
+description: Reference for Azure Video Analyzer SDK for JavaScript
+ms.topic: reference
+ms.devlang: javascript
+author: xirzec
+title: Azure Video Analyzer SDK for JavaScript
 ---
 # Azure Video Analyzer SDK for JavaScript - preview
 

@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
-ms.data: 09/19/2022
-ms.service: resources-profile-2020-09-01-hybrid
-description: Reference for Azure Resources-Profile-2020-09-01-Hybrid SDK for JavaScript
-ms.topic: reference
-ms.devlang: javascript
-author: xirzec
 title: Azure Resources-Profile-2020-09-01-Hybrid SDK for JavaScript
+ms.author: jeffish
+ms.data: 09/20/2022
+author: xirzec
+ms.service: resources-profile-2020-09-01-hybrid
+ms.topic: reference
+description: Reference for Azure Resources-Profile-2020-09-01-Hybrid SDK for JavaScript
+ms.devlang: javascript
 ---
 # Azure Resources-Profile-2020-09-01-Hybrid SDK for JavaScript - latest
 

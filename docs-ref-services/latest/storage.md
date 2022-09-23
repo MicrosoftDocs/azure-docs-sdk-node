@@ -1,12 +1,12 @@
 ---
-title: Azure Storage SDK for JavaScript
-author: EmmaZhu
-ms.service: storage
-ms.data: 09/21/2022
-ms.devlang: javascript
 ms.author: emmazhu
+ms.devlang: javascript
+ms.data: 09/23/2022
+author: EmmaZhu
 description: Reference for Azure Storage SDK for JavaScript
 ms.topic: reference
+title: Azure Storage SDK for JavaScript
+ms.service: storage
 ms.date: 06/15/2022
 ---
 # Azure Storage Library for JavaScript

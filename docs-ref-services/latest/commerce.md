@@ -1,12 +1,12 @@
 ---
-title: Azure Commerce SDK for JavaScript
-author: xirzec
-ms.service: commerce
-ms.data: 09/21/2022
-ms.devlang: javascript
 ms.author: jeffish
+ms.devlang: javascript
+ms.data: 09/23/2022
+author: xirzec
 description: Reference for Azure Commerce SDK for JavaScript
 ms.topic: reference
+title: Azure Commerce SDK for JavaScript
+ms.service: commerce
 ms.date: 06/15/2022
 ---
 # Azure Commerce modules for JavaScript

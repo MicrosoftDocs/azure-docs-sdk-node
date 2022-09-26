@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
-ms.devlang: javascript
-ms.data: 09/23/2022
-author: xirzec
 description: Reference for Azure Database Migration Service SDK for JavaScript
+author: xirzec
+ms.author: jeffish
+ms.data: 09/26/2022
+ms.devlang: javascript
 ms.topic: reference
-title: Azure Database Migration Service SDK for JavaScript
 ms.service: databasemigrationservice
+title: Azure Database Migration Service SDK for JavaScript
 ---
 # Azure Database Migration Service SDK for JavaScript - preview
 

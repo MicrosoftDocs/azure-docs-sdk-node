@@ -1,11 +1,11 @@
 ---
 description: Reference for Azure Form Recognizer SDK for JavaScript
-author: witemple-msft
-ms.author: witemple
-ms.data: 09/26/2022
+ms.data: 09/27/2022
 ms.devlang: javascript
-ms.topic: reference
+ms.author: witemple
 ms.service: formrecognizer
+ms.topic: reference
+author: witemple-msft
 title: Azure Form Recognizer SDK for JavaScript
 ---
 # Azure Form Recognizer SDK for JavaScript - preview

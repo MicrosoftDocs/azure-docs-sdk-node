@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Microsoft Authentication Library SDK for JavaScript
-ms.data: 09/27/2022
-ms.devlang: javascript
-ms.author: jeffish
-ms.service: microsoftauthenticationlibrary
 ms.topic: reference
 author: xirzec
+ms.service: microsoftauthenticationlibrary
+ms.devlang: javascript
+description: Reference for Azure Microsoft Authentication Library SDK for JavaScript
+ms.author: jeffish
 title: Azure Microsoft Authentication Library SDK for JavaScript
+ms.data: 09/28/2022
 ---
 # Azure Microsoft Authentication Library SDK for JavaScript - latest
 

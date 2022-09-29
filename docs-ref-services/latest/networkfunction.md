@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-author: xirzec
+ms.data: 09/29/2022
 ms.service: networkfunction
 ms.devlang: javascript
 description: Reference for Azure Networkfunction SDK for JavaScript
-ms.author: jeffish
 title: Azure Networkfunction SDK for JavaScript
-ms.data: 09/28/2022
+author: xirzec
+ms.author: jeffish
+ms.topic: reference
 ---
 # Azure Networkfunction SDK for JavaScript - latest
 

@@ -1,12 +1,12 @@
 ---
-ms.data: 09/29/2022
-ms.service: analysisservices
-ms.devlang: javascript
 description: Reference for Azure Analysis Services SDK for JavaScript
+ms.devlang: javascript
 title: Azure Analysis Services SDK for JavaScript
-author: xirzec
-ms.author: jeffish
+ms.data: 09/30/2022
 ms.topic: reference
+ms.author: jeffish
+ms.service: analysisservices
+author: xirzec
 ms.date: 06/15/2022
 ---
 # Azure Analysis Services modules for JavaScript

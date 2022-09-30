@@ -1,12 +1,12 @@
 ---
-ms.data: 09/29/2022
-ms.service: loganalytics
-ms.devlang: javascript
 description: Reference for Azure Log Analytics SDK for JavaScript
+ms.devlang: javascript
 title: Azure Log Analytics SDK for JavaScript
-author: xirzec
-ms.author: jeffish
+ms.data: 09/30/2022
 ms.topic: reference
+ms.author: jeffish
+ms.service: loganalytics
+author: xirzec
 ---
 # Azure Log Analytics SDK for JavaScript - latest
 

@@ -1,12 +1,12 @@
 ---
 ms.author: jeffish
-ms.service: servicelinker
-author: xirzec
-ms.devlang: javascript
-ms.data: 10/03/2022
 description: Reference for Azure Servicelinker SDK for JavaScript
-ms.topic: reference
+ms.service: servicelinker
+ms.devlang: javascript
 title: Azure Servicelinker SDK for JavaScript
+ms.data: 10/04/2022
+ms.topic: reference
+author: xirzec
 ---
 # Azure Servicelinker SDK for JavaScript - latest
 

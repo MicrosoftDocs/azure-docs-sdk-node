@@ -1,12 +1,12 @@
 ---
 ms.author: jeffish
-ms.service: loadtestservice
-author: xirzec
-ms.devlang: javascript
-ms.data: 10/03/2022
 description: Reference for Azure Loadtestservice SDK for JavaScript
-ms.topic: reference
+ms.service: loadtestservice
+ms.devlang: javascript
 title: Azure Loadtestservice SDK for JavaScript
+ms.data: 10/04/2022
+ms.topic: reference
+author: xirzec
 ---
 # Azure Loadtestservice SDK for JavaScript - preview
 

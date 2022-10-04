@@ -1,12 +1,12 @@
 ---
 ms.author: jeffish
-ms.service: serialconsole
-author: xirzec
-ms.devlang: javascript
-ms.data: 10/03/2022
 description: Reference for Azure Serial Console SDK for JavaScript
-ms.topic: reference
+ms.service: serialconsole
+ms.devlang: javascript
 title: Azure Serial Console SDK for JavaScript
+ms.data: 10/04/2022
+ms.topic: reference
+author: xirzec
 ---
 # Azure Serial Console SDK for JavaScript - latest
 

@@ -1,12 +1,12 @@
 ---
 ms.author: jeffish
-ms.service: imagebuilder
-author: xirzec
-ms.devlang: javascript
-ms.data: 10/03/2022
 description: Reference for Azure Imagebuilder SDK for JavaScript
-ms.topic: reference
+ms.service: imagebuilder
+ms.devlang: javascript
 title: Azure Imagebuilder SDK for JavaScript
+ms.data: 10/04/2022
+ms.topic: reference
+author: xirzec
 ---
 # Azure Imagebuilder SDK for JavaScript - latest
 

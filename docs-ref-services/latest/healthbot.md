@@ -1,12 +1,12 @@
 ---
 ms.author: jeffish
-ms.service: healthbot
-author: xirzec
-ms.devlang: javascript
-ms.data: 10/03/2022
 description: Reference for Azure Healthbot SDK for JavaScript
-ms.topic: reference
+ms.service: healthbot
+ms.devlang: javascript
 title: Azure Healthbot SDK for JavaScript
+ms.data: 10/04/2022
+ms.topic: reference
+author: xirzec
 ---
 # Azure Healthbot SDK for JavaScript - latest
 

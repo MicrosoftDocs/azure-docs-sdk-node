@@ -1,12 +1,12 @@
 ---
 ms.author: jeffish
-ms.service: dnsresolver
-author: xirzec
-ms.devlang: javascript
-ms.data: 10/03/2022
 description: Reference for Azure Dnsresolver SDK for JavaScript
-ms.topic: reference
+ms.service: dnsresolver
+ms.devlang: javascript
 title: Azure Dnsresolver SDK for JavaScript
+ms.data: 10/04/2022
+ms.topic: reference
+author: xirzec
 ---
 # Azure Dnsresolver SDK for JavaScript - latest
 

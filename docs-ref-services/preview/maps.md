@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
-description: Reference for Azure Maps SDK for JavaScript
-ms.service: maps
+author: xirzec
 ms.devlang: javascript
 title: Azure Maps SDK for JavaScript
-ms.data: 10/04/2022
+ms.data: 10/05/2022
+ms.service: maps
+ms.author: jeffish
+description: Reference for Azure Maps SDK for JavaScript
 ms.topic: reference
-author: xirzec
 ---
 # Azure Maps SDK for JavaScript - preview
 

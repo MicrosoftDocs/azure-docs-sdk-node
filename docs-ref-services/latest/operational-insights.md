@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
-description: Reference for Azure Operational Insights SDK for JavaScript
-ms.service: operationalinsights
+author: xirzec
 ms.devlang: javascript
 title: Azure Operational Insights SDK for JavaScript
-ms.data: 10/04/2022
+ms.data: 10/05/2022
+ms.service: operationalinsights
+ms.author: jeffish
+description: Reference for Azure Operational Insights SDK for JavaScript
 ms.topic: reference
-author: xirzec
 ms.date: 06/15/2022
 ---
 # Azure Operational Insights Modules for JavaScript

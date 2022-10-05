@@ -3,12 +3,12 @@ title: Azure Monitor Query client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-query, monitor
 author: KarishmaGhiya
 ms.author: kaghiya
-ms.date: 06/09/2022
+ms.date: 10/05/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor Query client library for JavaScript - version 1.0.2 
+# Azure Monitor Query client library for JavaScript - version 1.0.3 
 
 
 The Azure Monitor Query client library is used to execute read-only queries against [Azure Monitor][azure_monitor_overview]'s two data platforms:
@@ -29,14 +29,15 @@ The Azure Monitor Query client library is used to execute read-only queries agai
 
 ### Supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox
 
-For more details, see our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.2/SUPPORT.md).
+For more details, see our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.3/SUPPORT.md).
 
 ### Prerequisites
 
 - An [Azure subscription][azure_subscription]
+- A [TokenCredential](/javascript/api/@azure/core-auth/tokencredential?view=azure-node-latest) implementation, such as an [Azure Identity library credential type](/javascript/api/overview/azure/identity-readme?view=azure-node-latest#credential-classes).
 - To query Logs, you need an [Azure Log Analytics workspace][azure_monitor_create_using_portal].
 - To query Metrics, you need an Azure resource of any kind (Storage Account, Key Vault, Cosmos DB, etc.).
 
@@ -50,7 +51,7 @@ npm install @azure/monitor-query
 
 ### Create the client
 
-An authenticated client is required to query Logs or Metrics. To authenticate, the following example uses [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.2/sdk/identity/identity/README.md#defaultazurecredential) from the [@azure/identity](https://www.npmjs.com/package/@azure/identity) package.
+An authenticated client is required to query Logs or Metrics. To authenticate, the following example uses [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.3/sdk/identity/identity/README.md#defaultazurecredential) from the [@azure/identity](https://www.npmjs.com/package/@azure/identity) package.
 
 ```ts
 import { DefaultAzureCredential } from "@azure/identity";
@@ -200,7 +201,7 @@ async function processTables(tablesFromResult: LogsTable[]) {
 }
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.2/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQuery.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.3/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQuery.ts).
 
 ### Batch logs query
 
@@ -378,7 +379,7 @@ async function processTables(tablesFromResult: LogsTable[]) {
 }
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.2/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryBatch.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.3/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryBatch.ts).
 
 For information on request throttling at the Log Analytics service level, see [Rate limits](https://dev.loganalytics.io/documentation/Using-the-API/Limits).
 
@@ -386,13 +387,13 @@ For information on request throttling at the Log Analytics service level, see [R
 
 #### Set logs query timeout
 
-Some logs queries take longer than 3 minutes to execute. The default server timeout is 3 minutes. You can increase the server timeout to a maximum of 10 minutes. In the following example, the `LogsQueryOptions` object's `serverTimeoutInSeconds` property is used to decrease the server timeout to 1 minute:
+Some logs queries take longer than 3 minutes to execute. The default server timeout is 3 minutes. You can increase the server timeout to a maximum of 10 minutes. In the following example, the `LogsQueryOptions` object's `serverTimeoutInSeconds` property is used to increase the server timeout to 10 minutes:
 
 ```ts
 // setting optional parameters
 const queryLogsOptions: LogsQueryOptions = {
   // explicitly control the amount of time the server can spend processing the query.
-  serverTimeoutInSeconds: 60
+  serverTimeoutInSeconds: 600 // 600 seconds = 10 minutes
 };
 
 const result = await logsQueryClient.queryWorkspace(
@@ -445,7 +446,7 @@ AppEvents | order by TenantId
 AppEvents | filter TenantId == "<workspace2>"
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.2/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryMultipleWorkspaces.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.3/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryMultipleWorkspaces.ts).
 
 #### Include statistics
 
@@ -702,7 +703,7 @@ main().catch((err) => {
 });
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.2/sdk/monitor/monitor-query/samples/v1/typescript/src/metricsQuery.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.3/sdk/monitor/monitor-query/samples/v1/typescript/src/metricsQuery.ts).
 
 ## Troubleshooting
 
@@ -716,7 +717,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For detailed instructions on how to enable logs, see the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.2/sdk/core/logger).
+For detailed instructions on how to enable logs, see the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.3/sdk/core/logger).
 
 ## Next steps
 
@@ -724,7 +725,7 @@ To learn more about Azure Monitor, see the [Azure Monitor service documentation]
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This module's tests are a mixture of live and unit tests, which require you to have an Azure Monitor instance. To execute the tests, you'll need to run:
 
@@ -735,7 +736,7 @@ This module's tests are a mixture of live and unit tests, which require you to h
 5. Open the `.env` file in an editor and fill in the values.
 6. `npm run test`.
 
-For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.2/sdk/monitor/monitor-query/test) folder.
+For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.3/sdk/monitor/monitor-query/test) folder.
 
 ## Related projects
 
@@ -747,10 +748,10 @@ For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blo
 [azure_monitor_create_using_portal]: /azure/azure-monitor/logs/quick-create-workspace
 [azure_monitor_overview]: /azure/azure-monitor/overview
 [azure_subscription]: https://azure.microsoft.com/free/
-[changelog]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.2/sdk/monitor/monitor-query/CHANGELOG.md
+[changelog]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.3/sdk/monitor/monitor-query/CHANGELOG.md
 [kusto_query_language]: /azure/data-explorer/kusto/query/
 [msdocs_apiref]: /javascript/api/@azure/monitor-query
 [package]: https://www.npmjs.com/package/@azure/monitor-query
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.2/sdk/monitor/monitor-query/samples
-[source]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.2/sdk/monitor/monitor-query/
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.0.3/sdk/monitor/monitor-query/samples
+[source]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.0.3/sdk/monitor/monitor-query/
 

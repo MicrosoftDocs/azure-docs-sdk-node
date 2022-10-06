@@ -1,12 +1,12 @@
 ---
-author: xirzec
-ms.devlang: javascript
-title: Azure Time Series Insights SDK for JavaScript
-ms.data: 10/05/2022
-ms.service: timeseriesinsights
 ms.author: jeffish
-description: Reference for Azure Time Series Insights SDK for JavaScript
+ms.devlang: javascript
+ms.data: 10/06/2022
+title: Azure Time Series Insights SDK for JavaScript
+author: xirzec
 ms.topic: reference
+ms.service: timeseriesinsights
+description: Reference for Azure Time Series Insights SDK for JavaScript
 ---
 # Azure Time Series Insights SDK for JavaScript - latest
 

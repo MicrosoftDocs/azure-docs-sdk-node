@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
 ms.devlang: javascript
-ms.data: 10/06/2022
-title: Azure Service Fabric SDK for JavaScript
-author: xirzec
+ms.author: jeffish
 ms.topic: reference
-ms.service: servicefabric
 description: Reference for Azure Service Fabric SDK for JavaScript
+author: xirzec
+ms.service: servicefabric
+ms.data: 10/07/2022
+title: Azure Service Fabric SDK for JavaScript
 ms.date: 06/15/2022
 ---
 # Azure Service Fabric modules for JavaScript

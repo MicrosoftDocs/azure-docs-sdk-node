@@ -1,12 +1,12 @@
 ---
-ms.author: crtreasu
 ms.devlang: javascript
-ms.data: 10/06/2022
-title: Azure Mixed Reality SDK for JavaScript
-author: craigktreasure
+ms.author: crtreasu
 ms.topic: reference
-ms.service: mixedreality
 description: Reference for Azure Mixed Reality SDK for JavaScript
+author: craigktreasure
+ms.service: mixedreality
+ms.data: 10/07/2022
+title: Azure Mixed Reality SDK for JavaScript
 ms.date: 06/15/2022
 ---
 # Azure Mixed Reality Resource Management Modules for JavaScript

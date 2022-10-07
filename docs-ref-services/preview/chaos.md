@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
 ms.devlang: javascript
-ms.data: 10/06/2022
-title: Azure Chaos SDK for JavaScript
-author: xirzec
+ms.author: jeffish
 ms.topic: reference
-ms.service: chaos
 description: Reference for Azure Chaos SDK for JavaScript
+author: xirzec
+ms.service: chaos
+ms.data: 10/07/2022
+title: Azure Chaos SDK for JavaScript
 ---
 # Azure Chaos SDK for JavaScript - preview
 

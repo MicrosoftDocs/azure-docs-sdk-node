@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
 ms.devlang: javascript
-ms.data: 10/06/2022
-title: Azure Logic Apps SDK for JavaScript
-author: xirzec
+ms.author: jeffish
 ms.topic: reference
-ms.service: logicapps
 description: Reference for Azure Logic Apps SDK for JavaScript
+author: xirzec
+ms.service: logicapps
+ms.data: 10/07/2022
+title: Azure Logic Apps SDK for JavaScript
 ms.date: 06/15/2022
 ---
 # Azure Logic Apps modules for JavaScript

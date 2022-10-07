@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
 ms.devlang: javascript
-ms.data: 10/06/2022
-title: Azure Private Dns Management SDK for JavaScript
-author: xirzec
+ms.author: jeffish
 ms.topic: reference
-ms.service: privatednsmanagement
 description: Reference for Azure Private Dns Management SDK for JavaScript
+author: xirzec
+ms.service: privatednsmanagement
+ms.data: 10/07/2022
+title: Azure Private Dns Management SDK for JavaScript
 ---
 # Azure Private Dns Management SDK for JavaScript - latest
 

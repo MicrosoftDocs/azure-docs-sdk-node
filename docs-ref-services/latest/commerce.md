@@ -1,11 +1,11 @@
 ---
-ms.data: 10/10/2022
+author: xirzec
+description: Reference for Azure Commerce SDK for JavaScript
+ms.data: 10/11/2022
 ms.service: commerce
 title: Azure Commerce SDK for JavaScript
-ms.author: jeffish
-author: xirzec
 ms.devlang: javascript
-description: Reference for Azure Commerce SDK for JavaScript
+ms.author: jeffish
 ms.topic: reference
 ms.date: 06/15/2022
 ---

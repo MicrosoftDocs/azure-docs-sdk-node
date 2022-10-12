@@ -1,12 +1,12 @@
 ---
 ms.topic: reference
 description: Reference for Azure Scvmm SDK for JavaScript
-title: Azure Scvmm SDK for JavaScript
+ms.service: scvmm
 author: xirzec
 ms.devlang: javascript
-ms.service: scvmm
+ms.data: 10/12/2022
+title: Azure Scvmm SDK for JavaScript
 ms.author: jeffish
-ms.data: 10/11/2022
 ---
 # Azure Scvmm SDK for JavaScript - preview
 

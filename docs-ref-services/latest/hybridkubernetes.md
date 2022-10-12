@@ -1,12 +1,12 @@
 ---
 ms.topic: reference
 description: Reference for Azure Hybridkubernetes SDK for JavaScript
-title: Azure Hybridkubernetes SDK for JavaScript
+ms.service: hybridkubernetes
 author: xirzec
 ms.devlang: javascript
-ms.service: hybridkubernetes
+ms.data: 10/12/2022
+title: Azure Hybridkubernetes SDK for JavaScript
 ms.author: jeffish
-ms.data: 10/11/2022
 ---
 # Azure Hybridkubernetes SDK for JavaScript - latest
 

@@ -8,7 +8,7 @@ ms.data: 10/12/2022
 title: Azure Appcontainers SDK for JavaScript
 ms.author: jeffish
 ---
-# Azure Appcontainers SDK for JavaScript - latest
+# Azure Appcontainers SDK for JavaScript - preview
 
-## Management packages - latest
+## Management packages - preview
 [!INCLUDE [mgmt-packages](appcontainers-mgmt-index.md)]

@@ -1,12 +1,12 @@
 ---
 ms.topic: reference
 description: Reference for Azure Kubernetes Configuration SDK for JavaScript
-title: Azure Kubernetes Configuration SDK for JavaScript
+ms.service: kubernetesconfiguration
 author: xirzec
 ms.devlang: javascript
-ms.service: kubernetesconfiguration
+ms.data: 10/12/2022
+title: Azure Kubernetes Configuration SDK for JavaScript
 ms.author: jeffish
-ms.data: 10/11/2022
 ---
 # Azure Kubernetes Configuration SDK for JavaScript - preview
 

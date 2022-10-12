@@ -1,12 +1,12 @@
 ---
 ms.topic: reference
 description: Reference for Azure Appservice SDK for JavaScript
-title: Azure Appservice SDK for JavaScript
+ms.service: appservice
 author: xirzec
 ms.devlang: javascript
-ms.service: appservice
+ms.data: 10/12/2022
+title: Azure Appservice SDK for JavaScript
 ms.author: jeffish
-ms.data: 10/11/2022
 ---
 # Azure Appservice SDK for JavaScript - latest
 

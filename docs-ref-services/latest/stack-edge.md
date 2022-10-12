@@ -1,12 +1,12 @@
 ---
 ms.topic: reference
 description: Reference for Azure Stack Edge SDK for JavaScript
-title: Azure Stack Edge SDK for JavaScript
+ms.service: stackedge
 author: xirzec
 ms.devlang: javascript
-ms.service: stackedge
+ms.data: 10/12/2022
+title: Azure Stack Edge SDK for JavaScript
 ms.author: jeffish
-ms.data: 10/11/2022
 ---
 # Azure Stack Edge SDK for JavaScript - latest
 

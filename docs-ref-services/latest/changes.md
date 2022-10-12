@@ -1,12 +1,12 @@
 ---
 ms.topic: reference
 description: Reference for Azure Changes SDK for JavaScript
-title: Azure Changes SDK for JavaScript
+ms.service: changes
 author: xirzec
 ms.devlang: javascript
-ms.service: changes
+ms.data: 10/12/2022
+title: Azure Changes SDK for JavaScript
 ms.author: jeffish
-ms.data: 10/11/2022
 ---
 # Azure Changes SDK for JavaScript - latest
 

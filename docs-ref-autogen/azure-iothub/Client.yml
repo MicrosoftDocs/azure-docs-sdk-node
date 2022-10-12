@@ -226,7 +226,7 @@ inheritedMethods:
         description: ''
         type: Array&lt;string | symbol&gt;
     inheritanceDescription: <b>Inherited From</b> EventEmitter.eventNames
-  - name: 'getEventListeners(DOMEventTarget | EventEmitter, string | symbol)'
+  - name: 'getEventListeners(_DOMEventTarget | EventEmitter, string | symbol)'
     uid: azure-iothub.Client.getEventListeners
     package: azure-iothub
     summary: >-
@@ -268,11 +268,11 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function getEventListeners(emitter: DOMEventTarget |
+        static function getEventListeners(emitter: _DOMEventTarget |
         EventEmitter, name: string | symbol): Function[]
       parameters:
         - id: emitter
-          type: DOMEventTarget | EventEmitter
+          type: _DOMEventTarget | EventEmitter
           description: ''
         - id: name
           type: string | symbol
@@ -552,7 +552,72 @@ inheritedMethods:
         description: ''
         type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.on
-  - name: 'once(NodeEventTarget, string | symbol, StaticEventEmitterOptions)'
+  - name: 'once(string | symbol, (args: any[]) => void)'
+    uid: azure-iothub.Client.once
+    package: azure-iothub
+    summary: >-
+      Adds a **one-time**`listener` function for the event named `eventName`.
+      The
+
+      next time `eventName` is triggered, this listener is removed and then
+      invoked.
+
+      ```js
+
+      server.once('connection', (stream) => {
+        console.log('Ah, we have our first user!');
+      });
+
+      ```
+
+
+      Returns a reference to the `EventEmitter`, so that calls can be chained.
+
+
+      By default, event listeners are invoked in the order they are added.
+      The`emitter.prependOnceListener()` method can be used as an alternative to
+      add the
+
+      event listener to the beginning of the listeners array.
+
+
+      ```js
+
+      const myEE = new EventEmitter();
+
+      myEE.once('foo', () => console.log('a'));
+
+      myEE.prependOnceListener('foo', () => console.log('b'));
+
+      myEE.emit('foo');
+
+      // Prints:
+
+      //   b
+
+      //   a
+
+      ```
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function once(eventName: string | symbol, listener: (args: any[]) =>
+        void): this
+      parameters:
+        - id: eventName
+          type: string | symbol
+          description: The name of the event.
+        - id: listener
+          type: '(args: any[]) =&gt; void'
+          description: |
+            The callback function
+      return:
+        description: ''
+        type: this
+    inheritanceDescription: <b>Inherited From</b> EventEmitter.once
+  - name: 'once(_NodeEventTarget, string | symbol, StaticEventEmitterOptions)'
     uid: azure-iothub.Client.once
     package: azure-iothub
     summary: >-
@@ -676,11 +741,11 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        static function once(emitter: NodeEventTarget, eventName: string |
+        static function once(emitter: _NodeEventTarget, eventName: string |
         symbol, options?: StaticEventEmitterOptions): Promise<any[]>
       parameters:
         - id: emitter
-          type: NodeEventTarget
+          type: _NodeEventTarget
           description: ''
         - id: eventName
           type: string | symbol
@@ -691,71 +756,6 @@ inheritedMethods:
       return:
         description: ''
         type: 'Promise&lt;any[]&gt;'
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.once
-  - name: 'once(string | symbol, (args: any[]) => void)'
-    uid: azure-iothub.Client.once
-    package: azure-iothub
-    summary: >-
-      Adds a **one-time**`listener` function for the event named `eventName`.
-      The
-
-      next time `eventName` is triggered, this listener is removed and then
-      invoked.
-
-      ```js
-
-      server.once('connection', (stream) => {
-        console.log('Ah, we have our first user!');
-      });
-
-      ```
-
-
-      Returns a reference to the `EventEmitter`, so that calls can be chained.
-
-
-      By default, event listeners are invoked in the order they are added.
-      The`emitter.prependOnceListener()` method can be used as an alternative to
-      add the
-
-      event listener to the beginning of the listeners array.
-
-
-      ```js
-
-      const myEE = new EventEmitter();
-
-      myEE.once('foo', () => console.log('a'));
-
-      myEE.prependOnceListener('foo', () => console.log('b'));
-
-      myEE.emit('foo');
-
-      // Prints:
-
-      //   b
-
-      //   a
-
-      ```
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function once(eventName: string | symbol, listener: (args: any[]) =>
-        void): this
-      parameters:
-        - id: eventName
-          type: string | symbol
-          description: The name of the event.
-        - id: listener
-          type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
-      return:
-        description: ''
-        type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.once
   - name: 'prependListener(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.Client.prependListener
@@ -1091,7 +1091,7 @@ inheritedMethods:
         description: ''
         type: this
     inheritanceDescription: <b>Inherited From</b> EventEmitter.setMaxListeners
-  - name: 'setMaxListeners(number, Array<DOMEventTarget | EventEmitter>)'
+  - name: 'setMaxListeners(number, Array<_DOMEventTarget | EventEmitter>)'
     uid: azure-iothub.Client.setMaxListeners
     package: azure-iothub
     summary: |-
@@ -1111,7 +1111,7 @@ inheritedMethods:
     syntax:
       content: >-
         static function setMaxListeners(n?: number, eventTargets:
-        Array<DOMEventTarget | EventEmitter>)
+        Array<_DOMEventTarget | EventEmitter>)
       parameters:
         - id: 'n'
           type: number
@@ -1119,7 +1119,7 @@ inheritedMethods:
             A non-negative number. The maximum number of listeners per
             `EventTarget` event.
         - id: eventTargets
-          type: Array&lt;DOMEventTarget | EventEmitter&gt;
+          type: Array&lt;_DOMEventTarget | EventEmitter&gt;
           description: ''
     inheritanceDescription: <b>Inherited From</b> EventEmitter.setMaxListeners
 methods:

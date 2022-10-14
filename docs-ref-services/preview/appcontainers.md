@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-description: Reference for Azure Appcontainers SDK for JavaScript
-ms.service: appcontainers
 author: xirzec
-ms.devlang: javascript
-ms.data: 10/12/2022
-title: Azure Appcontainers SDK for JavaScript
 ms.author: jeffish
+ms.service: appcontainers
+ms.data: 10/14/2022
+description: Reference for Azure Appcontainers SDK for JavaScript
+ms.devlang: javascript
+ms.topic: reference
+title: Azure Appcontainers SDK for JavaScript
 ---
 # Azure Appcontainers SDK for JavaScript - preview
 

@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-description: Reference for Azure Links SDK for JavaScript
-ms.service: links
 author: xirzec
-ms.devlang: javascript
-ms.data: 10/12/2022
-title: Azure Links SDK for JavaScript
 ms.author: jeffish
+ms.service: links
+ms.data: 10/14/2022
+description: Reference for Azure Links SDK for JavaScript
+ms.devlang: javascript
+ms.topic: reference
+title: Azure Links SDK for JavaScript
 ---
 # Azure Links SDK for JavaScript - preview
 

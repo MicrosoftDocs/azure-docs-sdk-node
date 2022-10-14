@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-description: Reference for Azure Connectedvmware SDK for JavaScript
-ms.service: connectedvmware
 author: xirzec
-ms.devlang: javascript
-ms.data: 10/12/2022
-title: Azure Connectedvmware SDK for JavaScript
 ms.author: jeffish
+ms.service: connectedvmware
+ms.data: 10/14/2022
+description: Reference for Azure Connectedvmware SDK for JavaScript
+ms.devlang: javascript
+ms.topic: reference
+title: Azure Connectedvmware SDK for JavaScript
 ---
 # Azure Connectedvmware SDK for JavaScript - preview
 

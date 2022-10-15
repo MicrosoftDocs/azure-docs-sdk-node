@@ -42,6 +42,31 @@ constructors:
           description: |
             Options for configuring the Azure Notification Hubs client.
 methods:
+  - name: 'beginSubmitNotificationHubJob(NotificationHubJob, PolledOperationOptions)'
+    uid: >-
+      @azure/notification-hubs.NotificationHubsServiceClient.beginSubmitNotificationHubJob
+    package: '@azure/notification-hubs'
+    summary: Submits a Notification Hub job and creates a poller to poll for results.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginSubmitNotificationHubJob(notificationHubJob:
+        NotificationHubJob, options?: PolledOperationOptions):
+        Promise<NotificationHubJobPoller>
+      parameters:
+        - id: notificationHubJob
+          type: <xref uid="@azure/notification-hubs.NotificationHubJob" />
+          description: The Notification Hub import/export job to start.
+        - id: options
+          type: <xref uid="@azure/notification-hubs.PolledOperationOptions" />
+          description: The operation options.
+      return:
+        description: A poller which can be called to poll until completion of the job.
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/notification-hubs.NotificationHubJobPoller" />&gt;
   - name: 'cancelScheduledNotification(string, OperationOptions)'
     uid: >-
       @azure/notification-hubs.NotificationHubsServiceClient.cancelScheduledNotification
@@ -412,48 +437,7 @@ methods:
         type: >-
           PagedAsyncIterableIterator&lt;<xref
           uid="@azure/notification-hubs.RegistrationDescription" />&gt;
-  - name: 'scheduleBroadcastNotification(Date, Notification, OperationOptions)'
-    uid: >-
-      @azure/notification-hubs.NotificationHubsServiceClient.scheduleBroadcastNotification
-    package: '@azure/notification-hubs'
-    summary: >-
-      Schedules a push notification to all devices registered on the
-      Notification Hub.
-
-      NOTE: This is only available in Standard SKU Azure Notification Hubs.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function scheduleBroadcastNotification(scheduledTime: Date,
-        notification: Notification, options?: OperationOptions):
-        Promise<NotificationHubsMessageResponse>
-      parameters:
-        - id: scheduledTime
-          type: Date
-          description: The Date to send the push notification.
-        - id: notification
-          type: <xref uid="@azure/notification-hubs.Notification" />
-          description: The notification to send to the matching devices.
-        - id: options
-          type: OperationOptions
-          description: >-
-            Configuration options for the direct send operation which can
-            contain custom headers
-
-            which may include APNs specific such as apns-topic or for WNS,
-            X-WNS-TYPE.
-      return:
-        description: >-
-          A NotificationHubResponse with the tracking ID, correlation ID and
-          location.
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/notification-hubs.NotificationHubsMessageResponse" />&gt;
-  - name: >-
-      scheduleNotification(Date, string[] | string, Notification,
-      OperationOptions)
+  - name: 'scheduleNotification(Date, Notification, ScheduleNotificationOptions)'
     uid: >-
       @azure/notification-hubs.NotificationHubsServiceClient.scheduleNotification
     package: '@azure/notification-hubs'
@@ -467,29 +451,21 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function scheduleNotification(scheduledTime: Date, tags: string[] |
-        string, notification: Notification, options?: OperationOptions):
+        function scheduleNotification(scheduledTime: Date, notification:
+        Notification, options?: ScheduleNotificationOptions):
         Promise<NotificationHubsMessageResponse>
       parameters:
         - id: scheduledTime
           type: Date
           description: The Date to send the push notification.
-        - id: tags
-          type: 'string[] | string'
-          description: >-
-            The tags used to target the device for push notifications in either
-            an array or tag expression.
         - id: notification
           type: <xref uid="@azure/notification-hubs.Notification" />
           description: The notification to send to the matching devices.
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/notification-hubs.ScheduleNotificationOptions" />
           description: >-
-            Configuration options for the direct send operation which can
-            contain custom headers
-
-            which may include APNs specific such as apns-topic or for WNS,
-            X-WNS-TYPE.
+            Options which include tags used to target the device for push
+            notifications in either an array or tag expression.
       return:
         description: >-
           A NotificationHubResponse with the tracking ID, correlation ID and
@@ -497,68 +473,9 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/notification-hubs.NotificationHubsMessageResponse" />&gt;
-  - name: 'sendBroadcastNotification(Notification, SendOperationOptions)'
-    uid: >-
-      @azure/notification-hubs.NotificationHubsServiceClient.sendBroadcastNotification
-    package: '@azure/notification-hubs'
-    summary: Sends push notifications to all devices on the Notification Hub.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function sendBroadcastNotification(notification: Notification, options?:
-        SendOperationOptions): Promise<NotificationHubsMessageResponse>
-      parameters:
-        - id: notification
-          type: <xref uid="@azure/notification-hubs.Notification" />
-          description: The notification to send to all devices.
-        - id: options
-          type: <xref uid="@azure/notification-hubs.SendOperationOptions" />
-          description: >-
-            Configuration options for the direct send operation which can
-            contain custom headers
-
-            which may include APNs specific such as apns-topic or for WNS,
-            X-WNS-TYPE.
-      return:
-        description: >-
-          A NotificationHubResponse with the tracking ID, correlation ID and
-          location.
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/notification-hubs.NotificationHubsMessageResponse" />&gt;
-  - name: 'sendDirectNotification(PushHandle, Notification, OperationOptions)'
-    uid: >-
-      @azure/notification-hubs.NotificationHubsServiceClient.sendDirectNotification
-    package: '@azure/notification-hubs'
-    summary: Sends a direct push notification to a device with the given push handle.
-    remarks: ''
-    isPreview: false
-    isDeprecated: false
-    syntax:
-      content: >-
-        function sendDirectNotification(pushHandle: PushHandle, notification:
-        Notification, options?: OperationOptions):
-        Promise<NotificationHubsMessageResponse>
-      parameters:
-        - id: pushHandle
-          type: <xref uid="@azure/notification-hubs.PushHandle" />
-          description: The push handle which is the unique identifier for the device.
-        - id: notification
-          type: <xref uid="@azure/notification-hubs.Notification" />
-          description: The notification to send to the device.
-        - id: options
-          type: OperationOptions
-          description: The options for sending a direct notification.
-      return:
-        description: >-
-          A NotificationHubResponse with the tracking ID, correlation ID and
-          location.
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/notification-hubs.NotificationHubsMessageResponse" />&gt;
-  - name: 'sendNotification(string[] | string, Notification, SendOperationOptions)'
+  - name: >-
+      sendNotification(Notification, DirectSendNotificationOptions |
+      SendNotificationOptions)
     uid: '@azure/notification-hubs.NotificationHubsServiceClient.sendNotification'
     package: '@azure/notification-hubs'
     summary: >-
@@ -569,26 +486,20 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendNotification(tags: string[] | string, notification:
-        Notification, options?: SendOperationOptions):
+        function sendNotification(notification: Notification, options?:
+        DirectSendNotificationOptions | SendNotificationOptions):
         Promise<NotificationHubsMessageResponse>
       parameters:
-        - id: tags
-          type: 'string[] | string'
-          description: >-
-            The tags used to target the device for push notifications in either
-            an array or tag expression.
         - id: notification
           type: <xref uid="@azure/notification-hubs.Notification" />
           description: The notification to send to the matching devices.
         - id: options
-          type: <xref uid="@azure/notification-hubs.SendOperationOptions" />
+          type: >-
+            <xref uid="@azure/notification-hubs.DirectSendNotificationOptions"
+            /> | <xref uid="@azure/notification-hubs.SendNotificationOptions" />
           description: >-
-            Configuration options for the direct send operation which can
-            contain custom headers
-
-            which may include APNs specific such as apns-topic or for WNS,
-            X-WNS-TYPE.
+            Options for the notification including tags, device handles and
+            whether to enable test send.
       return:
         description: >-
           A NotificationHubResponse with the tracking ID, correlation ID and

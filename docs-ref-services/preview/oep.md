@@ -1,12 +1,12 @@
 ---
+ms.data: 10/17/2022
+title: Azure Oep SDK for JavaScript
+ms.devlang: javascript
+ms.service: oep
 author: xirzec
 ms.author: jeffish
-ms.service: oep
-ms.data: 10/14/2022
-description: Reference for Azure Oep SDK for JavaScript
-ms.devlang: javascript
 ms.topic: reference
-title: Azure Oep SDK for JavaScript
+description: Reference for Azure Oep SDK for JavaScript
 ---
 # Azure Oep SDK for JavaScript - preview
 

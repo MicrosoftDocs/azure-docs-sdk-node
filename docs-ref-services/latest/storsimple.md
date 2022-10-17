@@ -1,12 +1,12 @@
 ---
+ms.data: 10/17/2022
+title: Azure StorSimple SDK for JavaScript
+ms.devlang: javascript
+ms.service: storsimple
 author: xirzec
 ms.author: jeffish
-ms.service: storsimple
-ms.data: 10/14/2022
-description: Reference for Azure StorSimple SDK for JavaScript
-ms.devlang: javascript
 ms.topic: reference
-title: Azure StorSimple SDK for JavaScript
+description: Reference for Azure StorSimple SDK for JavaScript
 ---
 # Azure StorSimple SDK for JavaScript - latest
 

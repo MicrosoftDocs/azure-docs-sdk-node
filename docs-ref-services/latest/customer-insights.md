@@ -1,12 +1,12 @@
 ---
+ms.data: 10/17/2022
+title: Azure Customer Insights SDK for JavaScript
+ms.devlang: javascript
+ms.service: customerinsights
 author: xirzec
 ms.author: jeffish
-ms.service: customerinsights
-ms.data: 10/14/2022
-description: Reference for Azure Customer Insights SDK for JavaScript
-ms.devlang: javascript
 ms.topic: reference
-title: Azure Customer Insights SDK for JavaScript
+description: Reference for Azure Customer Insights SDK for JavaScript
 ---
 # Azure Customer Insights SDK for JavaScript - latest
 

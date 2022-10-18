@@ -1,12 +1,12 @@
 ---
-ms.data: 10/17/2022
-title: Azure Authorization SDK for JavaScript
-ms.devlang: javascript
 ms.service: authorization
-author: xirzec
-ms.author: jeffish
 ms.topic: reference
+ms.author: jeffish
+title: Azure Authorization SDK for JavaScript
 description: Reference for Azure Authorization SDK for JavaScript
+ms.data: 10/18/2022
+ms.devlang: javascript
+author: xirzec
 ms.date: 06/15/2022
 ---
 # Azure Authorization modules for JavaScript

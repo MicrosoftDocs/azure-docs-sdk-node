@@ -1,12 +1,12 @@
 ---
-ms.data: 10/17/2022
-title: Azure Communication SDK for JavaScript
-ms.devlang: javascript
 ms.service: communication
-author: xirzec
-ms.author: jeffish
 ms.topic: reference
+ms.author: jeffish
+title: Azure Communication SDK for JavaScript
 description: Reference for Azure Communication SDK for JavaScript
+ms.data: 10/18/2022
+ms.devlang: javascript
+author: xirzec
 ---
 # Azure Communication SDK for JavaScript - preview
 

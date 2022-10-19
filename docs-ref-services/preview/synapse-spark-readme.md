@@ -37,6 +37,8 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/s
 
 ## Examples
 
+### Get Spark Jobs information
+
 ```ts
 import { SparkClient } from "@azure/synapse-spark";
 import { DefaultAzureCredential } from "@azure/identity";
@@ -47,6 +49,36 @@ export async function main(): Promise<void> {
   let client = new SparkClient(credential, "https://mysynapse.dev.azuresynapse.net", "mysparkpool");
   let output = await client.sparkBatch.getSparkBatchJobs();
   console.log("output:", output);
+}
+```
+
+### Submit a Spark job
+
+```ts
+import { DefaultAzureCredential } from "@azure/identity";
+import { SparkClient, SparkBatchJobOptions } from "@azure/synapse-spark";
+
+export async function main(): Promise<void> {
+    const credential = new DefaultAzureCredential();
+    const endpoint = "https://mysynapse.dev.azuresynapse.net";
+    const poolName = "mysparkpool";
+    const pysparkFile = "abfss://<filesystem>@<storage-account>.dfs.core.windows.net/<pyspark-script-path>";
+
+    let client = new SparkClient(credential, endpoint, poolName);
+    
+    const sparkJobOptions: SparkBatchJobOptions = {
+        name: 'MySparkJob',
+        file: pysparkFile,
+        driverMemory: "1g",
+        driverCores: 1,
+        executorMemory: "4g",
+        executorCores: 2,
+        executorCount: 2,
+        arguments: [],
+        configuration: {}
+    };
+    
+    await client.sparkBatch.createSparkBatchJob(sparkJobOptions);
 }
 ```
 

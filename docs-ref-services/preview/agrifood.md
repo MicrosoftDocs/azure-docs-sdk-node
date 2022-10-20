@@ -1,12 +1,12 @@
 ---
-ms.data: 10/19/2022
 ms.service: agrifood
-author: joheredi
 ms.devlang: javascript
-title: Azure Agrifood SDK for JavaScript
-ms.author: joheredi
 ms.topic: reference
 description: Reference for Azure Agrifood SDK for JavaScript
+author: joheredi
+title: Azure Agrifood SDK for JavaScript
+ms.author: joheredi
+ms.data: 10/20/2022
 ---
 # Azure Agrifood SDK for JavaScript - preview
 

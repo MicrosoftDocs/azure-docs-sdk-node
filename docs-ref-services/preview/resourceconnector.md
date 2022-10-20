@@ -1,12 +1,12 @@
 ---
-ms.data: 10/19/2022
 ms.service: resourceconnector
-author: xirzec
 ms.devlang: javascript
-title: Azure Resourceconnector SDK for JavaScript
-ms.author: jeffish
 ms.topic: reference
 description: Reference for Azure Resourceconnector SDK for JavaScript
+author: xirzec
+title: Azure Resourceconnector SDK for JavaScript
+ms.author: jeffish
+ms.data: 10/20/2022
 ---
 # Azure Resourceconnector SDK for JavaScript - preview
 

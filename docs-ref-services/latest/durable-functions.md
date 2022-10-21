@@ -1,12 +1,12 @@
 ---
-ms.service: durablefunctions
-ms.devlang: javascript
-ms.topic: reference
-description: Reference for Azure Durable Functions SDK for JavaScript
-author: xirzec
-title: Azure Durable Functions SDK for JavaScript
 ms.author: jeffish
-ms.data: 10/20/2022
+description: Reference for Azure Durable Functions SDK for JavaScript
+ms.data: 10/21/2022
+ms.devlang: javascript
+ms.service: durablefunctions
+author: xirzec
+ms.topic: reference
+title: Azure Durable Functions SDK for JavaScript
 ---
 # Azure Durable Functions SDK for JavaScript - latest
 

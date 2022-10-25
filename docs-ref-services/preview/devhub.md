@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-ms.data: 10/24/2022
+ms.author: jeffish
 title: Azure Devhub SDK for JavaScript
-author: xirzec
-ms.service: devhub
+ms.data: 10/25/2022
 description: Reference for Azure Devhub SDK for JavaScript
 ms.devlang: javascript
-ms.author: jeffish
+ms.service: devhub
+ms.topic: reference
+author: xirzec
 ---
 # Azure Devhub SDK for JavaScript - preview
 

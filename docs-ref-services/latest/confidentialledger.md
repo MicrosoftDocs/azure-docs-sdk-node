@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-ms.data: 10/24/2022
+ms.author: joheredi
 title: Azure Confidentialledger SDK for JavaScript
-author: joheredi
-ms.service: confidentialledger
+ms.data: 10/25/2022
 description: Reference for Azure Confidentialledger SDK for JavaScript
 ms.devlang: javascript
-ms.author: joheredi
+ms.service: confidentialledger
+ms.topic: reference
+author: joheredi
 ---
 # Azure Confidentialledger SDK for JavaScript - latest
 

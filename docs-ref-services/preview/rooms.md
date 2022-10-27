@@ -1,11 +1,11 @@
 ---
-ms.author: jeffish
+ms.data: 10/27/2022
 title: Azure Rooms SDK for JavaScript
-ms.data: 10/25/2022
-description: Reference for Azure Rooms SDK for JavaScript
 ms.devlang: javascript
-ms.service: rooms
 ms.topic: reference
+ms.service: rooms
+description: Reference for Azure Rooms SDK for JavaScript
+ms.author: jeffish
 author: xirzec
 ---
 # Azure Rooms SDK for JavaScript - preview

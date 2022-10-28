@@ -1,12 +1,12 @@
 ---
-ms.data: 10/27/2022
-title: Azure Anomaly Detector SDK for JavaScript
-ms.devlang: javascript
-ms.topic: reference
-ms.service: anomalydetector
 description: Reference for Azure Anomaly Detector SDK for JavaScript
-ms.author: jeffish
+ms.topic: reference
+ms.data: 10/28/2022
 author: xirzec
+ms.devlang: javascript
+title: Azure Anomaly Detector SDK for JavaScript
+ms.author: jeffish
+ms.service: anomalydetector
 ---
 # Azure Anomaly Detector SDK for JavaScript - preview
 

@@ -1,12 +1,12 @@
 ---
-ms.data: 10/27/2022
-title: Azure Security SDK for JavaScript
-ms.devlang: javascript
-ms.topic: reference
-ms.service: security
 description: Reference for Azure Security SDK for JavaScript
-ms.author: jeffish
+ms.topic: reference
+ms.data: 10/28/2022
 author: xirzec
+ms.devlang: javascript
+title: Azure Security SDK for JavaScript
+ms.author: jeffish
+ms.service: security
 ---
 # Azure Security SDK for JavaScript - preview
 

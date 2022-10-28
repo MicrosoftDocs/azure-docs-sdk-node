@@ -1,12 +1,12 @@
 ---
-ms.data: 10/27/2022
-title: Azure Automation SDK for JavaScript
-ms.devlang: javascript
-ms.topic: reference
-ms.service: automation
 description: Reference for Azure Automation SDK for JavaScript
-ms.author: jeffish
+ms.topic: reference
+ms.data: 10/28/2022
 author: xirzec
+ms.devlang: javascript
+title: Azure Automation SDK for JavaScript
+ms.author: jeffish
+ms.service: automation
 ms.date: 07/18/2017
 manager: nirb
 ---

@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-title: Azure PowerBI Embedded SDK for JavaScript
 description: Reference for Azure PowerBI Embedded SDK for JavaScript
 ms.author: jeffish
-author: xirzec
-ms.data: 10/31/2022
+ms.data: 11/01/2022
 ms.devlang: javascript
+author: xirzec
+title: Azure PowerBI Embedded SDK for JavaScript
 ms.service: powerbiembedded
+ms.topic: reference
 ---
 # Azure PowerBI Embedded SDK for JavaScript - latest
 

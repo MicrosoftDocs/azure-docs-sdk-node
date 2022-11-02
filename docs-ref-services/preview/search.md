@@ -1,12 +1,12 @@
 ---
-description: Reference for Azure Search SDK for JavaScript
-ms.author: sarajama
-ms.data: 11/01/2022
-ms.devlang: javascript
 author: sarangan12
-title: Azure Search SDK for JavaScript
 ms.service: search
+ms.data: 11/02/2022
 ms.topic: reference
+ms.author: sarajama
+description: Reference for Azure Search SDK for JavaScript
+title: Azure Search SDK for JavaScript
+ms.devlang: javascript
 ms.date: 06/15/2022
 ---
 # JavaScript resource management modules for Azure Search

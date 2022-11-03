@@ -1,12 +1,12 @@
 ---
-author: xirzec
-ms.service: documenttranslation
-ms.data: 11/02/2022
 ms.topic: reference
 ms.author: jeffish
-description: Reference for Azure Document Translation SDK for JavaScript
-title: Azure Document Translation SDK for JavaScript
 ms.devlang: javascript
+ms.data: 11/03/2022
+author: xirzec
+description: Reference for Azure Document Translation SDK for JavaScript
+ms.service: documenttranslation
+title: Azure Document Translation SDK for JavaScript
 ---
 # Azure Document Translation SDK for JavaScript - preview
 

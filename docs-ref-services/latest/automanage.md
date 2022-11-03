@@ -1,12 +1,12 @@
 ---
-author: xirzec
-ms.service: automanage
-ms.data: 11/02/2022
 ms.topic: reference
 ms.author: jeffish
-description: Reference for Azure Automanage SDK for JavaScript
-title: Azure Automanage SDK for JavaScript
 ms.devlang: javascript
+ms.data: 11/03/2022
+author: xirzec
+description: Reference for Azure Automanage SDK for JavaScript
+ms.service: automanage
+title: Azure Automanage SDK for JavaScript
 ---
 # Azure Automanage SDK for JavaScript - latest
 

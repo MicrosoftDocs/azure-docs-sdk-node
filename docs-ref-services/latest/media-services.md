@@ -1,12 +1,12 @@
 ---
 ms.topic: reference
-ms.author: jeffish
+title: Azure Media Services SDK for JavaScript
+description: Reference for Azure Media Services SDK for JavaScript
+author: xirzec
 ms.devlang: javascript
 ms.data: 11/03/2022
-author: xirzec
-description: Reference for Azure Media Services SDK for JavaScript
 ms.service: mediaservices
-title: Azure Media Services SDK for JavaScript
+ms.author: jeffish
 ms.date: 06/15/2022
 ---
 # Azure Media Services modules for JavaScript

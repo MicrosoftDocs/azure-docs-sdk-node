@@ -1,12 +1,12 @@
 ---
 ms.topic: reference
-ms.author: jeffish
+title: Azure Resources Graph SDK for JavaScript
+description: Reference for Azure Resources Graph SDK for JavaScript
+author: xirzec
 ms.devlang: javascript
 ms.data: 11/03/2022
-author: xirzec
-description: Reference for Azure Resources Graph SDK for JavaScript
 ms.service: resourcesgraph
-title: Azure Resources Graph SDK for JavaScript
+ms.author: jeffish
 ---
 # Azure Resources Graph SDK for JavaScript - preview
 

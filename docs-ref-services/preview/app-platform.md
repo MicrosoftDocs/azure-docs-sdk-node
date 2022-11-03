@@ -1,12 +1,12 @@
 ---
 ms.topic: reference
-ms.author: jeffish
+title: Azure App Platform SDK for JavaScript
+description: Reference for Azure App Platform SDK for JavaScript
+author: xirzec
 ms.devlang: javascript
 ms.data: 11/03/2022
-author: xirzec
-description: Reference for Azure App Platform SDK for JavaScript
 ms.service: appplatform
-title: Azure App Platform SDK for JavaScript
+ms.author: jeffish
 ---
 # Azure App Platform SDK for JavaScript - preview
 

@@ -1,12 +1,12 @@
 ---
 ms.topic: reference
-ms.author: jeffish
+title: Azure Locks SDK for JavaScript
+description: Reference for Azure Locks SDK for JavaScript
+author: xirzec
 ms.devlang: javascript
 ms.data: 11/03/2022
-author: xirzec
-description: Reference for Azure Locks SDK for JavaScript
 ms.service: locks
-title: Azure Locks SDK for JavaScript
+ms.author: jeffish
 ---
 # Azure Locks SDK for JavaScript - preview
 

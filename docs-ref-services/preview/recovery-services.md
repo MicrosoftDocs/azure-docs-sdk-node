@@ -1,12 +1,12 @@
 ---
 ms.topic: reference
-ms.author: jeffish
+title: Azure Recovery Services SDK for JavaScript
+description: Reference for Azure Recovery Services SDK for JavaScript
+author: xirzec
 ms.devlang: javascript
 ms.data: 11/03/2022
-author: xirzec
-description: Reference for Azure Recovery Services SDK for JavaScript
 ms.service: recoveryservices
-title: Azure Recovery Services SDK for JavaScript
+ms.author: jeffish
 ---
 # Azure Recovery Services SDK for JavaScript - preview
 

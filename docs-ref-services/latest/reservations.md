@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-title: Azure Reservations SDK for JavaScript
-description: Reference for Azure Reservations SDK for JavaScript
 author: xirzec
-ms.devlang: javascript
-ms.data: 11/03/2022
-ms.service: reservations
+title: Azure Reservations SDK for JavaScript
 ms.author: jeffish
+description: Reference for Azure Reservations SDK for JavaScript
+ms.devlang: javascript
+ms.data: 11/04/2022
+ms.topic: reference
+ms.service: reservations
 ---
 # Azure Reservations SDK for JavaScript - latest
 

@@ -1,12 +1,12 @@
 ---
 ms.author: jeffish
-ms.data: 11/07/2022
 title: Azure IoT Central SDK for JavaScript
-ms.service: iotcentral
-author: xirzec
-ms.topic: reference
-description: Reference for Azure IoT Central SDK for JavaScript
 ms.devlang: javascript
+author: xirzec
+ms.service: iotcentral
+ms.topic: reference
+ms.data: 11/08/2022
+description: Reference for Azure IoT Central SDK for JavaScript
 ---
 # Azure IoT Central SDK for JavaScript - latest
 

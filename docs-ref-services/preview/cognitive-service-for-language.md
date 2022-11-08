@@ -1,12 +1,12 @@
 ---
 ms.author: jeffish
-ms.data: 11/07/2022
 title: Azure Cognitive Service For Language SDK for JavaScript
-ms.service: cognitiveserviceforlanguage
-author: xirzec
-ms.topic: reference
-description: Reference for Azure Cognitive Service For Language SDK for JavaScript
 ms.devlang: javascript
+author: xirzec
+ms.service: cognitiveserviceforlanguage
+ms.topic: reference
+ms.data: 11/08/2022
+description: Reference for Azure Cognitive Service For Language SDK for JavaScript
 ---
 # Azure Cognitive Service For Language SDK for JavaScript - preview
 

@@ -1,12 +1,12 @@
 ---
 ms.author: jeffish
-ms.data: 11/07/2022
 title: Azure Portal SDK for JavaScript
-ms.service: portal
-author: xirzec
-ms.topic: reference
-description: Reference for Azure Portal SDK for JavaScript
 ms.devlang: javascript
+author: xirzec
+ms.service: portal
+ms.topic: reference
+ms.data: 11/08/2022
+description: Reference for Azure Portal SDK for JavaScript
 ---
 # Azure Portal SDK for JavaScript - preview
 

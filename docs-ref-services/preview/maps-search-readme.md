@@ -3,21 +3,21 @@ title: Azure Maps Search client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/maps-search, maps
 author: xirzec
 ms.author: jeffish
-ms.date: 10/14/2022
+ms.date: 11/08/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: maps
 ---
-# Azure Maps Search client library for JavaScript - version 1.0.0-beta.1 
+# Azure Maps Search client library for JavaScript - version 1.0.0-beta.2 
 /TypeScript
 
 The Azure Maps Search Service is a set of RESTful APIs designed to help developers search addresses, places, and business listings by name, category, and other geographic information. In addition to supporting traditional geocoding, services can also reverse geocode addresses and cross streets based on latitudes and longitudes. Latitude and longitude values returned by the search can be used as parameters in other Azure Maps services, such as [Route](/rest/api/maps/route) and [Weather](/rest/api/maps/weather) services.
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Maps Search client.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.1/sdk/maps/maps-search) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.2/sdk/maps/maps-search) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/maps-search) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.1/sdk/maps/maps-search/samples) |
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.2/sdk/maps/maps-search/samples) |
 [Product Information](/rest/api/maps/search)
 
 ## Getting started
@@ -161,15 +161,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.1/sdk/maps/maps-search/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.2/sdk/maps/maps-search/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -181,6 +181,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: /powershell/module/az.maps/new-azmapsaccount
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/maps-search_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

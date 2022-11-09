@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
-title: Azure Securityinsight SDK for JavaScript
-ms.devlang: javascript
-author: xirzec
-ms.service: securityinsight
 ms.topic: reference
-ms.data: 11/08/2022
+ms.data: 11/09/2022
 description: Reference for Azure Securityinsight SDK for JavaScript
+ms.author: jeffish
+ms.devlang: javascript
+ms.service: securityinsight
+title: Azure Securityinsight SDK for JavaScript
+author: xirzec
 ---
 # Azure Securityinsight SDK for JavaScript - preview
 

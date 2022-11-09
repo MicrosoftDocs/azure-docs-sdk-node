@@ -1,12 +1,12 @@
 ---
-ms.author: albertcheng
-title: Azure Template Specs SDK for JavaScript
-ms.devlang: javascript
-author: ckairen
-ms.service: templatespecs
 ms.topic: reference
-ms.data: 11/08/2022
+ms.data: 11/09/2022
 description: Reference for Azure Template Specs SDK for JavaScript
+ms.author: albertcheng
+ms.devlang: javascript
+ms.service: templatespecs
+title: Azure Template Specs SDK for JavaScript
+author: ckairen
 ---
 # Azure Template Specs SDK for JavaScript - preview
 

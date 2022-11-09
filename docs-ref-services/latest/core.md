@@ -1,12 +1,12 @@
 ---
-ms.author: jeffish
-title: Azure Core SDK for JavaScript
-ms.devlang: javascript
-author: xirzec
-ms.service: core
 ms.topic: reference
-ms.data: 11/08/2022
+ms.data: 11/09/2022
 description: Reference for Azure Core SDK for JavaScript
+ms.author: jeffish
+ms.devlang: javascript
+ms.service: core
+title: Azure Core SDK for JavaScript
+author: xirzec
 ---
 # Azure Core SDK for JavaScript - latest
 

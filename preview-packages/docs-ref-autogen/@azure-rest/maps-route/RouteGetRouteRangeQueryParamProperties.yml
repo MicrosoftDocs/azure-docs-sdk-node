@@ -1,0 +1,752 @@
+### YamlMime:TSType
+name: RouteGetRouteRangeQueryParamProperties
+uid: '@azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties'
+package: '@azure-rest/maps-route'
+summary: ''
+fullName: RouteGetRouteRangeQueryParamProperties
+remarks: ''
+isPreview: false
+isDeprecated: false
+type: interface
+properties:
+  - name: accelerationEfficiency
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.accelerationEfficiency
+    package: '@azure-rest/maps-route'
+    summary: >
+      Specifies the efficiency of converting chemical energy stored in fuel to
+      kinetic energy when the vehicle accelerates _(i.e.
+      KineticEnergyGained/ChemicalEnergyConsumed). ChemicalEnergyConsumed_ is
+      obtained by converting consumed fuel to chemical energy using
+      **fuelEnergyDensityInMJoulesPerLiter**.
+
+      Must be paired with **decelerationEfficiency**.
+
+
+      The range of values allowed are 0.0 to 1/**decelerationEfficiency**.
+
+
+      Sensible Values : for **Combustion Model** : 0.33, for **Electric Model**
+      : 0.66
+    fullName: accelerationEfficiency
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'accelerationEfficiency?: number'
+      return:
+        description: ''
+        type: number
+  - name: auxiliaryPowerInkW
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.auxiliaryPowerInkW
+    package: '@azure-rest/maps-route'
+    summary: >
+      Specifies the amount of power consumed for sustaining auxiliary systems,
+      in kilowatts (kW).
+
+      It can be used to specify consumption due to devices and systems such as
+      AC systems, radio, heating, etc.
+
+
+      Sensible Values : 1.7
+    fullName: auxiliaryPowerInkW
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'auxiliaryPowerInkW?: number'
+      return:
+        description: ''
+        type: number
+  - name: auxiliaryPowerInLitersPerHour
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.auxiliaryPowerInLitersPerHour
+    package: '@azure-rest/maps-route'
+    summary: >
+      Specifies the amount of fuel consumed for sustaining auxiliary systems of
+      the vehicle, in liters per hour.
+
+      It can be used to specify consumption due to devices and systems such as
+      AC systems, radio, heating, etc.
+
+
+      Sensible Values : 0.2
+    fullName: auxiliaryPowerInLitersPerHour
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'auxiliaryPowerInLitersPerHour?: number'
+      return:
+        description: ''
+        type: number
+  - name: avoid
+    uid: '@azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.avoid'
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Specifies something that the route calculation should try to avoid when
+      determining the route. Can be specified multiple times in one request, for
+      example, '&avoid=motorways&avoid=tollRoads&avoid=ferries'. In
+      calculateReachableRange requests, the value alreadyUsedRoads must not be
+      used.
+    fullName: avoid
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        avoid?: Array<"tollRoads" | "motorways" | "ferries" | "unpavedRoads" |
+        "carpools" | "alreadyUsedRoads" | "borderCrossings">
+      return:
+        description: ''
+        type: >-
+          Array&lt;"tollRoads" | "motorways" | "ferries" | "unpavedRoads" |
+          "carpools" | "alreadyUsedRoads" | "borderCrossings"&gt;
+  - name: constantSpeedConsumptionInkWhPerHundredkm
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.constantSpeedConsumptionInkWhPerHundredkm
+    package: '@azure-rest/maps-route'
+    summary: >
+      Specifies the speed-dependent component of consumption.
+
+      Provided as an unordered list of speed/consumption-rate pairs. The list
+      defines points on a consumption curve. Consumption rates for speeds not in
+      the list are found as follows:
+
+
+      * by linear interpolation, if the given speed lies in between two speeds
+      in the list
+
+
+      * by linear extrapolation otherwise, assuming a constant
+      (ΔConsumption/ΔSpeed) determined by the nearest two points in the list
+
+
+      The list must contain between 1 and 25 points (inclusive), and may not
+      contain duplicate points for the same speed. If it only contains a single
+      point, then the consumption rate of that point is used without further
+      processing.
+
+
+      Consumption specified for the largest speed must be greater than or equal
+      to that of the penultimate largest speed. This ensures that extrapolation
+      does not lead to negative consumption rates.
+
+
+      Similarly, consumption values specified for the two smallest speeds in the
+      list cannot lead to a negative consumption rate for any smaller  speed.
+
+
+      The valid range for the consumption values(expressed in kWh/100km) is
+      between 0.01 and 100000.0.
+
+
+      Sensible Values : 50,8.2:130,21.3
+
+
+      This parameter is required for **Electric consumption model**.
+    fullName: constantSpeedConsumptionInkWhPerHundredkm
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'constantSpeedConsumptionInkWhPerHundredkm?: string'
+      return:
+        description: ''
+        type: string
+  - name: constantSpeedConsumptionInLitersPerHundredkm
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.constantSpeedConsumptionInLitersPerHundredkm
+    package: '@azure-rest/maps-route'
+    summary: >
+      Specifies the speed-dependent component of consumption.
+
+      Provided as an unordered list of colon-delimited speed & consumption-rate
+      pairs. The list defines points on a consumption curve. Consumption rates
+      for speeds not in the list are found as follows:
+
+       * by linear interpolation, if the given speed lies in between two speeds in the list
+
+       * by linear extrapolation otherwise, assuming a constant (ΔConsumption/ΔSpeed) determined by the nearest two points in the list
+
+      The list must contain between 1 and 25 points (inclusive), and may not
+      contain duplicate points for the same speed. If it only contains a single
+      point, then the consumption rate of that point is used without further
+      processing.
+
+
+      Consumption specified for the largest speed must be greater than or equal
+      to that of the penultimate largest speed. This ensures that extrapolation
+      does not lead to negative consumption rates.
+
+
+      Similarly, consumption values specified for the two smallest speeds in the
+      list cannot lead to a negative consumption rate for any smaller speed.
+
+
+      The valid range for the consumption values(expressed in l/100km) is
+      between 0.01 and 100000.0.
+
+
+      Sensible Values : 50,6.3:130,11.5
+
+
+      **Note** : This parameter is required for **The Combustion Consumption
+      Model**.
+    fullName: constantSpeedConsumptionInLitersPerHundredkm
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'constantSpeedConsumptionInLitersPerHundredkm?: string'
+      return:
+        description: ''
+        type: string
+  - name: currentChargeInkWh
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.currentChargeInkWh
+    package: '@azure-rest/maps-route'
+    summary: |
+      Specifies the current electric energy supply in kilowatt hours (kWh).
+      This parameter co-exists with **maxChargeInkWh** parameter.
+
+      The range of values allowed are 0.0 to **maxChargeInkWh**.
+
+      Sensible Values : 43
+    fullName: currentChargeInkWh
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'currentChargeInkWh?: number'
+      return:
+        description: ''
+        type: number
+  - name: currentFuelInLiters
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.currentFuelInLiters
+    package: '@azure-rest/maps-route'
+    summary: |
+      Specifies the current supply of fuel in liters.
+      Sensible Values : 55
+    fullName: currentFuelInLiters
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'currentFuelInLiters?: number'
+      return:
+        description: ''
+        type: number
+  - name: decelerationEfficiency
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.decelerationEfficiency
+    package: '@azure-rest/maps-route'
+    summary: >
+      Specifies the efficiency of converting kinetic energy to saved (not
+      consumed) fuel when the vehicle decelerates _(i.e.
+      ChemicalEnergySaved/KineticEnergyLost). ChemicalEnergySaved_ is obtained
+      by converting saved (not consumed) fuel to energy using
+      **fuelEnergyDensityInMJoulesPerLiter**.
+
+      Must be paired with **accelerationEfficiency**.
+
+
+      The range of values allowed are 0.0 to 1/**accelerationEfficiency**.
+
+
+      Sensible Values : for **Combustion Model** : 0.83, for **Electric Model**
+      : 0.91
+    fullName: decelerationEfficiency
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'decelerationEfficiency?: number'
+      return:
+        description: ''
+        type: number
+  - name: departAt
+    uid: '@azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.departAt'
+    package: '@azure-rest/maps-route'
+    summary: >-
+      The date and time of departure from the origin point. Departure times
+      apart from now must be specified as a dateTime. When a time zone offset is
+      not specified, it will be assumed to be that of the origin point. The
+      departAt value must be in the future in the date-time format
+      (1996-12-19T16:39:57-08:00).
+    fullName: departAt
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'departAt?: Date | string'
+      return:
+        description: ''
+        type: Date | string
+  - name: distanceBudgetInMeters
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.distanceBudgetInMeters
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Distance budget in meters that determines maximal range which can be
+      travelled using driving distance.  The Consumption Model will only affect
+      the range when routeType is eco.<br> Exactly one budget
+      (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or
+      distanceBudgetInMeters) must be used.
+    fullName: distanceBudgetInMeters
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'distanceBudgetInMeters?: number'
+      return:
+        description: ''
+        type: number
+  - name: downhillEfficiency
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.downhillEfficiency
+    package: '@azure-rest/maps-route'
+    summary: >
+      Specifies the efficiency of converting potential energy to saved (not
+      consumed) fuel when the vehicle loses elevation _(i.e.
+      ChemicalEnergySaved/PotentialEnergyLost). ChemicalEnergySaved_ is obtained
+      by converting saved (not consumed) fuel to energy using
+      **fuelEnergyDensityInMJoulesPerLiter**.
+
+      Must be paired with **uphillEfficiency**.
+
+
+      The range of values allowed are 0.0 to 1/**uphillEfficiency**.
+
+
+      Sensible Values : for **Combustion Model** : 0.51, for **Electric Model**
+      : 0.73
+    fullName: downhillEfficiency
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'downhillEfficiency?: number'
+      return:
+        description: ''
+        type: number
+  - name: energyBudgetInkWh
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.energyBudgetInkWh
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Electric energy budget in kilowatt hours (kWh) that determines maximal
+      range which can be travelled using the specified Electric Consumption
+      Model.<br> When energyBudgetInkWh is used, it is mandatory to specify a
+      detailed Electric Consumption Model.<br> Exactly one budget
+      (fuelBudgetInLiters, energyBudgetInkWh, timeBudgetInSec, or
+      distanceBudgetInMeters) must be used.
+    fullName: energyBudgetInkWh
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'energyBudgetInkWh?: number'
+      return:
+        description: ''
+        type: number
+  - name: fuelBudgetInLiters
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.fuelBudgetInLiters
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Fuel budget in liters that determines maximal range which can be travelled
+      using the specified Combustion Consumption Model.<br> When
+      fuelBudgetInLiters is used, it is mandatory to specify a detailed 
+      Combustion Consumption Model.<br> Exactly one budget (fuelBudgetInLiters,
+      energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be
+      used.
+    fullName: fuelBudgetInLiters
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'fuelBudgetInLiters?: number'
+      return:
+        description: ''
+        type: number
+  - name: fuelEnergyDensityInMJoulesPerLiter
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.fuelEnergyDensityInMJoulesPerLiter
+    package: '@azure-rest/maps-route'
+    summary: >
+      Specifies the amount of chemical energy stored in one liter of fuel in
+      megajoules (MJ). It is used in conjunction with the ***Efficiency**
+      parameters for conversions between saved or consumed energy and fuel. For
+      example, energy density is 34.2 MJ/l for gasoline, and 35.8 MJ/l for
+      Diesel fuel.
+
+      This parameter is required if any ***Efficiency** parameter is set.
+
+
+      Sensible Values : 34.2
+    fullName: fuelEnergyDensityInMJoulesPerLiter
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'fuelEnergyDensityInMJoulesPerLiter?: number'
+      return:
+        description: ''
+        type: number
+  - name: hilliness
+    uid: '@azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.hilliness'
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Degree of hilliness for thrilling route. This parameter can only be used
+      in conjunction with `routeType`=thrilling.
+    fullName: hilliness
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'hilliness?: "low" | "normal" | "high"'
+      return:
+        description: ''
+        type: '"low" | "normal" | "high"'
+  - name: maxChargeInkWh
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.maxChargeInkWh
+    package: '@azure-rest/maps-route'
+    summary: >
+      Specifies the maximum electric energy supply in kilowatt hours (kWh) that
+      may be stored in the vehicle's battery.
+
+      This parameter co-exists with **currentChargeInkWh** parameter.
+
+
+      Minimum value has to be greater than or equal to **currentChargeInkWh**.
+
+
+      Sensible Values : 85
+    fullName: maxChargeInkWh
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'maxChargeInkWh?: number'
+      return:
+        description: ''
+        type: number
+  - name: query
+    uid: '@azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.query'
+    package: '@azure-rest/maps-route'
+    summary: The Coordinate from which the range calculation should start.
+    fullName: query
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'query: Array<number>'
+      return:
+        description: ''
+        type: Array&lt;number&gt;
+  - name: routeType
+    uid: '@azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.routeType'
+    package: '@azure-rest/maps-route'
+    summary: The type of route requested.
+    fullName: routeType
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'routeType?: "fastest" | "shortest" | "eco" | "thrilling"'
+      return:
+        description: ''
+        type: '"fastest" | "shortest" | "eco" | "thrilling"'
+  - name: timeBudgetInSec
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.timeBudgetInSec
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Time budget in seconds that determines maximal range which can be
+      travelled using driving time. The Consumption Model will only affect the
+      range when routeType is eco.<br> Exactly one budget (fuelBudgetInLiters,
+      energyBudgetInkWh, timeBudgetInSec, or distanceBudgetInMeters) must be
+      used.
+    fullName: timeBudgetInSec
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'timeBudgetInSec?: number'
+      return:
+        description: ''
+        type: number
+  - name: traffic
+    uid: '@azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.traffic'
+    package: '@azure-rest/maps-route'
+    summary: |-
+      Possible values:
+        * true - Do consider all available traffic information during routing
+        * false - Ignore current traffic data during routing. Note that although the current traffic data is ignored
+        during routing, the effect of historic traffic on effective road speeds is still incorporated.
+    fullName: traffic
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'traffic?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: travelMode
+    uid: '@azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.travelMode'
+    package: '@azure-rest/maps-route'
+    summary: >-
+      The mode of travel for the requested route. If not defined, default is
+      'car'. Note that the requested travelMode may not be available for the
+      entire route. Where the requested travelMode is not available for a
+      particular section, the travelMode element of the response for that
+      section will be "other". Note that travel modes bus, motorcycle, taxi and
+      van are BETA functionality. Full restriction data is not available in all
+      areas. In **calculateReachableRange** requests, the values bicycle and
+      pedestrian must not be used.
+    fullName: travelMode
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        travelMode?: "car" | "truck" | "taxi" | "bus" | "van" | "motorcycle" |
+        "bicycle" | "pedestrian"
+      return:
+        description: ''
+        type: >-
+          "car" | "truck" | "taxi" | "bus" | "van" | "motorcycle" | "bicycle" |
+          "pedestrian"
+  - name: uphillEfficiency
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.uphillEfficiency
+    package: '@azure-rest/maps-route'
+    summary: >
+      Specifies the efficiency of converting chemical energy stored in fuel to
+      potential energy when the vehicle gains elevation _(i.e.
+      PotentialEnergyGained/ChemicalEnergyConsumed). ChemicalEnergyConsumed_ is
+      obtained by converting consumed fuel to chemical energy using
+      **fuelEnergyDensityInMJoulesPerLiter**.
+
+      Must be paired with **downhillEfficiency**.
+
+
+      The range of values allowed are 0.0 to 1/**downhillEfficiency**.
+
+
+      Sensible Values : for **Combustion Model** : 0.27, for **Electric Model**
+      : 0.74
+    fullName: uphillEfficiency
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'uphillEfficiency?: number'
+      return:
+        description: ''
+        type: number
+  - name: vehicleAxleWeight
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.vehicleAxleWeight
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Weight per axle of the vehicle in kg. A value of 0 means that weight
+      restrictions per axle are not considered.
+    fullName: vehicleAxleWeight
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'vehicleAxleWeight?: number'
+      return:
+        description: ''
+        type: number
+  - name: vehicleCommercial
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.vehicleCommercial
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Whether the vehicle is used for commercial purposes. Commercial vehicles
+      may not be allowed to drive on some roads.
+    fullName: vehicleCommercial
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'vehicleCommercial?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: vehicleEngineType
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.vehicleEngineType
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Engine type of the vehicle. When a detailed Consumption Model is
+      specified, it must be consistent with the value of **vehicleEngineType**.
+    fullName: vehicleEngineType
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'vehicleEngineType?: "combustion" | "electric"'
+      return:
+        description: ''
+        type: '"combustion" | "electric"'
+  - name: vehicleHeight
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.vehicleHeight
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Height of the vehicle in meters. A value of 0 means that height
+      restrictions are not considered.
+    fullName: vehicleHeight
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'vehicleHeight?: number'
+      return:
+        description: ''
+        type: number
+  - name: vehicleLength
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.vehicleLength
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Length of the vehicle in meters. A value of 0 means that length
+      restrictions are not considered.
+    fullName: vehicleLength
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'vehicleLength?: number'
+      return:
+        description: ''
+        type: number
+  - name: vehicleLoadType
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.vehicleLoadType
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Types of cargo that may be classified as hazardous materials and
+      restricted from some roads. Available vehicleLoadType values are US Hazmat
+      classes 1 through 9, plus generic classifications for use in other
+      countries. Values beginning with USHazmat are for US routing while
+      otherHazmat should be used for all other countries. vehicleLoadType can be
+      specified multiple times. This parameter is currently only considered for
+      travelMode=truck.
+    fullName: vehicleLoadType
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        vehicleLoadType?: "USHazmatClass1" | "USHazmatClass2" | "USHazmatClass3"
+        | "USHazmatClass4" | "USHazmatClass5" | "USHazmatClass6" |
+        "USHazmatClass7" | "USHazmatClass8" | "USHazmatClass9" |
+        "otherHazmatExplosive" | "otherHazmatGeneral" |
+        "otherHazmatHarmfulToWater"
+      return:
+        description: ''
+        type: >-
+          "USHazmatClass1" | "USHazmatClass2" | "USHazmatClass3" |
+          "USHazmatClass4" | "USHazmatClass5" | "USHazmatClass6" |
+          "USHazmatClass7" | "USHazmatClass8" | "USHazmatClass9" |
+          "otherHazmatExplosive" | "otherHazmatGeneral" |
+          "otherHazmatHarmfulToWater"
+  - name: vehicleMaxSpeed
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.vehicleMaxSpeed
+    package: '@azure-rest/maps-route'
+    summary: >
+      Maximum speed of the vehicle in km/hour. The max speed in the vehicle
+      profile is used to check whether a vehicle is allowed on motorways.
+
+      * A value of 0 means that an appropriate value for the vehicle will be
+      determined and applied during route planning.
+
+
+      * A non-zero value may be overridden during route planning. For example,
+      the current traffic flow is 60 km/hour. If the vehicle  maximum speed is
+      set to 50 km/hour, the routing engine will consider 60 km/hour as this is
+      the current situation.  If the maximum speed of the vehicle is provided as
+      80 km/hour but the current traffic flow is 60 km/hour, then routing engine
+      will again use 60 km/hour.
+    fullName: vehicleMaxSpeed
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'vehicleMaxSpeed?: number'
+      return:
+        description: ''
+        type: number
+  - name: vehicleWeight
+    uid: >-
+      @azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.vehicleWeight
+    package: '@azure-rest/maps-route'
+    summary: >
+      Weight of the vehicle in kilograms.
+
+      * It is mandatory if any of the *Efficiency parameters are set.
+
+
+      * It must be strictly positive when used in the context of the Consumption
+      Model. Weight restrictions are considered.
+
+
+      * If no detailed **Consumption Model** is specified and the value of
+      **vehicleWeight** is non-zero, then weight restrictions are considered.
+
+
+      * In all other cases, this parameter is ignored.
+
+
+      Sensible Values : for **Combustion Model** : 1600, for **Electric Model**
+      : 1900
+    fullName: vehicleWeight
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'vehicleWeight?: number'
+      return:
+        description: ''
+        type: number
+  - name: vehicleWidth
+    uid: '@azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.vehicleWidth'
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Width of the vehicle in meters. A value of 0 means that width restrictions
+      are not considered.
+    fullName: vehicleWidth
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'vehicleWidth?: number'
+      return:
+        description: ''
+        type: number
+  - name: windingness
+    uid: '@azure-rest/maps-route.RouteGetRouteRangeQueryParamProperties.windingness'
+    package: '@azure-rest/maps-route'
+    summary: >-
+      Level of turns for thrilling route. This parameter can only be used in
+      conjunction with `routeType`=thrilling.
+    fullName: windingness
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'windingness?: "low" | "normal" | "high"'
+      return:
+        description: ''
+        type: '"low" | "normal" | "high"'

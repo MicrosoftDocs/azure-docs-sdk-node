@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-ms.data: 11/09/2022
-description: Reference for Azure Hybridcontainerservice SDK for JavaScript
 ms.author: jeffish
+ms.data: 11/10/2022
 ms.devlang: javascript
-ms.service: hybridcontainerservice
-title: Azure Hybridcontainerservice SDK for JavaScript
+description: Reference for Azure Hybridcontainerservice SDK for JavaScript
+ms.topic: reference
 author: xirzec
+title: Azure Hybridcontainerservice SDK for JavaScript
+ms.service: hybridcontainerservice
 ---
 # Azure Hybridcontainerservice SDK for JavaScript - preview
 

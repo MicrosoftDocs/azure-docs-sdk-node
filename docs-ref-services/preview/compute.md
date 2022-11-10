@@ -1,12 +1,12 @@
 ---
-ms.topic: reference
-ms.data: 11/09/2022
-description: Reference for Azure Compute SDK for JavaScript
 ms.author: jeffish
+ms.data: 11/10/2022
 ms.devlang: javascript
-ms.service: compute
-title: Azure Compute SDK for JavaScript
+description: Reference for Azure Compute SDK for JavaScript
+ms.topic: reference
 author: xirzec
+title: Azure Compute SDK for JavaScript
+ms.service: compute
 ---
 # Azure Compute SDK for JavaScript - preview
 

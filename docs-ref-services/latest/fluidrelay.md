@@ -1,12 +1,12 @@
 ---
+ms.data: 11/14/2022
+ms.service: fluidrelay
+description: Reference for Azure Fluidrelay SDK for JavaScript
 ms.author: jeffish
+title: Azure Fluidrelay SDK for JavaScript
+ms.devlang: javascript
 author: xirzec
 ms.topic: reference
-ms.service: fluidrelay
-title: Azure Fluidrelay SDK for JavaScript
-description: Reference for Azure Fluidrelay SDK for JavaScript
-ms.devlang: javascript
-ms.data: 11/11/2022
 ---
 # Azure Fluidrelay SDK for JavaScript - latest
 

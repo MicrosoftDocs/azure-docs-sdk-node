@@ -1,12 +1,12 @@
 ---
+ms.data: 11/14/2022
+ms.service: monitor
+description: Reference for Azure Monitor SDK for JavaScript
 ms.author: hectorh
+title: Azure Monitor SDK for JavaScript
+ms.devlang: javascript
 author: hectorhdzg
 ms.topic: reference
-ms.service: monitor
-title: Azure Monitor SDK for JavaScript
-description: Reference for Azure Monitor SDK for JavaScript
-ms.devlang: javascript
-ms.data: 11/11/2022
 ms.date: 06/15/2022
 ---
 # Azure Monitor modules for JavaScript

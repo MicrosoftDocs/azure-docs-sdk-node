@@ -1,12 +1,12 @@
 ---
-ms.data: 11/14/2022
-ms.service: dynatrace
-description: Reference for Azure Dynatrace SDK for JavaScript
-ms.author: jeffish
 title: Azure Dynatrace SDK for JavaScript
-ms.devlang: javascript
+description: Reference for Azure Dynatrace SDK for JavaScript
 author: xirzec
+ms.author: jeffish
+ms.data: 11/15/2022
 ms.topic: reference
+ms.devlang: javascript
+ms.service: dynatrace
 ---
 # Azure Dynatrace SDK for JavaScript - preview
 

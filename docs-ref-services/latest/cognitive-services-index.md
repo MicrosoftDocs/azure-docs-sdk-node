@@ -9,7 +9,7 @@
 |Custom Vision Prediction|[@azure/cognitiveservices-customvision-prediction](https://www.npmjs.com/package/@azure/cognitiveservices-customvision-prediction)|[Github](https://github.com/Azure/azure-sdk-for-js)|
 |Custom Vision Training|[@azure/cognitiveservices-customvision-training](https://www.npmjs.com/package/@azure/cognitiveservices-customvision-training)|[Github](https://github.com/Azure/azure-sdk-for-js)|
 |[Entity Search](cognitiveservices-entitysearch-readme.md)|[@azure/cognitiveservices-entitysearch](https://www.npmjs.com/package/@azure/cognitiveservices-entitysearch)|[Github](https://github.com/Azure/azure-sdk-for-js)|
-|Face|[@azure/cognitiveservices-face](https://www.npmjs.com/package/@azure/cognitiveservices-face)|[Github](https://github.com/Azure/azure-sdk-for-js)|
+|[Face](cognitiveservices-face-readme.md)|[@azure/cognitiveservices-face](https://www.npmjs.com/package/@azure/cognitiveservices-face)|[Github](https://github.com/Azure/azure-sdk-for-js)|
 |Form Recognizer|[@azure/cognitiveservices-formrecognizer](https://www.npmjs.com/package/@azure/cognitiveservices-formrecognizer)|[Github](https://github.com/Azure/azure-sdk-for-js)|
 |[Image Search](cognitiveservices-imagesearch-readme.md)|[@azure/cognitiveservices-imagesearch](https://www.npmjs.com/package/@azure/cognitiveservices-imagesearch)|[Github](https://github.com/Azure/azure-sdk-for-js)|
 |Local Search|[@azure/cognitiveservices-localsearch](https://www.npmjs.com/package/@azure/cognitiveservices-localsearch)|[Github](https://github.com/Azure/azure-sdk-for-js)|

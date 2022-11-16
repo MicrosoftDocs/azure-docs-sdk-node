@@ -3,10 +3,11 @@ title: Azure Storage SDK for JavaScript
 description: Reference for Azure Storage SDK for JavaScript
 author: EmmaZhu
 ms.author: emmazhu
-ms.date: 06/15/2022
+ms.data: 11/16/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
+ms.date: 06/15/2022
 ---
 # Azure Storage Library for JavaScript
 
@@ -46,4 +47,3 @@ npm install @azure/arm-storage
 ### Example
 
 Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-storage)
-

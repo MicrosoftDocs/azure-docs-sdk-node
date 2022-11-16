@@ -1,6 +1,6 @@
 ---
-title: Azure Devcenter SDK for JavaScript
-description: Reference for Azure Devcenter SDK for JavaScript
+title: Azure DevCenter SDK for JavaScript
+description: Reference for Azure DevCenter SDK for JavaScript
 author: xirzec
 ms.author: jeffish
 ms.data: 11/16/2022

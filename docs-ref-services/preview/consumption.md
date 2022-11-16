@@ -3,12 +3,11 @@ title: Azure Consumption SDK for JavaScript
 description: Reference for Azure Consumption SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 11/15/2022
+ms.data: 11/16/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: consumption
 ---
 # Azure Consumption SDK for JavaScript - preview
-
-## Management packages - preview
-[!INCLUDE [mgmt-packages](consumption-mgmt-index.md)]
+## Packages - preview
+[!INCLUDE [packages](consumption-index.md)]

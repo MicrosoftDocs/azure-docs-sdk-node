@@ -3,12 +3,11 @@ title: Azure Core SDK for JavaScript
 description: Reference for Azure Core SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 11/15/2022
+ms.data: 11/16/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: core
 ---
 # Azure Core SDK for JavaScript - latest
-
-## Client packages - latest
-[!INCLUDE [client-packages](core-client-index.md)]
+## Packages - latest
+[!INCLUDE [packages](core-index.md)]

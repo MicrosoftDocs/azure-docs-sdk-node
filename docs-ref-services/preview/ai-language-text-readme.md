@@ -1,19 +1,19 @@
 ---
 title: Azure Text Analysis client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-language-text, cognitivelanguage
-author: xirzec
-ms.author: jeffish
-ms.date: 08/11/2022
+author: deyaaeldeen
+ms.author: dealmaha
+ms.date: 11/18/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitivelanguage
 ---
-# Azure Text Analysis client library for JavaScript - version 1.0.0-beta.1 
+# Azure Text Analysis client library for JavaScript - version 1.1.0-beta.1 
 
 
 [Azure Cognitive Service for Language](https://azure.microsoft.com/services/cognitive-services/language-service/) is a cloud-based service that provides advanced natural language processing over raw text, and includes the following main features:
 
-**Note:** This SDK targets Azure Cognitive Service for Language API version 2022-04-01-preview.
+**Note:** This SDK targets Azure Cognitive Service for Language API version 2022-10-01-preview.
 
 - Language Detection
 - Sentiment Analysis
@@ -23,8 +23,10 @@ ms.service: cognitivelanguage
 - Entity Linking
 - Healthcare Analysis
 - Extractive Summarization
+- Abstractive Summarization
 - Custom Entity Recognition
 - Custom Document Classification
+- Dynamic Classification
 - Support Multiple Actions Per Document
 
 Use the client library to:
@@ -37,24 +39,24 @@ Use the client library to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.0.0-beta.1/sdk/cognitivelanguage/ai-language-text/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.1/sdk/cognitivelanguage/ai-language-text/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/ai-language-text)
 - [API reference documentation](https://aka.ms/ai-language-text-js-api)
 - [Product documentation](/azure/cognitive-services/language-service/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.0.0-beta.1/sdk/cognitivelanguage/ai-language-text/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.1/sdk/cognitivelanguage/ai-language-text/samples)
 
 #### **_Migrating from @azure/ai-text-analytics advisory_ ⚠️**
 
-Please see the [Migration Guide](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.0.0-beta.1/sdk/cognitivelanguage/ai-language-text/MIGRATION_ai_text_analytics.md) for detailed instructions on how to update application code from version 5.x of the AI Text Analytics client library to the new AI Language Text client library.
+Please see the [Migration Guide](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.1/sdk/cognitivelanguage/ai-language-text/MIGRATION_ai_text_analytics.md) for detailed instructions on how to update application code from version 5.x of the AI Text Analytics client library to the new AI Language Text client library.
 
 ## Getting started
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -401,15 +403,48 @@ async function main() {
 main();
 ```
 
+### Dynamic Classification
+
+On the fly classification of the input documents into one or multiple categories. Assigns either one or multiple categories per document. This type of classification doesn't require model training.
+
+```javascript
+const { TextAnalysisClient, AzureKeyCredential } = require("@azure/ai-language-text");
+
+const client = new TextAnalysisClient("<endpoint>", new AzureKeyCredential("<API key>"));
+
+const documents = [
+  "The WHO is issuing a warning about Monkey Pox.",
+  "Mo Salah plays in Liverpool FC in England.",
+];
+
+export async function main() {
+  const results = await client.analyze("DynamicClassification", documents, "en", {
+    categories: ["Health", "Politics", "Music", "Sports"],
+    classificationType: "Multi",
+  });
+
+  for (const result of results) {
+    console.log(`- Document ${result.id}`);
+    if (!result.error) {
+      console.log("\tClassifications:");
+      for (const category of result.classifications) {
+        console.log(`\t- ${category.category}`);
+      }
+    } else {
+      console.error("  Error:", result.error);
+    }
+  }
+}
+
+main();
+```
+
 ### Healthcare Analysis
 
 Healthcare analysis identifies healthcare entities. For example, given input text "Prescribed 100mg ibuprofen, taken twice daily", the service returns "100mg" categorized as Dosage, "ibuprofen" as MedicationName, and "twice daily" as Frequency.
 
 ```javascript
-const {
-  AzureKeyCredential,
-  TextAnalysisClient,
-} = require("@azure/ai-language-text");
+const { AzureKeyCredential, TextAnalysisClient } = require("@azure/ai-language-text");
 
 const client = new TextAnalysisClient("<endpoint>", new AzureKeyCredential("<API key>"));
 
@@ -426,6 +461,7 @@ async function main() {
   ];
   const poller = await client.beginAnalyzeBatch(actions, documents, "en");
   const results = await poller.pollUntilDone();
+
   for await (const actionResult of results) {
     if (actionResult.kind !== "Healthcare") {
       throw new Error(`Expected a healthcare results but got: ${actionResult.kind}`);
@@ -462,18 +498,11 @@ main();
 Extractive summarization identifies sentences that summarize the article they belong to.
 
 ```javascript
-const {
-  AzureKeyCredential,
-  TextAnalysisClient,
-} = require("@azure/ai-language-text");
-
+const { AzureKeyCredential, TextAnalysisClient } = require("@azure/ai-language-text");
 const client = new TextAnalysisClient("<endpoint>", new AzureKeyCredential("<API key>"));
-
 const documents = [
-  "Prescribed 100mg ibuprofen, taken twice daily.",
-  "Patient does not suffer from high blood pressure.",
+  "<long article>"
 ];
-
 async function main() {
   const actions = [
     {
@@ -503,7 +532,50 @@ async function main() {
     }
   }
 }
+main();
+```
 
+### Abstractive Summarization
+
+Abstractive summarization generates a summary for the input articles. Abstractive summarization is different from extractive summarization in that extractive summarization is the strategy of concatenating extracted sentences from the input document into a summary, while abstractive summarization involves paraphrasing the document using novel sentences.
+
+```javascript
+const { AzureKeyCredential, TextAnalysisClient } = require("@azure/ai-language-text");
+const client = new TextAnalysisClient("<endpoint>", new AzureKeyCredential("<API key>"));
+const documents = [
+  "<long article>"
+];
+async function main() {
+  const actions = [
+    {
+      kind: "AbstractiveSummarization",
+      maxSentenceCount: 2,
+    },
+  ];
+  const poller = await client.beginAnalyzeBatch(actions, documents, "en");
+  const results = await poller.pollUntilDone();
+
+  for await (const actionResult of results) {
+    if (actionResult.kind !== "AbstractiveSummarization") {
+      throw new Error(`Expected abstractive summarization results but got: ${actionResult.kind}`);
+    }
+    if (actionResult.error) {
+      const { code, message } = actionResult.error;
+      throw new Error(`Unexpected error (${code}): ${message}`);
+    }
+    for (const result of actionResult.results) {
+      console.log(`- Document ${result.id}`);
+      if (result.error) {
+        const { code, message } = result.error;
+        throw new Error(`Unexpected error (${code}): ${message}`);
+      }
+      console.log("\t- Summary:");
+      for (const summary of result.summaries) {
+        console.log(summary.text);
+      }
+    }
+  }
+}
 main();
 ```
 
@@ -512,10 +584,7 @@ main();
 Recognize and categorize entities in text as entities using custom entity detection models built using [Azure Language Studio][lang_studio].
 
 ```javascript
-const {
-  AzureKeyCredential,
-  TextAnalysisClient,
-} = require("@azure/ai-language-text");
+const { AzureKeyCredential, TextAnalysisClient } = require("@azure/ai-language-text");
 
 const client = new TextAnalysisClient("<endpoint>", new AzureKeyCredential("<API key>"));
 
@@ -533,6 +602,8 @@ async function main() {
     },
   ];
   const poller = await client.beginAnalyzeBatch(actions, documents, "en");
+  const results = await poller.pollUntilDone();
+  
   for await (const actionResult of results) {
     if (actionResult.kind !== "CustomEntityRecognition") {
       throw new Error(`Expected a CustomEntityRecognition results but got: ${actionResult.kind}`);
@@ -598,7 +669,7 @@ async function main() {
         const { code, message } = result.error;
         throw new Error(`Unexpected error (${code}): ${message}`);
       }
-      console.log(`\tClassification: ${result.classification.category}`);
+      console.log(`\tClassification: ${result.classifications[0].category}`);
     }
   }
 }
@@ -611,10 +682,7 @@ main();
 Classify documents using custom multi-label models built using [Azure Language Studio][lang_studio].
 
 ```javascript
-const {
-  AzureKeyCredential,
-  TextAnalysisClient,
-} = require("@azure/ai-language-text");
+const { AzureKeyCredential, TextAnalysisClient } = require("@azure/ai-language-text");
 
 const client = new TextAnalysisClient("<endpoint>", new AzureKeyCredential("<API key>"));
 
@@ -665,10 +733,7 @@ main();
 Applies multiple actions on each input document in one service request.
 
 ```javascript
-const {
-  AzureKeyCredential,
-  TextAnalysisClient,
-} = require("@azure/ai-language-text");
+const { AzureKeyCredential, TextAnalysisClient } = require("@azure/ai-language-text");
 
 const client = new TextAnalysisClient("<endpoint>", new AzureKeyCredential("<API key>"));
 
@@ -696,6 +761,7 @@ async function main() {
   ];
   const poller = await client.beginAnalyzeBatch(actions, documents, "en");
   const actionResults = await poller.pollUntilDone();
+
   for await (const actionResult of actionResults) {
     if (actionResult.error) {
       const { code, message } = actionResult.error;
@@ -766,15 +832,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.1/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.0.0-beta.1/sdk/cognitivelanguage/ai-language-text/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.1/sdk/cognitivelanguage/ai-language-text/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -786,11 +852,11 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [cognitive_resource]: /azure/cognitive-services/cognitive-services-apis-create-account
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.0.0-beta.1/sdk/identity/identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.1/sdk/identity/identity
 [cognitive_auth]: /azure/cognitive-services/authentication
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.1/sdk/identity/identity#defaultazurecredential
 [data_limits]: /azure/cognitive-services/language-service/concepts/data-limits
-[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.0.0-beta.1/sdk/cognitivelanguage/ai-language-text/samples/v1-beta/javascript/opinionMining.js
+[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.1/sdk/cognitivelanguage/ai-language-text/samples/v1-beta/javascript/opinionMining.js
 [lang_studio]: /azure/cognitive-services/language-service/language-studio
 

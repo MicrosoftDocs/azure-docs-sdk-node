@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: signalr
 ---
-# Azure SignalR SDK for JavaScript - latest
-## Packages - latest
+# Azure SignalR SDK for JavaScript - preview
+## Packages - preview
 [!INCLUDE [packages](signalr-index.md)]

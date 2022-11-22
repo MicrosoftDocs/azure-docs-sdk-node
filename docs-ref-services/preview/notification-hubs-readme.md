@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/notification-hubs, notificationhubs
 author: xirzec
 ms.author: jeffish
-ms.date: 11/04/2022
+ms.date: 11/22/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: notificationhubs
@@ -21,10 +21,10 @@ Azure Notification Hubs provide a scaled-out push engine that enables you to sen
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/)
 - [Package (npm)](https://www.npmjs.com/package/@azure/notification-hubs)
 - [Product documentation](/azure/notification-hubs/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev)
 
 ## Getting started
 
@@ -33,7 +33,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.0-beta.7/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.0-beta.8/SUPPORT.md) for more details.
 
 ### Install the package
 
@@ -63,7 +63,7 @@ This SDK for JavaScript offers two ways of interacting with Azure Notification H
 
 ```typescript
 import { 
-  NotificationHubsServiceClient
+  NotificationHubsClient,
   createAppleInstallation 
 } from "@azure/notification-hubs";
 
@@ -91,6 +91,7 @@ The above code snippet then becomes the following:
 
 ```typescript
 import { createClientContext, createOrUpdateInstallation } from "@azure/notification-hubs/api";
+import { createAppleInstallation } from "@azure/notification-hubs/models";
 
 const context = createClientContext("<connection string>", "<hub name>");
 
@@ -203,7 +204,7 @@ Using the modular approach, the code would be as follows:
 
 ```typescript
 import { createClientContext, updateInstallation } from "@azure/notification-hubs/api";
-import { JsonPatch, createAppleInstallation } from "@azure/notification-hubs/models";
+import { JsonPatch } from "@azure/notification-hubs/models";
 
 const context = createClientContext("<connection string>", "<hub name>");
 
@@ -688,7 +689,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/core/logger).
 
 ## Next steps
 
@@ -697,32 +698,32 @@ The following samples show you the various ways you can interact with Azure Noti
 **Device Management:**
 
 - Installations API
-  - [Create Or Update Installation](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/createInstallation.ts)
-  - [Update Installation](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/updateInstallation.ts)
+  - [Create Or Update Installation](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/createInstallation.ts)
+  - [Update Installation](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/updateInstallation.ts)
 - Registration API
-  - [Create Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/createRegistration.ts)s
-  - [Create Or Update Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/createOrUpdateRegistration.ts)
-  - [Update Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/updateRegistration.ts)
-  - [List Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/listRegistrations.ts)
-  - [List Registration By Tag](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/listRegistrationsByTag.ts)
+  - [Create Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/createRegistration.ts)s
+  - [Create Or Update Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/createOrUpdateRegistration.ts)
+  - [Update Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/updateRegistration.ts)
+  - [List Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/listRegistrations.ts)
+  - [List Registration By Tag](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/listRegistrationsByTag.ts)
 
 **Send Operations:**
 
-- [Broadcast Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/sendBroadcastNotification.ts)
-- [Direct Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/sendDirectNotification.ts)
-- [Audience Send With Tags List](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/sendTagsList.ts)
-- [Audience Send With Tag Expression](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/sendTagExpression.ts)
-- [Scheduled Broadcast Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/scheduledSendBroadcastNotification.ts)
-- [Scheduled Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/scheduledSendNotification.ts)
+- [Broadcast Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/sendBroadcastNotification.ts)
+- [Direct Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/sendDirectNotification.ts)
+- [Audience Send With Tags List](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/sendTagsList.ts)
+- [Audience Send With Tag Expression](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/sendTagExpression.ts)
+- [Scheduled Broadcast Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/scheduledSendBroadcastNotification.ts)
+- [Scheduled Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/scheduledSendNotification.ts)
 
 **Management Operations:**
 
-- [Export Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/exportRegistrationsJob.ts)
-- [Import Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/samples-dev/importRegistrationsJob.ts)
+- [Export Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/exportRegistrationsJob.ts)
+- [Import Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/samples-dev/importRegistrationsJob.ts)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.0-beta.7/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.0-beta.8/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This module's tests are a mixture of live and unit tests, which require you to have an Azure Notification Hubs instance. To execute the tests you'll need to run:
 
@@ -734,7 +735,7 @@ This module's tests are a mixture of live and unit tests, which require you to h
 4. `cd sdk\notificationhubs\notification-hubs`
 5. `npm run test`.
 
-View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.0-beta.7/sdk/notificationhubs/notification-hubs/test)
+View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.0-beta.8/sdk/notificationhubs/notification-hubs/test)
 folder for more details.
 
 ## Related projects

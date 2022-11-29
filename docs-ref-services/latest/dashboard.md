@@ -3,7 +3,7 @@ title: Azure Dashboard SDK for JavaScript
 description: Reference for Azure Dashboard SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 11/28/2022
+ms.data: 11/29/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: dashboard

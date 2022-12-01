@@ -1,6 +1,5 @@
 | Reference | Package | Source |
 |---|---|---|
-|Anomaly Detector|[@azure/cognitiveservices-anomalydetector](https://www.npmjs.com/package/@azure/cognitiveservices-anomalydetector)|[Github](https://github.com/Azure/azure-sdk-for-js)|
 |[Autosuggest](cognitiveservices-autosuggest-readme.md)|[@azure/cognitiveservices-autosuggest](https://www.npmjs.com/package/@azure/cognitiveservices-autosuggest)|[Github](https://github.com/Azure/azure-sdk-for-js)|
 |Computer Vision|[@azure/cognitiveservices-computervision](https://www.npmjs.com/package/@azure/cognitiveservices-computervision)|[Github](https://github.com/Azure/azure-sdk-for-js)|
 |Content Moderator|[@azure/cognitiveservices-contentmoderator](https://www.npmjs.com/package/@azure/cognitiveservices-contentmoderator)|[Github](https://github.com/Azure/azure-sdk-for-js)|

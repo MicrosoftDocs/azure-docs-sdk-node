@@ -10,30 +10,28 @@ isDeprecated: false
 type: interface
 methods:
   - name: >-
-      abortLatestOperation(string, string, string,
+      beginAbortLatestOperation(string, string, string,
       AgentPoolsAbortLatestOperationOptionalParams)
-    uid: '@azure/arm-containerservice.AgentPools.abortLatestOperation'
+    uid: '@azure/arm-containerservice.AgentPools.beginAbortLatestOperation'
     package: '@azure/arm-containerservice'
     summary: >-
-      Aborting last running operation on agent pool. We return a 204 no content
-      code here to indicate that
+      Aborts the currently running operation on the agent pool. The Agent Pool
+      will be moved to a
 
-      the operation has been accepted and an abort will be attempted but is not
-      guaranteed to complete
+      Canceling state and eventually to a Canceled state when cancellation
+      finishes. If the operation
 
-      successfully. Please look up the provisioning state of the agent pool to
-      keep track of whether it
-
-      changes to Canceled. A canceled provisioning state indicates that the
-      abort was successful
+      completes before cancellation can take place, an error is returned.
     remarks: ''
     isPreview: false
     isDeprecated: false
     syntax:
       content: >-
-        function abortLatestOperation(resourceGroupName: string, resourceName:
-        string, agentPoolName: string, options?:
-        AgentPoolsAbortLatestOperationOptionalParams): Promise<void>
+        function beginAbortLatestOperation(resourceGroupName: string,
+        resourceName: string, agentPoolName: string, options?:
+        AgentPoolsAbortLatestOperationOptionalParams):
+        Promise<PollerLike<PollOperationState<AgentPoolsAbortLatestOperationResponse>,
+        AgentPoolsAbortLatestOperationResponse>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -53,7 +51,57 @@ methods:
             The options parameters.
       return:
         description: ''
-        type: Promise&lt;void&gt;
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-containerservice.AgentPoolsAbortLatestOperationResponse"
+          />&gt;, <xref
+          uid="@azure/arm-containerservice.AgentPoolsAbortLatestOperationResponse"
+          />&gt;&gt;
+  - name: >-
+      beginAbortLatestOperationAndWait(string, string, string,
+      AgentPoolsAbortLatestOperationOptionalParams)
+    uid: '@azure/arm-containerservice.AgentPools.beginAbortLatestOperationAndWait'
+    package: '@azure/arm-containerservice'
+    summary: >-
+      Aborts the currently running operation on the agent pool. The Agent Pool
+      will be moved to a
+
+      Canceling state and eventually to a Canceled state when cancellation
+      finishes. If the operation
+
+      completes before cancellation can take place, an error is returned.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginAbortLatestOperationAndWait(resourceGroupName: string,
+        resourceName: string, agentPoolName: string, options?:
+        AgentPoolsAbortLatestOperationOptionalParams):
+        Promise<AgentPoolsAbortLatestOperationResponse>
+      parameters:
+        - id: resourceGroupName
+          type: string
+          description: The name of the resource group. The name is case insensitive.
+        - id: resourceName
+          type: string
+          description: The name of the managed cluster resource.
+        - id: agentPoolName
+          type: string
+          description: The name of the agent pool.
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-containerservice.AgentPoolsAbortLatestOperationOptionalParams"
+            />
+          description: |
+            The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-containerservice.AgentPoolsAbortLatestOperationResponse"
+          />&gt;
   - name: >-
       beginCreateOrUpdate(string, string, string, AgentPool,
       AgentPoolsCreateOrUpdateOptionalParams)
@@ -150,7 +198,8 @@ methods:
       content: >-
         function beginDelete(resourceGroupName: string, resourceName: string,
         agentPoolName: string, options?: AgentPoolsDeleteOptionalParams):
-        Promise<PollerLike<PollOperationState<void>, void>>
+        Promise<PollerLike<PollOperationState<AgentPoolsDeleteResponse>,
+        AgentPoolsDeleteResponse>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -169,7 +218,11 @@ methods:
             The options parameters.
       return:
         description: ''
-        type: 'Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;'
+        type: >-
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/arm-containerservice.AgentPoolsDeleteResponse" />&gt;,
+          <xref uid="@azure/arm-containerservice.AgentPoolsDeleteResponse"
+          />&gt;&gt;
   - name: 'beginDeleteAndWait(string, string, string, AgentPoolsDeleteOptionalParams)'
     uid: '@azure/arm-containerservice.AgentPools.beginDeleteAndWait'
     package: '@azure/arm-containerservice'
@@ -181,7 +234,7 @@ methods:
       content: >-
         function beginDeleteAndWait(resourceGroupName: string, resourceName:
         string, agentPoolName: string, options?:
-        AgentPoolsDeleteOptionalParams): Promise<void>
+        AgentPoolsDeleteOptionalParams): Promise<AgentPoolsDeleteResponse>
       parameters:
         - id: resourceGroupName
           type: string
@@ -200,7 +253,9 @@ methods:
             The options parameters.
       return:
         description: ''
-        type: Promise&lt;void&gt;
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-containerservice.AgentPoolsDeleteResponse" />&gt;
   - name: >-
       beginUpgradeNodeImageVersion(string, string, string,
       AgentPoolsUpgradeNodeImageVersionOptionalParams)

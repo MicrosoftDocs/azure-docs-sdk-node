@@ -18,13 +18,17 @@ interfaces:
   - '@azure/arm-hybridcompute.ErrorResponse'
   - '@azure/arm-hybridcompute.ExtensionTargetProperties'
   - '@azure/arm-hybridcompute.HybridComputeManagementClientOptionalParams'
+  - '@azure/arm-hybridcompute.HybridComputePrivateLinkScope'
   - '@azure/arm-hybridcompute.HybridComputePrivateLinkScopeListResult'
   - '@azure/arm-hybridcompute.HybridComputePrivateLinkScopeProperties'
   - '@azure/arm-hybridcompute.Identity'
   - '@azure/arm-hybridcompute.LocationData'
+  - '@azure/arm-hybridcompute.Machine'
+  - '@azure/arm-hybridcompute.MachineExtension'
   - '@azure/arm-hybridcompute.MachineExtensionInstanceView'
   - '@azure/arm-hybridcompute.MachineExtensionInstanceViewStatus'
   - '@azure/arm-hybridcompute.MachineExtensionProperties'
+  - '@azure/arm-hybridcompute.MachineExtensionUpdate'
   - '@azure/arm-hybridcompute.MachineExtensionUpdateProperties'
   - '@azure/arm-hybridcompute.MachineExtensionUpgrade'
   - '@azure/arm-hybridcompute.MachineExtensions'
@@ -37,6 +41,7 @@ interfaces:
   - '@azure/arm-hybridcompute.MachineExtensionsUpdateOptionalParams'
   - '@azure/arm-hybridcompute.MachineListResult'
   - '@azure/arm-hybridcompute.MachineProperties'
+  - '@azure/arm-hybridcompute.MachineUpdate'
   - '@azure/arm-hybridcompute.MachineUpdateProperties'
   - '@azure/arm-hybridcompute.Machines'
   - '@azure/arm-hybridcompute.MachinesDeleteOptionalParams'
@@ -53,6 +58,7 @@ interfaces:
   - '@azure/arm-hybridcompute.OperationValueDisplay'
   - '@azure/arm-hybridcompute.Operations'
   - '@azure/arm-hybridcompute.OperationsListOptionalParams'
+  - '@azure/arm-hybridcompute.PrivateEndpointConnection'
   - '@azure/arm-hybridcompute.PrivateEndpointConnectionDataModel'
   - '@azure/arm-hybridcompute.PrivateEndpointConnectionListResult'
   - '@azure/arm-hybridcompute.PrivateEndpointConnectionProperties'
@@ -66,6 +72,7 @@ interfaces:
   - >-
     @azure/arm-hybridcompute.PrivateEndpointConnectionsListByPrivateLinkScopeOptionalParams
   - '@azure/arm-hybridcompute.PrivateEndpointProperty'
+  - '@azure/arm-hybridcompute.PrivateLinkResource'
   - '@azure/arm-hybridcompute.PrivateLinkResourceListResult'
   - '@azure/arm-hybridcompute.PrivateLinkResourceProperties'
   - '@azure/arm-hybridcompute.PrivateLinkResources'
@@ -90,38 +97,33 @@ interfaces:
   - '@azure/arm-hybridcompute.PrivateLinkScopesResource'
   - '@azure/arm-hybridcompute.PrivateLinkScopesUpdateTagsOptionalParams'
   - '@azure/arm-hybridcompute.PrivateLinkServiceConnectionStateProperty'
+  - '@azure/arm-hybridcompute.ProxyResource'
   - '@azure/arm-hybridcompute.Resource'
   - '@azure/arm-hybridcompute.ResourceUpdate'
   - '@azure/arm-hybridcompute.SystemData'
   - '@azure/arm-hybridcompute.TagsResource'
+  - '@azure/arm-hybridcompute.TrackedResource'
   - '@azure/arm-hybridcompute.UpgradeExtensionsOptionalParams'
 typeAliases:
   - '@azure/arm-hybridcompute.CreatedByType'
-  - '@azure/arm-hybridcompute.HybridComputePrivateLinkScope'
   - '@azure/arm-hybridcompute.InstanceViewTypes'
-  - '@azure/arm-hybridcompute.Machine'
-  - '@azure/arm-hybridcompute.MachineExtension'
-  - '@azure/arm-hybridcompute.MachineExtensionUpdate'
   - '@azure/arm-hybridcompute.MachineExtensionsCreateOrUpdateResponse'
   - '@azure/arm-hybridcompute.MachineExtensionsGetResponse'
   - '@azure/arm-hybridcompute.MachineExtensionsListNextResponse'
   - '@azure/arm-hybridcompute.MachineExtensionsListResponse'
   - '@azure/arm-hybridcompute.MachineExtensionsUpdateResponse'
-  - '@azure/arm-hybridcompute.MachineUpdate'
   - '@azure/arm-hybridcompute.MachinesGetResponse'
   - '@azure/arm-hybridcompute.MachinesListByResourceGroupNextResponse'
   - '@azure/arm-hybridcompute.MachinesListByResourceGroupResponse'
   - '@azure/arm-hybridcompute.MachinesListBySubscriptionNextResponse'
   - '@azure/arm-hybridcompute.MachinesListBySubscriptionResponse'
   - '@azure/arm-hybridcompute.OperationsListResponse'
-  - '@azure/arm-hybridcompute.PrivateEndpointConnection'
   - '@azure/arm-hybridcompute.PrivateEndpointConnectionsCreateOrUpdateResponse'
   - '@azure/arm-hybridcompute.PrivateEndpointConnectionsGetResponse'
   - >-
     @azure/arm-hybridcompute.PrivateEndpointConnectionsListByPrivateLinkScopeNextResponse
   - >-
     @azure/arm-hybridcompute.PrivateEndpointConnectionsListByPrivateLinkScopeResponse
-  - '@azure/arm-hybridcompute.PrivateLinkResource'
   - '@azure/arm-hybridcompute.PrivateLinkResourcesGetResponse'
   - >-
     @azure/arm-hybridcompute.PrivateLinkResourcesListByPrivateLinkScopeNextResponse
@@ -136,8 +138,26 @@ typeAliases:
   - '@azure/arm-hybridcompute.PrivateLinkScopesListNextResponse'
   - '@azure/arm-hybridcompute.PrivateLinkScopesListResponse'
   - '@azure/arm-hybridcompute.PrivateLinkScopesUpdateTagsResponse'
-  - '@azure/arm-hybridcompute.ProxyResource'
   - '@azure/arm-hybridcompute.PublicNetworkAccessType'
   - '@azure/arm-hybridcompute.StatusLevelTypes'
   - '@azure/arm-hybridcompute.StatusTypes'
-  - '@azure/arm-hybridcompute.TrackedResource'
+functions:
+  - name: getContinuationToken(unknown)
+    uid: '@azure/arm-hybridcompute.getContinuationToken'
+    package: '@azure/arm-hybridcompute'
+    summary: |-
+      Given a result page from a pageable operation, returns a
+      continuation token that can be used to begin paging from
+      that point later.
+    remarks: ''
+    isPreview: false
+    isDeprecated: false
+    syntax:
+      content: 'function getContinuationToken(page: unknown): string | undefined'
+      parameters:
+        - id: page
+          type: unknown
+          description: A result object from calling .byPage() on a paged operation.
+      return:
+        description: The continuation token that can be passed into byPage().
+        type: string | undefined

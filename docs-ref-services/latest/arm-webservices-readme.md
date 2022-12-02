@@ -3,33 +3,31 @@ title: Azure ML Web Services Management client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-webservices, machinelearning
 author: qiaozha
 ms.author: qiaozha
-ms.date: 04/28/2022
+ms.date: 12/02/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: machinelearning
 ---
-# Azure ML Web Services Management client library for JavaScript - version 1.0.1 
+# Azure ML Web Services Management client library for JavaScript - version 1.1.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ML Web Services Management client.
 
 These APIs allow end users to operate on Azure Machine Learning Web Services resources. They support the following operations:<ul><li>Create or update a web service</li><li>Get a web service</li><li>Patch a web service</li><li>Delete a web service</li><li>Get All Web Services in a Resource Group </li><li>Get All Web Services in a Subscription</li><li>Get Web Services Keys</li></ul>
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-webservices_1.0.1/sdk/machinelearning/arm-webservices) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-webservices_1.1.0/sdk/machinelearning/arm-webservices) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-webservices) |
-[API reference documentation](https://docs.microsoft.com/javascript/api/@azure/arm-webservices) |
+[API reference documentation](/javascript/api/@azure/arm-webservices) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-webservices_1.0.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-webservices_1.1.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -48,7 +46,7 @@ npm install @azure/arm-webservices
 To create a client object to access the Azure ML Web Services Management API, you will need the `endpoint` of your Azure ML Web Services Management resource and a `credential`. The Azure ML Web Services Management client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure ML Web Services Management resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-webservices_1.0.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-webservices_1.1.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -59,7 +57,7 @@ npm install @azure/identity
 You will also need to **register a new AAD application and grant access to Azure ML Web Services Management** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
-For more information about how to create an Azure AD Application check out [this guide](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal).
+For more information about how to create an Azure AD Application check out [this guide](/azure/active-directory/develop/howto-create-service-principal-portal).
 
 ```javascript
 const { AzureMLWebServicesManagementClient } = require("@azure/arm-webservices");
@@ -98,7 +96,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-webservices_1.0.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-webservices_1.1.0/sdk/core/logger).
 
 ## Next steps
 
@@ -106,7 +104,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-webservices_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-webservices_1.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -114,10 +112,10 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fmachinelearning%2Farm-webservices%2FREADME.png)
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-webservices_1.0.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-webservices_1.0.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-webservices_1.1.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-webservices_1.1.0/sdk/identity/identity#defaultazurecredential
 

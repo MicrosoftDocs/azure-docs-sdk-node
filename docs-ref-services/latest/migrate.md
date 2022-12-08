@@ -3,7 +3,7 @@ title: Azure Migrate SDK for JavaScript
 description: Reference for Azure Migrate SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 12/07/2022
+ms.data: 12/08/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: migrate

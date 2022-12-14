@@ -1,0 +1,289 @@
+### YamlMime:TSType
+name: CosmosClient
+uid: '@azure/cosmos.CosmosClient'
+package: '@azure/cosmos'
+summary: >+
+  Provides a client-side logical representation of the Azure Cosmos DB database
+  account.
+
+  This client is used to configure and execute requests in the Azure Cosmos DB
+  database service.
+
+
+  **Example**
+
+
+  Instantiate a client and create a new database
+
+  ```typescript
+
+  const client = new CosmosClient({endpoint: "<URL HERE>", auth: {masterKey:
+  "<KEY HERE>"}});
+
+  await client.databases.create({id: "<datbase name here>"});
+
+  ```
+
+
+
+
+  **Example**
+
+
+  Instantiate a client with custom Connection Policy
+
+  ```typescript
+
+  const connectionPolicy = new ConnectionPolicy();
+
+  connectionPolicy.RequestTimeout = 10000;
+
+  const client = new CosmosClient({
+     endpoint: "<URL HERE>",
+     auth: {masterKey: "<KEY HERE>"},
+     connectionPolicy
+  });
+
+  ```
+
+fullName: CosmosClient
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: CosmosClient(CosmosClientOptions)
+    uid: '@azure/cosmos.CosmosClient.constructor_1'
+    package: '@azure/cosmos'
+    summary: >-
+      Creates a new <xref:@azure/cosmos.CosmosClient> object. See
+      <xref:@azure/cosmos.CosmosClientOptions> for more details on what options
+      you can use.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new CosmosClient(options: CosmosClientOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/cosmos.CosmosClientOptions" />
+          description: |
+            bag of options; require at least endpoint and auth to be configured
+  - name: CosmosClient(string)
+    uid: '@azure/cosmos.CosmosClient.constructor'
+    package: '@azure/cosmos'
+    summary: >-
+      Creates a new <xref:@azure/cosmos.CosmosClient> object from a connection
+      string. Your database connection string can be found in the Azure Portal
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new CosmosClient(connectionString: string)'
+      parameters:
+        - id: connectionString
+          type: string
+          description: ''
+properties:
+  - name: databases
+    uid: '@azure/cosmos.CosmosClient.databases'
+    package: '@azure/cosmos'
+    summary: >+
+      Used for creating new databases, or querying/reading all databases.
+
+      Use `.database(id)` to read, replace, or delete a specific, existing
+      database by id.
+
+
+
+      **Example**
+
+
+      Create a new database
+
+      ```typescript
+
+      const {resource: databaseDefinition, database} = await
+      client.databases.create({id: "<name here>"});
+
+      ```
+
+    fullName: databases
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'databases: Databases'
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.Databases" />
+  - name: offers
+    uid: '@azure/cosmos.CosmosClient.offers'
+    package: '@azure/cosmos'
+    summary: |
+      Used for querying & reading all offers.
+      Use `.offer(id)` to read, or replace existing offers.
+    fullName: offers
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'offers: Offers'
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.Offers" />
+methods:
+  - name: database(string)
+    uid: '@azure/cosmos.CosmosClient.database'
+    package: '@azure/cosmos'
+    summary: >+
+      Used for reading, updating, or deleting a existing database by id or
+      accessing containers belonging to that database.
+
+      This does not make a network call. Use `.read` to get info about the
+      database after getting the <xref:@azure/cosmos.Database> object.
+
+
+
+      **Example**
+
+
+      Create a new container off of an existing database
+
+      ```typescript
+
+      const container = client.database("<database
+      id>").containers.create("<container id>");
+
+      ```
+
+
+
+
+      **Example**
+
+
+      Delete an existing database
+
+      ```typescript
+
+      await client.database("<id here>").delete();
+
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function database(id: string): Database'
+      parameters:
+        - id: id
+          type: string
+          description: The id of the database.
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.Database" />
+  - name: dispose()
+    uid: '@azure/cosmos.CosmosClient.dispose'
+    package: '@azure/cosmos'
+    summary: >-
+      Clears background endpoint refresher. Use client.dispose() when destroying
+      the CosmosClient within another process.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: function dispose()
+  - name: getDatabaseAccount(RequestOptions)
+    uid: '@azure/cosmos.CosmosClient.getDatabaseAccount'
+    package: '@azure/cosmos'
+    summary: >-
+      Get information about the current <xref:@azure/cosmos.DatabaseAccount>
+      (including which regions are supported, etc.)
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getDatabaseAccount(options?: RequestOptions):
+        Promise<ResourceResponse<DatabaseAccount>>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/cosmos.RequestOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/cosmos.ResourceResponse" />&lt;<xref
+          uid="@azure/cosmos.DatabaseAccount" />&gt;&gt;
+  - name: getReadEndpoint()
+    uid: '@azure/cosmos.CosmosClient.getReadEndpoint'
+    package: '@azure/cosmos'
+    summary: >
+      Gets the currently used read endpoint. Useful for troubleshooting
+      purposes.
+
+      The url may contain a region suffix (e.g. "-eastus") if we're using
+      location specific endpoints.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getReadEndpoint(): Promise<string>'
+      return:
+        description: ''
+        type: Promise&lt;string&gt;
+  - name: getReadEndpoints()
+    uid: '@azure/cosmos.CosmosClient.getReadEndpoints'
+    package: '@azure/cosmos'
+    summary: >
+      Gets the currently used read endpoint. Useful for troubleshooting
+      purposes.
+
+      The url may contain a region suffix (e.g. "-eastus") if we're using
+      location specific endpoints.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getReadEndpoints(): Promise<Object>'
+      return:
+        description: ''
+        type: Promise&lt;Object&gt;
+  - name: getWriteEndpoint()
+    uid: '@azure/cosmos.CosmosClient.getWriteEndpoint'
+    package: '@azure/cosmos'
+    summary: >
+      Gets the currently used write endpoint url. Useful for troubleshooting
+      purposes.
+
+      The url may contain a region suffix (e.g. "-eastus") if we're using
+      location specific endpoints.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getWriteEndpoint(): Promise<string>'
+      return:
+        description: ''
+        type: Promise&lt;string&gt;
+  - name: getWriteEndpoints()
+    uid: '@azure/cosmos.CosmosClient.getWriteEndpoints'
+    package: '@azure/cosmos'
+    summary: >
+      Gets the known write endpoints. Useful for troubleshooting purposes.
+
+      The urls may contain a region suffix (e.g. "-eastus") if we're using
+      location specific endpoints.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getWriteEndpoints(): Promise<Object>'
+      return:
+        description: ''
+        type: Promise&lt;Object&gt;
+  - name: offer(string)
+    uid: '@azure/cosmos.CosmosClient.offer'
+    package: '@azure/cosmos'
+    summary: 'Used for reading, or updating a existing offer by id.'
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function offer(id: string): Offer'
+      parameters:
+        - id: id
+          type: string
+          description: |
+            The id of the offer.
+      return:
+        description: ''
+        type: <xref uid="@azure/cosmos.Offer" />

@@ -1,0 +1,137 @@
+### YamlMime:TSType
+name: ServiceBusReceiverOptions
+uid: '@azure/service-bus.ServiceBusReceiverOptions'
+package: '@azure/service-bus'
+summary: Options to use when creating a receiver.
+fullName: ServiceBusReceiverOptions
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: identifier
+    uid: '@azure/service-bus.ServiceBusReceiverOptions.identifier'
+    package: '@azure/service-bus'
+    summary: >-
+      Sets the name to identify the receiver. This can be used to correlate logs
+      and exceptions.
+
+      If not specified or empty, a random unique one will be used.
+    fullName: identifier
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'identifier?: string'
+      return:
+        description: ''
+        type: string
+  - name: maxAutoLockRenewalDurationInMs
+    uid: >-
+      @azure/service-bus.ServiceBusReceiverOptions.maxAutoLockRenewalDurationInMs
+    package: '@azure/service-bus'
+    summary: >
+      The maximum duration, in milliseconds, that the lock on the message will
+      be renewed automatically by the client.
+
+      This auto renewal stops once the message is settled.
+
+      - **Default**: `300 * 1000` milliseconds (5 minutes).
+
+      - **To disable autolock renewal**, set this to `0`.
+
+
+      **Example:**
+
+         If the message lock expires in 2 minutes and your message processing time is 8 minutes...
+
+         Set maxAutoLockRenewalDurationInMs to 10 minutes, and the message lock will be automatically renewed for 4 times
+         (equivalent to having the message locked for 4 times its lock duration by leveraging the lock renewals).
+    fullName: maxAutoLockRenewalDurationInMs
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'maxAutoLockRenewalDurationInMs?: number'
+      return:
+        description: ''
+        type: number
+  - name: receiveMode
+    uid: '@azure/service-bus.ServiceBusReceiverOptions.receiveMode'
+    package: '@azure/service-bus'
+    summary: >+
+      Represents the receive mode for the receiver.
+
+      In receiveAndDelete mode, messages are deleted from Service Bus as they
+      are received.
+
+
+      In peekLock mode, the receiver has a lock on the message for the duration
+      specified on the
+
+      queue/subscription.
+
+
+      Messages that are not settled within the lock duration will be redelivered
+      as many times as
+
+      the max delivery count set on the queue/subscription, after which they get
+      sent to a separate
+
+      dead letter queue.
+
+
+      You can settle a message by calling complete(), abandon(), defer() or
+      deadletter() methods on
+
+      the message.
+
+
+      More information about how peekLock and message settlement works here:
+
+      https://docs.microsoft.com/azure/service-bus-messaging/message-transfers-locks-settlement#peeklock
+
+    fullName: receiveMode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'receiveMode?: "peekLock" | "receiveAndDelete"'
+      return:
+        description: ''
+        type: '"peekLock" | "receiveAndDelete"'
+  - name: skipParsingBodyAsJson
+    uid: '@azure/service-bus.ServiceBusReceiverOptions.skipParsingBodyAsJson'
+    package: '@azure/service-bus'
+    summary: >-
+      Option to disable the client from running JSON.parse() on the message body
+      when receiving the message.
+
+      Not applicable if the message was sent with AMQP body type value or
+      sequence. Use this option when you
+
+      prefer to work directly with the bytes present in the message body than
+      have the client attempt to parse it.
+    fullName: skipParsingBodyAsJson
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'skipParsingBodyAsJson?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: subQueueType
+    uid: '@azure/service-bus.ServiceBusReceiverOptions.subQueueType'
+    package: '@azure/service-bus'
+    summary: >-
+      Represents the sub queue that is applicable for any queue or subscription.
+
+      Valid values are "deadLetter" and "transferDeadLetter". To learn more
+      about dead letter queues,
+
+      see
+      https://docs.microsoft.com/azure/service-bus-messaging/service-bus-dead-letter-queues
+    fullName: subQueueType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'subQueueType?: "deadLetter" | "transferDeadLetter"'
+      return:
+        description: ''
+        type: '"deadLetter" | "transferDeadLetter"'

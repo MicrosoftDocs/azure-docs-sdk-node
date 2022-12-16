@@ -3,19 +3,19 @@ title: Azure ServiceLinkerManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-servicelinker, servicelinker
 author: xirzec
 ms.author: jeffish
-ms.date: 05/19/2022
+ms.date: 12/16/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: servicelinker
 ---
-# Azure ServiceLinkerManagement client library for JavaScript - version 2.0.0 
+# Azure ServiceLinkerManagement client library for JavaScript - version 2.1.0 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ServiceLinkerManagement client.
 
 Microsoft.ServiceLinker provider
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicelinker_2.0.0/sdk/servicelinker/arm-servicelinker) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicelinker_2.1.0/sdk/servicelinker/arm-servicelinker) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-servicelinker) |
 [API reference documentation](/javascript/api/@azure/arm-servicelinker) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -24,10 +24,10 @@ Microsoft.ServiceLinker provider
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicelinker_2.0.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicelinker_2.1.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -46,7 +46,7 @@ npm install @azure/arm-servicelinker
 To create a client object to access the Azure ServiceLinkerManagement API, you will need the `endpoint` of your Azure ServiceLinkerManagement resource and a `credential`. The Azure ServiceLinkerManagement client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure ServiceLinkerManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicelinker_2.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicelinker_2.1.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -64,14 +64,15 @@ const { ServiceLinkerManagementClient } = require("@azure/arm-servicelinker");
 const { DefaultAzureCredential } = require("@azure/identity");
 // For client-side applications running in the browser, use InteractiveBrowserCredential instead of DefaultAzureCredential. See https://aka.ms/azsdk/js/identity/examples for more details.
 
-const client = new ServiceLinkerManagementClient(new DefaultAzureCredential());
+const subscriptionId = "00000000-0000-0000-0000-000000000000";
+const client = new ServiceLinkerManagementClient(new DefaultAzureCredential(), subscriptionId);
 
 // For client-side applications running in the browser, use this code instead:
 // const credential = new InteractiveBrowserCredential({
 //   tenantId: "<YOUR_TENANT_ID>",
 //   clientId: "<YOUR_CLIENT_ID>"
 // });
-// const client = new ServiceLinkerManagementClient(credential);
+// const client = new ServiceLinkerManagementClient(credential, subscriptionId);
 ```
 
 
@@ -95,7 +96,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicelinker_2.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicelinker_2.1.0/sdk/core/logger).
 
 ## Next steps
 
@@ -103,7 +104,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicelinker_2.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-servicelinker_2.1.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -115,6 +116,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicelinker_2.0.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicelinker_2.0.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicelinker_2.1.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-servicelinker_2.1.0/sdk/identity/identity#defaultazurecredential
 

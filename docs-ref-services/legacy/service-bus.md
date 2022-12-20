@@ -16,7 +16,7 @@ ms.service: Service Bus
 
 Azure Service Bus is an asynchronous messaging cloud platform that enables you to send data between decoupled systems.
 
-Learn more about [Azure Service Bus](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview).
+Learn more about [Azure Service Bus](https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview).
 
 ## Management package
 Use npm to install the Azure Service Bus module for JavaScript
@@ -36,6 +36,6 @@ Use npm to install the Azure Service Bus module for JavaScript
 npm install @azure/service-bus
 ```
 
-See the documentation for this package [here](https://docs.microsoft.com/javascript/api/@azure/service-bus/?view=azure-node-latest).
+See the documentation for this package [here](https://learn.microsoft.com/en-us/javascript/api/@azure/service-bus/?view=azure-node-latest).
 
-For more code samples that use the @azure/service-bus package, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript&products=azure-service-bus).
+For more code samples that use the @azure/service-bus package, explore the [JavaScript samples](https://learn.microsoft.com/en-us/samples/browse/?languages=javascript&products=azure-service-bus).

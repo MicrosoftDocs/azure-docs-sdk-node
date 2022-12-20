@@ -4,7 +4,7 @@ description: Reference for Azure Service Bus Modules for JavaScript
 author: spelluru
 ms.author: spelluru
 manager: timlt
-ms.date: 03/04/2020
+ms.date: 12/20/2022
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -25,7 +25,7 @@ Use npm to install the Azure Service Bus module for JavaScript
 npm install @azure/arm-servicebus
 ```
 
-See the documentation for this package [here](https://docs.microsoft.com/javascript/api/overview/azure/servicebus/management?view=azure-node-latest).
+See the documentation for this package [here](https://learn.microsoft.com/en-us/javascript/api/overview/azure/arm-servicebus-readme?view=azure-node-latest).
 
 Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-servicebus)
 

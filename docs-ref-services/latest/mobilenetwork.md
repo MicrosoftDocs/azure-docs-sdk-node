@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: mobilenetwork
 ---
-# Azure Mobilenetwork SDK for JavaScript - preview
-## Packages - preview
+# Azure Mobilenetwork SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](mobilenetwork-index.md)]

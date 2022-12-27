@@ -3,7 +3,7 @@ title: Azure Appservice SDK for JavaScript
 description: Reference for Azure Appservice SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 12/26/2022
+ms.data: 12/27/2022
 ms.topic: reference
 ms.devlang: javascript
 ms.service: appservice

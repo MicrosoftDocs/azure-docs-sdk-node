@@ -3,7 +3,7 @@ title: Azure Policy Insights SDK for JavaScript
 description: Reference for Azure Policy Insights SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 12/30/2022
+ms.data: 01/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: policyinsights

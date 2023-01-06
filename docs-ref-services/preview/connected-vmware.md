@@ -1,9 +1,9 @@
 ---
-title: Azure Connected VMWare SDK for JavaScript
-description: Reference for Azure Connected VMWare SDK for JavaScript
+title: Azure Connected VMware SDK for JavaScript
+description: Reference for Azure Connected VMware SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 01/05/2023
+ms.data: 01/06/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: connectedvmware

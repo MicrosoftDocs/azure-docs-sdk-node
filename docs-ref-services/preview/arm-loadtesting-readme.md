@@ -1,21 +1,21 @@
 ---
-title: Azure LoadTest client library for JavaScript
+title: Azure Load Testing client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-loadtesting, loadtestservice
 author: xirzec
 ms.author: jeffish
-ms.date: 11/24/2022
+ms.date: 01/09/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: loadtestservice
 ---
-# Azure LoadTest client library for JavaScript - version 1.0.0-beta.1 
+# Azure Load Testing client library for JavaScript - version 1.0.0-beta.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure LoadTest client.
 
 LoadTest client provides access to LoadTest Resource and it's status operations.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-loadtesting_1.0.0-beta.1/sdk/loadtestservice/arm-loadtesting) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-loadtesting_1.0.0-beta.2/sdk/loadtestservice/arm-loadtesting) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-loadtesting) |
 [API reference documentation](/javascript/api/@azure/arm-loadtesting?view=azure-node-preview) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -27,7 +27,7 @@ LoadTest client provides access to LoadTest Resource and it's status operations.
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-loadtesting_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-loadtesting_1.0.0-beta.2/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -46,7 +46,7 @@ npm install @azure/arm-loadtesting
 To create a client object to access the Azure LoadTest API, you will need the `endpoint` of your Azure LoadTest resource and a `credential`. The Azure LoadTest client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure LoadTest resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-loadtesting_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-loadtesting_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -75,6 +75,109 @@ const client = new LoadTestClient(new DefaultAzureCredential(), subscriptionId);
 // const client = new LoadTestClient(credential, subscriptionId);
 ```
 
+### Create an Azure Load Testing resource
+
+Create a new Azure Load Testing resource.
+```javascript
+loadTestResourceCreatePayload = {
+  location: "westus2"
+};
+
+const resource = await client.loadTests.beginCreateOrUpdateAndWait(
+  "sample-rg",
+  "sample-loadtesting-resource",
+  loadTestResourceCreatePayload
+);
+
+console.log(resource);
+```
+
+Create a new Azure Load Testing resource with managed identity and customer managed key encryption.
+```javascript
+loadTestResourceCreatePayload = {
+  location: "westus2",
+  tags: { team: "testing" },
+  identity: {
+    type: 'SystemAssigned, UserAssigned',
+    userAssignedIdentities: {
+      '/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sample-rg/providers/microsoft.managedidentity/userassignedidentities/identity1': {}
+    }
+  },
+  encryption: {
+    identity: {
+      type: 'UserAssigned',
+      resourceId: '/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sample-rg/providers/microsoft.managedidentity/userassignedidentities/identity1'
+    },
+    keyUrl: 'https://sample-kv.vault.azure.net/keys/cmkkey/2d1ccd5c50234ea2a0858fe148b69cde'
+  }
+};
+
+const resource = await client.loadTests.beginCreateOrUpdateAndWait(
+  "sample-rg",
+  "sample-loadtesting-resource",
+  loadTestResourceCreatePayload
+);
+
+console.log(resource);
+```
+
+### Get an Azure Load Testing resource
+
+```javascript
+let resourceName = 'sample-loadtesting-resource';
+let resourceGroupName = 'sample-rg';
+
+const resource = await client.loadTests.get(
+  resourceGroupName,
+  resourceName
+);
+
+console.log(resource);
+```
+
+### Update an Azure Load Testing resource
+
+```javascript
+loadTestResourcePatchPayload = {
+  tags: { team: "testing-dev" },
+  identity: {
+    type: 'SystemAssigned, UserAssigned',
+    userAssignedIdentities: {
+      // removing a user-assigned managed identity by assigning the value in the payload as null
+      '/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sample-rg/providers/microsoft.managedidentity/userassignedidentities/identity1': null,
+      '/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sample-rg/providers/microsoft.managedidentity/userassignedidentities/identity2': {}
+    }
+  },
+  encryption: {
+    // use system-assigned managed identity for CMK encryption
+    identity: {
+      type: 'SystemAssigned',
+      resourceId: null
+    },
+    keyUrl: 'https://sample-kv.vault.azure.net/keys/cmkkey/2d1ccd5c50234ea2a0858fe148b69cde'
+  }
+};
+
+const resource = await client.loadTests.beginUpdateAndWait(
+  "sample-rg",
+  "sample-loadtesting-resource",
+  loadTestResourcePatchPayload
+);
+
+console.log(resource);
+```
+
+### Delete an Azure Load Testing resource
+
+```javascript
+let resourceName = 'sample-loadtesting-resource';
+let resourceGroupName = 'sample-rg';
+
+const result = await client.loadTests.beginDeleteAndWait(
+  resourceGroupName,
+  resourceName
+);
+```
 
 ### JavaScript Bundle
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
@@ -96,7 +199,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-loadtesting_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-loadtesting_1.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
@@ -104,7 +207,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-loadtesting_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-loadtesting_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -116,6 +219,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-loadtesting_1.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-loadtesting_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-loadtesting_1.0.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-loadtesting_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
 

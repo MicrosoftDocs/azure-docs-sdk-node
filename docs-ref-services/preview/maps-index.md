@@ -1,5 +1,7 @@
 | Reference | Package | Source |
 |---|---|---|
+|[Maps Geolocation](maps-geolocation-rest-readme.md)|[@azure-rest/maps-geolocation](https://www.npmjs.com/package/@azure-rest/maps-geolocation)|[Github](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/maps/maps-geolocation-rest)|
+|[Maps Render](maps-render-rest-readme.md)|[@azure-rest/maps-render](https://www.npmjs.com/package/@azure-rest/maps-render)|[Github](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/maps/maps-render-rest)|
 |[Maps Route](maps-route-rest-readme.md)|[@azure-rest/maps-route](https://www.npmjs.com/package/@azure-rest/maps-route)|[Github](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/maps/maps-route-rest)|
 |[Maps Common](maps-common-readme.md)|[@azure/maps-common](https://www.npmjs.com/package/@azure/maps-common)|[Github](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/maps/maps-common)|
 |[Maps Search](maps-search-readme.md)|[@azure/maps-search](https://www.npmjs.com/package/@azure/maps-search)|[Github](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/maps/maps-search)|

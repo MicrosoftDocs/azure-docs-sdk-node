@@ -3,7 +3,7 @@ title: Azure Links SDK for JavaScript
 description: Reference for Azure Links SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 01/10/2023
+ms.data: 01/11/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: links

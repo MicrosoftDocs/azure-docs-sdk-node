@@ -3,43 +3,11 @@ uid: '@azure/core-http'
 name: '@azure/core-http'
 summary: ''
 type: package
-classes:
-  - '@azure/core-http.ExpiringAccessTokenCache'
-  - '@azure/core-http.AccessTokenRefresher'
-  - '@azure/core-http.ApiKeyCredentials'
-  - '@azure/core-http.BasicAuthenticationCredentials'
-  - '@azure/core-http.TopicCredentials'
-  - '@azure/core-http.HttpHeaders'
-  - '@azure/core-http.ConsoleHttpPipelineLogger'
-  - '@azure/core-http.NodeFetchHttpClient'
-  - '@azure/core-http.ReportTransform'
-  - '@azure/core-http.DeserializationPolicy'
-  - '@azure/core-http.DisableResponseDecompressionPolicy'
-  - '@azure/core-http.ExponentialRetryPolicy'
-  - '@azure/core-http.GenerateClientRequestIdPolicy'
-  - '@azure/core-http.KeepAlivePolicy'
-  - '@azure/core-http.LogPolicy'
-  - '@azure/core-http.ProxyPolicy'
-  - '@azure/core-http.RedirectPolicy'
-  - '@azure/core-http.BaseRequestPolicy'
-  - '@azure/core-http.RequestPolicyOptions'
-  - '@azure/core-http.RPRegistrationPolicy'
-  - '@azure/core-http.SigningPolicy'
-  - '@azure/core-http.SystemErrorRetryPolicy'
-  - '@azure/core-http.ThrottlingRetryPolicy'
-  - '@azure/core-http.TracingPolicy'
-  - '@azure/core-http.UserAgentPolicy'
-  - '@azure/core-http.RestError'
-  - '@azure/core-http.Serializer'
-  - '@azure/core-http.ServiceClient'
-  - '@azure/core-http.URLBuilder'
-  - '@azure/core-http.URLQuery'
-  - '@azure/core-http.URLToken'
-  - '@azure/core-http.URLTokenizer'
-  - '@azure/core-http.Sanitizer'
-  - '@azure/core-http.WebResource'
-  - '@azure/core-http.XhrHttpClient'
 interfaces:
+  - '@azure/core-http.Headers'
+  - '@azure/core-http.Request'
+  - '@azure/core-http.RequestInit'
+  - '@azure/core-http.Response'
   - '@azure/core-http.AccessTokenCache'
   - '@azure/core-http.ApiKeyCredentialOptions'
   - '@azure/core-http.ServiceClientCredentials'
@@ -86,8 +54,6 @@ interfaces:
   - '@azure/core-http.UrlParameterValue'
   - '@azure/core-http.ProxySettings'
   - '@azure/core-http.ServiceClientOptions'
-  - '@azure/core-http.RetryData'
-  - '@azure/core-http.RetryError'
   - '@azure/core-http.SanitizerOptions'
   - '@azure/core-http.SerializerOptions'
   - '@azure/core-http.ServiceCallback'
@@ -95,6 +61,40 @@ interfaces:
   - '@azure/core-http.RequestOptionsBase'
   - '@azure/core-http.RequestPrepareOptions'
   - '@azure/core-http.WebResourceLike'
+classes:
+  - '@azure/core-http.ExpiringAccessTokenCache'
+  - '@azure/core-http.AccessTokenRefresher'
+  - '@azure/core-http.ApiKeyCredentials'
+  - '@azure/core-http.BasicAuthenticationCredentials'
+  - '@azure/core-http.TopicCredentials'
+  - '@azure/core-http.HttpHeaders'
+  - '@azure/core-http.ConsoleHttpPipelineLogger'
+  - '@azure/core-http.NodeFetchHttpClient'
+  - '@azure/core-http.ReportTransform'
+  - '@azure/core-http.DeserializationPolicy'
+  - '@azure/core-http.DisableResponseDecompressionPolicy'
+  - '@azure/core-http.ExponentialRetryPolicy'
+  - '@azure/core-http.GenerateClientRequestIdPolicy'
+  - '@azure/core-http.KeepAlivePolicy'
+  - '@azure/core-http.LogPolicy'
+  - '@azure/core-http.ProxyPolicy'
+  - '@azure/core-http.RedirectPolicy'
+  - '@azure/core-http.BaseRequestPolicy'
+  - '@azure/core-http.RequestPolicyOptions'
+  - '@azure/core-http.SigningPolicy'
+  - '@azure/core-http.SystemErrorRetryPolicy'
+  - '@azure/core-http.ThrottlingRetryPolicy'
+  - '@azure/core-http.TracingPolicy'
+  - '@azure/core-http.UserAgentPolicy'
+  - '@azure/core-http.RestError'
+  - '@azure/core-http.Serializer'
+  - '@azure/core-http.ServiceClient'
+  - '@azure/core-http.URLBuilder'
+  - '@azure/core-http.URLQuery'
+  - '@azure/core-http.URLToken'
+  - '@azure/core-http.URLTokenizer'
+  - '@azure/core-http.Sanitizer'
+  - '@azure/core-http.WebResource'
 typeAliases:
   - '@azure/core-http.Authenticator'
   - '@azure/core-http.RawHttpHeaders'
@@ -105,29 +105,16 @@ typeAliases:
   - '@azure/core-http.RequestPolicyFactory'
   - '@azure/core-http.ResponseHandler'
   - '@azure/core-http.TelemetryInfo'
-  - '@azure/core-http.ProxyAgent'
   - '@azure/core-http.Mapper'
   - '@azure/core-http.MapperType'
   - '@azure/core-http.PropertyParent'
   - '@azure/core-http.ProxyOptions'
   - '@azure/core-http.URLTokenType'
   - '@azure/core-http.URLTokenizerState'
-  - '@azure/core-http.UnknownObject'
   - '@azure/core-http.HttpMethods'
   - '@azure/core-http.HttpRequestBody'
   - '@azure/core-http.TransferProgressEvent'
 functions:
-  - name: getCachedDefaultHttpClient()
-    uid: '@azure/core-http.getCachedDefaultHttpClient'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function getCachedDefaultHttpClient(): HttpClient'
-      return:
-        description: ''
-        type: <xref uid="@azure/core-http.HttpClient" />
   - name: isHttpHeadersLike(unknown)
     uid: '@azure/core-http.isHttpHeadersLike'
     package: '@azure/core-http'
@@ -135,25 +122,27 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isHttpHeadersLike(object?: unknown): boolean'
+      content: 'function isHttpHeadersLike(object?: unknown): object'
       parameters:
         - id: object
           type: unknown
           description: ''
       return:
         description: ''
-        type: boolean
-  - name: parseHeaders(XMLHttpRequest)
+        type: object
+  - name: parseHeaders(Headers)
     uid: '@azure/core-http.parseHeaders'
     package: '@azure/core-http'
-    summary: ''
+    summary: >-
+      Transforms a set of headers into the key/value pair defined by
+      <xref:@azure/core-http.HttpHeadersLike>
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function parseHeaders(xhr: XMLHttpRequest): HttpHeadersLike'
+      content: 'function parseHeaders(headers: Headers): HttpHeadersLike'
       parameters:
-        - id: xhr
-          type: XMLHttpRequest
+        - id: headers
+          type: Headers
           description: ''
       return:
         description: ''
@@ -213,23 +202,6 @@ functions:
       return:
         description: ''
         type: string
-  - name: getStreamResponseStatusCodes(OperationSpec)
-    uid: '@azure/core-http.getStreamResponseStatusCodes'
-    package: '@azure/core-http'
-    summary: Gets the list of status codes for streaming responses.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function getStreamResponseStatusCodes(operationSpec: OperationSpec):
-        Set<number>
-      parameters:
-        - id: operationSpec
-          type: <xref uid="@azure/core-http.OperationSpec" />
-          description: ''
-      return:
-        description: ''
-        type: Set&lt;number&gt;
   - name: 'bearerTokenAuthenticationPolicy(TokenCredential, string | string[])'
     uid: '@azure/core-http.bearerTokenAuthenticationPolicy'
     package: '@azure/core-http'
@@ -435,17 +407,6 @@ functions:
       return:
         description: ''
         type: '<xref uid="@azure/core-http.TelemetryInfo" />[]'
-  - name: ndJsonPolicy()
-    uid: '@azure/core-http.ndJsonPolicy'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function ndJsonPolicy(): RequestPolicyFactory'
-      return:
-        description: ''
-        type: <xref uid="@azure/core-http.RequestPolicyFactory" />
   - name: getDefaultProxySettings(string)
     uid: '@azure/core-http.getDefaultProxySettings'
     package: '@azure/core-http'
@@ -490,17 +451,6 @@ functions:
       return:
         description: ''
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
-  - name: loadNoProxy()
-    uid: '@azure/core-http.loadNoProxy'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function loadNoProxy(): string[]'
-      return:
-        description: ''
-        type: 'string[]'
   - name: redirectPolicy(number)
     uid: '@azure/core-http.redirectPolicy'
     package: '@azure/core-http'
@@ -518,23 +468,6 @@ functions:
           description: Maximum number of redirects to follow.
       return:
         description: 'An instance of the <xref:@azure/core-http.RedirectPolicy>'
-        type: <xref uid="@azure/core-http.RequestPolicyFactory" />
-  - name: rpRegistrationPolicy(number)
-    uid: '@azure/core-http.rpRegistrationPolicy'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function rpRegistrationPolicy(retryTimeout?: number):
-        RequestPolicyFactory
-      parameters:
-        - id: retryTimeout
-          type: number
-          description: ''
-      return:
-        description: ''
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
   - name: signingPolicy(ServiceClientCredentials)
     uid: '@azure/core-http.signingPolicy'
@@ -660,67 +593,6 @@ functions:
       return:
         description: 'A new <xref:@azure/core-http.UserAgentPolicy>.'
         type: <xref uid="@azure/core-http.RequestPolicyFactory" />
-  - name: 'createProxyAgent(string, ProxySettings, HttpHeadersLike)'
-    uid: '@azure/core-http.createProxyAgent'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createProxyAgent(requestUrl: string, proxySettings:
-        ProxySettings, headers?: HttpHeadersLike): ProxyAgent
-      parameters:
-        - id: requestUrl
-          type: string
-          description: ''
-        - id: proxySettings
-          type: <xref uid="@azure/core-http.ProxySettings" />
-          description: ''
-        - id: headers
-          type: <xref uid="@azure/core-http.HttpHeadersLike" />
-          description: ''
-      return:
-        description: ''
-        type: <xref uid="@azure/core-http.ProxyAgent" />
-  - name: 'createTunnel(boolean, boolean, HttpsOverHttpsOptions)'
-    uid: '@azure/core-http.createTunnel'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createTunnel(isRequestHttps: boolean, isProxyHttps: boolean,
-        tunnelOptions: HttpsOverHttpsOptions): Agent | Agent
-      parameters:
-        - id: isRequestHttps
-          type: boolean
-          description: ''
-        - id: isProxyHttps
-          type: boolean
-          description: ''
-        - id: tunnelOptions
-          type: HttpsOverHttpsOptions
-          description: ''
-      return:
-        description: ''
-        type: Agent | Agent
-  - name: isUrlHttps(string)
-    uid: '@azure/core-http.isUrlHttps'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function isUrlHttps(url: string): boolean'
-      parameters:
-        - id: url
-          type: string
-          description: ''
-      return:
-        description: ''
-        type: boolean
   - name: serializeObject(unknown)
     uid: '@azure/core-http.serializeObject'
     package: '@azure/core-http'
@@ -888,133 +760,6 @@ functions:
       return:
         description: ''
         type: boolean
-  - name: decodeString(string)
-    uid: '@azure/core-http.decodeString'
-    package: '@azure/core-http'
-    summary: Decodes a base64 string into a byte array.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function decodeString(value: string): Uint8Array'
-      parameters:
-        - id: value
-          type: string
-          description: |
-            The base64 string to decode
-      return:
-        description: ''
-        type: Uint8Array
-  - name: encodeByteArray(Uint8Array)
-    uid: '@azure/core-http.encodeByteArray'
-    package: '@azure/core-http'
-    summary: Encodes a byte array in base64 format.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function encodeByteArray(value: Uint8Array): string'
-      parameters:
-        - id: value
-          type: Uint8Array
-          description: |
-            The Uint8Aray to encode
-      return:
-        description: ''
-        type: string
-  - name: encodeString(string)
-    uid: '@azure/core-http.encodeString'
-    package: '@azure/core-http'
-    summary: Encodes a string in base64 format.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function encodeString(value: string): string'
-      parameters:
-        - id: value
-          type: string
-          description: |
-            The string to encode
-      return:
-        description: ''
-        type: string
-  - name: isNumber(unknown)
-    uid: '@azure/core-http.isNumber'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function isNumber(n: unknown): boolean'
-      parameters:
-        - id: 'n'
-          type: unknown
-          description: ''
-      return:
-        description: ''
-        type: boolean
-  - name: >-
-      shouldRetry(number, (response?: HttpOperationResponse, error?: RetryError)
-      => boolean, RetryData, HttpOperationResponse, RetryError)
-    uid: '@azure/core-http.shouldRetry'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function shouldRetry(retryLimit: number, predicate: (response?:
-        HttpOperationResponse, error?: RetryError) => boolean, retryData:
-        RetryData, response?: HttpOperationResponse, error?: RetryError):
-        boolean
-      parameters:
-        - id: retryLimit
-          type: number
-          description: Specifies the max number of retries.
-        - id: predicate
-          type: '(response?: HttpOperationResponse, error?: RetryError) =&gt; boolean'
-          description: >-
-            Initial chekck on whether to retry based on given responses or
-            errors
-        - id: retryData
-          type: <xref uid="@azure/core-http.RetryData" />
-          description: The retry data.
-        - id: response
-          type: <xref uid="@azure/core-http.HttpOperationResponse" />
-          description: ''
-        - id: error
-          type: <xref uid="@azure/core-http.RetryError" />
-          description: ''
-      return:
-        description: True if the operation qualifies for a retry; false otherwise.
-        type: boolean
-  - name: >-
-      updateRetryData({ maxRetryInterval: number, minRetryInterval: number,
-      retryInterval: number }, RetryData, RetryError)
-    uid: '@azure/core-http.updateRetryData'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function updateRetryData(retryOptions: { maxRetryInterval: number,
-        minRetryInterval: number, retryInterval: number }, retryData?:
-        RetryData, err?: RetryError): RetryData
-      parameters:
-        - id: retryOptions
-          type: >-
-            { maxRetryInterval: number, minRetryInterval: number, retryInterval:
-            number }
-          description: 'specifies retry interval, and its lower bound and upper bound.'
-        - id: retryData
-          type: <xref uid="@azure/core-http.RetryData" />
-          description: The retry data.
-        - id: err
-          type: <xref uid="@azure/core-http.RetryError" />
-          description: |
-            The operation"s error, if any.
-      return:
-        description: ''
-        type: <xref uid="@azure/core-http.RetryData" />
   - name: 'applyMixins(unknown, any[])'
     uid: '@azure/core-http.applyMixins'
     package: '@azure/core-http'
@@ -1118,23 +863,6 @@ functions:
           description: The value to be validated for ISO 8601 duration format.
       return:
         description: '`true` if valid, `false` otherwise.'
-        type: boolean
-  - name: isObject(unknown)
-    uid: '@azure/core-http.isObject'
-    package: '@azure/core-http'
-    summary: ''
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function isObject(input: unknown): boolean'
-      parameters:
-        - id: input
-          type: unknown
-          description: ''
-      return:
-        description: >-
-          true when input is an object type that is not null, Array, RegExp, or
-          Date.
         type: boolean
   - name: isPrimitiveType(unknown)
     uid: '@azure/core-http.isPrimitiveType'
@@ -1354,14 +1082,14 @@ functions:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function isWebResourceLike(object: unknown): boolean'
+      content: 'function isWebResourceLike(object: unknown): object'
       parameters:
         - id: object
           type: unknown
           description: ''
       return:
         description: ''
-        type: boolean
+        type: object
 enums:
   - '@azure/core-http.HttpPipelineLogLevel'
   - '@azure/core-http.RetryMode'

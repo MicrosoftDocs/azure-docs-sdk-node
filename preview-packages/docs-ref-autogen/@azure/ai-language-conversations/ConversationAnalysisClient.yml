@@ -2,14 +2,49 @@
 name: ConversationAnalysisClient
 uid: '@azure/ai-language-conversations.ConversationAnalysisClient'
 package: '@azure/ai-language-conversations'
-summary: ''
+summary: |
+  A client for interacting with the conversational language understanding
+  features in Azure Cognitive Language Service.
+  The client needs the endpoint of a Language resource and an authentication
+  method such as an API key or AAD. The API key and endpoint can be found in
+  the Language resource page in the Azure portal. They will be located in the
+  resource's Keys and Endpoint page, under Resource Management.
+
+  ### Examples for authentication:
+
+  #### API Key
+
+  ```js
+  import { AzureKeyCredential } from "@azure/core-auth";
+  import { ConversationAnalysisClient } from "@azure/ai-language-conversations";
+
+  const endpoint = "https://<resource name>.cognitiveservices.azure.com";
+  const credential = new AzureKeyCredential("<api key>");
+
+  const client = new ConversationAnalysisClient(endpoint, credential);
+  ```
+
+  #### Azure Active Directory
+
+  See the [`@azure/identity`](https://npmjs.com/package/\@azure/identity)
+  package for more information about authenticating with Azure Active Directory.
+
+  ```js
+  import { ConversationAnalysisClient } from "@azure/ai-language-conversations";
+  import { DefaultAzureCredential } from "@azure/identity";
+
+  const endpoint = "https://<resource name>.cognitiveservices.azure.com";
+  const credential = new DefaultAzureCredential();
+
+  const client = new ConversationAnalysisClient(endpoint, credential);
+  ```
 fullName: ConversationAnalysisClient
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
   - name: >-
-      ConversationAnalysisClient(string,
+      ConversationAnalysisClient(string, TokenCredential | KeyCredential,
       ConversationAnalysisClientOptionalParams)
     uid: '@azure/ai-language-conversations.ConversationAnalysisClient.constructor'
     package: '@azure/ai-language-conversations'
@@ -18,7 +53,8 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new ConversationAnalysisClient(endpoint: string, options?:
+        new ConversationAnalysisClient(endpoint: string, credential:
+        TokenCredential | KeyCredential, options?:
         ConversationAnalysisClientOptionalParams)
       parameters:
         - id: endpoint
@@ -26,6 +62,9 @@ constructors:
           description: |-
             Supported Cognitive Services endpoint (e.g.,
                             https://<resource-name>.api.cognitiveservices.azure.com).
+        - id: credential
+          type: TokenCredential | KeyCredential
+          description: ''
         - id: options
           type: >-
             <xref
@@ -33,89 +72,6 @@ constructors:
             />
           description: |
             The parameter options
-properties:
-  - name: apiVersion
-    uid: '@azure/ai-language-conversations.ConversationAnalysisClient.apiVersion'
-    package: '@azure/ai-language-conversations'
-    summary: ''
-    fullName: apiVersion
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'apiVersion: string'
-      return:
-        description: ''
-        type: string
-  - name: endpoint
-    uid: '@azure/ai-language-conversations.ConversationAnalysisClient.endpoint'
-    package: '@azure/ai-language-conversations'
-    summary: ''
-    fullName: endpoint
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'endpoint: string'
-      return:
-        description: ''
-        type: string
-inheritedProperties:
-  - name: pipeline
-    uid: '@azure/ai-language-conversations.ConversationAnalysisClient.pipeline'
-    package: '@azure/ai-language-conversations'
-    summary: The pipeline used by this client to make requests
-    fullName: pipeline
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'pipeline: Pipeline'
-      return:
-        description: ''
-        type: Pipeline
-    inheritanceDescription: <b>Inherited From</b> ServiceClient.pipeline
-inheritedMethods:
-  - name: 'sendOperationRequest<T>(OperationArguments, OperationSpec)'
-    uid: >-
-      @azure/ai-language-conversations.ConversationAnalysisClient.sendOperationRequest
-    package: '@azure/ai-language-conversations'
-    summary: Send an HTTP request that is populated using the provided OperationSpec.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function sendOperationRequest<T>(operationArguments: OperationArguments,
-        operationSpec: OperationSpec): Promise<T>
-      parameters:
-        - id: operationArguments
-          type: OperationArguments
-          description: >-
-            The arguments that the HTTP request's templated values will be
-            populated from.
-        - id: operationSpec
-          type: OperationSpec
-          description: |
-            The OperationSpec to use to populate the httpRequest.
-      return:
-        description: ''
-        type: Promise&lt;T&gt;
-    inheritanceDescription: <b>Inherited From</b> ServiceClient.sendOperationRequest
-  - name: sendRequest(PipelineRequest)
-    uid: '@azure/ai-language-conversations.ConversationAnalysisClient.sendRequest'
-    package: '@azure/ai-language-conversations'
-    summary: Send the provided httpRequest.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function sendRequest(request: PipelineRequest):
-        Promise<PipelineResponse>
-      parameters:
-        - id: request
-          type: PipelineRequest
-          description: ''
-      return:
-        description: ''
-        type: Promise&lt;PipelineResponse&gt;
-    inheritanceDescription: <b>Inherited From</b> ServiceClient.sendRequest
 methods:
   - name: >-
       analyzeConversation(AnalyzeConversationTaskUnion,
@@ -192,43 +148,3 @@ methods:
           />&gt;, <xref
           uid="@azure/ai-language-conversations.ConversationAnalysisResponse"
           />&gt;&gt;
-  - name: >-
-      beginConversationAnalysisAndWait(AnalyzeConversationJobsInput,
-      ConversationAnalysisOptionalParams)
-    uid: >-
-      @azure/ai-language-conversations.ConversationAnalysisClient.beginConversationAnalysisAndWait
-    package: '@azure/ai-language-conversations'
-    summary: >-
-      Submit a collection of conversations for analysis. Specify one or more
-      unique tasks to be executed.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginConversationAnalysisAndWait(task:
-        AnalyzeConversationJobsInput, options?:
-        ConversationAnalysisOptionalParams):
-        Promise<ConversationAnalysisResponse>
-      parameters:
-        - id: task
-          type: >-
-            <xref
-            uid="@azure/ai-language-conversations.AnalyzeConversationJobsInput"
-            />
-          description: >-
-            The collection of conversations to analyze and one or more tasks to
-            execute.
-        - id: options
-          type: >-
-            <xref
-            uid="@azure/ai-language-conversations.ConversationAnalysisOptionalParams"
-            />
-          description: |
-            The options parameters.
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/ai-language-conversations.ConversationAnalysisResponse"
-          />&gt;
-extends: ServiceClient

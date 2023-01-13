@@ -1,3 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
-|[Resource Management - DevTest Labs](arm-devtestlabs-readme.md)|[@azure/arm-devtestlabs](https://www.npmjs.com/package/@azure/arm-devtestlabs)|[Github](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/devtestlabs/arm-devtestlabs)|
+|[Resource Management - DevTest Labs](arm-devtestlabs-readme.md)|[@azure/arm-devtestlabs](https://www.npmjs.com/package/@azure/arm-devtestlabs)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/devtestlabs/arm-devtestlabs)|

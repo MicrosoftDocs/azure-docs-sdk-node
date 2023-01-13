@@ -1,3 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
-|[Resource Management - Bot Service](arm-botservice-readme.md)|[@azure/arm-botservice](https://www.npmjs.com/package/@azure/arm-botservice)|[Github](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/botservice/arm-botservice)|
+|[Resource Management - Bot Service](arm-botservice-readme.md)|[@azure/arm-botservice](https://www.npmjs.com/package/@azure/arm-botservice)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/botservice/arm-botservice)|

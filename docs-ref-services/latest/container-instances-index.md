@@ -1,3 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
-|[Resource Management - Container Instances](arm-containerinstance-readme.md)|[@azure/arm-containerinstance](https://www.npmjs.com/package/@azure/arm-containerinstance)|[Github](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/containerinstance/arm-containerinstance)|
+|[Resource Management - Container Instances](arm-containerinstance-readme.md)|[@azure/arm-containerinstance](https://www.npmjs.com/package/@azure/arm-containerinstance)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/containerinstance/arm-containerinstance)|

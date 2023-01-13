@@ -13,6 +13,7 @@ enums:
   - '@azure/synapse-artifacts.KnownCassandraSourceReadConsistencyLevels'
   - '@azure/synapse-artifacts.KnownCellOutputType'
   - '@azure/synapse-artifacts.KnownCompressionCodec'
+  - '@azure/synapse-artifacts.KnownConfigurationType'
   - '@azure/synapse-artifacts.KnownCopyBehaviorType'
   - '@azure/synapse-artifacts.KnownCreateMode'
   - '@azure/synapse-artifacts.KnownDataFlowComputeType'
@@ -528,25 +529,24 @@ interfaces:
   - '@azure/synapse-artifacts.LibraryResourceProperties'
   - '@azure/synapse-artifacts.LinkConnection'
   - '@azure/synapse-artifacts.LinkConnectionCompute'
-  - >-
-    @azure/synapse-artifacts.LinkConnectionCreateOrUpdateLinkConnectionOptionalParams
-  - '@azure/synapse-artifacts.LinkConnectionDeleteLinkConnectionOptionalParams'
+  - '@azure/synapse-artifacts.LinkConnectionCreateOrUpdateOptionalParams'
+  - '@azure/synapse-artifacts.LinkConnectionDeleteOptionalParams'
   - '@azure/synapse-artifacts.LinkConnectionDetailedStatus'
   - '@azure/synapse-artifacts.LinkConnectionEditTablesOptionalParams'
   - '@azure/synapse-artifacts.LinkConnectionGetDetailedStatusOptionalParams'
-  - '@azure/synapse-artifacts.LinkConnectionGetLinkConnectionOptionalParams'
+  - '@azure/synapse-artifacts.LinkConnectionGetOptionalParams'
   - '@azure/synapse-artifacts.LinkConnectionLandingZone'
-  - >-
-    @azure/synapse-artifacts.LinkConnectionListLinkConnectionsByWorkspaceNextOptionalParams
-  - >-
-    @azure/synapse-artifacts.LinkConnectionListLinkConnectionsByWorkspaceOptionalParams
+  - '@azure/synapse-artifacts.LinkConnectionListByWorkspaceNextOptionalParams'
+  - '@azure/synapse-artifacts.LinkConnectionListByWorkspaceOptionalParams'
   - '@azure/synapse-artifacts.LinkConnectionListLinkTablesOptionalParams'
   - '@azure/synapse-artifacts.LinkConnectionListResponse'
   - '@azure/synapse-artifacts.LinkConnectionOperations'
+  - '@azure/synapse-artifacts.LinkConnectionPauseOptionalParams'
   - '@azure/synapse-artifacts.LinkConnectionQueryTableStatus'
   - '@azure/synapse-artifacts.LinkConnectionQueryTableStatusOptionalParams'
   - '@azure/synapse-artifacts.LinkConnectionRefreshStatus'
   - '@azure/synapse-artifacts.LinkConnectionResource'
+  - '@azure/synapse-artifacts.LinkConnectionResumeOptionalParams'
   - '@azure/synapse-artifacts.LinkConnectionSourceDatabase'
   - '@azure/synapse-artifacts.LinkConnectionSourceDatabaseTypeProperties'
   - '@azure/synapse-artifacts.LinkConnectionStartOptionalParams'
@@ -715,6 +715,7 @@ interfaces:
   - '@azure/synapse-artifacts.PostgreSqlLinkedService'
   - '@azure/synapse-artifacts.PostgreSqlSource'
   - '@azure/synapse-artifacts.PostgreSqlTableDataset'
+  - '@azure/synapse-artifacts.PowerBIWorkspaceLinkedService'
   - '@azure/synapse-artifacts.PrestoLinkedService'
   - '@azure/synapse-artifacts.PrestoObjectDataset'
   - '@azure/synapse-artifacts.PrestoSource'
@@ -835,6 +836,7 @@ interfaces:
     @azure/synapse-artifacts.SparkConfigurationGetSparkConfigurationsByWorkspaceOptionalParams
   - '@azure/synapse-artifacts.SparkConfigurationListResponse'
   - '@azure/synapse-artifacts.SparkConfigurationOperations'
+  - '@azure/synapse-artifacts.SparkConfigurationParametrizationReference'
   - '@azure/synapse-artifacts.SparkConfigurationReference'
   - >-
     @azure/synapse-artifacts.SparkConfigurationRenameSparkConfigurationOptionalParams
@@ -1025,6 +1027,7 @@ typeAliases:
   - '@azure/synapse-artifacts.CellOutputType'
   - '@azure/synapse-artifacts.CompressionCodec'
   - '@azure/synapse-artifacts.CompressionReadSettingsUnion'
+  - '@azure/synapse-artifacts.ConfigurationType'
   - '@azure/synapse-artifacts.ControlActivityUnion'
   - '@azure/synapse-artifacts.CopyBehaviorType'
   - '@azure/synapse-artifacts.CopySinkUnion'
@@ -1102,13 +1105,11 @@ typeAliases:
   - '@azure/synapse-artifacts.LibraryGetResponse'
   - '@azure/synapse-artifacts.LibraryListNextResponse'
   - '@azure/synapse-artifacts.LibraryListOperationResponse'
-  - '@azure/synapse-artifacts.LinkConnectionCreateOrUpdateLinkConnectionResponse'
+  - '@azure/synapse-artifacts.LinkConnectionCreateOrUpdateResponse'
   - '@azure/synapse-artifacts.LinkConnectionGetDetailedStatusResponse'
-  - '@azure/synapse-artifacts.LinkConnectionGetLinkConnectionResponse'
-  - >-
-    @azure/synapse-artifacts.LinkConnectionListLinkConnectionsByWorkspaceNextResponse
-  - >-
-    @azure/synapse-artifacts.LinkConnectionListLinkConnectionsByWorkspaceResponse
+  - '@azure/synapse-artifacts.LinkConnectionGetResponse'
+  - '@azure/synapse-artifacts.LinkConnectionListByWorkspaceNextResponse'
+  - '@azure/synapse-artifacts.LinkConnectionListByWorkspaceResponse'
   - '@azure/synapse-artifacts.LinkConnectionListLinkTablesResponse'
   - '@azure/synapse-artifacts.LinkConnectionQueryTableStatusResponse'
   - '@azure/synapse-artifacts.LinkedIntegrationRuntimeTypeUnion'
@@ -1245,3 +1246,26 @@ typeAliases:
   - >-
     @azure/synapse-artifacts.WorkspaceGitRepoManagementGetGitHubAccessTokenResponse
   - '@azure/synapse-artifacts.ZendeskAuthenticationType'
+functions:
+  - name: getContinuationToken(unknown)
+    uid: '@azure/synapse-artifacts.getContinuationToken'
+    package: '@azure/synapse-artifacts'
+    summary: |-
+      Given the last `.value` produced by the `byPage` iterator,
+      returns a continuation token that can be used to begin paging from
+      that point later.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function getContinuationToken(page: unknown): string | undefined'
+      parameters:
+        - id: page
+          type: unknown
+          description: >-
+            An object from accessing `value` on the IteratorResult from a
+            `byPage` iterator.
+      return:
+        description: >-
+          The continuation token that can be passed into byPage() during future
+          calls.
+        type: string | undefined

@@ -48,27 +48,93 @@ methods:
   - name: 'getSchema(string, GetSchemaOptions)'
     uid: '@azure/schema-registry.SchemaRegistryClient.getSchema'
     package: '@azure/schema-registry'
-    summary: Gets an existing schema by ID.
+    summary: >
+      Gets an existing schema by ID. If the schema was not found, a RestError
+      with
+
+      status code 404 will be thrown, which could be caught as follows:
+
+      ```js
+
+      ...
+
+      } catch (e) {
+
+      if (typeof e === "object" && e.statusCode === 404) {
+
+      ...;
+
+      }
+
+      throw e;
+
+      }
+
+      ```
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function getSchema(id: string, options?: GetSchemaOptions):
-        Promise<Schema | undefined>
+        function getSchema(schemaId: string, options?: GetSchemaOptions):
+        Promise<Schema>
       parameters:
-        - id: id
+        - id: schemaId
           type: string
           description: Unique schema ID.
         - id: options
           type: <xref uid="@azure/schema-registry.GetSchemaOptions" />
           description: ''
       return:
-        description: >-
-          Schema with given ID or undefined if no schema was found with the
-          given ID.
-        type: >-
-          Promise&lt;<xref uid="@azure/schema-registry.Schema" /> |
-          undefined&gt;
+        description: Schema with given ID.
+        type: Promise&lt;<xref uid="@azure/schema-registry.Schema" />&gt;
+  - name: 'getSchema(string, string, number, GetSchemaOptions)'
+    uid: '@azure/schema-registry.SchemaRegistryClient.getSchema_1'
+    package: '@azure/schema-registry'
+    summary: >
+      Gets an existing schema by version. If the schema was not found, a
+      RestError with
+
+      status code 404 will be thrown, which could be caught as follows:
+
+      ```js
+
+      ...
+
+      } catch (e) {
+
+      if (typeof e === "object" && e.statusCode === 404) {
+
+      ...;
+
+      }
+
+      throw e;
+
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getSchema(name: string, groupName: string, version: number,
+        options?: GetSchemaOptions): Promise<Schema>
+      parameters:
+        - id: name
+          type: string
+          description: ''
+        - id: groupName
+          type: string
+          description: ''
+        - id: version
+          type: number
+          description: ''
+        - id: options
+          type: <xref uid="@azure/schema-registry.GetSchemaOptions" />
+          description: ''
+      return:
+        description: Schema with given ID.
+        type: Promise&lt;<xref uid="@azure/schema-registry.Schema" />&gt;
   - name: 'getSchemaProperties(SchemaDescription, GetSchemaPropertiesOptions)'
     uid: '@azure/schema-registry.SchemaRegistryClient.getSchemaProperties'
     package: '@azure/schema-registry'
@@ -80,7 +146,7 @@ methods:
     syntax:
       content: >-
         function getSchemaProperties(schema: SchemaDescription, options?:
-        GetSchemaPropertiesOptions): Promise<SchemaProperties | undefined>
+        GetSchemaPropertiesOptions): Promise<SchemaProperties>
       parameters:
         - id: schema
           type: <xref uid="@azure/schema-registry.SchemaDescription" />
@@ -89,10 +155,8 @@ methods:
           type: <xref uid="@azure/schema-registry.GetSchemaPropertiesOptions" />
           description: ''
       return:
-        description: Matched schema's ID or undefined if no matching schema was found.
-        type: >-
-          Promise&lt;<xref uid="@azure/schema-registry.SchemaProperties" /> |
-          undefined&gt;
+        description: Matched schema's ID.
+        type: Promise&lt;<xref uid="@azure/schema-registry.SchemaProperties" />&gt;
   - name: 'registerSchema(SchemaDescription, RegisterSchemaOptions)'
     uid: '@azure/schema-registry.SchemaRegistryClient.registerSchema'
     package: '@azure/schema-registry'

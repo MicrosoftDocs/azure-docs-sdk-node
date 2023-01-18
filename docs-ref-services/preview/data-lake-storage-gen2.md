@@ -3,7 +3,7 @@ title: Azure Data Lake Storage Gen2 SDK for JavaScript
 description: Reference for Azure Data Lake Storage Gen2 SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 01/17/2023
+ms.data: 01/18/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: datalakestoragegen2

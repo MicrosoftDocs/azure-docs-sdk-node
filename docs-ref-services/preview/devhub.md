@@ -3,7 +3,7 @@ title: Azure DevHub SDK for JavaScript
 description: Reference for Azure DevHub SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 01/20/2023
+ms.data: 01/23/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: devhub

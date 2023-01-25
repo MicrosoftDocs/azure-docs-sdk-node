@@ -3,7 +3,7 @@ title: Azure MySQL SDK for JavaScript
 description: Reference for Azure MySQL SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 01/24/2023
+ms.data: 01/25/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: mysql

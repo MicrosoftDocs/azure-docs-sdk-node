@@ -2,8 +2,8 @@
 title: Azure Locks-Profile-2020-09-01-Hybrid SDK for JavaScript
 description: Reference for Azure Locks-Profile-2020-09-01-Hybrid SDK for JavaScript
 author: xirzec
-ms.author: xirzec
-ms.data: 01/27/2023
+ms.author: jeffish
+ms.data: 01/30/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: locks-profile-2020-09-01-hybrid

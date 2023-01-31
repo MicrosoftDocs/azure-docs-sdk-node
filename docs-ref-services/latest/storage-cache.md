@@ -3,7 +3,7 @@ title: Azure Storage Cache SDK for JavaScript
 description: Reference for Azure Storage Cache SDK for JavaScript
 author: EmmaZhu
 ms.author: emmazhu
-ms.data: 01/30/2023
+ms.data: 01/31/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storagecache

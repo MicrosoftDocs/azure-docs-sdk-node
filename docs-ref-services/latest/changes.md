@@ -3,7 +3,7 @@ title: Azure Changes SDK for JavaScript
 description: Reference for Azure Changes SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 01/31/2023
+ms.data: 02/01/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: changes

@@ -3,14 +3,14 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-client, web-pubsub
 author: vicancy
 ms.author: lianwei
-ms.date: 01/13/2023
+ms.date: 02/06/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: web-pubsub
 ---
-# Azure Web PubSub Client
+# Web PubSub client library for JavaScript
 
-[Azure Web PubSub](https://aka.ms/awps/doc) is an Azure-managed service that helps developers easily build web applications with real-time features and publish-subscribe patterns. Any scenario that requires real-time publish-subscribe messaging between server and clients or among clients can use Azure Web PubSub. Traditional real-time features that often require polling from the server or submitting HTTP requests can also use Azure Web PubSub.
+[Web PubSub](https://aka.ms/awps/doc) is an Azure-managed service that helps developers easily build web applications with real-time features and publish-subscribe patterns. Any scenario that requires real-time publish-subscribe messaging between server and clients or among clients can use Web PubSub. Traditional real-time features that often require polling from the server or submitting HTTP requests can also use Web PubSub.
 
 You can use this library on your client side to manage the WebSocket client connections, as shown below diagram:
 
@@ -31,7 +31,7 @@ Details about the terms used here are described in [Key concepts](#key-concepts)
 ### Prerequisites
 
 - An [Azure subscription][azure_sub].
-- An existing Azure Web PubSub endpoint.
+- An existing Web PubSub endpoint.
 
 ### 1. Install the `@azure/web-pubsub-client` package
 
@@ -101,7 +101,7 @@ const client = new WebPubSubClient({
 await client.start();
 ```
 
-For the full code samples, please reach out to [samples-browser](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.0-beta.1/sdk/web-pubsub/web-pubsub-client/samples-browser)
+For the full code samples, please reach out to [samples-browser](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.0-beta.2/sdk/web-pubsub/web-pubsub-client/samples-browser)
 
 ### Join groups and send messages to the group
 
@@ -123,15 +123,15 @@ await client.sendToGroup(groupName, "hello world", "text");
 
 ## JavaScript Bundle
 
-To use this client library in the browser, first, you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.0-beta.1/documentation/Bundling.md).
+To use this client library in the browser, first, you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.0-beta.2/documentation/Bundling.md).
 
-Refer to the browser sample [samples-browser](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.0-beta.1/sdk/web-pubsub/web-pubsub-client/samples-browser).
+Refer to the browser sample [samples-browser](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.0-beta.2/sdk/web-pubsub/web-pubsub-client/samples-browser).
 
 ## Key concepts
 
 ### Connection
 
-A connection, also known as a client or a client connection, represents an individual WebSocket connection connected to the Web PubSub service. When successfully connected, a unique connection ID is assigned to this connection by the Web PubSub service. Each `WebPubSubClient` creates its own exclusive connection.
+A connection, also known as a client or a client connection, represents an individual WebSocket connection connected to the Web PubSub. When successfully connected, a unique connection ID is assigned to this connection by the Web PubSub. Each `WebPubSubClient` creates its own exclusive connection.
 
 ### Recovery
 
@@ -143,7 +143,7 @@ Reconnection happens when the client connection drops and fails to recover. Reco
 
 ### Hub
 
-A hub is a logical concept for a set of client connections. Usually, you use one hub for one purpose, for example, a chat hub, or a notification hub. When a client connection is created, it connects to a hub, and during its lifetime, it belongs to that hub. Different applications can share one Azure Web PubSub service by using different hub names.
+A hub is a logical concept for a set of client connections. Usually, you use one hub for one purpose, for example, a chat hub, or a notification hub. When a client connection is created, it connects to a hub, and during its lifetime, it belongs to that hub. Different applications can share one Web PubSub by using different hub names.
 
 ### Group
 
@@ -248,17 +248,17 @@ try {
 
 You can set the following environment variable to get the debug logs when using this library.
 
-- Getting debug logs from the SignalR client library
+- Getting debug logs from the Web PubSub client library
 
 ```bash
 export AZURE_LOG_LEVEL=verbose
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/web-pubsub-client_1.0.0-beta.2/sdk/core/logger).
 
 ### Live Trace
 
-Use **Live Trace** from the Web PubSub service portal to view the live traffic.
+Use **Live Trace** from the Web PubSub portal to view the live traffic.
 
 ## Next steps
 
@@ -268,7 +268,7 @@ directory for detailed examples of how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/web-pubsub-client_1.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

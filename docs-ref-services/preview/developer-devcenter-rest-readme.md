@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure-rest/developer-devcenter, devcenter
 author: xirzec
 ms.author: jeffish
-ms.date: 11/10/2022
+ms.date: 02/08/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: devcenter
@@ -17,14 +17,14 @@ Use the package for Azure DevCenter to:
 > Create, deploy, manage, and delete Environment resources
 
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/developer-devcenter_1.0.0-beta.1/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/developer-devcenter_1.0.0-beta.2/documentation/rest-clients.md) to use this library**
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.1/sdk/devcenter/developer-devcenter-rest)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.2/sdk/devcenter/developer-devcenter-rest)
 - [Package (NPM)](https://www.npmjs.com/package/@azure-rest/developer-devcenter)
 - [API reference documentation](https://learn.microsoft.com/azure/dev-box)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.1/sdk/devcenter/developer-devcenter-rest/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.2/sdk/devcenter/developer-devcenter-rest/samples)
 
 ## Getting started
 
@@ -48,14 +48,14 @@ npm install @azure-rest/developer-devcenter
 
 ### Create and authenticate to the Azure DevCenter service
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/developer-devcenter_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/developer-devcenter_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.1/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.2/sdk/identity/identity#credentials) library.
 
 To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) 
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.2/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -65,7 +65,7 @@ AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET
 
 ### REST Client
 
-This client is one of our REST clients. We highly recommend you read how to use a REST client [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/developer-devcenter_1.0.0-beta.1/documentation/rest-clients.md).
+This client is one of our REST clients. We highly recommend you read how to use a REST client [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/developer-devcenter_1.0.0-beta.2/documentation/rest-clients.md).
 
 ### DevCenter Concepts
 Dev Boxes refer to managed developer machines running in Azure. Dev Boxes are provisioned in Pools, which define the network and image used for a Dev Box.
@@ -84,6 +84,6 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/developer-devcenter_1.0.0-beta.2/sdk/core/logger).
 
 

@@ -3,7 +3,7 @@ title: Azure Storage Import/Export SDK for JavaScript
 description: Reference for Azure Storage Import/Export SDK for JavaScript
 author: EmmaZhu
 ms.author: emmazhu
-ms.data: 02/07/2023
+ms.data: 02/08/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storageimport-export

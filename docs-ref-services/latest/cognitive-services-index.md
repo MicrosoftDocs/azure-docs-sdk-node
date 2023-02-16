@@ -14,7 +14,7 @@
 |LUIS Runtime|[@azure/cognitiveservices-luis-runtime](https://www.npmjs.com/package/@azure/cognitiveservices-luis-runtime)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |Personalizer|[@azure/cognitiveservices-personalizer](https://www.npmjs.com/package/@azure/cognitiveservices-personalizer)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |Question Answering|[@azure/cognitiveservices-qnamaker](https://www.npmjs.com/package/@azure/cognitiveservices-qnamaker)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
-|Question Answering Runtime|[@azure/cognitiveservices-qnamaker-runtime](https://www.npmjs.com/package/@azure/cognitiveservices-qnamaker-runtime)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
+|Question Answering|[@azure/cognitiveservices-qnamaker-runtime](https://www.npmjs.com/package/@azure/cognitiveservices-qnamaker-runtime)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |[Spell Check](cognitiveservices-spellcheck-readme.md)|[@azure/cognitiveservices-spellcheck](https://www.npmjs.com/package/@azure/cognitiveservices-spellcheck)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |Text Analytics|[@azure/cognitiveservices-textanalytics](https://www.npmjs.com/package/@azure/cognitiveservices-textanalytics)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |[Speech](microsoft-cognitiveservices-speech-sdk-readme.md)|[microsoft-cognitiveservices-speech-sdk](https://www.npmjs.com/package/microsoft-cognitiveservices-speech-sdk)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|

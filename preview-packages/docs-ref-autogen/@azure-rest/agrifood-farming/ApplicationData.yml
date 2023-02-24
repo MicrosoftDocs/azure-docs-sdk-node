@@ -2,7 +2,7 @@
 name: ApplicationData
 uid: '@azure-rest/agrifood-farming.ApplicationData'
 package: '@azure-rest/agrifood-farming'
-summary: ''
+summary: Schema of application data resource.
 fullName: ApplicationData
 remarks: ''
 isDeprecated: false
@@ -16,10 +16,12 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'applicationProductDetails?: ApplicationProductDetail[]'
+      content: 'applicationProductDetails?: Array<ApplicationProductDetail>'
       return:
         description: ''
-        type: '<xref uid="@azure-rest/agrifood-farming.ApplicationProductDetail" />[]'
+        type: >-
+          Array&lt;<xref
+          uid="@azure-rest/agrifood-farming.ApplicationProductDetail" />&gt;
   - name: area
     uid: '@azure-rest/agrifood-farming.ApplicationData.area'
     package: '@azure-rest/agrifood-farming'
@@ -44,18 +46,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: attachmentsLink
-    uid: '@azure-rest/agrifood-farming.ApplicationData.attachmentsLink'
-    package: '@azure-rest/agrifood-farming'
-    summary: Link for attachments.
-    fullName: attachmentsLink
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'attachmentsLink?: string'
-      return:
-        description: ''
-        type: string
   - name: avgMaterial
     uid: '@azure-rest/agrifood-farming.ApplicationData.avgMaterial'
     package: '@azure-rest/agrifood-farming'
@@ -68,18 +58,6 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure-rest/agrifood-farming.Measure" />
-  - name: createdDateTime
-    uid: '@azure-rest/agrifood-farming.ApplicationData.createdDateTime'
-    package: '@azure-rest/agrifood-farming'
-    summary: 'Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.'
-    fullName: createdDateTime
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'createdDateTime?: Date'
-      return:
-        description: ''
-        type: Date
   - name: description
     uid: '@azure-rest/agrifood-farming.ApplicationData.description'
     package: '@azure-rest/agrifood-farming'
@@ -92,56 +70,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: eTag
-    uid: '@azure-rest/agrifood-farming.ApplicationData.eTag'
-    package: '@azure-rest/agrifood-farming'
-    summary: The ETag value to implement optimistic concurrency.
-    fullName: eTag
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'eTag?: string'
-      return:
-        description: ''
-        type: string
-  - name: farmerId
-    uid: '@azure-rest/agrifood-farming.ApplicationData.farmerId'
-    package: '@azure-rest/agrifood-farming'
-    summary: Farmer ID which belongs to the operation data.
-    fullName: farmerId
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'farmerId?: string'
-      return:
-        description: ''
-        type: string
-  - name: id
-    uid: '@azure-rest/agrifood-farming.ApplicationData.id'
-    package: '@azure-rest/agrifood-farming'
-    summary: Unique resource ID.
-    fullName: id
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'id?: string'
-      return:
-        description: ''
-        type: string
-  - name: modifiedDateTime
-    uid: '@azure-rest/agrifood-farming.ApplicationData.modifiedDateTime'
-    package: '@azure-rest/agrifood-farming'
-    summary: >-
-      Date-time when resource was last modified, sample format:
-      yyyy-MM-ddTHH:mm:ssZ.
-    fullName: modifiedDateTime
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'modifiedDateTime?: Date'
-      return:
-        description: ''
-        type: Date
   - name: name
     uid: '@azure-rest/agrifood-farming.ApplicationData.name'
     package: '@azure-rest/agrifood-farming'
@@ -154,20 +82,6 @@ properties:
       return:
         description: ''
         type: string
-  - name: operationBoundaryId
-    uid: '@azure-rest/agrifood-farming.ApplicationData.operationBoundaryId'
-    package: '@azure-rest/agrifood-farming'
-    summary: >-
-      Optional boundary ID of the actual area for which operation was applied
-      inside the specified field.
-    fullName: operationBoundaryId
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'operationBoundaryId?: string'
-      return:
-        description: ''
-        type: string
   - name: operationEndDateTime
     uid: '@azure-rest/agrifood-farming.ApplicationData.operationEndDateTime'
     package: '@azure-rest/agrifood-farming'
@@ -176,10 +90,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'operationEndDateTime?: Date'
+      content: 'operationEndDateTime?: Date | string'
       return:
         description: ''
-        type: Date
+        type: Date | string
   - name: operationModifiedDateTime
     uid: '@azure-rest/agrifood-farming.ApplicationData.operationModifiedDateTime'
     package: '@azure-rest/agrifood-farming'
@@ -192,10 +106,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'operationModifiedDateTime?: Date'
+      content: 'operationModifiedDateTime?: Date | string'
       return:
         description: ''
-        type: Date
+        type: Date | string
   - name: operationStartDateTime
     uid: '@azure-rest/agrifood-farming.ApplicationData.operationStartDateTime'
     package: '@azure-rest/agrifood-farming'
@@ -206,10 +120,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'operationStartDateTime?: Date'
+      content: 'operationStartDateTime?: Date | string'
       return:
         description: ''
-        type: Date
+        type: Date | string
   - name: properties
     uid: '@azure-rest/agrifood-farming.ApplicationData.properties'
     package: '@azure-rest/agrifood-farming'
@@ -221,22 +135,21 @@ properties:
       and must not have a value greater than 150 characters.
 
       Note: A maximum of 25 key value pairs can be provided for a resource and
-      only string and numeral values are supported.
+      only string,
+
+      numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.
     fullName: properties
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'properties?: ApplicationDataPropertiesDictionary'
+      content: 'properties?: Record<string, any>'
       return:
         description: ''
-        type: >-
-          <xref
-          uid="@azure-rest/agrifood-farming.ApplicationDataPropertiesDictionary"
-          />
+        type: 'Record&lt;string, any&gt;'
   - name: source
     uid: '@azure-rest/agrifood-farming.ApplicationData.source'
     package: '@azure-rest/agrifood-farming'
-    summary: Source of the operation data.
+    summary: Source of the resource.
     fullName: source
     remarks: ''
     isDeprecated: false

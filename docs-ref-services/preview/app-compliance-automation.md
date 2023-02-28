@@ -3,7 +3,7 @@ title: Azure App Compliance Automation SDK for JavaScript
 description: Reference for Azure App Compliance Automation SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 02/27/2023
+ms.data: 02/28/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: appcomplianceautomation

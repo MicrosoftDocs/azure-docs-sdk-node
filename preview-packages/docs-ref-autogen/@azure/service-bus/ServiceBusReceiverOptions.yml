@@ -8,20 +8,43 @@ remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: identifier
+    uid: '@azure/service-bus.ServiceBusReceiverOptions.identifier'
+    package: '@azure/service-bus'
+    summary: >-
+      Sets the name to identify the receiver. This can be used to correlate logs
+      and exceptions.
+
+      If not specified or empty, a random unique one will be used.
+    fullName: identifier
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'identifier?: string'
+      return:
+        description: ''
+        type: string
   - name: maxAutoLockRenewalDurationInMs
     uid: >-
       @azure/service-bus.ServiceBusReceiverOptions.maxAutoLockRenewalDurationInMs
     package: '@azure/service-bus'
     summary: >
-      The maximum duration in milliseconds until which the lock on the message
-      will be renewed
+      The maximum duration, in milliseconds, that the lock on the message will
+      be renewed automatically by the client.
 
-      by the sdk automatically. This auto renewal stops once the message is
-      settled.
+      This auto renewal stops once the message is settled.
 
       - **Default**: `300 * 1000` milliseconds (5 minutes).
 
       - **To disable autolock renewal**, set this to `0`.
+
+
+      **Example:**
+
+         If the message lock expires in 2 minutes and your message processing time is 8 minutes...
+
+         Set maxAutoLockRenewalDurationInMs to 10 minutes, and the message lock will be automatically renewed for 4 times
+         (equivalent to having the message locked for 4 times its lock duration by leveraging the lock renewals).
     fullName: maxAutoLockRenewalDurationInMs
     remarks: ''
     isDeprecated: false
@@ -73,6 +96,22 @@ properties:
       return:
         description: ''
         type: '"peekLock" | "receiveAndDelete"'
+  - name: skipConvertingDate
+    uid: '@azure/service-bus.ServiceBusReceiverOptions.skipConvertingDate'
+    package: '@azure/service-bus'
+    summary: |-
+      Whether to skip converting Date type on properties of message annotations
+      or application properties into numbers when receiving the message. By
+      default, properties of Date type is converted into UNIX epoch number for
+      compatibility.
+    fullName: skipConvertingDate
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'skipConvertingDate?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: skipParsingBodyAsJson
     uid: '@azure/service-bus.ServiceBusReceiverOptions.skipParsingBodyAsJson'
     package: '@azure/service-bus'

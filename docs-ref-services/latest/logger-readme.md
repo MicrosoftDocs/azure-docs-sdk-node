@@ -1,17 +1,14 @@
 ---
 title: Azure Logger client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/logger, core
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 09/30/2021
+author: xirzec
+ms.author: jeffish
+ms.date: 03/02/2023
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: core
 ---
-
-# Azure Logger client library for JavaScript - version 1.0.3 
+# Azure Logger client library for JavaScript - version 1.0.4 
 
 
 The `@azure/logger` package can be used to enable logging in the Azure SDKs for JavaScript.
@@ -51,6 +48,50 @@ will be emitted.
 
 For example, setting the log level to `warning` will cause all logs that have the log
 level `warning` or `error` to be emitted.
+
+
+**NOTE**: When logging requests and responses, we sanitize these objects to make sure things like `Authorization` headers that contain secrets are not logged. 
+
+Request and response bodies are never logged. Headers are redacted by default, unless present in the following list or explicitly allowed by the client SDK:
+- "x-ms-client-request-id",
+- "x-ms-return-client-request-id",
+- "x-ms-useragent",
+- "x-ms-correlation-request-id",
+- "x-ms-request-id",
+- "client-request-id",
+- "ms-cv",
+- "return-client-request-id",
+- "traceparent", 
+- "Access-Control-Allow-Credentials",
+- "Access-Control-Allow-Headers",
+- "Access-Control-Allow-Methods",
+- "Access-Control-Allow-Origin",
+- "Access-Control-Expose-Headers",
+- "Access-Control-Max-Age",
+- "Access-Control-Request-Headers",
+- "Access-Control-Request-Method",
+- "Origin",
+- "Accept",
+- "Accept-Encoding",
+- "Cache-Control",
+- "Connection",
+- "Content-Length",
+- "Content-Type",
+- "Date",
+- "ETag",
+- "Expires",
+- "If-Match",
+- "If-Modified-Since",
+- "If-None-Match",
+- "If-Unmodified-Since",
+- "Last-Modified",
+- "Pragma",
+- "Request-Id",
+- "Retry-After",
+- "Server",
+- "Transfer-Encoding",
+- "User-Agent",
+- "WWW-Authenticate",
 
 ## Examples
 
@@ -97,7 +138,7 @@ If you run into issues while using this library, please feel free to [file an is
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/logger_1.0.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/logger_1.0.4/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcore%2Flogger%2FREADME.png)
 

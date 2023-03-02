@@ -14,3 +14,4 @@
 |[Resource Management - Digital Twins](arm-digitaltwins-readme.md)|[@azure/arm-digitaltwins](https://www.npmjs.com/package/@azure/arm-digitaltwins)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/digitaltwins/arm-digitaltwins)|
 |[Resource Management - IoT Central](arm-iotcentral-readme.md)|[@azure/arm-iotcentral](https://www.npmjs.com/package/@azure/arm-iotcentral)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/iotcentral/arm-iotcentral)|
 |[Resource Management - IoT Hub](arm-iothub-readme.md)|[@azure/arm-iothub](https://www.npmjs.com/package/@azure/arm-iothub)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/iothub/arm-iothub)|
+|[Resource Management - Time Series Insights](arm-timeseriesinsights-readme.md)|[@azure/arm-timeseriesinsights](https://www.npmjs.com/package/@azure/arm-timeseriesinsights)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/timeseriesinsights/arm-timeseriesinsights)|

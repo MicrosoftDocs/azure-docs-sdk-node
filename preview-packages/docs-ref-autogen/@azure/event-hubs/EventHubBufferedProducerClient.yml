@@ -2,9 +2,10 @@
 name: EventHubBufferedProducerClient
 uid: '@azure/event-hubs.EventHubBufferedProducerClient'
 package: '@azure/event-hubs'
-summary: >
+summary: >-
   The `EventHubBufferedProducerClient`is used to publish events to a specific
   Event Hub.
+
 
   The `EventHubBufferedProducerClient` does not publish events immediately.
 
@@ -87,7 +88,7 @@ constructors:
           type: >-
             <xref uid="@azure/event-hubs.EventHubBufferedProducerClientOptions"
             />
-          description: >
+          description: >-
             A set of options to apply when configuring the client.
 
             - `retryOptions`   : Configures the retry policy for all the
@@ -121,14 +122,14 @@ constructors:
         - id: connectionString
           type: string
           description: >-
-            The connection string to use for connecting to the Event Hub
-            instance.
+            The connection string to use for connecting to the Event Hubs
+            namespace.
 
-            It is expected that the shared key properties and the Event Hub path
-            are contained in this connection string.
+            It is expected that the shared key properties are contained in this
+            connection string, but not the Event Hub path,
 
             e.g.
-            'Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key;EntityPath=my-event-hub-name'.
+            'Endpoint=sb://my-servicebus-namespace.servicebus.windows.net/;SharedAccessKeyName=my-SA-name;SharedAccessKey=my-SA-key;'.
         - id: eventHubName
           type: string
           description: The name of the specific Event Hub to connect the client to.
@@ -136,7 +137,7 @@ constructors:
           type: >-
             <xref uid="@azure/event-hubs.EventHubBufferedProducerClientOptions"
             />
-          description: >
+          description: >-
             A set of options to apply when configuring the client.
 
             - `retryOptions`   : Configures the retry policy for all the
@@ -177,7 +178,9 @@ constructors:
           type: string
           description: The name of the specific Event Hub to connect the client to.
         - id: credential
-          type: TokenCredential | NamedKeyCredential | SASCredential
+          type: >-
+            <xref uid="@azure/event-hubs.TokenCredential" /> |
+            NamedKeyCredential | SASCredential
           description: >-
             An credential object used by the client to get the token to
             authenticate the connection
@@ -204,7 +207,7 @@ constructors:
           type: >-
             <xref uid="@azure/event-hubs.EventHubBufferedProducerClientOptions"
             />
-          description: >
+          description: >-
             A set of options to apply when configuring the client.
 
             - `retryOptions`   : Configures the retry policy for all the
@@ -222,7 +225,7 @@ properties:
   - name: eventHubName
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.eventHubName'
     package: '@azure/event-hubs'
-    summary: ''
+    summary: The name of the Event Hub instance for which this client is created.
     fullName: eventHubName
     remarks: ''
     isDeprecated: false
@@ -234,7 +237,11 @@ properties:
   - name: fullyQualifiedNamespace
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.fullyQualifiedNamespace'
     package: '@azure/event-hubs'
-    summary: ''
+    summary: >-
+      The fully qualified namespace of the Event Hub instance for which this
+      client is created.
+
+      This is likely to be similar to <yournamespace>.servicebus.windows.net.
     fullName: fullyQualifiedNamespace
     remarks: ''
     isDeprecated: false
@@ -247,10 +254,11 @@ methods:
   - name: close(BufferedCloseOptions)
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.close'
     package: '@azure/event-hubs'
-    summary: >
+    summary: >-
       Closes the AMQP connection to the Event Hub instance,
 
       returning a promise that will be resolved when disconnection is completed.
+
 
       This will wait for enqueued events to be flushed to the service before
       closing
@@ -269,10 +277,10 @@ methods:
       return:
         description: Promise<void>
         type: Promise&lt;void&gt;
-  - name: 'enqueueEvent(EventData | AmqpAnnotatedMessage, EnqueueEventOptions)'
+  - name: enqueueEvent(EventData | AmqpAnnotatedMessage, EnqueueEventOptions)
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.enqueueEvent'
     package: '@azure/event-hubs'
-    summary: >
+    summary: >-
       Enqueues an event into the buffer to be published to the Event Hub.
 
       If there is no capacity in the buffer when this method is invoked,
@@ -280,6 +288,7 @@ methods:
       it will wait for space to become available and ensure that the event
 
       has been enqueued.
+
 
       When this call returns, the event has been accepted into the buffer,
 
@@ -317,10 +326,10 @@ methods:
           The total number of events that are currently buffered and waiting to
           be published, across all partitions.
         type: Promise&lt;number&gt;
-  - name: 'enqueueEvents(EventData[] | AmqpAnnotatedMessage[], EnqueueEventOptions)'
+  - name: enqueueEvents(EventData[] | AmqpAnnotatedMessage[], EnqueueEventOptions)
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.enqueueEvents'
     package: '@azure/event-hubs'
-    summary: >
+    summary: >-
       Enqueues events into the buffer to be published to the Event Hub.
 
       If there is no capacity in the buffer when this method is invoked,
@@ -328,6 +337,7 @@ methods:
       it will wait for space to become available and ensure that the events
 
       have been enqueued.
+
 
       When this call returns, the events have been accepted into the buffer,
 
@@ -347,7 +357,7 @@ methods:
             <xref uid="@azure/event-hubs.EventData" />[] |
             AmqpAnnotatedMessage[]
           description: >-
-            An array of <xref:@azure/event-hubs.EventData> or
+            An array of [EventData](xref:@azure/event-hubs.EventData) or
             `AmqpAnnotatedMessage`.
         - id: options
           type: <xref uid="@azure/event-hubs.EnqueueEventOptions" />
@@ -384,8 +394,7 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/event-hubs.BufferedFlushOptions" />
-          description: |
-            The set of options to apply to the operation call.
+          description: The set of options to apply to the operation call.
       return:
         description: ''
         type: Promise&lt;void&gt;
@@ -415,7 +424,7 @@ methods:
     syntax:
       content: >-
         function getPartitionIds(options?: GetPartitionIdsOptions):
-        Promise<Array<string>>
+        Promise<string[]>
       parameters:
         - id: options
           type: <xref uid="@azure/event-hubs.GetPartitionIdsOptions" />
@@ -426,8 +435,8 @@ methods:
           for
 
           each partition associated with the Event Hub.
-        type: Promise&lt;Array&lt;string&gt;&gt;
-  - name: 'getPartitionProperties(string, GetPartitionPropertiesOptions)'
+        type: Promise&lt;string[]&gt;
+  - name: getPartitionProperties(string, GetPartitionPropertiesOptions)
     uid: '@azure/event-hubs.EventHubBufferedProducerClient.getPartitionProperties'
     package: '@azure/event-hubs'
     summary: Provides information about the state of the specified partition.

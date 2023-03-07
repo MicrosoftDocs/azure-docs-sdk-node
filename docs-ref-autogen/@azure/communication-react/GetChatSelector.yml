@@ -6,5 +6,11 @@ summary: Specific type of the selector applicable to a given Component.
 fullName: GetChatSelector<Component>
 remarks: ''
 isDeprecated: false
-syntax: |
-  type GetChatSelector<Component> = GetChatSelector<Component>
+syntax: >-
+  type GetChatSelector<Component> = (AreEqual<Component, typeof SendBox> extends
+  true ? SendBoxSelector : (AreEqual<Component, typeof MessageThread> extends
+  true ? MessageThreadSelector : (AreEqual<Component, typeof TypingIndicator>
+  extends true ? TypingIndicatorSelector : (AreEqual<Component, typeof
+  ParticipantList> extends true ? ChatParticipantListSelector :
+  (AreEqual<Component, typeof ErrorBar> extends true ? ChatErrorBarSelector :
+  undefined)))))

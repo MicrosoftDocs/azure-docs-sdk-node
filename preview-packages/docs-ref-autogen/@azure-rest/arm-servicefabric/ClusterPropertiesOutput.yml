@@ -17,13 +17,13 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        addOnFeatures?: Array<"RepairManager" | "DnsService" |
-        "BackupRestoreService" | "ResourceMonitorService">
+        addOnFeatures?: ("RepairManager" | "DnsService" | "BackupRestoreService"
+        | "ResourceMonitorService")[]
       return:
         description: ''
         type: >-
-          Array&lt;"RepairManager" | "DnsService" | "BackupRestoreService" |
-          "ResourceMonitorService"&gt;
+          ("RepairManager" | "DnsService" | "BackupRestoreService" |
+          "ResourceMonitorService")[]
   - name: applicationTypeVersionsCleanupPolicy
     uid: >-
       @azure-rest/arm-servicefabric.ClusterPropertiesOutput.applicationTypeVersionsCleanupPolicy
@@ -51,12 +51,12 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'availableClusterVersions?: Array<ClusterVersionDetailsOutput>'
+      content: 'availableClusterVersions?: ClusterVersionDetailsOutput[]'
       return:
         description: ''
         type: >-
-          Array&lt;<xref
-          uid="@azure-rest/arm-servicefabric.ClusterVersionDetailsOutput" />&gt;
+          <xref uid="@azure-rest/arm-servicefabric.ClusterVersionDetailsOutput"
+          />[]
   - name: azureActiveDirectory
     uid: '@azure-rest/arm-servicefabric.ClusterPropertiesOutput.azureActiveDirectory'
     package: '@azure-rest/arm-servicefabric'
@@ -117,13 +117,13 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'clientCertificateCommonNames?: Array<ClientCertificateCommonNameOutput>'
+      content: 'clientCertificateCommonNames?: ClientCertificateCommonNameOutput[]'
       return:
         description: ''
         type: >-
-          Array&lt;<xref
+          <xref
           uid="@azure-rest/arm-servicefabric.ClientCertificateCommonNameOutput"
-          />&gt;
+          />[]
   - name: clientCertificateThumbprints
     uid: >-
       @azure-rest/arm-servicefabric.ClusterPropertiesOutput.clientCertificateThumbprints
@@ -135,13 +135,13 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'clientCertificateThumbprints?: Array<ClientCertificateThumbprintOutput>'
+      content: 'clientCertificateThumbprints?: ClientCertificateThumbprintOutput[]'
       return:
         description: ''
         type: >-
-          Array&lt;<xref
+          <xref
           uid="@azure-rest/arm-servicefabric.ClientCertificateThumbprintOutput"
-          />&gt;
+          />[]
   - name: clusterCodeVersion
     uid: '@azure-rest/arm-servicefabric.ClusterPropertiesOutput.clusterCodeVersion'
     package: '@azure-rest/arm-servicefabric'
@@ -188,8 +188,9 @@ properties:
   - name: clusterState
     uid: '@azure-rest/arm-servicefabric.ClusterPropertiesOutput.clusterState'
     package: '@azure-rest/arm-servicefabric'
-    summary: |+
+    summary: |-
       The current state of the cluster.
+
         - WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.
         - Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.
         - BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.
@@ -200,7 +201,6 @@ properties:
         - UpgradeServiceUnreachable - Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider.
         - AutoScale - Indicates that the ReliabilityLevel of the cluster is being adjusted.
         - Ready - Indicates that the cluster is in a stable state.
-
     fullName: clusterState
     remarks: ''
     isDeprecated: false
@@ -256,13 +256,13 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'fabricSettings?: Array<SettingsSectionDescriptionOutput>'
+      content: 'fabricSettings?: SettingsSectionDescriptionOutput[]'
       return:
         description: ''
         type: >-
-          Array&lt;<xref
+          <xref
           uid="@azure-rest/arm-servicefabric.SettingsSectionDescriptionOutput"
-          />&gt;
+          />[]
   - name: infrastructureServiceManager
     uid: >-
       @azure-rest/arm-servicefabric.ClusterPropertiesOutput.infrastructureServiceManager
@@ -296,12 +296,12 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'nodeTypes: Array<NodeTypeDescriptionOutput>'
+      content: 'nodeTypes: NodeTypeDescriptionOutput[]'
       return:
         description: ''
         type: >-
-          Array&lt;<xref
-          uid="@azure-rest/arm-servicefabric.NodeTypeDescriptionOutput" />&gt;
+          <xref uid="@azure-rest/arm-servicefabric.NodeTypeDescriptionOutput"
+          />[]
   - name: notifications
     uid: '@azure-rest/arm-servicefabric.ClusterPropertiesOutput.notifications'
     package: '@azure-rest/arm-servicefabric'
@@ -310,12 +310,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'notifications?: Array<NotificationOutput>'
+      content: 'notifications?: NotificationOutput[]'
       return:
         description: ''
-        type: >-
-          Array&lt;<xref uid="@azure-rest/arm-servicefabric.NotificationOutput"
-          />&gt;
+        type: <xref uid="@azure-rest/arm-servicefabric.NotificationOutput" />[]
   - name: provisioningState
     uid: '@azure-rest/arm-servicefabric.ClusterPropertiesOutput.provisioningState'
     package: '@azure-rest/arm-servicefabric'
@@ -331,16 +329,16 @@ properties:
   - name: reliabilityLevel
     uid: '@azure-rest/arm-servicefabric.ClusterPropertiesOutput.reliabilityLevel'
     package: '@azure-rest/arm-servicefabric'
-    summary: >+
+    summary: >-
       The reliability level sets the replica set size of system services. Learn
       about
       [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).
+
         - None - Run the System services with a target replica set count of 1. This should only be used for test clusters.
         - Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.
         - Silver - Run the System services with a target replica set count of 5.
         - Gold - Run the System services with a target replica set count of 7.
         - Platinum - Run the System services with a target replica set count of 9.
-
     fullName: reliabilityLevel
     remarks: ''
     isDeprecated: false
@@ -421,10 +419,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'upgradeMode?: "Automatic" | "Manual"'
+      content: 'upgradeMode?: "Manual" | "Automatic"'
       return:
         description: ''
-        type: '"Automatic" | "Manual"'
+        type: '"Manual" | "Automatic"'
   - name: upgradePauseEndTimestampUtc
     uid: >-
       @azure-rest/arm-servicefabric.ClusterPropertiesOutput.upgradePauseEndTimestampUtc

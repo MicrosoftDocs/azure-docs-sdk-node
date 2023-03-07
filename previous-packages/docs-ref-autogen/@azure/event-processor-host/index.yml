@@ -3,23 +3,48 @@ uid: '@azure/event-processor-host'
 name: '@azure/event-processor-host'
 summary: ''
 type: package
-classes:
-  - '@azure/event-processor-host.BaseLease'
-  - '@azure/event-processor-host.CompleteLease'
-  - '@azure/event-processor-host.EventProcessorHost'
-  - '@azure/event-processor-host.PartitionContext'
 interfaces:
+  - '@azure/event-processor-host.CheckpointInfo'
+  - '@azure/event-processor-host.EventData'
   - '@azure/event-processor-host.BaseLeaseInfo'
   - '@azure/event-processor-host.CheckpointManager'
   - '@azure/event-processor-host.CompleteLeaseInfo'
+  - '@azure/event-processor-host.DataTransformer'
   - '@azure/event-processor-host.EPHDiagnosticInfo'
+  - '@azure/event-processor-host.EventHubPartitionRuntimeInformation'
+  - '@azure/event-processor-host.EventHubRuntimeInformation'
   - '@azure/event-processor-host.EventProcessorHostOptions'
   - '@azure/event-processor-host.FromConnectionStringOptions'
   - '@azure/event-processor-host.FromTokenProviderOptions'
-  - '@azure/event-processor-host.LeaseInfo'
   - '@azure/event-processor-host.LeaseManager'
+classes:
+  - '@azure/event-processor-host.BaseLease'
+  - '@azure/event-processor-host.CompleteLease'
+  - '@azure/event-processor-host.EventPosition'
+  - '@azure/event-processor-host.EventProcessorHost'
+  - '@azure/event-processor-host.MessagingError'
+  - '@azure/event-processor-host.PartitionContext'
 typeAliases:
-  - '@azure/event-processor-host.FromIotHubConnectionStringOptions'
   - '@azure/event-processor-host.OnEphError'
+  - '@azure/event-processor-host.OnError'
   - '@azure/event-processor-host.OnReceivedError'
   - '@azure/event-processor-host.OnReceivedMessage'
+functions:
+  - name: delay<T>(number, T)
+    uid: '@azure/event-processor-host.delay'
+    package: '@azure/event-processor-host'
+    summary: A wrapper for setTimeout that resolves a promise after t milliseconds.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function delay<T>(t: number, value?: T): Promise<T>'
+      parameters:
+        - id: t
+          type: number
+          description: The number of milliseconds to be delayed.
+        - id: value
+          type: T
+          description: The value to be resolved with after a timeout of t milliseconds.
+      return:
+        description: '- Resolved promise'
+        type: Promise&lt;T&gt;

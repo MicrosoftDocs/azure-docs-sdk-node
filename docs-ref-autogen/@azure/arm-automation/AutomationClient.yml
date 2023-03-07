@@ -10,7 +10,7 @@ type: class
 constructors:
   - name: >-
       AutomationClient(ServiceClientCredentials | TokenCredential, string,
-      Models.CountType, Models.AutomationClientOptions)
+      CountType, AutomationClientOptions)
     uid: '@azure/arm-automation.AutomationClient.constructor'
     package: '@azure/arm-automation'
     summary: Initializes a new instance of the AutomationClient class.
@@ -19,8 +19,8 @@ constructors:
     syntax:
       content: >-
         new AutomationClient(credentials: ServiceClientCredentials |
-        TokenCredential, subscriptionId: string, countType1: Models.CountType,
-        options?: Models.AutomationClientOptions)
+        TokenCredential, subscriptionId: string, countType1: CountType,
+        options?: AutomationClientOptions)
       parameters:
         - id: credentials
           type: ServiceClientCredentials | TokenCredential
@@ -37,6 +37,8 @@ constructors:
 
             ServiceClientCredentials interface from the older packages
             @azure/ms-rest-nodeauth and
+
+            @azure/ms-rest-browserauth are also supported.
         - id: subscriptionId
           type: string
           description: >-
@@ -46,13 +48,16 @@ constructors:
             subscription. The subscription ID forms part of the URI for every
             service call.
         - id: countType1
-          type: <xref uid="Models.CountType" />
+          type: <xref uid="@azure/arm-automation.AutomationModels.CountType" />
           description: |-
             The type of counts to retrieve. Possible values include: 'status',
             'nodeconfiguration'
         - id: options
-          type: <xref uid="Models.AutomationClientOptions" />
-          description: ''
+          type: >-
+            <xref
+            uid="@azure/arm-automation.AutomationModels.AutomationClientOptions"
+            />
+          description: The parameter options
 properties:
   - name: activity
     uid: '@azure/arm-automation.AutomationClient.activity'
@@ -566,7 +571,9 @@ inheritedProperties:
       return:
         description: ''
         type: string
-    inheritanceDescription: <b>Inherited From</b> AzureServiceClient.acceptLanguage
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AutomationClientContext.acceptLanguage](xref:@azure/arm-automation.AutomationClientContext.acceptLanguage)
   - name: countType1
     uid: '@azure/arm-automation.AutomationClient.countType1'
     package: '@azure/arm-automation'
@@ -575,10 +582,10 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'countType1: Models.CountType'
+      content: 'countType1: CountType'
       return:
         description: ''
-        type: <xref uid="Models.CountType" />
+        type: <xref uid="@azure/arm-automation.AutomationModels.CountType" />
     inheritanceDescription: >-
       <b>Inherited From</b>
       [AutomationClientContext.countType1](xref:@azure/arm-automation.AutomationClientContext.countType1)
@@ -607,11 +614,13 @@ inheritedProperties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'longRunningOperationRetryTimeout?: undefined | number'
+      content: 'longRunningOperationRetryTimeout?: number'
       return:
         description: ''
-        type: undefined | number
-    inheritanceDescription: <b>Inherited From</b> AzureServiceClient.longRunningOperationRetryTimeout
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AutomationClientContext.longRunningOperationRetryTimeout](xref:@azure/arm-automation.AutomationClientContext.longRunningOperationRetryTimeout)
   - name: subscriptionId
     uid: '@azure/arm-automation.AutomationClient.subscriptionId'
     package: '@azure/arm-automation'
@@ -652,13 +661,15 @@ inheritedMethods:
           description: The request object
         - id: options
           type: RequestOptionsBase
-          description: ''
+          description: Additional options to be sent while making the request
       return:
         description: |-
           The HttpLongRunningOperationResponse
           that provides methods for interacting with the LRO.
         type: Promise&lt;LROPoller&gt;
-    inheritanceDescription: <b>Inherited From</b> AzureServiceClient.beginLongRunningRequest
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AutomationClientContext.beginLongRunningRequest](xref:@azure/arm-automation.AutomationClientContext.beginLongRunningRequest)
   - name: restoreLROPoller(LROPollState)
     uid: '@azure/arm-automation.AutomationClient.restoreLROPoller'
     package: '@azure/arm-automation'
@@ -678,7 +689,9 @@ inheritedMethods:
       return:
         description: ''
         type: LROPoller
-    inheritanceDescription: <b>Inherited From</b> AzureServiceClient.restoreLROPoller
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AutomationClientContext.restoreLROPoller](xref:@azure/arm-automation.AutomationClientContext.restoreLROPoller)
   - name: >-
       sendLongRunningRequest(RequestPrepareOptions | WebResource,
       RequestOptionsBase)
@@ -700,14 +713,16 @@ inheritedMethods:
           description: The request object
         - id: options
           type: RequestOptionsBase
-          description: ''
+          description: Additional options to be sent while making the request
       return:
         description: >-
           The HttpOperationResponse containing the final polling request,
           response and the responseBody.
         type: Promise&lt;HttpOperationResponse&gt;
-    inheritanceDescription: <b>Inherited From</b> AzureServiceClient.sendLongRunningRequest
-  - name: 'sendLRORequest(OperationArguments, OperationSpec, RequestOptionsBase)'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AutomationClientContext.sendLongRunningRequest](xref:@azure/arm-automation.AutomationClientContext.sendLongRunningRequest)
+  - name: sendLRORequest(OperationArguments, OperationSpec, RequestOptionsBase)
     uid: '@azure/arm-automation.AutomationClient.sendLRORequest'
     package: '@azure/arm-automation'
     summary: >-
@@ -737,7 +752,9 @@ inheritedMethods:
           The LROPoller object that provides methods for interacting with the
           LRO.
         type: Promise&lt;LROPoller&gt;
-    inheritanceDescription: <b>Inherited From</b> AzureServiceClient.sendLRORequest
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AutomationClientContext.sendLRORequest](xref:@azure/arm-automation.AutomationClientContext.sendLRORequest)
   - name: >-
       sendOperationRequest(OperationArguments, OperationSpec,
       ServiceCallback<any>)
@@ -762,12 +779,13 @@ inheritedMethods:
           description: The OperationSpec to use to populate the httpRequest.
         - id: callback
           type: ServiceCallback&lt;any&gt;
-          description: |
-            The callback to call when the response is received.
+          description: The callback to call when the response is received.
       return:
         description: ''
         type: Promise&lt;RestResponse&gt;
-    inheritanceDescription: <b>Inherited From</b> ServiceClient.sendOperationRequest
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AutomationClientContext.sendOperationRequest](xref:@azure/arm-automation.AutomationClientContext.sendOperationRequest)
   - name: sendRequest(RequestPrepareOptions | WebResourceLike)
     uid: '@azure/arm-automation.AutomationClient.sendRequest'
     package: '@azure/arm-automation'
@@ -785,5 +803,7 @@ inheritedMethods:
       return:
         description: ''
         type: Promise&lt;HttpOperationResponse&gt;
-    inheritanceDescription: <b>Inherited From</b> ServiceClient.sendRequest
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [AutomationClientContext.sendRequest](xref:@azure/arm-automation.AutomationClientContext.sendRequest)
 extends: <xref uid="@azure/arm-automation.AutomationClientContext" />

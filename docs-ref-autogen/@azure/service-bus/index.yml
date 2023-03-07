@@ -3,7 +3,11 @@ uid: '@azure/service-bus'
 name: '@azure/service-bus'
 summary: ''
 type: package
+enums:
+  - '@azure/service-bus.RetryMode'
+  - '@azure/service-bus.TokenType'
 classes:
+  - '@azure/service-bus.MessagingError'
   - '@azure/service-bus.ServiceBusAdministrationClient'
   - '@azure/service-bus.ServiceBusClient'
   - '@azure/service-bus.ServiceBusError'
@@ -15,17 +19,20 @@ interfaces:
   - '@azure/service-bus.CreateSubscriptionOptions'
   - '@azure/service-bus.CreateTopicOptions'
   - '@azure/service-bus.DeadLetterOptions'
+  - '@azure/service-bus.Delivery'
   - '@azure/service-bus.GetMessageIteratorOptions'
   - '@azure/service-bus.HttpHeader'
   - '@azure/service-bus.HttpHeadersLike'
   - '@azure/service-bus.HttpResponse'
   - '@azure/service-bus.MessageHandlers'
   - '@azure/service-bus.NamespaceProperties'
+  - '@azure/service-bus.OperationOptions'
   - '@azure/service-bus.PeekMessagesOptions'
   - '@azure/service-bus.ProcessErrorArgs'
   - '@azure/service-bus.QueueProperties'
   - '@azure/service-bus.QueueRuntimeProperties'
   - '@azure/service-bus.ReceiveMessagesOptions'
+  - '@azure/service-bus.RetryOptions'
   - '@azure/service-bus.RuleProperties'
   - '@azure/service-bus.ServiceBusAdministrationClientOptions'
   - '@azure/service-bus.ServiceBusClientOptions'
@@ -44,10 +51,13 @@ interfaces:
   - '@azure/service-bus.SubscribeOptions'
   - '@azure/service-bus.SubscriptionProperties'
   - '@azure/service-bus.SubscriptionRuntimeProperties'
+  - '@azure/service-bus.TokenCredential'
   - '@azure/service-bus.TopicProperties'
   - '@azure/service-bus.TopicRuntimeProperties'
   - '@azure/service-bus.TryAddOptions'
   - '@azure/service-bus.WebResourceLike'
+  - '@azure/service-bus.WebSocketImpl'
+  - '@azure/service-bus.WebSocketOptions'
 typeAliases:
   - '@azure/service-bus.EntitiesResponse'
   - '@azure/service-bus.EntityAvailabilityStatus'
@@ -59,6 +69,32 @@ typeAliases:
   - '@azure/service-bus.TransferProgressEvent'
   - '@azure/service-bus.WithResponse'
 functions:
+  - name: delay<T>(number, AbortSignalLike, string, T)
+    uid: '@azure/service-bus.delay'
+    package: '@azure/service-bus'
+    summary: A wrapper for setTimeout that resolves a promise after t milliseconds.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function delay<T>(delayInMs: number, abortSignal?: AbortSignalLike,
+        abortErrorMsg?: string, value?: T): Promise<T | void>
+      parameters:
+        - id: delayInMs
+          type: number
+          description: The number of milliseconds to be delayed.
+        - id: abortSignal
+          type: AbortSignalLike
+          description: The abortSignal associated with containing operation.
+        - id: abortErrorMsg
+          type: string
+          description: The abort error message associated with containing operation.
+        - id: value
+          type: T
+          description: The value to be resolved with after a timeout of t milliseconds.
+      return:
+        description: '- Resolved promise'
+        type: Promise&lt;T | void&gt;
   - name: isServiceBusError(unknown)
     uid: '@azure/service-bus.isServiceBusError'
     package: '@azure/service-bus'
@@ -70,8 +106,7 @@ functions:
       parameters:
         - id: err
           type: unknown
-          description: |
-            An error to check to see if it's of type ServiceBusError
+          description: An error to check to see if it's of type ServiceBusError
       return:
         description: ''
         type: err
@@ -92,7 +127,7 @@ functions:
       parameters:
         - id: connectionString
           type: string
-          description: >
+          description: >-
             The connection string associated with the Shared Access Policy
             created
 

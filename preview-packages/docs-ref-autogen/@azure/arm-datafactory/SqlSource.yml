@@ -6,10 +6,15 @@ summary: A copy activity SQL source.
 fullName: SqlSource
 remarks: ''
 isDeprecated: false
-syntax: >-
-  type SqlSource = TabularSource & { isolationLevel?: Record<string, unknown>,
-  partitionOption?: Record<string, unknown>, partitionSettings?:
-  SqlPartitionSettings, sqlReaderQuery?: Record<string, unknown>,
-  sqlReaderStoredProcedureName?: Record<string, unknown>,
-  storedProcedureParameters?: undefined | [key: string]:
-  StoredProcedureParameter, type: "SqlSource" }
+syntax: |
+  type SqlSource = TabularSource & {
+    isolationLevel?: Record<string, unknown>,
+    partitionOption?: Record<string, unknown>,
+    partitionSettings?: SqlPartitionSettings,
+    sqlReaderQuery?: Record<string, unknown>,
+    sqlReaderStoredProcedureName?: Record<string, unknown>,
+    storedProcedureParameters?: {
+      [propertyName: string]: StoredProcedureParameter,
+    },
+    type: "SqlSource",
+  }

@@ -8,7 +8,7 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: 'CertificateClient(string, TokenCredential, CertificateClientOptions)'
+  - name: CertificateClient(string, TokenCredential, CertificateClientOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.constructor'
     package: '@azure/keyvault-certificates'
     summary: Creates an instance of CertificateClient.
@@ -26,11 +26,11 @@ constructors:
           type: TokenCredential
           description: >-
             An object that implements the `TokenCredential` interface used to
-            authenticate requests to the service. Use the \@azure/identity
+            authenticate requests to the service. Use the @azure/identity
             package to create a credential that suits your needs.
         - id: clientOptions
           type: <xref uid="@azure/keyvault-certificates.CertificateClientOptions" />
-          description: |
+          description: |-
             Pipeline options used to configure Key Vault API requests.
                                      Omit this parameter to use the default pipeline configuration.
 properties:
@@ -47,7 +47,7 @@ properties:
         description: ''
         type: string
 methods:
-  - name: 'backupCertificate(string, BackupCertificateOptions)'
+  - name: backupCertificate(string, OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.backupCertificate'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -55,6 +55,7 @@ methods:
       client. All versions of the certificate will be downloaded.
 
       This operation requires the certificates/backup permission.
+
 
       Example usage:
 
@@ -77,18 +78,17 @@ methods:
     syntax:
       content: >-
         function backupCertificate(certificateName: string, options?:
-        BackupCertificateOptions): Promise<Uint8Array | undefined>
+        OperationOptions): Promise<undefined | Uint8Array>
       parameters:
         - id: certificateName
           type: string
           description: The name of the certificate
         - id: options
-          type: <xref uid="@azure/keyvault-certificates.BackupCertificateOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
-        type: Promise&lt;Uint8Array | undefined&gt;
+        type: Promise&lt;undefined | Uint8Array&gt;
   - name: >-
       beginCreateCertificate(string, CertificatePolicy,
       BeginCreateCertificateOptions)
@@ -100,6 +100,7 @@ methods:
 
       This function returns a Long Running Operation poller that allows you to
       wait indefinitely until the certificate is fully recovered.
+
 
       **Note:** Sending `Self` as the `issuerName` of the certificate's policy
       will create a self-signed certificate.
@@ -168,16 +169,16 @@ methods:
           type: >-
             <xref
             uid="@azure/keyvault-certificates.BeginCreateCertificateOptions" />
-          description: |
-            Optional parameters
+          description: Optional parameters
       return:
         description: ''
         type: >-
-          Promise&lt;PollerLike&lt;<xref
-          uid="@azure/keyvault-certificates.CreateCertificateState" />, <xref
+          Promise&lt;<xref uid="@azure/keyvault-certificates.PollerLike"
+          />&lt;<xref uid="@azure/keyvault-certificates.CreateCertificateState"
+          />, <xref
           uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
           />&gt;&gt;
-  - name: 'beginDeleteCertificate(string, BeginDeleteCertificateOptions)'
+  - name: beginDeleteCertificate(string, CertificatePollerOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.beginDeleteCertificate'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -188,6 +189,7 @@ methods:
 
       This function returns a Long Running Operation poller that allows you to
       wait indefinitely until the certificate is fully recovered.
+
 
       This operation requires the certificates/delete permission.
 
@@ -235,27 +237,23 @@ methods:
     syntax:
       content: >-
         function beginDeleteCertificate(certificateName: string, options?:
-        BeginDeleteCertificateOptions):
-        Promise<PollerLike<DeleteCertificateState, DeletedCertificate>>
+        CertificatePollerOptions): Promise<PollerLike<DeleteCertificateState,
+        DeletedCertificate>>
       parameters:
         - id: certificateName
           type: string
           description: The name of the certificate.
         - id: options
-          type: >-
-            <xref
-            uid="@azure/keyvault-certificates.BeginDeleteCertificateOptions" />
-          description: |
-            The optional parameters
+          type: <xref uid="@azure/keyvault-certificates.CertificatePollerOptions" />
+          description: The optional parameters
       return:
         description: ''
         type: >-
-          Promise&lt;PollerLike&lt;<xref
-          uid="@azure/keyvault-certificates.DeleteCertificateState" />, <xref
-          uid="@azure/keyvault-certificates.DeletedCertificate" />&gt;&gt;
-  - name: >-
-      beginRecoverDeletedCertificate(string,
-      BeginRecoverDeletedCertificateOptions)
+          Promise&lt;<xref uid="@azure/keyvault-certificates.PollerLike"
+          />&lt;<xref uid="@azure/keyvault-certificates.DeleteCertificateState"
+          />, <xref uid="@azure/keyvault-certificates.DeletedCertificate"
+          />&gt;&gt;
+  - name: beginRecoverDeletedCertificate(string, CertificatePollerOptions)
     uid: >-
       @azure/keyvault-certificates.CertificateClient.beginRecoverDeletedCertificate
     package: '@azure/keyvault-certificates'
@@ -265,6 +263,7 @@ methods:
 
       This function returns a Long Running Operation poller that allows you to
       wait indefinitely until the certificate is fully recovered.
+
 
       This operation requires the certificates/recover permission.
 
@@ -311,7 +310,7 @@ methods:
     syntax:
       content: >-
         function beginRecoverDeletedCertificate(certificateName: string,
-        options?: BeginRecoverDeletedCertificateOptions):
+        options?: CertificatePollerOptions):
         Promise<PollerLike<RecoverDeletedCertificateState,
         KeyVaultCertificateWithPolicy>>
       parameters:
@@ -319,20 +318,17 @@ methods:
           type: string
           description: The name of the deleted certificate
         - id: options
-          type: >-
-            <xref
-            uid="@azure/keyvault-certificates.BeginRecoverDeletedCertificateOptions"
-            />
-          description: |
-            The optional parameters
+          type: <xref uid="@azure/keyvault-certificates.CertificatePollerOptions" />
+          description: The optional parameters
       return:
         description: ''
         type: >-
-          Promise&lt;PollerLike&lt;<xref
+          Promise&lt;<xref uid="@azure/keyvault-certificates.PollerLike"
+          />&lt;<xref
           uid="@azure/keyvault-certificates.RecoverDeletedCertificateState" />,
           <xref uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
           />&gt;&gt;
-  - name: 'createIssuer(string, string, CreateIssuerOptions)'
+  - name: createIssuer(string, string, CreateIssuerOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.createIssuer'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -340,6 +336,7 @@ methods:
       issuer. This
 
       operation requires the certificates/setissuers permission.
+
 
       Example usage:
 
@@ -367,14 +364,13 @@ methods:
           description: The issuer provider.
         - id: options
           type: <xref uid="@azure/keyvault-certificates.CreateIssuerOptions" />
-          description: |
-            The optional parameters
+          description: The optional parameters
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/keyvault-certificates.CertificateIssuer"
           />&gt;
-  - name: 'deleteCertificateOperation(string, DeleteCertificateOperationOptions)'
+  - name: deleteCertificateOperation(string, OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.deleteCertificateOperation'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -383,6 +379,7 @@ methods:
 
       The certificate is no longer created. This operation requires the
       certificates/update permission.
+
 
       Example usage:
 
@@ -408,29 +405,26 @@ methods:
     syntax:
       content: >-
         function deleteCertificateOperation(certificateName: string, options?:
-        DeleteCertificateOperationOptions): Promise<CertificateOperation>
+        OperationOptions): Promise<CertificateOperation>
       parameters:
         - id: certificateName
           type: string
           description: The name of the certificate
         - id: options
-          type: >-
-            <xref
-            uid="@azure/keyvault-certificates.DeleteCertificateOperationOptions"
-            />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/keyvault-certificates.CertificateOperation" />&gt;
-  - name: deleteContacts(DeleteContactsOptions)
+  - name: deleteContacts(OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.deleteContacts'
     package: '@azure/keyvault-certificates'
     summary: >-
       Deletes all of the certificate contacts. This operation requires the
       certificates/managecontacts permission.
+
 
       Example usage:
 
@@ -453,19 +447,18 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function deleteContacts(options?: DeleteContactsOptions):
-        Promise<CertificateContact[] | undefined>
+        function deleteContacts(options?: OperationOptions): Promise<undefined |
+        CertificateContact[]>
       parameters:
         - id: options
-          type: <xref uid="@azure/keyvault-certificates.DeleteContactsOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/keyvault-certificates.CertificateContact"
-          />[] | undefined&gt;
-  - name: 'deleteIssuer(string, DeleteIssuerOptions)'
+          Promise&lt;undefined | <xref
+          uid="@azure/keyvault-certificates.CertificateContact" />[]&gt;
+  - name: deleteIssuer(string, OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.deleteIssuer'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -474,6 +467,7 @@ methods:
 
       the vault. This operation requires the
       certificates/manageissuers/deleteissuers permission.
+
 
       Example usage:
 
@@ -492,28 +486,28 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function deleteIssuer(issuerName: string, options?:
-        DeleteIssuerOptions): Promise<CertificateIssuer>
+        function deleteIssuer(issuerName: string, options?: OperationOptions):
+        Promise<CertificateIssuer>
       parameters:
         - id: issuerName
           type: string
           description: The name of the issuer.
         - id: options
-          type: <xref uid="@azure/keyvault-certificates.DeleteIssuerOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/keyvault-certificates.CertificateIssuer"
           />&gt;
-  - name: 'getCertificate(string, GetCertificateOptions)'
+  - name: getCertificate(string, OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.getCertificate'
     package: '@azure/keyvault-certificates'
     summary: >-
       Gets the latest information available from a specific certificate,
       including the certificate's policy. This operation requires the
       certificates/get permission.
+
 
       Example usage:
 
@@ -541,22 +535,21 @@ methods:
     syntax:
       content: >-
         function getCertificate(certificateName: string, options?:
-        GetCertificateOptions): Promise<KeyVaultCertificateWithPolicy>
+        OperationOptions): Promise<KeyVaultCertificateWithPolicy>
       parameters:
         - id: certificateName
           type: string
           description: The name of the certificate
         - id: options
-          type: <xref uid="@azure/keyvault-certificates.GetCertificateOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
           />&gt;
-  - name: 'getCertificateOperation(string, GetCertificateOperationOptions)'
+  - name: getCertificateOperation(string, CertificatePollerOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.getCertificateOperation'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -565,6 +558,7 @@ methods:
 
       This function returns a Long Running Operation poller that allows you to
       wait indefinitely until the certificate is fully recovered.
+
 
       Example usage:
 
@@ -597,33 +591,31 @@ methods:
     syntax:
       content: >-
         function getCertificateOperation(certificateName: string, options?:
-        GetCertificateOperationOptions):
-        Promise<PollerLike<CertificateOperationState,
+        CertificatePollerOptions): Promise<PollerLike<CertificateOperationState,
         KeyVaultCertificateWithPolicy>>
       parameters:
         - id: certificateName
           type: string
           description: The name of the certificate
         - id: options
-          type: >-
-            <xref
-            uid="@azure/keyvault-certificates.GetCertificateOperationOptions" />
-          description: |
-            The optional parameters
+          type: <xref uid="@azure/keyvault-certificates.CertificatePollerOptions" />
+          description: The optional parameters
       return:
         description: ''
         type: >-
-          Promise&lt;PollerLike&lt;<xref
+          Promise&lt;<xref uid="@azure/keyvault-certificates.PollerLike"
+          />&lt;<xref
           uid="@azure/keyvault-certificates.CertificateOperationState" />, <xref
           uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
           />&gt;&gt;
-  - name: 'getCertificatePolicy(string, GetCertificatePolicyOptions)'
+  - name: getCertificatePolicy(string, OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.getCertificatePolicy'
     package: '@azure/keyvault-certificates'
     summary: >-
       The getCertificatePolicy operation returns the specified certificate
       policy resources in the specified key vault. This operation requires the
       certificates/get permission.
+
 
       Example usage:
 
@@ -648,29 +640,27 @@ methods:
     syntax:
       content: >-
         function getCertificatePolicy(certificateName: string, options?:
-        GetCertificatePolicyOptions): Promise<CertificatePolicy>
+        OperationOptions): Promise<CertificatePolicy>
       parameters:
         - id: certificateName
           type: string
           description: The name of the certificate
         - id: options
-          type: >-
-            <xref uid="@azure/keyvault-certificates.GetCertificatePolicyOptions"
-            />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/keyvault-certificates.CertificatePolicy"
           />&gt;
-  - name: 'getCertificateVersion(string, string, GetCertificateVersionOptions)'
+  - name: getCertificateVersion(string, string, OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.getCertificateVersion'
     package: '@azure/keyvault-certificates'
     summary: >-
       Gets information about a specific certificate on a specific version. It
       won't return the certificate's policy. This operation requires the
       certificates/get permission.
+
 
       Example usage:
 
@@ -702,7 +692,7 @@ methods:
     syntax:
       content: >-
         function getCertificateVersion(certificateName: string, version: string,
-        options?: GetCertificateVersionOptions): Promise<KeyVaultCertificate>
+        options?: OperationOptions): Promise<KeyVaultCertificate>
       parameters:
         - id: certificateName
           type: string
@@ -711,22 +701,20 @@ methods:
           type: string
           description: The specific version of the certificate
         - id: options
-          type: >-
-            <xref
-            uid="@azure/keyvault-certificates.GetCertificateVersionOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/keyvault-certificates.KeyVaultCertificate" />&gt;
-  - name: getContacts(GetContactsOptions)
+  - name: getContacts(OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.getContacts'
     package: '@azure/keyvault-certificates'
     summary: >-
       Returns the set of certificate contact resources in the specified key
       vault. This operation requires the certificates/managecontacts permission.
+
 
       Example usage:
 
@@ -751,19 +739,18 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function getContacts(options?: GetContactsOptions):
-        Promise<CertificateContact[] | undefined>
+        function getContacts(options?: OperationOptions): Promise<undefined |
+        CertificateContact[]>
       parameters:
         - id: options
-          type: <xref uid="@azure/keyvault-certificates.GetContactsOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/keyvault-certificates.CertificateContact"
-          />[] | undefined&gt;
-  - name: 'getDeletedCertificate(string, GetDeletedCertificateOptions)'
+          Promise&lt;undefined | <xref
+          uid="@azure/keyvault-certificates.CertificateContact" />[]&gt;
+  - name: getDeletedCertificate(string, OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.getDeletedCertificate'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -772,6 +759,7 @@ methods:
 
       current deletion recovery level. This operation requires the
       certificates/get permission.
+
 
       Example usage:
 
@@ -792,23 +780,20 @@ methods:
     syntax:
       content: >-
         function getDeletedCertificate(certificateName: string, options?:
-        GetDeletedCertificateOptions): Promise<DeletedCertificate>
+        OperationOptions): Promise<DeletedCertificate>
       parameters:
         - id: certificateName
           type: string
           description: The name of the certificate
         - id: options
-          type: >-
-            <xref
-            uid="@azure/keyvault-certificates.GetDeletedCertificateOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/keyvault-certificates.DeletedCertificate"
           />&gt;
-  - name: 'getIssuer(string, GetIssuerOptions)'
+  - name: getIssuer(string, OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.getIssuer'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -819,6 +804,7 @@ methods:
       certificates/manageissuers/getissuers
 
       permission.
+
 
       Example usage:
 
@@ -839,22 +825,21 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function getIssuer(issuerName: string, options?: GetIssuerOptions):
+        function getIssuer(issuerName: string, options?: OperationOptions):
         Promise<CertificateIssuer>
       parameters:
         - id: issuerName
           type: string
           description: The name of the issuer.
         - id: options
-          type: <xref uid="@azure/keyvault-certificates.GetIssuerOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/keyvault-certificates.CertificateIssuer"
           />&gt;
-  - name: 'importCertificate(string, Uint8Array, ImportCertificateOptions)'
+  - name: importCertificate(string, Uint8Array, ImportCertificateOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.importCertificate'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -865,6 +850,7 @@ methods:
       If the certificate is in PEM format the PEM file must contain the key as
       well as x509 certificates. This operation requires the certificates/import
       permission.
+
 
       Example usage:
 
@@ -911,8 +897,7 @@ methods:
             both the X.509 certificates and the private key
         - id: options
           type: <xref uid="@azure/keyvault-certificates.ImportCertificateOptions" />
-          description: |
-            The optional parameters
+          description: The optional parameters
       return:
         description: ''
         type: >-
@@ -929,6 +914,7 @@ methods:
 
       information. This operation requires the certificates/get/list permission.
       This operation can only be enabled on soft-delete enabled vaults.
+
 
       Example usage:
 
@@ -955,19 +941,21 @@ methods:
       content: >-
         function listDeletedCertificates(options?:
         ListDeletedCertificatesOptions):
-        PagedAsyncIterableIterator<DeletedCertificate>
+        PagedAsyncIterableIterator<DeletedCertificate, DeletedCertificate[],
+        PageSettings>
       parameters:
         - id: options
           type: >-
             <xref
             uid="@azure/keyvault-certificates.ListDeletedCertificatesOptions" />
-          description: |
-            The optional parameters
+          description: The optional parameters
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/keyvault-certificates.DeletedCertificate" />&gt;
+          uid="@azure/keyvault-certificates.DeletedCertificate" />, <xref
+          uid="@azure/keyvault-certificates.DeletedCertificate" />[],
+          PageSettings&gt;
   - name: listPropertiesOfCertificates(ListPropertiesOfCertificatesOptions)
     uid: >-
       @azure/keyvault-certificates.CertificateClient.listPropertiesOfCertificates
@@ -978,6 +966,7 @@ methods:
 
       in the response. No values are returned for the certificates. This
       operations requires the certificates/list permission.
+
 
       Example usage:
 
@@ -1009,23 +998,23 @@ methods:
       content: >-
         function listPropertiesOfCertificates(options?:
         ListPropertiesOfCertificatesOptions):
-        PagedAsyncIterableIterator<CertificateProperties>
+        PagedAsyncIterableIterator<CertificateProperties,
+        CertificateProperties[], PageSettings>
       parameters:
         - id: options
           type: >-
             <xref
             uid="@azure/keyvault-certificates.ListPropertiesOfCertificatesOptions"
             />
-          description: |
-            The optional parameters
+          description: The optional parameters
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/keyvault-certificates.CertificateProperties" />&gt;
-  - name: >-
-      listPropertiesOfCertificateVersions(string,
-      ListPropertiesOfCertificateVersionsOptions)
+          uid="@azure/keyvault-certificates.CertificateProperties" />, <xref
+          uid="@azure/keyvault-certificates.CertificateProperties" />[],
+          PageSettings&gt;
+  - name: listPropertiesOfCertificateVersions(string, OperationOptions)
     uid: >-
       @azure/keyvault-certificates.CertificateClient.listPropertiesOfCertificateVersions
     package: '@azure/keyvault-certificates'
@@ -1033,6 +1022,7 @@ methods:
       Returns the versions of a certificate in the specified key
 
       vault. This operation requires the certificates/list permission.
+
 
       Example usage:
 
@@ -1053,31 +1043,31 @@ methods:
     syntax:
       content: >-
         function listPropertiesOfCertificateVersions(certificateName: string,
-        options?: ListPropertiesOfCertificateVersionsOptions):
-        PagedAsyncIterableIterator<CertificateProperties>
+        options?: OperationOptions):
+        PagedAsyncIterableIterator<CertificateProperties,
+        CertificateProperties[], PageSettings>
       parameters:
         - id: certificateName
           type: string
           description: The name of the certificate.
         - id: options
-          type: >-
-            <xref
-            uid="@azure/keyvault-certificates.ListPropertiesOfCertificateVersionsOptions"
-            />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/keyvault-certificates.CertificateProperties" />&gt;
-  - name: listPropertiesOfIssuers(ListPropertiesOfIssuersOptions)
+          uid="@azure/keyvault-certificates.CertificateProperties" />, <xref
+          uid="@azure/keyvault-certificates.CertificateProperties" />[],
+          PageSettings&gt;
+  - name: listPropertiesOfIssuers(OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.listPropertiesOfIssuers'
     package: '@azure/keyvault-certificates'
     summary: >-
       Returns the set of certificate issuer resources in the specified key
       vault. This operation requires the certificates/manageissuers/getissuers
       permission.
+
 
       Example usage:
 
@@ -1108,28 +1098,28 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function listPropertiesOfIssuers(options?:
-        ListPropertiesOfIssuersOptions):
-        PagedAsyncIterableIterator<IssuerProperties>
+        function listPropertiesOfIssuers(options?: OperationOptions):
+        PagedAsyncIterableIterator<IssuerProperties, IssuerProperties[],
+        PageSettings>
       parameters:
         - id: options
-          type: >-
-            <xref
-            uid="@azure/keyvault-certificates.ListPropertiesOfIssuersOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/keyvault-certificates.IssuerProperties" />&gt;
-  - name: 'mergeCertificate(string, Uint8Array[], MergeCertificateOptions)'
+          uid="@azure/keyvault-certificates.IssuerProperties" />, <xref
+          uid="@azure/keyvault-certificates.IssuerProperties" />[],
+          PageSettings&gt;
+  - name: mergeCertificate(string, Uint8Array[], OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.mergeCertificate'
     package: '@azure/keyvault-certificates'
     summary: >-
       Performs the merging of a certificate or certificate chain with a key pair
       currently available in the service. This operation requires the
       certificates/create permission.
+
 
       Example usage:
 
@@ -1186,26 +1176,25 @@ methods:
     syntax:
       content: >-
         function mergeCertificate(certificateName: string, x509Certificates:
-        Uint8Array[], options?: MergeCertificateOptions):
+        Uint8Array[], options?: OperationOptions):
         Promise<KeyVaultCertificateWithPolicy>
       parameters:
         - id: certificateName
           type: string
           description: The name of the certificate
         - id: x509Certificates
-          type: 'Uint8Array[]'
+          type: Uint8Array[]
           description: The certificate(s) to merge
         - id: options
-          type: <xref uid="@azure/keyvault-certificates.MergeCertificateOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
           />&gt;
-  - name: 'purgeDeletedCertificate(string, PurgeDeletedCertificateOptions)'
+  - name: purgeDeletedCertificate(string, OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.purgeDeletedCertificate'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -1214,6 +1203,7 @@ methods:
 
       recovery level does not specify 'Purgeable'. This operation requires the
       certificate/purge permission.
+
 
       Example usage:
 
@@ -1237,26 +1227,24 @@ methods:
     syntax:
       content: >-
         function purgeDeletedCertificate(certificateName: string, options?:
-        PurgeDeletedCertificateOptions): Promise<null>
+        OperationOptions): Promise<null>
       parameters:
         - id: certificateName
           type: string
           description: The name of the deleted certificate to purge
         - id: options
-          type: >-
-            <xref
-            uid="@azure/keyvault-certificates.PurgeDeletedCertificateOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: Promise&lt;null&gt;
-  - name: 'restoreCertificateBackup(Uint8Array, RestoreCertificateBackupOptions)'
+  - name: restoreCertificateBackup(Uint8Array, OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.restoreCertificateBackup'
     package: '@azure/keyvault-certificates'
     summary: >-
       Restores a backed up certificate, and all its versions, to a vault. This
       operation requires the certificates/restore permission.
+
 
       Example usage:
 
@@ -1287,30 +1275,27 @@ methods:
     syntax:
       content: >-
         function restoreCertificateBackup(backup: Uint8Array, options?:
-        RestoreCertificateBackupOptions): Promise<KeyVaultCertificateWithPolicy>
+        OperationOptions): Promise<KeyVaultCertificateWithPolicy>
       parameters:
         - id: backup
           type: Uint8Array
           description: The back-up certificate to restore from
         - id: options
-          type: >-
-            <xref
-            uid="@azure/keyvault-certificates.RestoreCertificateBackupOptions"
-            />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/keyvault-certificates.KeyVaultCertificateWithPolicy"
           />&gt;
-  - name: 'setContacts(CertificateContact[], SetContactsOptions)'
+  - name: setContacts(CertificateContact[], OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.setContacts'
     package: '@azure/keyvault-certificates'
     summary: >-
       Sets the certificate contacts for the key vault. This operation requires
       the certificates/managecontacts permission.
+
 
       Example usage:
 
@@ -1332,23 +1317,20 @@ methods:
     syntax:
       content: >-
         function setContacts(contacts: CertificateContact[], options?:
-        SetContactsOptions): Promise<CertificateContact[] | undefined>
+        OperationOptions): Promise<undefined | CertificateContact[]>
       parameters:
         - id: contacts
-          type: '<xref uid="@azure/keyvault-certificates.CertificateContact" />[]'
+          type: <xref uid="@azure/keyvault-certificates.CertificateContact" />[]
           description: The contacts to use
         - id: options
-          type: <xref uid="@azure/keyvault-certificates.SetContactsOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/keyvault-certificates.CertificateContact"
-          />[] | undefined&gt;
-  - name: >-
-      updateCertificatePolicy(string, CertificatePolicy,
-      UpdateCertificatePolicyOptions)
+          Promise&lt;undefined | <xref
+          uid="@azure/keyvault-certificates.CertificateContact" />[]&gt;
+  - name: updateCertificatePolicy(string, CertificatePolicy, OperationOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.updateCertificatePolicy'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -1361,7 +1343,7 @@ methods:
     syntax:
       content: >-
         function updateCertificatePolicy(certificateName: string, policy:
-        CertificatePolicy, options?: UpdateCertificatePolicyOptions):
+        CertificatePolicy, options?: OperationOptions):
         Promise<CertificatePolicy>
       parameters:
         - id: certificateName
@@ -1371,17 +1353,14 @@ methods:
           type: <xref uid="@azure/keyvault-certificates.CertificatePolicy" />
           description: The certificate policy
         - id: options
-          type: >-
-            <xref
-            uid="@azure/keyvault-certificates.UpdateCertificatePolicyOptions" />
-          description: |
-            The optional parameters
+          type: OperationOptions
+          description: The optional parameters
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/keyvault-certificates.CertificatePolicy"
           />&gt;
-  - name: 'updateCertificateProperties(string, string, UpdateCertificateOptions)'
+  - name: updateCertificateProperties(string, string, UpdateCertificateOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.updateCertificateProperties'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -1390,6 +1369,7 @@ methods:
 
       certificate's attributes. This operation requires the certificates/update
       permission.
+
 
       Example usage:
 
@@ -1434,14 +1414,13 @@ methods:
             update the latest version)
         - id: options
           type: <xref uid="@azure/keyvault-certificates.UpdateCertificateOptions" />
-          description: |
-            The options, including what to update
+          description: The options, including what to update
       return:
         description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/keyvault-certificates.KeyVaultCertificate" />&gt;
-  - name: 'updateIssuer(string, UpdateIssuerOptions)'
+  - name: updateIssuer(string, UpdateIssuerOptions)
     uid: '@azure/keyvault-certificates.CertificateClient.updateIssuer'
     package: '@azure/keyvault-certificates'
     summary: >-
@@ -1449,6 +1428,7 @@ methods:
       issuer
 
       entity. This operation requires the certificates/setissuers permission.
+
 
       Example usage:
 
@@ -1477,8 +1457,7 @@ methods:
           description: The name of the issuer.
         - id: options
           type: <xref uid="@azure/keyvault-certificates.UpdateIssuerOptions" />
-          description: |
-            The optional parameters
+          description: The optional parameters
       return:
         description: ''
         type: >-

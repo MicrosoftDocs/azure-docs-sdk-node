@@ -14,17 +14,93 @@ fullName: AmqpWs
 remarks: ''
 isDeprecated: false
 type: class
+inheritedProperties:
+  - name: captureRejections
+    uid: azure-iothub.AmqpWs.captureRejections
+    package: azure-iothub
+    summary: Sets or gets the default captureRejection value for all emitters.
+    fullName: captureRejections
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static captureRejections: boolean'
+      return:
+        description: ''
+        type: boolean
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.captureRejections](xref:azure-iothub.Amqp.captureRejections)
+  - name: captureRejectionSymbol
+    uid: azure-iothub.AmqpWs.captureRejectionSymbol
+    package: azure-iothub
+    summary: ''
+    fullName: captureRejectionSymbol
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static captureRejectionSymbol: typeof captureRejectionSymbol'
+      return:
+        description: ''
+        type: typeof captureRejectionSymbol
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.captureRejectionSymbol](xref:azure-iothub.Amqp.captureRejectionSymbol)
+  - name: defaultMaxListeners
+    uid: azure-iothub.AmqpWs.defaultMaxListeners
+    package: azure-iothub
+    summary: ''
+    fullName: defaultMaxListeners
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static defaultMaxListeners: number'
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.defaultMaxListeners](xref:azure-iothub.Amqp.defaultMaxListeners)
+  - name: errorMonitor
+    uid: azure-iothub.AmqpWs.errorMonitor
+    package: azure-iothub
+    summary: >-
+      This symbol shall be used to install a listener for only monitoring
+      `'error'`
+
+      events. Listeners installed using this symbol are called before the
+      regular
+
+      `'error'` listeners are called.
+
+
+      Installing a listener using this symbol does not change the behavior once
+      an
+
+      `'error'` event is emitted, therefore the process will still crash if no
+
+      regular `'error'` listener is installed.
+    fullName: errorMonitor
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static errorMonitor: typeof errorMonitor'
+      return:
+        description: ''
+        type: typeof errorMonitor
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.errorMonitor](xref:azure-iothub.Amqp.errorMonitor)
 inheritedMethods:
   - name: 'addListener(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.AmqpWs.addListener
     package: azure-iothub
-    summary: 'Alias for `emitter.on(eventName, listener)`.'
+    summary: Alias for `emitter.on(eventName, listener)`.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function addListener(eventName: string | symbol, listener: (args: any[])
-        => void): this
+        => void): AmqpWs
       parameters:
         - id: eventName
           type: string | symbol
@@ -34,9 +110,11 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: this
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.addListener
-  - name: 'emit(string | symbol, any[])'
+        type: <xref uid="azure-iothub.AmqpWs" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.addListener](xref:azure-iothub.Amqp.addListener)
+  - name: emit(string | symbol, any[])
     uid: azure-iothub.AmqpWs.emit
     package: azure-iothub
     summary: >-
@@ -45,6 +123,7 @@ inheritedMethods:
       arguments
 
       to each.
+
 
       Returns `true` if the event had listeners, `false` otherwise.
 
@@ -110,18 +189,19 @@ inheritedMethods:
           type: string | symbol
           description: ''
         - id: args
-          type: 'any[]'
+          type: any[]
           description: ''
       return:
         description: ''
         type: boolean
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.emit
+    inheritanceDescription: <b>Inherited From</b> [Amqp.emit](xref:azure-iothub.Amqp.emit)
   - name: eventNames()
     uid: azure-iothub.AmqpWs.eventNames
     package: azure-iothub
     summary: |-
       Returns an array listing the events for which the emitter has registered
       listeners. The values in the array are strings or `Symbol`s.
+
       ```js
       const EventEmitter = require('events');
       const myEE = new EventEmitter();
@@ -137,11 +217,68 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function eventNames(): Array<string | symbol>'
+      content: 'function eventNames(): (string | symbol)[]'
       return:
         description: ''
-        type: Array&lt;string | symbol&gt;
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.eventNames
+        type: (string | symbol)[]
+    inheritanceDescription: <b>Inherited From</b> [Amqp.eventNames](xref:azure-iothub.Amqp.eventNames)
+  - name: getEventListeners(_DOMEventTarget | EventEmitter, string | symbol)
+    uid: azure-iothub.AmqpWs.getEventListeners
+    package: azure-iothub
+    summary: >-
+      Returns a copy of the array of listeners for the event named `eventName`.
+
+
+      For `EventEmitter`s this behaves exactly the same as calling `.listeners`
+      on
+
+      the emitter.
+
+
+      For `EventTarget`s this is the only way to get the event listeners for the
+
+      event target. This is useful for debugging and diagnostic purposes.
+
+
+      ```js
+
+      const { getEventListeners, EventEmitter } = require('events');
+
+
+      {
+        const ee = new EventEmitter();
+        const listener = () => console.log('Events are fun');
+        ee.on('foo', listener);
+        getEventListeners(ee, 'foo'); // [listener]
+      }
+
+      {
+        const et = new EventTarget();
+        const listener = () => console.log('Events are fun');
+        et.addEventListener('foo', listener);
+        getEventListeners(et, 'foo'); // [listener]
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function getEventListeners(emitter: _DOMEventTarget |
+        EventEmitter, name: string | symbol): Function[]
+      parameters:
+        - id: emitter
+          type: _DOMEventTarget | EventEmitter
+          description: ''
+        - id: name
+          type: string | symbol
+          description: ''
+      return:
+        description: ''
+        type: Function[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.getEventListeners](xref:azure-iothub.Amqp.getEventListeners)
   - name: getMaxListeners()
     uid: azure-iothub.AmqpWs.getMaxListeners
     package: azure-iothub
@@ -150,7 +287,7 @@ inheritedMethods:
       either
 
       set by `emitter.setMaxListeners(n)` or defaults to
-      <xref:azure-iothub.Amqp.defaultMaxListeners>.
+      [defaultMaxListeners](xref:azure-iothub.AmqpWs.defaultMaxListeners).
     remarks: ''
     isDeprecated: false
     syntax:
@@ -158,7 +295,52 @@ inheritedMethods:
       return:
         description: ''
         type: number
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.getMaxListeners
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.getMaxListeners](xref:azure-iothub.Amqp.getMaxListeners)
+  - name: listenerCount(EventEmitter, string | symbol)
+    uid: azure-iothub.AmqpWs.listenerCount
+    package: azure-iothub
+    summary: >-
+      A class method that returns the number of listeners for the given
+      `eventName`registered on the given `emitter`.
+
+
+      ```js
+
+      const { EventEmitter, listenerCount } = require('events');
+
+      const myEmitter = new EventEmitter();
+
+      myEmitter.on('event', () => {});
+
+      myEmitter.on('event', () => {});
+
+      console.log(listenerCount(myEmitter, 'event'));
+
+      // Prints: 2
+
+      ```
+    remarks: ''
+    isDeprecated: true
+    customDeprecatedMessage: Since v3.2.0 - Use `listenerCount` instead.
+    syntax:
+      content: >-
+        static function listenerCount(emitter: EventEmitter, eventName: string |
+        symbol): number
+      parameters:
+        - id: emitter
+          type: EventEmitter
+          description: The emitter to query
+        - id: eventName
+          type: string | symbol
+          description: The event name
+      return:
+        description: ''
+        type: number
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.listenerCount](xref:azure-iothub.Amqp.listenerCount)
   - name: listenerCount(string | symbol)
     uid: azure-iothub.AmqpWs.listenerCount
     package: azure-iothub
@@ -170,17 +352,19 @@ inheritedMethods:
       parameters:
         - id: eventName
           type: string | symbol
-          description: |
-            The name of the event being listened for
+          description: The name of the event being listened for
       return:
         description: ''
         type: number
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.listenerCount
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.listenerCount](xref:azure-iothub.Amqp.listenerCount)
   - name: listeners(string | symbol)
     uid: azure-iothub.AmqpWs.listeners
     package: azure-iothub
     summary: |-
       Returns a copy of the array of listeners for the event named `eventName`.
+
       ```js
       server.on('connection', (stream) => {
         console.log('someone connected!');
@@ -198,8 +382,8 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: 'Function[]'
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.listeners
+        type: Function[]
+    inheritanceDescription: <b>Inherited From</b> [Amqp.listeners](xref:azure-iothub.Amqp.listeners)
   - name: 'off(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.AmqpWs.off
     package: azure-iothub
@@ -209,7 +393,7 @@ inheritedMethods:
     syntax:
       content: >-
         function off(eventName: string | symbol, listener: (args: any[]) =>
-        void): this
+        void): AmqpWs
       parameters:
         - id: eventName
           type: string | symbol
@@ -219,8 +403,85 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: this
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.off
+        type: <xref uid="azure-iothub.AmqpWs" />
+    inheritanceDescription: <b>Inherited From</b> [Amqp.off](xref:azure-iothub.Amqp.off)
+  - name: on(EventEmitter, string, StaticEventEmitterOptions)
+    uid: azure-iothub.AmqpWs.on
+    package: azure-iothub
+    summary: |-
+      ```js
+      const { on, EventEmitter } = require('events');
+
+      (async () => {
+        const ee = new EventEmitter();
+
+        // Emit later on
+        process.nextTick(() => {
+          ee.emit('foo', 'bar');
+          ee.emit('foo', 42);
+        });
+
+        for await (const event of on(ee, 'foo')) {
+          // The execution of this inner block is synchronous and it
+          // processes one event at a time (even with await). Do not use
+          // if concurrent execution is required.
+          console.log(event); // prints ['bar'] [42]
+        }
+        // Unreachable here
+      })();
+      ```
+
+      Returns an `AsyncIterator` that iterates `eventName` events. It will throw
+      if the `EventEmitter` emits `'error'`. It removes all listeners when
+      exiting the loop. The `value` returned by each iteration is an array
+      composed of the emitted event arguments.
+
+      An `AbortSignal` can be used to cancel waiting on events:
+
+      ```js
+      const { on, EventEmitter } = require('events');
+      const ac = new AbortController();
+
+      (async () => {
+        const ee = new EventEmitter();
+
+        // Emit later on
+        process.nextTick(() => {
+          ee.emit('foo', 'bar');
+          ee.emit('foo', 42);
+        });
+
+        for await (const event of on(ee, 'foo', { signal: ac.signal })) {
+          // The execution of this inner block is synchronous and it
+          // processes one event at a time (even with await). Do not use
+          // if concurrent execution is required.
+          console.log(event); // prints ['bar'] [42]
+        }
+        // Unreachable here
+      })();
+
+      process.nextTick(() => ac.abort());
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function on(emitter: EventEmitter, eventName: string, options?:
+        StaticEventEmitterOptions): AsyncIterableIterator<any>
+      parameters:
+        - id: emitter
+          type: EventEmitter
+          description: ''
+        - id: eventName
+          type: string
+          description: The name of the event being listened for
+        - id: options
+          type: StaticEventEmitterOptions
+          description: ''
+      return:
+        description: that iterates `eventName` events emitted by the `emitter`
+        type: AsyncIterableIterator&lt;any&gt;
+    inheritanceDescription: <b>Inherited From</b> [Amqp.on](xref:azure-iothub.Amqp.on)
   - name: 'on(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.AmqpWs.on
     package: azure-iothub
@@ -234,6 +495,7 @@ inheritedMethods:
       called, multiple
 
       times.
+
 
       ```js
 
@@ -276,19 +538,18 @@ inheritedMethods:
     syntax:
       content: >-
         function on(eventName: string | symbol, listener: (args: any[]) =>
-        void): this
+        void): AmqpWs
       parameters:
         - id: eventName
           type: string | symbol
           description: The name of the event.
         - id: listener
           type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
+          description: The callback function
       return:
         description: ''
-        type: this
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.on
+        type: <xref uid="azure-iothub.AmqpWs" />
+    inheritanceDescription: <b>Inherited From</b> [Amqp.on](xref:azure-iothub.Amqp.on)
   - name: 'once(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.AmqpWs.once
     package: azure-iothub
@@ -298,6 +559,7 @@ inheritedMethods:
 
       next time `eventName` is triggered, this listener is removed and then
       invoked.
+
 
       ```js
 
@@ -340,19 +602,182 @@ inheritedMethods:
     syntax:
       content: >-
         function once(eventName: string | symbol, listener: (args: any[]) =>
-        void): this
+        void): AmqpWs
       parameters:
         - id: eventName
           type: string | symbol
           description: The name of the event.
         - id: listener
           type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
+          description: The callback function
       return:
         description: ''
-        type: this
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.once
+        type: <xref uid="azure-iothub.AmqpWs" />
+    inheritanceDescription: <b>Inherited From</b> [Amqp.once](xref:azure-iothub.Amqp.once)
+  - name: once(_DOMEventTarget, string, StaticEventEmitterOptions)
+    uid: azure-iothub.AmqpWs.once_1
+    package: azure-iothub
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function once(emitter: _DOMEventTarget, eventName: string,
+        options?: StaticEventEmitterOptions): Promise<any[]>
+      parameters:
+        - id: emitter
+          type: _DOMEventTarget
+          description: ''
+        - id: eventName
+          type: string
+          description: ''
+        - id: options
+          type: StaticEventEmitterOptions
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;any[]&gt;
+    inheritanceDescription: <b>Inherited From</b> [Amqp.once](xref:azure-iothub.Amqp.once)
+  - name: once(_NodeEventTarget, string | symbol, StaticEventEmitterOptions)
+    uid: azure-iothub.AmqpWs.once
+    package: azure-iothub
+    summary: >-
+      Creates a `Promise` that is fulfilled when the `EventEmitter` emits the
+      given
+
+      event or that is rejected if the `EventEmitter` emits `'error'` while
+      waiting.
+
+      The `Promise` will resolve with an array of all the arguments emitted to
+      the
+
+      given event.
+
+
+      This method is intentionally generic and works with the web platform
+      [EventTarget](https://dom.spec.whatwg.org/#interface-eventtarget)
+      interface, which has no special`'error'` event
+
+      semantics and does not listen to the `'error'` event.
+
+
+      ```js
+
+      const { once, EventEmitter } = require('events');
+
+
+      async function run() {
+        const ee = new EventEmitter();
+
+        process.nextTick(() => {
+          ee.emit('myevent', 42);
+        });
+
+        const [value] = await once(ee, 'myevent');
+        console.log(value);
+
+        const err = new Error('kaboom');
+        process.nextTick(() => {
+          ee.emit('error', err);
+        });
+
+        try {
+          await once(ee, 'myevent');
+        } catch (err) {
+          console.log('error happened', err);
+        }
+      }
+
+
+      run();
+
+      ```
+
+
+      The special handling of the `'error'` event is only used when
+      `events.once()`is used to wait for another event. If `events.once()` is
+      used to wait for the
+
+      '`error'` event itself, then it is treated as any other kind of event
+      without
+
+      special handling:
+
+
+      ```js
+
+      const { EventEmitter, once } = require('events');
+
+
+      const ee = new EventEmitter();
+
+
+      once(ee, 'error')
+        .then(([err]) => console.log('ok', err.message))
+        .catch((err) => console.log('error', err.message));
+
+      ee.emit('error', new Error('boom'));
+
+
+      // Prints: ok boom
+
+      ```
+
+
+      An `AbortSignal` can be used to cancel waiting for the event:
+
+
+      ```js
+
+      const { EventEmitter, once } = require('events');
+
+
+      const ee = new EventEmitter();
+
+      const ac = new AbortController();
+
+
+      async function foo(emitter, event, signal) {
+        try {
+          await once(emitter, event, { signal });
+          console.log('event emitted!');
+        } catch (error) {
+          if (error.name === 'AbortError') {
+            console.error('Waiting for the event was canceled!');
+          } else {
+            console.error('There was an error', error.message);
+          }
+        }
+      }
+
+
+      foo(ee, 'foo', ac.signal);
+
+      ac.abort(); // Abort waiting for the event
+
+      ee.emit('foo'); // Prints: Waiting for the event was canceled!
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function once(emitter: _NodeEventTarget, eventName: string |
+        symbol, options?: StaticEventEmitterOptions): Promise<any[]>
+      parameters:
+        - id: emitter
+          type: _NodeEventTarget
+          description: ''
+        - id: eventName
+          type: string | symbol
+          description: ''
+        - id: options
+          type: StaticEventEmitterOptions
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;any[]&gt;
+    inheritanceDescription: <b>Inherited From</b> [Amqp.once](xref:azure-iothub.Amqp.once)
   - name: 'prependListener(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.AmqpWs.prependListener
     package: azure-iothub
@@ -367,6 +792,7 @@ inheritedMethods:
       called, multiple
 
       times.
+
 
       ```js
 
@@ -383,19 +809,20 @@ inheritedMethods:
     syntax:
       content: >-
         function prependListener(eventName: string | symbol, listener: (args:
-        any[]) => void): this
+        any[]) => void): AmqpWs
       parameters:
         - id: eventName
           type: string | symbol
           description: The name of the event.
         - id: listener
           type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
+          description: The callback function
       return:
         description: ''
-        type: this
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.prependListener
+        type: <xref uid="azure-iothub.AmqpWs" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.prependListener](xref:azure-iothub.Amqp.prependListener)
   - name: 'prependOnceListener(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.AmqpWs.prependOnceListener
     package: azure-iothub
@@ -405,6 +832,7 @@ inheritedMethods:
       triggered, this
 
       listener is removed, and then invoked.
+
 
       ```js
 
@@ -421,25 +849,27 @@ inheritedMethods:
     syntax:
       content: >-
         function prependOnceListener(eventName: string | symbol, listener:
-        (args: any[]) => void): this
+        (args: any[]) => void): AmqpWs
       parameters:
         - id: eventName
           type: string | symbol
           description: The name of the event.
         - id: listener
           type: '(args: any[]) =&gt; void'
-          description: |
-            The callback function
+          description: The callback function
       return:
         description: ''
-        type: this
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.prependOnceListener
+        type: <xref uid="azure-iothub.AmqpWs" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.prependOnceListener](xref:azure-iothub.Amqp.prependOnceListener)
   - name: rawListeners(string | symbol)
     uid: azure-iothub.AmqpWs.rawListeners
     package: azure-iothub
     summary: |-
       Returns a copy of the array of listeners for the event named `eventName`,
       including any wrappers (such as those created by `.once()`).
+
       ```js
       const emitter = new EventEmitter();
       emitter.once('log', () => console.log('log once'));
@@ -473,13 +903,16 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: 'Function[]'
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.rawListeners
+        type: Function[]
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.rawListeners](xref:azure-iothub.Amqp.rawListeners)
   - name: removeAllListeners(string | symbol)
     uid: azure-iothub.AmqpWs.removeAllListeners
     package: azure-iothub
     summary: |-
       Removes all listeners, or those of the specified `eventName`.
+
       It is bad practice to remove listeners added elsewhere in the code,
       particularly when the `EventEmitter` instance was created by some other
       component or module (e.g. sockets or file streams).
@@ -488,21 +921,24 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function removeAllListeners(event?: string | symbol): this'
+      content: 'function removeAllListeners(event?: string | symbol): AmqpWs'
       parameters:
         - id: event
           type: string | symbol
           description: ''
       return:
         description: ''
-        type: this
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.removeAllListeners
+        type: <xref uid="azure-iothub.AmqpWs" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.removeAllListeners](xref:azure-iothub.Amqp.removeAllListeners)
   - name: 'removeListener(string | symbol, (args: any[]) => void)'
     uid: azure-iothub.AmqpWs.removeListener
     package: azure-iothub
     summary: >-
       Removes the specified `listener` from the listener array for the event
       named`eventName`.
+
 
       ```js
 
@@ -641,7 +1077,7 @@ inheritedMethods:
     syntax:
       content: >-
         function removeListener(eventName: string | symbol, listener: (args:
-        any[]) => void): this
+        any[]) => void): AmqpWs
       parameters:
         - id: eventName
           type: string | symbol
@@ -651,8 +1087,10 @@ inheritedMethods:
           description: ''
       return:
         description: ''
-        type: this
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.removeListener
+        type: <xref uid="azure-iothub.AmqpWs" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.removeListener](xref:azure-iothub.Amqp.removeListener)
   - name: setMaxListeners(number)
     uid: azure-iothub.AmqpWs.setMaxListeners
     package: azure-iothub
@@ -668,17 +1106,53 @@ inheritedMethods:
       modified for this specific `EventEmitter` instance. The value can be set
       to`Infinity` (or `0`) to indicate an unlimited number of listeners.
 
+
       Returns a reference to the `EventEmitter`, so that calls can be chained.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function setMaxListeners(n: number): this'
+      content: 'function setMaxListeners(n: number): AmqpWs'
       parameters:
         - id: 'n'
           type: number
           description: ''
       return:
         description: ''
-        type: this
-    inheritanceDescription: <b>Inherited From</b> EventEmitter.setMaxListeners
+        type: <xref uid="azure-iothub.AmqpWs" />
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.setMaxListeners](xref:azure-iothub.Amqp.setMaxListeners)
+  - name: setMaxListeners(number, (_DOMEventTarget | EventEmitter)[])
+    uid: azure-iothub.AmqpWs.setMaxListeners
+    package: azure-iothub
+    summary: |-
+      ```js
+      const {
+        setMaxListeners,
+        EventEmitter
+      } = require('events');
+
+      const target = new EventTarget();
+      const emitter = new EventEmitter();
+
+      setMaxListeners(5, target, emitter);
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function setMaxListeners(n?: number, eventTargets:
+        (_DOMEventTarget | EventEmitter)[])
+      parameters:
+        - id: 'n'
+          type: number
+          description: >-
+            A non-negative number. The maximum number of listeners per
+            `EventTarget` event.
+        - id: eventTargets
+          type: (_DOMEventTarget | EventEmitter)[]
+          description: ''
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Amqp.setMaxListeners](xref:azure-iothub.Amqp.setMaxListeners)
 extends: <xref uid="azure-iothub.Amqp" />

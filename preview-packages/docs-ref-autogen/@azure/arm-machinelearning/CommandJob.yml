@@ -6,10 +6,16 @@ summary: Command job definition.
 fullName: CommandJob
 remarks: ''
 isDeprecated: false
-syntax: >-
-  type CommandJob = JobBaseDetails & { codeId?: undefined | string, command:
-  string, distribution?: DistributionConfigurationUnion, environmentId: string,
-  environmentVariables?: undefined | [key: string]: function, inputs?: undefined
-  | [key: string]: function, limits?: CommandJobLimits, outputs?: undefined |
-  [key: string]: function, parameters?: Record<string, unknown>, resources?:
-  ResourceConfiguration }
+syntax: |
+  type CommandJob = JobBaseDetails & {
+    codeId?: string,
+    command: string,
+    distribution?: DistributionConfigurationUnion,
+    environmentId: string,
+    environmentVariables?: { [propertyName: string]: function },
+    inputs?: { [propertyName: string]: function },
+    limits?: CommandJobLimits,
+    outputs?: { [propertyName: string]: function },
+    parameters?: Record<string, unknown>,
+    resources?: ResourceConfiguration,
+  }

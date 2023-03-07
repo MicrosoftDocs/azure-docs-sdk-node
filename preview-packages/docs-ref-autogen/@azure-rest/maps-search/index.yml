@@ -228,8 +228,23 @@ typeAliases:
   - '@azure-rest/maps-search.SearchSearchPointOfInterestParameters'
   - '@azure-rest/maps-search.SearchSearchStructuredAddressParameters'
 functions:
-  - name: 'MapsSearch(AzureKeyCredential, ClientOptions)'
-    uid: '@azure-rest/maps-search.MapsSearch'
+  - name: createBatchItems<T>(T[])
+    uid: '@azure-rest/maps-search.createBatchItems'
+    package: '@azure-rest/maps-search'
+    summary: Create batch items for the batch request.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function createBatchItems<T>(requests: T[]): BatchRequestItem[]'
+      parameters:
+        - id: requests
+          type: T[]
+          description: The list of queries to process.
+      return:
+        description: '- The BatchRequestItem object.'
+        type: <xref uid="@azure-rest/maps-search.BatchRequestItem" />[]
+  - name: default(AzureKeyCredential, ClientOptions)
+    uid: '@azure-rest/maps-search.default'
     package: '@azure-rest/maps-search'
     summary: |+
       Creates an instance of MapsSearchClient from a subscription key.
@@ -248,7 +263,7 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function MapsSearch(credential: AzureKeyCredential, options?:
+        function default(credential: AzureKeyCredential, options?:
         ClientOptions): MapsSearchClient
       parameters:
         - id: credential
@@ -258,13 +273,12 @@ functions:
             service
         - id: options
           type: ClientOptions
-          description: |
-            Options used to configure the Search Client
+          description: Options used to configure the Search Client
       return:
         description: ''
         type: <xref uid="@azure-rest/maps-search.MapsSearchClient" />
-  - name: 'MapsSearch(TokenCredential, string, ClientOptions)'
-    uid: '@azure-rest/maps-search.MapsSearch_1'
+  - name: default(TokenCredential, string, ClientOptions)
+    uid: '@azure-rest/maps-search.default_1'
     package: '@azure-rest/maps-search'
     summary: >+
       Creates an instance of MapsSearch from an Azure Identity
@@ -291,7 +305,7 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function MapsSearch(credential: TokenCredential, mapsAccountClientId:
+        function default(credential: TokenCredential, mapsAccountClientId:
         string, options?: ClientOptions): MapsSearchClient
       parameters:
         - id: credential
@@ -304,28 +318,10 @@ functions:
           description: The Azure Maps client id of a specific map resource
         - id: options
           type: ClientOptions
-          description: |
-            Options used to configure the Search Client
+          description: Options used to configure the Search Client
       return:
         description: ''
         type: <xref uid="@azure-rest/maps-search.MapsSearchClient" />
-  - name: createBatchItems<T>(Array<T>)
-    uid: '@azure-rest/maps-search.createBatchItems'
-    package: '@azure-rest/maps-search'
-    summary: Create batch items for the batch request.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function createBatchItems<T>(requests: Array<T>):
-        Array<BatchRequestItem>
-      parameters:
-        - id: requests
-          type: Array&lt;T&gt;
-          description: The list of queries to process.
-      return:
-        description: '- The BatchRequestItem object.'
-        type: Array&lt;<xref uid="@azure-rest/maps-search.BatchRequestItem" />&gt;
   - name: >-
       getLongRunningPoller<TResult>(Client, TResult, LroEngineOptions<TResult,
       PollOperationState<TResult>>)
@@ -350,13 +346,13 @@ functions:
           type: TResult
           description: The initial response.
         - id: options
-          type: 'LroEngineOptions&lt;TResult, PollOperationState&lt;TResult&gt;&gt;'
+          type: LroEngineOptions&lt;TResult, PollOperationState&lt;TResult&gt;&gt;
           description: Options to set a resume state or custom polling interval.
       return:
         description: >-
           - A poller object to poll for operation state updates and eventually
           get the final response.
-        type: 'PollerLike&lt;PollOperationState&lt;TResult&gt;, TResult&gt;'
+        type: PollerLike&lt;PollOperationState&lt;TResult&gt;, TResult&gt;
   - name: >-
       isUnexpected(SearchListPolygons200Response |
       SearchListPolygonsDefaultResponse)

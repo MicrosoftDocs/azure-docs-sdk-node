@@ -2,16 +2,21 @@
 name: MessagesEnqueueResponse
 uid: '@azure/storage-queue.MessagesEnqueueResponse'
 package: '@azure/storage-queue'
-summary: Contains response data for the enqueue operation.
+summary: ''
 fullName: MessagesEnqueueResponse
 remarks: ''
 isDeprecated: false
 syntax: |
-  type MessagesEnqueueResponse = Array<EnqueuedMessage> &
-    MessagesEnqueueHeaders & {
+  type MessagesEnqueueResponse = {
+    expirationTime: Date,
+    insertionTime: Date,
+    messageId: string,
+    popReceipt: string,
+    timeNextVisible: Date,
+  } & Models.MessagesEnqueueHeaders & {
       _response: HttpResponse & {
         bodyAsText: string,
-        parsedBody: EnqueuedMessage[],
-        parsedHeaders: MessagesEnqueueHeaders,
+        parsedBody: Models.EnqueuedMessage[],
+        parsedHeaders: Models.MessagesEnqueueHeaders,
       },
     }

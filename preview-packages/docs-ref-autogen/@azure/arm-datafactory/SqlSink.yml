@@ -6,12 +6,18 @@ summary: A copy activity SQL sink.
 fullName: SqlSink
 remarks: ''
 isDeprecated: false
-syntax: >-
-  type SqlSink = CopySink & { preCopyScript?: Record<string, unknown>,
-  sqlWriterStoredProcedureName?: Record<string, unknown>, sqlWriterTableType?:
-  Record<string, unknown>, sqlWriterUseTableLock?: Record<string, unknown>,
-  storedProcedureParameters?: undefined | [key: string]:
-  StoredProcedureParameter, storedProcedureTableTypeParameterName?:
-  Record<string, unknown>, tableOption?: Record<string, unknown>, type:
-  "SqlSink", upsertSettings?: SqlUpsertSettings, writeBehavior?: Record<string,
-  unknown> }
+syntax: |
+  type SqlSink = CopySink & {
+    preCopyScript?: Record<string, unknown>,
+    sqlWriterStoredProcedureName?: Record<string, unknown>,
+    sqlWriterTableType?: Record<string, unknown>,
+    sqlWriterUseTableLock?: Record<string, unknown>,
+    storedProcedureParameters?: {
+      [propertyName: string]: StoredProcedureParameter,
+    },
+    storedProcedureTableTypeParameterName?: Record<string, unknown>,
+    tableOption?: Record<string, unknown>,
+    type: "SqlSink",
+    upsertSettings?: SqlUpsertSettings,
+    writeBehavior?: Record<string, unknown>,
+  }

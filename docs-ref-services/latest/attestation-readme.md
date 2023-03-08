@@ -114,7 +114,7 @@ For more information about the Azure Identity APIs and how to use them, see [Azu
 There are four major families of functionality provided in this preview SDK:
 
 - [SGX and TPM enclave attestation.](#attestation)
-- [MAA Attestation Token signing certificate discovery and validation.](#attestation-token-signing-certificate-discovery-and-validation)
+- [MAA Attestation Token signing certificate discovery and validation.](#attestation-service-token-signing-certificate-discovery-and-validation)
 - [Attestation Policy management.](#policy-management)
 - [Attestation policy management certificate management](#policy-management-certificate-management) (yes, policy management management).
 
@@ -182,7 +182,7 @@ InitTime data refers to data which is used to configure the SGX enclave being at
 ## Examples
 
 - [Create an attestation client instance](#create-client-instance)
-- [Attest an SGX enclave](#attest-sgx-enclave)
+- [Attest an SGX enclave](#attest-sgx-and-open-enclave)
 - [Get attestation policy](#get-attestation-policy)
 - [Retrieve token validation certificates](#retrieve-token-certificates)
 - [Create an attestation client instance](#create-client-instance)

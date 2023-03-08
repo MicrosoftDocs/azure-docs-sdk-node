@@ -6,10 +6,8 @@ ms.author: tomfitz
 manager: timlt
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: Resources
+ms.service: azure-resource-manager
 ---
 
 # Azure Resource modules for JavaScript

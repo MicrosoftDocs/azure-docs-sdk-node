@@ -6,10 +6,8 @@ ms.author: wesmc
 manager: cfowler
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: Redis Cache
+ms.service: cache
 ---
 
 # Azure Redis Cache modules for JavaScript

@@ -6,10 +6,8 @@ ms.author: xiangyul
 manager: dgriff
 ms.date: 04/16/2019
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: Mixed Reality
+ms.service: azure
 ---
 
 # Azure Mixed Reality Resource Management Modules for JavaScript

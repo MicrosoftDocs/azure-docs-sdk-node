@@ -6,10 +6,8 @@ ms.author: bwren
 manager: carmonm
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: Service Map
+ms.service: azure-maps
 ---
 
 # Azure Service Map modules for JavaScript

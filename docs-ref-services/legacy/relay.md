@@ -6,10 +6,8 @@ ms.author: sethm
 manager: timlt
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: Relay
+ms.service: service-bus-relay
 ---
 
 # Azure Relay modules for JavaScript

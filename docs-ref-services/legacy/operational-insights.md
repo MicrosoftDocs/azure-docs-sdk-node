@@ -6,10 +6,8 @@ ms.author: magoedte
 manager: carmonm
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: Operational Insights
+ms.service: operational-insights
 ---
 
 # Azure Operational Insights Modules for JavaScript

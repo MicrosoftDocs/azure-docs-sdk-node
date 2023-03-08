@@ -6,10 +6,8 @@ ms.author: estfan
 manager: cfowler
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: Logic Apps
+ms.service: logic-apps
 ---
 
 # Azure Logic Apps modules for JavaScript

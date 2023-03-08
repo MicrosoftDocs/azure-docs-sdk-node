@@ -5,10 +5,8 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 08/12/2020
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: key-vault
 ---
 
 # Azure Key Vault Secret client library for JavaScript - version 4.1.0 

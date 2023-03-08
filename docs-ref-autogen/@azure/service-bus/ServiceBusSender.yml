@@ -60,7 +60,7 @@ properties:
         description: ''
         type: boolean
 methods:
-  - name: 'cancelScheduledMessages(Long | Long[], OperationOptionsBase)'
+  - name: cancelScheduledMessages(any, OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSender.cancelScheduledMessages'
     package: '@azure/service-bus'
     summary: >-
@@ -70,11 +70,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function cancelScheduledMessages(sequenceNumbers: Long | Long[],
-        options?: OperationOptionsBase): Promise<void>
+        function cancelScheduledMessages(sequenceNumbers: any, options?:
+        OperationOptionsBase): Promise<void>
       parameters:
         - id: sequenceNumbers
-          type: 'Long | Long[]'
+          type: any
           description: >-
             Sequence number or an array of sequence numbers of the messages to
             be cancelled.
@@ -119,7 +119,7 @@ methods:
       parameters:
         - id: options
           type: <xref uid="@azure/service-bus.CreateMessageBatchOptions" />
-          description: >
+          description: >-
             Configures the behavior of the batch.
 
             - `maxSizeInBytes`: The upper limit for the size of batch. The
@@ -130,8 +130,8 @@ methods:
           Promise&lt;<xref uid="@azure/service-bus.ServiceBusMessageBatch"
           />&gt;
   - name: >-
-      scheduleMessages(ServiceBusMessage | ServiceBusMessage[] |
-      AmqpAnnotatedMessage | AmqpAnnotatedMessage[], Date, OperationOptionsBase)
+      scheduleMessages(ServiceBusMessage | AmqpAnnotatedMessage |
+      ServiceBusMessage[] | AmqpAnnotatedMessage[], Date, OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSender.scheduleMessages'
     package: '@azure/service-bus'
     summary: >-
@@ -142,15 +142,16 @@ methods:
     syntax:
       content: >-
         function scheduleMessages(messages: ServiceBusMessage |
-        ServiceBusMessage[] | AmqpAnnotatedMessage | AmqpAnnotatedMessage[],
+        AmqpAnnotatedMessage | ServiceBusMessage[] | AmqpAnnotatedMessage[],
         scheduledEnqueueTimeUtc: Date, options?: OperationOptionsBase):
         Promise<Long[]>
       parameters:
         - id: messages
           type: >-
-            <xref uid="@azure/service-bus.ServiceBusMessage" /> | <xref
+            <xref uid="@azure/service-bus.ServiceBusMessage" /> |
+            AmqpAnnotatedMessage | <xref
             uid="@azure/service-bus.ServiceBusMessage" />[] |
-            AmqpAnnotatedMessage | AmqpAnnotatedMessage[]
+            AmqpAnnotatedMessage[]
           description: Message or an array of messages that need to be scheduled.
         - id: scheduledEnqueueTimeUtc
           type: Date
@@ -170,16 +171,17 @@ methods:
 
           only supports 53 bit numbers, converting the `Long` to number will
           cause loss in precision.
-        type: 'Promise&lt;Long[]&gt;'
+        type: Promise&lt;Long[]&gt;
   - name: >-
-      sendMessages(ServiceBusMessage | ServiceBusMessage[] |
-      ServiceBusMessageBatch | AmqpAnnotatedMessage | AmqpAnnotatedMessage[],
+      sendMessages(ServiceBusMessage | ServiceBusMessageBatch |
+      AmqpAnnotatedMessage | ServiceBusMessage[] | AmqpAnnotatedMessage[],
       OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSender.sendMessages'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       Sends the given messages after creating an AMQP Sender link if it doesn't
       already exist.
+
 
       - To send messages to a `session` and/or `partition` enabled Queue/Topic,
       set the `sessionId`
@@ -206,16 +208,17 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function sendMessages(messages: ServiceBusMessage | ServiceBusMessage[]
-        | ServiceBusMessageBatch | AmqpAnnotatedMessage |
+        function sendMessages(messages: ServiceBusMessage |
+        ServiceBusMessageBatch | AmqpAnnotatedMessage | ServiceBusMessage[] |
         AmqpAnnotatedMessage[], options?: OperationOptionsBase): Promise<void>
       parameters:
         - id: messages
           type: >-
             <xref uid="@azure/service-bus.ServiceBusMessage" /> | <xref
-            uid="@azure/service-bus.ServiceBusMessage" />[] | <xref
             uid="@azure/service-bus.ServiceBusMessageBatch" /> |
-            AmqpAnnotatedMessage | AmqpAnnotatedMessage[]
+            AmqpAnnotatedMessage | <xref
+            uid="@azure/service-bus.ServiceBusMessage" />[] |
+            AmqpAnnotatedMessage[]
           description: >-
             A single message or an array of messages or a batch of messages
             created via the createBatch()

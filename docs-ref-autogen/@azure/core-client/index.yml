@@ -50,13 +50,14 @@ functions:
   - name: authorizeRequestOnClaimChallenge(AuthorizeRequestOnChallengeOptions)
     uid: '@azure/core-client.authorizeRequestOnClaimChallenge'
     package: '@azure/core-client'
-    summary: >
+    summary: >-
       This function can be used as a callback for the
       `bearerTokenAuthenticationPolicy` of `@azure/core-rest-pipeline`, to
       support CAE challenges:
 
       [Continuous Access
       Evaluation](https://docs.microsoft.com/azure/active-directory/conditional-access/concept-continuous-access-evaluation).
+
 
       Call the `bearerTokenAuthenticationPolicy` with the following options:
 
@@ -109,6 +110,30 @@ functions:
       return:
         description: ''
         type: Promise&lt;boolean&gt;
+  - name: authorizeRequestOnTenantChallenge(AuthorizeRequestOnChallengeOptions)
+    uid: '@azure/core-client.authorizeRequestOnTenantChallenge'
+    package: '@azure/core-client'
+    summary: >-
+      Defines a callback to handle auth challenge for Storage APIs.
+
+      This implements the bearer challenge process described here:
+      https://docs.microsoft.com/rest/api/storageservices/authorize-with-azure-active-directory#bearer-challenge
+
+      Handling has specific features for storage that departs to the general AAD
+      challenge docs.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function authorizeRequestOnTenantChallenge(challengeOptions:
+        AuthorizeRequestOnChallengeOptions): Promise<boolean>
+      parameters:
+        - id: challengeOptions
+          type: AuthorizeRequestOnChallengeOptions
+          description: ''
+      return:
+        description: ''
+        type: Promise&lt;boolean&gt;
   - name: createClientPipeline(InternalClientPipelineOptions)
     uid: '@azure/core-client.createClientPipeline'
     package: '@azure/core-client'
@@ -125,12 +150,11 @@ functions:
       parameters:
         - id: options
           type: <xref uid="@azure/core-client.InternalClientPipelineOptions" />
-          description: |
-            Options to customize the created pipeline.
+          description: Options to customize the created pipeline.
       return:
         description: ''
         type: Pipeline
-  - name: 'createSerializer([key: string]: any, boolean)'
+  - name: 'createSerializer({[key: string]: any}, boolean)'
     uid: '@azure/core-client.createSerializer'
     package: '@azure/core-client'
     summary: Method that creates and returns a Serializer.
@@ -138,16 +162,15 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function createSerializer(modelMappers?: [key: string]: any, isXML?:
+        function createSerializer(modelMappers?: {[key: string]: any}, isXML?:
         boolean): Serializer
       parameters:
         - id: modelMappers
-          type: '[key: string]\: any'
+          type: '{[key: string]: any}'
           description: Known models to map
         - id: isXML
           type: boolean
-          description: |
-            If XML should be supported
+          description: If XML should be supported
       return:
         description: ''
         type: <xref uid="@azure/core-client.Serializer" />

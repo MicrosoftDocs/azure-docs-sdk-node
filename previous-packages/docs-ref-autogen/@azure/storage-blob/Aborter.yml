@@ -5,6 +5,7 @@ package: '@azure/storage-blob'
 summary: >+
   An aborter instance implements AbortSignal interface, can abort HTTP requests.
 
+
   - Call Aborter.none to create a new Aborter instance without timeout.
 
   - Call Aborter.timeout() to create a new Aborter instance with timeout.
@@ -24,29 +25,38 @@ summary: >+
   from current aborter to all parents.
 
 
-
   **Example**
 
+
+  ```ts
 
   // Abort without timeout
 
   await blockBlobURL.upload(Aborter.none, buf, buf.length);
 
+  ```
+
 
 
 
   **Example**
 
+
+  ```ts
 
   // Abort container create in 1000ms
 
   await blockBlobURL.upload(Aborter.timeout(1000), buf, buf.length);
 
+  ```
+
 
 
 
   **Example**
 
+
+  ```ts
 
   // Share aborter cross multiple operations in 30s
 
@@ -59,11 +69,15 @@ summary: >+
 
   blockBlobURL2.upload(aborter, buf, buf.length).then(aborter.abort);
 
+  ```
+
 
 
 
   **Example**
 
+
+  ```ts
 
   // Cascaded aborting
 
@@ -77,6 +91,8 @@ summary: >+
   await blockBlobURL.upload(aborter.withTimeout(25 * 1000), buf, buf.length);
 
   await blockBlobURL.upload(aborter.withTimeout(25 * 1000), buf, buf.length);
+
+  ```
 
 fullName: Aborter
 remarks: ''
@@ -115,19 +131,20 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'onabort: (this: AbortSignalLike, ev: any) => any | null'
+      content: 'onabort: null | (this: AbortSignalLike, ev: any) => any'
       return:
         description: ''
-        type: '(this: AbortSignalLike, ev: any) =&gt; any | null'
+        type: 'null | (this: AbortSignalLike, ev: any) =&gt; any'
 methods:
   - name: abort()
     uid: '@azure/storage-blob.Aborter.abort'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       Trigger abort event immediately, the onabort and all abort event listeners
       will be triggered.
 
       Will try to trigger abort event for all children Aborter nodes.
+
 
       - If there is a timeout, the timer will be cancelled.
 
@@ -139,7 +156,7 @@ methods:
   - name: 'addEventListener("abort", (this: AbortSignalLike, ev: any) => any)'
     uid: '@azure/storage-blob.Aborter.addEventListener'
     package: '@azure/storage-blob'
-    summary: 'Added new "abort" event listener, only support "abort" event.'
+    summary: Added new "abort" event listener, only support "abort" event.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -167,30 +184,31 @@ methods:
   - name: getValue(string)
     uid: '@azure/storage-blob.Aborter.getValue'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       Find out latest value with corresponding key in the chain of
 
       [current node] -> [parent node] -> [grand parent node] -> ... -> [root
       node].
+
 
       If key is not found, undefined will be returned.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function getValue(key: string): string | number | boolean | null |
-        undefined
+        function getValue(key: string): undefined | null | string | number |
+        boolean
       parameters:
         - id: key
           type: string
           description: ''
       return:
         description: ''
-        type: string | number | boolean | null | undefined
+        type: undefined | null | string | number | boolean
   - name: 'removeEventListener("abort", (this: AbortSignalLike, ev: any) => any)'
     uid: '@azure/storage-blob.Aborter.removeEventListener'
     package: '@azure/storage-blob'
-    summary: 'Remove "abort" event listener, only support "abort" event.'
+    summary: Remove "abort" event listener, only support "abort" event.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -224,7 +242,7 @@ methods:
   - name: withTimeout(number)
     uid: '@azure/storage-blob.Aborter.withTimeout'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       Create and return a new Aborter instance, which will be appended as a
       child node of current Aborter.
 
@@ -233,6 +251,7 @@ methods:
 
       triggers timeout event, all children nodes abort event will be triggered
       too.
+
 
       When timeout parameter (in millisecond) is larger than 0, the abort event
       will be triggered when timeout.
@@ -249,10 +268,10 @@ methods:
       return:
         description: The new Aborter instance created.
         type: <xref uid="@azure/storage-blob.Aborter" />
-  - name: 'withValue(string, string | number | boolean | null)'
+  - name: withValue(string, null | string | number | boolean)
     uid: '@azure/storage-blob.Aborter.withValue'
     package: '@azure/storage-blob'
-    summary: >
+    summary: >-
       Create and return a new Aborter instance, which will be appended as a
       child node of current Aborter.
 
@@ -261,6 +280,7 @@ methods:
 
       triggers timeout event, all children nodes abort event will be triggered
       too.
+
 
       Immutable key value pair will be set into the new created Aborter
       instance.
@@ -273,14 +293,14 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function withValue(key: string, value?: string | number | boolean |
-        null): Aborter
+        function withValue(key: string, value?: null | string | number |
+        boolean): Aborter
       parameters:
         - id: key
           type: string
           description: ''
         - id: value
-          type: string | number | boolean | null
+          type: null | string | number | boolean
           description: ''
       return:
         description: ''

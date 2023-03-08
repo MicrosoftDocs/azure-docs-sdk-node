@@ -9,8 +9,8 @@ isDeprecated: false
 type: interface
 methods:
   - name: >-
-      create(string, string, AccessIdName, string,
-      AccessInformationCreateParameters, TenantAccessCreateOptionalParams)
+      create(string, string, string, string, AccessInformationCreateParameters,
+      TenantAccessCreateOptionalParams)
     uid: '@azure/arm-apimanagement.TenantAccess.create'
     package: '@azure/arm-apimanagement'
     summary: Update tenant access information details.
@@ -19,7 +19,7 @@ methods:
     syntax:
       content: >-
         function create(resourceGroupName: string, serviceName: string,
-        accessName: AccessIdName, ifMatch: string, parameters:
+        accessName: string, ifMatch: string, parameters:
         AccessInformationCreateParameters, options?:
         TenantAccessCreateOptionalParams): Promise<TenantAccessCreateResponse>
       parameters:
@@ -30,7 +30,7 @@ methods:
           type: string
           description: The name of the API Management service.
         - id: accessName
-          type: <xref uid="@azure/arm-apimanagement.AccessIdName" />
+          type: string
           description: The identifier of the Access configuration.
         - id: ifMatch
           type: string
@@ -47,14 +47,13 @@ methods:
           type: >-
             <xref
             uid="@azure/arm-apimanagement.TenantAccessCreateOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/arm-apimanagement.TenantAccessCreateResponse" />&gt;
-  - name: 'get(string, string, AccessIdName, TenantAccessGetOptionalParams)'
+  - name: get(string, string, string, TenantAccessGetOptionalParams)
     uid: '@azure/arm-apimanagement.TenantAccess.get'
     package: '@azure/arm-apimanagement'
     summary: Get tenant access information details without secrets.
@@ -63,7 +62,7 @@ methods:
     syntax:
       content: >-
         function get(resourceGroupName: string, serviceName: string, accessName:
-        AccessIdName, options?: TenantAccessGetOptionalParams):
+        string, options?: TenantAccessGetOptionalParams):
         Promise<TenantAccessGetResponse>
       parameters:
         - id: resourceGroupName
@@ -73,21 +72,20 @@ methods:
           type: string
           description: The name of the API Management service.
         - id: accessName
-          type: <xref uid="@azure/arm-apimanagement.AccessIdName" />
+          type: string
           description: The identifier of the Access configuration.
         - id: options
           type: >-
             <xref uid="@azure/arm-apimanagement.TenantAccessGetOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/arm-apimanagement.TenantAccessGetResponse" />&gt;
   - name: >-
-      getEntityTag(string, string, AccessIdName,
+      getEntityTag(string, string, string,
       TenantAccessGetEntityTagOptionalParams)
     uid: '@azure/arm-apimanagement.TenantAccess.getEntityTag'
     package: '@azure/arm-apimanagement'
@@ -97,9 +95,8 @@ methods:
     syntax:
       content: >-
         function getEntityTag(resourceGroupName: string, serviceName: string,
-        accessName: AccessIdName, options?:
-        TenantAccessGetEntityTagOptionalParams):
-        Promise<TenantAccessGetEntityTagResponse>
+        accessName: string, options?: TenantAccessGetEntityTagOptionalParams):
+        Promise<TenantAccessGetEntityTagHeaders>
       parameters:
         - id: resourceGroupName
           type: string
@@ -108,21 +105,20 @@ methods:
           type: string
           description: The name of the API Management service.
         - id: accessName
-          type: <xref uid="@azure/arm-apimanagement.AccessIdName" />
+          type: string
           description: The identifier of the Access configuration.
         - id: options
           type: >-
             <xref
             uid="@azure/arm-apimanagement.TenantAccessGetEntityTagOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           Promise&lt;<xref
-          uid="@azure/arm-apimanagement.TenantAccessGetEntityTagResponse" />&gt;
-  - name: 'listByService(string, string, TenantAccessListByServiceOptionalParams)'
+          uid="@azure/arm-apimanagement.TenantAccessGetEntityTagHeaders" />&gt;
+  - name: listByService(string, string, TenantAccessListByServiceOptionalParams)
     uid: '@azure/arm-apimanagement.TenantAccess.listByService'
     package: '@azure/arm-apimanagement'
     summary: Returns list of access infos - for Git and Management endpoints.
@@ -132,7 +128,8 @@ methods:
       content: >-
         function listByService(resourceGroupName: string, serviceName: string,
         options?: TenantAccessListByServiceOptionalParams):
-        PagedAsyncIterableIterator<AccessInformationContract>
+        PagedAsyncIterableIterator<AccessInformationContract,
+        AccessInformationContract[], PageSettings>
       parameters:
         - id: resourceGroupName
           type: string
@@ -145,16 +142,15 @@ methods:
             <xref
             uid="@azure/arm-apimanagement.TenantAccessListByServiceOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/arm-apimanagement.AccessInformationContract" />&gt;
-  - name: >-
-      listSecrets(string, string, AccessIdName,
-      TenantAccessListSecretsOptionalParams)
+          uid="@azure/arm-apimanagement.AccessInformationContract" />, <xref
+          uid="@azure/arm-apimanagement.AccessInformationContract" />[],
+          PageSettings&gt;
+  - name: listSecrets(string, string, string, TenantAccessListSecretsOptionalParams)
     uid: '@azure/arm-apimanagement.TenantAccess.listSecrets'
     package: '@azure/arm-apimanagement'
     summary: Get tenant access information details.
@@ -163,8 +159,7 @@ methods:
     syntax:
       content: >-
         function listSecrets(resourceGroupName: string, serviceName: string,
-        accessName: AccessIdName, options?:
-        TenantAccessListSecretsOptionalParams):
+        accessName: string, options?: TenantAccessListSecretsOptionalParams):
         Promise<TenantAccessListSecretsResponse>
       parameters:
         - id: resourceGroupName
@@ -174,22 +169,21 @@ methods:
           type: string
           description: The name of the API Management service.
         - id: accessName
-          type: <xref uid="@azure/arm-apimanagement.AccessIdName" />
+          type: string
           description: The identifier of the Access configuration.
         - id: options
           type: >-
             <xref
             uid="@azure/arm-apimanagement.TenantAccessListSecretsOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           Promise&lt;<xref
           uid="@azure/arm-apimanagement.TenantAccessListSecretsResponse" />&gt;
   - name: >-
-      regeneratePrimaryKey(string, string, AccessIdName,
+      regeneratePrimaryKey(string, string, string,
       TenantAccessRegeneratePrimaryKeyOptionalParams)
     uid: '@azure/arm-apimanagement.TenantAccess.regeneratePrimaryKey'
     package: '@azure/arm-apimanagement'
@@ -199,7 +193,7 @@ methods:
     syntax:
       content: >-
         function regeneratePrimaryKey(resourceGroupName: string, serviceName:
-        string, accessName: AccessIdName, options?:
+        string, accessName: string, options?:
         TenantAccessRegeneratePrimaryKeyOptionalParams): Promise<void>
       parameters:
         - id: resourceGroupName
@@ -209,20 +203,19 @@ methods:
           type: string
           description: The name of the API Management service.
         - id: accessName
-          type: <xref uid="@azure/arm-apimanagement.AccessIdName" />
+          type: string
           description: The identifier of the Access configuration.
         - id: options
           type: >-
             <xref
             uid="@azure/arm-apimanagement.TenantAccessRegeneratePrimaryKeyOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
   - name: >-
-      regenerateSecondaryKey(string, string, AccessIdName,
+      regenerateSecondaryKey(string, string, string,
       TenantAccessRegenerateSecondaryKeyOptionalParams)
     uid: '@azure/arm-apimanagement.TenantAccess.regenerateSecondaryKey'
     package: '@azure/arm-apimanagement'
@@ -232,7 +225,7 @@ methods:
     syntax:
       content: >-
         function regenerateSecondaryKey(resourceGroupName: string, serviceName:
-        string, accessName: AccessIdName, options?:
+        string, accessName: string, options?:
         TenantAccessRegenerateSecondaryKeyOptionalParams): Promise<void>
       parameters:
         - id: resourceGroupName
@@ -242,21 +235,20 @@ methods:
           type: string
           description: The name of the API Management service.
         - id: accessName
-          type: <xref uid="@azure/arm-apimanagement.AccessIdName" />
+          type: string
           description: The identifier of the Access configuration.
         - id: options
           type: >-
             <xref
             uid="@azure/arm-apimanagement.TenantAccessRegenerateSecondaryKeyOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
   - name: >-
-      update(string, string, AccessIdName, string,
-      AccessInformationUpdateParameters, TenantAccessUpdateOptionalParams)
+      update(string, string, string, string, AccessInformationUpdateParameters,
+      TenantAccessUpdateOptionalParams)
     uid: '@azure/arm-apimanagement.TenantAccess.update'
     package: '@azure/arm-apimanagement'
     summary: Update tenant access information details.
@@ -265,7 +257,7 @@ methods:
     syntax:
       content: >-
         function update(resourceGroupName: string, serviceName: string,
-        accessName: AccessIdName, ifMatch: string, parameters:
+        accessName: string, ifMatch: string, parameters:
         AccessInformationUpdateParameters, options?:
         TenantAccessUpdateOptionalParams): Promise<TenantAccessUpdateResponse>
       parameters:
@@ -276,7 +268,7 @@ methods:
           type: string
           description: The name of the API Management service.
         - id: accessName
-          type: <xref uid="@azure/arm-apimanagement.AccessIdName" />
+          type: string
           description: The identifier of the Access configuration.
         - id: ifMatch
           type: string
@@ -293,8 +285,7 @@ methods:
           type: >-
             <xref
             uid="@azure/arm-apimanagement.TenantAccessUpdateOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-

@@ -12,11 +12,15 @@ classes:
   - '@azure/storage-file-share.AccountSASServices'
   - '@azure/storage-file-share.AnonymousCredential'
   - '@azure/storage-file-share.AnonymousCredentialPolicy'
+  - '@azure/storage-file-share.BaseRequestPolicy'
+  - '@azure/storage-file-share.Credential'
   - '@azure/storage-file-share.CredentialPolicy'
-  - '@azure/storage-file-share.Credential_2'
   - '@azure/storage-file-share.FileSASPermissions'
   - '@azure/storage-file-share.FileSystemAttributes'
+  - '@azure/storage-file-share.HttpHeaders'
   - '@azure/storage-file-share.Pipeline'
+  - '@azure/storage-file-share.RequestPolicyOptions'
+  - '@azure/storage-file-share.RestError'
   - '@azure/storage-file-share.SASQueryParameters'
   - '@azure/storage-file-share.ShareClient'
   - '@azure/storage-file-share.ShareDirectoryClient'
@@ -26,12 +30,11 @@ classes:
   - '@azure/storage-file-share.ShareServiceClient'
   - '@azure/storage-file-share.StorageBrowserPolicy'
   - '@azure/storage-file-share.StorageBrowserPolicyFactory'
-  - '@azure/storage-file-share.StorageClient'
-  - '@azure/storage-file-share.StorageClientContext'
   - '@azure/storage-file-share.StorageRetryPolicy'
   - '@azure/storage-file-share.StorageRetryPolicyFactory'
   - '@azure/storage-file-share.StorageSharedKeyCredential'
   - '@azure/storage-file-share.StorageSharedKeyCredentialPolicy'
+  - '@azure/storage-file-share.WebResource'
 interfaces:
   - '@azure/storage-file-share.AccessPolicy'
   - '@azure/storage-file-share.AccountSASSignatureValues'
@@ -117,6 +120,8 @@ interfaces:
   - '@azure/storage-file-share.FilesAndDirectoriesListSegment'
   - '@azure/storage-file-share.HandleItem'
   - '@azure/storage-file-share.HttpAuthorization'
+  - '@azure/storage-file-share.HttpOperationResponse'
+  - '@azure/storage-file-share.IHttpClient'
   - '@azure/storage-file-share.LeaseAccessConditions'
   - '@azure/storage-file-share.LeaseOperationOptions'
   - '@azure/storage-file-share.LeaseOperationResponseHeaders'
@@ -127,8 +132,9 @@ interfaces:
   - '@azure/storage-file-share.Metadata'
   - '@azure/storage-file-share.Metrics'
   - '@azure/storage-file-share.PipelineOptions'
+  - '@azure/storage-file-share.Range'
   - '@azure/storage-file-share.RangeModel'
-  - '@azure/storage-file-share.Range_2'
+  - '@azure/storage-file-share.RequestPolicy'
   - '@azure/storage-file-share.RetentionPolicy'
   - '@azure/storage-file-share.SasIPRange'
   - '@azure/storage-file-share.ServiceGenerateAccountSasUrlOptions'
@@ -180,7 +186,6 @@ interfaces:
   - '@azure/storage-file-share.SignedIdentifierModel'
   - '@azure/storage-file-share.SmbMultichannel'
   - '@azure/storage-file-share.SourceModifiedAccessConditions'
-  - '@azure/storage-file-share.StorageClientOptionalParams'
   - '@azure/storage-file-share.StoragePipelineOptions'
   - '@azure/storage-file-share.StorageRetryOptions'
 typeAliases:
@@ -215,12 +220,14 @@ typeAliases:
   - '@azure/storage-file-share.FileStartCopyResponse'
   - '@azure/storage-file-share.FileUploadRangeFromURLResponse'
   - '@azure/storage-file-share.FileUploadRangeResponse'
+  - '@azure/storage-file-share.HttpRequestBody'
   - '@azure/storage-file-share.LeaseDurationType'
   - '@azure/storage-file-share.LeaseOperationResponse'
   - '@azure/storage-file-share.LeaseStateType'
   - '@azure/storage-file-share.LeaseStatusType'
   - '@azure/storage-file-share.ListSharesIncludeType'
   - '@azure/storage-file-share.PermissionCopyModeType'
+  - '@azure/storage-file-share.RequestPolicyFactory'
   - '@azure/storage-file-share.ServiceGetPropertiesResponse'
   - '@azure/storage-file-share.ServiceListSharesSegmentResponse'
   - '@azure/storage-file-share.ServiceSetPropertiesResponse'
@@ -245,6 +252,31 @@ typeAliases:
   - '@azure/storage-file-share.TimeNowType'
   - '@azure/storage-file-share.TimePreserveType'
 functions:
+  - name: deserializationPolicy(DeserializationContentTypes, SerializerOptions)
+    uid: '@azure/storage-file-share.deserializationPolicy'
+    package: '@azure/storage-file-share'
+    summary: >-
+      Create a new serialization RequestPolicyCreator that will serialized HTTP
+      request bodies as they
+
+      pass through the HTTP pipeline.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deserializationPolicy(deserializationContentTypes?:
+        DeserializationContentTypes, parsingOptions?: SerializerOptions):
+        RequestPolicyFactory
+      parameters:
+        - id: deserializationContentTypes
+          type: DeserializationContentTypes
+          description: ''
+        - id: parsingOptions
+          type: SerializerOptions
+          description: ''
+      return:
+        description: ''
+        type: <xref uid="@azure/storage-file-share.RequestPolicyFactory" />
   - name: >-
       generateAccountSASQueryParameters(AccountSASSignatureValues,
       StorageSharedKeyCredential)
@@ -253,11 +285,12 @@ functions:
     summary: >-
       ONLY AVAILABLE IN NODE.JS RUNTIME.
 
-      Generates a <xref:@azure/storage-file-share.SASQueryParameters> object
-      which contains all SAS query parameters needed to make an actual
+
+      Generates a
+      [SASQueryParameters](xref:@azure/storage-file-share.SASQueryParameters)
+      object which contains all SAS query parameters needed to make an actual
 
       REST request.
-
 
 
       See
@@ -275,8 +308,7 @@ functions:
           description: ''
         - id: sharedKeyCredential
           type: <xref uid="@azure/storage-file-share.StorageSharedKeyCredential" />
-          description: |
-            -
+          description: ''
       return:
         description: ''
         type: <xref uid="@azure/storage-file-share.SASQueryParameters" />
@@ -285,8 +317,9 @@ functions:
       StorageSharedKeyCredential)
     uid: '@azure/storage-file-share.generateFileSASQueryParameters'
     package: '@azure/storage-file-share'
-    summary: >
+    summary: >-
       ONLY AVAILABLE IN NODE.JS RUNTIME.
+
 
       Creates an instance of SASQueryParameters.
 
@@ -315,20 +348,19 @@ functions:
       parameters:
         - id: fileSASSignatureValues
           type: <xref uid="@azure/storage-file-share.FileSASSignatureValues" />
-          description: '-'
+          description: ''
         - id: sharedKeyCredential
           type: <xref uid="@azure/storage-file-share.StorageSharedKeyCredential" />
-          description: |
-            -
+          description: ''
       return:
         description: ''
         type: <xref uid="@azure/storage-file-share.SASQueryParameters" />
-  - name: 'newPipeline(Credential_2, StoragePipelineOptions)'
+  - name: newPipeline(Credential_2, StoragePipelineOptions)
     uid: '@azure/storage-file-share.newPipeline'
     package: '@azure/storage-file-share'
     summary: >-
-      Creates a new <xref:@azure/storage-file-share.Pipeline> object with
-      <xref:@azure/storage-file-share.AnonymousCredential> provided.
+      Creates a new [Pipeline](xref:@azure/storage-file-share.Pipeline) object
+      with [Credential](xref:@azure/storage-file-share.Credential) provided.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -337,8 +369,8 @@ functions:
         StoragePipelineOptions): Pipeline
       parameters:
         - id: credential
-          type: <xref uid="@azure/storage-file-share.Credential_2" />
-          description: 'Such as AnonymousCredential, StorageSharedKeyCredential.'
+          type: <xref uid="@azure/storage-file-share.Credential" />
+          description: Such as AnonymousCredential, StorageSharedKeyCredential.
         - id: pipelineOptions
           type: <xref uid="@azure/storage-file-share.StoragePipelineOptions" />
           description: Optional. Options.

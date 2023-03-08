@@ -1,0 +1,220 @@
+### YamlMime:TSType
+name: TaskExecutionInformation
+uid: '@azure/batch.BatchServiceModels.TaskExecutionInformation'
+package: '@azure/batch'
+summary: An interface representing TaskExecutionInformation.
+fullName: TaskExecutionInformation
+remarks: ''
+isDeprecated: false
+type: interface
+properties:
+  - name: containerInfo
+    uid: '@azure/batch.BatchServiceModels.TaskExecutionInformation.containerInfo'
+    package: '@azure/batch'
+    summary: >-
+      Information about the container under which the Task is executing. This
+      property is set only
+
+      if the Task runs in a container context.
+    fullName: containerInfo
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'containerInfo?: TaskContainerExecutionInformation'
+      return:
+        description: ''
+        type: >-
+          <xref
+          uid="@azure/batch.BatchServiceModels.TaskContainerExecutionInformation"
+          />
+  - name: endTime
+    uid: '@azure/batch.BatchServiceModels.TaskExecutionInformation.endTime'
+    package: '@azure/batch'
+    summary: >-
+      The time at which the Task completed. This property is set only if the
+      Task is in the
+
+      Completed state.
+    fullName: endTime
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'endTime?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: exitCode
+    uid: '@azure/batch.BatchServiceModels.TaskExecutionInformation.exitCode'
+    package: '@azure/batch'
+    summary: >-
+      The exit code of the program specified on the Task command line. This
+      property is set only if
+
+      the Task is in the completed state. In general, the exit code for a
+      process reflects the
+
+      specific convention implemented by the application developer for that
+      process. If you use the
+
+      exit code value to make decisions in your code, be sure that you know the
+      exit code convention
+
+      used by the application process. However, if the Batch service terminates
+      the Task (due to
+
+      timeout, or user termination via the API) you may see an operating
+      system-defined exit code.
+    fullName: exitCode
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'exitCode?: number'
+      return:
+        description: ''
+        type: number
+  - name: failureInfo
+    uid: '@azure/batch.BatchServiceModels.TaskExecutionInformation.failureInfo'
+    package: '@azure/batch'
+    summary: >-
+      Information describing the Task failure, if any. This property is set only
+      if the Task is in
+
+      the completed state and encountered a failure.
+    fullName: failureInfo
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'failureInfo?: TaskFailureInformation'
+      return:
+        description: ''
+        type: <xref uid="@azure/batch.BatchServiceModels.TaskFailureInformation" />
+  - name: lastRequeueTime
+    uid: '@azure/batch.BatchServiceModels.TaskExecutionInformation.lastRequeueTime'
+    package: '@azure/batch'
+    summary: >-
+      The most recent time at which the Task has been requeued by the Batch
+      service as the result of
+
+      a user request. This property is set only if the requeueCount is nonzero.
+    fullName: lastRequeueTime
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'lastRequeueTime?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: lastRetryTime
+    uid: '@azure/batch.BatchServiceModels.TaskExecutionInformation.lastRetryTime'
+    package: '@azure/batch'
+    summary: >-
+      The most recent time at which a retry of the Task started running. This
+      element is present
+
+      only if the Task was retried (i.e. retryCount is nonzero). If present,
+      this is typically the
+
+      same as startTime, but may be different if the Task has been restarted for
+      reasons other than
+
+      retry; for example, if the Compute Node was rebooted during a retry, then
+      the startTime is
+
+      updated but the lastRetryTime is not.
+    fullName: lastRetryTime
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'lastRetryTime?: Date'
+      return:
+        description: ''
+        type: Date
+  - name: requeueCount
+    uid: '@azure/batch.BatchServiceModels.TaskExecutionInformation.requeueCount'
+    package: '@azure/batch'
+    summary: >-
+      The number of times the Task has been requeued by the Batch service as the
+      result of a user
+
+      request. When the user removes Compute Nodes from a Pool (by
+      resizing/shrinking the pool) or
+
+      when the Job is being disabled, the user can specify that running Tasks on
+      the Compute Nodes
+
+      be requeued for execution. This count tracks how many times the Task has
+      been requeued for
+
+      these reasons.
+    fullName: requeueCount
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'requeueCount: number'
+      return:
+        description: ''
+        type: number
+  - name: result
+    uid: '@azure/batch.BatchServiceModels.TaskExecutionInformation.result'
+    package: '@azure/batch'
+    summary: >-
+      The result of the Task execution. If the value is 'failed', then the
+      details of the failure
+
+      can be found in the failureInfo property. Possible values include:
+      'success', 'failure'
+    fullName: result
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'result?: TaskExecutionResult'
+      return:
+        description: ''
+        type: <xref uid="@azure/batch.BatchServiceModels.TaskExecutionResult" />
+  - name: retryCount
+    uid: '@azure/batch.BatchServiceModels.TaskExecutionInformation.retryCount'
+    package: '@azure/batch'
+    summary: >-
+      The number of times the Task has been retried by the Batch service. Task
+      application failures
+
+      (non-zero exit code) are retried, pre-processing errors (the Task could
+      not be run) and file
+
+      upload errors are not retried. The Batch service will retry the Task up to
+      the limit specified
+
+      by the constraints.
+    fullName: retryCount
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'retryCount: number'
+      return:
+        description: ''
+        type: number
+  - name: startTime
+    uid: '@azure/batch.BatchServiceModels.TaskExecutionInformation.startTime'
+    package: '@azure/batch'
+    summary: >-
+      The time at which the Task started running. 'Running' corresponds to the
+      running state, so if
+
+      the Task specifies resource files or Packages, then the start time
+      reflects the time at which
+
+      the Task started downloading or deploying these. If the Task has been
+      restarted or retried,
+
+      this is the most recent time at which the Task started running. This
+      property is present only
+
+      for Tasks that are in the running or completed state.
+    fullName: startTime
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'startTime?: Date'
+      return:
+        description: ''
+        type: Date

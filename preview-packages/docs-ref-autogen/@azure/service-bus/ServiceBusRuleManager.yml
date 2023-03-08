@@ -6,15 +6,15 @@ summary: >-
   Allows rules for a subscription to be managed. This rule manager requires only
   Listen claims, whereas the
 
-  <xref:@azure/service-bus.ServiceBusAdministrationClient> requires Manage
-  claims.
+  [ServiceBusAdministrationClient](xref:@azure/service-bus.ServiceBusAdministrationClient)
+  requires Manage claims.
 fullName: ServiceBusRuleManager
 remarks: ''
 isDeprecated: false
 type: interface
 methods:
   - name: >-
-      createRule(string, SqlRuleFilter | CorrelationRuleFilter,
+      createRule(string, CorrelationRuleFilter | SqlRuleFilter,
       OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusRuleManager.createRule'
     package: '@azure/service-bus'
@@ -25,27 +25,27 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createRule(ruleName: string, filter: SqlRuleFilter |
-        CorrelationRuleFilter, options?: OperationOptionsBase): Promise<void>
+        function createRule(ruleName: string, filter: CorrelationRuleFilter |
+        SqlRuleFilter, options?: OperationOptionsBase): Promise<void>
       parameters:
         - id: ruleName
           type: string
           description: the name of the rule
         - id: filter
           type: >-
-            <xref uid="@azure/service-bus.SqlRuleFilter" /> | <xref
-            uid="@azure/service-bus.CorrelationRuleFilter" />
+            <xref uid="@azure/service-bus.CorrelationRuleFilter" /> | <xref
+            uid="@azure/service-bus.SqlRuleFilter" />
           description: the filter expression that the rule evaluates.
         - id: options
           type: <xref uid="@azure/service-bus.OperationOptionsBase" />
-          description: >
+          description: >-
             The options that can be used to abort, trace and control other
             configurations on the request.
       return:
         description: ''
         type: Promise&lt;void&gt;
   - name: >-
-      createRule(string, SqlRuleFilter | CorrelationRuleFilter, SqlRuleAction,
+      createRule(string, CorrelationRuleFilter | SqlRuleFilter, SqlRuleAction,
       OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusRuleManager.createRule_1'
     package: '@azure/service-bus'
@@ -56,8 +56,8 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createRule(ruleName: string, filter: SqlRuleFilter |
-        CorrelationRuleFilter, ruleAction?: SqlRuleAction, options?:
+        function createRule(ruleName: string, filter: CorrelationRuleFilter |
+        SqlRuleFilter, ruleAction?: SqlRuleAction, options?:
         OperationOptionsBase): Promise<void>
       parameters:
         - id: ruleName
@@ -65,8 +65,8 @@ methods:
           description: the name of the rule
         - id: filter
           type: >-
-            <xref uid="@azure/service-bus.SqlRuleFilter" /> | <xref
-            uid="@azure/service-bus.CorrelationRuleFilter" />
+            <xref uid="@azure/service-bus.CorrelationRuleFilter" /> | <xref
+            uid="@azure/service-bus.SqlRuleFilter" />
           description: the filter expression that the rule evaluates.
         - id: ruleAction
           type: <xref uid="@azure/service-bus.SqlRuleAction" />
@@ -75,13 +75,13 @@ methods:
             the associated filter apply.
         - id: options
           type: <xref uid="@azure/service-bus.OperationOptionsBase" />
-          description: >
+          description: >-
             The options that can be used to abort, trace and control other
             configurations on the request.
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'deleteRule(string, OperationOptionsBase)'
+  - name: deleteRule(string, OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusRuleManager.deleteRule'
     package: '@azure/service-bus'
     summary: Deletes a rule.
@@ -94,8 +94,7 @@ methods:
       parameters:
         - id: ruleName
           type: string
-          description: |
-            the name of the rule
+          description: the name of the rule
         - id: options
           type: <xref uid="@azure/service-bus.OperationOptionsBase" />
           description: ''
@@ -105,22 +104,25 @@ methods:
   - name: listRules(OperationOptions)
     uid: '@azure/service-bus.ServiceBusRuleManager.listRules'
     package: '@azure/service-bus'
-    summary: |
+    summary: |-
       Returns an async iterable iterator to list all the rules
       under the specified subscription.
+
       .byPage() returns an async iterable iterator to list the rules in pages.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         function listRules(options?: OperationOptions):
-        PagedAsyncIterableIterator<RuleProperties>
+        PagedAsyncIterableIterator<RuleProperties, RuleProperties[],
+        PageSettings>
       parameters:
         - id: options
-          type: OperationOptions
+          type: <xref uid="@azure/service-bus.OperationOptions" />
           description: ''
       return:
         description: An asyncIterableIterator that supports paging.
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/service-bus.RuleProperties" />&gt;
+          uid="@azure/service-bus.RuleProperties" />, <xref
+          uid="@azure/service-bus.RuleProperties" />[], PageSettings&gt;

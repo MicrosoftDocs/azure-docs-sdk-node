@@ -3,56 +3,70 @@ uid: '@azure/msal-node'
 name: '@azure/msal-node'
 summary: ''
 type: package
-interfaces:
-  - '@azure/msal-node.ITokenCache'
-  - '@azure/msal-node.ICacheClient'
-  - '@azure/msal-node.IPartitionManager'
-  - '@azure/msal-node.IConfidentialClientApplication'
-  - '@azure/msal-node.IPublicClientApplication'
+enums:
+  - '@azure/msal-node.AzureCloudInstance'
+  - '@azure/msal-node.LogLevel'
+  - '@azure/msal-node.ProtocolMode'
+  - '@azure/msal-node.ResponseMode'
 classes:
-  - '@azure/msal-node.NodeStorage'
-  - '@azure/msal-node.TokenCache'
-  - '@azure/msal-node.DistributedCachePlugin'
+  - '@azure/msal-node.AuthError'
   - '@azure/msal-node.ClientApplication'
   - '@azure/msal-node.ClientAssertion'
+  - '@azure/msal-node.ClientAuthError'
+  - '@azure/msal-node.ClientConfigurationError'
   - '@azure/msal-node.ConfidentialClientApplication'
-  - '@azure/msal-node.PublicClientApplication'
   - '@azure/msal-node.CryptoProvider'
+  - '@azure/msal-node.DistributedCachePlugin'
+  - '@azure/msal-node.InteractionRequiredAuthError'
+  - '@azure/msal-node.Logger'
+  - '@azure/msal-node.NodeStorage'
+  - '@azure/msal-node.PublicClientApplication'
+  - '@azure/msal-node.ServerError'
+  - '@azure/msal-node.TokenCache'
+  - '@azure/msal-node.TokenCacheContext'
+interfaces:
+  - '@azure/msal-node.IAppTokenProvider'
+  - '@azure/msal-node.ICacheClient'
+  - '@azure/msal-node.ICachePlugin'
+  - '@azure/msal-node.IConfidentialClientApplication'
+  - '@azure/msal-node.INetworkModule'
+  - '@azure/msal-node.IPartitionManager'
+  - '@azure/msal-node.IPublicClientApplication'
+  - '@azure/msal-node.ISerializableTokenCache'
+  - '@azure/msal-node.ITokenCache'
 typeAliases:
+  - '@azure/msal-node.AccountInfo'
+  - '@azure/msal-node.AppTokenProviderParameters'
+  - '@azure/msal-node.AppTokenProviderResult'
+  - '@azure/msal-node.AuthenticationResult'
+  - '@azure/msal-node.AuthorizationCodePayload'
+  - '@azure/msal-node.AuthorizationCodeRequest'
+  - '@azure/msal-node.AuthorizationUrlRequest'
+  - '@azure/msal-node.AzureCloudOptions'
   - '@azure/msal-node.CacheKVStore'
+  - '@azure/msal-node.CacheOptions'
+  - '@azure/msal-node.ClientCredentialRequest'
+  - '@azure/msal-node.Configuration'
+  - '@azure/msal-node.DeviceCodeRequest'
   - '@azure/msal-node.InMemoryCache'
+  - '@azure/msal-node.InteractiveRequest'
   - '@azure/msal-node.JsonCache'
+  - '@azure/msal-node.NetworkRequestOptions'
+  - '@azure/msal-node.NetworkResponse'
+  - '@azure/msal-node.NodeAuthOptions'
+  - '@azure/msal-node.NodeSystemOptions'
+  - '@azure/msal-node.OnBehalfOfRequest'
+  - '@azure/msal-node.RefreshTokenRequest'
   - '@azure/msal-node.SerializedAccessTokenEntity'
   - '@azure/msal-node.SerializedAccountEntity'
   - '@azure/msal-node.SerializedAppMetadataEntity'
   - '@azure/msal-node.SerializedIdTokenEntity'
   - '@azure/msal-node.SerializedRefreshTokenEntity'
-  - '@azure/msal-node.CacheOptions'
-  - '@azure/msal-node.Configuration'
-  - '@azure/msal-node.NodeAuthOptions'
-  - '@azure/msal-node.NodeConfiguration'
-  - '@azure/msal-node.NodeSystemOptions'
-  - '@azure/msal-node.NodeTelemetryOptions'
-  - '@azure/msal-node.AuthorizationCodeRequest'
-  - '@azure/msal-node.AuthorizationUrlRequest'
-  - '@azure/msal-node.ClientCredentialRequest'
-  - '@azure/msal-node.DeviceCodeRequest'
-  - '@azure/msal-node.InteractiveRequest'
-  - '@azure/msal-node.OnBehalfOfRequest'
-  - '@azure/msal-node.RefreshTokenRequest'
   - '@azure/msal-node.SilentFlowRequest'
   - '@azure/msal-node.UsernamePasswordRequest'
+  - '@azure/msal-node.ValidCacheType'
 functions:
-  - name: >-
-      buildAppConfiguration({ auth: { authority?: string, authorityMetadata?:
-      string, azureCloudOptions?: AzureCloudOptions, clientAssertion?: string,
-      clientCapabilities?: Array<string>, clientCertificate?: { privateKey:
-      string, thumbprint: string, x5c?: string }, clientId: string,
-      clientSecret?: string, cloudDiscoveryMetadata?: string, knownAuthorities?:
-      Array<string>, protocolMode?: ProtocolMode, skipAuthorityMetadataCache?:
-      boolean }, cache: { cachePlugin?: ICachePlugin }, system: {
-      loggerOptions?: LoggerOptions, networkClient?: INetworkModule, proxyUrl?:
-      string }, telemetry: { application?: ApplicationTelemetry } })
+  - name: buildAppConfiguration(Configuration)
     uid: '@azure/msal-node.buildAppConfiguration'
     package: '@azure/msal-node'
     summary: Sets the default options when not explicitly configured from app developer
@@ -60,30 +74,12 @@ functions:
     isDeprecated: false
     syntax:
       content: >-
-        function buildAppConfiguration(__namedParameters: { auth: { authority?:
-        string, authorityMetadata?: string, azureCloudOptions?:
-        AzureCloudOptions, clientAssertion?: string, clientCapabilities?:
-        Array<string>, clientCertificate?: { privateKey: string, thumbprint:
-        string, x5c?: string }, clientId: string, clientSecret?: string,
-        cloudDiscoveryMetadata?: string, knownAuthorities?: Array<string>,
-        protocolMode?: ProtocolMode, skipAuthorityMetadataCache?: boolean },
-        cache: { cachePlugin?: ICachePlugin }, system: { loggerOptions?:
-        LoggerOptions, networkClient?: INetworkModule, proxyUrl?: string },
-        telemetry: { application?: ApplicationTelemetry } }): NodeConfiguration
+        function buildAppConfiguration(__namedParameters: Configuration):
+        NodeConfiguration
       parameters:
         - id: __namedParameters
-          type: >-
-            { auth: { authority?: string, authorityMetadata?: string,
-            azureCloudOptions?: AzureCloudOptions, clientAssertion?: string,
-            clientCapabilities?: Array&lt;string&gt;, clientCertificate?: {
-            privateKey: string, thumbprint: string, x5c?: string }, clientId:
-            string, clientSecret?: string, cloudDiscoveryMetadata?: string,
-            knownAuthorities?: Array&lt;string&gt;, protocolMode?: ProtocolMode,
-            skipAuthorityMetadataCache?: boolean }, cache: { cachePlugin?:
-            ICachePlugin }, system: { loggerOptions?: LoggerOptions,
-            networkClient?: INetworkModule, proxyUrl?: string }, telemetry: {
-            application?: ApplicationTelemetry } }
+          type: <xref uid="@azure/msal-node.Configuration" />
           description: ''
       return:
         description: Configuration
-        type: <xref uid="@azure/msal-node.NodeConfiguration" />
+        type: NodeConfiguration

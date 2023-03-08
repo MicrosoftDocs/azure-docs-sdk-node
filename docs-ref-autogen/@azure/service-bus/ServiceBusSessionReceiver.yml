@@ -2,7 +2,7 @@
 name: ServiceBusSessionReceiver
 uid: '@azure/service-bus.ServiceBusSessionReceiver'
 package: '@azure/service-bus'
-summary: 'A receiver that handles sessions, including renewing the session lock.'
+summary: A receiver that handles sessions, including renewing the session lock.
 fullName: ServiceBusSessionReceiver
 remarks: ''
 isDeprecated: false
@@ -23,13 +23,14 @@ properties:
   - name: sessionLockedUntilUtc
     uid: '@azure/service-bus.ServiceBusSessionReceiver.sessionLockedUntilUtc'
     package: '@azure/service-bus'
-    summary: >
+    summary: >-
       The time in UTC until which the session is locked.
 
       Every time `renewSessionLock()` is called, this time gets updated to
       current time plus the lock
 
       duration as specified during the Queue/Subscription creation.
+
 
       Will return undefined until a AMQP receiver link has been successfully set
       up for the session.
@@ -109,7 +110,7 @@ inheritedProperties:
       <b>Inherited From</b>
       [ServiceBusReceiver.receiveMode](xref:@azure/service-bus.ServiceBusReceiver.receiveMode)
 inheritedMethods:
-  - name: 'abandonMessage(ServiceBusReceivedMessage, [key: string]: function)'
+  - name: 'abandonMessage(ServiceBusReceivedMessage, {[key: string]: function})'
     uid: '@azure/service-bus.ServiceBusSessionReceiver.abandonMessage'
     package: '@azure/service-bus'
     summary: >-
@@ -122,14 +123,14 @@ inheritedMethods:
     syntax:
       content: >-
         function abandonMessage(message: ServiceBusReceivedMessage,
-        propertiesToModify?: [key: string]: function): Promise<void>
+        propertiesToModify?: {[key: string]: function}): Promise<void>
       parameters:
         - id: message
           type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
           description: ''
         - id: propertiesToModify
-          type: '[key: string]\: function'
-          description: >
+          type: '{[key: string]: function}'
+          description: >-
             The properties of the message to modify while abandoning the
             message.
       return:
@@ -179,8 +180,8 @@ inheritedMethods:
       <b>Inherited From</b>
       [ServiceBusReceiver.completeMessage](xref:@azure/service-bus.ServiceBusReceiver.completeMessage)
   - name: >-
-      deadLetterMessage(ServiceBusReceivedMessage, DeadLetterOptions & [key:
-      string]: function)
+      deadLetterMessage(ServiceBusReceivedMessage, DeadLetterOptions & {[key:
+      string]: function})
     uid: '@azure/service-bus.ServiceBusSessionReceiver.deadLetterMessage'
     package: '@azure/service-bus'
     summary: >-
@@ -194,16 +195,16 @@ inheritedMethods:
     syntax:
       content: >-
         function deadLetterMessage(message: ServiceBusReceivedMessage, options?:
-        DeadLetterOptions & [key: string]: function): Promise<void>
+        DeadLetterOptions & {[key: string]: function}): Promise<void>
       parameters:
         - id: message
           type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
           description: ''
         - id: options
           type: >-
-            <xref uid="@azure/service-bus.DeadLetterOptions" /> & [key: string]:
-            function
-          description: |
+            <xref uid="@azure/service-bus.DeadLetterOptions" /> & {[key:
+            string]: function}
+          description: |-
             The DeadLetter options that can be provided while
             rejecting the message.
       return:
@@ -212,7 +213,7 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [ServiceBusReceiver.deadLetterMessage](xref:@azure/service-bus.ServiceBusReceiver.deadLetterMessage)
-  - name: 'deferMessage(ServiceBusReceivedMessage, [key: string]: function)'
+  - name: 'deferMessage(ServiceBusReceivedMessage, {[key: string]: function})'
     uid: '@azure/service-bus.ServiceBusSessionReceiver.deferMessage'
     package: '@azure/service-bus'
     summary: >-
@@ -226,15 +227,14 @@ inheritedMethods:
     syntax:
       content: >-
         function deferMessage(message: ServiceBusReceivedMessage,
-        propertiesToModify?: [key: string]: function): Promise<void>
+        propertiesToModify?: {[key: string]: function}): Promise<void>
       parameters:
         - id: message
           type: <xref uid="@azure/service-bus.ServiceBusReceivedMessage" />
           description: ''
         - id: propertiesToModify
-          type: '[key: string]\: function'
-          description: |
-            The properties of the message to modify while deferring the message
+          type: '{[key: string]: function}'
+          description: The properties of the message to modify while deferring the message
       return:
         description: ''
         type: Promise&lt;void&gt;
@@ -254,7 +254,7 @@ inheritedMethods:
       parameters:
         - id: options
           type: <xref uid="@azure/service-bus.GetMessageIteratorOptions" />
-          description: |
+          description: |-
             A set of options to control the receive operation.
             - `abortSignal`: The signal to use to abort the ongoing operation.
       return:
@@ -265,7 +265,7 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [ServiceBusReceiver.getMessageIterator](xref:@azure/service-bus.ServiceBusReceiver.getMessageIterator)
-  - name: 'peekMessages(number, PeekMessagesOptions)'
+  - name: peekMessages(number, PeekMessagesOptions)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.peekMessages'
     package: '@azure/service-bus'
     summary: >-
@@ -295,7 +295,7 @@ inheritedMethods:
           description: The maximum number of messages to peek.
         - id: options
           type: <xref uid="@azure/service-bus.PeekMessagesOptions" />
-          description: >
+          description: >-
             Options that allow to specify the maximum number of messages to
             peek,
 
@@ -309,7 +309,7 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [ServiceBusReceiver.peekMessages](xref:@azure/service-bus.ServiceBusReceiver.peekMessages)
-  - name: 'receiveDeferredMessages(Long | Long[], OperationOptionsBase)'
+  - name: receiveDeferredMessages(any, OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.receiveDeferredMessages'
     package: '@azure/service-bus'
     summary: >-
@@ -319,11 +319,11 @@ inheritedMethods:
     isDeprecated: false
     syntax:
       content: >-
-        function receiveDeferredMessages(sequenceNumbers: Long | Long[],
-        options?: OperationOptionsBase): Promise<ServiceBusReceivedMessage[]>
+        function receiveDeferredMessages(sequenceNumbers: any, options?:
+        OperationOptionsBase): Promise<ServiceBusReceivedMessage[]>
       parameters:
         - id: sequenceNumbers
-          type: 'Long | Long[]'
+          type: any
           description: >-
             The sequence number or an array of sequence numbers for the messages
             that need to be received.
@@ -340,7 +340,7 @@ inheritedMethods:
     inheritanceDescription: >-
       <b>Inherited From</b>
       [ServiceBusReceiver.receiveDeferredMessages](xref:@azure/service-bus.ServiceBusReceiver.receiveDeferredMessages)
-  - name: 'receiveMessages(number, ReceiveMessagesOptions)'
+  - name: receiveMessages(number, ReceiveMessagesOptions)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.receiveMessages'
     package: '@azure/service-bus'
     summary: >-
@@ -415,7 +415,7 @@ methods:
     summary: >-
       Gets the state of the Session. For more on session states, see
 
-      [| Session
+      [Session
       State](https://docs.microsoft.com/azure/service-bus-messaging/message-sessions#message-session-state)
     remarks: ''
     isDeprecated: false
@@ -443,13 +443,13 @@ methods:
       return:
         description: ''
         type: Promise&lt;Date&gt;
-  - name: 'setSessionState(any, OperationOptionsBase)'
+  - name: setSessionState(any, OperationOptionsBase)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.setSessionState'
     package: '@azure/service-bus'
     summary: >-
       Sets the state on the Session. For more on session states, see
 
-      [| Session
+      [Session
       State](https://docs.microsoft.com/azure/service-bus-messaging/message-sessions#message-session-state)
     remarks: ''
     isDeprecated: false
@@ -467,7 +467,7 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'subscribe(MessageHandlers, SubscribeOptions)'
+  - name: subscribe(MessageHandlers, SubscribeOptions)
     uid: '@azure/service-bus.ServiceBusSessionReceiver.subscribe'
     package: '@azure/service-bus'
     summary: Streams messages to message handlers.

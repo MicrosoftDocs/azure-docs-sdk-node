@@ -2,15 +2,15 @@
 name: LroEngine
 uid: '@azure/core-lro.LroEngine'
 package: '@azure/core-lro'
-summary: 'The LRO Engine, a class that performs polling.'
-fullName: 'LroEngine<TResult, TState>'
+summary: The LRO Engine, a class that performs polling.
+fullName: LroEngine<TResult, TState>
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
   - name: >-
-      LroEngine(LongRunningOperation<TResult>, LroEngineOptions<TResult,
-      TState>)
+      LroEngine<TResult, TState>(LongRunningOperation<TResult>,
+      LroEngineOptions<TResult, TState>)
     uid: '@azure/core-lro.LroEngine.constructor'
     package: '@azure/core-lro'
     summary: ''
@@ -33,11 +33,12 @@ inheritedMethods:
   - name: 'cancelOperation({ abortSignal?: AbortSignalLike })'
     uid: '@azure/core-lro.LroEngine.cancelOperation'
     package: '@azure/core-lro'
-    summary: >
+    summary: >-
       Attempts to cancel the underlying operation.
 
+
       It only optionally receives an object with an abortSignal property, from
-      \@azure/abort-controller's AbortSignalLike.
+      @azure/abort-controller's AbortSignalLike.
 
 
       If it's called again before it finishes, it will throw an error.
@@ -50,8 +51,7 @@ inheritedMethods:
       parameters:
         - id: options
           type: '{ abortSignal?: AbortSignalLike }'
-          description: |
-            Optional properties passed to the operation's update method.
+          description: Optional properties passed to the operation's update method.
       return:
         description: ''
         type: Promise&lt;void&gt;
@@ -61,8 +61,9 @@ inheritedMethods:
   - name: getOperationState()
     uid: '@azure/core-lro.LroEngine.getOperationState'
     package: '@azure/core-lro'
-    summary: >
+    summary: >-
       Returns the state of the operation.
+
 
       Even though TState will be the same type inside any of the methods of any
       extension of the Poller class,
@@ -150,10 +151,10 @@ inheritedMethods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function getResult(): TResult | undefined'
+      content: 'function getResult(): undefined | TResult'
       return:
         description: ''
-        type: TResult | undefined
+        type: undefined | TResult
     inheritanceDescription: >-
       <b>Inherited From</b>
       [Poller.getResult](xref:@azure/core-lro.Poller.getResult)
@@ -168,7 +169,7 @@ inheritedMethods:
       return:
         description: ''
         type: boolean
-    inheritanceDescription: '<b>Inherited From</b> [Poller.isDone](xref:@azure/core-lro.Poller.isDone)'
+    inheritanceDescription: <b>Inherited From</b> [Poller.isDone](xref:@azure/core-lro.Poller.isDone)
   - name: isStopped()
     uid: '@azure/core-lro.LroEngine.isStopped'
     package: '@azure/core-lro'
@@ -186,10 +187,11 @@ inheritedMethods:
   - name: 'onProgress((state: TState) => void)'
     uid: '@azure/core-lro.LroEngine.onProgress'
     package: '@azure/core-lro'
-    summary: >
+    summary: >-
       Invokes the provided callback after each polling is completed,
 
       sending the current state of the poller's operation.
+
 
       It returns a method that can be used to stop receiving updates on the
       given callback function.
@@ -210,14 +212,15 @@ inheritedMethods:
   - name: 'poll({ abortSignal?: AbortSignalLike })'
     uid: '@azure/core-lro.LroEngine.poll'
     package: '@azure/core-lro'
-    summary: >
+    summary: >-
       Returns a promise that will resolve once a single polling request
       finishes.
 
       It does this by calling the update method of the Poller's operation.
 
+
       It only optionally receives an object with an abortSignal property, from
-      \@azure/abort-controller's AbortSignalLike.
+      @azure/abort-controller's AbortSignalLike.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -227,12 +230,11 @@ inheritedMethods:
       parameters:
         - id: options
           type: '{ abortSignal?: AbortSignalLike }'
-          description: |
-            Optional properties passed to the operation's update method.
+          description: Optional properties passed to the operation's update method.
       return:
         description: ''
         type: Promise&lt;void&gt;
-    inheritanceDescription: '<b>Inherited From</b> [Poller.poll](xref:@azure/core-lro.Poller.poll)'
+    inheritanceDescription: <b>Inherited From</b> [Poller.poll](xref:@azure/core-lro.Poller.poll)
   - name: 'pollUntilDone({ abortSignal?: AbortSignalLike })'
     uid: '@azure/core-lro.LroEngine.pollUntilDone'
     package: '@azure/core-lro'
@@ -296,4 +298,4 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-extends: '<xref uid="@azure/core-lro.Poller" />&lt;TState, TResult&gt;'
+extends: <xref uid="@azure/core-lro.Poller" />&lt;TState, TResult&gt;

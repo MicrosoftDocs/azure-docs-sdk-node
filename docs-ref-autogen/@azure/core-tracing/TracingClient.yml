@@ -2,11 +2,13 @@
 name: TracingClient
 uid: '@azure/core-tracing.TracingClient'
 package: '@azure/core-tracing'
-summary: >
+summary: >-
   Represents a client that can integrate with the currently configured
-  <xref:@azure/core-tracing.Instrumenter>.
+  [Instrumenter](xref:@azure/core-tracing.Instrumenter).
 
-  Create an instance using <xref:@azure/core-tracing.createTracingClient>.
+
+  Create an instance using
+  [createTracingClient](xref:@azure/core-tracing.createTracingClient).
 fullName: TracingClient
 remarks: ''
 isDeprecated: false
@@ -30,35 +32,37 @@ methods:
           description: The context containing the span to propagate.
       return:
         description: The set of headers to add to a request.
-        type: 'Record&lt;string, string&gt;'
+        type: Record&lt;string, string&gt;
   - name: parseTraceparentHeader(string)
     uid: '@azure/core-tracing.TracingClient.parseTraceparentHeader'
     package: '@azure/core-tracing'
-    summary: 'Parses a traceparent header value into a <xref:TracingSpanContext>.'
+    summary: Parses a traceparent header value into a <xref:TracingSpanContext>.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function parseTraceparentHeader(traceparentHeader: string):
-        TracingContext | undefined
+        function parseTraceparentHeader(traceparentHeader: string): undefined |
+        TracingContext
       parameters:
         - id: traceparentHeader
           type: string
           description: The traceparent header to parse.
       return:
         description: An implementation-specific identifier for the span.
-        type: <xref uid="@azure/core-tracing.TracingContext" /> | undefined
-  - name: 'startSpan<Options>(string, Options, TracingSpanOptions)'
+        type: undefined | <xref uid="@azure/core-tracing.TracingContext" />
+  - name: startSpan<Options>(string, Options, TracingSpanOptions)
     uid: '@azure/core-tracing.TracingClient.startSpan'
     package: '@azure/core-tracing'
-    summary: >
+    summary: >-
       Starts a given span but does not set it as the active span.
 
-      You must end the span using <xref:@azure/core-tracing.TracingSpan.end>.
+
+      You must end the span using
+      [end](xref:@azure/core-tracing.TracingSpan.end).
 
 
       Most of the time you will want to use
-      <xref:@azure/core-tracing.TracingClient.withSpan> instead.
+      [withSpan](xref:@azure/core-tracing.TracingClient.withSpan) instead.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -77,12 +81,11 @@ methods:
           description: The original operation options.
         - id: spanOptions
           type: <xref uid="@azure/core-tracing.TracingSpanOptions" />
-          description: |
-            The options to use when creating the span.
+          description: The options to use when creating the span.
       return:
         description: >-
-          A <xref:@azure/core-tracing.TracingSpan> and the updated operation
-          options.
+          A [TracingSpan](xref:@azure/core-tracing.TracingSpan) and the updated
+          operation options.
         type: >-
           { span: TracingSpan, updatedOptions:
           OptionsWithTracingContext&lt;Options&gt; }
@@ -91,15 +94,16 @@ methods:
       CallbackArgs)
     uid: '@azure/core-tracing.TracingClient.withContext'
     package: '@azure/core-tracing'
-    summary: >
+    summary: >-
       Wraps a callback with an active context and calls the callback.
 
       Depending on the implementation, this may set the globally available
       active context.
 
+
       Useful when you want to leave the boundaries of the SDK (make a request or
       callback to user code) and are unable to use the
-      <xref:@azure/core-tracing.TracingClient.withSpan> API.
+      [withSpan](xref:@azure/core-tracing.TracingClient.withSpan) API.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -110,8 +114,8 @@ methods:
         - id: context
           type: <xref uid="@azure/core-tracing.TracingContext" />
           description: >-
-            The <xref:@azure/core-tracing.TracingContext> to use as the active
-            context in the scope of the callback.
+            The [TracingContext](xref:@azure/core-tracing.TracingContext) to use
+            as the active context in the scope of the callback.
         - id: callback
           type: Callback
           description: >-
@@ -119,17 +123,17 @@ methods:
             globally active context.
         - id: callbackArgs
           type: CallbackArgs
-          description: |
-            The callback arguments.
+          description: The callback arguments.
       return:
         description: ''
         type: ReturnType&lt;Callback&gt;
-  - name: 'withSpan<Options, Callback>(string, Options, Callback, TracingSpanOptions)'
+  - name: withSpan<Options, Callback>(string, Options, Callback, TracingSpanOptions)
     uid: '@azure/core-tracing.TracingClient.withSpan'
     package: '@azure/core-tracing'
     summary: >-
       Wraps a callback in a tracing span, calls the callback, and closes the
       span.
+
 
       This is the primary interface for using Tracing and will handle error
       recording as well as setting the status on the span.
@@ -167,12 +171,12 @@ methods:
           description: >-
             The original options passed to the method. The callback will receive
             these options with the newly created
-            <xref:@azure/core-tracing.TracingContext>.
+            [TracingContext](xref:@azure/core-tracing.TracingContext).
         - id: callback
           type: Callback
-          description: >
+          description: >-
             The callback to be invoked with the updated options and newly
-            created <xref:@azure/core-tracing.TracingSpan>.
+            created [TracingSpan](xref:@azure/core-tracing.TracingSpan).
         - id: spanOptions
           type: <xref uid="@azure/core-tracing.TracingSpanOptions" />
           description: ''

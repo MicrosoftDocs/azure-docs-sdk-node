@@ -2,7 +2,7 @@
 name: Twin
 uid: azure-iothub.Twin
 package: azure-iothub
-summary: >
+summary: >-
   A Device Twin is document describing the state of a device that is stored by
   an Azure IoT hub and is available even if the device is offline.
 
@@ -10,6 +10,7 @@ summary: >
     - Tags: key/value pairs only accessible from the service side
     - Desired Properties: updated by a service and received by the device
     - Reported Properties: updated by the device and received by the service.
+
   Note that although it is a possibility, desired and reported properties do not
   have to match
 
@@ -28,7 +29,7 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: 'Twin(DeviceIdentity | string, Registry)'
+  - name: Twin(string | DeviceIdentity, Registry)
     uid: azure-iothub.Twin.constructor
     package: azure-iothub
     summary: >-
@@ -38,18 +39,17 @@ constructors:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'new Twin(device: DeviceIdentity | string, registryClient: Registry)'
+      content: 'new Twin(device: string | DeviceIdentity, registryClient: Registry)'
       parameters:
         - id: device
-          type: DeviceIdentity | string
+          type: string | DeviceIdentity
           description: >-
             A device identifier string or an object describing the device. If an
             Object,
                                                 it must contain a deviceId property.
         - id: registryClient
           type: <xref uid="azure-iothub.Registry" />
-          description: |
-            The HTTP registry client used to execute REST API calls.
+          description: The HTTP registry client used to execute REST API calls.
 properties:
   - name: deviceId
     uid: azure-iothub.Twin.deviceId
@@ -118,11 +118,11 @@ properties:
     isDeprecated: false
     syntax:
       content: >-
-        properties: { desired: [key: string]: any, reported: [key: string]: any
-        }
+        properties: { desired: {[key: string]: any}, reported: {[key: string]:
+        any} }
       return:
         description: ''
-        type: '{ desired: [key: string]: any, reported: [key: string]: any }'
+        type: '{ desired: {[key: string]: any}, reported: {[key: string]: any} }'
   - name: tags
     uid: azure-iothub.Twin.tags
     package: azure-iothub
@@ -133,10 +133,10 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'tags: [key: string]: string'
+      content: 'tags: {[key: string]: string}'
       return:
         description: ''
-        type: '[key: string]\: string'
+        type: '{[key: string]: string}'
 methods:
   - name: get()
     uid: azure-iothub.Twin.get_1
@@ -149,8 +149,8 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;<xref uid="azure-iothub.Twin" />&gt;&gt;
+          Promise&lt;ResultWithIncomingMessage&lt;<xref uid="azure-iothub.Twin"
+          />&gt;&gt;
   - name: get(IncomingMessageCallback<Twin>)
     uid: azure-iothub.Twin.get
     package: azure-iothub
@@ -158,13 +158,18 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function get(done: IncomingMessageCallback<Twin>)'
+      content: 'function get(done?: IncomingMessageCallback<Twin>)'
       parameters:
         - id: done
-          type: >-
-            <xref uid="azure-iothub.IncomingMessageCallback" />&lt;<xref
-            uid="azure-iothub.Twin" />&gt;
-          description: ''
+          type: IncomingMessageCallback&lt;<xref uid="azure-iothub.Twin" />&gt;
+          description: |-
+            The optional function to call when the operation is
+                                           complete. `done` will be called with three
+                                           arguments: an Error object (can be null), a
+                                           [Twin](xref:azure-iothub.Twin)
+                                           object representing the created device
+                                           identity, and a transport-specific response
+                                           object useful for logging or debugging.
   - name: toJSON()
     uid: azure-iothub.Twin.toJSON
     package: azure-iothub
@@ -191,22 +196,27 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="azure-iothub.ResultWithIncomingMessage"
-          />&lt;<xref uid="azure-iothub.Twin" />&gt;&gt;
-  - name: 'update(any, IncomingMessageCallback<Twin>)'
+          Promise&lt;ResultWithIncomingMessage&lt;<xref uid="azure-iothub.Twin"
+          />&gt;&gt;
+  - name: update(any, IncomingMessageCallback<Twin>)
     uid: azure-iothub.Twin.update
     package: azure-iothub
     summary: Update the device twin with the patch provided as argument.
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function update(patch: any, done: IncomingMessageCallback<Twin>)'
+      content: 'function update(patch: any, done?: IncomingMessageCallback<Twin>)'
       parameters:
         - id: patch
           type: any
           description: Object containing the new values to apply to this device twin.
         - id: done
-          type: >-
-            <xref uid="azure-iothub.IncomingMessageCallback" />&lt;<xref
-            uid="azure-iothub.Twin" />&gt;
-          description: ''
+          type: IncomingMessageCallback&lt;<xref uid="azure-iothub.Twin" />&gt;
+          description: |-
+            The optional function to call when the operation is
+                                           complete. `done` will be called with three
+                                           arguments: an Error object (can be null), a
+                                           [Twin](xref:azure-iothub.Twin)
+                                           object representing the created device
+                                           identity, and a transport-specific response
+                                           object useful for logging or debugging.

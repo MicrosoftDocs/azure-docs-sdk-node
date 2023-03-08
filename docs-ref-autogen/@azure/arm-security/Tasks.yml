@@ -22,8 +22,7 @@ methods:
       content: >-
         function getResourceGroupLevelTask(resourceGroupName: string,
         ascLocation: string, taskName: string, options?:
-        TasksGetResourceGroupLevelTaskOptionalParams):
-        Promise<TasksGetResourceGroupLevelTaskResponse>
+        TasksGetResourceGroupLevelTaskOptionalParams): Promise<SecurityTask>
       parameters:
         - id: resourceGroupName
           type: string
@@ -39,20 +38,16 @@ methods:
                                Get locations
         - id: taskName
           type: string
-          description: 'Name of the task object, will be a GUID'
+          description: Name of the task object, will be a GUID
         - id: options
           type: >-
             <xref
             uid="@azure/arm-security.TasksGetResourceGroupLevelTaskOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-security.TasksGetResourceGroupLevelTaskResponse"
-          />&gt;
+        type: Promise&lt;<xref uid="@azure/arm-security.SecurityTask" />&gt;
   - name: >-
       getSubscriptionLevelTask(string, string,
       TasksGetSubscriptionLevelTaskOptionalParams)
@@ -67,7 +62,7 @@ methods:
       content: >-
         function getSubscriptionLevelTask(ascLocation: string, taskName: string,
         options?: TasksGetSubscriptionLevelTaskOptionalParams):
-        Promise<TasksGetSubscriptionLevelTaskResponse>
+        Promise<SecurityTask>
       parameters:
         - id: ascLocation
           type: string
@@ -77,19 +72,16 @@ methods:
                                Get locations
         - id: taskName
           type: string
-          description: 'Name of the task object, will be a GUID'
+          description: Name of the task object, will be a GUID
         - id: options
           type: >-
             <xref
             uid="@azure/arm-security.TasksGetSubscriptionLevelTaskOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/arm-security.TasksGetSubscriptionLevelTaskResponse" />&gt;
+        type: Promise&lt;<xref uid="@azure/arm-security.SecurityTask" />&gt;
   - name: list(TasksListOptionalParams)
     uid: '@azure/arm-security.Tasks.list'
     package: '@azure/arm-security'
@@ -101,18 +93,18 @@ methods:
     syntax:
       content: >-
         function list(options?: TasksListOptionalParams):
-        PagedAsyncIterableIterator<SecurityTask>
+        PagedAsyncIterableIterator<SecurityTask, SecurityTask[], PageSettings>
       parameters:
         - id: options
           type: <xref uid="@azure/arm-security.TasksListOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/arm-security.SecurityTask" />&gt;
-  - name: 'listByHomeRegion(string, TasksListByHomeRegionOptionalParams)'
+          uid="@azure/arm-security.SecurityTask" />, <xref
+          uid="@azure/arm-security.SecurityTask" />[], PageSettings&gt;
+  - name: listByHomeRegion(string, TasksListByHomeRegionOptionalParams)
     uid: '@azure/arm-security.Tasks.listByHomeRegion'
     package: '@azure/arm-security'
     summary: >-
@@ -124,7 +116,7 @@ methods:
       content: >-
         function listByHomeRegion(ascLocation: string, options?:
         TasksListByHomeRegionOptionalParams):
-        PagedAsyncIterableIterator<SecurityTask>
+        PagedAsyncIterableIterator<SecurityTask, SecurityTask[], PageSettings>
       parameters:
         - id: ascLocation
           type: string
@@ -136,13 +128,13 @@ methods:
           type: >-
             <xref uid="@azure/arm-security.TasksListByHomeRegionOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/arm-security.SecurityTask" />&gt;
+          uid="@azure/arm-security.SecurityTask" />, <xref
+          uid="@azure/arm-security.SecurityTask" />[], PageSettings&gt;
   - name: >-
       listByResourceGroup(string, string,
       TasksListByResourceGroupOptionalParams)
@@ -157,7 +149,7 @@ methods:
       content: >-
         function listByResourceGroup(resourceGroupName: string, ascLocation:
         string, options?: TasksListByResourceGroupOptionalParams):
-        PagedAsyncIterableIterator<SecurityTask>
+        PagedAsyncIterableIterator<SecurityTask, SecurityTask[], PageSettings>
       parameters:
         - id: resourceGroupName
           type: string
@@ -175,16 +167,15 @@ methods:
           type: >-
             <xref
             uid="@azure/arm-security.TasksListByResourceGroupOptionalParams" />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: >-
           PagedAsyncIterableIterator&lt;<xref
-          uid="@azure/arm-security.SecurityTask" />&gt;
+          uid="@azure/arm-security.SecurityTask" />, <xref
+          uid="@azure/arm-security.SecurityTask" />[], PageSettings&gt;
   - name: >-
-      updateResourceGroupLevelTaskState(string, string, string,
-      TaskUpdateActionType,
+      updateResourceGroupLevelTaskState(string, string, string, string,
       TasksUpdateResourceGroupLevelTaskStateOptionalParams)
     uid: '@azure/arm-security.Tasks.updateResourceGroupLevelTaskState'
     package: '@azure/arm-security'
@@ -196,9 +187,9 @@ methods:
     syntax:
       content: >-
         function updateResourceGroupLevelTaskState(resourceGroupName: string,
-        ascLocation: string, taskName: string, taskUpdateActionType:
-        TaskUpdateActionType, options?:
-        TasksUpdateResourceGroupLevelTaskStateOptionalParams): Promise<void>
+        ascLocation: string, taskName: string, taskUpdateActionType: string,
+        options?: TasksUpdateResourceGroupLevelTaskStateOptionalParams):
+        Promise<void>
       parameters:
         - id: resourceGroupName
           type: string
@@ -214,22 +205,21 @@ methods:
                                Get locations
         - id: taskName
           type: string
-          description: 'Name of the task object, will be a GUID'
+          description: Name of the task object, will be a GUID
         - id: taskUpdateActionType
-          type: <xref uid="@azure/arm-security.TaskUpdateActionType" />
+          type: string
           description: Type of the action to do on the task
         - id: options
           type: >-
             <xref
             uid="@azure/arm-security.TasksUpdateResourceGroupLevelTaskStateOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;
   - name: >-
-      updateSubscriptionLevelTaskState(string, string, TaskUpdateActionType,
+      updateSubscriptionLevelTaskState(string, string, string,
       TasksUpdateSubscriptionLevelTaskStateOptionalParams)
     uid: '@azure/arm-security.Tasks.updateSubscriptionLevelTaskState'
     package: '@azure/arm-security'
@@ -241,7 +231,7 @@ methods:
     syntax:
       content: >-
         function updateSubscriptionLevelTaskState(ascLocation: string, taskName:
-        string, taskUpdateActionType: TaskUpdateActionType, options?:
+        string, taskUpdateActionType: string, options?:
         TasksUpdateSubscriptionLevelTaskStateOptionalParams): Promise<void>
       parameters:
         - id: ascLocation
@@ -252,17 +242,16 @@ methods:
                                Get locations
         - id: taskName
           type: string
-          description: 'Name of the task object, will be a GUID'
+          description: Name of the task object, will be a GUID
         - id: taskUpdateActionType
-          type: <xref uid="@azure/arm-security.TaskUpdateActionType" />
+          type: string
           description: Type of the action to do on the task
         - id: options
           type: >-
             <xref
             uid="@azure/arm-security.TasksUpdateSubscriptionLevelTaskStateOptionalParams"
             />
-          description: |
-            The options parameters.
+          description: The options parameters.
       return:
         description: ''
         type: Promise&lt;void&gt;

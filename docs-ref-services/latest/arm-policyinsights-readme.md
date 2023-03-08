@@ -5,7 +5,6 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 01/24/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: policyinsights

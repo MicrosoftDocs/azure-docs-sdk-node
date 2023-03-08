@@ -6,10 +6,9 @@ ms.author: jeffish
 ms.data: 03/07/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: siterecovery
+ms.service: site-recovery
 ms.date: 07/18/2017
 ms.technology: azure
-ms.prod: azure
 manager: carmonm
 ---
 # Azure Site Recovery modules for JavaScript

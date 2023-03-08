@@ -5,7 +5,6 @@ author: AriZavala2
 ms.author: arzavala
 ms.date: 02/04/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: communication

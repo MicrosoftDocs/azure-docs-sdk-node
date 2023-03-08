@@ -5,7 +5,6 @@ author: xirzec
 ms.author: xirzec
 ms.date: 12/17/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: webpubsub

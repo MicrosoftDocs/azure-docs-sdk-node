@@ -5,7 +5,6 @@ author: HarshaNalluru
 ms.author: HarshaNalluru
 ms.date: 12/15/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: appconfiguration

@@ -1,7 +1,7 @@
 ---
 title: Azure Mixed Reality Resource Management Modules for JavaScript
 description: Reference for Azure Mixed Reality Resource Management for JavaScript
-author: Xiangyu Luo
+author: xiangyul
 ms.author: xiangyul
 manager: dgriff
 ms.date: 04/16/2019
@@ -14,8 +14,8 @@ ms.service: azure
 
 Microsoft provides a series of Azure services to empower Mixed Reality devices and applications. Currently, such services are provided:
 
-* [Azure Spatial Anchors](https://azure.microsoft.com/en-us/services/spatial-anchors/)
-* [Azure Remote Rendering (To be available soon...)](https://azure.microsoft.com/en-us/services/remote-rendering/)
+* [Azure Spatial Anchors](https://azure.microsoft.com/services/spatial-anchors/)
+* [Azure Remote Rendering (To be available soon...)](https://azure.microsoft.com/services/remote-rendering/)
 
 ## Management Package
 

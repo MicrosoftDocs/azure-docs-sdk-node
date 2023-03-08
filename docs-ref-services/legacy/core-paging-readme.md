@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/30/2020
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: core
 ---
 
 # Azure Core Paging client library for JavaScript - version 1.1.3 

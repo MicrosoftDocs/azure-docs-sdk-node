@@ -5,9 +5,8 @@ author: xirzec
 ms.author: xirzec
 ms.date: 12/17/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: webpubsub
+ms.service: azure-web-pubsub
 ---
 # Azure WebPubSubManagement client library for JavaScript - version 1.0.0 
 

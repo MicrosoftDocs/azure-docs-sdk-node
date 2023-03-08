@@ -6,7 +6,6 @@ ms.author: scbedd
 manager: timlt
 ms.date: 07/23/2020
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: service-bus
 ---

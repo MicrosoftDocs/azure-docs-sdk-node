@@ -1,13 +1,12 @@
 ---
 title: Azure CommunicationServiceManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-communication, communication
+keywords: Azure, javascript, SDK, API, @azure/arm-communication, azure-communication-services
 author: qiaozha
 ms.author: qiaozha
 ms.date: 04/15/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: communication
+ms.service: azure-communication-services
 ---
 # Azure CommunicationServiceManagement client library for JavaScript - version 3.0.1 
 

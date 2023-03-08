@@ -5,9 +5,8 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 04/20/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: links
+ms.service: azure
 ---
 # Azure ManagementLink client library for JavaScript - version 2.0.1 
 

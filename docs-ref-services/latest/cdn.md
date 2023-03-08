@@ -6,9 +6,8 @@ ms.author: v-deasim
 manager: v-laurab
 ms.date: 07/18/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: CDN
+ms.service: azure-cdn
 ---
 
 # Azure CDN modules for JavaScript

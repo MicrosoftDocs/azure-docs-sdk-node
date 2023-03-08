@@ -6,7 +6,6 @@ ms.author: ramyar
 manager: twolley
 ms.date: 02/27/2020
 ms.topic: reference
-ms.technology: azure
 ms.devlang: JavaScript
 ms.service: storage
 ---

@@ -5,9 +5,8 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 01/24/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: policyinsights
+ms.service: azure-policy
 ---
 # Azure PolicyInsights client library for JavaScript - version 5.0.0 
 

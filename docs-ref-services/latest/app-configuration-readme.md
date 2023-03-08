@@ -1,13 +1,12 @@
 ---
 title: 
-keywords: Azure, javascript, SDK, API, @azure/app-configuration, appconfiguration
+keywords: Azure, javascript, SDK, API, @azure/app-configuration, azure-app-configuration
 author: HarshaNalluru
 ms.author: HarshaNalluru
 ms.date: 12/15/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: appconfiguration
+ms.service: azure-app-configuration
 ---
 # App Configuration client library for JavaScript
 

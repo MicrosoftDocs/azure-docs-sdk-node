@@ -5,7 +5,6 @@ author: PatrickFarley
 ms.author: pafarley
 ms.date: 06/21/2021
 ms.topic: reference
-ms.technology:
 ms.devlang: javascript
 ms.service: azure-face
 ---

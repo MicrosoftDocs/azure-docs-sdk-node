@@ -5,7 +5,6 @@ author: maggiepint
 ms.author: magpint
 ms.date: 11/18/2022
 ms.topic: article
-ms.technology: azure
 ms.devlang: javascript
 ms.service: cognitive-search
 ---

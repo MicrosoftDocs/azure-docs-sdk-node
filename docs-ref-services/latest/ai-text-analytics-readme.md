@@ -1,13 +1,12 @@
 ---
 title: Azure Text Analytics client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/ai-text-analytics, textanalytics
+keywords: Azure, javascript, SDK, API, @azure/ai-text-analytics, text-analytics
 author: ramya-rao-a
 ms.author: ramyar
 ms.date: 07/07/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: textanalytics
+ms.service: text-analytics
 ---
 
 # Azure Text Analytics client library for JavaScript - version 5.1.0 

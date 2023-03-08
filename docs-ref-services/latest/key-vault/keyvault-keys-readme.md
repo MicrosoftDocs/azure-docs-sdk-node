@@ -5,7 +5,6 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 07/29/2021
 ms.topic: article
-ms.technology: azure
 ms.devlang: javascript
 ms.service: key-vault
 ---

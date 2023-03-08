@@ -1,14 +1,12 @@
 ---
 title: Azure Identity client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/identity, 
+keywords: Azure, javascript, SDK, API, @azure/identity, identity
 author: ramya-rao-a
 ms.author: ramyar
 ms.date: 11/11/2020
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: identity
 ---
 
 ## Azure Identity client library for JavaScript - version 1.2.0 

@@ -1,11 +1,10 @@
 ---
-title: 
+title: Azure Identity plugin for Visual Studio Code authentication
 keywords: Azure, javascript, SDK, API, @azure/identity-vscode, identity
 author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/16/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: identity
 ---

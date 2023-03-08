@@ -6,10 +6,8 @@ ms.author: cshoe
 manager: routlaw
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: Data Lake Analytics
+ms.service: data-lake-analytics
 ---
 
 # Azure Data Lake Analytics modules for Node.JS

@@ -5,9 +5,8 @@ author: jeremymeng
 ms.author: jeremymeng
 ms.date: 01/13/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: containerregistry
+ms.service: container-registry
 ---
 # Azure Container Registry client library for JavaScript - version 1.0.0 
 

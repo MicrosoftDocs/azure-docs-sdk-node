@@ -5,9 +5,8 @@ author: xirzec
 ms.author: jeffish
 ms.date: 02/09/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: core
+ms.service: azure
 ---
 # Azure Async Iterator Polyfill client library for JavaScript - version 1.0.2 
 

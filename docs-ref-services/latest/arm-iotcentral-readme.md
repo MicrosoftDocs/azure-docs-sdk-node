@@ -5,9 +5,8 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 01/20/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: iotcentral
+ms.service: iot-central
 ---
 # Azure IotCentral client library for JavaScript - version 6.0.0 
 

@@ -6,7 +6,6 @@ ms.author: rkarlin
 manager: kfile
 ms.date: 07/18/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: power-bi-embedded
 ---

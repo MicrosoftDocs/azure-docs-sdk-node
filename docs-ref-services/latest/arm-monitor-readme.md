@@ -5,9 +5,8 @@ author: hectorhdzg
 ms.author: hectorhdzg
 ms.date: 12/21/2021
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: monitor
+ms.service: azure-monitor
 ---
 # Azure Monitor client library for JavaScript - version 7.0.0 
 

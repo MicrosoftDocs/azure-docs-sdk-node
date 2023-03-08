@@ -6,10 +6,8 @@ ms.author: marsma
 manager: jeconnoc
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: Container Registry
+ms.service: container-registry
 ---
 
 # Azure Container Registry modules for JavaScript

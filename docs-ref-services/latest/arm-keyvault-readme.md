@@ -5,9 +5,8 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 01/17/2022
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: keyvault
+ms.service: key-vault
 ---
 # Azure KeyVaultManagement client library for JavaScript - version 2.0.0 
 

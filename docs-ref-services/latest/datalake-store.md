@@ -6,7 +6,6 @@ ms.author: cshoe
 manager: routlaw
 ms.date: 07/18/2017
 ms.topic: reference
-ms.technology: azure
 ms.devlang: nodejs
 ms.service: data-lake-store
 ---

@@ -27,7 +27,7 @@ constructors:
           type: <xref uid="@azure/communication-email.EmailClientOptions" />
           description: |
             Optional. Options to configure the HTTP pipeline.
-  - name: 'EmailClient(string, KeyCredential, EmailClientOptions)'
+  - name: 'EmailClient(string, KeyCredential | TokenCredential, EmailClientOptions)'
     uid: '@azure/communication-email.EmailClient.constructor_1'
     package: '@azure/communication-email'
     summary: >-
@@ -37,8 +37,8 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new EmailClient(endpoint: string, credential: KeyCredential, options?:
-        EmailClientOptions)
+        new EmailClient(endpoint: string, credential: KeyCredential |
+        TokenCredential, options?: EmailClientOptions)
       parameters:
         - id: endpoint
           type: string
@@ -46,7 +46,7 @@ constructors:
             The endpoint of the service (ex:
             https://contoso.eastus.communications.azure.net).
         - id: credential
-          type: KeyCredential
+          type: KeyCredential | TokenCredential
           description: >-
             An object that is used to authenticate requests to the service. Use
             the Azure KeyCredential or `@azure/identity` to create a credential.
@@ -55,40 +55,29 @@ constructors:
           description: |
             Optional. Options to configure the HTTP pipeline.
 methods:
-  - name: getSendStatus(string)
-    uid: '@azure/communication-email.EmailClient.getSendStatus'
-    package: '@azure/communication-email'
-    summary: Gets the status of a message sent previously.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function getSendStatus(messageId: string): Promise<SendStatusResult>'
-      parameters:
-        - id: messageId
-          type: string
-          description: >
-            System generated message id (GUID) returned from a previous call to
-            send email
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref uid="@azure/communication-email.SendStatusResult"
-          />&gt;
-  - name: send(EmailMessage)
-    uid: '@azure/communication-email.EmailClient.send'
+  - name: 'beginSend(EmailMessage, EmailSendOptionalParams)'
+    uid: '@azure/communication-email.EmailClient.beginSend'
     package: '@azure/communication-email'
     summary: Queues an email message to be sent to one or more recipients
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function send(emailMessage: EmailMessage): Promise<SendEmailResult>'
+      content: >-
+        function beginSend(message: EmailMessage, options?:
+        EmailSendOptionalParams):
+        Promise<PollerLike<PollOperationState<EmailSendResponse>,
+        EmailSendResponse>>
       parameters:
-        - id: emailMessage
+        - id: message
           type: <xref uid="@azure/communication-email.EmailMessage" />
+          description: Message payload for sending an email
+        - id: options
+          type: <xref uid="@azure/communication-email.EmailSendOptionalParams" />
           description: |
-            Message payload for sending an email
+            The options parameters.
       return:
         description: ''
         type: >-
-          Promise&lt;<xref uid="@azure/communication-email.SendEmailResult"
-          />&gt;
+          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          uid="@azure/communication-email.EmailSendResponse" />&gt;, <xref
+          uid="@azure/communication-email.EmailSendResponse" />&gt;&gt;

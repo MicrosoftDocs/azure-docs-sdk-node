@@ -7,7 +7,7 @@ manager: jhubbard
 ms.date: 07/18/2017
 ms.topic: reference
 ms.devlang: nodejs
-ms.service: azure-app-service
+ms.service: app-service
 ---
 
 # Azure App Service modules for JavaScript

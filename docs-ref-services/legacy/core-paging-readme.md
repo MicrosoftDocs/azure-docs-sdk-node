@@ -1,13 +1,13 @@
 ---
-title: Azure Core Paging client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/core-paging, 
+title: Azure Core Paging client library for JavaScript - version 1.1.3 readme
+keywords: Azure, javascript, SDK, API, @azure/core-paging, core
 author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/30/2020
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
-ms.service: core
+ms.service: azure
 ---
 
 # Azure Core Paging client library for JavaScript - version 1.1.3 

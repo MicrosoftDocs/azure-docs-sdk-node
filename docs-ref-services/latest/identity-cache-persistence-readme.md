@@ -9,7 +9,7 @@ ms.devlang: javascript
 ms.service: identity
 ---
 
-## Azure Identity Plugin for Token Cache Persistence
+# Azure Identity Plugin for Token Cache Persistence
 
 This package provides a plugin to the Azure Identity library for JavaScript ([`@azure/identity`](https://npmjs.com/package/@azure/identity)) that enables persistent token caching. Token cache persistence allows the built-in token cache to persist across sessions using a secure storage system provided by the local operating system.
 

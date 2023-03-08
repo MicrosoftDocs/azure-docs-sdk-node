@@ -9,7 +9,7 @@ ms.devlang: javascript
 ms.service: identity
 ---
 
-## Azure Identity client library for JavaScript - version 1.2.0 
+# Azure Identity client library for JavaScript - version 1.2.0 
 
 
 This library simplifies authentication against Azure Active Directory for Azure SDK libraries.

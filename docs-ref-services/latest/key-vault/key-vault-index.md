@@ -10,7 +10,7 @@ ms.devlang: nodejs
 ms.service: key-vault
 ---
 
-## Azure Key Vault SDK for JavaScript - latest
+# Azure Key Vault SDK for JavaScript - latest
 
 ## Client packages (4.x.x) - latest
 

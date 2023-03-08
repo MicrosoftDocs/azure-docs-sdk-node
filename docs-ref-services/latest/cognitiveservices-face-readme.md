@@ -6,7 +6,8 @@ ms.author: pafarley
 ms.date: 06/21/2021
 ms.topic: reference
 ms.devlang: javascript
-ms.service: azure-face
+ms.service: cognitive-services
+ms.subservice: face-api
 ---
 
 # Azure Face API

@@ -5,7 +5,6 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 11/03/2020
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
 ms.service: digital-twins
 ---

@@ -1,5 +1,5 @@
 ---
-title: Azure Service client library for JavaScript
+title: Azure Service client library for JavaScript - version 1.0.0 readme
 keywords: Azure, javascript, SDK, API, @azure/arm-hardwaresecuritymodules, hardwaresecuritymodules
 author: xirzec
 ms.author: jeffish

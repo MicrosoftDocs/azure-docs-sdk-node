@@ -104,7 +104,7 @@ The following sections provide several code snippets covering some of the most c
 - [Insert items](#insert-items)
 - [Query documents](#query-the-database)
 - [Read an item](#read-an-item)
-- [Delete an item](#delete-an-data)
+- [Delete an item](#delete-an-item)
 
 ### Create a database
 

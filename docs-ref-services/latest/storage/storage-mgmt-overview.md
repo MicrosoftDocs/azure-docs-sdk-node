@@ -1,5 +1,5 @@
 ---
-title: Azure Storage modules for JavaScript
+title: Azure Storage modules for JavaScript - reference table
 description: Reference for Azure Storage modules for JavaScript
 author: ramya-rao-a
 ms.author: ramyar
@@ -10,7 +10,7 @@ ms.devlang: JavaScript
 ms.service: storage
 ---
 
-## Management - Latest
+# Management - Latest
 
 | Package Name | Reference | NPM package | Source |
 |---|---|---|--|

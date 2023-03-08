@@ -6,7 +6,8 @@ ms.author: ramyar
 ms.date: 07/07/2021
 ms.topic: reference
 ms.devlang: javascript
-ms.service: text-analytics
+ms.service: cognitive-services
+ms.subservice: text-analytics
 ---
 
 # Azure Text Analytics client library for JavaScript - version 5.1.0 

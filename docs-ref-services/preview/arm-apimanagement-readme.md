@@ -1,14 +1,12 @@
 ---
 title: Azure ApiManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-apimanagement, apimanagement
+keywords: Azure, javascript, SDK, API, @azure/arm-apimanagement, api-management
 author: maggiepint
 ms.author: magpint
 ms.date: 11/17/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: apimanagement
+ms.service: api-management
 ---
 
 # Azure ApiManagement client library for JavaScript - version 8.0.0-beta.2 

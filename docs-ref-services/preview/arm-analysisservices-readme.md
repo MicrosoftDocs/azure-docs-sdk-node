@@ -1,14 +1,12 @@
 ---
 title: Azure Service client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-analysisservices, analysisservices
+keywords: Azure, javascript, SDK, API, @azure/arm-analysisservices, azure-analysis-services
 author: qiaozha
 ms.author: qiaozha
 ms.date: 11/30/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: analysisservices
+ms.service: azure-analysis-services
 ---
 
 # Azure Service client library for JavaScript - version 4.0.0-beta.1 

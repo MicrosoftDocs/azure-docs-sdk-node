@@ -1,12 +1,13 @@
 ---
 title: Azure AnomalyDetectorRest REST client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure-rest/ai-anomaly-detector, anomalydetector
+keywords: Azure, javascript, SDK, API, @azure-rest/ai-anomaly-detector, anomaly-detector
 author: xirzec
 ms.author: jeffish
 ms.date: 12/09/2022
 ms.topic: reference
 ms.devlang: javascript
-ms.service: anomalydetector
+ms.service: cognitive-services
+ms.subservice: anomaly-detector
 ---
 # Azure AnomalyDetectorRest REST client library for JavaScript - version 1.0.0-beta.1 
 

@@ -1,14 +1,12 @@
 ---
 title: Azure SourceControlConfiguration client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-kubernetesconfiguration, kubernetesconfiguration
+keywords: Azure, javascript, SDK, API, @azure/arm-kubernetesconfiguration, kubernetes-configuration
 author: qiaozha
 ms.author: qiaozha
 ms.date: 01/17/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: kubernetesconfiguration
+ms.service: azure
 ---
 # Azure SourceControlConfiguration client library for JavaScript - version 5.0.0-beta.1 
 

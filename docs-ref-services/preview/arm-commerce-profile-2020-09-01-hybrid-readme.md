@@ -5,10 +5,8 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 03/10/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: commerce
+ms.service: azure
 ---
 # Azure UsageManagement client library for JavaScript - version 2.0.0-beta.1 
 

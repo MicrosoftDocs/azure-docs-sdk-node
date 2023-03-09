@@ -1,14 +1,12 @@
 ---
 title: Azure WebSiteManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-appservice, appservice
+keywords: Azure, javascript, SDK, API, @azure/arm-appservice, app-service
 author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/15/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: appservice
+ms.service: app-service
 ---
 
 # Azure WebSiteManagement client library for JavaScript - version 10.0.0-beta.1 

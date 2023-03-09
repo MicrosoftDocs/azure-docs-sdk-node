@@ -12,7 +12,7 @@ ms.service: storage
 # Azure Storage SDK V10 for JavaScript - Queue
 
 - [![npm version](https://badge.fury.io/js/%40azure%2Fstorage-queue.svg)](https://badge.fury.io/js/%40azure%2Fstorage-queue)
-- [API Reference documentation](https://docs.microsoft.com/en-us/javascript/api/%40azure/storage-queue/index?view=azure-node-preview)
+- [API Reference documentation](https://docs.microsoft.com/javascript/api/%40azure/storage-queue/index?view=azure-node-preview)
 
 ## Introduction
 
@@ -47,7 +47,7 @@ This library depends on following ES features which need external polyfills load
 - `String.prototype.repeat`
 - `String.prototype.includes`
 - `Array.prototype.includes`
-- `Object.keys` (Override IE11's `Object.keys` with ES6 polyfill forcely to enable [ES6 behavior](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys#Notes))
+- `Object.keys` (Override IE11's `Object.keys` with ES6 polyfill forcely to enable [ES6 behavior](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/keys#Notes))
 
 #### Differences between Node.js and browsers
 
@@ -117,7 +117,7 @@ For example, you can create following CORS settings for debugging. But please cu
 
 The Azure Storage SDK for JavaScript provides low-level and high-level APIs.
 
-- ServiceURL, QueueURL, MessagesURL and MessageIdURL objects provide the low-level API functionality and map one-to-one to the [Azure Storage Queue REST APIs](https://docs.microsoft.com/en-us/rest/api/storageservices/queue-service-rest-api).
+- ServiceURL, QueueURL, MessagesURL and MessageIdURL objects provide the low-level API functionality and map one-to-one to the [Azure Storage Queue REST APIs](https://docs.microsoft.com/rest/api/storageservices/queue-service-rest-api).
 
 ## Code Samples
 

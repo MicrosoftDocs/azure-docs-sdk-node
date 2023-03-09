@@ -1,14 +1,12 @@
 ---
 title: Azure DnsResolverManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-dnsresolver, dnsresolver
+keywords: Azure, javascript, SDK, API, @azure/arm-dnsresolver, dns-resolver
 author: qiaozha
 ms.author: qiaozha
 ms.date: 04/20/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: dnsresolver
+ms.service: dns
 ---
 # Azure DnsResolverManagement client library for JavaScript - version 1.0.0-beta.3 
 

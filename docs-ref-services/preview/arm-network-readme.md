@@ -1,14 +1,12 @@
 ---
 title: Azure NetworkManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-network, virtualnetwork
+keywords: Azure, javascript, SDK, API, @azure/arm-network, virtual-network
 author: ramya-rao-a
 ms.author: ramyar
 ms.date: 11/02/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: virtualnetwork
+ms.service: virtual-network
 ---
 
 # Azure NetworkManagement client library for JavaScript - version 26.0.0-beta.2 

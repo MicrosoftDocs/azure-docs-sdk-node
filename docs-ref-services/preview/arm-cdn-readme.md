@@ -5,10 +5,8 @@ author: maggiepint
 ms.author: magpint
 ms.date: 11/11/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: cdn
+ms.service: azure-cdn
 ---
 
 # Azure CdnManagement client library for JavaScript - version 6.0.0-beta.1 

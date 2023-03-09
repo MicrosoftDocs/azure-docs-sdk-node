@@ -1,14 +1,12 @@
 ---
-title: 
+title: Azure Rest Core Paging library for JavaScript - experimental
 keywords: Azure, javascript, SDK, API, @azure-rest/core-client-paging, core
 author: ramya-rao-a
 ms.author: ramyar
 ms.date: 08/06/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: core
+ms.service: azure
 ---
 
 # Azure Rest Core Paging library for JavaScript (Experimental)

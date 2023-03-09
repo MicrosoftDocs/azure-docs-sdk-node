@@ -1,14 +1,12 @@
 ---
 title: Azure TemplateSpecs client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-templatespecs, templatespecs
+keywords: Azure, javascript, SDK, API, @azure/arm-templatespecs, template-specs
 author: ramya-rao-a
 ms.author: ramyar
 ms.date: 08/26/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: templatespecs
+ms.service: azure
 ---
 
 # Azure TemplateSpecs client library for JavaScript - version 1.0.0-beta.1 

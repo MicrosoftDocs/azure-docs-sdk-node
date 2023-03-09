@@ -1,14 +1,12 @@
 ---
-title: 
+title: Azure Core tracing library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/core-tracing, core
 author: xirzec
 ms.author: jeffish
 ms.date: 02/03/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: core
+ms.service: azure
 ---
 # Azure Core tracing library for JavaScript
 

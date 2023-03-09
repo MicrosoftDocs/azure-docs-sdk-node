@@ -1,14 +1,12 @@
 ---
 title: Azure Core Service client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/core-client, 
+keywords: Azure, javascript, SDK, API, @azure/core-client, core 
 author: ramya-rao-a
 ms.author: ramyar
 ms.date: 03/10/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: azure
 ---
 
 # Azure Core Service client library for JavaScript - version 1.0.0-beta.2 

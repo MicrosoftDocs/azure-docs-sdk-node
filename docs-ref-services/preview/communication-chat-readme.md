@@ -5,10 +5,8 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 08/30/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: communication
+ms.service: azure-communication-services
 ---
 
 # Azure Communication Chat client library for JavaScript - version 1.1.0-beta.2 

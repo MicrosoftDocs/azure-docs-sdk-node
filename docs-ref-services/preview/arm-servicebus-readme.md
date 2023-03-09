@@ -1,12 +1,12 @@
 ---
 title: Azure ServiceBusManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-servicebus, servicebus
+keywords: Azure, javascript, SDK, API, @azure/arm-servicebus, service-bus
 author: jeremymeng
 ms.author: yumeng
 ms.date: 02/21/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: servicebus
+ms.service: service-bus
 ---
 # Azure ServiceBusManagement client library for JavaScript - version 6.2.0-beta.1 
 

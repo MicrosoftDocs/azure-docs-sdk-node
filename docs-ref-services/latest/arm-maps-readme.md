@@ -1,5 +1,5 @@
 ---
-title: AzureMapsManagement client library for JavaScript
+title: Azure Maps AzureMapsManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-maps, maps
 author: qiaozha
 ms.author: qiaozha

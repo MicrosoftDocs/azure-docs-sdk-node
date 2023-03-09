@@ -1,5 +1,5 @@
 ---
-title: AzureDigitalTwinsManagement client library for JavaScript - readme
+title: Azure Digital Twins AzureDigitalTwinsManagement client library for JavaScript - readme
 keywords: Azure, javascript, SDK, API, @azure/arm-digitaltwins, digital-twins
 author: qiaozha
 ms.author: qiaozha

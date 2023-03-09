@@ -1,5 +1,5 @@
 ---
-title: Azure Identity Plugin for Token Cache Persistence - readme
+title: Azure Identity plugin for token cache persistence - readme
 keywords: Azure, javascript, SDK, API, @azure/identity-cache-persistence, identity
 author: ramya-rao-a
 ms.author: ramyar

@@ -1,5 +1,5 @@
 ---
-title: Azure UsageManagement client library for JavaScript
+title: Azure UsageManagement client library for JavaScript - version 2.0.0-beta.1 readme
 keywords: Azure, javascript, SDK, API, @azure/arm-commerce-profile-2020-09-01-hybrid, commerce
 author: qiaozha
 ms.author: qiaozha

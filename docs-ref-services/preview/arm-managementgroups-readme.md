@@ -1,5 +1,5 @@
 ---
-title: Azure Service client library for JavaScript
+title: Azure Service client library for JavaScript - version 2.0.0-beta.1 readme
 keywords: Azure, javascript, SDK, API, @azure/arm-managementgroups, management groups
 author: maggiepint
 ms.author: magpint

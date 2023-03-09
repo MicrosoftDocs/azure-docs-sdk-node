@@ -5,8 +5,6 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 11/29/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: search
 ---

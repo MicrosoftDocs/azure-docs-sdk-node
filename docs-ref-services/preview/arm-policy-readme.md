@@ -5,10 +5,8 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/18/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: policy
+ms.service: azure-policy
 ---
 
 # Azure Policy client library for JavaScript - version 5.0.0-beta.2 

@@ -1,9 +1,9 @@
 ---
 title: Azure Maps SDK for JavaScript
 description: Reference for Azure Maps SDK for JavaScript
-author: xirzec
-ms.author: jeffish
-ms.data: 03/07/2023
+author: dubiety
+ms.author: yuchungchen
+ms.data: 03/08/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: maps

@@ -85,7 +85,7 @@ This client is one of our REST clients. We highly recommend you read how to use 
 
 The following section shows you how to initialize and authenticate your client, then get all of your type-defs.
 
-- [Get A List of Collections](#get-a-list-of-collections "Get A List of Collections")
+<!-- [Get A List of Collections](#get-a-list-of-collections "Get A List of Collections") --
 
 ```typescript
 import PurviewAccount from "@azure-rest/purview-account";

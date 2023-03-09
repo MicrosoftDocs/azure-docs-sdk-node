@@ -9,7 +9,7 @@ ms.devlang: javascript
 ms.service: synapse-analytics
 ---
 
-## Azure Synapse Access Control client library for JavaScript - version 1.0.0-beta.3 
+# Azure Synapse Access Control client library for JavaScript - version 1.0.0-beta.3 
 
 
 This package contains an isomorphic SDK for Access Control.
@@ -55,7 +55,7 @@ export async function main(): Promise<void> {
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcdn%2Farm-cdn%2FREADME.png)
+![Impressions for JavaScript CDN](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcdn%2Farm-cdn%2FREADME.png)
 
 ## Troubleshooting
 
@@ -75,5 +75,4 @@ In the future, you'll find additional code samples here.
 
 If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/synapse-access-control_1.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-keys%2FREADME.png)
-
+![Impressions for JavaScript Key Vault](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fkeyvault%2Fkeyvault-keys%2FREADME.png)

@@ -10,7 +10,7 @@ ms.devlang: JavaScript
 ms.service: storage
 ---
 
-## Azure Storage SDK for JavaScript - preview
+# Azure Storage SDK for JavaScript - preview
 
 > [!NOTE]
 > Documentation in this table of contents is for Preview package versions. To see documentation for the latest version, see [Azure Storage SDK for JavaScript - latest](?view=az-js-storage-v12)

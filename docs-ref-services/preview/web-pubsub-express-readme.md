@@ -1,14 +1,12 @@
 ---
-title: 
+title: Azure Web PubSub CloudEvents handlers for Express
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub-express, webpubsub
 author: maggiepint
 ms.author: magpint
 ms.date: 11/11/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: webpubsub
+ms.service: azure-web-pubsub
 ---
 
 # Azure Web PubSub CloudEvents handlers for Express

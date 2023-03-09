@@ -6,10 +6,8 @@ ms.author: raynew
 manager: carmonm
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: nodejs
-ms.service: Site Recovery
+ms.service: site-recovery
 ---
 
 # Azure Site Recovery modules for JavaScript

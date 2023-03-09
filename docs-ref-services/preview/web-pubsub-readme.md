@@ -1,14 +1,12 @@
 ---
-title: Azure Web PubSub service client library for JavaScript
+title: Azure Web PubSub service client library for JavaScript - version 1.0.0-beta.4 
 keywords: Azure, javascript, SDK, API, @azure/web-pubsub, webpubsub
 author: maggiepint
 ms.author: magpint
 ms.date: 11/10/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: webpubsub
+ms.service: azure-web-pubsub
 ---
 
 # Azure Web PubSub service client library for JavaScript - version 1.0.0-beta.4 

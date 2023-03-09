@@ -6,11 +6,9 @@ ms.author: jeffish
 ms.data: 03/08/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: trafficmanager
+ms.service: traffic-manager
 ms.date: 07/18/2017
 manager: jeconnoc
-ms.technology: azure
-ms.prod: azure
 ---
 # Azure Traffic Manager modules for JavaScript
 

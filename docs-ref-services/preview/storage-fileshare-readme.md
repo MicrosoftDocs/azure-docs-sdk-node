@@ -1,13 +1,11 @@
 ---
-title: Azure Files for JavaScript Readme
+title: Azure Files for JavaScript Readme - Version 12.1.1
 description: Reference for Azure Storage modules for JavaScript
 author: ramya-rao-a
 ms.author: ramyar
 manager: twolley
 ms.date: 03/12/2020
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
 ms.service: storage
 ---

@@ -149,7 +149,7 @@ const client = new MixedRealityStsClient(
 const token = await client.getToken();
 ```
 
-See the authentication examples [above](#authenticate-the-client) or [Azure Identity][azure_identity] for more complex
+See the authentication examples [above](#using-account-key-authentication) or [Azure Identity][azure_identity] for more complex
 authentication scenarios.
 
 #### Using the access token in a Mixed Reality client library

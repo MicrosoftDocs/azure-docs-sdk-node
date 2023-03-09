@@ -1,14 +1,12 @@
 ---
-title: Azure Schema Registry Avro Serializer client library for JavaScript
+title: Azure Schema Registry Avro Serializer client library for JavaScript - version 1.0.0-beta.8 
 keywords: Azure, javascript, SDK, API, @azure/schema-registry-avro, schemaregistry
 author: deyaaeldeen
 ms.author: dealmaha
 ms.date: 04/05/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: schemaregistry
+ms.service: azure
 ---
 # Azure Schema Registry Avro Serializer client library for JavaScript - version 1.0.0-beta.8 
 

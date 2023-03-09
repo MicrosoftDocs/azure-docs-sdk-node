@@ -20,7 +20,7 @@ Samples
 
 -------------------------------------
 
-# Getting started
+## Getting started
 
 ## Key concepts
 

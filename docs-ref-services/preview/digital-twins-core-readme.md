@@ -1,14 +1,12 @@
 ---
-title: Azure Azure Digital Twins Core client library for JavaScript
+title: Azure Azure Digital Twins Core client library for JavaScript - version 1.1.0-beta.1 
 keywords: Azure, javascript, SDK, API, @azure/digital-twins-core, digitaltwins
 author: johngallardo
 ms.author: jgalla
 ms.date: 04/04/2022
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: digitaltwins
+ms.service: digital-twins
 ---
 # Azure Azure Digital Twins Core client library for JavaScript - version 1.1.0-beta.1 
 

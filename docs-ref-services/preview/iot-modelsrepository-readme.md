@@ -1,14 +1,12 @@
 ---
-title: Azure IoT Models Repository client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/iot-modelsrepository, 
+title: Azure IoT Models Repository client library for JavaScript - version 1.0.0-beta.2 
+keywords: Azure, javascript, SDK, API, @azure/iot-modelsrepository, iot
 author: ramya-rao-a
 ms.author: ramyar
 ms.date: 05/28/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: azure
 ---
 
 # Azure IoT Models Repository client library for JavaScript - version 1.0.0-beta.2 
@@ -41,10 +39,10 @@ The preferred way to install the Azure IoT Models Repository client library for 
 npm install @azure/iot-modelsrepository
 ```
 
-# Examples
+## Examples
 
 
-## Initializing the Models Repository Client
+### Initializing the Models Repository Client
 
 ```ts
 // When no URI is provided for instantiation, the Azure IoT Models Repository global endpoint
@@ -157,21 +155,21 @@ console.log(fullyQualifiedModelPath);
 
 -----------------------------------------
 
-# Troubleshooting
+## Troubleshooting
 
 - If you run into an error, first make sure the model you are access exists at the location you are attempting to get it from.
 
-# Next steps
+## Next steps
 
 - Review the [DTDL Spec](https://docs.microsoft.com/azure/iot-pnp/concepts-model-parser).
 - Understand the [Device Models Repository](https://devicemodels.azure.com/).
 - Code a IoT Plug and Play 'Device' using the [Azure IoT SDK for Node](https://github.com/Azure/azure-iot-sdk-node/tree/master/device/samples/pnp/readme.md).  
 
-# Related projects
+## Related projects
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-# Contributing
+## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us

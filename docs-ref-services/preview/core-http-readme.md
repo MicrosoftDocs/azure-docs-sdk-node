@@ -1,5 +1,5 @@
 ---
-title: Azure Core HTTP client library for JavaScript
+title: Azure Core HTTP client library for JavaScript - version 1.2.0
 keywords: Azure, javascript, SDK, API, @azure/core-http, core
 author: ramya-rao-a
 ms.author: ramyar

@@ -1,5 +1,5 @@
 ---
-title: Azure Core HTTP client library for JavaScript
+title: Azure Core HTTP client library for JavaScript - version 1.1.0-beta.3 
 keywords: Azure, javascript, SDK, API, @azure/core-rest-pipeline, core
 author: ramya-rao-a
 ms.author: ramyar

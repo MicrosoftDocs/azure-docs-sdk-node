@@ -254,11 +254,11 @@ export DEBUG=azure:core-amqp:(error|warning),rhea-promise:error,rhea:events,rhea
     node your-test-script.js &> out.log
     ```
 
-# Next steps
+## Next steps
 
 Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/core-amqp_2.0.0-beta.1/sdk/core/core-amqp/samples) directory for detailed samples.
 
-# Contributing
+## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us

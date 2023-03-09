@@ -1,14 +1,12 @@
 ---
-title: Azure Remote Rendering client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/mixed-reality-remote-rendering, remoterendering
+title: Azure Remote Rendering client library for JavaScript - version 1.0.0-beta.1 
+keywords: Azure, javascript, SDK, API, @azure/mixed-reality-remote-rendering, remote-rendering
 author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/21/2021
 ms.topic: reference
-ms.prod: azure
-ms.technology: azure
 ms.devlang: javascript
-ms.service: remoterendering
+ms.service: azure-remote-rendering
 ---
 
 # Azure Remote Rendering client library for JavaScript - version 1.0.0-beta.1 

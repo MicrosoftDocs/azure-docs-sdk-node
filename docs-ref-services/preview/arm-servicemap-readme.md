@@ -1,5 +1,5 @@
 ---
-title: Azure Service client library for JavaScript
+title: Azure Service client library for JavaScript - version 3.0.0-beta.1 
 keywords: Azure, javascript, SDK, API, @azure/arm-servicemap, azure-service
 author: qiaozha
 ms.author: qiaozha

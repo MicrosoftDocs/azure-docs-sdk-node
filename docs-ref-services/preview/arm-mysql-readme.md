@@ -6,7 +6,7 @@ ms.author: magpint
 ms.date: 11/09/2021
 ms.topic: reference
 ms.devlang: javascript
-ms.service: azure
+ms.service: mysql
 ---
 
 # Azure MySQLManagement client library for JavaScript - version 5.0.0-beta.1 

@@ -3,7 +3,7 @@ title: Azure Site Recovery SDK for JavaScript
 description: Reference for Azure Site Recovery SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.date: 03/07/2023
+ms.date: 03/13/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: site-recovery

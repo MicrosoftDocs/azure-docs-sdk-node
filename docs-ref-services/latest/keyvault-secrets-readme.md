@@ -3,12 +3,12 @@ title: Azure Key Vault Secret client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/keyvault-secrets, keyvault
 author: timovv
 ms.author: timov
-ms.date: 09/20/2022
+ms.date: 03/14/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: keyvault
 ---
-# Azure Key Vault Secret client library for JavaScript - version 4.6.0 
+# Azure Key Vault Secret client library for JavaScript - version 4.7.0 
 
 
 Azure Key Vault is a service that allows you to encrypt authentication keys, storage account keys, data encryption keys, .pfx files, and passwords by using secured keys.
@@ -28,15 +28,15 @@ Use the client library for Azure Key Vault Secrets in your Node.js application t
 - Get all secrets.
 - Get all deleted secrets.
 
-> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.6.0/samples/cors/ts/README.md) for guidance.
+> Note: This package cannot be used in the browser due to Azure Key Vault service limitations, please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.7.0/samples/cors/ts/README.md) for guidance.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.6.0/sdk/keyvault/keyvault-secrets)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.7.0/sdk/keyvault/keyvault-secrets)
 - [Package (npm)](https://www.npmjs.com/package/@azure/keyvault-secrets)
 - [API Reference Documentation](/javascript/api/@azure/keyvault-secrets)
 - [Product documentation](https://azure.microsoft.com/services/key-vault/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.6.0/sdk/keyvault/keyvault-secrets/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/keyvault-secrets_4.7.0/sdk/keyvault/keyvault-secrets/samples)
 
 ## Getting started
 
@@ -92,7 +92,7 @@ You also need to enable `compilerOptions.allowSyntheticDefaultImports` in your t
 
 ## Authenticating with Azure Active Directory
 
-The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.6.0/sdk/identity/identity/README.md) provides more details and samples to get you started.
+The Key Vault service relies on Azure Active Directory to authenticate requests to its APIs. The [`@azure/identity`](https://www.npmjs.com/package/@azure/identity) package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.7.0/sdk/identity/identity/README.md) provides more details and samples to get you started.
 
 In order to interact with the Azure Key Vault service, you will need to create an instance of the `SecretClient` class, a **vault url** and a credential object. The examples shown in this document use a credential object named [`DefaultAzureCredential`][default_azure_credential], which is appropriate for most scenarios, including local development and production environments. Additionally, we recommend using a [managed identity][managed_identity] for authentication in production environments.
 
@@ -488,7 +488,7 @@ main();
 
 ## Troubleshooting
 
-See our [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.6.0/sdk/keyvault/keyvault-secrets/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
+See our [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.7.0/sdk/keyvault/keyvault-secrets/TROUBLESHOOTING.md) for details on how to diagnose various failure scenarios.
 
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
@@ -502,13 +502,13 @@ setLogLevel("info");
 
 You can find more code samples through the following links:
 
-- [Key Vault Secrets Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.6.0/sdk/keyvault/keyvault-secrets/samples/v4/javascript)
-- [Key Vault Secrets Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.6.0/sdk/keyvault/keyvault-secrets/samples/v4/typescript)
-- [Key Vault Secrets Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.6.0/sdk/keyvault/keyvault-secrets/test/)
+- [Key Vault Secrets Samples (JavaScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.7.0/sdk/keyvault/keyvault-secrets/samples/v4/javascript)
+- [Key Vault Secrets Samples (TypeScript)](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.7.0/sdk/keyvault/keyvault-secrets/samples/v4/typescript)
+- [Key Vault Secrets Test Cases](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.7.0/sdk/keyvault/keyvault-secrets/test/)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.6.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/keyvault-secrets_4.7.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 [azure_keyvault]: /azure/key-vault/general/overview
 [azure_keyvault_cli]: /azure/key-vault/general/quick-create-cli

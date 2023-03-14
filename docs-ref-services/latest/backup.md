@@ -3,12 +3,12 @@ title: Azure Backup SDK for JavaScript
 description: Reference for Azure Backup SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 03/13/2023
+ms.data: 03/14/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: backup
-ms.date: 07/18/2017
 manager: carmonm
+ms.date: 07/18/2017
 ---
 # Azure Backup Modules for JavaScript
 

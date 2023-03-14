@@ -2,8 +2,8 @@
 title: Azure Communication Phone Numbers client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-phone-numbers, 
 author: ramya-rao-a
-ms.author: ramyar
-ms.date: 04/26/2021
+ms.author: nostojic
+ms.date: 03/13/2021
 ms.topic: reference
 ms.prod: azure
 ms.technology: azure
@@ -11,7 +11,7 @@ ms.devlang: javascript
 ms.service: 
 ---
 
-# Azure Communication Phone Numbers client library for JavaScript - version 1.0.0 
+# Azure Communication Phone Numbers client library for JavaScript - version 1.2.0 
 
 
 The phone numbers library provides capabilities for phone number administration.
@@ -23,7 +23,7 @@ Purchased phone numbers can come with many capabilities, depending on the countr
 ### Prerequisites
 
 - An [Azure subscription][azure_sub].
-- An existing Communication Services resource. If you need to create the resource, you can use the [Azure Portal][azure_portal], the[Azure PowerShell][azure_powershell], or the [Azure CLI][azure_cli].
+- An existing Communication Services resource. If you need to create the resource, you can use the [Azure portal][azure_portal], the[Azure PowerShell][azure_powershell], or the [Azure CLI][azure_cli].
 
 ### Installing
 
@@ -35,12 +35,17 @@ npm install @azure/communication-phone-numbers
 
 #### JavaScript Bundle
 
-To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
+To use Bundle client library in the browser, first you need to use a bundler. For details on how to use bundler, refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
 ## Key concepts
 
-The phone numbers package exposes the `PhoneNumbersClient` which provides methods to manage phone numbers.
+This SDK provides functionality to easily manage `direct offer` and `direct routing` numbers.
 
+The `direct offer` numbers come in two types: Geographic and Toll-Free. Geographic phone plans are phone plans associated with a location, whose phone numbers' area codes are associated with the area code of a geographic location. Toll-Free phone plans are phone plans not associated location. For example, in the US, toll-free numbers can come with area codes such as 800 or 888. They are managed using the PhoneNumbersClient
+
+The `direct routing` feature enables connecting your existing telephony infrastructure to ACS. The configuration is managed using the SipRoutingClient. Client provides methods for setting up SIP trunks and voice routing rules, in order to properly handle calls for your telephony subnet.
+
+## Phone number client
 ### Phone number types
 
 Phone numbers come in two types; Geographic and Toll-Free. Geographic phone numbers are phone numbers associated with a location, whose area codes are associated with the area code of a geographic location. Toll-Free phone numbers are not associated with a location. For example, in the US, toll-free numbers can come with area codes such as 800 or 888.
@@ -49,7 +54,7 @@ All geographic phone numbers within the same country are grouped into a phone pl
 
 ### Searching and acquiring numbers
 
-Phone numbers can be searched through the search creation API by providing a phone number type (geographic or toll-free), assignment type (person or application), calling and sms capabilities, an area code and quantity of phone numbers. The provided quantity of phone numbers will be reserved for 15 minutes. This search of phone numbers can either be cancelled or purchased. If the search is cancelled, then the phone numbers will become available to others. If the search is purchased, then the phone numbers are acquired for the Azure resource.
+Phone numbers can be searched through the search creation API by providing a phone number type (geographic or toll-free), assignment type (person or application), calling and sms capabilities, an area code and quantity of phone numbers. The provided quantity of phone numbers will be reserved for 15 minutes. This search of phone numbers can either be canceled or purchased. If the search is canceled, then the phone numbers become available to others. If the search is purchased, then the phone numbers are acquired for the Azure resource.
 
 ### Configuring phone numbers
 
@@ -57,13 +62,19 @@ Phone numbers can have a combination of capabilities. They can be configured to 
 
 It is important to consider the assignment type of your phone number. Some capabilities are restricted to a particular assignment type.
 
+## Sip routing client
+
+Direct routing feature allows connecting customer-provided telephony infrastructure to Azure Communication Resources. In order to set up routing configuration properly, customer needs to supply the SIP trunk configuration and SIP routing rules for calls. SIP routing client provides the necessary interface for setting this configuration.
+
+When the call arrives, system tries to match the destination number with regex number patterns of defined routes. The first route to match the number will be selected. The order of regex matching is the same as the order of routes in configuration, therefore the order of routes matters. Once a route is matched, the call is routed to the first trunk in the route's trunks list. If the trunk is not available, next trunk in the list is selected.
+
 ## Examples
 
 ## Authentication
 
-To create a client object to access the Communication Services API, you will need a `connection string` or the `endpoint` of your Communication Services resource and a `credential`. The Phone Numbers client can use either Azure Active Directory credentials or an API key credential to authenticate.
+To create a client object to access the Communication Services API, you need a `connection string` or the `endpoint` of your Communication Services resource and a `credential`. The Phone Numbers client can use either Azure Active Directory credentials or an API key credential to authenticate.
 
-You can get a key and/or connection string from your Communication Services resource in the [Azure Portal][azure_portal]. You can also find the endpoint for your Communication Services resource in the [Azure Portal][azure_portal].
+You can get a key and/or connection string from your Communication Services resource in the [Azure portal][azure_portal]. You can also find the endpoint for your Communication Services resource in the [Azure portal][azure_portal].
 
 Once you have a key, you can authenticate the `PhoneNumbersClient` with any of the following methods:
 
@@ -76,9 +87,16 @@ const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
 const client = new PhoneNumbersClient(connectionString);
 ```
 
+```typescript
+import { SipRoutingClient } from "@azure/communication-phone-numbers";
+
+const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
+const client = new SipRoutingClient(connectionString);
+```
+
 ### Using an access key with `AzureKeyCredential`
 
-If you use a key to initialize the client you will also need to provide the appropriate endpoint. You can get this endpoint from your Communication Services resource in [Azure Portal][azure_portal]. Once you have a key and endpoint, you can authenticate with the following code:
+If you use a key to initialize the client, you will also need to provide the appropriate endpoint. You can get this endpoint from your Communication Services resource in [Azure portal][azure_portal]. Once you have a key and endpoint, you can authenticate with the following code:
 
 ```typescript
 import { AzureKeyCredential } from "@azure/core-auth";
@@ -88,15 +106,23 @@ const credential = new AzureKeyCredential("<key-from-resource>");
 const client = new PhoneNumbersClient("<endpoint-from-resource>", credential);
 ```
 
+```typescript
+import { AzureKeyCredential } from "@azure/core-auth";
+import { SipRoutingClient } from "@azure/communication-phone-numbers";
+
+const credential = new AzureKeyCredential("<key-from-resource>");
+const client = new SipRoutingClient("<endpoint-from-resource>", credential);
+```
+
 ### Using an Azure Active Directory Credential
 
-Connection string authentication is used in most of the examples, but you can also authenticate with Azure Active Directory using the [Azure Identity library][azure_identity]. To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the [`@azure/identity`][azure_identity] package:
+Connection string authentication is used in most of the examples, but you can also authenticate with Azure Active Directory using the [Azure Identity library][azure_identity]. To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK install the [`@azure/identity`][azure_identity] package:
 
 ```bash
 npm install @azure/identity
 ```
 
-The [`@azure/identity`][azure_identity] package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`][azure_identity_readme] provides more details and samples to get you started.
+The [`@azure/identity`][azure_identity] package provides various credential types that your application can use to do this. The [README for `@azure/identity`][azure_identity_readme] provides more details and samples to get you started.
 
 ```typescript
 import { DefaultAzureCredential } from "@azure/identity";
@@ -106,9 +132,19 @@ let credential = new DefaultAzureCredential();
 const client = new PhoneNumbersClient("<endpoint-from-resource>", credential);
 ```
 
+```typescript
+import { DefaultAzureCredential } from "@azure/identity";
+import { SipRoutingClient } from "@azure/communication-phone-numbers";
+
+let credential = new DefaultAzureCredential();
+const client = new SipRoutingClient("<endpoint-from-resource>", credential);
+```
+
 ## Usage
 
 The following sections provide code snippets that cover some of the common tasks using the Azure Communication Services Phone Numbers client. The scenarios that are covered here consist of:
+
+PhoneNumbersClient
 
 - [Search for available phone numbers](#search-for-available-phone-numbers)
 - [Purchase phone numbers from a search](#purchase-phone-numbers-from-a-search)
@@ -117,6 +153,15 @@ The following sections provide code snippets that cover some of the common tasks
 - [Get a purchased phone number](#get-a-purchased-phone-number)
 - [List purchased phone numbers](#list-purchased-phone-numbers)
 
+SipRoutingClient
+
+- [Retrieve SIP trunks and routes](#retreive-sip-trunks-and-routes)
+- [Replace SIP trunks and routes](#replace-sip-trunks-and-routes)
+- [Retrieve single trunk](#retreive-single-trunk)
+- [Set single trunk](#set-single-trunk)
+- [Delete single trunk](#delete-single-trunk)
+
+## PhoneNumberClient
 ### Search for available phone numbers
 
 Use the `beginSearchAvailablePhoneNumbers` method to search for phone numbers and reserve them. The phone numbers returned are reserved for 15 minutes and can be purchased during this period by providing the `searchId` to the `beginPurchasePhoneNumbers` method.
@@ -154,7 +199,7 @@ main();
 
 ### Purchase phone numbers from a search
 
-Use the `beginPurchasePhoneNumbers` method to purchase the phone numbers from your search. Purchased phone numbers will be assigned to the Communication Services resource used when initiating the client. The `searchId` returned from `beginSearchAvailablePhoneNumbers` is required.
+Use the `beginPurchasePhoneNumbers` method to purchase the phone numbers from your search. Purchased phone numbers are assigned to the Communication Services resource used when initiating the client. The `searchId` returned from `beginSearchAvailablePhoneNumbers` is required.
 
 `beginPurchasePhoneNumbers` is a long running operation and returns a poller.
 
@@ -193,7 +238,7 @@ main();
 
 ### Release a purchased phone number
 
-Use the `beginReleasePhoneNumber` method to release a previously purchased phone number. Released phone numbers will no longer be associated with the Communication Services resource, and will not be available for use with other operations (eg. SMS) of the resource. The phone number being released is required.
+Use the `beginReleasePhoneNumber` method to release a previously purchased phone number. Released phone numbers are no longer be associated with the Communication Services resource, and will not be available for use with other operations (eg. SMS) of the resource. The phone number being released is required.
 
 `beginReleasePhoneNumber` is a long running operation and returns a poller.
 
@@ -294,11 +339,134 @@ async main function() {
 main();
 ```
 
+## SipRoutingClient
+
+### Retrieve SIP trunks and routes
+
+List currently configured trunks or routes.
+
+```typescript
+import { SipRoutingClient } from "@azure/communication-phone-numbers";
+
+const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
+const client = new SipRoutingClient(connectionString);
+
+async function main() {
+  const trunks = await client.listTrunks();
+  const routes = await client.listRoutes();
+  for (const trunk of trunks) {
+    console.log(`Trunk ${trunk.fqdn}:${trunk.sipSignalingPort}`);
+  }
+  
+  for (const route of routes) {
+    console.log(`Route ${route.name} with pattern ${route.numberPattern}`);
+    console.log(`Route's trunks: ${route.trunks?.join()}`);
+  }
+}
+
+main();
+
+```
+
+### Replace SIP trunks and routes
+
+Replace the list of currently configured trunks or routes with new values.
+
+```typescript
+import { SipRoutingClient } from "@azure/communication-phone-numbers";
+
+const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
+const client = new SipRoutingClient(connectionString);
+
+async function main() {
+  await client.setTrunks([
+    {
+      fqdn: 'sbc.one.domain.com',
+      sipSignalingPort: 1234
+    },{
+      fqdn: 'sbc.two.domain.com',
+      sipSignalingPort: 1234
+    }
+  ]);
+
+  await client.setRoutes([
+    {
+      name: "First Route",
+      description: "route's description",
+      numberPattern: "^\+[1-9][0-9]{3,23}$",
+      trunks: [ 'sbc.one.domain.com' ]
+    },{
+      name: "Second Route",
+      description: "route's description",
+      numberPattern: "^.*$",
+      trunks: [ 'sbc.two.domain.com', 'sbc.one.domain.com' ]
+    }
+  ]);
+}
+
+main();
+```
+
+### Retrieve single trunk
+
+```typescript
+import { SipRoutingClient } from "@azure/communication-phone-numbers";
+
+const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
+const client = new SipRoutingClient(connectionString);
+
+async function main() {
+  const trunk = await client.getTrunk('sbc.one.domain.com');
+  if (trunk) {
+    console.log(`Trunk ${trunk.fqdn}:${trunk.sipSignalingPort}`);
+  } else {
+      console.log('Trunk not found')
+  }
+}
+
+main();
+```
+
+### Set single trunk
+
+```typescript
+import { SipRoutingClient } from "@azure/communication-phone-numbers";
+
+const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
+const client = new SipRoutingClient(connectionString);
+
+async function main() {
+  await client.setTrunk({
+    fqdn: 'sbc.one.domain.com',
+    sipSignalingPort: 4321
+  });
+}
+
+main();
+```
+
+### Delete single trunk
+
+```typescript
+import { SipRoutingClient } from "@azure/communication-phone-numbers";
+
+const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
+const client = new SipRoutingClient(connectionString);
+
+async function main() {
+  await client.deleteTrunk('sbc.one.domain.com');
+}
+
+main();
+```
+
+
+
 ## Troubleshooting
 
 ## Next steps
 
-Please take a look at the
+Take a look at the
 [samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.0.0/sdk/communication/communication-phone-numbers/samples)
 directory for detailed examples on how to use this library.
 
@@ -308,7 +476,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 ## Related projects
 
-- [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
+- [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
 [azure_cli]: https://docs.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

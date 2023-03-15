@@ -7,6 +7,7 @@ ms.date: 02/10/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storage
+ms.subservice: files
 ---
 # Azure Storage File Share client library for JavaScript - version 12.13.0-beta.1 
 

@@ -5,10 +5,9 @@ author: johngallardo
 ms.author: jgalla
 ms.date: 04/04/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: digitaltwins
+ms.service: digital-twins
 ---
 # Azure Azure Digital Twins Core client library for JavaScript - version 1.1.0-beta.1 
 

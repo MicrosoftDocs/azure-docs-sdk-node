@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 02/09/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: synapse-analytics
 ---
 
 ## Azure Synapse Monitoring client library for JavaScript - version 1.0.0-beta.2 

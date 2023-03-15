@@ -6,8 +6,7 @@ ms.author: jeffish
 ms.data: 02/10/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: iothub
-ms.prod: azure
+ms.service: iot-hub
 ms.technology: azure
 ms.date: 07/18/2017
 manager: timlt

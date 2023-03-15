@@ -8,7 +8,7 @@ ms.date: 07/18/2017
 ms.topic: reference
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: azure-javascript
+ms.service: azure-asm
 ---
 
 # Azure Server Management modules for JavaScript

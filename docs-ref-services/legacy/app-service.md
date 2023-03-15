@@ -6,10 +6,9 @@ ms.author: cfowler
 manager: jhubbard
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: appservice
+ms.service: app-service
 ---
 
 # Azure App Service modules for JavaScript

@@ -6,10 +6,9 @@ ms.author: spelluru
 manager: timlt
 ms.date: 03/04/2020
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: Service Bus
+ms.service: service-bus
 ---
 
 # Azure Service Bus Modules for JavaScript

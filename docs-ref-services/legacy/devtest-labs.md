@@ -6,10 +6,9 @@ ms.author: v-craic
 manager: v-laurab
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: DevTest Labs
+ms.service: devtest-lab
 ---
 
 # Azure DevTest Labs modules for JavaScript

@@ -1,12 +1,13 @@
 ---
 title: Azure Communication Phone Numbers client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-phone-numbers, 
+description: Purchase Numbers for direct offer or direct routing. Configure number calling capabilities. Configure direct routing in order to connect customer-provided telephony infrastructure to Azure Communication Resources
 author: ramya-rao-a
 ms.author: nostojic
 ms.date: 03/13/2021
 ms.topic: reference
 ms.prod: azure
-ms.technology: azure
+ms.technology: azure-cli
 ms.devlang: javascript
 ms.service: 
 ---
@@ -155,9 +156,9 @@ PhoneNumbersClient
 
 SipRoutingClient
 
-- [Retrieve SIP trunks and routes](#retreive-sip-trunks-and-routes)
+- [Retrieve SIP trunks and routes](#retrieve-sip-trunks-and-routes)
 - [Replace SIP trunks and routes](#replace-sip-trunks-and-routes)
-- [Retrieve single trunk](#retreive-single-trunk)
+- [Retrieve single trunk](#retrieve-single-trunk)
 - [Set single trunk](#set-single-trunk)
 - [Delete single trunk](#delete-single-trunk)
 

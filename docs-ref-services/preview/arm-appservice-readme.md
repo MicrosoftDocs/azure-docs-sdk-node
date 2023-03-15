@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/15/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: appservice
+ms.service: app-service
 ---
 
 # Azure WebSiteManagement client library for JavaScript - version 10.0.0-beta.1 

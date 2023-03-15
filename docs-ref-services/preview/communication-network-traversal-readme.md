@@ -5,10 +5,9 @@ author: AriZavala2
 ms.author: arzavala
 ms.date: 03/11/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: communication
+ms.service: azure-communication-services
 ---
 # Azure Communication Network Traversal client library for JavaScript - version 1.1.0-beta.1 
 

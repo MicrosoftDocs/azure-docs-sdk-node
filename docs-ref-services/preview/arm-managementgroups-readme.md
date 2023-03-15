@@ -5,10 +5,9 @@ author: maggiepint
 ms.author: magpint
 ms.date: 11/23/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: managementgroups
+ms.service: azure-javascript
 ---
 
 # Azure Service client library for JavaScript - version 2.0.0-beta.1 

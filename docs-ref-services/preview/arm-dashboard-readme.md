@@ -5,10 +5,9 @@ author: xirzec
 ms.author: jeffish
 ms.date: 04/13/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: dashboard
+ms.service: azure-javascript
 ---
 # Azure DashboardManagement client library for JavaScript - version 1.0.0-beta.1 
 

@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 10/15/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: managedapplications
+ms.service: azure-javascript
 ---
 
 # Azure Application client library for JavaScript - version 2.0.0-beta.1 

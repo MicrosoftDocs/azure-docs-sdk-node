@@ -5,10 +5,9 @@ author: xirzec
 ms.author: jeffish
 ms.date: 04/01/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: hardwaresecuritymodules
+ms.service: azure-javascript
 ---
 # Azure Service client library for JavaScript - version 1.0.0 
 

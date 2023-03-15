@@ -5,10 +5,9 @@ author: maggiepint
 ms.author: magpint
 ms.date: 11/18/2022
 ms.topic: article
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: cognitive-search
 ---
 
 # Azure Cognitive Search client library for JavaScript - Version 11.3.1 

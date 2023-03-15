@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 04/26/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: azure-communication-services
 ---
 
 # Azure Communication Phone Numbers client library for JavaScript - version 1.0.0 

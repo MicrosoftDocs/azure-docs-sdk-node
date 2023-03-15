@@ -6,10 +6,9 @@ ms.author: ramyar
 manager: angrobe
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: Server Management
+ms.service: azure-javascript
 ---
 
 # Azure Server Management modules for JavaScript

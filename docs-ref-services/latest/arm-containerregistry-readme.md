@@ -5,10 +5,9 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 12/28/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: containerregistry
+ms.service: container-registry
 ---
 # Azure ContainerRegistryManagement client library for JavaScript - version 10.0.0 
 

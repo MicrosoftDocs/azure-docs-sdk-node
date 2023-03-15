@@ -5,10 +5,9 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 01/14/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: synapse
+ms.service: synapse-analytics
 ---
 # Azure SynapseManagement client library for JavaScript - version 8.0.0 
 

@@ -3,7 +3,7 @@ title: Azure Domain Services SDK for JavaScript
 description: Reference for Azure Domain Services SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 03/15/2023
+ms.data: 03/16/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: domainservices

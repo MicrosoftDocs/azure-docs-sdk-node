@@ -7,7 +7,7 @@ ms.date: 11/16/2021
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-javascript
+ms.service: azure
 ---
 
 # Azure ConsumptionManagement client library for JavaScript - version 9.0.0-beta.1 

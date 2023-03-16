@@ -7,7 +7,7 @@ ms.date: 10/26/2021
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-javascript
+ms.service: azure
 ---
 
 # Azure RecoveryServices client library for JavaScript - version 5.0.0-beta.1 

@@ -7,7 +7,7 @@ ms.date: 10/15/2021
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-javascript
+ms.service: azure
 ---
 
 # Azure Feature client library for JavaScript - version 3.0.0-beta.1 

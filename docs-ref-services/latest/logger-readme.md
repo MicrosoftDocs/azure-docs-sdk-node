@@ -6,7 +6,7 @@ ms.author: jeffish
 ms.date: 03/02/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: azure-javascript
+ms.service: azure
 ---
 # Azure Logger client library for JavaScript - version 1.0.4 
 

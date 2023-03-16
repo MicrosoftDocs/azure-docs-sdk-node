@@ -7,7 +7,7 @@ ms.date: 04/05/2022
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-javascript
+ms.service: azure
 ---
 # Azure Schema Registry Avro Serializer client library for JavaScript - version 1.0.0-beta.8 
 

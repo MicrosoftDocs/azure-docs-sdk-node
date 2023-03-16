@@ -7,7 +7,7 @@ ms.date: 06/15/2021
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-javascript
+ms.service: azure
 ---
 
 # Azure Template client library for JavaScript - version 1.0.12 

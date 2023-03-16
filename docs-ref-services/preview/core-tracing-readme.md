@@ -7,7 +7,7 @@ ms.date: 02/03/2022
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-javascript
+ms.service: azure
 ---
 # Azure Core tracing library for JavaScript
 

@@ -7,7 +7,7 @@ ms.date: 11/04/2020
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-javascript
+ms.service: azure
 ---
 
 # Azure Core AMQP client library for AMQP operations

@@ -7,7 +7,7 @@ ms.date: 10/20/2021
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-javascript
+ms.service: azure
 ---
 
 # Azure Subscription client library for JavaScript - version 2.0.0-beta.1 

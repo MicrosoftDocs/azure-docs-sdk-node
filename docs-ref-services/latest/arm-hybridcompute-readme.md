@@ -7,7 +7,7 @@ ms.date: 01/19/2022
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-javascript
+ms.service: azure
 ---
 # Azure HybridComputeManagement client library for JavaScript - version 3.0.0 
 

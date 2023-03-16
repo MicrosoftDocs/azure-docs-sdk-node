@@ -8,7 +8,7 @@ ms.date: 04/16/2019
 ms.topic: reference
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: azure-javascript
+ms.service: azure
 ---
 
 # Azure Mixed Reality Resource Management Modules for JavaScript

@@ -7,7 +7,7 @@ ms.date: 04/27/2022
 ms.topic: reference
 ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-javascript
+ms.service: azur
 ---
 # Azure LoadTest client library for JavaScript - version 1.0.0-beta.2 
 

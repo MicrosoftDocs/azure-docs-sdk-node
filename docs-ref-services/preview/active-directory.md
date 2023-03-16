@@ -8,7 +8,7 @@ ms.date: 07/18/2017
 ms.topic: reference
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: azure-active-directory
+ms.service: active-directory
 ---
 
 # Azure Active Directory modules for Node.js

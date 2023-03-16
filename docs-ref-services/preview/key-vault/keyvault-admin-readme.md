@@ -9,7 +9,6 @@ ms.technology: azure
 ms.devlang: javascript
 ms.service: key-vault
 ---
-
 # Azure Key Vault Administration client library for JavaScript - version 4.2.0-beta.1 
 
 

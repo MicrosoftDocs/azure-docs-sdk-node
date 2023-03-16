@@ -23,7 +23,7 @@ Purchased phone numbers can come with many capabilities, depending on the countr
 ### Prerequisites
 
 - An [Azure subscription][azure_sub].
-- An existing Communication Services resource. If you need to create the resource, you can use the [Azure portal][azure_portal], the[Azure PowerShell][azure_powershell], or the [Azure CLI][azure_cli].
+- An existing Communication Services resource. If you need to create the resource, you can use the [Azure portal][azure_portal], the [Azure PowerShell](https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice), or the [Azure CLI](https://docs.microsoft.com/cli/azure).
 
 ### Installing
 
@@ -478,10 +478,8 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-[azure_cli]: [https://docs.microsoft.com/cli/azure](/cli/azure)
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_powershell]: [https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice](/powershell/module/az.communication/new-azcommunicationservice)
 [defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.0.0/sdk/identity/identity#defaultazurecredential
 [azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.0.0/sdk/identity/identity
 [azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.0.0/sdk/identity/identity/README.md

@@ -7,7 +7,6 @@ ms.author: nostojic
 ms.date: 03/13/2021
 ms.topic: reference
 ms.prod: azure
-ms.technology: azure-cli
 ms.devlang: javascript
 ms.service: 
 ---
@@ -479,10 +478,10 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: [https://docs.microsoft.com/cli/azure](/cli/azure)
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_powershell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
+[azure_powershell]: [https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice](/powershell/module/az.communication/new-azcommunicationservice)
 [defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.0.0/sdk/identity/identity#defaultazurecredential
 [azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.0.0/sdk/identity/identity
 [azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.0.0/sdk/identity/identity/README.md

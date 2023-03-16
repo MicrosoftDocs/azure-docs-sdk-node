@@ -46,6 +46,7 @@ The `direct offer` numbers come in two types: Geographic and Toll-Free. Geograph
 The `direct routing` feature enables connecting your existing telephony infrastructure to ACS. The configuration is managed using the SipRoutingClient. Client provides methods for setting up SIP trunks and voice routing rules, in order to properly handle calls for your telephony subnet.
 
 ## Phone number client
+
 ### Phone number types
 
 Phone numbers come in two types; Geographic and Toll-Free. Geographic phone numbers are phone numbers associated with a location, whose area codes are associated with the area code of a geographic location. Toll-Free phone numbers are not associated with a location. For example, in the US, toll-free numbers can come with area codes such as 800 or 888.
@@ -162,6 +163,7 @@ SipRoutingClient
 - [Delete single trunk](#delete-single-trunk)
 
 ## PhoneNumberClient
+
 ### Search for available phone numbers
 
 Use the `beginSearchAvailablePhoneNumbers` method to search for phone numbers and reserve them. The phone numbers returned are reserved for 15 minutes and can be purchased during this period by providing the `searchId` to the `beginPurchasePhoneNumbers` method.
@@ -459,8 +461,6 @@ async function main() {
 
 main();
 ```
-
-
 
 ## Troubleshooting
 

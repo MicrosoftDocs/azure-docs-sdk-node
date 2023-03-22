@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: desktopvirtualization
 ---
-# Azure Desktop Virtualization SDK for JavaScript - preview
-## Packages - preview
+# Azure Desktop Virtualization SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](desktop-virtualization-index.md)]

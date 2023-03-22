@@ -7,3 +7,4 @@
 |[Storage - Queues](storage-queue-readme.md)|[@azure/storage-queue](https://www.npmjs.com/package/@azure/storage-queue)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/storage/storage-queue)|
 |[Resource Management - Data Lake Analytics](arm-datalake-analytics-readme.md)|[@azure/arm-datalake-analytics](https://www.npmjs.com/package/@azure/arm-datalake-analytics)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/datalake-analytics/arm-datalake-analytics)|
 |[Resource Management - Storage](arm-storage-readme.md)|[@azure/arm-storage](https://www.npmjs.com/package/@azure/arm-storage)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/storage/arm-storage)|
+|[Resource Management - Storage Cache](arm-storagecache-readme.md)|[@azure/arm-storagecache](https://www.npmjs.com/package/@azure/arm-storagecache)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/storagecache/arm-storagecache)|

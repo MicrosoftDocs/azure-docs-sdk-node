@@ -99,8 +99,8 @@ You can familiarize yourself with different APIs using [Samples](https://github.
 You can create a client and call the client's `Upload` method. Take note of the data ingestion [limits](https://learn.microsoft.com/azure/azure-monitor/service-limits#custom-logs).
 
 ```js
-const { isAggregateLogsUploadError, DefaultAzureCredential } = require("@azure/identity");
-const { LogsIngestionClient } = require("@azure/monitor-ingestion");
+const { DefaultAzureCredential } = require("@azure/identity");
+const { isAggregateLogsUploadError, LogsIngestionClient } = require("@azure/monitor-ingestion");
 
 require("dotenv").config();
 

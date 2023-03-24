@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/arm-reservations, reservations
 author: xirzec
 ms.author: jeffish
-ms.date: 02/21/2023
+ms.date: 03/22/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: reservations
@@ -14,7 +14,7 @@ This package contains an isomorphic SDK (runs both in Node.js and in browsers) f
 
 This API describe Azure Reservation
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-reservations_8.0.0/sdk/reservations/arm-reservations) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-reservations_9.0.0/sdk/reservations/arm-reservations) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-reservations) |
 [API reference documentation](/javascript/api/@azure/arm-reservations) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -26,7 +26,7 @@ This API describe Azure Reservation
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-reservations_8.0.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-reservations_9.0.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -45,7 +45,7 @@ npm install @azure/arm-reservations
 To create a client object to access the AzureReservationApi API, you will need the `endpoint` of your AzureReservationApi resource and a `credential`. The AzureReservationApi client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your AzureReservationApi resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-reservations_8.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-reservations_9.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -95,7 +95,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-reservations_8.0.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-reservations_9.0.0/sdk/core/logger).
 
 ## Next steps
 
@@ -103,7 +103,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-reservations_8.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-reservations_9.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -115,6 +115,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-reservations_8.0.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-reservations_8.0.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-reservations_9.0.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-reservations_9.0.0/sdk/identity/identity#defaultazurecredential
 

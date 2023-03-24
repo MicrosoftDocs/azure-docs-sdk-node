@@ -85,6 +85,10 @@ interfaces:
   - '@azure/arm-hybridcontainerservice.OrchestratorVersionProfile'
   - '@azure/arm-hybridcontainerservice.OrchestratorVersionProfileListResult'
   - '@azure/arm-hybridcontainerservice.ProvisionedClusterIdentity'
+  - '@azure/arm-hybridcontainerservice.ProvisionedClusterPoolUpgradeProfile'
+  - >-
+    @azure/arm-hybridcontainerservice.ProvisionedClusterPoolUpgradeProfileProperties
+  - '@azure/arm-hybridcontainerservice.ProvisionedClusterUpgradeProfile'
   - '@azure/arm-hybridcontainerservice.ProvisionedClusters'
   - '@azure/arm-hybridcontainerservice.ProvisionedClustersAllProperties'
   - '@azure/arm-hybridcontainerservice.ProvisionedClustersCommonProperties'
@@ -102,6 +106,8 @@ interfaces:
   - '@azure/arm-hybridcontainerservice.ProvisionedClustersDeleteOptionalParams'
   - '@azure/arm-hybridcontainerservice.ProvisionedClustersExtendedLocation'
   - '@azure/arm-hybridcontainerservice.ProvisionedClustersGetOptionalParams'
+  - >-
+    @azure/arm-hybridcontainerservice.ProvisionedClustersGetUpgradeProfileOptionalParams
   - >-
     @azure/arm-hybridcontainerservice.ProvisionedClustersListByResourceGroupNextOptionalParams
   - >-
@@ -121,6 +127,8 @@ interfaces:
   - '@azure/arm-hybridcontainerservice.ProvisionedClustersResponseListResult'
   - '@azure/arm-hybridcontainerservice.ProvisionedClustersResponseProperties'
   - '@azure/arm-hybridcontainerservice.ProvisionedClustersUpdateOptionalParams'
+  - >-
+    @azure/arm-hybridcontainerservice.ProvisionedClustersUpgradeNodeImageVersionForEntireClusterOptionalParams
   - '@azure/arm-hybridcontainerservice.ProxyResource'
   - '@azure/arm-hybridcontainerservice.Resource'
   - '@azure/arm-hybridcontainerservice.ResourceProviderOperation'
@@ -176,7 +184,7 @@ interfaces:
   - >-
     @azure/arm-hybridcontainerservice.VirtualNetworksPropertiesInfraVnetProfileHci
   - >-
-    @azure/arm-hybridcontainerservice.VirtualNetworksPropertiesInfraVnetProfileKubevirt
+    @azure/arm-hybridcontainerservice.VirtualNetworksPropertiesInfraVnetProfileNetworkCloud
   - >-
     @azure/arm-hybridcontainerservice.VirtualNetworksPropertiesInfraVnetProfileVmware
   - '@azure/arm-hybridcontainerservice.VirtualNetworksPropertiesStatus'
@@ -219,6 +227,8 @@ typeAliases:
   - '@azure/arm-hybridcontainerservice.ProvisionedClustersCreateOrUpdateResponse'
   - '@azure/arm-hybridcontainerservice.ProvisionedClustersGetResponse'
   - >-
+    @azure/arm-hybridcontainerservice.ProvisionedClustersGetUpgradeProfileResponse
+  - >-
     @azure/arm-hybridcontainerservice.ProvisionedClustersListByResourceGroupNextResponse
   - >-
     @azure/arm-hybridcontainerservice.ProvisionedClustersListByResourceGroupResponse
@@ -252,8 +262,8 @@ functions:
     uid: '@azure/arm-hybridcontainerservice.getContinuationToken'
     package: '@azure/arm-hybridcontainerservice'
     summary: |-
-      Given a result page from a pageable operation, returns a
-      continuation token that can be used to begin paging from
+      Given the last `.value` produced by the `byPage` iterator,
+      returns a continuation token that can be used to begin paging from
       that point later.
     remarks: ''
     isDeprecated: false
@@ -262,7 +272,11 @@ functions:
       parameters:
         - id: page
           type: unknown
-          description: A result object from calling .byPage() on a paged operation.
+          description: >-
+            An object from accessing `value` on the IteratorResult from a
+            `byPage` iterator.
       return:
-        description: The continuation token that can be passed into byPage().
+        description: >-
+          The continuation token that can be passed into byPage() during future
+          calls.
         type: string | undefined

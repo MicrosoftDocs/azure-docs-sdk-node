@@ -1,9 +1,9 @@
 ---
 title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-orbital, orbital
-author: qiaozha
-ms.author: qiaozha
-ms.date: 02/03/2023
+author: xirzec
+ms.author: jeffish
+ms.date: 03/22/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: orbital
@@ -12,9 +12,9 @@ ms.service: orbital
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for AzureOrbital client.
 
-Azure Orbital service
+Azure Orbital service.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-orbital_1.2.0/sdk/orbital/arm-orbital) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-orbital_2.0.0/sdk/orbital/arm-orbital) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-orbital) |
 [API reference documentation](/javascript/api/@azure/arm-orbital) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
@@ -26,7 +26,7 @@ Azure Orbital service
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-orbital_1.2.0/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-orbital_2.0.0/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -45,7 +45,7 @@ npm install @azure/arm-orbital
 To create a client object to access the AzureOrbital API, you will need the `endpoint` of your AzureOrbital resource and a `credential`. The AzureOrbital client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your AzureOrbital resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-orbital_1.2.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-orbital_2.0.0/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -95,7 +95,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-orbital_1.2.0/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-orbital_2.0.0/sdk/core/logger).
 
 ## Next steps
 
@@ -103,7 +103,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-orbital_1.2.0/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-orbital_2.0.0/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -115,6 +115,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-orbital_1.2.0/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-orbital_1.2.0/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-orbital_2.0.0/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-orbital_2.0.0/sdk/identity/identity#defaultazurecredential
 

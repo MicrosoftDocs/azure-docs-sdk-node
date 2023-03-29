@@ -1,0 +1,183 @@
+### YamlMime:TSType
+name: AsyncLock
+uid: '@azure/amqp-common.AsyncLock'
+package: '@azure/amqp-common'
+summary: ''
+fullName: AsyncLock
+remarks: ''
+isDeprecated: false
+type: class
+constructors:
+  - name: AsyncLock(AsyncLockOptions)
+    uid: '@azure/amqp-common.AsyncLock.constructor'
+    package: '@azure/amqp-common'
+    summary: ''
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'new AsyncLock(options?: AsyncLockOptions)'
+      parameters:
+        - id: options
+          type: <xref uid="@azure/amqp-common.AsyncLock.AsyncLockOptions" />
+          description: ''
+properties:
+  - name: DEFAULT_MAX_EXECUTION_TIME
+    uid: '@azure/amqp-common.AsyncLock.DEFAULT_MAX_EXECUTION_TIME'
+    package: '@azure/amqp-common'
+    summary: ''
+    fullName: DEFAULT_MAX_EXECUTION_TIME
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static DEFAULT_MAX_EXECUTION_TIME: 0'
+      return:
+        description: ''
+        type: '0'
+  - name: DEFAULT_MAX_OCCUPATION_TIME
+    uid: '@azure/amqp-common.AsyncLock.DEFAULT_MAX_OCCUPATION_TIME'
+    package: '@azure/amqp-common'
+    summary: ''
+    fullName: DEFAULT_MAX_OCCUPATION_TIME
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static DEFAULT_MAX_OCCUPATION_TIME: 0'
+      return:
+        description: ''
+        type: '0'
+  - name: DEFAULT_MAX_PENDING
+    uid: '@azure/amqp-common.AsyncLock.DEFAULT_MAX_PENDING'
+    package: '@azure/amqp-common'
+    summary: ''
+    fullName: DEFAULT_MAX_PENDING
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static DEFAULT_MAX_PENDING: 1000'
+      return:
+        description: ''
+        type: '1000'
+  - name: DEFAULT_TIMEOUT
+    uid: '@azure/amqp-common.AsyncLock.DEFAULT_TIMEOUT'
+    package: '@azure/amqp-common'
+    summary: ''
+    fullName: DEFAULT_TIMEOUT
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static DEFAULT_TIMEOUT: 0'
+      return:
+        description: ''
+        type: '0'
+methods:
+  - name: >-
+      acquire<T>(string | string[], () => T | PromiseLike<T> | (done:
+      AsyncLockDoneCallback<T>) => any, AsyncLockOptions)
+    uid: '@azure/amqp-common.AsyncLock.acquire'
+    package: '@azure/amqp-common'
+    summary: |+
+      Lock on asynchronous code.
+
+      **Example**
+
+      ```ts
+      import AsyncLock = require('async-lock');
+      const lock = new AsyncLock();
+
+      lock.acquire(
+          key,
+          () => {
+              // return value or promise
+          },
+          opts
+      ).then(() => {
+          // lock released
+      });
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function acquire<T>(key: string | string[], fn: () => T | PromiseLike<T>
+        | (done: AsyncLockDoneCallback<T>) => any, opts?: AsyncLockOptions):
+        Promise<T>
+      parameters:
+        - id: key
+          type: string | string[]
+          description: resource key or keys to lock
+        - id: fn
+          type: >-
+            () =&gt; T | PromiseLike&lt;T&gt; | (done:
+            AsyncLockDoneCallback&lt;T&gt;) =&gt; any
+          description: function to execute
+        - id: opts
+          type: <xref uid="@azure/amqp-common.AsyncLock.AsyncLockOptions" />
+          description: options
+      return:
+        description: ''
+        type: Promise&lt;T&gt;
+  - name: >-
+      acquire<T>(string | string[], (done: AsyncLockDoneCallback<T>) => any,
+      AsyncLockDoneCallback<T>, AsyncLockOptions)
+    uid: '@azure/amqp-common.AsyncLock.acquire_1'
+    package: '@azure/amqp-common'
+    summary: |+
+      Lock on asynchronous code.
+
+      **Example**
+
+      ```ts
+      import AsyncLock = require('async-lock');
+      const lock = new AsyncLock();
+
+      lock.acquire(
+          key,
+          (done) => {
+              // async work
+              done(err, ret);
+          },
+          (err, ret) => {
+              // lock released
+          },
+          opts
+      );
+      ```
+
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function acquire<T>(key: string | string[], fn: (done:
+        AsyncLockDoneCallback<T>) => any, cb: AsyncLockDoneCallback<T>, opts?:
+        AsyncLockOptions)
+      parameters:
+        - id: key
+          type: string | string[]
+          description: resource key or keys to lock
+        - id: fn
+          type: '(done: AsyncLockDoneCallback&lt;T&gt;) =&gt; any'
+          description: function to execute
+        - id: cb
+          type: >-
+            <xref uid="@azure/amqp-common.AsyncLock.AsyncLockDoneCallback"
+            />&lt;T&gt;
+          description: callback function
+        - id: opts
+          type: <xref uid="@azure/amqp-common.AsyncLock.AsyncLockOptions" />
+          description: options
+  - name: isBusy(string)
+    uid: '@azure/amqp-common.AsyncLock.isBusy'
+    package: '@azure/amqp-common'
+    summary: Whether there is any running or pending async function.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function isBusy(key?: string): boolean'
+      parameters:
+        - id: key
+          type: string
+          description: ''
+      return:
+        description: ''
+        type: boolean

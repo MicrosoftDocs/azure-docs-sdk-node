@@ -3,14 +3,14 @@ title: Azure Site Recovery SDK for JavaScript
 description: Reference for Azure Site Recovery SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.date: 03/30/2023
+ms.data: 03/30/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: site-recovery
+ms.service: siterecovery
 manager: carmonm
 ms.technology: azure
+ms.date: 03/30/2023
 ---
-
 # Azure Site Recovery modules for JavaScript
 
 Site Recovery allows you to automate replication of Azure VMs between regions, on-premises virtual machines and physical servers to Azure, and on-premises machines to a secondary datacenter.

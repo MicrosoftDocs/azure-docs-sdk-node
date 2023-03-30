@@ -3,7 +3,7 @@ title: Azure Security DevOps SDK for JavaScript
 description: Reference for Azure Security DevOps SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 03/29/2023
+ms.data: 03/30/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: securitydevops

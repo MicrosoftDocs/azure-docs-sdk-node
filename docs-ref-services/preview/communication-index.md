@@ -1,6 +1,7 @@
 | Reference | Package | Source |
 |---|---|---|
 |[Communication Chat](communication-chat-readme.md)|[@azure/communication-chat](https://www.npmjs.com/package/@azure/communication-chat)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-chat)|
+|[Communication Common](communication-common-readme.md)|[@azure/communication-common](https://www.npmjs.com/package/@azure/communication-common)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-common)|
 |[Communication Email](communication-email-readme.md)|[@azure/communication-email](https://www.npmjs.com/package/@azure/communication-email)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-email)|
 |[Communication Identity](communication-identity-readme.md)|[@azure/communication-identity](https://www.npmjs.com/package/@azure/communication-identity)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-identity)|
 |[Communication Network Traversal](communication-network-traversal-readme.md)|[@azure/communication-network-traversal](https://www.npmjs.com/package/@azure/communication-network-traversal)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-network-traversal)|

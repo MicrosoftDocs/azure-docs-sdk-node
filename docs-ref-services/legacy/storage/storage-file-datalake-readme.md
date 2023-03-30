@@ -5,10 +5,10 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 11/11/2020
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: 
+ms.service: storage
+ms.subservice: data-lake-storage-gen2
 ---
 
 # Azure Storage File Data Lake client library for JavaScript - version 12.2.0 

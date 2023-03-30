@@ -6,10 +6,9 @@ ms.author: rkarlin
 manager: kfile
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: PowerBI Embedded
+ms.service: power-bi-embedded
 ---
 
 # Azure PowerBI Embedded modules for JavaScript

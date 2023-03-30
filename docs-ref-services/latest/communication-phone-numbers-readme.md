@@ -3,10 +3,11 @@ title: Azure Communication Phone Numbers client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-phone-numbers, communication
 author: xirzec
 ms.author: jeffish
-ms.date: 03/28/2023
+ms.date: 03/29/2023
 ms.topic: reference
+ms.technology: azure
 ms.devlang: javascript
-ms.service: communication
+ms.service: azure-communication-services
 ---
 # Azure Communication Phone Numbers client library for JavaScript - version 1.2.0 
 

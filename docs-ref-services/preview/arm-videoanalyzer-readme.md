@@ -5,10 +5,9 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 12/17/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: videoanalyzer
+ms.service: azure-video-analyzer
 ---
 # Azure VideoAnalyzerManagement client library for JavaScript - version 1.0.0-beta.2 
 

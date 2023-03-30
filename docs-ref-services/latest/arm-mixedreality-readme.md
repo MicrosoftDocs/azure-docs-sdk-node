@@ -5,10 +5,9 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 01/20/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: mixedreality
+ms.service: azure
 ---
 # Azure MixedReality client library for JavaScript - version 4.0.1 
 

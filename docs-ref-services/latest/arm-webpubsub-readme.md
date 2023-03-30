@@ -5,8 +5,9 @@ author: vicancy
 ms.author: lianwei
 ms.date: 03/20/2023
 ms.topic: reference
+ms.technology: azure
 ms.devlang: javascript
-ms.service: web-pubsub
+ms.service: azure-web-pubsub
 ---
 # Azure WebPubSubManagement client library for JavaScript - version 1.1.0 
 

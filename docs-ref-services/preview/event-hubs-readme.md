@@ -5,10 +5,9 @@ author: jeremymeng
 ms.author: yumeng
 ms.date: 04/06/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: eventhub
+ms.service: event-hubs
 ---
 # Azure Event Hubs client library for JavaScript - version 5.8.0-beta.3 
 

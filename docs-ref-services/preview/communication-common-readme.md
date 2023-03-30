@@ -5,9 +5,11 @@ author: xirzec
 ms.author: jeffish
 ms.date: 03/29/2023
 ms.topic: reference
+ms.technology: azure
 ms.devlang: javascript
-ms.service: communication
+ms.service: azure-communication-services
 ---
+
 # Azure Communication Common client library for JavaScript - version 3.0.0-beta.1 
 
 

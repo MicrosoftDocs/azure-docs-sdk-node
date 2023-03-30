@@ -6,7 +6,6 @@ ms.author: barclayn
 manager: mbaldwin
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
 ms.service: key-vault

@@ -5,7 +5,6 @@ author: maggiepint
 ms.author: magpint
 ms.date: 11/22/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
 ms.service: batch

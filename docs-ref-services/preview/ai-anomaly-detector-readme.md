@@ -5,10 +5,10 @@ author: ramya-rao-a
 ms.author: ramya-rao-a
 ms.date: 01/21/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: anomalydetector
+ms.service: cognitive-services
+ms.subservice: anomaly-detector
 ---
 # Azure Anomaly Detector client library for JavaScript - version 3.0.0-beta.5 
 

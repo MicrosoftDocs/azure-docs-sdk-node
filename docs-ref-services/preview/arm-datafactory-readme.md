@@ -5,10 +5,9 @@ author: maggiepint
 ms.author: magpint
 ms.date: 11/24/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: datafactory
+ms.service: data-factory
 ---
 
 # Azure DataFactoryManagement client library for JavaScript - version 10.0.0-beta.1 

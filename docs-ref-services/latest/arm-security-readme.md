@@ -5,10 +5,9 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 04/01/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: security
+ms.service: security-center
 ---
 # Azure Service client library for JavaScript - version 5.0.0 
 

@@ -5,10 +5,9 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 04/15/2022
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: appconfiguration
+ms.service: azure-app-configuration
 ---
 # Azure AppConfigurationManagement client library for JavaScript - version 3.0.0-beta.4 
 

@@ -6,9 +6,9 @@ ms.author: celested
 manager: mtillman
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
+ms.service: active-directory
 ---
 
 # Azure Active Directory modules for Node.js

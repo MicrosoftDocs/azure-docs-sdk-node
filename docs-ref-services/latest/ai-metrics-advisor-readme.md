@@ -5,10 +5,10 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 07/06/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: metricsadvisor
+ms.service: cognitive-services
+ms.subservice: metrics-advisor
 ---
 
 # Azure Metrics Advisor client library for JavaScript - version 1.0.0 

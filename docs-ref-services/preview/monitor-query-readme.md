@@ -5,10 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 09/10/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: monitor
+ms.service: azure-monitor
 ---
 
 # Azure Monitor Workspace query client library for JavaScript - version 1.0.0-beta.5 

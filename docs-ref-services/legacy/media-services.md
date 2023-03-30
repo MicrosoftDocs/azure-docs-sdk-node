@@ -6,10 +6,9 @@ ms.author: juliako
 manager: cfowler
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: Media Services
+ms.service: media-services
 ---
 
 # Azure Media Services modules for JavaScript

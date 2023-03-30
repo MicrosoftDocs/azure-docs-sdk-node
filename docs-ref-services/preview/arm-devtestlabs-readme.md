@@ -5,10 +5,9 @@ author: qiaozha
 ms.author: qiaozha
 ms.date: 12/02/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
-ms.service: devtestlabs
+ms.service: devtest-lab
 ---
 
 # Azure DevTestLabs client library for JavaScript - version 4.0.0-beta.1 

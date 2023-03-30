@@ -6,10 +6,9 @@ ms.author: kumud
 manager: jeconnoc
 ms.date: 07/18/2017
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: nodejs
-ms.service: DNS
+ms.service: dns
 ---
 
 # Azure DNS modules for JavaScript

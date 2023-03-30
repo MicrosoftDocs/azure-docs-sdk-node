@@ -5,10 +5,10 @@ author: PatrickFarley
 ms.author: pafarley
 ms.date: 06/21/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology:
 ms.devlang: javascript
-ms.service: 
+ms.service: cognitive-services
+ms.subservice: face-api
 ---
 
 # Azure Face API

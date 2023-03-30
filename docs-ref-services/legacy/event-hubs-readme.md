@@ -5,9 +5,9 @@ author: ramya-rao-a
 ms.author: ramyar
 ms.date: 02/02/2021
 ms.topic: reference
-ms.prod: azure
 ms.technology: azure
 ms.devlang: javascript
+ms.service: event-hubs
 ---
 
 # Azure Event Hubs client library for JavaScript - version 2.1.4 

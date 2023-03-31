@@ -2,6 +2,7 @@
 |---|---|---|
 |[Communication Chat](communication-chat-readme.md)|[@azure/communication-chat](https://www.npmjs.com/package/@azure/communication-chat)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-chat)|
 |[Communication Common](communication-common-readme.md)|[@azure/communication-common](https://www.npmjs.com/package/@azure/communication-common)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-common)|
+|[Communication Email](communication-email-readme.md)|[@azure/communication-email](https://www.npmjs.com/package/@azure/communication-email)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-email)|
 |[Communication Identity](communication-identity-readme.md)|[@azure/communication-identity](https://www.npmjs.com/package/@azure/communication-identity)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-identity)|
 |[Communication Phone Numbers](communication-phone-numbers-readme.md)|[@azure/communication-phone-numbers](https://www.npmjs.com/package/@azure/communication-phone-numbers)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-phone-numbers)|
 |@azure/communication-react|[@azure/communication-react](https://www.npmjs.com/package/@azure/communication-react)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|

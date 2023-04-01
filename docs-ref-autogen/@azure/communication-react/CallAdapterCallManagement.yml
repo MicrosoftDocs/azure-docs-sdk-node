@@ -2,12 +2,13 @@
 name: CallAdapterCallManagement
 uid: '@azure/communication-react.CallAdapterCallManagement'
 package: '@azure/communication-react'
-summary: Functionality for managing the current call.
+summary: Functionality for managing the current call or start a new call
 fullName: CallAdapterCallManagement
 remarks: ''
-isDeprecated: false
+isDeprecated: true
+customDeprecatedMessage: CallAdapter interface will be flatten, consider using CallAdapter directly
 type: interface
-methods:
+inheritedMethods:
   - name: createStreamView(string, VideoStreamOptions)
     uid: '@azure/communication-react.CallAdapterCallManagement.createStreamView'
     package: '@azure/communication-react'
@@ -17,7 +18,7 @@ methods:
     syntax:
       content: >-
         function createStreamView(remoteUserId?: string, options?:
-        VideoStreamOptions): Promise<void>
+        VideoStreamOptions): Promise<void | CreateVideoStreamViewResult>
       parameters:
         - id: remoteUserId
           type: string
@@ -31,7 +32,12 @@ methods:
             <xref:%40azure%2Fcommunication-calling%23VideoStreamOptions>
       return:
         description: ''
-        type: Promise&lt;void&gt;
+        type: >-
+          Promise&lt;void | <xref
+          uid="@azure/communication-react.CreateVideoStreamViewResult" />&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [CallAdapterCallOperations.createStreamView](xref:@azure/communication-react.CallAdapterCallOperations.createStreamView)
   - name: disposeStreamView(string, VideoStreamOptions)
     uid: '@azure/communication-react.CallAdapterCallManagement.disposeStreamView'
     package: '@azure/communication-react'
@@ -56,21 +62,9 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: joinCall(boolean)
-    uid: '@azure/communication-react.CallAdapterCallManagement.joinCall'
-    package: '@azure/communication-react'
-    summary: Join the call with microphone initially on/off.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function joinCall(microphoneOn?: boolean): undefined | Call'
-      parameters:
-        - id: microphoneOn
-          type: boolean
-          description: Whether microphone is initially enabled
-      return:
-        description: ''
-        type: undefined | Call
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [CallAdapterCallOperations.disposeStreamView](xref:@azure/communication-react.CallAdapterCallOperations.disposeStreamView)
   - name: leaveCall(boolean)
     uid: '@azure/communication-react.CallAdapterCallManagement.leaveCall'
     package: '@azure/communication-react'
@@ -86,6 +80,9 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [CallAdapterCallOperations.leaveCall](xref:@azure/communication-react.CallAdapterCallOperations.leaveCall)
   - name: mute()
     uid: '@azure/communication-react.CallAdapterCallManagement.mute'
     package: '@azure/communication-react'
@@ -97,6 +94,9 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [CallAdapterCallOperations.mute](xref:@azure/communication-react.CallAdapterCallOperations.mute)
   - name: removeParticipant(string)
     uid: '@azure/communication-react.CallAdapterCallManagement.removeParticipant'
     package: '@azure/communication-react'
@@ -112,21 +112,9 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: startCall(string[])
-    uid: '@azure/communication-react.CallAdapterCallManagement.startCall'
-    package: '@azure/communication-react'
-    summary: Start the call.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'function startCall(participants: string[]): undefined | Call'
-      parameters:
-        - id: participants
-          type: string[]
-          description: An array of participant ids to join
-      return:
-        description: ''
-        type: undefined | Call
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [CallAdapterCallOperations.removeParticipant](xref:@azure/communication-react.CallAdapterCallOperations.removeParticipant)
   - name: startCamera(VideoStreamOptions)
     uid: '@azure/communication-react.CallAdapterCallManagement.startCamera'
     package: '@azure/communication-react'
@@ -148,6 +136,9 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [CallAdapterCallOperations.startCamera](xref:@azure/communication-react.CallAdapterCallOperations.startCamera)
   - name: startScreenShare()
     uid: '@azure/communication-react.CallAdapterCallManagement.startScreenShare'
     package: '@azure/communication-react'
@@ -159,6 +150,9 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [CallAdapterCallOperations.startScreenShare](xref:@azure/communication-react.CallAdapterCallOperations.startScreenShare)
   - name: stopCamera()
     uid: '@azure/communication-react.CallAdapterCallManagement.stopCamera'
     package: '@azure/communication-react'
@@ -174,6 +168,9 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [CallAdapterCallOperations.stopCamera](xref:@azure/communication-react.CallAdapterCallOperations.stopCamera)
   - name: stopScreenShare()
     uid: '@azure/communication-react.CallAdapterCallManagement.stopScreenShare'
     package: '@azure/communication-react'
@@ -185,6 +182,9 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [CallAdapterCallOperations.stopScreenShare](xref:@azure/communication-react.CallAdapterCallOperations.stopScreenShare)
   - name: unmute()
     uid: '@azure/communication-react.CallAdapterCallManagement.unmute'
     package: '@azure/communication-react'
@@ -196,3 +196,43 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [CallAdapterCallOperations.unmute](xref:@azure/communication-react.CallAdapterCallOperations.unmute)
+methods:
+  - name: joinCall(boolean)
+    uid: '@azure/communication-react.CallAdapterCallManagement.joinCall'
+    package: '@azure/communication-react'
+    summary: Join the call with microphone initially on/off.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'function joinCall(microphoneOn?: boolean): undefined | Call'
+      parameters:
+        - id: microphoneOn
+          type: boolean
+          description: Whether microphone is initially enabled
+      return:
+        description: ''
+        type: undefined | Call
+  - name: startCall(string[], StartCallOptions)
+    uid: '@azure/communication-react.CallAdapterCallManagement.startCall'
+    package: '@azure/communication-react'
+    summary: Start the call.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function startCall(participants: string[], options?: StartCallOptions):
+        undefined | Call
+      parameters:
+        - id: participants
+          type: string[]
+          description: An array of participant ids to join
+        - id: options
+          type: StartCallOptions
+          description: ''
+      return:
+        description: ''
+        type: undefined | Call
+extends: <xref uid="@azure/communication-react.CallAdapterCallOperations" />

@@ -3,7 +3,7 @@ title: Azure Communication Alpha Ids SDK for JavaScript
 description: Reference for Azure Communication Alpha Ids SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 04/03/2023
+ms.data: 04/04/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communicationalphaids

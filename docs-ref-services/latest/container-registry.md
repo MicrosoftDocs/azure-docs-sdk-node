@@ -3,7 +3,7 @@ title: Azure Container Registry SDK for JavaScript
 description: Reference for Azure Container Registry SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 04/07/2023
+ms.data: 04/10/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: containerregistry

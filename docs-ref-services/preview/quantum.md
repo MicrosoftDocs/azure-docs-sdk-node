@@ -3,7 +3,7 @@ title: Azure Quantum SDK for JavaScript
 description: Reference for Azure Quantum SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 04/07/2023
+ms.data: 04/10/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: quantum

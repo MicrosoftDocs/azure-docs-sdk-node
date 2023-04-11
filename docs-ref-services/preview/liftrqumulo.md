@@ -3,7 +3,7 @@ title: Azure Liftrqumulo SDK for JavaScript
 description: Reference for Azure Liftrqumulo SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 04/10/2023
+ms.data: 04/11/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: liftrqumulo

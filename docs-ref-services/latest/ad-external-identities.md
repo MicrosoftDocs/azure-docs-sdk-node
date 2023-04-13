@@ -3,7 +3,7 @@ title: Azure AD External Identities SDK for JavaScript
 description: Reference for Azure AD External Identities SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 04/12/2023
+ms.data: 04/13/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: adexternalidentities

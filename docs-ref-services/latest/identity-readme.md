@@ -17,7 +17,7 @@ For examples of various credentials, see the [Azure Identity examples page](http
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/identity_3.1.4/sdk/identity/identity)
 - [Package (npm)](https://www.npmjs.com/package/@azure/identity)
 - [API Reference Documentation](https://learn.microsoft.com/javascript/api/@azure/identity)
 - [Azure AD documentation](https://azure.microsoft.com/services/active-directory/)

@@ -303,6 +303,17 @@ methods:
       will be uploaded to the service for analysis.
 
 
+      If the input provided is a string, it will be treated as a URL to the
+      location of a document to be analyzed. See the
+
+      [beginAnalyzeDocumentFromUrl](xref:@azure/ai-form-recognizer.DocumentAnalysisClient.beginAnalyzeDocumentFromUrl_1)
+      method for more information. Use of that method is preferred when using
+      URLs,
+
+      and URL support is only provided in this method for backwards
+      compatibility.
+
+
       ```typescript
 
       import * as fs from "fs";
@@ -628,3 +639,178 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/ai-form-recognizer.AnalysisPoller"
           />&lt;Result&gt;&gt;
+  - name: >-
+      beginClassifyDocument(string, FormRecognizerRequestBody,
+      ClassifyDocumentOptions)
+    uid: '@azure/ai-form-recognizer.DocumentAnalysisClient.beginClassifyDocument'
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Classify a document using a custom classifier given by its ID.
+
+
+      This method produces a long-running operation (poller) that will
+      eventually produce an `AnalyzeResult`. This is the
+
+      same type as `beginAnalyzeDocument` and `beginAnalyzeDocumentFromUrl`, but
+      the result will only contain a small
+
+      subset of its fields. Only the `documents` field and `pages` field will be
+      populated, and only minimal page
+
+      information will be returned. The `documents` field will contain
+      information about all the identified documents and
+
+      the `docType` that they were classified as.
+
+
+      ### Example
+
+
+      This method supports streamable request bodies
+      ([FormRecognizerRequestBody](xref:@azure/ai-form-recognizer.FormRecognizerRequestBody))
+      such as Node.JS `ReadableStream`
+
+      objects, browser `Blob`s, and `ArrayBuffer`s. The contents of the body
+      will be uploaded to the service for analysis.
+
+
+      ```typescript
+
+      import * as fs from "fs";
+
+
+      const file = fs.createReadStream("path/to/file.pdf");
+
+
+      const poller = await client.beginClassifyDocument("<classifier ID>",
+      file);
+
+
+      // The result is a long-running operation (poller), which must itself be
+      polled until the operation completes
+
+      const {
+        pages, // pages extracted from the document, which contain only basic information for classifiers
+        documents // extracted documents and their types
+      } = await poller.pollUntilDone();
+
+
+      // We'll print the documents and their types
+
+      for (const { docType } of documents) {
+        console.log("The type of this document is:", docType);
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginClassifyDocument(classifierId: string, document:
+        FormRecognizerRequestBody, options?: ClassifyDocumentOptions):
+        Promise<AnalysisPoller<AnalyzeResult<AnalyzedDocument>>>
+      parameters:
+        - id: classifierId
+          type: string
+          description: the ID of the custom classifier to use for analysis
+        - id: document
+          type: <xref uid="@azure/ai-form-recognizer.FormRecognizerRequestBody" />
+          description: the document to classify
+        - id: options
+          type: <xref uid="@azure/ai-form-recognizer.ClassifyDocumentOptions" />
+          description: options for the classification operation
+      return:
+        description: >-
+          a long-running operation (poller) that will eventually produce an
+          `AnalyzeResult`
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.AnalysisPoller"
+          />&lt;<xref uid="@azure/ai-form-recognizer.AnalyzeResult" />&lt;<xref
+          uid="@azure/ai-form-recognizer.AnalyzedDocument" />&gt;&gt;&gt;
+  - name: beginClassifyDocumentFromUrl(string, string, ClassifyDocumentOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentAnalysisClient.beginClassifyDocumentFromUrl
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Classify a document from a URL using a custom classifier given by its ID.
+
+
+      This method produces a long-running operation (poller) that will
+      eventually produce an `AnalyzeResult`. This is the
+
+      same type as `beginAnalyzeDocument` and `beginAnalyzeDocumentFromUrl`, but
+      the result will only contain a small
+
+      subset of its fields. Only the `documents` field and `pages` field will be
+      populated, and only minimal page
+
+      information will be returned. The `documents` field will contain
+      information about all the identified documents and
+
+      the `docType` that they were classified as.
+
+
+      ### Example
+
+
+      This method supports extracting data from a file at a given URL. The Form
+      Recognizer service will attempt to
+
+      download a file using the submitted URL, so the URL must be accessible
+      from the public internet. For example, a SAS
+
+      token can be used to grant read access to a blob in Azure Storage, and the
+      service will use the SAS-encoded URL to
+
+      request the file.
+
+
+      ```typescript
+
+      // the URL must be publicly accessible
+
+      const url = "<file url>";
+
+
+      const poller = await client.beginClassifyDocument("<classifier ID>", url);
+
+
+      // The result is a long-running operation (poller), which must itself be
+      polled until the operation completes
+
+      const {
+        pages, // pages extracted from the document, which contain only basic information for classifiers
+        documents // extracted documents and their types
+      } = await poller.pollUntilDone();
+
+
+      // We'll print the documents and their types
+
+      for (const { docType } of documents) {
+        console.log("The type of this document is:", docType);
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginClassifyDocumentFromUrl(classifierId: string, documentUrl:
+        string, options?: ClassifyDocumentOptions):
+        Promise<AnalysisPoller<AnalyzeResult<AnalyzedDocument>>>
+      parameters:
+        - id: classifierId
+          type: string
+          description: the ID of the custom classifier to use for analysis
+        - id: documentUrl
+          type: string
+          description: the URL of the document to classify
+        - id: options
+          type: <xref uid="@azure/ai-form-recognizer.ClassifyDocumentOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.AnalysisPoller"
+          />&lt;<xref uid="@azure/ai-form-recognizer.AnalyzeResult" />&lt;<xref
+          uid="@azure/ai-form-recognizer.AnalyzedDocument" />&gt;&gt;&gt;

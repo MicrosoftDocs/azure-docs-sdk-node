@@ -19,8 +19,6 @@ Azure IoT Hub is a fully managed service that enables reliable and secure bidire
 - Provides extensive monitoring for device connectivity and device identity management events.
 - Includes device libraries for the most popular languages and platforms.
 
-Use npm to install the Azure IoT Hub modules for JavaScript
-
 ## Management Package
 
 ### Install the npm module
@@ -34,7 +32,6 @@ npm install @azure/arm-iothub
 ## Samples
 
 - Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-iothub)
-- [Get started with the Raspberry Pi Azure IoT Starter Kit](https://azure.microsoft.com/resources/samples/iot-remote-monitoring-node-raspberrypi-getstartedkit/)
-- [Tweet vibration anomalies detected by Azure IoT services on data from an Intel Edison running JavaScript](https://azure.microsoft.com/resources/samples/iot-hub-nodejs-intel-edison-vibration-anomaly-detection/)
+- [Connect Raspberry Pi to Azure IoT Hub](https://learn.microsoft.com/en-us/azure/iot-hub/iot-hub-raspberry-pi-kit-node-get-started)
 
 For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).

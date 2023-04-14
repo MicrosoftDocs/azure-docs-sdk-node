@@ -6,7 +6,7 @@ ms.author: jeffish
 ms.data: 02/10/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: iothub
+ms.service: iot-hub
 ms.date: 06/15/2022
 ---
 # Azure IoT Hub modules for JavaScript
@@ -32,6 +32,6 @@ npm install @azure/arm-iothub
 ## Samples
 
 - Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-iothub)
-- [Connect Raspberry Pi to Azure IoT Hub](https://learn.microsoft.com/en-us/azure/iot-hub/iot-hub-raspberry-pi-kit-node-get-started)
+- [Connect Raspberry Pi to Azure IoT Hub](/azure/iot-hub/iot-hub-raspberry-pi-kit-node-get-started)
 
-For more code samples that use various Azure packages, explore the [JavaScript samples](https://docs.microsoft.com/samples/browse/?languages=javascript).
+For more code samples that use various Azure packages, explore the [JavaScript samples](/samples/browse/?languages=javascript).

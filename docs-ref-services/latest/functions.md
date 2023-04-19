@@ -3,7 +3,7 @@ title: Azure Functions SDK for JavaScript
 description: Reference for Azure Functions SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 04/17/2023
+ms.data: 04/18/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: functions

@@ -2,7 +2,7 @@
 name: ImageTemplateSharedImageDistributor
 uid: '@azure/arm-imagebuilder.ImageTemplateSharedImageDistributor'
 package: '@azure/arm-imagebuilder'
-summary: Distribute via Shared Image Gallery.
+summary: Distribute via Azure Compute Gallery.
 fullName: ImageTemplateSharedImageDistributor
 remarks: ''
 isDeprecated: false
@@ -26,7 +26,7 @@ properties:
   - name: galleryImageId
     uid: '@azure/arm-imagebuilder.ImageTemplateSharedImageDistributor.galleryImageId'
     package: '@azure/arm-imagebuilder'
-    summary: Resource Id of the Shared Image Gallery image
+    summary: Resource Id of the Azure Compute Gallery image
     fullName: galleryImageId
     remarks: ''
     isDeprecated: false
@@ -39,12 +39,15 @@ properties:
     uid: >-
       @azure/arm-imagebuilder.ImageTemplateSharedImageDistributor.replicationRegions
     package: '@azure/arm-imagebuilder'
-    summary: A list of regions that the image will be replicated to
+    summary: >-
+      [Deprecated] A list of regions that the image will be replicated to. This
+      list can be specified only if targetRegions is not specified. This field
+      is deprecated - use targetRegions instead.
     fullName: replicationRegions
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'replicationRegions: string[]'
+      content: 'replicationRegions?: string[]'
       return:
         description: ''
         type: string[]
@@ -53,8 +56,10 @@ properties:
       @azure/arm-imagebuilder.ImageTemplateSharedImageDistributor.storageAccountType
     package: '@azure/arm-imagebuilder'
     summary: >-
-      Storage account type to be used to store the shared image. Omit to use the
-      default (Standard_LRS).
+      [Deprecated] Storage account type to be used to store the shared image.
+      Omit to use the default (Standard_LRS). This field can be specified only
+      if replicationRegions is specified. This field is deprecated - use
+      targetRegions instead.
     fullName: storageAccountType
     remarks: ''
     isDeprecated: false
@@ -63,6 +68,21 @@ properties:
       return:
         description: ''
         type: string
+  - name: targetRegions
+    uid: '@azure/arm-imagebuilder.ImageTemplateSharedImageDistributor.targetRegions'
+    package: '@azure/arm-imagebuilder'
+    summary: >-
+      The target regions where the distributed Image Version is going to be
+      replicated to. This object supersedes replicationRegions and can be
+      specified only if replicationRegions is not specified.
+    fullName: targetRegions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'targetRegions?: TargetRegion[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-imagebuilder.TargetRegion" />[]
   - name: type
     uid: '@azure/arm-imagebuilder.ImageTemplateSharedImageDistributor.type'
     package: '@azure/arm-imagebuilder'
@@ -77,6 +97,18 @@ properties:
       return:
         description: ''
         type: '"SharedImage"'
+  - name: versioning
+    uid: '@azure/arm-imagebuilder.ImageTemplateSharedImageDistributor.versioning'
+    package: '@azure/arm-imagebuilder'
+    summary: Describes how to generate new x.y.z version number for distribution.
+    fullName: versioning
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'versioning?: DistributeVersionerUnion'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-imagebuilder.DistributeVersionerUnion" />
 inheritedProperties:
   - name: artifactTags
     uid: '@azure/arm-imagebuilder.ImageTemplateSharedImageDistributor.artifactTags'

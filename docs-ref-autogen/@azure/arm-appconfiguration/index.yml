@@ -11,6 +11,7 @@ enums:
   - '@azure/arm-appconfiguration.KnownIdentityType'
   - '@azure/arm-appconfiguration.KnownProvisioningState'
   - '@azure/arm-appconfiguration.KnownPublicNetworkAccess'
+  - '@azure/arm-appconfiguration.KnownReplicaProvisioningState'
 classes:
   - '@azure/arm-appconfiguration.AppConfigurationManagementClient'
 interfaces:
@@ -51,9 +52,6 @@ interfaces:
   - '@azure/arm-appconfiguration.KeyValuesCreateOrUpdateOptionalParams'
   - '@azure/arm-appconfiguration.KeyValuesDeleteOptionalParams'
   - '@azure/arm-appconfiguration.KeyValuesGetOptionalParams'
-  - >-
-    @azure/arm-appconfiguration.KeyValuesListByConfigurationStoreNextOptionalParams
-  - '@azure/arm-appconfiguration.KeyValuesListByConfigurationStoreOptionalParams'
   - '@azure/arm-appconfiguration.KeyVaultProperties'
   - '@azure/arm-appconfiguration.LogSpecification'
   - '@azure/arm-appconfiguration.MetricDimension'
@@ -92,6 +90,16 @@ interfaces:
     @azure/arm-appconfiguration.PrivateLinkResourcesListByConfigurationStoreOptionalParams
   - '@azure/arm-appconfiguration.PrivateLinkServiceConnectionState'
   - '@azure/arm-appconfiguration.RegenerateKeyParameters'
+  - '@azure/arm-appconfiguration.Replica'
+  - '@azure/arm-appconfiguration.ReplicaListResult'
+  - '@azure/arm-appconfiguration.Replicas'
+  - '@azure/arm-appconfiguration.ReplicasCreateOptionalParams'
+  - '@azure/arm-appconfiguration.ReplicasDeleteHeaders'
+  - '@azure/arm-appconfiguration.ReplicasDeleteOptionalParams'
+  - '@azure/arm-appconfiguration.ReplicasGetOptionalParams'
+  - >-
+    @azure/arm-appconfiguration.ReplicasListByConfigurationStoreNextOptionalParams
+  - '@azure/arm-appconfiguration.ReplicasListByConfigurationStoreOptionalParams'
   - '@azure/arm-appconfiguration.Resource'
   - '@azure/arm-appconfiguration.ResourceIdentity'
   - '@azure/arm-appconfiguration.ServiceSpecification'
@@ -122,8 +130,6 @@ typeAliases:
   - '@azure/arm-appconfiguration.IdentityType'
   - '@azure/arm-appconfiguration.KeyValuesCreateOrUpdateResponse'
   - '@azure/arm-appconfiguration.KeyValuesGetResponse'
-  - '@azure/arm-appconfiguration.KeyValuesListByConfigurationStoreNextResponse'
-  - '@azure/arm-appconfiguration.KeyValuesListByConfigurationStoreResponse'
   - '@azure/arm-appconfiguration.OperationsCheckNameAvailabilityResponse'
   - '@azure/arm-appconfiguration.OperationsListNextResponse'
   - '@azure/arm-appconfiguration.OperationsListResponse'
@@ -141,13 +147,18 @@ typeAliases:
     @azure/arm-appconfiguration.PrivateLinkResourcesListByConfigurationStoreResponse
   - '@azure/arm-appconfiguration.ProvisioningState'
   - '@azure/arm-appconfiguration.PublicNetworkAccess'
+  - '@azure/arm-appconfiguration.ReplicaProvisioningState'
+  - '@azure/arm-appconfiguration.ReplicasCreateResponse'
+  - '@azure/arm-appconfiguration.ReplicasGetResponse'
+  - '@azure/arm-appconfiguration.ReplicasListByConfigurationStoreNextResponse'
+  - '@azure/arm-appconfiguration.ReplicasListByConfigurationStoreResponse'
 functions:
   - name: getContinuationToken(unknown)
     uid: '@azure/arm-appconfiguration.getContinuationToken'
     package: '@azure/arm-appconfiguration'
     summary: |-
-      Given a result page from a pageable operation, returns a
-      continuation token that can be used to begin paging from
+      Given the last `.value` produced by the `byPage` iterator,
+      returns a continuation token that can be used to begin paging from
       that point later.
     remarks: ''
     isDeprecated: false
@@ -156,7 +167,11 @@ functions:
       parameters:
         - id: page
           type: unknown
-          description: A result object from calling .byPage() on a paged operation.
+          description: >-
+            An object from accessing `value` on the IteratorResult from a
+            `byPage` iterator.
       return:
-        description: The continuation token that can be passed into byPage().
+        description: >-
+          The continuation token that can be passed into byPage() during future
+          calls.
         type: string | undefined

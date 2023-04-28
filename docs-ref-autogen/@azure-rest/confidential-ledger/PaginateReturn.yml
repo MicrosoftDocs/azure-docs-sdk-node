@@ -17,7 +17,11 @@ summary: >-
 fullName: PaginateReturn<TResult>
 remarks: ''
 isDeprecated: false
-syntax: >-
-  type PaginateReturn<TResult> = (TResult extends { body: { value?: TPage } } |
-  { body: { members?: TPage } } | { body: { collections?: TPage } } | { body: {
-  entries?: TPage } } ? GetArrayType<TPage> : unknown[])
+syntax: |
+  type PaginateReturn<TResult> = TResult extends
+    | { body: { value?: TPage } }
+    | { body: { members?: TPage } }
+    | { body: { collections?: TPage } }
+    | { body: { entries?: TPage } }
+    ? GetArrayType<TPage>
+    : unknown[]

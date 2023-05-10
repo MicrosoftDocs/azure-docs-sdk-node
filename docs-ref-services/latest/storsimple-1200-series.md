@@ -3,7 +3,7 @@ title: Azure StorSimple 1200 series SDK for JavaScript
 description: Reference for Azure StorSimple 1200 series SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 05/09/2023
+ms.data: 05/10/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: storsimple1200series

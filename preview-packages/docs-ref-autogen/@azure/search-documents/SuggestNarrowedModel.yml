@@ -1,0 +1,18 @@
+### YamlMime:TSTypeAlias
+name: SuggestNarrowedModel
+uid: '@azure/search-documents.SuggestNarrowedModel'
+package: '@azure/search-documents'
+summary: ''
+fullName: SuggestNarrowedModel<Model, Fields>
+remarks: ''
+isDeprecated: false
+syntax: |
+  type SuggestNarrowedModel<Model, Fields> = [Model] extends [never]
+    ? object
+    : [Fields] extends [never]
+    ? keyof ExtractDocumentKey<Model> extends never
+      ? Model
+      : ExtractDocumentKey<Model>
+    : Fields extends SelectFields<Model>
+    ? NarrowedModel<Model, Fields>
+    : never

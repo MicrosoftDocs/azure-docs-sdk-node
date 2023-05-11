@@ -5,7 +5,7 @@ package: '@azure/search-documents'
 summary: >-
   Parameters for filtering, sorting, faceting, paging, and other search query
   behaviors.
-fullName: SearchRequestOptions<Fields>
+fullName: SearchRequestOptions<Model, Fields>
 remarks: ''
 isDeprecated: false
 type: interface
@@ -300,10 +300,12 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'searchFields?: Fields[]'
+      content: 'searchFields?: SelectFields<Model>[] | (readonly SelectFields<Model>[])'
       return:
         description: ''
-        type: Fields[]
+        type: >-
+          <xref uid="@azure/search-documents.SelectFields" />&lt;Model&gt;[] |
+          (readonly SelectFields&lt;Model&gt;[])
   - name: searchMode
     uid: '@azure/search-documents.SearchRequestOptions.searchMode'
     package: '@azure/search-documents'
@@ -330,10 +332,14 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'select?: Fields[]'
+      content: >-
+        select?: ([string] extends [Fields] ? string[] : Fields[] | (readonly
+        Fields[]))
       return:
         description: ''
-        type: Fields[]
+        type: >-
+          ([string] extends [Fields] ? string[] : Fields[] | (readonly
+          Fields[]))
   - name: semanticFields
     uid: '@azure/search-documents.SearchRequestOptions.semanticFields'
     package: '@azure/search-documents'

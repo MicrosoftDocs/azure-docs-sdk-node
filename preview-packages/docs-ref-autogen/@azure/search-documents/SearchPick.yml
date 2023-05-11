@@ -1,0 +1,38 @@
+### YamlMime:TSTypeAlias
+name: SearchPick
+uid: '@azure/search-documents.SearchPick'
+package: '@azure/search-documents'
+summary: |-
+  Deeply pick fields of T using valid Cognitive Search OData $select
+  paths.
+fullName: SearchPick<T, Paths>
+remarks: ''
+isDeprecated: false
+syntax: |
+  type SearchPick<T, Paths> = [T] extends [never]
+    ? object
+    : UnionToIntersection<
+        Paths extends Object
+          ? FieldName extends keyof T & string
+            ? NonNullable<T[FieldName]> extends Elem[]
+              ? Elem extends object
+                ? RestPaths extends SelectFields<Elem>
+                  ? {
+                      [Key in keyof T as Key & FieldName]: SearchPick<
+                        Elem,
+                        RestPaths
+                      >[]
+                    }
+                  : never
+                : never
+              : NonNullable<T[FieldName]> extends object
+              ? {
+                  [Key in keyof T as Key &
+                    FieldName]: RestPaths extends SelectFields<T[Key] & {}>
+                    ? SearchPick<T[Key] & {}, RestPaths> | Extract<T[Key], null>
+                    : never
+                }
+              : never
+            : never
+          : Pick<T, Paths> | Extract<T, null>
+      > & {}

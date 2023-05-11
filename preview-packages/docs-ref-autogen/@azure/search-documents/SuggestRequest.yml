@@ -5,7 +5,7 @@ package: '@azure/search-documents'
 summary: >-
   Parameters for filtering, sorting, fuzzy matching, and other suggestions query
   behaviors.
-fullName: SuggestRequest<Fields>
+fullName: SuggestRequest<Model, Fields>
 remarks: ''
 isDeprecated: false
 type: interface
@@ -115,10 +115,12 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'searchFields?: Fields[]'
+      content: 'searchFields?: SelectFields<Model>[] | (readonly SelectFields<Model>[])'
       return:
         description: ''
-        type: Fields[]
+        type: >-
+          <xref uid="@azure/search-documents.SelectFields" />&lt;Model&gt;[] |
+          (readonly SelectFields&lt;Model&gt;[])
   - name: select
     uid: '@azure/search-documents.SuggestRequest.select'
     package: '@azure/search-documents'
@@ -129,18 +131,24 @@ properties:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'select?: Fields[]'
+      content: >-
+        select?: ([string] extends [Fields] ? string[] : Fields[] | (readonly
+        Fields[]))
       return:
         description: ''
-        type: Fields[]
+        type: >-
+          ([string] extends [Fields] ? string[] : Fields[] | (readonly
+          Fields[]))
   - name: top
     uid: '@azure/search-documents.SuggestRequest.top'
     package: '@azure/search-documents'
     summary: >-
-      The number of suggestions to retrieve. This must be a value between 1 and
-      100. The default is
+      /**
 
-      5.
+      * The number of suggestions to retrieve. This must be a value between 1
+      and 100. The default is
+
+      * 5.
     fullName: top
     remarks: ''
     isDeprecated: false

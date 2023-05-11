@@ -5,14 +5,14 @@ package: '@azure/search-documents'
 summary: |-
   Class used to perform buffered operations against a search index,
   including adding, updating, and removing them.
-fullName: SearchIndexingBufferedSender<T>
+fullName: SearchIndexingBufferedSender<Model>
 remarks: ''
 isDeprecated: false
 type: class
 constructors:
   - name: >-
-      SearchIndexingBufferedSender<T>(IndexDocumentsClient<T>, (document: T) =>
-      string, SearchIndexingBufferedSenderOptions)
+      SearchIndexingBufferedSender<Model>(IndexDocumentsClient<Model>,
+      (document: Model) => string, SearchIndexingBufferedSenderOptions)
     uid: '@azure/search-documents.SearchIndexingBufferedSender.constructor'
     package: '@azure/search-documents'
     summary: Creates a new instance of SearchIndexingBufferedSender.
@@ -20,15 +20,17 @@ constructors:
     isDeprecated: false
     syntax:
       content: >-
-        new SearchIndexingBufferedSender(client: IndexDocumentsClient<T>,
-        documentKeyRetriever: (document: T) => string, options?:
+        new SearchIndexingBufferedSender(client: IndexDocumentsClient<Model>,
+        documentKeyRetriever: (document: Model) => string, options?:
         SearchIndexingBufferedSenderOptions)
       parameters:
         - id: client
-          type: <xref uid="@azure/search-documents.IndexDocumentsClient" />&lt;T&gt;
+          type: >-
+            <xref uid="@azure/search-documents.IndexDocumentsClient"
+            />&lt;Model&gt;
           description: Search Client used to call the underlying IndexBatch operations.
         - id: documentKeyRetriever
-          type: '(document: T) =&gt; string'
+          type: '(document: Model) =&gt; string'
           description: ''
         - id: options
           type: >-
@@ -36,7 +38,7 @@ constructors:
             uid="@azure/search-documents.SearchIndexingBufferedSenderOptions" />
           description: Options to modify auto flush.
 methods:
-  - name: deleteDocuments(T[], OperationOptions)
+  - name: deleteDocuments(Model[], OperationOptions)
     uid: '@azure/search-documents.SearchIndexingBufferedSender.deleteDocuments'
     package: '@azure/search-documents'
     summary: Deletes the documents/Adds the documents to the delete queue.
@@ -44,11 +46,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function deleteDocuments(documents: T[], options?: OperationOptions):
-        Promise<void>
+        function deleteDocuments(documents: Model[], options?:
+        OperationOptions): Promise<void>
       parameters:
         - id: documents
-          type: T[]
+          type: Model[]
           description: Documents to be deleted.
         - id: options
           type: OperationOptions
@@ -82,7 +84,7 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: mergeDocuments(T[], OperationOptions)
+  - name: mergeDocuments(Model[], OperationOptions)
     uid: '@azure/search-documents.SearchIndexingBufferedSender.mergeDocuments'
     package: '@azure/search-documents'
     summary: Merges the documents/Adds the documents to the merge queue.
@@ -90,11 +92,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function mergeDocuments(documents: T[], options?: OperationOptions):
+        function mergeDocuments(documents: Model[], options?: OperationOptions):
         Promise<void>
       parameters:
         - id: documents
-          type: T[]
+          type: Model[]
           description: Documents to be merged.
         - id: options
           type: OperationOptions
@@ -102,7 +104,7 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: mergeOrUploadDocuments(T[], OperationOptions)
+  - name: mergeOrUploadDocuments(Model[], OperationOptions)
     uid: >-
       @azure/search-documents.SearchIndexingBufferedSender.mergeOrUploadDocuments
     package: '@azure/search-documents'
@@ -111,11 +113,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function mergeOrUploadDocuments(documents: T[], options?:
+        function mergeOrUploadDocuments(documents: Model[], options?:
         OperationOptions): Promise<void>
       parameters:
         - id: documents
-          type: T[]
+          type: Model[]
           description: Documents to be merged/uploaded.
         - id: options
           type: OperationOptions
@@ -123,7 +125,7 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: 'off("batchAdded", (e: { action: string, documents: T[] }) => void)'
+  - name: 'off("batchAdded", (e: { action: string, documents: Model[] }) => void)'
     uid: '@azure/search-documents.SearchIndexingBufferedSender.off'
     package: '@azure/search-documents'
     summary: Detach Batch Added Event
@@ -132,13 +134,13 @@ methods:
     syntax:
       content: >-
         function off(event: "batchAdded", listener: (e: { action: string,
-        documents: T[] }) => void)
+        documents: Model[] }) => void)
       parameters:
         - id: event
           type: '"batchAdded"'
           description: Event to be emitted
         - id: listener
-          type: '(e: { action: string, documents: T[] }) =&gt; void'
+          type: '(e: { action: string, documents: Model[] }) =&gt; void'
           description: Event Listener
   - name: 'off("batchFailed", (e: RestError) => void)'
     uid: '@azure/search-documents.SearchIndexingBufferedSender.off_3'
@@ -172,7 +174,7 @@ methods:
         - id: listener
           type: '(e: IndexDocumentsResult) =&gt; void'
           description: Event Listener
-  - name: 'off("beforeDocumentSent", (e: IndexDocumentsAction<T>) => void)'
+  - name: 'off("beforeDocumentSent", (e: IndexDocumentsAction<Model>) => void)'
     uid: '@azure/search-documents.SearchIndexingBufferedSender.off_1'
     package: '@azure/search-documents'
     summary: Detach Batch Sent Event
@@ -181,15 +183,15 @@ methods:
     syntax:
       content: >-
         function off(event: "beforeDocumentSent", listener: (e:
-        IndexDocumentsAction<T>) => void)
+        IndexDocumentsAction<Model>) => void)
       parameters:
         - id: event
           type: '"beforeDocumentSent"'
           description: Event to be emitted
         - id: listener
-          type: '(e: IndexDocumentsAction&lt;T&gt;) =&gt; void'
+          type: '(e: IndexDocumentsAction&lt;Model&gt;) =&gt; void'
           description: Event Listener
-  - name: 'on("batchAdded", (e: { action: string, documents: T[] }) => void)'
+  - name: 'on("batchAdded", (e: { action: string, documents: Model[] }) => void)'
     uid: '@azure/search-documents.SearchIndexingBufferedSender.on'
     package: '@azure/search-documents'
     summary: Attach Batch Added Event
@@ -198,13 +200,13 @@ methods:
     syntax:
       content: >-
         function on(event: "batchAdded", listener: (e: { action: string,
-        documents: T[] }) => void)
+        documents: Model[] }) => void)
       parameters:
         - id: event
           type: '"batchAdded"'
           description: Event to be emitted
         - id: listener
-          type: '(e: { action: string, documents: T[] }) =&gt; void'
+          type: '(e: { action: string, documents: Model[] }) =&gt; void'
           description: Event Listener
   - name: 'on("batchFailed", (e: RestError) => void)'
     uid: '@azure/search-documents.SearchIndexingBufferedSender.on_3'
@@ -238,7 +240,7 @@ methods:
         - id: listener
           type: '(e: IndexDocumentsResult) =&gt; void'
           description: Event Listener
-  - name: 'on("beforeDocumentSent", (e: IndexDocumentsAction<T>) => void)'
+  - name: 'on("beforeDocumentSent", (e: IndexDocumentsAction<Model>) => void)'
     uid: '@azure/search-documents.SearchIndexingBufferedSender.on_1'
     package: '@azure/search-documents'
     summary: Attach Batch Sent Event
@@ -247,15 +249,15 @@ methods:
     syntax:
       content: >-
         function on(event: "beforeDocumentSent", listener: (e:
-        IndexDocumentsAction<T>) => void)
+        IndexDocumentsAction<Model>) => void)
       parameters:
         - id: event
           type: '"beforeDocumentSent"'
           description: Event to be emitted
         - id: listener
-          type: '(e: IndexDocumentsAction&lt;T&gt;) =&gt; void'
+          type: '(e: IndexDocumentsAction&lt;Model&gt;) =&gt; void'
           description: Event Listener
-  - name: uploadDocuments(T[], OperationOptions)
+  - name: uploadDocuments(Model[], OperationOptions)
     uid: '@azure/search-documents.SearchIndexingBufferedSender.uploadDocuments'
     package: '@azure/search-documents'
     summary: Uploads the documents/Adds the documents to the upload queue.
@@ -263,11 +265,11 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function uploadDocuments(documents: T[], options?: OperationOptions):
-        Promise<void>
+        function uploadDocuments(documents: Model[], options?:
+        OperationOptions): Promise<void>
       parameters:
         - id: documents
-          type: T[]
+          type: Model[]
           description: Documents to be uploaded.
         - id: options
           type: OperationOptions

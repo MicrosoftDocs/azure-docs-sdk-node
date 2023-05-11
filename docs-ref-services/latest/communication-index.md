@@ -1,5 +1,6 @@
 | Reference | Package | Source |
 |---|---|---|
+|@azure/communication-calling-effects|[@azure/communication-calling-effects](https://www.npmjs.com/package/@azure/communication-calling-effects)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |[Communication Chat](communication-chat-readme.md)|[@azure/communication-chat](https://www.npmjs.com/package/@azure/communication-chat)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-chat)|
 |[Communication Common](communication-common-readme.md)|[@azure/communication-common](https://www.npmjs.com/package/@azure/communication-common)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-common)|
 |[Communication Email](communication-email-readme.md)|[@azure/communication-email](https://www.npmjs.com/package/@azure/communication-email)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-email)|

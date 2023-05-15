@@ -3,7 +3,7 @@ title: Azure Batch SDK for JavaScript
 description: Reference for Azure Batch SDK for JavaScript
 author: jingjlii
 ms.author: jingjli
-ms.data: 05/12/2023
+ms.data: 05/15/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: batch

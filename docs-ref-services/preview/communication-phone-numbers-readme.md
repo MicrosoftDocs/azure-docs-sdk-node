@@ -3,12 +3,12 @@ title: Azure Communication Phone Numbers client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-phone-numbers, communication
 author: xirzec
 ms.author: jeffish
-ms.date: 03/07/2023
+ms.date: 05/17/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Phone Numbers client library for JavaScript - version 1.2.0-alpha.20230307.3 
+# Azure Communication Phone Numbers client library for JavaScript - version 1.3.0-alpha.20230517.1 
 
 
 The phone numbers library provides capabilities for phone number administration.
@@ -66,7 +66,7 @@ It is important to consider the assignment type of your phone number. Some capab
 
 Direct routing feature allows connecting customer-provided telephony infrastructure to Azure Communication Resources. In order to setup routing configuration properly, customer needs to supply the SIP trunk configuration and SIP routing rules for calls. SIP routing client provides the necessary interface for setting this configuration.
 
-When the call arrives, system tries to match the destination number with regex number patterns of defined routes. The first route to match the number will be selected. The order of regex matching is the same as the order of routes in configuration, therefore the order of routes matters.
+When a call is made, system tries to match the destination number with regex number patterns of defined routes. The first route to match the number will be selected. The order of regex matching is the same as the order of routes in configuration, therefore the order of routes matters.
 Once a route is matched, the call is routed to the first trunk in the route's trunks list. If the trunk is not available, next trunk in the list is selected.
 
 ## Examples
@@ -358,15 +358,20 @@ const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
 const client = new SipRoutingClient(connectionString);
 
 async function main() {
-  const trunks = await client.getTrunks();
-  const routes = await client.getRoutes();
+  const trunks = await client.listTrunks();
+  const routes = await client.listRoutes();
+  const domains = await client.listDomains();
   for (const trunk of trunks) {
-    console.log(`Trunk ${trunk.fqdn}:${trunk.sipSignalingPort}`);
+    console.log(`Trunk ${trunk.fqdn}:${trunk.sipSignalingPort} with property enabled: ${trunk.enabled}`);
   }
   
-  for (const route of routes) {
+  for await(const route of routes) {
     console.log(`Route ${route.name} with pattern ${route.numberPattern}`);
     console.log(`Route's trunks: ${route.trunks?.join()}`);
+  }
+
+  for (const domain of domains) {
+    console.log(`Domain ${domain.domainUri} with property enabled: ${domain.enabled}`);
   }
 }
 
@@ -387,10 +392,12 @@ async function main() {
   await client.setTrunks([
     {
       fqdn: 'sbc.one.domain.com',
-      sipSignalingPort: 1234
+      sipSignalingPort: 1234,
+      enabled: true
     },{
       fqdn: 'sbc.two.domain.com',
-      sipSignalingPort: 1234
+      sipSignalingPort: 1234,
+      enabled: true
     }
   ]);
 
@@ -405,6 +412,13 @@ async function main() {
       description: "route's description",
       numberPattern: "^.*$",
       trunks: [ 'sbc.two.domain.com', 'sbc.one.domain.com' ]
+    }
+  ]);
+
+  await client.setDomains([
+    {
+      fqdn: 'domain.com',
+      enabled: true
     }
   ]);
 }
@@ -470,12 +484,12 @@ main();
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.2.0-alpha.20230307.3/sdk/communication/communication-phone-numbers/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-alpha.20230517.1/sdk/communication/communication-phone-numbers/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.2.0-alpha.20230307.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-alpha.20230517.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -485,9 +499,9 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.2.0-alpha.20230307.3/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.2.0-alpha.20230307.3/sdk/identity/identity
-[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.2.0-alpha.20230307.3/sdk/identity/identity/README.md
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.3.0-alpha.20230517.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.3.0-alpha.20230517.1/sdk/identity/identity
+[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-alpha.20230517.1/sdk/identity/identity/README.md
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-phone-numbers%2FREADME.png)
 

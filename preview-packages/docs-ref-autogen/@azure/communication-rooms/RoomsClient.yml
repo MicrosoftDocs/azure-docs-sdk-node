@@ -8,25 +8,27 @@ remarks: ''
 isDeprecated: false
 type: class
 constructors:
-  - name: RoomsClient(string, KeyCredential, RoomsClientOptions)
+  - name: RoomsClient(string, KeyCredential | TokenCredential, RoomsClientOptions)
     uid: '@azure/communication-rooms.RoomsClient.constructor_1'
     package: '@azure/communication-rooms'
-    summary: Initializes a new instance of the RoomsClient using an Azure KeyCredential
+    summary: Initializes a new instance of the RoomsClient using a TokenCredential
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        new RoomsClient(endpoint: string, credential: KeyCredential, options?:
-        RoomsClientOptions)
+        new RoomsClient(endpoint: string, credential: KeyCredential |
+        TokenCredential, options?: RoomsClientOptions)
       parameters:
         - id: endpoint
           type: string
           description: The url of the Communication Services resource
         - id: credential
-          type: KeyCredential
+          type: KeyCredential | TokenCredential
           description: >-
             An object that is used to authenticate requests to the service. Use
-            the Azure KeyCredential or `@azure/identity` to create a credential.
+            the Azure KeyCredential from `@azure/identity` or
+            AzureCommunicationTokenCredential from `@azure/communication-common`
+            to create a credential.
         - id: options
           type: <xref uid="@azure/communication-rooms.RoomsClientOptions" />
           description: Optional. Options to configure the HTTP pipeline.
@@ -47,47 +49,28 @@ constructors:
         - id: options
           type: <xref uid="@azure/communication-rooms.RoomsClientOptions" />
           description: Optional. Options to configure the HTTP pipeline.
-  - name: RoomsClient(string, TokenCredential, RoomsClientOptions)
-    uid: '@azure/communication-rooms.RoomsClient.constructor_2'
-    package: '@azure/communication-rooms'
-    summary: Initializes a new instance of the RoomsClient using a TokenCredential
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        new RoomsClient(endpoint: string, credential: TokenCredential, options?:
-        RoomsClientOptions)
-      parameters:
-        - id: endpoint
-          type: string
-          description: The url of the Communication Services resource
-        - id: credential
-          type: TokenCredential
-          description: >-
-            An object that is used to authenticate requests to the service. Use
-            the AzureCommunicationTokenCredential from
-            `@azure/communication-common` to create a credential.
-        - id: options
-          type: <xref uid="@azure/communication-rooms.RoomsClientOptions" />
-          description: Optional. Options to configure the HTTP pipeline.
 methods:
-  - name: addParticipants(string, RoomParticipant[], OperationOptions)
-    uid: '@azure/communication-rooms.RoomsClient.addParticipants'
+  - name: addOrUpdateParticipants(string, RoomParticipantPatch[], OperationOptions)
+    uid: '@azure/communication-rooms.RoomsClient.addOrUpdateParticipants'
     package: '@azure/communication-rooms'
-    summary: Adds Participants to a room asynchronously
+    summary: >-
+      Updates the Participants in a Room asynchronously.
+
+      Participant is added to room if they did not exist and updated if already
+      in room.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function addParticipants(roomId: string, participants:
-        RoomParticipant[], options?: OperationOptions): Promise<void>
+        function addOrUpdateParticipants(roomId: string, participants:
+        RoomParticipantPatch[], options?: OperationOptions): Promise<void>
       parameters:
         - id: roomId
           type: string
           description: ID of the room.
         - id: participants
-          type: <xref uid="@azure/communication-rooms.RoomParticipant" />[]
-          description: ''
+          type: <xref uid="@azure/communication-rooms.RoomParticipantPatch" />[]
+          description: List of participants to add or update.
         - id: options
           type: OperationOptions
           description: Operational options.
@@ -101,14 +84,18 @@ methods:
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'function createRoom(options?: CreateRoomOptions): Promise<Room>'
+      content: >-
+        function createRoom(options?: CreateRoomOptions):
+        Promise<CommunicationRoom>
       parameters:
         - id: options
           type: <xref uid="@azure/communication-rooms.CreateRoomOptions" />
           description: Operation options.
       return:
         description: a RoomModel object with the values of the created room.
-        type: Promise&lt;<xref uid="@azure/communication-rooms.Room" />&gt;
+        type: >-
+          Promise&lt;<xref uid="@azure/communication-rooms.CommunicationRoom"
+          />&gt;
   - name: deleteRoom(string, OperationOptions)
     uid: '@azure/communication-rooms.RoomsClient.deleteRoom'
     package: '@azure/communication-rooms'
@@ -129,16 +116,39 @@ methods:
       return:
         description: ''
         type: Promise&lt;void&gt;
-  - name: getParticipants(string, OperationOptions)
-    uid: '@azure/communication-rooms.RoomsClient.getParticipants'
+  - name: getRoom(string, OperationOptions)
+    uid: '@azure/communication-rooms.RoomsClient.getRoom'
+    package: '@azure/communication-rooms'
+    summary: Gets a room by id asynchronously.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getRoom(roomId: string, options?: OperationOptions):
+        Promise<CommunicationRoom>
+      parameters:
+        - id: roomId
+          type: string
+          description: ID of the room.
+        - id: options
+          type: OperationOptions
+          description: Operational options.
+      return:
+        description: a RoomModel object with the values of the created room.
+        type: >-
+          Promise&lt;<xref uid="@azure/communication-rooms.CommunicationRoom"
+          />&gt;
+  - name: listParticipants(string, OperationOptions)
+    uid: '@azure/communication-rooms.RoomsClient.listParticipants'
     package: '@azure/communication-rooms'
     summary: Gets the participants of a room asynchronously.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function getParticipants(roomId: string, options?: OperationOptions):
-        Promise<RoomParticipant[]>
+        function listParticipants(roomId: string, options?: OperationOptions):
+        PagedAsyncIterableIterator<RoomParticipant, RoomParticipant[],
+        PageSettings>
       parameters:
         - id: roomId
           type: string
@@ -149,31 +159,33 @@ methods:
       return:
         description: a list of all the participants in the room.
         type: >-
-          Promise&lt;<xref uid="@azure/communication-rooms.RoomParticipant"
-          />[]&gt;
-  - name: getRoom(string, OperationOptions)
-    uid: '@azure/communication-rooms.RoomsClient.getRoom'
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/communication-rooms.RoomParticipant" />, <xref
+          uid="@azure/communication-rooms.RoomParticipant" />[],
+          PageSettings&gt;
+  - name: listRooms(OperationOptions)
+    uid: '@azure/communication-rooms.RoomsClient.listRooms'
     package: '@azure/communication-rooms'
-    summary: Gets a room by id asynchronously.
+    summary: Gets the list of rooms
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function getRoom(roomId: string, options?: OperationOptions):
-        Promise<Room>
+        function listRooms(options?: OperationOptions):
+        PagedAsyncIterableIterator<CommunicationRoom, CommunicationRoom[],
+        PageSettings>
       parameters:
-        - id: roomId
-          type: string
-          description: ID of the room.
         - id: options
           type: OperationOptions
-          description: Operational options.
+          description: Operational options
       return:
-        description: a RoomModel object with the values of the created room.
-        type: Promise&lt;<xref uid="@azure/communication-rooms.Room" />&gt;
-  - name: >-
-      removeParticipants(string, CommunicationUserIdentifier[],
-      OperationOptions)
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/communication-rooms.CommunicationRoom" />, <xref
+          uid="@azure/communication-rooms.CommunicationRoom" />[],
+          PageSettings&gt;
+  - name: removeParticipants(string, CommunicationIdentifier[], OperationOptions)
     uid: '@azure/communication-rooms.RoomsClient.removeParticipants'
     package: '@azure/communication-rooms'
     summary: Removes Participants from a Room asynchronously.
@@ -181,39 +193,15 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function removeParticipants(roomId: string, participants:
-        CommunicationUserIdentifier[], options?: OperationOptions):
-        Promise<void>
+        function removeParticipants(roomId: string, participantIdentifiers:
+        CommunicationIdentifier[], options?: OperationOptions): Promise<void>
       parameters:
         - id: roomId
           type: string
           description: ID of the room.
-        - id: participants
-          type: CommunicationUserIdentifier[]
-          description: ''
-        - id: options
-          type: OperationOptions
-          description: Operational options.
-      return:
-        description: a list of all the participants in the room.
-        type: Promise&lt;void&gt;
-  - name: updateParticipants(string, RoomParticipant[], OperationOptions)
-    uid: '@azure/communication-rooms.RoomsClient.updateParticipants'
-    package: '@azure/communication-rooms'
-    summary: Updates the Participants in a Room asynchronously.
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function updateParticipants(roomId: string, participants:
-        RoomParticipant[], options?: OperationOptions): Promise<void>
-      parameters:
-        - id: roomId
-          type: string
-          description: ID of the room.
-        - id: participants
-          type: <xref uid="@azure/communication-rooms.RoomParticipant" />[]
-          description: ''
+        - id: participantIdentifiers
+          type: CommunicationIdentifier[]
+          description: List of participants' communication identifiers to remove from room.
         - id: options
           type: OperationOptions
           description: Operational options.
@@ -229,7 +217,7 @@ methods:
     syntax:
       content: >-
         function updateRoom(roomId: string, options?: UpdateRoomOptions):
-        Promise<Room>
+        Promise<CommunicationRoom>
       parameters:
         - id: roomId
           type: string
@@ -239,4 +227,6 @@ methods:
           description: Operational options.
       return:
         description: a RoomModel object with the values of the created room.
-        type: Promise&lt;<xref uid="@azure/communication-rooms.Room" />&gt;
+        type: >-
+          Promise&lt;<xref uid="@azure/communication-rooms.CommunicationRoom"
+          />&gt;

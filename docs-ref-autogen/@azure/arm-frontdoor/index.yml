@@ -70,6 +70,8 @@ interfaces:
   - '@azure/arm-frontdoor.CustomHttpsConfiguration'
   - '@azure/arm-frontdoor.CustomRule'
   - '@azure/arm-frontdoor.CustomRuleList'
+  - '@azure/arm-frontdoor.DefaultErrorResponse'
+  - '@azure/arm-frontdoor.DefaultErrorResponseError'
   - '@azure/arm-frontdoor.Endpoint'
   - '@azure/arm-frontdoor.Endpoints'
   - '@azure/arm-frontdoor.EndpointsPurgeContentOptionalParams'
@@ -159,8 +161,11 @@ interfaces:
   - '@azure/arm-frontdoor.PoliciesCreateOrUpdateOptionalParams'
   - '@azure/arm-frontdoor.PoliciesDeleteOptionalParams'
   - '@azure/arm-frontdoor.PoliciesGetOptionalParams'
+  - '@azure/arm-frontdoor.PoliciesListBySubscriptionNextOptionalParams'
+  - '@azure/arm-frontdoor.PoliciesListBySubscriptionOptionalParams'
   - '@azure/arm-frontdoor.PoliciesListNextOptionalParams'
   - '@azure/arm-frontdoor.PoliciesListOptionalParams'
+  - '@azure/arm-frontdoor.PoliciesUpdateOptionalParams'
   - '@azure/arm-frontdoor.PolicySettings'
   - '@azure/arm-frontdoor.PreconfiguredEndpoint'
   - '@azure/arm-frontdoor.PreconfiguredEndpointList'
@@ -271,8 +276,11 @@ typeAliases:
   - '@azure/arm-frontdoor.Operator'
   - '@azure/arm-frontdoor.PoliciesCreateOrUpdateResponse'
   - '@azure/arm-frontdoor.PoliciesGetResponse'
+  - '@azure/arm-frontdoor.PoliciesListBySubscriptionNextResponse'
+  - '@azure/arm-frontdoor.PoliciesListBySubscriptionResponse'
   - '@azure/arm-frontdoor.PoliciesListNextResponse'
   - '@azure/arm-frontdoor.PoliciesListResponse'
+  - '@azure/arm-frontdoor.PoliciesUpdateResponse'
   - '@azure/arm-frontdoor.PolicyEnabledState'
   - '@azure/arm-frontdoor.PolicyMode'
   - '@azure/arm-frontdoor.PolicyRequestBodyCheck'
@@ -304,8 +312,8 @@ functions:
     uid: '@azure/arm-frontdoor.getContinuationToken'
     package: '@azure/arm-frontdoor'
     summary: |-
-      Given a result page from a pageable operation, returns a
-      continuation token that can be used to begin paging from
+      Given the last `.value` produced by the `byPage` iterator,
+      returns a continuation token that can be used to begin paging from
       that point later.
     remarks: ''
     isDeprecated: false
@@ -314,7 +322,11 @@ functions:
       parameters:
         - id: page
           type: unknown
-          description: A result object from calling .byPage() on a paged operation.
+          description: >-
+            An object from accessing `value` on the IteratorResult from a
+            `byPage` iterator.
       return:
-        description: The continuation token that can be passed into byPage().
+        description: >-
+          The continuation token that can be passed into byPage() during future
+          calls.
         type: string | undefined

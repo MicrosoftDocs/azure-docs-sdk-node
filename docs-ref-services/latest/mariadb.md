@@ -3,7 +3,7 @@ title: Azure MariaDB SDK for JavaScript
 description: Reference for Azure MariaDB SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 05/23/2023
+ms.data: 05/24/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: mariadb

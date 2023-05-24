@@ -19,6 +19,8 @@ enums:
 classes:
   - '@azure/arm-kubernetesconfiguration.SourceControlConfigurationClient'
 interfaces:
+  - '@azure/arm-kubernetesconfiguration.AzureBlobDefinition'
+  - '@azure/arm-kubernetesconfiguration.AzureBlobPatchDefinition'
   - '@azure/arm-kubernetesconfiguration.BucketDefinition'
   - '@azure/arm-kubernetesconfiguration.BucketPatchDefinition'
   - '@azure/arm-kubernetesconfiguration.ComplianceStatus'
@@ -57,6 +59,8 @@ interfaces:
   - '@azure/arm-kubernetesconfiguration.Identity'
   - '@azure/arm-kubernetesconfiguration.KustomizationDefinition'
   - '@azure/arm-kubernetesconfiguration.KustomizationPatchDefinition'
+  - '@azure/arm-kubernetesconfiguration.ManagedIdentityDefinition'
+  - '@azure/arm-kubernetesconfiguration.ManagedIdentityPatchDefinition'
   - '@azure/arm-kubernetesconfiguration.ObjectReferenceDefinition'
   - '@azure/arm-kubernetesconfiguration.ObjectStatusConditionDefinition'
   - '@azure/arm-kubernetesconfiguration.ObjectStatusDefinition'
@@ -70,6 +74,7 @@ interfaces:
   - '@azure/arm-kubernetesconfiguration.OperationsListNextOptionalParams'
   - '@azure/arm-kubernetesconfiguration.OperationsListOptionalParams'
   - '@azure/arm-kubernetesconfiguration.PatchExtension'
+  - '@azure/arm-kubernetesconfiguration.Plan'
   - '@azure/arm-kubernetesconfiguration.ProxyResource'
   - '@azure/arm-kubernetesconfiguration.RepositoryRefDefinition'
   - '@azure/arm-kubernetesconfiguration.Resource'
@@ -79,6 +84,8 @@ interfaces:
   - '@azure/arm-kubernetesconfiguration.Scope'
   - '@azure/arm-kubernetesconfiguration.ScopeCluster'
   - '@azure/arm-kubernetesconfiguration.ScopeNamespace'
+  - '@azure/arm-kubernetesconfiguration.ServicePrincipalDefinition'
+  - '@azure/arm-kubernetesconfiguration.ServicePrincipalPatchDefinition'
   - '@azure/arm-kubernetesconfiguration.SourceControlConfiguration'
   - >-
     @azure/arm-kubernetesconfiguration.SourceControlConfigurationClientOptionalParams
@@ -136,8 +143,8 @@ functions:
     uid: '@azure/arm-kubernetesconfiguration.getContinuationToken'
     package: '@azure/arm-kubernetesconfiguration'
     summary: |-
-      Given a result page from a pageable operation, returns a
-      continuation token that can be used to begin paging from
+      Given the last `.value` produced by the `byPage` iterator,
+      returns a continuation token that can be used to begin paging from
       that point later.
     remarks: ''
     isDeprecated: false
@@ -146,7 +153,11 @@ functions:
       parameters:
         - id: page
           type: unknown
-          description: A result object from calling .byPage() on a paged operation.
+          description: >-
+            An object from accessing `value` on the IteratorResult from a
+            `byPage` iterator.
       return:
-        description: The continuation token that can be passed into byPage().
+        description: >-
+          The continuation token that can be passed into byPage() during future
+          calls.
         type: string | undefined

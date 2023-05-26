@@ -47,3 +47,26 @@ npm install @azure/arm-storage
 ### Example
 
 Examples for using this module in Node.js as well as browser applications can be found in the [README for the module](https://www.npmjs.com/package/@azure/arm-storage)
+
+## Known issues
+
+This section details known issues for the Azure Storage client libraries for JavaScript.
+
+### InvalidHeaderValue error message when using beta version of SDK
+
+In rare scenarios, applications that have upgraded to a beta version of the SDK can receive an `InvalidHeaderValue` error message. This issue can occur when using any of the Storage libraries. The error message looks similar to the following sample:
+
+```console
+HTTP/1.1 400 The value for one of the HTTP headers is not in the correct format.
+Content-Length: 328
+Content-Type: application/xml
+Server: Microsoft-HTTPAPI/2.0
+x-ms-request-id: <REMOVED>
+Date: Fri, 19 May 2023 17:10:33 GMT
+ 
+<?xml version="1.0" encoding="utf-8"?><Error><Code>InvalidHeaderValue</Code><Message>The value for one of the HTTP headers is not in the correct format.
+RequestId:<REMOVED>
+Time:2023-05-19T17:10:34.2972651Z</Message><HeaderName>x-ms-version</HeaderName><HeaderValue>yyyy-mm-dd</HeaderValue></Error> 
+```
+
+If you've upgraded to a beta version of the SDK and you experience this error, it's recommended that you downgrade to a supported, generally available version of the SDK to see if the issue resolves. If the issue persists, or if the recommendation is not feasible, [open a support ticket](https://ms.portal.azure.com/#create/Microsoft.Support) to explore further options.

@@ -3,7 +3,7 @@ title: Azure Custom Image Search SDK for JavaScript
 description: Reference for Azure Custom Image Search SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 05/29/2023
+ms.data: 06/06/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: customimagesearch

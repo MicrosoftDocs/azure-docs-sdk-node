@@ -1,3 +1,3 @@
 | Reference | Package | Source |
 |---|---|---|
-|[Quantum Jobs](quantum-jobs-readme.md)|[@azure/quantum-jobs](https://www.npmjs.com/package/@azure/quantum-jobs)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
+|[Quantum Jobs](quantum-jobs-readme.md)|[@azure/quantum-jobs](https://www.npmjs.com/package/@azure/quantum-jobs)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/quantum/quantum-jobs)|

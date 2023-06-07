@@ -1,14 +1,14 @@
 ---
 title: Azure OpenAI client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/openai, openai
-author: xirzec
-ms.author: jeffish
-ms.date: 05/22/2023
+author: deyaaeldeen
+ms.author: dealmaha
+ms.date: 06/07/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: openai
 ---
-# Azure OpenAI client library for JavaScript - version 1.0.0-beta.1 
+# Azure OpenAI client library for JavaScript - version 1.0.0-beta.2 
 
 
 The Azure OpenAI client library for JavaScript is an adaptation of OpenAI's REST APIs that provides an idiomatic interface
@@ -23,13 +23,19 @@ Use the client library for Azure OpenAI to:
 
 Azure OpenAI is a managed service that allows developers to deploy, tune, and generate content from OpenAI models on Azure resources.
 
+Checkout the following examples:
+
+- [Multiple Completions](#generate-multiple-completions-with-subscription-key)
+- [Chatbot](#generate-chatbot-response)
+- [Summarize Text](#summarize-text-with-completion)
+
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.1/sdk/openai/openai)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/openai/openai)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/openai)
 - [API reference documentation](https://aka.ms/openai-js-api)
 - [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.1/sdk/openai/openai/samples/v1-beta)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/openai/openai/samples/v1-beta)
 
 ## Getting started
 
@@ -142,26 +148,39 @@ for (const choice of choices) {
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.1/sdk/openai/openai/samples/v1-beta).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/openai/openai/samples/v1-beta).
 
 ### Generate Chatbot Response
 
-This example authenticates using a DefaultAzureCredential, then generates text responses to input prompts.
+This example authenticates using a DefaultAzureCredential, then generates chat responses to input chat question and messages.
 
 ```javascript
 const endpoint = "https://myaccount.openai.azure.com/";
 const client = new OpenAIClient(endpoint, new DefaultAzureCredential());
 
-const deploymentName = "text-davinci-003";
-const prompt = ["What is Azure OpenAI?"];
-console.log(`Input: ${prompt}`);
+const deploymentId = "gpt-35-turbo";
 
-const { choices } = await client.getCompletions(deploymentName, prompt);
-const completion = choices[0].text;
-console.log(`Chatbot: ${completion}`);
+const messages = [
+  { role: "system", content: "You are a helpful assistant. You will talk like a pirate." },
+  { role: "user", content: "Can you help me?" },
+  { role: "assistant", content: "Arrrr! Of course, me hearty! What can I do for ye?" },
+  { role: "user", content: "What's the best way to train a parrot?" },
+];
+
+console.log(`Messages: ${messages.map((m) => m.content).join("\n")}`);
+
+const events = await client.listChatCompletions(deploymentId, messages, { maxTokens: 128 });
+for await (const event of events) {
+  for (const choice of event.choices) {
+    const delta = choice.delta?.content;
+    if (delta !== undefined) {
+      console.log(`Chatbot: ${delta}`);
+    }
+  }
+}
 ```
 
-### Generate Multiple Chatbot Responses With Subscription Key
+### Generate Multiple Completions With Subscription Key
 
 This example generates text responses to input prompts using an Azure subscription key
 
@@ -219,7 +238,9 @@ console.log(`Input: ${summarizationPrompt}`);
 
 const deploymentName = "text-davinci-003";
 
-const { choices } = await client.getCompletions(deploymentName, summarizationPrompt);
+const { choices } = await client.getCompletions(deploymentName, examplePrompts, {
+  maxTokens: 64
+});
 const completion = choices[0].text;
 console.log(`Summarization: ${completion}`);
 ```
@@ -236,15 +257,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/core/logger).
 
 <!-- LINKS -->
-[msdocs_openai_completion]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
-[msdocs_openai_chat_completion]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/chatgpt
+[msdocs_openai_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.2/sdk/openai/openai/samples/v1-beta/javascript/completions.js
+[msdocs_openai_chat_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.2/sdk/openai/openai/samples/v1-beta/javascript/listChatCompletions.js
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.1/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/identity/identity
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [azure_cli]: /cli/azure
 [azure_portal]: https://portal.azure.com

@@ -22,6 +22,18 @@ properties:
       return:
         description: ''
         type: number
+  - name: availabilityZone
+    uid: '@azure/arm-sql.Database.availabilityZone'
+    package: '@azure/arm-sql'
+    summary: Specifies the availability zone the database is pinned to.
+    fullName: availabilityZone
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'availabilityZone?: string'
+      return:
+        description: ''
+        type: string
   - name: catalogCollation
     uid: '@azure/arm-sql.Database.catalogCollation'
     package: '@azure/arm-sql'
@@ -225,6 +237,20 @@ properties:
       return:
         description: ''
         type: string
+  - name: encryptionProtector
+    uid: '@azure/arm-sql.Database.encryptionProtector'
+    package: '@azure/arm-sql'
+    summary: >-
+      The azure key vault URI of the database if it's configured with per
+      Database Customer Managed Keys.
+    fullName: encryptionProtector
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'encryptionProtector?: string'
+      return:
+        description: ''
+        type: string
   - name: failoverGroupId
     uid: '@azure/arm-sql.Database.failoverGroupId'
     package: '@azure/arm-sql'
@@ -258,7 +284,8 @@ properties:
     package: '@azure/arm-sql'
     summary: >-
       The number of secondary replicas associated with the database that are
-      used to provide high availability.
+      used to provide high availability. Not applicable to a Hyperscale database
+      within an elastic pool.
     fullName: highAvailabilityReplicaCount
     remarks: ''
     isDeprecated: false
@@ -310,6 +337,18 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: keys
+    uid: '@azure/arm-sql.Database.keys'
+    package: '@azure/arm-sql'
+    summary: The resource ids of the user assigned identities to use
+    fullName: keys
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'keys?: {[propertyName: string]: DatabaseKey}'
+      return:
+        description: ''
+        type: '{[propertyName: string]: <xref uid="@azure/arm-sql.DatabaseKey" />}'
   - name: kind
     uid: '@azure/arm-sql.Database.kind'
     package: '@azure/arm-sql'
@@ -385,6 +424,32 @@ properties:
       return:
         description: ''
         type: string
+  - name: manualCutover
+    uid: '@azure/arm-sql.Database.manualCutover'
+    package: '@azure/arm-sql'
+    summary: >-
+      Whether or not customer controlled manual cutover needs to be done during
+      Update Database operation to Hyperscale tier.
+
+
+      This property is only applicable when scaling database from Business
+      Critical/General Purpose/Premium/Standard tier to Hyperscale tier.
+
+
+      When manualCutover is specified, the scaling operation will wait for user
+      input to trigger cutover to Hyperscale database.
+
+
+      To trigger cutover, please provide 'performCutover' parameter when the
+      Scaling operation is in Waiting state.
+    fullName: manualCutover
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'manualCutover?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: maxLogSizeBytes
     uid: '@azure/arm-sql.Database.maxLogSizeBytes'
     package: '@azure/arm-sql'
@@ -442,17 +507,42 @@ properties:
       return:
         description: ''
         type: Date
-  - name: primaryDelegatedIdentityClientId
-    uid: '@azure/arm-sql.Database.primaryDelegatedIdentityClientId'
+  - name: performCutover
+    uid: '@azure/arm-sql.Database.performCutover'
     package: '@azure/arm-sql'
     summary: >-
-      The Primary Delegated Identity Client id used for per database CMK - for
-      internal use only
-    fullName: primaryDelegatedIdentityClientId
+      To trigger customer controlled manual cutover during the wait state while
+      Scaling operation is in progress.
+
+
+      This property parameter is only applicable for scaling operations that are
+      initiated along with 'manualCutover' parameter.
+
+
+      This property is only applicable when scaling database from Business
+      Critical/General Purpose/Premium/Standard tier to Hyperscale tier is
+      already in progress.
+
+
+      When performCutover is specified, the scaling operation will trigger
+      cutover and perform role-change to Hyperscale database.
+    fullName: performCutover
     remarks: ''
     isDeprecated: false
     syntax:
-      content: 'primaryDelegatedIdentityClientId?: string'
+      content: 'performCutover?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: preferredEnclaveType
+    uid: '@azure/arm-sql.Database.preferredEnclaveType'
+    package: '@azure/arm-sql'
+    summary: Type of enclave requested on the database i.e. Default or VBS enclaves.
+    fullName: preferredEnclaveType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'preferredEnclaveType?: string'
       return:
         description: ''
         type: string
@@ -462,7 +552,8 @@ properties:
     summary: >-
       The state of read-only routing. If enabled, connections that have
       application intent set to readonly in their connection string may be
-      routed to a readonly secondary replica in the same region.
+      routed to a readonly secondary replica in the same region. Not applicable
+      to a Hyperscale database within an elastic pool.
     fullName: readScale
     remarks: ''
     isDeprecated: false
@@ -589,7 +680,7 @@ properties:
     package: '@azure/arm-sql'
     summary: >-
       The secondary type of the database if it is a secondary.  Valid values are
-      Geo and Named.
+      Geo, Named and Standby.
     fullName: secondaryType
     remarks: ''
     isDeprecated: false
@@ -654,6 +745,50 @@ properties:
     isDeprecated: false
     syntax:
       content: 'sourceDatabaseId?: string'
+      return:
+        description: ''
+        type: string
+  - name: sourceResourceId
+    uid: '@azure/arm-sql.Database.sourceResourceId'
+    package: '@azure/arm-sql'
+    summary: >-
+      The resource identifier of the source associated with the create operation
+      of this database.
+
+
+      This property is only supported for DataWarehouse edition and allows to
+      restore across subscriptions.
+
+
+      When sourceResourceId is specified, sourceDatabaseId,
+      recoverableDatabaseId, restorableDroppedDatabaseId and
+      sourceDatabaseDeletionDate must not be specified and CreateMode must be
+      PointInTimeRestore, Restore or Recover.
+
+
+      When createMode is PointInTimeRestore, sourceResourceId must be the
+      resource ID of the existing database or existing sql pool, and
+      restorePointInTime must be specified.
+
+
+      When createMode is Restore, sourceResourceId must be the resource ID of
+      restorable dropped database or restorable dropped sql pool.
+
+
+      When createMode is Recover, sourceResourceId must be the resource ID of
+      recoverable database or recoverable sql pool.
+
+
+      When source subscription belongs to a different tenant than target
+      subscription, “x-ms-authorization-auxiliary” header must contain
+      authentication token for the source tenant. For more details about
+      “x-ms-authorization-auxiliary” header see
+      https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/authenticate-multi-tenant
+    fullName: sourceResourceId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'sourceResourceId?: string'
       return:
         description: ''
         type: string

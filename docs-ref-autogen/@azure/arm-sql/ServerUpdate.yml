@@ -35,7 +35,11 @@ properties:
   - name: administrators
     uid: '@azure/arm-sql.ServerUpdate.administrators'
     package: '@azure/arm-sql'
-    summary: The Azure Active Directory identity of the server.
+    summary: >-
+      The Azure Active Directory administrator of the server. This can only be
+      used at server create time. If used for server update, it will be ignored
+      or it will result in an error. For updates individual APIs will need to be
+      used.
     fullName: administrators
     remarks: ''
     isDeprecated: false
@@ -44,6 +48,22 @@ properties:
       return:
         description: ''
         type: <xref uid="@azure/arm-sql.ServerExternalAdministrator" />
+  - name: externalGovernanceStatus
+    uid: '@azure/arm-sql.ServerUpdate.externalGovernanceStatus'
+    package: '@azure/arm-sql'
+    summary: >-
+      Status of external governance.
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: externalGovernanceStatus
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'externalGovernanceStatus?: string'
+      return:
+        description: ''
+        type: string
   - name: federatedClientId
     uid: '@azure/arm-sql.ServerUpdate.federatedClientId'
     package: '@azure/arm-sql'
@@ -99,7 +119,7 @@ properties:
   - name: minimalTlsVersion
     uid: '@azure/arm-sql.ServerUpdate.minimalTlsVersion'
     package: '@azure/arm-sql'
-    summary: 'Minimal TLS version. Allowed values: ''1.0'', ''1.1'', ''1.2'''
+    summary: 'Minimal TLS version. Allowed values: ''None'', ''1.0'', ''1.1'', ''1.2'''
     fullName: minimalTlsVersion
     remarks: ''
     isDeprecated: false
@@ -141,7 +161,8 @@ properties:
     package: '@azure/arm-sql'
     summary: >-
       Whether or not public endpoint access is allowed for this server.  Value
-      is optional but if passed in, must be 'Enabled' or 'Disabled'
+      is optional but if passed in, must be 'Enabled' or 'Disabled' or
+      'SecuredByPerimeter'
     fullName: publicNetworkAccess
     remarks: ''
     isDeprecated: false

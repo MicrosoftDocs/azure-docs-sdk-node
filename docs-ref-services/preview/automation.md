@@ -7,8 +7,8 @@ ms.data: 06/13/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: automation
-ms.date: 07/18/2017
 manager: nirb
+ms.date: 07/18/2017
 ---
 # Azure Automation Modules for JavaScript
 

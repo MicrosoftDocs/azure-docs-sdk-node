@@ -6,7 +6,7 @@ ms.author: jeffish
 ms.data: 06/13/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: azure-load-testing
+ms.service: loadtesting
 ---
 # Azure Load Testing SDK for JavaScript - latest
 ## Packages - latest

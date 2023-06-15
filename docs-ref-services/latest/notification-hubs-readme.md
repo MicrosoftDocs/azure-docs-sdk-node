@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/notification-hubs, notificationhubs
 author: xirzec
 ms.author: jeffish
-ms.date: 03/21/2023
+ms.date: 06/15/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: notificationhubs
@@ -21,10 +21,12 @@ Azure Notification Hubs provide a scaled-out push engine that enables you to sen
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/)
 - [Package (npm)](https://www.npmjs.com/package/@azure/notification-hubs)
 - [Product documentation](/azure/notification-hubs/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev)
+
+**NOTE**: If you are coming from using the `azure-sb` package, see the [migration guide to move from azure-sb to @azure/notification-hubs](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/migrationguide.md)
 
 ## Getting started
 
@@ -33,7 +35,7 @@ Key links:
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.2/SUPPORT.md) for more details.
 
 ### Install the package
 
@@ -62,9 +64,9 @@ Once created, the Notification Hub can be configured using the [Azure Portal or 
 This SDK for JavaScript offers two ways of interacting with Azure Notification Hubs, either through the class-based approach, or with a modular design approach.  The class-based approach is consistent across all packages to create a client and then interact with the methods on the client.
 
 ```typescript
-import { 
+import {
   NotificationHubsClient,
-  createAppleInstallation 
+  createAppleInstallation
 } from "@azure/notification-hubs";
 
 const client = new NotificationHubsClient("<connection string>", "<hub name>");
@@ -78,9 +80,9 @@ const installation = createAppleInstallation({
 const result = await client.createOrUpdateInstallation(installation);
 ```
 
-The modular approach allows the developer to pick and choose which functions to import as each method is exposed individually.  This approach uses subpath-exports with ES-Modules to expose the methods via direct imports.  With the individual exports, this creates a better tree-shaking experience and smaller bundle sizes that the developer can take advantage of.  
+The modular approach allows the developer to pick and choose which functions to import as each method is exposed individually.  This approach uses subpath-exports with ES-Modules to expose the methods via direct imports.  With the individual exports, this creates a better tree-shaking experience and smaller bundle sizes that the developer can take advantage of.
 
-Note that creating a client is exposed through the `"@azure/notification-hubs/api"` subpath and all client methods are exposed through the `"@azure/notification-hubs/api"` subpath.  Each function exported takes the `client` as the first parameter and the rest of the parameters remain unchanged.  
+Note that creating a client is exposed through the `"@azure/notification-hubs/api"` subpath and all client methods are exposed through the `"@azure/notification-hubs/api"` subpath.  Each function exported takes the `client` as the first parameter and the rest of the parameters remain unchanged.
 
 The following subpaths are exposed:
 
@@ -303,10 +305,10 @@ registration = await client.updateRegistration(registration);
 Using the modular approach, the code would be as follows:
 
 ```typescript
-import { 
-  createClientContext, 
-  getRegistration, 
-  updateRegistration 
+import {
+  createClientContext,
+  getRegistration,
+  updateRegistration
 } from "@azure/notification-hubs/api";
 
 const context = createClientContext("<connection string>", "<hub name>");
@@ -394,7 +396,7 @@ const result = await sendNotification(context, notification);
 Notification Hubs can be used to send notifications to all registered devices per platform using broadcast send through the `sendNotification` method.
 
 ```typescript
-import { 
+import {
   NotificationHubsClient,
   createAppleNotification,
 } from "@azure/notification-hubs/api";
@@ -453,7 +455,7 @@ if (result.notificationId) {
 
 #### Direct Send
 
-To send directly a device, the user can send using the platform provided unique identifier such as APNs device token by calling the `sendNotification` method with a `deviceHandle` parameter.  
+To send directly a device, the user can send using the platform provided unique identifier such as APNs device token by calling the `sendNotification` method with a `deviceHandle` parameter.
 
 ```typescript
 import {
@@ -673,9 +675,11 @@ React Native currently does not have support for [`URLSearchParams`] which is us
 import 'url-search-params-polyfill';
 ```
 
+We also need to provide polyfill for `TextEncoder` API and async iterator API. Please see our [React Native sample with Expo](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.2/samples/frameworks/react-native/appconfigBasic/README.md#add-polyfills) for more details.
+
 ### Diagnose Dropped Notifications
 
-Azure Notification Hubs has a complete guide to troubleshooting problems with dropped notifications in the [Diagnose dropped notifications in Azure Notification Hubs Guide](/azure/notification-hubs/notification-hubs-push-notification-fixer).  
+Azure Notification Hubs has a complete guide to troubleshooting problems with dropped notifications in the [Diagnose dropped notifications in Azure Notification Hubs Guide](/azure/notification-hubs/notification-hubs-push-notification-fixer).
 
 [Test send](/azure/notification-hubs/notification-hubs-push-notification-fixer#enabletestsend-property) is supported supported in the `sendNotification` method with the `enableTestSend` option:
 
@@ -697,7 +701,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/core/logger).
 
 ## Next steps
 
@@ -706,32 +710,32 @@ The following samples show you the various ways you can interact with Azure Noti
 **Device Management:**
 
 - Installations API
-  - [Create Or Update Installation](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/createInstallation.ts)
-  - [Update Installation](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/updateInstallation.ts)
+  - [Create Or Update Installation](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/createInstallation.ts)
+  - [Update Installation](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/updateInstallation.ts)
 - Registration API
-  - [Create Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/createRegistration.ts)s
-  - [Create Or Update Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/createOrUpdateRegistration.ts)
-  - [Update Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/updateRegistration.ts)
-  - [List Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/listRegistrations.ts)
-  - [List Registration By Tag](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/listRegistrationsByTag.ts)
+  - [Create Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/createRegistration.ts)s
+  - [Create Or Update Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/createOrUpdateRegistration.ts)
+  - [Update Registration](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/updateRegistration.ts)
+  - [List Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/listRegistrations.ts)
+  - [List Registration By Tag](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/listRegistrationsByTag.ts)
 
 **Send Operations:**
 
-- [Broadcast Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/sendBroadcastNotification.ts)
-- [Direct Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/sendDirectNotification.ts)
-- [Audience Send With Tags List](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/sendTagsList.ts)
-- [Audience Send With Tag Expression](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/sendTagExpression.ts)
-- [Scheduled Broadcast Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/scheduledSendBroadcastNotification.ts)
-- [Scheduled Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/scheduledSendNotification.ts)
+- [Broadcast Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/sendBroadcastNotification.ts)
+- [Direct Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/sendDirectNotification.ts)
+- [Audience Send With Tags List](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/sendTagsList.ts)
+- [Audience Send With Tag Expression](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/sendTagExpression.ts)
+- [Scheduled Broadcast Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/scheduledSendBroadcastNotification.ts)
+- [Scheduled Send](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/scheduledSendNotification.ts)
 
 **Management Operations:**
 
-- [Export Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/exportRegistrationsJob.ts)
-- [Import Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/samples-dev/importRegistrationsJob.ts)
+- [Export Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/exportRegistrationsJob.ts)
+- [Import Registrations](https://github.com/Azure/azure-sdk-for-js/tree/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/samples-dev/importRegistrationsJob.ts)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This module's tests are a mixture of live and unit tests, which require you to have an Azure Notification Hubs instance. To execute the tests you'll need to run:
 
@@ -743,7 +747,7 @@ This module's tests are a mixture of live and unit tests, which require you to h
 4. `cd sdk\notificationhubs\notification-hubs`
 5. `npm run test`.
 
-View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.1/sdk/notificationhubs/notification-hubs/test)
+View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/notification-hubs_1.0.2/sdk/notificationhubs/notification-hubs/test)
 folder for more details.
 
 ## Related projects

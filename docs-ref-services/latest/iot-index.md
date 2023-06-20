@@ -1,7 +1,6 @@
 | Reference | Package | Source |
 |---|---|---|
 |[Device Update](iot-device-update-rest-readme.md)|[@azure-rest/iot-device-update](https://www.npmjs.com/package/@azure-rest/iot-device-update)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/deviceupdate/iot-device-update-rest)|
-|Digital Twins|[@azure/digital-twins](https://www.npmjs.com/package/@azure/digital-twins)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |[Digital Twins - Core](digital-twins-core-readme.md)|[@azure/digital-twins-core](https://www.npmjs.com/package/@azure/digital-twins-core)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/digitaltwins/digital-twins-core)|
 |IoT Hub - IoT Common|[azure-iot-common](https://www.npmjs.com/package/azure-iot-common)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |IoT Hub - IoT Device|[azure-iot-device](https://www.npmjs.com/package/azure-iot-device)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|

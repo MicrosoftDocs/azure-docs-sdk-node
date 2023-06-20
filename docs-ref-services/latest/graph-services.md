@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: graphservices
 ---
-# Azure Graph Services SDK for JavaScript - preview
-## Packages - preview
+# Azure Graph Services SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](graph-services-index.md)]

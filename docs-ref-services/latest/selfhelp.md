@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: selfhelp
 ---
-# Azure Selfhelp SDK for JavaScript - preview
-## Packages - preview
+# Azure Selfhelp SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](selfhelp-index.md)]

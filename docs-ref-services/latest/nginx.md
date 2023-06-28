@@ -3,7 +3,7 @@ title: Azure Nginx SDK for JavaScript
 description: Reference for Azure Nginx SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 06/27/2023
+ms.data: 06/28/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: nginx

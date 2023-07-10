@@ -3,7 +3,7 @@ title: Azure Synapse SDK for JavaScript
 description: Reference for Azure Synapse SDK for JavaScript
 author: joheredi
 ms.author: joheredi
-ms.data: 07/07/2023
+ms.data: 07/10/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: synapse

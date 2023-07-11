@@ -2,13 +2,13 @@
 title: Azure Cognitive Search client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/search-documents, search
 author: dgetu
-ms.author: dgetu
-ms.date: 05/09/2023
+ms.author: danielgetu
+ms.date: 07/11/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: search
 ---
-# Azure Cognitive Search client library for JavaScript - version 12.0.0-beta.1 
+# Azure Cognitive Search client library for JavaScript - version 12.0.0-beta.2 
 
 
 [Azure Cognitive Search](/azure/search/) is a search-as-a-service cloud solution that gives developers APIs and tools for adding a rich search experience over private, heterogeneous content in web, mobile, and enterprise applications.
@@ -32,12 +32,12 @@ Use the @azure/search-documents client library to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.0.0-beta.1/sdk/search/search-documents/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.0.0-beta.2/sdk/search/search-documents/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/search-documents)
 - [API reference documentation](/javascript/api/@azure/search-documents)
 - [REST API documentation](/rest/api/searchservice/)
 - [Product documentation](/azure/search/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0-beta.1/sdk/search/search-documents/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0-beta.2/sdk/search/search-documents/samples)
 
 ## Getting started
 
@@ -52,7 +52,7 @@ npm install @azure/search-documents
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.0.0-beta.2/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -184,7 +184,7 @@ Typically you will only wish to [show a subset of search results](/azure/search/
 
 ## Examples
 
-The following examples demonstrate the basics - please [check out our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0-beta.1/sdk/search/search-documents/samples) for much more.
+The following examples demonstrate the basics - please [check out our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0-beta.2/sdk/search/search-documents/samples) for much more.
 
 - [Creating an index](#create-an-index)
 - [Retrieving a specific document from your index](#retrieve-a-specific-document-from-an-index)
@@ -329,19 +329,24 @@ main();
 
 #### Querying with TypeScript
 
-In TypeScript `SearchClient` takes a generic parameter that is the model shape of your index documents. This allows you to perform strongly typed lookup of fields returned in results. TypeScript is also able to check for fields returned when specifying a `select` parameter.
+In TypeScript, `SearchClient` takes a generic parameter that is the model shape of your index documents. This allows you to perform strongly typed lookup of fields returned in results. TypeScript is also able to check for fields returned when specifying a `select` parameter.
 
 ```ts
 import { SearchClient, AzureKeyCredential } from "@azure/search-documents";
 
 // An example schema for documents in the index
 interface Hotel {
-  HotelId: string;
-  HotelName: string;
-  Description: string;
-  ParkingIncluded: boolean;
-  LastRenovationDate: Date;
-  Rating: number;
+  hotelId?: string;
+  hotelName?: string | null;
+  description?: string | null;
+  descriptionVector?: Array<number> | null;
+  parkingIncluded?: boolean | null;
+  lastRenovationDate?: Date | null;
+  rating?: number | null;
+  rooms?: Array<{
+    beds?: number | null;
+    description?: string | null;
+  } | null;>
 }
 
 const client = new SearchClient<Hotel>(
@@ -354,13 +359,22 @@ async function main() {
   const searchResults = await client.search("wifi -luxury", {
     // Only fields in Hotel can be added to this array.
     // TS will complain if one is misspelled.
-    select: ["HotelId", "HotelName", "Rating"],
+    select: ["hotelId", "hotelName", "rooms/beds"],
   });
 
+  // These are other ways to declare the correct type for `select`.
+  const select = ["hotelId", "hotelName", "rooms/beds"] as const;
+  // This declaration lets you opt out of narrowing the TypeScript type of your documents,
+  // though the Cognitive Search service will still only return these fields.
+  const selectWide: SelectFields<Hotel>[] = ["hotelId", "hotelName", "rooms/beds"];
+  // This is an invalid declaration. Passing this to `select` will result in a compiler error
+  // unless you opt out of including the model in the client constructor.
+  const selectInvalid = ["hotelId", "hotelName", "rooms/beds"];
+
   for await (const result of searchResults.results) {
-    // result.document has HotelId, HotelName, and Rating.
-    // Trying to access result.document.Description would emit a TS error.
-    console.log(result.document.HotelName);
+    // result.document has hotelId, hotelName, and rating.
+    // Trying to access result.document.description would emit a TS error.
+    console.log(result.document.hotelName);
   }
 }
 
@@ -382,11 +396,38 @@ async function main() {
   const searchResults = await client.search("WiFi", {
     filter: odata`Rooms/any(room: room/BaseRate lt ${baseRateMax}) and Rating ge ${ratingMin}`,
     orderBy: ["Rating desc"],
-    select: ["HotelId", "HotelName", "Rating"],
+    select: ["hotelId", "hotelName", "rating"],
   });
   for await (const result of searchResults.results) {
     // Each result will have "HotelId", "HotelName", and "Rating"
     // in addition to the standard search result property "score"
+    console.log(result);
+  }
+}
+
+main();
+```
+
+#### Querying with vectors
+
+Text embeddings can be queried using the `vector` search parameter.
+
+```js
+const { SearchClient, AzureKeyCredential, odata } = require("@azure/search-documents");
+
+const client = new SearchClient("<endpoint>", "<indexName>", new AzureKeyCredential("<apiKey>"));
+
+async function main() {
+  const queryVector: number[] = [...]
+  const searchResults = await searchClient.search("*", {
+    vector: {
+      fields: ["descriptionVector"],
+      kNearestNeighborsCount: 3,
+      value: queryVector,
+    },
+  });
+  for await (const result of searchResults.results) {
+    // These results are the nearest neighbors to the query vector
     console.log(result);
   }
 }
@@ -405,17 +446,17 @@ const client = new SearchClient("<endpoint>", "<indexName>", new AzureKeyCredent
 
 async function main() {
   const searchResults = await client.search("WiFi", {
-    facets: ["Category,count:3,sort:count", "Rooms/BaseRate,interval:100"],
+    facets: ["category,count:3,sort:count", "rooms/baseRate,interval:100"],
   });
   console.log(searchResults.facets);
   // Output will look like:
   // {
-  //   'Rooms/BaseRate': [
+  //   'rooms/baseRate': [
   //     { count: 16, value: 0 },
   //     { count: 17, value: 100 },
   //     { count: 17, value: 200 }
   //   ],
-  //   Category: [
+  //   category: [
   //     { count: 5, value: 'Budget' },
   //     { count: 5, value: 'Luxury' },
   //     { count: 5, value: 'Resort and Spa' }
@@ -440,17 +481,17 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0-beta.2/sdk/core/logger).
 
 ## Next steps
 
-- [Go further with search-documents and our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0-beta.1/sdk/search/search-documents/samples)
+- [Go further with search-documents and our samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/search-documents_12.0.0-beta.2/sdk/search/search-documents/samples)
 - [Watch a demo or deep dive video](https://azure.microsoft.com/resources/videos/index/?services=search)
 - [Read more about the Azure Cognitive Search service](/azure/search/search-what-is-azure-search)
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/search-documents_12.0.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit [cla.microsoft.com][cla].
 

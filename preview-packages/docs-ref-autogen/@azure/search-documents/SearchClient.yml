@@ -137,7 +137,7 @@ methods:
       import {
         AzureKeyCredential,
         SearchClient,
-        SelectFields,
+        SearchFieldArray,
       } from "@azure/search-documents";
 
       type TModel = {
@@ -151,7 +151,7 @@ methods:
         new AzureKeyCredential("key")
       );
 
-      const searchFields: SelectFields<TModel>[] = ["azure/sdk"];
+      const searchFields: SearchFieldArray<TModel> = ["azure/sdk"];
 
       const autocompleteResult = await client.autocomplete(
         "searchText",
@@ -232,7 +232,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.IndexDocumentsResult"
           />&gt;
-  - name: getDocument<Fields>(string, GetDocumentOptions<TModel, Fields>)
+  - name: getDocument<TFields>(string, GetDocumentOptions<TModel, TFields>)
     uid: '@azure/search-documents.SearchClient.getDocument'
     package: '@azure/search-documents'
     summary: Retrieve a particular document from the index by key.
@@ -240,9 +240,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function getDocument<Fields>(key: string, options?:
-        GetDocumentOptions<TModel, Fields>): Promise<NarrowedModel<TModel,
-        Fields>>
+        function getDocument<TFields>(key: string, options?:
+        GetDocumentOptions<TModel, TFields>): Promise<NarrowedModel<TModel,
+        TFields>>
       parameters:
         - id: key
           type: string
@@ -250,13 +250,13 @@ methods:
         - id: options
           type: >-
             <xref uid="@azure/search-documents.GetDocumentOptions" />&lt;TModel,
-            Fields&gt;
+            TFields&gt;
           description: Additional options
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.NarrowedModel"
-          />&lt;TModel, Fields&gt;&gt;
+          />&lt;TModel, TFields&gt;&gt;
   - name: getDocumentsCount(OperationOptions)
     uid: '@azure/search-documents.SearchClient.getDocumentsCount'
     package: '@azure/search-documents'
@@ -362,7 +362,7 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.IndexDocumentsResult"
           />&gt;
-  - name: search<Fields>(string, SearchOptions<TModel, Fields>)
+  - name: search<TFields>(string, SearchOptions<TModel, TFields>)
     uid: '@azure/search-documents.SearchClient.search'
     package: '@azure/search-documents'
     summary: |+
@@ -375,7 +375,7 @@ methods:
       import {
         AzureKeyCredential,
         SearchClient,
-        SelectFields,
+        SearchFieldArray,
       } from "@azure/search-documents";
 
       type TModel = {
@@ -390,7 +390,7 @@ methods:
       );
 
       const select = ["azure/sdk"] as const;
-      const searchFields: SelectFields<TModel>[] = ["azure/sdk"];
+      const searchFields: SearchFieldArray<TModel> = ["azure/sdk"];
 
       const searchResult = await client.search("searchText", {
         select,
@@ -402,9 +402,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function search<Fields>(searchText?: string, options?:
-        SearchOptions<TModel, Fields>): Promise<SearchDocumentsResult<TModel,
-        Fields>>
+        function search<TFields>(searchText?: string, options?:
+        SearchOptions<TModel, TFields>): Promise<SearchDocumentsResult<TModel,
+        TFields>>
       parameters:
         - id: searchText
           type: string
@@ -412,14 +412,14 @@ methods:
         - id: options
           type: >-
             <xref uid="@azure/search-documents.SearchOptions" />&lt;TModel,
-            Fields&gt;
+            TFields&gt;
           description: Options for the search operation.
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.SearchDocumentsResult"
-          />&lt;TModel, Fields&gt;&gt;
-  - name: suggest<Fields>(string, string, SuggestOptions<TModel, Fields>)
+          />&lt;TModel, TFields&gt;&gt;
+  - name: suggest<TFields>(string, string, SuggestOptions<TModel, TFields>)
     uid: '@azure/search-documents.SearchClient.suggest'
     package: '@azure/search-documents'
     summary: >+
@@ -436,7 +436,7 @@ methods:
       import {
         AzureKeyCredential,
         SearchClient,
-        SelectFields,
+        SearchFieldArray,
       } from "@azure/search-documents";
 
 
@@ -455,7 +455,7 @@ methods:
 
       const select = ["azure/sdk"] as const;
 
-      const searchFields: SelectFields<TModel>[] = ["azure/sdk"];
+      const searchFields: SearchFieldArray<TModel> = ["azure/sdk"];
 
 
       const suggestResult = await client.suggest("searchText", "suggesterName",
@@ -470,9 +470,9 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function suggest<Fields>(searchText: string, suggesterName: string,
-        options?: SuggestOptions<TModel, Fields>):
-        Promise<SuggestDocumentsResult<TModel, Fields>>
+        function suggest<TFields>(searchText: string, suggesterName: string,
+        options?: SuggestOptions<TModel, TFields>):
+        Promise<SuggestDocumentsResult<TModel, TFields>>
       parameters:
         - id: searchText
           type: string
@@ -487,13 +487,13 @@ methods:
         - id: options
           type: >-
             <xref uid="@azure/search-documents.SuggestOptions" />&lt;TModel,
-            Fields&gt;
+            TFields&gt;
           description: Options for the suggest operation
       return:
         description: ''
         type: >-
           Promise&lt;<xref uid="@azure/search-documents.SuggestDocumentsResult"
-          />&lt;TModel, Fields&gt;&gt;
+          />&lt;TModel, TFields&gt;&gt;
   - name: uploadDocuments(TModel[], IndexDocumentsOptions)
     uid: '@azure/search-documents.SearchClient.uploadDocuments'
     package: '@azure/search-documents'

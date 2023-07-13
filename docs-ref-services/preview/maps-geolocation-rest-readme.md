@@ -1,19 +1,19 @@
 ---
 title: Azure Maps Geolocation REST client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/maps-geolocation, maps
-author: xirzec
-ms.author: jeffish
-ms.date: 01/10/2023
+author: dubiety
+ms.author: yuchungchen
+ms.date: 07/13/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: maps
 ---
-# Azure Maps Geolocation REST client library for JavaScript - version 1.0.0-beta.1 
+# Azure Maps Geolocation REST client library for JavaScript - version 1.0.0-beta.2 
 
 
 Azure Maps Geolocation Client
 
-\*\*If you are not familiar with our REST client, please spend 5 minutes to take a look at our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-geolocation_1.0.0-beta.1/documentation/rest-clients.md) to use this library, the REST client provides a light-weighted & developer friendly way to call azure rest api
+\*\*If you are not familiar with our REST client, please spend 5 minutes to take a look at our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-geolocation_1.0.0-beta.2/documentation/rest-clients.md) to use this library, the REST client provides a light-weighted & developer friendly way to call azure rest api
 
 Key links:
 
@@ -55,14 +55,14 @@ You'll need a `credential` instance for authentication when creating the `MapsGe
 
 #### Using an Azure AD credential
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-geolocation_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/maps-geolocation_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.1/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.2/sdk/identity/identity#credentials) library.
 
 To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.1/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.2/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 You'll need to register the new Azure AD application and grant access to Azure Maps by assigning the required role to your service principal. For more information, see [Host a daemon on non-Azure resources](https://learn.microsoft.com/azure/azure-maps/how-to-secure-daemon-app#host-a-daemon-on-non-azure-resources). Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -88,7 +88,7 @@ npm install @azure/core-auth
 
 ```javascript
 const MapsGeolocation = require("@azure-rest/maps-geolocation").default;
-const AzureKeyCredential = require("@azure/core-auth");
+const { AzureKeyCredential } = require("@azure/core-auth");
 const credential = new AzureKeyCredential("<subscription-key>");
 const client = MapsGeolocation(credential);
 ```
@@ -104,7 +104,7 @@ const client = MapsGeolocation(credential);
 You can get the country code from a IP address:
 
 ```javascript
-const isUnexpected = require("@azure-rest/maps-geolocation");
+const { isUnexpected } = require("@azure-rest/maps-geolocation");
 
 const result = await client.path("/geolocation/ip/{format}", "json").get({
   queryParameters: { ip: "2001:4898:80e8:b::189" },
@@ -131,15 +131,14 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.2/sdk/core/logger).
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fmaps%2Fmaps-geolocation-rest%2FREADME.png)
 
-<!-- [source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.1/sdk/maps/maps-geolocation-rest -->
-<!-- [npm_package]: https://www.npmjs.com/package/@azure-rest/maps-geolocation -->
-<!-- [api_ref]: /javascript/api/@azure-rest/maps-geolocation?view=azure-node-preview -->
-<!-- [samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.1/sdk/maps/maps-geolocation-rest/samples -->
-
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.2/sdk/maps/maps-geolocation-rest
+[npm_package]: https://www.npmjs.com/package/@azure-rest/maps-geolocation
+[api_ref]: /javascript/api/@azure-rest/maps-geolocation?view=azure-node-preview
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/maps-geolocation_1.0.0-beta.2/sdk/maps/maps-geolocation-rest/samples
 [product_info]: https://learn.microsoft.com/rest/api/maps/geolocation
 [az_subscription]: https://azure.microsoft.com/free/
 [az_maps_account_management]: /azure/azure-maps/how-to-manage-account-keys

@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: paloaltonetworksngfw
 ---
-# Azure Paloaltonetworksngfw SDK for JavaScript - preview
-## Packages - preview
+# Azure Paloaltonetworksngfw SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](paloaltonetworksngfw-index.md)]

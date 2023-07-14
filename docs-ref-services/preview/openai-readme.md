@@ -3,12 +3,12 @@ title: Azure OpenAI client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/openai, openai
 author: deyaaeldeen
 ms.author: dealmaha
-ms.date: 06/07/2023
+ms.date: 07/14/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: openai
 ---
-# Azure OpenAI client library for JavaScript - version 1.0.0-beta.2 
+# Azure OpenAI client library for JavaScript - version 1.0.0-beta.3 
 
 
 The Azure OpenAI client library for JavaScript is an adaptation of OpenAI's REST APIs that provides an idiomatic interface
@@ -31,11 +31,11 @@ Checkout the following examples:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/openai/openai)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/openai/openai)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/openai)
 - [API reference documentation](https://aka.ms/openai-js-api)
 - [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/openai/openai/samples/v1-beta)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/openai/openai/samples/v1-beta)
 
 ## Getting started
 
@@ -148,7 +148,7 @@ for (const choice of choices) {
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/openai/openai/samples/v1-beta).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/openai/openai/samples/v1-beta).
 
 ### Generate Chatbot Response
 
@@ -257,15 +257,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/core/logger).
 
 <!-- LINKS -->
-[msdocs_openai_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.2/sdk/openai/openai/samples/v1-beta/javascript/completions.js
-[msdocs_openai_chat_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.2/sdk/openai/openai/samples/v1-beta/javascript/listChatCompletions.js
+[msdocs_openai_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.3/sdk/openai/openai/samples/v1-beta/javascript/completions.js
+[msdocs_openai_chat_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.3/sdk/openai/openai/samples/v1-beta/javascript/listChatCompletions.js
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.2/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/identity/identity
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [azure_cli]: /cli/azure
 [azure_portal]: https://portal.azure.com

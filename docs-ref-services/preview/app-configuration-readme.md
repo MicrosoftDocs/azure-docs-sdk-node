@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/app-configuration, appconfiguration
 author: HarshaNalluru
 ms.author: sanallur
-ms.date: 05/11/2022
+ms.date: 07/14/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: appconfiguration
@@ -17,14 +17,15 @@ Use the client library for App Configuration to:
 - Create flexible key representations and mappings
 - Tag keys with labels
 - Replay settings from any point in time
+- Manage snapshots of an app's configuration
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/app-configuration)
 - [API reference documentation](/javascript/api/@azure/app-configuration)
 - [Product documentation](/azure/azure-app-configuration/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/samples)
 
 ## Getting started
 
@@ -36,10 +37,10 @@ npm install @azure/app-configuration
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.4.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.5.0-beta.1/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -68,7 +69,7 @@ Authentication via service principal is done by:
 - Setting appropriate RBAC rules on your AppConfiguration resource.
   More information on App Configuration roles can be found [here](/azure/azure-app-configuration/concept-enable-rbac#azure-built-in-roles-for-azure-app-configuration).
 
-Using [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.4.0-beta.1/sdk/identity/identity/README.md#defaultazurecredential)
+Using [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.5.0-beta.1/sdk/identity/identity/README.md#defaultazurecredential)
 
 ```javascript
 const azureIdentity = require("@azure/identity");
@@ -81,7 +82,7 @@ const client = new appConfig.AppConfigurationClient(
 );
 ```
 
-More information about `@azure/identity` can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.4.0-beta.1/sdk/identity/identity/README.md)
+More information about `@azure/identity` can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.5.0-beta.1/sdk/identity/identity/README.md)
 
 #### Sovereign Clouds
 
@@ -98,7 +99,7 @@ const client = new AppConfigurationClient(
 );
 ```
 
-More information about `@azure/identity` can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.4.0-beta.1/sdk/identity/identity/README.md)
+More information about `@azure/identity` can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.5.0-beta.1/sdk/identity/identity/README.md)
 
 #### Authenticating with a connection string
 
@@ -153,9 +154,11 @@ let setting = await client.getConfigurationSetting({
 setting = await client.getConfigurationSetting(setting);
 ```
 
+The `2022-11-01-preview` API version supports configuration snapshots: immutable, point-in-time copies of a configuration store. Snapshots can be created with filters that determine which key-value pairs are contained within the snapshot, creating an immutable, composed view of the configuration store. This feature enables applications to hold a consistent view of configuration, ensuring that there are no version mismatches to individual settings due to reading as updates were made. For example, this feature can be used to create "release configuration snapshots" within an App Configuration. See [the _create and get a snapshot_ section](#create-and-get-a-setting) in the example below. 
+
 ## Examples
 
-#### Create and get a setting
+### Create and get a setting
 
 ```javascript
 const appConfig = require("@azure/app-configuration");
@@ -185,6 +188,81 @@ async function run() {
 run().catch((err) => console.log("ERROR:", err));
 ```
 
+### Create a snapshot
+
+`beginCreateSnapshot` gives you the poller to poll for the snapshot creation. 
+
+```javascript
+const { AppConfigurationClient } = require("@azure/app-configuration");
+
+const client = new AppConfigurationClient(
+  "<App Configuration connection string goes here>"
+);
+
+const key = "testkey";
+const value = "testvalue";
+const label = "optional-label";
+
+await client.addConfigurationSetting({
+  key,
+  value,
+  label
+});
+
+const poller = await this.beginCreateSnapshot({
+  name:"testsnapshot",
+  retentionPeriod: 2592000,
+  filters: [{key, label}],
+});
+const snapshot = await poller.pollUntilDone();
+```
+
+You can also use `beginCreateSnapshotAndWait` to have the result of the creation directly after the polling is done.
+```js
+const snapshot  = await client.beginCreateSnapshotAndWait({
+  name:"testsnapshot",
+  retentionPeriod: 2592000,
+  filters: [{key, label}],
+});
+```
+
+### Get a snapshot
+
+```js
+const retrievedSnapshot = await client.getSnapshot("testsnapshot");
+console.log("Retrieved snapshot:", retrievedSnapshot);
+```
+
+### List the `ConfigurationSetting` in the snapshot
+```javascript
+let retrievedSnapshotSettings = await client.listConfigurationSettings({
+  snapshotFilter: "testsnapshot"
+});
+
+for await (const setting of retrievedSnapshotSettings) {
+  console.log(`Found key: ${setting.key}, label: ${setting.label}`);
+}
+```
+
+### List all snapshots from the service
+```javascript
+let snapshots = await client.listSnapshots();
+
+for await (const snapshot of snapshots) {
+  console.log(`Found snapshot: ${snapshot.name}`);
+}
+```
+
+### Recover and archive the snapshot
+```javascript
+// Snapshot is in ready status
+let archivedSnapshot = await client.archiveSnapshot("testsnapshot");
+console.log("Snapshot updated status is:", archivedSnapshot.status);
+
+// Snapshot is in archive status
+let recoverSnapshot = await client.recoverSnapshot("testsnapshot");
+console.log("Snapshot updated status is:", recoverSnapshot.status);
+```
 ## Troubleshooting
 
 ### Logging
@@ -192,31 +270,35 @@ run().catch((err) => console.log("ERROR:", err));
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
 ```javascript
-import { setLogLevel } from "@azure/logger";
+const { setLogLevel } = require("@azure/logger");
 
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.4.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.5.0-beta.1/sdk/core/logger).
+
+### React Native support
+
+React Native does not support some JavaScript API used by this SDK library so you need to provide polyfills for them.  Please see our [React Native sample with Expo](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.5.0-beta.1/samples/frameworks/react-native/appconfigBasic/README.md#add-polyfills) for more details.
 
 ## Next steps
 
 The following samples show you the various ways you can interact with App Configuration:
 
-- [`helloworld.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/helloworld.ts) - Get, set, and delete configuration values.
-- [`helloworldWithLabels.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/helloworldWithLabels.ts) - Use labels to add additional dimensions to your settings for scenarios like beta vs production.
-- [`optimisticConcurrencyViaEtag.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/optimisticConcurrencyViaEtag.ts) - Set values using etags to prevent accidental overwrites.
-- [`setReadOnlySample.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/setReadOnlySample.ts) - Marking settings as read-only to prevent modification.
-- [`getSettingOnlyIfChanged.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/getSettingOnlyIfChanged.ts) - Get a setting only if it changed from the last time you got it.
-- [`listRevisions.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/listRevisions.ts) - List the revisions of a key, allowing you to see previous values and when they were set.
-- [`secretReference.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/secretReference.ts) - SecretReference represents a configuration setting that references as KeyVault secret.
-- [`featureFlag.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/featureFlag.ts) - Feature flags are settings that follow specific JSON schema for the value.
+- [`helloworld.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/helloworld.ts) - Get, set, and delete configuration values.
+- [`helloworldWithLabels.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/helloworldWithLabels.ts) - Use labels to add additional dimensions to your settings for scenarios like beta vs production.
+- [`optimisticConcurrencyViaEtag.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/optimisticConcurrencyViaEtag.ts) - Set values using etags to prevent accidental overwrites.
+- [`setReadOnlySample.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/setReadOnlySample.ts) - Marking settings as read-only to prevent modification.
+- [`getSettingOnlyIfChanged.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/getSettingOnlyIfChanged.ts) - Get a setting only if it changed from the last time you got it.
+- [`listRevisions.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/listRevisions.ts) - List the revisions of a key, allowing you to see previous values and when they were set.
+- [`secretReference.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/secretReference.ts) - SecretReference represents a configuration setting that references as KeyVault secret.
+- [`featureFlag.ts`](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/typescript/src/featureFlag.ts) - Feature flags are settings that follow specific JSON schema for the value.
 
-More in-depth examples can be found in the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/) folder on GitHub.
+More in-depth examples can be found in the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/samples/v1/) folder on GitHub.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.4.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.5.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This module's tests are a mixture of live and unit tests, which require you to have an Azure App Configuration instance. To execute the tests you'll need to run:
 
@@ -227,7 +309,7 @@ This module's tests are a mixture of live and unit tests, which require you to h
 4. `cd sdk\appconfiguration\app-configuration`
 5. `npm run test`.
 
-View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.4.0-beta.1/sdk/appconfiguration/app-configuration/test)
+View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/app-configuration_1.5.0-beta.1/sdk/appconfiguration/app-configuration/test)
 folder for more details.
 
 ## Related projects

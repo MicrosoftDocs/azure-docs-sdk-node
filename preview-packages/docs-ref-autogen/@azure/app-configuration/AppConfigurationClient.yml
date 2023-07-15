@@ -111,6 +111,89 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/app-configuration.AddConfigurationSettingResponse" />&gt;
+  - name: archiveSnapshot(SnapshotId, UpdateSnapshotOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.archiveSnapshot'
+    package: '@azure/app-configuration'
+    summary: |-
+      Archive a ready snapshot
+
+      Example usage:
+      ```ts
+      const result = await client.archiveSnapshot("MySnapshot");
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function archiveSnapshot(snapshotId: SnapshotId, options?:
+        UpdateSnapshotOptions): Promise<UpdateSnapshotResponse>
+      parameters:
+        - id: snapshotId
+          type: <xref uid="@azure/app-configuration.SnapshotId" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/app-configuration.UpdateSnapshotOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/app-configuration.UpdateSnapshotResponse"
+          />&gt;
+  - name: beginCreateSnapshot(SnapshotInfo, CreateSnapshotOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.beginCreateSnapshot'
+    package: '@azure/app-configuration'
+    summary: >-
+      Begins creating a snapshot for Azure App Configuration service, fails if
+      it
+
+      already exists.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginCreateSnapshot(snapshot: SnapshotInfo, options?:
+        CreateSnapshotOptions):
+        Promise<SimplePollerLike<OperationState<CreateSnapshotResponse>,
+        CreateSnapshotResponse>>
+      parameters:
+        - id: snapshot
+          type: <xref uid="@azure/app-configuration.SnapshotInfo" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/app-configuration.CreateSnapshotOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;SimplePollerLike&lt;OperationState&lt;<xref
+          uid="@azure/app-configuration.CreateSnapshotResponse" />&gt;, <xref
+          uid="@azure/app-configuration.CreateSnapshotResponse" />&gt;&gt;
+  - name: beginCreateSnapshotAndWait(SnapshotInfo, CreateSnapshotOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.beginCreateSnapshotAndWait'
+    package: '@azure/app-configuration'
+    summary: >-
+      Begins creating a snapshot for Azure App Configuration service, waits
+      until it is done,
+
+      fails if it already exists.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginCreateSnapshotAndWait(snapshot: SnapshotInfo, options?:
+        CreateSnapshotOptions): Promise<CreateSnapshotResponse>
+      parameters:
+        - id: snapshot
+          type: <xref uid="@azure/app-configuration.SnapshotInfo" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/app-configuration.CreateSnapshotOptions" />
+          description: ''
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/app-configuration.CreateSnapshotResponse"
+          />&gt;
   - name: >-
       deleteConfigurationSetting(ConfigurationSettingId,
       DeleteConfigurationSettingOptions)
@@ -188,6 +271,34 @@ methods:
         type: >-
           Promise&lt;<xref
           uid="@azure/app-configuration.GetConfigurationSettingResponse" />&gt;
+  - name: getSnapshot(string, GetSnapshotOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.getSnapshot'
+    package: '@azure/app-configuration'
+    summary: |-
+      Get a snapshot from Azure App Configuration service
+
+      Example usage:
+      ```ts
+      const result = await client.getSnapshot("MySnapshot");
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getSnapshot(name: string, options?: GetSnapshotOptions):
+        Promise<GetSnapshotResponse>
+      parameters:
+        - id: name
+          type: string
+          description: The name of the snapshot.
+        - id: options
+          type: <xref uid="@azure/app-configuration.GetSnapshotOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/app-configuration.GetSnapshotResponse"
+          />&gt;
   - name: listConfigurationSettings(ListConfigurationSettingsOptions)
     uid: '@azure/app-configuration.AppConfigurationClient.listConfigurationSettings'
     package: '@azure/app-configuration'
@@ -226,6 +337,47 @@ methods:
           uid="@azure/app-configuration.ConfigurationSetting" />&lt;string&gt;,
           <xref uid="@azure/app-configuration.ListConfigurationSettingPage" />,
           <xref uid="@azure/app-configuration.PageSettings" />&gt;
+  - name: listConfigurationSettingsForSnapshot(string, ListSettingsSnapshotsOptions)
+    uid: >-
+      @azure/app-configuration.AppConfigurationClient.listConfigurationSettingsForSnapshot
+    package: '@azure/app-configuration'
+    summary: >-
+      Lists settings from the Azure App Configuration service for snapshots
+      based on name, optionally
+
+      filtered by key names, labels and accept datetime.
+
+
+      Example code:
+
+      ```ts
+
+      const allSettingsWithLabel = client.listConfigurationSettingsForSnashots({
+      snapshotName: "MySnapshot" });
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listConfigurationSettingsForSnapshot(snapshotName: string,
+        options?: ListSettingsSnapshotsOptions):
+        PagedAsyncIterableIterator<ConfigurationSetting<string>,
+        ListConfigurationSettingPage, PageSettings>
+      parameters:
+        - id: snapshotName
+          type: string
+          description: ''
+        - id: options
+          type: <xref uid="@azure/app-configuration.ListSettingsSnapshotsOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/app-configuration.ConfigurationSetting" />&lt;string&gt;,
+          <xref uid="@azure/app-configuration.ListConfigurationSettingPage" />,
+          <xref uid="@azure/app-configuration.PageSettings" />&gt;
   - name: listRevisions(ListRevisionsOptions)
     uid: '@azure/app-configuration.AppConfigurationClient.listRevisions'
     package: '@azure/app-configuration'
@@ -255,6 +407,61 @@ methods:
           uid="@azure/app-configuration.ConfigurationSetting" />&lt;string&gt;,
           <xref uid="@azure/app-configuration.ListRevisionsPage" />, <xref
           uid="@azure/app-configuration.PageSettings" />&gt;
+  - name: listSnapshots(ListSnapshotsOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.listSnapshots'
+    package: '@azure/app-configuration'
+    summary: |-
+      List all snapshots from Azure App Configuration service
+
+      Example usage:
+      ```ts
+      const result = await client.listSnapshots();
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listSnapshots(options?: ListSnapshotsOptions):
+        PagedAsyncIterableIterator<Snapshot, ListSnapshotsPage, PageSettings>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/app-configuration.ListSnapshotsOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/app-configuration.Snapshot" />, <xref
+          uid="@azure/app-configuration.ListSnapshotsPage" />, <xref
+          uid="@azure/app-configuration.PageSettings" />&gt;
+  - name: recoverSnapshot(SnapshotId, UpdateSnapshotOptions)
+    uid: '@azure/app-configuration.AppConfigurationClient.recoverSnapshot'
+    package: '@azure/app-configuration'
+    summary: |-
+      Recover an archived snapshot back to ready status
+
+      Example usage:
+      ```ts
+      const result = await client.recoverSnapshot("MySnapshot");
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function recoverSnapshot(snapshotId: SnapshotId, options?:
+        UpdateSnapshotOptions): Promise<UpdateSnapshotResponse>
+      parameters:
+        - id: snapshotId
+          type: <xref uid="@azure/app-configuration.SnapshotId" />
+          description: ''
+        - id: options
+          type: <xref uid="@azure/app-configuration.UpdateSnapshotOptions" />
+          description: Optional parameters for the request.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref uid="@azure/app-configuration.UpdateSnapshotResponse"
+          />&gt;
   - name: >-
       setConfigurationSetting(SetConfigurationSettingParam<string> |
       SetConfigurationSettingParam<FeatureFlagValue> |

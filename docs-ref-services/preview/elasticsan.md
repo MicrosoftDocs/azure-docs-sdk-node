@@ -3,7 +3,7 @@ title: Azure Elasticsan SDK for JavaScript
 description: Reference for Azure Elasticsan SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 07/14/2023
+ms.data: 07/17/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: elasticsan

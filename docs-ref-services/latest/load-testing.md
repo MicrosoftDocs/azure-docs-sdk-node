@@ -3,10 +3,10 @@ title: Azure Load Testing SDK for JavaScript
 description: Reference for Azure Load Testing SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 07/18/2023
+ms.data: 07/19/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: azure-load-testing
+ms.service: loadtesting
 ---
 # Azure Load Testing SDK for JavaScript - latest
 ## Packages - latest

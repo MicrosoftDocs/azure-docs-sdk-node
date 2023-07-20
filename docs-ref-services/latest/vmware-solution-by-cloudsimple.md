@@ -3,7 +3,7 @@ title: Azure VMware Solution by CloudSimple SDK for JavaScript
 description: Reference for Azure VMware Solution by CloudSimple SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 07/19/2023
+ms.data: 07/20/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: vmwaresolutionbycloudsimple

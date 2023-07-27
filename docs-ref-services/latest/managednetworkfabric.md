@@ -8,6 +8,6 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: managednetworkfabric
 ---
-# Azure Managednetworkfabric SDK for JavaScript - preview
-## Packages - preview
+# Azure Managednetworkfabric SDK for JavaScript - latest
+## Packages - latest
 [!INCLUDE [packages](managednetworkfabric-index.md)]

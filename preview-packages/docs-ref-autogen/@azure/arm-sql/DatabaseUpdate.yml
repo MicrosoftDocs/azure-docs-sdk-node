@@ -2,7 +2,7 @@
 name: DatabaseUpdate
 uid: '@azure/arm-sql.DatabaseUpdate'
 package: '@azure/arm-sql'
-summary: A database resource.
+summary: A database update resource.
 fullName: DatabaseUpdate
 remarks: ''
 isDeprecated: false
@@ -225,6 +225,20 @@ properties:
       return:
         description: ''
         type: string
+  - name: encryptionProtector
+    uid: '@azure/arm-sql.DatabaseUpdate.encryptionProtector'
+    package: '@azure/arm-sql'
+    summary: >-
+      The azure key vault URI of the database if it's configured with per
+      Database Customer Managed Keys.
+    fullName: encryptionProtector
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'encryptionProtector?: string'
+      return:
+        description: ''
+        type: string
   - name: failoverGroupId
     uid: '@azure/arm-sql.DatabaseUpdate.failoverGroupId'
     package: '@azure/arm-sql'
@@ -241,12 +255,25 @@ properties:
       return:
         description: ''
         type: string
+  - name: federatedClientId
+    uid: '@azure/arm-sql.DatabaseUpdate.federatedClientId'
+    package: '@azure/arm-sql'
+    summary: The Client id used for cross tenant per database CMK scenario
+    fullName: federatedClientId
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'federatedClientId?: string'
+      return:
+        description: ''
+        type: string
   - name: highAvailabilityReplicaCount
     uid: '@azure/arm-sql.DatabaseUpdate.highAvailabilityReplicaCount'
     package: '@azure/arm-sql'
     summary: >-
       The number of secondary replicas associated with the database that are
-      used to provide high availability.
+      used to provide high availability. Not applicable to a Hyperscale database
+      within an elastic pool.
     fullName: highAvailabilityReplicaCount
     remarks: ''
     isDeprecated: false
@@ -255,6 +282,18 @@ properties:
       return:
         description: ''
         type: number
+  - name: identity
+    uid: '@azure/arm-sql.DatabaseUpdate.identity'
+    package: '@azure/arm-sql'
+    summary: Database identity
+    fullName: identity
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'identity?: DatabaseIdentity'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-sql.DatabaseIdentity" />
   - name: isInfraEncryptionEnabled
     uid: '@azure/arm-sql.DatabaseUpdate.isInfraEncryptionEnabled'
     package: '@azure/arm-sql'
@@ -286,6 +325,18 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: keys
+    uid: '@azure/arm-sql.DatabaseUpdate.keys'
+    package: '@azure/arm-sql'
+    summary: The resource ids of the user assigned identities to use
+    fullName: keys
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'keys?: {[propertyName: string]: DatabaseKey}'
+      return:
+        description: ''
+        type: '{[propertyName: string]: <xref uid="@azure/arm-sql.DatabaseKey" />}'
   - name: licenseType
     uid: '@azure/arm-sql.DatabaseUpdate.licenseType'
     package: '@azure/arm-sql'
@@ -329,6 +380,32 @@ properties:
       return:
         description: ''
         type: string
+  - name: manualCutover
+    uid: '@azure/arm-sql.DatabaseUpdate.manualCutover'
+    package: '@azure/arm-sql'
+    summary: >-
+      Whether or not customer controlled manual cutover needs to be done during
+      Update Database operation to Hyperscale tier.
+
+
+      This property is only applicable when scaling database from Business
+      Critical/General Purpose/Premium/Standard tier to Hyperscale tier.
+
+
+      When manualCutover is specified, the scaling operation will wait for user
+      input to trigger cutover to Hyperscale database.
+
+
+      To trigger cutover, please provide 'performCutover' parameter when the
+      Scaling operation is in Waiting state.
+    fullName: manualCutover
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'manualCutover?: boolean'
+      return:
+        description: ''
+        type: boolean
   - name: maxLogSizeBytes
     uid: '@azure/arm-sql.DatabaseUpdate.maxLogSizeBytes'
     package: '@azure/arm-sql'
@@ -386,13 +463,53 @@ properties:
       return:
         description: ''
         type: Date
+  - name: performCutover
+    uid: '@azure/arm-sql.DatabaseUpdate.performCutover'
+    package: '@azure/arm-sql'
+    summary: >-
+      To trigger customer controlled manual cutover during the wait state while
+      Scaling operation is in progress.
+
+
+      This property parameter is only applicable for scaling operations that are
+      initiated along with 'manualCutover' parameter.
+
+
+      This property is only applicable when scaling database from Business
+      Critical/General Purpose/Premium/Standard tier to Hyperscale tier is
+      already in progress.
+
+
+      When performCutover is specified, the scaling operation will trigger
+      cutover and perform role-change to Hyperscale database.
+    fullName: performCutover
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'performCutover?: boolean'
+      return:
+        description: ''
+        type: boolean
+  - name: preferredEnclaveType
+    uid: '@azure/arm-sql.DatabaseUpdate.preferredEnclaveType'
+    package: '@azure/arm-sql'
+    summary: Type of enclave requested on the database i.e. Default or VBS enclaves.
+    fullName: preferredEnclaveType
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'preferredEnclaveType?: string'
+      return:
+        description: ''
+        type: string
   - name: readScale
     uid: '@azure/arm-sql.DatabaseUpdate.readScale'
     package: '@azure/arm-sql'
     summary: >-
       The state of read-only routing. If enabled, connections that have
       application intent set to readonly in their connection string may be
-      routed to a readonly secondary replica in the same region.
+      routed to a readonly secondary replica in the same region. Not applicable
+      to a Hyperscale database within an elastic pool.
     fullName: readScale
     remarks: ''
     isDeprecated: false
@@ -519,7 +636,7 @@ properties:
     package: '@azure/arm-sql'
     summary: >-
       The secondary type of the database if it is a secondary.  Valid values are
-      Geo and Named.
+      Geo, Named and Standby.
     fullName: secondaryType
     remarks: ''
     isDeprecated: false

@@ -37,7 +37,11 @@ properties:
   - name: administrators
     uid: '@azure/arm-sql.ManagedInstanceUpdate.administrators'
     package: '@azure/arm-sql'
-    summary: The Azure Active Directory administrator of the server.
+    summary: >-
+      The Azure Active Directory administrator of the instance. This can only be
+      used at instance create time. If used for instance update, it will be
+      ignored or it will result in an error. For updates individual APIs will
+      need to be used.
     fullName: administrators
     remarks: ''
     isDeprecated: false
@@ -55,6 +59,24 @@ properties:
     isDeprecated: false
     syntax:
       content: 'collation?: string'
+      return:
+        description: ''
+        type: string
+  - name: currentBackupStorageRedundancy
+    uid: '@azure/arm-sql.ManagedInstanceUpdate.currentBackupStorageRedundancy'
+    package: '@azure/arm-sql'
+    summary: >-
+      The storage account type used to store backups for this instance. The
+      options are Local (LocallyRedundantStorage), Zone (ZoneRedundantStorage),
+      Geo (GeoRedundantStorage) and GeoZone(GeoZoneRedundantStorage)
+
+      NOTE: This property will not be serialized. It can only be populated by
+      the server.
+    fullName: currentBackupStorageRedundancy
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'currentBackupStorageRedundancy?: string'
       return:
         description: ''
         type: string
@@ -266,6 +288,22 @@ properties:
       return:
         description: ''
         type: boolean
+  - name: requestedBackupStorageRedundancy
+    uid: '@azure/arm-sql.ManagedInstanceUpdate.requestedBackupStorageRedundancy'
+    package: '@azure/arm-sql'
+    summary: >-
+      The storage account type to be used to store backups for this instance.
+      The options are Local (LocallyRedundantStorage), Zone
+      (ZoneRedundantStorage), Geo (GeoRedundantStorage) and
+      GeoZone(GeoZoneRedundantStorage)
+    fullName: requestedBackupStorageRedundancy
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'requestedBackupStorageRedundancy?: string'
+      return:
+        description: ''
+        type: string
   - name: restorePointInTime
     uid: '@azure/arm-sql.ManagedInstanceUpdate.restorePointInTime'
     package: '@azure/arm-sql'
@@ -280,6 +318,18 @@ properties:
       return:
         description: ''
         type: Date
+  - name: servicePrincipal
+    uid: '@azure/arm-sql.ManagedInstanceUpdate.servicePrincipal'
+    package: '@azure/arm-sql'
+    summary: The managed instance's service principal.
+    fullName: servicePrincipal
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'servicePrincipal?: ServicePrincipal'
+      return:
+        description: ''
+        type: <xref uid="@azure/arm-sql.ServicePrincipal" />
   - name: sku
     uid: '@azure/arm-sql.ManagedInstanceUpdate.sku'
     package: '@azure/arm-sql'
@@ -322,27 +372,13 @@ properties:
       return:
         description: ''
         type: string
-  - name: storageAccountType
-    uid: '@azure/arm-sql.ManagedInstanceUpdate.storageAccountType'
-    package: '@azure/arm-sql'
-    summary: >-
-      The storage account type used to store backups for this instance. The
-      options are LRS (LocallyRedundantStorage), ZRS (ZoneRedundantStorage) and
-      GRS (GeoRedundantStorage)
-    fullName: storageAccountType
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: 'storageAccountType?: string'
-      return:
-        description: ''
-        type: string
   - name: storageSizeInGB
     uid: '@azure/arm-sql.ManagedInstanceUpdate.storageSizeInGB'
     package: '@azure/arm-sql'
     summary: >-
-      Storage size in GB. Minimum value: 32. Maximum value: 8192. Increments of
-      32 GB allowed only.
+      Storage size in GB. Minimum value: 32. Maximum value: 16384. Increments of
+      32 GB allowed only. Maximum value depends on the selected hardware family
+      and number of vCores.
     fullName: storageSizeInGB
     remarks: ''
     isDeprecated: false

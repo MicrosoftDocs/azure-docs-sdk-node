@@ -3,12 +3,12 @@ title: Azure Form Recognizer client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-form-recognizer, formrecognizer
 author: witemple-msft
 ms.author: witemple
-ms.date: 04/12/2023
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: formrecognizer
 ---
-# Azure Form Recognizer client library for JavaScript - version 4.1.0-beta.1 
+# Azure Form Recognizer client library for JavaScript - version 4.1.0-alpha.20230727.2 
 
 
 Azure Cognitive Services [Form Recognizer](https://azure.microsoft.com/services/cognitive-services/form-recognizer/) is a cloud service that uses machine learning to analyze text and structured data from your documents. It includes the following main features:
@@ -20,15 +20,15 @@ Azure Cognitive Services [Form Recognizer](https://azure.microsoft.com/services/
 - Custom - Build custom models to extract text, field values, selection marks, and table data from documents. Custom models are built with your own data, so they're tailored to your documents.
 - Classifiers - Build custom classifiers to categorize documents into predefined classes.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/ai-form-recognizer) |
 [API reference documentation](/javascript/api/@azure/ai-form-recognizer) |
 [Product documentation](/azure/cognitive-services/form-recognizer/) |
-[Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples)
+[Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/formrecognizer/ai-form-recognizer/samples)
 
 #### **_Breaking change advisory_ ⚠️**
 
-In version 4.0.0, this package introduces a full redesign of the Azure Form Recognizer client library. To leverage features of the newest Form Recognizer service API (version "2022-08-31" and newer), the new SDK is required, and application code must be changed to use the new clients. Please see the [Migration Guide](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/MIGRATION-v3_v4.md) for detailed instructions on how to update application code from version 3.x of the Form Recognizer SDK to the new version (4.x). Additionally, the [CHANGELOG](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/CHANGELOG.md) contains an outline of the changes since version 3.x. This package targets Azure Form Recognizer service API version `2022-08-31` and newer. To continue to use Form Recognizer API version 2.1, please use major version 3 of the client package (`@azure/ai-form-recognizer@^3.2.0`).
+In version 4.0.0, this package introduces a full redesign of the Azure Form Recognizer client library. To leverage features of the newest Form Recognizer service API (version "2022-08-31" and newer), the new SDK is required, and application code must be changed to use the new clients. Please see the [Migration Guide](https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/MIGRATION-v3_v4.md) for detailed instructions on how to update application code from version 3.x of the Form Recognizer SDK to the new version (4.x). Additionally, the [CHANGELOG](https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/CHANGELOG.md) contains an outline of the changes since version 3.x. This package targets Azure Form Recognizer service API version `2022-08-31` and newer. To continue to use Form Recognizer API version 2.1, please use major version 3 of the client package (`@azure/ai-form-recognizer@^3.2.0`).
 
 ### Install the `@azure/ai-form-recognizer` package
 
@@ -64,7 +64,7 @@ const { pages, tables, styles, keyValuePairs, entities, documents } = await poll
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -677,15 +677,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples) directory for detailed code samples that show how to use this library including several features and methods that are not shown in the "Examples" section above, such as copying and composing models, listing model management operations, and deleting models.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/formrecognizer/ai-form-recognizer/samples) directory for detailed code samples that show how to use this library including several features and methods that are not shown in the "Examples" section above, such as copying and composing models, listing model management operations, and deleting models.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fformrecognizer%2Fai-form-recognizer%2FREADME.png)
 
@@ -693,11 +693,11 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [fr_or_cs_resource]: /azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/identity/identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/identity/identity#defaultazurecredential
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 [fr-build-model]: https://aka.ms/azsdk/formrecognizer/buildmodel
-[build_sample]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples/v4-beta/typescript/src/buildModel.ts
+[build_sample]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/samples/v4-beta/typescript/src/buildModel.ts
 [multi_and_single_service]: /azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows
 [azure_portal_create_fr_resource]: https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesFormRecognizer
 [azure_cli_create_fr_resource]: /azure/cognitive-services/cognitive-services-apis-create-account-cli?tabs=windows
@@ -705,16 +705,16 @@ If you'd like to contribute to this library, please read the [contributing guide
 [fr-studio]: https://formrecognizer.appliedai.azure.com/studio
 [fr-build-training-set]: https://aka.ms/azsdk/formrecognizer/buildtrainingset
 [fr-models]: https://aka.ms/azsdk/formrecognizer/models
-[sample-build-classifier]: https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples/v4-beta/typescript/src/buildClassifier.ts
-[samples-prebuilt]: https://github.com/azure/azure-sdk-for-js/tree/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/
-[samples-prebuilt-businesscard]: https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-businessCard.ts
-[samples-prebuilt-document]: https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-document.ts
-[samples-prebuilt-healthinsurancecard]: https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-healthInsuranceCard.ts
-[samples-prebuilt-iddocument]: https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-idDocument.ts
-[samples-prebuilt-invoice]: https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-invoice.ts
-[samples-prebuilt-layout]: https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-layout.ts
-[samples-prebuilt-read]: https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-read.ts
-[samples-prebuilt-receipt]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-receipt.ts
-[samples-prebuilt-tax.us.w2]: https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-tax.us.w2.ts
-[trouble-shooting]: https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-form-recognizer_4.1.0-beta.1/sdk/formrecognizer/ai-form-recognizer/TROUBLESHOOTING.md
+[sample-build-classifier]: https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/samples/v4-beta/typescript/src/buildClassifier.ts
+[samples-prebuilt]: https://github.com/azure/azure-sdk-for-js/tree/main/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/
+[samples-prebuilt-businesscard]: https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-businessCard.ts
+[samples-prebuilt-document]: https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-document.ts
+[samples-prebuilt-healthinsurancecard]: https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-healthInsuranceCard.ts
+[samples-prebuilt-iddocument]: https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-idDocument.ts
+[samples-prebuilt-invoice]: https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-invoice.ts
+[samples-prebuilt-layout]: https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-layout.ts
+[samples-prebuilt-read]: https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-read.ts
+[samples-prebuilt-receipt]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-receipt.ts
+[samples-prebuilt-tax.us.w2]: https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/samples-dev/prebuilt/prebuilt-tax.us.w2.ts
+[trouble-shooting]: https://github.com/azure/azure-sdk-for-js/blob/main/sdk/formrecognizer/ai-form-recognizer/TROUBLESHOOTING.md
 

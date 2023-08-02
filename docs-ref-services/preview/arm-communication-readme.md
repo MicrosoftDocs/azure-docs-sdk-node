@@ -1,24 +1,25 @@
 ---
 title: Azure CommunicationServiceManagement client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-communication, communication
-author: qiaozha
-ms.author: qiaozha
-ms.date: 02/02/2023
+author: xirzec
+ms.author: jeffish
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure CommunicationServiceManagement client library for JavaScript - version 4.0.0-beta.3 
+# Azure CommunicationServiceManagement client library for JavaScript - version 4.0.1-alpha.20230725.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure CommunicationServiceManagement client.
 
 REST API for Azure Communication Services
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-communication_4.0.0-beta.3/sdk/communication/arm-communication) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/communication/arm-communication) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-communication) |
-[API reference documentation](/javascript/api/@azure/arm-communication?view=azure-node-preview) |
-[Samples](https://github.com/Azure-Samples/azure-samples-js-management)
+[API reference documentation](/javascript/api/@azure/arm-communication) |
+[Samples](https://github.com/Azure-Samples/azure-samples-js-management) 
+
 
 ## Getting started
 
@@ -27,7 +28,7 @@ REST API for Azure Communication Services
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-communication_4.0.0-beta.3/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -46,7 +47,7 @@ npm install @azure/arm-communication
 To create a client object to access the Azure CommunicationServiceManagement API, you will need the `endpoint` of your Azure CommunicationServiceManagement resource and a `credential`. The Azure CommunicationServiceManagement client can use Azure Active Directory credentials to authenticate.
 You can find the endpoint for your Azure CommunicationServiceManagement resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-communication_4.0.0-beta.3/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -74,8 +75,54 @@ const client = new CommunicationServiceManagementClient(new DefaultAzureCredenti
 // });
 // const client = new CommunicationServiceManagementClient(credential, subscriptionId);
 ```
+### Create Communication Service Resource
+
+This example creates a new Azure Communication Service resource using the `communication service management client`. 
+
+```javascript
+//Define the communication service resource.
+const resource = {
+    location: "Global",
+    dataLocation: "United States",
+};
+const resourceGroup="resource-group-name";
+const result = await client.communicationServices.beginCreateOrUpdate(resourceGroup, resourceName, resource);
+```
+### Create Communication Service Resource with 'Managed Identity'
+
+This example creates a new Azure Communication Service resource with a system assigned managed identity enabled by default. This is achieved by passing identity type `SystemAssigned`. 
 
 
+```javascript
+// Create Resource with Managed Identity and specify identity type as System Assigned
+const resource = {
+    location: "Global",
+    dataLocation: "United States",
+    identity: {
+        type: "SystemAssigned" 
+    }
+};
+
+const result = await client.communicationServices.beginCreateOrUpdate("MyResourceGroup", "MyCommunicationResource", resource);
+```
+
+To create a user assigned managed identity, your account needs the Managed Identity Contributor role assignment. A resource can have multiple user assigned managed identities. 
+
+```javascript
+// Defining an object that specifies identity type as User Assigned for the new resource.
+const resource = {
+    location: "Global",
+    dataLocation: "United States",
+    identity: {
+        type: "UserAssigned", 
+        userAssignedIdentities: {
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}": {}
+        }
+    }     
+};
+
+const result = await client.communicationServices.beginCreateOrUpdate(resourceGroup, resourceName, resource)
+```
 ### JavaScript Bundle
 To use this client library in the browser, first you need to use a bundler. For details on how to do this, please refer to our [bundling documentation](https://aka.ms/AzureSDKBundling).
 
@@ -96,7 +143,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-communication_4.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -104,7 +151,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-communication_4.0.0-beta.3/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -116,6 +163,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-communication_4.0.0-beta.3/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-communication_4.0.0-beta.3/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 

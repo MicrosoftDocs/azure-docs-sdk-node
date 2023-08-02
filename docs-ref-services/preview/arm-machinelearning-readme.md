@@ -1,33 +1,32 @@
 ---
-title: Azure Service client library for JavaScript
+title: 
 keywords: Azure, javascript, SDK, API, @azure/arm-machinelearning, machinelearning
 author: xirzec
 ms.author: jeffish
-ms.date: 05/27/2022
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: machinelearning
 ---
-# Azure Service client library for JavaScript - version 1.0.0-beta.1 
+# AzureMachineLearningWorkspaces client library for JavaScript
 
-
-This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Service client.
+This package contains an isomorphic SDK (runs both in Node.js and in browsers) for AzureMachineLearningWorkspaces client.
 
 These APIs allow end users to operate on Azure Machine Learning Workspace resources.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-machinelearning_1.0.0-beta.1/sdk/machinelearning/arm-machinelearning) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/machinelearning/arm-machinelearning) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/arm-machinelearning) |
-[API reference documentation](/javascript/api/@azure/arm-machinelearning?view=azure-node-preview) |
+[API reference documentation](/javascript/api/@azure/arm-machinelearning) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-machinelearning_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -35,7 +34,7 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/a
 
 ### Install the `@azure/arm-machinelearning` package
 
-Install the Azure Service client library for JavaScript with `npm`:
+Install the AzureMachineLearningWorkspaces client library for JavaScript with `npm`:
 
 ```bash
 npm install @azure/arm-machinelearning
@@ -43,10 +42,10 @@ npm install @azure/arm-machinelearning
 
 ### Create and authenticate a `AzureMachineLearningWorkspaces`
 
-To create a client object to access the Azure Service API, you will need the `endpoint` of your Azure Service resource and a `credential`. The Azure Service client can use Azure Active Directory credentials to authenticate.
-You can find the endpoint for your Azure Service resource in the [Azure Portal][azure_portal].
+To create a client object to access the AzureMachineLearningWorkspaces API, you will need the `endpoint` of your AzureMachineLearningWorkspaces resource and a `credential`. The AzureMachineLearningWorkspaces client can use Azure Active Directory credentials to authenticate.
+You can find the endpoint for your AzureMachineLearningWorkspaces resource in the [Azure Portal][azure_portal].
 
-You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-machinelearning_1.0.0-beta.1/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
+You can authenticate with Azure Active Directory using a credential from the [@azure/identity][azure_identity] library or [an existing AAD Token](https://github.com/Azure/azure-sdk-for-js/blob/master/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token).
 
 To use the [DefaultAzureCredential][defaultazurecredential] provider shown below, or other credential providers provided with the Azure SDK, please install the `@azure/identity` package:
 
@@ -54,7 +53,7 @@ To use the [DefaultAzureCredential][defaultazurecredential] provider shown below
 npm install @azure/identity
 ```
 
-You will also need to **register a new AAD application and grant access to Azure Service** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
+You will also need to **register a new AAD application and grant access to AzureMachineLearningWorkspaces** by assigning the suitable role to your service principal (note: roles such as `"Owner"` will not grant the necessary permissions).
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_CLIENT_SECRET`.
 
 For more information about how to create an Azure AD Application check out [this guide](/azure/active-directory/develop/howto-create-service-principal-portal).
@@ -83,7 +82,7 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 ### AzureMachineLearningWorkspaces
 
-`AzureMachineLearningWorkspaces` is the primary interface for developers using the Azure Service client library. Explore the methods on this client object to understand the different features of the Azure Service service that you can access.
+`AzureMachineLearningWorkspaces` is the primary interface for developers using the AzureMachineLearningWorkspaces client library. Explore the methods on this client object to understand the different features of the AzureMachineLearningWorkspaces service that you can access.
 
 ## Troubleshooting
 
@@ -96,7 +95,7 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-machinelearning_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -104,7 +103,7 @@ Please take a look at the [samples](https://github.com/Azure-Samples/azure-sampl
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/arm-machinelearning_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -116,6 +115,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-machinelearning_1.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/arm-machinelearning_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 

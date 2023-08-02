@@ -7,8 +7,8 @@ ms.data: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: relay
-ms.technology: azure
 ms.date: 07/18/2017
+ms.technology: azure
 manager: timlt
 ---
 # Azure Relay modules for JavaScript

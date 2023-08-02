@@ -10,7 +10,6 @@
 |Custom Vision Training|[@azure/cognitiveservices-customvision-training](https://www.npmjs.com/package/@azure/cognitiveservices-customvision-training)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |[Face](cognitiveservices-face-readme.md)|[@azure/cognitiveservices-face](https://www.npmjs.com/package/@azure/cognitiveservices-face)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |Form Recognizer|[@azure/cognitiveservices-formrecognizer](https://www.npmjs.com/package/@azure/cognitiveservices-formrecognizer)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
-|LUIS Authoring|[@azure/cognitiveservices-luis-authoring](https://www.npmjs.com/package/@azure/cognitiveservices-luis-authoring)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |LUIS Runtime|[@azure/cognitiveservices-luis-runtime](https://www.npmjs.com/package/@azure/cognitiveservices-luis-runtime)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |Personalizer|[@azure/cognitiveservices-personalizer](https://www.npmjs.com/package/@azure/cognitiveservices-personalizer)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |Question Answering|[@azure/cognitiveservices-qnamaker](https://www.npmjs.com/package/@azure/cognitiveservices-qnamaker)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|

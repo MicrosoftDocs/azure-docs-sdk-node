@@ -7,8 +7,8 @@ ms.data: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: trafficmanager
-manager: jeconnoc
 ms.technology: azure
+manager: jeconnoc
 ms.date: 03/30/2023
 ---
 # Azure Traffic Manager modules for JavaScript

@@ -7,10 +7,10 @@ ms.data: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: billing
-manager: timlt
 ms.technology: 
-ms.date: 07/18/2017
 ms.product: 
+manager: timlt
+ms.date: 07/18/2017
 ---
 # Azure Billing modules for JavaScript
 

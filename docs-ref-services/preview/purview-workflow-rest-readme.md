@@ -3,12 +3,12 @@ title: Azure Purview Workflow Rest-Level client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-rest/purview-workflow, purview
 author: qiaozha
 ms.author: qiaozha
-ms.date: 03/09/2023
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: purview
 ---
-# Azure Purview Workflow Rest-Level client library for JavaScript - version 1.0.0-beta.1 
+# Azure Purview Workflow Rest-Level client library for JavaScript - version 1.0.0-alpha.20230418.1 
 
 
 Workflows are automated, repeatable business processes that users can create within Microsoft Purview to validate and orchestrate CUD (create, update, delete) operations on their data entities. Enabling these processes allow organizations to track changes, enforce policy compliance, and ensure quality data across their data landscape.
@@ -162,13 +162,13 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-workflow_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 <!-- LINKS -->
 [product_documentation]: https://learn.microsoft.com/azure/purview/concept-workflow
 [azure_subscription]: https://azure.microsoft.com/free/dotnet/
 [purview_resource]: /azure/purview/create-catalog-portal
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/purview-workflow_1.0.0-beta.1/sdk/identity/identity#readme
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#readme
 [app_registration]: https://learn.microsoft.com/azure/active-directory/develop/quickstart-register-app
 [username_password_credential]: https://learn.microsoft.com/javascript/api/@azure/identity/usernamepasswordcredential?view=azure-node-latest
 

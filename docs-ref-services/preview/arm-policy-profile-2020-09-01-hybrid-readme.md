@@ -1,6 +1,6 @@
 ---
 title: Azure Policy client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-policy, policy
+keywords: Azure, javascript, SDK, API, @azure/arm-policy-profile-2020-09-01-hybrid, policy
 author: xirzec
 ms.author: jeffish
 ms.date: 08/02/2023
@@ -8,16 +8,16 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: policy
 ---
-# Azure Policy client library for JavaScript - version 5.1.1-alpha.20230725.1 
+# Azure Policy client library for JavaScript - version 2.1.1-alpha.20230725.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Policy client.
 
 To manage and control access to your resources, you can define customized policies and assign them at a scope.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/policy/arm-policy) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-policy) |
-[API reference documentation](/javascript/api/@azure/arm-policy) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/policy/arm-policy-profile-2020-09-01-hybrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-policy-profile-2020-09-01-hybrid) |
+[API reference documentation](/javascript/api/@azure/arm-policy-profile-2020-09-01-hybrid) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -33,12 +33,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-policy` package
+### Install the `@azure/arm-policy-profile-2020-09-01-hybrid` package
 
 Install the Azure Policy client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-policy
+npm install @azure/arm-policy-profile-2020-09-01-hybrid
 ```
 
 ### Create and authenticate a `PolicyClient`
@@ -60,7 +60,7 @@ Set the values of the client ID, tenant ID, and client secret of the AAD applica
 For more information about how to create an Azure AD Application check out [this guide](/azure/active-directory/develop/howto-create-service-principal-portal).
 
 ```javascript
-const { PolicyClient } = require("@azure/arm-policy");
+const { PolicyClient } = require("@azure/arm-policy-profile-2020-09-01-hybrid");
 const { DefaultAzureCredential } = require("@azure/identity");
 // For client-side applications running in the browser, use InteractiveBrowserCredential instead of DefaultAzureCredential. See https://aka.ms/azsdk/js/identity/examples for more details.
 
@@ -110,7 +110,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fpolicy%2Farm-policy%2FREADME.png)
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fpolicy%2Farm-policy-profile-2020-09-01-hybrid%2FREADME.png)
 
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

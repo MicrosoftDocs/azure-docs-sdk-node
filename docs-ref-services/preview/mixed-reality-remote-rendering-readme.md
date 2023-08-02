@@ -1,16 +1,14 @@
 ---
 title: Azure Remote Rendering client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/mixed-reality-remote-rendering, remoterendering
-author: ramya-rao-a
-ms.author: ramyar
-ms.date: 09/21/2021
+author: FlorianBorn71
+ms.author: flborn
+ms.date: 08/02/2023
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-remote-rendering
+ms.service: remoterendering
 ---
-
-# Azure Remote Rendering client library for JavaScript - version 1.0.0-beta.1 
+# Azure Remote Rendering client library for JavaScript - version 1.0.0-alpha.20230419.1 
 
 
 Azure Remote Rendering (ARR) is a service that enables you to render high-quality, interactive 3D content in the cloud and stream it in real time to devices, such as the HoloLens 2.
@@ -20,21 +18,21 @@ the lifetime of remote rendering sessions.
 
 > NOTE: Once a session is running, a client application will connect to it using one of the "runtime SDKs".
 > These SDKs are designed to best support the needs of an interactive application doing 3d rendering.
-> They are available in ([.net](https://docs.microsoft.com/dotnet/api/microsoft.azure.remoterendering)
-> or ([C++](https://docs.microsoft.com/cpp/api/remote-rendering/)).
+> They are available in ([.net](/dotnet/api/microsoft.azure.remoterendering)
+> or ([C++](/cpp/api/remote-rendering/)).
 
-[Product documentation](https://docs.microsoft.com/azure/remote-rendering/)
+[Product documentation](/azure/remote-rendering/)
 
 ## Getting started
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
 ### Prerequisites
 
-You will need an [Azure subscription](https://azure.microsoft.com/free/) and an [Azure Remote Rendering account](https://docs.microsoft.com/azure/remote-rendering/how-tos/create-an-account) to use this package.
+You will need an [Azure subscription](https://azure.microsoft.com/free/) and an [Azure Remote Rendering account](/azure/remote-rendering/how-tos/create-an-account) to use this package.
 
 ### Install the `@azure/mixed-reality-remote-rendering` package
 
@@ -53,7 +51,7 @@ To use this client library in the browser, first you need to use a bundler. For 
 #### CORS
 
 This library cannot be used to make direct calls to the Azure Remote Rendering service from a browser.
-Please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/@azure/mixed-reality-remote-rendering_1.0.0-beta.1/samples/cors/ts/README.md) for guidance.
+Please refer to [this document](https://github.com/Azure/azure-sdk-for-js/blob/main/samples/cors/ts/README.md) for guidance.
 
 ### Authenticate the client
 
@@ -72,7 +70,7 @@ There are several different forms of authentication:
     method for production applications because it allows you to avoid embedding the credentials for access to Azure Spatial
     Anchors in your client application.
 
-See [here](https://docs.microsoft.com/azure/remote-rendering/how-tos/authentication) for detailed instructions and information.
+See [here](/azure/remote-rendering/how-tos/authentication) for detailed instructions and information.
 
 In all the following examples, the client is constructed with a `remoteRenderingEndpoint`.
 The available endpoints correspond to regions, and the choice of endpoint determines the region in which the service performs its work.
@@ -110,12 +108,15 @@ const client = new RemoteRenderingClient(serviceEndpoint, accountId, accountDoma
 Use the `DeviceCodeCredential` object to perform device code authentication.
 
 ```typescript Snippet:CreateAClientWithDeviceCode
-let deviceCodeCallback = (deviceCodeInfo: DeviceCodeInfo) => {
+const userPromptCallback = (deviceCodeInfo: DeviceCodeInfo) => {
   console.debug(deviceCodeInfo.message);
   console.log(deviceCodeInfo.message);
 };
 
-let credential = new DeviceCodeCredential(tenantId, clientId, deviceCodeCallback, {
+const credential = new DeviceCodeCredential({
+  tenantId: tenantId,
+  clientId: clientId,
+  userPromptCallback: userPromptCallback,
   authorityHost: "https://login.microsoftonline.com/" + tenantId
 });
 
@@ -141,7 +142,7 @@ return new RemoteRenderingClient(serviceEndpoint, accountId, accountDomain, cred
 #### Authenticating with a static access token
 
 You can pass a Mixed Reality access token as an `AccessToken` previously retrieved from the
-[Mixed Reality STS service](https://github.com/Azure/azure-sdk-for-js/tree/@azure/mixed-reality-remote-rendering_1.0.0-beta.1/sdk/mixedreality/mixed-reality-authentication)
+[Mixed Reality STS service](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/mixedreality/mixed-reality-authentication)
 to be used with a Mixed Reality client library:
 
 ```typescript Snippet:CreateAClientWithStaticAccessToken
@@ -360,14 +361,14 @@ client.endSession(sessionId);
 Enabling logging may help uncover useful information about failures. In order to see a log of HTTP requests and responses, set the `AZURE_LOG_LEVEL` environment variable to `info`. Alternatively, logging can be enabled at runtime by calling `setLogLevel` in the `@azure/logger`:
 
 ```javascript
-import { setLogLevel } from "@azure/logger";
+const { setlogLevel } = require("@azure/logger");
 
 setLogLevel("info");
 ```
 
 ### Azure Remote Rendering troubleshooting
 
-For general troubleshooting advice concerning Azure Remote Rendering, see [the Troubleshoot page](https://docs.microsoft.com/azure/remote-rendering/resources/troubleshoot) for remote rendering at docs.microsoft.com.
+For general troubleshooting advice concerning Azure Remote Rendering, see [the Troubleshoot page](/azure/remote-rendering/resources/troubleshoot) for remote rendering at docs.microsoft.com.
 
 The client methods will throw exceptions if the request cannot be made.
 However, in the case of both conversions and sessions, the requests can succeed but the requested operation may not be successful.
@@ -384,14 +385,14 @@ RemoteRenderingServiceError with details.
 
 ## Next steps
 
-- Read the [Product documentation](https://docs.microsoft.com/azure/remote-rendering/)
+- Read the [Product documentation](/azure/remote-rendering/)
 - Learn about the runtime SDKs:
-  - .NET: https://docs.microsoft.com/dotnet/api/microsoft.azure.remoterendering
-  - C++: https://docs.microsoft.com/cpp/api/remote-rendering/
+  - .NET: /dotnet/api/microsoft.azure.remoterendering
+  - C++: /cpp/api/remote-rendering/
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/mixed-reality-remote-rendering_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -399,6 +400,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Ftemplate%2Ftemplate%2FREADME.png)
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 

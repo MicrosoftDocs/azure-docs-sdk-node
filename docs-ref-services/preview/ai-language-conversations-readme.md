@@ -1,14 +1,14 @@
 ---
 title: Azure ConversationAnalysis client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-language-conversations, cognitivelanguage
-author: xirzec
-ms.author: jeffish
-ms.date: 09/09/2022
+author: quentinRobinson
+ms.author: qrobinson
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitivelanguage
 ---
-# Azure ConversationAnalysis client library for JavaScript - version 1.0.0-beta.1 
+# Azure ConversationAnalysis client library for JavaScript - version 1.0.0-alpha.20230727.2 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure ConversationAnalysis client.
@@ -19,20 +19,20 @@ The language service conversations API is a suite of natural language processing
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-conversations_1.0.0-beta.1/sdk/cognitivelanguage/ai-language-conversations)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/cognitivelanguage/ai-language-conversations)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/ai-language-conversations)
 - [API reference documentation](https://aka.ms/clujsapidocs)
 - [Product documentation](/azure/cognitive-services/language-service/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-conversations_1.0.0-beta.1/sdk/cognitivelanguage/ai-language-conversations/samples-dev)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/cognitivelanguage/ai-language-conversations/samples-dev)
 
 ## Getting started
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-conversations_1.0.0-beta.1/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -102,15 +102,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-conversations_1.0.0-beta.1/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-conversations_1.0.0-beta.1/sdk/cognitivelanguage/ai-language-conversations/samples-dev) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/cognitivelanguage/ai-language-conversations/samples-dev) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-conversations_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -121,6 +121,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-conversations_1.0.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-conversations_1.0.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 

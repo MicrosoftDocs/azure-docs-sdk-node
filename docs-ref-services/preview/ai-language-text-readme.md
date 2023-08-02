@@ -1,19 +1,19 @@
 ---
 title: Azure Text Analysis client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/ai-language-text, cognitivelanguage
-author: minhanh-phan
-ms.author: minhanhphan
-ms.date: 03/07/2023
+author: quentinRobinson
+ms.author: qrobinson
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitivelanguage
 ---
-# Azure Text Analysis client library for JavaScript - version 1.1.0-beta.2 
+# Azure Text Analysis client library for JavaScript - version 1.1.0-alpha.20230727.2 
 
 
 [Azure Cognitive Service for Language](https://azure.microsoft.com/services/cognitive-services/language-service/) is a cloud-based service that provides advanced natural language processing over raw text, and includes the following main features:
 
-**Note:** This SDK targets Azure Cognitive Service for Language API version 2022-10-01-preview.
+**Note:** This SDK targets Azure Cognitive Service for Language API version 2023-04-01.
 
 - Language Detection
 - Sentiment Analysis
@@ -26,7 +26,6 @@ ms.service: cognitivelanguage
 - Abstractive Summarization
 - Custom Entity Recognition
 - Custom Document Classification
-- Dynamic Classification
 - Support Multiple Actions Per Document
 
 Use the client library to:
@@ -39,23 +38,20 @@ Use the client library to:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/ai-language-text)
 - [API reference documentation](https://aka.ms/ai-language-text-js-api)
 - [Product documentation](/azure/cognitive-services/language-service/)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/cognitivelanguage/ai-language-text/samples)
 
 #### **_Migrating from @azure/ai-text-analytics advisory_ ⚠️**
 
-Please see the [Migration Guide](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/MIGRATION_ai_text_analytics.md) for detailed instructions on how to update application code from version 5.x of the AI Text Analytics client library to the new AI Language Text client library.
+Please see the [Migration Guide](https://github.com/azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/MIGRATION_ai_text_analytics.md) for detailed instructions on how to update application code from version 5.x of the AI Text Analytics client library to the new AI Language Text client library.
 
 ## What's New
-* [Abstractive Summarization](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/Samples.md#abstractive-summarization)
-* [Dynamic Classification](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/Samples.md#dynamic-classification)
-* [Script Detection](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/Samples.md#language-detection)
-* [Automatic Language Detection](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/Samples.md#automatic-language-detection)
-* [Entity Resolutions](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/Samples.md#entity-resolutions)
-* [Specifying healthcare document type for better FHIR results](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/Samples.md#healthcare-analysis)
+
+* [Abstractive Summarization](https://github.com/azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/Samples.md#abstractive-summarization)
+* [Healthcare Analysis](https://github.com/azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/Samples.md#healthcare-analysis)
 
 
 ## Getting started
@@ -65,7 +61,7 @@ Please see the [Migration Guide](https://github.com/azure/azure-sdk-for-js/blob/
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -202,30 +198,29 @@ if (result.error !== undefined) {
 ## Samples
 
 ### Client Usage
-* [Actions Batching](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/batching.ts)
-* [Choose Model Version](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/modelVersion.ts)
-* [Paging](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/paging.ts)
-* [Rehydrate Polling](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/rehydratePolling.ts)
-* [Get Statistics](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/stats.ts)
+* [Actions Batching](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/batching.ts)
+* [Choose Model Version](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/modelVersion.ts)
+* [Paging](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/paging.ts)
+* [Rehydrate Polling](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/rehydratePolling.ts)
+* [Get Statistics](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/stats.ts)
 
 ### Prebuilt Tasks
-* [Abstractive Summarization](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/abstractiveSummarization.ts)
-* [Dynamic Classification](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/dynamicClassification.ts)
-* [Language Detection](https://github.com/azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/Samples.md#language-detection)
-* [Entity Linking](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/entityLinking.ts)
-* [Entity Regconition](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/entityRecognition.ts)
-* [Extractive Summarization](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/extractiveSummarization.ts)
-* [Healthcare Analysis](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/healthcare.ts)
-* [Key Phrase Extraction](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/keyPhraseExtraction.ts)
-* [Language Detection](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/languageDetection.ts)
-* [Opinion Mining](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/opinionMining.ts)
-* [PII Entity Recognition](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/piiEntityRecognition.ts)
-* [Sentiment Analysis](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/sentimentAnalysis.ts)
+* [Abstractive Summarization](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/abstractiveSummarization.ts)
+* [Language Detection](https://github.com/azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/Samples.md#language-detection)
+* [Entity Linking](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/entityLinking.ts)
+* [Entity Regconition](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/entityRecognition.ts)
+* [Extractive Summarization](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/extractiveSummarization.ts)
+* [Healthcare Analysis](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/healthcare.ts)
+* [Key Phrase Extraction](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/keyPhraseExtraction.ts)
+* [Language Detection](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/languageDetection.ts)
+* [Opinion Mining](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/opinionMining.ts)
+* [PII Entity Recognition](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/piiEntityRecognition.ts)
+* [Sentiment Analysis](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/sentimentAnalysis.ts)
 
 ### Custom Tasks
-* [Custom Entity Recognition](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/customEntityRecognition.ts)
-* [Custom Single-lable Classfication](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/customSingleLabelClassification.ts)
-* [Custom Multi-lable Classfication](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples-dev/customMultiLabelClassification.ts)
+* [Custom Entity Recognition](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/customEntityRecognition.ts)
+* [Custom Single-lable Classfication](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/customSingleLabelClassification.ts)
+* [Custom Multi-lable Classfication](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text/samples-dev/customMultiLabelClassification.ts)
 
 ## Troubleshooting
 
@@ -239,15 +234,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
-Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples) directory for detailed examples on how to use this library.
+Please take a look at the [samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/cognitivelanguage/ai-language-text/samples) directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/ai-language-text_1.1.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -260,11 +255,11 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [cognitive_resource]: /azure/cognitive-services/cognitive-services-apis-create-account
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.2/sdk/identity/identity
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
 [cognitive_auth]: /azure/cognitive-services/authentication
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.2/sdk/identity/identity#defaultazurecredential
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 [data_limits]: /azure/cognitive-services/language-service/concepts/data-limits
-[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/ai-language-text_1.1.0-beta.2/sdk/cognitivelanguage/ai-language-text/samples/v1-beta/javascript/opinionMining.js
+[analyze_sentiment_opinion_mining_sample]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/cognitivelanguage/ai-language-text/samples/v1-beta/javascript/opinionMining.js
 [lang_studio]: /azure/cognitive-services/language-service/language-studio
 

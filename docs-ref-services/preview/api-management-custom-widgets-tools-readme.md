@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/api-management-custom-widgets-tools, apimanagement
 author: xirzec
 ms.author: jeffish
-ms.date: 08/03/2022
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: apimanagement
@@ -14,7 +14,7 @@ This repository is managed by the [Microsoft Azure API Management](https://aka.m
 source code of tools for development of custom widgets for the Developer portal. Refer to
 the [official Azure documentation](https://aka.ms/apimdocs/portal/customwidgets) for more information and instructions.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/blob/@azure/api-management-custom-widgets-tools_1.0.0-beta.1/sdk/apimanagement/api-management-custom-widgets-scaffolder/) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/apimanagement/api-management-custom-widgets-scaffolder/) |
 [Package (NPM)](https://www.npmjs.com/package/@azure/api-management-custom-widgets-scaffolder) |
 [Product documentation](https://aka.ms/apimdocs/portal/)
 
@@ -22,7 +22,7 @@ the [official Azure documentation](https://aka.ms/apimdocs/portal/customwidgets)
 
 ### Currently supported environments
 
-- [LTS versions of Node.js](https://nodejs.org/about/releases/)
+- [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox
 
 ### Prerequisites
@@ -44,7 +44,7 @@ This package should not be confused with `@azure/api-management-custom-widgets-s
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/api-management-custom-widgets-tools_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 To execute the tests you'll need to run:
 
@@ -53,7 +53,7 @@ To execute the tests you'll need to run:
 3. `cd sdk\apimanagement\api-management-custom-widgets-tools`
 4. `npm run test`
 
-View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/api-management-custom-widgets-tools_1.0.0-beta.1/sdk/apimanagement/api-management-custom-widgets-scaffolder/test)
+View our [tests](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/apimanagement/api-management-custom-widgets-scaffolder/test)
 folder for more details.
 
 ## Related projects

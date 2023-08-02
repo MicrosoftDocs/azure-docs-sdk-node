@@ -1,14 +1,14 @@
 ---
 title: Azure Communication Short Codes client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure-tools/communication-short-codes, communication
-author: petrsvihlik
-ms.author: petrsvihlik
-ms.date: 08/18/2022
+author: xirzec
+ms.author: jeffish
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Short Codes client library for JavaScript - version 1.0.0-beta.4 
+# Azure Communication Short Codes client library for JavaScript - version 1.0.0-alpha.20230728.1 
 
 
 The phone numbers library provides capabilities for short codes administration.
@@ -291,17 +291,39 @@ async main function() {
 main();
 ```
 
+### Get short code costs
+Use `listShortCodeCosts` to page through all short code costs eligible by a resource.
+
+```typescript
+import { ShortCodesClient } from "@azure-tools/communication-short-codes";
+
+const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
+const client = new ShortCodesClient(connectionString);
+
+async main function() {
+  // get all eligible short code costs for a resource
+  var shortCodeCosts = await client.listShortCodeCosts();
+
+  // print all short code costs
+  for await (const shortCodeCost of shortCodeCosts) {
+    console.log(`${shortCodeCost}`);
+  }
+}
+
+main();
+```
+
 ## Troubleshooting
 
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.4/sdk/communication/communication-short-codes/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-short-codes/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -311,9 +333,9 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-short-codes_1.0.0-beta.4/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-tools/communication-short-codes_1.0.0-beta.4/sdk/identity/identity
-[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure-tools/communication-short-codes_1.0.0-beta.4/sdk/identity/identity/README.md
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/README.md
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-phone-numbers%2FREADME.png)
 

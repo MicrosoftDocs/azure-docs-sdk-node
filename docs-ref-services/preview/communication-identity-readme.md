@@ -1,16 +1,14 @@
 ---
 title: Azure Communication Identity client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-identity, communication
-author: petrsvihlik
-ms.author: petrsvihlik
-ms.date: 04/05/2022
+author: xirzec
+ms.author: jeffish
+ms.date: 08/02/2023
 ms.topic: reference
-ms.technology: azure
 ms.devlang: javascript
-ms.service: azure-communication-services
-ms.subservice: identity
+ms.service: communication
 ---
-# Azure Communication Identity client library for JavaScript - version 1.1.0-beta.2 
+# Azure Communication Identity client library for JavaScript - version 1.2.1-alpha.20230728.1 
 
 
 The identity library is used for managing users and tokens for Azure Communication Services.
@@ -20,7 +18,7 @@ The identity library is used for managing users and tokens for Azure Communicati
 ### Prerequisites
 
 - An [Azure subscription][azure_sub].
-- An existing Communication Services resource. If you need to create the resource, you can use the [Azure Portal][azure_portal], the[Azure PowerShell][azure_powershell], or the [Azure CLI][azure_cli].
+- An existing Communication Services resource. If you need to create the resource, you can use the [Azure Portal][azure_portal], the [Azure PowerShell][azure_powershell], or the [Azure CLI][azure_cli].
 
 ### Installing
 
@@ -112,12 +110,30 @@ To refresh the user token, issue another token with the same user.
 let { token } = await client.getToken(user, ["chat"]);
 ```
 
+### Creating a user token with custom expiration
+
+It's also possible to create a Communication Identity access token by customizing the expiration time. Validity period of the token must be within [60,1440] minutes range. If not provided, the default value of 1440 minutes (24 hours) will be used.
+
+```typescript
+const tokenOptions: GetTokenOptions = { tokenExpiresInMinutes: 60 };
+let { token } = await client.getToken(user, ["chat"], tokenOptions);
+```
+
 ### Creating a user and a token in a single request
 
 For convenience, use `createUserAndToken` to create a new user and issue a token with one function call. This translates into a single web request as opposed to creating a user first and then issuing a token.
 
 ```typescript
 let { user, token } = await client.createUserAndToken(["chat"]);
+```
+
+### Creating a user and a token with custom expiration in a single request
+
+It's also possible to create a Communication Identity access token by customizing the expiration time. Validity period of the token must be within [60,1440] minutes range. If not provided, the default value of 1440 minutes (24 hours) will be used.
+
+```typescript
+const userAndTokenOptions: CreateUserAndTokenOptions = { tokenExpiresInMinutes: 60 };
+let { user, token } = await client.createUserAndToken(["chat"], userAndTokenOptions);
 ```
 
 ### Revoking tokens for a user
@@ -136,12 +152,16 @@ Use the `deleteUser` method to delete a user.
 await client.deleteUser(user);
 ```
 
-### Exchanging AAD access token of a Teams User for a Communication access token
+### Exchanging Azure AD access token of a Teams User for a Communication access token
 
-Use `getTokenForTeamsUser` method to exchange an AAD access token of a Teams user for a new `CommunicationAccessToken` with a matching expiration time.
+Use `getTokenForTeamsUser` method to exchange an Azure AD access token of a Teams user for a new `CommunicationAccessToken` with a matching expiration time.
 
 ```typescript
-await client.getTokenForTeamsUser('<aad-access-token-of-a-teams-user>');
+await client.getTokenForTeamsUser({
+  teamsUserAadToken: "<aad-access-token-of-a-teams-user>",
+  clientId: "<cliend-id-of-an-aad-application>",
+  userObjectId: "<aad-object-id-of-a-teams-user>",
+});
 ```
 
 ## Troubleshooting
@@ -149,21 +169,21 @@ await client.getTokenForTeamsUser('<aad-access-token-of-a-teams-user>');
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.1.0-beta.2/sdk/communication/communication-identity/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/communication-identity/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-identity_1.1.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
 - [Microsoft Azure SDK for Javascript](https://github.com/Azure/azure-sdk-for-js)
 
-[azure_cli]: https://docs.microsoft.com/cli/azure
+[azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_powershell]: https://docs.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
+[azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-identity%2FREADME.png)
 

@@ -1,6 +1,6 @@
 ---
-title: Azure Communication Alpha IDs client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure-tools/communication-alpha-ids, communication
+title: Azure Communication Tiering client library for JavaScript
+keywords: Azure, javascript, SDK, API, @azure-tools/communication-tiering, communication
 author: xirzec
 ms.author: jeffish
 ms.date: 08/02/2023
@@ -8,10 +8,10 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Alpha IDs client library for JavaScript - version 1.0.0-alpha.20230728.1 
+# Azure Communication Tiering client library for JavaScript - version 1.0.0-alpha.20230728.1 
 
 
-The Alpha IDs library provides capabilities for Alpha IDs administration.
+The Tiering client library allows developers to retrieve limits for each capability (SMS/PSTN Calling/Phone Number purchasing) for a specific resource/tier.
 
 ## Getting started
 
@@ -23,7 +23,7 @@ The Alpha IDs library provides capabilities for Alpha IDs administration.
 ### Installing
 
 ```bash
-npm install @azure-tools/communication-alpha-ids
+npm install @azure-tools/communication-tiering
 ```
 
 ### Browser support
@@ -38,19 +38,18 @@ To use this client library in the browser, first you need to use a bundler. For 
 
 ## Authentication
 
-To create a client object to access the Communication Services API, you will need a `connection string` or the `endpoint` of your Communication Services resource and a `credential`. The Alpha IDs client can use either Azure Active Directory credentials or an API key credential to authenticate.
+To create a client object to access the Communication Services API, you will need a `connection string` or the `endpoint` of your Communication Services resource and a `credential`. The Tiering client can use either Azure Active Directory credentials or an API key credential to authenticate.
 
 You can get a key and/or connection string from your Communication Services resource in the [Azure Portal][azure_portal]. You can also find the endpoint for your Communication Services resource in the [Azure Portal][azure_portal].
 
-Once you have a key, you can authenticate the `AlphaIdsClient` with any of the following methods:
+Once you have a key, you can authenticate the `TieringClient` with any of the following methods:
 
 ### Using a connection string
 
 ```javascript
-const { AlphaIdsClient } = require("@azure-tools/communication-alpha-ids");
-
+const { TieringClient } = require("@azure-tools/communication-tiering");
 const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
-const client = new AlphaIdsClient(connectionString);
+const client = new TieringClient(connectionString);
 ```
 
 ### Using an access key with `AzureKeyCredential`
@@ -59,10 +58,9 @@ If you use a key to initialize the client you will also need to provide the appr
 
 ```javascript
 const { AzureKeyCredential } = require("@azure/core-auth");
-const { AlphaIdsClient } = require("@azure-tools/communication-alpha-ids");
-
+const { TieringClient } = require("@azure-tools/communication-tiering");
 const credential = new AzureKeyCredential("<key-from-resource>");
-const client = new AlphaIdsClient("<endpoint-from-resource>", credential);
+const client = new TieringClient("<endpoint-from-resource>", credential);
 ```
 
 ### Using an Azure Active Directory Credential
@@ -76,32 +74,58 @@ npm install @azure/identity
 The [`@azure/identity`][azure_identity] package provides a variety of credential types that your application can use to do this. The [README for `@azure/identity`][azure_identity_readme] provides more details and samples to get you started.
 
 ```javascript
-const { DefaultAzureCredential } = require ("@azure/identity");
-const { AlphaIdsClient } = require("@azure-tools/communication-alpha-ids");
+const { DefaultAzureCredential } = require("@azure/identity");
+const { TieringClient } = require("@azure-tools/communication-tiering");
 
 let credential = new DefaultAzureCredential();
-const client = new AlphaIdsClient("<endpoint-from-resource>", credential);
+const client = new TieringClient("<endpoint-from-resource>", credential);
 ```
 
 ## Usage
 
-The following sections provide code snippets that cover some of the common tasks using the Azure Communication Services Alpha IDs client. The scenarios that are covered here consist of:
+The following sections provide code snippets that cover some of the common tasks using the Azure Communication Services Tiering Client. The scenarios that are covered here consist of:
 
-- [Get the current applied configuration](#get-the-current-applied-configuration)
+- [Get acquired number limits](#get-acquired-number-limits)
+- [Get Tier Info](#get-tier-info)
 
-### Get the current applied configuration
-Use the `getConfiguration` method to obtain the current applied configuration for your resource.
+### Get acquired number limits
 
-```javascript
-const { AlphaIdsClient } = require("@azure-tools/communication-alpha-ids");
-
+```typescript
+import { Tiering } from "@azure-tools/communication-tiering";
 const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
-const client = new AlphaIdsClient(connectionString);
+const client = new Tiering(connectionString);
 
-// get the current configuration
-var configuration = await client.getConfiguration();
+async main function() {
+  const resourceId = "5d41e908-de88-4bbf-94dc-fe9a1b51029b";
 
-console.log(`Usage of Alpha IDs is currently ${(configuration.enabled ? "enabled" : "disabled")}`);
+  // Get acquired numbers and limits for a resource
+  var acquiredNumberLimits = await client.getAcquiredNumberLimits(resourceId);
+
+  // print all number limits
+  console.log(acquiredNumberLimits);
+}
+
+main();
+```
+
+### Get tier info
+
+```typescript
+import { Tiering } from "@azure-tools/communication-tiering";
+const connectionString = "endpoint=<endpoint>;accessKey=<accessKey>";
+const client = new Tiering(connectionString);
+
+async main function() {
+  const resourceId = "5d41e908-de88-4bbf-94dc-fe9a1b51029b";
+
+  // Get tier info for a resource
+  var tierInfo = await client.getTierByResourceId(resourceId);
+
+  // print all tier info
+  console.log(tierInfo);
+}
+
+main();
 ```
 
 ## Troubleshooting
@@ -125,5 +149,6 @@ If you'd like to contribute to this library, please read the [contributing guide
 [defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 [azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
 [azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/README.md
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-alpha-ids%2FREADME.png)
+
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-toll-free-verification%2FREADME.png)
 

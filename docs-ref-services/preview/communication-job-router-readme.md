@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/communication-job-router, communication
 author: xirzec
 ms.author: jeffish
-ms.date: 07/27/2023
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
@@ -328,12 +328,12 @@ await jobRouterClient.closeJob(jobId, assignmentId, { dispositionCode: "Resolved
 ## Next steps
 
 Take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-job-router_1.0.0-beta.1/sdk/communication/)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/communication/)
 directory for additional detailed examples of using this SDK.
 
 ## Contributing
 
-If you'd like to contribute to this SDK, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-job-router_1.0.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this SDK, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

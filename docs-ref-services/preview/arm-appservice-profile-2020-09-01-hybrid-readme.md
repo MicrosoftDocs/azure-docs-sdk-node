@@ -1,6 +1,6 @@
 ---
 title: Azure WebSiteManagement client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-appservice, appservice
+keywords: Azure, javascript, SDK, API, @azure/arm-appservice-profile-2020-09-01-hybrid, appservice
 author: xirzec
 ms.author: jeffish
 ms.date: 08/02/2023
@@ -8,16 +8,16 @@ ms.topic: reference
 ms.devlang: javascript
 ms.service: appservice
 ---
-# Azure WebSiteManagement client library for JavaScript - version 14.0.1-alpha.20230725.1 
+# Azure WebSiteManagement client library for JavaScript - version 2.1.1-alpha.20230725.1 
 
 
 This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure WebSiteManagement client.
 
 WebSite Management Client
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/appservice/arm-appservice) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-appservice) |
-[API reference documentation](/javascript/api/@azure/arm-appservice) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/appservice/arm-appservice-profile-2020-09-01-hybrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-appservice-profile-2020-09-01-hybrid) |
+[API reference documentation](/javascript/api/@azure/arm-appservice-profile-2020-09-01-hybrid) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -33,12 +33,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-appservice` package
+### Install the `@azure/arm-appservice-profile-2020-09-01-hybrid` package
 
 Install the Azure WebSiteManagement client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-appservice
+npm install @azure/arm-appservice-profile-2020-09-01-hybrid
 ```
 
 ### Create and authenticate a `WebSiteManagementClient`
@@ -60,7 +60,7 @@ Set the values of the client ID, tenant ID, and client secret of the AAD applica
 For more information about how to create an Azure AD Application check out [this guide](/azure/active-directory/develop/howto-create-service-principal-portal).
 
 ```javascript
-const { WebSiteManagementClient } = require("@azure/arm-appservice");
+const { WebSiteManagementClient } = require("@azure/arm-appservice-profile-2020-09-01-hybrid");
 const { DefaultAzureCredential } = require("@azure/identity");
 // For client-side applications running in the browser, use InteractiveBrowserCredential instead of DefaultAzureCredential. See https://aka.ms/azsdk/js/identity/examples for more details.
 
@@ -110,7 +110,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fappservice%2Farm-appservice%2FREADME.png)
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fappservice%2Farm-appservice-profile-2020-09-01-hybrid%2FREADME.png)
 
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

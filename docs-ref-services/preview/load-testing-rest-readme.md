@@ -1,19 +1,19 @@
 ---
 title: Azure Load Testing client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure-rest/load-testing, azure-load-testing
+keywords: Azure, javascript, SDK, API, @azure-rest/load-testing, load-testing
 author: xirzec
 ms.author: jeffish
-ms.date: 01/26/2023
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: azure-load-testing
+ms.service: load-testing
 ---
-# Azure Load Testing client library for JavaScript - version 1.0.0-beta.2 
+# Azure Load Testing client library for JavaScript - version 1.0.1-alpha.20230428.1 
 
 
 Azure Load Testing provides client library in JavaScript to the user by which they can interact natively with Azure Load Testing service. Azure Load Testing is a fully managed load-testing service that enables you to generate high-scale load. The service simulates traffic for your applications, regardless of where they're hosted. Developers, testers, and quality assurance (QA) engineers can use it to optimize application performance, scalability, or capacity.
 
-**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/load-testing_1.0.0-beta.2/documentation/rest-clients.md) to use this library**
+**Please rely heavily on our [REST client docs](https://github.com/Azure/azure-sdk-for-js/blob/main/documentation/rest-clients.md) to use this library**
 
 ## Documentation
 
@@ -43,14 +43,14 @@ npm install @azure-rest/load-testing
 
 ### Create and authenticate a `AzureLoadTesting` client
 
-To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/load-testing_1.0.0-beta.2/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
+To use an [Azure Active Directory (AAD) token credential](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/identity/identity/samples/AzureIdentityExamples.md#authenticating-with-a-pre-fetched-access-token),
 provide an instance of the desired credential type obtained from the
-[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.0.0-beta.2/sdk/identity/identity#credentials) library.
+[@azure/identity](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials) library.
 
 To authenticate with AAD, you must first `npm` install [`@azure/identity`](https://www.npmjs.com/package/@azure/identity)
 
-After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.0.0-beta.2/sdk/identity/identity#credentials) from `@azure/identity` to use.
-As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.0.0-beta.2/sdk/identity/identity#defaultazurecredential)
+After setup, you can choose which type of [credential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#credentials) from `@azure/identity` to use.
+As an example, [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential)
 can be used to authenticate the client.
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables:
@@ -111,12 +111,13 @@ In the above example, `eus` represents the Azure region `East US`.
 
 ```javascript
 import { AzureLoadTestingClient } from "@azure-rest/load-testing";
+import AzureLoadTesting from "@azure-rest/load-testing";
 import { DefaultAzureCredential } from "@azure/identity";
 
 var TEST_ID = "some-test-id";
 var DISPLAY_NAME = "my-load-test";
 
-const client: AzureLoadTestingClient = AzureLoadTesting(Endpoint, new DefaultAzureCredential());
+const client: AzureLoadTestingClient = AzureLoadTesting("<Endpoint>", new DefaultAzureCredential());
 
 await client.path("/tests/{testId}", TEST_ID).patch({
   contentType: "application/merge-patch+json",
@@ -137,11 +138,13 @@ await client.path("/tests/{testId}", TEST_ID).patch({
 ### Uploading .jmx file to a Test
 
 ```javascript
-import { AzureLoadTestingClient, getLongRunningPoller } from "@azure-rest/load-testing";
+import { AzureLoadTestingClient, getLongRunningPoller, isUnexpected } from "@azure-rest/load-testing";
+import AzureLoadTesting from "@azure-rest/load-testing";
+import { AbortController } from "@azure/abort-controller";
 import { DefaultAzureCredential } from "@azure/identity";
 import { createReadStream } from "fs";
 
-const client: AzureLoadTestingClient = AzureLoadTesting(Endpoint, new DefaultAzureCredential());
+const client: AzureLoadTestingClient = AzureLoadTesting("<Endpoint>", new DefaultAzureCredential());
 
 var TEST_ID = "some-test-id";
 const readStream = createReadStream("./sample.jmx");
@@ -166,7 +169,7 @@ fileValidateResult = await fileValidatePoller.pollUntilDone({
 new Error("Error in polling file Validation" + ex.message); //polling timed out
 }
 
-if (fileUploadPoller.getOperationState().status != "succeeded" && fileValidateResult)
+if (fileValidatePoller.getOperationState().status != "succeeded" && fileValidateResult)
   throw new Error(
     "There is some issue in validation, please make sure uploaded file is a valid JMX." +
       fileValidateResult.body.validationFailureDetails
@@ -176,10 +179,12 @@ if (fileUploadPoller.getOperationState().status != "succeeded" && fileValidateRe
 ### Running a Test and fetching Metrics
 
 ```javascript
-import { AzureLoadTestingClient, getLongRunningPoller } from "@azure-rest/load-testing";
+import { AzureLoadTestingClient, getLongRunningPoller, isUnexpected } from "@azure-rest/load-testing";
+import AzureLoadTesting from "@azure-rest/load-testing";
 import { DefaultAzureCredential } from "@azure/identity";
+import { AbortController } from "@azure/abort-controller";
 
-const client: AzureLoadTestingClient = AzureLoadTesting(Endpoint, new DefaultAzureCredential());
+const client: AzureLoadTestingClient = AzureLoadTesting("<Endpoint>", new DefaultAzureCredential());
 
 var TEST_ID = "some-test-id";
 var DISPLAY_NAME = "my-load-test";
@@ -221,7 +226,7 @@ const testRunPoller = await getLongRunningPoller(client, testRunCreationResult);
 
     // get list of all metric namespaces and pick the first one
     const metricNamespaces = await client
-      .path("/test-runs/{testRunId}/metric-namespaces", testRunId)
+      .path("/test-runs/{testRunId}/metric-namespaces", TEST_RUN_ID)
       .get();
 
     if (isUnexpected(metricNamespaces)) {
@@ -236,7 +241,7 @@ const testRunPoller = await getLongRunningPoller(client, testRunCreationResult);
 
     // get list of all metric definitions and pick the first one
     const metricDefinitions = await client
-      .path("/test-runs/{testRunId}/metric-definitions", testRunId)
+      .path("/test-runs/{testRunId}/metric-definitions", TEST_RUN_ID)
       .get({
         queryParameters: {
           metricNamespace: metricNamespace.name,
@@ -254,7 +259,7 @@ const testRunPoller = await getLongRunningPoller(client, testRunCreationResult);
     }
 
     // fetch client metrics using metric namespace and metric name
-    const metricsResult = await client.path("/test-runs/{testRunId}/metrics", testRunId).post({
+    const metricsResult = await client.path("/test-runs/{testRunId}/metrics", TEST_RUN_ID).post({
       queryParameters: {
         metricname: metricDefinition.name,
         metricNamespace: metricNamespace.name,
@@ -279,7 +284,7 @@ import { setLogLevel } from "@azure/logger";
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.0.0-beta.2/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/core/logger).
 
 ## Next steps
 
@@ -289,7 +294,7 @@ See [Azure Load Testing samples][sample_code].
 
 ## Contributing
 
-For details on contributing to this repository, see the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure-rest/load-testing_1.0.0-beta.2/CONTRIBUTING.md).
+For details on contributing to this repository, see the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md).
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
@@ -299,8 +304,8 @@ For details on contributing to this repository, see the [contributing guide](htt
 
 <!-- LINKS -->
 
-[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.0.0-beta.2/sdk/loadtestservice/load-testing-rest/src
-[sample_code]: https://github.com/Azure/azure-sdk-for-js/tree/@azure-rest/load-testing_1.0.0-beta.2/sdk/loadtestservice/load-testing-rest/samples/v1-beta
+[source_code]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/loadtesting/load-testing-rest/src
+[sample_code]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/loadtesting/load-testing-rest/samples/v1-beta
 [api_reference_doc]: /rest/api/loadtesting/
 [product_documentation]: https://azure.microsoft.com/services/load-testing/
 [azure_subscription]: https://azure.microsoft.com/free/

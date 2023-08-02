@@ -6,7 +6,7 @@ ms.author: jeffish
 ms.data: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: azure-monitor
+ms.service: loganalytics
 ---
 # Azure Log Analytics SDK for JavaScript - preview
 ## Packages - preview

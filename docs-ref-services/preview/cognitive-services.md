@@ -7,8 +7,8 @@ ms.data: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: cognitiveservices
-ms.date: 05/28/2020
 manager: ehansen
+ms.date: 05/28/2020
 ---
 # JavaScript Azure Cognitive Services modules
 

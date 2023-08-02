@@ -3,12 +3,12 @@ title: Azure Schema Registry client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/schema-registry, schemaregistry
 author: deyaaeldeen
 ms.author: dealmaha
-ms.date: 01/12/2023
+ms.date: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: schemaregistry
 ---
-# Azure Schema Registry client library for JavaScript - version 1.3.0-beta.1 
+# Azure Schema Registry client library for JavaScript - version 1.3.0-alpha.20230419.1 
 
 
 Azure Schema Registry is a schema repository service hosted by Azure Event Hubs,
@@ -18,10 +18,10 @@ schema identifiers rather than full schemas.
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.3.0-beta.1/sdk/schemaregistry/schema-registry)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/schemaregistry/schema-registry)
 - [Package (npm)](https://www.npmjs.com/package/@azure/schema-registry)
 - [API Reference Documentation](/javascript/api/@azure/schema-registry)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.3.0-beta.1/sdk/schemaregistry/schema-registry/samples)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/schemaregistry/schema-registry/samples)
 
 ## Getting started
 
@@ -160,7 +160,7 @@ setLogLevel("info");
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.3.0-beta.1/sdk/schemaregistry/schema-registry/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/schemaregistry/schema-registry/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
@@ -183,7 +183,7 @@ FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact
 questions or comments.
 
 If you'd like to contribute to this library, please read the [contributing
-guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/schema-registry_1.3.0-beta.1/CONTRIBUTING.md) to
+guide](https://github.com/Azure/azure-sdk-for-js/blob/main/CONTRIBUTING.md) to
 learn more about how to build and test the code.
 
 ## Related projects
@@ -195,6 +195,6 @@ learn more about how to build and test the code.
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.3.0-beta.1/sdk/identity/identity
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/schema-registry_1.3.0-beta.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/identity/identity#defaultazurecredential
 

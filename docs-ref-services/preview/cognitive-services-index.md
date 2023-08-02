@@ -1,6 +1,6 @@
 | Reference | Package | Source |
 |---|---|---|
-|Document Translation|[@azure-rest/ai-document-translator](https://www.npmjs.com/package/@azure-rest/ai-document-translator)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
+|[Document Translation](ai-document-translator-rest-readme.md)|[@azure-rest/ai-document-translator](https://www.npmjs.com/package/@azure-rest/ai-document-translator)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/documenttranslator/ai-document-translator-rest)|
 |[Personalizer](ai-personalizer-rest-readme.md)|[@azure-rest/ai-personalizer](https://www.npmjs.com/package/@azure-rest/ai-personalizer)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/personalizer/ai-personalizer-rest)|
 |[Text Translation](ai-translation-text-rest-readme.md)|[@azure-rest/ai-translation-text](https://www.npmjs.com/package/@azure-rest/ai-translation-text)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/translation/ai-translation-text-rest)|
 |[Anomaly Detector](ai-anomaly-detector-readme.md)|[@azure/ai-anomaly-detector](https://www.npmjs.com/package/@azure/ai-anomaly-detector)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/anomalydetector/ai-anomaly-detector)|
@@ -9,3 +9,4 @@
 |[Language Text](ai-language-text-readme.md)|[@azure/ai-language-text](https://www.npmjs.com/package/@azure/ai-language-text)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitivelanguage/ai-language-text)|
 |[Text Analytics](ai-text-analytics-readme.md)|[@azure/ai-text-analytics](https://www.npmjs.com/package/@azure/ai-text-analytics)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/textanalytics/ai-text-analytics)|
 |[Anomaly Detector - RLC](ai-anomaly-detector-rest-readme.md)|[@azure-rest/ai-anomaly-detector](https://www.npmjs.com/package/@azure-rest/ai-anomaly-detector)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/anomalydetector/ai-anomaly-detector-rest)|
+|[Resource Management - Cognitive Services](arm-cognitiveservices-readme.md)|[@azure/arm-cognitiveservices](https://www.npmjs.com/package/@azure/arm-cognitiveservices)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/cognitiveservices/arm-cognitiveservices)|

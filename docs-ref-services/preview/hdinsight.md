@@ -7,8 +7,8 @@ ms.data: 08/02/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: hdinsight
-manager: kfile
 ms.date: 07/18/2017
+manager: kfile
 ---
 # Azure HDInsight Modules for JavaScript
 

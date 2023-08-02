@@ -1,6 +1,6 @@
 ---
 title: Azure ManagementLock client library for JavaScript
-keywords: Azure, javascript, SDK, API, @azure/arm-locks, locks
+keywords: Azure, javascript, SDK, API, @azure/arm-locks-profile-2020-09-01-hybrid, locks
 author: xirzec
 ms.author: jeffish
 ms.date: 08/02/2023
@@ -15,9 +15,9 @@ This package contains an isomorphic SDK (runs both in Node.js and in browsers) f
 
 Azure resources can be locked to prevent other users in your organization from deleting or modifying resources.
 
-[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/locks/arm-locks) |
-[Package (NPM)](https://www.npmjs.com/package/@azure/arm-locks) |
-[API reference documentation](/javascript/api/@azure/arm-locks) |
+[Source code](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/locks/arm-locks-profile-2020-09-01-hybrid) |
+[Package (NPM)](https://www.npmjs.com/package/@azure/arm-locks-profile-2020-09-01-hybrid) |
+[API reference documentation](/javascript/api/@azure/arm-locks-profile-2020-09-01-hybrid) |
 [Samples](https://github.com/Azure-Samples/azure-samples-js-management)
 
 ## Getting started
@@ -33,12 +33,12 @@ See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/main/SUP
 
 - An [Azure subscription][azure_sub].
 
-### Install the `@azure/arm-locks` package
+### Install the `@azure/arm-locks-profile-2020-09-01-hybrid` package
 
 Install the Azure ManagementLock client library for JavaScript with `npm`:
 
 ```bash
-npm install @azure/arm-locks
+npm install @azure/arm-locks-profile-2020-09-01-hybrid
 ```
 
 ### Create and authenticate a `ManagementLockClient`
@@ -60,7 +60,7 @@ Set the values of the client ID, tenant ID, and client secret of the AAD applica
 For more information about how to create an Azure AD Application check out [this guide](/azure/active-directory/develop/howto-create-service-principal-portal).
 
 ```javascript
-const { ManagementLockClient } = require("@azure/arm-locks");
+const { ManagementLockClient } = require("@azure/arm-locks-profile-2020-09-01-hybrid");
 const { DefaultAzureCredential } = require("@azure/identity");
 // For client-side applications running in the browser, use InteractiveBrowserCredential instead of DefaultAzureCredential. See https://aka.ms/azsdk/js/identity/examples for more details.
 
@@ -110,7 +110,7 @@ If you'd like to contribute to this library, please read the [contributing guide
 
 - [Microsoft Azure SDK for JavaScript](https://github.com/Azure/azure-sdk-for-js)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Flocks%2Farm-locks%2FREADME.png)
+![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Flocks%2Farm-locks-profile-2020-09-01-hybrid%2FREADME.png)
 
 [azure_cli]: /cli/azure
 [azure_sub]: https://azure.microsoft.com/free/

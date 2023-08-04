@@ -3,7 +3,7 @@ title: Azure OpenAI SDK for JavaScript
 description: Reference for Azure OpenAI SDK for JavaScript
 author: deyaaeldeen
 ms.author: dealmaha
-ms.data: 08/03/2023
+ms.data: 08/04/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: openai

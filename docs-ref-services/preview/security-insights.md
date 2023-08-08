@@ -3,7 +3,7 @@ title: Azure Security Insights SDK for JavaScript
 description: Reference for Azure Security Insights SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 08/07/2023
+ms.data: 08/08/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: securityinsights

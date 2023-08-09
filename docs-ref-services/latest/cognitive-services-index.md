@@ -5,7 +5,7 @@
 |[Text Analytics](ai-text-analytics-readme.md)|[@azure/ai-text-analytics](https://www.npmjs.com/package/@azure/ai-text-analytics)|[GitHub](https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/textanalytics/ai-text-analytics)|
 |Anomaly Detector|[@azure/cognitiveservices-anomalydetector](https://www.npmjs.com/package/@azure/cognitiveservices-anomalydetector)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |Computer Vision|[@azure/cognitiveservices-computervision](https://www.npmjs.com/package/@azure/cognitiveservices-computervision)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
-|Content Moderator|[@azure/cognitiveservices-contentmoderator](https://www.npmjs.com/package/@azure/cognitiveservices-contentmoderator)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
+|Content Safety|[@azure/cognitiveservices-contentmoderator](https://www.npmjs.com/package/@azure/cognitiveservices-contentmoderator)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |Custom Vision Prediction|[@azure/cognitiveservices-customvision-prediction](https://www.npmjs.com/package/@azure/cognitiveservices-customvision-prediction)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |Custom Vision Training|[@azure/cognitiveservices-customvision-training](https://www.npmjs.com/package/@azure/cognitiveservices-customvision-training)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|
 |[Face](cognitiveservices-face-readme.md)|[@azure/cognitiveservices-face](https://www.npmjs.com/package/@azure/cognitiveservices-face)|[GitHub](https://github.com/Azure/azure-sdk-for-js)|

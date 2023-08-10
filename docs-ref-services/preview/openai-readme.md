@@ -3,12 +3,12 @@ title: Azure OpenAI client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/openai, openai
 author: deyaaeldeen
 ms.author: dealmaha
-ms.date: 07/14/2023
+ms.date: 08/10/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: openai
 ---
-# Azure OpenAI client library for JavaScript - version 1.0.0-beta.3 
+# Azure OpenAI client library for JavaScript - version 1.0.0-beta.4 
 
 
 The Azure OpenAI client library for JavaScript is an adaptation of OpenAI's REST APIs that provides an idiomatic interface
@@ -31,11 +31,11 @@ Checkout the following examples:
 
 Key links:
 
-- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/openai/openai)
+- [Source code](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.4/sdk/openai/openai)
 - [Package (NPM)](https://www.npmjs.com/package/@azure/openai)
 - [API reference documentation](https://aka.ms/openai-js-api)
 - [Product documentation](https://learn.microsoft.com/azure/cognitive-services/openai)
-- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/openai/openai/samples/v1-beta)
+- [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.4/sdk/openai/openai/samples/v1-beta)
 
 ## Getting started
 
@@ -133,48 +133,56 @@ const client = new OpenAIClient(new OpenAIKeyCredential("<API key>"));
 The main concept to understand is [Completions][azure_openai_completions_docs]. Briefly explained, completions provides its functionality in the form of a text prompt, which by using a specific [model](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models), will then attempt to match the context and patterns, providing an output text. The following code snippet provides a rough overview:
 
 ```javascript
-const client = new OpenAIClient(
+const { OpenAIClient } = require("@azure/openai");
+
+async function main(){
+  const client = new OpenAIClient(
   "https://your-azure-openai-resource.com/",
   new AzureKeyCredential("your-azure-openai-resource-api-key"));
 
-const { choices } = await client.getCompletions(
-  "text-davinci-003", // assumes a matching model deployment or model name
-  ["Hello, world!"]);
+  const { choices } = await client.getCompletions(
+    "text-davinci-003", // assumes a matching model deployment or model name
+    ["Hello, world!"]);
 
-for (const choice of choices) {
-  console.log(choice.text);
+  for (const choice of choices) {
+    console.log(choice.text);
+  }
 }
 ```
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/openai/openai/samples/v1-beta).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.4/sdk/openai/openai/samples/v1-beta).
 
 ### Generate Chatbot Response
 
 This example authenticates using a DefaultAzureCredential, then generates chat responses to input chat question and messages.
 
 ```javascript
-const endpoint = "https://myaccount.openai.azure.com/";
-const client = new OpenAIClient(endpoint, new DefaultAzureCredential());
+const { OpenAIClient } = require("@azure/openai");
 
-const deploymentId = "gpt-35-turbo";
+async function main(){
+  const endpoint = "https://myaccount.openai.azure.com/";
+  const client = new OpenAIClient(endpoint, new DefaultAzureCredential());
 
-const messages = [
-  { role: "system", content: "You are a helpful assistant. You will talk like a pirate." },
-  { role: "user", content: "Can you help me?" },
-  { role: "assistant", content: "Arrrr! Of course, me hearty! What can I do for ye?" },
-  { role: "user", content: "What's the best way to train a parrot?" },
-];
+  const deploymentId = "gpt-35-turbo";
 
-console.log(`Messages: ${messages.map((m) => m.content).join("\n")}`);
+  const messages = [
+    { role: "system", content: "You are a helpful assistant. You will talk like a pirate." },
+    { role: "user", content: "Can you help me?" },
+    { role: "assistant", content: "Arrrr! Of course, me hearty! What can I do for ye?" },
+    { role: "user", content: "What's the best way to train a parrot?" },
+  ];
 
-const events = await client.listChatCompletions(deploymentId, messages, { maxTokens: 128 });
-for await (const event of events) {
-  for (const choice of event.choices) {
-    const delta = choice.delta?.content;
-    if (delta !== undefined) {
-      console.log(`Chatbot: ${delta}`);
+  console.log(`Messages: ${messages.map((m) => m.content).join("\n")}`);
+
+  const events = await client.listChatCompletions(deploymentId, messages, { maxTokens: 128 });
+  for await (const event of events) {
+    for (const choice of event.choices) {
+      const delta = choice.delta?.content;
+      if (delta !== undefined) {
+        console.log(`Chatbot: ${delta}`);
+      }
     }
   }
 }
@@ -185,27 +193,31 @@ for await (const event of events) {
 This example generates text responses to input prompts using an Azure subscription key
 
 ```javascript
-// Replace with your Azure OpenAI key
-const key = "YOUR_AZURE_OPENAI_KEY";
-const endpoint = "https://myaccount.openai.azure.com/";
-const client = new OpenAIClient(endpoint, new AzureKeyCredential(key));
+const { OpenAIClient } = require("@azure/openai");
 
-const examplePrompts = [
-  "How are you today?",
-  "What is Azure OpenAI?",
-  "Why do children love dinosaurs?",
-  "Generate a proof of Euler's identity",
-  "Describe in single words only the good things that come into your mind about your mother.",
-];
+async function main(){
+  // Replace with your Azure OpenAI key
+  const key = "YOUR_AZURE_OPENAI_KEY";
+  const endpoint = "https://myaccount.openai.azure.com/";
+  const client = new OpenAIClient(endpoint, new AzureKeyCredential(key));
 
-const deploymentName = "text-davinci-003";
+  const examplePrompts = [
+    "How are you today?",
+    "What is Azure OpenAI?",
+    "Why do children love dinosaurs?",
+    "Generate a proof of Euler's identity",
+    "Describe in single words only the good things that come into your mind about your mother.",
+  ];
 
-let promptIndex = 0;
-const { choices } = await client.getCompletions(deploymentName, examplePrompts);
-for (const choice of choices) {
-  const completion = choice.text;
-  console.log(`Input: ${examplePrompts[promptIndex++]}`);
-  console.log(`Chatbot: ${completion}`);
+  const deploymentName = "text-davinci-003";
+
+  let promptIndex = 0;
+  const { choices } = await client.getCompletions(deploymentName, examplePrompts);
+  for (const choice of choices) {
+    const completion = choice.text;
+    console.log(`Input: ${examplePrompts[promptIndex++]}`);
+    console.log(`Chatbot: ${completion}`);
+  }
 }
 ```
 
@@ -214,35 +226,39 @@ for (const choice of choices) {
 This example generates a summarization of the given input prompt.
 
 ```javascript
-const endpoint = "https://myaccount.openai.azure.com/";
-const client = new OpenAIClient(endpoint, new DefaultAzureCredential());
+const { OpenAIClient } = require("@azure/openai");
 
-const textToSummarize = `
-  Two independent experiments reported their results this morning at CERN, Europe's high-energy physics laboratory near Geneva in Switzerland. Both show convincing evidence of a new boson particle weighing around 125 gigaelectronvolts, which so far fits predictions of the Higgs previously made by theoretical physicists.
+async function main(){
+  const endpoint = "https://myaccount.openai.azure.com/";
+  const client = new OpenAIClient(endpoint, new DefaultAzureCredential());
 
-  ""As a layman I would say: 'I think we have it'. Would you agree?"" Rolf-Dieter Heuer, CERN's director-general, asked the packed auditorium. The physicists assembled there burst into applause.
- :`;
+  const textToSummarize = `
+    Two independent experiments reported their results this morning at CERN, Europe's high-energy physics laboratory near Geneva in Switzerland. Both show convincing evidence of a new boson particle weighing around 125 gigaelectronvolts, which so far fits predictions of the Higgs previously made by theoretical physicists.
 
-const summarizationPrompt = [`
-  Summarize the following text.
+    ""As a layman I would say: 'I think we have it'. Would you agree?"" Rolf-Dieter Heuer, CERN's director-general, asked the packed auditorium. The physicists assembled there burst into applause.
+  :`;
 
-  Text:
-  """"""
-  ${textToSummarize}
-  """"""
+  const summarizationPrompt = [`
+    Summarize the following text.
 
-  Summary:
-`];
+    Text:
+    """"""
+    ${textToSummarize}
+    """"""
 
-console.log(`Input: ${summarizationPrompt}`);
+    Summary:
+  `];
 
-const deploymentName = "text-davinci-003";
+  console.log(`Input: ${summarizationPrompt}`);
 
-const { choices } = await client.getCompletions(deploymentName, examplePrompts, {
-  maxTokens: 64
-});
-const completion = choices[0].text;
-console.log(`Summarization: ${completion}`);
+  const deploymentName = "text-davinci-003";
+
+  const { choices } = await client.getCompletions(deploymentName, summarizationPrompt, {
+    maxTokens: 64
+  });
+  const completion = choices[0].text;
+  console.log(`Summarization: ${completion}`);
+}
 ```
 
 ## Troubleshooting
@@ -257,15 +273,15 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.4/sdk/core/logger).
 
 <!-- LINKS -->
-[msdocs_openai_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.3/sdk/openai/openai/samples/v1-beta/javascript/completions.js
-[msdocs_openai_chat_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.3/sdk/openai/openai/samples/v1-beta/javascript/listChatCompletions.js
+[msdocs_openai_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.4/sdk/openai/openai/samples/v1-beta/javascript/completions.js
+[msdocs_openai_chat_completion]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/openai_1.0.0-beta.4/sdk/openai/openai/samples/v1-beta/javascript/listChatCompletions.js
 [msdocs_openai_embedding]: https://learn.microsoft.com/azure/cognitive-services/openai/concepts/understand-embeddings
 [azure_openai_completions_docs]: https://learn.microsoft.com/azure/cognitive-services/openai/how-to/completions
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.3/sdk/identity/identity
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.4/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/openai_1.0.0-beta.4/sdk/identity/identity
 [register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
 [azure_cli]: /cli/azure
 [azure_portal]: https://portal.azure.com

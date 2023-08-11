@@ -162,6 +162,222 @@ constructors:
           description: optional settings for configuring all methods in the client
 methods:
   - name: >-
+      beginBuildDocumentClassifier(string,
+      DocumentClassifierDocumentTypeSources,
+      BeginBuildDocumentClassifierOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.beginBuildDocumentClassifier
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Build a new document classifier with the given classifier ID and document
+      types.
+
+
+      The classifier ID must be unique among classifiers within the resource.
+
+
+      The document types are given as an object that maps the name of the
+      document type to the training data set for that
+
+      document type. Two training data input methods are supported:
+
+
+      - `azureBlobSource`, which trains a classifier using the data in the given
+      Azure Blob Storage container.
+
+      - `azureBlobFileListSource`, which is similar to `azureBlobSource` but
+      allows for more fine-grained control over
+        the files that are included in the training data set by using a JSONL-formatted file list.
+
+      The Form Recognizer service reads the training data set from an Azure
+      Storage container, given as a URL to the
+
+      container with a SAS token that allows the service backend to communicate
+      with the container. At a minimum, the
+
+      "read" and "list" permissions are required. In addition, the data in the
+      given container must be organized
+
+      according to a particular convention, which is documented in [the
+      service's documentation for building custom
+
+      document
+      classifiers](https://aka.ms/azsdk/formrecognizer/buildclassifiermodel).
+
+
+      ### Example
+
+
+      ```javascript
+
+      const classifierId = "aNewClassifier";
+
+      const containerUrl1 = "<training data container SAS URL 1>";
+
+      const containerUrl2 = "<training data container SAS URL 2>";
+
+
+      const poller = await client.beginBuildDocumentClassifier(
+        classifierId,
+        {
+          // The document types. Each entry in this object should map a document type name to a
+          // `ClassifierDocumentTypeDetails` object
+          "formX": {
+            azureBlobSource: {
+              containerUrl: containerUrl1,
+            }
+          },
+          "formY": {
+            azureBlobFileListSource: {
+              containerUrl: containerUrl2,
+              fileList: "path/to/fileList.jsonl"
+            }
+          },
+        },
+        {
+          // Optionally, a text description may be attached to the classifier
+          description: "This is an example classifier!"
+        }
+      );
+
+
+      // Classifier building, like model creation operations, returns a poller
+      that eventually produces a
+
+      // DocumentClassifierDetails object
+
+      const classifierDetails = await poller.pollUntilDone();
+
+
+      const {
+        classifierId, // identical to the classifierId given when creating the classifier
+        description, // identical to the description given when creating the classifier (if any)
+        createdOn, // the Date (timestamp) that the classifier was created
+        docTypes // information about the document types in the classifier and their details
+      } = classifierDetails;
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginBuildDocumentClassifier(classifierId: string,
+        docTypeSources: DocumentClassifierDocumentTypeSources, options?:
+        BeginBuildDocumentClassifierOptions): Promise<DocumentClassifierPoller>
+      parameters:
+        - id: classifierId
+          type: string
+          description: the unique ID of the classifier to create
+        - id: docTypeSources
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.DocumentClassifierDocumentTypeSources"
+            />
+          description: >-
+            the document types to include in the classifier and their sources (a
+            map of document type
+                                    names to `ClassifierDocumentTypeDetails`)
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/ai-form-recognizer.BeginBuildDocumentClassifierOptions"
+            />
+          description: optional settings for the classifier build operation
+      return:
+        description: >-
+          a long-running operation (poller) that will eventually produce the
+          created classifier details or an error
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/ai-form-recognizer.DocumentClassifierPoller" />&gt;
+  - name: >-
+      beginBuildDocumentModel(string, DocumentModelSource,
+      DocumentModelBuildMode, BeginBuildDocumentModelOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.beginBuildDocumentModel_1
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Build a new model with a given ID from a model content source.
+
+
+      The Model ID can consist of any text, so long as it does not begin with
+      "prebuilt-" (as these models refer to
+
+      prebuilt Form Recognizer models that are common to all resources), and so
+      long as it does not already exist within
+
+      the resource.
+
+
+      The content source describes the mechanism the service will use to read
+      the input training data. See the
+
+      <xref:DocumentModelContentSource> type for more information.
+
+
+      ### Example
+
+
+      ```javascript
+
+      const modelId = "aNewModel";
+
+
+      const poller = await client.beginBuildDocumentModel(modelId, {
+      containerUrl: "<SAS-encoded blob container URL>" }, {
+        // Optionally, a text description may be attached to the model
+        description: "This is an example model!"
+      });
+
+
+      // Model building, like all other model creation operations, returns a
+      poller that eventually produces a ModelDetails
+
+      // object
+
+      const modelDetails = await poller.pollUntilDone();
+
+
+      const {
+        modelId, // identical to the modelId given when creating the model
+        description, // identical to the description given when creating the model
+        createdOn, // the Date (timestamp) that the model was created
+        docTypes // information about the document types in the model and their field schemas
+      } = modelDetails;
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function beginBuildDocumentModel(modelId: string, contentSource:
+        DocumentModelSource, buildMode: DocumentModelBuildMode, options?:
+        BeginBuildDocumentModelOptions): Promise<DocumentModelPoller>
+      parameters:
+        - id: modelId
+          type: string
+          description: the unique ID of the model to create
+        - id: contentSource
+          type: <xref uid="@azure/ai-form-recognizer.DocumentModelSource" />
+          description: a content source that provides the training data for this model
+        - id: buildMode
+          type: DocumentModelBuildMode
+          description: >-
+            the mode to use when building the model (see
+            `DocumentModelBuildMode`)
+        - id: options
+          type: >-
+            <xref uid="@azure/ai-form-recognizer.BeginBuildDocumentModelOptions"
+            />
+          description: optional settings for the model build operation
+      return:
+        description: >-
+          a long-running operation (poller) that will eventually produce the
+          created model information or an error
+        type: >-
+          Promise&lt;<xref uid="@azure/ai-form-recognizer.DocumentModelPoller"
+          />&gt;
+  - name: >-
       beginBuildDocumentModel(string, string, DocumentModelBuildMode,
       BeginBuildDocumentModelOptions)
     uid: >-
@@ -436,6 +652,39 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/ai-form-recognizer.DocumentModelPoller"
           />&gt;
+  - name: deleteDocumentClassifier(string, OperationOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.deleteDocumentClassifier
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Deletes a classifier with the given ID from the client's resource, if it
+      exists. This operation CANNOT be reverted.
+
+
+      ### Example
+
+
+      ```javascript
+
+      await client.deleteDocumentClassifier("<classifier ID to delete>"));
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function deleteDocumentClassifier(classifierId: string, options?:
+        OperationOptions): Promise<void>
+      parameters:
+        - id: classifierId
+          type: string
+          description: the unique ID of the classifier to delete from the resource
+        - id: options
+          type: OperationOptions
+          description: optional settings for the request
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
   - name: deleteDocumentModel(string, DeleteDocumentModelOptions)
     uid: >-
       @azure/ai-form-recognizer.DocumentModelAdministrationClient.deleteDocumentModel
@@ -450,7 +699,7 @@ methods:
 
       ```javascript
 
-      await client.deleteModel("<model ID to delete>"));
+      await client.deleteDocumentModel("<model ID to delete>"));
 
       ```
     remarks: ''
@@ -521,13 +770,70 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/ai-form-recognizer.CopyAuthorization"
           />&gt;
+  - name: getDocumentClassifier(string, OperationOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.getDocumentClassifier
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      Retrieves information about a classifier
+      ([DocumentClassifierDetails](xref:@azure/ai-form-recognizer.DocumentClassifierDetails))
+      by ID.
+
+
+      ### Example
+
+
+      ```javascript
+
+      const classifierId = "<classifier ID";
+
+
+      const {
+        classifierId, // identical to the ID given when calling `getDocumentClassifier`
+        description, // a textual description of the classifier, if provided during classifier creation
+        createdOn, // the Date (timestamp) that the classifier was created
+        // information about the document types in the classifier and their corresponding traning data
+        docTypes
+      } = await client.getDocumentClassifier(classifierId);
+
+
+      // The `docTypes` property is a map of document type names to information
+      about the training data
+
+      // for that document type.
+
+      for (const [docTypeName, classifierDocTypeDetails] of
+      Object.entries(docTypes)) {
+       console.log(`- '${docTypeName}': `, classifierDocTypeDetails);
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getDocumentClassifier(classifierId: string, options?:
+        OperationOptions): Promise<DocumentClassifierDetails>
+      parameters:
+        - id: classifierId
+          type: string
+          description: the unique ID of the classifier to query
+        - id: options
+          type: OperationOptions
+          description: optional settings for the request
+      return:
+        description: information about the classifier with the given ID
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/ai-form-recognizer.DocumentClassifierDetails" />&gt;
   - name: getDocumentModel(string, GetModelOptions)
     uid: >-
       @azure/ai-form-recognizer.DocumentModelAdministrationClient.getDocumentModel
     package: '@azure/ai-form-recognizer'
     summary: >-
       Retrieves information about a model
-      (<xref:@azure/ai-form-recognizer.DocumentModelDetails>) by ID.
+      ([DocumentModelDetails](xref:@azure/ai-form-recognizer.DocumentModelDetails))
+      by ID.
 
 
       This method can retrieve information about custom as well as prebuilt
@@ -679,6 +985,75 @@ methods:
         type: >-
           Promise&lt;<xref uid="@azure/ai-form-recognizer.ResourceDetails"
           />&gt;
+  - name: listDocumentClassifiers(ListModelsOptions)
+    uid: >-
+      @azure/ai-form-recognizer.DocumentModelAdministrationClient.listDocumentClassifiers
+    package: '@azure/ai-form-recognizer'
+    summary: >-
+      List details about classifiers in the resource. This operation supports
+      paging.
+
+
+      ### Examples
+
+
+      #### Async Iteration
+
+
+      ```javascript
+
+      for await (const details of client.listDocumentClassifiers()) {
+        const {
+          classifierId, // The classifier's unique ID
+          description, // a textual description of the classifier, if provided during creation
+          docTypes, // information about the document types in the classifier and their corresponding traning data
+        } = details;
+      }
+
+      ```
+
+
+      #### By Page
+
+
+      ```javascript
+
+      // The listDocumentClassifiers method is paged, and you can iterate by
+      page using the `byPage` method.
+
+      const pages = client.listDocumentClassifiers().byPage();
+
+
+      for await (const page of pages) {
+        // Each page is an array of classifiers and can be iterated synchronously
+        for (const details of page) {
+          const {
+            classifierId, // The classifier's unique ID
+            description, // a textual description of the classifier, if provided during creation
+            docTypes, // information about the document types in the classifier and their corresponding traning data
+          } = details;
+        }
+      }
+
+      ```
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function listDocumentClassifiers(options?: ListModelsOptions):
+        PagedAsyncIterableIterator<DocumentClassifierDetails,
+        DocumentClassifierDetails[], PageSettings>
+      parameters:
+        - id: options
+          type: <xref uid="@azure/ai-form-recognizer.ListModelsOptions" />
+          description: optional settings for the classifier requests
+      return:
+        description: an async iterable of classifier details that supports paging
+        type: >-
+          PagedAsyncIterableIterator&lt;<xref
+          uid="@azure/ai-form-recognizer.DocumentClassifierDetails" />, <xref
+          uid="@azure/ai-form-recognizer.DocumentClassifierDetails" />[],
+          PageSettings&gt;
   - name: listDocumentModels(ListModelsOptions)
     uid: >-
       @azure/ai-form-recognizer.DocumentModelAdministrationClient.listDocumentModels
@@ -690,7 +1065,8 @@ methods:
       supports paging.
 
 
-      The model summary (<xref:@azure/ai-form-recognizer.DocumentModelSummary>)
+      The model summary
+      ([DocumentModelSummary](xref:@azure/ai-form-recognizer.DocumentModelSummary))
       includes only the basic information about the model, and does not include
 
       information about the document types in the model (such as the field

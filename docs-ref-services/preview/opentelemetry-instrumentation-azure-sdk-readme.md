@@ -3,7 +3,7 @@ title:
 keywords: Azure, javascript, SDK, API, @azure/opentelemetry-instrumentation-azure-sdk, instrumentation
 author: joheredi
 ms.author: joheredi
-ms.date: 06/15/2023
+ms.date: 08/11/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: instrumentation
@@ -17,7 +17,7 @@ ms.service: instrumentation
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox.
 
-See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.4/SUPPORT.md) for more details.
+See our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.5/SUPPORT.md) for more details.
 
 ### Prerequisites
 
@@ -67,7 +67,8 @@ registerInstrumentations({
 
 // Continue to import any Azure SDK client libraries after registering the instrumentation.
 
-const { keyClient } = require("@azure/keyvault-keys");
+const { KeyClient } = require("@azure/keyvault-keys");
+const keyClient = new KeyClient(url, new DefaultAzureCredential()); 
 
 async function main() {
   // Tracing is now enabled using automatic span propagation with an active context.
@@ -101,11 +102,11 @@ const { setLogLevel } = require("@azure/logger");
 setLogLevel("info");
 ```
 
-For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.4/sdk/core/logger).
+For more detailed instructions on how to enable logs, you can look at the [@azure/logger package docs](https://github.com/Azure/azure-sdk-for-js/tree/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.5/sdk/core/logger).
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.4/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/opentelemetry-instrumentation-azure-sdk_1.0.0-beta.5/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 

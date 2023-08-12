@@ -40,6 +40,18 @@ properties:
       return:
         description: Authorization token.
         type: string
+  - name: internalData
+    uid: microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.internalData
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: ''
+    fullName: internalData
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: object internalData
+      return:
+        description: ''
+        type: object
   - name: properties
     uid: microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.properties
     package: microsoft-cognitiveservices-speech-sdk
@@ -58,18 +70,122 @@ properties:
         type: >-
           <xref uid="microsoft-cognitiveservices-speech-sdk.PropertyCollection"
           />
+  - name: telemetryEnabled
+    uid: microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.telemetryEnabled
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: This method returns the current state of the telemetry setting.
+    fullName: telemetryEnabled
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: static boolean telemetryEnabled
+      return:
+        description: true if the telemetry is enabled, false otherwise.
+        type: boolean
+inheritedProperties:
+  - name: sessionStarted
+    uid: microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.sessionStarted
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: Defines event handler for session started events.
+    fullName: sessionStarted
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        public sessionStarted: (sender: Recognizer, event: SessionEventArgs) =>
+        void
+      return:
+        description: ''
+        type: '(sender: Recognizer, event: SessionEventArgs) =&gt; void'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Recognizer.sessionStarted](xref:microsoft-cognitiveservices-speech-sdk.Recognizer.sessionStarted)
+  - name: sessionStopped
+    uid: microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.sessionStopped
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: Defines event handler for session stopped events.
+    fullName: sessionStopped
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        public sessionStopped: (sender: Recognizer, event: SessionEventArgs) =>
+        void
+      return:
+        description: ''
+        type: '(sender: Recognizer, event: SessionEventArgs) =&gt; void'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Recognizer.sessionStopped](xref:microsoft-cognitiveservices-speech-sdk.Recognizer.sessionStopped)
+  - name: speechEndDetected
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.speechEndDetected
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: Defines event handler for speech stopped events.
+    fullName: speechEndDetected
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        public speechEndDetected: (sender: Recognizer, event:
+        RecognitionEventArgs) => void
+      return:
+        description: ''
+        type: '(sender: Recognizer, event: RecognitionEventArgs) =&gt; void'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Recognizer.speechEndDetected](xref:microsoft-cognitiveservices-speech-sdk.Recognizer.speechEndDetected)
+  - name: speechStartDetected
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.speechStartDetected
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: Defines event handler for speech started events.
+    fullName: speechStartDetected
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        public speechStartDetected: (sender: Recognizer, event:
+        RecognitionEventArgs) => void
+      return:
+        description: ''
+        type: '(sender: Recognizer, event: RecognitionEventArgs) =&gt; void'
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Recognizer.speechStartDetected](xref:microsoft-cognitiveservices-speech-sdk.Recognizer.speechStartDetected)
+inheritedMethods:
+  - name: enableTelemetry(boolean)
+    uid: microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.enableTelemetry
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: This method globally enables or disables telemetry.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static function enableTelemetry(enabled: boolean)'
+      parameters:
+        - id: enabled
+          type: boolean
+          description: |-
+            Global setting for telemetry collection.
+            If set to true, telemetry information like microphone errors,
+            recognition errors are collected and sent to Microsoft.
+            If set to false, no telemetry is sent to Microsoft.
+    inheritanceDescription: >-
+      <b>Inherited From</b>
+      [Recognizer.enableTelemetry](xref:microsoft-cognitiveservices-speech-sdk.Recognizer.enableTelemetry)
 methods:
   - name: close()
     uid: microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.close
     package: microsoft-cognitiveservices-speech-sdk
-    summary: Included for compatibility
+    summary: Clean up object and close underlying connection
     remarks: ''
     isDeprecated: false
     syntax:
-      content: function close()
-  - name: >-
-      createProfileAsync(VoiceProfileType, string, (e: VoiceProfile) => void,
-      (e: string) => void)
+      content: 'function close(): Promise<void>'
+      return:
+        description: ''
+        type: Promise&lt;void&gt;
+  - name: createProfileAsync(VoiceProfileType, string)
     uid: >-
       microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.createProfileAsync
     package: microsoft-cognitiveservices-speech-sdk
@@ -78,28 +194,23 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function createProfileAsync(profileType: VoiceProfileType, lang: string,
-        cb?: (e: VoiceProfile) => void, err?: (e: string) => void)
+        function createProfileAsync(profileType: VoiceProfileType, lang:
+        string): Promise<VoiceProfile>
       parameters:
         - id: profileType
           type: >-
             <xref uid="microsoft-cognitiveservices-speech-sdk.VoiceProfileType"
             />
-          description: |-
-            Type of Voice Profile to be created
-                   specifies the keyword to be recognized.
+          description: Type of Voice Profile to be created
         - id: lang
           type: string
           description: Language string (locale) for Voice Profile
-        - id: cb
-          type: '(e: VoiceProfile) =&gt; void'
-          description: Callback invoked once Voice Profile has been created.
-        - id: err
-          type: '(e: string) =&gt; void'
-          description: Callback invoked in case of an error.
-  - name: >-
-      deleteProfileAsync(VoiceProfile, (response: VoiceProfileResult) => void,
-      (e: string) => void)
+      return:
+        description: '- Promise of a VoiceProfile.'
+        type: >-
+          Promise&lt;<xref
+          uid="microsoft-cognitiveservices-speech-sdk.VoiceProfile" />&gt;
+  - name: deleteProfileAsync(VoiceProfile)
     uid: >-
       microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.deleteProfileAsync
     package: microsoft-cognitiveservices-speech-sdk
@@ -108,21 +219,18 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function deleteProfileAsync(profile: VoiceProfile, cb?: (response:
-        VoiceProfileResult) => void, err?: (e: string) => void)
+        function deleteProfileAsync(profile: VoiceProfile):
+        Promise<VoiceProfileResult>
       parameters:
         - id: profile
           type: <xref uid="microsoft-cognitiveservices-speech-sdk.VoiceProfile" />
           description: Voice Profile to be deleted
-        - id: cb
-          type: '(response: VoiceProfileResult) =&gt; void'
-          description: Callback invoked once Voice Profile has been deleted.
-        - id: err
-          type: '(e: string) =&gt; void'
-          description: Callback invoked in case of an error.
-  - name: >-
-      enrollProfileAsync(VoiceProfile, AudioConfig, (e:
-      VoiceProfileEnrollmentResult) => void, (e: string) => void)
+      return:
+        description: '- Promise of a VoiceProfileResult.'
+        type: >-
+          Promise&lt;<xref
+          uid="microsoft-cognitiveservices-speech-sdk.VoiceProfileResult" />&gt;
+  - name: enrollProfileAsync(VoiceProfile, AudioConfig)
     uid: >-
       microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.enrollProfileAsync
     package: microsoft-cognitiveservices-speech-sdk
@@ -132,8 +240,7 @@ methods:
     syntax:
       content: >-
         function enrollProfileAsync(profile: VoiceProfile, audioConfig:
-        AudioConfig, cb?: (e: VoiceProfileEnrollmentResult) => void, err?: (e:
-        string) => void)
+        AudioConfig): Promise<VoiceProfileEnrollmentResult>
       parameters:
         - id: profile
           type: <xref uid="microsoft-cognitiveservices-speech-sdk.VoiceProfile" />
@@ -141,15 +248,64 @@ methods:
         - id: audioConfig
           type: <xref uid="microsoft-cognitiveservices-speech-sdk.AudioConfig" />
           description: source info from which to create enrollment
-        - id: cb
-          type: '(e: VoiceProfileEnrollmentResult) =&gt; void'
-          description: Callback invoked once Enrollment request has been submitted.
-        - id: err
-          type: '(e: string) =&gt; void'
-          description: Callback invoked in case of an error.
-  - name: >-
-      resetProfileAsync(VoiceProfile, (response: VoiceProfileResult) => void,
-      (e: string) => void)
+      return:
+        description: '- Promise of a VoiceProfileEnrollmentResult.'
+        type: >-
+          Promise&lt;<xref
+          uid="microsoft-cognitiveservices-speech-sdk.VoiceProfileEnrollmentResult"
+          />&gt;
+  - name: getActivationPhrasesAsync(VoiceProfileType, string)
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.getActivationPhrasesAsync
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: Get valid authorization phrases for voice profile enrollment
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getActivationPhrasesAsync(profileType: VoiceProfileType, lang:
+        string): Promise<VoiceProfilePhraseResult>
+      parameters:
+        - id: profileType
+          type: >-
+            <xref uid="microsoft-cognitiveservices-speech-sdk.VoiceProfileType"
+            />
+          description: Profile Type to get activation phrases for
+        - id: lang
+          type: string
+          description: Language string (locale) for Voice Profile
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="microsoft-cognitiveservices-speech-sdk.VoiceProfilePhraseResult"
+          />&gt;
+  - name: getAllProfilesAsync(VoiceProfileType)
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.getAllProfilesAsync
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: Get all voice profiles on account with given voice profile type
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getAllProfilesAsync(profileType: VoiceProfileType):
+        Promise<VoiceProfileEnrollmentResult[]>
+      parameters:
+        - id: profileType
+          type: >-
+            <xref uid="microsoft-cognitiveservices-speech-sdk.VoiceProfileType"
+            />
+          description: >-
+            profile type (identification/verification) for which to list
+            profiles
+      return:
+        description: '- Promise of an array of VoiceProfileEnrollmentResults.'
+        type: >-
+          Promise&lt;<xref
+          uid="microsoft-cognitiveservices-speech-sdk.VoiceProfileEnrollmentResult"
+          />[]&gt;
+  - name: resetProfileAsync(VoiceProfile)
     uid: >-
       microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.resetProfileAsync
     package: microsoft-cognitiveservices-speech-sdk
@@ -158,15 +314,36 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function resetProfileAsync(profile: VoiceProfile, cb?: (response:
-        VoiceProfileResult) => void, err?: (e: string) => void)
+        function resetProfileAsync(profile: VoiceProfile):
+        Promise<VoiceProfileResult>
       parameters:
         - id: profile
           type: <xref uid="microsoft-cognitiveservices-speech-sdk.VoiceProfile" />
           description: Voice Profile to be reset
-        - id: cb
-          type: '(response: VoiceProfileResult) =&gt; void'
-          description: Callback invoked once Voice Profile has been reset.
-        - id: err
-          type: '(e: string) =&gt; void'
-          description: Callback invoked in case of an error.
+      return:
+        description: '- Promise of a VoiceProfileResult.'
+        type: >-
+          Promise&lt;<xref
+          uid="microsoft-cognitiveservices-speech-sdk.VoiceProfileResult" />&gt;
+  - name: retrieveEnrollmentResultAsync(VoiceProfile)
+    uid: >-
+      microsoft-cognitiveservices-speech-sdk.VoiceProfileClient.retrieveEnrollmentResultAsync
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: Get current information of a voice profile
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function retrieveEnrollmentResultAsync(profile: VoiceProfile):
+        Promise<VoiceProfileEnrollmentResult>
+      parameters:
+        - id: profile
+          type: <xref uid="microsoft-cognitiveservices-speech-sdk.VoiceProfile" />
+          description: Voice Profile to retrieve info for
+      return:
+        description: '- Promise of a VoiceProfileEnrollmentResult.'
+        type: >-
+          Promise&lt;<xref
+          uid="microsoft-cognitiveservices-speech-sdk.VoiceProfileEnrollmentResult"
+          />&gt;
+extends: <xref uid="microsoft-cognitiveservices-speech-sdk.Recognizer" />

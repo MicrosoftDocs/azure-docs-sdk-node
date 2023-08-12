@@ -31,6 +31,18 @@ properties:
       return:
         description: ''
         type: void
+  - name: DialogTypes
+    uid: microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig.DialogTypes
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: ''
+    fullName: DialogTypes
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'static { BotFramework: string, CustomCommands: string } DialogTypes'
+      return:
+        description: ''
+        type: '{ BotFramework: string, CustomCommands: string }'
   - name: outputFormat
     uid: microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig.outputFormat
     package: microsoft-cognitiveservices-speech-sdk
@@ -174,34 +186,39 @@ inheritedMethods:
           description: ''
     inheritanceDescription: <b>Inherited From</b> DialogServiceConfigImpl.setServiceProperty
 methods:
-  - name: fromAuthorizationToken(string, string)
+  - name: fromAuthorizationToken(string, string, string)
     uid: >-
       microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig.fromAuthorizationToken
     package: microsoft-cognitiveservices-speech-sdk
     summary: >-
-      Creates an instance of the bot framework config with the specified
+      Creates a bot framework configuration instance for the specified
       authorization token and region.
 
-      Note: The caller needs to ensure that the authorization token is valid.
-      Before the authorization token
+      Note: The caller must ensure that an authorization token is valid. Before
+      an authorization token expires, the
 
-      expires, the caller needs to refresh it by calling this setter with a new
-      valid token.
+      caller must refresh it by setting the authorizationToken property on the
+      corresponding
 
-      As configuration values are copied when creating a new recognizer, the new
-      token value will not apply to recognizers that have already been created.
+      DialogServiceConnector instance created with this config. The contents of
+      configuration objects are copied
 
-      For recognizers that have been created before, you need to set
-      authorization token of the corresponding recognizer
+      when connectors are created, so setting authorizationToken on a
+      DialogServiceConnector will not update the
 
-      to refresh the token. Otherwise, the recognizers will encounter errors
-      during recognition.
+      original configuration's authorization token. Create a new configuration
+      instance or set the
+
+      SpeechServiceAuthorization_Token property to update an existing instance
+      if it will be used to create
+
+      further DialogServiceConnectors.
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
         static function fromAuthorizationToken(authorizationToken: string,
-        region: string): BotFrameworkConfig
+        region: string, botId?: string): BotFrameworkConfig
       parameters:
         - id: authorizationToken
           type: string
@@ -211,8 +228,116 @@ methods:
           description: >-
             The region name (see the <a
             href="https://aka.ms/csspeech/region">region page</a>).
+        - id: botId
+          type: string
+          description: >-
+            Optional. Identifier for using a specific bot within an Azure
+            resource group. Equivalent to the
+
+            resource name.
       return:
-        description: A new bot framework config.
+        description: A new bot framework configuration instance.
+        type: >-
+          <xref uid="microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig"
+          />
+  - name: fromEndpoint(URL, string)
+    uid: microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig.fromEndpoint
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: >-
+      Creates an instance of a BotFrameworkConfig.
+
+      This method is intended only for users who use a non-standard service
+      endpoint or parameters.
+
+      Note: The query parameters specified in the endpoint URL are not changed,
+      even if they are set by any other APIs.
+
+      Note: To use authorization token with fromEndpoint, pass an empty string
+      to the subscriptionKey in the
+
+      fromEndpoint method, and then set authorizationToken="token" on the
+      created BotFrameworkConfig instance to
+
+      use the authorization token.
+
+      Note: Added in version 1.15.0.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromEndpoint(endpoint: URL, subscriptionKey?: string):
+        BotFrameworkConfig
+      parameters:
+        - id: endpoint
+          type: URL
+          description: The service endpoint to connect to.
+        - id: subscriptionKey
+          type: string
+          description: >-
+            The subscription key. If a subscription key is not specified, an
+            authorization
+
+            token must be set.
+      return:
+        description: >-
+          - A new bot framework configuration instance using the provided
+          endpoint.
+        type: >-
+          <xref uid="microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig"
+          />
+  - name: fromHost(string | URL, string, string)
+    uid: microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig.fromHost
+    package: microsoft-cognitiveservices-speech-sdk
+    summary: >-
+      Creates an instance of a BotFrameworkConfig.
+
+      This method is intended only for users who use a non-default service host.
+      The standard resource path will be
+
+      assumed. For services with a non-standard resource path or no path at all,
+      use fromEndpoint instead.
+
+      Note: Query parameters are not allowed in the host URI and must be set by
+      other APIs.
+
+      Note: To use an authorization token with fromHost, use fromHost(URL) and
+      then set the AuthorizationToken
+
+      property on the created BotFrameworkConfig instance.
+
+      Note: Added in version 1.15.0.
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        static function fromHost(host: string | URL, subscriptionKey?: string,
+        botId?: string): BotFrameworkConfig
+      parameters:
+        - id: host
+          type: string | URL
+          description: >-
+            If a URL is provided, the fully-qualified host with protocol (e.g.
+
+            wss://your.host.com:1234) will be used. If a string is provided, it
+            will be embedded in
+
+            wss://{host}.convai.speech.azure.us.
+        - id: subscriptionKey
+          type: string
+          description: >-
+            The subscription key. If a subscription key is not specified, an
+            authorization
+
+            token must be set.
+        - id: botId
+          type: string
+          description: >-
+            Optional. Identifier for using a specific bot within an Azure
+            resource group. Equivalent to the
+
+            resource name.
+      return:
+        description: A new bot framework configuration instance.
         type: >-
           <xref uid="microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig"
           />
@@ -220,8 +345,8 @@ methods:
     uid: microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig.fromSubscription
     package: microsoft-cognitiveservices-speech-sdk
     summary: >-
-      Creates an instance of the bot framework config with the specified
-      subscription and region.
+      Creates a bot framework configuration instance with the provided
+      subscription information.
     remarks: ''
     isDeprecated: false
     syntax:
@@ -239,9 +364,13 @@ methods:
             href="https://aka.ms/csspeech/region">region page</a>).
         - id: botId
           type: string
-          description: Optional, ID for using a specific bot.
+          description: >-
+            Optional. Identifier for using a specific bot within an Azure
+            resource group. Equivalent to the
+
+            resource name.
       return:
-        description: A new bot framework config.
+        description: A new bot framework configuration instance.
         type: >-
           <xref uid="microsoft-cognitiveservices-speech-sdk.BotFrameworkConfig"
           />

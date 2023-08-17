@@ -3,7 +3,7 @@ title: Azure Self Help SDK for JavaScript
 description: Reference for Azure Self Help SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 08/16/2023
+ms.data: 08/17/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: selfhelp

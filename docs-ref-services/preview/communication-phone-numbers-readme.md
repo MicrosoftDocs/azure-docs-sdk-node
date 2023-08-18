@@ -3,12 +3,12 @@ title: Azure Communication Phone Numbers client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/communication-phone-numbers, communication
 author: xirzec
 ms.author: jeffish
-ms.date: 07/21/2023
+ms.date: 08/18/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: communication
 ---
-# Azure Communication Phone Numbers client library for JavaScript - version 1.3.0-beta.1 
+# Azure Communication Phone Numbers client library for JavaScript - version 1.3.0-alpha.20230820.1 
 
 
 The phone numbers library provides capabilities for phone number administration.
@@ -360,13 +360,18 @@ const client = new SipRoutingClient(connectionString);
 async function main() {
   const trunks = await client.listTrunks();
   const routes = await client.listRoutes();
-  for await(const trunk of trunks) {
-    console.log(`Trunk ${trunk.fqdn}:${trunk.sipSignalingPort}`);
+  const domains = await client.listDomains();
+  for (const trunk of trunks) {
+    console.log(`Trunk ${trunk.fqdn}:${trunk.sipSignalingPort} with property enabled: ${trunk.enabled}`);
   }
   
   for await(const route of routes) {
     console.log(`Route ${route.name} with pattern ${route.numberPattern}`);
     console.log(`Route's trunks: ${route.trunks?.join()}`);
+  }
+
+  for (const domain of domains) {
+    console.log(`Domain ${domain.domainUri} with property enabled: ${domain.enabled}`);
   }
 }
 
@@ -387,10 +392,12 @@ async function main() {
   await client.setTrunks([
     {
       fqdn: 'sbc.one.domain.com',
-      sipSignalingPort: 1234
+      sipSignalingPort: 1234,
+      enabled: true
     },{
       fqdn: 'sbc.two.domain.com',
-      sipSignalingPort: 1234
+      sipSignalingPort: 1234,
+      enabled: true
     }
   ]);
 
@@ -405,6 +412,13 @@ async function main() {
       description: "route's description",
       numberPattern: "^.*$",
       trunks: [ 'sbc.two.domain.com', 'sbc.one.domain.com' ]
+    }
+  ]);
+
+  await client.setDomains([
+    {
+      fqdn: 'domain.com',
+      enabled: true
     }
   ]);
 }
@@ -470,12 +484,12 @@ main();
 ## Next steps
 
 Please take a look at the
-[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-beta.1/sdk/communication/communication-phone-numbers/samples)
+[samples](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-alpha.20230820.1/sdk/communication/communication-phone-numbers/samples)
 directory for detailed examples on how to use this library.
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-alpha.20230820.1/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 ## Related projects
 
@@ -485,9 +499,9 @@ If you'd like to contribute to this library, please read the [contributing guide
 [azure_sub]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [azure_powershell]: /powershell/module/az.communication/new-azcommunicationservice
-[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.3.0-beta.1/sdk/identity/identity#defaultazurecredential
-[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.3.0-beta.1/sdk/identity/identity
-[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-beta.1/sdk/identity/identity/README.md
+[defaultazurecredential]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.3.0-alpha.20230820.1/sdk/identity/identity#defaultazurecredential
+[azure_identity]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/communication-phone-numbers_1.3.0-alpha.20230820.1/sdk/identity/identity
+[azure_identity_readme]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/communication-phone-numbers_1.3.0-alpha.20230820.1/sdk/identity/identity/README.md
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-js%2Fsdk%2Fcommunication%2Fcommunication-phone-numbers%2FREADME.png)
 

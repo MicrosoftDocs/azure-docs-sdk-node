@@ -3,12 +3,12 @@ title: Azure Monitor Query client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/monitor-query, monitor
 author: xirzec
 ms.author: jeffish
-ms.date: 08/14/2023
+ms.date: 08/21/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: monitor
 ---
-# Azure Monitor Query client library for JavaScript - version 1.2.0-beta.1 
+# Azure Monitor Query client library for JavaScript - version 1.2.0-beta.2 
 
 
 The Azure Monitor Query client library is used to execute read-only queries against [Azure Monitor][azure_monitor_overview]'s two data platforms:
@@ -32,7 +32,7 @@ The Azure Monitor Query client library is used to execute read-only queries agai
 - [LTS versions of Node.js](https://github.com/nodejs/release#release-schedule)
 - Latest versions of Safari, Chrome, Edge, and Firefox
 
-For more details, see our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.1/SUPPORT.md).
+For more details, see our [support policy](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.2/SUPPORT.md).
 
 ### Prerequisites
 
@@ -53,7 +53,7 @@ npm install @azure/monitor-query
 
 ### Create the client
 
-An authenticated client is required to query Logs or Metrics. To authenticate, the following example uses [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.1/sdk/identity/identity/README.md#defaultazurecredential) from the [@azure/identity](https://www.npmjs.com/package/@azure/identity) package.
+An authenticated client is required to query Logs or Metrics. To authenticate, the following example uses [DefaultAzureCredential](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.2/sdk/identity/identity/README.md#defaultazurecredential) from the [@azure/identity](https://www.npmjs.com/package/@azure/identity) package.
 
 ```ts
 import { DefaultAzureCredential } from "@azure/identity";
@@ -225,7 +225,7 @@ async function processTables(tablesFromResult: LogsTable[]) {
 }
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.1/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQuery.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.2/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQuery.ts).
 
 ### Batch logs query
 
@@ -403,7 +403,7 @@ async function processTables(tablesFromResult: LogsTable[]) {
 }
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.1/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryBatch.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.2/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryBatch.ts).
 
 ### Advanced logs query scenarios
 
@@ -468,7 +468,7 @@ AppEvents | order by TenantId
 AppEvents | filter TenantId == "<workspace2>"
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.1/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryMultipleWorkspaces.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.2/sdk/monitor/monitor-query/samples/v1/typescript/src/logsQueryMultipleWorkspaces.ts).
 
 #### Include statistics
 
@@ -725,11 +725,11 @@ main().catch((err) => {
 });
 ```
 
-A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.1/sdk/monitor/monitor-query/samples/v1/typescript/src/metricsQuery.ts).
+A full sample can be found [here](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.2/sdk/monitor/monitor-query/samples/v1/typescript/src/metricsQuery.ts).
 
 ## Troubleshooting
 
-To diagnose various failure scenarios, see the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.1/sdk/monitor/monitor-query/TROUBLESHOOTING.md).
+To diagnose various failure scenarios, see the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.2/sdk/monitor/monitor-query/TROUBLESHOOTING.md).
 
 ## Next steps
 
@@ -737,7 +737,7 @@ To learn more about Azure Monitor, see the [Azure Monitor service documentation]
 
 ## Contributing
 
-If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.1/CONTRIBUTING.md) to learn more about how to build and test the code.
+If you'd like to contribute to this library, please read the [contributing guide](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.2/CONTRIBUTING.md) to learn more about how to build and test the code.
 
 This module's tests are a mixture of live and unit tests, which require you to have an Azure Monitor instance. To execute the tests, you'll need to run:
 
@@ -748,7 +748,7 @@ This module's tests are a mixture of live and unit tests, which require you to h
 5. Open the `.env` file in an editor and fill in the values.
 6. `npm run test`.
 
-For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.1/sdk/monitor/monitor-query/test) folder.
+For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.2/sdk/monitor/monitor-query/test) folder.
 
 ## Related projects
 
@@ -760,10 +760,10 @@ For more details, view our [tests](https://github.com/Azure/azure-sdk-for-js/blo
 [azure_monitor_create_using_portal]: /azure/azure-monitor/logs/quick-create-workspace
 [azure_monitor_overview]: /azure/azure-monitor/overview
 [azure_subscription]: https://azure.microsoft.com/free/
-[changelog]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.1/sdk/monitor/monitor-query/CHANGELOG.md
+[changelog]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.2/sdk/monitor/monitor-query/CHANGELOG.md
 [kusto_query_language]: /azure/data-explorer/kusto/query/
 [msdocs_apiref]: /javascript/api/@azure/monitor-query
 [package]: https://www.npmjs.com/package/@azure/monitor-query
-[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.2.0-beta.1/sdk/monitor/monitor-query/samples
-[source]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.1/sdk/monitor/monitor-query/
+[samples]: https://github.com/Azure/azure-sdk-for-js/tree/@azure/monitor-query_1.2.0-beta.2/sdk/monitor/monitor-query/samples
+[source]: https://github.com/Azure/azure-sdk-for-js/blob/@azure/monitor-query_1.2.0-beta.2/sdk/monitor/monitor-query/
 

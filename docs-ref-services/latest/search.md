@@ -6,7 +6,7 @@ ms.author: danielgetu
 ms.data: 08/23/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: cognitive-search
+ms.service: search
 ms.date: 06/15/2022
 ---
 # JavaScript resource management modules for Azure Search

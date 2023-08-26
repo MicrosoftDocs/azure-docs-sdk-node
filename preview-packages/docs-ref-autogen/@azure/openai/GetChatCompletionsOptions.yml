@@ -2,12 +2,29 @@
 name: GetChatCompletionsOptions
 uid: '@azure/openai.GetChatCompletionsOptions'
 package: '@azure/openai'
-summary: Common options to set on an outgoing operation
+summary: |-
+  This module contains models that we want to live side-by-side with the
+  corresponding generated models. This is useful for providing customer-facing
+  models that has different names/types than the generated models.
 fullName: GetChatCompletionsOptions
 remarks: ''
 isDeprecated: false
 type: interface
 properties:
+  - name: azureExtensionOptions
+    uid: '@azure/openai.GetChatCompletionsOptions.azureExtensionOptions'
+    package: '@azure/openai'
+    summary: |-
+      The configuration entries for Azure OpenAI chat extensions that use them.
+        This additional specification is only compatible with Azure OpenAI.
+    fullName: azureExtensionOptions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'azureExtensionOptions?: AzureExtensionsOptions'
+      return:
+        description: ''
+        type: <xref uid="@azure/openai.AzureExtensionsOptions" />
   - name: frequencyPenalty
     uid: '@azure/openai.GetChatCompletionsOptions.frequencyPenalty'
     package: '@azure/openai'
@@ -30,6 +47,37 @@ properties:
       return:
         description: ''
         type: number
+  - name: functionCall
+    uid: '@azure/openai.GetChatCompletionsOptions.functionCall'
+    package: '@azure/openai'
+    summary: >-
+      Controls how the model responds to function calls. "none" means the model
+      does not call a function,
+
+      and responds to the end-user. "auto" means the model can pick between an
+      end-user or calling a function.
+       Specifying a particular function via `{"name": "my_function"}` forces the model to call that function.
+       "none" is the default when no functions are present. "auto" is the default if functions are present.
+    fullName: functionCall
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'functionCall?: string | FunctionName'
+      return:
+        description: ''
+        type: string | <xref uid="@azure/openai.FunctionName" />
+  - name: functions
+    uid: '@azure/openai.GetChatCompletionsOptions.functions'
+    package: '@azure/openai'
+    summary: A list of functions the model may generate JSON inputs for.
+    fullName: functions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'functions?: FunctionDefinition[]'
+      return:
+        description: ''
+        type: <xref uid="@azure/openai.FunctionDefinition" />[]
   - name: logitBias
     uid: '@azure/openai.GetChatCompletionsOptions.logitBias'
     package: '@azure/openai'
@@ -221,23 +269,59 @@ properties:
         description: ''
         type: string
 inheritedProperties:
+  - name: abortSignal
+    uid: '@azure/openai.GetChatCompletionsOptions.abortSignal'
+    package: '@azure/openai'
+    summary: The signal which can be used to abort requests.
+    fullName: abortSignal
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'abortSignal?: AbortSignalLike'
+      return:
+        description: ''
+        type: AbortSignalLike
+    inheritanceDescription: <b>Inherited From</b> OperationOptions.abortSignal
+  - name: onResponse
+    uid: '@azure/openai.GetChatCompletionsOptions.onResponse'
+    package: '@azure/openai'
+    summary: |-
+      A function to be called each time a response is received from the server
+      while performing the requested operation.
+      May be called multiple times.
+    fullName: onResponse
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'onResponse?: RawResponseCallback'
+      return:
+        description: ''
+        type: RawResponseCallback
+    inheritanceDescription: <b>Inherited From</b> OperationOptions.onResponse
   - name: requestOptions
     uid: '@azure/openai.GetChatCompletionsOptions.requestOptions'
     package: '@azure/openai'
-    summary: Options to set on an outgoing HTTP request
+    summary: Options used when creating and sending HTTP requests for this operation.
     fullName: requestOptions
     remarks: ''
     isDeprecated: false
     syntax:
-      content: >-
-        requestOptions?: { allowInsecureConnection?: boolean, headers?:
-        RawHttpHeadersInput, skipUrlEncoding?: boolean }
+      content: 'requestOptions?: OperationRequestOptions'
       return:
         description: ''
-        type: >-
-          { allowInsecureConnection?: boolean, headers?: RawHttpHeadersInput,
-          skipUrlEncoding?: boolean }
-    inheritanceDescription: >-
-      <b>Inherited From</b>
-      [RequestOptions.requestOptions](xref:@azure/openai.RequestOptions.requestOptions)
-extends: <xref uid="@azure/openai.RequestOptions" />
+        type: OperationRequestOptions
+    inheritanceDescription: <b>Inherited From</b> OperationOptions.requestOptions
+  - name: tracingOptions
+    uid: '@azure/openai.GetChatCompletionsOptions.tracingOptions'
+    package: '@azure/openai'
+    summary: Options used when tracing is enabled.
+    fullName: tracingOptions
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: 'tracingOptions?: OperationTracingOptions'
+      return:
+        description: ''
+        type: OperationTracingOptions
+    inheritanceDescription: <b>Inherited From</b> OperationOptions.tracingOptions
+extends: OperationOptions

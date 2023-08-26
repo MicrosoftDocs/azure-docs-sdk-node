@@ -86,59 +86,6 @@ constructors:
           type: <xref uid="@azure/openai.OpenAIClientOptions" />
           description: The options for configuring the client.
 methods:
-  - name: >-
-      beginAzureBatchImageGeneration(string,
-      BeginAzureBatchImageGenerationOptions)
-    uid: '@azure/openai.OpenAIClient.beginAzureBatchImageGeneration'
-    package: '@azure/openai'
-    summary: Starts the generation of a batch of images from a text caption
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function beginAzureBatchImageGeneration(prompt: string, options?:
-        BeginAzureBatchImageGenerationOptions):
-        Promise<BatchImageGenerationOperationResponse>
-      parameters:
-        - id: prompt
-          type: string
-          description: ''
-        - id: options
-          type: <xref uid="@azure/openai.BeginAzureBatchImageGenerationOptions" />
-          description: ''
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/openai.BatchImageGenerationOperationResponse" />&gt;
-  - name: >-
-      getAzureBatchImageGenerationOperationStatus(string,
-      GetAzureBatchImageGenerationOperationStatusOptions)
-    uid: '@azure/openai.OpenAIClient.getAzureBatchImageGenerationOperationStatus'
-    package: '@azure/openai'
-    summary: Returns the status of the images operation
-    remarks: ''
-    isDeprecated: false
-    syntax:
-      content: >-
-        function getAzureBatchImageGenerationOperationStatus(operationId:
-        string, options?: GetAzureBatchImageGenerationOperationStatusOptions):
-        Promise<BatchImageGenerationOperationResponse>
-      parameters:
-        - id: operationId
-          type: string
-          description: ''
-        - id: options
-          type: >-
-            <xref
-            uid="@azure/openai.GetAzureBatchImageGenerationOperationStatusOptions"
-            />
-          description: ''
-      return:
-        description: ''
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/openai.BatchImageGenerationOperationResponse" />&gt;
   - name: getChatCompletions(string, ChatMessage[], GetChatCompletionsOptions)
     uid: '@azure/openai.OpenAIClient.getChatCompletions'
     package: '@azure/openai'
@@ -215,7 +162,7 @@ methods:
       return:
         description: The embeddings for the given prompt.
         type: Promise&lt;<xref uid="@azure/openai.Embeddings" />&gt;
-  - name: getImages(string, BeginAzureBatchImageGenerationOptions)
+  - name: getImages(string, ImageGenerationOptions)
     uid: '@azure/openai.OpenAIClient.getImages'
     package: '@azure/openai'
     summary: Starts the generation of a batch of images from a text caption
@@ -223,21 +170,18 @@ methods:
     isDeprecated: false
     syntax:
       content: >-
-        function getImages(prompt: string, options?:
-        BeginAzureBatchImageGenerationOptions):
-        Promise<BatchImageGenerationOperationResponse>
+        function getImages(prompt: string, options?: ImageGenerationOptions):
+        Promise<ImageGenerations>
       parameters:
         - id: prompt
           type: string
           description: The prompt to use for this request.
         - id: options
-          type: <xref uid="@azure/openai.BeginAzureBatchImageGenerationOptions" />
+          type: <xref uid="@azure/openai.ImageGenerationOptions" />
           description: The options for this image request.
       return:
         description: The image generation response (containing url or base64 data).
-        type: >-
-          Promise&lt;<xref
-          uid="@azure/openai.BatchImageGenerationOperationResponse" />&gt;
+        type: Promise&lt;<xref uid="@azure/openai.ImageGenerations" />&gt;
   - name: listChatCompletions(string, ChatMessage[], GetChatCompletionsOptions)
     uid: '@azure/openai.OpenAIClient.listChatCompletions'
     package: '@azure/openai'
@@ -250,7 +194,7 @@ methods:
       content: >-
         function listChatCompletions(deploymentName: string, messages:
         ChatMessage[], options?: GetChatCompletionsOptions):
-        AsyncIterable<Omit<ChatCompletions, "usage">>
+        AsyncIterable<ChatCompletions>
       parameters:
         - id: deploymentName
           type: string
@@ -265,9 +209,7 @@ methods:
           description: The chat completions options for this chat completions request.
       return:
         description: An asynchronous iterable of chat completions tokens.
-        type: >-
-          AsyncIterable&lt;Omit&lt;<xref uid="@azure/openai.ChatCompletions" />,
-          "usage"&gt;&gt;
+        type: AsyncIterable&lt;<xref uid="@azure/openai.ChatCompletions" />&gt;
   - name: listCompletions(string, string[], GetCompletionsOptions)
     uid: '@azure/openai.OpenAIClient.listCompletions'
     package: '@azure/openai'

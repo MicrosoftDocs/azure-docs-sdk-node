@@ -21,7 +21,7 @@ methods:
         function beginCreateOrUpdate(resourceGroupName: string, monitorName:
         string, resource: MonitorResource, options?:
         MonitorsCreateOrUpdateOptionalParams):
-        Promise<PollerLike<PollOperationState<MonitorResource>,
+        Promise<SimplePollerLike<OperationState<MonitorResource>,
         MonitorResource>>
       parameters:
         - id: resourceGroupName
@@ -41,7 +41,7 @@ methods:
       return:
         description: ''
         type: >-
-          Promise&lt;PollerLike&lt;PollOperationState&lt;<xref
+          Promise&lt;SimplePollerLike&lt;OperationState&lt;<xref
           uid="@azure/arm-dynatrace.MonitorResource" />&gt;, <xref
           uid="@azure/arm-dynatrace.MonitorResource" />&gt;&gt;
   - name: >-
@@ -85,7 +85,7 @@ methods:
       content: >-
         function beginDelete(resourceGroupName: string, monitorName: string,
         options?: MonitorsDeleteOptionalParams):
-        Promise<PollerLike<PollOperationState<void>, void>>
+        Promise<SimplePollerLike<OperationState<void>, void>>
       parameters:
         - id: resourceGroupName
           type: string
@@ -98,7 +98,9 @@ methods:
           description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;PollerLike&lt;PollOperationState&lt;void&gt;, void&gt;&gt;
+        type: >-
+          Promise&lt;SimplePollerLike&lt;OperationState&lt;void&gt;,
+          void&gt;&gt;
   - name: beginDeleteAndWait(string, string, MonitorsDeleteOptionalParams)
     uid: '@azure/arm-dynatrace.Monitors.beginDeleteAndWait'
     package: '@azure/arm-dynatrace'
@@ -146,34 +148,67 @@ methods:
         description: ''
         type: Promise&lt;<xref uid="@azure/arm-dynatrace.MonitorResource" />&gt;
   - name: >-
-      getAccountCredentials(string, string,
-      MonitorsGetAccountCredentialsOptionalParams)
-    uid: '@azure/arm-dynatrace.Monitors.getAccountCredentials'
+      getMarketplaceSaaSResourceDetails(MarketplaceSaaSResourceDetailsRequest,
+      MonitorsGetMarketplaceSaaSResourceDetailsOptionalParams)
+    uid: '@azure/arm-dynatrace.Monitors.getMarketplaceSaaSResourceDetails'
     package: '@azure/arm-dynatrace'
-    summary: Gets the user account credentials for a Monitor
+    summary: >-
+      Get Marketplace SaaS resource details of a tenant under a specific
+      subscription
     remarks: ''
     isDeprecated: false
     syntax:
       content: >-
-        function getAccountCredentials(resourceGroupName: string, monitorName:
-        string, options?: MonitorsGetAccountCredentialsOptionalParams):
-        Promise<AccountInfoSecure>
+        function getMarketplaceSaaSResourceDetails(request:
+        MarketplaceSaaSResourceDetailsRequest, options?:
+        MonitorsGetMarketplaceSaaSResourceDetailsOptionalParams):
+        Promise<MarketplaceSaaSResourceDetailsResponse>
+      parameters:
+        - id: request
+          type: >-
+            <xref
+            uid="@azure/arm-dynatrace.MarketplaceSaaSResourceDetailsRequest" />
+          description: Tenant Id
+        - id: options
+          type: >-
+            <xref
+            uid="@azure/arm-dynatrace.MonitorsGetMarketplaceSaaSResourceDetailsOptionalParams"
+            />
+          description: The options parameters.
+      return:
+        description: ''
+        type: >-
+          Promise&lt;<xref
+          uid="@azure/arm-dynatrace.MarketplaceSaaSResourceDetailsResponse"
+          />&gt;
+  - name: getMetricStatus(string, string, MonitorsGetMetricStatusOptionalParams)
+    uid: '@azure/arm-dynatrace.Monitors.getMetricStatus'
+    package: '@azure/arm-dynatrace'
+    summary: Get metric status
+    remarks: ''
+    isDeprecated: false
+    syntax:
+      content: >-
+        function getMetricStatus(resourceGroupName: string, monitorName: string,
+        options?: MonitorsGetMetricStatusOptionalParams):
+        Promise<MetricsStatusResponse>
       parameters:
         - id: resourceGroupName
           type: string
           description: The name of the resource group. The name is case insensitive.
         - id: monitorName
           type: string
-          description: Monitor resource name
+          description: Name of the Monitor resource
         - id: options
           type: >-
             <xref
-            uid="@azure/arm-dynatrace.MonitorsGetAccountCredentialsOptionalParams"
-            />
+            uid="@azure/arm-dynatrace.MonitorsGetMetricStatusOptionalParams" />
           description: The options parameters.
       return:
         description: ''
-        type: Promise&lt;<xref uid="@azure/arm-dynatrace.AccountInfoSecure" />&gt;
+        type: >-
+          Promise&lt;<xref uid="@azure/arm-dynatrace.MetricsStatusResponse"
+          />&gt;
   - name: getSSODetails(string, string, MonitorsGetSSODetailsOptionalParams)
     uid: '@azure/arm-dynatrace.Monitors.getSSODetails'
     package: '@azure/arm-dynatrace'
@@ -317,7 +352,7 @@ methods:
     uid: '@azure/arm-dynatrace.Monitors.listHosts'
     package: '@azure/arm-dynatrace'
     summary: >-
-      List the compute resources currently being monitored by the Dynatrace
+      List the VM/VMSS resources currently being monitored by the Dynatrace
       resource.
     remarks: ''
     isDeprecated: false

@@ -3,7 +3,7 @@ title: Azure Bot Service SDK for JavaScript
 description: Reference for Azure Bot Service SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 08/25/2023
+ms.data: 08/28/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: botservice

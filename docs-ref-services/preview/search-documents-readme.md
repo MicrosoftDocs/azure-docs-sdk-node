@@ -6,7 +6,7 @@ ms.author: danielgetu
 ms.date: 08/11/2023
 ms.topic: reference
 ms.devlang: javascript
-ms.service: search
+ms.service: cognitive-search
 ---
 # Azure Cognitive Search client library for JavaScript - version 12.0.0-beta.3 
 

@@ -6,7 +6,7 @@ ms.author: qiaozha
 ms.date: 12/20/2022
 ms.topic: reference
 ms.devlang: javascript
-ms.service: search
+ms.service: cognitive-search
 ---
 # Azure SearchManagement client library for JavaScript - version 3.1.0 
 

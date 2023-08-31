@@ -1,16 +1,16 @@
 ---
-title: Azure Storage modules for JavaScript
-description: Reference for Azure Storage modules for JavaScript
-author: ramya-rao-a
-ms.author: ramyar
+title: Azure Storage SDK for JavaScript
+description: Reference for Azure Storage SDK for JavaScript
+author: EmmaZhu
+ms.author: emmazhu
+ms.data: 08/31/2023
+ms.topic: reference
+ms.devlang: javascript
+ms.service: storage
 manager: twolley
 ms.date: 02/27/2020
-ms.topic: reference
 ms.technology: azure
-ms.devlang: JavaScript
-ms.service: storage
 ---
-
 # Azure Storage Library for JavaScript
 
 [Azure Storage](https://docs.microsoft.com/azure/storage/) is a Microsoft managed service providing cloud storage that is highly available, secure, durable, scalable, and redundant. The following libraries in JavaScript make it easy to consume Azure Storage service.

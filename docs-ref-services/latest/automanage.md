@@ -3,7 +3,7 @@ title: Azure Automanage SDK for JavaScript
 description: Reference for Azure Automanage SDK for JavaScript
 author: xirzec
 ms.author: jeffish
-ms.data: 09/04/2023
+ms.data: 09/05/2023
 ms.topic: reference
 ms.devlang: javascript
 ms.service: automanage

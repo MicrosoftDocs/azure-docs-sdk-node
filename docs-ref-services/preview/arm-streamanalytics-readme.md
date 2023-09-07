@@ -2,8 +2,6 @@
 title: Azure Stream Analytics Management client library for JavaScript
 keywords: Azure, javascript, SDK, API, @azure/arm-streamanalytics, streamanalytics
 description: This package contains an isomorphic SDK (runs both in Node.js and in browsers) for Azure Stream Analytics Management client.
-author: ramya-rao-a
-ms.author: ramyar
 ms.date: 11/02/2021
 ms.topic: reference
 ms.devlang: javascript
